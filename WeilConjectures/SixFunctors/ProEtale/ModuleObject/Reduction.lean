@@ -27,7 +27,7 @@ a morphism of coefficient ring objects `𝒪_{E,X} ⟶ 𝔽_{E,X}`
 (`ProEtale.padicIntegersToResidueField`). The residue field `𝔽_E` acts on every module object over
 `𝔽_{E,X}` through the constant global sections, so that such a module object is a pro-étale sheaf
 of `𝔽_E`-modules (`ProEtale.residueFieldModuleSheaf`). The *first derived reduction*
-`K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` of blueprint `sk-def-pe-derived-completion`, as a complex of
+`K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` of blueprint `definition-derived-adic-completeness`, as a complex of
 pro-étale sheaves of `𝔽_E`-modules, is `ProEtale.derivedReduction`.
 
 -/
@@ -131,7 +131,7 @@ instance : (residueFieldModuleSheaf X ℓ E).ReflectsIsomorphisms :=
       (residueFieldSectionRingHom X ℓ E c))).ReflectsIsomorphisms
 
 /-- The **first derived reduction** `K ↦ K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` of complexes of
-`𝒪_{E,X}`-module objects (blueprint `sk-def-pe-derived-completion`), regarded in the derived
+`𝒪_{E,X}`-module objects (blueprint `definition-derived-adic-completeness`), regarded in the derived
 category of pro-étale sheaves of `𝔽_E`-modules: the derived extension of scalars along the
 residue map `𝒪_{E,X} ⟶ 𝔽_{E,X}`, followed by the exact functor
 `ProEtale.residueFieldModuleSheaf`. -/

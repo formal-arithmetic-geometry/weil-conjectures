@@ -44,7 +44,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The derived site comparison for extension by zero, `c_j : N_X j_!^et ≅ j_!^proet N_U`,
 the degreewise extension of the sheaf comparison of
-lem-cbc-proetale-extension-zero-comparison.  It is the same construction as the upstream
+proposition-comparison-immersions--1.  It is the same construction as the upstream
 `mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso`, whose module cannot be
 imported together with this item's side imports.
 Source: Stacks Tag 09AF (`lemma-jshriek-comparison`), blueprint
@@ -62,7 +62,7 @@ noncomputable def fixSiteOpenComparison (Λ : Type (u + 1)) [CommRing Λ] [Finit
 
 /-- The inverse-image comparison, oriented as `rho_u : u_proet⁻¹ N_V ≅
 N_T u_et⁻¹`: degreewise `comparisonUpperStarCompUpperStarIso`, the inverse of the canonical
-comparison of lem-weil-pbc-comparison-pullback.  It is the same construction as the
+comparison of proposition-comparison-etale-derived-category--5.  It is the same construction as the
 upstream `mapDerivedCategoryComparisonUpperStarCompUpperStarIso`, whose module cannot be
 imported together with this item's side imports.
 Source: Stacks Tag 099R; blueprint `lem-fix-site-open-exchange`. -/

@@ -11,7 +11,7 @@ import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorChainCompositionProof
 
 /-! # Composition of normalized strict tensor Roos maps
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-roos).
 -/
 
@@ -51,10 +51,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] integralOperationsRoos
 attribute [local implicit_reducible] integralOperationsRoosFunctor
 
-set_option maxHeartbeats 800000 in
 -- The three coefficient actions and their whole-tower comparisons elaborate together.
 /-- Composition before localization of the strict tensor Roos maps.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-roos).
 
 Proof: in each positive quotient and each homogeneous summand, the three tensor

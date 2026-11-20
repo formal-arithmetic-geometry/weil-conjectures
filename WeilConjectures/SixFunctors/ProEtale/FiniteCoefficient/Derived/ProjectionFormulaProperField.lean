@@ -36,10 +36,11 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- **The proper projection formula over a finite field** (`sk-thm-sf-pf-proetale`, at the
-finite stage `𝔽_E`): for a finite field `Λ`, a proper `g : Z ⟶ Y` and bounded constructible
-complexes `N` on `Z_proét` and `L` on `Y_proét` with coefficients in `Λ`, the projection map
-`Rg_* N ⊗ᴸ L ⟶ Rg_*(N ⊗ᴸ Lg^* L)` is an isomorphism. -/
+/-- **The proper projection formula over a finite field**
+(`proposition-proper-direct-image-constructible-complexes--9`, at the finite stage `𝔽_E`): for a
+finite field `Λ`, a proper `g : Z ⟶ Y` and bounded constructible complexes `N` on `Z_proét` and `L`
+on `Y_proét` with coefficients in `Λ`, the projection map `Rg_* N ⊗ᴸ L ⟶ Rg_*(N ⊗ᴸ Lg^* L)` is an
+isomorphism. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_app_app_of_boundedConstructible_of_field
     (hΛ : IsField Λ) {Y Z : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]
     {N : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ))}

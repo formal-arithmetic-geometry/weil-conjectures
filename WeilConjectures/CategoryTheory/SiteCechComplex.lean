@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
 
 /-!
 # Čech complexes of coverings on a site

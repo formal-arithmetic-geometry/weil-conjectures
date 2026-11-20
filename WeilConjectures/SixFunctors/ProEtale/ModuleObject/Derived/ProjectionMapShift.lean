@@ -101,7 +101,6 @@ noncomputable abbrev leftDerivedUpperStarTensorApp (K : 𝔻(Y)) :
       L((p)^*⟦Λ⟧) ⋙ (curriedTensor 𝔻(X)).obj (L((p)^*⟦Λ⟧).obj K) :=
   (leftDerivedUpperStarTensor Λ p).app K
 
-set_option maxHeartbeats 1000000 in
 -- the instances on complexes of module objects make the elaboration slow
 /-- The compatibility of the tensor comparison with the shifts in the second variable is
 invariant under isomorphisms of the first variable. -/
@@ -125,7 +124,6 @@ lemma commShift_leftDerivedUpperStarTensor_app_of_iso {K K' : 𝔻(Y)} (e : K �
   rw [eq]
   infer_instance
 
-set_option maxHeartbeats 1000000 in
 -- the instances on complexes of module objects make the elaboration slow
 /-- The compatibility of the tensor comparison with the shifts in the first variable is
 invariant under isomorphisms of the second variable. -/

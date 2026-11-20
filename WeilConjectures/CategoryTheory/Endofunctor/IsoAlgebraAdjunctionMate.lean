@@ -26,21 +26,21 @@ namespace CategoryTheory.Endofunctor.IsoAlgebra
 
 variable {C D : Type*} [Category C] [Category D] {F : C ⥤ C} {G : D ⥤ D}
   {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (eL : L ⋙ G ≅ F ⋙ L) (eR : R ⋙ F ≅ G ⋙ R)
-  (h : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans = eR.hom)
+  (h : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)) = eR.hom)
 
 /-- The base change map of the forgetful functors along the lifted adjunction
 `mapOfNatIsoAdjunction adj eL eR h` and `adj`, the mate of the identification
 `forget F ⋙ L ≅ mapOfNatIso eL ⋙ forget G`, is the identity of the underlying objects. -/
 lemma mateEquiv_mapOfNatIsoCompForgetIso_inv_app (M : IsoAlgebra G) :
     (mateEquiv (mapOfNatIsoAdjunction adj eL eR h) adj
-      (mapOfNatIsoCompForgetIso eL).inv).natTrans.app M = 𝟙 _ := by
+      (mapOfNatIsoCompForgetIso eL).inv).app M = 𝟙 _ := by
   simp [mateEquiv_apply, mapOfNatIsoCompForgetIso]
 
 /-- The base change map of the forgetful functors along the lifted adjunction
 `mapOfNatIsoAdjunction adj eL eR h` and `adj` is an isomorphism. -/
 instance isIso_mateEquiv_mapOfNatIsoCompForgetIso_inv :
     IsIso (mateEquiv (mapOfNatIsoAdjunction adj eL eR h) adj
-      (mapOfNatIsoCompForgetIso eL).inv).natTrans := by
+      (mapOfNatIsoCompForgetIso eL).inv) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro M
   rw [mateEquiv_mapOfNatIsoCompForgetIso_inv_app]

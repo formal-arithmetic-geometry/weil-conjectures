@@ -9,9 +9,10 @@ module
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 /-! # The degree-zero kernel of a locally restricted Cech augmentation
 
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1.
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1.
 (blueprint: lem-pc-cech-local-augmentation-kernel).
 -/
 
@@ -60,7 +61,7 @@ private theorem augmentation_injective_on_open
     ← op_comp, hr, op_id, F.presheafModuleCat.map_id, ConcreteCategory.id_apply] using hh
 
 /-- A zero cocycle on an open inside a member of the family is a restriction family.
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1.
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1.
 (blueprint: lem-pc-cech-local-augmentation-kernel)
 
 Proof: Put P(W)(V)=F(W x V), with the global structure-ring action. For the singleton
@@ -238,7 +239,7 @@ private theorem restricted_kernel_of_sectionwise
       exact el.inv_hom_id_assoc _))⟩
 
 /-- The restricted augmentation is the kernel of the first differential.
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1.
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1.
 (blueprint: lem-pc-cech-local-augmentation-kernel)
 
 Proof: On an open V contained in U_i, identify the singleton i coordinate with F(V).

@@ -12,7 +12,7 @@ import WeilConjectures.ProperBaseChange.PrincipalWLocalization.ThmPeIndetaleRefi
 /-! # Points and components of the principal w-localization
 
 Source: blueprint, proper base change, lemma "Points of the affine w-localization", order 1223
-(blueprint: lem-weil-pbc-w-localization-points).
+(blueprint: theorem-existence-contractible-covers--1).
 -/
 
 @[expose] public section
@@ -65,7 +65,7 @@ map is an `A`-algebra map, so these identifications respect the structural morph
 The homeomorphism on closed points and the continuous first-coordinate map use the patch
 rather than the Zariski topology on `Spec A`.
 
-Source: blueprint order 1223 (blueprint: lem-weil-pbc-w-localization-points).
+Source: blueprint order 1223 (blueprint: theorem-existence-contractible-covers--1).
 Proof:
 1. The proved `primeCharts` theorem supplies the prime-pair bijection, contraction formula,
 continuous first coordinate, and the closed immersion of `Spec A_x` onto its first-coordinate

@@ -41,7 +41,7 @@ theorem finiteFreeRestrictionDirectImageMate_isIso {R S : Coefficients.{u}} (a :
       (pbcDerivedScalarAdjunction (a.map V))).symm
         (TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedDirectImage g
           (R.ring V) (S.ring V) (R.ring U) (S.ring U)
-          (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv)).natTrans) :=
+          (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv))) :=
   FiniteFreeDirectImage.restrictionDirectImageMate_isIso g _ _ _ _ _ _ _ _ _ d hfree
 
 end WeilConjectures.PurCompactSupport

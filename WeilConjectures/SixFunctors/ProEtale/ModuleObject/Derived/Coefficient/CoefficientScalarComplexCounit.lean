@@ -72,7 +72,6 @@ alias coefficientScalarTensor_complexCounit := coefficientScalarTensor_complexCo
 
 attribute [local irreducible] coefficientInternalScalarComplex
 
-set_option maxHeartbeats 800000 in
 -- Check the counit and localization corner with native functor object types.
 /-- The tensor of the two scalar complex comparisons, followed by localization,
 is the tensor of the two derived counits followed by homotopy localization.

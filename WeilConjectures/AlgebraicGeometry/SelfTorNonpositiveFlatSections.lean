@@ -32,8 +32,6 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
--- Comparing restricted tensor complexes requires additional elaboration heartbeats.
 /-- Nonpositive termwise flat resolutions have affine quotient-tensor coordinates.
 This lemma does not construct algebraic augmented comparison maps, and does not
 compare an unbounded K-flat resolution with a bounded one.
@@ -121,6 +119,8 @@ theorem exists_selfTor_nonpositive_flat_sections
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
             c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
+  -- Keep the tensor homology object named while unpacking the comparison data.
+  intro B S Q
   obtain ⟨c, hc⟩ := exists_selfTor_nonpositive_chosen_comparisons
     i K q hbounded hflat hq n
   refine ⟨c, ?_⟩
@@ -132,12 +132,14 @@ theorem exists_selfTor_nonpositive_flat_sections
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective y
     exact (hψ₀ x).trans (hψ x).symm
   subst ψ₀
-  obtain ⟨H⟩ := ModuleCat.quotient_tensor_resolution_lift_homotopy
-    (i.ker.ideal U) (i.ker.ideal V) (Y.presheaf.map (homOfLE h).op).hom
-    (projectiveResolution _) (projectiveResolution _) ψ a₀ a k₀ k hψ ha₀ ha hk₀ hk
+  have hH : Nonempty (Homotopy k₀ k) :=
+    ModuleCat.quotient_tensor_resolution_lift_homotopy
+      I J φ P R ψ a₀ a k₀ k hψ ha₀ ha hk₀ hk
+  obtain ⟨H⟩ := hH
   have heq := H.homologyMap_eq n
   intro e x
-  simpa only [heq] using hc₀ x
+  exact (hc₀ x).trans
+    (congrArg (fun y ↦ c V (e.hom y)) (ConcreteCategory.congr_hom heq x))
 
 
 end AlgebraicGeometry

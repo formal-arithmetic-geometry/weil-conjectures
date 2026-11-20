@@ -24,7 +24,6 @@ universe u
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-set_option maxHeartbeats 800000 in
 -- Comparing the chosen DVR presentations requires unfolding the spectral norm data.
 /-- The embedded uniformizer quotient agrees with the finite coefficient ring
 used by the ordinary etale comparison, independently of the uniformizer generator.

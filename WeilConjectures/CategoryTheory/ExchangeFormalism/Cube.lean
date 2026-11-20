@@ -54,11 +54,11 @@ lemma baseChange_cube {U' U Z' Z V' V W' W : 𝒞} (t : U' ⟶ U) (l : U' ⟶ Z'
     (w' : t' ≫ r' = l' ≫ b') (sx : x ≫ t = t' ≫ y) (sl : x ≫ l = l' ≫ z)
     (sr : y ≫ r = r' ≫ v) (sb : z ≫ b = b' ≫ v) (M : F.obj U) :
     (F.sh l').map ((F.sqIso x t' t y sx).inv.app M) ≫
-        (F.baseChange x l' l z sl).natTrans.app ((F.pb t).obj M) ≫
-        (F.pb z).map ((F.baseChange t l r b w).natTrans.app M) ≫
+        (F.baseChange x l' l z sl).app ((F.pb t).obj M) ≫
+        (F.pb z).map ((F.baseChange t l r b w).app M) ≫
         (F.sqIso z b' b v sb).hom.app ((F.sh r).obj M) =
-      (F.baseChange t' l' r' b' w').natTrans.app ((F.pb y).obj M) ≫
-        (F.pb b').map ((F.baseChange y r' r v sr).natTrans.app M) := by
+      (F.baseChange t' l' r' b' w').app ((F.pb y).obj M) ≫
+        (F.pb b').map ((F.baseChange y r' r v sr).app M) := by
   have wbig : (x ≫ t) ≫ r = l' ≫ z ≫ b := by
     rw [Category.assoc, w, reassoc_of% sl]
   have h₁ := congr_app (F.baseChange_paste_horiz x t l' l r z b (x ≫ t) (z ≫ b) sl w rfl rfl

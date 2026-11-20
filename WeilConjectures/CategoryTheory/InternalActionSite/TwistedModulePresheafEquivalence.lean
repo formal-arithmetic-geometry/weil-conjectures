@@ -552,7 +552,7 @@ round trips are identities, with identity section components for the unit and co
 Pointwise addition and zero of linear maps commute with the action, so both functors
 are additive, using `def-weil-presheaf-modules-sheafification` for module presheaves.
 (9) By (4), restrict these same inverse functors to the full subcategories of sheaves
-of `def-weil-sheaf-of-modules-category`. Their underlying objects and maps are unchanged,
+of `situation-conventions`. Their underlying objects and maps are unchanged,
 so the sheaf equivalence is additive and has exactly the stated restrictions and actions. -/
 theorem module_presheaf_equivalence [HasFiniteLimits C] (J : Precoverage C)
     (hJ : J.IsSiteForCoverings)

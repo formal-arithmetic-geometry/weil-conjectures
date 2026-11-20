@@ -59,7 +59,6 @@ private theorem comparison_ι (f : RingedPullback R S) (k : Comparison f)
     HomologicalComplex.ι_mapBifunctorDesc, Iso.hom_inv_id_assoc]
   exact Category.comp_id _
 
-set_option maxHeartbeats 600000 in
 -- Three ringed functors require repeated dependent termwise conversions.
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true

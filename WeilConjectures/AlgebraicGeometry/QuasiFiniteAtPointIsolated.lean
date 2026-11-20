@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.RingTheory.ZariskisMainTheorem
 
 /-!
 # Quasi-finite at a point implies isolated in the fibre

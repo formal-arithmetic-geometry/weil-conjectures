@@ -31,7 +31,7 @@ Source: Stacks Project, Tag 091W, `lemma-naive-derived-completion`, with tensor 
 
 Proof:
 1. Products of modules are exact: kernels are coordinatewise, and tuples lift across
-products of surjections by choice. Apply `lem-weil-derived-limit-existence` to obtain
+products of surjections by choice. Apply `lemma-reduction-derived-nakayama` to obtain
 countable products and derived limits in `D(A)`, unique up to isomorphism.
 2. Fix a level and `a ∈ I`, and choose `e ≥ 1` annihilating that level. On the product
 of the constant tower, its shift `s` satisfies `pr_j s^r = a^r pr_{j+r}`, by induction
@@ -58,18 +58,18 @@ theorem isDerivedComplete_of_isDerivedLimit_of_nilpotent
     obtain ⟨e, _, he⟩ := h a ha n
     obtain ⟨p, δ, hT⟩ := hT
     let K : ℕ → DerivedCategory (ModuleCat.{v} A) := fun _ ↦ L n
-    let s : End (∏ᶜ K) := towerProductShift (K := K) (fun _ ↦ a • 𝟙 (L n))
-    have hs (r j : ℕ) : (s ^ r) ≫ Pi.π K j = (a ^ r) • Pi.π K (j + r) := by
+    let s : End (∏ᶜ K) := .of (towerProductShift (K := K) (fun _ ↦ a • 𝟙 (L n)))
+    have hs (r j : ℕ) : ((s ^ r).asHom) ≫ Pi.π K j = (a ^ r) • Pi.π K (j + r) := by
       induction r generalizing j with
       | zero => simp
       | succ r ih =>
-        rw [pow_succ, End.mul_def, Category.assoc, ih, Linear.comp_smul]
-        have hsπ : s ≫ Pi.π K (j + r) = a • Pi.π K (j + r + 1) := by
+        rw [pow_succ, End.mul_asHom, Category.assoc, ih, Linear.comp_smul]
+        have hsπ : (s).asHom ≫ Pi.π K (j + r) = a • Pi.π K (j + r + 1) := by
           simp [s, towerProductShift, K]
         rw [hsπ, smul_smul, pow_succ, Nat.add_assoc]
     have hnil : IsNilpotent s := by
-      refine ⟨e, Pi.hom_ext _ _ fun j ↦ ?_⟩
-      rw [hs, zero_comp]
+      refine ⟨e, End.ext (Pi.hom_ext _ _ fun j ↦ ?_)⟩
+      rw [hs, End.zero_asHom, zero_comp]
       simpa only [K, Linear.comp_smul, Category.comp_id, comp_zero] using
         congrArg (fun z ↦ Pi.π K (j + e) ≫ z) he
     apply Pretriangulated.Triangle.isZero₁_of_isIso₂ _ hT

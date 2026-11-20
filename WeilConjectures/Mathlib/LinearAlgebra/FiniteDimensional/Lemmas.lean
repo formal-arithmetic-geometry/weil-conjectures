@@ -25,7 +25,7 @@ namespace Submodule
 variable {K ι : Type*} [Field K]
 
 /-- **Finite coordinates detect a finite-dimensional sequence space**
-(blueprint `lem-weil-finite-coordinate-detection`): a finite-dimensional subspace `V` of
+(blueprint `lemma-hankel-rank-rationality--1`): a finite-dimensional subspace `V` of
 `ι → K` admits a finite set `s ⊆ ι` of coordinates such that `v ↦ (v i)_{i ∈ s}` is injective
 on `V`. Choose `s` minimising the dimension of the common kernel in `V` of the coordinates in `s`;
 a nonzero vector of that kernel would have a nonzero coordinate `i`, and adding `i` to `s` would

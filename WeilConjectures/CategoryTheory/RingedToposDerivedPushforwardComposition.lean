@@ -386,7 +386,6 @@ private theorem flatKFlat_inverts
     HomotopyCategory.quotient_map_mem_quasiIso_iff,
     HomologicalComplex.mem_quasiIso_iff] using hinv P Q s hX.kflat hX.flat hY.kflat hY.flat hq
 
-set_option maxHeartbeats 800000 in
 -- Repeated module localizations and their comparison-unit equations require more elaboration steps.
 /-- The total derived module direct images compose canonically, including the normalization
 on arbitrary K-injective resolutions of the intermediate direct image.

@@ -183,9 +183,9 @@ theorem Smooth.exists_etale_to_affineSpace {X Y : Scheme.{u}} (g : X ⟶ Y) (d :
   exact ⟨U, V, hU, hV, hVU hx, hx, hVU, e, he, hge⟩
 
 /-- The étale-local normal form of a morphism smooth at a point (blueprint
-`sbc-thm-etale-local-normal-form`). Let `g : X ⟶ Y` be locally of finite presentation and
-smooth at `x : X`. Then there are `d : ℕ` and affine open neighbourhoods `V ∋ x` and
-`U ∋ g.base x` with `V ≤ g ⁻¹ᵁ U` such that `g.resLE U V hVU` factors as an étale morphism
+`proposition-exceptional-inverse-image-smooth-morphism`). Let `g : X ⟶ Y` be locally of finite
+presentation and smooth at `x : X`. Then there are `d : ℕ` and affine open neighbourhoods `V ∋ x`
+and `U ∋ g.base x` with `V ≤ g ⁻¹ᵁ U` such that `g.resLE U V hVU` factors as an étale morphism
 `e : V ⟶ 𝔸(d; U)` followed by the projection `𝔸(d; U) ↘ U`:
 
 ```
@@ -526,7 +526,7 @@ theorem topologicalKrullDimAt_eq_of_smoothOfRelativeDimension {K : Type u} [Fiel
 
 open Limits in
 /-- **Local constancy of the relative dimension** (blueprint
-`sbc-lem-smooth-relative-dimension-locally-constant`). For a smooth morphism `f : X ⟶ Y`, the
+`lemma-smooth-morphisms-locally-constant-sheaves`). For a smooth morphism `f : X ⟶ Y`, the
 function `x ↦ dim_x (X_{f(x)})`, the local dimension at `x` of the fibre of `f` through `x`, is
 locally constant on `X`.
 

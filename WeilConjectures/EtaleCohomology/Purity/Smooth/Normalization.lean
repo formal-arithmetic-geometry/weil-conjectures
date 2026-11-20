@@ -19,10 +19,11 @@ under `Rp_!` and the counit of `Rs_! ⊣ Rs^!`:
 `cl : Λ ≅ R(s ≫ p)_! Λ ≅ Rp_! Rs_! Λ ⟶ Rp_! Rs_! Rs^! Λ(1)[2] ⟶ Rp_! Λ(1)[2]`.
 
 The statement proved here is that *some* purity isomorphism `γ` has `Tr^sm_p(cl) = 1`. It does
-not single out the canonical `γ` of blueprint `thm-pur-trace-normalization-transitivity`
+not single out the canonical `γ` of blueprint `proposition-transitivity-trace-map--1`
 (normalized on the projective line): the orientation `pur_s` is the Kummer boundary `∂κ(t)`,
-which forgets supports to `-c₁(𝒪(V(t)))` (blueprint `lem-pur-divisor-class` (b)), so for the
-canonical `γ` the trace of `cl` is `-1`, and `(-1)^d` for the ordered fundamental class of `𝔸^d`.
+which forgets supports to `-c₁(𝒪(V(t)))` (blueprint `lemma-cycle-class-cartier-divisor` (b)), so for
+the canonical `γ` the trace of `cl` is `-1`, and `(-1)^d` for the ordered fundamental class of
+`𝔸^d`.
 
 ## Main definitions
 
@@ -98,7 +99,7 @@ noncomputable def affineLineFundamentalClass
         {AffineSpace.coord Y (ULift.up 0)})).counit.app
           ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧))
 
-/-- Blueprint `thm-pur-trace-normalization-transitivity`: Trace normalization and transitivity
+/-- Blueprint `proposition-transitivity-trace-map--1`: Trace normalization and transitivity
 
 **The trace of the fundamental class is invertible.** For `Y` separated and locally
 of finite type over a field and every purity isomorphism
@@ -175,14 +176,14 @@ theorem isIso_affineLineFundamentalClass_comp_smoothPurityTrace [HasKummerClass.
   rw [key]
   infer_instance
 
-/-- Blueprint `thm-pur-trace-normalization-transitivity`: Trace normalization and transitivity
+/-- Blueprint `proposition-transitivity-trace-map--1`: Trace normalization and transitivity
 
 **Normalization on the affine line.** Over a separably closed field `k`: for every
 composition isomorphism `α` and identification `ψ : Λ_k ≅ R(s ≫ p)_! Λ_{V(t)}` there is a
 purity isomorphism `γ_{p,Λ} : Lp^* Λ(1)[2] ≅ Rp^! Λ` of the affine line `p : 𝔸¹_k ⟶ Spec k`
 with `Tr^sm_{p,Λ} ∘ cl ∘ ψ = 1`. This `γ` is not the canonical one of the blueprint (normalized
 on the projective line): `cl` is built from the Kummer boundary `∂κ(t)`, which forgets supports
-to `-c₁(𝒪(V(t)))` (blueprint `lem-pur-divisor-class` (b)), so the canonical `γ` gives
+to `-c₁(𝒪(V(t)))` (blueprint `lemma-cycle-class-cartier-divisor` (b)), so the canonical `γ` gives
 `Tr^sm_{p,Λ} ∘ cl ∘ ψ = -1`, and `(-1)^d` on the ordered fundamental class of `𝔸^d`. -/
 theorem exists_affineLineFundamentalClass_comp_smoothPurityTrace {k : Type u} [Field k]
     [IsSepClosed k] [HasKummerClass.IsNormalized Λ]

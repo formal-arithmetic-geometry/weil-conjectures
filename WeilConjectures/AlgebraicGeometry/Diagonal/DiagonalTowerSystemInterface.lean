@@ -37,7 +37,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 # The diagonal class in the derived category of strict torsion towers
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-system.md (blueprint: det-prop-diagonal-tower-system).
+sk-prop-diagonal-tower-system.md (blueprint: proposition-ell-adic-cycle-class-diagonal).
 The index n denotes exponent n+1. Fixed-scalar module sheaves present modules over
 constant ring sheaves; the underlying integer category is abelian sheaves.
 -/
@@ -49,23 +49,23 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- Integral sheaves. Source: blueprint clause 1
-(blueprint: det-prop-diagonal-tower-system). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev DiagonalAb (W : Scheme.{u}) := Sheaf (Scheme.ProEt.topology W) AddCommGrpCat.{u + 1}
 
 /-- Discrete constant Z_l-module sheaves, not continuous-function coefficient sheaves.
-Source: blueprint tower category (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint tower category (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev DiagonalMod (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :=
   Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ]))
 
 /-- Strict inverse systems. Source: blueprint tower category
-(blueprint: det-prop-diagonal-tower-system). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev DiagonalSystems (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :=
   ℕᵒᵖ ⥤ DiagonalMod ℓ W
 
 /-- The canonical abelian structure, named once to share all its sheafification
 witnesses throughout the strict-system specification. This is the existing Mathlib
 structure, with no choice of a replacement category.
-Source: blueprint coefficient conventions (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint coefficient conventions (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance (priority := 2000) diagonalModuleSheafAbelian
     (A : Type (u + 1)) [CommRing A] (W : Scheme.{u}) :
     Abelian (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} A)) :=
@@ -73,14 +73,14 @@ instance (priority := 2000) diagonalModuleSheafAbelian
     toPreadditive := Preadditive.fullSubcategory _ }
 
 /-- The canonical abelian-sheaf structure, with its witnesses shared by name.
-Source: blueprint coefficient conventions (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint coefficient conventions (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance (priority := 2000) diagonalAbSheafAbelian (W : Scheme.{u}) :
     Abelian (DiagonalAb W) :=
   { (inferInstance : Abelian (DiagonalAb W)) with
     toPreadditive := Preadditive.fullSubcategory _ }
 
 /-- Ordinary extension from abelian groups to Z_l, before reduction, sheafified
-sectionwise. Source: blueprint clause 2 (blueprint: det-prop-diagonal-tower-system). -/
+sectionwise. Source: blueprint clause 2 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalScalarExtension (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     DiagonalAb W ⥤ DiagonalMod ℓ W :=
   sheafToPresheaf (Scheme.ProEt.topology W) AddCommGrpCat.{u + 1} ⋙
@@ -91,7 +91,7 @@ def diagonalScalarExtension (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     presheafToSheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ]))
 
 /-- Forget scalars through the unique integer action.
-Source: blueprint clause 2 (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint clause 2 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalForget (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     DiagonalMod ℓ W ⥤ DiagonalAb W :=
   sheafCompose (Scheme.ProEt.topology W)
@@ -99,7 +99,7 @@ def diagonalForget (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
       forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1})
 
 /-- The usual insertion-of-one scalar adjunction, lifted to sheaves.
-Source: blueprint clause 2 (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint clause 2 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalScalarAdjunction (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     diagonalScalarExtension ℓ W ⊣ diagonalForget ℓ W :=
   Sheaf.adjunction (Scheme.ProEt.topology W)
@@ -108,7 +108,7 @@ def diagonalScalarAdjunction (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
         (Int.castRingHom (ULift.{u + 1} ℤ_[ℓ]))))
 
 /-- Forgetting constant scalars is exact.
-Source: blueprint clause 2 (blueprint: det-prop-diagonal-tower-system).
+Source: blueprint clause 2 (blueprint: proposition-ell-adic-cycle-class-diagonal).
 Proof: kernels are sectionwise; cokernels are sheafifications of the same additive
 quotients. The unique integer action changes neither construction. -/
 theorem diagonalForget_exact (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
@@ -135,17 +135,17 @@ theorem diagonalForget_exact (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     exact inferInstanceAs (PreservesFiniteColimits (sheafCompose J G))
 
 /-- Exact scalar forgetting, limits. Source: blueprint clause 2
-(blueprint: det-prop-diagonal-tower-system). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance diagonalForgetLimits (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     PreservesFiniteLimits (diagonalForget ℓ W) := (diagonalForget_exact ℓ W).1
 
 /-- Exact scalar forgetting, colimits. Source: blueprint clause 2
-(blueprint: det-prop-diagonal-tower-system). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance diagonalForgetColimits (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     PreservesFiniteColimits (diagonalForget ℓ W) := (diagonalForget_exact ℓ W).2
 
 /-- Additivity of scalar forgetting. Source: blueprint clause 2
-(blueprint: det-prop-diagonal-tower-system).
+(blueprint: proposition-ell-adic-cycle-class-diagonal).
 Proof: the underlying section maps add pointwise and forgetting retains them. -/
 theorem diagonalForget_additive (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     (diagonalForget ℓ W).Additive := by
@@ -157,7 +157,7 @@ attribute [instance] diagonalForget_additive
 /-- A strict ordinary reduction functor, characterized by its quotient universal
 properties and quotient transitions. With L=extension to Z_l this is tensor with the
 whole coefficient system; with L=identity this is its integral version.
-Source: blueprint clause 2 (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint clause 2 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 structure DiagonalReductionPresentation
     (ℓ : ℕ) {A : Type uA} [Category.{vA} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] [Abelian B] (L : A ⥤ B) where
@@ -181,7 +181,7 @@ attribute [instance] DiagonalReductionPresentation.additive
 
 /-- The everywhere-defined left derived functor of a strict reduction presentation.
 The universal counit and pointwise condition retain functoriality on all unbounded
-complexes. Source: blueprint clause 2 (blueprint: det-prop-diagonal-tower-system). -/
+complexes. Source: blueprint clause 2 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 structure DiagonalDerivedReduction
     (ℓ : ℕ) {A : Type uA} [Category.{vA} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] [Abelian B] (L : A ⥤ B)
@@ -203,7 +203,7 @@ structure DiagonalDerivedReduction
 
 /-- The source identification is the universal derived counit on a degree-zero
 flat supported constant, with the standard single-complex comparisons.
-Source: blueprint clause 3 (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint clause 3 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalDerivedSingleCounit
     (ℓ : ℕ) {A : Type uA} [Category.{vA} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] [Abelian B] (L : A ⥤ B)
@@ -218,18 +218,18 @@ def diagonalDerivedSingleCounit
     (DerivedCategory.singleFunctorIsoCompQ (ℕᵒᵖ ⥤ B) 0).inv.app (D.ordinary.E.obj M)
 
 /-- The positive-exponent finite coefficient ring, lifted to the sheaf universe.
-Source: blueprint clauses 3--4 (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint clauses 3--4 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev diagonalResidue (ℓ n : ℕ) := cartierResidueRing.{u} ℓ (n + 1)
 
 /-- The coefficient projection from Z_l to the lifted finite ring.
-Source: blueprint clauses 2--4 (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint clauses 2--4 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalResidueProjection (ℓ n : ℕ) [Fact ℓ.Prime] :
     ULift.{u + 1} ℤ_[ℓ] →+* diagonalResidue.{u} ℓ n :=
   ULift.ringEquiv.symm.toRingHom.comp
     ((PadicInt.toZModPow (n + 1)).comp ULift.ringEquiv.toRingHom)
 
 /-- A finite-coefficient module, read as a Z_l-module through the specified projection.
-Source: blueprint clause 4 (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint clause 4 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalFiniteToPadic (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n)) ⥤
       DiagonalMod ℓ W :=
@@ -237,7 +237,7 @@ def diagonalFiniteToPadic (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     (ModuleCat.restrictScalars (diagonalResidueProjection.{u} ℓ n))
 
 /-- Finite coefficient restriction is exact and additive.
-Source: blueprint clause 4 (blueprint: det-prop-diagonal-tower-system).
+Source: blueprint clause 4 (blueprint: proposition-ell-adic-cycle-class-diagonal).
 Proof: the underlying abelian kernels and sheafified cokernels are unchanged;
 restriction retains every additive section map. -/
 theorem diagonalFiniteToPadic_exact (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
@@ -273,30 +273,30 @@ theorem diagonalFiniteToPadic_exact (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{
     infer_instance
 
 /-- Exact restriction, limits. Source: blueprint clause 4
-(blueprint: det-prop-diagonal-tower-system). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance diagonalFiniteToPadicLimits (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     PreservesFiniteLimits (diagonalFiniteToPadic ℓ n W) :=
   (diagonalFiniteToPadic_exact ℓ n W).1
 
 /-- Exact restriction, colimits. Source: blueprint clause 4
-(blueprint: det-prop-diagonal-tower-system). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance diagonalFiniteToPadicColimits (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     PreservesFiniteColimits (diagonalFiniteToPadic ℓ n W) :=
   (diagonalFiniteToPadic_exact ℓ n W).2.1
 
 /-- Additive restriction. Source: blueprint clause 4
-(blueprint: det-prop-diagonal-tower-system). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 instance diagonalFiniteToPadicAdditive (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :
     (diagonalFiniteToPadic ℓ n W).Additive :=
   (diagonalFiniteToPadic_exact ℓ n W).2.2
 
 /-- The product of two projective lines. Source: blueprint opening
-(blueprint: det-prop-diagonal-tower-system). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev diagonalSurface (Y : Scheme.{u}) :=
   pullback (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)
 
 /-- The diagonal. Source: blueprint opening
-(blueprint: det-prop-diagonal-tower-system). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev diagonalImmersion (Y : Scheme.{u}) : ProjectiveLine Y ⟶ diagonalSurface Y :=
   pullback.diagonal (ProjectiveLine Y ↘ Y)
 
@@ -308,7 +308,7 @@ instance diagonalImmersionClosed (Y : Scheme.{u}) :
   infer_instance
 
 /-- The diagonal is Cartier over every base, including the empty base.
-Source: blueprint proof step 1 (blueprint: det-prop-diagonal-tower-system).
+Source: blueprint proof step 1 (blueprint: proposition-ell-adic-cycle-class-diagonal).
 Proof: the first projection of the surface is smooth of relative dimension one,
 as a base change of the projective line. Its composite with the diagonal is the
 identity. The closed subscheme defined by the kernel of the diagonal is isomorphic
@@ -337,7 +337,7 @@ theorem diagonalImmersion_cartier (Y : Scheme.{u}) :
       (by change LocallyOfFinitePresentation (j ≫ p); rw [hp]; infer_instance)
 
 /-- Invertibility pulls from the base to the diagonal surface and all powers.
-Source: blueprint standing hypothesis (blueprint: det-prop-diagonal-tower-system).
+Source: blueprint standing hypothesis (blueprint: proposition-ell-adic-cycle-class-diagonal).
 Proof: apply the ring map of global sections for W→Y to the given unit, then take
 its positive power. This also applies to the zero ring of the empty scheme. -/
 theorem diagonalSurface_power_unit (ℓ : ℕ) (Y : Scheme.{u})
@@ -349,14 +349,14 @@ theorem diagonalSurface_power_unit (ℓ : ℕ) (Y : Scheme.{u})
   simpa using (hY.map f.appTop.hom).pow (n + 1)
 
 /-- The supported integral constant on the pro-etale site.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint clause 1 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev diagonalIntegralSource (Y : Scheme.{u}) :=
   (lowerStar AddCommGrpCat.{u + 1} (diagonalImmersion Y)).obj
     ((constantSheaf (Scheme.ProEt.topology (ProjectiveLine Y)) AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of (ULift.{u + 1} ℤ)))
 
 /-- Units mean exact comparison pullback of etale units.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint clause 1 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 abbrev diagonalComparisonUnits (Y : Scheme.{u}) :=
   (comparisonUpperStar AddCommGrpCat.{u + 1} (diagonalSurface Y)).obj
     (diagonalSurface Y).gmSheaf
@@ -374,7 +374,7 @@ def transportBoundarySource
 This is the roof with [G_m→M] in degrees -1,0, quotient on the left and positive
 projection on the right. The pole extension sends t inverse to +1.
 Source: blueprint clause 1 and proof steps 1--2
-(blueprint: det-prop-diagonal-tower-system). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalIntegralBoundary (Y : Scheme.{u}) :
     Ext (diagonalIntegralSource Y) (diagonalComparisonUnits Y) 1 :=
   -(transportBoundarySource (comparisonUpperStar AddCommGrpCat.{u + 1} (diagonalSurface Y))
@@ -390,7 +390,7 @@ output is right orthogonal to every complex on which l is invertible, the intrin
 derived l-completeness criterion. The natural unit is universal for maps to all
 such complete complexes, so this asserts derived completion, not just a limit formula.
 Source: blueprint clause 2 and Stacks 099M, 091S and 091Z
-(blueprint: det-prop-diagonal-tower-system). -/
+(blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def DiagonalCompletionSpec (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (DiagonalMod ℓ W)]
@@ -420,7 +420,7 @@ def DiagonalCompletionSpec (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
 
 /-- The levelwise finite-source comparison preserves the quotient unit, not an
 arbitrary automorphism of the supported constant.
-Source: blueprint clauses 3--4 (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint clauses 3--4 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def DiagonalSourceNormalization (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (D : DiagonalReductionPresentation ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))
     (n : ℕ)
@@ -574,7 +574,7 @@ def diagonalBoundaryTarget (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
 /-- A single arrow in D(strict systems), its prescribed source and target, and its
 finite cycle-class identifications. Ext^2 is used only as the standard homEquiv
 presentation of a morphism from a degree-zero system to a system shifted by two.
-Source: blueprint clauses 3--4 (blueprint: det-prop-diagonal-tower-system). -/
+Source: blueprint clauses 3--4 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def DiagonalCycleSystemSpec (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]

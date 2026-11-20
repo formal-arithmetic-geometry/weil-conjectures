@@ -45,7 +45,7 @@ map (`lem-weil-pbc-flat-local-ring-maps`), hence a faithfully flat one
 projective differentials (`def-weil-pbc-smooth-ring-map`). Localizing these at `qK`
 (`lem-weil-pbc-h1-cotangent-localization`, `lem-weil-pbc-kahler-differentials-localization`)
 gives zero homology and finite free differentials
-(`lem-weil-pbc-finite-projective-prime-local-free`).
+(`proposition-projective-line-rational-coefficients--1`).
 3. Flat base change compares cotangent homology
 (`lem-weil-pbc-h1-cotangent-flat-base-change`) and differentials
 (`lem-weil-pbc-kahler-differentials-base-change`). Localize those comparisons using

@@ -764,9 +764,9 @@ import WeilConjectures.AlgebraicGeometry.MLSetsTowerLimitNonempty
 
 /-! # Integral local structure for continuous coefficient complexes
 
-Source: current blueprint, sec-proetale-coefficients,
-sk-prop-integral-local-structure, statement and proof
-(blueprint: sk-prop-integral-local-structure).
+Source: current blueprint, chap-The-pro-etale-site,
+proposition-local-structure-integral-constructible-complexes, statement and proof
+(blueprint: proposition-local-structure-integral-constructible-complexes).
 
 The point complex is bounded and termwise finite free over the continuous condensed
 integer ring. Its differentials are scalar matrices chosen before inverse image to a
@@ -784,38 +784,42 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- A derived complete integral complex with bounded constructible residue reduction
 has bounded finite free scalar models pro-etale locally on a finite stratification.
-Source: current blueprint sk-prop-integral-local-structure, statement and proof
-(blueprint: sk-prop-integral-local-structure).
+Source: current blueprint proposition-local-structure-integral-constructible-complexes, statement
+and proof (blueprint: proposition-local-structure-integral-constructible-complexes).
 
 Proof plan:
 1. Refine the cohomology stratifications of the first reduction and their connected
    components, using lemma-constructible-common-refinement and
-   lem-sfb-noetherian-connected-components-open. By
-   lem-sfb-strict-completion-restriction-comparison, exact restriction preserves
+   proposition-local-structure-integral-constructible-complexes--1. By
+   proposition-local-structure-integral-constructible-complexes--1, exact restriction preserves
    completeness and the actual reductions.
-2. sk-lem-integral-finite-levels gives lisse finite cohomology and a common Tor bound.
-   Use lem-pe-finite-coefficient-model-comparison,
-   lem-sf-finite-discrete-encoding-tensor-tor and sk-thm-pe-constructible-comparison,
-   with det-pe-finite-tor-comparison-noetherian, to pass to the etale presentation.
-   lem-sfb-coefficient-connected-stalk-constant gives perfect scalar stalk models
-   on the cover of lem-sfb-coefficient-connected-contractible-cover.
-   lem-sfb-coefficient-etale-stalk-scalar-extension identifies their reductions.
-3. sk-lem-integral-scalar-towers (1) gives one bounded finite free scalar complex P.
-   lem-pc-bounded-above-flat-kflat-site and
-   lem-pe-internal-section-tensor-comparison compute its actual derived reductions,
-   separately isomorphic to those of K, using sk-def-pe-derived-completion.
-4. lem-sfb-finite-scalar-local-model-complete and the restriction comparison prove
+2. lemma-bounds-finite-reductions gives lisse finite cohomology and a common Tor bound.
+   Use proposition-local-structure-integral-constructible-complexes--1,
+   proposition-local-structure-integral-constructible-complexes--1 and
+   theorem-comparison-constructible-sheaves, with
+   corollary-finite-tor-amplitude-under-comparison--1, to pass to the etale presentation.
+   proposition-local-structure-integral-constructible-complexes--1 gives perfect scalar stalk models
+   on the cover of proposition-local-structure-integral-constructible-complexes--1.
+   proposition-local-structure-integral-constructible-complexes--1 identifies their reductions.
+3. lemma-perfect-complexes-over-oe (1) gives one bounded finite free scalar complex P.
+   proposition-local-structure-integral-constructible-complexes--1 and
+   proposition-local-structure-integral-constructible-complexes--1 compute its actual derived
+   reductions, separately isomorphic to those of K, using definition-derived-adic-completeness.
+4. proposition-local-structure-integral-constructible-complexes--1 and the restriction comparison
+prove
    completeness of its finite free terms. A finite stupid filtration, shifts and
-   cones preserve completeness by det-pe-derived-nakayama-first-reduction.
+   cones preserve completeness by lemma-reduction-derived-nakayama.
 5. Choose an exponent killing the torsion of H^1 of the scalar endomorphism complex,
-   finite over the DVR by lem-weil-l-adic-extension-integers-dvr. Apply
-   lem-pe-internal-perfect-reduction-hom-ml to stabilize the images of the Hom tower.
+   finite over the DVR by proposition-local-structure-integral-constructible-complexes--1. Apply
+   proposition-local-structure-integral-constructible-complexes--1 to stabilize the images of the
+   Hom tower.
 6. Choose an invertible stable image at the first level. Its fibres at every level
    are nonempty and Mittag-Leffler, since their images are the stabilized Hom images
-   intersected with the fibre. lem-weil-pbc-ml-sets-tower-limit-nonempty supplies a
-   compatible family of maps with this invertible first reduction.
-7. lem-pe-internal-perfect-hom-limit-surjective lifts that family to an integral map.
-   Both source and target are complete, so sk-lem-pe-derived-nakayama makes it an
+   intersected with the fibre. proposition-local-structure-integral-constructible-complexes--1
+   supplies a compatible family of maps with this invertible first reduction.
+7. proposition-local-structure-integral-constructible-complexes--1 lifts that family to an integral
+map.
+   Both source and target are complete, so lemma-reduction-derived-nakayama makes it an
    isomorphism. The chosen weakly contractible charts cover each stratum. -/
 theorem integral_local_structure
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

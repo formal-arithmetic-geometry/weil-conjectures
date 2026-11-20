@@ -52,8 +52,6 @@ private theorem map_lift_transport
       rw [hn]
       rfl
 
-set_option maxHeartbeats 800000 in
--- Derived restriction transport elaborates across several chosen localizations.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Construct the affine member and its compatible overlap map; no object on the union
@@ -127,21 +125,21 @@ theorem exists_supported_affine_overlap_map
               x))) ∧
         SW.map a ≫ kW.hom.app E.obj = c.hom ≫ SV.map b ≫ kV.hom.app E.obj := by
   classical
-  let JW := (schemeOpenRestriction X W).mapDerivedCategory
-  let JV := (schemeOpenRestriction X V).mapDerivedCategory
-  let SW := (schemeOpenOverlapRestriction X
-    (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory
-  let SV := (schemeOpenOverlapRestriction X
-    (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory
-  let kW := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left : W ⊓ V ⟶ W)
-  let kV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : W ⊓ V ⟶ V)
-  let A := JW.obj R ⊞ (JW.obj R)⟦(1 : ℤ)⟧
-  let a : A ⟶ JW.obj E.obj := biprod.fst ≫ JW.map β
-  obtain ⟨hF, hFT, hA, hAT⟩ := local_perfect_supported_stabilization X W T R hR hRT
-  obtain ⟨Q, hQ, hQT, ⟨q⟩⟩ :=
+  -- Cache the sheaf-category structures used by the restriction and lifting steps.
+  let : ∀ Z : Scheme.{u}, Abelian (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) :=
+    fun Z ↦ inferInstance
+  let : ∀ (Z : Scheme.{u}) (O : Z.Opens),
+      Abelian (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over O)) :=
+    fun Z O ↦ inferInstance
+  intro JW JV SW SV kW kV A a
+  -- Destructure a named hypothesis to avoid generalizing an application across the large goal.
+  have hstabilization := local_perfect_supported_stabilization X W T R hR hRT
+  obtain ⟨hF, hFT, hA, hAT⟩ := hstabilization
+  have hextension :=
     exists_supported_overlap_perfect_extension X W V hW hV T hT hTc (JW.obj R) hF hFT
-  obtain ⟨U, hU, hD, e, ⟨d⟩⟩ :=
-    exists_compact_overlap_restriction_model X W V hW hV
+  obtain ⟨Q, hQ, hQT, ⟨q⟩⟩ := hextension
+  have hrestriction := exists_compact_overlap_restriction_model X W V hW hV
+  obtain ⟨U, hU, hD, e, ⟨d⟩⟩ := hrestriction
   let := hD
   let : IsAffine V.toScheme := hV
   let L := (schemeOpenRestriction V.toScheme U).mapDerivedCategory
@@ -154,8 +152,8 @@ theorem exists_supported_affine_overlap_map
     q.hom ≫ SW.map a ≫ kW.hom.app E.obj ≫ kV.inv.app E.obj
   let α₀ : L.obj Q ⟶ L.obj EV.obj :=
     e.functor.preimage (d.hom.app Q ≫ α ≫ d.inv.app EV.obj)
-  obtain ⟨B, I, δ, b, hB, _hI, _hδ, ⟨bU, _hbU, hα₀⟩, hBT⟩ :=
-    exists_perfect_map_lift_of_isAffine V.toScheme U hU EV Q hQ α₀
+  have hlift := exists_perfect_map_lift_of_isAffine V.toScheme U hU EV Q hQ α₀
+  obtain ⟨B, I, δ, b, hB, _hI, _hδ, ⟨bU, _hbU, hα₀⟩, hBT⟩ := hlift
   let bS : SV.obj B ≅ SV.obj Q :=
     (d.app B).symm ≪≫ e.functor.mapIso bU ≪≫ d.app Q
   have hα : α = bS.inv ≫ SV.map b := by

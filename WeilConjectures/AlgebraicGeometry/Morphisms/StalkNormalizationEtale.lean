@@ -21,8 +21,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationFibrePurity
 /-!
 # Etaleness of the finite normalization over a stalk
 
-Source: Stacks Project, Tag 0EYJ, proof of the local claim.
-(blueprint: lem-sbc-stalk-normalization-etale)
+## References
+
+* Stacks Project, Tag 0EYJ, proof of the local claim
+* Stacks Project, Tag 0EYJ, local claim
+* Stacks Project, local claim
+* Tags 0EYI, 0EYE, 0EY9 and 0EYB
 -/
 
 @[expose] public section
@@ -60,14 +64,9 @@ private theorem normalization_etale_restrict {P X : Scheme.{u}} (V : X.Opens)
     pullbackRestrictIsoRestrict_hom_morphismRestrict]
   exact hp
 
-/-- Local affine-chart form of the stalk normalization claim.
-
-Source: Stacks Project, Tag 0EYJ, local claim.  The missing argument is the
-identification of the normalization with the split extension on every affine
-chart of the stalk; once that identification is available, the `Etale`
-structure is obtained by checking its defining affine ring maps.
-(blueprint: lem-sbc-stalk-normalization-etale-local-charts)
--/
+/-- Local affine-chart form of the stalk normalization claim: if the normalization over the
+stalk at a generic boundary point `s` is finite, then its ring maps on all affine charts are
+étale. -/
 theorem GaloisCover.stalk_normalization_etale_local_charts {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
@@ -123,35 +122,7 @@ theorem GaloisCover.stalk_normalization_etale_local_charts {S C : Scheme.{u}} [I
   intro V hV W hW e
   exact n.etale_appLE hV hW e
 
-/-- Etaleness of the finite normalization at a generic boundary point.
-
-Source: Stacks Project, Tag 0EYJ (pione-lemma-extend-covering), local claim;
-Tags 0EYI, 0EYE, 0EY9 and 0EYB.
-(blueprint: lem-sbc-stalk-normalization-etale)
-
-Proof: Localize at s. Its minimality makes U the punctured local spectrum.
-The finite model in the premise is the actual integral closure of the local
-total space in the given punctured finite etale algebra; localization commutes
-with this construction. Generic full faithfulness extends the G-action and
-identifies the section fibre on the punctured base with the split G-cover:
-the rational generic point and its translates give that splitting generically,
-and normal generic full faithfulness extends it.
-In dimension one the local base is a DVR. The tame normal form and split
-section test 0EYI give etaleness near the section. The smooth connected special
-fibre is geometrically integral, so this neighbourhood contains its generic
-point. Purity across its regular Cartier divisor, 0EYE, gives etaleness on the
-whole fibre. The finite normalization agrees with this etale extension.
-In dimension at least two, normality and flatness give depth at least two
-along the missing fibre. The normalization is the unique depth-two extension
-of 0EY6. Complete an affine smooth neighbourhood of the section in its section
-ideal. This is a power series ring over the local base, and completion is flat.
-The section splitting and power series full faithfulness 0EY9 split the cover
-on the punctured completion. Uniqueness and flat base change for the depth-two
-extension split the completed finite model. Flat descent gives etaleness at
-the generic point of the special fibre, and the fibre criterion 0EYB gives
-etaleness on the entire special fibre. It was already etale off this fibre.
-For disconnected torsors apply the argument to stabilizer covers and induce
-back to G; stabilizer orders divide the invertible order of G. -/
+/-- Etaleness of the finite normalization at a generic boundary point. -/
 theorem GaloisCover.stalk_normalization_etale {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

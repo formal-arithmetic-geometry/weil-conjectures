@@ -42,7 +42,7 @@ invertible, then `G` sends the evaluation `A ⊗ [A, 𝟙] ⟶ 𝟙` to an isomo
 comparison and the tensorator it is the evaluation of the invertible object `G A`. -/
 theorem isIso_map_ev_of_isIso_ihomComparison [MonoidalClosed C] [BraidedCategory D]
     [MonoidalClosed D] (G : C ⥤ D) [G.Monoidal] {A : C}
-    [IsIso ((ihomComparison G A).natTrans.app (𝟙_ C))] (h : IsInvertible (G.obj A)) :
+    [IsIso ((ihomComparison G A).app (𝟙_ C))] (h : IsInvertible (G.obj A)) :
     IsIso (G.map ((ihom.ev A).app (𝟙_ C))) := by
   have := h.isIso_ev (G.obj (𝟙_ C))
   have h₁ := ihomComparison_ev G A (𝟙_ C)

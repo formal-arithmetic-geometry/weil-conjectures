@@ -14,9 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupChart
 For a quasi-coherent ideal `I` on a scheme `X`, the closed subscheme `V(I) × {0}` of the
 relative affine line `Spec_X 𝒪_X[t]` is the relative spectrum of `𝒪_X / I` mapping to it by
 `p ↦ p(0) mod I`. Its ideal sheaf `I.deformationCenterSheaf` is the center of the blow-up
-description of the deformation to the normal cone (blueprint `def-pur-dnc-section-family`).
-Over the chart `Spec Γ(U)[t]` of an affine open `U ⊆ X` it is
-`AlgebraicGeometry.AffineBlowup.deformationCenter (I(U)) = I(U) Γ(U)[t] + (t)`
+description of the deformation to the normal cone (blueprint
+`definition-deformation-normal-bundle`). Over the chart `Spec Γ(U)[t]` of an affine open `U ⊆ X` it
+is `AlgebraicGeometry.AffineBlowup.deformationCenter (I(U)) = I(U) Γ(U)[t] + (t)`
 (`ideal_deformationCenterSheaf_chart`).
 -/
 
@@ -71,7 +71,7 @@ instance : IsClosedImmersion I.deformationCenterι :=
           rw [polynomialToQuotient_app_apply, Polynomial.coeff_C_zero]; rfl⟩
 
 /-- The ideal sheaf of `V(I) × {0}` in `Spec_X 𝒪_X[t]`: the center of the blow-up description of
-the deformation to the normal cone (blueprint `def-pur-dnc-section-family`). -/
+the deformation to the normal cone (blueprint `definition-deformation-normal-bundle`). -/
 noncomputable def deformationCenterSheaf : X.polynomialSpec.IdealSheafData :=
   I.deformationCenterι.ker
 

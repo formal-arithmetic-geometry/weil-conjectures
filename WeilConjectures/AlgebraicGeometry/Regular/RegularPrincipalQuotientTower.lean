@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Complete.AdicTower
 
 /-! # Regular principal quotient towers
 
-Source: Stacks Project, Tag 099M (blueprint: lem-sfb-regular-principal-quotient-tower).
+## References
+
+* Stacks Project, Tag 099M, using the free two-term resolution of the principal coefficients
 -/
 
 @[expose] public section
@@ -84,18 +86,7 @@ private theorem quotient_tower_from_cones
     CochainComplex.mappingCone.inr_descShortComplex (T n)
   rw [← Category.assoc, ha, Category.assoc, ← DerivedCategory.Q.map_comp, hinc]
 
-/-- Degreewise regular scalar quotients identify with the positive derived quotient tower.
-
-Source: Stacks Project, Tag 099M, lemma-naive-completion, using the free two-term
-resolution of the principal coefficients
-(blueprint: lem-sfb-regular-principal-quotient-tower).
-
-Proof: the short exact sequences give canonical cone-to-quotient quasi-isomorphisms.
-The two-term coefficient resolution identifies each derived quotient with its scalar
-cone. The resolution transition has components (r,1), so naturality of the canonical
-cone-to-quotient map makes the comparisons one natural isomorphism of towers.
-The cone inclusion equation identifies its augmentation with the quotient projection.
-Only the coefficient resolution is free; the unbounded complex need not be K-flat. -/
+/-- Degreewise regular scalar quotients identify with the positive derived quotient tower. -/
 theorem regular_principal_quotient_tower
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) {Λ : Type (u + 1)} [CommRing Λ]

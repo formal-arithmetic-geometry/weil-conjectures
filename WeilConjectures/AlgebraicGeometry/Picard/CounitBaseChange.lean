@@ -100,7 +100,6 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [Flat 
   [LocallyOfFinitePresentation f]
   [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (Limits.pullback f T.hom).Modules]
 
-set_option maxHeartbeats 400000 in
 -- the proof assembles the Čech complex, its base changes and their exactness in one context
 /-- **Pullbacks of generators of `f_{T,*} ℒ` to fibres are nonzero.** Let `ℒ ∈ Pic(X_T)` satisfy
 `IsInvertibleDirectImage`, let `s` be a free generator of `f_{T,*} ℒ` on an affine open `V ⊆ T`

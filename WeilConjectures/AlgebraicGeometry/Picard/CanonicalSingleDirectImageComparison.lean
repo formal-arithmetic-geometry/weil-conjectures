@@ -15,8 +15,9 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
 /-! # The unit comparison from an ordinary image to a total derived image
 
-Source: Stacks Project, Tags 079V and 0A1G.
-(blueprint: lem-pc-canonical-single-direct-image-comparison).
+## References
+
+* Stacks, Tags 079V and 0A1G
 -/
 
 @[expose] public section
@@ -33,9 +34,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The single-complex direct-image comparison followed by the right-derived unit.
-This is an actual morphism, without a choice of a cohomological representative.
-Source: Stacks, Tag 079V
-(blueprint: lem-pc-canonical-single-direct-image-comparison). -/
+This is an actual morphism, without a choice of a cohomological representative. -/
 def canonicalSingleDirectImageMap {X S : Scheme.{u}} (f : X ⟶ S) (M : X.Modules) :
     (DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj ((pushforward f).obj M) ⟶
@@ -48,18 +47,7 @@ def canonicalSingleDirectImageMap {X S : Scheme.{u}} (f : X ⟶ S) (M : X.Module
       ((HomotopyCategory.singleFunctor _ 0).obj M))
 
 /-- Vanishing of positive right-derived images makes the unit comparison invertible.
-No invertibility or flatness of either module is required.
-Source: Stacks, Tags 079V and 0A1G; the nonnegative injective-resolution computation.
-(blueprint: lem-pc-canonical-single-direct-image-comparison).
-
-Proof: Resolve M by a nonnegative injective resolution. Its image computes the total
-right-derived functor and the ordinary right-derived functors in nonnegative degrees.
-Negative cohomology vanishes. The assumed positive vanishing makes the target
-concentrated in degree zero. The displayed unit induces the usual degree-zero unit
-of the right-derived functor; this is inverse to rightDerivedZeroIsoSelf because
-pushforward is left exact. Thus the unit induces isomorphisms in all degrees: the
-zeroth comparison just described, and zero-to-zero in all other degrees. Homology
-jointly reflects isomorphisms in the derived category, so the unit is invertible. -/
+No invertibility or flatness of either module is required. -/
 theorem isIso_canonicalSingleDirectImageMap {X S : Scheme.{u}} (f : X ⟶ S)
     [HasInjectiveResolutions X.Modules] (M : X.Modules)
     (hq : ∀ q : ℕ, 0 < q → IsZero (((pushforward f).rightDerived q).obj M)) :

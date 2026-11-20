@@ -31,15 +31,15 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Kummer
 /-!
 # Canonical arrows for the ordinary finite projective-line calculation
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-decomposition.md and
-thm-amb-p1-adjunction.md; Stacks Project, Tags 03PL and 03FD
-(blueprint: def-asd-ordinary-finite-p1-kummer-class).
-
 ## Main definitions
 
 * `ordinaryFiniteRootMap`: scalar extension of roots of unity.
 * `ordinaryFiniteClass`: realization of a module-derived class in abelian cohomology.
 * `ordinaryFiniteP1KummerClass`: the scalar Kummer class of the specified `O(1)`.
+
+## References
+
+* Stacks Project, Tags 03PL and 03FD
 -/
 
 @[expose] public noncomputable section
@@ -106,10 +106,7 @@ attribute [local irreducible]
 
 attribute [local irreducible] ordinaryFiniteRootMap Sheaf.H.map
 
-/-- The degree-zero object is concentrated in degrees at least zero, as its
-single-functor value is; this keeps the Mathlib instance visible through the wrapper.
-Source: Mathlib's degree-zero single-functor t-structure instance
-(blueprint: def-asd-ordinary-finite-p1-kummer-class). -/
+/-- The degree-zero object is concentrated in degrees at least zero. -/
 instance ordinaryFiniteDegreeZero_isGE (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     DerivedCategory.TStructure.t.IsGE (ordinaryFiniteDegreeZero A T F) 0 :=
@@ -117,9 +114,7 @@ instance ordinaryFiniteDegreeZero_isGE (A : Type (u + 1)) [CommRing A] (T : Sche
     unfold ordinaryFiniteDegreeZero
     infer_instance
 
-/-- The degree-zero object is concentrated in degrees at most zero.
-Source: Mathlib's degree-zero single-functor t-structure instance
-(blueprint: def-asd-ordinary-finite-p1-kummer-class). -/
+/-- The degree-zero object is concentrated in degrees at most zero. -/
 instance ordinaryFiniteDegreeZero_isLE (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     DerivedCategory.TStructure.t.IsLE (ordinaryFiniteDegreeZero A T F) 0 :=

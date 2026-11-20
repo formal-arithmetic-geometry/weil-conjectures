@@ -80,7 +80,7 @@ lemma homEquiv_δ_uncurry_leftProjectionMorphism (L : C ⥤ D) [L.Monoidal] {H :
     (adj : L ⊣ H) {A B X : C} (g : X ⟶ (ihom A).obj B ⊗ H.obj (𝟙_ D)) :
     adj.homEquiv _ _ (OplaxMonoidal.δ L A X ≫ uncurry ((adj.homEquiv _ _).symm
       ((g ≫ adj.leftProjectionMorphism _ (𝟙_ D) ≫ H.map (ρ_ _).hom) ≫
-        H.map ((ihomComparison L A).natTrans.app B)))) =
+        H.map ((ihomComparison L A).app B)))) =
     A ◁ g ≫ (α_ _ _ _).inv ≫ (ihom.ev A).app B ▷ _ ≫ adj.leftProjectionMorphism B (𝟙_ D) ≫
       H.map (ρ_ _).hom := by
   apply (adj.homEquiv _ _).symm.injective
@@ -125,7 +125,7 @@ isomorphisms. -/
 theorem isIso_ihomComparison_of_isIso_leftProjectionMorphism (L : C ⥤ D) [L.Monoidal]
     {H : D ⥤ C} [H.ReflectsIsomorphisms] (adj : L ⊣ H) (P' : C) [ExactPairing P' (H.obj (𝟙_ D))]
     (h : ∀ K : C, IsIso (adj.leftProjectionMorphism K (𝟙_ D))) (A B : C) :
-    IsIso ((ihomComparison L A).natTrans.app B) := by
+    IsIso ((ihomComparison L A).app B) := by
   rw [← isIso_iff_of_reflects_iso _ H, isIso_iff_yoneda_map_bijective]
   intro X
   let e : (X ⟶ H.obj ((ihom (L.obj A)).obj (L.obj B))) → (A ⊗ X ⟶ H.obj (L.obj B)) :=
@@ -143,7 +143,7 @@ theorem isIso_ihomComparison_of_isIso_leftProjectionMorphism (L : C ⥤ D) [L.Mo
       f ≫ adj.leftProjectionMorphism B (𝟙_ D) ≫ H.map (ρ_ _).hom) :=
     (isIso_iff_yoneda_map_bijective _).1 (hσ _) _
   have hcomp : Function.Bijective
-      ((e ∘ fun g ↦ g ≫ H.map ((ihomComparison L A).natTrans.app B)) ∘
+      ((e ∘ fun g ↦ g ≫ H.map ((ihomComparison L A).app B)) ∘
         fun g : X ⟶ (ihom A).obj B ⊗ H.obj (𝟙_ D) ↦
           g ≫ adj.leftProjectionMorphism _ (𝟙_ D) ≫ H.map (ρ_ _).hom) := by
     convert hβ.comp (bijective_whiskerLeft_comp_ev_whiskerRight P' _ A B X) using 1

@@ -1232,7 +1232,7 @@ def sbcOrdinaryReductionMap (n : ℕ) :
       (pbcAdicProjection V (pbcIntegralDatum l E) n))
     (AlgebraicGeometry.Scheme.pbcDerivedScalarAdjunction
       (pbcAdicProjection U (pbcIntegralDatum l E) n))).symm
-        (TwoSquare.mk _ _ _ _ (sbcRestrictionPull l E q n).inv)).natTrans
+        (TwoSquare.mk _ _ _ _ (sbcRestrictionPull l E q n).inv))
 
 /-- The ordinary comparison is tensor balancing on K-flat representatives.
 Source: Stacks 07A4 and 06YY (blueprint: lem-sbc-completed-operations-linear-natural-exchange).

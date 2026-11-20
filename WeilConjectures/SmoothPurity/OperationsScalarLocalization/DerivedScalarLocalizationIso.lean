@@ -24,7 +24,7 @@ namespace WeilConjectures.OperationsScalarLocalization
 
 /-- Normalized isomorphisms of localized functors.
 Source: module base change (Stacks 00CV, 00CX), and the rational paragraph of
-blueprint `def-weil-derived-pullback-tensor-hom`.
+blueprint `prose-03-02`.
 (blueprint: lem-sf-localized-natural-iso).
 Proof: Conjugate the localized integral comparison by the prescribed object equalities. On a pure
 tensor, the two map formulas and the integral naturality square prove naturality; additivity

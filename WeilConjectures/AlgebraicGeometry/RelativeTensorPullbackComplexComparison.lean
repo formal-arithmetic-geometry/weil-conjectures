@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.InverseImageModuleFunctor
 import WeilConjectures.AlgebraicGeometry.RelativeTensorPullbackBalancedNaturality
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Balanced tensor pullback for ordinary complexes
 

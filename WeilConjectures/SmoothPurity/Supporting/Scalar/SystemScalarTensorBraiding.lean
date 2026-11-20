@@ -62,7 +62,6 @@ private theorem sigmaDegree (P Q : Complex l E W) (p q k : ℤ) (h : p + q = k)
   subst k
   exact (comparisons l).sigma_formula E L ι W P Q p q V 1 x y
 
-set_option maxHeartbeats 800000 in
 -- Section maps pass through the scalar adjunction and the total-tensor sheafification.
 private theorem scalarSignedTotal (P Q : Complex l E W) :
     (scalar l E L ι W).map

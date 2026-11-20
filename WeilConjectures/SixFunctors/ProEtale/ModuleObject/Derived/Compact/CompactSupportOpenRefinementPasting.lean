@@ -17,7 +17,8 @@ import Mathlib.Tactic.Convert
 /-!
 # Local open-adjunction equation for compactification refinement
 
-Source: blueprint det-sf-comp-composition-base-change, proof (3), before applying Rp'_*.
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proof (3), before applying
+Rp'_*.
 -/
 
 @[expose] public noncomputable section
@@ -159,7 +160,6 @@ private theorem restrictionOfTriangle_app
   exact congrArg (fun t ↦ k.hom.app (R.obj M) ≫ t)
     (Category.comp_id (U.map (adj.counit.app M)))
 
-set_option maxHeartbeats 1000000 in
 -- Normalize the two presentations of derived pullback without unfolding their data.
 private def pullRestriction
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -347,7 +347,6 @@ private def openPullSquare
   let sq := c.isPullback_i_ofIsPullback (IsPullback.of_hasPullback f v)
   ⟨sq.toCommSq, sq.isoPullback, sq.isoPullback_hom_fst, sq.isoPullback_hom_snd⟩
 
-set_option maxHeartbeats 1000000 in
 -- Transport the open adjunction across the two derived pullback presentations.
 private theorem openBaseChange_exchangeLeft
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -407,7 +406,6 @@ private theorem square_pasting_from_components
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.comp_id, Category.assoc, Functor.isoWhiskerRight_inv] using h M
 
-set_option maxHeartbeats 1000000 in
 -- Unifying native unbounded derived pullback objects exceeds the default kernel allowance.
 private theorem pullSquare_base_nat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -476,11 +474,10 @@ private theorem ambient_exchange_eq
       (mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
         (derivedUpperStarLowerStarAdjunction Λ f')
         (TwoSquare.mk L((v)^*⟦Λ⟧) L((f)^*⟦Λ⟧) L((f')^*⟦Λ⟧) L((u')^*⟦Λ⟧)
-          (condensedAmbientPullbackComparison Λ sq).hom)).natTrans := by
+          (condensedAmbientPullbackComparison Λ sq).hom)) := by
   rfl
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 1000000 in
 -- Derived adjunctions require additional definitional comparison during specialization.
 private theorem ambient_exchange_counit
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -597,7 +594,6 @@ private theorem restriction_mate_component
     Functor.comp_obj, Category.assoc] using NatTrans.congr_app h M
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 1000000 in
 -- Derived adjunctions require additional definitional comparison during specialization.
 private theorem triangle_restriction_mate_nat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -632,17 +628,13 @@ private theorem triangle_restriction_mate_nat
     (pullTriangle Λ i h j e) (pullTriangle Λ i' h' j' e')
     (condensedAmbientPullbackComparison Λ si) (condensedAmbientPullbackComparison Λ sj)
     (condensedAmbientPullbackComparison Λ sh) (condensedAmbientExchange Λ sh) ?_ ?_
-  · intro M
-    dsimp only [detSfDerivedPullback]
-    exact ambient_exchange_counit Λ sh M
-  · simpa only [ambient_comparison_eq] using
-      pullSquare_triangle_nat Λ i h j i' h' j' u' va vb e e'
-        si.toCommSq sh.toCommSq sj.toCommSq
+  · exact ambient_exchange_counit Λ sh
+  · exact pullSquare_triangle_nat Λ i h j i' h' j' u' va vb e e'
+      si.toCommSq sh.toCommSq sj.toCommSq
 
 -- Keep scheme pullbacks as named objects while matching their derived-functor formulas.
 attribute [local irreducible] limit limit.cone
 
-set_option maxHeartbeats 1000000 in
 -- Specialize coherent pullback and restriction identities at the functor level.
 private theorem pullRestriction_baseChange_nat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -680,8 +672,6 @@ private theorem pullRestriction_baseChange_nat
   let sd := openPullSquare f v d.obj.obj
   let sh := compactSupportTrianglePullbackSquare h.hom.hom.hom c.obj.obj.g d.obj.obj.g
     h.hom.hom.hom_g v
-  rw [pulledRefinementExchange_eq]
-  simp only [pullRestriction_eq]
   exact triangle_restriction_mate_nat Λ
     d.obj.obj.i h.hom.hom.hom c.obj.obj.i d'.obj.obj.i r.hom.hom.hom c'.obj.obj.i
     (pullback.fst f v) (pullback.fst d.obj.obj.g v) (pullback.fst c.obj.obj.g v)
@@ -733,9 +723,7 @@ private theorem coefficient_refinement_of_natural_comparisons
     hA hB
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 1000000 in
 -- Specializing four derived adjunctions compares large module category expressions.
-set_option synthInstance.maxHeartbeats 100000 in
 private theorem local_refinement_pullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -782,10 +770,8 @@ private theorem local_refinement_pullback
     (localizingRefinementMap Λ r ((detSfDerivedPullback Λ (pullback.fst f v)).obj K))
     od oc ?_ ?_ ?_ ?_
   · exact pullRestriction_baseChange_nat Λ v h
-  · simpa only [detSfBoundaryCompactification, sd, hod] using
-      openBaseChange_exchangeLeft Λ f v d.obj.obj
-  · simpa only [detSfBoundaryCompactification, sc, hoc] using
-      openBaseChange_exchangeLeft Λ f v c.obj.obj
+  · exact hod.trans (openBaseChange_exchangeLeft Λ f v d.obj.obj)
+  · exact hoc.trans (openBaseChange_exchangeLeft Λ f v c.obj.obj)
   · exact pullRestriction_normalized Λ h K
   · exact pullRestriction_normalized Λ r
       ((detSfDerivedPullback Λ (pullback.fst f v)).obj K)
@@ -827,7 +813,6 @@ private theorem refinement_pasting_algebra
   simp only [Category.assoc]
   rw [reassoc_of% hb, he]
 
-set_option maxHeartbeats 1000000 in
 -- Match the large derived functors in the normalized coefficient equations.
 private theorem boundary_refinement_pasting
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -898,7 +883,6 @@ private def refinementNatural
     b.unit ≫ (asIso t).inv ≫ (Functor.associator Jd Rr Uc).inv
   exact adjointNatural a (Jd ⋙ Rr) g
 
-set_option maxHeartbeats 1000000 in
 -- Compare adjuncts of the same inverse restriction and open unit.
 private theorem refinementNatural_app
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -914,7 +898,6 @@ private theorem refinementNatural_app
     NatTrans.comp_app, Functor.whiskerLeft_app, NatIso.isIso_inv_app,
     Functor.associator_inv_app, Category.comp_id, Functor.comp_obj]
 
-set_option maxHeartbeats 1000000 in
 -- Lift the proved component equation to natural transformations.
 private theorem boundary_refinement_pasting_nat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

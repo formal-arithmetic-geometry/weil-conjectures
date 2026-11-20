@@ -17,6 +17,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialCon
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 @[expose] public section
 

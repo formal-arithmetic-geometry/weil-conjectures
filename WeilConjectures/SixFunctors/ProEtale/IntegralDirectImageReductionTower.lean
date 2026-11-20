@@ -84,13 +84,13 @@ private theorem projection_unit
   have hi := iterated_mateEquiv_conjugateEquiv a b s t α
   have hu := unit_mateEquiv t s (mateEquiv a b α) K
   change R.map (t.unit.app K) ≫
-    ((mateEquiv t s (mateEquiv a b α)).natTrans).app (T.obj K) = _ at hu
+    ((mateEquiv t s (mateEquiv a b α))).app (T.obj K) = _ at hu
   rw [hi] at hu
   have hp : (mateEquiv a b α).app K =
       (b.homEquiv _ _) (χ.inv.app (R.obj K) ≫ T.map (a.counit.app K)) := by
     simp [mateEquiv, α, Adjunction.homEquiv_unit]
   simpa only [restrictionPushIso, conjugateIsoEquiv_apply_hom, Iso.symm_hom, Functor.id_obj, hp, α,
-    TwoSquare.mk, TwoSquare.natTrans]
+    TwoSquare.mk]
     using hu
 
 private theorem projection_unit_map
@@ -113,15 +113,14 @@ private theorem restrictionPushIso_inv
     (a : L ⊣ R) (b : L' ⊣ R') (s : S ⊣ U) (t : T ⊣ V)
     (χ : L ⋙ T ≅ S ⋙ L')
     (r : U ⋙ L ⟶ L' ⋙ V)
-    (hr : (mateEquiv s t (TwoSquare.mk _ _ _ _ χ.hom)).natTrans = r) :
+    (hr : (mateEquiv s t (TwoSquare.mk _ _ _ _ χ.hom)) = r) :
     (restrictionPushIso a b s t χ).inv =
-      (mateEquiv b a (TwoSquare.mk _ _ _ _ r)).natTrans := by
+      (mateEquiv b a (TwoSquare.mk _ _ _ _ r)) := by
   have h := iterated_mateEquiv_conjugateEquiv s t a b
     (TwoSquare.mk _ _ _ _ χ.hom)
   have hm : mateEquiv s t (TwoSquare.mk _ _ _ _ χ.hom) =
       TwoSquare.mk _ _ _ _ r := by
-    apply TwoSquare.ext
-    intro Z
+    refine NatTrans.ext (funext fun Z ↦ ?_)
     exact congrArg (fun z ↦ z.app Z) hr
   rw [hm] at h
   simpa only [restrictionPushIso, conjugateIsoEquiv_apply_inv, Iso.symm_inv] using h.symm
@@ -168,8 +167,7 @@ private theorem pushRestriction_square
   let β := TwoSquare.mk _ _ _ _ r₁
   let γ := TwoSquare.mk _ _ _ _ r
   have hs : TwoSquare.hComp α β = (γ.whiskerTop c.hom).whiskerBottom d.inv := by
-    apply TwoSquare.ext
-    intro Z
+    refine NatTrans.ext (funext fun Z ↦ ?_)
     simp only [α, β, γ, TwoSquare.hComp, TwoSquare.whiskerTop,
       TwoSquare.whiskerBottom, TwoSquare.mk, NatTrans.comp_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
@@ -305,14 +303,13 @@ private theorem scalarPushRestriction_inv (n : ℕ)
           (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
             (DerivedNakayama.integerRing l E) j))
         (TwoSquare.mk _ _ _ _ (CondensedRing.derivedComapUpperStarIso
-          (DerivedNakayama.reductionRing l E (n + 1)) j).inv)).natTrans:= by
+          (DerivedNakayama.reductionRing l E (n + 1)) j).inv)):= by
   try dsimp (config := { instances := true }) only
     [AdicCompletion.ringMonoidalObject, AdicCompletion.finiteRingMonoidalObject,
      AdicCompletion.modulesDerived, AdicCompletion.finiteModulesDerived] at *
   unfold scalarPushRestriction
   apply restrictionPushIso_inv
-  try simp only [CondensedRing.scalarSixPullHom, Adjunction.pushHomOfComapIso]
-  exact congrArg TwoSquare.natTrans
+  exact
     ((mateEquiv _ _).apply_symm_apply (TwoSquare.mk _ _ _ _ _))
 
 private theorem finitePushRestriction_inv (n : ℕ) :
@@ -327,7 +324,7 @@ private theorem finitePushRestriction_inv (n : ℕ) :
           (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
             (DerivedNakayama.quotientRing l E (n + 2)) j))
         (TwoSquare.mk _ _ _ _ (CondensedRing.derivedComapUpperStarIso
-          (AdicCompletion.transitionRing l E n) j).inv)).natTrans:= by
+          (AdicCompletion.transitionRing l E n) j).inv)):= by
   dsimp (config := { instances := true }) only
     [AdicCompletion.ringMonoidalObject, AdicCompletion.finiteRingMonoidalObject,
      AdicCompletion.modulesDerived, AdicCompletion.finiteModulesDerived] at *
@@ -335,7 +332,7 @@ private theorem finitePushRestriction_inv (n : ℕ) :
   apply restrictionPushIso_inv
   try simp only [finiteScalarMap, CondensedRing.scalarSixPullHom,
     Adjunction.pushHomOfComapIso]
-  exact congrArg TwoSquare.natTrans
+  exact
     ((mateEquiv _ _).apply_symm_apply (TwoSquare.mk _ _ _ _ _))
 
 private theorem pushRestrictionSquare (n : ℕ)

@@ -27,7 +27,7 @@ The property of `K` is stable under isomorphisms, shifts and extensions, so it h
 bounded complex whose cohomology sheaves have it
 (`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_bounded`). This is the dévissage
 along the truncation triangles of the third step of the proof of
-`thm-fin-deligne-generic-open`.
+`theorem-generic-constructibility-base-change-rj`.
 -/
 
 @[expose] public section

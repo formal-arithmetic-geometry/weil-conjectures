@@ -11,7 +11,7 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # The original completion augmentation and the selected reduction calculus
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4, 0941 (blueprint: lem-pod-reindexing-completion-normalization).
 -/
 
@@ -42,7 +42,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The original completion augmentation agrees with the actual unit of the selected
 reduction/limit adjunction.
-Source: blueprint prop-pod-dual-tate-data-compatibility, proof Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, proof Steps 1 and 5;
 Stacks 07A4, 0941 (blueprint: lem-pod-reindexing-completion-normalization).
 
 Proof: take the normalized primitive completion model on the singleton family W.

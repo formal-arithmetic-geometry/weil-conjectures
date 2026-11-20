@@ -55,7 +55,7 @@ theorem isIso_ihomComparison_constructibleExtendScalars
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     (A : PadicSubfieldConstructible X.left ℓ E) :
     IsIso
-      (Functor.LaxMonoidal.ihomComparison (constructibleExtendScalars X.left ℓ h) A).natTrans := by
+      (Functor.LaxMonoidal.ihomComparison (constructibleExtendScalars X.left ℓ h) A) := by
   let := leftDerivedExtendScalarsSubfieldMonoidal ℓ X.left h
   have hamb := isIso_ihomComparison_derivedExtendScalarsSubfield ℓ X.left h A.obj
   exact ObjectProperty.isIso_ihomComparison_monoidalLift _ _ A fun B ↦ inferInstance
@@ -79,7 +79,7 @@ noncomputable def constructibleCoconeTMonoidal (E F : PadicAlgCl.FiniteIntermedi
 theorem isIso_ihomComparison_constructibleToPadicAlgCl_of_twoColimit
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (A : PadicSubfieldConstructible X.left ℓ E) :
     IsIso
-      (Functor.LaxMonoidal.ihomComparison (constructibleToPadicAlgCl X.left ℓ E) A).natTrans := by
+      (Functor.LaxMonoidal.ihomComparison (constructibleToPadicAlgCl X.left ℓ E) A) := by
   have := noetherianSpace_left_of_over X
   let := constructibleCoconeΦMonoidal ℓ X
   let := constructibleCoconeTMonoidal ℓ X

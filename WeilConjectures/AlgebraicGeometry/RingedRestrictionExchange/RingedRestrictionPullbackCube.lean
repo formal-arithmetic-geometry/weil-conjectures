@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coh
 
 /-! # The ordinary inverse-image cube for restriction
 
-Source: Stacks Project, sites.tex Tag 03CB and proetale.tex Tag 09A5.
+## References
+
+* Stacks Project, composition of morphisms of sites, morphisms of pro-etale sites
 -/
 
 @[expose] public noncomputable section
@@ -157,8 +159,6 @@ private theorem push_congr_forget {S X : RingedVertex.{u}}
 attribute [local irreducible] RingedMap.pullComp
   exchangeModuleComposition
 
-set_option maxHeartbeats 800000 in
--- Comparing underlying direct images requires reducing several module structures.
 private theorem push_assoc {S X T W : RingedVertex.{u}}
     (a : RingedMap S X) (b : RingedMap T S)
     (d : RingedMap W T)
@@ -182,16 +182,14 @@ private theorem push_assoc {S X T W : RingedVertex.{u}}
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
     Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
     Functor.whiskerRight_app, Category.id_comp, Functor.map_comp] at H ⊢
-  rw [hab, ha, hb]
   have hh : (eqToIso (congrArg RingedMap.push h)).inv =
       (eqToIso (congrArg RingedMap.push h.symm)).hom := by
     rfl
-  simp only [Iso.symm_hom, hh]
-  erw [hc]
   have hm : (SheafOfModules.toSheaf _).map (a.push.map ((pushComp b d).hom.app N)) =
       (AlgebraicGeometry.ProEtale.lowerStar AddCommGrpCat.{u + 1} a.hom).map
         ((SheafOfModules.toSheaf _).map ((pushComp b d).hom.app N)) := rfl
-  erw [hm, hbd]
+  -- Apply the sectionwise identifications together to avoid repeated dependent rewrites.
+  simp only [hab, ha, hb, Iso.symm_hom, hh, hc, hm, hbd]
   exact H
 
 attribute [local irreducible] proEtaleRingModuleDirectImage
@@ -812,24 +810,7 @@ private def pointwiseFace6
     (M : proEtaleRingModules Y r.RY) :=
   pointwiseFace5 r C M (by cube_apps)
 
-/-- The six canonical module inverse-image squares commute around an open cube.
-Source: Stacks Project, sites.tex Tag 03CB, composition of morphisms of sites,
-and proetale.tex Tag 09A5, morphisms of pro-etale sites; step 7 of
-lem-sf-ringed-restriction-exchange-open-descent.
-(blueprint: lem-sf-ringed-restriction-pullback-cube).
-Proof: expand each exchangeModuleSquare as the inverse compositor for its first
-path followed by the compositor for its second path. All paths have the same
-composite scheme map, by the Cartesian-square commutativity equations.
-The coefficient coherence equations of the four side faces, r and C.localRings
-identify the composite coefficient isomorphisms. Conjugate the ordinary compositors under
-the composite module adjunctions. By exchangeModuleComposition_existsUnique,
-their conjugates act on sections by the fibre-product pasting maps. The two
-threefold pastings preserve all three projections, so the universal property
-of the iterated fibre product identifies them. Faithfulness on module sections
-and injectivity of adjunction conjugation give the compositor associativity
-with these coefficient transports. Cancel the inverse pairs on the two routes
-to obtain the displayed equation. The argument uses neither openness nor any
-nonemptiness hypothesis, and applies to zero modules and empty schemes. -/
+/-- The six canonical module inverse-image squares commute around an open cube. -/
 theorem restriction_pullback_cube
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}

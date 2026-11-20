@@ -45,8 +45,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 
 /-! # Normalized mixed reduction unit
 
-Source: lem-fix-operation-reduction, tensor reassociation and completed comparison
-(blueprint: def-weil-mixed-reduction-unit).
+Source: proposition-six-operations-change-coefficients, tensor reassociation and completed
+comparison (blueprint: def-weil-mixed-reduction-unit).
 -/
 
 @[expose] public noncomputable section
@@ -169,7 +169,7 @@ private theorem mixedReduction_tensor_smul
     ((congrArg a (b.hom.map_smul s _)).trans (a.hom.map_smul s _))
 
 /-- The ordinary mixed-reduction unit, uniquely prescribed on sheafified tensors.
-Source: lem-fix-operation-reduction, tensor reassociation paragraph
+Source: proposition-six-operations-change-coefficients, tensor reassociation paragraph
 (blueprint: def-weil-mixed-reduction-unit).
 Proof: send s tensor x to ι_n(s) tensor (1 tensor x). The projection identity
 for integralCompletedScalarMap makes this balanced. It commutes with restrictions;
@@ -287,12 +287,12 @@ theorem sfMixedReductionUnit_existsUnique :
     rw [hτ, map_one, hη]
 
 /-- The actual mixed tensor unit, with no choice of a comparison isomorphism.
-Source: lem-fix-operation-reduction, tensor reassociation paragraph
+Source: proposition-six-operations-change-coefficients, tensor reassociation paragraph
 (blueprint: def-weil-mixed-reduction-unit). -/
 def sfMixedReductionUnit := (sfMixedReductionUnit_existsUnique l E L ι W n).exists.choose
 
 /-- The homotopy-level mixed unit, with the tensor composites explicitly associated.
-Source: lem-fix-operation-reduction, tensor reassociation paragraph
+Source: proposition-six-operations-change-coefficients, tensor reassociation paragraph
 (blueprint: def-weil-mixed-reduction-unit). -/
 def sfMixedReductionUnitHomotopy :
     (scalarReductionExtension l E W n).mapHomotopyCategory (.up ℤ) ⟶
@@ -388,7 +388,7 @@ private theorem mixedReductionDerivedComparison_isLeftDerived :
 /-- Localization of the tensor-unit map. The equation is on the whole homotopy
 category, including both coordinates of every Roos complex; it is not a choice of
 maps after evaluation of a derived inverse limit.
-Source: lem-fix-operation-reduction, tensor reassociation paragraph
+Source: proposition-six-operations-change-coefficients, tensor reassociation paragraph
 (blueprint: def-weil-mixed-reduction-unit).
 Proof: ordinary finite free extension is exact, and restriction is exact. Derive
 the ordinary mixed unit using the two universal left-derived tensor counits.
@@ -441,14 +441,14 @@ theorem sfMixedReductionDerivedUnit_existsUnique :
     exact (hτ P).trans (hη P).symm
 
 /-- The derived unit is selected from a unique universally normalized transformation.
-Source: lem-fix-operation-reduction, tensor reassociation paragraph
+Source: proposition-six-operations-change-coefficients, tensor reassociation paragraph
 (blueprint: def-weil-mixed-reduction-unit). -/
 def sfMixedReductionDerivedUnit :=
   (sfMixedReductionDerivedUnit_existsUnique l E L ι W n).exists.choose
 
 /-- Complete the target of the ordinary tensor-unit map using the prescribed diagonal
 Roos completion map. This retains its quotient augmentation and shifted cone coordinate.
-Source: lem-fix-operation-reduction, completed comparison paragraph
+Source: proposition-six-operations-change-coefficients, completed comparison paragraph
 (blueprint: def-weil-mixed-reduction-unit). -/
 def sfMixedCompletedReductionUnit
     (K : DerivedCategory (scalarReductionSource l E W)) :

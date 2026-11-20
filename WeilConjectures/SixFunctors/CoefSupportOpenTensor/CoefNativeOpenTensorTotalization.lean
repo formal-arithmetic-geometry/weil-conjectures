@@ -129,8 +129,6 @@ attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbe
   SemilinearSections.sequenceSmall SemilinearSections.sliceSmall
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 500000 in
--- Comparing the two canonical total-tensor presentations uses colimit-instance elaboration.
 /-- Totalize an ordinary natural extension/tensor isomorphism, with its summand equation.
 Source: Stacks, sites-cohomology.tex Tag 0GL1 and Homology Tag 012Z.
 (blueprint: lem-coef-native-open-tensor-totalization).
@@ -224,25 +222,9 @@ theorem nativeOpenTensor_totalization_exists
     (SheafOfModules.ringedOpenTotalTensor_presentation.{c, v, r} R)
   refine ⟨fun P Q ↦ (Φ P Q).symm, ?_, ?_⟩
   · intro P Q a b k h
-    have hi' : F.map (tensorSummand.{c, v, r} J' R' P
-        ((G.mapHomologicalComplex (.up ℤ)).obj Q) a b k h) ≫ (Φ P Q).hom.f k =
-      (ordinary (P.X a) (Q.X b)).inv ≫
-        tensorSummand.{c, v, r} J R ((F.mapHomologicalComplex (.up ℤ)).obj P)
-          Q a b k h := hi P Q a b k h
-    change tensorSummand.{c, v, r} J R
-        ((F.mapHomologicalComplex (.up ℤ)).obj P) Q a b k h ≫ (Φ P Q).inv.f k = _
-    apply (cancel_mono ((Φ P Q).hom.f k)).mp
-    have he : (Φ P Q).inv.f k ≫ (Φ P Q).hom.f k = 𝟙 _ :=
-      congrArg (fun f ↦ f.f k) (Φ P Q).inv_hom_id
-    erw [Category.assoc, he, Category.comp_id, Category.assoc, hi',
-      ← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+    exact SheafOfModules.inverse_square (ordinary (P.X a) (Q.X b)).symm
+      ((HomologicalComplex.eval B (.up ℤ) k).mapIso (Φ P Q)) _ _ (hi P Q a b k h)
   · intro P P' Q Q' f g
-    have hnat' : (F.mapHomologicalComplex (.up ℤ)).map
-        ((totalTensor.{c, v, r} J' R').map
-          (Prod.mkHom f ((G.mapHomologicalComplex (.up ℤ)).map g))) ≫ (Φ P' Q').hom =
-      (Φ P Q).hom ≫ (totalTensor.{c, v, r} J R).map
-        (Prod.mkHom ((F.mapHomologicalComplex (.up ℤ)).map f) g) :=
-      hnat P P' Q Q' f g
-    exact SheafOfModules.inverse_square _ _ _ _ hnat'
+    exact SheafOfModules.inverse_square (Φ P Q) (Φ P' Q') _ _ (hnat P P' Q Q' f g)
 
 end WeilConjectures.CoefSupportOpenTensor

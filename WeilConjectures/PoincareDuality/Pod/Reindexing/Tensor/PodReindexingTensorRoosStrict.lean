@@ -162,7 +162,7 @@ private theorem representative_equivalence
 representatives. No naturality of the independently supplied derived tensor family
 is assumed, so the conclusion concerns actual localized representatives only.
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-tensor-roos-model-iff-canonical).
 
 Proof: the representative square identifies the localized strict Roos arrow,

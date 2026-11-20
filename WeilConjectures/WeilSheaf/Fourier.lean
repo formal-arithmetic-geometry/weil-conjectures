@@ -200,8 +200,8 @@ lemma affineLine.geometricTranslation_comp_artinSchreierMap (c : k₀) :
 are base changes of translations defined over `k₀`. -/
 lemma affineLine.geometricTranslation_comp_geometricGaloisFrobenius (c : k₀) :
     (affineLine.geometricTranslationIso k₀ c).hom ≫
-        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom =
-      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom =
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom ≫
         (affineLine.geometricTranslationIso k₀ c).hom :=
   Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius _ (comp_over _ _)
 
@@ -758,11 +758,11 @@ lemma WeilSheaf.lowerStar_adicConstant_str_hom_hom {X Y : Scheme.{u}}
     [LocallyOfFiniteType φ] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] :
     ((WeilSheaf.lowerStar φ).obj (WeilSheaf.adicConstant k₀ l X)).obj.obj.str.hom =
       ((ProEtale.lowerStarComp _ (Scheme.Hom.geometricFiberMap φ (comp_over φ _))
-            (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≪≫
+            (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv ≪≫
           ProEtale.lowerStarCongr _
             (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) ≪≫
           (ProEtale.lowerStarComp _
-            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
             (Scheme.Hom.geometricFiberMap φ (comp_over φ _))).symm).app
           -- Stated with this form of `ℚ̄_ℓ,X̄` rather than `ProEtale.adicConstantSheaf`: closing
           -- the goal up to the definitional unfolding of `WeilSheaf.adicConstant` times out in
@@ -770,7 +770,7 @@ lemma WeilSheaf.lowerStar_adicConstant_str_hom_hom {X Y : Scheme.{u}}
           (IsoAlgebra.carrier (WeilSheaf.adicConstant k₀ l X).obj).X ≪≫
         (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[WeilCoefficients.{u} l].mapIso
           (ProEtale.adicConstantSheafLowerStarIso l
-            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)).hom := by
+            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm)).hom := by
   rw [← Endofunctor.IsoAlgebra.str_hom, WeilSheaf.lowerStar_obj_obj_str, Iso.trans_hom,
     Mod.comp_hom', Functor.mapIso_hom, ProEtale.adicLowerStar_map_hom]
   erw [WeilSheaf.adicConstant_str_hom_hom]
@@ -784,17 +784,17 @@ lemma WeilSheaf.lowerStar_adicConstant_str_hom_hom {X Y : Scheme.{u}}
 lemma artinSchreierPushforward_str_hom_hom :
     (WeilSheaf.artinSchreierPushforward k₀ l).obj.obj.str.hom =
       ((ProEtale.lowerStarComp _ (affineLine.geometricArtinSchreierMap k₀)
-            (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≪≫
+            (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv ≪≫
           ProEtale.lowerStarCongr _
             (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) ≪≫
           (ProEtale.lowerStarComp _
-            (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+            (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
             (affineLine.geometricArtinSchreierMap k₀)).symm).app
           (ProEtale.adicConstantSheaf l
             (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≪≫
         (affineLine.geometricArtinSchreierMap k₀)_*[WeilCoefficients.{u} l].mapIso
           (ProEtale.adicConstantSheafLowerStarIso l
-            (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)).hom :=
+            (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm)).hom :=
   WeilSheaf.lowerStar_adicConstant_str_hom_hom (affineLine.artinSchreierMap k₀)
 
 /-- The action of `σ_c` on `AS_* ℚ̄_ℓ` commutes with its Weil structure: the translation and
@@ -810,8 +810,8 @@ lemma artinSchreierTranslationSheafHom_comm (c : k₀) :
     artinSchreierTranslationSheafHom_hom, artinSchreierPushforward_str_hom_hom]
   exact ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange l
     (affineLine.geometricArtinSchreierMap k₀)
-    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
+    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
     (affineLine.geometricTranslationIso k₀ c)
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
     (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)
@@ -892,7 +892,7 @@ lemma affineLine.restriction_map_artinSchreierIdempotent (ψ : AddChar k₀ (Pad
   rw [artinSchreierTranslationSheafHom_hom_app]
   rfl
 
--- TODO(unify): def-fd-artin-schreier-sheaf
+-- TODO(unify): lemma-artin-schreier-character-sheaf--1
 /-- The Artin–Schreier sheaf `ℒ_{ψ(a x)}` on the affine line: the pullback along `x ↦ a x` of
 the `ψ`-isotypic component `ℒ_ψ` of the pushforward of the constant sheaf along the
 Artin–Schreier cover `u^q - u = x`, which is Galois over the line with group `k₀`, so that its
@@ -1159,7 +1159,6 @@ lemma affineLine.artinSchreierAverageModHom_splitModHom_of_restriction
     affineLine.artinSchreierSplitHom_comp_evalHom, affineLine.artinSchreierAverageModHom_hom,
     ProEtale.adicUpperStar_map_hom, h₂, Category.assoc]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- Instance search for the (co)kernels in the category of sheaves of modules is slow.
 /-- The `ψ`-isotypic component `ℒ_ψ` of `AS_* ℚ̄_ℓ`, the image of the projector `e_ψ`, is lisse
 (of rank one): after pullback along the finite étale Galois cover `AS` itself, `AS_* ℚ̄_ℓ`
@@ -1226,14 +1225,14 @@ noncomputable def affineLine.geometricSMul (a : AlgebraicClosure k₀) :
 
 variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 
--- TODO(unify): def-real-weil-representation-operations
+-- TODO(unify): definition-weil-representation
 /-- `F.HasLinearArtinSchreierConstituent ψ a j` says that the restriction along `j : U ⟶ 𝔸¹` of
 the geometric linear Artin–Schreier sheaf `ℒ_{ψ(a x)}`, for `a` in the algebraic closure of
 `k₀`, is a constituent of the pullback of `F` to `U ⊗_{k₀} k̄`: a quotient of a lisse subsheaf
 of the underlying sheaf of `F` on `Ū`, that is, a subquotient in the category of lisse sheaves,
 a Jordan–Hölder constituent of the geometric monodromy representation
-(`def-a1-constituent-nonexceptional`). The geometric sheaf `ℒ_{ψ(a x)}` is the pullback of the
-underlying sheaf of `ℒ_ψ` along the multiplication `x ↦ a x` of `𝔸¹_{k̄}`
+(`proposition-fourier-transform-middle-extension`). The geometric sheaf `ℒ_{ψ(a x)}` is the pullback
+of the underlying sheaf of `ℒ_ψ` along the multiplication `x ↦ a x` of `𝔸¹_{k̄}`
 (`AlgebraicGeometry.affineLine.geometricSMul`); it is defined over the finite subextension
 `k₀(a)`, where it is `AlgebraicGeometry.artinSchreier` for the character `ψ ∘ Tr`, but only its
 pullback to the geometric affine line is used here. Being lisse of rank one, it is irreducible,
@@ -1495,7 +1494,7 @@ Artin–Schreier sheaf. -/
 theorem isLisse_fourierKernel (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierKernel ψ).IsLisse :=
   isLisse_affineSpaceFourierKernel PUnit.{u + 1} ψ
 
--- TODO(unify): def-fd-transform
+-- TODO(unify): sec-Fourier-inversion
 /-- The Fourier–Deligne transform `FT_ψ(K) = Rpr₂!(pr₁^* K ⊗ μ^* ℒ_ψ)[1]` from Weil complexes
 on the affine line to Weil complexes on the dual affine line, with Laumon's shift by the
 relative dimension one: the case `ι = PUnit` of `AlgebraicGeometry.affineSpaceFourierTransform`.
@@ -1512,16 +1511,16 @@ theorem fourierTransform_eq (ψ : AddChar k₀ (PadicAlgCl l)) :
       shiftFunctor _ (1 : ℤ) :=
   rfl
 
--- TODO(unify): def-fd-transform
+-- TODO(unify): sec-Fourier-inversion
 instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).Additive :=
   inferInstanceAs (affineSpaceFourierTransform (l := l) PUnit.{u + 1} ψ).Additive
 
--- TODO(unify): def-fd-transform
+-- TODO(unify): sec-Fourier-inversion
 noncomputable instance (ψ : AddChar k₀ (PadicAlgCl l)) :
     (fourierTransform (l := l) ψ).CommShift ℤ :=
   inferInstanceAs ((affineSpaceFourierTransform (l := l) PUnit.{u + 1} ψ).CommShift ℤ)
 
--- TODO(unify): def-fd-transform
+-- TODO(unify): sec-Fourier-inversion
 /-- The Fourier–Deligne transform is a triangulated functor, as a composite of the triangulated
 functors `pr₁^*`, `- ⊗ μ^* ℒ_ψ`, `Rpr₂!` and the shift. -/
 instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).IsTriangulated :=

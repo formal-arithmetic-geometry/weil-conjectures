@@ -114,8 +114,6 @@ private theorem strictPerfect_isKFlat_local (X : Scheme.{u}) (U : X.Opens)
     (hk ((HomotopyCategory.quotient C (.up ℤ)).obj F)
       ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 hF)).2
 
-set_option maxHeartbeats 500000 in
--- Comparing the concrete tensor and its derived monoidal carrier needs extra elaboration.
 private theorem local_kFlat_tensor_invariance (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (P N A B : CochainComplex
@@ -129,6 +127,9 @@ private theorem local_kFlat_tensor_invariance (X : Scheme.{u}) (U : X.Opens)
         DerivedCategory.Q.obj (CochainComplex.mapBifunctor A B
           (@curriedTensor _ _ (SheafOfModules.monoidalCategory (X.sheaf.over U))))) := by
   let C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)
+  -- Mapping cones and homology use these same structures at every step.
+  let : Abelian C := inferInstance
+  let : CategoryTheory.Limits.HasBinaryBiproducts C := inferInstance
   let : MonoidalCategory C := SheafOfModules.monoidalCategory (X.sheaf.over U)
   let : SymmetricCategory C := SheafOfModules.symmetricCategory (X.sheaf.over U)
   have : MonoidalPreadditive C :=

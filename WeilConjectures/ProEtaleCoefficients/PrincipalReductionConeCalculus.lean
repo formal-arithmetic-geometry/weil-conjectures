@@ -22,7 +22,7 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 /-!
 # Strict principal reduction and its compatible cone comparisons
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 `sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md`,
 Cones paragraph; Stacks Tag 014E, definition-cone
 (blueprint: lem-pe-principal-reduction-cone-calculus).

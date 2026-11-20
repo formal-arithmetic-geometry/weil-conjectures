@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 
 For a separated finite-type morphism `f : X ⟶ Y` over a finite-type `k`-scheme `Y` and a finite
 `Λ` whose exponent is invertible on `Y`, the exceptional inverse image `Rf^!` carries `Dᵇc(Y, Λ)`
-into `Dᵇc(X, Λ)`. This is the bounded constructible half of `sk-prop-sf-rf-shriek-preservation`
+into `Dᵇc(X, Λ)`. This is the bounded constructible half of `theorem-f-shriek-finite-coefficients`
 (iv), without any Tor-amplitude condition, and it is what makes the exceptional adjunction of the
 six-functor datum `def-fix-six-functor-datum` (4) restrict to the bounded constructible
 categories (`fix-prop-adjunctions` (2)).
@@ -161,7 +161,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_chart {U V Y : Scheme.{u}}
 /-- The exceptional inverse image preserves bounded constructibility: for a separated
 finite-type `f : X ⟶ Y` admitting a compactification, over a finite-type `k`-scheme `Y`, and a
 finite `Λ` whose exponent is invertible on `Y`, `Rf^!` carries `Dᵇc(Y, Λ)` into `Dᵇc(X, Λ)`. This
-is the constructibility part of `sk-prop-sf-rf-shriek-preservation` (iv), with no Tor-amplitude
+is the constructibility part of `theorem-f-shriek-finite-coefficients` (iv), with no Tor-amplitude
 condition; it makes `Rf^! : Dᵇc(Y, Λ) ⥤ Dᵇc(X, Λ)` of `def-fix-six-functor-datum` (4) defined. -/
 theorem boundedConstructible_rightDerivedUpperShriek {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]

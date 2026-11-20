@@ -21,13 +21,13 @@ private theorem homology_scalar_comm
     (A : ShortComplex (ModuleCat.{u} R)) (B : ShortComplex (ModuleCat.{u} S))
     (f : A.map (forget₂ _ AddCommGrpCat.{u}) ⟶
       B.map (forget₂ _ AddCommGrpCat.{u})) (r : R) (s : S)
-    (hf : A.mapNatTrans (ModuleCat.smulNatTrans R r) ≫ f =
-      f ≫ B.mapNatTrans (ModuleCat.smulNatTrans S s)) :
-    A.homology.smul r ≫ (A.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).inv ≫
+    (hf : A.mapNatTrans (ModuleCat.smulNatTrans R r).asHom ≫ f =
+      f ≫ B.mapNatTrans (ModuleCat.smulNatTrans S s).asHom) :
+    (A.homology.smul r).asHom ≫ (A.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).inv ≫
       ShortComplex.homologyMap f ≫ (B.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).hom =
     (A.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).inv ≫
       ShortComplex.homologyMap f ≫ (B.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).hom ≫
-        B.homology.smul s := by
+        (B.homology.smul s).asHom := by
   have h := congrArg (fun g : A.map (forget₂ _ AddCommGrpCat.{u}) ⟶
     B.map (forget₂ _ AddCommGrpCat.{u}) ↦ ShortComplex.homologyMap g) hf
   rw [ShortComplex.homologyMap_comp, ShortComplex.homologyMap_comp,
@@ -39,7 +39,6 @@ private theorem homology_scalar_comm
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 600000 in
 -- The comparisons involve several nested evaluation and homology functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The resolution map admits a semilinear lift over the map on global functions.
@@ -87,10 +86,10 @@ theorem ModuleCohomologyFMapData.map_semilinear
     rw [ha']
     exact (ΓY.map (D.lambda.f n)).hom.map_smul r x
   have hμ (r : Y.ringCatSheaf.obj.obj (op ⊤)) :
-      (A.sc p).mapNatTrans (ModuleCat.smulNatTrans _ (h.appTop.hom r)) ≫
+      (A.sc p).mapNatTrans (ModuleCat.smulNatTrans _ (h.appTop.hom r)).asHom ≫
         (HomologicalComplex.shortComplexFunctor _ (ComplexShape.up ℕ) p).map μ =
       (HomologicalComplex.shortComplexFunctor _ (ComplexShape.up ℕ) p).map μ ≫
-        (C.sc p).mapNatTrans (ModuleCat.smulNatTrans _ r) := by
+        (C.sc p).mapNatTrans (ModuleCat.smulNatTrans _ r).asHom := by
     ext x
     all_goals exact hμn _ r x
   have hm (r : Y.ringCatSheaf.obj.obj (op ⊤)) (x : A.homology p) :
@@ -130,7 +129,10 @@ theorem ModuleCohomologyFMapData.map_semilinear
   refine ⟨{ (fadd.hom) with map_smul' := ?_ }, ?_⟩
   · intro r x
     change i (inv m (b (j (r • x)))) = h.appTop.hom r • i (inv m (b (j x)))
-    rw [j.hom.map_smul, b.hom.map_smul, hmi, i.hom.map_smul]
+    exact (congrArg (fun y ↦ i (inv m (b y))) (j.hom.map_smul r x)).trans
+      ((congrArg (fun y ↦ i (inv m y)) (b.hom.map_smul r (j x))).trans
+        ((congrArg (fun y ↦ i y) (hmi r (b (j x)))).trans
+          (i.hom.map_smul (h.appTop.hom r) (inv m (b (j x))))))
   · intro x
     exact congrArg (fun f ↦ f x) hfadd
 

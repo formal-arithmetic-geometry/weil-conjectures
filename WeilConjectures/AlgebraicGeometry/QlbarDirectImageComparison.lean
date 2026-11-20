@@ -145,20 +145,20 @@ Proof plan:
 2. The finite intermediate fields containing E form a nonempty directed tail. Their
    actual inclusion legs exhibit the algebraic-closure coefficient module as a colimit
    (lem-sfb-qlbar-tail-module-colimit). Cartesian coefficients identify their pullbacks
-   and inclusion maps (sk-prop-sfb-cartesian-coefficients, sk-def-sfb-coefficient-change).
+   and inclusion maps (lemma-inverse-image-coefficient-sheaves, sk-def-sfb-coefficient-change).
    Finite coefficients are finite free; closure coefficients are flat
-   (lem-sfb-subfield-flat, lem-sfb-qlbar-flat).
+   (prose-03-27, prose-03-27).
 3. Represent C by a complex vanishing below one integer a, using
    def-sbc-standard-tstructure-derived-category. Exact scalar extension preserves this
    common bound. Tensor preserves the coefficient colimit termwise
    (lem-weil-pbc-independent-sheaf-tensor-colimits). Filtered module colimits are exact
-   (lem-weil-pbc-module-sheaves-colimits-forgetful,
+   (situation-conventions,
    lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact), hence commute with cohomology
    (lem-weil-pbc-exact-functor-complex-cohomology).
 4. The symmetric projection mate at a finite coefficient field is the finite-biproduct
    comparison: naturality and the tensor-unit normalization identify it on every summand
    (lem-weil-pbc-ringed-projection-mate-exact). It is therefore invertible.
-5. Apply det-pe-bounded-continuity-direct-image to the actual finite-field diagram with
+5. Apply corollary-continuity-cohomology--2 to the actual finite-field diagram with
    its common bound a. Naturality gives the cocone equation for the projection mates.
    Thus the closure projection mate induces, on every cohomology sheaf, the colimit of
    the finite-field isomorphisms followed by the continuity isomorphism. Cohomology

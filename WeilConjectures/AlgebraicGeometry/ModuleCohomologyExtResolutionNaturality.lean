@@ -17,6 +17,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafi
 import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Resolution-normalized module/Ext comparisons
 

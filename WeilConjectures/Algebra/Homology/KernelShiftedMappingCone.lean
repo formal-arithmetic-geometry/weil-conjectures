@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-!
 # The kernel of a degreewise epimorphism and its shifted mapping cone

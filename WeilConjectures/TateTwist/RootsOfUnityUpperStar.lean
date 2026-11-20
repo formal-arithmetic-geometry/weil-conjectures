@@ -306,7 +306,7 @@ theorem isIso_upperStarRootsOfUnityComparison {k : Type u} [Field k] {X X' : Sch
   have : NeZero N := NeZero.of_neZero_natCast k
   have : NeZero (N : SeparableClosure k) :=
     ‹NeZero (N : k)›.of_injective (algebraMap k (SeparableClosure k)).injective
-  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot (SeparableClosure k) N
+  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot (SeparableClosure k) N
   let w := pullback.fst f (specSepClosureHom k)
   let w' := pullback.fst (g ≫ f) (specSepClosureHom k)
   let a : pullback (g ≫ f) (specSepClosureHom k) ⟶ pullback f (specSepClosureHom k) :=

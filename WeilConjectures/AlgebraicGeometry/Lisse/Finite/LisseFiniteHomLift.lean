@@ -214,8 +214,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ProperBaseChange.Grot
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 
 /-! # Finite-stage lifting of lisse coefficient morphisms
-
-Source: the finite-descent-lisse blueprint proof, step 6.
 -/
 
 @[expose] public noncomputable section
@@ -232,8 +230,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- A lisse coefficient module is locally free over its coefficient ring: the free
 trivializations of the module pullbacks are transported along the inverse of the invertible
-coefficient comparison `condensedPullbackHom`.
-(auxiliary; not a blueprint node) -/
+coefficient comparison `condensedPullbackHom`. -/
 lemma IsLisseCoefficientModule.isLocallyFree
     {X : Scheme.{u}}
     {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -251,8 +248,7 @@ lemma IsLisseCoefficientModule.isLocallyFree
 
 /-- On a quasi-compact quasi-separated scheme, a morphism from a locally free module object
 to the colimit of a filtered diagram factors through some stage of the diagram: internal Hom
-out of a locally free module object preserves colimits, and the unit object is compact.
-(auxiliary; not a blueprint node) -/
+out of a locally free module object preserves colimits, and the unit object is compact. -/
 lemma IsLocallyFree.exists_comp_eq_of_isColimit
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
@@ -392,23 +388,7 @@ variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- A morphism of algebraic-closure extensions of two lisse finite-field modules
 is obtained at a finite field. This asserts only existence of representatives, not their
-comparison or equality relation.
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-lisse.proof.md, proof (2),
-surjectivity paragraph (blueprint: lem-sfb-lisse-finite-hom-lift).
-
-Proof in words: remove the invertible coefficient pullback from the local free
-trivializations. Internal Hom out of this locally finite free module preserves small
-colimits by the existing internal-Hom theorem. Use the filtered final category of finite
-coefficient fields above E. The existing coefficient complex colimit, evaluated in degree
-zero on N concentrated in degree zero, expresses its restricted closure extension as the
-colimit of restricted finite scalar extensions. Transpose the given map by scalar
-adjunction and then by internal-Hom adjunction. The qcqs unit-Hom stage lemma factors the
-result through a finite stage of the internal-Hom diagram. Transpose back by both
-adjunctions. Finally, calculate the units of the canonical scalar-extension comparison:
-the mixed scalar cocone map is the composite of the larger-field unit and the inverse
-comparison. This gives exactly the conjugation equation in the conclusion. Neither a
-constant rank nor nonemptiness is required. -/
+comparison or equality relation. -/
 theorem exists_lisse_finite_hom_lift [CompactSpace X] [QuasiSeparatedSpace X]
     (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
     (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E))

@@ -88,8 +88,41 @@ private theorem tensorModel_isIso_right (Y : Scheme.{u})
   change IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q F V)
   infer_instance
 
-set_option maxHeartbeats 400000 in
--- The canonical sheaf tensor and Hom comparisons require extra instance-reconciliation work.
+-- Keep the monoidal transport calculation independent of the concrete derived instances.
+private theorem tensorHomEquiv_evaluation_models {C : Type*} [Category* C]
+    [MonoidalCategory C] (H : Cᵒᵖ × C ⥤ C)
+    (e : ∀ A B D : C, (A ⟶ H.obj (op B, D)) ≃ (A ⊗ B ⟶ D))
+    (hn : ∀ A A' B B' D D' (x : A' ⟶ A) (y : B' ⟶ B) (z : D ⟶ D')
+      (v : A ⟶ H.obj (op B, D)),
+      e A' B' D' (x ≫ v ≫ H.map (y.op, z)) = (x ⊗ₘ y) ≫ e A B D v ≫ z)
+    {K N V A T B : C} (eN : A ≅ N) (d : V ≅ H.obj (op K, 𝟙_ C))
+    (c : B ≅ H.obj (op K, N)) (m : A ⊗ V ≅ T) (f : T ⟶ B)
+    (hl : e (N ⊗ V) K N ((eN.inv ▷ V) ≫ m.hom ≫ f ≫ c.hom) =
+      (α_ N V K).hom ≫ N ◁ (e V K (𝟙_ C) d.hom) ≫ (ρ_ N).hom) :
+    let D := H.obj (op K, 𝟙_ C)
+    let g := (e (N ⊗ D) K N).symm
+      ((α_ N D K).hom ≫ N ◁ (e D K (𝟙_ C) (𝟙 D)) ≫ (ρ_ N).hom)
+    g ≫ c.inv = (tensorIso eN.symm d.symm ≪≫ m).hom ≫ f := by
+  let D := H.obj (op K, 𝟙_ C)
+  let g := (e (N ⊗ D) K N).symm
+    ((α_ N D K).hom ≫ N ◁ (e D K (𝟙_ C) (𝟙 D)) ≫ (ρ_ N).hom)
+  change g ≫ c.inv = _
+  have hd := hn D V K K (𝟙_ C) (𝟙_ C) d.hom (𝟙 K) (𝟙 _) (𝟙 D)
+  simp only [op_id, ← prod_id', H.map_id, Category.comp_id, tensorHom_id] at hd
+  have hg := hn (N ⊗ D) (N ⊗ V) K K N N (N ◁ d.hom) (𝟙 K) (𝟙 N) g
+  simp only [op_id, ← prod_id', H.map_id, Category.comp_id, tensorHom_id] at hg
+  have heval : e (N ⊗ V) K N ((N ◁ d.hom) ≫ g) =
+      (α_ N V K).hom ≫ N ◁ (e V K (𝟙_ C) d.hom) ≫ (ρ_ N).hom := by
+    rw [hg]
+    dsimp only [g]
+    rw [Equiv.apply_symm_apply]
+    rw [associator_naturality_middle_assoc, hd, whiskerLeft_comp]
+    simp only [Category.assoc]
+  have heq := (e (N ⊗ V) K N).injective (heval.trans hl.symm)
+  apply (cancel_mono c.hom).1
+  apply (cancel_epi (N ◁ d.hom)).1
+  simpa [tensorIso_hom, tensorHom_def', Category.assoc, ← whiskerLeft_comp] using heq
+
 /-- Compute derived evaluation using ordinary complexes on the same scheme site.
 Source: Stacks Project, Tags 08DJ, 08DM and 08DQ, representative calculation.
 (blueprint: lem-pc-kinjective-scheme-evaluation-models).
@@ -174,36 +207,9 @@ theorem exists_kInjective_scheme_evaluation_models (Y : Scheme.{u})
   have := tensorModel_isIso_right Y F V hdual
   let a := tensorIso eN.symm d.symm ≪≫ asIso (pullbackTensorModelMap Y F V)
   refine ⟨a, b, ?_⟩
-  let e := schemeDerivedTensorHomEquiv Y
-  let g := (e (N ⊗ D) K N).symm
-    ((α_ N D K).hom ≫ N ◁ (e D K (𝟙_ _) (𝟙 D)) ≫ (ρ_ N).hom)
-  change g ≫ b.hom = a.hom ≫ DerivedCategory.Q.map f
-  have hn := (Classical.choose_spec (exists_canonicalDerivedTensorHom Y)).1
-  change ∀ A A' B B' C C' (x : A' ⟶ A) (y : B' ⟶ B) (z : C ⟶ C')
-    (v : A ⟶ H.obj (op B, C)),
-    e A' B' C' (x ≫ v ≫ H.map (y.op, z)) = (x ⊗ₘ y) ≫ e A B C v ≫ z at hn
-  have hd := hn D (DerivedCategory.Q.obj V) K K (𝟙_ _) (𝟙_ _)
-    d.hom (𝟙 K) (𝟙 _) (𝟙 D)
-  simp only [op_id, ← prod_id', H.map_id, Category.comp_id, tensorHom_id] at hd
-  have hg := hn (N ⊗ D) (N ⊗ DerivedCategory.Q.obj V) K K N N
-    (N ◁ d.hom) (𝟙 K) (𝟙 N) g
-  simp only [op_id, ← prod_id', H.map_id, Category.comp_id, tensorHom_id] at hg
-  have heval : e (N ⊗ DerivedCategory.Q.obj V) K N ((N ◁ d.hom) ≫ g) =
-      (α_ N (DerivedCategory.Q.obj V) K).hom ≫ N ◁
-        (e (DerivedCategory.Q.obj V) K (𝟙_ _) d.hom) ≫ (ρ_ N).hom := by
-    rw [hg]
-    dsimp only [g]
-    rw [Equiv.apply_symm_apply]
-    rw [associator_naturality_middle_assoc, hd, whiskerLeft_comp]
-    simp only [Category.assoc]
-  have hl := schemeOrdinaryEvaluation_localization Y K N P F eK eN f hf
-  change e (N ⊗ DerivedCategory.Q.obj V) K N
-    ((eN.inv ▷ DerivedCategory.Q.obj V) ≫ pullbackTensorModelMap Y F V ≫
-      DerivedCategory.Q.map f ≫ c) = _ at hl
-  have heq := (e (N ⊗ DerivedCategory.Q.obj V) K N).injective (heval.trans hl.symm)
-  apply (cancel_mono b.inv).1
-  apply (cancel_epi (N ◁ d.hom)).1
-  simpa [a, b, d, tensorIso_hom, tensorHom_def', Category.assoc,
-    ← whiskerLeft_comp] using heq
+  exact tensorHomEquiv_evaluation_models H (schemeDerivedTensorHomEquiv Y)
+    (schemeDerivedTensorHomEquiv_naturality Y) eN d (asIso c)
+    (asIso (pullbackTensorModelMap Y F V)) (DerivedCategory.Q.map f)
+    (schemeOrdinaryEvaluation_localization Y K N P F eK eN f hf)
 
 end AlgebraicGeometry

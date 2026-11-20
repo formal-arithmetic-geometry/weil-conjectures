@@ -73,13 +73,13 @@ structure CondensedQbarCoefficientProperties (ℓ : ℕ) [Fact ℓ.Prime] (X : S
       (hab : b.1 = a.1.comp g.base.hom) :
     (condensedQbarRegularPullbackIso ℓ g).inv ≫
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) g).map
-        (condensedQbarScalar ℓ Y a) ≫ (condensedQbarRegularPullbackIso ℓ g).hom =
-      condensedQbarScalar ℓ Z b
+        (condensedQbarScalar ℓ Y a).asHom ≫ (condensedQbarRegularPullbackIso ℓ g).hom =
+      (condensedQbarScalar ℓ Z b).asHom
   /-- In these coordinates a scalar acts by its value at the point. -/
   fiber_scalar (U : X.ProEt) (x : U.left)
       (a : PadicAlgCl.finiteIntermediateFieldValued ℓ U.left) :
     regularScalarValue (d.fiber U x) (d.fiber_regular U x)
-      (condensedQbarScalar ℓ U.left a) = a.1 x
+      (condensedQbarScalar ℓ U.left a).asHom = a.1 x
   /-- Evaluating a module pulled back from X depends only on its base point. -/
   fiber_compare (U V : X.ProEt) (x : U.left) (y : V.left) (h : U.hom x = V.hom y) :
     Nonempty
@@ -114,8 +114,8 @@ structure CondensedQbarFunctionCoefficients (ℓ : ℕ) [Fact ℓ.Prime] (X : Sc
       (hab : b.1 = a.1.comp g.base.hom) :
     (condensedQbarRegularPullbackIso ℓ g).inv ≫
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) g).map
-        (condensedQbarScalar ℓ Y a) ≫ (condensedQbarRegularPullbackIso ℓ g).hom =
-      condensedQbarScalar ℓ Z b
+        (condensedQbarScalar ℓ Y a).asHom ≫ (condensedQbarRegularPullbackIso ℓ g).hom =
+      (condensedQbarScalar ℓ Z b).asHom
   /-- Geometric evaluation, after choosing an algebraic closure above the point. -/
   fiber (U : X.ProEt) (x : U.left) :
     Mod (Sheaf (Scheme.ProEt.topology U.left) Ab.{u + 1})
@@ -131,7 +131,7 @@ structure CondensedQbarFunctionCoefficients (ℓ : ℕ) [Fact ℓ.Prime] (X : Sc
   fiber_scalar (U : X.ProEt) (x : U.left)
       (a : PadicAlgCl.finiteIntermediateFieldValued ℓ U.left) :
     regularScalarValue (fiber U x) (fiber_regular U x)
-      (condensedQbarScalar ℓ U.left a) = a.1 x
+      (condensedQbarScalar ℓ U.left a).asHom = a.1 x
   /-- Evaluating a module pulled back from X depends only on its base point. -/
   fiber_compare (U V : X.ProEt) (x : U.left) (y : V.left) (h : U.hom x = V.hom y) :
     Nonempty
@@ -342,20 +342,21 @@ private lemma sheafScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u
   have : IsIso (η.app (op T)) := bounded_unit_isIso ℓ Y T wY
   intro f
   obtain ⟨a, ha⟩ := (ConcreteCategory.bijective_of_isIso (η.app (op T))).2
-    (f.hom.hom.app (op T) (η.app (op T) (ULift.up 1)))
+    (f.asHom.hom.hom.app (op T) (η.app (op T) (ULift.up 1)))
   refine ⟨a.down, ?_⟩
+  apply End.ext
   apply (Mod.bijective_one_comp_hom (Mod.regular (padicAlgClSheaf Y ℓ))).1
   apply Sheaf.unit_hom_ext
   change Functor.LaxMonoidal.ε (sheafToPresheaf J Ab.{u + 1}) ≫
       ((MonObj.one (X := padicAlgClSheaf Y ℓ)).hom ≫
-        (CondensedQbarScalarConstruction.sheafScalar ℓ Y a.down).hom.hom) =
+        (CondensedQbarScalarConstruction.sheafScalar ℓ Y a.down).asHom.hom.hom) =
     Functor.LaxMonoidal.ε (sheafToPresheaf J Ab.{u + 1}) ≫
-      ((MonObj.one (X := padicAlgClSheaf Y ℓ)).hom ≫ f.hom.hom)
+      ((MonObj.one (X := padicAlgClSheaf Y ℓ)).hom ≫ f.asHom.hom.hom)
   rw [← Category.assoc, ← Category.assoc, sheafification_one]
   apply unit_presheaf_hom_ext Y
-  change ((CondensedQbarScalarConstruction.sheafScalar ℓ Y a.down).hom.hom.app (op T))
+  change ((CondensedQbarScalarConstruction.sheafScalar ℓ Y a.down).asHom.hom.hom.app (op T))
       (η.app (op T) (ULift.up 1)) =
-    f.hom.hom.app (op T) (η.app (op T) (ULift.up 1))
+    f.asHom.hom.hom.app (op T) (η.app (op T) (ULift.up 1))
   change (sheafifyMap J (CondensedQbarScalarConstruction.boundedMul ℓ Y a.down)).app
     (op T) (η.app (op T) (ULift.up 1)) = _
   have hs := ConcreteCategory.congr_hom
@@ -384,12 +385,13 @@ private lemma condensedQbarScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime]
     inferInstanceAs ((Mod.comapEquivalenceOfIsIso (inv e.inv.hom)).functor.Full)
   intro f
   obtain ⟨a, ha⟩ := sheafScalar_surjective ℓ Y wY
-    (F.preimage (d.hom ≫ f ≫ d.inv))
+    (End.of (F.preimage (d.hom ≫ f.asHom ≫ d.inv)))
   refine ⟨a, ?_⟩
   change CondensedQbarScalarConstruction.transportedScalar ℓ Y e a = f
+  apply End.ext
   unfold CondensedQbarScalarConstruction.transportedScalar
-  change d.inv ≫ F.map (CondensedQbarScalarConstruction.sheafScalar ℓ Y a) ≫ d.hom = f
-  rw [ha, F.map_preimage]
+  change d.inv ≫ F.map (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).asHom ≫ d.hom = f.asHom
+  rw [congrArg End.asHom ha, F.map_preimage]
   simp only [Iso.inv_hom_id_assoc, Category.assoc, Iso.inv_hom_id,
     Category.comp_id]
 
@@ -407,7 +409,7 @@ private lemma field_scalar (K : Type u) [Field K] [IsAlgClosed K]
     (a : PadicAlgCl.finiteIntermediateFieldValued ℓ (Spec (.of K))) :
     (CondensedQbarGeometricEvaluation.fieldRegularCoordinates K ℓ)
       ((CondensedQbarGeometricEvaluation.fieldFiber K ℓ).map
-        (condensedQbarScalar ℓ (Spec (.of K)) a)
+        (condensedQbarScalar ℓ (Spec (.of K)) a).asHom
           ((CondensedQbarGeometricEvaluation.fieldRegularCoordinates K ℓ).symm 1)) =
       a.1 default := by
   let Y := Spec (.of K)
@@ -435,12 +437,12 @@ private lemma field_scalar (K : Type u) [Field K] [IsAlgClosed K]
     (LinearEquiv.symm_apply_eq _).mpr hm.symm
   rw [hm', fieldRegularCoordinates_apply]
   change (((CondensedQbarGeometricEvaluation.fieldCoefficientIso K ℓ).hom.hom)
-    (((condensedQbarScalar ℓ Y a).hom.hom.app (op T)) m)).down = _
+    (((condensedQbarScalar ℓ Y a).asHom.hom.hom.app (op T)) m)).down = _
   unfold condensedQbarScalar CondensedQbarScalarConstruction.transportedScalar
   let d := ((sheafToPresheaf (Scheme.ProEt.topology Y) Ab.{u + 1}).mapIso
     ((Mon.forget _).mapIso e)).app (op T)
   change (((CondensedQbarGeometricEvaluation.fieldCoefficientIso K ℓ).hom.hom)
-    (((inv e.inv.hom ≫ (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).hom ≫
+    (((inv e.inv.hom ≫ (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).asHom.hom ≫
       e.inv.hom).hom.app (op T)) m)).down = _
   rw [show inv e.inv.hom = e.hom.hom from
     (IsIso.inv_eq_of_hom_inv_id (show e.inv.hom ≫ e.hom.hom = 𝟙 _ from
@@ -550,7 +552,7 @@ private lemma fiber_scalar (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) (x : Y)
     (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y) :
     regularScalarValue (CondensedQbarGeometricEvaluation.fiber ℓ Y x)
       (CondensedQbarGeometricEvaluation.fiberRegularCoordinates ℓ Y x)
-      (condensedQbarScalar ℓ Y a) = a.1 x := by
+      (condensedQbarScalar ℓ Y a).asHom = a.1 x := by
   have hpoint : (CondensedQbarGeometricEvaluation.geometricPoint Y x) default = x :=
     Scheme.fromSpecResidueField_apply x _
   change regularScalarValue ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
@@ -560,7 +562,7 @@ private lemma fiber_scalar (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) (x : Y)
     (condensedQbarRegularPullbackIso ℓ (CondensedQbarGeometricEvaluation.geometricPoint Y
     x))).toLinearEquiv.trans (CondensedQbarGeometricEvaluation.fieldRegularCoordinates
     (AlgebraicClosure (Y.residueField x)) ℓ))
-    (condensedQbarScalar ℓ Y a) = _
+    (condensedQbarScalar ℓ Y a).asHom = _
   rw [regularScalarValue_comp, regularScalarValue_conjugate
     (CondensedQbarGeometricEvaluation.fieldFiber (AlgebraicClosure (Y.residueField x)) ℓ)
     (condensedQbarRegularPullbackIso ℓ (CondensedQbarGeometricEvaluation.geometricPoint Y x))
@@ -641,7 +643,7 @@ theorem condensedQbar_canonical_coefficient_properties
     exact condensedQbarScalar_surjective ℓ U.left wU
   · intro Y Z f g _ _ a b hab
     exact (condensedQbar_scalar_pullback ℓ g a).trans
-      (congrArg (condensedQbarScalar ℓ Z) (Subtype.ext hab).symm)
+      (congrArg (fun b ↦ (condensedQbarScalar ℓ Z b).asHom) (Subtype.ext hab).symm)
   · intro U x a
     exact fiber_scalar ℓ U.left x a
   · exact fibers_compare ℓ

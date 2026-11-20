@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.DeterminantSplitComparison
 
 /-!
 # Bijectivity of the wedge morphism on a splitting open
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph
-(blueprint: lem-sc-determinant-wedge-morphism-split).
 -/
 
 @[expose] public section
@@ -343,30 +340,7 @@ private theorem bijective_of_comparison {X : Scheme.{v}}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A morphism satisfying the wedge formula is bijective on sections over every open
-contained in an open on which the sequence splits. No global exactness is needed here.
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph
-(blueprint: lem-sc-determinant-wedge-morphism-split).
-
-Proof: Refine `U` to a cover trivializing the first and third terms. Restrict the given
-splitting `e` to these charts; its two compatibility equations identify `S.f` with the
-first inclusion and `S.g` with the second projection. Sections of the free outside
-terms have bases indexed by `Fin r₁` and `Fin r₃` on each subopen of such a chart.
-Apply `exteriorPower.existsUnique_topDirectSum` to these bases, transporting along `e`
-and the reindexing `hr`. Its inverse satisfies the wedge formula by choosing the lifts
-obtained from the second inclusion. The formula assumed for `φ` therefore identifies
-its restriction with this inverse: pure wedges span the exterior powers, pure tensors
-span their tensor product, and the maps into their sheafifications are locally
-surjective. Apply `exteriorTensor_lift_hom_ext` on each chart (the split quotient is an
-epimorphism) to obtain equality of sheaf morphisms. This also handles sections
-which are not globally sums of wedges.
-Consequently `φ` is an isomorphism on the refined cover. For an arbitrary `W ≤ U`,
-local injectivity implies injectivity on `W` by separatedness. For surjectivity, take
-local inverse images of a section on the induced cover of `W`; local injectivity makes
-them agree on pairwise intersections, so the sheaf property glues them to an inverse
-image on `W`. Thus the map on sections is bijective for every such `W`. The argument
-also covers zero ranks (the empty wedge is the basis of degree zero), zero rings,
-and the empty open or empty scheme. -/
+contained in an open on which the sequence splits. No global exactness is needed here. -/
 theorem determinant_wedgeMorphism_bijective_of_split {X : Scheme.{v}}
     (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)
     [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]
