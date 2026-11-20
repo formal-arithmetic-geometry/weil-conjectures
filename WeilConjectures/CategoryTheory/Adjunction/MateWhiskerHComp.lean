@@ -28,11 +28,12 @@ variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* 
   {G : A ⥤ C} {H : B ⥤ D} {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
   (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
 
-/-- The mate of a square whiskered at the top is the mate whiskered on the right. -/
+/-- The mate of a square whiskered at the top is the mate whiskered on the right: the case
+`τ = 𝟙` of `mateEquiv_whiskerTop_whiskerBottom`. -/
 lemma mateEquiv_whiskerTop {G' : A ⥤ C} (α : TwoSquare G L₁ L₂ H) (σ : G' ⟶ G) :
     mateEquiv adj₁ adj₂ (α.whiskerTop σ) = (mateEquiv adj₁ adj₂ α).whiskerRight σ := by
   ext X
-  simp
+  simpa using NatTrans.congr_app (mateEquiv_whiskerTop_whiskerBottom adj₁ adj₂ α σ (𝟙 H)) X
 
 end
 

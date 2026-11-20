@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.CategoryTheory.Adjunction.MateWhiskerHComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.TwoSquareTrans
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerShriek
@@ -50,38 +51,23 @@ section Comp
 variable {R S T : Type (u + 1)} [CommRing R] [CommRing S] [CommRing T] (φ : R →+* S)
   (ψ : S →+* T) (χ : R →+* T) (hχ : χ = ψ.comp φ) (X : Scheme.{u})
 
-/-- Restriction of scalars of pro-étale sheaves along `χ = ψ ∘ φ` is restriction along `ψ` followed
-by restriction along `φ`. -/
-noncomputable def sheafRestrictScalarsCompIso :
-    sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} ψ) ⋙
-        sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} φ) ≅
-      sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} χ) where
-  hom := sheafCompose_map (Scheme.ProEt.topology X)
-    (ModuleCat.restrictScalarsComp'.{u + 1} φ ψ χ hχ).inv
-  inv := sheafCompose_map (Scheme.ProEt.topology X)
-    (ModuleCat.restrictScalarsComp'.{u + 1} φ ψ χ hχ).hom
-  hom_inv_id := by
-    rw [← sheafCompose_comp, Iso.inv_hom_id, sheafCompose_id]
-    rfl
-  inv_hom_id := by
-    rw [← sheafCompose_comp, Iso.hom_inv_id, sheafCompose_id]
-
 /-- Extension of scalars of pro-étale sheaves along `ψ ∘ φ` is extension along `φ` followed by
-extension along `ψ`: the conjugate of `sheafRestrictScalarsCompIso`. -/
+extension along `ψ`: the conjugate of `Sheaf.restrictScalarsCompIso`. -/
 noncomputable def sheafExtendScalarsCompIso :
     sheafExtendScalars χ X ≅ sheafExtendScalars φ X ⋙ sheafExtendScalars ψ X :=
   (conjugateIsoEquiv ((sheafExtendScalarsAdjunction φ X).comp (sheafExtendScalarsAdjunction ψ X))
-    (sheafExtendScalarsAdjunction χ X)).symm (sheafRestrictScalarsCompIso φ ψ χ hχ X)
+    (sheafExtendScalarsAdjunction χ X)).symm
+    (Sheaf.restrictScalarsCompIso (Scheme.ProEt.topology X) φ ψ χ hχ)
 
 /-- The inverse of `sheafExtendScalarsCompIso` is conjugate to the inverse of
-`sheafRestrictScalarsCompIso`. -/
+`Sheaf.restrictScalarsCompIso`. -/
 lemma conjugateEquiv_sheafExtendScalarsCompIso_inv :
     conjugateEquiv (sheafExtendScalarsAdjunction χ X)
         ((sheafExtendScalarsAdjunction φ X).comp (sheafExtendScalarsAdjunction ψ X))
         (sheafExtendScalarsCompIso φ ψ χ hχ X).inv =
-      (sheafRestrictScalarsCompIso φ ψ χ hχ X).inv :=
+      (Sheaf.restrictScalarsCompIso (Scheme.ProEt.topology X) φ ψ χ hχ).inv :=
   congrArg Iso.inv ((conjugateIsoEquiv _ _).apply_symm_apply
-    (sheafRestrictScalarsCompIso φ ψ χ hχ X))
+    (Sheaf.restrictScalarsCompIso (Scheme.ProEt.topology X) φ ψ χ hχ))
 
 set_option hygiene false in
 local notation "aR" => ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} R)
@@ -131,7 +117,7 @@ lemma sheafExtendScalarsCompUpperStarIso_hom_app_trans {Y Z : Scheme.{u}} (g : Z
       conjugateEquiv_sheafExtendScalarsCompUpperStarIso_hom,
       conjugateEquiv_sheafExtendScalarsCompIso_inv, conjugateEquiv_sheafExtendScalarsCompIso_inv]
     ext F U
-    simp [sheafRestrictScalarsCompIso]
+    simp [Sheaf.restrictScalarsCompIso]
     rfl
   simpa using NatTrans.congr_app key F
 
