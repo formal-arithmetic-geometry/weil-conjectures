@@ -80,3 +80,22 @@ post-ring child and the Kernel reduction order.
 The visible ring mismatch is real but not causal by itself. Aligning both
 instances exposes a deeper `Functor.obj`/local-object mismatch without reducing
 the conversion, so the case remains unclassified.
+## Round 2 and v2 addendum
+
+DownstreamAfterRing aligns both ring paths at the same local exact h site and still reaches a deterministic timeout after 66.01 s (61.95 s user, 5.58 GB peak RSS). The first post-ring divergence is under LinearMap.charpoly at a Functor.obj/local P boundary. The child footprint includes Add.add 1,910, CategoryStruct.comp 663, AddMonoid.toAdd 574, and Functor.obj 55.
+
+### STRUCTURE EXPOSURE AND AMPLIFICATION ADDENDUM
+
+**A. MISMATCH SEMANTICS.** Field.toCommRing versus AlgebraicClosure.instCommRing is syntactic and independently alignable, but not causal. The next Functor.obj/local-object divergence under LinearMap.charpoly is unresolved; no supported trigger exists.
+
+**B. EXPOSURE.** The boundary is the ring argument under Polynomial.reverse/coeff, then the first common polynomial representation under charpoly. The visible tree includes polynomial, Frobenius/stalk, functor-object, and algebraic-closure data. Only the post-ring object conversion is relevant to the unchanged timeout; no causal child attribution is measured.
+
+**C. COST MECHANISM.** Ring-aligned proof is still reduction-heavy and times out. Small ring counters do not account for the conversion; larger object/proof path remains unknown. No repeated generated-field cost is shown.
+
+**D. FIXED-TRIGGER ABLATION.** Invalid: the ring leaf is shown non-causal and the next candidate lies inside a dependent polynomial/object bundle.
+
+**E. REDUCTION-PATH AUDIT.** Aligning either or both regular ring paths moves the first difference to Functor.obj versus local P under LinearMap.charpoly. Polynomial.reverse exposes a deeper representation without making the parent conversion cheap. Internal order is inferred.
+
+**F. MISMATCH PROVENANCE.** Field and algebraic-closure instance providers create the ring split during elaboration. The downstream Functor.obj path is the concrete Frobenius/stalk producer versus local P. First provenance divergence is ring selection; first post-alignment conversion divergence is the object producer split.
+
+**G. CONCLUSION.** U, evidence level 1; ring-leaf sufficiency is not supported. The unchanged 66.01 s timeout after both alignments is strongest contrary evidence. A typed Functor.obj/local-object alignment retaining the original polynomial proof is the next falsifier.

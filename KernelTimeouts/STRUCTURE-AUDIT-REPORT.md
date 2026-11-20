@@ -78,3 +78,62 @@ Kernel's internal reduction order. Unfold counters are therefore reported as
 downstream footprints, not as independent causes. The exact dominant child
 after alignment remains unknown in ImageHomCounit, IntegralComparison, and
 RealPurity; those cases are not promoted to a stronger classification.
+
+
+## Round 2 / v2 update
+
+The fresh restoration measurements are recorded in the case reports. The
+updated per-case evidence levels are: RealPushforward N level 1;
+OrderedSpectralRawLattices P2+P3 level 2; EtaleHomComparisonReversedExact P2
+level 2; FiniteBaseChangeRestrictionMateTransport P1 level 2; F66Adj P1
+level 2; ImageHomCounit P2 level 2; IntegralComparison U/P4 candidate level
+1; RealPurity U level 1.
+
+| Case | Fresh aligned | Fresh restored or downstream | Main footprint |
+|---|---:|---:|---|
+| RealPushforward | 3.21 s | 54.54 s original | small polynomial unfold |
+| OrderedSpectralRawLattices | 16.91 s | 40.23 s original; single routes 49.96--50.76 s timeout | repeated ring paths, Functor.obj |
+| EtaleHomComparisonReversedExact | 3.54 s | 114.25 s | Add.add/Functor.obj/DFunLike.coe |
+| FiniteBaseChangeRestrictionMateTransport | 5.13 s | 605.06 s | Functor.obj/PresheafOfModules.obj/module instances |
+| F66Adj | 3.73 s | 119.54 s | dependent Over/scheme/functor path |
+| ImageHomCounit | 2.62 s | 56.11 s; wrapper-only 84.55 s | Add.add/Functor.obj/DFunLike.coe |
+| IntegralComparisonPullbackRealizationShifts | first-leaf negative | 88.99 s downstream | Add.add/PresheafOfModules.obj/AddMonoid.toAdd |
+| RealPurity | ring-leaf negative | 66.01 s timeout | post-ring Functor.obj/charpoly path |
+
+### v2 coverage, provenance, and matched controls
+
+Corpus coverage is 8/8 for an exact site, initial divergence, candidate
+boundary, and exposed-structure inventory. Causal coverage remains 5/8
+(OrderedSpectral, EtaleHom, FiniteBaseChange, F66Adj, ImageHomCounit) at
+evidence level 2 or higher. RealPushforward is N; IntegralComparison and
+RealPurity are negative/unknown controls. Using the fresh isolated original
+sites, the five P1/P2/P3 cases account for approximately 935.19 s of measured
+Kernel time; the eight-site total is approximately 1,055.73 s, so the
+confirmed causal group covers approximately 88.6 percent. These totals avoid
+adding inclusive child timings.
+
+Producer-mechanism grouping for this share is: instance-path divergence
+(OrderedSpectral, IntegralComparison, RealPurity); wrapper/raw vocabulary
+(EtaleHom, ImageHomCounit); dependent instantiated domains
+(FiniteBaseChange, F66Adj); generic/concrete polynomial producers
+(RealPushforward); and downstream object-provider divergence
+(IntegralComparison, RealPurity). The first group is recurrent, but not every
+instance leaf is causal.
+
+Five matched fast controls from the same case modules are the aligned
+EtaleHom, FiniteBaseChange, F66Adj, ImageHomCounit, and RealPushforward probes.
+They retain the original consumer shape and data-bearing types while sharing
+the relevant representation at the audited boundary. Their 2.62--5.13 s
+timings contrast with the restored slow rows; they are alignment controls,
+not claims that every large structure is intrinsically cheap.
+
+Observations are kept separate from interpretation: the controls change the
+same conversion and the diagnostics report the listed unfold counts.
+Interpretation is limited to the evidence levels above; diagnostics do not
+trace internal Kernel order. Fixed-trigger ablation is invalid for all eight
+share cases because the supported triggers are either the dependent telescope
+or the only mismatching boundary, except for the explicitly negative
+RealPushforward control.
+Correction to the coverage arithmetic above: the eight fresh isolated site
+times sum to approximately 1,144.73 s, so the five confirmed cases cover
+approximately 81.7 percent.
