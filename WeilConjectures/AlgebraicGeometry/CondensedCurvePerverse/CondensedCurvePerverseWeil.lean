@@ -20,7 +20,7 @@ autoequivalence of the perverse heart `CondensedCurvePerverse.heart`, and the pe
 sheaves `CondensedCurvePerverse.WeilHeart` are the algebras over this autoequivalence. The
 forgetful functor to perverse sheaves on `C` therefore creates finite limits and colimits: kernels
 and cokernels of perverse Weil sheaves are computed in perverse sheaves on `C`, so the functor is
-exact and reflects exactness (blueprint `lemma-perverse-weil-sheaves`, part 2).
+exact and reflects exactness.
 
 ## Main declarations
 
@@ -32,11 +32,15 @@ exact and reflects exactness (blueprint `lemma-perverse-weil-sheaves`, part 2).
   forgetful functor from perverse Weil sheaves to perverse sheaves creates finite limits and
   colimits.
 
-## Implementation notes
+## Implementation details
 
-The constructibility of a pullback is the coefficient hypothesis
-`AlgebraicGeometry.ProEtale.ConstantModelPullbackStatement`, which holds for the coefficients
-`E` and `ℚ̄_ℓ` of the blueprint (`AlgebraicGeometry.ProEtale.pullback_constantModelConstructible`).
+The constructibility of a pullback is `AlgebraicGeometry.ProEtale.constantModelPullbackStatement`.
+The derived pullback along an automorphism `f` of `C` commutes with the cohomology sheaves, so it
+preserves the perverse heart because the pullback of sheaves preserves constructibility, punctual
+sheaves and the absence of punctual subsheaves. For `g : C ≅ C` it therefore restricts to an
+autoequivalence of the heart, and the forgetful functor from its algebras, the perverse Weil
+sheaves, creates finite limits and colimits
+(`CategoryTheory.Endofunctor.IsoAlgebra.nonempty_createsFiniteLimits_forgetFullSubcategory`).
 -/
 
 @[expose] public noncomputable section
@@ -94,18 +98,14 @@ theorem HasNoPunctualSubsheaf.of_iso {C : Scheme.{u}} {F F' : Modules Λ C} (e :
     (hF : HasNoPunctualSubsheaf Λ C F) : HasNoPunctualSubsheaf Λ C F' :=
   fun G i _ hG ↦ hF G (i ≫ e.inv) inferInstance hG
 
-variable (hΛ : ConstantModelPullbackStatement Λ)
-include hΛ
-
-/-- The pullback of a punctual sheaf along an automorphism `f` of `C` is punctual: it vanishes
-off the preimage of the finite set of closed points off which the sheaf vanishes. -/
+/-- The pullback of a punctual sheaf along an automorphism `f` of `C` is punctual. -/
 theorem isPunctual_upperStar {C : Scheme.{u}} [CompactSpace C] [QuasiSeparatedSpace C]
     (f : C ⟶ C) [IsIso f] {F : Modules Λ C} (hF : IsPunctual Λ C F) :
     IsPunctual Λ C ((CondensedRing.upperStar Λ f).obj F) := by
   obtain ⟨hc, U, hU, hcl, hz⟩ := hF
   have hinj : Function.Injective f.base := f.isOpenEmbedding.injective
   let V : C.Opens := f ⁻¹ᵁ U
-  refine ⟨(hΛ f F hc).1, V, ?_, fun x hx ↦ ?_, ?_⟩
+  refine ⟨(constantModelPullbackStatement Λ f F hc).1, V, ?_, fun x hx ↦ ?_, ?_⟩
   · exact hU.preimage hinj.injOn
   · have : f.base ⁻¹' {f.base x} = {x} := by
       ext y
@@ -121,8 +121,7 @@ theorem isPunctual_upperStar {C : Scheme.{u}} [CompactSpace C] [QuasiSeparatedSp
     exact isZero_obj_obj_of_iso E hz
 
 /-- The pullback of a sheaf without nonzero punctual subsheaf along an automorphism `f` of `C`
-has no nonzero punctual subsheaf: a punctual subsheaf `G ⊆ f^*F` gives the punctual subsheaf
-`(f⁻¹)^*G ⊆ (f⁻¹)^*f^*F ≅ F`. -/
+has no nonzero punctual subsheaf. -/
 theorem hasNoPunctualSubsheaf_upperStar {C : Scheme.{u}} [CompactSpace C]
     [QuasiSeparatedSpace C] (f : C ⟶ C) [IsIso f] {F : Modules Λ C}
     (hF : HasNoPunctualSubsheaf Λ C F) :
@@ -132,13 +131,11 @@ theorem hasNoPunctualSubsheaf_upperStar {C : Scheme.{u}} [CompactSpace C]
   let ε := CondensedRing.upperStarCompUpperStarIsoOfComp Λ f (inv f) (IsIso.hom_inv_id f)
   have hz : IsZero ((CondensedRing.upperStar Λ (inv f)).obj G) :=
     hF _ ((CondensedRing.upperStar Λ (inv f)).map i ≫ η.hom.app F) inferInstance
-      (isPunctual_upperStar hΛ (inv f) hG)
+      (isPunctual_upperStar (inv f) hG)
   exact ((CondensedRing.upperStar Λ f).map_isZero hz).of_iso (ε.app G).symm
 
 /-- **Frobenius pullback is perverse t-exact**: the derived pullback along an automorphism `f`
-of `C` preserves the perverse heart. It commutes with the cohomology sheaves, and the pullback
-of sheaves preserves constructibility, punctual sheaves and the absence of punctual subsheaves.
-(blueprint: `lemma-perverse-weil-sheaves`) -/
+of `C` preserves the perverse heart. -/
 theorem heart_mapDerivedCategory_upperStar {C : Scheme.{u}} [CompactSpace C]
     [QuasiSeparatedSpace C] (f : C ⟶ C) [IsIso f] {K : DerivedCategory (Modules Λ C)}
     (hK : heart Λ C K) :
@@ -149,31 +146,26 @@ theorem heart_mapDerivedCategory_upperStar {C : Scheme.{u}} [CompactSpace C]
   refine ⟨⟨(CondensedRing.upperStar Λ f).bounded_mapDerivedCategory_obj hb, fun n ↦ ?_⟩,
     ⟨fun a ha ↦ ?_, ?_⟩, ⟨fun a ha ↦ ?_, ?_⟩⟩
   · exact ObjectProperty.prop_of_iso (IsConstantModelConstructible Λ C) (eH n)
-      (hΛ f _ (hcK n)).1
+      (constantModelPullbackStatement Λ f _ (hcK n)).1
   · exact ((CondensedRing.upperStar Λ f).map_isZero (hu1 a ha)).of_iso (eH a).symm
-  · exact (isPunctual_upperStar hΛ f hu2).of_iso (eH 0)
+  · exact (isPunctual_upperStar f hu2).of_iso (eH 0)
   · exact ((CondensedRing.upperStar Λ f).map_isZero (hl1 a ha)).of_iso (eH a).symm
-  · exact (hasNoPunctualSubsheaf_upperStar hΛ f hl2).of_iso (eH (0 - 1))
+  · exact (hasNoPunctualSubsheaf_upperStar f hl2).of_iso (eH (0 - 1))
 
 open CategoryTheory.Endofunctor in
 /-- **The forgetful functor on perverse Weil sheaves**: for an automorphism `g` of `C`, the
 functor forgetting the Weil structure, from perverse Weil sheaves to perverse sheaves on `C`,
-creates finite limits and finite colimits. Hence it is exact and reflects exactness: kernels and
-cokernels of perverse Weil sheaves are those of the underlying perverse sheaves, with the induced
-Weil structures. The derived pullback along `g` restricts to an autoequivalence of the perverse
-heart (`AlgebraicGeometry.ProEtale.CondensedCurvePerverse.heart_mapDerivedCategory_upperStar`),
-whose algebras are the perverse Weil sheaves.
-(blueprint: `lemma-perverse-weil-sheaves--2`) -/
+creates finite limits and finite colimits. -/
 theorem nonempty_createsFiniteLimits_forget {C : Scheme.{u}} [CompactSpace C]
     [QuasiSeparatedSpace C] (g : C ≅ C) :
     Nonempty (CreatesFiniteLimits (forget Λ g)) ∧
       Nonempty (CreatesFiniteColimits (forget Λ g)) := by
   let Φ := (CondensedRing.upperStar Λ g.hom).mapDerivedCategory
   have hΦ (K : DerivedCategory (Modules Λ C)) (hK : heart Λ C K) : heart Λ C (Φ.obj K) :=
-    heart_mapDerivedCategory_upperStar hΛ g.hom hK
+    heart_mapDerivedCategory_upperStar g.hom hK
   have : (IsoAlgebra.restrict Φ (heart Λ C) hΦ).IsEquivalence := by
     refine { essSurj := ⟨fun L ↦ ⟨⟨(CondensedRing.upperStar Λ g.inv).mapDerivedCategory.obj L.obj,
-      heart_mapDerivedCategory_upperStar hΛ g.inv L.property⟩, ⟨ObjectProperty.isoMk _ ?_⟩⟩⟩ }
+      heart_mapDerivedCategory_upperStar g.inv L.property⟩, ⟨ObjectProperty.isoMk _ ?_⟩⟩⟩ }
     exact (Functor.mapDerivedCategoryCompIso _ _).app L.obj ≪≫
       (Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarCompUpperStarIsoOfComp Λ g.hom
         g.inv g.hom_inv_id)).app L.obj ≪≫ (Functor.mapDerivedCategoryIdIso _).app L.obj

@@ -20,18 +20,14 @@ On a smooth curve `C₀` over `k₀`, the curve perverse classes of
 form a t-structure on the triangulated category of Weil complexes as soon as every Weil sheaf
 `F` has a largest punctual subsheaf, that is, a quotient `F ↠ Q` with punctual kernel and
 without nonzero punctual subsheaf (`AlgebraicGeometry.WeilComplex.exists_distTriang_curvePerverse`).
-Following the blueprint, the truncation triangle of a Weil complex `A` is obtained from the
-ordinary truncation `τ^{≤0}A ⟶ A ⟶ τ^{≥1}A ⟶` by splitting off the punctual part of `𝓗⁰A`
-with the octahedral axiom. On the affine line the largest punctual subsheaf of `F` is the kernel
-of the unit `F ⟶ j_*j^*F` of a dense open `j` on which `F` is lisse
+On the affine line every Weil sheaf has a largest punctual subsheaf
 (`AlgebraicGeometry.WeilSheaf.exists_epi_support_finite_kernel`).
 
 The heart of this t-structure is the category of curve perverse Weil complexes, that is, of
-perverse Weil sheaves; it is therefore abelian (blueprint `lemma-perverse-weil-sheaves`, part 1).
+perverse Weil sheaves; it is therefore abelian.
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilComplex.IsCurvePerverseGE`: the shifted lower classes `ᵖD^{≥n}`.
 - `AlgebraicGeometry.WeilComplex.curvePerverseTStructure`: the perverse t-structure on Weil
   complexes on the affine line.
 - `AlgebraicGeometry.WeilComplex.curvePerverseTStructure_heart`: its heart is the class of curve
@@ -39,12 +35,19 @@ perverse Weil sheaves; it is therefore abelian (blueprint `lemma-perverse-weil-s
 - `AlgebraicGeometry.WeilComplex.abelianCurvePerverse`: perverse Weil sheaves on the affine line
   form an abelian category.
 
-## Implementation notes
+## Implementation details
 
-The blueprint states the lemma for a smooth curve `C₀`. Here the Weil sheaf input, the largest
-punctual subsheaf (blueprint `lemma-largest-punctual-subsheaf`), is available on the affine line,
-the curve of the Fourier transform; the construction of the truncation triangles is stated for an
-arbitrary smooth curve under that input.
+The truncation triangle `A' ⟶ A ⟶ A'' ⟶ A'[1]` of a Weil complex `A` is obtained from the
+ordinary truncation `τ^{≤0}A ⟶ A ⟶ τ^{≥1}A ⟶` by splitting off the punctual part of `𝓗⁰A`: with
+`K' = τ^{≤0}A` and `F = 𝓗⁰A ↠ Q` the quotient by the largest punctual subsheaf, `A'` is the
+fibre of `K' ⟶ Q[0]`, and the octahedral axiom exhibits `A''` as an extension of `τ^{≥1}A` by
+`Q[0]`.
+
+On the affine line the largest punctual subsheaf of `F` is the kernel of the unit
+`F ⟶ j_*j^*F` of a dense open `j : U₀ ↪ 𝔸¹` on which `F` is lisse: the kernel of the unit
+vanishes on `U₀`, and a punctual subsheaf of `j_*j^*F` vanishes. The construction of the
+truncation triangles is stated for an arbitrary smooth curve under this input, but the
+t-structure is only built on the affine line, the curve of the Fourier transform.
 
 In this formalisation a Weil complex carries its Weil structure (`AlgebraicGeometry.WeilComplex`
 is the derived category of Weil sheaves), so the perverse Weil sheaves are the heart of the
@@ -64,10 +67,7 @@ namespace WeilSheaf
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- **The largest punctual subsheaf** on the affine line: every Weil sheaf `F` has a quotient
-`p : F ↠ Q` with punctual kernel and without nonzero punctual subsheaf. On a dense open
-`j : U₀ ↪ 𝔸¹` where `F` is lisse, `Q` is the image of the unit `F ⟶ j_*j^*F`: the kernel of the
-unit vanishes on `U₀`, and a punctual subsheaf of `j_*j^*F` vanishes.
-(blueprint: `lemma-largest-punctual-subsheaf`) -/
+`p : F ↠ Q` with punctual kernel and without nonzero punctual subsheaf. -/
 theorem exists_epi_support_finite_kernel (F : WeilSheaf k₀ l (affineLine k₀)) :
     ∃ (Q : WeilSheaf k₀ l (affineLine k₀)) (p : F ⟶ Q), Epi p ∧ (kernel p).support.Finite ∧
       ∀ (G : WeilSheaf k₀ l (affineLine k₀)) (i : G ⟶ Q), Mono i → G.support.Finite →
@@ -91,18 +91,6 @@ namespace WeilComplex
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- The shifted lower class `ᵖD^{≥n} = ᵖD^{≥0}[-n]` of the perverse t-structure on a smooth
-curve: `𝓗ᵃK = 0` for `a < n - 1`, and `𝓗ⁿ⁻¹K` has no nonzero subsheaf of finite support.
-(blueprint: `definition-perverse-sheaves-curve`) -/
-def IsCurvePerverseGE (n : ℤ) (K : WeilComplex k₀ l X) : Prop :=
-  (∀ a : ℤ, a < n - 1 → IsZero ((homologySheaf a).obj K)) ∧
-    ∀ (G : WeilSheaf k₀ l X) (i : G ⟶ (homologySheaf (n - 1)).obj K), Mono i →
-      (WeilSheaf.support G).Finite → IsZero G
-
-theorem isCurvePerverseLower_iff_isCurvePerverseGE_zero (K : WeilComplex k₀ l X) :
-    K.IsCurvePerverseLower ↔ K.IsCurvePerverseGE 0 :=
-  Iff.rfl
-
 theorem IsCurvePerverseGE.of_iso {n : ℤ} {K L : WeilComplex k₀ l X} (e : K ≅ L)
     (hK : K.IsCurvePerverseGE n) : L.IsCurvePerverseGE n :=
   ⟨fun a ha ↦ (hK.1 a ha).of_iso ((homologySheaf a).mapIso e).symm,
@@ -122,7 +110,7 @@ variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 variable [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **Orthogonality** of the perverse classes on a smooth curve: there is no nonzero morphism
-from `ᵖD^{≤0}` to `ᵖD^{≥1}`. (blueprint: `lemma-perverse-sheaves-curve`) -/
+from `ᵖD^{≤0}` to `ᵖD^{≥1}`. -/
 theorem eq_zero_of_isCurvePerverseLE_of_isCurvePerverseGE {M K : WeilComplex k₀ l X}
     (hM : M.IsCurvePerverseLE 0) (hK : K.IsCurvePerverseGE 1) (f : M ⟶ K) : f = 0 := by
   apply (shiftFunctor (WeilComplex k₀ l X) (1 : ℤ)).map_injective
@@ -132,10 +120,7 @@ theorem eq_zero_of_isCurvePerverseLE_of_isCurvePerverseGE {M K : WeilComplex k�
 
 /-- **The perverse truncation triangle** on a scheme on which every Weil sheaf has a largest
 punctual subsheaf: every Weil complex `A` sits in a distinguished triangle
-`A' ⟶ A ⟶ A'' ⟶ A'[1]` with `A' ∈ ᵖD^{≤0}` and `A'' ∈ ᵖD^{≥1}`. With `K' = τ^{≤0}A` and
-`F = 𝓗⁰A ↠ Q` the quotient by the largest punctual subsheaf, `A'` is the fibre of
-`K' ⟶ Q[0]`, and the octahedral axiom exhibits `A''` as an extension of `τ^{≥1}A` by `Q[0]`.
-(blueprint: `lemma-perverse-sheaves-curve`) -/
+`A' ⟶ A ⟶ A'' ⟶ A'[1]` with `A' ∈ ᵖD^{≤0}` and `A'' ∈ ᵖD^{≥1}`. -/
 theorem exists_distTriang_curvePerverse
     (hX : ∀ F : WeilSheaf k₀ l X, ∃ (Q : WeilSheaf k₀ l X) (p : F ⟶ Q), Epi p ∧
       (kernel p).support.Finite ∧
@@ -209,10 +194,7 @@ end Curve
 section AffineLine
 
 /-- **The perverse t-structure on the affine line**: the classes `ᵖD^{≤n}` and `ᵖD^{≥n}` form a
-t-structure on the triangulated category of Weil complexes on `𝔸¹_{k₀}`. Orthogonality is
-`AlgebraicGeometry.WeilComplex.eq_zero_of_isCurvePerverseLE_of_isCurvePerverseGE`, and the
-truncation triangles are `AlgebraicGeometry.WeilComplex.exists_distTriang_curvePerverse`.
-(blueprint: `lemma-perverse-sheaves-curve`) -/
+t-structure on the triangulated category of Weil complexes on `𝔸¹_{k₀}`. -/
 noncomputable def curvePerverseTStructure : TStructure (WeilComplex k₀ l (affineLine k₀)) where
   le n K := K.IsCurvePerverseLE n
   ge n K := K.IsCurvePerverseGE n
@@ -233,7 +215,7 @@ noncomputable def curvePerverseTStructure : TStructure (WeilComplex k₀ l (affi
     exists_distTriang_curvePerverse WeilSheaf.exists_epi_support_finite_kernel A
 
 /-- The heart of the perverse t-structure on the affine line is the class of curve perverse Weil
-complexes, the perverse Weil sheaves. (blueprint: `definition-perverse-sheaves-curve`) -/
+complexes, the perverse Weil sheaves. -/
 theorem curvePerverseTStructure_heart :
     (curvePerverseTStructure (k₀ := k₀) (l := l)).heart = curvePerverse :=
   rfl
@@ -249,8 +231,7 @@ noncomputable instance : (curvePerverseTStructure (k₀ := k₀) (l := l)).Heart
       fun hK ↦ ⟨⟨K, hK⟩, ⟨Iso.refl _⟩⟩⟩
 
 /-- **Perverse Weil sheaves form an abelian category**: the curve perverse Weil complexes on the
-affine line are the heart of the perverse t-structure, and the heart of a t-structure is abelian.
-(blueprint: `lemma-perverse-weil-sheaves--1`) -/
+affine line form an abelian category. -/
 noncomputable instance abelianCurvePerverse :
     Abelian (curvePerverse (k₀ := k₀) (l := l)).FullSubcategory :=
   (curvePerverseTStructure (k₀ := k₀) (l := l)).abelianHeart _

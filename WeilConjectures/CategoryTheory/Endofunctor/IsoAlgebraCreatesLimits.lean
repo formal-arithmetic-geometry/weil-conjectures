@@ -132,11 +132,6 @@ noncomputable def ofRestrict :
     IsoAlgebra (restrict F P hF) ⥤ (carrierProperty F P).FullSubcategory :=
   (carrierProperty F P).lift (mapOfNatIso (L := P.ι) (Iso.refl _)) fun K ↦ K.carrier.property
 
-/-- The underlying object of an algebra over `F|_P`. -/
-noncomputable def ofRestrictCompForgetFullSubcategoryIso :
-    ofRestrict F P hF ⋙ forgetFullSubcategory F P ≅ forget (restrict F P hF) :=
-  Iso.refl _
-
 instance : (ofRestrict F P hF).Faithful :=
   have : (ofRestrict F P hF ⋙ forgetFullSubcategory F P).Faithful :=
     inferInstanceAs (forget (restrict F P hF)).Faithful
@@ -172,8 +167,7 @@ theorem nonempty_createsFiniteLimits_forgetFullSubcategory
   let e : forgetFullSubcategory F P ≅ (ofRestrict F P hF).inv ⋙ forget (restrict F P hF) :=
     (Functor.leftUnitor _).symm ≪≫
       Functor.isoWhiskerRight (ofRestrict F P hF).asEquivalence.counitIso.symm _ ≪≫
-      Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (ofRestrictCompForgetFullSubcategoryIso F P hF)
+      Functor.associator _ _ _
   exact ⟨⟨⟨fun J _ _ ↦ createsLimitsOfShapeOfNatIso e.symm⟩⟩,
     ⟨⟨fun J _ _ ↦ createsColimitsOfShapeOfNatIso e.symm⟩⟩⟩
 

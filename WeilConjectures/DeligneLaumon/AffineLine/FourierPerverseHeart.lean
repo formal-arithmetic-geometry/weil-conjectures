@@ -15,12 +15,7 @@ For a nontrivial additive character `ψ`, the Fourier–Deligne transform `FT_ψ
 on the affine line is a t-exact equivalence for the perverse t-structure
 (`AlgebraicGeometry.WeilComplex.curvePerverseTStructure`), with quasi-inverse
 `FT_{ψ⁻¹}(-)(1)`. Hence it restricts to an exact autoequivalence of the abelian category of
-perverse Weil sheaves (blueprint `proposition-fourier-transform-perverse-heart`).
-
-Following the blueprint, `FT_ψ` and its quasi-inverse preserve `ᵖD^{≤n}`
-(`AlgebraicGeometry.isCurvePerverseLE_fourierTransform_obj`,
-`AlgebraicGeometry.isCurvePerverseLE_fourierTransform_inv_obj`); being mutually inverse, they
-preserve the right orthogonals `ᵖD^{≥n}` of the classes `ᵖD^{≤n-1}`.
+perverse Weil sheaves.
 
 ## Main statements
 
@@ -32,13 +27,19 @@ preserve the right orthogonals `ᵖD^{≥n}` of the classes `ᵖD^{≤n-1}`.
   of perverse Weil sheaves, and `AlgebraicGeometry.exact_curvePerverseFourierTransform`: it is
   exact.
 
-## Implementation notes
+## Implementation details
+
+`FT_ψ` and its quasi-inverse preserve `ᵖD^{≤n}`
+(`AlgebraicGeometry.isCurvePerverseLE_fourierTransform_obj`,
+`AlgebraicGeometry.isCurvePerverseLE_fourierTransform_inv_obj`); being mutually inverse, they
+preserve the right orthogonals `ᵖD^{≥n}` of the classes `ᵖD^{≤n-1}`.
 
 A Weil complex carries its Weil structure (`AlgebraicGeometry.WeilComplex` is the derived
-category of Weil sheaves), and `FT_ψ` is defined directly on Weil complexes: the Frobenius
-compatibilities of the blueprint are built into the functor. Hence the equivalence of perverse
-hearts and the equivalence of perverse Weil sheaves of the blueprint are the same functor
-`AlgebraicGeometry.curvePerverseFourierTransform`.
+category of Weil sheaves), and `FT_ψ` is defined directly on Weil complexes, so its Frobenius
+compatibilities are built into the functor. Hence the equivalence of perverse hearts and the
+equivalence of perverse Weil sheaves are the same functor
+`AlgebraicGeometry.curvePerverseFourierTransform`, which is exact as is every equivalence of
+abelian categories.
 -/
 
 @[expose] public section
@@ -64,10 +65,7 @@ theorem isCurvePerverseLE_fourierTransform_obj_iff (ψ : AddChar k₀ (PadicAlgC
 
 /-- **The Fourier transform is perverse t-exact**: for a nontrivial additive character `ψ`, the
 Fourier–Deligne transform `FT_ψ` of Weil complexes on the affine line is t-exact for the perverse
-t-structure. It preserves `ᵖD^{≤n}` by the stalk computation
-(`AlgebraicGeometry.isCurvePerverseLE_fourierTransform_obj`), and `ᵖD^{≥n}`, the right
-orthogonal of `ᵖD^{≤n-1}`, because its quasi-inverse preserves `ᵖD^{≤n-1}`.
-(blueprint: `proposition-fourier-transform-perverse-heart--1`) -/
+t-structure. -/
 theorem tExact_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) :
     (fourierTransform (l := l) ψ).TExact curvePerverseTStructure curvePerverseTStructure := by
   have := isEquivalence_fourierTransform (l := l) ψ hψ
@@ -76,7 +74,7 @@ theorem tExact_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠
       fun h ↦ ⟨(isCurvePerverseLE_fourierTransform_obj_iff ψ hψ n Y).2 h.le⟩⟩
 
 /-- **Fourier inversion**: the quasi-inverse of `FT_ψ` is `FT_{ψ⁻¹}(-)(1)`, since
-`FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)`. (blueprint: `proposition-fourier-transform-perverse-heart--1`) -/
+`FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)`. -/
 theorem nonempty_fourierTransform_inv_iso (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) :
     haveI := isEquivalence_fourierTransform (l := l) ψ hψ
     Nonempty ((fourierTransform ψ).inv ≅
@@ -91,8 +89,7 @@ theorem nonempty_fourierTransform_inv_iso (ψ : AddChar k₀ (PadicAlgCl l)) (h�
     Functor.isoWhiskerRight (fourierTransform ψ).asEquivalence.counitIso _ ≪≫
     Functor.leftUnitor _⟩
 
-/-- The quasi-inverse `FT_{ψ⁻¹}(-)(1)` of `FT_ψ` is t-exact for the perverse t-structure.
-(blueprint: `proposition-fourier-transform-perverse-heart--1`) -/
+/-- The quasi-inverse `FT_{ψ⁻¹}(-)(1)` of `FT_ψ` is t-exact for the perverse t-structure. -/
 theorem tExact_fourierTransform_inv_comp_tateTwist (ψ : AddChar k₀ (PadicAlgCl l))
     (hψ : ψ ≠ 1) :
     (fourierTransform (l := l) ψ⁻¹ ⋙ tateTwist k₀ l (affineLine k₀) 1).TExact
@@ -124,11 +121,7 @@ theorem curvePerverseFourierTransform_functor_comp_ι (ψ : AddChar k₀ (PadicA
 
 /-- **The Fourier transform is an exact equivalence of perverse Weil sheaves**: for a nontrivial
 `ψ`, the autoequivalence `FT_ψ` of the abelian category of perverse Weil sheaves on the affine
-line is exact, as is every equivalence of abelian categories. Since Weil complexes carry their
-Weil structure, this is at once the exact equivalence of perverse hearts and the exact equivalence
-of perverse Weil sheaves of the blueprint.
-(blueprint: `proposition-fourier-transform-perverse-heart--2`,
-`proposition-fourier-transform-perverse-heart--3`) -/
+line is exact. -/
 theorem exact_curvePerverseFourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) :
     PreservesFiniteLimits (curvePerverseFourierTransform ψ hψ).functor ∧
       PreservesFiniteColimits (curvePerverseFourierTransform ψ hψ).functor :=
