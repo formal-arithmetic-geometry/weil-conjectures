@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Limits.EpiMono
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsCover
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLattice
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeValues
@@ -14,17 +15,19 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeValu
 
 Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` with ring of integers `𝒪_E`. For a
 locally free `𝒪_{E,S}`-module `M`, the unit `M ⟶ E_S ⊗_{𝒪_{E,S}} M` is a monomorphism
-(`AlgebraicGeometry.ProEtale.mono_extendRestrictAdjunction_unit_app_of_isLocallyFree`): this is
-local on `S` (`ProEtale.CondensedRing.mono_of_mono_upperStar_map_of_cover`, the pullbacks along a
-pro-étale cover being jointly conservative and left exact), the formation of the unit commutes
-with pullbacks (`ProEtale.CondensedRing.upperStar_map_unit_app_comp_comapUpperStarIso_inv_app`),
-and for free modules the unit is a monomorphism
-(`AlgebraicGeometry.ProEtale.mono_extendRestrictAdjunction_unit_app_finiteFree_padicIntegers`).
-
+(`AlgebraicGeometry.ProEtale.mono_extendRestrictAdjunction_unit_app_of_isLocallyFree`).
 Hence on a connected normal Noetherian scheme every lisse `E`-module `L` contains a lisse
 `𝒪_E`-submodule `M` with `M[1/ℓ] = L`
-(`AlgebraicGeometry.ProEtale.exists_mono_isLocallyFree_padicIntegers_of_isIntegrallyClosed_stalk`,
-blueprint `lemma-global-lattice-normal-scheme`).
+(`AlgebraicGeometry.ProEtale.exists_mono_isLocallyFree_padicIntegers_of_isIntegrallyClosed_stalk`).
+
+## Implementation details
+
+That the unit is a monomorphism is local on `S`
+(`ProEtale.CondensedRing.mono_of_mono_upperStar_map_of_cover`, the pullbacks along a pro-étale
+cover being jointly conservative and left exact), the formation of the unit commutes with
+pullbacks (`ProEtale.CondensedRing.upperStar_map_unit_app_comp_comapUpperStarIso_inv_app`),
+and for free modules the unit is a monomorphism
+(`AlgebraicGeometry.ProEtale.mono_extendRestrictAdjunction_unit_app_finiteFree_padicIntegers`).
 -/
 
 @[expose] public section
@@ -43,7 +46,7 @@ section Mono
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-/-- **Monomorphisms of module objects are local for the pro-étale topology**: a morphism whose
+/-- **Monomorphisms of module objects are local for the pro-étale topology.** A morphism whose
 pullbacks along the members of a pro-étale cover are monomorphisms is a monomorphism. -/
 theorem mono_of_mono_upperStar_map_of_cover {S : Scheme.{u}}
     {N N' : Mod (Sheaf (ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)} (g : N ⟶ N')
@@ -130,11 +133,11 @@ theorem mono_extendRestrictAdjunction_unit_app_of_isLocallyFree {S : Scheme.{u}}
   infer_instance
 
 
-/-- **Lisse `E`-modules on connected normal Noetherian schemes contain lisse lattices**
-(blueprint `lemma-global-lattice-normal-scheme`, first part). Let `X` be a connected Noetherian
-scheme whose local rings are integrally closed domains. Every lisse (locally free) `E_X`-module
-`L` contains a lisse `𝒪_{E,X}`-submodule `M` with `M[1/ℓ] = L`: there is a monomorphism
-`ι : M ⟶ L` of `𝒪_{E,X}`-modules whose adjoint `E_X ⊗_{𝒪_{E,X}} M ⟶ L` is an isomorphism. -/
+/-- **Lisse `E`-modules on connected normal Noetherian schemes contain lisse lattices.** Let `X` be
+a connected Noetherian scheme whose local rings are integrally closed domains. Every lisse (locally
+free) `E_X`-module `L` contains a lisse `𝒪_{E,X}`-submodule `M` with `M[1/ℓ] = L`: there is a
+monomorphism `ι : M ⟶ L` of `𝒪_{E,X}`-modules whose adjoint `E_X ⊗_{𝒪_{E,X}} M ⟶ L` is an
+isomorphism. -/
 theorem exists_mono_isLocallyFree_padicIntegers_of_isIntegrallyClosed_stalk {X : Scheme.{u}}
     [IsNoetherian X] [ConnectedSpace X]
     (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x))

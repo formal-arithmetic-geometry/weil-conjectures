@@ -16,11 +16,10 @@ public import WeilConjectures.WeilSheaf.LisseLocus
 # Exactness of duals and tensor products of lisse Weil sheaves
 
 The internal hom `𝓗om(-, N)` of sheaves of `ℚ̄_ℓ,X`-modules turns cokernels into kernels
-(`AlgebraicGeometry.ProEtale.exact_ihomMap_app`), by transposition. For lisse sheaves the dual
-`𝓗om(-, ℚ̄_ℓ)` also turns monomorphisms into epimorphisms
-(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.epi_ihomMap_app_of_mono`): the cokernel `C` of
-`E^∨ ⟶ B^∨`, for `B ⊆ E`, is lisse with `C^∨ ⊆ B^∨∨ ≅ B` killed by `B ⊆ E ≅ E^∨∨`, so `C ≅ C^∨∨`
-vanishes. Hence on lisse Weil sheaves:
+(`AlgebraicGeometry.ProEtale.exact_ihomMap_app`). For lisse sheaves the dual `𝓗om(-, ℚ̄_ℓ)` also
+turns monomorphisms into epimorphisms
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.epi_ihomMap_app_of_mono`). Hence on lisse Weil
+sheaves:
 
 * the dual is exact (`AlgebraicGeometry.WeilSheaf.exact_dualMap`,
   `AlgebraicGeometry.WeilSheaf.epi_dualMap`, `AlgebraicGeometry.WeilSheaf.mono_dualMap`);
@@ -29,6 +28,14 @@ vanishes. Hence on lisse Weil sheaves:
   (`AlgebraicGeometry.WeilSheaf.tensorLeft`, which preserves finite limits and colimits);
 * the tensor product commutes with pullback
   (`AlgebraicGeometry.WeilSheaf.upperStarTensorObjIso`).
+
+## Implementation details
+
+`𝓗om(-, N)` turns cokernels into kernels by transposition: a morphism `P ⟶ 𝓗om(B, N)` killed by
+`A ⟶ B` transposes to a morphism `B ⟶ 𝓗om(P, N)` killed by `A ⟶ B`, which factors through the
+cokernel `C` of `A ⟶ B`. For lisse `B ⊆ E`, the cokernel `C` of `E^∨ ⟶ B^∨` is lisse, and its
+dual `C^∨` is the kernel of `B^∨∨ ⟶ E^∨∨`, which is `B ⟶ E` up to the biduality isomorphisms,
+hence vanishes; so does `C ≅ C^∨∨`.
 -/
 
 @[expose] public section
@@ -48,17 +55,14 @@ lemma ihomMap_zero_app {M M' : AdicSheaf l Y} (N : AdicSheaf l Y) :
     (Mod.ihomMap (0 : M ⟶ M')).app N = 0 := by
   rw [← Mod.ihomMapAddHom_apply, map_zero, NatTrans.app_zero]
 
-/-- The internal hom out of a zero sheaf vanishes: a morphism into `𝓗om(Z, N)` is determined by
-its transpose, a morphism out of `Z`. -/
+/-- The internal hom out of a zero sheaf vanishes. -/
 lemma isZero_ihom_obj_of_isZero {Z : AdicSheaf l Y} (hZ : IsZero Z) (N : AdicSheaf l Y) :
     IsZero ((AdicSheaf.ihom Z).obj N) := by
   rw [IsZero.iff_id_eq_zero, ← Mod.transpose_eq_zero_iff]
   exact hZ.eq_of_src _ _
 
 /-- **`𝓗om(-, N)` turns cokernels into kernels.** If `A ⟶ B ⟶ C ⟶ 0` is exact, then
-`0 ⟶ 𝓗om(C, N) ⟶ 𝓗om(B, N) ⟶ 𝓗om(A, N)` is exact: a morphism `P ⟶ 𝓗om(B, N)` killed by
-`A ⟶ B` transposes to a morphism `B ⟶ 𝓗om(P, N)` killed by `A ⟶ B`, which factors through
-the cokernel `C`. -/
+`0 ⟶ 𝓗om(C, N) ⟶ 𝓗om(B, N) ⟶ 𝓗om(A, N)` is exact. -/
 theorem exact_ihomMap_app {S : ShortComplex (AdicSheaf l Y)} (hS : S.Exact) [hg : Epi S.g]
     (N : AdicSheaf l Y) :
     (ShortComplex.mk ((Mod.ihomMap S.g).app N) ((Mod.ihomMap S.f).app N) (by
@@ -73,9 +77,7 @@ theorem exact_ihomMap_app {S : ShortComplex (AdicSheaf l Y)} (hS : S.Exact) [hg 
 
 /-- **The dual of a monomorphism of lisse sheaves is an epimorphism.** For lisse `B` and `E`
 and a monomorphism `i : B ⟶ E`, the restriction `𝓗om(E, ℚ̄_ℓ) ⟶ 𝓗om(B, ℚ̄_ℓ)` is an
-epimorphism: its cokernel `C` is lisse, and its dual `C^∨` is the kernel of
-`B^∨∨ ⟶ E^∨∨`, which is `i` up to the biduality isomorphisms, hence vanishes; so does
-`C ≅ C^∨∨`. -/
+epimorphism. -/
 theorem IsAdicLisseSheaf.epi_ihomMap_app_of_mono [IsLocallyNoetherian Y] {B E : AdicSheaf l Y}
     (hB : IsAdicLisseSheaf B) (hE : IsAdicLisseSheaf E) (i : B ⟶ E) [Mono i] :
     Epi ((Mod.ihomMap i).app (AdicSheaf.unit l Y)) := by
@@ -158,7 +160,7 @@ theorem mono_dualMap {F G : WeilSheaf k₀ l X} (f : F ⟶ G) [Epi f] (hF : F.Is
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The underlying morphism of `ℓ`-adic sheaves of `f ⊗ 𝟙 : F ⊗ G ⟶ F' ⊗ G`, for a morphism
-`f : F ⟶ F'` of lisse Weil sheaves: the map `[F^∨, G] ⟶ [F'^∨, G]` induced by `f^∨`. -/
+`f : F ⟶ F'` of lisse Weil sheaves, the map `[F^∨, G] ⟶ [F'^∨, G]` induced by `f^∨`. -/
 lemma carrierFunctor_map_tensorHom_id {F F' : WeilSheaf k₀ l X} (f : F ⟶ F') (G : WeilSheaf k₀ l X)
     (hF : F.IsLisse) (hF' : F'.IsLisse) :
     (carrierFunctor k₀ l X).map (tensorHom f (𝟙 G) hF hF') =
@@ -173,7 +175,7 @@ lemma carrierFunctor_map_tensorHom_id {F F' : WeilSheaf k₀ l X} (f : F ⟶ F')
 
 /-- **The tensor product is exact in the lisse variable.** If `0 ⟶ A ⟶ B ⟶ C ⟶ 0` is a short
 exact sequence of lisse Weil sheaves, then `A ⊗ G ⟶ B ⊗ G ⟶ C ⊗ G` is exact for every Weil
-sheaf `G`: it is `[A^∨, G] ⟶ [B^∨, G] ⟶ [C^∨, G]`, and `C^∨ ⟶ B^∨ ⟶ A^∨ ⟶ 0` is exact. -/
+sheaf `G`. -/
 theorem exact_tensorHom_id {S : ShortComplex (WeilSheaf k₀ l X)} (hS : S.Exact) [Mono S.f]
     [Epi S.g] (h₁ : S.X₁.IsLisse) (h₂ : S.X₂.IsLisse) (h₃ : S.X₃.IsLisse) (G : WeilSheaf k₀ l X) :
     (ShortComplex.mk (tensorHom S.f (𝟙 G) h₁ h₂) (tensorHom S.g (𝟙 G) h₂ h₃)

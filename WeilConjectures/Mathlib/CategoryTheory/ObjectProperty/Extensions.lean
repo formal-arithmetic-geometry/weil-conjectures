@@ -262,8 +262,7 @@ section Map
 variable {D : Type*} [Category* D] [Abelian D] {Q : ObjectProperty D}
 
 /-- An exact functor carrying objects with `P` to objects with `Q` carries the filtration closure
-of `P` into the filtration closure of `Q`: it carries a filtration with quotients in `P` to a
-filtration with quotients in `Q`. -/
+of `P` into the filtration closure of `Q`. -/
 theorem filtrationClosure.map (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
     [PreservesFiniteColimits F] [Q.IsClosedUnderIsomorphisms] (hF : ∀ X, P X → Q (F.obj X))
     {X : C} (hX : P.filtrationClosure X) : Q.filtrationClosure (F.obj X) := by

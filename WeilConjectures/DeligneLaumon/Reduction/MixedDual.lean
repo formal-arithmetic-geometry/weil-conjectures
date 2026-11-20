@@ -13,13 +13,12 @@ public import WeilConjectures.WeilSheaf.LisseDualExact
 /-!
 # The dual of a mixed lisse Weil sheaf
 
-Clause 6 of the blueprint proposition `proposition-weights-under-usual-operations`: the dual of
-a mixed lisse Weil sheaf is mixed, of the negated weights
+The dual of a mixed lisse Weil sheaf is mixed, of the negated weights
 (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsIn.dual`); and when a filtration of a lisse sheaf
 has lisse graded pieces, their duals are the graded pieces of the annihilator filtration of the
 dual (`AlgebraicGeometry.WeilSheaf.cokernelAnnihilatorIsoDual`).
 
-## Proof
+## Implementation details
 
 Dualizing is exact on lisse sheaves (`AlgebraicGeometry.WeilSheaf.exact_dualMap`), so the dual
 of a lisse sheaf with a filtration by lisse subsheaves with pure graded pieces is mixed, with
@@ -56,8 +55,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X} {S : Set ℝ}
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
-/-- The punctual weights of the dual of a lisse sheaf are the negatives of those of the sheaf:
-the local Frobenius of `F^∨` is the inverse transpose of that of `F`. -/
+/-- The punctual weights of the dual of a lisse sheaf are the negatives of those of the sheaf. -/
 theorem HasWeightsIn.dual (hF : F.IsLisse) (h : F.HasWeightsIn ι S) :
     (F.dual hF).HasWeightsIn ι (-S) := fun x α hα ↦ by
   obtain ⟨e⟩ := nonempty_equiv_stalk_dual hF x
@@ -68,8 +66,7 @@ theorem HasWeightsIn.dual (hF : F.IsLisse) (h : F.HasWeightsIn ι S) :
   rw [hα', neg_div, Real.rpow_neg (Nat.cast_nonneg _)]
 
 /-- The dual of a lisse sheaf with a finite filtration by lisse subsheaves with punctually pure
-graded pieces is mixed: dualizing is exact on lisse sheaves, and the graded pieces of the dual
-filtration are the duals of the graded pieces, punctually pure. -/
+graded pieces is mixed. -/
 theorem IsMixed.dual_of_filtrationClosure_isLissePunctuallyPure
     (h : (isLissePunctuallyPure ι).filtrationClosure F) (hF : F.IsLisse) :
     (F.dual hF).IsMixed ι := by
@@ -86,10 +83,8 @@ theorem IsMixed.dual_of_filtrationClosure_isLissePunctuallyPure
       (exact_dualMap (ShortComplex.exact_cokernel i) hG' hF hQ)
       (h₁.mono_weight (le_max_left _ _)) (h₃.mono_weight (le_max_right _ _))⟩
 
-/-- **The dual of a mixed lisse sheaf is mixed** (blueprint:
-`proposition-weights-under-usual-operations--6`, first assertion, without the weights). The
-scheme `X` is assumed quasi-compact over `k₀`, unlike in the blueprint: mixedness is a global
-filtration, built here by Noetherian induction. -/
+/-- **The dual of a mixed lisse sheaf is mixed**, on a quasi-compact `k₀`-scheme locally of
+finite type. -/
 theorem IsMixed.dual [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (hF : F.IsLisse)
     (h : F.IsMixed ι) : (F.dual hF).IsMixed ι := by
   refine isMixed_of_forall_exists_isMixed_upperStar_opensι_of_stable
@@ -106,14 +101,12 @@ theorem IsMixed.dual [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (hF : F.I
 
 /-- **The dual of a mixed lisse sheaf is mixed, of the negated weights.** If a lisse Weil sheaf
 `F` on a quasi-compact `k₀`-scheme locally of finite type is `ι`-mixed with weights in `S`, its
-dual `F^∨` is `ι`-mixed with weights in `-S`
-(blueprint: `proposition-weights-under-usual-operations--6`, first assertion). -/
+dual `F^∨` is `ι`-mixed with weights in `-S`. -/
 theorem IsMixedOfWeightsIn.dual [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     (hF : F.IsLisse) (h : F.IsMixedOfWeightsIn ι S) : (F.dual hF).IsMixedOfWeightsIn ι (-S) :=
   isMixedOfWeightsIn_iff.2 ⟨h.isMixed.dual hF, h.hasWeightsIn.dual hF⟩
 
-/-- The dual of a lisse sheaf mixed with weights at least `a` is mixed of weights at most `-a`
-(blueprint: `proposition-weights-under-usual-operations--6`). -/
+/-- The dual of a lisse sheaf mixed with weights at least `a` is mixed of weights at most `-a`. -/
 theorem IsMixedOfWeightsIn.isMixedOfWeightsAtMost_dual
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (hF : F.IsLisse) {a : ℝ}
     (h : F.IsMixedOfWeightsIn ι (Set.Ici a)) : (F.dual hF).IsMixedOfWeightsAtMost ι (-a) := by
@@ -158,8 +151,7 @@ noncomputable def cokernelAnnihilatorIsoDualOfCompEq {F G₁ G₂ : WeilSheaf k�
 embedded by `i₁ : G₁ ⟶ F` and `i₂ : G₂ ⟶ F`, with lisse graded piece `G₂ / G₁`. The annihilator
 `G₂^⊥ = ker (i₂^∨ : F^∨ ⟶ G₂^∨)` of `G₂` in the dual is contained in the annihilator
 `G₁^⊥ = ker (i₁^∨)`, and the graded piece `G₁^⊥ / G₂^⊥` of the annihilator filtration is the dual
-`(G₂ / G₁)^∨` of the graded piece (blueprint: `proposition-weights-under-usual-operations--6`,
-second assertion). -/
+`(G₂ / G₁)^∨` of the graded piece. -/
 noncomputable def cokernelAnnihilatorIsoDual {F G₁ G₂ : WeilSheaf k₀ l X}
     (hF : F.IsLisse) (hG₁ : G₁.IsLisse) (hG₂ : G₂.IsLisse) (i₁ : G₁ ⟶ F) (i₂ : G₂ ⟶ F) [Mono i₂]
     (j : G₁ ⟶ G₂) [Mono j] (hj : j ≫ i₂ = i₁) (hQ : (cokernel j).IsLisse) :
@@ -169,8 +161,7 @@ noncomputable def cokernelAnnihilatorIsoDual {F G₁ G₂ : WeilSheaf k₀ l X}
   cokernelAnnihilatorIsoDualOfCompEq hF hG₁ hG₂ i₂ j hQ _ (by rw [← dualMap_comp, hj])
 
 /-- The graded piece `G₁^⊥ / G₂^⊥` of the annihilator filtration is isomorphic to the dual
-`(G₂ / G₁)^∨` (blueprint: `proposition-weights-under-usual-operations--6`, second assertion),
-see `AlgebraicGeometry.WeilSheaf.cokernelAnnihilatorIsoDual`. -/
+`(G₂ / G₁)^∨`. -/
 theorem nonempty_cokernel_annihilator_iso_dual {F G₁ G₂ : WeilSheaf k₀ l X}
     (hF : F.IsLisse) (hG₁ : G₁.IsLisse) (hG₂ : G₂.IsLisse) (i₁ : G₁ ⟶ F) (i₂ : G₂ ⟶ F) [Mono i₂]
     (j : G₁ ⟶ G₂) [Mono j] (hj : j ≫ i₂ = i₁) (hQ : (cokernel j).IsLisse) :

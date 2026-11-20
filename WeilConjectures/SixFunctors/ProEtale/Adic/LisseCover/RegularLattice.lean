@@ -23,9 +23,8 @@ scheme has a lattice (blueprint `proposition-lattices-representations-normal-sch
 
 More generally, this holds on a connected Noetherian scheme whose local rings are integrally
 closed domains
-(`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk`,
-blueprint `lemma-global-lattice-normal-scheme`): the orbit of a lattice is contained in a finite
-invariant set of lattices
+(`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk`):
+the orbit of a lattice is contained in a finite invariant set of lattices
 (`AlgebraicGeometry.exists_finite_invariant_subset_of_isIntegrallyClosed_stalk`, Bhatt–Scholze,
 Lemma 7.4.10), whose sum is an invariant lattice. On a regular scheme the sections over the
 finitely many connected components glue.
@@ -42,13 +41,10 @@ namespace AlgebraicGeometry
 variable {l : ℕ} [Fact l.Prime] {E : IntermediateField ℚ_[l] (PadicAlgCl l)}
   [FiniteDimensional ℚ_[l] E] {n : ℕ} {T V : Scheme.{u}}
 
-/-- **Lattices on connected normal schemes** (blueprint `lemma-global-lattice-normal-scheme`).
-Let `T` be a connected Noetherian scheme whose local rings are integrally closed domains, and `γ`
-a cocycle on a single-morphism pro-étale cover of `T` acting on the lattices of `Eⁿ` by a descent
-cocycle. Then `γ` has a twisted section with values in the lattices: the orbit of the standard
-lattice lies in a finite invariant set of lattices
-(`AlgebraicGeometry.exists_finite_invariant_subset_of_isIntegrallyClosed_stalk`), whose sum is an
-invariant lattice. -/
+/-- **Lattices on connected normal schemes.** Let `T` be a connected Noetherian scheme whose local
+rings are integrally closed domains, and `γ` a cocycle on a single-morphism pro-étale cover of `T`
+acting on the lattices of `Eⁿ` by a descent cocycle. Then `γ` has a twisted section with values in
+the lattices. -/
 theorem exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk
     [IsLocallyNoetherian T] [CompactSpace T] [ConnectedSpace T]
     (hT : ∀ y : T, IsDomain (T.presheaf.stalk y) ∧ IsIntegrallyClosed (T.presheaf.stalk y))
@@ -104,9 +100,7 @@ theorem exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk
     ext L
     simp only [Set.Finite.mem_toFinset, Finset.mem_image, h, Set.mem_image]
 
-/-- **Lattices on connected regular schemes**: the case of
-`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk` for a
-regular scheme, whose local rings are integrally closed domains. -/
+/-- **Lattices on connected regular schemes.** -/
 theorem exists_isTwistedSection_compactOpenLattice_of_connectedSpace [IsLocallyNoetherian T]
     [CompactSpace T] [IsRegular T] [ConnectedSpace T] (f : V ⟶ T) [WeaklyEtale f]
     [Surjective f] [QuasiCompact f] (γ : ↥(pullback f f) → GL (Fin n) E)

@@ -17,14 +17,17 @@ A constructible Weil sheaf `F` is `ι`-*mixed with weights in* a set `S ⊆ ℝ`
 successive quotients are punctually `ι`-pure of weights belonging to `S`. For `S = Iic w` this is
 being mixed of weights at most `w`.
 
-The weights of the pure quotients of a mixed filtration are the weights of the eigenvalues of the
-local Frobenius of `F` at closed points (`AlgebraicGeometry.WeilSheaf.HasWeightsIn`): a nonzero
-punctually pure quotient has an eigenvalue at some closed point, which is an eigenvalue of `F`.
-Hence a mixed sheaf is mixed with weights in `S` as soon as all its punctual weights lie in `S`
+A mixed sheaf is mixed with weights in `S` as soon as all its punctual weights lie in `S`
 (`AlgebraicGeometry.WeilSheaf.isMixedOfWeightsIn_iff`); in particular a mixed sheaf with weights
 at most `w` at every closed point is mixed of weights at most `w`
 (`AlgebraicGeometry.WeilSheaf.IsMixed.isMixedOfWeightsAtMost`), without any separatedness or
 quasi-compactness assumption on the base.
+
+## Implementation details
+
+The weights of the pure quotients of a mixed filtration are the weights of the eigenvalues of the
+local Frobenius of `F` at closed points (`AlgebraicGeometry.WeilSheaf.HasWeightsIn`): a nonzero
+punctually pure quotient has an eigenvalue at some closed point, which is an eigenvalue of `F`.
 -/
 
 @[expose] public section
@@ -60,8 +63,7 @@ theorem not_hasEigenvalue_stalk_of_isZero (hF : IsZero F) (x : X.finitePoints)
 
 variable (ι) in
 /-- `F` has *punctual weights in* `S`: at every closed point `x`, every eigenvalue `α` of the
-local Frobenius `Fₓ` satisfies `|ι α| = q_x ^ (v / 2)` for some `v ∈ S`
-(blueprint: `def-weil-punctual-weights`). -/
+local Frobenius `Fₓ` satisfies `|ι α| = q_x ^ (v / 2)` for some `v ∈ S`. -/
 def HasWeightsIn (F : WeilSheaf k₀ l X) (S : Set ℝ) : Prop :=
   ∀ (x : X.finitePoints) (α : PadicAlgCl l), (F.stalk x).frobeniusEnd.HasEigenvalue α →
     ∃ v ∈ S, ‖ι α‖ = ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1 : ℝ) ^ (v / 2)
@@ -93,8 +95,7 @@ theorem HasWeightsIn.of_epi (f : F ⟶ G) [Epi f] (h : F.HasWeightsIn ι S) :
 theorem HasWeightsIn.of_iso (e : F ≅ G) (h : F.HasWeightsIn ι S) : G.HasWeightsIn ι S :=
   h.of_epi e.hom
 
-/-- An extension of sheaves with punctual weights in `S` has punctual weights in `S`: the stalks
-form short exact sequences of Frobenius modules. -/
+/-- An extension of sheaves with punctual weights in `S` has punctual weights in `S`. -/
 theorem HasWeightsIn.of_mono_cokernel (i : G ⟶ F) [Mono i] (hG : G.HasWeightsIn ι S)
     (hQ : (cokernel i).HasWeightsIn ι S) : F.HasWeightsIn ι S := fun x α hα ↦
   (FrobeniusModule.hasEigenvalue_or_of_exact _ (stalkAtMap_frobenius _ _ _ i) _
@@ -103,8 +104,7 @@ theorem HasWeightsIn.of_mono_cokernel (i : G ⟶ F) [Mono i] (hG : G.HasWeightsI
     (hG x α) (hQ x α)
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
-/-- A sheaf with weights at most `w` at every closed point has punctual weights in `Iic w`: the
-local Frobenius is invertible, so its eigenvalues are nonzero and have a weight. -/
+/-- A sheaf with weights at most `w` at every closed point has punctual weights in `Iic w`. -/
 theorem HasWeightsAtMost.hasWeightsIn_Iic {w : ℝ} (h : F.HasWeightsAtMost ι w) :
     F.HasWeightsIn ι (Set.Iic w) := fun x α hα ↦ by
   have hq := one_lt_residueCard (k₀ := k₀) x
@@ -137,8 +137,7 @@ instance :
 
 variable (ι) in
 /-- `F` is `ι`-*mixed with weights in* `S` if it admits a finite filtration whose successive
-quotients are punctually `ι`-pure of weights belonging to `S`
-(blueprint: `sk-d-real-weights`, `def-weil-punctual-weights`). -/
+quotients are punctually `ι`-pure of weights belonging to `S`. -/
 def IsMixedOfWeightsIn (F : WeilSheaf k₀ l X) (S : Set ℝ) : Prop :=
   (isPunctuallyPureOfWeightIn ι S).filtrationClosure F
 
@@ -211,9 +210,7 @@ theorem IsMixedOfWeightsIn.isMixed (h : F.IsMixedOfWeightsIn ι S) : F.IsMixed �
     exact ⟨max w v, (hw.mono_weight (le_max_left _ _)).of_mono_cokernel i
       (isMixedOfWeightsIn_Iic_iff.1 (h.isMixedOfWeightsIn (le_max_right w v)))⟩
 
-/-- A mixed sheaf whose punctual weights lie in `S` is mixed with weights in `S`: the weight of a
-nonzero punctually pure quotient of a mixed filtration is the weight of an eigenvalue of the
-local Frobenius of the sheaf at some closed point. -/
+/-- A mixed sheaf whose punctual weights lie in `S` is mixed with weights in `S`. -/
 theorem IsMixed.isMixedOfWeightsIn (h : F.IsMixed ι) (hS : F.HasWeightsIn ι S) :
     F.IsMixedOfWeightsIn ι S := by
   obtain ⟨w, h⟩ := h
@@ -246,9 +243,7 @@ theorem isMixedOfWeightsIn_iff : F.IsMixedOfWeightsIn ι S ↔ F.IsMixed ι ∧ 
   ⟨fun h ↦ ⟨h.isMixed, h.hasWeightsIn⟩, fun h ↦ h.1.isMixedOfWeightsIn h.2⟩
 
 /-- **Punctual cutoff for a mixed sheaf.** A mixed sheaf with weights at most `w` at every closed
-point is mixed of weights at most `w` (compare
-`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost`, which assumes the base
-separated and quasi-compact). -/
+point is mixed of weights at most `w`. -/
 theorem IsMixed.isMixedOfWeightsAtMost {w : ℝ} (h : F.IsMixed ι) (hw : F.HasWeightsAtMost ι w) :
     F.IsMixedOfWeightsAtMost ι w :=
   isMixedOfWeightsIn_Iic_iff.1 (h.isMixedOfWeightsIn hw.hasWeightsIn_Iic)

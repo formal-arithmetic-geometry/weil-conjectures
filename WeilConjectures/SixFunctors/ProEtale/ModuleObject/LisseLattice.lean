@@ -16,11 +16,10 @@ Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` with rin
 a connected Noetherian scheme whose local rings are integrally closed domains. Every lisse
 (locally free) `E_S`-module `L` has a lattice: there is a locally free `𝒪_{E,S}`-module `L₀` with
 `E_S ⊗_{𝒪_{E,S}} L₀ ≅ L`
-(`ProEtale.exists_isLocallyFree_padicIntegers_extendScalars_iso_of_isIntegrallyClosed_stalk`,
-blueprint `lemma-global-lattice-normal-scheme`). In particular this holds on a connected regular
+(`ProEtale.exists_isLocallyFree_padicIntegers_extendScalars_iso_of_isIntegrallyClosed_stalk`).
+In particular this holds on a connected regular
 Noetherian scheme
-(`AlgebraicGeometry.ProEtale.exists_isLocallyFree_padicIntegers_extendScalars_iso`,
-blueprint `sk-lem-stratified-lattice`, first stage).
+(`AlgebraicGeometry.ProEtale.exists_isLocallyFree_padicIntegers_extendScalars_iso`).
 
 The proof:
 
@@ -65,8 +64,8 @@ lemma isZero_mod_of_isEmpty {X : Scheme.{u}} [IsEmpty X]
   ext : 1
   exact hX.eq_of_src _ _
 
-/-- **Lisse `E`-sheaves on connected normal Noetherian schemes have lattices** (blueprint
-`lemma-global-lattice-normal-scheme`). See the module docstring. -/
+/-- **Lisse `E`-sheaves on connected normal Noetherian schemes have lattices.** See the module
+docstring. -/
 theorem exists_isLocallyFree_padicIntegers_extendScalars_iso_of_isIntegrallyClosed_stalk
     {S : Scheme.{u}} [IsNoetherian S] [ConnectedSpace S]
     (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s))
@@ -142,9 +141,8 @@ theorem exists_isLocallyFree_padicIntegers_extendScalars_iso_of_isIntegrallyClos
   exact hdesc g hg hg' hint₁ hint₂
 
 
-/-- **Lisse `E`-sheaves on connected regular Noetherian schemes have lattices** (blueprint
-`sk-lem-stratified-lattice`, first stage): the local rings of a regular scheme are integrally
-closed domains. See the module docstring. -/
+/-- **Lisse `E`-sheaves on connected regular Noetherian schemes have lattices.** See the module
+docstring. -/
 theorem exists_isLocallyFree_padicIntegers_extendScalars_iso {S : Scheme.{u}} [IsNoetherian S]
     [IsRegular S] [ConnectedSpace S]
     (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})

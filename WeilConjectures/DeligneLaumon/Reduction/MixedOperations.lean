@@ -10,8 +10,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
 /-!
 # Mixedness under extensions and inverse images
 
-Two of the closure properties of mixed Weil sheaves recorded in the blueprint proposition
-`proposition-weights-under-usual-operations`:
+Two closure properties of mixed Weil sheaves:
 
 * an extension of mixed Weil sheaves is mixed
   (`AlgebraicGeometry.WeilSheaf.IsMixed.of_shortExact`);
@@ -32,8 +31,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   {ι : PadicAlgCl l →+* ℂ}
 
 /-- **Mixed extensions.** The middle term of a short exact sequence of Weil sheaves whose outer
-terms are mixed is mixed: both outer terms are mixed of weights at most the larger of their two
-bounds. (blueprint: `proposition-weights-under-usual-operations--1`) -/
+terms are mixed is mixed. -/
 theorem IsMixed.of_shortExact {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {S : ShortComplex (WeilSheaf k₀ l X)}
     (hS : S.ShortExact) (h₁ : S.X₁.IsMixed ι) (h₃ : S.X₃.IsMixed ι) : S.X₂.IsMixed ι :=
@@ -44,9 +42,7 @@ theorem IsMixed.of_shortExact {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k�
 
 /-- **Upper bounds under inverse image.** Pulling back along any morphism `φ : X ⟶ Y` of
 `k₀`-schemes locally of finite type carries Weil sheaves mixed of weights at most `w` to Weil
-sheaves mixed of weights at most `w`; this is
-`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.upperStar` in the notation of the blueprint
-proposition. (blueprint: `proposition-weights-under-usual-operations--9`) -/
+sheaves mixed of weights at most `w`. -/
 theorem isMixedOfWeightsAtMost_upperStar_obj {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]

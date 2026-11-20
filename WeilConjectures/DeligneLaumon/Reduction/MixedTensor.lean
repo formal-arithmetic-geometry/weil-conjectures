@@ -12,13 +12,12 @@ public import WeilConjectures.WeilSheaf.LisseDualExact
 /-!
 # Tensor products of mixed Weil sheaves
 
-Clause 5 of the blueprint proposition `proposition-weights-under-usual-operations`: the tensor
-product of mixed sheaves of weights at most `a` and `b` is mixed of weights at most `a + b`
-(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.tensorObj`). The tensor product
+The tensor product of mixed sheaves of weights at most `a` and `b` is mixed of weights at most
+`a + b` (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.tensorObj`). The tensor product
 `F ⊗ G = [F^∨, G]` of Weil sheaves (`AlgebraicGeometry.WeilSheaf.tensorObj`) is only defined
 for a lisse first factor `F`.
 
-## Proof
+## Implementation details
 
 The weights of `F ⊗ G` at a closed point are the sums of those of `F` and `G`
 (`AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.tensorObj`), so it suffices to show that `F ⊗ G`
@@ -55,8 +54,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   {ι : PadicAlgCl l →+* ℂ} {F G : WeilSheaf k₀ l X}
 
 /-- The tensor product of a lisse sheaf with a finite filtration by lisse subsheaves with
-punctually pure graded pieces and of a mixed sheaf is mixed: the tensor product is exact in both
-variables, and the tensor products of punctually pure sheaves are punctually pure. -/
+punctually pure graded pieces and of a mixed sheaf is mixed. -/
 theorem IsMixed.tensorObj_of_filtrationClosure_isLissePunctuallyPure
     (h : (isLissePunctuallyPure ι).filtrationClosure F) (hF : F.IsLisse) (hG : G.IsMixed ι) :
     (F.tensorObj G hF).IsMixed ι := by
@@ -78,10 +76,8 @@ theorem IsMixed.tensorObj_of_filtrationClosure_isLissePunctuallyPure
       (exact_tensorHom_id (ShortComplex.exact_cokernel i) hF' hF hQ G)
       (h₁.mono_weight (le_max_left _ _)) (h₃.mono_weight (le_max_right _ _))⟩
 
-/-- **The tensor product of mixed sheaves is mixed** (blueprint:
-`proposition-weights-under-usual-operations--5`, without the weights). The
-scheme `X` is assumed quasi-compact over `k₀`, unlike in the blueprint: mixedness is a global
-filtration, built here by Noetherian induction. -/
+/-- **The tensor product of mixed sheaves is mixed**, on a quasi-compact `k₀`-scheme locally of
+finite type. -/
 theorem IsMixed.tensorObj [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (hF : F.IsLisse)
     (hFm : F.IsMixed ι) (hG : G.IsMixed ι) : (F.tensorObj G hF).IsMixed ι := by
   refine isMixed_of_forall_exists_isMixed_upperStar_opensι_of_stable
@@ -98,8 +94,7 @@ theorem IsMixed.tensorObj [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (hF 
 
 /-- **Tensor products of mixed sheaves.** On a quasi-compact `k₀`-scheme locally of finite type,
 the tensor product `F ⊗ G` of a lisse Weil sheaf `F` mixed of weights at most `a` and a Weil
-sheaf `G` mixed of weights at most `b` is mixed of weights at most `a + b`
-(blueprint: `proposition-weights-under-usual-operations--5`). -/
+sheaf `G` mixed of weights at most `b` is mixed of weights at most `a + b`. -/
 theorem IsMixedOfWeightsAtMost.tensorObj [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     (hF : F.IsLisse) {a b : ℝ} (hFa : F.IsMixedOfWeightsAtMost ι a)
     (hGb : G.IsMixedOfWeightsAtMost ι b) : (F.tensorObj G hF).IsMixedOfWeightsAtMost ι (a + b) :=

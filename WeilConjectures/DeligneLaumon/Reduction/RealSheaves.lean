@@ -34,12 +34,11 @@ open–closed sequence.
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.isMixed_of_forall_exists_isMixed_upperStar_opensι_of_stable`: the
-  Noetherian induction of `thm-zl-real-mixed-by-curves`, for any property of Weil sheaves stable
-  under pullback along closed immersions, and
+  Noetherian induction reducing mixedness to a nonempty open, for any property of Weil sheaves
+  stable under pullback along closed immersions, and
   `AlgebraicGeometry.WeilSheaf.isMixed_of_forall_exists_isMixed_upperStar_opensι`, its case of
   real sheaves on separated schemes.
-- `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`: blueprint `sk-i-dl-general-real` and
-  `thm-zl-real-mixed-by-curves`.
+- `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`: real Weil sheaves are mixed.
 
 ## References
 
@@ -161,9 +160,7 @@ theorem isMixedOfWeightsAtMost_of_isEmpty {X : Scheme.{u}} [X.Over (Spec (CommRi
 `k₀`-schemes locally of finite type, stable under pullback along closed immersions over `k₀`.
 Suppose that on every nonempty reduced quasi-compact `k₀`-scheme `T` locally of finite type,
 every Weil sheaf with `P` is `ι`-mixed on some nonempty open of `T`. Then every Weil sheaf with
-`P` on a quasi-compact `k₀`-scheme locally of finite type is `ι`-mixed
-(blueprint: `thm-zl-real-mixed-by-curves`, the Noetherian induction; used in
-`proposition-weights-under-usual-operations`). -/
+`P` on a quasi-compact `k₀`-scheme locally of finite type is `ι`-mixed. -/
 theorem isMixed_of_forall_exists_isMixed_upperStar_opensι_of_stable
     (P : ∀ (T : Scheme.{u}) [T.Over (Spec (CommRingCat.of k₀))]
       [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))], WeilSheaf k₀ l T → Prop)
@@ -250,13 +247,7 @@ theorem isMixed_of_forall_exists_isMixed_upperStar_opensι_of_stable
 /-- **Reduction of mixedness of real sheaves to a nonempty open.** Suppose that on every nonempty
 reduced separated `k₀`-scheme `T` of finite type, every `ι`-real Weil sheaf is `ι`-mixed on some
 nonempty open of `T`. Then every `ι`-real Weil sheaf on a separated finite-type `k₀`-scheme is
-`ι`-mixed (blueprint: `thm-zl-real-mixed-by-curves`, the reduction to a lisse stratum).
-
-Noetherian induction on the closed subsets of `X`: on a reduced closed subscheme `T`, a real
-sheaf is mixed on a nonempty open `U` by hypothesis and, by induction, on the reduced closed
-complement of `U`; mixed filtrations glue along the open–closed exact sequence
-(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_openClosed`), and reality is inherited
-by restrictions (`AlgebraicGeometry.WeilSheaf.IsReal.upperStar`). -/
+`ι`-mixed. -/
 theorem isMixed_of_forall_exists_isMixed_upperStar_opensι
     (h : ∀ (T : Scheme.{u}) [T.Over (Spec (CommRingCat.of k₀))] [IsReduced T] [Nonempty T]
       [IsSeparated (T ↘ Spec (CommRingCat.of k₀))]

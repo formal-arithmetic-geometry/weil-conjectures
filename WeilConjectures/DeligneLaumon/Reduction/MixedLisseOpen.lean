@@ -14,10 +14,13 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 
 A mixed Weil sheaf on a reduced quasi-compact `k₀`-scheme `X` admits, on a nonempty open `U` of
 `X`, a filtration whose successive quotients are lisse and punctually pure
-(`AlgebraicGeometry.WeilSheaf.IsMixed.exists_opens_filtrationClosure_isLissePunctuallyPure`):
-each of the finitely many pure quotients of a mixed filtration is lisse on a dense open
+(`AlgebraicGeometry.WeilSheaf.IsMixed.exists_opens_filtrationClosure_isLissePunctuallyPure`).
+
+## Implementation details
+
+Each of the finitely many pure quotients of a mixed filtration is lisse on a dense open
 (`AlgebraicGeometry.WeilSheaf.exists_dense_isLisse_upperStar`). This is the generic step of the
-Noetherian inductions of `proposition-weights-under-usual-operations`.
+Noetherian inductions showing that tensor products and duals of mixed sheaves are mixed.
 -/
 
 @[expose] public section
@@ -70,9 +73,7 @@ theorem filtrationClosure_isLissePunctuallyPure_upperStar {Y : Scheme.{u}}
 /-- **Lisse graded pieces on a nonempty open.** A mixed Weil sheaf `F` on a nonempty reduced
 quasi-compact `k₀`-scheme `X` locally of finite type has a nonempty open `U` such that on every
 open `V ⊆ U`, the restriction of `F` admits a finite filtration whose successive quotients are
-lisse and punctually pure: the restrictions of a mixed filtration to the intersection of the
-dense opens on which its pure quotients are lisse
-(blueprint: `proposition-weights-under-usual-operations`, proofs of clauses 5 and 6). -/
+lisse and punctually pure. -/
 theorem IsMixed.exists_opens_filtrationClosure_isLissePunctuallyPure [IsReduced X] [Nonempty X]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (hF : F.IsMixed ι) :
     ∃ U : X.Opens, (U : Set X).Nonempty ∧ ∀ V : X.Opens, V ≤ U →

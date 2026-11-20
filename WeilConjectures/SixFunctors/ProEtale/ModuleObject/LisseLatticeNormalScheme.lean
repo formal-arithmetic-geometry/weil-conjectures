@@ -18,8 +18,7 @@ instance a nonempty connected normal scheme of finite type over a field), `ℓ` 
 `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ`, with ring of integers `𝒪_E` and uniformiser `ϖ`.
 Every lisse `E_X`-module `L` contains a lisse `𝒪_{E,X}`-submodule `M` with `M[1/ℓ] = L`; the
 reductions `Mₙ = M/ϖⁿM` are finite locally constant étale sheaves and `M ≅ lim Mₙ`
-(`AlgebraicGeometry.ProEtale.exists_lisse_integral_lattice_of_isIntegrallyClosed_stalk`,
-blueprint `lemma-global-lattice-normal-scheme`).
+(`AlgebraicGeometry.ProEtale.exists_lisse_integral_lattice_of_isIntegrallyClosed_stalk`).
 
 The lattice is
 `ProEtale.exists_mono_isLocallyFree_padicIntegers_of_isIntegrallyClosed_stalk`.
@@ -30,6 +29,13 @@ The statements on the reductions hold for every locally free `𝒪_{E,X}`-module
   constant sheaf `G` on the small étale site of `X`;
 * `AlgebraicGeometry.ProEtale.isLimit_cokernelEndPowTowerCone_of_isLocallyFree`: `M` is the limit
   of its reductions, `𝒪_{E,X} = C(-, 𝒪_E)` being the limit of the `C(-, 𝒪_E/ϖⁿ)`.
+
+## Implementation details
+
+Pro-étale locally `M/ϖⁿM ≅ (𝒪_E/ϖⁿ)ʳ` is constant with finite value; its descent datum along an
+affine weakly étale cover `V = lim Vᵢ ⟶ X` is a locally constant function with values in a finite
+set on the quasi-compact `V ×_X V = lim Vᵢ ×_X Vᵢ`, hence comes from a finite stage. That `M` is
+the limit of its reductions is local on `X`.
 -/
 
 @[expose] public section
@@ -47,14 +53,10 @@ open Scheme PadicAlgCl CondensedRing
 variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
 
 /-- **The reductions of a locally free `𝒪_{E,X}`-module are finite locally constant étale
-sheaves** (blueprint `lemma-global-lattice-normal-scheme`). Let `M` be a locally free
+sheaves.** Let `M` be a locally free
 `𝒪_{E,X}`-module on a Noetherian scheme `X` and `ϖ` a uniformiser of `𝒪_E`. The reduction
 `M/ϖⁿM` is, as a sheaf of abelian groups, the pullback `ν^* G` of a finite locally constant sheaf
-`G` of abelian groups on the small étale site of `X`.
-
-Pro-étale locally `M/ϖⁿM ≅ (𝒪_E/ϖⁿ)ʳ` is constant with finite value; its descent datum along an
-affine weakly étale cover `V = lim Vᵢ ⟶ X` is a locally constant function with values in a finite
-set on the quasi-compact `V ×_X V = lim Vᵢ ×_X Vᵢ`, hence comes from a finite stage. -/
+`G` of abelian groups on the small étale site of `X`. -/
 theorem exists_isFiniteLocallyConstantSheaf_iso_of_isLocallyFree {X : Scheme.{u}}
     [IsNoetherian X]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -67,10 +69,8 @@ theorem exists_isFiniteLocallyConstantSheaf_iso_of_isLocallyFree {X : Scheme.{u}
         ((cokernelEndPowTower (padicIntegersSmul ϖ M)).obj (op n)).X) := by
   sorry
 
-/-- **A locally free `𝒪_{E,X}`-module is the limit of its reductions** (blueprint
-`lemma-global-lattice-normal-scheme`): for a uniformiser `ϖ` of `𝒪_E`, the cone of the
-projections `M ⟶ M/ϖⁿM` is a limit cone. This is local on `X`, and `𝒪_{E,X} = C(-, 𝒪_E)` is the
-limit of the `C(-, 𝒪_E/ϖⁿ)`. -/
+/-- **A locally free `𝒪_{E,X}`-module is the limit of its reductions.** For a uniformiser `ϖ` of
+`𝒪_E`, the cone of the projections `M ⟶ M/ϖⁿM` is a limit cone. -/
 theorem isLimit_cokernelEndPowTowerCone_of_isLocallyFree {X : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))
@@ -79,14 +79,12 @@ theorem isLimit_cokernelEndPowTowerCone_of_isLocallyFree {X : Scheme.{u}}
     Nonempty (IsLimit (cokernelEndPowTowerCone (padicIntegersSmul ϖ M))) := by
   sorry
 
-/-- **Lattices of lisse `E`-modules on connected normal schemes** (blueprint
-`lemma-global-lattice-normal-scheme`). Let `X` be a connected Noetherian scheme whose local rings
-are integrally closed domains (e.g. a nonempty connected normal scheme of finite type over a
-field) and `E/ℚ_ℓ` finite. Every lisse (locally free) `E_X`-module `L` contains a lisse
-`𝒪_{E,X}`-submodule `M` with `M[1/ℓ] = L`: there is a monomorphism `ι : M ⟶ L` of
-`𝒪_{E,X}`-modules with adjoint `E_X ⊗_{𝒪_{E,X}} M ≅ L`. For every uniformiser `ϖ` of `𝒪_E`, the
-reductions `Mₙ = M/ϖⁿM` are finite locally constant étale sheaves (`Mₙ ≅ ν^* Gₙ` with `Gₙ` finite
-locally constant on the small étale site), and `M ≅ lim Mₙ`. -/
+/-- **Lattices of lisse `E`-modules on connected normal schemes.** Let `X` be a connected Noetherian
+scheme whose local rings are integrally closed domains and `E/ℚ_ℓ` finite. Every lisse (locally
+free) `E_X`-module `L` contains a lisse `𝒪_{E,X}`-submodule `M` with `M[1/ℓ] = L`: there is a
+monomorphism `ι : M ⟶ L` of `𝒪_{E,X}`-modules with adjoint `E_X ⊗_{𝒪_{E,X}} M ≅ L`. For every
+uniformiser `ϖ` of `𝒪_E`, the reductions `Mₙ = M/ϖⁿM` are finite locally constant étale sheaves
+(`Mₙ ≅ ν^* Gₙ` with `Gₙ` finite locally constant on the small étale site), and `M ≅ lim Mₙ`. -/
 theorem exists_lisse_integral_lattice_of_isIntegrallyClosed_stalk {X : Scheme.{u}}
     [IsNoetherian X] [ConnectedSpace X]
     (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x))

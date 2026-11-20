@@ -111,9 +111,7 @@ variable [LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- Pulling back along a morphism `h : W ⟶ X` of `k₀`-schemes preserves mixed upper weight
-bounds: restrict the filtration, the pullback being exact and preserving punctual purity
-(`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar`) (blueprint:
-`lem-zl-morphism-open-closed-reduction`, restriction). -/
+bounds. -/
 theorem WeilSheaf.IsMixedOfWeightsAtMost.upperStar {w : ℝ}
     {F : WeilSheaf k₀ l X} (hF : F.IsMixedOfWeightsAtMost ι w) :
     ((WeilSheaf.upperStar h).obj F).IsMixedOfWeightsAtMost ι w :=

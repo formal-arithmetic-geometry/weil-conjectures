@@ -179,9 +179,7 @@ theorem charpoly_eq_prod_charpoly_mapQ_of_le (f : V →ₗ[K] V) (F : ℕ → Su
 
 /-- **Eigenvalues along a filtration.** If `f` preserves a finite filtration
 `0 = F 0 ≤ F 1 ≤ ⋯ ≤ F n = V`, the multiset of roots of the characteristic polynomial of `f` is
-the sum of those of the endomorphisms induced by `f` on the graded pieces `F (i + 1) ⧸ F i`: the
-eigenvalues with algebraic multiplicity are the union of those on the graded pieces.
-(blueprint: `lemma-filtrations-spectra--2`) -/
+the sum of those of the endomorphisms induced by `f` on the graded pieces `F (i + 1) ⧸ F i`. -/
 theorem charpoly_roots_eq_sum_charpoly_roots_mapQ_of_le (f : V →ₗ[K] V)
     (F : ℕ → Submodule K V) (n : ℕ) (h0 : F 0 = ⊥) (hn : F n = ⊤)
     (hle : ∀ i < n, F i ≤ F (i + 1)) (hF : ∀ i, F i ≤ (F i).comap f) :

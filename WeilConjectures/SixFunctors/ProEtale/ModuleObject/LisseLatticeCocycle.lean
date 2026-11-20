@@ -34,8 +34,7 @@ are locally constant and conjugate `γ` into `GL_n(𝒪_E)`
 The proof only uses the existence of lattice-valued twisted sections
 (`AlgebraicGeometry.exists_integral_conj_of_transitionValues_of_forall_exists_isTwistedSection`),
 so it also applies to connected Noetherian schemes whose local rings are integrally closed domains
-(`AlgebraicGeometry.exists_integral_conj_of_transitionValues_of_isIntegrallyClosed_stalk`, blueprint
-`lemma-global-lattice-normal-scheme`).
+(`AlgebraicGeometry.exists_integral_conj_of_transitionValues_of_isIntegrallyClosed_stalk`).
 -/
 
 @[expose] public section
@@ -62,11 +61,10 @@ lemma exists_lift_sigmaι {κ : Type u} [Small.{u} κ] (V : κ → Scheme.{u}) {
     hv
   exact ⟨j, _, pullback.snd _ _, pullback.fst _ _, r, hr₂, pullback.condition⟩
 
-/-- **Integral conjugates of transition values.** Let `S` be a quasi-compact quasi-separated
-locally Noetherian scheme on which every descent cocycle `γ` acting on the lattices of `Eⁿ`, on a
-single-morphism pro-étale cover, has a lattice-valued twisted section (for instance a regular or
-a connected normal scheme). Then transition values on a finite affine pro-étale cover of `S` are
-conjugate to integral ones. See the module docstring. -/
+/-- **Integral conjugates of transition values.** Let `S` be a quasi-compact quasi-separated locally
+Noetherian scheme on which every descent cocycle `γ` acting on the lattices of `Eⁿ`, on a
+single-morphism pro-étale cover, has a lattice-valued twisted section. Then transition values on a
+finite affine pro-étale cover of `S` are conjugate to integral ones. See the module docstring. -/
 theorem exists_integral_conj_of_transitionValues_of_forall_exists_isTwistedSection
     {S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] [QuasiSeparatedSpace S]
     (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage S) [Finite 𝒰.I₀] [∀ k, IsAffine (𝒰.X k)]
@@ -389,10 +387,8 @@ theorem exists_integral_conj_of_transitionValues {S : Scheme.{u}} [IsLocallyNoet
     (fun f _ _ _ γ hdc ↦ exists_isTwistedSection_compactOpenLattice f γ hdc) Tval hc hc' hcomp
     htrans hself
 
-/-- **Integral conjugates of transition values on connected normal schemes** (blueprint
-`lemma-global-lattice-normal-scheme`): the case of a connected locally Noetherian scheme whose
-local rings are integrally closed domains, with the lattice theorem
-`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk`. -/
+/-- **Integral conjugates of transition values on connected normal schemes**, i.e.
+connected locally Noetherian schemes whose local rings are integrally closed domains. -/
 theorem exists_integral_conj_of_transitionValues_of_isIntegrallyClosed_stalk {S : Scheme.{u}}
     [IsLocallyNoetherian S] [CompactSpace S] [QuasiSeparatedSpace S] [ConnectedSpace S]
     (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s))
