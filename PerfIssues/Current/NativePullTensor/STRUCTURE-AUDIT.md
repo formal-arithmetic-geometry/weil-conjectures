@@ -97,7 +97,7 @@ Conclusion: invalid ablation, but major-premise restoration is valid.
 
 E. REDUCTION-PATH AUDIT
 Same regular head: Iso and Functor.comp yes; Functor.obj is abbrev.
-Reducibility hints: regular/regular same-body 0 ms; abbrev/abbrev 11.251 ms.
+Reducibility hints: regular/regular same-body 0 ms; abbrev/abbrev 11.251 s.
 Argument results: all six Functor.obj arguments independently 0-1 ms.
 One-sided exposure: Functor.obj exposes Functor.0; both-sided aligned premise is immediate.
 Wrapper placement: regular wrapper removes the cost only when both sides share the regular head.
