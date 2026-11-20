@@ -13,9 +13,13 @@ public import WeilConjectures.WeilSheaf.UpperStarFiniteEtale
 
 For a quasi-compact quasi-separated surjective étale morphism `g` of `k₀`-schemes, the unit
 `F ⟶ g_* g^* F` of Weil sheaves is a monomorphism
-(`AlgebraicGeometry.WeilSheaf.mono_upperStarLowerStarAdjunction_unit_app_of_surjective`): its
-underlying morphism of `ℓ`-adic sheaves is the unit along the base change of `g` to the
-geometric fibres, which is again quasi-compact, surjective and étale.
+(`AlgebraicGeometry.WeilSheaf.mono_upperStarLowerStarAdjunction_unit_app_of_surjective`).
+
+## Implementation details
+
+The underlying morphism of `ℓ`-adic sheaves is the unit along the base change of `g` to the
+geometric fibres, which is again quasi-compact, surjective and étale, so
+`AlgebraicGeometry.ProEtale.mono_adicUpperStarLowerStarAdjunction_unit_app` applies.
 -/
 
 @[expose] public section
@@ -30,9 +34,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
 
 /-- For a qcqs surjective étale morphism `g` of `k₀`-schemes, the unit `F ⟶ g_* g^* F`
-of Weil sheaves is a monomorphism: on underlying `ℓ`-adic sheaves it is the unit along the base
-change of `g` to the geometric fibres
-(`AlgebraicGeometry.ProEtale.mono_adicUpperStarLowerStarAdjunction_unit_app`). -/
+of Weil sheaves is a monomorphism. -/
 theorem mono_upperStarLowerStarAdjunction_unit_app_of_surjective (g : X ⟶ Y)
     [g.IsOver (Spec (CommRingCat.of k₀))] [Etale g] [Surjective g] [QuasiCompact g]
     [QuasiSeparated g]
