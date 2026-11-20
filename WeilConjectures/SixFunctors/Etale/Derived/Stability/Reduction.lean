@@ -196,31 +196,29 @@ theorem nonempty_iso_reductionModIdeal_verdierDual {X : Scheme.{u}} (aX : X ⟶ 
   obtain ⟨e₂⟩ := nonempty_iso_reductionModIdeal_dualizingComplex Λ J aX
   exact ⟨e₁ ≪≫ (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).mapIso e₂⟩
 
-/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image--1`: the finite coefficient
-comparison for the exceptional inverse image.
+/-- The finite coefficient comparison for the exceptional inverse image.
 
 For a morphism `f : X ⟶ Y` of separated finite-type `k`-schemes, `L ∈ Dctf(Y, Λ)` and
 `B = Λ ⧸ J`, there is an isomorphism `(Rf^! L) ⊗ᴸ B ≅ Rf_B^!(L ⊗ᴸ B)`, which after restriction of
 scalars to `Λ` reads `(Rf^! L)_B ≅ Rf^!(L_B)`.
 
-As in the blueprint, `Rf^! L ≅ 𝔻_X Lf^* 𝔻_Y L` (`proposition-six-operations-dctf` (v)), and the
-duality comparisons (`theorem-verdier-biduality--2`) move the reduction through both duals:
-`(𝔻_X Lf^* 𝔻_Y L)_B ≅ RHom(Lf^* 𝔻_Y L, Ra_X^! B) ≅ RHom(Lf^* 𝔻_Y L, Rf^! Ra_Y^! B)
-≅ Rf^! RHom(𝔻_Y L, Ra_Y^! B) ≅ Rf^! (𝔻_Y 𝔻_Y L)_B ≅ Rf^!(L_B)`, the middle step being duality
-against pullback (`lemma-internal-adjunction-two-exchange-formulas--3`). -/
+The isomorphism is the exceptional tensor map `Rf^! L ⊗ᴸ Lf^* N ⟶ Rf^!(L ⊗ᴸ N)` for the constant
+sheaf `N = B` on `Y`, which is invertible by the exceptional Künneth formula applied to the
+squares with identity sides over `Y` and over `Spec k`, composed with the identification
+`Lf^* B ≅ B` of constant sheaves. No algebraic closedness of `k` is needed. -/
 theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]
     [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] [HasCompactification aY]
-    (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
+    (f : X ⟶ Y) (_hf : f ≫ aY = aX) [HasCompactification f]
     {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hL : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
+    (_hL : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
     Nonempty ((reductionModIdeal Λ X J).obj ((R(f)^![Λ]).obj L) ≅
       (R(f)^![Λ]).obj ((reductionModIdeal Λ Y J).obj L)) := by
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
-  letI : QuasiCompact f := inferInstance
+  let : QuasiCompact f := inferInstance
   let B := ModuleCat.of Λ (Λ ⧸ J)
   let N := constantSingle (ModuleCat.{u + 1} Λ) Y B
   have hK := isExceptionalKunneth Λ k f aY
@@ -230,16 +228,16 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}
     (q' := 𝟙 X) (h := f) aY (𝟙 _) sqP sq
   have hh := h.2 L
     (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) B)
-  letI : IsIso (rightDerivedUpperShriekTensorMap f
+  let : IsIso (rightDerivedUpperShriekTensorMap f
       ((L((𝟙 Y)^*[ModuleCat.{u + 1} Λ])).obj L)
       ((L((aY)^*[ModuleCat.{u + 1} Λ])).obj
         (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) B))) := hh
-  haveI := isIso_lowerShriekRightAdjointTensorMap_of_iso_left
+  have := isIso_lowerShriekRightAdjointTensorMap_of_iso_left
     (rightDerivedUpperShriekAdjunction Λ f) (M := (L((𝟙 Y)^*[ModuleCat.{u + 1} Λ])).obj L)
       (M' := L) ((leftDerivedUpperStarId _ Y).app L)
     (N := (L((aY)^*[ModuleCat.{u + 1} Λ])).obj
       (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) B))
-  haveI := isIso_lowerShriekRightAdjointTensorMap_of_iso_right
+  have := isIso_lowerShriekRightAdjointTensorMap_of_iso_right
     (rightDerivedUpperShriekAdjunction Λ f) (M := L)
       (N := (L((aY)^*[ModuleCat.{u + 1} Λ])).obj
         (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) B))
@@ -259,6 +257,7 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}
 
 variable [IsAlgClosed k]
 
+omit [IsAlgClosed k] in
 /-- Blueprint `proposition-six-operations-dctf`, clause (vii), at the finite stage.
 
 Let `k` be algebraically closed, `Λ` a finite ring whose exponent is invertible on `k` (the
