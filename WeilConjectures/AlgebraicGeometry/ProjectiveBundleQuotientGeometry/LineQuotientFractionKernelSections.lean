@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Sectionwise fraction-kernel comparison
 
-Source: Stacks Project, Constructions, Tags 01OA and 01O4.
+## References
+
+* Stacks Project, Constructions, Tags 01OA and 01O4
+* Stacks Project, Constructions, Tags 01OA and 01O4, affine fraction-chart calculation and
+  localization by a degree-one generator
 -/
 
 @[expose] public section
@@ -294,18 +298,7 @@ private theorem kernel_eq_of_unit_charts {S T : Scheme.{u}} (h : T ⟶ S)
   exact ⟨V, htm, hVW.trans hWO,
     hchart A V (hVW.trans hWU) _ (hl.map hVW) m hunit⟩
 
-/-- The fraction-chart calculation identifies the two quotient maps on every section.
-Source: Stacks Project, Constructions, Tags 01OA and 01O4, affine fraction-chart
-calculation and localization by a degree-one generator.
-(blueprint: lem-trf-line-quotient-fraction-kernel-sections).
-
-Proof: on an affine base and a line-trivializing affine, the fraction chart indexed by
-`m` identifies the pulled tautological frame with the scalar multiple `b_m • l`. The
-degree-one chart equation then sends the image of every generator `v` to `b_v • l`,
-which is exactly its image under `q`. The opens `D(b_m)` cover the affine, so the two
-sections have the same zero locus after restriction; sheaf separatedness gives the
-displayed equivalence on each open. Empty charts satisfy the same statement.
--/
+/-- The fraction-chart calculation identifies the two quotient maps on every section. -/
 theorem lineQuotient_fraction_kernel_sections {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (D : TautologicalQuotient E)
     (L : T.Modules) [L.IsInvertible] (q : (tensorPullback h).obj E ⟶ L) [Epi q]

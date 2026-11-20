@@ -55,7 +55,7 @@ therefore identical (`def-weil-pbc-noetherian-ring`,
 `def-weil-pbc-finite-purely-inseparable-extension`, `def-weil-regular-scheme`;
 Algebra 0382). Hence ψ's fibre is geometrically regular over k.
 6. Flatness from step 1 and the fibre conditions from steps 2–5 give regularity
-of ψ by `def-weil-pbc-g-ring` (More on Algebra 07BZ).
+of ψ by `theorem-finite-etale-covers-proper-henselian--2` (More on Algebra 07BZ).
 -/
 theorem isRegular_of_comp_algebraMap_localization
     {A : Type u} {A' : Type v} {C : Type w}

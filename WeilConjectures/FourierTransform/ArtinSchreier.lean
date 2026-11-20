@@ -91,10 +91,10 @@ classical case is `k = ℤ/p`.
 The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
 repository; they are not labels of `blueprint/src` and so are not checked by the build.
 
-The subsection `sk-lem-as-properties` also contains the trace function of `ℒ_{Ψ, a x}`
-(`AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier`, stated for the `ℓ`-adic Weil sheaf
-`AlgebraicGeometry.artinSchreier`, where trace functions are defined) and the cohomology of the
-affine line with coefficients in `ℒ_{Ψ, a x}`
+The subsection `lemma-artin-schreier-character-sheaf` also contains the trace function of
+`ℒ_{Ψ, a x}` (`AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier`, stated for the `ℓ`-adic
+Weil sheaf `AlgebraicGeometry.artinSchreier`, where trace functions are defined) and the cohomology
+of the affine line with coefficients in `ℒ_{Ψ, a x}`
 (`WeilConjectures.FourierTransform.ArtinSchreierCohomology`). The orthogonality
 `e_χ e_{χ'} = 0` and completeness `∑_χ e_χ = 1` of the character projectors fail for a general
 `Λ` (the first when `Λ` has zero divisors, the second when `Λ` lacks the `p`-th roots of unity);
@@ -302,7 +302,7 @@ is a translation `σ_a`, and `a` is unique by
 (`AlgebraicGeometry.AffineSpace.isIso_artinSchreierTorsorMap`) of `AS_q`, this is the
 Artin–Schreier covering lemma for the universal covering `AS_q : 𝔸¹_k ⟶ 𝔸¹_k`, whose source is
 connected; the covering of a function `f` is its base change along `f`.
-(blueprint: `lem-fd-as-cover`) -/
+(blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem exists_eq_artinSchreierTranslation_of_comp_artinSchreierMap (g : 𝔸¹[k] ⟶ 𝔸¹[k])
     (hg : g ≫ AS[k] = AS[k]) : ∃ a : k, g = artinSchreierTranslation k a := by
   obtain ⟨a, ha⟩ := exists_eq_comp_artinSchreierTranslation (𝟙 _) g (by rw [hg, Category.id_comp])
@@ -424,7 +424,8 @@ lemma artinSchreierIdempotent_comp_artinSchreierTranslationAction (Ψ : AddChar 
 
 /-- `e_Ψ` is an idempotent. -/
 lemma isIdempotentElem_artinSchreierIdempotent (Ψ : AddChar k Λ) :
-    IsIdempotentElem (M := End 𝒫[Λ, k]) (artinSchreierIdempotent Ψ) := by
+    IsIdempotentElem (M := End 𝒫[Λ, k]) (.of (artinSchreierIdempotent Ψ)) := by
+  apply End.ext
   change artinSchreierIdempotent Ψ ≫ artinSchreierIdempotent Ψ = artinSchreierIdempotent Ψ
   conv_lhs => arg 2; rw [artinSchreierIdempotent]
   simp only [Preadditive.comp_sum, Linear.comp_smul,
@@ -437,7 +438,8 @@ lemma isIdempotentElem_artinSchreierIdempotent (Ψ : AddChar k Λ) :
 /-- The *Artin–Schreier sheaf* `ℒ_Ψ` on `𝔸¹_k`: the image of the idempotent `e_Ψ` on
 `(AS_q)_* Λ`, that is, the `Ψ`-isotypic component of the pushforward of the constant sheaf
 along the Artin–Schreier map `AS_q : 𝔸¹_k ⟶ 𝔸¹_k`.
-(sketch blueprint: `def-fd-artin-schreier-sheaf`; blueprint: `def-fd-artin-schreier-sheaf`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf--1`; blueprint:
+`lemma-artin-schreier-character-sheaf--1`) -/
 def artinSchreierSheaf (Ψ : AddChar k Λ) :
     Sheaf (Scheme.smallEtaleTopology 𝔸¹[k]) (ModuleCat Λ) :=
   image (artinSchreierIdempotent Ψ)
@@ -451,7 +453,7 @@ lemma image_ι_comp_factorThruImage_artinSchreierIdempotent (Ψ : AddChar k Λ) 
       𝟙 _ := by
   rw [← cancel_mono (image.ι _), ← cancel_epi (factorThruImage _)]
   simp only [Category.assoc, image.fac_assoc, image.fac, Category.id_comp]
-  exact isIdempotentElem_artinSchreierIdempotent Ψ
+  exact congr($((isIdempotentElem_artinSchreierIdempotent Ψ).eq).asHom)
 
 /-- Each `σ_b` acts on `ℒ_Ψ ⊆ (AS_q)_* Λ` by the scalar `Ψ(b)`: `s_Ψ ≫ σ_b = Ψ(b) • s_Ψ`. -/
 lemma image_ι_artinSchreierIdempotent_comp_artinSchreierTranslationAction
@@ -465,7 +467,8 @@ lemma image_ι_artinSchreierIdempotent_comp_artinSchreierTranslationAction
 `X`, where `f` is viewed as a morphism `X ⟶ 𝔸¹_k`. The variants `ℒ_{ψ⁻¹, f}` and
 `ℒ_{ψ(a f)}` of the blueprint are `artinSchreierSheafOf X Ψ⁻¹ f` and
 `artinSchreierSheafOf X Ψ (a • f)`.
-(sketch blueprint: `def-fd-artin-schreier-sheaf`; blueprint: `def-fd-artin-schreier-sheaf`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf--1`; blueprint:
+`lemma-artin-schreier-character-sheaf--1`) -/
 def artinSchreierSheafOf (X : Scheme.{u}) [X.Over (Spec (.of k))] (Ψ : AddChar k Λ)
     (f : Γ(X, ⊤)) : Sheaf X.smallEtaleTopology (ModuleCat Λ) :=
   (AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ ↦ f)^*[ModuleCat Λ].obj
@@ -506,9 +509,9 @@ instance invertible_card_ulift_zmod {p : ℕ} [NeZero p] [Invertible (p : Λ)] :
 /-- For a scheme `X` of characteristic `p`, the Artin–Schreier sheaf `ℒ_{Ψ, f}` of a global
 function `f` and an additive character `Ψ` of `ℤ/p`, where `X` is viewed as a scheme over
 `𝔽_p` by `AlgebraicGeometry.Scheme.overSpecZModOfCharP`. This is the construction of the
-blueprint definition `def-fd-artin-schreier-sheaf` (sketch blueprint:
-`def-fd-artin-schreier-sheaf`): the `Ψ`-isotypic part, for a character `Ψ` of `𝔽_p`, of the
-Artin–Schreier covering `T ^ p - T = f`. -/
+blueprint definition `lemma-artin-schreier-character-sheaf--1` (sketch blueprint:
+`lemma-artin-schreier-character-sheaf--1`): the `Ψ`-isotypic part, for a character `Ψ` of `𝔽_p`, of
+the Artin–Schreier covering `T ^ p - T = f`. -/
 def artinSchreierSheafZMod {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)] (X : Scheme.{u})
     [CharP Γ(X, ⊤) p] (Ψ : AddChar (ZMod p) Λ) (f : Γ(X, ⊤)) :
     Sheaf X.smallEtaleTopology (ModuleCat Λ) :=
@@ -536,7 +539,7 @@ for any morphism `g : X' ⟶ X`, `g^* ℒ_{Ψ, f} ≅ ℒ_{Ψ, g^* f}`. This is
 `AlgebraicGeometry.Etale.artinSchreierSheafOfPullbackIso`, every morphism being one over
 `𝔽_p` (`AlgebraicGeometry.Scheme.Hom.isOver_overSpecZModOfCharP`): the Artin–Schreier
 covering is compatible with base change.
-(sketch blueprint: `def-fd-artin-schreier-sheaf`; blueprint: `def-fd-kernel`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf--1`; blueprint: `sec-Fourier-inversion`) -/
 def artinSchreierSheafZModPullbackIso {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
     {X X' : Scheme.{u}} [CharP Γ(X, ⊤) p] [CharP Γ(X', ⊤) p] (g : X' ⟶ X)
     (Ψ : AddChar (ZMod p) Λ) (f : Γ(X, ⊤)) :
@@ -684,7 +687,7 @@ instance isIso_upperStar_map_image_ι_comp_counit (Ψ : AddChar k Λ) :
 /-- **The Artin–Schreier sheaf is trivialized by the Artin–Schreier covering**:
 `AS_q^* ℒ_Ψ ≅ Λ`, the adjoint of the inclusion `ℒ_Ψ ⟶ (AS_q)_* Λ`. In particular `ℒ_Ψ` is lisse
 of rank one: it becomes the constant sheaf `Λ` on the finite étale covering `AS_q`.
-(blueprint: `lem-fd-as-characters`, rank one) -/
+(blueprint: `lemma-artin-schreier-character-sheaf`, rank one) -/
 def artinSchreierSheafUpperStarIso (Ψ : AddChar k Λ) :
     (AS[k])^*[ModuleCat.{u + 1} Λ].obj (artinSchreierSheaf Ψ) ≅ 𝟙_ _ :=
   asIso ((AS[k])^*[ModuleCat.{u + 1} Λ].map (image.ι (artinSchreierIdempotent Ψ)) ≫
@@ -716,7 +719,8 @@ variable {k : Type u} [Field k] [Fintype k] [Invertible (Fintype.card k : Λ)]
 
 /-- The Artin–Schreier sheaf is lisse: it is trivialized by the finite étale surjective
 covering `AS_q` (`AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso`).
-(sketch blueprint: `sk-lem-as-properties`; blueprint: `lem-fd-as-lisse`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`; blueprint:
+`lemma-artin-schreier-character-sheaf--2`) -/
 instance isLocallyConstantSheaf_artinSchreierSheaf (Ψ : AddChar k Λ) :
     Scheme.IsLocallyConstantSheaf (artinSchreierSheaf Ψ) := by
   have := etale_artinSchreierMap (k := k)
@@ -735,7 +739,7 @@ instance isLocallyConstantSheaf_artinSchreierSheafOf (X : Scheme.{u}) [X.Over (S
 
 /-- The Artin–Schreier sheaf is rigidified along the zero section `0 : Spec k ⟶ 𝔸¹_k`:
 `Λ ≅ 0^* ℒ_Ψ`.
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheaf_zero (Ψ : AddChar k Λ) :
     Nonempty (𝟙_ _ ≅ (AffineSpace.zeroSection PUnit (Spec (.of k)))^*[ModuleCat Λ].obj
       (artinSchreierSheaf Ψ)) :=
@@ -999,7 +1003,7 @@ with the addition `m` and the two projections `u₁, u₂`,
 ```
 
 `m^* ℒ_Ψ ≅ u₁^* ℒ_Ψ ⊗ u₂^* ℒ_Ψ`.
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheaf_add (Ψ : AddChar k Λ) :
     Nonempty ((AffineSpace.add PUnit (Spec (.of k)))^*[ModuleCat Λ].obj
         (artinSchreierSheaf Ψ) ≅
@@ -1075,7 +1079,7 @@ theorem nonempty_iso_artinSchreierSheaf_add (Ψ : AddChar k Λ) :
     infer_instance
 
 /-- The Artin–Schreier sheaf of the trivial character is the constant sheaf `Λ`.
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheaf_one :
     Nonempty (artinSchreierSheaf (1 : AddChar k Λ) ≅ 𝟙_ _) := by
   -- the constant functions `ε : Λ ⟶ (AS_q)_* Λ` are invariant, so they land in `ℒ_1`, and the
@@ -1106,7 +1110,7 @@ theorem nonempty_iso_artinSchreierSheaf_one :
 open Functor.LaxMonoidal Functor.OplaxMonoidal in
 /-- The Artin–Schreier sheaf turns multiplication of characters into tensor product of
 sheaves, `ℒ_Ψ ⊗ ℒ_{Ψ'} ≅ ℒ_{Ψ Ψ'}`.
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheaf_mul (Ψ Ψ' : AddChar k Λ) :
     Nonempty (artinSchreierSheaf Ψ ⊗ artinSchreierSheaf Ψ' ≅ artinSchreierSheaf (Ψ * Ψ')) := by
   -- the product `s_Ψ ⊗ s_Ψ' ⟶ (AS_q)_* Λ` of the inclusions is `Ψ Ψ'`-isotypic, so it factors
@@ -1193,7 +1197,7 @@ lemma lowerStar_map_artinSchreierTranslationAction_comp (c : kˣ) (a : k)
 
 /-- The pullback of the Artin–Schreier sheaf along the scaling `[c] : x ↦ c x` by a unit
 `c ∈ kˣ` is the Artin–Schreier sheaf of the character `Ψ(c ·)`: `[c]^* ℒ_Ψ ≅ ℒ_{Ψ(c ·)}`.
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheaf_smul (Ψ : AddChar k Λ) (c : kˣ) :
     Nonempty ((AffineSpace.smul PUnit (Spec (.of k))
         ((Scheme.ΓSpecIso (.of k)).inv.hom c))^*[ModuleCat Λ].obj (artinSchreierSheaf Ψ) ≅
@@ -1273,7 +1277,7 @@ theorem nonempty_iso_artinSchreierSheaf_smul (Ψ : AddChar k Λ) (c : kˣ) :
     rfl
 
 /-- The inverse of `ℒ_Ψ` is `ℒ_{Ψ⁻¹}`.
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheaf_inv (Ψ : AddChar k Λ) :
     Nonempty (artinSchreierSheaf Ψ ⊗ artinSchreierSheaf Ψ⁻¹ ≅ 𝟙_ _) := by
   obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_mul Ψ Ψ⁻¹
@@ -1282,19 +1286,19 @@ theorem nonempty_iso_artinSchreierSheaf_inv (Ψ : AddChar k Λ) :
 
 /-- Over a finite coefficient ring the Artin–Schreier sheaf has finite stalks: it has the tensor
 inverse `ℒ_{Ψ⁻¹}`, so its stalks are invertible modules over the finite ring `Λ`.
-(sketch blueprint: `prop-kernel-lisse`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 instance isFiniteSheaf_artinSchreierSheaf [Finite Λ] (Ψ : AddChar k Λ) :
     Scheme.IsFiniteSheaf (artinSchreierSheaf Ψ) :=
   .of_tensorIso (nonempty_iso_artinSchreierSheaf_inv Ψ).some
 
 /-- Over a finite coefficient ring the Artin–Schreier sheaf is constructible, being finite
-locally constant. (sketch blueprint: `prop-kernel-lisse`) -/
+locally constant. (sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 instance isConstructibleSheaf_artinSchreierSheaf [Finite Λ] (Ψ : AddChar k Λ) :
     Scheme.IsConstructibleSheaf (artinSchreierSheaf Ψ) :=
   Scheme.IsFiniteLocallyConstantSheaf.isConstructibleSheaf {}
 
 /-- Over a finite coefficient ring the Artin–Schreier sheaf `ℒ_{Ψ, f}` is constructible, as the
-pullback of a constructible sheaf. (sketch blueprint: `prop-kernel-lisse`) -/
+pullback of a constructible sheaf. (sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 instance isConstructibleSheaf_artinSchreierSheafOf [Finite Λ] (X : Scheme.{u})
     [X.Over (Spec (.of k))] (Ψ : AddChar k Λ) (f : Γ(X, ⊤)) :
     Scheme.IsConstructibleSheaf (artinSchreierSheafOf X Ψ f) :=
@@ -1302,7 +1306,7 @@ instance isConstructibleSheaf_artinSchreierSheafOf [Finite Λ] (X : Scheme.{u})
 
 /-- The inverse of `ℒ_Ψ` is also `(-1)^* ℒ_Ψ`, the pullback along the reflection `x ↦ -x`,
 since `(-1)^* ℒ_Ψ ≅ ℒ_{Ψ⁻¹}` by `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_smul`.
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheaf_neg (Ψ : AddChar k Λ) :
     Nonempty (artinSchreierSheaf Ψ ⊗
         (AffineSpace.neg PUnit (Spec (.of k)))^*[ModuleCat Λ].obj (artinSchreierSheaf Ψ) ≅
@@ -1323,7 +1327,7 @@ composite
 X ----> Spec k --0--> 𝔸¹_k
 ```
 
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheafOf_zero (Ψ : AddChar k Λ) :
     Nonempty (artinSchreierSheafOf X Ψ 0 ≅ 𝟙_ _) := by
   obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_zero Ψ
@@ -1334,7 +1338,7 @@ theorem nonempty_iso_artinSchreierSheafOf_zero (Ψ : AddChar k Λ) :
 
 /-- The Artin–Schreier sheaf turns addition of functions into tensor product of sheaves,
 `ℒ_{Ψ, f} ⊗ ℒ_{Ψ, g} ≅ ℒ_{Ψ, f + g}`.
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheafOf_add (Ψ : AddChar k Λ) (f g : Γ(X, ⊤)) :
     Nonempty (artinSchreierSheafOf X Ψ f ⊗ artinSchreierSheafOf X Ψ g ≅
       artinSchreierSheafOf X Ψ (f + g)) := by
@@ -1361,7 +1365,7 @@ theorem nonempty_iso_artinSchreierSheafOf_add (Ψ : AddChar k Λ) (f g : Γ(X, �
 
 /-- The Artin–Schreier sheaf of the trivial character is the constant sheaf: `ℒ_{1, f} ≅ Λ`,
 the pullback of `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_one` along `f`.
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheafOf_one (f : Γ(X, ⊤)) :
     Nonempty (artinSchreierSheafOf X (1 : AddChar k Λ) f ≅ 𝟙_ _) := by
   obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_one (k := k) (Λ := Λ)
@@ -1369,7 +1373,7 @@ theorem nonempty_iso_artinSchreierSheafOf_one (f : Γ(X, ⊤)) :
 
 /-- The Artin–Schreier sheaf turns multiplication of characters into tensor product of
 sheaves, `ℒ_{Ψ, f} ⊗ ℒ_{Ψ', f} ≅ ℒ_{Ψ Ψ', f}`.
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheafOf_mul (Ψ Ψ' : AddChar k Λ) (f : Γ(X, ⊤)) :
     Nonempty (artinSchreierSheafOf X Ψ f ⊗ artinSchreierSheafOf X Ψ' f ≅
       artinSchreierSheafOf X (Ψ * Ψ') f) := by
@@ -1377,7 +1381,7 @@ theorem nonempty_iso_artinSchreierSheafOf_mul (Ψ Ψ' : AddChar k Λ) (f : Γ(X,
   exact ⟨Functor.Monoidal.μIso _ _ _ ≪≫ Functor.mapIso _ e⟩
 
 /-- The inverse of `ℒ_{Ψ, f}` is `ℒ_{Ψ, -f}`.
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheafOf_neg (Ψ : AddChar k Λ) (f : Γ(X, ⊤)) :
     Nonempty (artinSchreierSheafOf X Ψ f ⊗ artinSchreierSheafOf X Ψ (-f) ≅ 𝟙_ _) := by
   obtain ⟨e⟩ := nonempty_iso_artinSchreierSheafOf_add X Ψ f (-f)
@@ -1387,7 +1391,7 @@ theorem nonempty_iso_artinSchreierSheafOf_neg (Ψ : AddChar k Λ) (f : Γ(X, ⊤
 /-- The inverse of `ℒ_{Ψ, f}` is also `ℒ_{Ψ⁻¹, f}`; together with
 `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg` this identifies
 `ℒ_{Ψ, -f}` with `ℒ_{Ψ⁻¹, f}`, as used for the kernel of the inverse Fourier transform.
-(sketch blueprint: `sk-lem-as-properties`) -/
+(sketch blueprint: `lemma-artin-schreier-character-sheaf`) -/
 theorem nonempty_iso_artinSchreierSheafOf_inv (Ψ : AddChar k Λ) (f : Γ(X, ⊤)) :
     Nonempty (artinSchreierSheafOf X Ψ f ⊗ artinSchreierSheafOf X Ψ⁻¹ f ≅ 𝟙_ _) := by
   obtain ⟨e⟩ := nonempty_iso_artinSchreierSheafOf_mul X Ψ Ψ⁻¹ f
@@ -1397,7 +1401,7 @@ theorem nonempty_iso_artinSchreierSheafOf_inv (Ψ : AddChar k Λ) (f : Γ(X, ⊤
 /-- The Artin–Schreier sheaf of `-f` is that of `f` for the inverse character:
 `ℒ_{Ψ, -f} ≅ ℒ_{Ψ⁻¹, f}`, the pullback along `f` of `(-1)^* ℒ_Ψ ≅ ℒ_{Ψ⁻¹}`
 (`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_smul`).
-(blueprint: `lem-fd-as-characters`, `lem-fd-as-lisse`) -/
+(blueprint: `lemma-artin-schreier-character-sheaf`, `lemma-artin-schreier-character-sheaf--2`) -/
 theorem nonempty_iso_artinSchreierSheafOf_neg_inv (Ψ : AddChar k Λ) (f : Γ(X, ⊤)) :
     Nonempty (artinSchreierSheafOf X Ψ (-f) ≅ artinSchreierSheafOf X Ψ⁻¹ f) := by
   obtain ⟨e⟩ := nonempty_iso_artinSchreierSheaf_smul Ψ (-1)
@@ -1416,7 +1420,7 @@ theorem nonempty_iso_artinSchreierSheafOf_neg_inv (Ψ : AddChar k Λ) (f : Γ(X,
 function `x` of `𝔸¹_k` is `ℒ_Ψ` itself: the Artin–Schreier covering of `x` is
 `AS_q : 𝔸¹_k ⟶ 𝔸¹_k`, `y ↦ y ^ q - y`, on which `k` acts by the translations `y ↦ y + a`, since
 the function `x : 𝔸¹_k ⟶ 𝔸¹_k` is the identity.
-(blueprint: `lem-fd-as-cover-affine-line`) -/
+(blueprint: `lemma-integral-linear-character--2`) -/
 def artinSchreierSheafOfCoordIso (Ψ : AddChar k Λ) :
     artinSchreierSheafOf 𝔸¹[k] Ψ (AffineSpace.coord _ PUnit.unit) ≅ artinSchreierSheaf Ψ :=
   eqToIso (by
@@ -1438,7 +1442,7 @@ private lemma sum_invOf_card_mul_apply_mul [IsDomain Λ] [DecidableEq k] {Ψ : A
 open AddChar in
 /-- The character idempotents are orthogonal: on the image of `e_{Ψ(b ·)}`, the idempotent
 `e_{Ψ(b' ·)}` is the identity if `b = b'` and zero otherwise.
-(blueprint: `lem-fd-as-characters`) -/
+(blueprint: `lemma-artin-schreier-character-sheaf`) -/
 lemma image_ι_artinSchreierIdempotent_mulShift_comp [IsDomain Λ] [DecidableEq k]
     {Ψ : AddChar k Λ} (hΨ : Ψ.IsPrimitive) (b b' : k) :
     image.ι (artinSchreierIdempotent (Ψ.mulShift b)) ≫
@@ -1458,7 +1462,7 @@ lemma image_ι_artinSchreierIdempotent_mulShift_comp [IsDomain Λ] [DecidableEq 
 
 open AddChar in
 /-- The character idempotents sum to the identity: `∑_{b ∈ k} e_{Ψ(b ·)} = 1`.
-(blueprint: `lem-fd-as-characters`) -/
+(blueprint: `lemma-artin-schreier-character-sheaf`) -/
 lemma sum_artinSchreierIdempotent_mulShift [IsDomain Λ] {Ψ : AddChar k Λ}
     (hΨ : Ψ.IsPrimitive) : ∑ b : k, artinSchreierIdempotent (Ψ.mulShift b) = 𝟙 _ := by
   classical
@@ -1481,7 +1485,7 @@ idempotents are orthogonal and sum to the identity, by the orthogonality relatio
 Each summand is lisse of rank one (`AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso`),
 and the summand of `b = 0` is the constant sheaf
 (`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_one`).
-(blueprint: `lem-fd-as-characters`) -/
+(blueprint: `lemma-artin-schreier-character-sheaf`) -/
 noncomputable def artinSchreierPushforwardIsoBiproduct [IsDomain Λ] (Ψ : AddChar k Λ)
     (hΨ : Ψ.IsPrimitive) :
     (AS[k])_*[ModuleCat Λ].obj (𝟙_ _) ≅ ⨁ fun b : k ↦ artinSchreierSheaf (Ψ.mulShift b) :=

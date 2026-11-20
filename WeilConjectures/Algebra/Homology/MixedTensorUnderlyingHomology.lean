@@ -358,7 +358,6 @@ private theorem homComp_naturality (R A Aq : Type u)
   have heq : UR.map (HomologicalComplex.homologyMap ((T.map g).app F) i) ≫ tq.inv ≫
       H.map b.inv ≫ hq.hom ≫ UA.map j.inv =
     t.inv ≫ H.map a.inv ≫ ha.hom ≫ UA.map (HomologicalComplex.homologyMap v i) := by
-    try simp only [Category.assoc]
     erw [reassoc_of% hth, hj, ← reassoc_of% hn', hvh]
   have he := ConcreteCategory.congr_hom heq x
   exact he
@@ -421,7 +420,6 @@ private theorem homComp_scalar (R A : Type u)
   have he : UR.map (HomologicalComplex.homologyMap ((T.map g).app F) i) ≫ t.inv ≫
         H.map e.inv ≫ h.hom =
       t.inv ≫ H.map e.inv ≫ h.hom ≫ UA.map (HomologicalComplex.homologyMap v i) := by
-    try simp only [Category.assoc]
     erw [reassoc_of% hg, ← reassoc_of% hc, hv]
   have he' := ConcreteCategory.congr_hom he x
   have hs : HomologicalComplex.homologyMap v i = a • 𝟙 (C.homology i) := by

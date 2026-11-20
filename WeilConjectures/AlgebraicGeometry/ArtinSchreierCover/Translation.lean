@@ -19,7 +19,8 @@ import WeilConjectures.Mathlib.Algebra.CharP.Algebra
 For a scheme `S` with `p = 0` on `S` and `f ∈ Γ(S, ⊤)`, the cover
 `adjoinRootCover S (T ^ p - T - f)` carries the translations `T ↦ T + a`, `a ∈ 𝔽_p`, which
 preserve the equation since `a ^ p = a`; the inverse of `T ↦ T + a` is `T ↦ T - a`.
-Source: blueprint, lem-fd-as-cover, step (3); lem-sc-field-artin-schreier-kernel.
+Source: blueprint, lemma-artin-schreier-character-sheaf, step (3);
+lem-sc-field-artin-schreier-kernel.
 -/
 
 @[expose] public section
@@ -163,7 +164,7 @@ lemma artinSchreierTranslation_add (hP : P = X ^ p - X - C f) (hchar : (p : Γ(S
 /-- The translation by `a`, as an automorphism of the Artin–Schreier cover over `S`. -/
 def artinSchreierTranslationIso (hP : P = X ^ p - X - C f) (hchar : (p : Γ(S, ⊤)) = 0)
     (a : ZMod p) : Aut (adjoinRootCover S P) :=
-  Over.isoMk
+  .of <| Over.isoMk
     { hom := artinSchreierTranslation hP hchar a
       inv := artinSchreierTranslation hP hchar (-a)
       hom_inv_id := by
@@ -175,7 +176,7 @@ def artinSchreierTranslationIso (hP : P = X ^ p - X - C f) (hchar : (p : Γ(S, �
 @[simp]
 lemma artinSchreierTranslationIso_hom_left (hP : P = X ^ p - X - C f)
     (hchar : (p : Γ(S, ⊤)) = 0) (a : ZMod p) :
-    (artinSchreierTranslationIso hP hchar a).hom.left = artinSchreierTranslation hP hchar a :=
+    (artinSchreierTranslationIso hP hchar a).asIso.hom.left = artinSchreierTranslation hP hchar a :=
   rfl
 
 /-- The translation action of `𝔽_p` on the Artin–Schreier cover. -/
@@ -183,20 +184,23 @@ def artinSchreierAction (hP : P = X ^ p - X - C f) (hchar : (p : Γ(S, ⊤)) = 0
     Multiplicative (ZMod p) →* Aut (adjoinRootCover S P) where
   toFun a := artinSchreierTranslationIso hP hchar a.toAdd
   map_one' := by
+    apply Aut.ext
+    rw [Aut.one_asIso]
     ext : 1
     refine Over.OverMorphism.ext ?_
     exact artinSchreierTranslation_zero hP hchar
   map_mul' a b := by
+    apply Aut.ext
+    rw [Aut.mul_asIso]
     ext : 1
     refine Over.OverMorphism.ext ?_
-    rw [Aut.Aut_mul_def]
     exact (congr_arg (artinSchreierTranslation hP hchar) (add_comm a.toAdd b.toAdd)).trans
       (artinSchreierTranslation_add hP hchar _ _)
 
 @[simp]
 lemma artinSchreierAction_hom_left (hP : P = X ^ p - X - C f) (hchar : (p : Γ(S, ⊤)) = 0)
     (a : ZMod p) :
-    (artinSchreierAction hP hchar (Multiplicative.ofAdd a)).hom.left =
+    (artinSchreierAction hP hchar (Multiplicative.ofAdd a)).asIso.hom.left =
       artinSchreierTranslation hP hchar a :=
   rfl
 

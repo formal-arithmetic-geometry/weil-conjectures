@@ -8,6 +8,7 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Regularity along a flat local map with regular closed fibre

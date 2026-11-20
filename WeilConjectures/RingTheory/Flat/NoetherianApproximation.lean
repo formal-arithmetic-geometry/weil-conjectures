@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+import WeilConjectures.Mathlib.RingTheory.TensorProduct.DirectLimitFG
 
 /-!
 # Flatness of modules descends to a finite stage
@@ -379,7 +380,7 @@ theorem exists_finset_lTensor_eq_zero_of_injective [IsNoetherianRing R₀] (p : 
       (TensorProduct.comm R₀ M₀ p ξ) = ψ.rTensor M₀ ((Submodule.inclusion hPQ).rTensor M₀ t) := by
     rw [LinearMap.rTensor_comp, LinearMap.comp_apply, LinearMap.rTensor_comp, LinearMap.comp_apply]
   rw [← hψ, ← (TensorProduct.comm R₀ p M₀).apply_symm_apply ξ, TensorProduct.comm_symm,
-    LinearMap.lTensor_comm, key, hQ, map_zero, map_zero]
+    LinearMap.lTensor_comm, key, hQ, LinearMap.map_zero, LinearEquiv.map_zero]
 
 
 end FiniteStage
@@ -588,8 +589,47 @@ lemma map_val_eq_rTensor {A : Type u} [CommRing A] [Algebra R₀ A] {R : Subalge
   | add a b ha hb => simp only [map_add, ha, hb]
   | tmul a s => rfl
 
-set_option maxHeartbeats 1000000 in
--- The proof is long and elaborates many tensor product instances.
+/-- Compactness gives one finite stage that is flat at every prime coming from `A`. -/
+private lemma exists_fg_forall_flat_localizedModule_baseChange {A : Type u} [CommRing A]
+    [Algebra R₀ A] [IsNoetherianRing R₀] [Algebra.FiniteType R₀ S₀] [Module.Finite S₀ M₀]
+    (hA : Flat A ((A ⊗[R₀] S₀) ⊗[S₀] M₀)) :
+    ∃ R : Subalgebra R₀ A, R.FG ∧ ∀ q : PrimeSpectrum (A ⊗[R₀] S₀),
+      Flat R (LocalizedModule
+        (q.asIdeal.comap (Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀)).toRingHom).primeCompl
+        ((R ⊗[R₀] S₀) ⊗[S₀] M₀)) := by
+  classical
+  -- The set of primes of `A ⊗[R₀] S₀` at which `R` is flat.
+  let W (R : Subalgebra R₀ A) : Set (PrimeSpectrum (A ⊗[R₀] S₀)) :=
+    {q | Flat R (LocalizedModule
+      (q.asIdeal.comap (Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀)).toRingHom).primeCompl
+      ((R ⊗[R₀] S₀) ⊗[S₀] M₀))}
+  have hcomap {R R' : Subalgebra R₀ A} (h : R ≤ R') (q : Ideal (A ⊗[R₀] S₀)) :
+      (q.comap (Algebra.TensorProduct.map R'.val (AlgHom.id R₀ S₀)).toRingHom).comap
+        (Algebra.TensorProduct.map (Subalgebra.inclusion h) (AlgHom.id R₀ S₀)).toRingHom =
+      q.comap (Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀)).toRingHom := by
+    rw [Ideal.comap_comap]
+    congr 1
+    exact RingHom.ext fun x ↦ map_val_map_inclusion h x
+  have hW {R R' : Subalgebra R₀ A} (h : R ≤ R') : W R ⊆ W R' := by
+    intro q hq
+    apply flat_localizedModule_baseChange_map (M₀ := M₀)
+      (Subalgebra.inclusion h) _ _ (hcomap h q.asIdeal)
+    exact hq
+  have hWopen (R : {R : Subalgebra R₀ A // R.FG}) : IsOpen (W R.1) := by
+    have : Algebra.FiniteType R₀ R.1 := (Subalgebra.fg_iff_finiteType _).mp R.2
+    have : IsNoetherianRing R.1 := Algebra.FiniteType.isNoetherianRing R₀ R.1
+    exact isOpen_setOf_flat_localizedModule_comap (M₀ := M₀) R.1
+  have hWcov (q : PrimeSpectrum (A ⊗[R₀] S₀)) :
+      ∃ R : {R : Subalgebra R₀ A // R.FG}, q ∈ W R.1 := by
+    obtain ⟨R, hR, -, hflat⟩ := exists_fg_flat_localizedModule_baseChange hA q.asIdeal
+    exact ⟨⟨R, hR⟩, hflat⟩
+  have : Nonempty {R : Subalgebra R₀ A // R.FG} := ⟨⟨⊥, Subalgebra.fg_bot⟩⟩
+  obtain ⟨⟨R₁, hR₁⟩, hK⟩ := isCompact_univ.elim_directed_cover (fun R ↦ W R.1) hWopen
+    (fun q _ ↦ Set.mem_iUnion.mpr (hWcov q))
+    fun (R R' : {R : Subalgebra R₀ A // R.FG}) ↦ ⟨⟨R.1 ⊔ R'.1, R.2.sup R'.2⟩,
+      hW le_sup_left, hW le_sup_right⟩
+  exact ⟨R₁, hR₁, fun q ↦ hK (Set.mem_univ q)⟩
+
 /-- **Flatness descends to a finitely generated subalgebra** (Stacks, Tag 02JO; EGA IV₃, 11.2.6).
 Let `R₀` be noetherian, `S₀` a finite type `R₀`-algebra, `M₀` a finite `S₀`-module and `A` an
 `R₀`-algebra such that `(A ⊗[R₀] S₀) ⊗[S₀] M₀` is flat over `A`. Then there is a finitely
@@ -608,39 +648,15 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
     ∃ R₁ : Subalgebra R₀ A, R₁.FG ∧
       ∀ R : Subalgebra R₀ A, R₁ ≤ R → Flat R ((R ⊗[R₀] S₀) ⊗[S₀] M₀) := by
   classical
-  -- The set of primes of `A ⊗[R₀] S₀` at which `R` is flat.
-  let W (R : Subalgebra R₀ A) : Set (PrimeSpectrum (A ⊗[R₀] S₀)) :=
-    {q | Flat R (LocalizedModule
-      (q.asIdeal.comap (Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀)).toRingHom).primeCompl
-      ((R ⊗[R₀] S₀) ⊗[S₀] M₀))}
-  have hcomap {R R' : Subalgebra R₀ A} (h : R ≤ R') (q : Ideal (A ⊗[R₀] S₀)) :
-      (q.comap (Algebra.TensorProduct.map R'.val (AlgHom.id R₀ S₀)).toRingHom).comap
-        (Algebra.TensorProduct.map (Subalgebra.inclusion h) (AlgHom.id R₀ S₀)).toRingHom =
-      q.comap (Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀)).toRingHom := by
-    rw [Ideal.comap_comap]
-    congr 1
-    exact RingHom.ext fun x ↦ map_val_map_inclusion h x
-  have hW {R R' : Subalgebra R₀ A} (h : R ≤ R') : W R ⊆ W R' := fun q hq ↦
-    flat_localizedModule_baseChange_map (Subalgebra.inclusion h) _ _ (hcomap h q.asIdeal) hq
-  have hWopen (R : {R : Subalgebra R₀ A // R.FG}) : IsOpen (W R.1) := by
-    have : Algebra.FiniteType R₀ R.1 := (Subalgebra.fg_iff_finiteType _).mp R.2
-    have : IsNoetherianRing R.1 := Algebra.FiniteType.isNoetherianRing R₀ R.1
-    exact isOpen_setOf_flat_localizedModule_comap (M₀ := M₀) R.1
-  have hWcov (q : PrimeSpectrum (A ⊗[R₀] S₀)) :
-      ∃ R : {R : Subalgebra R₀ A // R.FG}, q ∈ W R.1 := by
-    obtain ⟨R, hR, -, hflat⟩ := exists_fg_flat_localizedModule_baseChange hA q.asIdeal
-    exact ⟨⟨R, hR⟩, hflat⟩
-  have : Nonempty {R : Subalgebra R₀ A // R.FG} := ⟨⟨⊥, Subalgebra.fg_bot⟩⟩
-  obtain ⟨⟨R₁, hR₁⟩, hK⟩ := isCompact_univ.elim_directed_cover (fun R ↦ W R.1) hWopen
-    (fun q _ ↦ Set.mem_iUnion.mpr (hWcov q))
-    fun (R R' : {R : Subalgebra R₀ A // R.FG}) ↦ ⟨⟨R.1 ⊔ R'.1, R.2.sup R'.2⟩,
-      hW le_sup_left, hW le_sup_right⟩
+  obtain ⟨R₁, hR₁, hK⟩ := exists_fg_forall_flat_localizedModule_baseChange hA
+  -- Elaborate the flat locus over an abstract algebra, then specialize to subalgebras.
+  let F (R : Type u) [CommRing R] [Algebra R₀ R] : Set (PrimeSpectrum (R ⊗[R₀] S₀)) :=
+    {Q | Flat R (LocalizedModule Q.asIdeal.primeCompl ((R ⊗[R₀] S₀) ⊗[S₀] M₀))}
   -- The flat locus `U` of `R₁` and its closed complement `Z = V(I)`.
   have : Algebra.FiniteType R₀ R₁ := (Subalgebra.fg_iff_finiteType _).mp hR₁
   have : IsNoetherianRing R₁ := Algebra.FiniteType.isNoetherianRing R₀ R₁
-  set U := {Q : PrimeSpectrum (R₁ ⊗[R₀] S₀) |
-      Flat R₁ (LocalizedModule Q.asIdeal.primeCompl ((R₁ ⊗[R₀] S₀) ⊗[S₀] M₀))}
-  have hU : IsOpen U := isOpen_setOf_flat_localizedModule_baseChange R₁
+  set U : Set (PrimeSpectrum (R₁ ⊗[R₀] S₀)) := F R₁
+  have hU : IsOpen U := isOpen_setOf_flat_localizedModule_baseChange (M₀ := M₀) R₁
   set Z := Uᶜ
   set I := PrimeSpectrum.vanishingIdeal Z
   set φ₁ := Algebra.TensorProduct.map R₁.val (AlgHom.id R₀ S₀)
@@ -653,62 +669,36 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
     obtain ⟨m, hm, hle⟩ := Ideal.exists_le_maximal _ hne
     have hmZ := hZ (PrimeSpectrum.comap φ₁.toRingHom ⟨m, hm.isPrime⟩)
       (Ideal.map_le_iff_le_comap.mp hle)
-    exact hmZ (hK (Set.mem_univ (⟨m, hm.isPrime⟩ : PrimeSpectrum (A ⊗[R₀] S₀))))
-  -- `1 = ∑ cᵢ φ₁(fᵢ)` with `fᵢ ∈ I`.
-  have h1 : (1 : A ⊗[R₀] S₀) ∈ Submodule.span (A ⊗[R₀] S₀) (φ₁ '' I) := by
-    change (1 : A ⊗[R₀] S₀) ∈ I.map φ₁
-    rw [hI]
-    exact Submodule.mem_top
-  obtain ⟨n, c, g, hcg⟩ := Submodule.mem_span_set'.mp h1
-  choose a ha hag using fun i ↦ (g i).2
-  -- Lift the coefficients `cᵢ` to a finite stage.
-  choose C hC hCc using fun i ↦ TensorProduct.Algebra.exists_of_fg (R := R₀) (N := S₀) (c i)
-  choose c' hc' using hCc
-  obtain ⟨s₁, hs₁⟩ := hR₁
-  choose s hs using hC
-  set R₂' : Subalgebra R₀ A :=
-    Algebra.adjoin R₀ ((s₁ ∪ Finset.univ.biUnion s : Finset A) : Set A)
-  have hR₁₂ : R₁ ≤ R₂' := by
-    rw [← hs₁]
-    exact Algebra.adjoin_mono (by simp)
-  have hC₂ (i : Fin n) : C i ≤ R₂' := by
-    rw [← hs i]
-    exact Algebra.adjoin_mono (fun x hx ↦ by
-      simp only [Finset.coe_union, Finset.coe_biUnion, Finset.coe_univ, Set.mem_univ,
-        Set.iUnion_true, Set.mem_union, Set.mem_iUnion]
-      exact Or.inr ⟨i, hx⟩)
-  set ψ := Algebra.TensorProduct.map (Subalgebra.inclusion hR₁₂) (AlgHom.id R₀ S₀)
-  set w : R₂' ⊗[R₀] S₀ := ∑ i, LinearMap.rTensor S₀ (Subalgebra.inclusion (hC₂ i)).toLinearMap
-    (c' i) * ψ (a i)
-  have hw : LinearMap.rTensor S₀ R₂'.val.toLinearMap w =
-      LinearMap.rTensor S₀ R₂'.val.toLinearMap 1 := by
-    rw [← map_val_eq_rTensor, ← map_val_eq_rTensor, map_one, map_sum, ← hcg]
-    refine Finset.sum_congr rfl fun i _ ↦ ?_
-    rw [map_mul, ← hag i, smul_eq_mul, ← map_eq_rTensor, map_val_map_inclusion,
-      map_val_map_inclusion, map_val_eq_rTensor, hc' i]
-  obtain ⟨R₂, hR₂, hR₂fg, hw₂⟩ := TensorProduct.Algebra.eq_of_fg_of_subtype_eq
-    (Subalgebra.fg_adjoin_finset _) hw
+    apply hmZ
+    exact hK ⟨m, hm.isPrime⟩
+  -- Descend the unit ideal to a finite stage.
+  obtain ⟨R₂, hR₁₂, hR₂fg, hI₂⟩ :=
+    Subalgebra.exists_map_tensorProduct_inclusion_eq_top hR₁ I hI
   refine ⟨R₂, hR₂fg, fun R hR ↦ ?_⟩
   -- Every prime of `R ⊗[R₀] S₀` lies over the flat locus of `R₁`.
-  have h₁ : R₁ ≤ R := hR₁₂.trans (hR₂.trans hR)
+  have h₁ : R₁ ≤ R := hR₁₂.trans hR
   set ρ := Algebra.TensorProduct.map (Subalgebra.inclusion h₁) (AlgHom.id R₀ S₀)
-  set θ := Algebra.TensorProduct.map (Subalgebra.inclusion (hR₂.trans hR)) (AlgHom.id R₀ S₀)
-  have hθ : θ w = 1 := by
-    rw [← map_inclusion_map_inclusion hR₂ hR w, map_eq_rTensor hR₂ w, hw₂, ← map_eq_rTensor,
-      map_one, map_one]
-  have hθψ (x : R₁ ⊗[R₀] S₀) : θ (ψ x) = ρ x := map_inclusion_map_inclusion _ _ x
+  have hIR : I.map ρ = ⊤ := by
+    have hcomp : ρ.toRingHom =
+        (Algebra.TensorProduct.map (Subalgebra.inclusion hR) (AlgHom.id R₀ S₀)).toRingHom.comp
+          (Algebra.TensorProduct.map (Subalgebra.inclusion hR₁₂)
+            (AlgHom.id R₀ S₀)).toRingHom :=
+      RingHom.ext fun x ↦ (map_inclusion_map_inclusion hR₁₂ hR x).symm
+    change I.map (Algebra.TensorProduct.map (Subalgebra.inclusion hR₁₂)
+      (AlgHom.id R₀ S₀)).toRingHom = ⊤ at hI₂
+    change I.map ρ.toRingHom = ⊤
+    rw [hcomp, ← Ideal.map_map, hI₂, Ideal.map_top]
   apply flat_of_forall_flat_localizedModule (S := R ⊗[R₀] S₀)
   intro Q _
-  refine flat_localizedModule_baseChange_map (Subalgebra.inclusion h₁) Q (Q.comap ρ.toRingHom)
-    rfl ?_
+  apply flat_localizedModule_baseChange_map (M₀ := M₀) (Subalgebra.inclusion h₁) Q
+    (Q.comap ρ.toRingHom) rfl
   by_contra hP
   have hPZ : (⟨Q.comap ρ.toRingHom, inferInstance⟩ : PrimeSpectrum (R₁ ⊗[R₀] S₀)) ∈ Z := hP
-  have hQ : (1 : R ⊗[R₀] S₀) ∈ Q := by
-    rw [← hθ, map_sum]
-    refine Ideal.sum_mem _ fun i _ ↦ ?_
-    rw [map_mul, hθψ]
-    exact Ideal.mul_mem_left _ _ ((PrimeSpectrum.mem_vanishingIdeal _ _).mp (ha i) _ hPZ)
-  exact (Ideal.IsPrime.ne_top ‹_›) ((Ideal.eq_top_iff_one _).mpr hQ)
+  have hIQ : I ≤ Q.comap ρ.toRingHom :=
+    (PrimeSpectrum.subset_zeroLocus_iff_le_vanishingIdeal Z I).mpr le_rfl hPZ
+  have hQ : I.map ρ ≤ Q := Ideal.map_le_iff_le_comap.mpr hIQ
+  rw [hIR] at hQ
+  exact (Ideal.IsPrime.ne_top ‹_›) (top_le_iff.mp hQ)
 
 end Global
 

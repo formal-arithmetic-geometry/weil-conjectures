@@ -42,7 +42,8 @@ ring of `A` is `K`, and `A` is étale.
 
 ## Blueprint
 
-`HopfAlgebra.etale_of_not_dvd_finrank` is the algebraic content of `lem-sc-fg-order-prime-etale`.
+`HopfAlgebra.etale_of_not_dvd_finrank` is the algebraic content of
+`proposition-multiplication-n--2`.
 -/
 
 @[expose] public section
@@ -218,9 +219,9 @@ theorem etale_of_not_dvd_finrank_of_isAlgClosed [IsAlgClosed K] [FiniteDimension
   exact .of_forall_finrank_localization_eq_one fun m ↦ by rw [hall, hr0, pow_zero]
 
 variable (K A) in
-/-- **Blueprint `lem-sc-fg-order-prime-etale`**, algebraic form: a finite-dimensional commutative
-Hopf algebra over a field of characteristic `p` whose dimension is prime to `p` (for `p = 0`:
-any finite-dimensional one) is étale. -/
+/-- **Blueprint `proposition-multiplication-n--2`**, algebraic form: a finite-dimensional
+commutative Hopf algebra over a field of characteristic `p` whose dimension is prime to `p` (for
+`p = 0`: any finite-dimensional one) is étale. -/
 theorem etale_of_not_dvd_finrank [FiniteDimensional K A] (p : ℕ) [CharP K p]
     (hp : ¬ p ∣ finrank K A) : Algebra.Etale K A := by
   rcases CharP.char_is_prime_or_zero K p with hprime | rfl

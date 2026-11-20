@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureShea
 
 /-! # Comparing unit and additive kernels from square-zero section kernels
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-square-zero-relative-units-additive-kernel-sections)
 -/
 
@@ -22,7 +22,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- If the section kernels of restriction have square zero, its unit and additive sheaf
 kernels are isomorphic. No closed-immersion or ideal-sheaf hypothesis is needed.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-square-zero-relative-units-additive-kernel-sections)
 
 Proof: On every etale object V, the unit kernel consists of units u restricting to 1.

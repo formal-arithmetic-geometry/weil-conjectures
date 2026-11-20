@@ -200,7 +200,7 @@ $t_1,\ldots,t_d$ among its parameters (and $t_1=p$ in mixed characteristic). By
 $R\to T$ is flat by [lem-weil-pbc-flat-over-regular]. Its closed fibre $T/\mathfrak m_RT$ is
 $\overline S/(\bar x_1,\ldots,\bar x_r)\cong\overline{B^\wedge}$ as a local $k$-algebra, with the
 isomorphism induced by $T\to B^\wedge$. It is formally smooth over $k$ for its maximal-ideal-adic
-topology by transport of the lifting property [def-weil-pbc-formally-smooth-adic].
+topology by transport of the lifting property [theorem-finite-etale-covers-proper-henselian--2].
 
 5. *Identify the completed target with a base change.* The Cohen presentation in Step 2 gives a
 surjection $R\to A^\wedge$. Let $D=T\otimes_R A^\wedge\cong T/(\ker(R\to A^\wedge))T$
@@ -222,15 +222,16 @@ an isomorphism.
 maximal-ideal-adic topology, [lem-weil-pbc-fs-adic-base-change] gives the same for $D=T\otimes_R
 A^\wedge$ over $A^\wedge$ with the extended maximal ideal, which is the maximal ideal of $D$ since
 $D$ is a local quotient of $T$. Transport through $h:D\cong B^\wedge$ (Step 5) gives formal
-smoothness of $B^\wedge$ over $A^\wedge$ [def-weil-pbc-formally-smooth-adic]. We now prove the
-needed lifting property for $R\to T$ using its power-series coordinates. To lighten notation write
-$S=T$, let $\mathfrak m$ be its maximal ideal, $k=R/\mathfrak m_R$, and $K=S/\mathfrak m$.
+smoothness of $B^\wedge$ over $A^\wedge$ [theorem-finite-etale-covers-proper-henselian--2]. We now
+prove the needed lifting property for $R\to T$ using its power-series coordinates. To lighten
+notation write $S=T$, let $\mathfrak m$ be its maximal ideal, $k=R/\mathfrak m_R$, and
+$K=S/\mathfrak m$.
 
 7. *Reduce a square-zero lifting problem to a residue-vector-space kernel.* Take an $R$-algebra
 $N$, a square-zero ideal $J\subseteq N$, and an $R$-algebra map $g:S\to N/J$ killing $\mathfrak
-m^n$ for some $n\ge1$ [def-weil-pbc-formally-smooth-adic]. The map $g$ makes $J$ an $S$-module:
-$s\cdot j$ is $g(s)j$, independent of a lift of $g(s)$ because $J^2=0$; thus $\mathfrak m^nJ=0$.
-Set $J_i=\{j\in J: \mathfrak m^i j=0\}$ for $0\le i\le n$. Then $0=J_0\subseteq
+m^n$ for some $n\ge1$ [theorem-finite-etale-covers-proper-henselian--2]. The map $g$ makes $J$ an
+$S$-module: $s\cdot j$ is $g(s)j$, independent of a lift of $g(s)$ because $J^2=0$; thus $\mathfrak
+m^nJ=0$. Set $J_i=\{j\in J: \mathfrak m^i j=0\}$ for $0\le i\le n$. Then $0=J_0\subseteq
 J_1\subseteq\cdots\subseteq J_n=J$, and $\mathfrak m(J_{i+1}/J_i)=0$. Each $J_i$ is an ideal of
 $N$, and each map $N/J_i\to N/J_{i+1}$ has square-zero kernel $J_{i+1}/J_i$. Therefore it suffices
 to solve the lifting problem for such a kernel, one quotient at a time. In that case $J$ is a

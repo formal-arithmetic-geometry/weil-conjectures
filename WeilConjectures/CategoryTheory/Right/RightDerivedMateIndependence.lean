@@ -50,17 +50,17 @@ transfers this conclusion to all objects. -/
 theorem rightDerivedMate_isIso_of_ordinaryMate_isIso
     (a : L ⊣ R) (b : L' ⊣ R') (c : Q ⊣ R) (d : Q' ⊣ R')
     (θ : G ⋙ L' ≅ L ⋙ H) (ψ : G ⋙ Q' ≅ Q ⋙ H)
-    (ha : IsIso (mateEquiv a b θ.hom).natTrans)
-    (hb : IsIso (mateEquiv c d ψ.hom).natTrans)
+    (ha : IsIso (mateEquiv a b θ.hom))
+    (hb : IsIso (mateEquiv c d ψ.hom))
     (hd : IsIso (mateEquiv c.mapDerivedCategoryRightDerivedAdjunction
       d.mapDerivedCategoryRightDerivedAdjunction
-      (Functor.mapDerivedCategorySquareIso ψ).hom).natTrans) :
+      (Functor.mapDerivedCategorySquareIso ψ).hom)) :
     IsIso (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
       b.mapDerivedCategoryRightDerivedAdjunction
-      (Functor.mapDerivedCategorySquareIso θ).hom).natTrans := by
+      (Functor.mapDerivedCategorySquareIso θ).hom) := by
   let α := (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
     b.mapDerivedCategoryRightDerivedAdjunction
-    (Functor.mapDerivedCategorySquareIso θ).hom).natTrans
+    (Functor.mapDerivedCategorySquareIso θ).hom)
   have := ha
   have := hb
   have := hd
@@ -74,17 +74,17 @@ theorem rightDerivedMate_isIso_of_ordinaryMate_isIso
       unfold UnboundedExactTower.cochainUnit
       infer_instance
     have hca : IsIso ((NatTrans.mapHomologicalComplex
-        (mateEquiv a b θ.hom).natTrans (.up ℤ)).app I) := by
+        (mateEquiv a b θ.hom) (.up ℤ)).app I) := by
       change IsIso ((NatIso.mapHomologicalComplex
-        (asIso (mateEquiv a b θ.hom).natTrans) (.up ℤ)).hom.app I)
+        (asIso (mateEquiv a b θ.hom)) (.up ℤ)).hom.app I)
       infer_instance
     have hcb : IsIso ((NatTrans.mapHomologicalComplex
-        (mateEquiv c d ψ.hom).natTrans (.up ℤ)).app I) := by
+        (mateEquiv c d ψ.hom) (.up ℤ)).app I) := by
       change IsIso ((NatIso.mapHomologicalComplex
-        (asIso (mateEquiv c d ψ.hom).natTrans) (.up ℤ)).hom.app I)
+        (asIso (mateEquiv c d ψ.hom)) (.up ℤ)).hom.app I)
       infer_instance
     have hs : IsIso (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-        (mateEquiv c d ψ.hom).natTrans (.up ℤ)).app I) ≫
+        (mateEquiv c d ψ.hom) (.up ℤ)).app I) ≫
         UnboundedExactTower.cochainUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj I)) := by
       rw [← h₂]
       infer_instance
@@ -92,7 +92,7 @@ theorem rightDerivedMate_isIso_of_ordinaryMate_isIso
         ((H.mapHomologicalComplex (.up ℤ)).obj I)) :=
       IsIso.of_isIso_comp_left
         (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-          (mateEquiv c d ψ.hom).natTrans (.up ℤ)).app I))
+          (mateEquiv c d ψ.hom) (.up ℤ)).app I))
         (UnboundedExactTower.cochainUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj I))
     have ht : IsIso (G.mapDerivedCategoryFactors.inv.app
         ((R.mapHomologicalComplex (.up ℤ)).obj I) ≫
@@ -104,7 +104,7 @@ theorem rightDerivedMate_isIso_of_ordinaryMate_isIso
         G.mapDerivedCategory.map (UnboundedExactTower.cochainUnit R I) ≫
         (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
           b.mapDerivedCategoryRightDerivedAdjunction
-          (Functor.mapDerivedCategorySquareIso θ).hom).natTrans.app
+          (Functor.mapDerivedCategorySquareIso θ).hom).app
             (DerivedCategory.Q.obj I) ≫
         R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app I))
       rw [h₁]

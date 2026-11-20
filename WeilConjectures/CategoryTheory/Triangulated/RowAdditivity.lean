@@ -29,13 +29,14 @@ as soon as a few morphism groups vanish: `T ⟶ R₁⟦-1⟧`, `P₀ ⟶ R₁⟦
 `P₂⟦1⟧ ⟶ W` (`CategoryTheory.Pretriangulated.comp_eq_add_of_distTriang`).
 
 This is the triangulated core of the additivity of trace classes along an invariant open–closed
-decomposition (blueprint `lem-trf-trace-triangle-compatibility`, `sk-i-additivity`): there `T` is
-the class of the support of a correspondence, `W` the pushforward of the dualizing complex along
-the diagonal, `e` the evaluation kernels and `σ` the supported classes. The filtered argument of
-Varshavsky, Prop. 1.5.10 (after SGA 5, III 4.13) is replaced by the pullback `G` of the row `0`
-along `g : R₂ ⟶ R₀` (the cocone of `R₂ ⟶ R₀ ⟶ P₀⟦1⟧`): the section lifts to `G`, and the defect
-of additivity on `G` vanishes on `P₀` and on `Q₂`, hence factors through `P₂⟦1⟧`, where it is
-zero because the corner `P₂ = K' ⊠ D K''` does not meet the diagonal.
+decomposition (blueprint `proposition-additivity-trace-classes--2`,
+`proposition-additivity-trace-classes`): there `T` is the class of the support of a correspondence,
+`W` the pushforward of the dualizing complex along the diagonal, `e` the evaluation kernels and `σ`
+the supported classes. The filtered argument of Varshavsky, Prop. 1.5.10 (after SGA 5, III 4.13) is
+replaced by the pullback `G` of the row `0` along `g : R₂ ⟶ R₀` (the cocone of `R₂ ⟶ R₀ ⟶ P₀⟦1⟧`):
+the section lifts to `G`, and the defect of additivity on `G` vanishes on `P₀` and on `Q₂`, hence
+factors through `P₂⟦1⟧`, where it is zero because the corner `P₂ = K' ⊠ D K''` does not meet the
+diagonal.
 
 -/
 

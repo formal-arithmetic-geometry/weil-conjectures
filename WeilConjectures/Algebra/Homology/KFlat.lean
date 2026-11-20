@@ -16,8 +16,8 @@ public import Mathlib.Algebra.Homology.QuasiIso
 /-!
 # K-flat complexes of modules on a ringed site
 
-Source: the blueprint of the Weil conjectures, chapter `sec-picard-framework`, unit
-`det-thm-picard-semicon` (blueprint: def-pc-kflat-complex); Stacks Project, Cohomology on Sites,
+Source: the blueprint of the Weil conjectures, chapter `chap-The-Picard-scheme-of-a-curve`, unit
+`lemma-triviality-fibres--2` (blueprint: def-pc-kflat-complex); Stacks Project, Cohomology on Sites,
 Definition `sites-cohomology-definition-K-flat` (Tag 06YN), and the term "K-flat resolution" as
 used in Lemma `sites-cohomology-lemma-K-flat-resolution` (Tag 06YS).
 

@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertiblePullback
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.Local
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicallySmooth
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 
@@ -21,8 +22,8 @@ public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 Let `S` be integral and of finite type over a field `k` (in the application `S = 𝔸¹_k`), with
 invertible dualizing complex `ω_S`, let `t : T ⟶ S` lie over the generic point of `S` (in the
 application `T = Spec \overline{k(t)}`), and let `X` be of finite type over `S` with base change
-`g : X_T ⟶ X`. This file proves blueprint `lem-weil-geometric-generic-duality`, Zariski locally
-on `X`, that is for `X ⟶ S` factored as a closed immersion `i : X ⟶ P` followed by a smooth
+`g : X_T ⟶ X`. This file proves the double-dual lemma on a geometric generic fibre, Zariski
+locally on `X`, that is for `X ⟶ S` factored as a closed immersion `i : X ⟶ P` followed by a smooth
 `p : P ⟶ S` (e.g. `P = 𝔸^r_S` for `X` affine):
 
 - `AlgebraicGeometry.Etale.exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic`:
@@ -33,7 +34,7 @@ on `X`, that is for `X ⟶ S` factored as a closed immersion `i : X ⟶ P` follo
 
 ## Proof
 
-As in the blueprint, `ω_X ≅ ω_{X/S} ⊗ᴸ (i ≫ p)^* ω_S` with `ω_S` invertible
+First, `ω_X ≅ ω_{X/S} ⊗ᴸ (i ≫ p)^* ω_S` with `ω_S` invertible
 (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_comp_of_isInvertible`), and
 `ω_{X/S} ≅ Ri^! ω_p`. Closed-support generic exchange
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_generic`) gives
@@ -70,8 +71,8 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lem-weil-geometric-generic-duality`, first assertion (Zariski locally): **the
-dualizing complex of a generic fibre.**
+/-- First assertion of the double-dual lemma on a geometric generic fibre (Zariski
+locally): **the dualizing complex of a generic fibre.**
 
 Let `S` be integral and of finite type over a field `k`, with invertible dualizing complex
 `ω_S` (e.g. `S = 𝔸¹_k`), let `Λ` be a finite ring whose exponent is invertible on `S`, and let
@@ -155,8 +156,36 @@ theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic {k : Type u}
   exact (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso e₁ ≪≫ leftDerivedUpperStarTensorIso _ g _ _ ≪≫
     ((derivedTensor (ModuleCat.{u + 1} Λ) X').mapIso e₅).app _
 
-/-- Blueprint `lem-weil-geometric-generic-duality`, second assertion (Zariski locally): **the
-double dual on a geometric generic fibre.**
+/-- **The dualizing complex of a generic fibre**, for `S` smooth of relative dimension `rS` over
+`k` (e.g. `S = 𝔸¹_k`): the hypothesis of
+`AlgebraicGeometry.Etale.exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic` that `ω_S` be
+invertible holds by smooth purity
+(`AlgebraicGeometry.Etale.isInvertible_dualizingComplex_of_smoothOfRelativeDimension`). -/
+theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic_of_smooth {k : Type u}
+    [Field k]
+    {S : Scheme.{u}} [IsIntegral S] [QuasiSeparatedSpace S] (aS : S ⟶ Spec (.of k))
+    [LocallyOfFiniteType aS]
+    [QuasiCompact aS] [HasCompactification aS] [HasInvertibleExponent Λ S]
+    (rS : ℕ) [SmoothOfRelativeDimension rS aS]
+    {T : Scheme.{u}} [IsNoetherian T] (t : T ⟶ S) (ht : ∀ x, t.base x = genericPoint S)
+    {P P' : Scheme.{u}} (p : P ⟶ S) (r : ℕ) [SmoothOfRelativeDimension r p]
+    [LocallyOfFiniteType p] [QuasiCompact p] [HasCompactification p] {gP : P' ⟶ P}
+    {p' : P' ⟶ T} [HasCompactification p'] (sqP : IsPullback gP p' p t)
+    {X X' : Scheme.{u}} (i : X ⟶ P) [IsClosedImmersion i] [HasCompactification i]
+    {g : X' ⟶ X} {i' : X' ⟶ P'} [IsClosedImmersion i'] [HasCompactification i']
+    (sqX : IsPullback g i' i gP) [HasCompactification (i ≫ p)] [QuasiCompact (i ≫ p)]
+    (aX : X ⟶ Spec (.of k)) (hX : i ≫ p ≫ aS = aX) [HasCompactification aX] [QuasiCompact aX]
+    (fT : X' ⟶ T) (hT : i' ≫ p' = fT) [HasCompactification fT] [QuasiCompact fT] :
+    ∃ L : _root_.DerivedCategory (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      DerivedCategory.isInvertible Λ X' L ∧
+      Nonempty ((L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex _ aX) ≅
+        ((derivedTensor (ModuleCat.{u + 1} Λ) X').obj (dualizingComplex _ fT)).obj L) :=
+  exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic Λ aS
+    (isInvertible_dualizingComplex_of_smoothOfRelativeDimension Λ aS rS) t ht p r sqP i sqX aX hX
+    fT hT
+
+/-- Second assertion of the double-dual lemma on a geometric generic fibre (Zariski
+locally): **the double dual on a geometric generic fibre.**
 
 In the setting of
 `AlgebraicGeometry.Etale.exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic` (`S`

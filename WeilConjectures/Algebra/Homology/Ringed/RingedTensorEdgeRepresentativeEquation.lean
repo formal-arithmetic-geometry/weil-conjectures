@@ -30,7 +30,6 @@ private abbrev Complexes (A : RingedTensorCorner.{u, w}) := CochainComplex (Modu
 private abbrev Good {A : RingedTensorCorner.{u, w}} (P : Complexes A) : Prop :=
   P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the unique representative characterization with both models fixed.
 /-- The canonical tensor comparison satisfies its defining representative equation.
 

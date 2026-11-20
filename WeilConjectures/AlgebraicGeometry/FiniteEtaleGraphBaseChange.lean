@@ -14,7 +14,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
 
 Source: Mathlib IsPullback.mk' and IsPullback.of_right, and
 IsOpenImmersion.range_pullbackSnd; corrected finite-étale lifting steps 1–3.
-(blueprint: lem-weil-pbc-finite-etale-graph-base-change)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 
 @[expose] public section
@@ -27,7 +27,7 @@ set_option backward.defeqAttrib.useBackward true in
 /-- The product and graph squares after change of base are cartesian on schemes
 and on graph images.
 Source: corrected blueprint finite-étale lifting, steps 1–3; Stacks Tag 0GS2.
-(blueprint: lem-weil-pbc-finite-etale-graph-base-change)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 
 Proof: The product after base change represents triples consisting of a point of each
 factor and a common point of the new base. Its map to the old product, together with

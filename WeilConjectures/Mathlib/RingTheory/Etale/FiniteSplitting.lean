@@ -67,7 +67,6 @@ variable {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
 
 attribute [local instance] Algebra.TensorProduct.rightAlgebra
 
-set_option maxHeartbeats 800000 in
 -- long proof with many local algebra instances on residue fields
 /-- **Étale-local splitting of a finite algebra at a geometric point.** Let `B` be a finite
 `A`-algebra and `t` a point of `B` over a geometric point `φ : A →+* Ω`. Then there is an
@@ -320,7 +319,6 @@ namespace Algebra
 variable {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
   {Ω : Type w} [Field Ω]
 
-set_option maxHeartbeats 800000 in
 -- induction over the finite set of points, with a tensor product bookkeeping at each step
 /-- Auxiliary statement for `Algebra.exists_etale_completeOrthogonalIdempotents_forall_tensor_eq`:
 orthogonal idempotents separating the points in a finite set `S`. -/

@@ -19,7 +19,7 @@ compact-support exchange); Stacks Project, Tags 0E48, 0GL1 and 03S6
 (auxiliary; not a blueprint node).
 
 The compact-support projection map is taken with the coefficient first, as in
-lem-amb-proper-coproducts-projection: the upstream right-coefficient projection map
+lemma-cohomology-projective-line-trace: the upstream right-coefficient projection map
 `AlgebraicGeometry.Etale.projectionMap` (proper projection of the compactification followed by
 the inverse open tensor comparison) conjugated by the canonical signed derived symmetry
 `AlgebraicGeometry.Etale.derivedTensorSymmetry`. The exchange map is the upstream
@@ -123,7 +123,7 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint ModuleCat.ha
 by the inverse extension-by-zero tensor comparison), and `Rf_!` of the signed symmetry.
 Source: blueprint `lem-asd-smooth-generic-direct-image.md`, proof, last paragraph; Stacks
 Project, equation-projection-formula-map and lemma-j-shriek-and-tensor (Tag 0GL1), with the
-coefficient-first convention of lem-amb-proper-coproducts-projection
+coefficient-first convention of lemma-cohomology-projective-line-trace
 (auxiliary; not a blueprint node). -/
 noncomputable def compactProjectionMapCoeffFirst {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f]
@@ -159,8 +159,9 @@ Proof (the node's proof, step by step):
    `u = v_X`. Let `P_f(M,Q) = Rp_*(γ_{j;M,p^*Q}) ∘ π_{p;j_!M,Q}` (the right-coefficient
    projection map `projectionMap`), `e_E : v^*Rp_*E ⟶ Rp'_*a^*E` the proper exchange and
    `β_M : a^*j_!M ⟶ j'_!u^*M` the open base change; then `b_M = Rp'_*(β_M) ∘ e_{j_!M}`.
-   Uses: def-amb-etale-compact-support, def-kun-projection-formula-map, sbc-def-base-change-map,
-   sbc-prop-extension-by-zero-and-arbitrary-base-change, lem-pur-etale-open-derived-tensor.
+   Uses: proposition-construction-independence-rf-shriek, definition-projection-formula-map--1,
+   definition-derived-base-change-map--1,
+   proposition-extension-zero-restriction-closed-subscheme--11, lem-pur-etale-open-derived-tensor.
 2. Apply lem-weil-pbc-ringed-exchange-tensor-coherence to the square `(p, p', v, a)` with
    `E = j_!M` and coefficient `Q`: with `θ : p'^*v^*Q ≅ a^*p^*Q` and
    `d_E = (1 ⊗ θ⁻¹) t_a`, `Rp'_*(d_E) e_{E ⊗ p^*Q} v^*(π_{p;E,Q}) = π_{p';a^*E,v^*Q}(e_E ⊗ 1) t_v`.
@@ -175,7 +176,7 @@ Proof (the node's proof, step by step):
    in its first argument (lem-weil-pbc-ringed-projection-mate-exact) at `β_M`: the composite is
    `P_{f'}(u^*M, v^*Q) (b_M ⊗ 1) t_v`. This right-coefficient identity is the upstream theorem
    `projectionMap_rightDerivedLowerShriekBaseChangeMap`.
-6. By lem-amb-proper-coproducts-projection the coefficient-first map is
+6. By lemma-cohomology-projective-line-trace the coefficient-first map is
    `Π_{f,Q,M} = Rf_!(σ_{M,f^*Q}) P_f(M,Q) σ_{Q,Rf_!M}`. Conjugate step 5 by the symmetries using
    naturality of `σ` (lem-kun-tensor-sym) and its compatibility with the pullback tensor
    comparison (lem-kun-inverse-image-monoidal: bidegree `(r,s)` and sign `(-1)^{rs}` are

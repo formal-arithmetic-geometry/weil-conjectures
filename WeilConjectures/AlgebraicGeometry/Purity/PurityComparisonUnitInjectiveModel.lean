@@ -14,8 +14,9 @@ set_option autoImplicit false
 /-!
 # Injective-resolution representative of the comparison unit
 
-Source: literature/stacks-project/derived.tex, Lemma Tags 0DVC and 09T5
-(blueprint: lem-pur-comparison-unit-injective-model).
+## References
+
+* Stacks Project, Tags 0DVC and 09T5
 -/
 
 @[expose] public section

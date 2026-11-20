@@ -34,7 +34,7 @@ Source: Stacks Project, Etale Cohomology, Lemma 09Z7 (proof, first paragraph)
 (blueprint: lem-weil-pbc-constructible-module-noetherian-descent).
 Proof outline: (1) Noetherian approximation gives a cofiltered system of schemes of
 finite type over `Spec ℤ` with affine transitions and limit `X`, using
-`prop-nagata-noetherian-inverse-system` and `def-nagata-noetherian-inverse-system`.
+`theorem-nagata-s-compactification-theorem--1` and `theorem-nagata-s-compactification-theorem--1`.
 (2) Reindex it by a directed set using
 `lem-weil-pbc-cofiltered-limit-directed-reindex`.
 (3) Each stage is Noetherian, hence quasi-compact and quasi-separated, by

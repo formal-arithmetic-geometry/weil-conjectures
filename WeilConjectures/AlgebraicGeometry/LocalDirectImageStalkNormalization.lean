@@ -81,8 +81,6 @@ private theorem restriction_iso {Y : Scheme.{u}} (U : Y.Opens) (hU : U = ⊤)
   exact fmap_iso _ _ p
 
 
-set_option maxHeartbeats 1000000 in
--- Elaborating the nested cohomology and stalk types needs more than the default heartbeats.
 /-- Normalization of the inverse of the specified canonical class map.
 Source: Stacks Project, Tags 01E4 and 01FB; Tag 02OD for the local spectrum.
 (blueprint: lem-weil-pbc-local-direct-image-stalk-cohomology-normalization)
@@ -138,7 +136,7 @@ theorem localDirectImage_stalk_cohomology_normalization
                 p).obj
                 ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj
                   F))).presheaf V y hy (D.targetClass p xi))) = xi := by
-  intro I K V hy D xi
+  intro I K V hy D
   have hc : (Y.fromSpecStalk y) ⁻¹ᵁ V = ⊤ := by
     apply top_unique
     intro q _
@@ -152,13 +150,19 @@ theorem localDirectImage_stalk_cohomology_normalization
     simp
   have hi := restriction_iso _ hW
     ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F) p
-  obtain ⟨eta, heta⟩ := (ConcreteCategory.bijective_of_isIso
-    (Scheme.Modules.moduleCohomologyRestriction _
-      ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F) p)).2 xi
+  let r := Scheme.Modules.moduleCohomologyFMap
+    ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι
+    ((Scheme.Modules.restrictAdjunction
+      ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).unit.app
+        ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)) p
+  have : IsIso r := hi
+  have hr : Function.Surjective r := (ConcreteCategory.bijective_of_isIso r).2
+  refine hr.forall.mpr ?_
+  intro eta
   have hclass := localDirectImage_stalk_class_restriction f y F p I K V hy D eta
-  change Scheme.Modules.moduleCohomologyFMap _ _ p eta = xi at heta
-  rw [heta] at hclass
-  rw [← hclass, ← he eta]
-  simpa using heta
+  have heclass := (he eta).trans hclass
+  have hs := congrArg e.symm.toLinearMap heclass
+  have hs' := (e.symm_apply_apply eta).symm.trans hs
+  exact congrArg r hs'.symm
 
 end AlgebraicGeometry

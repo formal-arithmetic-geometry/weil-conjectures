@@ -70,12 +70,12 @@ theorem etaleBrownOpenScalarTransport_square
           c.i).mapDerivedCategoryRightDerivedAdjunction).ofNatIsoRight
           (Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))
             c.i).rightDerivedFunctorIsoMapDerivedCategory)
-        (.mk _ _ _ _ (jo n).inv)).natTrans = (ro n).inverse.inv)
+        (.mk _ _ _ _ (jo n).inv)) = (ro n).inverse.inv)
     {m n : ℕ} (h : m ≤ n) (op : (S.PX.scalar h).derived ⋙ S.levelDerivedOpen m ≅
       S.levelDerivedOpen n ⋙ (S.PZ.scalar h).derived)
     (hop :
       (mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)
-        (.mk _ _ _ _ op.hom)).natTrans = (S.openDerived.derivedTensor h).inv) :
+        (.mk _ _ _ _ op.hom)) = (S.openDerived.derivedTensor h).inv) :
     ∀ P : DerivedCategory (strictEtaleLevel X O t n),
     (RZ.derived m).map (op.inv.app P) ≫
       (jo m).hom.app ((S.PX.scalar h).derived.obj P) ≫

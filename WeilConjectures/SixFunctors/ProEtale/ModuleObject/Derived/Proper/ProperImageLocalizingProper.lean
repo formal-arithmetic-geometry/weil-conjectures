@@ -33,9 +33,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCate
 /-!
 # Proper direct image on localizing categories
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.md and its proof
-(blueprint: det-proper-image-localizing-proper).
+(blueprint: proposition-proper-direct-image-extension-zero--1).
 
 The coefficient list uses bundled ring objects, so membership identifies both the
 underlying condensed abelian sheaf and its multiplication. The two auxiliary predicates
@@ -52,93 +52,6 @@ universe u v w u' v'
 
 open CategoryTheory CategoryTheory.Limits
 open scoped ZeroObject CategoryTheory.Obj
-
--- Existing coproducts have only Hom-universe many nonzero summands.
-private theorem small_coproduct_support
-    {C : Type u} [Category.{v} C] [Preadditive C]
-    {I : Type w} (G : I → C) (t : Cofan G) (ht : IsColimit t) :
-    Small.{v} {i // ¬ IsZero (G i)} := by
-  classical
-  let p (i : I) : t.pt ⟶ G i := ht.desc (Cofan.mk (G i) (Pi.single i (𝟙 (G i))))
-  have hp (i j : I) :
-      t.inj j ≫ p i = Pi.single (M := fun j ↦ G j ⟶ G i) i (𝟙 (G i)) j :=
-    ht.fac (Cofan.mk (G i) (Pi.single i (𝟙 (G i)))) (Discrete.mk j)
-  let q : {i // ¬ IsZero (G i)} → (t.pt ⟶ t.pt) := fun i ↦ p i.val ≫ t.inj i.val
-  apply small_of_injective.{v, v, w} (f := q)
-  intro i j hij
-  apply Subtype.ext
-  by_contra hne
-  have he := congrArg (fun f ↦ t.inj i.val ≫ f ≫ p i.val) hij
-  have hi : t.inj i.val ≫ p i.val = 𝟙 (G i.val) := by simp [hp]
-  have hj : t.inj i.val ≫ p j.val = 0 := by simp [hp, hne]
-  have hid : 𝟙 (G i.val) = 0 := by
-    simpa only [q, ← Category.assoc, hi, hj, Category.id_comp, zero_comp] using he
-  exact i.property ((IsZero.iff_id_eq_zero _).mpr hid)
-
--- Preservation at the Hom universe implies preservation of every existing coproduct.
-private theorem preserves_large_coproducts
-    {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
-    [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Additive]
-    (hF : ∀ I : Type v, PreservesColimitsOfShape (Discrete I) F) (I : Type w) :
-    PreservesColimitsOfShape (Discrete I) F := by
-  classical
-  constructor
-  intro K
-  let G : I → C := fun i ↦ K.obj ⟨i⟩
-  suffices h : PreservesColimit (Discrete.functor G) F by
-    let := h
-    exact preservesColimit_of_iso_diagram (K₁ := Discrete.functor G) (K₂ := K)
-      F (Discrete.natIsoFunctor (F := K)).symm
-  constructor
-  intro t ht
-  let t : Cofan G := t
-  have : Small.{v} {i // ¬ IsZero (G i)} := small_coproduct_support G t ht
-  let N := {i // ¬ IsZero (G i)}
-  let B := Shrink.{v} N
-  let e : N ≃ B := equivShrink N
-  let r : B → I := fun b ↦ (e.symm b).val
-  let U : N → C := fun i ↦ G i.val
-  let tN : Cofan U := Cofan.mk t.pt (fun i ↦ t.inj i.val)
-  have htN : IsColimit tN := by
-    refine Cofan.IsColimit.mk tN (fun s ↦ ht.desc (Cofan.mk s.pt
-      (fun i ↦ if hi : ¬ IsZero (G i) then s.inj ⟨i, hi⟩ else 0))) ?_ ?_
-    · intro s i
-      obtain ⟨i, hi⟩ := i
-      change t.ι.app (Discrete.mk i) ≫ _ = _
-      rw [ht.fac]
-      simp only [Cofan.mk_ι_app, dite_eq_left hi]
-    · intro s m hm
-      apply ht.hom_ext
-      intro ⟨i⟩
-      rw [ht.fac]
-      by_cases hi : ¬ IsZero (G i)
-      · simpa only [tN, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
-          using hm ⟨i, hi⟩
-      · exact (not_not.mp hi).eq_of_src _ _
-  let V : B → C := fun b ↦ U (e.symm b)
-  let tB : Cofan V := Cofan.mk t.pt (fun b ↦ tN.inj (e.symm b))
-  have htB : IsColimit tB :=
-    (Cofan.isColimitEquivOfEquiv e.symm tN) htN
-  let := hF B
-  have hmapped : IsColimit (Cofan.mk (F.obj t.pt) (fun b ↦ F.map (tB.inj b))) :=
-    (Cofan.isColimitMapCoconeEquiv F V tB) (isColimitOfPreserves F htB)
-  refine ⟨(isColimitMapCoconeCofanMkEquiv F G t.inj).symm ?_⟩
-  refine Cofan.IsColimit.mk _
-    (fun s ↦ hmapped.desc (Cofan.mk s.pt (fun b ↦ s.inj (r b)))) ?_ ?_
-  · intro s i
-    by_cases hi : ¬ IsZero (G i)
-    · have hh := hmapped.fac (Cofan.mk s.pt (fun b ↦ s.inj (r b)))
-        (Discrete.mk (e ⟨i, hi⟩))
-      change F.map (t.inj (r (e ⟨i, hi⟩))) ≫ _ = s.inj (r (e ⟨i, hi⟩)) at hh
-      have hr : r (e ⟨i, hi⟩) = i := congrArg Subtype.val (e.symm_apply_apply _)
-      rw [hr] at hh
-      exact hh
-    · exact (F.map_isZero (not_not.mp hi)).eq_of_src _ _
-  · intro s m hm
-    apply hmapped.hom_ext
-    intro ⟨b⟩
-    rw [hmapped.fac]
-    exact hm (r b)
 
 private theorem localizingClosure_isLocalizing
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
@@ -183,7 +96,7 @@ private theorem localizingClosure_map
     (S : ObjectProperty C) (T : ObjectProperty D) (F : C ⥤ D)
     [F.CommShift ℤ] [F.IsTriangulated]
     (hS : ∀ K, S K → T (F.obj K))
-    (hF : ∀ (I : Type u) (G : Discrete I ⥤ (localizingClosure S).FullSubcategory),
+    (hF : ∀ (I : Type v) (G : Discrete I ⥤ (localizingClosure S).FullSubcategory),
       PreservesColimit (G ⋙ (localizingClosure S).ι) F) :
     ∀ K, localizingClosure S K → localizingClosure T (F.obj K) := by
   let L := localizingClosure S
@@ -204,7 +117,7 @@ private theorem localizingClosure_map
     let G' := L.lift G (fun i ↦ (h i.as).1)
     have : PreservesColimit G F := hF I G'
     have hMG : M (colimit (G ⋙ F)) :=
-      hM.2.2 (G ⋙ F) inferInstance (fun i ↦ (h i).2)
+      hM.prop_colimit (G ⋙ F) inferInstance (fun i ↦ (h i).2)
     exact M.prop_of_iso (preservesColimitIso F G).symm hMG
   intro K hK
   exact (hK P hP (fun K hK ↦ ⟨fun Q hQ hSQ ↦ hSQ K hK,
@@ -231,8 +144,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The two hypotheses in the proper localizing-image statement: preservation of
 bounded constructible finite-Tor objects and of ambient sums of localizing objects.
-Source: blueprint det-proper-image-localizing-proper, first paragraph
-(blueprint: det-proper-image-localizing-proper). -/
+Source: blueprint proposition-proper-direct-image-extension-zero--1, first paragraph
+(blueprint: proposition-proper-direct-image-extension-zero--1). -/
 def ProperLocalizingHypotheses
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (p : X ⟶ Y) : Prop :=
@@ -244,12 +157,26 @@ def ProperLocalizingHypotheses
     PreservesColimit (F ⋙ (localizingClosureProEtale Λ X).ι)
       (lowerStar Λ p).rightDerivedFunctor
 
+/-- The sum-preservation hypothesis of `ProperLocalizingHypotheses` for a sum indexed by the
+universe of the morphisms: lift the index along `ULift`, the index categories being equivalent. -/
+theorem preservesColimit_of_properLocalizingHypotheses
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (p : X ⟶ Y)
+    (h : ProperLocalizingHypotheses Λ p) (I : Type (u + 1))
+    (G : Discrete I ⥤ (localizingClosureProEtale Λ X).FullSubcategory) :
+    PreservesColimit (G ⋙ (localizingClosureProEtale Λ X).ι)
+      (lowerStar Λ p).rightDerivedFunctor := by
+  have : PreservesColimit ((Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I)).functor ⋙
+      (G ⋙ (localizingClosureProEtale Λ X).ι)) (lowerStar Λ p).rightDerivedFunctor :=
+    h.2 (ULift.{u + 2} I) ((Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I)).functor ⋙ G)
+  exact preservesColimit_of_preservesColimit_ulift _ _
+
 /-- The canonical restriction of the total derived pushforward is triangulated
 and preserves every small coproduct. The subcategory structures are the induced
 ones from the ambient derived categories, and the functor is the standard lift of
 inclusion followed by the total derived pushforward, with its induced shift structure.
-Source: blueprint det-proper-image-localizing-proper, first paragraph
-(blueprint: det-proper-image-localizing-proper). -/
+Source: blueprint proposition-proper-direct-image-extension-zero--1, first paragraph
+(blueprint: proposition-proper-direct-image-extension-zero--1). -/
 def ProperLocalizingRestriction
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (p : X ⟶ Y) : Prop :=
@@ -271,8 +198,8 @@ localizing categories, provided it preserves the generators and ambient sums of
 localizing objects. The coefficient list is exactly the admissible list, with the
 finite ring discrete, finite subfield E, and finite-subextension condensed Qbar.
 
-Source: blueprint det-proper-image-localizing-proper, first paragraph and first
-proof paragraph (blueprint: det-proper-image-localizing-proper).
+Source: blueprint proposition-proper-direct-image-extension-zero--1, first paragraph and first
+proof paragraph (blueprint: proposition-proper-direct-image-extension-zero--1).
 
 Proof: lowerStar is additive, so its total right derived functor is triangulated
 (lem-pc-right-derived-functor-triangulated). Inside the source localizing closure,
@@ -280,9 +207,9 @@ take the objects whose image belongs to the target localizing closure. Exactness
 makes this subcategory replete and triangulated. The first hypothesis puts all
 Dctf generators in it. For a family in it, the second hypothesis identifies the
 image of its ambient sum with the sum of its images, so this subcategory is
-closed under sums. Minimality of sk-def-localizing-closure makes it the entire
+closed under sums. Minimality of definition-localizing-subcategory makes it the entire
 source closure. ObjectProperty.isTriangulated_lift gives exactness of the lift
-(lem-weil-pbc-triangulated-functor-restriction). Fullness and closure under sums
+(situation-conventions). Fullness and closure under sums
 identify subcategory coproducts with ambient coproducts, giving preservation of
 sums by that same lift. Only sums of localizing objects were used. -/
 theorem proper_image_localizing_proper
@@ -312,7 +239,8 @@ theorem proper_image_localizing_proper
   let := hL.2.1
   let := hM.2.1
   have hmap : ∀ K : L.FullSubcategory, M (F.obj K.obj) := fun K ↦
-    localizingClosure_map S T F (fun K hK ↦ h.1 ⟨K, hK⟩) h.2 K.obj K.property
+    localizingClosure_map S T F (fun K hK ↦ h.1 ⟨K, hK⟩)
+      (preservesColimit_of_properLocalizingHypotheses Λ.X p h) K.obj K.property
   refine ⟨hmap, inferInstance, ?_⟩
   let C := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (condensedRingObj Λ.X X)
@@ -327,16 +255,15 @@ theorem proper_image_localizing_proper
     have hclosed : L.IsClosedUnderColimitsOfShape (Discrete (ULift.{u + 2} I)) :=
       .mk' (by
         rintro K ⟨G, hG⟩
-        exact hL.2.2 G inferInstance (fun i ↦ hG ⟨i⟩))
+        exact hL.prop_colimit G inferInstance (fun i ↦ hG ⟨i⟩))
     let := hclosed
     have : L.IsClosedUnderColimitsOfShape (Discrete I) :=
-      ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
-        (Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I))
+      L.isClosedUnderColimitsOfShape_discrete_of_ulift I
     let := createsColimitsOfShapeFullSubcategoryInclusion (Discrete I) L
     infer_instance
   intro I
   have : PreservesColimitsOfShape (Discrete I) L.ι :=
-    preserves_large_coproducts L.ι hι I
+    Functor.preservesColimitsOfShape_discrete_of_small L.ι hι I
   constructor
   intro G
   have : PreservesColimit (G ⋙ L.ι) F := h.2 I G
@@ -401,6 +328,10 @@ private theorem properHypotheses_coefficientIso
       PreservesColimitsOfSize.{u + 2, u + 2} (H Z).mapDerivedCategory := inferInstance
   have hHX {I : Type (u + 2)} (K : Discrete I ⥤ _) : PreservesColimit K HX :=
     (hcols X).preservesColimitsOfShape.preservesColimit
+  have hcolsSmall (Z : Scheme.{u}) :
+      PreservesColimitsOfSize.{u + 1, u + 1} (H Z).mapDerivedCategory := inferInstance
+  have hHXSmall {I : Type (u + 1)} (K : Discrete I ⥤ _) : PreservesColimit K HX :=
+    (hcolsSmall X).preservesColimitsOfShape.preservesColimit
   have : HY.IsEquivalence := hDEq Y
   have : (constantModelBoundedConstructible Λ' Y).IsClosedUnderIsomorphisms :=
     (constantModelConstructibleFiniteTor_wellDefined Λ' Y).2.1
@@ -410,7 +341,7 @@ private theorem properHypotheses_coefficientIso
       localizingClosureProEtale Λ' X (HX.obj K) :=
     localizingClosure_map _ _ HX
       (fun K hK ↦ constantModelCtf_coefficientIso e X ⟨K, hK⟩)
-      (fun _ K ↦ hHX (K ⋙ (localizingClosureProEtale Λ X).ι))
+      (fun _ K ↦ hHXSmall (K ⋙ (localizingClosureProEtale Λ X).ι))
   constructor
   · intro K
     have hK := constantModelCtf_coefficientIso e X K
@@ -480,10 +411,8 @@ private theorem properHypotheses_rational
     (localizingClosure_ctf_equals_bc ℓ X Λ.X hc).1.2.2.1
     (localizingClosure_ctf_equals_bc ℓ Y Λ.X hc).1.2.2.1
   · intro K hK
-    have hX := constantModelBoundedConstructible_eq_rational ℓ Λ hΛ k
-      (ringChar k) (Fact.out : (ringChar k).Prime).pos Fact.out X
-    have hY := constantModelBoundedConstructible_eq_rational ℓ Λ hΛ k
-      (ringChar k) (Fact.out : (ringChar k).Prime).pos Fact.out Y
+    have hX := constantModelBoundedConstructible_eq_rational ℓ Λ hΛ k X
+    have hY := constantModelBoundedConstructible_eq_rational ℓ Λ hΛ k Y
     apply (congrFun hY _).mpr
     have : LocallyOfFiniteType (X.asOver (Spec (.of k))).hom :=
       inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (.of k)))
@@ -619,21 +548,21 @@ end Coefficients
 both hypotheses of proper_image_localizing_proper hold for every admissible coefficient.
 The list includes Q_ell and Z_ell explicitly, as the E = Q_ell specializations.
 
-Source: blueprint det-proper-image-localizing-proper, coefficient assertions and
-second proof paragraph (blueprint: det-proper-image-localizing-proper).
+Source: blueprint proposition-proper-direct-image-extension-zero--1, coefficient assertions and
+second proof paragraph (blueprint: proposition-proper-direct-image-extension-zero--1).
 
 Proof: for E and Qbar, the schemes are qcqs by lem-weil-pbc-qcqs-over-affine.
 By det-def-localizing-closure-ctf-equals-bc, Dctf equals Dbc, and the rational
-proper base-change theorem det-thm-sfb-proper-base-change-rational preserves Dbc.
-By det-ambient-ind-derived-sums their localizing closure lies in Dic;
+proper base-change theorem proposition-proper-direct-image-constructible-complexes preserves Dbc.
+By corollary-ambient-ind-derived their localizing closure lies in Dic;
 sk-lem-proper-unbounded-window-ii therefore supplies exactly the required sums.
-For finite A, det-ctf-finite-proper-localizing gives preservation of Dctf and
-an exact sum-preserving restriction; its sums are ambient by fullness and sum
+For finite A, corollary-proper-direct-image-finite-coefficients-localizing gives preservation of
+Dctf and an exact sum-preserving restriction; its sums are ambient by fullness and sum
 closure. No identification Dctf = Dbc for arbitrary finite A is used.
-For O_E, qcqs again gives Dctf = Dbc; det-thm-sfb-proper-base-change-integral
+For O_E, qcqs again gives Dctf = Dbc; proposition-proper-direct-image-constructible-complexes
 preserves Dbc. Properness and quasi-compactness of the target give a uniform
 fibre-dimension bound by lem-fin-finite-type-fibre-dimension-bound, and
-det-prop-int-compactness-direct-sums gives preservation of sums on that closure.
+proposition-compactness-proper-direct-image--2 gives preservation of sums on that closure.
 Taking E = Q_ell yields the Q_ell and Z_ell cases. -/
 theorem proper_image_localizing_proper_coefficients
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

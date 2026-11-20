@@ -107,10 +107,16 @@ private theorem paste_units
   dsimp only [Functor.comp_map] at hPN
   rw [hPN, reassoc_of% hP, hD]
 
+private theorem comp_four_inv_of_eq {C : Type*} [Category C]
+    {T A B D E F G : C} (u : T ⟶ A) (v : A ⟶ B) (a : B ⟶ D) (b : D ⟶ E)
+    (e : F ≅ E) (w : T ⟶ G) (z : G ⟶ F)
+    (h : u ≫ v ≫ a ≫ b = w ≫ z ≫ e.hom) :
+    u ≫ v ≫ a ≫ b ≫ e.inv = w ≫ z := by
+  apply (cancel_mono e.hom).mp
+  simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using h
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 500000 in
--- The instantiated sheaf functors require extra definitional-equality checks in the chase.
 /-- Restricting the finite coefficient h-map composes the two restricted
 pullback units. This is an identity of module-sheaf morphisms, before applying
 cohomology, and uses no resolutions beyond the unit-square fields of E and D.
@@ -177,19 +183,7 @@ theorem formalFunctions_finite_open_unit_pasting {X Y : Scheme.{u}} (f : X ⟶ Y
             ((Scheme.Modules.restrictFunctor W.ι).obj Fₙ) ≫
           (Scheme.Modules.pushforwardCongr hrs).hom.app
             ((Scheme.Modules.restrictFunctor W.ι).obj Fₙ) = D.psi := by
-  dsimp only
-  intro hle hrs τ hτ
-  let g := pullback.snd (Y.fromSpecStalk y) f
-  let j := formalFunctionsFiniteι f y n
-  let i := formalFibreι f y n
-  let U := f ⁻¹ᵁ V
-  let U' := g ⁻¹ᵁ U
-  let W := i ⁻¹ᵁ U
-  let F' := (Scheme.Modules.tensorPullback g).obj F
-  let Fₙ := (Scheme.Modules.tensorPullback i).obj F
-  let r := j.resLE U' W hle
-  let s := g.resLE U U' le_rfl
-  let q := i.resLE U W le_rfl
+  intro g j i U U' W F' Fₙ hle r s q hrs τ hτ
   let N := (Scheme.Modules.restrictFunctor W.ι).obj Fₙ
   have hφ :
       (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app F ≫
@@ -218,35 +212,21 @@ theorem formalFunctions_finite_open_unit_pasting {X Y : Scheme.{u}} (f : X ⟶ Y
       (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app F ≫
         (Scheme.Modules.pushforward g).map
           ((Scheme.Modules.restrictAdjunction U'.ι).unit.app F') := by
-    apply (cancel_mono ((Scheme.Modules.pushforwardComp U'.ι g).hom.app M)).mp
-    simpa only [A, Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
-      Category.assoc, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app,
-      Category.comp_id] using E.unit_square
+    exact comp_four_inv_of_eq _ _ _ _ ((Scheme.Modules.pushforwardComp U'.ι g).app M)
+      _ _ E.unit_square
   have hB : (Scheme.Modules.restrictAdjunction U'.ι).unit.app F' ≫
       (Scheme.Modules.pushforward U'.ι).map τ ≫ B.hom.app N =
       formalFunctionsFiniteFMap f y F n ≫ (Scheme.Modules.pushforward j).map
         ((Scheme.Modules.restrictAdjunction W.ι).unit.app Fₙ) := by
-    apply (cancel_mono ((Scheme.Modules.pushforwardComp W.ι j).hom.app N)).mp
-    simpa only [B, Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
-      Category.assoc, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app,
-      Category.comp_id] using hτ
+    exact comp_four_inv_of_eq _ _ _ _ ((Scheme.Modules.pushforwardComp W.ι j).app N)
+      _ _ hτ
   have hD : (Scheme.Modules.restrictAdjunction U.ι).unit.app F ≫
       (Scheme.Modules.pushforward U.ι).map D.psi ≫ C.hom.app N =
       (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app F ≫
         (Scheme.Modules.pushforward i).map
           ((Scheme.Modules.restrictAdjunction W.ι).unit.app Fₙ) := by
-    have hd : (Scheme.Modules.restrictAdjunction U.ι).unit.app F ≫
-        (Scheme.Modules.pushforward U.ι).map D.psi ≫
-        (Scheme.Modules.pushforwardComp q U.ι).hom.app N ≫
-        (Scheme.Modules.pushforwardCongr (i.resLE_comp_ι le_rfl)).hom.app N =
-        (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app F ≫
-          (Scheme.Modules.pushforward i).map
-            ((Scheme.Modules.restrictAdjunction W.ι).unit.app Fₙ) ≫
-          (Scheme.Modules.pushforwardComp W.ι i).hom.app N := D.unit_square
-    apply (cancel_mono ((Scheme.Modules.pushforwardComp W.ι i).hom.app N)).mp
-    simpa only [C, Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
-      Category.assoc, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app,
-      Category.comp_id] using hd
+    exact comp_four_inv_of_eq _ _ _ _ ((Scheme.Modules.pushforwardComp W.ι i).app N)
+      _ _ D.unit_square
   have hP :
       (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app F ≫
         (Scheme.Modules.pushforward g).map (formalFunctionsFiniteFMap f y F n) ≫

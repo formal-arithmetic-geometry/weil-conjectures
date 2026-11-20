@@ -48,10 +48,10 @@ variable {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* 
 the sides of its mate `R₁ ⋙ G ⟶ H ⋙ R₂`, as an equation of natural transformations. -/
 lemma mateEquiv_mk_whiskerRight_comp_comp_whiskerLeft (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     {G' : C ⥤ E} {H' : D ⥤ F} (σ : G' ⟶ G) (α : TwoSquare G L₁ L₂ H) (τ : H ⟶ H') :
-    (mateEquiv adj₁ adj₂ (TwoSquare.mk G' L₁ L₂ H' (Functor.whiskerRight σ L₂ ≫ α.natTrans ≫
-      Functor.whiskerLeft L₁ τ))).natTrans =
-      Functor.whiskerLeft R₁ σ ≫ (mateEquiv adj₁ adj₂ α).natTrans ≫ Functor.whiskerRight τ R₂ := by
-  have h := congrArg TwoSquare.natTrans (mateEquiv_whiskerTop_whiskerBottom adj₁ adj₂ α σ τ)
+    (mateEquiv adj₁ adj₂ (TwoSquare.mk G' L₁ L₂ H' (Functor.whiskerRight σ L₂ ≫ α ≫
+      Functor.whiskerLeft L₁ τ))) =
+      Functor.whiskerLeft R₁ σ ≫ (mateEquiv adj₁ adj₂ α) ≫ Functor.whiskerRight τ R₂ := by
+  have h := (mateEquiv_whiskerTop_whiskerBottom adj₁ adj₂ α σ τ)
   simpa [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft,
     TwoSquare.whiskerRight] using h
 end OfNatIsoRight
@@ -105,7 +105,7 @@ variable {X Y Z X' Y' Z' : 𝒞} (i : X ⟶ Z) (p : Z ⟶ Y) (i' : X' ⟶ Z') (p
 /-- The mate of the base change map of the pushforwards of a square `h ≫ p = p' ≫ g` is the
 composition square `h_* ⋙ p_* ≅ (p' ≫ g)_* ≅ p'_* ⋙ g_*`. -/
 lemma mateEquiv_pfBaseChange :
-    (mateEquiv (F.adj h) (F.adj g) (F.pfBaseChange h p' p g wp)).natTrans =
+    (mateEquiv (F.adj h) (F.adj g) (F.pfBaseChange h p' p g wp)) =
       (F.pfComp' h p (p' ≫ g) wp).inv ≫ (F.pfComp' p' g (p' ≫ g) rfl).hom := by
   rw [pfBaseChange, iterated_mateEquiv_conjugateEquiv, pfComp'_inv, pfComp'_hom,
     conjugateEquiv_comp]
@@ -115,10 +115,10 @@ lemma mateEquiv_pfBaseChange :
 /-- **The mate of the compact-support exchange map** under `g'^* ⊣ g'_*` and `g^* ⊣ g_*` is the
 vertical pasting of the exchange map `g'_* ⋙ i_! ⟶ i'_! ⋙ h_*` of the upper square with the
 composition square `h_* ⋙ p_* ≅ (p' ≫ g)_* ≅ p'_* ⋙ g_*` of the lower square. -/
-lemma mateEquiv_shriekBaseChange [IsIso (F.baseChange g' i' i h wi).natTrans] :
-    (mateEquiv (F.adj g') (F.adj g) (F.shriekBaseChange i p i' p' g' h g wi wp)).natTrans =
+lemma mateEquiv_shriekBaseChange [IsIso (F.baseChange g' i' i h wi)] :
+    (mateEquiv (F.adj g') (F.adj g) (F.shriekBaseChange i p i' p' g' h g wi wp)) =
       (F.exchange g' i' i h wi ≫ᵥ TwoSquare.mk _ _ _ _
-        ((F.pfComp' h p (p' ≫ g) wp).inv ≫ (F.pfComp' p' g (p' ≫ g) rfl).hom)).natTrans := by
+        ((F.pfComp' h p (p' ≫ g) wp).inv ≫ (F.pfComp' p' g (p' ≫ g) rfl).hom)) := by
   rw [shriekBaseChange]
   erw [mateEquiv_vcomp (F.adj g') (F.adj h) (F.adj g)]
   rw [← mateEquiv_pfBaseChange]
@@ -132,15 +132,15 @@ variable [𝒪.ContainsIdentities] {X Y : 𝒞}
 
 /-- The base change map of the square `g ≫ 𝟙 = 𝟙 ≫ g` is an isomorphism. -/
 lemma isIso_baseChange_id_vert (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g) :
-    IsIso (F.baseChange g (𝟙 X) (𝟙 Y) g w).natTrans := by
+    IsIso (F.baseChange g (𝟙 X) (𝟙 Y) g w) := by
   rw [F.baseChange_id_vert g w]
   dsimp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight]
   infer_instance
 
 /-- The exchange map of the square `g ≫ 𝟙 = 𝟙 ≫ g` is an isomorphism. -/
 lemma isIso_exchange_id_vert (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g)
-    [IsIso (F.baseChange g (𝟙 X) (𝟙 Y) g w).natTrans] :
-    IsIso (F.exchange g (𝟙 X) (𝟙 Y) g w).natTrans := by
+    [IsIso (F.baseChange g (𝟙 X) (𝟙 Y) g w)] :
+    IsIso (F.exchange g (𝟙 X) (𝟙 Y) g w) := by
   rw [F.exchange_id_vert g w]
   dsimp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight]
   infer_instance
@@ -192,11 +192,11 @@ abbrev shriekBaseChangeTriangleRight : ShriekTriangle 𝒪 X' Y' Y where
 
 /-- The composition isomorphism of `shriekBaseChangeTriangleLeft`, after `(𝟙)_! ≅ 𝟭`: the
 exchange map of the square `g' ≫ i = i' ≫ h` followed by `h_* ⋙ p_* ≅ (p' ≫ g)_*`. -/
-lemma compIso_shriekBaseChangeTriangleLeft_hom_app [IsIso (F.baseChange g' i' i h wi).natTrans]
-    [IsIso (F.exchange g' i' i h wi).natTrans] (K : F.obj X') :
+lemma compIso_shriekBaseChangeTriangleLeft_hom_app [IsIso (F.baseChange g' i' i h wi)]
+    [IsIso (F.exchange g' i' i h wi)] (K : F.obj X') :
     (F.shriek i p).map ((F.pf g').map ((F.shId X').inv.app K)) ≫
         (F.compIso (shriekBaseChangeTriangleLeft i p i' p' g' h g wi wp)).hom.app K =
-      (F.pf p).map ((F.exchange g' i' i h wi).natTrans.app K) ≫
+      (F.pf p).map ((F.exchange g' i' i h wi).app K) ≫
         (F.pfComp' h p (p' ≫ g) wp).inv.app ((F.sh i').obj K) := by
   rw [compIso_hom_app]
   dsimp only
@@ -225,11 +225,11 @@ isomorphisms**: under `g'^* ⊣ g'_*` and `g^* ⊣ g_*`, the mate of the compact
 map of the squares `g' ≫ i = i' ≫ h` and `h ≫ p = p' ≫ g` is, up to `(𝟙)_! ≅ 𝟭`, the composite
 `g'_* ⋙ (p_* i_!) ≅ (p' ≫ g)_* i'_! ≅ (p'_* i'_!) ⋙ g_*` of the composition isomorphisms of the
 triangles `shriekBaseChangeTriangleLeft` and `shriekBaseChangeTriangleRight`. -/
-theorem mateEquiv_shriekBaseChange_eq_compIso [IsIso (F.baseChange g' i' i h wi).natTrans]
-    [IsIso (F.exchange g' i' i h wi).natTrans] :
+theorem mateEquiv_shriekBaseChange_eq_compIso [IsIso (F.baseChange g' i' i h wi)]
+    [IsIso (F.exchange g' i' i h wi)] :
     haveI := F.isIso_baseChange_id_vert p' (shriekBaseChangeTriangleRight (𝒪 := 𝒪) i' p' g).w
     haveI := F.isIso_exchange_id_vert p' (shriekBaseChangeTriangleRight (𝒪 := 𝒪) i' p' g).w
-    (mateEquiv (F.adj g') (F.adj g) (F.shriekBaseChange i p i' p' g' h g wi wp)).natTrans =
+    (mateEquiv (F.adj g') (F.adj g) (F.shriekBaseChange i p i' p' g' h g wi wp)) =
       Functor.whiskerRight ((Functor.leftUnitor _).inv ≫
           Functor.whiskerRight (F.shId X').inv (F.pf g')) (F.shriek i p) ≫
         (F.compIso (shriekBaseChangeTriangleLeft i p i' p' g' h g wi wp)).hom ≫

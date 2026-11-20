@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.U
 Let `X` be a scheme in which the prime `p` vanishes, `F_X` its `p ^ n`-power absolute Frobenius
 and `Λ` a commutative condensed ring. The trivialization `F_X^* ≅ 𝟭` of the pullback of abelian
 pro-étale sheaves (`AlgebraicGeometry.ProEtale.upperStarIterateFrobeniusIso`, blueprint
-`lem-trf-absolute-frobenius-site`) is monoidal
+`lemma-scheme-frobenius-geometric-frobenius--1`) is monoidal
 (`AlgebraicGeometry.ProEtale.isMonoidal_upperStarIterateFrobeniusIso_hom`) and is the canonical
 comparison on the sheaves pulled back from the condensed point
 (`AlgebraicGeometry.ProEtale.upperStarIterateFrobeniusIso_hom_app_upperStarFromPoint`), in

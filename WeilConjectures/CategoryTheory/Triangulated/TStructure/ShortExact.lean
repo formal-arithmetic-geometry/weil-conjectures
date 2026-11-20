@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 Let `t` be a t-structure on a triangulated category `C`, with heart `H`, which is abelian
 (`CategoryTheory.Triangulated.TStructure.abelianHeart`). This file records the basic dictionary
 between the triangulated structure of `C` and the abelian structure of `H`
-(blueprint `lem-weil-heart-short-exact-triangles`):
+(blueprint `lemma-perverse-sheaves-curve--1`):
 
 1. truncation triangles are unique up to unique isomorphism
    (`CategoryTheory.Triangulated.TStructure.triangle_hom_ext_of_isLE_of_isGE`,
@@ -58,7 +58,7 @@ omit [HasZeroObject C] [Pretriangulated C] in
 lemma eq_zero_of_shift_map_eq_zero {X Y : C} (f : X ⟶ Y) (a : ℤ) (h : f⟦a⟧' = 0) : f = 0 :=
   (shiftFunctor C a).map_injective (by rw [h, Functor.map_zero])
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (1): two morphisms between distinguished
+/-- Blueprint `lemma-perverse-sheaves-curve--1` (1): two morphisms between distinguished
 triangles of the form `A ⟶ K ⟶ B ⟶ A⟦1⟧` with `A ≤ n` and `B ≥ n + 1` which agree on the
 middle term agree. In particular truncation triangles have no nontrivial automorphisms which are
 the identity on the middle term. -/
@@ -80,7 +80,7 @@ lemma triangle_hom_ext_of_isLE_of_isGE {T T' : Triangle C} (hT : T ∈ distTrian
     rw [hu, t.zero u (n - 1) (n + 1) (by lia), comp_zero]
   exact Triangle.hom_ext _ _ h₁' h h₃'
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (1): a distinguished triangle
+/-- Blueprint `lemma-perverse-sheaves-curve--1` (1): a distinguished triangle
 `A ⟶ K ⟶ B ⟶ A⟦1⟧` with `A ≤ n` and `B ≥ n + 1` is isomorphic to the truncation triangle of `K`
 by an isomorphism which is the identity on `K`. -/
 lemma exists_iso_triangleLEGE (T : Triangle C) (hT : T ∈ distTriang C) (n : ℤ)
@@ -133,17 +133,17 @@ lemma exists_iso_truncLE_of_distTriang {X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z)
   rw [he] at h'
   exact (comp_id _).symm.trans h'
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (1): the truncation `τ_{≤ n}`, as a functor
+/-- Blueprint `lemma-perverse-sheaves-curve--1` (1): the truncation `τ_{≤ n}`, as a functor
 to the subcategory `t.le n`. -/
 noncomputable def truncLEFunctor (n : ℤ) : C ⥤ (t.le n).FullSubcategory :=
   (t.le n).lift (t.truncLE n) (fun _ ↦ t.le_of_isLE _ n)
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (1): the truncation `τ_{≥ n}`, as a functor
+/-- Blueprint `lemma-perverse-sheaves-curve--1` (1): the truncation `τ_{≥ n}`, as a functor
 to the subcategory `t.ge n`. -/
 noncomputable def truncGEFunctor (n : ℤ) : C ⥤ (t.ge n).FullSubcategory :=
   (t.ge n).lift (t.truncGE n) (fun _ ↦ t.ge_of_isGE _ n)
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (1): the truncation `τ_{≤ n}` is right adjoint
+/-- Blueprint `lemma-perverse-sheaves-curve--1` (1): the truncation `τ_{≤ n}` is right adjoint
 to the inclusion of `t.le n`. -/
 noncomputable def truncLEAdjunction (n : ℤ) : (t.le n).ι ⊣ t.truncLEFunctor n :=
   Adjunction.mkOfHomEquiv
@@ -163,7 +163,7 @@ noncomputable def truncLEAdjunction (n : ℤ) : (t.le n).ι ⊣ t.truncLEFunctor
         ext
         exact t.to_truncLE_obj_ext (by simp [truncLEFunctor]) }
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (1): the truncation `τ_{≥ n}` is left adjoint
+/-- Blueprint `lemma-perverse-sheaves-curve--1` (1): the truncation `τ_{≥ n}` is left adjoint
 to the inclusion of `t.ge n`. -/
 noncomputable def truncGEAdjunction (n : ℤ) : t.truncGEFunctor n ⊣ (t.ge n).ι :=
   Adjunction.mkOfHomEquiv
@@ -187,7 +187,7 @@ end Truncation
 
 section Extensions
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (2): the heart is closed under
+/-- Blueprint `lemma-perverse-sheaves-curve--1` (2): the heart is closed under
 extensions. -/
 lemma heart₂ (T : Triangle C) (hT : T ∈ distTriang C) (h₁ : t.heart T.obj₁)
     (h₃ : t.heart T.obj₃) : t.heart T.obj₂ := by
@@ -237,7 +237,7 @@ lemma isLE_isGE_of_distTriang {X Y : H} (f : X ⟶ Y) {S : C} (g : t.ιHeart.obj
     t.isGE₂ _ (rot_of_distTriang _ hT) (-1) (t.isGE_of_ge (t.ιHeart.obj Y) (-1) 0)
       (t.isGE_shift (t.ιHeart.obj X) 0 1 (-1) (by lia))⟩
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (3): let `f : X ⟶ Y` be a morphism of the
+/-- Blueprint `lemma-perverse-sheaves-curve--1` (3): let `f : X ⟶ Y` be a morphism of the
 heart and `X ⟶ Y ⟶ S ⟶ X⟦1⟧` a distinguished triangle. Then `S ∈ [-1, 0]`, and the kernel of
 `f` is `(τ_{≤ -1} S)⟦-1⟧`, with kernel map induced by `τ_{≤ -1} S ⟶ S ⟶ X⟦1⟧`. -/
 lemma exists_isLimit_kernelFork_of_distTriang {X Y : H} (f : X ⟶ Y) {S : C}
@@ -253,7 +253,7 @@ lemma exists_isLimit_kernelFork_of_distTriang {X Y : H} (f : X ⟶ Y) {S : C}
   exact ⟨K, _, _, AbelianSubcategory.isLimitKernelFork hι hT hT', e₁,
     by rw [AbelianSubcategory.shift_ι_map_ιK, assoc]⟩
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (3): let `f : X ⟶ Y` be a morphism of the
+/-- Blueprint `lemma-perverse-sheaves-curve--1` (3): let `f : X ⟶ Y` be a morphism of the
 heart and `X ⟶ Y ⟶ S ⟶ X⟦1⟧` a distinguished triangle. Then the cokernel of `f` is
 `τ_{≥ 0} S`, with cokernel map `Y ⟶ S ⟶ τ_{≥ 0} S`. -/
 lemma exists_isColimit_cokernelCofork_of_distTriang {X Y : H} (f : X ⟶ Y) {S : C}
@@ -270,7 +270,7 @@ lemma exists_isColimit_cokernelCofork_of_distTriang {X Y : H} (f : X ⟶ Y) {S :
     by rw [AbelianSubcategory.ι_map_πQ]; simp⟩
 
 omit [IsTriangulated C] in
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (4): the connecting morphism of a
+/-- Blueprint `lemma-perverse-sheaves-curve--1` (4): the connecting morphism of a
 distinguished triangle whose terms lie in the heart is determined by the first two morphisms. -/
 lemma eq_of_distTriang_of_heart {X Y Z : H} (f : X ⟶ Y) (g : Y ⟶ Z)
     (δ δ' : t.ιHeart.obj Z ⟶ (t.ιHeart.obj X)⟦(1 : ℤ)⟧)
@@ -291,7 +291,7 @@ lemma eq_of_distTriang_of_heart {X Y Z : H} (f : X ⟶ Y) (g : Y ⟶ Z)
       (inferInstanceAs (t.IsGE (t.ιHeart.obj Z) 0)), comp_zero]
   rw [hc₂', this, id_comp]
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (4): a sequence `0 ⟶ X ⟶ Y ⟶ Z ⟶ 0` of the
+/-- Blueprint `lemma-perverse-sheaves-curve--1` (4): a sequence `0 ⟶ X ⟶ Y ⟶ Z ⟶ 0` of the
 heart is short exact if and only if it extends to a distinguished triangle
 `X ⟶ Y ⟶ Z ⟶ X⟦1⟧`. -/
 lemma shortExact_iff_exists_distTriang (S : ShortComplex H) :

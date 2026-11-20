@@ -138,7 +138,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace SheafOfModules
 
-set_option maxHeartbeats 3000000 in
 -- The module comparisons involve several nested element sites.
 set_option maxRecDepth 4000 in
 /-- Pullback from the represented source slice, with its colimit and unit comparisons.

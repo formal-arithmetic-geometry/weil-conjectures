@@ -69,8 +69,8 @@ private lemma mate_ofNatIsoLeft
     {G : C ⥤ E} {H : D ⥤ F}
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e₁ : L₁ ≅ L₁') (e₂ : L₂ ≅ L₂')
     (α : TwoSquare G L₁' L₂' H) :
-    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α).natTrans =
-      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)).natTrans := by
+    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α) =
+      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)) := by
   ext K
   simp [mateEquiv_apply, Adjunction.ofNatIsoLeft_unit,
     Adjunction.ofNatIsoLeft_counit, Category.assoc, ← Functor.map_comp]
@@ -88,9 +88,9 @@ private theorem fixed_tensor_mate
       G.map (tj.app N) ≫ e.app (TC.obj N) ≫ I.map (tf.app N) =
         tg.app (J.obj N) ≫ TB.map (e.app N) ≫ ti.app (F.obj N))
     (M : E) :
-    let ex := (mateEquiv adj adj' (TwoSquare.mk J F G I e)).natTrans
-    let pf := (mateEquiv adj adj (TwoSquare.mk TC F F TE tf)).natTrans
-    let pg := (mateEquiv adj' adj' (TwoSquare.mk TD G G TB tg)).natTrans
+    let ex := (mateEquiv adj adj' (TwoSquare.mk J F G I e))
+    let pf := (mateEquiv adj adj (TwoSquare.mk TC F F TE tf))
+    let pg := (mateEquiv adj' adj' (TwoSquare.mk TD G G TB tg))
     tj.app (R.obj M) ≫ J.map (pf.app M) ≫ ex.app (TE.obj M) =
       TD.map (ex.app M) ≫ pg.app (I.obj M) ≫ S.map (ti.app M) := by
   intro ex pf pg
@@ -128,9 +128,9 @@ private theorem right_projection_mate
       (((Functor.whiskeringLeft₂ D).obj F).obj F).obj U)
     (K : C) (M : D) :
     (mateEquiv adj adj (TwoSquare.mk (T.flip.obj K) F F (U.flip.obj (F.obj K))
-      (((flipFunctor _ _ _).map φ).app K))).natTrans.app M =
+      (((flipFunctor _ _ _).map φ).app K))).app M =
       ((adj.rightAdjointProjectionMap φ).app M).app K := by
-  simp [mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, flipFunctor, Functor.flip,
+  simp [mateEquiv_apply, TwoSquare.mk, flipFunctor, Functor.flip,
     Adjunction.rightAdjointProjectionMap_app_app, Adjunction.homEquiv_unit,
     Functor.map_comp]
 
@@ -284,7 +284,7 @@ private theorem open_exchange_mate
     openImmersionLowerShriekLowerStarExchange B sq =
       (mateEquiv (derivedUpperStarLowerStarAdjunction B q)
         (derivedUpperStarLowerStarAdjunction B p)
-        (TwoSquare.mk J F G I (derivedOpenImmersionLowerShriekBaseChangeIso B sq).inv)).natTrans :=
+        (TwoSquare.mk J F G I (derivedOpenImmersionLowerShriekBaseChangeIso B sq).inv)) :=
           by
   dsimp only
   unfold openImmersionLowerShriekLowerStarExchange
@@ -293,10 +293,10 @@ private theorem open_exchange_mate
     mapDerivedUpperStarLowerStarAdjunction_eq B p, mate_ofNatIsoLeft]
   apply congrArg (fun α ↦
     (mateEquiv (derivedUpperStarLowerStarAdjunction B q)
-      (derivedUpperStarLowerStarAdjunction B p) α).natTrans)
+      (derivedUpperStarLowerStarAdjunction B p) α))
   ext K
   simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.mk,
-    TwoSquare.natTrans,
+    
     derivedOpenImmersionLowerShriekBaseChangeIso, Iso.trans_inv, Iso.symm_inv,
     NatTrans.comp_app, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc]
@@ -374,14 +374,14 @@ private theorem mixed_projection
   have hpq :
       (mateEquiv (derivedUpperStarLowerStarAdjunction B q)
         (derivedUpperStarLowerStarAdjunction B q)
-        (TwoSquare.mk TC F F TE tf)).natTrans.app M =
+        (TwoSquare.mk TC F F TE tf)).app M =
       ((rightDerivedLowerStarProjectionMap B q).app M).app (L.obj N) := by
     exact right_projection_mate (derivedUpperStarLowerStarAdjunction B q) TW T
       (leftDerivedUpperStarTensorComparison B q) (L.obj N) M
   have hpp :
       (mateEquiv (derivedUpperStarLowerStarAdjunction B p)
         (derivedUpperStarLowerStarAdjunction B p)
-        (TwoSquare.mk TD G G TB tg)).natTrans.app (I.obj M) =
+        (TwoSquare.mk TD G G TB tg)).app (I.obj M) =
       ((rightDerivedLowerStarProjectionMap B p).app (I.obj M)).app N := by
     exact right_projection_mate (derivedUpperStarLowerStarAdjunction B p) TZ TV
       (leftDerivedUpperStarTensorComparison B p) N (I.obj M)

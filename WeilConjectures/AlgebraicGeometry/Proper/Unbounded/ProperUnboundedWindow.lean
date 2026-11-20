@@ -19,13 +19,11 @@ import WeilConjectures.AlgebraicGeometry.Proper.Unbounded.ProperUnboundedWindowI
 /-!
 # Proper direct image of unbounded ind-constructible complexes
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-proper-unbounded-window,
-statement and three proof paragraphs (blueprint: sk-lem-proper-unbounded-window).
-The schemes have the standing setting of sk-def-sfb-dc-setting, inherited through
-sk-lem-proper-heart-bound. All filtered diagrams are small in the coefficient universe.
-The window assertion records the actual two cohomology arrows of the truncation zigzag.
-Their composite, the inverse of the first followed by the second, is the required
-isomorphism in the full subcategory IndCons.
+The schemes have the standing setting of the uniform bound for proper direct images. All
+filtered diagrams are small in the coefficient universe. The window assertion records the two
+cohomology arrows of the truncation zigzag. Their composite, the inverse of the first followed
+by the second, is the required isomorphism in the full subcategory of ind-constructible
+modules.
 -/
 
 @[expose] public noncomputable section
@@ -60,15 +58,9 @@ private lemma dimensionBound_of_nat_tests (δ : WithBot ℕ∞) (d : ℤ)
     have := hδ 0 hzero
     omega
 
-/-- Preservation of Dic, its upper and lower bounds, and the canonical finite window.
-Dic is expanded as membership of every cohomology sheaf in the ambient filtered-colimit
-closure of constructible sheaves. The two window maps are the images of truncLEι and
-truncGEπ, not an arbitrary isomorphism between the endpoint sheaves. The first endpoint
-is ind-constructible by the first clause; the last endpoint is included explicitly.
-Invertibility of the two arrows puts the middle sheaf in IndCons too, and fullness makes
-their inverses and their composite morphisms of IndCons.
-Source: blueprint sk-lem-proper-unbounded-window, displayed assertions and final paragraph
-(blueprint: sk-lem-proper-unbounded-window). -/
+/-- Derived pushforward along `p` preserves complexes with ind-constructible cohomology, has
+amplitude `[0, 2d + 1]`, and in degree `q` its cohomology is computed on the window
+`τ^{≥ q - 2d - 1} τ^{≤ q} K`: the images of `truncLEι` and `truncGEπ` are isomorphisms. -/
 def ProperUnboundedWindowAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (p : X ⟶ Y) (d : ℤ) : Prop :=
@@ -98,27 +90,7 @@ def ProperUnboundedWindowAssertions
             ((DerivedCategory.TStructure.t.truncLE q).obj K)))))
 
 /-- Proper pushforward of unbounded complexes with ind-constructible finite-extension
-cohomology preserves that property, has amplitude [0,2d+1], and has the stated finite window.
-Source: blueprint main-20261015, sk-lem-proper-unbounded-window, all three paragraphs
-(blueprint: sk-lem-proper-unbounded-window).
-
-Proof for stage 3, following the five steps of the DAG:
-1. det-ambient-ind-derived-sums(2) and def-kun-truncations keep both canonical
-   truncations in Dic. Their cohomology agrees with that of the input in the retained
-   range and vanishes outside it. In particular tau_ge(-n) K is bounded below.
-2. det-proper-unbounded-window-bounded-below applies the bounded-below spectral sequence,
-   with sk-lem-proper-heart-bound, to give IndCons membership and both amplitude bounds.
-3. For arbitrary K and each degree q, det-proper-unbounded-window-arbitrary identifies
-   H^q(Rp_*K) with H^q(Rp_*tau_ge(-n) K) for sufficiently large n. Step 2 gives
-   ind-constructibility of the latter, hence of the former by repleteness. If K is at most
-   b, its truncations are too; step 2 and the same identification give the upper bound.
-4. If K is at least a, it is already bounded below. Apply step 2 directly for the lower
-   bound, with no bounded-above restriction.
-5. Set A = tau_le(q) K and B = tau_ge(q-2d-1) A. Step 1 keeps A and B in Dic.
-   det-proper-unbounded-window-iso makes the two canonical cohomology arrows alpha and
-   beta invertible. Step 3 puts their objects in IndCons. The required isomorphism is
-   alpha inverse followed by beta; its inverse is beta inverse followed by alpha.
-   Fullness of IndCons makes all these maps morphisms of that subcategory. -/
+cohomology preserves that property, has amplitude [0,2d+1], and has the stated finite window. -/
 theorem properUnboundedWindow
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
@@ -145,21 +117,7 @@ theorem properUnboundedWindow
   · intro q
     exact (proper_unbounded_window_iso ℓ E k p₀ hp₀ hpℓ X Y p d hd K hK q).2.2
 
-/-- The same unbounded proper-window theorem for the condensed algebraic closure.
-Its sections take values in a finite subextension, as in sk-def-sfb-qlbar-condensed.
-Source: blueprint main-20261015, sk-lem-proper-unbounded-window, all three paragraphs
-(blueprint: sk-lem-proper-unbounded-window).
-
-Proof for stage 3: det-ambient-ind-derived-sums(2) and def-kun-truncations give stability
-of Dic under the two good truncations. Apply det-proper-unbounded-window-bounded-below
-first to bounded-below inputs. For arbitrary inputs, in each degree use the eventual
-cohomology isomorphism of det-proper-unbounded-window-arbitrary, then the bounded-below
-case and closure of IndCons under isomorphism. This also gives the upper bound b+2d+1.
-The lower-bound case is already bounded below, so the bounded-below node applies directly.
-Finally apply det-proper-unbounded-window-iso to A = tau_le(q) K and its truncation
-B = tau_ge(q-2d-1) A. Both cohomology arrows are invertible and all three sheaves are
-ind-constructible. Their composite alpha inverse followed by beta is the window
-isomorphism, with inverse beta inverse followed by alpha, in the full category IndCons. -/
+/-- The same unbounded proper-window theorem for the condensed algebraic closure. -/
 theorem properUnboundedWindow_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)

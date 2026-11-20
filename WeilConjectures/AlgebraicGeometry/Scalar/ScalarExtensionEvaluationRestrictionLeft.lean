@@ -108,8 +108,11 @@ import all WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictio
 
 /-! # Tensor comparison for evaluated scalar extension
 
-Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03CY,
-applied to the vertical sequence topology.
+## References
+
+* Stacks Project, Modules on Sites, Section 03EK and Tag 03CY, applied to the vertical sequence
+  topology
+* Stacks Project, Section 03EK, restriction of pure tensors
 -/
 
 @[expose] public noncomputable section
@@ -144,8 +147,6 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
 
 include he
 
-set_option maxHeartbeats 500000 in
--- The two identity coefficient transports require substantial kernel normalization.
 private theorem evaluatedTensorRestriction_left
     {U V : Cᵒᵖ} (f : U ⟶ V)
     (x : ((evaluation.{c, v, max c v r} J B τ n).obj M).val.obj U) :
@@ -163,21 +164,9 @@ private theorem evaluatedTensorRestriction_left
     (α n) Q f (1 : (D n).obj.obj U) x
   simp only [map_one] at ht
   refine (congrArg (fun z ↦ (e V).hom z) ht).trans ?_
-  have hm : (Q.val.map f x : M.val.obj (op (n, V.unop))) =
-      M.val.map ((Prod.sectR n C).map f.unop).op x := rfl
-  exact (he V 1 (Q.val.map f x)).trans
-      (congrArg (fun y : M.val.obj (op (n, V.unop)) ↦
-        (1 : (systemRing.{c, v, max c v r} J D σ).obj.obj (op (n, V.unop)))
-          ⊗ₜ[(systemRing.{c, v, max c v r} J B τ).obj.obj (op (n, V.unop)),
-            (φ.hom.app (op (n, V.unop))).hom] y) hm)
+  exact he V 1 (M.val.map ((Prod.sectR n C).map f.unop).op x)
 
-/-- The left composite in tensor evaluation naturality has its generator value.
-Source: Stacks Project, Section 03EK, restriction of pure tensors.
-(blueprint: lem-sp-scalar-extension-evaluation-restriction-left).
-
-Proof: restriction sends 1 tensor x to 1 tensor the restricted section x.
-Apply the given pure-tensor formula for the sectionwise comparison before
-or after restriction, respectively. Evaluation uses the same raw restriction. -/
+/-- The left composite in tensor evaluation naturality has its generator value. -/
 theorem scalarExtension_evaluation_restriction_left
     {U V : Cᵒᵖ} (f : U ⟶ V)
     (x : ((evaluation.{c, v, max c v r} J B τ n).obj M).val.obj U) :

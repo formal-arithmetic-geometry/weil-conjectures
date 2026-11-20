@@ -76,7 +76,7 @@ private def residueExtensionIso
     {F : A ⥤ C} {G : B ⥤ D} [F.IsEquivalence] [G.IsEquivalence]
     (a : L ⊣ U) (b : L' ⊣ U') (e : U ⋙ F ≅ G ⋙ U') :
     L ⋙ G ≅ F ⋙ L' := by
-  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans
+  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom))
   let : IsIso α := CategoryTheory.isIso_inverseMate_of_equivalences a b e
   exact (asIso α).symm
 

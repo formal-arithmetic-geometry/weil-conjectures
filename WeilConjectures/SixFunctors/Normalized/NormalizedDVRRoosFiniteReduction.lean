@@ -56,7 +56,7 @@ private theorem exactDerived_reflects_iso
   exact isIso_of_mono_of_epi _
 
 /-- Finite reduction of the Roos limit of a normalized DVR tower.
-Source: blueprint lem-coef-normalized-dvr-effectivity, proof paragraphs 1--4;
+Source: blueprint lemma-sp-tower-adjunction-foundation--2, proof paragraphs 1--4;
 Bhatt--Scholze, Lemmas 3.5.4--3.5.7.
 (blueprint: lem-coef-normalized-dvr-roos-finite-reduction).
 

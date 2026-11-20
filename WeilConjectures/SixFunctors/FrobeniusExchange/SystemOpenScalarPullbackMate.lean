@@ -13,6 +13,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionComparisonPasting
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.Algebra.Homology.System.SystemScalarModel
+import all WeilConjectures.CategoryTheory.Cochain.CochainInverseMateComparison
+import all WeilConjectures.CategoryTheory.Derived.DerivedMateUnitComparison
 
 /-! # Open scalar mates on strict coefficient systems
 
@@ -57,21 +59,32 @@ theorem inverseMate_isIso_of_left_adjoints
     {G : A ⥤ C} {H : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (b₁ : L₁' ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₂ : L₂' ⊣ R₂)
     (w : TwoSquare R₁ H G R₂)
-    [IsIso ((mateEquiv b₁ b₂).symm w).natTrans] :
-    IsIso ((mateEquiv a₁ a₂).symm w).natTrans := by
+    [IsIso ((mateEquiv b₁ b₂).symm w)] :
+    IsIso ((mateEquiv a₁ a₂).symm w) := by
   have hw : (mateEquiv a₁ a₂).symm w = TwoSquare.mk _ _ _ _
       (Functor.whiskerLeft G (a₂.leftAdjointUniq b₂).hom ≫
-        ((mateEquiv b₁ b₂).symm w).natTrans ≫
+        ((mateEquiv b₁ b₂).symm w) ≫
           Functor.whiskerRight (a₁.leftAdjointUniq b₁).inv H) := by
     apply (mateEquiv a₁ a₂).injective
     rw [Equiv.apply_symm_apply, mateEquiv_leftAdjointUniq, Equiv.apply_symm_apply]
   rw [hw]
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  dsimp only [TwoSquare.mk]
   apply IsIso.comp_isIso'
   · exact (Functor.isoWhiskerLeft G (a₂.leftAdjointUniq b₂)).isIso_hom
   · apply IsIso.comp_isIso'
     · infer_instance
     · exact (Functor.isoWhiskerRight (a₁.leftAdjointUniq b₁).symm H).isIso_hom
+
+/-- Cancel the outer factors of an equality between composites of isomorphisms. -/
+private theorem inverse_square_factors
+    {C : Type*} [Category C] {A B D E F G : C}
+    (q : A ≅ B) (i : B ≅ D) (r : D ≅ E) (g : A ≅ F) (s : F ≅ G) (t : G ≅ E)
+    (h : q.hom ≫ i.hom ≫ r.hom = g.hom ≫ s.hom ≫ t.hom) :
+    i.inv ≫ q.inv ≫ g.hom = r.hom ≫ t.inv ≫ s.inv := by
+  apply (cancel_mono (s.hom ≫ t.hom)).1
+  simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [← h]
+  simp only [Iso.inv_hom_id_assoc]
 
 section Ordinary
 
@@ -103,7 +116,7 @@ private def sequenceRestrictionPullbackInv {X B : Scheme.{u}} (j : X ⟶ B) :
       integralComparisonSequencePullback l L j ⋙ sequenceRestriction l E L ι X :=
   ((mateEquiv (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
     (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j))).symm
-    (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv))
 
 section OpenRestriction
 
@@ -117,7 +130,7 @@ private theorem openRestrictionMate_app_apply {X B : Scheme.{u}} (j : X ⟶ B)
     (x : M.val.obj (op (((𝟭 ℕ).prod (openMap j)).obj U.unop))) :
     ((((mateEquiv (openPullAdj (sequenceRings l L) (sequenceQuotient l L) j)
         (openPullAdj (sequenceRings l E) (sequenceQuotient l E) j)).symm
-        (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).natTrans.app
+        (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).app
           M).val.app U) x = x := by
   change M.val.presheaf.map (((𝟭 ℕ).prod (openMap j)).map
       ((prodAdj (openAdj j)).unit.app U.unop)).op
@@ -138,27 +151,51 @@ private theorem openRestrictionMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] :
     IsIso ((mateEquiv (openPullAdj (sequenceRings l L) (sequenceQuotient l L) j)
       (openPullAdj (sequenceRings l E) (sequenceQuotient l E) j)).symm
-      (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)) := by
   have h (M : coefficientSequenceModules l L B) :
       IsIso (((mateEquiv (openPullAdj (sequenceRings l L) (sequenceQuotient l L) j)
         (openPullAdj (sequenceRings l E) (sequenceQuotient l E) j)).symm
-        (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).natTrans.app M) := by
+        (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).app M) := by
     apply sheafOfModules_isIso_of_bijective
     intro U
     have key := openRestrictionMate_app_apply l E L ι j M U
     refine ⟨fun x y hxy ↦ ?_, fun y ↦ ⟨y, key y⟩⟩
-    rw [key, key] at hxy
-    exact hxy
+    exact (key x).symm.trans (hxy.trans (key y))
   exact NatIso.isIso_of_isIso_app _
 
 end OpenRestriction
 
-set_option maxHeartbeats 1000000 in
--- elaborating the mate of the restriction adjunction is slow
+/-- The sectionwise argument with the sequence direct-image functors fixed explicitly. -/
+private theorem sequenceOpenRestrictionMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
+    [IsOpenImmersion j] :
+    IsIso ((mateEquiv
+      (R₁ := integralComparisonSequenceDirectImage l L j)
+      (R₂ := integralComparisonSequenceDirectImage l E j)
+      (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
+        (sequenceQuotient l L) j)
+      (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l E)
+        (sequenceQuotient l E) j)).symm
+      (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)) := by
+  have h (M : coefficientSequenceModules l L B) : IsIso
+      (((mateEquiv
+        (R₁ := integralComparisonSequenceDirectImage l L j)
+        (R₂ := integralComparisonSequenceDirectImage l E j)
+        (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
+          (sequenceQuotient l L) j)
+        (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l E)
+          (sequenceQuotient l E) j)).symm
+        (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).app M) := by
+    apply sheafOfModules_isIso_of_bijective
+    intro U
+    have key := openRestrictionMate_app_apply l E L ι j M U
+    refine ⟨fun x y hxy ↦ ?_, fun y ↦ ⟨y, key y⟩⟩
+    exact (key x).symm.trans (hxy.trans (key y))
+  exact NatIso.isIso_of_isIso_app _
+
 /-- The ordinary restriction/pullback comparison is invertible for an open immersion. -/
 private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] : IsIso (sequenceRestrictionPullbackInv l E L ι j) := by
-  have := openRestrictionMate_isIso l E L ι j
+  have := sequenceOpenRestrictionMate_isIso l E L ι j
   exact inverseMate_isIso_of_left_adjoints
     (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
     (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
@@ -178,7 +215,6 @@ private theorem normalizedAdjointComparison_choose_eq
   ((normalizedAdjointComparison F G R T adj₁ adj₂ e).choose_spec.2 _
     (fun X ↦ unit_conjugateEquiv_symm adj₂ adj₁ e.inv X)).symm
 
-set_option maxHeartbeats 1000000 in
 -- elaborating the mate of the restriction adjunction is slow
 /-- The ordinary scalar/pullback comparison is the scalar mate of the
 restriction/pullback comparison. -/
@@ -188,7 +224,7 @@ private theorem sequenceScalarPullback_hom_eq {X B : Scheme.{u}} (j : X ⟶ B) :
         (sequenceScalarAdjunction l E L ι X).choose).symm
         (TwoSquare.mk (sequenceRestriction l E L ι B) (integralComparisonSequencePullback l L j)
           (integralComparisonSequencePullback l E j) (sequenceRestriction l E L ι X)
-          (sequenceRestrictionPullbackInv l E L ι j))).natTrans := by
+          (sequenceRestrictionPullbackInv l E L ι j))) := by
   let adjY := (sequenceScalarAdjunction l E L ι B).choose
   have hY := sequenceScalarAdjunction_unit l E L ι B
   let adjZ := (sequenceScalarAdjunction l E L ι X).choose
@@ -228,7 +264,7 @@ private theorem sequenceScalarPullback_hom_eq {X B : Scheme.{u}} (j : X ⟶ B) :
   have hc : h.choose = (conjugateIsoEquiv adj₂ adj₁).symm e.symm :=
     normalizedAdjointComparison_choose_eq _ _ _ _ adj₁ adj₂ e
   rw [heq, hc]
-  have hi := congrArg TwoSquare.natTrans
+  have hi := 
     (iterated_mateEquiv_conjugateEquiv_symm adjY adjZ pE pL (TwoSquare.mk _ _ _ _ e.inv))
   exact hi.symm
 
@@ -253,8 +289,6 @@ private theorem sequenceDerived_kflat_ext (W : Scheme.{u}) {D : Type*} [Category
   apply (cancel_epi (F.map (DerivedCategory.Q.map r))).mp
   rw [α.naturality, β.naturality, h P hP]
 
-set_option maxHeartbeats 5000000 in
--- the derived mate comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the derived scalar mate of the
 restriction/pullback comparison, for any scalar models with normalized adjunctions. -/
 private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
@@ -271,7 +305,7 @@ private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
       sequenceRestriction l E L ι B ⋙ integralComparisonSequencePullback l E j)
     (a : integralComparisonSequencePullback l E j ⋙ MX.E ≅
       MB.E ⋙ integralComparisonSequencePullback l L j)
-    (ha : a.hom = ((mateEquiv oB oX).symm (TwoSquare.mk _ _ _ _ q.inv)).natTrans)
+    (ha : a.hom = ((mateEquiv oB oX).symm (TwoSquare.mk _ _ _ _ q.inv)))
     (S : integralComparisonDerivedSequencePullback l E j ⋙ MX.T ≅
       MB.T ⋙ integralComparisonDerivedSequencePullback l L j)
     (hS : ∀ (P : CochainComplex (coefficientSequenceModules l E B) ℤ),
@@ -288,7 +322,7 @@ private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
     ∃ (σB : MB.T ⊣ (sequenceRestriction l E L ι B).mapDerivedCategory)
       (σX : MX.T ⊣ (sequenceRestriction l E L ι X).mapDerivedCategory),
       S.hom = ((mateEquiv σB σX).symm (TwoSquare.mk _ _ _ _
-        (Functor.mapDerivedCategorySquareIso q).inv)).natTrans := by
+        (Functor.mapDerivedCategorySquareIso q).inv)) := by
   obtain ⟨AB, rfl⟩ := hAB
   obtain ⟨AX, rfl⟩ := hAX
   have hoB : oB.unit = AB.ordinaryAdj.unit := by
@@ -297,88 +331,51 @@ private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
   have hoX : oX.unit = AX.ordinaryAdj.unit := by
     ext P U x
     rw [huX, AX.unit_normalized]
+  have hoB' : oB = AB.ordinaryAdj := Adjunction.ext hoB
+  have hoX' : oX = AX.ordinaryAdj := Adjunction.ext hoX
+  subst oB oX
   refine ⟨AB.adjunction, AX.adjunction, ?_⟩
   unfold integralComparisonDerivedSequencePullback at S hS ⊢
   apply sequenceDerived_kflat_ext l E B
   intro P hP
   have : IsIso (AB.model.ε.app P) := AB.model.computes P hP
   let K := (AB.model.E.mapHomologicalComplex (.up ℤ)).obj P
-  let kP : (AX.model.E.mapHomologicalComplex (.up ℤ)).obj
-      (((integralComparisonSequencePullback l E j).mapHomologicalComplex (.up ℤ)).obj P) ⟶
-      ((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K :=
-    (NatIso.mapHomologicalComplex a (.up ℤ)).hom.app P
-  let qK : ((integralComparisonSequencePullback l E j).mapHomologicalComplex (.up ℤ)).obj
-      (((sequenceRestriction l E L ι B).mapHomologicalComplex (.up ℤ)).obj K) ⟶
-      ((sequenceRestriction l E L ι X).mapHomologicalComplex (.up ℤ)).obj
-        (((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K) :=
-    (NatTrans.mapHomologicalComplex q.inv (.up ℤ)).app K
-  have hS' : AX.model.T.map
-        ((integralComparisonSequencePullback l E j).mapDerivedCategoryFactors.hom.app P) ≫
-      AX.model.ε.app (((integralComparisonSequencePullback l E j).mapHomologicalComplex
-        (.up ℤ)).obj P) ≫ DerivedCategory.Q.map kP =
-      S.hom.app (DerivedCategory.Q.obj P) ≫
-        (integralComparisonSequencePullback l L j).mapDerivedCategory.map (AB.model.ε.app P) ≫
-        (integralComparisonSequencePullback l L j).mapDerivedCategoryFactors.hom.app K :=
-    hS P hP
-  have h1 : AB.adjunction.homEquiv (DerivedCategory.Q.obj P)
-      (DerivedCategory.Q.obj ((AB.model.E.mapHomologicalComplex (.up ℤ)).obj P))
-      (AB.model.ε.app P) =
-      DerivedCategory.Q.map ((AB.ordinaryAdj.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
-        (sequenceRestriction l E L ι B).mapDerivedCategoryFactors.inv.app K := by
-    have e1 : AB.model.ε.app P ≫ DerivedCategory.Q.map (𝟙 K) = AB.model.ε.app P := by
-      rw [CategoryTheory.Functor.map_id]
-      exact Category.comp_id _
-    rw [← e1]
-    refine (AB.transpose P _ (𝟙 _)).trans ?_
-    rw [Adjunction.homEquiv_id]
-  have h2 := (Functor.mapDerivedCategorySquareIso q).inv.naturality (AB.model.ε.app P)
-  simp only [Functor.comp_map] at h2
-  have h3 := AlgebraicGeometry.Scheme.mapDerivedCategorySquareIso_hom_app_factors
-    (integralComparisonSequencePullback l L j) (sequenceRestriction l E L ι X)
-    (sequenceRestriction l E L ι B) (integralComparisonSequencePullback l E j) q K
-  have h3' : (sequenceRestriction l E L ι X).mapDerivedCategory.map
-      ((integralComparisonSequencePullback l L j).mapDerivedCategoryFactors.hom.app K) =
-      ((Functor.mapDerivedCategorySquareIso q).hom.app _ ≫
-        (integralComparisonSequencePullback l E j).mapDerivedCategory.map
-          ((sequenceRestriction l E L ι B).mapDerivedCategoryFactors.hom.app K) ≫
-        (integralComparisonSequencePullback l E j).mapDerivedCategoryFactors.hom.app
-          (((sequenceRestriction l E L ι B).mapHomologicalComplex (.up ℤ)).obj K)) ≫
-        DerivedCategory.Q.map qK ≫
-        (sequenceRestriction l E L ι X).mapDerivedCategoryFactors.inv.app
-          (((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K) :=
-    (Iso.eq_comp_inv ((sequenceRestriction l E L ι X).mapDerivedCategoryFactors.app
-      (((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K) ≪≫
-      DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex q (.up ℤ)).app K))).2 h3.symm
-  have h5 := (integralComparisonSequencePullback l E j).mapDerivedCategoryFactors_hom_naturality
-    ((AB.ordinaryAdj.mapHomologicalComplex (.up ℤ)).unit.app P)
   apply (cancel_mono
     ((integralComparisonSequencePullback l L j).mapDerivedCategory.map (AB.model.ε.app P) ≫
     (integralComparisonSequencePullback l L j).mapDerivedCategoryFactors.hom.app K)).1
-  rw [← hS']
-  apply (AX.adjunction.homEquiv _ _).injective
-  rw [Adjunction.homEquiv_naturality_left]
-  refine (congrArg (_ ≫ ·) (AX.transpose _ _ _)).trans ?_
-  rw [Adjunction.homEquiv_naturality_right, AX.adjunction.homEquiv_unit]
-  have hm := (unit_mateEquiv_symm AB.adjunction AX.adjunction
+  rw [← hS P hP]
+  symm
+  refine CategoryTheory.unitComparison_aux
+    (AB.ordinaryAdj.mapHomologicalComplex (.up ℤ))
+    (AX.ordinaryAdj.mapHomologicalComplex (.up ℤ)) AB.adjunction AX.adjunction
+    AB.model.ε AX.model.ε
+    (sequenceRestriction l E L ι B).mapDerivedCategoryFactors.inv
+    (sequenceRestriction l E L ι X).mapDerivedCategoryFactors.inv
+    (integralComparisonSequencePullback l E j).mapDerivedCategoryFactors
+    (integralComparisonSequencePullback l L j).mapDerivedCategoryFactors
+    AB.transpose AX.transpose
+    (TwoSquare.mk _ _ _ _ (NatTrans.mapHomologicalComplex q.inv (.up ℤ)))
     (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso q).inv)
-    (DerivedCategory.Q.obj P)).symm
-  dsimp only [Functor.id_obj] at hm
-  erw [hm]
-  rw [CategoryTheory.Functor.map_comp, Category.assoc, ← reassoc_of% h2,
-    ← CategoryTheory.Functor.map_comp_assoc, ← Adjunction.homEquiv_unit, h1, h3']
-  simp only [Category.assoc]
-  rw [Iso.inv_hom_id_app_assoc, ← CategoryTheory.Functor.map_comp_assoc, Category.assoc,
-    Iso.inv_hom_id_app]
-  erw [Category.comp_id]
-  rw [reassoc_of% h5, ← DerivedCategory.Q.map_comp_assoc]
-  congr 2
-  refine congrArg DerivedCategory.Q.map ?_
-  rw [Adjunction.homEquiv_unit]
-  apply HomologicalComplex.hom_ext
-  intro n
-  have hu := unit_mateEquiv_symm oB oX (TwoSquare.mk _ _ _ _ q.inv) (P.X n)
-  rw [hoB, hoX] at hu
-  simpa [kP, qK, K, ha] using hu.symm
+    ?_ (NatIso.mapHomologicalComplex a (.up ℤ)).hom ?_ P
+  · intro K
+    exact inverse_square_factors ((Functor.mapDerivedCategorySquareIso q).app
+        (DerivedCategory.Q.obj K))
+      ((integralComparisonSequencePullback l E j).mapDerivedCategory.mapIso
+        ((sequenceRestriction l E L ι B).mapDerivedCategoryFactors.app K))
+      ((integralComparisonSequencePullback l E j).mapDerivedCategoryFactors.app
+        (((sequenceRestriction l E L ι B).mapHomologicalComplex (.up ℤ)).obj K))
+      ((sequenceRestriction l E L ι X).mapDerivedCategory.mapIso
+        ((integralComparisonSequencePullback l L j).mapDerivedCategoryFactors.app K))
+      ((sequenceRestriction l E L ι X).mapDerivedCategoryFactors.app
+        (((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K))
+      (DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex q (.up ℤ)).app K))
+      (AlgebraicGeometry.Scheme.mapDerivedCategorySquareIso_hom_app_factors
+        (integralComparisonSequencePullback l L j) (sequenceRestriction l E L ι X)
+        (sequenceRestriction l E L ι B) (integralComparisonSequencePullback l E j) q K)
+  · intro K
+    have hc := CategoryTheory.cochainMate_unit AB.ordinaryAdj AX.ordinaryAdj q.inv K
+    rw [← ha] at hc
+    exact hc
 
 end Derived
 
@@ -397,7 +394,7 @@ theorem systemScalarPullback_leftMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     (adjE : JE ⊣ integralComparisonDerivedSequencePullback l E j)
     (adjL : JL ⊣ integralComparisonDerivedSequencePullback l L j) :
     IsIso ((mateEquiv adjE adjL).symm (TwoSquare.mk _ _ _ _
-      (integralComparisonSystemScalarPullback l E L ι j).hom)).natTrans := by
+      (integralComparisonSystemScalarPullback l E L ι j).hom)) := by
   have : IsIso (sequenceRestrictionPullbackInv l E L ι j) :=
     sequenceRestrictionPullbackInv_isIso l E L ι j
   let q := (asIso (sequenceRestrictionPullbackInv l E L ι j)).symm
@@ -414,7 +411,7 @@ theorem systemScalarPullback_leftMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     (integralComparisonSystemScalarPullback l E L ι j)
     (integralComparisonSystemScalarPullback_existsUnique l E L ι j).exists.choose_spec
   rw [hS]
-  have h := congrArg TwoSquare.natTrans (iterated_mateEquiv_conjugateEquiv_symm adjE adjL σX σB
+  have h := (iterated_mateEquiv_conjugateEquiv_symm adjE adjL σX σB
     (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso q).inv))
   erw [h]
   change IsIso ((conjugateEquiv (adjE.comp σB) (σX.comp adjL)).symm

@@ -10,11 +10,7 @@ public import Mathlib.CategoryTheory.Monoidal.Category
 set_option autoImplicit false
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.ProEtale.RationalP1
-/-- Append a tensor-unit comparison to an evaluated prefix.
-Source: rational projective-line First identity, terminal unitors
-(blueprint: lem-sfb-finish-tensor-evaluation).
-Proof: postcompose the assumed equation with R(M tensor e.hom) and R(rho_M).
-Combine adjacent functor maps and left whiskerings and reassociate. -/
+/-- Append a tensor-unit comparison to an evaluated prefix. -/
 theorem finish_tensor_evaluation
     {C D : Type*} [Category C] [Category D] [MonoidalCategory C]
     (R : C ⥤ D) (M V U : C) {A : D} {Z U₀ U₁ U₂ : C}

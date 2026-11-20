@@ -11,6 +11,7 @@ public import WeilConjectures.RingTheory.SingularIdeal
 
 import Mathlib.RingTheory.Extension.Cotangent.BaseChange
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Kaehler.TensorProduct
 
 @[expose] public section
 

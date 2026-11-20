@@ -19,7 +19,7 @@ import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 /-!
 # The actual inverse limit of a finite étale surjective tower is a cover
 
-Source: blueprint, smooth purity, proof of `det-def-sp-tate-twist-locally-free`, (1);
+Source: blueprint, smooth purity, proof of `definition-tate-twists`, (1);
 Stacks Project, Tags 01YX, 01YW, 097N, 090N, 00HP, 00HQ and 094S
 (blueprint: lem-pur-finite-etale-surjective-limit-cover).
 
@@ -51,7 +51,7 @@ namespace FiniteEtaleTower
 
 /-- Restriction of a tower over `X` to the open subscheme `U`, by actual fibre products.
 Source: Stacks Project, Tags 01YX and 01YW, applied to the tower in blueprint proof (1)
-of `det-def-sp-tate-twist-locally-free`
+of `definition-tate-twists`
 (blueprint: lem-pur-finite-etale-surjective-limit-cover). -/
 noncomputable def affineDiagram {X : Scheme.{u}} (D : ℕᵒᵖ ⥤ Over X) (U : X.Opens) :
     ℕᵒᵖ ⥤ Scheme.{u} :=
@@ -59,7 +59,7 @@ noncomputable def affineDiagram {X : Scheme.{u}} (D : ℕᵒᵖ ⥤ Over X) (U :
 
 /-- The coordinate rings of the base-changed tower, with their actual transition maps.
 Source: Stacks Project, Tag 01YW, and blueprint proof (1) of
-`det-def-sp-tate-twist-locally-free`
+`definition-tate-twists`
 (blueprint: lem-pur-finite-etale-surjective-limit-cover). -/
 noncomputable def ringDiagram {X : Scheme.{u}} (D : ℕᵒᵖ ⥤ Over X) (U : X.Opens) :
     ℕᵒᵖᵒᵖ ⥤ CommRingCat.{u} :=
@@ -68,7 +68,7 @@ noncomputable def ringDiagram {X : Scheme.{u}} (D : ℕᵒᵖ ⥤ Over X) (U : X
 /-- The canonical map `A → colim Bₙ`, computed using the first stage. All stages give
 this same map because all transitions are over the base chart.
 Source: Stacks Project, Tag 01YW, and blueprint proof (1) of
-`det-def-sp-tate-twist-locally-free`
+`definition-tate-twists`
 (blueprint: lem-pur-finite-etale-surjective-limit-cover). -/
 noncomputable def baseMap {X : Scheme.{u}} (D : ℕᵒᵖ ⥤ Over X) (U : X.Opens) :
     Γ(U.toScheme, ⊤) ⟶ colimit (ringDiagram D U) :=
@@ -233,7 +233,7 @@ The cone is limiting after forgetting to schemes; its legs are the specified pro
 The singleton belongs to the precoverage of the small pro-étale site. The chart
 isomorphism respects every projection and the structure morphism to the base chart.
 
-Source: blueprint proof (1) of `det-def-sp-tate-twist-locally-free`;
+Source: blueprint proof (1) of `definition-tate-twists`;
 Stacks Project, Tags 01YX, 01YW, 097N, 090N, 00HP, 00HQ and 094S
 (blueprint: lem-pur-finite-etale-surjective-limit-cover).
 
@@ -254,9 +254,9 @@ Proof plan:
    the spectrum of the ring colimit maps onto the first stage, so the chart maps onto `U`.
 6. Flat and surjective `Spec (baseMap)` is faithfully flat
    (`def-weil-pbc-faithfully-flat-ring-map`, Mathlib `flat_and_surjective_SpecMap_iff`).
-7. Target locality (`sk-lem-pe-weakly-etale-stability`) over the affine-open cover gives
+7. Target locality (`lemma-stability`) over the affine-open cover gives
    global weak étaleness and surjectivity; the affine, hence quasi-compact, weakly étale
-   singleton is a small pro-étale cover (`def-weil-pbc-proetale-site`). No compactness or
+   singleton is a small pro-étale cover (`definition-small-pro-etale-site--1`). No compactness or
    separation assumption on `X` is used.
 -/
 theorem exists_finiteEtale_surjective_limit_cover {X : Scheme.{u}}

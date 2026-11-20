@@ -302,7 +302,7 @@ end Rational
 
 /-- Rational pullback commutes with a tower of the prescribed scalar extensions.
 Source: `scalarOperationsOrdinary_tower`, pullback clause, and the scalar comparison
-paragraph of def-weil-derived-pullback-tensor-hom; Stacks Project, Tags 07A4 and 099N.
+paragraph of prose-03-02; Stacks Project, Tags 07A4 and 099N.
 (blueprint: lem-weil-rational-pullback-scalar-tower).
 
 Proof: use the pullback clause of scalarOperationsOrdinary_tower on E -> L -> M.

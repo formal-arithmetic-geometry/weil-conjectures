@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.Ring.Constructions
 public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Topology.Category.Profinite.Limits
-public import Mathlib.Topology.Separation.Profinite
+public import Mathlib.Topology.Separation.Regular
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 
 /-!
@@ -138,8 +138,8 @@ theorem mem_closure_comap_mul_comap [CompactSpace P] [CompactSpace X] [T2Space X
       rw [hte]
       rfl
     obtain ⟨u, v, hu, hv, hxu, hyv, huv⟩ := isOpen_prod_iff.1 ht _ _ hqt
-    obtain ⟨U, hU, hxU, hUu⟩ := compact_exists_isClopen_in_isOpen hu hxu
-    obtain ⟨V, hV, hyV, hVv⟩ := compact_exists_isClopen_in_isOpen hv hyv
+    obtain ⟨U, hU, hxU, hUu⟩ := exists_isClopen_mem_of_isOpen hu hxu
+    obtain ⟨V, hV, hyV, hVv⟩ := exists_isClopen_mem_of_isOpen hv hyv
     refine ⟨U, hU, hxU, V, hV, hyV, fun q' hq'U hq'V ↦ ?_⟩
     have : q' ∈ (fun q ↦ (fst q, snd q)) ⁻¹' t := huv ⟨hUu hq'U, hVv hq'V⟩
     rw [hte] at this

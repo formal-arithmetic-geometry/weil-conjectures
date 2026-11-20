@@ -26,22 +26,20 @@ variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive 
 /-- Conjugation by an isomorphism `α : X ≅ Y`, as a ring isomorphism `End X ≃+* End Y`. -/
 def Iso.conjRingEquiv {X Y : C} (α : X ≅ Y) : End X ≃+* End Y where
   __ := α.conj
-  map_add' f g := by
-    simp only [MulEquiv.toEquiv_eq_coe, Equiv.toFun_as_coe, MulEquiv.coe_toEquiv, Iso.conj_apply]
-    rw [Preadditive.add_comp, Preadditive.comp_add]
+  map_add' f g := End.ext (by
+    simp only [MulEquiv.toEquiv_eq_coe, Equiv.toFun_as_coe, MulEquiv.coe_toEquiv,
+      Iso.conj_apply_asHom, End.add_asHom, Preadditive.add_comp, Preadditive.comp_add])
 
 @[simp]
 lemma Iso.conjRingEquiv_apply {X Y : C} (α : X ≅ Y) (f : End X) :
-    α.conjRingEquiv f = α.inv ≫ f ≫ α.hom :=
+    α.conjRingEquiv f = .of (α.inv ≫ (f).asHom ≫ α.hom) :=
   rfl
 
 /-- An additive functor induces a ring homomorphism `End X →+* End (F.obj X)`. -/
-@[simps]
+@[simps!]
 def Functor.mapEndRingHom (F : C ⥤ D) [F.Additive] (X : C) : End X →+* End (F.obj X) where
-  toFun := F.map
-  map_one' := F.map_id X
-  map_mul' f g := F.map_comp g f
-  map_zero' := F.map_zero X X
-  map_add' _ _ := F.map_add
+  __ := F.mapEnd X
+  map_zero' := End.ext (F.map_zero X X)
+  map_add' _ _ := End.ext F.map_add
 
 end CategoryTheory

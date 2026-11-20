@@ -103,7 +103,7 @@ variable (T : Type) [TopologicalSpace T] [Field T] [IsTopologicalRing T]
 /-- Every nonzero endomorphism of the regular module `C(-, T)` over a topological field `T` is
 invertible: the endomorphisms are the multiplications by the constants `T`. -/
 theorem isIso_of_ne_zero_end_regular_continuousMapRingObj
-    (t : End (Mod.regular (continuousMapRingObj.{u} T))) (ht : t ≠ 0) : IsIso t :=
+    (t : End (Mod.regular (continuousMapRingObj.{u} T))) (ht : t ≠ 0) : IsIso t.asHom :=
   isIso_of_ne_zero_of_surjective (Mod.regularEndRingHom.comp (continuousMapConstRingHom T))
     (Mod.regularEndRingHom_surjective.comp (continuousMapConstRingHom_surjective T)) t ht
 
@@ -124,11 +124,11 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 endomorphism of the unit of `Mod_{Spec Ω}` for a separably closed field `Ω`: the pullback from the
 point is an equivalence with condensed `Λ`-modules. -/
 theorem isIso_of_ne_zero_end_tensorUnit_of_regular
-    (hΛ : ∀ t : End (Mod.regular Λ), t ≠ 0 → IsIso t) (hΩ : IsField Ω)
+    (hΛ : ∀ t : End (Mod.regular Λ), t ≠ 0 → IsIso t.asHom) (hΩ : IsField Ω)
     (hsep : letI := hΩ.toField; IsSepClosed Ω)
     (t : End (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) Ab.{u + 1})
       (condensedRingObj Λ (Spec (.of Ω)))))) (ht : t ≠ 0) :
-    IsIso t := by
+    IsIso t.asHom := by
   let := hΩ.toField
   have := isEquivalence_upperStarFromPointMod (Ω := Ω) Λ
   exact (upperStarFromPointMod _ _).isIso_of_ne_zero_end (Iso.refl _) hΛ t ht
@@ -137,7 +137,7 @@ theorem isIso_of_ne_zero_end_tensorUnit_of_regular
 of a bounded constructible complex on a separably closed point `Spec Ω` are finite free: they are
 finitely presented, and the endomorphisms of the unit form a field. -/
 theorem isFree_homology_of_boundedConstructible
-    (hΛ : ∀ t : End (Mod.regular Λ), t ≠ 0 → IsIso t) (hΩ : IsField Ω)
+    (hΛ : ∀ t : End (Mod.regular Λ), t ≠ 0 → IsIso t.asHom) (hΩ : IsField Ω)
     (hsep : letI := hΩ.toField; IsSepClosed Ω)
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) Ab.{u + 1})
       (condensedRingObj Λ (Spec (.of Ω))))}
@@ -155,7 +155,7 @@ endomorphism of the regular module `Λ` is invertible, every bounded constructib
 separably closed point `Spec Ω` is a finite direct sum of shifts of the unit. Its cohomology
 sheaves are finite free, hence projective, so the truncation triangles split. -/
 theorem nonempty_shiftDecomposition_of_boundedConstructible_of_regular
-    (hΛ : ∀ t : End (Mod.regular Λ), t ≠ 0 → IsIso t) (hΩ : IsField Ω)
+    (hΛ : ∀ t : End (Mod.regular Λ), t ≠ 0 → IsIso t.asHom) (hΩ : IsField Ω)
     (hsep : letI := hΩ.toField; IsSepClosed Ω)
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) Ab.{u + 1})
       (condensedRingObj Λ (Spec (.of Ω))))}

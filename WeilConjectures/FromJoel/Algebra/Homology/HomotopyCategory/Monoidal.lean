@@ -233,7 +233,7 @@ lemma pentagon :
     exact this
 
 noncomputable instance instMonoidalCategory : MonoidalCategory (HomotopyCategory C c) :=
-  .ofBifunctor (unit C c) (bifunctor C c) (associator C c)
+  .ofBifunctorPentagon (unit C c) (bifunctor C c) (associator C c)
   (leftUnitor C c) (rightUnitor C c) (pentagon C c) (triangle C c)
 
 set_option backward.isDefEq.respectTransparency false in

@@ -18,11 +18,14 @@ is the composite of the derived base change map `La_X^* Ra_{Y*} F ⟶ Rq_* Lr^* 
 symmetry of `⊗ᴸ` and of the projection map of `q`
 (`AlgebraicGeometry.Etale.tensorBaseChangeMap_eq_projectionMap`). Hence the Künneth map
 `κ_{E,K}` (`AlgebraicGeometry.Etale.kunnethMap`) is the composite of the canonical maps of the
-blueprint: the tensor product with a constant complex (`lem-kun-0f12`), proper base change
-(`lem-kun-0f0c`) and the projection formula for the proper projection (`lem-kun-0f0g`)
-(`AlgebraicGeometry.Etale.kunnethMap_eq_of_isPullback`, blueprint `lem-kun-kunneth-map-agrees`).
-In particular, over a separably closed field and with torsion coefficients, `κ_{E,K}` is an
-isomorphism as soon as one factor is proper (`lem-kun-0f14a`, `lem-kun-kunneth-map-agrees`).
+blueprint: the tensor product with a constant complex
+(`proposition-open-direct-image-preserves-finite`), proper base change
+(`theorem-results-from-etale-theory--1`) and the projection formula for the proper projection
+(`proposition-proper-direct-image-constructible-complexes--9`)
+(`AlgebraicGeometry.Etale.kunnethMap_eq_of_isPullback`, blueprint
+`corollary-open-direct-image-over-field--2`). In particular, over a separably closed field and with
+torsion coefficients, `κ_{E,K}` is an isomorphism as soon as one factor is proper
+(`corollary-open-direct-image-over-field--2`).
 
 In the blueprint the proper factor is the first one. Here it is the second one, `Y`: with the
 conventions of `AlgebraicGeometry.Etale.kunnethMap`, whose canonical factorisation
@@ -32,10 +35,12 @@ this avoids composing with the symmetry of `⊗ᴸ` on both sides of `κ_{E,K}`.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.tensorBaseChangeMap_eq_projectionMap`.
-- `AlgebraicGeometry.Etale.kunnethMap_eq_of_isPullback` (`lem-kun-kunneth-map-agrees`).
+- `AlgebraicGeometry.Etale.kunnethMap_eq_of_isPullback`
+(`corollary-open-direct-image-over-field--2`).
 - `AlgebraicGeometry.Etale.isIso_kunnethMap_of_isProper_of_hasFiniteCohomologicalDimension`
-  (`lem-kun-0f14a`).
-- `AlgebraicGeometry.Etale.isIso_kunnethMap_of_isProper` (`lem-kun-kunneth-map-agrees`).
+  (`corollary-open-direct-image-over-field--2`).
+- `AlgebraicGeometry.Etale.isIso_kunnethMap_of_isProper`
+(`corollary-open-direct-image-over-field--2`).
 -/
 
 @[expose] public section
@@ -174,18 +179,20 @@ lemma tensorBaseChangeMap_eq_projectionMap (q : W ⟶ X) (r : W ⟶ Y) (aX : X �
     leftDerivedUpperStarComp_inv_app_comp_hom_app_congr_assoc A q aX r aY (q ≫ aX) (r ≫ aY)
       rfl w w.symm rfl]
 
-/-- Blueprint `lem-kun-kunneth-map-agrees`: the Künneth map is the composite of the canonical
-maps.
+/-- Blueprint `corollary-open-direct-image-over-field--2`: the Künneth map is the composite of the
+canonical maps.
 
 For a commutative square `q ≫ a_X = r ≫ a_Y = c` (with `q : W ⟶ X`, `r : W ⟶ Y`), the Künneth map
 `κ_{E,K} : Ra_{X*} E ⊗ᴸ Ra_{Y*} K ⟶ Rc_*(Lq^* E ⊗ᴸ Lr^* K)` is the composite of
 
 * the projection map `Ra_{X*} E ⊗ᴸ Ra_{Y*} K ⟶ Ra_{X*}(E ⊗ᴸ La_X^* Ra_{Y*} K)` (the tensor product
-  with a constant complex, `lem-kun-0f12`, over a separably closed field);
+  with a constant complex, `proposition-open-direct-image-preserves-finite`, over a separably closed
+  field);
 * `Ra_{X*}` of `E ⊗ᴸ` the derived base change map `La_X^* Ra_{Y*} K ⟶ Rq_* Lr^* K` (proper base
-  change, `lem-kun-0f0c`, if `a_Y` is proper);
+  change, `theorem-results-from-etale-theory--1`, if `a_Y` is proper);
 * `Ra_{X*}` of the projection map `E ⊗ᴸ Rq_* Lr^* K ⟶ Rq_*(Lq^* E ⊗ᴸ Lr^* K)` of `q`, up to the
-  symmetry of `⊗ᴸ` (the projection formula `lem-kun-0f0g`, if `q` is proper);
+  symmetry of `⊗ᴸ` (the projection formula
+  `proposition-proper-direct-image-constructible-complexes--9`, if `q` is proper);
 * the composition isomorphism `Ra_{X*} Rq_* ≅ Rc_*` (the Leray isomorphism).
 
 This is the statement `θ ∘ κ_{E,K} = id` of the blueprint, written as `κ_{E,K} = θ⁻¹`, with the
@@ -227,8 +234,8 @@ section Point
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k]
 
-/-- Blueprint `lem-kun-0f14a`: the Künneth formula with one proper factor, for torsion
-coefficients.
+/-- Blueprint `corollary-open-direct-image-over-field--2`: the Künneth formula with one proper
+factor, for torsion coefficients.
 
 Let `k` be a separably closed field, `Λ` a ring which is torsion as an additive group, `Y` a
 proper `k`-scheme and `X` a quasi-compact quasi-separated `k`-scheme of finite cohomological
@@ -241,12 +248,15 @@ of `AlgebraicGeometry.Etale.kunnethMap` is an isomorphism in `D((Spec k)_ét, Λ
 `D(Λ)` through `RΓ(Spec k, -)`).
 
 The blueprint works with `ℤ`-coefficients, `E ∈ D⁺(X_ét)` with torsion cohomology and
-`K ∈ D⁺(Y_ét)`, where the tensor product with a constant complex (`lem-kun-0f0e`) and the
-projection formula (`lem-kun-0f0f`) hold for bounded below complexes. Here the coefficient
-category is `ModuleCat Λ` for a torsion ring `Λ`; the inputs are then available on the
-unbounded derived categories (`lem-kun-0f12`, `lem-kun-0f0c`, `lem-kun-0f0g`), at the price of
-the finite cohomological dimension of `X`. As explained in the module docstring, the proper
-factor is the second one. -/
+`K ∈ D⁺(Y_ét)`, where the tensor product with a constant complex
+(`corollary-open-direct-image-over-field--2`) and the projection formula
+(`corollary-open-direct-image-over-field--2`) hold for bounded below complexes. Here the coefficient
+category is `ModuleCat Λ` for a torsion ring `Λ`; the inputs are then available on the unbounded
+derived categories (`proposition-open-direct-image-preserves-finite`,
+`theorem-results-from-etale-theory--1`,
+`proposition-proper-direct-image-constructible-complexes--9`), at the price of the finite
+cohomological dimension of `X`. As explained in the module docstring, the proper factor is the
+second one. -/
 theorem isIso_kunnethMap_of_isProper_of_hasFiniteCohomologicalDimension
     (hΛ : IsAddTorsion Λ) {X Y W : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [CompactSpace X] [QuasiSeparatedSpace X] (hX : HasFiniteCohomologicalDimension Λ X)
@@ -261,9 +271,9 @@ theorem isIso_kunnethMap_of_isProper_of_hasFiniteCohomologicalDimension
     (isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed Λ aX hX E _) inferInstance
     inferInstance
 
-/-- Blueprint `lem-kun-kunneth-map-agrees` (isomorphism statement): over a separably closed
-field `k`, with torsion coefficients `Λ`, the Künneth map of `X ×_k Y` for `X` of finite type and
-`Y` proper over `k` is an isomorphism, for all `E ∈ D(X_ét, Λ)`, `K ∈ D(Y_ét, Λ)` (unbounded).
+/-- Blueprint `corollary-open-direct-image-over-field--2` (isomorphism statement): over a separably
+closed field `k`, with torsion coefficients `Λ`, the Künneth map of `X ×_k Y` for `X` of finite type
+and `Y` proper over `k` is an isomorphism, for all `E ∈ D(X_ét, Λ)`, `K ∈ D(Y_ét, Λ)` (unbounded).
 It is the composite of the canonical isomorphisms of
 `AlgebraicGeometry.Etale.kunnethMap_eq_of_isPullback`. -/
 theorem isIso_kunnethMap_of_isProper (hΛ : IsAddTorsion Λ) {X Y W : Scheme.{u}}

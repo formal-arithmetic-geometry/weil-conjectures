@@ -16,9 +16,9 @@ public import Mathlib.Topology.KrullDimension
 /-!
 # Dimension and relative dimension of schemes
 
-Source: the blueprint of the Weil conjectures, chapter `sec-abelian-varieties`, unit
-`def-sc-jacobian`, node order 452 (blueprint: def-pc-dimension); Stacks Project, Properties,
-Tags 04MT and 04MU (dimension of a scheme via its local rings).
+Source: the blueprint of the Weil conjectures, chapter `chap-Abelian-varieties`, unit
+`theorem-picard-scheme-jacobian-over-separably--3`, node order 452 (blueprint: def-pc-dimension);
+Stacks Project, Properties, Tags 04MT and 04MU (dimension of a scheme via its local rings).
 
 ## Main definitions
 

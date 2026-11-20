@@ -79,9 +79,10 @@ lemma dualStr_whiskerRight_evaluation (P : WeilSheaf k₀ l X) (hP : P.IsLisse) 
     (P.dual hP).obj.str.hom.hom ▷ P.obj.carrier.X ≫
         Mod.evaluation P.obj.carrier (adicConstant k₀ l X).obj.carrier =
       _ ◁ P.obj.str.inv.hom ≫
-        μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+        μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+            WeilCoefficients.{u} l]
           (P.dual hP).obj.carrier.X P.obj.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (Mod.evaluation P.obj.carrier (adicConstant k₀ l X).obj.carrier) ≫
         (adicConstant k₀ l X).obj.str.hom.hom := by
   have hφ : P.obj.str.inv.hom ≫ P.obj.str.hom.hom = 𝟙 _ :=
@@ -99,7 +100,8 @@ noncomputable def dualTranspose {M N : WeilSheaf k₀ l X} (hM : M.IsLisse) (hN 
   ObjectProperty.homMk (ObjectProperty.homMk
     ⟨Mod.transpose i.hom.hom.f, Mod.uncurryHom_injective
       (Functor.LaxBraided.whiskerRight_evaluation_comm_of_transpose
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+          WeilCoefficients.{u} l]
         (Mod.uncurryHom_transpose i.hom.hom.f) (congrArg Mod.Hom.hom i.hom.hom.h)
         (congrArg Mod.Hom.hom N.obj.str.inv_hom_id) (dual_evaluation_str M hM)
         (dualStr_whiskerRight_evaluation N hN))⟩)

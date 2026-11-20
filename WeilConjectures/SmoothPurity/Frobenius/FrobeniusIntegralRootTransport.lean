@@ -14,7 +14,7 @@ import WeilConjectures.SmoothPurity.Frobenius.FrobeniusIntegralRootTransportModu
 
 /-! # Transport of the first integral root line
 
-Source: expanded DAG def-weil-frobenius-coefficient-twists, clause 2.
+Source: expanded DAG prose-10-21, clause 2.
 -/
 
 @[expose] public noncomputable section

@@ -16,9 +16,10 @@ public import WeilConjectures.Tactic.ExactModProofs
 
 # Gabber's Künneth formula with integral coefficients: the induction
 
-Gabber's Künneth formula with `𝒪_E`-coefficients (blueprint `sk-prop-tf-nearby-external-kunneth`)
-holds in every chart dimension (`NearbyCyclesModel.integralKunnethFormula`). The proof is by
-induction on the chart dimension, simultaneously for all separably closed fields `k'`:
+Gabber's Künneth formula with `𝒪_E`-coefficients (blueprint
+`proposition-external-kunneth-formula-nearby-cycles`) holds in every chart dimension
+(`NearbyCyclesModel.integralKunnethFormula`). The proof is by induction on the chart dimension,
+simultaneously for all separably closed fields `k'`:
 
 * the generic-slicing step with `𝒪_E`-coefficients over `Spec k'⟦t⟧` follows from the induction
   hypothesis over `Spec K⟦t⟧`, `K = k'(x)^alg`
@@ -54,8 +55,8 @@ variable {ℓ} {k' : Type u} [Field k'] [IsSepClosed k'] [Fact (ringChar k').Pri
   [Fact (ringChar k' ≠ ℓ)]
 
 /-- **The generic-slicing step with `𝒪_E`-coefficients** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Finite support"): if Gabber's Künneth formula with
-`𝒪_E`-coefficients holds in chart dimension `n` over the trait `Spec K⟦t⟧`, `K = k'(x)^alg`, so
+`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"): if Gabber's Künneth formula
+with `𝒪_E`-coefficients holds in chart dimension `n` over the trait `Spec K⟦t⟧`, `K = k'(x)^alg`, so
 does the generic-slicing step over `Spec k'⟦t⟧`. The induction hypothesis applies to the
 geometric slice of the product (`NearbyCyclesModel.sliceFst`, `NearbyCyclesModel.sliceSnd`), and
 `NearbyCyclesModel.isIso_map_kunnethMap_of_isIso_sliceFst_padicIntegers` concludes. -/

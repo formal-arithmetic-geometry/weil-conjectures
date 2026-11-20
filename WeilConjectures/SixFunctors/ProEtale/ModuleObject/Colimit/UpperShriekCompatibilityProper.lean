@@ -18,7 +18,7 @@ Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`, and 
 exchange `Rf^!_E ⋙ T_X ⟶ T_Y ⋙ Rf^!_{ℚ̄_ℓ}`
 (`ProEtale.CondensedRing.boundedConstructibleUpperShriekToPadicAlgCl`) is an isomorphism
 (`ProEtale.CondensedRing.isIso_boundedConstructibleUpperShriekToPadicAlgCl`): the clause on `f^!`
-of blueprint `sk-prop-scalar-six` for the coefficient change `E ⟶ ℚ̄_ℓ`.
+of blueprint `proposition-six-operations-change-coefficients` for the coefficient change `E ⟶ ℚ̄_ℓ`.
 
 By `ProEtale.CondensedRing.isIso_boundedConstructibleUpperShriekToPadicAlgCl_of_isIso` it suffices
 to treat the proper part `g` of a compactification. The category `Dᵇc(-)⟦ℚ̄_ℓ⟧` is the filtered
@@ -79,9 +79,10 @@ instance isIso_boundedConstructibleProperUpperShriekToPadicAlgCl {f : X ⟶ Y}
 
 variable (f : X ⟶ Y)
 
-/-- Blueprint `det-prop-scalar-six-exceptional` (`sk-prop-scalar-six`), the clause on `f^!` for
-the coefficient change `E ⟶ ℚ̄_ℓ`: the canonical comparison `Rf^!_E ⋙ T_X ⟶ T_Y ⋙ Rf^!_{ℚ̄_ℓ}`
-(the mate of the lower-shriek comparison) is an isomorphism on bounded constructible complexes. -/
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image`
+(`proposition-six-operations-change-coefficients`), the clause on `f^!` for the coefficient change
+`E ⟶ ℚ̄_ℓ`: the canonical comparison `Rf^!_E ⋙ T_X ⟶ T_Y ⋙ Rf^!_{ℚ̄_ℓ}` (the mate of the
+lower-shriek comparison) is an isomorphism on bounded constructible complexes. -/
 theorem isIso_boundedConstructibleUpperShriekToPadicAlgCl :
     IsIso (boundedConstructibleUpperShriekToPadicAlgCl ℓ E f) :=
   isIso_boundedConstructibleUpperShriekToPadicAlgCl_of_isIso ℓ E f

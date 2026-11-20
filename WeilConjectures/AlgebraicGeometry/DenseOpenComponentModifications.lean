@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.DenseOpenComponentModificationsNonempty
 # Dense-open gluing of component modifications
 
 Source: Stacks Project, Morphisms 0BAJ and Etale Cohomology 0A3Q.
-(blueprint: lem-weil-pbc-dense-open-component-modifications)
+(blueprint: theorem-cohomology-curves)
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry
 /-- The coproduct of modifications of distinct integral components is an isomorphism
 on a dense open of the reduced target.
 Source: Stacks Project, Morphisms 0BAJ and the proof of Etale Cohomology 0A3Q.
-(blueprint: lem-weil-pbc-dense-open-component-modifications)
+(blueprint: theorem-cohomology-curves)
 
 Proof: Write Z i for the image of ι i. Remove every Z j with j different from i,
 obtaining an open W i contained in Z i and containing its generic point. The image

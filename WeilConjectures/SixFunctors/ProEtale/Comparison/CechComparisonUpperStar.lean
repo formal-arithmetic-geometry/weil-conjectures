@@ -92,7 +92,7 @@ the comparison pullback `ν^* I` of an injective étale sheaf `I` with values in
 morphism `f` of affine pro-étale `W`-schemes, is exact in positive degrees. Presenting `f` as a
 cofiltered limit of morphisms of affine étale `W`-schemes, this Čech complex is the filtered
 colimit of the Čech complexes of `I` for these morphisms, which are exact since `I` is
-injective. (blueprint: `lem-weil-pbc-comparison-injective-acyclicity`) -/
+injective. (blueprint: `lemma-acyclicity-pulled-back-injectives`) -/
 theorem exactAt_overCechComplex_comparisonUpperStar
     (I : Sheaf W.smallEtaleTopology A) [Injective I] {V V' : W.AffineProEt} (f : V' ⟶ V)
     (q : ℕ) :

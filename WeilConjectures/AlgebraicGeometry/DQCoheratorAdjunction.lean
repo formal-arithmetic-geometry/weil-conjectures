@@ -88,7 +88,7 @@ Source: Stacks Project, Tag 0B6I, final proof paragraph
 
 Proof: the shifted complex has only one nonzero cohomology sheaf, namely O_Y,
 which is quasi-coherent; every other cohomology sheaf is zero and quasi-coherent.
-Use `def-pc-derived-category` to conclude. -/
+Use `lemma-coherent-base-change-invertible-sheaves` to conclude. -/
 theorem structureSheaf_shift_is_derivedQCoh (Y : Scheme.{u}) [CompactSpace Y]
     [QuasiSeparatedSpace Y]
     [HasDerivedCategory.{w}
@@ -354,8 +354,6 @@ private noncomputable def unitClassDerivedEquiv (Y : Scheme.{u})
 
 open CochainComplex HomComplex in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- Unfolding the composite Hom equivalence also checks both localization and shift structures.
 private lemma unitClassDerivedEquiv_naturality (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {I J : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}
@@ -373,6 +371,20 @@ private lemma unitClassDerivedEquiv_naturality (Y : Scheme.{u})
   let S := (CochainComplex.singleFunctor C 0).obj
     (SheafOfModules.unit (moduleRings Y.toRingedSpace))
   let sh := shiftEquiv' (DerivedCategory C) (-i) i (neg_add_cancel i)
+  -- Compute naturality before applying the adjunction's Hom equivalence.
+  have hcomp :
+      (DerivedCategory.quotientCompQhIso C).inv.app S ≫
+        DerivedCategory.Qh.map (CohomologyClass.toHom (DQComparisonAux.postClass f i a)) ≫
+        (DerivedCategory.quotientCompQhIso C).hom.app (J⟦i⟧) ≫
+        (DerivedCategory.Q.commShiftIso i).hom.app J =
+      ((DerivedCategory.quotientCompQhIso C).inv.app S ≫
+        DerivedCategory.Qh.map (CohomologyClass.toHom a) ≫
+        (DerivedCategory.quotientCompQhIso C).hom.app (I⟦i⟧) ≫
+        (DerivedCategory.Q.commShiftIso i).hom.app I) ≫ (DerivedCategory.Q.map f)⟦i⟧' := by
+    dsimp only [C, S]
+    simp only [hh, Functor.map_comp, Category.assoc,
+      DerivedCategory.quotientCompQhIso_hom_naturality_assoc,
+      Functor.commShiftIso_hom_naturality]
   change (sh.toAdjunction.homEquiv (DerivedCategory.Q.obj S)
     (DerivedCategory.Q.obj J)).symm
       ((DerivedCategory.quotientCompQhIso C).inv.app S ≫
@@ -385,17 +397,9 @@ private lemma unitClassDerivedEquiv_naturality (Y : Scheme.{u})
           DerivedCategory.Qh.map (CohomologyClass.toHom a) ≫
           (DerivedCategory.quotientCompQhIso C).hom.app (I⟦i⟧) ≫
           (DerivedCategory.Q.commShiftIso i).hom.app I) ≫ DerivedCategory.Q.map f
-  rw [hh, Functor.map_comp]
-  simp only [Category.assoc]
-  erw [(DerivedCategory.quotientCompQhIso C).hom.naturality_assoc]
-  erw [(DerivedCategory.Q.commShiftIso i).hom.naturality]
-  simp only [Functor.comp_map]
-  simpa only [sh, shiftEquiv', Category.assoc] using!
-    sh.toAdjunction.homEquiv_naturality_right_symm
-      ((DerivedCategory.quotientCompQhIso C).inv.app S ≫
-        DerivedCategory.Qh.map (CohomologyClass.toHom a) ≫
-        (DerivedCategory.quotientCompQhIso C).hom.app (I⟦i⟧) ≫
-        (DerivedCategory.Q.commShiftIso i).hom.app I) (DerivedCategory.Q.map f)
+  exact (congrArg (sh.toAdjunction.homEquiv (DerivedCategory.Q.obj S)
+    (DerivedCategory.Q.obj J)).symm hcomp).trans
+      (sh.toAdjunction.homEquiv_naturality_right_symm _ (DerivedCategory.Q.map f))
 
 /-- Global degree-i cohomology of a K-injective representative is the derived Hom
 from O_Y[-i], as an additive group.
@@ -440,7 +444,7 @@ Proof: global sections of a K-injective representative compute RΓ
 (`def-pc-global-derived-rhom`). Degree-i cocycles are chain maps from O_Y[-i],
 and coboundaries are null homotopies. The K-injective comparison
 (`lem-sc-kinjective-quasi-iso-comparison`) identifies this cohomology with derived Hom.
-The shift O_Y[-i] has quasi-coherent cohomology (`def-pc-derived-category`).
+The shift O_Y[-i] has quasi-coherent cohomology (`lemma-coherent-base-change-invertible-sheaves`).
 Adjunction identifies these groups with Hom into DQ_Y. An isomorphism after DQ_Y
 therefore gives an isomorphism on each global cohomology group, which is precisely
 quasi-isomorphism of the global-sections complexes. -/

@@ -124,8 +124,6 @@ private theorem injectiveContinuity_of_derived
     hd.fac c s]
   exact (rightDerivedObjQIso_naturality H (K := J.obj s) (L := c.pt) (c.ι.app s)).symm
 
-set_option maxHeartbeats 400000 in
--- Comparing the strict models needs additional elaboration heartbeats.
 set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimit inference needs a larger typeclass search budget.
 set_option synthInstance.maxSize 4096 in
@@ -164,6 +162,12 @@ theorem condensed_closed_costalk_injective_continuity
     (hq : QuasiIso (colimit.desc J c)) :
     QuasiIso (colimit.desc (J ⋙ H.mapHomologicalComplex (.up ℤ))
       ((H.mapHomologicalComplex (.up ℤ)).mapCocone c)) := by
+  -- Cache the module colimits before specializing the abstract continuity argument.
+  let A := Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)
+  let B := Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)
+  have : HasColimitsOfShape I A := inferInstance
+  have : HasColimitsOfShape I B := inferInstance
+  have : HasExactColimitsOfShape I B := inferInstance
   exact injectiveContinuity_of_derived H J c a hJ hJi hc hci hq
     (fun q ↦ condensed_closed_costalk_derived_continuity T Λ i H adj J a hJ q)
 

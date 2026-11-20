@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 set_option linter.privateModule false
 

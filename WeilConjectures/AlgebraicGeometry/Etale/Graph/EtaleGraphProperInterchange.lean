@@ -60,16 +60,16 @@ theorem graph_proper_interchange
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) b inferInstance)).symm
       (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A)
-        sq.toCommSq).hom)).natTrans)] :
+        sq.toCommSq).hom)))] :
     let sumEx := ((mateEquiv
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) b inferInstance)).symm
       (TwoSquare.mk _ _ _ _
-        (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq).hom)).natTrans
+        (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq).hom))
     let gam := (mateEquiv
       (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q)
       (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
-      (TwoSquare.mk _ _ _ _ (inv sumEx))).natTrans
+      (TwoSquare.mk _ _ _ _ (inv sumEx)))
     (Functor.isoWhiskerRight (graphChosenProperComparison A q).symm
         (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory ≪≫
       Functor.isoWhiskerLeft (rightDerivedLowerShriek (ModuleCat.{u + 1} A) q)
@@ -86,7 +86,7 @@ theorem graph_proper_interchange
   let θ := (mateEquiv
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
-      (TwoSquare.mk _ _ _ _ (etaleLowerShriekBaseChangeIso A sq).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (etaleLowerShriekBaseChangeIso A sq).hom))
   have hθ := cartesian_sum_mate_sheaf_normalization A q p b v sq
   have hmate := cartesian_sum_mate_units A q p b v sq
   apply Functor.rightDerived_ext

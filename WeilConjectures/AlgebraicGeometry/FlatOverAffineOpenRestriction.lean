@@ -40,8 +40,8 @@ private theorem flatOver_morphismRestrict
   convert hh using 1 <;> try rfl
   ext r m
   change (G.smul (((f ⁻¹ᵁ V).ι.appIso U0.1).inv.hom
-    ((f.appLE V1.1 U1.1 e1).hom r))).hom m =
-      (G.smul ((f.appLE V1.1 U1.1 e1).hom r)).hom m
+    ((f.appLE V1.1 U1.1 e1).hom r))).asHom.hom m =
+      (G.smul ((f.appLE V1.1 U1.1 e1).hom r)).asHom.hom m
   rw [Scheme.Opens.ι_appIso]
   rfl
 

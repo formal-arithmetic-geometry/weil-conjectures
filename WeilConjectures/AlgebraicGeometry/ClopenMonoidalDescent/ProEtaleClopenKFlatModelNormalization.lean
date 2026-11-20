@@ -89,7 +89,6 @@ private theorem flat_resolution {X : Scheme.{t}}
   exact ⟨V, f, hf, fun n ↦ (exactFunctor _ _).prop_of_iso
     (SheafOfModules.siteSheafTensorRightIso R (V.X n)).symm (hflat n), hq⟩
 
-set_option maxHeartbeats 500000 in
 -- Elaborating both natural-isomorphism composites involves large dependent functor types.
 /-- The normalization on flat-term K-flat models extends to every K-flat pair.
 Source: Stacks Project, sites-cohomology.tex, Tags 06YS and 06YT

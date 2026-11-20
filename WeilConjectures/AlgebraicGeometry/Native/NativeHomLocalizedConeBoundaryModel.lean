@@ -16,7 +16,9 @@ import all WeilConjectures.AlgebraicGeometry.Native.NativeHomEvaluationShiftOne
 
 /-! # The K-injective native Hom cone boundary
 
-Source: Stacks Project, Tags 08J9 and 08JC.
+## References
+
+* Stacks Project, Tags 08J9 and 08JC
 -/
 
 @[expose] public noncomputable section
@@ -84,17 +86,9 @@ private noncomputable def modelComparison (I : CochainComplex C ℤ) [I.IsKInjec
 
 end Model
 
-/-- The signed native-Hom cone calculation on a K-injective model.
-Source: Stacks Project, Tag 08JC, the cone calculation in lemma-RHom-triangulated
-(blueprint: lem-sf-native-hom-localized-cone-boundary-model).
-
-The Hom complex into a K-injective complex identifies the Hom of an ordinary
-mapping cone with the inverse rotation of the Hom cone.  The two summand
-coordinates determine the first two arrows, and the degree-one signed mate
-identifies the connecting arrow.  Applying localization and the evaluation
-comparison gives the displayed derived triangle.  This is the model-level
-calculation; transport to an arbitrary coefficient is a separate theorem.
--/
+/-- For a K-injective complex `I`, applying the internal Hom into `I` to the opposite of the
+mapping-cone triangle of `f`, with the signed source component on the connecting arrow, gives a
+distinguished triangle in the derived category. -/
 theorem nativeHom_localized_cone_boundary_model
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]

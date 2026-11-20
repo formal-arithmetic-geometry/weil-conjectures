@@ -32,8 +32,15 @@ universe u
 open scoped TensorProduct
 namespace RingTheory
 
-set_option maxHeartbeats 800000 in
--- The tensor quotient and integral-closure algebra towers need extra elaboration heartbeats.
+private theorem maximalIdeal_eq_span_of_unramified
+    {R T : Type u} [CommRing R] [CommRing T] [IsLocalRing R] [IsLocalRing T]
+    [Algebra R T] [IsLocalHom (algebraMap R T)] [Algebra.FormallyUnramified R T]
+    [Algebra.EssFiniteType R T]
+    (t : R) (ht : IsLocalRing.maximalIdeal R = Ideal.span {t}) :
+    IsLocalRing.maximalIdeal T = Ideal.span {algebraMap R T t} := by
+  rw [← Algebra.FormallyUnramified.map_maximalIdeal (R := R), ht,
+    Ideal.map_span, Set.image_singleton]
+
 /-- The root generates the maximal ideal of an integral-closure local factor.
 
 Source: Stacks Project, Tags 09EV, 09EB, 0BRM and 09E7.
@@ -87,10 +94,21 @@ theorem dvr_galois_root_factor_uniformizer
   let f := (Polynomial.X : Polynomial B) ^ n - Polynomial.C pi
   let A := AdjoinRoot f
   let D := E ⊗[B] A
-  obtain ⟨hdomA, hdvrA, hmaxA⟩ :=
+  intro P hP
+  let := hP
+  let F := D ⧸ P
+  let alpha : A →+* F := (Ideal.Quotient.mk P).comp
+    (Algebra.TensorProduct.includeRight : A →ₐ[B] D).toRingHom
+  let := alpha.toAlgebra
+  let S := integralClosure A F
+  intro Q hQ hcontract
+  let := hQ
+  have hroot :=
     AlgebraicGeometry.Scheme.dvr_uniformizer_root_algebra B pi hpi n hnpos
-  let := hdomA
-  let := hdvrA
+  -- Project the instances without dependent elimination over the tensor/localization goal.
+  have hdomA := hroot.choose
+  have hdvrA := hroot.choose_spec.choose
+  have hmaxA := hroot.choose_spec.choose_spec
   let : Module.Finite B A :=
     (Polynomial.monic_X_pow_sub_C pi hnpos.ne').finite_adjoinRoot
   let : FaithfulSMul B A := (faithfulSMul_iff_algebraMap_injective B A).mpr (by
@@ -106,18 +124,9 @@ theorem dvr_galois_root_factor_uniformizer
       IsLocalRing.maximalIdeal A ^ n := by
     rw [hpi.maximalIdeal_eq, Ideal.map_span, Set.image_singleton, hmaxA,
       Ideal.span_singleton_pow, hrel]
-  intro P hP
-  let := hP
-  let F := D ⧸ P
-  let alpha : A →+* F := (Ideal.Quotient.mk P).comp
-    (Algebra.TensorProduct.includeRight : A →ₐ[B] D).toRingHom
-  let := alpha.toAlgebra
-  let S := integralClosure A F
   let : Module.Finite A S :=
     dvr_root_tensor_factor_integralClosure_finite B A E
       ⟨hE.1, inferInstance⟩ P hP
-  intro Q hQ hcontract
-  let := hQ
   have hc : Q.comap (algebraMap A S) = IsLocalRing.maximalIdeal A :=
     hcontract.trans hmaxA.symm
   let : Algebra.FormallyUnramified A (Localization.AtPrime Q) :=
@@ -136,9 +145,7 @@ theorem dvr_galois_root_factor_uniformizer
         (algebraMap S (Localization.AtPrime Q)) = Q :=
       Localization.AtPrime.under_maximalIdeal
     exact (congrArg (Ideal.comap (algebraMap A S)) hloc).trans hc
-  have hm := Algebra.FormallyUnramified.map_maximalIdeal
-    (R := A) (S := Localization.AtPrime Q)
-  rw [hmaxA, Ideal.map_span, Set.image_singleton] at hm
-  exact hm.symm
+  exact maximalIdeal_eq_span_of_unramified (T := Localization.AtPrime Q)
+    (AdjoinRoot.root f) hmaxA
 
 end RingTheory

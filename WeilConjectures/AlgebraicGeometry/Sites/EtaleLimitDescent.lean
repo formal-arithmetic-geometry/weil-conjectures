@@ -19,9 +19,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 Let `R = colim Rⱼ` be a filtered colimit of commutative rings. An étale `R`-algebra is the base
 change of an étale algebra over one of the `Rⱼ`
-(`CommRingCat.exists_isPushout_of_etale`): one lifts a standard smooth presentation of relative
-dimension zero, together with an inverse of its Jacobian modulo the relations, and the identity
-expressing this inverse, to a common stage.
+(`CommRingCat.exists_isPushout_of_etale`).
 
 Geometrically, let `{Dᵢ}` be a cofiltered system of schemes with affine transition maps and limit
 `X = lim Dᵢ`.
@@ -38,8 +36,6 @@ Geometrically, let `{Dᵢ}` be a cofiltered system of schemes with affine transi
 - `AlgebraicGeometry.isLimitBaseChangeOverCone`: for `W ⟶ R` and a system over `R`, the
   `W ×_R Dᵢ` have limit `W ×_R X`.
 
-These are part of blueprint `lem-weil-pbc-etale-finite-data-descent`.
-
 Over a general base, let `X = lim Dⱼ` be a cofiltered limit of schemes with affine transition
 maps. This file also collects the finite-presentation data which descends from `X` to some stage
 `Dⱼ`, in the form in which it is used for the continuity of étale sections
@@ -47,16 +43,14 @@ maps. This file also collects the finite-presentation data which descends from `
 
 - `AlgebraicGeometry.exists_etale_isPullback_of_isAffine`: if all `Dⱼ` are affine, every étale
   `X`-scheme is, around any of its points, dominated by the base change of an affine scheme
-  étale over some `Dⱼ`. The proof writes the étale `X`-scheme locally as `Spec` of a standard
-  étale algebra over `Γ(X) = colim Γ(Dⱼ)`, whose finitely many coefficients come from a stage.
-- `AlgebraicGeometry.exists_etale_refinement_of_isLimit`: the same for a scheme étale over the
+  étale over some `Dⱼ`.
+-`AlgebraicGeometry.exists_etale_refinement_of_isLimit`: the same for a scheme étale over the
   base change `V ×_{Dₖ} X` of a scheme `V` étale over a stage `Dₖ`.
 - `AlgebraicGeometry.exists_etale_isPullback_of_isLimit`: if the `Dⱼ` are moreover quasi-compact
   and quasi-separated, every quasi-compact quasi-separated étale `X`-scheme is the base change
   of a quasi-compact quasi-separated scheme étale over some stage.
 - `AlgebraicGeometry.etale_finite_data_descent_of_isLimit`: the descent of étale objects,
-  morphisms, equalities and coverings, bundled (blueprint
-  `lem-weil-pbc-etale-finite-data-descent`).
+  morphisms, equalities and coverings, bundled.
 -/
 
 @[expose] public section
@@ -105,8 +99,7 @@ lemma map_det_jacobiMatrixOf {A B : Type*} [CommRing A] [CommRing B] (φ : A →
 include hc in
 /-- **Étale algebras descend along filtered colimits of rings.** If `S` is an étale algebra
 over the colimit `c.pt` of a filtered diagram `F` of commutative rings, then `S` is the base
-change of an étale algebra `T` over one of the `F.obj j`.
-(blueprint: part of `lem-weil-pbc-etale-finite-data-descent`) -/
+change of an étale algebra `T` over one of the `F.obj j`. -/
 theorem exists_isPushout_of_etale {S : CommRingCat.{u}} (f : c.pt ⟶ S) (hf : f.hom.Etale) :
     ∃ (j : J) (T : CommRingCat.{u}) (g : F.obj j ⟶ T) (_ : g.hom.Etale) (h : T ⟶ S),
       IsPushout (c.ι.app j) g f h := by
@@ -207,8 +200,7 @@ include hc in
 
 Let `{Dᵢ}` be a cofiltered inverse system of affine schemes with affine transition maps and
 let `X` be an affine scheme which is étale over `lim Dᵢ`. Then `X` is the base change of an
-affine scheme `Y` which is étale over some `Dᵢ`.
-(blueprint: part of `lem-weil-pbc-etale-finite-data-descent`) -/
+affine scheme `Y` which is étale over some `Dᵢ`. -/
 lemma Scheme.exists_isPullback_of_etale_of_isAffine [IsCofiltered I]
     [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, IsAffine (D.obj i)]
     {X : Scheme.{u}} [IsAffine X] (g : X ⟶ c.pt) [Etale g] :
@@ -291,7 +283,7 @@ include hc in
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-separated schemes with affine transition
 maps, and let `X` be an affine scheme which is étale over `lim Dᵢ`, with image in an affine open
 `N` of `lim Dᵢ`. Then `X` is the base change of an affine scheme `Y` which is étale over some
-`Dᵢ`. (blueprint: part of `lem-weil-pbc-etale-finite-data-descent`) -/
+`Dᵢ`. -/
 lemma Scheme.exists_isPullback_of_etale_of_isAffineOpen [IsCofiltered I]
     [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, QuasiSeparatedSpace (D.obj i)]
     {X : Scheme.{u}} [IsAffine X] (g : X ⟶ c.pt) [Etale g] {N : c.pt.Opens}
@@ -326,9 +318,8 @@ include hc in
 /-- **Morphisms to a scheme locally of finite presentation descend along a cartesian model.**
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes over `R` with
 affine transition maps, let `X = Y ×_{Dᵢ} lim Dⱼ` for a quasi-compact quasi-separated
-`Y ⟶ Dᵢ`, and let `φ : X ⟶ U` be a morphism over `R` to a scheme `U` locally of finite
-presentation over `R`. Then `φ` factors through `Y ×_{Dᵢ} Dₖ` for some `k ⟶ i`.
-(blueprint: part of `lem-weil-pbc-etale-finite-data-descent`) -/
+`Y ⟶ Dᵢ`, and let `φ: X ⟶ U` be a morphism over `R` to a scheme `U` locally of finite
+presentation over `R`. Then `φ` factors through `Y ×_{Dᵢ} Dₖ` for some `k ⟶ i`. -/
 lemma Scheme.exists_isPullbackLift_comp_eq [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {R : Scheme.{u}} (π : D ⟶ (Functor.const I).obj R)
     {i : I} {X Y : Scheme.{u}} {g : X ⟶ c.pt} {p : Y ⟶ D.obj i} {h : X ⟶ Y}
@@ -787,15 +778,7 @@ include hc in
 /-- **Quasi-compact quasi-separated étale schemes descend to a stage.** Let `X = lim Dⱼ` be a
 cofiltered limit of quasi-compact quasi-separated schemes with affine transition maps and let
 `g : V ⟶ X` be étale, quasi-compact and quasi-separated. Then `V` is the base change
-`V ≅ Y ×_{Dⱼ} X` of a quasi-compact quasi-separated scheme `Y` étale over some stage `Dⱼ`.
-
-The scheme `V` is the base change of a scheme `Y` of finite presentation over a stage
-(`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`). Around each point, `V` has
-an open chart which is the base change of an affine scheme étale over a stage
-(`AlgebraicGeometry.exists_etale_refinement_of_isLimit`); the chart descends to an open of a
-stage of `Y`, which is isomorphic to the étale model at a later stage
-(`AlgebraicGeometry.exists_iso_of_isPullback`). Finitely many such opens cover a late stage of
-`Y` (`AlgebraicGeometry.exists_map_eq_top`), which is therefore étale. -/
+`V ≅ Y ×_{Dⱼ} X` of a quasi-compact quasi-separated scheme `Y` étale over some stage `Dⱼ`. -/
 theorem exists_etale_isPullback_of_isLimit {V : Scheme.{u}} (g : V ⟶ c.pt) [Etale g]
     [QuasiCompact g] [QuasiSeparated g] :
     ∃ (j : J) (Y : Scheme.{u}) (p : Y ⟶ D.obj j) (_ : Etale p) (_ : CompactSpace Y)
@@ -865,8 +848,7 @@ quasi-compact quasi-separated schemes over `R` with affine transition maps. Then
    for some `k' ⟶ k` (`AlgebraicGeometry.exists_eq_descent_of_isLimit`);
 4. *(coverings)* étale morphisms `Eᵢ ⟶ V` to a quasi-compact scheme over a stage `Dₖ` which
    are jointly surjective after base change to `X` are jointly surjective after base change to
-   every late enough stage (`AlgebraicGeometry.exists_forall_mem_range_of_isLimit`).
-(blueprint: `lem-weil-pbc-etale-finite-data-descent`) -/
+   every late enough stage (`AlgebraicGeometry.exists_forall_mem_range_of_isLimit`). -/
 theorem etale_finite_data_descent_of_isLimit [∀ j, CompactSpace (D.obj j)]
     [∀ j, QuasiSeparatedSpace (D.obj j)] {R : Scheme.{u}} (π : D ⟶ (Functor.const J).obj R) :
     (∀ {V : Scheme.{u}} (g : V ⟶ c.pt) [Etale g] [QuasiCompact g] [QuasiSeparated g],

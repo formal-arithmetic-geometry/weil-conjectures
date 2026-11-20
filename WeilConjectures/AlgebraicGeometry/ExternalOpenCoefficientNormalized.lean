@@ -59,7 +59,6 @@ private theorem restriction_tensor_hom_tmul {A B : Scheme.{w}}
     (M.presheaf.map (eqToHom h).op s) (N.presheaf.map (eqToHom h).op t)))
     e.inv_hom_id
 
-set_option maxHeartbeats 400000 in
 -- Tensor section transports require additional elaboration of restriction instances.
 /-- Restriction of the external coefficient to an open base change, normalized on
 sections by the pullback units.

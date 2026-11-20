@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Dual.Lemmas
 Let `𝒪` be a discrete valuation ring with uniformizer `ϖ` and `A_n = 𝒪 ⧸ ϖⁿ`, the finite
 coefficient stages of the `ℓ`-adic formalism being `𝒪_E ⧸ ϖⁿ` for a finite extension `E` of
 `ℚ_ℓ`. This file proves the algebraic distinctions between the stages recorded in the blueprint
-lemma `lem-weil-coefficient-frobenius`.
+lemma `lemma-perfect-complexes-geometric-point--8`.
 
 ## Main statements
 
@@ -132,9 +132,9 @@ theorem isReflexive_quotient_quotient_pow (J : Ideal (R ⧸ Ideal.span {ϖ ^ n})
     simp only [SetLike.val_smul, smul_eq_mul, map_mul]
     ring
 
-/-- Blueprint `lem-weil-coefficient-frobenius`, clause (1) at the finite stages `A_{E,n}`:
-`A_n = 𝒪 ⧸ ϖⁿ` is self-injective. By Baer's criterion: a map out of the ideal `(ϖ^m)` sends
-`ϖ^m` to an element killed by `ϖ^(n - m)`, hence to a multiple `ϖ^m b`, and is the
+/-- Blueprint `lemma-perfect-complexes-geometric-point--8`, clause (1) at the finite stages
+`A_{E,n}`: `A_n = 𝒪 ⧸ ϖⁿ` is self-injective. By Baer's criterion: a map out of the ideal `(ϖ^m)`
+sends `ϖ^m` to an element killed by `ϖ^(n - m)`, hence to a multiple `ϖ^m b`, and is the
 multiplication by `b`. In particular `Hom(-, A_n)` is exact. -/
 theorem injective_quotient_pow :
     Module.Injective (R ⧸ Ideal.span {ϖ ^ n}) (R ⧸ Ideal.span {ϖ ^ n}) := by
@@ -158,8 +158,8 @@ theorem injective_quotient_pow :
   rw [this, map_smul, ← hz, smul_eq_mul, LinearMap.mulRight_apply, map_mul]
   ring
 
-/-- Blueprint `lem-weil-coefficient-frobenius`, clause (1) at the finite stages `A_{E,n}`:
-every finitely generated module `M` over `A_n = 𝒪 ⧸ ϖⁿ` is reflexive, the evaluation
+/-- Blueprint `lemma-perfect-complexes-geometric-point--8`, clause (1) at the finite stages
+`A_{E,n}`: every finitely generated module `M` over `A_n = 𝒪 ⧸ ϖⁿ` is reflexive, the evaluation
 `M ⟶ Hom(Hom(M, A_n), A_n)` being an isomorphism. -/
 theorem isReflexive_quotient_pow (M : Type*) [AddCommGroup M]
     [Module (R ⧸ Ideal.span {ϖ ^ n}) M] [Module.Finite (R ⧸ Ideal.span {ϖ ^ n}) M] :
@@ -196,8 +196,8 @@ theorem isReflexive_quotient_pow (M : Type*) [AddCommGroup M]
   exact Module.equiv (g.extendScalarsOfSurjective Ideal.Quotient.mk_surjective).symm
 
 omit [IsDiscreteValuationRing R] in
-/-- Blueprint `lem-weil-coefficient-frobenius`, clause (2): the integral stage `𝒪` is not
-quasi-Frobenius. Ordinary duality kills the torsion module `𝒪 ⧸ ϖ`:
+/-- Blueprint `lemma-perfect-complexes-geometric-point--8`, clause (2): the integral stage `𝒪` is
+not quasi-Frobenius. Ordinary duality kills the torsion module `𝒪 ⧸ ϖ`:
 `Hom_𝒪(𝒪 ⧸ ϖ, 𝒪) = 0`. -/
 theorem dual_quotient_eq_zero (φ : Dual R (R ⧸ Ideal.span {ϖ})) : φ = 0 := by
   refine LinearMap.ext fun x ↦ ?_
@@ -211,8 +211,8 @@ theorem dual_quotient_eq_zero (φ : Dual R (R ⧸ Ideal.span {ϖ})) : φ = 0 := 
   exact (mul_eq_zero.1 this).resolve_left hϖ.ne_zero
 
 omit [IsDiscreteValuationRing R] in
-/-- Blueprint `lem-weil-coefficient-frobenius`, clause (2): ordinary evaluation is not an
-isomorphism for every finite `𝒪`-module: `𝒪 ⧸ ϖ` is nonzero while its double dual vanishes.
+/-- Blueprint `lemma-perfect-complexes-geometric-point--8`, clause (2): ordinary evaluation is not
+an isomorphism for every finite `𝒪`-module: `𝒪 ⧸ ϖ` is nonzero while its double dual vanishes.
 Derived evaluation is an isomorphism for every perfect complex
 (`DerivedCategory.IsPerfect.isIso_toIhomIhomUnit`, clause (3)). -/
 theorem not_isReflexive_quotient : ¬ IsReflexive R (R ⧸ Ideal.span {ϖ}) := by

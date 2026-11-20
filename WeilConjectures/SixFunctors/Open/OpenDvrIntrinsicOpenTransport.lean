@@ -161,11 +161,12 @@ private theorem dvrOpen_scalar_extension
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (O : OpenDvrOpenModel l E j)
     (P : CochainComplex (scalarReductionSource.{u, u} l E U) ℤ) :
-    ((O.modules.functor ⋙ O.extension.ordinary).mapHomologicalComplex (.up ℤ)).map
-      (integralKoszulScalar.{u, u} l E U P) =
+    End.of (((O.modules.functor ⋙ O.extension.ordinary).mapHomologicalComplex (.up ℤ)).map
+      (integralKoszulScalar.{u, u} l E U P).asHom) =
     integralKoszulScalar.{u, u} l E X
       (((O.modules.functor ⋙ O.extension.ordinary).mapHomologicalComplex (.up ℤ)).obj P) := by
   let GP := ((O.modules.functor ⋙ O.extension.ordinary).mapHomologicalComplex (.up ℤ)).obj P
+  apply End.ext
   apply HomologicalComplex.hom_ext
   intro i
   let M := O.modules.functor.obj (P.X i)
@@ -178,20 +179,20 @@ private theorem dvrOpen_scalar_extension
         ((sheafCompose (ProEt.topology U)
           (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map O.ring.hom)) :
       ∀ (V : U.ProEtᵒᵖ) (x : (F.obj (P.X i)).val.obj V),
-        (F.map ((integralKoszulScalar.{u, u} l E U P).f i)).val.app V x =
+        (F.map ((integralKoszulScalar.{u, u} l E U P).asHom.f i)).val.app V x =
           integralCompletionScalarValue.{u, u} l E X
             ((SheafOfModules.OpenTensorNormalization.openInclusion .ordinary j).op.obj V) • x := by
     subst F
     intro V x
     let x₀ : (P.X i).val.obj V := x
-    change ((integralKoszulScalar.{u, u} l E U P).f i).val.app V x₀ =
+    change ((integralKoszulScalar.{u, u} l E U P).asHom.f i).val.app V x₀ =
       O.ring.hom.hom.app V (integralCompletionScalarValue.{u, u} l E X _) • x₀
     have hs := (integralKoszulScalar_existsUnique.{u, u} l E U P).exists.choose_spec i V x₀
-    change ((integralKoszulScalar.{u, u} l E U P).f i).val.app V x₀ = _ at hs
+    change ((integralKoszulScalar.{u, u} l E U P).asHom.f i).val.app V x₀ = _ at hs
     exact hs.trans (congrArg (fun z ↦ z • x₀) (dvrOpen_scalar_restrict l E j O V)).symm
   have hF := hF' O.modules.functor O.modules_functor
   change O.extension.ordinary.map (O.modules.functor.map
-    ((integralKoszulScalar.{u, u} l E U P).f i)) = _
+    ((integralKoszulScalar.{u, u} l E U P).asHom.f i)) = _
   apply (adj.homEquiv M (O.extension.ordinary.obj M)).injective
   rw [adj.homEquiv_unit, adj.homEquiv_unit]
   change adj.unit.app M ≫
@@ -199,14 +200,14 @@ private theorem dvrOpen_scalar_extension
       SheafOfModules.OpenTensorNormalization.restrict .ordinary j
         (completedIntegralCommRingSheafUnrestricted.{u, u} l E X)).map _ = _
   rw [← adj.unit.naturality (O.modules.functor.map
-    ((integralKoszulScalar.{u, u} l E U P).f i))]
+    ((integralKoszulScalar.{u, u} l E U P).asHom.f i))]
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro V
   ext x
   change (adj.unit.app M).val.app V
-      ((O.modules.functor.map ((integralKoszulScalar.{u, u} l E U P).f i)).val.app V x) =
-    ((integralKoszulScalar.{u, u} l E X GP).f i).val.app
+      ((O.modules.functor.map ((integralKoszulScalar.{u, u} l E U P).asHom.f i)).val.app V x) =
+    ((integralKoszulScalar.{u, u} l E X GP).asHom.f i).val.app
       ((SheafOfModules.OpenTensorNormalization.openInclusion .ordinary j).op.obj V)
           ((adj.unit.app M).val.app V x)
   rw [hF]
@@ -250,7 +251,7 @@ private theorem dvrOpen_complete
   have hμ : QuasiIso (CochainComplex.PrincipalCone.unit μ) :=
     (complete_iff_principalUnit.{u, u} p l hne E U P).mp hP
   have : QuasiIso (G.map (CochainComplex.PrincipalCone.unit μ)) := inferInstance
-  have hscalar : G.map μ = integralKoszulScalar.{u, u} l E X (G.obj P) := by
+  have hscalar : End.of (G.map μ.asHom) = integralKoszulScalar.{u, u} l E X (G.obj P) := by
     simpa only [G, H, μ] using dvrOpen_scalar_extension l E j O P
   let a : DerivedCategory.Q.obj (G.obj P) ≅ DerivedCategory.Q.obj
       (CochainComplex.PrincipalCone.completion (integralKoszulScalar.{u, u} l E X (G.obj P))) :=

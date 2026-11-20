@@ -114,19 +114,19 @@ private theorem flat_of_sectionwise_flat (X : Scheme.{u})
 
 private theorem isZero_of_nilpotent_cokernel
     {C : Type*} [Category* C] [Abelian C] {N : C} (f : End N)
-    (hnil : IsNilpotent f) (hc : IsZero (cokernel f)) : IsZero N := by
-  have : Epi f := Abelian.epi_of_cokernel_π_eq_zero f (hc.eq_of_tgt _ _)
-  have hp : ∀ n : ℕ, Epi (f ^ n) := by
+    (hnil : IsNilpotent f) (hc : IsZero (cokernel f.asHom)) : IsZero N := by
+  have : Epi f.asHom := Abelian.epi_of_cokernel_π_eq_zero f.asHom (hc.eq_of_tgt _ _)
+  have hp : ∀ n : ℕ, Epi (f ^ n).asHom := by
     intro n
     induction n with
     | zero => change Epi (𝟙 N); infer_instance
     | succ n ih =>
       rw [pow_succ]
-      change Epi (f ≫ f ^ n)
+      change Epi (f.asHom ≫ (f ^ n).asHom)
       infer_instance
   obtain ⟨n, hn⟩ := hnil
   have := hp n
-  exact IsZero.of_epi_eq_zero (f ^ n) hn
+  exact IsZero.of_epi_eq_zero (f ^ n).asHom (by rw [hn, End.zero_asHom])
 
 private theorem module_zero_of_stratum_cover
     (T : Scheme.{u}) [IsNoetherian T] (S : Stratification T)

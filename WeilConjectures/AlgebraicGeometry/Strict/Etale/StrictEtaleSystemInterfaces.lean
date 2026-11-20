@@ -232,7 +232,7 @@ def StrictEtaleCompactSupportCoherence
     -- openTranspose
     (∀ n, (record.openImage.inverseEvaluation n).hom =
       (mateEquiv record.openAdjunction (record.levelOpenAdjunction n)
-        (.mk _ _ _ _ (record.openEvaluation n).inv)).natTrans) ∧
+        (.mk _ _ _ _ (record.openEvaluation n).inv))) ∧
     -- derivedOpenTranspose
     (∀ P K
       (h : (record.openExtension.mapHomologicalComplex (.up ℤ)).obj P ⟶ K),

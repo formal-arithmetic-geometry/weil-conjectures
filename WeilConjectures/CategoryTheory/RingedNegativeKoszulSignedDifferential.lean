@@ -31,15 +31,15 @@ private def endSections
     End (SheafOfModules.unit
       ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O)) →+*
         RingCat.sectionsSubring (O.obj ⋙ forget₂ CommRingCat RingCat) where
-  toFun f := ⟨(SheafOfModules.unitHomEquiv _ f).val,
-    (SheafOfModules.unitHomEquiv _ f).property⟩
+  toFun f := ⟨(SheafOfModules.unitHomEquiv _ f.asHom).val,
+    (SheafOfModules.unitHomEquiv _ f.asHom).property⟩
   map_one' := by ext V; rfl
   map_zero' := by ext V; rfl
   map_add' f g := by ext V; rfl
   map_mul' f g := by
     ext V
-    let φ : O.obj.obj V →ₗ[O.obj.obj V] O.obj.obj V := (f.val.app V).hom
-    let ψ : O.obj.obj V →ₗ[O.obj.obj V] O.obj.obj V := (g.val.app V).hom
+    let φ : O.obj.obj V →ₗ[O.obj.obj V] O.obj.obj V := (f.asHom.val.app V).hom
+    let ψ : O.obj.obj V →ₗ[O.obj.obj V] O.obj.obj V := (g.asHom.val.app V).hom
     change φ (ψ 1) = φ 1 * ψ 1
     simpa only [smul_eq_mul, mul_one, one_mul, mul_comm] using φ.map_smul (ψ 1) (1 : O.obj.obj V)
 
@@ -51,19 +51,19 @@ private theorem coefficient_source
     {M : ringedSiteModules ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O)}
     (c : A) (f : SheafOfModules.unit
       ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O) ⟶ M) :
-    ringedKoszulCoefficientSMul O ((endSections O).comp ρ) c f = ρ c ≫ f := by
+    ringedKoszulCoefficientSMul O ((endSections O).comp ρ) c f = (ρ c).asHom ≫ f := by
   let : Linear (RingCat.sectionsSubring (O.obj ⋙ forget₂ CommRingCat RingCat))
       (ringedSiteModules ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O)) :=
     SheafOfModules.homLinear O.obj
       ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O).property
-  have hid : ((endSections O).comp ρ) c • 𝟙 _ = ρ c := by
+  have hid : ((endSections O).comp ρ) c • 𝟙 _ = (ρ c).asHom := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro x
-    let φ : O.obj.obj V →ₗ[O.obj.obj V] O.obj.obj V := (ρ c).val.app V |>.hom
+    let φ : O.obj.obj V →ₗ[O.obj.obj V] O.obj.obj V := (ρ c).asHom.val.app V |>.hom
     change φ 1 * (show O.obj.obj V from x) = φ x
     simpa only [smul_eq_mul, mul_one, mul_comm] using (φ.map_smul x 1).symm
   change ((endSections O).comp ρ) c • f = _
@@ -93,7 +93,7 @@ private theorem negative_basis_d_signed
       ⟨(endSections O (ρ (a i))).val, (endSections O (ρ (a i))).property⟩
     ringedNegativeKoszulBasis O r s n I.1 q ≫
         (ringedNegativeKoszul O r s n).d q (q + 1) =
-      ∑ i ∈ I.1, ρ ((-1 : A) ^ (I.1.filter (fun j ↦ j < i)).card * a i ^ (n + 1)) ≫
+      ∑ i ∈ I.1, (ρ ((-1 : A) ^ (I.1.filter (fun j ↦ j < i)).card * a i ^ (n + 1))).asHom ≫
         ringedNegativeKoszulBasis O r s n (I.1.erase i) (q + 1) := by
   classical
   let ρS := (endSections O).comp ρ
@@ -212,16 +212,16 @@ theorem ringedNegativeKoszulBasis_signed_d
     (n : ℕ) (q : ℤ) (I : exteriorKoszulIndex r q) :
     ringedNegativeKoszulBasis O r s n I.1 q ≫
         (ringedNegativeKoszul O r s n).d q (q + 1) =
-      ∑ i ∈ I.1, ρ ((-1 : A) ^ (I.1.filter (fun j ↦ j < i)).card * a i ^ (n + 1)) ≫
+      ∑ i ∈ I.1, (ρ ((-1 : A) ^ (I.1.filter (fun j ↦ j < i)).card * a i ^ (n + 1))).asHom ≫
         ringedNegativeKoszulBasis O r s n (I.1.erase i) (q + 1) := by
   classical
   let s' : Fin r → (O.obj ⋙ forget CommRingCat).sections := fun i ↦
     ⟨(endSections O (ρ (a i))).val, (endSections O (ρ (a i))).property⟩
   have hs : s' = s := by
     funext i
-    have h := congrArg (SheafOfModules.unitHomEquiv _) (hρ i)
+    have h := congrArg (SheafOfModules.unitHomEquiv _) (congrArg End.asHom (hρ i))
     apply Subtype.ext
-    change (SheafOfModules.unitHomEquiv _ (ρ (a i))).val = (s i).val
+    change (SheafOfModules.unitHomEquiv _ (ρ (a i)).asHom).val = (s i).val
     simpa only [ringedKoszulScalar, Equiv.apply_symm_apply] using
       congrArg Subtype.val h
   rw [← hs]

@@ -28,7 +28,7 @@ proper and geometrically connected of pure relative dimension `d`, with a Tate o
 
 The class `[x ⊂ X]` is the image in `H^{2d}(X, Λ(d)) = H^{2d}_c(X, Λ(d))` of the fundamental
 class of the regular closed immersion `x : Spec k ⟶ X` of codimension `d`
-(`AlgebraicGeometry.Etale.fundamentalClass`, `sk-thm-regular`), obtained by forgetting
+(`AlgebraicGeometry.Etale.fundamentalClass`, `lemma-class-of-point--1`), obtained by forgetting
 supports.
 
 ## Main definitions
@@ -49,7 +49,8 @@ supports.
   normalized) orientation the trace sends every point class to `1`. It rests on
   `AlgebraicGeometry.Etale.pointClass_eq` (all `k`-points have the same class) and
   `AlgebraicGeometry.Etale.isIso_traceMap_pointClass` (the trace of a point class is invertible).
-- `AlgebraicGeometry.Etale.traceIsomorphism` (`sk-cor-trace`): the trace isomorphism
+- `AlgebraicGeometry.Etale.traceIsomorphism` (`corollary-cup-product-pairing--1`): the trace
+isomorphism
   `H^{2d}(X, Λ) ≅ Λ(-d)` and the normalization of the trace by point classes.
 
 ## Implementation notes
@@ -57,8 +58,9 @@ supports.
 *The normalized orientation.* The repository has smooth purity only as the existence of an
 isomorphism `Λ_X(d)[2d] ≅ Ra^! Λ`
 (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`), not the canonical
-orientation built from Kummer classes in `sk-thm-smooth-purity`. The normalization is therefore
-stated as the existence of a Tate orientation whose trace sends all point classes to `1`.
+orientation built from Kummer classes in `proposition-smooth-purity-finite-coefficients`. The
+normalization is therefore stated as the existence of a Tate orientation whose trace sends all point
+classes to `1`.
 
 *Points.* A `k`-point `x` of the smooth `X` is a regular closed immersion of codimension `d`; this
 is taken as an instance argument `[IsRegularImmersion d x]`.
@@ -100,8 +102,8 @@ noncomputable def unitClassCompactSupport :
 
 namespace TateOrientation
 
-/-- Blueprint `sk-cor-trace` (the duality at `i = 0`): for a Tate orientation `γ` of a proper
-morphism `a : X ⟶ Y`, the duality isomorphism in degree `0`,
+/-- Blueprint `corollary-cup-product-pairing--1` (the duality at `i = 0`): for a Tate orientation
+`γ` of a proper morphism `a : X ⟶ Y`, the duality isomorphism in degree `0`,
 `H^{2d}_c(X, Λ(d)) ≃ Hom(Ra_! Λ_X, Λ_Y)`, that is `H^{2d}(X, Λ(d)) ≅ H^0_c(X, Λ)^∨` over a
 separably closed field. It is the composite
 ```
@@ -121,9 +123,9 @@ noncomputable def traceDualityEquiv (γ : TateOrientation Λ a d) :
       ((leftDerivedUpperStarConstantComplexIso Λ a).homCongr γ.dualizingComplexIso).trans
         ((rightDerivedUpperShriekAdjunction _ a).homEquiv _ _).symm
 
-/-- Blueprint `sk-cor-trace` (the trace is the map produced by the duality at `i = 0`): the trace
-map `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` of a Tate orientation `γ` of a proper morphism `a` is the
-duality isomorphism `H^{2d}_c(X, Λ(d)) ≃ Hom(Ra_! Λ_X, Λ_Y)`
+/-- Blueprint `corollary-cup-product-pairing--1` (the trace is the map produced by the duality at
+`i = 0`): the trace map `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` of a Tate orientation `γ` of a proper
+morphism `a` is the duality isomorphism `H^{2d}_c(X, Λ(d)) ≃ Hom(Ra_! Λ_X, Λ_Y)`
 (`AlgebraicGeometry.Etale.TateOrientation.traceDualityEquiv`) followed by evaluation at the
 class `1 ∈ H^0_c(X, Λ)` (`AlgebraicGeometry.Etale.unitClassCompactSupport`). -/
 theorem traceMap_eq_unitClassCompactSupport_comp (γ : TateOrientation Λ a d)
@@ -164,8 +166,8 @@ variable [HasTateTwist Λ]
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] [HasInvertibleExponent Λ X]
   [SmoothOfRelativeDimension d a] in
-/-- Blueprint `sk-cor-trace` (the trace isomorphism, twisted form): for `X` proper and
-geometrically connected over the algebraically closed field `k`, a self-injective finite
+/-- Blueprint `corollary-cup-product-pairing--1` (the trace isomorphism, twisted form): for `X`
+proper and geometrically connected over the algebraically closed field `k`, a self-injective finite
 coefficient ring `Λ` and any Tate orientation `γ`, the trace map
 `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` is bijective. Through the duality at `i = 0` it is evaluation at
 `1 ∈ H^0_c(X, Λ)`, `Hom(Ra_! Λ_X, Λ) ⟶ Hom(Λ, Λ)`
@@ -197,10 +199,10 @@ theorem bijective_traceMap [Module.Injective Λ Λ] (γ : TateOrientation Λ a d
     rw [Category.assoc, Iso.inv_hom_id_assoc, hg]
 
 omit [SmoothOfRelativeDimension d a] in
-/-- Blueprint `sk-cor-trace` (the trace isomorphism, compactly supported form): for `X` smooth,
-proper and geometrically connected of pure dimension `d` over the algebraically closed field `k`,
-a self-injective finite coefficient ring `Λ` (such as `A_{E,n} = 𝒪_E/ϖⁿ`) and any Tate
-orientation `γ`, the untwisted trace map `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` is bijective:
+/-- Blueprint `corollary-cup-product-pairing--1` (the trace isomorphism, compactly supported form):
+for `X` smooth, proper and geometrically connected of pure dimension `d` over the algebraically
+closed field `k`, a self-injective finite coefficient ring `Λ` (such as `A_{E,n} = 𝒪_E/ϖⁿ`) and any
+Tate orientation `γ`, the untwisted trace map `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` is bijective:
 the twisted trace is (`AlgebraicGeometry.Etale.TateOrientation.bijective_traceMap`), and over
 the algebraically closed `k` the Tate twists are trivial
 (`AlgebraicGeometry.Etale.TateOrientation.bijective_untwistedTraceMap_of_bijective_traceMap`). -/
@@ -351,12 +353,13 @@ lemma TateOrientation.traceMap_trans_mapIso [HasTateTwist Λ] (γ : TateOrientat
     Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
   rw [(rightDerivedUpperShriekAdjunction _ a).counit_naturality]
 
-/-- Blueprint `sk-cor-trace` (normalization of the trace by points): there is a Tate
-orientation `γ` of `a` — the normalized orientation of `sk-thm-smooth-purity` — whose trace map
-`tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` sends the class `[x ⊂ X]` of every `k`-point `x` to `1`.
+/-- Blueprint `corollary-cup-product-pairing--1` (normalization of the trace by points): there is a
+Tate orientation `γ` of `a` — the normalized orientation of
+`proposition-smooth-purity-finite-coefficients` — whose trace map `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ`
+sends the class `[x ⊂ X]` of every `k`-point `x` to `1`.
 
-This is not an independent convention. The blueprint derives it from `sk-thm-regular` (c) and
-the compatibility of smooth purity with composition. The repository has smooth purity only as
+This is not an independent convention. The blueprint derives it from `lemma-class-of-point--1` (c)
+and the compatibility of smooth purity with composition. The repository has smooth purity only as
 the existence of an orientation, and the proof is the following equivalent argument:
 * all `k`-points have the same class (`AlgebraicGeometry.Etale.pointClass_eq`): the point `y` is
   the base change of the diagonal along `X ≅ X × {y} ⊆ X × X`, and by proper base change the
@@ -383,7 +386,7 @@ theorem exists_tateOrientation_traceMap_pointClass [Module.Injective Λ Λ] :
     simp
   · exact ⟨θ.symm, fun x _ hx ↦ (h ⟨x, ‹_›, hx⟩).elim⟩
 
-/-- Blueprint `sk-cor-trace`: The trace isomorphism.
+/-- Blueprint `corollary-cup-product-pairing--1`: The trace isomorphism.
 
 Let `X` be smooth, proper and geometrically connected of pure dimension `d` over the
 algebraically closed field `k`, and let `Λ` be a self-injective finite coefficient ring whose

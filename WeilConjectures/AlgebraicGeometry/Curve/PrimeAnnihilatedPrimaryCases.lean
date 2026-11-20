@@ -22,7 +22,7 @@ namespace AlgebraicGeometry.Scheme
 another prime must be zero.
 Source: Stacks Project, Tag 0GJA, proof, primary assertion; elementary Bezout argument
 and geometric stalk conservativity.
-(blueprint: lem-pbc-a3-prime-annihilated-primary-cases).
+(blueprint: lemma-removing-finitely-many-points--1).
 
 Proof: Applying a geometric stalk functor to r times the identity shows that r kills
 all stalk elements, so exponent one witnesses r-primary torsion. If p is a different

@@ -19,8 +19,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 /-!
 # Descent of an invariant finite Galois germ representative
 
-Source: Stacks Project, Tag 04JM, direct proof of Lemma 59.56.5.
-(blueprint: lem-exc-field-invariant-germ-representative-identification).
+## References
+
+* Stacks Project, Tag 04JM, direct proof of Lemma 59.56.5
+* Stacks Project, Tag 04JM, invariance and finite Galois descent
 -/
 
 @[expose] public section
@@ -33,22 +35,8 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
-/-- Source: Stacks Project, Tag 04JM, invariance and finite Galois descent.
-(blueprint: lem-exc-field-invariant-germ-representative-identification).
-
-Proof: Since E/K is finite Galois and contains L, E/L is finite Galois. Every
-L-automorphism q of E extends to a K-automorphism g of Ks fixing L, and then to a
-K-automorphism τ of Ω. The compatibility of the canonical lifts identifies the germ
-of q's pullback of z with the action of g on the germ of z, by haction and naturality
-of the stalk injections. The hypothesis hz makes these germs equal. The supplied
-injectivity hinj therefore makes q's pullback of z equal to z.
-Restrict F to the small etale site of Spec L using composition with Spec L to Spec K.
-Etale covers are preserved by this functor, so this restriction is a sheaf. Apply
-finiteGaloisSectionsDescent to this sheaf and E/L, using the invariance just proved,
-to obtain a section w over Spec L whose pullback to Spec E is z. The chosen canonical
-y maps to x because the embeddings of L into E into Ks into Ω agree. Naturality of
-the stalk injections then identifies the germ of w at x with the germ of z at y.
-The case E=L is the identity cover and the argument gives w=z. -/
+/-- A germ represented, injectively, by a section `z` over a finite Galois extension `E ⊇ L`
+and invariant under the fixing subgroup of `L` is the germ of a section over `Spec L`. -/
 theorem exists_fieldSection_of_finiteGalois_invariant_representative
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

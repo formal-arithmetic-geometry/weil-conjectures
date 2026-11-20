@@ -51,6 +51,14 @@ lemma Adjunction.homEquiv_comp_conjugateEquiv_app {C D : Type*} [Category C] [Ca
     (conjugateEquiv adj₁ adj₂ α).naturality β, ← Category.assoc, unit_conjugateEquiv,
     Category.assoc, ← R₂.map_comp]
 
+/-- The transpose under a composite adjunction is the successive transpose. -/
+private lemma Adjunction.homEquiv_comp_apply {C D E : Type*} [Category C] [Category D] [Category E]
+    {F : C ⥤ D} {G : D ⥤ C} {H : D ⥤ E} {I : E ⥤ D}
+    (adj₁ : F ⊣ G) (adj₂ : H ⊣ I) (X : C) (Y : E) (f : H.obj (F.obj X) ⟶ Y) :
+    (adj₁.comp adj₂).homEquiv X Y f = adj₁.homEquiv X _ (adj₂.homEquiv _ Y f) := by
+  rw [CategoryTheory.Adjunction.comp_homEquiv]
+  rfl
+
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- For a closed immersion `i : Z ⟶ X` and `p : X ⟶ B` with `i ≫ p` invertible, the adjoint
@@ -237,7 +245,6 @@ lemma unit_comp_rightDerivedLowerStar_map_unit {X Y G : Scheme.{u}} (p : X ⟶ Y
   exact unit_conjugateEquiv _ _ _ M
 
 set_option maxRecDepth 20000 in
-set_option maxHeartbeats 1000000 in
 -- the composites of derived functors between the derived categories of the two bases are large
 include aY in
 /-- The global orientation (`thm-pur-affine-line-orientation`) for a rank-one datum whose Kummer
@@ -372,9 +379,8 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
   have hγ : shiftSupportedClass Λ ι 2 (kummerBoundary Λ t) =
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) jU).homEquiv _ _ α ≫ cs ≫
         w⟦(1 : ℤ)⟧' ≫ sa ≫ ss := by
-    rw [shiftSupportedClass, kummerBoundary_eq, Adjunction.homEquiv_unit]
-    simp only [α, cs, w, sa, ss, θj, κU, tU, L, Category.assoc]
-    rfl
+    simp only [shiftSupportedClass, kummerBoundary, α, cs, w, sa, ss, θj, κU, tU, L, jU, U, ι,
+      Category.assoc]
   let Rp := R((p)_*[ModuleCat.{u + 1} Λ])
   let H := _root_.DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology
     (ModuleCat.{u + 1} Λ))
@@ -417,10 +423,11 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
           ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).comp
             (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) jU)).homEquiv _ _
             ((L((jU)^*[ModuleCat.{u + 1} Λ])).map θp.hom ≫ θj.hom ≫ κU) := by
-        simp only [Ψ₁]
-        rw [← Adjunction.homEquiv_naturality_right, Category.assoc, h1,
-          Adjunction.comp_homEquiv]
-        rfl
+        simp only [Ψ₁, Adjunction.homEquiv_comp_apply]
+        refine (Adjunction.homEquiv_naturality_right
+          (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p) _ _).symm.trans ?_
+        exact congrArg ((derivedUpperStarLowerStarAdjunction
+          (ModuleCat.{u + 1} Λ) p).homEquiv _ _) ((Category.assoc _ _ _).trans h1)
       rw [← Category.assoc, h2, Adjunction.homEquiv_comp_conjugateEquiv_app]
       congr 1
       simp only [Bι, κU, hunit, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]

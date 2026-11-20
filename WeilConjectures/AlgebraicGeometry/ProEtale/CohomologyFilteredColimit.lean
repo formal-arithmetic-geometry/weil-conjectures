@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.Sites.CohomologyFilteredColimit
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-!
@@ -21,8 +23,9 @@ Then `colim_k Hᵠ(S_proét, D_k) ⟶ Hᵠ(S_proét, c.pt)` is bijective for eve
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.ProEt.exists_finite_affine_of_mem_topology`: every covering sieve
-  of a quasi-compact quasi-separated object of `S.ProEt` contains a finite covering family of
-  objects with affine underlying scheme.
+  of a quasi-compact quasi-separated object `W` of `S.ProEt` contains a finite covering family of
+  objects with affine underlying scheme, whose coproduct is an affine scheme mapping weakly
+  étale (in particular flat) and surjectively onto `W`.
 - `AlgebraicGeometry.Scheme.ProEt.H_map_isColimit_of_isFiltered_small`: pro-étale cohomology of
   a qcqs scheme commutes with filtered colimits.
 - `AlgebraicGeometry.Scheme.ProEt.subsingleton_H_of_isColimit_of_isFiltered`: a filtered colimit
@@ -49,11 +52,16 @@ variable {S : Scheme.{u}}
 
 /-- On an object `W` of the small pro-étale site with quasi-compact quasi-separated underlying
 scheme, every covering sieve contains a finite covering family of objects with affine
-underlying schemes: affine opens of the members of a quasi-compact covering family. -/
+underlying schemes: affine opens of the members of a quasi-compact covering family. Moreover the
+coproduct of these affine schemes is affine, and its map to `W` is weakly étale (in particular
+flat) and surjective. -/
 lemma exists_finite_affine_of_mem_topology {W : S.ProEt} [CompactSpace W.left]
     [QuasiSeparatedSpace W.left] {R : Sieve W} (hR : R ∈ topology S W) :
     ∃ (n : ℕ) (U : Fin n → S.ProEt) (g : ∀ a, U a ⟶ W), (∀ a, R (g a)) ∧
-      (∀ a, IsAffine (U a).left) ∧ Sieve.ofArrows U g ∈ topology S W := by
+      (∀ a, IsAffine (U a).left) ∧ Sieve.ofArrows U g ∈ topology S W ∧
+      IsAffine (∐ fun a ↦ (U a).left) ∧
+      WeaklyEtale (Sigma.desc fun a ↦ (g a).left) ∧
+      Surjective (Sigma.desc fun a ↦ (g a).left) := by
   obtain ⟨P, hP, hle⟩ := mem_topology_iff.1 hR
   obtain ⟨ι, Z, f, rfl⟩ := P.exists_eq_ofArrows
   rw [mem_precoverage_iff, Presieve.map_ofArrows] at hP
@@ -63,12 +71,6 @@ lemma exists_finite_affine_of_mem_topology {W : S.ProEt} [CompactSpace W.left]
     ((Scheme.presieve₀_mem_precoverage_iff E).1 hP.2).2 i
   obtain ⟨n, j, V, hV, hcov⟩ :=
     QuasiCompactCover.exists_isAffineOpen_of_isCompact E (U := ⊤) isCompact_univ
-  refine ⟨n, fun a ↦ ofOpenImmersion (Z (j a)) (V a).ι,
-    fun a ↦ ofOpenImmersionHom _ _ ≫ f (j a),
-    fun a ↦ R.downward_closed (hle _ _ (Presieve.ofArrows.mk (j a))) _, fun a ↦ hV a, ?_⟩
-  rw [mem_topology_iff]
-  refine ⟨_, ?_, Sieve.le_generate _⟩
-  rw [mem_precoverage_iff, Presieve.map_ofArrows]
   let E' : PreZeroHypercover W.left := ⟨Fin n, fun a ↦ V a, fun a ↦ (V a).ι ≫ (f (j a)).left⟩
   have hE' : E'.presieve₀ ∈ Scheme.precoverage @WeaklyEtale W.left := by
     rw [Scheme.presieve₀_mem_precoverage_iff]
@@ -83,7 +85,25 @@ lemma exists_finite_affine_of_mem_topology {W : S.ProEt} [CompactSpace W.left]
   have (a : Fin n) : QuasiCompact (𝒱.f a) :=
     have : IsAffine (V a) := hV a
     quasiCompact_of_compactSpace _
-  exact ⟨Scheme.presieve₀_mem_qcPrecoverage_iff.2 (QuasiCompactCover.of_finite (𝒰 := 𝒱)), hE'⟩
+  have hsieve : Sieve.ofArrows (fun a ↦ ofOpenImmersion (Z (j a)) (V a).ι)
+      (fun a ↦ ofOpenImmersionHom _ _ ≫ f (j a)) ∈ topology S W := by
+    rw [mem_topology_iff]
+    refine ⟨_, ?_, Sieve.le_generate _⟩
+    rw [mem_precoverage_iff, Presieve.map_ofArrows]
+    exact ⟨Scheme.presieve₀_mem_qcPrecoverage_iff.2 (QuasiCompactCover.of_finite (𝒰 := 𝒱)), hE'⟩
+  have (a : Fin n) : IsAffine (ofOpenImmersion (Z (j a)) (V a).ι).left := hV a
+  refine ⟨n, fun a ↦ ofOpenImmersion (Z (j a)) (V a).ι,
+    fun a ↦ ofOpenImmersionHom _ _ ≫ f (j a),
+    fun a ↦ R.downward_closed (hle _ _ (Presieve.ofArrows.mk (j a))) _, fun a ↦ hV a, hsieve,
+    inferInstance, ?_, ?_⟩
+  · exact IsZariskiLocalAtSource.sigmaDesc fun a ↦
+      inferInstanceAs (WeaklyEtale ((V a).ι ≫ (f (j a)).left))
+  · refine Surjective.sigmaDesc_of_union_range_eq_univ (Set.eq_univ_of_forall fun x ↦ ?_)
+    have hx : x ∈ ⋃ a, E.f (j a) '' (V a) := by
+      rw [hcov]
+      trivial
+    obtain ⟨a, y, hy, rfl⟩ := Set.mem_iUnion.1 hx
+    exact Set.mem_iUnion.2 ⟨a, ⟨y, hy⟩, rfl⟩
 
 /-- Quasi-compactness and quasi-separatedness of the underlying scheme are invariant under
 isomorphisms of objects of the small pro-étale site. -/
@@ -147,7 +167,7 @@ lemma exists_finite_cechNerve_of_mem_topology {V : S.ProEt}
         QuasiSeparatedSpace (Presheaf.cechNerveObj U y).left.left) ∧ (∀ a, R (U a).hom) ∧
       Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ topology S V := by
   obtain ⟨_, _⟩ := hV
-  obtain ⟨n, U, g, hRg, hU, hg⟩ := exists_finite_affine_of_mem_topology hR
+  obtain ⟨n, U, g, hRg, hU, hg, -, -, -⟩ := exists_finite_affine_of_mem_topology hR
   refine ⟨n, fun a ↦ Over.mk (g a), fun k y ↦ ?_, hRg, hg⟩
   refine compactSpace_and_quasiSeparatedSpace_piObj _ fun l ↦ ?_
   have := hU (y l)
@@ -178,16 +198,16 @@ theorem H_map_isColimit_of_isFiltered_small [CompactSpace S] [QuasiSeparatedSpac
 variable (S) in
 /-- **Vanishing of pro-étale cohomology passes to filtered colimits.** On a quasi-compact
 quasi-separated scheme `S`, if the pro-étale sheaves `D k` of a `u + 1`-small filtered diagram
-have vanishing `Hᵠ`, then so does their colimit. -/
+have vanishing `Hᵠ`, then so does their colimit: every class of the colimit comes from some
+`Hᵠ(S_proét, D_k)`, by the continuity of pro-étale cohomology
+(`AlgebraicGeometry.Scheme.ProEt.H_map_isColimit_of_isFiltered_small`). -/
 theorem subsingleton_H_of_isColimit_of_isFiltered [CompactSpace S] [QuasiSeparatedSpace S]
     {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
     {D : K ⥤ Sheaf (topology S) AddCommGrpCat.{u + 1}} {c : Cocone D} (hc : IsColimit c)
     (q : ℕ) (hD : ∀ k, Subsingleton (Sheaf.H (D.obj k) q)) :
-    Subsingleton (Sheaf.H c.pt q) :=
-  Sheaf.subsingleton_H_of_isColimit_of_isFiltered
-    (MorphismProperty.Over.mkIdTerminal @WeaklyEtale S)
-    (fun V : S.ProEt ↦ CompactSpace V.left ∧ QuasiSeparatedSpace V.left)
-    ⟨‹CompactSpace S›, ‹QuasiSeparatedSpace S›⟩
-    (fun _ hV _ hR ↦ exists_finite_cechNerve_of_mem_topology hV hR) hc q hD
+    Subsingleton (Sheaf.H c.pt q) := by
+  refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+  obtain ⟨k, y, rfl⟩ := (H_map_isColimit_of_isFiltered_small S hc q).1 x
+  rw [Subsingleton.elim y 0, map_zero]
 
 end AlgebraicGeometry.Scheme.ProEt

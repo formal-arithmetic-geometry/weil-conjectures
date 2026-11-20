@@ -33,7 +33,7 @@ namespace Algebra
 `R`-algebras. `ObjectProperty.ind` supplies a small nonempty filtered index category,
 a diagram of commutative `R`-algebras and a colimit presentation of `Λ`.
 Algebras and index categories live in universe `max u v`, as in
-lem-weil-pbc-algebra-colimit-fp-algebras-over-it, so that the index of step 4 (finitely
+theorem-finite-etale-covers-proper-henselian--2, so that the index of step 4 (finitely
 presented algebras over `R` with maps to `Λ`) is small.
 
 Source: Stacks Project, Smoothing Ring Maps, Lemma 16.3.5, Tag 07CI

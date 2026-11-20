@@ -84,16 +84,16 @@ Proof:
 1. Use lem-weil-pbc-proetale-affine-wcontractible-covering-family to cover `T` by
    affine objects weakly contractible in the full site.
 2. Choose a finite affine open cover of `T`. For each member, the affine-open
-   witnesses in def-weil-pbc-proetale-covering involve only finitely many covering
+   witnesses in definition-small-pro-etale-site--1 involve only finitely many covering
    indices. Retain their union. The witnesses restrict to principal opens and then
-   to arbitrary affine opens; composition and refinement in def-weil-pbc-proetale-site
+   to arbitrary affine opens; composition and refinement in definition-small-pro-etale-site--1
    show that the retained finite subfamily still covers. For empty `T`, retain no indices.
 3. Take the finite disjoint union `V` of this family. By
    lem-weil-pbc-proetale-qcqs-finite-family-geometry it is an affine object of the site.
    The induced map to `T` is weakly etale: flatness is checked on each summand, and
    the diagonal is flat on equal-summand pieces and empty on distinct-summand pieces
-   (def-weil-weakly-etale-morphism). The same affine-open witnesses establish the
-   singleton covering criterion of def-weil-pbc-proetale-covering.
+   (definition-ind-etale-pro-etale-weakly--3). The same affine-open witnesses establish the
+   singleton covering criterion of definition-small-pro-etale-site--1.
 4. The finite-family geometry lemma identifies sheaf evaluation at `V` naturally
    with the product of evaluations at the summands. For any epimorphism of sheaves,
    choose a preimage in each factor by weak contractibility. This proves surjectivity

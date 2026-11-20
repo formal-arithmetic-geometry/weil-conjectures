@@ -50,8 +50,9 @@ finite-type schemes is cofiltered.
 
 ## Blueprint
 
-This file implements the base change part of `sk-prop-nagata-sketch-comp-category` and of
-`prop-nagata-compactification-category`, and `prop-compactification-refinement`.
+This file implements the base change part of
+`proposition-dense-compactifications-form-cofiltered-category` and of
+`remark-base-change-compactification--1`, and `prop-compactification-refinement`.
 
 -/
 
@@ -69,9 +70,10 @@ namespace Refinement
 
 variable {c d e : Compactification f}
 
-/-- **Base change of a refinement** (blueprint `sk-prop-nagata-sketch-comp-category`,
-`prop-nagata-compactification-category`): a refinement `r : c ⟶ d` of compactifications of
-`f` base changes along `t : T ⟶ S` to the refinement `r.hom ×_S T` of `d.baseChange t` by
+/-- **Base change of a refinement** (blueprint
+`proposition-dense-compactifications-form-cofiltered-category`,
+`remark-base-change-compactification--1`): a refinement `r : c ⟶ d` of compactifications of `f` base
+changes along `t : T ⟶ S` to the refinement `r.hom ×_S T` of `d.baseChange t` by
 `c.baseChange t`. -/
 @[simps]
 noncomputable def baseChange (r : c.Refinement d) (t : T ⟶ S) :
@@ -102,11 +104,11 @@ lemma baseChange_comp (r : c.Refinement d) (s : d.Refinement e) (t : T ⟶ S) :
 end Refinement
 
 /-- **Base change of the category of compactifications** (blueprint
-`sk-prop-nagata-sketch-comp-category`, `prop-nagata-compactification-category`): base change
-along `t : T ⟶ S` is a functor from compactifications of `f` to compactifications of
-`f' = pullback.snd f t`. Being a functor, it carries common refinements to common refinements
-and refinements equalizing two parallel refinements to refinements equalizing their base
-changes. -/
+`proposition-dense-compactifications-form-cofiltered-category`,
+`remark-base-change-compactification--1`): base change along `t : T ⟶ S` is a functor from
+compactifications of `f` to compactifications of `f' = pullback.snd f t`. Being a functor, it
+carries common refinements to common refinements and refinements equalizing two parallel refinements
+to refinements equalizing their base changes. -/
 @[simps]
 noncomputable def baseChangeFunctor (t : T ⟶ S) :
     Compactification f ⥤ Compactification (pullback.snd f t) where
@@ -181,7 +183,7 @@ lemma infBaseChangeHom_snd :
   pullback.lift_snd _ _ _
 
 /-- **The common refinement commutes with base change up to a closed immersion** (blueprint
-`prop-nagata-compactification-category`, base change, second part): for compactifications
+`remark-base-change-compactification--1`, base change, second part): for compactifications
 `c`, `d` of a quasi-compact `f` and any `t : T ⟶ S`, the common refinement of the base changes
 `c' = c.baseChange t` and `d' = d.baseChange t` refines the base change of the common
 refinement of `c` and `d`. The ambient morphism is a closed immersion
@@ -250,7 +252,7 @@ instance isClosedImmersion_infBaseChange_hom : IsClosedImmersion (infBaseChange 
   exact .of_comp _ h
 
 /-- **The common refinement commutes with flat base change** (blueprint
-`prop-nagata-compactification-category`): if `t` is flat, the comparison `infBaseChange` is an
+`remark-base-change-compactification--1`): if `t` is flat, the comparison `infBaseChange` is an
 isomorphism of ambient schemes. -/
 instance isIso_infBaseChange_hom [Flat t] : IsIso (infBaseChange c d t).hom := by
   have : QuasiCompact (inf c d).i := (inf c d).quasiCompact_openImmersion inferInstance
