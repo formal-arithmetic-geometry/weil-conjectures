@@ -244,7 +244,6 @@ private theorem fixed_conjugate_exact
 The final comparison isomorphism is cancellable, so this statement is one composition
 shorter than the intrinsic-coordinate target.  Its proof is the left-derived/exact-derived
 adjunction identification and the transported mate equation.
-(blueprint: lem-sf-intrinsic-conjugate-comparison-transport).
 -/
 theorem sfIntrinsicConjugateComparisonTransport
     (A : Type u) [CommRing A] [Finite A]

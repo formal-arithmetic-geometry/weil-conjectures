@@ -142,7 +142,7 @@ elements [def-weil-regular-scheme].
 Step 2. (The case $d=0$.) If $d=0$ then $\mathfrak q\Lambda_{\mathfrak q}=0$, so
 $\Lambda_{\mathfrak q}=\kappa(\mathfrak q)$ is a field, separable over $k$ by (4)
 [def-weil-pbc-separable-field-extension]. Hence $\Lambda_{\mathfrak q}$ is a filtered colimit of
-smooth $k$-algebras [lem-kun-separable-smooth-colimit] (in the sense of
+smooth $k$-algebras [corollary-open-direct-image-over-field--2] (in the sense of
 [def-weil-pbc-filtered-colimit-smooth-algebras]: the smooth $k$-subalgebras with the inclusions
 form such a diagram), and the map $A\to\Lambda\to\Lambda_{\mathfrak q}$ from the finitely
 presented $k$-algebra $A$ factors as $A\to B'\to\Lambda_{\mathfrak q}$ with $B'$ a smooth
@@ -186,8 +186,8 @@ the Noetherian ring $R$ [lem-weil-pbc-finite-type-algebra-noetherian,
 lem-weil-pbc-finite-type-noetherian-finite-presentation]. By step 4, $C_{x_i}$ ($i=1,\dots,d$) and
 $C_{a_j}$ ($j=1,\dots,r$) are smooth over $R$, and $\Omega_{C_{x_i}/R}$ is free. By
 [lem-weil-pbc-smooth-free-differentials-strictly-standard-power] there are $e_0(i)$ with $x_i^{c}$
-strictly standard in $C$ over $R$ [def-weil-pbc-strictly-standard-element] for $c\ge e_0(i)$; take
-$c=\max_ie_0(i)$, so every $x_i^c$ is strictly standard in $C$ over $R$. Put $e=8c$.
+strictly standard in $C$ over $R$ [theorem-finite-etale-covers-proper-henselian--2] for $c\ge
+e_0(i)$; take $c=\max_ie_0(i)$, so every $x_i^c$ is strictly standard in $C$ over $R$. Put $e=8c$.
 
 Step 6. (The elements $\pi_i$ and the maps to $\Lambda$.) By step 1 and (1), (3),
 [lem-weil-pbc-popescu-find-sequence] applies to $\Lambda$, $I=H_{A/k}\Lambda\subset\mathfrak q$,
@@ -275,11 +275,11 @@ R_{\bar{\mathfrak p}}/\bar{\mathfrak m}=R_{\mathfrak p}/\mathfrak pR_{\mathfrak 
 $\bar\Lambda_{\bar{\mathfrak q}}/\bar{\mathfrak m}\bar\Lambda_{\bar{\mathfrak
 q}}=\Lambda_{\mathfrak q}/(\pi_1,\dots,\pi_d)\Lambda_{\mathfrak q}=\kappa(\mathfrak q)$ by (i),
 the $k$-algebra structure being the given one ($R\to\Lambda$ is a $k$-algebra map). By (4)
-[def-weil-pbc-separable-field-extension] and [lem-kun-separable-smooth-colimit], $\kappa(\mathfrak
-q)$ is a filtered colimit of smooth $k$-algebras [def-weil-pbc-filtered-colimit-smooth-algebras].
-With step 10, [lem-weil-pbc-popescu-lift-nilpotent] applied to $\bar R_{\bar{\mathfrak
-p}}\to\bar\Lambda_{\bar{\mathfrak q}}$ and $I=\bar{\mathfrak m}$ shows that
-$\bar\Lambda_{\bar{\mathfrak q}}$ is a filtered colimit of smooth $\bar R_{\bar{\mathfrak
+[def-weil-pbc-separable-field-extension] and [corollary-open-direct-image-over-field--2],
+$\kappa(\mathfrak q)$ is a filtered colimit of smooth $k$-algebras
+[def-weil-pbc-filtered-colimit-smooth-algebras]. With step 10, [lem-weil-pbc-popescu-lift-nilpotent]
+applied to $\bar R_{\bar{\mathfrak p}}\to\bar\Lambda_{\bar{\mathfrak q}}$ and $I=\bar{\mathfrak m}$
+shows that $\bar\Lambda_{\bar{\mathfrak q}}$ is a filtered colimit of smooth $\bar R_{\bar{\mathfrak
 p}}$-algebras.
 
 Step 12. (The resolution.) $\bar C_{\bar{\mathfrak p}}$ is of finite presentation over $\bar

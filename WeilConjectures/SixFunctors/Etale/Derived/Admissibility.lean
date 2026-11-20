@@ -15,13 +15,14 @@ The trace-formula chapter uses, for a separated finite-type morphism `f : X ⟶ 
 `k`-schemes and a finite coefficient ring `Λ` (a stage `A_{E,n} = 𝒪_E / ϖ_Eⁿ`), the adjunction
 `Rf_! ⊣ Rf^!` on the finite-Tor categories `Dctf`, the composition isomorphisms and the
 base-change exchange isomorphisms, and the preservation of `Dctf` by `Rf^!` with constants
-independent of the coefficient stage. Blueprint `def-trf-admissibility` names this datum
+independent of the coefficient stage. Blueprint `theorem-f-shriek-finite-coefficients` names this
+datum
 *exceptional admissibility* (`AlgebraicGeometry.Etale.IsExceptionallyAdmissible` at one
 coefficient ring, `AlgebraicGeometry.Etale.IsUniformlyExceptionallyAdmissible` at all of them
 with uniform constants) and observes that it is a theorem, not a restriction
 (`AlgebraicGeometry.Etale.isExceptionallyAdmissible`,
 `AlgebraicGeometry.Etale.isUniformlyExceptionallyAdmissible`): it is satisfied by the
-constructible exceptional inverse image `Rf^!` of `det-def-sf-operations` (vi).
+constructible exceptional inverse image `Rf^!` of `theorem-f-shriek-ell-adic-coefficients--4` (vi).
 
 This is unrelated to the *ambient* admissibility datum of `sk-def-sf-admissible`
 (`AlgebraicGeometry.ProEtale.IsExceptionalAdjointAdmissible`), which fails in general.
@@ -49,7 +50,7 @@ open Scheme _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] {X Y : Scheme.{u}}
 
-/-- Blueprint `def-trf-admissibility`: Exceptional-adjoint admissibility datum.
+/-- Blueprint `theorem-f-shriek-finite-coefficients`: Exceptional-adjoint admissibility datum.
 
 A separated finite-type morphism `f : X ⟶ Y` over a finite-type `k`-scheme `Y` is
 *exceptionally admissible at `Λ`* if
@@ -190,10 +191,10 @@ theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek_uniform
   have hn : n x ≤ t.sup n := Finset.le_sup hxt
   exact ⟨⟨hbc, hconc.mono (by omega) (by omega)⟩, hta.mono (by omega) (by omega)⟩
 
-/-- Blueprint `def-trf-admissibility`, the stage-independent form: `f` is *exceptionally
-admissible* if it is exceptionally admissible at every finite coefficient ring `Λ` whose exponent
-is invertible on `Y` (in particular at every stage `A_{E,n}`), with a preservation constant `c`
-independent of `Λ`. -/
+/-- Blueprint `theorem-f-shriek-finite-coefficients`, the stage-independent form: `f`
+is *exceptionally admissible* if it is exceptionally admissible at every finite coefficient ring `Λ`
+whose exponent is invertible on `Y` (in particular at every stage `A_{E,n}`), with a preservation
+constant `c` independent of `Λ`. -/
 def IsUniformlyExceptionallyAdmissible (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
     [QuasiCompact aY] (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] : Prop :=
   (∀ (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasInvertibleExponent Λ Y],

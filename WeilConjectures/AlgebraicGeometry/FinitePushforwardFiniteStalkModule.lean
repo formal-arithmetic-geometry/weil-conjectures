@@ -21,7 +21,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientS
 # Finite direct image of constructible module sheaves with finite stalks
 
 Source: Stacks Project, Tag 095R, and the module refinement argument in the
-normalization exact-sequence blueprint, unit `sk-thm-p1`.
+normalization exact-sequence blueprint, unit `proposition-proper-base-change-projective-line`.
 (blueprint: lem-weil-pbc-finite-pushforward-finite-stalk-module)
 -/
 

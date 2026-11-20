@@ -29,7 +29,7 @@ variable {C : Type u'} [Category.{v'} C] (R : Cᵒᵖ ⥤ RingCat.{u})
 `R`-modules has all small colimits; evaluation at every object `X` preserves them (the sections
 of a colimit over `X` are the colimit of the `R(X)`-modules of sections), and so does the
 forgetful functor to presheaves of abelian groups.
-(blueprint: `lem-weil-pbc-presheaf-modules-colimits-sectionwise`) -/
+(blueprint: `situation-conventions`) -/
 theorem hasColimits_and_preservesColimits_evaluation :
     HasColimitsOfSize.{v, v} (PresheafOfModules.{v} R) ∧
       (∀ X : Cᵒᵖ, PreservesColimitsOfSize.{v, v} (evaluation.{v} R X)) ∧

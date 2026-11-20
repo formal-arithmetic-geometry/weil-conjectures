@@ -110,7 +110,7 @@ import all WeilConjectures.SixFunctors.Compact.CompactSupportReductionTower
 
 /-! # Normalized realization of the specified compact-support quotient tower
 
-Source: blueprint main-20261015, lem-coef-integral-compact-support, proof paragraph 2;
+Source: blueprint main-20261015, lemma-change-coefficients-compact-support, proof paragraph 2;
 Stacks Tags 06YS, 0D6D, 07A6 and 05RT
 (blueprint: lem-coef-compact-support-normalized-realization).
 

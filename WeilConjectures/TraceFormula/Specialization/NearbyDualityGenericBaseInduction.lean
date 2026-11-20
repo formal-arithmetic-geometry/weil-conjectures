@@ -23,14 +23,15 @@ measure `μ` of the base `X₁`, which does not increase under dense open immers
 drops under generic slicing unless the slice is empty (`hμs`); the dimension is such a measure.
 
 The induction step (Illusie, *Autour du théorème de monodromie locale*, Thm. 4.2; blueprint
-`sk-prop-tf-nearby-duality-foundation`, "Dimension induction"): a trait model `M` of `X₁` over the
-generic base is an open sub-model of a proper one `M̄` over a dense compactification `X̄₁` of `X₁`
+`proposition-nearby-cycles-commute-verdier-duality`, "Dimension induction"): a trait model `M` of
+`X₁` over the generic base is an open sub-model of a proper one `M̄` over a dense compactification
+`X̄₁` of `X₁`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_isProper_openSubmodel_denseRange`), so that
 `μ X̄₁ ≤ μ X₁`. The cone of the duality map of `M̄` has finite support
 (`NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase`), since by the
-slice compatibility (`NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase`)
-it suffices that nearby duality holds for the generic slices of the restrictions of `M̄`, which
-holds by induction (the slices have smaller measure) or trivially (empty slices,
+slice compatibility (`NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase`) it
+suffices that nearby duality holds for the generic slices of the restrictions of `M̄`, which holds
+by induction (the slices have smaller measure) or trivially (empty slices,
 `NearbyCyclesModel.isIso_nearbyDualityMapOfGenericBase_of_isEmpty`). Global sections then give
 nearby duality for `M̄`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_nearbyDualityMap_of_isProper_of_finset`), and
@@ -108,9 +109,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- **Gabber's theorem for trait models over a generic base, by induction on a measure**
 (Illusie, *Autour du théorème de monodromie locale*, Thm. 4.2; blueprint
-`sk-prop-tf-nearby-duality-foundation`, "Dimension induction"). Let `μ` be a measure of schemes
-over fields which does not increase along dense open immersions (`hμc`), and which drops by at
-least one along generic slices of trait models over the generic base, unless the slice is empty
+`proposition-nearby-cycles-commute-verdier-duality`, "Dimension induction"). Let `μ` be a measure of
+schemes over fields which does not increase along dense open immersions (`hμc`), and which drops by
+at least one along generic slices of trait models over the generic base, unless the slice is empty
 (`hμs`). Then for every trait model `M` of `X₁` over the generic base and every family `D` of
 dualizing maps over generic bases, the duality map `δ_{M,K}` is an isomorphism for every bounded
 constructible `K`.

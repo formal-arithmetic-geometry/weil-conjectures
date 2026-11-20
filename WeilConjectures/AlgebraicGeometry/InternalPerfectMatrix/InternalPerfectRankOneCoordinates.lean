@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.Proper.Heart.ProperHeartBoundTorsio
 import all WeilConjectures.AlgebraicGeometry.FiniteModelQuotient.FiniteModelOrdinaryScalar
 
 /-! # Scalar normalization of the fixed rank-one coordinates
-Source: blueprint Compatible isomorphisms, the same integral bases at every level.
 -/
 
 @[expose] public noncomputable section
@@ -28,13 +27,7 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- A constant residue section is the actual image of the integral scalar section.
-Source: blueprint Compatible isomorphisms, normalization of coefficient reduction.
-(blueprint: lem-pe-internal-perfect-rank-one-coordinates).
-Proof: evaluate both global sections at the terminal object. The finite constant
-section comparison sends the constant to the sheafification unit, and the existing
-integral scalar normalization gives precisely the same unit followed by the canonical
-finite coefficient map. Terminal evaluation is injective on maps from the unit. -/
+/-- A constant residue section is the actual image of the integral scalar section. -/
 theorem coefficientSection_integral (W : Scheme.{u}) (n : ℕ) (x : A l E) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     coefficientSection l E W n (LocallyConstant.const _
@@ -51,13 +44,7 @@ theorem coefficientSection_integral (W : Scheme.{u}) (n : ℕ) (x : A l E) :
   exact (constant_scalar_section l E W (n + 1) x (op U)).symm
 
 /-- Integral multiplication has the prescribed multiplication matrix after ordinary
-rank-one scalar extension. This uses the fixed, normalized integral regular comparison.
-Source: blueprint Compatible isomorphisms, finite constant matrix entries.
-(blueprint: lem-pe-internal-perfect-rank-one-coordinates).
-Proof: the integral regular comparison intertwines multiplication by x with the integral
-scalar global section. Apply ordinary extension to that square. Naturality of the
-regular extension comparison replaces the section by its quotient. The preceding
-normalization identifies it with the constant residue entry used by matrix evaluation. -/
+rank-one scalar extension. This uses the fixed, normalized integral regular comparison. -/
 theorem quotientRegular_scalar (W : Scheme.{u}) (n : ℕ) (x : A l E) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let F := Mod.extendScalars (AdicCompletion.quotient l E W n)
@@ -85,12 +72,7 @@ theorem quotientRegular_scalar (W : Scheme.{u}) (n : ℕ) (x : A l E) :
   erw [← Category.assoc, hi, Category.assoc, he, ← Category.assoc]
 
 /-- Fixed free-coordinate comparisons intertwine every finite matrix of integral scalars
-with its entrywise constant residue matrix.
-Source: blueprint Compatible isomorphisms, finite free matrix computation.
-(blueprint: lem-pe-internal-perfect-rank-one-coordinates).
-Proof: the functor comparison maps a biproduct matrix entrywise. After postcomposing
-with the sum of rank-one comparisons, the rank-one scalar square applies to each entry.
-Biproduct extensionality reassembles the resulting squares into the stated matrix square. -/
+with its entrywise constant residue matrix. -/
 theorem quotientFreeMatrix_scalar (W : Scheme.{u}) (n a b : ℕ)
     (v : Fin a → Fin b → A l E) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField

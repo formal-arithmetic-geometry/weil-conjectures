@@ -245,7 +245,7 @@ compatibility of lem-pur-derived-change-of-rings show F(N[-q]) is concentrated i
 with the shift convention of def-weil-abstract-derived-category.
 3. For b < a, the good upper truncation of M at b is zero, since all its cohomology is
 zero. Starting at b = a-1, induct using the successive-truncation triangle
-(lem-weil-pbc-truncation-triangle). Its third term is H^b(M)[-b]. After applying F,
+(theorem-pbc-injective-acyclicity). Its third term is H^b(M)[-b]. After applying F,
 Step 2 concentrates this term in degree b >= a. The long exact cohomology sequence
 (lem-sf-derived-homology-long-exact) and induction give the lower bound for every finite
 upper truncation of M.
@@ -264,7 +264,7 @@ def-pc-tensor-complex-sheaves verifies this chain isomorphism and its inverse.
 which is the degreewise colimit of E_n tensor S. Step 3 makes each of these acyclic below
 a, so the exact-colimit cohomology calculation in Step 4 proves the same for F(M).
 One may calculate after restricting scalars to R: the kernels and sheafified cokernels
-are the same underlying abelian sheaves (def-weil-sheaf-of-modules-category), so vanishing
+are the same underlying abelian sheaves (situation-conventions), so vanishing
 also holds as an S-module sheaf. This uses no upper bound for the second assertion and
 no flatness, finite generation, boundedness beyond the stated bounds, or site points. -/
 theorem ringedTensorCohomologicalBounds

@@ -96,7 +96,7 @@ public import WeilConjectures.Algebra.Homology.SixFunctors.LocalizedSiteTensorRe
 /-! # Slice restriction of evaluation, transpose and Koszul symmetry
 
 Source: Stacks Project, Tags 07A4, 08J9, 08JB, 08FI and 03EL;
-main-20261015 blueprint, `lem-weil-delta-restriction`, final paragraph
+main-20261015 blueprint, `corollary-verdier-exchange-formulas--5`, final paragraph
 (blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose).
 
 The comparison data below retain their representative characterizations. In particular,

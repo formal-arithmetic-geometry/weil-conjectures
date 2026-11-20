@@ -34,7 +34,6 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 600000 in
 -- Derived tensor transport unfolds the large sheaf and derived category instance terms.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
@@ -139,11 +138,11 @@ theorem exists_selfTor_nonpositive_chosen_comparisons
   have hI : ∀ x ∈ I, φ x ∈ J := by
     intro x hx
     exact i.ker.ideal_le_comap_ideal h hx
-  obtain ⟨ψ, a, k, hψ, ha, hk⟩ := exists_quotient_resolution_tensor_comparison
-    A C I J φ hI P R
-  refine ⟨ψ, a, k, hψ, ha, hk, ?_⟩
+  refine (exists_quotient_resolution_tensor_comparison A C I J φ hI P R).imp
+    (fun ψ hψ ↦ hψ.imp (fun a ha ↦ ha.imp (fun k hk ↦ ?_)))
+  refine ⟨hk.1, hk.2.1, hk.2.2, ?_⟩
   intro e' x
-  have hn := hc V U h hbasic ψ a k hψ ha hk x
+  have hn := hc V U h hbasic ψ a k hk.1 hk.2.1 hk.2.2 x
   have hs := PresheafOfModules.naturality_apply eQ.hom.val (homOfLE h).op (c U x)
   change _ = eQ.hom.val.app (op V.1) _
   exact hs.symm.trans (congrArg (eQ.hom.val.app (op V.1)) hn)

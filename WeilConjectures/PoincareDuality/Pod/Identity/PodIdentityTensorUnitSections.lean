@@ -10,7 +10,7 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4 and 0941.
 -/
 
@@ -135,7 +135,7 @@ private theorem total_unit_restrict (W : Scheme.{u}) (n : ℕ)
       (reduction_section_restrict l E W n (Q.X q) f y))
 
 /-- Ordinary identity relabelling preserves total tensors of unit reduction sections.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-identity-tensor-unit-sections).
 
 Proof: the given section equation for ordinary identity relabelling is restriction

@@ -84,8 +84,8 @@ namespace ProEtale
 
 variable {f : X ⟶ Y} (c : Compactification f)
 
-/-- Blueprint `def-weil-compact-support-candidate`: Compact-support candidate attached to a
-compactification, `Rf^c_{!,n} = Rf̄_* j_!` (restricted to the étale-origin complexes in
+/-- Blueprint `proposition-construction-independence-rf-shriek`: Compact-support candidate attached
+to a compactification, `Rf^c_{!,n} = Rf̄_* j_!` (restricted to the étale-origin complexes in
 `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationEtaleOrigin`).
 
 The derived lower shriek `Rf_! : D(X_proét) ⥤ D(Y_proét)` attached to a compactification
@@ -148,7 +148,7 @@ namespace ProEtale
 admitting a compactification, on the unbounded derived categories of pro-étale sheaves: the
 functor `rightDerivedLowerShriekOfCompactification` attached to the chosen compactification
 `HasCompactification.compactification f`. This is blueprint
-`def-compact-support-direct-image-detailed`. -/
+`proposition-construction-independence-rf-shriek`. -/
 noncomputable def rightDerivedLowerShriek :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
@@ -230,8 +230,8 @@ namespace ProEtale
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- Blueprint `pur9-def-compact-cohomology`: Compact-support cohomology (for `f = a_X` the
-structure morphism of `X` over `Spec k`, and `A` the category of `A_{E,n}`-modules).
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Compact-support cohomology (for `f = a_X`
+the structure morphism of `X` over `Spec k`, and `A` the category of `A_{E,n}`-modules).
 Also blueprint `def-trf-coefficient-conventions` (on the small pro-étale site; the étale model
 is `AlgebraicGeometry.Etale.compactlySupportedGlobalSections`).
 

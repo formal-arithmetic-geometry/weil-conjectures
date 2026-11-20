@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedSquareVerticalPasting
 
 /-! # Pasting of the coefficient transpose
 
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-sc-picard-coefficient-transpose-pasting)
+## References
+
+* Stacks Project, Tags 08HY and 0D5S
 -/
 
 @[expose] public section
@@ -32,9 +33,7 @@ noncomputable section
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
-/-- The counit presentation of a coefficient transpose for an arbitrary square.
-Source: Stacks Project, Tag 08HY.
-(blueprint: def-sc-picard-coefficient-transpose) -/
+/-- The counit presentation of a coefficient transpose for an arbitrary square. -/
 @[irreducible]
 def coefficientCounitTranspose {A B W V : Scheme.{v}}
     (p : A ⟶ W) (p' : B ⟶ V) (r : V ⟶ W) (a : B ⟶ A)
@@ -45,9 +44,7 @@ def coefficientCounitTranspose {A B W V : Scheme.{v}}
   canonicalDerivedSquareComparison p p' r a ha ((schemeDerivedDirectImage p).obj K) ≫
     (derivedPullback a).map ((canonicalSchemeDerivedAdjunction p).counit.app K) ≫ e
 
-/-- Defining equation for the counit coefficient transpose.
-Source: Stacks Project, Tag 08HY.
-(blueprint: def-sc-picard-coefficient-transpose) -/
+/-- Defining equation for the counit coefficient transpose. -/
 theorem coefficientCounitTranspose_eq {A B W V : Scheme.{v}}
     (p : A ⟶ W) (p' : B ⟶ V) (r : V ⟶ W) (a : B ⟶ A)
     (ha : a ≫ p = p' ≫ r) (K : schemeDerivedCategory A)
@@ -58,9 +55,7 @@ theorem coefficientCounitTranspose_eq {A B W V : Scheme.{v}}
   delta coefficientCounitTranspose
   rfl
 
-/-- The coefficient transpose, constructed from the fixed base-change mate.
-Source: Stacks Project, Tag 08HY.
-(blueprint: def-sc-picard-coefficient-transpose) -/
+/-- The coefficient transpose, constructed from the fixed base-change mate. -/
 @[irreducible]
 def picardCoefficientTranspose {X S : Scheme.{v}} (f : X ⟶ S)
     (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S) :
@@ -129,11 +124,7 @@ private theorem paste_evaluated_comparisons
   rw [hz, hz']
   exact paste_coherent_comparisons F G H A ε e ej e' Dj d d' c hs he
 
-/-- Pasting API for the counit construction on arbitrary scheme squares.
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: def-sc-picard-coefficient-transpose)
-Proof: the square comparisons compose; the typed coefficient morphisms compose;
-naturality moves the counit through the derived composition isomorphism. -/
+/-- Pasting API for the counit construction on arbitrary scheme squares. -/
 private theorem coefficientCounitTranspose_pasting
     {A B C X W T T' : Scheme.{v}}
     (p : A ⟶ W) (p1 : B ⟶ T) (p2 : C ⟶ T')
@@ -181,22 +172,7 @@ private theorem coefficientCounitTranspose_pasting
 set_option cleanup.letToHave false in
 -- The selected adjunction and coefficient isomorphisms have large dependent types.
 /-- Coefficient pasting for the transposes of base change, with no structure-sheaf
-normalization and no test section.
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-sc-picard-coefficient-transpose-pasting)
-
-Proof: Write a and a' for the displayed lifts to X_W. Pullback.hom_ext and the
-projection equations give j followed by a equal to a'. Expand τ using the
-counit formula for the pinned derived adjunction and evaluate the defining
-base-change mate. Naturality moves the coefficient comparison through the
-counit and the triangle identity cancels the intervening unit. The derived
-composition associativity law identifies the two paths around the resulting
-rectangle. Evaluate the left-derived composition factorization on L[0];
-canonicalSinglePullbackSquare identifies its coefficient comparison with
-successive single-pullback comparisons. Uniqueness of left adjoints identifies
-the tensor comparison with the conjugate of pushforward composition. These
-give exactly d. No single-pullback coefficient map is inverted, so the argument
-also applies to zero modules, identity maps and empty schemes. -/
+normalization and no test section. -/
 theorem picardCoefficientTranspose_pasting
     {X S : Scheme.{v}} (f : X ⟶ S)
     (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)

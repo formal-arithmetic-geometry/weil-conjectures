@@ -22,7 +22,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # The uniform torsion bound for an integral scalar endomorphism complex
 
-Source: current blueprint, sk-prop-integral-local-structure, compatible isomorphisms.
+Source: current blueprint, proposition-local-structure-integral-constructible-complexes, compatible
+isomorphisms.
 -/
 
 @[expose] public noncomputable section
@@ -156,8 +157,8 @@ private theorem finite_dual_tensor_homology
 
 /-- The torsion in degree one of the scalar dual-tensor complex is killed by one
 uniformizer power.
-Source: current blueprint sk-prop-integral-local-structure, compatible isomorphisms,
-first paragraph (blueprint: lem-pe-integral-scalar-torsion-bound).
+Source: current blueprint proposition-local-structure-integral-constructible-complexes, compatible
+isomorphisms, first paragraph (blueprint: lem-pe-integral-scalar-torsion-bound).
 
 Proof: The scalar integer ring is a DVR, hence Noetherian. Each term of the dual
 complex embeds into the finite product of the linear Hom modules indexed by the

@@ -28,9 +28,6 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.FiniteStageRationalExch
 
 /-! # Smooth base change with algebraically closed ℓ-adic coefficients
 
-Source: blueprint master, sec-smooth-base-change/sk-rem-rest, order 1446
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch).
-
 The presentation specifies the finite-stage exchange and tensor comparisons.
 Its descent through both ambient Karoubi layers retains the canonical arrow
 and independence of the finite stage and admissible lattice.
@@ -38,13 +35,17 @@ No constructible landing of the ambient direct images is included.
 
 ## Main definitions
 
-* `IntegralComparisons`: scalar comparisons fixed by the published tensor maps.
+* `IntegralComparisons`: scalar comparisons fixed by the tensor maps.
 * `Presentation`: the completed composites and canonical compatible exchange.
 * `Presentation.exchange`: descent through the ambient pair and Karoubi categories.
 
 ## Main statements
 
 * `qbarCoefficientSmoothBaseChange`: invertibility and stage/lattice independence.
+
+## References
+
+* Stacks 099N
 -/
 
 @[expose] public noncomputable section
@@ -74,9 +75,7 @@ namespace AlgebraicGeometry.Scheme
 
 namespace QbarCoefficientSmoothBaseChange
 
-/-- The finite-stage completed pullback/direct-image composite for the square.
-Source: blueprint master, sec-smooth-base-change/sk-rem-rest, order 1446
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- The finite-stage completed pullback/direct-image composite for the square. -/
 abbrev smoothLeftStage (l : ℕ) [Fact l.Prime] (Ω : Type v)
     [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     (E : Padic.FiniteCoefficientFields l Ω)
@@ -87,9 +86,7 @@ abbrev smoothLeftStage (l : ℕ) [Fact l.Prime] (Ω : Type v)
   (Idempotents.functorExtension₂ _ _).obj
     (WeilConjectures.sbcRationalLeft l (pbcFiniteField.{u} l Ω E) (f := f) (g := g))
 
-/-- The finite-stage direct-image/pullback composite for the square.
-Source: blueprint master, sec-smooth-base-change/sk-rem-rest, order 1446
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- The finite-stage direct-image/pullback composite for the square. -/
 abbrev smoothRightStage (l : ℕ) [Fact l.Prime] (Ω : Type v)
     [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     (E : Padic.FiniteCoefficientFields l Ω)
@@ -100,9 +97,7 @@ abbrev smoothRightStage (l : ℕ) [Fact l.Prime] (Ω : Type v)
   (Idempotents.functorExtension₂ _ _).obj
     (WeilConjectures.sbcRationalRight l (pbcFiniteField.{u} l Ω E) (e := e) (h := h))
 
-/-- The canonical finite-stage smooth exchange transformation.
-Source: blueprint master, sec-smooth-base-change/sk-rem-rest, order 1446
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- The canonical finite-stage smooth exchange transformation. -/
 abbrev smoothExchangeStage (l : ℕ) [Fact l.Prime] (Ω : Type v)
     [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     (E : Padic.FiniteCoefficientFields l Ω)
@@ -123,9 +118,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   {U V : Scheme.{u}} (q : U ⟶ V)
 
-/-- The right-adjoint comparison is the mate of the normalized ordinary tensor comparison.
-Source: sketch32, lines 1191--1228 and 1291--1321
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- The right-adjoint comparison is the mate of the normalized ordinary tensor comparison. -/
 @[irreducible] def pushModel :
     sbcAmbientPush l E q ≅ pbcActualDerivedPush q (pbcIntegralDatum l E) :=
   conjugateIsoEquiv
@@ -134,11 +127,8 @@ Source: sketch32, lines 1191--1228 and 1291--1321
       (pbcAdicCompletion U (pbcIntegralDatum l E)) (sbcCoefficientIso l E q))
     (pbcActualDerivedAdjunction q (pbcIntegralDatum l E)) (sbcOrdinaryDerivedIso l E q)
 
-/-- Transport the existing strict-tower/reflector comparison through reassociation.
-Its unit normalization is exactly pbcActualCompletedPullback_tower: the strict
-quotient augmentation is preserved, rather than an arbitrary completion isomorphism.
-Source: sketch32, lines 1191--1228 and 1291--1321; Stacks 099N
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- The completed pullback comparison, obtained from the strict-tower/reflector comparison
+`pbcActualCompletedPullback_tower` by reassociation. -/
 @[irreducible] def pullModel :
     sbcPull l E q ⋙ ObjectProperty.ι (IsPbcComplete l E U) ≅
       ObjectProperty.ι (IsPbcComplete l E V) ⋙
@@ -176,13 +166,7 @@ private theorem levelComparison_hom (W : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The two recorded coefficient maps have the same finite projections, hence agree.
-Source: sketch32, lines 1291--1321
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch).
-Proof: both coefficient maps send a continuous quotient section to its image under
-pbcFiniteFieldInclusion. The finite projections agree by quotient induction.
-Uniqueness of the completed coefficient limit map gives equality; applying the
-fixed derived extension construction gives this equality of tensor functors. -/
+/-- The ambient scalar extension agrees with the embedding tensor along `E ≤ M`. -/
 theorem tensorModel_eq (W : Scheme.{u}) :
     pbcAmbientScalarExtension l Ω W a =
       pbcEmbeddingAmbientTensor l (pbcFiniteField.{u} l Ω E)
@@ -207,14 +191,10 @@ theorem tensorModel_eq (W : Scheme.{u}) :
   · exact (pbcScalarCoefficientMap_exists l (pbcFiniteField.{u} l Ω E)
       (pbcFiniteField.{u} l Ω M) (pbcFiniteFieldInclusion l Ω a) W).exists.choose_spec
 
-/-- Transport between the two identical finite-projection-normalized tensors.
-Source: sketch32, lines 1291--1321
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- Transport between the two identical finite-projection-normalized tensors. -/
 @[irreducible] def tensorModel (W : Scheme.{u}) := eqToIso (tensorModel_eq l Ω a W)
 
-/-- The specified scalar mate equation for an integral direct-image comparison.
-Source: sketch32, lines 1191--1228 and 1291--1321
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- The specified scalar mate equation for an integral direct-image comparison. -/
 @[irreducible] def IntegralPushNormalization (push : sbcPush l (pbcFiniteField.{u} l Ω E) q ⋙
       pbcAmbientCompleteIntegralTransition l Ω V a ≅
     pbcAmbientCompleteIntegralTransition l Ω U a ⋙
@@ -233,9 +213,7 @@ Source: sketch32, lines 1191--1228 and 1291--1321
         (sbcAmbientPush l (pbcFiniteField.{u} l Ω M) q).map
           ((tensorModel l Ω a U).inv.app K.obj))
 
-/-- The unit-normalized tensor equation for an integral completed-pullback comparison.
-Source: sketch32, lines 1191--1228 and 1291--1321
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- The unit-normalized tensor equation for an integral completed-pullback comparison. -/
 @[irreducible] def IntegralPullNormalization (pull : sbcPull l (pbcFiniteField.{u} l Ω E) q ⋙
       pbcAmbientCompleteIntegralTransition l Ω U a ≅
     pbcAmbientCompleteIntegralTransition l Ω V a ⋙
@@ -254,11 +232,8 @@ Source: sketch32, lines 1191--1228 and 1291--1321
           (⟨(pbcAmbientScalarExtension l Ω V a).obj K.obj,
             pbcAmbientCompleteTensor_preserves l Ω V a K⟩))
 
-/-- The canonical integral comparisons, specified by the published scalar mate and
-unit-normalized completed tensor comparison. Their underlying equations determine
-both isomorphisms uniquely. This packages the construction in proof step 1.
-Source: sketch32, lines 1191--1228 and 1291--1321
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- The canonical integral comparisons, specified by the scalar mate and
+unit-normalized completed tensor comparison. -/
 structure IntegralComparisons where
   push : sbcPush l (pbcFiniteField.{u} l Ω E) q ⋙
       pbcAmbientCompleteIntegralTransition l Ω V a ≅
@@ -290,9 +265,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
   [iY : Fact (∀ x : Y, IsUnit (l : Y.presheaf.stalk x))]
   (sq : ChosenCartesianSquare h e f g)
 
-/-- Normalization of the left rational comparison by the two integral comparisons.
-Source: sketch32, lines 1291--1321
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- Normalization of the left rational comparison by the two integral comparisons. -/
 @[irreducible] def LeftBetaNormalization
     (cf : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),
     IntegralComparisons l Ω f a)
@@ -315,9 +288,7 @@ Source: sketch32, lines 1291--1321
           ((cf a).pull.hom.app ((sbcPush l (pbcFiniteField.{u} l Ω E) g).obj K) ≫
             (sbcPull l (pbcFiniteField.{u} l Ω M) f).map ((cg a).push.hom.app K))
 
-/-- Normalization of the right rational comparison by the two integral comparisons.
-Source: sketch32, lines 1291--1321
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- Normalization of the right rational comparison by the two integral comparisons. -/
 @[irreducible] def RightBetaNormalization
     (ch : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),
     IntegralComparisons l Ω h a)
@@ -340,14 +311,9 @@ Source: sketch32, lines 1291--1321
           ((ch a).push.hom.app ((sbcPull l (pbcFiniteField.{u} l Ω E) e).obj K) ≫
             (sbcPush l (pbcFiniteField.{u} l Ω M) h).map ((ce a).pull.hom.app K))
 
-/-- A presentation of the specified ambient exchange and its scalar descent.
-The integral comparisons are fixed by the actual scalar mate and completion units.
-The raw comparison equations localize precisely their composites, also when E=M:
-the published integral/raw comparisons retain the tensor unit in that case.
-The stage operations and transformation are exactly their Karoubi extensions.
-These are witnesses supplied by the theorem, not extra assumptions on K.
-Source: sketch32, lines 1191--1228, 1291--1338 and 1439--1455
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- A presentation of the specified ambient exchange and its scalar descent: integral
+comparisons fixed by the scalar mate and completion units, raw comparisons localizing their
+composites, and stage operations given by their Karoubi extensions. -/
 structure Presentation where
   cf : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),
     IntegralComparisons l Ω f a
@@ -383,19 +349,14 @@ structure Presentation where
 namespace Presentation
 variable (P : Presentation l Ω sq)
 
-/-- Extend the descended exchange to the ambient outer Karoubi envelope.
-The Mathlib extension sandwiches components by both images of the outer projector.
-Source: sketch32, lines 1412--1455
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- Extend the descended exchange to the ambient outer Karoubi envelope. -/
 def ambientExchange :
     (Idempotents.functorExtension₂ _ _).obj P.F.functor ⟶
       (Idempotents.functorExtension₂ _ _).obj P.G.functor :=
   (Idempotents.functorExtension₂ _ _).map (StageSystem.Morphism.descNatTrans P.alpha)
 
-/-- The exchange on the recorded raw Qbar category, using its published inclusion
-through the finite-stage and outer identity projectors.
-Source: sketch32, lines 1412--1455
-(blueprint: sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch). -/
+/-- The exchange on the raw Qbar category, restricted along its inclusion
+through the finite-stage and outer identity projectors. -/
 def exchange :=
   Functor.whiskerLeft
     (pbcRawQbarToComplete l Ω T ⋙ pbcConstructibleCompleteQbarInclusion l Ω T)

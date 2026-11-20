@@ -26,10 +26,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Post-normalization comparison for the supported source.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, the derived trace comparison after removing the ordinary support isomorphism.
-(blueprint: lem-sfb-projective-supported-source-arrow-derived-core)
 
 This is the residual compatibility between the canonical derived unit and the
 conjugate section comparison. It is strictly smaller than the final statement
@@ -52,10 +48,6 @@ theorem supported_source_arrow_derived_core
   exact projective_residual_target Λ Y L d
 
 /-- Derived-unit evaluation of the supported source.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, evaluation of the canonical right-derived unit before cancellation.
-(blueprint: lem-sfb-projective-supported-source-arrow-derived)
 -/
 theorem supported_source_arrow_derived
     (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)

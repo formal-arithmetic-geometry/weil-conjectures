@@ -674,7 +674,7 @@ include h in
 étale sheaf `G` on `Y`, restriction `Γ(Y, G) ⟶ Γ(Y₀, i^* G)` is bijective. A henselian pair is
 Mathlib's `HenselianRing A I` (blueprint: `def-weil-pbc-henselian-terminology`; a strictly
 henselian local ring is a `HenselianLocalRing` with separably closed residue field).
-(blueprint: `lemma-weil-pbc-etale-degree-zero`) -/
+(blueprint: `theorem-comparison-over-henselian-pair-degree--1`) -/
 @[stacks 0A0C]
 theorem bijective_pullSection_of_henselianRing :
     Function.Bijective (pullSection i G (V := Scheme.Etale.mk (𝟙 Y₀))

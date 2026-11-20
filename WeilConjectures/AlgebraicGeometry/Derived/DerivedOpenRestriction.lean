@@ -15,9 +15,9 @@ import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
 /-!
 # Derived direct image restricted to an open
 
-Source: blueprint, sec-smooth-purity, sk-def-sf-operations,
-lem-weil-pbc-derived-open-restriction (blueprint: lem-weil-pbc-derived-open-restriction);
-Stacks Project, Tags 03S2, 03F3, 05TI and 05TH.
+Source: blueprint, chap-Smooth-purity, sk-def-sf-operations,
+proposition-construction-independence-rf-shriek--7 (blueprint:
+proposition-construction-independence-rf-shriek--7); Stacks Project, Tags 03S2, 03F3, 05TI and 05TH.
 -/
 
 @[expose] public section
@@ -35,7 +35,8 @@ The transformation is the canonical derived exchange map, not an arbitrary isomo
 Source: blueprint,
 part-six-operations/sec-six-functors-basics/sec-brown-construction/
 sec-construction-of-rf/sk-prop-sf-comp-coherence,
-lem-weil-pbc-derived-open-restriction (blueprint: lem-weil-pbc-derived-open-restriction).
+proposition-construction-independence-rf-shriek--7 (blueprint:
+proposition-construction-independence-rf-shriek--7).
 
 Proof:
 1. For an etale `W → U`, inverse image along an open is restriction
@@ -64,8 +65,9 @@ theorem isIso_derivedBaseChangeMapPlus_of_openImmersion_of_commRing
 
 /-- The finite-coefficient case of
 `isIso_derivedBaseChangeMapPlus_of_openImmersion_of_commRing`, kept for its existing users.
-Source: blueprint, sec-six-functors-basics, sk-prop-sf-comp-coherence,
-lem-weil-pbc-derived-open-restriction (blueprint: lem-weil-pbc-derived-open-restriction). -/
+Source: blueprint, chap-Construction-of-f, proposition-construction-independence-rf-shriek,
+proposition-construction-independence-rf-shriek--7 (blueprint:
+proposition-construction-independence-rf-shriek--7). -/
 theorem isIso_derivedBaseChangeMapPlus_of_openImmersion
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T S U V : Scheme.{u}} (f : T ⟶ S) (a : U ⟶ S)

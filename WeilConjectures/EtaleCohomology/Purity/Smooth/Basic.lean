@@ -19,8 +19,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 The central statement of the block. For `f : X ⟶ Y` smooth separated of pure relative
 dimension `d` and a finite coefficient ring `Λ` whose exponent is invertible on `X`, *smooth
-purity* (`sk-thm-smooth-purity`) says `ω_f ≅ Λ_X(d)[2d]`, hence `Rf^! K ≅ Lf^* K(d)[2d]`.
-It rests on *cohomological smoothness* (`sk-prop-cohsm`), stated in
+purity* (`proposition-smooth-purity-finite-coefficients`) says `ω_f ≅ Λ_X(d)[2d]`, hence
+`Rf^! K ≅ Lf^* K(d)[2d]`. It rests on *cohomological smoothness*
+(`proposition-exceptional-inverse-image-smooth-morphism`), stated in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness`.
 
 The route is the blueprint's: the model case is affine-space purity
@@ -34,25 +35,27 @@ The blueprint remark `sk-rem-split` records where the moves of the
 proof sit: the rank-one computation (Kummer class, excision, Gysin identification) in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine` (`sk-prop-a1-kummer`), the Künneth
 and frame-independence arguments in `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace`
-(`sk-prop-an`), and the geometry of the deformation of a section in
-`WeilConjectures.AlgebraicGeometry.DeformationToNormalCone` (`sk-lem-geometry`). Purity for
+(`proposition-purity-vector-bundles`), and the geometry of the deformation of a section in
+`WeilConjectures.AlgebraicGeometry.DeformationToNormalCone` (`prose-09-12`). Purity for
 regular closed immersions (`WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion`,
-`sk-thm-regular`) is not one of the moves: it follows from smooth purity for the two structure
-morphisms and the co-projection (`WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection`).
-The remark `rem-pur-status-after-completion` records the dependency order: the projective-line
-adjunction, then the affine-space adjunction, the orientation-free smooth tensor and base-change
-statements, and only then the deformation statement and smooth purity itself; the formal
-six-functor bookkeeping is downstream of this file.
+`lemma-class-of-point--1`) is not one of the moves: it follows from smooth purity for the two
+structure morphisms and the co-projection
+(`WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection`). The remark
+`rem-pur-status-after-completion` records the dependency order: the projective-line adjunction, then
+the affine-space adjunction, the orientation-free smooth tensor and base-change statements, and only
+then the deformation statement and smooth purity itself; the formal six-functor bookkeeping is
+downstream of this file.
 
 ## Implementation notes
 
-The blueprint asserts that each isomorphism below is *canonical*: `sk-thm-smooth-purity` is
-about the normalized comparison, built from the mate `φ_K : Lf^* K ⊗ ω_f ⟶ Rf^! K` of the
-projection formula. That map does not exist in the repository — the projection map itself is a
-TODO of `WeilConjectures.SixFunctors.Etale.Derived.Exchange` — so each statement records the
-existence of the isomorphism only, with a `TODO(unify)` marker. For the same reason the smooth
-purity map `γ_{f,K}` and the smooth pullback exchange are built from their constituent
-isomorphisms, which are arguments of the constructions.
+The blueprint asserts that each isomorphism below is *canonical*:
+`proposition-smooth-purity-finite-coefficients` is about the normalized comparison, built from the
+mate `φ_K : Lf^* K ⊗ ω_f ⟶ Rf^! K` of the projection formula. That map does not exist in the
+repository — the projection map itself is a TODO of
+`WeilConjectures.SixFunctors.Etale.Derived.Exchange` — so each statement records the existence of
+the isomorphism only, with a `TODO(unify)` marker. For the same reason the smooth purity map
+`γ_{f,K}` and the smooth pullback exchange are built from their constituent isomorphisms, which are
+arguments of the constructions.
 
 Statements whose type does not mention the relative dimension `d` carry `include d in`;
 without it the hypothesis `[SmoothOfRelativeDimension d f]` would silently be dropped.
@@ -100,7 +103,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
 section Twist
 
 variable (X) in
-/-- Blueprint `def-coefficient-twists-detailed`: the twist reassociation
+/-- Blueprint `definition-tate-twists`: the twist reassociation
 
 `M(m)[2m] = (M ⊗ Λ_X(m))[2m] ≅ M ⊗ Λ_X(m)[2m]`,
 
@@ -120,12 +123,12 @@ end Twist
 
 omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
-/-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
-projection
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--7`: Base change for the
+dualizing object of a projection
 
 Let `W = X ×_Y X` with projections `p₁, p₂`. The square `p₂ ≫ f = p₁ ≫ f` is cartesian and
-`p₁` is the base change of the smooth `f`, so smooth base change for `R^!` (`sk-prop-cohsm`
-(c)) gives
+`p₁` is the base change of the smooth `f`, so smooth base change for `R^!`
+(`proposition-exceptional-inverse-image-smooth-morphism` (c)) gives
 
 `ω_{p₁} = Rp₁^! Λ_X ≅ Lp₂^* Rf^! Λ_Y = Lp₂^* ω_f`.
 
@@ -142,8 +145,8 @@ theorem nonempty_iso_dualizingComplex_pullbackFst [QuasiSeparatedSpace Y] [Quasi
 
 omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
-/-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
-projection
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--7`: Base change for the
+dualizing object of a projection
 
 The symmetric statement: `ω_{p₂} ≅ Lp₁^* ω_f`. -/
 theorem nonempty_iso_dualizingComplex_pullbackSnd [QuasiSeparatedSpace Y] [QuasiCompact f] :
@@ -157,8 +160,8 @@ theorem nonempty_iso_dualizingComplex_pullbackSnd [QuasiSeparatedSpace Y] [Quasi
 
 omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
-/-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
-projection
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--7`: Base change for the
+dualizing object of a projection
 
 The section invariant of the diagonal `Δ : X ⟶ X ×_Y X`, a closed section of `p₁`, is the
 dualizing complex of `f`: since `Δ ≫ p₂ = 𝟙 X`,
@@ -171,7 +174,7 @@ theorem nonempty_iso_sectionInvariant_diagonal [QuasiSeparatedSpace Y] [QuasiCom
   exact ⟨(L((pullback.diagonal f)^*[ModuleCat.{u + 1} Λ])).mapIso e ≪≫
     (leftDerivedUpperStarCompSectionIso _ _ _ (pullback.diagonal_snd f)).app _⟩
 
-/-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
+/-- Blueprint `proposition-smooth-purity-finite-coefficients`: Finite-coefficient smooth purity
 
 **Smooth purity, finite coefficients.** For `f : X ⟶ Y` smooth separated of pure relative
 dimension `d`, `Y` separated of finite type over a field, and a finite coefficient ring `Λ`
@@ -182,8 +185,8 @@ whose exponent is invertible on `X`,
 canonically, compatibly with base change and additively in the twist under composition of
 smooth morphisms.
 
-This is also blueprint `thm-pur-diagonal-dualizing-object`. The proof is the diagonal argument.
-Let `W = X ×_Y X` and `Δ : X ⟶ W` the diagonal, a closed section of the smooth projection
+This is also blueprint `proposition-relative-dualizing-complex--1`. The proof is the diagonal
+argument. Let `W = X ×_Y X` and `Δ : X ⟶ W` the diagonal, a closed section of the smooth projection
 `p₁`.
 1. `𝒞(p₁, Δ) ≅ ω_f` by smooth base change
    (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`); `f` is quasi-compact,
@@ -197,11 +200,11 @@ Let `W = X ×_Y X` and `Δ : X ⟶ W` the diagonal, a closed section of the smoo
    fundamental class of `Δ` with `RΔ^! (Λ_W(d)[2d]) ≅ Λ_X`. The co-projection formula and
    `RΔ^! ω_{p₁} ≅ R(Δ ≫ p₁)^! Λ_X = Λ_X` turn this into `𝒞(p₁, Δ) ≅ Λ_X(d)[2d]`.
 
-Step 2 replaces the blueprint's deformation to the normal cone of `Δ` (`sk-thm-dnc`,
-`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`) followed by vector-bundle
-purity for its normal bundle: the fundamental class of `Δ` is glued directly from the
-coordinate frames, as for regular immersions (`sk-thm-regular`), whose frame classes agree on
-overlaps by frame independence. -/
+Step 2 replaces the blueprint's deformation to the normal cone of `Δ`
+(`lemma-section-normal-bundle`, `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`)
+followed by vector-bundle purity for its normal bundle: the fundamental class of `Δ` is glued
+directly from the coordinate frames, as for regular immersions (`lemma-class-of-point--1`), whose
+frame classes agree on overlaps by frame independence. -/
 theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k]
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
@@ -218,7 +221,7 @@ theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
 
 /-! ### The smooth purity map -/
 
-/-- Blueprint `def-pur-smooth-purity-map`: Smooth purity map
+/-- Blueprint `proposition-smooth-purity-finite-coefficients--1`: Smooth purity map
 
 For `f` smooth separated of pure relative dimension `d` and `K ∈ D(Y_ét, Λ)`, the *smooth
 purity map* is the composite
@@ -226,8 +229,8 @@ purity map* is the composite
 `γ_{f,K} : Lf^* K(d)[2d] ≅ Lf^* K ⊗ Λ_X(d)[2d] ≅ Lf^* K ⊗ ω_f ≅ Rf^! K`
 
 of the twist reassociation (`AlgebraicGeometry.Etale.twistShiftObjIso`), the inverse of the
-identification `θ : ω_f ≅ Λ_X(d)[2d]` of `thm-pur-diagonal-dualizing-object`, and the tensor
-formula `φ : Lf^* K ⊗ ω_f ≅ Rf^! K` of `sk-prop-cohsm` (b).
+identification `θ : ω_f ≅ Λ_X(d)[2d]` of `proposition-relative-dualizing-complex--1`, and the tensor
+formula `φ : Lf^* K ⊗ ω_f ≅ Rf^! K` of `proposition-exceptional-inverse-image-smooth-morphism` (b).
 
 The blueprint's `θ` and `φ` are canonical maps; the library only provides their existence
 (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`,
@@ -247,16 +250,16 @@ noncomputable def smoothPurityIso
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).mapIso
       θ.symm ≪≫ φ
 
-/-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
+/-- Blueprint `proposition-smooth-purity-finite-coefficients`: Finite-coefficient smooth purity
 
 **The purity isomorphism on all coefficients.** Combining the tensor formula of
-`sk-prop-cohsm` (b) with `ω_f ≅ Λ_X(d)[2d]`: for `f` smooth separated of pure relative
-dimension `d` and every `K ∈ D^b_{ctf}(Y, Λ)`,
+`proposition-exceptional-inverse-image-smooth-morphism` (b) with `ω_f ≅ Λ_X(d)[2d]`: for `f` smooth
+separated of pure relative dimension `d` and every `K ∈ D^b_{ctf}(Y, Λ)`,
 
 `Rf^! K ≅ (Lf^* K)(d)[2d]`.
 
-This is also blueprint `thm-pur-finite-coefficient-smooth-purity` and
-`cor-pur-dualizing-object-purity`: the isomorphism is the smooth purity map
+This is also blueprint `proposition-smooth-purity-finite-coefficients--1` and
+`proposition-smooth-purity-finite-coefficients--1`: the isomorphism is the smooth purity map
 `AlgebraicGeometry.Etale.smoothPurityIso` built from the two identifications. -/
 theorem nonempty_iso_rightDerivedUpperShriek_twistShift [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k]
@@ -270,17 +273,17 @@ theorem nonempty_iso_rightDerivedUpperShriek_twistShift [HasTateTwist.IsNormaliz
   exact ⟨(smoothPurityIso Λ (d := d) f K θ φ).symm⟩
 
 include d in
-/-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
+/-- Blueprint `proposition-smooth-purity-finite-coefficients`: Finite-coefficient smooth purity
 
 **Additivity of the dualizing complex under composition.** For composable smooth separated
 morphisms `g : W ⟶ X` and `f : X ⟶ Y`,
 
 `ω_{g ≫ f} ≅ ω_g ⊗^L Lg^* ω_f`,
 
-which is the multiplicativity of the twist that `sk-thm-regular` divides one dualizing complex
-into another with. This is the dualizing-object form of blueprint
-`thm-pur-composition-coherence`. It is the twist additivity of smooth purity: if `g` has
-relative dimension `e` and `f` relative dimension `d`, all three objects are Tate twists,
+which is the multiplicativity of the twist that `lemma-class-of-point--1` divides one dualizing
+complex into another with. This is the dualizing-object form of blueprint
+`proposition-compatibility-purity-composition--1`. It is the twist additivity of smooth purity: if
+`g` has relative dimension `e` and `f` relative dimension `d`, all three objects are Tate twists,
 `ω_{g ≫ f} ≅ Λ_W(e + d)[2(e + d)]`, `ω_g ≅ Λ_W(e)[2e]` and `Lg^* ω_f ≅ Λ_W(d)[2d]`, and
 `Λ_W(e)[2e] ⊗ Λ_W(d)[2d] ≅ Λ_W(e + d)[2(e + d)]`
 (`AlgebraicGeometry.Etale.shiftTateObjectAddIso`). -/
@@ -327,8 +330,8 @@ noncomputable def leftDerivedUpperStarTwistShiftBaseChangeIso (sq : CommSq g f' 
 
 variable [HasCompactification f']
 
-/-- Blueprint `def-pur-smooth-pullback-exchange`: Smooth pullback exchange for exceptional
-inverse image
+/-- Blueprint `proposition-compatibility-purity-base-change--1`: Smooth pullback exchange for
+exceptional inverse image
 
 For a cartesian square `g ≫ f = f' ≫ v` with `f` smooth of relative dimension `d`, the smooth
 pullback exchange is the composite
@@ -364,7 +367,7 @@ noncomputable def smoothPullbackExchange (sq : IsPullback g f' f v)
       smoothPurityIso Λ f' _ θ' φ'
 
 omit [IsSeparated f] [SmoothOfRelativeDimension d f] in
-/-- Blueprint `thm-pur-smooth-base-change-coherence`: Smooth base-change coherence
+/-- Blueprint `proposition-compatibility-purity-base-change--1`: Smooth base-change coherence
 
 For a cartesian square `g ≫ f = f' ≫ v` with `f` smooth of relative dimension `d`, the pullback
 of the purity isomorphism is the purity isomorphism of the base change: the square

@@ -20,7 +20,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # Ordinary compact-support coefficient system transport
 
-Source: blueprint sk-thm-purity-transport, Steps 2--3; the compact-support
+Source: blueprint theorem-smooth-purity-all-admissible-coefficients, Steps 2--3; the compact-support
 realization prerequisite, proof Steps 2--3 and 8--11 (agent-formulated constructions).
 (blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
 

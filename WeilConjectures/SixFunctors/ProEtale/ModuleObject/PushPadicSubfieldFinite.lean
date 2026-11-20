@@ -42,6 +42,14 @@ open CategoryTheory Limits MonoidalCategory MonObj Functor.LaxMonoidal
 
 open scoped CategoryTheory.Obj
 
+private lemma biproduct_desc_comp_eq {C : Type*} [Category* C] [HasZeroMorphisms C]
+    {J : Type*} {A : J → C} [HasBiproduct A] {B D : C}
+    (g : ∀ i, A i ⟶ B) (f : B ⟶ D) :
+    biproduct.desc g ≫ f = biproduct.desc (fun i ↦ g i ≫ f) := by
+  apply biproduct.hom_ext'
+  intro i
+  simp only [biproduct.ι_desc_assoc, biproduct.ι_desc]
+
 namespace CategoryTheory.Mod
 
 variable {C : Type*} [Category* C] [MonoidalCategory C] {A : C} [MonObj A]
@@ -70,8 +78,6 @@ noncomputable abbrev padicSubfieldConstSection (Z : Scheme.{u}) (t : F) :
   ε (upperStarFromPoint Z) ≫
     (upperStarFromPoint Z).map (Profinite.continuousMapConstRingHom F t).hom
 
-set_option maxHeartbeats 1000000 in
--- Identifying the various forms of the module objects `F_X ⊗_{E_X} M` is slow to elaborate.
 /-- **(Push) for `E ⟶ F` is an isomorphism**: for finite subextensions `E ≤ F` and every
 `E_X`-module `M`, the comparison `F_Y ⊗_{E_Y} f_* M ⟶ f_*(F_X ⊗_{E_X} M)` is an isomorphism. -/
 theorem isIso_pushHom_padicSubfieldRingObjMap_app
@@ -79,17 +85,22 @@ theorem isIso_pushHom_padicSubfieldRingObjMap_app
     IsIso ((pushHom (Profinite.padicSubfieldRingObjMap ℓ hF) f).app M) := by
   obtain ⟨n, b, h⟩ :=
     Profinite.exists_isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul.{u} ℓ hF
-  let push := (pushHom (Profinite.padicSubfieldRingObjMap ℓ hF) f).app M
+  let push :
+      (Mod.extendScalars (padicSubfieldRingObjMap Y ℓ hF)).obj
+          ((f)_*⟦Profinite.continuousMapRingObj E⟧.obj M) ⟶
+        (f)_*⟦Profinite.continuousMapRingObj F⟧.obj
+          ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ hF)).obj M) :=
+    (pushHom (Profinite.padicSubfieldRingObjMap ℓ hF) f).app M
   let DX : ⨁ (fun _ : Fin n ↦ M.X) ⟶
       ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ hF)).obj M).X :=
     biproduct.desc fun i ↦ Mod.extendUnitHom (padicSubfieldRingObjMap X ℓ hF) M ≫
       Mod.globalSmul (padicSubfieldConstSection ℓ X (b i))
         ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ hF)).obj M)
   let DY : ⨁ (fun _ : Fin n ↦ ((f)_*⟦_⟧.obj M).X) ⟶
-      (((f)_*⟦_⟧ ⋙ Mod.extendScalars (padicSubfieldRingObjMap Y ℓ hF)).obj M).X :=
+      ((Mod.extendScalars (padicSubfieldRingObjMap Y ℓ hF)).obj ((f)_*⟦_⟧.obj M)).X :=
     biproduct.desc fun i ↦ Mod.extendUnitHom (padicSubfieldRingObjMap Y ℓ hF) ((f)_*⟦_⟧.obj M) ≫
       Mod.globalSmul (padicSubfieldConstSection ℓ Y (b i))
-        (((f)_*⟦_⟧ ⋙ Mod.extendScalars (padicSubfieldRingObjMap Y ℓ hF)).obj M)
+        ((Mod.extendScalars (padicSubfieldRingObjMap Y ℓ hF)).obj ((f)_*⟦_⟧.obj M))
   have hX : IsIso DX := Mod.isIso_biproductDesc_extendUnitHom_globalSmul
     (padicSubfieldRingObjMap X ℓ hF) (fun i ↦ padicSubfieldConstSection ℓ X (b i))
       (isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul X ℓ hF b h) M
@@ -98,17 +109,24 @@ theorem isIso_pushHom_padicSubfieldRingObjMap_app
       (isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul Y ℓ hF b h) ((f)_*⟦_⟧.obj M)
   have key : DY ≫ push.hom =
       ((f)_*[Ab.{u + 1}].mapBiproduct (fun _ : Fin n ↦ M.X)).inv ≫ (f)_*[Ab.{u + 1}].map DX := by
-    rw [biproduct.mapBiproduct_inv_map_desc]
-    refine biproduct.hom_ext' _ _ fun i ↦ ?_
-    rw [biproduct.ι_desc_assoc, biproduct.ι_desc, Category.assoc,
-      Mod.globalSmul_comp_hom push, extendUnitHom_comp_pushHom_app_hom_assoc f
-        (Profinite.padicSubfieldRingObjMap ℓ hF) M]
+    refine (biproduct_desc_comp_eq _ _).trans ?_
+    refine Eq.trans ?_ (biproduct.mapBiproduct_inv_map_desc ((f)_*[Ab.{u + 1}])
+      (fun _ : Fin n ↦ M.X) (fun i ↦
+        Mod.extendUnitHom (padicSubfieldRingObjMap X ℓ hF) M ≫
+          Mod.globalSmul (padicSubfieldConstSection ℓ X (b i))
+            ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ hF)).obj M))).symm
+    apply congrArg biproduct.desc
+    funext i
+    rw [Category.assoc, Mod.globalSmul_comp_hom push,
+      extendUnitHom_comp_pushHom_app_hom_assoc f (Profinite.padicSubfieldRingObjMap ℓ hF) M]
     have e₃ : Mod.globalSmul (padicSubfieldConstSection ℓ Y (b i))
-        ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ hF) ⋙ (f)_*⟦_⟧).obj M) =
+        ((f)_*⟦_⟧.obj ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ hF)).obj M)) =
         (f)_*[Ab.{u + 1}].map (Mod.globalSmul (padicSubfieldConstSection ℓ X (b i))
           ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ hF)).obj M)) :=
       globalSmul_lowerStar_obj f F (b i) _
-    rw [e₃, ← Functor.map_comp]
+    exact (congrArg ((f)_*[Ab.{u + 1}].map
+      (Mod.extendUnitHom (padicSubfieldRingObjMap X ℓ hF) M) ≫ ·) e₃).trans
+        ((f)_*[Ab.{u + 1}].map_comp _ _).symm
   have : IsIso push.hom := by
     have : IsIso (DY ≫ push.hom) := by
       rw [key]

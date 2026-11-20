@@ -24,7 +24,7 @@ set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 /-- The canonical derived inverse-image/direct-image adjunction, recorded once.
-Source: the derived adjunction in blueprint thm-amb-p1-adjunction.
+Source: the derived adjunction in blueprint proposition-adjunction-projective-line--1.
 (auxiliary; not a blueprint node). -/
 @[irreducible]
 def ordinaryFiniteAdjunction (A : Type (u + 1)) [CommRing A]
@@ -41,7 +41,7 @@ instance ordinaryFinitePushforward_additive (A : Type (u + 1)) [CommRing A]
   Functor.additive_rightDerivedFunctor (lowerStar (ModuleCat.{u + 1} A) f)
 
 /-- Transport an arrow from the constant object through the canonical inverse image.
-Source: adjunction transport in blueprint thm-amb-p1-adjunction.
+Source: adjunction transport in blueprint proposition-adjunction-projective-line--1.
 (auxiliary; not a blueprint node). -/
 @[irreducible]
 def ordinaryFiniteArrowPullback (A : Type (u + 1)) [CommRing A]
@@ -52,7 +52,7 @@ def ordinaryFiniteArrowPullback (A : Type (u + 1)) [CommRing A]
   (ordinaryFiniteUnitPullback A f).inv ≫ (ordinaryFinitePullback A f).map d ≫ v
 
 /-- The published twisted unit is the unit of the recorded adjunction.
-Source: blueprint thm-amb-p1-decomposition.
+Source: blueprint lemma-cohomology-projective-line-trace.
 (auxiliary; not a blueprint node).
 Proof: expand the recorded adjunction, which is the canonical derived adjunction. -/
 theorem ordinaryFiniteP1Unit_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)
@@ -66,7 +66,7 @@ theorem ordinaryFiniteP1Unit_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)
   rfl
 
 /-- The published Chern component is the adjunct for the recorded adjunction.
-Source: blueprint thm-amb-p1-decomposition.
+Source: blueprint lemma-cohomology-projective-line-trace.
 (auxiliary; not a blueprint node).
 Proof: expand the recorded adjunction; both sides are the same canonical adjunct. -/
 theorem ordinaryFiniteP1ChernPushforward_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)

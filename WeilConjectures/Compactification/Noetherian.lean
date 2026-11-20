@@ -101,15 +101,15 @@ quasi-separated scheme `X`, a finite set `s` of generic points of irreducible co
 and a point `x`, a chosen affine open `A(x; s)` containing `x` and every point of `s`, selected
 from `AlgebraicGeometry.exists_isAffineOpen_mem_of_subset_genericPoints`. Its defining
 properties are `AlgebraicGeometry.Scheme.affineOpenGenericPoints_spec`.
-(blueprint: `def-nagata-affine-neighbourhood-generic-points`) -/
+(blueprint: `lemma-affine-covers-dense-intersection--1`) -/
 noncomputable def Scheme.affineOpenGenericPoints (X : Scheme.{u}) [QuasiSeparatedSpace X]
     {s : Set X} (hsf : s.Finite) (hs : s ⊆ genericPoints X) (x : X) : X.Opens :=
   (exists_isAffineOpen_mem_of_subset_genericPoints hsf hs x).choose
 
 /-- **Properties of the selected affine neighbourhood**: `A(x; s)` is affine and contains `x`
 and every point of `s`.
-(blueprint: `lemma-nagata-affine-neighbourhood-generic-points`; the existence statement
-`lemma-nagata-affine-neighbourhood-generic-points` is
+(blueprint: `lemma-affine-covers-dense-intersection--1`; the existence statement
+`lemma-affine-covers-dense-intersection--1` is
 `AlgebraicGeometry.exists_isAffineOpen_mem_of_subset_genericPoints`) -/
 theorem Scheme.affineOpenGenericPoints_spec (X : Scheme.{u}) [QuasiSeparatedSpace X]
     {s : Set X} (hsf : s.Finite) (hs : s ⊆ genericPoints X) (x : X) :
@@ -264,7 +264,7 @@ theorem nagataCompactification_of_isNoetherian [IsNoetherian S] (f : X ⟶ S) [I
 of the recursion `AlgebraicGeometry.noetherianCompactificationConstruction` over the selected
 dense affine cover `AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter` of `X`,
 transported along the identification `X ≅ X_n`.
-(blueprint: `def-nagata-noetherian-compactification`, `thm-nagata-noetherian`) -/
+(blueprint: `theorem-nagata-s-compactification-theorem--1`) -/
 noncomputable def noetherianCompactification [IsNoetherian S] (f : X ⟶ S) [IsSeparated f]
     [LocallyOfFiniteType f] [QuasiCompact f] : Compactification f :=
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f

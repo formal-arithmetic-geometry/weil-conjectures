@@ -31,7 +31,7 @@ private lemma eval_eq_res {C : Type u} [Category C]
 
 /-- Pullback of a global section commutes with the inverse-image stalk comparison.
 Source: Stacks Project, Tag 03Q1 (3), and the definition of globalSectionsUpperStarMap.
-(blueprint: lem-weil-pbc-global-sections-stalk-comparison).
+(blueprint: lemma-sheaves-finite-support-finite-morphisms--2).
 
 Proof: Use inverseImage_stalk_germ with the identity étale neighbourhood of X.
 The definition of globalSectionsUpperStarMap evaluates the adjunction unit there,

@@ -13,8 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Projective
 /-!
 # Smooth duality for the affine line
 
-The affine-line case of blueprint `cor-amb-affine-space-adjunction`, from the projective-line
-adjunction `Rq_! ⊣ Lq^*(1)[2]` (`thm-amb-p1-adjunction`,
+The affine-line case of blueprint `lemma-affine-space-etale-localization--1`, from the
+projective-line adjunction `Rq_! ⊣ Lq^*(1)[2]` (`proposition-adjunction-projective-line--1`,
 `AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`).
 
 * If `Rf_! ⊣ G` is an adjunction whose counit is a trace counit
@@ -133,8 +133,8 @@ theorem projectiveLineSmoothDuality [HasKummerClass Λ] [HasKummerClass.IsNormal
     isIso_dualizingComplexTensorMap_of_counit_eq hε⟩
 
 variable {Λ} in
-/-- **Smooth duality for the affine line** (`cor-amb-affine-space-adjunction` for `d = 1`): the
-projection `p : 𝔸¹_S ⟶ S` is the open immersion `j : 𝔸¹_S ⟶ ℙ¹_S` followed by `q : ℙ¹_S ⟶ S`.
+/-- **Smooth duality for the affine line** (`lemma-affine-space-etale-localization--1` for `d = 1`):
+the projection `p : 𝔸¹_S ⟶ S` is the open immersion `j : 𝔸¹_S ⟶ ℙ¹_S` followed by `q : ℙ¹_S ⟶ S`.
 Since `j` is étale it satisfies smooth duality in degree `0`
 (`AlgebraicGeometry.Etale.EtaleSmoothDuality`), and `q` satisfies it in degree `-2`
 (`AlgebraicGeometry.Etale.projectiveLineSmoothDuality`); the tensor maps compose and

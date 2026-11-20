@@ -18,12 +18,13 @@ For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` with induced map o
 the support isomorphisms are exchanged by the exchange map `E` of the support square:
 `Rb^!(RΔ_{Y*} τ_f) ∘ E ∘ Rg_* ζ_c = ζ_b ∘ Ri_{b*} τ_h`
 (`Correspondence.ProperPushforwardDiagram.lowerStar_map_supportIso_comp_exchange`, blueprint
-`lem-trf-trace-map-exchange`, (2)). Following the blueprint proof, we pass to the
-`Rb_! ⊣ Rb^!` adjoints; the exceptional adjoint of `ζ_c` is the composition law of the fixed
+`theorem-proper-pushforward-lefschetz-verdier--1`, (2)). Following the blueprint proof, we pass to
+the `Rb_! ⊣ Rb^!` adjoints; the exceptional adjoint of `ζ_c` is the composition law of the fixed
 square followed by the trace `t_d`
 (`ProEtale.CondensedRing.Correspondence.FixedLocus.homEquiv_symm_supportIso_hom`, the last
-assertion of `def-trf-kernel-pushforward-maps`), and the claim reduces to the compatibility of
-the traces with composition (`ProEtale.CondensedRing.lowerShriekSquareIso_trace_exchange`).
+assertion of `theorem-proper-pushforward-lefschetz-verdier--1`), and the claim reduces to the
+compatibility of the traces with composition
+(`ProEtale.CondensedRing.lowerShriekSquareIso_trace_exchange`).
 
 -/
 
@@ -47,11 +48,9 @@ namespace Correspondence.FixedLocus
 
 variable {c : Correspondence ℓ K} (F : c.FixedLocus)
 
-set_option maxHeartbeats 1000000 in
--- the pullbacks and shrieks of bounded constructible complexes are unfolded in defeq checks
 /-- **The exceptional adjoint of the support isomorphism** (blueprint
-`def-trf-kernel-pushforward-maps`, item 8, last assertion): the `Rc_! ⊣ Rc^!`-adjoint of
-`ζ_c : Rι_* ω_Fix(c) ⟶ Rc^! RΔ_* ω_X` is
+`theorem-proper-pushforward-lefschetz-verdier--1`, item 8, last assertion): the
+`Rc_! ⊣ Rc^!`-adjoint of `ζ_c : Rι_* ω_Fix(c) ⟶ Rc^! RΔ_* ω_X` is
 `Rc_! Rι_* ω ≅ Rc_! Rι_! ω ≅ RΔ_! Rd_! ω ⟶ RΔ_! ω_X ≅ RΔ_* ω_X`, the composition law of the
 fixed square followed by the trace `t_d`. -/
 theorem homEquiv_symm_supportIso_hom :
@@ -78,18 +77,18 @@ theorem homEquiv_symm_supportIso_hom :
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ F.isPullback)
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv ℓ F.isPullback)
     (dualizingComplex' ℓ X)
-  have n₁ := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ F.ι).inv.naturality
-    (dualizingComplexComp ℓ F.d).inv
-  have n₂ := (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ F.ι_support).hom.naturality
-    (dualizingComplexComp ℓ F.d).inv
-  simp only [Functor.comp_map] at n₂
   simp only [supportIso, Iso.symm_hom, Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv,
     Adjunction.homEquiv_naturality_left_symm, upperShriekLowerStarIso,
     lowerShriekBaseChangeIso, hK, lowerShriekDualizingComplexTrace,
     Functor.map_comp, Category.assoc]
-  rw [← Functor.map_comp_assoc, n₁, Functor.map_comp_assoc]
-  congr 1
-  rw [← Category.assoc, n₂, Category.assoc]
+  simp only [← Functor.map_app_comp_map_map_assoc
+    (boundedConstructibleLowerShriek ℓ c.support)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ F.ι).inv
+    (dualizingComplexComp ℓ F.d).inv]
+  have n := (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ F.ι_support).hom.naturality
+    (dualizingComplexComp ℓ F.d).inv
+  simp only [Functor.comp_map] at n
+  simp only [reassoc_of% n]
 
 end Correspondence.FixedLocus
 
@@ -117,11 +116,10 @@ lemma lowerStarDualizingComplexTrace_eq (a : Xc ⟶ Yb) [IsProper a.left] :
         lowerShriekDualizingComplexTrace ℓ a := by
   rw [lowerStarDualizingComplexTrace, lowerShriekDualizingComplexTrace]
 
-set_option maxHeartbeats 2000000 in
--- the direct images of bounded constructible complexes are unfolded in the defeq checks
 /-- The exchange of the support isomorphisms along a map of squares, in terms of the
-exceptional adjoints of the support isomorphisms (blueprint `lem-trf-trace-map-exchange`, (2),
-proof): the two maps `Rb_! Rg_* Rιc_* ω ⟶ RΔb_* ω` agree. -/
+exceptional adjoints of the support isomorphisms (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, (2), proof): the two maps
+`Rb_! Rg_* Rιc_* ω ⟶ RΔb_* ω` agree. -/
 theorem lowerStar_square_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : ιb ≫ b = db ≫ Δb)
     (wgb : g ≫ b = c ≫ q) (wq : Δc ≫ q = f ≫ Δb) (wh : ιc ≫ g = h ≫ ιb)
     (whd : dc ≫ f = h ≫ db) :
@@ -157,7 +155,7 @@ theorem lowerStar_square_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : ιb 
     Functor.whiskerLeft_app, eqToIso.hom, eqToHom_app, lowerStarComp_hom_app_eq,
     lowerStarComp_inv_app_eq, lowerStarDualizingComplexTrace_eq, Functor.map_comp,
     Category.assoc]
-  rw [Functor.map_hom_app_comp_map_inv_app_assoc (boundedConstructibleLowerStar ℓ q)
+  simp only [Functor.map_hom_app_comp_map_inv_app_assoc (boundedConstructibleLowerStar ℓ q)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ Δc),
     Functor.map_hom_app_comp_map_inv_app_assoc (boundedConstructibleLowerStar ℓ Δb)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f),
@@ -167,13 +165,13 @@ theorem lowerStar_square_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : ιb 
     lowerShriekIsoLowerStar_hom_app_comp_eqToHom_assoc ℓ wq, Iso.hom_inv_id_app_assoc,
     ← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ Δb).hom.naturality
       (lowerShriekDualizingComplexTrace ℓ f)]
-  rw [Iso.hom_app_comp_map₃_comp_inv_app_assoc
+  simp only [Iso.hom_app_comp_map₃_comp_inv_app_assoc
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ q),
     Functor.map_hom_app_comp_map_map_comp_map_inv_app_assoc (boundedConstructibleLowerShriek ℓ b)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ ιb),
     ← Functor.map_comp_assoc (boundedConstructibleLowerShriek ℓ b)
-      ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (ιc ≫ g)).hom.app _),
-    lowerShriekIsoLowerStar_hom_app_comp_eqToHom ℓ wh, Functor.map_comp_assoc,
+      ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (ιc ≫ g)).hom.app _)]
+  simp only [lowerShriekIsoLowerStar_hom_app_comp_eqToHom ℓ wh, Functor.map_comp_assoc,
     Functor.map_hom_app_comp_map_inv_app_assoc (boundedConstructibleLowerShriek ℓ b)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (h ≫ ιb)),
     NatTrans.app_comp_map_map_assoc (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c q).hom,
@@ -182,7 +180,6 @@ theorem lowerStar_square_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : ιb 
     Functor.map_app_comp_map_map_assoc (boundedConstructibleLowerShriek ℓ b)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv,
     lowerShriekSquareIso_trace_exchange_assoc ℓ wc wb wgb wq wh whd]
-  simp only [Functor.map_comp, Category.assoc]
 
 end Exchange
 
@@ -192,9 +189,8 @@ variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteTy
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
   (Fc : c.FixedLocus) (Fb : P.pushforward.FixedLocus)
 
-set_option maxHeartbeats 2000000 in
--- the direct images of bounded constructible complexes are unfolded in the defeq checks
-/-- **Exchange of the support isomorphisms** (blueprint `lem-trf-trace-map-exchange`, (2)):
+/-- **Exchange of the support isomorphisms** (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, (2)):
 `Rb^!(RΔ_{Y*} τ_f) ∘ E ∘ Rg_* ζ_c = ζ_b ∘ Ri_{b*} τ_h`, read through `g ∘ i_c = i_b ∘ h`. -/
 theorem lowerStar_map_supportIso_comp_exchange :
     (boundedConstructibleLowerStar ℓ P.g).map Fc.supportIso.hom ≫
@@ -235,11 +231,10 @@ theorem lowerStar_map_supportIso_comp_exchange :
       eqToHom (by rw [P.diag_comp_prodMap]) ≫
       (boundedConstructibleLowerStarComp ℓ P.f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
       (boundedConstructibleLowerStar ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ P.f))
-  rw [Category.id_comp] at hm
-  rw [lowerStarUpperShriekExchange, ← hm]
-  rw [Equiv.symm_apply_apply]
+  simp only [Category.id_comp] at hm
+  simp only [lowerStarUpperShriekExchange, ← hm, Equiv.symm_apply_apply]
   simp only [Adjunction.homEquiv_naturality_left_symm]
-  rw [Fc.homEquiv_symm_supportIso_hom, Fb.homEquiv_symm_supportIso_hom,
+  simp only [Fc.homEquiv_symm_supportIso_hom, Fb.homEquiv_symm_supportIso_hom,
     CategoryTheory.Functor.map_id, Category.id_comp]
   have key := lowerStar_square_trace_exchange ℓ Fc.ι_support Fb.ι_support P.g_comp_support
     P.diag_comp_prodMap (P.fixMap_ι Fc Fb).symm whd

@@ -545,9 +545,9 @@ end Reduction
 
 /-- **Smooth base change for `Rf^!` along any morphism, given the compatibility of the reduction
 modulo `ℓ` with compact-support base change** (SGA 4, Exposé XVIII, Théorème 3.2.5 and
-Théorème 2.9 (Var 4); blueprint `sk-prop-sp-purity-bc`): for a cartesian square
-`g' ≫ f = f' ≫ g` of separated `k`-schemes of finite type with `f` smooth of relative dimension
-`d` and `g` arbitrary, the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` with
+Théorème 2.9 (Var 4); blueprint `proposition-compatibility-purity-base-change`): for a cartesian
+square `g' ≫ f = f' ≫ g` of separated `k`-schemes of finite type with `f` smooth of relative
+dimension `d` and `g` arbitrary, the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` with
 `ℚ̄_ℓ`-coefficients is an isomorphism for every `L`, provided that, for every finite subextension
 `E ⊆ ℚ̄_ℓ`, the reduction modulo `ℓ` admits comparisons with `Rf_!` and `Rf'_!` (with invertible
 transposes) compatible with compact-support base change
@@ -583,12 +583,12 @@ def EtaleReductionProperBaseChangeCompatible (E : Type) [Field E] [Algebra E (Pa
 
 /-- **Smooth base change for `Rf^!` along any morphism, given the compatibility of the canonical
 reduction comparison for proper morphisms with compact-support base change** (SGA 4, Exposé
-XVIII, Théorème 3.2.5; blueprint `sk-prop-sp-purity-bc`): let `g' ≫ f = f' ≫ g` be a cartesian
-square of separated `k`-schemes of finite type with `f` smooth of relative dimension `d` and `g`
-arbitrary, and write `f = j ≫ p` for the chosen compactification (`compactificationOverField`),
-with `j` an open immersion and `p` proper. If, for every finite subextension `E ⊆ ℚ̄_ℓ`, the
-canonical comparisons of the reduction modulo `ℓ` with `Rp_!` and with the lower shriek of the
-base change of `p` along `g` are compatible with compact-support base change
+XVIII, Théorème 3.2.5; blueprint `proposition-compatibility-purity-base-change`): let
+`g' ≫ f = f' ≫ g` be a cartesian square of separated `k`-schemes of finite type with `f` smooth of
+relative dimension `d` and `g` arbitrary, and write `f = j ≫ p` for the chosen compactification
+(`compactificationOverField`), with `j` an open immersion and `p` proper. If, for every finite
+subextension `E ⊆ ℚ̄_ℓ`, the canonical comparisons of the reduction modulo `ℓ` with `Rp_!` and with
+the lower shriek of the base change of `p` along `g` are compatible with compact-support base change
 (`EtaleReductionProperBaseChangeCompatible`), then the exceptional base change map
 `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` with `ℚ̄_ℓ`-coefficients is an isomorphism for every `L`.
 

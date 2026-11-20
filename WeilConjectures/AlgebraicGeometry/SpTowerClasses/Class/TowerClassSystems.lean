@@ -15,7 +15,7 @@ import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
 /-! # Systems for canonical tower classes
 
-Source: blueprint main-20261015, sec-smooth-purity,
+Source: blueprint main-20261015, chap-Smooth-purity,
 `sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-systems).
 -/
 

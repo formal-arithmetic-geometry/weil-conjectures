@@ -29,7 +29,10 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Tensoring with a restricted coefficient unit
 
-Source: Stacks Project, Modules on Sites, Tag 05V4, the balanced tensor identity.
+## References
+
+* Stacks Project, Modules on Sites, Tag 05V4, the balanced tensor identity
+* Stacks Project, Modules on Sites, Tag 05V4, the tensor cancellation identity
 -/
 
 @[expose] public noncomputable section
@@ -96,16 +99,7 @@ private def tensorRestriction (B : Type (u + 1)) [CommRing B]
         isoWhiskerRight (FiniteFieldTensor.pbcTensorIso Y b).symm (pbcRestrict b)
 
 /-- Balanced tensor associativity when the last coefficient module is a restricted unit.
-No flatness or condition on the complex is required.
-Source: Stacks Project, Modules on Sites, Tag 05V4, the tensor cancellation identity.
-(blueprint: lem-sf-residue-layer-tensor-comparison).
-Proof: tensoring a B-module with the restricted T-unit is extension from B to T,
-followed by restriction. The balanced maps send m tensor t to t tensor m and back.
-Use cancellation for the sheaf tensor to obtain this natural isomorphism. Compose
-ordinary scalar extensions using their adjunctions. The equality of the two maps
-from R to T identifies their composites. Apply the resulting natural isomorphism
-in every degree; its naturality makes the maps commute with the differential.
-Zero modules and zero coefficient rings obey the same unit and balancing formulas. -/
+No flatness or condition on the complex is required. -/
 theorem comparison (B : Type (u + 1)) [CommRing B]
     {A : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     (a : R ⟶ adicLisseConstantRing Y B)

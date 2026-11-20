@@ -44,9 +44,10 @@ import Mathlib.Algebra.Homology.SingleHomology
 /-!
 # Derived sections over a w-contractible affine pro-etale object
 
-Source: Weil conjectures blueprint, snapshot main-20261015,
-sec-proetale-coefficients/sk-cor-pe-wc-sections/det-pe-wc-sections-derived.md;
-Stacks Project, Tags 079P, 070K and 070Y (blueprint: det-pe-wc-sections-derived).
+## References
+
+* Stacks Project, Tags 079P, 070K and 070Y
+* Stacks Project, Modules on Sites
 -/
 
 @[expose] public section
@@ -60,8 +61,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Evaluation is the composite of the existing additive forgetful and presheaf
-evaluation functors. Source: the blueprint's sectionwise module category,
-Stacks Project, Modules on Sites (blueprint: det-pe-wc-sections-derived). -/
+evaluation functors. -/
 instance moduleEvaluation_additive (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{u}) (U : X.ProEt) :
     (SheafOfModules.evaluation.{max u v (t + 1)} R (op U)).Additive :=

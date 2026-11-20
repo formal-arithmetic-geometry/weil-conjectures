@@ -28,7 +28,8 @@ this gives:
   (`AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_torsionQuotient`);
 * `𝒯` vanishes at the generic point, so `rk (ℱ / 𝒯) = rk ℱ`.
 
-(blueprint: `lem-sc-riemann-roch`, `sk-thm-picard-rr`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`,
+`theorem-riemann-roch-coherent-serre-duality`)
 -/
 
 @[expose] public section
@@ -192,7 +193,7 @@ include k in
 one over a field, `ℱ / ℱ_tors` is finite locally free, with constant rank the generic rank of
 `ℱ`, since the torsion vanishes at the generic point.
 
-(blueprint: `lem-sc-riemann-roch`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 theorem isFiniteLocallyFreeOfRank_torsionQuotient (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] :

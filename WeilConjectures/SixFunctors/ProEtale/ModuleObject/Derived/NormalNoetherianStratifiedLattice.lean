@@ -10,11 +10,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Topologi
 
 /-! # Integral lattices on finite strata of normal Noetherian schemes.
 
-Source: blueprint `sk-lem-stratified-lattice`, extended as directed by
+Source: blueprint `lemma-lattices-after-finite-stratification`, extended as directed by
 Wei Yang, Zulip #1412, answer 17 (2026-11-01), for clause (4) of
-`thm-lisse-qlbar-representations`. This keeps the original finite-type theorem
+`proposition-lattices-representations-normal-scheme`. This keeps the original finite-type theorem
 and supplies the normal-Noetherian instance required by its dense-open argument.
-(blueprint: sk-lem-stratified-lattice).
+(blueprint: lemma-lattices-after-finite-stratification).
 -/
 
 @[expose] public noncomputable section
@@ -29,7 +29,7 @@ lisse integral lattice on each stratum of a finite locally closed stratification
 There is no base field, characteristic restriction, separatedness assumption,
 connectedness assumption, or assumption that `l` is invertible on the scheme.
 
-Source: blueprint `sk-lem-stratified-lattice`, sheaf of lattices and trace proof;
+Source: blueprint `lemma-lattices-after-finite-stratification`, sheaf of lattices and trace proof;
 Wei Yang #1412, answer 17, normal-Noetherian extension; Stacks 07RY and 07RZ.
 
 Proof. The scheme has Noetherian underlying space and is qcqs. Split into the
@@ -48,7 +48,7 @@ with the spectral norm and its valuation subring. No cover degree is inverted.
 Normality is retained here for the expert-requested specialization, although
 the construction itself only needs a Noetherian underlying space. Empty schemes,
 zero rank, varying ranks, and residue characteristic `l` are included.
-(blueprint: sk-lem-stratified-lattice).
+(blueprint: lemma-lattices-after-finite-stratification).
 -/
 theorem exists_stratified_lisse_integral_lattice_of_normal
     (l : ℕ) [Fact l.Prime] (E : Type) [Field E]

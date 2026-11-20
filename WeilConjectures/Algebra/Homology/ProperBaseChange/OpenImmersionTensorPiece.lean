@@ -68,7 +68,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 Source: Weil conjectures blueprint, proper base change, lemma 1269;
 Stacks Project, Tags 03DI, 03DJ, 03EL, 06YQ and 07A4
-(blueprint: lemma-weil-pbc-projection-formula-open-piece).
+(blueprint: lemma-internal-adjunction-two-exchange-formulas).
 -/
 
 -- After pruning, this module only keeps private declarations.
