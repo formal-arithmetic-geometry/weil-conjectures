@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Affine.Space.AffineSpaceTopTrace
 public import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceCompactComparisonRestriction
+public import WeilConjectures.CategoryTheory.Adjunction.FullyFaithfulCounitLocal
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.RelativeMap
 public import WeilConjectures.SixFunctors.Etale.Derived.PointUnit
@@ -67,17 +68,6 @@ private lemma isIso_counit_app_of_iso_left (adj : L ⊣ R) (adj' : L' ⊣ R') (�
   have : IsIso (φ.hom.app _ ≫ adj'.counit.app K) := h ▸ inferInstance
   exact IsIso.of_isIso_comp_left (φ.hom.app _) _
 
-/-- Being invertible for the counit of an adjunction at an object only depends on the object up
-to isomorphism. -/
-private lemma isIso_counit_app_of_iso (adj : L ⊣ R) {K K' : D} (e : K ≅ K')
-    [hK : IsIso (adj.counit.app K)] : IsIso (adj.counit.app K') := by
-  have h : L.map (R.map e.hom) ≫ adj.counit.app K' = adj.counit.app K ≫ e.hom :=
-    adj.counit.naturality e.hom
-  have : IsIso (L.map (R.map e.hom) ≫ adj.counit.app K') := by
-    rw [h]
-    infer_instance
-  exact IsIso.of_isIso_comp_left (L.map (R.map e.hom)) _
-
 end Adjunction
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
@@ -94,7 +84,8 @@ theorem isIso_rightDerivedUpperShriekAdjunction_counit_affineTraceProjection (S 
   have := isIso_counit_app_of_iso_left (affineTraceAdjunction Λ N hΛ t D S hS d)
     (rightDerivedUpperShriekAdjunction Λ (affineTraceProjection S d))
     (affineTraceUnboundedCompactComparison Λ S d) (ordinaryFiniteUnit Λ S) (hK := hiso)
-  exact isIso_counit_app_of_iso _ (unitIsoSingleFunctorConstantSheaf Λ S).symm (hK := this)
+  exact (rightDerivedUpperShriekAdjunction Λ _).isIso_counit_app_of_iso'
+    (X := ordinaryFiniteUnit Λ S) (unitIsoSingleFunctorConstantSheaf Λ S).symm
 
 /-- The counit `Ra_! Ra^! Λ ⟶ Λ` of `Ra_! ⊣ Ra^!` for affine space `a : 𝔸ⁿ_S ⟶ S` over a
 Noetherian base is an isomorphism. -/
