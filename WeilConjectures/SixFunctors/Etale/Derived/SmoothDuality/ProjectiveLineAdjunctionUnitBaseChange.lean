@@ -14,16 +14,20 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Projective
 For `q : ℙ¹_S ⟶ S` the projective-line adjunction `Rq_! ⊣ Lq^*(1)[2]`
 (`AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`) has the trace counit
 `AlgebraicGeometry.Etale.projectiveLineCounit`, which commutes with every base change
-`g : S' ⟶ S` (`AlgebraicGeometry.Etale.projectiveLineCounit_baseChange`). The unit is determined by
-the counit through the triangle identities, so it commutes with base change as well
-(`CategoryTheory.Adjunction.unit_comp_of_counit_comp`): with `g' : ℙ¹_{S'} ⟶ ℙ¹_S` the base
-change of `g`, the pullback `Lg'^* η_M` of the unit at `M`, followed by the identification
+`g : S' ⟶ S` (`AlgebraicGeometry.Etale.projectiveLineCounit_baseChange`). Its unit commutes with
+base change as well: with `g' : ℙ¹_{S'} ⟶ ℙ¹_S` the base change of `g`, the pullback
+`Lg'^* η_M` of the unit at `M`, followed by the identification
 `Lg'^*(Lq^*(-)(1)[2]) ≅ Lq'^* Lg^*(-)(1)[2]` and by `Ex_! : Lg^* Rq_! ⟶ Rq'_! Lg'^*`, is the unit
 at `Lg'^* M`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.projectiveLineAdjunction_unit_baseChange`
+
+## Implementation details
+
+The unit is determined by the counit through the triangle identities, so the statement follows
+from the base change of the counit by `CategoryTheory.Adjunction.unit_comp_of_counit_comp`.
 -/
 
 @[expose] public section

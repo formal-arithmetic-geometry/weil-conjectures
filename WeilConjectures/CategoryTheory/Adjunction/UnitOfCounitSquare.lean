@@ -16,13 +16,31 @@ counits are compatible with `α` and `β`,
 
 `α_{R K} ≫ L' β_K ≫ ε'_{B K} = B ε_K`,
 
-then so are the units: `A η_M ≫ β_{L M} ≫ R' α_M = η'_{A M}`. This is how a statement that the
-counit of an adjunction commutes with base change gives the same statement for its unit, the
-unit being determined by the counit through the triangle identities.
+then so are the units: `A η_M ≫ β_{L M} ≫ R' α_M = η'_{A M}`. As diagrams:
+```
+               α_{R K}                      L' β_K
+B (L (R K)) -------> L' (A (R K)) -----------> L' (R' (B K))
+      \                                             |
+       \ B ε_K                                      | ε'_{B K}
+        \------------------------------------------>v
+                                                   B K
+
+        A η_M                   β_{L M}                    R' α_M
+A M ----------> A (R (L M)) ------------> R' (B (L M)) ------------> R' (L' (A M))
+  \                                                                       ^
+   \------------------------------- η'_{A M} -----------------------------+
+```
+In applications the counit compatibility is the base change or coefficient change of a counit,
+and the theorem gives the same statement for the unit.
 
 ## Main statements
 
 - `CategoryTheory.Adjunction.unit_comp_of_counit_comp`
+
+## Implementation details
+
+The unit is determined by the counit through the triangle identities: both sides of the unit
+equation are sent to the same morphism by the hom-equivalence of `L' ⊣ R'`.
 -/
 
 @[expose] public section
