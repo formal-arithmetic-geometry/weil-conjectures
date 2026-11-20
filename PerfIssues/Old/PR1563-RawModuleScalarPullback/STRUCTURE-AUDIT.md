@@ -115,3 +115,18 @@ P2/P3, evidence level 1 localization and below level 2 causal exposure.
 Strongest supporting result: seven exact child timings and nested composition distribution.
 Strongest contrary result: no valid one-factor alignment; fresh SA child timings are cheap in a reduced replay context.
 Next falsifying experiment: build a typed whole-endpoint control preserving all seven dependent arguments, then compare its footprint.
+
+ROUND 3: DECLARATION UNFOLD FOOTPRINT
+-------------------------------------
+`Before.lean` and `After.lean` both check successfully with diagnostics enabled at threshold 1000. The table is for the final `rawModuleScalar_pullback_module_formula` declaration; the preceding generic helper has its own, unchanged diagnostics table. These are whole-source controls, not same-pair alignments of the seven arguments.
+
+| Kernel unfold | Original target | Fixed target |
+|---|---:|---:|
+| `Add.add` | 1,287,366 | 246,362 |
+| `Functor.obj` | 903,620 | 171,971 |
+| `DFunLike.coe` | 648,317 | 125,381 |
+| `NatTrans.app` | 187,453 | 35,826 |
+| `Quiver.Hom` | 62,291 | 16,912 |
+| `CategoryStruct.comp` | 41,180 | 9,320 |
+
+No listed unfold disappears completely; each shrinks by roughly 73-81%. The unchanged helper itself still has 539,046 `Add.add` and 373,070 `Functor.obj` unfolds in both runs, so it is separate from the target reduction. Whole-file CPU/wall/RSS are 116.90 s / 118.01 s / 8,070,628 KB original and 50.89 s / 51.78 s / 5,206,444 KB fixed. These totals include elaboration and the helper. The counters establish substantial target reduction but do not assign cost to a specific composition argument or prove field traversal. No fixed-trigger ablation is valid until a typed seven-argument bundle control exists.
