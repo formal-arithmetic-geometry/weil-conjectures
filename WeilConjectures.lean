@@ -15563,6 +15563,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.PrescribedMonoidal
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChange
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChangeComp
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMap
+public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMapTraceCounit
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Biproduct
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.BraidedTrace
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.FiniteBiproductUnit
@@ -21189,6 +21190,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStarClopen
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStarShift
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTraceCounitTensorRight
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
