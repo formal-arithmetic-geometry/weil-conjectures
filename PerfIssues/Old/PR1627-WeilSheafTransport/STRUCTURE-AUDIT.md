@@ -114,3 +114,18 @@ P3, with U/P2 at the inner trigger; evidence level 2 for repeated exposure and l
 Strongest supporting result: two independent generated fields reproduce the same hot dependent-domain shape.
 Strongest contrary result: no one-factor alignment or restoration.
 Next falsifying experiment: print and align the first inner pullback-functor major premise while preserving each generated law telescope.
+
+ROUND 3: GENERATED-FIELD UNFOLD FOOTPRINT
+-----------------------------------------
+`Before.lean` and `After.lean` both check successfully with diagnostics enabled at threshold 1000. The large original table belongs to the concrete `powFunctor` generated-law construction; the fixed source uses the generic helper and has no corresponding generated-law kernel table above threshold. Earlier shared declarations have small, matching tables.
+
+| Kernel unfold | Original generated construction | Fixed source corresponding table |
+|---|---:|---:|
+| `Eq.ndrec` | 1,939,320 | none above threshold |
+| `Quiver.Hom` | 1,296,654 | none above threshold |
+| `Iso.inv` | 660,944 | none above threshold |
+| `WalkingPair.casesOn` | 653,682 | none above threshold |
+| `WidePullbackShape.Hom.casesOn` | 646,440 | none above threshold |
+| `Functor.obj` | 52,802 | none above threshold |
+
+The fixed source removes this generated check rather than aligning its exact dependent `id` domain, so disappearance of the table is a source-control result, not a same-site causal attribution. Whole-file CPU/wall/RSS are 109.66 s / 111.20 s / 8,207,808 KB original and 9.64 s / 10.02 s / 2,249,228 KB fixed. The reduction shape is dominated by equality transport and quiver/limit data; it does not establish that both generated fields traverse the same structure. Classification remains P3 for measured repeated sites, U for the inner trigger, below Level 3 amplification.
