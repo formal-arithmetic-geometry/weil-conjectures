@@ -14,19 +14,27 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 For a finite coefficient ring `Λ` whose exponent is invertible on an algebraically closed field
 `k` and a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type, this file derives from
 the exchange isomorphisms `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` and `Rf^! 𝔻_Y ≅ 𝔻_X f^*` and from Verdier
-biduality on `Dctf` the exchange isomorphisms of the right column of blueprint
-`corollary-verdier-exchange-formulas`:
+biduality on `Dctf` the exchange isomorphisms
 
-- `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedUpperShriek`
-  (`corollary-verdier-exchange-formulas--4`): `𝔻_X Rf^! L ≅ f^* 𝔻_Y L` for `L ∈ Dctf(Y, Λ)`;
-- `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerStar`
-  (`corollary-verdier-exchange-formulas--2`): `𝔻_Y Rf_* K ≅ Rf_! 𝔻_X K` for `K ∈ Dctf(X, Λ)`;
-- `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerStar_of_isOpenImmersion`
-  (`corollary-verdier-exchange-formulas--6`): `𝔻_X Rj_* K ≅ j_! 𝔻_U K` for an open immersion `j`
-  and `K ∈ Dctf(U, Λ)`, `j_!` being extension by zero.
+- `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedUpperShriek`:
+  `𝔻_X Rf^! L ≅ f^* 𝔻_Y L` for `L ∈ Dctf(Y, Λ)`;
+- `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerStar`:
+  `𝔻_Y Rf_* K ≅ Rf_! 𝔻_X K` for `K ∈ Dctf(X, Λ)`;
+- `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerStar_of_isOpenImmersion`:
+  `𝔻_X Rj_* K ≅ j_! 𝔻_U K` for an open immersion `j` and `K ∈ Dctf(U, Λ)`, `j_!` being extension
+  by zero.
 
 As in `WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality`, the isomorphisms are stated
 as the existence of an isomorphism for each object.
+
+## Implementation details
+
+The first isomorphism is `Rf^! L ≅ 𝔻_X f^* 𝔻_Y L`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`)
+dualized on `X`, with biduality for `f^* 𝔻_Y L ∈ Dctf(X, Λ)`. The second is the exchange
+`𝔻_Y Rf_! ≅ Rf_* 𝔻_X` (`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerShriek`)
+at `𝔻_X K`, with biduality on `X` and on `Y`. The third is the second for `f = j`, with
+`Rj_! ≅ j_!` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoOfIsOpenImmersion`).
 -/
 
 @[expose] public section
@@ -48,11 +56,8 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
 
-/-- Blueprint `corollary-verdier-exchange-formulas--4`: the dual of the exceptional inverse
-image. For a morphism `f : X ⟶ Y` over `k` of separated `k`-schemes of finite type and
-`L ∈ Dctf(Y, Λ)`, `𝔻_X (Rf^! L) ≅ Lf^* (𝔻_Y L)`. It is `Rf^! L ≅ 𝔻_X f^* 𝔻_Y L`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`)
-dualized on `X`, with biduality for `f^* 𝔻_Y L ∈ Dctf(X, Λ)`. -/
+/-- The dual of the exceptional inverse image. For a morphism `f : X ⟶ Y` over `k` of separated
+`k`-schemes of finite type and `L ∈ Dctf(Y, Λ)`, `𝔻_X (Rf^! L) ≅ Lf^* (𝔻_Y L)`. -/
 theorem nonempty_iso_verdierDual_rightDerivedUpperShriek {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [IsSeparated aX] [HasCompactification aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -68,11 +73,8 @@ theorem nonempty_iso_verdierDual_rightDerivedUpperShriek {X Y : Scheme.{u}}
     (constructibleFiniteTor_leftDerivedUpperStar _ f (constructibleFiniteTor_verdierDual Λ aY hL))
   exact ⟨(verdierDual Λ aX).mapIso e.op.symm ≪≫ b.symm⟩
 
-/-- Blueprint `corollary-verdier-exchange-formulas--2`: the dual of the ordinary direct image.
-For a morphism `f : X ⟶ Y` over `k` of separated `k`-schemes of finite type and
-`K ∈ Dctf(X, Λ)`, `𝔻_Y (Rf_* K) ≅ Rf_! (𝔻_X K)`. It is the exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X`
-(`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerShriek`) at `𝔻_X K`, with
-biduality on `X` and on `Y`. -/
+/-- The dual of the ordinary direct image. For a morphism `f : X ⟶ Y` over `k` of separated
+`k`-schemes of finite type and `K ∈ Dctf(X, Λ)`, `𝔻_Y (Rf_* K) ≅ Rf_! (𝔻_X K)`. -/
 theorem nonempty_iso_verdierDual_rightDerivedLowerStar {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [IsSeparated aX] [HasCompactification aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -98,11 +100,9 @@ theorem nonempty_iso_verdierDual_rightDerivedLowerStar {X Y : Scheme.{u}}
   let i := e ≪≫ (R((f)_*[ModuleCat.{u + 1} Λ])).mapIso bX.symm
   exact ⟨(verdierDual Λ aY).mapIso i.op ≪≫ bY.symm⟩
 
-/-- Blueprint `corollary-verdier-exchange-formulas--6`: the dual of the direct image along an
-open immersion. For an open immersion `j : U ⟶ X` of separated `k`-schemes of finite type and
-`K ∈ Dctf(U, Λ)`, `𝔻_X (Rj_* K) ≅ j_! (𝔻_U K)`, where `j_!` is extension by zero. It is
-`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerStar` for `f = j`, with
-`Rj_! ≅ j_!` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoOfIsOpenImmersion`). -/
+/-- The dual of the direct image along an open immersion. For an open immersion `j : U ⟶ X` of
+separated `k`-schemes of finite type and `K ∈ Dctf(U, Λ)`, `𝔻_X (Rj_* K) ≅ j_! (𝔻_U K)`, where
+`j_!` is extension by zero. -/
 theorem nonempty_iso_verdierDual_rightDerivedLowerStar_of_isOpenImmersion {U X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
     [HasCompactification aX] (j : U ⟶ X) [IsOpenImmersion j] [HasCompactification j]

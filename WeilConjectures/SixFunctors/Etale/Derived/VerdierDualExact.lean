@@ -17,12 +17,13 @@ contravariant functor: it commutes with the shifts and carries distinguished tri
 `D(X_ét)ᵒᵖ` to distinguished triangles
 (`AlgebraicGeometry.Etale.exists_commShift_isTriangulated_verdierDual`).
 Its restriction to the triangulated subcategory `Dctf(X, Λ)`, when it preserves it, is then exact
-too (blueprint `theorem-verdier-biduality--5`), and so is the anti-equivalence
-`AlgebraicGeometry.Etale.verdierDualEquivalence`.
+too, and so is the anti-equivalence `AlgebraicGeometry.Etale.verdierDualEquivalence`.
 
-The exactness of `RHom(-, W)` is the triangulated internal-Hom comparison of
-`lem-coef-etale-hom-thick-locus` (`AlgebraicGeometry.Etale.etaleHomComparison_thickLocus`) for the
-identity scalar extension, which is an exact equivalence.
+## Implementation details
+
+The exactness of `RHom(-, W)` is the triangulated internal-Hom comparison
+`AlgebraicGeometry.Etale.etaleHomComparison_thickLocus` for the identity scalar extension, which
+is an exact equivalence.
 -/
 
 @[expose] public section
@@ -82,10 +83,10 @@ theorem exists_commShift_isTriangulated_verdierDual :
     ∃ _ : (verdierDual Λ a).CommShift ℤ, (verdierDual Λ a).IsTriangulated :=
   exists_commShift_isTriangulated_derivedHom_flip_obj Λ X (dualizingComplex Λ a)
 
-/-- Blueprint `theorem-verdier-biduality--5`: **exactness of Verdier duality on `Dctf`**. If the
-Verdier dual `𝔻_X` preserves `Dctf(X, Λ)`, its restriction
-`𝔻_X : Dctf(X, Λ)ᵒᵖ ⥤ Dctf(X, Λ)` (`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.verdierDual`)
-is an exact contravariant functor: it commutes with the shifts and is triangulated. -/
+/-- **Exactness of Verdier duality on `Dctf`**. If the Verdier dual `𝔻_X` preserves
+`Dctf(X, Λ)`, its restriction `𝔻_X : Dctf(X, Λ)ᵒᵖ ⥤ Dctf(X, Λ)`
+(`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.verdierDual`) is an exact contravariant
+functor: it commutes with the shifts and is triangulated. -/
 theorem DerivedCategoryFiniteTor.exists_commShift_isTriangulated_verdierDual
     (h : ∀ ⦃K⦄, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
       DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
@@ -103,9 +104,9 @@ theorem DerivedCategoryFiniteTor.exists_commShift_isTriangulated_verdierDual
     inferInstance
   exact ⟨ObjectProperty.commShiftLift _ _ _, ObjectProperty.isTriangulated_lift _ _ _⟩
 
-/-- Blueprint `theorem-verdier-biduality--5`: **exactness of Verdier duality on `Dctf`**. For `X`
-separated of finite type over an algebraically closed field `k` and a finite `Λ` whose exponent is
-invertible on `k`, the anti-equivalence `𝔻_X : Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)`
+/-- **Exactness of Verdier duality on `Dctf`**. For `X` separated of finite type over an
+algebraically closed field `k` and a finite `Λ` whose exponent is invertible on `k`, the
+anti-equivalence `𝔻_X : Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)`
 (`AlgebraicGeometry.Etale.verdierDualEquivalence`) is exact: its functor commutes with the shifts
 and is triangulated. -/
 theorem exists_commShift_isTriangulated_verdierDualEquivalence_functor {k : Type u} [Field k]

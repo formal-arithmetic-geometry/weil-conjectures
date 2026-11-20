@@ -31,10 +31,8 @@ namespace FrobeniusModule.TraceCup
 variable {K : Type v} [Field K] {H : ℤ → FrobeniusModule.{max w v, v} K} {n : ℤ} {c : K}
   (T : TraceCup H n c)
 
-/-- Blueprint `corollary-cup-product-pairing--3` (linear algebra): if `2 ≠ 0` in `K` (for
-instance if `K` has characteristic zero) and `d` is odd, the trace–cup pairing
-`H^d × H^d ⟶ K`, `d + d = n`, is alternating: `⟨x, x⟩ = 0`. By graded commutativity
-(`FrobeniusModule.TraceCup.pairing_comm`), `⟨x, x⟩ = (-1)^{d·d} ⟨x, x⟩ = -⟨x, x⟩`. -/
+/-- If `2 ≠ 0` in `K` (for instance if `K` has characteristic zero) and `d` is odd, the
+trace–cup pairing `H^d × H^d ⟶ K`, `d + d = n`, is alternating: `⟨x, x⟩ = 0`. -/
 theorem isAlt_pairing [NeZero (2 : K)] {d : ℤ} (hd : Odd d) (h : d + d = n) :
     (T.pairing d d h).IsAlt := by
   intro x

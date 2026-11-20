@@ -33,11 +33,11 @@ variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   (d : ℕ) [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `theorem-trace-isomorphism-top-degree--9` (the trace isomorphism with coefficients
-`ℚ̄_ℓ`): for `X₀` smooth, proper and geometrically connected of pure dimension `d` over
-`k₀ = 𝔽_q`, there is an isomorphism `tr : H^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-d)`, that is an isomorphism
-`H^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ` on which the geometric Frobenius acts by `q^d`. The trace map
-itself is not available for Weil sheaves, hence the existential form
+/-- The trace isomorphism with coefficients `ℚ̄_ℓ`: for `X₀` smooth, proper and geometrically
+connected of pure dimension `d` over `k₀ = 𝔽_q`, there is an isomorphism
+`tr : H^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-d)`, that is an isomorphism `H^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ` on
+which the geometric Frobenius acts by `q^d`. The trace map itself is not available for Weil
+sheaves, hence the existential form
 (`AlgebraicGeometry.WeilSheaf.traceIsomorphism_adicConstant`). -/
 theorem exists_linearEquiv_cohomology_two_mul_adicConstant :
     ∃ tr : ((adicConstant k₀ l X).cohomology (2 * d)).carrier ≃ₗ[PadicAlgCl l] PadicAlgCl l,

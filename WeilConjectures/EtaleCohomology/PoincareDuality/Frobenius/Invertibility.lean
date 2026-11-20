@@ -13,13 +13,10 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Reciproc
 Over a coefficient field `Λ`, if the line-valued Poincaré pairing
 `H^i_c(X, K) × H^{2d-i}(X, K^∨) ⟶ Λ(-d) ≃ Λ` is perfect, the similitude
 `⟨F x, F y⟩ = q^d ⟨x, y⟩` with `q^d ≠ 0` forces `F` to be injective on `H^i_c(X, K)`, which is
-finite dimensional, hence `F` is invertible there. This is a clause of blueprint
-`theorem-poincare-duality-frobenius`.
+finite dimensional, hence `F` is invertible there.
 
 ## Main statements
 
-- `LinearMap.isUnit_of_similitude_of_isField`: the first member of a similitude pair for a
-  perfect pairing over a field is invertible.
 - `AlgebraicGeometry.Etale.TateOrientation.isUnit_frobeniusOperator_lowerShriek`: `F` is
   invertible on `H^i_c(X, K)`.
 -/
@@ -31,24 +28,6 @@ universe u
 open CategoryTheory Limits MonoidalCategory Opposite
 
 open scoped CategoryTheory.Functor
-
-namespace LinearMap
-
-variable {L V W : Type*} [CommRing L] [AddCommGroup V] [Module L V] [AddCommGroup W]
-  [Module L W] {p : V →ₗ[L] W →ₗ[L] L} [p.IsPerfPair] {F : Module.End L V}
-  {G : Module.End L W} {c : L}
-
-/-- Over a commutative ring `L` that is a field, the first member `F` of a similitude pair
-`p (F v) (G w) = c * p v w`, `c ≠ 0`, for a perfect pairing `p` is invertible: it is injective
-(`LinearMap.injective_of_similitude`) and `V` is finite dimensional, being reflexive. -/
-theorem isUnit_of_similitude_of_isField (hL : IsField L) (hc : c ≠ 0)
-    (hFG : ∀ v w, p (F v) (G w) = c * p v w) : IsUnit F := by
-  let := hL.toField
-  have := Module.IsReflexive.of_isPerfPair p
-  have hinj := injective_of_similitude hc hFG
-  exact (Module.End.isUnit_iff F).2 ⟨hinj, LinearMap.injective_iff_surjective.mp hinj⟩
-
-end LinearMap
 
 namespace AlgebraicGeometry
 
@@ -63,9 +42,8 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   [HasCompactification a] [QuasiCompact a] {d : ℕ} {g : X ⟶ X} {h : Y ⟶ Y}
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
-/-- Blueprint `theorem-poincare-duality-frobenius--5`: invertibility over a coefficient field.
-
-If `Λ` is a field, then with the hypotheses of
+/-- Invertibility of Frobenius over a coefficient field: if `Λ` is a field, then with the
+hypotheses of
 `AlgebraicGeometry.Etale.TateOrientation.conj_frobeniusOperator_eq_smul_inverse_dualMap`
 (a Weil complex `(K, φ)` with the contragredient structure `ψ` on `K^∨`, the Frobenius `τ`
 acting by `q^d` on the value line `Λ(-d)`, `q` invertible in `Λ`, and the line-valued pairing

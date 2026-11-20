@@ -17,8 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 Let `k` be an algebraically closed field, `a_X : X ⟶ Spec k` separated of finite type, and `Λ` a
 finite coefficient ring whose exponent is invertible on `k`. Global Verdier duality
 (`AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek`) identifies
-`RΓ_c(X, K)^∨` with `RΓ(X, 𝔻_X K)`. This file proves the companion isomorphism (10.6) of
-blueprint `theorem-global-verdier-duality`,
+`RΓ_c(X, K)^∨` with `RΓ(X, 𝔻_X K)`. This file proves the companion isomorphism
 
 `RΓ_c(X, 𝔻_X K) ≅ RHom_Λ(RΓ(X, K), Λ)`
 
@@ -52,13 +51,13 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [I
   [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
   [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]
 
-/-- Blueprint `theorem-global-verdier-duality--2`, in the point category: for `k`
+/-- Global Verdier duality with compact supports on the dual side, in the point category: for `k`
 algebraically closed, `a_X : X ⟶ Spec k` separated of finite type, `Λ` finite with exponent
 invertible on `k` and `K ∈ Dctf(X, Λ)`,
 
 `Ra_! 𝔻_X K ≅ (Ra_* K)^∨`
 
-in `D(Spec k_ét, Λ)`. Applying `RΓ(Spec k, -)` gives (10.6); see
+in `D(Spec k_ét, Λ)`. Applying `RΓ(Spec k, -)` gives `RΓ_c(X, 𝔻_X K) ≅ RHom_Λ(RΓ(X, K), Λ)`; see
 `AlgebraicGeometry.Etale.nonempty_iso_compactlySupportedGlobalSections_verdierDual`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_verdierDual
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -87,16 +86,11 @@ theorem nonempty_iso_rightDerivedLowerShriek_verdierDual
       (Spec (.of k))).app M) ≪≫
     (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) (Spec (.of k))).mapIso j.op⟩
 
-/-- Blueprint `theorem-global-verdier-duality--2`: Global Verdier duality (10.6).
+/-- Global Verdier duality with compact supports on the dual side: for `k` algebraically closed,
+`a_X : X ⟶ Spec k` separated of finite type, `Λ` finite with exponent invertible on `k` and
+`K ∈ Dctf(X, Λ)`, there is an isomorphism of `Λ`-module complexes
 
-For `k` algebraically closed, `a_X : X ⟶ Spec k` separated of finite type, `Λ` finite with
-exponent invertible on `k` and `K ∈ Dctf(X, Λ)`, there is an isomorphism of `Λ`-module complexes
-
-`RΓ_c(X, 𝔻_X K) ≅ RHom_Λ(RΓ(X, K), Λ)`.
-
-It is `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_verdierDual` read through the
-evaluation `RΓ(Spec k, -)`, which carries the coefficient dual of the point category to the dual
-over `Λ` and `RΓ(Spec k, Ra_* -)` to `RΓ(X, -)`. -/
+`RΓ_c(X, 𝔻_X K) ≅ RHom_Λ(RΓ(X, K), Λ)`. -/
 theorem nonempty_iso_compactlySupportedGlobalSections_verdierDual
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :

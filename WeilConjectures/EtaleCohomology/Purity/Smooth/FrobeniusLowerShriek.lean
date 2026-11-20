@@ -17,19 +17,18 @@ the base change comparison identifies
 
 `LΦ_Y^* Rf_! M ≅ Rf_! LΦ_X^* M`
 
-for the scheme Frobenii `Φ_X`, `Φ_Y`. This is the second isomorphism of (10.9) in blueprint
-`proposition-purity-trace-commute-frobenius`.
+for the scheme Frobenii `Φ_X`, `Φ_Y`.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.PurityFrobeniusDatum.schemeFrobeniusLowerShriekIso`: the isomorphism
   `LΦ_Y^* Rf_! M ≅ Rf_! LΦ_X^* M`.
 
-## Implementation notes
+## Implementation details
 
 The square formed by `f` with the scheme Frobenii commutes but is not Cartesian (for smooth `f`
 of positive relative dimension the relative Frobenius of `X` over `Y` is not an isomorphism),
-so the blueprint's base change comparison is read, as everywhere in the repository, through the
+so the base change comparison is read, as everywhere in the repository, through the
 Cartesian square formed by `f` with the geometric-Galois Frobenii `g_X`, `g_Y`
 (`AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap`) and the
 comparisons `κ : LΦ^* ≅ Lg^*` of the datum: the isomorphism is
@@ -59,16 +58,14 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k₀ : Type u} [Field k�
   [HasCompactification (Hom.geometricFiberMap f₀ hf₀)]
   [QuasiCompact (Hom.geometricFiberMap f₀ hf₀)]
 
-/-- Blueprint `proposition-purity-trace-commute-frobenius--3`: Frobenius pullback commutes
-with compactly supported direct image,
+/-- Frobenius pullback commutes with compactly supported direct image,
 
 `Fr_Y^* Rf_! M ≅ Rf_! Fr_X^* M`,
 
 for the scheme Frobenii `Fr_X = Φ_X`, `Fr_Y = Φ_Y` of a purity Frobenius datum and a finite
 coefficient ring `Λ`. It is the composite
 `LΦ_Y^* Rf_! M ≅ Lg_Y^* Rf_! M ≅ Rf_! Lg_X^* M ≅ Rf_! LΦ_X^* M` of the comparison `κ_Y`, the
-compact-support base change `Ex_!` of the Cartesian geometric-Galois square (an isomorphism by
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`) and the inverse of
+compact-support base change `Ex_!` of the Cartesian geometric-Galois square and the inverse of
 `κ_X`. -/
 noncomputable def schemeFrobeniusLowerShriekIso (M : DerivedCategoryModule Λ aX.geometricFiber) :
     (L((D.schemeFrobeniusY)^*[ModuleCat.{u + 1} Λ])).obj

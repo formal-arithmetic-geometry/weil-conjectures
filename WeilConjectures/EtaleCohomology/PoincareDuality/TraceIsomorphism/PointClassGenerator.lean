@@ -17,7 +17,9 @@ of pure relative dimension `d`. For a `k`-point `x` of `X`, the class
 `H^{2d}(X, Λ(d))` over `Λ = End(Λ_k)`: the map `Λ ⟶ H^{2d}(X, Λ(d))`, `λ ↦ λ · [x]`, is
 bijective (`AlgebraicGeometry.Etale.bijective_comp_pointClass`).
 
-The proof is that of the blueprint: for the normalized orientation the trace sends `[x]` to `1`
+## Implementation details
+
+For the normalized orientation the trace sends `[x]` to `1`
 (`AlgebraicGeometry.Etale.exists_tateOrientation_traceMap_pointClass`), so `λ ↦ λ · [x]` is a
 section of the trace, which is bijective
 (`AlgebraicGeometry.Etale.TateOrientation.bijective_traceMap`).
@@ -40,10 +42,9 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [I
   (a : X ⟶ Spec (.of k)) [IsProper a] [SmoothOfRelativeDimension d a] [GeometricallyConnected a]
   [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ]
 
-/-- Blueprint `lemma-class-of-point--2`: the class `[x ⊂ X]` of a `k`-point `x` generates
+/-- The class `[x ⊂ X]` of a `k`-point `x` generates
 `H^{2d}(X, Λ(d)) = H^{2d}_c(X, Λ(d))` over `Λ = End(Λ_k)`, in the strong sense that
-`End(Λ_k) ⟶ H^{2d}_c(X, Λ(d))`, `λ ↦ λ · [x]`, is bijective. For the normalized orientation the
-trace map sends `[x]` to `1`, so `λ ↦ λ · [x]` is a section of the trace, which is bijective. -/
+`End(Λ_k) ⟶ H^{2d}_c(X, Λ(d))`, `λ ↦ λ · [x]`, is bijective. -/
 theorem bijective_comp_pointClass [Module.Injective Λ Λ] (x : Spec (.of k) ⟶ X)
     [IsRegularImmersion d x] (hx : x ≫ a = 𝟙 _) :
     Function.Bijective (fun f : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ 𝟙_ _ ↦

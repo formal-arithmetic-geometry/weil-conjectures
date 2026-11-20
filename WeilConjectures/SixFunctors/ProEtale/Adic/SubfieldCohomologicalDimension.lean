@@ -28,9 +28,8 @@ qcqs scheme `S` commutes with filtered colimits
 
 - `AlgebraicGeometry.ProEtale.subsingleton_H_padicIntegersSheaf_of_two_mul_lt`: the vanishing of
   `Hᵠ(S_proét, 𝒪_E)` for `q > 2d`.
-- `AlgebraicGeometry.ProEtale.subsingleton_H_padicSubfieldSheaf_of_two_mul_lt`
-  (blueprint `theorem-trace-isomorphism-top-degree--6`): the vanishing of `Hᵠ(S_proét, E)` for
-  `q > 2d`.
+- `AlgebraicGeometry.ProEtale.subsingleton_H_padicSubfieldSheaf_of_two_mul_lt`: the vanishing of
+  `Hᵠ(S_proét, E)` for `q > 2d`.
 -/
 
 @[expose] public section
@@ -71,14 +70,11 @@ theorem subsingleton_H_padicIntegersSheaf_of_two_mul_lt (q : ℕ) (hq : 2 * d < 
     obtain ⟨m, hm⟩ := exists_nat_one_div_lt hε
     exact (Metric.mem_ball.1 (hx m)).trans (by simpa using hm)
 
-/-- Blueprint `theorem-trace-isomorphism-top-degree--6` (vanishing with coefficients in a finite
-extension `E` of `ℚ_ℓ`): for a scheme `S` of finite type and of dimension at most `d` over a
-separably closed field (for instance `X` smooth of pure dimension `d` over an algebraically
-closed `k`) and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the pro-étale cohomology
-`Hᵠ(S_proét, E_S)` of the abelian sheaf `E_S = C(-, E)` vanishes for `q > 2d`; there is no
-cohomology in negative degrees. As `E_S = 𝒪_{E,S}[1/ℓ]` is the filtered colimit of
-`𝒪_{E,S} --ℓ--> 𝒪_{E,S} --ℓ--> ⋯`, this follows from the case of `𝒪_E`
-(`AlgebraicGeometry.ProEtale.subsingleton_H_padicIntegersSheaf_of_two_mul_lt`). -/
+/-- Vanishing with coefficients in a finite extension `E` of `ℚ_ℓ`: for a scheme `S` of finite
+type and of dimension at most `d` over a separably closed field (for instance `X` smooth of pure
+dimension `d` over an algebraically closed `k`) and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
+pro-étale cohomology `Hᵠ(S_proét, E_S)` of the abelian sheaf `E_S = C(-, E)` vanishes for
+`q > 2d`; there is no cohomology in negative degrees. -/
 theorem subsingleton_H_padicSubfieldSheaf_of_two_mul_lt (q : ℕ) (hq : 2 * d < q) :
     letI := normedFieldOfAlgebra l E
     Subsingleton (Sheaf.H (continuousMapAbSheaf S E) q) := by

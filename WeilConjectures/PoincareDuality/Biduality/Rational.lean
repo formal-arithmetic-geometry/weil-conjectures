@@ -12,8 +12,8 @@ public import WeilConjectures.PoincareDuality.Biduality.Constructible
 
 Let `E ⊆ ℚ̄_ℓ` be a finite extension of `ℚ_ℓ` with ring of integers `𝒪_E`, `k` a field of
 characteristic `p ≠ ℓ` and `X` a separated `k`-scheme of finite type. This file defines the
-Verdier formalism at the rational stage `Λ = E`, and proves biduality there (blueprint
-`theorem-verdier-biduality--3`), from biduality for `𝒪_E`
+Verdier formalism at the rational stage `Λ = E`, and proves biduality there, from biduality for
+`𝒪_E`
 (`ProEtale.CondensedRing.PadicIntegersRingObj.isIso_verdierBiduality`) by integral models:
 the extension of scalars `T_X = E ⊗ᴸ_{𝒪_E} - : Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(X)⟦E⟧` is a localization,
 hence essentially surjective, it commutes with internal homs and with `Ra_X^!`, so it carries
@@ -115,12 +115,9 @@ theorem isIso_verdierBiduality_extendScalars_obj
   exact (isIso_map_toIhomIhom_iff (boundedConstructibleExtendScalars X.left ℓ E)
     (integersDualizingComplexIso ℓ E X).hom K₀).1 inferInstance
 
-/-- Blueprint `theorem-verdier-biduality--3`: **constructible Verdier biduality with coefficients
-a finite extension `E` of `ℚ_ℓ`**. For every bounded constructible `E`-complex `K` on `X`, with
-`ω_X = Ra_X^! E` and `𝔻_X = RHom(-, ω_X)`, the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an
-isomorphism. `K` has an integral model `K ≅ E ⊗ᴸ_{𝒪_E} K₀`
-(`ProEtale.exists_boundedConstructibleExtendScalars_obj_iso`), and `δ_{K₀}` is an isomorphism
-(`ProEtale.CondensedRing.PadicIntegersRingObj.isIso_verdierBiduality`). -/
+/-- **Constructible Verdier biduality with coefficients a finite extension `E` of `ℚ_ℓ`**. For
+every bounded constructible `E`-complex `K` on `X`, with `ω_X = Ra_X^! E` and
+`𝔻_X = RHom(-, ω_X)`, the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism. -/
 theorem isIso_verdierBiduality (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E.1⟧) :
     IsIso (verdierBiduality ℓ E K) := by
   have := noetherianSpace_left_of_over X

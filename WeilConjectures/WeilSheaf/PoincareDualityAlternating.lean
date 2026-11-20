@@ -35,13 +35,12 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
   [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `corollary-cup-product-pairing--3`: for `X` smooth, proper and geometrically
+/-- For `X` smooth, proper and geometrically
 connected of odd pure dimension `d` over `k₀ = 𝔽_q`, the cohomology
 `H^• = H^•(X ⊗ k̄, ℚ̄_ℓ)` carries a trace–cup structure whose trace `H^{2d} ⟶ ℚ̄_ℓ(-d)` is an
 isomorphism, whose pairings `Hⁱ × H^{2d-i} ⟶ ℚ̄_ℓ(-d)` are perfect, and whose middle pairing
 `⟨x, y⟩ = tr (x ⌣ y)` on `H^d` is alternating, `⟨x, x⟩ = 0`, as for a compact complex manifold
-of odd dimension. The coefficient field `ℚ̄_ℓ` has characteristic zero, so this follows from
-graded commutativity (`FrobeniusModule.TraceCup.isAlt_pairing`). -/
+of odd dimension. -/
 theorem exists_traceCup_isAlt_pairing_of_odd (hd : Odd d) :
     ∃ T : FrobeniusModule.TraceCup.{u + 1} (adicConstant k₀ l X).cohomology (2 * d)
         ((Nat.card k₀ : PadicAlgCl l) ^ d),

@@ -17,10 +17,8 @@ comparison (`CategoryTheory.MonoidalClosed.dualComparison`)
 `Rf_* RHom(M, ω_X) ⟶ RHom(Rf_* M, Rf_* ω_X) ⟶ RHom(Rf_* M, ω_Y)`, through the lax monoidal
 structure of `Rf_*` and the trace `Rf_* ω_X ≅ Rf_* Rf^! ω_Y ⟶ ω_Y`. It is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_dualComparison_rightDerivedLowerStar`), the inverse direction of
-the exchange `(10.3)` `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` (`Rf_! = Rf_*`), and it satisfies
-the compatibility with the double-dual morphisms of blueprint
-`lemma-internal-adjunction-two-exchange-formulas--4`
-(`AlgebraicGeometry.Etale.rightDerivedLowerStar_map_toIhomIhom_comp_dualComparison`).
+the exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` (`Rf_! = Rf_*`), and it is compatible with the double-dual
+morphisms (`AlgebraicGeometry.Etale.rightDerivedLowerStar_map_toIhomIhom_comp_dualComparison`).
 -/
 
 @[expose] public section
@@ -80,8 +78,7 @@ theorem isIso_dualComparison_rightDerivedLowerStar
       inferInstanceAs (IsIso (((rightDerivedLowerStarProjectionMap
         (ModuleCat.{u + 1} Λ) f).app M).app T))
 
-/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4`: for a proper `f : X ⟶ Y`, the
-composite of `Rf_* δ_K : Rf_* K ⟶ Rf_* 𝔻_X 𝔻_X K` and the exchange
+/-- For a proper `f : X ⟶ Y`, the composite of `Rf_* δ_K : Rf_* K ⟶ Rf_* 𝔻_X 𝔻_X K` and the exchange
 `c_{𝔻_X K} : Rf_* 𝔻_X (𝔻_X K) ≅ 𝔻_Y Rf_* (𝔻_X K)` equals the composite of
 `δ_{Rf_* K} : Rf_* K ⟶ 𝔻_Y 𝔻_Y Rf_* K` and `𝔻_Y` applied to the exchange
 `c_K : Rf_* 𝔻_X K ≅ 𝔻_Y Rf_* K`, that is, the square
@@ -101,7 +98,8 @@ Here `𝔻 = RHom(-, ω)` is written `(ihom -).obj ω`, `δ` is
 `𝔻_Y` on morphisms is `CategoryTheory.MonoidalClosed.pre`, and the exchange `c` is the canonical
 morphism `CategoryTheory.MonoidalClosed.dualComparison` of `Rf_*` and the trace, an isomorphism
 (`AlgebraicGeometry.Etale.isIso_dualComparison_rightDerivedLowerStar`). It goes in the direction
-`Rf_* 𝔻_X ⟶ 𝔻_Y Rf_*`, the inverse direction of the blueprint's `(10.3)` (with `Rf_! = Rf_*`). -/
+`Rf_* 𝔻_X ⟶ 𝔻_Y Rf_*`, the inverse direction of the exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` (with
+`Rf_! = Rf_*`). -/
 theorem rightDerivedLowerStar_map_toIhomIhom_comp_dualComparison
     (γ : (R(f)^![Λ]).obj (dualizingComplex Λ aY) ≅ dualizingComplex Λ aX)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
