@@ -100,9 +100,8 @@ noncomputable def diagUpperStarExternalProductIso
         eqToIso (by rw [diag, prod.lift_snd]) ≪≫
         (boundedConstructibleUpperStarId _ ℓ X).app N)
 
-/-- The *evaluation kernel* `e_K : K ⊠ D_X K ⟶ RΔ_* ω_X` (blueprint
-`definition-trace-morphism--1`, `theorem-proper-pushforward-lefschetz-verdier--1`): the
-`LΔ^* ⊣ RΔ_*` adjoint of the evaluation `LΔ^* (K ⊠ D_X K) ≅ K ⊗ D_X K ⟶ ω_X`. -/
+/-- The *evaluation kernel* `e_K : K ⊠ D_X K ⟶ RΔ_* ω_X`: the `LΔ^* ⊣ RΔ_*` adjoint of the
+evaluation `LΔ^* (K ⊠ D_X K) ≅ K ⊗ D_X K ⟶ ω_X`. -/
 noncomputable def evaluationKernel (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProduct ℓ K (verdierDual ℓ K) ⟶
       (boundedConstructibleLowerStar ℓ (diag X)).obj (dualizingComplex' ℓ X) :=
@@ -217,7 +216,7 @@ noncomputable def traceClassSource : Dᵇc(c.C.left)⟦Profinite.padicAlgClRingO
     ((boundedConstructibleUpperShriek ℓ c.c₁).obj K)
 
 /-- The *mate* `ũ : ℚ̄_ℓ,C ⟶ 𝓗_c(K)` of the coefficient map `u`, its transpose under the
-tensor–hom adjunction (blueprint `lemma-external-duality-trace-morphism--2`). -/
+tensor–hom adjunction. -/
 noncomputable def mate : 𝟙_ _ ⟶ c.traceClassSource :=
   curry' c.u
 
@@ -313,8 +312,8 @@ noncomputable def upperStarC₂Iso (K : Dᵇc(X.left)⟦Profinite.padicAlgClRing
 
 end FixedLocus
 
-/-- The *trace morphism from external duality* `𝔱 : 𝓗_c(K) ⟶ Rι_* ω_Fix(c)` (blueprint
-`definition-trace-morphism--1`, objectwise form):
+/-- The *trace morphism from external duality* `𝔱 : 𝓗_c(K) ⟶ Rι_* ω_Fix(c)`, in objectwise
+form:
 ```
 𝓗_c(K) ≅ Rc^! (K ⊠ D_X K) --Rc^! e_K--> Rc^! RΔ_* ω_X ≅ Rι_* Rd^! ω_X ≅ Rι_* ω_Fix(c).
 ```
@@ -327,12 +326,9 @@ noncomputable def traceMap (F : c.FixedLocus) :
     (F.upperShriekLowerStarIso.app (dualizingComplex' ℓ X)).hom ≫
     (boundedConstructibleLowerStar ℓ F.ι).map (dualizingComplexComp ℓ F.d).hom
 
-/-- The *trace class* `Tr_c(u) : ℚ̄_ℓ,Fix(c) ⟶ ω_Fix(c)` of an endocorrespondence (blueprint
-`definition-trace-class-local-terms--1`, `definition-trace-class-local-terms`): the `Lι^* ⊣ Rι_*`
-adjoint of the composite `ℚ̄_ℓ,C --ũ--> 𝓗_c(K) --𝔱--> Rι_* ω_Fix(c)` of the mate of `u` and the
-trace morphism `traceMap`, read through `ℚ̄_ℓ,Fix(c) ≅ Lι^* ℚ̄_ℓ,C`. It is defined for every
-correspondence, with no hypothesis beyond the finiteness conditions on the schemes (blueprint
-`definition-trace-class-local-terms--1`). -/
+/-- The *trace class* `Tr_c(u) : ℚ̄_ℓ,Fix(c) ⟶ ω_Fix(c)` of an endocorrespondence: the
+`Lι^* ⊣ Rι_*` adjoint of the composite `ℚ̄_ℓ,C --ũ--> 𝓗_c(K) --𝔱--> Rι_* ω_Fix(c)` of the mate
+of `u` and the trace morphism `traceMap`, read through `ℚ̄_ℓ,Fix(c) ≅ Lι^* ℚ̄_ℓ,C`. -/
 noncomputable def traceClass (F : c.FixedLocus) : BorelMooreSection ℓ F.F :=
   (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
     ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _).symm

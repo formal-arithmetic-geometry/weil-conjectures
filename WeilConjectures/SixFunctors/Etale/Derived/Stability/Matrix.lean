@@ -413,11 +413,10 @@ theorem constructibleFiniteTor_derivedHom_mapDerivedCategory {k : Type u} [Field
       (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
         (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
           (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)) := by
-  have : IsAlgClosed k := ‹IsAlgClosure (ZMod p) k›.isAlgClosed
+  have hEtale := Etale.constructibleFiniteTor_derivedHom Λ aX hK hM
   obtain ⟨e⟩ := nonempty_iso_mapDerivedCategory_derivedHom Λ (p := p) aX hK hM.1
   exact (constructibleFiniteTor _ X).prop_of_iso e
-    (constructibleFiniteTor_mapDerivedCategory Λ
-      (Etale.constructibleFiniteTor_derivedHom Λ aX hK hM))
+    (constructibleFiniteTor_mapDerivedCategory Λ hEtale)
 
 /-- The pro-étale internal Hom for a site-perfect
 first variable.
