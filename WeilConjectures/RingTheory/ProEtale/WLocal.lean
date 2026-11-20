@@ -151,3 +151,34 @@ local rings. -/
 class IsWStrictlyLocalRing (R : Type*) [CommRing R] : Prop extends IsWLocalRing R where
   isStrictlyHenselianLocalRing_localization (m : Ideal R) [m.IsMaximal] :
     IsStrictlyHenselianLocalRing (Localization.AtPrime m)
+
+/-- If `R` is w-local, the connected component of `Spec R` containing a closed point `m` is the
+image of `Spec R_m`. -/
+lemma IsWLocalRing.connectedComponent_eq_range_comap_localization [IsWLocalRing R]
+    (m : PrimeSpectrum R) [m.asIdeal.IsMaximal] :
+    connectedComponent m =
+      Set.range (PrimeSpectrum.comap (algebraMap R (Localization.AtPrime m.asIdeal))) := by
+  rw [WLocalSpace.connectedComponent_eq_setOf_specializes
+      ((PrimeSpectrum.isClosed_singleton_iff_isMaximal m).mpr ‹_›),
+    PrimeSpectrum.localization_comap_range _ m.asIdeal.primeCompl]
+  ext p
+  simp only [Set.mem_ofPred_eq, ← PrimeSpectrum.le_iff_specializes, Ideal.primeCompl,
+    Submonoid.coe_set_mk, Subsemigroup.coe_set_mk, Set.disjoint_compl_left_iff_subset,
+    SetLike.coe_subset_coe, PrimeSpectrum.asIdeal_le_asIdeal]
+
+/-- If `R` is w-strictly local, every connected component of `Spec R` is the spectrum of a strictly
+Henselian local ring: it is the image of the embedding `Spec R_m → Spec R` for a maximal ideal `m`
+of `R`, and `R_m` is strictly Henselian. -/
+lemma IsWStrictlyLocalRing.exists_connectedComponent_eq_range_comap_localization
+    [IsWStrictlyLocalRing R] (x : PrimeSpectrum R) :
+    ∃ m : PrimeSpectrum R, m.asIdeal.IsMaximal ∧
+      connectedComponent x =
+        Set.range (PrimeSpectrum.comap (algebraMap R (Localization.AtPrime m.asIdeal))) ∧
+      Topology.IsEmbedding (PrimeSpectrum.comap (algebraMap R (Localization.AtPrime m.asIdeal))) ∧
+      IsStrictlyHenselianLocalRing (Localization.AtPrime m.asIdeal) := by
+  obtain ⟨m, hm, hxm⟩ := exists_isClosed_specializes x
+  have : m.asIdeal.IsMaximal := (PrimeSpectrum.isClosed_singleton_iff_isMaximal m).mp hm
+  refine ⟨m, this, ?_, PrimeSpectrum.localization_comap_isEmbedding _ m.asIdeal.primeCompl,
+    IsWStrictlyLocalRing.isStrictlyHenselianLocalRing_localization _⟩
+  rw [← IsWLocalRing.connectedComponent_eq_range_comap_localization m,
+    ConnectedComponents.coe_eq_coe.mp hxm.connectedComponents_mk_eq]

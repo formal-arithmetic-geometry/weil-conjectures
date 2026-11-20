@@ -21,6 +21,8 @@ in w-local spaces.
   `closedPoints X → X → ConnectedComponents X` is a homeomorphism for w-local spaces.
 * `WLocalSpace.closedPointsHomeomorph`: The closed points of a w-local space are
   homeomorphic to the connected components.
+* `WLocalSpace.connectedComponent_eq_setOf_specializes`: The connected component of a closed
+  point consists of its generalizations.
 
 -/
 
@@ -93,3 +95,16 @@ lemma WLocalSpace.closedPoints_eq_of_mk_eq {X : Type*} [TopologicalSpace X] [WLo
   congrArg Subtype.val <|
     (WLocalSpace.isHomeomorph_connectedComponents_closedPoints X).bijective.1
       (a₁ := ⟨c₁, hc₁⟩) (a₂ := ⟨c₂, hc₂⟩) hmk
+
+/-- In a w-local space, the connected component of a closed point `c` consists exactly of the
+generalizations of `c`. -/
+lemma WLocalSpace.connectedComponent_eq_setOf_specializes {X : Type*} [TopologicalSpace X]
+    [WLocalSpace X] {c : X} (hc : IsClosed {c}) :
+    connectedComponent c = {x | x ⤳ c} := by
+  ext x
+  refine ⟨fun hx ↦ ?_, fun hx ↦ ConnectedComponents.coe_eq_coe'.mp hx.connectedComponents_mk_eq⟩
+  obtain ⟨d, hd, hxd⟩ := exists_isClosed_specializes x
+  obtain rfl : d = c := WLocalSpace.closedPoints_eq_of_mk_eq (mem_closedPoints_iff.mpr hd)
+    (mem_closedPoints_iff.mpr hc) (hxd.connectedComponents_mk_eq.symm.trans
+      (ConnectedComponents.coe_eq_coe'.mpr hx))
+  exact hxd
