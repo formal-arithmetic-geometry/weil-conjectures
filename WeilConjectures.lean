@@ -14042,7 +14042,6 @@ public import WeilConjectures.CategoryTheory.Abelian.AdicTowerStructure
 public import WeilConjectures.CategoryTheory.Abelian.AnnihilatorDevissage
 public import WeilConjectures.CategoryTheory.Abelian.CokernelNSMul
 public import WeilConjectures.CategoryTheory.Abelian.CokernelPowTower
-public import WeilConjectures.CategoryTheory.Abelian.CokernelToKernelShortExact
 public import WeilConjectures.CategoryTheory.Abelian.DerivedBottomComparison
 public import WeilConjectures.CategoryTheory.Abelian.DerivedBottomCycleTransport
 public import WeilConjectures.CategoryTheory.Abelian.DerivedBottomInclusion
