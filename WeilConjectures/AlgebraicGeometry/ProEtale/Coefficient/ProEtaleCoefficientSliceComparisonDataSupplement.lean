@@ -18,12 +18,21 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficientSliceComparis
 
 /-! # Closed slice comparison with transported pro-etale coefficients
 
-Comparison data and their defining section and representative equations
-(blueprint: def-zl-proetale-slice-comparison-data).
+Comparison data and their defining section and representative equations.
 
-Source: Hemo--Richarz--Scholbach, Lemma 4.5, and Stacks Project, Tags 03CE,
-03EL, 07A4, 08J7, 08J9, 08JB and 0FPT
-(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison).
+## References
+
+* Hemo--Richarz--Scholbach, Lemma 4.5, and Stacks Project, Tags 03CE, 03EL, 07A4, 08J7, 08J9, 08JB
+  and 0FPT
+* Stacks 03CZ, 03CY and 07A4
+* Stacks 06YN, 07A4
+* Stacks 03CE and 05RT
+* Hemo--Richarz--Scholbach Lemma 4.5
+
+## Implementation details
+
+The normalization equations `Normalized` are kept out of the data record `Data` so that Lean
+does not expand them in every generated projection and constructor.
 -/
 
 @[expose] public noncomputable section
@@ -37,13 +46,7 @@ open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Sectionwise restriction is additive and exact on the small pro-etale sites.
-Source: Stacks 03CE, 08JB
-(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison).
-Proof: the canonical equivalence ProEt.sliceEquiv identifies this functor with
-SheafOfModules.overFunctor. Addition and kernels are sectionwise; local lifts of
-sections for epimorphisms remain local lifts on the slice, whose covers are exactly
-covers of the underlying objects. Thus restriction preserves cokernels as well. -/
+/-- Sectionwise restriction is additive and exact on the small pro-etale sites. -/
 theorem proEtaleSliceModuleRestriction_exact {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     (proEtaleSliceModuleRestriction U O).Additive ∧
@@ -51,9 +54,7 @@ theorem proEtaleSliceModuleRestriction_exact {X : Scheme.{u}} (U : X.ProEt)
       PreservesFiniteColimits (proEtaleSliceModuleRestriction U O) := by
   exact proEtaleSliceModules_exact U O
 
-/-- Ordinary derived restriction; its construction is exact termwise localization.
-Source: Stacks 08JB
-(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- Ordinary derived restriction; its construction is exact termwise localization. -/
 def proEtaleSliceDerivedRestriction {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   haveI := (proEtaleSliceModuleRestriction_exact U O).1
@@ -61,9 +62,7 @@ def proEtaleSliceDerivedRestriction {X : Scheme.{u}} (U : X.ProEt)
   haveI := (proEtaleSliceModuleRestriction_exact U O).2.2
   (proEtaleSliceModuleRestriction U O).mapDerivedCategory
 
-/-- Scalar transport on ordinary unbounded derived categories, by exact termwise descent.
-Source: Stacks 03CZ, 03CY and 07A4
-(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- Scalar transport on ordinary unbounded derived categories, by exact termwise descent. -/
 def proEtaleSliceDerivedScalarTransport {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (B : Sheaf (ProEt.topology U.left) CommRingCat.{u + 1})
@@ -71,8 +70,7 @@ def proEtaleSliceDerivedScalarTransport {X : Scheme.{u}} (U : X.ProEt)
   (proEtaleSliceScalarTransport U O B b).mapDerivedCategory
 
 /-- The closed comparison is the transpose of transported evaluation, with the inverse
-of the specified tensor comparison. It therefore fixes its normalization uniquely.
-Source: Stacks 08J9 (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+of the specified tensor comparison. It therefore fixes its normalization uniquely. -/
 def coefficientClosedPullbackMap
     {D : Type u₁} [Category.{v₁} D] {E : Type u₂} [Category.{v₂} E]
     {H : Dᵒᵖ × D ⥤ D} {HB : Eᵒᵖ × E ⥤ E}
@@ -81,18 +79,14 @@ def coefficientClosedPullbackMap
     F.obj (H.obj (op L, M)) ⟶ HB.obj (op (F.obj L), F.obj M) :=
   SB.transpose _ _ _ ((rho.app (H.obj (op L, M), L)).inv ≫ F.map (S.evaluation L M))
 
-/-- Inclusion of the existing flat representatives into all K-flat representatives.
-Source: Stacks 06YN, 07A4
-(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- Inclusion of the existing flat representatives into all K-flat representatives. -/
 def proEtaleFlatToKFlat (X : Scheme.{u})
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   ObjectProperty.ιOfLE (P := proEtaleFlatRepresentatives X O)
     (P' := CochainComplex.IsKFlatIndependentCoefficients (J := ProEt.topology X) (R := O))
     (fun P hP ↦ (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).mpr hP.1)
 
-/-- Restrict the published tensor presentation to the published flat representatives.
-Source: Stacks 07A4
-(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- Restrict the tensor presentation to the flat representatives. -/
 def proEtaleClosedTensorModel (X : Scheme.{u})
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (S : CoefficientClosedStructure (proEtaleCoefficientHom X O))
@@ -102,29 +96,25 @@ def proEtaleClosedTensorModel (X : Scheme.{u})
   representative := Functor.isoWhiskerLeft
     ((proEtaleFlatToKFlat X O).prod (proEtaleFlatToKFlat X O)) T.comparison
 
-/-- Additivity of the sectionwise restriction used by this comparison.
-Source: Stacks 03CE (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- Additivity of the sectionwise restriction used by this comparison. -/
 instance proEtaleSliceRestriction_additive {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     (proEtaleSliceModuleRestriction U O).Additive :=
   (proEtaleSliceModuleRestriction_exact U O).1
 
-/-- Finite-limit preservation of sectionwise restriction.
-Source: Stacks 03CE (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- Finite-limit preservation of sectionwise restriction. -/
 instance proEtaleSliceRestriction_limits {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     PreservesFiniteLimits (proEtaleSliceModuleRestriction U O) :=
   (proEtaleSliceModuleRestriction_exact U O).2.1
 
-/-- Finite-colimit preservation of sectionwise restriction.
-Source: Stacks 03CE (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- Finite-colimit preservation of sectionwise restriction. -/
 instance proEtaleSliceRestriction_colimits {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     PreservesFiniteColimits (proEtaleSliceModuleRestriction U O) :=
   (proEtaleSliceModuleRestriction_exact U O).2.2
 /-- Exact localization of the normalized ordinary comparison, with its canonical
-composition comparison. Source: Stacks 03CE and 05RT
-(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+composition comparison. -/
 def proEtaleSliceDerivedComparison {X : Scheme.{u}} (U : X.ProEt)
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (B : Sheaf (ProEt.topology U.left) CommRingCat.{u + 1})
@@ -139,8 +129,7 @@ def proEtaleSliceDerivedComparison {X : Scheme.{u}} (U : X.ProEt)
   Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
 
 
-/-- The exact termwise functor used in the representative normalizations.
-Source: Stacks 07A4 (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- The exact termwise functor used in the representative normalizations. -/
 abbrev proEtaleComparisonComplex {X Y : Scheme.{u}}
     {O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     {B : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
@@ -150,8 +139,7 @@ abbrev proEtaleComparisonComplex {X Y : Scheme.{u}}
 attribute [local irreducible] CoefficientTensorModels.iso
 
 /-- The exact tensor localization square, kept separate to avoid expanding it in
-structure projections. Source: Stacks 07A4
-(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+structure projections. -/
 def ProEtaleSliceTensorModel {X Y : Scheme.{u}}
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (B : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -183,11 +171,8 @@ def ProEtaleSliceTensorModel {X Y : Scheme.{u}}
         DerivedCategory.Q.map (chain P Q).hom ≫
         (TB.iso (ProEt.topology Y) B SB _ _ (kflat P hP) (kflat Q hQ)).hom
 
-/-- A tensor comparison with its exact localization square retained. The following
-section formulas will specify `chain`, and hence `rho`, uniquely; these fields do
-not replace the ordinary tensor with a new bifunctor.
-Source: Stacks 07A4 and 0FPT
-(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- A tensor comparison together with the chain-level comparison `chain` and its exact
+localization square. -/
 structure ProEtaleSliceTensorDescent {X Y : Scheme.{u}}
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (B : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -214,17 +199,14 @@ structure ProEtaleSliceTensorDescent {X Y : Scheme.{u}}
   /-- Its value is the specified exact localization square. -/
   model : ProEtaleSliceTensorModel O B K S SB T TB chain kflat rho
 
-/-- The ordinary coefficient module; this abbreviates the published tensor unit.
-Source: Stacks 0FPT (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- The ordinary coefficient module; this abbreviates the tensor unit. -/
 abbrev proEtaleCoefficientUnit (X : Scheme.{u})
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   SheafOfModules.unit ((sheafCompose (ProEt.topology X)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O)
 
 /-- Degree-zero localization of the ordinary unit comparison. Conjugating with the
-published `RingedDerivedTensorCoherence.unitIso` gives the derived tensor-unit map.
-Source: Stacks 07A4 and 0FPT
-(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+`RingedDerivedTensorCoherence.unitIso` gives the derived tensor-unit map. -/
 def proEtaleDerivedCoefficientUnit {X Y : Scheme.{u}}
     {O : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     {B : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
@@ -242,20 +224,16 @@ variable {X : Scheme.{u}} (U : X.ProEt)
   (c : (proEtaleSheafInverseImage U.hom CommRingCat.{u + 1}).obj O ≅ B)
   (delta : ProEtaleObjectRestrictionComparison U CommRingCat.{u + 1})
 
-/-- Exact slice restriction on the canonically equivalent source site.
-Source: Stacks 08JB (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- Exact slice restriction on the canonically equivalent source site. -/
 abbrev r := proEtaleSliceModuleRestriction U O
 
-/-- Additivity of the exact slice restriction presentation.
-Source: Stacks 03CE (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- Additivity of the exact slice restriction presentation. -/
 instance r_additive : (r U O).Additive := proEtaleSliceRestriction_additive U O
 
-/-- Exactness on kernels of the slice restriction presentation.
-Source: Stacks 03CE (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- Exactness on kernels of the slice restriction presentation. -/
 instance r_limits : PreservesFiniteLimits (r U O) := proEtaleSliceRestriction_limits U O
 
-/-- Exactness on cokernels of the slice restriction presentation.
-Source: Stacks 03CE (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- Exactness on cokernels of the slice restriction presentation. -/
 instance r_colimits : PreservesFiniteColimits (r U O) := proEtaleSliceRestriction_colimits U O
 
 variable (S : CoefficientClosedStructure (proEtaleCoefficientHom X O))
@@ -266,16 +244,13 @@ variable (S : CoefficientClosedStructure (proEtaleCoefficientHom X O))
     (proEtaleSliceRing U O) SR)
   (TB : CoefficientTensorModels.{u + 1, u + 1, u} (ProEt.topology U.left) B SB)
 
-/-- The canonical pullback tensor comparison on the fixed closed tensor presentations.
-Source: Stacks 07A4 (blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- The canonical pullback tensor comparison on the fixed closed tensor presentations. -/
 abbrev rho := proEtaleCanonicalTensorComparison U.hom O B c
   (proEtaleClosedTensorModel X O S T) (proEtaleClosedTensorModel U.left B SB TB)
 
 /-- The normalized comparison assertions, including scalar transport, tensor, unit,
 internal Hom, evaluation, transpose and symmetry. All existential comparison data
-are pinned down by the displayed section or representative formulas.
-Source: Hemo--Richarz--Scholbach Lemma 4.5; Stacks 03CE, 07A4, 08J9, 08JB and 0FPT
-(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+are pinned down by the displayed section or representative formulas. -/
 structure Data where
   /-- Delta on module inverse image, with the scalar action transported by b. -/
   ordinary : f U O B c ≅ r U O ⋙ e U O B c delta
@@ -308,9 +283,7 @@ structure Data where
     ((f U O B c).mapDerivedCategory.op.prod (f U O B c).mapDerivedCategory) ⋙
       proEtaleCoefficientHom U.left B
 
-/-- The ordinary monoidal portion of the comparison, before internal Hom is considered.
-Source: Stacks 03CE, 07A4, 0FPT
-(blueprint: def-zl-proetale-slice-comparison-data). -/
+/-- The ordinary monoidal portion of the comparison, before internal Hom is considered. -/
 structure TensorData where
   /-- Delta on module inverse image, with the scalar action transported by b. -/
   ordinary : f U O B c ≅ r U O ⋙ e U O B c delta
@@ -330,8 +303,7 @@ structure TensorData where
   pullbackUnit : (f U O B c).obj (proEtaleCoefficientUnit X O) ≅
     proEtaleCoefficientUnit U.left B
 
-/-- Forget the internal-Hom fields while retaining all ordinary and tensor maps.
-Source: Stacks 07A4 (blueprint: def-zl-proetale-slice-comparison-data). -/
+/-- Forget the internal-Hom fields while retaining all ordinary and tensor maps. -/
 def Data.tensorData (d : Data U O B c delta S SR SB T TR TB) :
     TensorData U O B c delta S SR SB T TR TB where
   ordinary := d.ordinary
@@ -342,9 +314,7 @@ def Data.tensorData (d : Data U O B c delta S SR SB T TR TB) :
   pullbackUnit := d.pullbackUnit
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Section and representative equations for the monoidal portion alone.
-Source: Stacks 03CE, 07A4, 0FPT
-(blueprint: def-zl-proetale-slice-comparison-data). -/
+/-- Section and representative equations for the monoidal portion alone. -/
 def TensorNormalized (d : TensorData U O B c delta S SR SB T TR TB)
     (tail : Prop := True) : Prop :=
   -- ordinary_section
@@ -404,11 +374,7 @@ def TensorNormalized (d : TensorData U O B c delta S SR SB T TR TB)
       (proEtaleDerivedCoefficientUnit (e U O B c delta) d.scalarUnit).hom =
     (proEtaleDerivedCoefficientUnit (f U O B c) d.pullbackUnit).hom) ∧ tail
 
-/-- The section, tensor, unit and closed normalizations of the comparison data.
-These are the equations in the node, factored out of the data record so Lean does
-not expand them in every generated projection and constructor.
-Source: Hemo--Richarz--Scholbach Lemma 4.5; Stacks 03CE, 07A4, 08J9 and 08JB
-(blueprint: lem-zl-proetale-coefficient-slice-closed-comparison). -/
+/-- The section, tensor, unit and closed normalizations of the comparison data. -/
 def Normalized (d : Data U O B c delta S SR SB T TR TB) : Prop :=
   -- scalar_equivalence
   ((e U O B c delta).IsEquivalence) ∧

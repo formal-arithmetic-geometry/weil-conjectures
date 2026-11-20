@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.TrivSqZeroExt.Basic
 public import Mathlib.RingTheory.DedekindDomain.Different
+public import Mathlib.RingTheory.Finiteness.Quotient
 public import Mathlib.RingTheory.Localization.NormTrace
 public import WeilConjectures.RingTheory.Kaehler.Trace
 

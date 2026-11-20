@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 /-!
 # Cartesian squares with a chosen pullback identification
 
-Source: blueprint, sec-curve-estimates, sk-prop-cd.
+Source: blueprint, chap-Cohomology-of-torsion-sheaves-on-curves, sk-prop-cd.
 
 The inverse-image comparison is the existing `Etale.squareUpperStarIso` applied to
 `ChosenCartesianSquare.toCommSq`. Its identity and pasting coherence are supplied by
@@ -31,8 +31,8 @@ namespace AlgebraicGeometry
 The two projection equations say that the identification is one of squares, not merely
 of schemes. The inherited commutativity gives the canonical inverse-image comparison
 `Etale.squareUpperStarIso A sq.toCommSq`, with the identity and pasting compatibility of
-that construction. Source: blueprint, sec-curve-estimates, sk-prop-cd,
-node def-weil-pbc-cartesian-square . -/
+that construction. Source: blueprint, chap-Cohomology-of-torsion-sheaves-on-curves, sk-prop-cd,
+node definition-underived-base-change-map . -/
 structure ChosenCartesianSquare {X' X Y' Y : Scheme.{u}}
     (g' : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y)
     extends CommSq g' f' f g where

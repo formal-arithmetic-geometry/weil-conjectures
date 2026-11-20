@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.RingComplexSemilinearExtension
+public import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatSheafKFlat

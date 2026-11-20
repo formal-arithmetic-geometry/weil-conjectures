@@ -78,7 +78,7 @@ theorem strictLocalDerivedExchange_globalSections {X S : Scheme.{v}} (f : X ⟶ 
             (pullback.snd f (Scheme.strictLocalizationToBase s))).derivedPlus
           (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
             (IsPullback.of_hasPullback f
-              (Scheme.strictLocalizationToBase s)).toCommSq).hom)).natTrans.app K)) ≫
+              (Scheme.strictLocalizationToBase s)).toCommSq).hom)).app K)) ≫
       (strictLocalBaseChangeTargetIso f s K n).hom =
     H.map (DerivedCategory.Q.map
       ((NatTrans.mapHomologicalComplex b (.up ℤ)).app M)) ≫
@@ -97,7 +97,7 @@ theorem strictLocalDerivedExchange_globalSections {X S : Scheme.{v}} (f : X ⟶ 
         (pullback.snd f (Scheme.strictLocalizationToBase s))).derivedPlus
       (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
         (IsPullback.of_hasPullback f
-          (Scheme.strictLocalizationToBase s)).toCommSq).hom)).natTrans.app K
+          (Scheme.strictLocalizationToBase s)).toCommSq).hom)).app K
     have hn := (G.mapDerivedCategoryHomologyFunctorIso n).inv.naturality
       (DerivedCategory.Plus.ι.map m)
     dsimp only [Functor.comp_map] at hn

@@ -36,7 +36,7 @@ charts, rather than as abstract schemes with open immersions as in `Scheme.GlueD
   glue to a quasi-compact scheme.
 
 This is the affine gluing theorem used in the blueprint proofs of
-`lemma-nagata-finite-presentation-descends` and `def-nagata-noetherian-stage`.
+`theorem-nagata-s-compactification-theorem--1` and `theorem-nagata-s-compactification-theorem--1`.
 -/
 
 @[expose] public section

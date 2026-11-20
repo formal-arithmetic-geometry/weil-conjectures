@@ -18,9 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Frobenius comparison on completed compact-support representatives
 
-Source: blueprint main-20261015, sec-deligne-laumon-general,
+Source: blueprint main-20261015, chap-The-Deligne-Laumon-theorem-in-general,
 sk-l-dl-general-composition/lem-zl-shriek-composition.proof.md;
-lem-fix-weil-operations, composition-comparison clause
+prose-10-20, composition-comparison clause
 (blueprint: def-zl-frobenius-compact-support-comparison).
 
 The open comparison is the inverse of the open-adjunction mate. The proper
@@ -107,7 +107,7 @@ Source: blueprint Frobenius comparison; Stacks 099N
 (blueprint: def-zl-frobenius-compact-support-comparison). -/
 abbrev zlAmbientFrobenius (T₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType T₀.hom] [QuasiCompact T₀.hom] :=
-  pull (completed l E) (D.geometricFrobenius T₀).hom
+  pull (completed l E) (D.geometricFrobenius T₀).asIso.hom
 
 /-- Pullback around the Frobenius square, with both compositors fixed on coefficients.
 Source: blueprint Weil-operation compatibility; Stacks 099N(5)
@@ -115,11 +115,11 @@ Source: blueprint Weil-operation compatibility; Stacks 099N(5)
 def zlAmbientFrobeniusSquare :
     pull (completed l E) (zlFiberMap D f₀) ⋙ zlAmbientFrobenius D l E X₀ ≅
       zlAmbientFrobenius D l E Y₀ ⋙ pull (completed l E) (zlFiberMap D f₀) :=
-  (geometricPullComposition (completed l E) (D.geometricFrobenius X₀).hom
+  (geometricPullComposition (completed l E) (D.geometricFrobenius X₀).asIso.hom
       (zlFiberMap D f₀) (completedPull_comp l E _ _)).symm ≪≫
     eqToIso (congrArg (fun h ↦ pull (completed l E) h) (zlFrobenius_naturality D f₀)) ≪≫
       geometricPullComposition (completed l E) (zlFiberMap D f₀)
-        (D.geometricFrobenius Y₀).hom (completedPull_comp l E _ _)
+        (D.geometricFrobenius Y₀).asIso.hom (completedPull_comp l E _ _)
 
 /-- The open mate in its unit-normalized direction, before inversion.
 Source: blueprint Weil operations; Stacks 03DI
@@ -134,7 +134,7 @@ def zlFrobeniusOpenMate :
     (openDerivedAdjunction (completed l E) (zlGeometricCompactification D f₀ c₀).i)
     (openDerivedAdjunction (completed l E) (zlGeometricCompactification D f₀ c₀).i)).symm
       (TwoSquare.mk _ _ _ _
-        (zlAmbientFrobeniusSquare D (zlCompactificationOpen D f₀ c₀) l E).hom)).natTrans
+        (zlAmbientFrobeniusSquare D (zlCompactificationOpen D f₀ c₀) l E).hom))
 
 /-- Proper direct-image mate of the same normalized Frobenius square.
 Source: blueprint Weil operations; Stacks 0D6D
@@ -150,7 +150,7 @@ def zlFrobeniusProperMate :
     (proEtaleRingDerivedAdjunction (zlGeometricCompactification D f₀ c₀).g
       ((completed l E).ring _) ((completed l E).ring _) ((completed l E).pull _))
     (TwoSquare.mk _ _ _ _
-      (zlAmbientFrobeniusSquare D (zlCompactificationProper D f₀ c₀) l E).inv)).natTrans
+      (zlAmbientFrobeniusSquare D (zlCompactificationProper D f₀ c₀) l E).inv))
 
 open Opposite in
 private theorem pushforward_of_ringIso_isEquivalence
@@ -258,7 +258,7 @@ private theorem geometricPull_isEquivalence {X Y : Scheme.{u}} (g : X ⟶ Y) [Is
   exact Functor.isEquivalence_mapDerivedCategory _
 
 /-- Both prescribed mates are invertible for geometric Frobenius.
-Source: blueprint lem-fix-weil-operations; Stacks 099N and 03DI
+Source: blueprint prose-10-20; Stacks 099N and 03DI
 (blueprint: def-zl-frobenius-compact-support-comparison).
 Proof: geometric Frobenius and its middle-model map are scheme isomorphisms.
 Their exact inverse-image equivalences identify each square with an identity
@@ -270,12 +270,12 @@ theorem zlFrobeniusMates_isIso :
     IsIso (zlFrobeniusOpenMate D f₀ c₀ l E) ∧
       IsIso (zlFrobeniusProperMate D f₀ c₀ l E) := by
   let : (zlAmbientFrobenius D l E X₀).IsEquivalence :=
-    geometricPull_isEquivalence (D.geometricFrobenius X₀).hom (completed l E)
+    geometricPull_isEquivalence (D.geometricFrobenius X₀).asIso.hom (completed l E)
   let : (zlAmbientFrobenius D l E Y₀).IsEquivalence :=
-    geometricPull_isEquivalence (D.geometricFrobenius Y₀).hom (completed l E)
+    geometricPull_isEquivalence (D.geometricFrobenius Y₀).asIso.hom (completed l E)
   let : (zlAmbientFrobenius D l E (zlCompactificationMiddle D f₀ c₀)).IsEquivalence :=
     geometricPull_isEquivalence
-      (D.geometricFrobenius (zlCompactificationMiddle D f₀ c₀)).hom (completed l E)
+      (D.geometricFrobenius (zlCompactificationMiddle D f₀ c₀)).asIso.hom (completed l E)
   constructor
   · exact isIso_inverseMate_of_equivalences _ _
       (zlAmbientFrobeniusSquare D (zlCompactificationOpen D f₀ c₀) l E)
@@ -285,7 +285,7 @@ theorem zlFrobeniusMates_isIso :
 
 /-- The canonical compact-support Frobenius comparison on completed representatives.
 It is proper exchange followed by the inverse open mate.
-Source: blueprint lem-fix-weil-operations, compact-support clause
+Source: blueprint prose-10-20, compact-support clause
 (blueprint: def-zl-frobenius-compact-support-comparison). -/
 def zlCompactSupportFrobenius :
     image (completed l E) (zlGeometricCompactification D f₀ c₀) ⋙

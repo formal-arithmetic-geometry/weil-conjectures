@@ -319,7 +319,7 @@ end CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- The exceptional inverse image `Ri^! j^*` for the specified closed-then-open factorization.
-Source: blueprint lem-weil-stratum-ambient-hom and Stacks Tag 08FJ
+Source: blueprint lemma-internal-adjunction-two-exchange-formulas--1 and Stacks Tag 08FJ
 (blueprint: lem-sf-etale-generic-stratum-mate). -/
 noncomputable def immersionUpperShriek
     (A : Type (u + 1)) [CommRing A] [Finite A]

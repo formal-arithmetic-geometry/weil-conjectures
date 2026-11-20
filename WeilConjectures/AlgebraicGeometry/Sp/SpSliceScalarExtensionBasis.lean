@@ -82,7 +82,7 @@ private theorem internalSectionExtensionIso (X : Scheme.{u})
   let α : (sectionModuleEquivalence.{u + 1, u + 1, u} J R).functor ⋙ E ⟶
       Mod.extendScalars a ⋙ (sectionModuleEquivalence.{u + 1, u + 1, u} J S).functor :=
     ((mateEquiv (Mod.extendRestrictAdjunction a) adj).symm
-      (TwoSquare.mk _ _ _ _ (scalarRestrictionIso.{u + 1, u + 1, u} J a).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (scalarRestrictionIso.{u + 1, u + 1, u} J a).hom))
   have : IsIso α := inverseMate_isIso (Mod.extendRestrictAdjunction a) adj
     (scalarRestrictionIso.{u + 1, u + 1, u} J a)
   exact ⟨((asIso α).symm.app L)⟩

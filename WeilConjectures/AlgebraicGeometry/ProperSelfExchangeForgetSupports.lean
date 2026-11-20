@@ -346,14 +346,14 @@ private lemma inverse_exchange
 actual chosen-compactification forget-supports maps, in both forward and inverse forms.
 The ordinary exchange is `CoordinateTrace.exchange1`, the canonical derived adjunction
 mate in the left-derived presentation of exact inverse image, as specified in
-`def-kun-unbounded-exchange`. Its inverse is justified by torsion-ring proper base change.
+`definition-derived-base-change-map`. Its inverse is justified by torsion-ring proper base change.
 
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, first triangle, the common
 pullback counits (auxiliary; not a blueprint node).
 
 Proof in words:
 1. Exact module inverse images and their right adjoints have the sheaf composition
-normalization of prop-weil-pbc-inverse-image-modules-exact and
+normalization of situation-conventions and
 lem-weil-pbc-inverse-image-composition-module-linear. Apply
 lem-sfb-derived-composition-adjunction-normalization in the Grothendieck abelian module
 sheaf categories (lem-weil-pbc-module-sheaves-grothendieck-abelian). Thus the K-injective

@@ -45,11 +45,6 @@ import Mathlib.RingTheory.Localization.Away.Basic
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-! # Comparing normalized and finite-root Tate lines
-
-Source: the coefficient-identification step of
-`lem-normalized-projective-line-adjunction`, preceding the diagonal-kernel construction
-in blueprint `thm-amb-p1-adjunction.proof.md`.
-(blueprint: lem-sp-normalized-tate-line-comparison).
 -/
 
 @[expose] public section
@@ -65,29 +60,7 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
-/-- The degree-one line of a normalized Tate datum is the finite root-of-unity line.
-Source: `lem-normalized-projective-line-adjunction`, proof step 1, the universal-base
-coefficient comparison before transporting the diagonal kernel.
-(blueprint: lem-sp-normalized-tate-line-comparison).
-
-Proof in words: form V = Spec Z[1/N], using universe-lifted integers. Since N is
-positive, its localization is a normal integral Noetherian domain, including when
-N = 1. Both lines on X are pullbacks of the corresponding lines on V. Choose the
-degree-zero locally constant sheaf supplied by the given Tate datum on V; the
-finite-root line is locally constant by its primitive-root cover. At the generic
-point of V, the zero-section normalization and the concrete Kummer normalization
-identify tensoring the same exceptional complex with either shifted coefficient
-line with the unit. Tensor associativity and symmetry cancel that common factor;
-cancel the shift and use independence of the root level to obtain the generic
-comparison. The degree-zero single functor is fully faithful, so this is a sheaf
-isomorphism after generic pullback. The actual generic-point adjunction unit is an
-isomorphism on each locally constant sheaf: this is the normal generic constant
-unit, transported through a trivializing etale cover using etale base change.
-Compose the first unit, pushforward of the generic comparison, and inverse of the
-second unit to obtain the sheaf comparison on V. Finally construct X to V by the
-localization universal property and pull back the comparison using the specified
-Tate and finite-root pullback isomorphisms. The argument also covers the zero
-coefficient ring and the empty X. It asserts an object isomorphism only. -/
+/-- The degree-one line of a normalized Tate datum is the finite root-of-unity line. -/
 theorem nonempty_normalizedTateLineComparison
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
     [HasTateTwist.IsNormalized Λ] (N : ℕ) (hN : 0 < N) (hΛ : (N : Λ) = 0)

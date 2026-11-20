@@ -295,6 +295,6 @@ def comparison {Z W : Scheme.{u}} {q : Z ⟶ W} (sW : ScalarModel W) (sZ : Scala
   (mateEquiv
     (proEtaleRingDerivedAdjunction q R.target R.source R.identification)
     (proEtaleRingDerivedAdjunction q S.target S.source S.identification)
-    (TwoSquare.mk _ _ _ _ (balancing sW sZ a).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (balancing sW sZ a).hom))
 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage

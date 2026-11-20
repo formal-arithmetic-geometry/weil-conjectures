@@ -28,7 +28,7 @@ By the co-projection formula this computes the section invariant, `𝒞(g, s) �
 (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_twistShift_of_iso`).
 
 Applied to the diagonal of a smooth morphism, a section of the first projection, this is
-smooth purity (`sk-thm-smooth-purity`,
+smooth purity (`proposition-smooth-purity-finite-coefficients`,
 `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`).
 
 ## Main statements
@@ -111,7 +111,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_tateObject_of_section [HasKummerCla
     (hasThomFrames_of_section Λ c g s hs aB) (hasRegularZariskiFrames_of_section c g s hs)
     (g ≫ aB)
 
-/-- Blueprint `def-pur-section-invariant`: Section invariant
+/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
 
 **The section invariant of a section of a smooth morphism.** For `g : V ⟶ B` smooth of relative
 dimension `c` with a closed section `s`, `B` separated and locally of finite type over a field,

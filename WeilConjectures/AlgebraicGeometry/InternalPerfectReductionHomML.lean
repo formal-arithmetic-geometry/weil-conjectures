@@ -37,8 +37,8 @@ import Mathlib.CategoryTheory.CofilteredSystem
 /-! # Uniform stable images for internal perfect reduction Hom
 
 Source: literature/stacks-project/proetale.tex, Tag 09C5;
-current blueprint sk-prop-integral-local-structure, Compatible isomorphisms,
-paragraph beginning These Hom groups can be infinite
+current blueprint proposition-local-structure-integral-constructible-complexes, Compatible
+isomorphisms, paragraph beginning These Hom groups can be infinite
 (blueprint: lem-pe-internal-perfect-reduction-hom-ml).
 
 Natural-number index n denotes the positive exponent n+1. The scalar model uses
@@ -270,8 +270,8 @@ private theorem locallyConstant_range_eq {Y : Type*} [TopologicalSpace Y]
 
 /-- Uniform stable images for the internal perfect reduction Hom tower, hence ML.
 Source: literature/stacks-project/proetale.tex, Tag 09C5; current blueprint
-sk-prop-integral-local-structure, Compatible isomorphisms, uniform-bound paragraph
-(blueprint: lem-pe-internal-perfect-reduction-hom-ml).
+proposition-local-structure-integral-constructible-complexes, Compatible isomorphisms, uniform-bound
+paragraph (blueprint: lem-pe-internal-perfect-reduction-hom-ml).
 
 Proof:
 1. Identify the site over W with W_proet by weakly-etale localization. The DVR and
@@ -292,7 +292,7 @@ It also reduces homotopies, so this identification respects every finite reducti
 7. For N >= m >= n+e choose only one isomorphism at level N and reduce it to m and n.
 Postcomposition by those reductions identifies both Hom images with the endomorphism
 images using one common bijection at n; no independently chosen lower isomorphism is used.
-8. Apply sk-lem-integral-scalar-towers (2), q=0, to Q with the specified torsion exponent.
+8. Apply lemma-perfect-complexes-over-oe (2), q=0, to Q with the specified torsion exponent.
 Both images in H^0(Q/pi^n) equal the integral image. Exact constant sheaves and sections,
 then the common bijection, give equality of the actual Hom transition images.
 9. The witness c(n)=n+e gives the recorded Mittag-Leffler condition. No completeness

@@ -38,7 +38,7 @@ prime `q` of `S` over `p`, by `lem-weil-pbc-faithfully-flat-surjective-spectrum`
 (3) The induced map `R_p → S_q` is a flat local map of Noetherian local rings by
 `lem-weil-pbc-flat-local-ring-maps`, using `def-weil-pbc-localization-at-prime`.
 (4) Since `S_q` is regular by `def-weil-regular-scheme`,
-`lem-weil-pbc-flat-under-regular` gives that `R_p` is regular. (5) Since `p` was
+`theorem-finite-etale-covers-proper-henselian--2` gives that `R_p` is regular. (5) Since `p` was
 arbitrary, `R` is regular by `def-weil-regular-scheme`; its Noetherianity is the
 parent field of `IsRegularRing`.
 -/

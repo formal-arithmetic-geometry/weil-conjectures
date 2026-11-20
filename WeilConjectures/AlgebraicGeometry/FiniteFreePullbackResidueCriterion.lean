@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeSingleFieldFibre
 
 /-! # Residue detection of pulled-back single cohomology
 
-Source: blueprint lem-pc-perfect-locus, proof step 4.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4.
 (blueprint: lem-pc-finite-free-pullback-residue-criterion)
 -/
 
@@ -84,7 +84,7 @@ private theorem single_cohomology_of_homotopyEquiv {Y : Scheme.{u}}
 /-- Single finite locally free cohomology of a pulled-back bounded nonnegative finite
 free complex is detected by the residue cohomology at all image points.
 
-Source: blueprint lem-pc-perfect-locus, proof step 4.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4.
 (blueprint: lem-pc-finite-free-pullback-residue-criterion).
 
 Proof: at any image point satisfying the residue condition, split unit entries over

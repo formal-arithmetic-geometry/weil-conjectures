@@ -125,7 +125,7 @@ form the nonzero ring `ℚ̄_ℓ`. -/
 theorem one_ne_zero_end_regular :
     (1 : End (Mod.regular (padicAlgClRingObj.{u} ℓ))) ≠ 0 := by
   intro h
-  have h1 : 𝟙 (padicAlgClRingObj.{u} ℓ) = 0 := congrArg Mod.Hom.hom h
+  have h1 : 𝟙 (padicAlgClRingObj.{u} ℓ) = 0 := congrArg Mod.Hom.hom congr($(h).asHom)
   exact one_ne_zero (α := ULift.{u + 1}
     (_root_.PadicAlgCl.finiteIntermediateFieldValued ℓ (Profinite.of PUnit.{u + 1})))
     (congrArg (fun φ ↦ φ.hom.app (op (Profinite.of PUnit.{u + 1}))
@@ -134,7 +134,7 @@ theorem one_ne_zero_end_regular :
 /-- Every nonzero endomorphism of the regular module `ℚ̲̄_ℓ` is invertible: the endomorphisms are
 the multiplications by the constants `ℚ̄_ℓ`, a field. -/
 theorem isIso_of_ne_zero_end_regular (t : End (Mod.regular (padicAlgClRingObj.{u} ℓ)))
-    (ht : t ≠ 0) : IsIso t :=
+    (ht : t ≠ 0) : IsIso t.asHom :=
   isIso_of_ne_zero_of_surjective (Mod.regularEndRingHom.comp (constRingHom.{u} ℓ))
     (Mod.regularEndRingHom_surjective.comp (constRingHom_surjective ℓ)) t ht
 

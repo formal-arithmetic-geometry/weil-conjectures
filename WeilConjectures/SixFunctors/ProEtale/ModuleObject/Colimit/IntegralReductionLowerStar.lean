@@ -197,6 +197,13 @@ noncomputable instance commShift_boundedConstructibleLowerStar :
   delta boundedConstructibleLowerStar
   infer_instance
 
+/-- The derived pushforward along a proper morphism on bounded constructible `𝒪_E`-complexes
+commutes with the shifts. -/
+noncomputable instance commShift_boundedConstructibleLowerStarOfIsProper [IsProper f.left] :
+    (boundedConstructibleLowerStarOfIsProper ℓ E f).CommShift ℤ := by
+  delta boundedConstructibleLowerStarOfIsProper
+  infer_instance
+
 instance commShift_boundedConstructibleLowerStarCompatibility_hom :
     NatTrans.CommShift (boundedConstructibleLowerStarCompatibility ℓ E f).hom ℤ := by
   unfold boundedConstructibleLowerStarCompatibility boundedConstructibleLowerStar

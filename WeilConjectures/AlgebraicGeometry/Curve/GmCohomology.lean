@@ -41,7 +41,8 @@ namespace AlgebraicGeometry.IsCurve
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
-/-- Blueprint `sk-thm-br`: the cohomology of `𝔾ₘ` on a smooth curve, étale version.
+/-- Blueprint `lemma-cohomology-multiplicative-group`: the cohomology of `𝔾ₘ` on a smooth curve,
+étale version.
 
 Let `C` be a smooth separated curve of finite type over an algebraically closed field `k`. Then
 the canonical map `Pic(C) → H¹(C_ét, 𝔾ₘ)`, `L ↦ [Isom(𝒪_C, L)]`
@@ -52,8 +53,8 @@ pullback along any morphism `h : X ⟶ C`, for instance the projection `C_{k'} �
 extension `k ⊆ k'` of algebraically closed fields (in degrees `q ≥ 2` both sides vanish).
 
 The vanishing is `AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_smooth` (blueprint
-`det-thm-br-higher-vanishing`), the identification in degree one is Hilbert 90 (blueprint
-`lem-sc-h1-gm-pic`) and its naturality is
+`lemma-cohomology-multiplicative-group--2`), the identification in degree one is Hilbert 90
+(blueprint `lemma-cohomology-multiplicative-group--3`) and its naturality is
 `AlgebraicGeometry.Scheme.etaleRestrictionH_toCohomologicalPicardGroup` and
 `AlgebraicGeometry.Scheme.gmCohomologyMap_toCohomologicalPicardGroup`. -/
 theorem sheafH_gmSheaf_of_smooth (f : C ⟶ Spec (.of k)) [IsCurve f] [Smooth f] :
@@ -79,8 +80,8 @@ lemma nonempty_rightDerived_sectionsFunctor_iso_sheafH (X : Scheme.{u}) (q : ℕ
   Sheaf.nonempty_rightDerived_sections_obj_iso_functorH X.smallEtaleTopology
     (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X) q F
 
-/-- Blueprint `sk-thm-br`: the cohomology of the classical multiplicative sheaf on a smooth
-curve, pro-étale version.
+/-- Blueprint `lemma-cohomology-multiplicative-group`: the cohomology of the classical
+multiplicative sheaf on a smooth curve, pro-étale version.
 
 Let `C` be a smooth separated curve of finite type over an algebraically closed field `k` and
 `𝒢ₘ^cl = ν^* 𝔾ₘ` the classical multiplicative sheaf on the small pro-étale site of `C`. Then

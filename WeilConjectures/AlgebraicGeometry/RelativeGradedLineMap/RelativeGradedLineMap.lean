@@ -13,8 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.AlgebraicSpace.SpaceLineModulePr
 
 /-! # Relative graded maps into tensor powers of a line module
 
-Source: Stacks Project, Constructions, Tag 01O9
-(blueprint: def-trf-relative-graded-line-map).
+## References
+
+* Stacks Project, Constructions, Tag 01O9
 -/
 
 @[expose] public section
@@ -27,9 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A graded algebra map on affine base opens into tensor powers of an invertible module.
-Source: Stacks Project, Constructions, Tag 01O9 (blueprint:
-lem-trf-graded-immersion-ample-criterion). -/
+/-- A graded algebra map on affine base opens into tensor powers of an invertible module. -/
 structure RelativeGradedLineMap {Z S : Scheme.{u}} (h : Z ⟶ S)
     (A : S.GradedAlgebraData) (L : Z.Modules) where
   component (V : S.affineOpens) (n : ℕ) :
@@ -47,9 +46,7 @@ structure RelativeGradedLineMap {Z S : Scheme.{u}} (h : Z ⟶ S)
     component V n ⟨A.res q a, (A.res q).map_mem a.property⟩ =
       (L.tensorPow n).val.map (homOfLE (h.preimage_mono q)).op (component W n a)
 
-/-- Pull the component of a graded line map to a scheme chart.
-Source: Stacks Project, Constructions, Tag 01O9 (blueprint:
-lem-trf-graded-immersion-ample-criterion). -/
+/-- Pull the component of a graded line map to a scheme chart. -/
 noncomputable def RelativeGradedLineMap.evaluate
     {Z S : Scheme.{u}} {h : Z ⟶ S} {A : S.GradedAlgebraData} {L : Z.Modules}
     (ψ : RelativeGradedLineMap h A L) {W : Scheme.{u}} (j : W ⟶ Z)
@@ -61,9 +58,7 @@ noncomputable def RelativeGradedLineMap.evaluate
       (((tensorPullbackSectionAdjunction j).unit.app (L.tensorPow n)).app (h ⁻¹ᵁ V.1)
         (ψ.component V n a)))
 
-/-- Positive-degree images generate the line module everywhere.
-Source: Stacks Project, Constructions, Tag 01O9 (blueprint:
-lem-trf-graded-immersion-ample-criterion). -/
+/-- Positive-degree images generate the line module everywhere. -/
 def RelativeGradedLineMap.GeneratesEverywhere
     {Z S : Scheme.{u}} {h : Z ⟶ S} {A : S.GradedAlgebraData} {L : Z.Modules}
     (ψ : RelativeGradedLineMap h A L) : Prop :=
@@ -75,9 +70,7 @@ def RelativeGradedLineMap.GeneratesEverywhere
           (⊤ : Submodule (Z.presheaf.stalk x)
             ↑(TopCat.Presheaf.stalk (L.tensorPow n).val.presheaf x))
 
-/-- The usual homogeneous-fraction characterization of the canonical map to relative Proj.
-Source: Stacks Project, Constructions, Tag 01O9 (blueprint:
-lem-trf-graded-immersion-ample-criterion). -/
+/-- The usual homogeneous-fraction characterization of the canonical map to relative Proj. -/
 def RelativeGradedLineMap.IsCanonicalMap
     {Z S : Scheme.{u}} {h : Z ⟶ S} {A : S.GradedAlgebraData} {L : Z.Modules}
     (ψ : RelativeGradedLineMap h A L) (r : Z ⟶ A.relProj) : Prop :=

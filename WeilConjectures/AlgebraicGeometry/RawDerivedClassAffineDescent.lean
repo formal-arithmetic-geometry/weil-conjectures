@@ -78,7 +78,6 @@ private theorem raw_chart_transport {B Y Y' : Scheme.{u}}
   change z ≫ (shiftFunctor _ q).map e.inv = eF.hom ≫ t
   exact cancel_transport eF ((shiftFunctor _ q).mapIso e) t z ht
 
-set_option maxHeartbeats 400000 in
 -- Constructing the chart diagram and its limiting cone needs a larger elaboration budget.
 /-- A raw derived class descends with its coefficient complex fixed at the original stage.
 
@@ -198,13 +197,11 @@ theorem exists_rawDerivedClass_affine_descent
         Over.homMk_left, NatIso.ofComponents_hom_app, Category.assoc,
         pullbackSymmetry_hom_comp_fst, pullbackSymmetry_hom_comp_snd,
         Category.comp_id]
-    all_goals first
-      | exact pullback.lift_fst _ _ _
-      | exact pullback.lift_snd _ _ _
-      | (erw [pullback.lift_fst, pullback.lift_snd]
-         first
-         | exact (pullbackSymmetry_hom_comp_fst _ _).symm
-         | exact (pullbackSymmetry_hom_comp_snd_assoc _ _ _).symm)
+    all_goals
+      erw [pullback.lift_fst, pullback.lift_snd]
+      first
+      | exact (pullbackSymmetry_hom_comp_fst _ _).symm
+      | exact (pullbackSymmetry_hom_comp_snd_assoc _ _ _).symm
   have (l : Over j.left) : CompactSpace (M.obj l) := by
     have : IsAffine (M.obj l) := by
       dsimp [M]

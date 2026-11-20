@@ -173,7 +173,7 @@ theorem sections_over_quasiCompact_open {X : Scheme.{u}} [CompactSpace X]
             s ∈ Set.range ((a n).app W) ↔
               ∀ (W' : X.Opens) (h : W' ≤ W)
                 (b : Γ((idealSheafPower ι n).1, W')),
-                (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).hom
+                (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).asHom.hom
                   (F.presheaf.map (homOfLE h).op s) = 0) ∧
           (∀ (n m : ℕ), n ≤ m → ∃ t : A n ⟶ A m, t ≫ a m = a n) ∧
           (∀ (n : ℕ) (W : X.Opens), W ≤ U → Subsingleton Γ(A n, W)) ∧

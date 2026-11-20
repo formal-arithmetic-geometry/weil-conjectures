@@ -478,7 +478,7 @@ constant on the fibres of the projections to `X₀`, and `s` descends along the 
 theorem exists_locallyFiniteFunctionsComp_geometricFiberProj_eq [CompactSpace X₀]
     [QuasiSeparatedSpace X₀] [LocallyConnectedSpace f.geometricFiber]
     (s : locallyFiniteFunctions l f.geometricFiber)
-    (hs : locallyFiniteFunctionsComp l f.geometricGaloisFrobenius.hom.base.hom s = s) :
+    (hs : locallyFiniteFunctionsComp l f.geometricGaloisFrobenius.asIso.hom.base.hom s = s) :
     ∃ t : locallyFiniteFunctions l X₀,
       locallyFiniteFunctionsComp l f.geometricFiberProj.base.hom t = s := by
   have := Fintype.ofFinite k
@@ -487,7 +487,7 @@ theorem exists_locallyFiniteFunctionsComp_geometricFiberProj_eq [CompactSpace X�
   have hsx (x : f.geometricFiber) : s.1 x = s'.1 (f.geometricFiberToFiniteLevel K.1.val x) := by
     rw [← hs']
     rfl
-  have hFr (x : f.geometricFiber) : s.1 (f.geometricGaloisFrobenius.hom x) = s.1 x := by
+  have hFr (x : f.geometricFiber) : s.1 (f.geometricGaloisFrobenius.asIso.hom x) = s.1 x := by
     conv_rhs => rw [← hs]
     rfl
   have h₁ (y : f.finiteLevel K.1) : s'.1 (f.finiteLevelFrobenius K.1 y) = s'.1 y := by
@@ -598,7 +598,7 @@ def geometricFiberProjProEt : Scheme.ProEt.mk f.geometricFiberProj ⟶ Scheme.Pr
 the pro-étale site of `X₀`. -/
 def geometricGaloisFrobeniusProEt :
     Scheme.ProEt.mk f.geometricFiberProj ⟶ Scheme.ProEt.mk f.geometricFiberProj :=
-  MorphismProperty.Over.homMk f.geometricGaloisFrobenius.hom
+  MorphismProperty.Over.homMk f.geometricGaloisFrobenius.asIso.hom
     (f.geometricGaloisFrobenius_hom_comp_geometricFiberProj)
 
 /-- **Frobenius-invariant sections of the condensed coefficient ring over the geometric fibre
@@ -676,13 +676,13 @@ to `X₀` (`AlgebraicGeometry.Scheme.Hom.exists_locallyFiniteFunctionsComp_geome
 theorem exists_freeUpperStarIso_geometricFiberProj_eq [CompactSpace X₀] [QuasiSeparatedSpace X₀]
     [LocallyConnectedSpace f.geometricFiber]
     (ψ : (⨁ fun _ : ι ↦ unit l f.geometricFiber) ⟶ ⨁ fun _ : κ ↦ unit l f.geometricFiber)
-    (hψ : (freeUpperStarIso l ι f.geometricGaloisFrobenius.hom).inv ≫
-        (f.geometricGaloisFrobenius.hom)^*ᵃ[l].map ψ ≫
-          (freeUpperStarIso l κ f.geometricGaloisFrobenius.hom).hom = ψ) :
+    (hψ : (freeUpperStarIso l ι f.geometricGaloisFrobenius.asIso.hom).inv ≫
+        (f.geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map ψ ≫
+          (freeUpperStarIso l κ f.geometricGaloisFrobenius.asIso.hom).hom = ψ) :
     ∃ ψ₀ : (⨁ fun _ : ι ↦ unit l X₀) ⟶ ⨁ fun _ : κ ↦ unit l X₀,
       (freeUpperStarIso l ι f.geometricFiberProj).inv ≫ (f.geometricFiberProj)^*ᵃ[l].map ψ₀ ≫
         (freeUpperStarIso l κ f.geometricFiberProj).hom = ψ := by
-  have hN := unitMatrix_adicUpperStar f.geometricGaloisFrobenius.hom ψ
+  have hN := unitMatrix_adicUpperStar f.geometricGaloisFrobenius.asIso.hom ψ
   rw [hψ] at hN
   have h (i : κ) (j : ι) : ∃ t : locallyFiniteFunctions l X₀,
       locallyFiniteFunctionsComp l f.geometricFiberProj.base.hom t = unitMatrix ψ i j :=

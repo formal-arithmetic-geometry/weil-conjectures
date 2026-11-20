@@ -353,8 +353,6 @@ private lemma lowerStar_preservesKInjectives
 
 attribute [local instance] lowerStar_preservesKInjectives
 
-set_option maxHeartbeats 800000 in
--- Elaborating the module-object derived adjunctions repeats exactness instance searches.
 private lemma derived_lowerStar_conjugate
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] :
@@ -385,7 +383,7 @@ private lemma derived_lowerStar_conjugate
     (upperStarLowerStarAdjunction Λ (f ≫ g)) _ (upperStarComp Λ f g) (by
       change _ = (conjugateEquiv _ _) ((conjugateEquiv _ _).symm _)
       exact (Equiv.apply_symm_apply _ _).symm)]
-  rw [hadj, hadj, hadj]
+  simp only [hadj]
   ext K
   simp [conjugateEquiv_apply_app, leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
     Functor.leftDerivedFunctorCompIso]
@@ -474,8 +472,6 @@ private lemma bounded_comp_hom
     ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom]
   exact Category.id_comp ((leftDerivedUpperStarComp Λ h j).hom.app K.obj)
 
-set_option maxHeartbeats 100000 in
--- Normalizing the restricted comparisons repeats exact module-functor instance searches.
 /-- The specified scalar-extension/pullback comparison respects composition.
 Source: Bhatt--Scholze, Remark 6.8.15, and the canonical constructions
 `comapLowerStarIso`, `derivedComapLowerStarIso`, `derivedPullIso`, and

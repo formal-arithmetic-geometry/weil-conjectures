@@ -31,8 +31,8 @@ with base change `g : X_T ⟶ X`, the internal-hom comparison
 
 is an isomorphism for `K ∈ Dctf(X, Λ)` and `M ∈ Dᵇc(X, Λ)`
 (`AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_of_generic`). This is the third
-assertion of blueprint `lem-weil-geometric-generic-exchange`; since `ρ` is the comparison map of
-the monoidal functor `g^*`, it preserves evaluation
+assertion of blueprint `lemma-restriction-geometric-generic-fibre`; since `ρ` is the comparison map
+of the monoidal functor `g^*`, it preserves evaluation
 (`AlgebraicGeometry.Etale.derivedHomUpperStarComparison_ev`).
 
 ## Proof
@@ -109,7 +109,7 @@ lemma isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion_gene
     (Etale.upperStarLowerStarAdjunction _ i).preservesKInjectiveComplexes
   exact (derivedUpperStarLowerStarAdjunction _ i).counit_isIso_of_R_fully_faithful
 
-/-- Blueprint `lem-weil-geometric-generic-exchange`, internal-hom comparison, open piece. Let
+/-- Blueprint `lemma-restriction-geometric-generic-fibre`, internal-hom comparison, open piece. Let
 `j : V ⟶ Z` be an open immersion into a finite-type `S`-scheme, base changed along the generic
 `Z_T ⟶ Z`, and suppose that `j^* K` has a left dual `D ∈ Dctf(V, Λ)`. Then the comparison
 `g^* RHom(K, Rj_* N) ⟶ RHom(g^* K, g^* Rj_* N)` is an isomorphism for every bounded constructible
@@ -172,8 +172,8 @@ lemma isIso_derivedHomUpperStarComparison_rightDerivedLowerStar_of_generic {k : 
   exact (derivedUpperStarLowerStarAdjunction _ j').isIso_of_isIso_map_of_iso_rightAdjoint_obj
     eA eB _
 
-/-- Blueprint `lem-weil-geometric-generic-exchange`, internal-hom comparison, closed piece. Let
-`i : W ⟶ Z` be a closed immersion with base change `i_T : W_T ⟶ Z_T` along `g : Z_T ⟶ Z`. If the
+/-- Blueprint `lemma-restriction-geometric-generic-fibre`, internal-hom comparison, closed piece.
+Let `i : W ⟶ Z` be a closed immersion with base change `i_T : W_T ⟶ Z_T` along `g : Z_T ⟶ Z`. If the
 comparison of `g_W : W_T ⟶ W` is an isomorphism at `(i^* K, X)`, then the comparison of `g` is
 one at `(K, Ri_* X)`. -/
 lemma isIso_derivedHomUpperStarComparison_rightDerivedLowerStar_of_isClosedImmersion
@@ -296,9 +296,9 @@ lemma isIso_derivedHomUpperStarComparison_of_isIso_open_closed {Z Z' U U' W : Sc
   exact @Equiv.subsingleton _ _ ((Iso.homCongr (Iso.refl _) eB).trans
     ((derivedUpperStarLowerStarAdjunction _ j').homEquiv _ _).symm) this
 
-/-- Blueprint `lem-weil-geometric-generic-exchange`, third assertion: **the internal Hom commutes
-with generic base change.** Let `S` be integral and of finite type over a field `k`, let `Λ` be a
-finite ring whose exponent is invertible on `S`, and let `t : T ⟶ S` be a morphism from a
+/-- Blueprint `lemma-restriction-geometric-generic-fibre`, third assertion: **the internal Hom
+commutes with generic base change.** Let `S` be integral and of finite type over a field `k`, let
+`Λ` be a finite ring whose exponent is invertible on `S`, and let `t : T ⟶ S` be a morphism from a
 noetherian scheme lying over the generic point of `S` (e.g. a geometric generic point). Let `X`
 be of finite type over `S`, with base change `g : X_T ⟶ X`. For `K ∈ Dctf(X, Λ)` and
 `M ∈ Dᵇc(X, Λ)`, the canonical comparison

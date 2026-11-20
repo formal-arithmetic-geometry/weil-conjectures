@@ -197,9 +197,9 @@ map `t_* ⋙ r_! ⟶ l_! ⋙ b_*`, i.e. `r_! t_* ⟶ b_* l_!`, the mate of the i
 `ExchangeFormalism.baseChange` under the adjunctions `t^* ⊣ t_*` and `b^* ⊣ b_*`.
 -/
 noncomputable def exchange (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z) [Fact (𝒪 l)]
-    [Fact (𝒪 r)] (w : t ≫ r = l ≫ b) [IsIso (F.baseChange t l r b w).natTrans] :
+    [Fact (𝒪 r)] (w : t ≫ r = l ≫ b) [IsIso (F.baseChange t l r b w)] :
     TwoSquare (F.pf t) (F.sh l) (F.sh r) (F.pf b) :=
-  mateEquiv (F.adj t) (F.adj b) (inv (F.baseChange t l r b w).natTrans)
+  mateEquiv (F.adj t) (F.adj b) (inv (F.baseChange t l r b w))
 
 end Square
 

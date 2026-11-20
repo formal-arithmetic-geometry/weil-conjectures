@@ -169,7 +169,7 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper_eq (sq : IsPullback g' 
     [IsIso ((𝔽).baseChange (SepFinType.homMk (ofIsProperBaseChangeHom sq))
       (𝟙 (SepFinType.mk (Compactification.ofIsProper f'.left).overObj))
       (𝟙 (SepFinType.mk (Compactification.ofIsProper f.left).overObj))
-      (SepFinType.homMk (ofIsProperBaseChangeHom sq)) hw).natTrans] :
+      (SepFinType.homMk (ofIsProperBaseChangeHom sq)) hw)] :
     P.lowerShriekOfCompactificationBaseChange (Compactification.ofIsProper f.left)
         (Compactification.ofIsProper f'.left) (ofIsProperBaseChangeHom sq)
         (isPullback_ofIsProper_overI sq) (isPullback_ofIsProper_overG sq) =
@@ -179,7 +179,7 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper_eq (sq : IsPullback g' 
         (SepFinType.homMk (Compactification.ofIsProper f'.left).overG)
         (SepFinType.homMk (ofIsProperBaseChangeHom sq))
         (SepFinType.homMk (ofIsProperBaseChangeHom sq)) (SepFinType.homMk g) hw
-        (SepFinType.homMk_comp_homMk (isPullback_ofIsProper_overG sq).w)).natTrans := by
+        (SepFinType.homMk_comp_homMk (isPullback_ofIsProper_overG sq).w)) := by
   obtain ⟨Xl, ⟨⟨⟩⟩, Xh⟩ := X
   obtain ⟨Xl', ⟨⟨⟩⟩, Xh'⟩ := X'
   obtain ⟨fl, ⟨⟨⟨⟩⟩⟩, fw⟩ := f
@@ -190,9 +190,6 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper_eq (sq : IsPullback g' 
   obtain rfl : Xh' = fl' ≫ Y'.hom := by simpa using fw'.symm
   rfl
 
-set_option maxHeartbeats 400000 in
--- the final `exact` identifies the pullback along `g'` with the pullback along the map between the
--- middle objects of the trivial compactifications, which is only definitional
 /-- The compact-support exchange map of `P` of the trivial compactifications of the proper `f`
 and `f'` is the base change `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` of `P` of the square of their
 proper maps, through `Rf_!^c ≅ Rf_*`. -/
@@ -213,7 +210,7 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
   have : IsIso ((𝔽).baseChange (SepFinType.homMk (ofIsProperBaseChangeHom sq))
       (𝟙 (SepFinType.mk (Compactification.ofIsProper f'.left).overObj))
       (𝟙 (SepFinType.mk (Compactification.ofIsProper f.left).overObj))
-      (SepFinType.homMk (ofIsProperBaseChangeHom sq)) hw).natTrans :=
+      (SepFinType.homMk (ofIsProperBaseChangeHom sq)) hw) :=
     P.isIso_baseChange_exchangeFormalism (IsPullback.of_id_snd (f := ofIsProperBaseChangeHom sq))
   have key := (𝔽).shriekBaseChange_id_left
     (SepFinType.homMk (Compactification.ofIsProper f.left).overG)
@@ -223,8 +220,11 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
   simp only [lowerShriekOfCompactificationOfIsProperIso, Iso.trans_hom,
     Functor.isoWhiskerRight_hom,
     P.boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_eq_shId]
-  rw [P.baseChange_eq_pfBaseChange, P.lowerShriekOfCompactificationBaseChange_ofIsProper_eq sq hw]
-  exact key
+  rewrite [P.baseChange_eq_pfBaseChange,
+    P.lowerShriekOfCompactificationBaseChange_ofIsProper_eq sq hw]
+  -- Compare components so the pullback identification is checked on objects and morphisms.
+  refine NatTrans.ext (funext fun K ↦ ?_)
+  exact congr_app key K
 
 variable {P}
 
@@ -268,7 +268,7 @@ theorem lowerShriekBaseChange_of_isProper_mateEquiv (hP : P.IsIsoRefinementPushf
       (mateEquiv (P.adj (Compactification.ofIsProper f.left).overG)
         (P.adj (Compactification.ofIsProper f'.left).overG)
         (boundedConstructiblePullbackSquareComparison Λ ℓ
-          (isPullback_ofIsProper_overG sq).toCommSq).hom).natTrans =
+          (isPullback_ofIsProper_overG sq).toCommSq).hom) =
     lowerShriekBaseChange hP sq ≫
       Functor.whiskerLeft (boundedConstructibleUpperStar Λ ℓ g')
         (lowerShriekIsoLowerStar hP f').hom := by

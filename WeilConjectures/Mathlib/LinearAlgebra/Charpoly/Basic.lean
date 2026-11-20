@@ -65,9 +65,9 @@ expected diagonal.
 
 `LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ`,
 `LinearMap.charpoly_eq_prod_charpoly_mapQ_of_le` and `LinearMap.charpoly_mapQ_restrict_dvd`
-implement `sk-p-linear-filtration`;
+implement `lemma-filtrations-spectra--2`;
 `LinearMap.charpoly_roots_tensorProduct`, `LinearMap.charpoly_roots_exteriorPower` and
-`LinearMap.charpoly_roots_dualMap_symm` implement `p-linear-spectra`.
+`LinearMap.charpoly_roots_dualMap_symm` implement `lemma-filtrations-spectra`.
 -/
 
 @[expose] public section
@@ -84,7 +84,7 @@ variable {R V : Type*} [CommRing R] [AddCommGroup V] [Module R V] [Module.Free R
 /-- If an endomorphism preserves a submodule `W` with `W` and `V ⧸ W` finite free, its
 characteristic polynomial is the product of the characteristic polynomials of the induced
 endomorphisms of `W` and of `V ⧸ W`.
-(blueprint: `sk-p-linear-filtration`, `p-linear-filtration`) -/
+(blueprint: `lemma-filtrations-spectra--2`) -/
 theorem charpoly_eq_charpoly_restrict_mul_charpoly_mapQ (f : V →ₗ[R] V) (W : Submodule R V)
     [Module.Free R W] [Module.Finite R W] [Module.Free R (V ⧸ W)] [Module.Finite R (V ⧸ W)]
     (hW : W ≤ W.comap f) :
@@ -145,7 +145,7 @@ variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensiona
 filtration `0 = F 0 ≤ F 1 ≤ ⋯ ≤ F n = V` by `f`-stable subspaces: the characteristic
 polynomial of `f` is the product of the characteristic polynomials of the endomorphisms
 induced by `f` on the graded pieces `F (i + 1) ⧸ F i`.
-(blueprint: `sk-p-linear-filtration`) -/
+(blueprint: `lemma-filtrations-spectra--2`) -/
 theorem charpoly_eq_prod_charpoly_mapQ_of_le (f : V →ₗ[K] V) (F : ℕ → Submodule K V) (n : ℕ)
     (h0 : F 0 = ⊥) (hn : F n = ⊤) (hle : ∀ i < n, F i ≤ F (i + 1))
     (hF : ∀ i, F i ≤ (F i).comap f) :
@@ -196,7 +196,7 @@ theorem charpoly_roots_eq_sum_charpoly_roots_mapQ_of_le (f : V →ₗ[K] V)
 /-- The characteristic polynomial of the endomorphism induced by `f` on an invariant
 subquotient `S ⧸ U` divides the characteristic polynomial of `f`: the eigenvalues of `f` on a
 subquotient occur among those on `V`, with multiplicity.
-(blueprint: `sk-p-linear-filtration`) -/
+(blueprint: `lemma-filtrations-spectra--2`) -/
 theorem charpoly_mapQ_restrict_dvd (f : V →ₗ[K] V) {U S : Submodule K V}
     (hU : U ≤ U.comap f) (hS : S ≤ S.comap f) :
     ((U.comap S.subtype).mapQ (U.comap S.subtype) (f.restrict hS)
@@ -216,7 +216,7 @@ variable {K V W : Type*} [Field K] [IsAlgClosed K] [AddCommGroup V] [Module K V]
 
 /-- The eigenvalues of the tensor product of two endomorphisms are the pairwise products of their
 eigenvalues, with multiplicity.
-(blueprint: `p-linear-spectra`) -/
+(blueprint: `lemma-filtrations-spectra`) -/
 theorem charpoly_roots_tensorProduct (f : V →ₗ[K] V) (g : W →ₗ[K] W) :
     (TensorProduct.map f g).charpoly.roots =
       (f.charpoly.roots ×ˢ g.charpoly.roots).map fun p ↦ p.1 * p.2 := by
@@ -249,7 +249,7 @@ theorem charpoly_roots_tensorProduct (f : V →ₗ[K] V) (g : W →ₗ[K] W) :
 
 /-- The eigenvalues of the `s`-th exterior power of an endomorphism are the products of the
 `s`-element sub-multisets of its eigenvalues.
-(blueprint: `p-linear-spectra`) -/
+(blueprint: `lemma-filtrations-spectra`) -/
 theorem charpoly_roots_exteriorPower (f : V →ₗ[K] V) (s : ℕ) :
     (exteriorPower.map s f).charpoly.roots =
       (f.charpoly.roots.powersetCard s).map Multiset.prod := by
@@ -332,7 +332,7 @@ theorem charpoly_roots_exteriorPower (f : V →ₗ[K] V) (s : ℕ) :
 
 /-- The eigenvalues of the contragredient of a linear automorphism, that is the dual of its
 inverse, are the inverses of its eigenvalues.
-(blueprint: `p-linear-spectra`) -/
+(blueprint: `lemma-filtrations-spectra`) -/
 theorem charpoly_roots_dualMap_symm (f : V ≃ₗ[K] V) :
     (f.symm : V →ₗ[K] V).dualMap.charpoly.roots =
       (f : V →ₗ[K] V).charpoly.roots.map fun a ↦ a⁻¹ := by

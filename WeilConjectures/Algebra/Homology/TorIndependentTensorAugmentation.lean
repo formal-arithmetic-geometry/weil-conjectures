@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
 public import Mathlib.CategoryTheory.Monoidal.Tor
 import WeilConjectures.Algebra.Homology.TorIndependentScalarAugmentation
 import WeilConjectures.Algebra.Homology.MixedTensorRestrictionComparison

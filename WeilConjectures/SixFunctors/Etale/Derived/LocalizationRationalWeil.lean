@@ -19,8 +19,8 @@ immersion, `X` being of finite type over a field `k`, and let `τX : X ⟶ X`, `
 rational stage `Dᵇc(X̄, E)` with a Frobenius structure is a pair `(K, θ : R(τX)_* K ≅ K)`, an
 object of `CategoryTheory.Endofunctor.IsoAlgebra`.
 
-This file proves the Weil clause of blueprint `prop-sf-localization-all-stages` at the stage `E`,
-in this form: the direct images along `τX`, `τZ`, `τU` on `Dᵇc(-, E)` commute with `i_*` and
+This file proves the Weil clause of blueprint `lemma-local-cohomology-right-adjoint--2` at the stage
+`E`, in this form: the direct images along `τX`, `τZ`, `τU` on `Dᵇc(-, E)` commute with `i_*` and
 `Rj_*` (`AlgebraicGeometry.Etale.boundedConstructibleRationalRightDerivedLowerStarCommIso`), so
 the general results of `WeilConjectures.CategoryTheory.Triangulated.RecollementIsoAlgebra` apply:
 
@@ -77,7 +77,7 @@ noncomputable def boundedConstructibleIntegralRightDerivedLowerStarCommIso
         rightDerivedLowerStarCongr _ h ≪≫ (rightDerivedLowerStarComp _ τY f).symm))
 
 variable (I) in
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause, stage `E`): for
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause, stage `E`): for
 `f ≫ τX = τY ≫ f`, the isomorphism `Rf_* ⋙ RτX_* ≅ RτY_* ⋙ Rf_*` on `Dᵇc(-, E)`, induced by
 `AlgebraicGeometry.Etale.boundedConstructibleIntegralRightDerivedLowerStarCommIso`. -/
 noncomputable def boundedConstructibleRationalRightDerivedLowerStarCommIso
@@ -106,7 +106,7 @@ variable (I)
 /-- The isomorphism `j^* ⋙ RτU_* ≅ RτX_* ⋙ j^*` on `Dᵇc(-, E)`, whose inverse is the mate of
 `Rj_* ⋙ RτX_* ≅ RτU_* ⋙ Rj_*` along `j^* ⊣ Rj_*`
 (`CategoryTheory.Pretriangulated.Recollement.leftAdjointIso`).
-Blueprint `prop-sf-localization-all-stages` (Weil clause, stage `E`). -/
+Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause, stage `E`). -/
 noncomputable def boundedConstructibleRationalUpperStarCommIso :
     boundedConstructibleRationalUpperStar M I j ⋙
         boundedConstructibleRationalRightDerivedLowerStar M I aU τU ≅
@@ -128,7 +128,7 @@ lemma mateEquiv_boundedConstructibleRationalUpperStarCommIso_inv :
       (boundedConstructibleRationalRightDerivedLowerStarCommIso M I aX aU j τX τU hj).hom :=
   Recollement.mateEquiv_leftAdjointIso_inv _ _ _ _ _
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause, stage `E`): the adjunction
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause, stage `E`): the adjunction
 `j^* ⊣ Rj_*` on `Dᵇc(-, E)` lifts to objects with Frobenius structure (pairs
 `(K, θ : RτX_* K ≅ K)`), with the original unit and counit: the unit `K ⟶ Rj_* j^* K` is
 Frobenius-equivariant. -/
@@ -141,7 +141,7 @@ noncomputable def boundedConstructibleRationalUpperStarIsoAlgebraAdjunction :
     _ _
     (mateEquiv_boundedConstructibleRationalUpperStarCommIso_inv M I aX τX i j hij aZ aU τZ τU hi hj)
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause, stage `E`): the Frobenius
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause, stage `E`): the Frobenius
 structure `Ri^! ⋙ RτZ_* ≅ RτX_* ⋙ Ri^!` of the exceptional inverse image on `Dᵇc(-, E)`, the
 mate of the Frobenius structure of `i_*` along `i_* ⊣ Ri^!`
 (`CategoryTheory.Pretriangulated.Recollement.rightAdjointIso`). -/
@@ -158,7 +158,7 @@ noncomputable def boundedConstructibleRationalClosedUpperShriekCommIso :
     (isZero_boundedConstructibleRationalUpperStar_obj_rightDerivedLowerStar_obj M aX i j hij)
     (boundedConstructibleRationalRightDerivedLowerStar_essImage_of_isZero M aX i j hij)
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause, stage `E`): `Ri^!` carries
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause, stage `E`): `Ri^!` carries
 Frobenius structures, and the adjunction `i_* ⊣ Ri^!` on `Dᵇc(-, E)` lifts to objects with
 Frobenius structure, with the original unit and counit: the adjunction, its unit and its counit
 are Frobenius-equivariant. -/
@@ -175,7 +175,7 @@ noncomputable def boundedConstructibleRationalClosedUpperShriekIsoAlgebraAdjunct
     (isZero_boundedConstructibleRationalUpperStar_obj_rightDerivedLowerStar_obj M aX i j hij)
     (boundedConstructibleRationalRightDerivedLowerStar_essImage_of_isZero M aX i j hij)
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause, stage `E`): for an object
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause, stage `E`): for an object
 `(K, θ : RτX_* K ≅ K)` of `Dᵇc(X, E)` with Frobenius structure, the closed-support triangle
 `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1]` is Frobenius-equivariant: the Frobenius
 structures of its vertices (that of `K`, and those of `i_* Ri^! K` and `Rj_* j^* K` transported

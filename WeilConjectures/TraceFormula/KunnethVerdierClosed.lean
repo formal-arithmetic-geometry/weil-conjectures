@@ -110,7 +110,6 @@ variable {X Y Z W V : Over (Spec (.of k))}
   [IsSeparated Z.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
   [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
 
-set_option maxHeartbeats 400000 in
 -- The instantiation of the abstract chase involves large terms.
 /-- **The Künneth–Verdier pairing and closed pushforward along a cartesian square**: for a
 cartesian square `q_W ≫ g = G ≫ q_V` with `G` and `g` proper and `G` a monomorphism, where

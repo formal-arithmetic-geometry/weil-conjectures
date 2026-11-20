@@ -135,8 +135,32 @@ private theorem ordinary_homology_eq {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
 attribute [local irreducible] ordinaryIsoPullbackStalkComplexIso
   ordinaryIsoPullbackStalkHomologyIso
 
-set_option maxHeartbeats 700000 in
--- The two stalk-ring diagrams require a larger elaboration budget.
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+/-- Transport a commuting diagram with three arrows along its vertex isomorphisms. -/
+private theorem transport_three_comp_of_coherence
+    {D : Type u} [Category.{w} D]
+    {A B C Z E F A' B' C' Z' E' F' : D}
+    (c : A ≅ A') (cr : B ≅ B') (c0 : C ≅ C')
+    (ca : Z ≅ Z') (cs : E ≅ E') (ce : F ≅ F')
+    (t : A ⟶ B) (v : B ⟶ C) (s0 : C ⟶ Z)
+    (s : A ⟶ E) (u : E ⟶ F) (a : F ⟶ Z)
+    (t' : A' ⟶ B') (v' : B' ⟶ C') (s0' : C' ⟶ Z')
+    (s' : A' ⟶ E') (u' : E' ⟶ F') (a' : F' ⟶ Z')
+    (nt : t ≫ cr.hom = c.hom ≫ t')
+    (nr : v ≫ c0.hom = cr.hom ≫ v')
+    (ns0 : s0 ≫ ca.hom = c0.hom ≫ s0')
+    (ns : s ≫ cs.hom = c.hom ≫ s')
+    (na : a ≫ ca.hom = ce.hom ≫ a')
+    (nu : u' = cs.inv ≫ u ≫ ce.hom)
+    (hc : t ≫ v ≫ s0 = s ≫ u ≫ a) :
+    t' ≫ v' ≫ s0' = s' ≫ u' ≫ a' := by
+  apply (cancel_epi c.hom).mp
+  rw [← reassoc_of% nt, ← reassoc_of% nr, ← ns0, nu, ← reassoc_of% ns]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  rw [← na]
+  simpa only [Category.assoc] using congrArg (fun k ↦ k ≫ ca.hom) hc
+
 /-- The homology transport equation for supplied affine coordinate data.
 Source: Stacks Project, Tag 0098.
 (blueprint: lem-pc-affine-spectrum-tensor-coordinate-homology-pointwise).
@@ -230,36 +254,12 @@ theorem affineSpectrum_tensor_coordinate_homology_transport_pointwise
           (ordinaryIsoPullbackStalkHomologyIso j z0 i Pg).hom ≫
           F0.map (HomologicalComplex.homologyMap
             ((S0.mapHomologicalComplex (.up ℤ)).map alpha.inv) i)).hom x := by
-  dsimp only
-  intro eR eA eB eD q t h hc x
-  let z := X'.isoSpec.inv z0
-  let P0 := ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
-    (.up ℤ)).obj P
-  let Pg := ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P
-  let j := X'.isoSpec.inv
-  let S0 := RingedSpace.moduleStalkFunctor (Spec Γ(X', ⊤)).toRingedSpace z0
-  let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk z)) AddCommGrpCat.{u}
-  let F0 := forget₂ (ModuleCat.{u} ((Spec Γ(X', ⊤)).presheaf.stalk z0)) AddCommGrpCat.{u}
-  let := leftAlgebra f g' z
-  let := rightAlgebra f f' g g' sq z
-  let := (tensorMap f f' g g' sq z).toAlgebra
-  let := leftAlgebra (Spec.map f.appTop) (Spec.map g'.appTop) z0
-  let := rightAlgebra (Spec.map f.appTop) (Spec.map f'.appTop)
-    (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0
-  let := (tensorMap (Spec.map f.appTop) (Spec.map f'.appTop)
-    (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).toAlgebra
+  intro z P0 Pg j S0 F F0 alpha R0 A0 B0 D0 Q Q0 V0
+    eR eA eB eD q t h hc x
   let V := tensorComplex f f' g g' sq z P
-  let V0 := tensorComplex (Spec.map f.appTop) (Spec.map f'.appTop)
-    (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0
   let s := (tensorStalkIso f f' g g' sq z P).hom
   let s0 := (tensorStalkIso (Spec.map f.appTop) (Spec.map f'.appTop)
     (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0).hom
-  let alpha := (NatIso.mapHomologicalComplex
-    ((Scheme.Modules.tensorPullbackCompositionIso (Spec.map g'.appTop) X.isoSpec.inv
-      ((Spec.map g'.appTop) ≫ X.isoSpec.inv) rfl).symm ≪≫
-    Scheme.Modules.tensorPullbackCompositionIso j g'
-      ((Spec.map g'.appTop) ≫ X.isoSpec.inv) (Scheme.isoSpec_inv_naturality g').symm)
-    (.up ℤ)).app P
   let a := (S0.mapHomologicalComplex (.up ℤ)).map alpha.inv
   let T := ModuleCat.restrictScalars.{u} eD.toRingHom
   let Fc := F.mapHomologicalComplex (.up ℤ)
@@ -304,12 +304,11 @@ theorem affineSpectrum_tensor_coordinate_homology_transport_pointwise
       F.map (HomologicalComplex.homologyMap s i) ≫
       (ordinaryIsoPullbackStalkHomologyIso j z0 i Pg).hom ≫
       F0.map (HomologicalComplex.homologyMap a i) := by
-    apply (cancel_epi c.hom).mp
-    rw [← reassoc_of% nt, ← reassoc_of% nr, ← ns0, nu, ← reassoc_of% ns]
-    simp only [Category.assoc, Iso.hom_inv_id_assoc]
-    rw [← na]
-    simp only [← Functor.map_comp_assoc]
-    exact congrArg (fun k ↦ H.map k ≫ ca.hom) hc
+    apply transport_three_comp_of_coherence c cr c0 ca cs ce
+      (H.map (Fc.map t.hom)) (H.map v) (H.map (F0c.map s0))
+      (H.map (Fc.map s)) (H.map u) (H.map (F0c.map a))
+      _ _ _ _ _ _ nt nr ns0 ns na nu
+    simpa only [Functor.map_comp] using congrArg H.map hc
   exact congrArg (fun k ↦ k.hom x) hh
 
 

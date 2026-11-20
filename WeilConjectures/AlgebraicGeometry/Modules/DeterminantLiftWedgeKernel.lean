@@ -16,8 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.DeterminantWedgeQuotientFactor
 
 /-!
 # The wedge of lifts annihilates the quotient kernel
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
 -/
 
 @[expose] public section
@@ -27,28 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The wedge map on the sheaf of lifts annihilates the exterior quotient kernel.
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph
-(blueprint: new-determinant-lift-wedge-kernel).
-
-Proof: Sectionwise send a tensor of wedges to the concatenated wedge of the images
-under `S.f` and the second tuple. Exterior multiplication is alternating separately
-in these tuples, so the exterior-power and tensor universal properties give a linear
-map. The formula commutes with restrictions; sheafification gives `w`. The formula
-for `q` determines it on local generators, so it is the tensor of the identity with
-the exterior-power map of `S.g`. Locally trivialize `S.X₁`. Exactness identifies the
-kernel of `S.g` with the image of `S.f`. The exterior quotient has kernel generated
-by wedges with a factor from that image: algebraically exterior powers commute with
-quotients, and the relations for the quotient exterior power are precisely wedges
-containing such a factor. This description applies after sheafification, since
-finite tuples in the quotient lift locally. Every such term, after wedging with
-`r₁` first-term factors, contains `r₁ + 1` factors from a free module of rank `r₁`.
-Expand them in a local basis; each term has a repeated basis vector and vanishes by
-alternation. Hence the composite of the kernel inclusion with `w` is locally zero,
-and separatedness makes it zero globally. Degree zero in the second factor gives
-an identity quotient and zero kernel; rank zero in the first factor gives `S.f = 0`
-and `S.g` an isomorphism, with the same conclusion. -/
+/-- The wedge map on the sheaf of lifts annihilates the exterior quotient kernel. -/
 theorem determinant_liftWedge_kernel_exists {X : Scheme.{v}} (S : ShortComplex X.Modules)
     (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)
     [S.X₁.IsFiniteLocallyFreeOfRank r₁]

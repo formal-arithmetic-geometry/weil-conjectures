@@ -351,7 +351,6 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   Functor.mapDerivedCategoryFactors Functor.mapDerivedCategory DerivedCategory.Q
   integralOperationsRoosMap
 
-set_option maxHeartbeats 800000 in
 -- The fixed statement elaborates both strict section and derived-category coordinates.
 /-- Multiplication and the canonical product comparison give the same natural
 isomorphism on all strict quotient cones and after localization.

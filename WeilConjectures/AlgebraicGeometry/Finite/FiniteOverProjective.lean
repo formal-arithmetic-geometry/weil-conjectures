@@ -13,9 +13,10 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceFiniteIndexIso
 
 /-! # Finite covers of projective schemes over affine opens
 
-Source: blueprint, sec-smooth-purity, sk-prop-sf-cbc, node
-`lem-fin-finite-over-projective`, order 1601 (blueprint: lem-fin-finite-over-projective).
-The conclusion uses the node's corrected affine-local H-projective convention.
+Source: blueprint, chap-Smooth-purity, sk-prop-sf-cbc, node
+`proposition-proper-direct-image-finite-coefficients`, order 1601 (blueprint:
+proposition-proper-direct-image-finite-coefficients). The conclusion uses the node's corrected
+affine-local H-projective convention.
 -/
 
 @[expose] public section
@@ -44,8 +45,8 @@ private theorem finite_over_projective_embedding_affine {S T Y : Scheme.{u}} [Is
 
 /-- Over each affine open of a Noetherian base, a finite cover of a projective scheme
 admits a closed immersion into a finite-dimensional projective space over that open.
-Source: blueprint, sec-smooth-purity, sk-prop-sf-cbc, order 1601
-(blueprint: lem-fin-finite-over-projective).
+Source: blueprint, chap-Smooth-purity, sk-prop-sf-cbc, order 1601
+(blueprint: proposition-proper-direct-image-finite-coefficients).
 
 Proof plan:
 1. Fix an affine open U. Restrict the closed projective embedding of T and the finite

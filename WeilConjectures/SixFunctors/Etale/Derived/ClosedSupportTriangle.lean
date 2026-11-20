@@ -14,10 +14,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 Let `i : Z ⟶ X` be a closed immersion with open complement `j : U ⟶ X`, and let `Ri^!` be the
 right adjoint of the direct image `Ri_*` on the unbounded derived categories of étale sheaves of
 modules (`AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`, blueprint
-`lem-exc-closed-ambient`). This file records:
+`lemma-local-cohomology-right-adjoint--1`). This file records:
 
 * the closed-support triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1]` for every `K`
-  (blueprint `lem-exc-closed-support-triangle`), deduced from the supported localization
+  (blueprint `lemma-local-cohomology-right-adjoint--2`), deduced from the supported localization
   triangle `AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization` along
   `Ri_! ≅ Ri_*` and the uniqueness of right adjoints.
 
@@ -77,13 +77,13 @@ section Triangle
 variable {R : Type (u + 1)} [CommRing R] [Finite R] {Z U X : Scheme.{u}} (i : Z ⟶ X)
   [IsClosedImmersion i] [HasCompactification i] (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- Blueprint `lem-exc-closed-support-triangle`: Closed-support triangle before restriction.
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Closed-support triangle before restriction.
 
 Let `i : Z ⟶ X` be a closed immersion with open complement `j : U ⟶ X`, and let `Ri^!` be the
 right adjoint of the direct image `Ri_*` on the unbounded derived categories of étale sheaves of
 modules (`AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`, blueprint
-`lem-exc-closed-ambient`). For every `K` the counit of `Ri_* ⊣ Ri^!` and the unit of
-`Lj^* ⊣ Rj_*` extend to a distinguished triangle
+`lemma-local-cohomology-right-adjoint--1`). For every `K` the counit of `Ri_* ⊣ Ri^!` and the unit
+of `Lj^* ⊣ Rj_*` extend to a distinguished triangle
 ```
   i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1].
 ```

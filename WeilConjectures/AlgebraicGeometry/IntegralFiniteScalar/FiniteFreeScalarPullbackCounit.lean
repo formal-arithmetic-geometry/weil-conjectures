@@ -13,10 +13,6 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.In
 import all WeilConjectures.CategoryTheory.ModuleObjects.KFlatScalarTower.InternalKFlatScalarTowerRealizationSupplement
 
 /-! # Scalar pullback mate and representative counits
-
-Source: blueprint scalar-six direct-image proof, formal properties and finite free
-coefficient extensions.
-(blueprint: new-sfb-finite-free-scalar-pullback-counit)
 -/
 
 @[expose] public noncomputable section
@@ -44,19 +40,9 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunc
 attribute [local irreducible] betaTotalNatIso betaOrdinary betaTargetIso
   betaRestrictedCounit betaScalarCounit
 
-set_option maxHeartbeats 800000 in
 -- Compare the normalized derived mate with its ordinary unit square.
 /-- The normalized scalar-pullback mate commutes with the exact representative factors
-and the derived-to-ordinary scalar counits, on every cochain complex.
-
-Source: blueprint scalar-six direct-image proof, formal properties.
-(blueprint: new-sfb-finite-free-scalar-pullback-counit)
-
-Proof. Apply the generic mate computation to the extension/restriction adjunctions.
-Their computation counits satisfy the adjunction-unit equation. The ordinary square
-is the scalar-unit pullback square, degree by degree. Naturality of the exact
-localization factors and exact-square normalization transport it to the derived
-square. The prescribed theta normalization identifies its mate with theta. -/
+and the derived-to-ordinary scalar counits, on every cochain complex. -/
 theorem finiteFreeScalar_pullback_scalarCounit
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     {X Y : Scheme.{u}} (f : X ⟶ Y)

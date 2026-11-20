@@ -164,8 +164,8 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingRestricti
 # Canonical comparisons for strict-tower realization
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-cbc,
-Definition 1939 and the proof of thm-cbc-complete-proetale; Stacks 03DI, 09BP, 0A07
-(blueprint: def-cbc-strict-tower-realization-comparisons).
+Definition 1939 and the proof of proposition-composition-base-change-rf-shriek--4; Stacks 03DI,
+09BP, 0A07 (blueprint: def-cbc-strict-tower-realization-comparisons).
 
 All comparisons below are adjunction mates or their exact derived transports.
 The strict composite is constructed before applying either Rlim or evaluation.
@@ -383,7 +383,7 @@ private theorem cbcRealizationOrdinaryLimitMate
     (F : C ⥤ D) [PreservesLimitsOfShape ℕᵒᵖ F] :
     (mateEquiv (constLimAdj : (Functor.const ℕᵒᵖ : C ⥤ _) ⊣ lim)
       (constLimAdj : (Functor.const ℕᵒᵖ : D ⥤ _) ⊣ lim)
-      (TwoSquare.mk _ _ _ _ (Functor.compConstIso ℕᵒᵖ F).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Functor.compConstIso ℕᵒᵖ F).hom)) =
         (preservesLimitNatIso F (J := ℕᵒᵖ)).hom := by
   let aa := (constLimAdj : (Functor.const ℕᵒᵖ : C ⥤ _) ⊣ lim)
   let bb := (constLimAdj : (Functor.const ℕᵒᵖ : D ⥤ _) ⊣ lim)
@@ -395,7 +395,7 @@ private theorem cbcRealizationOrdinaryLimitMate
     (mateEquiv_counit aa bb (TwoSquare.mk _ _ _ _
       (Functor.compConstIso ℕᵒᵖ F).hom) M)
   change (mateEquiv aa bb (TwoSquare.mk _ _ _ _
-    (Functor.compConstIso ℕᵒᵖ F).hom)).natTrans.app M ≫ limit.π _ n = _ at h
+    (Functor.compConstIso ℕᵒᵖ F).hom)).app M ≫ limit.π _ n = _ at h
   change _ = 𝟙 _ ≫ F.map (limit.π M n) at h
   rw [Category.id_comp] at h
   exact h.trans (preservesLimitIso_hom_π F M n).symm
@@ -686,8 +686,8 @@ theorem cbcRealizationScalarOpenInv_isIso {U T : Scheme.{t}} (j : U ⟶ T)
   have : IsIso (adjR.counit.app
       ((cbcRealizationRes d T).obj ((cbcOpenShriek d j inferInstance).obj M))) :=
     adjR.isIso_counit_app_iff_mem_essImage.mpr (Functor.essImage.ofNatIso hR.symm ht)
-  change IsIso (((mateEquiv (cbcRealizationOpenAdj d j) adjR).symm _).natTrans.app M)
-  simp only [mateEquiv_symm_apply, TwoSquare.natTrans, NatTrans.comp_app,
+  change IsIso (((mateEquiv (cbcRealizationOpenAdj d j) adjR).symm _).app M)
+  simp only [mateEquiv_symm_apply, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,

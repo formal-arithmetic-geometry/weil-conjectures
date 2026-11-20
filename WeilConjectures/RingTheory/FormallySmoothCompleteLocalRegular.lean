@@ -84,7 +84,7 @@ Proposition 07PM, implication (4) to (1).
 Proof plan:
 1. By fs-adic-flat-geometrically-regular-closed-fibre, the map is flat and its closed fibre
    is geometrically regular. Fix a prime p of A; we must establish geometric regularity
-   and Noetherianity of its fibre, as in def-weil-pbc-g-ring.
+   and Noetherianity of its fibre, as in theorem-finite-etale-covers-proper-henselian--2.
 2. Replace A and B by A/p and B/pB using complete-local-quotient and fs-adic-base-change.
    The new base is a complete local domain with fraction field kappa(p). By tensor
    associativity, it suffices to show regularity after each finite purely inseparable

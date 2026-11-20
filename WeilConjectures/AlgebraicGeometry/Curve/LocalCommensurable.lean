@@ -22,7 +22,7 @@ are commensurable: `(f O + O) / O` is finite-dimensional, and so is `(f O + O) /
 `f ≠ 0` (`Subalgebra.finiteDimensional_sup_quotient_inf`). This is the hypothesis on the local
 rings in Tate's construction of residues.
 
-(blueprint: `det-thm-picard-duality`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section

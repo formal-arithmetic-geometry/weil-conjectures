@@ -14,8 +14,10 @@ import Mathlib.RingTheory.AdicCompletion.LocalRing
 
 /-! # CompletedMatchingRingMapTorsionKernel
 
-Source: Stacks Project, Tags 0BLH, 05ER and 05EU.
-(blueprint: lem-sbc-completed-matching-ring-map-torsion-kernel)
+## References
+
+* Stacks Project, Tags 0BLH, 05ER and 05EU
+* Stacks Project, Tag 05ER, torsion-submodule base-change kernel argument
 -/
 
 @[expose] public section
@@ -66,7 +68,6 @@ private theorem pushout_torsion_descends
     exact congrArg Subtype.val hb
 
 /-- A maximal-ideal-power torsion section on a scheme over the punctured spectrum is zero.
-Source: the localization argument in Stacks Project, Tag 05ER.
 At every point the image prime is strictly below the maximal ideal. Choose an element
 of the maximal ideal outside that prime. Its image is invertible in the stalk, while
 its nth power annihilates the section. Thus the section has zero germ everywhere,
@@ -100,27 +101,7 @@ private theorem punctured_torsion_section_zero
   change t ^ n * b = 0
   simpa only [map_pow] using hb (a ^ n) (Ideal.pow_mem_pow ha n)
 
-/-- The comparison kills no nonzero maximal-ideal-power torsion element.
-Source: Stacks Project, Tag 05ER, torsion-submodule base-change kernel argument.
-Proof: put m = maximalIdeal A, C = its completion, and B = D.matchingRing.
-The ring-pushout universal property identifies the source with C tensor_A B;
-the structural A-action in the hypothesis is its usual scalar action, and
-completedRingMap sends c tensor b to c times the second coordinate of b.
-Completion is flat and A/m to C/mC is an isomorphism. Since m is finitely
-generated, 05EC (1), formalized by Ideal.primaryComponent_baseChange_bijective,
-writes the given m-power torsion element x as 1 tensor b for an m-power
-torsion b in B. The exponent killing b need not be the supplied exponent n.
-The kernel hypothesis says the completed coordinate of b is zero.
-Choose generators f_i of m. The opens D(f_i) cover U; their inverse images
-in Y are affine because q is finite. Restrict the punctured coordinate of b
-to each such inverse image. Some power of f_i kills this restriction, while
-f_i is invertible there, so every restriction is zero. The sheaf's separatedness
-on this cover makes the punctured coordinate zero. The ring pullback defining
-B has jointly injective projections, so b = 0 and hence x = 0.
-If U is empty, Y is empty and its ring of sections is zero; only the completed
-coordinate is needed. For n = 0 the hypothesis already gives x = 0 by a = 1.
-Zero component rings obey the same calculations.
-(blueprint: lem-sbc-completed-matching-ring-map-torsion-kernel) -/
+/-- The comparison kills no nonzero maximal-ideal-power torsion element. -/
 theorem completedRingMap_torsion_kernel_zero
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

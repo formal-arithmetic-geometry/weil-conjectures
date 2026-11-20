@@ -36,11 +36,11 @@ Source: Bhatt--Scholze, Proposition 6.8.4(6), Definition 6.8.3
 (auxiliary; not a blueprint node).
 
 Proof plan:
-1. Apply `lem-weil-pbc-lattice-sheaf-locally-constant` to the isomorphism classes of
+1. Apply `lemma-lattices-lisse-e-sheaves--2` to the isomorphism classes of
    integral lattices with scalar-extension isomorphism. On each trivializing pro-etale
    member of rank n this is the constant sheaf GL_n(E)/GL_n(A). The identity coset gives
    a local section, also for n = 0.
-2. Apply `lem-weil-pbc-proetale-locally-classical-etale-cover` to descend inhabitedness
+2. Apply `lemma-lattices-lisse-e-sheaves--2` to descend inhabitedness
    to an etale covering. No compatibility among its sections is required.
 3. Choose lattice representatives on the members. Their defining isomorphisms are the
    required scalar-extension isomorphisms. Slice-site restriction is inverse image with

@@ -102,7 +102,7 @@ Source: Stacks Project, Morphisms, Lemma 05JU and Definition 05JV, with Lemma 01
 
 Proof (the node's seven steps):
 1. The rule on arbitrary opens is an ideal, stable under restriction, and membership is
-   local by the sheaf property (def-weil-sheaf-of-modules-category); hence it is an ideal sheaf.
+   local by the sheaf property (situation-conventions); hence it is an ideal sheaf.
 2. On an affine open it equals the annihilator of sections: use the principal-open basis
    (lem-weil-pbc-affine-open-spec-points, def-weil-affine-spectrum,
    lem-weil-pbc-affine-ideals-closed-subscheme) and the quasi-coherent section base-change

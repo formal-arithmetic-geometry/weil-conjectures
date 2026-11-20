@@ -33,6 +33,30 @@ attribute [local instance 20000] sheafBraidedCategory
 attribute [local instance 30000] CondensedRing.monoidal_upperStar
 attribute [local irreducible] Mod.monoidalClosed
 
+-- Check monoidal coherence without unfolding the concrete coefficient functors.
+private theorem canonical_monoidal_inverse_exchange
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E] [MonoidalCategory F]
+    (NX : C ≌ D) (NY : E ≌ F)
+    [NX.functor.Monoidal] [NX.inverse.Monoidal] [NX.IsMonoidal]
+    [NY.functor.Monoidal] [NY.inverse.Monoidal] [NY.IsMonoidal]
+    (R : C ⥤ E) (S : D ⥤ F) [R.LaxMonoidal] [S.LaxMonoidal]
+    (i : R ⋙ NY.functor ≅ NX.functor ⋙ S) [NatTrans.IsMonoidal i.hom] :
+    NatTrans.IsMonoidal (Iso.inverseCompIso (G := NX)
+      (Iso.isoCompInverse (H := NY) i ≪≫ Functor.associator _ _ _)).hom := by
+  let k : R ≅ NX.functor ⋙ S ⋙ NY.inverse :=
+    Iso.isoCompInverse (H := NY) i ≪≫ Functor.associator _ _ _
+  have : NatTrans.IsMonoidal k.hom := by
+    dsimp only [k, Iso.isoCompInverse]
+    simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
+      Functor.isoWhiskerRight_hom]
+    infer_instance
+  change NatTrans.IsMonoidal (Iso.inverseCompIso (G := NX) k).hom
+  dsimp only [Iso.inverseCompIso]
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom]
+  infer_instance
+
 variable (A : Type) [CommRing A]
 
 private theorem canonicalFixed_tensor_pure (T : Scheme.{u})
@@ -68,9 +92,7 @@ private theorem canonicalFixed_push_pure {X Y : Scheme.{u}} (p : X ⟶ Y)
       (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X) M N V)
 
 
-set_option synthInstance.maxHeartbeats 0 in
 -- The composite adjunctions require large monoidal instance arguments.
-set_option maxHeartbeats 0 in
 -- The two composite adjunctions carry large monoidal structures.
 /-- The adjoint-normalized finite coefficient pullback comparison is monoidal
 for the section-normalized tensor structures.
@@ -144,17 +166,9 @@ theorem canonicalFiniteCoefficientPullTensor
     lowerStarFiniteCoefficientModEquivalenceIso f A
   have : NatTrans.IsMonoidal i.hom := hi
   let k := Iso.isoCompInverse (H := NY) i ≪≫ Functor.associator _ _ _
-  have hk : NatTrans.IsMonoidal k.hom := by
-    dsimp only [k, Iso.isoCompInverse]
-    simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
-      Functor.isoWhiskerRight_hom]
-    infer_instance
   let kr := Iso.inverseCompIso (G := NX) k
-  have : NatTrans.IsMonoidal kr.hom := by
-    dsimp only [kr, Iso.inverseCompIso]
-    simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
-      Functor.isoWhiskerRight_hom]
-    infer_instance
+  have : NatTrans.IsMonoidal kr.hom :=
+    canonical_monoidal_inverse_exchange NX NY _ _ i
   let a := NY.toAdjunction.comp
     (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} A)) f)
   let b := aI.comp NX.toAdjunction

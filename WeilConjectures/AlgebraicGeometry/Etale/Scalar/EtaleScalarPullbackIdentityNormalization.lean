@@ -99,7 +99,7 @@ with ordinary formulas from Tag 03D8 and derived normalization from Tag 0D6D.
 Proof: (1) Resolve each complex by a flat-term K-flat complex using
 lem-pc-kflat-resolution. Geometric pullback and scalar extension are computed on these
 models by lem-weil-pbc-ringed-topoi-derived-tensor-pullback and
-prop-weil-pbc-inverse-image-modules-exact, with their specified counits.
+situation-conventions, with their specified counits.
 (2) Write I_R for ordinary identity module pullback and F for scalar extension.
 The ordinary identity map h_R sends m tensor r to rm, and the compositor d_R sends
 m tensor r to (m tensor 1) tensor r. Thus h_R I_R(h_R) d_R = h_R.

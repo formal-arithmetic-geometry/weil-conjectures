@@ -10,7 +10,7 @@ public import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLine
 
 /-! # Normalization of a common ordinary twist/scalar model
 
-Source: blueprint `prop-weil-twist-preserves`, final integral/common-stage sentence.
+Source: blueprint `definition-tate-twists--10`, final integral/common-stage sentence.
 -/
 
 @[expose] public noncomputable section

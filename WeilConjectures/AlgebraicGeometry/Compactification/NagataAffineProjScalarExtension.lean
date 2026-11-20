@@ -30,8 +30,8 @@ namespace AlgebraicGeometry
 Source: Stacks Project, Tags 01N2 and 01MY (blueprint: lem-nagata-affine-proj-scalar-extension).
 Proof: the graded scalar-extension condition expresses every positive-degree element of B
 as a finite S-linear combination of images of homogeneous elements of A. These images generate
-the irrelevant ideal, so their standard opens cover (def-nagata-affine-proj). On each such open,
-lem-nagata-homogeneous-localization-scalar-extension and
+the irrelevant ideal, so their standard opens cover (definition-admissible-blow-up--1). On each such
+open, lem-nagata-homogeneous-localization-scalar-extension and
 lem-weil-pbc-fibre-product-affine-spectra identify the chart with the affine fibre product.
 The projection is induced by Away.map, whose fraction formula is Away.map_mk.
 On intersections, lem-weil-pbc-proj-basic-open-intersection and

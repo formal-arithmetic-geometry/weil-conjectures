@@ -44,11 +44,22 @@ private theorem dualProjection_id_first
     (G.map (𝟙 A).op).app M ≫ (G.obj (op A)).map f = (G.obj (op A)).map f := by
   rw [op_id, CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp]
 
+private theorem dualProjection_comp_transport
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {A B E : C} {H K N V W : D}
+    (p : A ⟶ B) (s : B ⟶ E)
+    (b : F.obj A ⟶ H) (a : H ⟶ K) (π : H ⟶ N) (π' : K ⟶ V)
+    (e : F.obj B ⟶ N) (e' : F.obj E ⟶ W)
+    (f : N ⟶ V) (t : V ⟶ W) (g : N ⟶ W)
+    (hb : b ≫ π = F.map p ≫ e) (ha : a ≫ π' = π ≫ f)
+    (he : F.map s ≫ e' = e ≫ g) (hf : f ≫ t = g) :
+    (b ≫ a) ≫ π' ≫ t = F.map (p ≫ s) ≫ e' := by
+  rw [Category.assoc, ← Category.assoc a, ha, Category.assoc π, hf,
+    ← Category.assoc, hb, Category.assoc, ← he, ← Category.assoc, ← F.map_comp]
+
 attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
   Scheme.Modules.overEquivFunctorObjUnitIso HomologicalComplex.singleMapHomologicalComplex
 
-set_option maxHeartbeats 600000 in
--- The dependent Hom projections need extra elaboration steps on the concrete open site.
 set_option linter.unusedVariables false in
 /-- The inverse transported dual comparison recovers the unit-valued projection.
 Source: Stacks Project, Tags 0A8X and 08DL, product projections and open restriction.
@@ -168,25 +179,21 @@ theorem ordinaryEvaluation_over_dual_projection (X : Scheme.{u}) (U : X.Opens)
     change ((b M).hom.f q ≫
       (((homComplexFunctor (R := U.toScheme.sheaf)).obj (op (T.obj P))).map a.hom).f q) ≫
         π (T.obj P) O q r 0 h ≫ _ = _
-    rw [Category.assoc, ← Category.assoc _ (π (T.obj P) O q r 0 h), hn']
-    simp only [Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
-      Category.id_comp, ha]
-    rw [← Category.assoc, hπ M q r 0 h]
-    rw [CategoryTheory.Functor.map_comp]
-    simp only [Category.assoc]
-    rw [← Category.assoc
-      (L.map (SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r)) s.hom))
-      (e (P.X r) (𝟙_ (localEvaluationModules X U))).hom,
-      he _ _ _ _ (𝟙 (P.X r)) s.hom]
-    simp only [Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
-      CategoryTheory.Functor.map_id, Category.id_comp]
-    rfl
-  change d.inv.f q ≫ _ = π (T.obj P) O q r 0 h ≫
-    SheafOfModules.homObjMap (R := U.toScheme.sheaf) (𝟙 ((T.obj P).X r)) t.hom
-  rw [← hd, ← Category.assoc, ← Category.assoc]
-  have hi := congrArg (fun f ↦ f.f q) d.inv_hom_id
-  simp only [HomologicalComplex.comp_f, HomologicalComplex.id_f] at hi
-  rw [hi, Category.id_comp]
+    refine dualProjection_comp_transport L
+      (localEvaluationProjection X U P M q r 0 h)
+      (SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r)) s.hom)
+      _ _ _ _ _ _ _ _
+      (SheafOfModules.homObjMap (R := U.toScheme.sheaf) (L.map (𝟙 (P.X r)))
+        (L.map s.hom) ≫
+        SheafOfModules.homObjMap (R := U.toScheme.sheaf) (𝟙 (L.obj (P.X r))) z.inv)
+      (hπ M q r 0 h) hn' ?_ ?_
+    · exact (Category.assoc _ _ _).symm.trans ((congrArg (fun f ↦ f ≫
+        SheafOfModules.homObjMap (R := U.toScheme.sheaf) (𝟙 (L.obj (P.X r))) z.inv)
+        (he _ _ _ _ (𝟙 (P.X r)) s.hom)).trans (Category.assoc _ _ _))
+    · simp only [SheafOfModules.homObjMap_comp_homObjMap,
+        CategoryTheory.Functor.map_id, Category.id_comp, ha]
+      rfl
+  exact (Iso.inv_comp_eq ((HomologicalComplex.eval _ _ q).mapIso d)).2 hd.symm
 
 
 end AlgebraicGeometry

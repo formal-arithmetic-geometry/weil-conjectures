@@ -262,7 +262,6 @@ private def derivedLineComparison
   (nativeSingle (coefficient l c).X f).app (line l c S) ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso (lineComparison l c f)
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the canonical derived comparison with the module instance caches folded.
 private theorem derivedLineComparison_comp
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -301,7 +300,6 @@ private theorem derivedLineComparison_hom
 
 attribute [local irreducible] derivedLineComparison
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the canonical derived comparison with the module instance caches folded.
 private theorem shiftedLineComparison_comp
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -337,28 +335,8 @@ private theorem shiftedLineComparison_congr
   subst g
   simp only [eqToHom_refl, Category.id_comp]
 
-set_option maxHeartbeats 800000 in
 -- Keep the fixed coefficient and the canonical section maps folded.
-/-- Pulling the fixed Tate comparison back to the diagonal gives the canonical section.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, Cartesian coefficient restriction.
-(blueprint: lem-sfb-rational-tate-section).
-Proof: the finite root inverse-image maps commute with composition and with
-identity inverse image, as is seen on each root section. Tensor with the
-coefficient map. The finite projections jointly detect maps into the integral
-limit, so the same composition and identity equations hold for the integral
-comparison. Precompose the rational equation with the scalar-extension quotient;
-its epimorphism property and rational_scalar give the rational composition and
-identity equations. The closure equation follows after every finite-field
-coprojection, using qbar_coprojection and the colimit universal property.
-The extension-of-scalars adjunction and the uniqueness in linePull_existsUnique
-transfer these equations to the linear comparisons lineComparison. Apply the
-single functor and its canonical derived-pullback comparison. Finally apply
-shift by two and naturality of the shift/composition comparisons. Since
-Delta followed by f is identity, the resulting composite is pullSectionIso
-on the shifted single Tate object. No arbitrary derived object is involved.
-The argument remains valid for the empty scheme and either coefficient index. -/
+/-- Pulling the fixed Tate comparison back to the diagonal gives the canonical section. -/
 theorem shiftedLineComparison_section
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u})

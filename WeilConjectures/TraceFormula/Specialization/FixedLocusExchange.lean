@@ -21,7 +21,7 @@ Rd'_! Lι'^* Ψ_C Rι_* ≅ LΔ'^* Rc'_! Ψ_C Rι_* --ν_c--> LΔ'^* Ψ_{X×X} R
   --α_Δ--> Ψ_X LΔ^* Rc_! Rι_* ≅ Ψ_X Rd_! Lι^* Rι_* --ε--> Ψ_X Rd_!
 ```
 with `α_Δ` the mate of `χ_Δ` and the base change isomorphisms of the fixed squares. This is the
-`ν`-form of blueprint `sk-lem-tf-nearby-mate-coherences` (6), proved first for arbitrary
+`ν`-form of blueprint `sec-Base-change-for-nearby-cycles` (6), proved first for arbitrary
 adjunctions (`CategoryTheory.mateEquiv_symm_eq_fixedSquareCompactSupportExchange`).
 
 ## Main statements
@@ -75,7 +75,7 @@ def fixedSquareCompactSupportExchange : (ιS ⋙ ΨC ⋙ ιU') ⋙ dL' ⟶ dL �
 
 
 /-- **The compact-support exchange of the fixed locus** (the `ν`-form of blueprint
-`sk-lem-tf-nearby-mate-coherences` (6)): if `β_d` is `ι'^*` of
+`sec-Base-change-for-nearby-cycles` (6)): if `β_d` is `ι'^*` of
 `B' ∘ c'^!(χ_Δ) ∘ β_c(Δ_*) ∘ Ψ_C(B⁻¹)` followed by the counit of `ι'^* ⊣ ι'_*`, where `β_c`,
 `χ_Δ` are the mates of `ν_c`, `α_Δ` and `B`, `B'` the conjugates of `BC⁻¹`, `BC'⁻¹`, then the
 mate `ν_d` of `β_d` is `fixedSquareCompactSupportExchange`, that is,

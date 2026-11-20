@@ -31,7 +31,6 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCateg
   nativeRingedAssociatorComplex nativeRingedTripleLeft nativeRingedTripleRight
   SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 800000 in
 -- Keep the concrete total and localization constructions folded when applying naturality.
 /-- The signed chain associator square commutes after exact forgetting and localization.
 Source: Stacks 0FPQ, 06YU, 0FPT

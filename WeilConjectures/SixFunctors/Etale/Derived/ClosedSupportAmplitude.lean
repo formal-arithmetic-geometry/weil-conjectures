@@ -18,7 +18,7 @@ homology in `[a, b]` to complexes with homology in `[a, b + c + 1]`
 (`AlgebraicGeometry.Etale.homologyConcentratedIn_rightDerivedUpperShriek`), and under the full
 open-complement condition `D_c^{[a, b]}(T, Λ)` into `D_c^{[a, b + c + 1]}(Z, Λ)`
 (`AlgebraicGeometry.Etale.constructibleIn_rightDerivedUpperShriek`). Together these are blueprint
-`lem-exc-closed-amplitude`.
+`theorem-f-shriek-finite-coefficients--1`.
 
 The proof uses the supported localization triangle
 `Ri_! Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (Ri_! Ri^! K)[1]`
@@ -109,7 +109,7 @@ lemma homologyConcentratedIn_rightDerivedLowerShriek_rightDerivedUpperShriek {c 
     _root_.DerivedCategory.TStructure.t.isLE₂ _ hT (b + c + 1) h₁' h₃'⟩
 
 include hij in
-/-- Blueprint `lem-exc-closed-amplitude`: Closed-support amplitude.
+/-- Blueprint `theorem-f-shriek-finite-coefficients--1`: Closed-support amplitude.
 
 Let `i : Z ⟶ T` be a closed immersion with open complement `j : U ⟶ T`, and `Λ` a finite ring.
 Suppose that `R^q j_* M = 0` for every sheaf `M` of `Λ`-modules on `U_ét` and every `q > c`. Then
@@ -171,7 +171,8 @@ lemma boundedConstructible_rightDerivedLowerShriek_rightDerivedUpperShriek {c : 
     (supportedLocalizationTriangle_mem_distTriang Λ i j hij K) hK hC
 
 include hij in
-/-- Blueprint `lem-exc-closed-amplitude`: Closed-support amplitude, constructible version.
+/-- Blueprint `theorem-f-shriek-finite-coefficients--1`: Closed-support amplitude, constructible
+version.
 
 Let `i : Z ⟶ T` be a closed immersion with open complement `j : U ⟶ T`, and `Λ` a finite ring.
 If `(U, T)` satisfies the open-complement condition with constant `c`

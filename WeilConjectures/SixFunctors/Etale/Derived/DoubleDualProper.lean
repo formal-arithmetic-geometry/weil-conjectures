@@ -12,9 +12,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 /-!
 # The double-dual morphism under a proper push-forward
 
-This file proves blueprint `lem-weil-delta-proper-pushforward`. For a proper `f : X ⟶ Y`, the
-morphism `Rf_* δ_K` is identified with `δ_{Rf_* K}`; in particular one is an isomorphism if and
-only if the other is.
+This file proves blueprint `lemma-internal-adjunction-two-exchange-formulas--4`. For a proper
+`f : X ⟶ Y`, the morphism `Rf_* δ_K` is identified with `δ_{Rf_* K}`; in particular one is an
+isomorphism if and only if the other is.
 
 ## Main statements
 
@@ -28,8 +28,8 @@ only if the other is.
   `G δ_M ≅ δ_{G M}` as arrows (`CategoryTheory.MonoidalClosed.mapToIhomIhomArrowIso`).
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff`,
   `AlgebraicGeometry.Etale.nonempty_arrowIso_rightDerivedLowerStar_map_verdierDualDoubleDual`
-  (`lem-weil-delta-proper-pushforward`, general coefficients): for proper `f`, given the
-  braided axiom for `Lf^*`, the projection formula for `Rf_*` and `Rf^! ω_Y ≅ ω_X`,
+  (`lemma-internal-adjunction-two-exchange-formulas--4`, general coefficients): for proper `f`,
+  given the braided axiom for `Lf^*`, the projection formula for `Rf_*` and `Rf^! ω_Y ≅ ω_X`,
   `Rf_* δ_K ≅ δ_{Rf_* K}`.
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff_of_finite`:
   the case of a finite coefficient ring, where the projection formula and `Rf^! ω_Y ≅ ω_X` are
@@ -61,9 +61,9 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
   [BraidedCategory C] [BraidedCategory D] {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
   [F.OplaxMonoidal]
 
-/-- Blueprint `lem-weil-delta-proper-pushforward` (auxiliary): the right adjoint of an oplax
-monoidal functor compatible with the braidings is lax braided, for the lax monoidal structure
-`CategoryTheory.Adjunction.rightAdjointLaxMonoidal`. -/
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4` (auxiliary): the right adjoint of
+an oplax monoidal functor compatible with the braidings is lax braided, for the lax monoidal
+structure `CategoryTheory.Adjunction.rightAdjointLaxMonoidal`. -/
 @[instance_reducible]
 def rightAdjointLaxBraidedOfδ
     (h : ∀ X Y : C, F.map (β_ X Y).hom ≫ δ F Y X = δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom) :
@@ -78,7 +78,7 @@ def rightAdjointLaxBraidedOfδ
 variable [MonoidalClosed C] [MonoidalClosed D]
 
 omit [BraidedCategory C] [BraidedCategory D] [MonoidalClosed C] [MonoidalClosed D] in
-/-- Blueprint `lem-weil-delta-proper-pushforward` (auxiliary): the projection map
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4` (auxiliary): the projection map
 `G M ⊗ T ⟶ G (M ⊗ F T)` built from the lax monoidal structure of the right adjoint `G` is the
 transpose of `δ ≫ ε ▷ F T`, the form of `CategoryTheory.Adjunction.rightAdjointProjectionMap`. -/
 lemma whiskerLeft_unit_comp_rightAdjointLaxMonoidal_μ (M : D) (T : C) :
@@ -96,8 +96,8 @@ lemma whiskerLeft_unit_comp_rightAdjointLaxMonoidal_μ (M : D) (T : C) :
   rw [tensorHom_def', ← MonoidalCategory.whiskerLeft_comp_assoc,
     Adjunction.left_triangle_components, MonoidalCategory.whiskerLeft_id, Category.id_comp]
 
-/-- Blueprint `lem-weil-delta-proper-pushforward`: let `F ⊣ G` with `F` oplax monoidal and
-compatible with the braidings, let `G ⊣ Q'` and `e : W ≅ Q' W'`. If the projection maps
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4`: let `F ⊣ G` with `F` oplax
+monoidal and compatible with the braidings, let `G ⊣ Q'` and `e : W ≅ Q' W'`. If the projection maps
 `G M ⊗ T ⟶ G (M ⊗ F T)` are isomorphisms, the dual comparison
 `G [M, W] ⟶ [G M, G W] ⟶ [G M, W']` (through `G e` and the counit of `G ⊣ Q'`) is an isomorphism.
 Under the adjunctions `F ⊣ G`, `M ⊗ - ⊣ [M, -]` and `G ⊣ Q'`, composing with it is precomposition
@@ -145,9 +145,9 @@ theorem isIso_dualComparison_of_isIso_projection
   rw [hfun]
   exact E.bijective
 
-/-- Blueprint `lem-weil-delta-proper-pushforward` (formal core): under the hypotheses of
-`CategoryTheory.Adjunction.isIso_dualComparison_of_isIso_projection`, `G δ_M` is an isomorphism
-if and only if `δ_{G M}` (relative to `W'`) is. -/
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4` (formal core): under the
+hypotheses of `CategoryTheory.Adjunction.isIso_dualComparison_of_isIso_projection`, `G δ_M` is an
+isomorphism if and only if `δ_{G M}` (relative to `W'`) is. -/
 theorem isIso_map_toIhomIhom_iff_of_isIso_projection
     (h : ∀ X Y : C, F.map (β_ X Y).hom ≫ δ F Y X = δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom)
     {Q' : C ⥤ D} (q : G ⊣ Q') {W : D} {W' : C} (e : W ≅ Q'.obj W') (M : D)
@@ -160,9 +160,9 @@ theorem isIso_map_toIhomIhom_iff_of_isIso_projection
     (hπ ((ihom M).obj W))
   exact isIso_map_toIhomIhom_iff G (G.map e.hom ≫ q.counit.app W') M
 
-/-- Blueprint `lem-weil-delta-proper-pushforward` (formal core): under the hypotheses of
-`CategoryTheory.Adjunction.isIso_dualComparison_of_isIso_projection`, `G δ_M` and `δ_{G M}` are
-isomorphic arrows. -/
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4` (formal core): under the
+hypotheses of `CategoryTheory.Adjunction.isIso_dualComparison_of_isIso_projection`, `G δ_M` and
+`δ_{G M}` are isomorphic arrows. -/
 theorem nonempty_arrowIso_map_toIhomIhom_of_isIso_projection
     (h : ∀ X Y : C, F.map (β_ X Y).hom ≫ δ F Y X = δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom)
     {Q' : C ⥤ D} (q : G ⊣ Q') {W : D} {W' : C} (e : W ≅ Q'.obj W') (M : D)
@@ -195,10 +195,10 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
-/-- Blueprint `lem-weil-delta-proper-pushforward`: for a proper `f : X ⟶ Y`, `Rf_* δ_K` is an
-isomorphism if and only if `δ_{Rf_* K}` is. The hypotheses are the braided axiom for `Lf^*`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarBraided`), the projection formula for `Rf_*`, and
-`Rf^! ω_Y ≅ ω_X`. -/
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4`: for a proper `f : X ⟶ Y`,
+`Rf_* δ_K` is an isomorphism if and only if `δ_{Rf_* K}` is. The hypotheses are the braided axiom
+for `Lf^*` (`AlgebraicGeometry.Etale.leftDerivedUpperStarBraided`), the projection formula for
+`Rf_*`, and `Rf^! ω_Y ≅ ω_X`. -/
 theorem isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff
     (hbr : LeftDerivedUpperStarBraided (ModuleCat.{u + 1} Λ) f)
     [IsIso (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f)]
@@ -228,8 +228,8 @@ theorem isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff
   rw [verdierDualDoubleDual_app, verdierDualDoubleDual_app]
   exact p.isIso_map_toIhomIhom_iff_of_isIso_projection h q γ.symm K hπ
 
-/-- Blueprint `lem-weil-delta-proper-pushforward`: for a proper `f : X ⟶ Y`, under the
-hypotheses of
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4`: for a proper `f : X ⟶ Y`, under
+the hypotheses of
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff`,
 `Rf_* δ_K` and `δ_{Rf_* K}` are isomorphic arrows, through the canonical comparison
 `Rf_* 𝔻_X ⟶ 𝔻_Y Rf_*`. -/
@@ -270,8 +270,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y S : Scheme.{u}} (aY 
   (f : X ⟶ Y) [IsProper f] [HasCompactification f] [HasCompactification aY]
   [HasCompactification (f ≫ aY)]
 
-/-- Blueprint `lem-weil-delta-proper-pushforward`: for a proper `f : X ⟶ Y` and a finite ring
-`Λ`, given the braided axiom for `Lf^*`, `Rf_* δ_K` is an isomorphism if and only if
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4`: for a proper `f : X ⟶ Y` and a
+finite ring `Λ`, given the braided axiom for `Lf^*`, `Rf_* δ_K` is an isomorphism if and only if
 `δ_{Rf_* K}` is. In particular, if `δ_{Rf_* K}` is an isomorphism then so is `Rf_* δ_K`. -/
 theorem isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff_of_finite
     (hbr : LeftDerivedUpperStarBraided (ModuleCat.{u + 1} Λ) f)

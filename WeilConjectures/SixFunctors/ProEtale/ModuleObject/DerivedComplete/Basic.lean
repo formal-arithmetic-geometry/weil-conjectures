@@ -108,8 +108,9 @@ theorem derivedCompleteIntegers_shift {X : Scheme.{u}}
 
 omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- **Derived Nakayama for morphisms**: a morphism of derived complete complexes whose first
-derived reduction is an isomorphism is an isomorphism (blueprint `sk-lem-pe-derived-nakayama`):
-its cone is derived complete, with vanishing first derived reduction. -/
+derived reduction is an isomorphism is an isomorphism (blueprint
+`lemma-reduction-derived-nakayama`): its cone is derived complete, with vanishing first derived
+reduction. -/
 theorem isIso_of_derivedCompleteIntegers_of_isIso_derivedReduction_map {X : Scheme.{u}}
     {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))} (φ : K ⟶ L)

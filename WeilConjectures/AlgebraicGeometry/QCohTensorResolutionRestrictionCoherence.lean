@@ -48,7 +48,6 @@ theorem tensorResolution_presheaf_map_tmul {X : Scheme.{u}} (F G : X.Modules)
     tmulSection (F.presheaf.map i s) (G.presheaf.map i t) at ht
   exact ht
 
-set_option maxHeartbeats 400000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- The normalized tensor restriction comparisons respect successive affine restrictions. -/
 theorem tensorResolutionChartRestriction_tensor_inv (Y : Scheme.{u})
@@ -72,9 +71,16 @@ theorem tensorResolutionChartRestriction_tensor_inv (Y : Scheme.{u})
   erw [tensorResolutionRestrictionTensor_inv_tmul
     (Spec.map (Y.presheaf.map (homOfLE h).op))
     (F.restrict U.2.fromSpec) (G.restrict U.2.fromSpec) W s t]
+  -- Identify sections explicitly instead of comparing the nested restriction functors.
   erw [tensorResolutionRestrictionTensor_inv_tmul U.2.fromSpec F G
-    ((Spec.map (Y.presheaf.map (homOfLE h).op)) ''ᵁ W) s t]
-  erw [tensorResolution_presheaf_map_tmul F G, tensorResolution_presheaf_map_tmul F G]
+    ((Spec.map (Y.presheaf.map (homOfLE h).op)) ''ᵁ W)
+    (((F.restrict U.2.fromSpec).restrictAppIso
+      (Spec.map (Y.presheaf.map (homOfLE h).op)) W).hom s)
+    (((G.restrict U.2.fromSpec).restrictAppIso
+      (Spec.map (Y.presheaf.map (homOfLE h).op)) W).hom t)]
+  -- Only the right side contains presheaf maps applied to pure tensors.
+  conv_rhs =>
+    erw [tensorResolution_presheaf_map_tmul F G, tensorResolution_presheaf_map_tmul F G]
   rfl
 
 end AlgebraicGeometry

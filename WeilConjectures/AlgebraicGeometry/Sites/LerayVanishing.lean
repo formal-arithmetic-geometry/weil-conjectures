@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 
 For a morphism of schemes `f : X ⟶ Y` and an abelian étale sheaf `F` on `X`, the Leray spectral
 sequence `Hᵖ(Y, Rᵠf_* F) ⟹ Hᵖ⁺ᵠ(X, F)` (the Grothendieck spectral sequence of
-`f_*` followed by the global sections on `Y`, blueprint `thm-sp-grothendieck`) shows: if
+`f_*` followed by the global sections on `Y`) shows: if
 `Rᵠf_* F = 0` for `q > e` and `Hᵖ(Y, Rᵠf_* F) = 0` for `p > c`, then `Hⁿ(X, F) = 0` for
 `n > c + e` (`AlgebraicGeometry.Etale.subsingleton_H_of_rightDerived_lowerStar`).
 -/
@@ -39,8 +39,7 @@ lemma subsingleton_H_iff_isZero_rightDerived_Γ {X : Scheme.{u}}
 
 /-- **Leray vanishing.** Let `f : X ⟶ Y` be a morphism of schemes and `F` an abelian étale sheaf
 on `X`. If `Rᵠf_* F = 0` for `q > e` and `Hᵖ(Y, Rᵠf_* F) = 0` for every `q` and `p > c`, then
-`Hⁿ(X, F) = 0` for `n > c + e`. This follows from the Leray spectral sequence
-`Hᵖ(Y, Rᵠf_* F) ⟹ Hᵖ⁺ᵠ(X, F)`. -/
+`Hⁿ(X, F) = 0` for `n > c + e`. -/
 theorem subsingleton_H_of_rightDerived_lowerStar {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) {c e : ℕ}
     (hf : ∀ q : ℕ, e < q →

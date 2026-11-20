@@ -153,7 +153,7 @@ theorem isSplitMono_map_exchangeRight_app_of_isSplitMono_pullbackExchange_app (�
     (pullbackSquareComparison Λ φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     _ ((baseChangeMap_eq_exchangeRight Λ φ.commSq_j).symm.trans
       (φ.baseChangeMap_commSq_j_eq_mateEquiv Λ))
     (pullbackSquareComparison Λ φ.commSq_ε).hom (φ.pullbackExchange Λ) rfl K hK
@@ -171,7 +171,7 @@ theorem isSplitMono_pullbackExchange_app_of_toGeneric (φ : M.Hom N f f')
   isSplitMono_pullbackExchange_app_of_toGeneric_aux (pullbackSquareComparison Λ φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     (pullbackSquareComparison Λ φ.commSq_ε).hom
     (pullbackSquareComparison Λ φ.toGeneric.commSq_ε).hom (leftDerivedUpperStarId Λ N.generic)
     (φ.pullbackExchange Λ) rfl (φ.toGeneric.pullbackExchange Λ) rfl K h

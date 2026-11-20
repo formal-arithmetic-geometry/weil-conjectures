@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
 # Étale hypercovers without finiteness or splitting
 
 Source: Stacks Project, Hypercoverings, Definition 01G5 and Lemma 01GI;
-matching schemes as in blueprint `def-weil-pbc-finite-split-hypercover`.
+matching schemes as in blueprint `corollary-cohomology-pro-etale-affine`.
 (auxiliary; not a blueprint node)
 -/
 
@@ -31,7 +31,7 @@ At degree zero the diagram is empty and its limit is `X`; at degree one it is th
 product of the two vertices. Morphisms in `X.Etale` are automatically étale, so the
 covering condition is precisely surjectivity of the underlying matching arrow.
 Source: Stacks Project, Hypercoverings, Definition 01G5, and the matching-scheme clause
-of blueprint `def-weil-pbc-finite-split-hypercover`.
+of blueprint `corollary-cohomology-pro-etale-affine`.
 (auxiliary; not a blueprint node) -/
 def IsEtaleHypercover {X : Scheme.{u}} (U : SimplicialObject X.Etale) : Prop :=
   ∀ n : ℕ, ∃ (M : X.Etale)

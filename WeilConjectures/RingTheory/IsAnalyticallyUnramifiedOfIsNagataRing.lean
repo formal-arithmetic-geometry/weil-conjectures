@@ -8,6 +8,10 @@ module
 
 public import WeilConjectures.RingTheory.NagataRing
 public import WeilConjectures.RingTheory.AnalyticallyUnramified
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import WeilConjectures.RingTheory.AdicCompletionRingEquiv
@@ -184,13 +188,14 @@ quotient by $(0)$ is N-2 [def-weil-pbc-nagata-ring], so $S$ is a finite $A$-modu
 japanese-domain]. It is a normal domain with fraction field $K$ [lem-weil-pbc-integral-closure-
 finite-extension-normal], and is Nagata [lem-weil-pbc-finite-over-nagata-nagata]. Finiteness makes
 $S$ Noetherian [lem-weil-pbc-finite-algebra-noetherian] and integral over $A$ [lem-weil-pbc-
-finite-algebra-is-integral], so $\dim S\le d$ [lem-weil-pbc-integral-extension-dimension]. The
-finite fibre $S/\mathfrak mS$ has finitely many maximal ideals by [lem-weil-pbc-finite-over-zero-
-dim-local-discrete-spectrum]; their preimages are exactly the finitely many maximal ideals
-$\mathfrak n_1,\ldots,\mathfrak n_r$ of $S$, since each contracts to $\mathfrak m$ [lem-weil-pbc-
-finite-algebra-local-radical]. Dependencies: def-weil-pbc-nagata-ring, def-weil-pbc-japanese-
-domain, lem-weil-pbc-integral-closure-finite-extension-normal, lem-weil-pbc-finite-over-nagata-
-nagata, lem-weil-pbc-finite-algebra-noetherian, lem-weil-pbc-finite-algebra-is-integral, lem-weil-
+finite-algebra-is-integral], so $\dim S\le d$
+[proposition-proper-direct-image-constructible-complexes]. The finite fibre $S/\mathfrak mS$ has
+finitely many maximal ideals by [lem-weil-pbc-finite-over-zero- dim-local-discrete-spectrum]; their
+preimages are exactly the finitely many maximal ideals $\mathfrak n_1,\ldots,\mathfrak n_r$ of $S$,
+since each contracts to $\mathfrak m$ [lem-weil-pbc- finite-algebra-local-radical]. Dependencies:
+def-weil-pbc-nagata-ring, def-weil-pbc-japanese- domain,
+lem-weil-pbc-integral-closure-finite-extension-normal, lem-weil-pbc-finite-over-nagata- nagata,
+lem-weil-pbc-finite-algebra-noetherian, lem-weil-pbc-finite-algebra-is-integral, lem-weil-
 pbc-integral-extension-dimension, lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum, lem-
 weil-pbc-finite-algebra-local-radical.
 

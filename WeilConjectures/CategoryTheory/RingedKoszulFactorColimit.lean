@@ -113,20 +113,20 @@ private theorem fractionMap_apply
 
 private theorem scalar_apply
     (s : (O.obj ⋙ forget CommRingCat).sections) (X : Cᵒᵖ) (a : O.obj.obj X) :
-    (ringedKoszulScalar O s).val.app X a = a * sectionValue O s X := by
+    (ringedKoszulScalar O s).asHom.val.app X a = a * sectionValue O s X := by
   change a • sectionValue O s X = _
   rfl
 
 private theorem fractionMap_step
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
-    (ringedKoszulScalar O s).val ≫ fractionMap O s (n + 1) = fractionMap O s n := by
+    (ringedKoszulScalar O s).asHom.val ≫ fractionMap O s (n + 1) = fractionMap O s n := by
   apply PresheafOfModules.hom_ext
   intro X
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro a
   change O.obj.obj X at a
-  change (fractionMap O s (n + 1)).app X ((ringedKoszulScalar O s).val.app X a) =
+  change (fractionMap O s (n + 1)).app X ((ringedKoszulScalar O s).asHom.val.app X a) =
     (fractionMap O s n).app X a
   rw [fractionMap_apply, scalar_apply, fractionMap_apply, map_mul, pow_succ]
   calc
@@ -138,12 +138,12 @@ private def localizationPresheafCocone
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     Cocone (Functor.ofSequence (X := fun _ : ℕ ↦
       SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
-        (fun _ ↦ ringedKoszulScalar O s) ⋙ SheafOfModules.forget _) where
+        (fun _ ↦ (ringedKoszulScalar O s).asHom) ⋙ SheafOfModules.forget _) where
   pt := ringedSectionLocalizationPresheaf O s
   ι := NatTrans.ofSequence (fun n ↦ fractionMap O s (n + 1)) (by
     intro n
     change ((SheafOfModules.forget _).map
-      ((Functor.ofSequence (fun _ ↦ ringedKoszulScalar O s)).map _)) ≫ _ = _ ≫ 𝟙 _
+      ((Functor.ofSequence (fun _ ↦ (ringedKoszulScalar O s).asHom)).map _)) ≫ _ = _ ≫ 𝟙 _
     rw [Functor.ofSequence_map_homOfLE_succ, Category.comp_id]
     exact fractionMap_step O s (n + 1))
 
@@ -157,7 +157,7 @@ private def localizationPresheafCoconeIsColimit
     (fun _ ↦ ModuleCat.ofHom (LinearMap.lsmul R R (sectionValue O s X)))
   let c := (PresheafOfModules.evaluation _ X).mapCocone
     (localizationPresheafCocone O s)
-  let F := (Functor.ofSequence (fun _ ↦ ringedKoszulScalar O s) ⋙
+  let F := (Functor.ofSequence (fun _ ↦ (ringedKoszulScalar O s).asHom) ⋙
     SheafOfModules.forget _) ⋙ PresheafOfModules.evaluation _ X
   let t : D ⟶ F := NatTrans.ofSequence (fun _ ↦ 𝟙 (ModuleCat.of R R)) (by
     intro n
@@ -166,7 +166,7 @@ private def localizationPresheafCoconeIsColimit
     apply LinearMap.ext
     intro a
     change O.obj.obj X at a
-    change (sectionValue O s X) * a = (ringedKoszulScalar O s).val.app X a
+    change (sectionValue O s X) * a = (ringedKoszulScalar O s).asHom.val.app X a
     rw [scalar_apply, mul_comm])
   let et : D ≅ F := NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intro i j f; exact t.naturality f)
   let e := Classical.choose (scalar_localization_colimit (sectionValue O s X))
@@ -194,10 +194,10 @@ private def localizationSheafMap
 
 private theorem localizationSheafMap_step
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
-    ringedKoszulScalar O s ≫ localizationSheafMap O s (n + 1) =
+    (ringedKoszulScalar O s).asHom ≫ localizationSheafMap O s (n + 1) =
       localizationSheafMap O s n := by
   apply SheafOfModules.hom_ext
-  change (ringedKoszulScalar O s).val ≫ (fractionMap O s (n + 1) ≫ _) = _
+  change (ringedKoszulScalar O s).asHom.val ≫ (fractionMap O s (n + 1) ≫ _) = _
   rw [← Category.assoc, fractionMap_step]
   rfl
 
@@ -205,12 +205,12 @@ private def localizationSheafCocone
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     Cocone (Functor.ofSequence (X := fun _ : ℕ ↦
       SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
-        (fun _ ↦ ringedKoszulScalar O s)) where
+        (fun _ ↦ (ringedKoszulScalar O s).asHom)) where
   pt := ringedSectionLocalization O s
   ι := NatTrans.ofSequence (fun n ↦ localizationSheafMap O s (n + 1)) (by
     intro n
     rw [Functor.ofSequence_map_homOfLE_succ, Functor.const_obj_map]
-    change ringedKoszulScalar O s ≫ _ = _ ≫ 𝟙 _
+    change (ringedKoszulScalar O s).asHom ≫ _ = _ ≫ 𝟙 _
     rw [Category.comp_id]
     exact localizationSheafMap_step O s (n + 1))
 
@@ -249,14 +249,12 @@ private theorem localizationSheafMap_zero
 
 private theorem localizationSheafMap_pow
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
-    (ringedKoszulScalar O s ^ n) ≫ localizationSheafMap O s n =
+    (ringedKoszulScalar O s ^ n).asHom ≫ localizationSheafMap O s n =
       ringedSectionLocalizationUnit O s := by
   induction n with
   | zero => simpa using localizationSheafMap_zero O s
   | succ n ih =>
-    rw [pow_succ']
-    change ((ringedKoszulScalar O s ^ n) ≫ ringedKoszulScalar O s) ≫ _ = _
-    rw [Category.assoc, localizationSheafMap_step, ih]
+    rw [pow_succ', End.mul_asHom, Category.assoc, localizationSheafMap_step, ih]
 
 private def factorMap
     (s : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :
@@ -272,7 +270,7 @@ private def factorMap
       simp only [ringedLocalizationTwoTermD, eqToHom_refl,
         Category.id_comp, Category.comp_id]
       change ringedSectionLocalizationUnit O s =
-        (ringedKoszulScalar O s ^ (m + 1)) ≫ localizationSheafMap O s (m + 1)
+        (ringedKoszulScalar O s ^ (m + 1)).asHom ≫ localizationSheafMap O s (m + 1)
       exact (localizationSheafMap_pow O s (m + 1)).symm)
     (by
       intro n hn
@@ -313,14 +311,14 @@ private def factorCoconeIsColimit
       (ComplexShape.up ℤ) (0 : ℤ)
     let F := ringedKoszulFactors O s ⋙ E
     let t : F ⟶ (Functor.const ℕ).obj A := NatTrans.ofSequence
-      (fun m ↦ (HomologicalComplex.doubleXIso₀ (ringedKoszulScalar O s ^ (m + 1))
+      (fun m ↦ (HomologicalComplex.doubleXIso₀ (ringedKoszulScalar O s ^ (m + 1)).asHom
         (by decide : (ComplexShape.up ℤ).Rel 0 1)).hom) (by
         intro m
         simp only [F, E, Functor.comp_map, ringedKoszulFactors,
           Functor.ofSequence_map_homOfLE_succ, Functor.const_obj_map]
         simp [ringedKoszulFactorStep, ringedKoszulFactorStepF, Category.assoc])
     let e : F ≅ (Functor.const ℕ).obj A := NatIso.ofComponents
-      (fun m ↦ HomologicalComplex.doubleXIso₀ (ringedKoszulScalar O s ^ (m + 1))
+      (fun m ↦ HomologicalComplex.doubleXIso₀ (ringedKoszulScalar O s ^ (m + 1)).asHom
         (by decide : (ComplexShape.up ℤ).Rel 0 1)) (by
         intro i j f
         exact t.naturality f)
@@ -334,20 +332,20 @@ private def factorCoconeIsColimit
     · subst n
       let S := Functor.ofSequence (X := fun _ : ℕ ↦
         SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
-          (fun _ ↦ ringedKoszulScalar O s)
+          (fun _ ↦ (ringedKoszulScalar O s).asHom)
       let E := HomologicalComplex.eval
         (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
         (ComplexShape.up ℤ) (1 : ℤ)
       let F := ringedKoszulFactors O s ⋙ E
       let t : F ⟶ S := NatTrans.ofSequence
-        (fun m ↦ (HomologicalComplex.doubleXIso₁ (ringedKoszulScalar O s ^ (m + 1))
+        (fun m ↦ (HomologicalComplex.doubleXIso₁ (ringedKoszulScalar O s ^ (m + 1)).asHom
           (by decide : (ComplexShape.up ℤ).Rel 0 1) (by decide)).hom) (by
           intro m
           simp only [F, E, S, Functor.comp_map, ringedKoszulFactors,
             Functor.ofSequence_map_homOfLE_succ]
           simp [ringedKoszulFactorStep, ringedKoszulFactorStepF, Category.assoc])
       let e : F ≅ S := NatIso.ofComponents
-        (fun m ↦ HomologicalComplex.doubleXIso₁ (ringedKoszulScalar O s ^ (m + 1))
+        (fun m ↦ HomologicalComplex.doubleXIso₁ (ringedKoszulScalar O s ^ (m + 1)).asHom
           (by decide : (ComplexShape.up ℤ).Rel 0 1) (by decide)) (by
           intro i j f
           exact t.naturality f)
@@ -365,7 +363,7 @@ private def factorCoconeIsColimit
                fac := ?_
                uniq := ?_ }
       · intro t m
-        exact (HomologicalComplex.isZero_double_X (ringedKoszulScalar O s ^ (m + 1))
+        exact (HomologicalComplex.isZero_double_X (ringedKoszulScalar O s ^ (m + 1)).asHom
           (by decide : (ComplexShape.up ℤ).Rel 0 1) n h0 h1).eq_of_src _ _
       · intro t m hm
         exact hz.eq_of_src _ _

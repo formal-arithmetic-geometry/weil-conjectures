@@ -64,7 +64,6 @@ private lemma upperStarComp_inv_conjugate
   simp only [upperStarComp, Iso.symm_inv, conjugateIsoEquiv_symm_apply_hom,
     Equiv.apply_symm_apply, Iso.symm_hom]
 
-set_option maxHeartbeats 800000 in
 -- The mate comparison repeats typeclass searches for module-object adjunctions.
 /-- Composition coherence for the ordinary coefficient-restriction comparison.
 Source: Bhatt--Scholze, Remark 6.8.15.
@@ -101,8 +100,7 @@ theorem comapUpperStarIso_comp
       conjugateEquiv_mateEquiv_vcomp _ (upperStarLowerStarAdjunction Λ' (f ≫ g))]
     simp only [αf, αg, αfg, comapUpperStarIso_mate, upperStarComp_conjugate,
       upperStarComp_inv_conjugate]
-    apply TwoSquare.ext
-    intro K
+    refine NatTrans.ext (funext fun K ↦ ?_)
     simp only [TwoSquare.hComp, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
       TwoSquare.mk, NatTrans.comp_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
@@ -110,7 +108,6 @@ theorem comapUpperStarIso_comp
       Category.id_comp, Category.comp_id, Category.assoc]
     rw [← Category.assoc, comap_lowerStar_comp, Category.assoc, Category.assoc,
       Iso.hom_inv_id_app]
-    simp only [TwoSquare.natTrans]
     erw [Category.comp_id]
   have hN := congrArg (fun s ↦ s.app N) h
   simp only [αf, αg, αfg, TwoSquare.vComp, TwoSquare.whiskerLeft,
@@ -122,7 +119,7 @@ theorem comapUpperStarIso_comp
     (upperStarComp Λ f g).hom.app ((Mod.comap (coefficientMap a Z)).obj N) ≫ k ≫
       (comapUpperStarIso a f).hom.app ((g)^*⟦Λ'⟧.obj N) ≫
         (f)^*⟦Λ⟧.map ((comapUpperStarIso a g).hom.app N)) hN
-  simp only [TwoSquare.natTrans, Category.assoc, Iso.inv_hom_id_app_assoc,
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc,
     ← Functor.map_comp, Iso.inv_hom_id_app, Iso.hom_inv_id_app_assoc] at hh
   have hm := (f)^*⟦Λ⟧.map_id ((Mod.comap (coefficientMap a Z) ⋙ (g)^*⟦Λ⟧).obj N)
   rw [hm] at hh

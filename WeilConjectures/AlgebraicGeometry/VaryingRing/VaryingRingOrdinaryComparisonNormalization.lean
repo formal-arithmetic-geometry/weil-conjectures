@@ -299,12 +299,11 @@ private theorem pull_mate_pasting
     ((TwoSquare.mk R₁ E₂ E₁ r₁ β₁.hom).hComp
       (TwoSquare.mk R₀ E₁ E₀ r₀ β₀.hom)).whiskerBottom dR.inv =
     (TwoSquare.mk R₂ E₂ E₀ r₂ β₂.hom).whiskerTop cR.inv := by
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simp only [TwoSquare.whiskerBottom, TwoSquare.whiskerTop, TwoSquare.hComp,
     TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
-    Category.comp_id, TwoSquare.natTrans]
+    Category.comp_id]
   apply (cancel_epi (E₀.map (cR.hom.app M))).1
   simp only [← E₀.map_comp_assoc, Iso.hom_inv_id_app, E₀.map_id, Category.id_comp]
   rw [← Category.assoc, hp M]
@@ -324,7 +323,7 @@ private theorem open_from_inverse_pasting
   simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.vComp,
     TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
-    Category.comp_id, TwoSquare.natTrans] at hm
+    Category.comp_id] at hm
   let a := E₂.mapIso (c.app N) ≪≫ α₂.app N
   let b := α₁.app (L₀.obj N) ≪≫ l₁.mapIso (α₀.app N) ≪≫ d.app (E₀.obj N)
   have hi : a = b := by

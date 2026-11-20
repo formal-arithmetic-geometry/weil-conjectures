@@ -127,7 +127,7 @@ namespace Algebra.Etale
 
 /-- A finite algebra `A` over a field `K` is étale if and only if `Ω[A⁄K] = 0`.
 
-Part of blueprint `lem-sc-finite-etale-algebra-criterion`. A finite `K`-algebra is of finite
+Part of blueprint `proposition-multiplication-n--2`. A finite `K`-algebra is of finite
 presentation, and over a field formally unramified algebras of finite type are formally
 étale. -/
 theorem iff_subsingleton_kaehlerDifferential_of_field {K A : Type*} [Field K] [CommRing A]

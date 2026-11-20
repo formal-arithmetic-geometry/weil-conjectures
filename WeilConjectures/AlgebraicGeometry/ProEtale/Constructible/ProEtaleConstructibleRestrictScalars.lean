@@ -19,7 +19,9 @@ Restriction of scalars along a ring map `A → B` of finite rings preserves cons
 pro-etale module sheaves. If the ring map is surjective, restriction also reflects
 constructibility.
 
-Source: Stacks Project, Tags 09AJ and 093U (auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 09AJ and 093U
 -/
 
 @[expose] public section
@@ -86,9 +88,8 @@ end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Restriction of scalars along a ring map `f : A → B` of finite rings preserves
-constructibility of pro-etale module sheaves.
-Source: Stacks Project, Tag 09AJ (auxiliary; not a blueprint node). -/
+/-- Restriction of scalars along a ring map `f: A → B` of finite rings preserves
+constructibility of pro-etale module sheaves. -/
 theorem IsConstructibleProEtaleModuleSheaf.restrictScalars {T : Scheme.{u}}
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (f : A →+* B)
     {F : proEtaleRingModules T (proEtaleConstantRing T B)}
@@ -100,9 +101,8 @@ theorem IsConstructibleProEtaleModuleSheaf.restrictScalars {T : Scheme.{u}}
   exact ProEtale.isConstructible_of_iso ((WeilConjectures.restrictionEncodingIso T f).app F).symm
     (WeilConjectures.fixedConstructible_restrict T (RingHom.ulift.{u + 1, u + 1} f) _ hF)
 
-/-- Restriction of scalars along a surjective ring map `f : A → B` of finite rings reflects
-constructibility of pro-etale module sheaves.
-Source: Stacks Project, Tag 09AJ (auxiliary; not a blueprint node). -/
+/-- Restriction of scalars along a surjective ring map `f: A → B` of finite rings reflects
+constructibility of pro-etale module sheaves. -/
 theorem IsConstructibleProEtaleModuleSheaf.of_restrictScalars {T : Scheme.{u}}
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (f : A →+* B)
     (hf : Function.Surjective f) {F : proEtaleRingModules T (proEtaleConstantRing T B)}

@@ -22,10 +22,10 @@ universal: `R`-algebra maps `QuotientBasisRing w →ₐ[R] A` correspond to `w`-
 `A[n]`, by extension of `quotientBasisIdeal w` (`MvPolynomial.quotientBasisEquiv`).
 
 This is the affine scheme representing the subfunctor `F_W` of the Hilbert functor of points of
-an affine space (blueprint `lem-pc-hilb-representable`, Step 4). The blueprint presents it by the
-structure constants of the basis; we use instead the coordinates `v (m, k)` of the images of the
-monomials `m` in the basis, subject to the relations saying that `w l` has coordinates `e_l`
-and that multiplication by each variable is compatible with the coordinates.
+an affine space (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`, Step 4). The blueprint
+presents it by the structure constants of the basis; we use instead the coordinates `v (m, k)` of
+the images of the monomials `m` in the basis, subject to the relations saying that `w l` has
+coordinates `e_l` and that multiplication by each variable is compatible with the coordinates.
 
 ## Main definitions
 
@@ -408,9 +408,10 @@ theorem repr_mk_map_quotientBasisIdeal {A : Type*} [CommRing A] [Algebra R A]
     quotientBasisCoord_monomial, one_mul]
   rw [quotientBasisIdeal, map_quotientBasisIdealOf]
 
-/-- **The universal property of `QuotientBasisRing w`** (blueprint `lem-pc-hilb-representable`,
-Step 4 (2)(a)). `R`-algebra maps `QuotientBasisRing w →ₐ[R] A` correspond to `w`-adapted ideals
-of `A[n]`, by extending the universal ideal `quotientBasisIdeal w`. -/
+/-- **The universal property of `QuotientBasisRing w`** (blueprint
+`theorem-hilbert-schemes-points-smooth-curve--1`, Step 4 (2)(a)). `R`-algebra maps
+`QuotientBasisRing w →ₐ[R] A` correspond to `w`-adapted ideals of `A[n]`, by extending the universal
+ideal `quotientBasisIdeal w`. -/
 noncomputable def quotientBasisEquiv (A : Type*) [CommRing A] [Algebra R A] :
     (QuotientBasisRing w →ₐ[R] A) ≃ {I : Ideal (MvPolynomial n A) // IsQuotientBasis w I} where
   toFun φ := ⟨(quotientBasisIdeal w).map (map φ.toRingHom),

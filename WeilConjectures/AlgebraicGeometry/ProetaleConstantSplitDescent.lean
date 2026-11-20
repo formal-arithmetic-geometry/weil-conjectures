@@ -22,7 +22,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 # Split presentations of a pro-etale constant trivialization
 
 Source: Stacks Project, Tags 098Z, 03P5, 03YW and 0AP6; blueprint proof of
-`det-lem-stratified-lattice-scheme`, part (2)
+`lemma-lattices-lisse-e-sheaves`, part (2)
 (blueprint: lem-sfb-proetale-constant-split-descent).
 
 The overlap isomorphism is stated explicitly. Its cocycle is expressed using the
@@ -181,7 +181,7 @@ matching overlap isomorphism and its scheme descent cocycle. The codiagonal is
 separated, etale, surjective for nonempty labels, and ind-quasi-affine.
 
 Source: Stacks Project, Tags 098Z, 03P5, 03YW, 001P, 023V and 0AP6;
-blueprint `det-lem-stratified-lattice-scheme`, proof (2)
+blueprint `lemma-lattices-lisse-e-sheaves`, proof (2)
 (blueprint: lem-sfb-proetale-constant-split-descent).
 
 Proof: the conjunction of `proetaleConstantSplitDescentData_proof`
@@ -195,7 +195,7 @@ It is therefore a closed immersion, proving separatedness. The same component
 calculation identifies every base change with the coproduct over the new base.
 2. Each component chart of the codiagonal is an identity, hence flat and locally
 of finite presentation. The diagonal is an open immersion, so the codiagonal is
-etale and weakly etale. `sk-lem-pe-weakly-etale-stability` puts the overlaps and
+etale and weakly etale. `lemma-stability` puts the overlaps and
 split schemes in the localized sites.
 3. The presheaf of morphisms over V into the coproduct is a sheaf by
 `lem-weil-pbc-fpqc-representable-descent`. Send each constant label to its
@@ -211,7 +211,7 @@ normalization on labels.
 matching sections; reversing the comparison gives its inverse.
 6. On a triple overlap both composites correspond to rho third inverse followed
 by rho first: the middle pair cancels. Yoneda faithfulness proves the cocycle.
-This gives `def-pd-descent-datum` in its recorded transport form; its transport
+This gives `proposition-jacobian-over-ground-field--1` in its recorded transport form; its transport
 preserves rho and therefore induces precisely the unique alpha of step 5.
 7. A label gives a section of the codiagonal, proving surjectivity when labels
 are nonempty. A quasi-compact open above an affine open meets only finitely many
@@ -219,7 +219,7 @@ components. It is open in their finite union, which is affine by
 `lem-weil-pbc-finite-affine-coproduct-spectrum`, hence is quasi-affine. For the
 empty open use the empty union and the zero ring. No effectiveness is asserted.
 
-Sizes (`def-weil-size-convention`): the labels are `u`-small, so the coproduct exists in
+Sizes (`prose-01-10`): the labels are `u`-small, so the coproduct exists in
 `Scheme.{u}`; sheaves of sets take values in any universe `w` containing the `u + 1`-sized
 site (`UnivLE.{u + 1, w}`), where sheafification and the constant sheaf exist.
 -/

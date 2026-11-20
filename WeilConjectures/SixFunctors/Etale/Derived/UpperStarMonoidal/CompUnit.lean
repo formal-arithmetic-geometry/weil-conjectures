@@ -93,7 +93,6 @@ variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (fg : X ⟶ Z) (hfg : 
   [(f)^*[A].PreservesFlat] [(g)^*[A].PreservesFlat] [(fg)^*[A].PreservesFlat]
   [NatTrans.IsMonoidal (Etale.upperStarComp A f g fg hfg).hom]
 
-set_option maxHeartbeats 800000 in
 -- the kernel unfolds the counits of three left derived functors
 /-- The composition isomorphism `L(fg)^* ≅ Lg^* ⋙ Lf^*` is compatible with the counits
 `η : Lh^* Λ ⟶ Λ` of the oplax monoidal derived pullbacks. -/

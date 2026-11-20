@@ -18,8 +18,8 @@ transition cocycle of a trivialisation of a lisse sheaf,
 `AlgebraicGeometry.ProEtale.AdicSheaf.isDescentCocycle_smul_compactOpenLattice`). Then `γ` has a
 twisted section with values in the lattices
 (`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice`): a lisse sheaf on a regular
-scheme has a lattice (blueprint `thm-lisse-qlbar-representations` (4), used in
-`prop-zl-smooth-proper-relative-purity`).
+scheme has a lattice (blueprint `proposition-lattices-representations-normal-scheme` (4), used in
+`theorem-purity-higher-direct-images-under`).
 
 More generally, this holds on a connected Noetherian scheme whose local rings are integrally
 closed domains

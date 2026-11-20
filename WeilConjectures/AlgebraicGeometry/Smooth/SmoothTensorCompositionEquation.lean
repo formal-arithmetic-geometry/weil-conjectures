@@ -45,9 +45,9 @@ namespace AlgebraicGeometry.ProEtale
 compactifications and the common-refinement comparisons, rather than chosen from a
 Nonempty assertion. The compatible compactification is the closure of X in the product
 of the chosen compactifications of g and fg.
-Source: blueprint thm-pur-cohomological-smoothness, clause 4 and proof Step 9;
-thm-sf-comp-composition, triangle construction
-(blueprint: thm-pur-cohomological-smoothness). -/
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 4 and proof Step 9;
+proposition-composition-base-change-rf-shriek--1, triangle construction
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
 noncomputable def smoothCompactSupportCompIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -66,8 +66,8 @@ noncomputable def smoothCompactSupportCompIso
 /-- The adjunction-compatible exceptional composition comparison. Its counit is
 ε_g followed in adjunction order by g_! ε_f, through the displayed compact-support
 comparison, since this is rightAdjointUniq for precisely that composite adjunction.
-Source: blueprint thm-pur-cohomological-smoothness, clause 4, proof Step 9
-(blueprint: thm-pur-cohomological-smoothness). -/
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 4, proof Step 9
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
 noncomputable def smoothExceptionalCompIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -85,8 +85,8 @@ noncomputable def smoothExceptionalCompIso
 /-- The specified dualizing comparison q = θ_(f,ω_g) followed by c_Λ⁻¹.
 Its invertibility is asserted below; its data use only the existing tensor mate
 and the adjunction-induced composition comparison.
-Source: blueprint thm-pur-cohomological-smoothness, clause 4, proof Step 9
-(blueprint: thm-pur-cohomological-smoothness). -/
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 4, proof Step 9
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
 noncomputable def smoothDualizingCompMap
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -789,7 +789,7 @@ the tensor map in both variables, and the left-unitor identity then give precise
 the reassociated right-hand composite. This argument needs no smoothness or
 invertibility of the dualizing object; it also applies to empty schemes and the
 zero coefficient ring.
-Source: blueprint thm-pur-cohomological-smoothness, clause 4, proof Steps 9--10
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 4, proof Steps 9--10
 (blueprint: lem-v8-smooth-tensor-composition-equation). -/
 theorem smoothTensorCompositionEquation
     (A : Type (u + 1)) [CommRing A] [Finite A]

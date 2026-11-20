@@ -35,7 +35,7 @@ variable {𝒳 𝒴 𝒳' 𝒴' : Type*} [Category* 𝒳] [Category* 𝒴] [Cate
 /-- The exceptional base change is the component of the mate of the inverse of the base
 change. -/
 lemma exceptionalBaseChange_eq_mateEquiv_inv_app (N : 𝒴) :
-    exceptionalBaseChange a a' bc N = (mateEquiv a a' (inv bc)).natTrans.app N := by
+    exceptionalBaseChange a a' bc N = (mateEquiv a a' (inv bc)).app N := by
   rw [exceptionalBaseChange, Adjunction.homEquiv_unit]
   simp [mateEquiv_apply, NatIso.isIso_inv_app]
 

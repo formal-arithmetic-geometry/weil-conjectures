@@ -47,8 +47,8 @@ variable {C C' : Type*} [Category* C] [Category* C'] {G : C ⥤ C'} {R : C' ⥤ 
 `u' : 𝟭 ⟶ V'`, then so is its mate `R ⋙ V ⟶ V' ⋙ R`. -/
 @[reassoc]
 lemma Adjunction.app_comp_mateEquiv_app_of_comm
-    (hu : ∀ X : C, G.map (u.app X) ≫ α.natTrans.app X = u'.app (G.obj X)) (Y : C') :
-    u.app (R.obj Y) ≫ (mateEquiv adj adj α).natTrans.app Y = R.map (u'.app Y) := by
+    (hu : ∀ X : C, G.map (u.app X) ≫ α.app X = u'.app (G.obj X)) (Y : C') :
+    u.app (R.obj Y) ≫ (mateEquiv adj adj α).app Y = R.map (u'.app Y) := by
   have h := u'.naturality (adj.counit.app Y)
   simp only [Functor.id_obj, Functor.id_map, Functor.comp_obj] at h
   simp only [mateEquiv_apply, Functor.comp_obj, NatTrans.comp_app, Functor.id_obj,
@@ -72,9 +72,9 @@ variable {C C' : Type*} [Category* C] [Category* C'] [HasShift C ℤ] [HasShift 
 `R ⋙ V ⟶ V' ⋙ R`, for an adjunction `G ⊣ R` compatible with the shifts. -/
 @[reassoc]
 lemma Adjunction.mateEquiv_app_comp_of_comm
-    (hw : ∀ X : C, α.natTrans.app X ≫ w'.app (G.obj X) =
+    (hw : ∀ X : C, α.app X ≫ w'.app (G.obj X) =
       G.map (w.app X) ≫ (G.commShiftIso (1 : ℤ)).hom.app X) (Y : C') :
-    (mateEquiv adj adj α).natTrans.app Y ≫ R.map (w'.app Y) ≫
+    (mateEquiv adj adj α).app Y ≫ R.map (w'.app Y) ≫
       (R.commShiftIso (1 : ℤ)).hom.app Y = w.app (R.obj Y) := by
   have h := w'.naturality (adj.counit.app Y)
   have hc := (R.commShiftIso (1 : ℤ)).hom.naturality (adj.counit.app Y)
@@ -86,7 +86,7 @@ lemma Adjunction.mateEquiv_app_comp_of_comm
     Functor.associator_inv_app, Functor.whiskerRight_app, Functor.comp_map,
     Functor.leftUnitor_hom_app, Category.id_comp, Category.comp_id, Category.assoc]
   rw [← R.map_comp_assoc (V'.map _), h, R.map_comp_assoc,
-    ← R.map_comp_assoc (α.natTrans.app _), hw, hc,
+    ← R.map_comp_assoc (α.app _), hw, hc,
     R.map_comp_assoc, adj.unit_naturality_assoc, reassoc_of% hu, ← Functor.map_comp,
     Adjunction.right_triangle_components, Functor.map_id, Category.comp_id]
 
@@ -114,17 +114,17 @@ theorem Adjunction.isIso_mateEquiv_of_distTriang {G : C ⥤ C'} {R : C' ⥤ C} (
     (hT : ∀ X : C, Triangle.mk (a.app X) (u.app X) (w.app X) ∈ distTriang C)
     (hT' : ∀ Y : C', Triangle.mk (a'.app Y) (u'.app Y) (w'.app Y) ∈ distTriang C')
     (ha : ∀ Y : C', R.map (a'.app Y) = a.app (R.obj Y)) (α : TwoSquare V G G V')
-    (hu : ∀ X : C, G.map (u.app X) ≫ α.natTrans.app X = u'.app (G.obj X))
-    (hw : ∀ X : C, α.natTrans.app X ≫ w'.app (G.obj X) =
+    (hu : ∀ X : C, G.map (u.app X) ≫ α.app X = u'.app (G.obj X))
+    (hw : ∀ X : C, α.app X ≫ w'.app (G.obj X) =
       G.map (w.app X) ≫ (G.commShiftIso (1 : ℤ)).hom.app X) :
-    IsIso (mateEquiv adj adj α).natTrans := by
+    IsIso (mateEquiv adj adj α) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro Y
   let φ : Triangle.mk (a.app (R.obj Y)) (u.app (R.obj Y)) (w.app (R.obj Y)) ⟶
       R.mapTriangle.obj (Triangle.mk (a'.app Y) (u'.app Y) (w'.app Y)) :=
     { hom₁ := 𝟙 _
       hom₂ := 𝟙 _
-      hom₃ := (mateEquiv adj adj α).natTrans.app Y
+      hom₃ := (mateEquiv adj adj α).app Y
       comm₁ := by simp [Functor.mapTriangle, ha]
       comm₂ := by simpa [Functor.mapTriangle] using adj.app_comp_mateEquiv_app_of_comm u u' α hu Y
       comm₃ := by
@@ -157,24 +157,24 @@ theorem Adjunction.isIso_mateEquiv_inv_of_distTriang
     [L₁.CommShift ℤ] [R₁.CommShift ℤ] [adjL₁.CommShift ℤ] [R₁.IsTriangulated]
     [Res₁.ReflectsIsomorphisms]
     (e : L₂ ⋙ Res₂ ≅ Res₁ ⋙ L₁) (α : TwoSquare L₁ E₁ E₂ L₂)
-    (hα : mateEquiv adj₁ adj₂ α = TwoSquare.mk _ _ _ _ e.inv) [IsIso α.natTrans]
+    (hα : mateEquiv adj₁ adj₂ α = TwoSquare.mk _ _ _ _ e.inv) [IsIso α]
     (a : 𝟭 C ⟶ 𝟭 C) (a' : 𝟭 C' ⟶ 𝟭 C')
     (w₁ : E₁ ⋙ Res₁ ⟶ shiftFunctor C (1 : ℤ)) (w₂ : E₂ ⋙ Res₂ ⟶ shiftFunctor C' (1 : ℤ))
     (hT₁ : ∀ X : C, Triangle.mk (a.app X) (adj₁.unit.app X) (w₁.app X) ∈ distTriang C)
     (hT₂ : ∀ X : C', Triangle.mk (a'.app X) (adj₂.unit.app X) (w₂.app X) ∈ distTriang C')
     (ha : ∀ Y : C', R₁.map (a'.app Y) = a.app (R₁.obj Y))
-    (hw : ∀ X : C, e.inv.app (E₁.obj X) ≫ Res₂.map (inv (α.natTrans.app X)) ≫
+    (hw : ∀ X : C, e.inv.app (E₁.obj X) ≫ Res₂.map (inv (α.app X)) ≫
       w₂.app (L₁.obj X) = L₁.map (w₁.app X) ≫ (L₁.commShiftIso (1 : ℤ)).hom.app X) :
-    IsIso (mateEquiv adjL₁ adjL₂ (TwoSquare.mk _ _ _ _ (inv α.natTrans))).natTrans := by
+    IsIso (mateEquiv adjL₁ adjL₂ (TwoSquare.mk _ _ _ _ (inv α))) := by
   have hU := isIso_mateEquiv_of_distTriang adjL₁ a a' adj₁.unit adj₂.unit w₁ w₂ hT₁ hT₂ ha
-    ((TwoSquare.mk _ _ _ _ (inv α.natTrans)).hComp (TwoSquare.mk _ _ _ _ e.inv)) (fun X ↦ by
+    ((TwoSquare.mk _ _ _ _ (inv α)).hComp (TwoSquare.mk _ _ _ _ e.inv)) (fun X ↦ by
       have hunit : L₁.map (adj₁.unit.app X) ≫ e.inv.app (E₁.obj X) =
-          adj₂.unit.app (L₁.obj X) ≫ Res₂.map (α.natTrans.app X) := by
+          adj₂.unit.app (L₁.obj X) ≫ Res₂.map (α.app X) := by
         simpa [hα] using unit_mateEquiv adj₁ adj₂ α X
       simp [TwoSquare.hComp, reassoc_of% hunit])
     (fun X ↦ by simpa [TwoSquare.hComp] using hw X)
   rw [mateEquiv_vcomp adjL₁ adjL₂ adjL₁] at hU
-  have hc : IsIso (mateEquiv adjL₂ adjL₁ (TwoSquare.mk _ _ _ _ e.inv)).natTrans := by
+  have hc : IsIso (mateEquiv adjL₂ adjL₁ (TwoSquare.mk _ _ _ _ e.inv)) := by
     rw [← hα, iterated_mateEquiv_conjugateEquiv]
     infer_instance
   rw [NatTrans.isIso_iff_isIso_app] at hU ⊢
@@ -185,7 +185,7 @@ theorem Adjunction.isIso_mateEquiv_inv_of_distTriang
     Category.id_comp, Category.comp_id] at hM
   rw [← isIso_iff_of_reflects_iso _ Res₁]
   exact IsIso.of_isIso_comp_right _
-    ((mateEquiv adjL₂ adjL₁ (TwoSquare.mk _ _ _ _ e.inv)).natTrans.app (E₂.obj M))
+    ((mateEquiv adjL₂ adjL₁ (TwoSquare.mk _ _ _ _ e.inv)).app (E₂.obj M))
 
 end Triangulated
 

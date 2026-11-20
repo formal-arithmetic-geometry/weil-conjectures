@@ -31,7 +31,7 @@ E : ι₁! ≅ Rι₁_! ≅ Rι₃_! ⋙ Rp_! ≅ ι₃! ⋙ Rp_*
   by `E`.
 
 They are the inputs of the refinement step of the independence of the compact-support exchange
-of nearby cycles from the compactification (blueprint `det-nearby-exchange-maps`).
+of nearby cycles from the compactification (blueprint `prose-E-15`).
 
 -/
 

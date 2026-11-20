@@ -39,9 +39,9 @@ private theorem evaluation_composition
     (qH : H ⋙ e₂ ≅ e₀ ⋙ V)
     (dF : R ⋙ e₀ ⟶ e₁ ⋙ U) (dG : S ⋙ e₁ ⟶ e₂ ⋙ W)
     (dH : T ⋙ e₀ ⟶ e₂ ⋙ J)
-    (hF : (mateEquiv a a' qF.inv).natTrans = dF)
-    (hG : (mateEquiv b b' qG.inv).natTrans = dG)
-    (hH : (mateEquiv c c' qH.inv).natTrans = dH)
+    (hF : (mateEquiv a a' qF.inv) = dF)
+    (hG : (mateEquiv b b' qG.inv) = dG)
+    (hH : (mateEquiv c c' qH.inv) = dH)
     (k : H ≅ F ⋙ G) (k' : V ≅ P ⋙ Q)
     (hd : ∀ N : C₂,
       e₀.map ((conjugateEquiv (a.comp b) c k.hom).app N) ≫ dH.app N =
@@ -90,7 +90,7 @@ private theorem evaluation_mate
     (hi : ∀ M, b.homEquiv _ _ (i.hom.app M) =
       e₀.map (a.unit.app M) ≫ d.app (F.obj M))
     (hj : ∀ M, b.unit.app M ≫ U.map (j.hom.app M) = c.unit.app M) :
-    (mateEquiv a c (i.symm ≪≫ Functor.isoWhiskerLeft e₀ j).inv).natTrans = d := by
+    (mateEquiv a c (i.symm ≪≫ Functor.isoWhiskerLeft e₀ j).inv) = d := by
   apply (mateEquiv a c).symm.injective
   rw [Equiv.symm_apply_apply]
   apply NatTrans.ext
@@ -132,7 +132,7 @@ private theorem ordinary_evaluation_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : �
       (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
       ((pullbackTensorSequenceInverseEvaluation l E f n).symm ≪≫
         Functor.isoWhiskerLeft (coefficientSequenceEvaluation l E Y n)
-          (pullbackTensorLevelIntrinsic l E f n)).inv).natTrans =
+          (pullbackTensorLevelIntrinsic l E f n)).inv) =
       (directEvaluation l E f n).hom := by
   unfold directEvaluation
   apply evaluation_mate (pullbackTensorSequenceAdjunction l E f)

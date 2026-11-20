@@ -20,7 +20,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Unbounded exchange agrees with bounded exchange and with degree-zero exchange
 
-Source: blueprint, sec-smooth-purity, sk-prop-sf-kunneth-ordinary,
+Source: blueprint, chap-Smooth-purity, proposition-ordinary-external-kunneth--1,
 node lem-kun-unbounded-exchange-agrees; Stacks Project, Tags 07A7 and 05TD(3)
 (blueprint: lem-kun-unbounded-exchange-agrees).
 
@@ -50,7 +50,7 @@ private lemma mate_app
     {L : C₂ ⥤ C₁} {R : C₁ ⥤ C₂} {L' : C₄ ⥤ C₃} {R' : C₃ ⥤ C₄}
     {G : C₂ ⥤ C₄} {G' : C₁ ⥤ C₃}
     (adj : L ⊣ R) (adj' : L' ⊣ R') (θ : G ⋙ L' ⟶ L ⋙ G') (K : C₁) :
-    (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ θ)).natTrans.app K =
+    (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ θ)).app K =
       adj'.unit.app (G.obj (R.obj K)) ≫ R'.map (θ.app (R.obj K)) ≫
         R'.map (G'.map (adj.counit.app K)) := by
   simp [mateEquiv_apply]
@@ -209,12 +209,12 @@ private theorem derived_mate_plus_comparison
     (hθ : ∀ M, DerivedCategory.Plus.ι.map (θ.app M) = Θ.app M.obj)
     (K : DerivedCategory.Plus D) :
     (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
-      adj'.mapDerivedCategoryRightDerivedAdjunction (TwoSquare.mk _ _ _ _ Θ)).natTrans.app
+      adj'.mapDerivedCategoryRightDerivedAdjunction (TwoSquare.mk _ _ _ _ Θ)).app
         K.obj =
     G.mapDerivedCategory.map (R.rightDerivedFunctorPlusCompatibility.inv.app K) ≫
       DerivedCategory.Plus.ι.map
         ((mateEquiv adj.derivedPlus adj'.derivedPlus
-          (TwoSquare.mk _ _ _ _ θ)).natTrans.app K) ≫
+          (TwoSquare.mk _ _ _ _ θ)).app K) ≫
       R'.rightDerivedFunctorPlusCompatibility.hom.app (G'.mapDerivedCategoryPlus.obj K) := by
   apply (cancel_epi (G.mapDerivedCategory.map
     (R.rightDerivedFunctorPlusCompatibility.hom.app K))).1
@@ -261,7 +261,7 @@ private theorem exact_exchange_plus
     Functor.mapDerivedCategoryPlusCompIso (f)^*[A] (g')^*[A]
   have hm : (mateEquiv (upperStarLowerStarAdjunction A f).derivedPlus
       (upperStarLowerStarAdjunction A f').derivedPlus
-      (TwoSquare.mk _ _ _ _ θ.hom)).natTrans = derivedBaseChangeMapPlus A sq := by
+      (TwoSquare.mk _ _ _ _ θ.hom)) = derivedBaseChangeMapPlus A sq := by
     apply derivedBaseChangeMapPlus_ext A sq
     intro N
     exact Adjunction.derivedPlus_mateEquiv_app_fac

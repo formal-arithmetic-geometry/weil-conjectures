@@ -13,6 +13,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.SiteSesCechH1Surjective
 import WeilConjectures.CategoryTheory.SiteInjectiveCechAcyclic
+public import Mathlib.Algebra.Category.Grp.Zero
 
 @[expose] public section
 
