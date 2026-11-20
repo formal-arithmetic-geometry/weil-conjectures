@@ -1,0 +1,19 @@
+# DefEq Cost Anatomy Report
+
+Case: PR1625-TensorSheaf
+Lean / Mathlib: Lean 4.35.0, source snapshot 1ef1fddac73
+Kernel instrumentation: observational Lean 4.35.0 patch, counters and detailed-trace modes from READY-4.35.0; minimum reported root 100 ms.
+
+Root: leftDerivedUpperStarTensorComparison_app_app_fac. Original target type checking 107 s, CPU 200.87 s, RSS 8,267,032 KB. Correct replay: Kernel.check(value) 336 ms, final conversion 97,215 ms. Aligned source: 109.46 s CPU, 115.79 s wall, 2,943,588 KB RSS; aligned target conversion 2.43 s. Carrier and outer arguments were 0--2 ms; nested NatTrans.app was 92.732--97.215 s.
+
+Counters-only root 68000 took 127.840 s with 11,757,788 recursive calls and maximum depth 125. Exclusive comparison was 70.713 s (55.3%) and reduction 57.127 s (44.7%). It made 34,035,091 WHNF requests, 19,411,491 Delta unfolds, 17,656,468 Beta steps, 381,067 Zeta steps, and 2,815,216 projections. Delta timing was 2.183 s, much smaller than total reduction. The detailed trace reproduced the call count/depth and reported 3,284,552 exact pairs, 1,715,448 repeated entries among the first 5,000,000 captured calls, and 2,419,164 structural groups. Repeated entries contributed only 377 ms of exclusive comparison time within the captured subset; local context was not recorded.
+
+The proposition timer overlaps child work and cannot be summed with exclusive categories. Allocation/GC counters were unavailable; counters peak RSS was 20,434,672 KB versus 8,267,032 KB for release, so memory pressure cannot be assigned to expression allocation. Detailed trace peak RSS was 21,328,116 KB. Its top exclusive children included CategoryStruct.comp (1.003 s), NatTrans.app (542 ms), NSMul.proj (473 ms), AddGroup.proj (472 ms), and Functor.obj (242 ms). No one deep leaf explains the full 142.050 s trace root. The top-20 list and histograms are in the trace artifact.
+
+One nested major-premise comparison accounts for about 95 s at release speed. Its measured internal workload is mixed (outcome F), comparison-leaning and deep.
+
+## Reproducibility and cost accounting
+
+Root ID 68000 is the largest conversion in the replay containing the final inferred/declared check for `leftDerivedUpperStarTensorComparison_app_app_fac`. The release replay identifies the costly nested `NatTrans.app` pair as its major premise; the instrumented root line does not print full left/right expressions or a declaration ID, so the exact ID-to-premise mapping remains inferred. The expression and binder context are preserved in `probes/anatomy/replay/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/TensorSheaf.lean`; original, aligned and restoration sources are in adjacent directories. The replay `*.root-counters.metrics.txt` and `*.trace.metrics.txt`, and aligned `*.aligned-counters.metrics.txt`, preserve all per-root summaries, depth/fan-out histograms and ranked 20 child calls. Maximum fan-out across trace roots is 44.
+
+Trace root 68000 made 34,035,091 WHNF requests (59.679 s), 19,411,491 Delta unfolds (2.183 s), 17,656,468 Beta steps, 22 Iota steps, 381,067 Zeta steps and 2,815,216 projections. It entered 84,756 Pi-domain comparisons, 155,955 proposition comparisons and 5,235,311 proof attempts. The proposition timer (666.292 s) is nested and cannot be treated as exclusive time; the instrumentation cannot separate proof-type work from the 82.371 s trace comparison timer. The exact-pair sample is bounded to five million of 11.758 million calls, with no local-context key. Its aggregate counts cannot prove whether outer and inner `NatTrans.app` roots share particular pairs or instance arguments. No allocation or GC counters were available. The aligned target's release conversion was 2.43 s in the stored control and 2.54 s in the current rerun; the original 97.215 s replay cost is removed, while other module work remains.
