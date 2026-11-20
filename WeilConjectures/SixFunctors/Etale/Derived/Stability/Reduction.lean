@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduct
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHomConstantTensorIso
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.FiniteStage
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekConstantTensor
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.Local
 
 /-!
 # Finite coefficient reduction on `Dctf`
@@ -195,8 +196,6 @@ theorem nonempty_iso_reductionModIdeal_verdierDual {X : Scheme.{u}} (aX : X ⟶ 
   obtain ⟨e₂⟩ := nonempty_iso_reductionModIdeal_dualizingComplex Λ J aX
   exact ⟨e₁ ≪≫ (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).mapIso e₂⟩
 
-variable [IsAlgClosed k]
-
 /-- Blueprint `lemma-change-coefficients-exceptional-inverse-image--1`: the finite coefficient
 comparison for the exceptional inverse image.
 
@@ -218,30 +217,47 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}
     (hL : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
     Nonempty ((reductionModIdeal Λ X J).obj ((R(f)^![Λ]).obj L) ≅
       (R(f)^![Λ]).obj ((reductionModIdeal Λ Y J).obj L)) := by
-  have : HasInvertibleExponent Λ X := .of_hom aX
-  have : HasInvertibleExponent Λ Y := .of_hom aY
-  let N := constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) (ModuleCat.of Λ (Λ ⧸ J))
-  let DL := (verdierDual Λ aY).obj (op L)
-  have hDL := constructibleFiniteTor_verdierDual Λ aY hL
-  have hP := constructibleFiniteTor_leftDerivedUpperStar _ f hDL
-  have hω := constructibleFiniteTor_dualizingComplex Λ (𝟙 _) aY
-    (constructibleFiniteTor_tensorUnit Λ _)
-  obtain ⟨e₁⟩ :=
-    nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar Λ aX aY f hf hL
-  obtain ⟨e₂⟩ := nonempty_iso_reductionModIdeal_verdierDual Λ J aX hP
-  subst hf
-  have : QuasiCompact (f ≫ aY) := inferInstance
-  obtain ⟨c⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ f aY
-  obtain ⟨d⟩ := nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite Λ f
-  obtain ⟨e₃⟩ := nonempty_iso_reductionModIdeal_derivedHom_of_constructibleFiniteTor Λ J aY hDL hω
-  obtain ⟨e₄⟩ := nonempty_iso_reductionModIdeal_dualizingComplex Λ J aY
-  obtain ⟨b⟩ := nonempty_iso_verdierDual_verdierDual Λ aY hL
-  exact ⟨(reductionModIdeal Λ X J).mapIso e₁ ≪≫ e₂ ≪≫
-    (RHom(X)[ModuleCat.{u + 1} Λ].obj (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj DL))).mapIso
-      (c.app N) ≪≫ ((d.app (op DL)).app ((R(aY)^![Λ]).obj N)).symm ≪≫
-    (R(f)^![Λ]).mapIso
-      ((RHom(Y)[ModuleCat.{u + 1} Λ].obj (op DL)).mapIso e₄.symm ≪≫ e₃.symm ≪≫
-        (reductionModIdeal Λ Y J).mapIso b.symm)⟩
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+  have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
+  letI : QuasiCompact f := inferInstance
+  let B := ModuleCat.of Λ (Λ ⧸ J)
+  let N := constantSingle (ModuleCat.{u + 1} Λ) Y B
+  have hK := isExceptionalKunneth Λ k f aY
+  let sqP : IsPullback (𝟙 Y) aY aY (𝟙 (Spec (.of k))) := IsPullback.of_id_fst
+  let sq : IsPullback (𝟙 X) f f (𝟙 Y) := IsPullback.of_id_fst
+  have h := hK (W := Spec (.of k)) (P := Y) (Q := X) (q := 𝟙 Y) (r := aY)
+    (q' := 𝟙 X) (h := f) aY (𝟙 _) sqP sq
+  have hh := h.2 L
+    (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) B)
+  letI : IsIso (rightDerivedUpperShriekTensorMap f
+      ((L((𝟙 Y)^*[ModuleCat.{u + 1} Λ])).obj L)
+      ((L((aY)^*[ModuleCat.{u + 1} Λ])).obj
+        (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) B))) := hh
+  haveI := isIso_lowerShriekRightAdjointTensorMap_of_iso_left
+    (rightDerivedUpperShriekAdjunction Λ f) (M := (L((𝟙 Y)^*[ModuleCat.{u + 1} Λ])).obj L)
+      (M' := L) ((leftDerivedUpperStarId _ Y).app L)
+    (N := (L((aY)^*[ModuleCat.{u + 1} Λ])).obj
+      (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) B))
+  haveI := isIso_lowerShriekRightAdjointTensorMap_of_iso_right
+    (rightDerivedUpperShriekAdjunction Λ f) (M := L)
+      (N := (L((aY)^*[ModuleCat.{u + 1} Λ])).obj
+        (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) B))
+      (N' := N)
+      (leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} Λ) aY B)
+  let t := rightDerivedUpperShriekTensorMap f L N
+  let iT : IsIso t := by
+    dsimp [t]
+    infer_instance
+  let e := leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} Λ) f B
+  let m := ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+    ((R(f)^![Λ]).obj L)).map e.inv
+  let iM : IsIso m := by
+    dsimp [m]
+    infer_instance
+  exact ⟨@asIso _ _ _ _ m iM ≪≫ @asIso _ _ _ _ t iT⟩
+
+variable [IsAlgClosed k]
 
 /-- Blueprint `proposition-six-operations-dctf`, clause (vii), at the finite stage.
 
