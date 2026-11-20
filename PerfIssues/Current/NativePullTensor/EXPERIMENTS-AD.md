@@ -23,8 +23,8 @@ children were `Functor.map` (114.530 ms), `tensor_map_comm` (112.911 ms),
 `map_unit_comp_str` (55.699 ms), `Functor.modObjObj` (54.071 ms), and
 `Functor.flip._proof_4` (52.721 ms). `Functor.obj` unfolded 516,742 times in
 118.290 ms and `Functor.map` 216,960 times in 42.163 ms, so the high counts are
-cheap reductions relative to the comparison tree. Allocation and GC counters
-were unavailable; RSS is only a process proxy.
+cheap reductions relative to the comparison tree. The READY2 expression
+counter is the allocation proxy; RSS is only a process proxy.
 
 ## A2: targeted ablation
 

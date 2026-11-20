@@ -1,58 +1,40 @@
 # PerfIssues Targeted Follow-up Experiments
 
-Lean 4.35.0, snapshot `1ef1fddac73`, instrumentation build READY2-4.35.0.
-The reports use the existing in-situ and replay probes and add the A2/C
-validity decisions required by `AD.md`. All numeric values below are measured;
-interpretations are labelled as such. The completed READY2 reruns are
-summarized below; the original table remains the first-pass comparison.
+Lean 4.35.0, snapshot `1ef1fddac73`, rerun with READY2-4.35.0 counters and
+trace builds. Every row below is from the selected READY2 root for the same
+root and variant used in the first pass. Trace path samples are inclusive
+subtree samples; they are not additive with the root timer. Proposition timers
+are nested and are not added to exclusive comparison/reduction totals.
 
-| Case | Experiments | Measured result | Outcome |
-|---|---|---|---|
-| NativePullTensor | A1, A2 | 2.686M calls; depth 81; 22.333 s comparison + 11.746 s reduction. `Functor.obj`/major-premise A/A 0 ms versus A/B 11,396 ms and reverse 11,284 ms. | A causal accessor-premise component; remaining cost is distributed. B/C invalid. |
-| PR1556 | A1, A2 | 6.670M calls; depth 213; 39.404 s comparison + 37.784 s reduction. `NatTrans.app` A/B 50,090 ms, A/A 0, reverse 50,585 ms. | A causal major-premise component; deep mixed tree remains. B/C invalid. |
-| PR1625 | A1, A2 | 11.758M calls; depth 125; 70.713 s comparison + 57.127 s reduction. Nested app A/B 95,869 ms, A/A 0, reverse 93,567 ms. | A causal nested app premise; outer and inner sites share the mechanism. B/C invalid. |
-| PR1563 | A1, partial A2 | 2.574M calls; depth 95; 16.070 s comparison + 17.154 s reduction. Seven arguments range from 0 to 22.374 s; nested composition is largest. | Distributed mixed cost; no reversible single-component A2. B/C not validly isolated. |
-| PR1627 | A1, B attempt, C | 10.905M calls; depth 61; 20.611 s comparison + 20.198 s reduction. Generated fields 27.8/55.3/14.6 s; id domains 7.608/32.992 s. | Repeated generated dependent fields and proposition applications; B/A2 invalid. C confirms shared shape, not equal cost. |
-| PR1624 | A1, C | 6.599M calls; depth 88; 38.767 s comparison + 37.985 s reduction. Full endpoints 14.769/29.112 s while isolated args are 0--8 ms; aligned root 5.256 s/456k calls. | Full dependent endpoint creates the work; neither component A2 nor B preserves the telescope. |
-| PR2122 | C in original recursor | 2.227M calls; depth 93; 11.486 s comparison + 14.349 s reduction. Motive 16.115 s and witness 18.419 s; final branch cannot be checked alone. | Branch-local dependent work is measured; component and provider attribution remains unresolved. |
+| Case | READY2 root and path signal | Trace exclusive comparison / reduction | Dependent timer share | Expr proxy / RSS-commit proxy | A2/C conclusion |
+|---|---|---:|---:|---:|---|
+| NativePullTensor | `591`; `Functor.comp` paths 22,768.488 and 18,720.237 ms | 22,845.095 / 18,643.878 ms | 15,389.241 ms (67.4%) | 97,609,480 / 3.33 GB; 1.83 GB | `Functor.obj` premise A2 causal; B/C invalid |
+| PR1556 | `826`; `CategoryStruct.comp`/`NatTrans.app` subtree 76,274.013 ms | 48,035.017 / 44,715.147 ms | 38,426.569 ms (80.0%) | 298,357,470 / 9.97 GB; 103 MB | `NatTrans.app` premise A2 causal; B/C invalid |
+| PR1625 | `7086`; outer comp/app subtree 141,308.590 ms | 82,161.913 / 60,253.479 ms | 62,604.213 ms (76.2%) | 438,450,718 / 14.68 GB; 5.44 GB | outer `NatTrans.app` A2 causal; B/C invalid |
+| PR1563 | `2754`; nested comp/coe subtree 25,812.968 ms | 15,785.269 / 12,913.573 ms | 12,565.977 ms (79.6%) | 112,996,826 / 3.78 GB; 0 B | distributed partial A2 only; B/C invalid |
+| PR1627 | `1539`; generated algebra field chain 9,560.060 ms | 23,911.980 / 16,853.556 ms | 23,551.972 ms (98.5%) | 151,676,221 / 5.09 GB; 16.7 MB | no valid A2/B; C shared shape, unequal cost |
+| PR1624 | `3034`; dependent Iso/comp endpoint 2,420.826 ms sample | 37,377.645 / 29,061.999 ms | 29,986.592 ms (80.2%) | 293,181,229 / 9.80 GB; 4.62 GB | A2/B invalid; C endpoint work confirmed |
+| PR2122 | `32641`; branch endpoint path sample 192.071 ms | 12,314.071 / 11,839.551 ms | 8,546.240 ms (69.4%) | 84,397,734 / 2.81 GB; 1.53 GB | A/B invalid; C motive/witness valid |
 
-## READY2 rerun summary
+The counters reruns were: NativePullTensor 22,407.489 ms;
+PR1556 61,051.306 ms; PR1625 97,208.037 ms; PR1563 22,419.324 ms;
+PR1627 29,196.986 ms; PR1624 52,710.009 ms; and PR2122 18,025.161 ms.
+The corresponding comparison/reduction splits are recorded in each case
+record and profile. The dependent share is the reported dependent-comparison
+timer divided by trace comparison-exclusive time; it is a timer ratio, not a
+claim that all dependent work is disjoint from proposition work.
 
-The fixed selected roots reran with the READY2 counters build as follows:
-NativePullTensor 22.407 s / 2.686M calls, PR1556 61.051 s / 6.670M,
-PR1625 84.644 s / 11.758M, PR1563 21.635 s / 2.574M, PR1624 52.710 s /
-6.599M, and PR2122 18.025 s / 2.227M. READY2 generated-field probes for
-PR1627 completed with 2.069M and 4.697M-call roots; those are field probes,
-not a replacement for the earlier selected parent root. The corresponding
-trace and allocation/path logs are under `.round2logs2`.
+READY2 also reports proposition comparison/reduction timers for every root;
+the values are retained in each `EXPERIMENTS-AD.md` and `probes/ad/profile.txt`
+because they are nested. C++ expression creation is the available allocation
+proxy; RSS/commit deltas are process proxies and are not allocator totals.
 
-## Cross-case conclusions
+The selected source variants remain the original in-situ or replay probes:
+PR1627 uses `GeneratedProofPrefixes.lean`, while its original and replay
+variants were retained as non-selected diagnostics. PR2122's standalone final
+branch remains ill-typed outside its `Exists.casesOn` motive, so only the
+motive and witness/predicate branch measurements are attributed.
 
-1. The causal A2 controls that type-check (NativePullTensor, PR1556, PR1625)
-   remove the same measured representation-premise cost and restore it in the
-   reverse direction. This is evidence for a concrete component contribution,
-   not merely a high unfold count.
-2. The selected current roots are mixed. Comparison and reduction are both
-   material; selected roots do not support a reduction-only explanation.
-3. Exact pair repetition is visible, but its measured exclusive share is small
-   in the selected roots (about 0.5--11.2%). Pair keys omit local-context
-   identity, so this is a bounded repetition result rather than a cache claim.
-4. Dependent endpoints can be expensive even when their individual arguments
-   are cheap (`PR1624`). The trace records many Pi-domain and proposition
-   comparisons, but proposition timers are nested and cannot be added to the
-   exclusive comparison/reduction totals.
-5. PR1627 provides repeated generated-field evidence: two fields use the same
-   dependent `id`-proposition shape, while their costs differ substantially.
-   The generic helper is a construction control, not a shared-provider
-   experiment.
-6. PR2122's final dependent branch is ill-typed outside its `Exists.casesOn`
-   motive. The measured motive and witness checks are retained, and no cost is
-   attributed to the uncheckable branch.
-
-Allocation/GC counters were unavailable in READY-4.35.0; RSS changes are not
-reported as allocation. The validated instrumentation overhead was 1.32 s
-release, 1.48 s counters, 1.42 s trace on the fast control, and 49.39/53.79/
-59.81 s on the slow NativePullTensor control.
-
-Per-case records and compact measured probe summaries are in each case's
-`EXPERIMENTS-AD.md` and `probes/ad/profile.txt`.
+All seven cases have updated per-case experiment records and compact READY2
+profiles under `probes/ad/`. Raw rerun logs remain outside the committed
+deliverables.

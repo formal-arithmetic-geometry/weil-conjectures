@@ -58,4 +58,5 @@ rejected as a different telescope, so B/C are invalid rather than claimed.
 `probes/ad/profile.txt` records the root trace and the original/A/A/B/A
 replays. The original target conversion was 97,215 ms; the aligned theorem
 control was 2.43 s. Proposition timing is inclusive and is not added to the
-exclusive comparison/reduction split. Allocation/GC attribution is unavailable.
+exclusive comparison/reduction split. READY2 expression counts are the
+allocation proxy; RSS is a process proxy.

@@ -56,4 +56,5 @@ are partial C evidence: every retained replacement remains expensive.
 `probes/ad/profile.txt` records the seven argument measurements and selected
 trace. Original and fixed source prefixes were 117.04 s and 50.98 s wall. The
 20.699 s aligned root is a broader construction control, not a single-field
-ablation. Allocation/GC counters were unavailable.
+ablation. READY2 expression counts are the allocation proxy; RSS is a process
+proxy.

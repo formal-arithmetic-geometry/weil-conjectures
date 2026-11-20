@@ -56,5 +56,5 @@ added to exclusive totals.
 ## Accounting and artifacts
 
 `probes/ad/profile.txt` records the complete endpoint trace, isolated argument
-checks, and aligned control. Allocation/GC instrumentation was unavailable;
-instrumented RSS is not treated as allocated bytes.
+checks, and aligned control. READY2 expression counts are the allocation
+proxy; instrumented RSS is not treated as allocated bytes.

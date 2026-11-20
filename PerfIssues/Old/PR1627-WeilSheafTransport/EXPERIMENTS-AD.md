@@ -60,5 +60,5 @@ proof-type share is claimed.
 
 `probes/ad/profile.txt` records per-field and id-domain measurements and the
 selected trace. Original source RSS was 7,792,432 KB; aligned source RSS was
-1,841,708 KB. Allocation/GC counters were unavailable, so the RSS change is
-not attributed to allocation.
+1,841,708 KB. READY2 expression counts are the allocation proxy; the RSS
+change is not attributed to allocation.

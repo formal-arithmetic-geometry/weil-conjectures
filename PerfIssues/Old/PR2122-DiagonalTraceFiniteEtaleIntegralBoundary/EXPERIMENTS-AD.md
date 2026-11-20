@@ -51,4 +51,4 @@ No same-consumer type-preserving A2 or shared-provider B variant exists in the
 original branch. Concrete category/functor candidates remain hypotheses, not
 measured causes. `probes/ad/profile.txt` records the branch checks, original
 trace, and aligned control. Proposition timers are nested; allocation/GC
-counters were unavailable.
+counters are summarized by the READY2 expression and RSS/commit proxies above.
