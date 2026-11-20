@@ -1,0 +1,19 @@
+# DefEq Cost Anatomy Report
+
+Case: PR2122-DiagonalTraceFiniteEtaleIntegralBoundary
+Lean / Mathlib: Lean 4.35.0, source snapshot 1ef1fddac73
+Kernel instrumentation: observational Lean 4.35.0 patch, counters and detailed-trace modes from READY-4.35.0; minimum reported root 100 ms.
+
+Root: value check inside dependent Exists.casesOn. Original type-checking spans 16.7 s, 80.6 s, and 191 s; CPU 362.43 s; RSS 16,339,876 KB. Final inferred/declared conversion was 1 ms. Aligned split module: 28.1 s type checking, 30.89 s CPU, 31.76 s wall, RSS 5,298,740 KB. Existing branch audit measured motive 16,115 ms and witness/predicate 18,419 ms (body 2,212 ms); final dependent branch is invalid standalone.
+
+Counters-only instrumentation completed the original module and reported 72 roots above 100 ms. The largest observed root took 25.836 s with 2,227,198 calls, depth 93, 11.486 s exclusive comparison (44.5%) and 14.349 s reduction (55.5%). Other roots took 20.911, 18.000, 15.692, and 14.522 s, so no single recorded conversion accounts for the 191 s theorem check. The 72 root durations sum to 320.648 s across the entire module; this is not a single-parent cost and includes the earlier declarations. Proposition timers overlap nested work. Allocation/GC counters were unavailable.
+
+The detailed trace emitted 83 roots above 100 ms. Its largest root took 32.456 s, made 2,227,198 calls, reached depth 93, and split into 16.796 s exclusive comparison and 15.660 s reduction. The bounded full capture had 1,535,674 distinct exact pairs, 691,524 repeated entries, and 1,090,563 structural groups; repeated entries contributed only 287 ms exclusive comparison time. Top exclusive children were AddCommGroup.proj (236 ms), ModuleCat.carrier (113 ms), HAdd.hAdd (55 ms), and Functor.obj (26 ms). No one child explains the parent. The root counted zero Iota steps, so recursor iota reduction is not the measured expense in this root.
+
+Trace peak RSS was 23,183,492 KB, versus 16,339,876 KB for release. The pair key omits local-context identity; proposition time overlaps nested calls; allocation/GC attribution is unavailable. The measured workload is distributed and mixed (outcome F). Exact attribution of roots to motive, witness, and final dependent branch remains unresolved.
+
+## Reproducibility and cost accounting
+
+The complete original `Exists.casesOn` term and its 14 binders/12 lets are preserved inside `probes/anatomy/original/WeilConjectures/AlgebraicGeometry/DiagonalTrace/Finite/Trace/DiagonalTraceFiniteEtaleIntegralBoundary.lean`; no ill-typed standalone final branch was substituted. The aligned split source is in `aligned/`. The original `*.root-counters.metrics.txt` and `*.trace.metrics.txt` contain all module roots, ranked 20 child calls and depth/fan-out histograms; maximum fan-out across trace roots is 31. The aligned `*.aligned-counters.metrics.txt` is the control. Root ID 32641 is the largest reported module root, but the instrumentation has no declaration/branch ID, so its attribution to one specific recursor component is unresolved. The release motive and witness timings are separate branch audits, not children identified in this root trace.
+
+Trace root 32641 made 7,371,950 WHNF requests (15.660 s), 4,473,309 Delta unfolds (667 ms), 4,597,916 Beta steps, no Iota steps, 138,040 Zeta steps and 702,537 projections. It recorded 60,324 Pi-domain comparisons, 34,383 proposition comparisons and 1,190,293 proof attempts. The proposition timer (96.599 s) overlaps recursive work, and no exclusive motive/witness/final-branch split is available. Repeated entries contributed 1.7% of trace comparison-exclusive time; the raw pair key omits local context. No Expr allocation, live-heap or GC timer was available. The aligned module's largest root falls to 5.142 s/510,125 calls, but that control changes imports and theorem structure, so the decrease cannot be assigned to one recursor branch.
