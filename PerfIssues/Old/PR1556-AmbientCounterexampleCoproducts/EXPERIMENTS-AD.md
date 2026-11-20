@@ -21,6 +21,21 @@ time. Top exclusive children were `SMul.smul` (528 ms), `HAdd.hAdd` (502 ms),
 and cannot be added to the root categories. No allocation/GC counters were
 available.
 
+## READY2 rerun
+
+The selected trace root is `root=826`. Its largest path prefixes are the
+`CategoryStruct.comp`/`comp` chain under `argument[7]` and its nested
+`NatTrans.app` nodes, with the first major subtree at 76,274.013 ms. The trace
+root measured 92,750.164 ms wall, with 48,035.017 ms comparison exclusive and
+44,715.147 ms reduction exclusive. Counters measured 61,051.306 ms,
+29,147.176/31,904.129 ms. Dependent comparison/reduction timers were
+38,426.569/35,445.108 ms (80.0% of comparison-exclusive); proposition
+comparison/reduction were 9,557.184/9,207.893 ms and are nested.
+
+READY2 created 298,357,470 C++ expressions (9,970,769,744 bytes). RSS/commit
+delta was 103,219,200 bytes in trace (106,168,320 in counters). `/usr/bin/time`
+reported 4:58.47 wall and 8,662,560 KB maximum RSS for the trace run.
+
 ## A2: targeted ablation
 
 The A1 target is the `NatTrans.app` major premise. Replacing only the right

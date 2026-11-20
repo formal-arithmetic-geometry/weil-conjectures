@@ -21,6 +21,22 @@ Top exclusive children included `CategoryStruct.comp` (1.003 s), `NatTrans.app`
 (242 ms). No single child accounts for the parent; the outer and inner app
 sites have the same measured shape (about 95.7--97.2 s at release speed).
 
+## READY2 rerun
+
+The selected trace root is `root=7086`. The largest path prefixes are the
+outer `CategoryStruct.comp`/`NatTrans.app` chain under `binder_body[15]`,
+followed by the inner composition and app chain; the outer subtree measured
+141,308.590 ms. The trace root measured 142,415.392 ms wall, with
+82,161.913 ms comparison exclusive and 60,253.479 ms reduction exclusive.
+Counters measured 97,208.037 ms, split 49,660.504/47,547.533 ms. Dependent
+comparison/reduction timers were 62,604.213/49,357.493 ms (76.2% of
+comparison-exclusive); proposition comparison/reduction were 19,556.990/
+10,895.986 ms and are nested.
+
+READY2 created 438,450,718 C++ expressions (14,677,924,016 bytes). RSS/commit
+delta was 5,442,961,408 bytes in trace (65,404,928 in counters). `/usr/bin/time`
+reported 7:04.87 wall and 9,578,116 KB maximum RSS for the trace run.
+
 ## A2: targeted ablation
 
 The selected component is the outer `NatTrans.app` major premise. Original A/B

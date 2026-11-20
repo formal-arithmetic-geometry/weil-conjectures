@@ -19,6 +19,23 @@ endpoint conversions were 14,769 and 29,112 ms, while the four corresponding
 arguments were 0--8 ms. The full dependent endpoint therefore creates work
 absent from isolated argument checks.
 
+## READY2 rerun
+
+The selected trace root is `root=3034`. The leading path prefixes are the
+`Iso`/`Functor.comp` endpoint chain under `binder_body[5]`, including the
+`singleFunctor` proof and its proposition type (2,420.569--2,419.148 ms
+subtrees). The trace root measured 66,439.643 ms wall, with 37,377.645 ms
+comparison exclusive and 29,061.999 ms reduction exclusive. Counters measured
+52,710.009 ms, split 26,154.416/26,555.593 ms. Dependent
+comparison/reduction timers were 29,986.592/22,109.883 ms (80.2% of
+comparison-exclusive); proposition comparison/reduction were 7,388.116/
+6,951.204 ms and are nested.
+
+READY2 created 293,181,229 C++ expressions (9,796,728,600 bytes). RSS/commit
+delta was 4,621,074,432 bytes in trace (4,748,869,632 in counters).
+`/usr/bin/time` reported 4:54.41 wall and 12,226,248 KB maximum RSS for the
+trace run.
+
 ## A2 and B status
 
 Single-field replacement was rejected by `Kernel.check`: it changes later

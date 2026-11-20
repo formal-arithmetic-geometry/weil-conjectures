@@ -17,6 +17,23 @@ of comparison-exclusive time. The largest listed child was `AddCommGroup.proj`
 (236 ms), followed by `ModuleCat.carrier` (113 ms), `HAdd.hAdd` (55 ms), and
 `Functor.obj` (26 ms), so no single child accounts for the root.
 
+## READY2 rerun
+
+The selected trace root is `root=32641`. Its first path prefixes are the
+`ModuleCat.carrier` to `AddCommGrpCat.carrier` endpoint (192.071 ms sampled
+subtree) and the nested module action and `Functor.obj` branches; these path
+samples are reported as trace samples, not as a sum of the root timer. The
+trace root measured 24,153.623 ms wall, with 12,314.071 ms comparison
+exclusive and 11,839.551 ms reduction exclusive. Counters measured 18,025.161
+ms, split 7,779.355/10,245.805 ms. Dependent comparison/reduction timers were
+8,546.240/7,822.221 ms (69.4% of comparison-exclusive); proposition
+comparison/reduction were 3,761.463/4,014.431 ms and are nested.
+
+READY2 created 84,397,734 C++ expressions (2,810,518,408 bytes). RSS/commit
+delta was 1,528,496,128 bytes in trace (1,510,408,192 in counters).
+`/usr/bin/time` reported 7:40.38 wall and 17,287,104 KB maximum RSS for the
+trace run.
+
 ## C: branch-local dependent comparison
 
 The original-context branch audit measured the motive at 16,115 ms and the

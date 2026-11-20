@@ -2,7 +2,7 @@
 
 Case: `NativePullTensor`
 Lean / Mathlib: Lean 4.35.0, snapshot `1ef1fddac73`
-Instrumentation: READY-4.35.0 counters and trace builds; source and release baselines.
+Instrumentation: READY2-4.35.0 counters and trace builds; source and release baselines.
 
 ## A1: decomposition
 
@@ -47,9 +47,27 @@ timers and 21 Pi comparisons establish dependent work, but do not isolate a
 separate binder-instantiation cost. This is recorded as invalid rather than
 inferred.
 
+## READY2 rerun
+
+The selected trace root is `root=591`. The highest inclusive path prefixes are
+`root/binder_domain[0]` (41,488.963 ms), its `argument[3]` functor composition
+(22,768.488 ms), its `argument[2]` composition (18,720.237 ms), and the two
+`Functor.obj` children below those arguments (22,768.349 and 18,719.998 ms).
+The trace root measured 41,488.973 ms wall, with 22,845.095 ms comparison
+exclusive and 18,643.878 ms reduction exclusive. The counters rerun measured
+22,407.489 ms, split 15,131.398/7,276.091 ms. Reported dependent-
+comparison and dependent-reduction timers were 15,389.241/14,662.690 ms
+(67.4% of comparison-exclusive for the former); proposition comparison and
+reduction timers were 7,455.845/3,981.188 ms and are nested.
+
+READY2 created 97,609,480 C++ expressions (3,325,394,512 bytes). The process
+proxy changed RSS/commit by 1,832,189,952 bytes in trace (1,812,332,544 in
+counters); these are not allocator totals. `/usr/bin/time` reported 1:28.87
+wall and 6,323,668 KB maximum RSS for the trace run.
+
 ## Accounting and artifacts
 
-`probes/ad/profile.txt` records the measured rows and source artifacts. The
+`probes/ad/profile.txt` records the READY2 measured rows and source artifacts. The
 trace proposition timer is inclusive and overlaps recursive calls; it is not
 added to the exclusive categories. Instrumentation overhead on the validated
 fast control was 1.32 s release, 1.48 s counters, 1.42 s trace; on the slow

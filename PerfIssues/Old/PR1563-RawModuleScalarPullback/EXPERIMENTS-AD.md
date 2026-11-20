@@ -28,6 +28,22 @@ the exact original composition type with a reversible restored pair, so this
 is only partial ablation evidence, not a causal A2 claim. The valid conclusion
 is that no tested child explains the complete 31.026 s outer conversion.
 
+## READY2 rerun
+
+The selected trace root is `root=2754`. Its leading path prefixes are the
+nested `CategoryStruct.comp`/`DFunLike.coe` chain (25,812.968 ms), followed by
+the `comp`/`NatTrans.app` subtree (15,663.341 ms) and the `Functor.map` branch
+(6,852.367 ms). The trace root measured 28,698.842 ms wall, with
+15,785.269 ms comparison exclusive and 12,913.573 ms reduction exclusive.
+Counters measured 22,419.324 ms, split 10,744.132/11,675.192 ms. Dependent
+comparison/reduction timers were 12,565.977/10,210.169 ms (79.6% of
+comparison-exclusive); proposition comparison/reduction were 3,208.523/
+2,698.456 ms and are nested.
+
+READY2 created 112,996,826 C++ expressions (3,776,404,760 bytes). RSS/commit
+delta was zero in trace and counters for this run. `/usr/bin/time` reported
+7:08.31 wall and 12,306,952 KB maximum RSS for the trace run.
+
 ## B and C status
 
 The nested composition supplies local amplification and repeated vocabulary,

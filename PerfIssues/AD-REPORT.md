@@ -1,10 +1,10 @@
 # PerfIssues Targeted Follow-up Experiments
 
-Lean 4.35.0, snapshot `1ef1fddac73`, instrumentation build READY-4.35.0.
+Lean 4.35.0, snapshot `1ef1fddac73`, instrumentation build READY2-4.35.0.
 The reports use the existing in-situ and replay probes and add the A2/C
 validity decisions required by `AD.md`. All numeric values below are measured;
-interpretations are labelled as such. No READY2 build was present during this
-batch, so no component-path or allocation rerun was available.
+interpretations are labelled as such. The completed READY2 reruns are
+summarized below; the original table remains the first-pass comparison.
 
 | Case | Experiments | Measured result | Outcome |
 |---|---|---|---|
@@ -15,6 +15,16 @@ batch, so no component-path or allocation rerun was available.
 | PR1627 | A1, B attempt, C | 10.905M calls; depth 61; 20.611 s comparison + 20.198 s reduction. Generated fields 27.8/55.3/14.6 s; id domains 7.608/32.992 s. | Repeated generated dependent fields and proposition applications; B/A2 invalid. C confirms shared shape, not equal cost. |
 | PR1624 | A1, C | 6.599M calls; depth 88; 38.767 s comparison + 37.985 s reduction. Full endpoints 14.769/29.112 s while isolated args are 0--8 ms; aligned root 5.256 s/456k calls. | Full dependent endpoint creates the work; neither component A2 nor B preserves the telescope. |
 | PR2122 | C in original recursor | 2.227M calls; depth 93; 11.486 s comparison + 14.349 s reduction. Motive 16.115 s and witness 18.419 s; final branch cannot be checked alone. | Branch-local dependent work is measured; component and provider attribution remains unresolved. |
+
+## READY2 rerun summary
+
+The fixed selected roots reran with the READY2 counters build as follows:
+NativePullTensor 22.407 s / 2.686M calls, PR1556 61.051 s / 6.670M,
+PR1625 84.644 s / 11.758M, PR1563 21.635 s / 2.574M, PR1624 52.710 s /
+6.599M, and PR2122 18.025 s / 2.227M. READY2 generated-field probes for
+PR1627 completed with 2.069M and 4.697M-call roots; those are field probes,
+not a replacement for the earlier selected parent root. The corresponding
+trace and allocation/path logs are under `.round2logs2`.
 
 ## Cross-case conclusions
 
