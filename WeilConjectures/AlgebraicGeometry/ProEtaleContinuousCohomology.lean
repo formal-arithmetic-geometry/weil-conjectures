@@ -246,7 +246,7 @@ private lemma continuousCohomologyMilnor_shortExact (q : ℤ)
       Pi.lift_comp_π _ n
     simp only [v, c₁, Category.assoc]
     rw [h1, continuousCohomologyLimitMap_π]
-    erw [piComparison_comp_π]
+    rw [piComparison_comp_π]
     rw [← h2]
     simp only [Functor.map_comp]
     rfl
