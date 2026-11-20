@@ -95,3 +95,22 @@ No individual instance route explains the timeout. The complete three-route
 alignment removes the first two data-valued mismatches and the large cost,
 while leaving a smaller predicate conversion. This is the §6 restoration
 experiment for the bundle case.
+## Round 2 and v2 addendum
+
+The fresh full-alignment probe completed in 16.91 s wall (27.55 s user, 2.54 GB peak RSS). Four single-route restoration probes each reached a deterministic timeout in small_spectral_raw_lattices after 49.96--50.76 s and did not reach the final theorem check. The original all-route restoration remains the 40.23 s timeout.
+
+### STRUCTURE EXPOSURE AND AMPLIFICATION ADDENDUM
+
+**A. MISMATCH SEMANTICS.** The initial divergence is a bundle: two repeated continuousMapRingObj values select Semifield.toCommSemiring versus CommRing.toCommSemiring, with related third-map and lattice-predicate differences. No one route is independently causal; the complete three-path bundle is the trigger.
+
+**B. EXPOSURE.** The boundary is the topology/instance argument of the two ring-object lets, followed by the RawStratifiedLattices dependent predicate. The tree contains spectral norm, local-ring/domain instances, continuous-map ring objects, a functor map, locally-free module fields, and quantified lattice data. The ring paths are comparison-relevant and full alignment connects them to the measured Functor.obj footprint; individual fields remain inferred.
+
+**C. COST MECHANISM.** Original and single-route variants are reduction-heavy and repeated over two ring lets. Full alignment is 16.91 s; single-route probes time out; original is 40.23 s/timeout. The 23,580 Functor.obj count is a downstream footprint, not an execution trace.
+
+**D. FIXED-TRIGGER ABLATION.** Invalid: the trigger is the complete dependent instance bundle. Abstracting one route changes the bundle or times out at the leaf. The full aligned/original pair is the valid restoration control.
+
+**E. REDUCTION-PATH AUDIT.** Ring-object heads are shared but instance paths differ. Disabling one route moves the first difference to another route and still times out; disabling all three exposes the common fast representation. Internal order is inferred.
+
+**F. MISMATCH PROVENANCE.** The same generic spectral construction is elaborated through distinct IsRegularLocalRing, HenselianLocalRing, and IsDomain providers. The third map and lattice predicate come from surrounding helpers. The first provenance divergence is instance selection.
+
+**G. CONCLUSION.** P2 + P3, evidence level 2. Every one-factor restoration fails while complete alignment succeeds. Remaining predicate cost is unattributed. A typed whole-bundle ablation preserving all three lets is the next falsifier.
