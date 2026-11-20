@@ -19,7 +19,7 @@ the counit through the triangle identities, so it commutes with base change as w
 (`CategoryTheory.Adjunction.unit_comp_of_counit_comp`): with `g' : ℙ¹_{S'} ⟶ ℙ¹_S` the base
 change of `g`, the pullback `Lg'^* η_M` of the unit at `M`, followed by the identification
 `Lg'^*(Lq^*(-)(1)[2]) ≅ Lq'^* Lg^*(-)(1)[2]` and by `Ex_! : Lg^* Rq_! ⟶ Rq'_! Lg'^*`, is the unit
-at `Lg'^* M`. This is blueprint `proposition-adjunction-projective-line--2`.
+at `Lg'^* M`.
 
 ## Main statements
 
@@ -44,13 +44,12 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasKummerClass.IsNormalized Λ] {S S' : Scheme.{u}} [HasInvertibleExponent Λ S]
   [HasInvertibleExponent Λ S']
 
-/-- Blueprint `proposition-adjunction-projective-line--2`: *the unit of the projective-line
-adjunction is compatible with base change*. Let `adj : Rq_! ⊣ Lq^*(1)[2]` and
-`adj' : Rq'_! ⊣ Lq'^*(1)[2]` be the projective-line adjunctions of `q : ℙ¹_S ⟶ S` and of its base
-change `q' : ℙ¹_{S'} ⟶ S'` along `g : S' ⟶ S`, i.e. the adjunctions whose counits are the trace
-counits `AlgebraicGeometry.Etale.projectiveLineCounit`
-(`AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`).
-Then for every `M ∈ D(ℙ¹_S)` the pullback `Lg'^* η_M` of the unit, followed by the identification
+/-- The unit of the projective-line adjunction is compatible with base change. Let
+`adj : Rq_! ⊣ Lq^*(1)[2]` and `adj' : Rq'_! ⊣ Lq'^*(1)[2]` be the projective-line adjunctions
+of `q : ℙ¹_S ⟶ S` and of its base change `q' : ℙ¹_{S'} ⟶ S'` along `g : S' ⟶ S`,
+i.e. the adjunctions whose counits are the trace counits
+`AlgebraicGeometry.Etale.projectiveLineCounit`. Then for every `M ∈ D(ℙ¹_S)` the pullback
+`Lg'^* η_M` of the unit, followed by the identification
 `Lg'^*(Lq^* Rq_! M (1)[2]) ≅ Lq'^* Lg^* Rq_! M (1)[2]` and by `Lq'^*(Ex_!)(1)[2]`, is the unit
 `η'_{Lg'^* M}`. -/
 theorem projectiveLineAdjunction_unit_baseChange (g : S' ⟶ S)

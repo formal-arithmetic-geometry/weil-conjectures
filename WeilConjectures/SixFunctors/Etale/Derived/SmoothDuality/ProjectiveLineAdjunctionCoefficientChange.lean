@@ -20,18 +20,16 @@ Let `Λ` be a finite coefficient ring (the stage `A = A_{E,n}`) and `J` an ideal
 (`AlgebraicGeometry.Etale.reductionModIdeal`).
 
 For `q : ℙ¹_S ⟶ S` the projective-line adjunction `Rq_! ⊣ Lq^*(1)[2]`
-(`AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`, blueprint
-`proposition-adjunction-projective-line`) is compatible with this change of coefficients:
+(`AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`) is compatible with this change of
+coefficients:
 
 * the counit, through the coefficient change of compact support
   `(Rq_! M) ⊗ᴸ B ≅ Rq_!(M ⊗ᴸ B)` (`AlgebraicGeometry.Etale.compactSupportCoefficientChangeIso`)
   and the identification `(Lq^* K)(1)[2] ⊗ᴸ B ≅ Lq^*(K ⊗ᴸ B)(1)[2]`
   (`AlgebraicGeometry.Etale.projectiveLineReductionModIdealIso`)
-  (`AlgebraicGeometry.Etale.projectiveLineAdjunction_counit_reductionModIdeal`, blueprint
-  `proposition-adjunction-projective-line--5`);
+  (`AlgebraicGeometry.Etale.projectiveLineAdjunction_counit_reductionModIdeal`);
 * hence the unit, which is determined by the counit through the triangle identities
-  (`AlgebraicGeometry.Etale.projectiveLineAdjunction_unit_reductionModIdeal`, blueprint
-  `proposition-adjunction-projective-line--4`).
+  (`AlgebraicGeometry.Etale.projectiveLineAdjunction_unit_reductionModIdeal`).
 
 ## Main definitions
 
@@ -61,8 +59,7 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ] (J : Ideal Λ)
 
 /-- The twist-and-shift commutes with the reduction of the coefficients:
-`K(1)[2] ⊗ᴸ (Λ ⧸ J)_X ≅ (K ⊗ᴸ (Λ ⧸ J)_X)(1)[2]`, naturally in `K`. Both sides are tensor products
-with `Λ(1)[2]` and `(Λ ⧸ J)_X`, in two orders, which are exchanged by the braiding. -/
+`K(1)[2] ⊗ᴸ (Λ ⧸ J)_X ≅ (K ⊗ᴸ (Λ ⧸ J)_X)(1)[2]`, naturally in `K`. -/
 noncomputable def twistShiftOneReductionModIdealIso (X : Scheme.{u}) :
     twistShift Λ X 1 ⋙ reductionModIdeal Λ X J ≅ reductionModIdeal Λ X J ⋙ twistShift Λ X 1 :=
   Functor.isoWhiskerRight (derivedTensorRightShiftIso _ (tateObject Λ X 1) 2).symm _ ≪≫
@@ -72,9 +69,7 @@ noncomputable def twistShiftOneReductionModIdealIso (X : Scheme.{u}) :
     Functor.isoWhiskerLeft _ (derivedTensorRightShiftIso _ (tateObject Λ X 1) 2)
 
 /-- For `q : ℙ¹_S ⟶ S`, the functor `Lq^*(-)(1)[2]` commutes with the reduction of the
-coefficients: `(Lq^* K)(1)[2] ⊗ᴸ (Λ ⧸ J)_{ℙ¹_S} ≅ Lq^*(K ⊗ᴸ (Λ ⧸ J)_S)(1)[2]`, naturally in `K`,
-by `AlgebraicGeometry.Etale.twistShiftOneReductionModIdealIso` and the commutation of `Lq^*`
-with the reduction (`AlgebraicGeometry.Etale.leftDerivedUpperStarReductionModIdealIso`). -/
+coefficients: `(Lq^* K)(1)[2] ⊗ᴸ (Λ ⧸ J)_{ℙ¹_S} ≅ Lq^*(K ⊗ᴸ (Λ ⧸ J)_S)(1)[2]`, naturally in `K`. -/
 noncomputable def projectiveLineReductionModIdealIso (S : Scheme.{u}) :
     (L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ]) ⋙
         twistShift Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1) ⋙
@@ -90,10 +85,10 @@ noncomputable def projectiveLineReductionModIdealIso (S : Scheme.{u}) :
 
 variable [HasKummerClass.IsNormalized Λ] {S : Scheme.{u}} [HasInvertibleExponent Λ S]
 
-/-- Blueprint `proposition-adjunction-projective-line--5`: *the counit of the projective-line
-adjunction is compatible with change of finite coefficients*. For an ideal `J` of `Λ` and
-`B = Λ ⧸ J`, the counit `ε_K : Rq_!(Lq^* K (1)[2]) ⟶ K` of the projective-line adjunction
-(the trace counit `AlgebraicGeometry.Etale.projectiveLineCounit`) satisfies
+/-- The counit of the projective-line adjunction is compatible with change of finite
+coefficients: for an ideal `J` of `Λ` and `B = Λ ⧸ J`, the counit
+`ε_K : Rq_!(Lq^* K (1)[2]) ⟶ K` of the projective-line adjunction (the trace counit
+`AlgebraicGeometry.Etale.projectiveLineCounit`) satisfies
 
 `(Rq_! Lq^* K (1)[2]) ⊗ᴸ B ≅ Rq_!((Lq^* K (1)[2]) ⊗ᴸ B) ≅ Rq_!(Lq^*(K ⊗ᴸ B)(1)[2])
   --ε_{K ⊗ᴸ B}--> K ⊗ᴸ B` `= ε_K ⊗ᴸ B`,
@@ -112,8 +107,7 @@ theorem projectiveLineCounit_reductionModIdeal
     (reductionModIdeal Λ S J).map (projectiveLineCounit Λ S K) := by
   sorry
 
-/-- Blueprint `proposition-adjunction-projective-line--5`, for the adjunction: for every
-adjunction `adj : Rq_! ⊣ Lq^*(1)[2]` with the trace counit
+/-- For every adjunction `adj : Rq_! ⊣ Lq^*(1)[2]` with the trace counit
 (`AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`), the counit is compatible with the
 change of finite coefficients `- ⊗ᴸ (Λ ⧸ J)`
 (`AlgebraicGeometry.Etale.projectiveLineCounit_reductionModIdeal`). -/
@@ -133,15 +127,12 @@ theorem projectiveLineAdjunction_counit_reductionModIdeal
   rw [hadj, hadj]
   exact projectiveLineCounit_reductionModIdeal Λ J K
 
-/-- Blueprint `proposition-adjunction-projective-line--4`: *the unit of the projective-line
-adjunction is compatible with change of finite coefficients*. For every adjunction
-`adj : Rq_! ⊣ Lq^*(1)[2]` with the trace counit
+/-- The unit of the projective-line adjunction is compatible with change of finite coefficients:
+for every adjunction `adj : Rq_! ⊣ Lq^*(1)[2]` with the trace counit
 (`AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`), an ideal `J` of `Λ` and
 `M ∈ D(ℙ¹_S)`, the unit `η_M ⊗ᴸ B` at `M`, followed by the identification
 `(Lq^* Rq_! M)(1)[2] ⊗ᴸ B ≅ Lq^*((Rq_! M) ⊗ᴸ B)(1)[2]` and by `Lq^*` of the coefficient change of
-compact support `(Rq_! M) ⊗ᴸ B ≅ Rq_!(M ⊗ᴸ B)`, is the unit `η_{M ⊗ᴸ B}`. It follows from the
-compatibility of the counit (`AlgebraicGeometry.Etale.projectiveLineCounit_reductionModIdeal`),
-the unit being determined by the counit. -/
+compact support `(Rq_! M) ⊗ᴸ B ≅ Rq_!(M ⊗ᴸ B)`, is the unit `η_{M ⊗ᴸ B}`. -/
 theorem projectiveLineAdjunction_unit_reductionModIdeal
     (adj : R((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_![ModuleCat.{u + 1} Λ] ⊣
       L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ]) ⋙

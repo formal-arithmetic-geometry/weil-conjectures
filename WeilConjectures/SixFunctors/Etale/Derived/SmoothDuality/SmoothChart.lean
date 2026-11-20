@@ -15,24 +15,23 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineSpac
 
 Let `f : X ⟶ S` admit a compactification and let `u : U ⟶ X` be a quasi-compact open immersion
 with `u ≫ f = e ≫ p_d`, where `e : U ⟶ 𝔸^d_S` is separated, étale and quasi-compact and
-`p_d : 𝔸^d_S ⟶ S` is the projection: a *chart* of `f` in the sense of blueprint
-`proposition-exceptional-inverse-image-smooth-morphism` (every smooth morphism is covered by such
+`p_d : 𝔸^d_S ⟶ S` is the projection: a *chart* of `f` (every smooth morphism is covered by such
 charts). For a normalized Tate twist, the exceptional inverse image is computed on the chart:
 
 * `(Rf^! N)|_U ≅ Le^* Lp_d^* N(d)[2d]`, naturally in `N`
-  (`nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_chart`,
-  blueprint `proposition-exceptional-inverse-image-smooth-morphism--1`): étale localization of
-  `Rf^!` along `u` and along `e` (blueprint `lem-amb-etale-adjoint-locality`), and
-  `Rp_d^! ≅ Lp_d^*(d)[2d]` by uniqueness of right adjoints
-  (`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`);
+  (`nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_chart`);
 * under this identification, the counit of `R(e ≫ p_d)_! ⊣ R(e ≫ p_d)^!` is the counit of the
   extension by zero along `e` (the sum over the fibres of `e`) followed by the counit of
   `Rp_{d!} ⊣ Lp_d^*(d)[2d]`
-  (`AlgebraicGeometry.Etale.existsUnique_iso_rightDerivedUpperShriek_of_chart`, blueprint
-  `proposition-exceptional-inverse-image-smooth-morphism--2`);
+  (`AlgebraicGeometry.Etale.existsUnique_iso_rightDerivedUpperShriek_of_chart`);
 * `ω_f|_U ≅ Λ_U(d)[2d]`
-  (`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_dualizingComplex_of_chart`,
-  blueprint `proposition-exceptional-inverse-image-smooth-morphism--3`).
+  (`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_dualizingComplex_of_chart`).
+
+## Implementation details
+
+The first isomorphism is obtained by étale localization of `Rf^!` along `u` and along `e`, and
+`Rp_d^! ≅ Lp_d^*(d)[2d]` by uniqueness of right adjoints
+(`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`).
 -/
 
 @[expose] public section
@@ -52,10 +51,9 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
   [HasTateTwist.IsNormalized Λ] {U X S : Scheme.{u}} [HasInvertibleExponent Λ S] (d : ℕ)
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--1`: *the exceptional
-inverse image on a chart*. Let `f : X ⟶ S` admit a compactification, `u : U ⟶ X` a quasi-compact
-open immersion and `e : U ⟶ 𝔸^d_S` a separated, quasi-compact étale morphism with
-`u ≫ f = e ≫ p_d` for the projection `p_d : 𝔸^d_S ⟶ S`. Then, naturally in `N`,
+/-- The exceptional inverse image on a chart: let `f : X ⟶ S` admit a compactification,
+`u : U ⟶ X` a quasi-compact open immersion and `e : U ⟶ 𝔸^d_S` a separated, quasi-compact
+étale morphism with `u ≫ f = e ≫ p_d` for the projection `p_d : 𝔸^d_S ⟶ S`. Then, naturally in `N`,
 
 `(Rf^! N)|_U ≅ Le^* Lp_d^* N(d)[2d]`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_chart
@@ -74,10 +72,9 @@ theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_chart
     ((rightDerivedUpperShriekAdjunction Λ _).rightAdjointUniq adj) _⟩
 
 omit [HasTateTwist.IsNormalized Λ] [HasInvertibleExponent Λ S] in
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--2`: *the counit on a
-chart*. Let `e : U ⟶ 𝔸^d_S` be a separated étale morphism of finite type between Noetherian
-schemes, so that `h = e ≫ p_d` is the restriction of `f` to the chart `U`, and let
-`adj : Rp_{d!} ⊣ Lp_d^*(d)[2d]` be the adjunction of
+/-- The counit on a chart: let `e : U ⟶ 𝔸^d_S` be a separated étale morphism of finite type
+between Noetherian schemes, so that `h = e ≫ p_d` is the restriction of `f` to the chart `U`,
+and let `adj : Rp_{d!} ⊣ Lp_d^*(d)[2d]` be the adjunction of
 `AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace` (computed with
 the chosen compactifications). There is a unique identification
 `φ : e^* Lp_d^*(-)(d)[2d] ≅ Rh^!` under which the counit of `Rh_! ⊣ Rh^!` is the inverse
@@ -117,8 +114,7 @@ theorem existsUnique_iso_rightDerivedUpperShriek_of_chart [IsNoetherian U] [IsNo
     R(e ≫ (𝔸(ULift.{u} (Fin d); S) ↘ S))^![Λ] adj
     (rightDerivedUpperShriekAdjunction Λ (e ≫ (𝔸(ULift.{u} (Fin d); S) ↘ S)))
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--3`: *the dualizing complex
-on a chart*. In the situation of
+/-- The dualizing complex on a chart: in the situation of
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_chart`,
 the dualizing complex `ω_f = Rf^! Λ_S` restricts on the chart `U` to
 
