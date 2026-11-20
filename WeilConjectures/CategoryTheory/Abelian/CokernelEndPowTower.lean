@@ -37,25 +37,25 @@ variable {C : Type u} [Category.{v} C] [HasZeroMorphisms C] [HasCokernels C] {A 
   (φ : End A)
 
 lemma pow_succ_comp_cokernel_π_pow (n : ℕ) :
-    (φ ^ (n + 1) : A ⟶ A) ≫ cokernel.π (φ ^ n : A ⟶ A) = 0 := by
-  rw [pow_succ, End.mul_def, Category.assoc, cokernel.condition, Limits.comp_zero]
+    (φ ^ (n + 1)).asHom ≫ cokernel.π (φ ^ n).asHom = 0 := by
+  rw [pow_succ, End.mul_asHom, Category.assoc, cokernel.condition, Limits.comp_zero]
 
 /-- The reduction `A/φⁿ⁺¹ ⟶ A/φⁿ`. -/
 noncomputable def cokernelEndPowTransition (n : ℕ) :
-    cokernel (φ ^ (n + 1) : A ⟶ A) ⟶ cokernel (φ ^ n : A ⟶ A) :=
+    cokernel (φ ^ (n + 1)).asHom ⟶ cokernel (φ ^ n).asHom :=
   cokernel.desc _ (cokernel.π _) (pow_succ_comp_cokernel_π_pow φ n)
 
 @[reassoc (attr := simp)]
 lemma cokernel_π_cokernelEndPowTransition (n : ℕ) :
-    cokernel.π _ ≫ cokernelEndPowTransition φ n = cokernel.π (φ ^ n : A ⟶ A) :=
+    cokernel.π _ ≫ cokernelEndPowTransition φ n = cokernel.π (φ ^ n).asHom :=
   cokernel.π_desc _ _ _
 
 /-- The inverse system `n ↦ A/φⁿ` of the reductions of `A` modulo the powers of `φ`. -/
 noncomputable def cokernelEndPowTower : ℕᵒᵖ ⥤ C :=
-  Functor.ofOpSequence (X := fun n ↦ cokernel (φ ^ n : A ⟶ A)) (cokernelEndPowTransition φ)
+  Functor.ofOpSequence (X := fun n ↦ cokernel (φ ^ n).asHom) (cokernelEndPowTransition φ)
 
 lemma cokernelEndPowTower_obj (n : ℕ) :
-    (cokernelEndPowTower φ).obj (Opposite.op n) = cokernel (φ ^ n : A ⟶ A) :=
+    (cokernelEndPowTower φ).obj (Opposite.op n) = cokernel (φ ^ n).asHom :=
   rfl
 
 @[simp]
@@ -66,14 +66,14 @@ lemma cokernelEndPowTower_map_succ (n : ℕ) :
 /-- The cone of the projections `A ⟶ A/φⁿ`. -/
 noncomputable def cokernelEndPowTowerCone : Cone (cokernelEndPowTower φ) where
   pt := A
-  π := NatTrans.ofOpSequence (fun n ↦ cokernel.π (φ ^ n : A ⟶ A)) (fun n ↦ by
+  π := NatTrans.ofOpSequence (fun n ↦ cokernel.π (φ ^ n).asHom) (fun n ↦ by
     simp only [Functor.const_obj_obj, Functor.const_obj_map, Category.id_comp,
       cokernelEndPowTower_map_succ]
     exact (cokernel_π_cokernelEndPowTransition φ n).symm)
 
 @[simp]
 lemma cokernelEndPowTowerCone_π_app (n : ℕ) :
-    (cokernelEndPowTowerCone φ).π.app (Opposite.op n) = cokernel.π (φ ^ n : A ⟶ A) :=
+    (cokernelEndPowTowerCone φ).π.app (Opposite.op n) = cokernel.π (φ ^ n).asHom :=
   rfl
 
 end CategoryTheory.Limits

@@ -53,6 +53,6 @@ variable {ℓ E}
 noncomputable def padicIntegersSmul {X : Scheme.{u}} (c : integers ℓ E.1)
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) : End M :=
-  (Mod.smulNatTrans (padicIntegersConstSectionRingHom ℓ E X c).hom).app M
+  .of <| (Mod.smulNatTrans (padicIntegersConstSectionRingHom ℓ E X c).hom).app M
 
 end AlgebraicGeometry.ProEtale
