@@ -16,7 +16,7 @@ The isomorphisms `Lg^*(K ⊗ᴸ_R S) ≅ (Lg^* K) ⊗ᴸ_R S` of
 `AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso` are compatible with the
 identity isomorphisms `L(𝟙 Y)^* ≅ 𝟭`, with the composition isomorphisms
 `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*` and with the transport along equalities of morphisms
-(blueprint `thm-trf-finite-coefficient-map`).
+(blueprint `theorem-grothendieck-lefschetz-trace-formula--7`).
 
 The coherence arguments are first proved for arbitrary additive functors, localization functors
 and left derived functors (the `_aux` lemmas below) and then instantiated: at the concrete

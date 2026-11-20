@@ -22,8 +22,8 @@ compact-support exchanges
 ```
 ν_c : Rc'_! Ψ_C ⟶ Ψ_{X×X} Rc_!,     ν_X : Ra_{X'!} Ψ_X ⟶ Ψ_s Ra_{X!}
 ```
-of the nearby cycles of the deformations to the normal cones (blueprint `det-nearby-exchange-maps`),
-the specialization data of blueprint `sk-prop-tf-trace-specialization`
+of the nearby cycles of the deformations to the normal cones (blueprint `prose-E-15`),
+the specialization data of blueprint `proposition-specialization-trace-class`
 (`ProEtale.CondensedRing.Correspondence.IsContractingAt.deformationTraceSpecialization`) has the
 nearby cycles of the deformations as specialization functors, the specialization unit of the
 support, the proper exchange `χ_Δ` of the diagonal, the exceptional exchange `β_c`, the mate of
@@ -115,7 +115,7 @@ variable (νc : hc.SupportCompactSupportExchange (ℓ := ℓ) k')
   (νX : PointCompactSupportExchange (ℓ := ℓ) X k' (y ≫ c.c₁)) (F : c.FixedLocus)
 
 /-- **The trace specialization of the deformation to the normal cone** (blueprint
-`sk-prop-tf-trace-specialization`): the specialization data from `c` to the specialized
+`proposition-specialization-trace-class`): the specialization data from `c` to the specialized
 correspondence `c'` with the nearby cycles of the deformations to the normal cones
 `Ψ_C = specialization k' y`, `Ψ_X = specialization k' x`, `Ψ_{X×X} = specializationProd k' x`, the
 specialization unit of the support, the proper exchange of the diagonal, the exceptional exchange

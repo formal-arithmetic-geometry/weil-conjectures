@@ -11,7 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVNormalizedCoefficientRoof
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVResolvedRoofOpenMateComparisons
 
-/-! # Mate comparisons for the concrete resolved row roof -/
+/-! # Mate comparisons for the concrete resolved row roof
+
+## References
+
+* Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -169,29 +174,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- The three vertex comparison types include composed derived and complex functors.
 /-- Identify the three normalized roof maps with the prescribed base-change
-arrows, after their denominator vertices are known invertible.
-Source: Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T.
-(blueprint: lem-pc-relative-mv-resolved-roof-mate-comparisons).
-Proof: Compare Q(f_*I) with Rf_*K using the inverse K-injective computation
-isomorphism followed by Rf_* of the resolution isomorphism. For an open W,
-compare its open-image complex with Rj_* of exact restriction of K and then use
-relativeMVExactOpenIso to pass to R(jf)_*Lj* K. Apply Lg* to the source
-comparisons. On the target use the computation isomorphism for f'_*J and the
-canonical inverse-open comparisons. The middle comparisons are the composite
-of the localization and direct-image biproduct comparisons and the two open
-comparisons. Naturality of direct-image localization at r and s cancels the
-resolution maps from the roof. The composition comparison for pushforward
-is the right-adjoint mate of the pinned derived-pullback composition comparison:
-both are determined by their derived-unit equations. Expanding the counit of
-the composite adjunction identifies the global roof map with the transpose of
-the global base-change arrow. For W use the sectionwise open counit square,
-the exact-open pullback comparison and inverse-open coefficient comparison.
-Their mate equations identify the restricted roof map with the local
-base-change arrow for W. Biproduct naturality combines W=U,V to give the
-middle equation; W=U intersect V gives the third. This step constructs no
-complex, chain map, exact sequence or quasi-isomorphism. It uses only the
-normalized representatives supplied in the hypotheses, and the functorial
-comparisons, so zero maps and empty or repeated opens need no exceptions. -/
+arrows, after their denominator vertices are known invertible. -/
 theorem relativeMV_resolved_roof_mate_comparisons
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

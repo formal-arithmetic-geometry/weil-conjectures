@@ -260,7 +260,7 @@ theorem symSpecChart_linear {c : ℕ} (U₁ : X.AffineZariskiSite)
     Category.comp_id]
   exact appLE_relation' _ (CategoryTheory.Limits.pullback.snd _ _) _ _ hF _ _ _ _ _ β hβ _ _
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
 
 **`Spec_X (Sym^• ℰ)` is a vector bundle.** If `ℰ` is quasi-coherent and locally free of rank `c`
 (every point has an affine neighbourhood `U` on which `Γ(ℰ, U)` has a basis indexed by

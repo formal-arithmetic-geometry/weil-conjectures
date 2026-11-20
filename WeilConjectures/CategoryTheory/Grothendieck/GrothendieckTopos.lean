@@ -15,7 +15,7 @@ Source: Stacks Project, Sites, Tags 00XA, 00Z4, 00Z8 and 00VI
 
 Sieves, their pullbacks, Grothendieck topologies and sheaves are the existing Mathlib notions.
 The universe `w` represents the larger universe of the size convention
-`def-weil-size-convention`: both the presenting site and the values of its sheaves lie in it.
+`prose-01-10`: both the presenting site and the values of its sheaves lie in it.
 -/
 
 @[expose] public section
@@ -32,7 +32,7 @@ and transitivity axioms of `GrothendieckTopology`. The category `Sheaf J (Type w
 subcategory of presheaves satisfying unique amalgamation for every covering sieve.
 
 Source: Stacks Project, Sites, Tag 00XA (topoi), Tag 00Z4 (topologies), Tag 00Z8 (sheaves),
-and Tag 00VI (small sites), with the universe convention `def-weil-size-convention`
+and Tag 00VI (small sites), with the universe convention `prose-01-10`
 (blueprint: def-weil-pbc-topos). -/
 def IsGrothendieckTopos (E : Type u) [Category.{v} E] : Prop :=
   ∃ (D : Type w) (c : SmallCategory D) (J : @GrothendieckTopology D c),

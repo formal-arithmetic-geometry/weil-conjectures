@@ -42,8 +42,8 @@ private theorem compactModelAffineLineExchange_aux
 
 /-- The canonical exceptional exchange for an affine-line projection over an affine base,
 with finite field coefficients.
-Source: blueprint prop-asd-smooth-base-change, affine-line model case, and
-lem-asd-smooth-generic-direct-image.proof.md, relative dual base-change step.
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism--6, affine-line model case,
+and lem-asd-smooth-generic-direct-image.proof.md, relative dual base-change step.
 (auxiliary; not a blueprint node).
 
 Proof: Compactify the affine line by the projective line. The projective-line adjunction

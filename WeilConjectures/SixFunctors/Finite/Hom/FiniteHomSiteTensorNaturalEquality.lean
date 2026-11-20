@@ -52,7 +52,7 @@ def finiteHomTensorBetaRightOfComparisons
 
 -- Comparing the chosen intrinsic closed structures requires a larger kernel budget.
 /-- The route through the intrinsic scalar tensorator, in the direction of beta.
-Source: blueprint thm-coef-finite-hom, final site-comparison paragraph
+Source: blueprint lemma-change-coefficients-internal-hom--1, final site-comparison paragraph
 (blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
 noncomputable def finiteHomSiteTensorBetaLeft
     (l : ℕ) [Fact l.Prime]
@@ -73,7 +73,7 @@ noncomputable def finiteHomSiteTensorBetaLeft
 
 -- Comparing the chosen etale closed structures requires a larger kernel budget.
 /-- The route through the etale scalar tensorator, in the direction of beta.
-Source: blueprint thm-coef-finite-hom, final site-comparison paragraph
+Source: blueprint lemma-change-coefficients-internal-hom--1, final site-comparison paragraph
 (blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
 noncomputable def finiteHomSiteTensorBetaRight
     (l : ℕ) [Fact l.Prime]
@@ -113,7 +113,7 @@ private theorem beta_routes_on_representatives
 
 -- Fully faithful descent compares the recorded derived-category presentations.
 /-- The beta oriented tensor transformations agree after K-flat localization.
-Source: blueprint thm-coef-finite-hom, final scalar/site comparison paragraph
+Source: blueprint lemma-change-coefficients-internal-hom--1, final scalar/site comparison paragraph
 (blueprint: lem-coef-finite-hom-site-tensor-natural-equality).
 Proof: restrict the two natural transformations to pairs of K-flat representatives.
 The route normalization theorem supplies comparison isomorphisms for each route;

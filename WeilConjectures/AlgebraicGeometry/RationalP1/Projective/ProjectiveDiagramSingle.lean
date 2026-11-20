@@ -37,8 +37,7 @@ private theorem canonical_single
   rfl
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-/- Diagram-unit comparison for the single complex. Source: second identity proof.
-(blueprint: lem-sfb-projective-supported-source-arrow-derived-core) -/
+/- Diagram-unit comparison for the single complex. -/
 theorem projective_diagram_single (Y : Scheme.{u})
     (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L) :
     diagonalTraceRightSingle (CondensedRing.lowerStar Λ (secondProjection Y)) d.R₂

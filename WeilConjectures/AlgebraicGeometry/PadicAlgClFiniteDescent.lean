@@ -43,15 +43,15 @@ Proof plan, following the four steps of the node:
 make the underlying space Noetherian. Equivalently, the minimal-closed-subset result
 `lem-weil-pbc-noetherian-scheme-closed-subsets-minimal` rules out infinite strict
 descending chains of closed subsets. No separation or finite-type hypothesis is used.
-2. Apply `constructibleCocone_essSurjObj` (`lem-sfb-constructible-cocone-obj`) to `K`.
+2. Apply `constructibleCocone_essSurjObj` (`proposition-dctf-x-qbar-2-colimit--2`) to `K`.
 It produces a finite intermediate field `F`, a bounded constructible `K_F`, and an
 isomorphism from `constructibleToPadicAlgCl` applied to `K_F` to `K`. Map that isomorphism
 along the full-subcategory inclusion. The cocone functor is the restriction of
 `derivedExtendScalarsToPadicAlgCl`, so this is the required ambient derived isomorphism.
 3. For `h : F ≤ F'`, apply `boundedConstructible_derivedExtendScalarsSubfield_obj`
-(`lem-sfb-extend-subfield-constructible`) to `K_F`. This proves bounded constructibility
+(`lemma-extension-scalars-preserves-dctf--1`) to `K_F`. This proves bounded constructibility
 of the derived scalar extension to `F'`.
-4. Evaluate `derivedExtendScalarsCompIso` (`def-sfb-derived-extend-comp-iso`) at
+4. Evaluate `derivedExtendScalarsCompIso` (`definition-sp-scalar-extension--2`) at
 `K_F.obj`, and compose with the isomorphism from step 2. This gives the second
 displayed isomorphism, also when `F' = F` and `h` is reflexivity. -/
 theorem exists_padicAlgCl_finite_descent

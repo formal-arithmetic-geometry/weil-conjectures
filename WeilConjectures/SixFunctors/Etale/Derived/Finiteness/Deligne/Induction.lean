@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Third
 /-!
 # The induction step of Deligne's generic constructibility
 
-Granting the smooth case `lem-asd-smooth-generic-direct-image`
+Granting the smooth case `lemma-smooth-morphisms-locally-constant-sheaves`
 (`AlgebraicGeometry.Etale.SmoothGenericDirectImage`), the induction statement in generic dimension
 `< n` implies it in generic dimension `< n + 1`
 (`AlgebraicGeometry.Etale.deligneStatement_succ`). Hence Deligne's generic constructibility
@@ -175,8 +175,9 @@ theorem deligneStatement_succ (hsm : SmoothGenericDirectImage Λ) {n : ℕ}
   exact ⟨U₀.ι (π x), π x, ⟨x, hx, rfl⟩, rfl⟩
 
 /-- **Deligne's generic constructibility from the smooth case**: granting
-`lem-asd-smooth-generic-direct-image` (`AlgebraicGeometry.Etale.SmoothGenericDirectImage`),
-`thm-fin-deligne-generic-open` holds. -/
+`lemma-smooth-morphisms-locally-constant-sheaves`
+(`AlgebraicGeometry.Etale.SmoothGenericDirectImage`),
+`theorem-generic-constructibility-base-change-rj` holds. -/
 theorem exists_hasConstructibleDirectImageBaseChangeOn_of_smoothGenericDirectImage
     (hsm : SmoothGenericDirectImage Λ) {k : Type u} [Field k]
     {S X Y : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]

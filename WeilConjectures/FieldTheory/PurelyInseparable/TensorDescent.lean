@@ -31,7 +31,7 @@ a field extension and `B` a commutative `K`-algebra. If `L ⊗[K] B` is a field 
 `L`-algebra via `l ↦ l ⊗ 1`, is finite and purely inseparable over `L`, then `B` is a field,
 finite and purely inseparable over `K`, and `dim_K B = dim_L (L ⊗[K] B)`.
 
-(blueprint: `lem-weil-pbc-finite-purely-inseparable-scalar-descent`) -/
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem Algebra.TensorProduct.isField_finite_isPurelyInseparable_of_tensorProduct
     {K L B : Type*} [Field K] [Field L] [Algebra K L] [CommRing B] [Algebra K B]
     (hfield : IsField (L ⊗[K] B)) [Module.Finite L (L ⊗[K] B)]

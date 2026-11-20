@@ -8,12 +8,18 @@ module
 public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleTautologicalData
 
 /-! # Coherence of the specified tensor-pullback comparisons
-Source: Stacks Project, Sheaves, Tag 0097; Constructions Tag 01O3.
-Proof: conjugate the ordinary pullback unit equations by the specified tensor-to-ordinary
+
+## Implementation details
+
+Conjugate the ordinary pullback unit equations by the specified tensor-to-ordinary
 isomorphisms, cancel inverse pairs and use naturality. Equality transport commutes with the
 comparison family. Combine the two unit equations by cancellation against the composition
 isomorphism. Naturality of the identity comparison applied to the quotient gives its square.
-(blueprint: lem-pur-projective-bundle-pullback-unit-laws).
+
+## References
+
+* Stacks Project, Sheaves, Tag 0097
+* Constructions Tag 01O3
 -/
 
 @[expose] public section
@@ -22,9 +28,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Associativity transported from the ordinary module-pullback pseudofunctor.
-Source: Stacks Project, Sheaves, Tag 0097; Constructions Tag 01O3
-(blueprint: lem-pur-projective-bundle-pullback-unit-laws). -/
+/-- Associativity transported from the ordinary module-pullback pseudofunctor. -/
 theorem projectiveBundlePullback_associativity
     {W X Y Z : Scheme.{u}} (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z) :
     (projectiveBundlePullbackComp f (g ≫ h)).inv ≫

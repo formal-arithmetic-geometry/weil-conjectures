@@ -52,7 +52,7 @@ def word {m n : ℕ} (h : m ≤ n) (C : SpTowerShriek.D l E X) :
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The actual output reduction, conjugated by the canonical compact-support evaluations.
-Source: blueprint paragraph (1); det-sp-tower-shriek-levels evaluation identifications
+Source: blueprint paragraph (1); prose-09-23 evaluation identifications
 (blueprint: lem-sp-shriek-normalized-transition-comparison). -/
 def actual {m n : ℕ} (h : m ≤ n) (C : SpTowerShriek.D l E X) :
     (scalarExtensionFunctor (quotientMap l E h) Y).obj

@@ -14,9 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 # Scalar association and automorphism transport
 
 The canonical coefficient comparison commutes with successive scalar extensions.
-Source: `literature/blueprint/latest/blueprint/sec-six-functors-basics/`
-`sk-def-sf-admissible/def-weil-weil-sheaf-complex.proof.md`, Extension of scalars,
-and step 4 of the original Weil-category node.
 -/
 
 @[expose] public noncomputable section
@@ -728,24 +725,7 @@ attribute [local irreducible] pbcIsoRationalScalarComparison pbcScalarIntegralCo
   pbcScalarAssociator pbcIntegralScalarAssociator pbcIsoIntegralScalarComparison
   pbcScalarExtension pbcIntegralScalarExtension pbcIsoIntegralPullback
 
-/-- The scalar associator commutes with the canonical automorphism comparison.
-Source: blueprint, Extension of scalars, and parent Weil-category proof step 4
-(blueprint: lem-sf-pbc-rational-automorphism-coherence).
-Proof: coefficient restriction followed by automorphism direct image and direct
-image followed by restriction agree sectionwise. Their identity comparisons
-commute with composition of two scalar restrictions. Taking left adjoint mates
-identifies this equation with the ordinary tensor-associator square. Apply it
-to complexes, using the specified derived tensor counits and exact-transport
-localization comparison; localization at quasi-isomorphisms gives the ambient
-derived square. Restrict along the faithful integral full inclusions. Conjugate
-this integral square by the scalar/localization comparisons and the
-transport/localization comparisons. Postcompose both rational composites by
-the invertible direct scalar/localization comparison followed by the transport
-comparison. Their normalization equations and naturality move all comparison
-factors past each other and reduce the equality to the integral square. Cancel
-the invertible postcomposition. Every raw rational object is an integral object,
-so this proves the square on all objects. This also applies to repeated fields,
-where the associators and transitions have their normalized unit values. -/
+/-- The scalar associator commutes with the canonical automorphism comparison. -/
 theorem pbcIsoRationalScalarComparison_comp (h : E ≤ F) (k : F ≤ G)
     (K : pbcStageCategory l Ω T E) :
     (pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω G)

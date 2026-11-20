@@ -215,7 +215,7 @@ R/(ϖ^(n+2)) → R/(ϖ^(n+1)): well-definedness is multiplication of ideals, inj
 is cancellation of the nonzero uniformizer in E, and exactness is the quotient formula.
 3. Apply the exact constant-module functor (def-sfb-site-derived-constant-module-functor,
 def-sf-site-constant-module-functor). Exactness can be read on underlying additive
-sheaves by lem-weil-pbc-module-sheaves-colimits-forgetful.
+sheaves by situation-conventions.
 4. The residue injection is linear with the target action reduced to R/(ϖ).
 The limit-projection identities therefore make it B-linear (def-pur-sheaf-inverse-limit,
 def-pc-sheaf-restrict-scalars); its formula on constant sections is the one displayed.

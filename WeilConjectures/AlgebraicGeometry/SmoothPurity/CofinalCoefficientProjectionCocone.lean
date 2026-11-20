@@ -80,8 +80,8 @@ import WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralFiniteQuotie
 
 /-! # Cofinal coefficient quotient maps and completed projections
 
-Source: blueprint, sec-smooth-purity, sk-lem-sp-tower proof, final integral-constructibility
-sentence; sk-def-sp-coefficient-towers, first paragraph; integral-limit clause (3).
+Source: blueprint, chap-Smooth-purity, proposition-sp-integral-towers proof, final
+integral-constructibility sentence; prose-09-21, first paragraph; integral-limit clause (3).
 (blueprint: lem-sp-cofinal-coefficient-projection-cocone).
 
 The natural indices n and j denote positive exponents n+1 and j+1. Both coefficient

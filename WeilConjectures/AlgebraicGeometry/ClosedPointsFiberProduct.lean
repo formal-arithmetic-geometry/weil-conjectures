@@ -20,8 +20,8 @@ public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
   `lem-kun-etale-lfp`): étale morphisms are locally of finite presentation, and a quasi-compact
   étale scheme over a scheme of finite type over a field is of finite type over the field.
 - `AlgebraicGeometry.Scheme.Pullback.isClosed_singleton_iff` (blueprint
-  `lem-kun-closed-points-of-product`): a point of `X ×_K Y` is closed if and only if both of its
-  images are closed.
+  `corollary-open-direct-image-over-field--2`): a point of `X ×_K Y` is closed if and only if both
+  of its images are closed.
 - `AlgebraicGeometry.Scheme.finite_of_isClosed_of_forall_isClosed_singleton` (blueprint
   `lem-kun-finite-closed-subscheme`): a closed subset of a scheme of finite type over a field
   consisting of closed points is finite.
@@ -54,12 +54,12 @@ theorem Scheme.discreteTopology_of_topologicalKrullDim_le_zero_of_field {K : Typ
   have := IsLocallyArtinian.of_topologicalKrullDim_le_zero h
   exact (IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology.1 this).2
 
-/-- Blueprint `lem-kun-closed-points-of-product`: **closed points of a product.** Let `X` and `Y`
-be schemes locally of finite type over a field `K` and `z ∈ X ×_K Y`. Then `z` is a closed point
-if and only if its images in `X` and `Y` are closed points. The projections are locally of finite
-type with Jacobson targets, so they preserve closed points. Conversely, if `x` and `y` are closed,
-then `Spec κ(x) ×_K Spec κ(y) ⟶ X ×_K Y` is a closed immersion whose image contains `z`, and its
-source is zero-dimensional (`κ(x)` being finite over `K`), hence discrete. -/
+/-- Blueprint `corollary-open-direct-image-over-field--2`: **closed points of a product.** Let `X`
+and `Y` be schemes locally of finite type over a field `K` and `z ∈ X ×_K Y`. Then `z` is a closed
+point if and only if its images in `X` and `Y` are closed points. The projections are locally of
+finite type with Jacobson targets, so they preserve closed points. Conversely, if `x` and `y` are
+closed, then `Spec κ(x) ×_K Spec κ(y) ⟶ X ×_K Y` is a closed immersion whose image contains `z`, and
+its source is zero-dimensional (`κ(x)` being finite over `K`), hence discrete. -/
 theorem Scheme.Pullback.isClosed_singleton_iff {K : Type u} [Field K] {X Y : Scheme.{u}}
     (f : X ⟶ Spec (.of K)) (g : Y ⟶ Spec (.of K)) [LocallyOfFiniteType f]
     [LocallyOfFiniteType g] (z : (pullback f g : Scheme.{u})) :

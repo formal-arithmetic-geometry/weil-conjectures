@@ -81,10 +81,6 @@ import WeilConjectures.AlgebraicGeometry.SixFunctors.SpecifiedExceptionalClassHo
 /-!
 # Proper exceptional inverse image and arbitrary open restriction
 
-Source: blueprint main-20261015, sk-prop-sf-existence,
-prop-exc-base-change-proper, with the reviewed stage-1 repair of Steps 1–8
-(blueprint: prop-exc-base-change-proper).
-
 The ambient adjunction and the relative etale-origin assertion have separate hypotheses.
 The proper/open map is fixed by sectionwise restriction and the open adjunctions.
 
@@ -99,6 +95,10 @@ The proper/open map is fixed by sectionwise restriction and the open adjunctions
 
 * `sfProperExceptionalOpenBaseChange`: the conditional unbounded ambient assertion.
 * `sfProperFiniteExceptionalOpenBaseChange`: the independent etale-origin assertion.
+
+## References
+
+* Stacks Tags 09AE and 09BN
 -/
 
 @[expose] public section
@@ -110,9 +110,7 @@ namespace AlgebraicGeometry.Scheme
 variable (A : Type u) [CommRing A] [Finite A]
 
 /-- Open restriction of direct image, using exactly the sectionwise fibre-product map
-of the recorded sheaf comparison, now expressed with the exact inverse-image functors.
-Source: blueprint prop-exc-base-change-proper, Steps 2–3; Stacks Tags 09AE and 09BN
-(blueprint: prop-exc-base-change-proper). -/
+of the recorded sheaf comparison, now expressed with the exact inverse-image functors. -/
 noncomputable def sfProperOpenPullbackRestriction {U V W T : Scheme.{u}}
     (r : U ⟶ W) (k : U ⟶ V) (i : W ⟶ T) (p : V ⟶ T)
     [IsOpenImmersion i] [IsOpenImmersion k] (sq : IsPullback r k i p) :
@@ -134,9 +132,7 @@ noncomputable def sfProperOpenPullbackRestriction {U V W T : Scheme.{u}}
 /-- Derived open restriction. Direct image preserves K-injectives as right adjoint to
 exact inverse image; open pullback preserves them as right adjoint to exact extension.
 Thus this is induced by the specified sectionwise map on K-injective representatives.
-No finite-CD or ambient-adjoint hypothesis is needed for this restriction isomorphism.
-Source: blueprint prop-exc-base-change-proper, Step 3
-(blueprint: prop-exc-base-change-proper). -/
+No finite-CD or ambient-adjoint hypothesis is needed for this restriction isomorphism. -/
 noncomputable def sfProperOpenDerivedRestriction {U V W T : Scheme.{u}}
     (r : U ⟶ W) (k : U ⟶ V) (i : W ⟶ T) (p : V ⟶ T)
     [IsOpenImmersion i] [IsOpenImmersion k] (sq : IsPullback r k i p) :

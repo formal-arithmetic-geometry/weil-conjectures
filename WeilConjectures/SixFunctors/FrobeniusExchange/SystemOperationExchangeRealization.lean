@@ -991,7 +991,7 @@ def scalarModels : IntegralComparisonScalarData l E L ι (models l E) (models l 
 
 /-- Coefficient change of direct image is the actual mate of normalized tensor pullback.
 It is formed on whole strict systems, before any evaluation or inverse limit.
-Source: lem-fix-operation-reduction; Zheng 4.10
+Source: proposition-six-operations-change-coefficients; Zheng 4.10
 (blueprint: def-weil-system-operation-exchange-realization). -/
 def systemDirectScalar {X Y : Scheme.{u}} (f : X ⟶ Y) :
     systemDirect l E f ⋙ integralComparisonDerivedSequenceScalar l E L ι Y ⟶
@@ -1038,7 +1038,7 @@ def systemOpenScalar {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :=
   (asIso (systemOpenScalarInv l E L ι j)).symm
 
 /-- The proper/open scalar comparison uses the same compactification at every level.
-Source: lem-fix-operation-reduction, compact-support paragraph
+Source: proposition-six-operations-change-coefficients, compact-support paragraph
 (blueprint: def-weil-system-operation-exchange-realization). -/
 def systemCompactScalar {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (systemDerivedOpen l E c.i ⋙ systemDirect l E c.g) ⋙
@@ -1078,7 +1078,7 @@ def scalarReductionIso (X : Scheme.{u}) :
   exact asIso t
 
 /-- Realize a specified coefficient-system mate, rather than lift finite evaluations.
-Source: lem-fix-operation-reduction; Stacks 06YY, 0941
+Source: proposition-six-operations-change-coefficients; Stacks 06YY, 0941
 (blueprint: def-weil-system-operation-exchange-realization). -/
 def coefficientExchange {X Y : Scheme.{u}}
     (H : coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E Y)

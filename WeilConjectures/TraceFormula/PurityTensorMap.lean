@@ -14,7 +14,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 
 Let `f : X ⟶ Y` be a morphism of separated `k`-schemes of finite type. On the bounded
 constructible derived categories `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` this file defines the two canonical maps through
-which smooth purity is expressed (blueprint `sk-prop-cohsm`, maps (G11) and (G12)):
+which smooth purity is expressed (blueprint `proposition-exceptional-inverse-image-smooth-morphism`,
+maps (G11) and (G12)):
 
 - the *purity map* (or tensor map) `γ_{f,K} : Lf^* K ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! K`, the exceptional
   adjoint of the projection formula followed by the counit at the unit
@@ -76,7 +77,7 @@ f'         f
 v          v
 Y' --g---> Y
 ```
-(blueprint `sk-prop-cohsm`): the exceptional adjoint of
+(blueprint `proposition-exceptional-inverse-image-smooth-morphism`): the exceptional adjoint of
 `Rf'_! Lg'^* Rf^! L ≅ Lg^* Rf_! Rf^! L --Lg^* ε--> Lg^* L`, the inverse of compact-support base
 change followed by the pulled-back counit of `Rf_! ⊣ Rf^!`. -/
 noncomputable def upperShriekBaseChange (sq : IsPullback g' f' f g)

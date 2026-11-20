@@ -19,7 +19,7 @@ Let `X` be separated of finite type over an algebraically closed field `k` with 
 `[a, b]`, then `𝔻_X K = RHom(K, ω_X)` is bounded constructible with Tor amplitude in
 `[-b - 2d, -a]`
 (`AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed`,
-`lem-weil-verdier-preservation-strata`).
+`lemma-verdier-duality-preserves-constructibility--1`).
 
 The proof is a noetherian induction on the support, along the localization triangles of the
 *dualizing complex* `Ri_! Ri^! ω ⟶ ω ⟶ Rj_* j^* ω ⟶` for a closed immersion `i` with open
@@ -32,7 +32,7 @@ complement `j`, to which the triangulated functor `RHom(K, -)` is applied:
   (`AlgebraicGeometry.Etale.exists_boundedConstructible_and_torAmplitudeIn_verdierDual`), and the
   direct image `Rj_*` moves this to `[-b - 2n, -a]`
   (`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`,
-  `thm-sf-direct-image-tor-amplitude`).
+  `proposition-six-operations-dctf--2`).
 
 Working with the localization triangles of `ω` rather than of `K` only uses the exactness of
 the internal hom in its *second* variable.

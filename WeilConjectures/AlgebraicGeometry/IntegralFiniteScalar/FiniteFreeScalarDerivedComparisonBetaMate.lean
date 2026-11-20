@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.IntegralFiniteScalarModelDefinitions
 
 /-! The scalar mate identity for the normalized finite-free beta.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-mate)
 -/
 
 @[expose] public noncomputable section
@@ -107,16 +106,8 @@ private theorem scalar_projection
 
 -- Instantiating the generic mate calculation compares large derived-functor interfaces.
 /--
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, formal-properties
-paragraphs. This is the mate step after the normalized construction and its
+This is the mate step after the normalized construction and its
 pullback square have been supplied.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-mate)
-
-Proof: transport the normalized section adjunctions through coefficient change.
-The ring-sheaf change-adjunction identity rewrites the restricted scalar mate.
-Substituting the pullback square and using beta naturality at the geometric
-counit yields exactly the scalar-first projection arrow.
 -/
 theorem finiteFreeScalarDerivedComparison_beta_mate
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}

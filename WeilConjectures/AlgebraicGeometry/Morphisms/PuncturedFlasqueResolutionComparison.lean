@@ -18,8 +18,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! The comparison maps underlying the flasque resolution computation.
 
-Source: Stacks Project, Tags 09T2 and 0A6T.
-(blueprint: new-punctured-flasque-resolution-comparison).
+## References
+
+* Stacks Project, Tags 09T2 and 0A6T
 -/
 
 @[expose] public section
@@ -30,10 +31,7 @@ set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- The comparison maps from cohomology to the sections homology and back.
-Source: Stacks Project, Tags 09T2 and 0A6T; acyclic-resolution comparison.
-(blueprint: new-punctured-flasque-resolution-comparison).
--/
+/-- The comparison maps from cohomology to the sections homology and back. -/
 theorem punctured_flasque_resolution_comparison_maps
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     (W : (Spec (.of R)).Opens)

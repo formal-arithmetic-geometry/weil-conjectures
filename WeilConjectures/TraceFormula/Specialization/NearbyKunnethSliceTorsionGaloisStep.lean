@@ -13,11 +13,12 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTors
 
 # The Galois descent step of Gabber's Künneth formula modulo `ϖ`
 
-Step 2 of the generic-slicing step modulo `ϖ` (blueprint `sk-prop-tf-nearby-external-kunneth`,
-identification (2) and projection formula (3)): for a generic slice trait `S'`, if the Künneth map
-of the configuration `M_{S'} ⟵ P_{S'} ⟶ N` of the slices over `S'` is invertible, so is the
-pullback of the Künneth map of the geometric generic fibres to the special fibre of the slice of
-`P` (`NearbyCyclesModel.isIso_map_kunnethMap_toGeneric_of_isIso_coordinateSliceTrait`). This is
+Step 2 of the generic-slicing step modulo `ϖ` (blueprint
+`proposition-external-kunneth-formula-nearby-cycles`, identification (2) and projection formula
+(3)): for a generic slice trait `S'`, if the Künneth map of the configuration `M_{S'} ⟵ P_{S'} ⟶ N`
+of the slices over `S'` is invertible, so is the pullback of the Künneth map of the geometric
+generic fibres to the special fibre of the slice of `P`
+(`NearbyCyclesModel.isIso_map_kunnethMap_toGeneric_of_isIso_coordinateSliceTrait`). This is
 `NearbyCyclesModel.isIso_map_kunnethMap_of_galoisSlice` applied to the Galois-layer models of
 `WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTorsionGalois` and
 `WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTorsionProduct`.
@@ -74,11 +75,11 @@ theorem isUnit_ringChar_pow_integersResidueField (n : ℕ) :
     ((Nat.prime_dvd_prime_iff_eq Fact.out Fact.out).1 hℓ).symm
 
 -- the instantiation of the descent lemma at the Galois-layer models is a large term
-/-- **Galois descent along a generic slice trait** (blueprint `sk-prop-tf-nearby-external-kunneth`,
-identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the
-configuration `M_{S'} ⟵ P_{S'} ⟶ N` of the slices over a generic slice trait `S'` is invertible
-at `Lσ^* A`, `B`, then so is the pullback of the Künneth map of the geometric generic fibres to the
-special fibre of the slice of `P`. -/
+/-- **Galois descent along a generic slice trait** (blueprint
+`proposition-external-kunneth-formula-nearby-cycles`, identification (2) and projection formula (3),
+coefficients `𝔽_E`): if the Künneth map of the configuration `M_{S'} ⟵ P_{S'} ⟶ N` of the slices
+over a generic slice trait `S'` is invertible at `Lσ^* A`, `B`, then so is the pullback of the
+Künneth map of the geometric generic fibres to the special fibre of the slice of `P`. -/
 theorem isIso_map_kunnethMap_toGeneric_of_isIso_coordinateSliceTrait
     (hM : M.IsTraitModelOver qM gM)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))

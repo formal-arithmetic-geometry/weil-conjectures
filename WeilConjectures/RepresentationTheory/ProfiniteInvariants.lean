@@ -24,7 +24,7 @@ From this we deduce:
 * `Representation.invariantsTensorEquiv`: for an `A`-module `B` with trivial action, the natural
   map `ρ.invariants ⊗[A] B → (ρ ⊗ trivial)^G` is an isomorphism.
 
-This is the blueprint lemma `det-nearby-kunneth-invariants`, used in Gabber's Künneth formula for
+This is the blueprint lemma `prose-E-10`, used in Gabber's Künneth formula for
 nearby cycles (Illusie, *Autour du théorème de monodromie locale*, 4.7).
 
 The finite-level input is `Representation.cosetSum`, the sum of the `ρ g` over representatives
@@ -269,7 +269,7 @@ lemma discreteAverage_comp_subtype (hρ : ρ.IsDiscrete) :
   exact discreteAverage_apply_of_mem_invariants hA hρ v.2
 
 /-- **Invariants are exact on discrete representations** (blueprint
-`det-nearby-kunneth-invariants`, used in Gabber's Künneth formula for nearby cycles, Illusie,
+`prose-E-10`, used in Gabber's Künneth formula for nearby cycles, Illusie,
 *Autour du théorème de monodromie locale*, 4.7). Let `G` be a compact group such that the index of
 every open normal subgroup is invertible in `A` (e.g. a pro-`p` group with `p` invertible in `A`).
 If `π : E → E'` is a surjective equivariant map and `ρ` is discrete, then `π` maps the
@@ -325,7 +325,7 @@ lemma invariantsTensorToInvariants_bijective
       hU U le_rfl, cosetSum_of_mem_invariants y.2, ← Nat.cast_smul_eq_nsmul A, smul_smul,
       IsUnit.val_inv_mul, one_smul]
 
-/-- **Invariants commute with tensor products** (blueprint `det-nearby-kunneth-invariants`,
+/-- **Invariants commute with tensor products** (blueprint `prose-E-10`,
 used in Gabber's Künneth formula for nearby cycles, Illusie, *Autour du théorème de monodromie
 locale*, 4.7). Let `G` be a compact group such that the index of every open normal subgroup is
 invertible in `A` (e.g. a pro-`p` group with `p` invertible in `A`), `ρ` a discrete

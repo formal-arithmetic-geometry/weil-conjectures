@@ -20,7 +20,7 @@ The contravariant functor `[-, W]` is then the coefficient dual `[-, 𝟙_ C]` t
 the first arrow being `[X, γ⁻¹]` and the last the inverse of the canonical map
 `[X, 𝟙_ C] ⊗ T ⟶ [X, 𝟙_ C ⊗ T]`, an isomorphism since `T` is invertible
 (`CategoryTheory.MonoidalClosed.isIso_ihomTensorToIhom`). This is the formal core of the
-blueprint theorem `sk-thm-sf-dual-perfect`: an orientation `γ : Λ_X(d)[2d] ≅ ω_X` identifies
+blueprint theorem `theorem-poincare-duality--2`: an orientation `γ : Λ_X(d)[2d] ≅ ω_X` identifies
 the Verdier dual `𝔻_X = RHom(-, ω_X)` with `K ↦ K^∨(d)[2d]`.
 
 If `C` is moreover braided, the double-dual map `X ⟶ [[X, W], W]` is identified, under `θ`, with
@@ -48,7 +48,7 @@ dualizable `X`, and `[-, W]` restricts to an anti-equivalence of the dualizable 
 - `CategoryTheory.MonoidalClosed.ihomCurry_comp_map_ihomIsoIhomUnitTensor_hom`: `θ` is compatible
   with internal currying, `[K ⊗ A, W] ≅ [A, [K, W]]`; this gives the compatibility with shifts.
 - `CategoryTheory.MonoidalClosed.map_ihomIsoIhomUnitTensor_hom`: `θ` is compatible with monoidal
-  functors, such as a change of coefficients (blueprint `thm-sf-dual-perfect`).
+  functors, such as a change of coefficients (blueprint `theorem-poincare-duality--2`).
 - `CategoryTheory.MonoidalClosed.toIhomIhom_comp_ihomIhomIsoIhomIhomUnit_hom`: under `θ` the
   double-dual map into `[[X, W], W]` is the coefficient biduality.
 - `CategoryTheory.MonoidalClosed.isIso_toIhomIhom_of_isDualizable`: biduality relative to `W`
@@ -131,7 +131,7 @@ lemma whiskerLeft_ihomIsoIhomUnitTensor_hom_comp (X : C) :
   rw [this, MonoidalCategory.whiskerLeft_comp_assoc, ihom.ev_naturality_assoc,
     ihom.ev_naturality_assoc, Iso.inv_hom_id, Category.comp_id]
 
-/-- Blueprint `thm-sf-dual-perfect`: The dual of a perfect complex (compatibility with
+/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (compatibility with
 twisting the source).
 
 The isomorphism `θ` is compatible with internal currying: for all `K` and `A`, the square
@@ -183,8 +183,8 @@ noncomputable def ihomUnitComparison (X : C) :
 variable {T W : C} (γ : T ≅ W) (hT : IsInvertible T) {T' W' : D} (γ' : T' ≅ W')
   (hT' : IsInvertible T') (e : F.obj T ≅ T') (eW : F.obj W ≅ W')
 
-/-- Blueprint `thm-sf-dual-perfect`: The dual of a perfect complex (compatibility with finite
-reduction and scalar extension).
+/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (compatibility with
+finite reduction and scalar extension).
 
 The twist interchange `θ_X : [X, W] ≅ [X, 𝟙_ C] ⊗ T` is compatible with a monoidal functor
 `F` (for instance a change of coefficients: finite reduction or extension of scalars), given
@@ -201,7 +201,7 @@ commutes.
 This is only the formal core of the change-of-coefficients clause: it is not yet instantiated
 for finite reduction `Λ → Λ/ℓ^n` or extension of scalars on derived étale categories, and the
 compatibility of `θ` with shifts under a change of coefficients is not yet stated. Both remain
-to be done before the change-of-coefficients clause of `thm-sf-dual-perfect` is complete. -/
+to be done before the change-of-coefficients clause of `theorem-poincare-duality--2` is complete. -/
 lemma map_ihomIsoIhomUnitTensor_hom (h : F.map γ.hom ≫ eW.hom = e.hom ≫ γ'.hom) (X : C) :
     F.map (ihomIsoIhomUnitTensor γ hT X).hom ≫ δ F _ _ ≫ (ihomUnitComparison F X ⊗ₘ e.hom) =
       (ihomComparison F X).app W ≫ (ihom (F.obj X)).map eW.hom ≫

@@ -19,12 +19,12 @@ derived reduction `- ⊗ᴸ_{A_n} A_m`). Suppose that the derived Poincaré pair
 (ordinary global sections) and `e : G Λ ⟶ Λ'`. Then the square of the inverses of the
 tensor–internal-hom adjoints of the pairings commutes, and the comparison on ordinary global
 sections is an isomorphism as soon as the comparison of the duals of the compactly supported
-cohomology is. This is blueprint `thm-pod-finite-reduction`.
+cohomology is. This is blueprint `theorem-poincare-duality--9`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.map_inv_curry_poincarePairing_comp` (`thm-pod-finite-reduction`).
-- `AlgebraicGeometry.Etale.isIso_of_map_poincarePairing` (`thm-pod-finite-reduction`).
+- `AlgebraicGeometry.Etale.map_inv_curry_poincarePairing_comp` (`theorem-poincare-duality--9`).
+- `AlgebraicGeometry.Etale.isIso_of_map_poincarePairing` (`theorem-poincare-duality--9`).
 
 ## Implementation notes
 
@@ -34,8 +34,8 @@ As for the other compatibilities with changes of coefficients in the repository 
 coefficient comparison maps are parameters: no derived change-of-coefficients functor between
 étale derived categories over different rings is constructed. The identification of the two
 pairings through them is the composite of the coefficient compatibilities of the cup product,
-the evaluation and the trace (blueprints `lem-fix-operation-reduction` and
-`thm-pur-finite-reduction-of-purity`), and it is the hypothesis `h` below.
+the evaluation and the trace (blueprints `proposition-six-operations-change-coefficients` and
+`proposition-compatibility-purity-change-coefficients`), and it is the hypothesis `h` below.
 -/
 
 @[expose] public section
@@ -82,7 +82,7 @@ variable {X Y : Scheme.{u}} {a : X ⟶ Y} [HasCompactification a] {P : 𝐃(Y, A
   {T : 𝐃(X, A)} {T' : 𝐃(X, A')} (γ : T⟦(2 * d : ℤ)⟧ ≅ P.obj (𝟙_ _))
   (γ' : T'⟦(2 * d : ℤ)⟧ ≅ P'.obj (𝟙_ _)) {K : 𝐃(X, A)} {K' : 𝐃(X, A')}
 
-/-- Blueprint `thm-pod-finite-reduction`: Finite reduction of the Poincaré pairing.
+/-- Blueprint `theorem-poincare-duality--9`: Finite reduction of the Poincaré pairing.
 
 Let `G : D(Y_ét, A) ⥤ D(Y_ét, A')` be a lax monoidal change of coefficients (the finite
 reduction `A_n → A_m`), `K` over `A` and `K'` over `A'` perfect, and assume the projection
@@ -114,14 +114,14 @@ theorem map_inv_curry_poincarePairing_comp (hK : IsDualizable K) (hK' : IsDualiz
         (isPerfectPairing_poincarePairing_of_hasProjectionFormula A' a adj' γ' hK' hPF').iso.inv :=
   map_inv_curry_comp G _ _ cX cY e h
 
-/-- Blueprint `thm-pod-finite-reduction`: Finite reduction of the Poincaré pairing, the
+/-- Blueprint `theorem-poincare-duality--9`: Finite reduction of the Poincaré pairing, the
 comparison on ordinary global sections is an isomorphism.
 
 In the situation of `AlgebraicGeometry.Etale.map_inv_curry_poincarePairing_comp`, if the
 comparison `G(RΓ_c(X, K)^∨) ⟶ RΓ_c(X, K')^∨` of the duals is an isomorphism (in the blueprint:
-`RΓ_c(X, K)` is perfect, `thm-pod-point-perfectness`, so its dual commutes with reduction), then
-the comparison `c_Y : G(RΓ(X, K^∨(d))[2d]) ⟶ RΓ(X, K'^∨(d))[2d]` on ordinary global sections is an
-isomorphism. -/
+`RΓ_c(X, K)` is perfect, `lemma-perfect-complexes-geometric-point`, so its dual commutes with
+reduction), then the comparison `c_Y : G(RΓ(X, K^∨(d))[2d]) ⟶ RΓ(X, K'^∨(d))[2d]` on ordinary global
+sections is an isomorphism. -/
 theorem isIso_of_map_poincarePairing (hK : IsDualizable K) (hK' : IsDualizable K')
     (hPF : ∀ N, HasProjectionFormula A a K N) (hPF' : ∀ N, HasProjectionFormula A' a K' N)
     (cX : (R(a)_![A']).obj K' ⟶ G.obj ((R(a)_![A]).obj K))

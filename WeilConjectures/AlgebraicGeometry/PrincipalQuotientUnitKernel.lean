@@ -82,7 +82,6 @@ private theorem mono_baseScalar_of_flat
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 500000 in
 -- Comparing the two chosen tensor adjunctions needs extra definitional reductions.
 /-- Over a domain, for a flat scheme and an invertible module, multiplication by a
 nonzero base scalar is the kernel of the unit restricting to its principal quotient.
@@ -138,7 +137,9 @@ theorem principal_quotient_unit_kernel
   let m : MonoidalCategory.tensorObj i.ker.toModules L ⟶ L :=
     MonoidalCategory.whiskerRight i.ker.toModulesι L ≫ (MonoidalCategory.leftUnitor L).hom
   have : Mono μ := mono_baseScalar_of_flat A f L π hπ
-  obtain ⟨e, he⟩ := principal_quotient_multiplication_image A f L π
+  have himage : ∃ e : image μ ≅ image m, e.hom ≫ image.ι m = image.ι μ :=
+    principal_quotient_multiplication_image A f L π
+  obtain ⟨e, he⟩ := himage
   let d : L ≅ image m := (imageMonoIsoSource μ).symm ≪≫ e
   have hd : d.hom ≫ image.ι m = μ := by
     dsimp only [d, Iso.trans_hom, Iso.symm_hom]
@@ -149,7 +150,10 @@ theorem principal_quotient_unit_kernel
   change ∃ w : μ ≫ adj₂.unit.app L = 0, Nonempty (IsLimit (KernelFork.ofι μ w))
   have ht : adj₁.unit.app L ≫ t.hom = adj₂.unit.app L :=
     Adjunction.unit_leftAdjointUniq_hom_app adj₁ adj₂ L
-  obtain ⟨w, ⟨hk⟩⟩ := (closedImmersion_unit_kernel i L).2
+  have hkernel : ∃ w : image.ι m ≫ adj₁.unit.app L = 0,
+      Nonempty (IsLimit (KernelFork.ofι (image.ι m) w)) :=
+    (closedImmersion_unit_kernel i L).2
+  obtain ⟨w, ⟨hk⟩⟩ := hkernel
   have hw : μ ≫ adj₂.unit.app L = 0 := by
     rw [← ht, ← hd, Category.assoc, ← Category.assoc (image.ι m), w]
     simp

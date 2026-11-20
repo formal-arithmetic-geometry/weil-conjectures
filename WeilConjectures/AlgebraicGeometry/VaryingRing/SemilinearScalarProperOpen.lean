@@ -77,6 +77,11 @@ private theorem termwiseClopenUnit {I A X : Type*}
     Adjunction.whiskerRight_counit_app_app, Functor.whiskeringRight,
     Functor.comp_obj, Functor.id_obj, Functor.whiskerRight_app, NatTrans.id_app] using hn
 
+private theorem compIsoInvApp_eq {A B : Type*} [Category A] [Category B]
+    {F G : A ⥤ B} (e e' : F ≅ G) (he : e = e') (M : A)
+    {N : B} (f : N ⟶ G.obj M) : f ≫ e.inv.app M = f ≫ e'.inv.app M := by
+  rw [he]
+
 private theorem clopenComparison
     {A X A' X' : Type*} [Category A] [Category X] [Category A'] [Category X']
     {J : A ⥤ X} {P : X ⥤ A} {D : A ⥤ X}
@@ -443,8 +448,6 @@ private theorem scalarSquare_termwise {U' U X' X : Scheme.{u}}
   exact (termwiseIso_square_eq (StrictTower.moduleSquareG B a j' j g h)).trans
     (StrictTower.towerSquare_moduleSquareG B a j' j g h)
 
-set_option maxHeartbeats 700000 in
--- The tower-level comparison unfolds several termwise adjunction squares.
 private theorem scalarBeta_unit {U' U X' X : Scheme.{u}} (a : U' ⟶ U)
     (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -457,9 +460,11 @@ private theorem scalarBeta_unit {U' U X' X : Scheme.{u}} (a : U' ⟶ U)
     (StrictTower.openBetaModule B a j' j g h sq)
     (StrictTower.moduleSquareG B a j' j g h)
     (StrictTower.openBetaModule_normalized B a j' j g h sq).2 M
-  exact ht.trans (congrArg (fun e ↦
-    (StrictTower.towerPullback B a).map ((scalarTowerOpenAdj B j).unit.app M) ≫
-      e.inv.app ((StrictTower.towerJ B j).obj M)) (scalarSquare_termwise B a j' j g h))
+  exact ht.trans (compIsoInvApp_eq
+    (termwiseIso (I := ℕᵒᵖ) (StrictTower.moduleSquareG B a j' j g h))
+    (scalarTowerSquare B a j' j g h) (scalarSquare_termwise B a j' j g h)
+    ((StrictTower.towerJ B j).obj M)
+    ((StrictTower.towerPullback B a).map ((scalarTowerOpenAdj B j).unit.app M)))
 
 private def scalarClopen {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] :
@@ -488,6 +493,13 @@ private def scalarRComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
       StrictTower.towerDirectImage B (f ≫ g) :=
   (Functor.whiskeringRightObjCompIso _ _) ≪≫
     (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso (StrictTower.moduleRComp B f g)
+
+private theorem scalarRComp_hom_app {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (M : StrictTower.Towers B X) (n : ℕᵒᵖ) :
+    ((scalarRComp B f g).hom.app M).app n =
+      (StrictTower.moduleRComp B f g).hom.app (M.obj n) := by
+  change 𝟙 _ ≫ (StrictTower.moduleRComp B f g).hom.app (M.obj n) = _
+  exact Category.id_comp _
 
 private def scalarSection (C : OrdinaryScalarRestriction R φ B ψ)
     (X : Scheme.{u}) (n : ℕ) (M : Modules R φ X) (H : X.ProEtᵒᵖ)
@@ -523,8 +535,6 @@ private theorem scalarSection_direct (C : OrdinaryScalarRestriction R φ B ψ)
   exact (C.level_sections X n M ((Scheme.proEtaleBaseChange f).op.obj H) _).trans
     ((G.d_sections f M n H x).trans (C.level_sections Y n _ H x).symm)
 
-set_option maxHeartbeats 800000 in
--- The tower-level comparison unfolds several termwise adjunction squares.
 private theorem scalarDirect_comp (C : OrdinaryScalarRestriction R φ B ψ)
     (G : OrdinaryScalarAdjunctions R φ B ψ C) {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (M : Modules R φ X) :
@@ -551,16 +561,16 @@ private theorem scalarDirect_comp (C : OrdinaryScalarRestriction R φ B ψ)
   erw [(modulePComp_existsUnique R φ f g).choose_spec.1]
   change _ = scalarSection R φ B ψ C X n.unop M
     ((Scheme.proEtaleBaseChange (f ≫ g)).op.obj H) _
-  dsimp only [NatTrans.comp_app, StrictTower.towerDirectImage, Functor.whiskeringRight,
-    Functor.comp_map]
-  erw [StrictTower.directImage_map_apply, StrictTower.directImage_map_apply]
-  unfold scalarRComp
-  dsimp only [Functor.whiskeringRightObjCompIso, Iso.trans_hom, Functor.mapIso_hom,
-    Functor.whiskeringRight, NatTrans.comp_app, Iso.refl_hom, NatTrans.id_app]
-  erw [Category.id_comp]
-  erw [StrictTower.directComp_hom_apply f g B]
+  rw [scalarRComp_hom_app]
+  change _ = scalarSection R φ B ψ C X n.unop M
+    ((Scheme.proEtaleBaseChange (f ≫ g)).op.obj H)
+    (((StrictTower.moduleRComp B f g).hom.app (((C.rho X).obj M).obj n)).val.app H
+      (((((G.d f).hom.app M).app n).val.app
+        ((Scheme.proEtaleBaseChange g).op.obj H))
+        (((((G.d g).hom.app ((push R φ f).obj M)).app n).val.app H) x)))
+  rw [StrictTower.directComp_hom_apply f g B]
   erw [scalarSection_restrict]
-  erw [StrictTower.directImage_map_apply, scalarSection_direct, scalarSection_direct]
+  erw [scalarSection_direct, scalarSection_direct]
   rfl
 
 private theorem scalarTowerComp_mate {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :

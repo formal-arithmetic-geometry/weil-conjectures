@@ -19,10 +19,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Constructible generators under the specified native encoding
-
-Source: blueprint `sk-prop-int-brown-construction`, proper-image bullet;
-step 4 of `lem-sf-locally-finite-adic-compact-support-sums`.
-(blueprint: lem-sf-native-adic-encoding-bounded-constructible)
 -/
 
 @[expose] public section
@@ -129,32 +125,7 @@ private theorem constructible_encoding (l : ℕ) [Fact l.Prime]
       (condensedPullbackHom (Profinite.padicAlgClRingObj l) (S.immersion a)) h')
 
 /-- The specified native coefficient encoding takes bounded native constructible
-complexes to bounded constructible complexes of condensed module objects.
-
-Source: blueprint `sk-prop-int-brown-construction`, proper-image bullet;
-step 4 of `lem-sf-locally-finite-adic-compact-support-sums`.
-(blueprint: lem-sf-native-adic-encoding-bounded-constructible)
-
-Proof: The encoding is the exact equivalence of
-`lem-sf-native-adic-encoding-ordinary-operations`, with its fixed coefficient
-isomorphism and inverse-image comparison. A native finite free module therefore
-becomes the finite free module of the same rank, and the restriction comparison
-transports its trivializing pro-etale cover unchanged. Finite free modules have
-finite presentations (including rank zero), so a native lisse module becomes a
-locally finitely presented module object. On a Noetherian scheme, take a finite
-open cover with native finite stratifications and refine it by the disjoint
-constructible locally closed differences of successive members; intersect these
-pieces with the given strata. This globalizes the native stratification, with
-lisse restrictions. Transport it by the inverse-image comparisons just described.
-It is a stratification witnessing IsConstructibleModuleObject for the encoded
-sheaf, with the same immersions and covers. Exactness of the encoding identifies
-all derived cohomology objects with the encodings of the native cohomology
-objects. Apply the sheaf argument in each degree. An exact equivalence preserves
-zero, so the original finite cohomological support interval remains a support
-interval. These are exactly the two clauses of boundedConstructible. No absolute
-separatedness, finite-type assumption, or choice of an alternative encoding is
-used. The empty scheme and the zero object admit empty stratifications and zero
-finite presentations. -/
+complexes to bounded constructible complexes of condensed module objects. -/
 theorem encoding_boundedConstructible (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) [IsNoetherian T] :
     DerivedCategory.boundedAdicConstructible l T ≤

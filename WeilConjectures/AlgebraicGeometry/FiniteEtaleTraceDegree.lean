@@ -37,7 +37,7 @@ lem-weil-pbc-finite-etale-trace-degree).
 
 Proof (the node's eight steps):
 1. Finiteness and étaleness give finiteness, flatness, and local finite presentation
-   (def-weil-pbc-scheme-conventions, def-weil-etale-morphism), which is finite local
+   (definition-ind-etale-pro-etale-weakly--3, def-weil-etale-morphism), which is finite local
    freeness (def-pc-finite-locally-free; Stacks 02KB).
 2. The fibre degree is locally constant by
    lem-weil-pbc-finite-locally-free-degree-locally-constant (Stacks 04MH). Choose a point
@@ -54,13 +54,13 @@ Proof (the node's eight steps):
    A geometric point above the distinguished point counts the local summands, using
    (b) and Cartesian pasting (def-pc-fibre-product). Hence there are d summands.
    Gluing along these disjoint opens gives a coproduct of d copies of the neighbourhood
-   (lem-weil-pbc-scheme-coproduct-copies).
+   (definition-torsion-sheaves--3).
 6. Under lem-weil-pbc-etale-inverse-image-restriction, restriction on a site object W
    is restriction along W times_X Y to W. Cartesian pasting identifies this projection
    with the corresponding projection after localisation. The trace commutes with the
    same localisation by lem-weil-pbc-finite-etale-trace-exists, property (1).
 7. The sheaf condition identifies sections over the split cover with the d-fold product
-   (def-weil-pbc-abelian-etale-sheaves). Restriction is the diagonal, and trace is the
+   (situation-conventions). Restriction is the diagonal, and trace is the
    sum by lem-weil-pbc-finite-etale-trace-exists, property (2). Their composite is d times
    the identity; this also holds for the empty family, whose sections are zero.
 8. Pull back the jointly surjective splitting neighbourhoods to each site object

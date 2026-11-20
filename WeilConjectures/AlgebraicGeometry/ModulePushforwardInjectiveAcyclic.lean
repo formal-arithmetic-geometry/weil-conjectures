@@ -43,7 +43,7 @@ Proof:
    `h_* I` on each finite intersection are sections of `I` on its inverse image.
    Inverse image commutes with intersections and the restriction maps agree.
    Thus the Cech complexes coincide, including the alternating differentials
-   (def-sc-zariski-site, def-pc-module-pullback, def-weil-pbc-site-cech-complex).
+   (lemma-uniform-bounds-pro-etale-affines, def-pc-module-pullback, def-weil-pbc-site-cech-complex).
 2. The Cech cohomology of `I` for this covering vanishes in positive degrees by
    lem-weil-pbc-module-injective-open-cover-cech-acyclic (Tag 01EP), so the same
    holds for `h_* I` on every covering of every open.

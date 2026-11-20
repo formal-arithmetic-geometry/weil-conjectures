@@ -1523,10 +1523,10 @@ of the degreewise open-extension comparison, with the displayed canonical associ
 Source: Stacks Project, Tag 0F7L
 (blueprint: lem-amb-unbounded-compact-support-comparisons).
 Proof: expand the exact-functor transport in the existing exchange definition.
-The proper factor becomes the exact inverse-image adjunction mate of def-kun-unbounded-exchange.
-The open factor is the degreewise inverse conjugate of the sheaf exchange, hence the map
-of def-weil-pbc-etale-shriek-base-change-map. Triangle identities cancel the exact-functor
-transport isomorphisms. Localization descends this equation on every complex. -/
+The proper factor becomes the exact inverse-image adjunction mate of
+definition-derived-base-change-map. The open factor is the degreewise inverse conjugate of the sheaf
+exchange, hence the map of def-weil-pbc-etale-shriek-base-change-map. Triangle identities cancel the
+exact-functor transport isomorphisms. Localization descends this equation on every complex. -/
 theorem unboundedEtaleCompactSupport_exchange_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}

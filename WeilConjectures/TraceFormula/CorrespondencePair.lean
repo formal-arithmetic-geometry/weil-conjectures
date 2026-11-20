@@ -13,7 +13,7 @@ public import WeilConjectures.TraceFormula.Product
 
 Let `X, Y` be separated `k`-schemes of finite type with `K ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` and
 `L ∈ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`. A *correspondence from `(X, K)` to `(Y, L)`* (blueprint
-`def-trf-correspondence-between-pairs`, `sk-d-corr`) is a scheme `C` with an exceptional leg
+`definition-correspondence`) is a scheme `C` with an exceptional leg
 `c₁ : C ⟶ Y`, an ordinary leg `c₂ : C ⟶ X` and a coefficient map `u : Lc₂^* K ⟶ Rc₁^! L`
 (`ProEtale.CondensedRing.CorrespondenceBetween`). Its support map is
 `c = (c₁, c₂) : C ⟶ Z = Y ⨯ X`. An *opposite correspondence* is a correspondence `d` from
@@ -63,7 +63,7 @@ variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 /-- A *correspondence from `(X, K)` to `(Y, L)`* (blueprint
-`def-trf-correspondence-between-pairs`, `sk-d-corr`): a separated `k`-scheme of finite type `C`
+`definition-correspondence`): a separated `k`-scheme of finite type `C`
 with an exceptional leg `c₁ : C ⟶ Y`, an ordinary leg `c₂ : C ⟶ X` (so that the support is
 `c = (c₁, c₂) : C ⟶ Y ⨯ X`) and a coefficient map `u : Lc₂^* K ⟶ Rc₁^! L`. An *opposite
 correspondence* is a correspondence from `(Y, L)` to `(X, K)`, i.e. a term of
@@ -91,7 +91,7 @@ variable {ℓ} {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
   {L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
 
 /-- The *support map* `c = (c₁, c₂) : C ⟶ Z = Y ⨯ X` of a correspondence from `(X, K)` to
-`(Y, L)` (blueprint `def-trf-correspondence-between-pairs`): `c₁ = c ≫ p₁` and `c₂ = c ≫ p₂`. -/
+`(Y, L)` (blueprint `definition-correspondence`): `c₁ = c ≫ p₁` and `c₂ = c ≫ p₂`. -/
 noncomputable def support (c : CorrespondenceBetween ℓ K L) : c.C ⟶ Y ⨯ X :=
   prod.lift c.c₁ c.c₂
 
@@ -105,7 +105,7 @@ lemma support_snd (c : CorrespondenceBetween ℓ K L) : c.support ≫ prod.snd =
 
 /-- The support `d̄ = τ d = (d₂, d₁) : D ⟶ Z = Y ⨯ X` of an opposite correspondence `d` from
 `(Y, L)` to `(X, K)`, with `τ : X ⨯ Y ≅ Y ⨯ X` the exchange of factors (blueprint
-`def-trf-correspondence-between-pairs`). -/
+`definition-correspondence`). -/
 noncomputable def oppositeSupport (d : CorrespondenceBetween ℓ L K) : d.C ⟶ Y ⨯ X :=
   d.support ≫ (prod.braiding X Y).hom
 
@@ -124,7 +124,7 @@ lemma oppositeSupport_snd (d : CorrespondenceBetween ℓ L K) :
   rw [oppositeSupport_eq, prod.lift_snd]
 
 /-- The *intersection* `E(C, D) = C ×_{Z, c, d̄} D` of a correspondence `c` from `(X, K)` to
-`(Y, L)` and an opposite correspondence `d` (blueprint `def-trf-correspondence-between-pairs`):
+`(Y, L)` and an opposite correspondence `d` (blueprint `definition-correspondence`):
 a specified separated `k`-scheme of finite type with specified projections forming a cartesian
 square over the supports `c, d̄ : C, D ⟶ Z`. -/
 structure Intersection (c : CorrespondenceBetween ℓ K L) (d : CorrespondenceBetween ℓ L K) where
@@ -143,7 +143,7 @@ attribute [instance] Intersection.locallyOfFiniteType Intersection.quasiCompact
   Intersection.isSeparated
 
 /-- An endocorrespondence of `(X, K)` is a correspondence from `(X, K)` to `(X, K)` (blueprint
-`def-trf-correspondence-between-pairs`). -/
+`definition-correspondence`). -/
 @[simps]
 def equivCorrespondence : CorrespondenceBetween ℓ K K ≃ Correspondence ℓ K where
   toFun c := ⟨c.C, c.c₁, c.c₂, c.u⟩
@@ -151,7 +151,7 @@ def equivCorrespondence : CorrespondenceBetween ℓ K K ≃ Correspondence ℓ K
 
 variable (K) in
 /-- The *identity correspondence* `(X, Δ_X, 1_K)` of `(X, K)`, with `d₁ = d₂ = 𝟙 X` and
-coefficient map `L(𝟙)^* K ≅ K ≅ R(𝟙)^! K` (blueprint `def-trf-correspondence-between-pairs`). -/
+coefficient map `L(𝟙)^* K ≅ K ≅ R(𝟙)^! K` (blueprint `definition-correspondence`). -/
 noncomputable def id : CorrespondenceBetween ℓ K K :=
   equivCorrespondence.symm (Correspondence.ofEnd K (𝟙 K))
 
@@ -166,7 +166,7 @@ lemma id_oppositeSupport : (id K).oppositeSupport = diag X := by
   rw [oppositeSupport_eq, id_c₁, id_c₂]
 
 /-- **The intersection with the identity correspondence is the fixed locus** (blueprint
-`def-trf-correspondence-between-pairs`): an intersection `E(C, X)` of an endocorrespondence `c`
+`definition-correspondence`): an intersection `E(C, X)` of an endocorrespondence `c`
 with the identity correspondence of `(X, K)` is a fixed locus of `c`, with inclusion the first
 projection. -/
 noncomputable def Intersection.toFixedLocus {c : CorrespondenceBetween ℓ K K}
@@ -201,7 +201,7 @@ namespace Correspondence.FixedLocus
 variable {ℓ} {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ K}
 
 /-- **The fixed locus is the intersection with the identity correspondence** (blueprint
-`def-trf-correspondence-between-pairs`): `Fix(c) = C ×_{X ⨯ X, c, Δ_X} X = E(C, X)`, the
+`definition-correspondence`): `Fix(c) = C ×_{X ⨯ X, c, Δ_X} X = E(C, X)`, the
 intersection of the endocorrespondence `c` with the identity correspondence of `(X, K)`, with
 projections `ι : Fix(c) ⟶ C` and `d : Fix(c) ⟶ X`. -/
 noncomputable def toIntersection (F : c.FixedLocus) :

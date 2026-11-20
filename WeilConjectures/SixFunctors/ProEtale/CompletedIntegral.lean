@@ -71,7 +71,7 @@ lemma discreteTopology_reductionTopology (n : ℕ) :
 
 /-- The constant sheaf of rings `(Λ ⧸ Iⁿ)_Y` on the small pro-étale site of `Y` (for
 `Λ = 𝒪_E`, `I = 𝔪_E`, the finite-torsion coefficients `(A_{E,n})_Y` of blueprint
-`def-weil-finite-torsion-constructibility`): the sheaf of locally constant functions
+`definition-constructible-sheaves`): the sheaf of locally constant functions
 `U ↦ C(U, Λ ⧸ Iⁿ)` for the discrete topology. -/
 noncomputable def reductionRingSheaf (n : ℕ) : Sheaf (Scheme.ProEt.topology Y) RingCat.{u + 1} :=
   @continuousMapRingSheaf Y (Λ ⧸ I ^ n) (reductionTopology I n) _
@@ -122,7 +122,7 @@ lemma completedIntegralSheafπ_reductionRingSheafMap (n : ℕ) :
     using this
 
 /-- The category `Sh(Y_proét, 𝒪_E)` of sheaves of modules over the completed coefficient sheaf
-`𝒪̂_{E,Y}` (blueprint `def-weil-sheaf-of-modules-category`, Mathlib's `SheafOfModules`). It is
+`𝒪̂_{E,Y}` (blueprint `situation-conventions`, Mathlib's `SheafOfModules`). It is
 abelian. -/
 abbrev CompletedIntegralModule : Type _ :=
   SheafOfModules.{u + 1} (completedIntegralSheaf Y I)

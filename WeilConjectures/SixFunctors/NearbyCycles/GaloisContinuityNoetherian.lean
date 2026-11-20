@@ -38,6 +38,21 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+/-- Cancel after applying functors, then transport the equality along an isomorphism. -/
+private lemma map_eq_of_epi_of_intertwining
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (Q : C ⥤ D) (F : D ⥤ E) {A B : C} {Z : D}
+    (i : A ⟶ B) [hi : Epi ((Q ⋙ F).map i)] (e : Q.obj B ≅ Z)
+    {u v : B ⟶ B} {x y : Z ⟶ Z} (huv : i ≫ u = i ≫ v)
+    (hx : e.hom ≫ x = Q.map u ≫ e.hom) (hy : e.hom ≫ y = Q.map v ≫ e.hom) :
+    F.map x = F.map y := by
+  have h : (Q ⋙ F).map u = (Q ⋙ F).map v := by
+    apply (cancel_epi ((Q ⋙ F).map i)).1
+    simpa only [Functor.map_comp] using congrArg (Q ⋙ F).map huv
+  apply (cancel_epi (F.map e.hom)).1
+  rw [← F.map_comp, ← F.map_comp, hx, hy, F.map_comp, F.map_comp]
+  exact congrArg (fun f ↦ f ≫ F.map e.hom) h
+
 namespace AlgebraicGeometry.ProEtale.GaloisTower
 
 open Scheme CondensedRing
@@ -79,9 +94,6 @@ lemma restrictNormal_eq_one_of_forall_apply_eq (L' : FiniteGaloisIntermediateFie
   AlgEquiv.ext fun x ↦
     (algebraMap L' Ω).injective ((AlgEquiv.restrictNormal_commutes σ L' x).trans (hσ x))
 
-set_option maxHeartbeats 1600000 in
--- matching the derived functors of the Galois layer with those of the field tower (as in
--- `exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector`)
 /-- **Continuity of the Galois action on a noetherian cohomology sheaf of nearby cycles**
 (torsion coefficients). If `Lε^* C` is bounded below of étale origin and `Hᵠ(Ψ_{N_Ω} C)` is a
 noetherian object, there is a finite Galois subextension `L'` of `Ω/L` such that every
@@ -105,15 +117,17 @@ theorem exists_forall_homology_galoisLayerAction_eq_id [QuasiCompact N.j] [Quasi
   have hK (n : ℤ) :=
     rightAcyclic_condensedRingLowerStar_upperStar_of_iso (Ω := Ω) T₀ h (K.X n) (F₀ n) (hF₀ n)
   obtain ⟨hΦ⟩ := N.nonempty_isColimit_homology_nearbyCycles_galoisTower T₀ h Ω K a hKe q
-  have : IsNoetherianObject ((DerivedCategory.Q ⋙
-      R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-      L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q).mapCocone
-        ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K)).pt :=
-    isNoetherianObject_of_mono ((DerivedCategory.homologyFunctor _ q).map
-      (L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧).map
-        (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧).map
-          (GaloisTower.derivedTraceIso _ K a hK _ e).hom) ≫
-        (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C).hom))
+  let H := DerivedCategory.homologyFunctor
+    (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T₀) X')) q
+  let Ψ := R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
+    L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ H
+  let Φ := DerivedCategory.Q ⋙ Ψ
+  let eK := GaloisTower.derivedTraceIso (Profinite.continuousMapRingObj T₀) K a hK _ e
+  let κ := N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C
+  have : IsNoetherianObject (Φ.mapCocone
+      ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K)).pt :=
+    isNoetherianObject_of_mono (Ψ.map eK.hom ≫ H.map κ.hom)
   obtain ⟨j, hj⟩ := exists_epi_ι_of_isNoetherianObject hΦ
   let L' : FiniteGaloisIntermediateField L Ω := j
   refine ⟨L', fun σ hσ ↦ ?_⟩
@@ -122,47 +136,20 @@ theorem exists_forall_homology_galoisLayerAction_eq_id [QuasiCompact N.j] [Quasi
       (pullbackAction_fst h _ specGaloisAction_comp τ) j 1
       (restrictNormal_eq_one_of_forall_apply_eq Ω L' τ hτ ▸
         pullbackAction_comp_galoisLevelProjection h L' τ)
-  have key (τ : Ω ≃ₐ[L] Ω) (hτ : ∀ x : L', τ x = x) := by
-    have hτ' := congrArg (DerivedCategory.Q ⋙ R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-      L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q).map
-        (hU τ hτ)
-    rwa [Functor.map_comp, Functor.map_comp] at hτ'
-  have hG := (cancel_epi (((DerivedCategory.Q ⋙ R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-      L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q).mapCocone
-        ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K)).ι.app j)).1
-    ((key σ hσ).trans (key 1 fun _ ↦ rfl).symm)
-  simp only [Functor.comp_map] at hG
-  have hA : (DerivedCategory.homologyFunctor _ q).map
-      (L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧).map
-        (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧).map
-          (derivedUnitTransport (Profinite.continuousMapRingObj T₀)
-            (pullbackAction h _ specGaloisAction_comp σ)
-            (pullbackAction_fst h _ specGaloisAction_comp σ)
-            (pullbackAction_fst h _ specGaloisAction_comp σ)
-            (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)))) =
-      (DerivedCategory.homologyFunctor _ q).map
-      (L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧).map
-        (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧).map
-          (derivedUnitTransport (Profinite.continuousMapRingObj T₀)
-            (pullbackAction h _ specGaloisAction_comp 1)
-            (pullbackAction_fst h _ specGaloisAction_comp 1)
-            (pullbackAction_fst h _ specGaloisAction_comp 1)
-            (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)))) := by
-    rw [← cancel_epi ((DerivedCategory.homologyFunctor _ q).map
-      (L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧).map
-        (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧).map
-          (GaloisTower.derivedTraceIso _ K a hK _ e).hom)))]
-    simp only [← Functor.map_comp, GaloisTower.derivedTraceIso_hom_comp_derivedUnitTransport]
-    simp only [Functor.map_comp, hG]
-  have hσ1 : (DerivedCategory.homologyFunctor _ q).map
-      (N.galoisLayerAction (Profinite.continuousMapRingObj T₀) h Ω σ
-        (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) =
-      (DerivedCategory.homologyFunctor _ q).map
-      (N.galoisLayerAction (Profinite.continuousMapRingObj T₀) h Ω 1
-        (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) := by
-    rw [galoisLayerAction, galoisLayerAction, galoisLayerAut_autAction, galoisLayerAut_autAction,
-      Functor.map_comp, Functor.map_comp, Functor.map_comp, Functor.map_comp, hA]
-  rw [hσ1, galoisLayerAction_one, CategoryTheory.Functor.map_id]
+  have he (τ : Ω ≃ₐ[L] Ω) :=
+    GaloisTower.derivedTraceIso_hom_comp_derivedUnitTransport
+      (Profinite.continuousMapRingObj T₀) K a hK _ e
+      (pullbackAction h _ specGaloisAction_comp τ)
+      (pullbackAction_fst h _ specGaloisAction_comp τ)
+  have hA := map_eq_of_epi_of_intertwining (hi := hj) DerivedCategory.Q Ψ
+    (((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K).ι.app j) eK
+    ((hU σ hσ).trans (hU 1 fun _ ↦ rfl).symm) (he σ) (he 1)
+  have hact (τ : Ω ≃ₐ[L] Ω) := congrArg H.map
+    (galoisLayerAut_autAction (Profinite.continuousMapRingObj T₀) N h Ω τ C)
+  simp only [H.map_comp] at hact
+  exact (hact σ).trans ((congrArg (fun f ↦ H.map κ.inv ≫ f ≫ H.map κ.hom) hA).trans
+    ((hact 1).symm.trans ((congrArg H.map
+      (N.galoisLayerAction_one (Profinite.continuousMapRingObj T₀) h Ω _)).trans (H.map_id _))))
 
 /-- **Continuity of the Galois action on noetherian cohomology sheaves of nearby cycles**, for
 finitely many degrees at once: if the `Hᵠ(Ψ_{N_Ω} C)` are noetherian for `q ∈ s`, there is a single

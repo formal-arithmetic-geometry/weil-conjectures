@@ -22,7 +22,7 @@ schemes. The commutation `Lg^* Ψ ≅ Ψ Lg^*` of derived scalar extension `Ψ =
 derived pullback (`AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso`) and the
 commutation `Lg^* Res ≅ Res Lg^*` of restriction of scalars with the derived pullback
 (`AlgebraicGeometry.ProEtale.leftDerivedUpperStarRestrictScalarsIso`) are mates along the
-adjunctions `Ψ ⊣ Res` (blueprint `thm-trf-finite-coefficient-map`).
+adjunctions `Ψ ⊣ Res` (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`).
 -/
 
 @[expose] public section
@@ -134,7 +134,8 @@ lemma leftDerivedUpperStarExtendScalarsIso_inv_app_comp_counit
 
 /-- The commutation `Lg^* Ψ ≅ Ψ Lg^*` of derived scalar extension with the derived pullback is
 the mate, along the adjunctions `Ψ ⊣ Res`, of the commutation `Lg^* Res ≅ Res Lg^*` of
-restriction of scalars with the derived pullback (blueprint `thm-trf-finite-coefficient-map`). -/
+restriction of scalars with the derived pullback (blueprint
+`theorem-grothendieck-lefschetz-trace-formula--7`). -/
 theorem mateEquiv_leftDerivedUpperStarExtendScalarsIso_inv :
     mateEquiv (leftDerivedSheafExtendScalarsAdjunction R S Y)
         (leftDerivedSheafExtendScalarsAdjunction R S Z)

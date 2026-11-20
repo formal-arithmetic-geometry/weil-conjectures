@@ -25,7 +25,8 @@ scalars, so it preserves K-injective complexes, and it commutes with the direct 
 
 For `Λ = 𝒪_E` and `Λ' = 𝒪_E/ϖ` the functor `R coext = RHom_{𝒪_E}(𝒪_E/ϖ, -)` is the reduction
 modulo `ϖ` shifted by `-1`, read in `D(-, 𝒪_E/ϖ)`; this is a first step towards comparing
-the integral and the finite stages of the projection formula (`sk-thm-sf-pf-adic`).
+the integral and the finite stages of the projection formula
+(`lemma-projection-formula-integral-coefficients`).
 -/
 
 @[expose] public section

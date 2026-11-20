@@ -15,8 +15,9 @@ For a proper morphism `f : X ⟶ Y` and `q = f × f`, the mate of the compositio
 the non-cartesian square `q ≫ p₁' = p₁ ≫ f` (for `Lf^* ⊣ Rf_!` and `Lq^* ⊣ Rq_!`), followed by
 the transported counit of `q ≫ p₂' = p₂ ≫ f`, is the compact-support base change `Ex_!` of the
 cartesian square `(f × 1) ≫ p₁' = p_X ≫ f` followed by `Rp_X!` of the base change of the
-cartesian square `(1 × f) ≫ p_Y = p₂ ≫ f` (blueprint `lem-trf-trace-source-exchange`, Step 3).
-The proof factors `q = (1 × f) ≫ (f × 1)`.
+cartesian square `(1 × f) ≫ p_Y = p₂ ≫ f` (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3). The proof factors
+`q = (1 × f) ≫ (f × 1)`.
 
 -/
 
@@ -72,12 +73,12 @@ set_option hygiene false in
 local notation "𝐐" => Profinite.padicAlgClRingObj ℓ
 
 -- matching the mate square unfolds the restricted `ℚ̲̄_ℓ`-functors, which is expensive
-/-- **The mate of the Künneth square** (blueprint `lem-trf-trace-source-exchange`, Step 3): for
-`T = Lp₂'^* Rf_* B`, the mate `Lf^* Rp₁'_! T ⟶ Rp₁_! Lq^* T` of the composition isomorphism of
-`q ≫ p₁' = p₁ ≫ f`, followed by the transported counit `Lq^* Lp₂'^* Rf_* B ⟶ Lp₂^* B`, is `Ex_!`
-of the cartesian square `(f × 1) ≫ p₁' = p_X ≫ f`, followed by `Rp_X!` of
-`L(f × 1)^* Lp₂'^* Rf_* B ≅ Lp_Y^* Rf_! B ⟶ R(1 × f)_! Lp₂^* B` (the base change `Ex_!` of the
-cartesian square `(1 × f) ≫ p_Y = p₂ ≫ f`) and `Rp_X! R(1 × f)_! ≅ Rp₁_!`. -/
+/-- **The mate of the Künneth square** (blueprint `theorem-proper-pushforward-lefschetz-verdier--1`,
+Step 3): for `T = Lp₂'^* Rf_* B`, the mate `Lf^* Rp₁'_! T ⟶ Rp₁_! Lq^* T` of the composition
+isomorphism of `q ≫ p₁' = p₁ ≫ f`, followed by the transported counit
+`Lq^* Lp₂'^* Rf_* B ⟶ Lp₂^* B`, is `Ex_!` of the cartesian square `(f × 1) ≫ p₁' = p_X ≫ f`,
+followed by `Rp_X!` of `L(f × 1)^* Lp₂'^* Rf_* B ≅ Lp_Y^* Rf_! B ⟶ R(1 × f)_! Lp₂^* B` (the base
+change `Ex_!` of the cartesian square `(1 × f) ≫ p_Y = p₂ ≫ f`) and `Rp_X! R(1 × f)_! ≅ Rp₁_!`. -/
 theorem upperStar_map_unit_comp_squareIso_comp_counit_comp_prodUpperStarCounit
     (B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar 𝐐 ℓ f).map

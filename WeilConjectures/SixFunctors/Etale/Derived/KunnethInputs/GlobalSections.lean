@@ -15,9 +15,10 @@ public import WeilConjectures.SixFunctors.Finite.Exact
 /-!
 # Unbounded derived global sections and the Leray isomorphisms
 
-Inputs of the ordinary Künneth formula (blueprint subsection `sk-prop-sf-kunneth-ordinary`)
-about the derived global sections `RΓ(X, -) : D(X_ét) ⥤ D(A)` on the *unbounded* derived
-category and the composition of derived direct images.
+Inputs of the ordinary Künneth formula (blueprint subsection
+`proposition-ordinary-external-kunneth--1`) about the derived global sections
+`RΓ(X, -) : D(X_ét) ⥤ D(A)` on the *unbounded* derived category and the composition of derived
+direct images.
 
 In this development `RΓ(X, -)` is the total right derived functor
 `AlgebraicGeometry.Etale.rightDerivedGlobalSections`, computed with K-injective resolutions,

@@ -21,13 +21,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 
 Compactly supported cohomology of a bounded constructible complex of finite Tor amplitude over
 a separably closed field is a perfect complex of `Λ`-modules, and so are the derived geometric
-stalks of such a complex (`sk-prop-sf-trace-perfectness`, `prop-trf-compact-support-perfectness`).
+stalks of such a complex (`lemma-perfect-complexes-geometric-point`).
 
 ## Implementation notes
 
-`sk-prop-sf-trace-perfectness` concludes that `RΓ_c(X, K)` is *perfect*: bounded, with finite
-cohomology modules, and of finite Tor amplitude. The three are proved separately below, finite
-Tor amplitude in the sense of `DerivedCategory.finiteTorAmplitude` for `D(ModuleCat Λ)`; they
+`lemma-perfect-complexes-geometric-point` concludes that `RΓ_c(X, K)` is *perfect*: bounded, with
+finite cohomology modules, and of finite Tor amplitude. The three are proved separately below,
+finite Tor amplitude in the sense of `DerivedCategory.finiteTorAmplitude` for `D(ModuleCat Λ)`; they
 are assembled into perfectness in `WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect`
 (`AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections`). The geometric
 stalk `RΓ(Spec Ω, Lx̄^* K)` is perfect because `Lx̄^*` preserves `Dctf` and `RΓ` on a separably
@@ -125,7 +125,7 @@ variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
   [HasInvertibleExponent Λ X]
 
 omit [IsSeparated aX] in
-/-- Blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
 geometric stalks
 
 **Boundedness of compactly supported cohomology.** Let `Λ` be a finite coefficient ring, `k`
@@ -147,7 +147,7 @@ theorem isZero_compactlySupportedCohomology_of_lt
   · exact (_root_.DerivedCategory.isLE_iff _ b).1 hb q hq
 
 omit [IsSeparated aX] in
-/-- Blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
 geometric stalks
 
 **Finiteness of compactly supported cohomology.** In the situation of
@@ -169,7 +169,7 @@ theorem finite_compactlySupportedCohomology
     ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)).symm.toLinearEquiv
 
 omit [IsSeparated aX] in
-/-- Blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
 geometric stalks
 
 **Finite Tor amplitude of compactly supported cohomology.** In the situation of
@@ -223,10 +223,10 @@ section Stalk
 
 variable [Finite Λ] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
 
-/-- Blueprint `prop-trf-compact-support-perfectness`: Compact-support perfectness (geometric
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Compact-support perfectness (geometric
 stalks).
 
-Also blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
+Also blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
 geometric stalks.
 
 For a finite coefficient ring `Λ`, `K ∈ D^b_{ctf}(X, Λ)` and a geometric point

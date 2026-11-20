@@ -17,29 +17,29 @@ import WeilConjectures.SixFunctors.ProEtale.InternalResidueStacksComparison
 
 /-! # Integral models and Stacks adic constructibility
 
-This file proves `det-lem-integral-models-stacks` along the blueprint route: restriction of
+This file proves `lemma-integral-models--2` along the blueprint route: restriction of
 scalars along the map from the constant coefficient ring, the integral constructibility
-criterion `sk-prop-integral-criterion`, part (2) of
-`det-prop-integral-criterion-constant-coefficients` and the pro-étale/étale comparison of
+criterion `proposition-integral-constructibility-criterion`, part (2) of
+`lemma-integral-models--1` and the pro-étale/étale comparison of
 constructible complexes. The criterion is stated in the internal presentation over
 `DerivedNakayama.integerRing` (`internal_integral_criterion_forward`,
 `internal_integral_criterion_reverse`), where completeness is the Roos condition
 `IsDerivedComplete` and the residue is `AdicCompletion.derivedReduction`.
 
 Here `Dᵇc(X, 𝒪_E)` is `constantModelBoundedConstructible`, the finite-constant-model form of
-`sk-def-sfb-constructible`. For this form the reverse implication of the criterion needs the
-local structure theorem `sk-prop-integral-local-structure`; it is supplied by the adic stratified
-perfect models through `integral_models_stacks_criterion`.
+`definition-constructible-sheaves`. For this form the reverse implication of the criterion needs the
+local structure theorem `proposition-local-structure-integral-constructible-complexes`; it is
+supplied by the adic stratified perfect models through `integral_models_stacks_criterion`.
 
 ## Main statements
 
 * `internal_integral_criterion_forward`, `internal_integral_criterion_reverse`: the two
-  directions of `sk-prop-integral-criterion`.
+  directions of `proposition-integral-constructibility-criterion`.
 * `integral_models_stacks`: `K ∈ Dᵇc(X, 𝒪_E)` iff `Res K` is Stacks adic constructible
   (`integral_models_stacks_criterion`), and `Res` restricts to an equivalence of the two full
   subcategories.
 
-Source: blueprint det-lem-integral-models-stacks; Stacks Tag 09C1.
+Source: blueprint lemma-integral-models--2; Stacks Tag 09C1.
 -/
 
 @[expose] public noncomputable section
@@ -64,7 +64,7 @@ def stacksComplete (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The complexes over the continuous integers whose restriction to the constant integers is
 complete in the sense of `stacksComplete`.
-Source: blueprint det-lem-integral-models-stacks
+Source: blueprint lemma-integral-models--2
 (auxiliary; not a blueprint node). -/
 def restrictionComplete (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :
@@ -75,7 +75,7 @@ def restrictionComplete (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Transport along `IntegralConstantModel.pointComparison` from the internal presentation
 over `DerivedNakayama.integerRing` to the continuous integers `integersObj` preserves and
 reflects bounded constant-model constructibility.
-Source: blueprint det-lem-integral-models-stacks (auxiliary; not a blueprint node).
+Source: blueprint lemma-integral-models--2 (auxiliary; not a blueprint node).
 
 Proof: restriction of scalars along an isomorphism of coefficient rings is an exact
 equivalence, so it preserves and reflects boundedness, commutes with cohomology, and
@@ -109,11 +109,11 @@ theorem constantModelBoundedConstructible_pointComparison_iff
 /-- Integral constructibility criterion, direction (1) to (2), in the internal presentation:
 a bounded constructible complex over the continuous integers is derived complete, and its
 first derived reduction is bounded constructible of finite Tor amplitude. This is the
-implication (1) ⇒ (2) of `sk-prop-integral-criterion` (Bhatt–Scholze, Proposition 6.8.11),
-together with finite Tor amplitude of the reduction over the residue field, as used in the
-proof of `det-lem-integral-models-stacks`.
+implication (1) ⇒ (2) of `proposition-integral-constructibility-criterion` (Bhatt–Scholze,
+Proposition 6.8.11), together with finite Tor amplitude of the reduction over the residue field, as
+used in the proof of `lemma-integral-models--2`.
 Source: Bhatt–Scholze 6.8.11; Stacks Tag 09C7
-(blueprint: sk-prop-integral-criterion).
+(blueprint: proposition-integral-constructibility-criterion).
 
 Proof: transport `K` to the continuous integers
 (`constantModelBoundedConstructible_pointComparison_iff`),
@@ -138,10 +138,10 @@ theorem internal_integral_criterion_forward
 /-- Integral constructibility criterion, direction (2) to (1), in the internal presentation:
 a derived complete complex whose first derived reduction is bounded constructible is bounded
 constructible over the continuous integers. This is the implication (2) ⇒ (1) of
-`sk-prop-integral-criterion` (Bhatt–Scholze, Proposition 6.8.11); its proof goes through (3) by
-`sk-prop-integral-local-structure`.
+`proposition-integral-constructibility-criterion` (Bhatt–Scholze, Proposition 6.8.11); its proof
+goes through (3) by `proposition-local-structure-integral-constructible-complexes`.
 Source: Bhatt–Scholze 6.8.11; Stacks Tag 09C7
-(blueprint: sk-prop-integral-criterion).
+(blueprint: proposition-integral-constructibility-criterion).
 
 Proof: the reduction has finite Tor amplitude, `𝒪_E/ϖ_E` being a field
 (`finiteTorAmplitude_of_constantModelBoundedConstructible_residue`).
@@ -165,11 +165,11 @@ theorem internal_integral_criterion_reverse
 /-- Restriction of scalars along the map from the constant integer ring is an equivalence from
 the complexes whose restriction is complete onto the complete complexes, with the inclusion
 functors identified with restriction. This is part (2) of
-`det-prop-integral-criterion-constant-coefficients` (restriction of scalars is an equivalence
+`lemma-integral-models--1` (restriction of scalars is an equivalence
 on derived complete objects), transported to the small-site presentation of
 `stacksConstructible`; completeness of `K` is read on its restriction as in part (3).
 Source: Stacks Tags 0999 and 09C1
-(blueprint: det-prop-integral-criterion-constant-coefficients).
+(blueprint: lemma-integral-models--1).
 
 Proof: this is `completion_transport`, whose first clause identifies its source property
 with `restrictionComplete` and whose target property is `stacksComplete`. -/
@@ -187,8 +187,8 @@ theorem restriction_complete_equivalence
 
 /-- Restriction of scalars identifies the bounded constant-model constructible category
 with the Stacks adic constructible category, and reflects membership for every complex.
-Source: blueprint det-lem-integral-models-stacks; Stacks Tag 09C1
-(blueprint: det-lem-integral-models-stacks).
+Source: blueprint lemma-integral-models--2; Stacks Tag 09C1
+(blueprint: lemma-integral-models--2).
 
 Proof: the criterion is `integral_models_stacks_criterion`. Restriction is an equivalence
 from the complexes with complete restriction onto the complete complexes

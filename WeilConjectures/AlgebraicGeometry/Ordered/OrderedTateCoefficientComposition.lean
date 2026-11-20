@@ -709,22 +709,7 @@ private lemma coefficient_succ_hom (A : Type (u + 1)) [CommRing A] (N : ℕ)
   rw [Iso.trans_hom, tensor_mapIso_hom]
   rfl
 
-/-- Composition law for the ordered Tate coefficient pullback.
-Source: latest blueprint, sec-smooth-purity/sk-prop-an,
-cor-pur-vector-bundle-purity.proof.md, compatibility paragraph;
-lem-asd-etale-finite-twist-pullback.
-(blueprint: lem-pur-ordered-tate-coefficient-composition).
-
-Proof: induct on `d` in the recursive ordered tensor presentation of the
-coefficient.  In degree zero this is the composition law for the constant-unit
-comparison.  In a successor degree, expand the recursive tensor comparison.
-Naturality and composition of the derived tensor pullback comparison separate
-the previous coefficient from the shifted Tate line.  Apply the induction
-hypothesis to the previous coefficient.  The shifted-line equation follows from
-the normalized root comparison, the pure-generator formula for the line map,
-and naturality of the degree-zero and shift comparisons.  Reassemble the two
-ordered factors with bifunctoriality of tensor.  The argument includes empty
-schemes, degree zero, and the zero coefficient ring. -/
+/-- Composition law for the ordered Tate coefficient pullback. -/
 theorem orderedTateCoefficientComposition (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {T U S : Scheme.{u}} (p : T ⟶ U) (v : U ⟶ S) (w : T ⟶ S)
