@@ -78,3 +78,22 @@ alignment, restoration, and counters. Structurally inferred: the nested tree.
 The outer wrapper mismatch is necessary but insufficient by itself. Uniform
 alignment of the entire derived-category endpoint removes the cost and its
 large reduction footprint, and restoration brings the cost back.
+## Round 2 and v2 addendum
+
+Fresh diagnostics give 2.62 s wall (1.71 s user, 2.83 GB peak RSS) for uniform target and 56.11 s wall (55.08 s user, 7.51 GB peak RSS) for restored raw target. One-step wrapper exposure takes 84.55 s and reports 1,263,620 Add.add, 906,156 Functor.obj, and 635,819 DFunLike.coe unfolds. This is the unresolved post-wrapper child footprint.
+
+### STRUCTURE EXPOSURE AND AMPLIFICATION ADDENDUM
+
+**A. MISMATCH SEMANTICS.** Raw DerivedCategory versus DerivedCategoryModule is syntactic and obstructs final equality conversion. Full uniform endpoint representation is the causal trigger; outer wrapper alone is insufficient. This is a multilevel bundle.
+
+**B. EXPOSURE.** The boundary is the derived-category argument of Quiver.Hom under both composition sides. Visible nodes include sheaves, module-category objects, HasDerivedCategory instances, generated wrapper proof fields, functor objects, counits, and natural-transformation apps. Wrapper-only exposure is actually expensive; exact inner endpoint is unknown.
+
+**C. COST MECHANISM.** Original/restored conversion is reduction-heavy and repeated over endpoint structure: 56.11 s. Wrapper-only is 84.55 s. Uniform alignment is 2.62 s. Counters are inclusive.
+
+**D. FIXED-TRIGGER ABLATION.** Invalid: wrapper/raw is itself the trigger and each endpoint is dependent on the equality. Endpoint abstraction changes the theorem type. Uniform aligned/restored is the valid restoration.
+
+**E. REDUCTION-PATH AUDIT.** The wrapper is an abbrev exposing raw DerivedCategory; outer Eq and composition heads match. One-sided exposure leaves a deeper mismatch and increases cost, while uniform alignment reaches the inferred type. No directionality claim is made.
+
+**F. MISMATCH PROVENANCE.** conjugateEquiv_counit produces actual side; declared side uses concrete DerivedCategoryModule wrapper vocabulary. Elaboration and generated proof fields create the split, which matters at final exact h for every endpoint occurrence.
+
+**G. CONCLUSION.** P2, evidence level 2. Reversible 56.11 s to 2.62 s full alignment is strongest. The 84.55 s wrapper-only result shows an independent inner child. Endpoint-by-endpoint typed alignment is the next falsifier.
