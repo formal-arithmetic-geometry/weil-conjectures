@@ -50,8 +50,7 @@ variable [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 /-- **Real lisse sheaves on curves are mixed.** Let `C₀` be a smooth geometrically connected curve
 over `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on `C₀`. Then `𝒢` is `ι`-mixed: the successive
 quotients of a filtration with irreducible lisse quotients are irreducible constituents of `𝒢`,
-punctually pure by `theorem-purity-real-sheaves-curves--1` (blueprint:
-`theorem-real-constructible-sheaves-are-mixed--1`, the curve case). -/
+which are punctually pure. -/
 theorem IsReal.isMixed_of_isLisse [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}

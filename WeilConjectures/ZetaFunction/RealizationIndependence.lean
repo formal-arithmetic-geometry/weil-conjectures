@@ -162,6 +162,71 @@ theorem exists_isWeilNumber_of_mem_roots_reverse {A B : Polynomial ℤ}
     obtain ⟨hj, heven⟩ := Finset.mem_filter.1 hj
     exact ⟨j, by have := Finset.mem_range.1 hj; omega, heven, h⟩
 
+/-- Every algebraic reciprocal root of the normalized zeta numerator or denominator becomes a
+Frobenius eigenvalue after any embedding into an ℓ-adic algebraic closure. The degree has the
+parity of the polynomial from which the root came. -/
+theorem exists_frobeniusEigenvalue_of_mem_roots_reverse {A B : Polynomial ℤ}
+    (hAB : PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries A
+      B) (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+    (θ : AlgebraicClosure ℚ →+* PadicAlgCl l) :
+    (∀ α ∈ (A.reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots,
+      ∃ i : ℕ, i ≤ 2 * d ∧ Odd i ∧
+        ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd.HasEigenvalue (θ α)) ∧
+    (∀ α ∈ (B.reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots,
+      ∃ i : ℕ, i ≤ 2 * d ∧ Even i ∧
+        ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd.HasEigenvalue (θ α)) := by
+  obtain ⟨hA, hB⟩ := map_eq_frobeniusProduct_of_isNormalizedIntegralFraction k₀ X d l hAB
+  have hcomp : θ.comp (algebraMap ℤ (AlgebraicClosure ℚ)) =
+      Int.castRingHom (PadicAlgCl l) := RingHom.ext_int _ _
+  have key (C : Polynomial ℤ) (h0 : C.coeff 0 = 1) (s : Finset ℕ)
+      (hC : C.map (Int.castRingHom (PadicAlgCl l)) =
+        ∏ j ∈ s, frobeniusCharpolyRev k₀ l X j)
+      (α : AlgebraicClosure ℚ)
+      (hα : α ∈ (C.reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots) :
+      ∃ j ∈ s,
+        ((WeilSheaf.adicConstant k₀ l X).cohomology j).frobeniusEnd.HasEigenvalue (θ α) := by
+    have hrev0 : C.reverse.map (Int.castRingHom (PadicAlgCl l)) ≠ 0 :=
+      (Polynomial.map_ne_zero_iff (RingHom.injective_int _)).2
+        (Polynomial.monic_reverse_of_coeff_zero_eq_one h0).ne_zero
+    have hroot : (C.reverse.map (Int.castRingHom (PadicAlgCl l))).IsRoot (θ α) := by
+      have h := (Polynomial.mem_roots'.1 hα).2.map (f := θ)
+      simpa only [Polynomial.map_map, hcomp] using h
+    have hα' : θ α ∈ (C.reverse.map (Int.castRingHom (PadicAlgCl l))).roots :=
+      (Polynomial.mem_roots hrev0).2 hroot
+    have hC0 : C.map (Int.castRingHom (PadicAlgCl l)) ≠ 0 := by
+      intro he
+      have he0 := congrArg (fun P : Polynomial (PadicAlgCl l) ↦ P.coeff 0) he
+      simp only [Polynomial.coeff_map, h0, map_one] at he0
+      simp at he0
+    rw [← Polynomial.reverse_map (RingHom.injective_int _),
+      Polynomial.mem_roots_reverse_iff hC0] at hα'
+    obtain ⟨hα0, hroot'⟩ := hα'
+    rw [hC, Polynomial.IsRoot, Polynomial.eval_prod, Finset.prod_eq_zero_iff] at hroot'
+    obtain ⟨j, hj, hjroot⟩ := hroot'
+    have hP0 : frobeniusCharpolyRev k₀ l X j ≠ 0 := by
+      intro he
+      have he0 := congrArg (fun P : Polynomial (PadicAlgCl l) ↦ P.coeff 0) he
+      simp [coeff_zero_frobeniusCharpolyRev] at he0
+    have hmem : θ α ∈ (frobeniusCharpolyRev k₀ l X j).reverse.roots := by
+      apply (Polynomial.mem_roots_reverse_iff hP0).2
+      exact ⟨hα0, hjroot⟩
+    rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial,
+      (LinearMap.reciprocal_roots_eigenvalues
+        ((WeilSheaf.adicConstant k₀ l X).cohomology j).frobeniusEnd
+        (LinearEquiv.isUnit_det' ((WeilSheaf.adicConstant k₀ l X).cohomology j).frobenius)).1]
+      at hmem
+    exact ⟨j, hj, (Module.End.hasEigenvalue_iff_isRoot_charpoly _ _).2
+      (Polynomial.isRoot_of_mem_roots hmem)⟩
+  refine ⟨fun α hα ↦ ?_, fun α hα ↦ ?_⟩
+  · obtain ⟨j, hj, heig⟩ := key A hAB.1 _
+      (by rw [hA, oddFrobeniusProduct]) α hα
+    obtain ⟨hjrange, hodd⟩ := Finset.mem_filter.1 hj
+    exact ⟨j, by have := Finset.mem_range.1 hjrange; omega, hodd, heig⟩
+  · obtain ⟨j, hj, heig⟩ := key B hAB.2.1 _
+      (by rw [hB, evenFrobeniusProduct]) α hα
+    obtain ⟨hjrange, heven⟩ := Finset.mem_filter.1 hj
+    exact ⟨j, by have := Finset.mem_range.1 hjrange; omega, heven, heig⟩
+
 end ReciprocalRoots
 
 /-- For `X₀` smooth, proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`,
@@ -273,6 +338,70 @@ private theorem norm_eq_of_isWeilNumber {q : ℕ} {w : ℝ} {α : ℂ} (h : IsWe
     ‖α‖ = (q : ℝ) ^ (w / 2) := by
   rw [isWeilNumber_iff] at h
   exact h.2 α (Polynomial.mem_aroots.2 ⟨minpoly.ne_zero h.1, minpoly.aeval ℚ α⟩)
+
+/-- Each reciprocal root of the normalized zeta numerator or denominator has one weight, and
+under every ℓ-adic embedding it is a Frobenius eigenvalue in that degree. The degree is fixed
+by purity of smooth proper cohomology. -/
+theorem exists_isWeilNumber_and_frobeniusEigenvalue_of_mem_roots_reverse {A B : Polynomial ℤ}
+    (hAB : PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries A
+      B) :
+    (∀ α ∈ (A.reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots,
+      ∃ i : ℕ, i ≤ 2 * d ∧ Odd i ∧ IsWeilNumber (Nat.card k₀) i α ∧
+        ∀ (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+          (θ : AlgebraicClosure ℚ →+* PadicAlgCl l),
+          ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd.HasEigenvalue (θ α)) ∧
+    (∀ α ∈ (B.reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots,
+      ∃ i : ℕ, i ≤ 2 * d ∧ Even i ∧ IsWeilNumber (Nat.card k₀) i α ∧
+        ∀ (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+          (θ : AlgebraicClosure ℚ →+* PadicAlgCl l),
+          ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd.HasEigenvalue (θ α)) := by
+  let ψ : AlgebraicClosure ℚ →ₐ[ℚ] ℂ := IsAlgClosed.lift
+  have hcomp : ψ.toRingHom.comp (algebraMap ℤ (AlgebraicClosure ℚ)) =
+      Int.castRingHom ℂ := RingHom.ext_int _ _
+  have root_map (C : Polynomial ℤ) (α : AlgebraicClosure ℚ)
+      (hα : α ∈ (C.reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots) :
+      ψ α ∈ (C.reverse.map (Int.castRingHom ℂ)).roots := by
+    have hmem := Multiset.mem_of_le
+      (Polynomial.map_roots_le_of_injective _ ψ.toRingHom.injective)
+      (Multiset.mem_map_of_mem ψ.toRingHom hα)
+    change ψ.toRingHom α ∈ (C.reverse.map (Int.castRingHom ℂ)).roots
+    simpa only [Polynomial.map_map, hcomp] using hmem
+  have hweights := exists_isWeilNumber_of_mem_roots_reverse k₀ X d hAB
+  have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card (α := k₀)
+  have degree_eq {i j : ℕ} {α : AlgebraicClosure ℚ}
+      (hi : IsWeilNumber (Nat.card k₀) i α) (l : ℕ) [Fact l.Prime]
+      [Fact (ringChar k₀ ≠ l)] (θ : AlgebraicClosure ℚ →+* PadicAlgCl l)
+      (hj : ((WeilSheaf.adicConstant k₀ l X).cohomology j).frobeniusEnd.HasEigenvalue
+        (θ α)) : i = j := by
+    obtain ⟨ι⟩ := PadicAlgCl.nonempty_ringHom_complex l
+    let φ : AlgebraicClosure ℚ →ₐ[ℚ] ℂ :=
+      { toRingHom := ι.comp θ
+        commutes' := by intro r; simp }
+    have hi' : IsWeilNumber (Nat.card k₀) i (ι (θ α)) := by
+      simpa [φ] using (isWeilNumber_algHom_apply_iff φ).2 hi
+    have hn := norm_eq_of_isWeilNumber hi'
+    have hp := WeilSheaf.isPureOfWeightOver_cohomology_adicConstant k₀ l X d ι
+      (j : ℤ) (θ α) hj
+    have heq : (Nat.card k₀ : ℝ) ^ ((i : ℝ) / 2) =
+        (Nat.card k₀ : ℝ) ^ ((j : ℝ) / 2) := hn.symm.trans (by simpa using hp)
+    have hle := (Real.rpow_le_rpow_left_iff hq).1 heq.le
+    have hge := (Real.rpow_le_rpow_left_iff hq).1 heq.ge
+    exact_mod_cast (show (i : ℝ) = j by linarith)
+  refine ⟨fun α hα ↦ ?_, fun α hα ↦ ?_⟩
+  · obtain ⟨i, hi, hodd, hw⟩ := hweights.1 (ψ α) (root_map A α hα)
+    have hw' : IsWeilNumber (Nat.card k₀) i α :=
+      (isWeilNumber_algHom_apply_iff ψ).1 hw
+    refine ⟨i, hi, hodd, hw', fun l _ _ θ ↦ ?_⟩
+    obtain ⟨j, -, -, hj⟩ :=
+      (exists_frobeniusEigenvalue_of_mem_roots_reverse k₀ X d hAB l θ).1 α hα
+    exact (degree_eq hw' l θ hj) ▸ hj
+  · obtain ⟨i, hi, heven, hw⟩ := hweights.2 (ψ α) (root_map B α hα)
+    have hw' : IsWeilNumber (Nat.card k₀) i α :=
+      (isWeilNumber_algHom_apply_iff ψ).1 hw
+    refine ⟨i, hi, heven, hw', fun l _ _ θ ↦ ?_⟩
+    obtain ⟨j, -, -, hj⟩ :=
+      (exists_frobeniusEigenvalue_of_mem_roots_reverse k₀ X d hAB l θ).2 α hα
+    exact (degree_eq hw' l θ hj) ▸ hj
 
 /-- **The Riemann hypothesis for the integral Frobenius factors.** For `X₀` smooth and proper of
 pure dimension `d` over `k₀ = 𝔽_q` and an integral Frobenius factor `P` in degree `i ≤ 2d`:
