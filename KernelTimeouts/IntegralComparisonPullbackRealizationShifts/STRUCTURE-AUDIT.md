@@ -84,3 +84,22 @@ first causal child under `Functor.obj`.
 The first instance mismatch is not sufficient. A deeper presheaf/module/functor
 representation remains expensive after that leaf is aligned, so this case must
 remain separate from the confirmed bundle controls.
+## Round 2 and v2 addendum
+
+DownstreamInstance completed in 88.99 s wall (90.65 s user, 8.31 GB peak RSS) at the original change site. Same-site diagnostics include 1,193,814 Add.add, 1,047,896 PresheafOfModules.obj, 812,294 AddMonoid.toAdd, and 333,085 Functor.obj kernel unfolds. First-instance alignment remains negative; the first materially changed downstream region is the presheaf/module object bundle.
+
+### STRUCTURE EXPOSURE AND AMPLIFICATION ADDENDUM
+
+**A. MISMATCH SEMANTICS.** The two HasDerivedCategory paths are syntactically different, but first-leaf alignment only moves the first visible difference. It is not a causal trigger for the parent cost. The unresolved candidate is deeper under Functor.obj; classification remains U.
+
+**B. EXPOSURE.** The boundary is the endpoint Functor.obj used by change. The tree contains derived-category instances, pullback/reduction functors, PresheafOfModules.obj, additive/module instances, shifts, and natural transformations. Large presheaf/module counters are measured at the downstream conversion; the first leaf is only comparison-relevant.
+
+**C. COST MECHANISM.** The downstream site is reduction-heavy and repeated across endpoint compositions. Instance alignment leaves the 88.99 s run and large footprint. Counters are inclusive.
+
+**D. FIXED-TRIGGER ABLATION.** Invalid: the candidate trigger is not isolated, and the dependent endpoint cannot be parameterized without changing the change obligation. No fixed-trigger claim is made.
+
+**E. REDUCTION-PATH AUDIT.** Both sides share Functor.obj; aligning the stored instance moves the first difference to FullSubcategory versus CochainComplex under that head. This is measured path movement, not an internal trace.
+
+**F. MISMATCH PROVENANCE.** Distinct generic/local HasDerivedCategory providers are selected during elaboration. Consumption by change and then presheaf/module and shift functors makes the deeper representation relevant.
+
+**G. CONCLUSION.** U with a P4 candidate, evidence level 1. Negative first-leaf control and downstream counters are strongest; unchanged time is contrary to first-leaf causality. A typed whole-endpoint control aligning the PresheafOfModules provider is the next falsifier.
