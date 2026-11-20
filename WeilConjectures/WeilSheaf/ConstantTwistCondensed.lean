@@ -47,26 +47,26 @@ noncomputable def regularSmulIso (b : (PadicAlgCl l)ˣ) :
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≅
       Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj l)
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) where
-  hom := Mod.regularEndRingHom (CondensedRing.constRingHom (Profinite.padicAlgClRingObj l)
+  hom := (Mod.regularEndRingHom (CondensedRing.constRingHom (Profinite.padicAlgClRingObj l)
     (Profinite.PadicAlgCl.constRingHom l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
-    (b : PadicAlgCl l))
-  inv := Mod.regularEndRingHom (CondensedRing.constRingHom (Profinite.padicAlgClRingObj l)
+    (b : PadicAlgCl l))).asHom
+  inv := (Mod.regularEndRingHom (CondensedRing.constRingHom (Profinite.padicAlgClRingObj l)
     (Profinite.PadicAlgCl.constRingHom l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
-    ((b⁻¹ : (PadicAlgCl l)ˣ) : PadicAlgCl l))
+    ((b⁻¹ : (PadicAlgCl l)ˣ) : PadicAlgCl l))).asHom
   hom_inv_id := by
-    rw [← End.mul_def, ← map_mul, ← map_mul, Units.inv_mul, map_one, map_one]
+    rw [← End.mul_asHom, ← map_mul, ← map_mul, Units.inv_mul, map_one, map_one]
     rfl
   inv_hom_id := by
-    rw [← End.mul_def, ← map_mul, ← map_mul, Units.mul_inv, map_one, map_one]
+    rw [← End.mul_asHom, ← map_mul, ← map_mul, Units.mul_inv, map_one, map_one]
     rfl
 
 omit [Finite k₀] in
 @[simp]
 lemma regularSmulIso_hom (b : (PadicAlgCl l)ˣ) :
     (regularSmulIso k₀ l X b).hom =
-      Mod.regularEndRingHom (CondensedRing.constRingHom (Profinite.padicAlgClRingObj l)
+      (Mod.regularEndRingHom (CondensedRing.constRingHom (Profinite.padicAlgClRingObj l)
         (Profinite.PadicAlgCl.constRingHom l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
-        (b : PadicAlgCl l)) :=
+        (b : PadicAlgCl l))).asHom :=
   rfl
 
 /-- The Weil structure of the condensed image of a pro-étale Weil sheaf, unfolded. -/
@@ -95,13 +95,13 @@ lemma adicSheafEquivCondensedMod_functor_map_smul_unit (b : (PadicAlgCl l)ˣ) :
 the regular module `ℚ̲̄_ℓ,X̄` along `E ℚ̄_ℓ,X̄ ≅ ℚ̲̄_ℓ,X̄`. -/
 noncomputable def adicConstantCondensedStr :
     (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).obj
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).obj
         (Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj l)
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) ≅
       Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj l)
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
   (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).mapIso
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).mapIso
       (adicSheafEquivCondensedModUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).symm ≪≫
     ((toCondensed k₀ l X).obj (adicConstant k₀ l X)).str ≪≫
     adicSheafEquivCondensedModUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
@@ -109,7 +109,7 @@ noncomputable def adicConstantCondensedStr :
 lemma adicConstantCondensedStr_hom :
     (adicConstantCondensedStr k₀ l X).hom =
       (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).map
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).map
           (adicSheafEquivCondensedModUnitIso l
             (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).inv ≫
         ((toCondensed k₀ l X).obj (adicConstant k₀ l X)).obj.str ≫

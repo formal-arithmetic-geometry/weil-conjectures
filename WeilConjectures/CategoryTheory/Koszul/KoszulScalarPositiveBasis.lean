@@ -129,7 +129,6 @@ private theorem scalarTensorMap_inclusion (φ : R ⟶ B)
   exact inclusionCompositionCore (scalarTensor_inclusion φ P Q p q n h)
     (tensorInclusion_natural B _ _ P' Q' f g p q n h)
 
-set_option maxHeartbeats 3000000 in
 -- Normalize the recursive total-tensor basis and its component inclusions.
 /-- Scalar extension of every ordered positive Koszul basis vector.
 Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).

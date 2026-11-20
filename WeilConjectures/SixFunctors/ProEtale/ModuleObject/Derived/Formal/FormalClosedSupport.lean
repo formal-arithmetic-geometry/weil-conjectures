@@ -41,7 +41,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Glo
 
 Source: blueprint `sec-six-functors-basics/sk-lem-formal-closed-support`,
 using the derived closed-support and stratum-Hom interfaces
-(blueprint: sk-lem-formal-closed-support).
+(blueprint: lemma-sections-support-closed-subscheme).
 
 The support functors are the canonical kernel and coefficient-compatible inverse-image
 constructions from `FormalClosedSupportAdjunction`. The stratum formula uses the actual
@@ -67,16 +67,16 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Global sections of a coefficient module, with its underlying abelian group.
-Source: blueprint `sk-lem-formal-closed-support`, clause (2), the functor Γ(S,-)
-(blueprint: sk-lem-formal-closed-support). The right derived functor of this composite is
+Source: blueprint `lemma-sections-support-closed-subscheme`, clause (2), the functor Γ(S,-)
+(blueprint: lemma-sections-support-closed-subscheme). The right derived functor of this composite is
 RΓ(S,-); the scalar action is retained by the input module before taking sections. -/
 noncomputable def formalClosedSupportSections (X : Scheme.{u}) :
     FormalSupportModules Λ X ⥤ Ab.{u + 1} :=
   Mod.forget (condensedRingObj Λ X) ⋙ Sheaf.Γ (Scheme.ProEt.topology X) Ab.{u + 1}
 
 /-- Sections are additive, since both forgetful and global-sections functors preserve
-finite products. Source: blueprint `sk-lem-formal-closed-support`, clause (2)
-(blueprint: sk-lem-formal-closed-support). -/
+finite products. Source: blueprint `lemma-sections-support-closed-subscheme`, clause (2)
+(blueprint: lemma-sections-support-closed-subscheme). -/
 noncomputable instance formalClosedSupportSections_additive (X : Scheme.{u}) :
     (formalClosedSupportSections Λ X).Additive :=
   Functor.additive_of_preserves_binary_products
@@ -202,7 +202,7 @@ private theorem coverRetract_dualizable
 
 /-- The closed-support adjunction, fiber triangle and stratum formula.
 Source: blueprint `sec-six-functors-basics/sk-lem-formal-closed-support`, clauses (1)--(2)
-(blueprint: sk-lem-formal-closed-support).
+(blueprint: lemma-sections-support-closed-subscheme).
 
 The ordinary adjunction is normalized by the existing support-kernel inclusion;
 `rightAdjoint_eq` specifies its derived adjunction, rather than an arbitrary rescaling.
@@ -276,16 +276,16 @@ structure FormalClosedSupportAssertions {Z U X : Scheme.{u}}
 /-- Sections with support in a closed subscheme: derived adjunction, fiber formula, and the
 extension-by-zero stratum Hom formula.
 Source: blueprint `sec-six-functors-basics/sk-lem-formal-closed-support`, clauses (1)--(2)
-(blueprint: sk-lem-formal-closed-support).
+(blueprint: lemma-sections-support-closed-subscheme).
 
 Proof:
-1. Apply det-lem-formal-closed-support-derived in the standing-scheme setting. Its derived
+1. Apply lemma-sections-support-closed-subscheme in the standing-scheme setting. Its derived
 adjunction, normalized by the support-kernel inclusion in
 `formal_closed_support_adjunction`, gives `ordinaryAdjunction`, `counit_normalization`,
 `rightAdjoint`, `rightAdjoint_eq` and `globalRHom`. Its natural localization triangle gives
 `fiber`. Applying exact i^* and i^*i_* = id identifies RΓ_Z K with i^* of the fiber of the
 canonical unit K → Rj_*j^*K. These give every assertion of clause (1).
-2. Apply det-lem-formal-closed-support-stratum to u and the finite locally projective L.
+2. Apply lemma-sections-support-closed-subscheme--3 to u and the finite locally projective L.
 The identity a_! = i_*u_! and the closed-support adjunction first give
 RHom_X(i_*u_!L,K) ≅ RHom_Z(u_!L,RΓ_Z K). The exact open extension adjunction gives
 RHom_S(L,u^*RΓ_Z K). Locally L is a retract of a finite free module, so its dual is flat

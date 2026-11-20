@@ -19,7 +19,7 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.FilteredColimitSucces
 
 Source: Stacks Project, Tags 03Q5, 0739 and 03FD; blueprint
 `sec-curve-estimates/lem-sc-second-kummer-divisors` (blueprint:
-lem-weil-pbc-cohomology-filtered-colimit).
+lemma-finiteness-small-etale-topoi--2).
 
 The image cocone has legs induced by the original coprojections. Its colimit property
 expresses that the canonical comparison map is an isomorphism, rather than merely asserting
@@ -85,23 +85,23 @@ private theorem abelianSectionsColimit (Y : Scheme.{u}) [CompactSpace Y]
 
 /-- On a quasi-compact quasi-separated scheme, etale cohomology of abelian sheaves commutes
 with filtered colimits, with no torsion hypothesis. Source: Stacks Tags 03Q5 and 0739
-(blueprint: lem-weil-pbc-cohomology-filtered-colimit).
+(blueprint: lemma-finiteness-small-etale-topoi--2).
 
 Proof:
 1. Sections on the terminal identity étale object commute with filtered colimits by
-   lem-weil-pbc-etale-qcqs-sections-filtered-colimit. Use modules over the lifted integers
+   lemma-finiteness-small-etale-topoi--2. Use modules over the lifted integers
    and the integer-module/abelian-group equivalence to match its coefficient universe.
    Transfer the colimit through the induced sheaf equivalence and identify evaluation
    at the terminal object with global sections.
 2. The natural isomorphism `Γ.rightDerivedZeroIsoSelf` gives the degree-zero case.
    Sheaves and abelian groups have exact filtered colimits by their Mathlib AB5 instances;
    shrink these instances to the index universe.
-3. Induct on the degree using lem-weil-pbc-right-derived-filtered-colimit-successor.
+3. Induct on the degree using lemma-finiteness-small-etale-topoi--2.
    Its proof embeds the diagram functorially into injectives, uses its cokernel and
    the horseshoe delta-functor to construct two right-exact rows, and compares them
    by naturality of the connecting maps and the four lemma.
 4. Supply the successor step's vanishing hypothesis using
-   lem-weil-pbc-etale-filtered-injective-acyclic: on qcqs finite coverings the Čech
+   lemma-finiteness-small-etale-topoi--2: on qcqs finite coverings the Čech
    complex of a filtered colimit of injectives is the colimit of their complexes,
    hence has zero positive cohomology; the Čech criterion gives derived acyclicity.
 5. The source library's plus-derived compatibility and single-functor homology
@@ -142,7 +142,7 @@ theorem etaleCohomology_isColimit_of_isFiltered (Y : Scheme.{u}) [CompactSpace Y
 
 /-- The same canonical comparison is an isomorphism for etale sheaves of modules over a
 fixed constant commutative ring. Source: Stacks Tags 03FD, 03CO and 03Q5
-(blueprint: lem-weil-pbc-cohomology-filtered-colimit).
+(blueprint: lemma-finiteness-small-etale-topoi--2).
 
 Proof (step 8 of the node): the underlying sheaf functor is a left adjoint by
 restriction/coextension of coefficient scalars and the sheafification adjunction;

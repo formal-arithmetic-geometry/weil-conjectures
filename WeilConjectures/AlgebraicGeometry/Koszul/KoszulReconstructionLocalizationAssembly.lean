@@ -9,18 +9,17 @@ public import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Reflection and unit equations under localization
 
-Source: Stacks Tag 099M, localization step; Mathlib's fully faithful precomposition API.
-(blueprint: lem-weil-pbc-koszul-localization-assembly).
+## References
+
+* Stacks Tag 099M
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 open CategoryTheory
 
-/-- Localization descent interface used to assemble the Koszul comparison.
-Source: Stacks Tag 099M (blueprint: lem-weil-pbc-koszul-localization-assembly).
-Proof: fullness and faithfulness of precomposition by a right-fraction localization
-transport the inverse from the dense subcategory. -/
+/-- If `P.ι ⋙ L` is a localization, a natural transformation `η : F ⟶ G` of functors out of
+`D` that is an isomorphism on the objects `L.obj X` is a natural isomorphism. -/
 theorem AlgebraicGeometry.Scheme.localizationNatTransIso
     {C D E : Type*} [Category C] [Category D] [Category E]
     (P : ObjectProperty C) (L : C ⥤ D) (W : MorphismProperty C)
@@ -38,9 +37,8 @@ theorem AlgebraicGeometry.Scheme.localizationNatTransIso
   have : IsIso η := isIso_of_fully_faithful R η
   exact ⟨asIso η, rfl⟩
 
-/-- Unit normalization on a right-fraction-dense localization.
-Source: Stacks Tag 099M (blueprint: lem-weil-pbc-koszul-localization-assembly).
-Proof: naturality and localization faithfulness extend the equality from the dense subcategory. -/
+/-- If `P.ι ⋙ L` is a localization, the unit equation `uF ≫ e.hom = uG` holds at every object
+once it holds at the objects `L.obj X`. -/
 theorem AlgebraicGeometry.Scheme.localizationUnitEq
     {C D E : Type*} [Category C] [Category D] [Category E]
     (P : ObjectProperty C) (L : C ⥤ D) (W : MorphismProperty C)

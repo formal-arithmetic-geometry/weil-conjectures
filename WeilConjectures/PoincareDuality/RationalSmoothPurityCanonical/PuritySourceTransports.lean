@@ -19,7 +19,7 @@ import all WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLoc
 /-! # Canonical source transports for smooth purity
 
 Source: main-20261015, prop-weil-operations.proof.md, sentences 3--4;
-sk-prop-sp-rational, Steps 1--2, and thm-pur-adic-reconstruction
+proposition-sp-rational, Steps 1--2, and thm-pur-adic-reconstruction
 (blueprint: def-pur-canonical-purity-source-transports).
 
 The source functors retain the actual localization, coefficient and shift

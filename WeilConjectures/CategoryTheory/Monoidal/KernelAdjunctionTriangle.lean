@@ -14,9 +14,9 @@ public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionBaseChange
 We continue `WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionUnit` and
 `WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionBaseChange`, for an object `T = F τ`
 pulled back from `C` (for `q : ℙ¹_S ⟶ S`, `τ = Λ_S(1)[2]`), and prove the abstract form of
-blueprint `sk-prop-geo-p1-adjunction` (G5)–(G9): the unit given by a kernel and the trace counit
-are the unit and counit of an adjunction `G ⊣ T ⊗ F (-)` as soon as the two *integrals of the
-diagonal class* are `1` (`CategoryTheory.Adjunction.kernelAdjunction`).
+blueprint `proposition-adjunction-projective-line` (G5)–(G9): the unit given by a kernel and the
+trace counit are the unit and counit of an adjunction `G ⊣ T ⊗ F (-)` as soon as the two *integrals
+of the diagonal class* are `1` (`CategoryTheory.Adjunction.kernelAdjunction`).
 
 * The normalization at `T` (the second triangle identity, (G9)) follows from the integral along
   `a` of the class `𝟙 ⟶ A' (A T) ≅ A' (B T)`, against the trace `t_a : A' B T ≅ F G T ⟶ 𝟙`
@@ -104,7 +104,8 @@ lemma kernelAdjunctionUnit_app_comp_trace (τ : C)
 
 variable {B' : E ⥤ D} (adjB : B ⊣ B')
 
-/-- **The adjunction given by a kernel** (blueprint `sk-prop-geo-p1-adjunction`, (G5)–(G9)).
+/-- **The adjunction given by a kernel** (blueprint `proposition-adjunction-projective-line`,
+(G5)–(G9)).
 
 Setting: `F ⊣ G` (`q^* ⊣ q_*` for `q : P ⟶ S`) with `F` strong monoidal; strong monoidal
 `A, B : D ⥤ E` (`a^*, b^*` for the projections of `W = P ×_S P`) with right adjoints `A'`, `B'`,

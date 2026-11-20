@@ -21,7 +21,7 @@ sheaves of `R`-modules:
 * in particular every `K ∈ D(U_proét)` sits in a distinguished triangle
   `j_! K ⟶ Rj_* K ⟶ i_* i^* Rj_* K ⟶ (j_! K)[1]`, functorial in `K`
   (`AlgebraicGeometry.ProEtale.exists_distTriang_openImmersionLowerShriek_rightDerived`,
-  part (1) of blueprint `det-sf-open-closed-extension-zero-limits`).
+  part (1) of blueprint `proposition-extension-zero-restriction-closed-subscheme`).
 -/
 
 @[expose] public section
@@ -58,8 +58,8 @@ variable [QuasiCompact j] [PreservesFiniteColimits ((i)_*[ModuleCat.{u + 1} R])]
 /-- **The open–closed triangle** on the pro-étale site: for a closed immersion `i` with
 quasi-compact open complement `j`, every `M ∈ D(X_proét)` sits in a distinguished triangle
 `j_! j^* M ⟶ M ⟶ i_* i^* M ⟶ (j_! j^* M)[1]`, formed by the counit of `j_! ⊣ j^*` and the unit of
-`i^* ⊣ i_*` (blueprint `sk-prop-sf-open-closed-triangle`). The exactness of `i_*` is
-`AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isCompl`. -/
+`i^* ⊣ i_*` (blueprint `proposition-extension-zero-restriction-closed-subscheme`). The exactness of
+`i_*` is `AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isCompl`. -/
 theorem exists_distTriang_openClosed (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (M : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))) :
     ∃ w, Triangle.mk
@@ -116,9 +116,9 @@ theorem exists_distTriang_openClosed (hij : IsCompl (Set.range i.base) (Set.rang
   exact Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) e.symm (by simp)
     (by rw [← he]; simp) (by simp)
 
-/-- Blueprint `det-sf-open-closed-extension-zero-limits` (subsection `sk-prop-sf-closed-unit`),
-part (1): for a closed immersion `i` with quasi-compact open complement `j : U ⟶ X` and every
-`K ∈ D(U_proét)`, there is a distinguished triangle
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (subsection
+`lemma-local-cohomology-right-adjoint--1`), part (1): for a closed immersion `i` with quasi-compact
+open complement `j : U ⟶ X` and every `K ∈ D(U_proét)`, there is a distinguished triangle
 `j_! K ⟶ Rj_* K ⟶ i_* i^* Rj_* K ⟶ (j_! K)[1]` in `D(X_proét)`, functorial in `K`: its first
 map is adjoint to the inverse of the counit isomorphism `j^* Rj_* K ≅ K` and its second map is
 the unit of `i^* ⊣ i_*`. It is the open–closed triangle

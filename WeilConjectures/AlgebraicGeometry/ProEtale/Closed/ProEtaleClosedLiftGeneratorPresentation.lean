@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSpecializationRestrict
 import WeilConjectures.SixFunctors.ProEtale.Comparison.ForgetUpperStar
 
 /-! # Closed inverse image on the free closed-lift presentation
-
-Source: Steps 2--3 of `lem-sp-proetale-proper-closed-injective-sections`.
-(blueprint: lem-sp-proetale-closed-lift-generator-presentation).
 -/
 
 @[expose] public section
@@ -240,26 +237,7 @@ private theorem augmentation_cancel_directImage
     exact hf.symm.trans ((augmentation_tests A z M P f g h (V i) ha hw hs _).trans hg)
 
 /-- The augmentation covers after closed inverse image, and closed inverse image
-is fully faithful on maps out of its source.
-
-Source: affine closed inverse-image evaluation, together with the free-module
-presentation in Steps 2--3 of `lem-sp-proetale-proper-closed-injective-sections`.
-(blueprint: lem-sp-proetale-closed-lift-generator-presentation).
-
-Proof: refine each pro-etale object by the existing localization cover. On its
-open pieces the closed pullback is empty, so sections of a closed direct image
-are unique. On the other pieces every section of M corresponds to a map from
-a free sheaf appearing in the augmentation. Thus equality after augmentation
-implies equality of maps into every closed direct image, by sheaf separatedness.
-The inverse/direct-image adjunction makes the pulled-back augmentation epic.
-For the Hom assertion, compare module inverse image with abelian inverse image
-by the canonical Kan-extension and sheafification comparisons, checking their
-compatibility with the actual adjunction unit. The specialization theorem makes
-that unit bijective on each indexed object. Free Yoneda and the coproduct
-universal property make postcomposition with the unit bijective on maps out of
-the augmentation source. The adjunction hom equivalence and its triangle identity
-identify this bijection with the displayed inverse-image map. This argument also
-applies to empty charts and the zero coefficient ring. -/
+is fully faithful on maps out of its source. -/
 theorem closedLiftGeneratorPresentation
     (A : Type u) [CommRing A] {X Z U : Scheme.{u}}
     (z : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion z] [IsOpenImmersion j]

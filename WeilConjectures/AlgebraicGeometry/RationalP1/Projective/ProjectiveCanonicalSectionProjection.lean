@@ -31,19 +31,7 @@ attribute [local irreducible] supportedUnitIso pushSectionIso
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The canonical section/projection identity for the regular supported source.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, cancellation on the diagonal before coefficient normalization.
-(blueprint: lem-sfb-projective-canonical-section-projection).
-
-Proof: specialize the section clause of ringed projection/composition coherence to the
-closed diagonal and the second projection, transport through the fixed internal-module
-comparison, and evaluate it on the regular coefficient. The conjugate comparison is
-pushSectionIso, the exact closed direct image is supportedUnitIso, and the two unitors
-are singleUnitIso and the right unitor. The result is the displayed equality for every
-unbounded M, including zero and empty schemes. -/
+/-- The canonical section/projection identity for the regular supported source. -/
 theorem canonical_section_projection
     (Y : Scheme.{u})
     (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :

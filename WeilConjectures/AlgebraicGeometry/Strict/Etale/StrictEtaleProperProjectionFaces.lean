@@ -42,7 +42,7 @@ private theorem mate_of_counit
     (α : L ⋙ F ≅ E ⋙ L') (β : R ⋙ E ≅ F ⋙ R')
     (h : ∀ K, α.hom.app (R.obj K) ≫ L'.map (β.hom.app K) ≫
       adj'.counit.app (F.obj K) = F.map (adj.counit.app K)) :
-    (mateEquiv adj adj' (.mk _ _ _ _ α.inv)).natTrans = β.hom := by
+    (mateEquiv adj adj' (.mk _ _ _ _ α.inv)) = β.hom := by
   ext K
   apply (adj'.homEquiv _ _).symm.injective
   rw [Adjunction.homEquiv_counit]

@@ -27,7 +27,8 @@ the extension by zero on the compactification.
 - `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationOriginIso`: the
   comparison `Rf_!(c) ∘ ν^* ≅ Rf_!(d) ∘ ν^*` on bounded below étale complexes.
 - `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekCompactificationIso`: the comparison of the
-  chosen `Rf_!` with `Rf_!(c) = Rf̄_* j_!` (blueprint `lem-trf-compactification-cohomology`).
+  chosen `Rf_!` with `Rf_!(c) = Rf̄_* j_!` (blueprint
+  `proposition-construction-independence-rf-shriek--7`).
 
 ## Main results
 
@@ -92,7 +93,7 @@ lemma rightDerivedLowerShriekOfCompactificationOriginIso_trans (c₁ c₂ c₃ :
   rw [← Etale.rightDerivedLowerShriekOfCompactificationPlusιIso_trans Λ c₁ c₂ c₃]
   simp
 
-/-- Blueprint `lem-trf-compactification-cohomology`: for a compactification
+/-- Blueprint `proposition-construction-independence-rf-shriek--7`: for a compactification
 `c = (X ⟶[j] X̄ ⟶[ā] Y)` of `f`, the canonical isomorphism `Rf_! K ≃ Rā_* j_! K` between the
 exceptional direct image (for the chosen compactification) and the derived direct image of the
 extension by zero along `c`, on objects `K = ν_X^* K₀` of étale origin. For `f = a_X` the

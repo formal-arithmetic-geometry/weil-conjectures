@@ -190,7 +190,7 @@ lemma comparisonAdjunction_unit_app_hom (X : Scheme.{u}) (F : Sheaf X.smallEtale
     Adjunction.map_restrictFullyFaithful_unit_app]
   simp
 
-/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
+/-- Blueprint `theorem-bounded-below-cohomology-comparison`: The pro-étale comparison
 
 *Full faithfulness, in the form the chapter uses.* The unit `id ⟶ ν_* ν^*` of the comparison
 adjunction is an isomorphism; this is the assertion `id ≅ Rν_{T*} ν_T^*` of the blueprint, and
@@ -221,14 +221,14 @@ theorem isIso_comparisonAdjunction_unit (X : Scheme.{u}) :
     exact h2 (Opposite.op ((AffineEtale.toAffineProEt X).obj U.unop))
   infer_instance
 
-/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
+/-- Blueprint `theorem-bounded-below-cohomology-comparison`: The pro-étale comparison
 
 *Fullness.* The comparison pullback is full. -/
 instance full_comparisonUpperStar (X : Scheme.{u}) : (comparisonUpperStar A X).Full :=
   have := isIso_comparisonAdjunction_unit A X
   (comparisonAdjunction A X).full_L_of_isSplitEpi_unit_app
 
-/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
+/-- Blueprint `theorem-bounded-below-cohomology-comparison`: The pro-étale comparison
 
 *Faithfulness.* The comparison pullback is faithful. -/
 instance faithful_comparisonUpperStar (X : Scheme.{u}) : (comparisonUpperStar A X).Faithful :=

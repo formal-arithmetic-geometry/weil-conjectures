@@ -90,6 +90,16 @@ variable {C D C' D' T T' : Type*} [Category* C] [Category* D] [Category* C'] [Ca
   [Category* T'] [Preadditive T'] [HasZeroObject T'] [HasShift T' ℤ]
   [∀ n : ℤ, (shiftFunctor T' n).Additive] [Pretriangulated T']
 
+/-- The first term of a distinguished triangle on the unit of an adjunction vanishes after
+applying the left adjoint, if the counit at the pulled-back object is invertible. -/
+lemma isZero_map_obj_of_distinguished_unit_triangle {F : T ⥤ T'} {G : T' ⥤ T}
+    [F.CommShift ℤ] [F.IsTriangulated] (adj : F ⊣ G) {X M : T} (f : X ⟶ M)
+    (h : G.obj (F.obj M) ⟶ X⟦(1 : ℤ)⟧)
+    (hT : Triangle.mk f (adj.unit.app M) h ∈ distTriang T)
+    [IsIso (adj.counit.app (F.obj M))] : IsZero (F.obj X) := by
+  refine Triangle.isZero₁_of_isIso₂ _ (F.map_distinguished _ hT) ?_
+  exact IsIso.of_isIso_fac_right (hh := IsIso.id _) (adj.left_triangle_components M)
+
 /-- In the situation of
 `CategoryTheory.Pretriangulated.isIso_of_adjunction_triangle_of_fullyFaithful`,
 the counit `ι (L (R B)) ⟶ ι B` is the first map of the triangle, up to isomorphism. -/
@@ -238,7 +248,7 @@ noncomputable def upperShriekBaseChangeOfMap (sqf : IsPullback πZ f'.left f.lef
       boundedConstructibleUpperStarOfMap ℓ πP ⋙ boundedConstructibleUpperShriek ℓ f' :=
   have := isIso_boundedConstructibleBaseChangeOfMap ℓ sqf
   (mateEquiv (lowerStarUpperShriekAdjunction ℓ f) (lowerStarUpperShriekAdjunction ℓ f')
-    (inv (boundedConstructibleBaseChangeOfMap ℓ sqf.toCommSq))).natTrans
+    (inv (boundedConstructibleBaseChangeOfMap ℓ sqf.toCommSq)))
 
 /-- `ProEtale.CondensedRing.upperShriekBaseChangeOfMap` is the mate of the inverse of the proper
 base change isomorphism. -/
@@ -408,8 +418,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {F L : Type u} [Field F] [Field L] [Algebr
   {i : Z ⟶ P} {i' : Z' ⟶ P'} [IsClosedImmersion i.left] [IsClosedImmersion i'.left]
   {πP : P'.left ⟶ P.left} {πZ : Z'.left ⟶ Z.left}
 
-set_option maxHeartbeats 400000 in
--- the proof elaborates two triangles and several base change maps of the derived categories
 /-- **The base change map of a closed exceptional inverse image along a field extension is an
 isomorphism**: for a closed immersion `i : Z ⟶ P` of separated `F`-schemes of finite type, its
 base change `i' : Z' ⟶ P'` along a field extension `F ⟶ L` and a bounded constructible
@@ -440,9 +448,7 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_fieldExtension
   /- The triangle `X ⟶ M ⟶ Rj_* j^* M ⟶`. -/
   let adjV := derivedUpperStarLowerStarAdjunction 𝐐 V.ι
   obtain ⟨X, f, h, hT⟩ := distinguished_cocone_triangle₁ (adjV.unit.app M.obj)
-  have hjX : IsZero ((L((V.ι)^*⟦𝐐⟧)).obj X) := by
-    refine Triangle.isZero₁_of_isIso₂ _ ((L((V.ι)^*⟦𝐐⟧)).map_distinguished _ hT) ?_
-    exact IsIso.of_isIso_fac_right (hh := IsIso.id _) (adjV.left_triangle_components M.obj)
+  have hjX := isZero_map_obj_of_distinguished_unit_triangle adjV f h hT
   have hiX : IsIso ((derivedUpperStarLowerStarAdjunction 𝐐 i.left).unit.app X) :=
     isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero _ V.ι i.left hcompl hjX
   have : LocallyOfFiniteType (Over.mk (V.ι ≫ P.hom)).hom :=
@@ -452,9 +458,8 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_fieldExtension
   have : IsSeparated (Over.mk (V.ι ≫ P.hom)).hom :=
     inferInstanceAs (IsSeparated (V.ι ≫ P.hom))
   have hjM := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ V.ι M.obj M.property
-  have hRj : boundedConstructible _ ((R((V.ι)_*⟦𝐐⟧)).obj ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) :=
-    boundedConstructible_rightDerivedLowerStar_obj ℓ
-      (Over.homMk V.ι : Over.mk (V.ι ≫ P.hom) ⟶ P) ⟨_, hjM⟩
+  have hRj := boundedConstructible_rightDerivedLowerStar_obj ℓ
+    (Over.homMk V.ι : Over.mk (V.ι ≫ P.hom) ⟶ P) ⟨_, hjM⟩
   have hX : boundedConstructible _ X :=
     (boundedConstructible _).ext_of_isTriangulatedClosed₁ _ hT M.property hRj
   /- The closed part `Q₀ = Li^* X`, with `Ri_* Q₀ ≅ X`. -/
@@ -480,9 +485,7 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_fieldExtension
   have hbcU : IsIso ((baseChangeMap 𝐐 sqV.toCommSq).app ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) := by
     exact_mod_proofs isIso_baseChangeMap_app_padicAlgCl_of_fieldExtension P.hom P'.hom hP ℓ sqV
       (isUnit_natCast_spec ℓ F) _ hjM
-  let e₃ : ((L((πP)^*⟦𝐐⟧)).mapTriangle.obj Tr).obj₃ ≅ (R((V'.ι)_*⟦𝐐⟧)).obj
-      ((L((πP ∣_ V)^*⟦𝐐⟧)).obj ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) :=
-    asIso ((baseChangeMap 𝐐 sqV.toCommSq).app ((L((V.ι)^*⟦𝐐⟧)).obj M.obj))
+  let e₃ := asIso ((baseChangeMap 𝐐 sqV.toCommSq).app ((L((V.ι)^*⟦𝐐⟧)).obj M.obj))
   have := isIso_boundedConstructibleBaseChangeOfMap ℓ sq
   exact isIso_mateEquiv_inv_app_of_triangle (lowerStarUpperShriekAdjunction ℓ i)
     (lowerStarUpperShriekAdjunction ℓ i') (boundedConstructibleBaseChangeOfMap ℓ sq.toCommSq)

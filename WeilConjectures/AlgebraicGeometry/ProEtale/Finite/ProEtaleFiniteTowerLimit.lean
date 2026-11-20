@@ -42,7 +42,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteTowerRepr
 /-!
 # Preservation of finite constant ring towers on the pro-etale site
 
-Source: Stacks Project, Tags 098T (2), 097D, 04D3 and 00YV.
+## References
+
+* Stacks Project, Tags 098T (2), 097D, 04D3 and 00YV
+* Stacks Project, Tags 098T (2) and 097D
 -/
 
 @[expose] public section
@@ -135,22 +138,6 @@ private theorem preservesFiniteTower_of_representable
 
 /-- Inverse image preserves the limit of a countable tower of finite constant rings.
 No surjectivity of the transition maps is required.
-
-Source: Stacks Project, proetale.tex, Tags 098T (2) and 097D; sites.tex,
-Tags 04D3 and 00YV.
-(blueprint: lem-weil-pbc-proetale-finite-tower-limit)
-
-Proof: Represent the underlying finite constant sheaf diagram by a diagram of
-pro-etale test objects. Its geometric limit cone stays limiting under base change.
-Lifted Yoneda preserves the two limits. Left Kan extension sends a representable
-to the representable of its image; sheafification then gives the corresponding
-isomorphism for inverse image of sheaves of sets. Transfer limit preservation
-through these natural isomorphisms. Forgetting commutative rings commutes with
-inverse image: the pointwise Kan-extension index categories are filtered, because
-site base change is representably flat, and ring forgetting preserves filtered
-colimits; it also preserves sheafification. Finally, ring-sheaf forgetting preserves
-and reflects limits, as checked sectionwise on the underlying presheaves. Reflect
-the preserved underlying set-valued limit cone to obtain the claimed ring limit.
 -/
 theorem proEtaleSheafInverseImage_preserves_finite_tower
     {X Y : Scheme.{u}} (f : X ⟶ Y)

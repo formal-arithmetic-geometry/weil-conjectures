@@ -144,7 +144,7 @@ gives b_(rt) C(D_(r,t) Gamma_e). Identity compatibility removes b_id; naturality
 and epsilon_s = P_s(chi) b_s give exactly the first displayed equation below.
 9. Naturality of beta at the actual ce, followed by F^p(theta) and the assumed class-map
 square, gives psi C(F^e ce) = F^p(cp) F^p(epsilon_s) beta_source. Psi is an isomorphism
-because theta and beta are isomorphisms (lem-sf-class-compact-support-comparison).
+because theta and beta are isomorphisms (proposition-comparison-immersions--4).
 10. Precompose with C(sigma_e inverse) and use step 8 to cancel the two sigma factors.
 The result is psi C(tau_e) = tau_p chi. The degree-zero source and bounded-below target,
 with sourceWitness and targetWitness, retain the actual antecedent and map tau_e.

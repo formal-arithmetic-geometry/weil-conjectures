@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.GenericTorsionCohomologyColimit
 
 /-! # Finite-stalk approximation for a generic torsion sheaf
 
-Source: blueprint `lem-sc-affine-generic-second`, final proof paragraph.
+Source: blueprint `theorem-cohomology-curves--2`, final proof paragraph.
 -/
 
 @[expose] public section
@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A generic torsion sheaf on a qcqs integral scheme is a filtered colimit of finite-stalk
 sheaves, and applying generic direct image and cohomology preserves this presentation.
-Source: blueprint `lem-sc-affine-generic-second`, final proof paragraph.
+Source: blueprint `theorem-cohomology-curves--2`, final proof paragraph.
 (blueprint: lem-sc-generic-torsion-finite-stalk-colimit)
 
 Proof: use the equivalence between abelian etale sheaves on the function field and discrete

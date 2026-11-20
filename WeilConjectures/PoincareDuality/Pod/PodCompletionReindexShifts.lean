@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Signed shifts of normalized reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 011G, 07A4, 0941 (blueprint: def-pod-completion-reindex-shifts).
 The finite tensor generator formulas and both signed Roos coordinates determine
 all shift maps before localization. Their representative squares fix the derived maps.

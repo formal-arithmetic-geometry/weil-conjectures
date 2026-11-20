@@ -22,7 +22,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Index
 /-! # Exact isomorphism transport at integral and field coefficient stages
 
 Source: main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md, sentence 1, through lem-fix-weil-operations,
+prop-weil-operations.proof.md, sentence 1, through prose-10-20,
 first paragraph (blueprint: def-pod-isomorphism-field-transport-clauses).
 
 All functors, coefficient maps, scalar comparisons and quotient Hom constructors

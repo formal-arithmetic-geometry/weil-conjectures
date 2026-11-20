@@ -30,7 +30,7 @@ the `Gal(Ω / K')`-invariant sections over `Spec Ω`:
 
 For `K'` the fraction field of the strict henselization of a curve at a boundary point and `Ω` a
 separable closure, `Gal(Ω / K')` is the inertia group at the point: this is the second step of
-blueprint `lem-wf-boundary-stalk-invariants`, which identifies the boundary stalk of `j_* F`
+blueprint `lemma-boundary-stalk--1`, which identifies the boundary stalk of `j_* F`
 with the inertia invariants of the geometric generic stalk.
 -/
 

@@ -127,9 +127,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar 
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
 
 /-- The **duality map** `δ_{M,K} : Ψ D_{X₁} K ⟶ D_{X'} Ψ K` of a trait model `M` over the generic
-base (blueprint `sk-prop-tf-nearby-duality-foundation`): the adjoint of `θ_M ∘ Ψ(ev) ∘ μ_Ψ`, with
-`θ_M` the dualizing map of the family `D` (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase`).
-This is the generic-base version of `NearbyCyclesModel.nearbyDualityMap`. -/
+base (blueprint `proposition-nearby-cycles-commute-verdier-duality`): the adjoint of
+`θ_M ∘ Ψ(ev) ∘ μ_Ψ`, with `θ_M` the dualizing map of the family `D`
+(`NearbyCyclesModel.NearbyDualizingDataOfGenericBase`). This is the generic-base version of
+`NearbyCyclesModel.nearbyDualityMap`. -/
 noncomputable def nearbyDualityMapOfGenericBase (D : NearbyDualizingDataOfGenericBase k' ℓ)
     (h : M.IsTraitModelOfGenericBase X₁ ι q g)
     (K : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -188,10 +189,10 @@ theorem isIso_map_map_nearbyDualityMapOfGenericBase_iff_of_isOpenImmersion {E : 
   rw [isIso_comp_left_iff, isIso_comp_left_iff, isIso_comp_right_iff]
 
 /-- **Nearby duality over a generic base and open restriction** (blueprint
-`det-tf-nearby-duality-proper` (2)): for a morphism `φ : N ⟶ M` of trait models over the generic
-base, over open immersions `j : Y₁ ⟶ X₁` and `j' : Y' ⟶ X'`, whose map of total spaces is an open
-immersion compatible with the structure morphisms and whose square of geometric generic fibres is
-cartesian, `j'^* δ_{M,K}` is an isomorphism if and only if `δ_{N, j^* K}` is. -/
+`lemma-nearby-duality-proper-direct-image` (2)): for a morphism `φ : N ⟶ M` of trait models over the
+generic base, over open immersions `j : Y₁ ⟶ X₁` and `j' : Y' ⟶ X'`, whose map of total spaces is an
+open immersion compatible with the structure morphisms and whose square of geometric generic fibres
+is cartesian, `j'^* δ_{M,K}` is an isomorphism if and only if `δ_{N, j^* K}` is. -/
 theorem isIso_map_nearbyDualityMapOfGenericBase_iff_of_isOpenImmersion
     (D : NearbyDualizingDataOfGenericBase k' ℓ) (φ : N.Hom M j.left j'.left)
     (hM : M.IsTraitModelOfGenericBase X₁ ι q g)
@@ -267,12 +268,12 @@ variable {Xc : Over (Spec (.of F))} [LocallyOfFiniteType Xc.hom] [QuasiCompact X
   {qc : Mc.total ⟶ trait k'} {gc : Mc.generic ⟶ Spec (.of (traitGenericField k'))}
 
 /-- **Passing to a larger model over the generic base** (blueprint
-`sk-prop-tf-nearby-duality-foundation`, "open locality allows a compactification and extension by
-zero"): let `φ : M ⟶ M̄` be a morphism of trait models over the generic base, over open immersions
-`j : X₁ ⟶ X̄₁` and `j' : X' ⟶ X̄'`, whose map of total spaces is an open immersion compatible with
-the structure morphisms and whose square of geometric generic fibres is cartesian. If the duality
-map of `M̄` is an isomorphism at the extension by zero `j_! K`, then the duality map of `M` is an
-isomorphism at `K`. -/
+`proposition-nearby-cycles-commute-verdier-duality`, "open locality allows a compactification and
+extension by zero"): let `φ : M ⟶ M̄` be a morphism of trait models over the generic base, over open
+immersions `j : X₁ ⟶ X̄₁` and `j' : X' ⟶ X̄'`, whose map of total spaces is an open immersion
+compatible with the structure morphisms and whose square of geometric generic fibres is cartesian.
+If the duality map of `M̄` is an isomorphism at the extension by zero `j_! K`, then the duality map
+of `M` is an isomorphism at `K`. -/
 theorem isIso_nearbyDualityMapOfGenericBase_of_openSubmodel
     (D : NearbyDualizingDataOfGenericBase k' ℓ) (h : M.IsTraitModelOfGenericBase X₁ ι q g)
     (hc : Mc.IsTraitModelOfGenericBase Xc ι qc gc) (j : X₁ ⟶ Xc)

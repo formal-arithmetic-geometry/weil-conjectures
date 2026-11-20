@@ -210,7 +210,7 @@ compactification of the smooth affine connected curve `C_{k'}`, of genus `g`
 (`AlgebraicGeometry.Scheme.Hom.genus_baseChangeField`) with `r` boundary points
 (`AlgebraicGeometry.Compactification.natCard_compl_baseChangeField`), so both groups have order
 `n ^ (2g + r - 1)` (`AlgebraicGeometry.IsConnectedCurve.natCard_sheafH_one_constantZMod_mul`).
-(blueprint: `thm-sc-constant-invariance`, affine case) -/
+(blueprint: `proposition-cohomology-smooth-affine-curve`, affine case) -/
 theorem IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isAffine [IsAlgClosed k]
     [IsConnectedCurve f] [Smooth f] [IsAffine C] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0)
     (q : ℕ) : Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by

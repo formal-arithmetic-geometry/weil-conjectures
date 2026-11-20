@@ -14,7 +14,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/`
 `thm-dg-finite-type-constructibility.md`
-(blueprint: thm-dg-finite-type-constructibility).
+(blueprint: proposition-six-operations-dctf--2).
 
 The ordinary derived direct image preserves bounded constructibility, without a
 separatedness hypothesis on the morphism.
@@ -32,7 +32,7 @@ namespace AlgebraicGeometry.Etale
 constructible complexes with finite allowable commutative coefficients.
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/`
 `thm-dg-finite-type-constructibility.md`
-(blueprint: thm-dg-finite-type-constructibility).
+(blueprint: proposition-six-operations-dctf--2).
 
 Proof:
 1. Finite-type schemes over a field are Noetherian, using
@@ -43,10 +43,10 @@ injectives by `lem-pur-kinjective-restrict-localized-adjunction`. The section fo
 `def-weil-pbc-direct-image` identifies restricted direct images. Thus the assertion is
 local on the target, and a finite affine cover glues constructibility and bounds.
 2. Assume the target affine and choose a finite affine cover of the source. Each cover
-member has the projective compactification of `prop-nagata-affine-compactification`,
-`def-nagata-affine-compactification` and `def-nagata-compactification`. Every nonempty
-intersection is open in such a compactification; it need not be affine. Apply
-`cor-fin-deligne-open-finite-coefficients`, `lem-fin-proper-bounded-constructible` and
+member has the projective compactification of `lemma-affine-covers-dense-intersection--2`,
+`lemma-affine-covers-dense-intersection--2` and `definition-compactification-refinement--1`. Every
+nonempty intersection is open in such a compactification; it need not be affine. Apply
+`corollary-open-direct-image-over-field--1`, `theorem-results-from-etale-theory--3` and
 clause (5) of `lem-weil-derived-direct-image-composition` to obtain bounded constructible
 intersection direct images. Empty intersections give zero.
 3. Apply the finite alternating Cech resolution to the injective representative.

@@ -12,8 +12,8 @@ import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 /-! # The closed-lift adjunction on ind-etale algebras
 
 Source: Stacks Project, Tag 097P, proof of `lemma-lift-ind-etale`, final two paragraphs;
-blueprint, smooth purity, `lem-exc-closed-lift-adjunction`
-(blueprint: lem-exc-closed-lift-adjunction).
+blueprint, smooth purity, `proposition-extension-zero-restriction-closed-subscheme`
+(blueprint: proposition-extension-zero-restriction-closed-subscheme).
 
 The adjunction is expressed by its natural family of Hom equivalences. Naturality is
 written on quotient representatives; the quotient maps are surjective, so these are
@@ -199,7 +199,7 @@ private theorem quotient_indEtale (A : Type u) [CommRing A] (I : Ideal A)
 
 /-- Reduction is left adjoint to the closed lift, expressed as a natural Hom equivalence.
 Source: Stacks Project, Tag 097P, final two proof paragraphs
-(blueprint: lem-exc-closed-lift-adjunction).
+(blueprint: proposition-extension-zero-restriction-closed-subscheme).
 
 The first identity specifies the map on every quotient class. The second is naturality
 under precomposition in `D`, and the third is naturality under postcomposition in `C`.
@@ -208,10 +208,11 @@ composition. Together with ind-etaleness of the reduction and the existing ind-e
 instance for `ClosedLift`, this is the Hom-set definition of the claimed adjunction.
 
 Proof plan:
-1. The indexing category is small and filtered (lem-exc-closed-lift-filtered), with etale
-finite-presentation terms, so its colimit is ind-etale. Reduction is quotient base change,
-so lem-weil-pbc-ind-etale-stability makes it ind-etale. The composite of any map to the
-lift with `toAlgHom` kills the extended ideal, hence descends to the quotient.
+1. The indexing category is small and filtered
+(proposition-extension-zero-restriction-closed-subscheme), with etale finite-presentation terms, so
+its colimit is ind-etale. Reduction is quotient base change, so lemma-stability makes it ind-etale.
+The composite of any map to the lift with `toAlgHom` kills the extended ideal, hence descends to the
+quotient.
 2. For etale finite-presentation `D`, choose a finite presentation
 (def-weil-pbc-finitely-presented-algebra). A map from its reduction supplies an indexing
 object and hence a coprojection to the lift. Compatible presentation isomorphisms in the
@@ -230,7 +231,7 @@ universal property gives compatibility globally. The same argument proves identi
 composition for `map`.
 6. The inverse Hom equivalences define reduction left adjoint to the closed lift.
 The image of the identity is the specified reduction map, so this is the counit;
-lem-exc-closed-lift-reduction identifies it as an isomorphism. -/
+proposition-extension-zero-restriction-closed-subscheme identifies it as an isomorphism. -/
 theorem exists_natural_homEquiv (A : Type u) [CommRing A] (I : Ideal A) :
     ∃ β : ∀ (D C : CommAlgCat.{u} A) [Algebra (A ⧸ I) C]
       [IsScalarTower A (A ⧸ I) C] [Algebra.IndEtale A D]

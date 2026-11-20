@@ -11,6 +11,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.LocalModuleEpiGermLift
 import WeilConjectures.AlgebraicGeometry.StalkInternalHomEvaluation
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Germ comparison for an already descended local factorization
 

@@ -55,8 +55,8 @@ private theorem perfect_shift (X : Scheme.{u})
 perfect. Source: Stacks Project, Cohomology of Sheaves, Lemma 20.49.7, Tag 08CR
 (blueprint: lem-pc-perfect-two-out-of-three).
 
-Proof: By `def-pc-perfect-complex`, intersect and refine the local covers of the two
-perfect terms to a common affine cover. Restriction is exact and preserves cone triangles
+Proof: By `lemma-coherent-base-change-invertible-sheaves--1`, intersect and refine the local covers
+of the two perfect terms to a common affine cover. Restriction is exact and preserves cone triangles
 (`def-weil-abstract-derived-category`). On each affine open, Tag 08EB represents both
 perfect terms by bounded complexes of finite projective modules.
 
@@ -72,7 +72,7 @@ If the last two terms are perfect, rotate the triangle by TR2 and apply the firs
 then shift back. If the first and last terms are perfect, rotate backwards, apply the first
 case to the shifted last term and the first term, and obtain the middle term. Shifts preserve
 bounded finite projective complexes. Finally the local conclusions on the common affine
-cover imply perfectness on `X` by `def-pc-perfect-complex`. -/
+cover imply perfectness on `X` by `lemma-coherent-base-change-invertible-sheaves--1`. -/
 theorem isPerfect_two_out_of_three (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

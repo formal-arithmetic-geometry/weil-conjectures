@@ -15,7 +15,7 @@ import Mathlib.RingTheory.HopkinsLevitzki
 # Essential finite type for Artinian local algebras
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 07DT (blueprint:
-lem-weil-pbc-artinian-local-essentially-finite-type-residue).
+theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -23,7 +23,7 @@ lem-weil-pbc-artinian-local-essentially-finite-type-residue).
 namespace RingHom
 
 /--
-(blueprint: lem-weil-pbc-artinian-local-essentially-finite-type-residue)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 Let `f : R →+* S` be a homomorphism of commutative rings. If `S` is Artinian and
 local, and the induced map from `R` to its residue field is essentially of finite
 type, then `f` is essentially of finite type. This is the converse direction of

@@ -23,9 +23,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Rational.Ration
 /-!
 # Rational purity for relative affine space in every dimension
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 `sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.md` and its proof
-(blueprint: det-cor-affine-space-rational-induction).
+(blueprint: theorem-f-shriek-ell-adic-coefficients).
 
 The functors act on the literal localizing closures of the bounded constructible
 module-object categories. Their comparisons with the ambient functors specify both
@@ -48,8 +48,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 /-- Derived tensor with the degree-d Tate line, in the internal-module encoding.
 The signed line is the recorded tensor power; the existing sectionwise/internal module
 equivalence changes only its presentation, not its coefficient ring or underlying sheaf.
-Source: blueprint sk-def-sp-tate-twist, positive powers and derived twist formula
-(blueprint: det-cor-affine-space-rational-induction). -/
+Source: blueprint definition-tate-twists, positive powers and derived twist formula
+(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
 def rationalDegreeTwistFunctor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
@@ -64,7 +64,7 @@ def rationalDegreeTwistFunctor
 of relative affine d-space. The displayed over-objects and their instances are the
 same canonical structure morphisms as those of the affine projection.
 Source: blueprint sk-def-sfb-dc-setting, chosen compactification convention
-(blueprint: det-cor-affine-space-rational-induction). -/
+(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
 def affineSpaceChosenCompactification
     (k : Type u) [Field k] (V : Scheme.{u}) [V.Over (Spec (.of k))]
     [LocallyOfFiniteType (V ↘ Spec (.of k))]
@@ -85,7 +85,7 @@ def affineSpaceChosenCompactification
 
 /-- The ambient functor p_d^*(d)[2d], with the specified degree-d Tate tensor functor.
 Source: blueprint sk-cor-affine-space-rational-induction, both conclusions
-(blueprint: det-cor-affine-space-rational-induction). -/
+(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
 def affineSpaceRationalPullTwistShift
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (V : Scheme.{u}) (d : ℕ)
@@ -104,7 +104,7 @@ pullback, as witnessed by natural isomorphisms after the full inclusions. The ad
 ensures existence of the exceptional right adjoint; every such adjoint G is isomorphic to P.
 The final conjunct is preservation of Dbc by the ambient twisted shifted pullback itself.
 Source: blueprint sk-cor-affine-space-rational-induction, entire statement
-(blueprint: det-cor-affine-space-rational-induction). -/
+(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
 def affineSpaceRationalAssertion
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (V : Scheme.{u}) (d : ℕ)
@@ -249,39 +249,39 @@ private theorem rationalAffineInductionAux
 with preservation of bounded constructibility by p_d^*(d)[2d]. This includes d = 0,
 all finite coefficient subextensions, and the finite-subextension-valued algebraic closure.
 Source: blueprint sk-cor-affine-space-rational-induction, statement and proof
-(blueprint: det-cor-affine-space-rational-induction).
+(blueprint: theorem-f-shriek-ell-adic-coefficients).
 
 Proof, following the seven DAG steps:
 1. Put T_X = Loc(Dbc(X)). By det-def-localizing-closure-ctf-equals-bc the rational
    finite-Tor and bounded-constructible categories agree, as do their closures.
-   det-proper-base-change-unbounded-pullback makes every inverse image exact,
+   proposition-proper-base-change-localizing-categories--1 makes every inverse image exact,
    coproduct-preserving, and preserving Dbc and these precise closures.
-2. The degree-one Tate line of sk-def-sp-tate-twist is locally free of rank one.
+2. The degree-one Tate line of definition-tate-twists is locally free of rank one.
    Tensor with its dual is inverse to tensor with it. Thus its powers give exact
    coproduct-preserving tensor equivalences. On a common pro-etale trivializing
    cover they preserve finite constant scalar models and all vanishing degrees.
    They preserve Dbc, hence its localizing closure by the defining minimality of
-   sk-def-localizing-closure. Shifts reindex cohomology and preserve both categories.
-3. sk-prop-sfb-cartesian-coefficients identifies the pulled-back Tate lines.
-   The strong monoidal inverse image and scalar comparison of def-sfb-module-upper-star
+   definition-localizing-subcategory. Shifts reindex cohomology and preserve both categories.
+3. lemma-inverse-image-coefficient-sheaves identifies the pulled-back Tate lines.
+   The strong monoidal inverse image and scalar comparison of prose-03-02
    give the tensor comparison, invertible locally where the line is trivial.
    Apply termwise to obtain pullback/twist/shift compatibility. Use the mate
    def-sfb-module-upper-star-comp for pullback composition. Reassociate the recorded
    tensor powers and add shifts to identify successive twists and shifts.
 4. Induct on d uniformly over every base V in the setting. For d = 0 the affine
    projection is canonically the identity. Compare its chosen compactification with
-   the identity by det-sf-comp-coherence-cocycle. Its lower shriek is therefore the
-   identity; sk-prop-sf-existence and adjoint uniqueness identify its exceptional
-   inverse image with the identity. The zero Tate power and shift give that functor.
+   the identity by proposition-construction-independence-rf-shriek. Its lower shriek is therefore
+   the identity; theorem-existence-exceptional-inverse-image and adjoint uniqueness identify its
+   exceptional inverse image with the identity. The zero Tate power and shift give that functor.
 5. lem-sfb-localizing-lower-shriek-composition and the adjunctions of
-   sk-prop-sf-existence give Hom(Rb_! Ra_! M,N) = Hom(M,a^! b^! N), naturally.
-   Uniqueness of the right adjoint gives (ba)^! isomorphic to a^! b^! on T.
+   theorem-existence-exceptional-inverse-image give Hom(Rb_! Ra_! M,N) = Hom(M,a^! b^! N),
+   naturally. Uniqueness of the right adjoint gives (ba)^! isomorphic to a^! b^! on T.
 6. For the step r to r+1 set W = A^r_V and let pi : A^1_W -> W be the projection.
    The polynomial-coordinate isomorphism phi : A^(r+1)_V -> A^1_W gives
    p_(r+1) = p_r pi phi. Finite polynomial generators and the closed diagonal show
    W is again separated finite type over k. For phi, compare with its proper
-   compactification by det-sf-comp-coherence-cocycle; uniqueness gives phi^! = phi^*.
-   Apply det-cor-affine-space-rational-line over W, the inductive hypothesis,
+   compactification by proposition-construction-independence-rf-shriek; uniqueness gives phi^! =
+   phi^*. Apply theorem-f-shriek-ell-adic-coefficients over W, the inductive hypothesis,
    and Step 5 twice. Move the twists and shifts through the pullbacks by Step 3,
    compose the pullbacks, then add the exponents and shifts to obtain (r+1)[2r+2].
 7. For K in Dbc(V), Step 1 puts p_d^*K in Dbc and Step 2 preserves it under the

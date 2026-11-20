@@ -30,12 +30,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.HasKunnethComparisons` (`sk-def-sf-kv-maps`, `def-sf-kv-maps`): the
+- `AlgebraicGeometry.Etale.HasKunnethComparisons` (`lemma-external-duality-trace-morphism`): the
   four product comparison assertions `Ku_!`, `α`, `β`, `κ`, one per field.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.hasKunnethComparisons` (`sk-thm-sf-kunneth-verdier`): the four
+- `AlgebraicGeometry.Etale.hasKunnethComparisons` (`lemma-external-duality-trace-morphism`): the
+four
   comparison maps are isomorphisms.
 
 -/
@@ -65,7 +66,7 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [HasSmallSiteSheafify A]
 
-/-- Blueprint `sk-def-sf-kv-maps`, `def-sf-kv-maps`: The product comparison maps.
+/-- Blueprint `lemma-external-duality-trace-morphism`: The product comparison maps.
 
 The four product comparison maps of the six-functor formalism over a base scheme `S`, each
 recorded as the assertion that it is an isomorphism. All external products are taken over
@@ -90,9 +91,9 @@ recorded as the assertion that it is an isomorphism. All external products are t
   identifications `RHom(Λ_X, M) = M` and `Λ_X ⊠ N = p_Y^* N`.
 
 Only `Ku_!` is built from isomorphisms; that `α`, `β` and `κ` are invertible is the content of
-`AlgebraicGeometry.Etale.hasKunnethComparisons`, i.e. of `sk-thm-sf-kunneth-verdier`, which
-holds over a field for finite coefficients of invertible exponent. Over a more general base the
-comparisons fail: over `S = 𝔸¹_k`, with `E₁ = E₂ = i_*Λ` the skyscraper at the origin and
+`AlgebraicGeometry.Etale.hasKunnethComparisons`, i.e. of `lemma-external-duality-trace-morphism`,
+which holds over a field for finite coefficients of invertible exponent. Over a more general base
+the comparisons fail: over `S = 𝔸¹_k`, with `E₁ = E₂ = i_*Λ` the skyscraper at the origin and
 `N₁ = N₂ = Λ_S`, the source of `β` is `i_*Λ(-2)[-4]` and its target `i_*Λ(-1)[-2]`. -/
 structure HasKunnethComparisons (S : Scheme.{u}) : Prop where
   /-- The `!`-Künneth map `Ku_!` is an isomorphism. -/
@@ -202,8 +203,8 @@ inverse image is the restriction
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion`), and `f₁ × f₂` is again
 an open immersion, so this is the compatibility of the external product with pullbacks
 (`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp`).
-This is the étale-local case through which the blueprint proof (`prop-trf-exceptional-kunneth`)
-reduces lisse coefficients to constant ones. -/
+This is the étale-local case through which the blueprint proof
+(`proposition-exceptional-external-kunneth--1`) reduces lisse coefficients to constant ones. -/
 theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_isOpenImmersion
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {S X₁ X₂ Y₁ Y₂ : Scheme.{u}}
     (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S) (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)
@@ -236,7 +237,8 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_isOpenImmersion
 `M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`. Indeed `𝔻_Y N = RHom(N, ω_Y) ≅ N^∨ ⊗ ω_Y` and
 `RHom(p_Y^* N, -) ≅ p_Y^* N^∨ ⊗ -` (`CategoryTheory.nonempty_iso_tensorObj_map_ihom_obj_right`).
 The remaining case `M ⊠ ω_Y ≅ Rp_X^! M` is the exceptional Künneth map for `𝟙_X × b`, which
-is how the blueprint proof of `thm-trf-kunneth-verdier` uses `prop-trf-exceptional-kunneth`. -/
+is how the blueprint proof of `lemma-external-duality-trace-morphism--1` uses
+`proposition-exceptional-external-kunneth--1`. -/
 theorem nonempty_iso_externalProduct_verdierDual_of_isDualizable [UpperStarPreservesFlat
     (ModuleCat.{u + 1} Λ)]
     {S : Scheme.{u}} (a : X ⟶ S) (b : Y ⟶ S) [HasCompactification b]

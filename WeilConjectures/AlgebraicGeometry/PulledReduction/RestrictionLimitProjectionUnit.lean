@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 
 /-! # Restriction of derived limits and constant units
 
-Source: Stacks 06YY, 07A4, and 099N(5).
+## References
+
+* Stacks 06YY, 07A4, and 099N(5)
 -/
 
 @[expose] public noncomputable section
@@ -49,11 +51,11 @@ private theorem normalized_mate
           R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app P) =
         G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj P) ≫
           DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-            (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app P) ≫
+            (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app P) ≫
           _root_.chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj P)) :
     α = (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)) := by
   apply _root_.derived_comp_ext R G
   intro P
   apply (cancel_mono (R'.rightDerivedFunctor.map

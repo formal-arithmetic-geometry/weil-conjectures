@@ -37,7 +37,7 @@ private theorem exchange_mate_unit
     {G : B ⥤ D} {GR : D ⥤ B} {H : A ⥤ C} {HR : C ⥤ A}
     (a : L ⊣ R) (b : L' ⊣ R') (c : G ⊣ GR) (d : H ⊣ HR)
     (s : R ⋙ H ⟶ G ⋙ R') (β : GR ⋙ R ⟶ R' ⋙ HR)
-    (hβ : β = (mateEquiv c d (TwoSquare.mk _ _ _ _ s)).natTrans) (F : A) :
+    (hβ : β = (mateEquiv c d (TwoSquare.mk _ _ _ _ s))) (F : A) :
     b.unit.app (H.obj F) ≫
         R'.map (((conjugateEquiv (a.comp c) (d.comp b)).symm β).app F) =
       H.map (a.unit.app F) ≫ s.app (L.obj F) := by
@@ -213,7 +213,7 @@ private theorem pro_baseChange_eq_mate (Λ : Type (u + 1)) [CommRing Λ]
       (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g)
         (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) gU)
         (TwoSquare.mk _ _ _ _
-          (upperStarCompIso (ModuleCat.{u + 1} Λ) sq.w).hom)).natTrans := by
+          (upperStarCompIso (ModuleCat.{u + 1} Λ) sq.w).hom)) := by
   let A := ModuleCat.{u + 1} Λ
   have h := iterated_mateEquiv_conjugateEquiv
     (upperStarLowerStarAdjunction A g) (upperStarLowerStarAdjunction A gU)
@@ -224,8 +224,7 @@ private theorem pro_baseChange_eq_mate (Λ : Type (u + 1)) [CommRing Λ]
   rw [hc] at h
   change (((mateEquiv (upperStarLowerStarAdjunction A j')
     (upperStarLowerStarAdjunction A j)).symm
-      (TwoSquare.mk _ _ _ _ (ProEtale.squareLowerStarIso A sq).hom)).natTrans) = _
-  apply congrArg TwoSquare.natTrans
+      (TwoSquare.mk _ _ _ _ (ProEtale.squareLowerStarIso A sq).hom))) = _
   apply (Equiv.symm_apply_eq _).mpr
   exact h.symm
 

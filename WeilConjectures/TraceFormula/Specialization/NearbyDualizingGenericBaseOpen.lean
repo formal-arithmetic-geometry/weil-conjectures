@@ -96,7 +96,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {F : Type u} [Field F] [Fact (ringChar F).
   {hM : M.IsTraitModelOfGenericBase X ι qM gM}
 
 /-- **The compact-support exchanges along an open sub-model** (blueprint
-`det-nearby-exchange-maps`, `det-nearby-exceptional-tensor` (3)): for an open sub-model `N ⊆ M`
+`prose-E-15`, `lemma-compatibilities-base-change-maps` (3)): for an open sub-model `N ⊆ M`
 of trait models over a generic base, over open immersions `j`, `j'`, and a compactification
 `M ⊆ P`, the compact-support exchange of the restricted compactification `N ⊆ P` is the composite
 of the exchange `ν_j` (adjoint to `α_j⁻¹`) and of the compact-support exchange of `M ⊆ P`,

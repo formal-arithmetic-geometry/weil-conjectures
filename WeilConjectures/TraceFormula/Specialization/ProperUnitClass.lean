@@ -15,7 +15,7 @@ public import WeilConjectures.TraceFormula.Specialization.PointExchange
 Let `φ : M ⟶ S` be a morphism of nearby cycles models from a model `M` of a proper `k`-scheme `B`
 with proper special fibre `B'` to the trait `S`, over the structure maps, with proper morphism of
 total spaces and cartesian squares of special and of geometric generic fibres. The pushforward
-exchange `χ_a : Ψ_s Ra_* ⟶ Ra'_* Ψ_M` is invertible (blueprint `det-sp-nearby-cycles-exchanges`),
+exchange `χ_a : Ψ_s Ra_* ⟶ Ra'_* Ψ_M` is invertible (blueprint `prose-E-03`),
 and its inverse, read through `Ra_! ≅ Ra_*`, is a compact-support exchange
 `ν_a : Ra'_! Ψ_M ⟶ Ψ_s Ra_!` (`NearbyCyclesModel.Hom.properCompactSupportExchange`). It maps the
 specialization of the unit class of `B'` to the specialization of the unit class of `B`:
@@ -24,7 +24,7 @@ specialization of the unit class of `B'` to the specialization of the unit class
 ```
 (`NearbyCyclesModel.Hom.unitClass_comp_map_comp_properCompactSupportExchange_app`), by the unit
 identity of the pushforward exchange. This is step (D) of the proof of
-`sk-prop-tf-trace-specialization` for the class of a proper component of the fixed locus.
+`proposition-specialization-trace-class` for the class of a proper component of the fixed locus.
 
 -/
 
@@ -112,7 +112,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 include hMt hi hε in
 /-- The pushforward exchange `χ_a : Ψ_s Ra_* ⟶ Ra'_* Ψ_M` of a proper morphism of models to the
 trait with cartesian squares of special and of generic fibres is invertible on bounded
-constructible complexes (blueprint `det-sp-nearby-cycles-exchanges` (2)). -/
+constructible complexes (blueprint `prose-E-03` (2)). -/
 lemma isIso_boundedConstructiblePushforwardExchange_of_isProper :
     IsIso (φ.boundedConstructiblePushforwardExchange ℓ hM hN) := by
   have : IsProper (toPoint B).left := by rw [toPoint_left]; infer_instance
@@ -123,7 +123,7 @@ lemma isIso_boundedConstructiblePushforwardExchange_of_isProper :
       (isTraitModel_traitModel k k').exists_over hi hε K.property
 
 /-- **The compact-support exchange of a proper model over the trait** (blueprint
-`det-nearby-exchange-maps` (3) for a proper morphism): the inverse of the pushforward exchange
+`prose-E-15` (3) for a proper morphism): the inverse of the pushforward exchange
 `χ_a`, read through `Ra_! ≅ Ra_*` and `Ra'_! ≅ Ra'_*`. -/
 noncomputable def properCompactSupportExchange :
     boundedConstructibleNearbyCycles hM ⋙

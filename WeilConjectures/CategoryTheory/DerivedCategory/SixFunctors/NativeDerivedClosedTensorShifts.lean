@@ -306,7 +306,7 @@ The last two conjuncts are the premises of the final determination sentence.
 
 Proof (as written, step by step):
 1. (i): `tensorLeft_isLeftAdjoint_of_hasFunctorialFlatResolution` (independent derived-category
-   universe) [lem-sfb-derived-monoidal-closed], then `exists_rightAdjoint`.
+   universe) [prose-03-02], then `exists_rightAdjoint`.
 2. Write `L = quotient ⋙ Qh`. The source construction `TensorCommShift₂`
    [lem-sc-derived-tensor-shift-independent-universe] supplies, for every complex `X`, a
    K-flat left resolution `q : P → X`, inverted by `L`, and the shift compatibility
@@ -323,7 +323,7 @@ Proof (as written, step by step):
    identifying the chain comparisons with `mapBifunctorShift₂Iso`/`mapBifunctorShift₁Iso`,
    is exactly the two equations of (iii).
 6. For K-flat `X`, `μ(Qh)` at `πX, πZ` is invertible
-   (`isIso_counit_app_app_of_kFlat_left`, `kFlat_quotient_obj_iff`) [lem-sfb-derived-monoidal],
+   (`isIso_counit_app_app_of_kFlat_left`, `kFlat_quotient_obj_iff`) [prose-03-02],
    hence so is `μ(Q)_{X,Z}`; `exists_kFlat_iso` and `quotient_obj_surjective` give the K-flat
    representatives `QX ≅ K` [def-weil-abstract-derived-category].
 -/

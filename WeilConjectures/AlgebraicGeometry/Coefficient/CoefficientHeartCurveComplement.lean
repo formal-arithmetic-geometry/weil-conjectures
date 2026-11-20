@@ -106,7 +106,7 @@ import all Mathlib.CategoryTheory.Sites.Grothendieck
 import all Mathlib.CategoryTheory.Sites.Limits
 import all Mathlib.CategoryTheory.Sites.Sheaf
 import all Mathlib.Combinatorics.Quiver.ReflQuiver
-import all Mathlib.Data.Int.ConditionallyCompleteOrder
+import all Mathlib.Order.Int.ConditionallyCompleteOrder
 import all Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 import all Mathlib.Geometry.RingedSpace.PresheafedSpace
 import all Mathlib.Geometry.RingedSpace.SheafedSpace
@@ -153,7 +153,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 /-!
 # The finite curve complement and its coefficient-module localization sequence
 
-Source: blueprint main-20261015, sk-lem-coefficient-heart, final curve paragraph;
+Source: blueprint main-20261015, lemma-constructible-sheaves, final curve paragraph;
 Stacks Tags 01J3, 0AAX and 09AH
 (blueprint: lem-sfb-coefficient-heart-curve-complement).
 
@@ -182,7 +182,7 @@ to zero on the open. In particular, when the open restriction is lisse in the se
 `IsLisseCoefficientModule`, this is the extension of the finite closed-support term
 `i_* i^* F` by `u_! L`, with `L = u^* F`.
 
-Source: blueprint main-20261015, sk-lem-coefficient-heart, final curve paragraph;
+Source: blueprint main-20261015, lemma-constructible-sheaves, final curve paragraph;
 Stacks Tags 01J3, 0AAX and 09AH
 (blueprint: lem-sfb-coefficient-heart-curve-complement).
 

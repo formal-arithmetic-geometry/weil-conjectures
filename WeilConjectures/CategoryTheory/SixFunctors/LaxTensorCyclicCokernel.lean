@@ -50,12 +50,12 @@ theorem laxTensorCyclicCokernel
     [∀ M : D, PreservesFiniteColimits (tensorLeft M)]
     (F : C ⥤ D) [F.Additive] [F.LaxMonoidal] [PreservesFiniteColimits F]
     (N : C) (r : 𝟙_ C ⟶ N) (dC : End (𝟙_ C)) (dD : End (𝟙_ D))
-    (zC : dC ≫ r = 0) (hC : IsColimit (CokernelCofork.ofπ r zC))
-    (zD : dD ≫ (Functor.LaxMonoidal.ε F ≫ F.map r) = 0)
+    (zC : dC.asHom ≫ r = 0) (hC : IsColimit (CokernelCofork.ofπ r zC))
+    (zD : dD.asHom ≫ (Functor.LaxMonoidal.ε F ≫ F.map r) = 0)
     (hD : IsColimit (CokernelCofork.ofπ (Functor.LaxMonoidal.ε F ≫ F.map r) zD))
     (hs : ∀ M : C,
-      F.map ((ρ_ M).inv ≫ (M ◁ dC) ≫ (ρ_ M).hom) =
-        (ρ_ (F.obj M)).inv ≫ (F.obj M ◁ dD) ≫ (ρ_ (F.obj M)).hom)
+      F.map ((ρ_ M).inv ≫ (M ◁ (dC).asHom) ≫ (ρ_ M).hom) =
+        (ρ_ (F.obj M)).inv ≫ (F.obj M ◁ (dD).asHom) ≫ (ρ_ (F.obj M)).hom)
     (M : C) : IsIso (Functor.LaxMonoidal.μ F M N) := by
   let H : C ⥤ D := tensorLeft M ⋙ F
   let c := (CokernelCofork.ofπ r zC).map H
@@ -65,16 +65,16 @@ theorem laxTensorCyclicCokernel
   let hd : IsColimit d := CokernelCofork.mapIsColimit _ hD (tensorLeft (F.obj M))
   let e : F.obj (M ⊗ 𝟙_ C) ≅ F.obj M ⊗ 𝟙_ D :=
     F.mapIso (ρ_ M) ≪≫ (ρ_ (F.obj M)).symm
-  have he : e.hom ≫ (F.obj M ◁ dD) = F.map (M ◁ dC) ≫ e.hom := by
+  have he : e.hom ≫ (F.obj M ◁ dD.asHom) = F.map (M ◁ dC.asHom) ≫ e.hom := by
     apply (cancel_epi (F.map (ρ_ M).inv)).1
     apply (cancel_mono (ρ_ (F.obj M)).hom).1
     simpa only [e, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
       Category.assoc, Iso.inv_hom_id_assoc, ← F.map_comp_assoc,
       Iso.inv_hom_id, F.map_id, Category.id_comp, Category.comp_id] using (hs M).symm
   let j : d.pt ≅ c.pt := CokernelCofork.mapIsoOfIsColimit hd hc
-    (Arrow.isoMk (f := Arrow.mk (F.obj M ◁ dD))
-      (g := Arrow.mk (F.map (M ◁ dC))) e.symm e.symm (by
-        change e.inv ≫ F.map (M ◁ dC) = (F.obj M ◁ dD) ≫ e.inv
+    (Arrow.isoMk (f := Arrow.mk (F.obj M ◁ dD.asHom))
+      (g := Arrow.mk (F.map (M ◁ dC.asHom))) e.symm e.symm (by
+        change e.inv ≫ F.map (M ◁ dC.asHom) = (F.obj M ◁ dD.asHom) ≫ e.inv
         rw [Iso.inv_comp_eq, ← Category.assoc, he, Category.assoc,
           Iso.hom_inv_id, Category.comp_id]))
   have hμ : d.π ≫ Functor.LaxMonoidal.μ F M N = e.inv ≫ c.π := by

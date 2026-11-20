@@ -26,9 +26,9 @@ on `Y` and `Y'` (`AlgebraicGeometry.ProEtale.LisseMonodromy`) are *compatible* w
 `G_{y ≫ f} = (f^* G)_y` of stalks, the transport along the path `F_{y ≫ f} ≅ F_{z ≫ f}` induced by
 a path `τ : F_y ≅ F_z` of `Y'` is the transport along `τ` on `Y'`: the monodromy representation
 of `π₁(Y', y)` on `(f^* G)_y` is that of `π₁(Y, y ≫ f)` on `G_{y ≫ f}`, restricted along the map
-of fundamental groups. This is the compatibility of `cor-galois-lisse-representations` with base
-change of finite étale covers (`thm-galois-fundamental`); its existence, for connected normal
-Noetherian schemes, is
+of fundamental groups. This is the compatibility of
+`proposition-lattices-representations-normal-scheme` with base change of finite étale covers
+(`thm-galois-fundamental`); its existence, for connected normal Noetherian schemes, is
 `AlgebraicGeometry.ProEtale.exists_lisseMonodromy_isCompatible_of_isIntegrallyClosed_stalk` (for
 regular ones, `AlgebraicGeometry.ProEtale.exists_lisseMonodromy_isCompatible`).
 
@@ -82,9 +82,9 @@ action of `π₁(Y', y)` on `(f^* G)_y` with that of its image in `π₁(Y, y �
 lemma IsCompatible.rep_apply (hc : IsCompatible f M M')
     {y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y'} (σ : Aut (fiber y)) (G : LisseSheaf l Y)
     (v : StalkSpace (y ≫ f) G) :
-    upperStarStalkLinearEquiv f y G (M.rep (y ≫ f) G (pullbackPathIso f σ) v) =
+    upperStarStalkLinearEquiv f y G (M.rep (y ≫ f) G (Aut.of (pullbackPathIso f σ.asIso)) v) =
       M'.rep y (G.upperStar l f) σ (upperStarStalkLinearEquiv f y G v) := by
-  have h := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v) (hc σ G)
+  have h := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v) (hc σ.asIso G)
   simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at h
   exact h
 
@@ -102,7 +102,8 @@ of `G'_t` in `(f^* N)_t = N_{t ≫ f}` is `π₁(Y')`-stable, hence `π₁(Y)`-s
 of a lisse sheaf `G` on `Y`, and `f^* G ≅ G'` since both have the same `π₁(Y')`-representation. -/
 theorem exists_upperStar_iso_of_injective {t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y'}
     (hM : M.IsEquivalenceAt (t ≫ f)) (hM' : M'.IsEquivalenceAt t) (hc : IsCompatible f M M')
-    (hsurj : ∀ σ : Aut (fiber (t ≫ f)), ∃ σ' : Aut (fiber t), pullbackPathIso f σ' = σ)
+    (hsurj : ∀ σ : Aut (fiber (t ≫ f)), ∃ σ' : Aut (fiber t),
+      Aut.of (pullbackPathIso f σ'.asIso) = σ)
     {N : LisseSheaf l Y} {G' : LisseSheaf l Y'} (i : G' ⟶ N.upperStar l f)
     (hi : Function.Injective ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map i)).hom) :
     ∃ G : LisseSheaf l Y, Nonempty (G.upperStar l f ≅ G') := by
@@ -152,16 +153,16 @@ theorem exists_upperStar_iso_of_injective {t : Spec (.of (AlgebraicClosure Ω)) 
 
 end LisseMonodromy
 
-/-- **Compatible monodromies exist** (blueprint: `cor-galois-lisse-representations`, with the
-compatibility of `thm-galois-fundamental` with base change). For a morphism `f : Y' ⟶ Y` of
-connected normal Noetherian schemes there are monodromies of lisse `ℓ`-adic sheaves on
-`Y` and on `Y'` which are equivalences at every base point
-(`AlgebraicGeometry.ProEtale.exists_lisseMonodromy_of_isIntegrallyClosed_stalk`) and are
-compatible with `f`: the equivalence
-of `cor-galois-lisse-representations` is built from the fibre functors on finite étale covers,
-and pulling back finite étale covers along `f` is compatible with the fibre functors
-(`AlgebraicGeometry.Scheme.FiniteEtale.pullbackFiberIso`), so the monodromy action of
-`π₁(Y', y)` on `(f^* G)_y` is that of `π₁(Y, y ≫ f)` on `G_{y ≫ f}` restricted along
+/-- **Compatible monodromies exist** (blueprint:
+`proposition-lattices-representations-normal-scheme`, with the compatibility of
+`thm-galois-fundamental` with base change). For a morphism `f : Y' ⟶ Y` of connected normal
+Noetherian schemes there are monodromies of lisse `ℓ`-adic sheaves on `Y` and on `Y'` which are
+equivalences at every base point
+(`AlgebraicGeometry.ProEtale.exists_lisseMonodromy_of_isIntegrallyClosed_stalk`) and are compatible
+with `f`: the equivalence of `proposition-lattices-representations-normal-scheme` is built from the
+fibre functors on finite étale covers, and pulling back finite étale covers along `f` is compatible
+with the fibre functors (`AlgebraicGeometry.Scheme.FiniteEtale.pullbackFiberIso`), so the monodromy
+action of `π₁(Y', y)` on `(f^* G)_y` is that of `π₁(Y, y ≫ f)` on `G_{y ≫ f}` restricted along
 `π₁(Y', y) → π₁(Y, y ≫ f)`. -/
 theorem exists_lisseMonodromy_isCompatible_of_isIntegrallyClosed_stalk [IsLocallyNoetherian Y]
     [CompactSpace Y] [ConnectedSpace Y]
@@ -224,13 +225,14 @@ lemma isLocallyNoetherian_isRegular_connectedSpace_of_isOpenImmersion [IsLocally
 
 /-- **The fundamental group of a dense open of a normal scheme surjects**, in terms of paths:
 every automorphism of the fibre functor `F_{t ≫ j}` of `Y` is induced by an automorphism of the
-fibre functor `F_t` of the nonempty open `Y'` (blueprint `lem-wf-dense-open-pi1-surjective`,
+fibre functor `F_t` of the nonempty open `Y'` (blueprint `theorem-purity-real-sheaves-curves`,
 part (1)). -/
 lemma exists_pullbackPathIso_eq_of_isIntegrallyClosed_stalk [IsLocallyNoetherian Y]
     [ConnectedSpace Y]
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))
     (j : Y' ⟶ Y) [IsOpenImmersion j] (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y')
-    (σ : Aut (fiber (t ≫ j))) : ∃ σ' : Aut (fiber t), pullbackPathIso j σ' = σ := by
+    (σ : Aut (fiber (t ≫ j))) : ∃ σ' : Aut (fiber t),
+      Aut.of (pullbackPathIso j σ'.asIso) = σ := by
   have : Nonempty Y' := ⟨t.base (Nonempty.some inferInstance)⟩
   obtain ⟨-, -, _⟩ :=
     isLocallyNoetherian_isIntegrallyClosed_stalk_connectedSpace_of_isOpenImmersion hY j
@@ -260,7 +262,8 @@ lemma exists_pullbackPathIso_eq_of_isIntegrallyClosed_stalk [IsLocallyNoetherian
 schemes being normal). -/
 lemma exists_pullbackPathIso_eq_of_isRegular [IsLocallyNoetherian Y] [IsRegular Y]
     [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y')
-    (σ : Aut (fiber (t ≫ j))) : ∃ σ' : Aut (fiber t), pullbackPathIso j σ' = σ :=
+    (σ : Aut (fiber (t ≫ j))) : ∃ σ' : Aut (fiber t),
+      Aut.of (pullbackPathIso j σ'.asIso) = σ :=
   exists_pullbackPathIso_eq_of_isIntegrallyClosed_stalk
     (fun _ ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk _⟩) j t σ
 
@@ -279,7 +282,7 @@ lemma compactSpace_of_isOpenImmersion [IsLocallyNoetherian Y] [CompactSpace Y] (
   have : IsNoetherian Y := {}
   ⟨j.isOpenEmbedding.isInducing.isCompact_iff.2 (TopologicalSpace.NoetherianSpace.isCompact _)⟩
 
-/-- **Lisse subsheaves extend over a dense open** (blueprint `lem-wf-dense-open-pi1-surjective`,
+/-- **Lisse subsheaves extend over a dense open** (blueprint `theorem-purity-real-sheaves-curves`,
 part (4), geometric form). Let `Y` be a connected normal Noetherian scheme,
 `j : Y' ⟶ Y` an open immersion with `Y'` nonempty, and `N` lisse on `Y`. Every lisse subsheaf
 `G'` of `j^* N` is the restriction of a lisse sheaf on `Y`: this is
@@ -350,7 +353,7 @@ theorem IsAdicLisseSheaf.adicLowerStar_of_mono [IsLocallyNoetherian Y] [CompactS
     (fun _ ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk _⟩) j hj hN hG' i
 
 /-- **Restriction to a dense open is fully faithful on lisse sheaves** (blueprint
-`lem-wf-dense-open-pi1-surjective`, part (4), geometric form): for a dense open
+`theorem-purity-real-sheaves-curves`, part (4), geometric form): for a dense open
 `j : Y' ⟶ Y` of a scheme whose local rings are integrally closed domains and `N` lisse on `Y`,
 the restriction `Hom(A, N) → Hom(j^* A, j^* N)` is bijective for every `A`, since the unit
 `N ⟶ j_* j^* N` is an isomorphism. -/
@@ -363,7 +366,7 @@ theorem IsAdicLisseSheaf.adicUpperStar_map_bijective_of_isIntegrallyClosed_stalk
   (adicUpperStarLowerStarAdjunction l j).map_bijective_of_isIso_unit_app A
 
 /-- **Restriction to a dense open is fully faithful on lisse sheaves** (blueprint
-`lem-wf-dense-open-pi1-surjective`, part (4), geometric form): for a dense open
+`theorem-purity-real-sheaves-curves`, part (4), geometric form): for a dense open
 `j : Y' ⟶ Y` of a scheme with regular local rings and `N` lisse on `Y`, the restriction
 `Hom(A, N) → Hom(j^* A, j^* N)` is bijective for every `A`, since the unit `N ⟶ j_* j^* N` is
 an isomorphism. -/
@@ -376,7 +379,7 @@ theorem IsAdicLisseSheaf.adicUpperStar_map_bijective
   (adicUpperStarLowerStarAdjunction l j).map_bijective_of_isIso_unit_app A
 
 /-- **Restriction to a dense open preserves irreducible local systems** (blueprint
-`lem-wf-dense-open-pi1-surjective`, part (4), geometric form). Let `Y` be a connected normal
+`theorem-purity-real-sheaves-curves`, part (4), geometric form). Let `Y` be a connected normal
 Noetherian scheme and `j : Y' ⟶ Y` a dense open immersion. If `N` is an irreducible
 `ℓ`-adic local system on `Y`, so is `j^* N`: it is nonzero since `N ≅ j_* j^* N`, a lisse
 subsheaf of `j^* N` is the restriction of a lisse `G`

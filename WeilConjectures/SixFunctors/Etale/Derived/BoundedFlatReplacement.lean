@@ -16,7 +16,7 @@ with functorial flat resolutions, e.g. `A = ModuleCat Λ`) has a functorial flat
 a bounded above complex `Φ(K)` of flat sheaves, vanishing in the degrees where `K` strictly
 vanishes from some degree `N` on, with a termwise epimorphic quasi-isomorphism `Φ(K) ⟶ K`
 (`AlgebraicGeometry.Etale.exists_boundedAbove_flat_replacement`, blueprint
-`lem-kun-bounded-flat-replacement`).
+`proposition-open-direct-image-preserves-finite`).
 
 `Φ(K)` is the total complex of the bicomplex obtained by resolving each term `Kᵖ` by the
 functorial flat resolution of `A`
@@ -87,7 +87,8 @@ lemma _root_.CategoryTheory.Abelian.LeftResolution.isStrictlyLE_minusResolutionF
   inferInstanceAs (CochainComplex.IsStrictlyLE
     ((Λ.bicomplexFunctor.obj K.obj).total (ComplexShape.up ℤ)) N)
 
-/-- Blueprint `lem-kun-bounded-flat-replacement`: Functorial bounded-above flat replacement.
+/-- Blueprint `proposition-open-direct-image-preserves-finite`: Functorial bounded-above flat
+replacement.
 
 There is a functor `Φ` on bounded above complexes of étale sheaves on `X` together with a
 natural transformation `π : Φ ⟶ 𝟭` such that for every bounded above complex `K`: the terms of

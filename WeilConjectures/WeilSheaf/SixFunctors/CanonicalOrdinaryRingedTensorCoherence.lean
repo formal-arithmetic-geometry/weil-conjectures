@@ -116,8 +116,85 @@ private theorem forward_associativity_of_inverse
 attribute [local irreducible] SheafOfModules.monoidalCategory Mod.monoidalCategoryStruct
 attribute [local implicit_reducible] Mod.monoidalCategory Monoidal.induced
 
-set_option maxHeartbeats 1000000 in
+-- Lift and reverse associativity with abstract tensor instances before specializing them.
+private theorem ordinary_chain_forward_associativity
+    {B : Type*} [Category B] [Preadditive B] [HasZeroObject B]
+    [MonoidalCategory B] [MonoidalPreadditive B]
+    [∀ (X Y : GradedObject ℤ B), X.HasTensor Y]
+    [∀ X, PreservesColimit (Functor.empty.{0} B) ((curriedTensor B).obj X)]
+    [∀ X, PreservesColimit (Functor.empty.{0} B) ((curriedTensor B).flip.obj X)]
+    [∀ (W X Y Z : GradedObject ℤ B), GradedObject.HasTensor₄ObjExt W X Y Z]
+    [∀ (X Y Z : GradedObject ℤ B), GradedObject.HasGoodTensor₁₂Tensor X Y Z]
+    [∀ (X Y Z : GradedObject ℤ B), GradedObject.HasGoodTensorTensor₂₃ X Y Z]
+    {A : Type*} [Category A] [Preadditive A] [HasZeroObject A]
+    [MonoidalCategory A] [MonoidalPreadditive A]
+    [∀ (X Y : GradedObject ℤ A), X.HasTensor Y]
+    [∀ X, PreservesColimit (Functor.empty.{0} A) ((curriedTensor A).obj X)]
+    [∀ X, PreservesColimit (Functor.empty.{0} A) ((curriedTensor A).flip.obj X)]
+    [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z]
+    [∀ (X Y Z : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X Y Z]
+    [∀ (X Y Z : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X Y Z]
+    (F : B ⥤ A) [F.Additive]
+    (ν : MonoidalCategory.tensor B ⋙ F ≅ (F.prod F) ⋙ MonoidalCategory.tensor A)
+    (δ : MonoidalCategory.tensor (CochainComplex B ℤ) ⋙ F.mapHomologicalComplex (.up ℤ) ≅
+      ((F.mapHomologicalComplex (.up ℤ)).prod (F.mapHomologicalComplex (.up ℤ))) ⋙
+        MonoidalCategory.tensor (CochainComplex A ℤ))
+    (hδ : ∀ (P Q : CochainComplex B ℤ) (p q n : ℤ) (h : p + q = n),
+      F.map (HomologicalComplex.ιTensorObj P Q p q n h) ≫ (δ.hom.app (P, Q)).f n =
+        ν.hom.app (P.X p, Q.X q) ≫
+          HomologicalComplex.ιTensorObj ((F.mapHomologicalComplex (.up ℤ)).obj P)
+            ((F.mapHomologicalComplex (.up ℤ)).obj Q) p q n h)
+    (hν : ∀ X Y Z : B,
+      (ν.inv.app (X, Y) ▷ F.obj Z) ≫ ν.inv.app (X ⊗ Y, Z) ≫ F.map (α_ X Y Z).hom =
+        (α_ (F.obj X) (F.obj Y) (F.obj Z)).hom ≫
+          (F.obj X ◁ ν.inv.app (Y, Z)) ≫ ν.inv.app (X, Y ⊗ Z))
+    (P Q N : CochainComplex B ℤ) :
+    let G := F.mapHomologicalComplex (.up ℤ)
+    G.map (α_ P Q N).hom ≫ δ.hom.app (P, Q ⊗ N) ≫
+        (G.obj P ◁ δ.hom.app (Q, N)) =
+      δ.hom.app (P ⊗ Q, N) ≫ (δ.hom.app (P, Q) ▷ G.obj N) ≫
+        (α_ (G.obj P) (G.obj Q) (G.obj N)).hom := by
+  exact forward_associativity_of_inverse (F.mapHomologicalComplex (.up ℤ)) δ P Q N
+    (RingedForgetTensorTransposition.chain_inverse_associativity F ν δ hδ hν P Q N)
+
+
 -- Compare the abstract native and ringed total-tensor instances through their APIs.
+-- Specialize the chain coherence before constructing the signed ordinary comparison.
+private theorem ordinary_chain_associativity_comparison
+    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
+    {C : Type (u + 1)} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J CommRingCat.{u + 1})
+    (F : ProEtale.AdicSheaf l Y ⥤ RingedTensorModules.{u + 1, u + 1, u + 1} J R)
+    [F.Additive] :
+    letI := SheafOfModules.isMonoidal_W_independentCoefficients R
+    letI := SheafOfModules.monoidalCategory R
+    ∀ (ν : MonoidalCategory.tensor (ProEtale.AdicSheaf l Y) ⋙ F ≅
+        F.prod F ⋙ MonoidalCategory.tensor _)
+      (τ : MonoidalCategory.tensor (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) ⋙
+          F.mapHomologicalComplex (.up ℤ) ≅
+        (F.mapHomologicalComplex (.up ℤ)).prod (F.mapHomologicalComplex (.up ℤ)) ⋙
+          MonoidalCategory.tensor _),
+      (∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
+        (p q n : ℤ) (h : p + q = n),
+        F.map (HomologicalComplex.ιTensorObj P Q p q n h) ≫ (τ.hom.app (P, Q)).f n =
+          ν.hom.app (P.X p, Q.X q) ≫ HomologicalComplex.ιTensorObj
+            ((F.mapHomologicalComplex (.up ℤ)).obj P)
+            ((F.mapHomologicalComplex (.up ℤ)).obj Q) p q n h) →
+      (∀ P Q N : ProEtale.AdicSheaf l Y,
+        (ν.inv.app (P, Q) ▷ F.obj N) ≫ ν.inv.app (P ⊗ Q, N) ≫ F.map (α_ P Q N).hom =
+          (α_ (F.obj P) (F.obj Q) (F.obj N)).hom ≫
+            (F.obj P ◁ ν.inv.app (Q, N)) ≫ ν.inv.app (P, Q ⊗ N)) →
+      ∀ P Q N : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,
+        let G := F.mapHomologicalComplex (.up ℤ)
+        G.map (α_ P Q N).hom ≫ τ.hom.app (P, Q ⊗ N) ≫
+            (G.obj P ◁ τ.hom.app (Q, N)) =
+          τ.hom.app (P ⊗ Q, N) ≫ (τ.hom.app (P, Q) ▷ G.obj N) ≫
+            (α_ (G.obj P) (G.obj Q) (G.obj N)).hom := by
+  let _ := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let _ := SheafOfModules.monoidalCategory R
+  intro ν τ ht ha P Q N
+  exact ordinary_chain_forward_associativity F ν τ ht ha P Q N
+
 private theorem ordinary_coherence_of_inverse_associativity
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     {C : Type (u + 1)} [SmallCategory C] (J : GrothendieckTopology C)
@@ -181,17 +258,10 @@ private theorem ordinary_coherence_of_inverse_associativity
       Preadditive.zsmul_comp, Category.assoc, ht, ← Category.assoc, hd]
     rfl
   · intro P Q N
-    let G := E.functor.mapHomologicalComplex (.up ℤ)
-    have h := RingedForgetTensorTransposition.chain_inverse_associativity
-      E.functor ν τ ht ha P Q N
-    exact forward_associativity_of_inverse G τ P Q N h
+    exact ordinary_chain_associativity_comparison l Y J R E.functor ν τ ht ha P Q N
 
 attribute [local irreducible] ProEtale.NativeFrobenius.equivalence
 
-set_option maxHeartbeats 1600000 in
--- Elaborating the concrete tensor instances requires large definitional comparisons.
-set_option synthInstance.maxHeartbeats 200000 in
--- Elaborating the concrete tensor instances requires large definitional comparisons.
 /-- The canonical section-module equivalence retains its normalized tensor coherence.
 Source: the pure-tensor and evaluation equations of the adic module comparison;
 Stacks 03EO, 06YS, 06YU, 0FPT

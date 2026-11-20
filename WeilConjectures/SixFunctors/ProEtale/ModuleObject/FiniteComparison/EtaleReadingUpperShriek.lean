@@ -103,8 +103,8 @@ variable (X) in
 /-- **The étale reading lands in objects of étale origin** on `X`: for every bounded constructible
 condensed `𝒪_E ⧸ ℓⁿ`-complex `M`, the pro-étale complex `Φ(M)` is bounded constructible of étale
 origin, i.e. isomorphic to `ν^* M₀` for a bounded constructible étale complex `M₀`. (Blueprint
-`sk-def-sf-categories`: for finite `Λ = A_{E,n}` the comparison `ν^*` identifies the étale and
-pro-étale constructible categories; with `lem-sf-proetale-constructible-origin`.) -/
+`definition-constructible-sheaves`: for finite `Λ = A_{E,n}` the comparison `ν^*` identifies the
+étale and pro-étale constructible categories; with `theorem-comparison-constructible-sheaves`.) -/
 def EtaleOriginReading : Prop :=
   ∀ M : Dᵇc(X.left)⟦Profinite.integersModPowRingObj ℓ E n⟧,
     AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible
@@ -202,7 +202,7 @@ instance hasInvertibleExponent_integersModPowCoeff :
 variable (X) in
 /-- **Constructible étale complexes are read from bounded constructible condensed ones** on `X`:
 for a bounded constructible étale complex `N`, the condensed `𝒪_E ⧸ ℓⁿ`-complex `Φ⁻¹ (ν^* N)` is
-bounded constructible. (Blueprint `sk-def-sf-categories`, the converse of
+bounded constructible. (Blueprint `definition-constructible-sheaves`, the converse of
 `ProEtale.CondensedRing.EtaleOriginReading`.) -/
 def BoundedConstructibleOfEtale : Prop :=
   ∀ N, Etale.DerivedCategory.boundedConstructible

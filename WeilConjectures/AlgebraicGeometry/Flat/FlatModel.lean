@@ -166,7 +166,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Fla
 # Flat models and generators
 
 Source: Weil conjectures blueprint, main-20261015, `sec-six-functors-basics/`
-`sk-lem-sf-flat-model`, statement and complement (blueprint: sk-lem-sf-flat-model).
+`lemma-flat-models-generators`, statement and complement (blueprint: lemma-flat-models-generators).
 
 ## Main statements
 
@@ -199,8 +199,8 @@ attribute [local instance] WeilConjectures.sfAbBijective
 ordinary sheaf in degree zero is its derived value. The equation on `j` fixes the open
 factor through the scheme-theoretic image of the stratum immersion. Lisse flat sheaves
 have finite projective constant local models over the finite coefficient ring.
-Source: blueprint `sk-lem-sf-flat-model`, complement
-(blueprint: sk-lem-sf-flat-model). -/
+Source: blueprint `lemma-flat-models-generators`, complement
+(blueprint: lemma-flat-models-generators). -/
 def etaleClosureGenerators (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] :
     ObjectProperty (Etale.DerivedCategoryModule A X) :=
   fun K ↦ ∃ (str : Stratification X) (i : Fin str.n)
@@ -214,11 +214,11 @@ def etaleClosureGenerators (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Fin
 
 /-- The Noetherian complement on the etale site, with the recorded finite-value
 constructibility and the recorded Tor tests on every module sheaf in degree zero.
-Source: blueprint `sk-lem-sf-flat-model`, complement
-(blueprint: sk-lem-sf-flat-model).
+Source: blueprint `lemma-flat-models-generators`, complement
+(blueprint: lemma-flat-models-generators).
 
 Proof (node steps 1 and 3--7): use lem-sf-etale-flat-constructible directly, without
-comparison descent. Clauses 1--2 of det-sf-flat-model-generation give an ordered
+comparison descent. Clauses 1--2 of lemma-flat-models-generators--2 give an ordered
 stratification and a finite extension filtration of each flat constructible term.
 Finite stalks give finite generation on each locally constant restriction, and inverse
 image preserves flatness. The canonical open factor through the scheme-theoretic image

@@ -127,15 +127,7 @@ lemma exists_mem_forall_eq_sum_of_isColimit_cofan {ι : Type u}
 variable (X) in
 /-- **`H¹` commutes with direct sums on a qcqs scheme.** Let `X` be quasi-compact and
 quasi-separated and let `c` be a coproduct of a family `F` of abelian étale sheaves on `X`. If
-`H¹(X, Fᵢ) = 0` for all `i`, then `H¹(X, c.pt) = 0`.
-
-A global section `q` of the cokernel `Q` of an embedding `c.pt ⟶ E` lifts to sections `e_a` of
-`E` on finitely many affine étale `X`-schemes `U_a` covering `X`. On the quasi-compact overlaps
-`U_a ×_X U_b` the differences of the `e_a` are sections of `c.pt`, hence locally finite sums
-(`AlgebraicGeometry.Scheme.exists_mem_forall_eq_sum_of_isColimit_cofan`), and finitely many
-indices `S` suffice. So the `e_a` glue modulo the finite sum `G = ⨁_{i ∈ S} Fᵢ`, and the glued
-section lifts to `E` since `H¹(G) = ⨁_{i ∈ S} H¹(Fᵢ) = 0`. This is the case of degree one of
-[Stacks 03Q6]. -/
+`H¹(X, Fᵢ) = 0` for all `i`, then `H¹(X, c.pt) = 0`. -/
 theorem subsingleton_H_one_of_isColimit_cofan [CompactSpace X] [QuasiSeparatedSpace X]
     {ι : Type u} {F : ι → Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cofan F}
     (hc : IsColimit c) (hF : ∀ i, Subsingleton (Sheaf.H (F i) 1)) :
@@ -462,17 +454,7 @@ end Cech
 open Abelian in
 /-- **Étale cohomology commutes with direct sums on a qcqs scheme.** Let `X` be quasi-compact
 and quasi-separated and let `c` be a coproduct of a family `F` of abelian étale sheaves on `X`.
-If `Hⁿ(X, Fᵢ) = 0` for all `i`, then `Hⁿ(X, c.pt) = 0`. This is the special case of direct
-sums of the commutation of étale cohomology with filtered colimits on qcqs schemes,
-[Stacks 03Q6].
-
-In degree zero, a global section of `c.pt` is a finite sum of global sections of the `Fᵢ`
-(`AlgebraicGeometry.Scheme.exists_cofanFinsetDesc_app_eq`); degree one is
-`AlgebraicGeometry.Scheme.subsingleton_H_one_of_isColimit_cofan`. In higher degrees we shift
-dimensions along `0 → ⨁ Fᵢ → ⨁ Iᵢ → ⨁ Qᵢ → 0`, with `Iᵢ` injective: this sequence is exact
-as direct sums are exact, `⨁ Iᵢ` has no higher cohomology
-(`AlgebraicGeometry.Scheme.subsingleton_H_succ_of_isColimit_cofan_of_injective`) and
-`Hⁿ(Qᵢ) = Hⁿ⁺¹(Fᵢ)` for `n > 0`. -/
+If `Hⁿ(X, Fᵢ) = 0` for all `i`, then `Hⁿ(X, c.pt) = 0`. -/
 @[stacks 03Q6]
 theorem subsingleton_H_of_isColimit_cofan (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] {ι : Type u} {F : ι → Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}

@@ -429,7 +429,7 @@ by `c`, is `ι`-real. Over the algebraically closed field `K` the Frobenius `F` 
 `α₁, …, αₙ`; those of the second summand are the `c αᵢ⁻¹`, and
 `ι (c αᵢ⁻¹) = |ι αᵢ|² / ι αᵢ = conj (ι αᵢ)`. Hence the local polynomial of the sum is
 `Q · conj Q` for `Q = ∏ (1 - ι αᵢ T)`, which has real coefficients.
-(blueprint: `lem-wf-pure-realizable`) -/
+(blueprint: `proposition-twisting-weight-zero-adding-dual`) -/
 theorem IsPureOfWeight.isReal_prod_rescale_dual [IsAlgClosed K] {ι : K →+* ℂ} {q : ℕ}
     (hq : 0 < q) {M : FrobeniusModule.{u, v} K} {w : ℝ} (h : M.IsPureOfWeight ι q w) {c : K}
     (hc : ι c = (((q : ℝ) ^ w : ℝ) : ℂ)) :

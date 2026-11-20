@@ -29,7 +29,7 @@ set_option backward.isDefEq.respectTransparency.types true
 namespace WeilConjectures
 
 set_option allowUnsafeReducibility true in
-attribute [local reducible] CategoryTheory.Aut constructibleIntegralPullback
+attribute [local reducible] constructibleIntegralPullback
 attribute [local irreducible] HasDerivedCategory.standard integralDerivedPullback
   integralComparisonComposition integralComparisonUnit AlgebraicGeometry.Scheme.residueField
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

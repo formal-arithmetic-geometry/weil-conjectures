@@ -15,8 +15,10 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedBel
 
 /-! # Integral direct image and uniformly bounded-below coproducts
 
-Source: Bhatt--Scholze, Lemma 6.3.14; Stacks Tag 09A3
-(blueprint: lem-weil-pbc-integral-direct-image-coproducts).
+## References
+
+* Bhatt--Scholze, Lemma 6.3.14
+* Stacks Tag 09A3
 -/
 
 @[expose] public noncomputable section
@@ -73,22 +75,7 @@ private theorem integral_higherDirectImage_preservesCoproducts
   exact preservesColimit_of_isIso_post H K
 
 /-- Direct image preserves uniformly bounded-below coproducts for arbitrary
-identified inverse-image coefficient rings, including integral coefficients.
-Source: Bhatt--Scholze, Lemma 6.3.14; Stacks Tag 09A3
-(blueprint: lem-weil-pbc-integral-direct-image-coproducts).
-
-Proof: evaluate classical higher direct image on affine weakly contractible
-objects of the target. This evaluation is exact, and the base-change object in
-the source is qcqs. The arbitrary-coefficient hypercover calculation shows that
-its higher sections commute with sums. These exact evaluations jointly detect
-isomorphisms, proving the assertion for classical higher direct images. Choose
-injective representatives of the family with their common termwise lower bound.
-Their sum has the same bound and all its terms are direct-image acyclic, since
-higher direct image commutes with sums and vanishes on injectives. Thus termwise
-direct image computes its derived image. Its coproduct cocone, and naturality of
-the acyclic comparison, prove preservation for these representatives. Transport
-the cocone by the chosen isomorphisms to the original family. Empty sums satisfy
-the same argument. No rational action or invertibility of integers is used. -/
+identified inverse-image coefficient rings, including integral coefficients. -/
 theorem proEtaleIntegralDirectImage_preservesCoproduct
     {T U : Scheme.{u}} (h : T ⟶ U) [QuasiCompact h] [QuasiSeparated h]
     (R : Sheaf (ProEt.topology U) CommRingCat.{u + 1})

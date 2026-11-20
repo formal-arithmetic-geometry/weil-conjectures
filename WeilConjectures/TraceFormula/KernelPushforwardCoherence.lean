@@ -14,11 +14,11 @@ public import WeilConjectures.TraceFormula.ProperCompatibilityExchange
 
 For a proper morphism `f : X ⟶ Y`, `q = f × f` and `K' = Rf_* K`, the kernel pushforward
 `ρ_f : Rq_* (K ⊠ D_X K) ⟶ K' ⊠ D_Y K'` exchanges the evaluation kernels:
-`e_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* e_K` (blueprint `lem-trf-trace-map-exchange`, (1)). This file
-collects the ingredients of the proof, which passes to the `LΔ_Y^* ⊣ RΔ_{Y*}` and `Lf^* ⊣ Rf_*`
-adjoints, where it reduces to the coherence of the composition isomorphisms of the derived
-pullbacks with each other and with the tensor comparisons
-(`ProEtale.CondensedRing.upperStarComp_inv_app_comp_prodUpperStarCounit`,
+`e_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* e_K` (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, (1)). This file collects the ingredients of the
+proof, which passes to the `LΔ_Y^* ⊣ RΔ_{Y*}` and `Lf^* ⊣ Rf_*` adjoints, where it reduces to the
+coherence of the composition isomorphisms of the derived pullbacks with each other and with the
+tensor comparisons (`ProEtale.CondensedRing.upperStarComp_inv_app_comp_prodUpperStarCounit`,
 `ProEtale.CondensedRing.boundedConstructibleUpperStarComp_square_coherence_tensor`).
 
 -/
@@ -104,7 +104,6 @@ lemma homEquiv_comp_lowerStarComp_inv_app {Z : Over (Spec (.of k))} [LocallyOfFi
     Iso.inv_hom_id_app, Category.comp_id, homEquiv_comp_lowerStarComp_hom_app,
     Iso.hom_inv_id_app_assoc]
 
-set_option maxHeartbeats 2000000 in
 -- the pullbacks of bounded constructible complexes are unfolded in the defeq checks
 /-- The identification `LΔ^* (K ⊠ N) ≅ K ⊗ N` is natural in `N`. -/
 @[reassoc]
@@ -141,7 +140,6 @@ lemma diagUpperStarExternalProductIso_hom_naturality_right
   exact comp_tensorHom_eq_of_eq _ _ (CategoryTheory.Functor.map_id _ _) _ _ _ _ _ h
 
 
-set_option maxHeartbeats 1000000 in
 -- the pullbacks of bounded constructible complexes are unfolded in the defeq checks
 /-- The `Lf^*`-side of the exchange of the evaluation kernels: the adjoint of the Künneth map
 `Π : Rf_* K ⊠ Rf_* N ⟶ Rq_* (K ⊠ N)` (`q = f × f`), read through the composition isomorphisms

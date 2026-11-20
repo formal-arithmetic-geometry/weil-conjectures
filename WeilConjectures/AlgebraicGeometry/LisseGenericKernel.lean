@@ -42,7 +42,7 @@ Proof:
    among those on `X`, by fibre products (`def-weil-pbc-geometric-stalks`), so both
    stalks are unchanged. Represent the nonzero germ by a section `s` of `N` on a
    pointed neighbourhood. The constant-sheaf stalk formula
-   (`lem-weil-pbc-constant-sheaf-geometric-stalk`) identifies the germs of the image
+   (`definition-torsion-sheaves--3`) identifies the germs of the image
    of `s` in `F` and of the zero section of `F` with elements `m ≠ z` of `M`.
    Equality in a filtered colimit holds after refinement: shrink to a nonempty pointed
    étale neighbourhood `W` where the image of `s` is constantly `m` and the zero
@@ -54,7 +54,7 @@ Proof:
    At this pointed neighbourhood the section `s` of `N` has zero germ, since its
    generic stalk is zero. Its image in `F` nevertheless has nonzero germ: cofinality
    identifies this with the stalk of the constant sheaf on `V`, and
-   `lem-weil-pbc-constant-sheaf-geometric-stalk` sends `m ≠ z` to distinct germs.
+   `definition-torsion-sheaves--3` sends `m ≠ z` to distinct germs.
    This contradiction gives `N = 0`, and therefore `φ` is a monomorphism.
 -/
 theorem mono_of_mono_generic_stalk

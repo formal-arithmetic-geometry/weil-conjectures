@@ -69,7 +69,7 @@ tensorator, the evaluation of the invertible object `G A`. -/
 theorem isInvertible_of_isIso_ihomComparison [MonoidalClosed C] [BraidedCategory D]
     [MonoidalClosed D] (G : C ⥤ D) [G.Monoidal]
     (hG : ∀ {M N : C} (φ : M ⟶ N), IsIso (G.map φ) → IsIso φ) {A : C}
-    [IsIso ((ihomComparison G A).natTrans.app (𝟙_ C))] (h : IsInvertible (G.obj A)) :
+    [IsIso ((ihomComparison G A).app (𝟙_ C))] (h : IsInvertible (G.obj A)) :
     IsInvertible A := by
   have := h.isIso_ev (G.obj (𝟙_ C))
   have h₁ := ihomComparison_ev G A (𝟙_ C)

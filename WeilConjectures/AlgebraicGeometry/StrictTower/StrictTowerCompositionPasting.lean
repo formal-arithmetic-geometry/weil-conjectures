@@ -925,7 +925,7 @@ Source: Stacks, Tags 0F7J, 0F7C, 0F7D and 0F7F, adapted to strict towers
 Proof plan, following the node's ten steps:
 1. Evaluation commutes with J_c. A scalar etale origin L_n evaluates J_c M as the
    scalar realization of c_! L_n, by finite constant coefficient transport and
-   lem-cbc-proetale-extension-zero-comparison. Exactness of etale c_!
+   proposition-comparison-immersions--1. Exactness of etale c_!
    (lem-weil-pbc-extension-by-zero-exact) retains its individual lower bound.
 2. Apply gamma_isIso to Q at J_c M, and whisker with R_q. The jComp and rComp
    identifications give exactly compositionD, naturally in M.

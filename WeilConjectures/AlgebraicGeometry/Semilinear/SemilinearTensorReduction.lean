@@ -12,8 +12,11 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemTensorReductionFormula
 import WeilConjectures.AlgebraicGeometry.System.SystemEvaluationFlat
 
 /-! # Reduction compatibility for semilinear tensor models
-Source: Zheng Construction 4.1 and Stacks 07A4, 08J9.
-(blueprint: lem-coef-semilinear-tensor-coherence-reduction)
+
+## References
+
+* Zheng Construction 4.1 and Stacks 07A4, 08J9
+* Stacks 06YN
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -123,10 +126,7 @@ private theorem cochainReduction_f (S : SystemScalarCoherence.{c, v, r} J B τ) 
     (cochainReduction.{c, v, r} J B τ S h P).f k =
       ordinaryReduction.{c, v, r} J B τ S h (P.X k) := rfl
 
-/-- The degreewise construction agrees with the induced cochain adjunction.
-Source: Stacks 06YN (blueprint: lem-pur-system-cochain-tensor-reduction).
-Proof: the inverse Hom equivalence is extension of the map followed by the
-counit in both constructions, and the cochain counit is degreewise. -/
+/-- The degreewise construction agrees with the induced cochain adjunction. -/
 private theorem cochainReduction_eq_transpose (S : SystemScalarCoherence.{c, v, r} J B τ)
     {m n : ℕ} (h : n ≤ m)
     (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
@@ -179,7 +179,6 @@ private theorem ordinary_tensor_reduction_inv (S : SystemScalarCoherence.{c, v, 
   erw [(S.scalar h).model.E.map_id]
   simp only [Category.id_comp, Iso.inv_hom_id_assoc]
 
-set_option maxHeartbeats 400000 in
 -- The total-summand identity crosses three dependent ringed module categories.
 private theorem cochain_tensor_reduction (S : SystemScalarCoherence.{c, v, r} J B τ)
     (A : SystemTensorBase.{c, v, r} J B τ)
@@ -221,19 +220,10 @@ private theorem cochain_tensor_reduction (S : SystemScalarCoherence.{c, v, r} J 
       (((S.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj Pm)
       (((S.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj Qm)
       p q k hpq ≫ _ = _
-  erw [← Category.assoc, hs, Category.assoc, ← (S.scalar h).model.E.map_comp_assoc, hm]
-  erw [(S.scalar h).model.E.map_comp, Category.assoc,
-    cochainReduction_f.{c, v, r} J B τ S h
-      ((totalTensor.{c, v, r} (coefficientSequenceTopology J)
-        (systemRing.{c, v, max c v r} J B τ)).obj (P, Q)) k]
-  erw [hnat]
-  erw [reassoc_of% hmap, hn]
-  erw [cochainReduction_f.{c, v, r} J B τ S h P p,
-    cochainReduction_f.{c, v, r} J B τ S h Q q]
-  erw [T.tensorEvaluationModel_ordinary m (P.X p) (Q.X q),
-    T.tensorEvaluationModel_ordinary n (P.X p) (Q.X q)]
-  have hinv := ordinary_tensor_reduction_inv.{c, v, r} J B τ S A T h (P.X p) (Q.X q)
-  erw [reassoc_of% hinv]
+  rw [T.tensorEvaluationModel_ordinary m (P.X p) (Q.X q)] at hm
+  rw [T.tensorEvaluationModel_ordinary n (P.X p) (Q.X q)] at hn
+  exact cochainReduction_summand_paste (S.scalar h).model.E hs hm hn hmap hnat
+    (ordinary_tensor_reduction_inv.{c, v, r} J B τ S A T h (P.X p) (Q.X q))
 
 private theorem reduction_naturality (S : SystemScalarCoherence.{c, v, r} J B τ)
     {m n : ℕ} (h : n ≤ m) {P Q : DS.{c, v, max c v r} J B τ} (f : P ⟶ Q) :

@@ -86,7 +86,6 @@ private theorem tensor_to_product_snd
   (limit.isLimit (pair X X)).conePointUniqueUpToIso_inv_comp
     (CartesianMonoidalCategory.tensorProductIsBinaryProduct X X) ⟨.right⟩
 
-set_option maxHeartbeats 400000 in
 -- The dependent sheaf comparisons require repeated unfolding of the forgetful functors.
 /-- Source: Stacks Project, Tags 00X6, 00YV, and 03D2, proof of
 lemma-pullback-module.

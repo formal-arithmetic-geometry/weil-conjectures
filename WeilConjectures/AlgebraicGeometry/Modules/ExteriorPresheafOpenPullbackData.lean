@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
+import Mathlib.Algebra.Category.ModuleCat.ExteriorPower
 
 /-! Component data for exterior presheaf pullback. -/
 
@@ -125,7 +126,7 @@ private noncomputable def ringTransportInverseWedge
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Extend the new wedge and use the inverse ring map to prove linearity over `S`. -/
+/-- The `S`-linear map from the old exterior power to the new one extending the new wedge. -/
 private noncomputable def ringTransportInverse
     (R S : CommRingCat.{v}) (e : R ≅ S) (A : ModuleCat.{v} R) (n : ℕ) :
     (ModuleCat.restrictScalars e.inv.hom).obj (ModuleCat.of R (⋀[R]^n A)) ⟶
@@ -161,7 +162,7 @@ private theorem ringTransportInverse_wedge
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Both transports are inverse because their composites fix all pure wedges. -/
+/-- The isomorphism of `S`-modules between the old and the new exterior power. -/
 private noncomputable def ringTransportIso
     (R S : CommRingCat.{v}) (e : R ≅ S) (A : ModuleCat.{v} R) (n : ℕ) :
     (ModuleCat.restrictScalars e.inv.hom).obj (ModuleCat.of R (⋀[R]^n A)) ≅
@@ -215,8 +216,7 @@ private local instance restrictedSectionModule {X : Scheme.{v}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The presheaf analogue of Mathlib's `restrictAdjunction`: its unit is restriction to
-`f ᵁ (f ⁻¹ᵁ V)`, and its counit restricts along `f ⁻¹ᵁ (f ᵁ V) = V`. Naturality
-and both triangle identities follow from the presheaf composition and identity laws. -/
+`f ᵁ (f ⁻¹ᵁ V)`, and its counit restricts along `f ⁻¹ᵁ (f ᵁ V) = V`. -/
 private noncomputable def openPresheafRestrictionAdjunction {X Y : Scheme.{v}}
     (f : X ⟶ Y) [IsOpenImmersion f] :
     openPresheafRestriction f ⊣ PresheafOfModules.pushforward.{v} f.toRingCatSheafHom.hom where
@@ -320,20 +320,45 @@ private theorem restriction_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
           (fun i ↦ M.val.map f (a i)) :=
   (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val n f) a
 
-set_option maxHeartbeats 800000 in
--- The comparison unfolds section modules and their transported scalar actions.
+/-- Identify restricted sections before applying the exterior-power functor. -/
+private noncomputable def openSectionTransportIso {X : Scheme.{v}} (M : X.Modules)
+    (U : X.Opens) (V : U.toScheme.Opensᵒᵖ) :
+    (ModuleCat.restrictScalars (U.ι.appIso V.unop).inv.hom).obj
+      (M.val.obj (U.ι.opensFunctor.op.obj V)) ≅ (M.restrict U.ι).val.obj V :=
+  Iso.refl _
+
+/-- Scalar transport on exterior powers, expressed in the actual section modules. -/
+private noncomputable def openExteriorComponent {X : Scheme.{v}} (M : X.Modules)
+    (n : ℕ) (U : X.Opens) (V : U.toScheme.Opensᵒᵖ) :
+    ((openPresheafRestriction U.ι).obj
+      (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)).obj V ≅
+      (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).obj V :=
+  ringTransportIso
+    (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
+    (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n ≪≫
+      (ModuleCat.exteriorPower.functor (U.toScheme.presheaf.obj V) n).mapIso
+        (openSectionTransportIso M U V)
+
+/-- The section comparison takes a pure wedge to the same sections after restriction. -/
+private theorem openExteriorComponent_wedge {X : Scheme.{v}} (M : X.Modules)
+    (n : ℕ) (U : X.Opens) (V : U.toScheme.Opensᵒᵖ)
+    (a : Fin n → M.val.obj (U.ι.opensFunctor.op.obj V)) :
+    (openExteriorComponent M n U V).hom
+      (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n a) =
+      exteriorPower.ιMulti (U.toScheme.presheaf.obj V) n
+        (M := (M.restrict U.ι).val.obj V) a := by
+  change ModuleCat.exteriorPower.map (openSectionTransportIso M U V).hom n
+      (ringTransportInverse
+        (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
+        (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
+        (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n a)) = _
+  rw [ringTransportInverse_wedge]
+  exact ModuleCat.exteriorPower.map_mk (openSectionTransportIso M U V).hom a
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Component isomorphisms and their naturality for the exterior presheaf pullback.
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
-(blueprint: lem-sc-exterior-presheaf-open-pullback-data).
-
-The component map sends a pure wedge to the wedge of the corresponding restricted
-sections, using the canonical ring isomorphism on sections.  Its inverse uses the
-inverse ring isomorphism.  The exterior-power universal property proves that these
-maps are linear and inverse, while the defining restriction formula proves naturality.
--/
+/-- For an open `U ⊆ X`, the presheaf pullback of `⋀ⁿ M` along `U.ι` and `⋀ⁿ (M|_U)` have
+isomorphic sections over every open, compatibly with restriction. -/
 theorem exteriorPresheaf_open_pullback_data {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     (U : X.Opens) :
     ∃ (app : ∀ V : U.toScheme.Opensᵒᵖ,
@@ -354,33 +379,20 @@ theorem exteriorPresheaf_open_pullback_data {X : Scheme.{v}} (M : X.Modules) (n 
       (PresheafOfModules.pullbackPushforwardAdjunction.{v}
         U.ι.toRingCatSheafHom.hom)).symm.app P
   let e₁ : Q ≅ (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n) :=
-    PresheafOfModules.isoMk
-      (fun V ↦ ringTransportIso
+    PresheafOfModules.isoMk (openExteriorComponent M n U) (by
+      intro V W f
+      apply ringTransport_ext
         (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
-        (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n)
-      (by
-        intro V W f
-        apply ringTransport_ext
-          (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
-          (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
-        intro a
-        change ringTransportInverse
-            (X.presheaf.obj (U.ι.opensFunctor.op.obj W)) (U.toScheme.presheaf.obj W)
-            (U.ι.appIso W.unop) (M.val.obj (U.ι.opensFunctor.op.obj W)) n
-            (((_root_.PresheafOfModules.exteriorPower (R := _) M.val n).map
-                (U.ι.opensFunctor.op.map f))
-              (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n
-                (M := M.val.obj (U.ι.opensFunctor.op.obj V)) a)) =
-          ((_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).map f)
-            (ringTransportInverse
-              (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
-              (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
-              (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n
-                (M := M.val.obj (U.ι.opensFunctor.op.obj V)) a))
-        rw [restriction_wedge]
-        refine (ringTransportInverse_wedge _ _ _ _ n _).trans ?_
-        conv_rhs => rw [ringTransportInverse_wedge]
-        exact (restriction_wedge (M.restrict U.ι) n f a).symm)
+        (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
+      intro a
+      change (openExteriorComponent M n U W).hom
+          (P.map (U.ι.opensFunctor.op.map f)
+            (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n a)) =
+        ((_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).map f)
+          ((openExteriorComponent M n U V).hom
+            (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n a))
+      rw [restriction_wedge, openExteriorComponent_wedge, openExteriorComponent_wedge]
+      exact (restriction_wedge (M.restrict U.ι) n f a).symm)
   let e := e₀ ≪≫ e₁
   exact ⟨fun V ↦ (PresheafOfModules.evaluation _ V).mapIso e, fun f ↦ e.hom.naturality f⟩
 

@@ -9,7 +9,7 @@ public import WeilConjectures.PoincareDuality.PodCompletionReindex.PodCompletion
 
 /-! # Normalized completed tensor reindexing models
 
-Source: blueprint prop-pod-dual-tate-data-compatibility Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2 Steps 1 and 5;
 Stacks 07A4, 0941 (blueprint: def-pod-completion-tensor-reindex-models).
 -/
 

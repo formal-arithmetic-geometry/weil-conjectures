@@ -14,10 +14,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
 exponent is invertible on `k`, the Verdier dual `𝔻_X = RHom(-, ω_X)` carries `Dctf(X, Λ)` into
 itself, with the Tor interval `[a, b]` going to `[-b - 2d, -a]` when `dim X ≤ d`
-(`lem-weil-verdier-preservation-strata`), and, for `k` algebraically closed, the double-dual map
-`δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism, so that `𝔻_X` is an anti-equivalence of `Dctf(X, Λ)`
-(`sk-prop-sf-biduality-general`, `thm-fix-general-biduality`,
-`thm-weil-etale-geometric-biduality`).
+(`lemma-verdier-duality-preserves-constructibility--1`), and, for `k` algebraically closed, the
+double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism, so that `𝔻_X` is an anti-equivalence of
+`Dctf(X, Λ)` (`sk-prop-sf-biduality-general`, `theorem-verdier-biduality--1`,
+`theorem-verdier-biduality--1`).
 
 ## Implementation notes
 
@@ -45,14 +45,15 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
   [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] [HasCompactification a]
 
-/-- Blueprint `lem-weil-verdier-preservation-strata`: Constructible preservation before
-biduality (first half; the subsection `sk-prop-sf-rf-shriek-preservation`).
+/-- Blueprint `lemma-verdier-duality-preserves-constructibility--1`: Constructible preservation
+before biduality (first half; the subsection `theorem-f-shriek-finite-coefficients`).
 
 For `X` separated of finite type over a perfect field `k` and a finite coefficient ring `Λ`
 whose exponent is invertible on `k`, the Verdier dual `𝔻_X = RHom(-, ω_X)` carries `Dctf(X, Λ)`
 into itself. The Tor-amplitude bound of the same blueprint lemma is
 `AlgebraicGeometry.Etale.torAmplitudeIn_verdierDual`. This is the preservation half of the
-general Verdier biduality `sk-prop-sf-biduality-general`, whose blueprint proof cites it. -/
+general Verdier biduality `lemma-verdier-duality-preserves-constructibility--1`, whose blueprint
+proof cites it. -/
 theorem constructibleFiniteTor_verdierDual [PerfectField k]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
@@ -63,13 +64,13 @@ theorem constructibleFiniteTor_verdierDual [PerfectField k]
   exact (constructibleFiniteTor_and_torAmplitudeIn_verdierDual_of_perfectField Λ a d hd c e
     hKbc hKt).1
 
-/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
+/-- Blueprint `theorem-verdier-biduality--1`: General Verdier biduality.
 
 For `X` separated of finite type over an algebraically closed field `k` and a finite
 coefficient ring `Λ` whose exponent is invertible on `k`, the double-dual morphism
 `δ_K : K ⟶ 𝔻_X 𝔻_X K` (`AlgebraicGeometry.Etale.verdierDualDoubleDual`) is an isomorphism for
 every `K` in `Dctf(X, Λ)`. This is the finite-stage étale biduality
-`thm-weil-etale-geometric-biduality`
+`theorem-verdier-biduality--1`
 (`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_of_isAlgClosed`). -/
 theorem isIso_verdierDualDoubleDual_app [IsAlgClosed k]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -91,7 +92,7 @@ theorem nonempty_iso_verdierDual_verdierDual [IsAlgClosed k]
   have := isIso_verdierDualDoubleDual_app Λ a hK
   ⟨asIso ((verdierDualDoubleDual Λ a).app K)⟩
 
-/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
+/-- Blueprint `theorem-verdier-biduality--6`: General Verdier biduality.
 
 For `X` separated of finite type over an algebraically closed field `k` and a finite
 coefficient ring `Λ` whose exponent is invertible on `k`, the Verdier dual
@@ -108,7 +109,8 @@ noncomputable def verdierDualEquivalence [IsAlgClosed k] :
     (verdierDualDoubleDual Λ a)
     (fun _ hK ↦ isIso_verdierDualDoubleDual_app Λ a hK)
 
-/-- Blueprint `lem-weil-verdier-preservation-strata`: Verdier duality preserves `Dctf`.
+/-- Blueprint `lemma-verdier-duality-preserves-constructibility--1`: Verdier duality preserves
+`Dctf`.
 
 Let `X` be separated of finite type over a perfect field `k`, `ω_X = Ra_X^! Λ` and
 `𝔻_X = RHom(-, ω_X)`. Then `𝔻_X` carries `Dctf(X, Λ)` into itself, and more precisely, if

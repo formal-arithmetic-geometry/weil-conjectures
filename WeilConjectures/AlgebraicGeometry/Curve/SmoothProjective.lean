@@ -181,7 +181,7 @@ projective curve `C` over `k`, its genus `g(C) = dim_k H¹(C, 𝒪_C)`
 (`AlgebraicGeometry.Scheme.arithmeticGenus`) is the dimension of a finite-dimensional
 `k`-vector space, coherent cohomology of a proper scheme over a field being finite-dimensional.
 
-(blueprint: `def-sc-general-curve`) -/
+(blueprint: `corollary-serre-duality-field-extension--2`) -/
 theorem IsSmoothProjectiveCurve.finiteDimensional_H_one :
     FiniteDimensional k (Scheme.Modules.H (X := C) (SheafOfModules.unit C.ringCatSheaf) 1) :=
   have := SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf)
@@ -200,7 +200,7 @@ variable (k C) in
 a field extension `K/k`, `g(C_K) = g(C)`, where `g = dim H¹(-, 𝒪)`: this is flat base change of
 cohomology along `C_K ⟶ C`.
 
-(blueprint: `def-sc-general-curve`) -/
+(blueprint: `corollary-serre-duality-field-extension--2`) -/
 theorem IsSmoothProjectiveCurve.arithmeticGenus_baseChangeField :
     Scheme.arithmeticGenus K (C.baseChangeField k K) = Scheme.arithmeticGenus k C :=
   Scheme.arithmeticGenus_pullback K
@@ -219,10 +219,10 @@ instance IsSmoothProjectiveCurve.isProper_baseChangeField :
 variable (k C) in
 /-- **The genus of the base change.** For a smooth projective curve `C` over `k` and a field
 extension `K/k`, the genus `dim_K Γ(C_K, Ω¹_{C_K/K})` of the smooth proper curve `C_K`
-(`AlgebraicGeometry.Scheme.Hom.genus`, blueprint `def-sc-genus`) is the genus
+(`AlgebraicGeometry.Scheme.Hom.genus`, blueprint `prose-C-05`) is the genus
 `g(C) = dim_k H¹(C, 𝒪_C)` of `C`.
 
-(blueprint: `def-sc-general-curve`) -/
+(blueprint: `corollary-serre-duality-field-extension--2`) -/
 theorem IsSmoothProjectiveCurve.genus_baseChangeField :
     (C.baseChangeField k K ↘ Spec (.of K)).genus = Scheme.arithmeticGenus k C :=
   Scheme.genus_eq_arithmeticGenus.trans (arithmeticGenus_baseChangeField k C K)
@@ -243,7 +243,7 @@ algebraically closed), the base change `C_K` is a proper smooth connected curve 
 sense of `AlgebraicGeometry.IsConnectedCurve`, so that the degree and `Pic⁰` conventions of the
 smooth-curve chapter apply to it.
 
-(blueprint: `def-sc-general-curve`) -/
+(blueprint: `corollary-serre-duality-field-extension--2`) -/
 theorem IsSmoothProjectiveCurve.isConnectedCurve_baseChangeField :
     IsConnectedCurve (C.baseChangeField k K ↘ Spec (.of K)) ∧
       Smooth (C.baseChangeField k K ↘ Spec (.of K)) ∧

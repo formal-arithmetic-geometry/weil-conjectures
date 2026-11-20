@@ -20,8 +20,9 @@ restriction `Φ_Z` of `Φ_X^m` (`ProEtale.CondensedRing.fibreFrobenius`).
 The point `y` descends to a point `y₀ : Spec 𝔽_{q^m} ⟶ Y₀` of the fixed field
 `𝔽_{q^m} = {a ∈ k | a ^ (q ^ m) = a}` (`ProEtale.CondensedRing.frobeniusFixedField`), and `Z` is
 the base change of `Z₀ = X₀ ×_{Y₀, y₀} Spec 𝔽_{q^m}` along `Spec k ⟶ Spec 𝔽_{q^m}`, with `Φ_Z` the
-base change of the `q^m`-power Frobenius of `Z₀` (blueprint `sk-i-relative-frob` (4), and
-`lem-trf-weil-shriek-operator-fibres` (2)).
+base change of the `q^m`-power Frobenius of `Z₀` (blueprint
+`lemma-comparison-via-relative-frobenius` (4), and `lemma-comparison-via-relative-frobenius--4`
+(2)).
 
 ## Main statements
 
@@ -61,7 +62,7 @@ lemma id_spec {R : CommRingCat.{u}} {q : ℕ} (h : ∀ a : R, a ^ q = a) :
   simp [hφ, ← map_pow, h]
 
 /-- The `q`-power Frobenius of a fibre product `X ×_S Y` is induced by the `q`-power Frobenii
-of `X` and `Y` (blueprint `sk-i-relative-frob`). -/
+of `X` and `Y` (blueprint `lemma-comparison-via-relative-frobenius`). -/
 lemma pullbackMap {X Y S : Scheme.{u}} {f : X ⟶ S} {g : Y ⟶ S} {FX : X ⟶ X} {FY : Y ⟶ Y}
     {FS : S ⟶ S} {q : ℕ} (hFX : FX.IsFrobenius q) (hFY : FY.IsFrobenius q)
     (h₁ : f ≫ FS = FX ≫ f) (h₂ : g ≫ FS = FY ≫ g) :
@@ -78,7 +79,7 @@ end Scheme.Hom.IsFrobenius
 /-- A point `g : Spec Ω ⟶ X` with values in a field `Ω` which is fixed by `Spec ψ` for a ring
 endomorphism `ψ` of `Ω` descends to every subfield `L ⊆ Ω` containing the elements fixed by
 `ψ`: the embedding `κ(x) ↪ Ω` of the residue field takes values in `L`
-(blueprint `sk-i-relative-frob`). -/
+(blueprint `lemma-comparison-via-relative-frobenius`). -/
 theorem Scheme.exists_specMap_algebraMap_comp_eq {X : Scheme.{u}} {Ω : Type u} [Field Ω]
     (ψ : Ω →+* Ω) (L : Subfield Ω) (hL : ∀ a, ψ a = a → a ∈ L) (g : Spec (.of Ω) ⟶ X)
     (hg : Spec.map (CommRingCat.ofHom ψ) ≫ g = g) :
@@ -101,7 +102,8 @@ section FixedField
 variable (k₀ k : Type u) [Field k₀] [Fintype k₀] [Field k] [Algebra k₀ k]
 
 /-- The fixed field `𝔽_{q^m} = {a ∈ k | a ^ (q ^ m) = a}` of the `m`-th power of the arithmetic
-Frobenius `σ : a ↦ a ^ q` of `k` over `k₀ = 𝔽_q` (blueprint `sk-i-relative-frob`). -/
+Frobenius `σ : a ↦ a ^ q` of `k` over `k₀ = 𝔽_q` (blueprint
+`lemma-comparison-via-relative-frobenius`). -/
 def frobeniusFixedField (m : ℕ) : Subfield k :=
   RingHom.eqLocusField ((FiniteField.frobeniusAlgHom k₀ k ^ m : k →ₐ[k₀] k) : k →+* k)
     (RingHom.id k)
@@ -135,7 +137,7 @@ instance finite_frobeniusFixedField {m : ℕ} [NeZero m] :
 
 /-- For `k` algebraically closed and `m ≥ 1`, the fixed field of `σ^m` has `q ^ m` elements: it
 is the image of an embedding of the degree `m` extension of `k₀` (blueprint
-`sk-i-relative-frob`). -/
+`lemma-comparison-via-relative-frobenius`). -/
 theorem natCard_frobeniusFixedField [IsAlgClosed k] {m : ℕ} (hm : m ≠ 0) :
     Nat.card (frobeniusFixedField k₀ k m) = Nat.card k₀ ^ m := by
   have : Finite (FiniteField.galoisExtension k₀ m) := Module.finite_of_finite k₀
@@ -162,8 +164,8 @@ lemma left_eq_hom_of_point {T : Over (Spec (.of k))} (g : T ⟶ point k) : g.lef
   rw [toPoint_ext g (toPoint T), toPoint_left]
 
 /-- The restriction `Φ_Z` of `Φ_X^m` to the fibre `Z = X ×_{Y, y} Spec k` of `f : X ⟶ Y` at a
-rational point `y` fixed by `Φ_Y^m` (blueprint `sk-i-relative-frob` (4),
-`lem-trf-weil-shriek-operator-fibres`). -/
+rational point `y` fixed by `Φ_Y^m` (blueprint `lemma-comparison-via-relative-frobenius` (4),
+`lemma-comparison-via-relative-frobenius--4`). -/
 noncomputable def fibreFrobenius (f : X ⟶ Y) (hf : ΦX ≫ f = f ≫ ΦY) (m : ℕ)
     (y : RationalPoint Y) (hy : y ≫ frobeniusIterate ΦY m = y) : pullback f y ⟶ pullback f y :=
   pullback.lift (pullback.fst f y ≫ frobeniusIterate ΦX m) (pullback.snd f y) (by
@@ -188,7 +190,7 @@ variable {k₀ : Type u} [Field k₀] [Fintype k₀] [Algebra k₀ k] {X₀ Y₀
 
 /-- The rational point `y` of `Y = Y₀ ×_{k₀} k` fixed by `Φ_Y^m` descends to a point
 `y₀ : Spec 𝔽_{q^m} ⟶ Y₀` of the model, with `y = (y₀ ×_{k₀} k) ∘ Spec(𝔽_{q^m} ⊆ k)` on
-underlying schemes (blueprint `sk-i-relative-frob` (4)). -/
+underlying schemes (blueprint `lemma-comparison-via-relative-frobenius` (4)). -/
 noncomputable def IsModelFrobenius.descendedPoint (hY : IsModelFrobenius ΦY fY₀ pY) {m : ℕ}
     (y : RationalPoint Y) (hy : y ≫ frobeniusIterate ΦY m = y) :
     Spec (.of (frobeniusFixedField k₀ k m)) ⟶ Y₀ :=
@@ -206,7 +208,8 @@ lemma IsModelFrobenius.specMap_comp_descendedPoint (hY : IsModelFrobenius ΦY fY
       (congrArg CommaMorphism.left hy))).choose_spec
 
 /-- The comparison map `p_Z : Z ⟶ Z₀ = X₀ ×_{Y₀, y₀} Spec 𝔽_{q^m}` from the fibre of `f` at `y`
-to the fibre of the model `f₀` at the descended point `y₀` (blueprint `sk-i-relative-frob`). -/
+to the fibre of the model `f₀` at the descended point `y₀` (blueprint
+`lemma-comparison-via-relative-frobenius`). -/
 noncomputable def IsModelFrobenius.fibreModelMap (hY : IsModelFrobenius ΦY fY₀ pY) {f : X ⟶ Y}
     {f₀ : X₀ ⟶ Y₀} (hfp : f.left ≫ pY = pX ≫ f₀) {m : ℕ} (y : RationalPoint Y)
     (hy : y ≫ frobeniusIterate ΦY m = y) :
@@ -243,7 +246,7 @@ lemma IsModelFrobenius.isPullback_left (hX : IsModelFrobenius ΦX fX₀ pX)
   exact hX.isPullback.flip
 
 /-- The fibre `Z = X ×_{Y, y} Spec k` is the base change of `Z₀ = X₀ ×_{Y₀, y₀} Spec 𝔽_{q^m}`
-along `Spec k ⟶ Spec 𝔽_{q^m}` (blueprint `sk-i-relative-frob` (4)). -/
+along `Spec k ⟶ Spec 𝔽_{q^m}` (blueprint `lemma-comparison-via-relative-frobenius` (4)). -/
 lemma IsModelFrobenius.isPullback_fibreModelMap (hX : IsModelFrobenius ΦX fX₀ pX)
     (hY : IsModelFrobenius ΦY fY₀ pY) {f : X ⟶ Y} {f₀ : X₀ ⟶ Y₀}
     (hfp : f.left ≫ pY = pX ≫ f₀) (h₀ : f₀ ≫ fY₀ = fX₀) {m : ℕ} (y : RationalPoint Y)
@@ -260,13 +263,14 @@ lemma IsModelFrobenius.isPullback_fibreModelMap (hX : IsModelFrobenius ΦX fX₀
   rw [fibreModelMap_fst]
   exact houter
 
-/-- **The fibres of a morphism of models are models** (blueprint `sk-i-relative-frob` (4), side
-clause; `lem-trf-weil-shriek-operator-fibres` (2)). Let `f : X ⟶ Y` be the base change of a
-`k₀`-morphism `f₀ : X₀ ⟶ Y₀` commuting with the model Frobenii, `m ≥ 1`, and `y` a rational point
-of `Y` fixed by `Φ_Y^m`, descending to `y₀ : Spec 𝔽_{q^m} ⟶ Y₀`. Then the restriction `Φ_Z` of
-`Φ_X^m` to the fibre `Z = X ×_{Y, y} Spec k` is the model Frobenius of
-`Z₀ = X₀ ×_{Y₀, y₀} Spec 𝔽_{q^m}` over `𝔽_{q^m}`: `Z = Z₀ ×_{𝔽_{q^m}} k` and `Φ_Z` is the base
-change of the `q^m`-power Frobenius of `Z₀`, which is induced by `F_{X₀}^m`. -/
+/-- **The fibres of a morphism of models are models** (blueprint
+`lemma-comparison-via-relative-frobenius` (4), side clause;
+`lemma-comparison-via-relative-frobenius--4` (2)). Let `f : X ⟶ Y` be the base change of a
+`k₀`-morphism `f₀ : X₀ ⟶ Y₀` commuting with the model Frobenii, `m ≥ 1`, and `y` a rational point of
+`Y` fixed by `Φ_Y^m`, descending to `y₀ : Spec 𝔽_{q^m} ⟶ Y₀`. Then the restriction `Φ_Z` of `Φ_X^m`
+to the fibre `Z = X ×_{Y, y} Spec k` is the model Frobenius of `Z₀ = X₀ ×_{Y₀, y₀} Spec 𝔽_{q^m}`
+over `𝔽_{q^m}`: `Z = Z₀ ×_{𝔽_{q^m}} k` and `Φ_Z` is the base change of the `q^m`-power Frobenius of
+`Z₀`, which is induced by `F_{X₀}^m`. -/
 theorem IsModelFrobenius.isModelFrobenius_fibreFrobenius {m : ℕ} [NeZero m] [IsAlgClosed k]
     (hX : IsModelFrobenius ΦX fX₀ pX) (hY : IsModelFrobenius ΦY fY₀ pY) {f : X ⟶ Y}
     (hf : ΦX ≫ f = f ≫ ΦY) {f₀ : X₀ ⟶ Y₀} (hfp : f.left ≫ pY = pX ≫ f₀) (h₀ : f₀ ≫ fY₀ = fX₀)
@@ -292,10 +296,10 @@ theorem IsModelFrobenius.isModelFrobenius_fibreFrobenius {m : ℕ} [NeZero m] [I
         fibreModelMap_snd_assoc, Category.comp_id, Over.w_assoc]
 
 /-- **The fibres of a morphism of models are models**, existence form (blueprint
-`sk-i-relative-frob` (4), side clause; `lem-trf-weil-shriek-operator-fibres` (2)): the fibre of
-`f` at a rational point `y` fixed by `Φ_Y^m` is the base change of a scheme `Z₀` locally of
-finite type over a finite field `k'` with `q ^ m` elements, whose `q ^ m`-power Frobenius
-base-changes to the restriction of `Φ_X^m`. -/
+`lemma-comparison-via-relative-frobenius` (4), side clause;
+`lemma-comparison-via-relative-frobenius--4` (2)): the fibre of `f` at a rational point `y` fixed by
+`Φ_Y^m` is the base change of a scheme `Z₀` locally of finite type over a finite field `k'` with
+`q ^ m` elements, whose `q ^ m`-power Frobenius base-changes to the restriction of `Φ_X^m`. -/
 theorem IsModelFrobenius.exists_isModelFrobenius_fibreFrobenius {k₀ : Type u} [Field k₀]
     [Finite k₀] [Algebra k₀ k] [IsAlgClosed k] {X₀ Y₀ : Scheme.{u}}
     {fX₀ : X₀ ⟶ Spec (.of k₀)} {fY₀ : Y₀ ⟶ Spec (.of k₀)} [LocallyOfFiniteType fX₀]

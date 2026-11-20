@@ -15,7 +15,7 @@ Let `X` be separated of finite type over an algebraically closed field `k` with 
 `[a, b]`, then `𝔻_X K = RHom(K, ω_X)` is bounded constructible with Tor amplitude in
 `[-b - 2d, -a]`
 (`AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed`,
-`lem-weil-verdier-preservation-strata`).
+`lemma-verdier-duality-preserves-constructibility--1`).
 
 The proof is a noetherian induction on the closed subsets `T ⊆ X`, for all closed subschemes
 `Z ⊆ X` supported in `T`: a reduced `Z` is cut into a dense open `U`, smooth over `k`, on which
@@ -52,8 +52,8 @@ lemma topologicalKrullDim_le_zero_of_isEmpty {V : Type*} [TopologicalSpace V] [I
   rw [topologicalKrullDim, Order.krullDim_eq_bot]
   exact bot_le
 
-/-- Blueprint `lem-weil-verdier-preservation-strata`: Constructible preservation before
-biduality, over an algebraically closed field.
+/-- Blueprint `lemma-verdier-duality-preserves-constructibility--1`: Constructible preservation
+before biduality, over an algebraically closed field.
 
 Let `X` be separated of finite type over an algebraically closed field `k` with `dim X ≤ d`, and
 `Λ` a finite ring whose exponent is invertible in `k`. If `K` is bounded constructible on `X_ét`

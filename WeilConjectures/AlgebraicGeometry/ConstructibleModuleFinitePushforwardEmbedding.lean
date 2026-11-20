@@ -43,7 +43,7 @@ Proof:
 4. Pull the embedding back: inverse image is exact and preserves finite sums and constant
    sheaves; finite pushforward commutes with base change (0959). The base-changed morphisms
    remain finite and locally of finite presentation
-   (lem-weil-pbc-finite-pushforward-embedding-pullback).
+   (lemma-finiteness-small-etale-topoi--3).
 5. Compose with the inverse of the descent isomorphism to obtain the required monomorphism.
    Finite morphisms are quasi-compact and separated, so the resulting morphisms are also of
    finite presentation, as in Stacks. A finite coefficient ring is Noetherian, and finite

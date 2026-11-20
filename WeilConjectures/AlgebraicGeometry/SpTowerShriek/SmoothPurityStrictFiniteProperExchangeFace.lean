@@ -228,7 +228,7 @@ private theorem coordinates_mate
     {l : C' ⥤ D'} {g : D' ⥤ C'} {adj : L ⊣ G} {level : l ⊣ g}
     (coordinates : ComparisonAdjunctionCoordinates e d adj level)
     (p : L ⋙ d ≅ e ⋙ l) (hp : coordinates.left = p) :
-    (mateEquiv adj level (TwoSquare.mk _ _ _ _ p.inv)).natTrans =
+    (mateEquiv adj level (TwoSquare.mk _ _ _ _ p.inv)) =
       coordinates.right.hom := by
   subst p
   ext N
@@ -252,8 +252,8 @@ private theorem coordinates_cube_maps
     (pH : H ⋙ d ≅ b ⋙ H') (pK : K ⋙ d ≅ c ⋙ K')
     (θ : G ⋙ K ⟶ F ⋙ H) (θ' : G' ⋙ K' ⟶ F' ⋙ H')
     (e : R ⋙ G ⟶ H ⋙ S) (e' : R' ⋙ G' ⟶ H' ⋙ S')
-    (he : (mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)).natTrans = e)
-    (he' : (mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')).natTrans = e')
+    (he : (mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)) = e)
+    (he' : (mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')) = e')
     (hc : ∀ X : A,
       K'.map (pG.inv.app X) ≫ pK.inv.app (G.obj X) ≫ d.map (θ.app X) =
         θ'.app (a.obj X) ≫ H'.map (pF.inv.app X) ≫ pH.inv.app (F.obj X))
@@ -290,7 +290,7 @@ private theorem coordinates_cube_from_coordinates
     (pH : H ⋙ d ≅ b ⋙ H') (pK : K ⋙ d ≅ c ⋙ K')
     (θ : G ⋙ K ⟶ F ⋙ H) (θ' : G' ⋙ K' ⟶ F' ⋙ H')
     (e : R ⋙ G ⟶ H ⋙ S)
-    (he : (mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)).natTrans = e)
+    (he : (mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)) = e)
     (hc : ∀ X : A,
       K'.map (pG.inv.app X) ≫ pK.inv.app (G.obj X) ≫ d.map (θ.app X) =
         θ'.app (a.obj X) ≫ H'.map (pF.inv.app X) ≫ pH.inv.app (F.obj X))
@@ -300,9 +300,9 @@ private theorem coordinates_cube_from_coordinates
         coordinatesK.right.hom.app (H.obj E) ≫
         S'.map (pH.hom.app E) =
       pG.hom.app (R.obj E) ≫ G'.map (coordinatesF.right.hom.app E) ≫
-        (mateEquiv adj' adjK' (TwoSquare.mk G' F' K' H' θ')).natTrans.app (b.obj E) := by
+        (mateEquiv adj' adjK' (TwoSquare.mk G' F' K' H' θ')).app (b.obj E) := by
   exact coordinates_cube_maps adj adjK adj' adjK' a b c d pF pG pH pK θ θ'
-    e (mateEquiv adj' adjK' (TwoSquare.mk G' F' K' H' θ')).natTrans he rfl hc E
+    e (mateEquiv adj' adjK' (TwoSquare.mk G' F' K' H' θ')) he rfl hc E
     coordinatesF coordinatesK hF hK
 
 -- Explicit comparison congruences are checked within this declaration.
@@ -315,14 +315,13 @@ private theorem native_base_change_mate (A : Type u) [CommRing A]
       (derivedUpperStarLowerStarAdjunction
         (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f')
       (TwoSquare.mk _ _ _ _ (leftDerivedUpperStarSquareIso
-        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) sq).hom)).natTrans =
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) sq).hom)) =
       derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) sq := by
   rfl
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 700000 in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the proper base-change mate.
 Source: blueprint operations proof (2), finite proper exchange face.
@@ -370,30 +369,31 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
             eqToIso (congrArg (fun a ↦
               proEtaleConstantRingDerivedPullback (R l E n) a) sq.w.symm) ≪≫
             (proEtaleConstantRingPullbackComposition h f (R l E n)).symm).hom)
-        ).natTrans.app ((comparisonFiniteRealization l E b X n).obj N)   := by
-  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))
-  let θ := (leftDerivedUpperStarSquareIso B sq.toCommSq).hom
-  let θ' := (proEtaleConstantRingPullbackComposition f' g (R l E n) ≪≫
-    eqToIso (congrArg (fun a ↦ proEtaleConstantRingDerivedPullback (R l E n) a)
-      sq.w.symm) ≪≫
-    (proEtaleConstantRingPullbackComposition h f (R l E n)).symm).hom
+        ).app ((comparisonFiniteRealization l E b X n).obj N)   := by
   have H := coordinates_cube_from_coordinates
     (coordinates.val f n) (coordinates.val f' n)
     (comparisonFinitePull l E b f n) (comparisonFinitePull l E b g n)
     (comparisonFinitePull l E b h n) (comparisonFinitePull l E b f' n)
-    θ θ' (derivedBaseChangeMap B sq.toCommSq)
-    (by
-      have HN := native_base_change_mate (R l E n) sq.toCommSq
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HN) none
-        exactByConversion h)
+    (leftDerivedUpperStarSquareIso
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq.toCommSq).hom
+    (proEtaleConstantRingPullbackComposition f' g (R l E n) ≪≫
+      eqToIso (congrArg (fun a ↦ proEtaleConstantRingDerivedPullback (R l E n) a)
+        sq.w.symm) ≪≫
+      (proEtaleConstantRingPullbackComposition h f (R l E n)).symm).hom
+    (derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq.toCommSq)
+    (by rfl)
     (by
       intro M
       have HC := strictFinitePullbackSquareCoherence l E b sq n M
+      -- Normalize structural projections before constructing instance congruences.
+      dsimp only [Functor.comp_obj, Functor.comp_map, Iso.trans_hom, Iso.symm_hom,
+        NatTrans.comp_app] at HC ⊢
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
         exactByConversion h)
     N (coordinates.property f n) (coordinates.property f' n)
+  dsimp only [Functor.comp_obj, Functor.comp_map, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app] at H ⊢
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactByConversion h

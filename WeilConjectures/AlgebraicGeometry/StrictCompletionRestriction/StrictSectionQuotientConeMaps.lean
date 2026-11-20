@@ -354,7 +354,7 @@ end Transport
 private theorem presentationConeMap {A : Type*} [Category A] [Abelian A]
     [HasCountableProducts A] [HasDerivedCategory A] (T : Presentation A)
     (P : CochainComplex A ℤ) (n : ℕ) (Q : CochainComplex A ℤ) (ρ : P ⟶ Q)
-    (hw : (NatTrans.mapHomologicalComplex (T.scalar ^ (n + 1)) (.up ℤ)).app P ≫ ρ = 0)
+    (hw : (NatTrans.mapHomologicalComplex (T.scalar ^ (n + 1)).asHom (.up ℤ)).app P ≫ ρ = 0)
     (hc : QuasiIso (CochainComplex.mappingCone.descShortComplex
       (ShortComplex.mk _ ρ hw))) :
     ∃ c : (T.tower.obj P).asFunctor.obj (op n) ⟶ Q,
@@ -362,7 +362,7 @@ private theorem presentationConeMap {A : Type*} [Category A] [Abelian A]
         c.f q = (T.coordinates P n q).hom ≫ biprod.fst ≫ ρ.f q := by
   have := hc
   let g : P ⟶ P :=
-    (NatTrans.mapHomologicalComplex (T.scalar ^ (n + 1)) (.up ℤ)).app P
+    (NatTrans.mapHomologicalComplex (T.scalar ^ (n + 1)).asHom (.up ℤ)).app P
   let τ : CochainComplex.mappingCone g ⟶ Q :=
     CochainComplex.mappingCone.descShortComplex (ShortComplex.mk g ρ hw)
   refine ⟨(eqToIso (T.cone P n)).hom ≫ τ, inferInstance, ?_⟩
@@ -385,14 +385,14 @@ private theorem transportSectionCone
     (ρ₀ : 𝟭 (Modules Λ X) ⟶
       (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} Q :
         Modules Λ X ⥤ Modules Λ X))
-    (hs : ∀ M, (equivalence Λ X).functor.map (r.app M) =
-      (T.scalar ^ (n + 1)).app ((equivalence Λ X).functor.obj M))
+    (hs : ∀ M, (equivalence Λ X).functor.map (r.asHom.app M) =
+      (T.scalar ^ (n + 1)).asHom.app ((equivalence Λ X).functor.obj M))
     (hu : ∀ M, (equivalence Λ X).functor.map ((ρ_ M).inv ≫ M ◁ p) ≫
       (sectionTensorIso (Scheme.ProEt.topology X) (condensedRingObj Λ X) N Q eN M).hom =
         ρ₀.app ((equivalence Λ X).functor.obj M))
     (hcone : ∀ K : CochainComplex (Internal Λ X) ℤ,
       (HomologicalComplex.quasiIso (Internal Λ X) (.up ℤ)).kFlat K →
-      ∃ hz : (NatTrans.mapHomologicalComplex r (.up ℤ)).app K ≫
+      ∃ hz : (NatTrans.mapHomologicalComplex r.asHom (.up ℤ)).app K ≫
         (NatTrans.mapHomologicalComplex
           ((rightUnitorNatIso (Internal Λ X)).inv ≫
             (tensoringRight (Internal Λ X)).map p) (.up ℤ)).app K = 0,
@@ -414,8 +414,8 @@ private theorem transportSectionCone
   let j : (F.mapHomologicalComplex (.up ℤ)).obj (I.obj K) ≅ L.obj P :=
     sectionTensorComplexIso (Scheme.ProEt.topology X) (condensedRingObj Λ X) N Q eN K ≪≫
       L.mapIso e
-  let f : K ⟶ K := (NatTrans.mapHomologicalComplex r (.up ℤ)).app K
-  let g : P ⟶ P := (NatTrans.mapHomologicalComplex (T.scalar ^ (n + 1)) (.up ℤ)).app P
+  let f : K ⟶ K := (NatTrans.mapHomologicalComplex r.asHom (.up ℤ)).app K
+  let g : P ⟶ P := (NatTrans.mapHomologicalComplex (T.scalar ^ (n + 1)).asHom (.up ℤ)).app P
   let η : K ⟶ I.obj K := (NatTrans.mapHomologicalComplex
     ((rightUnitorNatIso (Internal Λ X)).inv ≫
       (tensoringRight (Internal Λ X)).map p) (.up ℤ)).app K
@@ -423,9 +423,9 @@ private theorem transportSectionCone
   have hf : (F.mapHomologicalComplex (.up ℤ)).map f ≫ e.hom = e.hom ≫ g := by
     apply HomologicalComplex.hom_ext
     intro q
-    change F.map (r.app (K.X q)) ≫ e.hom.f q = _
+    change F.map (r.asHom.app (K.X q)) ≫ e.hom.f q = _
     rw [hs]
-    exact ((T.scalar ^ (n + 1)).naturality (e.hom.f q)).symm
+    exact ((T.scalar ^ (n + 1)).asHom.naturality (e.hom.f q)).symm
   have hη : (F.mapHomologicalComplex (.up ℤ)).map η ≫ j.hom = e.hom ≫ ρ := by
     apply HomologicalComplex.hom_ext
     intro q
@@ -446,23 +446,23 @@ private theorem scalarSection_pow (X : Scheme.{u})
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hscalar : ∀ (M : Modules (DerivedNakayama.integerRing l E) X) (U : X.ProEtᵒᵖ)
       (x : M.val.obj U),
-      (T.scalar.app M).val.app U x = sectionScalarValue l E X d U • x)
+      (T.scalar.asHom.app M).val.app U x = sectionScalarValue l E X d U • x)
     (M : AdicCompletion.Modules l E X) (k : ℕ) :
     (equivalence (DerivedNakayama.integerRing l E) X).functor.map
       ((DerivedNakayama.scalarOnModules l E X (d ^ k)).app M) =
-      (T.scalar ^ k).app
+      (T.scalar ^ k).asHom.app
         ((equivalence (DerivedNakayama.integerRing l E) X).functor.obj M) := by
   have hb (N : AdicCompletion.Modules l E X) :
       (equivalence (DerivedNakayama.integerRing l E) X).functor.map
         ((DerivedNakayama.scalarOnModules l E X d).app N) =
-      T.scalar.app ((equivalence (DerivedNakayama.integerRing l E) X).functor.obj N) := by
+      T.scalar.asHom.app ((equivalence (DerivedNakayama.integerRing l E) X).functor.obj N) := by
     ext U x
     exact (section_scalar_value l E X d N U x).trans (hscalar _ U x).symm
   rw [scalarOnModules_pow]
   induction k with
   | zero => simp
   | succ k ih =>
-      simp only [pow_succ, End.mul_def, NatTrans.comp_app, Functor.map_comp, ih]
+      simp only [pow_succ, End.mul_asHom, NatTrans.comp_app, Functor.map_comp, ih]
       exact congrArg (fun h ↦ h ≫ _) (hb M)
 
 -- Instantiate the abstract transport with the actual coefficient quotient.
@@ -473,7 +473,7 @@ private theorem quotientConeMap (X : Scheme.{u})
     (hdata : data.IsCanonical l E X)
     (hscalar : ∀ (M : Modules (DerivedNakayama.integerRing l E) X) (U : X.ProEtᵒᵖ)
       (x : M.val.obj U),
-      (T.scalar.app M).val.app U x = sectionScalarValue l E X data.d U • x)
+      (T.scalar.asHom.app M).val.app U x = sectionScalarValue l E X data.d U • x)
     (P : CochainComplex (Modules (DerivedNakayama.integerRing l E) X) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients
       (R := ring (DerivedNakayama.integerRing l E) X) P) (n : ℕ)
@@ -495,7 +495,7 @@ private theorem quotientConeMap (X : Scheme.{u})
   refine transportSectionCone (DerivedNakayama.integerRing l E) X T n
     (AdicCompletion.finiteModule l E X n) _ (finiteSectionIso l E X n)
     (AdicCompletion.finiteUnit l E X n)
-    (DerivedNakayama.scalarOnModules l E X (data.d ^ (n + 1)))
+    (.of (DerivedNakayama.scalarOnModules l E X (data.d ^ (n + 1))))
     (SheafOfModules.KFlatRoos.tensorUnit.{u + 1, u, u + 1}
       (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X)
         (AdicCompletion.quotient l E X n))) ?_ ?_ ?_ P hP
@@ -548,7 +548,7 @@ theorem strictSectionQuotientConeMaps (X : Scheme.{u})
     (hdata : data.IsCanonical l E X)
     (hscalar : ∀ (M : Modules (DerivedNakayama.integerRing l E) X) (U : X.ProEtᵒᵖ)
       (x : M.val.obj U),
-      (T.scalar.app M).val.app U x = sectionScalarValue l E X data.d U • x)
+      (T.scalar.asHom.app M).val.app U x = sectionScalarValue l E X data.d U • x)
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (ι : (Functor.const ℕᵒᵖ).obj (ring (DerivedNakayama.integerRing l E) X) ⟶ B)
     (hB : ∀ n : ℕ, B.obj (op n) = sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology X)

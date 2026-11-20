@@ -18,8 +18,8 @@ public import WeilConjectures.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseCh
 # Derived extension-by-zero base change
 
 Source: blueprint, sec-smooth-purity/sk-prop-sf-cbc,
-cor-cbc-derived-extension-zero-base-change; Stacks Tags 03S6, 0F70 and 015F
-(blueprint: cor-cbc-derived-extension-zero-base-change).
+proposition-extension-zero-restriction-closed-subscheme--11; Stacks Tags 03S6, 0F70 and 015F
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--11).
 -/
 
 @[expose] public section
@@ -145,7 +145,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The canonical composition comparison for exact extension by zero on `D⁺`.
 Source: Stacks 03D8 and 015F, obtained by localizing `openImmersionLowerShriekComp`
-(blueprint: cor-cbc-derived-extension-zero-base-change). -/
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--11). -/
 noncomputable def extensionZeroCompDerivedPlusIso
     {V U X : Scheme.{u}} (k : V ⟶ U) (j : U ⟶ X)
     [IsOpenImmersion k] [IsOpenImmersion j] :

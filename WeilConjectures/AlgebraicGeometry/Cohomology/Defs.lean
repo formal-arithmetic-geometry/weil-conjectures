@@ -114,7 +114,7 @@ lemma H.map_zero_apply {M N : X.Modules} (n : ℕ) (x : M.H n) :
 /-- Multiplication by a global function `a : Γ(X, ⊤)`, as an endomorphism of the underlying
 presheaf of abelian groups of a sheaf of modules `M`. -/
 noncomputable def smulPresheafHom (M : X.Modules) (a : Γ(X, ⊤)) : M.presheaf ⟶ M.presheaf where
-  app U := M.smul (X.presheaf.map (homOfLE le_top).op a)
+  app U := (M.smul (X.presheaf.map (homOfLE le_top).op a)).asHom
   naturality U V i := by
     obtain ⟨U⟩ := U
     obtain ⟨V⟩ := V

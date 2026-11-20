@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.IntegralFiniteScalarModelDefinitions
 
 /-! The scalar mate identity for the normalized finite-free beta.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-mate)
 -/
 
 @[expose] public noncomputable section
@@ -37,7 +36,7 @@ private theorem conjugate_pushHom
     (e : F₂ ⋙ R₂ ≅ R₁ ⋙ F₁) (θ : F₁ ⋙ L₂ ≅ L₁ ⋙ F₂)
     (hθ : θ.hom = Adjunction.pushHomOfComapIso a₁ a₂ e) :
     conjugateEquiv (a₁.comp b₂) (b₁.comp a₂) θ.hom =
-      (mateEquiv b₂ b₁ (TwoSquare.mk _ _ _ _ e.inv)).natTrans := by
+      (mateEquiv b₂ b₁ (TwoSquare.mk _ _ _ _ e.inv)) := by
   have hm : mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ θ.hom) =
       TwoSquare.mk _ _ _ _ e.inv := by
     rw [hθ]
@@ -59,7 +58,7 @@ private theorem mate_adjunct
   have hu := unit_mateEquiv adj adj' s M
   dsimp only [Functor.id_obj] at hu
   rw [← Category.assoc, ← hu, Category.assoc]
-  have hn := (mateEquiv adj adj' s).natTrans.naturality v
+  have hn := (mateEquiv adj adj' s).naturality v
   dsimp only [Functor.comp_map] at hn
   rw [← hn, ← Category.assoc, ← G.map_comp]
 
@@ -71,7 +70,7 @@ private theorem scalar_projection
     (adj : L ⊣ R) (adj' : L' ⊣ R')
     (s : L' ⋙ V' ≅ V ⋙ L) (θ : L ⋙ E' ≅ E ⋙ L')
     (d : R' ⋙ V ≅ V' ⋙ R)
-    (hd : d.hom = (mateEquiv adj' adj (TwoSquare.mk _ _ _ _ s.inv)).natTrans)
+    (hd : d.hom = (mateEquiv adj' adj (TwoSquare.mk _ _ _ _ s.inv)))
     {BY : A} {BX : C} (βY : tensorLeft BY ≅ E ⋙ V) (βX : tensorLeft BX ≅ E' ⋙ V')
     (μ : ∀ M N : A, L.obj (M ⊗ N) ⟶ L.obj M ⊗ L.obj N) (e : L.obj BY ≅ BX)
     (hpull : ∀ M : A,
@@ -85,7 +84,7 @@ private theorem scalar_projection
     (θ.inv.app (R.obj K) ≫ E'.map (adj.counit.app K))
   change adj.homEquiv _ _
       (s.inv.app (E.obj (R.obj K)) ≫ V'.map _) =
-    V.map _ ≫ (mateEquiv adj' adj (TwoSquare.mk _ _ _ _ s.inv)).natTrans.app
+    V.map _ ≫ (mateEquiv adj' adj (TwoSquare.mk _ _ _ _ s.inv)).app
       (E'.obj K) at ht
   rw [hd]
   slice_lhs 2 3 => rw [← ht]
@@ -105,19 +104,10 @@ private theorem scalar_projection
   exact (tensorHom_comp_whiskerLeft e.hom (𝟙 _) (adj.counit.app K)).trans
     (by rw [Category.id_comp])
 
-set_option maxHeartbeats 500000 in
 -- Instantiating the generic mate calculation compares large derived-functor interfaces.
 /--
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, formal-properties
-paragraphs. This is the mate step after the normalized construction and its
+This is the mate step after the normalized construction and its
 pullback square have been supplied.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-mate)
-
-Proof: transport the normalized section adjunctions through coefficient change.
-The ring-sheaf change-adjunction identity rewrites the restricted scalar mate.
-Substituting the pullback square and using beta naturality at the geometric
-counit yields exactly the scalar-first projection arrow.
 -/
 theorem finiteFreeScalarDerivedComparison_beta_mate
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
@@ -148,7 +138,7 @@ theorem finiteFreeScalarDerivedComparison_beta_mate
   let d := derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f
   have hd : (restrictionPush D a f).hom =
       (mateEquiv (geometricAdjunction Λ' f) (geometricAdjunction Λ f)
-        (TwoSquare.mk _ _ _ _ d.inv)).natTrans :=
+        (TwoSquare.mk _ _ _ _ d.inv)) :=
     conjugate_pushHom (scalarAdjunction a Y) (scalarAdjunction a X)
       (geometricAdjunction Λ f) (geometricAdjunction Λ' f) d (D.theta a f)
       (D.thetaNormalization a f)

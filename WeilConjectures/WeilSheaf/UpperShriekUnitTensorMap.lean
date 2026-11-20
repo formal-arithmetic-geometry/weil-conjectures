@@ -63,8 +63,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [HasUpperShriek k₀ l f]
 
 /-- **The co-projection map of Weil complexes lies over the geometric one** (blueprint:
-`thm-pur-weil-equivariance-of-purity-and-trace`, the Weil equivariance of the map
-`φ_{f,K} : Lf^* K ⊗ ω_f ⟶ Rf^! K` of `pur9-cs-def-phi`, at the coefficient stage `ℚ̄_ℓ`): for a
+`proposition-purity-trace-commute-frobenius`, the Weil equivariance of the map
+`φ_{f,K} : Lf^* K ⊗ ω_f ⟶ Rf^! K` of `prose-09-07`, at the coefficient stage `ℚ̄_ℓ`): for a
 separated morphism of finite type `f : X ⟶ Y` of separated `k₀`-schemes of finite type, there is
 a morphism of Weil complexes `f^* L ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! L`, natural in `L`, which on the geometric
 fibre `X̄` is the geometric co-projection map `f̄^* L̄ ⊗ Rf̄^! ℚ̄_ℓ ⟶ Rf̄^! L̄`
