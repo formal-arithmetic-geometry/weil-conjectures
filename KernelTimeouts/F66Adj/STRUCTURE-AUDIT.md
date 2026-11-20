@@ -80,3 +80,22 @@ interface is held completely fixed.
 The expensive conversion begins exactly when the `Over.left`-bearing proof
 proposition is supplied. A direct restriction proof makes that same application
 cheap even though other concrete instance differences remain.
+## Round 2 and v2 addendum
+
+Fresh diagnostics give 3.73 s wall (2.82 s user, 2.87 GB peak RSS) for aligned restriction and 119.54 s wall (118.21 s user, 12.68 GB peak RSS) for restored original HR. Argument 39 and the theorem consumer are unchanged.
+
+### STRUCTURE EXPOSURE AND AMPLIFICATION ADDENDUM
+
+**A. MISMATCH SEMANTICS.** The first material difference is Over.left (Over.mk f.left) versus local X. It is syntactic and dependent; direct restriction is a causal control. This is one argument trigger, not seven equal costs.
+
+**B. EXPOSURE.** The boundary is the instantiated proposition for hR. Visible nodes include Over/Comma data, derived-category module objects, seven-fold composition, image/restriction functors, and NatTrans applications. Prefix timing and downstream functor/additive counters make the proposition actually expensive; individual composition fields remain inferred.
+
+**C. COST MECHANISM.** Argument 39 is a reduction-heavy dominant inclusive cost. Original/restored is 119.54 s; aligned is 3.73 s. Later full handoff is separate.
+
+**D. FIXED-TRIGGER ABLATION.** Invalid: Over.left is the trigger inside the dependent proof type, so independent abstraction changes argument 39. Direct restriction and restored original are the valid controls.
+
+**E. REDUCTION-PATH AUDIT.** Over.left is an abbrev exposing Comma.left; counterpart is local X. Outer equality and composition heads match until this ordinary application. Direct restriction changes the major premise; internal order is inferred.
+
+**F. MISMATCH PROVENANCE.** imageRestriction_counit applied to Over.mk f.left produces the actual proof; direct restriction produces the expected one at X. Dependent instantiation at argument 39 makes the split relevant. Wrapper, zeta, and simp are not the source.
+
+**G. CONCLUSION.** P1, evidence level 2. Reversible 119.54 s to 3.73 s control is strongest. Remaining monoidal leaf prevents full attribution. A typed seven-fold-composition ablation preserving Over is the next falsifier.
