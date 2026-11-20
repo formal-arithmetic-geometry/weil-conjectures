@@ -14,9 +14,12 @@ public import WeilConjectures.TraceFormula.Specialization.ZeroSectionVanishing
 For a separated `k`-scheme `X` of finite type, a closed subscheme `i : Z = V(I) ⟶ X` and a bounded
 constructible `ℚ̄_ℓ`-complex `L` on `X` with `Li^* L = 0`, the restriction `Le^* Sp_{X,Z}(L)` of
 the specialization to the zero section `e` of the normal cone vanishes
-(`ProEtale.CondensedRing.isZero_upperStar_nearbyCycles_deformationModel_of_isZero`, blueprint
-`theorem-verdier-s-theorem-specialization-zero--2`). It follows from the invertibility of the
-zero-section map `ε_{X,Z}(L) : Le^* Sp_{X,Z}(L) ⟶ Ψ_{Z × S}(Li^* L)`
+(`ProEtale.CondensedRing.isZero_upperStar_nearbyCycles_deformationModel_of_isZero`).
+
+## Implementation details
+
+This follows from the invertibility of the zero-section map
+`ε_{X,Z}(L) : Le^* Sp_{X,Z}(L) ⟶ Ψ_{Z × S}(Li^* L)`
 (`ProEtale.CondensedRing.isIso_zeroSectionMap`).
 
 -/
@@ -38,10 +41,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
   (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-/-- **Verdier's theorem, vanishing on the zero section** (blueprint
-`theorem-verdier-s-theorem-specialization-zero--2`): for a closed subscheme `i : Z = V(I) ⟶ X`
-and a bounded constructible complex `L` on `X`, if `Li^* L = 0` then the restriction
-`Le^* Sp_{X,Z}(L)` of the specialization to the normal cone to its zero section
+/-- **Verdier's theorem, vanishing on the zero section**: for a closed subscheme
+`i : Z = V(I) ⟶ X` and a bounded constructible complex `L` on `X`, if `Li^* L = 0` then
+the restriction `Le^* Sp_{X,Z}(L)` of the specialization to the normal cone to its zero section
 `e : Z ⊗ k' ⟶ N_Z X ⊗ k'` vanishes. -/
 theorem isZero_upperStar_nearbyCycles_deformationModel_of_isZero (I : X.left.IdealSheafData)
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)

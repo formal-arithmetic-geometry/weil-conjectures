@@ -129,9 +129,9 @@ theorem isZero_specializationDefect_polyAffineThickOrigin_biproduct_unit_padicAl
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [DiscreteTopology T]
   [Finite T]
 
-/-- **The thick origin for a finite free module, with finite coefficients** (blueprint
-`lemma-case-z-v-x-m`, for `M = T^J` with `J` finite and `T` a finite ring killed by a power of a
-prime `ℓ ≠ char k'`): for `m ≥ 1`, the defect `C_{𝔸¹, V(x^m)}(⨁_J T̲)` vanishes. -/
+/-- **The thick origin for a finite free module, with finite coefficients** (for
+`M = T^J` with `J` finite and `T` a finite ring killed by a power of a prime `ℓ ≠ char k'`): for
+`m ≥ 1`, the defect `C_{𝔸¹, V(x^m)}(⨁_J T̲)` vanishes. -/
 theorem isZero_specializationDefect_polyAffineThickOrigin_biproduct_unit_finiteCoefficient
     {n : ℕ} (hT : (ℓ : T) ^ n = 0) {m : ℕ} (hm : 0 < m) (J : Type*) [Finite J] :
     IsZero (specializationDefect (polyAffine k 1) (polyAffineThickOrigin k m) k'

@@ -40,8 +40,7 @@ variable {T T' : Type} [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
   [DiscreteTopology T'] [Finite T'] (ρ : T →+* T') (Y : Scheme.{u})
 
 /-- The pro-étale pullback of the constant étale sheaf commutes with restriction of scalars along
-`ρ`: both functors are left adjoint to `F ↦ coextend Γ(Y, F)`, the global sections over the
-terminal étale scheme being computed in the same way on both sides. -/
+`ρ`. -/
 noncomputable def constantSheafCompComparisonUpperStarRestrictScalarsIso :
     ModuleCat.restrictScalars ρ.ulift ⋙
         constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} T)) ⋙

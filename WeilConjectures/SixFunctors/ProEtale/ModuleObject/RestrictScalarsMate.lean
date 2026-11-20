@@ -46,8 +46,8 @@ variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* 
   {L : A ⥤ B} {R : B ⥤ A} (adj : L ⊣ R) {G : A ⥤ C} {H : B ⥤ D} {R' : D ⥤ C}
 
 /-- A natural transformation `β : R ⋙ G ⟶ H ⋙ R'` out of a composite with a right adjoint `R` is
-determined by its components at the objects `L (R N)`: `β_N = G(η_{R N}) ≫ β_{L R N} ≫ R'(H ε_N)`,
-by naturality and the triangle identity. -/
+determined by its components at the objects `L (R N)`:
+`β_N = G(η_{R N}) ≫ β_{L R N} ≫ R'(H ε_N)`. -/
 lemma app_eq_map_unit_comp_app_comp_map_counit (β : R ⋙ G ⟶ H ⋙ R') (N : B) :
     β.app N = G.map (adj.unit.app (R.obj N)) ≫ β.app (L.obj (R.obj N)) ≫
       R'.map (H.map (adj.counit.app N)) := by
@@ -101,7 +101,7 @@ lemma rightDerivedLowerStarComapIso_hom_eq_mateEquiv :
     (rightDerivedLowerStarComapIso a f).hom =
       (mateEquiv (derivedUpperStarLowerStarAdjunction Λ' f)
         (derivedUpperStarLowerStarAdjunction Λ f)
-        (derivedComapLeftDerivedUpperStarIso a f).hom).natTrans := by
+        (derivedComapLeftDerivedUpperStarIso a f).hom) := by
   rw [← mateEquiv_derivedUpperStarExtendScalarsIso_hom, iterated_mateEquiv_conjugateEquiv]
   rfl
 
@@ -109,7 +109,7 @@ lemma rightDerivedLowerStarComapIso_hom_eq_mateEquiv :
 instance isIso_mateEquiv_derivedComapLeftDerivedUpperStarIso_hom :
     IsIso (mateEquiv (derivedUpperStarLowerStarAdjunction Λ' f)
       (derivedUpperStarLowerStarAdjunction Λ f)
-      (derivedComapLeftDerivedUpperStarIso a f).hom).natTrans := by
+      (derivedComapLeftDerivedUpperStarIso a f).hom) := by
   rw [← rightDerivedLowerStarComapIso_hom_eq_mateEquiv]
   infer_instance
 

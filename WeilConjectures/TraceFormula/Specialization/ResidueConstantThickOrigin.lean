@@ -17,7 +17,7 @@ import WeilConjectures.Tactic.ExactModProofs
 
 Let `T` be a finite discrete commutative ring killed by a power of a prime `ℓ ≠ char k'`, for
 instance the residue field `𝔽_E` of a finite extension `E` of `ℚ_ℓ`. This file proves the thick
-origin (blueprint `lemma-case-z-v-x-m--1`) with coefficients `T̲`: for `m ≥ 1`, the defect
+origin with coefficients `T̲`: for `m ≥ 1`, the defect
 `C_{𝔸¹, V(x^m)}(T̲)` of the constant complex vanishes
 (`ProEtale.CondensedRing.isZero_specializationDefect_polyAffineThickOrigin_unit_finiteCoefficient`).
 

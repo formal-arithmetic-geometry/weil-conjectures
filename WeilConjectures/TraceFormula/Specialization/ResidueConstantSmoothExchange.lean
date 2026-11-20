@@ -190,7 +190,7 @@ lemma boundedConstructible_leftDerivedUpperStar_obj_leftDerivedUpperStar_obj_uni
     (boundedConstructible_leftDerivedUpperStar_obj_unit Λ f)
 
 /-- **Smooth pullback of the vanishing of the defect of the unit, with finite coefficients** (the
-smooth exchange step of blueprint `lemma-vanishing-generic-points-principal-divisor`): let `f : X ⟶ X₀` be smooth,
+smooth exchange step): let `f : X ⟶ X₀` be smooth,
 `Z₀ = V(I₀) ⊆ X₀` and `Z = f⁻¹ Z₀`. If `C_{X₀,Z₀}(T̲) = 0`, then `C_{X,Z}(T̲) = 0`, for a finite
 coefficient ring `T` killed by a power of `ℓ ≠ char k'`. The smooth exchanges of the deformations
 of `f` and of `f_Z` are invertible at the unit

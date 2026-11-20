@@ -16,7 +16,7 @@ correspondence `c'` with fixed locus `F'`
 (`ProEtale.CondensedRing.Correspondence.TraceSpecialization`), and put `K' = Ψ_X K`. Given the
 pullback exchange `α_{c₂} : Lc₂'^* Ψ_X ⟶ Ψ_C Lc₂^*` and the exceptional exchange
 `β_{c₁} : Ψ_C Rc₁^! ⟶ Rc₁'^! Ψ_X`, the coefficient map `u : Lc₂^* K ⟶ Rc₁^! K` of `c` specializes
-to the composite (blueprint `proposition-specialization-trace-class--1`)
+to the composite
 ```
 u_s : Lc₂'^* K' --α_{c₂}--> Ψ_C Lc₂^* K --Ψ_C u--> Ψ_C Rc₁^! K --β_{c₁}--> Rc₁'^! K'
 ```
@@ -49,9 +49,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime]
   {c : Correspondence ℓ K} {F : c.FixedLocus} {c' : Correspondence ℓ K'} {F' : c'.FixedLocus}
   (T : c.TraceSpecialization F c' F')
 
-/-- The *specialized coefficient map* (blueprint `proposition-specialization-trace-class--1`):
-for `K' = Ψ_X K`, the pullback exchange `α_{c₂} : Lc₂'^* Ψ_X ⟶ Ψ_C Lc₂^*` and the exceptional
-exchange `β_{c₁} : Ψ_C Rc₁^! ⟶ Rc₁'^! Ψ_X`, the composite
+/-- The *specialized coefficient map*: for `K' = Ψ_X K`, the pullback exchange
+`α_{c₂} : Lc₂'^* Ψ_X ⟶ Ψ_C Lc₂^*` and the exceptional exchange `β_{c₁} : Ψ_C Rc₁^! ⟶ Rc₁'^! Ψ_X`,
+the composite
 `u_s = β_{c₁} ∘ Ψ_C(u) ∘ α_{c₂} : Lc₂'^* K' ⟶ Rc₁'^! K'` of the coefficient map `u` of `c`. -/
 noncomputable def specializedCoeff
     (α : T.ΨX ⋙ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c'.c₂ ⟶

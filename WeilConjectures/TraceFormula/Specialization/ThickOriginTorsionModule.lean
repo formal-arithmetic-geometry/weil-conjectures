@@ -16,9 +16,11 @@ public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 # The thick origin for every finite module over a finite `ℓ`-torsion ring
 
 Let `X = 𝔸¹_k` and `Z = V(x^m)` with `m ≥ 1`, and let `T` be a finite commutative ring killed by a
-power of a prime `ℓ ≠ char k'`. Blueprint `lemma-case-z-v-x-m--1` asserts that the defect
-`C_{X,Z}(M_X)` of the constant complex of every finite `T`-module `M` vanishes
+power of a prime `ℓ ≠ char k'`. This file proves that the defect `C_{X,Z}(M_X)` of the constant
+complex of every finite `T`-module `M` vanishes
 (`ProEtale.CondensedRing.isZero_specializationDefect_polyAffineThickOrigin_finiteModule`).
+
+## Implementation details
 
 The proof is a dévissage. The complexes with vanishing defect form a triangulated subcategory,
 and short exact sequences of `T`-modules give distinguished triangles of constant complexes
@@ -56,8 +58,7 @@ variable {k : Type u} [Field k] (X : Over (Spec (.of k))) (I : X.left.IdealSheaf
   (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The zero-section map `ε_{X,Z}(L)` is invertible if and only if the pullback exchange of the
-morphism of models `Z × S ⟶ 𝒟_Z X` is invertible at `L`: the former is by definition a
-component of the latter. -/
+morphism of models `Z × S ⟶ 𝒟_Z X` is invertible at `L`. -/
 lemma isIso_zeroSectionMap_iff
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj Λ X.left))) :
@@ -75,8 +76,7 @@ variable {k : Type u} [Field k] (k' : Type u) [Field k'] [Algebra k k'] [IsSepCl
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Finite T] in
 /-- **Restriction of scalars of a vanishing defect**: for a morphism `ρ : T →+* T'` of finite
 coefficient rings, if the defect `C_{X,Z}(T'̲)` of the unit with coefficients `T'` vanishes, then
-so does the defect of its restriction of scalars to `T`. The zero-section map is a pullback
-exchange of nearby cycles, whose invertibility is preserved by restriction of scalars. -/
+so does the defect of its restriction of scalars to `T`. -/
 theorem isZero_specializationDefect_comap_unit (X : Over (Spec (.of k)))
     (I : X.left.IdealSheafData) {T' : Type} [TopologicalSpace T'] [CommRing T']
     [IsTopologicalRing T'] [DiscreteTopology T'] [Finite T'] (ρ : T →+* T')
@@ -146,12 +146,9 @@ theorem isZero_specializationDefect_polyAffineThickOrigin_quotient {n : ℕ}
     ((finiteCoefficientConstantFunctorObjComapIso ρ (polyAffine k 1).left).symm ≪≫
       (finiteCoefficientConstantFunctor T (polyAffine k 1).left).mapIso e.symm) h₂
 
-/-- **The case `Z = V(x^m) ⊆ 𝔸¹`** (blueprint `lemma-case-z-v-x-m--1`): let `T` be a finite
-commutative ring killed by a power `ℓ^n` of a prime `ℓ ≠ char k'`. For `X = 𝔸¹_k`,
-`Z = V(x^m)` with `m ≥ 1` and every finite `T`-module `M`, the defect `C_{X,Z}(M_X)` of the
-constant complex `M_X` vanishes. By dévissage along a composition series of `M`, it suffices to
-treat the residue fields of `T`
-(`isZero_specializationDefect_polyAffineThickOrigin_quotient`). -/
+/-- **The case `Z = V(x^m) ⊆ 𝔸¹`**: let `T` be a finite commutative ring killed by a power `ℓ^n`
+of a prime `ℓ ≠ char k'`. For `X = 𝔸¹_k`, `Z = V(x^m)` with `m ≥ 1` and every finite `T`-module
+`M`, the defect `C_{X,Z}(M_X)` of the constant complex `M_X` vanishes. -/
 theorem isZero_specializationDefect_polyAffineThickOrigin_finiteModule {n : ℕ}
     (hT : (ℓ : T) ^ n = 0) {m : ℕ} (hm : 0 < m) (M : ModuleCat.{u + 1} (ULift.{u + 1} T))
     [Module.Finite (ULift.{u + 1} T) M] :

@@ -15,20 +15,23 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.RestrictScalarsM
 # Nearby cycles and restriction of scalars
 
 Let `a : Λ ⟶ Λ'` be a morphism of commutative condensed rings, not necessarily flat, and write
-`Res = D(Res_a)` for the levelwise restriction of scalars. For a model `M = (𝒳, j, i, ε)` of `X`,
-the nearby cycles `Ψ = Li^* Rj_* Lε^*` commute with `Res`: the derived pullbacks and the derived
-pushforwards do, for every coefficient change
-(`ProEtale.CondensedRing.derivedComapLeftDerivedUpperStarIso`,
-`ProEtale.CondensedRing.rightDerivedLowerStarComapIso`), which gives an isomorphism
-`Res Ψ^{Λ'}(A) ≅ Ψ^Λ(Res A)` (`NearbyCyclesModel.comapComparison`).
+`Res = D(Res_a)` for the levelwise restriction of scalars. For a morphism of models `φ : M ⟶ N`,
+if the pullback exchange `α_φ : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` with coefficients `Λ'` is invertible at
+`A`, then the pullback exchange with coefficients `Λ` is invertible at `Res A`
+(`ProEtale.CondensedRing.NearbyCyclesModel.Hom.isIso_pullbackExchange_app_comap`). This transports
+results proved for the unit with coefficients `Λ'` to the restriction of scalars of the unit with
+coefficients `Λ`, for instance from the residue field `T ⧸ 𝔪` of a finite coefficient ring `T`
+to `T`.
 
-These isomorphisms are compatible with the pullback exchanges `α_φ : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` of a
-morphism of models `φ` (`NearbyCyclesModel.Hom.comap_map_pullbackExchange_app`). Hence, if the
-pullback exchange with coefficients `Λ'` is invertible at `A`, then the pullback exchange with
-coefficients `Λ` is invertible at `Res A`
-(`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_comap`). This transports results proved for
-the unit with coefficients `Λ'` to the restriction of scalars of the unit with coefficients `Λ`,
-for instance from the residue field `T ⧸ 𝔪` of a finite coefficient ring `T` to `T`.
+## Implementation details
+
+`Res` commutes with the derived pullbacks and the derived pushforwards, for every coefficient
+change (`ProEtale.CondensedRing.derivedComapLeftDerivedUpperStarIso`,
+`ProEtale.CondensedRing.rightDerivedLowerStarComapIso`), and carries `α_φ` with coefficients `Λ'`
+to `α_φ` with coefficients `Λ` up to these commutations (`CategoryTheory.map_exchange_comp_eq`).
+The cube conditions are `ProEtale.CondensedRing.derivedComapLeftDerivedUpperStarIso_cube` and its
+mate, and the commutation with `Rj_*` is invertible by
+`ProEtale.CondensedRing.rightDerivedLowerStarComapIso_hom_eq_mateEquiv`.
 
 -/
 
@@ -109,12 +112,7 @@ set_option maxHeartbeats 1000000 in
 /-- **Restriction of scalars of an invertible pullback exchange**: for a morphism of models
 `φ : M ⟶ N`, if the pullback exchange `α_φ : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` with coefficients `Λ'` is
 invertible at `A`, then the pullback exchange with coefficients `Λ` is invertible at the
-restriction of scalars `Res A`. Indeed, `Res` carries `α_φ` with coefficients `Λ'` to `α_φ` with
-coefficients `Λ`, up to the commutations of `Res` with the derived pullbacks and pushforwards
-(`CategoryTheory.map_exchange_comp_eq`); the cube conditions are
-`ProEtale.CondensedRing.derivedComapLeftDerivedUpperStarIso_cube` and its mate, and the
-commutation with `Rj_*` is invertible by
-`ProEtale.CondensedRing.rightDerivedLowerStarComapIso_hom_eq_mateEquiv`. -/
+restriction of scalars `Res A`. -/
 theorem Hom.isIso_pullbackExchange_app_comap (φ : M.Hom N f f')
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ' Y)))
@@ -131,12 +129,12 @@ theorem Hom.isIso_pullbackExchange_app_comap (φ : M.Hom N f f')
   have := isIso_app_of_map_exchange (pullbackSquareComparison Λ' φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ' N.j)
       (derivedUpperStarLowerStarAdjunction Λ' M.j)
-      (pullbackSquareComparison Λ' φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ' φ.commSq_j).hom)
     (pullbackSquareComparison Λ' φ.commSq_ε).hom
     (pullbackSquareComparison Λ φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     (pullbackSquareComparison Λ φ.commSq_ε).hom
     (derivedComapLeftDerivedUpperStarIso a f').symm
     (derivedComapLeftDerivedUpperStarIso a N.i).symm
@@ -148,10 +146,10 @@ theorem Hom.isIso_pullbackExchange_app_comap (φ : M.Hom N f f')
     (derivedComapLeftDerivedUpperStarIso a f).symm
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ' N.j)
       (derivedUpperStarLowerStarAdjunction Λ N.j)
-      (derivedComapLeftDerivedUpperStarIso a N.j).hom).natTrans
+      (derivedComapLeftDerivedUpperStarIso a N.j).hom)
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ' M.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (derivedComapLeftDerivedUpperStarIso a M.j).hom).natTrans
+      (derivedComapLeftDerivedUpperStarIso a M.j).hom)
     (derivedComapLeftDerivedUpperStarIso_cube a φ.commSq_i) hβ
     (derivedComapLeftDerivedUpperStarIso_cube a φ.commSq_ε)
     (φ.pullbackExchange Λ') rfl (φ.pullbackExchange Λ) rfl A h
