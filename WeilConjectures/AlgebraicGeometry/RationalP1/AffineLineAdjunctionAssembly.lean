@@ -87,7 +87,9 @@ private theorem selectNormalizedArrow
   obtain ⟨e, he⟩ := select a b c d h
   exact ⟨e, a, b, c, d, h, he⟩
 
-@[irreducible] private noncomputable def diagonalLocalizations (ℓ : ℕ) [Fact ℓ.Prime]
+/-- The derived categories and `Ext` groups used by the diagonal tower over `X`, all coming from
+the Grothendieck abelian structures in the coefficient universe. -/
+@[irreducible, no_expose] noncomputable def diagonalLocalizations (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) : DiagonalTraceLocalizations ℓ X := by
   letI : IsGrothendieckAbelian.{u + 1} (DiagonalCompleted ℓ X) :=
     SheafOfModules.isGrothendieckAbelian_coefficientUniverse _
@@ -171,10 +173,15 @@ theorem rationalP1_adjunction_assembly
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
-    [IsSeparated (Y ↘ Spec (.of k))]
-    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)] :
+    [IsSeparated (Y ↘ Spec (.of k))] :
     Nonempty (push ℓ c k (ringChar k) (Fact.out : ringChar k ≠ ℓ) Y ⊣
       exceptional ℓ c k (ringChar k) (Fact.out : ringChar k ≠ ℓ) Y) := by
+  have : IsNoetherian Y := isNoetherian_of_locallyOfFiniteType (Y ↘ Spec (.of k))
+  have : IsNoetherian (ProjectiveLine Y) :=
+    isNoetherian_of_locallyOfFiniteType (ProjectiveLine Y ↘ Y)
+  have : IsNoetherian (diagonalSurface Y) :=
+    isNoetherian_of_locallyOfFiniteType
+      (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))
   let := diagonalLocalizations ℓ Y
   let := diagonalLocalizations ℓ (ProjectiveLine Y)
   let := diagonalLocalizations ℓ (diagonalSurface Y)

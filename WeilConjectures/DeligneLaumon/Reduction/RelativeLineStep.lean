@@ -33,8 +33,8 @@ The stratification itself (`AlgebraicGeometry.WeilSheaf.HasRelativeLineStratific
 - `AlgebraicGeometry.WeilSheaf.HasRelativeLineStratification.isMixedOfWeightsAtMost`: the weight
   bound on a stratified sheaf.
 - `AlgebraicGeometry.hasDirectImageWeightBound_affineLine` and
-  `AlgebraicGeometry.hasDirectImageComplexWeightBound_affineLine`: blueprint
-  `proposition-relative-affine-line--1`, in its sheaf and its complex form.
+  `AlgebraicGeometry.hasDirectImageComplexWeightBound_affineLine`: the weight bound for the
+  projection of the relative affine line, for sheaves and for complexes.
 - `AlgebraicGeometry.hasDirectImageWeightBound_iteratedAffineLineProj`: the bound for the
   projection of the iterated relative affine line.
 
@@ -104,8 +104,7 @@ variable {S : Scheme.{u}} [S.Over (Spec (CommRingCat.of k₀))]
 variable (S) in
 /-- For the projection `p : 𝔸¹_S ⟶ S` of the relative affine line over a separated `k₀`-scheme
 of finite type and a Weil sheaf `F` on `𝔸¹_S` mixed of weights at most `w`, the sheaf `Rʳp₀!F` is
-mixed of weights at most `w + r`, for every `r` (blueprint: `proposition-relative-affine-line--1`,
-sheaf form).
+mixed of weights at most `w + r`, for every `r`.
 
 The weight filtration of `F` and the long exact sequences of `Rp₀!` reduce to a punctually pure
 graded piece, which has a relative-line stratification
