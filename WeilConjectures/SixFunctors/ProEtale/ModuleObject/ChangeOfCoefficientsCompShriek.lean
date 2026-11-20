@@ -72,13 +72,13 @@ lemma comapUpperStarIso_hom_app_of_comp_eq (hc : a ≫ b = c)
     (TwoSquare.mk _ _ _ _ (comapUpperStarIso a f).inv)
     (TwoSquare.mk _ _ _ _ (comapUpperStarIso c f).inv) (fun K => by
       rw [comapUpperStarIso_mate, comapUpperStarIso_mate, comapUpperStarIso_mate]
-      dsimp only [TwoSquare.natTrans, TwoSquare.mk]
+      dsimp only [TwoSquare.mk]
       rw [comapLowerStarIso_hom_app_of_comp_eq a b c f hc K]
       simp only [Iso.symm_hom, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
       erw [CategoryTheory.Functor.map_id]
       dsimp only [Functor.comp_obj]
       simp only [Category.comp_id]) N
-  dsimp only [TwoSquare.natTrans, TwoSquare.mk, Iso.symm_hom] at hm
+  dsimp only [TwoSquare.mk, Iso.symm_hom] at hm
   rw [← cancel_epi ((comapUpperStarIso c f).inv.app N), Iso.inv_hom_id_app_assoc,
     reassoc_of% hm]
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
@@ -240,12 +240,12 @@ theorem mateEquiv_inv_derivedLowerShriekHom_comp_app (hc : a ≫ b = c)
     [IsIso (derivedLowerShriekHom a f)] [IsIso (derivedLowerShriekHom b f)]
     [IsIso (derivedLowerShriekHom c f)]
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
-    (mateEquiv adj adj'' (TwoSquare.mk _ _ _ _ (inv (derivedLowerShriekHom c f)))).natTrans.app K =
+    (mateEquiv adj adj'' (TwoSquare.mk _ _ _ _ (inv (derivedLowerShriekHom c f)))).app K =
       (Mod.derivedExtendScalarsCompIso (coefficientMap a X) (coefficientMap b X)
           (coefficientMap c X) (coefficientMap_comp_eq a b c hc X)).hom.app (UΛ.obj K) ≫
         L(Mod.extendScalars (coefficientMap b X)).map ((mateEquiv adj adj'
-          (TwoSquare.mk _ _ _ _ (inv (derivedLowerShriekHom a f)))).natTrans.app K) ≫
-        (mateEquiv adj' adj'' (TwoSquare.mk _ _ _ _ (inv (derivedLowerShriekHom b f)))).natTrans.app
+          (TwoSquare.mk _ _ _ _ (inv (derivedLowerShriekHom a f)))).app K) ≫
+        (mateEquiv adj' adj'' (TwoSquare.mk _ _ _ _ (inv (derivedLowerShriekHom b f)))).app
           (L(Mod.extendScalars (coefficientMap a Y)).obj K) ≫
         UΛ''.map ((Mod.derivedExtendScalarsCompIso (coefficientMap a Y) (coefficientMap b Y)
           (coefficientMap c Y) (coefficientMap_comp_eq a b c hc Y)).inv.app K) := by

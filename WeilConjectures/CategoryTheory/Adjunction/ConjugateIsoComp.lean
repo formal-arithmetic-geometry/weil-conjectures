@@ -163,19 +163,19 @@ are the 2-squares themselves:
 lemma compCoherence_of_mateEquiv_app_comp
     (cG : Gpq ≅ Gq ⋙ Gp) (cH : Hpq ≅ Hq ⋙ Hp) (aq : TwoSquare Gq LZ LY Hq)
     (ap : TwoSquare Gp LY LX Hp) (apq : TwoSquare Gpq LZ LX Hpq)
-    (h : ∀ K, (mateEquiv adjZ adjX apq).natTrans.app K ≫ RX.map (cH.hom.app K) =
-      cG.hom.app (RZ.obj K) ≫ Gp.map ((mateEquiv adjZ adjY aq).natTrans.app K) ≫
-        (mateEquiv adjY adjX ap).natTrans.app (Hq.obj K)) (M : AZ) :
-    apq.natTrans.app M ≫ cH.hom.app (LZ.obj M) =
-      LX.map (cG.hom.app M) ≫ ap.natTrans.app (Gq.obj M) ≫ Hp.map (aq.natTrans.app M) := by
+    (h : ∀ K, (mateEquiv adjZ adjX apq).app K ≫ RX.map (cH.hom.app K) =
+      cG.hom.app (RZ.obj K) ≫ Gp.map ((mateEquiv adjZ adjY aq).app K) ≫
+        (mateEquiv adjY adjX ap).app (Hq.obj K)) (M : AZ) :
+    apq.app M ≫ cH.hom.app (LZ.obj M) =
+      LX.map (cG.hom.app M) ≫ ap.app (Gq.obj M) ≫ Hp.map (aq.app M) := by
   have key : (mateEquiv adjZ adjX
-      (TwoSquare.mk _ _ _ _ (apq.natTrans ≫ Functor.whiskerLeft LZ cH.hom))).natTrans =
+      (TwoSquare.mk _ _ _ _ (apq ≫ Functor.whiskerLeft LZ cH.hom))) =
       (mateEquiv adjZ adjX (TwoSquare.mk _ _ _ _
-        (Functor.whiskerRight cG.hom LX ≫ (aq ≫ₕ ap).natTrans))).natTrans := by
+        (Functor.whiskerRight cG.hom LX ≫ (aq ≫ₕ ap)))) := by
     rw [mateEquiv_comp_whiskerLeft, mateEquiv_whiskerRight_comp, mateEquiv_vcomp adjZ adjY adjX]
     ext K
     simpa [TwoSquare.vComp] using h K
-  have key' := congr_arg (fun s : TwoSquare Gpq LZ LX (Hq ⋙ Hp) => s.natTrans.app M)
+  have key' := congr_arg (fun s : TwoSquare Gpq LZ LX (Hq ⋙ Hp) => s.app M)
     ((mateEquiv adjZ adjX).injective key)
   simpa [TwoSquare.hComp] using key'
 
@@ -197,15 +197,15 @@ lemma mateEquiv_inv_app_comp_of_hom_app_comp (cG : Gpq ≅ Gq ⋙ Gp) (cH : Hpq 
     (eq : LZ ⋙ Hq ≅ Gq ⋙ LY) (ep : LY ⋙ Hp ≅ Gp ⋙ LX) (epq : LZ ⋙ Hpq ≅ Gpq ⋙ LX)
     (h : ∀ M, epq.hom.app M = cH.hom.app (LZ.obj M) ≫ Hp.map (eq.hom.app M) ≫
       ep.hom.app (Gq.obj M) ≫ LX.map (cG.inv.app M)) (K : BZ) :
-    (mateEquiv adjZ adjX (TwoSquare.mk _ _ _ _ epq.inv)).natTrans.app K =
+    (mateEquiv adjZ adjX (TwoSquare.mk _ _ _ _ epq.inv)).app K =
       cG.hom.app (RZ.obj K) ≫
-        Gp.map ((mateEquiv adjZ adjY (TwoSquare.mk _ _ _ _ eq.inv)).natTrans.app K) ≫
-        (mateEquiv adjY adjX (TwoSquare.mk _ _ _ _ ep.inv)).natTrans.app (Hq.obj K) ≫
+        Gp.map ((mateEquiv adjZ adjY (TwoSquare.mk _ _ _ _ eq.inv)).app K) ≫
+        (mateEquiv adjY adjX (TwoSquare.mk _ _ _ _ ep.inv)).app (Hq.obj K) ≫
         RX.map (cH.inv.app K) := by
   have hc := mateEquiv_app_comp_of_compCoherence adjZ adjY adjX cG cH
     (TwoSquare.mk _ _ _ _ eq.inv) (TwoSquare.mk _ _ _ _ ep.inv)
     (TwoSquare.mk _ _ _ _ epq.inv) (fun M => by
-      dsimp only [TwoSquare.natTrans, TwoSquare.mk]
+      dsimp only [TwoSquare.mk]
       rw [← cancel_epi (epq.hom.app M), Iso.hom_inv_id_app_assoc, h M]
       simp only [Functor.comp_obj, Category.assoc, ← LX.map_comp_assoc, Iso.inv_hom_id_app,
         Functor.map_id, Category.id_comp, Iso.hom_inv_id_app_assoc, ← Hp.map_comp,
@@ -220,10 +220,10 @@ lemma mateEquiv_inv_app_comp_of_app_comp (cG : Gpq ≅ Gq ⋙ Gp) (cH : Hpq ≅ 
     [IsIso αp] [IsIso αpq]
     (h : ∀ M, αpq.app M = cH.hom.app (LZ.obj M) ≫ Hp.map (αq.app M) ≫
       αp.app (Gq.obj M) ≫ LX.map (cG.inv.app M)) (K : BZ) :
-    (mateEquiv adjZ adjX (TwoSquare.mk _ _ _ _ (inv αpq))).natTrans.app K =
+    (mateEquiv adjZ adjX (TwoSquare.mk _ _ _ _ (inv αpq))).app K =
       cG.hom.app (RZ.obj K) ≫
-        Gp.map ((mateEquiv adjZ adjY (TwoSquare.mk _ _ _ _ (inv αq))).natTrans.app K) ≫
-        (mateEquiv adjY adjX (TwoSquare.mk _ _ _ _ (inv αp))).natTrans.app (Hq.obj K) ≫
+        Gp.map ((mateEquiv adjZ adjY (TwoSquare.mk _ _ _ _ (inv αq))).app K) ≫
+        (mateEquiv adjY adjX (TwoSquare.mk _ _ _ _ (inv αp))).app (Hq.obj K) ≫
         RX.map (cH.inv.app K) :=
   mateEquiv_inv_app_comp_of_hom_app_comp adjZ adjY adjX cG cH (asIso αq) (asIso αp) (asIso αpq)
     h K
@@ -260,9 +260,9 @@ lemma mateEquiv_inv_app_comp_conjugateIsoEquiv (ιf : Lf ⋙ TY ≅ TX ⋙ Lfₜ
     (eₜ : Lgfₜ ≅ Lfₜ ⋙ Lgₜ)
     (h : NatTrans.SquareCompatible ιgf (Functor.pasteSquareIso ιf ιg) e.hom eₜ.hom) (K : AZ) :
     TX.map ((conjugateIsoEquiv adjgf (adjf.comp adjg) e.symm).hom.app K) ≫
-        (mateEquiv adjf adjfₜ (TwoSquare.mk _ _ _ _ ιf.inv)).natTrans.app (Rg.obj K) ≫
-        Rfₜ.map ((mateEquiv adjg adjgₜ (TwoSquare.mk _ _ _ _ ιg.inv)).natTrans.app K) =
-      (mateEquiv adjgf adjgfₜ (TwoSquare.mk _ _ _ _ ιgf.inv)).natTrans.app K ≫
+        (mateEquiv adjf adjfₜ (TwoSquare.mk _ _ _ _ ιf.inv)).app (Rg.obj K) ≫
+        Rfₜ.map ((mateEquiv adjg adjgₜ (TwoSquare.mk _ _ _ _ ιg.inv)).app K) =
+      (mateEquiv adjgf adjgfₜ (TwoSquare.mk _ _ _ _ ιgf.inv)).app K ≫
         (conjugateIsoEquiv adjgfₜ (adjfₜ.comp adjgₜ) eₜ.symm).hom.app (TZ.obj K) := by
   have hS : TwoSquare.mk _ _ _ _ ιgf.inv =
       (((TwoSquare.mk _ _ _ _ ιf.inv) ≫ᵥ (TwoSquare.mk _ _ _ _ ιg.inv)).whiskerLeft
@@ -271,7 +271,7 @@ lemma mateEquiv_inv_app_comp_conjugateIsoEquiv (ιf : Lf ⋙ TY ≅ TX ⋙ Lfₜ
     have hM := h M
     simp only [Functor.pasteSquareIso_hom_app] at hM
     dsimp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
-      TwoSquare.natTrans, TwoSquare.mk]
+      TwoSquare.mk]
     simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
       Functor.comp_obj]
@@ -286,9 +286,9 @@ lemma mateEquiv_inv_app_comp_conjugateIsoEquiv (ιf : Lf ⋙ TY ≅ TX ⋙ Lfₜ
   rw [mateEquiv_conjugateEquiv_vcomp adjgf (adjfₜ.comp adjgₜ) adjgfₜ,
     conjugateEquiv_mateEquiv_vcomp adjgf (adjf.comp adjg) (adjfₜ.comp adjgₜ),
     mateEquiv_hcomp] at key
-  have keyK := NatTrans.congr_app (congr_arg TwoSquare.natTrans key) K
+  have keyK := NatTrans.congr_app key K
   dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
-    TwoSquare.natTrans, TwoSquare.mk] at keyK
+    TwoSquare.mk] at keyK
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.comp_id, Functor.comp_obj] at keyK
@@ -308,9 +308,9 @@ lemma mateEquiv_inv_app_comp_conjugateIsoEquiv' (ιf : Lf ⋙ TY ≅ TX ⋙ Lf�
     (eₜ : Lgfₜ ≅ Lfₜ ⋙ Lgₜ)
     (h : NatTrans.SquareCompatible ιgf (Functor.pasteSquareIso ιf ιg) e.hom eₜ.hom)
     {ρf : Rf ⋙ TX ⟶ TY ⋙ Rfₜ} {ρg : Rg ⋙ TY ⟶ TZ ⋙ Rgₜ} {ρgf : Rgf ⋙ TX ⟶ TZ ⋙ Rgfₜ}
-    (hρf : ρf = (mateEquiv adjf adjfₜ (TwoSquare.mk _ _ _ _ ιf.inv)).natTrans)
-    (hρg : ρg = (mateEquiv adjg adjgₜ (TwoSquare.mk _ _ _ _ ιg.inv)).natTrans)
-    (hρgf : ρgf = (mateEquiv adjgf adjgfₜ (TwoSquare.mk _ _ _ _ ιgf.inv)).natTrans)
+    (hρf : ρf = (mateEquiv adjf adjfₜ (TwoSquare.mk _ _ _ _ ιf.inv)))
+    (hρg : ρg = (mateEquiv adjg adjgₜ (TwoSquare.mk _ _ _ _ ιg.inv)))
+    (hρgf : ρgf = (mateEquiv adjgf adjgfₜ (TwoSquare.mk _ _ _ _ ιgf.inv)))
     {U : Rgf ≅ Rg ⋙ Rf} {Uₜ : Rgfₜ ≅ Rgₜ ⋙ Rfₜ}
     (hU : U = conjugateIsoEquiv adjgf (adjf.comp adjg) e.symm)
     (hUₜ : Uₜ = conjugateIsoEquiv adjgfₜ (adjfₜ.comp adjgₜ) eₜ.symm) (K : AZ) :
