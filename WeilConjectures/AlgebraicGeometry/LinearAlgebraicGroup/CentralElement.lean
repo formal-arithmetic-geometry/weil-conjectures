@@ -24,7 +24,8 @@ subquotient.
 ## Main statements
 
 * `AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_isPositiveCentralPair_and_map`:
-  blueprint `proposition-central-element-arithmetic-monodromy-group`.
+  a positive central pair `(N, z)` such that `r z` preserves every `W`-stable subspace and acts by
+  a scalar on every simple subquotient, for every polynomial homomorphism `r`.
 -/
 
 @[expose] public section
@@ -39,17 +40,13 @@ universe u v
 variable {W : Type*} [Group W] {n k : Type u} [Fintype n] [DecidableEq n] [Field k]
   [IsAlgClosed k] [CharZero k] (D : RepresentedDegreeDatum W n k)
 
-/-- **A central element of the arithmetic monodromy group** (blueprint:
-`proposition-central-element-arithmetic-monodromy-group`). Let `D` be a semisimple represented
+/-- **A central element of the arithmetic monodromy group.** Let `D` be a semisimple represented
 degree datum over an algebraically closed field `k` of characteristic zero, with monodromy
 groups `H ⊆ G` and Frobenius `F = ρ(s)`. There are `N > 0` and `z = h Fᴺ ∈ Z(G)(k)` with
-`h ∈ H(k)` (a positive central pair,
-`proposition-central-element-arithmetic-monodromy-group--1`) such that, for every homomorphism
-`r : GL n k →* GL m k` given by a `k`-algebra map `φ` of coordinate rings, `(N, r z)` is a
-positive central pair of `r ∘ ρ`, `r z` preserves every `W`-stable subspace of `kᵐ`, and `r z` acts
-by a scalar on every simple subquotient `S / U`
-(`proposition-central-element-arithmetic-monodromy-group--2`). Every tensor construction on `kⁿ`
-is a `W`-stable subquotient of such an `r ∘ ρ`, on which `z` acts through `r z`. -/
+`h ∈ H(k)` (a positive central pair) such that, for every homomorphism `r : GL n k →* GL m k`
+given by a `k`-algebra map `φ` of coordinate rings, `(N, r z)` is a positive central pair of
+`r ∘ ρ`, `r z` preserves every `W`-stable subspace of `kᵐ`, and `r z` acts by a scalar on every
+simple subquotient `S / U`. -/
 theorem exists_isPositiveCentralPair_and_map (hD : D.IsSemisimple) :
     ∃ (N : ℕ) (z : GL n k), D.IsPositiveCentralPair N z ∧
       ∀ {m : Type v} [Fintype m] [DecidableEq m] (r : GL n k →* GL m k)

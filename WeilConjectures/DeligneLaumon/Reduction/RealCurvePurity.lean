@@ -19,7 +19,7 @@ weight, and every `ι`-real lisse Weil sheaf is `ι`-mixed. The two halves are
 ## Main statements
 
 * `AlgebraicGeometry.WeilSheaf.IsReal.purity_and_isMixed`: purity of real lisse Weil sheaves on
-  curves (blueprint `theorem-purity-real-sheaves-curves`).
+  curves.
 -/
 
 @[expose] public section
@@ -38,17 +38,13 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]
 
-/-- **Purity of real lisse Weil sheaves on curves** (blueprint:
-`theorem-purity-real-sheaves-curves`). Let `C₀` be a smooth geometrically connected curve over
-`k₀` and `𝒢` an `ι`-real lisse Weil sheaf on `C₀`.
+/-- **Purity of real lisse Weil sheaves on curves.** Let `C₀` be a smooth geometrically connected
+curve over `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on `C₀`.
 
 1. Every irreducible constituent `𝒱 = 𝒢₂ / 𝒢₁` of `𝒢`, for lisse Weil subsheaves
   `𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢`, is punctually `ι`-pure of weight `γ = dw_ι(𝒱)`, its determinant weight:
-  at every closed point `x`, `rank(𝒱) γ` is the `ι`-weight of `det(F_x | 𝒱_x̄)`
-  (`theorem-purity-real-sheaves-curves--1`,
-  `AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight`).
-2. `𝒢` is `ι`-mixed (`theorem-purity-real-sheaves-curves--2`,
-  `AlgebraicGeometry.WeilSheaf.IsReal.isMixed_of_isLisse`). -/
+  at every closed point `x`, `rank(𝒱) γ` is the `ι`-weight of `det(F_x | 𝒱_x̄)`.
+2. `𝒢` is `ι`-mixed. -/
 theorem IsReal.purity_and_isMixed {𝒢 : WeilSheaf k₀ l C} (h𝒢 : 𝒢.IsLisse)
     (hreal : 𝒢.IsReal ι) :
     (∀ {𝒢₁ 𝒢₂ : WeilSheaf k₀ l C} (i : 𝒢₁ ⟶ 𝒢₂) (j : 𝒢₂ ⟶ 𝒢) [Mono i] [Mono j],
