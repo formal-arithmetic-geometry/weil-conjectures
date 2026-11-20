@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.GroupTheory.SpecificGroups.Cyclic.Basic
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic.Subgroup
 public import Mathlib.NumberTheory.Padics.PadicIntegers
 public import Mathlib.RingTheory.Nakayama
 
