@@ -22,8 +22,8 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 /-! # Cohomology models and retracts over a field
 
-Source: Weil conjectures blueprint, main-20261015, sec-trace-formula,
-sk-thm-trace-transport, first sentence of prop-trf-karoubi-independence.proof.md;
+Source: Weil conjectures blueprint, main-20261015, chap-The-trace-formula,
+theorem-trace-formula-euler-product, first sentence of prop-trf-karoubi-independence.proof.md;
 Stacks Project Tags 09FN, 09FP, 05CF and 05RU
 (blueprint: lem-trf-field-complex-cohomology-splitting).
 -/

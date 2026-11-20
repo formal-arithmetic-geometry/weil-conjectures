@@ -23,8 +23,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Exactly the two inversion witnesses needed by the four-arrow unit formula.
-Source: rational projective-line unit/counit, exchange and twisted projection
-(blueprint: def-sfb-rational-p1-unit-inversion-condition).
 This named condition keeps the derived-category instances inside its definition,
 so specializing the formula compares applications of the same constant. -/
 def UnitInversionCondition (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)

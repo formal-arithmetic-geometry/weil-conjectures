@@ -15,13 +15,14 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 /-!
 # Adjunct normal form of iterated scalar mates
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0E46,
-remark-compose-base-change, coefficient-change specialization of the omitted verification
-(blueprint: lem-pur-scalar-iterated-mates-adjunct).
-
 The exact constant-ring inverse image is represented by its canonical total left derived
 functor, as in the existing scalar/pullback comparison and scalar mate. The canonical
 `leftDerivedUpperStarIsoMapDerivedCategory` identifies it with termwise inverse image.
+
+## References
+
+* Stacks Project, Tag 0E46, coefficient-change specialization of the omitted verification
+* Stacks Project, Tag 0E46, and Categories Tag 0037
 -/
 
 @[expose] public noncomputable section
@@ -36,10 +37,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The composite-adjunction adjunct of an arbitrary arrow with the iterated scalar-mate
-endpoints: apply both pullbacks, then the s-counit, then the r-counit.
-Source: Stacks Project, Tag 0E46, remark-compose-base-change, and Categories Tag 0037;
-the composite counit is `CategoryTheory.Adjunction.comp_counit_app`
-(blueprint: lem-pur-scalar-iterated-mates-adjunct). -/
+endpoints: apply both pullbacks, then the s-counit, then the r-counit. -/
 def scalarIteratedAdjunct
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {X Y Z : Scheme.{u}} (r : X ⟶ Y) (s : Y ⟶ Z)
@@ -64,25 +62,7 @@ def scalarIteratedAdjunct
       ((scalarExtension φ X).obj M)
 
 /-- The adjunct of the two successive specified scalar mates is the two normalized
-scalar/pullback comparisons followed by scalar extension of the composite A-counit.
-Source: Stacks Project, Tag 0E46, remark-compose-base-change, coefficient-change
-specialization of the omitted verification
-(blueprint: lem-pur-scalar-iterated-mates-adjunct).
-
-Proof:
-1. By def-pur-etale-scalar-mate and lem-weil-pbc-adjunct-counit-identity, the B-pullback
-   of each scalar mate followed by the B-counit equals its scalar/pullback comparison
-   followed by scalar extension of the A-counit. Use this for (r,M) and (s,Rr_* M).
-2. Expand the iterated mate and scalarIteratedAdjunct. Functoriality and naturality
-   of the s-B-counit at the r-mate move that mate to immediately before the r-B-counit.
-   This counit is from the canonical adjunction of def-kun-projection-formula-map.
-3. Substitute the two equations of step 1. Associativity and functoriality give
-   the s-scalar/pullback comparison, the pullback of scalar extension of the s-A-counit,
-   the r-scalar/pullback comparison at Rr_* M, and scalar extension of the r-A-counit.
-4. Naturality of the r-comparison from def-pur-etale-scalar-pullback-iso at the
-   s-A-counit moves it before that counit. The resulting four arrows are exactly
-   the displayed right side. No mate is inverted and no boundedness, properness,
-   or coefficient flatness is used. -/
+scalar/pullback comparisons followed by scalar extension of the composite A-counit. -/
 theorem scalarMate_iterated_adjunct
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y Z : Scheme.{u}} (r : X ⟶ Y) (s : Y ⟶ Z)

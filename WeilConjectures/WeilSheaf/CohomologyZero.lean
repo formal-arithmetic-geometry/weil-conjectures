@@ -46,7 +46,8 @@ exactness of `a_*` (`AlgebraicGeometry.WeilSheaf.homologySheafZeroDerivedLowerSt
 invariance of global sections under pushforward
 (`AlgebraicGeometry.WeilSheaf.globalSectionsLowerStarEquiv`).
 
-Used for blueprint `p-real-sections` and `lem-a1-affine-hc2` (step 3: `H⁰(U, -) = Γ(Ū, -)`). -/
+Used for blueprint `lemma-degree-zero-top-cohomology--1` and `lemma-degree-zero-top-cohomology--2`
+(step 3: `H⁰(U, -) = Γ(Ū, -)`). -/
 noncomputable def cohomologyZeroEquiv (G : WeilSheaf k₀ l Y) :
     (G.cohomology 0).Equiv G.globalSections :=
   (globalSectionsEquivOfIso

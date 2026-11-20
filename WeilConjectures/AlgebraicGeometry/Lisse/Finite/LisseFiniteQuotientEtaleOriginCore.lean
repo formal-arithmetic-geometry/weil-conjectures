@@ -108,8 +108,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 
 /-! # Core data for a single finite quotient étale origin
 
-Source: Stacks Project, Tags 09AL and 09B1.
-(blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin).
+## References
+
+* Stacks Project, Tags 09AL and 09B1
+* Stacks Project, Tags 093I and 03CY
 -/
 
 @[expose] public noncomputable section
@@ -233,9 +235,7 @@ private theorem scalar_lisse {X : Scheme.{u}}
 end FiniteQuotientOriginProof
 
 /-- The fixed-coefficient encoding of modules over the constant ring sheaf.
-Its underlying module-valued sheaf is restriction along the constant-section map.
-Source: Stacks Project, Tags 093I and 03CY.
-(blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin-core). -/
+Its underlying module-valued sheaf is restriction along the constant-section map. -/
 def finiteQuotientOriginEncoding (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] :
     pbcModules X (adicLisseConstantRing X B) ⥤
       Sheaf (ProEt.topology X) (ModuleCat.{u + 1} B) where
@@ -264,9 +264,7 @@ instance finiteQuotientOriginEncoding_equivalence (X : Scheme.{u})
     (B : Type (u + 1)) [CommRing B] : (finiteQuotientOriginEncoding X B).IsEquivalence :=
   FiniteQuotientOriginProof.scalar_equivalence X B
 
-/-- The actual fixed-coefficient realization of the pullback of a quotient complex.
-Source: Stacks Project, Tags 09AL and 09B1.
-(blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin-core). -/
+/-- The actual fixed-coefficient realization of the pullback of a quotient complex. -/
 def finiteQuotientOriginPullback {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :=
   pbcDerivedRestrict (pbcLevelConstantComparison X d n).hom ⋙
@@ -276,9 +274,6 @@ def finiteQuotientOriginPullback {X Y : Scheme.{u}} (g : Y ⟶ X)
 /-- The descended level, its actual comparison with the pullback of `K`, and local
 finiteness data, before conditional transport. The comparison uses the fixed
 `A/I^(n+1)` coefficient encoding after restriction from the completion quotient.
-
-Source: Stacks Project, proetale.tex, Tags 09AL and 09B1
-(blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin-core).
 -/
 structure LisseFiniteQuotientEtaleOriginCore
     (X Y : Scheme.{u}) (g : Y ⟶ X)
@@ -312,21 +307,7 @@ attribute [local instance] FiniteQuotientOriginProof.scalar_additive
   FiniteQuotientOriginProof.relative_equivalence
 
 open FiniteQuotientOriginProof in
-/-- Descend the level, vanishing and finite lisse data of one quotient.
-
-Proof: apply exact inverse image, constant coefficient comparison and the finite
-coefficient derived-origin theorem to the bounded complex; transfer the resulting
-origin to the completion quotient and pull its covering sieves back along every
-pro-étale refinement. The finite quotient and completion identifications preserve
-the displayed cohomology and local models. This is the part of the construction
-before the conditional constant-model transport. Retain its origin comparison:
-restriction along the completion-quotient ring equivalence cancels the inverse
-scalar restriction used to construct `level`; comparison commutes with étale
-pullback, and pullback composition gives the displayed comparison field.
-
-Source: Stacks Project, proetale.tex, Tags 09AL and 09B1
-(blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin-core).
--/
+/-- Descend the level, vanishing and finite lisse data of one quotient. -/
 theorem lisse_finite_quotient_etale_origin_core
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)

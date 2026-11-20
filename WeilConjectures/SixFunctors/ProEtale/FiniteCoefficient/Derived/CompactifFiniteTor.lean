@@ -15,12 +15,13 @@ Let `Λ` be a finite ring whose exponent is invertible on a finite-type `k`-sche
 `c = (X ⟶[j] X̄ ⟶[p] Y)` be a compactification of `f : X ⟶ Y`. Then the pro-étale
 compact-support functor `Rf_!(c) = Rp_* ∘ j_!` maps `Dctf(X, Λ)` into `Dctf(Y, Λ)`
 (`AlgebraicGeometry.ProEtale.constructibleFiniteTor_rightDerivedLowerShriekOfCompactification`,
-part of blueprint `det-sf-comp-coherence-single`). On `ν^* G` it is `ν^* Rf_!^{ét}(c) G`
+part of blueprint `proposition-construction-independence-rf-shriek`). On `ν^* G` it is
+`ν^* Rf_!^{ét}(c) G`
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationWitnessIso`), and the étale
 `Rf_!^{ét}(c)` preserves `Dctf`
 (`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerShriekOfCompactification`): the
-extension by zero along the quasi-compact `j` does, and so does the direct image along the
-proper `p`.
+extension by zero along the quasi-compact `j` does, and so does the direct image along the proper
+`p`.
 -/
 
 @[expose] public section
@@ -56,15 +57,15 @@ theorem Etale.constructibleFiniteTor_rightDerivedLowerShriekOfCompactification {
   obtain ⟨hbc, a, b, hta⟩ := hK
   have h := Etale.constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek Λ c.i a b
     ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta⟩, hta⟩
-  exact Etale.constructibleFiniteTor_rightDerivedLowerStar Λ (c.g ≫ aY) aY c.g rfl
+  exact Etale.constructibleFiniteTor_rightDerivedLowerStar_of_isProper Λ (c.g ≫ aY) aY c.g rfl
     ⟨h.1.1, a, b, h.2⟩
 
 namespace ProEtale
 
-/-- Part of blueprint `det-sf-comp-coherence-single`: the pro-étale compact-support functor
-`Rf_!(c) = Rp_* ∘ j_!` attached to an arbitrary compactification `c` of `f`, over a finite-type
-`k`-scheme `Y`, maps `Dctf(X, Λ)` into `Dctf(Y, Λ)` for a finite `Λ` whose exponent is
-invertible on `Y`. -/
+/-- Part of blueprint `proposition-construction-independence-rf-shriek`: the pro-étale
+compact-support functor `Rf_!(c) = Rp_* ∘ j_!` attached to an arbitrary compactification `c` of `f`,
+over a finite-type `k`-scheme `Y`, maps `Dctf(X, Λ)` into `Dctf(Y, Λ)` for a finite `Λ` whose
+exponent is invertible on `Y`. -/
 theorem constructibleFiniteTor_rightDerivedLowerShriekOfCompactification {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     [HasInvertibleExponent Λ Y] {f : X ⟶ Y} (c : Compactification f)

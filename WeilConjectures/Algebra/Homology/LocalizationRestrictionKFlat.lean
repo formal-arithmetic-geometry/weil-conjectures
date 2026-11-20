@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.RingTheory.Localization.Basic
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 import WeilConjectures.Algebra.Homology.MixedTensorRestrictionComparison
 import Mathlib.Algebra.Category.ModuleCat.Descent

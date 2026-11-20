@@ -47,7 +47,7 @@ private theorem ordinary_cartesian_support
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
       (TwoSquare.mk _ _ _ _
         (@asIso _ _ _ _ _ (isIso_openImmersionLowerShriekBaseChangeMap
-          (ModuleCat.{u + 1} A) sq)).inv)).natTrans.app F ≫
+          (ModuleCat.{u + 1} A) sq)).inv)).app F ≫
       (p)_*[ModuleCat.{u + 1} A].map
         ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) k).app F) =
     (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) i).app
@@ -119,7 +119,7 @@ private theorem ordinary_cartesian_compare
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
       (TwoSquare.mk _ _ _ _
         (@asIso _ _ _ _ _ (isIso_openImmersionLowerShriekBaseChangeMap
-          (ModuleCat.{u + 1} A) sq)).inv)).natTrans := by
+          (ModuleCat.{u + 1} A) sq)).inv)) := by
   apply NatTrans.ext
   funext (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
   have := open_compare_mono A k F
@@ -169,12 +169,12 @@ private theorem derived_cartesian_normalized
     (c : R.rightDerivedFunctor ⋙ G.mapDerivedCategory ⟶
       H.mapDerivedCategory ⋙ R'.rightDerivedFunctor)
     (hc : ProperOpenUnitNormalized R R' H G
-      (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans c) :
+      (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)) c) :
     c = (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans := by
+        (Functor.mapDerivedCategoryCompIso L H).symm).hom)) := by
   have : (R.rightDerivedFunctor ⋙ G.mapDerivedCategory).IsRightDerivedFunctor
       (Functor.whiskerRight R.rightDerivedFunctorUnit G.mapDerivedCategory ≫
         (Functor.associator _ _ _).hom) (HomotopyCategory.quasiIso C₁ (.up ℤ)) := by

@@ -210,26 +210,26 @@ lemma constAct_app (c : ULift.{u + 1} (PadicAlgCl l)) (x : N.X.obj.obj U) :
 /-- The constant sections act on a module object over `forgetAb ℚ̄_ℓ,X` through a ring
 homomorphism `ℚ̄_ℓ →+* End N`. -/
 noncomputable def constActRingHom : ULift.{u + 1} (PadicAlgCl l) →+* End N.X where
-  toFun := constAct N
-  map_one' := Sheaf.hom_ext (NatTrans.ext (funext fun _ ↦ AddCommGrpCat.ext fun x ↦
+  toFun c := End.of (constAct N c)
+  map_one' := End.ext (Sheaf.hom_ext (NatTrans.ext (funext fun _ ↦ AddCommGrpCat.ext fun x ↦
     (congrArg (abSectionAct N · x) (congrArg ULift.up (map_one _))).trans
-      (abSectionAct_one N x)))
-  map_mul' _ _ := Sheaf.hom_ext (NatTrans.ext (funext fun _ ↦ AddCommGrpCat.ext fun x ↦
+      (abSectionAct_one N x))))
+  map_mul' _ _ := End.ext (Sheaf.hom_ext (NatTrans.ext (funext fun _ ↦ AddCommGrpCat.ext fun x ↦
     (congrArg (abSectionAct N · x) (congrArg ULift.up (map_mul _ _ _))).trans
-      (abSectionAct_mul N _ _ x)))
-  map_zero' := Sheaf.hom_ext (NatTrans.ext (funext fun _ ↦ AddCommGrpCat.ext fun x ↦
+      (abSectionAct_mul N _ _ x))))
+  map_zero' := End.ext (Sheaf.hom_ext (NatTrans.ext (funext fun _ ↦ AddCommGrpCat.ext fun x ↦
     (congrArg (abSectionAct N · x) (congrArg ULift.up (map_zero _))).trans
-      (zero_abSectionAct N x)))
-  map_add' _ _ := Sheaf.hom_ext (NatTrans.ext (funext fun _ ↦ AddCommGrpCat.ext fun x ↦
+      (zero_abSectionAct N x))))
+  map_add' _ _ := End.ext (Sheaf.hom_ext (NatTrans.ext (funext fun _ ↦ AddCommGrpCat.ext fun x ↦
     (congrArg (abSectionAct N · x) (congrArg ULift.up (map_add _ _ _))).trans
-      (add_abSectionAct N _ _ x)))
+      (add_abSectionAct N _ _ x))))
 
 /-- Morphisms of module objects over `forgetAb ℚ̄_ℓ,X` commute with the action of the constant
 sections. -/
 lemma constAct_comp_hom {N' : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       ((weilCoefficientsForgetAb l X).obj (adicConstantSheaf l X))} (φ : N ⟶ N')
     (c : ULift.{u + 1} (PadicAlgCl l)) :
-    constActRingHom N c ≫ φ.hom = φ.hom ≫ constActRingHom N' c :=
+    (constActRingHom N c).asHom ≫ φ.hom = φ.hom ≫ (constActRingHom N' c).asHom :=
   Sheaf.hom_ext (NatTrans.ext (funext fun _ ↦ AddCommGrpCat.ext fun x ↦
     hom_abSectionAct N φ _ x))
 

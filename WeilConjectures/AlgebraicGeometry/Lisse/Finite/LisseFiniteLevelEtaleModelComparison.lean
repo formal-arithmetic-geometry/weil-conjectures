@@ -13,8 +13,9 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Bounded etale models from finite locally constant cohomology models
 
-Source: Stacks Tags 099Y, 099Z and 09B1.
-(blueprint: new-lem-weil-pbc-lisse-finite-level-etale-model-comparison).
+## References
+
+* Stacks Tags 099Y, 099Z and 09B1
 -/
 
 @[expose] public noncomputable section
@@ -76,18 +77,7 @@ private theorem modelClassical_of_iso (Z : Scheme.{u}) (Λ : Type (u + 1))
 
 /-- A bounded pro-etale complex whose cohomology has finite locally constant etale
 models has an etale model with the same bounds and finite locally constant cohomology.
-The comparison is the canonical derived counit, so the chosen model is tied to K.
-
-Source: Stacks Project, proetale.tex, lemma-compare-derived (Tag 09B1) and
-lemma-compare-locally-constant-derived (Tag 099Z).
-(blueprint: new-lem-weil-pbc-lisse-finite-level-etale-model-comparison).
-
-Proof: the cohomology models make K classical. Apply the bounded-below classical
-comparison counit to K and take its derived direct image as D. Exact faithful
-comparison reflects the cohomological bounds. Its cohomology comparison identifies
-comparison(H^q(D)) with comparison(G_q), where G_q is the supplied finite locally
-constant model. Full faithfulness lifts that isomorphism to H^q(D) ≅ G_q, which
-transports finite local constancy. This includes zero rings and empty schemes. -/
+The comparison is the canonical derived counit, so the chosen model is tied to K. -/
 theorem lisse_finite_level_etale_model_comparison
     (Z : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (K : DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ)))
@@ -123,19 +113,9 @@ theorem lisse_finite_level_etale_model_comparison
       exact (L.obj G).property
     apply modelClassical_of_iso Z Λ (e ≪≫ (modelHomologyIso Z Λ q).app K)
     exact hG
-  have hunit (L : DerivedCategory.Plus
-      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-      IsIso ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) Z).derivedPlus.unit.app L) := by
-    have := ProEtale.isIso_compactSupportComparisonUnit Z Λ
-    have h := NatIso.isIso_app_of_isIso
-      (ProEtale.derivedComparisonAdjunctionPlus (ModuleCat.{u + 1} Λ) Z).unit L
-    change IsIso ((ProEtale.comparisonAdjunction
-      (ModuleCat.{u + 1} Λ) Z).derivedAdjunctionPlus.unit.app L) at h
-    rwa [(ProEtale.comparisonAdjunction
-      (ModuleCat.{u + 1} Λ) Z).derivedAdjunctionPlus_eq_derivedPlus] at h
   let adj := (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) Z).derivedPlus
   have : IsIso (adj.counit.app Kplus) :=
-    (ProEtale.classicalDerivedEquivalence Z Λ hunit).2.1 Kplus hclass
+    (ProEtale.classicalDerivedEquivalence Z Λ).2.1 Kplus hclass
   let R := (ProEtale.comparisonLowerStar (ModuleCat.{u + 1} Λ) Z).rightDerivedFunctorPlus
   let D := (R.obj Kplus).obj
   let e : F.mapDerivedCategory.obj D ≅ K :=

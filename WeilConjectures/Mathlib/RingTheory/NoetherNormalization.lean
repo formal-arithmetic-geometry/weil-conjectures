@@ -19,6 +19,7 @@ public import Mathlib.RingTheory.TensorProduct.MvPolynomial
 public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
+public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Noether normalization with the number of variables the Krull dimension
@@ -50,11 +51,12 @@ extension preserves the Krull dimension, `s` is the dimension of the algebra.
 
 ## Blueprint
 
-- `det-i-real-normalization`: Noether normalization.
-- `lem-zl-noether-normalization-field`: Mathlib's `exists_finite_inj_algHom_of_fg`.
-- `lem-zl-noether-normalization-dimension`: `ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial`.
+- `lemma-point-count-bound`: Noether normalization.
+- `lemma-point-count-bound`: Mathlib's `exists_finite_inj_algHom_of_fg`.
+- `lemma-point-count-bound`: `ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial`.
 - `det-i-geometry`: dimension drop.
-- `lem-zl-spread-normalization`: `Algebra.FiniteType.exists_finite_aeval_away`.
+- `lemma-relative-noether-normalization-over-stratification--1`:
+`Algebra.FiniteType.exists_finite_aeval_away`.
 - `lem-pc-dim-base-change`: `ringKrullDim_tensorProduct_of_finiteType`.
 -/
 
@@ -64,7 +66,7 @@ universe u
 
 open MvPolynomial TensorProduct
 
-/-- Blueprint `lem-zl-noether-normalization-dimension`: the number of Noether coordinates is the
+/-- Blueprint `lemma-point-count-bound`: the number of Noether coordinates is the
 Krull dimension.
 
 If `K[T₁, …, T_d] → B` is an injective `K`-algebra map over which `B` is a finite module, then
@@ -102,7 +104,7 @@ theorem exists_finite_inj_algHom_mvPolynomial_of_ringKrullDim_eq
     exact_mod_cast (ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial g hg hfin).symm.trans hB
   exact ⟨g, hg, hfin⟩
 
-/-- Blueprint `det-i-real-normalization`: One-dimensional Noether normalization.
+/-- Blueprint `lemma-point-count-bound`: One-dimensional Noether normalization.
 
 A finitely generated algebra `B` of Krull dimension one over a field `K` admits an injective
 `K`-algebra map from the polynomial ring `K[T]` making `B` a finite module.
@@ -129,16 +131,18 @@ theorem ringKrullDim_quotient_lt_of_finiteType (k A : Type*) [Field k] [CommRing
   ringKrullDim_quotient_lt_of_irreducibleSpace k A hP
 
 attribute [local instance] MvPolynomial.algebraMvPolynomial in
-/-- Blueprint `lem-zl-spread-normalization`: spreading Noether normalization to a principal open.
+/-- Blueprint `lemma-relative-noether-normalization-over-stratification--1`: spreading Noether
+normalization to a principal open.
 
 Let `A` be a domain and `B` a finitely generated `A`-algebra. Then there are `0 ≠ s₀ ∈ A`,
 `d ≥ 0` and `t₁, …, t_d ∈ B` such that for the localizations `A_s = A[1/s]` and `B_s = B[1/s]`, the
 algebra map `A_s[T₁, …, T_d] → B_s`, `Tᵢ ↦ tᵢ` (the map of blueprint
-`def-zl-localized-coordinates` on rings) makes `B_s` a finite module. If moreover `A → B` is
-injective, this map is injective as well.
+`lemma-relative-noether-normalization-over-stratification--1` on rings) makes `B_s` a finite module.
+If moreover `A → B` is injective, this map is injective as well.
 
 The blueprint statement is the case `s = s₀`; we allow any nonzero multiple `s` of `s₀`, as
-localizing further preserves finiteness (this is used in `thm-zl-relative-noether`).
+localizing further preserves finiteness (this is used in
+`lemma-relative-noether-normalization-over-stratification--1`).
 
 Following the blueprint, apply Noether normalization (`exists_finite_inj_algHom_of_fg`) to the
 generic fibre `B ⊗_A Frac A`, rescale the coordinates so that they come from `B`, and clear the

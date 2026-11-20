@@ -29,8 +29,6 @@ private theorem hom_restrict_apply {S : Scheme.{u}} {A D : S.Modules}
     φ.app B (A.presheaf.map i.op s) = D.presheaf.map i.op (φ.app C s) := by
   exact congrArg (fun k ↦ k s) (φ.mapPresheaf.naturality i.op)
 
-set_option maxHeartbeats 600000 in
--- Rewriting section morphisms requires unfolding the three composed adjunctions.
 /-- The concrete mate sends the three-unit generator to the pullback-unit section.
 Source: Stacks Project, Tag 01I6, Lemma 26.7.1; Tags 0096 and 0097.
 (blueprint: lem-pc-coefficient-comparison-morphism-generator).
@@ -97,11 +95,19 @@ theorem coefficientComparisonMorphism_generator {X T : Scheme.{u}} (f : X ⟶ T)
           (tilde N)).app ⊤ ((tilde.toOpen N ⊤) s))) =
     coefficientSectionAddMap f F U Z g g' f' w W hW s at hs
   change _ = _
-  erw [hom_restrict_apply q,
-    hom_restrict_apply ((pullbackPushforwardAdjunction g).unit.app
+  -- Restrict the naturality rewrites to the section arguments of the outer maps.
+  conv_lhs =>
+    arg 2
+    rw [hom_restrict_apply q]
+    arg 2
+    arg 2
+    erw [hom_restrict_apply ((pullbackPushforwardAdjunction g).unit.app
       ((pullback U.toScheme.toSpecΓ).obj (tilde N)))]
   simp only [pushforward_obj_presheaf_map]
-  erw [hom_restrict_apply q]
+  conv_lhs =>
+    arg 2
+    arg 2
+    erw [hom_restrict_apply q]
   rw [hs]
   dsimp only [coefficientSectionAddMap]
   let M := (pullback g').obj F

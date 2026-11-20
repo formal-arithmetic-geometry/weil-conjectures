@@ -47,17 +47,17 @@ we add its description on geometric stalks.
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso`: the stalk of
   `j_! F` at a geometric point `t ≫ j` of `X` lying in `U` is the stalk of `F` at `t`.
 - `AlgebraicGeometry.Etale.finiteOpenComparison`: the comparison map
-  `β : (jY)_! v_* ⟶ v̄_* (jX)_!` (blueprint: `def-weil-pbc-finite-open-comparison`).
+  `β : (jY)_! v_* ⟶ v̄_* (jX)_!` (blueprint: `lemma-normalization-constant-sheaf--1`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj`: the stalk
   of `j_! F` at a geometric point outside `U` vanishes
-  (blueprint: `def-weil-pbc-extension-by-zero`).
+  (blueprint: `proposition-extension-zero-restriction-closed-subscheme--7`).
 - `AlgebraicGeometry.Etale.isIso_finiteOpenComparison_app`: `β` is an isomorphism at every
-  sheaf `G` (blueprint: `lemma-weil-pbc-finite-pushforward-extension-zero`).
+  sheaf `G` (blueprint: `lemma-normalization-constant-sheaf--1`).
 - `AlgebraicGeometry.Etale.isIso_finiteOpenComparison`: `β` is a natural isomorphism
-  (blueprint: `lemma-weil-pbc-finite-pushforward-extension-zero`).
+  (blueprint: `lemma-normalization-constant-sheaf--1`).
 -/
 
 @[expose] public section
@@ -97,7 +97,8 @@ omit [HasSmallSiteSheafify A] in
 /-- **The stalk of the extension by zero inside `U`.** For a geometric point `t` of `U`, the
 stalk of `j_! F` at `t ≫ j` is the stalk of `F` at `t`, naturally in `F`: it is the stalk at
 `t` of `j^* j_! F ≅ F`.
-(blueprint: `def-weil-pbc-extension-by-zero`, `lem-weil-pbc-extension-by-zero-stalks`) -/
+(blueprint: `proposition-extension-zero-restriction-closed-subscheme--7`,
+`lem-weil-pbc-extension-by-zero-stalks`) -/
 def Etale.openImmersionLowerShriekCompUliftSheafFiberIso {Ω : Type u} [Field Ω]
     [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ U) :
     (j)_!open[A] ⋙ ((pointSmallEtale (t ≫ j)).ulift.{u + 1}).sheafFiber ≅
@@ -112,7 +113,8 @@ omit [HasSmallSiteSheafify A] in
 /-- **The stalk of the extension by zero outside `U` vanishes**: for a geometric point `s`
 of `X` not lying in `U`, the stalk of `j_! F` at `s` is zero. It is the stalk of
 `s^* j_! F`, which vanishes since the ranges of `s` and `j` are disjoint.
-(blueprint: `def-weil-pbc-extension-by-zero`, `lem-weil-pbc-extension-by-zero-stalks`) -/
+(blueprint: `proposition-extension-zero-restriction-closed-subscheme--7`,
+`lem-weil-pbc-extension-by-zero-stalks`) -/
 lemma Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj {Ω : Type u} [Field Ω]
     [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
     (hs : s.base (IsLocalRing.closedPoint Ω) ∉ Set.range j.base)
@@ -166,7 +168,7 @@ V --jY--> Y
 with `jX`, `jY` open immersions and `v̄` finite, the natural transformation
 `β : (jY)_! v_* ⟶ v̄_* (jX)_!`, the transpose under `(jY)_! ⊣ jY^*` of the isomorphism
 `v_* G ≅ jY^* v̄_* (jX)_! G` given by `jX^* (jX)_! G ≅ G` and finite base change.
-(blueprint: `def-weil-pbc-finite-open-comparison`) -/
+(blueprint: `lemma-normalization-constant-sheaf--1`) -/
 def Etale.finiteOpenComparison (sq : IsPullback jX v vbar jY) :
     (v)_*[A] ⋙ (jY)_!open[A] ⟶ (jX)_!open[A] ⋙ (vbar)_*[A] :=
   Functor.whiskerRight (Etale.finiteOpenComparisonAux A sq) (jY)_!open[A] ≫
@@ -213,7 +215,7 @@ checked on geometric stalks: at a point of `V` the stalk is a stalk of the isomo
 
 The blueprint also describes the inverse explicitly on sections and on geometric stalks;
 here only the existence of the inverse is recorded.
-(blueprint: `lemma-weil-pbc-finite-pushforward-extension-zero`) -/
+(blueprint: `lemma-normalization-constant-sheaf--1`) -/
 lemma Etale.isIso_finiteOpenComparison_app (sq : IsPullback jX v vbar jY)
     (G : Sheaf U.smallEtaleTopology A) :
     IsIso ((Etale.finiteOpenComparison A sq).app G) := by
@@ -237,7 +239,7 @@ naturality in `G` is built into the construction of `β` as a natural transforma
 
 The compatibilities of `β` with identity and composite finite maps and with base change,
 also part of the blueprint statement, are not formalised here.
-(blueprint: `lemma-weil-pbc-finite-pushforward-extension-zero`) -/
+(blueprint: `lemma-normalization-constant-sheaf--1`) -/
 lemma Etale.isIso_finiteOpenComparison (sq : IsPullback jX v vbar jY) :
     IsIso (Etale.finiteOpenComparison A sq) :=
   have := Etale.isIso_finiteOpenComparison_app A sq

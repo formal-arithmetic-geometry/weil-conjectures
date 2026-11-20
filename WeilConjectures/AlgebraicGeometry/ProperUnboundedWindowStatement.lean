@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Proper.Unbounded.ProperUnbounded
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
 sec-brown-construction/sec-proper-direct-image-of-unbounded-complexes/
 sk-lem-proper-unbounded-window/_section.md, assertions (1)--(3)
-(blueprint: sk-lem-proper-unbounded-window).
+(blueprint: lemma-proper-direct-image-unbounded-complexes).
 
 The theorem states the three assertions for both coefficient choices in the current
 condensed model.  The two existing predicates expand the degreewise ind-constructible
@@ -38,25 +38,26 @@ cohomological window and arbitrary direct sums, for both `E` and `ℚ̄_ℓ` coe
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
 sec-brown-construction/sec-proper-direct-image-of-unbounded-complexes/
 sk-lem-proper-unbounded-window/_section.md, assertions (1)--(3); proof in
-sk-lem-proper-unbounded-window.proof.md (blueprint: sk-lem-proper-unbounded-window).
+sk-lem-proper-unbounded-window.proof.md (blueprint: lemma-proper-direct-image-unbounded-complexes).
 
 Proof plan, the eight steps of the DAG node:
-1. Ambient setting: Dic and IndCons as in sk-cor-ambient-ind-derived and sk-prop-ind-heart.
-   The module categories are Grothendieck (det-prop-sfb-module-category), so
-   lem-sfb-grothendieck-k-injective gives K-injective resolutions, and
+1. Ambient setting: Dic and IndCons as in corollary-ambient-ind-derived and
+proposition-ind-constructible-sheaves.
+   The module categories are Grothendieck (prose-03-02), so
+   prose-03-02 gives K-injective resolutions, and
    lem-pc-right-derived-functor-triangulated makes Rp_* (sk-def-sfb-module-derived-pushpull)
    exact and shift-compatible.
-2. Bounded-below K: the spectral sequence of thm-sp-truncation-e2,
+2. Bounded-below K: the spectral sequence of lemma-uniform-bound-proper-direct-image--1,
    E_2^{u,v} = R^u p_* H^v(K) => H^{u+v}(Rp_*K), has columns 0 <= u <= 2d+1 with
-   ind-constructible terms by sk-lem-proper-heart-bound. Closure of IndCons under kernels,
-   cokernels and extensions (sk-prop-ind-heart (2)) and the finite filtration give
-   IndCons membership and both amplitude bounds.
-3. Arbitrary K: sk-prop-pe-left-complete gives K = Rlim_n A_n, A_n = tau_ge(-n) K. Rp_* is a
+   ind-constructible terms by lemma-uniform-bound-proper-direct-image. Closure of IndCons under
+   kernels, cokernels and extensions (proposition-ind-constructible-sheaves (2)) and the finite
+   filtration give IndCons membership and both amplitude bounds.
+3. Arbitrary K: proposition-left-completeness gives K = Rlim_n A_n, A_n = tau_ge(-n) K. Rp_* is a
    right adjoint, so it preserves products, and lem-pc-homotopy-limit-map gives
    Rp_*K = Rlim_n Rp_*A_n with the images of the canonical projections.
 4. The fibre of A_(n+1) -> A_n is H^(-n-1)(K)[n+1], whose image lies in degrees
    [-n-1, 2d-n]. For fixed q the towers H^q and H^(q-1) of Rp_*A_n are eventually constant,
-   so lim^1 = 0 (sk-prop-pe-milnor) and H^q(Rp_*K) = H^q(Rp_*A_n) for large n. Step 2 then
+   so lim^1 = 0 (proposition-milnor-sequence) and H^q(Rp_*K) = H^q(Rp_*A_n) for large n. Step 2 then
    gives (1).
 5. The triangles tau_le q K -> K -> tau_ge (q+1) K and tau_le (q-2d-2) K -> tau_le q K -> W_q K,
    W_q = tau_ge(q-2d-1) tau_le q (lem-sf-derived-truncation-triangle), with the bounds of (1)
@@ -66,7 +67,7 @@ Proof plan, the eight steps of the DAG node:
    src-weil-derived-homology-preserves-coproducts and lem-sfb-derived-truncation-coproducts
    make cohomology and truncations commute with sums; sums of triangles are distinguished.
 7. Families in a common finite interval [r,s]: induct on s-r. The single-degree case is the
-   arbitrary-sum clause of sk-lem-proper-heart-bound with
+   arbitrary-sum clause of lemma-uniform-bound-proper-direct-image with
    lem-weil-pbc-unbounded-derived-iso-cohomology; the induction uses the top-cohomology
    triangles and lem-sf-triangle-morphism-iso.
 8. Arbitrary families: for each q the natural window isomorphisms of step 5 and step 6 identify

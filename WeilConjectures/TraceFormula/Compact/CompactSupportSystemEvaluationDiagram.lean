@@ -440,7 +440,7 @@ def compactSupportSystemCoefficientMate
       coefficientFiniteQuotientDerived l E Z h ⋙
         (compactSupportLevelDirectImage l E p n).rightDerivedFunctor :=
   ((mateEquiv (D.operations.scalarZ h) (D.operations.scalarY h)).symm
-    (TwoSquare.mk _ _ _ _ (D.operations.derivedCoefficientComparison h).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (D.operations.derivedCoefficientComparison h).hom))
 
 /-- Successive restrictions equal restriction along the actual limit projection.
 Source: node statement, `Res_m Res_(m,n) = Res_n`, proof step 5

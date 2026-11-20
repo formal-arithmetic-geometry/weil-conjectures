@@ -28,9 +28,9 @@ import WeilConjectures.Compactification.CommonDenseRefinement
 /-!
 # Base change for `Rf_!` on the localizing category
 
-Source: the blueprint of the Weil conjectures, chapter `sec-six-functors-basics`, unit
-`sk-thm-sf-comp-composition` (blueprint: det-sf-comp-composition-base-change); Stacks Project,
-Tag 09AH.
+Source: the blueprint of the Weil conjectures, chapter `chap-Construction-of-f`, unit
+`proposition-composition-base-change-rf-shriek--1` (blueprint:
+proposition-composition-base-change-rf-shriek--4); Stacks Project, Tag 09AH.
 
 The statement uses the published module-object definitions of derived pullback and derived
 lower shriek, the literal compactification base-change construction, and the localizing closure
@@ -121,7 +121,7 @@ private theorem ambientExchange_of_preservation
     (localizingClosure_exists Λ B
       (constantModelBoundedConstructible Λ B ⊓ fun M ↦
         _root_.DerivedCategory.finiteTorAmplitude _ M)).2.2.2.1
-    _ _ (condensedAmbientExchange Λ sq) (composite_sums Λ hp hp' hg hg') hgen K hK
+    _ _ (condensedAmbientExchange Λ sq) (composite_sums_small Λ hp hp' hg hg') hgen K hK
 
 private theorem properExchange_admissible
     (ℓ : ℕ) [Fact ℓ.Prime]

@@ -178,18 +178,7 @@ private theorem transport_path_section
   exact NatTrans.congr_app h M
 
 -- Normalize the fixed comparisons through generic equality transport.
-/-- Changing the two direct-image paths carries the second diagonal section to the first.
-Source: the rational projective-line triangle, First identity, composition of direct images
-and cancellation on the diagonal
-(blueprint: lem-sfb-projective-diagonal-first-path-section).
-
-Proof: conjugate the two sides under the composite pullback adjunctions. Expand the square
-comparison into the two pullback compositors. Associativity for the pullback compositors,
-with the diagonal as the first map, identifies their restrictions to the diagonal.
-Both diagonal composites are the identity; the identity-compositor law cancels the
-remaining factors. Conjugation preserves composition and reverses the comparisons, so
-the corresponding direct-image natural transformations agree. Evaluate at M. This uses
-no tensor product, coefficient arrow, trace, or invertibility of a projection map. -/
+/-- Changing the two direct-image paths carries the second diagonal section to the first. -/
 theorem first_path_section
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

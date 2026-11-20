@@ -47,8 +47,8 @@ theorem CategoryTheory.Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv (e
     (d : p ⊣ t) (σ : a ⋙ p ≅ l ⋙ b) :
     let θ := (Functor.mapDerivedCategoryPlusCompIso a p).symm ≪≫
       Functor.mapDerivedCategoryPlusNatIso σ ≪≫ Functor.mapDerivedCategoryPlusCompIso l b
-    Functor.rightDerivedFunctorPlusBaseChange (mateEquiv e d σ.hom).natTrans =
-      (mateEquiv e.derivedPlus d.derivedPlus θ.hom).natTrans := by
+    Functor.rightDerivedFunctorPlusBaseChange (mateEquiv e d σ.hom) =
+      (mateEquiv e.derivedPlus d.derivedPlus θ.hom) := by
   dsimp only
   let θ := (Functor.mapDerivedCategoryPlusCompIso a p).symm ≪≫
     Functor.mapDerivedCategoryPlusNatIso σ ≪≫ Functor.mapDerivedCategoryPlusCompIso l b
@@ -70,7 +70,7 @@ theorem CategoryTheory.Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv (e
   apply NatTrans.ext
   funext M
   have hf := congr_app (Functor.rightDerivedFunctorPlusBaseChange_fac
-    (mateEquiv e d σ.hom).natTrans) M
+    (mateEquiv e d σ.hom)) M
   have hm := Adjunction.derivedPlus_mateEquiv_app_fac e d σ.hom θ.hom hθ M
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Category.comp_id] at hf ⊢
@@ -149,7 +149,7 @@ theorem underived_comparison_mate {U V : Scheme.{u}} (f : U ⟶ V) :
     lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ) =
       (mateEquiv (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
         (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
-        (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f).hom).natTrans := by
+        (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f).hom) := by
   apply NatTrans.ext
   funext K
   apply ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv _ _).symm.injective
@@ -160,7 +160,12 @@ theorem underived_comparison_mate {U V : Scheme.{u}} (f : U ⟶ V) :
   simpa only [Category.assoc, Iso.inv_hom_id_app_assoc] using
     underived_comparison_counit Λ f K
 
-private theorem comparison_counit_plus {U V : Scheme.{u}} (f : U ⟶ V)
+/-- **The canonical comparison of direct images and the counits**, on bounded below derived
+categories and for an arbitrary morphism `f : U ⟶ V`: the pullback comparison `a` (the inverse
+of `ν^* f^* ≅ f^* ν^*` on `D⁺`) at `R⁺f_* K`, followed by `f^*` of the canonical base change
+morphism `ν_V^* R⁺f_* K ⟶ R⁺f_* ν_U^* K` of right derived functors and the pro-étale counit at
+`ν_U^* K`, is `ν_U^*` of the étale counit `f^* R⁺f_* K ⟶ K`. -/
+theorem comparison_counit_plus {U V : Scheme.{u}} (f : U ⟶ V)
     (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     let a := (Functor.mapDerivedCategoryPlusCompIso
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) V)
@@ -187,7 +192,7 @@ private theorem comparison_counit_plus {U V : Scheme.{u}} (f : U ⟶ V)
   simp
 
 /-- The direct-image comparison is the counit mate of the specified pullback comparison.
-Source: Stacks Project, Tag 0B65; blueprint transport proof, step 2.
+Reference: Stacks Project, Tag 0B65.
 
 Proof: the underived direct-image comparison is the inverse mate of the restriction
 comparison. The pullback comparison is the adjoint conjugate of the same restriction

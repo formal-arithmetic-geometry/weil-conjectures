@@ -104,7 +104,7 @@ noncomputable def mvPolynomialBasisOfBasis {d : ℕ} (b : Basis (Fin d) A Ω[A�
 `e : ℕ` and `B = A[X_1, …, X_e]`. Then the `B`-linear map
 `(B ⊗[A] Ω[A⁄R]) × Bᵉ → Ω[B⁄R]`, `(b ⊗ dα, (b_j)) ↦ b dα + ∑ b_j dX_j`, is bijective; in
 particular, if `Ω[A⁄R]` is a free `A`-module of rank `d`, then `Ω[B⁄R]` is a free `B`-module of
-rank `d + e`. (blueprint: `lem-weil-pbc-kahler-differentials-polynomial-extension`) -/
+rank `d + e`. (blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem mvPolynomial_kaehler_bijective_and_basis (e : ℕ) :
     Function.Bijective (mvPolynomialKaehlerMap R A (Fin e)) ∧
       ∀ d : ℕ, Nonempty (Basis (Fin d) A Ω[A⁄R]) →

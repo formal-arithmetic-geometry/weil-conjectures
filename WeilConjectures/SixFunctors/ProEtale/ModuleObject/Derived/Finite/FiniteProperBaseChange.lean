@@ -43,9 +43,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShrie
 /-!
 # Proper direct image with finite coefficients
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.md
-(blueprint: det-thm-sfb-proper-base-change-finite).
+(blueprint: proposition-proper-direct-image-constructible-complexes).
 
 All three clauses use the recorded internal-module Dctf and ordinary uncompleted
 unbounded derived operations. The exchange is the mate of the composition comparison;
@@ -168,7 +168,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 This bundles the existing `Sheaf.sheafifyRingPresheaf` construction, so the finite ring
 may have the same arbitrary universe as the schemes, with no topology parameters.
 Source: blueprint sk-thm-sfb-proper-base-change-finite, finite discrete coefficients,
-and Bhatt--Scholze Section 5.3 (blueprint: det-thm-sfb-proper-base-change-finite). -/
+and Bhatt--Scholze Section 5.3 (blueprint:
+proposition-proper-direct-image-constructible-complexes). -/
 noncomputable def finiteProperCoefficientRing (A : Type u) [CommRing A] :
     CommMon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) := by
   letI : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
@@ -188,12 +189,11 @@ local instance finiteProperCoefficientComm (A : Type u) [CommRing A] :
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the two composed derived pullbacks unfolds their module scalar transports.
 /-- The canonical ambient exchange for internal condensed-coefficient modules.
 Source: blueprint sk-thm-sfb-proper-base-change-finite, clause (2), and the
 unit/square/counit construction in sk-def-sfb-base-change-morphism
-(blueprint: det-thm-sfb-proper-base-change-finite). -/
+(blueprint: proposition-proper-direct-image-constructible-complexes). -/
 noncomputable abbrev finiteProperAmbientExchange := @finiteProperExchange.{u}
 
 attribute [local irreducible] AlgebraicGeometry.ProEtale.CondensedRing.lowerStar
@@ -206,7 +206,6 @@ attribute [local irreducible] CategoryTheory.Sheaf.monoidalCategory
   DerivedCategory.monoidalClosed
   DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem finiteProperCoefficientRing_iso
     (A : Type u) [CommRing A] [Finite A]
@@ -227,7 +226,6 @@ private theorem finiteProperCoefficientRing_iso
     infer_instance
   exact ⟨Mon.mkIso' e⟩
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem continuous_finiteProper_preserves
     (A : Type u) [CommRing A] [Finite A]
@@ -318,7 +316,6 @@ private theorem continuous_finiteProper_preserves
   exact ⟨ObjectProperty.prop_of_iso _ ep D.property.1,
     ObjectProperty.prop_of_iso _ ep ⟨a', b + (d : ℤ), D.property.2⟩⟩
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem preserves_coefficientIso
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -366,7 +363,6 @@ private theorem preserves_coefficientIso
   have : (constantModelBoundedConstructible R Y).IsClosedUnderIsomorphisms :=
     (constantModelConstructibleFiniteTor_wellDefined R Y).2.1
   exact ObjectProperty.prop_of_iso _ (ec.app _) hU
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem isIso_app_app_of_iso
     {C D H : Type*} [Category C] [Category D] [Category H]
@@ -379,7 +375,6 @@ private theorem isIso_app_app_of_iso
       (show IsIso ((τ.app K).app M) from inferInstance)
   exact (NatTrans.isIso_app_iff_of_iso (τ.app K') eM).1 ht
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem ordinary_projection_of_etale_tor
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -424,7 +419,6 @@ private theorem ordinary_projection_of_etale_tor
     (((comparisonUpperStar (ModuleCat.{u + 1} A) Y).leftDerivedFunctorIsoMapDerivedCategory).app
       D)
 
-set_option maxHeartbeats 800000 in
 -- Specialize naturality before substituting the coefficient-encoding categories.
 private theorem ordinary_projection_transport
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -456,7 +450,6 @@ private abbrev EncodedEtaleOrigin
       Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1} A) T C ∧
         Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} A) T a b C }
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem coefficientEncoding_etaleOrigin
     (A : Type u) [CommRing A] [Finite A]
@@ -489,7 +482,6 @@ private theorem coefficientEncoding_etaleOrigin
   exact ((E T.left).fixedDerived.counitIso.app _).symm ≪≫
     (E T.left).fixedDerived.functor.mapIso ec
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed derived functors without unfolding their resolving constructions.
 private theorem ordinary_exchange_of_etale
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -513,7 +505,6 @@ attribute [local irreducible] FiniteDiscreteOrdinary.coefficientEncoding
   ProEtale.rightDerivedLowerStarProjectionMap finiteCoefficientProjectionIsIso
   ordinaryFiniteCoefficientProjectionIsIso
 
-set_option maxHeartbeats 800000 in
 -- Transport only between the named ordinary and internal projection arrows.
 private theorem projection_of_encoded_origins
     (A : Type u) [CommRing A] [Finite A]
@@ -581,39 +572,43 @@ set_option maxHeartbeats 20000 in
 -- Use the canonical comparison API without unfolding its arrow data.
 /-- Proper direct image preserves Dctf, and its canonical exchange and projection arrows
 are invertible, in the ordinary unbounded derived category of internal modules.
-Source: blueprint main-20261015, sk-thm-sfb-proper-base-change-finite, clauses (1)--(3)
-(blueprint: det-thm-sfb-proper-base-change-finite).
+Source: blueprint main-20261015, proposition-proper-direct-image-constructible-complexes, clauses
+(1)--(3) (blueprint: proposition-proper-direct-image-constructible-complexes).
 
 Proof:
 1. The sheafified constant coefficient ring is isomorphic, as a ring object, to the
 continuous finite coefficient ring: the constant-functions map is locally bijective, so
-sheafification inverts it, and it is multiplicative (lem-sf-finite-discrete-normalized-encoding).
-Scalar restriction along the inverse isomorphism is an exact equivalence, and it transports
-finite constant models and finite Tor amplitude (lem-sfb-condensed-coefficient-iso-constructible).
-Fix normalized encodings of the continuous coefficients on every scheme.
+sheafification inverts it, and it is multiplicative
+(proposition-proper-direct-image-constructible-complexes). Scalar restriction along the inverse
+isomorphism is an exact equivalence, and it transports finite constant models and finite Tor
+amplitude (proposition-proper-direct-image-constructible-complexes). Fix normalized encodings of the
+continuous coefficients on every scheme.
 2. Enlarge an internal Tor interval to [min a b, b]. The finite internal/etale realization
-(lem-sfb-finite-ctf-internal-etale-realization) gives a bounded constructible etale
+(proposition-proper-direct-image-constructible-complexes) gives a bounded constructible etale
 antecedent C with this interval, its comparison isomorphism, and the comparison of the
 total proper direct images on bounded-below inputs.
 3. Clause (1). The proper geometric-fibre torsion bound gives d for sectionwise
 ell-power-torsion sheaves on every geometric fibre. Replace the exponent killing 1 by r+1,
-positive also for the zero ring. det-ctf-finite-proper-tor gives bounded constructibility and
-Tor interval [a, b+d] for the etale direct image of C. The realization over Y, the
-direct-image comparison and repleteness (det-def-sfb-constructible-tor-amplitude) transport
-both properties to the continuous coefficients, then along the ring isomorphism of step 1.
+positive also for the zero ring. proposition-proper-direct-image-finite-coefficients--1 gives
+bounded constructibility and Tor interval [a, b+d] for the etale direct image of C. The realization
+over Y, the direct-image comparison and repleteness
+(proposition-proper-direct-image-constructible-complexes) transport both properties to the
+continuous coefficients, then along the ring isomorphism of step 1.
 4. Clause (2). The encoded K has the etale origin C of step 2, bounded below. The
-fixed-scalar proper exchange theorem (lem-sfb-fixed-scalar-etale-origin-proper-exchange)
+fixed-scalar proper exchange theorem (proposition-proper-direct-image-constructible-complexes)
 makes the ordinary exchange at its comparison image invertible, for arbitrary g; naturality
-moves it to the encoded K. The exchange encoding (lem-sfb-finite-coefficient-exchange-encoding)
-and reflection of isomorphisms by the encoding equivalence give invertibility of the
-internal exchange (def-sfb-finite-proper-exchange).
+moves it to the encoded K. The exchange encoding
+(proposition-proper-direct-image-constructible-complexes) and reflection of isomorphisms by the
+encoding equivalence give invertibility of the internal exchange
+(proposition-proper-direct-image-constructible-complexes).
 5. Clause (3). Take etale antecedents C, D of K, M. Exact etale pullback keeps a lower bound e
-of D; Tor connectivity (lem-kun-derived-tensor-t-est) bounds C tensor^L p*D below by a+e.
-Finite A is additively torsion, so the etale projection map is invertible (lem-kun-0f0g).
-The fixed-scalar projection transport (lem-sfb-fixed-scalar-derived-projection-transport)
-carries this to the ordinary pro-etale projection map; naturality transports it along both
-antecedent isomorphisms. The projection encoding (lem-sfb-finite-coefficient-projection-encoding)
-gives invertibility of the internal right-adjoint projection map.
+of D; Tor connectivity (proposition-proper-direct-image-constructible-complexes) bounds C tensor^L
+p*D below by a+e. Finite A is additively torsion, so the etale projection map is invertible
+(proposition-proper-direct-image-constructible-complexes--9). The fixed-scalar projection transport
+(proposition-proper-direct-image-constructible-complexes) carries this to the ordinary pro-etale
+projection map; naturality transports it along both antecedent isomorphisms. The projection encoding
+(proposition-proper-direct-image-constructible-complexes) gives invertibility of the internal
+right-adjoint projection map.
 -/
 theorem finiteProperBaseChange
     (A : Type u) [CommRing A] [Finite A]

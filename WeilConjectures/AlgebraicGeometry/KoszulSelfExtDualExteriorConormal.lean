@@ -69,7 +69,6 @@ private theorem restrict_stalk_surjective
       f.stalkLinearMap z.1 ((e.hom.app M) s') at hn
   rw [hn, hs', hs]
 
-set_option maxHeartbeats 600000 in
 -- Comparing the restricted exterior sheaves and their internal duals needs extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- The Koszul Hom calculation identifies self Ext with the internal dual of the
@@ -122,21 +121,29 @@ theorem koszulRegularImmersion_self_ext_dual_exterior_conormal
     Nonempty (F ≅ T) := by
   classical
   dsimp only
-  obtain ⟨φ, hφ⟩ :=
+  have hcomparison :=
     koszulRegularImmersion_self_ext_conormal_comparison_surjection i V n hregular
+  let φ := hcomparison.choose
+  have hφ := hcomparison.choose_spec
   have : IsIso φ := by
     apply Scheme.Modules.isIso_of_bijective_stalkLinearMap
     intro z
     obtain ⟨U, hzU, m, f, hf, hreg⟩ := hregular z.1 z.2
-    obtain ⟨⟨bT⟩, ⟨bE⟩⟩ :=
+    have hbases :=
       koszulRegularImmersion_self_ext_stalk_bases i V n z U hzU m f hf hreg
+    let bT := hbases.1.some
+    let bE := hbases.2.some
     let C := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
-    obtain ⟨p, hp⟩ := exterior_dual_pairing_exists Z C n
-    obtain ⟨a⟩ := Scheme.Modules.exteriorSheaf_restrict_iso (Scheme.Modules.dual C) n V
+    have hpairing := exterior_dual_pairing_exists Z C n
+    let p := hpairing.choose
+    have hp := hpairing.choose_spec
+    let a := (Scheme.Modules.exteriorSheaf_restrict_iso (Scheme.Modules.dual C) n V).some
     let q := a.inv ≫ (Scheme.Modules.restrictFunctor V.ι).map p
-    obtain ⟨c, hc⟩ := ExteriorAlgebra.exists_koszul_conormal_basis
+    have hbasis := ExteriorAlgebra.exists_koszul_conormal_basis
       Γ(Y, U.1) (i.ker.ideal U) m f hreg hf
-    obtain ⟨⟨e⟩, he⟩ := affine_conormal_frame i U m c
+    let c := hbasis.choose
+    have hframe := affine_conormal_frame i U m c
+    let e := hframe.1.some
     have hps : Function.Surjective (p.stalkLinearMap z.1) :=
       stalk_surjective_of_local_app p z.1 (i ⁻¹ᵁ U.1) hzU fun W hW ↦
         (exterior_dual_pairing_app_bijective Z C n p hp (i ⁻¹ᵁ U.1) m e W

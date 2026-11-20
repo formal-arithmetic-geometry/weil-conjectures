@@ -115,8 +115,8 @@ theorem exists_hasEigenvalue_globalSections_of_surjective (F : WeilSheaf k₀ l 
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (m : ℕ) (hm : 1 ≤ m)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
     (hsurj : Function.Surjective
       ((WeilCoefficients.toModuleCat l).map (F.globalSectionsToStalkObj s)).hom)
     {β : PadicAlgCl l} (hβ : (F.stalkAt s m hs).frobeniusEnd.HasEigenvalue β) :

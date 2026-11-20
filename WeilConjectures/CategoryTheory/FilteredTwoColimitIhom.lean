@@ -49,7 +49,7 @@ variable {C C' D : Type*} [Category* C] [Category* C'] [Category* D] [MonoidalCa
 tensorator followed by `F` of the transpose of `g : y ⟶ [A, B]`. -/
 lemma uncurry_map_comp_ihomComparison_app (F : C ⥤ D) [F.LaxMonoidal] {A B y : C}
     (g : y ⟶ (ihom A).obj B) :
-    uncurry (F.map g ≫ (ihomComparison F A).natTrans.app B) = μ F A y ≫ F.map (uncurry g) := by
+    uncurry (F.map g ≫ (ihomComparison F A).app B) = μ F A y ≫ F.map (uncurry g) := by
   rw [uncurry_natural_left, uncurry_eq, ihomComparison_ev, μ_natural_right_assoc, ← F.map_comp,
     ← uncurry_eq]
 
@@ -58,8 +58,8 @@ with the comparison map `F [A, B] ⟶ [F A, F B]` agree if and only if `F` ident
 transposes of `g₁` and `g₂`. -/
 lemma map_comp_ihomComparison_app_eq_iff (F : C ⥤ D) [F.Monoidal] {A B y : C}
     (g₁ g₂ : y ⟶ (ihom A).obj B) :
-    F.map g₁ ≫ (ihomComparison F A).natTrans.app B =
-        F.map g₂ ≫ (ihomComparison F A).natTrans.app B ↔
+    F.map g₁ ≫ (ihomComparison F A).app B =
+        F.map g₂ ≫ (ihomComparison F A).app B ↔
       F.map (uncurry g₁) = F.map (uncurry g₂) := by
   rw [← uncurry_injective.eq_iff, uncurry_map_comp_ihomComparison_app,
     uncurry_map_comp_ihomComparison_app, cancel_epi]
@@ -71,9 +71,9 @@ the components of `τ` at `A` and `B`. -/
 lemma whiskerRight_comp_uncurry_comp_ihomComparison_app {T : C ⥤ C'} {F' : C' ⥤ D} {F : C ⥤ D}
     [T.LaxMonoidal] [F'.LaxMonoidal] [F.LaxMonoidal] (τ : T ⋙ F' ⟶ F) [NatTrans.IsMonoidal τ]
     {A B : C} {Y : D} (h : Y ⟶ F'.obj (T.obj ((ihom A).obj B))) :
-    τ.app A ▷ Y ≫ uncurry (h ≫ τ.app _ ≫ (ihomComparison F A).natTrans.app B) =
-      uncurry (h ≫ F'.map ((ihomComparison T A).natTrans.app B) ≫
-        (ihomComparison F' (T.obj A)).natTrans.app (T.obj B)) ≫ τ.app B := by
+    τ.app A ▷ Y ≫ uncurry (h ≫ τ.app _ ≫ (ihomComparison F A).app B) =
+      uncurry (h ≫ F'.map ((ihomComparison T A).app B) ≫
+        (ihomComparison F' (T.obj A)).app (T.obj B)) ≫ τ.app B := by
   rw [uncurry_natural_left, uncurry_natural_left, uncurry_eq, ihomComparison_ev,
     ← whisker_exchange_assoc, ← tensorHom_def_assoc,
     ← NatTrans.IsMonoidal.tensor_assoc, ← τ.naturality, uncurry_natural_left, uncurry_eq,
@@ -88,12 +88,12 @@ composite with `F'` of the comparison map of `T` and the comparison map of `F'`.
 lemma comp_app_comp_ihomComparison_app_eq_iff {T : C ⥤ C'} {F' : C' ⥤ D} {F : C ⥤ D}
     [T.LaxMonoidal] [F'.LaxMonoidal] [F.LaxMonoidal] (τ : T ⋙ F' ≅ F)
     [NatTrans.IsMonoidal τ.hom] {A B : C} {Y : D} (h₁ h₂ : Y ⟶ F'.obj (T.obj ((ihom A).obj B))) :
-    h₁ ≫ τ.hom.app _ ≫ (ihomComparison F A).natTrans.app B =
-        h₂ ≫ τ.hom.app _ ≫ (ihomComparison F A).natTrans.app B ↔
-      h₁ ≫ F'.map ((ihomComparison T A).natTrans.app B) ≫
-          (ihomComparison F' (T.obj A)).natTrans.app (T.obj B) =
-        h₂ ≫ F'.map ((ihomComparison T A).natTrans.app B) ≫
-          (ihomComparison F' (T.obj A)).natTrans.app (T.obj B) := by
+    h₁ ≫ τ.hom.app _ ≫ (ihomComparison F A).app B =
+        h₂ ≫ τ.hom.app _ ≫ (ihomComparison F A).app B ↔
+      h₁ ≫ F'.map ((ihomComparison T A).app B) ≫
+          (ihomComparison F' (T.obj A)).app (T.obj B) =
+        h₂ ≫ F'.map ((ihomComparison T A).app B) ≫
+          (ihomComparison F' (T.obj A)).app (T.obj B) := by
   rw [← uncurry_injective.eq_iff, ← cancel_epi (τ.hom.app A ▷ Y),
     whiskerRight_comp_uncurry_comp_ihomComparison_app,
     whiskerRight_comp_uncurry_comp_ihomComparison_app, cancel_mono, uncurry_injective.eq_iff]
@@ -104,13 +104,13 @@ factors through the comparison map of `F'`, then every morphism from `Y` to `[F 
 factors through the comparison map of `F`. -/
 lemma exists_comp_ihomComparison_app_eq_of_iso {T : C ⥤ C'} {F' : C' ⥤ D} {F : C ⥤ D}
     [T.LaxMonoidal] [F'.LaxMonoidal] [F.LaxMonoidal] (τ : T ⋙ F' ≅ F)
-    [NatTrans.IsMonoidal τ.hom] {A B : C} [IsIso ((ihomComparison T A).natTrans.app B)] {Y : D}
+    [NatTrans.IsMonoidal τ.hom] {A B : C} [IsIso ((ihomComparison T A).app B)] {Y : D}
     (hY : ∀ g : Y ⟶ (ihom (F'.obj (T.obj A))).obj (F'.obj (T.obj B)),
-      ∃ f, f ≫ (ihomComparison F' (T.obj A)).natTrans.app (T.obj B) = g)
+      ∃ f, f ≫ (ihomComparison F' (T.obj A)).app (T.obj B) = g)
     (g : Y ⟶ (ihom (F.obj A)).obj (F.obj B)) :
-    ∃ f, f ≫ (ihomComparison F A).natTrans.app B = g := by
+    ∃ f, f ≫ (ihomComparison F A).app B = g := by
   obtain ⟨f, hf⟩ := hY (curry (τ.hom.app A ▷ Y ≫ uncurry g ≫ τ.inv.app B))
-  refine ⟨(f ≫ CategoryTheory.inv (F'.map ((ihomComparison T A).natTrans.app B))) ≫
+  refine ⟨(f ≫ CategoryTheory.inv (F'.map ((ihomComparison T A).app B))) ≫
     τ.hom.app _, ?_⟩
   apply uncurry_injective
   rw [← cancel_epi (τ.hom.app A ▷ Y), Category.assoc,
@@ -125,12 +125,12 @@ up to the tensorator and `τ`, the image under `F'` of `x : T (A ⊗ y) ⟶ T B`
 the comparison map of `F`, explicitly. -/
 lemma comp_ihomComparison_app_eq_of_uncurry_eq {T : C ⥤ C'} {F' : C' ⥤ D} {F : C ⥤ D}
     [T.LaxMonoidal] [F'.LaxMonoidal] [F.LaxMonoidal] (τ : T ⋙ F' ≅ F)
-    [NatTrans.IsMonoidal τ.hom] {A B y : C} [IsIso ((ihomComparison T A).natTrans.app B)]
+    [NatTrans.IsMonoidal τ.hom] {A B y : C} [IsIso ((ihomComparison T A).app B)]
     (x : T.obj (A ⊗ y) ⟶ T.obj B) (g : F.obj y ⟶ (ihom (F.obj A)).obj (F.obj B))
     (hg : uncurry g = μ F A y ≫ τ.inv.app _ ≫ F'.map x ≫ τ.hom.app B) :
     (τ.inv.app y ≫ F'.map (curry (μ T A y ≫ x) ≫
-      CategoryTheory.inv ((ihomComparison T A).natTrans.app B)) ≫ τ.hom.app _) ≫
-        (ihomComparison F A).natTrans.app B = g := by
+      CategoryTheory.inv ((ihomComparison T A).app B)) ≫ τ.hom.app _) ≫
+        (ihomComparison F A).app B = g := by
   apply uncurry_injective
   rw [Category.assoc, Category.assoc, ← Category.assoc (τ.inv.app y)]
   rw [← cancel_epi (τ.hom.app A ▷ _), whiskerRight_comp_uncurry_comp_ihomComparison_app, hg]
@@ -156,10 +156,10 @@ omit [∀ (i j : I) (h : i ≤ j), NatTrans.IsMonoidal (c.iso h).hom] in
 `g₁ g₂ : y ⟶ [A, B]` at stage `m` have the same composite `Φ m g ≫ v` with the comparison map
 `v : Φ m [A, B] ⟶ [Φ m A, Φ m B]`, then `Φ m g₁ = Φ m g₂`. -/
 lemma map_eq_map_of_map_comp_ihomComparison_app_eq (hc : c.IsFilteredTwoColimit)
-    (hT : ∀ (i j : I) (h : i ≤ j) (A : C i), IsIso (ihomComparison (c.T h) A).natTrans)
+    (hT : ∀ (i j : I) (h : i ≤ j) (A : C i), IsIso (ihomComparison (c.T h) A))
     {m : I} {y A B : C m} (g₁ g₂ : y ⟶ (ihom A).obj B)
-    (hg : (c.Φ m).map g₁ ≫ (ihomComparison (c.Φ m) A).natTrans.app B =
-      (c.Φ m).map g₂ ≫ (ihomComparison (c.Φ m) A).natTrans.app B) :
+    (hg : (c.Φ m).map g₁ ≫ (ihomComparison (c.Φ m) A).app B =
+      (c.Φ m).map g₂ ≫ (ihomComparison (c.Φ m) A).app B) :
     (c.Φ m).map g₁ = (c.Φ m).map g₂ := by
   rw [map_comp_ihomComparison_app_eq_iff] at hg
   obtain ⟨m', h, hTg⟩ := hc.homInj m _ _ _ _ hg
@@ -172,11 +172,11 @@ lemma map_eq_map_of_map_comp_ihomComparison_app_eq (hc : c.IsFilteredTwoColimit)
 `g : y ⟶ [A, B]` at stage `m` and `f : Φ m y ⟶ Φ m [A, B]` have the same composite with the
 comparison map `v : Φ m [A, B] ⟶ [Φ m A, Φ m B]`, then `Φ m g = f`. -/
 lemma map_eq_of_map_comp_ihomComparison_app_eq (hc : c.IsFilteredTwoColimit)
-    (hT : ∀ (i j : I) (h : i ≤ j) (A : C i), IsIso (ihomComparison (c.T h) A).natTrans)
+    (hT : ∀ (i j : I) (h : i ≤ j) (A : C i), IsIso (ihomComparison (c.T h) A))
     {m : I} {y A B : C m} (g : y ⟶ (ihom A).obj B)
     (f : (c.Φ m).obj y ⟶ (c.Φ m).obj ((ihom A).obj B))
-    (hf : (c.Φ m).map g ≫ (ihomComparison (c.Φ m) A).natTrans.app B =
-      f ≫ (ihomComparison (c.Φ m) A).natTrans.app B) :
+    (hf : (c.Φ m).map g ≫ (ihomComparison (c.Φ m) A).app B =
+      f ≫ (ihomComparison (c.Φ m) A).app B) :
     (c.Φ m).map g = f := by
   obtain ⟨m', h, h', x, rfl⟩ := hc.homSurj m m y _ f
   obtain rfl : h = h' := rfl
@@ -193,10 +193,10 @@ lemma map_eq_of_map_comp_ihomComparison_app_eq (hc : c.IsFilteredTwoColimit)
 with the comparison map `v : Φ k [A, B] ⟶ [Φ k A, Φ k B]` is injective on morphisms from an
 object `Φ k y` coming from the same stage. -/
 lemma eq_of_comp_ihomComparison_app_eq (hc : c.IsFilteredTwoColimit)
-    (hT : ∀ (i j : I) (h : i ≤ j) (A : C i), IsIso (ihomComparison (c.T h) A).natTrans)
+    (hT : ∀ (i j : I) (h : i ≤ j) (A : C i), IsIso (ihomComparison (c.T h) A))
     {k : I} {y A B : C k} (f f' : (c.Φ k).obj y ⟶ (c.Φ k).obj ((ihom A).obj B))
-    (hf : f ≫ (ihomComparison (c.Φ k) A).natTrans.app B =
-      f' ≫ (ihomComparison (c.Φ k) A).natTrans.app B) :
+    (hf : f ≫ (ihomComparison (c.Φ k) A).app B =
+      f' ≫ (ihomComparison (c.Φ k) A).app B) :
     f = f' := by
   obtain ⟨m, h, h', x, rfl⟩ := hc.homSurj k k y _ f
   obtain rfl : h = h' := rfl
@@ -214,9 +214,9 @@ lemma eq_of_comp_ihomComparison_app_eq (hc : c.IsFilteredTwoColimit)
 morphism from `Φ k y` to `[Φ k A, Φ k B]` factors through the comparison map
 `Φ k [A, B] ⟶ [Φ k A, Φ k B]`. -/
 lemma exists_comp_ihomComparison_app_eq_of_obj (hc : c.IsFilteredTwoColimit)
-    (hT : ∀ (i j : I) (h : i ≤ j) (A : C i), IsIso (ihomComparison (c.T h) A).natTrans)
+    (hT : ∀ (i j : I) (h : i ≤ j) (A : C i), IsIso (ihomComparison (c.T h) A))
     {k : I} {y A B : C k} (g : (c.Φ k).obj y ⟶ (ihom ((c.Φ k).obj A)).obj ((c.Φ k).obj B)) :
-    ∃ f, f ≫ (ihomComparison (c.Φ k) A).natTrans.app B = g := by
+    ∃ f, f ≫ (ihomComparison (c.Φ k) A).app B = g := by
   obtain ⟨m, h, h', x, hx⟩ :=
     hc.homSurj k k (A ⊗ y) B (CategoryTheory.inv (μ (c.Φ k) A y) ≫ uncurry g)
   obtain rfl : h = h' := rfl
@@ -227,8 +227,8 @@ lemma exists_comp_ihomComparison_app_eq_of_obj (hc : c.IsFilteredTwoColimit)
 internal homs, so do the functors to the vertex. -/
 theorem isIso_ihomComparison_Φ [IsDirected I (· ≤ ·)] (hc : c.IsFilteredTwoColimit)
     (hT : ∀ (i j : I) (h : i ≤ j) (A : C i),
-      IsIso (Functor.LaxMonoidal.ihomComparison (c.T h) A).natTrans)
-    (i : I) (A : C i) : IsIso (Functor.LaxMonoidal.ihomComparison (c.Φ i) A).natTrans := by
+      IsIso (Functor.LaxMonoidal.ihomComparison (c.T h) A))
+    (i : I) (A : C i) : IsIso (Functor.LaxMonoidal.ihomComparison (c.Φ i) A) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro B
   obtain ⟨j, y, ⟨e⟩⟩ := hc.essSurjObj ((ihom ((c.Φ i).obj A)).obj ((c.Φ i).obj B))

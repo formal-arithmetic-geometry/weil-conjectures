@@ -341,7 +341,7 @@ noncomputable def supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : 
           U).obj M).obj N)) :=
   (existsUnique_supportedProduct Λ i₁ i₂ i h M N).exists.choose
 
-/-- Blueprint `def-pur-supported-cup`: Cup product with closed supports
+/-- Blueprint `proposition-purity-vector-bundles`: Cup product with closed supports
 
 The *cup product with supports* of classes `α : K ⟶ Ri₁_! Ri₁^! M` supported on `Z₁` and
 `β : K ⟶ Ri₂_! Ri₂^! N` supported on `Z₂`, a class supported on `Z = Z₁ ∩ Z₂`:
@@ -356,8 +356,8 @@ with coefficients `M[a]`.
 This is the blueprint's supported cup product
 `H^a_{Z₁}(U, M) × H^b_{Z₂}(U, N) ⟶ H^{a+b}_{Z₁ ∩ Z₂}(U, M ⊗^L N)` in the model of classes with
 supports as maps `Λ_U ⟶ Ri_! Ri^!(M[a])`. The blueprint reads a class as a map `i_* Λ_Z ⟶ M[a]`
-(`lem-pur-supported-hom`), which corresponds to its adjoint, and multiplies through
-`i_* Λ_{Z₁ ∩ Z₂} ≅ i₁_* Λ_{Z₁} ⊗^L i₂_* Λ_{Z₂}`; the product of supports
+(`lemma-sections-support-closed-subscheme--1`), which corresponds to its adjoint, and multiplies
+through `i_* Λ_{Z₁ ∩ Z₂} ≅ i₁_* Λ_{Z₁} ⊗^L i₂_* Λ_{Z₂}`; the product of supports
 `AlgebraicGeometry.Etale.supportedProduct` is the derived counterpart of this identification,
 characterised by its compatibility with the counits. The blueprint's construction itself, through
 `h_* Λ_{Z₁ ∩ Z₂} ≅ i₁_* Λ_{Z₁} ⊗ᴸ i₂_* Λ_{Z₂}`, is

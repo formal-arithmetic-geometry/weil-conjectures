@@ -382,8 +382,70 @@ lemma isIso_Q_map_mappingCone_map_comp_restrictScalarsActionMap (f : R →+* B)
   rw [heq, isIso_Q_map_iff_quasiIso]
   infer_instance
 
-set_option maxHeartbeats 1000000 in
--- the identifications of the strict model with restrictions of scalars are slow to check
+/-- A morphism to a restricted complex is a derived base change if its reduction followed by
+the action map is an isomorphism. -/
+private lemma isDerivedBaseChange_of_isIso_reductionActionMap
+    (hψsurj : Function.Surjective ψ) (hker : RingHom.ker ψ = Ideal.span {ϖ ^ n})
+    (Y : CochainComplex (Sheaf J (ModuleCat.{u + 1} B)) ℤ)
+    {K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
+    (η : K ⟶ Q.obj ((resComplex ψ).obj Y))
+    (hη : IsIso ((reductionFunctor J I n).map η ≫ reductionActionMap hϖ hI n hψ Y)) :
+    Sheaf.IsDerivedBaseChange
+      (η ≫ (Sheaf.restrictScalars J ψ).mapDerivedCategoryFactors.inv.app Y) := by
+  let F := Sheaf.restrictScalars J ψ
+  obtain ⟨M⟩ := KFlatModel.nonempty (J := J) K
+  let D := Sheaf.reductionDatum J ψ hψsurj (ϖ ^ n) hker
+  have := Sheaf.restrictScalars_full J ψ hψsurj
+  let Z := (D.Φ.mapHomologicalComplex (.up ℤ)).obj M.P
+  let u : Q.obj M.P ⟶ F.mapDerivedCategory.obj (Q.obj Z) :=
+    Q.map (D.complexMap M.P) ≫ F.mapDerivedCategoryFactors.inv.app Z
+  have hu : Sheaf.IsDerivedBaseChange u := fun N ↦ D.bijective_comp_map M.P M.isKFlat N
+  obtain ⟨g, hg⟩ := (hu (Q.obj Y)).2
+    (M.iso.hom ≫ η ≫ F.mapDerivedCategoryFactors.inv.app Y)
+  replace hg : u ≫ F.mapDerivedCategory.map g =
+      M.iso.hom ≫ η ≫ F.mapDerivedCategoryFactors.inv.app Y := hg
+  have key : Q.map (D.complexMap M.P) ≫ resQ g = M.iso.hom ≫ η := by
+    change Q.map (D.complexMap M.P) ≫ F.mapDerivedCategoryFactors.inv.app Z ≫
+      F.mapDerivedCategory.map g ≫ F.mapDerivedCategoryFactors.hom.app Y = _
+    rw [← assoc, ← assoc, hg, assoc, assoc, Iso.inv_hom_id_app]
+    erw [comp_id]
+  have hred : (reductionFunctor J I n).map M.iso.hom ≫
+      ((reductionFunctor J I n).map η ≫ reductionActionMap hϖ hI n hψ Y) =
+      ((reductionConeIso hϖ hI n M.P).hom ≫
+        Q.map (CochainComplex.mappingCone.map (ϖ ^ n • 𝟙 M.P)
+          (ϖ ^ n • 𝟙 ((resComplex ψ).obj Z))
+          (D.complexMap M.P) (D.complexMap M.P) (by simp) ≫
+            restrictScalarsActionMap hψ Z)) ≫ resQ g := by
+    rw [← Functor.map_comp_assoc, ← key, Functor.map_comp, assoc,
+      reductionFunctor_map_comp_actionMap hϖ hI n hψ g, reductionActionMap, ← assoc, ← assoc]
+    erw [reductionConeIso_hom_naturality]
+    simp
+    rfl
+  have hW := isIso_Q_map_mappingCone_map_comp_restrictScalarsActionMap hϖ
+    ψ hψsurj hker hψ M.P M.flat
+  let W := (reductionConeIso hϖ hI n M.P).hom ≫
+    Q.map (CochainComplex.mappingCone.map (ϖ ^ n • 𝟙 M.P)
+      (ϖ ^ n • 𝟙 ((resComplex ψ).obj Z))
+      (D.complexMap M.P) (D.complexMap M.P) (by simp) ≫ restrictScalarsActionMap hψ Z)
+  have : IsIso (W ≫ resQ g) := by
+    rw [← hred]
+    infer_instance
+  have : IsIso (resQ (ψ := ψ) g) := IsIso.of_isIso_comp_left W _
+  have : IsIso (F.mapDerivedCategory.map g) := by
+    have : IsIso (F.mapDerivedCategoryFactors.inv.app Z ≫
+        F.mapDerivedCategory.map g ≫ F.mapDerivedCategoryFactors.hom.app Y) :=
+      ‹IsIso (resQ (ψ := ψ) g)›
+    have : IsIso (F.mapDerivedCategory.map g ≫ F.mapDerivedCategoryFactors.hom.app Y) :=
+      IsIso.of_isIso_comp_left (F.mapDerivedCategoryFactors.inv.app Z) _
+    exact IsIso.of_isIso_comp_right _ (F.mapDerivedCategoryFactors.hom.app Y)
+  have : IsIso g := isIso_of_isIso_derivedRestrictScalars_map ψ g
+  have heq : η ≫ F.mapDerivedCategoryFactors.inv.app Y =
+      M.iso.symm.hom ≫ u ≫ F.mapDerivedCategory.map (asIso g).hom := by
+    rw [asIso_hom, hg]
+    simp
+  rw [heq]
+  exact (hu.comp_map_iso (asIso g)).of_iso M.iso.symm
+
 include hϖ hI in
 /-- **The legs of the derived limit of a normalized tower are derived base changes.** Let
 `L_n ∈ D(J, R ⧸ Iⁿ)` be a tower whose transitions `t_n : L_{n+1} ⟶ Res L_n` exhibit `L_n` as
@@ -423,77 +485,13 @@ theorem isDerivedBaseChange_π_comp_quotientTowerFunctorIso_hom
   replace hiso : IsIso ((reductionFunctor J I n).map π' ≫ reductionActionMap hϖ hI n hψn Mn.P) := by
     rw [hπ']
     exact hiso
-  let F := Sheaf.restrictScalars J (Ideal.Quotient.mk (I ^ n))
-  have hcancel : (quotientTowerFunctorIso L t n).hom ≫ F.mapDerivedCategory.map Mn.iso.inv ≫
-      F.mapDerivedCategoryFactors.hom.app Mn.P = 𝟙 _ := by
-    simp only [quotientTowerFunctorIso, towerFunctorIso, Iso.trans_hom, Iso.symm_hom,
-      Functor.mapIso_hom, Iso.app_inv, assoc]
-    erw [← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id, id_comp,
-      Iso.inv_hom_id_app]
-    rfl
-  -- a K-flat model of the derived limit and its strict reduction
-  obtain ⟨M₀⟩ := KFlatModel.nonempty (J := J) c.pt
   have hker : RingHom.ker (Ideal.Quotient.mk (I ^ n)) = Ideal.span {ϖ ^ n} := by
     rw [Ideal.mk_ker, hI, Ideal.span_singleton_pow]
-  let D := Sheaf.reductionDatum J (Ideal.Quotient.mk (I ^ n)) Ideal.Quotient.mk_surjective
-    (ϖ ^ n) hker
-  have := Sheaf.restrictScalars_full J (Ideal.Quotient.mk (I ^ n)) Ideal.Quotient.mk_surjective
-  let Y := (D.Φ.mapHomologicalComplex (.up ℤ)).obj M₀.P
-  let u : Q.obj M₀.P ⟶ F.mapDerivedCategory.obj (Q.obj Y) :=
-    Q.map (D.complexMap M₀.P) ≫ F.mapDerivedCategoryFactors.inv.app Y
-  have hu : Sheaf.IsDerivedBaseChange u := fun N ↦ D.bijective_comp_map M₀.P M₀.isKFlat N
-  obtain ⟨g₀, hg₀⟩ := (hu (L n)).2 (M₀.iso.hom ≫ c.π.app (op n) ≫
-    (quotientTowerFunctorIso L t n).hom)
-  replace hg₀ : u ≫ F.mapDerivedCategory.map g₀ =
-      M₀.iso.hom ≫ c.π.app (op n) ≫ (quotientTowerFunctorIso L t n).hom := hg₀
-  let g := g₀ ≫ Mn.iso.inv
-  have key : Q.map (D.complexMap M₀.P) ≫ resQ g = M₀.iso.hom ≫ π' := by
-    have e₁ : Q.map (D.complexMap M₀.P) ≫ resQ g =
-        (u ≫ F.mapDerivedCategory.map g₀) ≫ F.mapDerivedCategory.map Mn.iso.inv ≫
-          F.mapDerivedCategoryFactors.hom.app Mn.P := by
-      simp only [resQ, g, u, F, Functor.map_comp, assoc]
-      rfl
-    rw [e₁, hg₀, assoc, assoc, hcancel]
-    erw [comp_id]
-    rw [hπ']
-  -- the reduction of the leg, followed by the action map
-  have hred : (reductionFunctor J I n).map M₀.iso.hom ≫
-      ((reductionFunctor J I n).map π' ≫ reductionActionMap hϖ hI n hψn Mn.P) =
-      ((reductionConeIso hϖ hI n M₀.P).hom ≫
-        Q.map (CochainComplex.mappingCone.map (ϖ ^ n • 𝟙 M₀.P)
-          (ϖ ^ n • 𝟙 ((resComplex (Ideal.Quotient.mk (I ^ n))).obj Y))
-          (D.complexMap M₀.P) (D.complexMap M₀.P) (by simp) ≫
-            restrictScalarsActionMap hψn Y)) ≫ resQ g := by
-    rw [← Functor.map_comp_assoc, ← key, Functor.map_comp, assoc,
-      reductionFunctor_map_comp_actionMap hϖ hI n hψn g, reductionActionMap, ← assoc, ← assoc]
-    erw [reductionConeIso_hom_naturality]
-    simp
-    rfl
-  have hW := isIso_Q_map_mappingCone_map_comp_restrictScalarsActionMap hϖ
-    (Ideal.Quotient.mk (I ^ n)) Ideal.Quotient.mk_surjective hker hψn M₀.P M₀.flat
-  let W := (reductionConeIso hϖ hI n M₀.P).hom ≫
-    Q.map (CochainComplex.mappingCone.map (ϖ ^ n • 𝟙 M₀.P)
-      (ϖ ^ n • 𝟙 ((resComplex (Ideal.Quotient.mk (I ^ n))).obj Y))
-      (D.complexMap M₀.P) (D.complexMap M₀.P) (by simp) ≫ restrictScalarsActionMap hψn Y)
-  have : IsIso (W ≫ resQ g) := by
-    rw [← hred]
-    infer_instance
-  have : IsIso (resQ (ψ := Ideal.Quotient.mk (I ^ n)) g) := IsIso.of_isIso_comp_left W _
-  have : IsIso (F.mapDerivedCategory.map g) := by
-    have : IsIso (F.mapDerivedCategoryFactors.inv.app Y ≫
-        F.mapDerivedCategory.map g ≫ F.mapDerivedCategoryFactors.hom.app Mn.P) :=
-      ‹IsIso (resQ (ψ := Ideal.Quotient.mk (I ^ n)) g)›
-    have : IsIso (F.mapDerivedCategory.map g ≫ F.mapDerivedCategoryFactors.hom.app Mn.P) :=
-      IsIso.of_isIso_comp_left (F.mapDerivedCategoryFactors.inv.app Y) _
-    exact IsIso.of_isIso_comp_right _ (F.mapDerivedCategoryFactors.hom.app Mn.P)
-  have : IsIso g := isIso_of_isIso_derivedRestrictScalars_map (Ideal.Quotient.mk (I ^ n)) g
-  have : IsIso g₀ := IsIso.of_isIso_comp_right g₀ Mn.iso.inv
-  have heq : c.π.app (op n) ≫ (quotientTowerFunctorIso L t n).hom =
-      M₀.iso.symm.hom ≫ u ≫ F.mapDerivedCategory.map (asIso g₀).hom := by
-    rw [asIso_hom, hg₀]
-    simp
-  rw [heq]
-  exact (hu.comp_map_iso (asIso g₀)).of_iso M₀.iso.symm
+  have hbase := isDerivedBaseChange_of_isIso_reductionActionMap hϖ hI n hψn
+    Ideal.Quotient.mk_surjective hker Mn.P π' hiso
+  have hbase' := hbase.comp_map_iso Mn.iso
+  simpa only [hπ', quotientTowerFunctorIso, towerFunctorIso, Iso.trans_hom, Iso.symm_hom,
+    Functor.mapIso_hom, Iso.app_inv, assoc] using hbase'
 
 end Reduction
 

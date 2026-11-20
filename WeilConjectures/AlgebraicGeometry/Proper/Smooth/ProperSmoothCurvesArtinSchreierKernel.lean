@@ -31,11 +31,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 /-!
 # The Artin--Schreier sequence for a family of curves
 
-For a proper smooth family `f : C ⟶ S` of curves with geometrically connected fibres over a
+For a proper smooth family `f: C ⟶ S` of curves with geometrically connected fibres over a
 Noetherian base on which the prime `p` vanishes, the underlying abelian sheaf of `Rᵠf_* ℤ/p` is
 the kernel of `F - 1` for a Frobenius-linear endomorphism `F` of a finite locally free module.
 
-Source: Stacks Project, Tag 0GKV, proof of lemma-proper-smooth-family-curves, case (b).
+## References
+
+* Stacks Project, Tag 0GKV, case (b)
 -/
 
 @[expose] public section
@@ -91,20 +93,10 @@ private theorem epi_sheafCompose_uliftFunctor_map {S : Scheme.{u}}
   infer_instance
 
 /-- **The Artin--Schreier sequence for a family of curves.** For a proper smooth family
-`f : C ⟶ S` with geometrically connected one-dimensional fibres over a Noetherian base on
+`f: C ⟶ S` with geometrically connected one-dimensional fibres over a Noetherian base on
 which the prime `p` vanishes, and every degree `q`, the underlying abelian sheaf of
 `Rᵠf_* ℤ/p` is the universe lift of the kernel of `F - 1`, for a Frobenius-linear endomorphism
-`F` of the étale sheaf of a finite locally free module.
-
-Source: Stacks Project, Tag 0GKV, proof of lemma-proper-smooth-family-curves, case (b).
-
-Proof: apply the long exact sequence of `Rf_*` to the Artin--Schreier sequence
-`0 → ℤ/p → 𝔾ₐ → 𝔾ₐ → 0`. By `properSmoothCurves_higherDirectImage_ga_frobeniusLinear`
-the map `Rᵠ⁻¹f_* ℘` is `F' - 1` for a Frobenius-linear `F'`, which is étale locally surjective
-(`frobenius_linear_vector_bundle_locally_surjective`); in negative degree its target is zero.
-Hence the connecting map into `Rᵠf_* ℤ/p` vanishes, so `Rᵠf_* ℤ/p` is the kernel of
-`Rᵠf_* ℘ = F - 1`. Universe lifting preserves kernels, and forgetting the module structure
-commutes with higher direct images. -/
+`F` of the étale sheaf of a finite locally free module. -/
 theorem exists_forget₂_higherDirectImage_iso_frobeniusLinear_kernel
     {C S : Scheme.{u}} [IsNoetherian S]
     (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]
@@ -116,8 +108,8 @@ theorem exists_forget₂_higherDirectImage_iso_frobeniusLinear_kernel
       (∀ (U : S.Etale) (a : Γ(U.left, ⊤))
         (e : Γ((Scheme.Modules.tensorPullback U.hom).obj E, ⊤)),
         F.hom.app (op U)
-            ((((Scheme.Modules.tensorPullback U.hom).obj E).smul a).hom e) =
-          (((Scheme.Modules.tensorPullback U.hom).obj E).smul (a ^ p)).hom
+            ((((Scheme.Modules.tensorPullback U.hom).obj E).smul a).asHom.hom e) =
+          (((Scheme.Modules.tensorPullback U.hom).obj E).smul (a ^ p)).asHom.hom
             (F.hom.app (op U) e)) ∧
       Nonempty ((sheafCompose S.smallEtaleTopology
           (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod p))) AddCommGrpCat.{u + 1})).obj

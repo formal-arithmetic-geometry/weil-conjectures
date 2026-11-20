@@ -26,9 +26,9 @@ cocycle `γ : (∐ V_k) ×_S (∐ V_k) → GL_n(E)`, a point of the fibre produc
 point of a scheme `R` with `a : R ⟶ V_j`, `b : R ⟶ V_k`; it acts on the lattices of `Eⁿ` by a
 descent cocycle. By the lattice theorem on regular schemes
 (`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice`, blueprint
-`sk-lem-stratified-lattice`), it has a lattice-valued twisted section `σ`; the bases `g` of the
-`𝒪_E`-spans of the lattices `σ` (`PadicAlgCl.CompactOpenLattice.integersBasisGL`) are locally
-constant and conjugate `γ` into `GL_n(𝒪_E)`
+`lemma-lattices-after-finite-stratification`), it has a lattice-valued twisted section `σ`; the
+bases `g` of the `𝒪_E`-spans of the lattices `σ` (`PadicAlgCl.CompactOpenLattice.integersBasisGL`)
+are locally constant and conjugate `γ` into `GL_n(𝒪_E)`
 (`PadicAlgCl.CompactOpenLattice.norm_integersBasisGL_inv_mul_mul_le_one`).
 -/
 

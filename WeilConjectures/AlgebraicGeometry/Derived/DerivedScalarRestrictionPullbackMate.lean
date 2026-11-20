@@ -33,9 +33,9 @@ private theorem transport_left_mate
     (a₁ : E₁ ⊣ U₁) (a₂ : E₂ ⊣ U₂)
     {F F' : A ⥤ C} {G G' : B ⥤ D} (e : F' ≅ F) (g : G' ≅ G)
     (τ : U₁ ⋙ F ⟶ G ⋙ U₂)
-    [IsIso (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans)] :
+    [IsIso (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)))] :
     IsIso (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _
-      (Functor.whiskerLeft U₁ e.hom ≫ τ ≫ Functor.whiskerRight g.inv U₂))).natTrans) := by
+      (Functor.whiskerLeft U₁ e.hom ≫ τ ≫ Functor.whiskerRight g.inv U₂)))) := by
   have (P : A) : IsIso ((𝟙 E₁ : E₁ ⟶ E₁).app P) := by
     change IsIso (𝟙 _)
     infer_instance
@@ -65,7 +65,7 @@ private theorem pro_ordinary_iso
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (((mateEquiv (scalarAdjunction (Scheme.ProEt.topology Y) a)
       (scalarAdjunction (Scheme.ProEt.topology X) a)).symm
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso a f).hom)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso a f).hom))) := by
   apply isIso_left_mate_of_iterated
     (scalarAdjunction (Scheme.ProEt.topology Y) a)
     (scalarAdjunction (Scheme.ProEt.topology X) a)
@@ -90,7 +90,7 @@ private theorem pro_ordinary_iso
         ((ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} a).right_triangle_components
           _))
   change (mateEquiv _ _ (TwoSquare.mk _ _ _ _
-    (upperStarRestrictScalarsIso a f).hom)).natTrans = _ at h
+    (upperStarRestrictScalarsIso a f).hom)) = _ at h
   rw [h]
   infer_instance
 -- Instantiate the normalized flat-resolution comparison.
@@ -102,12 +102,12 @@ private theorem pro_computed_iso
       (scalarDerivedAdjunctionData (Scheme.ProEt.topology X) a).adjunction).symm
       (TwoSquare.mk _ _ _ _
         (Functor.mapDerivedCategorySquareIso
-          (upperStarRestrictScalarsIso a f)).hom)).natTrans) := by
+          (upperStarRestrictScalarsIso a f)).hom))) := by
   have := pro_flat A f
   have : IsIso (((mateEquiv
       (scalarAdjunction (Scheme.ProEt.topology Y) a)
       (scalarAdjunction (Scheme.ProEt.topology X) a)).symm
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso a f).symm.inv)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso a f).symm.inv))) := by
     simpa only [Iso.symm_inv] using pro_ordinary_iso a f
   have h := derived_mate_isIso_of_flat
     (A := Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))
@@ -146,7 +146,7 @@ theorem proEtaleScalarPullbackMate_isIso
         (Scheme.ProEt.topology Y) a))
       (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars
         (Scheme.ProEt.topology X) a))).symm
-      (TwoSquare.mk _ _ _ _ (leftDerivedUpperStarRestrictScalarsIso a f).hom)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ (leftDerivedUpperStarRestrictScalarsIso a f).hom))) := by
   have := pro_computed_iso a f
   have := isIso_left_mate_change_adjunction
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars
@@ -173,11 +173,11 @@ private theorem et_computed_iso
       (scalarDerivedAdjunctionData X.smallEtaleTopology a).adjunction).symm
       (TwoSquare.mk _ _ _ _
         (Functor.mapDerivedCategorySquareIso
-          (Etale.upperStarRestrictScalarsIsoSheaf a f)).hom)).natTrans) := by
+          (Etale.upperStarRestrictScalarsIsoSheaf a f)).hom))) := by
   have hOrd : IsIso (((mateEquiv
       (scalarAdjunction Y.smallEtaleTopology a)
       (scalarAdjunction X.smallEtaleTopology a)).symm
-      (TwoSquare.mk _ _ _ _ (Etale.upperStarRestrictScalarsIsoSheaf a f).hom)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ (Etale.upperStarRestrictScalarsIsoSheaf a f).hom))) := by
     apply isIso_left_mate_of_iterated (scalarAdjunction Y.smallEtaleTopology a)
       (scalarAdjunction X.smallEtaleTopology a)
       (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
@@ -187,7 +187,7 @@ private theorem et_computed_iso
   have : IsIso (((mateEquiv
       (scalarAdjunction Y.smallEtaleTopology a)
       (scalarAdjunction X.smallEtaleTopology a)).symm
-      (TwoSquare.mk _ _ _ _ (Etale.upperStarRestrictScalarsIsoSheaf a f).symm.inv)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ (Etale.upperStarRestrictScalarsIsoSheaf a f).symm.inv))) := by
     simpa only [Iso.symm_inv] using hOrd
   have h := derived_mate_isIso_of_flat
     (A := Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
@@ -225,7 +225,7 @@ theorem etaleScalarPullbackMate_isIso
         Y.smallEtaleTopology a))
       (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars
         X.smallEtaleTopology a))).symm
-      (TwoSquare.mk _ _ _ _ (Etale.scalarRestrictionPullbackIso a f).hom)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ (Etale.scalarRestrictionPullbackIso a f).hom))) := by
   have := et_computed_iso a f
   have := isIso_left_mate_change_adjunction
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars

@@ -9,6 +9,7 @@ import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.AlgebraicGeometry.RingComplexGodementCech
 import WeilConjectures.AlgebraicGeometry.RingComplexOrderedScalarIso
+public import Mathlib.RingTheory.Flat.Localization
 
 /-! # Element-power torsion in ordered localization-model cohomology -/
 

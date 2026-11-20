@@ -30,7 +30,8 @@ The sheaf–function compatibility (`ProEtale.CondensedRing.ShriekTraceFunctionA
    (`ProEtale.CondensedRing.shriekTraceFunctionAt_overProdMap_polyAffineProj`), the composite of
    the open immersion into `ℙ¹_{𝔸ʲ_k ×_k E}` (`shriekTraceFunctionAt_of_isOpenImmersion`) and of
    the projection of item 1. This is the case of the affine line in blueprint
-   `thm-trf-coefficient-morphism-trace-formula`, the geometric base case of the trace formula.
+   `theorem-trace-formula-frobenius-correspondence--1`, the geometric base case of the trace
+   formula.
 
 -/
 
@@ -79,7 +80,7 @@ automorphisms `𝟙 ×_k e_E`. The relative affine line is the open complement o
 infinity in `ℙ¹_B` (`Scheme.overAffineLineι`), so the compatibility is the composite of the one
 along the open immersion (`shriekTraceFunctionAt_of_isOpenImmersion`) and the one along
 `ℙ¹_B ⟶ B` (`shriekTraceFunctionAt_overProjectiveLineProj`); this is the case of the affine
-line in blueprint `thm-trf-coefficient-morphism-trace-formula`. -/
+line in blueprint `theorem-trace-formula-frobenius-correspondence--1`. -/
 theorem shriekTraceFunctionAt_overProdMap_polyAffineProj (j : ℕ) (E : Over (Spec (.of k)))
     [LocallyOfFiniteType E.hom] [QuasiCompact E.hom] [IsSeparated E.hom] (eE : E ≅ E)
     (he : ∃ m : ℕ, eE.pow (m + 1) = Iso.refl E) :

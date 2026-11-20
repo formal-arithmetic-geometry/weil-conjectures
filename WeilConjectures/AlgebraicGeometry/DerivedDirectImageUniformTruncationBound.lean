@@ -57,7 +57,7 @@ Proof:
 4. Use the standard truncation triangle from
    `def-sbc-standard-tstructure-derived-category`, with first term
    T = τ_{≤ -n-1}E. The shift T[-n-1] has no positive cohomology. By step 3 and shift
-   compatibility of `def-pc-derived-direct-image`, H^j(Rf_*T) vanishes whenever
+   compatibility of `lemma-coherent-base-change-invertible-sheaves`, H^j(Rf_*T) vanishes whenever
    j+n+1 ≥ N. For n ≥ N-q this kills both H^q(Rf_*T) and H^{q+1}(Rf_*T).
    The long exact cohomology sequence therefore makes the displayed canonical
    truncation map an isomorphism in degree q, for all sufficiently large n. -/

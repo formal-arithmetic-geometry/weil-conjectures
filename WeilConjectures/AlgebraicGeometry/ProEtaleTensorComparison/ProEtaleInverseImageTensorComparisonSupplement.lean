@@ -90,8 +90,13 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageTensorCompar
 /-!
 # Normalized tensor comparison for pro-etale inverse image
 
-Source: Stacks Project, Tags 03EK, 03EL and 09A5
-(blueprint: lem-pur-proetale-inverse-image-tensor-comparison).
+## References
+
+* Stacks, Section 03EK
+* Stacks Project, Modules on Sites, Section 03EK and Tag 03D7
+* Stacks Project, Modules on Sites, Tag 03D2
+* Stacks Project, Sites, Tag 00YV, and Modules on Sites, Tag 03D2
+* Stacks, Tags 03EK, 03EL and 09A5, with Tags 00VE, 00WH, 00WX and 03CB for coherence
 -/
 
 @[expose] public section
@@ -105,13 +110,11 @@ open AlgebraicGeometry.Scheme SheafOfModules
 
 namespace AlgebraicGeometry.ProEtaleTensorComparison
 
-/-- The recorded sheafification of the sectionwise tensor product.
-Source: Stacks, Section 03EK (blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+/-- The recorded sheafification of the sectionwise tensor product. -/
 noncomputable abbrev tensor {X : Scheme.{u}} {R : Rings X} (M N : Modules R) : Modules R :=
   (siteSheafTensorRight N).obj M
 
-/-- The local pure tensor followed by the existing sheafification unit.
-Source: Stacks, Section 03EK (blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+/-- The local pure tensor followed by the existing sheafification unit. -/
 noncomputable abbrev pure {X : Scheme.{u}} {R : Rings X} (M N : Modules R)
     (V : X.ProEt) (s : M.val.obj (op V)) (t : N.val.obj (op V)) :=
   siteSheafTensorTmul M N (op V) s t
@@ -125,8 +128,7 @@ private theorem inverseSection_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
 -- Use the canonical-unit API without unfolding the small-model module construction.
 attribute [local irreducible] proEtaleModuleInverseImage inverseSection
 
-/-- The canonical ring compositor is the adjoint conjugate of pullback associativity.
-Source: Stacks, Tag 03CB (blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+/-- The canonical ring compositor is the adjoint conjugate of pullback associativity. -/
 noncomputable def ringComp {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
     (R : Rings Z) : inverseRing (g ≫ h) R ≅ inverseRing g (inverseRing h R) :=
   ((conjugateIsoEquiv
@@ -155,28 +157,31 @@ private theorem ringComp_unit {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
 -- Treat the adjoint-conjugation data through its unit equations.
 attribute [local irreducible] ringComp
 
-/-- Restriction of scalars is Mathlib's existing functor.
-Source: Stacks, Section 03EK (blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+/-- Restriction of scalars is Mathlib's existing functor. -/
 noncomputable abbrev restrict {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S) :
     Modules S ⥤ Modules R :=
   SheafOfModules.restrictScalars.{u + 1}
     ((sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map a)
 
-/-- Inverse image on ring morphisms, from the recorded functor.
-Source: Stacks, Tag 03D2 (blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+/-- Inverse image on ring morphisms, from the recorded functor. -/
 noncomputable abbrev inverseRingMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     {R S : Rings Y} (a : R ⟶ S) :=
   (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map a
 
-set_option maxHeartbeats 800000 in
--- Elaborate the two scalar actions in the sectionwise bilinear pairing.
-/-- The coefficient quotient is uniquely fixed by local pure tensors.
-Source: Stacks, Section 03EK; clause 2
-(blueprint: lem-pur-proetale-inverse-image-tensor-comparison).
-Proof: the pure pairing over S is R-balanced through a. Its sectionwise bilinear
-universal property, followed by module sheafification, gives the stated map. Every
-map with the formula has the same adjunct from the tensor presheaf, proving uniqueness. -/
+-- Restrict a tensor pairing at the level of modules, before using it on sheaf sections.
+private noncomputable def restrictedTensorPairing {A B : Type u} [CommRing A] [CommRing B]
+    (c : A →+* B) (M N P : ModuleCat.{u} B) (f : TensorProduct B M N →ₗ[B] P) :
+    (ModuleCat.restrictScalars c).obj M →ₗ[A]
+      (ModuleCat.restrictScalars c).obj N →ₗ[A] (ModuleCat.restrictScalars c).obj P :=
+  let b := (TensorProduct.mk B M N).compr₂ f
+  LinearMap.mk₂ A (fun x y ↦ b x y)
+    (fun x y z ↦ LinearMap.congr_fun (b.map_add x y) z)
+    (fun r x y ↦ LinearMap.congr_fun (b.map_smul (c r) x) y)
+    (fun x y z ↦ (b x).map_add y z)
+    (fun r x y ↦ (b x).map_smul (c r) y)
+
+/-- The coefficient quotient is uniquely fixed by local pure tensors. -/
 theorem coefficientQuotient_exists {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S)
     (M N : Modules S) :
     ∃! p : tensor ((restrict a).obj M) ((restrict a).obj N) ⟶
@@ -192,44 +197,9 @@ theorem coefficientQuotient_exists {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S
       ((restrict a).obj M).val.obj U →ₗ[R.obj.obj U]
         ((restrict a).obj N).val.obj U →ₗ[R.obj.obj U]
           ((restrict a).obj (tensor M N)).val.obj U :=
-    { toFun := fun x ↦
-        { toFun := fun y ↦ pure M N U.unop x y
-          map_add' := by
-            intro y z
-            change ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-              (x ⊗ₜ[S.obj.obj U] (y + z)) = _
-            rw [TensorProduct.tmul_add]
-            exact ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U).hom.map_add _ _
-          map_smul' := by
-            intro r y
-            change ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-              (x ⊗ₜ[S.obj.obj U] (a.hom.app U r • (show N.val.obj U from y))) =
-              a.hom.app U r •
-                ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-                  (x ⊗ₜ[S.obj.obj U] y)
-            rw [TensorProduct.tmul_smul]
-            exact ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U).hom.map_smul _ _ }
-      map_add' := by
-        intro x y
-        apply LinearMap.ext
-        intro z
-        change ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-          ((x + y) ⊗ₜ[S.obj.obj U] z) = _
-        rw [TensorProduct.add_tmul]
-        exact ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U).hom.map_add _ _
-      map_smul' := by
-        intro r x
-        apply LinearMap.ext
-        intro y
-        change ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-          ((a.hom.app U r • (show M.val.obj U from x)) ⊗ₜ[S.obj.obj U] y) =
-            a.hom.app U r •
-              ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-                (x ⊗ₜ[S.obj.obj U] y)
-        exact (congrArg ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-          (TensorProduct.smul_tmul' (R := S.obj.obj U) (a.hom.app U r)
-            (show M.val.obj U from x) (show N.val.obj U from y)).symm).trans
-              (((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U).hom.map_smul _ _) }
+    restrictedTensorPairing (a.hom.app U).hom (M.val.obj U) (N.val.obj U)
+      ((tensor M N).val.obj U)
+      ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U).hom
   let q : siteTensorPresheaf ((restrict a).obj M).val ((restrict a).obj N).val ⟶
       ((restrict a).obj (tensor M N)).val :=
     { app := fun U ↦ ModuleCat.ofHom
@@ -252,11 +222,7 @@ theorem coefficientQuotient_exists {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S
     intro V s t
     have h := (adj.homEquiv _ ((restrict a).obj (tensor M N))).apply_symm_apply q
     rw [Adjunction.homEquiv_unit] at h
-    have hh := congrArg (fun k ↦ k.app (op V) (s ⊗ₜ[R.obj.obj (op V)] t)) h
-    change p.val.app (op V) (pure ((restrict a).obj M) ((restrict a).obj N) V s t) =
-      TensorProduct.lift (β (op V)) (s ⊗ₜ[R.obj.obj (op V)] t) at hh
-    rw [TensorProduct.lift.tmul] at hh
-    exact hh
+    exact congrArg (fun k ↦ k.app (op V) (s ⊗ₜ[R.obj.obj (op V)] t)) h
   refine ⟨p, hp, ?_⟩
   intro p' hp'
   apply (adj.homEquiv _ ((restrict a).obj (tensor M N))).injective
@@ -269,22 +235,14 @@ theorem coefficientQuotient_exists {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S
   | add t s ht hs => simp only [map_add, ht, hs]
 
 /-- The canonical map from the tensor over R to the tensor over S, selected from its
-unique universal-property characterization, rather than from mere existence.
-Source: Stacks, Section 03EK (blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+unique universal-property characterization, rather than from mere existence. -/
 noncomputable def coefficientQuotient {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S)
     (M N : Modules S) :
     tensor ((restrict a).obj M) ((restrict a).obj N) ⟶ (restrict a).obj (tensor M N) :=
   Classical.choose (coefficientQuotient_exists a M N)
 
 /-- Inverse image commutes with restriction of the scalar action through a ring map;
-the identification is uniquely normalized by the actual adjunction units.
-Source: Stacks, Tag 03D2; the scalar identification in clause 2
-(blueprint: lem-pur-proetale-inverse-image-tensor-comparison).
-Proof: regard the module unit over S as an R-linear map by naturality of the ring
-unit with a. Its R-module adjunct gives the required map and the unit equation gives
-the formula. Under the normalized underlying-set identifications its underlying map
-is the identity, so reflection of isomorphisms by the forgetful functor makes it an
-isomorphism. Transposing a second normalized map proves uniqueness. -/
+the identification is uniquely normalized by the actual adjunction units. -/
 theorem scalarIdentification_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     {R S : Rings Y} (a : R ⟶ S) (M : Modules S) :
     ∃! e : (inverse f R).obj ((restrict a).obj M) ≅
@@ -372,8 +330,7 @@ theorem scalarIdentification_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (((he' V.unop s).trans (hp V.unop s).symm).trans
       (congrArg (p.val.app ((proEtaleBaseChange f).op.obj V)) hM).symm)
 
-/-- The unit-normalized scalar identification; uniqueness determines its data.
-Source: Stacks, Tag 03D2 (blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+/-- The unit-normalized scalar identification; uniqueness determines its data. -/
 noncomputable def scalarIdentification {X Y : Scheme.{u}} (f : X ⟶ Y)
     {R S : Rings Y} (a : R ⟶ S) (M : Modules S) :
     (inverse f R).obj ((restrict a).obj M) ≅
@@ -384,11 +341,8 @@ section TensorPairing
 
 universe uC vC uD vD r
 
-set_option maxHeartbeats 500000 in
--- Construct and sheafify the sectionwise bilinear pairing.
 /-- Pair two maps into module pushforwards, then use the sectionwise tensor universal
-property and module sheafification. The uniqueness is the same universal property.
-Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03D7. -/
+property and module sheafification. The uniqueness is the same universal property. -/
 private theorem tensorPushforwardPairing_exists
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -433,83 +387,10 @@ private theorem tensorPushforwardPairing_exists
   let β (U : Cᵒᵖ) : M.val.obj U →ₗ[R.obj.obj U]
       N.val.obj U →ₗ[R.obj.obj U]
         (T.obj H).val.obj U :=
-    { toFun := fun x ↦
-        { toFun := fun y ↦ siteSheafTensorTmul P Q (F.op.obj U)
-            (ηM.val.app U x) (ηN.val.app U y)
-          map_add' := by
-            intro y z
-            change ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-              (F.op.obj U))
-                (ηM.val.app U x ⊗ₜ[S.obj.obj
-                  (F.op.obj U)] ηN.val.app U (y + z)) = _
-            rw [(ηN.val.app U).hom.map_add, TensorProduct.tmul_add]
-            exact ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-              (F.op.obj U)).hom.map_add _ _
-          map_smul' := by
-            intro r y
-            have hn := (ηN.val.app U).hom.map_smul r y
-            change ηN.val.app U (r • y) =
-              a.hom.app U r •
-                (show Q.val.obj (F.op.obj U) from ηN.val.app U y) at hn
-            change ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-              (F.op.obj U))
-                (ηM.val.app U x ⊗ₜ[S.obj.obj
-                  (F.op.obj U)] ηN.val.app U (r • y)) =
-              a.hom.app U r •
-                ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-                  (F.op.obj U))
-                    (ηM.val.app U x ⊗ₜ[S.obj.obj
-                      (F.op.obj U)] ηN.val.app U y)
-            rw [hn]
-            exact (congrArg ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-              (F.op.obj U))
-                (TensorProduct.tmul_smul
-                  (R := S.obj.obj (F.op.obj U))
-                  (R' := S.obj.obj (F.op.obj U))
-                  (show S.obj.obj (F.op.obj U) from
-                    a.hom.app U r)
-                  (show P.val.obj (F.op.obj U) from ηM.val.app U x)
-                  (show Q.val.obj (F.op.obj U) from ηN.val.app U y))).trans
-              (((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-                (F.op.obj U)).hom.map_smul _ _) }
-      map_add' := by
-        intro x y
-        apply LinearMap.ext
-        intro z
-        change ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-          (F.op.obj U))
-            (ηM.val.app U (x + y) ⊗ₜ[S.obj.obj
-              (F.op.obj U)] ηN.val.app U z) = _
-        rw [(ηM.val.app U).hom.map_add, TensorProduct.add_tmul]
-        exact ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-          (F.op.obj U)).hom.map_add _ _
-      map_smul' := by
-        intro r x
-        apply LinearMap.ext
-        intro y
-        have hm := (ηM.val.app U).hom.map_smul r x
-        change ηM.val.app U (r • x) =
-          a.hom.app U r •
-            (show P.val.obj (F.op.obj U) from ηM.val.app U x) at hm
-        change ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-          (F.op.obj U))
-            (ηM.val.app U (r • x) ⊗ₜ[S.obj.obj
-              (F.op.obj U)] ηN.val.app U y) =
-          a.hom.app U r •
-            ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-              (F.op.obj U))
-                (ηM.val.app U x ⊗ₜ[S.obj.obj
-                  (F.op.obj U)] ηN.val.app U y)
-        rw [hm]
-        exact (congrArg ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-          (F.op.obj U))
-            (TensorProduct.smul_tmul' (R := S.obj.obj (F.op.obj U))
-              (R' := S.obj.obj (F.op.obj U))
-                (show S.obj.obj (F.op.obj U) from a.hom.app U r)
-                (show P.val.obj (F.op.obj U) from ηM.val.app U x)
-                (show Q.val.obj (F.op.obj U) from ηN.val.app U y)).symm).trans
-            (((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-              (F.op.obj U)).hom.map_smul _ _) }
+    (restrictedTensorPairing (a.hom.app U).hom (P.val.obj (F.op.obj U))
+      (Q.val.obj (F.op.obj U)) (H.val.obj (F.op.obj U))
+      ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app (F.op.obj U)).hom).compl₁₂
+        (ηM.val.app U).hom (ηN.val.app U).hom
   let q : siteTensorPresheaf M.val N.val ⟶
       (T.obj H).val :=
     { app := fun U ↦ ModuleCat.ofHom
@@ -541,11 +422,7 @@ private theorem tensorPushforwardPairing_exists
           (ηM.val.app (op V) x) (ηN.val.app (op V) y) := by
     have h := (adj.homEquiv _ (T.obj H)).apply_symm_apply q
     rw [Adjunction.homEquiv_unit] at h
-    have hh := congrArg (fun z ↦ z.app (op V) (x ⊗ₜ[R.obj.obj (op V)] y)) h
-    change k.val.app (op V) (siteSheafTensorTmul M N (op V) x y) =
-      TensorProduct.lift (β (op V)) (x ⊗ₜ[R.obj.obj (op V)] y) at hh
-    rw [TensorProduct.lift.tmul] at hh
-    exact hh
+    exact congrArg (fun z ↦ z.app (op V) (x ⊗ₜ[R.obj.obj (op V)] y)) h
   refine ⟨k, hk, ?_⟩
   intro k' hk'
   apply (adj.homEquiv _ (T.obj H)).injective
@@ -559,16 +436,7 @@ private theorem tensorPushforwardPairing_exists
 
 end TensorPairing
 
-/-- Existence and uniqueness of the module tensor comparison with its local normalization.
-Source: Stacks, Tag 03EL; clause 1
-(blueprint: lem-pur-proetale-inverse-image-tensor-comparison).
-Proof: pair the two module adjunction units, using the pure pairing in the target
-sheaf tensor. The sectionwise pairing is bilinear through the ring adjunction unit,
-and is compatible with restrictions. Tensor universality and module sheafification
-give a map into the module pushforward. Transpose it through the canonical module
-adjunction. The unit equation gives the required formula. Conversely any map with
-that formula has the same adjunct on all original pure tensors; tensor universality
-and sheafification identify the adjuncts and hence the maps. -/
+/-- Existence and uniqueness of the module tensor comparison with its local normalization. -/
 theorem comparison_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Rings Y)
     (M N : Modules R) :
     ∃! s : (inverse f R).obj (tensor M N) ⟶
@@ -618,15 +486,13 @@ theorem comparison_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Rings Y)
       (inverseSection_unit f R M (op V) x)
       (inverseSection_unit f R N (op V) y)).symm
 
-/-- The canonical sigma, determined uniquely by its local pure-tensor formula.
-Source: Stacks, Tag 03EL (blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+/-- The canonical sigma, determined uniquely by its local pure-tensor formula. -/
 noncomputable def comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Rings Y)
     (M N : Modules R) :
     (inverse f R).obj (tensor M N) ⟶ tensor ((inverse f R).obj M) ((inverse f R).obj N) :=
   Classical.choose (comparison_exists f R M N)
 
-/-- The tensor map in both variables is the composite of the two recorded factor maps.
-Source: Stacks, Section 03EK (blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+/-- The tensor map in both variables is the composite of the two recorded factor maps. -/
 noncomputable def tensorMap {X : Scheme.{u}} {R : Rings X} {M M' N N' : Modules R}
     (a : M ⟶ M') (b : N ⟶ N') : tensor M N ⟶ tensor M' N' :=
   (siteSheafTensorRight N).map a ≫ siteSheafTensorSecondMap M' b
@@ -648,8 +514,7 @@ private theorem tensor_hom_ext {X : Scheme.{u}} {R : Rings X}
   | tmul x y => exact h U.unop x y
   | add t s ht hs => simp only [map_add, ht, hs]
 
-/-- Adjunction injectivity tests a module map on the images of original sections.
-Source: Stacks Project, Modules on Sites, Tag 03D2. -/
+/-- Adjunction injectivity tests a module map on the images of original sections. -/
 private theorem inverseModule_hom_ext {X Y : Scheme.{u}} (f : X ⟶ Y)
     {R : Rings Y} {M : Modules R} {K : Modules (inverseRing f R)}
     (p q : (inverse f R).obj M ⟶ K)
@@ -966,15 +831,7 @@ private theorem setComp_map_units {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ 
 
 -- Elaborate the semilinear actions on the iterated pullback.
 /-- The module compositor is uniquely fixed by the images of original sections,
-with the canonical fibre-product associator written explicitly.
-Source: Stacks, Tags 03CB and 03D2; clause 3
-(blueprint: lem-pur-proetale-inverse-image-tensor-comparison).
-Proof: compose the two module units and restrict along the fibre-product associator.
-The ring compositor unit equation makes this map linear through the composite ring
-unit. Its module adjunct is the displayed map and satisfies the section formula.
-Under the normalized underlying-set identifications it is the canonical set compositor,
-so the forgetful functor reflects its invertibility. Any second normalized map has
-the same adjunct, proving uniqueness. -/
+with the canonical fibre-product associator written explicitly. -/
 theorem moduleComp_exists {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
     (R : Rings Z) (M : Modules R) :
     ∃! e : (inverse (g ≫ h) R).obj M ≅
@@ -1136,9 +993,7 @@ theorem moduleComp_exists {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
   intro V s
   exact (he' V s).trans (hp V s).symm
 
-/-- The canonical semilinear module compositor, from its unique unit characterization.
-Source: Stacks, Tags 03CB and 03D2
-(blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+/-- The canonical semilinear module compositor, from its unique unit characterization. -/
 noncomputable def moduleComp {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
     (R : Rings Z) (M : Modules R) :
     (inverse (g ≫ h) R).obj M ≅
@@ -1146,8 +1001,7 @@ noncomputable def moduleComp {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
         ((inverse g (inverseRing h R)).obj ((inverse h R).obj M)) :=
   Classical.choose (moduleComp_exists g h R M)
 
-/-- The canonical ring identity comparison, from the inverse-image adjunction.
-Source: Stacks, Tag 00VE (blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+/-- The canonical ring identity comparison, from the inverse-image adjunction. -/
 noncomputable def ringId {X : Scheme.{u}} (R : Rings X) : inverseRing (𝟙 X) R ≅ R :=
   ((conjugateIsoEquiv Adjunction.id
     (proEtaleSheafAdjunction (𝟙 X) CommRingCat.{u + 1})).symm
@@ -1167,15 +1021,7 @@ private theorem ringId_unit {X : Scheme.{u}} (R : Rings X)
 attribute [local irreducible] ringId
 
 -- Elaborate the identity scalar transport through the adjunction unit.
-/-- The module identity comparison is uniquely normalized by the identity unit.
-Source: Stacks, Tags 00VE and 03D2; the last sentence of clause 3
-(blueprint: lem-pur-proetale-inverse-image-tensor-comparison).
-Proof: restriction along the canonical identity base-change isomorphism is linear
-through the identity ring compositor, by its adjunction unit equation. Transposing
-this map through the module adjunction gives the required map and its normalization.
-The normalized underlying-set map is the conjugate of the identity direct-image
-comparison, hence is invertible. The forgetful functor reflects its invertibility.
-Taking adjuncts proves uniqueness. -/
+/-- The module identity comparison is uniquely normalized by the identity unit. -/
 theorem moduleId_exists {X : Scheme.{u}} (R : Rings X) (M : Modules R) :
     ∃! e : (inverse (𝟙 X) R).obj M ≅ (restrict (ringId R).hom).obj M,
       ∀ (V : X.ProEt) (s : M.val.obj (op V)),
@@ -1273,14 +1119,12 @@ theorem moduleId_exists {X : Scheme.{u}} (R : Rings X) (M : Modules R) :
   intro V s
   exact (he' V s).trans (hp V s).symm
 
-/-- The canonical module identity comparison, from its unique unit characterization.
-Source: Stacks, Tag 00VE (blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+/-- The canonical module identity comparison, from its unique unit characterization. -/
 noncomputable def moduleId {X : Scheme.{u}} (R : Rings X) (M : Modules R) :
     (inverse (𝟙 X) R).obj M ≅ (restrict (ringId R).hom).obj M :=
   Classical.choose (moduleId_exists R M)
 
-/-- Forget a ring morphism to its actual underlying sheaf map.
-Source: Stacks, Tag 00YV (blueprint: lem-pur-proetale-inverse-image-tensor-comparison). -/
+/-- Forget a ring morphism to its actual underlying sheaf map. -/
 noncomputable abbrev ringMapSets {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S) :=
   (sheafCompose (ProEt.topology X) (CategoryTheory.forget CommRingCat.{u + 1})).map a
 
@@ -1668,20 +1512,7 @@ private theorem moduleSetsIdentification_naturality {X Y : Scheme.{u}} (f : X �
       ((proEtaleBaseChange f).op.obj U) z) hM.symm))
 
 /-- The specified module inverse image transports the ring and module operations along
-set inverse image.
-Source: Stacks Project, Sites, Tag 00YV, and Modules on Sites, Tag 03D2;
-the algebraic-structure step in stratum scalar extension.
-Adapted from the proof attached to lem-sp-proetale-algebraic-inverse-image.
-
-Proof: use the existing unit-normalized underlying-set identifications for rings and
-modules. The module adjunction unit is natural, so the module identification is natural:
-transpose its naturality square through the set adjunction and check on unit sections.
-The same method transports every operation graph. Both sides of each graph equation
-are sheaf maps out of the inverse image of its test sheaf. Their adjuncts agree because
-the ring unit preserves addition, multiplication, zero and one, and the module unit
-preserves addition, zero and the scalar action through the ring unit. Set modules to
-proEtaleModuleInverseImage itself, so the final functor equality is reflexivity.
-This argument includes empty schemes and zero rings and imposes no flatness assumption. -/
+set inverse image. -/
 private noncomputable def algebraicLift {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     SheafOfModules.AlgebraicInverseImage
@@ -2080,35 +1911,7 @@ private theorem comparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The normalized pro-etale inverse-image tensor comparison: invertibility, local formula,
 joint naturality, coefficient change, set/ring/module composition, and the identity case.
 The existence and uniqueness assertions are comparison_exists and setComp_unique; the
-coefficient quotient and the semilinear identifications above have unique normalizations.
-Source: Stacks, Tags 03EK, 03EL and 09A5, with Tags 00VE, 00WH, 00WX and 03CB for coherence
-(blueprint: lem-pur-proetale-inverse-image-tensor-comparison).
-Proof:
-1. Apply the canonical normalized ringed tensor construction with scalar map id_RI.
-Multiplication RI tensor_RI I(M) to I(M), inverse m mapped to 1 tensor m, conjugates its
-isomorphism to comparison. The generalized-element normalization at the pair (s,t),
-using naturality of the unit with both projections, is the displayed local formula.
-Naturality of the construction gives joint naturality and invertibility.
-2. Taking adjuncts identifies two candidate maps if they agree on all original pure
-tensors: the module adjunction makes the adjuncts R-linear, and the tensor bilinear
-universal property identifies them. This is the uniqueness argument of comparison_exists.
-3. The quotient pairings are balanced over the smaller ring. On every pulled-back
-original pure tensor, naturality of the unit for the quotient and the normalization of
-comparison give the same tensor in the larger-ring tensor product on both routes.
-Apply the adjunct equality criterion of step 2 to get the coefficient equation.
-4. Conjugate the direct-image pullback-associativity comparison to get the canonical set
-compositor. Its adjunction-unit equation gives the section formula and setComp_unique.
-The product-projection comparisons commute with this natural isomorphism, and naturality
-with every operation map therefore transports ring addition/multiplication and module
-addition/action. The terminal-object equation transports zero and one. These are exactly
-the ringComp and moduleComp underlying-set equations below.
-5. Evaluate the two tensor-composition routes on each original pulled-back pure tensor.
-The unit formulas change both to the same iterated inverse images of its two factors.
-The criterion of step 2, now for g followed by h, proves the entire morphism equation.
-6. Conjugate the direct-image identity comparison to identify the identity set pullback
-with the identity functor. Its left adjoint is therefore an equivalence, so the adjunction
-unit is an isomorphism. The module identity normalization and tensor universality prove
-the last equation. -/
+coefficient quotient and the semilinear identifications above have unique normalizations. -/
 theorem inverseImage_tensor_comparison {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
     (R : Rings Z) (M N : Modules R) :
     IsIso (comparison h R M N) ∧

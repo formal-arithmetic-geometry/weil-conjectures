@@ -484,7 +484,6 @@ def IsNormalizedCoefficientSystem
 
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-set_option maxHeartbeats 800000 in
 -- Elaborate the canonical comparison equations against both evaluation packages.
 /-- The full derived comparison and its coherence on systems and all derived maps.
 Every functor is tied to the ordinary geometric functors or to the universal derived

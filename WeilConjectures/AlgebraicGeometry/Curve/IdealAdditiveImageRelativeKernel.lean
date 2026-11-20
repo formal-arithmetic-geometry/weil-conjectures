@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # The additive ideal image is the pushforward of the relative additive kernel.
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim;
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim;
 the affine argument in `lem-sc-nil-ideal-units-additive-image-comparison`.
 (blueprint: lem-sc-ideal-additive-image-relative-kernel)
 -/
@@ -100,7 +100,7 @@ private theorem image_kernel_factor {C : Type*} [Category C] [Abelian C]
   exact ⟨(image.isoStrongEpiMono e (kernel.ι g) he).symm⟩
 
 /-- The additive ideal image is the pushforward of the relative additive kernel.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim;
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim;
 the affine argument in `lem-sc-nil-ideal-units-additive-image-comparison`.
 (blueprint: lem-sc-ideal-additive-image-relative-kernel)
 

@@ -15,7 +15,7 @@ For a morphism `φ : N ⟶ M` of proper trait models with full geometric generic
 generic base, over proper `i₁ : Y₁ ⟶ X₁` and `i₂ : Y' ⟶ X'`, and a compact-support exchange `ν`
 inverting the proper exchange `χ_φ` under `Ri_! ≅ Ri_*`, the dualizing maps satisfy the
 closed-immersion law `θ_N ∘ Ψ_N(ρ) = ρ' ∘ Ri₂^!(θ_M) ∘ β_φ(ω_{X₁})` (blueprint
-`sk-lem-tf-nearby-mate-coherences` (4);
+`sec-Base-change-for-nearby-cycles` (4);
 `NearbyCyclesModel.NearbyDualizingDataOfGenericBase.closedImmersion_law`).
 
 -/
@@ -40,7 +40,7 @@ variable {k' : Type u} [Field k'] {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
 /-- **The closed-immersion law of the dualizing maps over a generic base** (blueprint
-`sk-lem-tf-nearby-mate-coherences` (4)): for a morphism `φ : N ⟶ M` of proper trait models with
+`sec-Base-change-for-nearby-cycles` (4)): for a morphism `φ : N ⟶ M` of proper trait models with
 full geometric generic fibres over proper `i₁ : Y₁ ⟶ X₁` and `i₂ : Y' ⟶ X'`, and a
 compact-support exchange `ν` inverting the proper exchange `χ_φ` under `Ri_! ≅ Ri_*`,
 `θ_N ∘ Ψ_N(ρ) = ρ' ∘ Ri₂^!(θ_M) ∘ β_φ(ω_{X₁})` for the exceptional exchange `β_φ` of `ν` and the

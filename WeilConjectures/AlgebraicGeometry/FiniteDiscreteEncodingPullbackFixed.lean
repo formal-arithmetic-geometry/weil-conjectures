@@ -96,7 +96,7 @@ private theorem encodedPushforward_action (T U : Scheme.{u}) (f : U ⟶ T)
     (m : M.X.obj.obj ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V)) :
     (show M.X.obj.obj ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V) from
       (ModuleCat.smul (((sectionEncoding A T e.ringIso ⋙ fixedRestriction A T).obj
-        ((CondensedRing.lowerStar (coefficient A) f).obj M)).obj.obj V) a).hom m) =
+        ((CondensedRing.lowerStar (coefficient A) f).obj M)).obj.obj V) a).asHom.hom m) =
     ((Functor.LaxMonoidal.μ (sheafToPresheaf (Scheme.ProEt.topology T) Ab.{u + 1})
         (condensedRingObj (coefficient A) T)
         ((CondensedRing.lowerStar (coefficient A) f).obj M).X).app V ≫
@@ -111,7 +111,7 @@ private theorem fixedPushforward_action (T U : Scheme.{u}) (f : U ⟶ T)
     (m : M.X.obj.obj ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V)) :
     (show M.X.obj.obj ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V) from
       (ModuleCat.smul (((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f).obj
-        ((sectionEncoding A U e.ringIso ⋙ fixedRestriction A U).obj M)).obj.obj V) a).hom m) =
+        ((sectionEncoding A U e.ringIso ⋙ fixedRestriction A U).obj M)).obj.obj V) a).asHom.hom m) =
     ((Functor.LaxMonoidal.μ (sheafToPresheaf (Scheme.ProEt.topology U) Ab.{u + 1})
         (condensedRingObj (coefficient A) U) M.X).app
         ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V) ≫
@@ -180,10 +180,11 @@ theorem sectionPushforward_smul (T U : Scheme.{u}) (f : U ⟶ T)
     (m : M.X.obj.obj ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V)) :
     (show M.X.obj.obj ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V) from
       (ModuleCat.smul (((sectionEncoding A T eT.ringIso ⋙ fixedRestriction A T).obj
-      ((CondensedRing.lowerStar (coefficient A) f).obj M)).obj.obj V) a).hom m) =
+      ((CondensedRing.lowerStar (coefficient A) f).obj M)).obj.obj V) a).asHom.hom m) =
     (show M.X.obj.obj ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V) from
       (ModuleCat.smul (((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f).obj
-      ((sectionEncoding A U eU.ringIso ⋙ fixedRestriction A U).obj M)).obj.obj V) a).hom m) := by
+        ((sectionEncoding A U eU.ringIso ⋙ fixedRestriction A U).obj M)).obj.obj V)
+        a).asHom.hom m) := by
   exact (encodedPushforward_action A T U f eT M V a m).trans
     ((normalizedPushforward_action A T U f M V a m).trans
       (fixedPushforward_action A T U f eU M V a m).symm)

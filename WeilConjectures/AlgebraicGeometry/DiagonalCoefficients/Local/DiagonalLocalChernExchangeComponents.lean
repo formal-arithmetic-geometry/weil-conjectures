@@ -108,9 +108,89 @@ private theorem adjunct_sum_factor
     adj.homEquiv_naturality_left]
   simp only [Preadditive.add_comp, Category.assoc]
 
+private theorem exchange_components_finish
+    {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B']
+    {L : B ⥤ A} {R R₀ : A ⥤ B} {L' : B' ⥤ A'} {R' R₀' : A' ⥤ B'}
+    {G : B ⥤ B'} {H : A ⥤ A'} (adj : L ⊣ R) (adj' : L' ⊣ R')
+    (θ : G ⋙ L' ≅ L ⋙ H) (i : R₀ ≅ R) (i' : R₀' ≅ R')
+    {M : B} {K : A} {T : A'} (a : L.obj M ⟶ K) (t : H.obj K ⟶ T)
+    [Preadditive B'] [Preadditive A']
+    {B₀ V : B'} {c : G.obj M ⟶ B₀} {γ : B₀ ⟶ V}
+    (v : L'.obj V ⟶ T) (a₀ : L'.obj B₀ ⟶ T)
+    (hlocal : θ.hom.app M ≫ H.map a ≫ t = L'.map (c ≫ γ) ≫ v + L'.map c ≫ a₀)
+    [L'.Additive] :
+    G.map (adj.homEquiv _ _ a ≫ i.inv.app K) ≫
+        (G.map (i.hom.app K) ≫ (Adjunction.exchangeRight adj adj' θ).app K ≫
+          i'.inv.app (H.obj K)) ≫ R₀'.map t =
+      (c ≫ γ) ≫ (adj'.homEquiv _ _ v ≫ i'.inv.app T) +
+        c ≫ (adj'.homEquiv _ _ a₀ ≫ i'.inv.app T) := by
+  rw [conjugated_exchange_adjunct]
+  exact (congrArg (fun x ↦ adj'.homEquiv _ _ x ≫ i'.inv.app T) hlocal).trans
+    (adjunct_sum_factor (L := L') adj' i' c γ v a₀)
+
+/-- Addition of normalized completed classes realizes multiplication in the Picard group. -/
+private theorem completedChern_mul_normalization (l : ℕ) [Fact l.Prime]
+    {X S : Scheme.{u}} [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
+    {f : X ⟶ S} (p : DiagonalTrace.Presentation l (ULift.{u} (Padic l)) f)
+    (L K : X.Pic)
+    (hK : K = L * Scheme.Pic.map p.model.model.hom (SpTowerClasses.hyperplanePic S))
+    (w z : DiagonalTrace.completedUnit l X ⟶
+      (DiagonalTrace.completedLine l X)⟦(2 : ℤ)⟧)
+    (hw : (diagonalCompletedUnderlying l X).map w ≫
+      DiagonalTrace.shiftedComparison (diagonalCompletedUnderlying l X)
+        (p.restrictionX.F.mapDerivedCategory ⋙ p.LX.R)
+        (p.coefficientsX.lineMap l (ULift.{u} (Padic l)) p.LX) 2 =
+      p.coefficientsX.unitMap l (ULift.{u} (Padic l)) p.LX ≫
+        p.LX.R.map (p.restrictionX.F.mapDerivedCategory.map
+          (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p.chernX L)))
+    (hz : ModelLocalChernNormalized l p z) :
+    (diagonalCompletedUnderlying l X).map (w + z) ≫
+      DiagonalTrace.shiftedComparison (diagonalCompletedUnderlying l X)
+        (p.restrictionX.F.mapDerivedCategory ⋙ p.LX.R)
+        (p.coefficientsX.lineMap l (ULift.{u} (Padic l)) p.LX) 2 =
+      p.coefficientsX.unitMap l (ULift.{u} (Padic l)) p.LX ≫
+        p.LX.R.map (p.restrictionX.F.mapDerivedCategory.map
+          (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p.chernX K)) := by
+  have : p.LX.R.Additive := by
+    have := p.LX.triangulated
+    infer_instance
+  rw [hK, firstChern_mul]
+  simp only [Functor.map_add, Preadditive.comp_add, Preadditive.add_comp]
+  exact congrArg₂ (· + ·) hw (by simpa only [ModelLocalChernNormalized] using hz)
+
+/-- A base Picard class has a normalized completed lift factoring through the base line. -/
+private theorem localChern_base_lift_factorization (l : ℕ) [Fact l.Prime]
+    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
+    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
+    (f : X ⟶ S) (hunit : IsUnit (l : Γ(S, ⊤)))
+    (p : DiagonalTrace.Presentation l (ULift.{u} (Padic l)) f)
+    (eX : CompletedRealization l X)
+    (cF : UnitPullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) f) (M : S.Pic) :
+    let Λ := Profinite.continuousMapRingObj.{u} ℤ_[l]
+    let V := ((DerivedCategory.singleFunctor (Modules Λ S) 0).obj
+      (zlLine l S))⟦(2 : ℤ)⟧
+    let T := ((DerivedCategory.singleFunctor (Modules Λ X) 0).obj
+      (zlLine l X))⟦(2 : ℤ)⟧
+    ∃ (w : DiagonalTrace.completedUnit l X ⟶
+        (DiagonalTrace.completedLine l X)⟦(2 : ℤ)⟧)
+      (γ : unit Λ S ⟶ V) (v : (derivedUpper Λ f).obj V ⟶ T),
+      ((diagonalCompletedUnderlying l X).map w ≫
+        DiagonalTrace.shiftedComparison (diagonalCompletedUnderlying l X)
+          (p.restrictionX.F.mapDerivedCategory ⋙ p.LX.R)
+          (p.coefficientsX.lineMap l (ULift.{u} (Padic l)) p.LX) 2 =
+        p.coefficientsX.unitMap l (ULift.{u} (Padic l)) p.LX ≫
+          p.LX.R.map (p.restrictionX.F.mapDerivedCategory.map
+            (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p.chernX
+              (Scheme.Pic.map f M)))) ∧
+        cF.derived ≫ eX.localChern l X w = (derivedUpper Λ f).map γ ≫ v := by
+  have hX : IsUnit (l : Γ(X, ⊤)) := by
+    simpa only [map_natCast] using hunit.map f.appTop.hom
+  obtain ⟨w, hw, _⟩ := DiagonalTrace.diagonalCompletedLocalChern_lift l p hX
+    (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p.chernX (Scheme.Pic.map f M))
+  obtain ⟨γ, v, hbase⟩ := diagonalLocalChern_base_factorization l f hunit p eX cF M w hw
+  exact ⟨w, γ, v, hw, hbase⟩
+
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 600000 in
--- The whole-system normalization and derived mate calculation need extra heartbeats.
 /-- The pulled local Chern adjunct differs from the new model adjunct by a map
 factoring through the shifted integral Tate line on the new base.
 
@@ -188,29 +268,11 @@ theorem diagonalLocalChern_exchange_components (l : ℕ) [Fact l.Prime]
   let adj' := CondensedRing.derivedUpperStarLowerStarAdjunction Λ f'
   have : L'.Additive := adj'.left_adjoint_additive
   obtain ⟨M, hM⟩ := hPic
-  have hX' : IsUnit (l : Γ(X', ⊤)) := by
-    simpa only [map_natCast] using hunit'.map f'.appTop.hom
-  obtain ⟨w, hw, _⟩ := DiagonalTrace.diagonalCompletedLocalChern_lift l p' hX'
-    (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p'.chernX (Scheme.Pic.map f' M))
-  have : p'.LX.R.Additive := by
-    have := p'.LX.triangulated
-    infer_instance
-  have hsum : (diagonalCompletedUnderlying l X').map (w + z') ≫
-      DiagonalTrace.shiftedComparison (diagonalCompletedUnderlying l X')
-        (p'.restrictionX.F.mapDerivedCategory ⋙ p'.LX.R)
-        (p'.coefficientsX.lineMap l (ULift.{u} (Padic l)) p'.LX) 2 =
-      p'.coefficientsX.unitMap l (ULift.{u} (Padic l)) p'.LX ≫
-        p'.LX.R.map (p'.restrictionX.F.mapDerivedCategory.map
-          (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p'.chernX
-            (Scheme.Pic.map hX
-              (Scheme.Pic.map p.model.model.hom (SpTowerClasses.hyperplanePic S))))) := by
-    rw [hM, firstChern_mul]
-    simp only [Functor.map_add, Preadditive.comp_add, Preadditive.add_comp]
-    exact congrArg₂ (· + ·) hw (by simpa only [ModelLocalChernNormalized] using hz')
+  obtain ⟨w, γ, v, hw, hbase⟩ :=
+    localChern_base_lift_factorization l f' hunit' p' eX' cF' M
+  have hsum := completedChern_mul_normalization l p' _ _ hM w z' hw hz'
   have hpull := diagonalLocalChern_horizontal_realization l f f' hX hS h
     hunit hunit' p p' eX eX' cF cF' line c z (w + z') hz hsum
-  obtain ⟨γ, v, hbase⟩ := diagonalLocalChern_base_factorization l f' hunit'
-    p' eX' cF' M w hw
   have hlocal : θ.hom.app (unit Λ S) ≫
       (derivedUpper Λ hX).map (cF.derived ≫ eX.localChern l X z) ≫ line.shift =
       L'.map (c.derived ≫ γ) ≫ v +
@@ -222,21 +284,14 @@ theorem diagonalLocalChern_exchange_components (l : ℕ) [Fact l.Prime]
         rw [localChern_add]
         simp only [Preadditive.comp_add]
       _ = _ := by
-        apply congrArg (fun x => x + L'.map c.derived ≫
+        apply congrArg (fun x ↦ x + L'.map c.derived ≫
           (cF'.derived ≫ eX'.localChern l X' z'))
         exact map_comp_factor L' c.derived γ v _ hbase
   refine ⟨c.derived ≫ γ, adj'.homEquiv _ _ v ≫ (eqToIso canonical').inv.app _, ?_⟩
   unfold modelLocalAdjunct modelExchange derivedExchange
-  change (derivedUpper Λ hS).map
-      (adj.homEquiv _ _ (cF.derived ≫ eX.localChern l X z) ≫
-        (eqToIso canonical).inv.app _) ≫
-      ((derivedUpper Λ hS).map ((eqToIso canonical).hom.app _) ≫
-        (Adjunction.exchangeRight adj adj' θ).app _ ≫
-        (eqToIso canonical').inv.app _) ≫ D'.R.map line.shift = _
-  rw [conjugated_exchange_adjunct]
-  refine (congrArg (fun a ↦ adj'.homEquiv _ _ a ≫
-    (eqToIso canonical').inv.app _) hlocal).trans ?_
-  exact adjunct_sum_factor (L := derivedUpper Λ f') adj' (eqToIso canonical') c.derived γ v
-    (cF'.derived ≫ eX'.localChern l X' z')
+  apply exchange_components_finish (c := c.derived) (γ := γ)
+    adj adj' θ (eqToIso canonical) (eqToIso canonical')
+    (cF.derived ≫ eX.localChern l X z) line.shift v
+    (cF'.derived ≫ eX'.localChern l X' z') hlocal
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

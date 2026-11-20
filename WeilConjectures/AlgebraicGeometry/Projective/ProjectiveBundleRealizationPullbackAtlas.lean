@@ -9,8 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleTauto
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
 
 /-! # Local frame atlases for realization base change
-Source: Stacks Project, Tags 01NQ, 01NR and 01OB.
-(blueprint: lem-pur-projective-bundle-realization-pullback-atlas).
+
+## References
+
+* Stacks Project, Tags 01NQ, 01NR and 01OB
 -/
 
 @[expose] public section
@@ -56,14 +58,8 @@ structure ProjectiveBundleRealizationPullbackAtlas
           (Scheme.Modules.tensorPullback D'.A.data.relProjHom).map e.inv ≫ D'.quotient).app V m =
           c • D'.L.presheaf.map (homOfLE hi).op (t i)
 
-/-- The affine-fraction calculation and normalized quotient equations produce a common frame
-atlas for arbitrary normalized realizations.  This is the local geometric part of the proof.
-Source: Stacks Project, Tags 01NQ, 01NR and 01OB.
-Proof: refine the affine base cover by degree-one standard opens.  Pull the source frame to the
-corresponding target standard open and use the generator equation `hb`; homogeneous fractions
-show that transition coefficients agree on every overlap.  Tensor pullback sections generate
-locally, giving the coefficient equation for every source section.
-(blueprint: lem-pur-projective-bundle-realization-pullback-atlas). -/
+/-- If the base-change map `b` is compatible with the degree-one sections via `e` (hypothesis
+`hb`), then the two realization pullback quotients admit a common frame atlas. -/
 theorem exists_projectiveBundleRealizationPullbackAtlas
     {B B' : Scheme.{u}} {F : B.Modules} {F' : B'.Modules}
     (D : ProjectiveBundleRealization B F) (D' : ProjectiveBundleRealization B' F')

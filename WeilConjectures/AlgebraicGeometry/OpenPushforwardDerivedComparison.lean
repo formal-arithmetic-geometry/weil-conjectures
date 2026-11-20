@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Derived comparison for an acyclic module on an open subscheme -/
 
@@ -22,7 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The derived-composition comparison for a module acyclic for open pushforward.
-Source: blueprint lem-pc-cech-resolution, proof paragraphs 2 and 3;
+Source: blueprint lemma-coherent-base-change-invertible-sheaves, proof paragraphs 2 and 3;
 Stacks Project, Derived Categories, Tag 015M.
 (blueprint: lem-pc-open-pushforward-derived-comparison)
 

@@ -40,8 +40,6 @@ variable (A : Data.{c, v, r} J B τ)
   (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))
   (adjSet : uInv ⊣ uPush)
 
-set_option maxHeartbeats 1000000 in
--- The dependent system and level functor fields require extra elaboration heartbeats.
 /-- The geometric operations on actual semilinear system categories.
 Coefficient inverse images retain the dependency's algebraic operation equations.
 Both direct images are total right derived functors of the specified ordinary

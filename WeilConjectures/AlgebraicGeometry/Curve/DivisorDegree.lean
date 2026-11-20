@@ -25,9 +25,10 @@ identifies the degree of `𝒪_X(E) = 𝒪_X(-E)^∨` with the degree of the div
 - `AlgebraicGeometry.Scheme.degreeOver_eq_one_of_isAlgClosed`: over an algebraically closed
   field, closed points of a scheme locally of finite type have degree one.
 - `AlgebraicGeometry.Scheme.Divisor.degree_dual_toModules_idealSheaf`:
-  `deg 𝒪_X(E) = ∑_P n_P [κ(P) : k]` (blueprint `lem-pc-degree-agrees-sc`).
+  `deg 𝒪_X(E) = ∑_P n_P [κ(P) : k]` (blueprint `theorem-riemann-roch-coherent-serre-duality--1`).
 - `AlgebraicGeometry.Scheme.Divisor.degree_dual_toModules_idealSheaf_eq_degree`: over an
-  algebraically closed field, `deg 𝒪_X(E) = deg E` (blueprint `lem-pc-degree-agrees-sc`).
+  algebraically closed field, `deg 𝒪_X(E) = deg E` (blueprint
+  `theorem-riemann-roch-coherent-serre-duality--1`).
 -/
 
 @[expose] public section
@@ -65,7 +66,7 @@ The χ-degree of `𝒪_X(E)` is `dim_k Γ(E, 𝒪_E)`
 `dim_k Γ(E, 𝒪_E) = ∑_P n_P [κ(P) : k]`
 (`AlgebraicGeometry.Scheme.Divisor.finrankΓ_subschemeι_idealSheaf`).
 
-(blueprint: `lem-pc-degree-agrees-sc`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 theorem Divisor.degree_dual_toModules_idealSheaf (E : closedPoints X →₀ ℕ) :
     (Divisor.idealSheaf E).toModulesᵛ.degree k =
       E.sum fun P n ↦ (n : ℤ) * (X ↘ Spec (.of k)).degreeOver P.1 := by
@@ -81,7 +82,7 @@ the degree `deg 𝒪_X(E) = χ(𝒪_X(E)) - χ(𝒪_X)` of its line bundle `𝒪
 (`AlgebraicGeometry.Scheme.Divisor.degree`). In particular `deg 𝒪_X([P]) = 1` for a closed
 point `P`.
 
-(blueprint: `lem-pc-degree-agrees-sc`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 theorem Divisor.degree_dual_toModules_idealSheaf_eq_degree [IsAlgClosed k]
     (E : closedPoints X →₀ ℕ) :
     (Divisor.idealSheaf E).toModulesᵛ.degree k =

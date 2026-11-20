@@ -221,7 +221,7 @@ theorem integralSystemOperationModels :
     exact {
       evaluation := fun n ↦ (@asIso _ _ _ _
         ((mateEquiv a.adj (finiteOpenAdj l E j n)).symm
-          (pullbackTensorDerivedEvaluation l E j n).hom).natTrans
+          (pullbackTensorDerivedEvaluation l E j n).hom)
         (integralSystemOpenEvaluation_isIso l E j a n)).symm
       transpose := fun n ↦ rfl }
   let o : Operations l E := {

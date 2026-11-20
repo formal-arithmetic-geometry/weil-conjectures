@@ -23,6 +23,28 @@ set_option synthInstance.maxSize 2048
 universe u w wA
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
+
+-- Perform cancellation before specializing to the concrete localization functors.
+private theorem map_comparison_cancel {C : Type*} {D : Type*} {E : Type*}
+    [Category C] [Category D] [Category E] (Q : D ⥤ E)
+    {F G : C ⥤ D} (e : F ≅ G) (K : C) {A B : E}
+    (a : Q.obj (F.obj K) ⟶ A) (b : A ⟶ B) :
+    Q.map (e.hom.app K ≫ e.inv.app K) ≫ a ≫ b = a ≫ b := by
+  rw [Iso.hom_inv_id_app, Q.map_id, Category.id_comp]
+
+private theorem right_unit_paste {C : Type*} {D : Type*} [Category C] [Category D]
+    (H : C ⥤ D) {U V W : C} (e : V ≅ W) {A B E F G J : D}
+    (a : A ⟶ H.obj U) (u : U ⟶ W) (c : H.obj W ⟶ B) (s : B ⟶ E)
+    (d : A ⟶ F) (v : F ⟶ B) (t : F ⟶ G) (q : G ⟶ E)
+    (b₀ : A ⟶ J) (b₁ : J ⟶ G)
+    (hunit : a ≫ H.map u ≫ c = d ≫ v)
+    (hnat : v ≫ s = t ≫ q) (hfactor : d ≫ t = b₀ ≫ b₁) :
+    (a ≫ H.map u ≫ H.map e.inv) ≫ H.map e.hom ≫ c ≫ s = b₀ ≫ b₁ ≫ q := by
+  simp only [Category.assoc, ← H.map_comp_assoc, e.inv_hom_id, H.map_id,
+    Category.id_comp]
+  rw [← Category.assoc (H.map u), ← Category.assoc a, hunit]
+  rw [Category.assoc, hnat, ← Category.assoc, hfactor, Category.assoc]
+
 -- Scalar restriction expands exact-functor localization instances.
 private theorem scalar_factor
     [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
@@ -71,7 +93,6 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
-set_option maxHeartbeats 800000 in
 -- The chosen comparison expands sheaf and localization instances.
 private theorem mixed_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :
@@ -84,6 +105,7 @@ private theorem mixed_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
       (mixedGlobalSectionsDirectImageIso f).hom.app (DerivedCategory.Qh.obj K) =
     S.mapDerivedCategoryFactorsh.inv.app ((H.mapHomotopyCategory (.up ℤ)).obj K) ≫
       (schemeGlobalScalarRestriction f).map (H.rightDerivedFunctorUnit.app K) := by
+  intro D H S
   let c₀ := Classical.choose (exists_mixedGlobalSectionsDirectImageIso f)
   have h₀ := (Classical.choose_spec (Classical.choose_spec
     (exists_mixedGlobalSectionsDirectImageIso f))).1
@@ -98,12 +120,14 @@ private theorem mixed_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   dsimp only [c₀] at he
   conv at hc => rhs; rw [he]
   simp only [Iso.refl_symm] at hc
-  erw [Iso.hom_inv_id_app] at hc
-  erw [CategoryTheory.Functor.map_id, Category.id_comp] at hc
-  simpa only [mixedGlobalSectionsDirectImageIso, CategoryTheory.Functor.map_id,
-    Category.id_comp] using hc
+  exact hc.trans (map_comparison_cancel
+    (DerivedCategory.Qh
+      (C := ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))))
+    (Functor.mapHomotopyCategoryCompIso
+      (Iso.refl (D ⋙ RingedSpace.globalSectionsFunctor Y.toRingedSpace)) (.up ℤ)) K
+    (S.mapDerivedCategoryFactorsh.inv.app ((H.mapHomotopyCategory (.up ℤ)).obj K))
+    ((schemeGlobalScalarRestriction f).map (H.rightDerivedFunctorUnit.app K)))
 
-set_option maxHeartbeats 400000 in
 -- The statement expands sheaf, scalar, and localization instances.
 /-- The right path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
@@ -153,23 +177,27 @@ theorem mixedSections_right_unit_normalization
       (mixedGlobalSectionsDirectImageIso (f ≫ g)).hom.app F ≫
       (schemeGlobalScalarRestrictionCompIso f g).hom.app
         ((schemeDerivedGlobalSections X).obj F) = b := by
-  let K := (HomotopyCategory.quotient _ (.up ℤ)).obj I
-  let F := DerivedCategory.Qh.obj K
-  let HZ := schemeDerivedGlobalSections Z
-  let e := schemeNormalizedDirectImageCompIso f g
-  have he : HZ.map (e.inv.app F) ≫ HZ.map (e.hom.app F) = 𝟙 _ := by
-    rw [← CategoryTheory.Functor.map_comp, Iso.inv_hom_id_app,
-      CategoryTheory.Functor.map_id]
-  dsimp only
-  simp only [Category.assoc]
-  erw [reassoc_of% he]
-  erw [reassoc_of% (mixed_unit (f ≫ g) K)]
-  erw [(schemeGlobalScalarRestrictionCompIso f g).hom.naturality
-    ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorUnit.app K)]
-  rw [← Category.assoc]
-  erw [scalar_factor f g
-    (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomotopyCategory (.up ℤ)).obj K)]
-  simp only [Category.assoc, CategoryTheory.Functor.comp_map]
-  rfl
+  intro K F Df Dfg HX HY HZ Sf Sg e p b
+  let Sfg := ModuleCat.restrictScalars.{u} (f ≫ g).appTop.hom
+  exact right_unit_paste (schemeDerivedGlobalSections Z) (e.app F)
+    (HZ.rightDerivedFunctorUnit.app ((Dfg.mapHomotopyCategory (.up ℤ)).obj K))
+    (Dfg.rightDerivedFunctorUnit.app K)
+    ((mixedGlobalSectionsDirectImageIso (f ≫ g)).hom.app F)
+    ((schemeGlobalScalarRestrictionCompIso f g).hom.app
+      ((schemeDerivedGlobalSections X).obj F))
+    (Sfg.mapDerivedCategoryFactorsh.inv.app ((HX.mapHomotopyCategory (.up ℤ)).obj K))
+    ((schemeGlobalScalarRestriction (f ≫ g)).map (HX.rightDerivedFunctorUnit.app K))
+    ((schemeGlobalScalarRestrictionCompIso f g).hom.app
+      (DerivedCategory.Qh.obj ((HX.mapHomotopyCategory (.up ℤ)).obj K)))
+    ((schemeGlobalScalarRestriction g).map
+      ((schemeGlobalScalarRestriction f).map (HX.rightDerivedFunctorUnit.app K)))
+    (Sg.mapDerivedCategoryFactorsh.inv.app
+      ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)))
+    ((schemeGlobalScalarRestriction g).map
+      (Sf.mapDerivedCategoryFactorsh.inv.app ((HX.mapHomotopyCategory (.up ℤ)).obj K)))
+    (mixed_unit (f ≫ g) K)
+    ((schemeGlobalScalarRestrictionCompIso f g).hom.naturality
+      (HX.rightDerivedFunctorUnit.app K))
+    (scalar_factor f g ((HX.mapHomotopyCategory (.up ℤ)).obj K))
 
 end AlgebraicGeometry

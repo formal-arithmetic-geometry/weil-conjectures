@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Basic
 # The Picard scheme of a smooth projective curve
 
 Let `k` be a separably closed field and let `X` be a smooth projective curve over `k`.  We show
-that the Picard functor `Pic_{X/k}` is representable by a group scheme over `k` (Stacks 0B9Z).
+that the Picard functor `Pic_{X/k}` is representable by a group scheme over `k`.
 
 The proof follows Stacks: `X` has a `k`-rational point `σ`, so `Pic_{X/k} ≅ Pic_{X/k,σ}`, and the
 `σ`-normalized Picard functor is a presheaf of groups to which the representability criterion
@@ -38,14 +38,17 @@ of the criterion are:
   `h⁰ = 1` and `h¹ = 0` has `Rf_{K,*} ℒ ≅ K[0]`.
 - `AlgebraicGeometry.smoothOfRelativeDimension_and_isProper_and_geometricallyIntegral_pullback_snd`:
   the base change of a smooth projective curve to a field extension is again a smooth projective
-  curve (blueprint `rem-pc-conventions`).
+  curve.
 - `AlgebraicGeometry.isRepresentable_picardFunctor`: the Picard functor of a smooth projective
   curve over a separably closed field is representable by a group scheme whose group law is the
-  tensor product of invertible modules (blueprint `sk-thm-picard-main`,
-  `thm-pc-picard-representable`).
+  tensor product of invertible modules.
 - `AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctor`: the Picard
   scheme is smooth of dimension `g`, being covered by translates of an open subscheme of
-  `Hilb^g_{X/k}` (blueprint `thm-sc-theorem-of-the-base`).
+  `Hilb^g_{X/k}`.
+
+## References
+
+* [Stacks, Tag 0B9Z]
 -/
 
 @[expose] public section
@@ -64,12 +67,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}}
 smooth projective curve over `k`, i.e. `X ⟶ Spec k` is smooth of relative dimension `1`, proper
 and geometrically integral, and let `K/k` be a field extension.  Then the base change
 `X_K ⟶ Spec K` is again smooth of relative dimension `1`, proper and geometrically integral, and
-`X_K` is integral.
-
-This is why the lemmas used in the proof of `AlgebraicGeometry.isRepresentable_picardFunctor` can
-be applied to all the fibres `X_K` of the family.
-
-(blueprint: `rem-pc-conventions`) -/
+`X_K` is integral. -/
 theorem smoothOfRelativeDimension_and_isProper_and_geometricallyIntegral_pullback_snd
     (f : X ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f]
     (K : Type u) [Field K] [Algebra k K] :
@@ -93,14 +91,7 @@ variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k
 /-- **A twisted class lies in `F`.** Let `X` be a smooth projective curve over `k`, let `K/k` be a
 field extension and let `ℒ` be an invertible module on `X_K` with `h⁰(X_K, ℒ) = 1` and
 `h¹(X_K, ℒ) = 0`.  Then `Rf_{K,*} ℒ ≅ H⁰(X_K, ℒ)[0] ≅ K[0]` is an invertible `𝒪_K`-module placed
-in degree `0`, i.e. the class of `ℒ` satisfies `AlgebraicGeometry.IsInvertibleDirectImage`.
-
-Indeed `H^q(X_K, ℒ) = 0` for `q ≥ 2` since `X_K` has dimension `1`, `H¹(X_K, ℒ)` is
-finite-dimensional, hence zero, since `X_K` is proper, and over the affine base `Spec K` the
-quasi-coherent module `R^q f_{K,*} ℒ` is determined by its global sections `H^q(X_K, ℒ)`.
-
-This is the last step of condition (2)(c) in the proof of blueprint
-`thm-pc-picard-representable`. -/
+in degree `0`, i.e. the class of `ℒ` satisfies `AlgebraicGeometry.IsInvertibleDirectImage`. -/
 theorem isInvertibleDirectImage_of_finrankH_eq (K : Type u) [Field K] [Algebra k K]
     [∀ T : Over (Spec (.of k)),
       HasInjectiveResolutions (pullback (X ↘ Spec (.of k)) T.hom).Modules]
@@ -156,12 +147,7 @@ variable [GeometricallyIntegral (X ↘ Spec (.of k))]
 /-- **Every class over a field is translated into `F` by a class defined over `k`.** Let `σ` be a
 `k`-rational point of the smooth projective curve `X`, let `K/k` be a field extension and let
 `g ∈ Pic_{X/k,σ}(K)`. Then there is `g' ∈ Pic_{X/k,σ}(k)` such that `g'|_K * g` lies in the
-subfunctor `F` of `AlgebraicGeometry.picardFunctorInvertibleDirectImage`: this is the twist lemma
-`AlgebraicGeometry.Scheme.exists_isInvertible_twist` together with
-`AlgebraicGeometry.isInvertibleDirectImage_of_finrankH_eq`.
-
-This is condition (2)(c) of the representability criterion
-`AlgebraicGeometry.isRepresentable_of_representable_open_subfunctor` for `Pic_{X/k,σ}`. -/
+subfunctor `F` of `AlgebraicGeometry.picardFunctorInvertibleDirectImage`. -/
 theorem exists_mul_mem_picardFunctorInvertibleDirectImage [IsSepClosed k]
     [∀ T : Over (Spec (.of k)),
       HasInjectiveResolutions (pullback (X ↘ Spec (.of k)) T.hom).Modules]
@@ -261,16 +247,7 @@ theorem isRepresentable_picardFunctor_aux [IsSepClosed k] :
 
 /-- **The Picard scheme is smooth of dimension `g`.** Let `X` be a smooth projective curve of
 genus `g` over a separably closed field `k`. Every `k`-scheme `A` representing the Picard functor
-`Pic_{X/k}` is smooth of relative dimension `g` over `k`.
-
-Choose a `k`-rational point `σ`, so that `Pic_{X/k} ≅ Pic_{X/k,σ}`. The open subfunctor
-`F ⊆ Pic_{X/k,σ}` is represented by an open subscheme `W` of the Hilbert scheme `Hilb^g_{X/k}`,
-smooth of dimension `g`
-(`AlgebraicGeometry.exists_representableBy_picardFunctorInvertibleDirectImage`),
-and the translates of `F` by `k`-points cover `A` by open subschemes isomorphic to `W`
-(`AlgebraicGeometry.exists_isOpenImmersion_of_representable_open_subfunctor`).
-
-(blueprint: `thm-sc-theorem-of-the-base`, smoothness) -/
+`Pic_{X/k}` is smooth of relative dimension `g` over `k`. -/
 theorem smoothOfRelativeDimension_of_representableBy_picardFunctor [IsSepClosed k]
     (A : Over (Spec (.of k))) (e : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy A) :
     SmoothOfRelativeDimension (arithmeticGenus k X) A.hom := by
@@ -296,17 +273,58 @@ theorem smoothOfRelativeDimension_of_representableBy_picardFunctor [IsSepClosed 
   have := smoothOfRelativeDimension_comp (n := 0) (m := arithmeticGenus k X) j H.hom
   rwa [zero_add] at this
 
+/-- **Representability of the Picard functor, with the structure of its proof.** Let `X` be a
+smooth projective geometrically integral curve of genus `g` over a separably closed field `k`.
+Then `Pic_{X/k}` is represented by a group scheme `A` over `k` whose group law is the tensor
+product of invertible modules (`AlgebraicGeometry.IsPicardMul`); `A` is smooth of relative
+dimension `g`, in particular locally of finite type; and for a rational point `σ` of `X`, the
+subfunctor `F ⊆ Pic_{X/k,σ}` of the classes with invertible direct image is represented by an open
+subscheme `W` of a scheme `H` smooth of relative dimension `g` (the Hilbert scheme `Hilb^g_{X/k}`),
+and `A` is covered by the open immersions `W ⟶ A` obtained from the translates of `W`. -/
+theorem representability_picardFunctor [IsSepClosed k] :
+    ∃ (A : Over (Spec (.of k))) (_ : GrpObj A)
+      (e : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy A),
+      IsPicardMul (X ↘ Spec (.of k)) e ∧
+      SmoothOfRelativeDimension (arithmeticGenus k X) A.hom ∧ LocallyOfFiniteType A.hom ∧
+      ∃ (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 _)
+        (H : Over (Spec (.of k))) (W : Scheme.{u}) (j : W ⟶ H.left),
+        SmoothOfRelativeDimension (arithmeticGenus k X) H.hom ∧ IsOpenImmersion j ∧
+        Nonempty ((picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor
+          |>.RepresentableBy (Over.mk (j ≫ H.hom))) ∧
+        ∀ a : A.left, ∃ ψ : Over.mk (j ≫ H.hom) ⟶ A,
+          IsOpenImmersion ψ.left ∧ a ∈ Set.range ψ.left.base := by
+  set f := X ↘ Spec (.of k)
+  have : ∀ T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules :=
+    fun T ↦ have := Modules.isGrothendieckAbelian (pullback f T.hom); inferInstance
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
+  obtain ⟨p⟩ := Hom.nonempty_fieldPoints (k := k) f
+  let σ : Spec (.of k) ⟶ X := p.1
+  have hσ : σ ≫ f = 𝟙 _ := by
+    rw [p.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
+  obtain ⟨A, -, ⟨e⟩⟩ := isRepresentable_picardFunctor_aux (k := k) (X := X)
+  obtain ⟨_, he⟩ := exists_commGrpObj_isPicardMul f e
+  have hsm := smoothOfRelativeDimension_of_representableBy_picardFunctor A e
+  have : Smooth A.hom := SmoothOfRelativeDimension.smooth (arithmeticGenus k X) A.hom
+  obtain ⟨H, W, j, hH, hj, ⟨eF⟩⟩ := exists_representableBy_picardFunctorInvertibleDirectImage σ hσ
+  let e' : (picardFunctorNormalizedGrp f σ hσ ⋙ forget GrpCat.{u + 1}).RepresentableBy A :=
+    e.ofIso (nonempty_picardFunctorNormalized_iso_picardFunctor σ hσ).some.symm
+  refine ⟨A, inferInstance, e, he, hsm, inferInstance, σ, hσ, H, W, j, hH, hj, ⟨eF⟩,
+    fun a ↦ ?_⟩
+  obtain ⟨ψ, hψ, ha⟩ := exists_isOpenImmersion_of_representable_open_subfunctor _ _ eF
+    (isOpenImmersion_picardFunctorInvertibleDirectImage_ι f σ hσ)
+    (exists_mul_mem_picardFunctorInvertibleDirectImage σ hσ) e' a
+  exact ⟨ψ, hψ, ha⟩
+
 end Curve
 
 /-- **The Picard functor of a smooth projective curve over a separably closed field is
-representable.** Let `k` be a separably closed field and let `f : X ⟶ Spec k` be a smooth
+representable.** Let `k` be a separably closed field and let `f: X ⟶ Spec k` be a smooth
 projective curve.  Then the Picard functor `Pic_{X/k} = AlgebraicGeometry.picardFunctor f` is
 represented by a group scheme `A` over `k`, i.e. by an object of `Over (Spec k)` carrying a
 `CategoryTheory.GrpObj` structure, and the representation respects the group laws
 (`AlgebraicGeometry.IsPicardMul`): the group law of `A` is the tensor product of invertible
-modules (blueprint `rem-pc-group-structure`).
-
-(blueprint: `sk-thm-picard-main`, `thm-pc-picard-representable`) -/
+modules. -/
 theorem isRepresentable_picardFunctor [IsSepClosed k] (f : X ⟶ Spec (.of k))
     [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] :
     ∃ (A : Over (Spec (.of k))) (_ : GrpObj A) (e : (picardFunctor f).obj.RepresentableBy A),

@@ -53,7 +53,7 @@ Proof, following Stacks Project, Etale Cohomology, Lemma 59.73.6 (Tag 095N):
    sheafification adjunction (`def-weil-presheaf-modules-sheafification`) turn a section
    over an etale object into a map from its extension by zero.
 3. Finite stalks (`lem-weil-pbc-constructible-module-finite-stalks`) and the filtered
-   colimit description (`lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`,
+   colimit description (`definition-torsion-sheaves--3`,
    `lem-weil-pbc-filtered-colimit-modules-elementwise`) let us represent all stalk elements
    by finitely many sections; shrink their neighbourhoods to affine ones using
    `lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink`. These maps surject at that stalk.

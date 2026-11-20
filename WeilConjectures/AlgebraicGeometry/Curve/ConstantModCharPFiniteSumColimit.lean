@@ -37,7 +37,7 @@ namespace AlgebraicGeometry.Etale
  `Module.Basis.ofVectorSpace`, `ModuleCat.finsuppCoconeIsColimit`,
  `CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone`, and
  `CategoryTheory.constantCommuteCompose`.
- (blueprint: lem-sc-constant-mod-charp-finite-sum-colimit).
+ (blueprint: proposition-p-torsion-smooth-proper-curve--4).
 
  Proof: Put M = Λ/(p). Its additive group is killed by p, so it has the canonical
  ZMod p module structure. Restrict scalars along the ring equivalence from ULift (ZMod p)

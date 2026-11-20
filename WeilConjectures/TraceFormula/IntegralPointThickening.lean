@@ -98,8 +98,9 @@ theorem integral_injective (b : RationalPoint B) (hb : Set.range b.left.base = S
   intro α β h
   have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction_toPoint ℓ b hb
   unfold integral at h
-  rw [cancel_epi, cancel_epi, cancel_epi] at h
-  exact Equiv.injective _ h
+  have h' := congrArg End.asHom h
+  rw [cancel_epi, cancel_epi, cancel_epi] at h'
+  exact Equiv.injective _ h'
 
 end BorelMooreSection
 

@@ -46,7 +46,7 @@ theorem mateEquiv_pullForget_inv :
         (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l f))
       (Adjunction.mapDerivedCategoryRightDerivedAdjunction
         (ProEtale.adicUpperStarLowerStarAdjunction l (geometricMap k₀ f)))
-      (TwoSquare.mk _ _ _ _ (pullForget k₀ l f).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (pullForget k₀ l f).inv)) =
         (pushForget k₀ l f).hom :=
   pushForget_mate k₀ l f
 

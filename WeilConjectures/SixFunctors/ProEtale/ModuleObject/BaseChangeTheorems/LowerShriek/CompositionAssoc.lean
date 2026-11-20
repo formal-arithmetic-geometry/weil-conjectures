@@ -100,7 +100,6 @@ lemma isPullback_overP_overQ_assoc :
   IsPullback.of_map (Over.forget _) (Over.OverMorphism.ext (hV.map (Over.forget _)).w)
     (hV.map (Over.forget _))
 
-set_option maxHeartbeats 400000 in
 -- the instance of `compIso_assoc` unifies the four triangles of the staircase
 /-- **Associativity of the composition isomorphisms of the staircase of triangles of
 compactifications**, an instance of `CategoryTheory.ExchangeFormalism.compIso_assoc`. -/
@@ -175,7 +174,6 @@ theorem compIso_triangleShriekTriangle_assoc (K : Dᵇc(W.left)⟦Profinite.padi
   · congr 1
   · congr 1
 
-set_option maxHeartbeats 400000 in
 -- The statement unfolds the staircase triangles of three compactifications.
 /-- **Associativity of the composition isomorphisms computed through the staircase**: the
 associativity equation of the composition isomorphisms of the lower shriek, with each

@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChern
 import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChernP2Degree
 
 /-! # Trace one on the two transported Chern generators
-
-Source: the completed Chern-degree proof in DiagonalUniformizerTraceChernDegree,
-followed by the normalized realization and coefficient squares.
 -/
 
 @[expose] public noncomputable section
@@ -33,20 +30,7 @@ attribute [local irreducible] firstProjection secondProjection square derivedSca
 attribute [local irreducible] Functor.mapDerivedCategory RestrictionSquare.mate
 attribute [local irreducible] CompletedRealization.singleUnit CompletedRealization.shiftedLine
 
-/-- Each independently transported Chern adjunct has trace one.
-
-Source: diagonal-tower trace proof (1) and coefficient changes (1)--(2)
-(blueprint: lem-sfb-rational-p1-scalar-chern-degree).
-
-Proof: Use the strict twisted-splitting component formula to cancel the Chern
-injection against the inverse splitting and second projection. Apply restriction
-and the derived limit. The complete Chern and trace normalization equations and
-faithfulness on completed units give the completed Chern-degree equation. Each
-realization or coefficient square then transports this equation by functoriality:
-if F(t)u=vt' and ct=1, then (u^-1 F(c)v)t'=1. Apply this four-arrow calculation
-to the actual realization, integral extension, rationalization and, for the closure,
-the bottom finite-field leg. Finally cancel the canonical right-derived comparison
-against its inverse in the native trace. No base-change equation is used. -/
+/-- Each independently transported Chern adjunct has trace one. -/
 theorem scalar_chern_degree
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

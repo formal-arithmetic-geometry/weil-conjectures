@@ -105,7 +105,7 @@ private noncomputable def oneStep
   F_succ_le p := by
     let r := p + 1
     have hpr : p ≤ r := by dsimp [r]; omega
-    split_ifs <;> first | exact le_rfl | exact bot_le | exact le_top | omega
+    split_ifs <;> first | exact le_rfl | exact bot_le | omega
 
 private theorem oneStep_top
     {C : Type uB} [Category.{v} C] [Abelian C] (X : C) (p : ℤ) (hp : p ≤ 0) :

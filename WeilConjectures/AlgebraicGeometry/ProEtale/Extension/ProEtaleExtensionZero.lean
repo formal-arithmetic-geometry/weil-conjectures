@@ -42,14 +42,14 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 /-!
 # Extension by zero on the small pro-etale site
 
-Source: Weil conjectures blueprint, sec-smooth-purity/sk-prop-sf-cbc,
-`lem-cbc-proetale-extension-zero`; Stacks Project, Tags 09AE, 03DI, 03DJ and 03CY
-(blueprint: lem-cbc-proetale-extension-zero).
-
 We use the recorded extension-by-zero functor with fixed module coefficients. Its
 termwise extension is Mathlib's `mapHomologicalComplex`. The scalar comparison is
 specified as the mate of the identity on restricted sections, so its normalization
 is fixed before invertibility is asserted.
+
+## References
+
+* Stacks Project, Tags 09AE, 03DI, 03DJ and 03CY
 -/
 
 @[expose] public noncomputable section
@@ -63,27 +63,20 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- The degreewise extension of the recorded `j_!`: terms are `j_!(K.X n)` and
-its differentials are `j_!(K.d n m)`, including for unbounded complexes.
-Source: blueprint lemma, last proof paragraph; Stacks Project, Tags 03DJ and 09AE
-(blueprint: lem-cbc-proetale-extension-zero). -/
+its differentials are `j_!(K.d n m)`, including for unbounded complexes. -/
 abbrev openExtensionCochain (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)
 
-/-- Scalar restriction on fixed-module-valued sheaves is additive, section by section.
-Source: Stacks Project, Tag 03CY, and `def-pc-sheaf-restrict-scalars`
-(blueprint: lem-cbc-proetale-extension-zero). -/
+/-- Scalar restriction on fixed-module-valued sheaves is additive, section by section. -/
 instance openExtensionScalarRestriction_additive {A B : Type (u + 1)}
     [CommRing A] [CommRing B] (φ : A →+* B) (X : Scheme.{u}) :
     (sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} φ)).Additive :=
   sheafCompose_additive.{u, u + 1, u + 1, u + 1, u + 2, u + 2}
     (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} φ)
 
-/-- The identity-on-sections scalar square, transposed along the two recorded
-extension/restriction adjunctions. This is the canonical map
-`j_!^A Res_U ⟶ Res_X j_!^B`; invertibility supplies the comparison in the node's direction.
-Source: blueprint lemma, scalar-restriction proof paragraph; Stacks Project, Tag 03CY
-(blueprint: lem-cbc-proetale-extension-zero). -/
+/-- The canonical map `j_!^A Res_U ⟶ Res_X j_!^B`, the mate of the identity-on-sections
+scalar square along the two extension/restriction adjunctions. -/
 def openExtensionScalarMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     sheafCompose (Scheme.ProEt.topology U) (ModuleCat.restrictScalars.{u + 1} φ) ⋙
@@ -93,7 +86,7 @@ def openExtensionScalarMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
   ((mateEquiv
     (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} B) j)
     (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j)).symm
-      (TwoSquare.mk _ _ _ _ (eqToHom (by rfl)))).natTrans
+      (TwoSquare.mk _ _ _ _ (eqToHom (by rfl))))
 
 private theorem scalarMap_isIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
@@ -118,7 +111,8 @@ private theorem scalarMap_isIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
         (sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars φ))
         (sheafCompose (Scheme.ProEt.topology U) (ModuleCat.restrictScalars φ))
         (openImmersionRestriction (ModuleCat.{u + 1} A) j) (eqToHom (by rfl)) := by
-    ext F : 1
+    apply NatTrans.ext
+    funext F
     apply Sheaf.hom_ext
     apply NatTrans.ext
     funext V
@@ -129,10 +123,10 @@ private theorem scalarMap_isIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     exact (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ).left_triangle_components _
   have h := iterated_mateEquiv_conjugateEquiv_symm aB aA aU aX γ
   rw [hβ] at h
-  have hi : IsIso ((conjugateEquiv (aB.comp aX) (aU.comp aA)).symm γ.natTrans) := by
+  have hi : IsIso ((conjugateEquiv (aB.comp aX) (aU.comp aA)).symm γ) := by
     exact inferInstance
   change IsIso (((mateEquiv aB aA).symm
-    (TwoSquare.mk _ _ _ _ (eqToHom (by rfl)))).natTrans)
+    (TwoSquare.mk _ _ _ _ (eqToHom (by rfl)))))
   rw [h]
   exact hi
 

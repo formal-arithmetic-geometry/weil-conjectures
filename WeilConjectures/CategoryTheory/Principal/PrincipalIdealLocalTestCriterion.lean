@@ -189,8 +189,8 @@ theorem principalLocallyComplete_iff
       ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U))) :=
         principalLocalTestSliceDerived O
     principalLocallyComplete.{u, u, u, w} O a N ↔
-      IsLocallyDerivedRingedIdealComplete.{u, w} O (image (ringedKoszulScalar O a))
-        (image.ι (ringedKoszulScalar O a)) N := by
+      IsLocallyDerivedRingedIdealComplete.{u, w} O (image (ringedKoszulScalar O a).asHom)
+        (image.ι (ringedKoszulScalar O a).asHom) N := by
   let : ∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
     ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U))) :=
       principalLocalTestSliceDerived O

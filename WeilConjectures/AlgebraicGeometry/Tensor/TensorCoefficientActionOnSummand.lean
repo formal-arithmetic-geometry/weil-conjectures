@@ -62,10 +62,10 @@ theorem tensorGradedCoefficient_action_on_summand {X Z : Scheme.{u}} (j : Z ⟶ 
       T.I.val.map a.op (σ U g y) = σ V (T.C.right.obj.map a.op g) (T.I.val.map a.op y))
     (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)
       (y : T.I.val.obj (op U)),
-      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
+      (μ g).asHom.val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
     letI := square_zero_ideal_tensor_unit_isIso j L hI (n * (e + 1))
     letI := square_zero_ideal_tensor_unit_isIso j L hI (n * ((e + 1) + 1))
-    T.k (n * (e + 1)) ≫ μ (tensorGradedSection T D 0 (tensorPowSection f 1)) =
+    T.k (n * (e + 1)) ≫ (μ (tensorGradedSection T D 0 (tensorPowSection f 1))).asHom =
       ((pushforward j).mapIso (boundaryCoefficientDegreeIso j L n e).symm ≪≫
       (asIso ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app
         (j.ker.toModules ⊗ L.tensorPow (n * (e + 1))))).symm ≪≫
