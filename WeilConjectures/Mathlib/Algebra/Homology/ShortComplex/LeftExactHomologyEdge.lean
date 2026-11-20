@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
 
 /-! # The homology edge of a left exact functor
 

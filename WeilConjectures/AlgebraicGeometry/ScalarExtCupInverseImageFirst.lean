@@ -101,7 +101,6 @@ private theorem unitComparison (t : Y ⟶ X) :
     (Opens.map t.base) (ModuleCat.{w} k) (Opens.grothendieckTopology X)
       (Opens.grothendieckTopology Y) (Opposite.op ⊤)).symm
 
-set_option maxHeartbeats 400000 in
 -- Normalize the inverse-image functor before applying monoidal coherence.
 /-- Compatibility of the first tensor transport with exact inverse image.
 Source: Stacks Project, Cohomology, Tags 01FD, 07MB and 0FKV.
@@ -144,17 +143,20 @@ theorem scalarExtCup_inverseImage_first (t : Y ⟶ X)
   rw [rightUnitTransport a, Abelian.Ext.mapExactFunctor_comp,
     Abelian.Ext.mapExactFunctor_mk₀, rightUnitTransport]
   simp only [Abelian.Ext.comp_assoc_of_third_deg_zero, Abelian.Ext.mk₀_comp_mk₀]
-  congr 2
-  congr 1
-  let adj := (Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
-    (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
-  let : (scalarInverseImage (k := k) t).OplaxMonoidal := adj.leftAdjointOplaxMonoidal
-  have hu : (scalarInverseUnitIso (k := k) t).hom =
-      Functor.OplaxMonoidal.η (scalarInverseImage t) := unitComparison t
-  dsimp only [scalarInverseImage] at hu φ ⊢
-  rw [hu, tensorHom_def',
-    ← Functor.OplaxMonoidal.right_unitality_assoc]
-  exact (rightUnitor_inv_naturality φ).symm
+  have h : (scalarInverseImage t).map (ρ_ A).inv ≫
+      ((Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
+        (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).leftAdjointOplaxMonoidal.δ
+          A (𝟙_ (KSheaf X k)) ≫ (φ ⊗ₘ (scalarInverseUnitIso t).hom) =
+      φ ≫ (ρ_ A').inv := by
+    let adj := (Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
+      (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
+    let : (scalarInverseImage (k := k) t).OplaxMonoidal := adj.leftAdjointOplaxMonoidal
+    have hu : (scalarInverseUnitIso (k := k) t).hom =
+        Functor.OplaxMonoidal.η (scalarInverseImage t) := unitComparison t
+    dsimp only [scalarInverseImage] at hu φ ⊢
+    rw [hu, tensorHom_def', ← Functor.OplaxMonoidal.right_unitality_assoc]
+    exact (rightUnitor_inv_naturality φ).symm
+  rw [h]
 
 end
 end AlgebraicGeometry.Scheme.Modules

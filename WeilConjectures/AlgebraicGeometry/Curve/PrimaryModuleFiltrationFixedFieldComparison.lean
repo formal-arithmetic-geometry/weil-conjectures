@@ -19,7 +19,7 @@ import WeilConjectures.Mathlib.FieldTheory.KrullTopology
 # Restricted subgroup representations and the fixed-field comparison
 
 Source: Stacks Project, Tags 04JQ, 03QT and 03SF; blueprint
-`lem-sc-affine-generic-second`, proof paragraphs 1--2.
+`theorem-cohomology-curves--2`, proof paragraphs 1--2.
 -/
 
 @[expose] public section
@@ -160,7 +160,7 @@ theorem primaryAssociatedSheaf_zero
       R.obj.ρ (g : Gal(Ks/K)) x ∈ B) :
     IsZero (primaryAssociatedSheaf K Ks H Ω C T e (primarySubmodule K Ks H R B hB)) := by
   have hV : IsZero (primarySubmodule K Ks H R B hB).obj := by
-    apply (Rep.isZero_iff ℤ H.toSubgroup _).mpr
+    apply (Rep.isZero_iff _).mpr
     change Subsingleton B.toIntSubmodule
     subst B
     rw [map_bot]

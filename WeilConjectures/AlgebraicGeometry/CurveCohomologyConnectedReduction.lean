@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteCoproductCohomologyAssembly
 
 /-! # Reduction of curve comparison to connected curves
 
-Source: blueprint sbc-thm-algebraically-closed-invariance, first step (clopen connected components).
+Source: blueprint theorem-cohomology-curves--6, first step (clopen connected components).
 -/
 
 @[expose] public section
@@ -27,7 +27,7 @@ namespace AlgebraicGeometry
 
 /-- Comparison on connected smooth curves implies comparison on every qc smooth
 separated curve of relative dimension one.
-Source: blueprint sbc-thm-algebraically-closed-invariance, first step.
+Source: blueprint theorem-cohomology-curves--6, first step.
 (blueprint: lem-sc-curve-cohomology-connected-reduction)
 
 Proof: C is finite type over k and hence Noetherian. Its finitely many

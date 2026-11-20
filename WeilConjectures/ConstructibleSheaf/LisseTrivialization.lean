@@ -85,9 +85,9 @@ lemma isPullback_sigmaDesc_of_isGalois (A E : X.FiniteEtale) [IsGalois A] (a : (
     obtain ⟨σ, rfl⟩ := evaluation_aut_surjective_of_isGalois (fiber s) A a x
     refine ⟨fun f g hfg ↦ evaluation_injective_of_isConnected (fiber s) A E _ hfg, fun e ↦ ?_⟩
     obtain ⟨g, hg⟩ := ha.2 e
-    refine ⟨σ.inv ≫ g, ?_⟩
+    refine ⟨σ.asIso.inv ≫ g, ?_⟩
     simp only [Functor.map_comp, FintypeCat.comp_apply]
-    rw [← FintypeCat.comp_apply ((fiber s).map σ.hom), ← Functor.map_comp, σ.hom_inv_id,
+    rw [← FintypeCat.comp_apply ((fiber s).map σ.asIso.hom), ← Functor.map_comp, σ.asIso.hom_inv_id,
       CategoryTheory.Functor.map_id, FintypeCat.id_apply]
     exact hg
   have hΦ : IsIso ((fiber s).map Φ) := by

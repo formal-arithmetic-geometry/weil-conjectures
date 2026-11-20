@@ -94,14 +94,15 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Hypercover.ProEtaleHypercoverC
 /-!
 # Derived abelian sections from a weakly contractible hypercover
 
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-prop-pe-hypercover/
-det-pe-hypercover-complex.md; Stacks Project, Tag 09A2
-(blueprint: det-pe-hypercover-complex).
-
-The helpers realize this node's alternating section total for arbitrary ring sheaves.
+The helpers realize the alternating section total for arbitrary ring sheaves.
 The existing `hypercoverTotal` has commutative coefficients and a module-valued target.
 Here all values and derived categories use the common larger coefficient universe;
 the pro-etale site's object and morphism universes stay different.
+
+## References
+
+* Stacks Project, Tag 09A2, the construction of `s(E(K))`
+* Stacks Project, Tag 09A2, construction of the total complex
 -/
 
 @[expose] public section
@@ -118,9 +119,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 private instance : Preadditive (CosimplicialObject AddCommGrpCat.{u}) :=
   inferInstanceAs (Preadditive (SimplexCategory ⥤ AddCommGrpCat.{u}))
 
-/-- Cosimplicial underlying abelian sections, with the actual sheaf restriction maps.
-Source: Stacks Project, Tag 09A2, the construction of `s(E(K))`
-(blueprint: det-pe-hypercover-complex). -/
+/-- Cosimplicial underlying abelian sections, with the actual sheaf restriction maps. -/
 noncomputable def hypercoverAbelianSections (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{u}) (U : X.ProEt)
     (W : SimplicialObject (Over U)) :
@@ -131,9 +130,7 @@ noncomputable def hypercoverAbelianSections (X : Scheme.{t})
 
 /-- The alternating section rows, extended by zero in negative simplicial degrees.
 The differential from degree r to r+1 is the sum of `(-1)^i` times the i-th
-face restriction, for i in `Fin (r+2)`. No hypercover condition enters this data.
-Source: Stacks Project, Tag 09A2
-(blueprint: det-pe-hypercover-complex). -/
+face restriction, for i in `Fin (r+2)`. No hypercover condition enters this data. -/
 noncomputable def hypercoverAbelianRows (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{u}) (U : X.ProEt)
     (W : SimplicialObject (Over U)) :
@@ -143,14 +140,7 @@ noncomputable def hypercoverAbelianRows (X : Scheme.{t})
     AlgebraicTopology.alternatingCofaceMapComplex _ ⋙
     ComplexShape.embeddingUpNat.extendFunctor _
 
-/-- Additivity needed to apply the alternating section rows to a coefficient complex.
-Source: Stacks Project, Tag 09A2, construction of the total complex; step 1 of the
-node's proof (blueprint: det-pe-hypercover-complex).
-Proof: a coefficient morphism acts by its section map in every degree. Addition of
-module-sheaf morphisms, of abelian presheaf morphisms and of complex morphisms is
-componentwise. Alternating cofaces do not change these components, and extension
-by zero has zero components in the additional degrees. Thus each component of the
-image of a sum is the sum of its images. -/
+/-- Additivity needed to apply the alternating section rows to a coefficient complex. -/
 theorem hypercoverAbelianRows_additive (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{u}) (U : X.ProEt)
     (W : SimplicialObject (Over U)) :

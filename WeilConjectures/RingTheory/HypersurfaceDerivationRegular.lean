@@ -37,7 +37,7 @@ Proof:
    image `p` in `R`. The element `f` lies in `p`, whereas `D(f)` does not: its
    image is a unit, and a proper prime ideal cannot contain a unit. This also
    covers a unit `f` vacuously, since its quotient has no primes.
-2. Extend `D` to `R_p` using `lem-weil-pbc-derivation-extends`. The image of `f`
+2. Extend `D` to `R_p` using `theorem-finite-etale-covers-proper-henselian--2`. The image of `f`
    lies in the maximal ideal, and the derivative of this image is a unit because
    `D(f)` lies outside `p`. Induction on sums of products in the square of the
    maximal ideal, using additivity and Leibniz, shows that their derivatives lie

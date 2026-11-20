@@ -43,7 +43,7 @@ private theorem inverseMate_app
     {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ : D ⥤ C}
     {L₂ : E ⥤ F} {R₂ : F ⥤ E} (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂)
     (β : R₁ ⋙ G ⟶ H ⋙ R₂) (M : C) :
-    (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ β)).natTrans.app M) =
+    (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ β)).app M) =
       L₂.map (G.map (a₁.unit.app M)) ≫
         L₂.map (β.app (L₁.obj M)) ≫ a₂.counit.app (H.obj (L₁.obj M)) := by
   simp only [mateEquiv, Equiv.coe_fn_symm_mk, TwoSquare.mk, NatTrans.comp_app,
@@ -61,7 +61,7 @@ private noncomputable def inverseMateNatTrans
   app M := L₂.map (G.map (a₁.unit.app M)) ≫
     L₂.map (β.app (L₁.obj M)) ≫ a₂.counit.app (H.obj (L₁.obj M))
   naturality M N f := by
-    have h := (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ β)).natTrans).naturality f
+    have h := (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ β))).naturality f
     simpa only [inverseMate_app] using h
 
 end CategoryTheory

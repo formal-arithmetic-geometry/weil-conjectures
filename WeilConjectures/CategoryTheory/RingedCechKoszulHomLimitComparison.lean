@@ -94,7 +94,6 @@ attribute [local irreducible] ringedExtendedCech ringedKoszulTensorTowerComplex
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1200000 in
 -- The product-localization factorization requires several large functor type comparisons.
 /-- The telescope/Hom calculation identifies Cech internal Hom with any specified
 presentation of the actual strict Koszul tensor tower and its derived inverse limit.

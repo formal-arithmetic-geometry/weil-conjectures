@@ -61,7 +61,7 @@ theorem existsUnique_algHom_of_indEtale [Algebra.IndEtale A D₁]
   obtain ⟨ι, _, _, P, hP⟩ := Algebra.IndEtale.exists_colimitPresentation (R := A) (S := D₁)
   have hcolim : IsColimit ((forget (CommAlgCat.{u} A)).mapCocone P.cocone) :=
     isColimitOfPreserves (forget (CommAlgCat.{u} A)) P.isColimit
-  -- The structure maps `ιᵢ : Dᵢ → D₁` of the presentation.
+  -- The structure maps `ιᵢ: Dᵢ → D₁` of the presentation.
   let s (i : ι) : P.diag.obj i →ₐ[A] D₁ := (P.ι.app i).hom
   have hs {i j : ι} (t : i ⟶ j) : (s j).comp (P.diag.map t).hom = s i := by
     ext x

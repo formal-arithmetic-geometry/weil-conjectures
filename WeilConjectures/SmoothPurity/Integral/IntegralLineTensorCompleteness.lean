@@ -15,7 +15,7 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
 /-! # Exact line tensor preserves the canonical augmented reduction triangle
 
-Source: prop-weil-twist-preserves, proof steps 6--7.
+Source: definition-tate-twists--10, proof steps 6--7.
 (blueprint: lem-weil-integral-line-tensor-completeness).
 -/
 
@@ -27,7 +27,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace WeilConjectures
 
 /-- Tensor by a completed coefficient line preserves intrinsic derived completeness.
-Source: blueprint prop-weil-twist-preserves, proof steps 6--7
+Source: blueprint definition-tate-twists--10, proof steps 6--7
 (blueprint: lem-weil-integral-line-tensor-completeness).
 
 Proof: the internal dual of L is its tensor inverse, checked after a rank-one

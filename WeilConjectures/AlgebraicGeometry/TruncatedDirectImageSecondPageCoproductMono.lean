@@ -14,6 +14,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Mathlib.Algebra.Category.ModuleCat.Products
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 @[expose] public section
 

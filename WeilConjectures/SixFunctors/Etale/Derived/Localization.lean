@@ -66,7 +66,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U Z X : Scheme.{u}}
 
 omit [HasSmallSiteSheafify A] in
-/-- Blueprint `sk-prop-sf-closed-unit`: Closed-immersion unit
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`: Closed-immersion unit
 
 For a closed immersion `i : Z ⟶ X` and `Q ∈ D^b_{ctf}(Z, Λ)` the unit
 
@@ -194,7 +194,7 @@ noncomputable abbrev supportedLocalizationTriangle (i : Z ⟶ X) [HasCompactific
 
 omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] in
-/-- Blueprint `sk-prop-sf-localization`: Supported localization
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Supported localization
 
 **No maps from the closed side to the open side.** Let `i : Z ⟶ X` be compactifiable and let
 `j : U ⟶ X` be an open immersion, with disjoint ranges. Then `Hom((Ri_! B)[n], Rj_* C) = 0` for
@@ -230,7 +230,7 @@ theorem subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar (i 
     ⟨fun _ _ ↦ hz.eq_of_src _ _⟩
   exact ((mapDerivedUpperStarLowerStarAdjunction A j).homEquiv _ _).symm.subsingleton
 
-/-- Blueprint `sk-prop-sf-localization`: Supported localization
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Supported localization
 
 **The supported localization triangle.** Let `i : Z ⟶ X` be a closed immersion with
 complementary open `j : U ⟶ X`. For `L ∈ D(X_ét, A)` the *adjunction maps*
@@ -345,7 +345,7 @@ theorem supportedLocalizationTriangle_mem_distTriang (i : Z ⟶ X) (j : U ⟶ X)
       distTriang _ :=
   (existsUnique_distTriang_supportedLocalization Λ i j hij L).exists.choose_spec
 
-/-- Blueprint `sk-prop-sf-localization`: Supported localization
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Supported localization
 
 **Naturality of the supported localization triangle.** Let `i : Z ⟶ X` be compactifiable and
 `j : U ⟶ X` an open immersion, with disjoint images. For `φ : L ⟶ L'` and distinguished
@@ -394,7 +394,7 @@ theorem exists_triangleHom_supportedLocalization (i : Z ⟶ X) [HasCompactificat
   · rw [τ.comm₂, hτ]
     exact ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit_naturality φ).symm
 
-/-- Blueprint `sk-prop-sf-localization`: Supported localization
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Supported localization
 
 **A morphism of supported localization triangles is determined by its middle
 component.** Let

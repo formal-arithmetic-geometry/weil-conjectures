@@ -9,9 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.IntegralModelsEmbedded.IntegralM
 
 /-! # Realization of the embedded constant finite coefficient ring
 
-Source: Stacks Tags 03ET and 00YV. Use the specified constant-function scalar map,
+Use the specified constant-function scalar map,
 followed by the existing intrinsic realization. No coefficient isomorphism is chosen.
-(blueprint: def-sfb-embedded-finite-coefficient-realization).
+
+## References
+
+* Stacks Tags 03ET and 00YV
+* Stacks Tags 099L and 03ET
 -/
 
 @[expose] public noncomputable section
@@ -27,29 +31,21 @@ namespace AlgebraicGeometry.ProEtale.IntegralModelsEmbedded
 attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
   monoidal_upperStarFromPoint monoidal_pointUpperStar oplaxMonoidal_pointUpperStar
 
-/-- Constant functions on the point, with precisely the scalar map used for the integers.
-Source: Stacks Tag 03ET
-(blueprint: def-sfb-embedded-finite-coefficient-realization). -/
+/-- Constant functions on the point, with precisely the scalar map used for the integers. -/
 def finiteScalarPointMap (A : Type) [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] : discreteObj.{u} A ⟶ Profinite.continuousMapRingObj.{u} A :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (constantToContinuous A)
 
-/-- Constant functions preserve multiplication and the unit.
-Source: Stacks Tag 03ET
-(blueprint: def-sfb-embedded-finite-coefficient-realization). -/
+/-- Constant functions preserve multiplication and the unit. -/
 instance finiteScalarPointMap_mon (A : Type) [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] : IsMonHom (finiteScalarPointMap.{u} A) :=
   Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u}) (constantToContinuous A)
 
-/-- The specified constant-function scalar map after pullback to the scheme.
-Source: Stacks Tag 03ET
-(blueprint: def-sfb-embedded-finite-coefficient-realization). -/
+/-- The specified constant-function scalar map after pullback to the scheme. -/
 def finiteScalarMap (X : Scheme.{u}) (A : Type) [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] := (upperStarFromPoint X).map (finiteScalarPointMap A)
 
-/-- Pullback retains the ring-object homomorphism.
-Source: Stacks Tag 03ET
-(blueprint: def-sfb-embedded-finite-coefficient-realization). -/
+/-- Pullback retains the ring-object homomorphism. -/
 instance finiteScalarMap_mon (X : Scheme.{u}) (A : Type) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] : IsMonHom (finiteScalarMap X A) :=
   inferInstanceAs (IsMonHom ((upperStarFromPoint X).map (finiteScalarPointMap A)))
@@ -57,9 +53,7 @@ instance finiteScalarMap_mon (X : Scheme.{u}) (A : Type) [CommRing A]
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- Realize the constant embedded coefficient presentation via constant functions.
-This is the concrete composite of the two existing derived functors.
-Source: Stacks Tags 03ET and 00YV
-(blueprint: def-sfb-embedded-finite-coefficient-realization). -/
+This is the concrete composite of the two existing derived functors. -/
 def finiteRealization (X : Scheme.{u}) (A : Type) [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :
     letI : HasSheafify (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} :=
@@ -77,9 +71,7 @@ def finiteRealization (X : Scheme.{u}) (A : Type) [CommRing A] [TopologicalSpace
     (finiteScalarMap.{u} X A)).leftDerivedFunctor ⋙
       (integralModelIntrinsicRealization.{u} X A).rightDerivedFunctor
 
-/-- The actual first constant reduction, with its source and target fixed explicitly.
-Source: Stacks Tag 099L
-(blueprint: def-sfb-embedded-finite-coefficient-realization). -/
+/-- The actual first constant reduction, with its source and target fixed explicitly. -/
 @[irreducible] def constantFirstReduction (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1)
     (X : Scheme.{u}) :
@@ -91,9 +83,7 @@ Source: Stacks Tag 099L
 
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
-/-- The actual first continuous reduction, with its source and target fixed explicitly.
-Source: Stacks Tag 099L
-(blueprint: def-sfb-embedded-finite-coefficient-realization). -/
+/-- The actual first continuous reduction, with its source and target fixed explicitly. -/
 @[irreducible] def continuousFirstReduction (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1)
     (X : Scheme.{u}) :
@@ -105,9 +95,7 @@ Source: Stacks Tag 099L
 
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
-/-- The specified realized first reduction, with the intermediate scalar categories hidden.
-Source: Stacks Tags 099L and 03ET
-(blueprint: def-sfb-embedded-finite-coefficient-realization). -/
+/-- The specified realized first reduction, with the intermediate scalar categories hidden. -/
 @[irreducible] def constantResidueRealization (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1)
     (X : Scheme.{u}) [Finite (completedResidue ℓ E π 0)]
@@ -128,9 +116,7 @@ Source: Stacks Tags 099L and 03ET
 
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
-/-- The specified realized first reduction, with the intermediate scalar categories hidden.
-Source: Stacks Tags 099L and 03ET
-(blueprint: def-sfb-embedded-finite-coefficient-realization). -/
+/-- The specified realized first reduction, with the intermediate scalar categories hidden. -/
 @[irreducible] def continuousResidueRealization (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1)
     (X : Scheme.{u}) [Finite (completedResidue ℓ E π 0)]

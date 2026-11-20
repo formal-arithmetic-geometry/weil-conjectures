@@ -448,14 +448,12 @@ theorem specifiedHomScalarRational_tower (X : Scheme.{u})
   have h₅ := (rationalHomScalarComparison_existsUnique l E F (j.comp ι) X P).exists.choose_spec
   have hleft := compHeq
     (by
-      try dsimp only [Functor.comp_obj]
       rw [scalarObj, scalarObj, homObj]
       rfl)
     (by rw [scalarObj, homObj, scalarPair]; rfl)
     (by rw [homObj, scalarPair, scalarPair]; rfl) h₁'' h₂'
   have hleft' := compHeq
     (by
-      try dsimp only [Functor.comp_obj]
       rw [scalarObj, scalarObj, homObj]
       rfl)
     (by rw [homObj, scalarPair, scalarPair]; rfl)

@@ -70,11 +70,10 @@ primitive `n`-th root of unity.
 - `AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_zero_constantZMod`:
   `H⁰(X, ℤ/n) ≅ ℤ/n` for a connected scheme `X`.
 
-## Blueprint references
+## Implementation details
 
-The labels quoted below are labels of the *sketch* blueprint, which lives in the separate
-repository `formal-arithmetic-geometry/weil-conjectures-blueprint`, not of `blueprint/src` in
-this repository.
+Some auxiliary lemmas take the terminal object of `X.Etale` as a variable, since `rw` fails on
+terms mentioning the canonical one.
 -/
 
 @[expose] public section
@@ -97,17 +96,7 @@ private lemma exists_pow_eq_pullback_fst_toSpecΓ_appTop {U : Scheme.{u}} {R : C
 
 /-- **Kummer covers.** Let `U` be a scheme, `n ≠ 0` invertible on `U` and `t` a unit on `U`.
 Then `t` has an `n`-th root on a surjective étale cover of `U`: there is an étale surjective
-`f : V ⟶ U` and `ω ∈ Γ(V, 𝒪_V)` with `ωⁿ = f^* t`.
-
-One takes for `V` the base change of `Spec Γ(U, 𝒪)[T]/(Tⁿ - t) ⟶ Spec Γ(U, 𝒪)` along
-`U ⟶ Spec Γ(U, 𝒪)`, and for `ω` the image of `T`. The algebra `Γ(U, 𝒪)[T]/(Tⁿ - t)` is étale
-since the derivative `nTⁿ⁻¹` is invertible modulo `Tⁿ - t`
-(`AdjoinRoot.etale_X_pow_sub_C`), and faithfully flat since it is free of rank `n ≥ 1`
-(`AdjoinRoot.faithfullyFlat_of_monic`), so its spectrum is surjective; both properties are
-stable under base change.
-
-This is the main step of the proof of exactness of the Kummer sequence
-(blueprint: `lem-sc-kummer-exact`). -/
+`f: V ⟶ U` and `ω ∈ Γ(V, 𝒪_V)` with `ωⁿ = f^* t`. -/
 theorem exists_etale_surjective_pow_eq_appTop {U : Scheme.{u}} {n : ℕ} (hn₀ : n ≠ 0)
     (hn : IsUnit (n : Γ(U, ⊤))) {t : Γ(U, ⊤)} (ht : IsUnit t) :
     ∃ (V : Scheme.{u}) (f : V ⟶ U), Etale f ∧ Surjective f ∧
@@ -145,17 +134,13 @@ noncomputable def rootsOfUnitySheaf : Sheaf X.smallEtaleTopology AddCommGrpCat.{
 ```
 
 on `X`, the second map being `ω ↦ ωⁿ` and `μₙ = ker(n)` the sheaf of `n`-th roots of unity.
-Its exactness is `AlgebraicGeometry.Scheme.kummerSequence_shortExact` and is *not* part of
-the definition.
-(blueprint: `def-sc-kummer-sequence`) -/
+-/
 noncomputable def kummerSequence :
     ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   ShortComplex.mk (kernel.ι (n • 𝟙 X.gmSheaf)) (n • 𝟙 X.gmSheaf) (kernel.condition _)
 
 /-- The `n`-th power map `n • 𝟙` on `𝔾ₘ` is locally surjective for the étale topology when `n` is
-invertible on `X`: a unit `t` on an étale `X`-scheme `U` acquires an `n`-th root on the
-surjective étale cover of `AlgebraicGeometry.Scheme.exists_etale_surjective_pow_eq_appTop`.
-(blueprint: `lem-sc-kummer-exact`) -/
+invertible on `X`. -/
 theorem isLocallySurjective_nsmul_gmSheaf (hn : IsUnit (n : Γ(X, ⊤))) :
     Sheaf.IsLocallySurjective (n • 𝟙 X.gmSheaf) where
   imageSieve_mem {U} s := by
@@ -201,15 +186,7 @@ theorem isLocallySurjective_nsmul_gmSheaf (hn : IsUnit (n : Γ(X, ⊤))) :
 
 /-- **Exactness of the Kummer sequence.** Let `X` be a scheme and let `n ≥ 1` be invertible on
 `X`. Then the Kummer sequence `AlgebraicGeometry.Scheme.kummerSequence` is a short exact
-sequence of sheaves on `X_ét`.
-
-The first map is a kernel of the second by definition of `μₙ`. The second map, `ω ↦ ωⁿ`, is
-an epimorphism because it is locally surjective
-(`AlgebraicGeometry.Scheme.isLocallySurjective_nsmul_gmSheaf`): a unit `t` acquires an `n`-th
-root on the finite étale surjective cover `Spec 𝒪[T]/(Tⁿ - t)`. The hypothesis is necessary: in
-characteristic `p` the `p`-th power map is not an epimorphism of étale sheaves, and the correct
-replacement is the Artin–Schreier sequence.
-(blueprint: `lem-sc-kummer-exact`) -/
+sequence of sheaves on `X_ét`. -/
 theorem kummerSequence_shortExact (hn : IsUnit (n : Γ(X, ⊤))) :
     (X.kummerSequence n).ShortExact :=
   have := X.isLocallySurjective_nsmul_gmSheaf n hn
@@ -227,21 +204,19 @@ lemma kummerSequence_g_app_apply (U : X.Etaleᵒᵖ) (x : (X.kummerSequence n).X
   rw [e, NatTrans.app_nsmul, NatTrans.id_app]
   rfl
 
-/-- The connecting homomorphism `α : Γ(X, 𝒪)ˣ = H⁰(X, 𝔾ₘ) → H¹(X, μₙ)` of the long exact
+/-- The connecting homomorphism `α: Γ(X, 𝒪)ˣ = H⁰(X, 𝔾ₘ) → H¹(X, μₙ)` of the long exact
 cohomology sequence of the Kummer sequence, for `n` invertible on `X`
 (`AlgebraicGeometry.Scheme.kummerSequence_shortExact`). The group of units is written
-additively.
-(blueprint: `lem-sc-kummer-les`) -/
+additively. -/
 noncomputable def kummerδ₀ (hn : IsUnit (n : Γ(X, ⊤))) :
     Additive Γ(X, ⊤)ˣ →+ Sheaf.H (X.rootsOfUnitySheaf n) 1 :=
   (Sheaf.H.δSections (X.kummerSequence_shortExact n hn)
     (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X)).comp
       AddEquiv.ulift.symm.toAddMonoidHom
 
-/-- The connecting homomorphism `α : H¹(X, 𝔾ₘ) → H²(X, μₙ)` of the long exact cohomology
+/-- The connecting homomorphism `α: H¹(X, 𝔾ₘ) → H²(X, μₙ)` of the long exact cohomology
 sequence of the Kummer sequence, for `n` invertible on `X`
-(`AlgebraicGeometry.Scheme.kummerSequence_shortExact`).
-(blueprint: `lem-sc-kummer-les`) -/
+(`AlgebraicGeometry.Scheme.kummerSequence_shortExact`). -/
 noncomputable def kummerδ₁ (hn : IsUnit (n : Γ(X, ⊤))) :
     X.CohomologicalPicardGroup →+ Sheaf.H (X.rootsOfUnitySheaf n) 2 :=
   Sheaf.H.δSucc (X.kummerSequence_shortExact n hn) 1
@@ -255,8 +230,7 @@ lemma sheafH_map_kummerSequence_g_apply (q : ℕ) (y : Sheaf.H X.gmSheaf q) :
 
 /-- The exactness statements of `AlgebraicGeometry.Scheme.exact_sheafH_rootsOfUnitySheaf_one`,
 for an arbitrary terminal object `T` of `X.Etale` and identification `e` of the units of `X`
-with the sections of `𝔾ₘ` over `T`. The terminal object is a variable here, as `rw` fails on
-terms mentioning the canonical one. -/
+with the sections of `𝔾ₘ` over `T`. -/
 private lemma exact_sheafH_rootsOfUnitySheaf_one_aux (hS : (X.kummerSequence n).ShortExact)
     {T : X.Etale} (hT : IsTerminal T)
     (e : Additive Γ(X, ⊤)ˣ ≃+ (X.kummerSequence n).X₃.obj.obj (Opposite.op T)) :
@@ -293,10 +267,7 @@ private lemma exact_sheafH_rootsOfUnitySheaf_one_aux (hS : (X.kummerSequence n).
 is exact, that is, `0 → Γ(X, 𝒪)ˣ/n → H¹(X, μₙ) → H¹(X, 𝔾ₘ)[n] → 0`. Here `α` is the
 connecting homomorphism `AlgebraicGeometry.Scheme.kummerδ₀` and `β` is induced by the inclusion
 `μₙ ⟶ 𝔾ₘ`: the statement is `ker α = (Γ(X, 𝒪)ˣ)ⁿ`, `ker β = im α` and `im β = H¹(X, 𝔾ₘ)[n]`.
-
-Exactness at `H⁰(X, 𝔾ₘ)` gives `ker α`, exactness at `H¹(X, μₙ)` gives `ker β = im α`, and
-exactness at `H¹(X, 𝔾ₘ)`, where the next map is multiplication by `n`, gives `im β`.
-(blueprint: `det-prop-h1`) -/
+-/
 theorem exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤))) :
     (X.kummerδ₀ n hn).ker = (zsmulAddGroupHom (α := Additive Γ(X, ⊤)ˣ) (n : ℤ)).range ∧
       Function.Exact (X.kummerδ₀ n hn) (Sheaf.H.map (kernel.ι (n • 𝟙 X.gmSheaf)) 1) ∧
@@ -306,8 +277,7 @@ theorem exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤))) :
     (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X) AddEquiv.ulift.symm
 
 /-- The short exact sequence `0 → Γ(X, 𝒪)ˣ/n → H¹(X, μₙ) → H¹(X, 𝔾ₘ)[n] → 0` of
-`AlgebraicGeometry.Scheme.exact_sheafH_rootsOfUnitySheaf_one`, with the maps forgotten.
-(blueprint: `det-prop-h1`) -/
+`AlgebraicGeometry.Scheme.exact_sheafH_rootsOfUnitySheaf_one`, with the maps forgotten. -/
 theorem exists_exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤))) :
     ∃ (α : Additive Γ(X, ⊤)ˣ →+ Sheaf.H (X.rootsOfUnitySheaf n) 1)
       (β : Sheaf.H (X.rootsOfUnitySheaf n) 1 →+ X.CohomologicalPicardGroup),
@@ -316,9 +286,7 @@ theorem exists_exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤)))
   ⟨_, _, X.exact_sheafH_rootsOfUnitySheaf_one n hn⟩
 
 /-- **`H¹(X, μₙ) = H¹(X, 𝔾ₘ)[n]`.** If `n` is invertible on `X` and every unit on `X` is an
-`n`-th power, then `H¹(X, μₙ) ≅ H¹(X, 𝔾ₘ)[n]`: the first term `Γ(X, 𝒪)ˣ/n` of the short exact
-sequence `AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_one` vanishes.
-(blueprint: `det-prop-h1`) -/
+`n`-th power, then `H¹(X, μₙ) ≅ H¹(X, 𝔾ₘ)[n]`. -/
 theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤)))
     (hdiv : ∀ u : Γ(X, ⊤)ˣ, ∃ v : Γ(X, ⊤)ˣ, v ^ n = u) :
     Nonempty (Sheaf.H (X.rootsOfUnitySheaf n) 1 ≃+
@@ -345,9 +313,7 @@ theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, �
 is exact, that is, `0 → H¹(X, 𝔾ₘ)/n → H²(X, μₙ) → H²(X, 𝔾ₘ)[n] → 0`. Here `α` is the
 connecting homomorphism `AlgebraicGeometry.Scheme.kummerδ₁` and `β` is induced by the inclusion
 `μₙ ⟶ 𝔾ₘ`: the statement is `ker α = n · H¹(X, 𝔾ₘ)`, `ker β = im α` and
-`im β = H²(X, 𝔾ₘ)[n]`. This is the middle part of the long exact cohomology sequence of the
-Kummer sequence.
-(blueprint: `lem-sc-second-kummer-divisors`) -/
+`im β = H²(X, 𝔾ₘ)[n]`. -/
 theorem exact_sheafH_rootsOfUnitySheaf_two (hn : IsUnit (n : Γ(X, ⊤))) :
     (X.kummerδ₁ n hn).ker = (zsmulAddGroupHom (α := X.CohomologicalPicardGroup) (n : ℤ)).range ∧
       Function.Exact (X.kummerδ₁ n hn) (Sheaf.H.map (kernel.ι (n • 𝟙 X.gmSheaf)) 2) ∧
@@ -368,8 +334,7 @@ theorem exact_sheafH_rootsOfUnitySheaf_two (hn : IsUnit (n : Γ(X, ⊤))) :
     exact (Sheaf.H.exact_map_map hS 2 x).symm
 
 /-- The short exact sequence `0 → H¹(X, 𝔾ₘ)/n → H²(X, μₙ) → H²(X, 𝔾ₘ)[n] → 0` of
-`AlgebraicGeometry.Scheme.exact_sheafH_rootsOfUnitySheaf_two`, with the maps forgotten.
-(blueprint: `lem-sc-second-kummer-divisors`) -/
+`AlgebraicGeometry.Scheme.exact_sheafH_rootsOfUnitySheaf_two`, with the maps forgotten. -/
 theorem exists_exact_sheafH_rootsOfUnitySheaf_two (hn : IsUnit (n : Γ(X, ⊤))) :
     ∃ (α : X.CohomologicalPicardGroup →+ Sheaf.H (X.rootsOfUnitySheaf n) 2)
       (β : Sheaf.H (X.rootsOfUnitySheaf n) 2 →+ X.CohomologicalBrauerGroup),
@@ -378,14 +343,13 @@ theorem exists_exact_sheafH_rootsOfUnitySheaf_two (hn : IsUnit (n : Γ(X, ⊤)))
   ⟨_, _, X.exact_sheafH_rootsOfUnitySheaf_two n hn⟩
 
 /-- The constant étale sheaf `ℤ/n` on a scheme `X`, valued in abelian groups of the universe of
-the small étale site (blueprint `def-sc-constant-sheaves`). -/
+the small étale site. -/
 noncomputable abbrev constantZMod : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
     (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))
 
 /-- The global sections of the constant sheaf `ℤ/n` on a connected scheme are `ℤ/n`:
-`H⁰(X_ét, ℤ/n) ≅ ℤ/n`.
-(blueprint: `sk-thm-curveestimate`) -/
+`H⁰(X_ét, ℤ/n) ≅ ℤ/n`. -/
 theorem nonempty_addEquiv_sheafH_zero_constantZMod [ConnectedSpace X] :
     Nonempty (Sheaf.H (X.constantZMod n) 0 ≃+ ZMod n) := by
   -- the sections of a constant étale sheaf over `X` are the locally constant functions

@@ -203,7 +203,7 @@ theorem finsum_traceFunction_upperStar_affineSpaceFourierIntegrand
 
 up to the sign coming from the shift `[r]`, the trace function of the transform is the
 classical Fourier transform of the trace function of `K`.
-(sketch blueprint: `thm-fd-fourier-trace`; blueprint: `thm-fd-fourier-trace`) -/
+(sketch blueprint: `sec-The-Plancherel-formula`; blueprint: `sec-The-Plancherel-formula`) -/
 theorem traceFunction_affineSpaceFourierTransform (ψ : AddChar k₀ (PadicAlgCl l))
     (K : WeilComplex k₀ l 𝔸(ι; Spec (CommRingCat.of k₀))) {n : ℕ} (hn : n ≠ 0)
     [Fintype (FiniteField.galoisExtension k₀ n)] (y : ι → FiniteField.galoisExtension k₀ n) :
@@ -374,7 +374,7 @@ the affine line, `n ≥ 1` and `y ∈ 𝔽_{qⁿ}`,
 up to the sign coming from the shift `[1]`, the trace function of the transform is the
 classical Fourier transform of the trace function of `K`. It is the case `ι = PUnit` of
 `AlgebraicGeometry.WeilComplex.traceFunction_affineSpaceFourierTransform`.
-(sketch blueprint: `thm-fd-fourier-trace`; blueprint: `thm-fd-fourier-trace`) -/
+(sketch blueprint: `sec-The-Plancherel-formula`; blueprint: `sec-The-Plancherel-formula`) -/
 theorem traceFunction_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l))
     (K : WeilComplex k₀ l (affineLine k₀)) {n : ℕ} (hn : n ≠ 0)
     [Fintype (FiniteField.galoisExtension k₀ n)] (y : FiniteField.galoisExtension k₀ n) :

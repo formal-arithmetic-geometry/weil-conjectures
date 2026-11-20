@@ -53,7 +53,6 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Base change along universal homeomorphisms on the ambient derived categories**: for a
 cartesian square `g' ≫ p = p' ≫ g` of schemes with `g` a universal homeomorphism, the base change
@@ -90,7 +89,7 @@ lemma isIso_pullbackExchange_of_isUniversalHomeomorphism
     IsIso (φ.pullbackExchange Λ) := by
   have : IsIso (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans := by
+      (pullbackSquareComparison Λ φ.commSq_j).hom) := by
     have := isIso_baseChangeMap_of_isUniversalHomeomorphism Λ hφ
     rwa [baseChangeMap, Adjunction.exchangeRight_eq_mateEquiv] at this
   unfold pullbackExchange

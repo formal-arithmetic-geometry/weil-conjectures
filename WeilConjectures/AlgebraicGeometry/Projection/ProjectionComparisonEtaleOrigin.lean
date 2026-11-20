@@ -27,9 +27,10 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Projection
 /-!
 # Etale-origin comparison of compact-support projection maps
 
-Source: main-20261015 blueprint, sec-six-functors-basics/sk-prop-cohsm,
-first paragraph of thm-pur-cohomological-smoothness.proof.md; Stacks Tags 0E48,
-09AF and 0GL1 (blueprint: lem-pur-projection-comparison-etale-origin).
+## References
+
+* Stacks Tags 0E48, 09AF and 0GL1
+* Stacks Tags 07A4 and 099R
 -/
 
 @[expose] public noncomputable section
@@ -44,9 +45,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
-/-- The derived pullback comparison used in the target transport.
-Source: Stacks Tag 099R
-(blueprint: def-smooth-purity-projection-comparison-equation). -/
+/-- The derived pullback comparison used in the target transport. -/
 noncomputable def projectionComparisonPullbackIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory ⋙
@@ -66,8 +65,7 @@ noncomputable def projectionComparisonPullbackIso (A : Type (u + 1)) [CommRing A
       (Etale.upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor
       (comparisonUpperStar (ModuleCat.{u + 1} A) X).leftDerivedFunctorIsoMapDerivedCategory
 
-/-- The canonical target transport from the comparison of pullback and tensor.
-Source: Stacks Tags 07A4 and 099R (blueprint: def-smooth-purity-projection-comparison-equation). -/
+/-- The canonical target transport from the comparison of pullback and tensor. -/
 noncomputable def projectionComparisonTargetIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y) :
@@ -86,8 +84,7 @@ noncomputable def projectionComparisonTargetIso (A : Type (u + 1)) [CommRing A] 
       (ModuleCat.{u + 1} A) M).app
       ((Etale.upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj H)).symm
 
-/-- Tensor target used in the bounded-below witness.
-Source: main-20261015 blueprint (blueprint: def-smooth-purity-projection-comparison-equation). -/
+/-- Tensor target used in the bounded-below witness. -/
 noncomputable def projectionComparisonTensor (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y) :=

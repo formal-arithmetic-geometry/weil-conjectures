@@ -169,12 +169,58 @@ private theorem localized_uncurry
       rw [← Category.assoc e'.hom, hloc', ← hu]
       rfl
 
+-- Assemble the model and localization squares in arbitrary categories, so their
+-- rewrites do not unfold the concrete derived-category instances.
+private theorem localized_uncurry_of_representatives
+    {C C' E : Type a} [Category.{b} C] [Category.{b} C'] [Category.{b} E]
+    {H' : Eᵒᵖ × E ⥤ E} (S' : CoefficientClosedStructure H')
+    (Q : C ⥤ D) (Q' : C' ⥤ E) (U : C ⥤ C') (F : D ⥤ E)
+    (δ : Q ⋙ F ≅ U ⋙ Q') (t : S.tensor ⋙ F ≅ F.prod F ⋙ S'.tensor)
+    (P R I T J : C) (B J' : C')
+    (e : S.tensor.obj (Q.obj R, Q.obj P) ≅ Q.obj T)
+    (e' : S'.tensor.obj (Q'.obj (U.obj R), Q'.obj (U.obj P)) ≅ Q'.obj B)
+    (c : U.obj T ≅ B) (m : H.obj (op (Q.obj P), Q.obj I) ≅ Q.obj J)
+    (m' : H'.obj (op (Q'.obj (U.obj P)), Q'.obj (U.obj I)) ≅ Q'.obj J')
+    (d : U.obj J ≅ J')
+    (x : F.obj (H.obj (op (Q.obj P), Q.obj I)) ⟶
+      H'.obj (op (F.obj (Q.obj P)), F.obj (Q.obj I)))
+    (hs : x ≫ H'.map (Prod.mkHom (δ.inv.app P).op (δ.hom.app I)) ≫ m'.hom =
+      F.map m.hom ≫ δ.hom.app J ≫ Q'.map d.hom)
+    (φ : R ⟶ J) (ψ : T ⟶ I) (ψ' : B ⟶ U.obj I)
+    (hloc : e.hom ≫ Q.map ψ = (S.transpose _ _ _).symm (Q.map φ ≫ m.inv))
+    (hloc' : e'.hom ≫ Q'.map ψ' =
+      (S'.transpose _ _ _).symm (Q'.map (U.map φ ≫ d.hom) ≫ m'.inv))
+    (hc : c.inv ≫ U.map ψ = ψ')
+    (ht : F.map e.hom ≫ δ.hom.app T ≫ Q'.map c.hom =
+      t.hom.app (Q.obj R, Q.obj P) ≫
+        S'.tensor.map (Prod.mkHom (δ.hom.app R) (δ.hom.app P)) ≫ e'.hom) :
+    F.map ((S.transpose _ _ _).symm (Q.map φ ≫ m.inv)) =
+      t.hom.app (Q.obj R, Q.obj P) ≫
+        (S'.transpose _ _ _).symm (F.map (Q.map φ ≫ m.inv) ≫ x) := by
+  let f := Q.map φ ≫ m.inv
+  let f' := Q'.map (U.map φ ≫ d.hom) ≫ m'.inv
+  have hf : F.map f ≫ x ≫
+      H'.map (Prod.mkHom (δ.inv.app P).op (δ.hom.app I)) = δ.hom.app R ≫ f' := by
+    have hm := remove_model_natural Q (U ⋙ Q') F δ m m' (Q'.map d.hom)
+      (x ≫ H'.map (Prod.mkHom (δ.inv.app P).op (δ.hom.app I)))
+      (by simpa only [Category.assoc] using hs) φ
+    simpa only [Functor.comp_map, Functor.map_comp, Category.assoc, f, f'] using hm
+  have hf' : F.map f ≫ x = δ.hom.app R ≫ f' ≫
+      H'.map (Prod.mkHom (δ.hom.app P).op (δ.inv.app I)) := by
+    have hh := invert_hom_square H' (δ.app P) (δ.app I)
+      (F.map f ≫ x) (δ.hom.app R ≫ f')
+      (by simpa only [Category.assoc, Iso.app_inv, Iso.app_hom] using hf)
+    simpa only [Category.assoc, Iso.app_inv, Iso.app_hom] using hh
+  exact localized_uncurry S S' Q (U ⋙ Q') F δ t P R I T (Q'.obj B)
+    e e' (Q'.mapIso c) ψ (Q'.map ψ') f f' (F.map f ≫ x) hf' hloc hloc'
+    (by simpa only [Functor.comp_map, Functor.map_comp, Functor.mapIso_hom] using
+      congrArg Q'.map ((Iso.inv_comp_eq c).mp hc)) ht
+
 end TensorEvaluationFormal
 
 open TensorEvaluation
 variable {k₀ l X}
 
-set_option maxHeartbeats 800000 in
 -- The proof combines both normalizations and their dependent representative isomorphisms.
 /-- Forgetting commutes with inverse transposition on K-flat tensor representatives
 and a K-injective target.
@@ -222,49 +268,33 @@ theorem native_weil_representative_uncurry
             χ.hom.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj I)) := by
   let F := nativeForget k₀ l X
   let δ := (U (k₀ := k₀) (l := l) (X := X)).mapDerivedCategoryFactors
-  let f := DerivedCategory.Q.map φ ≫ (M.weilRepresentatives.model P I hI).inv
-  obtain ⟨hUI, c, hc, hs⟩ := native_hom_evaluation_square_all_sources k₀ l X M χ hχ P I hI
+  -- Projections keep the witnesses shared without constructing large elimination motives.
+  have hsources := native_hom_evaluation_square_all_sources k₀ l X M χ hχ P I hI
+  have hUI := hsources.choose
+  let c := hsources.choose_spec.choose
+  have hc := hsources.choose_spec.choose_spec.1
+  have hs := hsources.choose_spec.choose_spec.2
   let φ' := (UC).map φ ≫ c.hom
-  let f' := DerivedCategory.Q.map φ' ≫ (M.ordinaryRepresentatives.model _ _ hUI).inv
-  obtain ⟨ψ, hψ, hloc⟩ := hW P Q I hP hQ hI φ
-  obtain ⟨ψ', hψ', hloc'⟩ := N.ordinaryNormalization ((UC).obj P) ((UC).obj Q)
+  have hnorm := hW P Q I hP hQ hI φ
+  let ψ := hnorm.choose
+  have hψ := hnorm.choose_spec.1
+  have hloc := hnorm.choose_spec.2
+  have hnorm' := N.ordinaryNormalization ((UC).obj P) ((UC).obj Q)
     ((UC).obj I) (N.preserves_flat P hP) (N.preserves_flat Q hQ) hUI φ'
-  have hchain := native_weil_chain_uncurry_forget M S W t N P Q I c hc φ ψ ψ' hψ hψ'
-  have hchain' : (UC).map ψ = (N.chain P Q).hom ≫ ψ' := by
-    rw [← hchain, Iso.hom_inv_id_assoc]
-  have hf : F.map f ≫ χ.hom.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj I) ≫
-      M.ordinaryHom.map (Prod.mkHom (δ.inv.app P).op (δ.hom.app I)) =
-    δ.hom.app Q ≫ f' := by
-    have hm := TensorEvaluationFormal.remove_model_natural DerivedCategory.Q
-      ((UC) ⋙ DerivedCategory.Q) F δ
-      (M.weilRepresentatives.model P I hI)
-      (M.ordinaryRepresentatives.model ((UC).obj P) ((UC).obj I) hUI)
-      (DerivedCategory.Q.map c.hom)
-      (χ.hom.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj I) ≫
-        M.ordinaryHom.map (Prod.mkHom (δ.inv.app P).op (δ.hom.app I)))
-      (by simpa only [Category.assoc] using hs) φ
-    simpa only [Functor.comp_map, Functor.map_comp, Category.assoc, f, f', φ'] using hm
-  have hf' : F.map f ≫
-      χ.hom.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj I) =
-    δ.hom.app Q ≫ f' ≫
-      M.ordinaryHom.map (Prod.mkHom (δ.hom.app P).op (δ.inv.app I)) := by
-    have hh := TensorEvaluationFormal.invert_hom_square M.ordinaryHom (δ.app P) (δ.app I)
-      (F.map f ≫ χ.hom.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj I))
-      (δ.hom.app Q ≫ f')
-      (by simpa only [Category.assoc, Iso.app_inv, Iso.app_hom] using hf)
-    simpa only [Category.assoc, Iso.app_inv, Iso.app_hom] using hh
-  exact TensorEvaluationFormal.localized_uncurry W S DerivedCategory.Q
-    ((UC) ⋙ DerivedCategory.Q) F δ t P Q I
-    (CochainComplex.mapBifunctor P Q N.tensor) _
+  let ψ' := hnorm'.choose
+  have hψ' := hnorm'.choose_spec.1
+  have hloc' := hnorm'.choose_spec.2
+  exact TensorEvaluationFormal.localized_uncurry_of_representatives W S
+    DerivedCategory.Q DerivedCategory.Q (UC) F δ t P Q I
+    (CochainComplex.mapBifunctor P Q N.tensor)
+    (CochainComplex.bifunctorHomObj (HW) P I) _ _
     (N.model P Q hP)
     (N.ordinaryModel ((UC).obj P) ((UC).obj Q) (N.preserves_flat P hP))
-    (DerivedCategory.Q.mapIso (N.chain P Q))
-    ψ (DerivedCategory.Q.map ψ') f f'
-    (F.map f ≫ χ.hom.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj I))
-    hf' hloc hloc' (by
-      simpa only [Functor.comp_map, Functor.map_comp, Functor.mapIso_hom] using
-        congrArg (fun z ↦ DerivedCategory.Q.map z) hchain')
-    (by simpa only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
-      Category.assoc] using N.model_forget P Q hP)
+    (N.chain P Q) (M.weilRepresentatives.model P I hI)
+    (M.ordinaryRepresentatives.model ((UC).obj P) ((UC).obj I) hUI) c
+    (χ.hom.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj I))
+    hs φ ψ ψ' hloc hloc'
+    (native_weil_chain_uncurry_forget M S W t N P Q I c hc φ ψ ψ' hψ hψ')
+    (N.model_forget P Q hP)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

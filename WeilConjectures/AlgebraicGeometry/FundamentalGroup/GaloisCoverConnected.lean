@@ -18,7 +18,7 @@ component `P₀` of `P` is again a Galois cover of `Y`, with group the stabilize
 In terms of the Galois correspondence: the geometric fibre `P_s` is a `G`-torsor with a commuting
 action of `π₁(Y, s)`; a `π₁`-orbit `O ⊆ P_s` corresponds to a connected finite étale `Y`-scheme
 `P₀` with a morphism to `P`, and the subgroup `H = {g ∈ G | g • O = O}` acts simply transitively
-on `O` (blueprint `det-tf-transverse-corner-vanishing`, dévissage step).
+on `O` (blueprint `lemma-cohomology-near-two-transverse-divisors--1`, dévissage step).
 
 ## Main statements
 
@@ -144,7 +144,7 @@ lemma _root_.MulAction.stabilizer_eq_of_injective {M X Z : Type*} [Group M] [Mul
 /-- A finite étale Galois cover `c` of a connected scheme `Y` with group `G` has a connected
 Galois subcover: there are a subgroup `H ≤ G`, a Galois cover `c'` of `Y` with group `H` and
 connected total space, and a morphism of `Y`-schemes `c'.P ⟶ c.P` (blueprint
-`det-tf-transverse-corner-vanishing`). -/
+`lemma-cohomology-near-two-transverse-divisors--1`). -/
 theorem exists_connected_subcover {Y : Scheme.{u}} [ConnectedSpace Y] {G : Type (u + 1)}
     [Group G] [Finite G] (c : Y.GaloisCover G) :
     ∃ (H : Subgroup G) (c' : Y.GaloisCover H) (_ : ConnectedSpace c'.P) (i : c'.P ⟶ c.P),

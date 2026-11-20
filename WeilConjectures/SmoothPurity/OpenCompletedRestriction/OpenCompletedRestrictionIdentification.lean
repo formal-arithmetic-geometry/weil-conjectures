@@ -30,7 +30,7 @@ import Mathlib.Data.Nat.Prime.Infinite
 /-! # Open restriction and the actual completed quotient tower
 
 Source: Stacks Tags 00XZ, 08TC and 0941; the finite-clopen expansion of
-blueprint def-pur-section-invariant, retained step 5
+blueprint lemma-section-normal-bundle--1, retained step 5
 (blueprint: lem-pur-open-completed-restriction-identification).
 -/
 
@@ -772,7 +772,7 @@ theorem Comparison.localization (d : Comparison l E j) :
 /-- The canonical open comparison is restriction of the actual quotient completion
 unit followed by the representative-normalized comparison. Its naturality includes
 all derived roofs because both factors are natural transformations on D(R_X).
-Source: Stacks 00XZ, 08TC, 0941; retained step 5 of def-pur-section-invariant
+Source: Stacks 00XZ, 08TC, 0941; retained step 5 of lemma-section-normal-bundle--1
 (blueprint: lem-pur-open-completed-restriction-identification). -/
 def kappa (d : Comparison l E j) :
     derivedRestriction l E j ⟶ integralDerivedPullback l E j :=

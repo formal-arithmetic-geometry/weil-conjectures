@@ -14,7 +14,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 /-- A map between canonical finite free sheaves over a stalk extends locally.
-Source: lem-pc-perfect-locus, finite matrix calculation, expanded in
+Source: lemma-coherent-base-change-invertible-sheaves--3, finite matrix calculation, expanded in
 lem-pc-finite-free-stalk-chain-map-lift-local, steps 1--2.
 
 Proof: Pullback identifies each displayed free sheaf with the free sheaf of the

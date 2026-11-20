@@ -30,8 +30,9 @@ of (Pull) with the units and the connecting morphisms transpose to the same comp
 `CategoryTheory.isIso_mateEquiv_of_reductionTriangle` applies a second time, to `F ⊣ H`.
 
 No information on `H` is needed beyond its being a triangulated right adjoint of `F` compatible
-with the shifts: this is the formal part of blueprint `det-prop-scalar-six-exceptional` for a
-coefficient change whose monad is the cone of a scalar (the reduction `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`).
+with the shifts: this is the formal part of blueprint
+`lemma-change-coefficients-exceptional-inverse-image` for a coefficient change whose monad is the
+cone of a scalar (the reduction `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`).
 -/
 
 @[expose] public section

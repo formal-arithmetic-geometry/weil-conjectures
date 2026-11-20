@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.PicardAdjunctionSectionEvaluation
 
 /-! # Evaluation of the canonical unit morphism
 
-Source: Stacks Project, Tag 08HY; adjunction and naturality on opens.
-(blueprint: lem-sc-picard-direct-image-unit-morphism-evaluation)
+## References
+
+* Stacks Project, Tag 08HY
 -/
 
 @[expose] public section
@@ -26,13 +27,7 @@ namespace AlgebraicGeometry.Scheme
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
-/-- Evaluation of the unit morphism gives exactly the previously fixed section map.
-Source: Stacks Project, Tag 08HY; adjunction and naturality on opens.
-(blueprint: lem-sc-picard-direct-image-unit-morphism-evaluation)
-Proof: Transposing back cancels the ordinary adjunction Hom equivalence and the
-invertible pullback comparison on the structure sheaf. Evaluation at 1 and
-naturality for the inclusion of top into the inverse image of top give the
-restriction used in the definition of the section map. -/
+/-- Evaluating the unit morphism at the unit section `1` gives `picardDirectImageSectionMap`. -/
 theorem picardDirectImageUnitMorphism_evaluation
     {X S : Scheme.{v}} (f : X ⟶ S) (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)
     {T : Scheme.{v}} (t : T ⟶ W)

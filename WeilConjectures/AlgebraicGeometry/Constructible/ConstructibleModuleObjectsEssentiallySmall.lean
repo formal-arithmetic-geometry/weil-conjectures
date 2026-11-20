@@ -20,7 +20,7 @@ import Mathlib.CategoryTheory.Subobject.WellPowered
 
 /-! # Essential smallness of constructible module objects
 
-Source: blueprint `det-brown-hypotheses-small`, local finite-presentation counting.
+Source: blueprint `lemma-hypotheses-brown-representability--5`, local finite-presentation counting.
 (blueprint: lem-sfb-constructible-module-objects-essentially-small)
 -/
 
@@ -277,8 +277,8 @@ private structure ConstructiblePresentationData where
 /-- Constructible module objects over a fixed sheaf of rings on a Noetherian scheme
 form an essentially small class in the sheaf morphism universe.
 
-Source: blueprint `det-brown-hypotheses-small`, steps 1–10; the proved local-vanishing
-argument in `UpperLowerStar.Detection` and cover conservativity in
+Source: blueprint `lemma-hypotheses-brown-representability--5`, steps 1–10; the proved
+local-vanishing argument in `UpperLowerStar.Detection` and cover conservativity in
 `LowerShriek.Open.Conservative` of the source library.
 (blueprint: lem-sfb-constructible-module-objects-essentially-small)
 

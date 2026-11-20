@@ -20,7 +20,7 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 # Tor one of a minimal finite graded free presentation
 
 Source: stage-1 minimal-presentation refinement of the graded free resolution argument in
-blueprint `lem-sc-p1-graded-resolution`, proof;
+blueprint `theorem-riemann-roch-coherent-serre-duality`, proof;
 Stacks Project, Algebra, Tag 00M0 and Section 00LY
 (blueprint: lem-sc-p1-minimal-presentation-tor).
 -/
@@ -87,7 +87,7 @@ Tor. Naturality is stated on quotient generators for every commuting square of g
 presentations, with `c` its induced kernel map. The zero-module consequence is included explicitly.
 
 Source: stage-1 minimal-presentation refinement of the graded free resolution argument in
-blueprint `lem-sc-p1-graded-resolution`, proof;
+blueprint `theorem-riemann-roch-coherent-serre-duality`, proof;
 Stacks Project, Algebra, Tag 00M0 and Section 00LY.
 
 Proof: (1) Use `exists_tor_kernel_boundary_natural` for the short exact sequence

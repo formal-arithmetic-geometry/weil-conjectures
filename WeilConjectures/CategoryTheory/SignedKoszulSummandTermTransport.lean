@@ -45,6 +45,37 @@ private theorem tensor_degree_transport
     Iso.refl_hom, Category.id_comp, MonoidalCategory.id_tensorHom]
   rfl
 
+private theorem signed_tensor_degree_transport
+    {E : Type*} [Category* E] [Preadditive E] [HasCountableCoproducts E]
+    [MonoidalCategory E] [MonoidalPreadditive E]
+    {R A : Type*} [CommRing R] [CommRing A] [Linear R E]
+    (ρ : A →+* R) (b : A) (K Q : CochainComplex E ℤ)
+    (p p' n n' t : ℤ) (hp : p = p') (hn : n = n')
+    (h : p + n = t) (h' : p' + n' = t)
+    (s : MonoidalCategory.tensorUnit E ⟶ MonoidalCategory.tensorUnit E)
+    (hs : (MonoidalCategory.rightUnitor (K.X p)).inv ≫
+      (MonoidalCategory.tensorLeft (K.X p)).map s =
+        (ρ b) • (MonoidalCategory.rightUnitor (K.X p)).inv)
+    (β : MonoidalCategory.tensorUnit E ⟶ Q.X n') :
+    ((-1 : ℤˣ) ^ p) • (MonoidalCategory.rightUnitor (K.X p)).inv ≫
+        (MonoidalCategory.tensorLeft (K.X p)).map
+          (s ≫ β ≫ eqToHom (congrArg Q.X hn.symm)) ≫
+        CochainComplex.ιMapBifunctor K Q (MonoidalCategory.curriedTensor E) p n t h =
+      ((ρ ((if Even p then 1 else -1) * b)) • (K.XIsoOfEq hp).hom) ≫
+        (MonoidalCategory.rightUnitor (K.X p')).inv ≫
+        MonoidalCategory.tensorHom (𝟙 _) β ≫
+        CochainComplex.ιMapBifunctor K Q (MonoidalCategory.curriedTensor E) p' n' t h' := by
+  have ht := tensor_degree_transport K Q p p' n n' t hp hn h h' β
+  rw [Functor.map_comp]
+  simp only [Category.assoc]
+  rw [← Category.assoc, hs]
+  simp only [Linear.smul_comp]
+  rw [ht, neg_one_zpow_eq_ite]
+  by_cases he : Even p
+  · simp only [ite_eq_left he, one_smul, one_mul]
+  · simp only [ite_eq_right he, Units.smul_def, Units.val_neg, Units.val_one,
+      neg_one_mul, map_neg, neg_smul, one_smul]
+
 section Scalars
 
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
@@ -66,7 +97,7 @@ private noncomputable def coefficientLinear : Linear S E :=
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).property
 
 private theorem scalar_eq_smul (b : S) :
-    ringedKoszulScalar O ⟨b.val, b.property⟩ =
+    (ringedKoszulScalar O ⟨b.val, b.property⟩).asHom =
       ringedKoszulCoefficientSMul O (RingHom.id S) b
         (𝟙 (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))) := by
   apply SheafOfModules.hom_ext
@@ -145,7 +176,8 @@ private theorem tensorLeft_smul (M N P : E) (f : N ⟶ P) (b : S) :
 private theorem unitor_tensor_scalar (M : E) (b : S) :
     letI := SheafOfModules.monoidalCategory O
     (MonoidalCategory.rightUnitor M).inv ≫
-        (MonoidalCategory.tensorLeft M).map (ringedKoszulScalar O ⟨b.val, b.property⟩) =
+        (MonoidalCategory.tensorLeft M).map
+          (ringedKoszulScalar O ⟨b.val, b.property⟩).asHom =
       ringedKoszulCoefficientSMul O (RingHom.id S) b
         (MonoidalCategory.rightUnitor M).inv := by
   let := SheafOfModules.monoidalCategory O
@@ -161,6 +193,7 @@ private noncomputable def scalarHom : S →+* End (SheafOfModules.unit
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) where
   toFun b := ringedKoszulScalar O ⟨b.val, b.property⟩
   map_one' := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro U
@@ -168,6 +201,7 @@ private noncomputable def scalarHom : S →+* End (SheafOfModules.unit
     change x * 1 = x
     exact mul_one x
   map_mul' b b' := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro U
@@ -177,6 +211,7 @@ private noncomputable def scalarHom : S →+* End (SheafOfModules.unit
     change x * (c * c') = (x * c') * c
     ring
   map_zero' := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro U
@@ -184,6 +219,7 @@ private noncomputable def scalarHom : S →+* End (SheafOfModules.unit
     change x * 0 = 0
     exact mul_zero x
   map_add' b b' := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro U
@@ -204,7 +240,6 @@ private theorem signed_power_scalar {A : Type z} [CommRing A] (ρ : A →+* S) (
   rw [zsmul_eq_mul]
   simp only [map_mul, map_pow, map_neg, map_one, Int.cast_pow, Int.cast_neg, Int.cast_one]
 
-set_option maxHeartbeats 600000 in
 -- The transport compares the canonical sheaf tensor and Hom scalar instances.
 private theorem signed_scalar_degree_transport
     {A : Type z} [CommRing A]
@@ -221,7 +256,7 @@ private theorem signed_scalar_degree_transport
     ∀ (β : MonoidalCategory.tensorUnit E ⟶ Q.X n'),
     ((-1 : ℤˣ) ^ p) • (MonoidalCategory.rightUnitor (K.X p)).inv ≫
         (MonoidalCategory.tensorLeft (K.X p)).map
-          (ringedKoszulScalar O ⟨(ρ b).val, (ρ b).property⟩ ≫
+          ((ringedKoszulScalar O ⟨(ρ b).val, (ρ b).property⟩).asHom ≫
             β ≫ eqToHom (congrArg Q.X hn.symm)) ≫
         CochainComplex.ιMapBifunctor K Q (MonoidalCategory.curriedTensor E) p n t h =
       ringedKoszulCoefficientSMul O ρ ((if Even p then 1 else -1) * b)
@@ -237,21 +272,9 @@ private theorem signed_scalar_degree_transport
   let := Classical.choice (SheafOfModules.tensorClosed O).2.1
   let := coefficientLinear O
   intro β
-  have hs := unitor_tensor_scalar O (K.X p) (ρ b)
-  have ht := tensor_degree_transport K Q p p' n n' t hp hn h h' β
-  rw [Functor.map_comp]
-  simp only [Category.assoc]
-  rw [← Category.assoc, hs]
-  change ((-1 : ℤˣ) ^ p) •
-      (((ρ b) • (MonoidalCategory.rightUnitor (K.X p)).inv) ≫ _ ≫ _) = _
-  simp only [Linear.smul_comp]
-  rw [ht]
-  simp only [ringedKoszulCoefficientSMul, Linear.smul_comp]
-  rw [neg_one_zpow_eq_ite]
-  by_cases he : Even p
-  · simp only [ite_eq_left he, one_smul, one_mul]
-  · simp only [ite_eq_right he, Units.smul_def, Units.val_neg, Units.val_one,
-      neg_one_mul, map_neg, neg_smul, one_smul]
+  exact signed_tensor_degree_transport ρ b K Q p p' n n' t hp hn h h'
+    (ringedKoszulScalar O ⟨(ρ b).val, (ρ b).property⟩).asHom
+    (unitor_tensor_scalar O (K.X p) (ρ b)) β
 
 end Scalars
 
@@ -296,7 +319,7 @@ theorem ringedNegativeKoszulSummand_D₂_term
         (MonoidalCategory.rightUnitor (K.X (q + I.card))).inv ≫
       (MonoidalCategory.tensorLeft (K.X (q + I.card))).map
         (((-1 : ℤ) ^ (I.filter (fun j ↦ j < i)).card •
-            (ringedKoszulScalar O ⟨(ρ (a i)).val, (ρ (a i)).property⟩) ^ (m + 1)) ≫
+            (ringedKoszulScalar O ⟨(ρ (a i)).val, (ρ (a i)).property⟩) ^ (m + 1)).asHom ≫
           ringedNegativeKoszulBasis O
             (r + 1) (fun j ↦ ⟨(ρ (a j)).val, (ρ (a j)).property⟩) m
             (I.erase i) (-((I.erase i).card : ℤ)) ≫

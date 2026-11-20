@@ -26,15 +26,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Matrix evaluation carries the actual scalar quotient differential to the signed
-Hom differential of the ordinary quotient model.
-Source: blueprint Compatible isomorphisms, the signed finite matrix Hom complex.
-(blueprint: lem-pe-internal-perfect-differential-compatibility).
-Proof: expand the signed differential in degrees q,q+1. In the fixed quotient bases,
-each ordinary differential has its constant residue matrix. The quotient entry
-formula is the same signed sum of the two matrix products. The coefficient ring
-comparison preserves sums and signs and carries products to composition; finite
-biproduct extensionality therefore identifies the two cochains. Off the cochain
-shape both differentials are zero. This argument includes rank-zero terms. -/
+Hom differential of the ordinary quotient model. -/
 theorem evaluation_differential (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -63,18 +55,18 @@ theorem evaluation_differential (W : Scheme.{u})
         (internalPerfectOrdinaryReduction l E W P n).d i j ≫
             (quotientIso l E W P hfree n j).hom =
           (quotientIso l E W P hfree n i).hom ≫
-            biproduct.matrix (fun s t ↦ coefficientEndEquiv l E W n
+            biproduct.matrix (fun s t ↦ (coefficientEndEquiv l E W n
               (LocallyConstant.const _ (Ideal.Quotient.mk
                 (Padic.coefficientExtensionIdeal l E (n + 1))
-                  (mapEntry l E P hfree i j (P.d i j) s t)))) :=
+                  (mapEntry l E P hfree i j (P.d i j) s t)))).asHom) :=
       quotientIso_map l E W P hfree n i j (P.d i j)
     have hd' (i j : ℤ) :
         (internalPerfectOrdinaryReduction l E W P n).d i j =
           (quotientIso l E W P hfree n i).hom ≫
-            biproduct.matrix (fun s t ↦ coefficientEndEquiv l E W n
+            biproduct.matrix (fun s t ↦ (coefficientEndEquiv l E W n
               (LocallyConstant.const _ (Ideal.Quotient.mk
                 (Padic.coefficientExtensionIdeal l E (n + 1))
-                  (mapEntry l E P hfree i j (P.d i j) s t)))) ≫
+                  (mapEntry l E P hfree i j (P.d i j) s t)))).asHom) ≫
               (quotientIso l E W P hfree n j).inv := by
       apply (cancel_mono (quotientIso l E W P hfree n j).hom).1
       simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
@@ -91,7 +83,7 @@ theorem evaluation_differential (W : Scheme.{u})
       ← ringMatrix_units_smul M e, ← ringMatrix_add M e]
     congr 1
     funext s t
-    exact congrArg e
+    exact congrArg (fun z ↦ (e z).asHom)
       (locallyConstant_quotientEntry_differential l E (ConnectedComponents W)
         P hfree n q i j hij s t z.down).symm
   · rw [(CochainComplex.HomComplex (internalPerfectOrdinaryReduction l E W P n)

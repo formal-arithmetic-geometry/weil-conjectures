@@ -29,7 +29,7 @@ variable {A B C A' B' C' : Type*}
 /-- A pasted unit base change is invertible for any specified factorizations of the
 left adjoints. The right-adjoint composition comparisons are their canonical mates. -/
 theorem isIso_unitBaseChange_pastedAdjunction
-    [IsIso ((mateEquiv adjF adjF' (inv eF.hom)).natTrans.app (GR.obj U))]
+    [IsIso ((mateEquiv adjF adjF' (inv eF.hom)).app (GR.obj U))]
     [IsIso (unitBaseChange adjG adjG' eG.hom ε)] :
     IsIso (unitBaseChange adjH adjH'
       (Functor.isoWhiskerRight h TC ≪≫ compForgetIso eF eG ≪≫

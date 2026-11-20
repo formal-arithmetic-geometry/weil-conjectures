@@ -110,8 +110,9 @@ private lemma tensorBijectiveShifts_unitF :
       rw [h f, h g]⟩
     exact Functor.TensorBijective.of_subsingleton
 
-/-- Blueprint `def-weil-finite-coefficient-point` (auxiliary): for a field extension `F ⊆ F'` and
-`X`, `Y` in `Dᵇ_fd(F)`, extension of scalars induces `F' ⊗_F Hom(X, Y) ≃ Hom(X_{F'}, Y_{F'})`. -/
+/-- Blueprint `lemma-perfect-complexes-geometric-point` (auxiliary): for a field extension `F ⊆ F'`
+and `X`, `Y` in `Dᵇ_fd(F)`, extension of scalars induces
+`F' ⊗_F Hom(X, Y) ≃ Hom(X_{F'}, Y_{F'})`. -/
 theorem tensorBijective_fieldExtendScalars {X Y : DerivedCategory (ModuleCat.{u + 1} F)}
     (hX : boundedFiniteCohomology F X) (hY : boundedFiniteCohomology F Y) :
     (fieldExtendScalars F F').TensorBijective fieldExtendScalars_map_smul X Y :=

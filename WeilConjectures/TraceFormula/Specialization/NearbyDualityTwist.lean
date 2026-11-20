@@ -17,7 +17,7 @@ Let `Ψ : C ⥤ C'` be a functor between monoidal closed categories with lax ten
 (`CategoryTheory.Verdier.nearbyDualityMap`). Let `T` and `T'` be invertible objects of `C` and
 `C'` and `κ_A : Ψ (A ⊗ T) ≅ Ψ A ⊗ T'` an isomorphism, natural in `A` and compatible with `μ`.
 The *twisted* dualizing map is `θ_tw = (θ ▷ T') ∘ κ_ω : Ψ (ω ⊗ T) ⟶ ω' ⊗ T'`. This file proves
-(formal input of the twist step of blueprint `det-tf-nearby-duality-slice`):
+(formal input of the twist step of blueprint `lemma-nearby-duality-slice--1`):
 
 * `CategoryTheory.Verdier.map_ihomTensorToIhom_comp_nearbyDualityMap_twist`: under the canonical
   isomorphisms `[M, ω] ⊗ T ≅ [M, ω ⊗ T]` and `[Ψ M, ω'] ⊗ T' ≅ [Ψ M, ω' ⊗ T']` and `κ`, the

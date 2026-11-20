@@ -75,10 +75,10 @@ uniquely determined by that unit equation, by adjunction transposition, proving 
 No invertibility of a general mate is inferred: invertibility here comes from the two
 right-derived universal properties. -/
 theorem derived_exact_forget_mate (a : L ⋙ V ≅ U ⋙ L₀) (b : R ⋙ U ≅ V ⋙ R₀)
-    (hb : (mateEquiv adj adj₀ (TwoSquare.mk _ _ _ _ a.inv)).natTrans = b.hom) :
+    (hb : (mateEquiv adj adj₀ (TwoSquare.mk _ _ _ _ a.inv)) = b.hom) :
     (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj₀.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso a).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso a).inv)) =
       ((Functor.rightDerivedFunctorCompMapDerivedCategoryIso R U).symm ≪≫
         Functor.rightDerivedFunctorNatIso b ≪≫
         Functor.rightDerivedFunctorCompIso V R₀ ≪≫
@@ -257,11 +257,11 @@ theorem derived_exact_forget_mate (a : L ⋙ V ≅ U ⋙ L₀) (b : R ⋙ U ≅ 
   -- The unit square determines the mate by naturality and the right triangle law.
   apply NatTrans.ext
   funext N
-  change (mateEquiv d d₀ (TwoSquare.mk _ _ _ _ aD.inv)).natTrans.app N = β.app N
+  change (mateEquiv d d₀ (TwoSquare.mk _ _ _ _ aD.inv)).app N = β.app N
   simp only [mateEquiv_apply, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app, Functor.comp_map]
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans, Functor.comp_obj]
+  dsimp only [TwoSquare.mk, Functor.comp_obj]
   simp only [Category.id_comp]
   erw [Category.comp_id]
   change d₀.unit.app (U.mapDerivedCategory.obj (R.rightDerivedFunctor.obj N)) ≫

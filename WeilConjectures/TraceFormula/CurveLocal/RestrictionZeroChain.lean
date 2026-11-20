@@ -25,8 +25,8 @@ RΓ(O, P) ⟶ RΓ(U, P|_U)
 vanishes, then `ρ_{a,b} = 0`
 (`AlgebraicGeometry.Etale.sectionsWithSupportRestriction_eq_zero_of_restriction`).
 
-This is the reduction step of the proof of blueprint `sk-lem-tf-curve-restriction-zero`
-(`det-tf-restriction-zero-localization` (iii)): by the localization triangles `ρ_{a,b}` vanishes
+This is the reduction step of the proof of blueprint `lemma-vanishing-local-term-zero-stalk`
+(`lemma-vanishing-local-term-zero-stalk--1` (iii)): by the localization triangles `ρ_{a,b}` vanishes
 if and only if the restriction `RΓ(T ∖ G, P) ⟶ RΓ(B ∖ Y, b^* P)` does, and this restriction
 factors through `RΓ(O, P)`, since `U ⊆ O ⊆ T ∖ G`.
 
@@ -89,8 +89,8 @@ variable {T B G Y : Scheme.{u}} (b : B ⟶ T) (a : G ⟶ T) [IsClosedImmersion a
 
 include hw hψ in
 /-- **Reduction of the supported restriction to a punctured restriction** (blueprint
-`det-tf-restriction-zero-localization` (iii), as used in the proof of
-`sk-lem-tf-curve-restriction-zero`): if `RΓ(T, P) = 0`, `RΓ(B, b^* P) = 0`, and the restriction
+`lemma-vanishing-local-term-zero-stalk--1` (iii), as used in the proof of
+`lemma-vanishing-local-term-zero-stalk`): if `RΓ(T, P) = 0`, `RΓ(B, b^* P) = 0`, and the restriction
 `RΓ(O, P) ⟶ RΓ(B ∖ Y, P)` along `ψ : B ∖ Y ⟶ O` vanishes, where `O ⊆ T ∖ G`, then the
 supported restriction `ρ_{a,b}` vanishes. -/
 theorem sectionsWithSupportRestriction_eq_zero_of_restriction

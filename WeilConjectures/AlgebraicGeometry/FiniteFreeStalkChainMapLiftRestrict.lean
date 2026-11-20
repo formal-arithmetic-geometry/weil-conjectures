@@ -9,8 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 
 /-! # Restriction stability of a local chain map
 
-Source: lem-pc-perfect-locus, finite matrix extension argument, expanded in
-lem-pc-finite-free-stalk-chain-map-lift.
+Source: lemma-coherent-base-change-invertible-sheaves--3, finite matrix extension argument, expanded
+in lem-pc-finite-free-stalk-chain-map-lift.
 (blueprint: lem-pc-finite-free-stalk-chain-map-lift-restrict)
 -/
 
@@ -135,8 +135,8 @@ private theorem restrict_triangle {A B C D : Scheme.{u}}
 /-- Restriction stability of a local chain map.
 
 Source: lem-pc-finite-free-stalk-chain-map-lift, proof step 4, expanding
-lem-pc-perfect-locus's extension of the finite calculation. The comparison uses
-Mathlib's restrictFunctorComp, restrictFunctorIsoPullback, pullbackComp, and
+lemma-coherent-base-change-invertible-sheaves--3's extension of the finite calculation. The
+comparison uses Mathlib's restrictFunctorComp, restrictFunctorIsoPullback, pullbackComp, and
 pseudofunctor_associativity.
 
 Proof: Fix V <= U containing y and let j : V.toScheme -> U.toScheme be the open

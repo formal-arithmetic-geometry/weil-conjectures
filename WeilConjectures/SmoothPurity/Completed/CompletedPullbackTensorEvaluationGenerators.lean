@@ -54,7 +54,6 @@ attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   coefficientSequenceCommRingSystem coefficientSequenceTopology
   SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 800000 in
 -- The section formulas compare coefficient modules on the sequence and finite sites.
 /-- The evaluated sequence tensor map sends unit generators to the intrinsic unit tensors.
 Source: Stacks Tags 07A4, 0941 and 03D2

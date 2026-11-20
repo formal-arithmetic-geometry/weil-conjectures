@@ -15,7 +15,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Derived.PodReindexingDeriv
 
 /-! # Localization of the normalized strict reindexing comparisons
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-derived-comparisons).
 -/
 

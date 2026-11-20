@@ -50,7 +50,7 @@ surjective and quasi-compact, so `Γ(X') = Γ(X) ⊗_R S` by flat base change. H
 morphism `X' ⟶ Spec Γ(X')`, an isomorphism, is the base change of `X ⟶ Spec Γ(X)` along the
 faithfully flat `Spec Γ(X') ⟶ Spec Γ(X)`, and isomorphisms descend.
 
-This is used in the proof of `lem-pc-descent-finite-flat-closed-subschemes`. -/
+This is used in the proof of `theorem-hilbert-schemes-points-smooth-curve--1`. -/
 @[stacks 02L5]
 theorem IsAffineHom.descendsAlong_surjective_inf_flat_inf_quasicompact :
     DescendsAlong (@IsAffineHom : MorphismProperty Scheme.{u})

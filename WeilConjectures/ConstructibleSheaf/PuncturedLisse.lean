@@ -18,7 +18,7 @@ finitely many constructible sheaves `F i` on `X_ét` there is an open neighbourh
 that every `F i` is finite locally constant on the punctured neighbourhood `U ∖ {x}`
 (`AlgebraicGeometry.Scheme.exists_isFiniteLocallyConstantSheaf_punctured`): by generic constancy
 the `F i` are finite locally constant on a dense open `W`, whose complement is a finite set of
-closed points. This is the first step of blueprint `det-tf-restriction-zero-covers` (i): the
+closed points. This is the first step of blueprint `lemma-tangent-cones-on-cover` (i): the
 terms of constructible models are lisse on the punctured neighbourhood.
 
 -/
@@ -40,7 +40,7 @@ variable {X : Scheme.{u}} {A : Type u'} [Category.{u + 1} A] [Abelian A]
 def puncturedOpens (U : X.Opens) (x : X) (hx : IsClosed ({x} : Set X)) : X.Opens :=
   U ⊓ ⟨{x}ᶜ, hx.isOpen_compl⟩
 
-/-- **Lisse on a punctured neighbourhood** (blueprint `det-tf-restriction-zero-covers` (i), first
+/-- **Lisse on a punctured neighbourhood** (blueprint `lemma-tangent-cones-on-cover` (i), first
 step): on an irreducible noetherian scheme of dimension at most one, finitely many constructible
 sheaves are finite locally constant on a punctured open neighbourhood of a closed point `x`. -/
 theorem exists_isFiniteLocallyConstantSheaf_punctured [IrreducibleSpace X] [NoetherianSpace X]

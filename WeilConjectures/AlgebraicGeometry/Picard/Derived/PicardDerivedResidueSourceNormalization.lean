@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Flat.FlatInvertibleCanonicalDerivedBase
 
 /-! # PicardDerivedResidueSourceNormalization
 
-Source: Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7.
+## References
+
+* Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7
 -/
 
 @[expose] public section
@@ -20,20 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The explicit fibre-normalization map is invertible for a proper flat family
-and an invertible coefficient.
-Source: Stacks Project, Tags 0A1D, 08HY and 0096.
-(blueprint: lem-picard-residue-normalization-map-isiso)
-
-Proof: Pullback of an invertible module is invertible, and the fixed comparison
-of tensor and ordinary pullbacks transfers this property to the coefficient on
-X_W. The identified apex has cartesian square: precompose the standard pullback
-square by e inverse, using hesnd for its second projection. Properness and
-flatness are stable under base change, so invertible-coefficient flat derived
-base change makes its mate invertible. The canonical single-pullback map is
-invertible for that invertible coefficient. The tensor coefficient comparison
-and tau are isomorphisms. Functors preserve their invertibility, and hence the
-composite defining picardResidueNormalizationMap is invertible. This argument
-includes identity maps, zero modules on empty schemes and empty fibres. -/
+and an invertible coefficient. -/
 theorem isIso_picardResidueNormalizationMap
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

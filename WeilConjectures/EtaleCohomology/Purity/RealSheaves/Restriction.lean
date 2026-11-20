@@ -15,11 +15,11 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 Let `j : U₀ ⟶ C₀` be a nonempty open immersion of curves over a finite field and
 `R : AlgebraicGeometry.WeilGroup.Restriction j W(U₀) W(C₀)` a restriction of Weil groups. Pulling
 a Weil representation `ρ` of `W(C₀)` back along `R.restrict` is the restriction `j^* ℱ` of the
-corresponding lisse Weil sheaf. This file records how the notions of `sk-d-real-weights` and
-`def-real-weil-representation-operations` behave under this operation: lisse sheaves restrict to
+corresponding lisse Weil sheaf. This file records how the notions of `definition-weights` and
+`definition-weil-representation` behave under this operation: lisse sheaves restrict to
 lisse sheaves, the local eigenvalues at a closed point of `U₀` are those at its image, so reality,
 determinant weights and punctual purity are inherited, and since `R.restrict` is surjective,
-constituents restrict to constituents (`sk-i-real-boundary`).
+constituents restrict to constituents (`lemma-boundary-stalk--2`).
 
 Every Weil group `W` of a smooth geometrically connected curve receives a restriction from some
 Weil group of any nonempty geometrically connected open
@@ -235,7 +235,7 @@ theorem frobeniusWeight_eq_of_isPunctuallyPure_comp {w : ℝ}
   exact h x α hα
 
 omit [FiniteDimensional (PadicAlgCl l) V] in
-/-- Restriction to `U₀` preserves constituents (`sk-i-real-boundary`): the restriction of Weil
+/-- Restriction to `U₀` preserves constituents (`lemma-boundary-stalk--2`): the restriction of Weil
 groups is surjective, so `j^*` does not change the invariant subspaces. -/
 theorem isConstituent_comp {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
     {σ : Representation (PadicAlgCl l) WC.carrier V'} (hσ : σ.IsConstituent ρ) :

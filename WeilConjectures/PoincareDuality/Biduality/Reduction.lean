@@ -16,7 +16,7 @@ public import WeilConjectures.PoincareDuality.Biduality.ReductionIhom
 Write `R = (𝒪_E ⧸ ℓⁿ) ⊗ᴸ_{𝒪_E} - : Dᵇc(X)⟦𝒪_E⟧ ⥤ D(Mod_{(𝒪_E ⧸ ℓⁿ)_X})` for the reduction modulo
 `ℓⁿ` of bounded constructible `𝒪_E`-complexes, with values in the ambient derived category of
 module objects over `(𝒪_E ⧸ ℓⁿ)_X`. This file proves the integral step (ii) of blueprint
-`det-pd-biduality-coefficients`: `R` is lax braided monoidal and commutes with internal homs, so it
+`theorem-verdier-biduality`: `R` is lax braided monoidal and commutes with internal homs, so it
 carries the double-dual morphism `δ_{K₀}` of `K₀` (relative to `ω_{X, 𝒪_E}`) to the double-dual
 morphism of `R K₀` (relative to `R ω_{X, 𝒪_E}`), and `R` detects isomorphisms (derived Nakayama).
 
@@ -48,7 +48,7 @@ variable {C D : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C]
 /-- The comparison maps `ι [A, B] ⟶ [ι A, ι B]` of the inclusion of a full monoidal closed
 subcategory are identities. -/
 lemma ihomComparison_ι_app (A B : P.FullSubcategory) :
-    (ihomComparison P.ι A).natTrans.app B = 𝟙 ((ihom A.obj).obj B.obj) := by
+    (ihomComparison P.ι A).app B = 𝟙 ((ihom A.obj).obj B.obj) := by
   apply uncurry_injective
   rw [ihomComparison_app_eq_curry, uncurry_curry]
   exact (Category.id_comp _).trans (uncurry_id_eq_ev _ _).symm
@@ -56,8 +56,8 @@ lemma ihomComparison_ι_app (A B : P.FullSubcategory) :
 /-- The comparison maps of the restriction `P.ι ⋙ F` of a lax monoidal functor `F` to a full
 monoidal closed subcategory are those of `F`. -/
 lemma ihomComparison_ι_comp_app (F : C ⥤ D) [F.LaxMonoidal] (A B : P.FullSubcategory) :
-    (ihomComparison (P.ι ⋙ F) A).natTrans.app B =
-      (ihomComparison F A.obj).natTrans.app B.obj := by
+    (ihomComparison (P.ι ⋙ F) A).app B =
+      (ihomComparison F A.obj).app B.obj := by
   rw [ihomComparison_comp_app, ihomComparison_ι_app]
   exact (congrArg (· ≫ _) (F.map_id _)).trans (Category.id_comp _)
 
@@ -96,18 +96,18 @@ attribute [local instance] leftDerivedIntegersModPowReductionMonoidal
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- Blueprint
-`det-prop-scalar-six-tensor-hom`, (2), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`. **Reduction
-modulo `ℓⁿ` commutes with internal homs**: for bounded constructible `𝒪_E`-complexes `A` and `B`,
-the comparison `v_{A,B} : RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)`, the
-transpose of the reduction of the evaluation
-(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), is an isomorphism: the restriction to
-bounded constructible complexes of
+`proposition-six-operations-change-coefficients`, (2), for the coefficient map
+`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`. **Reduction modulo `ℓⁿ` commutes with internal homs**: for bounded constructible
+`𝒪_E`-complexes `A` and `B`, the comparison
+`v_{A,B} : RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)`, the transpose of the
+reduction of the evaluation (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), is an
+isomorphism: the restriction to bounded constructible complexes of
 `ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedIntegersModPowReduction` (blueprint
-`lem-coef-integral-hom-reduction`). -/
+`proposition-six-operations-change-coefficients--7`). -/
 theorem isIso_ihomComparison_integersModPowReduction
     (A B : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     IsIso ((Functor.LaxMonoidal.ihomComparison
-      L(Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)) A.obj).natTrans.app B.obj) :=
+      L(Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)) A.obj).app B.obj) :=
   isIso_ihomComparison_leftDerivedIntegersModPowReduction_of_eq ℓ E.1 n X.left
     (leftDerivedIntegersModPowReductionMonoidal ℓ E n X) rfl A.obj B.obj
 
@@ -116,7 +116,7 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] i
 `𝒪_E`-complex `K` whose reduction `K ⊗ᴸ 𝒪_E ⧸ ℓⁿ` vanishes is zero. By the reduction triangle
 `ℓⁿ` acts invertibly on `K`, hence on its first derived reduction, where `ℓ` acts by zero; so the
 first derived reduction vanishes and `K = 0` by derived Nakayama (blueprint
-`sk-lem-pe-derived-nakayama`). This is the argument of
+`lemma-reduction-derived-nakayama`). This is the argument of
 `ProEtale.CondensedRing.isZero_of_isZero_etaleReduction`. -/
 theorem isZero_of_isZero_integersModPowReductionAmbient_obj (hn : n ≠ 0)
     {K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
@@ -130,9 +130,9 @@ theorem isZero_of_isZero_integersModPowReductionAmbient_obj (hn : n ≠ 0)
   exact isZero_of_isIso_pow_zsmul_id X.left ℓ E.1 hn hK
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] in
-/-- **Derived Nakayama for the reduction modulo `ℓⁿ`** (blueprint `sk-lem-pe-derived-nakayama`):
-for `n ≠ 0`, a morphism `f` of bounded constructible `𝒪_E`-complexes whose reduction modulo `ℓⁿ`
-is an isomorphism is an isomorphism. -/
+/-- **Derived Nakayama for the reduction modulo `ℓⁿ`** (blueprint
+`lemma-reduction-derived-nakayama`): for `n ≠ 0`, a morphism `f` of bounded constructible
+`𝒪_E`-complexes whose reduction modulo `ℓⁿ` is an isomorphism is an isomorphism. -/
 theorem isIso_of_isIso_integersModPowReductionAmbient_map (hn : n ≠ 0)
     {K L : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧} (f : K ⟶ L)
     (h : IsIso ((integersModPowReductionAmbient ℓ E n X).map f)) : IsIso f := by
@@ -162,7 +162,7 @@ noncomputable def leftDerivedIntegersModPowReductionBraided :
   (Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)).leftDerivedFunctorBraided
     (Mod.extendScalars_map_braiding_hom_δ (integersModPowReduction X.left ℓ E.1 n))
 
-/-- **Biduality along the reduction modulo `ℓⁿ`** (blueprint `det-pd-biduality-coefficients`,
+/-- **Biduality along the reduction modulo `ℓⁿ`** (blueprint `theorem-verdier-biduality`,
 (ii)): for `n ≠ 0`, the double-dual morphism `δ_{K₀}` of a bounded constructible `𝒪_E`-complex is
 an isomorphism as soon as the double-dual morphism of its reduction `R K₀`, relative to the
 reduction `R ω_{X, 𝒪_E}` of the dualizing complex, is one. -/
@@ -175,7 +175,7 @@ theorem isIso_verdierBiduality_of_isIso_toIhomIhom_reduction (hn : n ≠ 0)
   let := PadicIntegersRingObj.boundedConstructibleBraiding ℓ E.1 X
   let G := integersModPowReductionAmbient ℓ E n X
   have hG (A B : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
-      IsIso ((Functor.LaxMonoidal.ihomComparison G A).natTrans.app B) := by
+      IsIso ((Functor.LaxMonoidal.ihomComparison G A).app B) := by
     rw [ObjectProperty.ihomComparison_ι_comp_app]
     -- the instances agree up to reducible unfolding; a default `exact` takes minutes
     with_reducible exact isIso_ihomComparison_integersModPowReduction ℓ E n X A B

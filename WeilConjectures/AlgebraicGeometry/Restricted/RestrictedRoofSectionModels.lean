@@ -12,8 +12,10 @@ import all WeilConjectures.AlgebraicGeometry.RestrictionResolutionLiftSections
 
 /-! # Restriction and direct-image section models for injective roofs
 
-Source: Stacks Project, Cohomology, Tags 01E4 and 01FB.
-(blueprint: def-weil-pbc-restricted-roof-section-models).
+## References
+
+* Stacks Project, Cohomology, Tags 01E4 and 01FB
+* Stacks Project, Cohomology, Tag 01E4
 -/
 
 @[expose] public section
@@ -27,13 +29,7 @@ noncomputable section
 namespace AlgebraicGeometry
 open Scheme.Modules
 
-/-- Sections on an open are global sections after restricting the sheaf.
-Source: Stacks Project, Cohomology, Tag 01E4
-(blueprint: def-weil-pbc-restricted-roof-section-models).
-
-Proof: On each module use restrictAppIso at the whole open subscheme, followed by
-transport along the equality that its image is U. Naturality follows from the
-naturality of the original presheaf map along this equality. -/
+/-- Sections on an open are global sections after restricting the sheaf. -/
 def restrictionSectionsIso {X : Scheme.{u}} (U : X.Opens) :
     restrictFunctor U.ι ⋙ RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace ⋙
       forget₂ _ AddCommGrpCat.{u} ≅ RingedSpace.openModuleSections X.toRingedSpace U :=
@@ -62,7 +58,6 @@ private theorem restrictedDirectImageMap_eq {X Z : Scheme.{u}} (v : Z ⟶ X)
 
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Scheme.Modules.Hom
-set_option maxHeartbeats 400000 in
 -- Normalize the fixed restriction comparison and its sheaf-module category instances.
 private theorem restriction_pushforward_sections {X Z : Scheme.{u}} (v : Z ⟶ X)
     {G : Z.Modules} (J : InjectiveResolution G) (U : X.Opens)

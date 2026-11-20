@@ -10,7 +10,14 @@ import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 import Mathlib.RingTheory.Ideal.Quotient.Index
 
-/-! Integral restriction of finite-coefficient lisse systems. -/
+/-! Integral restriction of finite-coefficient lisse systems.
+
+## References
+
+* Weil II (1.1.1) b)-d)
+* Weil II (1.1.1) b)
+* Deligne, Weil II (1.1.1) b)-d), pp. 146-147
+-/
 
 @[expose] public section
 noncomputable section
@@ -24,11 +31,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{d})
   [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (ι : L →ₐ[ℚ_[l]] E)
 
-/-- The ramification subsequence is monotone.
-Source: Weil II (1.1.1) b)-d).
-(blueprint: lem-pod-lisse-coefficient-restriction-integral-model).
-Proof: successor, multiplication by a fixed natural number, and truncated subtraction
-by one are monotone functions of natural numbers. -/
+/-- The ramification subsequence is monotone. -/
 theorem lisseIntegralRestrictionIndex_monotone :
     Monotone (fun n : ℕ ↦ lisseRamificationIndex l L E ι * (n + 1) - 1) := by
   intro _ _ h
@@ -36,9 +39,7 @@ theorem lisseIntegralRestrictionIndex_monotone :
     (Nat.mul_le_mul_left (lisseRamificationIndex l L E ι) (Nat.succ_le_succ h)) 1
 
 /-- Restrict the given lattice along the cofinal ramification-index subsequence.
-The object at level n is the restriction of F at level e(n+1)-1.
-Source: Weil II (1.1.1) b)-d).
-(blueprint: lem-pod-lisse-coefficient-restriction-integral-model). -/
+The object at level n is the restriction of F at level e(n+1)-1. -/
 def lisseIntegralRestrictionRaw (F : LisseIntegralSheaf l E Y) :
     AdicIntegralDiagram l L Y :=
   (lisseIntegralRestrictionIndex_monotone l L E ι).functor.op ⋙
@@ -191,9 +192,7 @@ section Stalks
 variable {Ω : Type d} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
 
 /-- The level ideal kills every geometric stalk, since every stalk element is represented
-by a section on which that ideal acts as zero.
-Source: Weil II (1.1.1) b).
-(blueprint: lem-pod-lisse-coefficient-restriction-integral-model). -/
+by a section on which that ideal acts as zero. -/
 lemma lisseIntegralStalk_annihilated (F : LisseIntegralSheaf l E Y) (n : ℕ) :
     let R := Padic.coefficientExtensionIntegers l E
     let I := Ideal.span ({Padic.coefficientExtensionUniformizer l E} : Set R)
@@ -215,9 +214,7 @@ lemma lisseIntegralStalk_annihilated (F : LisseIntegralSheaf l E Y) (n : ℕ) :
 
 /-- Arbitrary transition maps are surjective with the expected ideal-multiple kernel.
 Induct on the length of the transition, using the adjacent transition condition and
-preimages of ideal multiples under a surjective linear map.
-Source: Weil II (1.1.1) b).
-(blueprint: lem-pod-lisse-coefficient-restriction-integral-model). -/
+preimages of ideal multiples under a surjective linear map. -/
 theorem lisseIntegralStalk_transition (F : LisseIntegralSheaf l E Y)
     (m n : ℕ) (h : m ≤ n) :
     let R := Padic.coefficientExtensionIntegers l E
@@ -258,18 +255,7 @@ theorem lisseIntegralStalk_transition (F : LisseIntegralSheaf l E Y)
 end Stalks
 
 /-- Reindexing the integral lattice along the ramification-index cofinal subsequence
-and restricting coefficients gives a lisse integral system over the smaller field.
-Source: Deligne, Weil II (1.1.1) b)-d), pp. 146-147.
-(blueprint: lem-pod-lisse-coefficient-restriction-integral-model).
-
-Proof: restricting coefficients preserves the trivializing covers of the original levels.
-Each stalk is a finite module over a finite coefficient quotient, so is a finite set
-and hence a finite module over the smaller integer ring. Mapping the smaller
-uniformizer ideal gives the e-th power of the larger ideal, which proves annihilation.
-Induction on the length of a transition gives surjectivity and the ideal-multiple
-kernel for the original system. The comparison between restriction and stalks
-transports this calculation, and the same ramification ideal identity gives precisely
-the required kernel for the restricted system. -/
+and restricting coefficients gives a lisse integral system over the smaller field. -/
 theorem lisseIntegralRestrictionRaw_isLisse (F : LisseIntegralSheaf l E Y) :
     IsLisseIntegralDiagram l L Y (lisseIntegralRestrictionRaw l Y L E ι F) := by
   refine ⟨restriction_finite_lisse l Y L E ι F,

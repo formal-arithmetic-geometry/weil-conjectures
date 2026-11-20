@@ -100,6 +100,42 @@ private lemma retraction_of_comp_of_isIso_aux {DX DM DT DS : Type*} [Category DX
       ← reassoc_of% (hact i (c₀.hom.app A)), ← Ψ.map_comp, Iso.hom_inv_id_app, Ψ.map_id,
       Category.comp_id]
 
+private lemma eq_id_of_intertwining_of_epi_aux {D E : Type*} [Category D] [Category E]
+    (F : D ⥤ E) {A : D} {B : E} (f : A ⟶ A) (g : B ⟶ B) (e : F.obj A ⟶ B)
+    [Epi e] (h : e ≫ g = F.map f ≫ e) (hf : f = 𝟙 A) : g = 𝟙 B := by
+  rw [hf, F.map_id, Category.id_comp] at h
+  exact (cancel_epi e).1 (h.trans (Category.comp_id e).symm)
+
+/-- Transfer trivial actions and an averaged retraction through an equivariant isomorphism. -/
+private lemma stabilization_of_equivariant_iso_aux {DX DM DT DS : Type*}
+    [Category DX] [Category DM] [Category DT] [Category DS]
+    [Preadditive DT] [Preadditive DS] {L₀ : DX ⥤ DX} {Lfg : DM ⥤ DS}
+    {Lg : DM ⥤ DT} {Lf : DT ⥤ DS} [Lf.Additive]
+    {ΨM : DX ⥤ DM} {Ψ₁ : DX ⥤ DT} {Ψ : DX ⥤ DS}
+    (αχ : ΨM ⋙ Lfg ⟶ L₀ ⋙ Ψ) (αψ : ΨM ⋙ Lg ⟶ L₀ ⋙ Ψ₁) (αρ : Ψ₁ ⋙ Lf ⟶ L₀ ⋙ Ψ)
+    (c₀ : L₀ ≅ L₀ ⋙ L₀) (c₁ : Lfg ≅ Lg ⋙ Lf) (A : DX)
+    (hx : αχ.app A ≫ Ψ.map (c₀.hom.app A) =
+      c₁.hom.app (ΨM.obj A) ≫ Lf.map (αψ.app A) ≫ αρ.app (L₀.obj A))
+    (hiso : IsIso (αρ.app (L₀.obj A)))
+    {G ι : Type*} (H : Set G) (π : G → ι) (lift : ι → G) (hlift : ∀ i, π (lift i) = i)
+    (s : Finset ι) (n : ℕ) (act₁ : ι → (Ψ₁.obj (L₀.obj A) ⟶ Ψ₁.obj (L₀.obj A)))
+    (act : G → ∀ C, Ψ.obj C ⟶ Ψ.obj C)
+    (hact : ∀ σ {C C'} (g : C ⟶ C'), act σ C ≫ Ψ.map g = Ψ.map g ≫ act σ C')
+    (hfix : ∀ σ ∈ H, act₁ (π σ) = 𝟙 _)
+    (hsplit : ∃ r, αψ.app A ≫ r = 𝟙 _ ∧ n • (r ≫ αψ.app A) = ∑ i ∈ s, act₁ i)
+    (hcomm : ∀ σ, αρ.app (L₀.obj A) ≫ act σ (L₀.obj (L₀.obj A)) =
+      Lf.map (act₁ (π σ)) ≫ αρ.app (L₀.obj A)) :
+    (∀ σ ∈ H, act σ (L₀.obj A) = 𝟙 _) ∧
+      ∃ r, αχ.app A ≫ r = 𝟙 _ ∧ n • (r ≫ αχ.app A) = ∑ i ∈ s, act (lift i) (L₀.obj A) := by
+  constructor
+  · intro σ hσ
+    exact eq_id_of_naturality_of_iso (act σ) (hact σ) (c₀.app A)
+      (eq_id_of_intertwining_of_epi_aux Lf _ _ _ (hcomm σ) (hfix σ hσ))
+  · obtain ⟨r, hr, havg⟩ := hsplit
+    exact retraction_of_comp_of_isIso_aux αχ αψ αρ c₀ c₁ A hx r hr s n act₁
+      (fun i ↦ act (lift i)) (fun i ↦ hact (lift i)) havg
+      (fun i ↦ by simpa only [hlift i] using hcomm (lift i))
+
 variable {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω]
   (L' : IntermediateField L Ω)
@@ -166,8 +202,15 @@ lemma restrictNormal_eq_one_of_mem_fixingSubgroup [Normal L L'] {σ : Ω ≃ₐ[
   exact (AlgEquiv.restrictNormal_commutes σ L' x).trans
     ((IntermediateField.mem_fixingSubgroup_iff L' σ).1 hσ x x.2)
 
-set_option maxHeartbeats 800000 in
--- the pullback exchanges of the three layers are large terms
+private lemma galoisLayerAction_restrict_eq_id_of_mem_fixingSubgroup [Normal L L']
+    (σ : Ω ≃ₐ[L] Ω) (hσ : σ ∈ L'.fixingSubgroup)
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    (N.galoisLayerAut h L' (σ.restrictNormal L')).autAction Λ C = 𝟙 _ :=
+  (congrArg (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ C)
+    (restrictNormal_eq_one_of_mem_fixingSubgroup Ω L' hσ)).trans
+      (N.galoisLayerAction_one Λ h L' C)
+
 /-- **Nearby cycles of a Galois layer stabilizing at a finite level are the invariants of a
 finite quotient.** Let `L ⊆ L' ⊆ Ω` with `L'/L` finite Galois, and suppose the pullback exchange
 of the change of Galois layers `N_Ω ⟶ N_{L'}` is invertible at `L(𝟙)^* C` (stabilization at the
@@ -195,34 +238,25 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     ∃ r, ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
       Fintype.card (L' ≃ₐ[L] L') • (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) =
         ∑ τ, (N.galoisLayerAut h Ω (lift τ)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
-  constructor
-  · intro σ hσ
-    have hc := N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ
-      (L((𝟙 X)^*⟦Λ⟧).obj C)
-    rw [restrictNormal_eq_one_of_mem_fixingSubgroup Ω L' hσ] at hc
-    have h1 : (N.galoisLayerAut h L' 1).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) = 𝟙 _ :=
-      N.galoisLayerAction_one Λ h L' _
-    rw [h1, CategoryTheory.Functor.map_id, Category.id_comp] at hc
-    have h2 : (N.galoisLayerAut h Ω σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj (L((𝟙 X)^*⟦Λ⟧).obj C)) =
-        𝟙 _ := by
-      rw [← cancel_epi (((N.galoisLayerRestrict h Ω L').pullbackExchange Λ).app
-        (L((𝟙 X)^*⟦Λ⟧).obj C)), hc]
-      exact (Category.comp_id _).symm
-    exact eq_id_of_naturality_of_iso _ (fun g ↦ Hom.autAction_naturality Λ _ g)
-      ((leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X))).app C) h2
-  · obtain ⟨r, hr, havg⟩ := N.exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ h L' C
-    have hx := (N.galoisLayerRestrict h Ω L').pullbackExchange_comp_app_of_eq Λ
-      (N.galoisLayerHom h L') (N.galoisLayerHom h Ω) (Category.id_comp (𝟙 X))
-      (Category.id_comp (𝟙 X')) (by simp) (N.galoisLayerRestrict_generic_comp h Ω L') C
-    exact retraction_of_comp_of_isIso_aux ((N.galoisLayerHom h Ω).pullbackExchange Λ)
-      ((N.galoisLayerHom h L').pullbackExchange Λ)
-      ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ)
-      (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X)))
-      (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx r hr Finset.univ _
-      (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C))
-      (fun τ C' ↦ (N.galoisLayerAut h Ω (lift τ)).autAction Λ C')
-      (fun τ _ _ g ↦ Hom.autAction_naturality Λ _ g) havg
-      (fun τ ↦ by
-        rw [N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ (lift τ), hlift])
+  have hx := (N.galoisLayerRestrict h Ω L').pullbackExchange_comp_app_of_eq Λ
+    (N.galoisLayerHom h L') (N.galoisLayerHom h Ω) (Category.id_comp (𝟙 X))
+    (Category.id_comp (𝟙 X')) (by simp) (N.galoisLayerRestrict_generic_comp h Ω L') C
+  have hfix := N.galoisLayerAction_restrict_eq_id_of_mem_fixingSubgroup h Ω L' Λ
+  have hsplit := N.exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ h L' C
+  have hcomm := N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ
+  have key := stabilization_of_equivariant_iso_aux
+    (G := Ω ≃ₐ[L] Ω) (ι := L' ≃ₐ[L] L')
+    ((N.galoisLayerHom h Ω).pullbackExchange Λ)
+    ((N.galoisLayerHom h L').pullbackExchange Λ)
+    ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ)
+    (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X)))
+    (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx hstab
+    (L'.fixingSubgroup : Set (Ω ≃ₐ[L] Ω)) (fun σ ↦ σ.restrictNormal L') lift hlift
+    Finset.univ (Fintype.card (L' ≃ₐ[L] L'))
+    (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ _)
+    (fun σ C' ↦ (N.galoisLayerAut h Ω σ).autAction Λ C')
+    (fun σ _ _ g ↦ Hom.autAction_naturality Λ _ g)
+    (fun σ hσ ↦ hfix σ hσ _) hsplit (fun σ ↦ hcomm σ _)
+  exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

@@ -14,8 +14,11 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 /-!
 # Restriction of a disjoint-open direct-image product
 
-Source: Stacks Project, Sheaves, Tags 00AL, 00AM and 04TN.
-(blueprint: lem-sfb-disjoint-open-product-restriction)
+## References
+
+* Stacks Project, Sheaves, Tags 00AL, 00AM and 04TN
+* Stacks Project, Sheaves, Tags 00AL and 00AM (disjoint gluing), and Tag 0095 (direct image on
+  sections)
 -/
 
 @[expose] public section
@@ -70,21 +73,7 @@ private noncomputable def productSingleIso {C : Type*} [Category C]
   · simp
 
 /-- A direct-image product on pairwise disjoint opens restricts to its single
-supported factor. No covering or finiteness assumption is necessary.
-
-Source: Stacks Project, Sheaves, Tags 00AL and 00AM (disjoint gluing), and
-Tag 0095 (direct image on sections).
-(blueprint: lem-sfb-disjoint-open-product-restriction)
-
-Proof: For an open W contained in V, its intersection with U j is empty
-when j differs from i. Sections of a module over the empty open form the
-zero module, so the sectionwise product projects isomorphically to its i-th
-factor. The latter is the sections of F i on W, because W lies in U i.
-These identifications commute with restriction and the structure-sheaf action.
-They give mutually inverse module maps. Identify tensor-formula pullback along
-an open immersion with restriction using uniqueness of the pullback adjunction.
-This also treats empty V and infinitely many factors; pullback is not asserted
-to preserve an arbitrary product. -/
+supported factor. No covering or finiteness assumption is necessary. -/
 @[no_expose] noncomputable def disjointOpenProductRestrictIso {X : Scheme.{u}} {ι : Type}
     (U : ι → X.Opens)
     (hdisjoint : ∀ (i j : ι) (x : X), x ∈ U i → x ∈ U j → i = j)

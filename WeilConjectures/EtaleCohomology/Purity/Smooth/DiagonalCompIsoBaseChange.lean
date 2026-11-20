@@ -194,12 +194,12 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [QuasiCompact f'] [HasInvertibleExponent Λ (pullback f f)]
   [HasInvertibleExponent Λ (pullback f' f')]
 
-/-- Blueprint `sk-prop-sp-purity-bc` at the unit, for an isomorphism of squares (the Frobenius
-square): the statement of `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange` for
-`g`, `g'` isomorphisms, from the three laws of the compactly supported direct image
-`H1` (vertical pasting of `Ex_!` along `Δ ≫ p₁ = 𝟙`,
-`CategoryTheory.Adjunction.ExchangeCompCompatible`), `H2` (the identity square) and `H3` (the
-horizontal pasting, as the comparison of the identifications of `ω_{p₁}`). -/
+/-- Blueprint `proposition-compatibility-purity-base-change` at the unit, for an isomorphism of
+squares (the Frobenius square): the statement of
+`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange` for `g`, `g'` isomorphisms, from
+the three laws of the compactly supported direct image `H1` (vertical pasting of `Ex_!` along
+`Δ ≫ p₁ = 𝟙`, `CategoryTheory.Adjunction.ExchangeCompCompatible`), `H2` (the identity square) and
+`H3` (the horizontal pasting, as the comparison of the identifications of `ω_{p₁}`). -/
 theorem dualizingComplexTwistShiftIso_baseChange_of_isIso_of_laws
     (H1 : Adjunction.ExchangeCompCompatible
       (rightDerivedLowerShriekBaseChangeMap Λ (isPullback_diagonal sq))

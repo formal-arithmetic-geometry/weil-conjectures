@@ -16,12 +16,12 @@ For a separated finite-type morphism `f : X ⟶ S` between finite-type schemes o
 finite coefficient ring `Λ` whose exponent is invertible on `S`, the compactly supported direct
 image `Rf_!` preserves bounded constructibility, and its formation commutes with every base
 change from a noetherian scheme. This is the input on compact supports used by Deligne's generic
-constructibility theorem (`thm-fin-deligne-generic-open`).
+constructibility theorem (`theorem-generic-constructibility-base-change-rj`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_and_isIso`
-  (`lem-fin-compact-bounded-and-base-change`).
+  (`lemma-smooth-morphisms-locally-constant-sheaves`).
 -/
 
 @[expose] public section
@@ -40,7 +40,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lem-fin-compact-bounded-and-base-change`: Compact direct images needed by the
+/-- Blueprint `lemma-smooth-morphisms-locally-constant-sheaves`: Compact direct images needed by the
 generic argument.
 
 Let `f : X ⟶ S` be a separated finite-type morphism (here: one admitting a compactification)

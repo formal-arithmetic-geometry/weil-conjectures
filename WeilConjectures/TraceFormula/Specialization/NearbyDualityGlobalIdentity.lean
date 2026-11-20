@@ -103,8 +103,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
 /-- **Global sections of the duality map of a proper model** (blueprint
-`lemma-nearby-duality-proper-direct-image`, (E.14); `det-tf-nearby-duality-proper` (1), (3)): if
-`X`, `X'` and the total space of the trait model `M` over the base are proper, then
+`lemma-nearby-duality-proper-direct-image`, (E.14); `lemma-nearby-duality-proper-direct-image` (1),
+(3)): if `X`, `X'` and the total space of the trait model `M` over the base are proper, then
 ```
 χ_a ≫ RΓ(X', δ_{M,K}) ≫ δ_{a'} ≫ D(χ_a) = Ψ_S(δ_a) ≫ δ_S
 ```

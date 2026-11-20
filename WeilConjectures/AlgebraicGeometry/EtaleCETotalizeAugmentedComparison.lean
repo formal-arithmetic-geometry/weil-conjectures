@@ -40,7 +40,6 @@ private theorem factors_finset_sup {C : Type*} [Category C] [Abelian C]
   exact Subobject.factors_of_le _ hs (Subobject.factors_self _)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 500000 in
 -- Elaborate the sections comparisons and their dependent summand equations together.
 -- The summand equation is essential: an arbitrary map of totals need not preserve this
 -- filtration. The components constructed below are unique by the target monomorphisms.

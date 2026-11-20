@@ -51,7 +51,7 @@ Proof:
 5. Both completions are Noetherian by `lem-weil-pbc-adic-completion-noetherian`.
    By `lem-weil-pbc-local-completion-local-ring`, Bhat is local with maximal
    ideal mB Bhat; locality of φ puts mA Bhat inside it. Bhat is finite over
-   itself. Apply `lem-weil-pbc-flat-module-powers` with R = Ahat, I = mA Ahat,
+   itself. Apply `theorem-finite-etale-covers-proper-henselian--2` with R = Ahat, I = mA Ahat,
    S = Bhat and M = S to conclude φhat.Flat (`def-weil-pbc-flat-ring-map`).
 -/
 theorem flat_adicCompletion_of_flat_local

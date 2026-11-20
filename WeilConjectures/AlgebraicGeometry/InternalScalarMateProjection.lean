@@ -68,7 +68,7 @@ def scalarRestrictionPush (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     F Λ' f ⋙ V a Y ⟶ V a X ⋙ F Λ f :=
   (mateEquiv (adj Λ' f) (adj Λ f)
-    (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv))
 
 /-- Restriction of the regular coefficient in degree zero, with the exact localization
 and single-complex comparisons retained.
@@ -264,8 +264,8 @@ private theorem restricted_mate_adjunct
     {dC : C ⥤ C'} {dE : E ⥤ E'} {vC : C' ⥤ C} {vE : E' ⥤ E}
     (b : l' ⋙ vE ≅ vC ⋙ l) (lam : dC ⋙ l' ⟶ l ⋙ dE)
     {t : E ⥤ E} (e : dE ⋙ vE ⟶ t) (K : E) :
-    l.map (vC.map ((mateEquiv ar ar' (TwoSquare.mk _ _ _ _ lam)).natTrans.app K) ≫
-        (mateEquiv ar' ar (TwoSquare.mk _ _ _ _ b.inv)).natTrans.app (dE.obj K) ≫
+    l.map (vC.map ((mateEquiv ar ar' (TwoSquare.mk _ _ _ _ lam)).app K) ≫
+        (mateEquiv ar' ar (TwoSquare.mk _ _ _ _ b.inv)).app (dE.obj K) ≫
         r.map (e.app K)) ≫ ar.counit.app (t.obj K) =
       b.inv.app (dC.obj (r.obj K)) ≫ vE.map (lam.app (r.obj K)) ≫
         e.app (l.obj (r.obj K)) ≫ t.map (ar.counit.app K) := by
@@ -277,8 +277,8 @@ private theorem restricted_mate_adjunct
   have hm := mateEquiv_counit ar' ar (TwoSquare.mk _ _ _ _ b.inv) (dE.obj K)
   slice_lhs 2 3 => exact hm
   have hb := b.inv.naturality
-    ((mateEquiv ar ar' (TwoSquare.mk _ _ _ _ lam)).natTrans.app K)
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans, Functor.comp_obj,
+    ((mateEquiv ar ar' (TwoSquare.mk _ _ _ _ lam)).app K)
+  dsimp only [TwoSquare.mk, Functor.comp_obj,
     Functor.comp_map] at hb
   simp only [Category.assoc]
   erw [reassoc_of% hb]
@@ -339,7 +339,7 @@ private theorem scalar_push_hom {X Y : Scheme.{u}} (f : X ⟶ Y) :
         unfold F CondensedRing.moduleObjectDerivedPushforward
         exact (ModuleRingedComparison.derivedPushComparison Λ f).hom) := by
   change (mateEquiv (adj Λ f) (ModuleRingedComparison.derivedAdjunction Λ f)
-    (TwoSquare.mk _ _ _ _ (scalarSectionPullComparison Λ f).inv)).natTrans = _
+    (TwoSquare.mk _ _ _ _ (scalarSectionPullComparison Λ f).inv)) = _
   exact scalarSectionPushMate_eq Λ f
 
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)] in

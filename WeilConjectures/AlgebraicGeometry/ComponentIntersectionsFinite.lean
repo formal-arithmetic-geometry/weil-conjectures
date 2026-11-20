@@ -9,6 +9,7 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.Topology.KrullDimension
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-!
 # Component intersections on a Noetherian scheme of dimension at most one

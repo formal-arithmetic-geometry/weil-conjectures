@@ -69,7 +69,7 @@ theorem koszul_finite_augmentation
         v (n + 1) ≫ (quotients l E X P).map
           (homOfLE (Nat.le_add_right n 1)).op) := by
   let N := complex l E X P
-  let s := ringedSingletonKoszulPower (ring l E X) a N
+  let s := fun n ↦ (ringedSingletonKoszulPower (ring l E X) a N n).asHom
   let U := ringedKoszulRightUnitIso (ring l E X) N
   obtain ⟨e, he, hz, ht⟩ := ringedSingletonKoszulCone (ring l E X) a N
   have hs (n : ℕ) : s n ≫

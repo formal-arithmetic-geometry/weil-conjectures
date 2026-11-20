@@ -94,14 +94,14 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 
 /-! # Pasting constant-coefficient pro-etale pullback squares
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D,
-`lemma-derived-pullback-composition`; the two-square deduction in the node
-(blueprint: lem-pur-factorized-pullback-square-pasting).
-
 ## Main statements
 
 - `proEtaleFactorizedPullback_pasting`: equality of the two canonical derived paths.
 - `proEtaleFactorizedPullback_pasting_representatives`: their termwise normalization.
+
+## References
+
+* Stacks Tag 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -116,19 +116,17 @@ attribute [local irreducible] proEtaleRingModulePullback proEtaleConstantRingCom
   Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategory
 
-/-- The ordinary compositor with the published unit-section normalization.
+/-- The ordinary compositor with the unit-section normalization.
 The unit-section equation in the cited theorem determines its maps: the adjunction
 identifies a map out of pullback with its composite with the unit. Thus this choice
-selects the canonical isomorphism, rather than an unspecified witness of existence.
-Source: Stacks Tag 0D6D (blueprint: lem-pur-factorized-pullback-square-pasting). -/
+selects the canonical isomorphism, rather than an unspecified witness of existence. -/
 def proEtalePastingOrdinaryComposition
     {X Y Z : Scheme.{u}} (h : Z ⟶ Y) (k : Y ⟶ X) (A : Type u) [CommRing A] :
     proEtaleConstantRingPullback A k ⋙ proEtaleConstantRingPullback A h ≅
       proEtaleConstantRingPullback A (h ≫ k) :=
   (Classical.choose (proEtaleConstantRingPullbackComposition_ordinary h k A)).symm
 
-/-- The ordinary square comparison, with the specified equality transport.
-Source: Stacks Tag 0D6D (blueprint: lem-pur-factorized-pullback-square-pasting). -/
+/-- The ordinary square comparison, with the specified equality transport. -/
 def proEtalePastingOrdinarySquare
     {X Y : Scheme.{u}} (u : X ⟶ Y) (vX : X ⟶ X) (vY : Y ⟶ Y)
     (e : u ≫ vY = vX ≫ u) (A : Type u) [CommRing A] :
@@ -138,8 +136,7 @@ def proEtalePastingOrdinarySquare
     eqToIso (congrArg (proEtaleConstantRingPullback A) e) ≪≫
       (proEtalePastingOrdinaryComposition vX u A).symm
 
-/-- The derived square comparison, with the specified equality transport.
-Source: Stacks Tag 0D6D (blueprint: lem-pur-factorized-pullback-square-pasting). -/
+/-- The derived square comparison, with the specified equality transport. -/
 def proEtalePastingDerivedSquare
     {X Y : Scheme.{u}} (u : X ⟶ Y) (vX : X ⟶ X) (vY : Y ⟶ Y)
     (e : u ≫ vY = vX ≫ u) (A : Type u) [CommRing A] :

@@ -16,7 +16,7 @@ The dualizing maps `θ_N` of the trait models over generic bases
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.dualizingMap`) form a family
 `NearbyCyclesModel.NearbyDualizingDataOfGenericBase`
 (`NearbyCyclesModel.nonempty_nearbyDualizingDataOfGenericBase`, blueprint
-`det-nearby-exchange-maps`).
+`prose-E-15`).
 
 The dualizing maps are built from the trait as a model of the point `Spec F` along
 `ε₀ = (Spec Ω ⟶ η ⟶ Spec F)`, while the trace property is asked for every `ε₀'` compatible with
@@ -107,12 +107,12 @@ variable (k' : Type u) [Field k'] (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
 /-- **Existence of the dualizing maps of nearby cycles over generic bases** (blueprint
-`det-nearby-exchange-maps`): the dualizing map `θ_Y = β_{a_Y}(A)` of blueprint
-`det-nearby-exchange-maps` (5) for separated models of finite type over the trait, the
+`prose-E-15`): the dualizing map `θ_Y = β_{a_Y}(A)` of blueprint
+`prose-E-15` (5) for separated models of finite type over the trait, the
 exceptional adjoint of the compact-support exchange `ν_{a_Y}` (built from a relative
 compactification over the trait), with its characterising properties: for proper models,
-`ν_a = χ_a⁻¹` gives the trace property (`det-nearby-exchange-maps`), and the composition law
-`sk-lem-tf-nearby-mate-coherences` (4) for an open immersion followed by the structure morphism
+`ν_a = χ_a⁻¹` gives the trace property (`prose-E-15`), and the composition law
+`sec-Base-change-for-nearby-cycles` (4) for an open immersion followed by the structure morphism
 gives open restriction. This is the generic-base version of
 `NearbyCyclesModel.nonempty_nearbyDualizingData` (the case of a base field). -/
 theorem nonempty_nearbyDualizingDataOfGenericBase :
