@@ -103,7 +103,7 @@ private theorem totalSwap_boundary {R : Type u} [CommRing R]
   rw [map_add]
   split_ifs <;> simp only [LinearMap.comp_apply, LinearMap.zero_apply,
     map_zero, indexSwap, Equiv.coe_fn_mk, flip_d_f, flip_X_d,
-    add_zero, zero_add] <;> try rfl
+    add_zero, zero_add]
   all_goals
     repeat rw [totalSwap_lof]
     first | rfl | exact add_comm _ _

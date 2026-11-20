@@ -12,7 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.Pur.PurInverseImageScalarComparison
 
 /-! # Normalized reduction of the completed first Tate line
 
-Source: prop-weil-twist-preserves, finite coefficient paragraph.
+Source: definition-tate-twists--10, finite coefficient paragraph.
 (blueprint: lem-weil-twist-first-quotient-normalization).
 -/
 
@@ -30,7 +30,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (S : Scheme.{u})
 
 /-- The completed first line has its root-normalized quotient comparison.
-Source: prop-weil-twist-preserves, first line and finite coefficient paragraph.
+Source: definition-tate-twists--10, first line and finite coefficient paragraph.
 (blueprint: lem-weil-twist-first-quotient-normalization).
 
 Proof: the completed action on the integral first line restricts along the

@@ -59,7 +59,7 @@ private theorem geometric_scalar_mate
     {T : A ⥤ C} {U : C ⥤ A} {S : B ⥤ D} {V : D ⥤ B}
     (a : p ⊣ q) (b : P ⊣ Q) (c : T ⊣ U) (d : S ⊣ V)
     (δ : Q ⋙ U ≅ V ⋙ q) (K : B) :
-    P.map (((mateEquiv d c).symm (TwoSquare.mk _ _ _ _ δ.inv)).natTrans.app K) ≫
+    P.map (((mateEquiv d c).symm (TwoSquare.mk _ _ _ _ δ.inv)).app K) ≫
         b.counit.app (S.obj K) =
       (((a.comp d).ofNatIsoRight δ.symm).leftAdjointUniq (c.comp b)).inv.app
           (q.obj K) ≫ S.map (a.counit.app K) := by
@@ -69,12 +69,10 @@ private theorem geometric_scalar_mate
   have hc := unique_conjugate (a.comp d) (c.comp b) δ
   change _ = conjugateEquiv (a.comp d) (c.comp b) θ.inv at h
   rw [hc] at h
-  have hm : (mateEquiv a b (TwoSquare.mk _ _ _ _ θ.inv)).natTrans =
-      ((mateEquiv d c).symm (TwoSquare.mk _ _ _ _ δ.inv)).natTrans := by
-    apply congrArg TwoSquare.natTrans
+  have hm : (mateEquiv a b (TwoSquare.mk _ _ _ _ θ.inv)) =
+      ((mateEquiv d c).symm (TwoSquare.mk _ _ _ _ δ.inv)) := by
     apply (mateEquiv d c).injective
-    apply TwoSquare.ext
-    intro X
+    refine NatTrans.ext (funext fun X ↦ ?_)
     simpa only [Equiv.apply_symm_apply] using congrArg (fun t ↦ t.app X) h
   rw [← hm]
   exact mateEquiv_counit a b (TwoSquare.mk _ _ _ _ θ.inv) K

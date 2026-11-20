@@ -481,7 +481,6 @@ private noncomputable abbrev moduleSets
   toSheaf ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj A) ⋙
     sheafCompose J (CategoryTheory.forget AddCommGrpCat.{r})
 
-set_option maxHeartbeats 600000 in
 -- Recover the rank-one module comparison from the transported scalar action.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -24,7 +24,7 @@ isomorphism, `Φ(N) = 0`, so that `Hom(N, ΨΦ(L)) = Hom(Φ(N), Φ(L)) = 0` and
 
 This is the formal part of the proof of Stacks Tag 0F5Y (Stacks Lemma 19.15.1), where `Φ` is the
 exact functor `D(R) ⥤ D(A)` given by the Gabriel-Popescu theorem; it is used in the blueprint
-node `thm-amb-etale-exceptional-adjoint`.
+node `theorem-existence-exceptional-inverse-image--1`.
 -/
 
 @[expose] public section
@@ -92,8 +92,8 @@ lemma isIso_unit_app_of_comp {Φ : D' ⥤ D} {Ψ : D ⥤ D'} (adj : Φ ⊣ Ψ) [
   exact (IsZero.iff_id_eq_zero N).2 this
 
 /-- **Right adjoints through a Bousfield localization** (formal part of Stacks Tag 0F5Y, via
-Stacks Lemma 19.15.1; blueprint `thm-amb-etale-exceptional-adjoint`): let `Φ : D' ⥤ D` be a
-triangulated functor with a fully faithful right adjoint `Ψ`, and `F : D ⥤ T` a functor
+Stacks Lemma 19.15.1; blueprint `theorem-existence-exceptional-inverse-image--1`): let `Φ : D' ⥤ D`
+be a triangulated functor with a fully faithful right adjoint `Ψ`, and `F : D ⥤ T` a functor
 preserving zero morphisms. If `Φ ⋙ F` is a left adjoint, then so is `F`. -/
 theorem isLeftAdjoint_of_isLeftAdjoint_comp {Φ : D' ⥤ D} {Ψ : D ⥤ D'} (adj : Φ ⊣ Ψ) [Ψ.Full]
     [Ψ.Faithful] [Φ.CommShift ℤ] [Φ.IsTriangulated] (F : D ⥤ T) [F.PreservesZeroMorphisms]

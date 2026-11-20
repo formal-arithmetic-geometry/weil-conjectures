@@ -17,7 +17,8 @@ Let `X` be a separated `k`-scheme of finite type, `Z = V(I) ⊆ X` a closed subs
 point of `Z`. If the defect `C_{V, Z ∩ V}(g^* L)` vanishes generically on `Z ∩ V`, then
 `C_{X,Z}(L)` vanishes generically on `Z`
 (`ProEtale.CondensedRing.genericallyVanishingDefect_of_isOpenImmersion`). This is the reduction
-"near a generic point `ζ` of `Z`" in the proof of blueprint `det-sp-generic-divisor`.
+"near a generic point `ζ` of `Z`" in the proof of blueprint
+`lemma-vanishing-generic-points-principal-divisor--1`.
 
 The proof uses the smooth exchange for the defect along `g`
 (`ProEtale.CondensedRing.nonempty_specializationDefect_upperStar_iso`) and the identification of

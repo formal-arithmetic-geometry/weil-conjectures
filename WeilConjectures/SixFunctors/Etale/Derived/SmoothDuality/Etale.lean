@@ -12,10 +12,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChangeUni
 /-!
 # Base change for the exceptional inverse image along an étale morphism
 
-The étale case (c) of the proof of blueprint `prop-asd-smooth-base-change` (in the form of the
-proof of `det-sf-cohsm-base-change`): for an étale morphism `e : X ⟶ Y` admitting a
-compactification, `Re^! ≅ Le^*`, with counit the counit of the extension by zero `e_!`, and the
-canonical base change map `Lg'^* Re^! ⟶ Re'^! Lg^*`
+The étale case (c) of the proof of blueprint
+`proposition-exceptional-inverse-image-smooth-morphism--6` (in the form of the proof of
+`proposition-exceptional-inverse-image-smooth-morphism`): for an étale morphism `e : X ⟶ Y`
+admitting a compactification, `Re^! ≅ Le^*`, with counit the counit of the extension by zero `e_!`,
+and the canonical base change map `Lg'^* Re^! ⟶ Re'^! Lg^*`
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`) is an isomorphism
 (`AlgebraicGeometry.Etale.etaleBaseChange`).
 
@@ -68,11 +69,11 @@ theorem etaleBaseChange : EtaleBaseChange Λ := by
 
 /-- **Base change for smooth morphisms from the affine-line case**: if the affine-line
 projections satisfy base change (`AlgebraicGeometry.Etale.AffineLineBaseChange`,
-the elementary case (a) of the proof of blueprint `prop-asd-smooth-base-change`), then for every
-smooth `f : X ⟶ Y` of relative dimension `d` admitting a compactification, over a
-quasi-separated `Y`, with the exponent of `Λ` invertible on `X`, the canonical base change map
-`Lg'^* Rf^! ⟶ Rf'^! Lg^*` of a cartesian square with quasi-compact `f'` admitting a
-compactification is an isomorphism: the étale case is
+the elementary case (a) of the proof of blueprint
+`proposition-exceptional-inverse-image-smooth-morphism--6`), then for every smooth `f : X ⟶ Y` of
+relative dimension `d` admitting a compactification, over a quasi-separated `Y`, with the exponent
+of `Λ` invertible on `X`, the canonical base change map `Lg'^* Rf^! ⟶ Rf'^! Lg^*` of a cartesian
+square with quasi-compact `f'` admitting a compactification is an isomorphism: the étale case is
 `AlgebraicGeometry.Etale.etaleBaseChange`. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_affineLine (h₁ : AffineLineBaseChange Λ)
     {X Y : Scheme.{u}} [QuasiSeparatedSpace Y] [HasInvertibleExponent Λ X] (f : X ⟶ Y)

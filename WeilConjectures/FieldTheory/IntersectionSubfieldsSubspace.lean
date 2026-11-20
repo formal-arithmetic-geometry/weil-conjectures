@@ -13,7 +13,7 @@ public import Mathlib.LinearAlgebra.Pi
 # Nonzero intersections of a subspace with a directed family of subfields
 
 Source: Stacks Project, More on Algebra, Lemma 15.47.3, Tag 07P3
-(blueprint: lem-weil-pbc-intersection-subfields-subspace).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -27,7 +27,7 @@ base field, a linear subspace of `Kⁿ` contains a nonzero vector over the base 
 it contains a nonzero vector over every field of the family.
 
 Source: Stacks Project, More on Algebra, Lemma 15.47.3, Tag 07P3
-(blueprint: lem-weil-pbc-intersection-subfields-subspace).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof:
 1. A nonzero vector over `k` lies over every intermediate field, giving the forward implication.

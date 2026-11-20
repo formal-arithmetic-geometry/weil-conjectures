@@ -311,7 +311,7 @@ import Mathlib.CategoryTheory.Sites.Grothendieck
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Sites.Sheaf
 import Mathlib.Combinatorics.Quiver.ReflQuiver
-import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Order.Int.ConditionallyCompleteOrder
 import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 import Mathlib.Geometry.RingedSpace.PresheafedSpace
 import Mathlib.Geometry.RingedSpace.SheafedSpace
@@ -536,9 +536,10 @@ import Mathlib.RingTheory.Finiteness.Small
 /-!
 # An integral lattice on a nonempty reduced open
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.13,
-first paragraph, and Stacks Tag 03S0.
-(blueprint: lem-weil-pbc-lisse-lattice-reduced-open)
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.13, first paragraph, and Stacks Tag
+  03S0
 -/
 
 @[expose] public noncomputable section

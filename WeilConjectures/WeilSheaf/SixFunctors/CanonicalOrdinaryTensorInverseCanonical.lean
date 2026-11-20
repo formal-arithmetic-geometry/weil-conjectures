@@ -41,9 +41,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-set_option maxHeartbeats 1600000 in
 -- Elaborating the concrete tensor instances requires large definitional comparisons.
-set_option synthInstance.maxHeartbeats 200000 in
 -- The native and ringed tensor instances have separate coefficient and site universes.
 /-- `comparison_pure` with its Hom comparison spelled out exactly as in
 `canonical_ordinary_tensor_inverse_associativity`, so that the main theorem applies it without

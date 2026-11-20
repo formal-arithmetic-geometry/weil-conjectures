@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentOpenSectionIdealExtension
 
 /-! # Flasqueness of the sheaf associated to an injective module
 
-Source: Stacks Project, Tag 09T2, Lemma 36.8.1.
-(blueprint: lem-sbc-injective-module-tilde-flasque)
+## References
+
+* Stacks Project, Tag 09T2, Lemma 36.8.1
+* Stacks Project, Tags 01YB and 09T2
 -/
 
 @[expose] public section
@@ -26,18 +28,9 @@ namespace AlgebraicGeometry.Scheme
 noncomputable section
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Affine module coordinates for the ideal-power section extension of Tag 01YB.
-Source: Stacks Project, Tags 01YB and 09T2.
-
-Apply `quasicoherent_open_section_ideal_extension` to the vanishing ideal of
-Spec R minus U. For the resulting power K, transport K's global ideal along
-`ΓSpecIso` to an ideal J of R. The inclusion on global sections is injective
-and its range is J, giving a linear equivalence between K's global sections
-and J. Compose its inverse with the global component of the extension and
-`tilde.isoTop.inv` to define φ. Naturality of the extension and the inclusion
-proves the scalar identity on U. The support of a positive ideal power equals
-the original support, so J is not contained in any prime in U. At exponent
-zero K is the unit ideal and the same assertion follows from empty support. -/
+/-- For a section `s` of `M^~` over an open `U` of `Spec R` with `R` Noetherian, there are an
+ideal `J` of `R` not contained in any prime of `U` and a linear map `φ : J →ₗ[R] M` such that
+`φ a` restricts to `a • s` on `U` for all `a ∈ J` (Stacks, Tag 01YB). -/
 private theorem affine_section_ideal_presentation
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     (M : ModuleCat.{u} R) (U : (Spec (.of R)).Opens)
@@ -139,22 +132,7 @@ private theorem affine_section_ideal_presentation
         congrArg (fun c : Γ(X, U) ↦ c • sE) hi'
       _ = (a : R) • sE := (Modules.smul_Spec_def (M := E) (a : R) sE).symm
 
-/-- The associated sheaf of an injective module over a Noetherian ring is flasque.
-Source: Stacks Project, Tag 09T2, Lemma 36.8.1.
-(blueprint: lem-sbc-injective-module-tilde-flasque)
-
-Proof: Spec R is Noetherian. The affine equivalence between R-modules and
-quasi-coherent sheaves preserves injectivity, so the sheaf associated to M is
-injective in QCoh. Tag 09T2 makes this sheaf flasque. In its proof, a section
-on an open extends to a morphism from a power of the coherent ideal defining
-the complement. Injectivity extends that morphism along the ideal's inclusion
-in the structure sheaf; the resulting global section restricts to the given
-section. Thus sections on the whole spectrum surject onto those on every
-open. Given V contained in U, extend a section on V globally and restrict
-it to U; this proves all restriction maps surjective. Restriction of scalars
-to R does not alter these underlying functions, and epimorphisms in ModuleCat
-are exactly surjective maps. Therefore the presheaf used by tilde.toOpen is
-flasque. The empty open has the zero section module and is included. -/
+/-- The associated sheaf of an injective module over a Noetherian ring is flasque. -/
 theorem injective_tilde_isFlasque
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     (M : ModuleCat.{u} R) [Injective M] :

@@ -17,8 +17,9 @@ Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a subfield with ring of integers `𝒪_E
 `X` a scheme. The reduction `𝒪̲_E ⟶ (𝒪_E ⧸ ℓⁿ)̲` of condensed rings
 (`Profinite.padicIntegersRingObjToIntegersModPow`) pulls back to the morphism of coefficient
 ring objects `𝒪_{E,X} ⟶ (𝒪_E ⧸ ℓⁿ)_X` on `X_proét` (`ProEtale.integersModPowReduction`), one of
-the coefficient changes of the blueprint (`sk-prop-scalar-six`, coefficient maps `𝒪_E → A` to
-finite rings). Its derived extension of scalars is the *reduction modulo `ℓⁿ`*
+the coefficient changes of the blueprint (`proposition-six-operations-change-coefficients`,
+coefficient maps `𝒪_E → A` to finite rings). Its derived extension of scalars is the *reduction
+modulo `ℓⁿ`*
 ```
 K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_E ⧸ ℓⁿ = L(Ext) K : D(Mod_{𝒪_{E,X}}) ⥤ D(Mod_{(𝒪_E ⧸ ℓⁿ)_X}).
 ```

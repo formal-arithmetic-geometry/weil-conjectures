@@ -18,8 +18,8 @@ Let `S` be the strict localization of the surface `Z` of a transverse corner
 `RΓ(S - Y_S, 𝔽_ℓ)` and `RΓ(X_S - z, 𝔽_ℓ)` have cohomology `𝔽_ℓ` in degree `0`, `𝔽_ℓ(-1)` in
 degree `1` and zero in all other degrees, and the restriction map
 `RΓ(S - Y_S, 𝔽_ℓ) ⟶ RΓ(X_S - z, 𝔽_ℓ)` is an isomorphism (blueprint
-`det-tf-transverse-corner-constant`). The coefficients are the constant abelian sheaf `ℤ/ℓ`;
-the Tate twist `𝔽_ℓ(-1)` is free of rank one over `𝔽_ℓ`, and only its rank is recorded.
+`lemma-punctured-surface-punctured-curve--1`). The coefficients are the constant abelian sheaf
+`ℤ/ℓ`; the Tate twist `𝔽_ℓ(-1)` is free of rank one over `𝔽_ℓ`, and only its rank is recorded.
 
 ## Main definitions
 

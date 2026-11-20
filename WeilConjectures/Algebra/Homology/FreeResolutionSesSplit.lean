@@ -15,7 +15,7 @@ import Mathlib.LinearAlgebra.Finsupp.VectorSpace
 # Degreewise split free resolutions of a short exact sequence
 
 Source: Stacks Project, Algebra, proof of Tag 065P
-(blueprint: lem-weil-pbc-free-resolution-ses-split).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -275,7 +275,7 @@ private lemma ResolutionSES.chainC {R : Type u} [CommRing R]
 
 /-- A short exact sequence of modules admits compatible free resolutions with split rows in
 every degree. Source: Stacks Project, Algebra, proof of Tag 065P; Derived Categories,
-Tag 064C (blueprint: lem-weil-pbc-free-resolution-ses-split).
+Tag 064C (blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof plan:
 1. For a short exact sequence A → A' → A'', choose generating families of A and A'' and

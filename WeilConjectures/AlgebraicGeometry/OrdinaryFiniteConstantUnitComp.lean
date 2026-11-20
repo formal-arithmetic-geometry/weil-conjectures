@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
 
 /-! # Composition of the canonical derived constant units
 
-Source: blueprint lem-amb-p1-diagonal-integrals, adjunction-unit pasting.
+Source: blueprint lemma-class-diagonal-projective-line, adjunction-unit pasting.
 -/
 
 @[expose] public noncomputable section
@@ -123,7 +123,7 @@ section
 universe u'
 
 /-- Pasting the two constant-object units gives the constant unit for the composite.
-Source: blueprint lem-amb-p1-diagonal-integrals, proof step 3; the composition
+Source: blueprint lemma-class-diagonal-projective-line, proof step 3; the composition
 normalization of upperStarConstantSheafIso.
 (auxiliary; not a blueprint node)
 

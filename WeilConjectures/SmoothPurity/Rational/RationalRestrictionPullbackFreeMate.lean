@@ -29,8 +29,8 @@ private theorem inverseMate_component_transport
     {G : A ⥤ C} {H : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₁ : L₁' ⊣ R₁) (b₂ : L₂' ⊣ R₂)
     (β : TwoSquare R₁ H G R₂) (K : A)
-    [IsIso (((mateEquiv b₁ b₂).symm β).natTrans.app K)] :
-    IsIso (((mateEquiv a₁ a₂).symm β).natTrans.app K) := by
+    [IsIso (((mateEquiv b₁ b₂).symm β).app K)] :
+    IsIso (((mateEquiv a₁ a₂).symm β).app K) := by
   let e₁ : L₁' ≅ L₁ := (conjugateIsoEquiv a₁ b₁).symm (Iso.refl R₁)
   let e₂ : L₂' ≅ L₂ := (conjugateIsoEquiv a₂ b₂).symm (Iso.refl R₂)
   have h₁ : conjugateEquiv a₁ b₁ e₁.hom = 𝟙 R₁ :=
@@ -46,7 +46,7 @@ private theorem inverseMate_component_transport
     simp only [w, w', Equiv.apply_symm_apply, h₁, h₂]
     ext X
     simp [TwoSquare.whiskerTop, TwoSquare.whiskerBottom]
-  have hc := congrArg (fun t ↦ t.natTrans.app K) h
+  have hc := congrArg (fun t ↦ t.app K) h
   change w'.app K ≫ H.map (e₁.hom.app K) = e₂.hom.app (G.obj K) ≫ w.app K at hc
   have hi : IsIso (e₂.hom.app (G.obj K) ≫ w.app K) := by
     rw [← hc]
@@ -98,7 +98,7 @@ theorem rationalRestrictionPullback_freeMate
       (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι)
     (M : sfRationalConstructibleCategory l E Y) :
     IsIso (((mateEquiv bY bX).symm
-      (TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv)).natTrans.app
+      (TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv)).app
         ((sfRationalScalarExtension l E Y 0
           (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι).obj M)) := by
   let TY := sfRationalScalarExtension l E Y 0

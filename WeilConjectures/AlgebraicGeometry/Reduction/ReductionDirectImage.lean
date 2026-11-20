@@ -29,9 +29,6 @@ import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicTorAmplitudeTranspor
 /-!
 # Compact support and finite coefficient extension
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-reduction,
-sk-lem-sp-reduction-direct-image.md (blueprint: det-sp-reduction-direct-image).
-
 The comparison uses the specified counit mate and the unit-normalized open tensor
 comparison. All categories are ordinary uncompleted module derived categories.
 -/

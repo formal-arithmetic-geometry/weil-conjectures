@@ -111,12 +111,12 @@ private theorem inverse_mate_model (adj : L ⊣ G) (adj' : L' ⊣ G')
         L'.mapDerivedCategoryFactors.hom.app ((S.mapHomologicalComplex (.up ℤ)).obj P) ≫
         DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex
-            ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ c)).natTrans
+            ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ c))
             (.up ℤ)).app P) := by
   let δ := ((mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
     adj'.mapDerivedCategoryRightDerivedAdjunction).symm
-    (TwoSquare.mk _ _ _ _ b)).natTrans
-  let δ₀ := ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ c)).natTrans
+    (TwoSquare.mk _ _ _ _ b))
+  let δ₀ := ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ c))
   let Pc := (L.mapHomologicalComplex (.up ℤ)).obj P
   let t := (NatTrans.mapHomologicalComplex δ₀ (.up ℤ)).app P
   have ho : (adj'.mapHomologicalComplex (.up ℤ)).homEquiv
@@ -230,7 +230,7 @@ theorem integralScalarPullback_mateNormalization {X Y : Scheme.{u}} (f : X ⟶ Y
       (sfDerivedImageRestriction f (Padic.coefficientExtensionTransition l E (n + 1))))
     (P : CochainComplex (normalizedDVRModules l E Y n) ℤ) :
     ((mateEquiv (finiteAdj l E f n) (finiteAdj l E f (n + 1))).symm
-        (TwoSquare.mk _ _ _ _ r.inv)).natTrans.app (DerivedCategory.Q.obj P) ≫
+        (TwoSquare.mk _ _ _ _ r.inv)).app (DerivedCategory.Q.obj P) ≫
       (normalizedDVRRes l E X (Nat.le_succ n)).map
         ((Functor.mapDerivedCategoryFactors
           (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f)).hom.app P) ≫
@@ -247,7 +247,7 @@ theorem integralScalarPullback_mateNormalization {X Y : Scheme.{u}} (f : X ⟶ Y
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
             (sfIntrinsicConstantModuleAdjunction f
               (finiteCoefficientRing l E (n + 2)))).symm
-          (TwoSquare.mk _ _ _ _ r₀.inv)).natTrans (.up ℤ)).app P) := by
+          (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app P) := by
   let := normalizedDVRModuleRes_limits l E X (Nat.le_succ n)
   let := normalizedDVRModuleRes_colimits l E X (Nat.le_succ n)
   let := normalizedDVRModuleRes_limits l E Y (Nat.le_succ n)

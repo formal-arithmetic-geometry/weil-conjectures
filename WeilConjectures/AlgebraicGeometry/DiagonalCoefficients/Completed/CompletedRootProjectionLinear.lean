@@ -251,7 +251,7 @@ attribute [-instance] WeilConjectures.SixFunctors.integralModel_coefficientMonOb
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
 sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), and the coordinatewise
-integral twist construction of sk-def-sp-tate-twist.
+integral twist construction of definition-tate-twists.
 (blueprint: lem-diagonal-completed-root-projection-linear).
 
 Proof: the completed root action is defined coordinatewise. Its n-th projection

@@ -30,7 +30,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 /-!
 # Finite free coordinates for internal scalar extension
 
-Source: blueprint main-20261015, `sec-proetale-coefficients`,
+Source: blueprint main-20261015, `chap-The-pro-etale-site`,
 `sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md`, last sentence,
 first inference (blueprint: lem-sfb-finite-free-scalar-coordinates).
 

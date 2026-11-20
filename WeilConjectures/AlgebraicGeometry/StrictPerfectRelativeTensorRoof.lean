@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.AlgebraicGeometry.RelativeTensorRoofComparison
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # A relative tensor representative roof
 

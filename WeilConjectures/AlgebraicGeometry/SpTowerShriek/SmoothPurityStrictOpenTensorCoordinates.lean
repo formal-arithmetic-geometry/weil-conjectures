@@ -29,7 +29,7 @@ universe u v c r
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 namespace AlgebraicGeometry.ProEtale.SpTowerShriek
-attribute [local implicit_reducible] CategoryTheory.TwoSquare
+attribute [local implicit_reducible]
   AlgebraicGeometry.ProEtale.VaryingRing.push
   AlgebraicGeometry.ProEtale.spCoefficientCommRings
   AlgebraicGeometry.ProEtale.SpTowerShriek.tau
@@ -238,8 +238,8 @@ private theorem inverseMate_rightIso
     {F : C ⥤ D} {P Q : D ⥤ C} {F' : C' ⥤ D'} {P' : D' ⥤ C'}
     (a : F ⊣ P) (b : F' ⊣ P') (e : P ≅ Q)
     {V : C ⥤ C'} {W : D ⥤ D'} (d : Q ⋙ V ⟶ W ⋙ P') :
-    ((mateEquiv (a.ofNatIsoRight e) b).symm d).natTrans =
-      ((mateEquiv a b).symm (Functor.whiskerRight e.hom V ≫ d)).natTrans := by
+    ((mateEquiv (a.ofNatIsoRight e) b).symm d) =
+      ((mateEquiv a b).symm (Functor.whiskerRight e.hom V ≫ d)) := by
   ext M
   apply (b.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
@@ -293,7 +293,6 @@ private abbrev HS (X : Scheme.{u}) (σ : ∀ n, B l E X (n + 1) ⟶ B l E X n)
     {m n : ℕ} (h : n ≤ m) :=
   transitionValue (ProEt.topology X) (B l E X) σ h
 
-set_option maxHeartbeats 1200000 in
 -- Each section comparison normalizes the two continuous module-sheaf carrier presentations.
 private theorem canonicalPushHorizontal
     (R' : ℕ → CommRingCat.{u + 1}) (φ : ∀ n, R' (n + 1) ⟶ R' n)
@@ -311,7 +310,12 @@ private theorem canonicalPushHorizontal
     (transitionValue (ProEt.topology T) (VaryingRing.coefficients R' T)
       (VaryingRing.coefficientTransition R' φ T) h ((VaryingRing.push R' φ j).obj M) V x)
   have hm := (VaryingRing.moduleEvalP_existsUnique R' φ j m).choose_spec.1 M V.unop x
-  rw [hn, hm, transitionValue_eq, transitionValue_eq]
+  -- Apply the section equalities directly to avoid rewrite matching through carrier conversions.
+  refine hn.trans ?_
+  refine Eq.trans ?_ (congrArg
+    (transitionValue (ProEt.topology U) (VaryingRing.coefficients R' U)
+      (VaryingRing.coefficientTransition R' φ U) h M (chart j V)) hm.symm)
+  simp only [transitionValue_eq]
   change M.val.map
     (((VaryingRing.baseChange j).map (Prod.mkHom (homOfLE h) (𝟙 V.unop))).op) x =
     M.val.map
@@ -352,7 +356,7 @@ private structure OpenSiteModel (b : Base l E) {U T : Scheme.{u}} (j : U ⟶ T)
       (proEtaleConstantRingPushforward (R l E n) j).map ((evalG n).hom.app M) =
         (proEtaleConstantRingAdjunction (R l E n) j).unit.app ((EE l E T σT n).obj M)
   openMate : ∀ n, IsIso
-    ((mateEquiv openAdj (finiteOpenAdjunction l E b j n)).symm (evalG n).hom).natTrans
+    ((mateEquiv openAdj (finiteOpenAdjunction l E b j n)).symm (evalG n).hom)
   openUnit : IsIso openAdj.unit
   support : ∀ (A : SemilinearSections.Closed.{u + 1, u, u + 1}
       (coefficientSequenceTopology (ProEt.topology T))
@@ -375,7 +379,7 @@ private theorem openMate_isIso (b : Base l E)
     (hp : ∀ n : ℕ, Functor.isoWhiskerRight p (ev l E U n) ≪≫
       g.ordinaryPullEvaluation n = c.evalG n) (n : ℕ) :
     IsIso ((mateEquiv (c.openAdj.ofNatIsoRight p)
-      (finiteOpenAdjunction l E b j n)).symm (g.ordinaryPullEvaluation n).hom).natTrans := by
+      (finiteOpenAdjunction l E b j n)).symm (g.ordinaryPullEvaluation n).hom) := by
   rw [inverseMate_rightIso]
   have he : Functor.whiskerRight p.hom (ev l E U n) ≫
       (g.ordinaryPullEvaluation n).hom = (c.evalG n).hom := congrArg Iso.hom (hp n)

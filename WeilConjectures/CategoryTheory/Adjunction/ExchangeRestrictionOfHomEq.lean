@@ -45,12 +45,12 @@ theorem Adjunction.map_mateEquiv_app_comp_of_hom_eq {s : cL ⋙ Δ ⟶ ι ⋙ dL
     {s' : cL' ⋙ Δ' ⟶ ι' ⋙ dL'} (hs' : σ'.hom = s')
     (hσ : ∀ M : CC, TX.map (s.app M) ≫ τd.hom.app (ι.obj M) ≫ dL'.map (τι.hom.app M) =
       τΔ.hom.app (cL.obj M) ≫ Δ'.map (τc.hom.app M) ≫ s'.app (TC.obj M)) (P : C₂) :
-    TF.map ((mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P) ≫
-        (mateEquiv g g' (TwoSquare.mk _ _ _ _ τd.inv)).natTrans.app (Δ.obj P) ≫
+    TF.map ((mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).app P) ≫
+        (mateEquiv g g' (TwoSquare.mk _ _ _ _ τd.inv)).app (Δ.obj P) ≫
           dR'.map (τΔ.hom.app P) =
       τι.hom.app (cR.obj P) ≫
-        ι'.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ τc.inv)).natTrans.app P) ≫
-          (mateEquiv a' g' (TwoSquare.mk _ _ _ _ σ'.inv)).natTrans.app (T₂.obj P) := by
+        ι'.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ τc.inv)).app P) ≫
+          (mateEquiv a' g' (TwoSquare.mk _ _ _ _ σ'.inv)).app (T₂.obj P) := by
   subst hs hs'
   exact Adjunction.map_mateEquiv_app_comp a g ι Δ σ a' g' ι' Δ' σ' T₂ TC TF TX τc τd τι τΔ hσ P
 

@@ -70,7 +70,6 @@ private lemma fan_projection_isIso {D : Type*} [Category* D] [HasZeroMorphisms D
   exact (Iso.mk (s.proj k) v hp hv).isIso_hom
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
 -- The dependent product projections need extra elaboration steps.
 /-- Internal Hom from a complex concentrated in one degree preserves quasi-isomorphisms
 if internal Hom from its sole possibly nonzero term preserves short exact sequences.
@@ -267,7 +266,6 @@ private noncomputable def fanSplitting
       _ = (𝟙 _) ≫ p₂ i := by rw [(σ i).id, Category.comp_id, Category.id_comp]
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
 -- The product projections are elaborated through their recorded universal properties.
 private lemma homComplex_degreewise_split {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C}

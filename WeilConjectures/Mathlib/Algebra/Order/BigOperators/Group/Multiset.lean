@@ -16,8 +16,8 @@ public import Mathlib.Algebra.Order.Sub.Unbundled.Basic
 - `Multiset.sum_le_sum_filter_add_of_le`: a sub-multiset `T ≤ M` with one element more than the
   number of elements of `M` above `γ` has sum at most the sum of those elements plus `γ`. This
   is the bound on the weights of the constituents of an exterior power used in
-  `sk-p-real-purity`: the largest sum of `N + 1` entries of a list with exactly `N` entries
-  above `γ` takes those `N` entries and one entry at most `γ`.
+  `theorem-purity-real-sheaves-curves--1`: the largest sum of `N + 1` entries of a list with exactly
+  `N` entries above `γ` takes those `N` entries and one entry at most `γ`.
 - `Multiset.eq_of_le_of_sum_eq`: if all elements of `s` are at most `γ` and their sum is
   `card s • γ`, all of them equal `γ`.
 -/

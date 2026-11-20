@@ -24,7 +24,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `lem-kun-geometric-reduced-perfect`: let `X` be a reduced scheme locally of
+/-- Blueprint `lemma-kunneth-finite-direct-image--1`: let `X` be a reduced scheme locally of
 finite type over a perfect field `k`. Then for every field extension `L / k` the base change
 `X_L` is reduced, and `X ⟶ Spec k` is flat, locally of finite presentation and geometrically
 reduced.

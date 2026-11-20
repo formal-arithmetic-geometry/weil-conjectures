@@ -16,6 +16,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.AlgebraicGeometry.StalkTorDimensionLocallyUniform
 import WeilConjectures.AlgebraicGeometry.StrictlyPerfectRelativeTensorStalkBound
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Local relative Tor bounds for perfect complexes
 

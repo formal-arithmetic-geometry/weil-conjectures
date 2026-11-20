@@ -1776,7 +1776,7 @@ Proof:
    The representative formula sends this difference to the same difference of pulled-back
    sections. Thus the degree-one map sends da to d(e-sharp a). The universal property
    lem-weil-pbc-quasi-coherent-symmetric-algebra-core identifies the induced normal map
-   with the actual differential under pur9-dg-def-tangent, not merely with some isomorphism.
+   with the actual differential under prose-09-15, not merely with some isomorphism.
 6. No step selects a point of U or a coordinate. For empty U all comparisons are unique
    over the empty base; for d=0 the degree-one modules have rank zero, leaving the identity
    on scalars. The constructions and the augmentation identities apply in both cases. -/

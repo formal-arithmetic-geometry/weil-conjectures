@@ -24,9 +24,9 @@ whose special fibre is the special fibre `𝒳''_s` of the slice (`NearbyCyclesM
 
 This file proves the **slice compatibility of nearby duality**
 (`NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase`, blueprint
-`det-tf-nearby-duality-slice` (2) with `det-tf-invariants-duality`): if nearby duality holds for
-the generic slice model and the twist equation holds, then the pullback of `δ_{M,L}` to `𝒳''_s`
-is an isomorphism. This is the
+`lemma-nearby-duality-slice--1` (2) with `lemma-duality-invariants-pro-p--1`): if nearby duality
+holds for the generic slice model and the twist equation holds, then the pullback of `δ_{M,L}` to
+`𝒳''_s` is an isomorphism. This is the
 `hslice` hypothesis of the finite-support step
 `NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase`.
 
@@ -127,9 +127,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar 
   [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom] [IsSeparated X₁.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
 
-/-- **Nearby duality and generic slices** (blueprint `det-tf-nearby-duality-slice` (2), with
-`det-tf-invariants-duality`): let `M` be a trait model over the generic base, `b : 𝒳 ⟶ 𝔸¹_S` a
-coordinate of its total space, and `M''` the generic slice model of `b`
+/-- **Nearby duality and generic slices** (blueprint `lemma-nearby-duality-slice--1` (2), with
+`lemma-duality-invariants-pro-p--1`): let `M` be a trait model over the generic base, `b : 𝒳 ⟶ 𝔸¹_S`
+a coordinate of its total space, and `M''` the generic slice model of `b`
 (`NearbyCyclesModel.genericSliceModel`, along `σ : Spec K⟦t⟧ ⟶ 𝔸¹_S`, `K = k'(x)^alg`), a trait
 model over the generic base `(Frac K⟦t⟧, X₂)`. If the duality maps `δ_{M'',L'}` of the slice
 model (with the dualizing maps of a family `D_K` over the trait `Spec K⟦t⟧`) are isomorphisms for
@@ -142,9 +142,9 @@ inertia action on nearby cycles (SGA 4½, [Th. finitude], §3), the pullback of 
 the `P`-invariants of `Ψ_{M''}` of the pullback of the coefficients, `P` the pro-`p` kernel of the
 map of inertia groups of the strict localisation of `𝔸¹_S` at the generic point of its special
 fibre. The pullback of the dualizing complex of `X'` to `𝒳''_s` is the dualizing complex twisted
-by `ℚ̄_ℓ(1)[2]` (blueprint `det-pd-generic-dualizing-twist`), and the dualizing maps `θ` are
-compatible with slicing (blueprint `det-tf-nearby-duality-slice`; this is the hypothesis `H`), so
-that the pullback of `δ_{M,L}` is identified with the `P`-invariants of `δ_{M'',L'}(1)[2]`. The
+by `ℚ̄_ℓ(1)[2]` (blueprint `lemma-double-dual-geometric-generic-fibre`), and the dualizing maps `θ`
+are compatible with slicing (blueprint `lemma-nearby-duality-slice--1`; this is the hypothesis `H`),
+so that the pullback of `δ_{M,L}` is identified with the `P`-invariants of `δ_{M'',L'}(1)[2]`. The
 `P`-invariants are a direct summand cut out by an averaging idempotent (`P` is pro-`p` and
 `p ≠ ℓ`), and the restriction of an isomorphism to the two averaging summands is an isomorphism
 (`CategoryTheory.isIso_comp_comp_map_op_of_averaging`). The formal part is

@@ -11,7 +11,9 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Coherence of restriction and pullback for successive coefficient maps
 
-Source: Stacks Project, Tags 03EL and 06YY.
+## References
+
+* Stacks Project, Tags 03EL, 03DA and 06YY
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -87,19 +89,7 @@ variable {X Y : Scheme.{u}} (f : Y ⟶ X)
     (hc : eR.hom ≫ cY =
       (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map cX ≫ eT.hom)
 
-/-- Pullback commutes coherently with successive exact scalar restrictions.
-Source: Stacks Project, Tags 03EL, 03DA and 06YY
-(blueprint: lem-weil-pbc-restriction-pullback-scalar-composition).
-Proof: on ordinary modules, transpose both pullback/restriction paths through the
-geometric module adjunction. The restriction/direct-image comparisons are the
-identity on sections, as are the scalar restriction compositors. Thus both
-transposes are equal, including their scalar actions by the three coefficient
-squares. The ordinary adjunction bijection gives equality of the inverse-image
-paths. Apply exact localization to that equality. The factorization equations
-for mapDerivedCategoryCompIso and mapDerivedCategoryNatIso identify its two sides
-with the displayed composites of the published derived comparisons. Every complex
-represents a derived object, so localization gives the equation on arbitrary M.
-No flatness, completeness, nonempty-site or nonzero-ring hypothesis is used. -/
+/-- Pullback commutes coherently with successive exact scalar restrictions. -/
 theorem proEtaleRestrictionPullback_scalarComposition
     (M : reductionDerivedCategory X TX) :
     (proEtaleRingRestrictionDerivedPullback f RX TX RY TY cX cY eR eT hc).inv.app M ≫
@@ -164,11 +154,11 @@ theorem proEtaleRestrictionPullback_scalarComposition
         γ.app N ≫ ηY.inv.app (LT.obj N) := by
       apply mate_naturality at_ ar γ (β ≫ₕ α) ηX.inv ηY.inv (fun P ↦ ?_) N
       rw [hm, hmc]
-      simpa only [TwoSquare.vComp, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+      simpa only [TwoSquare.vComp, TwoSquare.mk, NatTrans.comp_app,
         Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
         Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc]
         using hd P
-    simpa only [TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    simpa only [TwoSquare.hComp, TwoSquare.mk, NatTrans.comp_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc]
       using hp
@@ -177,26 +167,26 @@ theorem proEtaleRestrictionPullback_scalarComposition
     (proEtaleRingRestrictScalars cX)
     (proEtaleRingRestrictScalars bY) (proEtaleRingRestrictScalars aY)
     (proEtaleRingRestrictScalars cY) LT LS LR
-    (asIso β.natTrans) (asIso α.natTrans) (asIso γ.natTrans)
+    (asIso β) (asIso α) (asIso γ)
     ηX.symm ηY.symm hq M
   have hα :
       (proEtaleRingRestrictionDerivedPullback f RX SX RY SY aX aY eR eS ha).inv =
-        (Functor.mapDerivedCategorySquareIso (asIso α.natTrans)).hom := by
-    change (Functor.mapDerivedCategorySquareIso (asIso α.natTrans).symm).inv = _
+        (Functor.mapDerivedCategorySquareIso (asIso α)).hom := by
+    change (Functor.mapDerivedCategorySquareIso (asIso α).symm).inv = _
     simpa only [Iso.symm_symm_eq] using
-      (Functor.square_symm_hom (asIso α.natTrans).symm).symm
+      (Functor.square_symm_hom (asIso α).symm).symm
   have hβ :
       (proEtaleRingRestrictionDerivedPullback f SX TX SY TY bX bY eS eT hb).inv =
-        (Functor.mapDerivedCategorySquareIso (asIso β.natTrans)).hom := by
-    change (Functor.mapDerivedCategorySquareIso (asIso β.natTrans).symm).inv = _
+        (Functor.mapDerivedCategorySquareIso (asIso β)).hom := by
+    change (Functor.mapDerivedCategorySquareIso (asIso β).symm).inv = _
     simpa only [Iso.symm_symm_eq] using
-      (Functor.square_symm_hom (asIso β.natTrans).symm).symm
+      (Functor.square_symm_hom (asIso β).symm).symm
   have hγ :
       (proEtaleRingRestrictionDerivedPullback f RX TX RY TY cX cY eR eT hc).inv =
-        (Functor.mapDerivedCategorySquareIso (asIso γ.natTrans)).hom := by
-    change (Functor.mapDerivedCategorySquareIso (asIso γ.natTrans).symm).inv = _
+        (Functor.mapDerivedCategorySquareIso (asIso γ)).hom := by
+    change (Functor.mapDerivedCategorySquareIso (asIso γ).symm).inv = _
     simpa only [Iso.symm_symm_eq] using
-      (Functor.square_symm_hom (asIso γ.natTrans).symm).symm
+      (Functor.square_symm_hom (asIso γ).symm).symm
   simpa only [hα, hβ, hγ, pbcDerivedRestrictComp, pbcDerivedRestrict,
     reductionDerivedRestrict, Functor.mapDerivedCategoryNatIso_symm,
     Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,

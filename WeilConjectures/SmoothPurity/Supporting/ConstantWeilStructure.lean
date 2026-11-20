@@ -314,7 +314,6 @@ private def identityRestrictionIso
 attribute [local irreducible] identityRestrictionIso regularExtensionPresheafIso
   PresheafOfModules.sheafificationAdjunction
 
-set_option maxHeartbeats 600000 in
 -- Elaborating the sheafification comparison traverses the coefficient transports.
 private def regularExtensionIso :
     SheafOfModules.changeOfRings.{v, c, r} α
@@ -402,7 +401,6 @@ end
 section ChainConstruction
 attribute [local irreducible] unrestrictedIntegralReductionExistence limit
 
-set_option maxHeartbeats 800000 in
 -- Explicit coefficient transports require a larger elaboration budget.
 private theorem reduction_map_tensor (Y : Scheme.{u}) (n : ℕ)
     {M N : integralTowerModules l E Y} (a : M ⟶ N) (U : Y.ProEtᵒᵖ)
@@ -1534,12 +1532,12 @@ variable (Y₀ : Over (Spec (.of D.k₀)))
 /-- Lift the actual integral theta to the full constructible subcategory.
 Source: blueprint order 1510, clause 3 (blueprint: def-weil-constant-weil-structure). -/
 def constantWeilConstructibleIntegralTheta :
-    (@constructibleIntegralPullback l _ E _ _ _ _ _ (D.geometricFrobenius Y₀).hom
+    (@constructibleIntegralPullback l _ E _ _ _ _ _ (D.geometricFrobenius Y₀).asIso.hom
       (fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x)
       (fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x)).obj
         (constantWeilIntegralObject l E D hl (D.geometricFiber Y₀).left) ≅
       constantWeilIntegralObject l E D hl (D.geometricFiber Y₀).left :=
-  ObjectProperty.isoMk _ (constantWeilIntegralTheta l E (D.geometricFrobenius Y₀).hom)
+  ObjectProperty.isoMk _ (constantWeilIntegralTheta l E (D.geometricFrobenius Y₀).asIso.hom)
 
 /-- Rational theta is exactly integral theta tensor one. The source identification is
 part of the recorded rational pullback's unchanged-integral-object normalization.
@@ -1549,7 +1547,7 @@ def constantWeilRationalTheta :
         (constantWeilRationalObject l E D hl (D.geometricFiber Y₀).left) ≅
       constantWeilRationalObject l E D hl (D.geometricFiber Y₀).left :=
   eqToIso ((@rationalDerivedPullback_existsUnique l _ E _ _ _ _ _
-    (D.geometricFrobenius Y₀).hom
+    (D.geometricFrobenius Y₀).asIso.hom
     (fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x)
     (fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x)).exists.choose_spec.2.1 _) ≪≫
       (sfRationalConstructibleLocalization l E (D.geometricFiber Y₀).left).mapIso

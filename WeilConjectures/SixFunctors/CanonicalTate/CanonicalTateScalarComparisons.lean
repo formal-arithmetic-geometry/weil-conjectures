@@ -25,7 +25,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantOpenS
 
 /-! # Canonical Tate comparisons: ScalarComparisons
 
-Source: current blueprint, def-pur-tate-datum, canonical root-line comparisons.
+Source: current blueprint, definition-weil-structure--1, canonical root-line comparisons.
 This module preserves the original unshifted comparison declarations.
 (blueprint: def-pur-canonical-tate-scalar-comparisons).
 -/
@@ -56,7 +56,7 @@ attribute [local irreducible] IntegralOnSlice.completion
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 /-- The completed scalar comparison on a line, fixed by ordinary scalar extension.
-Source: blueprint def-pur-tate-datum, canonical roots and tensor powers
+Source: blueprint definition-weil-structure--1, canonical roots and tensor powers
 (blueprint: def-pur-canonical-tate-scalar-comparisons).
 Proof: The scalar-completion map is invertible on the complete line. Its
 inverse identifies completed extension with the published ordinary derived
@@ -93,7 +93,7 @@ theorem integralScalarLine_existsUnique
     simpa [e, scalarCompletionIso] using he'
 
 /-- The specified completed scalar extension of a Tate line.
-Source: blueprint def-pur-tate-datum, canonical roots and tensor powers
+Source: blueprint definition-weil-structure--1, canonical roots and tensor powers
 (blueprint: def-pur-canonical-tate-scalar-comparisons). -/
 def integralScalarLine
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
@@ -105,7 +105,7 @@ def integralScalarLine
   ObjectProperty.isoMk _ (integralScalarLine_existsUnique l E L ι X r).exists.choose
 
 /-- The rational coefficient-line comparison is the localized completed scalar map.
-Source: blueprint def-pur-tate-datum, canonical roots and tensor powers
+Source: blueprint definition-weil-structure--1, canonical roots and tensor powers
 (blueprint: def-pur-canonical-tate-scalar-comparisons). -/
 def rationalScalarLine
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]

@@ -22,8 +22,8 @@ an isomorphism `F X ≅ X'` (`CategoryTheory.Functor.trace_eq_unitEndRingHom_tra
 
 For the derived extension of scalars `- ⊗ᴸ_A B` along a homomorphism of coefficient rings
 `ρ : A → B` this is the scalar-extension law `ρ (tr_A (v ∣ P)) = tr_B (v ⊗ᴸ B ∣ P ⊗ᴸ B)` of the
-categorical trace (blueprint `prop-trf-trace-formal-laws`, item (3)), used for blueprint
-`thm-trf-finite-coefficient-map`.
+categorical trace (blueprint `proposition-properties-trace`, item (3)), used for blueprint
+`theorem-grothendieck-lefschetz-trace-formula--7`.
 -/
 
 @[expose] public section
@@ -47,28 +47,37 @@ endomorphism rings of the units: for the derived extension of scalars along a ho
 coefficient rings `ρ : A → B`, this is `ρ` itself. -/
 noncomputable def unitEndRingHom [Preadditive C] [Preadditive D] [F.Additive] :
     End (𝟙_ C) →+* End (𝟙_ D) where
-  toFun t := ε F ≫ F.map t ≫ η F
+  toFun t := .of (ε F ≫ F.map t.asHom ≫ η F)
   map_one' := by
-    rw [End.one_def, End.one_def, F.map_id, id_comp, Monoidal.ε_η]
+    apply End.ext
+    rw [End.one_asHom, End.one_asHom, F.map_id, id_comp, Monoidal.ε_η]
   map_mul' s t := by
-    rw [End.mul_def, End.mul_def, F.map_comp, assoc, assoc, assoc, Monoidal.η_ε_assoc]
+    apply End.ext
+    rw [End.mul_asHom, End.mul_asHom, F.map_comp, assoc, assoc, assoc, Monoidal.η_ε_assoc]
   map_zero' := by
+    apply End.ext
+    change ε F ≫ F.map 0 ≫ η F = 0
     rw [F.map_zero, Limits.zero_comp, Limits.comp_zero]
   map_add' s t := by
+    apply End.ext
+    change ε F ≫ F.map (s.asHom + t.asHom) ≫ η F =
+      (ε F ≫ F.map s.asHom ≫ η F) + (ε F ≫ F.map t.asHom ≫ η F)
     rw [F.map_add, Preadditive.add_comp, Preadditive.comp_add]
 
 lemma unitEndRingHom_apply [Preadditive C] [Preadditive D] [F.Additive] (t : End (𝟙_ C)) :
-    F.unitEndRingHom t = ε F ≫ F.map t ≫ η F :=
+    F.unitEndRingHom t = .of (ε F ≫ F.map t.asHom ≫ η F) :=
   rfl
 
-/-- **Scalar-extension law of the trace** (blueprint `prop-trf-trace-formal-laws`, item (3)):
+/-- **Scalar-extension law of the trace** (blueprint `proposition-properties-trace`, item (3)):
 if an isomorphism `e : F X ≅ X'` intertwines `F f` with an endomorphism `f'` of `X'`, then
 `tr (f') = ρ_F (tr f)`. -/
 theorem trace_eq_unitEndRingHom_trace [Preadditive C] [Preadditive D] [F.Additive] {X : C}
     {X' : D} [HasRightDual X] [HasRightDual (F.obj X)] [HasRightDual X'] (f : X ⟶ X)
     (f' : X' ⟶ X') (e : F.obj X ≅ X') (h : F.map f ≫ e.hom = e.hom ≫ f') :
-    trace f' = F.unitEndRingHom (trace f) := by
-  rw [unitEndRingHom_apply, ← trace_map, trace_eq_of_iso e _ _ h]
+    trace f' = (F.unitEndRingHom (.of (trace f))).asHom := by
+  rw [unitEndRingHom_apply]
+  change trace f' = ε F ≫ F.map (trace f) ≫ η F
+  rw [← trace_map, trace_eq_of_iso e _ _ h]
 
 end Functor
 

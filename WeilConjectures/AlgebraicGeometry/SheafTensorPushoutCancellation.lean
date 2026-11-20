@@ -11,6 +11,7 @@ public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import WeilConjectures.AlgebraicGeometry.SheafTensorPushoutComparisonIsIso
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Cancellation of tensor extension over a pushout of ring sheaves
 

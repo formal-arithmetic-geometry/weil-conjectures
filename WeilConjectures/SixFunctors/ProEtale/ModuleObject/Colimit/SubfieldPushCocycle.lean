@@ -30,8 +30,11 @@ Let `ℓ` be a prime and `X` a scheme. This file
   between finite subextensions
   (`ProEtale.CondensedRing.boundedConstructibleLowerStarToPadicAlgClIso_hom_app_eq`). This is the
   hypothesis `hcocycle` of `CategoryTheory.CategoryCocone.isIso_mateEquiv_of_isFilteredTwoColimit`,
-  and it follows, on the underlying complexes, from the compatibility of (Push) with the
-  composition of coefficient changes (`ProEtale.CondensedRing.derivedPushHom_comp_app`).
+  and it follows, on the underlying complexes, from the composition of the isomorphisms
+  `Rf_* ⋙ D(Res) ≅ D(Res) ⋙ Rf_*` along `E ⊆ F ⊆ ℚ̄_ℓ`
+  (`ProEtale.CondensedRing.derivedComapLowerStarIso_hom_app_comp`), of which the (Push)
+  comparisons are the transposes along `L(Ext) ⊣ D(Res)`
+  (`CategoryTheory.Adjunction.pushHomOfComapIso_app_eq_comp`).
 -/
 
 @[expose] public section
@@ -134,7 +137,9 @@ lemma derivedExtendScalarsCompIso_hom_app (X : Scheme.{u})
 
 /-- **(Push) along `E ⊆ F ⊆ ℚ̄_ℓ`**, on the unbounded derived categories: the comparison for
 `E ⊆ ℚ̄_ℓ` is the composite of the comparisons for `E ⊆ F` and `F ⊆ ℚ̄_ℓ`, up to the transitivity
-isomorphisms `ProEtale.derivedExtendScalarsCompIso`. -/
+isomorphisms `ProEtale.derivedExtendScalarsCompIso`. The (Push) comparisons are the transposes of
+the isomorphisms `Rf_* ⋙ D(Res) ≅ D(Res) ⋙ Rf_*` along `L(Ext) ⊣ D(Res)`, and these compose
+(`derivedComapLowerStarIso_hom_app_comp`). -/
 lemma derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E))) :
@@ -147,7 +152,10 @@ lemma derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app {X Y : Scheme.{u}} (f 
           ((derivedExtendScalarsSubfield X ℓ h).obj K) ≫
         R((f)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map
           ((derivedExtendScalarsCompIso X ℓ h).hom.app K) := by
-  have H := derivedPushHom_comp_app (Profinite.padicSubfieldRingObjMap ℓ h)
+  -- (Push) is the transpose, along `L(Ext) ⊣ D(Res)`, of the isomorphism
+  -- `Rf_* ⋙ D(Res) ≅ D(Res) ⋙ Rf_*`; these isomorphisms compose along `E ⊆ F ⊆ ℚ̄_ℓ`, and
+  -- transposes of composites are composites.
+  have H := derivedPushHom_app_eq_comp_of_comp_eq (Profinite.padicSubfieldRingObjMap ℓ h)
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F)
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f
     (Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl ℓ h) K

@@ -64,12 +64,14 @@ public import WeilConjectures.AlgebraicGeometry.SectionModuleOperationsData
 
 /-! # Existing section-module operations and pure-tensor data
 
-Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03D6, 03D7,
-03DI, 03DJ, 03EK and 0GMW (blueprint: def-pd-section-module-operations-data).
-
 These transparent aliases expose the existing constructions in the two imported
 comparison modules. They introduce no replacement functors, maps, or tensors.
 The comparison theorems about these data remain proof dependencies of consumers.
+
+## References
+
+* Stacks Project, Sites, Tag 00YV
+* Modules on Sites, Tags 03D6, 03D7, 03DI, 03DJ, 03EK and 0GMW
 -/
 
 @[expose] public noncomputable section
@@ -98,22 +100,19 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 
 
-/-- The existing sectionwise extension by zero.
-Source: Stacks 03DI (blueprint: def-pd-section-module-operations-data). -/
+/-- The existing sectionwise extension by zero. -/
 abbrev extension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     modules Λ U ⥤ modules Λ X :=
   InternalModuleOperations.extension Λ j
 
-/-- The existing extension-by-zero adjunction.
-Source: Stacks 03DI (blueprint: def-pd-section-module-operations-data). -/
+/-- The existing extension-by-zero adjunction. -/
 abbrev openAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     extension Λ j ⊣ pullback Λ j :=
   InternalModuleOperations.openAdjunction Λ j
 
 
 
-/-- The existing extension comparison normalized by the ordinary open adjunction mate.
-Source: Stacks 03DI and 03DJ (blueprint: def-pd-section-module-operations-data). -/
+/-- The existing extension comparison normalized by the ordinary open adjunction mate. -/
 abbrev ordinaryExtensionComparison {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   InternalModuleOperations.openComparison Λ j
 

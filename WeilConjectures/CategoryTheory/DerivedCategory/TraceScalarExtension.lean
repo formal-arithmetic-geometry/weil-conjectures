@@ -6,15 +6,16 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.RingTheory.TensorProduct.Finite
 public import Mathlib.RingTheory.TensorProduct.Free
 public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 
 /-!
 # Scalar extension of the trace on perfect complexes
 
-This file proves item (3) (scalar extension) of blueprint `prop-trf-trace-formal-laws`
-(subsection `sk-p-trace`) for the categorical trace in the derived category, with the Koszul
-braiding `DerivedCategory.braidedCategory'` of the derived tensor product: for a ring
+This file proves item (3) (scalar extension) of blueprint `proposition-properties-trace`
+(subsection `proposition-properties-trace`) for the categorical trace in the derived category, with
+the Koszul braiding `DerivedCategory.braidedCategory'` of the derived tensor product: for a ring
 homomorphism `φ : R →+* B`, `φ (tr_R (v ∣ P)) = tr_B (v ⊗ B ∣ P ⊗^L B)`.
 
 ## Main results
@@ -22,7 +23,7 @@ homomorphism `φ : R →+* B`, `φ (tr_R (v ∣ P)) = tr_B (v ⊗ B ∣ P ⊗^L 
 - `ModuleCat.trace_extendScalars_map`: the trace of the base change `B ⊗[R] g` of an
   endomorphism `g` of a finite free `R`-module is `φ (Tr g)`.
 - `DerivedCategory.exists_trace_eq_algebraMap_and_trace_extendScalars_eq_algebraMap`, item (3) of
-  `prop-trf-trace-formal-laws`.
+  `proposition-properties-trace`.
 
 ## Implementation notes
 
@@ -73,7 +74,7 @@ variable {R B : Type u} [CommRing R] [CommRing B] (φ : R →+* B)
   [HasDerivedCategory.{u} (ModuleCat.{u} B)]
   [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} B)]
 
-/-- Blueprint `prop-trf-trace-formal-laws`, item (3) (scalar extension): let `φ : R →+* B` be a
+/-- Blueprint `proposition-properties-trace`, item (3) (scalar extension): let `φ : R →+* B` be a
 homomorphism of commutative rings, `P` a bounded complex of finitely generated free `R`-modules
 and `v` a chain endomorphism of `P`. Since `P` is degreewise free, `P ⊗^L_R B` is represented by
 the termwise scalar extension `P_B = B ⊗[R] P`, with endomorphism `v_B = B ⊗[R] v`. Then the
@@ -93,10 +94,10 @@ theorem exists_trace_eq_algebraMap_and_trace_extendScalars_eq_algebraMap
     ∃ a : R,
       (letI := braidedCategory' (ModuleCat.{u} R)
       MonoidalCategory.trace w =
-        algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) a) ∧
+        (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) a).asHom) ∧
       (letI := braidedCategory' (ModuleCat.{u} B)
       MonoidalCategory.trace w' =
-        algebraMap B (End (𝟙_ (DerivedCategory (ModuleCat.{u} B)))) (φ a)) := by
+        (algebraMap B (End (𝟙_ (DerivedCategory (ModuleCat.{u} B)))) (φ a)).asHom) := by
   refine ⟨_, trace_eq_algebraMap_sum_negOnePow_linearMapTrace P v s hs hfree hfin K w e hw, ?_⟩
   rw [trace_eq_algebraMap_sum_negOnePow_linearMapTrace _ _ s
     (fun i hi ↦ (ModuleCat.extendScalars φ).map_isZero (hs i hi))
@@ -106,6 +107,7 @@ theorem exists_trace_eq_algebraMap_and_trace_extendScalars_eq_algebraMap
     (fun i ↦
       have := hfin i
       ModuleCat.finite_extendScalars_obj φ (P.X i)) K' w' e' hw', map_sum φ]
+  apply congrArg End.asHom
   refine congrArg _ (Finset.sum_congr rfl fun i _ ↦ ?_)
   rw [map_zsmul]
   exact congrArg _ (ModuleCat.trace_extendScalars_map φ (P.X i) (v.f i))

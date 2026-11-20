@@ -16,7 +16,7 @@ when the cocone satisfies the object, Hom-surjectivity, or Hom-injectivity condi
 `CategoryCocone.IsFilteredTwoColimit`; hence the cocone is a filtered 2-colimit if and only if the
 comparison is an equivalence.
 
-(blueprint: det-def-sfb-filtered-two-colimit-characterization).
+(blueprint: proposition-dctf-x-qbar-2-colimit--1).
 -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ namespace CategoryTheory.FilteredTwoColimit
 comparison functor, and their conjunction characterizes its being an equivalence.
 
 Stacks
-04AX and 02C3 (blueprint: det-def-sfb-filtered-two-colimit-characterization).
+04AX and 02C3 (blueprint: proposition-dctf-x-qbar-2-colimit--1).
 
 Proof plan:
 1. The model's objects are pairs (i,x), whose comparison images are Phi_i(x). Thus essential

@@ -10,7 +10,7 @@ import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComp
 import all WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoefficientDatumSupplement
 /-! # Tensor and K-flat models for the scalar identity unit
 
-Source: the identity normalization in thm-coef-rational-verdier.
+Source: the identity normalization in theorem-verdier-biduality--3.
 (blueprint: lem-coef-verdier-scalar-unit-model)
 -/
 
@@ -163,7 +163,7 @@ private theorem scalar_identity_unit_derived {X : Scheme.{u}}
   exact derivedUnit_model R φ h P hp
 
 /-- Tensor and K-flat formulas for the constructed scalar identity units.
-Source: Stacks 03DA and 06YY; the identity clause of thm-coef-rational-verdier.
+Source: Stacks 03DA and 06YY; the identity clause of theorem-verdier-biduality--3.
 (blueprint: lem-coef-verdier-scalar-unit-model).
 
 Proof: the inverse ordinary adjoint mate multiplies pure tensors, since the

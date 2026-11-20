@@ -20,7 +20,7 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-! # Underived supported sections as Hom
 
 Source: Milne, Lectures on Etale Cohomology, Section 9, proof of Theorem 9.4,
-p. 67; the constant-coefficient argument of lem-pur-supported-hom, steps 1--4
+p. 67; the constant-coefficient argument of lemma-sections-support-closed-subscheme--1, steps 1--4
 (blueprint: lem-pur-supported-sections-hom).
 -/
 

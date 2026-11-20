@@ -118,7 +118,6 @@ private theorem sectionsComparison_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
   exact ((SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _).map
     ((InjectiveResolution.desc (𝟙 F) C'.I C.I).f n)).naturality _ |>.symm
 
-set_option maxHeartbeats 400000 in
 -- Resolution transports cross module-valued and additive-group-valued homology.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source: Stacks Project, Tags 01F8 and 01FB

@@ -60,15 +60,15 @@ theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X)
         b * @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) y))
     (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)
       (y : T.I.val.obj (op U)),
-      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
+      (μ g).asHom.val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
     ∃ v : kernel (tensorGradedUnit j (L.tensorPow d)) ⟶
         kernel (tensorGradedUnit j (L.tensorPow (d + a))),
-      T.k d ≫ μ ((T.c a).app ⊤ s) = v ≫ T.k (d + a)  := by
+      T.k d ≫ (μ ((T.c a).app ⊤ s)).asHom = v ≫ T.k (d + a)  := by
   classical
   let η := tensorGradedUnit j (L.tensorPow a)
   let g := (T.c a).app ⊤ s
   let w := μ g
-  let v := T.k d ≫ w ≫ (T.degree (d + a)).τ₁
+  let v := T.k d ≫ (w).asHom ≫ (T.degree (d + a)).τ₁
   refine ⟨v, ?_⟩
   have hi : Mono T.i := T.shortExact.mono_f
   have hc : Mono (T.c (a + d)) := mono_of_mono_fac (T.c_projection (a + d))
@@ -93,7 +93,7 @@ theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X)
           (homOfLE le_top).op s)
       (y : Γ(kernel (tensorGradedUnit j (L.tensorPow d)), V)) :
       ∃ z : Γ(kernel (tensorGradedUnit j (L.tensorPow (d + a))), V),
-        w.val.app (op V) ((T.k d).app V y) = (T.k (d + a)).app V z := by
+        w.asHom.val.app (op V) ((T.k d).app V y) = (T.k (d + a)).app V z := by
     rw [Nat.add_comm d a]
     let z := (L.tensorPowAddIso a d).inv.app V
       (tmulSection t ((kernel.ι (tensorGradedUnit j (L.tensorPow d))).app V y))
@@ -107,8 +107,9 @@ theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X)
     have hki := congrArg (fun f ↦ f.app V y) (T.k_inclusion d)
     change T.i.val.app (op V) ((T.k d).app V y) =
       (T.b d).app V ((kernel.ι (tensorGradedUnit j (L.tensorPow d))).app V y) at hki
-    have ha : T.i.val.app (op V) (w.val.app (op V) ((T.k d).app V y)) = (T.b (a + d)).app V z := by
-      change T.i.val.app (op V) ((μ g).val.app (op V) ((T.k d).app V y)) = _
+    have ha : T.i.val.app (op V) (w.asHom.val.app (op V) ((T.k d).app V y)) =
+        (T.b (a + d)).app V z := by
+      change T.i.val.app (op V) ((μ g).asHom.val.app (op V) ((T.k d).app V y)) = _
       rw [hglobal, ← hp]
       have hh := hlocal V ((T.b a).app V t) ((T.k d).app V y)
       change T.i.val.app (op V) (σ V (T.p.right.hom.app (op V) ((T.b a).app V t))
@@ -122,7 +123,7 @@ theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X)
       have hzero : T.p.right.hom.app (op V) ((T.b (a + d)).app V z) = 0 := by
         rw [← ha]
         exact congrArg (fun f ↦ f.val.app (op V)
-          (w.val.app (op V) ((T.k d).app V y))) T.hw
+          (w.asHom.val.app (op V) ((T.k d).app V y))) T.hw
       have hb := congrArg (fun f ↦ f.app V z) (T.b_quotient (a + d))
       change T.p.right.hom.app (op V) ((T.b (a + d)).app V z) =
         (T.c (a + d)).app V
@@ -145,7 +146,7 @@ theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X)
     have hinj := (ModuleCat.mono_iff_injective
       ((SheafOfModules.evaluation X.ringCatSheaf (op V)).map T.i)).mp
       (inferInstance : Mono ((SheafOfModules.evaluation X.ringCatSheaf (op V)).map T.i))
-    have hres : w.val.app (op V) ((T.k d).app V y) = (T.k (a + d)).app V z' :=
+    have hres : w.asHom.val.app (op V) ((T.k d).app V y) = (T.k (a + d)).app V z' :=
       hinj (ha.trans hki'.symm)
     exact ⟨z', hres⟩
   ext U y
@@ -175,13 +176,14 @@ theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X)
     have hproj := congrArg (fun f ↦ f.app (V x) z) (T.k_projection (d + a))
     change (T.degree (d + a)).τ₁.val.app (op (V x)) ((T.k (d + a)).app (V x) z) = z at hproj
     change T.I.val.map (homOfLE (hVU x)).op
-        ((T.k d ≫ w).val.app (op U) y) =
+        ((T.k d ≫ (w).asHom).val.app (op U) y) =
       T.I.val.map (homOfLE (hVU x)).op
         ((v ≫ T.k (d + a)).val.app (op U) y)
     rw [← PresheafOfModules.naturality_apply, ← PresheafOfModules.naturality_apply]
-    change w.val.app (op (V x)) ((T.k d).app (V x) y') =
+    change w.asHom.val.app (op (V x)) ((T.k d).app (V x) y') =
       (T.k (d + a)).app (V x)
-        ((T.degree (d + a)).τ₁.val.app (op (V x)) (w.val.app (op (V x)) ((T.k d).app (V x) y')))
+        ((T.degree (d + a)).τ₁.val.app (op (V x))
+          (w.asHom.val.app (op (V x)) ((T.k d).app (V x) y')))
     rw [hz, hproj]
 
 end

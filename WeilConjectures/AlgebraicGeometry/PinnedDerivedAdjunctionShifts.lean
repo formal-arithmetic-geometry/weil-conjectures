@@ -100,7 +100,7 @@ private theorem normalizedCounitShift
     erw [CategoryTheory.Category.comp_id, CategoryTheory.Category.comp_id] at hh
     exact hh
   let δ := ((CategoryTheory.mateEquiv adj dadj).symm
-    (TwoSquare.mk _ _ _ _ β)).natTrans
+    (TwoSquare.mk _ _ _ _ β))
   have hδ : ε = δ := by
     ext M
     apply (dadj.homEquiv _ _).injective
@@ -108,7 +108,7 @@ private theorem normalizedCounitShift
     exact CategoryTheory.unit_mateEquiv_symm adj dadj (TwoSquare.mk _ _ _ _ β) M
   rw [hδ]
   dsimp only [δ, CategoryTheory.mateEquiv, Equiv.symm, Equiv.coe_fn_mk,
-    TwoSquare.mk, TwoSquare.natTrans]
+    TwoSquare.mk]
   infer_instance
 
 -- Shift equivalences preserve the Kan universal property, which detects each comparison.

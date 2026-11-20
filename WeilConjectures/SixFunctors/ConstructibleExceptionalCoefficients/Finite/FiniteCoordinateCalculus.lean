@@ -243,7 +243,7 @@ private theorem transported_open_unit
   dsimp only [Functor.id_map, Functor.comp_map, Functor.comp_obj, Functor.id_obj] at he
   simp only [← e.functor.map_comp, ← U.map_comp]
   rw [← hf, U.map_comp, ← Category.assoc, ← he, Category.assoc]
-  rw [e.functor.map_comp, ← Category.assoc, e.counitIso_functor_comp]
+  rw [e.functor.map_comp, ← Category.assoc, e.counitInv_functor_comp]
   erw [Category.id_comp]
 
 private theorem open_unit_coordinates

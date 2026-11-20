@@ -1816,9 +1816,6 @@ lemma pieceChi_push' {j₀ : J} {A₀ : CommRingCat.{u}} {f₀ : D.obj j₀ ⟶ 
     rfl
 
 
-set_option maxHeartbeats 1600000 in
--- The proof descends many pieces of data stage by stage through a long chain of filtered
--- colimit arguments, which exceeds the default heartbeat limit.
 /-- Descend all the piece data to a single stage. -/
 lemma exists_pieceAt (hs : IsColimit (Cocone.mk S s)) {j₀ : J}
     {A₀ : CommRingCat.{u}} {f₀ : D.obj j₀ ⟶ A₀} {v₀ : A₀ ⟶ A}

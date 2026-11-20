@@ -159,7 +159,7 @@ private theorem comparisonOfModel
     rw [hmate, ← Category.assoc]
     rw [show SU.reduction.map ((openAdjunction l E j o).unit.app K) ≫
         ((mateEquiv (openAdjunction l E j o) (systemAdjunction l E j o)
-          (TwoSquare.mk _ _ _ _ c.r.inv)).natTrans.app ((shriek l E j o).obj K)) =
+          (TwoSquare.mk _ _ _ _ c.r.inv)).app ((shriek l E j o).obj K)) =
         (systemAdjunction l E j o).unit.app (SU.reduction.obj K) ≫
           (P l E j o).map (c.r.inv.app K) from
       unit_mateEquiv (openAdjunction l E j o) (systemAdjunction l E j o)
@@ -171,7 +171,7 @@ private theorem comparisonOfModel
     rw [hmate]
     rw [show (J l E j o).map
         ((mateEquiv (openAdjunction l E j o) (systemAdjunction l E j o)
-          (TwoSquare.mk _ _ _ _ c.r.inv)).natTrans.app H) ≫
+          (TwoSquare.mk _ _ _ _ c.r.inv)).app H) ≫
         (systemAdjunction l E j o).counit.app (SX.reduction.obj H) =
         c.r.inv.app ((star l E j o).obj H) ≫
           SX.reduction.map ((openAdjunction l E j o).counit.app H) from

@@ -50,7 +50,7 @@ private theorem condensedAmbientExchange_eq
       (mateEquiv (ambientAdjunction Λ f) (ambientAdjunction Λ f')
         (TwoSquare.mk (moduleObjectDerivedPullback Λ g) (moduleObjectDerivedPullback Λ f)
           (moduleObjectDerivedPullback Λ f') (moduleObjectDerivedPullback Λ g')
-          (condensedAmbientPullbackComparison Λ sq).hom)).natTrans := by
+          (condensedAmbientPullbackComparison Λ sq).hom)) := by
   delta condensedAmbientExchange ambientAdjunction
   rfl
 
@@ -64,7 +64,7 @@ private theorem mate_unit_maps
     (e₂ : L'.obj B' ⟶ Q) (h : θ.app A ≫ H.map e ≫ d = L'.map j ≫ e₂) :
     G.map (a.unit.app A ≫ R.map e) ≫ (mateEquiv a b θ).app B ≫ R'.map d =
       j ≫ b.unit.app B' ≫ R'.map e₂ := by
-  have hn := (mateEquiv a b θ).natTrans.naturality e
+  have hn := (mateEquiv a b θ).naturality e
   simp only [Functor.comp_map] at hn
   calc
     _ = G.map (a.unit.app A) ≫ (mateEquiv a b θ).app (L.obj A) ≫
@@ -80,8 +80,7 @@ private theorem mate_unit_maps
         congrArg (fun t ↦ t ≫ R'.map e₂) (b.unit.naturality j).symm
 
 /-- Ambient twisted-unit mate assembly. Apply `unit_mateEquiv`, then use
-naturality of the exchange and the two adjunction units.
-(blueprint: lem-sfb-ambient-twisted-unit-mate) -/
+naturality of the exchange and the two adjunction units. -/
 theorem ambient_twisted_unit_mate
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

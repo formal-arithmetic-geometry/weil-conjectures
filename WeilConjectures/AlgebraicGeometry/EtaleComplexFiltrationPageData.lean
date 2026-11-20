@@ -72,7 +72,6 @@ private theorem cokernel_map_apply
   exact ConcreteCategory.congr_hom (cokernel.π_desc f (b ≫ cokernel.π g) _) x
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 500000 in
 -- The dependent first-page and graded-class witnesses are elaborated together.
 set_option maxRecDepth 1000000 in
 set_option linter.unusedVariables false in

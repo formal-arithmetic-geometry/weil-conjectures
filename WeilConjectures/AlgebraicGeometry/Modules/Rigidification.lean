@@ -25,6 +25,10 @@ the theorem of the cube (Stacks, Tag 0BF4).
   checked on an open cover.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_iso_of_tensorObj_dual_iso_unit`: `M ≅ N` as soon as
   `M ⊗ Nᵛ` is trivial, for `N` invertible.
+
+## References
+
+* [Stacks: Tag 0BF4](https://stacks.math.columbia.edu/tag/0BF4)
 -/
 
 @[expose] public section
@@ -52,11 +56,7 @@ lemma IsFreeGenerator.of_iSup {X : Scheme.{u}} {M : X.Modules} {U : X.Opens}
 that `π` induces surjections `Γ(B, V) ⟶ Γ(P, π⁻¹ V)` for all opens `V`. Let `L` be an
 `𝒪_P`-module with free generators on the members `π⁻¹ V i` of an open cover pulled back from
 `B`, and such that `σ^* L` has a global free generator `γ`. Then `L` has a global free
-generator.
-
-After multiplying each generator `e i` by a unit pulled back from `B`, we may assume that
-`σ^* (e i) = γ`. Two such generators differ on overlaps by a unit `w = π^♯ a`; pulling back along
-`σ` shows `a = σ^♯ π^♯ a = 1`, so the generators agree on overlaps and glue. -/
+generator. -/
 theorem exists_isFreeGenerator_top_of_comp_eq_id {P B : Scheme.{u}} (π : P ⟶ B)
     (σ : B ⟶ P) (hσ : σ ≫ π = 𝟙 B) (hπ : ∀ V : B.Opens, Function.Surjective (π.app V))
     (L : P.Modules) {ι : Type*} (V : ι → B.Opens) (hV : ⨆ i, V i = ⊤)

@@ -16,7 +16,8 @@ Let `X` be a Noetherian scheme and `Λ` a finite commutative ring. Every étale 
 finite subsums are constructible subsheaves of `F` (quotients of constructible sheaves, the kernel
 being constructible by `AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_mono`), they form a
 directed family indexed by the finite sets of sections, and `F` is their colimit
-(`AlgebraicGeometry.Etale.isColimitFinsetSectionImageCocone`, blueprint `lem-kun-03sa`).
+(`AlgebraicGeometry.Etale.isColimitFinsetSectionImageCocone`, blueprint
+`lemma-finiteness-small-etale-topoi--1`).
 
 ## Main definitions
 
@@ -29,7 +30,8 @@ directed family indexed by the finite sets of sections, and `F` is their colimit
 - `AlgebraicGeometry.Etale.isColimitFinsetSectionImageCocone`: `F` is the colimit.
 - `AlgebraicGeometry.Etale.isConstructibleSheaf_finsetSectionImage_obj`: the subsheaves are
   constructible.
-- `AlgebraicGeometry.Etale.exists_isColimit_isConstructibleSheaf` (blueprint `lem-kun-03sa`).
+- `AlgebraicGeometry.Etale.exists_isColimit_isConstructibleSheaf` (blueprint
+`lemma-finiteness-small-etale-topoi--1`).
 -/
 
 @[expose] public section
@@ -155,7 +157,7 @@ instance isConstructibleSheaf_finsetSectionImage_obj [IsNoetherian X]
   have : IsConstructibleSheaf (cokernel (kernel.ι f)) := IsConstructibleSheaf.cokernel _
   exact IsConstructibleSheaf.of_iso ((Abelian.coimageIsoImage' f).trans (imageSubobjectIso f).symm)
 
-/-- Blueprint `lem-kun-03sa`: constructible generation (Stacks 03SA).
+/-- Blueprint `lemma-finiteness-small-etale-topoi--1`: constructible generation (Stacks 03SA).
 
 Let `X` be a Noetherian scheme, for instance a scheme of finite type over a field, and `Λ` a
 finite commutative ring. Every sheaf `F` of `Λ`-modules on `X_ét` is a filtered colimit of

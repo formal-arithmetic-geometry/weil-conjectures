@@ -322,8 +322,6 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [HasSheafify J CommRingCat.{u}]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
-set_option maxHeartbeats 1200000 in
--- Comparing tensor objects and both derived scalar actions requires extensive instance search.
 /-- Restriction of localized coefficients is the normalized scalar telescope.
 The statement has independent object, morphism and coefficient universes and makes no
 assertion about Hom groups or Hom continuity.
@@ -387,12 +385,18 @@ theorem scalarLocalization_telescopeOfUniverses
   let φ := ringedLocalizationRingUnitOfUniverses R (a t)
   let U := SheafOfModules.restrictScalars
     ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
-  obtain ⟨hUlim, hUcol, hadj⟩ :=
+  -- Share the witnesses and their specifications without repeatedly reducing the
+  -- large dependent goal when eliminating the existential statements.
+  have hU :=
     SheafOfModules.scalarLocalizationCoefficientAdjunctionOfUniverses φ
-  have : PreservesFiniteLimits U := hUlim
-  have : PreservesFiniteColimits U := hUcol
-  obtain ⟨adj, hnorm⟩ := hadj F hF _hmap
-  obtain ⟨d, hd⟩ := exact_adjunction_descends F U adj
+  have : PreservesFiniteLimits U := hU.choose
+  have : PreservesFiniteColimits U := hU.choose_spec.choose
+  have hadj := hU.choose_spec.choose_spec F hF _hmap
+  let adj := hadj.choose
+  have hnorm := hadj.choose_spec
+  have hderived := exact_adjunction_descends F U adj
+  let d := hderived.choose
+  have hd := hderived.choose_spec
   let η := fun K ↦ (adj.mapHomologicalComplex (.up ℤ)).unit.app K
   have hsections : ∀ K i,
       scalarLocalizationUnitSectionsOfUniverses φ (K.X i) (F.obj (K.X i)) (hF (K.X i))

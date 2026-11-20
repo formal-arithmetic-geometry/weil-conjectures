@@ -47,7 +47,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 set_option hygiene false in
 /-- The Frobenius pullback `Fr^* = (Fr⁻¹)_*` of sheaves of `ℚ̄_ℓ`-modules on `X̄`. -/
 local notation "Fr" =>
-  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
 
 attribute [local instance] Sheaf.symmetricCategory
 
@@ -82,14 +82,15 @@ theorem tensorπ_str (P M : ProEtaleWeilSheaf k₀ l X) :
       μ Fr P.carrier.X M.carrier.X ≫ (Fr).map (Mod.tensorπ P.carrier M.carrier) ≫
         (ProEtaleWeilSheaf.tensor k₀ l X M P).str.hom.hom := by
   have : (Mod.mapModComap (G := Fr) (adicConstantSheafToLowerStar l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)).IsEquivalence :=
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)).IsEquivalence :=
     isEquivalence_adicLowerStar l _
   have h₁ := Mod.map_tensorπ_comp_tensorLeftCompMapModComapIso_hom (adicConstantSheafToLowerStar l
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)
     (fun _ _ ↦ Functor.LaxBraided.braided _ _) P.carrier M.carrier
   have hstr : (ProEtaleWeilSheaf.tensor k₀ l X M P).str.hom.hom =
-      ((adicLowerStarTensorLeftIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
-        M.carrier).hom.app P.carrier).hom ≫
+      ((adicLowerStarTensorLeftIso l
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv M.carrier).hom.app
+        P.carrier).hom ≫
       ((Mod.tensorLeftMapIso M.str).hom.app _).hom ≫
       ((Mod.tensorLeft M.carrier).map P.str.hom).hom := rfl
   rw [hstr, ← Category.assoc ((Fr).map _)]
@@ -147,13 +148,13 @@ lemma frobeniusPullback_tensor_hom_ext {P M : ProEtaleWeilSheaf k₀ l X}
       μ Fr P.carrier.X M.carrier.X ≫ (Fr).map (Mod.tensorπ P.carrier M.carrier) ≫ g.hom) :
     f = g := by
   have : (Mod.mapModComap (G := Fr) (adicConstantSheafToLowerStar l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)).IsEquivalence :=
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)).IsEquivalence :=
     isEquivalence_adicLowerStar l _
   have h₁ := Mod.map_tensorπ_comp_tensorLeftCompMapModComapIso_hom (adicConstantSheafToLowerStar l
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)
     (fun _ _ ↦ Functor.LaxBraided.braided _ _) P.carrier M.carrier
-  set T := (adicLowerStarTensorLeftIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
-    M.carrier).app P.carrier
+  set T := (adicLowerStarTensorLeftIso l
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv M.carrier).app P.carrier
   have hT : Mod.tensorπ _ _ ≫ T.inv.hom =
       μ Fr P.carrier.X M.carrier.X ≫ (Fr).map (Mod.tensorπ P.carrier M.carrier) := by
     rw [← cancel_mono T.hom.hom, Category.assoc, ← Mod.comp_hom', T.inv_hom_id]

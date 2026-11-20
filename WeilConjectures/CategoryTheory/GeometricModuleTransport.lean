@@ -379,9 +379,176 @@ private theorem restrictHomEquiv_map
     G.map (restrictHomEquiv F G E h f) = E (F.map f) :=
   Classical.choose_spec ((h (F.map f)).mp ⟨f, rfl⟩)
 
+-- Work with abstract functors here to avoid unfolding the sheaf and restriction-of-scalars
+-- constructions at every naturality rewrite.
+private theorem linear_mate_naturality_left
+    {C₀ D₀ M₀ A₀ : Type*} [Category C₀] [Category D₀] [Category M₀] [Category A₀]
+    {L : C₀ ⥤ D₀} {V : D₀ ⥤ C₀} (adj : L ⊣ V)
+    (F : M₀ ⥤ C₀) (G : A₀ ⥤ D₀) [F.Faithful]
+    (I : M₀ ⥤ A₀) (eI : I ⋙ G ≅ F ⋙ L)
+    {M N P : M₀} {Y : A₀} (eP : F.obj P ≅ V.obj (G.obj Y))
+    (a : M ⟶ N) (f : I.obj N ⟶ Y) (b : M ⟶ P) (b' : N ⟶ P)
+    (hb : F.map b ≫ eP.hom = adj.homEquiv _ _ (eI.inv.app M ≫ G.map (I.map a ≫ f)))
+    (hb' : F.map b' ≫ eP.hom = adj.homEquiv _ _ (eI.inv.app N ≫ G.map f)) :
+    b = a ≫ b' := by
+  apply F.map_injective
+  apply (cancel_mono eP.hom).mp
+  rw [hb, F.map_comp, Category.assoc, hb', G.map_comp]
+  have hn : eI.inv.app M ≫ G.map (I.map a) = L.map (F.map a) ≫ eI.inv.app N :=
+    (eI.inv.naturality a).symm
+  rw [← Category.assoc, hn, Category.assoc, adj.homEquiv_naturality_left]
+
+private theorem linear_mate_naturality_right
+    {C₀ D₀ M₀ A₀ : Type*} [Category C₀] [Category D₀] [Category M₀] [Category A₀]
+    {L : C₀ ⥤ D₀} {V : D₀ ⥤ C₀} (adj : L ⊣ V)
+    (F : M₀ ⥤ C₀) (G : A₀ ⥤ D₀) [F.Faithful]
+    {M P P' : M₀} {I Y Y' : A₀} (eI : G.obj I ≅ L.obj (F.obj M))
+    (eP : F.obj P ≅ V.obj (G.obj Y)) (eP' : F.obj P' ≅ V.obj (G.obj Y'))
+    (f : I ⟶ Y) (q : Y ⟶ Y') (p : P ⟶ P') (g : M ⟶ P) (g' : M ⟶ P')
+    (hg : F.map g ≫ eP.hom = adj.homEquiv _ _ (eI.inv ≫ G.map f))
+    (hg' : F.map g' ≫ eP'.hom = adj.homEquiv _ _ (eI.inv ≫ G.map (f ≫ q)))
+    (hp : F.map p ≫ eP'.hom = eP.hom ≫ V.map (G.map q)) :
+    g' = g ≫ p := by
+  apply F.map_injective
+  apply (cancel_mono eP'.hom).mp
+  rw [hg', F.map_comp, Category.assoc, hp, ← Category.assoc, hg, G.map_comp,
+    ← Category.assoc, adj.homEquiv_naturality_right]
+
+private theorem linear_mate_iff
+    {C D : Type u} [Category.{u} C] [Category.{u} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
+    (V : Sheaf K (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
+    [PreservesFiniteProducts L] [PreservesFiniteProducts V]
+    {R : Sheaf J CommRingCat.{u}} {S A : Sheaf K CommRingCat.{u}}
+    (eR : ringSets A ≅ L.obj (ringSets R)) (c : A ⟶ S)
+    (M : SheafOfModules.{u} (ringBase R)) (MI : SheafOfModules.{u} (ringBase A))
+    (H : SheafOfModules.{u} (ringBase S)) (PH : SheafOfModules.{u} (ringBase R))
+    (eM : (moduleSets A).obj MI ≅ L.obj ((moduleSets R).obj M))
+    (eH : (moduleSets R).obj PH ≅ V.obj ((moduleSets S).obj H))
+    (hI : ∃ (aM : (moduleSets R).obj M ⨯ (moduleSets R).obj M ⟶ (moduleSets R).obj M)
+      (sM : ringSets R ⨯ (moduleSets R).obj M ⟶ (moduleSets R).obj M)
+      (aI : (moduleSets A).obj MI ⨯ (moduleSets A).obj MI ⟶ (moduleSets A).obj MI)
+      (sI : ringSets A ⨯ (moduleSets A).obj MI ⟶ (moduleSets A).obj MI),
+      addSpec M aM ∧ smulSpec M sM ∧ addSpec MI aI ∧ smulSpec MI sI ∧
+      L.map aM = prodComparison L _ _ ≫ prod.map eM.inv eM.inv ≫ aI ≫ eM.hom ∧
+      L.map sM = prodComparison L _ _ ≫ prod.map eR.inv eM.inv ≫ sI ≫ eM.hom)
+    (hP : ∃ (aH : (moduleSets S).obj H ⨯ (moduleSets S).obj H ⟶ (moduleSets S).obj H)
+      (sH : ringSets S ⨯ (moduleSets S).obj H ⟶ (moduleSets S).obj H)
+      (aP : (moduleSets R).obj PH ⨯ (moduleSets R).obj PH ⟶ (moduleSets R).obj PH)
+      (sP : ringSets R ⨯ (moduleSets R).obj PH ⟶ (moduleSets R).obj PH)
+      (k : ringSets R ⨯ (moduleSets R).obj PH ⟶
+        V.obj (ringSets S ⨯ (moduleSets S).obj H)),
+      addSpec H aH ∧ smulSpec H sH ∧ addSpec PH aP ∧ smulSpec PH sP ∧
+      V.map aH = prodComparison V _ _ ≫ prod.map eH.inv eH.inv ≫ aP ≫ eH.hom ∧
+      k ≫ V.map prod.fst = prod.fst ≫ adj.homEquiv _ _
+        (eR.inv ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{u})).map c) ∧
+      k ≫ V.map prod.snd = prod.snd ≫ eH.hom ∧ sP ≫ eH.hom = k ≫ V.map sH)
+    (α : (moduleSets A).obj MI ⟶ (moduleSets S).obj H) :
+    (∃ f : MI ⟶ (restrictScalars ((sheafCompose K
+      (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj H, (moduleSets A).map f = α) ↔
+      ∃ g : M ⟶ PH, (moduleSets R).map g = mateIsoEquiv adj eM eH α := by
+  have : K.HasSheafCompose (CategoryTheory.forget CommRingCat.{u}) := inferInstance
+  obtain ⟨aM, sM, aI, sI, haM, hsM, haI, hsI, hLA, hLS⟩ := hI
+  obtain ⟨aH, sH, aP, sP, k, haH, hsH, haP, hsP, hVA, hk₁, hk₂, hks⟩ := hP
+  have hRightAdd := right_operation V eH aP aH hVA
+  have hk := right_pair V k
+    (adj.homEquiv _ _ (eR.inv ≫ (sheafCompose K
+      (CategoryTheory.forget CommRingCat)).map c)) eH.hom hk₁ hk₂
+  have hRightSmul : sP ≫ eH.hom =
+      prod.map (adj.homEquiv _ _ (eR.inv ≫ (sheafCompose K
+        (CategoryTheory.forget CommRingCat)).map c)) eH.hom ≫
+          inv (prodComparison V (ringSets S) ((moduleSets S).obj H)) ≫ V.map sH := by
+    rw [hks, hk]
+    simp only [Category.assoc]
+  let β := mateIsoEquiv adj eM eH α
+  have hm : adj.homEquiv _ _ (eM.inv ≫ α) = β ≫ eH.hom :=
+    mateIsoEquiv_equation adj eM eH α
+  have hAdd := binary_mate_iso_iff adj eM eM eM
+    eH.hom eH.hom eH aM aI aH aP
+    hLA hRightAdd α α α (β) (β) (β) hm hm hm
+  have hSmul := binary_mate_iso_iff adj eR eM eM
+    (adj.homEquiv _ _ (eR.inv ≫ (sheafCompose K
+      (CategoryTheory.forget CommRingCat)).map c))
+    eH.hom eH sM sI sH sP hLS hRightSmul
+    ((sheafCompose K (CategoryTheory.forget CommRingCat)).map c) α α
+    (𝟙 (ringSets R)) (β) (β)
+    (by exact (Category.id_comp _).symm) hm hm
+  have hSame := linear_iff (𝟙 R) M PH aM aP sM sP
+    haM haP hsM hsP (β)
+  exact (linear_iff c MI H aI aH sI sH haI haH hsI hsH α).trans
+    ((and_congr hAdd hSmul).trans hSame.symm)
+
+private theorem linear_mate_equiv
+    {C D : Type u} [Category.{u} C] [Category.{u} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
+    (V : Sheaf K (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
+    [PreservesFiniteProducts L] [PreservesFiniteProducts V]
+    {R : Sheaf J CommRingCat.{u}} {S A : Sheaf K CommRingCat.{u}}
+    (eR : ringSets A ≅ L.obj (ringSets R)) (c : A ⟶ S)
+    (I : SheafOfModules.{u} (ringBase R) ⥤ SheafOfModules.{u} (ringBase A))
+    (P : SheafOfModules.{u} (ringBase S) ⥤ SheafOfModules.{u} (ringBase R))
+    (eI : I ⋙ moduleSets A ≅ moduleSets R ⋙ L)
+    (eP : P ⋙ moduleSets R ≅ moduleSets S ⋙ V)
+    (hI : ∀ M, ∃ (aM : (moduleSets R).obj M ⨯ (moduleSets R).obj M ⟶ (moduleSets R).obj M)
+      (sM : ringSets R ⨯ (moduleSets R).obj M ⟶ (moduleSets R).obj M)
+      (aI : (moduleSets A).obj (I.obj M) ⨯ (moduleSets A).obj (I.obj M) ⟶
+        (moduleSets A).obj (I.obj M))
+      (sI : ringSets A ⨯ (moduleSets A).obj (I.obj M) ⟶ (moduleSets A).obj (I.obj M)),
+      addSpec M aM ∧ smulSpec M sM ∧ addSpec (I.obj M) aI ∧ smulSpec (I.obj M) sI ∧
+      L.map aM = prodComparison L _ _ ≫
+        prod.map (eI.inv.app M) (eI.inv.app M) ≫ aI ≫ eI.hom.app M ∧
+      L.map sM = prodComparison L _ _ ≫ prod.map eR.inv (eI.inv.app M) ≫ sI ≫ eI.hom.app M)
+    (hP : ∀ H, ∃ (aH : (moduleSets S).obj H ⨯ (moduleSets S).obj H ⟶ (moduleSets S).obj H)
+      (sH : ringSets S ⨯ (moduleSets S).obj H ⟶ (moduleSets S).obj H)
+      (aP : (moduleSets R).obj (P.obj H) ⨯ (moduleSets R).obj (P.obj H) ⟶
+        (moduleSets R).obj (P.obj H))
+      (sP : ringSets R ⨯ (moduleSets R).obj (P.obj H) ⟶ (moduleSets R).obj (P.obj H))
+      (k : ringSets R ⨯ (moduleSets R).obj (P.obj H) ⟶
+        V.obj (ringSets S ⨯ (moduleSets S).obj H)),
+      addSpec H aH ∧ smulSpec H sH ∧ addSpec (P.obj H) aP ∧ smulSpec (P.obj H) sP ∧
+      V.map aH = prodComparison V _ _ ≫
+        prod.map (eP.inv.app H) (eP.inv.app H) ≫ aP ≫ eP.hom.app H ∧
+      k ≫ V.map prod.fst = prod.fst ≫ adj.homEquiv _ _
+        (eR.inv ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{u})).map c) ∧
+      k ≫ V.map prod.snd = prod.snd ≫ eP.hom.app H ∧ sP ≫ eP.hom.app H = k ≫ V.map sH)
+    : ∃ B : ∀ M H, (I.obj M ⟶ (restrictScalars
+        ((sheafCompose K (forget₂ CommRingCat RingCat)).map c)).obj H) ≃ (M ⟶ P.obj H),
+      (∀ {M N} (a : M ⟶ N) H f, B M H (I.map a ≫ f) = a ≫ B N H f) ∧
+      (∀ M {H H'} f (b : H ⟶ H'), B M H' (f ≫ (restrictScalars
+        ((sheafCompose K (forget₂ CommRingCat RingCat)).map c)).map b) = B M H f ≫ P.map b) ∧
+      ∀ M H f, (moduleSets R).map (B M H f) ≫ eP.hom.app H =
+        adj.homEquiv _ _ (eI.inv.app M ≫ (moduleSets A).map f) := by
+  have : K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+  let Q := restrictScalars ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).map c)
+  let E : ∀ M H, ((moduleSets A).obj (I.obj M) ⟶ (moduleSets S).obj H) ≃
+      ((moduleSets R).obj M ⟶ (moduleSets R).obj (P.obj H)) :=
+    fun M H ↦ mateIsoEquiv adj (eI.app M) (eP.app H)
+  have hImage M H (α : (moduleSets A).obj (I.obj M) ⟶ (moduleSets S).obj H) :
+      (∃ f : I.obj M ⟶ (restrictScalars ((sheafCompose K
+        (forget₂ CommRingCat RingCat)).map c)).obj H, (moduleSets A).map f = α) ↔
+        ∃ g : M ⟶ P.obj H, (moduleSets R).map g = E M H α := by
+    exact linear_mate_iff L V adj eR c M (I.obj M) H (P.obj H)
+      (eI.app M) (eP.app H) (hI M) (hP H) α
+  let B : ∀ M H, (I.obj M ⟶ (restrictScalars ((sheafCompose K
+      (forget₂ CommRingCat RingCat)).map c)).obj H) ≃ (M ⟶ P.obj H) :=
+    fun M H ↦ restrictHomEquiv (moduleSets A) (moduleSets R) (E M H) (hImage M H)
+  have hB M H f : (moduleSets R).map (B M H f) ≫ eP.hom.app H =
+      adj.homEquiv _ _ (eI.inv.app M ≫ (moduleSets A).map f) := by
+    rw [restrictHomEquiv_map]
+    exact (mateIsoEquiv_equation adj (eI.app M) (eP.app H) _).symm
+  refine ⟨B, ?_, ?_, hB⟩
+  · intro M N a H f
+    exact linear_mate_naturality_left adj (moduleSets R) (moduleSets A) I eI
+      (Y := Q.obj H) (eP.app H) a f _ _ (hB M H _) (hB N H f)
+  · intro M H H' f b
+    exact linear_mate_naturality_right adj (moduleSets R) (moduleSets A)
+      (Y := Q.obj H) (Y' := Q.obj H') (eI.app M) (eP.app H) (eP.app H') f (Q.map b)
+      (P.map b) _ _ (hB M H f) (hB M H' _) (eP.hom.naturality b)
+
 end Helpers
 
-set_option maxHeartbeats 800000 in
 -- The statement records every operation and its underlying comparison.
 
 /-- Transport module structures and restrict the given set adjunction to linear maps.
@@ -715,68 +882,7 @@ theorem geometric_module_transport
   let : PreservesLimits V := adj.rightAdjoint_preservesLimits
   obtain ⟨I, P, eI, eP, hI, hP⟩ :=
     geometric_module_construction J K L V adj R S A eR addR mulR addA mulA hRing c
-  let E : ∀ M H, ((moduleSets A).obj (I.obj M) ⟶ (moduleSets S).obj H) ≃
-      ((moduleSets R).obj M ⟶ (moduleSets R).obj (P.obj H)) :=
-    fun M H ↦ mateIsoEquiv adj (eI.app M) (eP.app H)
-  have hImage M H (α : (moduleSets A).obj (I.obj M) ⟶ (moduleSets S).obj H) :
-      (∃ f : I.obj M ⟶ (restrictScalars ((sheafCompose K
-        (forget₂ CommRingCat RingCat)).map c)).obj H, (moduleSets A).map f = α) ↔
-        ∃ g : M ⟶ P.obj H, (moduleSets R).map g = E M H α := by
-    obtain ⟨aM, sM, aI, sI, haM, hsM, haI, hsI, hLA, hLS⟩ := hI M
-    obtain ⟨aH, sH, aP, sP, k, haH, hsH, haP, hsP, hVA, hk₁, hk₂, hks⟩ := hP H
-    have hRightAdd := right_operation V (eP.app H) aP aH hVA
-    have hk := right_pair V k
-      (adj.homEquiv _ _ (eR.inv ≫ (sheafCompose K
-        (CategoryTheory.forget CommRingCat)).map c)) (eP.hom.app H) hk₁ hk₂
-    have hRightSmul : sP ≫ eP.hom.app H =
-        prod.map (adj.homEquiv _ _ (eR.inv ≫ (sheafCompose K
-          (CategoryTheory.forget CommRingCat)).map c)) (eP.hom.app H) ≫
-            inv (prodComparison V (ringSets S) ((moduleSets S).obj H)) ≫ V.map sH := by
-      rw [hks, hk]
-      simp only [Category.assoc]
-    have hm : adj.homEquiv _ _ (eI.inv.app M ≫ α) = E M H α ≫ eP.hom.app H :=
-      mateIsoEquiv_equation adj (eI.app M) (eP.app H) α
-    have hAdd := binary_mate_iso_iff adj (eI.app M) (eI.app M) (eI.app M)
-      (eP.hom.app H) (eP.hom.app H) (eP.app H) aM aI aH aP
-      hLA hRightAdd α α α (E M H α) (E M H α) (E M H α) hm hm hm
-    have hSmul := binary_mate_iso_iff adj eR (eI.app M) (eI.app M)
-      (adj.homEquiv _ _ (eR.inv ≫ (sheafCompose K
-        (CategoryTheory.forget CommRingCat)).map c))
-      (eP.hom.app H) (eP.app H) sM sI sH sP hLS hRightSmul
-      ((sheafCompose K (CategoryTheory.forget CommRingCat)).map c) α α
-      (𝟙 (ringSets R)) (E M H α) (E M H α)
-      (by exact (Category.id_comp _).symm) hm hm
-    have hSame := linear_iff (𝟙 R) M (P.obj H) aM aP sM sP
-      haM haP hsM hsP (E M H α)
-    exact (linear_iff c (I.obj M) H aI aH sI sH haI haH hsI hsH α).trans
-      ((and_congr hAdd hSmul).trans hSame.symm)
-  let B : ∀ M H, (I.obj M ⟶ (restrictScalars ((sheafCompose K
-      (forget₂ CommRingCat RingCat)).map c)).obj H) ≃ (M ⟶ P.obj H) :=
-    fun M H ↦ restrictHomEquiv (moduleSets A) (moduleSets R) (E M H) (hImage M H)
-  have hB M H f : (moduleSets R).map (B M H f) ≫ eP.hom.app H =
-      adj.homEquiv _ _ (eI.inv.app M ≫ (moduleSets A).map f) := by
-    rw [restrictHomEquiv_map]
-    exact (mateIsoEquiv_equation adj (eI.app M) (eP.app H) _).symm
-  refine ⟨I, P, eI, eP, hI, hP, B, ?_, ?_, hB⟩
-  · intro M N a H f
-    apply (moduleSets R).map_injective
-    apply (cancel_mono (eP.hom.app H)).mp
-    rw [hB, (moduleSets R).map_comp, Category.assoc, hB]
-    rw [(moduleSets A).map_comp]
-    have hn : eI.inv.app M ≫ (moduleSets A).map (I.map a) =
-        L.map ((moduleSets R).map a) ≫ eI.inv.app N :=
-      (eI.inv.naturality a).symm
-    rw [← Category.assoc, hn, Category.assoc,
-      adj.homEquiv_naturality_left]
-  · intro M H H' f b
-    apply (moduleSets R).map_injective
-    apply (cancel_mono (eP.hom.app H')).mp
-    rw [hB, (moduleSets R).map_comp, Category.assoc]
-    have hn : (moduleSets R).map (P.map b) ≫ eP.hom.app H' =
-        eP.hom.app H ≫ V.map ((moduleSets S).map b) := eP.hom.naturality b
-    rw [hn, ← Category.assoc, hB, (moduleSets A).map_comp]
-    change adj.homEquiv _ _ (eI.inv.app M ≫
-      ((moduleSets A).map f ≫ (moduleSets S).map b)) = _
-    rw [← Category.assoc, adj.homEquiv_naturality_right]
+  refine ⟨I, P, eI, eP, hI, hP, ?_⟩
+  exact linear_mate_equiv L V adj eR c I P eI eP hI hP
 
 end SheafOfModules

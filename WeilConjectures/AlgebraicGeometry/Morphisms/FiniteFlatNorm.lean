@@ -104,8 +104,7 @@ lemma Scheme.Hom.exists_isAffineOpen_mem_free_app {X Y : Scheme.{u}} (p : X ⟶ 
   T --f--> S
 ```
 and affine opens `US` of `S`, `UX ⊆ iX⁻¹ US` of `X` such that `f⁻¹ US` is affine. If
-`Γ(T, f⁻¹ US)` is a free `Γ(S, US)`-module, then `Γ(Y, g⁻¹ UX)` is a free `Γ(X, UX)`-module: it
-is `Γ(X, UX) ⊗_{Γ(S, US)} Γ(T, f⁻¹ US)`. -/
+`Γ(T, f⁻¹ US)` is a free `Γ(S, US)`-module, then `Γ(Y, g⁻¹ UX)` is a free `Γ(X, UX)`-module. -/
 lemma free_app_of_isPullback {X Y S T : Scheme.{u}} {f : T ⟶ S} {g : Y ⟶ X} {iX : X ⟶ S}
     {iY : Y ⟶ T} (H : IsPullback g iY iX f) {US : S.Opens} {UX : X.Opens}
     (hUS : IsAffineOpen US) (hUT : IsAffineOpen (f ⁻¹ᵁ US)) (hUX : IsAffineOpen UX)
