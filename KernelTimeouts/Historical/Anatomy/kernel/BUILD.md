@@ -60,10 +60,16 @@ times form a partition of the measured recursive root span. Delta timers
 and nested-exclusive proposition timers overlap that partition. Detailed
 pair capture is bounded at five million general recursive entries.
 
-Limitations: no automatic declaration-name filter, full argument/field
-path, context fingerprint, reverse-pair accounting, repeated-subtree
-inclusive time, Expr allocation/bytes, or GC timer. Raw-expression
-hashes are grouping proxies. The P and T current-case reports were
+Limitations: the standalone `Kernel.isDefEq` entry does not pass a
+declaration name to `is_def_eq_core`, so the patch filters printed roots
+by duration and identifies them with process-local serials. Recursive
+calls are not tagged with source argument/field indices; assigning a
+complete path would require carrying that context through the individual
+comparison branches. Expr allocation, live bytes, and GC timers are not
+exposed by the type-checker code and would require runtime allocator/GC
+hooks. The patch also lacks context fingerprints, reverse-pair accounting,
+and repeated-subtree inclusive time. Raw-expression hashes are grouping
+proxies. The P and T current-case reports were
 recorded with an earlier observational revision of the patch; the
 final patches add cache and proposition-group diagnostics without
 changing conversion behavior. Their recorded counters remain tied to
