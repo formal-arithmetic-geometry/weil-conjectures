@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizedActual
 
 /-! # Localizing a descended semilinear tower
 
-Source: Stacks Project, Tags 03CY, 03DA, 06YY and 0H7J.
+## References
+
+* Stacks Tags 03CY and 0H7J
+* Stacks Tags 03DA, 06YY and 0H7J
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +34,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   lisseTowerFixedRealization
 
 /-- First pull fixed module sheaves from V to W, then use the prescribed realization
-on W. This is a concrete functor, independent of descended levels and transitions.
-Source: Stacks Tags 03CY and 0H7J
-(blueprint: lem-weil-pbc-lisse-tower-localized-realization). -/
+on W. This is a concrete functor, independent of descended levels and transitions. -/
 def lisseTowerLocalRealization {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (U : Y.ProEt)
     (V : U.left.ProEt) (W : Y.ProEt) (f : W ⟶ ProEt.mk (V.hom ≫ U.hom)) (n : ℕ) :=
@@ -42,9 +43,7 @@ def lisseTowerLocalRealization {X Y : Scheme.{u}} (g : Y ⟶ X)
       lisseTowerFixedRealization (W.hom ≫ g) d n
 
 /-- Comparisons for the concrete localized realization, after the transitions have
-already descended. This record supplies no etale levels or normalization arrows.
-Source: Stacks Tags 03DA, 06YY and 0H7J
-(blueprint: lem-weil-pbc-lisse-tower-localized-realization). -/
+already descended. This record supplies no etale levels or normalization arrows. -/
 structure LisseTowerLocalizedComparisons
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -104,28 +103,7 @@ structure LisseTowerLocalizedComparisons
 
 /-- Pullback transports an already descended semilinear tower and its coefficient
 square to the explicit realization on V and W. The assertion has no universality,
-lissity, stalk or boundedness conclusion, and does not construct a transition.
-
-Source: Stacks Project, Tags 03CY, 03DA, 06YY and 0H7J.
-(blueprint: lem-weil-pbc-lisse-tower-localized-realization).
-
-Proof: fixed module sheafification commutes with inverse image, by its adjunction
-and the constant-section coefficient map. Localize this natural comparison and paste
-it with the comparison pullback isomorphism and the inverse-image compositor for
-f.left, V.hom and U.hom. The equality f.w identifies their composite with W.hom.
-Applied to the supplied e_n, this gives actual. Applied to constants it gives model,
-naturally in the algebraic complex E. Restriction to completion coefficients in two
-successive ways gives scalar; the equality of the underlying maps follows from the
-consecutive quotient relation and the section normalization of c_n. Pull back the
-supplied descent equation, use naturality of these comparisons, and paste the scalar
-restriction compositors. This gives actual_normalized, with the actual restricted
-step of M. For a constant arrow k, the same section calculation commutes with k and
-is the identity on each constant section. Exact localization replaces composition
-by the specified mapDerivedCategoryCompIso and restrictScalarsComp' compositors,
-yielding lisseTowerAlgebraArrow. The section-normalized comparison defining
-constantAdicQuotientRightIso then gives exactly model_normalized. Since these
-comparisons are constructed from inverse image of the supplied e_n, no new choice of
-comparisons on V or W is used. All identities hold on the zero object and empty bases. -/
+lissity, stalk or boundedness conclusion, and does not construct a transition. -/
 theorem lisseTower_localized_realization
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

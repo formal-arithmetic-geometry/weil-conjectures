@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassD
 
 /-! # Pullback of canonical tower classes
 
-Source: blueprint main-20261015, sec-smooth-purity,
+Source: blueprint main-20261015, chap-Smooth-purity,
 `sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-pullback).
 -/
 

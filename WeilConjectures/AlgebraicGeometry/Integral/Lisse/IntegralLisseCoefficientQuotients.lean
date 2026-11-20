@@ -42,7 +42,12 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 /-!
 # IntegralLisseCoefficientQuotients
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.4(1).
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.4(1)
+* Bhatt--Scholze, Lemma 6.8.2(1)
+* Bhatt--Scholze, Lemma 6.8.2(1), pp. 58--59
+* Stacks Tag 03EK
 -/
 
 @[expose] public noncomputable section
@@ -60,11 +65,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
 /-- Reduction on continuous coefficient sections is surjective and has the scalar image
-as its kernel. Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-sfb-integral-lisse-coefficient-quotients).
-Proof: lift residue values through a set-theoretic section of the discrete quotient.
-A function in the kernel takes values in the principal uniformizer ideal, and division
-by the uniformizer power is continuous in the coefficient field. -/
+as its kernel. -/
 theorem integralLisseCoefficient_sectionwise (n : ℕ) :
     let M := SheafOfModules.unit (integralLisseRing l E X)
     let q := integralLisseRingMap l E X
@@ -186,21 +187,7 @@ theorem integralLisseCoefficient_sectionwise (n : ℕ) :
       rfl
   exact fun U ↦ ⟨hs U, hex U⟩
 
-/-- Pointwise reduction of the coefficient unit is the sheaf scalar cokernel.
-
-Source: Bhatt--Scholze, Lemma 6.8.2(1), pp. 58--59; Stacks Tag 03EK.
-(blueprint: lem-sfb-integral-lisse-coefficient-quotients)
-
-Proof: choose one integral representative of each finite residue value. Since the
-quotient ring is discrete, composition with this finite section lifts every
-continuous residue-valued function to a continuous integral-valued function.
-The kernel consists of functions valued in the uniformizer-power ideal.
-Multiplication by the nonzero uniformizer power identifies the integral ring
-homeomorphically with this ideal: its inverse is division in the coefficient
-field, with the subspace topology. Hence the kernel is precisely the image of
-the scalar map, on every object and compatibly with restriction. The resulting
-sectionwise cokernel is already the displayed finite-coefficient sheaf; therefore
-it has the sheaf cokernel universal property as well. -/
+/-- Pointwise reduction of the coefficient unit is the sheaf scalar cokernel. -/
 theorem integralLisseCoefficient_quotients (n : ℕ) :
     IsIntegralLisseQuotient l E X
       (Padic.coefficientExtensionUniformizer l E ^ (n + 1))

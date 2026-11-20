@@ -29,7 +29,7 @@ punctured trait. For a prime `ℓ` invertible in the algebraically closed base f
   `ℓ`-th power in `K`.
 
 These are the parts "the punctured trait" and "the restriction" of the proof of blueprint
-`det-tf-transverse-corner-constant`.
+`lemma-punctured-surface-punctured-curve--1`.
 
 ## Main statements
 
@@ -66,7 +66,7 @@ morphism of schemes, `f : Y ⟶ Spec k` a structure map to a field in which `n` 
 which contains a primitive `n`-th root of unity, and `a` a unit on `Y` whose pullback to `X` is
 not an `n`-th power. Then the restriction `H¹(Y, ℤ/n) ⟶ H¹(X, g^* ℤ/n)` is nonzero: through
 `ℤ/n ≅ μₙ`, the Kummer class of `a` restricts to the Kummer class of `g^* a`, which is nonzero
-(blueprint `det-tf-transverse-corner-constant`). -/
+(blueprint `lemma-punctured-surface-punctured-curve--1`). -/
 theorem Etale.cohomologyMap_one_constantZMod_ne_zero_of_forall_pow_ne {k : Type u} [Field k]
     {X Y : Scheme.{u}} (g : X ⟶ Y) (f : Y ⟶ Spec (.of k)) {n : ℕ} [NeZero n]
     (hn : (n : k) ≠ 0) {ζ : k} (hζ : IsPrimitiveRoot ζ n) (a : Γ(Y, ⊤)ˣ)
@@ -132,7 +132,7 @@ lemma connectedSpace_puncturedStrictLocalization :
 
 include hℓ hz
 
-/-- Blueprint `det-tf-transverse-corner-constant`: `H^q(X_S - z, ℤ/ℓ) = 0` for `q ≥ 2`. -/
+/-- Blueprint `lemma-punctured-surface-punctured-curve--1`: `H^q(X_S - z, ℤ/ℓ) = 0` for `q ≥ 2`. -/
 theorem subsingleton_sheafH_puncturedTrait (q : ℕ) (hq : 2 ≤ q) :
     Subsingleton (Sheaf.H ((C.puncturedTrait zbar).constantZMod ℓ) q) := by
   obtain ⟨B, _, _, _, _, φ, -, -, e, -, -, -⟩ :=
@@ -141,7 +141,7 @@ theorem subsingleton_sheafH_puncturedTrait (q : ℕ) (hq : 2 ≤ q) :
     (FractionRing B) (natCast_residueField_ne_zero φ hℓ) q hq
   exact (sheafHConstantZModAddEquivOfIso e ℓ q).toEquiv.subsingleton
 
-/-- Blueprint `det-tf-transverse-corner-constant`: `H^0(X_S - z, ℤ/ℓ)` and
+/-- Blueprint `lemma-punctured-surface-punctured-curve--1`: `H^0(X_S - z, ℤ/ℓ)` and
 `H^1(X_S - z, ℤ/ℓ) ≅ 𝔽_ℓ(-1)` are free of rank one over `𝔽_ℓ`. -/
 theorem nonempty_addEquiv_sheafH_puncturedTrait (q : ℕ) (hq : q ≤ 1) :
     Nonempty (Sheaf.H ((C.puncturedTrait zbar).constantZMod ℓ) q ≃+ ZMod ℓ) := by
@@ -156,7 +156,7 @@ theorem nonempty_addEquiv_sheafH_puncturedTrait (q : ℕ) (hq : q ≤ 1) :
     exact ⟨(sheafHConstantZModAddEquivOfIso e ℓ 1).trans f⟩
 
 omit hℓ in
-/-- Blueprint `det-tf-transverse-corner-constant`, *the restriction* in degree `0`: both
+/-- Blueprint `lemma-punctured-surface-punctured-curve--1`, *the restriction* in degree `0`: both
 `S - Y_S` and `X_S - z` are connected, so the restriction of the constants is bijective. -/
 theorem bijective_cohomologyMap_zero_puncturedTraitι :
     Function.Bijective
@@ -167,8 +167,8 @@ theorem bijective_cohomologyMap_zero_puncturedTraitι :
   have : NeZero ℓ := ⟨(Fact.out : ℓ.Prime).ne_zero⟩
   exact bijective_cohomologyMap_zero_constantZMod _ ℓ
 
-/-- Blueprint `det-tf-transverse-corner-constant`, *the restriction* in degree `1`: the Kummer
-class of a local equation of `Y_S` restricts to the Kummer class of a uniformizer of `X_S`,
+/-- Blueprint `lemma-punctured-surface-punctured-curve--1`, *the restriction* in degree `1`: the
+Kummer class of a local equation of `Y_S` restricts to the Kummer class of a uniformizer of `X_S`,
 which is nonzero, so the restriction map is nonzero. -/
 theorem cohomologyMap_one_puncturedTraitι_ne_zero [IsAlgClosed k] :
     Etale.cohomologyMap (C.puncturedTraitι zbar)

@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtal
 
 /-! # Shared coefficient presentations for open restriction cubes
 
-Source: Stacks Project, Tags 09A5, 03CB and 00XZ.
+## References
+
+* Stacks 09A5, 03CB and 00XZ
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +27,7 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
 /-- An open restriction of the square, with shared coefficients at all eight vertices.
 Each face is Cartesian and each coefficient comparison is coherent with its two
 composite inverse-image maps. Thus the fields describe presentations of the actual
-inverse-image rings, rather than extra hypotheses on schemes or complexes.
-Source: Stacks 09A5, 03CB and 00XZ
-(blueprint: def-sf-ringed-restriction-open-cube). -/
+inverse-image rings, rather than extra hypotheses on schemes or complexes. -/
 structure OpenCube (r : StrictTowerRingedSquare sq) {U : Scheme.{u}} (j : U ⟶ Y) where
   XU : Scheme.{u}
   YU' : Scheme.{u}
@@ -66,8 +66,7 @@ structure OpenCube (r : StrictTowerRingedSquare sq) {U : Scheme.{u}} (j : U ⟶ 
 
 variable {U : Scheme.{u}} {j : U ⟶ Y}
 
-/-- The p/open face, with shared coefficient objects. Source: Stacks 03CB
-(blueprint: def-sf-ringed-restriction-open-cube). -/
+/-- The p/open face, with shared coefficient objects. -/
 def OpenCube.sourceFace {r : StrictTowerRingedSquare sq} (C : OpenCube r j) :
     StrictTowerRingedSquare C.sourceSquare where
   RY := r.RY
@@ -80,8 +79,7 @@ def OpenCube.sourceFace {r : StrictTowerRingedSquare sq} (C : OpenCube r j) :
   cf' := C.localRings.cf
   coherent := C.sourceCoherent
 
-/-- The p'/open face, with shared coefficient objects. Source: Stacks 03CB
-(blueprint: def-sf-ringed-restriction-open-cube). -/
+/-- The p'/open face, with shared coefficient objects. -/
 def OpenCube.targetFace {r : StrictTowerRingedSquare sq} (C : OpenCube r j) :
     StrictTowerRingedSquare C.targetSquare where
   RY := r.RY'
@@ -94,8 +92,7 @@ def OpenCube.targetFace {r : StrictTowerRingedSquare sq} (C : OpenCube r j) :
   cf' := C.localRings.cf'
   coherent := C.targetCoherent
 
-/-- The h/open pullback-composition face. Source: Stacks 03CB
-(blueprint: def-sf-ringed-restriction-open-cube). -/
+/-- The h/open pullback-composition face. -/
 def OpenCube.baseFace {r : StrictTowerRingedSquare sq} (C : OpenCube r j) :
     StrictTowerRingedSquare C.baseSquare where
   RY := r.RY
@@ -108,8 +105,7 @@ def OpenCube.baseFace {r : StrictTowerRingedSquare sq} (C : OpenCube r j) :
   cf' := C.localRings.cg
   coherent := C.baseCoherent
 
-/-- The h'/open pullback-composition face. Source: Stacks 03CB
-(blueprint: def-sf-ringed-restriction-open-cube). -/
+/-- The h'/open pullback-composition face. -/
 def OpenCube.upperFace {r : StrictTowerRingedSquare sq} (C : OpenCube r j) :
     StrictTowerRingedSquare C.upperSquare where
   RY := r.RX

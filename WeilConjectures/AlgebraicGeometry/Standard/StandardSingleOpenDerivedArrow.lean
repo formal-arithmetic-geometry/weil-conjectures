@@ -54,6 +54,16 @@ private theorem appendCoefficientNaturality
   rw [← Category.assoc, h, Category.assoc, ← F.map_comp, hc]
   simp only [F.map_comp, Category.assoc]
 
+private theorem pinnedSingle_comp_naturality {D : Type*} [Category D]
+    {A₀ A₁ A₂ B₀ B₁ B₂ : D}
+    (f₀ : A₀ ⟶ B₀) (f₁ : A₁ ⟶ B₁) (f₂ : A₂ ⟶ B₂)
+    (a₀ : A₀ ⟶ A₁) (a₁ : A₁ ⟶ A₂) (b₀ : B₀ ⟶ B₁) (b₁ : B₁ ⟶ B₂)
+    (p : A₀ ⟶ A₂) (q : B₀ ⟶ B₂)
+    (h₀ : f₀ ≫ b₀ = a₀ ≫ f₁) (h₁ : f₁ ≫ b₁ = a₁ ≫ f₂)
+    (hp : p = a₀ ≫ a₁) (hq : q = b₀ ≫ b₁) :
+    f₀ ≫ q = p ≫ f₂ := by
+  rw [hp, hq, ← Category.assoc, h₀, Category.assoc, h₁, Category.assoc]
+
 section
 variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1}
   (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -131,8 +141,6 @@ private theorem pinnedSingle_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.
       (Classical.choose_spec exists_derivedPullbackComposition))) f
   · simpa only [cast_eq] using Scheme.single_map_normalize f M
 
-set_option maxHeartbeats 800000 in
--- The single-complex and homotopy-coordinate spellings require additional elaboration.
 private theorem pinnedSingle_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {M N : Y.Modules} (k : M ⟶ N) :
     (derivedPullback f).map ((DerivedCategory.singleFunctor _ 0).map k) ≫
@@ -141,41 +149,29 @@ private theorem pinnedSingle_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
         (DerivedCategory.singleFunctor _ 0).map ((Scheme.Modules.tensorPullback f).map k) := by
   let := Scheme.Modules.canonicalTensorPullbackAdditive f
   let ε := (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f
+  let H := HomotopyCategory.quotient X.Modules (.up ℤ)
   let r := HomologicalComplex.singleMapHomologicalComplex
     (Scheme.Modules.tensorPullback f) (.up ℤ) 0
-  have norm (L : Y.Modules) : Scheme.picardTermwiseSingleMap f L =
-      ε.app ((HomotopyCategory.singleFunctor _ 0).obj L) ≫
-        DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map (r.hom.app L)) := by
-    exact Scheme.single_map_normalize f L
-  rw [norm M, norm N]
-  have hε := ε.naturality ((HomotopyCategory.singleFunctor _ 0).map k)
-  have hr := r.hom.naturality k
-  dsimp only [Functor.comp_map] at hε hr
-  rw [← Category.assoc]
-  erw [hε]
-  have hq := congrArg
-    (fun t ↦ (DerivedCategory.Q (C :=
-      SheafOfModules.{u} (moduleRings X.toRingedSpace))).map t) hr
-  simp only [Functor.map_comp] at hq
-  change (ε.app ((HomotopyCategory.singleFunctor _ 0).obj M) ≫
-    DerivedCategory.Qh.map (((Scheme.Modules.tensorPullback f).mapHomotopyCategory
-      (.up ℤ)).map ((HomotopyCategory.quotient Y.Modules (.up ℤ)).map
-        ((HomologicalComplex.single Y.Modules (.up ℤ) 0).map k)))) ≫
-      DerivedCategory.Qh.map ((HomotopyCategory.quotient X.Modules (.up ℤ)).map
-        (r.hom.app N)) = _
-  rw [Functor.mapHomotopyCategory_map]
-  change (ε.app ((HomotopyCategory.singleFunctor _ 0).obj M) ≫
-      (DerivedCategory.Q (C := X.Modules)).map
-        (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).map
-          ((HomologicalComplex.single Y.Modules (.up ℤ) 0).map k))) ≫
-        (DerivedCategory.Q (C := X.Modules)).map (r.hom.app N) =
-    (ε.app ((HomotopyCategory.singleFunctor _ 0).obj M) ≫
-        (DerivedCategory.Q (C := X.Modules)).map (r.hom.app M)) ≫
-      (DerivedCategory.Q (C := X.Modules)).map
-        ((HomologicalComplex.single X.Modules (.up ℤ) 0).map
-          ((Scheme.Modules.tensorPullback f).map k))
-  simpa only [Category.assoc] using
-    congrArg (fun t ↦ ε.app ((HomotopyCategory.singleFunctor _ 0).obj M) ≫ t) hq
+  let HY := HomotopyCategory.singleFunctor Y.Modules 0
+  let SY := DerivedCategory.singleFunctor Y.Modules 0
+  let SX := DerivedCategory.singleFunctor X.Modules 0
+  let T := (Scheme.Modules.tensorPullback f).mapHomotopyCategory (.up ℤ)
+  have hε := ε.naturality (HY.map k)
+  change (derivedPullback f).map (SY.map k) ≫ ε.app (HY.obj N) =
+    ε.app (HY.obj M) ≫ DerivedCategory.Qh.map (T.map (HY.map k)) at hε
+  have hr := congrArg (fun b ↦ DerivedCategory.Qh.map (H.map b)) (r.hom.naturality k)
+  simp only [Functor.map_comp, Functor.comp_map] at hr
+  change DerivedCategory.Qh.map (T.map (HY.map k)) ≫
+      DerivedCategory.Qh.map (H.map (r.hom.app N)) =
+    DerivedCategory.Qh.map (H.map (r.hom.app M)) ≫
+      SX.map ((Scheme.Modules.tensorPullback f).map k) at hr
+  exact pinnedSingle_comp_naturality
+    ((derivedPullback f).map (SY.map k)) (DerivedCategory.Qh.map (T.map (HY.map k)))
+    (SX.map ((Scheme.Modules.tensorPullback f).map k))
+    (ε.app (HY.obj M)) (DerivedCategory.Qh.map (H.map (r.hom.app M)))
+    (ε.app (HY.obj N)) (DerivedCategory.Qh.map (H.map (r.hom.app N)))
+    (Scheme.picardTermwiseSingleMap f M) (Scheme.picardTermwiseSingleMap f N)
+    hε hr (Scheme.single_map_normalize f M) (Scheme.single_map_normalize f N)
 
 -- The coefficient transports compare dependent derived-category witnesses.
 /-- The derived arrow square before taking homology or stalks.

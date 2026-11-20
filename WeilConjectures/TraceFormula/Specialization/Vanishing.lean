@@ -18,8 +18,8 @@ Let `c = (c₁, c₂) : C ⟶ X × X` be contracting at the `k`-point `y` of its
 with underlying set `{y}`, and assume that the stalk `K_x` vanishes. Then the trait class of `c`
 restricted to `B` vanishes, whatever the coefficient map `u`
 (`ProEtale.CondensedRing.Correspondence.restrict_traceClass_eq_zero_of_isContractingAt`, blueprint
-`det-tf-contracting-vanishing`; Varshavsky, *Lefschetz–Verdier trace formula and a generalization
-of a theorem of Fujiwara*, Thm. 2.1.3).
+`theorem-contracting-correspondences-local-terms`; Varshavsky, *Lefschetz–Verdier trace formula and
+a generalization of a theorem of Fujiwara*, Thm. 2.1.3).
 
 The proof is Varshavsky's specialization to the normal cone, over the strictly henselian trait
 `Spec k̄⟦t⟧`:
@@ -32,8 +32,9 @@ The proof is Varshavsky's specialization to the normal cone, over the strictly h
   (`ProEtale.CondensedRing.nonempty_specializationProd_externalProduct_iso`), so that by external
   duality `Rc'^! Ψ_{X×X}(K ⊠ D K) ≅ RHom(γ₂^* Ψ_X K, γ₁^! Ψ_X K)`;
 * `γ₂` lands in the zero section (`IsContractingAt.range_specialLeg₂_subset`, blueprint
-  `det-tf-cone-zero-sections`), on which `Ψ_X K` vanishes by Verdier's zero-section theorem
-  (`ProEtale.CondensedRing.isZero_upperStar_zeroSection_specialization`), so `γ₂^* Ψ_X K = 0`.
+  `lemma-normal-cones-contracting-ideals`), on which `Ψ_X K` vanishes by Verdier's zero-section
+  theorem (`ProEtale.CondensedRing.isZero_upperStar_zeroSection_specialization`), so
+  `γ₂^* Ψ_X K = 0`.
 
 -/
 
@@ -71,16 +72,16 @@ variable {y : RationalPoint c.C} (hc : c.IsContractingAt y) (k' : Type u) [Field
   [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [Algebra k k']
 
 /-- **Specialization of the trace class to the normal cone** (blueprint
-`sk-lem-tf-nearby-mate-coherences`, `det-nearby-exchange-maps`, `det-tf-sp-theta-open-constant`,
-`det-tf-fixed-deformation-points`; Varshavsky, §1.4–§2): the nearby cycles of the deformation of
-`c` to the normal cones carry exchange maps `σ, θ, χ, β` with the coherences of
-`TraceSpecialization` (the unit identity, the composition law for `θ` and the fixed-square
-identity), relating the trace class of `c` to the specialized correspondence `c'`; and since the
-deformed fixed locus is the constant family `F × S` up to nilpotents
-(`det-tf-fixed-deformation-points`), the specialization of Borel–Moore sections is the base change
-to `k'` on the component `B = {y}` of the fixed locus (`det-tf-sp-theta-open-constant`), so it is
-injective there. The exchange maps `β` and `θ` are built from compactifications of the deformed
-schemes over the trait. -/
+`sec-Base-change-for-nearby-cycles`, `prose-E-15`,
+`corollary-specialization-when-fixed-point-scheme--1`, `lemma-fixed-point-scheme-deformation--1`;
+Varshavsky, §1.4–§2): the nearby cycles of the deformation of `c` to the normal cones carry exchange
+maps `σ, θ, χ, β` with the coherences of `TraceSpecialization` (the unit identity, the composition
+law for `θ` and the fixed-square identity), relating the trace class of `c` to the specialized
+correspondence `c'`; and since the deformed fixed locus is the constant family `F × S` up to
+nilpotents (`lemma-fixed-point-scheme-deformation--1`), the specialization of Borel–Moore sections
+is the base change to `k'` on the component `B = {y}` of the fixed locus
+(`corollary-specialization-when-fixed-point-scheme--1`), so it is injective there. The exchange maps
+`β` and `θ` are built from compactifications of the deformed schemes over the trait. -/
 theorem exists_traceSpecialization (F : c.FixedLocus) {B : Over (Spec (.of k))}
     [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
     [IsClosedImmersion j.left]
@@ -124,8 +125,8 @@ end IsContractingAt
 variable (c)
 
 /-- **Vanishing of the trace class at a contracting point with zero stalk** (blueprint
-`det-tf-contracting-vanishing` for the closed subscheme `Z = {x}` of the rational point
-`x = c₁(y)`; Varshavsky, *Lefschetz–Verdier trace formula and a generalization of a theorem of
+`theorem-contracting-correspondences-local-terms` for the closed subscheme `Z = {x}` of the rational
+point `x = c₁(y)`; Varshavsky, *Lefschetz–Verdier trace formula and a generalization of a theorem of
 Fujiwara*, Thm. 2.1.3, the case `K|_Z = 0` of its proof): let `c` be contracting at `y` and let
 `B` be an open and closed subscheme of the fixed locus, proper over `s`, with underlying set
 `{y}`. If the stalk `K_x` vanishes, the restriction of the trace class of `c` to `B` is zero,

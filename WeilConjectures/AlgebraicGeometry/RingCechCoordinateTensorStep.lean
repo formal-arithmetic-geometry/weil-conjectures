@@ -22,8 +22,6 @@ open CategoryTheory AlgebraicGeometry Opposite
 open scoped BigOperators TensorProduct
 namespace CategoryTheory
 
-set_option maxHeartbeats 2500000 in
--- The coordinate eliminations compare the chosen sheaf-tensor instance parameters.
 /-- A single two-term localization factor preserves the positive ordered coordinates
 of an arbitrary nonnegative augmented complex with the tail's coordinates.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099D(d), the induction
@@ -148,8 +146,18 @@ theorem ringCechCoordinates_tensor_step (A : CommRingCat.{u}) (r : ℕ)
     have h := hd q ((e q).symm x) t
     simp only [LinearEquiv.apply_symm_apply] at h
     exact h
-  obtain ⟨E, l', hE₀, hE⟩ := ringCechAlgebraicCone_coordinates A r f d l h₀ hD
-  obtain ⟨z, c, haz, hc₀, hcs⟩ := ringLocalizationTensor_blocks A (f 0) K a hneg
+  -- Project the witnesses without eliminating into the sheaf-tensor target.
+  let hcoord := ringCechAlgebraicCone_coordinates A r f d l h₀ hD
+  let E := hcoord.choose
+  let l' := hcoord.choose_spec.choose
+  have hE₀ := hcoord.choose_spec.choose_spec.1
+  have hE := hcoord.choose_spec.choose_spec.2
+  let hblocks := ringLocalizationTensor_blocks A (f 0) K a hneg
+  let z := hblocks.choose
+  let c := hblocks.choose_spec.choose
+  have haz := hblocks.choose_spec.choose_spec.1
+  have hc₀ := hblocks.choose_spec.choose_spec.2.1
+  have hcs := hblocks.choose_spec.choose_spec.2.2
   let T (q : ℕ) := TensorProduct.congr (LinearEquiv.refl A S) (C q)
   let F (q : ℕ) := (c q).trans (((C (q + 1)).prodCongr (T q)).trans (E q))
   have ht (q : ℕ) (y : S ⊗[A] M q) :

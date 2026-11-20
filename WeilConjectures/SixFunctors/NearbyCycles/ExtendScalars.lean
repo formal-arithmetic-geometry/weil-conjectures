@@ -64,7 +64,6 @@ noncomputable def nearbyCyclesExtendScalarsIso
 
 variable {U Y W : Scheme.{u}} (o : U ⟶ X) [IsOpenImmersion o] (e : Y ⟶ X') (ι : W ⟶ Y)
 
-set_option maxHeartbeats 2000000 in
 -- Elaborating the statement compares the coefficient rings `Λ'_X` of both sides.
 /-- **Restricted nearby cycles of extensions by zero commute with a change of coefficients**: for
 an open immersion `o : U ⟶ X` and morphisms `e : Y ⟶ X'`, `ι : W ⟶ Y`,
@@ -85,7 +84,6 @@ noncomputable def upperStarUpperStarNearbyCyclesLowerShriekExtendScalarsIso
     (L((ι)^*⟦Λ'⟧)).mapIso ((derivedUpperStarExtendScalarsIso a e).app _ ≪≫
       (L((e)^*⟦Λ'⟧)).mapIso (eΨ ≪≫
         (M.nearbyCycles Λ').mapIso ((derivedOpenImmersionShriekIso a o).app K)))
-set_option maxHeartbeats 1000000 in
 -- Elaborating the statement compares the coefficient rings `Λ'_X` of both sides.
 /-- If `Lι^* Le^* Ψ^Λ(Do_! K)` vanishes, so does `Lι^* Le^* Ψ^Λ'(Do_!(Λ' ⊗ᴸ K))`, as soon as a
 comparison `φ` for the pushforward `Rj_*` is invertible at `Lε^* Do_! K`. -/
@@ -103,7 +101,6 @@ lemma isZero_upperStar_upperStar_nearbyCycles_lowerShriek_extendScalars
     (upperStarUpperStarNearbyCyclesLowerShriekExtendScalarsIso a M o e ι K
       (nearbyCyclesExtendScalarsIso a M φ _ hφ)).symm
 
-set_option maxHeartbeats 1000000 in
 -- Elaborating the statement compares the coefficient rings `Λ'_X` of both sides.
 /-- If `Lι^* Le^* Ψ^Λ'(Do_!(Λ' ⊗ᴸ K))` vanishes, so does `Λ' ⊗ᴸ Lι^* Le^* Ψ^Λ(Do_! K)`, as soon as
 a comparison `φ` for the pushforward `Rj_*` is invertible at `Lε^* Do_! K`. -/

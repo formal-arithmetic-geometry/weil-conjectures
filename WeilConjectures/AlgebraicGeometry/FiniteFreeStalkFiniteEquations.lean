@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 
 /-! # Finitely many equations of maps between finite free sheaves
 
-Source: lem-pc-perfect-locus, finite matrix calculation, expanded in
+Source: lemma-coherent-base-change-invertible-sheaves--3, finite matrix calculation, expanded in
 lem-pc-finite-free-stalk-degreewise-shrink, steps 1 and 2.
 (blueprint: lem-pc-finite-free-stalk-finite-equations)
 -/
@@ -43,7 +43,7 @@ private lemma restrict_eq_trans {Y : Scheme.{u}} {U V W : Y.Opens}
 /-- Finitely many equations of module maps between finite free sheaves hold near a point
 if they hold after pullback to its stalk scheme.
 
-Source: lem-pc-perfect-locus, finite matrix calculation, expanded in
+Source: lemma-coherent-base-change-invertible-sheaves--3, finite matrix calculation, expanded in
 lem-pc-finite-free-stalk-degreewise-shrink, steps 1 and 2.
 
 Proof: Induct over the finite set of indices, starting with U for the empty set.

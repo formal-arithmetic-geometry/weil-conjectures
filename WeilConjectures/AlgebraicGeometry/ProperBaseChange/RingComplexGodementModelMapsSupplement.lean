@@ -64,8 +64,9 @@ import all WeilConjectures.AlgebraicGeometry.Module.ModuleCupCosimplicialFMapSum
 
 /-! # Strict maps between the prescribed Godement models
 
-Source: Stacks Project, Tag 0FKS, the coordinate product-of-stalks construction.
-(blueprint: lem-weil-pbc-ring-complex-godement-model-maps).
+## References
+
+* Stacks Project, Tag 0FKS, the coordinate product-of-stalks construction
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -322,7 +322,6 @@ private theorem native_base_change_mate (A : Type u) [CommRing A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 700000 in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the proper base-change mate.
 Source: blueprint operations proof (2), finite proper exchange face.
@@ -371,29 +370,30 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
               proEtaleConstantRingDerivedPullback (R l E n) a) sq.w.symm) ≪≫
             (proEtaleConstantRingPullbackComposition h f (R l E n)).symm).hom)
         ).app ((comparisonFiniteRealization l E b X n).obj N)   := by
-  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))
-  let θ := (leftDerivedUpperStarSquareIso B sq.toCommSq).hom
-  let θ' := (proEtaleConstantRingPullbackComposition f' g (R l E n) ≪≫
-    eqToIso (congrArg (fun a ↦ proEtaleConstantRingDerivedPullback (R l E n) a)
-      sq.w.symm) ≪≫
-    (proEtaleConstantRingPullbackComposition h f (R l E n)).symm).hom
   have H := coordinates_cube_from_coordinates
     (coordinates.val f n) (coordinates.val f' n)
     (comparisonFinitePull l E b f n) (comparisonFinitePull l E b g n)
     (comparisonFinitePull l E b h n) (comparisonFinitePull l E b f' n)
-    θ θ' (derivedBaseChangeMap B sq.toCommSq)
-    (by
-      have HN := native_base_change_mate (R l E n) sq.toCommSq
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HN) none
-        exactByConversion h)
+    (leftDerivedUpperStarSquareIso
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq.toCommSq).hom
+    (proEtaleConstantRingPullbackComposition f' g (R l E n) ≪≫
+      eqToIso (congrArg (fun a ↦ proEtaleConstantRingDerivedPullback (R l E n) a)
+        sq.w.symm) ≪≫
+      (proEtaleConstantRingPullbackComposition h f (R l E n)).symm).hom
+    (derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq.toCommSq)
+    (by rfl)
     (by
       intro M
       have HC := strictFinitePullbackSquareCoherence l E b sq n M
+      -- Normalize structural projections before constructing instance congruences.
+      dsimp only [Functor.comp_obj, Functor.comp_map, Iso.trans_hom, Iso.symm_hom,
+        NatTrans.comp_app] at HC ⊢
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
         exactByConversion h)
     N (coordinates.property f n) (coordinates.property f' n)
+  dsimp only [Functor.comp_obj, Functor.comp_map, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app] at H ⊢
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactByConversion h

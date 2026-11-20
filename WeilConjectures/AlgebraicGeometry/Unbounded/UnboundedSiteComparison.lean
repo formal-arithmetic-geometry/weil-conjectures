@@ -36,14 +36,14 @@ termwise comparison from the etale to the pro-etale module derived category is e
 fully faithful, and preserves arbitrary small direct sums.
 
 Source: blueprint `sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.md`,
-statement and proof (blueprint: lem-sfb-unbounded-site-comparison).
+statement and proof (blueprint: proposition-unbounded-comparison-finite-coefficients--1).
 Proof:
 1. Write L for the exact comparison inverse image and E for finite coefficient
 realization. Exactness induces the triangulated termwise derived functor, and E is
 an equivalence by the existing coefficient realization theorem.
 2. Form the canonical unbounded derived adjunction of L and comparison direct image.
 Replace the nilpotence exponent n by n+1. Apply
-lem-sfb-finite-classical-unbounded-comparison: the derived image of L has classical
+proposition-unbounded-comparison-finite-coefficients--1: the derived image of L has classical
 cohomology, and the actual derived counit is invertible on this image. That theorem
 contains the geometric finite-cohomological-dimension and truncation argument.
 3. The underived L is fully faithful and reflects isomorphisms. The natural

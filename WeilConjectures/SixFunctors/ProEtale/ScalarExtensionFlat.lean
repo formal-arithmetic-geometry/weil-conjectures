@@ -44,7 +44,6 @@ noncomputable def _root_.ModuleCat.restrictScalarsAlgebraMapSelfLinearEquiv :
   left_inv _ := rfl
   right_inv _ := rfl
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale sites
 -- take long to synthesize
 omit [Algebra R S] in

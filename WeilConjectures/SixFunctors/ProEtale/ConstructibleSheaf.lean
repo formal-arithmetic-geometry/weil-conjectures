@@ -122,7 +122,7 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 # Constructible sheaves on the small pro-étale site
 
 This file defines the intrinsic notion of constructibility of sheaves of `Λ`-modules on the
-small pro-étale site of a scheme `X` (blueprint `def-weil-finite-torsion-constructibility`): a
+small pro-étale site of a scheme `X` (blueprint `definition-constructible-sheaves`): a
 sheaf is constructible if, on the strata of a stratification of `X`, it is locally constant with
 finitely generated stalks. Locally constant with finitely generated stalks means that the
 pullbacks along the members of a pro-étale covering family are constant sheaves of finitely
@@ -142,8 +142,8 @@ generated `Λ`-modules.
 - `AlgebraicGeometry.ProEtale.isConstructible_comparisonUpperStar_obj`: `ν^*` preserves
   constructibility.
 - `ProEtale.isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_obj`
-  (`lem-sf-proetale-constructible-origin` (i)): a pro-étale sheaf is constructible if and only if
-  it is `ν^*` of a constructible étale sheaf.
+  (`theorem-comparison-constructible-sheaves` (i)): a pro-étale sheaf is constructible if and only
+  if it is `ν^*` of a constructible étale sheaf.
 
 -/
 
@@ -159,7 +159,7 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `def-weil-finite-torsion-constructibility`: a sheaf `F` of `Λ`-modules on the
+/-- Blueprint `definition-constructible-sheaves`: a sheaf `F` of `Λ`-modules on the
 small pro-étale site of `X` is *locally constant with finitely generated stalks* if there is a
 pro-étale covering family `g i : W i ⟶ X` such that every pullback `(g i)^* F` is the constant
 sheaf of a finitely generated `Λ`-module (Stacks 09AJ). -/
@@ -171,7 +171,7 @@ def IsFiniteLocallyConstant {X : Scheme.{u}}
         Nonempty (((g i)^*[ModuleCat.{u + 1} Λ]).obj F ≅
           (constantSheaf (Scheme.ProEt.topology (W i)) (ModuleCat.{u + 1} Λ)).obj M)
 
-/-- Blueprint `def-weil-finite-torsion-constructibility`: a sheaf `F` of `Λ`-modules on the
+/-- Blueprint `definition-constructible-sheaves`: a sheaf `F` of `Λ`-modules on the
 small pro-étale site of `X` is *constructible* if there is a finite partition of `X` into
 locally closed constructible subschemes on each of which the restriction of `F` is locally
 constant with finitely generated stalks. -/
@@ -287,9 +287,9 @@ theorem IsFiniteLocallyConstant.exists_finite [Finite Λ] {X : Scheme.{u}}
   exact ⟨M, Module.finite_of_finite Λ, e⟩
 
 variable (Λ) in
-/-- Compatibility required from `sec-proetale-coefficients` (to be proved there):
-blueprint `lem-sf-proetale-constructible-origin`.
-Blueprint `lem-sf-proetale-constructible-origin`: Constructible pro-étale coefficients are
+/-- Compatibility required from `chap-The-pro-etale-site` (to be proved there):
+blueprint `theorem-comparison-constructible-sheaves`.
+Blueprint `theorem-comparison-constructible-sheaves`: Constructible pro-étale coefficients are
 of étale origin, clause (i).
 
 At a finite coefficient ring `Λ`, the comparison pullback `ν^*` induces an equivalence between
@@ -325,7 +325,7 @@ theorem isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_
 
 variable (Λ) in
 /-- A constructible pro-étale sheaf is `ν^*` of a constructible étale sheaf
-(`lem-sf-proetale-constructible-origin` (i)). -/
+(`theorem-comparison-constructible-sheaves` (i)). -/
 theorem exists_isConstructibleSheaf_iso_comparisonUpperStar_obj [Finite Λ] {T : Scheme.{u}}
     {F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)} (hF : IsConstructible Λ F) :
     ∃ G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), Scheme.IsConstructibleSheaf G ∧

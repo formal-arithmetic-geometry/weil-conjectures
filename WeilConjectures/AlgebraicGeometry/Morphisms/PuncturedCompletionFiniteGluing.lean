@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-! # Finite algebra gluing across maximal-ideal completion
 
-Source: Stacks Project, Tag 0BLH.
+## References
+
+* Stacks Project, Tag 0BLH and More on Algebra, Proposition 15.91.16
 -/
 
 @[expose] public section
@@ -25,22 +27,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite completed model glues to a finite model with both prescribed restrictions.
-
-Source: Stacks Project, Tag 0BLH and More on Algebra, Proposition 15.91.16.
-(blueprint: lem-sbc-punctured-completion-finite-gluing)
-
-Proof: Form the actual ring of matching sections Γ(Y) ×_{Γ(P)} Γ(E), where
-P is the overlap and the map to E is induced by the supplied identification.
-The A-algebra map is the pullback lift of the two structural maps on sections.
-Its spectrum is the candidate F. The punctured and completed comparison theorems
-identify its two restrictions with the supplied models. The natural base equations
-and the inverse-hom identity give the equations required below. The completed
-pullback projection is finite because it is isomorphic over the completed base
-to s. Noetherian maximal-ideal completion is flat and local, hence faithfully flat;
-finite morphisms descend under this fpqc base change. This proves finiteness of F
-without an additional hole. For empty U the matching ring is Γ(E), so the same
-construction also includes Artinian local bases. -/
+/-- A finite completed model glues to a finite model with both prescribed restrictions. -/
 theorem exists_finite_model_of_completed_model
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     (U : (Spec (.of A)).Opens)

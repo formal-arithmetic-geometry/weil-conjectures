@@ -261,8 +261,6 @@ private theorem factor_differential
     Preadditive.sub_comp, Preadditive.zsmul_comp, Category.assoc, hα, hβ]
 
 -- Categorical comparisons elaborate several nested restriction and localization functors.
-set_option maxHeartbeats 800000 in
--- The nested functor comparisons require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 private theorem sheafHomIso_naturality
     (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)
@@ -337,7 +335,6 @@ private abbrev complexMap
 attribute [local irreducible] homComplexFunctor
 
 -- Categorical comparisons elaborate several nested restriction and localization functors.
-set_option maxHeartbeats 800000 in
 -- Projection formulas require reducing the local Hom-complex abbreviations.
 set_option backward.isDefEq.respectTransparency true in
 private theorem homComplexFromComparison
@@ -491,8 +488,6 @@ private theorem homComplexRestriction
     (fun f g ↦ sheafHomIso_naturality F R hF f g)
 
 -- Categorical comparisons elaborate several nested restriction and localization functors.
-set_option maxHeartbeats 800000 in
--- The nested functor comparisons require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency true in
 private theorem derivedHomRestriction
     {C D : Type u} [SmallCategory C] [SmallCategory D]
@@ -745,7 +740,6 @@ private def pushforwardCompare
     SheafOfModules.pushforwardCongr₂ _ e.symm he
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Transport through flattening compares two presentations of the same section fibres.
 private theorem flattenRestrictionEquivalence
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}

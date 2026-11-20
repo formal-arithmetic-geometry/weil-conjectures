@@ -45,7 +45,7 @@ attribute [local reducible] derivedScalars moduleObjectDerivedPullback
   moduleObjectDerivedPushforward
 
 -- The proof helpers below use their own instance context; the public statements are
--- elaborated after this section, in the context of the published module.
+-- elaborated after this section, in the context of the module.
 section ProofHelpers
 attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafMonoidalCategory
 attribute [local implicit_reducible] ProEtale.sheafMonoidalCategory
@@ -197,7 +197,6 @@ section UnitComparison
 attribute [-instance] scalar_unit_comm_sym
 attribute [local instance 20001] ProEtale.sheafSymmetricCategory
 
-set_option maxHeartbeats 2000000 in
 -- Compare the two native unit structures with their dependent tensor instances.
 attribute [-instance] internalMonoidal internalTensorCommShift in
 private theorem native_unit_comparison
@@ -211,7 +210,6 @@ private theorem native_unit_comparison
 
 attribute [local instance 50000] scalar_unit_comm_braided
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the native module-object tensor instances and derived-functor comparisons.
 private theorem native_single_unit_inv
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -222,7 +220,6 @@ private theorem native_single_unit_inv
   change ((𝟙 _ ≫ (DerivedCategory.Qh (C := Modules Λ X)).map (𝟙 _)) ≫ 𝟙 _) ≫ 𝟙 _ = 𝟙 _
   simp
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the native module-object tensor instances and derived-functor comparisons.
 private theorem native_single_unit_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -244,16 +241,13 @@ private theorem scalar_unit_pull_formula
   unfold scalarUnitPullIso
   rfl
 
-set_option maxHeartbeats 2000000 in
--- Normalize the native module-object tensor instances and derived-functor comparisons.
+-- Normalize the unit comparison before applying the derived adjunction.
 attribute [-instance] internalMonoidal internalTensorCommShift in
-private theorem scalar_unit_pull_adjunct
+private theorem scalar_unit_pull_native_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u}) :
-    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (ProjectiveLine Y ↘ Y)).homEquiv
-        _ _ (scalarUnitPullIso Λ Y).hom =
-      coefficientUnitPush Λ Y
-        (canonicalDiagonalRightDerived (CondensedRing.lowerStar Λ (ProjectiveLine Y ↘ Y))) := by
+    HEq (scalarUnitPullIso Λ Y).hom
+      (CondensedRing.leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y)).hom := by
   generalize hU : secondTraceUnitIso Λ Y = U
   have hu_global := native_unit_comparison Λ Y
   rw [hU] at hu_global
@@ -264,6 +258,36 @@ private theorem scalar_unit_pull_adjunct
   let : MonoidalClosed (Modules Λ (ProjectiveLine Y)) :=
     scalar_module_closed Λ (ProjectiveLine Y)
   rw [scalar_unit_pull_formula]
+  have hY := (singleUnit_existsUnique Λ Y).exists.choose_spec
+  have hP := (singleUnit_existsUnique Λ (ProjectiveLine Y)).exists.choose_spec
+  unfold singleUnitIso internalMonoidal internalTensorBundle nativeTensorBundle at hY hP ⊢
+  erw [eq_of_heq hY, eq_of_heq hP]
+  simp only [Iso.symm_hom]
+  erw [native_single_unit_hom, native_single_unit_inv]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  unfold internalMonoidal internalTensorBundle nativeTensorBundle
+    moduleObjectDerivedPullback at U hu_global
+  have hu' : U = CondensedRing.leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y) :=
+    eq_of_heq hu_global
+  erw [hU, hu']
+  exact HEq.rfl
+
+-- Normalize the native module-object tensor instances and derived-functor comparisons.
+attribute [-instance] internalMonoidal internalTensorCommShift in
+private theorem scalar_unit_pull_adjunct
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u}) :
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (ProjectiveLine Y ↘ Y)).homEquiv
+        _ _ (scalarUnitPullIso Λ Y).hom =
+      coefficientUnitPush Λ Y
+        (canonicalDiagonalRightDerived (CondensedRing.lowerStar Λ (ProjectiveLine Y ↘ Y))) := by
+  let : BraidedCategory (Modules Λ Y) := scalar_module_braided Λ Y
+  let : BraidedCategory (Modules Λ (ProjectiveLine Y)) :=
+    scalar_module_braided Λ (ProjectiveLine Y)
+  let : MonoidalClosed (Modules Λ Y) := scalar_module_closed Λ Y
+  let : MonoidalClosed (Modules Λ (ProjectiveLine Y)) :=
+    scalar_module_closed Λ (ProjectiveLine Y)
+  erw [eq_of_heq (scalar_unit_pull_native_hom Λ Y)]
   let ad := CondensedRing.derivedUpperStarLowerStarAdjunction Λ (ProjectiveLine Y ↘ Y)
   let ad' := (Adjunction.mapDerivedCategoryRightDerivedAdjunction
         (CondensedRing.upperStarLowerStarAdjunction Λ (ProjectiveLine Y ↘ Y))).ofNatIsoLeft
@@ -277,19 +301,8 @@ private theorem scalar_unit_pull_adjunct
       (Functor.leftDerivedFunctorIsoMapDerivedCategory_hom_fac
         (CondensedRing.upperStar Λ (ProjectiveLine Y ↘ Y))).symm
   change ad.homEquiv _ _ _ = _
-  rw [ha, Adjunction.homEquiv_ofNatIsoLeft_apply]
+  erw [ha, Adjunction.homEquiv_ofNatIsoLeft_apply]
   simp only [Iso.symm_hom]
-  have hY := (singleUnit_existsUnique Λ Y).exists.choose_spec
-  have hP := (singleUnit_existsUnique Λ (ProjectiveLine Y)).exists.choose_spec
-  unfold singleUnitIso internalMonoidal internalTensorBundle nativeTensorBundle at hY hP ⊢
-  erw [eq_of_heq hY, eq_of_heq hP]
-  erw [native_single_unit_hom, native_single_unit_inv]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
-  unfold internalMonoidal internalTensorBundle nativeTensorBundle
-    moduleObjectDerivedPullback at U hu_global
-  have hu' : U = CondensedRing.leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y) :=
-    eq_of_heq hu_global
-  erw [hU, hu']
   erw [CondensedRing.leftDerivedUpperStarUnitIso_hom_eq,
     ← Functor.leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh]
   erw [Category.assoc, Iso.inv_hom_id_app_assoc]
@@ -305,7 +318,6 @@ private theorem scalar_unit_pull_adjunct
 
 end UnitComparison
 
-set_option maxHeartbeats 2000000 in
 -- The four module-object categories carry large dependent instance arguments.
 private theorem scalar_unit_pull_naturality_aux
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -363,26 +375,7 @@ private theorem scalar_unit_pull_naturality_aux
 end ProofHelpers
 
 /-- The scalar/pullback comparison respects the normalized coefficient-unit endpoints.
-This equation has no direct image, exchange map, Tate line, or Chern adjunct.
-
-Source: latest blueprint, diagonal-tower coefficient changes, paragraphs (2)--(3),
-coefficient functors commuting with pullback.
-(blueprint: lem-sfb-scalar-unit-pull-naturality).
-
-Proof: Transpose through the derived extension/restriction adjunction at the
-projective line. The Endpoint.normalization equations replace both scalar
-endpoint maps by the degree-zero images of the prescribed coefficient maps.
-The scalar/pullback comparison is conjugate to the identity restriction/direct-image
-comparison. Its transpose therefore inserts the coefficient unit before applying
-ordinary inverse image. The unit pullback comparison is the ordinary regular-module
-comparison, transported through the single/unit comparisons. Both transposed
-composites send the coefficient unit to the coefficient unit, by naturality of
-coefficientMap and condensedPullbackHom. The extension/restriction adjunction and
-faithful module forgetful functor identify the ordinary arrows. Exact inverse image
-computes on degree-zero complexes; its canonical single comparison transports this
-equality into the derived category. Injectivity of the derived adjunction returns
-the displayed square. No basis, coefficient flatness beyond that defining the
-specified derivedPullIso, or nonempty scheme is used. -/
+This equation has no direct image, exchange map, Tate line, or Chern adjunct. -/
 theorem scalar_unit_pull_naturality
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -398,12 +391,7 @@ theorem scalar_unit_pull_naturality
       cY.iso.hom (scalarUnitPullIso Λ Y).hom (scalarUnitPullIso Λ' Y).hom cP.iso.hom :=
   scalar_unit_pull_naturality_aux a Y cY cP
 
-/-- The unit square in native functor notation.
-Source: diagonal coefficient changes (2)--(3).
-(blueprint: lem-sfb-scalar-unit-pull-naturality).
-
-Proof: unfold PullEndpointSquare in scalar_unit_pull_naturality and identify the
-functor wrappers by structural heterogeneous congruence. -/
+/-- The unit square in native functor notation. -/
 theorem scalar_unit_pull_naturality_explicit
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

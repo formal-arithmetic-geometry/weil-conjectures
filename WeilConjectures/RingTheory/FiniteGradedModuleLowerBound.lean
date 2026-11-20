@@ -24,8 +24,8 @@ universe u v
 namespace MvPolynomial
 
 /-- A finite graded module over the nonnegatively graded polynomial ring is bounded below.
-Source: blueprint `lem-sc-p1-graded-resolution`, expanded graded Nakayama argument, step 1
-(blueprint: lem-sc-p1-finite-graded-module-lower-bound).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, expanded graded Nakayama argument,
+step 1 (blueprint: lem-sc-p1-finite-graded-module-lower-bound).
 
 Proof: use finite homogeneous generators of degrees `dᵢ` and choose a common lower bound `B`
 for those finitely many integers (also if there are no generators). Expand every polynomial

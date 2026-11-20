@@ -40,7 +40,7 @@ Proof:
    base-change isomorphisms. Their rings are Noetherian by
    `def-weil-pbc-noetherian-ring` and `lem-weil-pbc-finite-type-algebra-noetherian`.
    The prime localizations have local transition maps by
-   `lem-weil-pbc-filtered-colimit-localization-at-prime`, and each localized module is finite.
+   `lemma-quasi-finite-coordinates--1`, and each localized module is finite.
 2. The colimits of these prime localizations are `R_p`, `S_q`, and `M_q`.
    For the module, representatives of fractions come from a common stage, and a fraction
    that vanishes is killed at a later stage, using `def-weil-directed-colimit-abelian-groups`.

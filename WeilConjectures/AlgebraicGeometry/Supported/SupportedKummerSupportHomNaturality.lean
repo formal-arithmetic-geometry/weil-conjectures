@@ -408,7 +408,7 @@ abbrev supportedHomPullbackMapsType (A : Type (u + 1)) [CommRing A]
 /-- The canonical representative maps for pullback of a closed/open pair. A resolution
 comparison must extend the pulled-back resolution unit. Its section maps and Hom map are
 specified degreewise; the relative pullback is then the diagonal mapping-cone map.
-Source: Stacks, Tag 0A45 and blueprint lem-amb-cartier-kummer-map, penultimate paragraph
+Source: Stacks, Tag 0A45 and blueprint lemma-cycle-class-cartier-divisor, penultimate paragraph
 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
 structure SupportedKummerSupportHomData (A : Type (u + 1)) [CommRing A]
     {T' T D' D V' V : Scheme.{u}} (h : T' ⟶ T) (i : D ⟶ T)

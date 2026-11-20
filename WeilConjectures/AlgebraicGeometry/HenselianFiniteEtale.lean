@@ -59,6 +59,8 @@ Spec A/I --> Spec A
   constant sheaf of sets is of this form.
 - `AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing`:
   the `H¹` comparison for a finite constant sheaf.
+- `Scheme.isEquivalence_pullback_finiteEtale_and_bijective_cohomology_one_of_henselianRing`:
+  both, with the target identified with `H¹(Y₀, M)`.
 
 ## References
 
@@ -116,8 +118,8 @@ henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre 
 Then restriction `Γ(Y, 𝒪_Y) ⟶ Γ(Y₀, 𝒪_{Y₀})` induces a bijection between the idempotents
 of the two rings; equivalently the open and closed subschemes of `Y₀` are exactly the closed
 fibres of those of `Y`. The restriction map itself need not be bijective.
-(blueprint: `thm-weil-pbc-henselian-idempotent-lifting`) 
-(blueprint: thm-weil-pbc-henselian-idempotent-lifting)
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) 
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 @[stacks 0A0B]
 theorem Scheme.bijective_appTop_idempotent_of_henselianRing
@@ -150,8 +152,8 @@ Then base change along `i` is an equivalence from the category of finite étale 
 to the category of finite étale `Y₀`-schemes. In particular morphisms, and hence finite
 group actions (finitely many automorphisms subject to finitely many equations), lift
 uniquely.
-(blueprint: `thm-weil-pbc-finite-etale-lifting`) 
-(blueprint: thm-weil-pbc-finite-etale-lifting)
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) 
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 @[stacks 0A48]
 theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing
@@ -193,8 +195,8 @@ change along `i` is an equivalence from the category of finite étale `Y`-scheme
 category of finite étale `Y₀`-schemes; in particular morphisms and finite group actions
 lift uniquely. This is the case `I = 𝔪` of
 `AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing`.
-(blueprint: `lemma-weil-pbc-finite-etale-henselian-lifting`) 
-(blueprint: lemma-weil-pbc-finite-etale-henselian-lifting)
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) 
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianLocalRing
     {A : Type u} [CommRing A] [HenselianLocalRing A]
@@ -212,8 +214,8 @@ bijective. Both sides classify `M`-torsors, i.e. finite étale schemes with a si
 transitive `M`-action (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_quotientEquivSheafH`),
 and these correspond under the finite étale lifting
 `AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing`.
-(blueprint: `lemma-weil-pbc-h1-torsor-comparison`) 
-(blueprint: lemma-weil-pbc-h1-torsor-comparison)
+(blueprint: `theorem-finite-etale-covers-proper-henselian--3`) 
+(blueprint: theorem-finite-etale-covers-proper-henselian--3)
 -/
 theorem Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing
     {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]
@@ -226,6 +228,30 @@ theorem Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing
   by
     have hFE := Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing I f i f₀ h
     exact Etale.bijective_cohomologyMap_one_of_finiteEtale_equivalence i hFE M
+
+/-- Let `(A, I)` be a henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed
+fibre over `Spec A/I`. Then base change along `i` is an equivalence from finite étale
+`Y`-schemes to finite étale `Y₀`-schemes, and for every finite abelian group `M` the
+restriction `H¹(Y, M) ⟶ H¹(Y₀, i^* M) ≅ H¹(Y₀, M)` is bijective. -/
+theorem Scheme.isEquivalence_pullback_finiteEtale_and_bijective_cohomology_one_of_henselianRing
+    {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]
+    {Y Y₀ : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (i : Y₀ ⟶ Y)
+    (f₀ : Y₀ ⟶ Spec (.of (A ⧸ I)))
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
+    (MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ i).IsEquivalence ∧
+      ∀ (M : Type (u + 1)) [AddCommGroup M] [Finite M],
+        Function.Bijective (Sheaf.H.map
+          ((upperStarConstantSheafIso AddCommGrpCat.{u + 1} i).app (AddCommGrpCat.of M)).hom 1 ∘
+            Etale.cohomologyMap i
+              ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+                (AddCommGrpCat.of M)) 1) := by
+  refine ⟨isEquivalence_pullback_finiteEtale_of_henselianRing I f i f₀ h, fun M _ _ ↦ ?_⟩
+  let e := (upperStarConstantSheafIso AddCommGrpCat.{u + 1} i).app (AddCommGrpCat.of M)
+  have he : Function.Bijective (Sheaf.H.map e.hom 1) := by
+    refine Function.bijective_iff_has_inverse.2 ⟨Sheaf.H.map e.inv 1, fun x ↦ ?_, fun x ↦ ?_⟩
+    · rw [← Sheaf.H.map_comp_apply, e.hom_inv_id, Sheaf.H.map_id_apply]
+    · rw [← Sheaf.H.map_comp_apply, e.inv_hom_id, Sheaf.H.map_id_apply]
+  exact he.comp (Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing I f i f₀ h M)
 
 end AlgebraicGeometry
 

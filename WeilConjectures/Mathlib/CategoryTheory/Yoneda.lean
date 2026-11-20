@@ -18,11 +18,11 @@ compatible with the two representations.
 
 - `CategoryTheory.Functor.RepresentableBy.existsUnique_iso`: two representing objects of a functor
   are isomorphic through a unique isomorphism compatible with the representations (blueprints
-  `lem-sc-jacobian-unique`, `lem-pc-representable-unique`).
+  `proposition-jacobian-over-ground-field--1`, `proposition-jacobian-over-ground-field`).
 - `CategoryTheory.bijective_yoneda_app_id`: the Yoneda bijection `τ ↦ τ_X(𝟙 X)` and its
   naturality (blueprint `lem-pc-yoneda`).
 - `CategoryTheory.Functor.isRepresentable_iff_exists_nonempty_iso`: a presheaf is representable
-  iff it is isomorphic to a functor of points (blueprint `def-pc-representable-functor`).
+  iff it is isomorphic to a functor of points (blueprint `definition-relative-picard-functor--2`).
 - `CategoryTheory.Functor.FullyFaithful.opCompYonedaObjIso`: for a fully faithful `F`,
   `Hom(F -, F A) ≅ Hom(-, A)`.
 -/
@@ -69,7 +69,8 @@ of group schemes is not part of the statement, as `Pic^0_{C/k}` is only a functo
 For `C` the category `Over S` of schemes over `S` this is the uniqueness of the scheme
 representing a functor `(Sch/S)ᵒᵖ ⥤ Set`.
 
-(blueprint: `lem-sc-jacobian-unique`, `lem-pc-representable-unique`) -/
+(blueprint: `proposition-jacobian-over-ground-field--1`,
+`proposition-jacobian-over-ground-field`) -/
 theorem existsUnique_iso (e : F.RepresentableBy Y) (e' : F.RepresentableBy Y') :
     ∃! u : Y ≅ Y', ∀ {X : C} (f : X ⟶ Y), e'.homEquiv (f ≫ u.hom) = e.homEquiv f := by
   refine ⟨e.uniqueUpToIso e', fun f ↦ homEquiv_comp_uniqueUpToIso_hom e e' f, fun u hu ↦ ?_⟩
@@ -114,7 +115,7 @@ schemes over `S`, this is representability of `F` by a scheme over `S`; a repres
 is unique up to unique isomorphism
 (`CategoryTheory.Functor.RepresentableBy.existsUnique_iso`).
 
-(blueprint: `def-pc-representable-functor`) -/
+(blueprint: `definition-relative-picard-functor--2`) -/
 theorem isRepresentable_iff_exists_nonempty_iso {C : Type u} [Category.{v} C]
     (F : Cᵒᵖ ⥤ Type v) : F.IsRepresentable ↔ ∃ P : C, Nonempty (yoneda.obj P ≅ F) :=
   ⟨fun _ ↦ ⟨F.reprX, ⟨F.reprW⟩⟩, fun ⟨_, ⟨e⟩⟩ ↦ IsRepresentable.mk' e⟩

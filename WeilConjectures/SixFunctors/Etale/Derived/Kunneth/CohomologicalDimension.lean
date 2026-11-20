@@ -19,15 +19,18 @@ import Mathlib.Condensed.Discrete.Characterization
 # Cohomological dimension of étale sheaves of `Λ`-modules
 
 The (torsion étale) cohomological dimension of a scheme and of a morphism, for sheaves of
-`Λ`-modules (blueprint `def-kun-cd`), and its finiteness for schemes and morphisms of finite type
-over a field (blueprint `lem-kun-0f10`, Stacks 0F10).
+`Λ`-modules (blueprint `definition-cohomological-dimension`), and its finiteness for schemes and
+morphisms of finite type over a field (blueprint `theorem-results-from-etale-theory--6`, Stacks
+0F10).
 
 ## Main definitions and statements
 
 - `AlgebraicGeometry.Etale.HasFiniteCohomologicalDimension`,
-  `AlgebraicGeometry.Etale.HasFiniteCohomologicalDimensionMorphism` (`def-kun-cd`).
+  `AlgebraicGeometry.Etale.HasFiniteCohomologicalDimensionMorphism`
+  (`definition-cohomological-dimension`).
 - `AlgebraicGeometry.Etale.hasFiniteCohomologicalDimensionMorphism` and
-  `AlgebraicGeometry.Etale.hasFiniteCohomologicalDimension_of_isSepClosed` (`lem-kun-0f10`).
+  `AlgebraicGeometry.Etale.hasFiniteCohomologicalDimension_of_isSepClosed`
+  (`theorem-results-from-etale-theory--6`).
 - `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_topologicalKrullDim_le`: the
   vanishing of `R^q f_*` above twice the dimension of the base changes of the source to the
   field extensions, over an arbitrary field, deduced from the separably closed case by a limit
@@ -67,9 +70,9 @@ noncomputable def homologyRightDerivedLowerStarSingleIsoHigherDirectImage {X Y :
   ((f)_*[ModuleCat.{u + 1} Λ]).homologyRightDerivedFunctorObjSingleFunctorIso F q ≪≫
     (((f)_*[ModuleCat.{u + 1} Λ]).homologyRightDerivedFunctorPlusObjSingleFunctorIso F q).symm
 
-/-- Blueprint `lem-kun-0f10`, part (1), over a separably closed field: a morphism between
-`K`-schemes of finite type has finite cohomological dimension, with bound `2 dim X`. This is
-`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt`. -/
+/-- Blueprint `theorem-results-from-etale-theory--6`, part (1), over a separably closed field: a
+morphism between `K`-schemes of finite type has finite cohomological dimension, with bound
+`2 dim X`. This is `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt`. -/
 theorem hasFiniteCohomologicalDimensionMorphism_of_isSepClosed_of_locallyOfFiniteType
     (hΛ : IsAddTorsion Λ) {K : Type u} [Field K] [IsSepClosed K]
     {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))
@@ -88,9 +91,9 @@ theorem hasFiniteCohomologicalDimensionMorphism_of_isSepClosed_of_locallyOfFinit
   exact (Etale.isZero_higherDirectImage_of_two_mul_lt hΛ f aX aY hf d hd F n hq).of_iso
     (homologyRightDerivedLowerStarSingleIsoHigherDirectImage Λ f F n)
 
-/-- The key step of blueprint `lem-kun-0f10`, part (1), over an arbitrary field `K`. Let
-`f : X ⟶ Y` be a morphism between `K`-schemes of finite type such that `dim (X ×_K L) ≤ n` for
-every field extension `L` of `K`. Then `R^q f_* F = 0` for every `q > 2n`.
+/-- The key step of blueprint `theorem-results-from-etale-theory--6`, part (1), over an arbitrary
+field `K`. Let `f : X ⟶ Y` be a morphism between `K`-schemes of finite type such that
+`dim (X ×_K L) ≤ n` for every field extension `L` of `K`. Then `R^q f_* F = 0` for every `q > 2n`.
 
 Write `K^sep` for a separable closure of `K` and `X_L = X ×_K L`. By the limit theorem for higher
 direct images (`AlgebraicGeometry.Etale.higherDirectImage_limit`), the stalks of the
@@ -236,7 +239,8 @@ theorem isZero_higherDirectImage_of_forall_topologicalKrullDim_le (hΛ : IsAddTo
     (R+((f)_*[ModuleCat.{u + 1} Λ]).mapIso ((DerivedCategory.Plus.singleFunctor _ 0).mapIso
       ((Etale.upperStarId (ModuleCat.{u + 1} Λ) X).app F).symm)))
 
-/-- Blueprint `lem-kun-0f10`: finite cohomological dimension of finite-type morphisms, part (1).
+/-- Blueprint `theorem-results-from-etale-theory--6`: finite cohomological dimension of finite-type
+morphisms, part (1).
 
 Let `K` be a field and `f : X ⟶ Y` a morphism between `K`-schemes of finite type. For a torsion
 coefficient ring `Λ`, the higher direct images `R^q f_*` of étale sheaves of `Λ`-modules vanish
@@ -252,7 +256,8 @@ theorem hasFiniteCohomologicalDimensionMorphism (hΛ : IsAddTorsion Λ) {K : Typ
   exact (isZero_higherDirectImage_of_forall_topologicalKrullDim_le Λ hΛ aX aY f _hf n hn F m
     hq).of_iso (homologyRightDerivedLowerStarSingleIsoHigherDirectImage Λ f F m)
 
-/-- Blueprint `lem-kun-0f10`: finite cohomological dimension of finite-type morphisms, part (2).
+/-- Blueprint `theorem-results-from-etale-theory--6`: finite cohomological dimension of finite-type
+morphisms, part (2).
 
 Over a separably closed field `K`, a `K`-scheme `X` of finite type has finite étale
 cohomological dimension: for a torsion coefficient ring `Λ`, `H^q(X, F) = 0` for every étale

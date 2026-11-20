@@ -28,9 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-set_option synthInstance.maxHeartbeats 100000 in
 -- Derived functor compositions need additional typeclass search budget.
-set_option maxHeartbeats 400000 in
 -- Comparing the localizations elaborates several large exact-functor structures.
 /-- A decomposition of an associated module complex on an affine open comes from a
 binary decomposition in the module derived category. No boundedness, finite generation,

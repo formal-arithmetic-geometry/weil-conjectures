@@ -22,7 +22,7 @@ import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalS
 
 Source: literature/blueprint/latest/blueprint/sec-fourier-transform/
 sk-lem-wft-character-integral/lem-fd-affine-line-constant-cohomology.md and its proof.
-(blueprint: lem-fd-affine-line-constant-cohomology).
+(blueprint: lemma-integral-linear-character--2).
 
 The coefficients are the recorded finite-subextension-valued condensed ring pulled
 back from the point. Cohomology means the right derived functors of evaluation at
@@ -44,7 +44,7 @@ namespace AlgebraicGeometry.ProEtale
 This applies the existing monoidal inverse image to the existing constant global
 section and evaluates the resulting tensor-unit morphism at the integer generator.
 Source: the degree-zero normalization of the affine-line cohomology lemma
-(blueprint: lem-fd-affine-line-constant-cohomology). -/
+(blueprint: lemma-integral-linear-character--2). -/
 def condensedQbarConstantSection (X : Scheme.{v}) (ℓ : ℕ) [Fact ℓ.Prime]
     (a : PadicAlgCl ℓ) :
     (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X).obj.obj
@@ -248,7 +248,7 @@ by constant sections in degree zero.
 
 Source: literature/blueprint/latest/blueprint/sec-fourier-transform/
 sk-lem-wft-character-integral/lem-fd-affine-line-constant-cohomology.md and its proof.
-(blueprint: lem-fd-affine-line-constant-cohomology).
+(blueprint: lemma-integral-linear-character--2).
 
 Proof: Put X = Spec K[t]. The source-library affine-line Kummer theorem gives
 vanishing for every finite constant group killed by a power of ell. Compare the

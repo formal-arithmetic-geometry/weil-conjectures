@@ -140,8 +140,6 @@ private theorem restrict_scalar_naturality {R : CommRingCat.{u}} {X : Scheme.{u}
     rfl
   exact congrArg (fun k ↦ k ((Scheme.ΓSpecIso R).inv r)) hh
 
-set_option maxHeartbeats 500000 in
--- Elaborating the chart's dependent module structures needs more than the default heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- Global linear maps extend to a morphism into the internal Hom sheaf.
 Source: Stacks Project, Tag 01I7 (mapping property) and Tag 01HV (4)-(5).
@@ -197,8 +195,7 @@ theorem exists_affineHom_generator_extension {Y : Scheme.{u}} (U : Y.affineOpens
     exact Functor.additive_of_preservesBinaryBiproducts T
   have hadd : ∀ h k : M ⟶ N, α (h + k) = α h + α k := by
     intro h k
-    dsimp only [α]
-    rw [T.map_add, hom_section_add, Preadditive.comp_add]
+    simp only [α, F, T.map_add, hom_section_add, Preadditive.comp_add]
   have hsmul : ∀ (r : Γ(Y, U.1)) (h : M ⟶ N),
       α (r • h) =
         T.map (ModuleCat.ofHom (LinearMap.toSpanSingleton Γ(Y, U.1) Γ(Y, U.1) r)) ≫
@@ -230,7 +227,13 @@ theorem exists_affineHom_generator_extension {Y : Scheme.{u}} (U : Y.affineOpens
     intro W
     apply ModuleCat.hom_ext
     ext m
-    rw [hom_section_app, hom_section_app, hs M N h W.unop.left m]
+    change U.1.toScheme.sheaf.obj.map W.unop.hom.op (e.hom.val.app V x) •
+        (T.map (r • h)).val.app (Opposite.op W.unop.left) m =
+      U.1.toScheme.sheaf.obj.map W.unop.hom.op
+        (e.hom.val.app V ((T.map (ModuleCat.ofHom
+          (LinearMap.toSpanSingleton Γ(Y, U.1) Γ(Y, U.1) r))).val.app V x)) •
+        (T.map h).val.app (Opposite.op W.unop.left) m
+    rw [hs M N h W.unop.left m]
     have hmul : ModuleCat.ofHom (LinearMap.toSpanSingleton Γ(Y, U.1) Γ(Y, U.1) r) =
         r • 𝟙 (ModuleCat.of Γ(Y, U.1) Γ(Y, U.1)) := by
       apply ModuleCat.hom_ext

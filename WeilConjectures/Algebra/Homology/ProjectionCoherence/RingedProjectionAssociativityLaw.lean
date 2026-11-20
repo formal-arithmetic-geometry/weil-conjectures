@@ -158,7 +158,6 @@ private theorem comparison_isIso {A B : RingedTensorCorner.{u, w}}
     P hp.1 (fun n ↦ (exactFunctor _ _).prop_of_iso
       (siteSheafTensorRightIso A.ring _).symm (hp.2 n))
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the uniquely characterized comparison with both tensor models fixed.
 private theorem edge_equation {A B : RingedTensorCorner.{u, w}}
     (e : RingedTensorEdge A B) (a : RingedTensorModel A) (b : RingedTensorModel B)
@@ -169,7 +168,8 @@ private theorem edge_equation {A B : RingedTensorCorner.{u, w}}
     comparison e ((totalTensor A).obj (P, Q)) ≫ DerivedCategory.Q.map (delta e P Q) ≫
       b.representative.hom.app
         (⟨(pull e).obj P, pull_good e hp⟩, ⟨(pull e).obj Q, pull_good e hq⟩) := by
-  exact ringedTensorEdgeRepresentativeEquation e a b P Q hp hq
+  dsimp only [comparison, delta]
+  exact ringedTensorEdgeRepresentativeEquation (A := A) (B := B) e a b P Q hp hq
     (pull_good e hp) (pull_good e hq)
 
 attribute [local irreducible] monoidalCategory

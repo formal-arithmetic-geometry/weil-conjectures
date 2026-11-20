@@ -29,9 +29,9 @@ Nothing uses these declarations yet. They are the base point of the compact-supp
 exceptional exchange `β_{a_X}` (`ProEtale.CondensedRing.dualizingExchange` takes `σ_s` as a
 parameter). Reading `θ_X` through `σ_s⁻¹` needs `σ_s` to be an isomorphism
 (`ProEtale.CondensedRing.isIso_traitSpecializationUnit`), the point case of blueprint
-`det-sp-constant-family-vanishing`. It follows from the pro-étale computations over the strictly
-henselian trait that `i^*` inverts the unit `ℚ̄_ℓ ⟶ j_* ℚ̄_ℓ` and kills `Rⁿ j_* ℚ̄_ℓ` for `n > 0`
-(`WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit`,
+`lemma-nearby-cycles-constant-family--1`. It follows from the pro-étale computations over the
+strictly henselian trait that `i^*` inverts the unit `ℚ̄_ℓ ⟶ j_* ℚ̄_ℓ` and kills `Rⁿ j_* ℚ̄_ℓ` for
+`n > 0` (`WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit`,
 `WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage`).
 
 -/
@@ -130,7 +130,7 @@ omit [Fact (ringChar k).Prime] in
 /-- For the strictly henselian trait `S = Spec k'⟦t⟧`, the specialization unit
 `σ_s : ℚ̄_ℓ ⟶ Ψ_s ℚ̄_ℓ = i^* Rj_* ℚ̄_ℓ` is an isomorphism: the cohomology of the geometric
 generic point of `S` is that of its closed point. This is the case `Y = Spec k'`, `L = ℚ̄_ℓ` of
-blueprint `det-sp-constant-family-vanishing`. -/
+blueprint `lemma-nearby-cycles-constant-family--1`. -/
 theorem isIso_traitSpecializationUnit : IsIso (traitSpecializationUnit k k' (ℓ := ℓ)) := by
   have h : UpperStarInvertsLowerStarUnit (Profinite.padicAlgClRingObj ℓ) (traitGenericPoint k')
       (traitClosedPoint k') :=

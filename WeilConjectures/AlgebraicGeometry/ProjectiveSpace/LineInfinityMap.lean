@@ -17,6 +17,12 @@ Let `U ⊆ 𝔸¹` be a nonempty open over a finite field `k₀`. There is a mor
 is finite and étale over an open `W ∋ ∞` of `ℙ¹` with finite complement
 (`AlgebraicGeometry.exists_toProjectiveLine_isFinite_etale_near_infinity`): it is
 `x ↦ [1 : P(x)]` for a monic irreducible polynomial `P` whose zeros lie in `U`.
+
+## Implementation details
+
+Instead of a homography `τ` with `τ(s) = ∞` for a rational point `s`, which may need a
+constant field extension, a closed point of `U` is sent to `∞` by a finite map which is étale
+near `∞`.
 -/
 
 @[expose] public section
@@ -30,19 +36,10 @@ namespace AlgebraicGeometry
 open affineLine ProjectiveLine in
 /-- **A point of `U` sent to `∞` by a map finite and étale near `∞`.** Let `U` be a nonempty
 open of the affine line over a finite field `k`, given by an open immersion
-`j : U ⟶ 𝔸¹_k` over `k`. There are a morphism `H : U ⟶ ℙ¹_k` over `k` which is separated,
+`j: U ⟶ 𝔸¹_k` over `k`. There are a morphism `H: U ⟶ ℙ¹_k` over `k` which is separated,
 locally quasi-finite, locally of finite type and quasi-compact, and an open `W` of `ℙ¹_k`
 containing `∞` (that is, `W` and the affine chart cover `ℙ¹_k`) with finite complement such that
-`H` is finite and étale over `W`.
-
-One takes `H = x ↦ [1 : P(x)]`, where `P` is a monic irreducible polynomial whose zeros lie in
-`U`, so that `H` sends these closed points of `U` to `∞`
-(`AlgebraicGeometry.affineLine.exists_isFinite_polynomialMap_etale`).
-
-This replaces the homography `τ` with `τ(s) = ∞` of the proof of `lem-a1-unramified-at-infinity`
-(blueprint: `lem-a1-unramified-at-infinity`, subsection `sk-thm-dl-a1-upper`), and needs no
-constant field extension: instead of a rational point `s` sent isomorphically to `∞`, a closed
-point of `U` is sent to `∞` by a finite map which is étale near `∞`. -/
+`H` is finite and étale over `W`. -/
 theorem exists_toProjectiveLine_isFinite_etale_near_infinity {k : Type u} [Field k] [Finite k]
     {U : Scheme.{u}} [U.Over (Spec (.of k))] [Nonempty U] (j : U ⟶ affineLine k)
     [IsOpenImmersion j] [j.IsOver (Spec (.of k))] :
@@ -77,7 +74,7 @@ theorem exists_toProjectiveLine_isFinite_etale_near_infinity {k : Type u} [Field
       rw [← infinityChart_preimage_opensRange_affineChart]
       exact hy
     exact Or.inr ⟨a, (hV0.ge (Set.mem_univ a)).resolve_left ha, rfl⟩
-  · -- outside `W` lie the image of the finite complement of `V` and the point `[0 : 1]`
+  · -- outside `W` lie the image of the finite complement of `V` and the point `[0: 1]`
     refine (((finite_compl_basicOpen_coord k).image (affineChart _)).union
       (hVf.image (infinityChart _))).subset fun y hy ↦ ?_
     by_cases hy' : y ∈ (infinityChart _).opensRange

@@ -13,7 +13,7 @@ import WeilConjectures.SixFunctors.IntegralHom.IntegralHomRoosTransport
 /-! # Integral internal Hom and reduction
 
 Source: blueprint order 2134; Stacks Tags 08J9, 07A6, 07A4 and 08TC
-(blueprint: lem-coef-integral-hom-reduction).
+(blueprint: proposition-six-operations-change-coefficients--7).
 -/
 
 @[expose] public section
@@ -40,9 +40,9 @@ fix the constructions on local sections. The comparison itself is a defined
 transpose; the following clauses assert its invertibility, its evaluation equation,
 and compatibility with every transpose.
 
-Source: blueprint, sec-six-functors, sk-prop-sf-biduality-general,
-lem-coef-integral-hom-reduction, order 2134
-(blueprint: lem-coef-integral-hom-reduction).
+Source: blueprint, chap-The-six-operations-on-Dbctf, sk-prop-sf-biduality-general,
+proposition-six-operations-change-coefficients--7, order 2134
+(blueprint: proposition-six-operations-change-coefficients--7).
 
 Proof:
 1. The valuation ring is a DVR and hence Noetherian

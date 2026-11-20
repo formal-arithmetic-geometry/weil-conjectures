@@ -23,8 +23,9 @@ Let `Λ` be a finite ring with Jacobson radical `J`. For a sheaf `F` of `Λ`-mod
   morphism `π` and a finite module `M` killed by `J`, the sheaf `π_* M` is a retract of a finite
   sum of copies of `π_* Λ / J π_* Λ`.
 
-These are the finite-pushforward steps of the proof of blueprint `lem-kun-0f1j`, for sheaves
-killed by `J` (blueprint `lemma-weil-pbc-constructible-finite-pushforward`).
+These are the finite-pushforward steps of the proof of blueprint
+`lemma-kunneth-field-coefficients--1`, for sheaves killed by `J` (blueprint
+`lemma-finiteness-small-etale-topoi--3`).
 -/
 
 @[expose] public section
@@ -159,8 +160,8 @@ lemma ModuleCat.exists_retract_biproduct_cokernel_smulDesc (M : ModuleCat.{u + 1
 
 /-- A constructible sheaf killed by the Jacobson radical `J` of `Λ`, on a scheme of finite type
 over a field, embeds into a finite sum of direct images along finite morphisms of constant sheaves
-with finite values killed by `J` (blueprint `lemma-weil-pbc-constructible-finite-pushforward`
-for sheaves killed by `J`, used in the proof of blueprint `lem-kun-0f1j`). -/
+with finite values killed by `J` (blueprint `lemma-finiteness-small-etale-topoi--3`
+for sheaves killed by `J`, used in the proof of blueprint `lemma-kunneth-field-coefficients--1`). -/
 theorem exists_mono_biproduct_lowerStar_of_smul_eq_zero {k : Type u} [Field k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F]
@@ -189,7 +190,7 @@ theorem exists_mono_biproduct_lowerStar_of_smul_eq_zero {k : Type u} [Field k]
 
 /-- For a finite morphism `π` and a finite `Λ`-module `M` killed by the Jacobson radical `J`, the
 sheaf `π_* M` is a retract of a finite sum of copies of `π_* Λ / J π_* Λ`
-(used in the proof of blueprint `lem-kun-0f1j`). -/
+(used in the proof of blueprint `lemma-kunneth-field-coefficients--1`). -/
 theorem exists_retract_lowerStar_constantSheaf_of_smul_eq_zero {X Y : Scheme.{u}} (π : Y ⟶ X)
     [IsFinite π] (M : ModuleCat.{u + 1} Λ) [Finite M]
     (hM : ∀ x ∈ Ring.jacobson Λ, x • 𝟙 M = 0) :

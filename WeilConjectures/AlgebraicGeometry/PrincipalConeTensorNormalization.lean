@@ -8,11 +8,13 @@ public import WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
 import WeilConjectures.Algebra.Homology.ReductionIsoShift
 import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
+public import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 
 /-! # Signed principal cones and derived tensor
 
-Source: blueprint, derived Nakayama resolution, On X paragraph.
-(auxiliary; not a blueprint node).
+The mapping cones of the powers of the uniformizer acting on complexes of modules over the
+pulled-back ring of integers compute the derived reductions modulo these powers, compatibly with
+the quotient maps, the tensor units and the signed shifts.
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +30,8 @@ attribute [local irreducible] upperStarFromPoint
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
-/-- The standard shift on derived right tensor by the finite quotient.
-Source: derived tensor localized from total tensor
-(auxiliary; not a blueprint node). -/
+/-- The standard shift on derived right tensor by the finite quotient: the derived tensor is
+localized from the total tensor. -/
 abbrev tensorReductionShift (n : ℕ) :
     (DerivedNakayama.reductionFunctor l E X (n + 1)).CommShift ℤ := by
   change (tensorRight _).CommShift ℤ
@@ -185,6 +186,17 @@ private theorem scalar_mul
   rw [End.mul_asHom, Functor.map_comp]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
 
+/-- The scalar action of a power of an endomorphism of the pulled-back ring of integers on a
+complex of modules is the action of the endomorphism followed by the action of the previous
+power. -/
+theorem scalarOnComplex_pow_succ (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
+    (n : ℕ) (M : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
+    DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1 + 1)) M =
+      DerivedNakayama.scalarOnComplex l E X d M ≫
+        DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1)) M := by
+  rw [scalar_complex, scalar_complex, scalar_complex, pow_succ, scalar_mul, Linear.smul_comp,
+    Linear.comp_smul, Category.comp_id, smul_smul, mul_comm]
+
 section Generic
 universe v z
 variable {A : Type*} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
@@ -286,10 +298,6 @@ end Generic
 /-- The scalar cone comparison with derived tensor preserves quotient maps, the
 specified tensor unit and the signed shift. No change of coefficient category is involved.
 
-Source: blueprint derived Nakayama resolution, On X paragraph, and first reduction,
-Cones paragraph; original normalization proof steps 1, 3 and 4.
-(auxiliary; not a blueprint node).
-
 Proof: equality on profinite sections identifies d with the specified uniformizer.
 The exact coefficient sequence gives the augmentation from its two-term free
 resolution to the finite quotient in degree zero. The resolution is K-flat, so
@@ -297,7 +305,7 @@ its total tensor with any complex computes the derived tensor. Compose the inver
 of the standard tensor-cone interchange with this augmentation and the localization
 comparison. The interchange is natural in the input complex, hence gives a natural
 isomorphism. The quotient map is lifted on the two-term resolutions by (d,id);
-the supplied power equation is its chain-map equation. Naturality of tensor-cone
+the power law `scalarOnComplex_pow_succ` is its chain-map equation. Naturality of tensor-cone
 interchange and of the augmentation proves the transition equation. The cone
 inclusion becomes the right unitor inverse followed by the degree-zero quotient
 map, which is the stated tensor unit. Shifting the two-term tensor multiplies the
@@ -309,11 +317,7 @@ theorem principal_cone_tensor_normalization
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)
       (s : S.unop), ((d.asHom.hom.hom.app S) a).down s =
-        Padic.coefficientExtensionUniformizer l E * a.down s)
-    (hs : ∀ (n : ℕ) (M : CochainComplex (AdicCompletion.Modules l E X) ℤ),
-      DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1 + 1)) M =
-        DerivedNakayama.scalarOnComplex l E X d M ≫
-          DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1)) M) :
+        Padic.coefficientExtensionUniformizer l E * a.down s) :
     ∃ (κ : ∀ n : ℕ, DerivedNakayama.coneFunctor l E X (d ^ (n + 1)) ≅
         DerivedCategory.Q ⋙ DerivedNakayama.reductionFunctor l E X (n + 1)),
       (∀ (n : ℕ) (M : CochainComplex (AdicCompletion.Modules l E X) ℤ),
@@ -321,7 +325,8 @@ theorem principal_cone_tensor_normalization
           (DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1 + 1)) M)
           (DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1)) M)
           (DerivedNakayama.scalarOnComplex l E X d M) (𝟙 M)
-          ((Category.comp_id _).trans (hs n M))) ≫ (κ n).hom.app M =
+          ((Category.comp_id _).trans (scalarOnComplex_pow_succ l E X d n M))) ≫
+            (κ n).hom.app M =
             (κ (n + 1)).hom.app M ≫
               (DerivedNakayama.reductionMap l E X
                 (AdicCompletion.quotientStep l E n)).app (DerivedCategory.Q.obj M)) ∧
@@ -381,6 +386,43 @@ theorem principal_cone_tensor_normalization
     normalize (fun n ↦ scalar l E X (d ^ (n + 1))) (scalar l E X d) hb
     (AdicCompletion.finiteModule l E X) (AdicCompletion.finiteUnit l E X) w hw
     (fun n ↦ (DerivedNakayama.pullback l E X).map (AdicCompletion.quotientStep l E n)) hq
-      τ hτ σ hσ (fun _ _ _ ↦ rfl) hs
+      τ hτ σ hσ (fun _ _ _ ↦ rfl) (scalarOnComplex_pow_succ l E X d)
+
+/-- The augmentation from the two-term complex `[O_{E,X} → O_{E,X}]`, given by the power
+`π ^ (n + 1)` of the uniformizer, to the quotient `(O_E / π ^ (n + 1))_X` placed in degree zero
+is a quasi-isomorphism: the sequence `0 → O_{E,X} → O_{E,X} → (O_E / π ^ (n + 1))_X → 0` is
+short exact. -/
+theorem quasiIso_principal_augmentation
+    (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
+    (hd : ∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)
+      (s : S.unop), ((d.asHom.hom.hom.app S) a).down s =
+        Padic.coefficientExtensionUniformizer l E * a.down s) (n : ℕ) :
+    ∃ w : (DerivedNakayama.pullback l E X).map (d ^ (n + 1)).asHom ≫
+        (DerivedNakayama.pullback l E X).map (AdicCompletion.quotientUnit l E n) = 0,
+      QuasiIso (CochainComplex.mappingCone.descShortComplex
+        ((ShortComplex.mk _ _ w).map
+          (HomologicalComplex.single (AdicCompletion.Modules l E X) (.up ℤ) 0))) := by
+  obtain ⟨d₀, hd₀, r, hr, i, q, hi, hq, hseq⟩ :=
+    DerivedNakayama.derived_nakayama_resolution l E
+  have he : d₀ = d := by
+    let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    apply End.ext
+    apply Mod.hom_ext
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext S
+    apply AddCommGrpCat.hom_ext
+    ext a
+    apply ULift.ext
+    apply ContinuousMap.ext
+    intro s
+    exact (hd₀ S a s).trans (hd S a s).symm
+  subst d₀
+  obtain ⟨w, hw⟩ := (hseq X (n + 1) (by omega)).1
+  have hr' : r (n + 1) = AdicCompletion.quotientUnit l E n :=
+    Mod.hom_ext _ _ (hr (n + 1))
+  simp only [hr'] at w hw
+  exact ⟨w, CochainComplex.mappingCone.quasiIso_descShortComplex
+    (hw.map_of_exact (HomologicalComplex.single (AdicCompletion.Modules l E X) (.up ℤ) 0))⟩
 
 end AlgebraicGeometry.ProEtale.PrincipalNormalization

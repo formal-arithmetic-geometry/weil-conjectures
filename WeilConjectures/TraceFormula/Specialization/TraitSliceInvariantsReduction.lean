@@ -17,10 +17,10 @@ public import WeilConjectures.Tactic.ExactModProofs
 # The formal part of the identification of the slice nearby cycles with the invariants
 
 `NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom` (SGA 4½, [Th. finitude],
-§3.7; blueprint `sk-prop-tf-nearby-external-kunneth`, identification (2)) asks, for the pullback
-exchange `α_θ` of the morphism of models `θ : M'' ⟶ M_T` from the geometric slice to the change of
-trait, for a subgroup `V` of finite index of the pro-`p` kernel `P'` acting trivially on
-`Ψ_{M''} C`, and for a retraction of `α_θ` whose idempotent is the average over `P' ⧸ V`.
+§3.7; blueprint `proposition-external-kunneth-formula-nearby-cycles`, identification (2)) asks, for
+the pullback exchange `α_θ` of the morphism of models `θ : M'' ⟶ M_T` from the geometric slice to
+the change of trait, for a subgroup `V` of finite index of the pro-`p` kernel `P'` acting trivially
+on `Ψ_{M''} C`, and for a retraction of `α_θ` whose idempotent is the average over `P' ⧸ V`.
 
 This file proves its formal part, for a general strictly henselian slice `Spec K⟦t⟧`:
 * the exchange `α_θ` lands in the `P'`-invariants
@@ -144,7 +144,6 @@ variable {k' : Type u} [Field k'] {X : Scheme.{u}}
 
 variable [IsSepClosed k'] {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k' ≠ ℓ)]
 
-set_option maxHeartbeats 1600000 in
 -- elaborating the actions of `P' ⧸ V` on the concrete slice trait `Spec k'⟦u⟧⟦t⟧` is slow
 /-- **The invariants from the finiteness of the action and the image of the average**: the
 conclusion of `NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom` follows

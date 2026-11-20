@@ -24,7 +24,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 # Constant coefficients under algebraically closed field extension
 
 Source: Weil conjectures blueprint, sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-thm-sc-constant-invariance (blueprint: thm-sc-constant-invariance).
+proposition-cohomology-smooth-affine-curve (blueprint: proposition-cohomology-smooth-affine-curve).
 -/
 
 @[expose] public section
@@ -36,7 +36,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry
 
 /-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-thm-sc-constant-invariance (blueprint: thm-sc-constant-invariance).
+proposition-cohomology-smooth-affine-curve (blueprint: proposition-cohomology-smooth-affine-curve).
 
 The witness `r` is constrained to be the canonical cohomology pullback followed by the
 constant-sheaf comparison. The witness `t` is the primitive-root trivialization on cohomology.
@@ -45,7 +45,8 @@ compatibility with Picard torsion and Picard modulo n. In the proper case the de
 identification is constrained by the degree of every line bundle. Compatible bases of Picard
 torsion give the degree-one coordinates with the genus of the chosen compactification.
 In the affine case the equations are the canonical short exact Kummer ladder, whose Picard
-term is the quotient of the compactification's Jacobian described by lem-sc-pic-affine.
+term is the quotient of the compactification's Jacobian described by
+proposition-cohomology-smooth-affine-curve--3.
 
 Proof following the node:
 1. Use baseChange_curve for the smooth connected curve over K. Define r to be the canonical

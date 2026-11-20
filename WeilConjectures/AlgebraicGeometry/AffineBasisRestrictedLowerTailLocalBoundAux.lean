@@ -28,7 +28,6 @@ namespace AlgebraicGeometry
 -- Keep the original hypotheses hV and hq, although the proof works without them.
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 400000 in
 -- Comparing the transported injective resolution and its section complexes needs extra elaboration.
 /-- Local vanishing on each affine open; this is the cohomological core of the
 restricted lower-tail bound.

@@ -910,7 +910,6 @@ end ProjectionPasting
 attribute [local irreducible] restrictionIso etaleAdjunction Etale.quotientRestrictionHomChain
 
 -- Keep the adjunction calculations independent of the concrete coefficient quotients.
-set_option maxHeartbeats 2000000 in
 -- Allow the concrete projection and normalized six-Hom-chain type comparisons.
 private theorem torsionScalarMapsEtale_exists
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)

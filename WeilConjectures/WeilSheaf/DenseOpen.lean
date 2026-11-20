@@ -21,13 +21,13 @@ fundamental group of a dense open of a connected normal scheme surjects onto tha
 lisse sheaves on `X` are determined by their restriction to `U`:
 
 - if `X` is a smooth curve, `j̄_* ℚ̄_ℓ ≅ ℚ̄_ℓ`, from the description of a lisse Weil sheaf as the
-  direct image of its restriction to `U` (blueprint `lem-a1-lisse-middle-extension`);
+  direct image of its restriction to `U` (blueprint `lemma-boundary-stalk--2`);
 - if `X` is a smooth curve, the restriction `j^*` is fully faithful on lisse Weil sheaves;
 - if `X` is a smooth geometrically connected curve, the restriction `j^*` carries irreducible
   lisse Weil sheaves to irreducible lisse Weil sheaves.
 
-The last two are part (4) of the blueprint lemma `lem-wf-dense-open-pi1-surjective` (subsection
-`sk-i-real-boundary`). The geometric versions, for lisse `ℓ`-adic sheaves on the geometric
+The last two are part (4) of the blueprint lemma `theorem-purity-real-sheaves-curves` (subsection
+`lemma-boundary-stalk--2`). The geometric versions, for lisse `ℓ`-adic sheaves on the geometric
 curves, are in `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyPullback`
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.adicUpperStar_map_bijective`,
 `AlgebraicGeometry.ProEtale.IsIrreducibleAdicLocalSystem.adicUpperStar`).
@@ -62,7 +62,7 @@ variable [Fact (ringChar k₀ ≠ l)]
 over `k₀`, the pushforward `j̄_* ℚ̄_ℓ` of the constant sheaf of the geometric fiber `Ū` is the
 constant sheaf of `X̄`: the constant Weil sheaf is lisse, hence the direct image of its
 restriction to `U` (`AlgebraicGeometry.WeilSheaf.IsLisse.nonempty_iso_directImage_upperStar`,
-blueprint `lem-a1-lisse-middle-extension`), and the restriction of `ℚ̄_ℓ` is `ℚ̄_ℓ`. -/
+blueprint `lemma-boundary-stalk--2`), and the restriction of `ℚ̄_ℓ` is `ℚ̄_ℓ`. -/
 theorem nonempty_adicLowerStar_unit_iso_geometricFiberMap
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ X) [IsOpenImmersion j]
@@ -89,7 +89,7 @@ lisse Weil sheaf on `X`. Then `Hom(A, N) → Hom(j^* A, j^* N)` is bijective for
 `A`: the unit `N ⟶ j_* j^* N` is an isomorphism
 (`AlgebraicGeometry.WeilSheaf.IsLisse.isIso_upperStarLowerStarAdjunction_unit_app`), and under
 the adjunction `j^* f` corresponds to `f` followed by the unit.
-(blueprint: `lem-wf-dense-open-pi1-surjective`, part (4), subsection `sk-i-real-boundary`) -/
+(blueprint: `theorem-purity-real-sheaves-curves`, part (4), subsection `lemma-boundary-stalk--2`) -/
 theorem upperStar_map_bijective_of_isLisse
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ X) [IsOpenImmersion j]
@@ -111,7 +111,7 @@ of `π₁(Ū) → π₁(X̄)`. As `j^* j_* G' ≅ G'`, the inclusion `G' ⟶ j^*
 monomorphism `j_* G' ⟶ M` by full faithfulness
 (`AlgebraicGeometry.WeilSheaf.upperStar_map_bijective_of_isLisse`), to which the irreducibility
 of `M` applies.
-(blueprint: `lem-wf-dense-open-pi1-surjective`, part (4), subsection `sk-i-real-boundary`) -/
+(blueprint: `theorem-purity-real-sheaves-curves`, part (4), subsection `lemma-boundary-stalk--2`) -/
 theorem IsIrreducibleLisse.upperStar_of_isDominant
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]

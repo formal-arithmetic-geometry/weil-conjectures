@@ -21,7 +21,8 @@ projection map `PF_{f, K, L}` over `Λ` is, up to isomorphism of arrows, the pro
 
 The reduction square itself,
 `AlgebraicGeometry.Etale.exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap`
-(`lem-fix-operation-reduction`), and the constant `AlgebraicGeometry.Etale.projectionMapApp` are in
+(`proposition-six-operations-change-coefficients`), and the constant
+`AlgebraicGeometry.Etale.projectionMapApp` are in
 `WeilConjectures.SixFunctors.CoefficientReduction`.
 
 ## Main statements

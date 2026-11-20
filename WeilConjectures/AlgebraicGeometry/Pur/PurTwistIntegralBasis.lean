@@ -11,9 +11,6 @@ import Mathlib.Algebra.Polynomial.Lifts
 import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
 
 /-! # A finite integral coefficient basis
-
-Source: coefficient-twist blueprint, proof step 5.
-(blueprint: lem-pur-twist-integral-basis)
 -/
 
 @[expose] public section
@@ -23,21 +20,7 @@ universe u
 namespace AlgebraicGeometry.Scheme
 
 /-- The chosen valuation ring has a finite basis over the p-adic integers, for
-precisely the canonical inclusion used in the Tate-twist construction.
-
-Source: coefficient-twist blueprint, proof step 5; the complete-DVR integral
-closure theorem, as implemented in Mathlib.
-(blueprint: lem-pur-twist-integral-basis)
-
-Proof: its elements are integral over the p-adic integers, since the monic
-minimal polynomial has integral coefficients by the spectral-norm criterion.
-Conversely an integral element belongs to the integrally closed valuation ring.
-Thus this is the integral closure in the finite field extension. Finiteness
-of integral closure and torsion freeness over the base DVR give a finite free
-module; its finite basis uses the specified inclusion because that inclusion
-agrees in the coefficient field with the given field algebra map.
-The argument is the already-proved arithmetic helper of
-`purTwistCoefficientTensor`, made available independently of its tensor statement. -/
+precisely the canonical inclusion used in the Tate-twist construction. -/
 theorem purTwistIntegralBasis (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     ∃ k : ℕ, Nonempty (@Module.Basis (Fin k) ℤ_[l]

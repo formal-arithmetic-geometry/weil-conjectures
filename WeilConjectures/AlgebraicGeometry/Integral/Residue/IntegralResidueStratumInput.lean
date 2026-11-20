@@ -20,8 +20,12 @@ import WeilConjectures.CategoryTheory.Ringed.RingedDerivedRestrictionGeneralSupp
 
 /-! # Input comparison for residue lifting on one stratum
 
-Source: Bhatt--Scholze, Lemma 6.5.8 and Proposition 6.6.11.
-(blueprint: lem-weil-pbc-integral-residue-stratum-input).
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8 and Proposition 6.6.11
+* Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.5.1
+* Bhatt--Scholze, Lemma 6.5.8(1)
+* Bhatt--Scholze, Lemmas 6.5.8(1), (2), 6.6.8 and Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -65,9 +69,7 @@ private noncomputable def inputSliceIso
 
 /-- The completed coefficient comparison on the fixed stratum. Each factor is
 projection-normalized: inverse image of the quotient limit, the integral coefficient
-presentation, and the DVR coefficient model.
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.5.1
-(blueprint: lem-weil-pbc-integral-residue-stratum-input). -/
+presentation, and the DVR coefficient model. -/
 def integralResidueStratumCoefficient
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -80,9 +82,7 @@ def integralResidueStratumCoefficient
     WeilConjectures.purCoefficientIso l E S ≪≫ c.completed.symm
 
 /-- The actual stratum inverse image followed by scalar restriction along the
-normalized coefficient comparison. The coefficient universe is unchanged.
-Source: Bhatt--Scholze, Lemma 6.5.8(1)
-(blueprint: lem-weil-pbc-integral-residue-stratum-input). -/
+normalized coefficient comparison. The coefficient universe is unchanged. -/
 def integralResidueStratumPull
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -95,33 +95,7 @@ def integralResidueStratumPull
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Normalized coefficient transport supplies the two inputs of residue perfect lifting.
-It asserts neither the existence of integral perfect models nor any covering refinement.
-Source: Bhatt--Scholze, Lemmas 6.5.8(1),(2), 6.6.8 and Proposition 6.6.11.
-(blueprint: lem-weil-pbc-integral-residue-stratum-input).
-
-Proof: write e for integralResidueStratumCoefficient. Its first factor is the limit
-comparison for inverse image, its second the quotient-normalized ULift comparison,
-and its last the inverse of c.completed. Thus all finite projection squares commute.
-Restrict the given intrinsic completion unit through the immersion g using
-stratumIntrinsicComplete_preserved. The singleton uniformizer generates d.ideal.
-Compare the two Koszul constructions termwise using ULift.down on coefficients:
-they both have the same multiplication maps by powers of this uniformizer. Exact
-scalar restriction identifies their tensor complexes, countable products and signed
-mapping fibres, including the unit. Cancellation of the invertible comparisons gives
-the first assertion. This uses no cohomological bounds.
-
-For the second assertion, generate an etale sieve by the given cover. Derived reduction
-commutes with the exact stratum restriction by the finite projection square and the
-scalar extension/restriction adjunction. Its normalized localization comparison sends
-a pure tensor to the same tensor. Compose with eC and each hmodels isomorphism.
-ULift.down identifies the exponent-one quotient with O_E/d.ideal; scalar restriction
-and universe lift preserve the bounded finite-projective representatives. Constant
-sheafification respects the scalar equivalence, and its comparison with component
-functions is uniquely determined on constant sections. These identifications give the
-residueLisseConstantComparison in the conclusion. For an arrow of the generated sieve,
-pull back the relevant cover-member isomorphism to its source and use transitivity of
-slice restriction. This also proves the assertion for every arrow, not just for the
-cover generators. The empty scheme and zero complex need no extra hypotheses. -/
+It asserts neither the existence of integral perfect models nor any covering refinement. -/
 theorem integralResidueStratum_input
     (T : Scheme.{u}) [IsNoetherian T] (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

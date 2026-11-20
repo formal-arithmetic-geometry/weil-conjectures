@@ -23,8 +23,8 @@ exponent invertible on an algebraically closed field `k` (the integral stage `Λ
 dualizing complex `ω_{X, 𝒪_E} = R lim_n Res_n Ra_{X,n}^! A_n` is the point of a homotopy limit
 cone of the tower `n ↦ Ra_X^!(Λ ⧸ Iⁿ)` (restriction of scalars commuting with `Ra_X^!`), and the
 integral Verdier dual is `𝔻_X = RHom(-, ω_X)`. This file records the integral stage of blueprint
-`thm-sf-biduality-class` (`AlgebraicGeometry.Etale.verdierDual_integralStage`), deduced, as in the
-blueprint, from integral Verdier duality (`thm-coef-integral-verdier`,
+`theorem-verdier-biduality` (`AlgebraicGeometry.Etale.verdierDual_integralStage`), deduced, as in
+the blueprint, from integral Verdier duality (`theorem-verdier-biduality--2`,
 `AlgebraicGeometry.Etale.boundedConstructibleIntegral_derivedHom_dualizing`), which belongs to the
 coefficient chapter.
 
@@ -304,7 +304,8 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
   [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
 
 include hϖ hI in
-/-- Blueprint `prop-coef-integral-dualizing`: The integral dualizing object and its adjunction.
+/-- Blueprint `proposition-sp-integral-adjunction`: The integral dualizing object and its
+adjunction.
 
 For `a_X : X ⟶ Spec k` separated of finite type, `k` algebraically closed, there is a derived
 complete object `ω_{X, 𝒪_E} = R lim_n Res_n Ra_{X,n}^! A_n`, realised as the point of a homotopy
@@ -416,7 +417,7 @@ variable
   (hωX : Pretriangulated.IsHomotopyLimit ωX)
 
 include hϖ hI hωX in
-/-- Blueprint `thm-coef-integral-verdier`: Integral Verdier duality.
+/-- Blueprint `theorem-verdier-biduality--2`: Integral Verdier duality.
 
 For `K ∈ Dᵇc(X, 𝒪_E)` and the integral dualizing complex `ω_X` (the point of a homotopy limit
 cone of `n ↦ Ra_X^!(Λ ⧸ Iⁿ)`), the integral Verdier dual `𝔻_X K = RHom(K, ω_X)`:
@@ -448,7 +449,7 @@ theorem boundedConstructibleIntegral_derivedHom_dualizing {K : 𝐃(X, Λ)}
   sorry
 
 include hϖ hI hωX in
-/-- Blueprint `thm-sf-biduality-class`: Verdier biduality on the coefficient class, at the
+/-- Blueprint `theorem-verdier-biduality`: Verdier biduality on the coefficient class, at the
 integral stage `Λ = 𝒪_E`.
 
 For `X` separated of finite type over an algebraically closed field `k`, the integral Verdier

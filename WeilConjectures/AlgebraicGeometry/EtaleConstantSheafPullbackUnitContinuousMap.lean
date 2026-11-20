@@ -24,7 +24,7 @@ namespace AlgebraicGeometry.Etale
 /-- The constant-sheaf pullback comparison sends the adjunction unit to composition
 with the first projection, in the description of constant sheaves by continuous maps.
 Source: Stacks Project Tags 03Q1 (2), (4), and 0A5G.
-(blueprint: lem-weil-pbc-constant-pullback-unit-continuous-map)
+(blueprint: theorem-finite-etale-covers-proper-henselian--3)
 
 Proof: Construct the natural transformation from the constant sheaf on Y to the
 pushforward of the continuous-map sheaf on Y₀ by composition with the first

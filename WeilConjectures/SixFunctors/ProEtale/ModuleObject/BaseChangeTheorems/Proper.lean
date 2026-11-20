@@ -43,7 +43,7 @@ The same holds for the condensed ring `𝒪̲_E` (`Profinite.padicIntegersRingOb
 extension `E` of `ℚ_ℓ` embedded in `ℚ̄_ℓ`.
 
 All three are deduced from the torsion case, as in the proof of blueprint
-`sk-thm-sbc-coefficients`.
+`theorem-smooth-base-change-all-admissible`.
 A bounded constructible `E`-complex is `E ⊗ᴸ_{𝒪_E} K₀` for a bounded constructible
 `𝒪_E`-complex `K₀` (`ProEtale.exists_boundedConstructibleExtendScalars_obj_iso`), and a bounded
 constructible `ℚ̄_ℓ`-complex is `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀` for some `E` and `K₀`
@@ -99,9 +99,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- **The proper base change theorem** (blueprint `sk-thm-sfb-proper-base-change`) for bounded
-constructible `𝒪_E`-sheaves, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ`: for a cartesian square of
-schemes
+/-- **The proper base change theorem** (blueprint
+`proposition-proper-direct-image-constructible-complexes`) for bounded constructible `𝒪_E`-sheaves,
+`E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
 
 ```
 X' --g'--> X
@@ -133,8 +133,9 @@ theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers
     (isIso_derivedBaseChangeMap_app_of_isProper _ hsq _
       (boundedConstructible_derivedReduction_obj X.left ℓ E _ K₀.property).plusEtaleOrigin)
 
-/-- **The proper base change theorem** (blueprint `sk-thm-sfb-proper-base-change`) for bounded
-constructible `E`-sheaves, `E` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
+/-- **The proper base change theorem** (blueprint
+`proposition-proper-direct-image-constructible-complexes`) for bounded constructible `E`-sheaves,
+`E` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
 
 ```
 X' --g'--> X
@@ -161,10 +162,10 @@ theorem isIso_boundedConstructibleBaseChange_of_isProper (E : PadicAlgCl.FiniteI
     simp only [MorphismProperty.isomorphisms.iff]
     infer_instance)
 
-/-- **The proper base change theorem** (blueprint `sk-thm-sfb-proper-base-change`) for bounded
-constructible `ℚ̄_ℓ`-sheaves: for a cartesian square of schemes `sq : IsPullback g' f' f g` with
-`f` proper, the base-change morphism
-`BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an isomorphism of functors
+/-- **The proper base change theorem** (blueprint
+`proposition-proper-direct-image-constructible-complexes`) for bounded constructible `ℚ̄_ℓ`-sheaves:
+for a cartesian square of schemes `sq : IsPullback g' f' f g` with `f` proper, the base-change
+morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an isomorphism of functors
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`, for the condensed ring
 `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl [IsProper f.left]

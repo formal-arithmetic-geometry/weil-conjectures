@@ -41,7 +41,7 @@ bounded finite-free tensor commutes with the derived limit; the completion is de
 complete, the completion unit `kappa` becomes invertible after every finite reduction, and
 its invertibility characterizes derived completeness; the completion is computed by the
 Roos model of any K-flat representative.
-Source: blueprint Assertions 5--6 (blueprint: det-pbc-complete-derived-completion).
+Source: blueprint Assertions 5--6 (blueprint: proposition-proper-base-change-complete-integral).
 -/
 
 @[expose] public noncomputable section
@@ -120,7 +120,7 @@ theorem constantLimitUnit_isIso (T : Scheme.{u})
   infer_instance
 
 /-- Scalar powers are respected by the induced action on every integral module.
-Source: blueprint Notation 3 (blueprint: det-pbc-complete-derived-completion).
+Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral).
 Proof: the scalar action is the composite of pullback, conjugation by the regular-module
 comparison, tensoring on the left, and conjugation by the left unitor. Each is a monoid
 homomorphism on endomorphisms, so their composite preserves powers. -/
@@ -138,7 +138,7 @@ theorem scalarOnModules_pow (T : Scheme.{u})
 
 /-- The derived reduction tower is triangulated with its totalization shift.
 Source: blueprint Notation 3 and Assertion 6
-(blueprint: det-pbc-complete-derived-completion).
+(blueprint: proposition-proper-base-change-complete-integral).
 Proof: the strict functor is the cone of a termwise natural transformation between
 additive functors. Its two-column totalization is exact on homotopy categories.
 The factorization through complexes agrees with the specified localized functor.
@@ -306,7 +306,7 @@ private theorem tensorTower_realization (T : Scheme.{u})
     ((constant l E T).mapDerivedCategoryFactors.app P).symm⟩
 
 /-- Bounded finite-free tensor commutes naturally with derived inverse limit.
-Source: blueprint Assertion 5 (blueprint: det-pbc-complete-derived-completion).
+Source: blueprint Assertion 5 (blueprint: proposition-proper-base-change-complete-integral).
 Proof: form functorial flat covers of towers levelwise, so the pointwise monoidal
 structure has its derived tensor. The exact constant tower functor is strong monoidal
 on derived categories. A bounded finite-free complex is dualizable. The projection
@@ -354,7 +354,7 @@ theorem tensorLimitIso (T : Scheme.{u})
 
 /-- The finite scalar tensor functor is the restricted derived reduction.
 Source: blueprint Assertion 5 and the normalized internal K-flat scalar comparison
-(blueprint: det-pbc-complete-derived-completion).
+(blueprint: proposition-proper-base-change-complete-integral).
 Proof: the pulled-back finite coefficient module is the regular quotient module with
 scalars restricted. Apply the natural K-flat scalar-tower realization; its canonical
 unit and transition equations imply, in particular, the asserted natural isomorphism. -/
@@ -422,8 +422,22 @@ private theorem power_on_complex (T : Scheme.{u})
     (((HomologicalComplex.eval (AdicCompletion.Modules l E T) (.up ℤ) j).mapEnd P).map_pow
       (principalScalar l E T P) (n + 1)).symm
 
-set_option maxHeartbeats 1600000 in
--- Comparing the nested tower, cone and evaluation functors needs extra elaboration fuel.
+private theorem principal_levelConeTowerIso_app
+    {A : Type*} [Category A] [Abelian A]
+    {K L : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : K ⟶ L) (n : ℕ) :
+    (levelConeTowerIso
+      (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map f)).app (op n) =
+        CochainComplex.mappingCone.mapHomologicalComplexIso f
+          ((evaluation ℕᵒᵖ A).obj (op n)) := rfl
+
+private theorem principal_coneIso_inr
+    {A : Type*} [Category A] [Abelian A]
+    {K L K' L' : CochainComplex A ℤ} (f : K ⟶ L) (g : K' ⟶ L')
+    (a : K ≅ K') (b : L ≅ L') (h : f ≫ b.hom = a.hom ≫ g) :
+    CochainComplex.mappingCone.inr f ≫ (coneIso f g a b h).hom =
+      b.hom ≫ CochainComplex.mappingCone.inr g :=
+  (CochainComplex.mappingCone.triangleMap f g a.hom b.hom h).comm₂
+
 private theorem strictPrincipalLevels (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ) :
     ∃ b : ∀ n : ℕ, ((strictRed l E T).obj P).asFunctor.obj (op n) ≅
@@ -446,7 +460,8 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
   have hf (n : ℕ) : f.app (op n) = (μ ^ (n + 1)).asHom := power_on_complex l E T P n
   let c (n : ℕ) := coneIso (f.app (op n)) (μ ^ (n + 1)).asHom
     (Iso.refl P) (Iso.refl P) (by
-      simp only [Iso.refl_hom]
+      change (f.app (op n) : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ (μ ^ (n + 1)).asHom
+      erw [Category.comp_id, Category.id_comp]
       exact hf n)
   let b (n : ℕ) := e.app (op n) ≪≫ c n
   refine ⟨b, ?_, ?_⟩
@@ -459,17 +474,18 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
         (fun _ ↦ scalar l E T)).map (homOfLE (Nat.le_succ n)).op).app (P.X j) = _
       rw [Functor.ofOpSequence_map_homOfLE_succ]
       rfl
-    have hY : Y.map (homOfLE (Nat.le_succ n)).op = 𝟙 P := rfl
     have hn := e.hom.naturality (homOfLE (Nat.le_succ n)).op
     have hc : (levelConeTower f).map (homOfLE (Nat.le_succ n)).op ≫ (c n).hom =
         (c (n + 1)).hom ≫ CochainComplex.PrincipalCone.step μ n := by
       change CochainComplex.mappingCone.map _ _ (X.map _) (Y.map _)
           (f.naturality (homOfLE (Nat.le_succ n)).op).symm ≫ (c n).hom =
         (c (n + 1)).hom ≫ CochainComplex.PrincipalCone.step μ n
-      dsimp only [c, coneIso, CochainComplex.PrincipalCone.step]
-      rw [← CochainComplex.mappingCone.map_comp, ← CochainComplex.mappingCone.map_comp]
-      simp only [Iso.refl_hom, Category.comp_id, hX, hY]
-      congr 1
+      apply coneIso_natural
+      · change (X.map (homOfLE (Nat.le_succ n)).op : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ μ.asHom
+        erw [Category.comp_id, Category.id_comp]
+        exact hX
+      · change (Y.map (homOfLE (Nat.le_succ n)).op : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ 𝟙 P
+        erw [Category.comp_id]
     change _ ≫ (e.hom.app (op n) ≫ (c n).hom) =
       (e.hom.app (op (n + 1)) ≫ (c (n + 1)).hom) ≫ _
     calc
@@ -483,15 +499,15 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
         congrArg (fun g ↦ e.hom.app (op (n + 1)) ≫ g) hc
       _ = _ := (Category.assoc _ _ _).symm
   · intro n
+    dsimp only [b, Iso.trans_hom, e]
+    rw [principal_levelConeTowerIso_app]
     change ((ev l E T n).mapHomologicalComplex (.up ℤ)).map
       (CochainComplex.mappingCone.inr ((complexPowerMap l E T).app P)) ≫
         (CochainComplex.mappingCone.mapHomologicalComplexIso
           ((complexPowerMap l E T).app P) (ev l E T n)).hom ≫ (c n).hom = _
     rw [← Category.assoc, CochainComplex.mappingCone.map_inr]
     change CochainComplex.mappingCone.inr (f.app (op n)) ≫ (c n).hom = _
-    dsimp only [c, coneIso]
-    simp only [CochainComplex.mappingCone.map, CochainComplex.mappingCone.inr_desc,
-      Iso.refl_hom]
+    rw [principal_coneIso_inr]
     exact Category.id_comp _
 
 private abbrev strictProductUnit (T : Scheme.{u})
@@ -678,7 +694,7 @@ private def coneEvaluationComparison (T : Scheme.{u}) (n : ℕ) :
 
 /-- Evaluation of the derived cone tower is naturally the actual finite reduction.
 Source: blueprint Assertion 5, the two-term uniformizer resolution
-(blueprint: det-pbc-complete-derived-completion).
+(blueprint: proposition-proper-base-change-complete-integral).
 Proof: exact evaluation carries the tower cone to the scalar cone. Scalar action
 preserves powers. The coefficient resolution identifies that cone with derived tensor
 by the finite coefficient module. The K-flat scalar comparison identifies this tensor
@@ -769,7 +785,7 @@ private theorem roosComparisonNormalized (T : Scheme.{u}) :
 
 /-- On complexes the specified completion unit is the derived ordinary adjoint
 of the degree-zero cone inclusion.
-Source: blueprint Notation 4 (blueprint: det-pbc-complete-derived-completion).
+Source: blueprint Notation 4 (blueprint: proposition-proper-base-change-complete-integral).
 Proof: apply the factorization equation of the localized augmentation, the derived
 adjunction unit formula, and naturality of the total right derived cochain comparison. -/
 private theorem kappa_on_complex (T : Scheme.{u})
@@ -821,7 +837,7 @@ private theorem principalCompletionComparison (T : Scheme.{u})
 
 /-- The quotient Roos complex represents the specified completion, preserving its unit.
 Source: blueprint Notation 4, Stacks Tags 099B, 0A0E and 0941
-(blueprint: det-pbc-complete-derived-completion).
+(blueprint: proposition-proper-base-change-complete-integral).
 Proof: evaluate the strict reduction cone tower and identify it, with its transitions
 and degree-zero inclusions, with the principal power-cone tower. Exact products give
 its Roos comparison. Change the sign of the second product to match the normalized
@@ -843,7 +859,7 @@ theorem completionComparison_on_complex (T : Scheme.{u})
   exact hb
 
 /-- Every K-flat representative has the normalized comparison required by Notation 4.
-Source: blueprint Notation 4 (blueprint: det-pbc-complete-derived-completion).
+Source: blueprint Notation 4 (blueprint: proposition-proper-base-change-complete-integral).
 Proof: compose the complex comparison with the image of the representative isomorphism.
 Naturality of kappa cancels that representative on the specified completion map. -/
 theorem completionComparison (T : Scheme.{u})
@@ -873,7 +889,7 @@ private theorem existsKFlatRepresentative (T : Scheme.{u})
   exact ⟨P, hP, ⟨asIso (DerivedCategory.Q.map q) ≪≫ DerivedCategory.Q.objObjPreimageIso M⟩⟩
 
 /-- Completeness is equivalent to invertibility of the specified completion unit.
-Source: blueprint Notation 4 (blueprint: det-pbc-complete-derived-completion).
+Source: blueprint Notation 4 (blueprint: proposition-proper-base-change-complete-integral).
 Proof: choose a K-flat representative and use the normalized quotient Roos comparison.
 The existing representative-independent completeness criterion applies to its unit. -/
 theorem isDerivedComplete_iff (T : Scheme.{u})
@@ -886,7 +902,7 @@ theorem isDerivedComplete_iff (T : Scheme.{u})
 
 /-- The output of completion is derived complete for every input.
 Source: blueprint Assertion 6 and Stacks Tag 099B
-(blueprint: det-pbc-complete-derived-completion).
+(blueprint: proposition-proper-base-change-complete-integral).
 Proof: on a K-flat representative the completion is isomorphic to the quotient Roos
 output, whose completeness is already proved by the singleton Koszul reflector.
 Transport the witnessing K-flat representative along this isomorphism. -/
@@ -1000,7 +1016,7 @@ private theorem finiteReduction_kappa_complex (T : Scheme.{u})
 
 /-- Finite reduction inverts the specified completion unit.
 Source: blueprint Assertion 6, Stacks Tags 0941 and 099B
-(blueprint: det-pbc-complete-derived-completion).
+(blueprint: proposition-proper-base-change-complete-integral).
 Proof: the uniformizer is invertible on the derived limit of the scalar source tower:
 its inverse is the index shift up to homotopy on the Roos fibre. Every quotient-power
 reduction of that limit is therefore zero, by the uniformizer cone resolution. Apply

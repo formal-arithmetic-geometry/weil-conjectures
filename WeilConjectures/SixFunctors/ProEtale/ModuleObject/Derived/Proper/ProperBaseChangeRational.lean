@@ -63,9 +63,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChang
 /-!
 # Proper direct image with rational condensed coefficients
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.md, clauses 1--3
-(blueprint: det-thm-sfb-proper-base-change-rational).
+(blueprint: proposition-proper-direct-image-constructible-complexes).
 
 The three coefficient comparisons are the existing derived push mates. Bounded
 constructibility is the recorded ambient internal-module predicate. Base change uses the
@@ -432,7 +432,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified proper projection formula is invertible on bounded constructible objects.
 Source: blueprint rational proper direct image, clause 3, projection formula
-(blueprint: det-thm-sfb-proper-base-change-rational).
+(blueprint: proposition-proper-direct-image-constructible-complexes).
 
 Proof: compare integral coefficient presentations by their canonical ring isomorphism,
 transport bounded constructibility, and apply the integral proper projection formula.

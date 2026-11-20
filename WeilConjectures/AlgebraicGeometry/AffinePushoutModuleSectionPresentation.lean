@@ -38,6 +38,30 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+-- Compute the two actions on ordinary modules, without unfolding sheaf section instances.
+private theorem affine_pushout_first_action
+    {C D N M : Type*} [CommRing C] [CommRing D] [AddCommGroup M] [Module D M]
+    (b : C →+* D) (p : C → N → M) (v : N → M)
+    (hp : ∀ d n, p d n = b d • v n) :
+    (∀ c d n, b c • p d n = p (c * d) n) ∧ ∀ n, p 1 n = v n := by
+  constructor
+  · intro c d n
+    simp only [hp, map_mul, mul_smul]
+  · intro n
+    simp only [hp, map_one, one_smul]
+
+private theorem affine_pushout_second_action
+    {C D N M : Type*} [CommRing C] [CommRing D] [SMul C N]
+    [AddCommGroup M] [Module D M]
+    (b δ : C →+* D) (p : C → N → M) (v : N → M)
+    (hb : ∀ c d n, b c • p d n = p (c * d) n)
+    (hu : ∀ n, p 1 n = v n) (hv : ∀ c n, δ c • v n = v (c • n)) :
+    ∀ c d n, δ c • p d n = p d (c • n) := by
+  have hp (d : C) (n : N) : p d n = b d • v n := by
+    simpa only [mul_one, hu] using (hb d 1 n).symm
+  intro c d n
+  rw [hp, hp, smul_comm, hv]
+
 variable {U X : Scheme.{u}} (f : U ⟶ X)
 
 local instance instHasLeftKanExtension_affinePushoutModuleSectionPresentation
@@ -84,7 +108,6 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
 
-set_option maxHeartbeats 1000000 in
 -- The affine-section comparison requires transport between restricted section-module instances.
 /-- The affine pullback comparison, transported through κ, is linear for the first
 section-ring action and sends `1 tensor n` to the canonical pullback unit. -/
@@ -139,27 +162,23 @@ private theorem affine_pushout_module_section_presentation_equiv [IsAffineHom f]
   let p : (Γ(U, f ⁻¹ᵁ V) ⊗[Γ(X, V)] (G.val.obj (op V))) ≃ₗ[Γ(X, V)]
       ((P.obj G).val.obj (op (f ⁻¹ᵁ V))) := ((TensorProduct.comm Γ(X, V) Γ(U, f ⁻¹ᵁ V)
     (G.val.obj (op V))).trans e).trans kl
+  have htmul' (n : G.val.obj (op V)) (d : Γ(U, f ⁻¹ᵁ V)) :
+      c ((S).obj G) hS (n ⊗ₜ[Γ(X, V)] d) =
+        d • (show Γ((tensorPullback f).obj ((S).obj G), f ⁻¹ᵁ V) from
+          (((adj₀).unit.app ((S).obj G)).val.app (op V) n)) := by
+    have hid : ((tensorPullback f).obj ((S).obj G)).presheaf.map
+        (homOfLE (show f ⁻¹ᵁ V ≤ f ⁻¹ᵁ V from le_rfl)).op = 𝟙 _ :=
+      ((tensorPullback f).obj ((S).obj G)).presheaf.map_id _
+    simpa only [hid, ConcreteCategory.id_apply] using htmul ((S).obj G) hS n d
   have hp (d : Γ(U, f ⁻¹ᵁ V)) (n : G.val.obj (op V)) :
       p (d ⊗ₜ[Γ(X, V)] n) = (b.hom.app (op (f ⁻¹ᵁ V))).hom d •
         (show (P.obj G).val.obj (op (f ⁻¹ᵁ V)) from
           (κ.inv.app G).val.app (fV (op V))
             (((adj₀).unit.app ((S).obj G)).val.app (op V) n)) := by
-    change (κ.inv.app G).val.app (fV (op V))
-      (c ((S).obj G) hS (n ⊗ₜ[Γ(X, V)] d)) = _
-    rw [htmul]
-    have hid : ((tensorPullback f).obj ((S).obj G)).presheaf.map
-        (homOfLE (show f ⁻¹ᵁ V ≤ f ⁻¹ᵁ V from le_rfl)).op = 𝟙 _ := by
-      exact ((tensorPullback f).obj ((S).obj G)).presheaf.map_id _
-    rw [hid]
-    exact ((κ.inv.app G).val.app (fV (op V))).hom.map_smul d
-      (((adj₀).unit.app ((S).obj G)).val.app (op V) n)
-  refine ⟨p, ?_, ?_⟩
-  · intro a d n
-    rw [hp, hp, ← mul_smul, ← map_mul]
-  · intro n
-    simpa only [map_one, one_smul] using hp 1 n
+    exact (congrArg k (htmul' n d)).trans (k.map_smul d _)
+  exact ⟨p, affine_pushout_first_action (b.hom.app (op (f ⁻¹ᵁ V))).hom
+    (fun d n ↦ p (d ⊗ₜ[Γ(X, V)] n)) _ hp⟩
 
-set_option maxHeartbeats 1100000 in
 -- The canonical unit calculation unfolds inverse-image and change-of-rings section instances.
 /-- Affine first-tensor module section presentation with both actions and the canonical unit.
 Source: Stacks Project, Morphisms, Tag 01SB, construction of h and affine reduction.
@@ -232,8 +251,8 @@ theorem affine_pushout_module_section_presentation [IsAffineHom f]
   let : Module Γ(X, V) (G.val.obj (op V)) := Module.compHom _ (f.app V).hom
   let : Module Γ(X, V) ((P.obj G).val.obj (op (f ⁻¹ᵁ V))) :=
     Module.compHom _ ((b.hom.app (op (f ⁻¹ᵁ V))).hom.comp (f.app V).hom)
-  obtain ⟨p, hb, hu⟩ := affine_pushout_module_section_presentation_equiv
-    f B b P κ G hG V hV
+  have he := affine_pushout_module_section_presentation_equiv f B b P κ G hG V hV
+  rcases he with ⟨p, hb, hu⟩
   let v (n : G.val.obj (op V)) : (P.obj G).val.obj (op (f ⁻¹ᵁ V)) :=
     (κ.inv.app G).val.app (fV (op V))
       (((adj₀).unit.app ((S).obj G)).val.app (op V) n)
@@ -251,11 +270,7 @@ theorem affine_pushout_module_section_presentation [IsAffineHom f]
     rw [hP.2 G (op V) n, hP.2 G (op V) (c • n)]
     subst δ
     exact inverseImage_changeOfRings_unit_smul f.base A B t G (op V) c n
-  refine ⟨p, hb, ?_, hu⟩
-  intro c d n
-  have hp (d : Γ(U, f ⁻¹ᵁ V)) (n : G.val.obj (op V)) :
-      p (d ⊗ₜ[Γ(X, V)] n) = (b.hom.app (op (f ⁻¹ᵁ V))).hom d • v n := by
-    simpa only [mul_one, hu] using (hb d 1 n).symm
-  rw [hp, hp, smul_comm, hv]
+  exact ⟨p, hb, affine_pushout_second_action (b.hom.app (op (f ⁻¹ᵁ V))).hom δ
+    (fun d n ↦ p (d ⊗ₜ[Γ(X, V)] n)) v hb hu hv, hu⟩
 end
 end AlgebraicGeometry.Scheme.Modules

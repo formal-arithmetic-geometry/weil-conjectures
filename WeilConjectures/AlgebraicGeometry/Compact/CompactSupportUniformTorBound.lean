@@ -26,7 +26,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
 
 Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-tower-bound,
 `sk-lem-sp-tower-bound-uniform.md`; Stacks Project, Tag 0F10
-(blueprint: det-sp-tower-bound-uniform).
+(blueprint: prose-09-23).
 
 Finite coefficients use the recorded ordinary ringed pro-etale derived category.
 The second clause uses the existing strict semilinear sequence-site presentation of
