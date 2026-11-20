@@ -7,14 +7,14 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Geo.GeoCartierCanonicalEtale
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals
+public import WeilConjectures.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalCartier
 import WeilConjectures.AlgebraicGeometry.FiniteP1DiagonalAlpha
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
 import WeilConjectures.ConstructibleSheaf.RankOne
-import WeilConjectures.ConstructibleSheaf.LisseRankOne
+public import WeilConjectures.ConstructibleSheaf.LisseRankOne
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
-import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologyZero
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
@@ -80,20 +80,22 @@ private theorem class_detects_from_integral_and_unit_action
     (t : R.obj (((DerivedCategory.singleFunctor C 0).obj L)⟦(2 : ℤ)⟧) ⟶ Q)
     (hint : s.hom ≫ R.map δ.hom ≫ t = 𝟙 Q)
     (hunit : Function.Injective (fun a : End (𝟙_ C) ↦
-      R.map ((DerivedCategory.singleFunctor C 0).map (unitEndAction S a)))) :
+      R.map ((DerivedCategory.singleFunctor C 0).map (unitEndAction S a).asHom))) :
     Function.Injective (fun f : L ⟶ L ↦ δ.comp (Abelian.Ext.mk₀ f) (add_zero 2)) := by
   intro f g hfg
-  obtain ⟨a, ha⟩ := (bijective_unitEndAction L).2 f
-  obtain ⟨b, hb⟩ := (bijective_unitEndAction L).2 g
+  obtain ⟨a, ha⟩ := (bijective_unitEndAction L).2 (End.of f)
+  obtain ⟨b, hb⟩ := (bijective_unitEndAction L).2 (End.of g)
+  have ha : (unitEndAction L a).asHom = f := congrArg End.asHom ha
+  have hb : (unitEndAction L b).asHom = g := congrArg End.asHom hb
   have hcenter (a : End (𝟙_ C)) :
-      δ.comp (Abelian.Ext.mk₀ (unitEndAction L a)) (add_zero 2) =
-        (Abelian.Ext.mk₀ (unitEndAction S a)).comp δ (zero_add 2) := by
+      δ.comp (Abelian.Ext.mk₀ (unitEndAction L a).asHom) (add_zero 2) =
+        (Abelian.Ext.mk₀ (unitEndAction S a).asHom).comp δ (zero_add 2) := by
     let θ : 𝟭 C ⟶ 𝟭 C :=
-      { app := fun X ↦ unitEndAction X a
+      { app := fun X ↦ (unitEndAction X a).asHom
         naturality := fun _ _ f ↦ (unitEndAction_naturality f a).symm }
     exact Abelian.Ext.comp_natural_endomorphism θ δ
-  have h : (Abelian.Ext.mk₀ (unitEndAction S a)).comp δ (zero_add 2) =
-      (Abelian.Ext.mk₀ (unitEndAction S b)).comp δ (zero_add 2) := by
+  have h : (Abelian.Ext.mk₀ (unitEndAction S a).asHom).comp δ (zero_add 2) =
+      (Abelian.Ext.mk₀ (unitEndAction S b).asHom).comp δ (zero_add 2) := by
     rw [← hcenter, ← hcenter, ha, hb]
     exact hfg
   have hh := congrArg (fun z : Ext S L 2 ↦ (z.hom :
@@ -108,7 +110,7 @@ private theorem class_detects_from_integral_and_unit_action
   have hab : a = b := by
     apply hunit
     simpa only [R.map_comp, Category.assoc, hs, Category.comp_id] using hR
-  exact ha.symm.trans ((congrArg (unitEndAction L) hab).trans hb)
+  exact ha.symm.trans ((congrArg (fun c ↦ (unitEndAction L c).asHom) hab).trans hb)
 end CategoryTheory
 
 namespace CategoryTheory
@@ -133,7 +135,7 @@ private theorem source_unit_action_detected
     (adj : F ⊣ G) (adjH : H ⊣ K)
     [F.Full] [F.Faithful] [(F ⋙ H).Full] [(F ⋙ H).Faithful]
     {Z : C} (e : 𝟙_ D ≅ F.obj Z) {V : E} (r : H.obj (𝟙_ D) ≅ V) :
-    Function.Injective (fun a : End (𝟙_ D) ↦ G.map (unitEndAction (K.obj V) a)) := by
+    Function.Injective (fun a : End (𝟙_ D) ↦ G.map (unitEndAction (K.obj V) a).asHom) := by
   have hF : IsIso (G.map (adjH.unit.app (F.obj Z))) := by
     have h : IsIso ((adj.comp adjH).unit.app Z) := inferInstance
     rw [Adjunction.comp_unit_app] at h
@@ -150,20 +152,22 @@ private theorem source_unit_action_detected
   have hε : IsIso (adj.counit.app (𝟙_ D)) := adj.isIso_counit_app_of_iso e
   intro a b hab
   dsimp only at hab
-  have hnat (a : End (𝟙_ D)) : a ≫ q = q ≫ unitEndAction (K.obj V) a := by
+  have hnat (a : End (𝟙_ D)) : a.asHom ≫ q = q ≫ (unitEndAction (K.obj V) a).asHom := by
     simpa only [Functor.id_obj, unitEndAction_unit] using unitEndAction_naturality q a
-  have habG : G.map a = G.map b := by
+  have habG : G.map a.asHom = G.map b.asHom := by
     apply (cancel_mono (G.map q)).1
     calc
-      G.map a ≫ G.map q = G.map (a ≫ q) := (G.map_comp _ _).symm
-      _ = G.map (q ≫ unitEndAction (K.obj V) a) := congrArg G.map (hnat a)
-      _ = G.map q ≫ G.map (unitEndAction (K.obj V) a) := G.map_comp _ _
-      _ = G.map q ≫ G.map (unitEndAction (K.obj V) b) := congrArg (fun z ↦ G.map q ≫ z) hab
-      _ = G.map (q ≫ unitEndAction (K.obj V) b) := (G.map_comp _ _).symm
-      _ = G.map (b ≫ q) := congrArg G.map (hnat b).symm
-      _ = G.map b ≫ G.map q := G.map_comp _ _
+      G.map a.asHom ≫ G.map q = G.map (a.asHom ≫ q) := (G.map_comp _ _).symm
+      _ = G.map (q ≫ (unitEndAction (K.obj V) a).asHom) := congrArg G.map (hnat a)
+      _ = G.map q ≫ G.map (unitEndAction (K.obj V) a).asHom := G.map_comp _ _
+      _ = G.map q ≫ G.map (unitEndAction (K.obj V) b).asHom :=
+        congrArg (fun z ↦ G.map q ≫ z) hab
+      _ = G.map (q ≫ (unitEndAction (K.obj V) b).asHom) := (G.map_comp _ _).symm
+      _ = G.map (b.asHom ≫ q) := congrArg G.map (hnat b).symm
+      _ = G.map b.asHom ≫ G.map q := G.map_comp _ _
+  apply End.ext
   apply (cancel_epi (adj.counit.app (𝟙_ D))).1
-  have hn (a : End (𝟙_ D)) := adj.counit.naturality a
+  have hn (a : End (𝟙_ D)) := adj.counit.naturality a.asHom
   simp only [Functor.id_map, Functor.comp_map] at hn
   exact (hn a).symm.trans ((congrArg
     (fun z ↦ F.map z ≫ adj.counit.app (𝟙_ D)) habG).trans (hn b))
@@ -289,7 +293,7 @@ private theorem diagonal_class_detects
       (ordinaryFinitePushforward A (projectiveLineDiagonalProjection Y false)).map
         ((DerivedCategory.singleFunctor _ 0).map (unitEndAction
           ((lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine Y ↘ Y))).obj
-            (ordinaryFiniteConstant A (ProjectiveLine Y))) a)))) :
+            (ordinaryFiniteConstant A (ProjectiveLine Y))) a).asHom))) :
     Function.Injective (fun f : Scheme.finiteEtaleTateLine
         (pullback (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) N A hA ⟶
         Scheme.finiteEtaleTateLine
@@ -389,7 +393,7 @@ theorem finiteEtaleDiagonalClass_postcomp_injective
     (Functor.Monoidal.εIso F) (Functor.Monoidal.εIso H).symm
   have hunit : Function.Injective (fun a : End
       (𝟙_ (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A))) ↦
-      R.map ((DerivedCategory.singleFunctor _ 0).map (unitEndAction S a))) := by
+      R.map ((DerivedCategory.singleFunctor _ 0).map (unitEndAction S a).asHom)) := by
     intro a b hab
     apply hunit₀
     have hR : R = G.rightDerivedFunctor := rfl

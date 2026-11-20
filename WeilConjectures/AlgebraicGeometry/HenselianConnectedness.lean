@@ -65,8 +65,8 @@ namespace AlgebraicGeometry
 Stein connectedness): for a proper morphism `p : Y ⟶ Spec A` with `A` noetherian, the ring
 `Γ(Y, 𝒪_Y)` is a finite `A`-algebra, i.e. the second map `Spec Γ(Y, 𝒪_Y) ⟶ Spec A` of the Stein
 factorization is finite. For a general affine base this is not proved in the blueprint.
-(blueprint: `thm-weil-pbc-stein-inputs`) 
-(blueprint: thm-weil-pbc-stein-inputs)
+(blueprint: `theorem-comparison-over-henselian-pair-degree`) 
+(blueprint: theorem-comparison-over-henselian-pair-degree)
 -/
 @[stacks 02O5]
 theorem Scheme.Hom.isFinite_steinFactorizationBase {A : Type u} [CommRing A]
@@ -121,12 +121,12 @@ connected subset. This is the Stein-factorization step of the henselian-pair com
 
 It is deduced from the idempotent lifting for proper schemes over a henselian pair
 (`AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing`, blueprint
-`thm-weil-pbc-henselian-idempotent-lifting`), applied to `C` with its reduced induced
+`theorem-finite-etale-covers-proper-henselian--2`), applied to `C` with its reduced induced
 structure `Z`: the space `Z ≅ C` is irreducible, hence connected, so `Γ(Z, 𝒪_Z)` has no
 idempotents but `0` and `1`; hence neither has `Γ(Z₀, 𝒪_{Z₀})`, and the nonempty closed fibre
 `Z₀`, whose image in `Y` is `C ∩ Y₀`, is connected.
-(blueprint: `thm-weil-pbc-stein-inputs`) 
-(blueprint: thm-weil-pbc-stein-inputs)
+(blueprint: `theorem-comparison-over-henselian-pair-degree`) 
+(blueprint: theorem-comparison-over-henselian-pair-degree)
 -/
 @[stacks 0A0B]
 theorem Scheme.Hom.isConnected_inter_preimage_zeroLocus {A : Type u} [CommRing A]
@@ -228,8 +228,8 @@ hypotheses of the Zariski restriction criterion
 spectrality holds because `Y` is quasi-compact and quasi-separated, the closedness because
 `V(I)` is closed, and the connectedness is the classical input
 `AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`.
-(blueprint: `lemma-weil-pbc-stein-connectedness`) 
-(blueprint: lemma-weil-pbc-stein-connectedness)
+(blueprint: `theorem-comparison-over-henselian-pair-degree`) 
+(blueprint: theorem-comparison-over-henselian-pair-degree)
 -/
 theorem Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p] :

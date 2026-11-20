@@ -108,7 +108,7 @@ private theorem evaluation_mate_iso
   exact h
 
 /-- The coefficient pullback map is the adjoint of the monoidal unit comparison.
-Source: the coefficient adjunction, as used in blueprint lem-fd-as-characters
+Source: the coefficient adjunction, as used in blueprint lemma-artin-schreier-character-sheaf
 (blueprint: lem-fd-as-coefficient-cover-maps).
 
 Proof: the underlying morphism of the adjoint is condensedPushforwardHom by
@@ -271,7 +271,7 @@ private theorem coefficientUnit_pull
 
 /-- The pullback of a constant coefficient function has that constant value at
 any chosen root.
-Source: blueprint lem-fd-as-characters, trivial-character clause
+Source: blueprint lemma-artin-schreier-character-sheaf, trivial-character clause
 (blueprint: lem-fd-as-coefficient-cover-maps).
 
 Proof: composing the coefficient unit with pullback of functions is the
@@ -338,7 +338,7 @@ private theorem coefficientEvaluation_eq_sheetProjection
 
 /-- Root evaluation equals the composition-comparison projection followed by the
 monoidal identification of the pulled-back regular module.
-Source: blueprint lem-wft-as-comparison, root-evaluation convention
+Source: blueprint lemma-artin-schreier-character-sheaf, root-evaluation convention
 (blueprint: lem-fd-as-coefficient-cover-maps).
 
 Proof: apply the pullback/pushforward adjunction for x to both maps. Conjugacy of

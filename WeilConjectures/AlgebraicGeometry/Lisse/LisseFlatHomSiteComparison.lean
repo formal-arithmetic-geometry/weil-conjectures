@@ -91,12 +91,13 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-! # Site comparison for internal Hom from a flat lisse sheaf
 
-Source: blueprint, lem-weil-finite-duality-site-comparison, proof paragraphs 2--3;
-Stacks Tags 00NZ, 08JI, 08JB, 03EO and 095I
-(blueprint: lem-sf-lisse-flat-hom-site-comparison).
-
 The finite-coordinate maps are actual evaluation maps at the chosen basis vectors.
 Finite products in these additive categories are the finite direct sums in the source.
+
+## References
+
+* Stacks Tags 00NZ, 08JI, 08JB, 03EO and 095I
+* Stacks 03EO, naturality of evaluation
 -/
 
 @[expose] public noncomputable section
@@ -117,9 +118,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Both-variable naturality, stated with abstract functors so that it does not
 unfold the derived tensor structures while checking the equation. The specialization
-below supplies exactly the existing evaluation comparison.
-Source: Stacks 03EO, naturality of evaluation
-(blueprint: lem-sf-lisse-flat-hom-site-comparison). -/
+below supplies exactly the existing evaluation comparison. -/
 def lisseFlatHomNaturality
     {C : Type c} [Category.{v} C] {D : Type d} [Category.{v} D]
     (H : Cᵒᵖ ⥤ C ⥤ C) (G : Dᵒᵖ ⥤ D ⥤ D) (F : C ⥤ D)
@@ -135,17 +134,17 @@ private theorem homComparison_naturality
     {D : Type d} [Category.{v} D] [MonoidalCategory D] [MonoidalClosed D]
     (F : C ⥤ D) [F.LaxMonoidal] (K N : C) :
     lisseFlatHomNaturality internalHom internalHom F
-      (fun K N ↦ (Functor.LaxMonoidal.ihomComparison F K).natTrans.app N) K N := by
+      (fun K N ↦ (Functor.LaxMonoidal.ihomComparison F K).app N) K N := by
   intro K' N' f g
   change F.map ((pre f).app N ≫ (ihom K').map g) ≫
-    (Functor.LaxMonoidal.ihomComparison F K').natTrans.app N' =
-    (Functor.LaxMonoidal.ihomComparison F K).natTrans.app N ≫
+    (Functor.LaxMonoidal.ihomComparison F K').app N' =
+    (Functor.LaxMonoidal.ihomComparison F K).app N ≫
       (pre (F.map f)).app (F.obj N) ≫ (ihom (F.obj K')).map (F.map g)
   have h : F.map ((ihom K').map g) ≫
-      (Functor.LaxMonoidal.ihomComparison F K').natTrans.app N' =
-      (Functor.LaxMonoidal.ihomComparison F K').natTrans.app N ≫
+      (Functor.LaxMonoidal.ihomComparison F K').app N' =
+      (Functor.LaxMonoidal.ihomComparison F K').app N ≫
         (ihom (F.obj K')).map (F.map g) :=
-    (Functor.LaxMonoidal.ihomComparison F K').natTrans.naturality g
+    (Functor.LaxMonoidal.ihomComparison F K').naturality g
   rw [F.map_comp, Category.assoc, h, ← Category.assoc,
     Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app, Category.assoc]
 

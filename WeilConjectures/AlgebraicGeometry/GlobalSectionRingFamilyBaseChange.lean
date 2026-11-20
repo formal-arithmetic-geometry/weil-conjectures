@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionScalarExtension
 public import WeilConjectures.AlgebraicGeometry.RingComplexSemilinearExtension

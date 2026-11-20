@@ -26,11 +26,11 @@ to `Dᵇc` through `NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchang
 
 The proof compares `χ_a` with the proper exchange of the model `M` of its geometric generic fibre
 over the trait as a model of `Spec Ω` (`NearbyCyclesModel.IsTraitModelOver.toTraitGeneric`,
-invertible by blueprint `det-sp-nearby-cycles-exchanges` (2),
+invertible by blueprint `prose-E-03` (2),
 `NearbyCyclesModel.IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app`): by the square
 law of the pullback exchanges, the two differ by `Ψ_S` of the base change morphism
 `Lε^* Ra_* ⟶ Rg_* Lε^*` of the cartesian square of generic fibres, which is invertible by proper
-base change (blueprint `sk-thm-sfb-proper-base-change`,
+base change (blueprint `proposition-proper-direct-image-constructible-complexes`,
 `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`), and
 by pullback exchanges along identities (`NearbyCyclesModel.pushforwardExchange_square_aux`).
 
@@ -146,8 +146,6 @@ set_option hygiene false in
 /-- The condensed field `ℚ̄_ℓ`. -/
 local notation "𝐐" => Profinite.padicAlgClRingObj ℓ
 
-set_option maxHeartbeats 800000 in
--- the square law of the exchanges is instantiated on the ambient derived categories
 /-- **Proper exchange for a proper trait model over the base**, on the ambient derived
 categories: if the total space of the trait model `M` over the base is proper over the trait and
 its geometric generic fibre is all of `X ×_k Spec Ω`, the proper exchange
@@ -155,7 +153,7 @@ its geometric generic fibre is all of `X ×_k Spec Ω`, the proper exchange
 every bounded constructible `K` (for proper `X`). By the square law
 `NearbyCyclesModel.pushforwardExchange_square_aux`, it agrees, up to invertible pullback
 exchanges along identities and base change along identities, with the proper exchange of the
-model of the geometric generic fibre (blueprint `det-sp-nearby-cycles-exchanges` (2)) composed
+model of the geometric generic fibre (blueprint `prose-E-03` (2)) composed
 with `Ψ_S` of the proper base change morphism of the square of generic fibres. -/
 theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
     [Fact (ringChar k ≠ ℓ)] [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
@@ -165,65 +163,21 @@ theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))
     (hA : boundedConstructible _ A) :
     IsIso ((h.toTrait.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app A) := by
-  have hM := h.isTraitModelOver
-  obtain ⟨e, he, -⟩ := h.exists_comp_ε
-  have hb : M.ε ≫ (toPoint X).left = g ≫ (traitModel k k').ε := h.toTrait.comm_ε.symm
-  have hs : 𝟙 X'.left ≫ (toPoint X').left = X'.hom ≫ 𝟙 (point k').left := by simp
-  have hSQ := fun C ↦ Hom.pullbackExchange_square 𝐐 (toGenericSelfHom M) h.toTrait
-    hM.toTraitGeneric (traitGenericModelHom k k')
-    (by simp [IsTraitModelOfBase.toTrait]) (by simp [IsTraitModelOfBase.toTrait]) hb hs C
+  have : IsNoetherian (point k).left := inferInstanceAs (IsNoetherian (Spec (.of k)))
+  have : IsProper h.toTrait.total := ‹IsProper q›
   have hgen' : IsPullback M.ε g (toPoint X).left (traitModel k k').ε := by
     have e₀ : (traitModel k k').ε = traitGenericPoint k' ≫ traitToBase k k' :=
       (traitModel_j_traitToBase k k').symm
     rw [e₀, toPoint_left]
     exact hgen
-  have key := pushforwardExchange_square_aux
-    (derivedUpperStarLowerStarAdjunction 𝐐 (toPoint X).left)
-    (derivedUpperStarLowerStarAdjunction 𝐐 g)
-    (derivedUpperStarLowerStarAdjunction 𝐐 (toPoint X').left)
-    (derivedUpperStarLowerStarAdjunction 𝐐 X'.hom)
-    ((toGenericSelfHom M).pullbackExchange 𝐐) ((traitGenericModelHom k k').pullbackExchange 𝐐)
-    (h.toTrait.pullbackExchange 𝐐) (hM.toTraitGeneric.pullbackExchange 𝐐)
-    (h.toTrait.pushforwardExchange 𝐐) (hM.toTraitGeneric.pushforwardExchange 𝐐)
-    (h.toTrait.map_pushforwardExchange_app_comp_counit_app 𝐐)
-    (hM.toTraitGeneric.map_pushforwardExchange_app_comp_counit_app 𝐐)
-    (pullbackSquareComparison 𝐐 ⟨hb⟩).hom (pullbackSquareComparison 𝐐 ⟨hs⟩).hom
-    (baseChangeMap 𝐐 ⟨hb⟩) (baseChangeMap 𝐐 ⟨hs⟩)
-    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
-    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl) hSQ A
-  have : IsNoetherian (point k).left := inferInstanceAs (IsNoetherian (Spec (.of k)))
-  have pbc := isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ
-    (𝟙 (point k).left) (traitGenericPoint k' ≫ traitToBase k' k') ⟨hb⟩ hgen' A hA
-  -- the base change morphisms are invertible
-  have : IsIso (baseChangeMap 𝐐 ⟨hs⟩) := by
-    have : WeaklyEtale (𝟙 X'.left) := MorphismProperty.id_mem _ _
-    have : WeaklyEtale (𝟙 (point k').left) := MorphismProperty.id_mem _ _
-    have hsq : IsPullback (𝟙 X'.left) X'.hom (toPoint X').left (𝟙 (point k').left) := by
+  exact h.toTrait.isIso_pushforwardExchange_app_of_isProper (ℓ := ℓ)
+    (𝟙 (point k).left) h.isTraitModelOver.isTraitModel.exists_over
+    (isTraitModel_traitModel k k').exists_over
+    (by
+      change IsPullback M.i (toPoint X').left q (traitClosedPoint k')
       rw [toPoint_left]
-      exact IsPullback.of_id_fst
-    exact isIso_baseChangeMap_of_weaklyEtale 𝐐 hsq
-  -- the proper exchange of the model of the geometric generic fibre is invertible
-  have hC₀ : boundedConstructible _ (L((e)^*⟦𝐐⟧).obj A) :=
-    boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ e _ hA
-  have h₀ := hM.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) (L((e)^*⟦𝐐⟧).obj A) hC₀
-  have iso : L((M.ε)^*⟦𝐐⟧).obj A ≅ L((M.j)^*⟦𝐐⟧).obj (L((e)^*⟦𝐐⟧).obj A) :=
-    (eqToIso (congrArg (fun f : M.generic ⟶ X.left ↦ L((f)^*⟦𝐐⟧)) he.symm)).app A ≪≫
-      (leftDerivedUpperStarComp 𝐐 M.j e).app A
-  have hχgen : IsIso ((hM.toTraitGeneric.pushforwardExchange 𝐐).app (L((M.ε)^*⟦𝐐⟧).obj A)) :=
-    NatTrans.isIso_app_of_iso' _ iso
-  have := isIso_pullbackExchange_traitGenericModelHom k k' 𝐐
-  have hcomp : IsIso (L((𝟙 (point k').left)^*⟦𝐐⟧).map
-      ((h.toTrait.pushforwardExchange 𝐐).app A) ≫ (baseChangeMap 𝐐 ⟨hs⟩).app _ ≫
-        R((X'.hom)_*⟦𝐐⟧).map (((toGenericSelfHom M).pullbackExchange 𝐐).app A)) := by
-    rw [key]
-    exact IsIso.comp_isIso' (NatIso.isIso_app_of_isIso _ _)
-      (IsIso.comp_isIso' (Functor.map_isIso _ _) hχgen)
-  have : IsIso (L((𝟙 (point k').left)^*⟦𝐐⟧).map ((h.toTrait.pushforwardExchange 𝐐).app A)) :=
-    IsIso.of_isIso_comp_right _ ((baseChangeMap 𝐐 ⟨hs⟩).app _ ≫
-      R((X'.hom)_*⟦𝐐⟧).map (((toGenericSelfHom M).pullbackExchange 𝐐).app A))
-  have : L((𝟙 (point k').left)^*⟦𝐐⟧).IsEquivalence :=
-    Functor.isEquivalence_of_iso (leftDerivedUpperStarId 𝐐 _).symm
-  exact isIso_of_reflects_iso _ L((𝟙 (point k').left)^*⟦𝐐⟧)
+      exact h.isTraitModelOver.isPullback_i)
+    hgen' hA
 
 /-- **Proper exchange for a proper trait model over the base**: if `X` is proper over `k`, the
 total space of the trait model `M` over the base is proper over the trait and its geometric

@@ -19,7 +19,8 @@ which preserves bounded constructibility and commutes with every base change (`i
 `lemma-weil-pbc-finite-exchange`). Hence the generic constructibility and base change property
 of `Rj_* K` over `S` implies that of `R(j ≫ i)_* K`
 (`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.comp_isClosedImmersion`). This is the
-reduction to a dense open immersion in the proof of `thm-fin-deligne-generic-open`.
+reduction to a dense open immersion in the proof of
+`theorem-generic-constructibility-base-change-rj`.
 -/
 
 @[expose] public section
@@ -40,7 +41,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- The direct image along a closed immersion into a locally noetherian scheme preserves bounded
 constructibility: it is exact, so it commutes with the homology sheaves, and it preserves
-constructible sheaves (`lem-fin-closed-immersion`). -/
+constructible sheaves (`proposition-proper-direct-image-finite-coefficients`). -/
 lemma boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion {Z Y : Scheme.{u}}
     [IsLocallyNoetherian Y] (i : Z ⟶ Y) [IsClosedImmersion i]
     {K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

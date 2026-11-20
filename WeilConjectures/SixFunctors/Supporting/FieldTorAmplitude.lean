@@ -38,7 +38,7 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.ConstantFieldTensorCohomolo
 
 /-! # Finite Tor amplitude at condensed field coefficients
 
-Source: current blueprint `lem-integral-ctf-equals-bc`, field case of clause (2).
+Source: current blueprint `proposition-ctf-equals-bc`, field case of clause (2).
 This specializes the local-model and truncation argument to the two field coefficient
 families, in the ordinary derived category over the pulled-back condensed ring.
 (blueprint: lem-weil-field-tor-amplitude).

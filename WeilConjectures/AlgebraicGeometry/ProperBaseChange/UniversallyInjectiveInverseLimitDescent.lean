@@ -16,7 +16,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 /-!
 # Descent of universal injectivity through an affine-transition inverse limit
 
-Source: Stacks Project, Limits, Tag 07RR and Morphisms, Tag 01S4, via surjectivity of the diagonal.
+## References
+
+* Stacks Project, Limits, Tag 07RR and Morphisms, Tag 01S4, via surjectivity of the diagonal
+* Stacks Project, Limits, Tag 07RR and Morphisms, Tag 01S4
 -/
 
 @[expose] public section
@@ -26,17 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Universal injectivity of a finitely presented model descends from an inverse limit.
-
-Source: Stacks Project, Limits, Tag 07RR and Morphisms, Tag 01S4.
-(blueprint: lem-weil-pbc-descend-universally-injective-qcqs)
-
-Proof: Universal injectivity is surjectivity of the diagonal. Form the diagonal as a
-morphism over the original stage. It is locally finitely presented; its source and
-target are qcqs. Its limit pullback is surjective, by the diagonal base-change
-isomorphism. Descend this surjectivity and use the same base-change isomorphism at
-the resulting stage. Symmetry interchanges the two pullback projections.
--/
+/-- Universal injectivity of a finitely presented model descends from an inverse limit. -/
 theorem exists_universallyInjective_pullback_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

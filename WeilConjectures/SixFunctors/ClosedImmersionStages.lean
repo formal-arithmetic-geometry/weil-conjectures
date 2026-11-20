@@ -19,8 +19,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Clo
 /-!
 # The direct image along a closed immersion is fully faithful at every coefficient stage
 
-Blueprint `prop-sf-closed-unit-all-stages`: for a closed immersion `i : Z ⟶ X`, the direct image
-`i_* = Ri_* = Ri_!` is fully faithful on the categories `Dᵇc(-, Λ)` at each of the coefficient
+Blueprint `lemma-local-cohomology-right-adjoint--1`: for a closed immersion `i : Z ⟶ X`, the direct
+image `i_* = Ri_* = Ri_!` is fully faithful on the categories `Dᵇc(-, Λ)` at each of the coefficient
 stages `Λ = A_{E,n}, 𝒪_E, E, ℚ̄_ℓ`, and consequently, at every stage at which `i_*` has a right
 adjoint `Ri^!` on these categories, the unit `Q ⟶ Ri^! i_* Q` is an isomorphism.
 
@@ -31,7 +31,7 @@ In this repository the stages are realised as follows.
   (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`). Here `Ri_*` is fully
   faithful on the whole derived category
   (`AlgebraicGeometry.ProEtale.full_rightDerivedFunctor_lowerStar`), and the right adjoint
-  exists on the ambient categories (`prop-sf-closed-immersion-unit`,
+  exists on the ambient categories (`lemma-local-cohomology-right-adjoint--1`,
   `AlgebraicGeometry.ProEtale.isIso_derivedLowerStarClosedUpperShriekAdjunction_unit_app`).
 * `𝒪_E`: the derived complete objects `D_comp(X_ét, 𝒪_E)` of the derived category of étale
   sheaves of `𝒪_E`-modules (`DerivedCategoryDerivedCompleteIntegral`), which `Rf_*` preserves
@@ -87,7 +87,7 @@ section Finite
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `prop-sf-closed-unit-all-stages`, finite stage `A_{E,n}`: the direct image
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, finite stage `A_{E,n}`: the direct image
 `Ri_*` along a closed immersion is fully faithful on the bounded constructible pro-étale
 complexes `Dᵇc_proét(Z, Λ)`, `Λ` finite. -/
 instance ProEtale.full_boundedConstructible_ι_comp_rightDerivedLowerStar :
@@ -101,7 +101,7 @@ instance ProEtale.faithful_boundedConstructible_ι_comp_rightDerivedLowerStar :
   inferInstance
 
 omit [Finite Λ] in
-/-- Blueprint `prop-sf-closed-unit-all-stages`, the unit at the finite stage: for any right
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, the unit at the finite stage: for any right
 adjoint `Ri^!` of the corestriction of `Ri_* : Dᵇc_proét(Z, Λ) ⥤ D(X_proét, Λ)` to a full
 subcategory `P` (for instance `Dᵇc_proét(X, Λ)`), the unit `Q ⟶ Ri^! Ri_* Q` is an isomorphism.
 On the ambient categories the right adjoint exists, and this is
@@ -188,8 +188,8 @@ instance Etale.faithful_rightDerivedFunctor_lowerStar_of_isClosedImmersion (A : 
     (Etale.upperStarLowerStarAdjunction A i).preservesKInjectiveComplexes
   inferInstance
 
-/-- Blueprint `prop-sf-closed-unit-all-stages`, integral stage `𝒪_E`: the direct image `Ri_*`
-along a closed immersion is fully faithful on the derived complete objects
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, integral stage `𝒪_E`: the direct image
+`Ri_*` along a closed immersion is fully faithful on the derived complete objects
 `D_comp(Z_ét, 𝒪_E)`. -/
 instance Etale.full_rightDerivedLowerStarDerivedCompleteIntegral :
     (Etale.rightDerivedLowerStarDerivedCompleteIntegral l E i).Full :=
@@ -208,7 +208,7 @@ noncomputable def Etale.rightDerivedLowerStarDerivedCompleteRational {Y X : Sche
       DerivedCategoryDerivedCompleteRational X.smallEtaleTopology l E :=
   Rationalization.map _ (Etale.rightDerivedLowerStarDerivedCompleteIntegral l E f)
 
-/-- Blueprint `prop-sf-closed-unit-all-stages`, rational stage `E`: the direct image `Ri_*`
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, rational stage `E`: the direct image `Ri_*`
 along a closed immersion is fully faithful on `D_comp(Z_ét, E)`. -/
 instance Etale.full_rightDerivedLowerStarDerivedCompleteRational :
     (Etale.rightDerivedLowerStarDerivedCompleteRational l E i).Full :=
@@ -218,9 +218,9 @@ instance Etale.faithful_rightDerivedLowerStarDerivedCompleteRational :
     (Etale.rightDerivedLowerStarDerivedCompleteRational l E i).Faithful :=
   Rationalization.faithful_map _
 
-/-- Blueprint `prop-sf-closed-unit-all-stages`, the unit at the integral stage: for any right
-adjoint `Ri^!` of `Ri_* : D_comp(Z_ét, 𝒪_E) ⥤ D_comp(X_ét, 𝒪_E)`, the unit `Q ⟶ Ri^! Ri_* Q` is an
-isomorphism. -/
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, the unit at the integral stage: for any
+right adjoint `Ri^!` of `Ri_* : D_comp(Z_ét, 𝒪_E) ⥤ D_comp(X_ét, 𝒪_E)`, the unit `Q ⟶ Ri^! Ri_* Q`
+is an isomorphism. -/
 theorem Etale.isIso_unit_app_rightDerivedLowerStarDerivedCompleteIntegral
     {G : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E ⥤
       DerivedCategoryDerivedCompleteIntegral Z.smallEtaleTopology l E}
@@ -229,8 +229,8 @@ theorem Etale.isIso_unit_app_rightDerivedLowerStarDerivedCompleteIntegral
     IsIso (adj.unit.app Q) :=
   inferInstance
 
-/-- Blueprint `prop-sf-closed-unit-all-stages`, the unit at the rational stage: for any right
-adjoint `Ri^!` of `Ri_* : D_comp(Z_ét, E) ⥤ D_comp(X_ét, E)`, the unit `Q ⟶ Ri^! Ri_* Q` is an
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, the unit at the rational stage: for any
+right adjoint `Ri^!` of `Ri_* : D_comp(Z_ét, E) ⥤ D_comp(X_ét, E)`, the unit `Q ⟶ Ri^! Ri_* Q` is an
 isomorphism. -/
 theorem Etale.isIso_unit_app_rightDerivedLowerStarDerivedCompleteRational
     {G : DerivedCategoryDerivedCompleteRational X.smallEtaleTopology l E ⥤
@@ -257,8 +257,8 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
 
-/-- Blueprint `prop-sf-closed-unit-all-stages`, integral stage `𝒪_E`: the direct image `Ri_*`
-along a closed immersion is fully faithful on `Dᵇc(Z, 𝒪_E)`
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, integral stage `𝒪_E`: the direct image
+`Ri_*` along a closed immersion is fully faithful on `Dᵇc(Z, 𝒪_E)`
 (`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`: derived complete objects
 whose reductions modulo `𝔪_Eⁿ` are bounded constructible of uniformly bounded Tor amplitude). -/
 instance Etale.full_boundedConstructibleIntegral_ι_comp_rightDerivedLowerStar :
@@ -273,7 +273,7 @@ instance Etale.faithful_boundedConstructibleIntegral_ι_comp_rightDerivedLowerSt
         i).rightDerivedFunctor).Faithful :=
   inferInstance
 
-/-- Blueprint `def-sfb-rationalization-quotient`: Rationalization (scalar localization), the
+/-- Blueprint `proposition-inverting-ell--2`: Rationalization (scalar localization), the
 category `Dᵇc(Y, E) = Dᵇc(Y, 𝒪_E)[1/ϖ_E]` (as its full subcategory, with no Karoubi completion).
 
 The objects of `D_comp(X_ét, E)` coming from `Dᵇc(X, 𝒪_E)`: the rationalization of
@@ -289,7 +289,7 @@ def Etale.DerivedCategory.boundedConstructibleRational (X : Scheme.{u}) :
     Nonempty ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj L ≅ K)
 
 /-- The Karoubi envelope of the rational stage `Dᵇc(X, E)` of blueprint
-`def-sfb-rationalization-quotient` (which takes no Karoubi completion; the canonical functor into
+`proposition-inverting-ell--2` (which takes no Karoubi completion; the canonical functor into
 the envelope is an equivalence, the rationalization being idempotent complete): the Karoubi
 envelope of the rationalization of `Dᵇc(X, 𝒪_E)`. -/
 abbrev Etale.DerivedCategoryBoundedConstructibleRational (X : Scheme.{u}) :=
@@ -306,7 +306,7 @@ noncomputable def Etale.rightDerivedLowerStarBoundedConstructibleRational {Y X :
     ((Etale.DerivedCategory.boundedConstructibleRational l E Y).ι ⋙
       Etale.rightDerivedLowerStarDerivedCompleteRational l E f)
 
-/-- Blueprint `prop-sf-closed-unit-all-stages`, rational stage `E`: the direct image `Ri_*`
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, rational stage `E`: the direct image `Ri_*`
 along a closed immersion is fully faithful on `Dᵇc(Z, E)`, the Karoubi envelope of the
 rationalization of `Dᵇc(Z, 𝒪_E)`. It is the Karoubi extension of the functor induced on
 rationalizations by the integral `Ri_*`, which is fully faithful because the integral `Ri_*`
@@ -322,8 +322,8 @@ instance Etale.faithful_rightDerivedLowerStarBoundedConstructibleRational :
   unfold Etale.rightDerivedLowerStarBoundedConstructibleRational
   infer_instance
 
-/-- Blueprint `prop-sf-closed-unit-all-stages`, the unit at the rational stage: for any right
-adjoint `Ri^!` of the corestriction of `Ri_* : Dᵇc(Z, E) ⥤ Karoubi D_comp(X_ét, E)` to a full
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, the unit at the rational stage: for any
+right adjoint `Ri^!` of the corestriction of `Ri_* : Dᵇc(Z, E) ⥤ Karoubi D_comp(X_ét, E)` to a full
 subcategory `P` (for instance `Dᵇc(X, E)`), the unit `Q ⟶ Ri^! Ri_* Q` is an isomorphism. -/
 theorem Etale.isIso_unit_app_boundedConstructibleRational
     {P : ObjectProperty (Idempotents.Karoubi
@@ -335,9 +335,9 @@ theorem Etale.isIso_unit_app_boundedConstructibleRational
   ObjectProperty.isIso_unit_app_of_lift h adj Q
 
 omit [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E] in
-/-- Blueprint `prop-sf-closed-unit-all-stages`, the unit at the integral stage on `Dᵇc(Z, 𝒪_E)`:
-for any right adjoint `Ri^!` of the corestriction of `Ri_*` to a full subcategory `P` (for
-instance `Dᵇc(X, 𝒪_E)`), the unit `Q ⟶ Ri^! Ri_* Q` is an isomorphism. -/
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, the unit at the integral stage on
+`Dᵇc(Z, 𝒪_E)`: for any right adjoint `Ri^!` of the corestriction of `Ri_*` to a full subcategory `P`
+(for instance `Dᵇc(X, 𝒪_E)`), the unit `Q ⟶ Ri^! Ri_* Q` is an isomorphism. -/
 theorem Etale.isIso_unit_app_boundedConstructibleIntegral
     {P : ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))))}
@@ -369,8 +369,8 @@ abbrev ProEtale.DerivedCategory.boundedConstructibleAdic (X : Scheme.{u}) :
   DerivedCategory.TStructure.t.bounded ⊓
     DerivedCategory.homologyProperty (ProEtale.adicConstructibleSheaf l X)
 
-/-- Blueprint `prop-sf-closed-unit-all-stages`, stage `ℚ̄_ℓ`: the direct image `Ri_*` along a
-closed immersion is fully faithful on `Dᵇc(Z, ℚ̄_ℓ)`. The `ℓ`-adic `i_*` is fully faithful, its
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, stage `ℚ̄_ℓ`: the direct image `Ri_*` along
+a closed immersion is fully faithful on `Dᵇc(Z, ℚ̄_ℓ)`. The `ℓ`-adic `i_*` is fully faithful, its
 counit being an isomorphism, and preserves K-injective complexes, so its right derived functor is
 fully faithful. -/
 instance ProEtale.full_boundedConstructibleAdic_ι_comp_rightDerivedLowerStar :
@@ -383,7 +383,7 @@ instance ProEtale.faithful_boundedConstructibleAdic_ι_comp_rightDerivedLowerSta
       (ProEtale.adicLowerStar l i).rightDerivedFunctor).Faithful :=
   inferInstance
 
-/-- Blueprint `prop-sf-closed-unit-all-stages`, the unit at the stage `ℚ̄_ℓ`: for any right
+/-- Blueprint `lemma-local-cohomology-right-adjoint--1`, the unit at the stage `ℚ̄_ℓ`: for any right
 adjoint `Ri^!` of the corestriction of `Ri_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ D(X_proét, ℚ̄_ℓ)` to a full
 subcategory `P` (for instance `Dᵇc(X, ℚ̄_ℓ)`), the unit `Q ⟶ Ri^! Ri_* Q` is an isomorphism. -/
 theorem ProEtale.isIso_unit_app_boundedConstructibleAdic

@@ -114,8 +114,6 @@ private theorem boundary_assembly_zero {R : Type u} [CommRing R] {r : ℕ}
   simp only [prefix_map_coe, contract_prefix]
   rfl
 
-set_option maxHeartbeats 800000 in
--- Tensoring the dependent exterior-power equivalences needs extra elaboration heartbeats.
 /-- Source: Stacks Project, Tags 0628 and 0629
 (blueprint: lem-weil-pbc-koszul-tensor-cone-coordinates).
 
@@ -154,8 +152,6 @@ theorem exists_koszulTensorConeCoordinates {R : Type u} [CommRing R]
       (⋀[R]^(n + 1) (Fin r →₀ R) × ⋀[R]^n (Fin r →₀ R)) ≃ₗ[R]
         ⋀[R]^(n + 1) (Fin (r + 1) →₀ R) :=
     LinearEquiv.ofBijective (koszulLastAssembly R r n) (koszulLastAssembly_bijective R r n)
-  have hi (n : ℕ) (a : ⋀[R]^(n + 1) (Fin r →₀ R))
-      (b : ⋀[R]^n (Fin r →₀ R)) : i n (a, b) = koszulLastAssembly R r n (a, b) := rfl
   let e₀ := i₀.symm.rTensor M
   let e (n : ℕ) := ((i n).symm.rTensor M).trans
     (TensorProduct.prodLeft R R (⋀[R]^(n + 1) (Fin r →₀ R))
@@ -174,18 +170,22 @@ theorem exists_koszulTensorConeCoordinates {R : Type u} [CommRing R]
     change e₀ ((koszulBoundary R (r + 1) f 0).rTensor M x) =
       (koszulBoundary R r (fun i ↦ f i.castSucc) 0).rTensor M (e 0 x).1 +
         f (Fin.last r) • (e 0 x).2
-    induction x using TensorProduct.inductionOn with
-    | tmul x m =>
-      obtain ⟨⟨a, b⟩, rfl⟩ := (i 0).surjective x
-      rw [hi]
-      change e₀ ((koszulBoundary R (r + 1) f 0).rTensor M
-        (koszulLastAssembly R r 0 (a, b) ⊗ₜ[R] m)) = _
-      rw [LinearMap.rTensor_tmul, boundary_assembly_zero, he₀, he]
-      simp only [TensorProduct.add_tmul, TensorProduct.smul_tmul', LinearMap.rTensor_tmul]
-    | add x y hx hy =>
-      simp only [map_add, Prod.fst_add, Prod.snd_add, smul_add]
-      rw [hx, hy]
-      abel
+    let F := e₀.toLinearMap.comp ((koszulBoundary R (r + 1) f 0).rTensor M)
+    let G := ((koszulBoundary R r (fun i ↦ f i.castSucc) 0).rTensor M).comp
+      ((LinearMap.fst R _ _).comp (e 0).toLinearMap) +
+      f (Fin.last r) • (LinearMap.snd R _ _).comp (e 0).toLinearMap
+    change F x = G x
+    apply LinearMap.congr_fun
+    apply TensorProduct.ext'
+    intro x m
+    obtain ⟨⟨a, b⟩, rfl⟩ := (i 0).surjective x
+    change e₀ ((koszulBoundary R (r + 1) f 0).rTensor M
+      (koszulLastAssembly R r 0 (a, b) ⊗ₜ[R] m)) =
+        (koszulBoundary R r (fun i ↦ f i.castSucc) 0).rTensor M
+          (e 0 (koszulLastAssembly R r 0 (a, b) ⊗ₜ[R] m)).1 +
+        f (Fin.last r) • (e 0 (koszulLastAssembly R r 0 (a, b) ⊗ₜ[R] m)).2
+    rw [LinearMap.rTensor_tmul, boundary_assembly_zero, he₀, he]
+    simp only [TensorProduct.add_tmul, TensorProduct.smul_tmul', LinearMap.rTensor_tmul]
   · intro n x
     dsimp only [koszulComplexTensor, ChainComplex.of] at x ⊢
     erw [ChainComplex.of_d _ _ (n + 1), ChainComplex.of_d _ _ (n + 1),
@@ -194,20 +194,26 @@ theorem exists_koszulTensorConeCoordinates {R : Type u} [CommRing R]
       ((koszulBoundary R r (fun i ↦ f i.castSucc) (n + 1)).rTensor M (e (n + 1) x).1 +
           f (Fin.last r) • (e (n + 1) x).2,
         -(koszulBoundary R r (fun i ↦ f i.castSucc) n).rTensor M (e (n + 1) x).2)
-    induction x using TensorProduct.inductionOn with
-    | tmul x m =>
-      obtain ⟨⟨a, b⟩, rfl⟩ := (i (n + 1)).surjective x
-      rw [hi]
-      change e n ((koszulBoundary R (r + 1) f (n + 1)).rTensor M
-        (koszulLastAssembly R r (n + 1) (a, b) ⊗ₜ[R] m)) = _
-      rw [LinearMap.rTensor_tmul, boundary_assembly, he, he]
-      simp only [TensorProduct.add_tmul, TensorProduct.smul_tmul',
-        TensorProduct.neg_tmul, LinearMap.rTensor_tmul]
-    | add x y hx hy =>
-      simp only [map_add, Prod.fst_add, Prod.snd_add, smul_add, neg_add]
-      rw [hx, hy]
-      ext <;> dsimp
-      all_goals abel
+    let p := (LinearMap.fst R _ _).comp (e (n + 1)).toLinearMap
+    let q := (LinearMap.snd R _ _).comp (e (n + 1)).toLinearMap
+    let F := (e n).toLinearMap.comp ((koszulBoundary R (r + 1) f (n + 1)).rTensor M)
+    let G := (((koszulBoundary R r (fun i ↦ f i.castSucc) (n + 1)).rTensor M).comp p +
+      f (Fin.last r) • q).prod (-((koszulBoundary R r (fun i ↦ f i.castSucc) n).rTensor M).comp q)
+    change F x = G x
+    apply LinearMap.congr_fun
+    apply TensorProduct.ext'
+    intro x m
+    obtain ⟨⟨a, b⟩, rfl⟩ := (i (n + 1)).surjective x
+    change e n ((koszulBoundary R (r + 1) f (n + 1)).rTensor M
+      (koszulLastAssembly R r (n + 1) (a, b) ⊗ₜ[R] m)) =
+        ((koszulBoundary R r (fun i ↦ f i.castSucc) (n + 1)).rTensor M
+            (e (n + 1) (koszulLastAssembly R r (n + 1) (a, b) ⊗ₜ[R] m)).1 +
+          f (Fin.last r) • (e (n + 1) (koszulLastAssembly R r (n + 1) (a, b) ⊗ₜ[R] m)).2,
+        -(koszulBoundary R r (fun i ↦ f i.castSucc) n).rTensor M
+          (e (n + 1) (koszulLastAssembly R r (n + 1) (a, b) ⊗ₜ[R] m)).2)
+    rw [LinearMap.rTensor_tmul, boundary_assembly, he, he]
+    simp only [TensorProduct.add_tmul, TensorProduct.smul_tmul',
+      TensorProduct.neg_tmul, LinearMap.rTensor_tmul]
 
 
 end ExteriorAlgebra

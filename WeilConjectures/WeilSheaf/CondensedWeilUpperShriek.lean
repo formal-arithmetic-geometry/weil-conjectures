@@ -80,12 +80,12 @@ variable (k₀) in
 `ℚ̲̄_ℓ` on the geometric fibre `S̄`. -/
 noncomputable abbrev condensedFrobenius (S : Scheme.{u}) [S.Over (Spec (CommRingCat.of k₀))] :=
   CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-    (S ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+    (S ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
 
 instance (S : Scheme.{u}) [S.Over (Spec (CommRingCat.of k₀))] :
     (condensedFrobenius k₀ l S).IsEquivalence :=
   (CondensedRing.lowerStarEquivalenceOfIso (Profinite.padicAlgClRingObj l)
-    (S ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).isEquivalence_functor
+    (S ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm).isEquivalence_functor
 
 variable (k₀) in
 /-- Bounded constructible complexes on the geometric fibre `S̄`, condensed model. -/

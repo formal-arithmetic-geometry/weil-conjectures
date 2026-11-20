@@ -30,7 +30,7 @@ count. As `R` is reduced, `φ` is an isomorphism after inverting `a`.
 
 ## Blueprint
 
-These are the commutative-algebra content of `lem-sc-finite-constant-length-flat`.
+These are the commutative-algebra content of `proposition-multiplication-n--1`.
 -/
 
 @[expose] public section
@@ -198,7 +198,7 @@ theorem exists_free_away_of_finrank_fiber_eq
       rw [LocalizedModule.map_mk, hc, ← LocalizedModule.mk_cancel_common_left a' s m]
       rfl
 
-/-- Blueprint `lem-sc-finite-constant-length-flat` (algebraic form): a finitely presented module
+/-- Blueprint `proposition-multiplication-n--1` (algebraic form): a finitely presented module
 of constant fibre dimension over a reduced ring is projective, hence flat. -/
 theorem projective_of_finrank_fiber_eq [Module.FinitePresentation R M]
     (h : ∀ (q : Ideal R) [q.IsPrime], finrank q.ResidueField (q.Fiber M) = n) :
@@ -208,7 +208,7 @@ theorem projective_of_finrank_fiber_eq [Module.FinitePresentation R M]
   obtain ⟨a, hap, _⟩ := exists_free_away_of_finrank_fiber_eq h p.asIdeal
   exact basicOpen_subset_freeLocus_iff.mpr inferInstance hap
 
-/-- Blueprint `lem-sc-finite-constant-length-flat` (algebraic form): a finitely presented module
+/-- Blueprint `proposition-multiplication-n--1` (algebraic form): a finitely presented module
 of constant fibre dimension `n` over a reduced ring has rank `n` at every prime. -/
 theorem rankAtStalk_eq_of_finrank_fiber_eq [Module.FinitePresentation R M]
     (h : ∀ (q : Ideal R) [q.IsPrime], finrank q.ResidueField (q.Fiber M) = n)

@@ -31,11 +31,11 @@ private theorem restrictionUnit_of_retracts
     (α : TY ⋙ LF ⟶ LE ⋙ TX)
     (hgen : ∀ K : A, ∃ M : C, Nonempty (Retract K (TY.obj M)))
     (hiso : ∀ M : C, IsIso
-      (((mateEquiv bY bX).symm (TwoSquare.mk _ _ _ _ α)).natTrans.app (TY.obj M))) :
+      (((mateEquiv bY bX).symm (TwoSquare.mk _ _ _ _ α)).app (TY.obj M))) :
     ∃ e : LF ⋙ UX ≅ UY ⋙ LE,
       ∀ K, LF.map (bY.unit.app K) ≫ α.app (UY.obj K) =
         bX.unit.app (LF.obj K) ≫ TX.map (e.hom.app K) := by
-  let δ := ((mateEquiv bY bX).symm (TwoSquare.mk _ _ _ _ α)).natTrans
+  let δ := ((mateEquiv bY bX).symm (TwoSquare.mk _ _ _ _ α))
   have hδ (K : A) : IsIso (δ.app K) := by
     obtain ⟨M, ⟨r⟩⟩ := hgen K
     exact MorphismProperty.of_retract (P := MorphismProperty.isomorphisms D)

@@ -196,7 +196,7 @@ Proof: (1) Present a finite module by finite free modules, using the lists of it
 and its kernel's elements. Exact inverse image and exact module sheafification carry
 this presentation to the identical constant presentation (def-sf-site-constant-module-functor,
 lem-weil-pbc-site-module-presheaf-sheafification-exact,
-prop-weil-pbc-inverse-image-modules-exact).
+situation-conventions).
 (2) Apply lem-sf-proetale-sheafification-tensor-comparison to constant presheaves.
 The unit is locally bijective by lem-weil-pbc-site-sheafification-iso-locally-bijective.
 The pure tensor formula preserves the B-action. Tensors of the finitely many elements
@@ -260,7 +260,7 @@ Source: blueprint comparison-equivalence proof (1), Stacks 098B and 099R
 Proof: (1) A finite constant module has the finite free presentation in proof step 1
 of the node; lem-sf-comparison-pullback-exact identifies its comparison with the same
 constant module by taking the identical cokernel.
-(2) Apply lem-weil-pbc-comparison-pullback to a stratum and then a trivializing map.
+(2) Apply proposition-comparison-etale-derived-category--5 to a stratum and then a trivializing map.
 The two comparisons identify its restriction with that same finite constant model.
 The original etale cover is a pro-etale cover by lem-pur-etale-proetale-cover.
 (3) The encoding and constructibility equivalences

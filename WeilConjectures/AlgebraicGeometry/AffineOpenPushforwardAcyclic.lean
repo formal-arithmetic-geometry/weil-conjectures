@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.OpenPushforwardDerivedComparison
 
 /-! # Acyclic direct images from affine opens
 
-Source: blueprint lem-pc-cech-resolution, proof paragraphs 2 and 3.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves, proof paragraphs 2 and 3.
 (blueprint: lem-pc-affine-open-pushforward-acyclic).
 -/
 
@@ -28,7 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- An affine open direct image is acyclic for a separated map to an affine scheme.
-Source: blueprint lem-pc-cech-resolution, proof paragraphs 2 and 3.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves, proof paragraphs 2 and 3.
 (blueprint: lem-pc-affine-open-pushforward-acyclic)
 
 Proof: X is separated over an affine base. Intersections of affine opens are affine,

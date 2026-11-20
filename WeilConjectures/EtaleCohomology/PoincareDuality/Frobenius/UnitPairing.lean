@@ -75,8 +75,8 @@ variable [Finite Λ] [Module.Injective Λ Λ] {a : X ⟶ Spec (.of k)} [HasCompa
 namespace TateOrientation
 
 /-- **Finite-level Poincaré duality for the constant sheaf** (finite level of blueprint
-`sk-thm-transport`, for `K = Λ_X`). Let `k` be separably closed, `a : X ⟶ Spec k` proper with a
-Tate orientation `γ` of relative dimension `d`, and `Λ` a finite self-injective cogenerating
+`theorem-poincare-duality--9`, for `K = Λ_X`). Let `k` be separably closed, `a : X ⟶ Spec k` proper
+with a Tate orientation `γ` of relative dimension `d`, and `Λ` a finite self-injective cogenerating
 ring. For `i + j = 2d` there is a biadditive pairing `H^i(X, Λ) × H^j(X, Λ) ⟶ Λ`,
 `H^n(X, Λ) = Hom(Λ_X, Λ_X[n])`, which is nondegenerate on both sides: the degreewise Poincaré
 pairing of `Λ_X` read through `H^i_c = H^i`, `Λ_X^∨(d) ≅ Λ_X` and `End(Λ_s) ≅ Λ`. -/

@@ -100,8 +100,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 # Internal Hom of finite-stage constructible complexes
 
 Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-cor-weil-finite-constructible-hom, order 2138
-(blueprint: cor-weil-finite-constructible-hom).
+proposition-six-operations-dctf--15, order 2138
+(blueprint: proposition-six-operations-dctf--15).
 
 ## Main statements
 
@@ -218,15 +218,15 @@ attribute [local instance 2000] CommRing.toRing
 /-- Etale internal Hom is bounded constructible, with the asserted Tor interval.
 The input intervals already imply finite Tor amplitude. Finiteness of the lifted
 coefficient ring is supplied by the recorded positive-level finiteness theorem.
-Source: blueprint order 2138 (blueprint: cor-weil-finite-constructible-hom).
+Source: blueprint order 2138 (blueprint: proposition-six-operations-dctf--15).
 
 Proof:
-1. General biduality (thm-fix-general-biduality) identifies L with D_X D_X L.
+1. General biduality (theorem-verdier-biduality--1) identifies L with D_X D_X L.
 Apply internal Hom(K,-), then the natural currying isomorphism of
 lem-weil-pbc-ringed-internal-hom-exact-restriction, to identify the result with
 D_X(K tensor^L D_X L), without a perfectness hypothesis.
-2. By lem-weil-verdier-preservation-strata, D_X L is constructible with interval
-[-e-2d,-c]. By lem-sf-tensor-ctf the tensor with K is constructible with interval
+2. By lemma-verdier-duality-preserves-constructibility--1, D_X L is constructible with interval
+[-e-2d,-c]. By proposition-six-operations-dctf--14 the tensor with K is constructible with interval
 [a-e-2d,b-c]. Dualizing again gives bounded constructibility and the interval
 [c-b-2d,e-a+2d]. Transport these properties across the displayed isomorphism. -/
 theorem finite_constructible_derivedHom_etale
@@ -296,18 +296,18 @@ private theorem finiteTor_iso
 /-- Pro-etale internal Hom preserves finite-Tor bounded constructibility and has the
 same interval bound. The internal Hom is the recorded Hom-complex localization on the
 original small site, whose object and morphism universes remain distinct.
-Source: blueprint order 2138 (blueprint: cor-weil-finite-constructible-hom).
+Source: blueprint order 2138 (blueprint: proposition-six-operations-dctf--15).
 
 Proof:
-1. By lem-sf-proetale-constructible-origin choose bounded constructible etale
+1. By theorem-comparison-constructible-sheaves choose bounded constructible etale
 origins K', L'. By clause (ii) of lem-sf-comparison-tor-amplitude they retain the
 original intervals [a,b] and [c,e].
-2. Apply the etale argument: biduality thm-fix-general-biduality and currying
+2. Apply the etale argument: biduality theorem-verdier-biduality--1 and currying
 lem-weil-pbc-ringed-internal-hom-exact-restriction give Hom(K',L') as
 D_X(K' tensor^L D_X L'). The two duality bounds of
-lem-weil-verdier-preservation-strata and tensor bound lem-sf-tensor-ctf give
-bounded constructibility and interval [c-b-2d,e-a+2d].
-3. By lem-weil-finite-duality-site-comparison, inverse image of this internal Hom
+lemma-verdier-duality-preserves-constructibility--1 and tensor bound
+proposition-six-operations-dctf--14 give bounded constructibility and interval [c-b-2d,e-a+2d].
+3. By proposition-six-operations-dctf--15, inverse image of this internal Hom
 is the internal Hom of the inverse images. That comparison applies since K' is
 finite-Tor constructible and L' is bounded constructible. Clause (i) of
 lem-sf-comparison-tor-amplitude preserves bounded constructibility and the exact

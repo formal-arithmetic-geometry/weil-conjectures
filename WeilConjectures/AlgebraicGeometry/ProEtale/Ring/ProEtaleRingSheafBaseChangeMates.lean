@@ -21,8 +21,9 @@ import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 /-!
 # Canonical base-change mates for arbitrary pro-etale ring sheaves
 
-Source: blueprint det-sf-open-closed-sequence-ring-sheaf, proof part (4).
-(blueprint: lem-sf-ring-sheaf-base-change-mates)
+## References
+
+* Stacks Tags 03CB and 03CC
 -/
 
 @[expose] public noncomputable section
@@ -178,28 +179,7 @@ private theorem openUnit {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   exact isIso_of_reflects_iso _ (Mod.forget _)
 
 -- The transported module actions involve several nested functor structures.
-/-- The canonical open and closed base-change mates are invertible.
-Source: blueprint det-sf-open-closed-sequence-ring-sheaf, proof part (4);
-Stacks Tags 03CB and 03CC
-(blueprint: lem-sf-ring-sheaf-base-change-mates).
-
-Proof:
-1. The inverse-image composition comparison is monoidal, being the mate of the
-   monoidal direct-image composition comparison. Transport actions to obtain delta
-   and gamma; their carrier maps are exactly the fixed composition comparison.
-2. Define alpha inverse as the inverse adjunct of the pulled-back open unit followed
-   by delta inverse. Naturality follows by transposing and using naturality of delta
-   and of the unit. Its closed restriction is between zero objects, since i^*j_! = 0.
-   Its open restriction is invertible by its defining transpose and the invertible
-   open units. Exact complementary restrictions jointly detect isomorphisms, by the
-   supported-unit theorem applied to kernels and cokernels, so alpha is invertible.
-3. Transpose gamma followed by g_Z pullback of the closed counit to define beta.
-   After open restriction its source and target are zero. After closed restriction,
-   composing with the invertible closed counit gives gamma followed by the pulled-back
-   closed counit, hence is invertible. The open--closed localization sequence detects
-   isomorphisms, by applying exact restrictions to kernels and cokernels. Therefore beta
-   is invertible. Its transpose is its defining formula, as required.
-The construction works for arbitrary g and uses no commutativity of the coefficients. -/
+/-- The canonical open and closed base-change mates are invertible. -/
 theorem ringSheaf_baseChange_mates
     {X Z U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]

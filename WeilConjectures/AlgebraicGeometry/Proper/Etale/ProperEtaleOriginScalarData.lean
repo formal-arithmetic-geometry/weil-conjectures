@@ -19,15 +19,19 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-! # Canonical comparisons for scalar change on etale origins
 
-Source: Stacks Project, Tag 0F0G, lemma-projection-formula-proper-mod-n;
-Tags 09A6, 0E48 and 0B56 for the canonical comparison and scalar mate.
-(blueprint: def-fix-proper-etale-origin-scalar-data).
-
 ## Main definitions
 
 - `properOriginTensorIso`: canonical constant-B tensor comparison.
 - `properOriginMateIso`: the specified bounded-below direct-image mate.
 - `properOriginEtaleProjection`: the actual etale projection arrow.
+
+## References
+
+* Tags 09A6, 0E48 and 0B56 for the canonical comparison and scalar mate
+* Stacks 03D1 and 0H7J
+* Stacks 03D2 and 00YV
+* Stacks 06YY, 07A4 and 0D6D
+* Stacks 0B56 and 0F0G
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +46,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
   Etale.scalarTensorIso Scheme.completedAdicDerivedChange
 
 /-- The identity-on-sections change from the counit-adjoint coefficient map to
-its original constant-section map. Source: Stacks 03D1 and 0H7J
-(blueprint: lem-fix-proper-etale-origin-scalar-isomorphism). -/
+its original constant-section map. -/
 @[irreducible] def properOriginPushIso (A : Type u) [CommRing A]
     {Z Y : Scheme.{u}} (p : Z ⟶ Y) :
     directImageConstantPush A p ≅ Scheme.proEtaleConstantDerivedDirectImage p A :=
@@ -58,8 +61,7 @@ its original constant-section map. Source: Stacks 03D1 and 0H7J
           |>.apply_symm_apply (Scheme.proEtaleCoefficientDirectImageMap p A))))
 
 /-- Restriction commutes with the specified comparison inverse image, with the
-identity-on-sections realization normalization. Source: Stacks 03D2 and 00YV
-(blueprint: lem-fix-proper-etale-origin-scalar-isomorphism). -/
+identity-on-sections realization normalization. -/
 @[irreducible] def properOriginRestrictionIso
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u}) :
@@ -80,8 +82,7 @@ identity-on-sections realization normalization. Source: Stacks 03D2 and 00YV
     Functor.isoWhiskerLeft _ (Scheme.FiniteCompactScalar.intrinsicSiteFunctorIso A T).symm
 
 /-- Ordinary etale tensor with the constant A-module B in degree zero.
-This uses the existing tensor and coefficient, without changing either.
-Source: Stacks 0F0G (blueprint: lem-fix-proper-etale-origin-scalar-isomorphism). -/
+This uses the existing tensor and coefficient, without changing either. -/
 def properOriginEtaleTensor
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u})
@@ -90,8 +91,7 @@ def properOriginEtaleTensor
     (Etale.scalarCoefficient φ T)
 
 /-- Image of the canonical scalar/tensor component under a functor. Stating this
-at general coefficients keeps specialization to lifted rings small.
-Source: Stacks 06YY (blueprint: lem-fix-proper-etale-origin-scalar-isomorphism). -/
+at general coefficients keeps specialization to lifted rings small. -/
 @[irreducible] def properOriginScalarTensorImage
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) {C : Type v} [Category.{w} C]
@@ -104,9 +104,7 @@ Source: Stacks 06YY (blueprint: lem-fix-proper-etale-origin-scalar-isomorphism).
 /-- The canonical comparison F(M tensor B) = U S F(M). It is the tensor
 comparison specialized to the constant coefficient B, expressed using the
 representative-normalized scalar/tensor identifications. All its factors are
-published normalized comparisons, including the scalar-adjunction mate.
-Source: Stacks 06YY, 07A4 and 0D6D
-(blueprint: lem-fix-proper-etale-origin-scalar-isomorphism). -/
+normalized comparisons, including the scalar-adjunction mate. -/
 @[irreducible] def properOriginTensorIso
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u})
@@ -122,8 +120,7 @@ Source: Stacks 06YY, 07A4 and 0D6D
     (finiteCoefficientIntrinsicDerivedComparison T A) M (e₂ ≪≫ e₃)
 
 /-- The fixed counit mate on D+, included in the unbounded categories by the
-standard endpoint compatibilities. Source: Stacks 09A6
-(blueprint: lem-fix-proper-etale-origin-scalar-isomorphism). -/
+standard endpoint compatibilities. -/
 @[irreducible] def properOriginFixedMateIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z Y : Scheme.{u}} (p : Z ⟶ Y) [QuasiCompact p] [QuasiSeparated p]
     (K : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -146,8 +143,7 @@ standard endpoint compatibilities. Source: Stacks 09A6
 
 /-- The same specified mate in intrinsic constant-ring modules. The additional
 factors only change coefficient presentations and their section-normalized direct
-images; they do not choose another mate. Source: Stacks 09A6 and 00YV
-(blueprint: lem-fix-proper-etale-origin-scalar-isomorphism). -/
+images; they do not choose another mate. -/
 @[irreducible] def properOriginMateIso (A : Type u) [CommRing A] [Finite A]
     {Z Y : Scheme.{u}} (p : Z ⟶ Y) [QuasiCompact p] [QuasiSeparated p]
     (K : DerivedCategory.Plus
@@ -166,8 +162,7 @@ images; they do not choose another mate. Source: Stacks 09A6 and 00YV
     (properOriginPushIso A p).symm.app _
 
 /-- The actual etale projection arrow followed only by the canonical identification
-p*B_Y = B_Z. Source: Stacks 0B56 and 0F0G
-(blueprint: lem-fix-proper-etale-origin-scalar-isomorphism). -/
+p*B_Y = B_Z. -/
 @[irreducible] def properOriginEtaleProjection
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y)

@@ -67,8 +67,6 @@ private theorem inverseForwardComparison
   rw [← h, ← F.map_comp_assoc, b.inv_hom_id, F.map_id, Category.id_comp,
     c.inv_hom_id_assoc]
 
-set_option maxHeartbeats 2000000 in
--- Comparing the coefficient presentations requires extra unification heartbeats.
 /-- The integral completion comparison in both coefficient presentations, ready for raw
 localization. This statement makes no assertion about rational comparisons or stage systems.
 Source: trace-definition final coefficient-category sentence, integral comparison steps 1--6
@@ -198,20 +196,21 @@ theorem fdIntegralScalarDescentInputs
     have hY := congrArg (fun F ↦ F.obj ((U l Ω T h).obj K))
       (stage L).integral_identity
     exact (heq_composite hX hY _ _ (hb E L h K) _).trans (hcomparison h V hV)
-  obtain ⟨hs, he⟩ := @fdIntegralScalarRestrictionExact D l _ hl Ω _ _ _ T _ dT iT stage
+  -- Project the conjunctions directly to avoid case elimination over the large remaining goal.
+  have hrestriction := @fdIntegralScalarRestrictionExact D l _ hl Ω _ _ _ T _ dT iT stage
     @ordinary @b' @hlift hI
-  obtain ⟨hf, hu⟩ := @fdIntegralScalarPresentationForward D l _ hl Ω _ _ _ T _ dT iT stage
+  have hforward := @fdIntegralScalarPresentationForward D l _ hl Ω _ _ _ T _ dT iT stage
     @ordinary @b' @hlift
   refine ⟨@ordinary, @comparison, @b', (fun {E L} h K ↦ hb E L h K),
-    @hcomparison, hI, @hs, @he, @hlift, ?_, ?_⟩
+    @hcomparison, hI, hrestriction.1, hrestriction.2, @hlift, ?_, ?_⟩
   · intro E L M h k K
     exact inverseForwardComparison (C l Ω T k) ((b' h).app K)
       ((b' k).app ((U l Ω T h).obj K))
       ((pbcIntegralScalarAssociator l Ω T dT.out iT.out h k).hom.app
         ((I l Ω T stage E).obj K))
       ((I l Ω T stage M).map ((integralAssoc l Ω T h k).hom.app K))
-      ((b' (h.trans k)).app K) (hf h k K)
+      ((b' (h.trans k)).app K) (hforward.1 h k K)
   · intro E K
-    exact ((b' (le_refl E)).app K).inv_comp_eq.mpr (hu E K).symm
+    exact ((b' (le_refl E)).app K).inv_comp_eq.mpr (hforward.2 E K).symm
 
 end WeilConjectures

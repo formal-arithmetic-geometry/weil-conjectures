@@ -101,7 +101,6 @@ private theorem adic_tensor_unit_quotient {A : Type u} [CommRing A]
     LinearEquiv.refl_apply, h1']
   rfl
 
-set_option maxHeartbeats 400000 in
 -- The component proof unfolds quotient maps through two composite functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- Extension along the adic completion leaves every positive sheaf quotient unchanged.

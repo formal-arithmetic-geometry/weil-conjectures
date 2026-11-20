@@ -34,7 +34,7 @@ Tor amplitude in `[c,d]`, has Tor amplitude in `[a+c,b+d]`. No constructibility 
 
 Proof:
 1. In the abelian category of modules over `Λ_X`, represent `K` by a cochain complex `C`.
-   Put `T_q = Q(τ_≤q C)`. The cohomology formulas of lem-weil-pbc-truncation-descends
+   Put `T_q = Q(τ_≤q C)`. The cohomology formulas of theorem-pbc-injective-acyclicity
    give `T_(a-1) ≅ 0` and `T_b ≅ K`: the lower truncation is acyclic, and the upper
    truncation inclusion is a quasi-isomorphism.
 2. Set `M_q = H^q(K)` in degree zero. The Layer-B relative derived tensor of
@@ -49,7 +49,7 @@ Proof:
    invariance in det-def-sfb-constructible-tor-amplitude gives the base case `T_(a-1)`.
 4. Induct on the natural number `m` from 0 to `b-a+1`. For `q = a+m`, the distinguished
    triangle `T_(q-1) → T_q → H^q(K)[-q] → T_(q-1)[1]` of
-   lem-weil-pbc-truncation-triangle has first and third terms of amplitude in `I`.
+   theorem-pbc-injective-acyclicity has first and third terms of amplitude in `I`.
    The extension clause of det-def-sfb-constructible-tor-amplitude gives the middle term
    the same amplitude. At `m = b-a+1` this proves the assertion for `T_b`.
 5. Transport along `T_b ≅ K` using isomorphism invariance. Only the cohomological window

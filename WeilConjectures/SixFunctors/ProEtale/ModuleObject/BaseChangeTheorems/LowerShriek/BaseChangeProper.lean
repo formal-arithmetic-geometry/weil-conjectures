@@ -119,14 +119,14 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper_eq
     (sq : IsPullback g' f' f g)
     (hw : SepFinType.homMk g' ≫ 𝟙 (SepFinType.mk X) = 𝟙 (SepFinType.mk X') ≫ SepFinType.homMk g')
     [IsIso ((𝔽).baseChange (SepFinType.homMk g') (𝟙 (SepFinType.mk X')) (𝟙 (SepFinType.mk X))
-      (SepFinType.homMk g') hw).natTrans] :
+      (SepFinType.homMk g') hw)] :
     boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ
         (Compactification.ofIsProper f.left) (Compactification.ofIsProper f'.left)
         (ofIsProperBaseChangeHom sq) (isPullback_ofIsProper_overI sq)
         (isPullback_ofIsProper_overG sq) =
       ((𝔽).shriekBaseChange (𝟙 (SepFinType.mk X)) (SepFinType.homMk f) (𝟙 (SepFinType.mk X'))
         (SepFinType.homMk f') (SepFinType.homMk g') (SepFinType.homMk g') (SepFinType.homMk g) hw
-        (SepFinType.homMk_comp_homMk sq.w)).natTrans := by
+        (SepFinType.homMk_comp_homMk sq.w)) := by
   obtain ⟨Xl, ⟨⟨⟩⟩, Xh⟩ := X
   obtain ⟨Xl', ⟨⟨⟩⟩, Xh'⟩ := X'
   obtain ⟨fl, ⟨⟨⟨⟩⟩⟩, fw⟩ := f
@@ -155,7 +155,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper
     rw [Category.comp_id, Category.id_comp]
   have : IsIso ((𝔽).baseChange (SepFinType.homMk g') (𝟙 (SepFinType.mk X'))
       (𝟙 (SepFinType.mk X)) (SepFinType.homMk g')
-      hw).natTrans :=
+      hw) :=
     isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (IsPullback.of_id_snd (f := g') : IsPullback g' (𝟙 X') (𝟙 X) g')
   have key := (𝔽).shriekBaseChange_id_left (SepFinType.homMk f) (SepFinType.homMk f')

@@ -44,7 +44,7 @@ namespace DerivedCategory
 
 variable (R : Type u) [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]
 
-/-- Blueprint `def-trf-categorical-trace`: Perfect complex and its categorical trace (the
+/-- Blueprint `definition-categorical-trace`: Perfect complex and its categorical trace (the
 category `D^b_fin(A)`).
 
 The perfect complexes of `D(A)`, those quasi-isomorphic to a bounded complex of finitely
@@ -54,7 +54,7 @@ generated free modules (`DerivedCategory.IsPerfect.exists_free`). -/
 def perfect : ObjectProperty (DerivedCategory (ModuleCat.{u} R)) :=
   fun C ↦ C.IsPerfect
 
-/-- Blueprint `def-trf-categorical-trace`: the category `D^b_fin(A)` of perfect complexes, as a
+/-- Blueprint `definition-categorical-trace`: the category `D^b_fin(A)` of perfect complexes, as a
 full subcategory of `D(A)`. -/
 abbrev Perf : Type _ := (perfect R).FullSubcategory
 
@@ -66,7 +66,7 @@ noncomputable def homologyZeroUnitIso :
   (homologyFunctor (ModuleCat.{u} R) 0).mapIso (singleFunctorObjUnitIso _).symm ≪≫
     (singleFunctorCompHomologyFunctorIso (ModuleCat.{u} R) 0).app (𝟙_ _)
 
-/-- Blueprint `def-trf-categorical-trace`: the identification `End_{D(A)}(A) ⟶ A` sending an
+/-- Blueprint `definition-categorical-trace`: the identification `End_{D(A)}(A) ⟶ A` sending an
 endomorphism of the unit `A` of `D(A)` to its degree-`0` scalar, the image of `1` under the
 induced endomorphism of `H⁰(A) = A`. -/
 noncomputable def unitEndScalar (φ : 𝟙_ (DerivedCategory (ModuleCat.{u} R)) ⟶ 𝟙_ _) : R :=
@@ -79,7 +79,7 @@ lemma unitEndScalar_id : unitEndScalar R (𝟙 _) = 1 := by
 
 variable {R}
 
-/-- Blueprint `def-trf-categorical-trace`: Perfect complex and its categorical trace.
+/-- Blueprint `definition-categorical-trace`: Perfect complex and its categorical trace.
 
 For a perfect complex `P ∈ D^b_fin(A)` and an endomorphism `v : P ⟶ P`, the categorical trace
 `tr_A(v | P) = ev_P ∘ sym ∘ (v ⊗ᴸ 1) ∘ coev_P ∈ End_{D(A)}(A)`

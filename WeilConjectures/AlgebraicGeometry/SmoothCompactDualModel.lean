@@ -22,7 +22,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
 
 /-! # A compact dual model for smooth ordinary direct images
 
-Source: blueprint lem-asd-smooth-generic-direct-image, construction of the compact
+Source: blueprint lemma-smooth-morphisms-locally-constant-sheaves, construction of the compact
 coefficient dual and compatibility with ordinary exchange.
 -/
 
@@ -60,7 +60,7 @@ noncomputable abbrev smoothCompactSingle
   (_root_.DerivedCategory.singleFunctor _ 0).obj L
 
 /-- Data of a compact coefficient-dual presentation, including its exchange identity.
-Source: blueprint lem-asd-smooth-generic-direct-image, compact-dual construction and
+Source: blueprint lemma-smooth-morphisms-locally-constant-sheaves, compact-dual construction and
 comparison of pairings (auxiliary; not a blueprint node). -/
 structure SmoothCompactDualModel (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {S X : Scheme.{u}} (f : X ⟶ S)

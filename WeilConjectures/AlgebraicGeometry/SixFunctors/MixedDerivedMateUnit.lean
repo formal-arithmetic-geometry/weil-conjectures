@@ -10,8 +10,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Unit normalization of a mixed derived mate
 
-Source: Stacks Project, Tags 0F7B and 0D6E.
-(blueprint: lem-sfb-mixed-derived-mate-unit).
+## References
+
+* Stacks Project, Tags 0F7B and 0D6E
 -/
 
 @[expose] public section
@@ -64,9 +65,7 @@ private lemma square_factors
 /-- The mate of an exact derived square carries the source right-derived unit to the
 ordinary homotopy mate followed by the target unit. Expand the derived mate as unit,
 square and counit; use their factorization identities and naturality. On complex
-representatives the remaining equality is the ordinary mate formula degree by degree.
-Source: Stacks Project, Tags 0F7B and 0D6E.
-(blueprint: lem-sfb-mixed-derived-mate-unit). -/
+representatives the remaining equality is the ordinary mate formula degree by degree. -/
 theorem mixedDerivedMateUnit
     {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]
     [Abelian C] [Abelian D] [Abelian E] [Abelian V]
@@ -88,13 +87,13 @@ theorem mixedDerivedMateUnit
     T.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app K) ≫
         (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
           adj'.mapDerivedCategoryRightDerivedAdjunction
-          (TwoSquare.mk _ _ _ _ β)).natTrans.app
+          (TwoSquare.mk _ _ _ _ β)).app
           (DerivedCategory.Qh.obj K) ≫
         P.rightDerivedFunctor.map (O.mapDerivedCategoryFactorsh.hom.app K) =
       T.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj K) ≫
         DerivedCategory.Qh.map
           ((Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ T)) (.up ℤ)).hom.app K ≫
-            ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans.mapHomotopyCategory
+            ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).mapHomotopyCategory
               (.up ℤ)).app K ≫
             (Functor.mapHomotopyCategoryCompIso (Iso.refl (O ⋙ P)) (.up ℤ)).inv.app K) ≫
         P.rightDerivedFunctorUnit.app ((O.mapHomotopyCategory (.up ℤ)).obj K) := by
@@ -120,7 +119,7 @@ theorem mixedDerivedMateUnit
           (O.mapHomotopyCategory (.up ℤ)).map
             ((adj.mapHomotopyCategory (.up ℤ)).counit.app K)) =
       (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ T)) (.up ℤ)).hom.app K ≫
-        ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans.mapHomotopyCategory
+        ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).mapHomotopyCategory
           (.up ℤ)).app K ≫
         (Functor.mapHomotopyCategoryCompIso (Iso.refl (O ⋙ P)) (.up ℤ)).inv.app K := by
     obtain ⟨J, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
@@ -136,13 +135,13 @@ theorem mixedDerivedMateUnit
     change adj'.unit.app (T.obj (R.obj (J.X n))) ≫
       P.map ((𝟙 _) ≫ e.hom.app (R.obj (J.X n)) ≫ (𝟙 _) ≫
         O.map (adj.counit.app (J.X n))) =
-      (𝟙 _) ≫ (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans.app
+      (𝟙 _) ≫ (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).app
         (J.X n) ≫ (𝟙 _)
     simp [mateEquiv_apply]
   have hmate :
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
         adj'.mapDerivedCategoryRightDerivedAdjunction
-        (TwoSquare.mk _ _ _ _ b.hom)).natTrans.app (DerivedCategory.Qh.obj K) =
+        (TwoSquare.mk _ _ _ _ b.hom)).app (DerivedCategory.Qh.obj K) =
       adj'.mapDerivedCategoryRightDerivedAdjunction.unit.app _ ≫
         P.rightDerivedFunctor.map (b.hom.app _ ≫
           O.mapDerivedCategory.map

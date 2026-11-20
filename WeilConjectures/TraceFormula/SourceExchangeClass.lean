@@ -16,7 +16,7 @@ For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` with `q = f × f`,
 class of the coefficient pushforward `[f, g]_! u` and of the transported class of `u` agree up to
 the coefficient map
 (`ProEtale.CondensedRing.Correspondence.ProperPushforwardDiagram.class_pushforward_core`,
-blueprint `lem-trf-trace-source-exchange`, Step 2). This gives identity (b),
+blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 2). This gives identity (b),
 `ProperPushforwardDiagram.class_pushforward`.
 
 -/
@@ -46,8 +46,6 @@ namespace Correspondence.ProperPushforwardDiagram
 variable {ℓ} {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
 
-set_option maxHeartbeats 0 in
--- the compactly supported direct images are unfolded in the defeq checks
 /-- The core of `class_pushforward`: the two ways of transporting `Rp₁'_! (Lp₂'^* K' ⊗ Rb_! 𝟙)`
 to `Rf_* Rc₁_! Lc₂^* K` agree. -/
 theorem class_pushforward_core :
@@ -99,25 +97,32 @@ theorem class_pushforward_core :
     Category.comp_id, Functor.comp_map, Category.assoc]
   simp only [curriedTensor_obj_map, MonoidalCategory.whiskerLeft_comp, Functor.map_comp,
     Category.assoc]
-  conv_rhs => rw [Functor.map_whiskerLeft_hom_app_comp_map_whiskerLeft_inv_app_assoc]
+  conv_rhs =>
+    simp only [Functor.map_whiskerLeft_hom_app_comp_map_whiskerLeft_inv_app_assoc
+      (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y))
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff)
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map P.f P.f))
+      ((boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _))]
   simp only [← Functor.map_comp (boundedConstructibleLowerStar ℓ P.f)]
-  conv_rhs => rw [← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.f).hom.naturality]
+  conv_rhs =>
+    simp only [← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.f).hom.naturality]
   simp only [← Category.assoc]
   refine congrArg (· ≫ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.f).hom.app _) ?_
   simp only [Category.assoc, Functor.map_comp, leftProjectionNatTrans, curriedTensor_map_app,
     curriedTensor_obj_obj]
-  conv_rhs => rw [Functor.map_map_comp_map_map_assoc_of_eq (boundedConstructibleLowerShriek ℓ P.f)
-    (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X))
-    (Verdier.leftProjection_naturality_left
-        (boundedConstructibleExceptionalProjection ℓ c.support)
-      (prodUpperStarCounit ℓ (prod.map_snd P.f P.f) K) (𝟙_ _))]
+  conv_rhs =>
+    simp only [Functor.map_map_comp_map_map_assoc_of_eq (boundedConstructibleLowerShriek ℓ P.f)
+      (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X))
+      (Verdier.leftProjection_naturality_left
+          (boundedConstructibleExceptionalProjection ℓ c.support)
+        (prodUpperStarCounit ℓ (prod.map_snd P.f P.f) K) (𝟙_ _))]
   have hsq := (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ
       (prod.map_fst P.f P.f)).hom.naturality
       (Verdier.leftProjection (boundedConstructibleExceptionalProjection ℓ c.support)
         ((boundedConstructibleUpperStar _ ℓ (prod.map P.f P.f)).obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff)) (𝟙_ _))
   simp only [Functor.comp_map] at hsq
-  conv_rhs => rw [← reassoc_of% hsq]
+  conv_rhs => simp only [← reassoc_of% hsq]
   have hc := leftProjection_lowerShriek_comp ℓ c.support (prod.map P.f P.f)
     ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff) (𝟙_ _)
   have h₃ : (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff ◁
@@ -137,22 +142,25 @@ theorem class_pushforward_core :
         ((boundedConstructibleUpperStarComp _ ℓ c.support (prod.map P.f P.f)).hom.app _ ▷ _) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support
           (prod.map P.f P.f)).hom.app _ := by
-    rw [reassoc_of% hc]
-    simp
-  conv_rhs => rw [Functor.map_comp₃_assoc_of_eq
+    simpa only [Functor.comp_obj, Category.assoc, Iso.inv_hom_id_app, Category.comp_id] using
+      (congrArg (· ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support
+        (prod.map P.f P.f)).hom.app _) hc).symm
+  conv_rhs => simp only [Functor.map_comp₃_assoc_of_eq
     (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)) h₃]
-  conv_rhs => rw [map_leftProjection_lowerShriek_comp_unit ℓ P.g P.pushforward.support
+  conv_rhs => simp only [map_leftProjection_lowerShriek_comp_unit ℓ P.g P.pushforward.support
       P.g_comp_support]
   refine whisker_eq _ (whisker_eq _ ?_)
   unfold pushforwardCoeffUnit
   dsimp only [Functor.comp_obj]
   have hcoh := lowerShriek_pushforwardCoeff_coherence ℓ P.g P.pushforward.support c.support
-    (prod.map P.f P.f) P.f prod.fst prod.snd prod.fst prod.snd P.pushforward.support_fst
+    (prod.map P.f P.f) P.f prod.fst prod.snd prod.fst prod.snd
+    (b₁ := P.b₁) (b₂ := P.b₂) (c₁ := c.c₁) (c₂ := c.c₂) P.pushforward.support_fst
     P.pushforward.support_snd c.support_fst c.support_snd P.g_comp_support
     (prod.map_fst P.f P.f) (prod.map_snd P.f P.f) P.w₁ P.w₂ K
   refine Eq.trans ?_ (hcoh.trans ?_)
-  · rfl
-  · rfl
+  -- Normalize the coefficient abbreviation before comparing the long composites.
+  all_goals simp only [coeff, Functor.comp_obj]
+  all_goals rfl
 
 end Correspondence.ProperPushforwardDiagram
 

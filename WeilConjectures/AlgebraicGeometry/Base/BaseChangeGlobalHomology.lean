@@ -67,7 +67,7 @@ theorem smallModel_isIso_strictHenselization_baseChange_globalHomology
             (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
               (IsPullback.of_hasPullback f
                 (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
-                |>.natTrans.app K))) := by
+                |>.app K))) := by
   let m :=
     ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
         AddCommGrpCat.{v + 1}).map
@@ -78,7 +78,7 @@ theorem smallModel_isIso_strictHenselization_baseChange_globalHomology
             (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
               (IsPullback.of_hasPullback f
                 (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
-                |>.natTrans.app K)))
+                |>.app K)))
   change IsIso m
   obtain ⟨P⟩ := smallModel_nonempty_strictLocalBaseChange_continuityPresentation f s K n
   let : SmallCategory P.I := P.category

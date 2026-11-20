@@ -179,8 +179,19 @@ variable {S : Type u} [Field S] [Fact (ringChar S).Prime] [Fact (ringChar S ≠ 
   [LocallyOfFiniteType D.hom] [QuasiCompact D.hom] [IsSeparated D.hom]
   {a : A ⟶ B} {b : B ⟶ D} {c : A ⟶ C} {d : C ⟶ D}
 
-set_option maxHeartbeats 800000 in
--- the objects of the bounded constructible and of the ambient derived categories are compared
+/-- Compute the ambient comparison with an abstract coefficient ring before specialization. -/
+private lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_comp
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (sq : CommSq a c b d) (K : Dᵇc(D.left)⟦Λ⟧) :
+    ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K).hom =
+      (leftDerivedUpperStarComp Λ c.left d.left).inv.app K.obj ≫
+        eqToHom (congrArg (fun t ↦ L((t)^*⟦Λ⟧).obj K.obj)
+          (Over.left_comp_left_eq_of_comp_eq sq.w).symm) ≫
+        (leftDerivedUpperStarComp Λ a.left b.left).hom.app K.obj := by
+  exact (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
+    ℓ Λ sq K).trans
+      (pullbackSquareComparison_hom_app Λ ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ K.obj)
+
 omit [Fact ℓ.Prime] in
 /-- On the ambient derived categories, the pullback comparison of a commutative square
 `a ≫ b = c ≫ d` is `L(c ≫ d)^* = L(a ≫ b)^*` between the composition isomorphisms. -/
@@ -192,10 +203,8 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq [Fact ℓ.Prim
         eqToHom (congrArg (fun t ↦ L((t)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj K.obj)
           (Over.left_comp_left_eq_of_comp_eq sq.w).symm) ≫
         (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) a.left b.left).hom.app K.obj := by
-  rw [boundedConstructiblePullbackSquareComparison_hom_app,
-    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    boundedConstructibleUpperStarComp_inv_app_hom, boundedConstructibleUpperStarComp_hom_app_hom,
-    ObjectProperty.FullSubcategory.eqToHom_hom']
+  -- Infer the coefficient-ring instances from the goal when applying the generic formula.
+  rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_comp]
 
 end SquareComparison
 
@@ -318,16 +327,16 @@ lemma leftDerivedUpperStarGeometricBaseChangeComparison_eq :
   rw [pullbackCongrIso_eq_eqToIso]
 
 variable (f) in
-/-- **Base change along the base change to `Ω`** (blueprint `sk-thm-sfb-proper-base-change`, for
-the cartesian square `f̄ ≫ π_Y = π_X ≫ f`, `isPullback_geometricBaseChange_map_left`): for a
-separable algebraic extension `Ω / k` and a morphism `f` of separated schemes of finite type over
-`k`, the base change morphism `Ex_π : Lπ_Y^* Rf_* ⟶ Rf̄_* Lπ_X^*` along the projection
-`π_Y : Ȳ ⟶ Y` is an isomorphism on bounded constructible complexes. On the ambient derived
-categories `Ex_π` is the base change morphism `baseChangeMap` of the square
-(`Adjunction.exchangeRight_restrictFullyFaithful_app_hom`, the functors on bounded constructible
-complexes being restrictions). The projections `π_X` and `π_Y` are weakly étale
-(`weaklyEtale_geometricBaseChangeProj`), so `baseChangeMap` is an isomorphism by weakly étale base
-change (`isIso_baseChangeMap_of_weaklyEtale`); no properness of `f` is needed. -/
+/-- **Base change along the base change to `Ω`** (blueprint
+`proposition-proper-direct-image-constructible-complexes`, for the cartesian square
+`f̄ ≫ π_Y = π_X ≫ f`, `isPullback_geometricBaseChange_map_left`): for a separable algebraic
+extension `Ω / k` and a morphism `f` of separated schemes of finite type over `k`, the base change
+morphism `Ex_π : Lπ_Y^* Rf_* ⟶ Rf̄_* Lπ_X^*` along the projection `π_Y : Ȳ ⟶ Y` is an isomorphism on
+bounded constructible complexes. On the ambient derived categories `Ex_π` is the base change
+morphism `baseChangeMap` of the square (`Adjunction.exchangeRight_restrictFullyFaithful_app_hom`,
+the functors on bounded constructible complexes being restrictions). The projections `π_X` and `π_Y`
+are weakly étale (`weaklyEtale_geometricBaseChangeProj`), so `baseChangeMap` is an isomorphism by
+weakly étale base change (`isIso_baseChangeMap_of_weaklyEtale`); no properness of `f` is needed. -/
 theorem isIso_geometricBaseChangeLowerStarBaseChange [Algebra.IsSeparable k Ω] :
     IsIso (geometricBaseChangeLowerStarBaseChange ℓ Ω f) := by
   rw [NatTrans.isIso_iff_isIso_app]
@@ -376,7 +385,6 @@ lemma commSq_baseChangeModelFrobenius :
       ((geometricBaseChange k Ω).map f) (baseChangeModelFrobenius Ω Y N eY.hom) :=
   ⟨baseChangeModelFrobenius_comp_map N hf⟩
 
-set_option maxHeartbeats 800000 in
 -- the objects of the bounded constructible and of the ambient derived categories are compared
 omit [IsProper f.left] in
 /-- **The pullback cube**: on bounded constructible complexes, the comparisons of the derived
@@ -477,7 +485,7 @@ Lπ_Y^* Rf_!^Weil K ≅ Rf̄_! Lπ_X^* K
 ```
 as Weil objects for the model Frobenius `Φ_Y = (e_Y ≫ F_Y^N) ×_k Ω`, the right side with the
 Frobenius comparison of the relative Frobenius `r = (f̄, Φ_X)` of `f̄`
-(`weilLowerShriekOfFrobenius`, blueprint `def-trf-weil-shriek-pushforward`). The underlying
+(`weilLowerShriekOfFrobenius`, blueprint `lemma-comparison-via-relative-frobenius`). The underlying
 isomorphism is the base change `Ex_π : Lπ_Y^* Rf_* ≅ Rf̄_* Lπ_X^*` along the projection
 `π_Y : Ȳ ⟶ Y` (`isIso_geometricBaseChangeLowerStarBaseChange`), read through `Rf_! ≅ Rf_*`.
 Under these identifications the Frobenius comparisons of both sides are exchange morphisms
@@ -485,8 +493,9 @@ Under these identifications the Frobenius comparisons of both sides are exchange
 `weilLowerShriekFrobeniusComparison_exchangeCompatible`), and the compatibility of `Ex_π` with
 them is the cube law of exchange morphisms (`Adjunction.exchangeRight_app_cube`) for the cube of
 pullback comparisons `geometricBaseChangePullbackComparison_cube`, which uses the naturality of
-the trivializations `κ : (F^N)^* ≅ 𝟭` of the absolute Frobenius (blueprint `sk-i-relative-frob`
-(1), `lem-trf-absolute-frobenius-site`, `fix-lem-exchanges`). -/
+the trivializations `κ : (F^N)^* ≅ 𝟭` of the absolute Frobenius (blueprint
+`lemma-comparison-via-relative-frobenius` (1), `lemma-scheme-frobenius-geometric-frobenius--1`,
+`proposition-composition-base-change-rf-shriek`). -/
 theorem nonempty_weilGeometricBaseChange_weilLowerShriek_iso [IsProper f.left]
     [Algebra.IsSeparable k Ω]
     (K : WeilBoundedConstructible ℓ eX.hom) :

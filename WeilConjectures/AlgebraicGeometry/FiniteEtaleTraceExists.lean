@@ -41,7 +41,7 @@ Proof plan, following the node's ten steps:
 isomorphism (lem-weil-pbc-etale-inverse-image-restriction). Giving a trace is equivalent to
 giving an additive presheaf map from this sheaf to `F`.
 2. For a finite clopen splitting define the local sum of restrictions along its sections.
-It is additive and natural in `F` (def-weil-pbc-abelian-etale-sheaves).
+It is additive and natural in `F` (situation-conventions).
 3. Pull a splitting back along an étale-site morphism. Cartesian-square pasting and open
 fibre products identify its pieces and sections; local sums commute with restriction
 (lem-weil-pbc-cartesian-square-pasting, lem-weil-pbc-open-fibre-product).
@@ -56,7 +56,7 @@ gives a unique section. Its restrictions agree with the sum for every pulled-bac
 7. Uniqueness in this descent proves additivity, compatibility with restriction, and
 naturality in `F`. Transport the resulting presheaf morphism back by the restriction iso.
 8. In the split case the identity covering computes the descended section as the sum;
-the coproduct case follows from lem-weil-pbc-scheme-coproduct-copies.
+the coproduct case follows from definition-torsion-sheaves--3.
 9. Cartesian pasting identifies the two iterated fibre products. Transporting splittings
 along this identification shows localization compatibility for `F|_X'`; naturality in the
 restriction iso gives the assertion for `g⁻¹ F`.

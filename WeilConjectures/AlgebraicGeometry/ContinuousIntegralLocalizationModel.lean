@@ -122,7 +122,7 @@ theorem exists_integralLocalization_complex_model (X : Scheme.{u})
       Functor.const_obj_obj, id_eq, Cocone.precompose_obj_pt, Mod.smulSequenceCompIso,
       NatIso.ofComponents_inv_app, Iso.refl_inv, Functor.mapCocone_pt, Cocone.precompose_obj_ι,
       NatTrans.comp_app, Mod.smulSequenceMap_app, Functor.mapCocone_ι_app,
-      Functor.comp_map, Category.assoc, pow_zero, End.one_def, CategoryTheory.Functor.map_id,
+      Functor.comp_map, Category.assoc, pow_zero, End.one_asHom, CategoryTheory.Functor.map_id,
       Category.comp_id, r, α, t, s, σ, g]
     change 𝟙 _ ≫ DerivedCategory.Q.map (c.ι.app 0) ≫
         DerivedCategory.Q.map w.hom ≫ z.hom ≫ (L ⋙ U).map e.inv =

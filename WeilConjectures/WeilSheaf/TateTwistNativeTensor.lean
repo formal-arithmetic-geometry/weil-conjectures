@@ -113,7 +113,7 @@ noncomputable def constantTwistShiftAdjunction (b : (PadicAlgCl l)ˣ) (n : ℤ) 
             ((Category.comp_id _).trans (Category.id_comp _).symm)))) ≪≫
       (constantTwist k₀ l X b⁻¹).mapDerivedCategory.commShiftIso (-n))
 
-/-- **Tate twists are tensor products** (blueprint: `def-wf-tate-twist`, where the Tate twist
+/-- **Tate twists are tensor products** (blueprint: `definition-tate-twists`, where the Tate twist
 `K(m) = K ⊗^L ℚ̄_ℓ(m)` is the derived tensor product with the Tate sheaf): for a Weil complex `K`
 on `X`, the native derived tensor product `K ⊗ ℚ̄_ℓ(m)[n]` is the shifted Tate twist `K(m)[n]`,
 naturally in `K`.

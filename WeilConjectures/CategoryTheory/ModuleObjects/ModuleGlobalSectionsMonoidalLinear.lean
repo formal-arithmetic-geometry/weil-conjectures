@@ -76,7 +76,7 @@ theorem regularEndRingHom_eq_smul
     {R : C} [MonObj R] [IsCommMonObj R] {K : Type w} [CommRing K]
     (φ : K →+* MonObj.Γ R) (a : K) :
     let := linearOfRingHom φ
-    regularEndRingHom (φ a) = a • 𝟙 (regular R) := by
+    (regularEndRingHom (φ a)).asHom = a • 𝟙 (regular R) := by
   dsimp only
   let := linearOfRingHom φ
   rw [linearOfRingHom_smul_id]

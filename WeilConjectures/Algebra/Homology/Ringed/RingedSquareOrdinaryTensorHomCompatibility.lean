@@ -69,7 +69,6 @@ private theorem total_map_eq {A : Type*} [Category A] [CategoryTheory.Abelian A]
   simp [Functor.uncurry_obj_map, Functor.map₂HomologicalComplex,
     HomologicalComplex.mapBifunctorMap, ← HomologicalComplex₂.total.map_comp]
 
-set_option maxHeartbeats 800000 in
 -- Keep the four comparison endpoints explicit through the degreewise calculation.
 /-- The hom-oriented total tensor square commutes.
 
@@ -115,35 +114,7 @@ theorem ringedSquareOrdinaryTensorHomCompatibility
     eh ≪≫ H.mapIso ef
   TZ.map (CategoryTheory.Prod.mkHom (γ.app P) (γ.app Q)) ≫ b.hom =
       a.hom ≫ γ.app (TY.obj (P, Q)) := by
-  let F := f.pullback.mapHomologicalComplex (.up ℤ)
-  let G := g.pullback.mapHomologicalComplex (.up ℤ)
-  let H := h.pullback.mapHomologicalComplex (.up ℤ)
-  let K := k.pullback.mapHomologicalComplex (.up ℤ)
-  let γ := (NatIso.mapHomologicalComplex s.modules (.up ℤ)).hom
-  let ef := f.ordinaryTensor.totalIso Y.ring X.ring f.inverseRing
-    f.inverse f.algebraic f.ringMap f.pullback f.object_eq
-    f.pushforward f.moduleAdjunction P Q
-  let eg := g.ordinaryTensor.totalIso Y.ring Y'.ring g.inverseRing
-    g.inverse g.algebraic g.ringMap g.pullback g.object_eq
-    g.pushforward g.moduleAdjunction P Q
-  let eh := h.ordinaryTensor.totalIso X.ring X'.ring h.inverseRing
-    h.inverse h.algebraic h.ringMap h.pullback h.object_eq
-    h.pushforward h.moduleAdjunction (F.obj P) (F.obj Q)
-  let ek := k.ordinaryTensor.totalIso Y'.ring X'.ring k.inverseRing
-    k.inverse k.algebraic k.ringMap k.pullback k.object_eq
-    k.pushforward k.moduleAdjunction (G.obj P) (G.obj Q)
-  let TY := Functor.uncurry.obj
-    ((@MonoidalCategory.curriedTensor (SheafOfModules.{u}
-      ((sheafCompose Y.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj Y.ring)) _
-      (monoidalCategory Y.ring)).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ))
-  let TZ := Functor.uncurry.obj
-    ((@MonoidalCategory.curriedTensor (SheafOfModules.{u}
-      ((sheafCompose X'.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj X'.ring)) _
-      (monoidalCategory X'.ring)).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ))
-  let a : TZ.obj (K.obj (G.obj P), K.obj (G.obj Q)) ≅ K.obj (G.obj (TY.obj (P, Q))) :=
-    ek ≪≫ K.mapIso eg
-  let b : TZ.obj (H.obj (F.obj P), H.obj (F.obj Q)) ≅ H.obj (F.obj (TY.obj (P, Q))) :=
-    eh ≪≫ H.mapIso ef
+  intro F G H K γ ef eg eh ek TY TZ a b
   let := monoidalCategory Y.ring
   let := monoidalCategory X.ring
   let := monoidalCategory Y'.ring
@@ -153,7 +124,7 @@ theorem ringedSquareOrdinaryTensorHomCompatibility
   let := ringedTensorPreadditive Y'.ring
   let := ringedTensorPreadditive X'.ring
   dsimp only [a, b, Iso.trans_hom, Functor.mapIso_hom]
-  rw [total_map_eq]
+  conv_lhs => arg 1; rw [total_map_eq]
   apply HomologicalComplex.Hom.ext
   funext n
   apply HomologicalComplex.mapBifunctor.hom_ext
@@ -166,13 +137,17 @@ theorem ringedSquareOrdinaryTensorHomCompatibility
     CochainComplex.ιMapBifunctor (K.obj (G.obj P)) (K.obj (G.obj Q))
         (MonoidalCategory.curriedTensor _) i j n hij ≫
       ek.hom.f n ≫ k.pullback.map (eg.hom.f n) ≫ (γ.app (TY.obj (P, Q))).f n
-  rw [← MonoidalCategory.tensorHom_def_assoc]
-  rw [reassoc_of% (ringedTensorTotalComponent h (F.obj P) (F.obj Q) i j n hij),
-    reassoc_of% (ringedTensorTotalComponent k (G.obj P) (G.obj Q) i j n hij)]
+  conv_lhs => rw [← MonoidalCategory.tensorHom_def_assoc]
+  conv_lhs =>
+    arg 2
+    rw [reassoc_of% (ringedTensorTotalComponent h (F.obj P) (F.obj Q) i j n hij)]
+  conv_rhs =>
+    rw [reassoc_of% (ringedTensorTotalComponent k (G.obj P) (G.obj Q) i j n hij)]
   have hf := congrArg (fun a ↦ h.pullback.map a) (ringedTensorTotalComponent f P Q i j n hij)
   have hg := congrArg (fun a ↦ k.pullback.map a) (ringedTensorTotalComponent g P Q i j n hij)
   simp only [Functor.map_comp] at hf hg
-  rw [hf, reassoc_of% hg]
+  conv_lhs => arg 2; arg 2; rw [hf]
+  conv_rhs => arg 2; rw [reassoc_of% hg]
   have hn := s.modules.hom.naturality
     (CochainComplex.ιMapBifunctor P Q (MonoidalCategory.curriedTensor _) i j n hij)
   dsimp only [Functor.comp_map] at hn
@@ -182,7 +157,7 @@ theorem ringedSquareOrdinaryTensorHomCompatibility
     (g.pullback.obj (Q.X j))).inv ≫ k.pullback.map
       (g.ordinaryTensor.mu (P.X i) (Q.X j)).inv ≫
     k.pullback.map (g.pullback.map _) ≫ s.modules.hom.app _
-  rw [hn]
+  conv_rhs => arg 2; arg 2; rw [hn]
   have hm := congrArg (fun a ↦ a ≫ h.pullback.map (f.pullback.map
     (CochainComplex.ιMapBifunctor P Q (MonoidalCategory.curriedTensor _) i j n hij)))
     (inverse_module_square s (P.X i) (Q.X j))

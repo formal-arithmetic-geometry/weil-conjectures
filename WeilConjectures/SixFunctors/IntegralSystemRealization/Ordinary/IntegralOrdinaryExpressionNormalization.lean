@@ -210,7 +210,6 @@ private theorem open_transpose (o : Operations l E) (a : AmbientModels l E o)
     ((Operations.shriek l E o j).map ((calculus l E U).adjunction.counit.app M))
     (a.openNormalization j M hM hJ)
 
-set_option maxHeartbeats 400000 in
 -- The tensor case unifies the two recursive normalizations through nested chart transports.
 /-- The transpose of the explicit ordinary coefficient recursion, followed by any
 comparison satisfying the recursion laws, is the actual expression completion map.

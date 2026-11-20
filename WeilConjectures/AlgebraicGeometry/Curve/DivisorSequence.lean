@@ -324,7 +324,7 @@ points of `V` over `S` vanishes extends, near every point of `V`, to a unit of `
 over `S` the local ring is a discrete valuation ring and `f` is a unit of it
 (`Ring.exists_eq_algebraMap_of_ordOf_eq_zero`); its extension agrees with `f` on the punctured
 neighbourhood by `AlgebraicGeometry.IsCurve.injective_toLocalGenericRing_appTop`.
-(blueprint: `lem-sc-divisor-exact-sequence`, exactness in the middle) -/
+(blueprint: `lemma-cohomology-multiplicative-group--6`, exactness in the middle) -/
 lemma exists_eq_of_ord_eq_zero (hC : topologicalKrullDim C = 1) {S : Set C} (hS : S.Finite)
     (hSc : ∀ P ∈ S, IsClosed {P}) (hj : Set.range j = Sᶜ) (V : C.Etale) (y : V.left)
     (f : Γ(pullback V.hom j, ⊤)ˣ)
@@ -474,7 +474,7 @@ integer-valued function on the points of `V` over `P`. Near every point of `V` t
 `V ×_C U` whose order is `c` at the points over `P` and `0` at the other points over `S`: a
 power of a uniformiser of the discrete valuation ring `𝒪_{V,y}`, which near `y` vanishes only
 at `y` (`AlgebraicGeometry.Scheme.exists_opens_isolate`).
-(blueprint: `lem-sc-divisor-exact-sequence`, surjectivity) -/
+(blueprint: `lemma-cohomology-multiplicative-group--6`, surjectivity) -/
 lemma exists_ord_eq_extendByZero (hC : topologicalKrullDim C = 1) {S : Set C}
     (hSc : ∀ P ∈ S, IsClosed {P}) (hj : Set.range j = Sᶜ) (V : C.Etale)
     (y : V.left) {P : C} (hP : P ∈ S)
@@ -642,7 +642,7 @@ vanishing at the points over `S`, and `⨁_{P ∈ S} i_{P*} ℤ` maps to it by e
 on geometric stalks the second map is injective, the two images agree by
 `AlgebraicGeometry.IsCurve.exists_ord_eq_extendByZero`, and the kernel of the first is the
 image of `𝔾ₘ` by `AlgebraicGeometry.IsCurve.exists_eq_of_ord_eq_zero`.
-(blueprint: `lem-sc-divisor-exact-sequence`) -/
+(blueprint: `lemma-cohomology-multiplicative-group--6`) -/
 theorem exists_shortExact_divisorSequence [IsAlgClosed k] (f : C ⟶ Spec (.of k)) [IsCurve f]
     [Smooth f] [IsProper f] [ConnectedSpace C] (hC : topologicalKrullDim C = 1) (S : Set C)
     (hS : S.Finite) (hSc : ∀ P ∈ S, IsClosed {P}) {U : Scheme.{u}} (j : U ⟶ C)

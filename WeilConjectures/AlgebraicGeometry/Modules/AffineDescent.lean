@@ -163,14 +163,10 @@ end TensorProduct
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Abstract data of morphisms between affine schemes used in the proof of faithfully flat
-descent for quasi-coherent modules along a family `f j : Spec (B j) ⟶ Spec A`: the "double
-overlaps" `Spec (C j k)` with projections `p₁, p₂`, the diagonals `δ j`, the "triple
-overlaps" `Spec (T j k l)` with their projections, together with the properties of these
-morphisms on global sections (semilinearity, base change) which are used in the proof.
-Working with abstract morphisms (rather than `Spec.map` of explicit ring maps) keeps the
-kernel from unfolding the involved preimages of opens. See `AffineDescentData.ofAlgebra` for
-the concrete instance. -/
+/-- Abstract descent data of morphisms between affine schemes for a family
+`f j : Spec (B j) ⟶ Spec A`: the "double overlaps" `Spec (C j k)` with projections `p₁, p₂`,
+the diagonals `δ j`, the "triple overlaps" `Spec (T j k l)` with their projections, together
+with the properties of these morphisms on global sections (semilinearity, base change). -/
 structure AffineDescentData (A : Type u) [CommRing A] {J : Type u} (B : J → Type u)
     [∀ j, CommRing (B j)] [∀ j, Algebra A (B j)] (C : J → J → Type u)
     [∀ j k, CommRing (C j k)] [∀ j k, Algebra A (C j k)] (T : J → J → J → Type u)

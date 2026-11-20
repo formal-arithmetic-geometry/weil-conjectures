@@ -19,7 +19,7 @@ public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 
 If `F` is a lisse Weil sheaf on a smooth curve `C₀` over `k₀` and `j : U₀ ⟶ C₀` is a dense
 quasi-compact open immersion, then the unit `F ⟶ j_* j^* F` of the adjunction `j^* ⊣ j_*` is an
-isomorphism (blueprint: `lem-a1-lisse-middle-extension`). The étale finite-coefficient version is
+isomorphism (blueprint: `lemma-boundary-stalk--2`). The étale finite-coefficient version is
 `AlgebraicGeometry.Etale.isIso_unit_upperStarLowerStarAdjunction`.
 
 On the geometric fibres this is
@@ -34,7 +34,7 @@ every dense open subset.
 
 - `AlgebraicGeometry.WeilSheaf.IsLisse.isIso_upperStarLowerStarAdjunction_unit_app` and
   `AlgebraicGeometry.WeilSheaf.IsLisse.nonempty_iso_directImage_upperStar`: blueprint
-  `lem-a1-lisse-middle-extension`.
+  `lemma-boundary-stalk--2`.
 -/
 
 @[expose] public section
@@ -121,7 +121,7 @@ variable [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 `C₀`. Then the unit `F ⟶ j_* j^* F` of the adjunction `j^* ⊣ j_*` is an isomorphism: on the
 geometric fibres this is
 `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app`.
-(blueprint: `lem-a1-lisse-middle-extension`) -/
+(blueprint: `lemma-boundary-stalk--2`) -/
 theorem WeilSheaf.IsLisse.isIso_upperStarLowerStarAdjunction_unit_app {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
@@ -144,7 +144,7 @@ quasi-compact open immersion with dense image and `F` a lisse Weil sheaf on `C�
 the inertia invariants `(F_η̄)^{I_x} = F_x̄`, the inertia acting trivially since `F` is lisse at
 `x`. The isomorphism is the unit of `j^* ⊣ j_*`
 (`AlgebraicGeometry.WeilSheaf.IsLisse.isIso_upperStarLowerStarAdjunction_unit_app`).
-(blueprint: `lem-a1-lisse-middle-extension`) -/
+(blueprint: `lemma-boundary-stalk--2`) -/
 theorem WeilSheaf.IsLisse.nonempty_iso_directImage_upperStar {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]

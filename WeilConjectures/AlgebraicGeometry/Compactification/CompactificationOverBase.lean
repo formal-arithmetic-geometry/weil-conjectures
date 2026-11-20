@@ -13,7 +13,7 @@ import WeilConjectures.Compactification.Dense
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
 `sk-def-sfb-dc-setting/lem-sfb-compactification-over-base.md`, node order 1775
-(blueprint: lem-sfb-compactification-over-base).
+(blueprint: remark-compactifications--1).
 -/
 
 @[expose] public section
@@ -32,7 +32,7 @@ has a compactification with quasi-compact open immersion.
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
 `sk-def-sfb-dc-setting/lem-sfb-compactification-over-base.md`, node order 1775
-(blueprint: lem-sfb-compactification-over-base).
+(blueprint: remark-compactifications--1).
 
 Proof, following the source proof:
 1. Write the structure morphisms `X ↘ S` and `Y ↘ S`; `f.IsOver S` identifies
@@ -47,17 +47,17 @@ quasi-separatedness of `Y` from that of its structure map and of `S`.
 gives local finite type of `f` from that of `X ↘ S`. Clause (1) of
 `lem-weil-pbc-qcqs-morphism-permanence` gives quasi-compactness of `f` because
 `X` is quasi-compact and `Y` is quasi-separated. Thus `f` is of finite type.
-3. Apply `sk-thm-nagata-compactification` to `f` over the qcqs base `Y` to get
+3. Apply `theorem-nagata-s-compactification-theorem--1` to `f` over the qcqs base `Y` to get
 a dense compactification. Its open immersion is quasi-compact, its structure
-map is proper, and their composite is `f` (`sk-def-nagata-sketch-data`). Forget
+map is proper, and their composite is `f` (`definition-compactification-refinement`). Forget
 density to obtain an object of `BoundaryCompactification f`.
-The argument uses the statement dependencies `sk-def-nagata-sketch-data`,
+The argument uses the statement dependencies `definition-compactification-refinement`,
 `def-weil-scheme-over-base`, `def-weil-finite-type-morphism`,
 `def-weil-proper-morphism`, `def-weil-quasi-separated-morphism`, and
 `def-weil-pbc-quasi-compact-scheme`, and the proof dependencies
 `lem-pc-separated-quasi-separated`, `lem-weil-pbc-qcqs-morphism-permanence`,
 `lem-weil-pbc-separated-cancellation`, `lem-weil-pbc-proper-fp-permanence`, and
-`sk-thm-nagata-compactification`.
+`theorem-nagata-s-compactification-theorem--1`.
 -/
 theorem compactification_over_base {S X Y : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [X.Over S] [Y.Over S] (f : X ⟶ Y) [f.IsOver S]

@@ -53,11 +53,11 @@ private theorem below_mate
     (E : CoefficientEvaluationExtensionData e r T atensor kflat flat norm unitNorm assocNorm)
     {m n : ℕ} (h : m ≤ n) :
     ((mateEquiv (E.derivedAdj n) (E.scalar h).derivedAdj).symm
-      (.mk _ _ _ _ ((Functor.rightUnitor _).hom ≫ E.transition h))).natTrans =
+      (.mk _ _ _ _ ((Functor.rightUnitor _).hom ≫ E.transition h))) =
       (E.derivedBelow h).inv := by
   let := E.extensionAdditive
   let β := ((mateEquiv (E.derivedAdj n) (E.scalar h).derivedAdj).symm
-    (.mk _ _ _ _ ((Functor.rightUnitor _).hom ≫ E.transition h))).natTrans
+    (.mk _ _ _ _ ((Functor.rightUnitor _).hom ≫ E.transition h)))
   have hb (P : CochainComplex (M n) ℤ) :
       β.app (DerivedCategory.Q.obj P) ≫
         (E.evaluation m).map ((E.counit n).app P) ≫
@@ -97,14 +97,14 @@ private theorem below_mate
       (.mk _ _ _ _ ((Functor.rightUnitor _).hom ≫ E.transition h))
       (by
         intro K
-        dsimp only [TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+        dsimp only [TwoSquare.mk, NatTrans.comp_app,
           Functor.comp_obj, Functor.id_obj, Functor.rightUnitor_hom_app, Functor.id_map,
           Iso.refl_hom, NatTrans.id_app]
         simpa only [Category.id_comp] using ht K)
       ((NatIso.mapHomologicalComplex (E.below h) (.up ℤ)).inv)
       (by
         intro P
-        dsimp only [TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+        dsimp only [TwoSquare.mk, NatTrans.comp_app,
           Functor.rightUnitor_hom_app, Functor.id_map]
         erw [Category.id_comp]
         apply HomologicalComplex.hom_ext
@@ -152,7 +152,7 @@ private theorem below_transpose
   rw [← below_mate E h]
   have ht := adjunctionMate_transpose (E.derivedAdj n) (E.scalar h).derivedAdj
     (.mk _ _ _ _ ((Functor.rightUnitor _).hom ≫ E.transition h)) P M f
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans, Functor.id_map, Functor.id_obj,
+  dsimp only [TwoSquare.mk, Functor.id_map, Functor.id_obj,
     NatTrans.comp_app, Functor.rightUnitor_hom_app] at ht
   exact ht.trans (congrArg
     (fun g ↦ (E.derivedAdj n).homEquiv P M f ≫ g)
@@ -172,11 +172,11 @@ private theorem scalar_mate_unit
         an.homEquiv P (RX.obj Q)
           (ax.homEquiv (Fn.obj P) Q (γ.inv.app P ≫ f)) ≫ δ.hom.app Q)
     (q : CX ⋙ Rm ≅ Rn ⋙ CY)
-    (hq : q.inv = (mateEquiv an am (.mk _ _ _ _ γ.hom)).natTrans) (P : C) :
+    (hq : q.inv = (mateEquiv an am (.mk _ _ _ _ γ.hom))) (P : C) :
     ay.homEquiv _ _ (q.inv.app P) =
       Rn.map (ax.unit.app P) ≫ δ.hom.app (CX.obj P) := by
   have he := mateEquiv_counit an am (.mk _ _ _ _ γ.hom) P
-  change Fm.map ((mateEquiv an am (.mk _ _ _ _ γ.hom)).natTrans.app P) ≫
+  change Fm.map ((mateEquiv an am (.mk _ _ _ _ γ.hom)).app P) ≫
     am.counit.app (CX.obj P) = γ.hom.app (Rn.obj P) ≫ CX.map (an.counit.app P) at he
   rw [← hq] at he
   have hh := hδ (Rn.obj P) (CX.obj P)
@@ -201,7 +201,7 @@ private theorem iterated_insertion_mate
     {Fs : C ⥤ D} {Rs : D ⥤ C} (asys : Fs ⊣ Rs)
     (d : Rs ⋙ EY ≅ EZ ⋙ Rn) :
     let i := ((conjugateIsoEquiv (ay.comp asys) (an.comp az)).symm d).symm
-    let a := (mateEquiv an asys (.mk _ _ _ _ i.hom)).natTrans
+    let a := (mateEquiv an asys (.mk _ _ _ _ i.hom))
     ∀ P, ay.homEquiv _ _ (a.app P) ≫ d.hom.app (FZ.obj P) =
       Rn.map (az.unit.app P) := by
   intro i a P
@@ -209,15 +209,14 @@ private theorem iterated_insertion_mate
   have hc : conjugateEquiv (an.comp az) (ay.comp asys) i.hom = d.inv :=
     Equiv.apply_symm_apply _ _
   rw [hc] at hh
-  have he : ((mateEquiv az ay).symm (.mk _ _ _ _ d.inv)).natTrans = a := by
+  have he : ((mateEquiv az ay).symm (.mk _ _ _ _ d.inv)) = a := by
     have hs : (mateEquiv az ay (.mk _ _ _ _ a)) = (.mk _ _ _ _ d.inv) := by
-      apply TwoSquare.ext
-      intro X
+      refine NatTrans.ext (funext fun X ↦ ?_)
       exact congrArg (fun τ ↦ τ.app X) hh
-    exact congrArg TwoSquare.natTrans ((Equiv.symm_apply_eq _).2 hs.symm)
+    exact ((Equiv.symm_apply_eq _).2 hs.symm)
   have ht := adjunctionMate_transpose az ay (.mk _ _ _ _ d.inv) P (FZ.obj P) (𝟙 _)
   change ay.homEquiv _ _
-    (((mateEquiv az ay).symm (.mk _ _ _ _ d.inv)).natTrans.app P ≫ Rs.map (𝟙 _)) =
+    (((mateEquiv az ay).symm (.mk _ _ _ _ d.inv)).app P ≫ Rs.map (𝟙 _)) =
     Rn.map (az.homEquiv _ _ (𝟙 _)) ≫ d.inv.app (FZ.obj P) at ht
   rw [he] at ht
   erw [Rs.map_id, Category.comp_id, az.homEquiv_id] at ht
@@ -250,14 +249,14 @@ theorem etaleBrownProperSingletonEvaluation
       (S.properDerived.level n).direct ⋙ (S.PY.scalar h).derived)
     (hq : q.inv =
       (mateEquiv (S.properDerived.level n).adjunction (S.properDerived.level m).adjunction
-        (.mk _ _ _ _ (S.properDerived.derivedTensor h).hom)).natTrans)
+        (.mk _ _ _ _ (S.properDerived.derivedTensor h).hom)))
     (P : DerivedCategory (strictEtaleLevel c.Z O t n)) :
     let insertion := ((conjugateIsoEquiv
       ((S.PY.derivedAdj n).comp S.properDerived.system.adjunction)
       (((S.properDerived.level n).adjunction).comp (S.PZ.derivedAdj n))).symm
         (S.properDerived.directEvaluation n)).symm
     let a := (mateEquiv (S.properDerived.level n).adjunction
-      S.properDerived.system.adjunction (.mk _ _ _ _ insertion.hom)).natTrans
+      S.properDerived.system.adjunction (.mk _ _ _ _ insertion.hom))
     (S.PY.evaluation m).map (a.app P) ≫
       (S.properDerived.directEvaluation m).hom.app ((S.PZ.derivedExtension n).obj P) ≫
       (S.properDerived.level m).direct.map ((S.PZ.derivedBelow h).hom.app P) =

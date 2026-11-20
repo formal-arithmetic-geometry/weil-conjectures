@@ -18,7 +18,7 @@ Let `R ⟶ S` be a homomorphism of finite commutative rings whose exponent is in
 scheme `X` of finite type over a field. Derived extension of scalars
 `Ψ = - ⊗ᴸ_R S : D(X_proét, R) ⥤ D(X_proét, S)` carries bounded constructible complexes of finite
 Tor amplitude to bounded constructible complexes of finite Tor amplitude (blueprint
-`thm-trf-finite-coefficient-map`).
+`theorem-grothendieck-lefschetz-trace-formula--7`).
 
 The proof goes through flat models. A complex `K ∈ Dᵇctf(X_proét, R)` is `ν^* K'` for some
 `K' ∈ Dᵇctf(X_ét, R)`, and `K'` is quasi-isomorphic to a bounded complex `P` of flat
@@ -51,10 +51,10 @@ open Scheme
 
 variable {R S : Type (u + 1)} [CommRing R] [CommRing S] [Algebra R S] [Finite R] [Finite S]
 
-/-- **Derived scalar extension preserves `Dᵇctf`** (blueprint `thm-trf-finite-coefficient-map`):
-for a homomorphism `R ⟶ S` of finite rings whose exponent is invertible on a scheme `X` of
-finite type over a field, `K ⊗ᴸ_R S` is bounded constructible of finite Tor amplitude whenever
-`K` is. -/
+/-- **Derived scalar extension preserves `Dᵇctf`** (blueprint
+`theorem-grothendieck-lefschetz-trace-formula--7`): for a homomorphism `R ⟶ S` of finite rings whose
+exponent is invertible on a scheme `X` of finite type over a field, `K ⊗ᴸ_R S` is bounded
+constructible of finite Tor amplitude whenever `K` is. -/
 theorem constructibleFiniteTor_leftDerivedSheafExtendScalars {k : Type u} [Field k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [HasInvertibleExponent R X]

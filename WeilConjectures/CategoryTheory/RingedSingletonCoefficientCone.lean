@@ -130,9 +130,10 @@ private def singletonCoefficientIso
       (ringedKoszulDualTower O 1 (fun _ ↦ a)).obj (op n)) (n : ℕ) :
     (ringedKoszulDualTower O 1 (fun _ ↦ a)).obj (op n) ≅
       CochainComplex.mappingCone
-        ((HomologicalComplex.single _ (.up ℤ) 0).map (ringedKoszulScalar O a ^ (n + 1))) :=
+        ((HomologicalComplex.single _ (.up ℤ) 0).map
+          (ringedKoszulScalar O a ^ (n + 1)).asHom) :=
   (d n).symm ≪≫ ringedKoszulRightUnitIso O (ringedNegativeKoszulFactor O a n) ≪≫
-    doubleConeIso (ringedKoszulScalar O a ^ (n + 1))
+    doubleConeIso (ringedKoszulScalar O a ^ (n + 1)).asHom
 
 private theorem singletonCoefficientIso_unit
     (a : (O.obj ⋙ forget CommRingCat).sections)
@@ -145,7 +146,7 @@ private theorem singletonCoefficientIso_unit
       (singletonCoefficientIso O a d n).hom =
         CochainComplex.mappingCone.inr
           ((HomologicalComplex.single _ (.up ℤ) 0).map
-            (ringedKoszulScalar O a ^ (n + 1))) := by
+            (ringedKoszulScalar O a ^ (n + 1)).asHom) := by
   apply HomologicalComplex.from_single_hom_ext
   rw [← cancel_epi (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv]
   simp only [HomologicalComplex.comp_f, singletonCoefficientIso, Iso.trans_hom,
@@ -156,7 +157,7 @@ private theorem singletonCoefficientIso_unit
   rw [← reassoc_of% (hu n), reassoc_of% hd]
   have hb : ringedNegativeKoszulBasis O 1 (fun _ ↦ a) n ∅ 0 ≫
       (ringedKoszulRightUnitIso O (ringedNegativeKoszulFactor O a n)).hom.f 0 =
-        (HomologicalComplex.doubleXIso₁ (ringedKoszulScalar O a ^ (n + 1))
+        (HomologicalComplex.doubleXIso₁ (ringedKoszulScalar O a ^ (n + 1)).asHom
           (by decide : (ComplexShape.up ℤ).Rel (-1) 0) (by decide)).inv := by
     simpa [ringedNegativeKoszulBasis, ringedNegativeKoszulFactorBasis,
       ringedNegativeKoszul] using
@@ -171,9 +172,9 @@ private theorem singleCone_inr_isIso
     (a : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
     IsIso ((CochainComplex.mappingCone.inr
       ((HomologicalComplex.single _ (.up ℤ) 0).map
-        (ringedKoszulScalar O a ^ (n + 1)))).f 0) := by
+        (ringedKoszulScalar O a ^ (n + 1)).asHom)).f 0) := by
   let f := (HomologicalComplex.single _ (.up ℤ) 0).map
-    (ringedKoszulScalar O a ^ (n + 1))
+    (ringedKoszulScalar O a ^ (n + 1)).asHom
   change IsIso ((CochainComplex.mappingCone.inr f).f 0)
   refine ⟨⟨(CochainComplex.mappingCone.snd f).v 0 0 (add_zero 0), by simp, ?_⟩⟩
   apply CochainComplex.mappingCone.ext_from _ 1 0 (by decide)
@@ -192,11 +193,11 @@ private theorem singletonCoefficientIso_transition
       (singletonCoefficientIso O a d n).hom.f j ≫
         (CochainComplex.mappingCone.snd
           ((HomologicalComplex.single _ (.up ℤ) 0).map
-            (ringedKoszulScalar O a ^ (n + 1)))).v j j (add_zero j) =
+            (ringedKoszulScalar O a ^ (n + 1)).asHom)).v j j (add_zero j) =
       (singletonCoefficientIso O a d (n + 1)).hom.f j ≫
         (CochainComplex.mappingCone.snd
           ((HomologicalComplex.single _ (.up ℤ) 0).map
-            (ringedKoszulScalar O a ^ (n + 1 + 1)))).v j j (add_zero j) := by
+            (ringedKoszulScalar O a ^ (n + 1 + 1)).asHom)).v j j (add_zero j) := by
   by_cases hj : j = 0
   · subst j
     have hc := singletonCoefficientIso_unit O a d hu (n + 1)
@@ -249,22 +250,22 @@ theorem ringedSingletonCoefficientCone
         (ringedKoszulDualTower O 1 (fun _ ↦ a)).obj (op n) ≅
           CochainComplex.mappingCone
             ((HomologicalComplex.single _ (.up ℤ) 0).map
-              (ringedKoszulScalar O a ^ (n + 1))),
+              (ringedKoszulScalar O a ^ (n + 1)).asHom),
       (∀ n, ringedKoszulDualUnit O 1 (fun _ ↦ a) n ≫ (e n).hom =
         CochainComplex.mappingCone.inr
           ((HomologicalComplex.single _ (.up ℤ) 0).map
-            (ringedKoszulScalar O a ^ (n + 1)))) ∧
+            (ringedKoszulScalar O a ^ (n + 1)).asHom)) ∧
       (∀ (n : ℕ) (j : ℤ),
         ((ringedKoszulDualTower O 1 (fun _ ↦ a)).map
             (homOfLE (Nat.le_add_right n 1)).op).f j ≫
           (e n).hom.f j ≫
             (CochainComplex.mappingCone.snd
               ((HomologicalComplex.single _ (.up ℤ) 0).map
-                (ringedKoszulScalar O a ^ (n + 1)))).v j j (add_zero j) =
+                (ringedKoszulScalar O a ^ (n + 1)).asHom)).v j j (add_zero j) =
           (e (n + 1)).hom.f j ≫
             (CochainComplex.mappingCone.snd
               ((HomologicalComplex.single _ (.up ℤ) 0).map
-                (ringedKoszulScalar O a ^ (n + 1 + 1)))).v j j (add_zero j)) := by
+                (ringedKoszulScalar O a ^ (n + 1 + 1)).asHom)).v j j (add_zero j)) := by
   obtain ⟨d, _, hu⟩ := ringedNegativeKoszulSuccDuality O 0 (fun _ ↦ a)
   refine ⟨singletonCoefficientIso O a d, ?_, ?_⟩
   · exact singletonCoefficientIso_unit O a d hu

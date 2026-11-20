@@ -21,7 +21,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.SectionFiniteEtaleGenericSpli
 
 /-! # Splitting the zero slice of the fixed formal test
 
-Source: Stacks Project, Tags 0EYJ and 0EY9.
+## References
+
+* Stacks Project, Tags 0EYJ and 0EY9
+* Stacks Project, Tag 0EYJ (the rational section point and extended action)
+* Tag 0BQM (full faithfulness over a normal integral base)
 -/
 
 @[expose] public section
@@ -104,37 +108,16 @@ private theorem composed_pullback {X Y Z B : Scheme.{u}} (f : X ⟶ Z)
     (IsPullback.of_hasPullback f g)
   exact ⟨H.isoPullback, H.isoPullback_hom_snd⟩
 
+private theorem iso_trans_over {X Y Z B : Scheme.{u}} (e : X ≅ Y) (d : Y ≅ Z)
+    {f : X ⟶ B} {g : Y ⟶ B} {h : Z ⟶ B}
+    (he : e.hom ≫ g = f) (hd : d.hom ≫ h = g) : (e ≪≫ d).hom ≫ h = f := by
+  rw [Iso.trans_hom, Category.assoc, hd, he]
+
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Splitting over U first makes the minimality hypotheses unnecessary for this proof.
-set_option maxHeartbeats 1800000 in
--- The nested normalization and iterated pullbacks require extra elaboration heartbeats.
 /-- The normalization test is split on the zero slice of its punctured open.
-This only gives an isomorphism after pulling back to the zero slice.
-
-Source: Stacks Project, Tag 0EYJ (the rational section point and extended action);
-Tag 0BQM (full faithfulness over a normal integral base).
-(blueprint: lem-sbc-stalk-normalization-formal-zero-slice-split)
-
-Proof: Minimality identifies the inverse image of U with the punctured spectrum
-of the normal local ring A = O_{S,s}. On this open relative normalization
-agrees with PA: PA is finite, hence integral, over C_U, and normalization
-commutes with smooth base change along the open inclusion.
-Extend the generic G-action to PA using generic-fibre full faithfulness.
-Pull back along the given section on this punctured local base. The rational
-point over the generic section and its G-translates give an isomorphism of
-its generic fibre with the constant G-indexed cover: simple transitivity
-makes the translates distinct and exhaustive. On the normal integral
-punctured local base, extend that generic isomorphism and its inverse using
-full faithfulness of finite etale restriction to the generic point (0BQM).
-Uniqueness checks both inverse identities. The base compatibility of t and
-its entire zero-section compatibility identify the zero slice of V with
-this punctured base, and identify the pulled-back normalization cover with
-the section pullback of PA. Pullback of the constant coproduct commutes with
-this restriction. Transport the section-cover isomorphism through these
-canonical pullback comparisons to get the displayed finite etale isomorphism.
-This argument applies to zero variables and to disconnected torsors; it
-makes no assertion about the cover away from the zero slice. -/
+This only gives an isomorphism after pulling back to the zero slice. -/
 theorem GaloisCover.stalk_normalization_formal_zero_slice_split {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
@@ -179,19 +162,11 @@ theorem GaloisCover.stalk_normalization_formal_zero_slice_split {S C : Scheme.{u
   let : QuasiCompact (c ⁻¹ᵁ U).ι :=
     MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
       (inferInstance : QuasiCompact U.ι)
-  dsimp only
-  intro d t hb hz
-  let a := S.fromSpecStalk s
+  intro a n τ d t hb hz T F E V r p z
   let g := pullback.fst c a
   let f := PA.obj.hom ≫ (c ⁻¹ᵁ U).ι
-  let n := pullback.snd f.fromNormalization g
-  let T := Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s)))
-  let r := pullback.snd n t
-  let p := Sigma.desc (fun _ : G ↦ 𝟙 T)
-  let V := (t ≫ g) ⁻¹ᵁ (c ⁻¹ᵁ U)
   let ζ := Spec.map (CommRingCat.ofHom
     (MvPowerSeries.constantCoeff (σ := Fin d) (R := S.presheaf.stalk s)))
-  let z := ζ ∣_ V
   let v := z ≫ V.ι
   let Hc := (isPullback_morphismRestrict c U).flip
   let b : U.toScheme ⟶ (c ⁻¹ᵁ U).toScheme :=
@@ -250,23 +225,23 @@ theorem GaloisCover.stalk_normalization_formal_zero_slice_split {S C : Scheme.{u
     simp
   have heNi : eN.inv ≫ pullback.snd PA.obj.hom (wU ≫ b) =
       pullback.snd f.fromNormalization ((wU ≫ b) ≫ (c ⁻¹ᵁ U).ι) := by
-    rw [← heN, eN.inv_hom_id_assoc]
+    exact eN.inv_comp_eq.mpr heN.symm
   have heR₄i : eR₄.inv ≫ pullback.snd (pullback.snd PA.obj.hom b) wU =
       pullback.snd PA.obj.hom (wU ≫ b) := by
-    rw [← heR₄, eR₄.inv_hom_id_assoc]
+    exact eR₄.inv_comp_eq.mpr heR₄.symm
   let eR := eR₁ ≪≫ eR₂ ≪≫ eR₃ ≪≫ eQ ≪≫ eN.symm ≪≫ eR₄.symm
   have heR : eR.hom ≫ pullback.snd (pullback.snd PA.obj.hom b) wU =
       pullback.snd (r ∣_ V) z := by
-    simp only [eR, Iso.trans_hom, Iso.symm_hom, Category.assoc, heR₄i, heNi, heQ]
-    rw [heR₃, heR₂, heR₁]
+    exact iso_trans_over eR₁ _ heR₁ (iso_trans_over eR₂ _ heR₂
+      (iso_trans_over eR₃ _ heR₃ (iso_trans_over eQ _ heQ
+        (iso_trans_over eN.symm eR₄.symm heNi heR₄i))))
   have heP₂i : eP₂.inv ≫ Sigma.desc (fun _ : G ↦ 𝟙 (ζ ⁻¹ᵁ V).toScheme) =
       pullback.snd p v := by
-    rw [← heP₂, eP₂.inv_hom_id_assoc]
+    exact eP₂.inv_comp_eq.mpr heP₂.symm
   let eP := eP₁ ≪≫ eP₂.symm ≪≫ eP₃
   have heP : eP.hom ≫ pullback.snd (Sigma.desc (fun _ : G ↦ 𝟙 U.toScheme)) wU =
       pullback.snd (p ∣_ V) z := by
-    simp only [eP, Iso.trans_hom, Iso.symm_hom, Category.assoc, heP₃, heP₂i]
-    exact heP₁
+    exact iso_trans_over eP₁ _ heP₁ (iso_trans_over eP₂.symm eP₃ heP₂i heP₃)
   let m := pullback.map (Sigma.desc (fun _ : G ↦ 𝟙 U.toScheme)) wU
     (pullback.snd PA.obj.hom b) wU eS.hom (𝟙 _) (𝟙 _)
     (by simpa using heS.symm) (by simp)
@@ -277,9 +252,8 @@ theorem GaloisCover.stalk_normalization_formal_zero_slice_split {S C : Scheme.{u
     simp
   have heRi : eR.inv ≫ pullback.snd (r ∣_ V) z =
       pullback.snd (pullback.snd PA.obj.hom b) wU := by
-    rw [← heR, eR.inv_hom_id_assoc]
+    exact eR.inv_comp_eq.mpr heR.symm
   refine ⟨eP ≪≫ asIso m ≪≫ eR.symm, ?_⟩
-  change (eP.hom ≫ m ≫ eR.inv) ≫ pullback.snd (r ∣_ V) z = _
-  rw [Category.assoc, Category.assoc, heRi, hm, heP]
+  exact iso_trans_over eP _ heP (iso_trans_over (asIso m) eR.symm hm heRi)
 
 end AlgebraicGeometry.Scheme

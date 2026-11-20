@@ -25,7 +25,7 @@ comparison on the derived categories is
 (`ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_isIso`),
 in particular under the compatibilities of (Pull) with the natural reduction triangle
 (`ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_compatible`).
-This is blueprint `det-prop-scalar-six-direct-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, for every `d`
+This is blueprint `lemma-change-coefficients-direct-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, for every `d`
 (proper or not), modulo the two compatibilities.
 
 -/
@@ -90,7 +90,7 @@ theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_isIso
   exact this
 
 /-- **Reduction modulo `ℓⁿ` commutes with the pushforward on bounded constructible complexes**
-(blueprint `det-prop-scalar-six-direct-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`), for an arbitrary morphism
+(blueprint `lemma-change-coefficients-direct-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`), for an arbitrary morphism
 `d`, given the compatibilities of (Pull) with the units and the connecting morphisms of the
 natural reduction triangles. -/
 theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_compatible

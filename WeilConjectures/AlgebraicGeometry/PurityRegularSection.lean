@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Regular sections and transverse direct sums

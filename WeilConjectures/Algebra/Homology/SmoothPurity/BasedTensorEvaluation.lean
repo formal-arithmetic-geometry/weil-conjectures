@@ -35,6 +35,9 @@ import Mathlib.LinearAlgebra.TensorProduct.Pi
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.CategoryTheory.Preadditive.LeftExact
 public import Mathlib.Algebra.Category.ModuleCat.Products
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Finite-basis tensor evaluation
 

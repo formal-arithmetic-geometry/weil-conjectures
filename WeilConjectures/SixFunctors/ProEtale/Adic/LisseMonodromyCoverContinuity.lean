@@ -116,18 +116,18 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}} {Ω : Type u} [Field Ω]
 
 /-- The transport along the inverse loop is the inverse of the transport. -/
 lemma transport_inv_hom (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (g : Aut (fiber t)) :
-    (U.transport (g⁻¹ : Aut (fiber t))).hom = (U.transport g).inv := by
-  have h := U.transport_trans g (g⁻¹ : Aut (fiber t))
-  rw [Aut.Aut_inv_def, Iso.self_symm_id, U.transport_refl] at h
-  exact (Iso.hom_comp_eq_id (U.transport g)).1 (congrArg Iso.hom h).symm
+    (U.transport (g⁻¹ : Aut (fiber t)).asIso).hom = (U.transport g.asIso).inv := by
+  have h := U.transport_trans g.asIso (g⁻¹ : Aut (fiber t)).asIso
+  rw [Aut.inv_asIso, Iso.self_symm_id, U.transport_refl] at h
+  exact (Iso.hom_comp_eq_id (U.transport g.asIso)).1 (congrArg Iso.hom h).symm
 
 variable (hU : ∀ (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y), ∃ n : ℕ,
   Nonempty ((U.proj y)^*ᵃ[l].obj G.obj ≅ ⨁ fun _ : Fin n ↦ AdicSheaf.unit l (U.cover y)))
 
 include hU in
 /-- **The monodromy representations are continuous** (blueprint:
-`cor-galois-lisse-representations`): `φ(ρ(g) v)` is the value of a continuous function on
-`Ỹ_t ×_Y Ỹ_t` at the point `(t̃, g⁻¹ t̃)`. -/
+`proposition-lattices-representations-normal-scheme`): `φ(ρ(g) v)` is the value of a continuous
+function on `Ỹ_t ×_Y Ỹ_t` at the point `(t̃, g⁻¹ t̃)`. -/
 theorem lisseMonodromy_continuous_rep (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     (G : LisseSheaf l Y)
     (φ : Module.Dual (PadicAlgCl l) (LisseMonodromy.StalkSpace t G))
@@ -174,23 +174,23 @@ theorem lisseMonodromy_continuous_rep (t : Spec (.of (AlgebraicClosure Ω)) ⟶ 
     rw [adicConstantGlobalSection, ULift.up_down, ← ModuleCat.comp_apply, Iso.hom_inv_id_app]
     rfl
   let z : Aut (fiber t) → (Spec (.of (AlgebraicClosure Ω)) ⟶ pullback (U.proj t) (U.proj t)) :=
-    fun g ↦ pullback.lift (U.pt t) (U.pt t ≫ (U.transport g).inv)
+    fun g ↦ pullback.lift (U.pt t) (U.pt t ≫ (U.transport g.asIso).inv)
       (by rw [Category.assoc, U.transport_inv_proj])
   have key (g : Aut (fiber t)) :
       φ ((U.lisseMonodromy hU).rep t G g v) =
         c.1 ((z g).base (IsLocalRing.closedPoint (AlgebraicClosure Ω))) := by
     have hz₁ : z g ≫ pullback.fst (U.proj t) (U.proj t) = U.pt t := pullback.lift_fst _ _ _
-    have hz₂ : z g ≫ pullback.snd (U.proj t) (U.proj t) = U.pt t ≫ (U.transport g).inv :=
+    have hz₂ : z g ≫ pullback.snd (U.proj t) (U.proj t) = U.pt t ≫ (U.transport g.asIso).inv :=
       pullback.lift_snd _ _ _
     have hzq : z g ≫ pullback.fst (U.proj t) (U.proj t) ≫ U.proj t = t := by
       rw [← Category.assoc, hz₁, U.pt_proj]
-    have e₁ : ((monoIso hU g).hom.app G).hom v =
+    have e₁ : ((monoIso hU g.asIso).hom.app G).hom v =
         ((resOver _ (z g) hzq).app G.obj.X).hom
           (((resOver _ (pullback.snd (U.proj t) (U.proj t)) pullback.condition.symm).app
             G.obj.X).hom s) := by
       rw [← hs, monoIso_hom_app_ptRes_apply, transportRes_hom_app, ptRes_app]
-      have r₁ := congrArg (fun φ ↦ φ.hom s) (resOver_comp _ (U.pt t) (U.transport g).inv
-        (U.pt_proj t) (U.transport_inv_proj g)
+      have r₁ := congrArg (fun φ ↦ φ.hom s) (resOver_comp _ (U.pt t) (U.transport g.asIso).inv
+        (U.pt_proj t) (U.transport_inv_proj g.asIso)
         (by rw [Category.assoc, U.transport_inv_proj, U.pt_proj]) G.obj.X)
       have r₂ := congrArg (fun φ ↦ φ.hom s) (resOver_comp _ (z g)
         (pullback.snd (U.proj t) (U.proj t)) hzq pullback.condition.symm
@@ -205,15 +205,15 @@ theorem lisseMonodromy_continuous_rep (t : Spec (.of (AlgebraicClosure Ω)) ⟶ 
       simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at r
       rw [r, resOver_congr _ hz₁]
     have e₃ : Mod.evaluationPairing (stalkFunctor l t) G.obj (AdicSheaf.unit l Y) d
-        (((monoIso hU g).hom.app G).hom v) =
+        (((monoIso hU g.asIso).hom.app G).hom v) =
           ((resOver _ (z g) hzq).app (adicConstantSheaf l Y)).hom a := by
       rw [e₁, e₂]
       exact evaluationPairing_natTrans (resOver _ (z g) hzq) G.obj (AdicSheaf.unit l Y) _ _
-    have hψ := LinearMap.congr_fun hd (((monoIso hU g).hom.app G).hom v)
+    have hψ := LinearMap.congr_fun hd (((monoIso hU g.asIso).hom.app G).hom v)
     calc φ ((U.lisseMonodromy hU).rep t G g v)
         = φ ((U.lisseMonodromy hU).rep t G g v) * stalkUnitVal t u₀ := by
           rw [stalkUnitVal_oneGlobalSection, mul_one]
-      _ = stalkUnitVal t (ψ (((monoIso hU g).hom.app G).hom v)) :=
+      _ = stalkUnitVal t (ψ (((monoIso hU g.asIso).hom.app G).hom v)) :=
           (stalkUnitVal_smul t _ u₀).symm
       _ = stalkUnitVal t (((resOver _ (z g) hzq).app (adicConstantSheaf l Y)).hom a) := by
           rw [← hψ, e₃]
@@ -221,7 +221,7 @@ theorem lisseMonodromy_continuous_rep (t : Spec (.of (AlgebraicClosure Ω)) ⟶ 
           stalkUnitVal_resOver hzq a c hc
   have hz : (fun g ↦ (z g).base (IsLocalRing.closedPoint (AlgebraicClosure Ω))) =
       (fun g' : Aut (fiber t) ↦ (pullback.lift (f := U.proj t) (g := U.proj t) (U.pt t)
-        (U.pt t ≫ (U.transport g').hom) (by rw [Category.assoc, U.transport_proj]) :
+        (U.pt t ≫ (U.transport g'.asIso).hom) (by rw [Category.assoc, U.transport_proj]) :
           Spec (.of (AlgebraicClosure Ω)) ⟶ pullback (U.proj t) (U.proj t)).base
           (IsLocalRing.closedPoint (AlgebraicClosure Ω))) ∘ fun g ↦ g⁻¹ := by
     funext g

@@ -324,7 +324,7 @@ noncomputable def supportRestrictionMap (F : DerivedCategory (Sheaf T.smallEtale
       ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) c.openComplement.ι).unit.app _) ≫
     (supportRestrictionIso₃ Λ b c F).inv
 
-/-- Blueprint `lem-pur-support-restriction-triangle`: Restriction triangle inside a closed
+/-- Blueprint `proposition-purity-vector-bundles`: Restriction triangle inside a closed
 support
 
 Let `b : B ⟶ T`, `c : C ⟶ T` be closed immersions, `v : V ⟶ T` the open complement of `C`, and

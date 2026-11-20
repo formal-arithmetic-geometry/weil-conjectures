@@ -14,7 +14,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingRoosShiftComp
 
 /-! # Strict quotient and Roos reindexing before localization
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-strict-comparisons).
 -/
 
@@ -134,7 +134,7 @@ def PodReindexingStrictData.Laws (D : PodReindexingStrictData l E g)
   D.RestrictedGenerators l E g
 
 /-- Strict reindexing on simultaneous quotient towers and the native Roos complexes.
-Source: blueprint prop-pod-dual-tate-data-compatibility, proof Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, proof Steps 1 and 5;
 Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-strict-comparisons).
 
 Proof: transport modules along the projection-normalized completed and quotient

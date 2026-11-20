@@ -23,7 +23,6 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-set_option maxHeartbeats 800000 in
 -- Comparing the composed section functors across localization requires extra defeq work.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -77,7 +76,7 @@ theorem strictLocalComplexSectionRestriction_mate {X S : Scheme.{v}}
             (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
               (IsPullback.of_hasPullback f
                 (Scheme.strictLocalizationToBase s)).toCommSq).hom))
-                |>.natTrans.app K))) ≫
+                |>.app K))) ≫
         (strictLocalBaseChangeTargetIso f s K n).hom =
     (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map
       ((NatIso.mapHomologicalComplex (sourceStageSectionsIso f s i) (.up ℤ)).hom.app M) ≫

@@ -153,7 +153,7 @@ The parameter n denotes the positive level n+1; representatives are arbitrary.
 No boundedness, nonempty scheme, nonzero ring, or nonempty generator tuple is required.
 
 Source: blueprint order 1262; Stacks Tag 099N (5)
-(blueprint: lemma-weil-pbc-completed-pullback-reduction).
+(blueprint: definition-completed-inverse-image).
 
 Proof:
 1. Restrict to constant A-coefficients using lem-weil-pbc-constant-completion-equivalence.

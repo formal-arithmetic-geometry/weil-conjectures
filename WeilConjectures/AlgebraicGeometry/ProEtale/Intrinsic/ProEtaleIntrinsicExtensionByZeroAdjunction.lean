@@ -25,11 +25,12 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-!
 # The open extension adjunction in intrinsic constant coefficients
 
-Source: Weil blueprint, order 1835; Stacks Project, Tags 03DI, 03CY and 09AE
-(blueprint: lem-weil-extension-by-zero-adjunction).
-
 The canonical coefficient realization transports the sectionwise restriction and
 its extension-by-zero adjunction to the intrinsic coefficient presentation.
+
+## References
+
+* Stacks, Tags 03DI, 03CY and 09AE
 -/
 
 @[expose] public section
@@ -47,9 +48,7 @@ canonical coefficient realization its value at `V → U` is the original module 
 `V → U → X`, with the same restrictions and scalar action. The realization inverse
 only restricts scalars to constants, and realization extends them uniquely to locally
 constant sections. Thus this is the usual restriction, in the presentation used by
-`sfIntrinsicExtensionByZero`, without an arbitrary coefficient identification.
-Source: Stacks, Tags 03CY and 09AE
-(blueprint: lem-weil-extension-by-zero-adjunction). -/
+`sfIntrinsicExtensionByZero`, without an arbitrary coefficient identification. -/
 noncomputable def sfIntrinsicOpenRestriction {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] :
     proEtaleRingModules X (proEtaleConstantRing X A) ⥤
@@ -58,15 +57,9 @@ noncomputable def sfIntrinsicOpenRestriction {U X : Scheme.{u}} (j : U ⟶ X)
     ProEtale.openImmersionRestriction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j ⋙
       (sfIntrinsicModuleEquivalence U A).functor
 
-/-- The canonical extension-by-zero adjunction for intrinsic constant coefficients.
-Its Hom equivalence restricts to the given component over each object factoring through
-`U`, and inserts the unique map from zero on every other object; sheafification supplies
-its inverse on sheaves. Naturality and the two inverse laws hold sectionwise. This is
-exactly the fixed-scalar localization adjunction, composed with the canonical coefficient
-realization adjunctions. In particular its unit is the sectionwise identity over `U`,
-transported by those equivalences.
-Source: Weil blueprint, order 1835; Stacks, Tags 03DI, 03CY and 09AE
-(blueprint: lem-weil-extension-by-zero-adjunction). -/
+/-- The canonical extension-by-zero adjunction for intrinsic constant coefficients: the
+fixed-scalar extension-by-zero adjunction composed with the coefficient realization
+equivalences. -/
 noncomputable def sfIntrinsicExtensionByZeroAdjunction {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] :
     sfIntrinsicExtensionByZero j A ⊣ sfIntrinsicOpenRestriction j A :=
