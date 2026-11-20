@@ -1,0 +1,520 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.Algebra.Homology.BifunctorSingleComparison
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorResolution
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
+
+/-!
+# The derived tensor product with a sheaf
+
+For a pro-étale sheaf `c` on `X`, the left derived functor `L(- ⊗ c)` of the tensor product with
+`c` is the derived tensor product `- ⊗ᴸ c` with `c` placed in degree `0`: both are computed on a
+K-flat complex `K` by the complex `K ⊗ c`.
+
+For `g : Z ⟶ Y`, sheaves `c_Y` on `Y` and `c_Z` on `Z` and a morphism `κ : g^* c_Y ⟶ c_Z`, the
+comparison `g^*(P ⊗ c_Y) ⟶ g^* P ⊗ g^* c_Y ⟶ g^* P ⊗ c_Z` induces a natural transformation
+`Lg^* (K ⊗ᴸ c_Y) ⟶ Lg^* K ⊗ᴸ c_Z` of left derived functors. Through `L(- ⊗ c) ≅ - ⊗ᴸ c`, it is the
+comparison `Lg^* (K ⊗ᴸ c_Y) ⟶ Lg^* K ⊗ᴸ Lg^* c_Y` of the derived pullback with the derived
+tensor product (`AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`) followed by
+`Lg^* c_Y ⟶ c_Z`.
+
+The constructions are made for a general coefficient category `A`: for a concrete category such
+as `ModuleCat R`, the kernel is slow to check terms involving the tensor product of the homotopy
+category.
+
+## Main definitions and results
+
+- `AlgebraicGeometry.ProEtale.leftDerivedTensorRightIso`: `L(- ⊗ c) ≅ - ⊗ᴸ c`.
+- `AlgebraicGeometry.ProEtale.leftDerivedTensorRightUpperStarMap`: the comparison
+  `Lg^* (K ⊗ᴸ c_Y) ⟶ Lg^* K ⊗ᴸ c_Z` induced by `κ`.
+- `AlgebraicGeometry.ProEtale.leftDerivedTensorRightUpperStarMap_app_comp`: its identification with
+  the comparison of the derived pullback with the derived tensor product.
+-/
+
+@[expose] public section
+
+universe u' u
+
+open CategoryTheory Limits MonoidalCategory HomologicalComplex Functor.OplaxMonoidal
+
+open scoped CategoryTheory.Functor
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme
+
+variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+section Single
+
+variable {X : Scheme.{u}} (c : Sheaf (ProEt.topology X) A)
+
+/-- Tensoring with a fixed pro-étale sheaf sends quasi-isomorphisms between K-flat complexes to
+quasi-isomorphisms. -/
+instance preservesKFlatQuasiIso_tensorRight : (tensorRight c).PreservesKFlatQuasiIso :=
+  Functor.PreservesKFlatQuasiIso.mk' _ fun K hK hK' ↦
+    CochainComplex.acyclic_tensorRight_of_kFlat K hK hK' c
+
+/-- A pro-étale sheaf `c` placed in degree `0`, as an object of `D(X_proét)`. -/
+noncomputable abbrev derivedSingle : DerivedCategory (Sheaf (ProEt.topology X) A) :=
+  DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c))
+
+set_option linter.unusedSimpArgs false in
+/-- On homotopy categories, the tensor product with `c` placed in degree `0` is the degreewise
+tensor product with `c`. -/
+noncomputable def tensorSingleIso :
+    (curriedTensor (HomotopyCategory (Sheaf (ProEt.topology X) A) (.up ℤ))).flip.obj
+        ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c)) ≅
+      (tensorRight c).mapHomotopyCategory (.up ℤ) :=
+  Quotient.natIsoLift _
+    ((NatIso.ofComponents (F := HomotopyCategory.quotient _ (.up ℤ) ⋙
+        (curriedTensor (HomotopyCategory (Sheaf (ProEt.topology X) A) (.up ℤ))).flip.obj
+          ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c)))
+      (G := (tensorRight c).mapHomologicalComplex (.up ℤ) ⋙ HomotopyCategory.quotient _ _)
+      (fun K ↦ Functor.Monoidal.μIso (HomotopyCategory.quotient _ (.up ℤ)) K
+          ((single _ (.up ℤ) 0).obj c) ≪≫
+        (HomotopyCategory.quotient _ _).mapIso
+          ((CochainComplex.map₂HomologicalComplexFlipObjSingleIso (curriedTensor _) c).app K))
+      (fun {K L} f ↦ by
+        have h := (CochainComplex.map₂HomologicalComplexFlipObjSingleIso
+          (curriedTensor (Sheaf (ProEt.topology X) A)) c).hom.naturality f
+        have h' := Functor.LaxMonoidal.μ_natural_left (HomotopyCategory.quotient _ (.up ℤ)) f
+          ((single (Sheaf (ProEt.topology X) A) (.up ℤ) 0).obj c)
+        dsimp at h h' ⊢
+        simp only [Functor.Monoidal.μIso_hom, Functor.mapIso_hom, Iso.app_hom, Category.assoc]
+        rw [reassoc_of% h']
+        congr 1
+        exact (Functor.map_comp _ _ _).symm.trans
+          ((congrArg (HomotopyCategory.quotient _ _).map h).trans (Functor.map_comp _ _ _))) :
+      HomotopyCategory.quotient _ _ ⋙ _ ≅
+        (tensorRight c).mapHomologicalComplex (.up ℤ) ⋙ HomotopyCategory.quotient _ _) ≪≫
+    ((tensorRight c).mapHomotopyCategoryFactors (.up ℤ)).symm)
+
+omit [Abelian.HasFunctorialFlatResolution A] in
+/-- On the image of a complex `K`, the isomorphism `AlgebraicGeometry.ProEtale.tensorSingleIso`
+is induced by `CochainComplex.mapBifunctorSingle₂Iso`. -/
+lemma tensorSingleIso_hom_app_quotient_obj (K : CochainComplex (Sheaf (ProEt.topology X) A) ℤ) :
+    (tensorSingleIso c).hom.app ((HomotopyCategory.quotient _ _).obj K) =
+      (HomotopyCategory.quotient _ _).map
+        (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) c K).hom := by
+  have hμ : Functor.LaxMonoidal.μ (HomotopyCategory.quotient (Sheaf (ProEt.topology X) A) (.up ℤ))
+      K ((single _ (.up ℤ) 0).obj c) = 𝟙 _ := rfl
+  have h : (tensorSingleIso c).hom.app ((HomotopyCategory.quotient _ _).obj K) =
+      (Functor.LaxMonoidal.μ (HomotopyCategory.quotient _ (.up ℤ)) K
+          ((single _ (.up ℤ) 0).obj c) ≫
+        (HomotopyCategory.quotient _ _).map
+          (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) c K).hom) ≫
+        ((tensorRight c).mapHomotopyCategoryFactors (.up ℤ)).inv.app K := rfl
+  rw [h, hμ]
+  simp [Functor.mapHomotopyCategoryFactors]
+
+/-- The counit exhibiting `- ⊗ᴸ c` as the left derived functor of `- ⊗ c`: the comparison
+`Qh K ⊗ᴸ Qh c ⟶ Qh (K ⊗ c)` followed by `AlgebraicGeometry.ProEtale.tensorSingleIso`. -/
+noncomputable def derivedTensorSingleCounit :
+    DerivedCategory.Qh ⋙ (-⊗ᴸ-(X)[A]).flip.obj (derivedSingle c) ⟶
+      (tensorRight c).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh where
+  app K := Functor.LaxMonoidal.μ DerivedCategory.Qh K _ ≫
+    DerivedCategory.Qh.map ((tensorSingleIso c).hom.app K)
+  naturality K L f := by
+    have h := (tensorSingleIso c).hom.naturality f
+    have h' := Functor.LaxMonoidal.μ_natural_left DerivedCategory.Qh f
+      ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c))
+    dsimp [derivedTensor] at h h' ⊢
+    rw [reassoc_of% h', Category.assoc, ← Functor.map_comp, ← Functor.map_comp, h]
+
+lemma derivedTensorSingleCounit_app (K : HomotopyCategory (Sheaf (ProEt.topology X) A) (.up ℤ)) :
+    (derivedTensorSingleCounit c).app K = Functor.LaxMonoidal.μ DerivedCategory.Qh K _ ≫
+      DerivedCategory.Qh.map ((tensorSingleIso c).hom.app K) :=
+  rfl
+
+/-- The counit `Qh K ⊗ᴸ Qh c ⟶ Qh (K ⊗ c)` is an isomorphism on K-flat complexes. -/
+lemma isIso_derivedTensorSingleCounit_app
+    {K : HomotopyCategory (Sheaf (ProEt.topology X) A) (.up ℤ)}
+    (hK : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat K) :
+    IsIso ((derivedTensorSingleCounit c).app K) := by
+  have := isIso_μ_Qh_of_kFlat K hK
+    ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c))
+  rw [derivedTensorSingleCounit_app]
+  infer_instance
+
+instance isLeftDerivedFunctor_derivedTensorSingle :
+    ((-⊗ᴸ-(X)[A]).flip.obj (derivedSingle c)).IsLeftDerivedFunctor
+      (derivedTensorSingleCounit c) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
+  rw [(tensorRight c).isLeftDerivedFunctor_iff_isIso_app_of_kFlat]
+  exact fun K hK ↦ isIso_derivedTensorSingleCounit_app c
+    ((HomotopyCategory.kFlat_quotient_obj_iff K).2 hK)
+
+/-- **`L(- ⊗ c) ≅ - ⊗ᴸ c`**: the left derived functor of the tensor product with a sheaf `c` is
+the derived tensor product with `c` placed in degree `0`. -/
+noncomputable def leftDerivedTensorRightIso :
+    L(tensorRight c) ≅ (-⊗ᴸ-(X)[A]).flip.obj (derivedSingle c) :=
+  Functor.leftDerivedUnique _ _ (tensorRight c).leftDerivedFunctorCounit
+    (derivedTensorSingleCounit c) (HomotopyCategory.quasiIso _ (.up ℤ))
+
+/-- The defining property of `AlgebraicGeometry.ProEtale.leftDerivedTensorRightIso`. -/
+@[reassoc]
+lemma leftDerivedTensorRightIso_hom_app_comp
+    (K : HomotopyCategory (Sheaf (ProEt.topology X) A) (.up ℤ)) :
+    (leftDerivedTensorRightIso c).hom.app (DerivedCategory.Qh.obj K) ≫
+        (derivedTensorSingleCounit c).app K =
+      (tensorRight c).leftDerivedFunctorCounit.app K := by
+  simp [leftDerivedTensorRightIso]
+
+end Single
+
+section Pullback
+
+variable [ProEtale.UpperStarPreservesFlat A] {Y Z : Scheme.{u}} (g : Z ⟶ Y)
+  {c_Y : Sheaf (ProEt.topology Y) A} {c_Z : Sheaf (ProEt.topology Z) A}
+  (κ : (g)^*[A].obj c_Y ⟶ c_Z)
+
+/-- The comparison `g^*(P ⊗ c_Y) ⟶ g^* P ⊗ c_Z` of pro-étale sheaves: the comonoidal structure of
+the pullback followed by `κ : g^* c_Y ⟶ c_Z`. -/
+noncomputable def tensorRightUpperStarMap :
+    tensorRight c_Y ⋙ (g)^*[A] ⟶ (g)^*[A] ⋙ tensorRight c_Z where
+  app P := δ (g)^*[A] P c_Y ≫ (_ ◁ κ)
+  naturality P Q f := by
+    dsimp
+    rw [← δ_natural_left_assoc, Category.assoc, whisker_exchange]
+
+/-- The counit of `L(- ⊗ c_Y) ⋙ Lg^*`: the counit of `L(- ⊗ c_Y)` followed by the counit of
+`Lg^*`. -/
+noncomputable def leftDerivedTensorRightUpperStarCounit :
+    DerivedCategory.Qh ⋙ L(tensorRight c_Y) ⋙ L((g)^*[A]) ⟶
+      (tensorRight c_Y).mapHomotopyCategory (.up ℤ) ⋙ (g)^*[A].mapHomotopyCategory (.up ℤ) ⋙
+        DerivedCategory.Qh :=
+  Functor.whiskerRight (tensorRight c_Y).leftDerivedFunctorCounit L((g)^*[A]) ≫
+    Functor.whiskerLeft ((tensorRight c_Y).mapHomotopyCategory (.up ℤ))
+      (g)^*[A].leftDerivedFunctorCounit
+
+variable (c_Z) in
+/-- The counit of `Lg^* ⋙ L(- ⊗ c_Z)`: the counit of `Lg^*` followed by the counit of
+`L(- ⊗ c_Z)`. -/
+noncomputable def leftDerivedUpperStarTensorRightCounit :
+    DerivedCategory.Qh ⋙ L((g)^*[A]) ⋙ L(tensorRight c_Z) ⟶
+      (g)^*[A].mapHomotopyCategory (.up ℤ) ⋙ (tensorRight c_Z).mapHomotopyCategory (.up ℤ) ⋙
+        DerivedCategory.Qh :=
+  Functor.whiskerRight (g)^*[A].leftDerivedFunctorCounit L(tensorRight c_Z) ≫
+    Functor.whiskerLeft ((g)^*[A].mapHomotopyCategory (.up ℤ))
+      (tensorRight c_Z).leftDerivedFunctorCounit
+
+variable (c_Z) in
+instance isLeftDerivedFunctor_leftDerivedUpperStarTensorRight :
+    (L((g)^*[A]) ⋙ L(tensorRight c_Z)).IsLeftDerivedFunctor
+      (leftDerivedUpperStarTensorRightCounit g c_Z) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
+  refine LocalizerMorphism.isLeftDerivedFunctor_of_isLeftDerivabilityStructure
+    (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)) _ (fun X ↦ ?_)
+  -- Stated for an arbitrary K-flat `K`: applying `Derives.isIso_of_isLeftDerivedFunctor` directly
+  -- to the pullback of `X` is very slow for the kernel.
+  have hk (K : HomotopyCategory (Sheaf (ProEt.topology Z) A) (.up ℤ))
+      (hK : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat K) :
+      IsIso ((tensorRight c_Z).leftDerivedFunctorCounit.app K) := by
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+    exact (tensorRight c_Z).isIso_leftDerivedFunctorCounit_app_of_kFlat K
+      ((HomotopyCategory.kFlat_quotient_obj_iff K).1 hK)
+  have : IsIso ((tensorRight c_Z).leftDerivedFunctorCounit.app
+      (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X))) :=
+    hk _ X.property
+  have : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).functor.obj X)) :=
+    NatIso.isIso_app_of_isIso _ _
+  simp only [leftDerivedUpperStarTensorRightCounit, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app]
+  infer_instance
+
+/-- The comparison `g^*(P ⊗ c_Y) ⟶ g^* P ⊗ c_Z` on homotopy categories. -/
+noncomputable def mapHomotopyCategoryTensorRightUpperStarMap :
+    (tensorRight c_Y).mapHomotopyCategory (.up ℤ) ⋙ (g)^*[A].mapHomotopyCategory (.up ℤ) ⟶
+      (g)^*[A].mapHomotopyCategory (.up ℤ) ⋙ (tensorRight c_Z).mapHomotopyCategory (.up ℤ) :=
+  (Functor.mapHomotopyCategoryCompIso (Iso.refl _) _).hom ≫
+    NatTrans.mapHomotopyCategory (tensorRightUpperStarMap g κ) (.up ℤ) ≫
+    (Functor.mapHomotopyCategoryCompIso (Iso.refl _) _).inv
+
+/-- The comparison `Lg^* (K ⊗ᴸ c_Y) ⟶ Lg^* K ⊗ᴸ c_Z` induced by the comparison
+`g^*(P ⊗ c_Y) ⟶ g^* P ⊗ c_Z` of sheaves, where `- ⊗ᴸ c` is the left derived functor of `- ⊗ c`. -/
+noncomputable def leftDerivedTensorRightUpperStarMap :
+    L(tensorRight c_Y) ⋙ L((g)^*[A]) ⟶ L((g)^*[A]) ⋙ L(tensorRight c_Z) :=
+  Functor.leftDerivedNatTrans _ _ (leftDerivedTensorRightUpperStarCounit g)
+    (leftDerivedUpperStarTensorRightCounit g c_Z) (HomotopyCategory.quasiIso _ (.up ℤ))
+    (Functor.whiskerRight (mapHomotopyCategoryTensorRightUpperStarMap g κ) DerivedCategory.Qh)
+
+/-- The defining property of `AlgebraicGeometry.ProEtale.leftDerivedTensorRightUpperStarMap`. -/
+@[reassoc]
+lemma leftDerivedTensorRightUpperStarMap_app_comp_counit
+    (K : HomotopyCategory (Sheaf (ProEt.topology Y) A) (.up ℤ)) :
+    (leftDerivedTensorRightUpperStarMap g κ).app (DerivedCategory.Qh.obj K) ≫
+        (leftDerivedUpperStarTensorRightCounit g c_Z).app K =
+      (leftDerivedTensorRightUpperStarCounit g).app K ≫
+        DerivedCategory.Qh.map ((mapHomotopyCategoryTensorRightUpperStarMap g κ).app K) :=
+  Functor.leftDerivedNatTrans_app _ _ _ _ _ _ K
+
+/-- The morphism `Lg^* c_Y ⟶ c_Z` in the derived category induced by `κ`: the counit of `Lg^*`
+at `c_Y` followed by `κ`. -/
+noncomputable def leftDerivedUpperStarDerivedSingleMap :
+    L((g)^*[A]).obj (derivedSingle c_Y) ⟶ derivedSingle c_Z :=
+  (g)^*[A].leftDerivedFunctorCounit.app _ ≫
+    DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
+      ((singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y ≫ (single _ (.up ℤ) 0).map κ))
+
+instance isIso_leftDerivedUpperStarDerivedSingleMap [IsIso κ] :
+    IsIso (leftDerivedUpperStarDerivedSingleMap g κ) := by
+  have h₁ : IsIso ((g)^*[A].leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c_Y))) :=
+    NatIso.isIso_app_of_isIso _ _
+  have : IsIso ((singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y ≫
+      (single _ (.up ℤ) 0).map κ) := IsIso.comp_isIso
+  have h₂ : IsIso (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
+      ((singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y ≫
+        (single (Sheaf (ProEt.topology Z) A) (.up ℤ) 0).map κ))) := Functor.map_isIso _ _
+  dsimp only [leftDerivedUpperStarDerivedSingleMap]
+  exact IsIso.comp_isIso' h₁ h₂
+
+/-- Every object of `D(Y_proét)` is represented by a complex whose pullback by `g` is K-flat. -/
+lemma exists_iso_Qh_obj_kFlatUpperStar (K : DerivedCategory (Sheaf (ProEt.topology Y) A)) :
+    ∃ P, kFlatUpperStar A g P ∧ Nonempty (DerivedCategory.Qh.obj P ≅ K) := by
+  let Λ := (inferInstance :
+    Abelian.HasFunctorialFlatResolution (Sheaf (ProEt.topology Y) A)).some.reduced
+  have : DerivedCategory.Qh.EssSurj :=
+    Localization.essSurj _ (HomotopyCategory.quasiIso (Sheaf (ProEt.topology Y) A) (.up ℤ))
+  obtain ⟨K', ⟨e⟩⟩ : ∃ K' : CochainComplex (Sheaf (ProEt.topology Y) A) ℤ,
+      Nonempty (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj K') ≅ K) := by
+    obtain ⟨K', hK'⟩ := HomotopyCategory.quotient_obj_surjective (DerivedCategory.Qh.objPreimage K)
+    exact ⟨K', ⟨eqToIso (by rw [hK']) ≪≫ DerivedCategory.Qh.objObjPreimageIso K⟩⟩
+  have : IsIso (DerivedCategory.Qh.map
+      ((HomotopyCategory.quotient _ _).map (Λ.resolutionNatTrans.app K'))) :=
+    Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso _ (.up ℤ)) _ (by
+      rw [HomotopyCategory.quotient_map_mem_quasiIso_iff, HomologicalComplex.mem_quasiIso_iff]
+      infer_instance)
+  exact ⟨_, kFlatUpperStar_quotient_obj_resolutionFunctor_obj A g Λ K',
+    ⟨asIso (DerivedCategory.Qh.map
+      ((HomotopyCategory.quotient _ _).map (Λ.resolutionNatTrans.app K'))) ≪≫ e⟩⟩
+
+omit [Abelian.HasFunctorialFlatResolution A] [ProEtale.UpperStarPreservesFlat A] in
+/-- The comparison `g^*(K ⊗ c_Y) ⟶ g^* K ⊗ c_Z` of complexes, computed through the
+identifications `K ⊗ c[0] ≅ K ⊗ c` (`CochainComplex.mapBifunctorSingle₂Iso`). -/
+lemma mapHomologicalComplex_map_mapBifunctorSingle₂Iso_hom_comp
+    (K : CochainComplex (Sheaf (ProEt.topology Y) A) ℤ) :
+    ((g)^*[A].mapHomologicalComplex (.up ℤ)).map
+        (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) c_Y K).hom ≫
+      (NatTrans.mapHomologicalComplex (tensorRightUpperStarMap g κ) (.up ℤ)).app K =
+    mapBifunctorComparison (δNatTrans (g)^*[A]) (.up ℤ) K ((single _ (.up ℤ) 0).obj c_Y) ≫
+      (((g)^*[A].mapHomologicalComplex (.up ℤ)).obj K ◁
+        ((singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y ≫
+          (single _ (.up ℤ) 0).map κ)) ≫
+      (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) c_Z
+        (((g)^*[A].mapHomologicalComplex _).obj K)).hom := by
+  have h₁ : ((g)^*[A].mapHomologicalComplex _).map
+        (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) c_Y K).inv ≫
+      mapBifunctorComparison (δNatTrans (g)^*[A]) (.up ℤ) K ((single _ (.up ℤ) 0).obj c_Y) ≫
+      (((g)^*[A].mapHomologicalComplex (.up ℤ)).obj K ◁
+        (singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y) ≫
+      (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) ((g)^*[A].obj c_Y)
+        (((g)^*[A].mapHomologicalComplex _).obj K)).hom =
+      (NatTrans.mapHomologicalComplex (δRightNatTrans (g)^*[A] c_Y) (.up ℤ)).app K :=
+    CochainComplex.mapBifunctorComparison_δNatTrans_single₂ (g)^*[A] K c_Y
+  have h₂ : (NatTrans.mapHomologicalComplex ((curriedTensor _).flip.map κ) (.up ℤ)).app
+        (((g)^*[A].mapHomologicalComplex _).obj K) ≫
+      (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) c_Z
+        (((g)^*[A].mapHomologicalComplex _).obj K)).inv =
+      (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) ((g)^*[A].obj c_Y)
+        (((g)^*[A].mapHomologicalComplex _).obj K)).inv ≫
+      (((g)^*[A].mapHomologicalComplex (.up ℤ)).obj K ◁ (single _ (.up ℤ) 0).map κ) :=
+    CochainComplex.mapBifunctorSingle₂Iso_inv_naturality₂ (curriedTensor _) κ _
+  have h₂' : (((g)^*[A].mapHomologicalComplex (.up ℤ)).obj K ◁ (single _ (.up ℤ) 0).map κ) ≫
+      (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) c_Z
+        (((g)^*[A].mapHomologicalComplex _).obj K)).hom =
+      (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) ((g)^*[A].obj c_Y)
+        (((g)^*[A].mapHomologicalComplex _).obj K)).hom ≫
+      (NatTrans.mapHomologicalComplex ((curriedTensor _).flip.map κ) (.up ℤ)).app
+        (((g)^*[A].mapHomologicalComplex _).obj K) := by
+    rw [← cancel_epi (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) ((g)^*[A].obj c_Y)
+        (((g)^*[A].mapHomologicalComplex _).obj K)).inv, ← reassoc_of% h₂, Iso.inv_hom_id,
+      Category.comp_id, Iso.inv_hom_id_assoc]
+  have h₃ : (NatTrans.mapHomologicalComplex (tensorRightUpperStarMap g κ) (.up ℤ)).app K =
+      (NatTrans.mapHomologicalComplex (δRightNatTrans (g)^*[A] c_Y) (.up ℤ)).app K ≫
+        (NatTrans.mapHomologicalComplex ((curriedTensor _).flip.map κ) (.up ℤ)).app
+          (((g)^*[A].mapHomologicalComplex _).obj K) := by
+    rfl
+  refine (cancel_epi (((g)^*[A].mapHomologicalComplex (.up ℤ)).map
+    (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) c_Y K).inv)).1 ?_
+  erw [Iso.inv_hom_id_map_assoc]
+  rw [h₃, MonoidalCategory.whiskerLeft_comp, Category.assoc, h₂']
+  erw [reassoc_of% h₁]
+
+omit [Abelian.HasFunctorialFlatResolution A] [ProEtale.UpperStarPreservesFlat A] in
+/-- The comparison `g^*(P ⊗ c_Y) ⟶ g^* P ⊗ c_Z` on homotopy categories, computed through
+`AlgebraicGeometry.ProEtale.tensorSingleIso`. -/
+lemma mapHomotopyCategory_map_tensorSingleIso_hom_app_comp
+    (P : HomotopyCategory (Sheaf (ProEt.topology Y) A) (.up ℤ)) :
+    ((g)^*[A].mapHomotopyCategory (.up ℤ)).map ((tensorSingleIso c_Y).hom.app P) ≫
+        (mapHomotopyCategoryTensorRightUpperStarMap g κ).app P =
+      ((mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]).app P).app
+          ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c_Y)) ≫
+        (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj P ◁
+          (HomotopyCategory.quotient _ _).map
+            ((singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y ≫
+              (single _ (.up ℤ) 0).map κ)) ≫
+        (tensorSingleIso c_Z).hom.app (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj P) := by
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+  have hinv (K' : HomotopyCategory (Sheaf (ProEt.topology Y) A) (.up ℤ)) :
+      (Functor.mapHomotopyCategoryCompIso (Iso.refl ((g)^*[A] ⋙ tensorRight c_Z))
+      (.up ℤ)).inv.app K' = 𝟙 _ := by
+    refine (cancel_epi ((Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).hom.app K')).1 ?_
+    erw [Iso.hom_inv_id_app]
+  have hw : ((g)^*[A].mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj K) ◁
+      (HomotopyCategory.quotient _ _).map
+        ((singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y ≫
+          (single _ (.up ℤ) 0).map κ) =
+      (HomotopyCategory.quotient _ _).map (((g)^*[A].mapHomologicalComplex (.up ℤ)).obj K ◁
+        ((singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).hom.app c_Y ≫
+          (single _ (.up ℤ) 0).map κ)) := rfl
+  have hZ : (tensorSingleIso c_Z).hom.app
+      (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj K)) =
+      (HomotopyCategory.quotient _ _).map (CochainComplex.mapBifunctorSingle₂Iso
+        (curriedTensor _) c_Z (((g)^*[A].mapHomologicalComplex _).obj K)).hom :=
+    tensorSingleIso_hom_app_quotient_obj c_Z _
+  rw [tensorSingleIso_hom_app_quotient_obj, mapHomotopyCategoryTensorRightUpperStarMap,
+    NatTrans.comp_app, NatTrans.comp_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app, hinv]
+  erw [Category.id_comp, Category.comp_id]
+  erw [hw]
+  rw [mapHomotopyCategoryδNatTrans_app_app, hZ, NatTrans.mapHomotopyCategory_app]
+  have h := congrArg (HomotopyCategory.quotient (Sheaf (ProEt.topology Z) A) (.up ℤ)).map
+    (mapHomologicalComplex_map_mapBifunctorSingle₂Iso_hom_comp g κ K)
+  refine Eq.trans ?_ (h.trans ((Functor.map_comp _ _ _).trans ?_))
+  · exact ((HomotopyCategory.quotient (Sheaf (ProEt.topology Z) A) (.up ℤ)).map_comp _ _).symm
+  · exact congrArg (_ ≫ ·) (Functor.map_comp _ _ _)
+
+attribute [local instance] isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar
+  isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor in
+/-- The defining property of `AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`,
+on objects of the homotopy category. -/
+@[reassoc]
+lemma leftDerivedUpperStarTensorComparison_app_app_fac
+    (X M : HomotopyCategory (Sheaf (ProEt.topology Y) A) (.up ℤ)) :
+    ((leftDerivedUpperStarTensorComparison A g).app (DerivedCategory.Qh.obj X)).app
+        (DerivedCategory.Qh.obj M) ≫ ((derivedTensorLeftDerivedUpperStarCounit A g).app X).app M =
+      ((leftDerivedUpperStarDerivedTensorCounit A g).app X).app M ≫
+        DerivedCategory.Qh.map (((mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]).app X).app M) :=
+  Functor.leftDerived₂NatTrans_app_app _ (derivedTensorLeftDerivedUpperStarCounit A g)
+    (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) _
+    (leftDerivedUpperStarDerivedTensorCounit A g)
+    (Functor.postcompose₂MapWhiskeringLeft₂ (mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A])
+      DerivedCategory.Qh) X M
+
+end Pullback
+
+end AlgebraicGeometry.ProEtale
+
+open Lean Lean.Meta
+
+set_option maxHeartbeats 10000000
+
+private def natHead (e : Expr) : String :=
+  match e.getAppFn with
+  | .const n _ => s!"const {n}"
+  | .proj n i _ => s!"proj {n}.{i}"
+  | .fvar .. => "fvar"
+  | .bvar i => s!"bvar {i}"
+  | .lam .. => "lambda"
+  | .forallE .. => "forall"
+  | .letE .. => "let"
+  | .mdata .. => "metadata"
+  | _ => "other"
+
+private partial def peelNatLambdas (e : Expr) : Expr :=
+  match e with
+  | .lam _ _ b _ => peelNatLambdas b
+  | _ => e
+
+run_meta do
+  let env ← getEnv
+  for name in [`CategoryTheory.CategoryStruct.comp, `CategoryTheory.NatTrans.app] do
+    match (← getConstInfo name) with
+    | .defnInfo d =>
+      let body := peelNatLambdas d.value
+      logInfo m!"{name}: hint={match d.hints with | .regular h => s!"regular {h}" | .abbrev => "abbrev" | .opaque => "opaque"}; one-step post-lambda body={natHead body}"
+    | _ => logInfo m!"{name}: other declaration kind"
+  let info ← getConstInfo `AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison_app_app_fac
+  let value := info.value! (allowOpaque := true)
+  lambdaTelescope value fun xs body => do
+    let lctx ← getLCtx
+    let .ok actual := Kernel.check env lctx body
+      | throwError "body did not Kernel-check"
+    let mut expected := info.type
+    for x in xs do
+      match expected with
+      | .forallE _ _ rest _ => expected := rest.instantiate1 x
+      | _ => throwError "declared type has too few binders"
+    let actualEqArgs := actual.getAppArgs
+    let expectedEqArgs := expected.getAppArgs
+    let actualComp := actualEqArgs[1]!
+    let expectedComp := expectedEqArgs[1]!
+    let actualCompArgs := actualComp.getAppArgs
+    let expectedCompArgs := expectedComp.getAppArgs
+    let left := actualCompArgs[5]!
+    let right := expectedCompArgs[5]!
+    let la := left.getAppArgs
+    let ra := right.getAppArgs
+    logInfo m!"NatTrans.app pair: args={la.size}/{ra.size}, head identical={left.getAppFn == right.getAppFn}"
+    for i in [:min la.size ra.size] do
+      let a := la[i]!
+      let b := ra[i]!
+      let start ← IO.monoMsNow
+      let result := Kernel.isDefEq env lctx a b
+      let stop ← IO.monoMsNow
+      logInfo m!"NatTrans arg {i}: {natHead a}/{natHead b}, structural={a == b}, defeq={stop - start} ms, result={match result with | .ok true => "equal" | .ok false => "unequal" | .error _ => "error"}"
+    let majorIndex := la.size - 2
+    let aligned := mkAppN right.getAppFn (ra.set! majorIndex la[majorIndex]!)
+    let .ok alignedType := Kernel.check env lctx aligned
+      | throwError "aligned NatTrans.app did not Kernel-check"
+    let .ok rightType := Kernel.check env lctx right
+      | throwError "original NatTrans.app did not Kernel-check"
+    logInfo m!"aligned major argument {majorIndex}; result type structurally equal={alignedType == rightType}"
+    for (label, a, b) in [("original", left, right),
+        ("aligned", left, aligned), ("right/aligned", right, aligned)] do
+      let start ← IO.monoMsNow
+      let result := Kernel.isDefEq env lctx a b
+      let stop ← IO.monoMsNow
+      logInfo m!"NatTrans.app {label}: {stop - start} ms, result={match result with | .ok true => "equal" | .ok false => "unequal" | .error _ => "error"}"
+    let objIndex := la.size - 1
+    let .ok objectType := Kernel.check env lctx la[objIndex]!
+      | throwError "object argument did not Kernel-check"
+    withLocalDeclD `auditObject objectType fun object => do
+      let genericCtx ← getLCtx
+      let genericLeft := mkAppN left.getAppFn (la.set! objIndex object)
+      let genericRight := mkAppN right.getAppFn (ra.set! objIndex object)
+      let .ok genericLeftType := Kernel.check env genericCtx genericLeft
+        | throwError "generic left accessor did not Kernel-check"
+      let .ok genericRightType := Kernel.check env genericCtx genericRight
+        | throwError "generic right accessor did not Kernel-check"
+      logInfo m!"E1 trigger unchanged={la[majorIndex]! == genericLeft.getAppArgs[majorIndex]! && ra[majorIndex]! == genericRight.getAppArgs[majorIndex]!}; types structurally equal={genericLeftType == genericRightType}"
+      let helperLeft ← mkLambdaFVars #[object] genericLeft
+      let helperRight ← mkLambdaFVars #[object] genericRight
+      let .ok _ := Kernel.check env lctx helperLeft
+        | throwError "left helper did not Kernel-check"
+      let .ok _ := Kernel.check env lctx helperRight
+        | throwError "right helper did not Kernel-check"
+      let start ← IO.monoMsNow
+      let result := Kernel.isDefEq env genericCtx genericLeft genericRight
+      let stop ← IO.monoMsNow
+      logInfo m!"E1 generic: {stop - start} ms, result={match result with | .ok true => "equal" | .ok false => "unequal" | .error _ => "error"}"
+      let restoredLeft := mkApp helperLeft la[objIndex]!
+      let restoredRight := mkApp helperRight ra[objIndex]!
+      let .ok _ := Kernel.check env lctx restoredLeft
+        | throwError "restored left helper did not Kernel-check"
+      let .ok _ := Kernel.check env lctx restoredRight
+        | throwError "restored right helper did not Kernel-check"
+      let start ← IO.monoMsNow
+      let result := Kernel.isDefEq env lctx restoredLeft restoredRight
+      let stop ← IO.monoMsNow
+      logInfo m!"E3 restored: {stop - start} ms, result={match result with | .ok true => "equal" | .ok false => "unequal" | .error _ => "error"}"
