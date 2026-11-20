@@ -38,8 +38,7 @@ attribute [local irreducible] upperStarFromPoint CondensedRing.upperStar
 attribute [local instance 2000] Scheme.proEtaleRingModules_hasDerivedCategory
 
 /-- Additive functors which agree, compatibly with scalars, on the regular module agree on
-complexes of finite free scalar modules.
-(auxiliary; not a blueprint node). -/
+complexes of finite free scalar modules. -/
 theorem nonempty_mapHomologicalComplex_iso_of_freeScalars {A : Type u} [CommRing A]
     {C : Type*} [Category* C] [Abelian C]
     (F G : ModuleCat.{u + 1} A ⥤ C) [F.Additive] [G.Additive]
@@ -57,8 +56,7 @@ theorem nonempty_mapHomologicalComplex_iso_of_freeScalars {A : Type u} [CommRing
     (fun q ↦ scalarFreeComparison F G e (n q))
     (fun i j _ ↦ (scalarFreeComparison_natural F G e he (n i) (n j) (d i j)).symm)⟩
 
-/-- The continuous scalar realization is additive, being right exact.
-(auxiliary; not a blueprint node). -/
+/-- The continuous scalar realization is additive. -/
 instance continuousScalarFunctor_additive (A : Type u) [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] : (continuousScalarFunctor A).Additive :=
   rightExactFunctor_le_additiveFunctor _ _ _ (ContinuousScalarPresentation.continuous_colimits A)
@@ -68,8 +66,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
 
 /-- The inverse image of the completed constant model of a complex of finite free scalar
 modules is the image, under the comparison equivalence `Φ`, of the pullback from the point of
-the corresponding complex of free condensed modules.
-(auxiliary; not a blueprint node). -/
+the corresponding complex of free condensed modules. -/
 theorem nonempty_adicTowerPullback_sfbCompletedModel_iso {X Y : Scheme.{u}} (h : Y ⟶ X)
     (Φ : AdicCompletion.Modules l E Y ⥤ Scheme.proEtaleRingModules Y
       ((Scheme.adicTowerInverseImage h).obj
@@ -159,18 +156,16 @@ theorem nonempty_adicTowerPullback_sfbCompletedModel_iso {X Y : Scheme.{u}} (h :
       (NatIso.mapHomologicalComplex i₁ (.up ℤ)).app P ≪≫ j₄) ≪≫
     (Φ.mapDerivedCategoryFactors.app _).symm⟩
 
-/-- The continuous scalar realization of a finite free scalar module is free.
-(auxiliary; not a blueprint node). -/
+/-- The continuous scalar realization of a finite free scalar module is free. -/
 theorem isFree_continuousScalarFunctor_freeScalars (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] (n : ℕ) :
     Mod.IsFree (Profinite.continuousCoefficientRingObj A)
       ((continuousScalarFunctor A).obj (FiniteConstantModel.freeScalars A n)) :=
   ⟨n, ⟨ContinuousScalarPresentation.continuousFreeIso A n⟩⟩
 
-/-- A bounded-or-not complex of finite projective modules over the lifted ring `ULift O`, with
+/-- A complex of finite projective modules over the lifted ring `ULift O`, with
 `O` local, is, after restriction of scalars along `ULift O ≃ O`, isomorphic to a complex whose
-terms are the standard finite free `O`-modules.
-(auxiliary; not a blueprint node). -/
+terms are the standard finite free `O`-modules. -/
 theorem exists_freeScalars_complex {O : Type u} [CommRing O]
     [IsLocalRing (ULift.{u + 1} O)]
     (P : CochainComplex (ModuleCat.{u + 1} (ULift.{u + 1} O)) ℤ)

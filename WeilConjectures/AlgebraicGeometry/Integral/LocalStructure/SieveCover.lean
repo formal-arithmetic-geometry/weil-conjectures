@@ -22,8 +22,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A property satisfied by the structure maps of the members of a covering sieve of the
-terminal object of `S_proét` is satisfied by the members of a small pro-étale cover of `S`.
-(auxiliary; not a blueprint node). -/
+terminal object of `S_proét` is satisfied by the members of a small pro-étale cover of `S`. -/
 theorem exists_cover_of_mem_proEt_topology {S : Scheme.{u}}
     (P : ∀ {Y : Scheme.{u}}, (Y ⟶ S) → Prop) (V : Sieve (⊤_ S.ProEt))
     (hV : V ∈ Scheme.ProEt.topology S (⊤_ S.ProEt))

@@ -38,8 +38,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
 
 /-- The realization of internal modules over the continuous integers as module sheaves over
 the completed constant ring: the section functor followed by the coefficient comparisons.
-This is `IntegralConstantModel.modulesFunctor` without its initial change of point ring.
-(auxiliary; not a blueprint node). -/
+This is `IntegralConstantModel.modulesFunctor` without its initial change of point ring. -/
 abbrev integralRealization (X : Scheme.{u}) :
     AdicCompletion.Modules l E X ⥤
       Scheme.proEtaleRingModules X
@@ -50,8 +49,7 @@ abbrev integralRealization (X : Scheme.{u}) :
     Scheme.pbcRestrict (Scheme.pbcCompletedComparison X (Scheme.pbcIntegralDatum l E)).hom
 
 /-- Inverse image of the integral realization along a morphism of schemes is, after an
-equivalence of the target module categories, the internal inverse image.
-(auxiliary; not a blueprint node). -/
+equivalence of the target module categories, the internal inverse image. -/
 theorem exists_integralRealization_pullback {X Y : Scheme.{u}} (h : Y ⟶ X) :
     ∃ Φ : AdicCompletion.Modules l E Y ⥤ Scheme.proEtaleRingModules Y
         ((Scheme.adicTowerInverseImage h).obj
@@ -89,8 +87,7 @@ theorem exists_integralRealization_pullback {X Y : Scheme.{u}} (h : Y ⟶ X) :
     Functor.isoWhiskerRight e.symm (Res.functor ⋙
       Scheme.proEtaleRingRestrictScalars (inv.map c.hom))
 
-/-- Changing the point ring to the continuous integers and back is the identity on modules.
-(auxiliary; not a blueprint node). -/
+/-- Changing the point ring to the continuous integers and back is the identity on modules. -/
 def pointComparisonRoundTrip (X : Scheme.{u}) :
     Mod.comap (coefficientMap (IntegralConstantModel.pointComparison l E).inv.hom X) ⋙
         Mod.comap (coefficientMap (IntegralConstantModel.pointComparison l E).hom.hom X) ≅
@@ -102,8 +99,7 @@ def pointComparisonRoundTrip (X : Scheme.{u}) :
     Mod.comapId _
 
 /-- The derived inverse image of the transported realization of `K` is, after an equivalence
-of the target derived categories, the internal derived inverse image of `K`.
-(auxiliary; not a blueprint node). -/
+of the target derived categories, the internal derived inverse image of `K`. -/
 theorem exists_derived_integralRealization_pullback {X Y : Scheme.{u}} (h : Y ⟶ X) :
     ∃ (Φ : AdicCompletion.Modules l E Y ⥤ Scheme.proEtaleRingModules Y
         ((Scheme.adicTowerInverseImage h).obj

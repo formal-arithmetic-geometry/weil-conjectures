@@ -780,6 +780,21 @@ proposition-local-structure-integral-constructible-complexes, statement and proo
 The point complex is bounded and termwise finite free over the continuous condensed
 integer ring. Its differentials are scalar matrices chosen before inverse image to a
 chart; its termwise pullback is the ordinary scalar model in the source.
+
+## Implementation details
+
+The proof of `integral_local_structure` transports `K` to the completed constant ring sheaf, where
+the completion and residue conditions become Stacks adic constructibility (`completion_transport`,
+`residue_transport`, `internal_completion_stacks_comparison`, `internal_residue_stacks_comparison`).
+The adic stratified perfect models (`Scheme.adicConstructible_localModels`, built on the
+residue-lisse perfect lift: Mittag-Leffler Hom towers, a compatible family of reductions lifted to
+an integral map, and derived Nakayama) give a finite stratification, covering sieves and bounded
+finite projective scalar models; over the DVR these are finite free. Inverse image of the comparison
+functor agrees with the internal inverse image up to an equivalence
+(`exists_derived_integralRealization_pullback`), and the completed constant model of a finite free
+complex is the pullback of free condensed modules from the point
+(`nonempty_adicTowerPullback_sfbCompletedModel_iso`). Reflect the local isomorphisms along that
+equivalence and replace each covering sieve by a small pro-étale cover.
 -/
 
 @[expose] public noncomputable section
@@ -795,19 +810,7 @@ namespace AlgebraicGeometry.ProEtale
 has bounded finite free scalar models pro-etale locally on a finite stratification.
 Source: current blueprint proposition-local-structure-integral-constructible-complexes, statement
 and proof (blueprint: proposition-local-structure-integral-constructible-complexes).
-
-Proof: transport `K` to the completed constant ring sheaf, where the completion and residue
-conditions become Stacks adic constructibility (`completion_transport`, `residue_transport`,
-`internal_completion_stacks_comparison`, `internal_residue_stacks_comparison`). The adic
-stratified perfect models (`Scheme.adicConstructible_localModels`, built on the residue-lisse
-perfect lift: Mittag-Leffler Hom towers, a compatible family of reductions lifted to an
-integral map, and derived Nakayama) give a finite stratification, covering sieves and bounded
-finite projective scalar models; over the DVR these are finite free. Inverse image of the
-comparison functor agrees with the internal inverse image up to an equivalence
-(`exists_derived_integralRealization_pullback`), and the completed constant model of a finite
-free complex is the pullback of free condensed modules from the point
-(`nonempty_adicTowerPullback_sfbCompletedModel_iso`). Reflect the local isomorphisms along
-that equivalence and replace each covering sieve by a small pro-étale cover. -/
+-/
 theorem integral_local_structure
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
