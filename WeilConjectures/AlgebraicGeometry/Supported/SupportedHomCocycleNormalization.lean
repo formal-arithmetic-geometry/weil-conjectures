@@ -195,7 +195,7 @@ def supportedHomAbelianInclusion :
 /-- Agreement on injective representatives with the shifted restriction cone: the
 comparison is exactly kernel inclusion composed with evaluation, hence sends a supported
 section to `(0,s)`. This specifies the comparison itself, including its sign.
-Source: blueprint lem-amb-closed-support-hom, Hom triangle proof; Milne, Section 9
+Source: blueprint lemma-cycle-class-cartier-divisor, Hom triangle proof; Milne, Section 9
 (blueprint: lem-pur-supported-hom-cocycle-normalization). -/
 def SupportedHomCocycleNormalization.ConeAgreement
     (N : SupportedHomCocycleNormalization J A hT j B rho) : Prop :=
@@ -1490,7 +1490,7 @@ both topologies. On the etale site the comparison to the shifted restriction con
 inclusion of the evaluated support kernel in the shifted source summand.
 
 Source: Milne, Lectures on Etale Cohomology, Section 9, Example 9.5 and the Ext proof
-of Theorem 9.4, pp. 66--67; blueprint lem-amb-closed-support-hom, Hom triangle proof
+of Theorem 9.4, pp. 66--67; blueprint lemma-cycle-class-cartier-divisor, Hom triangle proof
 (blueprint: lem-pur-supported-hom-cocycle-normalization).
 
 Proof, following the ten recorded DAG steps:
@@ -1528,7 +1528,7 @@ Proof, following the ten recorded DAG steps:
    a map from the free module presheaf on the smaller representable to the larger
    one and evaluate at the identity. This proves degreewise short exactness of the
    support kernel, total sections and open sections. Forgetting coefficients is exact.
-10. Apply closedConeLift_quasiIso from lem-amb-closed-support-hom to this short exact
+10. Apply closedConeLift_quasiIso from lemma-cycle-class-cartier-divisor to this short exact
    sequence. The canonical support inclusion into the shifted restriction cone is
    a quasi-isomorphism, as is its composite with the termwise evaluation isomorphism.
    This proves exactly ConeAgreement. No quasi-compactness, constructibility,

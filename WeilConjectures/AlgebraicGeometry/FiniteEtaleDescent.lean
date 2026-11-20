@@ -43,7 +43,7 @@ Proof plan from the node, following Stacks:
    (`def-weil-pbc-finite-etale-category`). Identify both iterated pullbacks
    with `P ×_Y Y''` by `def-pc-fibre-product`. Over the triple product the
    comparisons satisfy the cocycle; the same identifications show every
-   base-changed morphism is compatible (`def-pd-descent-datum`).
+   base-changed morphism is compatible (`proposition-jacobian-over-ground-field--1`).
 3. Apply `lem-galois-fpqc-morphisms-descend` (Descent, Tag 02W0) to the
    covering in Step 1. Compatible maps between the canonical objects
    descend uniquely, giving full faithfulness.

@@ -26,7 +26,7 @@ with constant twists, and so do their right derived functors. Hence the cohomolo
 - `AlgebraicGeometry.WeilSheaf.nonempty_equiv_cohomology_constantTwist`:
   `Hʳ(X ⊗ k̄, F ⊗ 𝓑_b) ≅ Hʳ(X ⊗ k̄, F)` with the Frobenius multiplied by `b`.
 - `AlgebraicGeometry.WeilSheaf.nonempty_higherLowerShriek_constantTwist_iso`:
-  `Rⁱf₀!(F ⊗ 𝓑_b) ≅ Rⁱf₀!F ⊗ 𝓑_b` (blueprint: `lem-wf-constant-twist-cohomology`).
+  `Rⁱf₀!(F ⊗ 𝓑_b) ≅ Rⁱf₀!F ⊗ 𝓑_b` (blueprint: `proposition-purity-lisse-part-fourier-transform`).
 -/
 
 @[expose] public section
@@ -148,7 +148,7 @@ noncomputable abbrev globalSectionsFrobeniusHom (G : WeilSheaf k₀ l X) :
     (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj G.obj.carrier.X ⟶
       (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj G.obj.carrier.X :=
   ((ProEtale.globalSectionsLowerStarIso _
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app G.obj.carrier.X).inv ≫
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).app G.obj.carrier.X).inv ≫
     (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map G.obj.str.hom)
 
 omit [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
@@ -157,7 +157,7 @@ lemma globalSectionsMap_comp_frobeniusHom {G G' : WeilSheaf k₀ l X} (f : G ⟶
     globalSectionsMap f ≫ globalSectionsFrobeniusHom G' =
       globalSectionsFrobeniusHom G ≫ globalSectionsMap f := by
   have h₁ := ((ProEtale.globalSectionsLowerStarIso _
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.naturality
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.naturality
     ((AdicSheaf.forget _).map f.hom.hom.f))
   have h₂ := congrArg (fun g ↦ (Sheaf.Γ _ (WeilCoefficients.{u} l)).map
     ((AdicSheaf.forget _).map g)) f.hom.hom.h
@@ -394,7 +394,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 `f : X ⟶ Y` of `k₀`-schemes as in `AlgebraicGeometry.WeilSheaf.higherLowerShriek` and a unit
 `b ∈ ℚ̄_ℓˣ`, `Rⁱf₀!(F ⊗ 𝓑_b) ≅ Rⁱf₀!F ⊗ 𝓑_b`. The direct image with compact support of
 pro-étale Weil sheaves commutes with constant twists, its constituents being `ℚ̄_ℓ`-linear.
-(blueprint: `lem-wf-constant-twist-cohomology`) -/
+(blueprint: `proposition-purity-lisse-part-fourier-transform`) -/
 theorem nonempty_higherLowerShriek_constantTwist_iso (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) (i : ℕ) :

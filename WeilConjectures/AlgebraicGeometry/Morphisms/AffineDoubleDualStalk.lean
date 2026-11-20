@@ -16,7 +16,11 @@ import Mathlib.RingTheory.Localization.Finiteness
 
 /-! # Localization of an affine finite double dual
 
-Source: Stacks Project, Tags 01HV and 0583, as used in Tag 0EY6.
+## References
+
+* Stacks Project, Tags 01HV and 0583, as used in Tag 0EY6
+* Stacks Project, Tags 01HV (associated sheaf stalks) and 0583 (localization of Hom for finite
+  presentations), used in Tag 0EY6
 -/
 
 @[expose] public section
@@ -57,20 +61,7 @@ private theorem dual_stalk_iso
     (StructureSheaf.toStalkₗ A (Module.Dual A M) x) h
   exact ⟨e.extendScalarsOfIsLocalization x.asIdeal.primeCompl R⟩
 
-/-- The stalk of the actual double dual is the double dual of the finite stalk.
-Source: Stacks Project, Tags 01HV (associated sheaf stalks) and 0583
-(localization of Hom for finite presentations), used in Tag 0EY6.
-(blueprint: new-affine-double-dual-stalk)
-
-Proof: Identify the stalk of tilde M at x with the localization M_x over A_x.
-Finite generators of M localize to generators, proving finiteness of this stalk.
-Both M and Hom_A(M,A) are finitely presented since A is Noetherian. Apply the
-localization-Hom isomorphism first to M and then to Hom_A(M,A); composing these
-with the associated-sheaf stalk identification gives an A_x-linear isomorphism
-between the displayed stalk and Hom_{A_x}(Hom_{A_x}(M_x,A_x),A_x). The algebra
-structure and scalar action on A_x are the structure sheaf's canonical ones.
-All isomorphisms are canonical; the finiteness witness is a proposition.
-For M = 0 both sides are zero; an empty spectrum has no point x. -/
+/-- The stalk of the actual double dual is the double dual of the finite stalk. -/
 theorem affine_double_dual_stalk
     (A : CommRingCat.{u}) [IsNoetherianRing A] (M : ModuleCat.{u} A)
     [Module.Finite A M] (x : Spec A) :

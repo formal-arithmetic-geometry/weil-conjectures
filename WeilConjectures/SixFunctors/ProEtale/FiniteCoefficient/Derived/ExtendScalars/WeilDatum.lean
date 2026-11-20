@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Wei
 # Scalar extension of Weil data and of local Frobenii
 
 Let `R → S` be a homomorphism of commutative rings and `Ψ = - ⊗ᴸ_R S` derived scalar extension
-of pro-étale sheaves (blueprint `def-weil-derived-tensor`). A Weil datum `φ : Lg^* K ⟶ K` over
+of pro-étale sheaves (blueprint `prose-03-02`). A Weil datum `φ : Lg^* K ⟶ K` over
 `R` induces the Weil datum
 ```
 φ_S : Lg^* Ψ K ≅ Ψ Lg^* K --Ψ φ--> Ψ K
@@ -23,7 +23,7 @@ construction commutes with the operations of `WeilConjectures.SixFunctors.ProEta
 FiniteCoefficient.Derived.WeilDatum`: iterates, pullbacks and local Frobenii. In particular the
 identification `Lx^* Ψ K ≅ Ψ Lx^* K` of the geometric stalks intertwines the local Frobenius of
 `(Ψ K, φ_S)` with the scalar extension of the local Frobenius of `(K, φ)` (part of blueprint
-`sk-p-trace-coeff`).
+`theorem-grothendieck-lefschetz-trace-formula--7`).
 
 ## Main statements
 

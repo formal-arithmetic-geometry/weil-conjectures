@@ -9,7 +9,7 @@ public import WeilConjectures.Compactification.ProjectiveSpace
 
 /-! # Changing the two homogeneous coordinates of the projective line
 
-Source: blueprint sk-lem-geo-affine-local, proof (1), transport of the standard model.
+Source: blueprint lemma-affine-space-etale-localization, proof (1), transport of the standard model.
 -/
 
 @[expose] public noncomputable section
@@ -20,7 +20,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- The standard-chart coordinates give the same projective line as the finite trace model.
-Source: blueprint sk-lem-geo-affine-local, proof (1), coordinate identification.
+Source: blueprint lemma-affine-space-etale-localization, proof (1), coordinate identification.
 (auxiliary; not a blueprint node)
 Proof: reindex the homogeneous sections by the explicit bijection from two lifted indices
  to an optional lifted singleton. The existing coordinate reindexing theorem makes the
@@ -45,7 +45,7 @@ theorem exists_projectiveLinePresentation (S : Scheme.{u}) :
   exact ProjectiveSpace.homOfIsFreeGenerator_over s U hs _ hU
 
 /-- A pullback of a presented projective line is again presented by the standard model.
-Source: blueprint sk-lem-geo-affine-local, proof (1), pullback universal property.
+Source: blueprint lemma-affine-space-etale-localization, proof (1), pullback universal property.
 (auxiliary; not a blueprint node)
 Proof: transport the pullback square along the given isomorphism on its upper right.
 Its universal-property isomorphism to the standard projective-line square preserves

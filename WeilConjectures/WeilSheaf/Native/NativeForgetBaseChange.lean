@@ -68,13 +68,13 @@ instance isIso_mateEquiv_forgetCompAdicUpperStarIso :
     IsIso (mateEquiv (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l p)
       (ProEtale.adicUpperStarLowerStarAdjunction l
         (Scheme.Hom.geometricFiberMap p (comp_over p _)))
-      (TwoSquare.mk _ _ _ _ (forgetCompAdicUpperStarIso k₀ l p).hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (forgetCompAdicUpperStarIso k₀ l p).hom)) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro F
   suffices h : (mateEquiv (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l p)
       (ProEtale.adicUpperStarLowerStarAdjunction l
         (Scheme.Hom.geometricFiberMap p (comp_over p _)))
-      (TwoSquare.mk _ _ _ _ (forgetCompAdicUpperStarIso k₀ l p).hom)).natTrans.app F = 𝟙 _ by
+      (TwoSquare.mk _ _ _ _ (forgetCompAdicUpperStarIso k₀ l p).hom)).app F = 𝟙 _ by
     rw [h]
     infer_instance
   simp only [Functor.comp_obj, IsoAlgebra.forget_obj, mateEquiv_apply, NatTrans.comp_app,
@@ -107,7 +107,7 @@ theorem isIso_mateEquiv_forgetCompUpperStarIso_app
     IsIso ((mateEquiv (ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l p)
       (ProEtale.adicUpperStarLowerStarAdjunction l
         (Scheme.Hom.geometricFiberMap p (comp_over p _))).mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ (forgetCompUpperStarIso k₀ l p).hom)).natTrans.app M) := by
+      (TwoSquare.mk _ _ _ _ (forgetCompUpperStarIso k₀ l p).hom)).app M) := by
   have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
     (ProEtale.AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
   have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}

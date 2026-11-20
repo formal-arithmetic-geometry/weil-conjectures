@@ -98,7 +98,7 @@ instance finiteTriangulated (E : FieldStage.{u} l) (n : ℕ+) (T : Scheme.{u}) :
 
 /-- The same closure assertion for the completed integral coefficient category.
 This is the DAG statement lem-weil-integral-ctf-triangulated, stated here on the
-recorded predicate of def-weil-finite-tor-amplitude.
+recorded predicate of definition-constructible-sheaves.
 Source: blueprint integral finite-Tor paragraph; Stacks Project, Tag 08G2 (2)
 (blueprint: lem-sf-constructible-exceptional-adjunction-coefficients).
 Proof: every reduction is exact and preserves shifts. A common interval for two

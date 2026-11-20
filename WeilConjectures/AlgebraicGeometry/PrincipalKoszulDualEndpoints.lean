@@ -199,7 +199,7 @@ private theorem dualTermStep (m : ℕ) (q : ℤ)
     (c : End (SheafOfModules.unit
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))
     (hf : s0.inv ≫ (ringedKoszulFactorStep R ⟨a.val, a.property⟩ m).f (-q) =
-      c ≫ s1.inv) :
+      c.asHom ≫ s1.inv) :
     ((ringedKoszulDualTower R 1 (fun _ ↦ ⟨a.val, a.property⟩)).map
         (homOfLE (Nat.le_succ m)).op).f q ≫
         ((dualFactorTerm R a m q).hom ≫
@@ -207,9 +207,9 @@ private theorem dualTermStep (m : ℕ) (q : ℤ)
             (SheafOfModules.homObjUnitIso (R := R) (SheafOfModules.unit _)).hom) =
       ((dualFactorTerm R a (m + 1) q).hom ≫
         SheafOfModules.homObjMap (R := R) s1.inv (𝟙 _) ≫
-          (SheafOfModules.homObjUnitIso (R := R) (SheafOfModules.unit _)).hom) ≫ c := by
+          (SheafOfModules.homObjUnitIso (R := R) (SheafOfModules.unit _)).hom) ≫ c.asHom := by
   rw [← Category.assoc, dualFactorTerm_step R a m q, Category.assoc,
-    homTransportEvaluation R s0 s1 _ c hf, ← Category.assoc]
+    homTransportEvaluation R s0 s1 _ c.asHom hf, ← Category.assoc]
 
 private theorem dualZeroTerm_step (m : ℕ) :
     ((ringedKoszulDualTower R 1 (fun _ ↦ ⟨a.val, a.property⟩)).map
@@ -229,7 +229,7 @@ private theorem dualZeroTerm_step (m : ℕ) :
     change s0.inv ≫ (s0.hom ≫ s1.inv) = s1.inv
     exact s0.inv_hom_id_assoc _
   have hs := dualTermStep R a m 0
-  have ht := hs s0 s1 (𝟙 U) (by
+  have ht := hs s0 s1 (1 : End U) (by
     exact hf.trans (Category.id_comp s1.inv).symm)
   change _ ≫ ((dualFactorTerm R a m 0).hom ≫
       SheafOfModules.homObjMap (R := R) s0.inv (𝟙 U) ≫ e.hom) =
@@ -240,7 +240,7 @@ private theorem dualZeroTerm_step (m : ℕ) :
 private theorem dualNegOneTerm_step (m : ℕ) :
     ((ringedKoszulDualTower R 1 (fun _ ↦ ⟨a.val, a.property⟩)).map
         (homOfLE (Nat.le_succ m)).op).f (-1) ≫ (dualNegOneTerm R a m).hom =
-      (dualNegOneTerm R a (m + 1)).hom ≫ ringedKoszulScalar R ⟨a.val, a.property⟩ := by
+      (dualNegOneTerm R a (m + 1)).hom ≫ (ringedKoszulScalar R ⟨a.val, a.property⟩).asHom := by
   rw [dualNegOneTerm_hom R a m, dualNegOneTerm_hom R a (m + 1)]
   let U := SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
   let L0 := ringedKoszulFactor R ⟨a.val, a.property⟩ m
@@ -250,11 +250,11 @@ private theorem dualNegOneTerm_step (m : ℕ) :
   let f := ringedKoszulFactorStep R ⟨a.val, a.property⟩ m
   let c := ringedKoszulScalar R ⟨a.val, a.property⟩
   let e := SheafOfModules.homObjUnitIso (R := R) U
-  have hf : s0.inv ≫ f.f 1 = c ≫ s1.inv := by
+  have hf : s0.inv ≫ f.f 1 = c.asHom ≫ s1.inv := by
     simp only [f, ringedKoszulFactorStep, ringedKoszulFactorStepF,
       dite_eq_right (show (1 : ℤ) ≠ 0 by decide), dite_eq_left rfl, eqToHom_refl,
       Category.id_comp]
-    change s0.inv ≫ (s0.hom ≫ c ≫ s1.inv) = c ≫ s1.inv
+    change s0.inv ≫ (s0.hom ≫ c.asHom ≫ s1.inv) = c.asHom ≫ s1.inv
     exact s0.inv_hom_id_assoc _
   have hs := dualTermStep R a m (-1)
   exact hs s0 s1 c hf
@@ -344,7 +344,7 @@ private theorem coneZeroTerm_step (m : ℕ) :
 
 private theorem coneNegOneTerm_step (m : ℕ) :
     (principalKoszulTransition R a m).f (-1) ≫ (coneNegOneTerm R a m).hom =
-      (coneNegOneTerm R a (m + 1)).hom ≫ ringedKoszulScalar R ⟨a.val, a.property⟩ := by
+      (coneNegOneTerm R a (m + 1)).hom ≫ (ringedKoszulScalar R ⟨a.val, a.property⟩).asHom := by
   let e := HomologicalComplex.singleObjXSelf (.up ℤ) 0
     (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
   have hc (k : ℕ) : (coneNegOneTerm R a k).hom =
@@ -359,7 +359,7 @@ private theorem coneNegOneTerm_step (m : ℕ) :
   rw [hc m, hc (m + 1)]
   have he : ((CochainComplex.singleFunctor _ 0).map
       (globalSectionMultiplication R a)).f 0 ≫ e.hom =
-        e.hom ≫ ringedKoszulScalar R ⟨a.val, a.property⟩ :=
+        e.hom ≫ (ringedKoszulScalar R ⟨a.val, a.property⟩).asHom :=
     (HomologicalComplex.singleCompEvalIsoSelf _ (.up ℤ) 0).hom.naturality
       (globalSectionMultiplication R a)
   exact evaluateSquare _ _ _ _ _ _ (coneFst_step R a m) he
@@ -384,7 +384,7 @@ private theorem finiteDualTerm_step (m : ℕ) (q : ℤ) (hq : q = 0 ∨ q = -1) 
     rw [h m, h (m + 1)]
     exact conjugateSquare (coneNegOneTerm R a m) (coneNegOneTerm R a (m + 1))
       (dualNegOneTerm R a m) (dualNegOneTerm R a (m + 1)) _ _
-      (ringedKoszulScalar R ⟨a.val, a.property⟩)
+      (ringedKoszulScalar R ⟨a.val, a.property⟩).asHom
       (coneNegOneTerm_step R a m) (dualNegOneTerm_step R a m)
 
 private theorem dualUnit_remove (m : ℕ) :

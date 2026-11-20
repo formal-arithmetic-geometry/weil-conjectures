@@ -42,7 +42,7 @@ abelian sheaves on `C` are assumed to have enough injectives, the covering is in
 
 It is the first spectral sequence of the double complex `Sheaf.exists_cechDoubleComplex`.
 
-(blueprint: `det-thm-picard-cech`, `lem-sc-cech-spectral`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, `lem-sc-cech-spectral`) -/
 theorem Sheaf.exists_cechToDerivedSpectralSequence_of_enoughInjectives
     [HasExt.{v} (Sheaf J AddCommGrpCat.{v})] [EnoughInjectives (Sheaf J AddCommGrpCat.{v})]
     (F : Sheaf J AddCommGrpCat.{v}) (X : C)

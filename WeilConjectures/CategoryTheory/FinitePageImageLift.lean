@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedCoupleExact
 /-!
 # Incoming-alpha image lifts to derived-D terms
 
-Source: Stacks Tags 011S and 0AMJ; blueprint thm-sp-truncation-e2, step 5.
+Source: Stacks Tags 011S and 0AMJ; blueprint lemma-uniform-bound-proper-direct-image--1, step 5.
 (blueprint: lem-sp-finite-page-image-lift)
 -/
 
@@ -118,8 +118,8 @@ private theorem incoming_split_heq
     congr! 1 <;> omega
 
 /-- The incoming-alpha filtration step lifts isomorphically to the derived-D term.
-Source: blueprint thm-sp-truncation-e2, proof step 5; Stacks Tags 011S and 0AMJ.
-(blueprint: lem-sp-finite-page-image-lift)
+Source: blueprint lemma-uniform-bound-proper-direct-image--1, proof step 5; Stacks Tags 011S and
+0AMJ. (blueprint: lem-sp-finite-page-image-lift)
 
 Proof: Put R=max(p+3,q-a+2), r=R-2, u=p-r and v=q+r. First identify the families
 A and I in pageCouple_image with incomingAlphaIter and inc. Their initial values

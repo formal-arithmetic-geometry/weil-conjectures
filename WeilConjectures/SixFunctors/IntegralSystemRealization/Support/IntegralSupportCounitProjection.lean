@@ -179,7 +179,6 @@ private theorem open_normalized_transport (o : Operations l E) (a : AmbientModel
         L.map ((a.realizationModel.openReduction l E j).app H) := by
       rw [← hr, Functor.map_comp, Functor.map_comp, Category.assoc]
 
-set_option maxHeartbeats 400000 in
 -- The final rewrite unfolds the scalar-reduction evaluation of the counit composite.
 /-- Finite projection of the primitive open/proper realization, with an arbitrary
 normalized input comparison substituted afterwards. There are no expression trees

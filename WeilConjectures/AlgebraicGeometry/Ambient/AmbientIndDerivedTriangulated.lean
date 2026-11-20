@@ -22,7 +22,7 @@ import all WeilConjectures.AlgebraicGeometry.ConstructibleFiniteHeart
 # The ind-constructible ambient derived category is triangulated
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-cor-ambient-ind-derived,
-node `det-ambient-ind-derived-triangulated` (blueprint: det-ambient-ind-derived-triangulated).
+node `corollary-ambient-ind-derived--1` (blueprint: corollary-ambient-ind-derived--1).
 
 ## Main statements
 
@@ -78,8 +78,8 @@ Source: blueprint main-20261015, sec-six-functors-basics/sk-cor-ambient-ind-deri
 Proof, separately for the canonical coefficients `E` and `Q̄_ℓ`:
 
 1. The zero module is constructible: on each affine open use the single stratum and the zero
-   finitely presented scalar module (`sk-def-sfb-constructible`). Its constant diagram on the
-   one-object filtered category makes it ind-constructible. Since every cohomology of the
+   finitely presented scalar module (`definition-constructible-sheaves`). Its constant diagram on
+   the one-object filtered category makes it ind-constructible. Since every cohomology of the
    zero complex is zero (`def-weil-abstract-derived-category`), the derived predicate contains
    zero. An isomorphism of complexes induces isomorphisms on every cohomology object; transport
    the filtered-colimit presentation along these isomorphisms to obtain isomorphism closure.
@@ -98,9 +98,9 @@ Proof, separately for the canonical coefficients `E` and `Q̄_ℓ`:
    sequence `0 → coker α → Hⁿ(M) → ker β → 0`.
 5. The four outer cohomology objects belong to `IndCons`. Fullness makes `α,β` morphisms
    between its objects. Closure under ambient kernels and cokernels
-   (`det-ind-heart-kernels-cokernels`) puts `coker α` and `ker β` in `IndCons`. Closure under
-   extensions (`det-ind-heart-extensions`) puts `Hⁿ(M)` there too. Since `n` was arbitrary,
-   `M` satisfies the derived predicate.
+   (`proposition-ind-constructible-sheaves`) puts `coker α` and `ker β` in `IndCons`. Closure under
+   extensions (`proposition-ind-constructible-sheaves--7`) puts `Hⁿ(M)` there too. Since `n` was
+   arbitrary, `M` satisfies the derived predicate.
 6. If instead `L,M` satisfy the predicate, rotate to the distinguished triangle
    `L → M → K[1] → L[1]` (`def-weil-triangulated-category`). Steps 3--5 give `K[1]` in the
    predicate; shift by `[-1]` and use `(K[1])[-1] ≅ K` and steps 1--2 to obtain `K`.
@@ -113,7 +113,7 @@ Proof, separately for the canonical coefficients `E` and `Q̄_ℓ`:
    closure and the middle-vertex condition. Apply `def-weil-triangulated-subcategory`:
    the inherited shifts and distinguished triangles make this full subcategory triangulated.
 
-(blueprint: det-ambient-ind-derived-triangulated). -/
+(blueprint: corollary-ambient-ind-derived--1). -/
 theorem indConstructibleDerived_isTriangulated
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)

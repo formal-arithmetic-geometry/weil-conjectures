@@ -27,7 +27,7 @@ that of its underlying sheaf of `𝔽_ℓ`-modules.
 - `AlgebraicGeometry.Etale.preservesKInjectiveComplexes_restrictScalars`: restriction of scalars
   along a flat ring morphism preserves K-injective complexes.
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarCompDerivedRestrictScalarsIso`: restriction of
-  scalars commutes with `Rg_*` (`lem-fin-coefficients-forgetful-direct-image`).
+  scalars commutes with `Rg_*` (`corollary-open-direct-image-over-field--1`).
 -/
 
 @[expose] public section
@@ -77,7 +77,7 @@ lemma preservesKInjectiveComplexes_restrictScalars (hφ : φ.Flat) (X : Scheme.{
 
 variable (φ)
 
-/-- Blueprint `lem-fin-coefficients-forgetful-direct-image`: Changing finite coefficient rings in
+/-- Blueprint `corollary-open-direct-image-over-field--1`: Changing finite coefficient rings in
 a direct image.
 
 Let `φ : Λ →+* Λ'` be a flat ring morphism (in the blueprint, `Λ = 𝔽_ℓ` and `Λ'` a finite

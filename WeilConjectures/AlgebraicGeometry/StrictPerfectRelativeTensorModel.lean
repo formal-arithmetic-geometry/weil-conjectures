@@ -17,6 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.AlgebraicGeometry.StrictPerfectRelativeTensorTermsFlat
 import WeilConjectures.AlgebraicGeometry.StrictPerfectRelativeTensorRoof
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatSheafKFlat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # A bounded base-ring model on a strict-perfect tensor chart
 

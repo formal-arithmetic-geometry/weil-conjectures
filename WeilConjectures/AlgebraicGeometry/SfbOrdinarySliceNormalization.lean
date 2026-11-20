@@ -46,7 +46,6 @@ private noncomputable def changeIsoRestriction
   let E := scalarEquivalence (asIso c)
   exact (SheafOfModules.tensorAdjunction c).leftAdjointUniq E.symm.toAdjunction
 
-set_option maxHeartbeats 800000 in
 -- The final transport compares module structures on the two site presentations.
 /-- Ordinary slice restriction commutes with transport to the AsSmall site and
 with an invertible change of coefficient rings.
@@ -137,9 +136,35 @@ theorem sfbOrdinarySliceNormalization
   have hGl : PreservesFiniteLimits G := SheafOfModules.pushforward_finiteLimits φ
   have hGc : PreservesFiniteColimits G := SheafOfModules.pushforward_finiteColimits φ
   refine ⟨G, hGa, hGl, hGc, ⟨?_⟩⟩
-  exact Functor.isoWhiskerLeft
-    ((proEtaleModuleToModel ((adicLisseForget S).obj R) ⋙
-      ConstantCompletion.res e.inv) ⋙ SheafOfModules.overFunctor (siteModuleRings B) W)
-    (changeIsoRestriction c)
+  let F := (proEtaleModuleToModel ((adicLisseForget S).obj R) ⋙
+    ConstantCompletion.res e.inv) ⋙ SheafOfModules.overFunctor (siteModuleRings B) W
+  let β : F ⋙ ConstantCompletion.res (asIso c).inv ≅
+      SheafOfModules.overFunctor ((adicLisseForget S).obj R) U ⋙ G := by
+    refine NatIso.ofComponents (fun M ↦ ?_) ?_
+    · refine
+        { hom := { val := { app := fun V ↦ ?_, naturality := ?_ } }
+          inv := { val := { app := fun V ↦ ?_, naturality := ?_ } }
+          hom_inv_id := ?_
+          inv_hom_id := ?_ }
+      · exact ModuleCat.ofHom
+          (X := ((ConstantCompletion.res (asIso c).inv).obj (F.obj M)).val.obj V)
+          (Y := (G.obj ((SheafOfModules.overFunctor ((adicLisseForget S).obj R) U).obj
+            M)).val.obj V)
+          { toFun := fun x ↦ x
+            map_add' := fun _ _ ↦ rfl
+            map_smul' := fun _ _ ↦ rfl }
+      · intros; ext; rfl
+      · exact ModuleCat.ofHom
+          (X := (G.obj ((SheafOfModules.overFunctor ((adicLisseForget S).obj R) U).obj
+            M)).val.obj V)
+          (Y := ((ConstantCompletion.res (asIso c).inv).obj (F.obj M)).val.obj V)
+          { toFun := fun x ↦ x
+            map_add' := fun _ _ ↦ rfl
+            map_smul' := fun _ _ ↦ rfl }
+      · intros; ext; rfl
+      · ext; rfl
+      · ext; rfl
+    · intros; ext; rfl
+  exact Functor.isoWhiskerLeft F (changeIsoRestriction c) ≪≫ β
 
 end AlgebraicGeometry.Scheme

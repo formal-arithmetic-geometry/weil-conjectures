@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Completed.CompletedTensorShiftRight
 
 /-! # Representative formulas for the two tensor slots
 
-Source: blueprint sec-smooth-purity, sk-thm-purity-transport, Step 2;
+Source: blueprint chap-Smooth-purity, theorem-smooth-purity-all-admissible-coefficients, Step 2;
 cochain tensor and mapping-cone conventions of Stacks 011G, 014E and 0941
 (blueprint: def-pur-integral-tensor-shift-properties).
 -/

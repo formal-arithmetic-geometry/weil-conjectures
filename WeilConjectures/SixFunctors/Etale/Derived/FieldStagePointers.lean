@@ -14,15 +14,15 @@ public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
 /-!
 # Properties of the field coefficient stages
 
-Three remarks of blueprint `det-def-sf-operations` point to properties of the field coefficient
-stages proved elsewhere in the blueprint:
+Three remarks of blueprint `theorem-f-shriek-ell-adic-coefficients--4` point to properties of the
+field coefficient stages proved elsewhere in the blueprint:
 
 * the rationalization `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ]` is idempotent complete, so that the
   canonical functor into its Karoubi envelope is an equivalence;
 * the common-stage category `Dᵇc(X, ℚ̄_ℓ)` is idempotent complete, so that the canonical functor
   into its Karoubi envelope is an equivalence;
 * at a field coefficient, every bounded constructible complex has finite Tor amplitude, so that
-  `Dᵇctf = Dᵇc` (`rem-ptr-weil-finite-tor-amplitude-4`, from `lem-integral-ctf-equals-bc`).
+  `Dᵇctf = Dᵇc` (`proposition-ctf-equals-bc`, from `proposition-ctf-equals-bc`).
 
 ## Implementation notes
 
@@ -33,7 +33,7 @@ stages proved elsewhere in the blueprint:
 * The derived tensor product of the field stages is only available, in this repository, for
   étale sheaves of modules over a discrete coefficient field `F`; the Tor amplitude statements
   are made there.
-* The idempotent completeness of `Dᵇc(X, ℚ̄_ℓ)` and the lemma `lem-integral-ctf-equals-bc` belong
+* The idempotent completeness of `Dᵇc(X, ℚ̄_ℓ)` and the lemma `proposition-ctf-equals-bc` belong
   to other parts of the blueprint. In the Bhatt–Scholze model, idempotent completeness of
   `Dᵇc(X, ℚ̄_ℓ)` needs no descent to finite stages: an idempotent of a bounded object of
   `D(X_proét, ℚ̄_ℓ)` splits (`CategoryTheory.Triangulated.TStructure.isSplit_of_isGE_of_isLE`),
@@ -174,7 +174,7 @@ section FieldTorAmplitude
 
 variable (F : Type (u + 1)) [Field F] (X : Scheme.{u})
 
-/-- Blueprint `lem-integral-ctf-equals-bc`: Finite Tor amplitude at field coefficients.
+/-- Blueprint `proposition-ctf-equals-bc`: Finite Tor amplitude at field coefficients.
 
 For a coefficient field `F`, every bounded constructible complex `K` of étale sheaves of
 `F`-modules has finite Tor amplitude: there are `a ≤ b` with `𝓗ʳ(K ⊗ᴸ_F M) = 0` for `r ∉ [a, b]`
@@ -197,13 +197,13 @@ theorem Etale.DerivedCategory.finiteTorAmplitude_of_boundedConstructible_of_fiel
   exact (Etale.flat_iff_forall_flat_sheafFiber_obj G).2 fun _ ↦
     (ModuleCat.flat_iff_flat _).2 inferInstance
 
-/-- Blueprint `rem-ptr-weil-finite-tor-amplitude-4`: Pointer to the properties of finite Tor
+/-- Blueprint `proposition-ctf-equals-bc`: Pointer to the properties of finite Tor
 amplitude.
 
 At a field coefficient `F` the finite-Tor category is the bounded constructible one,
 `Dᵇctf(X, F) = Dᵇc(X, F)`, consistently with the amplitude condition: every bounded constructible
 complex at a field coefficient has finite Tor amplitude (blueprint
-`lem-integral-ctf-equals-bc`). -/
+`proposition-ctf-equals-bc`). -/
 theorem Etale.DerivedCategory.constructibleFiniteTor_eq_boundedConstructible_of_field :
     Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} F) X =
       Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} F) X := by

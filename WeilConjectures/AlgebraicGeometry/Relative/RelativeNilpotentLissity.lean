@@ -676,7 +676,12 @@ import WeilConjectures.AlgebraicGeometry.AdicOrdinaryComparisonComposition
 import WeilConjectures.AlgebraicGeometry.NilpotentReductionLissity
 import WeilConjectures.AlgebraicGeometry.ConstantCoefficientScalarEquivalence
 
-/-! # Nilpotent reflection of relative finite lissity -/
+/-! # Nilpotent reflection of relative finite lissity
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 094I and Tag 094H
+-/
 
 @[expose] public noncomputable section
 
@@ -691,23 +696,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientRingSheafify in
-/-- Relative finite lissity is reflected by a nilpotent surjection of finite coefficients.
-
-Source: Stacks Project, Cohomology on Sites, Tag 094I and Tag 094H.
-(blueprint: lem-weil-pbc-relative-nilpotent-lissity)
-
-Proof: inverse image is exact and commutes with derived scalar extension, by the
-scalar-extension/pullback adjunction comparison. Identify inverse-image constant ring
-sheaves with the native constant ring sheaves using the constant-section isomorphisms.
-Pass to the equivalent small site and its constant coefficient module encoding. The
-covering-sieve descriptions become locally constant finite-type modules. Factor the
-surjection through B/ker(f), and use the quotient ring isomorphism to transport the
-reduced cohomology hypothesis. Apply locallyConstantFiniteTypeModules_reduction_pow
-at a positive nilpotence exponent of ker(f); its second clause gives lissity of the
-unreduced complex. Exactness preserves the upper bound. Since B is finite, each finite
-type constant B-module has finite underlying set. Transport these models back through
-the small-site and constant-ring equivalences to relative models. This uses neither
-an adic tower nor a common stratification, and includes zero rings and empty schemes. -/
+/-- Relative finite lissity is reflected by a nilpotent surjection of finite coefficients. -/
 theorem relative_finite_lisse_of_nilpotent_reduction {X Y : Scheme.{u}} (g : Y ⟶ X)
     {B R : Type (u + 1)} [CommRing B] [CommRing R] [Finite B] [Finite R]
     (f : B →+* R) (hf : Function.Surjective f) (hnil : IsNilpotent (RingHom.ker f))

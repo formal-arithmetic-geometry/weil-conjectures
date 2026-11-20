@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Picard.PicardOrdinaryResidueCoefficient
 
 /-! # PicardResidueCoefficientSquare
 
-Source: Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7.
+## References
+
+* Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7
 -/
 
 @[expose] public section
@@ -37,24 +39,9 @@ private theorem residue_singlePullback_naturality
 
 end Modules
 
-set_option maxHeartbeats 900000 in
 -- Normalizing the fixed derived single-functor comparisons expands the fibre objects.
 set_option maxRecDepth 2048 in
-/-- The single-module coefficient square before direct image.
-Source: Stacks Project, Tags 06YJ, 0D5S and 01F7.
-(blueprint: lem-picard-residue-coefficient-square)
-
-Proof: Expand the normalization coefficients and alpha, the ordinary pullback
-comparison defining the base coefficient arrow. Apply the canonical single-map
-composition identity to the pairs (j,b) and (bi,jW), using hr to identify their
-composites. Naturality moves the single image of the trivialization through the
-single-pullback comparison. The remaining equation is the ordinary pullback
-composition pentagon: the two projection identities identify both coefficient
-paths with pullback of L along bi followed by the projection from Xi_W and ui.
-The inverse tensor-to-ordinary comparisons cancel in pairs. The surviving map is
-pullback of tau along j followed by the unit comparison, which is exactly tau_i.
-No comparison is inverted in this coefficient identity, so the zero and empty
-cases are included. -/
+/-- The single-module coefficient square before direct image. -/
 theorem picardResidueCoefficientSquare
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

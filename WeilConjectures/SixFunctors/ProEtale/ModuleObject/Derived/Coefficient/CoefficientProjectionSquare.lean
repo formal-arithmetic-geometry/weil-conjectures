@@ -302,10 +302,9 @@ private theorem push_eq_mate_pull_inv
     (e : r' ⋙ S' ≅ S ⋙ r) :
     Adjunction.pushHomOfComapIso a b e =
       (mateEquiv c d (TwoSquare.mk _ _ _ _
-        (Adjunction.pullIsoOfComapIso a b c d e).inv)).natTrans := by
+        (Adjunction.pullIsoOfComapIso a b c d e).inv)) := by
   have h := iterated_mateEquiv_conjugateEquiv_symm c d b a
     (TwoSquare.mk _ _ _ _ e.inv)
-  apply (TwoSquare.equivNatTrans _ _ _ _).symm.injective
   apply (mateEquiv c d).symm.injective
   change (mateEquiv c d).symm ((mateEquiv a b).symm (.mk _ _ _ _ e.inv)) =
     (mateEquiv c d).symm
@@ -326,7 +325,6 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- The comparison specializes four large derived adjunctions.
 private theorem path_conjugate :
     conjugateEquiv
@@ -355,9 +353,7 @@ attribute [local irreducible]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option synthInstance.maxHeartbeats 200000 in
 -- The statement shares geometric and scalar derived tensor instances.
-set_option maxHeartbeats 800000 in
 -- The categorical square specializes large derived adjunctions.
 /-- The specified scalar push mate and pull comparison commute with the actual projection
 morphism, on ordinary unbounded derived module-object categories.
@@ -450,7 +446,7 @@ theorem coefficientProjectionSquare
     exact (Iso.eq_inv_comp (α.app (((derivedTensor R Y.left).obj A).obj B))).2 h.symm
   have hm : derivedPushHom a f.left =
       (mateEquiv (derivedUpperStarLowerStarAdjunction R f.left)
-        (derivedUpperStarLowerStarAdjunction S f.left) (TwoSquare.mk _ _ _ _ α.hom)).natTrans := by
+        (derivedUpperStarLowerStarAdjunction S f.left) (TwoSquare.mk _ _ _ _ α.hom)) := by
     exact push_eq_mate_pull_inv
       (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X.left))
       (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y.left))

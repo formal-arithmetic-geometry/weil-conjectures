@@ -40,8 +40,6 @@ private theorem counit_factorization
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
--- Elaborating the pinned derived functor data requires additional heartbeats.
 /-- Normalize the pinned derived counit at a homotopy representative.
 Source: Stacks Project, Tag 08HY, and `exists_schemeDerivedAdjunction`.
 (blueprint: lem-pc-open-pinned-counit-unit).

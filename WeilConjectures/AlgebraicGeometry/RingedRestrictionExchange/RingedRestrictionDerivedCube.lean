@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.StrictTowerRingedSquare.ProEtaleRingedS
 
 /-! # The derived exchange equation of a ringed restriction cube
 
-Source: Stacks Project, Tags 03CB, 09A5, 05S7 and 0E47.
+## References
+
+* Stacks Project, Tags 03CB, 09A5, 05S7 and 0E47
 -/
 
 @[expose] public noncomputable section
@@ -156,10 +158,10 @@ private theorem normalized_mate_cube
     (E : B)
     (e : R ⋙ G ⟶ H ⋙ S) (e' : R' ⋙ G' ⟶ H' ⋙ S')
     (mF : R ⋙ a ⟶ b ⋙ R') (mK : S ⋙ c ⟶ d ⋙ S')
-    (he : (mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)).natTrans = e)
-    (he' : (mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')).natTrans = e')
-    (hF : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ pF.inv)).natTrans = mF)
-    (hK : (mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ pK.inv)).natTrans = mK) :
+    (he : (mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)) = e)
+    (he' : (mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')) = e')
+    (hF : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ pF.inv)) = mF)
+    (hK : (mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ pK.inv)) = mK) :
     c.map (e.app E) ≫ mK.app (H.obj E) ≫ S'.map (pH.hom.app E) =
       pG.hom.app (R.obj E) ≫ G'.map (mF.app E) ≫ e'.app (b.obj E) := by
   have h := exchangeMate_cube adj adjK adj' adjK' a b c d pF pG pH pK θ θ' hc E
@@ -168,14 +170,14 @@ private theorem normalized_mate_cube
 private theorem exchange_as_mate (r : StrictTowerRingedSquare sq) :
     (mateEquiv (proEtaleRingDerivedAdjunction f r.RY r.RX r.cf)
       (proEtaleRingDerivedAdjunction f' r.RY' r.RX' r.cf')
-      (TwoSquare.mk _ _ _ _ (pullSquare r).hom)).natTrans = exchange r := by
+      (TwoSquare.mk _ _ _ _ (pullSquare r).hom)) = exchange r := by
   unfold exchange proEtaleAmbientRingedExchange pullSquare
   rfl
 
 private theorem cube_source_mate (r : StrictTowerRingedSquare sq) (C : OpenCube r j) :
     (mateEquiv (proEtaleRingDerivedAdjunction f r.RY r.RX r.cf)
       (proEtaleRingDerivedAdjunction C.fU C.localRings.RY C.localRings.RX C.localRings.cf)
-      (TwoSquare.mk _ _ _ _ (pullSquare C.sourceFace).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (pullSquare C.sourceFace).hom)) =
         exchange C.sourceFace := by
   simpa only [OpenCube.sourceFace] using exchange_as_mate C.sourceFace
 
@@ -183,7 +185,7 @@ private theorem cube_target_mate (r : StrictTowerRingedSquare sq) (C : OpenCube 
     (mateEquiv (proEtaleRingDerivedAdjunction f' r.RY' r.RX' r.cf')
       (proEtaleRingDerivedAdjunction C.fU' C.localRings.RY' C.localRings.RX'
         C.localRings.cf')
-      (TwoSquare.mk _ _ _ _ (pullSquare C.targetFace).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (pullSquare C.targetFace).hom)) =
         exchange C.targetFace := by
   simpa only [OpenCube.targetFace] using exchange_as_mate C.targetFace
 
@@ -258,28 +260,28 @@ private theorem cube_data_coherent (r : StrictTowerRingedSquare sq)
 private theorem cube_data_global_mate (r : StrictTowerRingedSquare sq)
     (C : OpenCube r j) :
     (mateEquiv (cube_data r C).globalAdj (cube_data r C).targetAdj
-      (TwoSquare.mk _ _ _ _ (cube_data r C).globalSquare.hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (cube_data r C).globalSquare.hom)) =
         (cube_data r C).globalExchange := by
   simpa only [cube_data] using exchange_as_mate r
 
 private theorem cube_data_local_mate (r : StrictTowerRingedSquare sq)
     (C : OpenCube r j) :
     (mateEquiv (cube_data r C).localAdj (cube_data r C).localTargetAdj
-      (TwoSquare.mk _ _ _ _ (cube_data r C).localSquare.hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (cube_data r C).localSquare.hom)) =
         (cube_data r C).localExchange := by
   simpa only [cube_data] using exchange_as_mate C.localRings
 
 private theorem cube_data_source_mate (r : StrictTowerRingedSquare sq)
     (C : OpenCube r j) :
     (mateEquiv (cube_data r C).globalAdj (cube_data r C).localAdj
-      (TwoSquare.mk _ _ _ _ (cube_data r C).sourceSquare.hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (cube_data r C).sourceSquare.hom)) =
         (cube_data r C).sourceExchange := by
   simpa only [cube_data] using cube_source_mate r C
 
 private theorem cube_data_target_mate (r : StrictTowerRingedSquare sq)
     (C : OpenCube r j) :
     (mateEquiv (cube_data r C).targetAdj (cube_data r C).localTargetAdj
-      (TwoSquare.mk _ _ _ _ (cube_data r C).targetSquare.hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (cube_data r C).targetSquare.hom)) =
         (cube_data r C).targetExchange := by
   simpa only [cube_data] using cube_target_mate r C
 
@@ -296,19 +298,19 @@ private theorem typed_cube_exchange_comm (r : StrictTowerRingedSquare sq)
         (D.upperSquare).hom.app ((verticalPull r).mapDerivedCategory.obj M))
     (hglobal :
     (mateEquiv D.globalAdj D.targetAdj
-      (TwoSquare.mk _ _ _ _ D.globalSquare.hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ D.globalSquare.hom)) =
         D.globalExchange)
     (hlocal :
     (mateEquiv D.localAdj D.localTargetAdj
-      (TwoSquare.mk _ _ _ _ D.localSquare.hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ D.localSquare.hom)) =
         D.localExchange)
     (hsource :
     (mateEquiv D.globalAdj D.localAdj
-      (TwoSquare.mk _ _ _ _ D.sourceSquare.hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ D.sourceSquare.hom)) =
         D.sourceExchange)
     (htarget :
     (mateEquiv D.targetAdj D.localTargetAdj
-      (TwoSquare.mk _ _ _ _ D.targetSquare.hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ D.targetSquare.hom)) =
         D.targetExchange)
     (K : DerivedCategory (proEtaleRingModules X r.RX)) :
     (basePull C.targetFace).mapDerivedCategory.map ((D.globalExchange).app K) ≫
@@ -373,17 +375,7 @@ private theorem cube_data_exchange_comm (r : StrictTowerRingedSquare sq)
     (cube_data_global_mate r C) (cube_data_local_mate r C)
     (cube_data_source_mate r C) (cube_data_target_mate r C) K
 
-/-- The six-face inverse-image cube yields the equation of derived exchange mates.
-Source: Stacks Project, Tags 03CB, 09A5, 05S7 and 0E47; step 7 of
-lem-sf-ringed-restriction-exchange-open-descent.
-(blueprint: lem-sf-ringed-restriction-derived-cube).
-Proof: localize restriction_pullback_cube by mapDerivedCategory_exactCube.
-The ambientSquare_localization equations identify all six localized faces with
-canonical derived comparisons. Give the comparisons and four adjunctions their
-shared-vertex types in TypedDerivedCube. Apply exchangeMate_cube with the four
-side comparisons inverted, first with this data abstract. Substitute cube_data;
-the defining equations of the four exchange mates then give the displayed
-identity. There is no openness, boundedness or nonemptiness assumption. -/
+/-- The six-face inverse-image cube yields the equation of derived exchange mates. -/
 theorem restriction_exchange_cube (r : StrictTowerRingedSquare sq)
     (C : OpenCube r j)
     (K : DerivedCategory (proEtaleRingModules X r.RX)) :

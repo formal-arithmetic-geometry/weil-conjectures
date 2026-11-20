@@ -214,11 +214,18 @@ import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-! Inverse-image preservation of good completed integral models.
 
-The source is the inverse-image part of the proof of
-`scalar_completed_preserves_models` (blueprint:
-`lem-weil-isomorphism-scalar-completed-preserves-models`).  The statement is
-separate because the independent site and coefficient universes require the
-ringed-topos K-flat pullback argument for the sectionwise inverse-image model.
+This is the inverse-image part of `scalar_completed_preserves_models`.
+
+## Implementation details
+
+The independent site and coefficient universes require a ringed-topos K-flat pullback argument
+for the sectionwise inverse-image model.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03D2
+* Cohomology on Sites, Tag 0DEP
+* Stacks Project, Tags 0DEN, 0DEP, 08FC and 09A5
 -/
 
 @[expose] public noncomputable section
@@ -242,20 +249,7 @@ private theorem postcompose_cocontinuous
   exact (E.toAdjunction.isCocontinuous_iff_coverPreserving _ _).2 e.2.2.2.2.some
 
 /-- Sectionwise inverse image with an invertible coefficient identification preserves
-flat module sheaves.
-
-Source: Stacks Project, Tags 08FC and 05VD and the flatness clause of
-`lem-pod-sectionwise-flat-kflat` .
-
-Proof: postcomposition by the scheme isomorphism is a site equivalence whose
-inverse preserves coverings, so pulling back a covering sieve gives a covering.
-For a finite relation in the image module, send its coefficients through c inverse
-and apply the local equational criterion to the resulting relation in the original
-flat module. Pull back its covering sieve and send the factorization coefficients
-through c. The inverse identities prove the section factorization equations, and
-naturality, additivity and multiplicativity of c prove the zero coefficient sums.
-The converse local equational criterion proves flatness. Empty relations are
-included. -/
+flat module sheaves. -/
 private theorem sectionwise_preservesFlat
     {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{max u (t + 1)} X.ProEt] [EssentiallySmall.{max u (t + 1)} Y.ProEt]
@@ -327,7 +321,6 @@ private theorem sectionwise_preservesFlat
     simpa only [hn] using h
 
 /-- The explicit algebraic presentation of sectionwise inverse image.
-Source: Stacks Project, Modules on Sites, Tag 03D2; Cohomology on Sites, Tag 0DEP.
 The ring identification is induced by `c`, and the underlying module identification
 is the identity. The scalar graph follows by cancelling `c` with its inverse. -/
 private noncomputable def sectionwiseAlgebraicLift
@@ -403,16 +396,7 @@ private noncomputable def sectionwiseAlgebraicLift
     exact h _ x
 
 /-- Sectionwise inverse image with an invertible coefficient identification preserves
-K-flat complexes for the independent-coefficient tensor predicate.
-
-Source: Stacks Project, Tag 06YN and the K-flatness part of the tensor argument in
-`lem-pod-sectionwise-flat-kflat` .
-
-Proof: the inverse reindexing functor is an exact equivalence and preserves the
-colimits forming total tensor complexes. The sectionwise tensor comparison is
-natural in both variables and respects the signed differential. For an acyclic
-complex on the target site, transport it by the inverse, apply K-flatness, and
-transport the resulting acyclic total tensor complex back. -/
+K-flat complexes for the independent-coefficient tensor predicate. -/
 private theorem sectionwise_preservesKFlat
     {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{max u (t + 1)} X.ProEt] [EssentiallySmall.{max u (t + 1)} Y.ProEt]
@@ -470,24 +454,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/-- The sectionwise inverse image sends every good representative to a good one.
-Source: the inverse-image step of `lem-weil-isomorphism-scalar-completed-preserves-models`,
-using the sectionwise inverse-image equivalence, K-flatness via points and the local
-equational criterion for flatness (Stacks Tags 0DEN, 0DEP, 08FC and 09A5).  The proof
-transports the K-flat independent-coefficient condition and each flat term along the exact
-equivalence; the coefficient map is the prescribed completed limit isomorphism, so no
-arbitrary module or coefficient object is selected.
-(blueprint: new-k3-isomorphism-scalar-completed-inverse-good).
-
-Proof: Lift the prescribed completed coefficient isomorphism through the fully faithful
-forgetful functor from commutative ring sheaves; its image is the given map, so the module
-functor is `inverseComplex`. Present the sectionwise inverse image as an algebraic inverse
-image whose module identification is the identity. The inverse image on set sheaves is an
-equivalence, hence a geometric morphism, and the pro-etale topos has a conservative family
-of points; K-flatness via points gives the K-flat clause. Each flat term stays flat by the
-local equational criterion, transporting relations along the coefficient isomorphism and
-covering sieves along the cocontinuous site equivalence. Unfold
-`integralOperationsGoodComplex` to combine both clauses. -/
+/-- The sectionwise inverse image sends every good representative to a good one. -/
 theorem inverseImageIntegralModules_preserves_good
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :
     integralOperationsGoodComplex l E X

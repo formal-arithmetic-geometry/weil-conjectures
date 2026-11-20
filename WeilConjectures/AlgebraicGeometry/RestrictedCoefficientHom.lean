@@ -32,7 +32,7 @@ private abbrev scalarRestriction :=
 set_option backward.isDefEq.respectTransparency false in
 private def sourceScalar (U : C) (b : B.obj.obj (op U)) :
     End ((PresheafOfModules.restrictOver R.obj U).obj
-      ((scalarRestriction φ).obj M).val) where
+      ((scalarRestriction φ).obj M).val) := End.of {
   app W := ModuleCat.ofHom
     { toFun (m : M.val.obj (op W.unop.left)) := B.obj.map W.unop.hom.op b • m
       map_add' m n := by
@@ -60,12 +60,12 @@ private def sourceScalar (U : C) (b : B.obj.obj (op U)) :
     rw [← op_comp, Over.w] at h
     exact congrArg (fun a ↦
       @SMul.smul _ _ (M.val.obj (op W'.unop.left)).isModule.toSMul a
-        (M.val.map g.unop.left.op m)) h.symm
+        (M.val.map g.unop.left.op m)) h.symm }
 
 private def coefficientHomSmul (U : C) (b : B.obj.obj (op U))
     (f : (PresheafOfModules.restrictOver R.obj U).obj ((scalarRestriction φ).obj M).val ⟶
       (PresheafOfModules.restrictOver R.obj U).obj N.val) :=
-  sourceScalar φ M U b ≫ f
+  (sourceScalar φ M U b).asHom ≫ f
 
 set_option backward.isDefEq.respectTransparency false in
 @[instance_reducible]

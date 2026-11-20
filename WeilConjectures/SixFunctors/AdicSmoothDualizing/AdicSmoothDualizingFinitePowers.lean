@@ -66,7 +66,7 @@ set_option linter.unusedVariables false in
 /-- The canonical finite tensor presentation, with its full normalization stored
 in its type, is uniquely determined.
 Source: the corollary's ordered Tate powers
-(blueprint: cor-pur-adic-and-rational-smooth-dualizing-complexes).
+(blueprint: corollary-dualizing-complex-smooth-scheme--1).
 Proof: construct the comparison by induction from the zero-shift unitor using
 exactly the four normalized factors. HEq fixes each factor, so induction proves
 uniqueness of the comparison. The normalization proof is unique by proof irrelevance. -/
@@ -78,7 +78,7 @@ theorem existsUnique_etalePowerPresentation (P : PurityFiniteSetting.{u}) (T : S
 
 /-- The canonical ordered-tensor family selected by its uniquely determining recursion.
 Source: the corollary's finite Tate presentation
-(blueprint: cor-pur-adic-and-rational-smooth-dualizing-complexes). -/
+(blueprint: corollary-dualizing-complex-smooth-scheme--1). -/
 def etalePowerComparison (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
     (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))) :
     (d : ℕ) → P.diagonalTwistEtale T d ≅ (etaleSingle P T d)⟦2 * (d : ℤ)⟧ :=

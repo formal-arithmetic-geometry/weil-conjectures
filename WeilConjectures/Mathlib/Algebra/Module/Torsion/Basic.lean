@@ -214,9 +214,9 @@ theorem exists_basis_torsionBy (D : Type*) [AddCommGroup D] (ℓ : ℕ) [Fact �
     rfl
   exact ⟨e, fun i ↦ (Submodule.mem_torsionBy_iff _ _).1 (b i).2, he, he'⟩
 
-/-- Blueprint `lem-sc-divisible-group-structure`: The torsion of a divisible group.
+/-- Blueprint `proposition-integral-tate-module--1`: The torsion of a divisible group.
 
-This is also the blueprint lemma `lem-sc-divisible-group-structure`.
+This is also the blueprint lemma `proposition-integral-tate-module--1`.
 
 Let `D` be a divisible abelian group, let `ℓ` be a prime and suppose that the `ℓ`-torsion of
 `D` is finite of order `ℓ ^ r`. Then for every `n` the `ℓ ^ n`-torsion of `D` is isomorphic
@@ -319,7 +319,7 @@ theorem nonempty_addEquiv_torsionBy_mul_prod (D : Type*) [AddCommGroup D] {a b :
         rw [smul_add, smul_smul, smul_smul, mul_comm (a : ℤ) v, mul_smul v, hy, smul_zero,
           zero_add, mul_comm, ← hz']
 
-/-- The Chinese remainder step of blueprint `lem-sc-ntorsion-etale`.
+/-- The Chinese remainder step of blueprint `proposition-multiplication-n--2`.
 
 Let `D` be a divisible abelian group and suppose that for every prime `ℓ` dividing `n ≠ 0` the
 `ℓ`-torsion of `D` has order `ℓ ^ r`. Then the `n`-torsion of `D` is isomorphic to
@@ -361,7 +361,7 @@ variable {G : Type*} [AddCommGroup G]
 `G` on which multiplication by `n` is surjective. Then there is a short exact sequence
 `0 → G[n] / Λ[n] → (G / Λ)[n] → Λ / nΛ → 0`, whose second map sends the class of `g` with
 `n • g ∈ Λ` to the class of `n • g`.
-(blueprint: `lem-sc-divisible-quotient-torsion`) -/
+(blueprint: `proposition-cohomology-smooth-affine-curve--3`) -/
 theorem exists_exact_torsionBy_quotient (Λ : AddSubgroup G) (n : ℤ)
     (hG : Function.Surjective (zsmulAddGroupHom (α := G) n)) :
     ∃ (α : G[n] ⧸ Λ.addSubgroupOf G[n] →+ (G ⧸ Λ)[n])

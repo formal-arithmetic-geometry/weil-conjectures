@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Equality of maps with finite free source near a stalk
 
-Source: lem-pc-perfect-locus, finite germ calculation.
+Source: lemma-coherent-base-change-invertible-sheaves--3, finite germ calculation.
 (blueprint: lem-pc-finite-free-stalk-map-eq-shrink)
 -/
 

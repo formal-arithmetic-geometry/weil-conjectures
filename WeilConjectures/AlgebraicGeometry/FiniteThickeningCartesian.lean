@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.AlgebraicGeometry.Thickening
 import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeThickening
 import WeilConjectures.AlgebraicGeometry.ThickeningIntegral

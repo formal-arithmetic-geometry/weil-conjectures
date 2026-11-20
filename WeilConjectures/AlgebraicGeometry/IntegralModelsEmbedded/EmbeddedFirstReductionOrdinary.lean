@@ -217,7 +217,12 @@ import all WeilConjectures.AlgebraicGeometry.Integral.Models.IntegralModelsEmbed
 import all WeilConjectures.CategoryTheory.SixFunctors.InternalSectionScalarAdjunctionSupplement
 import WeilConjectures.AlgebraicGeometry.IntegralModelsEmbedded.EmbeddedFiniteScalarIsIso
 
-/-! # Ordinary first reduction square -/
+/-! # Ordinary first reduction square
+
+## References
+
+* Stacks Tags 093M, 03ET and 00YV
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -316,7 +321,7 @@ private def smallExtensionIso (X : Scheme.{u})
   let b := SheafOfModules.RingedTensor.tensorAdjunction
     (IntegralModelsStacks.smallMap X f)
   let β := smallRestrictionIso X f
-  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom)).natTrans
+  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom))
   have : IsIso α := InternalAbelianSheafModule.inverseMate_isIso a b β
   exact (asIso α).symm
 
@@ -462,37 +467,8 @@ private theorem first_reduction_square
   exact ((upperStarFromPoint X).map_comp _ _).symm.trans
     (((upperStarFromPoint X).congr_map hp).trans ((upperStarFromPoint X).map_comp _ _))
 
-set_option maxHeartbeats 1600000 in
--- Specializing the reconstructed coefficient diagrams requires extra definitional checks.
 attribute [-instance] integralModel_coefficientMonObj in
-/-- Ordinary reduction commutes with restriction of the actual embedded coefficient map.
-
-Source: integral-models proof, first paragraph (1), the common uniformizer quotient;
-Stacks Tags 093M, 03ET and 00YV.
-(blueprint: lem-sfb-embedded-first-reduction-ordinary).
-
-Proof: write R for constant integral coefficients, B for continuous integral
-coefficients, S for the constant first residue ring, and T for the continuous first
-residue ring. The constant-function map e : S -> T is an isomorphism because the
-residue ring is finite and discrete. The actual quotient maps satisfy e q = p phi:
-this is the equality on constant sections induced by the quotient ring homomorphism,
-and sheafification and inverse image preserve it. Locally, q and p are surjective,
-and their kernels are respectively pi R and pi B. Indeed the discrete quotient is
-locally liftable to integer constants, and a continuous function to the finite
-residue ring is locally constant; its zero fiber is precisely the ideal generated
-by pi. These assertions are preserved by the exact inverse image from the point.
-
-For a B-module M define S tensor_R M -> T tensor_B M by
-s tensor m |-> e(s) tensor m. Its inverse is local: first identify T with S, then
-send 1 tensor m to 1 tensor m in S tensor_R M. To check B-balancing, locally lift
-the residue of b in B to a in R. Since b - phi(a) is in pi B, multiplication by
-b on S tensor_R M agrees with multiplication by the residue of a. Thus the local
-inverse respects b tensor m = 1 tensor bm. Different lifts differ by pi R and
-produce the same tensor. The maps therefore glue after sheafification, are inverse
-on local pure tensors, and commute with every map of M. Scalar extension along e
-identifies S-modules with T-modules. Associativity of scalar extension gives the
-stated natural isomorphism. No resolution or K-flatness is involved. Empty covers,
-the zero module and unboundedness cause no additional condition. -/
+/-- Ordinary reduction commutes with restriction of the actual embedded coefficient map. -/
 theorem embeddedFirstReductionOrdinary
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)
@@ -521,8 +497,14 @@ theorem embeddedFirstReductionOrdinary
       integralModelsEmbedded_scalar_square ℓ E π hπ X,
       integralModelsEmbedded_residue_square ℓ E π X,
       integralModelsEmbedded_reduction_square ℓ E π hπ X⟩
-  obtain ⟨i⟩ := smallQuotientComparisonIso X φ q e p
-    (first_reduction_square ℓ E π X) hd.1 hd.2
+  -- Fix the comparison's type before checking its sectionwise hypotheses.
+  have hi : Nonempty (Mod.comap φ ⋙ Mod.extendScalars (q ≫ e) ≅
+      Mod.extendScalars p) := by
+    apply smallQuotientComparisonIso X φ q e p
+    · exact first_reduction_square ℓ E π X
+    · exact hd.1
+    · exact hd.2
+  obtain ⟨i⟩ := hi
   exact ⟨Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft (Mod.comap φ) (Mod.extendScalarsComp q e).symm ≪≫ i⟩
 

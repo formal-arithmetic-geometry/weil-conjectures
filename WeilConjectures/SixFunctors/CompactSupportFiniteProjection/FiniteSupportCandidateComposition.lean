@@ -98,7 +98,7 @@ theorem finiteSupportCandidateCompositionCore_app
   rfl
 
 /-- Conjugate the canonical origin compositor to the three specified candidates.
-Source: thm-sf-comp-composition, compactification independence
+Source: proposition-composition-base-change-rf-shriek--1, compactification independence
 (blueprint: lem-sf-finite-support-candidate-composition). -/
 @[irreducible] def finiteSupportCandidateComposition (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -646,7 +646,7 @@ private theorem coherence_pro_grouped (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The candidate compositor evaluates to the recorded pro-etale compositor on an
 etale input. Source: compactSupportSiteCoherence, comparison/composition calculation,
-and thm-sf-comp-composition
+and proposition-composition-base-change-rf-shriek--1
 (blueprint: lem-sf-finite-support-candidate-composition).
 
 Proof: precompose each towerCandidateComparison with the etale-origin equivalence.

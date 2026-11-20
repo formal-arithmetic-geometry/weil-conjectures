@@ -38,10 +38,6 @@ import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 
 /-!
 # Uniform classical pro-étale cohomological bounds
-
-Source: blueprint `sec-six-functors-basics/sk-prop-pe-unbounded-classical`, detail
-`sk-prop-pe-unbounded-classical-bounds.md` and its proof
-(blueprint: det-pe-unbounded-classical-bounds).
 -/
 
 universe u
@@ -53,14 +49,10 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The three uniform bounds in `det-pe-unbounded-classical-bounds` for a morphism `f` and an
-étale sheaf `F` on its source; `hasClassicalUniformBounds` proves them for torsion `F` and
-finite-type schemes over a finite or algebraically closed field. The dimensions are the
-topological Krull dimensions, with the empty scheme assigned dimension zero, and the bound
-is `2 * d + 1`.
-Source: blueprint `sec-six-functors-basics/sk-prop-pe-unbounded-classical`, node
-`det-pe-unbounded-classical-bounds` (blueprint: det-pe-unbounded-classical-bounds).
--/
+/-- Uniform cohomological bounds for a morphism `f : S ⟶ R` and an étale sheaf `F` on `S`:
+with `d` the topological Krull dimension of `S` (zero if `S` is empty), the pro-étale
+cohomology of `F` on pro-affine-étale objects over `S` and over `R` (after base change), and
+the derived étale pushforward `R f_* F`, vanish in degrees above `2 * d + 1`. -/
 def HasClassicalUniformBounds {S R : Scheme.{u}} (f : S ⟶ R)
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) : Prop :=
   let dS : ℕ := (topologicalKrullDim S).unbotD 0 |>.toNat
@@ -254,72 +246,8 @@ private theorem uniform_bounds_of_field_cd {k : Type u} [Field k]
   · exact Etale.isZero_higherDirectImage_of_affineEtale_cd g c (fun w ↦ stages w) G hG
 
 /-- Uniform vanishing for torsion étale sheaves over finite-type schemes over a finite or
-algebraically closed field.  This is the three-part statement of
-`det-pe-unbounded-classical-bounds`; the final conjunct repeats it with source `Y` and an
-arbitrary finite-type map from `Y` to a finite-type `k`-scheme.
-
-Source: blueprint `sec-six-functors-basics/sk-prop-pe-unbounded-classical`, node
-`det-pe-unbounded-classical-bounds` (blueprint: det-pe-unbounded-classical-bounds).
-Proof (the eleven steps of the node, with their dependency nodes):
-1. Use `lem-exc-abelian-sheaves-gmodules` and `lem-exc-field-sections-stalk-invariants`
-   to identify derived field sections with derived invariants. The additive equivalence
-   preserves injectives by the Hom lifting criterion. Apply `det-base-field-cd-cochains`
-   (1); torsion sections give torsion stalks.
-2. For finite k, `det-base-field-cd-galois-group` identifies its absolute Galois group
-   with the profinite integers. Every element of a discrete torsion module has finite
-   orbit, generating a finite stable subgroup. Finite sums give a directed union of
-   finite stable modules; use `det-base-field-cd-cochains` (2).
-3. A finite stable module has exponent e and action through a finite cyclic quotient.
-   Coordinate kernels are cofinal, so `det-base-field-cd-cochains` (3) computes its
-   cohomology by finite quotients. Inflation to the quotient multiplied by e is zero
-   in degrees at least two by `det-base-field-cd-inflation`. Every colimit class dies.
-   For algebraically closed k use `lem-sf-separably-closed-torsion-cd`. Thus the
-   all-torsion field dimension of `def-sc-etale-torsion-cd` is at most one.
-4. `lem-kun-dimension-finite-type` gives finite dimension, agreeing with
-   `def-kun-dimension` and `def-kun-topological-krull-dimension`; nonempty schemes have
-   a length-zero chain by `lem-sc-scheme-sober`. Finite-type schemes over k are
-   Noetherian by `lem-weil-pbc-finite-type-over-noetherian`. Each affine etale stage
-   is finite type over k. For the products with X, finite affine covers over affine
-   opens of Y give a finite affine cover using
-   `lem-weil-pbc-fibre-product-affine-spectra`. The projection to X is etale by
-   `lem-weil-pbc-etale-base-change-finite-limits`, hence finite type over k. The stages
-   are qcqs: use `lem-weil-pbc-noetherian-scheme-closed-subsets-minimal` for compact
-   opens and `lem-weil-pbc-locally-noetherian-quasi-separated`.
-5. `lem-sc-etale-local-dimension` identifies the local dimensions of etale source
-   and target. `lem-sc-scheme-stalk-dimension-generalization-chains`, generic points
-   from `lem-sc-scheme-sober`, and the topological dimension definition bound every
-   finite irreducible chain in an etale stage by the source dimension. This also
-   applies to the product stages by etale base change; no separatedness is needed.
-6. `thm-sc-finite-type-torsion-cd` with field bound one gives the common stage bound
-   `2 * d + 1`. Empty stages have zero sections by the empty covering axiom.
-   `lem-weil-pbc-inverse-image-torsion` keeps the pulled-back coefficients torsion.
-7. `lem-sc-cd-affine-limit` gives the bound for U. Apply
-   `lem-weil-pbc-comparison-pullback` to the etale pullback of G, and
-   `lem-weil-proetale-weakly-etale-localization` to identify restriction to U.
-   The inverse-image Kan colimit is evaluation: (W, graph) is initial before
-   taking the opposite category. `sk-prop-sf-comparison` for the discrete ring
-   of integers and the degree-zero complex identifies pro-etale and etale cohomology.
-8. The fibre-product universal property identifies X times V with the limit of
-   X times the V_i. Transition maps are affine by base change, using
-   `lem-weil-pbc-affine-morphism-permanence`. These stages are qcqs with the bound
-   from step 6, so `lem-sc-cd-affine-limit` gives the same bound on the product.
-9. Its etale pullback coefficient is torsion. Use
-   `lem-weil-pbc-comparison-pullback` and `sk-prop-sf-comparison` on this scheme,
-   again only for G in degree zero, to obtain clause 2.
-10. `lem-weil-pbc-higher-direct-image-sheafified-presheaf` identifies the higher
-    image with the sheafified cohomology presheaf. Use
-    `lem-weil-pbc-cohomology-over-object-localization`,
-    `lem-weil-pbc-etale-site-localization-open`, and
-    `lem-weil-pbc-etale-inverse-image-restriction` to identify coefficients.
-    On affine etale target objects steps 4--6 give zero above the bound.
-    Every etale object has an affine open covering, so this presheaf is locally
-    zero. By the universal property in `def-weil-pbc-sheafification` its
-    sheafification is zero, proving clause 3.
-11. For empty X, all schemes in clauses 1--2 are empty, hence have zero sections
-    and cohomology; direct image out of the zero sheaf category is zero as well.
-    Thus the explicit empty bound one works. Repeat with source Y and an arbitrary
-    finite-type target and map to obtain the last conjunct (including the identity).
--/
+algebraically closed field: `HasClassicalUniformBounds g G` holds, and likewise for every
+torsion sheaf on `Y` and every finite-type map from `Y` to a finite-type `k`-scheme. -/
 theorem hasClassicalUniformBounds {k : Type u} [Field k]
     (hk : Finite k ∨ IsAlgClosed k)
     {X Y : Scheme.{u}}

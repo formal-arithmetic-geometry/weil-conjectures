@@ -64,7 +64,7 @@ theorem balancedAction_directImage_module
     (M : X.Modules) (hM : M.IsQuasicoherent)
     (rho : B →+* End M)
     (hscalar : ∀ a : A, rho (algebraMap A B a) =
-      M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a)) :
+      .of (M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a))) :
     let g := Spec.map (CommRingCat.ofHom (algebraMap A B))
     let Y := pullback f g
     let pi : Y ⟶ X := pullback.fst f g
@@ -76,7 +76,7 @@ theorem balancedAction_directImage_module
         (show X.sheaf ⟶ C from ⟨pi.c⟩))
     ∃ (G : SheafOfModules.{u} R) (e : M ≅ S.obj G),
       ∀ (b : B) (U : X.Opens) (x : M.val.obj (op U)),
-        (e.hom.val.app (op U)).hom ((rho b).val.app (op U) x) =
+        (e.hom.val.app (op U)).hom ((rho b).asHom.val.app (op U) x) =
           Y.presheaf.map (homOfLE (le_top (a := pi ⁻¹ᵁ U))).op
             (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b) •
               (show G.val.obj (op U) from (e.hom.val.app (op U)).hom x) := by
@@ -110,7 +110,7 @@ theorem balancedAction_directImage_module
   have hB' (U : X.Opens) (b : B) (x : M.val.obj (op U)) :
       sigma U (Y.presheaf.map (homOfLE (le_top (a := pi ⁻¹ᵁ U))).op
         (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b)) x =
-        (rho b).val.app (op U) x := by
+        (rho b).asHom.val.app (op U) x := by
     apply affine_section_ext M U
     intro V i
     change F.obj.map i.op (sigma U _ x) = _
@@ -126,9 +126,9 @@ theorem balancedAction_directImage_module
     change tau V (C.obj.map i.op (Y.presheaf.map
       (homOfLE (le_top (a := pi ⁻¹ᵁ U))).op
         (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b)))
-      (M.val.map i.op x) = M.val.map i.op ((rho b).val.app (op U) x)
+      (M.val.map i.op x) = M.val.map i.op ((rho b).asHom.val.app (op U) x)
     rw [hres, hB]
-    exact PresheafOfModules.naturality_apply (rho b).val i.op x
+    exact PresheafOfModules.naturality_apply (rho b).asHom.val i.op x
   let inst : ∀ U : X.Opensᵒᵖ, Module (R.obj.obj U) (F.obj.obj U) :=
     fun U => Module.compHom _ (sigma U.unop)
   let P : PresheafOfModules.{u} R.obj :=

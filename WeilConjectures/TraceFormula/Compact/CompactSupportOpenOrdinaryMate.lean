@@ -38,9 +38,9 @@ private theorem inverseMateFromUnit
     {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
     {G : A ⥤ C} {H : B ⥤ D} (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂)
     (δ : TwoSquare R₁ H G R₂) (e : L₁ ⋙ H ≅ G ⋙ L₂)
-    (hn : ∀ M, G.map (a.unit.app M) ≫ δ.natTrans.app (L₁.obj M) ≫
+    (hn : ∀ M, G.map (a.unit.app M) ≫ δ.app (L₁.obj M) ≫
       R₂.map (e.hom.app M) = b.unit.app (G.obj M)) :
-    ((mateEquiv a b).symm δ).natTrans = e.inv := by
+    ((mateEquiv a b).symm δ) = e.inv := by
   apply NatTrans.ext
   funext M
   apply (b.homEquiv _ _).injective
@@ -61,13 +61,13 @@ private theorem pastedInverse
     {G : A ⥤ D} {H : B ⥤ E} {K : C ⥤ F}
     (e₁ : L₁ ⋙ H ≅ G ⋙ L₂) (e₂ : L₃ ⋙ K ≅ H ⋙ L₄) :
     ((TwoSquare.mk G L₁ L₂ H e₁.inv) ≫ᵥ
-      (TwoSquare.mk H L₃ L₄ K e₂.inv)).natTrans =
+      (TwoSquare.mk H L₃ L₄ K e₂.inv)) =
       (Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft L₁ e₂ ≪≫
         (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight e₁ L₄ ≪≫
         Functor.associator _ _ _).inv := by
   apply NatTrans.ext
   funext M
-  simp only [TwoSquare.vComp, TwoSquare.mk, TwoSquare.natTrans,
+  simp only [TwoSquare.vComp, TwoSquare.mk,
     Functor.isoWhiskerRight, Functor.isoWhiskerLeft, Iso.trans_inv, Iso.symm_inv,
     NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
@@ -77,8 +77,8 @@ private theorem pastedInverse
 private theorem equivalenceMateIsIso
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     (e : A ≌ B) (f : C ≌ D) {G : A ⥤ C} {H : B ⥤ D}
-    (α : TwoSquare G e.functor f.functor H) [IsIso α.natTrans] :
-    IsIso (mateEquiv e.toAdjunction f.toAdjunction α).natTrans := by
+    (α : TwoSquare G e.functor f.functor H) [IsIso α] :
+    IsIso (mateEquiv e.toAdjunction f.toAdjunction α) := by
   dsimp only [mateEquiv, Equiv.coe_fn_mk]
   infer_instance
 
@@ -90,8 +90,8 @@ private theorem pastedMateIsIso
     {G : A ⥤ D} {H : B ⥤ E} {K : C ⥤ F}
     (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) (c : L₃ ⊣ R₃) (d : L₄ ⊣ R₄)
     (α : TwoSquare G L₁ L₂ H) (β : TwoSquare H L₃ L₄ K)
-    [IsIso (mateEquiv a b α).natTrans] [IsIso (mateEquiv c d β).natTrans] :
-    IsIso (mateEquiv (a.comp c) (b.comp d) (α ≫ᵥ β)).natTrans := by
+    [IsIso (mateEquiv a b α)] [IsIso (mateEquiv c d β)] :
+    IsIso (mateEquiv (a.comp c) (b.comp d) (α ≫ᵥ β)) := by
   rw [mateEquiv_hcomp]
   dsimp only [TwoSquare.hComp]
   infer_instance
@@ -129,7 +129,7 @@ theorem compactSupportOpenOrdinaryMate
           (SheafOfModules.localizedSystemAdjunction.{t+1, t, max u (t+1)}
             (integralCoefficientCommRingSheaf l E Z n)
             (IntegralOpenReduction.openObject j)))).symm
-        (TwoSquare.mk _ _ _ _ d.hom)).natTrans =
+        (TwoSquare.mk _ _ _ _ d.hom)) =
           (IntegralOpenReduction.extensionEvaluation l E j o n).inv := by
   let a := o.openSystems.ordinaryAdjunction
   let b := SheafOfModules.localizedSystemAdjunction.{t+1, t, max u (t+1)}
@@ -137,29 +137,29 @@ theorem compactSupportOpenOrdinaryMate
   let α := TwoSquare.mk _ _ _ _ (o.transportEvaluation n).inv
   let β := TwoSquare.mk _ _ _ _ (o.openSystems.extensionEvaluation n).inv
   let δ := TwoSquare.mk _ _ _ _ (o.openSystems.restrictionEvaluation n).hom
-  have hβ : ((mateEquiv a b).symm δ).natTrans = β.natTrans :=
+  have hβ : ((mateEquiv a b).symm δ) = β :=
     inverseMateFromUnit a b δ (o.openSystems.extensionEvaluation n)
       (o.openSystems.unit_evaluation n)
-  have hβ' : (mateEquiv a b β).natTrans = δ.natTrans := by
+  have hβ' : (mateEquiv a b β) = δ := by
     have hsq : (mateEquiv a b).symm δ = β := hβ
-    exact congrArg TwoSquare.natTrans
+    exact
       (((Equiv.symm_apply_eq (mateEquiv a b)).mp hsq).symm)
-  have iα : IsIso (mateEquiv o.systems.toAdjunction (o.finite n).toAdjunction α).natTrans :=
+  have iα : IsIso (mateEquiv o.systems.toAdjunction (o.finite n).toAdjunction α) :=
     equivalenceMateIsIso o.systems (o.finite n) α
-  have iβ : IsIso (mateEquiv a b β).natTrans := by
+  have iβ : IsIso (mateEquiv a b β) := by
     rw [hβ']
     exact inferInstanceAs (IsIso (o.openSystems.restrictionEvaluation n).hom)
   let γ := α ≫ᵥ β
   have iγ : IsIso (mateEquiv (o.systems.toAdjunction.comp a)
-      ((o.finite n).toAdjunction.comp b) γ).natTrans :=
+      ((o.finite n).toAdjunction.comp b) γ) :=
     pastedMateIsIso o.systems.toAdjunction (o.finite n).toAdjunction a b α β
   let d := asIso (mateEquiv (o.systems.toAdjunction.comp a)
-    ((o.finite n).toAdjunction.comp b) γ).natTrans
+    ((o.finite n).toAdjunction.comp b) γ)
   refine ⟨d, ?_⟩
   change ((mateEquiv (o.systems.toAdjunction.comp a)
     ((o.finite n).toAdjunction.comp b)).symm
     (mateEquiv (o.systems.toAdjunction.comp a)
-      ((o.finite n).toAdjunction.comp b) γ)).natTrans = _
+      ((o.finite n).toAdjunction.comp b) γ)) = _
   rw [Equiv.symm_apply_apply]
   exact pastedInverse (o.transportEvaluation n) (o.openSystems.extensionEvaluation n)
 

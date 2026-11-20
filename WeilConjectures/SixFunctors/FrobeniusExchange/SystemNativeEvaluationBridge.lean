@@ -107,7 +107,7 @@ theorem pullEvaluationMate_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
           Functor.isoWhiskerLeft (ProEtale.VaryingRing.eval (compactSupportSystemLevel l E)
             (compactSupportSystemQuotient l E) X n)
           (compactSupportDirectModel f (Padic.coefficientExtensionRing l E (n + 1)))).hom)
-        ).natTrans =
+        ) =
     Functor.whiskerLeft (ProEtale.VaryingRing.eval (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) Y n)
         (openSquarePullbackModel (Padic.coefficientExtensionRing l E (n + 1)) f).inv ≫
@@ -134,13 +134,12 @@ theorem pullEvaluationMate_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   rw [nativeFinitePullIso_eq_openSquarePullbackModel] at hs
   have hs' : conjugateEquiv b b' e.hom = s.inv := congrArg Iso.inv hs
   have hm : (mateEquiv a b'
-      (TwoSquare.mk G _ _ H (ProEtale.VaryingRing.moduleEvalG R q f n).inv)).natTrans =
+      (TwoSquare.mk G _ _ H (ProEtale.VaryingRing.moduleEvalG R q f n).inv)) =
         (ProEtale.VaryingRing.moduleEvalP R q f n).hom :=
     varyingModuleEvalMate R q f n
   have key : mateEquiv a b t = TwoSquare.mk _ _ _ _
       (ProEtale.VaryingRing.moduleEvalP R q f n ≪≫ Functor.isoWhiskerLeft H s).hom := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     have ht := IntegralSystemRealization.NativeComparison.transport_mates a a b b'
       (Iso.refl _) e.symm t
       (TwoSquare.mk G _ _ H (ProEtale.VaryingRing.moduleEvalG R q f n).inv)
@@ -154,7 +153,7 @@ theorem pullEvaluationMate_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     rw [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
       ← ht]
     exact eq_comp_inv_hom _ (s.app (H.obj M))
-  exact congrArg TwoSquare.natTrans (((mateEquiv a b).symm_apply_apply t).symm.trans
+  exact (((mateEquiv a b).symm_apply_apply t).symm.trans
     (congrArg (mateEquiv a b).symm key)).symm
 
 /-- Exact localization of `pullEvaluationMate_eq`: any ordinary pullback evaluation
@@ -249,7 +248,7 @@ theorem directEvaluationMate_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
         (compactSupportSystemQuotient l E) f)
       (sfIntrinsicConstantModuleAdjunction f
         (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ σ.hom)).natTrans.app M =
+      (TwoSquare.mk _ _ _ _ σ.hom)).app M =
     (ProEtale.VaryingRing.evalP (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) f n ≪≫
       Functor.isoWhiskerLeft _ (Functor.rightDerivedFunctorNatIso

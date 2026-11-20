@@ -22,7 +22,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
 -- Expanding the units and reassociating naturality equations needs extra elaboration fuel.
 /-- The scheme-level composition calculation for two commuting triangles.
 

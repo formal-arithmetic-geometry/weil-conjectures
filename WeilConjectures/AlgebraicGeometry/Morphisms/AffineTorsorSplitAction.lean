@@ -13,8 +13,11 @@ import Mathlib.AlgebraicGeometry.Properties
 
 /-! # The action on labels of a pulled-back splitting
 
-Source: Stacks Project, Tag 03SF, finite Galois covers and their permutation sets.
-(blueprint: lem-sbc-affine-torsor-split-label-laws)
+## References
+
+* Stacks Project, Tag 03SF, finite Galois covers and their permutation sets
+* Stacks Project, Tag 03SF (connected cover)
+* Stacks Project, Tag 03SF, the equivalence with finite permutation sets
 -/
 
 @[expose] public section
@@ -24,9 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Restrict the contravariant automorphism induced by `ρ ζ` to D(h).
-The element h comes from H and is therefore fixed by every H-algebra homomorphism.
-Source: Stacks Project, Tag 03SF.
-(blueprint: lem-sbc-affine-torsor-split-label-laws) -/
+The element h comes from H and is therefore fixed by every H-algebra homomorphism. -/
 noncomputable def fixedPunctureDeck (H : CommRingCat.{u}) (C : Type u)
     [CommRing C] [Algebra H C] (h : H) (G : Type u) [Group G]
     (ρ : G → C →ₐ[H] C) (ζ : G) :
@@ -41,9 +42,7 @@ noncomputable def fixedPunctureDeck (H : CommRingCat.{u}) (C : Type u)
       PrimeSpectrum.basicOpen ((ρ ζ) (algebraMap H C h))
     rw [AlgHom.commutes])
 
-/-- Restriction of a deck map preserves the structural map to Spec H.
-Source: Stacks Project, Tag 03SF.
-(blueprint: lem-sbc-affine-torsor-split-label-laws) -/
+/-- Restriction of a deck map preserves the structural map to Spec H. -/
 theorem fixedPunctureDeck_base (H : CommRingCat.{u}) (C : Type u)
     [CommRing C] [Algebra H C] (h : H) (G : Type u) [Group G]
     (ρ : G → C →ₐ[H] C) (ζ : G) :
@@ -82,9 +81,7 @@ private theorem puncture_deck_mul (H : CommRingCat.{u}) (C : Type u)
     Hom.resLE_comp_ι_assoc, ← Spec.map_comp, hρmul]
   congr 2
 
-/-- The zero prime is an actual point of D(h), since h is nonzero.
-Source: Stacks Project, Tag 03SF (connected cover).
-(blueprint: lem-sbc-affine-torsor-split-label-laws) -/
+/-- The zero prime is an actual point of D(h), since h is nonzero. -/
 def fixedPunctureGeneric (C : Type u) [CommRing C] [IsDomain C]
     (h : C) (hne : h ≠ 0) :
     Scheme.Opens.toScheme (X := Spec (CommRingCat.of C)) (PrimeSpectrum.basicOpen h) :=
@@ -92,17 +89,13 @@ def fixedPunctureGeneric (C : Type u) [CommRing C] [IsDomain C]
     change {x : PrimeSpectrum C // x ∈ PrimeSpectrum.basicOpen h}
     exact ⟨⊥, by simpa using hne⟩
 
-/-- Pull the i-th split section back along k, retaining the map to Y.
-Source: Stacks Project, Tag 03SF.
-(blueprint: lem-sbc-affine-torsor-split-label-laws) -/
+/-- Pull the i-th split section back along k, retaining the map to Y. -/
 noncomputable def fixedSplitSection {Y S T V : Scheme.{u}} (p : Y ⟶ S) (t : T ⟶ S)
     (k : V ⟶ T) (d : ℕ) (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
     (i : Fin d) : V ⟶ Y :=
   k ≫ Sigma.ι (fun _ : Fin d ↦ T) i ≫ δ.inv ≫ pullback.fst p t
 
-/-- The pulled-back split sections lie over k.
-Source: Stacks Project, Tag 03SF.
-(blueprint: lem-sbc-affine-torsor-split-label-laws) -/
+/-- The pulled-back split sections lie over k. -/
 theorem fixedSplitSection_base {Y S T V : Scheme.{u}} (p : Y ⟶ S) (t : T ⟶ S)
     (k : V ⟶ T) (d : ℕ) (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
     (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t)
@@ -114,9 +107,7 @@ theorem fixedSplitSection_base {Y S T V : Scheme.{u}} (p : Y ⟶ S) (t : T ⟶ S
   simp
 
 /-- Read the label of a section in the splitting at the specified point.
-This is an evaluation, not an arbitrary choice of an orbit or a component.
-Source: Stacks Project, Tag 03SF.
-(blueprint: lem-sbc-affine-torsor-split-label-laws) -/
+This is an evaluation, not an arbitrary choice of an orbit or a component. -/
 noncomputable def fixedSplitLabel {Y S T V : Scheme.{u}} (p : Y ⟶ S) (t : T ⟶ S)
     (k : V ⟶ T) (d : ℕ) (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
     (s : V ⟶ Y) (hs : s ≫ p = k ≫ t) (x : V) : Fin d :=
@@ -186,9 +177,7 @@ private theorem split_section_injective {Y S T V : Scheme.{u}}
   exact congrArg Sigma.fst
     ((sigmaι_eq_iff (fun _ : Fin d ↦ T) _ _ _ _).mp (congrArg (fun a ↦ a x) he'))
 
-/-- The label obtained by precomposing a split section with the deck map of `ρ ζ`.
-Source: Stacks Project, Tag 03SF.
-(blueprint: lem-sbc-affine-torsor-split-label-laws) -/
+/-- The label obtained by precomposing a split section with the deck map of `ρ ζ`. -/
 noncomputable def fixedPunctureLabel
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
@@ -213,21 +202,7 @@ noncomputable def fixedPunctureLabel
         (fixedPunctureDeck_base H C (ι g) G ρ ζ))
     (fixedPunctureGeneric C (algebraMap H C (ι g)) hne)
 
-/-- The explicit label evaluation satisfies the identity and cocycle laws.
-
-Source: Stacks Project, Tag 03SF, the equivalence with finite permutation sets.
-Proof: the puncture of Spec C is nonempty and irreducible, since C is a domain
-and the inverted element is nonzero. Pull the splitting δ back along k. A section
-of this split cover lands in exactly one open-and-closed summand: its inverse images
-partition a connected nonempty scheme. Its projection to the base is the identity,
-so it is precisely the corresponding split section. Its label is the index evaluated
-at the zero prime, exactly the formula in fixedPunctureLabel. Deck maps preserve the
-structural map because ρ consists of H-algebra maps. Restriction and contravariance
-of Spec give v(1)=id and v(ab)=v(a) followed by v(b), using ρ of the group elements themselves.
-Precomposing split sections therefore gives label(1,i)=i and
-label(ab,i)=label(a,label(b,i)). Equality of labels follows from disjointness of the
-summands. For d=0 both laws have no i to quantify over.
-(blueprint: lem-sbc-affine-torsor-split-label-laws) -/
+/-- The explicit label evaluation satisfies the identity and cocycle laws. -/
 theorem fixedPunctureLabel_laws
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
@@ -271,9 +246,7 @@ theorem fixedPunctureLabel_laws
       Category.assoc]
 
 /-- The concrete descent action; its underlying function is label evaluation.
-The law theorem supplies proofs only; no component data are chosen from it.
-Source: Stacks Project, Tag 03SF.
-(blueprint: lem-sbc-affine-torsor-split-label-laws) -/
+The law theorem supplies proofs only; no component data are chosen from it. -/
 noncomputable def fixedPunctureDescentAction
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

@@ -16,7 +16,7 @@ import WeilConjectures.Compactification.BoundaryRefinement
 # The integral Brown exceptional adjoint
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-int-brown,
-sk-prop-int-brown-adjoint.md and its proof (blueprint: det-prop-int-brown-adjoint).
+sk-prop-int-brown-adjoint.md and its proof (blueprint: theorem-existence-exceptional-inverse-image).
 
 The left adjoint restricts the recorded compactification composite to Loc(Dbc).
 Identification with the general Loc(Dctf) adjoint is expressed in the common ambient
@@ -42,7 +42,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 proofs change neither its objects nor its morphisms. This is the functor in
 `integralLocalizingCompactSupport`, with its codomain restricted as well.
 Source: blueprint sk-prop-int-brown-adjoint, displayed left adjoint
-(blueprint: det-prop-int-brown-adjoint). -/
+(blueprint: theorem-existence-exceptional-inverse-image). -/
 def lowerShriek (c : Compactification f)
     (h : ∀ K, localizing Λ X K → localizing Λ Y ((image Λ c).obj K)) :
     (localizing Λ X).FullSubcategory ⥤ (localizing Λ Y).FullSubcategory :=

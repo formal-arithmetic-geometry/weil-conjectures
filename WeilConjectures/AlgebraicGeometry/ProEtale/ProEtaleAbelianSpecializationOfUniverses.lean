@@ -40,8 +40,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 
 /-! # Abelian specialization with independently sized coefficients
 
-Source: Stacks Project, Tag 09AC, lemma-compute-i-star.
-(blueprint: lem-u9-proetale-abelian-specialization-universes).
+## References
+
+* Stacks Project, Tag 09AC, first reduction, and Tag 01IH for closed immersions into affine schemes
+* Stacks Project, Tag 09AC, with the fully faithful adjunction of Tag 09BK
+* Stacks Project, Tag 09BL, (2), and Tag 09AC, localization and unit identification
+* Stacks Project, Tag 09AC, and Tag 09BL (1), (2)
 -/
 
 @[expose] public section
@@ -180,28 +184,7 @@ private theorem quotient_specialization {T Y : Scheme.{t}} [IsAffine Y]
 
 /-- Affine coordinates transport projectivity of evaluation and the closed-fibre
 specialization condition. The ideal is the actual kernel of the global-sections
-map of the closed base change, rather than an ideal selected from existence.
-
-Source: Stacks Project, Tag 09AC, first reduction, and Tag 01IH for closed
-immersions into affine schemes. The single-cover lifting criterion is
-`AffineProEt.isLocallySurjective_iff_of_isSheaf` in the source library.
-(blueprint: lem-u9-proetale-abelian-specialization-universes).
-
-Proof. An epimorphism of sheaves on the affine basis lifts any given section
-along a single surjective affine cover. Compose that cover with the affine
-coordinate isomorphism and the structure map to X. Subcanonical Yoneda sends
-this cover to an epimorphism of set sheaves on X.ProEt: maps agreeing after
-the cover agree by separatedness. The hypothesis at V lifts the identity
-section to a section of the cover. Transport it to affine coordinates and
-restrict the local lift along it. Naturality and the section equation give
-a preimage of the original section.
-The closed base change has a surjective global-sections map. Its quotient by
-the displayed kernel maps to the coordinate ring by the first isomorphism
-theorem. Composing its spectrum map with the canonical toSpecΓ map gives a
-map from the closed fibre to the quotient spectrum, commuting with the
-projection by naturality. Push the assumed specialization forward along
-V.left.isoSpec.hom and lift its closed endpoint to the pullback along the
-identity. All constructions include empty schemes and the zero ring. -/
+map of the closed base change. -/
 private theorem specialization_affine_coordinates
     {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]
@@ -416,23 +399,7 @@ private theorem precomposition_unit_surjective {S T : Scheme.{t}}
     ((congrArg (fun a ↦ G.obj.map a.op s) hσ).trans (G.obj.map_id_apply _ s))
 
 /-- The affine closed-site counit is invertible at a weakly contractible object
-whose points specialize into the closed fibre.
-
-Source: Stacks Project, Tag 09AC, lemma-compute-i-star, with the fully faithful
-adjunction of Tag 09BK
-(blueprint: lem-u9-proetale-abelian-specialization-universes).
-
-Proof. Full faithfulness makes the base change of the counit invertible. Hence
-its image contains the closed fibre. Its underlying morphism is weakly etale,
-therefore flat; lifting generalizations shows that its image contains every point
-by the specialization hypothesis. This surjective affine morphism is a cover.
-Subcanonical Yoneda takes it to an epimorphism of set sheaves: separatedness
-cancels maps agreeing after that cover. Weak contractibility lifts the identity
-to a section. Base change takes that section to the inverse of the base-changed
-counit. The adjunction Hom bijection then identifies the other composite with
-the identity. Thus the section is a two-sided inverse. Empty schemes and the
-zero ring require no exception: surjectivity is vacuous and the same Yoneda
-argument applies. -/
+whose points specialize into the closed fibre. -/
 private theorem isIso_closedSiteCounit_of_specialization
     (A : Type t) [CommRing A] (I : Ideal A)
     (adj : closedSiteLift A I ⊣ closedSiteBaseChange A I)
@@ -645,7 +612,7 @@ private theorem isIso_affineUnit_sections
     Functor.sheafPushforwardContinuousIso t.symm D (topology X) (ProEt.topology Z) ≪≫
     (Functor.sheafPushforwardContinuousComp r (toProEt Z) D
       (topology X) (topology Z) (ProEt.topology Z)).symm
-  let alpha := ((mateEquiv (proEtaleSheafAdjunction i D) a).symm beta.hom).natTrans
+  let alpha := ((mateEquiv (proEtaleSheafAdjunction i D) a).symm beta.hom)
   have : IsIso alpha := isIso_inverseMate_of_equivalences (proEtaleSheafAdjunction i D) a beta
   have hp := projectiveEvaluation_closedBaseChange A I B hB adj hε
   have hη : IsIso ((a.unit.app (RX.obj F)).hom.app (op B)) := by
@@ -725,7 +692,7 @@ private noncomputable def siteMate (sq : CommSq g' j' j g'') :=
     (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j'
       (inferInstance : WeaklyEtale j') trivial)
     (TwoSquare.mk _ _ _ _ (MorphismProperty.Over.pullbackMapComparison
-      (inferInstance : WeaklyEtale j) (inferInstance : WeaklyEtale j') sq))).natTrans
+      (inferInstance : WeaklyEtale j) (inferInstance : WeaklyEtale j') sq)))
 private theorem siteMate_eq (sq : CommSq g' j' j g'') :
     siteMate sq = (MorphismProperty.Over.pullbackComp g' j).inv ≫
       (MorphismProperty.Over.pullbackCongr (P := @WeaklyEtale) (Q := ⊤) sq.w).hom ≫
@@ -744,13 +711,13 @@ private lemma isIso_mate_localRestrictionBaseChangeMap (sq : CommSq g' j' j g'')
     IsIso ((mateEquiv
       (localizationRestrictionLowerStarAdjunction A j' inferInstance)
       (localizationRestrictionLowerStarAdjunction A j inferInstance)
-      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans) := by
+      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq)))) := by
   have hs : IsIso (siteMate sq) := by rw [siteMate_eq]; infer_instance
   have h (F : Sheaf (ProEt.topology U') A) (b : Z.ProEt) :
       ((mateEquiv
         (localizationRestrictionLowerStarAdjunction A j' inferInstance)
         (localizationRestrictionLowerStarAdjunction A j inferInstance)
-        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans.app F).hom.app
+        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).app F).hom.app
           (op b) = F.obj.map ((siteMate sq).app b).op := by
     simp only [Functor.comp_obj, mateEquiv, localizationRestrictionLowerStarAdjunction,
       Adjunction.sheafPushforwardContinuous, Functor.id_obj,
@@ -771,11 +738,11 @@ private lemma isIso_mate_localRestrictionBaseChangeMap (sq : CommSq g' j' j g'')
   have hF (F : Sheaf (ProEt.topology U') A) : IsIso ((mateEquiv
       (localizationRestrictionLowerStarAdjunction A j' inferInstance)
       (localizationRestrictionLowerStarAdjunction A j inferInstance)
-      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans.app F) := by
+      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).app F) := by
     have hB : ∀ b : Z.ProEtᵒᵖ, IsIso (((mateEquiv
         (localizationRestrictionLowerStarAdjunction A j' inferInstance)
         (localizationRestrictionLowerStarAdjunction A j inferInstance)
-        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans.app F).hom.app b) :=
+        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).app F).hom.app b) :=
       fun b ↦ by
         have hi : IsIso (F.obj.map ((siteMate sq).app b.unop).op) := inferInstance
         exact (h F b.unop).symm ▸ hi
@@ -783,7 +750,7 @@ private lemma isIso_mate_localRestrictionBaseChangeMap (sq : CommSq g' j' j g'')
     change IsIso (((mateEquiv
       (localizationRestrictionLowerStarAdjunction A j' inferInstance)
       (localizationRestrictionLowerStarAdjunction A j inferInstance)
-      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans.app F).hom)
+      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).app F).hom)
     exact NatIso.isIso_of_isIso_app _
   exact NatIso.isIso_of_isIso_app _
 
@@ -793,7 +760,7 @@ variable [HasColimitsOfSize.{t + 1, t + 1} A]
 private theorem isIso_inverseMate_localRestrictionBaseChange (sq : CommSq g' j' j g'') :
     IsIso (((mateEquiv (proEtaleSheafAdjunction g'' A)
       (proEtaleSheafAdjunction g' A)).symm
-        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans) := by
+        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq)))) := by
   let ai := proEtaleSheafAdjunction g'' A
   let ak := proEtaleSheafAdjunction g' A
   let aj := localizationRestrictionLowerStarAdjunction A j inferInstance
@@ -803,15 +770,15 @@ private theorem isIso_inverseMate_localRestrictionBaseChange (sq : CommSq g' j' 
   have hm : mateEquiv ai ak alpha = beta := (mateEquiv ai ak).apply_symm_apply beta
   have h := iterated_mateEquiv_conjugateEquiv ai ak aj ab alpha
   rw [hm] at h
-  have hc : IsIso (conjugateEquiv (ai.comp ab) (aj.comp ak) alpha.natTrans) := by
+  have hc : IsIso (conjugateEquiv (ai.comp ab) (aj.comp ak) alpha) := by
     rw [← h]
     exact isIso_mate_localRestrictionBaseChangeMap A sq
   have := hc
   let e := (conjugateIsoEquiv (ai.comp ab) (aj.comp ak)).symm
-    (asIso (conjugateEquiv (ai.comp ab) (aj.comp ak) alpha.natTrans))
-  have he : e.hom = alpha.natTrans :=
-    (conjugateEquiv (ai.comp ab) (aj.comp ak)).symm_apply_apply alpha.natTrans
-  change IsIso alpha.natTrans
+    (asIso (conjugateEquiv (ai.comp ab) (aj.comp ak) alpha))
+  have he : e.hom = alpha :=
+    (conjugateEquiv (ai.comp ab) (aj.comp ak)).symm_apply_apply alpha
+  change IsIso alpha
   rw [← he]
   infer_instance
 
@@ -828,8 +795,8 @@ private theorem isIso_unit_sections_of_localization
   let R := proEtaleSheafDirectImage g' A
   let beta := TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A hsq.toCommSq)
   let alpha := (mateEquiv ai ak).symm beta
-  have : IsIso alpha.natTrans := isIso_inverseMate_localRestrictionBaseChange A hsq.toCommSq
-  have : IsIso beta.natTrans := isIso_localRestrictionBaseChangeMap_of_isPullback A hsq
+  have : IsIso alpha := isIso_inverseMate_localRestrictionBaseChange A hsq.toCommSq
+  have : IsIso beta := isIso_localRestrictionBaseChangeMap_of_isPullback A hsq
   have hu := unit_mateEquiv_symm ai ak beta F
   have hu' := congrArg (fun f ↦ f.hom.app (op W)) hu
   change ((ai.unit.app F).hom.app
@@ -894,35 +861,9 @@ private theorem affine_closed_square {X Z : Scheme.{t}}
   · simp
   · simp
 
-/-- Once the affine lift's counit at the identity object is invertible,
-projective evaluation gives the actual inverse-image unit isomorphism on V.
-No specialization assumption is made in this comparison lemma.
-
-Source: Stacks Project, Tag 09BL, lemma-closed-immersion-affines-apply (1),(2),
-and Tag 09AC, localization and unit identification
-(blueprint: lem-u9-proetale-abelian-specialization-universes).
-
-Proof. First transfer projective evaluation from B to r(B). A locally surjective
-map admits a lift over a single affine surjective cover of r(B). The lift functor
-v sends this cover to a covering of v(r(B)), which is isomorphic to B by the
-counit. Projectivity and subcanonical Yoneda split this cover. Full faithfulness
-of v brings the section back, giving the required lift at r(B).
-
-Precomposition by v, followed by sheafification, is left adjoint to restriction
-along r. Its unit at B is restriction along the counit followed by the
-sheafification unit at r(B). The set-valued sheafification lemmas make the latter
-bijective; sheafification commutes with forgetting abelian groups, so it is an
-isomorphism of abelian groups. The affine-basis restriction equivalences and the
-inverse-mate unit identity identify this with the actual quotient-immersion unit.
-
-For a general affine V, the first isomorphism theorem constructs the canonical
-quotient-coordinate isomorphism for its closed base change. Restriction along
-weakly etale localization commutes with this cartesian base-change square. On
-the sites the rotated comparison is a composite of pullback-composition
-isomorphisms. Applying a sheaf and conjugating adjunctions makes the inverse
-mate invertible. The mate unit identity transfers the quotient unit to V, and
-pointwise invertibility gives the claimed natural isomorphism. No nonemptiness
-assumption is used; the same arguments apply to the empty scheme. -/
+/-- For affine `V`, if evaluation at the identity object is projective and the counit of the
+affine closed-site lift adjunction is invertible there, then the inverse-image unit is an
+isomorphism on sections over `V`. -/
 private theorem isIso_proEtaleUnit_sections_of_closedSiteCounit
     {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]
@@ -966,30 +907,7 @@ private theorem isIso_proEtaleUnit_sections_of_closedSiteCounit
 end IndependentSpecialization
 
 /-- The actual abelian inverse-image unit is bijective on an affine specialization
-neighbourhood, for any chosen left adjoint and independently sized coefficients.
-
-Source: Stacks Project, Tag 09AC, lemma-compute-i-star, and Tag 09BL (1),(2).
-(blueprint: lem-u9-proetale-abelian-specialization-universes).
-
-Proof: localize the pro-etale sites at V and its closed fibre, retaining the unit
-under the cartesian base-change comparison. On affine ind-etale bases use the
-fully faithful closed-lift adjunction v adjoint to r. The base change of its
-counit at V is invertible, so its image contains the closed fibre. Flat going-down
-and the specialization assumption make the counit surjective. Subcanonical
-Yoneda in Type(max u (t+1)) and projectivity at V split that cover. Full
-faithfulness and the adjunction show that the section is also a left inverse.
-Covers of r(V) lift through v to covers of v(r(V)), hence of V, and split there;
-full faithfulness descends these splittings to r(V). Therefore sheafification of
-precomposition by v does not change sections at r(V): equality is tested on
-covers lifted through v; local lifts of sections glue on finite coproduct covers
-and are pulled back along a splitting. Forgetting abelian groups commutes with
-sheafification, so the same map is invertible for abelian sheaves. The affine
-basis equivalences identify this map, preceded by restriction along the counit,
-with the inverse-image unit. Transport back through localization and compare
-the supplied adjunction using unit_leftAdjointUniq_hom_app. Perform all sheaf
-constructions in max u (t+1); site object and morphism sizes are at most t+1.
-The empty affine has singleton sections by the empty-cover axiom, so the same
-argument includes it. This assertion concerns no ring or scalar extension. -/
+neighbourhood, for any chosen left adjoint and independently sized coefficients. -/
 theorem proEtale_abelian_unit_bijective_of_specialization
     {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]

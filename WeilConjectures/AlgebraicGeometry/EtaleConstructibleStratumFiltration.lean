@@ -58,7 +58,7 @@ as the closed complement of its open prefix inside the next prefix. Irreducible 
 give connected strata; Noetherianity makes the locally closed images constructible
 (lem-weil-pbc-noetherian-scheme-closed-subsets-minimal). For empty X take no strata.
 2. Restrict K to each stratum. Exact inverse image commutes with cohomology by
-prop-weil-pbc-inverse-image-modules-exact and
+situation-conventions and
 lem-weil-pbc-exact-functor-complex-cohomology. Image containment gives finite lisse
 cohomology by lemma-constructible-immersion-independence. Pullback preserves the Tor
 interval, as in lem-coef-etale-domain-pullback-calculus.
@@ -67,7 +67,7 @@ This gives the etale local bounded finite-projective coefficient models; it does
 not assert that the individual cohomology modules are projective.
 4. Apply the unbounded open-closed triangle lem-fin-module-open-closed-triangle inside
 each prefix open, then apply exact open extension by zero to X; exact derived functors
-preserve distinguished triangles by lem-weil-pbc-exact-functor-derived-factorization.
+preserve distinguished triangles by situation-conventions.
 The vertices are identified by lem-weil-pbc-inverse-image-composition and uniqueness of
 left adjoints for lem-weil-pbc-extension-by-zero-adjunction.
 5. The empty open gives the zero object; the total open gives K since the counit of

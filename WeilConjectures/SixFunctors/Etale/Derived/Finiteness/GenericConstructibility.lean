@@ -16,8 +16,8 @@ Let `X` be a Noetherian scheme and `F` an étale sheaf of `Λ`-modules on `X`. I
 integral closed subscheme `i : Z ⟶ X` the restriction of `F` to some nonempty open of `Z` is
 constructible, then `F` is constructible
 (`AlgebraicGeometry.Scheme.isConstructibleSheaf_of_forall_isIntegral`). This is the Noetherian
-induction closing the proof of `thm-fin-projective-curve-constant`: the generic statement over
-integral bases spreads to the whole base.
+induction closing the proof of `proposition-proper-direct-image-finite-coefficients`: the generic
+statement over integral bases spreads to the whole base.
 
 The induction runs over the closed subsets of `X`, each with a reduced closed subscheme
 structure. A nonempty reduced Noetherian scheme `Z` has a nonempty open `V` contained in one of

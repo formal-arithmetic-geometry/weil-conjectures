@@ -165,9 +165,10 @@ import WeilConjectures.Algebra.Homology.Site.SitePerfectModelRestrictionSuppleme
 
 /-! # Uniform bounds and finite reductions of stratified perfect models
 
-Source: Bhatt--Scholze, Lemma 6.6.10(1), Proposition 6.6.11, reverse implication;
-Stacks Tags 06YS, 06YT, 06YU and 093J.
-(blueprint: lem-weil-pbc-perfect-strata-uniform-reductions).
+## References
+
+* Bhatt--Scholze, Lemma 6.6.10(1), Proposition 6.6.11, reverse implication
+* Stacks Tags 06YS, 06YT, 06YU and 093J
 -/
 
 @[expose] public noncomputable section
@@ -340,35 +341,7 @@ private theorem uniform_bounds_of_local_vanishing
       ((SheafOfModules.toSheaf _).map (𝟙 (H t q))) ((SheafOfModules.toSheaf _).map 0)
 
 /-- Uniform bounds for K and all positive finite reductions, intrinsic constructibility,
-and finite constant models on every member of the original stratum covers.
-Source: Bhatt--Scholze, Lemma 6.6.10(1), Proposition 6.6.11, reverse implication;
-Stacks Tags 06YS, 06YT, 06YU and 093J
-(blueprint: lem-weil-pbc-perfect-strata-uniform-reductions).
-
-Proof: choose a bounded finite-projective representative on every original chart.
-The local reduction lemma computes the completed model by its K-flat constant
-complex, and every normalized finite reduction by its constant quotient tensor
-complex. Exact inverse image, slice restriction and constants commute with homology.
-The tensor terms are finite over the finite quotient ring, so their cycles and
-homology are finite sets. This gives local vanishing intervals and finite constant
-models on every original chart.
-
-Each stratum is Noetherian and hence quasi-compact. A covering sieve of its terminal
-object has a finite quasi-compact refinement, each member factoring through an
-original chart. Choose this refinement once, before the reduction index. The negative
-sum of the absolute lower bounds and the sum of the absolute upper bounds give one
-interval containing all selected intervals; an empty family gives [0,0]. Vanishing
-passes along the factoring maps, then descends along the covering sieve. Exact
-underlying-abelian inverse image and detection by the finite locally closed strata
-give global vanishing for K and every reduction. Scalar restriction leaves the
-underlying abelian sheaf unchanged, so normalized vanishing is also raw vanishing.
-
-For constructibility, finite constant models on the original covering sieve give
-relative finite lisseness on each stratum by the intrinsic coefficient criterion.
-The Noetherian finite stratification is a constructible stratification. The intrinsic
-coefficient constructibility equivalence then gives the conclusion directly, retaining
-the original covers and models. No completeness or compatible etale-origin witness
-is concluded. -/
+and finite constant models on every member of the original stratum covers. -/
 theorem perfect_strata_uniform_reductions
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

@@ -11,7 +11,7 @@ import WeilConjectures.PoincareDuality.Pod.Identity.PodIdentityRoosMap
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4 and 0941.
 -/
 
@@ -46,7 +46,7 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor integralOpera
 attribute [local implicit_reducible] integralOperationsTensorComplexFunctor
 
 /-- The strict tensor-tower identity determines the identity on its whole Roos complex.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
 (blueprint: lem-pod-identity-tensor-roos).
 
 Proof: the strict tensor-tower equation and functoriality identify the tower-map

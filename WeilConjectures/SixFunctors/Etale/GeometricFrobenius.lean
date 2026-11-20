@@ -92,8 +92,8 @@ commutes with the pullbacks along the geometric Galois Frobenii: the square
 commutes up to the isomorphism `φ̄_* ⋙ Fr_Y^* ≅ Fr_X^* ⋙ φ̄_*`, whose `hom` is the base change
 map `Fr_Y^* φ̄_* ⟶ φ̄_* Fr_X^*` of the square `Fr_X ≫ φ̄ = φ̄ ≫ Fr_Y`. -/
 noncomputable def Etale.lowerStarGeometricFiberMapCompFrobeniusIso :
-    (Scheme.Hom.geometricFiberMap φ h)_*[A] ⋙ (g.geometricGaloisFrobenius.hom)^*[A] ≅
-      (f.geometricGaloisFrobenius.hom)^*[A] ⋙ (Scheme.Hom.geometricFiberMap φ h)_*[A] :=
+    (Scheme.Hom.geometricFiberMap φ h)_*[A] ⋙ (g.geometricGaloisFrobenius.asIso.hom)^*[A] ≅
+      (f.geometricGaloisFrobenius.asIso.hom)^*[A] ⋙ (Scheme.Hom.geometricFiberMap φ h)_*[A] :=
   -- The Frobenii are isomorphisms, so the base change map is an isomorphism.
   have := Etale.isIso_baseChangeMap_of_isIso A (Scheme.Hom.commSq_geometricGaloisFrobenius φ h)
   asIso (Etale.baseChangeMap A (Scheme.Hom.commSq_geometricGaloisFrobenius φ h))
@@ -120,8 +120,8 @@ the square
 commutes up to the isomorphism `Rφ̄_* ⋙ D(Fr_Y^*) ≅ D(Fr_X^*) ⋙ Rφ̄_*`, the total right
 derived functor of the underived one. -/
 noncomputable def Etale.rightDerivedLowerStarGeometricFiberMapCompFrobeniusIso :
-    R((Scheme.Hom.geometricFiberMap φ h)_*[A]) ⋙ D((g.geometricGaloisFrobenius.hom)^*[A]) ≅
-      D((f.geometricGaloisFrobenius.hom)^*[A]) ⋙
+    R((Scheme.Hom.geometricFiberMap φ h)_*[A]) ⋙ D((g.geometricGaloisFrobenius.asIso.hom)^*[A]) ≅
+      D((f.geometricGaloisFrobenius.asIso.hom)^*[A]) ⋙
         R((Scheme.Hom.geometricFiberMap φ h)_*[A]) :=
   -- The pullbacks along the Frobenii are exact, so `D(Fr^*)` is their total right derived
   -- functor; they are equivalences, so they preserve K-injective complexes and the composition
@@ -154,8 +154,8 @@ commutes up to the isomorphism `φ̄_! ⋙ Fr_Y^* ≅ Fr_X^* ⋙ φ̄_!`. Its `h
 `φ̄_! Fr_X^* ⟶ Fr_Y^* φ̄_!` (`AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap`) of
 the square `Fr_X ≫ φ̄ = φ̄ ≫ Fr_Y`. -/
 noncomputable def Etale.openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso :
-    (Scheme.Hom.geometricFiberMap φ h)_!open[A] ⋙ (g.geometricGaloisFrobenius.hom)^*[A] ≅
-      (f.geometricGaloisFrobenius.hom)^*[A] ⋙ (Scheme.Hom.geometricFiberMap φ h)_!open[A] :=
+    (Scheme.Hom.geometricFiberMap φ h)_!open[A] ⋙ (g.geometricGaloisFrobenius.asIso.hom)^*[A] ≅
+      (f.geometricGaloisFrobenius.asIso.hom)^*[A] ⋙ (Scheme.Hom.geometricFiberMap φ h)_!open[A] :=
   -- The square is cartesian, so the base change map is an isomorphism.
   have := Etale.isIso_openImmersionLowerShriekBaseChangeMap A
     (Scheme.Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap φ h)
@@ -188,10 +188,10 @@ commutes, where `can` is `AlgebraicGeometry.Etale.openImmersionLowerShriekToLowe
 lemma Etale.openImmersionLowerShriekToLowerStar_geometricFiberMapCompFrobeniusIso :
     Functor.whiskerRight
         (Etale.openImmersionLowerShriekToLowerStar A (Scheme.Hom.geometricFiberMap φ h))
-        (g.geometricGaloisFrobenius.hom)^*[A] ≫
+        (g.geometricGaloisFrobenius.asIso.hom)^*[A] ≫
       (Etale.lowerStarGeometricFiberMapCompFrobeniusIso A φ h).hom =
     (Etale.openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso A φ h).hom ≫
-      Functor.whiskerLeft (f.geometricGaloisFrobenius.hom)^*[A]
+      Functor.whiskerLeft (f.geometricGaloisFrobenius.asIso.hom)^*[A]
         (Etale.openImmersionLowerShriekToLowerStar A (Scheme.Hom.geometricFiberMap φ h)) := by
   rw [← Etale.openImmersionLowerShriekBaseChangeMap_comp_baseChangeMap A
       (Scheme.Hom.commSq_geometricGaloisFrobenius φ h),

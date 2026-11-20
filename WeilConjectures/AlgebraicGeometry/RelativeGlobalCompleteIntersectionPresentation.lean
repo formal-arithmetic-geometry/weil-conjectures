@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersecti
 # The relative global complete intersection condition for specified equations
 
 Source: Stacks Project, Algebra, Definition 00SP
-(blueprint: def-weil-pbc-relative-global-complete-intersection).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 The ring-map notion is `Algebra.IsRelativeGlobalCompleteIntersection` in the imported module;
 this module supplies the specified-presentation notion in the same definition.
 -/
@@ -27,7 +27,7 @@ namespace Algebra
 nonempty fibre has dimension the number of variables minus the number of equations.
 The inequality prevents natural-number subtraction from admitting negative dimensions.
 Source: Stacks Project, Algebra, Definition 00SP
-(blueprint: def-weil-pbc-relative-global-complete-intersection). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 def IsRelativeGlobalCompleteIntersectionPresentation {R : Type u} [CommRing R]
     {n c : ℕ} (f : Fin c → MvPolynomial (Fin n) R) : Prop :=
   ∀ (p : Ideal R) [p.IsPrime],

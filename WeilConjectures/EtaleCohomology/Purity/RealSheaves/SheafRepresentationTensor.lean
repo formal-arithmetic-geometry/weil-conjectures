@@ -11,10 +11,10 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamental
 /-!
 # The lisse sheaf–representation equivalence is a tensor equivalence
 
-The lisse sheaf–representation equivalence (`prop-wf-weil-sheaf-representation-equivalence`,
-subsection `prop-wf-weil-sheaf-representation-equivalence`) between lisse Weil sheaves on the curve
+The lisse sheaf–representation equivalence (`definition-weil-representation--1`,
+subsection `definition-weil-representation--1`) between lisse Weil sheaves on the curve
 `C₀` and lisse representations of the Weil group `W(C₀)` is the functor `ℱ ↦ (ℱ_η̄, ρ_ℱ)`, the Weil
-fundamental representation (`def-wf-fundamental-representation`), and it is a tensor equivalence:
+fundamental representation (`situation-weil`), and it is a tensor equivalence:
 
 * the underlying representation of `e ℱ` is, naturally in `ℱ`, the Weil fundamental
   representation `ℱ ↦ (ℱ_t, ρ_ℱ)` on the stalk at the base point
@@ -50,16 +50,16 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K
   [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
 omit [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] in
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
-`prop-wf-weil-sheaf-representation-equivalence`): the lisse sheaf–representation equivalence is the
+/-- Blueprint `definition-weil-representation--1` (subsection
+`definition-weil-representation--1`): the lisse sheaf–representation equivalence is the
 tensor functor `ℱ ↦ (ℱ_η̄, ρ_ℱ)`.
 
 For a monodromy `M` of lisse sheaves on the geometric curve which is an equivalence at the base
-point `t` of the base point data `B` (`cor-galois-lisse-representations`), there is an
-equivalence `e` between lisse Weil sheaves on `C₀` and lisse representations of `W(C₀)` such
+point `t` of the base point data `B` (`proposition-lattices-representations-normal-scheme`), there
+is an equivalence `e` between lisse Weil sheaves on `C₀` and lisse representations of `W(C₀)` such
 that
 * (`η`) the representation `e ℱ` is, naturally in `ℱ`, the Weil fundamental representation
-  `(ℱ_t, ρ_ℱ)` of `def-wf-fundamental-representation`
+  `(ℱ_t, ρ_ℱ)` of `situation-weil`
   (`AlgebraicGeometry.WeilGroup.fundamentalRepFunctor`; up to the universe lift
   `Rep.uliftFunctor`, the stalks living in a larger universe);
 * (`τ`) `e` is compatible with tensor products: there is an isomorphism of bifunctors
@@ -157,8 +157,8 @@ theorem exists_equivalence_isLisse_tensor_of_lisseMonodromy
   exact ((TensorProduct.congr (f F) (f G)).apply_symm_apply
     (fundamentalRepTensorEquiv M D F G (f ((LisseWeilSheaf.tensor K l C).obj (F, G)) v))).symm
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
-`prop-wf-weil-sheaf-representation-equivalence`): the lisse sheaf–representation equivalence is the
+/-- Blueprint `definition-weil-representation--1` (subsection
+`definition-weil-representation--1`): the lisse sheaf–representation equivalence is the
 tensor functor `ℱ ↦ (ℱ_η̄, ρ_ℱ)`, for some monodromy `M` of lisse sheaves on the geometric curve and
 some base point data `B`; see
 `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_tensor_of_lisseMonodromy` for the properties

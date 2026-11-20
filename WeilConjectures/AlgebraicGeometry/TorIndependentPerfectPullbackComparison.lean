@@ -130,7 +130,7 @@ Proof (the node's three steps):
    A tensor-over-R B -> C. Its map is the model's localizedComparison.
 3. Restrict derived pullback to this neighbourhood by
    lem-pc-affine-derived-pullback-tensor-tilde. Its strictly perfect model is
-   termwise flat, so lem-pc-flat-complex-derived-pullback computes its derived
+   termwise flat, so lemma-coherent-base-change-invertible-sheaves--2 computes its derived
    pullback termwise. Apply lem-weil-pbc-module-stalk-pullback degreewise to
    identify the target with Q tensor-over-A C. The ring map to C is a
    localization by the affine description of the fibre product; exactness of

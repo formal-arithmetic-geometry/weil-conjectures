@@ -15,8 +15,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 /-!
 # The graded quotient induced by derived g
 
-Source: blueprint thm-sp-truncation-e2, steps 5--6; Stacks Tags 011R, 011S and 0AMJ.
-(blueprint: lem-sp-finite-page-graded-quotient)
+Source: blueprint lemma-uniform-bound-proper-direct-image--1, steps 5--6; Stacks Tags 011R, 011S and
+0AMJ. (blueprint: lem-sp-finite-page-graded-quotient)
 -/
 
 @[expose] public section
@@ -41,8 +41,8 @@ private theorem derivedDInclusion_kernel
   exact aux (p + 1) (q - 1) p q (by omega) (by omega)
 
 /-- Once the image lift is fixed, derived g induces the finite-page graded isomorphism.
-Source: blueprint thm-sp-truncation-e2, proof steps 5--6; Stacks Tags 011R, 011S and 0AMJ.
-(blueprint: lem-sp-finite-page-graded-quotient)
+Source: blueprint lemma-uniform-bound-proper-direct-image--1, proof steps 5--6; Stacks Tags 011R,
+011S and 0AMJ. (blueprint: lem-sp-finite-page-graded-quotient)
 
 Proof: Write R=max(p+3,q-a+2), r=R-2, u=p-r and v=q+r. The inclusion inc r is
 monomorphic and its image is the incoming r-fold alpha image, by induction on its

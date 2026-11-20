@@ -773,9 +773,9 @@ import all WeilConjectures.AlgebraicGeometry.IntegralCohomologicalAdicCriterion
 
 /-! # Integral local structure for continuous coefficient complexes
 
-Source: current blueprint, sec-proetale-coefficients,
-sk-prop-integral-local-structure, statement and proof
-(blueprint: sk-prop-integral-local-structure).
+Source: current blueprint, chap-The-pro-etale-site,
+proposition-local-structure-integral-constructible-complexes, statement and proof
+(blueprint: proposition-local-structure-integral-constructible-complexes).
 
 The point complex is bounded and termwise finite free over the continuous condensed
 integer ring. Its differentials are scalar matrices chosen before inverse image to a
@@ -793,8 +793,8 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- A derived complete integral complex with bounded constructible residue reduction
 has bounded finite free scalar models pro-etale locally on a finite stratification.
-Source: current blueprint sk-prop-integral-local-structure, statement and proof
-(blueprint: sk-prop-integral-local-structure).
+Source: current blueprint proposition-local-structure-integral-constructible-complexes, statement
+and proof (blueprint: proposition-local-structure-integral-constructible-complexes).
 
 Proof: transport `K` to the completed constant ring sheaf, where the completion and residue
 conditions become Stacks adic constructibility (`completion_transport`, `residue_transport`,

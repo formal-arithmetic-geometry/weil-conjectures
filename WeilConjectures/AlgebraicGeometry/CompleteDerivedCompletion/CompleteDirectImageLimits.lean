@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.Direct
 
 Source: literature/blueprint/latest/blueprint/sec-proper-base-change/
 sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.md
-(blueprint: prop-weil-pbc-direct-image-limits).
+(blueprint: proposition-proper-base-change-complete-integral--1).
 
 The reduction projection is the adjunction mate of the normalized cone pullback
 comparison. This specifies its finite-level projection-formula normalization, including
@@ -43,8 +43,8 @@ attribute [local instance] Limits.comp_preservesFiniteLimits
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The reduction/direct-image mate is invertible.
-Source: assertion (2) of prop-weil-pbc-direct-image-limits.
-(blueprint: prop-weil-pbc-direct-image-limits) -/
+Source: assertion (2) of proposition-proper-base-change-complete-integral--1.
+(blueprint: proposition-proper-base-change-complete-integral--1) -/
 @[instance] theorem pushReductionMap_isIso : IsIso (pushReductionMap l E f) := by
   have : ∀ K : DerivedCategory (AdicCompletion.Modules l E X),
       IsIso ((pushReductionMap l E f).app K) :=
@@ -60,7 +60,7 @@ compatible with the level projections through pushEvaluationMap. The projection 
 pushReductionMap, the mate of the summand-normalized cone comparison; it is a single
 natural transformation on derived towers. The displayed equality is exactly (3), before
 inverting the projection comparison on its right-hand side.
-Source: assertions (1)--(3) (blueprint: prop-weil-pbc-direct-image-limits).
+Source: assertions (1)--(3) (blueprint: proposition-proper-base-change-complete-integral--1).
 Proof: (1) is the derived constant-limit adjunction comparison from
 completeDerivedCompletion. Its conjugate construction is compatible with the counits,
 hence with the level projections after pushEvaluationMap. The Roos comparison of

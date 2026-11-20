@@ -18,15 +18,15 @@ Let `Λ` be a commutative condensed ring with `Λ_X` flat, `i : Z ⟶ X` a close
 quasi-compact open complement `j`. If `Hom(s, -[q])` commutes with filtered colimits of module
 objects over `Λ_Z` and `s` is bounded above, then so does `Hom(Ri_* s, -[q])` over `Λ_X`
 (`homCommutesWithFilteredColimits_rightDerivedLowerStar_of_isClosedImmersion`, blueprint
-`sk-lem-constructible-ext-continuity`, closed-support step via
-`sk-lem-formal-closed-support`).
+`lemma-continuity-ext-out-constructible-complex--1`, closed-support step via
+`lemma-sections-support-closed-subscheme`).
 
 Indeed `Hom(i_* s, B[q]) = Hom(s, (Ri^! B)[q])`
 (`ProEtale.CondensedRing.derivedLowerStarClosedUpperShriekAdjunction`),
 `Ri^! B = i^* RΓ_Z B` is concentrated in degrees `≥ 0`, and its cohomology commutes with filtered
 colimits: `RΓ_Z B` sits in the natural triangle `RΓ_Z B ⟶ B ⟶ Rj_* j^* B ⟶`, whose last two terms
 have this property
-(`sk-cor-pe-bounded-continuity`).
+(`corollary-continuity-cohomology`).
 -/
 
 @[expose] public section
@@ -129,9 +129,9 @@ lemma nonempty_isColimit_homologyFunctor_mapCocone_rightDerivedFunctor_closedUpp
     isColimitOfPreserves (i)^*⟦Λ⟧ h
   exact ⟨IsColimit.mapCoconeEquiv e.symm h'⟩
 
-/-- Blueprint `sk-lem-constructible-ext-continuity`, closed-support step: for a closed immersion
-`i` with quasi-compact open complement and `Λ_X` flat, `Ri_*` preserves the bounded above objects
-whose morphisms commute with filtered colimits of module objects. -/
+/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1`, closed-support step: for a closed
+immersion `i` with quasi-compact open complement and `Λ_X` flat, `Ri_*` preserves the bounded above
+objects whose morphisms commute with filtered colimits of module objects. -/
 theorem homCommutesWithFilteredColimits_rightDerivedLowerStar_of_isClosedImmersion
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     {s : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))}

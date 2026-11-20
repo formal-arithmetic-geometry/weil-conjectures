@@ -18,7 +18,7 @@ ranges, and `F` an abelian étale sheaf on `X`. The open–closed sequence
 `0 ⟶ j_! j^* F ⟶ F ⟶ ι_* ι^* F ⟶ 0` and the identification `H^q(X, ι_* G) ≅ H^q(T, G)` show:
 if the restriction maps `H^q(X, F) ⟶ H^q(T, ι^* F)` (`AlgebraicGeometry.Etale.cohomologyMap`)
 are bijective in every degree, then `H^q(X, j_! j^* F) = 0` for all `q`
-(blueprint `det-tf-transverse-corner-vanishing`, constant coefficients).
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`, constant coefficients).
 
 ## Main statements
 
@@ -67,7 +67,8 @@ variable {U T X : Scheme.{u}} (j : U ⟶ X) (ι : T ⟶ X) [IsOpenImmersion j] [
 
 /-- If the restriction maps `H^q(X, F) ⟶ H^q(T, ι^* F)` to the closed complement `T` of an open
 `U ⊆ X` are bijective in every degree, then the extension by zero `j_! j^* F` of the restriction
-of `F` to `U` has vanishing cohomology (blueprint `det-tf-transverse-corner-vanishing`). -/
+of `F` to `U` has vanishing cohomology (blueprint
+`lemma-cohomology-near-two-transverse-divisors--1`). -/
 theorem subsingleton_sheafH_openImmersionLowerShriek_of_bijective_cohomologyMap
     (hjι : Set.range ι.base = (Set.range j.base)ᶜ)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

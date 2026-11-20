@@ -51,7 +51,7 @@ and for proper `a` the same with `H_c` replaced by `H`.
 
 ## Main definitions
 
-All of them are blueprint `prop-pod-degree-of-the-pairing`.
+All of them are blueprint `corollary-degreewise-duality-over-fields--1`.
 
 - `AlgebraicGeometry.Etale.TateOrientation.degreeZeroPairing`: the degree-zero part of `β_K`,
   pairing `Hⁱ_c(X, K)` with `H⁻ⁱ(RΓ(X, K^∨(d))[2d])`.
@@ -66,11 +66,12 @@ All of them are blueprint `prop-pod-degree-of-the-pairing`.
   degree-zero part of `β_K` evaluated on `x` and on `y` read in `H⁻ⁱ(RΓ(X, K^∨(d))[2d])`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_of_isPerfectPairing`: over a
   separably closed field, derived global sections carry perfect pairings to dualities
-  (from blueprint `lem-sf-point`).
-- `AlgebraicGeometry.Etale.TateOrientation.degreewise_duality` (`sk-thm-derived-duality`,
-  `thm-pod-degreewise-perfectness-over-a-field`): degreewise duality over a field.
+  (from blueprint `theorem-global-verdier-duality`).
+- `AlgebraicGeometry.Etale.TateOrientation.degreewise_duality`
+(`corollary-degreewise-duality-over-fields`,
+  `corollary-degreewise-duality-over-fields--1`): degreewise duality over a field.
 - `AlgebraicGeometry.Etale.TateOrientation.degreewise_duality_of_isProper`
-  (`thm-pod-proper-poincare-duality`, degreewise part): the same for proper `X`, with ordinary
+  (`theorem-poincare-duality--8`, degreewise part): the same for proper `X`, with ordinary
   cohomology.
 
 ## Implementation notes
@@ -172,7 +173,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   {a : X ⟶ Y} [HasCompactification a] {d : ℕ}
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
-/-- Blueprint `prop-pod-degree-of-the-pairing`: Degree of the pairing.
+/-- Blueprint `corollary-degreewise-duality-over-fields--1`: Degree of the pairing.
 
 The degree-zero part of the derived Poincaré pairing `β_K` of a Tate orientation `γ`
 (`AlgebraicGeometry.Etale.TateOrientation.poincarePairing`): the biadditive pairing of
@@ -185,7 +186,7 @@ noncomputable def degreeZeroPairing (γ : TateOrientation Λ a d) (K : DerivedCa
       ((𝟙_ (DerivedCategoryModule Λ Y)) ⟶ 𝟙_ (DerivedCategoryModule Λ Y)) :=
   degreeZeroPairingOfPairing (γ.poincarePairing K) i _
 
-/-- Blueprint `prop-pod-degree-of-the-pairing`: Degree of the pairing.
+/-- Blueprint `corollary-degreewise-duality-over-fields--1`: Degree of the pairing.
 
 The degreewise Poincaré pairings `⟨-, -⟩ᵢ : Hⁱ_c(X, K) × Hʲ(X, K^∨(d)) ⟶ Λ`, `i + j = 2d`: the
 degree-zero part of the derived Poincaré pairing
@@ -201,7 +202,7 @@ noncomputable def degreewisePairing (γ : TateOrientation Λ a d)
     ((shiftFunctorAdd' _ (2 * d : ℤ) (-i) j (by lia)).hom.app _))
 
 omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
-/-- Blueprint `prop-pod-degree-of-the-pairing`: Degree of the pairing.
+/-- Blueprint `corollary-degreewise-duality-over-fields--1`: Degree of the pairing.
 
 The degreewise pairing `⟨x, y⟩ᵢ` is the degree-zero part of `β_K` evaluated on `x` and on the
 class `y` read in degree `-i` of `RΓ(X, K^∨(d))[2d]`, by the shift convention
@@ -238,7 +239,7 @@ noncomputable def untwistClass (K : DerivedCategoryModule Λ X) (j : ℤ) :
     ((Preadditive.leftComp _ (derivedTensorLeftUnitor _ Y (tateObject Λ Y d)).inv).comp
       (((derivedTensor _ Y).flip.obj (tateObject Λ Y d)).mapAddHom))
 
-/-- Blueprint `prop-pod-degree-of-the-pairing`: Degree of the pairing.
+/-- Blueprint `corollary-degreewise-duality-over-fields--1`: Degree of the pairing.
 
 The line-valued Poincaré pairings `Hⁱ_c(X, K) × Hʲ(X, K^∨) ⟶ Λ(-d)`, `i + j = 2d`, obtained
 from the same morphism `β_K` by eliminating the twist `Λ_X(d)` of the second factor: the
@@ -270,7 +271,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k
 `RΓ(Spec k, D) ≅ RΓ(Spec k, C)^∨` in `D(Λ)`: the pairing identifies `D` with the dual `C^∨`,
 and evaluation at the point carries `C^∨` to `RΓ(Spec k, C)^∨`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual`, blueprint
-`lem-sf-point`). -/
+`theorem-global-verdier-duality`). -/
 theorem nonempty_iso_rightDerivedGlobalSections_of_isPerfectPairing
     {C D : DerivedCategoryModule Λ (Spec (.of k))}
     (hC : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) C)
@@ -289,9 +290,9 @@ variable {Λ}
 
 namespace TateOrientation
 
-/-- Blueprint `sk-thm-derived-duality`: Degreewise duality over a field (finite-field case,
-non-canonical form). This is the finite-field, non-canonical form of blueprint
-`thm-pod-degreewise-perfectness-over-a-field`: only an abstract isomorphism, that is an equality
+/-- Blueprint `corollary-degreewise-duality-over-fields`: Degreewise duality over a field
+(finite-field case, non-canonical form). This is the finite-field, non-canonical form of blueprint
+`corollary-degreewise-duality-over-fields--1`: only an abstract isomorphism, that is an equality
 of dimensions, is proved, not that the adjoint of the degreewise pairing `⟨-, -⟩_i` is an
 isomorphism (see the implementation notes of this file).
 
@@ -337,7 +338,7 @@ theorem degreewise_duality [LocallyOfFiniteType a] (γ : TateOrientation Λ a d)
     exact Module.Free.of_divisionRing _ _
   exact ⟨hfin, Module.Finite.equiv e.toLinearEquiv.symm, ⟨e⟩⟩
 
-/-- Blueprint `thm-pod-proper-poincare-duality`: Proper Poincaré duality (degreewise form,
+/-- Blueprint `theorem-poincare-duality--8`: Proper Poincaré duality (degreewise form,
 finite-field case, non-canonical form). As for
 `AlgebraicGeometry.Etale.TateOrientation.degreewise_duality`, only an abstract isomorphism (an
 equality of dimensions) is proved, not the perfectness of the degreewise pairing.

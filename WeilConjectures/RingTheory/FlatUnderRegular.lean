@@ -14,7 +14,7 @@ import WeilConjectures.Mathlib.RingTheory.Regular.ProjectiveDimension
 # Regularity descends along flat local homomorphisms
 
 Source: Stacks Project, Algebra, Lemma 10.110.9 (Tag 00OF)
-(blueprint: lem-weil-pbc-flat-under-regular).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -26,7 +26,7 @@ namespace IsRegularLocalRing
 /-- If `φ : R → S` is a flat local homomorphism of Noetherian local rings and `S` is a regular
 local ring, then `R` is a regular local ring.
 Source: Stacks Project, Algebra, Lemma 10.110.9 (Tag 00OF)
-(blueprint: lem-weil-pbc-flat-under-regular).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof: Let `κ` be the residue field of `R` and `d = dim S`, finite since `S` is Noetherian
 local. As `R` is Noetherian, `κ` has a resolution by finite free modules `F_i`; let `K` be `κ`

@@ -161,8 +161,9 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 /-!
 # Constructibility under the native adic encoding
 
-Source: Bhatt--Scholze, Definitions 6.8.3 and 6.8.8.
-(blueprint: lem-sf-native-adic-encoding-constructibility)
+## References
+
+* Bhatt--Scholze, Definitions 6.8.3 and 6.8.8
 -/
 
 @[expose] public section
@@ -279,21 +280,7 @@ private theorem encoding_lisse_iff {T : Scheme.{u}}
         (encoding_free (C.X i) r).symm)⟩⟩
 
 /-- The normalized native encoding preserves and detects constructibility on a Noetherian
-scheme.
-
-Source: Bhatt--Scholze, Definitions 6.8.3 and 6.8.8; the finite-presentation
-characterization in `condensedQbar_lfp_locally_free`.
-(blueprint: lem-sf-native-adic-encoding-constructibility)
-
-Proof: encoding identifies the regular modules and their finite biproducts. Its pullback
-comparison transports native local finite-free trivializations to the condensed side.
-Conversely local finite presentation has a finite-free refinement, and full faithfulness
-lifts each trivialization back. On a Noetherian scheme native constructibility has a
-finite global lisse stratification. Apply the local equivalence on each stratum and
-transport local finite presentations along the invertible coefficient pullback map.
-Conversely the same strata of a condensed constructible object give native lisse
-restrictions, hence native constructibility. Empty covers, empty strata and rank zero
-are included in the biproduct and covering constructions. -/
+scheme. -/
 theorem encoding_constructible_iff {T : Scheme.{u}} [IsNoetherian T]
     (M : AdicSheaf l T) :
     IsAdicConstructibleSheaf M ↔

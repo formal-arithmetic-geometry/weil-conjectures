@@ -66,7 +66,6 @@ private theorem component_transport {C D : Type*} [Category C] [Category D]
 attribute [local irreducible] IntegralSourceBoundary IntegralTargetBoundary
   IntegralComponent IntegralScalarFormula nativeScalarComponent
 
-set_option maxHeartbeats 400000 in
 -- Compare the cached finite-stage types without unfolding their constructions.
 /-- Move one normalized integral component to its canonical common scalar stage.
 Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
@@ -114,7 +113,7 @@ theorem integralStageComponent [G : NativeGeometry.{u} l]
       (sections l Y).mapDerivedCategory.map (alpha.app Q) =
         b ≫ nativeScalarComponent l c source target E (change E) hs ht KE.obj ≫ d := by
   classical
-  dsimp only
+  dsimp only [rationalization, Functor.comp_obj]
   obtain ⟨bE, dE, hboundE⟩ :=
     native_integral_scalar_boundaries l D hl P c source target stage E
   let Ke := (PurCompactSupport.finiteTorIntegralInclusion l
@@ -123,13 +122,21 @@ theorem integralStageComponent [G : NativeGeometry.{u} l]
     (Coefficient.{u} l (PadicAlgCl l) i) X).obj K
   have hfE := integralComponent_factorization_of_isos l D hl P c source target stage E
     change hs ht KE alpha bE dE (hboundE KE).1 (hboundE KE).2 hm
-  have hQ : (rationalization.{u, u} l (ULift.{u} (PadicAlgCl l)) (finiteField l E) X).obj KE =
-      ((⟨i, (rationalization.{u, u} l (ULift.{u} (PadicAlgCl l)) (finiteField l i) X).obj K⟩ :
+  -- Match the localization presentation used by the stage-object lemma.
+  have hQ : (sfRationalConstructibleLocalization l
+      (Coefficient.{u} l (PadicAlgCl l) E) X).obj Ke =
+      ((⟨i, (sfRationalConstructibleLocalization l
+        (Coefficient.{u} l (PadicAlgCl l) i) X).obj Ki⟩ :
         generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X).toStage h) :=
     (congrArg (sfRationalConstructibleLocalization l
       (Coefficient.{u} l (PadicAlgCl l) E) X).obj hKE).trans
         (integralStageObject l X i E h Ki).symm
   have hh := component_transport
+    (U := (PurCompactSupport.image (PurCompactSupport.completed l
+      (Coefficient.{u} l (PadicAlgCl l) E)) c ⋙
+        pbcDerivedExtend ((target.coefficient E).integralMap l Y)).obj KE.obj)
+    (V := (pbcDerivedExtend ((source.coefficient E).integralMap l X) ⋙
+      PurCompactSupport.image (nativeCoefficients l) c).obj KE.obj)
     (Functor.whiskerRight alpha (sections l Y).mapDerivedCategory) hQ
     (bE.hom.app Ke)
     (nativeScalarComponent l c source target E (change E) hs ht KE.obj)
@@ -137,6 +144,7 @@ theorem integralStageComponent [G : NativeGeometry.{u} l]
     (fun {_ _} b ↦ IntegralSourceBoundary l D hl P c target E KE b)
     (fun {_ _} d ↦ IntegralTargetBoundary l c source E KE d)
     (hboundE KE).1 (hboundE KE).2 hfE
+  dsimp only [Ki, Ke, finiteField, Functor.comp_obj, Functor.whiskerRight_app] at hh ⊢
   exact hh
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport

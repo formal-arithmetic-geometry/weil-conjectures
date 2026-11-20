@@ -39,7 +39,7 @@ structure, i.e. the right adjoint of the derived tensor product.
 
 This is the module-object counterpart of
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom`. The closedness of
-`D(Mod_{Λ_X})` is the sorried instance `DerivedCategory.monoidalClosed`.
+`D(Mod_{Λ_X})` is the instance `DerivedCategory.monoidalClosed`.
 
 -/
 

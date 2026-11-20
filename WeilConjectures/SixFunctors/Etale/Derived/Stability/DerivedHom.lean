@@ -48,7 +48,7 @@ variable [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} (a : X ⟶ S
   [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] [HasCompactification a]
 
 include a in
-/-- Blueprint `cor-weil-finite-constructible-hom`: Internal Hom for arbitrary finite-stage
+/-- Blueprint `proposition-six-operations-dctf--15`: Internal Hom for arbitrary finite-stage
 constructible complexes.
 
 For `X` separated of finite type over a field `k` with `dim X ≤ d`, a finite coefficient ring `Λ`
@@ -138,7 +138,7 @@ has Tor amplitude in `[c - b - 2m, d - a + 2m]`. The blueprint derives this from
 `RHom(K, M) ≅ 𝔻_X (K ⊗ᴸ 𝔻_X M)`, the dualizing complex having cohomology in `[-2m, 0]`. The
 statement is local on `X`, and on the separated affine opens it is
 `AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_isSeparated`
-(`cor-weil-finite-constructible-hom`). -/
+(`proposition-six-operations-dctf--15`). -/
 theorem torAmplitudeIn_derivedHom
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K)
@@ -202,7 +202,7 @@ theorem torAmplitudeIn_derivedHom_of_isDualizable
   torAmplitudeIn_derivedHom_of_isDualizable_aux _ hKt hKd hMt
 
 include aX in
-/-- Blueprint `lem-sf-ext-sheaf-constructible`: Constructible internal Hom with a site-perfect
+/-- Blueprint `proposition-six-operations-dctf--15`: Constructible internal Hom with a site-perfect
 first variable.
 
 If `K ∈ Dctf(X, Λ)` is site-perfect, that is dualizable, and `M` is bounded constructible, then
@@ -273,7 +273,7 @@ theorem homologyConcentratedIn_derivedHom_singleFunctor_of_isDualizable
   exact homologyConcentratedIn_of_iso _ e h
 
 include aX in
-/-- Blueprint `lem-sf-ext-sheaf-constructible`: Constructible internal Hom with a site-perfect
+/-- Blueprint `proposition-six-operations-dctf--15`: Constructible internal Hom with a site-perfect
 first variable.
 
 For a finite locally free sheaf `F`, that is a constructible flat sheaf which is dualizable in

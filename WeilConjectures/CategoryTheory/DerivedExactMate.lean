@@ -44,11 +44,11 @@ omit [HasDerivedCategory C₁] [HasDerivedCategory C₂]
   [PreservesFiniteLimits G'] [PreservesFiniteColimits G'] in
 private lemma homotopyMate (adj : L ⊣ R) (adj' : L' ⊣ R')
     (σ : TwoSquare G L L' G') (K : HomotopyCategory C₁ (.up ℤ)) :
-    (NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ).natTrans (.up ℤ)).app K =
+    (NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ) (.up ℤ)).app K =
       (adj'.mapHomotopyCategory (.up ℤ)).unit.app
           ((G.mapHomotopyCategory (.up ℤ)).obj ((R.mapHomotopyCategory (.up ℤ)).obj K)) ≫
         (R'.mapHomotopyCategory (.up ℤ)).map
-          ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app
+          ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app
             ((R.mapHomotopyCategory (.up ℤ)).obj K)) ≫
         (R'.mapHomotopyCategory (.up ℤ)).map
           ((G'.mapHomotopyCategory (.up ℤ)).map
@@ -85,28 +85,28 @@ theorem derivedExact_mateEquiv_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
     (θ : TwoSquare G.mapDerivedCategory L.mapDerivedCategory L'.mapDerivedCategory
       G'.mapDerivedCategory)
     (hθ : ∀ N : HomotopyCategory C₂ (.up ℤ),
-      θ.natTrans.app (DerivedCategory.Qh.obj N) ≫
+      θ.app (DerivedCategory.Qh.obj N) ≫
           G'.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app N) ≫
           G'.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj N) =
         L'.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app N) ≫
           L'.mapDerivedCategoryFactorsh.hom.app ((G.mapHomotopyCategory (.up ℤ)).obj N) ≫
-          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app N))
+          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app N))
     (K : HomotopyCategory C₁ (.up ℤ)) :
     G.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app K) ≫
         (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
-          adj'.mapDerivedCategoryRightDerivedAdjunction θ).natTrans.app
+          adj'.mapDerivedCategoryRightDerivedAdjunction θ).app
           (DerivedCategory.Qh.obj K) =
       G.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj K) ≫
         DerivedCategory.Qh.map
-          ((NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ).natTrans (.up ℤ)).app K) ≫
+          ((NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ) (.up ℤ)).app K) ≫
         R'.rightDerivedFunctorUnit.app ((G'.mapHomotopyCategory (.up ℤ)).obj K) ≫
         R'.rightDerivedFunctor.map (G'.mapDerivedCategoryFactorsh.inv.app K) := by
   have hmate : ∀ (Z : DerivedCategory C₁),
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
-          adj'.mapDerivedCategoryRightDerivedAdjunction θ).natTrans.app Z =
+          adj'.mapDerivedCategoryRightDerivedAdjunction θ).app Z =
         adj'.mapDerivedCategoryRightDerivedAdjunction.unit.app
             (G.mapDerivedCategory.obj (R.rightDerivedFunctor.obj Z)) ≫
-          R'.rightDerivedFunctor.map (θ.natTrans.app (R.rightDerivedFunctor.obj Z)) ≫
+          R'.rightDerivedFunctor.map (θ.app (R.rightDerivedFunctor.obj Z)) ≫
           R'.rightDerivedFunctor.map (G'.mapDerivedCategory.map
             (adj.mapDerivedCategoryRightDerivedAdjunction.counit.app Z)) := fun Z => by
     simp [mateEquiv_apply]
@@ -114,13 +114,13 @@ theorem derivedExact_mateEquiv_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
   set u := R.rightDerivedFunctorUnit.app K
   have h₁ := adj'.mapDerivedCategoryRightDerivedAdjunction.unit.naturality
     (G.mapDerivedCategory.map u)
-  have h₂ := θ.natTrans.naturality u
+  have h₂ := θ.naturality u
   have h₃ := (adj.mapHomotopyCategory (.up ℤ)).derivedε_fac_app
     (HomotopyCategory.quasiIso C₁ (.up ℤ)) L.mapDerivedCategoryFactorsh.hom
       R.rightDerivedFunctorUnit K
   have h₄ := homotopyMate adj adj' σ K
   have h₅ := R'.rightDerivedFunctorUnit.naturality
-    ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app N ≫
+    ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app N ≫
       (G'.mapHomotopyCategory (.up ℤ)).map ((adj.mapHomotopyCategory (.up ℤ)).counit.app K))
   have h₆ := (adj'.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
     (HomotopyCategory.quasiIso C₄ (.up ℤ)) L'.mapDerivedCategoryFactorsh.hom
@@ -139,12 +139,12 @@ theorem derivedExact_mateEquiv_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
   erw [Functor.map_comp DerivedCategory.Qh, Category.assoc, reassoc_of% h₅]
   erw [← reassoc_of% h₆, reassoc_of% h₇]
   congr 1
-  have key : θ.natTrans.app (DerivedCategory.Qh.obj N) ≫
+  have key : θ.app (DerivedCategory.Qh.obj N) ≫
       G'.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app N ≫
         DerivedCategory.Qh.map ((adj.mapHomotopyCategory (.up ℤ)).counit.app K)) =
       L'.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app N) ≫
         L'.mapDerivedCategoryFactorsh.hom.app ((G.mapHomotopyCategory (.up ℤ)).obj N) ≫
-        DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app N) ≫
+        DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app N) ≫
         DerivedCategory.Qh.map
           ((G'.mapHomotopyCategory (.up ℤ)).map ((adj.mapHomotopyCategory (.up ℤ)).counit.app K)) ≫
         G'.mapDerivedCategoryFactorsh.inv.app K := by

@@ -72,8 +72,8 @@ surjections to `K`-invariant elements: average an arbitrary lift over the finite
 lemma exists_fixed_lift {ℓ : ℕ} [Fact ℓ.Prime] (K : Subgroup G)
     (hK : ∀ U : Subgroup G, IsOpen (U : Set G) → ¬ ℓ ∣ U.relIndex K)
     {Y Z : DiscreteModule.{w} G} (p : Y ⟶ Z) (hp : Function.Surjective p.hom.hom.hom)
-    (hZ : IsPrimary ℓ Z) (z : Z.obj.V) (hz : ∀ k ∈ K, (Z.obj.ρ k).hom z = z) :
-    ∃ y, (∀ k ∈ K, (Y.obj.ρ k).hom y = y) ∧ p.hom.hom.hom y = z := by
+    (hZ : IsPrimary ℓ Z) (z : Z.obj.V) (hz : ∀ k ∈ K, (Z.obj.ρ k).asHom.hom z = z) :
+    ∃ y, (∀ k ∈ K, (Y.obj.ρ k).asHom.hom y = y) ∧ p.hom.hom.hom y = z := by
   classical
   obtain ⟨y₀, rfl⟩ := hp z
   let U := Y.obj.stabilizer y₀
@@ -83,8 +83,8 @@ lemma exists_fixed_lift {ℓ : ℕ} [Fact ℓ.Prime] (K : Subgroup G)
   let S := U.subgroupOf K
   have : Finite (K ⧸ S) := Subgroup.finite_quotient_of_finiteIndex
   have := Fintype.ofFinite (K ⧸ S)
-  let s : Y.obj.V := ∑ c : K ⧸ S, (Y.obj.ρ ((Quotient.out c : K) : G)).hom y₀
-  have hs : ∀ k ∈ K, (Y.obj.ρ k).hom s = s := by
+  let s : Y.obj.V := ∑ c : K ⧸ S, (Y.obj.ρ ((Quotient.out c : K) : G)).asHom.hom y₀
+  have hs : ∀ k ∈ K, (Y.obj.ρ k).asHom.hom s = s := by
     intro k hk
     simp only [s, map_sum]
     refine Fintype.sum_equiv (MulAction.toPerm (⟨k, hk⟩ : K)) _ _ fun c ↦ ?_
@@ -256,9 +256,9 @@ lemma _root_.DiscreteModule.isPrimary_coind₁ {X : DiscreteModule.{w} G} (hX : 
 
 omit [IsTopologicalGroup G] [CompactSpace G] hχ in
 lemma ρ_mul_conj_apply {X : DiscreteModule.{w} G} {y : X.obj.V}
-    (hy : ∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ k).hom y = y) {k : G}
+    (hy : ∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ k).asHom.hom y = y) {k : G}
     (hk : k ∈ χ.toMonoidHom.ker) :
-    (X.obj.ρ k).hom ((X.obj.ρ τ).hom y) = (X.obj.ρ τ).hom y := by
+    (X.obj.ρ k).asHom.hom ((X.obj.ρ τ).asHom.hom y) = (X.obj.ρ τ).asHom.hom y := by
   have : τ⁻¹ * k * τ ∈ χ.toMonoidHom.ker := by
     simpa using (MonoidHom.normal_ker χ.toMonoidHom).conj_mem k hk τ⁻¹
   rw [← ρ_mul_apply, show k * τ = τ * (τ⁻¹ * k * τ) by group, ρ_mul_apply, hy _ this]
@@ -266,9 +266,9 @@ lemma ρ_mul_conj_apply {X : DiscreteModule.{w} G} {y : X.obj.V}
 /-- **Vanishing of `H¹`.** If `τ - 1` is surjective on the `ker χ`-invariants of an `ℓ`-primary
 discrete module `X`, then `H¹(G, X) = 0`. -/
 lemma subsingleton_H_one (X : DiscreteModule.{w} G) (hX : IsPrimary ℓ X)
-    (hsurj : ∀ x : X.obj.V, (∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ k).hom x = x) →
-      ∃ y : X.obj.V, (∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ k).hom y = y) ∧
-        (X.obj.ρ τ).hom y - y = x) :
+    (hsurj : ∀ x : X.obj.V, (∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ k).asHom.hom x = x) →
+      ∃ y : X.obj.V, (∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ k).asHom.hom y = y) ∧
+        (X.obj.ρ τ).asHom.hom y - y = x) :
     Subsingleton (H G X 1) := by
   change Subsingleton (Abelian.Ext (intTrivial G) (shortComplex₁ X).X₁ 1)
   rw [subsingleton_ext_one_iff (shortExact₁ X) (subsingleton_H_coind₁ _ 0),
@@ -276,21 +276,21 @@ lemma subsingleton_H_one (X : DiscreteModule.{w} G) (hX : IsPrimary ℓ X)
   intro z hz
   obtain ⟨f, hfK, rfl⟩ := exists_fixed_lift _ hχ.not_dvd_relIndex (coker₁π X)
     QuotientAddGroup.mk_surjective (isPrimary_coker₁ hX) z fun k _ ↦ hz k
-  have hτf : (((coind₁ G).obj X.obj.V).obj.ρ τ).hom f - f ∈ toCoind₁Range X := by
+  have hτf : (((coind₁ G).obj X.obj.V).obj.ρ τ).asHom.hom f - f ∈ toCoind₁Range X := by
     rw [← QuotientAddGroup.eq_iff_sub_mem]
     exact hz τ
   obtain ⟨x, hx⟩ := hτf
-  have hxK : ∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ k).hom x = x := by
+  have hxK : ∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ k).asHom.hom x = x := by
     intro k hk
     apply injective_toCoind₁ X
     rw [hom_comm_apply, hx, map_sub, hfK k hk, ρ_mul_conj_apply hfK hk]
   obtain ⟨y, hyK, hy⟩ := hsurj x hxK
   let f' : ((coind₁ G).obj X.obj.V).obj.V := f - (toCoind₁ X).hom.hom.hom y
-  have hf'K : ∀ k ∈ χ.toMonoidHom.ker, (((coind₁ G).obj X.obj.V).obj.ρ k).hom f' = f' := by
+  have hf'K : ∀ k ∈ χ.toMonoidHom.ker, (((coind₁ G).obj X.obj.V).obj.ρ k).asHom.hom f' = f' := by
     intro k hk
     simp only [f', map_sub, hfK k hk, ← hom_comm_apply, hyK k hk]
-  have hf'τ : (((coind₁ G).obj X.obj.V).obj.ρ τ).hom f' = f' := by
-    have h1 : (((coind₁ G).obj X.obj.V).obj.ρ τ).hom f = f + (toCoind₁ X).hom.hom.hom x := by
+  have hf'τ : (((coind₁ G).obj X.obj.V).obj.ρ τ).asHom.hom f' = f' := by
+    have h1 : (((coind₁ G).obj X.obj.V).obj.ρ τ).asHom.hom f = f + (toCoind₁ X).hom.hom.hom x := by
       rw [hx]; abel
     simp only [f', map_sub, h1, ← hom_comm_apply, ← hy, map_sub]
     abel
@@ -305,9 +305,9 @@ lemma subsingleton_H_one (X : DiscreteModule.{w} G) (hX : IsPrimary ℓ X)
 
 /-- `τ - 1` is surjective on the `ker χ`-invariants of `C^sm(G, X) / X` for `ℓ`-primary `X`. -/
 lemma exists_coker₁_sub_eq (X : DiscreteModule.{w} G) (hX : IsPrimary ℓ X)
-    (z : (coker₁ X).obj.V) (hz : ∀ k ∈ χ.toMonoidHom.ker, ((coker₁ X).obj.ρ k).hom z = z) :
-    ∃ y : (coker₁ X).obj.V, (∀ k ∈ χ.toMonoidHom.ker, ((coker₁ X).obj.ρ k).hom y = y) ∧
-      ((coker₁ X).obj.ρ τ).hom y - y = z := by
+    (z : (coker₁ X).obj.V) (hz : ∀ k ∈ χ.toMonoidHom.ker, ((coker₁ X).obj.ρ k).asHom.hom z = z) :
+    ∃ y : (coker₁ X).obj.V, (∀ k ∈ χ.toMonoidHom.ker, ((coker₁ X).obj.ρ k).asHom.hom y = y) ∧
+      ((coker₁ X).obj.ρ τ).asHom.hom y - y = z := by
   obtain ⟨f, hfK, rfl⟩ := exists_fixed_lift _ hχ.not_dvd_relIndex (coker₁π X)
     QuotientAddGroup.mk_surjective (isPrimary_coker₁ hX) z hz
   have hfK' : χ.toMonoidHom.ker ≤ rightStab G f.1 := fun k hk x ↦
@@ -345,7 +345,7 @@ section HOne
 omit [IsTopologicalGroup G] [CompactSpace G] [Fact ℓ.Prime] in
 /-- The elements of a discrete module fixed by a subgroup `K`. -/
 def fixedAddSubgroup (X : DiscreteModule.{w} G) (K : Subgroup G) : AddSubgroup X.obj.V where
-  carrier := {x | ∀ k ∈ K, (X.obj.ρ k).hom x = x}
+  carrier := {x | ∀ k ∈ K, (X.obj.ρ k).asHom.hom x = x}
   zero_mem' _ _ := map_zero _
   add_mem' hx hy k hk := by simp [hx k hk, hy k hk]
   neg_mem' hx k hk := by simp [hx k hk]
@@ -353,7 +353,7 @@ def fixedAddSubgroup (X : DiscreteModule.{w} G) (K : Subgroup G) : AddSubgroup X
 omit [IsTopologicalGroup G] [CompactSpace G] [Fact ℓ.Prime] in
 @[simp]
 lemma mem_fixedAddSubgroup {X : DiscreteModule.{w} G} {K : Subgroup G} {x : X.obj.V} :
-    x ∈ fixedAddSubgroup X K ↔ ∀ k ∈ K, (X.obj.ρ k).hom x = x :=
+    x ∈ fixedAddSubgroup X K ↔ ∀ k ∈ K, (X.obj.ρ k).asHom.hom x = x :=
   Iff.rfl
 
 omit [IsTopologicalGroup G] [CompactSpace G] [Fact ℓ.Prime] in
@@ -368,7 +368,7 @@ omit [IsTopologicalGroup G] [CompactSpace G] in
 /-- The endomorphism `τ - 1` of the `ker χ`-invariants of a discrete module. -/
 noncomputable def tauSubOne :
     fixedAddSubgroup X χ.toMonoidHom.ker →+ fixedAddSubgroup X χ.toMonoidHom.ker :=
-  (((X.obj.ρ τ).hom - AddMonoidHom.id _).comp (fixedAddSubgroup X _).subtype).codRestrict _
+  (((X.obj.ρ τ).asHom.hom - AddMonoidHom.id _).comp (fixedAddSubgroup X _).subtype).codRestrict _
     fun x k hk ↦ by
       simp only [AddMonoidHom.coe_comp, Function.comp_apply, AddSubgroup.coe_subtype,
         AddMonoidHom.sub_apply, AddMonoidHom.id_apply, map_sub,
@@ -377,26 +377,26 @@ noncomputable def tauSubOne :
 omit [IsTopologicalGroup G] [CompactSpace G] in
 @[simp]
 lemma coe_tauSubOne_apply (x : fixedAddSubgroup X χ.toMonoidHom.ker) :
-    (tauSubOne χ τ X x : X.obj.V) = (X.obj.ρ τ).hom x - x :=
+    (tauSubOne χ τ X x : X.obj.V) = (X.obj.ρ τ).asHom.hom x - x :=
   rfl
 
 /-- The smooth functions `f : G → X`, invariant under `ker χ`, with `(τ - 1) f ∈ X`. -/
 noncomputable def coindFixed : AddSubgroup ((coind₁ G).obj X.obj.V).obj.V :=
   fixedAddSubgroup _ χ.toMonoidHom.ker ⊓
-    (toCoind₁Range X).comap ((((coind₁ G).obj X.obj.V).obj.ρ τ).hom - AddMonoidHom.id _)
+    (toCoind₁Range X).comap ((((coind₁ G).obj X.obj.V).obj.ρ τ).asHom.hom - AddMonoidHom.id _)
 
 omit [CompactSpace G] in
 lemma mem_coindFixed {f : ((coind₁ G).obj X.obj.V).obj.V} :
     f ∈ coindFixed χ τ X ↔
-      (∀ k ∈ χ.toMonoidHom.ker, (((coind₁ G).obj X.obj.V).obj.ρ k).hom f = f) ∧
-      (((coind₁ G).obj X.obj.V).obj.ρ τ).hom f - f ∈ toCoind₁Range X :=
+      (∀ k ∈ χ.toMonoidHom.ker, (((coind₁ G).obj X.obj.V).obj.ρ k).asHom.hom f = f) ∧
+      (((coind₁ G).obj X.obj.V).obj.ρ τ).asHom.hom f - f ∈ toCoind₁Range X :=
   Iff.rfl
 
 /-- The map `f ↦ (τ - 1) f` from `coindFixed` to `Xᴷ`. -/
 noncomputable def coindFixedToFixed :
     coindFixed χ τ X →+ fixedAddSubgroup X χ.toMonoidHom.ker where
   toFun f := ⟨(AddMonoidHom.ofInjective (injective_toCoind₁ X)).symm
-      ⟨(((coind₁ G).obj X.obj.V).obj.ρ τ).hom f - f, ((mem_coindFixed χ τ X).1 f.2).2⟩,
+      ⟨(((coind₁ G).obj X.obj.V).obj.ρ τ).asHom.hom f - f, ((mem_coindFixed χ τ X).1 f.2).2⟩,
       fun k hk ↦ by
     apply injective_toCoind₁ X
     rw [hom_comm_apply, ofInjective_symm_apply]
@@ -405,7 +405,7 @@ noncomputable def coindFixedToFixed :
       IsEllAdicQuotient.ρ_mul_conj_apply ((mem_coindFixed χ τ X).1 f.2).1 hk]⟩
   map_zero' := Subtype.ext <| injective_toCoind₁ X <| by
     rw [ofInjective_symm_apply]
-    change (((coind₁ G).obj X.obj.V).obj.ρ τ).hom 0 - 0 = (toCoind₁ X).hom.hom.hom 0
+    change (((coind₁ G).obj X.obj.V).obj.ρ τ).asHom.hom 0 - 0 = (toCoind₁ X).hom.hom.hom 0
     simp
   map_add' f f' := Subtype.ext <| injective_toCoind₁ X <| by
     simp only [AddSubgroup.coe_add, map_add, ofInjective_symm_apply]
@@ -414,7 +414,7 @@ noncomputable def coindFixedToFixed :
 omit [CompactSpace G] in
 lemma toCoind₁_coindFixedToFixed (f : coindFixed χ τ X) :
     (toCoind₁ X).hom.hom.hom (coindFixedToFixed χ τ X f) =
-      (((coind₁ G).obj X.obj.V).obj.ρ τ).hom f - f :=
+      (((coind₁ G).obj X.obj.V).obj.ρ τ).asHom.hom f - f :=
   ofInjective_symm_apply _ _
 
 /-- The connecting map `(C^sm(G, X) / X)ᴳ → H¹(G, X)`. -/
@@ -443,7 +443,7 @@ lemma surjective_HOneδ : Function.Surjective (HOneδ X) := by
 omit [CompactSpace G] in
 lemma HOneδ_eq_zero_iff (z : (invariants G).obj (coker₁ X)) :
     HOneδ X z = 0 ↔ ∃ c : ((coind₁ G).obj X.obj.V).obj.V,
-      (∀ g, (((coind₁ G).obj X.obj.V).obj.ρ g).hom c = c) ∧
+      (∀ g, (((coind₁ G).obj X.obj.V).obj.ρ g).asHom.hom c = c) ∧
         (QuotientAddGroup.mk c : (coker₁ X).obj.V) = z.1 := by
   constructor
   · intro hz
@@ -479,8 +479,8 @@ include hχ
 
 omit [IsTopologicalGroup G] in
 /-- An element fixed by `ker χ` and by `τ` is fixed by `G`. -/
-lemma forall_ρ_eq {x : X.obj.V} (hxK : ∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ k).hom x = x)
-    (hxτ : (X.obj.ρ τ).hom x = x) (g : G) : (X.obj.ρ g).hom x = x := by
+lemma forall_ρ_eq {x : X.obj.V} (hxK : ∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ k).asHom.hom x = x)
+    (hxτ : (X.obj.ρ τ).asHom.hom x = x) (g : G) : (X.obj.ρ g).asHom.hom x = x := by
   have := hχ.eq_top_of_le (U := X.obj.stabilizer x) (X.isOpen_stabilizer x) hxK hxτ
   exact (this ▸ Subgroup.mem_top g : g ∈ X.obj.stabilizer x)
 
@@ -522,7 +522,7 @@ lemma surjective_coindFixedToInvariants (hX : IsPrimary ℓ X) :
   intro z
   obtain ⟨f, hfK, hf⟩ := exists_fixed_lift _ hχ.not_dvd_relIndex (coker₁π X)
     QuotientAddGroup.mk_surjective (isPrimary_coker₁ hX) z.1 fun k _ ↦ z.2 k
-  have hτ : (((coind₁ G).obj X.obj.V).obj.ρ τ).hom f - f ∈ toCoind₁Range X := by
+  have hτ : (((coind₁ G).obj X.obj.V).obj.ρ τ).asHom.hom f - f ∈ toCoind₁Range X := by
     rw [← QuotientAddGroup.eq_iff_sub_mem, ← coker₁_ρ_mk]
     simp only [coker₁π_apply] at hf
     rw [hf]
@@ -536,11 +536,11 @@ lemma surjective_coindFixedToFixed (hX : IsPrimary ℓ X) :
   obtain ⟨h, hho, hhK, hh⟩ := hχ.exists_mul_sub_eq F.1 F.2
     (fun k hk y ↦ by simp [F, x.2 k hk]) fun y ↦ hX _
   let h' : ((coind₁ G).obj X.obj.V).obj.V := ⟨h, hho⟩
-  have hτ : (((coind₁ G).obj X.obj.V).obj.ρ τ).hom h' - h' = F :=
+  have hτ : (((coind₁ G).obj X.obj.V).obj.ρ τ).asHom.hom h' - h' = F :=
     Subtype.ext (funext fun y ↦ hh y)
   have hmem : h' ∈ coindFixed χ τ X :=
     ⟨fun k hk ↦ Subtype.ext (funext fun y ↦ hhK hk y),
-      show (((coind₁ G).obj X.obj.V).obj.ρ τ).hom h' - h' ∈ toCoind₁Range X by
+      show (((coind₁ G).obj X.obj.V).obj.ρ τ).asHom.hom h' - h' ∈ toCoind₁Range X by
         rw [hτ]; exact ⟨x, rfl⟩⟩
   refine ⟨⟨h', hmem⟩, Subtype.ext (injective_toCoind₁ X ?_)⟩
   rw [toCoind₁_coindFixedToFixed]
@@ -613,7 +613,7 @@ variable {ℓ} (M : DiscreteModule.{w} (Multiplicative ℤ_[ℓ]))
 
 /-- The endomorphism `τ - 1` of a discrete `ℤ_ℓ`-module, `τ = 1` the topological generator. -/
 noncomputable abbrev padicIntTauSubOne : M.obj.V →+ M.obj.V :=
-  (M.obj.ρ (.ofAdd 1)).hom - AddMonoidHom.id _
+  (M.obj.ρ (.ofAdd 1)).asHom.hom - AddMonoidHom.id _
 
 /-- Blueprint `lem-exc-procyclic-two-term`: A two-term computation for a procyclic group,
 vanishing part.

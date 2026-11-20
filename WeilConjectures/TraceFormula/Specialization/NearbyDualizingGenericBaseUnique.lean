@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBas
 
 The two properties of a family of dualizing maps over generic bases
 (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase`) determine it, as over a base field
-(`TraceFormula.Specialization.NearbyDualizingUnique`, blueprint `det-nearby-exchange-maps`):
+(`TraceFormula.Specialization.NearbyDualizingUnique`, blueprint `prose-E-15`):
 
 * for a proper model whose geometric generic fibre is all of `X₁ ×_F Spec Ω`, the proper exchange
   `χ_a` along `ε₀ = (Spec Ω ⟶ η ⟶ Spec F)` is invertible
@@ -70,7 +70,7 @@ theorem θ_eq_of_isProper (D₁ D₂ : NearbyDualizingDataOfGenericBase k' ℓ)
   exact eq_of_map_comp_trace_eq ℓ X' h₁
 
 /-- **Uniqueness of the dualizing maps over generic bases** (blueprint
-`det-nearby-exchange-maps`): two families of dualizing maps of nearby cycles over generic bases
+`prose-E-15`): two families of dualizing maps of nearby cycles over generic bases
 agree. The model is an open sub-model of a proper model with full geometric generic fibre
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_isProper_openSubmodel`), on which they agree
 (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.θ_eq_of_isProper`), and open restriction

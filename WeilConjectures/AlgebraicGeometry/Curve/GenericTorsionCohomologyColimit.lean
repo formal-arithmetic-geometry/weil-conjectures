@@ -83,7 +83,7 @@ private theorem lowerStar_isColimit {Y X : Scheme.{u}} (f : Y ⟶ X)
   exact isColimitOfReflects G hE
 
 /-- Generic direct image and etale cohomology preserve the finite-stalk cocone.
-Source: blueprint `lem-sc-affine-generic-second`, cohomology passage.
+Source: blueprint `theorem-cohomology-curves--2`, cohomology passage.
 (blueprint: lem-sc-generic-torsion-finite-stalk-colimit-cohomology)
 The generic point is affine and qcqs; sections are finite products of invariants, which commute
 with the filtered union. The directed-colimit theorem for etale cohomology and the natural

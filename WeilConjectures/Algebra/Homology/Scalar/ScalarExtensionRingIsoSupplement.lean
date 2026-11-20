@@ -196,7 +196,7 @@ Source: Stacks, Tags 03CZ, 03EK and 03CY
 
 Proof: (1) restriction of scalars along `c.inv` retains the abelian sheaf and all maps;
 its action is `s • x = c.inv(s) • x`, compatible with restrictions by naturality of
-`c.inv` (def-weil-sheaf-of-modules-category). (2) The balanced map on local tensors
+`c.inv` (situation-conventions). (2) The balanced map on local tensors
 sends `s ⊗ x` to `c.inv(s) • x`; the tensor universal property makes it linear
 (def-weil-pbc-module-tensor-product). (3) The maps commute with restrictions since
 `c.inv` is natural (def-pur-sheaf-tensor-product). (4) The inverse before sheafification

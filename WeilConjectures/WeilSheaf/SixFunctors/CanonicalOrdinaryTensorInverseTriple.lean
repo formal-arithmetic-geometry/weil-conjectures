@@ -39,9 +39,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
-set_option maxHeartbeats 1600000 in
 -- Elaborating the concrete tensor instances requires large definitional comparisons.
-set_option synthInstance.maxHeartbeats 200000 in
 -- The native and ringed tensor instances have separate coefficient and site universes.
 private theorem inverse_associativity_of_pure (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
     let E := ProEtale.NativeFrobenius.equivalence Y l

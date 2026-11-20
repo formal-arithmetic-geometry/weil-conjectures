@@ -170,7 +170,7 @@ theorem exists_leftDerivedUpperStar_projectiveLine_map_eq
         (2 : ℤ)).app _ ≪≫
       (shiftFunctor _ (2 : ℤ)).mapIso (leftDerivedUpperStarTateObjectIso
         (ℙ(Option (ULift.{u} (Fin 1)); T) ↘ T) 1))
-    _ (isIso_projectiveLineDecompositionMap Λ T)
+    _ (isIso_projectiveLineDecompositionMapAux Λ T)
     (DerivedCategory.eq_zero_of_shift_two (θ ≪≫ constantComplexIsoSingleFunctor Λ T)
       (constantComplexIsoSingleFunctor Λ T))
 

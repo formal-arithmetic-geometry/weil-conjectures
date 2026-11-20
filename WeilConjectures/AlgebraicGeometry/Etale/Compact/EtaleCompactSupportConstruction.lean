@@ -118,7 +118,7 @@ theorem etaleCompactSupport_construction
           S.levelDerivedOpen n ⋙ (S.PZ.scalar h).restriction),
       (∀ {m n : ℕ} (h : n ≤ m),
         (mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)
-          (.mk _ _ _ _ (a h).hom)).natTrans =
+          (.mk _ _ _ _ (a h).hom)) =
           (S.openDerived.restrictedInverse h).inv) ∧
       (∀ {m n : ℕ} (h : n ≤ m)
         (K : DerivedCategory (strictEtaleCoefficientSystem X O t)),
@@ -182,7 +182,7 @@ theorem etaleCompactSupport_construction
     (H.level m).mapDerivedCategoryFactors (PZ.scalar h).restrictionFactors (H.restriction h)
   choose a ha using @hb
   have hmate {m n : ℕ} (h : n ≤ m) :
-      (mateEquiv (al n) (al m) (.mk _ _ _ _ (a h).hom)).natTrans =
+      (mateEquiv (al n) (al m) (.mk _ _ _ _ (a h).hom)) =
         (DX.restrictedInverse h).inv := by
     let τ : TwoSquare (DX.level n).inverse (PZ.scalar h).restriction
         (PX.scalar h).restriction (DX.level m).inverse :=
@@ -207,11 +207,11 @@ theorem etaleCompactSupport_construction
       change (coefficientRestriction.{u + 1, u, u + 1}
         (J := X.smallEtaleTopology) O t h).map ((H.levelAdjunction n).unit.app P) ≫
           ((mateEquiv (H.levelAdjunction n) (H.levelAdjunction m)
-            (.mk _ _ _ _ (H.restriction h).hom)).natTrans).app ((H.level n).obj P) =
+            (.mk _ _ _ _ (H.restriction h).hom))).app ((H.level n).obj P) =
         (H.levelAdjunction m).unit.app _ ≫
           (IX.lift m).modules.map ((H.restriction h).hom.app P) at hu
       rw [show (mateEquiv (H.levelAdjunction n) (H.levelAdjunction m)
-        (.mk _ _ _ _ (H.restriction h).hom)).natTrans = (IX.restrictInverse h).inv from
+        (.mk _ _ _ _ (H.restriction h).hom)) = (IX.restrictInverse h).inv from
           H.restrictionMate h] at hu
       exact hu.symm
     have hrep (P : CochainComplex (strictEtaleLevel X O t n) ℤ) :=
@@ -228,7 +228,7 @@ theorem etaleCompactSupport_construction
           apply HomologicalComplex.hom_ext
           intro i
           exact hi (P.X i)) P
-    have heq : ((mateEquiv (al n) (al m)).symm τ).natTrans = (a h).hom := by
+    have heq : ((mateEquiv (al n) (al m)).symm τ) = (a h).hom := by
       apply (Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Q
         (HomologicalComplex.quasiIso (strictEtaleLevel X O t n) (.up ℤ))
         (DerivedCategory (strictEtaleLevel c.Z O t m))).map_injective
@@ -240,9 +240,9 @@ theorem etaleCompactSupport_construction
           (((H.level n).mapHomologicalComplex (.up ℤ)).obj P))).1
       exact (hrep P).trans (ha h P).symm
     have heq' : (mateEquiv (al n) (al m)
-        (.mk _ _ _ _ (a h).hom)).natTrans = τ.natTrans := by
+        (.mk _ _ _ _ (a h).hom)) = τ := by
       rw [← heq]
-      exact congrArg TwoSquare.natTrans ((mateEquiv (al n) (al m)).apply_symm_apply τ)
+      exact ((mateEquiv (al n) (al m)).apply_symm_apply τ)
     exact heq'
   have htransition {m n : ℕ} (h : n ≤ m)
       (K : DerivedCategory (strictEtaleCoefficientSystem X O t)) :

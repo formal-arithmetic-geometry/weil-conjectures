@@ -30,7 +30,7 @@ Tor amplitude. This file proves that the ordinary and the compactly supported co
 complexes `RΓ(X, K)` and `RΓ_c(X, K)`, and their duals `RHom(-, Λ)`, are *perfect point
 complexes* (`DerivedCategory.IsPerfect`), at each coefficient stage of the `ℓ`-adic formalism:
 at the finite stages `Λ = A_{E,n}`, at the integral stage `𝒪_E`, at the rational stage `E`
-and at `ℚ̄_ℓ` (blueprint `sk-lem-finite`).
+and at `ℚ̄_ℓ` (blueprint `lemma-perfect-complexes-geometric-point`).
 
 ## Main statements
 
@@ -64,8 +64,8 @@ complexes with constructible `ℓ`-adic cohomology sheaves, in
 ## Implementation notes
 
 The finite stage follows the blueprint: `RΓ_c(X, K)` is bounded with finite cohomology and of
-finite Tor amplitude (`sk-prop-sf-trace-perfectness`), hence perfect over the Noetherian ring
-`Λ` (`DerivedCategory.isPerfect_of_finiteTorAmplitude`). For `RΓ(X, K)` choose a
+finite Tor amplitude (`lemma-perfect-complexes-geometric-point`), hence perfect over the Noetherian
+ring `Λ` (`DerivedCategory.isPerfect_of_finiteTorAmplitude`). For `RΓ(X, K)` choose a
 compactification `X ⟶[j] X̄ ⟶[ā] Spec k` of `a_X`. Then `RΓ(X, K) ≅ RΓ(X̄, Rj_* K)` (Leray) and
 `RΓ(X̄, -) ≅ RΓ_c(X̄, -)` since `ā` is proper, and `Rj_* K` is again bounded constructible of
 finite Tor amplitude (`sk-thm-sf-direct-image-tor-amplitude`), so the compactly supported case
@@ -86,7 +86,7 @@ sheaf formalism, and bounded constructible means bounded with cohomology sheaves
 as in the definition of `AlgebraicGeometry.WeilComplex`. This stage is not deduced from the
 integral one (there is no comparison of `ℚ̄_ℓ,X`-modules with `ℓ`-adic towers in the
 repository) but proved directly, for `k` algebraically closed as in the blueprint setting
-`sk-def-set`: the derived pushforward to `Spec k` of an object of `D^b_c(X, ℚ̄_ℓ)` is in
+`prose-01-10`: the derived pushforward to `Spec k` of an object of `D^b_c(X, ℚ̄_ℓ)` is in
 `D^b_c(Spec k, ℚ̄_ℓ)` by the pro-étale finiteness theorem
 (`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor`), and the global sections of such an
 object are perfect, the global sections functor on `Spec k` being exact and constructible
@@ -115,15 +115,15 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [I
   [HasCompactification aX]
 
 include aX in
-/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
-This is also blueprint `thm-pod-point-perfectness` (Point perfectness of global sections), at
-the finite stage.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
+at the point. This is also blueprint `lemma-perfect-complexes-geometric-point` (Point perfectness of
+global sections), at the finite stage.
 
 **`RΓ(X, K)` is perfect.** In the situation of
 `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections`, the ordinary cohomology
 complex `RΓ(X, K)` is a perfect complex of `Λ`-modules. For a compactification
 `X ⟶[j] X̄ ⟶[ā] Spec k` of `a_X`, `RΓ(X, K) ≅ RΓ(X̄, Rj_* K) ≅ RΓ_c(X̄, Rj_* K)`, `ā` being
-proper, and `Rj_* K ∈ Dctf(X̄, Λ)` (`sk-thm-sf-direct-image-tor-amplitude`). -/
+proper, and `Rj_* K ∈ Dctf(X̄, Λ)` (`lemma-perfect-complexes-geometric-point--5`). -/
 theorem isPerfect_rightDerivedGlobalSections [QuasiCompact aX]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
@@ -147,9 +147,9 @@ theorem isPerfect_rightDerivedGlobalSections [QuasiCompact aX]
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)
 
-/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
-This is also blueprint `thm-pod-point-perfectness` (Point perfectness of global sections), at
-the finite stage.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
+at the point. This is also blueprint `lemma-perfect-complexes-geometric-point` (Point perfectness of
+global sections), at the finite stage.
 
 **The dual of `RΓ_c(X, K)` is perfect.** In the situation of
 `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections`, the dual
@@ -162,9 +162,9 @@ theorem isPerfect_ihom_compactlySupportedGlobalSections
   (isPerfect_compactlySupportedGlobalSections Λ aX K hK).ihom_unit
 
 include aX in
-/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
-This is also blueprint `thm-pod-point-perfectness` (Point perfectness of global sections), at
-the finite stage.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
+at the point. This is also blueprint `lemma-perfect-complexes-geometric-point` (Point perfectness of
+global sections), at the finite stage.
 
 **The dual of `RΓ(X, K)` is perfect.** In the situation of
 `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections`, the dual
@@ -176,8 +176,8 @@ theorem isPerfect_ihom_rightDerivedGlobalSections [QuasiCompact aX]
       (𝟙_ _)).IsPerfect :=
   (isPerfect_rightDerivedGlobalSections Λ aX K hK).ihom_unit
 
-/-- Blueprint `thm-pod-point-perfectness`: Point perfectness of global sections, the finite
-stage `Λ = A_{E,n}`.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Point perfectness of global sections, the
+finite stage `Λ = A_{E,n}`.
 
 Let `Λ` be a finite ring whose exponent is invertible in the separably closed field `k`, let `X`
 be separated of finite type over `k` (neither proper nor smooth) and `K ∈ Dctf(X, Λ)`. Then the
@@ -391,7 +391,8 @@ lemma finite_and_hasInvertibleExponent_of_eq_bot (h : I = ⊥) :
     (Λ := Λ ⧸ (⊥ : Ideal Λ)) (X := Spec (.of k))
   exact ⟨m, hm0, by simpa using congrArg e hmΛ, hmk⟩
 
-/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
+at the point.
 
 **`RΓ_c(X, K)` is perfect at the integral stage.** Let `Λ` be a principal ideal domain, complete
 for an ideal `I` with `Λ/I` finite of exponent invertible in `k`; this is the integral stage
@@ -439,7 +440,8 @@ theorem isPerfect_compactlySupportedGlobalSections_integral (hI : I.IsPrincipal)
     hN φ hφ
 
 omit [IsSeparated aX] in
-/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
+at the point.
 
 **`RΓ(X, K)` is perfect at the integral stage.** In the situation of
 `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`, the cohomology
@@ -518,7 +520,8 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
   have hY0 : IsZero Y := (Triangle.isZero₃_iff_isIso₁ _ hY).2 (inferInstanceAs (IsIso (𝟙 _)))
   exact ⟨⟨0, hY0.eq_of_src _ _, hY0.eq_of_src _ _⟩⟩
 
-/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
+at the point.
 
 **The dual of `RΓ_c(X, K)` is perfect at the integral stage.** Here `RΓ_c(X, K)` is the integral
 compactly supported cohomology `RΓ(Spec k, c.pt)` of
@@ -534,7 +537,8 @@ theorem isPerfect_ihom_compactlySupportedGlobalSections_integral (hI : I.IsPrinc
   (isPerfect_compactlySupportedGlobalSections_integral aX hI K hK c hc).ihom_unit
 
 omit [IsSeparated aX] in
-/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
+at the point.
 
 **The dual of `RΓ(X, K)` is perfect at the integral stage.** -/
 theorem isPerfect_ihom_rightDerivedGlobalSections_integral [QuasiCompact aX]
@@ -545,9 +549,9 @@ theorem isPerfect_ihom_rightDerivedGlobalSections_integral [QuasiCompact aX]
       (𝟙_ _)).IsPerfect :=
   (isPerfect_rightDerivedGlobalSections_integral aX hI K hK).ihom_unit
 
-/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
-This is also blueprint `thm-pod-point-perfectness` (Point perfectness of global sections), at
-the field stage `E`.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
+at the point. This is also blueprint `lemma-perfect-complexes-geometric-point` (Point perfectness of
+global sections), at the field stage `E`.
 
 **The rational stage.** In the situation of
 `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`, let `E` be a
@@ -584,8 +588,8 @@ theorem rationalHomology_globalSections [QuasiCompact aX] (hI : I.IsPrincipal)
       hc).tensor_homology E
   · exact (isPerfect_ihom_rightDerivedGlobalSections_integral aX hI K hK).tensor_homology E
 
-/-- Blueprint `thm-pod-point-perfectness`: Point perfectness of global sections, the integral
-stage `Λ = 𝒪_E`.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Point perfectness of global sections, the
+integral stage `Λ = 𝒪_E`.
 
 In the situation of `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`
 (`Λ` a complete Noetherian domain for a principal ideal `I` with finite residue ring of exponent

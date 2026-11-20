@@ -52,8 +52,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! Derived comparison data for localized projection sites.
 
-Source: Stacks Project, Cohomology on Sites, Tags 08FI and 0FN5.
-(blueprint: lem-weil-pbc-ringed-projection-local-derived-data).
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 08FI and 0FN5
 -/
 
 @[expose] public noncomputable section
@@ -65,8 +66,6 @@ open CategoryTheory AlgebraicGeometry Opposite
 namespace AlgebraicGeometry.Scheme.ProjectionRestriction
 
 /-- The derived comparison portion of localized projection data.
-Source: Stacks Project, Cohomology on Sites, Tags 08FI and 0FN5.
-(blueprint: lem-weil-pbc-ringed-projection-local-derived-data).
 
 The structure contains the normalized direct-image and pullback comparisons,
 their representative equations, and the counit mate equation.  The restriction
@@ -145,18 +144,7 @@ private theorem rightComparison_isIso
 attribute [local instance] Limits.comp_preservesFiniteLimits Limits.comp_preservesFiniteColimits
 
 -- Elaborate the canonical derived mate and its two localized coefficient models.
-/-- The derived comparison package exists for every base package.
-Source: Stacks Project, Cohomology on Sites, Tags 08FI and 0FN5.
-(blueprint: lem-weil-pbc-ringed-projection-local-derived-data).
-
-Proof: construct the ordinary direct-image square from the coefficient section
-equality, and identify its inverse mate with the canonical ordinary localization
-isomorphism. Localize this exact pullback square and take its mate under the
-specified derived adjunctions. The cochain mate normalization gives the required
-representative equation. Restriction preserves K-injectives, so this mate is
-invertible on K-injective representatives and hence on every derived object.
-Exact localization and the canonical derived adjunctions commute with shifts;
-the mate counit identity supplies the final equation. -/
+/-- The derived comparison package exists for every base package. -/
 theorem localDerivedData_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -216,16 +204,16 @@ theorem localDerivedData_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
   let := b.operation.kInjectives
   have := localOrdinaryInverseMate_isIso g V b ordinary hsections
   let theta := asIso (((mateEquiv g.operation.moduleAdjunction
-    b.operation.moduleAdjunction).symm (TwoSquare.mk _ _ _ _ ordinary.hom)).natTrans)
+    b.operation.moduleAdjunction).symm (TwoSquare.mk _ _ _ _ ordinary.hom)))
   have htheta : (mateEquiv g.operation.moduleAdjunction b.operation.moduleAdjunction
-      (TwoSquare.mk _ _ _ _ theta.hom)).natTrans = ordinary.hom := by
-    exact congrArg TwoSquare.natTrans
+      (TwoSquare.mk _ _ _ _ theta.hom)) = ordinary.hom := by
+    exact
       ((mateEquiv g.operation.moduleAdjunction b.operation.moduleAdjunction).apply_symm_apply
         (TwoSquare.mk _ _ _ _ ordinary.hom))
   let thetaD := CategoryTheory.UnboundedExactTower.localizedSquare
     g.operation.pullback b.operation.pullback r t theta
   let beta := (mateEquiv g.operation.derivedAdjunction b.operation.derivedAdjunction
-    (TwoSquare.mk _ _ _ _ thetaD.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ thetaD.hom))
   have hnormal (I : CochainComplex (Mod R_X) ℤ) :
       r.mapDerivedCategoryFactors.inv.app
           ((g.operation.pushforward.mapHomologicalComplex (.up ℤ)).obj I) ≫

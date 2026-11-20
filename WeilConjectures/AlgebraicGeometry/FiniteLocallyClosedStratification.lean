@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 # Finite locally closed stratifications
 
 Source: Stacks Project, Tag 09XZ, with finiteness added
-(blueprint: def-constructible-stratification).
+(blueprint: definition-constructible-sheaves--2).
 
 The upstream `Topology.Stratification` now requires constructible strata. These interfaces
 state the recorded DAG notion without that additional condition.
@@ -26,7 +26,7 @@ namespace Topology
 
 /-- A finite partition into locally closed subsets; constructibility is not required.
 Source: Stacks Project, Tag 09XZ, with finiteness added
-(blueprint: def-constructible-stratification). -/
+(blueprint: definition-constructible-sheaves--2). -/
 structure FiniteLocallyClosedStratification (X : Type u) [TopologicalSpace X] where
   /-- Number of strata. -/
   n : ℕ
@@ -47,7 +47,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A finite locally closed partition with scheme immersions realizing its strata.
 Source: Stacks Project, Tag 09XZ, with finiteness and scheme realizations added
-(blueprint: def-constructible-stratification). -/
+(blueprint: definition-constructible-sheaves--2). -/
 structure FiniteLocallyClosedStratification (X : Scheme.{u}) extends
     Topology.FiniteLocallyClosedStratification X where
   /-- A scheme realizing each stratum. -/

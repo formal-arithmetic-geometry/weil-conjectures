@@ -26,8 +26,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteCo
 /-!
 # Intrinsic constructibility in the fixed-coefficient presentation
 
-Source: blueprint, def-weil-proetale-constructible-sheaf, second paragraph
-(blueprint: def-weil-proetale-constructible-sheaf).
 This is the intrinsic finite-stratification definition in the fixed-module encoding
 and in the coefficient universe required by the small pro-etale site.
 -/
@@ -40,9 +38,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A finite constructible locally closed stratification, local constancy on each
 stratum, and finite geometric stalks. No bound, common stratification, or etale
-origin is part of this sheaf predicate. Source: blueprint,
-def-weil-proetale-constructible-sheaf, second paragraph
-(blueprint: def-weil-proetale-constructible-sheaf). -/
+origin is part of this sheaf predicate. -/
 def IsConstructibleProEtaleFixedModuleSheaf (Y : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : Prop :=

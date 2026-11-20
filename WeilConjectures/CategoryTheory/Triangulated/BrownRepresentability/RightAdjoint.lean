@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Triangulated.Adjunction
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Basic
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
+public import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-!
 # The Brown right adjoint of a coproduct-preserving triangulated functor
@@ -18,8 +19,8 @@ Let `C` be a pretriangulated category with `Hom`-types in `Type v`, with coprodu
 (`CategoryTheory.BrownRepresentability.CompactGenerators`), and let `F : C ⥤ D` be a triangulated
 functor which preserves coproducts. Brown representability
 (`CategoryTheory.Functor.isLeftAdjoint_of_compactGenerators`) shows that `F` has a right adjoint
-`G`. We complete this to the abstract form of blueprint nodes `det-sf-existence-brown` and
-`det-sf-existence-direct-sums`:
+`G`. We complete this to the abstract form of blueprint nodes
+`theorem-existence-exceptional-inverse-image` and `theorem-existence-exceptional-inverse-image--4`:
 
 * `G` commutes with shifts compatibly with the adjunction and is triangulated, and any two right
   adjoints of `F` are isomorphic by a unique isomorphism compatible with the counits
@@ -41,7 +42,7 @@ functor `Φ : C₁ ⥤ C₂` mapping `Loc(P₁)` into `Loc(P₂)` and `P₁` int
 `Loc(P₁) ⥤ Loc(P₂)` (`CategoryTheory.ObjectProperty.localizingClosureLift`) has a triangulated,
 coproduct-preserving right adjoint, unique up to unique isomorphism
 (`CategoryTheory.ObjectProperty.exists_rightAdjoint_localizingClosureLift`). This is the formal
-part of blueprint `sk-prop-sf-existence`.
+part of blueprint `theorem-existence-exceptional-inverse-image`.
 -/
 
 @[expose] public section
@@ -139,9 +140,9 @@ lemma bijective_comp_sigmaComparison [Preadditive C] [Preadditive D] {F : C ⥤ 
 variable [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
 
-/-- Blueprint `det-sf-existence-direct-sums` (abstract form): let `C` be a pretriangulated
-category with a family of compact generators `S`, and `F ⊣ G` with `F` additive. If `F` sends
-each generator to a compact object, then the right adjoint `G` preserves coproducts: the
+/-- Blueprint `theorem-existence-exceptional-inverse-image--4` (abstract form): let `C` be a
+pretriangulated category with a family of compact generators `S`, and `F ⊣ G` with `F` additive. If
+`F` sends each generator to a compact object, then the right adjoint `G` preserves coproducts: the
 canonical map `∐ G(Nⱼ) ⟶ G(∐ Nⱼ)` induces bijections on `Hom(S i, -)`
 (`Adjunction.bijective_comp_sigmaComparison`), and the generators detect isomorphisms. -/
 theorem preservesColimitsOfShape_discrete_of_compactGenerators [Preadditive D]
@@ -155,8 +156,8 @@ theorem preservesColimitsOfShape_discrete_of_compactGenerators [Preadditive D]
     exact PreservesCoproduct.of_iso_comparison G N
   exact preservesColimitsOfShape_of_discrete G
 
-/-- Uniqueness of right adjoints (blueprint `det-sf-existence-brown` (3)): two right adjoints of
-`F` are isomorphic by a unique isomorphism compatible with the counits. -/
+/-- Uniqueness of right adjoints (blueprint `theorem-existence-exceptional-inverse-image` (3)): two
+right adjoints of `F` are isomorphic by a unique isomorphism compatible with the counits. -/
 lemma existsUnique_iso_comp_counit {C : Type u₁} {D : Type u₂} [Category* C] [Category* D]
     {F : C ⥤ D} {G G' : D ⥤ C} (adj : F ⊣ G) (adj' : F ⊣ G') :
     ∃! e : G ≅ G', ∀ Y, F.map (e.hom.app Y) ≫ adj'.counit.app Y = adj.counit.app Y := by
@@ -176,9 +177,9 @@ variable {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v} D]
   [Preadditive D] [HasZeroObject D] [HasShift D ℤ]
   [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
 
-/-- Blueprint `det-sf-existence-brown` (abstract form): let `C` be a pretriangulated category
-with coproducts and a family of compact generators, and `F : C ⥤ D` a triangulated functor
-preserving coproducts. Then
+/-- Blueprint `theorem-existence-exceptional-inverse-image` (abstract form): let `C` be a
+pretriangulated category with coproducts and a family of compact generators, and `F : C ⥤ D` a
+triangulated functor preserving coproducts. Then
 
 1. `F` has a right adjoint `G` (Brown representability,
    `Functor.isLeftAdjoint_of_compactGenerators`);
@@ -292,9 +293,9 @@ instance preservesColimitsOfShape_localizingClosureLift (J : Type v)
     (localizingClosureLiftCompιIso P₁ P₂ Φ hΦ).symm
   preservesColimitsOfShape_of_reflects_of_preserves _ P₂.localizingClosure.ι
 
-/-- Blueprint `det-sf-existence-brown` (1), on localizing closures: if `P₁` compactly generates
-its localizing closure and the restriction of the triangulated functor `Φ` to `Loc(P₁)`
-preserves coproducts, then the restriction `Φ : Loc(P₁) ⥤ Loc(P₂)` is a left adjoint
+/-- Blueprint `theorem-existence-exceptional-inverse-image` (1), on localizing closures: if `P₁`
+compactly generates its localizing closure and the restriction of the triangulated functor `Φ` to
+`Loc(P₁)` preserves coproducts, then the restriction `Φ : Loc(P₁) ⥤ Loc(P₂)` is a left adjoint
 (Brown representability). -/
 theorem isLeftAdjoint_localizingClosureLift [HasCoproducts.{v} C₁] [Φ.IsTriangulated]
     (hP₁ : P₁.CompactlyGeneratesLocalizingClosure)
@@ -303,8 +304,8 @@ theorem isLeftAdjoint_localizingClosureLift [HasCoproducts.{v} C₁] [Φ.IsTrian
   obtain ⟨ι, S, hS, -⟩ := hP₁.exists_compactGenerators
   exact Functor.isLeftAdjoint_of_compactGenerators hS _
 
-/-- Blueprint `det-sf-existence-direct-sums`, on localizing closures: if `P₁` and `P₂`
-compactly generate their localizing closures and `Φ` maps `P₁` into `P₂`, then every right
+/-- Blueprint `theorem-existence-exceptional-inverse-image--4`, on localizing closures: if `P₁` and
+`P₂` compactly generate their localizing closures and `Φ` maps `P₁` into `P₂`, then every right
 adjoint of the restriction `Φ : Loc(P₁) ⥤ Loc(P₂)` preserves coproducts. -/
 theorem preservesColimitsOfShape_of_localizingClosureLift_adjunction [HasCoproducts.{v} C₁]
     [HasCoproducts.{v} C₂] [Φ.IsTriangulated] (hP₁ : P₁.CompactlyGeneratesLocalizingClosure)
@@ -319,12 +320,12 @@ theorem preservesColimitsOfShape_of_localizingClosureLift_adjunction [HasCoprodu
     ((localizingClosureLift P₁ P₂ Φ hΦ).mapIso e ≪≫
       ((localizingClosureLift P₁ P₂ Φ hΦ).commShiftIso n).app X)
 
-/-- The formal part of blueprint `sk-prop-sf-existence`. Let `P₁`, `P₂` compactly generate their
-localizing closures, and let `Φ : C₁ ⥤ C₂` be a triangulated functor which maps `Loc(P₁)` into
-`Loc(P₂)` and `P₁` into `P₂`, and whose restriction to `Loc(P₁)` preserves coproducts. Then the
-restriction `Φ : Loc(P₁) ⥤ Loc(P₂)` has a right adjoint `G`, which commutes with shifts
-compatibly with the adjunction, is triangulated, preserves coproducts, and is unique up to a
-unique isomorphism compatible with the counits. -/
+/-- The formal part of blueprint `theorem-existence-exceptional-inverse-image`. Let `P₁`, `P₂`
+compactly generate their localizing closures, and let `Φ : C₁ ⥤ C₂` be a triangulated functor which
+maps `Loc(P₁)` into `Loc(P₂)` and `P₁` into `P₂`, and whose restriction to `Loc(P₁)` preserves
+coproducts. Then the restriction `Φ : Loc(P₁) ⥤ Loc(P₂)` has a right adjoint `G`, which commutes
+with shifts compatibly with the adjunction, is triangulated, preserves coproducts, and is unique up
+to a unique isomorphism compatible with the counits. -/
 theorem exists_rightAdjoint_localizingClosureLift [HasCoproducts.{v} C₁] [HasCoproducts.{v} C₂]
     [Φ.IsTriangulated] (hP₁ : P₁.CompactlyGeneratesLocalizingClosure)
     (hP₂ : P₂.CompactlyGeneratesLocalizingClosure) (hΦ' : ∀ X, P₁ X → P₂ (Φ.obj X))

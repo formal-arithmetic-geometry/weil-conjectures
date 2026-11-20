@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.CommMonoidOperationsDescent
 /-!
 # Descent of the commutative monoid operations
 
-Source: blueprint lem-pd-group-scheme-descent, multiplication and unit step;
+Source: blueprint proposition-jacobian-over-ground-field--1, multiplication and unit step;
 Stacks Project, Descent, Tag 02W0.
 (blueprint: lem-pd-comm-monoid-operations-descent).
 -/
@@ -66,8 +66,8 @@ private theorem local_hom_ext
   exact congrArg (fun k => k.left) h
 
 /-- Multiplication and the unit descend to a commutative monoid structure, before the
-inverse is descended. Source: blueprint lem-pd-group-scheme-descent, multiplication and
-unit step; Stacks Project, Tag 02W0.
+inverse is descended. Source: blueprint proposition-jacobian-over-ground-field--1, multiplication
+and unit step; Stacks Project, Tag 02W0.
 (blueprint: lem-pd-comm-monoid-operations-descent).
 
 Proof: First descend multiplication and the unit as morphisms using
