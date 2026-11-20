@@ -21,8 +21,20 @@ sheaf whose local Frobenius eigenvalues are of finite order. The *twisted envelo
 `(A ⊗ L) ⊕ (A^∨ ⊗ L^∨)`
 
 is `ι`-real and punctually `ι`-pure of weight zero, and its extension by zero along an open
-immersion is `ι`-real as well. For `L` of rank one, `L^∨ = L⁻¹`, which is the form of the
-blueprint; the rank plays no role in the proof.
+immersion is `ι`-real as well.
+
+## Main declarations
+
+- `AlgebraicGeometry.WeilSheaf.twistedEnvelope`: the sheaf `(A ⊗ L) ⊕ (A^∨ ⊗ L^∨)`.
+- `AlgebraicGeometry.WeilSheaf.IsReal.extensionByZero`: the extension by zero of a real sheaf is
+  real.
+- `AlgebraicGeometry.WeilSheaf.isReal_twistedEnvelope_and_isPunctuallyPureOfWeight`: the twisted
+  envelope is real and pure of weight zero, and its extension by zero along an open immersion is
+  real.
+
+## Implementation details
+
+For `L` of rank one, `L^∨ = L⁻¹`; the rank plays no role in the proof, so `L` is arbitrary.
 
 The local eigenvalues of `L` are roots of unity, so `L` is punctually pure of weight zero, and
 so is `A ⊗ L`. On the dual of a module pure of weight zero the traces of the powers of the
@@ -34,15 +46,6 @@ the traces of the two summands are mutually conjugate, which makes the sum real
 (`FrobeniusModule.isReal_prod_of_map_trace_frobeniusEnd_pow`).
 The extension by zero of a real sheaf is real: its stalks are those of the sheaf on the open and
 zero outside, where the local polynomial is `1`.
-
-## Main declarations
-
-- `AlgebraicGeometry.WeilSheaf.twistedEnvelope`: the sheaf `(A ⊗ L) ⊕ (A^∨ ⊗ L^∨)`.
-- `AlgebraicGeometry.WeilSheaf.IsReal.extensionByZero`: the extension by zero of a real sheaf is
-  real.
-- `AlgebraicGeometry.WeilSheaf.isReal_twistedEnvelope_and_isPunctuallyPureOfWeight`
-  (`lemma-twisted-envelope`): the twisted envelope is real and pure of weight zero, and its
-  extension by zero along an open immersion is real.
 -/
 
 @[expose] public section
@@ -57,7 +60,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- A Weil sheaf whose local Frobenius eigenvalues are all of finite order is punctually
-`ι`-pure of weight zero: the images under `ι` of its eigenvalues are roots of unity. -/
+`ι`-pure of weight zero. -/
 theorem isPunctuallyPureOfWeight_zero_of_isOfFinOrder (ι : PadicAlgCl l →+* ℂ)
     {L : WeilSheaf k₀ l X}
     (hL : ∀ (x : X.finitePoints) (α : PadicAlgCl l),
@@ -83,9 +86,7 @@ section ExtensionByZero
 variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
 
-/-- **The extension by zero of a real sheaf is real.** At a closed point of the open the stalk
-of `j₀!G` is that of `G`, and at a closed point outside the open it vanishes, so that its local
-polynomial is `1`. -/
+/-- The extension by zero of a real sheaf along an open immersion is real. -/
 theorem IsReal.extensionByZero {ι : PadicAlgCl l →+* ℂ} {G : WeilSheaf k₀ l U}
     (hG : G.IsReal ι) : ((WeilSheaf.extensionByZero j).obj G).IsReal ι := by
   intro x
@@ -103,7 +104,7 @@ theorem IsReal.extensionByZero {ι : PadicAlgCl l →+* ℂ} {G : WeilSheaf k₀
 end ExtensionByZero
 
 /-- The *twisted envelope* `(A ⊗ L) ⊕ (A^∨ ⊗ L^∨)` of a lisse Weil sheaf `A` by a lisse Weil
-sheaf `L`. For `L` of rank one, `L^∨ = L⁻¹`. (blueprint: `lemma-twisted-envelope`) -/
+sheaf `L`. -/
 noncomputable def twistedEnvelope (A L : WeilSheaf k₀ l X) (hA : A.IsLisse) (hL : L.IsLisse) :
     WeilSheaf k₀ l X :=
   A.tensorObj L hA ⊞ (A.dual hA).tensorObj (L.dual hL) hA.dual
@@ -114,9 +115,7 @@ variable {ι : PadicAlgCl l →+* ℂ} {A L : WeilSheaf k₀ l X} (hA : A.IsLiss
 theorem IsLisse.twistedEnvelope : (twistedEnvelope A L hA hL).IsLisse :=
   (hA.tensorObj hL).biprod (hA.dual.tensorObj hL.dual)
 
-/-- **The twisted envelope is real.** If `A` and `L` are lisse and punctually `ι`-pure of weight
-zero, then at every closed point the traces of the powers of the local Frobenius on
-`A^∨ ⊗ L^∨` are the complex conjugates of those on `A ⊗ L`, so that the twisted envelope
+/-- If `A` and `L` are lisse and punctually `ι`-pure of weight zero, then the twisted envelope
 `(A ⊗ L) ⊕ (A^∨ ⊗ L^∨)` is `ι`-real. -/
 theorem isReal_twistedEnvelope (hA₀ : A.IsPunctuallyPureOfWeight ι 0)
     (hL₀ : L.IsPunctuallyPureOfWeight ι 0) : (twistedEnvelope A L hA hL).IsReal ι := by
@@ -129,8 +128,8 @@ theorem isReal_twistedEnvelope (hA₀ : A.IsPunctuallyPureOfWeight ι 0)
     map_mul, map_mul, hL₀.map_trace_frobeniusEnd_pow_stalk_dual hL,
     hA₀.map_trace_frobeniusEnd_pow_stalk_dual hA]
 
-/-- **The twisted envelope is pure of weight zero**, if `A` and `L` are: `A ⊗ L` is of weight
-`0 + 0`, and `A^∨ ⊗ L^∨` of weight `-0 + -0`. -/
+/-- If `A` and `L` are lisse and punctually `ι`-pure of weight zero, then so is the twisted
+envelope `(A ⊗ L) ⊕ (A^∨ ⊗ L^∨)`. -/
 theorem isPunctuallyPureOfWeight_twistedEnvelope (hA₀ : A.IsPunctuallyPureOfWeight ι 0)
     (hL₀ : L.IsPunctuallyPureOfWeight ι 0) :
     (twistedEnvelope A L hA hL).IsPunctuallyPureOfWeight ι 0 := by
@@ -149,10 +148,7 @@ theorem isPunctuallyPureOfWeight_twistedEnvelope (hA₀ : A.IsPunctuallyPureOfWe
 /-- **Twisting and adding the dual.** Let `A` be lisse and punctually `ι`-pure of weight zero,
 and let `L` be lisse with local Frobenius eigenvalues of finite order. Then the twisted envelope
 `(A ⊗ L) ⊕ (A^∨ ⊗ L^∨)` is `ι`-real and punctually `ι`-pure of weight zero, and its extension by
-zero along any (quasi-compact) open immersion `j : X ⟶ Y` is `ι`-real as well.
-
-For `L` of rank one, `L^∨ = L⁻¹`, which is the statement of the blueprint; the rank is not used.
-(blueprint: `lemma-twisted-envelope`, `lemma-twisted-envelope--1`) -/
+zero along any quasi-compact open immersion `j : X ⟶ Y` is `ι`-real as well. -/
 theorem isReal_twistedEnvelope_and_isPunctuallyPureOfWeight
     (hA₀ : A.IsPunctuallyPureOfWeight ι 0)
     (hLfin : ∀ (x : X.finitePoints) (α : PadicAlgCl l),
