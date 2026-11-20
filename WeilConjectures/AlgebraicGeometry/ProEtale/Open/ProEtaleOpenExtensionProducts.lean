@@ -27,11 +27,6 @@ set_option linter.privateModule false
 /-!
 # Products and sequential derived limits of open extensions
 
-Source: Weil blueprint, sec-smooth-purity/sk-prop-sf-closed-unit,
-`det-sf-open-closed-extension-zero-limits`, clauses (1)--(3); Stacks Project,
-Tags 09BN, 0152, 070I and 08TC
-(blueprint: det-sf-open-closed-extension-zero-limits).
-
 The ring sheaf is an arbitrary monoid object in abelian sheaves. The module functors
 are the recorded open-closed module-object functors, without commutative or constant
 coefficient hypotheses. Derived categories use the standard localization universe.
@@ -49,6 +44,10 @@ localization on the closed stratum is needed.
 
 * `proEtale_openExtension_products_derivedLimits`: the natural triangle, preservation of
   derived products and sequential Roos limits, and preservation of sheaf products.
+
+## References
+
+* Stacks Project, Tags 09BN, 0152, 070I and 08TC
 -/
 
 @[expose] public noncomputable section

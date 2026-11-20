@@ -24,8 +24,9 @@ Galois Frobenius of `X`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback`: blueprint
-  `lem-zl-bertini-finite-cover-curve`.
+- `AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback`: a smooth
+  affine curve through prescribed points along which a connected finite étale cover stays
+  connected.
 
 ## Implementation notes
 
@@ -51,11 +52,10 @@ open CategoryTheory Limits TensorProduct
 
 namespace AlgebraicGeometry.Scheme.Hom
 
-/-- **Curves through prescribed points preserving a finite cover**
-(blueprint: `lem-zl-bertini-finite-cover-curve`). Let `f : X₀ ⟶ Spec k₀` be a smooth
-geometrically connected affine scheme of relative dimension `d ≥ 2` over a finite field, with
-geometric fiber `X`, let `π : T ⟶ X` be a finite étale morphism with `T` connected, and let `S`
-be a nonempty finite set of `k̄`-points of `X`. There is a closed immersion `i : C ⟶ X` of a
+/-- **Curves through prescribed points preserving a finite cover.** Let `f : X₀ ⟶ Spec k₀` be a
+smooth geometrically connected affine scheme of relative dimension `d ≥ 2` over a finite field,
+with geometric fiber `X`, let `π : T ⟶ X` be a finite étale morphism with `T` connected, and let
+`S` be a nonempty finite set of `k̄`-points of `X`. There is a closed immersion `i : C ⟶ X` of a
 smooth connected affine curve over `k̄` through every point of `S`, such that `T ×_X C` is
 connected and `C` is stable under some power `(𝟙 × σ)ᵐ`, `m ≥ 1`, of the geometric Galois
 Frobenius of `X`. -/

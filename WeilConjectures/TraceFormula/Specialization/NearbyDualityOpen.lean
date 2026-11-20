@@ -15,7 +15,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 # Nearby duality and open restriction: the concrete inputs
 
 The compatibility of the duality map of nearby cycles with open restriction (blueprint
-`det-tf-nearby-duality-proper` (2)) is the abstract identity
+`lemma-nearby-duality-proper-direct-image` (2)) is the abstract identity
 `CategoryTheory.Verdier.nearbyDualityMap_restrict_natTrans`. This file proves its concrete inputs
 for trait models:
 * the duality map of `(G, μ_G, e)` for a lax monoidal `G` is the internal-hom comparison of `G`
@@ -198,8 +198,8 @@ lemma Hom.boundedConstructiblePullbackExchange_tensor
     (φ.boundedConstructiblePullbackExchange_eq_liftExchange' hN hM) A B
 
 /-- **Nearby duality and open restriction, on bounded constructible complexes** (blueprint
-`det-tf-nearby-duality-proper` (2)): for a morphism of models `φ : N ⟶ M` over `j`, `j'` whose
-pullback exchange is given, dualizing maps `θ_M`, `θ_N` compatible with the identifications
+`lemma-nearby-duality-proper-direct-image` (2)): for a morphism of models `φ : N ⟶ M` over `j`, `j'`
+whose pullback exchange is given, dualizing maps `θ_M`, `θ_N` compatible with the identifications
 `ρ : j^* ω ⟶ ω_N`, `ρ' : j'^* ω' ⟶ ω'_N`, the restriction of the duality map of `M` is identified
 with the duality map of `N`. -/
 theorem nearbyDualityMap_restrict_boundedConstructible
@@ -302,8 +302,8 @@ variable (ℓ) [IsSepClosed k'] [Algebra k k'] [IsOpenImmersion j.left] [IsOpenI
   {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-/-- **Nearby duality and open restriction** (blueprint `det-tf-nearby-duality-proper` (2)): for a
-morphism `φ : N ⟶ M` of trait models over the base, over open immersions `j : Y ⟶ X` and
+/-- **Nearby duality and open restriction** (blueprint `lemma-nearby-duality-proper-direct-image`
+(2)): for a morphism `φ : N ⟶ M` of trait models over the base, over open immersions `j : Y ⟶ X` and
 `j' : Y' ⟶ X'`, whose map of total spaces is an open immersion compatible with the structure
 morphisms and whose square of geometric generic fibres is cartesian, the restriction `j'^* δ_{M,K}`
 of the duality map of `M` is an isomorphism if and only if the duality map `δ_{N, j^* K}` of `N`

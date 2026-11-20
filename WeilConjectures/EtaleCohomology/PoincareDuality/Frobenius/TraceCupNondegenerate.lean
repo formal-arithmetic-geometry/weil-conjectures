@@ -28,8 +28,9 @@ cup product is the Yoneda product `x ⌣ y = x ≫ y[i]`
 (`AlgebraicGeometry.Etale.nondegenerate_comp_unit_of_isSepClosed_of_injective`), read through the
 bijections `x ↦ 1 ≫ Ra_!(x)` (`La^* ⊣ Ra_*` and `Ra_! ≅ Ra_*`) and `y ↦ (y[i] ≫ γ')^♭`.
 
-This is the finite-level duality of blueprint `sk-thm-transport` in the form needed for the
-trace–cup structure at `ℚ̄_ℓ` (`sk-cor-trace`, `sk-thm-derived-duality`).
+This is the finite-level duality of blueprint `theorem-poincare-duality--9` in the form needed for
+the trace–cup structure at `ℚ̄_ℓ` (`corollary-cup-product-pairing--1`,
+`corollary-degreewise-duality-over-fields`).
 -/
 
 @[expose] public section

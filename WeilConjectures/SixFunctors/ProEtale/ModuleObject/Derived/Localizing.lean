@@ -23,10 +23,11 @@ let `D(X_proét, Λ) = D(Mod_{Λ_X})` be the derived category of module objects 
 localizing closure `Loc(Dbc(X, Λ))` of the bounded constructible complexes, defined in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing`
 (`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`, blueprint
-`sk-def-localizing-closure`; for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` one has `Dctf(X, Λ) = Dbc(X, Λ)`), the
-projection map and the base change map of the ambient categories, and the formal arguments of
-blueprint `sk-thm-sf-pf-field` and `sk-thm-sf-pf-adic` extending the projection formula and the
-tensor closure from `Dbc` to `Loc(Dbc)`.
+`definition-localizing-subcategory`; for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` one has `Dctf(X, Λ) = Dbc(X, Λ)`),
+the projection map and the base change map of the ambient categories, and the formal arguments of
+blueprint `proposition-projection-formula-rational-coefficients` and
+`lemma-projection-formula-integral-coefficients` extending the projection formula and the tensor
+closure from `Dbc` to `Loc(Dbc)`.
 
 ## Main definitions
 
@@ -148,11 +149,11 @@ lemma preservesCoproductsOn_tensorRight (K : 𝔻(X)) (P : ObjectProperty 𝔻(X
     (NatIso.ofComponents (fun M ↦ @BraidedCategory.braiding _ _ _ β K M)
       (fun f ↦ @BraidedCategory.braiding_naturality_right _ _ _ β K _ _ f))
 
-/-- Blueprint `det-thm-sf-pf-field-tensor` (2), for an arbitrary condensed ring `Λ`: if the
-bounded constructible complexes `Dbc(X, Λ)` are closed under `⊗ᴸ`, so is `Loc(Dbc(X, Λ))`.
-Fixing `B` in `Dbc(X, Λ)`, the objects `A` of `Loc(Dbc(X, Λ))` with `A ⊗ᴸ B ∈ Loc(Dbc(X, Λ))` form
-a localizing subcategory containing `Dbc(X, Λ)`, `- ⊗ᴸ B` being exact and preserving direct sums;
-then fix `A` in `Loc(Dbc(X, Λ))` and argue in `B`
+/-- Blueprint `proposition-projection-formula-rational-coefficients--1` (2), for an arbitrary
+condensed ring `Λ`: if the bounded constructible complexes `Dbc(X, Λ)` are closed under `⊗ᴸ`, so is
+`Loc(Dbc(X, Λ))`. Fixing `B` in `Dbc(X, Λ)`, the objects `A` of `Loc(Dbc(X, Λ))` with
+`A ⊗ᴸ B ∈ Loc(Dbc(X, Λ))` form a localizing subcategory containing `Dbc(X, Λ)`, `- ⊗ᴸ B` being exact
+and preserving direct sums; then fix `A` in `Loc(Dbc(X, Λ))` and argue in `B`
 (`CategoryTheory.ObjectProperty.localizingClosure_map₂`). -/
 theorem localizingBoundedConstructible_tensor
     (h : ∀ A B : 𝔻(X), boundedConstructible (condensedRingObj Λ X) A →

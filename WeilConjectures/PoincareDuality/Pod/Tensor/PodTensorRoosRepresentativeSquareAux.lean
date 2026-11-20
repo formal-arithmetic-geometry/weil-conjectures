@@ -16,7 +16,7 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
 /-! # Ingredients of the canonical representative square
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
 (blueprint: lem-pod-tensor-roos-representative-square).
 
 The normalized pullback field of a lawful reindexing package is the fixed completed
@@ -99,7 +99,7 @@ theorem podOrdinaryToCompleted_app_eq
 /-- The coherent limit/tensor comparison, followed by the tensor of the two
 ordinary-to-completed maps, is the ordinary-to-completed map of the tensor followed by
 the canonical completed pullback/tensor comparison.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Step 5; Stacks 07A4, 0941
+Source: blueprint theorem-poincare-duality-frobenius--2, Step 5; Stacks 07A4, 0941
 (blueprint: lem-pod-tensor-roos-representative-square). -/
 theorem podReindexingLimitTensorComparison_canonical
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -162,7 +162,7 @@ theorem podOrdinaryToCompleted_isIso
 /-- A strict tensor tower comparison, equal to a prescribed one at one pair of inputs and to
 a chosen generator-normalized comparison elsewhere, packaged with the induced constructible
 tensor comparison.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
 (blueprint: lem-pod-tensor-roos-representative-square). -/
 def podTensorReindexAt
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

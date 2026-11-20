@@ -15,8 +15,10 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Point lifting along a split faithfully flat puncture cover
 
-Source: Stacks Project, Tag 03SF.
-(blueprint: lem-sbc-affine-torsor-split-point-lifting) -/
+## References
+
+* Stacks Project, Tag 03SF
+-/
 
 @[expose] public section
 universe u
@@ -25,9 +27,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Compatibility of the explicit split section with a second base.
-Source: Stacks Project, Tag 03SF. Substitute the section's structural-map equation
-and then the supplied equality of the two maps to S.
-(blueprint: lem-sbc-affine-torsor-split-point-lifting) -/
+Substitute the section's structural-map equation
+and then the supplied equality of the two maps to S. -/
 theorem fixedSplitSectionOver_compat {Y S T V W : Scheme.{u}}
     (p : Y ⟶ S) (t : T ⟶ S) (k : V ⟶ T) (v : V ⟶ W) (w : W ⟶ S)
     (hk : k ≫ t = v ≫ w) (d : ℕ) (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
@@ -36,9 +37,7 @@ theorem fixedSplitSectionOver_compat {Y S T V W : Scheme.{u}}
   rw [fixedSplitSection_base p t k d δ hδ, hk]
 
 /-- The split section, retaining its structural map to a second base.
-This is a pullback lift of two explicit morphisms; no witness is chosen.
-Source: Stacks Project, Tag 03SF.
-(blueprint: lem-sbc-affine-torsor-split-point-lifting) -/
+This is a pullback lift of two explicit morphisms; no witness is chosen. -/
 noncomputable def fixedSplitSectionOver {Y S T V W : Scheme.{u}}
     (p : Y ⟶ S) (t : T ⟶ S) (k : V ⟶ T) (v : V ⟶ W) (w : W ⟶ S)
     (hk : k ≫ t = v ≫ w) (d : ℕ) (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
@@ -47,18 +46,7 @@ noncomputable def fixedSplitSectionOver {Y S T V W : Scheme.{u}}
   pullback.lift (fixedSplitSection p t k d δ x) v
     (fixedSplitSectionOver_compat p t k v w hk d δ hδ x)
 
-/-- Every point above H lifts to one of the explicit split sections above C.
-
-Source: Stacks Project, Tag 03SF; faithful flatness and base change.
-Proof: faithful flatness makes Spec C -> Spec H surjective, and its restriction
-D(h) -> D(ι g) is surjective by base change. Since p factors through D(g), every
-point of Y × Spec H is over D(ι g). Thus its pullback to D(h) is surjective.
-The isomorphism δ, pulled back along k, identifies Y × D(h) with d copies of D(h).
-Choose a point above the given point and read its summand label in this splitting.
-The morphism from that summand to Y × Spec H is exactly fixedSplitSectionOver,
-by its two projections. This gives the desired label and point. If d = 0, the
-pulled-back scheme is empty; surjectivity makes the original scheme empty too.
-(blueprint: lem-sbc-affine-torsor-split-point-lifting) -/
+/-- Every point above H lifts to one of the explicit split sections above C. -/
 theorem affine_torsor_split_point_lifting
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [Module.FaithfullyFlat H C]

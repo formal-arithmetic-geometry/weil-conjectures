@@ -53,7 +53,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 /-- **Topological invariance of the small pro-étale topos**: for a universal homeomorphism
 `r : X ⟶ Y`, the pushforward `r_*`, restriction along base change `V ↦ V ×_Y X`, is an
 equivalence between the categories of `A`-valued pro-étale sheaves on `X` and on `Y`, base
-change being a dense subsite (blueprint: `sk-i-topology`). -/
+change being a dense subsite (blueprint: `lemma-comparison-via-relative-frobenius--1`). -/
 theorem isEquivalence_lowerStar_of_isUniversalHomeomorphism : ((r)_*[A]).IsEquivalence := by
   have := Scheme.ProEt.isDenseSubsite_overPullback r
   have : ∀ V, HasLimitsOfShape
@@ -66,7 +66,7 @@ theorem isEquivalence_lowerStar_of_isUniversalHomeomorphism : ((r)_*[A]).IsEquiv
 /-- **Topological invariance of the small pro-étale topos**: for a universal homeomorphism
 `r : X ⟶ Y`, the pullback `r^*` is an equivalence between the categories of `A`-valued
 pro-étale sheaves on `Y` and on `X`, being left adjoint to the equivalence `r_*`
-(blueprint: `sk-i-topology`). -/
+(blueprint: `lemma-comparison-via-relative-frobenius--1`). -/
 theorem isEquivalence_upperStar_of_isUniversalHomeomorphism : ((r)^*[A]).IsEquivalence :=
   have := isEquivalence_lowerStar_of_isUniversalHomeomorphism A r
   (upperStarLowerStarAdjunction A r).isEquivalence_left_of_isEquivalence_right

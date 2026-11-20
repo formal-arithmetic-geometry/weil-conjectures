@@ -405,19 +405,7 @@ private lemma constructible_extend {X : Scheme.{u}}
     (lfp_extend (F.obj R) (F.obj S) (F.map φ) (hU i))
 
 /-- A constructible algebraic-closure coefficient sheaf becomes ind-constructible
-when restricted to any finite coefficient field.
-
-Source: blueprint latest, uniform constructible Ext, algebraic-closure coefficient
-argument. (blueprint: lem-sfb-algcl-restriction-ind-constructible).
-
-Proof: descend the sheaf to a constructible sheaf B over a finite field F. The finite
-fields containing E and F form a filtered final subsystem of all finite coefficient
-fields. The canonical coefficient cocone expresses Res_E(Omega tensor_F B) as the
-filtered colimit of Res_E(G tensor_F B). Scalar extension preserves finite presentations
-on each stratum, and finite-field restriction preserves constructibility by a finite
-basis. Evaluating the coefficient complex cocone in degree zero proves the claimed
-ordinary sheaf colimit. Transport across the descended model isomorphism. This argument
-also applies to the zero sheaf and the empty scheme. -/
+when restricted to any finite coefficient field. -/
 theorem algClRestriction_indConstructible
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

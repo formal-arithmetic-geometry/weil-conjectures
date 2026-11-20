@@ -58,7 +58,7 @@ public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetric
 
 /-! # Evaluation and signed coherence for the reindexed Hom complex
 
-Source: blueprint `prop-pod-dual-tate-data-compatibility`, proof Steps 1, 2 and 4;
+Source: blueprint `theorem-poincare-duality-frobenius--2`, proof Steps 1, 2 and 4;
 Stacks Project, Tags 0GMX, 0A8X and 08J9
 (blueprint: lem-pod-reindexing-evaluation-shift-composition).
 -/

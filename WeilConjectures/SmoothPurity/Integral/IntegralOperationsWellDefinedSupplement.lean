@@ -2202,7 +2202,7 @@ structure maps commute with reduction since their adjoints are the constant-sect
 maps. Thus the displayed pullback and tensor transition formulas commute with u,v.
 4. Exact countable products on pro-etale module sheaves identify the termwise
 products with derived products (lem-weil-proetale-countable-products-exact and
-lem-weil-derived-limit-existence). The shifted cone triangle is the Roos triangle
+lemma-reduction-derived-nakayama). The shifted cone triangle is the Roos triangle
 of def-weil-derived-limit, so each displayed value is a derived limit. The diagonal
 product map is a morphism of Roos triangles. Its two product components are
 isomorphisms; lem-weil-derived-limit-levelwise-iso makes its shifted-cone component

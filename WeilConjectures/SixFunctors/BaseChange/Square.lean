@@ -49,8 +49,8 @@ The pasting laws for the base change maps of horizontally or vertically composed
 follow from `CategoryTheory.mateEquiv_vcomp` and `CategoryTheory.mateEquiv_hcomp` together
 with the coherence of `AlgebraicGeometry.Etale.upperStarComp`; they are left to a later
 file.
-(blueprint: `def:weil-pbc-cartesian-square`, `def-weil-pbc-underived-exchange`,
-`lemma-weil-pbc-underived-exchange-naturality`)
+(blueprint: `def:weil-pbc-cartesian-square`, `definition-underived-base-change-map--1`,
+`prose-04-05`)
 
 -/
 
@@ -71,7 +71,7 @@ section Square
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- Blueprint `def-weil-pbc-cartesian-square`: Cartesian square and chosen pullback
+/-- Blueprint `definition-underived-base-change-map`: Cartesian square and chosen pullback
 identification, the square isomorphism.
 
 The square isomorphism `g^* ⋙ f'^* ≅ f^* ⋙ g'^*` attached to a commutative square
@@ -129,7 +129,7 @@ lemma Etale.map_unit_baseChangeMap_app (sq : CommSq g' f' f g)
 
 omit [HasSmallSiteSheafify A] in
 /-- **Naturality of the base change map** in the sheaf.
-(blueprint: `lemma-weil-pbc-underived-exchange-naturality`) -/
+(blueprint: `prose-04-05`) -/
 lemma Etale.baseChangeMap_naturality (sq : CommSq g' f' f g)
     {F F' : Sheaf X.smallEtaleTopology A} (u : F ⟶ F') :
     ((g)^*[A]).map (((f)_*[A]).map u) ≫ (Etale.baseChangeMap A sq).app F' =

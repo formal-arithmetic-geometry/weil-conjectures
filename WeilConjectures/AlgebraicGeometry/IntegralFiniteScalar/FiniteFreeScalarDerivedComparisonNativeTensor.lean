@@ -7,7 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.IntegralFiniteScalarModelDefinitions
 
 /-! Native derived tensor consequence for the finite-free scalar model.
-(blueprint: lem-sfb-finite-free-scalar-derived-comparison-flatness)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -20,8 +19,7 @@ open CondensedRing
 set_option linter.unusedVariables false in
 /-- K-flatness gives the native derived tensor comparison isomorphism.
 
-Source: the normalized sectionwise native-tensor theorem and transport across the
-fixed internal/module equivalence.  Resolve the two factors by the K-flat complex;
+Resolve the two factors by the K-flat complex;
 the normalized total-tensor comparison is an isomorphism and localization preserves
 it, yielding the displayed `DerivedCategory.Q` multiplication map.
 -/

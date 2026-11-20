@@ -10,9 +10,7 @@ public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import all WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupplement
 import Mathlib.CategoryTheory.Triangulated.TriangleShift
 
-/-! # Transport of the signed Kummer triangle
-Source: diagonal tower system proof, steps (3) and (4).
-(blueprint: lem-sfb-kummer-signed-triangle-transport). -/
+/-! # Transport of the signed Kummer triangle. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -152,16 +150,7 @@ private theorem transport_signed_kummer_triangle
   rw [hδ, ← hq] at h
   exact h
 
-/-- Transport the signed Kummer triangle through prescribed endpoint isomorphisms.
-Source: diagonal tower proof, step (3), kernel transport, and step (4), rotation sign
-(blueprint: lem-sfb-kummer-signed-triangle-transport).
-Proof: pull the Kummer short exact sequence back through the two isomorphisms
-on units and change its kernel through r. The resulting inclusion is monic.
-Naturality of single-object connecting arrows gives the prescribed q. Rotate the
-single-object distinguished triangle, shift once, change the first object by
-negative identity, and use shift addition on the third. The signs become the
-negative shifted q and the negative inclusion. Cancelling the endpoint
-isomorphisms gives the final inclusion equation. No scalar inversion is used. -/
+/-- Transport the signed Kummer triangle through prescribed endpoint isomorphisms. -/
 theorem proEtale_signed_kummer_triangle
     (W : Scheme.{u}) [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     (k : ℕ) (hk : 0 < k) (hW : IsUnit (k : Γ(W, ⊤)))

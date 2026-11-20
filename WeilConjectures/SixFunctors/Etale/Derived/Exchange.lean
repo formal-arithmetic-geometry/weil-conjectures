@@ -117,7 +117,7 @@ theorem isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite [
     (IsPullback.of_hasPullback c.g g)
   isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap _ sq c
 
-/-- Blueprint `sk-prop-sf-cbc`: Compact-support base change
+/-- Blueprint `proposition-composition-base-change-rf-shriek--4`: Compact-support base change
 
 **Compact-support base change.** For `f : X ⟶ Y` admitting a compactification, `g : Y' ⟶ Y`
 arbitrary, a cartesian square
@@ -131,8 +131,9 @@ arbitrary, a cartesian square
 ```
 
 with `f'` quasi-compact and admitting a compactification, and `Λ` finite, the exchange
-transformation `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of `sk-def-sf-exchanges` is an isomorphism of
-functors `D(X_ét, Λ) ⥤ D(Y'_ét, Λ)`.
+transformation `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of
+`proposition-composition-base-change-rf-shriek--4` is an isomorphism of functors
+`D(X_ét, Λ) ⥤ D(Y'_ét, Λ)`.
 
 `Ex_!` is `Ex_!(c)` for the chosen compactification `c` of `f`, followed by the comparison
 isomorphism `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` for `f'`, so this follows from
@@ -227,8 +228,8 @@ end Projection
 
 section LowerStar
 
-/-- Blueprint `lem-fix-operation-reduction`: Basic operations and coefficient reduction; the
-ordinary direct image. Used in blueprint `sk-lem-finite`.
+/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
+reduction; the ordinary direct image. Used in blueprint `lemma-perfect-complexes-geometric-point`.
 
 **`Rf_*` commutes with reduction modulo a principal ideal.** For `f : X ⟶ Y` arbitrary and a
 principal ideal `J` of a domain `Λ`, the square
@@ -251,8 +252,8 @@ is `Λ`. So the constant complex `(Λ/J)_Y` is dualizable, and the comparison
 `AlgebraicGeometry.Etale.rightDerivedLowerStarReductionModIdealMap` (the projection map of `Rf_*`
 at `(Λ/J)_Y`) is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarReductionModIdealMap_span_pow`).
-This is the reduction `𝒪_E → 𝒪_E/𝔪_Eⁿ` that carries `sk-lem-finite` from the finite stages to
-the integral stage `𝒪_E`, and the input of
+This is the reduction `𝒪_E → 𝒪_E/𝔪_Eⁿ` that carries `lemma-perfect-complexes-geometric-point` from
+the finite stages to the integral stage `𝒪_E`, and the input of
 `AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerStar`. -/
 theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar (f : X ⟶ Y) [IsDomain Λ]
     (J : Ideal Λ) (hJ : J.IsPrincipal) :

@@ -33,7 +33,7 @@ Proof:
 2. Use lem-weil-pbc-jacobi-zariski-surjection-h1 and
    lem-weil-pbc-jacobi-zariski-surjection-differentials (Tag 07BP) to identify
    the relative first homology with a.Cotangent and the relative differentials with zero.
-3. Apply lem-weil-pbc-jacobi-zariski-left-term-vanishing: projectivity kills
+3. Apply theorem-finite-etale-covers-proper-henselian--2: projectivity kills
    the two Tor groups, and the first homology vanishing kills the left endpoint.
 4. Use lem-weil-pbc-jacobi-zariski-differential-maps (Tag 00RU) for the two
    displayed formulas. Truncate the sequence at its zero endpoints.

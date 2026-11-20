@@ -19,7 +19,7 @@ and the dual of the linear Artin–Schreier sheaf `ℒ_{ψ⁻¹(a x)}` is `ℒ_{
 (`AlgebraicGeometry.nonempty_iso_dual_artinSchreier`, the pullback of the dual of a lisse sheaf
 being the dual of the pullback). Hence if `M` is nonexceptional for `ψ`, then `M^∨` is
 nonexceptional for `ψ⁻¹`, and so is the twisted dual `M^∨ ⊗ 𝓑_b`, which is moreover irreducible
-lisse if `M` is. (blueprint: `lem-fd-constituent-nonexceptional-concentration`, part (2))
+lisse if `M` is. (blueprint: `proposition-purity-lisse-part-fourier-transform`, part (2))
 
 ## Main statements
 
@@ -56,7 +56,7 @@ namespace WeilSheaf.LisseOnDenseOpen
 
 /-- If the lisse sheaf `M` of `D` is nonexceptional for `ψ`, its dual `M^∨` is nonexceptional
 for `ψ⁻¹`: a geometric constituent `ℒ_{ψ⁻¹(a x)}|_U` of `M^∨` would dualise to the geometric
-constituent `ℒ_{ψ(a x)}|_U` of `M`. (blueprint: `lem-fd-constituent-nonexceptional-concentration`,
+constituent `ℒ_{ψ(a x)}|_U` of `M`. (blueprint: `proposition-purity-lisse-part-fourier-transform`,
 part (2)) -/
 theorem isNonexceptional_dual (D : LisseOnDenseOpen k₀ l) {ψ : AddChar k₀ (PadicAlgCl l)}
     (h : D.sheaf.IsNonexceptional ψ D.j) : (D.sheaf.dual D.lisse).IsNonexceptional ψ⁻¹ D.j := by
@@ -82,7 +82,7 @@ theorem isNonexceptional_dual (D : LisseOnDenseOpen k₀ l) {ψ : AddChar k₀ (
 
 /-- The twisted dual `M^∨ ⊗ 𝓑_b` of an irreducible lisse sheaf `M` is irreducible lisse: the
 dual is irreducible lisse (`AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse.dual`), and so are
-its constant twists. (blueprint: `lem-fd-constituent-nonexceptional-concentration`, part (2)) -/
+its constant twists. (blueprint: `proposition-purity-lisse-part-fourier-transform`, part (2)) -/
 theorem isIrreducibleLisse_twistedDual (D : LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse) (b : (PadicAlgCl l)ˣ) :
     (D.twistedDual b).sheaf.IsIrreducibleLisse :=
@@ -90,7 +90,7 @@ theorem isIrreducibleLisse_twistedDual (D : LisseOnDenseOpen k₀ l)
 
 /-- If the lisse sheaf `M` of `D` is nonexceptional for `ψ`, the twisted dual `M^∨ ⊗ 𝓑_b` is
 nonexceptional for `ψ⁻¹`: the constant twist does not change the geometric constituents.
-(blueprint: `lem-fd-constituent-nonexceptional-concentration`, part (2)) -/
+(blueprint: `proposition-purity-lisse-part-fourier-transform`, part (2)) -/
 theorem isNonexceptional_twistedDual (D : LisseOnDenseOpen k₀ l)
     {ψ : AddChar k₀ (PadicAlgCl l)} (h : D.sheaf.IsNonexceptional ψ D.j) (b : (PadicAlgCl l)ˣ) :
     (D.twistedDual b).sheaf.IsNonexceptional ψ⁻¹ (D.twistedDual b).j :=

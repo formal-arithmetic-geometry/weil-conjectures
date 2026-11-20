@@ -24,8 +24,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The canonical comparison for restriction inside an open and the fixed ambient stalk.
 
-Source: lem-pc-perfect-locus, extension of the finite calculation near a point;
-lem-pc-finite-free-reverse-components-lift, proof step 1. Replace restriction by
+Source: lemma-coherent-base-change-invertible-sheaves--3, extension of the finite calculation near a
+point; lem-pc-finite-free-reverse-components-lift, proof step 1. Replace restriction by
 pullback, compose pullbacks, and identify the composite scheme maps by cancelling
 V.ι. This comparison applies to every module on V, independently of any complex.
 (blueprint: def-pc-stalk-restriction-within-iso) -/

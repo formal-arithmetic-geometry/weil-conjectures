@@ -18,8 +18,8 @@ Since `ν^*` is exact, it induces a canonical base change morphism of bounded be
 functors `ν_Y^* ∘ Rf_* ⟶ Rf_* ∘ ν_X^*`
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusBaseChange`), and for `f`
 quasi-compact and quasi-separated this morphism is an isomorphism (blueprint
-`sk-prop-sf-comparison`, the comparison direct image): the underived morphism is invertible and
-`ν^*` sends injective étale sheaves to `f_*`-acyclic pro-étale sheaves.
+`theorem-bounded-below-cohomology-comparison`, the comparison direct image): the underived morphism
+is invertible and `ν^*` sends injective étale sheaves to `f_*`-acyclic pro-étale sheaves.
 
 This makes the isomorphism of
 `AlgebraicGeometry.ProEtale.nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar`
@@ -70,9 +70,9 @@ theorem rightDerivedLowerStarComparisonPlusBaseChange_fac :
     Functor.rightDerivedFunctorPlusBaseChangeAux (lowerStarComparisonUpperStarBaseChange f A) :=
   Functor.rightDerivedFunctorPlusBaseChange_fac _
 
-/-- Blueprint `sk-prop-sf-comparison`, the comparison direct image: for `f` quasi-compact and
-quasi-separated, the canonical base change morphism `ν_Y^* ∘ R⁺f_* ⟶ R⁺f_* ∘ ν_X^*` is an
-isomorphism. The underived base change morphism is invertible
+/-- Blueprint `theorem-bounded-below-cohomology-comparison`, the comparison direct image: for `f`
+quasi-compact and quasi-separated, the canonical base change morphism
+`ν_Y^* ∘ R⁺f_* ⟶ R⁺f_* ∘ ν_X^*` is an isomorphism. The underived base change morphism is invertible
 (`AlgebraicGeometry.ProEtale.isIso_lowerStarComparisonUpperStarBaseChange`) and `ν_X^*` sends
 injective étale sheaves to `f_*`-acyclic pro-étale sheaves
 (`AlgebraicGeometry.ProEtale.rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective`). -/
@@ -83,11 +83,12 @@ instance isIso_rightDerivedLowerStarComparisonPlusBaseChange [QuasiCompact f]
     (asIso (lowerStarComparisonUpperStarBaseChange f A))
     (fun I _ ↦ rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective A f I)
 
-/-- Blueprint `prop-weil-pbc-comparison-direct-image` (and `sk-prop-sf-comparison`, the
-comparison direct image): for `f` quasi-compact and quasi-separated, the canonical isomorphism
-`ν_Y^* Rf_* ≅ Rf_* ν_X^*` on bounded below derived categories, the base change morphism
-`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusBaseChange` of right derived
-functors induced by the underived comparison `ν_Y^* f_* ⟶ f_* ν_X^*`
+/-- Blueprint `theorem-comparison-direct-images--1` (and
+`theorem-bounded-below-cohomology-comparison`, the comparison direct image): for `f` quasi-compact
+and quasi-separated, the canonical isomorphism `ν_Y^* Rf_* ≅ Rf_* ν_X^*` on bounded below derived
+categories, the base change morphism
+`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusBaseChange` of right derived functors
+induced by the underived comparison `ν_Y^* f_* ⟶ f_* ν_X^*`
 (`AlgebraicGeometry.ProEtale.lowerStarComparisonUpperStarBaseChange`). -/
 noncomputable def rightDerivedLowerStarComparisonPlusIso [QuasiCompact f] [QuasiSeparated f] :
     R+(Etale.lowerStar A f) ⋙ D+(ν^*(Y)[A]) ≅ D+(ν^*(X)[A]) ⋙ R+(ProEtale.lowerStar A f) :=

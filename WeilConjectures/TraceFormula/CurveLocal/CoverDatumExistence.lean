@@ -19,7 +19,7 @@ import Mathlib.GroupTheory.Sylow
 
 # Existence of the cover datum
 
-This file assembles the ingredients of blueprint `det-tf-restriction-zero-covers` (i) into a
+This file assembles the ingredients of blueprint `lemma-tangent-cones-on-cover` (i) into a
 cover datum `AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum`:
 
 * `AlgebraicGeometry.Scheme.exists_sylow_galoisCover_trivializing_connected`: a version of
@@ -174,7 +174,7 @@ lemma exists_specializes_ne :
   obtain ⟨z, hz⟩ := not_isMax_iff.mp (mt Order.coheight_eq_zero.mpr hne)
   exact ⟨z, hz.le, hz.ne'⟩
 
-/-- **Existence of the cover datum** (blueprint `det-tf-restriction-zero-covers` (i), first
+/-- **Existence of the cover datum** (blueprint `lemma-tangent-cones-on-cover` (i), first
 half). -/
 theorem nonempty_coverDatum (ℓ : ℕ) [Fact ℓ.Prime] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (PL PK : CochainComplex (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ)

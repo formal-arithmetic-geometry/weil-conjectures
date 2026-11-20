@@ -17,7 +17,7 @@ Let `j : U₀ ⟶ C₀` be a nonempty open of a smooth geometrically connected c
 field, `z` a boundary point and `x` the corresponding closed point of `C₀`. A *strictly henselian
 neighbourhood* of the boundary point (`AlgebraicGeometry.WeilGroup.BoundaryNeighbourhood`) is the
 data used to compute the boundary stalk `(j_* F)_x̄` of a lisse Weil sheaf
-(blueprint `lem-wf-boundary-stalk-invariants`):
+(blueprint `lemma-boundary-stalk--1`):
 
 * a weakly étale `h : Spec A ⟶ C̄` from the spectrum of a strictly henselian local ring, with a
   lift of the geometric point `x̄` through the closed point (for instance the strict
@@ -55,7 +55,7 @@ local notation "j̄" => Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommR
 /-- **A strictly henselian neighbourhood of a boundary point** `z` with closed point `x`,
 relative to a Galois automorphism `σ_F` of `Ω` over `k(C)` (the residue Frobenius lift at `z`):
 the data used to compute the boundary stalk `(j_* F)_x̄` as the inertia invariants of the generic
-stalk, Frobenius-equivariantly (blueprint `lem-wf-boundary-stalk-invariants`). -/
+stalk, Frobenius-equivariantly (blueprint `lemma-boundary-stalk--1`). -/
 structure BoundaryNeighbourhood
     (I : Subgroup Gal(Ω/C.functionField)) (σF : Gal(Ω/C.functionField)) (x : C.finitePoints) where
   /-- The ring of the neighbourhood. -/

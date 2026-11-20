@@ -106,10 +106,95 @@ private lemma beta_naturality {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens
     Functor.map_comp, HomologicalComplex.comp_f, Category.assoc]
   rfl
 
+/-- Two maps of short exact sequences have the same target connecting morphism. -/
+private theorem boundary_naturality_pair
+    {C : Type u} [Category C] [Abelian C]
+    {A B V : ShortComplex (CochainComplex C ℕ)}
+    (a₁ : A.X₁ ⟶ V.X₁) (a₂ : A.X₂ ⟶ V.X₂) (a₃ : A.X₃ ⟶ V.X₃)
+    (b₁ : B.X₁ ⟶ V.X₁) (b₂ : B.X₂ ⟶ V.X₂) (b₃ : B.X₃ ⟶ V.X₃)
+    (ha₁ : a₁ ≫ V.f = A.f ≫ a₂) (ha₂ : a₂ ≫ V.g = A.g ≫ a₃)
+    (hb₁ : b₁ ≫ V.f = B.f ≫ b₂) (hb₂ : b₂ ≫ V.g = B.g ≫ b₃)
+    (hA : A.ShortExact) (hB : B.ShortExact) (hV : V.ShortExact) (q : ℕ) :
+    ∃ δ : V.X₃.homology q ⟶ V.X₁.homology (q + 1),
+      hA.δ q (q + 1) rfl ≫ HomologicalComplex.homologyMap a₁ (q + 1) =
+        HomologicalComplex.homologyMap a₃ q ≫ δ ∧
+      hB.δ q (q + 1) rfl ≫ HomologicalComplex.homologyMap b₁ (q + 1) =
+        HomologicalComplex.homologyMap b₃ q ≫ δ :=
+  ⟨hV.δ q (q + 1) rfl,
+    HomologicalComplex.HomologySequence.δ_naturality
+      (ShortComplex.homMk a₁ a₂ a₃ ha₁ ha₂) hA hV q (q + 1) rfl,
+    HomologicalComplex.HomologySequence.δ_naturality
+      (ShortComplex.homMk b₁ b₂ b₃ hb₁ hb₂) hB hV q (q + 1) rfl⟩
+
+/-- Finite-diagonal totalization preserves short exact sequences of double complexes. -/
+private theorem total_shortExact_of_shortExact
+    (D : ShortComplex (HomologicalComplex₂ AddCommGrpCat.{u} (.up ℕ) (.up ℕ)))
+    (hD : D.ShortExact) :
+    (ShortComplex.mk (HomologicalComplex₂.total.map D.f (.up ℕ))
+      (HomologicalComplex₂.total.map D.g (.up ℕ))
+      (by rw [← HomologicalComplex₂.total.map_comp, D.zero,
+        HomologicalComplex₂.total.map_zero])).ShortExact := by
+  classical
+  apply HomologicalComplex.shortExact_of_degreewise_shortExact
+  intro n
+  let π := ComplexShape.π (.up ℕ) (.up ℕ) (.up ℕ)
+  let J := {i : ℕ × ℕ // π i = n}
+  have : Finite J := by
+    refine Set.Finite.to_subtype ((Set.finite_Iic (n, n)).subset ?_)
+    rintro ⟨p, q⟩ (h : p + q = n)
+    simp only [Set.mem_Iic, Prod.mk_le_mk]
+    omega
+  let E : HomologicalComplex₂ AddCommGrpCat.{u} (.up ℕ) (.up ℕ) ⥤
+      (Discrete J ⥤ AddCommGrpCat.{u}) :=
+    { obj := fun A ↦ Discrete.functor (fun i : J ↦ (A.X i.val.1).X i.val.2)
+      map := fun f ↦ Discrete.natTrans (fun i : Discrete J ↦ (f.f i.as.val.1).f i.as.val.2) }
+  have : PreservesFiniteLimits E := preservesFiniteLimits_of_evaluation E (fun i ↦ by
+    change PreservesFiniteLimits
+      (HomologicalComplex.eval _ (.up ℕ) i.as.val.1 ⋙
+        HomologicalComplex.eval _ (.up ℕ) i.as.val.2)
+    infer_instance)
+  have : PreservesFiniteColimits E := preservesFiniteColimits_of_evaluation E (fun i ↦ by
+    change PreservesFiniteColimits
+      (HomologicalComplex.eval _ (.up ℕ) i.as.val.1 ⋙
+        HomologicalComplex.eval _ (.up ℕ) i.as.val.2)
+    infer_instance)
+  have : E.PreservesZeroMorphisms := by
+    constructor
+    intro A B
+    ext ⟨i⟩
+    simp [E]
+  let F := E ⋙ colim
+  change (D.map F).ShortExact
+  exact hD.map_of_exact F
+
+/-- Split resolution rows remain exact after taking Cech cochains and totalizing. -/
+private theorem totalCech_shortExact {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
+    (R : ShortComplex
+      (CochainComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) ℕ))
+    (hrows : ∀ n, (R.map (HomologicalComplex.eval _ (.up ℕ) n)).ShortExact)
+    (hinj : ∀ n, Injective (R.X₁.X n)) :
+    (R.map (totalCechFunctor U)).ShortExact := by
+  let G := (TopCat.Sheaf.cechComplexFunctor U).mapHomologicalComplex (.up ℕ) ⋙
+    HomologicalComplex₂.flipFunctor _ (.up ℕ) (.up ℕ)
+  have : G.PreservesZeroMorphisms := by
+    constructor
+    intro A B
+    ext n m z
+    rfl
+  let D := R.map G
+  have hD : D.ShortExact := by
+    apply HomologicalComplex.shortExact_of_degreewise_shortExact
+    intro p
+    apply HomologicalComplex.shortExact_of_degreewise_shortExact
+    intro n
+    have : Injective ((R.map (HomologicalComplex.eval _ (.up ℕ) n)).X₁) :=
+      hinj n
+    exact (((hrows n).splittingOfInjective.map (TopCat.Sheaf.cechComplexFunctor U)).map
+      (HomologicalComplex.eval _ (.up ℕ) p)).shortExact
+  exact total_shortExact_of_shortExact D hD
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 600000 in
--- Comparing the two nested complex functors with finite-diagonal totalization is expensive.
 /-- A prescribed horseshoe gives a common total boundary for alpha and beta.
 Source: Stacks 01EQ (the two augmentations) and 0117 (boundary naturality).
 (blueprint: lem-pc-abelian-cech-horseshoe-total-boundary)
@@ -159,75 +244,24 @@ theorem abelianCechHorseshoe_total_boundary
         HomologicalComplex.homologyMap (abelianCechAlpha U I₃) q ≫ δ  := by
   classical
   let R := ShortComplex.mk α β hαβ
-  let G := (TopCat.Sheaf.cechComplexFunctor U).mapHomologicalComplex (.up ℕ) ⋙
-    HomologicalComplex₂.flipFunctor _ (.up ℕ) (.up ℕ)
-  have : G.PreservesZeroMorphisms := by
-    constructor
-    intro A B
-    ext n m z
-    rfl
-  let D := R.map G
-  have hD : D.ShortExact := by
-    apply HomologicalComplex.shortExact_of_degreewise_shortExact
-    intro p
-    apply HomologicalComplex.shortExact_of_degreewise_shortExact
-    intro n
-    have : Injective ((R.map (HomologicalComplex.eval _ (.up ℕ) n)).X₁) :=
-      I₁.injective n
-    exact (((hrows n).splittingOfInjective.map (TopCat.Sheaf.cechComplexFunctor U)).map
-      (HomologicalComplex.eval _ (.up ℕ) p)).shortExact
-  let V := R.map (totalCechFunctor U)
-  have hV : V.ShortExact := by
-    apply HomologicalComplex.shortExact_of_degreewise_shortExact
-    intro n
-    let π := ComplexShape.π (.up ℕ) (.up ℕ) (.up ℕ)
-    let J := {i : ℕ × ℕ // π i = n}
-    have : Finite J := by
-      refine Set.Finite.to_subtype ((Set.finite_Iic (n, n)).subset ?_)
-      rintro ⟨p, q⟩ (h : p + q = n)
-      simp only [Set.mem_Iic, Prod.mk_le_mk]
-      omega
-    let E : HomologicalComplex₂ AddCommGrpCat.{u} (.up ℕ) (.up ℕ) ⥤
-        (Discrete J ⥤ AddCommGrpCat.{u}) :=
-      { obj := fun A ↦ Discrete.functor (fun i : J ↦ (A.X i.val.1).X i.val.2)
-        map := fun f ↦ Discrete.natTrans (fun i : Discrete J ↦ (f.f i.as.val.1).f i.as.val.2) }
-    have : PreservesFiniteLimits E := preservesFiniteLimits_of_evaluation E (fun i ↦ by
-      change PreservesFiniteLimits
-        (HomologicalComplex.eval _ (.up ℕ) i.as.val.1 ⋙
-          HomologicalComplex.eval _ (.up ℕ) i.as.val.2)
-      infer_instance)
-    have : PreservesFiniteColimits E := preservesFiniteColimits_of_evaluation E (fun i ↦ by
-      change PreservesFiniteColimits
-        (HomologicalComplex.eval _ (.up ℕ) i.as.val.1 ⋙
-          HomologicalComplex.eval _ (.up ℕ) i.as.val.2)
-      infer_instance)
-    have : E.PreservesZeroMorphisms := by
-      constructor
-      intro A B
-      ext ⟨i⟩
-      simp [E]
-    let F := E ⋙ colim
-    change (D.map F).ShortExact
-    exact hD.map_of_exact F
+  -- Specify the total objects once, so the augmentation maps have matching endpoints.
+  let V := ShortComplex.mk
+    (X₁ := (abelianCechDouble U I₁).total (.up ℕ))
+    (X₂ := (abelianCechDouble U I₂).total (.up ℕ))
+    (X₃ := (abelianCechDouble U I₃).total (.up ℕ))
+    ((totalCechFunctor U).map α) ((totalCechFunctor U).map β)
+    (by rw [← Functor.map_comp, hαβ, Functor.map_zero])
+  have hV : V.ShortExact := totalCech_shortExact U R hrows (fun n ↦ I₁.injective n)
   let A := (ShortComplex.mk α β hαβ).map
     ((sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj
       (op (⊤ : X.Opens))).mapHomologicalComplex (.up ℕ))
   let C := T.map (TopCat.Sheaf.cechComplexFunctor U)
   have hC : C.ShortExact := TopCat.Sheaf.shortExact_cechComplex hT hg
-  let φα : A ⟶ V :=
-    { τ₁ := abelianCechAlpha U I₁
-      τ₂ := abelianCechAlpha U I₂
-      τ₃ := abelianCechAlpha U I₃
-      comm₁₂ := alpha_naturality U I₁ I₂ α
-      comm₂₃ := alpha_naturality U I₂ I₃ β }
-  let φβ : C ⟶ V :=
-    { τ₁ := abelianCechBeta U I₁
-      τ₂ := abelianCechBeta U I₂
-      τ₃ := abelianCechBeta U I₃
-      comm₁₂ := beta_naturality U I₁ I₂ T.f α hα
-      comm₂₃ := beta_naturality U I₂ I₃ T.g β hβ }
-  refine ⟨hV.δ q (q + 1) rfl, ?_, ?_⟩
-  · exact HomologicalComplex.HomologySequence.δ_naturality φβ hC hV q (q + 1) rfl
-  · exact HomologicalComplex.HomologySequence.δ_naturality φα hS hV q (q + 1) rfl
+  exact boundary_naturality_pair (A := C) (B := A) (V := V)
+    (abelianCechBeta U I₁) (abelianCechBeta U I₂) (abelianCechBeta U I₃)
+    (abelianCechAlpha U I₁) (abelianCechAlpha U I₂) (abelianCechAlpha U I₃)
+    (beta_naturality U I₁ I₂ T.f α hα) (beta_naturality U I₂ I₃ T.g β hβ)
+    (alpha_naturality U I₁ I₂ α) (alpha_naturality U I₂ I₃ β)
+    hC hS hV q
 
 end AlgebraicGeometry.Scheme.Modules

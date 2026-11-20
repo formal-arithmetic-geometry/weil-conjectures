@@ -37,10 +37,11 @@ Proof:
    `lem-weil-pbc-flat-map-local-criterion` (Stacks 00HT).
 2. At a prime `q` above `p`, the closed fibre of the local map is a localization of the
    global fibre at `p`. This identification commutes with finite purely inseparable residue
-   field extensions (`def-weil-pbc-g-ring`, `def-weil-pbc-localization-at-prime`). A Noetherian
-   fibre ring is regular exactly when its prime localizations are regular local rings, by
-   `lem-weil-pbc-regular-ring-local-criterion`. The same argument for each prime of the source
-   local ring gives the equivalence of global regularity and the prime-local condition.
+   field extensions (`theorem-finite-etale-covers-proper-henselian--2`,
+   `def-weil-pbc-localization-at-prime`). A Noetherian fibre ring is regular exactly when its prime
+   localizations are regular local rings, by `lem-weil-pbc-regular-ring-local-criterion`. The same
+   argument for each prime of the source local ring gives the equivalence of global regularity and
+   the prime-local condition.
 3. The prime-local condition includes the maximal-local condition. Conversely, put each
    target prime inside a maximal ideal. The map at that prime is obtained by further
    localization of the map at the maximal ideal. Apply the fibre-localization description

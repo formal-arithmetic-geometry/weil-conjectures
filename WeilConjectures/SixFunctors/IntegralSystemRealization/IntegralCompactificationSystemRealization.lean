@@ -90,7 +90,7 @@ including their morphisms. The evaluated adjunctions are those of
 [lem-pur-coefficient-system-derived-comparison]. Write $u:1\to\mathcal L\mathcal R$ and
 $e:\mathcal R\mathcal L\to1$ for the actual unit and counit of
 [lem-coef-derived-system-evaluation-calculus]. If $N$ is normalized,
-[lem-coef-normalized-dvr-effectivity] identifies each $e_{N,n}$ with an isomorphism, the
+[lemma-sp-tower-adjunction-foundation--2] identifies each $e_{N,n}$ with an isomorphism, the
 scalar-extension adjoint of the total-limit projection. Since derived evaluations detect
 isomorphisms, $e_N$ itself is an isomorphism of semilinear systems. This uses detection of
 isomorphisms only. The limit $\mathcal L N$ is derived complete, and its reductions have precisely
@@ -129,7 +129,7 @@ products are identified by the natural Roos triangle of
 [lem-weil-pbc-ringed-strict-tower-homotopy-limit], the termwise products representing the derived
 products; the simultaneous models ensure agreement on morphisms and transitions, not merely on
 evaluated objects. For $S_p$ use the proper direct-image reduction-tower formula of
-[def-weil-derived-direct-image]. For $S_pJ_j$, [lem-sf-compact-support-restriction-of-scalars]
+[prose-03-02]. For $S_pJ_j$, [lem-sf-compact-support-restriction-of-scalars]
 gives the transition from $m$ to $n$: apply $Rp_{*,m}j_!$ to $K_m\to\operatorname{Res}_{m,n}K_n$,
 then its coefficient-restriction isomorphism. These are exactly the transitions in
 [def-weil-integral-rational-qbar-compact-support]. The simultaneous system construction and its

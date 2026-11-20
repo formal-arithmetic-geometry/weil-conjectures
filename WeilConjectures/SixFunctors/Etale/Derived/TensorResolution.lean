@@ -14,15 +14,17 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 The derived tensor product `- ⊗ᴸ -` of `D(X_ét)` (`AlgebraicGeometry.Etale.derivedTensor`) is
 the left derived bifunctor of the tensor product of complexes of étale sheaves along the K-flat
 left derivability structure. This file records the description of blueprint
-`def-kun-derived-tensor` and its two basic properties:
+`proposition-open-direct-image-preserves-finite` and its two basic properties:
 
 * `K₁ ⊗ᴸ K₂` is computed by `P ⊗ K₂` for any K-flat complex `P` representing `K₁`
   (`AlgebraicGeometry.Etale.derivedTensorQhIsoOfKFlat`);
 * a quasi-isomorphism between K-flat complexes stays a quasi-isomorphism after tensoring with
   any complex (Stacks `06YT`), so that this does not depend on the K-flat model
-  (`AlgebraicGeometry.Etale.quasiIso_whiskerLeft_of_kFlat`, `lem-kun-derived-tensor-well-defined`);
+  (`AlgebraicGeometry.Etale.quasiIso_whiskerLeft_of_kFlat`,
+  `proposition-open-direct-image-preserves-finite`);
 * the derived tensor product is triangulated in each variable
-  (`AlgebraicGeometry.Etale.isTriangulated_derivedTensor`, `lem-kun-derived-tensor-triangulated`).
+  (`AlgebraicGeometry.Etale.isTriangulated_derivedTensor`,
+  `proposition-open-direct-image-preserves-finite`).
 
 This is the étale counterpart of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.
 TensorResolution`.
@@ -43,7 +45,8 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
 
 open Functor.LaxMonoidal in
-/-- Blueprint `def-kun-derived-tensor`: Derived tensor product of étale sheaves.
+/-- Blueprint `proposition-open-direct-image-preserves-finite`: Derived tensor product of étale
+sheaves.
 
 The derived tensor product of `K₁, K₂ ∈ D(X_ét)` is `AlgebraicGeometry.Etale.derivedTensor`, the
 left derived bifunctor of the tensor product of complexes along the K-flat complexes. It is
@@ -59,7 +62,7 @@ noncomputable def derivedTensorQhIsoOfKFlat
   have := isIso_μNatTrans_Qh_app_app_of_kFlat_left P K₂ hP
   asIso (((μNatTrans (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A))).app P).app K₂)
 
-/-- Blueprint `lem-kun-derived-tensor-well-defined`: Independence of the K-flat model.
+/-- Blueprint `proposition-open-direct-image-preserves-finite`: Independence of the K-flat model.
 
 For complexes of `A`-valued sheaves on the small étale site of `X`, a quasi-isomorphism
 `α : P ⟶ Q` between K-flat complexes induces a quasi-isomorphism `F ⊗ P ⟶ F ⊗ Q` for every
@@ -83,8 +86,8 @@ theorem quasiIso_whiskerLeft_of_kFlat
       (NatIso.ofComponents (fun Z ↦ β_ Y Z) (by intros; simp [curriedTensor]))
   exact MorphismProperty.whiskerLeft_of_kFlat _ α hα hP hQ F
 
-/-- Blueprint `lem-kun-derived-tensor-triangulated`: The derived tensor product is triangulated
-in each variable.
+/-- Blueprint `proposition-open-direct-image-preserves-finite`: The derived tensor product is
+triangulated in each variable.
 
 For every `K ∈ D(X_ét)`, both `M ↦ K ⊗ᴸ M` and `M ↦ M ⊗ᴸ K` are triangulated functors
 `D(X_ét) ⥤ D(X_ét)`, for their commutations with shifts: the tensor product of the monoidal

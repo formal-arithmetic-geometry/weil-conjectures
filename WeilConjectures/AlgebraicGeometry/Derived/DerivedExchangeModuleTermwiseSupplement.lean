@@ -27,11 +27,11 @@ import WeilConjectures.CategoryTheory.Derived.DerivedExactMateSupplement
 # The unbounded module exchange on K-injective representatives
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7; derived.tex,
-Tags 070I, 070K and 0DVC. Blueprint main-20261015, sk-def-exchange, final paragraph.
-(blueprint: lem-weil-pbc-derived-exchange-module-termwise).
+Tags 070I, 070K and 0DVC. Blueprint main-20261015, definition-derived-base-change-map, final
+paragraph. (blueprint: lem-weil-pbc-derived-exchange-module-termwise).
 
 The comparison below is the agent-formulated unbounded representative statement,
-using the exact inverse-image mate of `def-kun-unbounded-exchange`.
+using the exact inverse-image mate of `definition-derived-base-change-map`.
 The three auxiliary definitions spell out its canonical maps, without additional choices.
 -/
 
@@ -288,8 +288,8 @@ this fixed exchange mate. This includes bounded below injective representatives,
 requires no K-injectivity of the inverse image of `I`.
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7; derived.tex,
-Tags 070I, 070K, 08BJ and 0DVC; blueprint main-20261015, sk-def-exchange, final paragraph
-(blueprint: lem-weil-pbc-derived-exchange-module-termwise).
+Tags 070I, 070K, 08BJ and 0DVC; blueprint main-20261015, definition-derived-base-change-map, final
+paragraph (blueprint: lem-weil-pbc-derived-exchange-module-termwise).
 
 Proof: the composition and natural-isomorphism factorization identities normalize the
 exact derived inverse-image square. Apply the general exact-derived mate identity on

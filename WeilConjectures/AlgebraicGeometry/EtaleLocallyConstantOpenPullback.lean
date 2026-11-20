@@ -59,7 +59,7 @@ private lemma constant_setPullback {X Y : Scheme.{u}} (g : Y ⟶ X) [Etale g]
 /-- Restricting a locally constant set-valued etale sheaf to an open subscheme preserves
 local constancy. No finiteness or Noetherian hypothesis is needed.
 
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, step 2;
+Source: blueprint `lemma-detection-proper-direct-image--1`, step 2;
 Stacks Project, Modules on Sites, Lemma 093R; Etale Cohomology, Tags 03S2 and 00XZ.
 (blueprint: lem-weil-pbc-etale-locally-constant-open-pullback).
 

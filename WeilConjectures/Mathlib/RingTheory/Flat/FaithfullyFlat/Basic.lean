@@ -53,7 +53,7 @@ namespace Module.Flat
 /-- **Flatness descends along faithfully flat algebras.** If `C` is faithfully flat over `B` and
 flat over `A`, then `B` is flat over `A`: for an injection `N ⟶ P` of `A`-modules, the map
 `B ⊗ N ⟶ B ⊗ P` becomes, after `C ⊗_B -`, the injective map `C ⊗ N ⟶ C ⊗ P`.
-(blueprint: `lem-weil-pbc-flat-algebra-faithfully-flat-descent`) -/
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem of_flat_of_faithfullyFlat {A B C : Type*} [CommRing A] [CommRing B]
     [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C]
     [Module.FaithfullyFlat B C] [Module.Flat A C] : Module.Flat A B := by

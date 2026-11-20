@@ -17,9 +17,9 @@ public import WeilConjectures.TraceFormula.SourceExchangeRightTranspose
 # The base-change core of the exceptional Künneth part of the source exchange
 
 The base-change core of the exceptional Künneth part of the source exchange
-(blueprint `lem-trf-trace-source-exchange`, Step 3), for a proper `f : X ⟶ Y`, in a generic form
-(`ProEtale.CondensedRing.lowerShriek_exceptionalKunneth_baseChange_generic`). It is proved by
-transposing both sides along `Lf^* ⊣ Rf_*` (`sourceExchange_leftTranspose`,
+(blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 3), for a proper `f : X ⟶ Y`, in
+a generic form (`ProEtale.CondensedRing.lowerShriek_exceptionalKunneth_baseChange_generic`). It is
+proved by transposing both sides along `Lf^* ⊣ Rf_*` (`sourceExchange_leftTranspose`,
 `sourceExchange_rightTranspose`) and comparing them on `X × Y` (`sourceExchange_coreTail`).
 
 -/

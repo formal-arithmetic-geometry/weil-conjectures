@@ -15,12 +15,12 @@ public import WeilConjectures.TraceFormula.SourceExchangeKunnethUnit
 For a proper morphism `f : X ⟶ Y` and `q = f × f : X × X ⟶ Y × Y`, the base change along the
 non-cartesian square `q ≫ p₁' = p₁ ≫ f` (the mate of its composition isomorphism) is compared
 with the compact-support base changes of the product squares of `X` and `Y` (blueprint
-`lem-trf-trace-source-exchange`, Step 3). This is the base-change input of the exceptional
-Künneth part of identity (a) of the trace-class source exchange
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3). This is the base-change input of the
+exceptional Künneth part of identity (a) of the trace-class source exchange
 (`ProEtale.CondensedRing.unit_comp_lowerShriek_map_prodBaseChangeIso`). The comparison goes
 through the factorization `q = (1 × f) ≫ (f × 1)` and the cartesian squares
 `(f × 1) ≫ p₁' = p_X ≫ f` and `(1 × f) ≫ p_Y = p₂ ≫ f`, using the pasting laws of `Ex_!`
-(blueprint `fix-lem-exchanges`).
+(blueprint `proposition-composition-base-change-rf-shriek`).
 
 -/
 
@@ -221,11 +221,11 @@ lemma upperStar_map_upperStar_map_comp_εIso_inv {S : Over (Spec (.of k))}
   rw [← hu, eqToHom_refl, Category.comp_id, ← reassoc_of% hn, Iso.inv_hom_id_app_assoc]
 
 /-- **Base change along the Künneth square of a proper morphism** (blueprint
-`lem-trf-trace-source-exchange`, Step 3): the unit of `Lq^* ⊣ Rq_!` for `q = f × f`, followed by
-the composition isomorphism of `q ≫ p₁' = p₁ ≫ f`, the transported counit, the compact-support
-base change of the product square of `X` and the counit of `Ra_X! ⊣ Ra_X^!`, is the compact-support
-base change of the product square of `Y` followed by `Ra_Y! Rf_* ω_X ≅ Ra_X! ω_X`, the counit of
-`Ra_X! ⊣ Ra_X^!` and the unit `𝟙 ⟶ Rf_! 𝟙`. -/
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 3): the unit of `Lq^* ⊣ Rq_!` for
+`q = f × f`, followed by the composition isomorphism of `q ≫ p₁' = p₁ ≫ f`, the transported counit,
+the compact-support base change of the product square of `X` and the counit of `Ra_X! ⊣ Ra_X^!`, is
+the compact-support base change of the product square of `Y` followed by
+`Ra_Y! Rf_* ω_X ≅ Ra_X! ω_X`, the counit of `Ra_X! ⊣ Ra_X^!` and the unit `𝟙 ⟶ Rf_! 𝟙`. -/
 theorem unit_comp_lowerShriek_map_prodBaseChangeIso :
     ((boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)).map
         ((boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (prod.map f f)).unit.app

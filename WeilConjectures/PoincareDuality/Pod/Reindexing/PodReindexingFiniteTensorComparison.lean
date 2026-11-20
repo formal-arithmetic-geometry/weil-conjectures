@@ -82,7 +82,7 @@ end GeneratorNormalization
 /-- Reindexing a restricted finite total tensor, followed by any two finite chain
 isomorphisms, has the prescribed map on every tensor summand.
 
-Source: blueprint `prop-pod-dual-tate-data-compatibility`, Steps 1 and 5;
+Source: blueprint `theorem-poincare-duality-frobenius--2`, Steps 1 and 5;
 Stacks 03EL, 012Z, 07A4 (blueprint: lem-pod-reindexing-finite-tensor-comparison).
 
 Proof: commute sectionwise reindexing with restriction of scalars using the
@@ -235,7 +235,7 @@ private theorem podReindexingFiniteTensorComparison_withModels
           p q (p + q) rfl (op U) x y).trans hX)))
 
 /-- A normalized tensor comparison at one finite coefficient level.
-Source: blueprint `prop-pod-dual-tate-data-compatibility`, Steps 1 and 5;
+Source: blueprint `theorem-poincare-duality-frobenius--2`, Steps 1 and 5;
 Stacks 03EL, 012Z, 07A4 (blueprint: lem-pod-reindexing-finite-tensor-comparison).
 Proof: instantiate the finite closed models in the preceding parameterized argument.
 The result uses only the sectionwise tensor comparison and the two given finite

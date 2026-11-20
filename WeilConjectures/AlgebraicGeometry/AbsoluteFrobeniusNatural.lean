@@ -38,7 +38,7 @@ characteristic `p`:
 - `frobenius_spec`: Mathlib's `frobenius` and `iterateFrobenius` (blueprint
   `def-weil-ring-frobenius`).
 - `AlgebraicGeometry.Scheme.absoluteFrobenius_wellDefined`: blueprint
-  `lem-weil-absolute-frobenius-well-defined`.
+  `definition-frobenius-correspondences-their-operators--1`.
 - `AlgebraicGeometry.Scheme.comp_iterateFrobenius`: naturality of the absolute Frobenius.
 - `AlgebraicGeometry.Scheme.iterateFrobenius_Spec`: on `Spec A` it is `Spec` of the Frobenius.
 - `AlgebraicGeometry.Scheme.isFrobenius_iterateFrobenius`: it satisfies the predicate
@@ -180,8 +180,8 @@ section Frobenius
 
 variable {p : ℕ} (hp : p.Prime)
 
-/-- Blueprint `def-weil-absolute-frobenius-scheme`: Absolute q-power Frobenius of a scheme in
-characteristic p.
+/-- Blueprint `definition-frobenius-correspondences-their-operators--1`: Absolute q-power Frobenius
+of a scheme in characteristic p.
 
 The *absolute Frobenius* `F_X : X ⟶ X` of a scheme `X` of characteristic `p`: the identity on
 the underlying space (`AlgebraicGeometry.Scheme.iterateFrobenius_apply`) with `g ↦ g ^ p` on
@@ -275,8 +275,8 @@ lemma isFrobenius_iterateFrobenius (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) 
   ext r
   exact (hφ r).symm
 
-/-- Blueprint `lem-weil-absolute-frobenius-well-defined`: The Frobenius of the structure sheaf
-is a morphism of locally ringed spaces; affine case.
+/-- Blueprint `definition-frobenius-correspondences-their-operators--1`: The Frobenius of the
+structure sheaf is a morphism of locally ringed spaces; affine case.
 
 Let `p` be a prime. (i) For a ring `A` with `p = 0`, the Frobenius `F_A : a ↦ a ^ p ^ n` fixes
 every prime ideal, so `Spec F_A` is the identity on points. (ii) `F_A` is a local homomorphism.

@@ -11,7 +11,13 @@ import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestrictio
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralChartPullbackComparison
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.CechPerfectModelCompleteness
 
-/-! # Completeness of a single perfect integral chart -/
+/-! # Completeness of a single perfect integral chart
+
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11, reverse implication
+* Bhatt--Scholze, Lemma 6.5.8(1), (2)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,19 +30,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-/-- A perfect integral model on one pro-etale chart is intrinsically complete there.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Lemma 6.5.8(1),(2).
-(blueprint: lem-weil-pbc-integral-perfect-chart-complete).
-
-Proof: the completed constant perfect model is intrinsically complete on T by
-finite-projective retracts and the unit-normalized coefficient comparison. Scalar
-restriction and the pro-etale slice equivalence turn the given model isomorphism
-into an isomorphism of ordinary datum pullbacks. Preserve completeness of the
-constant model along the chart morphism followed by the immersion. Compose the
-supplied representative isomorphism with the ordinary pullback comparison, then
-cancel its invertible prefix from the intrinsic completion unit. No pullback
-compatibility of constant realization is required. The empty chart, zero complex
-and zero ideal use exactly the same argument. -/
+/-- A perfect integral model on one pro-etale chart is intrinsically complete there. -/
 theorem integralPerfectChart_complete
     (T : Scheme.{u}) [IsNoetherian T] (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

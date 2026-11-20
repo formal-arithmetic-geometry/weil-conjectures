@@ -24,7 +24,7 @@ with the structure morphisms of the geometric generic fibres to `Spec Ω`. This 
 the Künneth map `Π_{A,B} : Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)` is an isomorphism
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.isIso_kunnethMap_of_isProper`),
 following Illusie's argument (*Autour du théorème de monodromie locale*, Thm. 4.7; blueprint
-`sk-prop-tf-nearby-external-kunneth`): the cone `C` of `Π_{A,B}`
+`proposition-external-kunneth-formula-nearby-cycles`): the cone `C` of `Π_{A,B}`
 
 * has no global sections, `RΓ(X_s × Y_s, C) = 0` (the global-sections step,
   `NearbyCyclesModel.isIso_lowerStar_kunnethMap`);
@@ -32,7 +32,7 @@ following Illusie's argument (*Autour du théorème de monodromie locale*, Thm. 
   (`NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap`, the finite-support step);
 
 and a bounded constructible complex supported on finitely many closed points without global
-sections vanishes (blueprint `det-nearby-kunneth-finite-support`; for `ℚ̄_ℓ`-coefficients
+sections vanishes (blueprint `lemma-finite-support-global-sections--1`; for `ℚ̄_ℓ`-coefficients
 `ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`).
 
 The finite-support step is proved in chart dimension `n` (charts `V ⟶ 𝔸ᵐ_S` with `m` summed over
@@ -146,9 +146,9 @@ lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
             e).symm)) (hgeom C₀ hC₀)
 
 /-- **The finite-support step of Gabber's Künneth formula** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
-locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
-`N` of finite type and bounded constructible `A`, `B`, the Künneth map `Π_{A,B}` is an
+`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"; Illusie, *Autour du théorème
+de monodromie locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of
+models `M`, `N` of finite type and bounded constructible `A`, `B`, the Künneth map `Π_{A,B}` is an
 isomorphism away from finitely many closed points of the special fibre `X_s × Y_s`, given that the
 total spaces locally embed into `𝔸ᵐ_S`, `𝔸^{m'}_S` and that the generic-slicing step holds in
 chart dimension `m + m' - 1` (`NearbyCyclesModel.SliceKunnethFormula`).
@@ -193,18 +193,83 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap [TopologicalSpace.Noetheria
       (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
       heM heN hA hB)
 
-set_option maxHeartbeats 1600000 in
+private lemma finiteSupport_and_lowerStar_kunnethMap [TopologicalSpace.NoetherianSpace X]
+    [TopologicalSpace.NoetherianSpace Y] [TopologicalSpace.NoetherianSpace Z]
+    (hM : M.IsTraitModelOver qM gM)
+    (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
+    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
+    (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) [IsProper qM] [IsProper qN]
+    {m m' : ℕ} (hm : qM.LocallyEmbedsInAffineSpace m) (hm' : qN.LocallyEmbedsInAffineSpace m')
+    (hslice : 0 < m + m' → SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' (m + m' - 1))
+    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
+    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) A)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
+    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B)
+    (hΨA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X'.left)
+        ((M.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj A))
+    (hΨB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left)
+        ((N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj B))
+    (hT : IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) (Hom.id (traitGenericModel k'))
+      (Hom.id (traitGenericModel k'))
+      (R((gM)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A))
+      (R((gN)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)))) :
+    ∃ (S : Finset Z'.left) (hS : ∀ x ∈ S, IsClosed {x}),
+      IsIso (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) ∧
+      IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) := by
+  obtain ⟨S, hS, hU⟩ := exists_finite_isIso_upperStar_map_kunnethMap
+    hM hN hpb hP hgen hm hm' hslice heM heN hA hB
+  have hR := isIso_lowerStar_kunnethMap hM hN hpb hP hgen heM heN hA hB hΨA hΨB hT
+  exact ⟨S, hS, hR, hU⟩
+
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+private lemma isIso_of_isIso_upperStar_and_lowerStar
+    [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
+    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z'.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left))}
+    (f : K ⟶ L)
+    (hsrc : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left) K)
+    (htgt : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left) L)
+    (hdetect : ∀ (S : Finset Z'.left) (hS : ∀ x ∈ S, IsClosed {x})
+      (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z'.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left))),
+      boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left) C →
+        IsZero (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) →
+          IsZero (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) → IsZero C)
+    (S : Finset Z'.left) (hS : ∀ x ∈ S, IsClosed {x})
+    (hU : IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map f))
+    (hR : IsIso (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map f)) : IsIso f := by
+  obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle f
+  have : IsLocallyNoetherian Z'.left := LocallyOfFiniteType.isLocallyNoetherian Z'.hom
+  have : CompactSpace Z'.left := QuasiCompact.compactSpace_of_compactSpace Z'.hom
+  have : IsNoetherian Z'.left := ⟨⟩
+  have hC := (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+      Z'.left)).ext_of_isTriangulatedClosed₃ _ hT hsrc htgt
+  have h₁ := Triangle.isZero₃_of_isIso₁ _
+    (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT) hR
+  have h₂ := Triangle.isZero₃_of_isIso₁ _
+    (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT) hU
+  exact (Triangle.isZero₃_iff_isIso₁ _ hT).1
+    (hdetect S hS C hC h₂ h₁)
+
 -- the triangle of the Künneth map has large terms
 /-- **Gabber's Künneth formula for proper models** (Illusie, *Autour du théorème de monodromie
-locale*, Thm. 4.7; blueprint `sk-prop-tf-nearby-external-kunneth`): for the product `P` over the
-strictly henselian trait of models `M`, `N` of finite type along proper structure morphisms, with
-projections compatible with the structure morphisms to `Spec Ω`, and bounded constructible `A`,
-`B`, the Künneth map `Π_{A,B}` is an isomorphism. Its cone `C` is bounded constructible (given
-that the source and target of `Π_{A,B}` are, by Deligne's finiteness theorem), has no global
-sections (`NearbyCyclesModel.isIso_lowerStar_kunnethMap`, given that the Künneth map of the trait
-at the cohomology of the geometric generic fibres is invertible), and is supported on finitely
-many closed points (`NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap`); hence it
-vanishes (the hypothesis `hdetect`, blueprint `det-nearby-kunneth-finite-support`). -/
+locale*, Thm. 4.7; blueprint `proposition-external-kunneth-formula-nearby-cycles`): for the product
+`P` over the strictly henselian trait of models `M`, `N` of finite type along proper structure
+morphisms, with projections compatible with the structure morphisms to `Spec Ω`, and bounded
+constructible `A`, `B`, the Künneth map `Π_{A,B}` is an isomorphism. Its cone `C` is bounded
+constructible (given that the source and target of `Π_{A,B}` are, by Deligne's finiteness theorem),
+has no global sections (`NearbyCyclesModel.isIso_lowerStar_kunnethMap`, given that the Künneth map
+of the trait at the cohomology of the geometric generic fibres is invertible), and is supported on
+finitely many closed points (`NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap`);
+hence it vanishes (the hypothesis `hdetect`, blueprint
+`lemma-finite-support-global-sections--1`). -/
 theorem isIso_kunnethMap_of_isProper [TopologicalSpace.NoetherianSpace X]
     [TopologicalSpace.NoetherianSpace Y] [TopologicalSpace.NoetherianSpace Z]
     (hM : M.IsTraitModelOver qM gM)
@@ -244,28 +309,14 @@ theorem isIso_kunnethMap_of_isProper [TopologicalSpace.NoetherianSpace X]
       IsZero (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) →
         IsZero (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) → IsZero C) :
     IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) := by
-  obtain ⟨S, hS, hU⟩ := exists_finite_isIso_upperStar_map_kunnethMap
-      hM hN hpb hP hgen hm hm' hslice heM heN hA hB
-  have hR := isIso_lowerStar_kunnethMap hM hN hpb hP hgen heM heN hA
-      hB hΨA hΨB hT
-  obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle (kunnethMap (Profinite.padicAlgClRingObj ℓ)
-      φ₁ φ₂ A B)
+  obtain ⟨S, hS, hR, hU⟩ := finiteSupport_and_lowerStar_kunnethMap
+    hM hN hpb hP hgen hm hm' hslice heM heN hA hB hΨA hΨB hT
   have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
     hP.locallyOfFiniteType
   have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
   have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.isSeparated
-  have : IsLocallyNoetherian Z'.left := LocallyOfFiniteType.isLocallyNoetherian Z'.hom
-  have : CompactSpace Z'.left := QuasiCompact.compactSpace_of_compactSpace Z'.hom
-  have : IsNoetherian Z'.left := ⟨⟩
-  have hC := (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-      Z'.left)).ext_of_isTriangulatedClosed₃ _
-    hT hsrc htgt
-  have h₁ := Triangle.isZero₃_of_isIso₁ _ (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj
-      ℓ⟧).map_distinguished _ hT) hR
-  have h₂ := Triangle.isZero₃_of_isIso₁ _
-    (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT) hU
-  exact (Triangle.isZero₃_iff_isIso₁ _ hT).1
-    (hdetect S hS C hC h₂ h₁)
+  exact isIso_of_isIso_upperStar_and_lowerStar
+    (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) hsrc htgt hdetect S hS hU hR
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Projective closures over the trait**: an affine scheme of finite type over the trait
@@ -374,7 +425,8 @@ theorem isIso_kunnethMap_closure_of_properKunnethFormula {n : ℕ}
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **Reduction of Gabber's Künneth formula to proper models, for a global chart** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Reduction to projective flat families"; Illusie,
+`proposition-external-kunneth-formula-nearby-cycles`, "Reduction to projective flat families";
+Illusie,
 *Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth formula holds for
 proper models in chart dimension `n`, then it holds for products over the trait of models whose
 total spaces admit immersions into `𝔸(ι_M; S)`, `𝔸(ι_N; S)` with `|ι_M| + |ι_N| ≤ n`.
@@ -425,7 +477,8 @@ theorem isIso_kunnethMap_of_properKunnethFormula_of_isImmersion {n : ℕ}
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **Reduction of Gabber's Künneth formula to proper models** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Reduction to projective flat families"; Illusie,
+`proposition-external-kunneth-formula-nearby-cycles`, "Reduction to projective flat families";
+Illusie,
 *Autour du théorème de monodromie locale*, proof of Thm. 4.7): if the Künneth formula holds for
 proper models in chart dimension `n`, then it holds in chart dimension `n`.
 

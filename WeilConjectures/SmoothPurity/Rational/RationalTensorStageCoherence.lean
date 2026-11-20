@@ -14,7 +14,7 @@ import WeilConjectures.SmoothPurity.Rational.RationalTensorTowerCoherence
 
 /-! # Coherence of the rational tensor scalar comparisons
 
-Source: the common-stage tensor argument of def-weil-derived-pullback-tensor-hom,
+Source: the common-stage tensor argument of prose-03-02,
 using the normalized scalar-extension comparisons of
 lem-pur-integral-operations-scalar-extension; Stacks Project, Tags 07A4 and 08J9.
 -/
@@ -168,7 +168,7 @@ set_option allowUnsafeReducibility true in
 attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
 
 /-- The normalized tensor comparison, expressed using the recorded stage transitions.
-Source: the common-stage paragraph of def-weil-derived-pullback-tensor-hom.
+Source: the common-stage paragraph of prose-03-02.
 (blueprint: lem-weil-rational-tensor-stage-coherence). -/
 def rationalTensorStageComparison {E L : Index l Ω} (h : E ≤ L) :
     rationalDerivedTensor l (Coefficient.{u} l Ω E) W ⋙ (stageSystem l Ω W).T h ≅
@@ -245,7 +245,7 @@ private theorem stageAssociator_heq {E L M : Index l Ω} (h : E ≤ L) (k : L �
 /-- The normalized rational tensor comparisons satisfy the coefficient tower equation.
 Source: lem-pur-integral-operations-scalar-extension, coefficient-tower calculation
 (scalarOperationsOrdinary_tower), and the common-stage tensor paragraph of
- def-weil-derived-pullback-tensor-hom; Stacks Project, Tags 07A4 and 08J9.
+ prose-03-02; Stacks Project, Tags 07A4 and 08J9.
 (blueprint: lem-weil-rational-tensor-stage-coherence).
 
 Proof: apply the tensor clause of scalarOperationsOrdinary_tower to the three

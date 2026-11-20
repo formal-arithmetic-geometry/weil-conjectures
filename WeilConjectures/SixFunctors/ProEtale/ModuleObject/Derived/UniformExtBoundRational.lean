@@ -15,7 +15,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 /-!
 # Helpers for the uniform `Ext` bound for constructible `E`-sheaves, from `𝒪_E`
 
-Blueprint `det-uniform-constructible-ext-rational`, coefficients `E`. Let `E ⊆ ℚ̄_ℓ` be a finite
+Blueprint `lemma-uniform-ext-bound`, coefficients `E`. Let `E ⊆ ℚ̄_ℓ` be a finite
 subextension of `ℚ_ℓ` and `X` a scheme. This file computes `Ext` between extensions of scalars
 `E ⊗_{𝒪_E} M₀` of `𝒪_{E,X}`-modules: by adjunction
 `Ext^q_E(E ⊗ M₀, E ⊗ B₀) = Ext^q_{𝒪_E}(M₀, E ⊗ B₀)`, and `E ⊗ B₀` is the filtered colimit of

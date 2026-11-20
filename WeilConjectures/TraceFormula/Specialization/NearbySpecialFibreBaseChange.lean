@@ -25,7 +25,7 @@ and whose square of special fibres is cartesian. For a bounded constructible `�
 on the geometric generic fibre of `M`, the base change morphism
 `Li_N^* Rt_* ⟶ Rt_{s*} Li_M^*` is invertible at the generic direct image `Rj_{M*} L`
 (`NearbyCyclesModel.Hom.isIso_baseChangeMap_commSq_i_app_lowerStar`). This is the step
-`ī^* Rt̄_* ≃ Rt_{s*} ī'^*` of the proof of blueprint `det-sp-nearby-cycles-exchanges` (2).
+`ī^* Rt̄_* ≃ Rt_{s*} ī'^*` of the proof of blueprint `prose-E-03` (2).
 
 The complex `Rj_{M*} L` is not bounded constructible, so the proper base change theorem for
 bounded constructible complexes does not apply. The proof passes to an integral model `L₀` of
@@ -88,7 +88,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime]
 
 -- the derived categories of module objects are slow to elaborate
 /-- **Proper base change along the special fibre at a generic direct image** (the step
-`ī^* Rt̄_* ≃ Rt_{s*} ī'^*` of the proof of blueprint `det-sp-nearby-cycles-exchanges` (2); SGA 7
+`ī^* Rt̄_* ≃ Rt_{s*} ī'^*` of the proof of blueprint `prose-E-03` (2); SGA 7
 XIII 2.1.7): for a morphism `φ : M ⟶ N` of models of finite type over the trait whose morphism of
 total spaces is proper and whose square of special fibres is cartesian, the base change morphism
 `Li_N^* Rt_* ⟶ Rf'_* Li_M^*` is invertible at the direct image `Rj_{M*} L` of a bounded

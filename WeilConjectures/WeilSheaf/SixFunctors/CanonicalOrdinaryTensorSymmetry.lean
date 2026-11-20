@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.NativeFrobenius.NativeFrobeniusHomNaturality
 public import WeilConjectures.WeilSheaf.Ordinary.OrdinaryRingedTensorCoherenceData
 import all WeilConjectures.AlgebraicGeometry.NativeFrobenius.NativeFrobeniusHomEvaluation
+import all WeilConjectures.WeilSheaf.SixFunctors.CanonicalOrdinaryTensorInverseEvaluation
 import WeilConjectures.WeilSheaf.Ordinary.OrdinaryRelativeTensorIdentification
 import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicModuleHomComparisonCore
@@ -147,7 +148,6 @@ private def canonicalInverseHom (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
       (fun MN ↦ NativeFrobenius.homComparison Y l H MN.1.unop MN.2)
       (fun fg ↦ NativeFrobenius.homComparison_naturality Y l H fg.1.unop fg.2))
 
-set_option maxHeartbeats 4000000 in
 -- Compare the explicit sheaf and module category presentations.
 private theorem canonical_inverseHom_evaluation
     (H : AdicModuleHomComparisonCore l Y) (P I : AdicSheaf l Y)
@@ -157,88 +157,7 @@ private theorem canonical_inverseHom_evaluation
         (op (AsSmall.up.obj V.unop)) z).app
           (op (Over.mk (𝟙 (AsSmall.up.obj V.unop))))) x =
       adicComparisonEval P I V z x := by
-  let E := NativeFrobenius.equivalence Y l
-  let Z := (AdicSheaf.ihom P).obj I
-  let zz := (E.counitIso.inv.app Z).hom.hom.app V z
-  let xx := (E.counitIso.inv.app P).hom.hom.app V x
-  have hc (M : AdicSheaf l Y) (w : M.X.obj.obj V) :
-      (E.counitIso.hom.app M).hom.hom.app V
-        ((E.counitIso.inv.app M).hom.hom.app V w) = w := by
-    have hh := congrArg (fun f ↦ f.hom.hom.app V w)
-      (E.counitIso.inv_hom_id_app M)
-    simpa only [Mod.comp_hom', Mod.id_hom',
-      ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.id_hom,
-      NatTrans.comp_app, NatTrans.id_app, ModuleCat.comp_apply, ModuleCat.id_apply] using hh
-  have hsc (M : AdicSheaf l Y)
-      (w : (E.functor.obj (E.inverse.obj M)).X.obj.obj V) :
-      ((NativeFrobenius.sectionCounit Y l).hom.app (E.inverse.obj M)).val.app V w =
-        (E.counitIso.hom.app M).hom.hom.app V w := by
-    let A := SheafOfModules.SmallSite.equivalence (Scheme.ProEt.topology Y)
-      (comparisonRing l Y)
-    let S := adicSectionModuleEquivalence l Y
-    have hε : E.counitIso.hom.app M = (A.trans S.symm).counitIso.hom.app M := by
-      change S.inverse.map (𝟙 (A.functor.obj (A.inverse.obj (S.functor.obj M)))) ≫
-        (A.trans S.symm).counitIso.hom.app M = (A.trans S.symm).counitIso.hom.app M
-      erw [S.inverse.map_id, Category.id_comp]
-    have hh := congrArg (fun f ↦ f.val.app V w) (composite_counit_map A S M)
-    erw [smallSite_counit, Category.comp_id] at hh
-    simp only [NativeFrobenius.sectionCounit, Iso.trans_hom,
-      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, NatTrans.comp_app,
-      Functor.associator_hom_app, Functor.rightUnitor_hom_app]
-    change (S.counitIso.hom.app (A.functor.obj (E.inverse.obj M))).val.app V w =
-      (S.functor.map (E.counitIso.hom.app M)).val.app V w
-    rw [hε]
-    exact hh.symm
-  let h : Functor.uncurry.obj (SheafOfModules.homFunctor (R := NativeFrobenius.ring Y l)) ⋙
-      E.functor ≅ E.functor.op.prod E.functor ⋙
-        Functor.uncurry.obj (ProEtaleWeilSheaf.ordinaryIhomBifunctor l Y) :=
-    NatIso.ofComponents
-      (fun MN ↦ NativeFrobenius.homComparison Y l H MN.1.unop MN.2)
-      (fun fg ↦ NativeFrobenius.homComparison_naturality Y l H fg.1.unop fg.2)
-  have hk := NativeFrobenius.inverseComparison_map E
-    (Functor.uncurry.obj (ProEtaleWeilSheaf.ordinaryIhomBifunctor l Y))
-    (Functor.uncurry.obj (SheafOfModules.homFunctor (R := NativeFrobenius.ring Y l)))
-    h P I
-  have hkV := congrArg (fun f ↦ f.hom.hom.app V zz) hk
-  change (NativeFrobenius.homComparison Y l H (E.inverse.obj P)
-      (E.inverse.obj I)).hom.hom.hom.app V
-        ((E.functor.map ((canonicalInverseHom l Y H).hom.app (op P, I))).hom.hom.app
-          V zz) =
-    ((AdicSheaf.ihom (E.functor.obj (E.inverse.obj P))).map
-      (E.counitIso.inv.app I)).hom.hom.app V
-        (((Mod.ihomMap (E.counitIso.hom.app P)).app I).hom.hom.app V
-          ((E.counitIso.hom.app Z).hom.hom.app V zz)) at hkV
-  have hz : (E.counitIso.hom.app Z).hom.hom.app V zz = z := hc Z z
-  rw [hz] at hkV
-  have he := NativeFrobenius.comparison_evaluation Y l H
-    (E.inverse.obj P) (E.inverse.obj I) V
-    ((E.functor.map ((canonicalInverseHom l Y H).hom.app (op P, I))).hom.hom.app V zz) xx
-  have hn := congrArg (fun f ↦ f.val.app V zz)
-    ((NativeFrobenius.sectionCounit Y l).hom.naturality
-      ((canonicalInverseHom l Y H).hom.app (op P, I)))
-  change ((NativeFrobenius.sectionCounit Y l).hom.app
-      (SheafOfModules.homObj (R := NativeFrobenius.ring Y l)
-        (E.inverse.obj P) (E.inverse.obj I))).val.app V
-      ((E.functor.map ((canonicalInverseHom l Y H).hom.app (op P, I))).hom.hom.app V zz) =
-    ((canonicalInverseHom l Y H).hom.app (op P, I)).val.app
-      (op (AsSmall.up.obj V.unop))
-        (((NativeFrobenius.sectionCounit Y l).hom.app (E.inverse.obj Z)).val.app V zz) at hn
-  conv at hn =>
-    rhs
-    rw [hsc Z zz, hz]
-  erw [hn] at he
-  rw [hsc I, hsc P] at he
-  have hx : (E.counitIso.hom.app P).hom.hom.app V xx = x := hc P x
-  rw [hx] at he
-  erw [hkV, evaluation_map_target, evaluation_map_source] at he
-  dsimp only [xx] at he
-  erw [hc P x, hc I (adicComparisonEval P I V z x)] at he
-  erw [CategoryTheory.Functor.map_id] at he
-  change adicComparisonEval P I V z x =
-    ((((canonicalInverseHom l Y H).hom.app (op P, I)).val.app
-      (op (AsSmall.up.obj V.unop)) z).app
-        (op (Over.mk (𝟙 (AsSmall.up.obj V.unop))))) x at he
-  exact he.symm
+  exact ProEtaleWeilSheaf.inverse_comparison_evaluation l Y H P I V z x
 
 -- Compare the explicit sheaf and module category presentations.
 private theorem canonical_inverse_tensor_pure

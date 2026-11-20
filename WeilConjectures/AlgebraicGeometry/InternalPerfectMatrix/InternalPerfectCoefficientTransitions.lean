@@ -192,15 +192,7 @@ private theorem coefficientSection_eval (W : Scheme.{u}) (n : ℕ)
   exact RingEquiv.apply_symm_apply _ _
 
 -- The coefficient encoding square needs additional sheaf-instance reduction.
-/-- Locally constant finite coefficient sections reduce by the actual coefficient map.
-Source: blueprint Compatible isomorphisms, successor reduction of constant matrix entries.
-(blueprint: lem-pe-internal-perfect-coefficient-transitions).
-Proof: the normalized coefficient encoding commutes with transition by sheafification
-uniqueness: both composites send every constant to the same reduced constant function.
-The finite constant-section comparison is natural in the ring map by the same uniqueness.
-Its inverse therefore sends entrywise reduction to the actual constant-sheaf coefficient
-map. Evaluating the encoding square at this section and using injectivity of terminal
-unit evaluation proves equality of the two global sections, including on the empty scheme. -/
+/-- Locally constant finite coefficient sections reduce by the actual coefficient map. -/
 theorem coefficientSection_step (W : Scheme.{u}) (n : ℕ)
     (z : LocallyConstant (ConnectedComponents W)
       (Padic.coefficientExtensionRing l E (n + 2))) :
@@ -250,12 +242,7 @@ theorem coefficientSection_step (W : Scheme.{u}) (n : ℕ)
       (coefficientSection_eval l E W (n + 1) z)).trans
     (h.trans (coefficientSection_eval l E W n (z.map (scalarStep l E n))).symm)
 
-/-- Regular multiplication by a locally constant entry commutes with successor extension.
-Source: blueprint Compatible isomorphisms, finite matrix entries under ordinary balancing.
-(blueprint: lem-pe-internal-perfect-coefficient-transitions).
-Proof: the normalized regular extension comparison intertwines a regular lift of any
-global section with the lift of its image. The preceding global-section transition
-identity identifies this image with entrywise quotient reduction. -/
+/-- Regular multiplication by a locally constant entry commutes with successor extension. -/
 theorem coefficientEnd_step (W : Scheme.{u}) (n : ℕ)
     (z : LocallyConstant (ConnectedComponents W)
       (Padic.coefficientExtensionRing l E (n + 2))) :

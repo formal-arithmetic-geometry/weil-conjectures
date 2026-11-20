@@ -23,7 +23,7 @@ image is the mate of the commutation of `Ψ` with `Lg^*`. For proper `g` it is a
 `M = j_! K` with `K` bounded constructible of finite Tor amplitude on an open `j : U ⟶ Z`:
 restricted back to `R`, it is the projection map `Rg_* M ⊗ᴸ S_Y ⟶ Rg_* (M ⊗ᴸ Lg^* S_Y)` for the
 constant sheaf `S_Y`, an isomorphism by the projection formula
-(blueprint `thm-trf-finite-coefficient-map`).
+(blueprint `theorem-grothendieck-lefschetz-trace-formula--7`).
 -/
 
 @[expose] public section

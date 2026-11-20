@@ -111,6 +111,24 @@ private theorem coordinate_square
   rw [hm]
   rfl
 
+/-- Paste a normalized tensor square with a change of representatives. -/
+private theorem transport_tensor_square
+    {C D : Type*} [Category C] [Category D] (Q : C ⥤ D) (T : D × D ⥤ D)
+    {P P' R S : C} {K H A B A' B' V W : D}
+    (a : K ⟶ H) (b : H ⟶ T.obj (A, B))
+    (p : K ⟶ Q.obj P) (e : P ≅ P') (c : P ⟶ R) (d : R ⟶ S)
+    (m : Q.obj R ⟶ T.obj (A', B')) (n : Q.obj S ⟶ T.obj (V, W))
+    (x : A ⟶ A') (y : B ⟶ B') (q : A' ⟶ V) (r : B' ⟶ W)
+    (hs : a ≫ b ≫ T.map (Prod.mkHom x y) = p ≫ Q.map c ≫ m)
+    (hn : Q.map d ≫ n = m ≫ T.map (Prod.mkHom q r)) :
+    a ≫ b ≫ T.map (Prod.mkHom (x ≫ q) (y ≫ r)) =
+      (p ≫ Q.map e.hom) ≫ Q.map (e.inv ≫ c ≫ d) ≫ n := by
+  have hp : Prod.mkHom (x ≫ q) (y ≫ r) = Prod.mkHom x y ≫ Prod.mkHom q r := rfl
+  rw [hp, T.map_comp, ← Category.assoc b, ← Category.assoc a, hs]
+  simp only [Category.assoc]
+  rw [← hn]
+  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_map_assoc]
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
@@ -137,8 +155,6 @@ attribute [local implicit_reducible] pullbackTensorReferenceTensor pullbackTenso
   StrictQuotient.SystemGood sfIntegralConstructible constructibleIntegralPullback
   pullbackTensorSequenceDerived coefficientKFlatInclusion
 
-set_option maxHeartbeats 600000 in
--- Elaborating the K-flat comparison across the two strict pullback interfaces is expensive.
 private theorem strict_comparison_square
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : StrictQuotient.Complex l E Y)
@@ -174,15 +190,6 @@ private theorem strict_comparison_square
         ObjectProperty.FullSubcategory (CochainComplex.IsKFlatIndependentCoefficients
           (R := coefficientSequenceCommRingSheaf l E X))) ⟶
         ⟨StrictQuotient.pull l E f B, hfB.1⟩ from ⟨(pullBridge l E f).hom.app B⟩))
-  have hp : Prod.mkHom
-      ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app A ≫
-        DerivedCategory.Q.map ((pullBridge l E f).hom.app A))
-      ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app B ≫
-        DerivedCategory.Q.map ((pullBridge l E f).hom.app B)) =
-    Prod.mkHom ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app A)
-      ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app B) ≫
-    Prod.mkHom (DerivedCategory.Q.map ((pullBridge l E f).hom.app A))
-      (DerivedCategory.Q.map ((pullBridge l E f).hom.app B)) := rfl
   have hs' : F.map (pullbackTensorSystemModel l E Y A B hA.1 hB.1).hom ≫
       (pullbackTensorSystemComparison l E f).hom.app
         (DerivedCategory.Q.obj A, DerivedCategory.Q.obj B) ≫
@@ -195,21 +202,6 @@ private theorem strict_comparison_square
         (pullbackTensorSequenceGood l E f A hA.1)
         (pullbackTensorSequenceGood l E f B hB.1)).hom := by
     simpa only [pullbackTensorSystemComparison, pullbackTensorUniqueChoice] using hs
-  trans (F.map (pullbackTensorSystemModel l E Y A B hA.1 hB.1).hom ≫
-      (pullbackTensorSystemComparison l E f).hom.app
-        (DerivedCategory.Q.obj A, DerivedCategory.Q.obj B) ≫
-      T.map (Prod.mkHom
-        ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app A)
-        ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app B))) ≫
-    T.map (Prod.mkHom (DerivedCategory.Q.map ((pullBridge l E f).hom.app A))
-      (DerivedCategory.Q.map ((pullBridge l E f).hom.app B)))
-  · rw [hp, Functor.map_comp]
-    simp only [Category.assoc]
-    rfl
-  rw [hs']
-  unfold comparison
-  simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Functor.mapIso_hom,
-    Iso.prod_hom, Functor.map_comp, Category.assoc]
   have hn' : DerivedCategory.Q.map
         ((coefficientTotalTensor.{u, u+1, u}
           (coefficientSequenceTopology (Scheme.ProEt.topology X))
@@ -225,18 +217,26 @@ private theorem strict_comparison_square
       Functor.comp_map, Functor.prod_map, coefficientKFlatInclusion,
       ObjectProperty.ι_map, ObjectProperty.ι_obj, Functor.comp_obj,
       Functor.prod_obj, Iso.app_hom, T] using hn
-  rw [← hn']
-  have he := Iso.hom_inv_id_map_assoc
-    ((pullBridge l E f).app (StrictQuotient.total l E A B)) DerivedCategory.Q
-    (DerivedCategory.Q.map ((pullbackTensorSequenceCochain l E f).hom.app (A, B)) ≫
-      DerivedCategory.Q.map ((coefficientTotalTensor.{u, u+1, u}
-        (coefficientSequenceTopology (Scheme.ProEt.topology X))
-        (coefficientSequenceCommRingSheaf l E X)).map
-          (Prod.mkHom ((pullBridge l E f).hom.app A) ((pullBridge l E f).hom.app B))) ≫
-      (pullbackTensorSystemModel l E X _ _ hfA.1 hfB.1).hom)
-  exact (congrArg
-    ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app
-      (StrictQuotient.total l E A B) ≫ ·) he).symm
+  unfold comparison
+  exact transport_tensor_square DerivedCategory.Q T
+    (F.map (pullbackTensorSystemModel l E Y A B hA.1 hB.1).hom)
+    ((pullbackTensorSystemComparison l E f).hom.app
+      (DerivedCategory.Q.obj A, DerivedCategory.Q.obj B))
+    ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app _)
+    ((pullBridge l E f).app (StrictQuotient.total l E A B))
+    ((pullbackTensorSequenceCochain l E f).hom.app (A, B))
+    ((coefficientTotalTensor.{u, u+1, u}
+      (coefficientSequenceTopology (Scheme.ProEt.topology X))
+      (coefficientSequenceCommRingSheaf l E X)).map
+        (Prod.mkHom ((pullBridge l E f).hom.app A) ((pullBridge l E f).hom.app B)))
+    (pullbackTensorSystemModel l E X (G.obj A) (G.obj B)
+      (pullbackTensorSequenceGood l E f A hA.1)
+      (pullbackTensorSequenceGood l E f B hB.1)).hom
+    (pullbackTensorSystemModel l E X _ _ hfA.1 hfB.1).hom
+    ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app A)
+    ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app B)
+    (DerivedCategory.Q.map ((pullBridge l E f).hom.app A))
+    (DerivedCategory.Q.map ((pullBridge l E f).hom.app B)) hs' hn'
 
 /-- The canonical comparison intertwines substitution for arbitrary leaf maps. -/
 private theorem substitution_comparison

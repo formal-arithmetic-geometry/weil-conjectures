@@ -47,9 +47,9 @@ and higher direct images are the right derived functors (pqf-def-cohomology).
 2. Apply thm-sp-grothendieck to direct image followed by global sections. The module-sheaf
 categories are Grothendieck abelian (prop-pur-kinjective-resolutions-exist), as is Ab
 (lem-weil-pbc-ring-modules-grothendieck-abelian). Both functors are additive and left exact
-(def-weil-sheaf-of-modules-category); lem-weil-pbc-module-pushforward-injective-acyclic
+(situation-conventions); lem-weil-pbc-module-pushforward-injective-acyclic
 supplies composite acyclicity (def-sp-composite-acyclicity). The composite is global
-sections on X. By lem-sp-derived-well-defined the derived identifications are independent
+sections on X. By lemma-acyclic-resolutions the derived identifications are independent
 of resolution; lem-sp-grothendieck-edge-maps gives naturality and
 lem-pc-grothendieck-edge-cocycle identifies this edge with the cocycle formula.
 3. Under the vanishing hypothesis all columns except p = 0 vanish. The first-quadrant

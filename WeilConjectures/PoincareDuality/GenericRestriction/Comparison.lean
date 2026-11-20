@@ -24,7 +24,7 @@ comparison map
 `ρ_g(K, M) : Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)`
 (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`). This file collects the formal properties of
 `ρ` used to prove that it is an isomorphism for a change of the base field and for the pullback to
-a geometric generic fibre (blueprint `det-pd-generic-closed-hom` (2)):
+a geometric generic fibre (blueprint `lemma-restriction-geometric-generic-fibre` (2)):
 
 * `ρ` is compatible with composition: the composition isomorphism
   `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` is monoidal

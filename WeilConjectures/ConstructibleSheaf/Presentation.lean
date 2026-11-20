@@ -34,7 +34,7 @@ namespace AlgebraicGeometry.Scheme
 variable {X : Scheme.{u}} (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- **Constructible sheaves are quotients of sums of `j_{V!} Λ_V`** [Stacks 095M; SGA 4½,
-Rapport, 4.6]. This is an input to blueprint `sk-lem-sf-flat-model`.
+Rapport, 4.6]. This is an input to blueprint `lemma-flat-models-generators`.
 
 On a quasi-compact quasi-separated scheme `X`, every constructible sheaf `F` of `Λ`-modules on
 `X_ét` is a quotient of a finite coproduct `∐ j_{V!} Λ_V`, with `j_V : V ⟶ X` étale and `V`

@@ -8,9 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerSystemInterface
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleRootsOfUnitySheafSupplement
 
-/-! # Compatibility of normalized root inclusions
-Source: diagonal tower system proof, steps (3) and (4).
-(blueprint: lem-sfb-kummer-kernel-transition). -/
+/-! # Compatibility of normalized root inclusions. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,14 +34,7 @@ private theorem compatible_inclusions_transition
   simp only [Category.assoc]
   exact congrArg (fun f ↦ r₂.hom ≫ i₂ ≫ f) hc
 
-/-- Normalized root inclusions carry the actual tower transition to multiplication.
-Source: diagonal tower proof, step (3), root transitions
-(blueprint: lem-sfb-kummer-kernel-transition).
-Proof: the actual transition raises roots to the ell-th power, so its composite
-with the lower roots inclusion is the upper inclusion followed by ell. Substitute
-the two prescribed inclusion formulas. Scalar multiplication commutes with the
-units isomorphism q. Cancellation of q gives the asserted equation. The generic
-cancellation lemma keeps this computation independent of any derived category. -/
+/-- Normalized root inclusions carry the actual tower transition to multiplication. -/
 theorem kummer_kernel_transition (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (M : DiagonalAb W) (P : ℕ → DiagonalAb W)
     (q : M ≅ Scheme.proEtaleUnitsSheaf W)

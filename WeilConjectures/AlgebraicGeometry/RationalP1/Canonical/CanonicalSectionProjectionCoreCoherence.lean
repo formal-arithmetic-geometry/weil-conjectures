@@ -46,17 +46,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /--
 The categorical cancellation form of the section/projection coherence identity.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-second identity before coefficient normalization.
-(blueprint: lem-sfb-projective-canonical-section-projection-core-coherence).
-
-Proof: apply the section case of the ringed projection/composition coherence to the
-closed diagonal and the second projection.  Transport the resulting identity through
-the fixed internal-module comparison, evaluate it on the regular coefficient, and
-postcompose by the inverse of the canonical pushforward comparison.  The remaining
-right-unitor and pullback-section factors are exactly those displayed in the theorem.
 -/
 theorem canonical_section_projection_core_coherence
     (Y : Scheme.{u})

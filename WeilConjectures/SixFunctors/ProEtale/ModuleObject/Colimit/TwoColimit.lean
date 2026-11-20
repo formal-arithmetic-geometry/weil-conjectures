@@ -97,9 +97,7 @@ the ordinary-category model of the 2-colimit that they describe.
   an `E_X`-linear direct summand of `ℚ̄_ℓ,X` (`ProEtale.faithful_derivedExtendScalarsToPadicAlgCl`).
 
 These proofs do not use the lemmas `ProEtale.exists_iso_derivedExtendScalarsToPadicAlgCl_obj` and
-`ProEtale.exists_derivedExtendScalarsToPadicAlgCl_map_eq` (which rest on the sorried blueprint nodes
-`det-cor-coefficient-heart-ii-generation` and `sk-lem-constructible-ext-continuity` (1) of other
-subsections).
+`ProEtale.exists_derivedExtendScalarsToPadicAlgCl_map_eq`.
 
 This is the input needed to transport base change theorems from finite to `ℚ̄_ℓ`-coefficients:
 by (Obj) every constructible `K` is `T^X_{E,Ω} K_E`, and the compatibility of the base change
@@ -512,7 +510,7 @@ private lemma single_model (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
   exact es ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso e
 
 set_option backward.isDefEq.respectTransparency true in
-/-- **(Obj)** (blueprint `lem-sfb-constructible-cocone-obj`): every bounded constructible
+/-- **(Obj)** (blueprint `proposition-dctf-x-qbar-2-colimit--2`): every bounded constructible
 `ℚ̄_ℓ,X`-complex is isomorphic to the extension of
 scalars `T^X_{E,Ω} K_E` of a bounded constructible `E_X`-complex `K_E` for some finite
 subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. See the module docstring. -/

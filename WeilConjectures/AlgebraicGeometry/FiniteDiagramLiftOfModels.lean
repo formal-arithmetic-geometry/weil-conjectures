@@ -246,7 +246,7 @@ relations lift after one further base change. No object descent or étaleness de
 is asserted here.
 
 Source: Stacks Project, Limits, Tag 01ZM (2), (3), closing colimit assertion;
-step 4 of lem-weil-pbc-etale-finite-data-descent.
+step 4 of lemma-acyclicity-pulled-back-injectives.
 (blueprint: lem-weil-pbc-finite-diagram-lift-of-models).
 
 Proof:

@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.PulledReduction.PulledReductionC
 
 /-! # Descent of the augmented pulled reduction model
 
-Source: Stacks 06YY, 07A4, and 099N(5).
+## References
+
+* Stacks 06YY, 07A4, and 099N(5)
 -/
 
 @[expose] public noncomputable section

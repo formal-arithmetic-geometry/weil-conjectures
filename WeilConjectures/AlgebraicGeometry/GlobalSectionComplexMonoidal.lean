@@ -46,8 +46,6 @@ noncomputable abbrev smallClosedCochainMonoidal
       GradedObject.HasTensor₄ObjExt X Y Z W := by infer_instance
   exact HomologicalComplex.monoidalCategory D (.up ℤ)
 
-set_option maxHeartbeats 800000 in
--- Comparing the canonical module and total-complex structures needs extra elaboration steps.
 /-- The scalar-extension functor on complexes is strong monoidal with its prescribed
 multiplication as the inverse unit constraint.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
@@ -144,7 +142,10 @@ theorem ringFamilyGlobalExtension_complex_monoidal
       GradedObject.HasGoodTensorTensor₂₃ X Y Z := by infer_instance
   let (X Y Z W : GradedObject ℤ (SheafOfModules.{u} R)) :
       GradedObject.HasTensor₄ObjExt X Y Z W := by infer_instance
-  obtain ⟨mon, hmon⟩ := ringFamilyGlobalExtension_module_monoidal O
+  -- Keep the instance-rich target out of the existential elimination motive.
+  let hmod := ringFamilyGlobalExtension_module_monoidal O
+  let mon := hmod.choose
+  let hmon := hmod.choose_spec
   let := mon
   have := ringFamilyGlobalExtension_preservesColimits O
   refine ⟨Functor.mapCochainComplexMonoidal (ringFamilyGlobalExtension O), ?_⟩

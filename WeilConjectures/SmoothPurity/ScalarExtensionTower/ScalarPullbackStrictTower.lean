@@ -51,8 +51,29 @@ private theorem section_cast_cancel {A B : AddCommGrpCat.{u + 1}} (h : A = B) (x
   subst h
   rfl
 
-set_option maxHeartbeats 800000 in
--- The strict square contains several nested sheaf scalar-change functors.
+private theorem strict_pullback_evaluation_section (Y : Scheme.{u})
+    (M : coefficientSequenceModules l E Y) (n : ℕ) (U : Y.ProEtᵒᵖ)
+    (x : ((coefficientSequenceEvaluation l E Y n).obj M).val.obj U) :
+    coefficientEvaluationSection l E Y M n U
+      (integralComparisonSequenceSection l E Y M n U x) = x := by
+  exact section_cast_cancel _ _
+
+private theorem strict_pullback_scalar_section (X : Scheme.{u})
+    {N N' : integralTowerModules l E X} (g : N ⟶ N')
+    (t : integralOrdinaryScalar l E L ι X ≅ completedOrdinaryScalarExtension l E L ι X)
+    (ht : ∀ (N : integralTowerModules l E X) (U : X.ProEtᵒᵖ)
+      (s : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj U) (x : N.val.obj U),
+      (t.hom.app N).val.app U (integralOrdinaryTensorSection l E L ι X N U s x) =
+        completedScalarTensorSection l E L ι X N U s x)
+    (U : X.ProEtᵒᵖ) (x : N.val.obj U) (y : N'.val.obj U) (h : g.val.app U x = y) :
+    (t.hom.app N').val.app U
+      (((integralOrdinaryScalar l E L ι X).map g).val.app U
+        (integralOrdinaryTensorSection l E L ι X N U 1 x)) =
+      completedScalarTensorSection l E L ι X N' U 1 y := by
+  exact (congrArg ((t.hom.app N').val.app U)
+    ((scalar_map_tensor l E L ι X g U 1 x).trans
+      (congrArg (integralOrdinaryTensorSection l E L ι X N' U 1) h))).trans (ht N' U 1 y)
+
 /-- The strict scalar/pullback quotient square on every level and transition.
 Source: Stacks 03D3, 06YY and 07A4, the nested generator calculation.
 (blueprint: lem-pur-scalar-pullback-strict-tower).
@@ -133,12 +154,7 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
         ((integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ)) ≫
       Functor.whiskerLeft CE.asFunctor (NatIso.mapHomologicalComplex t (.up ℤ)).hom ≫
       a ≫ τ ≫ q.hom = (scalarPullbackTower l E L ι f).app P.obj := by
-  dsimp only
-  let H := ((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)).obj C
-  let σ := (NatIso.mapHomologicalComplex
-    (integralComparisonSequenceScalarPullback l E L ι f) (.up ℤ)).hom.app C
-  let τ := HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
-    (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).map σ)
+  intro H CE σ τ
   apply NatTrans.ext
   funext n
   apply HomologicalComplex.hom_ext
@@ -148,7 +164,10 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
   with_unfolding_all
     apply scalar_pullback_hom_ext l E L ι f n.unop n.unop
       (scalarFiniteRingMap l E L ι X n.unop) (scalarProjectionRingSquare l E L ι X n.unop)
-      (P.obj.X i) _
+      (P.obj.X i)
+      ((integralOperationsLevelPullback l L f n.unop).obj
+        ((unrestrictedIntegralReductionFunctor l L Y n.unop).obj
+          ((integralOrdinaryScalar l E L ι Y).obj (P.obj.X i))))
   intro U x
   let z := integralComparisonSequenceSection l E Y (C.X i) n.unop (op U)
     (((κ n.unop).inv.f i).val.app (op U)
@@ -163,7 +182,7 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
     have hc : coefficientEvaluationSection l E Y (C.X i) n.unop (op U) z =
         (((κ n.unop).inv.f i).val.app (op U)
           (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x)) :=
-      section_cast_cancel (coefficientSequenceEvaluationAb_eq l E Y (C.X i) n.unop (op U)) _
+      strict_pullback_evaluation_section l E Y (C.X i) n.unop (op U) _
     rw [hc]
     exact congrArg (fun g ↦ (g.f i).val.app (op U)
       (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x))
@@ -192,10 +211,14 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
                 (op ((Scheme.proEtaleBaseChange f).obj U)) 1
                 (integralOperationsPullbackGenerator l E f n.unop _ U
                   (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x))))))) = _
-  rw [scalar_map_tensor]
-  erw [hqEinv, ht]
-  erw [ha n.unop i (op ((Scheme.proEtaleBaseChange f).obj U)) 1
-    (integralComparisonSequenceGenerator l E f (C.X i) n.unop U z)]
+  have hscalar := strict_pullback_scalar_section l E L ι X ((qE.inv.app n).f i) t ht
+    (op ((Scheme.proEtaleBaseChange f).obj U)) _ w hqEinv
+  refine (congrArg (fun y ↦ ((q.hom.app n).f i).val.app _
+    (((τ.app n).f i).val.app _ (((a.app n).f i).val.app _ y))) hscalar).trans ?_
+  refine (congrArg (fun y ↦ ((q.hom.app n).f i).val.app _
+    (((τ.app n).f i).val.app _ y))
+    (ha n.unop i (op ((Scheme.proEtaleBaseChange f).obj U)) 1
+      (integralComparisonSequenceGenerator l E f (C.X i) n.unop U z))).trans ?_
   simp only [map_one]
   change ((q.hom.app n).f i).val.app _
     (((((coefficientSequenceRestriction l L X).map (σ.f i)).app n).val.app _)
