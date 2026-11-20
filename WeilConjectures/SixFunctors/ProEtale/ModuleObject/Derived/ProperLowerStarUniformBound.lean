@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLo
 Let `ℓ` be a prime, `k` a field in which `ℓ` is invertible, `p : Z ⟶ Y` a proper morphism to a
 `k`-scheme of finite type, and `d` a natural number bounding the dimensions of all geometric
 fibres of `p`. For the coefficient rings `Λ = E` (a finite extension of `ℚ_ℓ`) and `Λ = ℚ̄_ℓ`, and
-`M ∈ IndCons(Z, Λ)` (blueprint `lemma-uniform-bound-proper-direct-image--1`):
+`M ∈ IndCons(Z, Λ)`:
 
 * `R^q p_* M = 0` for `q > 2d + 1` (we prove the sharper bound `Rp_* M ∈ D^{≤ 2d}`);
 * `R^q p_* M ∈ IndCons(Y, Λ)` for `q ≥ 0`.
@@ -32,8 +32,7 @@ All in the namespace `AlgebraicGeometry.ProEtale.CondensedRing`:
   `isLE_rightDerivedLowerStar_singleFunctor_padicAlgClRingObj_of_isIndConstructible`: the bound
   `Rp_* M ∈ D^{≤ 2d}`;
 * `rightDerivedLowerStar_uniformBound_continuousMapRingObj`,
-  `rightDerivedLowerStar_uniformBound_padicAlgClRingObj`: the clause
-  `lemma-uniform-bound-proper-direct-image--1`.
+  `rightDerivedLowerStar_uniformBound_padicAlgClRingObj`: both statements above.
 -/
 
 @[expose] public section
@@ -90,8 +89,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k �
 
 include aY hd in
 /-- For a finite subextension `E ⊆ ℚ̄_ℓ`, `Rp_*` sends the constructible `E`-sheaves into degrees
-`≤ 2d`, `d` bounding the dimensions of the geometric fibres of `p` (blueprint
-`lemma-uniform-bound-proper-direct-image--1`, constructible case). -/
+`≤ 2d`, `d` bounding the dimensions of the geometric fibres of `p`. -/
 lemma isLE_rightDerivedLowerStar_singleFunctor_finiteIntermediateField
     (E : FiniteIntermediateField ℓ)
     (N : Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
@@ -118,7 +116,7 @@ lemma isLE_rightDerivedLowerStar_singleFunctor_finiteIntermediateField
 include aY hd in
 /-- For the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ`, `Rp_*` sends the
 constructible `E`-sheaves into degrees `≤ 2d`, `d` bounding the dimensions of the geometric fibres
-of `p` (blueprint `lemma-uniform-bound-proper-direct-image--1`, constructible case). -/
+of `p`. -/
 lemma isLE_rightDerivedLowerStar_singleFunctor_continuousMapRingObj (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (N : Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
@@ -132,8 +130,7 @@ lemma isLE_rightDerivedLowerStar_singleFunctor_continuousMapRingObj (E : Type) [
 
 include aY hd in
 /-- For the coefficient ring `ℚ̄_ℓ`, `Rp_*` sends the constructible `ℚ̄_ℓ`-sheaves into degrees
-`≤ 2d`, `d` bounding the dimensions of the geometric fibres of `p` (blueprint
-`lemma-uniform-bound-proper-direct-image--1`, constructible case). -/
+`≤ 2d`, `d` bounding the dimensions of the geometric fibres of `p`. -/
 lemma isLE_rightDerivedLowerStar_singleFunctor_padicAlgClRingObj
     (N : Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z))
@@ -155,7 +152,7 @@ lemma isLE_rightDerivedLowerStar_singleFunctor_padicAlgClRingObj
 /-! ### The bound on ind-constructible sheaves -/
 
 include aY hd in
-/-- Blueprint `lemma-uniform-bound-proper-direct-image--1`, amplitude, for the coefficient ring
+/-- For the coefficient ring
 `E` of a finite extension `E` of `ℚ_ℓ`: `Rp_*` sends `IndCons(Z, E)` into degrees `≤ 2d`. -/
 lemma isLE_rightDerivedLowerStar_singleFunctor_continuousMapRingObj_of_isIndConstructible
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
@@ -173,7 +170,7 @@ lemma isLE_rightDerivedLowerStar_singleFunctor_continuousMapRingObj_of_isIndCons
     (isLE_rightDerivedLowerStar_singleFunctor_continuousMapRingObj ℓ aY p d hd E) hM
 
 include aY hd in
-/-- Blueprint `lemma-uniform-bound-proper-direct-image--1`, amplitude, for the coefficient ring
+/-- For the coefficient ring
 `ℚ̄_ℓ`: `Rp_*` sends `IndCons(Z, ℚ̄_ℓ)` into degrees `≤ 2d`. -/
 lemma isLE_rightDerivedLowerStar_singleFunctor_padicAlgClRingObj_of_isIndConstructible
     {M : Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
@@ -187,7 +184,7 @@ lemma isLE_rightDerivedLowerStar_singleFunctor_padicAlgClRingObj_of_isIndConstru
 /-! ### Ind-constructibility of the higher direct images -/
 
 include aY in
-/-- Blueprint `lemma-uniform-bound-proper-direct-image--1`, second assertion, for the coefficient
+/-- For the coefficient
 ring `E` of a finite extension `E` of `ℚ_ℓ`: `R^q p_* M ∈ IndCons(Y, E)` for
 `M ∈ IndCons(Z, E)`. -/
 lemma isIndConstructible_homology_rightDerivedLowerStar_continuousMapRingObj
@@ -214,7 +211,7 @@ lemma isIndConstructible_homology_rightDerivedLowerStar_continuousMapRingObj
       ℓ E aY p _ (boundedConstructible_singleFunctor_obj _ Z 0 N hN)).2 n) hM
 
 include aY in
-/-- Blueprint `lemma-uniform-bound-proper-direct-image--1`, second assertion, for the coefficient
+/-- For the coefficient
 ring `ℚ̄_ℓ`: `R^q p_* M ∈ IndCons(Y, ℚ̄_ℓ)` for `M ∈ IndCons(Z, ℚ̄_ℓ)`. -/
 lemma isIndConstructible_homology_rightDerivedLowerStar_padicAlgClRingObj
     {M : Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
@@ -233,10 +230,10 @@ lemma isIndConstructible_homology_rightDerivedLowerStar_padicAlgClRingObj
     (fun N hN ↦ (boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj
       ℓ aY p _ (boundedConstructible_singleFunctor_obj _ Z 0 N hN)).2 n) hM
 
-/-! ### The clause `lemma-uniform-bound-proper-direct-image--1` -/
+/-! ### The uniform bound -/
 
 include aY hd in
-/-- Blueprint `lemma-uniform-bound-proper-direct-image--1`, for the coefficient ring `E` of a
+/-- For the coefficient ring `E` of a
 finite extension `E` of `ℚ_ℓ`: let `p : Z ⟶ Y` be proper, `Y` of finite type over `k`, and `d`
 bound the dimensions of all geometric fibres of `p`. For `M ∈ IndCons(Z, E)`,
 `R^q p_* M = 0` for `q > 2d + 1` and `R^q p_* M ∈ IndCons(Y, E)` for `q ≥ 0`. -/
@@ -257,7 +254,7 @@ theorem rightDerivedLowerStar_uniformBound_continuousMapRingObj
     fun q _ ↦ isIndConstructible_homology_rightDerivedLowerStar_continuousMapRingObj ℓ aY p E hM q⟩
 
 include aY hd in
-/-- Blueprint `lemma-uniform-bound-proper-direct-image--1`, for the coefficient ring `ℚ̄_ℓ`: let
+/-- For the coefficient ring `ℚ̄_ℓ`: let
 `p : Z ⟶ Y` be proper, `Y` of finite type over `k`, and `d` bound the dimensions of all
 geometric fibres of `p`. For `M ∈ IndCons(Z, ℚ̄_ℓ)`, `R^q p_* M = 0` for `q > 2d + 1` and
 `R^q p_* M ∈ IndCons(Y, ℚ̄_ℓ)` for `q ≥ 0`. -/

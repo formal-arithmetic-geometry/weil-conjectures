@@ -24,7 +24,12 @@ placed in degree `0`, into degrees `≤ d` and to a complex with cohomology in `
   `K ← τ_{≤ q} K → τ_{≥ q - d - 1} τ_{≤ q} K` induce isomorphisms on `H^q ∘ G`;
 * `DerivedCategory.homologyProperty_obj_of_homologyProperty`: `G K` has cohomology in `Q`.
 
-This is the formal part of blueprint `lemma-proper-direct-image-unbounded-complexes`.
+## Implementation details
+
+The bounded case is a dévissage along the truncation triangles. For the amplitude bound, the
+bounded truncations `τ_{≥ -n} K` go into degrees `≤ b + d`, and `K` is their homotopy limit.
+For the cohomology, `H^q(G K) ≅ H^q(G (τ_{≥ q - d - 1} τ_{≤ q} K))` and the latter complex is
+bounded.
 -/
 
 @[expose] public section
@@ -48,7 +53,7 @@ variable (Q : ObjectProperty D) [Q.IsClosedUnderIsomorphisms] [Q.ContainsZero]
 omit [P.ContainsZero] in
 /-- If a triangulated functor `G` sends the objects of `P`, placed in degree `0`, to complexes
 with cohomology in the weak Serre class `Q`, it does so for all bounded complexes with
-cohomology in `P` (dévissage along the truncation triangles). -/
+cohomology in `P`. -/
 lemma homologyProperty_obj_of_bounded
     (hG : ∀ F : C, P F → homologyProperty Q (G.obj ((singleFunctor C 0).obj F)))
     (M : DerivedCategory C) (hM : t.bounded M) (hMP : homologyProperty P M) :
@@ -63,9 +68,8 @@ variable [Abelian.HasKInjectiveResolutions C] [HasLimitsOfShape (Discrete ℕ) C
   [PreservesLimitsOfShape (Discrete ℕ) G] (d : ℤ)
 
 /-- If `G` sends the objects of `P`, placed in degree `0`, into degrees `≤ d`, it sends every
-(possibly unbounded) complex in `D^{≤ b}` with cohomology in `P` into degrees `≤ b + d + 1`:
-the bounded truncations `τ_{≥ -n} K` go into degrees `≤ b + d`, and `K` is their homotopy
-limit. -/
+(possibly unbounded) complex in `D^{≤ b}` with cohomology in `P` into degrees `≤ b + d + 1`.
+-/
 lemma isLE_obj_add_one_of_homologyProperty
     (hG : ∀ F : C, P F → (G.obj ((singleFunctor C 0).obj F)).IsLE d)
     (K : DerivedCategory C) (hK : homologyProperty P K) (b : ℤ) [K.IsLE b] :
@@ -114,9 +118,7 @@ variable (Q : ObjectProperty D) [Q.IsClosedUnderIsomorphisms] [Q.ContainsZero]
 
 /-- Let `G` not lower degrees and send the objects of `P`, placed in degree `0`, into degrees
 `≤ d` and to complexes with cohomology in the weak Serre class `Q`. Then `G` sends every
-(possibly unbounded) complex with cohomology in `P` to a complex with cohomology in `Q`: in
-degree `q`, `H^q(G K) ≅ H^q(G (τ_{≥ q - d - 1} τ_{≤ q} K))`, and the latter complex is
-bounded. -/
+(possibly unbounded) complex with cohomology in `P` to a complex with cohomology in `Q`. -/
 lemma homologyProperty_obj_of_homologyProperty
     (hG₁ : ∀ F : C, P F → (G.obj ((singleFunctor C 0).obj F)).IsLE d)
     (hG₂ : ∀ (X : DerivedCategory C) (a : ℤ), X.IsGE a → (G.obj X).IsGE a)

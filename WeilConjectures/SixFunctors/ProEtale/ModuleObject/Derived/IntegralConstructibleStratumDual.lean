@@ -23,8 +23,8 @@ pro-étale locally `𝒪_{E,S} ⊗_{𝒪_E} P` with `P` finitely generated
 locally, a finitely generated module `P` over the discrete valuation ring `𝒪_E` has a free
 resolution `0 ⟶ 𝒪_E^r ⟶ 𝒪_E^s ⟶ P ⟶ 0` of length one.
 
-Combined with the local structure of constructible sheaves, this gives blueprint
-`lemma-structure-integral-constructible-complexes--3`
+Combined with the local structure of constructible sheaves, this gives a finite stratification on
+whose strata a constructible `𝒪_E`-sheaf has these properties
 (`AlgebraicGeometry.ProEtale.CondensedRing.exists_stratification_isDualizable_torAmplitudeIn`).
 -/
 
@@ -153,9 +153,9 @@ theorem isDualizable_and_torAmplitudeIn_of_hasFiniteConstantLocalModel (S : Sche
   isDualizable_and_torAmplitudeIn_of_localResolution _ S N
     (exists_localResolution_of_hasFiniteConstantLocalModel ℓ E S N hN)
 
-/-- Blueprint `lemma-structure-integral-constructible-complexes--3`: for a constructible
+/-- For a constructible
 `𝒪_E`-sheaf `C` on a noetherian scheme `X` there is a finite stratification `X = ∐ₐ Xₐ` on whose
-strata `C` is pro-étale locally `𝒪_{E,Xₐ} ⊗_{𝒪_E} P` with `P` finitely generated (clause (2)),
+strata `C` is pro-étale locally `𝒪_{E,Xₐ} ⊗_{𝒪_E} P` with `P` finitely generated,
 and on each such stratum `C|_{Xₐ}` (placed in degree `0`) is dualizable of Tor amplitude
 `[-1, 0]`, its dual `RHom(C|_{Xₐ}, 𝒪_{E,Xₐ})` having Tor amplitude `[0, 1]`. -/
 theorem exists_stratification_isDualizable_torAmplitudeIn {X : Scheme.{u}} [IsNoetherian X]

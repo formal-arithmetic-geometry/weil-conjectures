@@ -14,8 +14,7 @@ For a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a constructible `�
 noetherian scheme `X`, there is a finite stratification of `X` on whose strata `C` is pro-étale
 locally of the form `𝒪_{E,S} ⊗_{𝒪_E} P` with `P` a finitely presented (equivalently, finitely
 generated: `𝒪_E` is noetherian) `𝒪_E`-module
-(`AlgebraicGeometry.ProEtale.CondensedRing.exists_stratification_hasFiniteConstantLocalModel`,
-blueprint `lemma-structure-integral-constructible-complexes--2`).
+(`AlgebraicGeometry.ProEtale.CondensedRing.exists_stratification_hasFiniteConstantLocalModel`).
 -/
 
 @[expose] public section
@@ -31,8 +30,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
   [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
-/-- Blueprint `lemma-structure-integral-constructible-complexes--2`: for a constructible
-`𝒪_E`-sheaf `C` on a noetherian scheme `X` there is a finite stratification `X = ∐ₐ Xₐ` into
+/-- For a constructible `𝒪_E`-sheaf `C` on a noetherian scheme `X` there is a finite
+stratification `X = ∐ₐ Xₐ` into
 constructible locally closed subschemes on whose strata `C` is pro-étale locally
 `𝒪_{E,Xₐ} ⊗_{𝒪_E} P` with `P` finitely generated: `C|_{Xₐ}` has a finite constant local model
 (`HasFiniteConstantLocalModel`), i.e. on the members `U` of a pro-étale cover of `Xₐ` it is the

@@ -260,8 +260,7 @@ section FiniteProducts
 open Limits
 
 /-- A property of objects of an abelian category which contains zero and is closed under
-isomorphisms and extensions is closed under finite products (a binary product is an extension).
--/
+isomorphisms and extensions is closed under finite products. -/
 lemma isClosedUnderFiniteProducts_of_isClosedUnderExtensions (Q : ObjectProperty C)
     [Q.ContainsZero] [Q.IsClosedUnderIsomorphisms] [Q.IsClosedUnderExtensions] :
     Q.IsClosedUnderFiniteProducts := by

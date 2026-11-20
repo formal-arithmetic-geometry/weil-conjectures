@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 For a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a noetherian scheme `X`, we collect the
 structure of the bounded constructible complexes `Dᵇc(X, 𝒪_E)` of module objects over `𝒪_{E,X}`
 and of the constructible sheaves `Cons(X, 𝒪_E)`
-(`AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_padicIntegersRingObj_structure`,
-blueprint `lemma-structure-integral-constructible-complexes--1`):
+(`AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_padicIntegersRingObj_structure`):
 `Dᵇc(X, 𝒪_E)` is a triangulated subcategory of bounded objects of `D(X_proét, 𝒪_E)`, stable
 under the truncations; its objects in degree `0` are the constructible sheaves, which form an
 essentially small abelian subcategory of `Mod(X_proét, 𝒪_E)` closed under kernels, cokernels and
@@ -132,7 +131,7 @@ lemma isClosedUnderFiniteProducts_isConstructibleModuleObject_padicIntegersRingO
     ⟨0, isZero_zero _, isConstructibleModuleObject_of_isZero _ (isZero_zero _)⟩
   P.isClosedUnderFiniteProducts_of_isClosedUnderExtensions
 
-/-- Blueprint `lemma-structure-integral-constructible-complexes--1`: for a finite subextension
+/-- For a finite subextension
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a noetherian scheme `X`, `Dᵇc(X, 𝒪_E)` is a triangulated subcategory of
 `D(X_proét, 𝒪_E)` of bounded objects, stable under the truncations `τ^{≤ n}` and `τ^{≥ n}`; its
 objects in degree `0` (the complexes concentrated in degree `0`, equivalently the sheaves placed

@@ -18,16 +18,13 @@ derived categories, hence exact)
   (`DerivedCategory.constructibleFiniteTor_rightDerivedLowerStar`):
   on `ν^* G` it is `ν^* Rp_*^{ét} G`, and the étale `Rp_*` preserves `Dctf`;
 * preserves direct sums of objects of `Loc(Dctf(X, Λ))`
-  (`DerivedCategory.preservesColimitsOfShape_localizing_rightDerivedLowerStar`, blueprint
-  `proposition-proper-direct-image-extension-zero--2`), these having cohomology sheaves
-  of étale origin;
+  (`DerivedCategory.preservesColimitsOfShape_localizing_rightDerivedLowerStar`), these having
+  cohomology sheaves of étale origin;
 * hence maps `Loc(Dctf(X, Λ))` into `Loc(Dctf(Y, Λ))`
-  (`DerivedCategory.localizingConstructibleFiniteTor_rightDerivedLowerStar`, blueprint
-  `proposition-proper-direct-image-extension-zero--1` for finite coefficients).
+  (`DerivedCategory.localizingConstructibleFiniteTor_rightDerivedLowerStar`).
 
-Together: blueprint `corollary-proper-direct-image-finite-coefficients-localizing--1`
-(`localizingConstructibleFiniteTor_rightDerivedLowerStar_and_preservesColimitsOfShape`, in
-the namespace `AlgebraicGeometry.ProEtale.DerivedCategory`).
+The last two statements are combined in
+`localizingConstructibleFiniteTor_rightDerivedLowerStar_and_preservesColimitsOfShape`.
 -/
 
 @[expose] public section
@@ -65,9 +62,8 @@ theorem constructibleFiniteTor_rightDerivedLowerStar [HasInvertibleExponent Λ Y
       (Etale.constructibleFiniteTor_rightDerivedLowerStar Λ (p ≫ aY) aY p rfl hGt))
 
 include aY in
-/-- Blueprint `proposition-proper-direct-image-extension-zero--2`: Proper direct sums, finite
-coefficients. For a proper `p : X ⟶ Y` to a finite-type `k`-scheme and a finite ring `Λ`, the
-direct image `Rp_*` preserves direct sums of objects of `Loc(Dctf(X_proét, Λ))`. -/
+/-- For a proper `p : X ⟶ Y` to a finite-type `k`-scheme and a finite ring `Λ`, the direct
+image `Rp_*` preserves direct sums of objects of `Loc(Dctf(X_proét, Λ))`. -/
 theorem preservesColimitsOfShape_localizing_rightDerivedLowerStar (J : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete J)
       ((localizingConstructibleFiniteTor Λ X).ι ⋙
@@ -91,11 +87,8 @@ theorem preservesColimitsOfShape_localizing_rightDerivedLowerStar (J : Type (u +
   exact preservesColimitsOfShape_of_discrete _
 
 include aY in
-/-- Blueprint `proposition-proper-direct-image-extension-zero--1`, finite coefficients: for a
-proper `p : X ⟶ Y` to a finite-type `k`-scheme and a finite ring `Λ` whose exponent is
-invertible on `Y`, the direct image `Rp_*` (exact, being a triangulated functor of the ambient
-derived categories) restricts to a functor `Loc(Dctf(X, Λ)) ⥤ Loc(Dctf(Y, Λ))`: it maps
-`Loc(Dctf(X, Λ))` into `Loc(Dctf(Y, Λ))`. -/
+/-- For a proper `p : X ⟶ Y` to a finite-type `k`-scheme and a finite ring `Λ` whose exponent
+is invertible on `Y`, the direct image `Rp_*` maps `Loc(Dctf(X, Λ))` into `Loc(Dctf(Y, Λ))`. -/
 theorem localizingConstructibleFiniteTor_rightDerivedLowerStar [HasInvertibleExponent Λ Y]
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
     (hK : localizingConstructibleFiniteTor Λ X K) :
@@ -107,11 +100,9 @@ theorem localizingConstructibleFiniteTor_rightDerivedLowerStar [HasInvertibleExp
       (constructibleFiniteTor_rightDerivedLowerStar Λ aY p hK)) K hK
 
 include aY in
-/-- Blueprint `corollary-proper-direct-image-finite-coefficients-localizing--1`: Proper direct
-image on the localizing categories. Let `Λ` be a finite ring whose exponent is invertible on the
-finite-type `k`-scheme `Y`, and let `p : X ⟶ Y` be proper. The direct image `Rp_*`, a
-triangulated (hence exact) functor of the ambient derived categories, restricts to a functor
-`Loc(Dctf(X, Λ)) ⥤ Loc(Dctf(Y, Λ))`, and this restriction preserves arbitrary direct sums. -/
+/-- Let `Λ` be a finite ring whose exponent is invertible on the finite-type `k`-scheme `Y`,
+and let `p : X ⟶ Y` be proper. The direct image `Rp_*` maps `Loc(Dctf(X, Λ))` into
+`Loc(Dctf(Y, Λ))`, and preserves arbitrary direct sums of objects of `Loc(Dctf(X, Λ))`. -/
 theorem localizingConstructibleFiniteTor_rightDerivedLowerStar_and_preservesColimitsOfShape
     [HasInvertibleExponent Λ Y] :
     (∀ K, localizingConstructibleFiniteTor Λ X K →

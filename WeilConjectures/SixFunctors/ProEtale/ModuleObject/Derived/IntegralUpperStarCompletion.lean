@@ -34,7 +34,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable {ℓ : ℕ} [Fact ℓ.Prime] {E : Type} [Field E] [Algebra E (PadicAlgCl ℓ)]
   [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
-/-- Blueprint `lemma-inverse-image-tensor-product--5`: on `Dᵇc(-_proét, 𝒪_E)`, the ordinary
+/-- On `Dᵇc(-_proét, 𝒪_E)`, the ordinary
 inverse image agrees with the completed inverse image. For `g : W ⟶ X` with `W` noetherian and
 `K ∈ Dᵇc(X, 𝒪_E)`, the ordinary inverse image `Lg^* K` is derived complete, and the canonical
 comparison from `Lg^* K` to its completion `R lim_n Res_n (red_n (Lg^* K))` (the completed

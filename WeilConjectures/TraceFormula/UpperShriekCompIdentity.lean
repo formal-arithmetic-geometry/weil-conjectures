@@ -14,16 +14,19 @@ For bounded constructible `ℚ̄_ℓ`-sheaves, the composition isomorphisms
 `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!`
 (`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl`) are compatible with
 the identity isomorphisms `R(𝟙 X)^! ≅ 𝟭`
-(`ProEtale.CondensedRing.boundedConstructibleUpperShriekId`): both unit laws hold. The left unit
-law is `ProEtale.CondensedRing.Correspondence.upperShriekComp_id_left_hom_app`; this file
-proves the right unit law by conjugating the right unit law of the lower shriek (using
-`CategoryTheory.conjugateIsoEquiv_comp_right_hom_app`), and packages
-both (blueprint `proposition-composition-open-restriction-compactifications-f--3`).
+(`ProEtale.CondensedRing.boundedConstructibleUpperShriekId`): both unit laws hold.
 
 ## Main statements
 
 - `ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl_id_right_hom_app`
 - `ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl_unitality`
+
+## Implementation details
+
+The left unit law is `ProEtale.CondensedRing.Correspondence.upperShriekComp_id_left_hom_app`.
+The right unit law is obtained by conjugating the right unit law of the composition isomorphisms
+of the lower shriek (`boundedConstructibleLowerShriekComp_padicAlgCl_id_right`) using
+`CategoryTheory.conjugateIsoEquiv_comp_right_hom_app`.
 -/
 
 @[expose] public section
@@ -42,9 +45,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 /-- **Right unit law of the composition isomorphisms of the exceptional inverse image**:
-`R(f ≫ 𝟙)^! ≅ R(𝟙)^! ⋙ Rf^! ≅ Rf^!` is the identity. This is conjugate to the right unit law
-of the composition isomorphisms of the lower shriek
-(`boundedConstructibleLowerShriekComp_padicAlgCl_id_right`). -/
+`R(f ≫ 𝟙)^! ≅ R(𝟙)^! ⋙ Rf^! ≅ Rf^!` is the identity. -/
 lemma boundedConstructibleUpperShriekComp_padicAlgCl_id_right_hom_app (f : X ⟶ Y)
     (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperShriekComp_padicAlgCl ℓ f (𝟙 Y)).hom.app K ≫
@@ -66,9 +67,8 @@ lemma boundedConstructibleUpperShriekComp_padicAlgCl_id_right_hom_app (f : X ⟶
         eqToHom_app]
       exact boundedConstructibleLowerShriekComp_padicAlgCl_id_right ℓ f K) K
 
-/-- Blueprint `proposition-composition-open-restriction-compactifications-f--3`: **the
-composition comparisons are compatible with the identity morphism**. For bounded constructible
-`ℚ̄_ℓ`-sheaves and `f : X ⟶ Y`, both unit laws hold for the composition isomorphisms
+/-- **The composition comparisons are compatible with the identity morphism**. For bounded
+constructible `ℚ̄_ℓ`-sheaves and `f : X ⟶ Y`, both unit laws hold for the composition isomorphisms
 `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` (`boundedConstructibleUpperShriekComp_padicAlgCl`) and the identity
 isomorphisms `R(𝟙)^! ≅ 𝟭` (`boundedConstructibleUpperShriekId`):
 `R(𝟙 ≫ f)^! ≅ Rf^! ⋙ R(𝟙)^! ≅ Rf^!` and `R(f ≫ 𝟙)^! ≅ R(𝟙)^! ⋙ Rf^! ≅ Rf^!` are the

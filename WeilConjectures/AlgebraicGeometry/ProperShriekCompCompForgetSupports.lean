@@ -496,8 +496,7 @@ theorem rightDerivedLowerShriekOfCompactificationCompIso_hom_app_comp_forgetSupp
 
 /-- Forget supports commutes with composition on compatible compactifications, for proper
 `p` and `f`: the special case of
-`rightDerivedLowerShriekOfCompactificationCompIso_hom_app_comp_forgetSupports`.
-(auxiliary; not a blueprint node) -/
+`rightDerivedLowerShriekOfCompactificationCompIso_hom_app_comp_forgetSupports`. -/
 theorem properShriekComp_compactificationForgetSupports {W X S : Scheme.{u}}
     (p : W ⟶ X) (f : X ⟶ S) [IsProper p] [IsProper f]
     (d : Compactification f) (e : Compactification (p ≫ d.i))

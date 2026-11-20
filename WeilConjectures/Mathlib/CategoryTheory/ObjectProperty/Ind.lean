@@ -22,10 +22,14 @@ Let `A` be a Grothendieck abelian category and `P` an essentially small property
 `A`. If `P.ind` (the filtered colimits of objects satisfying `P`) contains zero and is closed under
 kernels, cokernels, finite products and coproducts in `A`, then the full subcategory of `A`
 defined by `P.ind` is Grothendieck abelian
-(`CategoryTheory.ObjectProperty.isGrothendieckAbelian_ind_fullSubcategory`): it is abelian with
-all small colimits computed in `A` (coproducts and cokernels), filtered colimits are exact since
-they are computed in `A` and the inclusion is exact, and the objects satisfying `P` form a small
-separating family, since every object of `P.ind` is a filtered colimit of such objects.
+(`CategoryTheory.ObjectProperty.isGrothendieckAbelian_ind_fullSubcategory`).
+
+## Implementation details
+
+The full subcategory is abelian with all small colimits computed in `A` (coproducts and
+cokernels), filtered colimits are exact since they are computed in `A` and the inclusion is
+exact, and the objects satisfying `P` form a small separating family, since every object of
+`P.ind` is a filtered colimit of such objects.
 -/
 
 @[expose] public section
@@ -40,8 +44,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] (P : ObjectProperty A)
 
 /-- If the filtered colimits of an essentially small family of objects of a Grothendieck abelian
 category `A` form a subcategory containing zero and closed under kernels, cokernels, finite
-products and coproducts, then this full subcategory is a Grothendieck abelian category
-(blueprint `proposition-ind-constructible-sheaves--8`, abstract form). -/
+products and coproducts, then this full subcategory is a Grothendieck abelian category. -/
 theorem isGrothendieckAbelian_ind_fullSubcategory [IsGrothendieckAbelian.{w} A]
     [ObjectProperty.EssentiallySmall.{w} P] [(ind.{w} P).ContainsZero]
     [(ind.{w} P).IsClosedUnderKernels] [(ind.{w} P).IsClosedUnderCokernels]

@@ -15,8 +15,7 @@ Let `Dic(X, Λ)` be the complexes of sheaves of `Λ_X`-modules with cohomology i
 `IndCons(X, Λ)` (`DerivedCategory.homologyProperty (IsIndConstructibleModuleObject _)`). Let
 `p : Z ⟶ Y` be a proper morphism to a separated `k`-scheme of finite type and `d` a natural number
 bounding the dimensions of all geometric fibres of `p`. For the coefficient rings `Λ = E`
-(a finite extension of `ℚ_ℓ`) and `Λ = ℚ̄_ℓ` we prove blueprint
-`lemma-proper-direct-image-unbounded-complexes`:
+(a finite extension of `ℚ_ℓ`) and `Λ = ℚ̄_ℓ` we prove:
 
 1. `Rp_*` maps `Dic(Z, Λ)` into `Dic(Y, Λ)`, with `Rp_* Dic^{≤ b}(Z) ⊆ Dic^{≤ b + 2d + 1}(Y)` and
    `Rp_* Dic^{≥ a}(Z) ⊆ Dic^{≥ a}(Y)`;
@@ -152,7 +151,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k �
 section ContinuousMapRingObj
 
 include aY hd in
-/-- Blueprint `lemma-proper-direct-image-unbounded-complexes--1`, for the coefficient ring `E` of
+/-- For the coefficient ring `E` of
 a finite extension `E` of `ℚ_ℓ`: `Rp_*` maps `Dic(Z, E)` into `Dic(Y, E)`, with
 `Rp_* Dic^{≤ b}(Z, E) ⊆ Dic^{≤ b + 2d + 1}(Y, E)` and `Rp_* Dic^{≥ a}(Z, E) ⊆ Dic^{≥ a}(Y, E)`. -/
 theorem rightDerivedLowerStar_indConstructibleDerived_continuousMapRingObj
@@ -176,7 +175,7 @@ theorem rightDerivedLowerStar_indConstructibleDerived_continuousMapRingObj
   exact this
 
 include aY hd in
-/-- Blueprint `lemma-proper-direct-image-unbounded-complexes--2`, for the coefficient ring `E` of
+/-- For the coefficient ring `E` of
 a finite extension `E` of `ℚ_ℓ`: for `K ∈ Dic(Z, E)` and every `q`, the truncation maps
 `K ← τ_{≤ q} K → τ_{≥ q - 2d - 1} τ_{≤ q} K` induce isomorphisms
 `H^q(Rp_* K) ≃ H^q(Rp_* τ_{≤ q} K) ≃ H^q(Rp_* τ_{≥ q - 2d - 1} τ_{≤ q} K)` between objects of
@@ -208,7 +207,7 @@ theorem isIso_homologyFunctor_map_rightDerivedLowerStar_truncation_continuousMap
     isIso_homologyFunctor_map_rightDerivedLowerStar_truncation _ p _ hn K hK q⟩
 
 include aY hd in
-/-- Blueprint `lemma-proper-direct-image-unbounded-complexes--3`, for the coefficient ring `E` of
+/-- For the coefficient ring `E` of
 a finite extension `E` of `ℚ_ℓ`: `Rp_* : Dic(Z, E) → Dic(Y, E)` preserves arbitrary direct sums
 (direct sums in `Dic` are computed in the derived category). -/
 theorem preservesColimitsOfShape_indConstructibleDerived_rightDerivedLowerStar_continuousMapRingObj
@@ -232,7 +231,7 @@ end ContinuousMapRingObj
 /-! ### The coefficient ring `ℚ̄_ℓ` -/
 
 include aY hd in
-/-- Blueprint `lemma-proper-direct-image-unbounded-complexes--1`, for the coefficient ring `ℚ̄_ℓ`:
+/-- For the coefficient ring `ℚ̄_ℓ`:
 `Rp_*` maps `Dic(Z, ℚ̄_ℓ)` into `Dic(Y, ℚ̄_ℓ)`, with
 `Rp_* Dic^{≤ b}(Z, ℚ̄_ℓ) ⊆ Dic^{≤ b + 2d + 1}(Y, ℚ̄_ℓ)` and
 `Rp_* Dic^{≥ a}(Z, ℚ̄_ℓ) ⊆ Dic^{≥ a}(Y, ℚ̄_ℓ)`. -/
@@ -256,7 +255,7 @@ theorem rightDerivedLowerStar_indConstructibleDerived_padicAlgClRingObj
   exact this
 
 include aY hd in
-/-- Blueprint `lemma-proper-direct-image-unbounded-complexes--2`, for the coefficient ring `ℚ̄_ℓ`:
+/-- For the coefficient ring `ℚ̄_ℓ`:
 for `K ∈ Dic(Z, ℚ̄_ℓ)` and every `q`, the truncation maps
 `K ← τ_{≤ q} K → τ_{≥ q - 2d - 1} τ_{≤ q} K` induce isomorphisms
 `H^q(Rp_* K) ≃ H^q(Rp_* τ_{≤ q} K) ≃ H^q(Rp_* τ_{≥ q - 2d - 1} τ_{≤ q} K)` between objects of
@@ -286,7 +285,7 @@ theorem isIso_homologyFunctor_map_rightDerivedLowerStar_truncation_padicAlgClRin
     isIso_homologyFunctor_map_rightDerivedLowerStar_truncation _ p _ hn K hK q⟩
 
 include aY hd in
-/-- Blueprint `lemma-proper-direct-image-unbounded-complexes--3`, for the coefficient ring `ℚ̄_ℓ`:
+/-- For the coefficient ring `ℚ̄_ℓ`:
 `Rp_* : Dic(Z, ℚ̄_ℓ) → Dic(Y, ℚ̄_ℓ)` preserves arbitrary direct sums (direct sums in `Dic` are
 computed in the derived category). -/
 theorem preservesColimitsOfShape_indConstructibleDerived_rightDerivedLowerStar_padicAlgClRingObj

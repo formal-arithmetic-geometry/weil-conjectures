@@ -14,10 +14,11 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 # The compact objects of `Loc(Dctf(X, Λ))`, finite coefficients
 
 Let `k` be a field of finite cohomological dimension for `Λ`-modules, `X` a separated
-finite-type `k`-scheme and `Λ` a finite ring whose exponent is invertible on `X`. Blueprint
-`proposition-compactness-finite-coefficients--2`: the compact objects of `Loc(Dctf(X, Λ))` are
-exactly the objects of `Dctf(X, Λ)`
+finite-type `k`-scheme and `Λ` a finite ring whose exponent is invertible on `X`. The compact
+objects of `Loc(Dctf(X, Λ))` are exactly the objects of `Dctf(X, Λ)`
 (`AlgebraicGeometry.ProEtale.DerivedCategory.isCompactObj_iff_constructibleFiniteTor`).
+
+## Implementation details
 
 The objects of `Dctf(X, Λ)` are compact
 (`AlgebraicGeometry.ProEtale.DerivedCategory.isCompactObj_of_constructibleFiniteTor`).
@@ -55,10 +56,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}}
   [HasInvertibleExponent Λ X]
 
 include hk aX in
-/-- The compact objects of `Loc(Dctf(X, Λ))` lie in `Dctf(X, Λ)`: the inclusion
-`Loc(Dctf(X, Λ))^c ⊆ Dctf(X, Λ)` of blueprint `proposition-compactness-finite-coefficients--2`.
-A compact object is a retract of an object in the thick closure of finitely many compact
-generators, which are shifts of objects of `Dctf(X, Λ)`. -/
+/-- The compact objects of `Loc(Dctf(X, Λ))` lie in `Dctf(X, Λ)`. -/
 theorem constructibleFiniteTor_of_isCompactObj (C : DerivedCategoryLocalizingFiniteTor Λ X)
     (hC : BrownRepresentability.IsCompactObj C) :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X C.obj := by
@@ -96,11 +94,9 @@ theorem constructibleFiniteTor_of_isCompactObj (C : DerivedCategoryLocalizingFin
       (ObjectProperty.singleton_le_iff.2 hsum) Q hQ)
 
 include hk aX in
-/-- Blueprint `proposition-compactness-finite-coefficients--2`: Compactness for finite
-coefficients. For a finite ring `Λ` whose exponent is invertible on the separated finite-type
-`k`-scheme `X`, over a field `k` of finite cohomological dimension for `Λ`-modules,
-`Loc(Dctf(X, Λ))^c = Dctf(X, Λ)`: an object of `Loc(Dctf(X, Λ))` is compact if and only if it
-lies in `Dctf(X, Λ)`. -/
+/-- For a finite ring `Λ` whose exponent is invertible on the separated finite-type `k`-scheme
+`X`, over a field `k` of finite cohomological dimension for `Λ`-modules, an object of
+`Loc(Dctf(X, Λ))` is compact if and only if it lies in `Dctf(X, Λ)`. -/
 theorem isCompactObj_iff_constructibleFiniteTor (C : DerivedCategoryLocalizingFiniteTor Λ X) :
     BrownRepresentability.IsCompactObj C ↔ constructibleFiniteTor (ModuleCat.{u + 1} Λ) X C.obj :=
   ⟨constructibleFiniteTor_of_isCompactObj hk aX C, isCompactObj_of_constructibleFiniteTor hk aX C⟩

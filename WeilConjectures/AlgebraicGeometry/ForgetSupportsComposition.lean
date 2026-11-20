@@ -27,7 +27,6 @@ Rg_*(η_f) ∘ (η_g Rf_!)    η_{gf}
     ▼                       ▼
 Rg_* Rf_* ──c^*_{g,f}──▶ R(gf)_*
 ```
-This is blueprint `proposition-forgetting-supports-composition--2`.
 
 ## Main statements
 
@@ -107,10 +106,9 @@ theorem rightDerivedLowerShriekCompIso_inv_app_comp_forgetSupports (f : X ⟶ Y)
   rw [hα, hcomp, ← Functor.map_comp_assoc, hβ]
   exact (reassoc_of% hn) _
 
-/-- Blueprint `proposition-forgetting-supports-composition--2`: the forget-supports map
-`η_f : Rf_! ⟶ Rf_*` **is independent of the compactification** (for two compactifications `c`,
-`d` of `f`, the comparison `Rf_!(c) ≅ Rf_!(d)` followed by `η` of `d` is `η` of `c`), and **the
-square**
+/-- The forget-supports map `η_f : Rf_! ⟶ Rf_*` **is independent
+of the compactification** (for two compactifications `c`, `d` of `f`, the comparison
+`Rf_!(c) ≅ Rf_!(d)` followed by `η` of `d` is `η` of `c`), and **the square**
 ```
 Rg_! Rf_! ──c^!_{g,f}──▶ R(gf)_!
     │                       │

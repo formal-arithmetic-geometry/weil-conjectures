@@ -10,11 +10,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 /-!
 # Local smallness of `Loc(Dctf)`, finite coefficients
 
-Blueprint `lemma-hypotheses-brown-representability--1`: for every admissible `Λ`, the category
-`Loc(Dctf(X_proét, Λ))` is locally small. For a finite coefficient ring `Λ`, the morphisms of
-`Loc(Dctf(X, Λ))`, a full subcategory of `D(X_proét, Λ)`, lie in `Type (u + 1)`
-(`AlgebraicGeometry.ProEtale.locallySmall_derivedCategoryLocalizingFiniteTor`). For the `ℓ`-adic
-coefficient rings, see
+For a finite coefficient ring `Λ`, the category `Loc(Dctf(X_proét, Λ))` is locally small: its
+morphisms, those of the full subcategory `Loc(Dctf(X, Λ))` of `D(X_proét, Λ)`, lie in
+`Type (u + 1)` (`AlgebraicGeometry.ProEtale.locallySmall_derivedCategoryLocalizingFiniteTor`).
+For the `ℓ`-adic coefficient rings, see
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingLocallySmall`.
 -/
 
@@ -26,9 +25,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Blueprint `lemma-hypotheses-brown-representability--1`: Local smallness, for a finite
-coefficient ring `Λ`: the category `Loc(Dctf(X_proét, Λ))` is locally small, its morphisms being
-those of the derived category `D(X_proét, Λ)`, which lie in `Type (u + 1)`. -/
+/-- For a finite coefficient ring `Λ`, the category `Loc(Dctf(X_proét, Λ))` is locally
+`(u + 1)`-small. -/
 theorem locallySmall_derivedCategoryLocalizingFiniteTor (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] (X : Scheme.{u}) : LocallySmall.{u + 1} (DerivedCategoryLocalizingFiniteTor Λ X) :=
   inferInstance
