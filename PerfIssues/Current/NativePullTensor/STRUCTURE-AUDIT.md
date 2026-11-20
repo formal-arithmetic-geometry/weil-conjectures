@@ -63,7 +63,7 @@ Unresolved: independent role of _proof_3 and the exact source of every downstrea
 
 8. MOST IMPORTANT RESULT
 ------------------------
-A small concrete Functor.obj major-premise difference blocks the useful regular-head comparison and opens the surrounding Functor.comp/Exists endpoint structure. Aligning that one premise removes the same conversion; restoring the mismatch restores the cost. A fixed-trigger subtree ablation was invalid: parameterizing the surrounding endpoint would change the dependent Iso/Exists consumer.
+A small concrete Functor.obj major-premise difference blocks the useful regular-head comparison. Aligning it removes the accessor cost; a fixed-trigger helper that abstracts the shared object reduces the same accessor comparison to 2-3 ms and re-instantiation restores about 11.3 s. The full Iso/Exists parent remains only partially attributed.
 
 STRUCTURE EXPOSURE AND AMPLIFICATION ADDENDUM
 =============================================
@@ -89,11 +89,11 @@ Inclusive/exclusive: endpoint times include their Functor.obj child; child timin
 Reduction footprint: counters above; aligned child is 0 ms.
 
 D. FIXED-TRIGGER ABLATION
-Trigger preserved exactly: no valid in-situ ablation.
-Subtree abstracted: endpoint Functor/Exists bundle.
-Dependent telescope preserved: no; abstraction would alter the consumer.
-Original/aligned/restored cost: 11.396/0/11.284 s (reverse restoration).
-Conclusion: invalid ablation, but major-premise restoration is valid.
+Trigger preserved exactly: yes, at both Functor.obj major premises.
+Subtree abstracted: the shared object argument 5 in a typed accessor helper.
+Dependent telescope preserved: yes outside the new object parameter; E3 re-instantiates the original data.
+E0/E1/E3: 11.488/0.002/11.261 s at endpoint 2 and 11.300/0.003/11.271 s at endpoint 3.
+Conclusion: Level 3 amplification of this object subtree at the accessor child.
 
 E. REDUCTION-PATH AUDIT
 Same regular head: Iso and Functor.comp yes; Functor.obj is abbrev.
@@ -114,7 +114,44 @@ Dependent instantiation: Exists.choose domains instantiate the predicate after p
 First provenance divergence: concrete Functor major premise; first conversion-relevant divergence is the Functor.obj accessor.
 
 G. CONCLUSION
-P1/P3; evidence level 3 for the accessor trigger and level 2 for surrounding-structure exposure.
-Strongest supporting result: type-preserving alignment and reverse restoration at the same child conversion.
-Strongest contrary result: no valid fixed-trigger subtree ablation and no direct Kernel trace.
+P1/P3; Level 3 for the fixed-trigger object ablation at the accessor child; Level 2 for the full Iso/Exists parent.
+Strongest supporting result: 11.4 s original, 2-3 ms generic, and 11.3 s re-instantiated with the trigger unchanged.
+Strongest contrary result: no direct Kernel trace or fixed-trigger ablation of the entire Iso/Exists parent.
 Next falsifying experiment: parameterize a whole dependent endpoint bundle while retaining the exact Iso/Exists consumer, then restore it.
+
+ROUND 3: FIXED-TRIGGER OBJECT ABLATION
+--------------------------------------
+`probes/sa/FixedTriggerAblation.lean` keeps both original `Functor.obj` major-premise expressions unchanged at each endpoint. It abstracts only argument 5, the shared concrete object, into a typed lambda helper whose body is the original accessor consumer. Both helper values and their re-instantiations Kernel-check. The helper's generic result types are not structurally identical, but the kernel finds them definitionally equal.
+
+| Endpoint | E0 original | E1 generic object | E3 helper at original object |
+|---|---:|---:|---:|
+| source (2) | 11,488 ms | 2 ms | 11,261 ms |
+| target (3) | 11,300 ms | 3 ms | 11,271 ms |
+
+The original major-premise pair is byte-for-byte unchanged in E1. The generic helper retains the `Functor.obj` consumer and the original dependent telescope outside the new object parameter; E3 restores the original object and cost. This establishes Level 3 amplification for this non-trigger object subtree at the accessor child, not a field-by-field trace of the full `Iso`/`Exists` parent. The earlier statement in section D that no fixed-trigger ablation was valid is superseded. Whole-probe user CPU/wall/peak RSS: 116.18 s / 117.37 s / 6,182,556 KB.
+
+The original source-level diagnostics (`probes/NativeDiagnostics.lean`, threshold 1000) show the following first hot declaration; later hot checks reach 1,550,252 `Functor.obj` unfolds. These declaration counts are inclusive of their own kernel checks and do not isolate the accessor child.
+
+| Kernel unfold | Original first hot declaration |
+|---|---:|
+| `Functor.obj` | 1,104,002 |
+| `Functor.map` | 463,500 |
+| `NatTrans.app` | 204,584 |
+| `CategoryStruct.comp` | 129,480 |
+
+The source-level run checks successfully (271.97 s wall, 8,016,840 KB peak RSS). The exact E0/E1/E3 accessor timing above is the causal attribution; declaration counters remain reduction evidence only.
+
+ROUND 3: SAME-VALUE DECLARATION REPLAY
+--------------------------------------
+`probes/sa/DeclarationDiagnostics.lean` synchronously Kernel-checks the original `nativePullTotalTensor` value three times under the original binder telescope. The middle type aligns only the two expected `Functor.obj` major premises at endpoints 2 and 3; both replacements have the same checked type as the original endpoint. The third type restores the original expected expressions. Diagnostics were reset before each check, with kernel counting enabled in each returned environment (`-j1`, threshold 1000 for the source comparison above).
+
+| Kernel unfold / check | Original | Aligned | Restored |
+|---|---:|---:|---:|
+| `Functor.obj` | 1,550,252 | 1,033,514 | 1,550,252 |
+| `Functor.map` | 650,880 | 433,920 | 650,880 |
+| `NatTrans.app` | 287,292 | 191,528 | 287,292 |
+| `CategoryStruct.comp` | 181,752 | 121,168 | 181,752 |
+| `Eq.ndrec` | 107,712 | 71,808 | 107,712 |
+| Synchronous kernel check | 72,873 ms | 51,621 ms | 79,526 ms |
+
+Each listed unfold shrinks by about one third under alignment and returns exactly on restoration; none disappears. The still-expensive aligned parent demonstrates additional reduction beyond these two accessor triggers. These counts are per whole cloned declaration, so they do not prove which individual Functor fields were traversed. The separate fixed-trigger object ablation above establishes the object's causal contribution only at the accessor child. The three-check probe succeeded; whole-run wall/RSS were 253.50 s / 7,942,012 KB.
