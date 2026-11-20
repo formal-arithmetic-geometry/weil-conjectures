@@ -190,11 +190,8 @@ theorem exists_hasEigenvalue_pow_eq_of_powFrobenius [IsAlgClosed K]
   exact WeilConjectures.infinity_eigenvalue_power_preimage (RingHom.id K) Function.surjective_id
     _ m (Nat.pos_of_ne_zero hm) β hβ
 
-/-- **Weight bounds and finite constant extensions.** Over an algebraically closed field, for
-`m ≠ 0`, every eigenvalue `α` of the Frobenius `F` of `M` satisfies `|ι α| ≤ q ^ (b / 2)` if and
-only if every eigenvalue `β` of `Fᵐ`, the Frobenius over the constant extension of degree `m`,
-satisfies `|ι β| ≤ (qᵐ) ^ (b / 2)`.
-(blueprint: `lemma-weight-bound-constant-extension--1`) -/
+/-- Over an algebraically closed field, for `m ≠ 0`, `M` has weights at most `b` if and only if
+the Frobenius module `(M, Fᵐ)` has weights at most `b` for the field cardinality `qᵐ`. -/
 theorem hasWeightsAtMost_powFrobenius_iff [IsAlgClosed K] {M : FrobeniusModule.{u, v} K}
     {ι : K →+* ℂ} {q m : ℕ} (hm : m ≠ 0) {b : ℝ} :
     (M.powFrobenius m).HasWeightsAtMost ι (q ^ m) b ↔ M.HasWeightsAtMost ι q b := by
@@ -202,9 +199,8 @@ theorem hasWeightsAtMost_powFrobenius_iff [IsAlgClosed K] {M : FrobeniusModule.{
   exact (WeilConjectures.infinity_eigenvalue_bound_power_iff (RingHom.id K)
     Function.surjective_id M.frobeniusEnd ι q m (Nat.pos_of_ne_zero hm) b).symm
 
-/-- **Weight bounds over a finite constant extension**, the ascending direction. Over an
-algebraically closed field, if `M` has weights at most `b`, so has the Frobenius module `(M, Fᵐ)`
-for the field cardinality `qᵐ`. For `m = 0` the only eigenvalue of `F⁰ = 1` is `1`. -/
+/-- Over an algebraically closed field, if `M` has weights at most `b`, so has the Frobenius
+module `(M, Fᵐ)` for the field cardinality `qᵐ`. -/
 theorem HasWeightsAtMost.powFrobenius [IsAlgClosed K] {M : FrobeniusModule.{u, v} K}
     {ι : K →+* ℂ} {q : ℕ} {b : ℝ} (h : M.HasWeightsAtMost ι q b) (m : ℕ) :
     (M.powFrobenius m).HasWeightsAtMost ι (q ^ m) b := by
