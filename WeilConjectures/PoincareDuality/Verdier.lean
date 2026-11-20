@@ -133,17 +133,19 @@ theorem isIso_verdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj �
       isIso_properProjectionMorphism_padicAlgCl ℓ c.overG _ L.obj hA L.property
     have : IsIso (properProjectionMorphism (Profinite.padicAlgClRingObj ℓ) c.g
         ((D((c.i)_!open⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) L.obj) := this
-    have hExc : IsIso (exceptionalProjectionMorphismOfCompactification (Profinite.padicAlgClRingObj ℓ) c
-        K.obj L.obj) := by
+    have hExc : IsIso
+        (exceptionalProjectionMorphismOfCompactification (Profinite.padicAlgClRingObj ℓ) c
+          K.obj L.obj) := by
       unfold exceptionalProjectionMorphismOfCompactification
       infer_instance
     have : IsIso ((boundedConstructible _).ι.map
         (boundedConstructibleExceptionalProjectionMorphism ℓ f K L)) := by
-      change IsIso (exceptionalProjectionMorphismOfCompactification (Profinite.padicAlgClRingObj ℓ) c
-        K.obj L.obj)
+      change IsIso
+        (exceptionalProjectionMorphismOfCompactification (Profinite.padicAlgClRingObj ℓ) c
+          K.obj L.obj)
       exact hExc
     exact isIso_of_fully_faithful (boundedConstructible _).ι _
-  letI := hproj
+  let := hproj
   exact Verdier.isIso_exchange_of_isIso _ _ _ K L
 
 end Exchange
