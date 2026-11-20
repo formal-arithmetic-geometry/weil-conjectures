@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedBa
 
 Let `f : X ⟶ Y` be proper, `g : Y' ⟶ Y` arbitrary and `X' = X ×_Y Y'` with projections
 `f' : X' ⟶ Y'` and `g' : X' ⟶ X`. For a quotient-tower complete `K` on `X` whose reductions
-`K_n` have bounded below étale origin (blueprint
-`proposition-proper-base-change-complete-integral`):
+`K_n` have bounded below étale origin:
 
 * `Rf_* K` is complete (`AlgebraicGeometry.Scheme.AdicCoefficientDatum.push_complete`);
 * `ĝ^* Rf_* K ≅ Rlim_n g^* Rf_* K_n`
@@ -23,6 +22,14 @@ Let `f : X ⟶ Y` be proper, `g : Y' ⟶ Y` arbitrary and `X' = X ×_Y Y'` with 
 * under these, the derived limit of the finite base change maps is an isomorphism
   `ĝ^* Rf_* K ≅ Rf'_* ĝ'^* K`
   (`AlgebraicGeometry.Scheme.AdicCoefficientDatum.isIso_completedBaseChangeMap`).
+
+## Implementation details
+
+The completed pullback `ĝ^*` is by definition the derived limit of the pullback of the reduction
+tower, and the reduction tower of `Rf_* K` is the tower `(Rf_{n*} K_n)_n` through the
+projection-formula isomorphisms (`AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerProjection`);
+the direct image commutes with derived limits of towers
+(`AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageRlimIso`).
 
 The last point reduces, by conservativity of the evaluations of derived towers, to finite-level
 proper base change (`AlgebraicGeometry.Scheme.AdicCoefficientDatum.finiteExchange_isIso`),
@@ -44,12 +51,10 @@ variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
 
-/-- The four finite-level arrows commute: at every finite level `n`, the finite base change map
+/-- At every finite level `n`, the finite base change map
 `g_n^* Rf_{n*} K_n ⟶ Rf'_{n*} g'_n^* K_n` is the reduction of the integral base change map
 `Lg^* Rf_* K ⟶ Rf'_* Lg'^* K`, modulo the projection-formula identifications
-`(Rf_* K)_n ≅ Rf_{n*} K_n` and the reduction/pullback comparisons. This is the statement, used
-in the proof of blueprint `proposition-proper-base-change-complete-integral--4`, that the finite
-base change maps form a map of towers. -/
+`(Rf_* K)_n ≅ Rf_{n*} K_n` and the reduction/pullback comparisons. -/
 theorem AdicCoefficientDatum.finiteProjection_comp_finiteExchange (K : d.derived X) (n : ℕ) :
     (d.finitePull g n).map (d.finiteProjection f K n) ≫
         (d.finiteExchange sq n).app ((d.reduction X n).obj K) =
@@ -144,11 +149,7 @@ theorem AdicCoefficientDatum.isIso_towerV' [IsProper f] (K : d.derived X)
   unfold AdicCoefficientDatum.towerV'
   infer_instance
 
-/-- Blueprint `proposition-proper-base-change-complete-integral--2`: the canonical isomorphism
-`ĝ^* Rf_* K ≅ Rlim_n g^* Rf_* K_n`. The completed pullback `ĝ^*` is by definition the derived
-limit of the pullback of the reduction tower, and the reduction tower of `Rf_* K` is the tower
-`(Rf_{n*} K_n)_n` through the projection-formula isomorphisms
-(`AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerProjection`). -/
+/-- The canonical isomorphism `ĝ^* Rf_* K ≅ Rlim_n g^* Rf_* K_n`. -/
 def AdicCoefficientDatum.completedPullPushIso (K : d.derived X) :
     (d.completedPull g).obj ((d.push f).obj K) ≅
       (completedRlim Y' (d.completedRing Y')).obj
@@ -156,9 +157,7 @@ def AdicCoefficientDatum.completedPullPushIso (K : d.derived X) :
   (completedRlim Y' (d.completedRing Y')).mapIso
     (d.towerH (f := f) (f' := f') (g := g) (g' := g') K)
 
-/-- Blueprint `proposition-proper-base-change-complete-integral--3`: the canonical isomorphism
-`Rf'_* ĝ'^* K ≅ Rlim_n Rf'_* g'^* K_n`, since the direct image commutes with derived limits of
-towers (`AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageRlimIso`). -/
+/-- The canonical isomorphism `Rf'_* ĝ'^* K ≅ Rlim_n Rf'_* g'^* K_n`. -/
 def AdicCoefficientDatum.pushCompletedPullIso (K : d.derived X) :
     (d.push f').obj ((d.completedPull g').obj K) ≅
       (completedRlim Y' (d.completedRing Y')).obj
@@ -166,8 +165,7 @@ def AdicCoefficientDatum.pushCompletedPullIso (K : d.derived X) :
   (d.directImageRlimIso f').app ((d.towerPull g').obj ((completedReductionTower X d).obj K))
 
 /-- The completed base change map is the derived limit of the tower of finite base change maps,
-transported along the isomorphisms of blueprint
-`proposition-proper-base-change-complete-integral--2` and `--3`. -/
+transported along `completedPullPushIso` and `pushCompletedPullIso`. -/
 lemma AdicCoefficientDatum.completedExchange_eq (K : d.derived X) :
     d.completedExchange sq K =
       (d.completedPullPushIso (f' := f') (g' := g') K).hom ≫
@@ -176,10 +174,9 @@ lemma AdicCoefficientDatum.completedExchange_eq (K : d.derived X) :
   simp [AdicCoefficientDatum.completedExchange, AdicCoefficientDatum.completedPullPushIso,
     AdicCoefficientDatum.pushCompletedPullIso]
 
-/-- Blueprint `proposition-proper-base-change-complete-integral--4`: for proper `f` and complete
-`K` whose reductions `K_n` have bounded below étale origin, the derived limit of the finite base
-change maps `g^* Rf_* K_n ⟶ Rf'_* g'^* K_n` is an isomorphism, and hence so is the completed base
-change map `ĝ^* Rf_* K ⟶ Rf'_* ĝ'^* K`. -/
+/-- For proper `f` and complete `K` whose reductions `K_n` have bounded below étale origin, the
+derived limit of the finite base change maps `g^* Rf_* K_n ⟶ Rf'_* g'^* K_n` is an isomorphism,
+and so is the completed base change map `ĝ^* Rf_* K ⟶ Rf'_* ĝ'^* K`. -/
 theorem AdicCoefficientDatum.isIso_completedBaseChangeMap [IsProper f] (K : d.derived X)
     (hK : d.TowerComplete X K)
     (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1))
@@ -192,11 +189,11 @@ theorem AdicCoefficientDatum.isIso_completedBaseChangeMap [IsProper f] (K : d.de
   rw [d.completedExchange_eq sq K]
   infer_instance
 
-/-- Blueprint `proposition-proper-base-change-complete-integral`: **proper base change for
-complete complexes**. Let `f` be proper and `K` complete with reductions of bounded below étale
-origin. Then `Rf_* K` is complete, `ĝ^* Rf_* K ≅ Rlim_n g^* Rf_* K_n`,
-`Rf'_* ĝ'^* K ≅ Rlim_n Rf'_* g'^* K_n`, and under these isomorphisms the derived limit of the
-finite base change maps is an isomorphism `ĝ^* Rf_* K ≅ Rf'_* ĝ'^* K`. -/
+/-- **Proper base change for complete complexes**: let `f` be proper and `K` complete with
+reductions of bounded below étale origin. Then `Rf_* K` is complete,
+`ĝ^* Rf_* K ≅ Rlim_n g^* Rf_* K_n`, `Rf'_* ĝ'^* K ≅ Rlim_n Rf'_* g'^* K_n`, and under these
+isomorphisms the derived limit of the finite base change maps is an isomorphism
+`ĝ^* Rf_* K ≅ Rf'_* ĝ'^* K`. -/
 theorem AdicCoefficientDatum.properBaseChange_complete [IsProper f] (K : d.derived X)
     (hK : d.TowerComplete X K)
     (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1))

@@ -14,11 +14,10 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 
 The three laws for the derived base change map
 `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus` on bounded below derived categories of
-étale sheaves, bundled into one statement (blueprint `lemma-identity-pasting`): it is the
-identity for an identity square (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id`), and
-it is compatible with horizontal (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz`)
-and vertical (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert`) pasting of
-commutative squares.
+étale sheaves, bundled into one statement: it is the identity for an identity square
+(`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id`), and it is compatible with horizontal
+(`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz`) and vertical
+(`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert`) pasting of commutative squares.
 -/
 
 @[expose] public section
@@ -34,12 +33,11 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 open Etale
 
-/-- Blueprint `lemma-identity-pasting`: **identity and pasting** for the derived base change
-map. The base change map of an identity square is the identity (modulo the identity
-isomorphisms of the derived pullbacks), and the base change map of a horizontally or vertically
-pasted square is the composite of the base change maps of the two squares (modulo the
-composition isomorphisms of the derived pullbacks, resp. direct images). Only commutativity of
-the squares is required. -/
+/-- **Identity and pasting** for the derived base change map of commutative squares. The base
+change map of an identity square is the identity (modulo the identity isomorphisms of the derived
+pullbacks), and the base change map of a horizontally or vertically pasted square is the
+composite of the base change maps of the two squares (modulo the composition isomorphisms of the
+derived pullbacks, resp. direct images). -/
 theorem Etale.derivedBaseChangeMapPlus_id_and_paste :
     (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)),
       Etale.derivedBaseChangeMapPlus A sq =

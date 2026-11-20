@@ -13,9 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperSta
 # Naturality, identity and pasting of the pro-étale base change map
 
 For a commutative square `g' ≫ f = f' ≫ g` of schemes, the pro-étale base change map
-`Lg^* Rf_* ⟶ Rf'_* Lg'^*` (`ProEtale.CondensedRing.baseChangeMap`, blueprint
-`definition-pro-etale-base-change-map`) on the unbounded derived categories of module objects over
-a condensed ring `Λ`:
+`Lg^* Rf_* ⟶ Rf'_* Lg'^*` (`ProEtale.CondensedRing.baseChangeMap`) on the unbounded derived
+categories of module objects over a condensed ring `Λ`:
 
 - is natural in `K` (`ProEtale.CondensedRing.baseChangeMap_naturality`);
 - is the identity for an identity square, through `L(𝟙)^* ≅ 𝟭`
@@ -24,11 +23,15 @@ a condensed ring `Λ`:
   and with vertical pasting (`ProEtale.CondensedRing.baseChangeMap_app_paste_vert`), through
   the composition isomorphisms of derived pullbacks and pushforwards.
 
-These are blueprint `lemma-naturality-pasting-comparison--1` and
-`lemma-naturality-pasting-comparison--2`, in the form of `lemma-identity-pasting`. The formal
-parts are the abstract statements `CategoryTheory.mateEquiv_app_of_isoId`,
+## Implementation details
+
+The formal parts are the abstract statements `CategoryTheory.mateEquiv_app_of_isoId`,
 `CategoryTheory.Adjunction.exchangeRight_app_paste_of_eq` and
 `CategoryTheory.Adjunction.exchangeRight_app_paste_vert` about mates and exchange morphisms.
+
+`ProEtale.CondensedRing.baseChangeMap_eq_exchangeRight` is proved by unfolding `baseChangeMap`:
+its instance arguments were elaborated in another context, and comparing them at default
+transparency times out.
 -/
 
 @[expose] public section
@@ -46,7 +49,7 @@ namespace CategoryTheory
 lemma mateEquiv_app_of_isoId {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
     (a : L ⊣ R) {G : C ⥤ C} {H : D ⥤ D} (I₁ : G ≅ 𝟭 C) (I₂ : H ≅ 𝟭 D) (θ : G ⋙ L ⟶ L ⋙ H)
     (hθ : ∀ B, θ.app B = L.map (I₁.hom.app B) ≫ I₂.inv.app (L.obj B)) (Y : D) :
-    (mateEquiv a a θ).natTrans.app Y = I₁.hom.app (R.obj Y) ≫ R.map (I₂.inv.app Y) := by
+    (mateEquiv a a θ).app Y = I₁.hom.app (R.obj Y) ≫ R.map (I₂.inv.app Y) := by
   apply (a.homEquiv _ _).symm.injective
   rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit, mateEquiv_counit, hθ,
     Functor.map_comp, Category.assoc, Category.assoc, a.counit_naturality]
@@ -200,16 +203,14 @@ section Square
 variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 /-- The base change map of module objects is the exchange morphism of the pullback square
-comparison. The two sides only differ by the unfolding of `baseChangeMap`, whose instance
-arguments were elaborated in another context (comparing them at default transparency times
-out). -/
+comparison. -/
 lemma baseChangeMap_eq_exchangeRight (sq : CommSq g' f' f g) :
     baseChangeMap Λ sq = Adjunction.exchangeRight (derivedUpperStarLowerStarAdjunction Λ f)
       (derivedUpperStarLowerStarAdjunction Λ f') (pullbackSquareComparison Λ sq) := by
   delta baseChangeMap
   with_reducible_and_instances rfl
 
-/-- Blueprint `lemma-naturality-pasting-comparison--1`: for a commutative square
+/-- For a commutative square
 `g' ≫ f = f' ≫ g`, the pro-étale base change maps `Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` on the unbounded
 derived categories are natural in `K`. -/
 lemma baseChangeMap_naturality (sq : CommSq g' f' f g) {K K' : 𝔻(X)} (φ : K ⟶ K') :
@@ -259,10 +260,9 @@ lemma pullbackSquareComparison_hom_app_id_left (p : X ⟶ Y)
   simp only [Category.assoc, Iso.inv_hom_id_app, h₁, eqToHom_trans]
   simp
 
-/-- Blueprint `lemma-naturality-pasting-comparison--2`, identity square: the pro-étale base
-change map of the square with vertical maps `f, f` and horizontal maps `𝟙 X, 𝟙 Y` is the
-composite `L(𝟙 Y)^* Rf_* K ≅ Rf_* K ≅ Rf_* L(𝟙 X)^* K` of the identity isomorphisms of the
-derived pullbacks. -/
+/-- The pro-étale base change map of the square with vertical maps `f, f` and horizontal maps
+`𝟙 X, 𝟙 Y` is the composite `L(𝟙 Y)^* Rf_* K ≅ Rf_* K ≅ Rf_* L(𝟙 X)^* K` of the identity
+isomorphisms of the derived pullbacks. -/
 lemma baseChangeMap_app_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)) (K : 𝔻(X)) :
     (baseChangeMap Λ sq).app K =
       (leftDerivedUpperStarId Λ Y).hom.app (R((f)_*⟦Λ⟧).obj K) ≫
@@ -280,8 +280,7 @@ section Horizontal
 variable {X Y X' Y' X'' Y'' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'}
   {g' : X' ⟶ X} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'} {f'' : X'' ⟶ Y''}
 
-/-- Blueprint `lemma-naturality-pasting-comparison--2`, horizontal pasting: for two horizontally
-pasted commutative squares
+/-- Horizontal pasting: for two horizontally pasted commutative squares
 ```
 X'' --h'--> X' --g'--> X
  |f''       |f'        |f
@@ -314,8 +313,7 @@ section Vertical
 variable {X Y Z X' Y' Z' : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} {h : Z' ⟶ Z} {hY : Y' ⟶ Y}
   {g' : Y' ⟶ Z'} {hX : X' ⟶ X} {f' : X' ⟶ Y'}
 
-/-- Blueprint `lemma-naturality-pasting-comparison--2`, vertical pasting: for two vertically
-pasted commutative squares
+/-- Vertical pasting: for two vertically pasted commutative squares
 ```
 X' --hX--> X
 |f'        |f
