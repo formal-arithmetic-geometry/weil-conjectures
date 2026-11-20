@@ -84,3 +84,22 @@ Unknown: which `Functor.comp` argument dominates after transport.
 The first visible named-predicate mismatch is not enough to explain the cost;
 the complete instantiated dependent domain must be aligned. That alignment
 removes the application hotspot while preserving the original consumer.
+## Round 2 and v2 addendum
+
+Fresh diagnostics give 3.54 s wall (2.59 s user, 3.21 GB peak RSS) for the aligned transported domain and 114.25 s wall (112.84 s user, 12.52 GB peak RSS) for the restored original domain. Both use the same application and obligation.
+
+### STRUCTURE EXPOSURE AND AMPLIFICATION ADDENDUM
+
+**A. MISMATCH SEMANTICS.** The named predicate versus instantiated forall is syntactic; after unfolding, the material obstruction is the wrapper/raw derived-category domain. The whole instantiated domain is causal, so this is a dependent bundle.
+
+**B. EXPOSURE.** The boundary is the quantified K domain after preceding arguments instantiate the application. The tree contains DerivedCategoryModule/raw DerivedCategory, scalar extension, transpose maps, tensor-Hom functors, adjunction counits, and repeated v.app data. The domain is comparison-relevant and timing plus Add.add/Functor.obj/DFunLike.coe counters make the bundle actually expensive; the inner Functor.comp child is unresolved.
+
+**C. COST MECHANISM.** One dominant dependent-argument conversion is reduction-heavy with repeated wrapper occurrences. Original/restored is 114.25 s; aligned is 3.54 s. Counters are inclusive to the application.
+
+**D. FIXED-TRIGGER ABLATION.** Invalid: the trigger is the dependent domain, and independent replacement of a non-trigger field is ill-typed. The whole-domain aligned/restored pair preserves the telescope.
+
+**E. REDUCTION-PATH AUDIT.** Predicate application versus forall exposes a common proposition body whose quantified domain differs. A transported lambda moves the boundary to the expected domain. Internal order is source-guided.
+
+**F. MISMATCH PROVENANCE.** The generic transpose predicate and concrete helper select wrapper and raw derived-category producers separately. Preceding dependent arguments make the difference relevant; no zeta or proof abstraction is needed.
+
+**G. CONCLUSION.** P2, evidence level 2. The reversible 114.25 s to 3.54 s same-site control is strongest. The unresolved inner functor is contrary to a claim that every unfold is caused by the wrapper. A typed tensor-Hom child ablation is the next falsifier.
