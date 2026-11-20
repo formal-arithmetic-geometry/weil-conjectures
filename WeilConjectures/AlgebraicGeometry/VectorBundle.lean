@@ -41,7 +41,7 @@ variable {E Z : Scheme.{u}}
 
 namespace Scheme.Hom
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
 
 A *linear atlas of rank `c`* of `p : E ⟶ Z` with section `z`: open immersions `vᵢ : Vᵢ ⟶ Z`
 covering `Z`, with isomorphisms `φᵢ : E ×_Z Vᵢ ≅ 𝔸^c_{Vᵢ}` over `Vᵢ` carrying `z` to the zero
@@ -77,7 +77,7 @@ structure VectorBundleAtlas (c : ℕ) (p : E ⟶ Z) (z : Z ⟶ E) where
             (pullback.fst (v i) (v j)) (𝟙 Z) (by simp) (by simp)).appTop
             ((chart i).hom.appTop (AffineSpace.coord (V i) (ULift.up l))))
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
 
 `p : E ⟶ Z` is a *vector bundle of constant rank `c`* with *zero section* `z` if `z` is a section
 of `p` and a closed immersion, and `(p, z)` admits a linear atlas of rank `c`
@@ -89,7 +89,7 @@ structure IsVectorBundle (c : ℕ) (p : E ⟶ Z) (z : Z ⟶ E) : Prop where
   isClosedImmersion_zeroSection : IsClosedImmersion z
   nonempty_atlas : Nonempty (VectorBundleAtlas c p z)
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
 
 A *trivialization* of `p : E ⟶ Z`: an étale open `v : Z' ⟶ Z` together with an isomorphism
 `E ×_Z Z' ≅ 𝔸^c_{Z'}` over `Z'`. -/

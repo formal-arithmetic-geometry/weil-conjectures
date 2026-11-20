@@ -22,7 +22,7 @@ compatible with the derived pullbacks
 (`AlgebraicGeometry.Etale.derivedExtendScalarsTateShiftIsoOfPullback_hom_pullback`). Taking for
 `S` the universal base `Spec ℤ[1/n]` on which the characteristic `n` of `Λ` is invertible, this
 is a Tate shift datum of `Ψ` (`AlgebraicGeometry.Etale.DerivedExtendScalarsTateShiftData.ofBase`,
-blueprint `det-sp-purity-coefficient-change`).
+blueprint `proposition-compatibility-purity-change-coefficients`).
 -/
 
 @[expose] public section
@@ -131,7 +131,7 @@ variable [NeZero (ringChar Λ)]
     ((tateObject Λ (invertibleExponentBase.{u} Λ) m)⟦2 * m⟧) ≅
       (tateObject Λ' (invertibleExponentBase.{u} Λ) m)⟦2 * m⟧)
 
-/-- Blueprint `det-sp-purity-coefficient-change`
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`
 
 **The Tate shift datum of the reduction of coefficients pulled back from the universal base.**
 A family of identifications `c_m : Ψ(Λ_S(m)[2m]) ≅ Λ'_S(m)[2m]` on `S = Spec ℤ[1/n]`, `n` the

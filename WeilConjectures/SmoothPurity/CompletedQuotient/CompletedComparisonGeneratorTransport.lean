@@ -220,8 +220,6 @@ private theorem mapComplex_eqToIso_symm
   subst G
   rfl
 
-set_option maxHeartbeats 4000000 in
--- Elaborate the tensor-generator type across both sequence inverse-image interfaces.
 /-- Generator normalization after transport across the sequence pullback bridge.
 Source: Stacks 07A4 and 0941; the generator-normalization step of canonical
 comparison identification (blueprint: lem-pur-completed-comparison-generator-transport).
@@ -287,18 +285,17 @@ theorem completedComparisonGeneratorTransport {X Y : Scheme.{u}} (f : X ⟶ Y)
   have hbridge :
       NatIso.mapHomologicalComplex
           (eqToIso eF) (.up ℤ) =
-        (NatIso.mapHomologicalComplex
-          (eqToIso (sequencePullback_eq l E f)) (.up ℤ)).symm := by
+        (pullBridge l E f).symm := by
+    unfold pullBridge
     exact mapComplex_eqToIso_symm (sequencePullback_eq l E f)
   unfold generatorNorm at hs
+  specialize hs P Q p q k hpq (n, V) x y
   rw [hbridge] at hs
-  dsimp [pullBridge, rI, rP] at hs ⊢
-  dsimp only [Functor.mapIso, Iso.trans, Iso.symm, Iso.prod] at hs ⊢
-  convert hs P Q p q k hpq (n, V) x y using 1 <;>
-    simp [sequenceDirect, pullbackTensorSequenceDirect,
+  dsimp only [rI, rP] at hs ⊢
+  simp only [Iso.trans_hom, Iso.symm_hom] at hs
+  dsimp only [sequenceDirect, pullbackTensorSequenceDirect,
     pullbackTensorSequenceAdjunction, pullbackTensorSequenceInverse,
-    IntegralCoherence.PullbackComparison.tensor, pullBridge,
-    Iso.symm_hom, NatIso.mapHomologicalComplex_hom_app_f]
-    <;> try rfl
+    IntegralCoherence.PullbackComparison.tensor] at hs ⊢
+  exact hs
 
 end WeilConjectures.CompletedQuotient

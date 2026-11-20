@@ -52,7 +52,6 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   [Algebra L₂ Ω₂] [IsGalois L₁ Ω₁] [IsGalois L₂ Ω₂] {l : L₁ →+* L₂} {ω : Ω₁ →+* Ω₂}
   {hω : ω.comp (algebraMap L₁ Ω₁) = (algebraMap L₂ Ω₂).comp l}
 
-set_option maxHeartbeats 1600000 in
 -- the statement involves several large derived functor objects
 /-- **Change of trait from change of Galois layers, torsion coefficients** (SGA 4½,
 [Th. finitude], proof of 3.7, 3.8: "taking the invariants under a pro-`p` group"). Let
@@ -99,7 +98,6 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin [Qua
     (hω := hω) (by exact_mod_proofs hβ)
   exact_mod_proofs key
 
-set_option maxHeartbeats 1600000 in
 -- the statement involves several large derived functor objects
 /-- **Change of trait from change of Galois layers, from the map of inertia groups** (SGA 4½,
 [Th. finitude], proof of 3.7, 3.8).

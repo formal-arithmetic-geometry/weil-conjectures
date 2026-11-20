@@ -154,7 +154,6 @@ private theorem flat_retract (Y : Scheme.{u})
   exact (ObjectProperty.flat_of_retract ⟨i, r, h⟩ hf).2
 
 
-set_option maxHeartbeats 400000 in
 -- Tensor comparison transports through complex and derived module equivalences.
 /-- The open restriction of the derived tensor is computed by the ordinary total tensor.
 Source: Stacks Project, Tags 0DJQ and 06YH (local strict-perfect tensor calculation).

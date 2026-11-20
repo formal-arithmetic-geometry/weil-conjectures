@@ -121,8 +121,8 @@ noncomputable def Etale.DerivedCategoryBoundedConstructible.ι :
 scoped notation "Dᵇc(" X ", " A ")" =>
   Etale.DerivedCategoryBoundedConstructible A X
 
-/-- Blueprint `sk-def-sf-categories`: the inclusion of the small category `Dᵇc(X, A)` into the
-ambient bounded derived category `Dᵇ(X, A)` of étale sheaves. -/
+/-- Blueprint `definition-constructible-sheaves`: the inclusion of the small category `Dᵇc(X, A)`
+into the ambient bounded derived category `Dᵇ(X, A)` of étale sheaves. -/
 noncomputable def Etale.DerivedCategoryBoundedConstructible.toBounded :
     Etale.DerivedCategoryBoundedConstructible A X ⥤
       DerivedCategory.Bounded (Sheaf X.smallEtaleTopology A) :=
@@ -142,7 +142,7 @@ lemma Etale.DerivedCategory.constructibleIn_iff (a b : ℤ)
         DerivedCategory.homologyConcentratedIn a b K :=
   Iff.rfl
 
-/-- Blueprint `sk-def-sf-categories`: Ambient categories and small subcategories.
+/-- Blueprint `definition-constructible-sheaves`: Ambient categories and small subcategories.
 
 The small category `D_c^[a, b](X, A)` of bounded constructible complexes of étale sheaves with
 homology concentrated in `[a, b]`, as a full subcategory of `D(X_ét)`. -/
@@ -280,7 +280,7 @@ variable [(Etale.constructibleSheaf A X).IsClosedUnderKernels]
   [(Etale.constructibleSheaf A X).IsClosedUnderExtensions]
   [PreservesFiniteLimits (CategoryTheory.forget A)]
 
-/-- Blueprint `prop-constructible-derived-subcategory`, first assertion: **Complexes with
+/-- Blueprint `corollary-ambient-ind-derived--1`, first assertion: **Complexes with
 constructible homology form a triangulated subcategory**, provided the
 constructible sheaves are closed under kernels, cokernels and extensions
 (blueprint: `thm:constructible-serre`). (blueprint: `prop:constructible-derived-subcategory`) -/
@@ -289,7 +289,7 @@ instance Etale.DerivedCategory.constructibleHomology_isTriangulated :
   rw [Etale.DerivedCategory.constructibleHomology_eq]
   infer_instance
 
-/-- Blueprint `prop-constructible-derived-subcategory`: **`Dᵇc(X, A)` is a triangulated
+/-- Blueprint `corollary-ambient-ind-derived--1`: **`Dᵇc(X, A)` is a triangulated
 subcategory of `D(X_ét)`**, provided the constructible
 sheaves are closed under kernels, cokernels and extensions (blueprint:
 `thm:constructible-serre`). (blueprint: `prop:constructible-derived-subcategory`) -/

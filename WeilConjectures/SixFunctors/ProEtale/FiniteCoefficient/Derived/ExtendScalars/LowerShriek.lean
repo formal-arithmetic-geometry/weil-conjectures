@@ -21,10 +21,10 @@ For a morphism `f : X ⟶ Y` admitting a compactification `X ⟶[i] Z ⟶[g] Y`,
 is built from the base change map of `Ψ` along `Rg_*`, the mate of the commutation
 `AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso` of `Ψ` with `Lg^*`, and the
 commutation of `Ψ` with the exact extension by zero `i_!`. It is an isomorphism on bounded
-constructible complexes of finite Tor amplitude (blueprint `thm-trf-finite-coefficient-map`):
-restricted back to `R`, the base change map is the projection map
-`Rg_* M ⊗ᴸ S_Y ⟶ Rg_* (M ⊗ᴸ S_Z)` for the constant sheaf `S_Y`, an isomorphism by the projection
-formula.
+constructible complexes of finite Tor amplitude (blueprint
+`theorem-grothendieck-lefschetz-trace-formula--7`): restricted back to `R`, the base change map is
+the projection map `Rg_* M ⊗ᴸ S_Y ⟶ Rg_* (M ⊗ᴸ S_Z)` for the constant sheaf `S_Y`, an isomorphism by
+the projection formula.
 
 ## Main definitions and results
 
@@ -67,7 +67,7 @@ variable {f : X ⟶ Y} (c : Compactification f)
 
 /-- The comparison map `Ψ (Rf_!(c) K) ⟶ Rf_!(c) (Ψ K)` for a compactification
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`: the base change map `Ψ (Rg_* i_! K) ⟶ Rg_* Ψ (i_! K)` followed by
-`Rg_*` of `Ψ (i_! K) ≅ i_! (Ψ K)` (blueprint `thm-trf-finite-coefficient-map`). -/
+`Rg_*` of `Ψ (i_! K) ≅ i_! (Ψ K)` (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`). -/
 noncomputable def rightDerivedLowerShriekOfCompactificationExtendScalarsMap :
     Rf_!(c)[ModuleCat.{u + 1} R] ⋙ L(sheafExtendScalars (algebraMap R S) Y) ⟶
       L(sheafExtendScalars (algebraMap R S) X) ⋙ Rf_!(c)[ModuleCat.{u + 1} S] :=
@@ -87,9 +87,9 @@ lemma rightDerivedLowerShriekOfCompactificationExtendScalarsMap_app
   rfl
 
 /-- **Derived scalar extension commutes with `Rf_!`**, for an arbitrary compactification `c` of
-`f` (blueprint `thm-trf-finite-coefficient-map`): for a finite ring `R`, the comparison map
-`Ψ (Rf_!(c) K) ⟶ Rf_!(c) (Ψ K)` is an isomorphism for `K` bounded constructible of finite Tor
-amplitude. -/
+`f` (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`): for a finite ring `R`, the
+comparison map `Ψ (Rf_!(c) K) ⟶ Rf_!(c) (Ψ K)` is an isomorphism for `K` bounded constructible of
+finite Tor amplitude. -/
 theorem isIso_rightDerivedLowerShriekOfCompactificationExtendScalarsMap_app [Finite R]
     {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) X K) :
@@ -114,7 +114,7 @@ noncomputable def rightDerivedLowerShriekExtendScalarsMap :
     (HasCompactification.compactification f)
 
 /-- **Derived scalar extension commutes with `Rf_!`** (blueprint
-`thm-trf-finite-coefficient-map`): for a finite ring `R`, the comparison map
+`theorem-grothendieck-lefschetz-trace-formula--7`): for a finite ring `R`, the comparison map
 `Ψ (Rf_! K) ⟶ Rf_! (Ψ K)` is an isomorphism for `K` bounded constructible of finite Tor
 amplitude. -/
 theorem isIso_rightDerivedLowerShriekExtendScalarsMap_app [Finite R]

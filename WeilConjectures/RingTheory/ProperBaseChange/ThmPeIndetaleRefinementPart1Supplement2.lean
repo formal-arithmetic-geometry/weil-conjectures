@@ -16,9 +16,9 @@ import WeilConjectures.RingTheory.FilteredColimitOfFactorization
 
 /-! # Local-ring identifications with w-local target
 
-Source: blueprint, proper base change, `sk-thm-properbasechange`, lemma
-`lem-weil-pbc-local-rings-ind-zariski`
-(blueprint: lem-weil-pbc-local-rings-ind-zariski).
+Source: blueprint, proper base change, `theorem-proper-base-change-classical-pro`, lemma
+`theorem-pro-etale-refinements-weakly-etale`
+(blueprint: theorem-pro-etale-refinements-weakly-etale).
 -/
 
 @[expose] public section
@@ -32,8 +32,8 @@ namespace Algebra
 open scoped BigOperators
 
 /-- Descend the inverse stalk map to a principal neighbourhood, then clear the finitely
-many generator equalities. Source: blueprint lem-weil-pbc-local-rings-ind-zariski,
-proof paragraphs 1--2 (blueprint: lem-weil-pbc-local-rings-ind-zariski). -/
+many generator equalities. Source: blueprint theorem-pro-etale-refinements-weakly-etale,
+proof paragraphs 1--2 (blueprint: theorem-pro-etale-refinements-weakly-etale). -/
 private theorem local_factorization
     (A B P : Type u) [CommRing A] [CommRing B] [CommRing P]
     [Algebra A B] [Algebra A P] [FinitePresentation A P]
@@ -128,8 +128,8 @@ private theorem local_factorization
   exact AlgHom.congr_fun hgen y
 
 /-- Pull a disjoint clopen refinement on the closed points back along the continuous
-closed-specialization map. Source: blueprint lem-weil-pbc-local-rings-ind-zariski,
-proof paragraph 2 (blueprint: lem-weil-pbc-local-rings-ind-zariski). -/
+closed-specialization map. Source: blueprint theorem-pro-etale-refinements-weakly-etale,
+proof paragraph 2 (blueprint: theorem-pro-etale-refinements-weakly-etale). -/
 private theorem clopen_refinement
     (B : Type u) [CommRing B] [IsWLocalRing B]
     (ι : Type u) (O : ι → TopologicalSpace.Opens (PrimeSpectrum B))
@@ -176,8 +176,8 @@ private theorem clopen_refinement
     exact hxc.mem_open (O (r i)).isOpen (hr i hcV)
 
 /-- Patch neighbourhood factorizations using the Chinese remainder isomorphism associated
-with a finite clopen partition. Source: blueprint lem-weil-pbc-local-rings-ind-zariski,
-proof paragraph 2 (blueprint: lem-weil-pbc-local-rings-ind-zariski). -/
+with a finite clopen partition. Source: blueprint theorem-pro-etale-refinements-weakly-etale,
+proof paragraph 2 (blueprint: theorem-pro-etale-refinements-weakly-etale). -/
 private theorem patch_factorization
     (A B P : Type u) [CommRing A] [CommRing B] [CommRing P]
     [Algebra A B] [Algebra A P]
@@ -270,9 +270,9 @@ private theorem patch_factorization
  target as a filtered colimit of finite products of principal localizations of the source.
  No w-locality of the source or of the map is assumed.
 
-Source: blueprint, proper base change, `sk-thm-properbasechange`, lemma
-`lem-weil-pbc-local-rings-ind-zariski`
-(blueprint: lem-weil-pbc-local-rings-ind-zariski).
+Source: blueprint, proper base change, `theorem-proper-base-change-classical-pro`, lemma
+`theorem-pro-etale-refinements-weakly-etale`
+(blueprint: theorem-pro-etale-refinements-weakly-etale).
 
 Proof:
 1. Given a finitely presented algebra `P` and `α : P → B`, invert the stalk isomorphism

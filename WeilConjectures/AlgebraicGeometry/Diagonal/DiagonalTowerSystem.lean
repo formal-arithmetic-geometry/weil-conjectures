@@ -81,7 +81,7 @@ integral Cartier roof. No noetherian, finiteness or nonemptiness assumption is i
 on Y. The displayed typeclasses only choose the localization and Ext size conventions.
 
 Source: blueprint main-20261015, sk-prop-diagonal-tower-system.md, clauses 1--4;
-Stacks Project, Tags 099M and 09AD (blueprint: det-prop-diagonal-tower-system).
+Stacks Project, Tags 099M and 09AD (blueprint: proposition-ell-adic-cycle-class-diagonal).
 
 Proof:
 1. The diagonal is a section of the smooth relative curve given by the first

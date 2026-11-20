@@ -26,7 +26,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct`
-  (`sk-def-sf-kv-maps` (i)): the `!`-Künneth isomorphism
+  (`lemma-external-duality-trace-morphism` (i)): the `!`-Künneth isomorphism
   `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for a finite coefficient ring.
 
 -/
@@ -59,9 +59,9 @@ section KunnethShriek
 
 /-! ### The `!`-Künneth isomorphism
 
-Item (i) of `sk-def-sf-kv-maps`: for `fᵢ : Xᵢ ⟶ Yᵢ` over `S`, the `!`-Künneth isomorphism
-`Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` is the relative product theorem over
-`B = Y₁ ×_S Y₂`, using `X₁ ×_S X₂ = (X₁ ×_{Y₁} B) ×_B (X₂ ×_{Y₂} B)`
+Item (i) of `lemma-external-duality-trace-morphism`: for `fᵢ : Xᵢ ⟶ Yᵢ` over `S`, the `!`-Künneth
+isomorphism `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` is the relative product theorem
+over `B = Y₁ ×_S Y₂`, using `X₁ ×_S X₂ = (X₁ ×_{Y₁} B) ×_B (X₂ ×_{Y₂} B)`
 (`CategoryTheory.Limits.pullback.mapOverBaseIso`) and compact-support base change. -/
 
 /-- For an isomorphism `e : Y ≅ Y'` of schemes, the derived pushforward `R(e_*)` is the
@@ -248,7 +248,8 @@ theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_base
     ((-⊗ᴸ-(pullback b₁ b₂)[ModuleCat.{u + 1} Λ]).obj _).mapIso e₂.symm⟩
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
-/-- Blueprint `sk-def-sf-kv-maps` (i), `def-sf-kv-maps` (i): the `!`-Künneth isomorphism.
+/-- Blueprint `lemma-external-duality-trace-morphism` (i), `lemma-external-duality-trace-morphism`
+(i): the `!`-Künneth isomorphism.
 
 Let `fᵢ : Xᵢ ⟶ Yᵢ` be separated of finite type between schemes over `S`, let `Λ` be a finite
 coefficient ring and `Mᵢ` in `Dctf(Xᵢ, Λ)`. Writing `f = f₁ × f₂ : X₁ ×_S X₂ ⟶ Y₁ ×_S Y₂`,

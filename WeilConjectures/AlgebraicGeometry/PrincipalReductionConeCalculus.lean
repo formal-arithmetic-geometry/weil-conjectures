@@ -1168,7 +1168,7 @@ Proof plan (the ten steps of the node):
 2. Morphisms of scalar cone triangles and lem-sf-triangle-morphism-iso show
    quasi-isomorphism preservation. Localization descends the functor and its maps;
    the direct-sum coordinates prove additivity after localization.
-3. The two-term resolution of det-pe-derived-nakayama-resolution has flat rank-one
+3. The two-term resolution of lemma-reduction-derived-nakayama--1 has flat rank-one
    terms; lem-weil-pbc-independent-bounded-flat-kflat makes it K-flat.
 4. Resolve M using lem-pc-kflat-resolution. The signed tensor interchange identifies
    its tensor with that two-term resolution with this scalar cone. The localization
@@ -1176,7 +1176,7 @@ Proof plan (the ten steps of the node):
    give one natural comparison on all unbounded complexes.
 5. Lift coefficient transitions by (pi,id) and reduction by the degree-zero identity.
    Tensoring identifies them with the specified transition and coaugmentation, so
-   their localizations are the canonical maps of sk-def-pe-derived-completion.
+   their localizations are the canonical maps of definition-derived-adic-completeness.
 6. Expand the four-coordinate differentials. The map (b,a,b',a') to (b,b',a,-a')
    is a chain isomorphism with inverse (u,v,w,z) to (u,w,v,-z).
 7. The shift differential is (-1)^r d. The map (x,y) to (x,(-1)^r y) intertwines
@@ -1441,7 +1441,7 @@ Proof plan (the ten steps of the node):
 2. Morphisms of scalar cone triangles and lem-sf-triangle-morphism-iso show
    quasi-isomorphism preservation. Localization descends the functor and its maps;
    the direct-sum coordinates prove additivity after localization.
-3. The two-term resolution of det-pe-derived-nakayama-resolution has flat rank-one
+3. The two-term resolution of lemma-reduction-derived-nakayama--1 has flat rank-one
    terms; lem-weil-pbc-independent-bounded-flat-kflat makes it K-flat.
 4. Resolve M using lem-pc-kflat-resolution. The signed tensor interchange identifies
    its tensor with that two-term resolution with this scalar cone. The localization
@@ -1449,7 +1449,7 @@ Proof plan (the ten steps of the node):
    give one natural comparison on all unbounded complexes.
 5. Lift coefficient transitions by (pi,id) and reduction by the degree-zero identity.
    Tensoring identifies them with the specified transition and coaugmentation, so
-   their localizations are the canonical maps of sk-def-pe-derived-completion.
+   their localizations are the canonical maps of definition-derived-adic-completeness.
 6. Expand the four-coordinate differentials. The map (b,a,b',a') to (b,b',a,-a')
    is a chain isomorphism with inverse (u,v,w,z) to (u,w,v,-z).
 7. The shift differential is (-1)^r d. The map (x,y) to (x,(-1)^r y) intertwines

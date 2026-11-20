@@ -18,8 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-!
 # Finite coefficients of a finite-stalk module sheaf
 
-Source: the normalization exact-sequence blueprint, unit `sk-thm-p1`, finite-coefficient
-reduction in lem-weil-pbc-finite-pushforward-finite-stalk-module.
+Source: the normalization exact-sequence blueprint, unit
+`proposition-proper-base-change-projective-line`, finite-coefficient reduction in
+lem-weil-pbc-finite-pushforward-finite-stalk-module.
 -/
 
 @[expose] public section

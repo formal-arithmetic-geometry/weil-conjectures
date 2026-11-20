@@ -33,7 +33,7 @@ diagonal map `V → ⨁_x V ⧸ V_x` (`AlgebraicGeometry.Scheme.Modules.principa
 - `AlgebraicGeometry.Scheme.Modules.adelicH1Equiv`: `H¹(X, M) ≃ₗ[k] (⨁_x V ⧸ V_x) ⧸ V`.
 - `AlgebraicGeometry.Scheme.Modules.adelicH0Equiv`: `H⁰(X, M) ≃ₗ[k] ⋂_x V_x`.
 
-(blueprint: `det-thm-picard-duality`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section
@@ -297,7 +297,7 @@ scheme of dimension at most one over `k`, and `φ : M ⟶ V_η` injective on sec
 canonical `k`-linear isomorphism
 `H¹(X, M) ≅ (⨁_{x closed} V ⧸ V_x) ⧸ V`.
 
-(blueprint: `det-thm-picard-duality`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 noncomputable def adelicH1Equiv :
     M.H 1 ≃ₗ[k] (Π₀ x : closedPoints X, V ⧸ stalkLattice k φ x.1) ⧸
       LinearMap.range (principalPartsMap k φ hdim hgen) :=

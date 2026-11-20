@@ -12,8 +12,8 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 # Weights of eigenvalues, Frobenius modules, reality and semisimplification
 
 This file collects the finite-dimensional linear algebra of weights used in the purity theorem
-for real lisse Weil sheaves (blueprint subsections `p-real-operations`, `sk-r-real-linear`
-and `sk-p-real-semi`).
+for real lisse Weil sheaves (blueprint subsections `situation-weil`,
+`proposition-weights-under-usual-operations` and `proposition-weights-j-boundary-points`).
 
 * An element `α` of a field `E` with an embedding `ι : E →+* ℂ` has *weight* `w` relative to
   `q` if `|ι α| = q ^ (w / 2)` (`AlgebraicGeometry.WeilGroup.IsOfWeight`); weights add under
@@ -59,12 +59,12 @@ section EigenvalueWeight
 
 variable {E : Type*} [Field E] (ι : E →+* ℂ) (q : ℕ)
 
-/-- Blueprint `def-tw-eigenvalue`: weights of eigenvalues.
+/-- Blueprint `definition-weights--1`: weights of eigenvalues.
 
 An element `α` (typically an eigenvalue of a Frobenius operator) has *weight* `w` relative to
 the prime power `q` if `|ι α| = q ^ (w / 2)`, the absolute value being read through the fixed
 embedding `ι` into `ℂ`; so `|q| = q` and `q` itself has weight `2`. This is the convention of
-`sk-d-real-weights`; it is related to the `ι`-weight
+`definition-weights`; it is related to the `ι`-weight
 `AlgebraicGeometry.WeilGroup.frobeniusWeight` by
 `AlgebraicGeometry.WeilGroup.isOfWeight_iff_frobeniusWeight_eq`. The weight `w` is allowed
 to be any real number. -/
@@ -84,7 +84,8 @@ theorem isOfWeight_iff_frobeniusWeight_eq (hq : 1 < q) {α : E} (hα : α ≠ 0)
     Real.rpow_def_of_pos (by linarith), Real.exp_eq_exp, Real.log_exp]
   constructor <;> intro h <;> linarith
 
-/-- Blueprint `lem-tw-multiplicativity`: Weights multiply under tensor product.
+/-- Blueprint `proposition-weights-under-usual-operations--3`: Weights multiply under tensor
+product.
 
 If `α` and `β` have weights `w₁` and `w₂`, then `α β` has weight `w₁ + w₂`: the absolute value
 is multiplicative. -/
@@ -92,7 +93,8 @@ theorem IsOfWeight.mul (hq : 0 < q) {w₁ w₂ : ℝ} {α β : E} (hα : IsOfWei
     (hβ : IsOfWeight ι q w₂ β) : IsOfWeight ι q (w₁ + w₂) (α * β) := by
   rw [IsOfWeight, map_mul, norm_mul, hα, hβ, ← Real.rpow_add (by exact_mod_cast hq), add_div]
 
-/-- Blueprint `lem-tw-multiplicativity`: Weights multiply under tensor product.
+/-- Blueprint `proposition-weights-under-usual-operations--3`: Weights multiply under tensor
+product.
 
 If `α ≠ 0` has weight `w`, then `α⁻¹` has weight `-w`: `|α⁻¹| = |α|⁻¹`. -/
 theorem IsOfWeight.inv {w : ℝ} {α : E} (hα : IsOfWeight ι q w α) :
@@ -105,7 +107,7 @@ section FrobeniusModule
 
 variable {E : Type*} [Field E] (ι : E →+* ℂ) (q : ℕ) {V : Type*} [AddCommGroup V] [Module E V]
 
-/-- Blueprint `def-weil-frobenius-module-weights`: Weights of finite-dimensional Frobenius
+/-- Blueprint `definition-weights`: Weights of finite-dimensional Frobenius
 modules.
 
 A vector space `V` with an automorphism `F` is `ι`-pure of weight `w` if every eigenvalue `α`
@@ -114,7 +116,7 @@ eigenvalue of `F` lies in `E`. -/
 def IsPureFrobeniusModule [IsAlgClosed E] (F : V ≃ₗ[E] V) (w : ℝ) : Prop :=
   ∀ α : E, Module.End.HasEigenvalue (F : Module.End E V) α → IsOfWeight ι q w α
 
-/-- Blueprint `def-weil-frobenius-module-weights`: Weights of finite-dimensional Frobenius
+/-- Blueprint `definition-weights`: Weights of finite-dimensional Frobenius
 modules.
 
 A vector space `V` with an automorphism `F` is `ι`-mixed of weights at most `w` if there are an
@@ -191,7 +193,7 @@ section Operations
 variable (W l) {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
   (ρ : Representation (PadicAlgCl l) W.carrier V)
 
-/-- Blueprint `def-real-weil-representation-operations`: Operations on Weil representations.
+/-- Blueprint `definition-weil-representation`: Operations on Weil representations.
 
 The determinant line `det V = ⋀^{dim V} V` of a Weil representation, with `g` acting by
 `g (v₁ ∧ ⋯ ∧ v_r) = g v₁ ∧ ⋯ ∧ g v_r`. The other operations of the blueprint are
@@ -206,7 +208,7 @@ noncomputable abbrev detLine : Representation (PadicAlgCl l) W.carrier
   ρ.exteriorPower (Module.finrank (PadicAlgCl l) V)
 
 variable {ρ} in
-/-- Blueprint `def-real-weil-representation-operations`: Operations on Weil representations.
+/-- Blueprint `definition-weil-representation`: Operations on Weil representations.
 
 The semisimplification `V^{ss} = ⨁_{i < n} F (i + 1) / F i` of a Weil representation along a
 chain of subrepresentations `F 0 ≤ F 1 ≤ ⋯ ≤ F n`; when `F` is a composition series these are
@@ -225,7 +227,7 @@ variable {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
   [FiniteDimensional (PadicAlgCl l) V] {ρ : Representation (PadicAlgCl l) W.carrier V}
   (ι : PadicAlgCl l →+* ℂ)
 
-/-- Blueprint `p-real-operations`: Local Frobenius polynomials.
+/-- Blueprint `situation-weil`: Local Frobenius polynomials.
 
 The local polynomial of a Weil representation at a closed point `x` is
 `P_x(ρ, T) = det (1 - T ρ(F_x) ∣ V)`, the reverse characteristic polynomial of the local
@@ -235,7 +237,7 @@ theorem localPolynomial_eq_charpolyRev (x : C.finitePoints) :
     W.localPolynomial l ρ x = (ρ (W.frobenius x)).charpolyRev :=
   rfl
 
-/-- Blueprint `lem-rp-exterior-reality`: Reality of exterior powers.
+/-- Blueprint `theorem-purity-real-sheaves-curves`: Reality of exterior powers.
 
 If `ρ` is `ι`-real, then every exterior power `⋀^r ρ` is `ι`-real: its local eigenvalues are
 the products of `r`-element sub-multisets of those of `ρ`, which complex conjugation
@@ -254,7 +256,7 @@ theorem charpoly_semisimplification {F : ℕ → Subrepresentation ρ} {n : ℕ}
     (fun i ↦ (F i).apply_mem_toSubmodule g)]
   exact Fin.prod_univ_eq_prod_range (fun i ↦ ((F (i + 1)).subquotient (F i) g).charpoly) n
 
-/-- Blueprint `lem-wf-real-semisimplification`: Reality survives semisimplification.
+/-- Blueprint `theorem-purity-real-sheaves-curves`: Reality survives semisimplification.
 
 The semisimplification `⨁ F (i + 1) / F i` of a Weil representation along a filtration by
 subrepresentations (for instance a composition series) has the same local characteristic
@@ -266,7 +268,7 @@ theorem localPolynomial_semisimplification {F : ℕ → Subrepresentation ρ} {n
   rw [localPolynomial, localPolynomial, LinearMap.charpolyRev, LinearMap.charpolyRev,
     charpoly_semisimplification h0 hn hF]
 
-/-- Blueprint `lem-wf-real-semisimplification`: Reality survives semisimplification.
+/-- Blueprint `theorem-purity-real-sheaves-curves`: Reality survives semisimplification.
 
 The semisimplification of an `ι`-real Weil representation along a filtration by
 subrepresentations (for instance a composition series) is `ι`-real, since it has the same local
@@ -278,7 +280,7 @@ theorem IsReal.semisimplification (hreal : W.IsReal l ρ ι) {F : ℕ → Subrep
   rw [localPolynomial_semisimplification h0 hn hF]
   exact hreal x m
 
-/-- Blueprint `sk-r-real-linear`: Weights, reality and semisimplification.
+/-- Blueprint `proposition-weights-under-usual-operations`: Weights, reality and semisimplification.
 
 The semisimplification `⨁ F (i + 1) / F i` along a filtration by subrepresentations has the same
 local eigenvalues as `ρ`, since it has the same local characteristic polynomials. -/
@@ -287,7 +289,7 @@ theorem localEigenvalues_semisimplification {F : ℕ → Subrepresentation ρ} {
     W.localEigenvalues l (semisimplification W l F n) x = W.localEigenvalues l ρ x := by
   rw [localEigenvalues, localEigenvalues, charpoly_semisimplification h0 hn hF]
 
-/-- Blueprint `sk-r-real-linear`: Weights, reality and semisimplification.
+/-- Blueprint `proposition-weights-under-usual-operations`: Weights, reality and semisimplification.
 
 The semisimplification along a filtration by subrepresentations is punctually `ι`-pure of
 weight `w` exactly when `ρ` is. -/
@@ -296,7 +298,7 @@ theorem isPunctuallyPure_semisimplification_iff {F : ℕ → Subrepresentation �
     W.IsPunctuallyPure l (semisimplification W l F n) ι w ↔ W.IsPunctuallyPure l ρ ι w := by
   simp only [IsPunctuallyPure, localEigenvalues_semisimplification h0 hn hF]
 
-/-- Blueprint `sk-r-real-linear`: Weights, reality and semisimplification.
+/-- Blueprint `proposition-weights-under-usual-operations`: Weights, reality and semisimplification.
 
 The semisimplification along a filtration by subrepresentations has `ι`-weights at most `w`
 exactly when `ρ` has. -/

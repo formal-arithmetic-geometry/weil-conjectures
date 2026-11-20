@@ -80,7 +80,7 @@ private theorem splitProjection_eq
     Iso.refl_hom, NatTrans.id_app, Category.id_comp]
 
 /-- The monoidal unit comparison, with its objects stated as regular modules.
-Source: blueprint lem-fd-as-characters, Step 2
+Source: blueprint lemma-artin-schreier-character-sheaf, Step 2
 (blueprint: lem-fd-as-split-regular-product). -/
 @[irreducible]
 def regularUnitIso
@@ -92,7 +92,7 @@ def regularUnitIso
 
 /-- Restriction of coefficient functions to one sheet, followed by the canonical
 identification of the pulled-back regular module.
-Source: blueprint lem-fd-as-characters, Step 2
+Source: blueprint lemma-artin-schreier-character-sheaf, Step 2
 (blueprint: lem-fd-as-split-regular-product). -/
 def sheetProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -135,8 +135,8 @@ private theorem sheetProjection_product_fin_isIso
 
 /-- The sheet projections identify a split finite direct image of regular coefficient
 modules with the product of the regular modules on the base of the split chart.
-Source: blueprint lem-fd-as-characters, Step 2, and the existing module product comparison
-(blueprint: lem-fd-as-split-regular-product).
+Source: blueprint lemma-artin-schreier-character-sheaf, Step 2, and the existing module product
+comparison (blueprint: lem-fd-as-split-regular-product).
 
 Proof: reindex the given finite sheets by Fin n and apply
 splitProEtaleModuleProductMap_isIso. Each target is the inverse image of a regular

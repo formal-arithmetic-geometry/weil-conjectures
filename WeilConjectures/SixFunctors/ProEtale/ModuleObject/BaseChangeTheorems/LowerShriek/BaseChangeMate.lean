@@ -21,7 +21,7 @@ adjunctions `Lg'^* ⊣ Rg'_!` and `Lg^* ⊣ Rg_!` (the adjunctions `Lg^* ⊣ Rg_
 `Rg_! ≅ Rg_*`), of the composition isomorphism
 `Rg'_! ⋙ Rf_! ≅ R(g' ≫ f)_! = R(f' ≫ g)_! ≅ Rf'_! ⋙ Rg_!`
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv'`,
-blueprint `fix-lem-exchanges`, clause (4)).
+blueprint `proposition-composition-base-change-rf-shriek`, clause (4)).
 
 The proof computes everything through a compactification `X ⟶[i] Z ⟶[p] Y` of `f` and a
 compactification `X' ⟶[i'] Z' ⟶[p'] Y'` of `f'` lying over it along `h : Z' ⟶ Z`: the two
@@ -315,11 +315,11 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_inv_comp_hom_eq_triangles
   rw [reassoc_of% (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_copy ℓ w
     (c'.postcomp g.left))]
 
-/-- **`Ex_!` is the mate of the composition isomorphism** (blueprint `fix-lem-exchanges`,
-clause (4)): for a cartesian square `sq : g' ≫ f = f' ≫ g` with `g` and `g'` proper, the
-compact-support base-change morphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` is the mate, for the
-adjunctions `Lg'^* ⊣ Rg'_*` and `Lg^* ⊣ Rg_*` transported along `Rg'_! ≅ Rg'_*` and
-`Rg_! ≅ Rg_*`, of the composition isomorphism
+/-- **`Ex_!` is the mate of the composition isomorphism** (blueprint
+`proposition-composition-base-change-rf-shriek`, clause (4)): for a cartesian square
+`sq : g' ≫ f = f' ≫ g` with `g` and `g'` proper, the compact-support base-change morphism
+`Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` is the mate, for the adjunctions `Lg'^* ⊣ Rg'_*` and
+`Lg^* ⊣ Rg_*` transported along `Rg'_! ≅ Rg'_*` and `Rg_! ≅ Rg_*`, of the composition isomorphism
 `Rg'_! ⋙ Rf_! ≅ R(g' ≫ f)_! = R(f' ≫ g)_! ≅ Rf'_! ⋙ Rg_!`. -/
 theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv'
     (sq : IsPullback g' f' f g) [IsProper g.left] [IsProper g'.left] :

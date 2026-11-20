@@ -192,14 +192,14 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteOp
 /-!
 # Integral open direct image preserves constructibility
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-pf-adic,
-`sk-thm-sf-pf-adic-open.md` and its proof; Stacks Tags 099L, 09A6 and 09C1
-(blueprint: det-thm-sf-pf-adic-open).
-
 The residue comparison is specified by its adjunction equation, rather than by an
 unconstrained isomorphism of objects. The coefficient-change pullback square used in that
 equation is defined for the nonflat residue quotient. All derived categories below are
 ordinary derived categories of internal modules over the continuous condensed coefficients.
+
+## References
+
+* Stacks Tags 099L, 09A6, 09C1
 -/
 
 @[expose] public noncomputable section
@@ -221,9 +221,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The canonical pullback/reduction transformation, obtained by transposing the inverse
 of the exact restriction-of-scalars pullback square along the two derived scalar
-adjunctions. No flatness of O_E -> F_E is assumed.
-Source: blueprint open-direct-image proof, Reduction paragraph and the coefficient square
-(blueprint: det-thm-sf-pf-adic-open). -/
+adjunctions. No flatness of O_E -> F_E is assumed. -/
 def reductionPullbackMap :
     (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory ⋙
         AdicCompletion.derivedReduction l E U 0 ⟶
@@ -333,45 +331,11 @@ private theorem residue_open_image
   obtain ⟨hbc, hta⟩ := hd (min a b) (max b a) (by omega) K hK ht'
   exact ⟨hbc, min a b, max b a + d, hta⟩
 
-set_option maxHeartbeats 800000 in
 -- Normalize the two scalar adjunctions and the internal coefficient module categories.
 /-- Integral open direct image is derived complete, commutes canonically with residue
 reduction, and is bounded constructible; integral Dbc equals its finite-Tor subcategory.
 The unique comparison is characterized by the usual pullback/reduction square and the
-two geometric counits. This is the canonical coefficient-change (projection-formula) map.
-Source: blueprint main-20261015, `sk-thm-sf-pf-adic-open.md` and its proof; Stacks
-Tags 099L, 09A6, 09C1 (blueprint: det-thm-sf-pf-adic-open).
-
-Proof:
-1. Apply sk-lem-integral-models on U: K is complete and its residue reduction is bounded
-   constructible of etale origin. The extension-integers DVR theorem gives a finite residue
-   field of characteristic l, which is invertible in k.
-2. det-pe-derived-nakayama-resolution identifies reduction with the uniformizer cone.
-   The right derived module pushforward is triangulated and O_E-linear. The canonical
-   finite-projection clause of prop-weil-pbc-direct-image-limits, with the finite perfect
-   quotients of lem-weil-pbc-standard-quotients-perfect, identifies the residue comparison
-   and all tower transitions. Its adjunction equation is the one displayed below.
-3. Apply the direct-image/derived-limit comparison to K's reduction tower. The completion
-   unit compatibility in that same node identifies the composite with the completion unit
-   of Rj_*K, proving completeness (sk-def-pe-derived-completion).
-4. Descend the residue reduction to the etale site by sk-thm-pe-constructible-comparison.
-   cor-fin-deligne-open-finite-coefficients makes its etale open direct image bounded
-   constructible, since the residue field is finite and killed by l.
-5. An open immersion has identity diagonal, so quasi-compactness makes j qcqs.
-6. prop-weil-pbc-comparison-direct-image identifies the residue pro-etale direct image
-   with the pullback of the etale one; constructible comparison preserves its finiteness.
-7. sk-prop-sfb-cartesian-coefficients and sk-def-sfb-coefficient-change give the compatible
-   integral/residue ring square. lem-weil-pbc-ring-sheaf-change-adjunction compares the
-   direct images after restriction, without imposing flatness on the residue quotient.
-8. Exact scalar restriction (lem-weil-restriction-of-scalars-exact) identifies cohomology
-   of these two residue complexes as integral modules.
-9. The coefficient resolution makes O_E -> F_E an epimorphism. Lift residue scalars
-   locally to integral scalars; integral linearity then gives residue linearity of the
-   cohomology isomorphisms and their inverses. The actual reduction is bounded constructible.
-10. Constructible comparison gives etale origin for that actual residue reduction.
-11. Apply the residue criterion sk-lem-integral-models on X. It gives bounded
-    constructibility and the equality of integral bounded constructible and finite-Tor
-    subcategories. This proves all clauses, including the empty-open and identity cases. -/
+two geometric counits. This is the canonical coefficient-change (projection-formula) map. -/
 theorem integral_open_direct_image
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
     [U.Over (Spec (.of k))] [X.Over (Spec (.of k))]
@@ -424,9 +388,10 @@ theorem integral_open_direct_image
     (X ↘ Spec (.of k))
   let : IsNoetherian U := ⟨⟩
   let : IsNoetherian X := ⟨⟩
-  obtain ⟨hχ, hpush⟩ := internal_integral_direct_image_limits l E j
-  change IsIso (reductionPullbackMap l E j) at hχ
+  have hlimits := internal_integral_direct_image_limits l E j
+  have hχ : IsIso (reductionPullbackMap l E j) := hlimits.choose
   let := hχ
+  have hpush := hlimits.choose_spec
   let adj := (CondensedRing.derivedUpperStarLowerStarAdjunction
     (DerivedNakayama.integerRing l E) j).ofNatIsoLeft
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
@@ -435,10 +400,18 @@ theorem integral_open_direct_image
     (DerivedNakayama.quotientRing l E 1) j).ofNatIsoLeft
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
         (DerivedNakayama.quotientRing l E 1) j)
-  obtain ⟨hcomplete, hmate⟩ := hpush K
-  obtain ⟨hinput, _⟩ := internal_integral_residue_criterion l E U
-  obtain ⟨houtput, htor'⟩ := internal_integral_residue_criterion l E X
-  obtain ⟨hcK, hrK, htK⟩ := (hinput K).mp hK
+  have hpushK := hpush K
+  have hcomplete := hpushK.1
+  have hmate := hpushK.2
+  have hinputAll := internal_integral_residue_criterion l E U
+  have hinput := hinputAll.1
+  have houtputAll := internal_integral_residue_criterion l E X
+  have houtput := houtputAll.1
+  have htor' := houtputAll.2
+  have hresK := (hinput K).mp hK
+  have hcK := hresK.1
+  have hrK := hresK.2.1
+  have htK := hresK.2.2
   have hcomplete' := hcomplete hcK
   obtain ⟨c, hc, hunique⟩ := unique_mate adj adj'
     (AdicCompletion.derivedReduction l E X 0)

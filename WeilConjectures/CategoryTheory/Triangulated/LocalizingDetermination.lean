@@ -22,9 +22,9 @@ direct image preserves direct sums on `Loc(Dctf)` but not on the whole derived c
 ## Main results
 
 - `CategoryTheory.NatTrans.isIso_app_of_localizingClosure` (blueprint
-  `sk-lem-sf-determination`): a natural transformation of triangulated functors, compatible with
-  the shifts, between functors preserving the coproducts of objects of `Loc(P)`, which is an
-  isomorphism on the objects of `P`, is an isomorphism on `Loc(P)`.
+  `lemma-checking-isomorphisms-constructible-complexes--1`): a natural transformation of
+  triangulated functors, compatible with the shifts, between functors preserving the coproducts of
+  objects of `Loc(P)`, which is an isomorphism on the objects of `P`, is an isomorphism on `Loc(P)`.
 - `CategoryTheory.NatTrans.isIso_app_app_of_localizingClosure`: the same in two variables, for
   natural transformations of bifunctors (the argument of the projection formula).
 - `CategoryTheory.ObjectProperty.localizingClosure_map`: a triangulated functor preserving the
@@ -140,11 +140,11 @@ namespace NatTrans
 variable {F₁ F₂ : C ⥤ D} [F₁.CommShift ℤ] [F₂.CommShift ℤ] [F₁.IsTriangulated]
   [F₂.IsTriangulated] (τ : F₁ ⟶ F₂) [NatTrans.CommShift τ ℤ]
 
-/-- Blueprint `sk-lem-sf-determination`, for the localizing closure: let `τ : F₁ ⟶ F₂` be a
-natural transformation of triangulated functors, compatible with the shifts, where `F₁` and
-`F₂` preserve the coproducts of objects of `Loc(P)`. If `τ` is an isomorphism on the objects of
-`P`, it is an isomorphism on the objects of `Loc(P)`: the objects of `Loc(P)` on which `τ` is an
-isomorphism form a localizing property containing `P`. -/
+/-- Blueprint `lemma-checking-isomorphisms-constructible-complexes--1`, for the localizing closure:
+let `τ : F₁ ⟶ F₂` be a natural transformation of triangulated functors, compatible with the shifts,
+where `F₁` and `F₂` preserve the coproducts of objects of `Loc(P)`. If `τ` is an isomorphism on the
+objects of `P`, it is an isomorphism on the objects of `Loc(P)`: the objects of `Loc(P)` on which
+`τ` is an isomorphism form a localizing property containing `P`. -/
 theorem isIso_app_of_localizingClosure {P : ObjectProperty C}
     (hF₁ : F₁.PreservesCoproductsOn.{w} P.localizingClosure)
     (hF₂ : F₂.PreservesCoproductsOn.{w} P.localizingClosure)

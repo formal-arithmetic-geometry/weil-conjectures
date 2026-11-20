@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 # Pullback preserves finite Tor amplitude
 
 Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-rf-shriek-preservation,
-order 2064 (blueprint: lem-sf-pullback-tor-amplitude).
+order 2064 (blueprint: proposition-six-operations-dctf--1).
 The finite pullback below specializes the recorded ringed-site operation along the
 canonical constant-section coefficient isomorphism. It introduces no chosen ring map.
 -/
@@ -39,7 +39,7 @@ namespace WeilConjectures
 The coefficient comparison is the canonical inverse-image map, whose invertibility
 is the recorded constant-coefficient theorem. Exact module pullback descends termwise.
 Source: blueprint order 2064, finite-level operation from order 1467;
-Stacks Tags 03D2 and 0735 (blueprint: lem-sf-pullback-tor-amplitude). -/
+Stacks Tags 03D2 and 0735 (blueprint: proposition-six-operations-dctf--1). -/
 noncomputable def sfFiniteDerivedPullback
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)
@@ -126,7 +126,7 @@ private theorem comparison_tor_iff (T : Scheme.{u}) (A : Type u)
     fun h ↦ torAmplitude_of_iso T A e.symm a b h⟩
 
 /-- Pullback preserves bounded constructibility and the very same Tor interval.
-Source: Weil blueprint, order 2064 (blueprint: lem-sf-pullback-tor-amplitude).
+Source: Weil blueprint, order 2064 (blueprint: proposition-six-operations-dctf--1).
 Proof:
 1. The coefficient quotient is finite. Apply the intrinsic finite-ring derived
 comparison to descend K to a bounded constructible etale complex L. Convert its

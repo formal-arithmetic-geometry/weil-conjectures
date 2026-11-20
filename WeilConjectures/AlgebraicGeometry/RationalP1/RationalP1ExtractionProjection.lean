@@ -22,9 +22,7 @@ open DiagonalCoefficients CondensedRing
 attribute [local irreducible] twist projectionMap tensorShiftIso
 attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 
-/-- The specified canonical composite, constructed before coefficient specialization.
-Source: Second identity, extraction of q*K.
-(blueprint: def-sfb-rational-p1-extraction-projection). -/
+/-- The specified canonical composite, constructed before coefficient specialization. -/
 @[irreducible]
 def extractionInsideMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -43,9 +41,7 @@ def extractionInsideMap
     (tensorShiftIso Λ X LX ((moduleObjectDerivedPullback Λ g).obj A)).hom ≫
     (pullTwistIso Λ g LS LX e A).inv
 
-/-- The specified canonical composite, constructed before coefficient specialization.
-Source: Second identity, extraction of q*K.
-(blueprint: def-sfb-rational-p1-extraction-projection). -/
+/-- The specified canonical composite, constructed before coefficient specialization. -/
 @[irreducible]
 def extractionProjectionMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -64,9 +60,7 @@ def extractionProjectionMap
   projectionMap Λ f A _ ≫
     (moduleObjectDerivedPushforward Λ f).map (extractionInsideMap Λ f g LS LX e A b)
 
-/-- Unfolding equation for the actual canonical construction.
-Source: Second identity, extraction of q*K.
-(blueprint: def-sfb-rational-p1-extraction-projection). -/
+/-- Unfolding equation for the actual canonical construction. -/
 theorem extractionInsideMap_eq
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {S X : Scheme.{u}} (f g : X ⟶ S)
@@ -84,9 +78,7 @@ theorem extractionInsideMap_eq
   delta extractionInsideMap
   rfl
 
-/-- Unfolding equation for the actual canonical construction.
-Source: Second identity, extraction of q*K.
-(blueprint: def-sfb-rational-p1-extraction-projection). -/
+/-- Unfolding equation for the actual canonical construction. -/
 theorem extractionProjectionMap_eq
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {S X : Scheme.{u}} (f g : X ⟶ S)

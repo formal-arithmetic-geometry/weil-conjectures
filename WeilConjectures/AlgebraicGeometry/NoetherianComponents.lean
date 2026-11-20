@@ -26,8 +26,8 @@ Four elementary facts used by the Noetherian theory of constructible étale shea
   a Noetherian scheme whose local rings are integrally closed domains is a finite disjoint union
   of open and closed normal integral subschemes.
 - `AlgebraicGeometry.Scheme.exists_isClopen_isIntegral_of_etale` (blueprint
-  `lem-fin-etale-normal-components`): a Noetherian scheme étale over a normal integral scheme is
-  a finite disjoint union of open and closed normal integral subschemes.
+  `proposition-proper-direct-image-finite-coefficients`): a Noetherian scheme étale over a normal
+  integral scheme is a finite disjoint union of open and closed normal integral subschemes.
 -/
 
 @[expose] public section
@@ -114,7 +114,8 @@ theorem Scheme.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk (W : Schem
   have := (hW ((U a).ι w)).2
   exact .of_equiv (hst w)
 
-/-- Blueprint `lem-fin-etale-normal-components`: Normal components after étale pullback.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Normal components after étale
+pullback.
 
 Let `f : W ⟶ Y` be étale with `W` Noetherian and `Y` normal integral (an integral scheme all
 of whose local rings are integrally closed). Then `W` is a finite disjoint union of open and

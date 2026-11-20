@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Tate.TateTwistedProjection
 
 /-! # Naturality of the rational tensor-shift comparison
-
-Source: rational projective-line unit/counit, naturality of the canonical comparisons
-(blueprint: lem-sfb-rational-p1-tensor-shift-naturality).
 -/
 
 @[expose] public noncomputable section
@@ -60,12 +57,7 @@ private theorem normalizedTensorShift_naturality (X : Scheme.{u}) (L : Modules �
     (NatTrans.shift_app_comm ((curriedTensor _).map f) (2 : ℤ)
       ((DerivedCategory.singleFunctor (Modules Λ X) 0).obj L)).symm
 
-/-- Naturality of the fixed tensor-shift comparison in the module-object tensor interface.
-Source: unit/counit proof, the tensor-shift comparison in steps 10--12
-(blueprint: lem-sfb-rational-p1-tensor-shift-naturality).
-Proof: abstract the normalized family before unfolding the fixed tensor bundle.
-Normalization identifies it with the native tensor-shift isomorphism. The shift
-commutation square of the tensor natural transformation gives the required equation. -/
+/-- Naturality of the fixed tensor-shift comparison in the module-object tensor interface. -/
 theorem tensorShiftIso_naturality (X : Scheme.{u}) (L : Modules Λ X)
     {A B : DerivedCategory (Modules Λ X)} (f : A ⟶ B) :
     tensorHom f (𝟙 _) ≫ (tensorShiftIso Λ X L B).hom =

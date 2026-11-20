@@ -13,7 +13,7 @@ import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerAffineLine
 
 /-! # Cardinalities of the two projective-line fibre homology groups
 
-Source: blueprint thm-amb-p1-decomposition, geometric-fibre calculation.
+Source: blueprint lemma-cohomology-projective-line-trace, geometric-fibre calculation.
 (auxiliary; not a blueprint node).
 -/
 
@@ -32,7 +32,7 @@ attribute [local reducible] ordinaryFiniteDegreeZero ordinaryFiniteLine ordinary
 
 /-- Given the scalar generator calculation in H2, sections of either nonzero
 homology of the shifted projective-line direct image have the cardinality of A.
-Source: blueprint thm-amb-p1-decomposition, geometric-fibre calculation.
+Source: blueprint lemma-cohomology-projective-line-trace, geometric-fibre calculation.
 (auxiliary; not a blueprint node).
 
 Proof: the canonical homology/global-cohomology comparison identifies degree zero

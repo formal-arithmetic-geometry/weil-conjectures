@@ -32,7 +32,6 @@ attribute [local irreducible] HasDerivedCategory.standard integralOrdinaryScalar
   integralComparisonSystemScalarPullback integralComparisonSequenceScalarPullback
   integralComparisonSequenceScalarModel coefficientSequenceLimit
 
-set_option maxHeartbeats 800000 in
 -- The coefficient-functor comparisons exceed the default elaboration budget.
 /-- Move the inverse scalar/pullback system comparison through the explicit coordinate.
 Source: Stacks 06YY, 07A4 and 0941; step 2 of stage3-pur-scalar-pullback-left-roos.

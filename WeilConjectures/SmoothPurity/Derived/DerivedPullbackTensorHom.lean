@@ -93,7 +93,7 @@ import all WeilConjectures.CategoryTheory.BilinearCoefficientDescent.BilinearCoe
 
 Source: blueprint sec-smooth-purity/sk-def-sf-operations, order 1467;
 Stacks Project, Tags 06YL, 06YV, 08J7 and 099N
-(blueprint: def-weil-derived-pullback-tensor-hom).
+(blueprint: prose-03-02).
 
 The ambient operations for every commutative condensed coefficient ring are the
 existing module-object derived pullback, K-flat relative tensor and closed internal Hom,
@@ -236,7 +236,7 @@ attribute [local irreducible] ScalarLocalization.category
 
 /-- Pullback on the actual pair-category quotient has the prescribed representative action.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom).
+(blueprint: prose-03-02).
 Proof: use the normalized rationalPullbackScalarComparison for every coefficient
 inclusion. The strict generator formulas commute with a tower of coefficient
 maps; multiplication and associativity of tensors give the scalar associators.
@@ -268,7 +268,7 @@ end PullbackProofs
 
 /-- Canonical common-stage pullback, with no new coefficient objects or retracts.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def commonStageDerivedPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] :=
@@ -276,7 +276,7 @@ def commonStageDerivedPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The literal tensor object is formed at the finite coefficient compositum.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def commonStageTensorObject (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)]
     (P Q : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -292,7 +292,7 @@ attribute [local irreducible] ObjectProperty.FullSubcategory.category
 
 /-- The tensor comparison at a common stage includes the scalar associators of both inputs.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def commonStageTensorComparison (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)]
     (P Q : generalAlgebraicallyClosedConstructibleCategory l Ω W)
@@ -335,7 +335,7 @@ attribute [local irreducible] ObjectProperty.FullSubcategory.category ScalarLoca
 
 /-- Common-stage tensor has the bilinear representative formula of the blueprint.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom).
+(blueprint: prose-03-02).
 Proof: extend both endpoints to their finite coefficient composita and use the
 literal object formula. At a common larger stage, use commonStageTensorComparison
 to identify their scalar extensions with the tensor of the extended inputs. The
@@ -412,7 +412,7 @@ end TensorDescentElaboration
 
 /-- The canonical common-stage tensor functor on the existing pair category.
 Source: blueprint common-stage paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def commonStageDerivedTensor (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)] :=
   (commonStageDerivedTensor_existsUnique l Ω W).exists.choose
@@ -438,7 +438,7 @@ open CommonStageInternalHom CommonStageInternalHomDescent
 
 /-- Common-stage internal Hom has precisely the contravariant representative formula.
 Source: blueprint common-stage internal-Hom paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom).
+(blueprint: prose-03-02).
 Proof: form the permitted rational Hom at each literal compositum. The permitted
 pair remains permitted at every common stage by commonStageHomPairAtStage_permitted.
 Use commonStageHomComparison to compare the scalar extension of each output with
@@ -532,7 +532,7 @@ theorem commonStageDerivedInternalHom_existsUnique (W : Scheme.{u}) :
 
 /-- The canonical common-stage internal Hom on precisely the permitted full subcategory.
 Source: blueprint common-stage internal-Hom paragraph
-(blueprint: def-weil-derived-pullback-tensor-hom). -/
+(blueprint: prose-03-02). -/
 def commonStageDerivedInternalHom (W : Scheme.{u}) :=
   (commonStageDerivedInternalHom_existsUnique l Ω W).exists.choose
 

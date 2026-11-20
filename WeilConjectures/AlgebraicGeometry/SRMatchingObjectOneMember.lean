@@ -252,7 +252,7 @@ Source: Stacks, Tags 01G2, 01G3, 01G5, 0186
 
 Proof, following the six steps of the node:
 1. The small étale category has terminal object `id_X` and scheme-theoretic pullbacks
-   [lem-weil-pbc-etale-base-change-finite-limits]. Its inclusion into `Over X` preserves
+   [situation-conventions]. Its inclusion into `Over X` preserves
    these, hence finite limits [lem-weil-pbc-finite-limits-from-terminal-pullbacks].
 2. Take the matching objects in `X.Etale`. Their boundary cones are also proper-face limits
    [lem-weil-pbc-matching-object-proper-faces, lem-weil-pbc-simplicial-matching-object].
@@ -268,7 +268,7 @@ Proof, following the six steps of the node:
    [lem-weil-pbc-semi-representable-covering-permanence] transports the covering condition
    across the comparison. A singleton is covering exactly when its component is étale and
    surjective. The component is étale since it is a morphism between étale `X`-schemes
-   [lem-weil-pbc-etale-composition-cancellation].
+   [definition-torsion-sheaves--3].
 6. Apply the equivalence in every degree to the definition of an SR hypercover
    [def-weil-pbc-semi-representable-object], obtaining the final equivalence. -/
 theorem sr_matching_object_one_member (X : Scheme.{u}) (U : SimplicialObject X.Etale) :

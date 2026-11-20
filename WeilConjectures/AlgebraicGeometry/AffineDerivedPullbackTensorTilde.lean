@@ -216,8 +216,9 @@ Source: Stacks, Tag 08DW, proof
 Proof (node step 1): choose a K-flat resolution on Y (lem-pc-kflat-resolution).
 Restriction to V preserves K-flatness (lem-pc-kflat-pullback-preservation).
 Termwise tensor pullback and restriction commute, so both composite functors are
-computed by the same pulled-back restricted resolution (def-pc-derived-pullback).
-The resolution comparison is natural and descends to the derived category. -/
+computed by the same pulled-back restricted resolution
+(lemma-coherent-base-change-invertible-sheaves--2). The resolution comparison is natural and
+descends to the derived category. -/
 theorem derivedPullback_openRestriction_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (U : X.Opens) (V : Y.Opens) (hUV : U ≤ f ⁻¹ᵁ V)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -352,8 +353,8 @@ Source: Stacks, Tag 08DW(2), via Tag 08DV
 Proof (node step 2): apply the natural termwise tilde/base-change isomorphism
 (lem-weil-pbc-tilde-pullback-base-change) to K-flat complexes. Their tilde complexes
 are K-flat (lem-pc-affine-tilde-kflat), so the derived-pullback counit is invertible
-there (def-pc-derived-pullback). Compose the two natural comparisons. For arbitrary
-M use a K-flat resolution P to M; exact tilde sends it to an isomorphism after Q
+there (lemma-coherent-base-change-invertible-sheaves--2). Compose the two natural comparisons. For
+arbitrary M use a K-flat resolution P to M; exact tilde sends it to an isomorphism after Q
 (lem-pc-affine-qcoh-derived-equivalence). Naturality on K-flat models gives compatibility
 with resolution comparisons, hence the affine formula independent of that choice. -/
 theorem derivedPullback_tilde_kFlat_natIso (A B : Type u) [CommRing A] [CommRing B]
@@ -480,7 +481,7 @@ Source: Stacks, Tag 08DW(2), via Tag 08DV
 Proof (node step 2): resolve M by P (lem-pc-kflat-resolution). Termwise tilde
 preserves quasi-isomorphisms (lem-pc-affine-qcoh-derived-equivalence), and tilde P
 is K-flat (lem-pc-affine-tilde-kflat). Derived pullback is therefore represented
-by termwise tensor pullback of tilde P (def-pc-derived-pullback).
+by termwise tensor pullback of tilde P (lemma-coherent-base-change-invertible-sheaves--2).
 The natural tilde/base-change comparison in each degree
 (lem-weil-pbc-tilde-pullback-base-change) identifies this with tilde of B tensor P.
 This complex computes M tensor-derived B since P is K-flat. -/

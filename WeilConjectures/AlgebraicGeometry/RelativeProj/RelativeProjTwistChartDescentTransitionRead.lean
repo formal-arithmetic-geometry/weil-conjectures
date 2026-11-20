@@ -9,8 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.RelativeProjTwistCh
 
 /-! # Reading sections across relative Proj twist charts
 
-Source: Stacks Project, Constructions, Tag 01NR.
-(blueprint: lem-trf-relative-proj-twist-chart-descent-transition-read).
+## References
+
+* Stacks Project, Constructions, Tag 01NR
 -/
 
 @[expose] public section
@@ -93,16 +94,7 @@ end AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry.Scheme.GradedAlgebraData
 variable {S : Scheme.{u}} (A : S.GradedAlgebraData)
 
-/-- The normalized transition induced by a compatible chart square intertwines reading maps.
-
-Source: Stacks Project, Constructions, Tag 01NR, compatibility portion of
-`lemma-glue-relative-proj-twists`.
-The proof expands the section-normalized pullback adjunction, uses naturality of its unit,
-and evaluates the displayed chart square on a section.  The first map in the square is
-transported across the equality of the two chart preimages, and the remaining composition
-is exactly the normalized transition map.
-(blueprint: lem-trf-relative-proj-twist-chart-descent-transition-read).
--/
+/-- The normalized transition induced by a compatible chart square intertwines reading maps. -/
 theorem twist_chart_transition_read
     (L : A.relProj.Modules)
     (chart : ∀ U : S.affineOpens,

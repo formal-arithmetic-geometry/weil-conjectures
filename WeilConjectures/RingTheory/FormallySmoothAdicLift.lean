@@ -61,7 +61,7 @@ Proof (following the six steps of the node):
    R → T is flat. By `lem-weil-pbc-complete-local-quotient`, T is complete
    Noetherian local. The induced map T/m_R T → E is a k₀-algebra isomorphism,
    since its presentation is S̄/(x̄₁, …, x̄_r) and this ideal is the kernel.
-5. Transport the lifting property `def-weil-pbc-formally-smooth-adic` from E to
+5. Transport the lifting property `theorem-finite-etale-covers-proper-henselian--2` from E to
    T/m_R T along that isomorphism, which identifies their maximal ideals.
    By `lem-weil-pbc-flat-formally-smooth-closed-fibre-adic`, the flat local map
    R → T is formally smooth for the maximal-ideal-adic topology.

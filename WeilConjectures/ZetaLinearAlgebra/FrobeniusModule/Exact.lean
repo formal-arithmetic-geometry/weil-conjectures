@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.DeligneLaumon.InfinityReductionLinearAlgebra
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Map
 
@@ -21,15 +22,18 @@ field cardinality `q` becomes `qᵐ`.
 
 - `FrobeniusModule.hasEigenvalue_of_exact`: an eigenvalue of the middle term of an exact
   sequence is one of an outer term.
-- `FrobeniusModule.HasWeightsAtMost.of_functionExact` (`lem-a1-extension-bounds`): the middle
+- `FrobeniusModule.HasWeightsAtMost.of_functionExact`
+(`proposition-weights-under-usual-operations--2`): the middle
   term of an exact sequence inherits a common upper weight bound.
 - `FrobeniusModule.hasWeightsAtMost_of_forall_hasEigenvalue`
-  (`lem-a1-punctual-bound-module-mixed`): a bound on all eigenvalues is an upper weight bound.
-- `FrobeniusModule.HasWeightsAtMost.of_powFrobenius` (`lem-a1-weight-bound-constant-extension`):
+  (`lemma-bounding-weights-mixed-sheaf--1`): a bound on all eigenvalues is an upper weight bound.
+- `FrobeniusModule.HasWeightsAtMost.of_powFrobenius` (`lemma-weight-bound-constant-extension`):
   a weight bound over a finite constant extension descends.
-- `FrobeniusModule.roots_charpoly_frobeniusEnd_map_eq_add` (`lem-a1-spectrum-exact-sequence`): the
+- `FrobeniusModule.hasWeightsAtMost_powFrobenius_iff`: over an algebraically closed field, weight
+  bounds over `k₀` and over `k_m` are equivalent.
+- `FrobeniusModule.roots_charpoly_frobeniusEnd_map_eq_add` (`lemma-filtrations-spectra--2`): the
   spectrum of the middle term of a short exact sequence is the sum of those of the outer terms.
-- `FrobeniusModule.HasWeightsAtMost.of_subquotient` (`lem-a1-subquotient-extension-bounds`):
+- `FrobeniusModule.HasWeightsAtMost.of_subquotient` (`lemma-subobjects-quotients-weil-sheaves--3`):
   weights of subquotients.
 -/
 
@@ -111,7 +115,7 @@ theorem hasEigenvalue_of_exact (hfg : Function.Exact f g) {α : K}
 
 /-- **Extension bounds.** If the outer terms of an exact sequence `A → B → C` of Frobenius
 modules have weights at most `w`, so has the middle term. In particular this holds for a short
-exact sequence `0 → A → B → C → 0`. (blueprint: `lem-a1-extension-bounds`) -/
+exact sequence `0 → A → B → C → 0`. (blueprint: `proposition-weights-under-usual-operations--2`) -/
 theorem HasWeightsAtMost.of_functionExact (hfg : Function.Exact f g) {ι : K →+* ℂ} {q : ℕ}
     {w : ℝ} (hA : A.HasWeightsAtMost ι q w) (hC : C.HasWeightsAtMost ι q w) :
     B.HasWeightsAtMost ι q w := fun α hα ↦
@@ -123,7 +127,7 @@ end Exact
 satisfies `|ι α| ≤ q ^ (w / 2)`, then `M` has weights at most `w`: upper weight bounds of
 Frobenius modules are phrased on the eigenvalues, every simple Frobenius module over an
 algebraically closed field being a line with a single eigenvalue.
-(blueprint: `lem-a1-punctual-bound-module-mixed`) -/
+(blueprint: `lemma-bounding-weights-mixed-sheaf--1`) -/
 theorem hasWeightsAtMost_of_forall_hasEigenvalue {M : FrobeniusModule.{u, v} K} {ι : K →+* ℂ}
     {q : ℕ} {w : ℝ} (h : ∀ α, M.frobeniusEnd.HasEigenvalue α → ‖ι α‖ ≤ (q : ℝ) ^ (w / 2)) :
     M.HasWeightsAtMost ι q w :=
@@ -164,7 +168,7 @@ theorem hasEigenvalue_powFrobenius {M : FrobeniusModule.{u, v} K} {α : K}
 degree `m ≠ 0`, where the Frobenius becomes `Fᵐ` and the field cardinality becomes `qᵐ`, the
 module `M` has weights at most `b`, then it has weights at most `b` over the original field:
 `|ι α|ᵐ = |ι αᵐ| ≤ (qᵐ) ^ (b / 2)` gives `|ι α| ≤ q ^ (b / 2)`.
-(blueprint: `lem-a1-weight-bound-constant-extension`) -/
+(blueprint: `lemma-weight-bound-constant-extension`) -/
 theorem HasWeightsAtMost.of_powFrobenius {M : FrobeniusModule.{u, v} K} {ι : K →+* ℂ} {q m : ℕ}
     (hm : m ≠ 0) {b : ℝ} (h : (M.powFrobenius m).HasWeightsAtMost ι (q ^ m) b) :
     M.HasWeightsAtMost ι q b := by
@@ -175,6 +179,41 @@ theorem HasWeightsAtMost.of_powFrobenius {M : FrobeniusModule.{u, v} K} {ι : K 
       ← Real.rpow_natCast (q : ℝ) m, ← Real.rpow_mul (Nat.cast_nonneg _), mul_comm]
   rw [map_pow, norm_pow, Nat.cast_pow, e] at hb
   exact (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg (Nat.cast_nonneg _) _) hm).1 hb
+
+/-- Over an algebraically closed field, for `m ≠ 0`, every eigenvalue `β` of `Fᵐ` is the
+`m`-th power of an eigenvalue `α` of `F`. -/
+theorem exists_hasEigenvalue_pow_eq_of_powFrobenius [IsAlgClosed K]
+    {M : FrobeniusModule.{u, v} K} {m : ℕ} (hm : m ≠ 0) {β : K}
+    (hβ : (M.powFrobenius m).frobeniusEnd.HasEigenvalue β) :
+    ∃ α, M.frobeniusEnd.HasEigenvalue α ∧ α ^ m = β := by
+  rw [powFrobenius_frobeniusEnd] at hβ
+  exact WeilConjectures.infinity_eigenvalue_power_preimage (RingHom.id K) Function.surjective_id
+    _ m (Nat.pos_of_ne_zero hm) β hβ
+
+/-- Over an algebraically closed field, for `m ≠ 0`, `M` has weights at most `b` if and only if
+the Frobenius module `(M, Fᵐ)` has weights at most `b` for the field cardinality `qᵐ`. -/
+theorem hasWeightsAtMost_powFrobenius_iff [IsAlgClosed K] {M : FrobeniusModule.{u, v} K}
+    {ι : K →+* ℂ} {q m : ℕ} (hm : m ≠ 0) {b : ℝ} :
+    (M.powFrobenius m).HasWeightsAtMost ι (q ^ m) b ↔ M.HasWeightsAtMost ι q b := by
+  rw [HasWeightsAtMost, HasWeightsAtMost, powFrobenius_frobeniusEnd]
+  exact (WeilConjectures.infinity_eigenvalue_bound_power_iff (RingHom.id K)
+    Function.surjective_id M.frobeniusEnd ι q m (Nat.pos_of_ne_zero hm) b).symm
+
+/-- Over an algebraically closed field, if `M` has weights at most `b`, so has the Frobenius
+module `(M, Fᵐ)` for the field cardinality `qᵐ`. -/
+theorem HasWeightsAtMost.powFrobenius [IsAlgClosed K] {M : FrobeniusModule.{u, v} K}
+    {ι : K →+* ℂ} {q : ℕ} {b : ℝ} (h : M.HasWeightsAtMost ι q b) (m : ℕ) :
+    (M.powFrobenius m).HasWeightsAtMost ι (q ^ m) b := by
+  rcases eq_or_ne m 0 with rfl | hm
+  · intro β hβ
+    rw [powFrobenius_frobeniusEnd, pow_zero] at hβ
+    obtain ⟨x, hx⟩ := hβ.exists_hasEigenvector
+    have h1 : (1 : K) • x = β • x := by
+      rw [one_smul]
+      exact Module.End.mem_eigenspace_iff.1 hx.1
+    rw [← smul_left_injective K hx.2 h1]
+    simp
+  · exact (hasWeightsAtMost_powFrobenius_iff hm).2 h
 
 /-- A Frobenius module with weights at most `w` whose dual has weights at most `-w` (through an
 isomorphism `N ≃ M^∨`) is pure of weight `w`: the eigenvalues of the Frobenius of `M^∨` are the
@@ -234,7 +273,7 @@ sequence `0 → V' → V → V'' → 0` of Frobenius modules with Frobenius-equi
 `χ_V = χ_{V'} χ_{V''}`. The image of `V'` is a Frobenius-stable subspace of `V`, isomorphic to
 `V'`, with quotient isomorphic to `V''`, so this is
 `LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ`.
-(blueprint: `lem-a1-spectrum-exact-sequence`) -/
+(blueprint: `lemma-filtrations-spectra--2`) -/
 theorem charpoly_frobeniusEnd_eq_mul (hinj : Function.Injective f)
     (hsurj : Function.Surjective g) (hexact : Function.Exact f g) :
     M.frobeniusEnd.charpoly = M'.frobeniusEnd.charpoly * M''.frobeniusEnd.charpoly := by
@@ -263,7 +302,7 @@ include hf hg in
 of Frobenius modules with Frobenius-equivariant maps, the spectrum of `V` — the multiset of the
 images under `ι : K →+* ℂ` of the eigenvalues of its Frobenius, counted with algebraic
 multiplicity — is the sum of the spectra of `V'` and `V''`.
-(blueprint: `lem-a1-spectrum-exact-sequence`) -/
+(blueprint: `lemma-filtrations-spectra--2`) -/
 theorem roots_charpoly_frobeniusEnd_map_eq_add (ι : K →+* ℂ) (hinj : Function.Injective f)
     (hsurj : Function.Surjective g) (hexact : Function.Exact f g) :
     (M.frobeniusEnd.charpoly.map ι).roots =
@@ -280,7 +319,7 @@ end CharpolyExact
 /-- *Subquotient bounds for Frobenius modules*: if `(V, F)` has weights at most `w`, then so
 has every Frobenius-stable subquotient of `V`, presented as a Frobenius-equivariant quotient
 `A ↠ S` of a Frobenius-equivariant subspace `A ↪ V`.
-(blueprint: `lem-a1-subquotient-extension-bounds`) -/
+(blueprint: `lemma-subobjects-quotients-weil-sheaves--3`) -/
 theorem HasWeightsAtMost.of_subquotient {V A S : FrobeniusModule.{u, v} K}
     (i : A.carrier →ₗ[K] V.carrier) (hi : ∀ x, i (A.frobenius x) = V.frobenius (i x))
     (hinj : Function.Injective i) (p : A.carrier →ₗ[K] S.carrier)

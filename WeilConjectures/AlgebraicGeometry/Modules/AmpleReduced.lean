@@ -69,12 +69,7 @@ open Scheme.Modules in
 /-- **Ample families descend from the reduced subscheme in characteristic `p`** (Stacks 0BD4 (3)).
 Let `X` be a quasi-compact locally noetherian scheme in which the prime `p` vanishes. If the
 reduced subscheme `X_red` carries an invertible module with finitely many sections whose
-non-vanishing loci are affine and cover `X_red`, then so does `X`.
-
-For `n` large the `p ^ n`-power absolute Frobenius `F : X ⟶ X` kills the nilradical
-(`AlgebraicGeometry.Scheme.exists_nilradical_le_ker_iterateFrobenius`), so it factors as
-`X ⟶ X_red ⟶ X`. The first map is affine since `F` is, and the ample family of `X_red` pulls
-back along it (`exists_isAffineOpen_compl_support_zeroLocus_of_isAffineHom`). -/
+non-vanishing loci are affine and cover `X_red`, then so does `X`. -/
 @[stacks 0BD4]
 theorem exists_isAffineOpen_compl_support_zeroLocus_of_nilradical {X : Scheme.{u}}
     [IsLocallyNoetherian X] [CompactSpace X] {p : ℕ} (hp : p.Prime) (hX : (p : Γ(X, ⊤)) = 0)

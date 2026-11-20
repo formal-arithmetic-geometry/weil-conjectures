@@ -16,7 +16,7 @@ public import WeilConjectures.Tactic.TransportExact
 For the specialization `Sp_{X,x}` to the normal cone of a rational point, the comparison
 `ρ = (1 ⊠ δ_K) ∘ Π⁻¹ : Sp(K ⊠ D K) ⟶ K' ⊠ D K'` of the universal kernels
 (`ProEtale.CondensedRing.universalKernelSpecialization`) satisfies the second identity of
-blueprint `det-tf-sp-universal-kernel`,
+blueprint `lemma-nearby-cycles-universal-kernel`,
 
 `e_{K'} ∘ ρ = RΔ_{s*} θ_X ∘ χ_Δ ∘ S(e_K)`
 
@@ -49,7 +49,6 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   (x : RationalPoint X)
 
-set_option maxHeartbeats 1000000 in
 -- the ambient identity is transported to the bounded constructible forms of the objects
 /-- The restriction of the Künneth map `Π_{K,L}` to the diagonal is the lax tensor map `μ_X` of
 the specialization, through the pullback exchange `α_Δ` and the identifications
@@ -95,13 +94,17 @@ lemma map_specializationKunnethMap_comp_pullbackExchange
     change deformationDiagGeneric X x.left.ker k' ≫
       deformationProdFstGeneric X x.left.ker X x.left.ker k' = 𝟙 _
     apply pullback.hom_ext <;>
-      simp [deformationDiagGeneric, deformationProdFstGeneric, deformationDiagTotal]
+      simp only [deformationDiagGeneric, deformationProdFstGeneric, deformationDiagTotal,
+        Category.assoc, pullback.lift_fst, pullback.lift_snd, pullback.lift_fst_assoc,
+        Category.comp_id, Category.id_comp]
   have hgen₂ : (deformationDiagModelHom X x.left.ker k').generic ≫
       (deformationProdSndModelHom X x.left.ker X x.left.ker k').generic = 𝟙 _ := by
     change deformationDiagGeneric X x.left.ker k' ≫
       deformationProdSndGeneric X x.left.ker X x.left.ker k' = 𝟙 _
     apply pullback.hom_ext <;>
-      simp [deformationDiagGeneric, deformationProdSndGeneric, deformationDiagTotal]
+      simp only [deformationDiagGeneric, deformationProdSndGeneric, deformationDiagTotal,
+        Category.assoc, pullback.lift_fst, pullback.lift_snd, pullback.lift_fst_assoc,
+        Category.comp_id, Category.id_comp]
   have hmapU : ∀ {A B : Dᵇc((deformationSpecialFibre X x.left.ker k' ⨯
       deformationSpecialFibre X x.left.ker k').left)⟦Profinite.padicAlgClRingObj ℓ⟧} (g : A ⟶ B),
       ((boundedConstructibleUpperStar _ ℓ (diag (deformationSpecialFibre X x.left.ker k'))).map
@@ -127,10 +130,9 @@ lemma map_specializationKunnethMap_comp_pullbackExchange
 
 variable (D : NearbyCyclesModel.NearbyDualizingData k k' ℓ)
 
-set_option maxHeartbeats 1000000 in
 -- matching the abstract statements against the concrete functors
 /-- **Nearby cycles of the universal kernel**, second identity (blueprint
-`det-tf-sp-universal-kernel`): for `ρ = (1 ⊠ δ_K) ∘ Π⁻¹`, the evaluation kernels satisfy
+`lemma-nearby-cycles-universal-kernel`): for `ρ = (1 ⊠ δ_K) ∘ Π⁻¹`, the evaluation kernels satisfy
 `e_{K'} ∘ ρ = RΔ_{s*} θ_X ∘ χ_Δ ∘ S(e_K)`, with `K' = Sp_{X,x}(K)`. -/
 theorem universalKernelSpecialization_comp_evaluationKernel
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -176,6 +178,11 @@ theorem universalKernelSpecialization_comp_evaluationKernel
       (isTraitModel_deformationProdModel X x.left.ker X x.left.ker k')
       (deformationProdModel_exists_comp_ε X x.left.ker X x.left.ker k'))
   unfold universalKernelSpecialization evaluationKernel
-  apply_by_match CategoryTheory.comp_homEquiv_eq_map_homEquiv_comp_exchange [hχ := hχ, hρ := hρ]
+  simp only [specialization, specializationProd,
+    Correspondence.IsContractingAt.diagPushforwardExchange] at hρ ⊢
+  apply_by_match CategoryTheory.comp_homEquiv_eq_map_homEquiv_comp_exchange
+    [a := boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X),
+      a' := boundedConstructibleUpperStarLowerStarAdjunction ℓ
+        (diag (deformationSpecialFibre X x.left.ker k')), hχ := hχ, hρ := hρ]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

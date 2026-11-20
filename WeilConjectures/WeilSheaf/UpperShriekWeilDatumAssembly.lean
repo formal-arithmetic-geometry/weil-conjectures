@@ -101,7 +101,7 @@ theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_isWeilE
 set_option linter.style.longLine false in
 set_option linter.style.whitespace false in
 /-- **The Weil orientation from the trace square** (the uniqueness route, blueprint
-`thm-pur-weil-equivariance-of-purity-and-trace`): let `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` be an
+`proposition-purity-trace-commute-frobenius`): let `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` be an
 orientation on `X̄` (`f̄^! = ī^* ∘ ḡ^!` for the compactification), whose trace
 `f̄_! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ` is Frobenius equivariant for the composite exchange of `f̄_!` and the
 structures of `ℚ̄_ℓ(d)[2d]` and `ℚ̄_ℓ`. Then the underlying complex of `Rf^! ℚ̄_ℓ` is isomorphic to

@@ -15,13 +15,14 @@ public import Mathlib.LinearAlgebra.Matrix.FiniteDimensional
 Let `𝒢` be a lisse Weil sheaf on a smooth geometrically connected curve `C₀` over `𝔽_q`, and
 `U₀ ⊆ C₀` a nonempty open on which `𝒢` is punctually `ι`-pure of weight `w`. Then `𝒢` is
 punctually `ι`-pure of weight `w` on all of `C₀` (the consequence in
-`cor-wf-unramified-boundary-purity`, and the second assertion of `sk-p-real-semi`).
+`corollary-unramified-boundary-point--2`, and the second assertion of
+`proposition-weights-j-boundary-points`).
 
-The argument is the one of `lem-wf-boundary-semicontinuity`, for the lisse sheaf `𝒢 = j_* j^* 𝒢`
-(`lem-a1-lisse-middle-extension`), whose boundary stalks are its own stalks. On an affine
-neighbourhood `X'₀` of a closed point `s`, the Euler product of `𝒢` (`cor-rp-euler-product`)
-splits into the Euler series over the closed points of `X'₀ ∩ U₀` and the finitely many local
-factors at the points of `X'₀ \ U₀`:
+The argument is the one of `proposition-weights-j-boundary-points--1`, for the lisse sheaf
+`𝒢 = j_* j^* 𝒢` (`lemma-boundary-stalk--2`), whose boundary stalks are its own stalks. On an affine
+neighbourhood `X'₀` of a closed point `s`, the Euler product of `𝒢`
+(`theorem-trace-formula-euler-product--4`) splits into the Euler series over the closed points of
+`X'₀ ∩ U₀` and the finitely many local factors at the points of `X'₀ \ U₀`:
 
 `L (X'₀ ∩ U₀, 𝒢, T) · ι det (1 - F T ∣ H_c²) = P · ∏_{s ∈ X'₀ \ U₀} ι P_s (𝒢, T ^ e_s)`.
 
@@ -140,7 +141,7 @@ theorem norm_le_of_hasEigenvalue_compactTopFrobenius_of_forall (x : C.finitePoin
 
 variable {W l ρ ι}
 
-/-- The analytic step of `lem-wf-boundary-semicontinuity` (Steps 1–3).
+/-- The analytic step of `proposition-weights-j-boundary-points--1` (Steps 1–3).
 
 Let `T` be a set of closed points with at most `A q ^ e` points of degree `e`, at which `ℱ` has
 weights at most `β`, and suppose that the Euler series of `ℱ` over `T` satisfies
@@ -275,14 +276,14 @@ theorem eulerSeries_eq_tprod_mul_prod {T : Set C.finitePoints} (hT : Tᶜ.Finite
   congr 1
   exact tprod_congr_set_coe _ hT.coe_toFinset.symm
 
-/-- Steps 0–3 of `lem-wf-boundary-semicontinuity` for a lisse sheaf on an affine curve.
+/-- Steps 0–3 of `proposition-weights-j-boundary-points--1` for a lisse sheaf on an affine curve.
 
 Let `C₀` be a smooth geometrically connected affine curve, `ℱ` lisse on `C₀` and `T` a set of
 closed points with finite complement, containing some point `x₀`, at which `ℱ` has weights at
 most `β`. Then every local eigenvalue of `ℱ`, at any closed point, has weight at most `β + 2`.
 
-By the Euler product of `ℱ` (`cor-rp-euler-product`), split into the Euler product over `T` and
-the local factors at the points outside `T`
+By the Euler product of `ℱ` (`theorem-trace-formula-euler-product--4`), split into the Euler product
+over `T` and the local factors at the points outside `T`
 (`AlgebraicGeometry.WeilGroup.eulerSeries_eq_tprod_mul_prod`), the product `B` of the local
 polynomials outside `T` satisfies `L (T, ℱ, T) · ι det (1 - F T ∣ H_c²) = P · B`. The eigenvalues
 on `H_c²` are bounded through the point `x₀`
@@ -354,10 +355,11 @@ theorem frobeniusWeight_le_add_two_of_isAffine [IsAffine C] [SmoothOfRelativeDim
   rw [Scheme.Hom.pointNorm_eq_pow_degreeOver p s.2]
   exact frobeniusWeight_le_add_two_of_le_norm hα0 he hz hzR
 
-/-- Step 4 of `lem-wf-boundary-semicontinuity` for a lisse sheaf on an affine curve: sharpening by
-tensor powers. Applying `AlgebraicGeometry.WeilGroup.frobeniusWeight_le_add_two_of_isAffine` to
-the iterated tensor squares `ℱ ^ ⊗ 2 ^ k`, of weights at most `2 ^ k β` on `T` and with the local
-eigenvalue `α ^ (2 ^ k)`, gives `wt (α) ≤ β + 2 / 2 ^ k`. -/
+/-- Step 4 of `proposition-weights-j-boundary-points--1` for a lisse sheaf on an affine curve:
+sharpening by tensor powers. Applying
+`AlgebraicGeometry.WeilGroup.frobeniusWeight_le_add_two_of_isAffine` to the iterated tensor squares
+`ℱ ^ ⊗ 2 ^ k`, of weights at most `2 ^ k β` on `T` and with the local eigenvalue `α ^ (2 ^ k)`,
+gives `wt (α) ≤ β + 2 / 2 ^ k`. -/
 theorem frobeniusWeight_le_add_div_two_pow_of_isAffine [IsAffine C]
     [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (k : ℕ) :
     ∀ {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
@@ -389,8 +391,8 @@ theorem frobeniusWeight_le_add_div_two_pow_of_isAffine [IsAffine C]
     push_cast at h
     linarith
 
-/-- `lem-wf-boundary-semicontinuity` for a lisse sheaf on an affine curve: if `ℱ` is lisse on a
-smooth geometrically connected affine curve and has weights at most `β` at the closed points of
+/-- `proposition-weights-j-boundary-points--1` for a lisse sheaf on an affine curve: if `ℱ` is lisse
+on a smooth geometrically connected affine curve and has weights at most `β` at the closed points of
 a nonempty set `T` with finite complement, then it has weights at most `β` everywhere. -/
 theorem frobeniusWeight_le_of_isAffine [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hρ : W.IsLisse l ρ)
@@ -495,8 +497,8 @@ theorem hasWeightsAtMost_of_forall_mem_range [SmoothOfRelativeDimension 1 p]
   exact frobeniusWeight_le_of_isAffine W' l (ρ.comp R.restrict) ι (R.isLisse_comp l hρ) hT hx₀
     hw' _ α hα
 
-/-- Blueprint `cor-wf-unramified-boundary-purity`: Purity at an unramified boundary point, the
-consequence. Also the second assertion of `sk-p-real-semi`.
+/-- Blueprint `corollary-unramified-boundary-point--2`: Purity at an unramified boundary point, the
+consequence. Also the second assertion of `proposition-weights-j-boundary-points`.
 
 A lisse Weil sheaf `𝒢` on a smooth geometrically connected curve `C₀` which is punctually
 `ι`-pure of weight `w` at the closed points of a nonempty open `U₀` is punctually `ι`-pure of

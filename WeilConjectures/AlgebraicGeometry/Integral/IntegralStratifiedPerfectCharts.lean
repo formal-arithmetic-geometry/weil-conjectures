@@ -17,8 +17,11 @@ The stratified-perfect condition gives perfect constant models on the slices of 
 covering sieve of each stratum. Choosing a covering family generating the sieve turns
 them into perfect constant models after inverse image to the covering schemes.
 
-Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.8
-(blueprint: lem-weil-pbc-adic-unlifted-perfect-charts).
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.8
+* Stacks Tags 0997 and 0998
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +47,7 @@ private def terminalIdentity (X : Scheme.{u}) : IsTerminal (ProEt.mk (𝟙 X)) :
       exact (Category.comp_id _).symm.trans hw)
 
 /-- Isomorphic slice restrictions over a weakly etale object give isomorphic inverse
-images to the underlying scheme of that object, composed with the given morphism.
-Source: Stacks Tags 0997 and 0998 (blueprint: lem-weil-pbc-adic-unlifted-perfect-charts). -/
+images to the underlying scheme of that object, composed with the given morphism. -/
 theorem nonempty_adicTowerPullback_comp_iso_of_local {T S : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt)
     {K L : DerivedCategory (pbcModules T R)}
@@ -73,12 +75,7 @@ theorem nonempty_adicTowerPullback_comp_iso_of_local {T S : Scheme.{u}} (g : S �
       (P.app K ≪≫ a ≪≫ (P.app L).symm) ≪≫ s.app L⟩
 
 /-- A stratified-perfect complex has perfect constant models after inverse image to the
-members of a pro-etale cover of each stratum.
-Source: Bhatt--Scholze, Proposition 6.6.11; Stacks Tags 0997 and 0998
-(blueprint: lem-weil-pbc-adic-unlifted-perfect-charts).
-Proof: choose a covering family generating each covering sieve of the stratification;
-each member is a weakly etale object in the sieve, where the slice restrictions are
-isomorphic, and slice restriction is the inverse image to that member. -/
+members of a pro-etale cover of each stratum. -/
 theorem IsIntegralStratifiedPerfect.exists_cover_charts (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (K : DerivedCategory (pbcModules T (pbcAdicCompletion T d)))

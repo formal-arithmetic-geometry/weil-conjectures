@@ -119,7 +119,6 @@ end AffineLine
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- Instance search for the (co)kernels in the category of sheaves of modules is slow.
 /-- The `ψ`-isotypic component `ℒ_ψ` of `AS_* ℚ̄_ℓ` becomes the constant sheaf `ℚ̄_ℓ` after
 pullback along the geometric Artin–Schreier map: there the projector `e_ψ` factors as an

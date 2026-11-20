@@ -10,7 +10,7 @@ public import Mathlib.Algebra.GroupWithZero.Units.Basic
 
 /-! # Transport of invertible integral scalar endomorphisms
 
-Source: canonical q^(-d) normalization of det-sp-purity-coefficient-change.
+Source: canonical q^(-d) normalization of proposition-compatibility-purity-change-coefficients.
 -/
 
 @[expose] public section

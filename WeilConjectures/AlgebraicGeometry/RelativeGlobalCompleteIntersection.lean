@@ -15,7 +15,7 @@ public import Mathlib.Topology.KrullDimension
 # Relative global complete intersections
 
 Source: Stacks Project, Algebra, Definition Tag 00SP
-(blueprint: def-weil-pbc-relative-global-complete-intersection).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -26,7 +26,7 @@ namespace Algebra
 polynomial presentation whose nonempty fibres all have the expected dimension.
 If `c > n`, this forces every fibre to be empty.
 Source: Stacks Project, Algebra, Definition Tag 00SP
-(blueprint: def-weil-pbc-relative-global-complete-intersection).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 def IsRelativeGlobalCompleteIntersection {R S : Type*} [CommRing R] [CommRing S]
     (f : R →+* S) : Prop :=

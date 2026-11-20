@@ -16,11 +16,11 @@ Rees algebra `R[t, I t⁻¹]` if and only if `xⱼ ∈ I^{-j}` for all `j` (with
 multiple of `t` (`Ideal.mem_span_extendedReesAlgebraT_of_coeff_mem`).
 
 We use this to show the algebraic core of Varshavsky's lemma on contracting correspondences
-(blueprint `det-tf-cone-zero-sections`): let `φ : R ⟶ S` be a ring map and `J` an ideal of `S`
-with `L = I S ⊆ J` and `L^n ⊆ J^{n+1}` for some `n ≥ 1`. Then the induced map of associated graded
-rings `gr_I R = R[t, I t⁻¹] / t ⟶ gr_J S` sends the kernel of the augmentation `gr_I R ⟶ R / I`
-(the irrelevant ideal `gr_I^{>0} R`) to nilpotent elements: their `n`-th powers vanish
-(`Ideal.pow_extendedReesAlgebraMap_mem_span_extendedReesAlgebraT`).
+(blueprint `lemma-normal-cones-contracting-ideals`): let `φ : R ⟶ S` be a ring map and `J` an ideal
+of `S` with `L = I S ⊆ J` and `L^n ⊆ J^{n+1}` for some `n ≥ 1`. Then the induced map of associated
+graded rings `gr_I R = R[t, I t⁻¹] / t ⟶ gr_J S` sends the kernel of the augmentation
+`gr_I R ⟶ R / I` (the irrelevant ideal `gr_I^{>0} R`) to nilpotent elements: their `n`-th powers
+vanish (`Ideal.pow_extendedReesAlgebraMap_mem_span_extendedReesAlgebraT`).
 -/
 
 @[expose] public section

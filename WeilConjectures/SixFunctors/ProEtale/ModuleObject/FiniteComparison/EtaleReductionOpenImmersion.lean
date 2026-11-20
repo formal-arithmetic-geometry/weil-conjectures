@@ -20,7 +20,7 @@ Write `red_X : Dᵇc(X)⟦𝒪_E⟧ ⥤ D(X_ét, 𝒪_E ⧸ ℓⁿ)` for the red
 étale site (`ProEtale.CondensedRing.etaleReduction`). This file proves that an open immersion
 `j : U ⟶ X` has a reduction comparison for `Rj_!` and `Rj^!`
 (`ProEtale.CondensedRing.hasEtaleReductionLowerShriekIso_of_isOpenImmersion`), the open-immersion
-case of blueprint `det-prop-scalar-six-exceptional`.
+case of blueprint `lemma-change-coefficients-exceptional-inverse-image`.
 
 ## Strategy
 
@@ -119,10 +119,10 @@ noncomputable irreducible_def etaleReductionUpperShriekIsoOfIsOpenImmersion :
       (Etale.leftDerivedUpperStarIsoMapDerivedCategory _ j.left ≪≫
         (Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion _ j.left).symm)
 
-/-- Blueprint `det-prop-scalar-six-exceptional`, open-immersion case, for the coefficient map
-`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site. **Open immersions have a reduction comparison for
-`Rj_!` and `Rj^!`**: there is an isomorphism `γ : Rj_! ⋙ red_X ≅ red_U ⋙ Rj_!` whose transpose
-under `Rj_! ⊣ Rj^!` is an isomorphism.
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image`, open-immersion case, for the
+coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site. **Open immersions have a reduction
+comparison for `Rj_!` and `Rj^!`**: there is an isomorphism `γ : Rj_! ⋙ red_X ≅ red_U ⋙ Rj_!` whose
+transpose under `Rj_! ⊣ Rj^!` is an isomorphism.
 
 The comparison `γ` is the inverse of the transpose `θ` of
 `etaleReductionUpperShriekIsoOfIsOpenImmersion`, so that its own transpose is invertible by

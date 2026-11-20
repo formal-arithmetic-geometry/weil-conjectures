@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 /-!
 # Closed symmetric tensor product of sheaves
 
-Source: the Weil conjectures blueprint, `sec-proetale-coefficients`,
+Source: the Weil conjectures blueprint, `chap-The-pro-etale-site`,
 `sk-def-sfb-sheaf-tensor/_section.md` and its proof
 (auxiliary; not a blueprint node).
 
@@ -41,7 +41,7 @@ Source: blueprint `sk-def-sfb-sheaf-tensor`, proof, Presheaves paragraph
 
 Proof: closedness makes left tensor a left adjoint; symmetry gives the same for right
 tensor. Both preserve zero objects and finite coproducts by
-`lem-weil-pbc-left-adjoint-preserves-colimits`. In an abelian category these are
+`situation-conventions`. In an abelian category these are
 biproducts. Preservation of the injections and zero maps forces preservation of the
 projections, then diagonals and codiagonals. The biproduct formula for addition therefore
 shows that both tensor functors are additive.

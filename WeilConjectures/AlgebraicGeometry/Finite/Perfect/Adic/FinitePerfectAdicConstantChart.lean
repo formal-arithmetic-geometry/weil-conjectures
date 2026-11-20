@@ -216,7 +216,6 @@ private def chartConstantsIso
 
 attribute [local irreducible] chartConstantsIso
 
-set_option maxHeartbeats 400000 in
 -- Four inverse-image comparisons and their sheafification instances are pasted here.
 private lemma chartConstantsIso_coefficient
     (X : Scheme.{t}) (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)

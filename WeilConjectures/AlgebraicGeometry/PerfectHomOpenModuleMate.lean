@@ -74,8 +74,47 @@ def perfectHomOpenModuleMate {S Y T : Scheme.{u}}
     (schemeOpenModuleAdjunction Y B)).symm
       (TwoSquare.mk _ _ _ _ (perfectHomOpenModuleComposition s B r).hom))
 
-set_option maxHeartbeats 600000 in
--- Sectionwise evaluation unfolds the module-restriction adjunction and comparisons.
+private theorem isIso_open_module_mate_of_isPullback
+    {X X' Y : Scheme.{u}} (B : Y.Opens) (p : X ⟶ Y) (p' : X' ⟶ B.toScheme)
+    (i : X' ⟶ X) [IsOpenImmersion i] (h : IsPullback p' i B.ι p) :
+    let c := Scheme.Modules.pushforwardComp i p ≪≫
+      Scheme.Modules.pushforwardCongr h.w.symm ≪≫
+      (Scheme.Modules.pushforwardComp p' B.ι).symm
+    IsIso ((mateEquiv (Scheme.Modules.restrictAdjunction i)
+      (schemeOpenModuleAdjunction Y B)).symm (TwoSquare.mk _ _ _ _ c.hom)) := by
+  let c := Scheme.Modules.pushforwardComp i p ≪≫
+    Scheme.Modules.pushforwardCongr h.w.symm ≪≫
+    (Scheme.Modules.pushforwardComp p' B.ι).symm
+  let α := (mateEquiv (Scheme.Modules.restrictAdjunction i)
+    (schemeOpenModuleAdjunction Y B)).symm (TwoSquare.mk _ _ _ _ c.hom)
+  change IsIso α
+  have (M : X.Modules) : IsIso (α.app M) := by
+    apply Scheme.Modules.Hom.isIso_iff_isIso_app.mpr
+    intro W
+    have hW := IsOpenImmersion.image_preimage_eq_preimage_image_of_isPullback h W
+    have hh : Scheme.Modules.Hom.app (α.app M) W =
+        M.val.presheaf.map (eqToHom hW).op := by
+      -- Name the restriction arrows before unfolding the mate on sections.
+      let V := B.ι ''ᵁ W
+      let U := p ⁻¹ᵁ V
+      have hc : p' ⁻¹ᵁ (B.ι ⁻¹ᵁ V) = i ⁻¹ᵁ U :=
+        congrArg (fun k : X' ⟶ Y ↦ k ⁻¹ᵁ V) h.w
+      let a := (homOfLE (i.image_preimage_le U)).op
+      let b := (i.opensFunctor.map (eqToHom hc)).op
+      let d := (i.opensFunctor.map ((TopologicalSpace.Opens.map p'.base).map
+        (eqToHom (B.ι.preimage_image_eq W).symm))).op
+      have hm : M.val.presheaf.map a ≫ M.val.presheaf.map b ≫ M.val.presheaf.map d =
+          M.val.presheaf.map (eqToHom hW).op := by
+        rw [← Functor.map_comp, ← Functor.map_comp]
+        congr 1
+      ext x
+      change M.val.presheaf.map d
+        (M.val.presheaf.map b (M.val.presheaf.map a x)) = _
+      exact ConcreteCategory.congr_hom hm x
+    rw [hh]
+    infer_instance
+  exact NatIso.isIso_of_isIso_app _
+
 /-- The ordinary open-square mate is the sectionwise direct-image/restriction identity.
 Source: Stacks Project, Cohomology, Tag 08FE, proof of
 `lemma-restrict-direct-image-open`.
@@ -95,30 +134,8 @@ for the full open it is the identity formula. No derived category is used. -/
 theorem perfectHomOpenModuleMate_isIso {S Y T : Scheme.{u}}
     (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S) :
     IsIso (perfectHomOpenModuleMate s B r) := by
-  have (M : (pullback s r).Modules) : IsIso ((perfectHomOpenModuleMate s B r).app M) := by
-    dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
-    have : IsIso ((SheafOfModules.forget _).map ((perfectHomOpenModuleMate s B r).app M)) := by
-      have : IsIso ((PresheafOfModules.toPresheaf _).map
-          ((SheafOfModules.forget _).map ((perfectHomOpenModuleMate s B r).app M))) := by
-        have (W : B.toScheme.Opensᵒᵖ) : IsIso
-            (((PresheafOfModules.toPresheaf _).map
-              ((SheafOfModules.forget _).map ((perfectHomOpenModuleMate s B r).app M))).app W) := by
-          have hW := IsOpenImmersion.image_preimage_eq_preimage_image_of_isPullback
-            (perfectHomOpenSquare s B r) W.unop
-          have hh : (Scheme.Modules.Hom.app ((perfectHomOpenModuleMate s B r).app M) W.unop) =
-              M.val.presheaf.map (eqToHom hW).op := by
-            ext x
-            change M.val.presheaf.map _
-              (M.val.presheaf.map _ (M.val.presheaf.map _ x)) = _
-            simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
-            congr 1
-          change IsIso (Scheme.Modules.Hom.app ((perfectHomOpenModuleMate s B r).app M) W.unop)
-          rw [hh]
-          infer_instance
-        exact NatIso.isIso_of_isIso_app _
-      exact isIso_of_reflects_iso _ (PresheafOfModules.toPresheaf _)
-    exact isIso_of_reflects_iso _ (SheafOfModules.forget _)
-  exact NatIso.isIso_of_isIso_app _
+  exact isIso_open_module_mate_of_isPullback B (pullback.fst s r)
+    (pullback.fst (B.ι ≫ s) r) (perfectHomOpenMap s B r) (perfectHomOpenSquare s B r)
 
 end
 end AlgebraicGeometry

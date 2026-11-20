@@ -60,8 +60,8 @@ namespace AlgebraicGeometry
 morphism `g : Z ⟶ Y` and an open immersion `i : X ⟶ Z` such that `f = i ≫ g`.
 
 The open immersion `i` is not required to be quasi-compact, unlike in the blueprint
-(`def-nagata-compactification`) and in Stacks/Conrad, where `j` is a quasi-compact open
-immersion. When `f` is quasi-compact, which is the case in all uses of Nagata's theorem, the
+(`definition-compactification-refinement--1`) and in Stacks/Conrad, where `j` is a quasi-compact
+open immersion. When `f` is quasi-compact, which is the case in all uses of Nagata's theorem, the
 two notions agree: `i` is then automatically quasi-compact
 (`AlgebraicGeometry.Compactification.quasiCompact_openImmersion_iff`). The weaker
 requirement is what lets a compactification be restricted along an arbitrary open immersion
@@ -224,7 +224,7 @@ variable {X Y : Scheme.{u}}
 
 /-- A morphism `f : X ⟶ Y` has a compactification if it factors as an open
 immersion followed by a proper morphism, i.e. `f` is *compactifiable*, such a factorization
-being a `Compactification f`. This is blueprint `def-nagata-compactifiable`. -/
+being a `Compactification f`. This is blueprint `definition-compactification-refinement--1`. -/
 class HasCompactification (f : X ⟶ Y) : Prop where
   /-- Some compactification of `f` exists. -/
   nonempty_compactification : Nonempty (Compactification f)

@@ -61,8 +61,12 @@ public import WeilConjectures.RingTheory.ProperBaseChange.IndEtaleStability
 /-!
 # Coherence of pro-etale pullback stalk comparisons
 
-Source: Stacks Project, Tags 05V1 and 0F4F, and proetale.tex Tag 0993
-(blueprint: lem-trf-proetale-pullback-stalk-coherence).
+## References
+
+* Stacks Tags 0F4F and 0993
+* Stacks Tags 0F6B and 0F4F
+* Stacks Tags 05V1 and 09A5
+* Stacks Tag 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -82,8 +86,7 @@ private noncomputable instance (priority := 10000) fixedAbelianStalkSite (T : Sc
     u + 1, u + 2, u + 1} _
 
 /-- The stalk functor on cochain complexes, obtained term by term from the
-finite-coefficient geometric stalk.  Source: Stacks Tags 0F4F and 0993
-(blueprint: lem-trf-proetale-pullback-stalk-coherence). -/
+finite-coefficient geometric stalk. -/
 noncomputable def proEtaleFiniteCoefficientStalkComplexFunctor
     {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (u : Spec (.of Ω) ⟶ T) (A : Type u) [CommRing A] :
@@ -91,9 +94,7 @@ noncomputable def proEtaleFiniteCoefficientStalkComplexFunctor
       CochainComplex (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) ℤ :=
   (finiteCoefficientModuleStalkFunctor u A).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- The actual additive colimit coprojection, viewed in the stalk with constant scalars.
-Source: Stacks Tags 0F6B and 0F4F
-(blueprint: lem-trf-proetale-pullback-stalk-coherence). -/
+/-- The actual additive colimit coprojection, viewed in the stalk with constant scalars. -/
 def proEtaleCoefficientModuleGerm {T : Scheme.{u}} {Ω : Type u}
     [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ T)
     (A : Type u) [CommRing A]
@@ -104,9 +105,7 @@ def proEtaleCoefficientModuleGerm {T : Scheme.{u}} {Ω : Type u}
 
 /-- Both representative formulas defining the canonical comparison. The first quantifies
 all comma representatives `(P, theta, a)`; the equality of lifts says that `N` is their
-projected pointed neighbourhood. The second is the inverse formula on unit germs.
-Source: Stacks Tags 05V1 and 0F4F
-(blueprint: lem-trf-proetale-pullback-stalk-coherence). -/
+projected pointed neighbourhood. The second is the inverse formula on unit germs. -/
 def ProEtalePullbackStalkGermNormalized (A : Type u) [CommRing A]
     {T S : Scheme.{u}} (t : T ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ T)
@@ -377,17 +376,7 @@ private theorem pullbackStalkInverseLinear (A : Type u) [CommRing A]
   exact ⟨e, hi⟩
 
 /-- The normalized comparison exists uniquely; this fixes its data before any coherence
-assertion. Source: Stacks Tags 05V1 and 0F4F
-(blueprint: lem-trf-proetale-pullback-stalk-coherence).
-Proof: apply `proEtaleInverseImage_abelianStalk` to the underlying abelian sheaf.
-Sheafification does not change its stalk by `proEtaleGeometricStalk_sheafification`.
-The two colimit maps send `(P,theta,a)` to the projected germ and a germ to its
-pullback-unit section. Restriction relations make both maps well defined; the pointed
-arrow theta proves the second composite is the identity. Constant scalars are preserved
-by the specified coefficient comparison, so these maps are A-linear. The unit is the
-normalized module adjunction unit. A module morphism acts only on a, giving naturality.
-Every stalk element is represented after sheafification by such a germ; hence the first
-formula determines every component, proving uniqueness. -/
+assertion. -/
 theorem proEtalePullbackStalkComparison_existsUnique (A : Type u) [CommRing A]
     {T S : Scheme.{u}} (t : T ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ T) :
@@ -472,8 +461,7 @@ theorem proEtalePullbackStalkComparison_existsUnique (A : Type u) [CommRing A]
       (he M N.unop (pairedLift t x N.unop) a (pairedLift_fst t x N.unop)).symm
 
 /-- The unique comparison specified on all represented germs, not a choice of an
-unnormalized isomorphism. Source: Stacks Tags 05V1 and 0F4F
-(blueprint: lem-trf-proetale-pullback-stalk-coherence). -/
+unnormalized isomorphism. -/
 def proEtalePullbackStalkComparison (A : Type u) [CommRing A]
     {T S : Scheme.{u}} (t : T ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ T) :
@@ -546,13 +534,7 @@ private theorem identityDirect_hom (A : Type u) [CommRing A] (T : Scheme.{u})
   rfl
 
 /-- The identity-pullback comparison is uniquely fixed by its inverse, the unit
-followed by restriction along the diagonal. Source: Stacks Tags 05V1 and 09A5
-(blueprint: lem-trf-proetale-pullback-stalk-coherence).
-Proof: inverse image for the identity is the identity left Kan extension followed by
-sheafification. The inverse is its unit restricted along U to U times_T T. The comma
-universal property and the sheaf axiom show this is an isomorphism. The coefficient
-comparison preserves constants and the tensor unit, so this is A-linear and natural.
-The formula fixes its inverse sectionwise and therefore determines the isomorphism. -/
+followed by restriction along the diagonal. -/
 theorem proEtaleStalkIdentityPullback_existsUnique (A : Type u) [CommRing A]
     (T : Scheme.{u}) :
     ∃! e : proEtaleConstantRingPullback A (𝟙 T) ≅
@@ -587,17 +569,14 @@ theorem proEtaleStalkIdentityPullback_existsUnique (A : Type u) [CommRing A]
       rw [he]
       exact (identityDirect_hom A T _ V.unop _).symm)
 
-/-- The canonical identity-pullback isomorphism with its diagonal-unit normalization.
-Source: Stacks Tags 05V1 and 09A5
-(blueprint: lem-trf-proetale-pullback-stalk-coherence). -/
+/-- The canonical identity-pullback isomorphism with its diagonal-unit normalization. -/
 def proEtaleStalkIdentityPullback (A : Type u) [CommRing A] (T : Scheme.{u}) :
     proEtaleConstantRingPullback A (𝟙 T) ≅
       𝟭 (proEtaleRingModules T (proEtaleConstantRing T A)) :=
   (proEtaleStalkIdentityPullback_existsUnique A T).exists.choose
 
 /-- The canonical identity comparison descended termwise, including the localization
-identity unitor. Source: Stacks Tag 0D6D
-(blueprint: lem-trf-proetale-pullback-stalk-coherence). -/
+identity unitor. -/
 def proEtaleStalkDerivedIdentityPullback (A : Type u) [CommRing A] (T : Scheme.{u}) :
     proEtaleConstantRingDerivedPullback A (𝟙 T) ≅ 𝟭 (proEtaleDerivedCategory T A) :=
   Functor.mapDerivedCategoryNatIso (proEtaleStalkIdentityPullback A T) ≪≫
