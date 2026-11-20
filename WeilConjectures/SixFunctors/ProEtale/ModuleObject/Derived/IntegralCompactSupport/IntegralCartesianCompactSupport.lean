@@ -503,8 +503,8 @@ private theorem cartesianComparisons_compatible
 set_option linter.unusedVariables false in
 /-- Cartesian base change with the total-derived open adjunction normalization.
 
-Source: blueprint det-sf-comp-composition-base-change, proof steps 1--8,
-and det-prop-int-brown-construction step 7.
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proof steps 1--8,
+and proposition-construction-independence-rf-shriek step 7.
 (blueprint: lem-sfb-total-derived-cartesian-compact-support).
 
 Proof: the proper leg of the base-changed compactification is already the literal

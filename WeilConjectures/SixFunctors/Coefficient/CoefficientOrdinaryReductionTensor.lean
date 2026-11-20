@@ -228,7 +228,6 @@ theorem coefficientEvaluationTensorIso_naturality (n : ℕ)
   rw [← hβ, ← hβ]
   exact h
 
-set_option maxHeartbeats 800000 in
 -- Instantiating the generic naturality checks the concrete scalar extension interfaces.
 /-- The ordinary scalar tensor comparison is natural in both complexes.
 Source: Stacks 03EK, 07A4. -/

@@ -100,7 +100,6 @@ lemma commShift_curriedTensor_flip_map {X X' : P.FullSubcategory} (g : X ⟶ X')
 
 omit [∀ X : C, ((curriedTensor C).obj X).CommShift A] in
 set_option synthInstance.maxSize 4096 in
-set_option synthInstance.maxHeartbeats 1000000 in
 -- the instance problems for the composite functors are large
 /-- The associator `(- ⊗ Y) ⊗ Z ≅ - ⊗ (Y ⊗ Z)` of `P`, natural in its first variable, commutes
 with the shifts if that of `C` does. -/

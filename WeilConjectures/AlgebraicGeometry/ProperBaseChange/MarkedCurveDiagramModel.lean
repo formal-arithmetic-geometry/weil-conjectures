@@ -23,7 +23,16 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteClosedImmersionLocus
 /-!
 # Descent of a marked finite curve diagram before the final shrinking
 
-Source: Stacks Project, Tag 0GK7, diagram descent and marked-open paragraphs.
+## References
+
+* Stacks Project, Tag 0GK7, the paragraphs from reduction of the base through descent of the
+  marked closed immersion
+
+## Implementation details
+
+In `exists_marked_curve_diagram_model` the fibre conditions are only required at points above
+the generic point `η`; the global fibre conditions and surjectivity of the marked opens are left
+to a subsequent shrinking.
 -/
 
 @[expose] public section
@@ -32,34 +41,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Descend the supplied marked diagram, with the required fibre conditions only at
-points above the specified component generic point. The global fibre conditions and
-surjectivity of the marked opens are deliberately left to a subsequent shrinking.
-
-Source: Stacks Project, Tag 0GK7, proof of `lemma-make-good-curves`, the paragraphs
-from reduction of the base through descent of the marked closed immersion.
-(blueprint: lem-weil-pbc-marked-curve-diagram-model)
-
-Proof: Reduce an affine neighbourhood of η. Its generic stalk is its residue field.
-Apply the prescribed purely inseparable generic-cover theorem, and reduce its source.
-The unique point above η has residue field K. Over this reduced cover, take the inverse
-system of affine neighbourhoods of this point. Its limit is Spec K. The finite-family
-object, arrow and equality descent theorems descend the supplied schemes and their
-commuting arrows to one stage. The objects are finitely presented: B is proper smooth
-over a field, A is an open in a Noetherian scheme and is quasi-compact, and L/K is finite.
-Keep the given model X by the cartesian comparison with its generic fibre. Descend
-finiteness and surjectivity of ν, finite etaleness of t, openness of j, and smooth
-properness of p to a common later stage. These properties persist under further base
-change. The target over K is Noetherian, hence W₀ is quasi-compact. Descent of this
-open and of the closed-immersion comparison gives a marked open W on the model.
-Surjectivity of ν makes the comparison a thickening. Its generic inverse image in A_i
-is nonempty, since it is dense and A_i is nonempty. Thus its image contains the point
-of Spec L_i. The cartesian identifications give geometric connectedness and the
-one-dimensional bound at every point of T_i above η. Finally descend each shrinking
-through the finite radicial cover by removing the closed image of its complement.
-For n=0 all component conditions are vacuous; the descended empty-source surjection
-forces the target model to be empty. No final shrinking to control other fibres is used.
--/
+/-- A marked finite curve diagram over the purely inseparable extension `K` of the residue field
+at a generic point `η` of `S` descends to a finite surjective universally injective `V ⟶ U`
+over an open neighbourhood `U` of `η`, with the fibre conditions holding above `η`. -/
 theorem exists_marked_curve_diagram_model
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]
     [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]

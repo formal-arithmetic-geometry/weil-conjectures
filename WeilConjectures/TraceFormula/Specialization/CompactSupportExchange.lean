@@ -17,7 +17,7 @@ public import WeilConjectures.TraceFormula.Specialization.Basic
 Let `c` be an endocorrespondence over `k` (the generic fibre) and `c'` one over `k'` (the special
 fibre), with fixed loci `F` and `F'`, and let `Ψ` be specialization functors between the bounded
 constructible derived categories of the corresponding schemes. In the nearby-cycles formalism
-(blueprint `det-nearby-exchange-maps`) the exceptional exchanges `β_f : Ψ Rf^! ⟶ Rf'^! Ψ` and
+(blueprint `prose-E-15`) the exceptional exchanges `β_f : Ψ Rf^! ⟶ Rf'^! Ψ` and
 the dualizing maps `θ_X : Ψ ω_X ⟶ ω_{X'}` are built from the *compact-support exchanges*
 
 ```
@@ -29,7 +29,7 @@ as their mates for `Rf_! ⊣ Rf^!` (`ProEtale.CondensedRing.exceptionalExchange`
 (`ProEtale.CondensedRing.dualizingExchange`). The proper exchanges `χ_f` are the mates of the
 pullback exchanges `α_f : f'^* Ψ ⟶ Ψ f^*` for `f^* ⊣ Rf_*`.
 
-The two coherences of the trace class (blueprint `sk-lem-tf-nearby-mate-coherences` (4) and (6))
+The two coherences of the trace class (blueprint `sec-Base-change-for-nearby-cycles` (4) and (6))
 follow formally from two properties of `ν`, which in the nearby-cycles formalism hold because `ν`
 is compatible with composition and is the inverse of `χ` for proper maps:
 
@@ -40,7 +40,7 @@ is compatible with composition and is the inverse of `χ` for proper maps:
   (`CategoryTheory.fixedSquare_of_compactSupportExchange`, (6)).
 
 Together with the unit identity, this builds the specialization data `TraceSpecialization` of
-blueprint `sk-prop-tf-trace-specialization` out of pullback and compact-support exchanges
+blueprint `proposition-specialization-trace-class` out of pullback and compact-support exchanges
 (`ProEtale.CondensedRing.Correspondence.TraceSpecialization.ofCompactSupportExchange`).
 
 ## Main definitions
@@ -54,7 +54,7 @@ blueprint `sk-prop-tf-trace-specialization` out of pullback and compact-support 
 ## Main statements
 
 - `ProEtale.CondensedRing.dualizingExchange_eq_comp`: the composition law
-  `θ_F = d'^! θ_X ∘ β_d(ω_X)` (blueprint `det-nearby-exceptional-tensor` (3)).
+  `θ_F = d'^! θ_X ∘ β_d(ω_X)` (blueprint `lemma-compatibilities-base-change-maps` (3)).
 
 -/
 
@@ -82,7 +82,7 @@ variable (ℓ) {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCom
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
 
 /-- The *exceptional exchange* `β_f : Ψ_X Rf^! ⟶ Rf'^! Ψ_Y` of a compact-support exchange
-`ν_f : Rf'_! Ψ_X ⟶ Ψ_Y Rf_!` (blueprint `det-nearby-exchange-maps` (4)): its mate for the
+`ν_f : Rf'_! Ψ_X ⟶ Ψ_Y Rf_!` (blueprint `prose-E-15` (4)): its mate for the
 adjunctions `Rf_! ⊣ Rf^!` and `Rf'_! ⊣ Rf'^!`, that is, the `Rf'_! ⊣ Rf'^!` adjoint of
 `Rf'_! Ψ_X Rf^! ⟶ Ψ_Y Rf_! Rf^! ⟶ Ψ_Y`. -/
 noncomputable def exceptionalExchange (f : X ⟶ Y) (f' : X' ⟶ Y')
@@ -96,7 +96,7 @@ noncomputable def exceptionalExchange (f : X ⟶ Y) (f' : X' ⟶ Y')
     (boundedConstructibleUpperShriekAdjunction ℓ f') ν
 
 /-- The *dualizing map* `θ_X : Ψ_X ω_X ⟶ ω_{X'}` of a compact-support exchange
-`ν : Ra_{X'!} Ψ_X ⟶ Ψ_s Ra_{X!}` for the structure maps (blueprint `det-nearby-exchange-maps`
+`ν : Ra_{X'!} Ψ_X ⟶ Ψ_s Ra_{X!}` for the structure maps (blueprint `prose-E-15`
 (5)): the exceptional exchange `β_{a_X}(ℚ̄_ℓ) : Ψ_X Ra_X^! ℚ̄_ℓ ⟶ Ra_{X'}^! Ψ_s ℚ̄_ℓ`, followed
 by the inverse of the specialization unit `σ_s : ℚ̄_ℓ ≅ Ψ_s ℚ̄_ℓ` of the point. -/
 noncomputable def dualizingExchange
@@ -124,11 +124,12 @@ variable (ℓ) {F X P : Over (Spec (.of k))} [LocallyOfFiniteType F.hom] [QuasiC
   {ΨF : Dᵇc(F.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(F'.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
   {ΨX : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
 
-/-- **Composition law for exceptional exchanges** (blueprint `det-nearby-exceptional-tensor` (3),
-`β_{ad} = d'^! β_a ∘ β_d(a^!)`): if the compact-support exchange `ν` of `d ≫ a` is the composite
-of those of `d` and `a` under the composition isomorphisms of the lower shrieks, then the
-exceptional exchange of `d ≫ a` is the composite of those of `d` and `a` under the composition
-isomorphisms of the exceptional inverse images. -/
+/-- **Composition law for exceptional exchanges** (blueprint
+`lemma-compatibilities-base-change-maps` (3), `β_{ad} = d'^! β_a ∘ β_d(a^!)`): if the
+compact-support exchange `ν` of `d ≫ a` is the composite of those of `d` and `a` under the
+composition isomorphisms of the lower shrieks, then the exceptional exchange of `d ≫ a` is the
+composite of those of `d` and `a` under the composition isomorphisms of the exceptional inverse
+images. -/
 theorem exceptionalExchange_comp_app (d : F ⟶ X) (a : X ⟶ P) (d' : F' ⟶ X') (a' : X' ⟶ P')
     {ΨP : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(P'.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (νd : ΨF ⋙ boundedConstructibleLowerShriek ℓ d' ⟶
@@ -222,10 +223,11 @@ private lemma dualizingExchange_eq_comp_aux (d : F ⟶ X) (d' : F' ⟶ X') {aF :
   rw [hn, reassoc_of% hc]
   simp only [Functor.comp_map, Functor.comp_obj, Category.comp_id]
 
-/-- **The composition law for the dualizing maps** (blueprint `det-nearby-exceptional-tensor`
-(3), `θ_F = d'^! θ_X ∘ β_d(ω_X)`; `sk-lem-tf-nearby-mate-coherences` (4)): if the
-compact-support exchange of `a_F` is the composite of those of `d : F ⟶ X` and of `a_X`, then
-the dualizing map of `F` is `Ψ_F ω_F ≅ Ψ_F Rd^! ω_X ⟶ Rd'^! Ψ_X ω_X ⟶ Rd'^! ω_{X'} ≅ ω_{F'}`. -/
+/-- **The composition law for the dualizing maps** (blueprint
+`lemma-compatibilities-base-change-maps` (3), `θ_F = d'^! θ_X ∘ β_d(ω_X)`;
+`sec-Base-change-for-nearby-cycles` (4)): if the compact-support exchange of `a_F` is the composite
+of those of `d : F ⟶ X` and of `a_X`, then the dualizing map of `F` is
+`Ψ_F ω_F ≅ Ψ_F Rd^! ω_X ⟶ Rd'^! Ψ_X ω_X ⟶ Rd'^! ω_{X'} ≅ ω_{F'}`. -/
 theorem dualizingExchange_eq_comp (d : F ⟶ X) (d' : F' ⟶ X')
     (νd : ΨF ⋙ boundedConstructibleLowerShriek ℓ d' ⟶
       boundedConstructibleLowerShriek ℓ d ⋙ ΨX)
@@ -282,7 +284,7 @@ variable
       boundedConstructibleLowerShriek ℓ (diag X) ⋙ ΨXX)
 
 /-- **The fixed-square identity from compact-support exchanges** (blueprint
-`sk-lem-tf-nearby-mate-coherences` (6)): if `ν_ι`, `ν_Δ` are inverse to the proper exchanges
+`sec-Base-change-for-nearby-cycles` (6)): if `ν_ι`, `ν_Δ` are inverse to the proper exchanges
 `χ_ι`, `χ_Δ` (the mates of `α_ι`, `α_Δ`) and the compact-support exchanges are compatible with
 the composition `cι = Δd`, then
 `Rι'_* β_d ∘ χ_ι ∘ Ψ_C(B) = B' ∘ c'^!(χ_Δ) ∘ β_c(RΔ_*)`. That is, for `M ∈ Dᵇc(X)` the square
@@ -350,7 +352,7 @@ theorem fixedSquare_of_compactSupportExchange_app
 end FixedSquare
 
 /-- The *specialization data built from exchange maps* (blueprint
-`sk-prop-tf-trace-specialization`, `det-nearby-exchange-maps`): given specialization functors
+`proposition-specialization-trace-class`, `prose-E-15`): given specialization functors
 `Ψ_C, Ψ_F, Ψ_X, Ψ_{X×X}` and `Ψ_s` of the point, specialization units `σ_C`, `σ_F` and an
 invertible unit `σ_s`, pullback exchanges `α_ι`, `α_Δ` and compact-support exchanges
 `ν_c, ν_d, ν_ι, ν_Δ` and `ν_X, ν_F` (for the structure maps), the specialization data has

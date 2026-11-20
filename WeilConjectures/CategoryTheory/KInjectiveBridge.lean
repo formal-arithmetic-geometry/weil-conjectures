@@ -14,7 +14,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResol
 /-!
 # The K-injective bridge
 
-Source: Weil conjectures blueprint, sec-abelian-varieties, cor-pqf-proper-quasifinite-finite,
+Source: Weil conjectures blueprint, chap-Abelian-varieties, cor-pqf-proper-quasifinite-finite,
 def-sp-kinjective-bridge (blueprint: def-sp-kinjective-bridge).
 
 ## Main definitions
@@ -28,7 +28,7 @@ def-sp-kinjective-bridge (blueprint: def-sp-kinjective-bridge).
 * `CategoryTheory.Functor.rightDerivedCohomologyWithResolution`: `R^p v(K) := H^p(v(I))`.
 
 K-injectivity uses Mathlib's `CochainComplex.IsKInjective`, as in
-`lem-sfb-grothendieck-k-injective`: every map from an acyclic complex is null-homotopic.
+`prose-03-02`: every map from an acyclic complex is null-homotopic.
 The Hom-complex formulation follows by applying this in every shifted degree.
 Independence of the choice and agreement with `Functor.rightDerived` on objects in degree zero
 are deferred to `lem-sp-kinjective-computes`; the definitions retain the chosen resolution.
@@ -44,7 +44,7 @@ namespace CochainComplex
 
 /-- A K-injective resolution consists of a complex `I`, a quasi-isomorphism `K ⟶ I`, and
 K-injectivity of `I`, using the generic Mathlib notions underlying the étale specialization
-`lem-sfb-grothendieck-k-injective`.
+`prose-03-02`.
 Source: blueprint def-sp-kinjective-bridge (blueprint: def-sp-kinjective-bridge). -/
 structure KInjectiveResolutionChoice {C : Type u₁} [Category.{v₁} C] [Abelian C]
     (K : CochainComplex C ℤ) where

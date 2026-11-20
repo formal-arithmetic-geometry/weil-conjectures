@@ -1558,7 +1558,7 @@ Proof (the node's eleven steps):
    give the identity roof when both original complexes are K-injective.
 7. The family identity gives `H(X,Y[n]) ≅ H(X,Y)[n]`: both differentials are
    `(-1)^n d_Y f - (-1)^s f d_X`. Shift the augmentation and use the preceding comparison.
-8. Use lem-sfb-derived-tensor-modules-derived for the canonical lax localization map;
+8. Use prose-03-02 for the canonical lax localization map;
    the module Grothendieck and functorial-flat-resolution inputs are supplied by
    lem-weil-pbc-ring-modules-grothendieck-abelian and
    lem-sfb-abelian-functorial-flat-resolution. Define resolved composition by ordinary

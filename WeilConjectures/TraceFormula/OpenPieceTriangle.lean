@@ -20,7 +20,7 @@ coefficient `u^U : Lg^* j_! Lj^* K ⟶ j_! Lj^* K` is compatible with the counit
 ε ∘ u^U = v ∘ Lg^* ε.
 ```
 This is the first square of the morphism of open–closed triangles induced by `v` (blueprint
-`prop-trf-trace-class-additivity`, proof of item 2, step (a)).
+`proposition-additivity-trace-classes--2`, proof of item 2, step (a)).
 
 * `ProEtale.CondensedRing.map_counit_comp_eq_openSquareExchange_hom_comp`: the general statement
   for any cartesian square `g_U ≫ j = j' ≫ g` of open immersions and any `v : Lg^* K ⟶ L`. Both
@@ -135,9 +135,10 @@ variable (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) {h : X ⟶ X}
   (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
   {x : RationalPoint X} (hx : x ≫ h = x)
 
-/-- **The open piece coefficient and the counit** (blueprint `prop-trf-trace-class-additivity`,
-proof of item 2, step (a)): `ε ∘ u^U = v ∘ Lh^* ε` for the counit `ε : j_! Lj^* K ⟶ K` of the
-open complement `j : X ∖ {x} ⟶ X` of a rational point fixed by `h`. -/
+/-- **The open piece coefficient and the counit** (blueprint
+`proposition-additivity-trace-classes--2`, proof of item 2, step (a)): `ε ∘ u^U = v ∘ Lh^* ε` for
+the counit `ε : j_! Lj^* K ⟶ K` of the open complement `j : X ∖ {x} ⟶ X` of a rational point fixed
+by `h`. -/
 @[reassoc]
 theorem graphOpenPieceCoeff_comp_counit :
     graphOpenPieceCoeff K v hx ≫
@@ -180,9 +181,10 @@ namespace WeilBoundedConstructible
 
 variable {Φ : X ⟶ X} (K : WeilBoundedConstructible ℓ Φ)
 
-/-- **The open piece coefficient and the counit** (blueprint `prop-trf-trace-class-additivity`,
-proof of item 2, step (a)): `ε ∘ u^U = φ_m ∘ LΦ_m^* ε` for the counit `ε : j_! Lj^* K ⟶ K` of an
-open immersion `j` and a cartesian square `Φ_{m,U} ≫ j = j ≫ Φ_m`. -/
+/-- **The open piece coefficient and the counit** (blueprint
+`proposition-additivity-trace-classes--2`, proof of item 2, step (a)): `ε ∘ u^U = φ_m ∘ LΦ_m^* ε`
+for the counit `ε : j_! Lj^* K ⟶ K` of an open immersion `j` and a cartesian square
+`Φ_{m,U} ≫ j = j ≫ Φ_m`. -/
 @[reassoc]
 theorem openPieceCoeff_comp_counit (m : ℕ) {ΦU : U ⟶ U}
     (sq : IsPullback ΦU j j (frobeniusIterate Φ m)) :

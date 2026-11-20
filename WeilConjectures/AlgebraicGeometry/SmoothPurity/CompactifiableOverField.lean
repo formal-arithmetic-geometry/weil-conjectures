@@ -46,8 +46,8 @@ and quasi-compact (lem-weil-pbc-affine-scheme-qcqs), hence Noetherian.
 Step 2: finite type over this spectrum makes `S` Noetherian
 (lem-weil-pbc-finite-type-over-noetherian). In particular it is quasi-compact and locally
 Noetherian, hence quasi-separated (lem-weil-pbc-locally-noetherian-quasi-separated).
-Step 3: apply thm-nagata-compactification to the separated finite-type morphism `f` and
-this quasi-compact quasi-separated target. Its compactification witnesses the conclusion.
+Step 3: apply theorem-nagata-s-compactification-theorem--1 to the separated finite-type morphism `f`
+and this quasi-compact quasi-separated target. Its compactification witnesses the conclusion.
 This assertion places no restriction on arbitrary morphisms used for base change. -/
 theorem hasCompactification_of_finiteType_over_field
     (k : Type u) [Field k] (X S : Scheme.{u})

@@ -39,7 +39,7 @@ Proof:
    precomposition with base change and its adjunction unit is the pulled-back section.
 2. Covers over `U` remain covers over `X`, and fibre products agree. Thus restriction
    preserves sheaves. Base change preserves sheaves by
-   lem-weil-pbc-etale-covering-base-change and lem-weil-pbc-etale-base-change-finite-limits.
+   lem-weil-pbc-etale-covering-base-change and situation-conventions.
 3. Apply lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction to composition
    and base change. The resulting restriction/direct-image adjunction has unit
    `G(p_W)` for the projection `p_W : W ×_X U → W`.

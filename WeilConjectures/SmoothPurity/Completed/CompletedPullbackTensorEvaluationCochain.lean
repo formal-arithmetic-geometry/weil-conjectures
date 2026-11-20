@@ -64,7 +64,6 @@ private theorem cochain_comp3_section
       (c.f i).val.app U ((b.f i).val.app U ((a.f i).val.app U x)) := by
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- Section transports in the chosen evaluation functors have large implicit types.
 /-- Ordinary total tensor commutes with the unit-normalized evaluation mate.
 Source: Stacks, sites-cohomology.tex, Tag 07A4, final total-complex comparison;

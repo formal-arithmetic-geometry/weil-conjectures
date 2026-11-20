@@ -48,7 +48,6 @@ private theorem homologyCounit_naturality
   rw [← Functor.map_comp, ← Functor.map_comp]
   exact congrArg H.map ((ε.mapHomologicalComplex (ComplexShape.up ℕ)).naturality l)
 
--- Elaborating sheafification and the mapped homology comparisons requires extra heartbeats.
 private theorem sectionComparison_naturality {Y : Scheme.{u}}
     {A B : CochainComplex Y.Modules ℕ} (l : A ⟶ B) (p : ℕ) :
     (PresheafOfModules.sheafification (𝟙 Y.ringCatSheaf.obj)).map
@@ -74,7 +73,6 @@ private theorem sectionTheta_naturality {Y : Scheme.{u}}
     (𝟙 Y.ringCatSheaf.obj)).homEquiv_naturality_left_square _ _ _ _
       (sectionComparison_naturality l p)
 
-set_option maxHeartbeats 500000 in
 -- Match global sections with top evaluation of the pushforward section complex.
 private theorem topSection_naturality {Z Y : Scheme.{u}} (h : Z ⟶ Y)
     {G : Z.Modules} (R K : InjectiveResolution G) (l : R.cocomplex ⟶ K.cocomplex)
@@ -95,16 +93,9 @@ private theorem topSection_naturality {Z Y : Scheme.{u}} (h : Z ⟶ Y)
     (evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
   have ht := congrArg E.map (sectionTheta_naturality (P.map l) p)
   simp only [Functor.map_comp] at ht
-  unfold Scheme.Modules.resolutionSectionClass
-  simp only [Iso.refl_hom, Category.assoc]
-  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
-  change _ ≫ _ ≫ _ ≫ E.map (Scheme.Modules.sectionCohomologyTheta (P.obj R.cocomplex) p) ≫
-    E.map ((SheafOfModules.forget.{u} Y.ringCatSheaf).map
-      (HomologicalComplex.homologyMap (P.map l) p)) = _
-  rw [← ht]
-  simp only [HomologicalComplex.homologyMap]
-  rw [← ShortComplex.mapHomologyIso_hom_naturality_assoc]
-  erw [CategoryTheory.Category.id_comp]
+  have he := ShortComplex.mapHomologyIso_hom_naturality
+    ((HomologicalComplex.shortComplexFunctor _ (ComplexShape.up ℕ) p).map
+      (U.map (P.map l))) E
   let Γ := RingedSpace.globalSectionsFunctor Z.toRingedSpace
   let : Γ.Additive := RingedSpace.globalSectionsFunctor_additive Z.toRingedSpace
   let T := forget₂ (ModuleCat.{u} ((moduleRings Z.toRingedSpace).obj.obj (op ⊤)))
@@ -112,20 +103,23 @@ private theorem topSection_naturality {Z Y : Scheme.{u}} (h : Z ⟶ Y)
   let L := Γ.mapHomologicalComplex (ComplexShape.up ℕ)
   have hs := ShortComplex.mapHomologyIso_inv_naturality
     ((HomologicalComplex.shortComplexFunctor _ (ComplexShape.up ℕ) p).map (L.map l)) T
-  change _ ≫ ((L.obj R.cocomplex).sc p |>.mapHomologyIso T).inv ≫
-    HomologicalComplex.homologyMap
-      ((T.mapHomologicalComplex (ComplexShape.up ℕ)).map (L.map l)) p ≫ _ = _
-  erw [← reassoc_of% hs]
   have hn := InjectiveResolution.isoRightDerivedObj_hom_naturality
     (𝟙 G) R K l (by simpa only [Category.id_comp] using hl) Γ p
   simp only [CategoryTheory.Functor.map_id, Category.id_comp] at hn
   have hg := congrArg T.map hn
   simp only [Functor.map_comp] at hg
-  erw [← reassoc_of% hg]
-  rfl
+  have hsquare := (CommSq.mk hs.symm).horiz_comp
+    ((CommSq.mk he.symm).horiz_comp (CommSq.mk ht.symm))
+  have hfinal := (Category.assoc (T.map (R.isoRightDerivedObj Γ p).hom) _ _).trans
+    ((congrArg (T.map (R.isoRightDerivedObj Γ p).hom ≫ ·) hsquare.w).trans
+      ((Category.assoc _ _ _).symm.trans (congrArg (· ≫ _) hg.symm)))
+  unfold Scheme.Modules.resolutionSectionClass
+  simp only [Iso.refl_hom, CategoryTheory.Functor.map_id, Category.assoc]
+  erw [Category.id_comp, Category.id_comp]
+  simp only [Category.assoc] at hfinal
+  convert hfinal using 1 <;> rfl
 
 
--- The pullback and stalk types need additional elaboration heartbeats.
 /-- The defined local class map can be computed on the top open using any
 injective resolution of the pulled-back module.
 Source: Stacks Project, Lemma 20.7.3 (Tag 01E4).

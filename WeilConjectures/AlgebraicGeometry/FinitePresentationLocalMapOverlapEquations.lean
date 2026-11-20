@@ -84,7 +84,6 @@ private theorem assocFive {D : Type*} [Category* D] {A B C E F G : D}
 
 -- The preserved signature includes the unused let-bound pullback cover V₀.
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 350000 in
 -- Extra fuel checks the dependent descent-data interfaces without raising the wall-clock limit.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in

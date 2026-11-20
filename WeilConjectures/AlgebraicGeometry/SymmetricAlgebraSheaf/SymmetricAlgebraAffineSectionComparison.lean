@@ -143,8 +143,6 @@ private theorem exists_tildeTensorEquiv {R : CommRingCat.{u}} (M : ModuleCat R)
   rw [ht]
   congr 1
 
-set_option maxHeartbeats 400000 in
--- Elaborating the chart transports compares several section-module scalar structures.
 private theorem exists_sectionEquiv {X : Scheme.{u}} (F : X.Modules)
     [F.IsQuasicoherent] {W : X.Opens} (hW : IsAffineOpen W)
     (V : (Spec Γ(X, W)).affineOpens) :
@@ -179,8 +177,10 @@ private theorem exists_sectionEquiv {X : Scheme.{u}} (F : X.Modules)
   refine ⟨ell.toAddEquiv.symm.trans (t.toAddEquiv.trans β.toAddEquiv), ?_⟩
   intro r a
   change β (t (ell.symm (r • restriction F _ a))) = _
-  rw [← hell, LinearEquiv.symm_apply_apply, TensorProduct.congr_tmul]
-  exact hβ _ _
+  -- Transport the pure-tensor equality directly, avoiding rewrite search through the equivalences.
+  have he : ell.symm (r • restriction F _ a) = r ⊗ₜ[R] a :=
+    (congrArg ell.symm (hell r a)).symm.trans (ell.symm_apply_apply _)
+  exact (congrArg (fun z ↦ β (t z)) he).trans (hβ (f r) a)
 
 private theorem section_induction {X : Scheme.{u}} (F : X.Modules) [F.IsQuasicoherent]
     {U W : X.Opens} (hU : IsAffineOpen U) (hW : IsAffineOpen W) (hUW : U ≤ W)
@@ -212,8 +212,6 @@ private theorem restriction_comp {X : Scheme.{u}} (F : X.Modules)
     restriction F j (restriction F i a) = restriction F (i ≫ j) a := by
   exact (CategoryTheory.congr_fun ((presheaf F).map_comp i j) a).symm
 
-set_option maxHeartbeats 600000 in
--- The affine-basis naturality proof elaborates several equivalent section-module presentations.
 /-- The restricted sectionwise symmetric algebra maps to the tilde of its affine sections,
 on the affine basis, bijectively on each affine open, with composite the unit.
 Source: Stacks Project, Constructions, Lemma 01LN; Algebra, Lemma 0C6F;
@@ -273,23 +271,43 @@ theorem exists_affineSectionComparison {X : Scheme.{u}}
         · intro x y hx hy
           simp only [_root_.map_add, hx, hy]
         · intro r a
-          rw [restriction_smul]
-          erw [restriction_comp F (homOfLE (hW.fromSpec_image_le V.unop.1)).op
-            (hW.fromSpec.opensFunctor.op.map ((inducedFunctor B).op.map j)) a]
+          -- Explicit transports avoid unfolding section-module structures during rewriting.
+          let i := (inducedFunctor B).op.map j
+          let k := hW.fromSpec.opensFunctor.op.map i
           have hi :
               (homOfLE (hW.fromSpec_image_le V.unop.1)).op ≫
-                  hW.fromSpec.opensFunctor.op.map ((inducedFunctor B).op.map j) =
+                  k =
                 (homOfLE (hW.fromSpec_image_le V'.unop.1)).op := Subsingleton.elim _ _
-          rw [hi]
-          erw [hg V'.unop _ a, hg V.unop r a, T.val.map_smul]
+          have hr := (restriction_comp F
+            (homOfLE (hW.fromSpec_image_le V.unop.1)).op k a).trans
+              (congrArg (fun l ↦ restriction F l a) hi)
           have ht := congrArg (fun f ↦ f a)
             (tilde.toOpen_res A V.unop.1 V'.unop.1 ((inducedFunctor B).map j.unop))
-          change T.presheaf.map ((inducedFunctor B).op.map j)
+          change T.presheaf.map i
             (tilde.toOpen A V.unop.1 a) = tilde.toOpen A V'.unop.1 a at ht
-          erw [ht]
-          congr 1
-          exact CategoryTheory.congr_fun
-            (hW.fromSpec.appIso_hom_naturality ((inducedFunctor B).op.map j)) r }
+          have hs := CategoryTheory.congr_fun (hW.fromSpec.appIso_hom_naturality i) r
+          calc
+            g V'.unop (restriction F k
+                (r • restriction F (homOfLE (hW.fromSpec_image_le V.unop.1)).op a)) =
+                g V'.unop ((show Γ(X, hW.fromSpec ''ᵁ V'.unop.1) from X.presheaf.map k r) •
+                  restriction F (homOfLE (hW.fromSpec_image_le V'.unop.1)).op a) :=
+              congrArg (g V'.unop) ((restriction_smul F k r _).trans
+                (congrArg (fun (z : sections F (op (hW.fromSpec ''ᵁ V'.unop.1))) ↦
+                  (show Γ(X, hW.fromSpec ''ᵁ V'.unop.1) from X.presheaf.map k r) • z) hr))
+            _ = (hW.fromSpec.appIso V'.unop.1).hom (X.presheaf.map k r) •
+                (show Γ(T, V'.unop.1) from tilde.toOpen A V'.unop.1 a) := hg V'.unop _ a
+            _ = (show Γ(Spec Γ(X, W), V'.unop.1) from
+                  (Spec Γ(X, W)).presheaf.map i ((hW.fromSpec.appIso V.unop.1).hom r)) •
+                (show Γ(T, V'.unop.1) from
+                  T.presheaf.map i (tilde.toOpen A V.unop.1 a)) :=
+              congrArg₂ (fun (s : Γ(Spec Γ(X, W), V'.unop.1)) (z : Γ(T, V'.unop.1)) ↦
+                s • z) hs ht.symm
+            _ = T.presheaf.map i ((hW.fromSpec.appIso V.unop.1).hom r •
+                (show Γ(T, V.unop.1) from tilde.toOpen A V.unop.1 a)) :=
+              (T.val.map_smul i _ _).symm
+            _ = T.presheaf.map i
+                (g V.unop (r • restriction F (homOfLE (hW.fromSpec_image_le V.unop.1)).op a)) :=
+              congrArg (T.presheaf.map i) (hg V.unop r a).symm }
   refine ⟨γ, ?_, ?_⟩
   · intro V
     exact (g V).bijective

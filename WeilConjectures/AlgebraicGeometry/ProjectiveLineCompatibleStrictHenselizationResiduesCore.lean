@@ -102,7 +102,7 @@ theorem Etale.projectiveLine_compatibleStrictHenselizationResidues_core
 
 /-- A compatible local map can be chosen to induce the specified geometric residue square.
 Source: Stacks Project, Tags 04GU and 04HX.
-(blueprint: compatible-strict-henselization-residue-square).
+(blueprint: proposition-proper-base-change-projective-line--1).
 
 Proof: first use residue-image containment to construct the unique embedding r whose
 composite with the injective map κB → k' equals κA → k → k'. Prove its ring laws

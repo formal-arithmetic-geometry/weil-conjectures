@@ -19,9 +19,9 @@ with internal homs of bounded constructible `ℚ̄_ℓ`-complexes: the compariso
 `Lπ^* RHom(K, M) ⟶ RHom(Lπ^* K, Lπ^* M)`
 (`ProEtale.CondensedRing.ihomUpperStarComparison`) is an isomorphism
 (`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_of_fieldExtension`). This is the
-internal-hom assertion of blueprint `det-pd-generic-closed-hom` (2) for a change of the base
-field; the geometric generic fibre of blueprint `sk-lem-pd-generic-restriction` is such a change
-of base field followed by the weakly étale inclusion of a generic point
+internal-hom assertion of blueprint `lemma-restriction-geometric-generic-fibre` (2) for a change of
+the base field; the geometric generic fibre of blueprint `lemma-restriction-geometric-generic-fibre`
+is such a change of base field followed by the weakly étale inclusion of a generic point
 (`WeilConjectures.PoincareDuality.GenericRestriction.GenericFibre`).
 
 ## Proof
@@ -315,8 +315,8 @@ theorem isIso_ihomUpperStarComparison_of_fieldExtension_of_range_subset (X : Ove
         (boundedConstructible_leftDerivedUpperStar_obj _ ℓ i ⟨K, hK⟩) hN)
 
 /-- **Internal homs commute with a change of the base field** (blueprint
-`det-pd-generic-closed-hom` (2), for the change of the base field `k ⟶ L`): for a separated
-`k`-scheme of finite type `X`, its base change `π : X_L ⟶ X` and bounded constructible
+`lemma-restriction-geometric-generic-fibre` (2), for the change of the base field `k ⟶ L`): for a
+separated `k`-scheme of finite type `X`, its base change `π : X_L ⟶ X` and bounded constructible
 `ℚ̄_ℓ`-complexes `K` and `M` on `X`, the comparison
 `Lπ^* RHom(K, M) ⟶ RHom(Lπ^* K, Lπ^* M)` is an isomorphism. The extension `L / k` may be
 transcendental and inseparable. -/

@@ -68,7 +68,7 @@ private lemma isIso_map_desc_of_isZero_left
 /-- At one positive finite level the actual unit/Chern map is invertible.
 
 Source: `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1), and
-`sk-lem-geo-p1-cohomology`, decomposition (G2).
+`lemma-cohomology-projective-line-trace`, decomposition (G2).
 (blueprint: lem-sfb-diagonal-trace-finite-splitting).
 
 Proof: use the normalized evaluation comparison for the geometric system

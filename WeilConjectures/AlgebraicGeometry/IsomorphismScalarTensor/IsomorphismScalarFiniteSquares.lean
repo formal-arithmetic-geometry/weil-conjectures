@@ -12,8 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.Iso.IsoSectionwiseInverseImage
 
 /-! # Commutative squares for the finite scalar model
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL.
-(blueprint: lem-weil-isomorphism-scalar-finite-model-squares).
+## References
+
+* Stacks Project, Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section
@@ -96,19 +97,11 @@ private theorem finiteRight_ext (n : ℕ)
       exact (_root_.map_add fa z w).trans
         ((congrArg₂ (· + ·) hz hw).trans (_root_.map_add fb z w).symm)
 
-set_option maxHeartbeats 1000000 in
--- On the rebased imports this proof needs more than the default heartbeat limit.
 /--
 The finite quotient and transition maps from the finite formula construction
 satisfy the two naturality squares. The hypotheses include completed normalization
 and the five finite formula predicates; tensor generation identifies the corresponding
 natural transformations. This is strictly the square part of the finite model.
-
-Proof source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL, Steps 5--6.
-Both squares are checked on pure tensors: the quotient square inserts the unit
-and the transition square reduces the two scalar factors. The argument includes
-ramified extensions and does not use surjectivity or flatness.
-(blueprint: lem-weil-isomorphism-scalar-finite-model-squares).
 -/
 theorem scalar_finite_squares
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅

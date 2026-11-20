@@ -32,7 +32,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 /-- Pasting the specified compact-support mate with one normalized boundary refinement.
 
-Source: blueprint det-sf-comp-composition-base-change, proof clause (3);
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proof clause (3);
 lem-sfb-total-derived-cartesian-compact-support, the refinement-pasting equation.
 (blueprint: lem-sfb-total-derived-boundary-exchange).
 

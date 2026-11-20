@@ -89,7 +89,6 @@ noncomputable def derivedExtendScalarsAdjunction :
   (Sheaf.extendScalarsAdjunction (Scheme.ProEt.topology X) φ).derivedAdjunction.ofNatIsoRight
     (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).rightDerivedFunctorIsoMapDerivedCategory
 
-set_option maxHeartbeats 400000 in
 -- the kernel checks the ten isomorphisms of the chain below
 /-- With scalars restricted back to `Λ`, the derived extension of scalars `K ⊗ᴸ_Λ Λ'` of
 pro-étale sheaves is the derived tensor product `K ⊗ᴸ (Λ ⧸ ker φ)_X` with the constant sheaf: on a

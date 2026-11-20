@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCohe
 
 /-! Naturality of the condensed Artin–Schreier character projector under coefficients.
 
-Source: latest blueprint, lem-fd-first-formula proof, coefficient paragraph
+Source: latest blueprint, lemma-fourier-transform-constant-sheaf proof, coefficient paragraph
 (blueprint: lem-fd-unit-punctured-kernel-coefficient-comparison).
 -/
 @[expose] public noncomputable section
@@ -46,7 +46,6 @@ private theorem unitUnderlying
     (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))).X = condensedRingObj Λ X := rfl
 
-set_option maxHeartbeats 400000 in
 -- Explicit coefficient and module-object coercions require additional elaboration.
 /-- Deck translations commute with the coefficient map on pushforwards. -/
 private theorem translationCoefficient

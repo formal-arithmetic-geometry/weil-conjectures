@@ -73,8 +73,18 @@ private theorem perfect_shift (X : Scheme.{u})
     exact ⟨(L.commShiftIso n).app P ≪≫ (shiftFunctor _ n).mapIso e ≪≫
       ((DerivedCategory.Q.commShiftIso n).app K).symm⟩
 
-set_option maxHeartbeats 500000 in
--- The slice-site and open-subscheme derived categories require expensive comparisons.
+-- Transport a zero map through a comparison without unfolding its construction.
+private theorem map_eq_zero_of_comp_iso
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [HasZeroMorphisms C] [HasZeroMorphisms D] [HasZeroMorphisms E]
+    (F : C ⥤ D) (G : D ⥤ E) [G.PreservesZeroMorphisms]
+    (L : C ⥤ E) (e : F ⋙ G ≅ L) {A B : C} (f : A ⟶ B)
+    (hf : F.map f = 0) : L.map f = 0 := by
+  apply (cancel_mono (e.inv.app B)).mp
+  rw [zero_comp, e.inv.naturality]
+  change e.inv.app A ≫ G.map (F.map f) = 0
+  rw [hf, Functor.map_zero, comp_zero]
+
 /-- If every map from a global perfect complex into K vanishes after restriction to a
 quasi-compact open U, every cohomology stalk of K on U is zero.
 Source: Stacks Project, Tags 09IS, 09IM, and the proof of Tag 0E4G.
@@ -123,7 +133,12 @@ theorem perfect_open_support_detection
         SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) :=
       Scheme.Modules.overEquiv U
     let O := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
+    have : O.Additive := Functor.additive_of_preserves_binary_products O
+    have : e.functor.Additive := Functor.additive_of_preserves_binary_products e.functor
     let F := O ⋙ e.functor
+    have : F.Additive := inferInstance
+    have : PreservesFiniteLimits F := comp_preservesFiniteLimits O e.functor
+    have : PreservesFiniteColimits F := comp_preservesFiniteColimits O e.functor
     let L := F.mapDerivedCategory
     have hqc : schemeDerivedQCohProperty U.toScheme (L.obj K.obj) := by
       apply (schemeDerivedQCoh_openRestriction_iff X U K.obj).mpr
@@ -144,14 +159,9 @@ theorem perfect_open_support_detection
           ⟨R, schemeDerivedQCohProperty_of_isPerfect X R hR⟩
         have hβ := htest P hR (ObjectProperty.homMk β)
         change O.mapDerivedCategory.map β = 0 at hβ
-        have hc := (Functor.mapDerivedCategoryCompIso O e.functor).inv.naturality β
-        have hLβ : L.map β = 0 := by
-          apply (cancel_mono ((Functor.mapDerivedCategoryCompIso O e.functor).inv.app
-            K.obj)).mp
-          change L.map β ≫ _ = 0 ≫ _
-          rw [zero_comp, hc]
-          change _ ≫ e.functor.mapDerivedCategory.map (O.mapDerivedCategory.map β) = 0
-          rw [hβ, Functor.map_zero, comp_zero]
+        have hLβ : L.map β = 0 :=
+          map_eq_zero_of_comp_iso O.mapDerivedCategory e.functor.mapDerivedCategory L
+            (Functor.mapDerivedCategoryCompIso O e.functor) β hβ
         rw [← hα]
         change ι ≫ L.map β = 0
         rw [hLβ, comp_zero]

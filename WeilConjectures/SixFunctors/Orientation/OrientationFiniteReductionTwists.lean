@@ -12,7 +12,7 @@ import WeilConjectures.SmoothPurity.Supporting.SignedTwistFirstReduction
 import all WeilConjectures.AlgebraicGeometry.Pur.PurInverseImageScalarComparison
 
 /-! Canonical finite quotient and realization of the completed root lines.
-Source: def-coefficient-twists-detailed
+Source: definition-tate-twists
 (blueprint: def-sf-orientation-finite-reduction-comparisons). -/
 @[expose] public noncomputable section
 set_option autoImplicit false

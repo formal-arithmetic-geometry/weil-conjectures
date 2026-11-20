@@ -94,7 +94,7 @@ Source: Stacks, Tags 04J0 and 09AE
 (blueprint: lem-cbc-tower-open-beta-normalization).
 Proof: conjugate the section-normalized right-adjoint comparison under the composite
 adjunctions (def-weil-pbc-composite-adjunction,
-lem-weil-pbc-conjugate-iso-unit-equation). The iterated-mate formula
+situation-conventions). The iterated-mate formula
 lem-trf-iterated-square-mates identifies its inverse with `singleBetaInv`.
 The transpose formula lem-pur-adjunction-mate-transpose gives precisely the pulled-back
 open unit, so injectivity of the Hom equivalence proves the identification. -/
@@ -362,7 +362,7 @@ and its inverse has the specified open-unit transpose before evaluation.
 Source: Stacks, Tags 015F, 09AE and 04J0
 (blueprint: lem-cbc-tower-open-beta-normalization).
 Proof: extend the sheaf comparison termwise; naturality gives the transition-map and
-chain-map equations. Use lem-weil-pbc-exact-functor-derived-factorization and
+chain-map equations. Use situation-conventions and
 lem-weil-pbc-localization-universal-property (2),(3) to descend the comparison, its
 inverse identities and its transpose equation. The descended units are the specified
 jAdj units, so injectivity of their Hom equivalence identifies the result with beta.

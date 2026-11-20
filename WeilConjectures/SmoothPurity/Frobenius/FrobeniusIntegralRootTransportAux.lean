@@ -153,7 +153,7 @@ private theorem integralTransportScalar_of_tensors
 /-- The additive inverse-image transport of the first completed integral root line.
 
 Source: literature/stacks-project/sites-modules.tex, Tags 03EK and 03EL; expanded DAG
-clause 2 of `def-weil-frobenius-coefficient-twists`.
+clause 2 of `prose-10-21`.
 Proof: finite root comparisons commute with transitions, hence their inverse limit gives
 an additive isomorphism. Tensor presentation transport extends it across the constant
 integral coefficients and the completed coefficient pushout. The resulting additive map

@@ -72,8 +72,6 @@ private theorem comparison_square_cancel
     _ = l ≫ o := ho
     _ = l ≫ p ≫ e := by rw [← h]
 
-set_option maxHeartbeats 1000000 in
--- Elaborating the localized tensor and derived-stalk comparisons needs this budget.
 set_option linter.unusedVariables false in
 -- Keep the original unused local H in the statement unchanged.
 /-- Open restriction transports the normalized tensor comparison on the literal
@@ -161,8 +159,10 @@ theorem exists_singleComplexOpen_termwise_comparison
   let Q := ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapHomologicalComplex (.up ℤ)).obj P
   have hcQ := counit_isIso_kFlat j Q hQ
   refine ⟨hQ, hcQ, ?_⟩
-  obtain ⟨l, hl⟩ := exists_singleComplexOpen_ordinary_comparison
+  have hs := exists_singleComplexOpen_ordinary_comparison
     f f' g g' sq V V' hV' j hj sq₀ P z i
+  let l := hs.choose
+  have hl := hs.choose_spec
   refine ⟨l, ?_⟩
   let K := DerivedCategory.Q.obj P
   let a := (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategoryFactors.symm.app P
@@ -188,7 +188,7 @@ theorem exists_singleComplexOpen_termwise_comparison
     have : (Scheme.Modules.tensorPullback g').Additive := tensorPullbackAdditive g'
     have : (Scheme.Modules.tensorPullback j).Additive := tensorPullbackAdditive j
     dsimp only at hcompat
-    erw [termwise_counit_transport
+    simp only [termwise_counit_transport
       (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
       (D := SheafOfModules.{u} (moduleRings X'.toRingedSpace))
       (Scheme.Modules.tensorPullback g') (derivedPullback g') (counit g') P,
@@ -196,7 +196,8 @@ theorem exists_singleComplexOpen_termwise_comparison
         (C := SheafOfModules.{u} (moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace))
         (D := SheafOfModules.{u} (moduleRings (f' ⁻¹ᵁ V').toScheme.toRingedSpace))
         (Scheme.Modules.tensorPullback j)
-        (derivedPullback j) (counit j) Q] at hcompat
+        (derivedPullback j) (counit j)
+        (((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapHomologicalComplex (.up ℤ)).obj P)] at hcompat
     simpa only [Functor.map_comp, Category.assoc] using
       congrArg (fun t => F₀.map (H₀.map t)) hcompat
   have hν := ν.hom.naturality ε

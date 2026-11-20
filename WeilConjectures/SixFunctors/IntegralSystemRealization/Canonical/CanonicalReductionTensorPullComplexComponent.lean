@@ -11,7 +11,7 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.Canonical
 
 /-! # Degreewise ordinary reduction and total tensor pullback
 
-Source: Stacks 07A4, 07A6 and 0941; lem-fix-operation-reduction, first paragraph.
+Source: Stacks 07A4, 07A6 and 0941; proposition-six-operations-change-coefficients, first paragraph.
 -/
 
 @[expose] public section
@@ -28,7 +28,7 @@ attribute [local irreducible] pullbackTensorCalculus
   HasDerivedCategory.standard SheafOfModules.monoidalCategory
 
 /-- The missing ordinary tensor identity, after taking one cochain degree.
-Source: Stacks 07A4, 07A6 and 0941; lem-fix-operation-reduction, first paragraph.
+Source: Stacks 07A4, 07A6 and 0941; proposition-six-operations-change-coefficients, first paragraph.
 (blueprint: lem-sf-canonical-reduction-tensor-pull-complex-component).
 
 Proof: expand the three strict-system maps in degree `n` and use the finite

@@ -141,7 +141,6 @@ structure IsKunnethRestriction (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f�
   isPullback_N : IsPullback ρN.generic NU.j N.j ρN.total
   isPullback_P : IsPullback ρP.generic PU.j P.j ρP.total
 
-set_option maxHeartbeats 800000 in
 -- the Künneth maps of the two products are large terms
 /-- **Pullback of the Künneth map along morphisms of models with invertible exchanges**: for
 morphisms of models `ρ_M : M' ⟶ M`, `ρ_N : N' ⟶ N`, `ρ_P : P' ⟶ P` compatible with
@@ -153,8 +152,8 @@ morphisms of models `ρ_M : M' ⟶ M`, `ρ_N : N' ⟶ N`, `ρ_P : P' ⟶ P` comp
 Besides restrictions to opens
 (`NearbyCyclesModel.isIso_map_kunnethMap_iff_of_isKunnethRestriction`),
 this is the formal part of the generic-slicing step of Gabber's Künneth formula (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "the composition compatibility in (2)"), where `ρ` is the
-base change to the generic slice of a coordinate and `α_ρ` the slicing identification (2)
+`proposition-external-kunneth-formula-nearby-cycles`, "the composition compatibility in (2)"), where
+`ρ` is the base change to the generic slice of a coordinate and `α_ρ` the slicing identification (2)
 (SGA 4½, [Th. finitude], §3). -/
 theorem isIso_map_kunnethMap_iff_of_isIso_pullbackExchange {φ₁ : P.Hom M f₁ f₁'}
     {φ₂ : P.Hom N f₂ f₂'} {φ₁U : PU.Hom MU e₁ e₁'} {φ₂U : PU.Hom NU e₂ e₂'}
@@ -176,7 +175,6 @@ theorem isIso_map_kunnethMap_iff_of_isIso_pullbackExchange {φ₁ : P.Hom M f₁
   isIso_iff_of_comp_eq (map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁U φ₂U ρM ρN ρP
     htot₁ hgen₁ htot₂ hgen₂ hb₁ hs₁ hb₂ hs₂ A B)
 
-set_option maxHeartbeats 800000 in
 -- the Künneth maps of the two products are large terms
 /-- **Restriction of the Künneth map**: for a restriction of the product along open immersions,
 the pullback `Lρ'^* Π_{A,B}` of the Künneth map to the special fibre of the restriction is

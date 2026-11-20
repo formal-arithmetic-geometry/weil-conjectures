@@ -37,8 +37,20 @@ private theorem transported_morphism_eq
   rw [h, Functor.map_preimage]
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
-set_option maxHeartbeats 500000 in
--- Elaborating the transported derived restriction diagram needs this budget.
+-- Perform the cancellation with abstract functors before instantiating derived restrictions.
+private theorem transported_morphism_comp_eq
+    {C D B : Type*} [Category C] [Category D] [Category B]
+    (r : C ⥤ D) (e : D ⥤ B) [e.Full] [e.Faithful]
+    (T : C ⥤ B) (q : r ⋙ e ≅ T) {F H : C} (f : F ⟶ H)
+    {M N : B} (kF : T.obj F ≅ M) (kH : T.obj H ≅ N) (a : M ⟶ N)
+    (h : r.map f = e.preimage
+      (q.hom.app F ≫ kF.hom ≫ a ≫ kH.inv ≫ q.inv.app H)) :
+    T.map f ≫ kH.hom = kF.hom ≫ a := by
+  have ht : T.map f = kF.hom ≫ a ≫ kH.inv :=
+    transported_morphism_eq r e T q f _ (by simpa only [Category.assoc] using h)
+  rw [ht]
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Compatible local maps between restrictions of two fixed ambient objects glue on
@@ -94,8 +106,7 @@ theorem exists_open_union_hom
       ∃ (α : L.obj G ⟶ L.obj E),
         PW.map α ≫ kW.hom.app E = kW.hom.app G ≫ a ∧
         PV.map α ≫ kV.hom.app E = kV.hom.app G ≫ b := by
-  dsimp only
-  intro a b hab
+  intro L JW JV SW SV sW sV PW PV kW kV a b hab
   let U := (W ⊔ V).ι ⁻¹ᵁ W
   let T := (W ⊔ V).ι ⁻¹ᵁ V
   have hcover : U ⊔ T = ⊤ := by
@@ -106,13 +117,6 @@ theorem exists_open_union_hom
   let := hU
   let := hT
   let := hI
-  let L := (schemeOpenRestriction X (W ⊔ V)).mapDerivedCategory
-  let PW := (schemeOpenOverlapRestriction X
-    (homOfLE le_sup_left : W ⟶ W ⊔ V)).mapDerivedCategory
-  let PV := (schemeOpenOverlapRestriction X
-    (homOfLE le_sup_right : V ⟶ W ⊔ V)).mapDerivedCategory
-  let kW := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_left : W ⟶ W ⊔ V)
-  let kV := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_right : V ⟶ W ⊔ V)
   let a' := eW.functor.preimage
     (qW.hom.app (L.obj G) ≫ kW.hom.app G ≫ a ≫
       kW.inv.app E ≫ qW.inv.app (L.obj E))
@@ -121,18 +125,8 @@ theorem exists_open_union_hom
       kV.inv.app E ≫ qV.inv.app (L.obj E))
   obtain ⟨α, hαW, hαV⟩ := scheme_derived_hom_gluing (W ⊔ V).toScheme U T hcover
     (L.obj G) (L.obj E) a' b' (hcompat G E a b hab)
-  have hW : PW.map α = kW.hom.app G ≫ a ≫ kW.inv.app E := by
-    apply transported_morphism_eq _ eW.functor PW qW α
-    simpa only [a', Category.assoc] using hαW
-  have hV : PV.map α = kV.hom.app G ≫ b ≫ kV.inv.app E := by
-    apply transported_morphism_eq _ eV.functor PV qV α
-    simpa only [b', Category.assoc] using hαV
-  refine ⟨α, ?_, ?_⟩
-  · change PW.map α ≫ kW.hom.app E = kW.hom.app G ≫ a
-    rw [hW]
-    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-  · change PV.map α ≫ kV.hom.app E = kV.hom.app G ≫ b
-    rw [hV]
-    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  exact ⟨α,
+    transported_morphism_comp_eq _ eW.functor PW qW α (kW.app G) (kW.app E) a hαW,
+    transported_morphism_comp_eq _ eV.functor PV qV α (kV.app G) (kV.app E) b hαV⟩
 
 end AlgebraicGeometry.Scheme

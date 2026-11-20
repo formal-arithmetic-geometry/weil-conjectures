@@ -25,7 +25,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Rationalization of coefficient-module complexes
 
-Source: blueprint main-20261015, `def-weil-finite-coefficient-point`, final paragraph;
+Source: blueprint main-20261015, `lemma-perfect-complexes-geometric-point`, final paragraph;
 Stacks Tags 0539, 00HD, 00CX, 015F and 04VG
 (blueprint: lem-weil-coefficient-complex-rationalization).
 

@@ -18,7 +18,8 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology
 /-!
 # Strict-henselization stalk formula
 
-Source: the blueprint of the Weil conjectures, chapter `sec-curve-estimates`, node
+Source: the blueprint of the Weil conjectures, chapter
+`chap-Cohomology-of-torsion-sheaves-on-curves`, node
 `prop-weil-pbc-strict-henselization-stalk-formula` (Stacks Project, Tag 03Q9).
 -/
 

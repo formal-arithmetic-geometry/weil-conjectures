@@ -40,7 +40,7 @@ Source: blueprint `lemma-constructible-flc-serre`, extension paragraph
 (blueprint: lem-constructible-shortexact-local-lift).
 
 Proof: `def-weil-pbc-exact-sequence` makes the quotient map an epimorphism. By
-`lem-weil-pbc-module-sheaves-colimits-forgetful` (1), forgetting module structure preserves
+`situation-conventions` (1), forgetting module structure preserves
 cokernels, so this is also an epimorphism of abelian sheaves. Apply
 `lem-weil-pbc-abelian-sheaf-epi-locally-surjective` to the given section to obtain a covering
 and a lift on each member. This only lifts individual sections and requires no splitting

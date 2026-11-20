@@ -13,7 +13,7 @@ universe u
 /-- Geometric regularity of a generic formal fibre is invariant under replacing the
 canonical fraction field by any chosen fraction field.
 Source: Stacks Project, More on Algebra, Proposition 07PS.
-(blueprint: lem-weil-pbc-generic-formal-fibre-fraction-field-transport).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 Proof: Use the universal property of fraction fields to identify the chosen field with the
 canonical residue field, then transport geometric regularity across the induced tensor
 isomorphism. -/

@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.CechSheafLocalPositiveSections
 /-! # Positive-degree exactness of a locally restricted Cech complex
 
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1.
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1.
 (blueprint: lem-pc-cech-local-positive-exact).
 -/
 
@@ -25,8 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The restricted Cech-model complex is exact in every positive degree.
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1 (insertion homotopy).
-(blueprint: lem-pc-cech-local-positive-exact)
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1 (insertion
+homotopy). (blueprint: lem-pc-cech-local-positive-exact)
 
 Proof: On an open V contained in U_i, insert i at the front of each tuple to define
 h from degree p+1 to degree p. The extra intersection with U_i does not change V.

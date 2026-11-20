@@ -88,21 +88,21 @@ universal property and its identity/composition normalization
 3. Extend a module map by sending m/t^n to the inverse t-action applied n times to its
    image, using `def-weil-pbc-module-localization`; sheafify and use uniqueness.
 4. `lem-weil-pbc-adjunction-lifts-group-ring-objects` and
-   `lem-weil-pbc-sheaf-algebraic-structures-objects` transport the ring initial property.
+   `situation-conventions` transport the ring initial property.
 5. `lem-weil-pbc-geometric-module-transport` transports the module initial property.
 6. The same unit characterization proves naturality and the generalized fraction formula.
 7. Kernels of inverse image are finite limits, and its adjunction preserves cokernels;
-   use `lem-weil-pbc-module-sheaves-colimits-forgetful` and
-   `lem-weil-pbc-left-adjoint-preserves-colimits`.
+   use `situation-conventions` and
+   `situation-conventions`.
 8. For scalar localization combine `lem-weil-pbc-localization-module-exact`,
    `lem-weil-pbc-ringed-site-module-sheafification-exact` and
    `lem-weil-pbc-ringed-topoi-module-adjunction` to obtain kernels and cokernels.
-9. `def-weil-pbc-composite-adjunction` and `lem-weil-pbc-conjugate-iso-unit-equation`
+9. `def-weil-pbc-composite-adjunction` and `situation-conventions`
    identify the composite inverse image. Both comparison routes extend the same unit,
    so uniqueness proves the composition and identity equations.
 10. Extend a specified ring isomorphism using the localization mapping property; its
     module reinterpretation preserves units, so the same uniqueness proves the square.
-11. `lem-weil-pbc-exact-functor-derived-factorization`,
+11. `situation-conventions`,
     `lem-weil-pbc-exact-functor-derived-functor` and
     `lem-weil-pbc-localization-universal-property` descend the termwise comparison,
     units and equations on every unbounded complex.

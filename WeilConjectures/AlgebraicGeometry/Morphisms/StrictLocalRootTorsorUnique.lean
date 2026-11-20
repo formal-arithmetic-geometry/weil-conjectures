@@ -12,17 +12,20 @@ public import Mathlib.Algebra.Regular.SMul
 
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
 
+/-!
+# Uniqueness of rotations between points of the punctured root algebra
+
+## References
+
+* Stacks Project, Tags 0EYG and 09EV
+-/
+
 @[expose] public section
 universe u
 set_option autoImplicit false
 namespace AlgebraicGeometry.Scheme
 
-/-- Field valued points of the punctured root algebra differ by a unique rotation.
-
-Source: Stacks Project, Tags 0EYG and 09EV.
-Proof: lift all simple roots of X^n-1 by strict henselianity; compare the
-images of the root under the two maps and use the unique lifted ratio.
-(blueprint: lem-sbc-strict-local-root-torsor-unique) -/
+/-- Field valued points of the punctured root algebra differ by a unique rotation. -/
 theorem strict_local_root_torsor_unique
     (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]
     [IsRegularLocalRing H] (h : H)

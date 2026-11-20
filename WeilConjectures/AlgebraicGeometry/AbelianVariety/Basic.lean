@@ -47,7 +47,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- Blueprint `lem-sc-abelian-variety-characterization`: Abelian varieties are the complete group
+/-- Blueprint `lemma-abelian-variety-commutative--1`: Abelian varieties are the complete group
 varieties.
 
 Let `G` be a group scheme over a field `K` which is proper, connected and smooth over `K`, that
@@ -57,7 +57,7 @@ gives geometric connectedness (`GeometricallyConnected.of_universallyClosed_of_s
 morphism with geometrically connected fibres is geometrically irreducible; and smoothness gives
 geometric reducedness.
 
-This is also blueprint `lem-sc-abelian-variety-characterization`. -/
+This is also blueprint `lemma-abelian-variety-commutative--1`. -/
 instance IsAbelianVariety.geometricallyIntegral (G : Over (Spec (.of K))) [GrpObj G]
     [IsAbelianVariety G] : GeometricallyIntegral G.hom := by
   have hη : η[G].left ≫ G.hom = 𝟙 _ := by simp
@@ -65,22 +65,22 @@ instance IsAbelianVariety.geometricallyIntegral (G : Over (Spec (.of K))) [GrpOb
   have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected G.hom
   exact .of_geometricallyReduced_of_geometricallyIrreducible _
 
-/-- Blueprint `lem-sc-abelian-variety-characterization`: Abelian varieties are the complete group
+/-- Blueprint `lemma-abelian-variety-commutative--1`: Abelian varieties are the complete group
 varieties.
 
 The underlying space of an abelian variety is irreducible, being geometrically irreducible over
 the one-point space `Spec K`.
 
-This is also blueprint `lem-sc-abelian-variety-characterization`. -/
+This is also blueprint `lemma-abelian-variety-commutative--1`. -/
 instance IsAbelianVariety.irreducibleSpace (G : Over (Spec (.of K))) [GrpObj G]
     [IsAbelianVariety G] : IrreducibleSpace G.left :=
   GeometricallyIrreducible.irreducibleSpace_of_subsingleton G.hom
 
-/-- Blueprint `lem-sc-av-commutative`: Abelian varieties are commutative
+/-- Blueprint `lemma-abelian-variety-commutative--2`: Abelian varieties are commutative
 
 Let `A` be an abelian variety over `K`. Then `m ∘ s = m`, where `s` is the swap of the two
 factors of `A ⊗ A`; that is, `A` is a commutative group object, and in particular `A(K)` is an
-abelian group. This is also blueprint `lem-sc-av-commutative`.
+abelian group. This is also blueprint `lemma-abelian-variety-commutative--2`.
 
 This is Mathlib's `AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral` applied
 to `AlgebraicGeometry.IsAbelianVariety.geometricallyIntegral`. The blueprint instead deduces it
@@ -91,7 +91,8 @@ instance IsAbelianVariety.isCommMonObj (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] : IsCommMonObj A :=
   isCommMonObj_of_isProper_of_geometricallyIntegral A
 
-/-- Blueprint `d-ab-field`: an abelian variety is geometrically connected over the base field.
+/-- Blueprint `definition-abelian-variety--1`: an abelian variety is geometrically connected over
+the base field.
 
 It is proper and connected with a rational point, the unit, so this is Stacks 04KV
 (`GeometricallyConnected.of_universallyClosed_of_section`). -/
@@ -99,11 +100,11 @@ instance IsAbelianVariety.geometricallyConnected (A : Over (Spec (.of K))) [GrpO
     [IsAbelianVariety A] : GeometricallyConnected A.hom :=
   GeometricallyConnected.of_universallyClosed_of_section A.hom η[A].left (by simp)
 
-/-- Blueprint `d-ab-field`: Finite fields, Frobenius and abelian varieties.
+/-- Blueprint `definition-abelian-variety--1`: Finite fields, Frobenius and abelian varieties.
 
-This is also blueprint `d-ab-field`, which defines an abelian variety over `K` as a proper, smooth,
-geometrically connected, commutative group scheme of finite type over `K`. For a group scheme
-`A` over `K` this agrees with `AlgebraicGeometry.IsAbelianVariety` (proper, smooth and
+This is also blueprint `definition-abelian-variety--1`, which defines an abelian variety over `K` as
+a proper, smooth, geometrically connected, commutative group scheme of finite type over `K`. For a
+group scheme `A` over `K` this agrees with `AlgebraicGeometry.IsAbelianVariety` (proper, smooth and
 connected): a geometrically connected scheme over the one-point space `Spec K` is connected, and
 conversely an abelian variety is geometrically connected
 (`AlgebraicGeometry.IsAbelianVariety.geometricallyConnected`). Finite type is part of
@@ -122,7 +123,7 @@ change, and `A_L` is connected because `A`, being proper and connected with a ra
 unit), is geometrically connected (Stacks 04KV,
 `GeometricallyConnected.of_universallyClosed_of_section`).
 
-This is used in the proof of blueprint `lem-sc-mult-n-finite-kernel`. -/
+This is used in the proof of blueprint `proposition-multiplication-n--2`. -/
 instance IsAbelianVariety.pullback {L : Type u} [Field L] (g : Spec (.of L) ⟶ Spec (.of K))
     (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A] :
     IsAbelianVariety ((Over.pullback g).obj A) := by

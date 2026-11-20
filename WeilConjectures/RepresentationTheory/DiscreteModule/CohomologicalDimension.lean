@@ -652,7 +652,7 @@ theorem subsingleton_H_two
 /-- **A degree-two criterion for continuous cohomology.** Let `G` be a profinite (more
 generally, compact) group and `ℓ` a prime such that `H²(K, 𝔽_ℓ) = 0` for every open subgroup
 `K` of `G`. Then `Hⁿ(G, M) = 0` for every `n ≥ 2` and every discrete `ℓ`-primary `G`-module `M`.
-(blueprint: `lem-sc-group-cd-one`) -/
+(blueprint: `theorem-cohomology-curves`) -/
 theorem subsingleton_H_of_two_le
     (h2 : ∀ K : Subgroup G, IsOpen (K : Set G) → Subsingleton (H K (trivialZMod.{w} K ℓ) 2))
     (M : DiscreteModule.{w} G) (hM : IsPrimary ℓ M) {n : ℕ} (hn : 2 ≤ n) :

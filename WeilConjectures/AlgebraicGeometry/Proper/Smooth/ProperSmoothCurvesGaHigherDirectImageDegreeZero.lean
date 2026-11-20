@@ -27,14 +27,15 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # The étale direct image of `𝔾ₐ` in a family of curves
 
-For a proper smooth morphism `f : C ⟶ S` with geometrically connected fibres, the étale direct
+For a proper smooth morphism `f: C ⟶ S` with geometrically connected fibres, the étale direct
 image `f_* 𝔾ₐ` is `𝔾ₐ` on `S`, i.e. the universe lift of the étale sheaf of `𝒪_S`, and the
-Artin--Schreier map `℘ = Frob - 1` of `C` induces `F - 1` for the Frobenius `F : x ↦ xᵖ`.
+Artin--Schreier map `℘ = Frob - 1` of `C` induces `F - 1` for the Frobenius `F: x ↦ xᵖ`.
 
 This is the degree `0` case of `properSmoothCurves_higherDirectImage_ga_frobeniusLinear`.
 
-Source: Stacks Project, Tag 0GKV, proof of lemma-proper-smooth-family-curves, case (b), and
-Tag 0E0L (`f_* 𝒪_C = 𝒪_S` universally).
+## References
+
+* Stacks Project, Tag 0GKV, case (b), and Tag 0E0L (`f_* 𝒪_C = 𝒪_S` universally)
 -/
 
 @[expose] public section
@@ -50,8 +51,22 @@ attribute [local instance]
 
 namespace Scheme.Modules
 
-set_option maxHeartbeats 2000000 in
--- The kernel check of the explicit section equivalences is slow.
+private theorem etaleTensorSectionsSheaf_map_eq {X : Scheme.{u}} (F : X.Modules)
+    [F.IsQuasicoherent] {U V : X.Etaleᵒᵖ} (g : U ⟶ V) :
+    (etaleTensorSectionsSheaf F).obj.map g = etaleTensorSectionsRestriction F g.unop := rfl
+
+private theorem exists_sections_addEquiv_of_isIso_unit {Y : Scheme.{u}} {M : Y.Modules}
+    (f : M ⟶ SheafOfModules.unit Y.ringCatSheaf) [IsIso f] :
+    ∃ b : Γ(M, ⊤) ≃+ Γ(Y, ⊤),
+      (∀ x : Γ(M, ⊤), b x = f.app ⊤ x) ∧
+        ∀ (a : Γ(Y, ⊤)) (x : Γ(M, ⊤)), b (a • x) = a * b x := by
+  classical
+  let b : Γ(M, ⊤) ≃+ Γ(Y, ⊤) :=
+    AddEquiv.ofBijective (f.app ⊤).hom (ConcreteCategory.bijective_of_isIso (f.app ⊤))
+  refine ⟨b, fun _ ↦ rfl, ?_⟩
+  intro a x
+  exact Hom.app_smul f a x
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The sections of the étale sheaf of `𝒪_X` over an étale `X`-scheme `U` are `Γ(U, 𝒪_U)`,
@@ -71,17 +86,16 @@ theorem exists_etaleTensorUnit_sections_natural_smul (X : Scheme.{u}) :
   classical
   have hi (U : X.Etaleᵒᵖ) : IsIso (tensorPullbackObjUnitToUnit U.unop.hom) :=
     (tensorPullbackObjUnitToUnit_isIso U.unop.hom).1
-  let b : ∀ U : X.Etaleᵒᵖ,
-      (etaleTensorSectionsSheaf (SheafOfModules.unit X.ringCatSheaf)).obj.obj U ≃+
-        Γ(U.unop.left, ⊤) := fun U ↦
-    AddEquiv.ofBijective ((tensorPullbackObjUnitToUnit U.unop.hom).app ⊤).hom
-      (ConcreteCategory.bijective_of_isIso
-        ((tensorPullbackObjUnitToUnit U.unop.hom).app ⊤))
+  choose b hb hs using fun U : X.Etaleᵒᵖ ↦
+    exists_sections_addEquiv_of_isIso_unit (Y := U.unop.left)
+      (M := (tensorPullback U.unop.hom).obj (SheafOfModules.unit X.ringCatSheaf))
+      (tensorPullbackObjUnitToUnit U.unop.hom)
   refine ⟨b, ?_, ?_⟩
   · intro U V g x
+    erw [etaleTensorSectionsSheaf_map_eq, hb, hb]
     exact etaleTensorUnitRestriction_equation g.unop x
   · intro U a x
-    exact Hom.app_smul (tensorPullbackObjUnitToUnit U.hom) a x
+    exact hs (op U) a x
 
 end Scheme.Modules
 
@@ -217,15 +231,10 @@ namespace Etale
 open Scheme
 
 /-- **The étale direct image of `𝔾ₐ` in a family of curves** (degree `0` case of
-`properSmoothCurves_higherDirectImage_ga_frobeniusLinear`). For `f : C ⟶ S` proper and smooth
+`properSmoothCurves_higherDirectImage_ga_frobeniusLinear`). For `f: C ⟶ S` proper and smooth
 with geometrically connected fibres, on a base where the prime `p` vanishes, `H⁰(Rf_* 𝔾ₐ)` is
 the universe lift of the étale sheaf of `𝒪_S`, with the map induced by `℘ = Frob - 1`
-corresponding to `F - 1` for the Frobenius `F : x ↦ xᵖ`.
-
-`H⁰(Rf_* 𝔾ₐ) = f_* 𝔾ₐ` as `f_*` is left exact, and `f_* 𝔾ₐ = 𝔾ₐ` since `𝒪_S → f_* 𝒪_C` is an
-isomorphism universally (Stacks, Tag 0E0L).
-
-Source: Stacks Project, Tag 0GKV, proof of lemma-proper-smooth-family-curves, case (b). -/
+corresponding to `F - 1` for the Frobenius `F: x ↦ xᵖ`. -/
 theorem properSmoothCurves_higherDirectImage_ga_frobeniusLinear_zero_aux
     {C S : Scheme.{u}} (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]
     (p : ℕ) [Fact p.Prime] (hpS : (p : Γ(S, ⊤)) = 0) (hpC : (p : Γ(C, ⊤)) = 0) :

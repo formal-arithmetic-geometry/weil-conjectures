@@ -204,7 +204,7 @@ identification `Γ(S, R^q f_* ℱ) ≅ H^q(X, ℱ)` over an affine base
 The complex is concentrated in degrees `≥ 0` and is exact in degrees `≥ #ι`
 (`AlgebraicGeometry.Scheme.Modules.exactAt_cechModuleComplex`).
 
-(blueprint: `lem-pc-cech-resolution`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem nonempty_homology_cechModuleComplex_linearEquiv [IsAffine S] [QuasiCompact f]
     [IsSeparated f] [HasInjectiveResolutions X.Modules] (hU : ∀ i, IsAffineOpen (U i))
     (hU' : iSup U = ⊤) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :

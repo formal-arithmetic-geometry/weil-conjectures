@@ -14,8 +14,8 @@ import Mathlib.LinearAlgebra.Dual.Lemmas
 /-!
 # Lie dimension and the local ring at a smooth identity
 
-Source: blueprint `sk-i-cartier`, third proof paragraph, and the dimension paragraph of
-`lem-wf-same-lie-closed-subgroup`.
+Source: blueprint `proposition-cartier-s-theorem`, third proof paragraph, and the dimension
+paragraph of `lemma-connected-components-images-homomorphisms--3`.
 -/
 
 @[expose] public section
@@ -29,8 +29,8 @@ namespace AlgebraicGeometry.GrpObj
 
 /-- The Lie algebra of a smooth group scheme has the dimension of its local ring at the identity.
 
-Source: blueprint `sk-i-cartier`, third proof paragraph, and
-`lem-wf-same-lie-closed-subgroup`, the dimension paragraph.
+Source: blueprint `proposition-cartier-s-theorem`, third proof paragraph, and
+`lemma-connected-components-images-homomorphisms--3`, the dimension paragraph.
 
 Proof: Write `e` for the image of the unique point of `Spec k` under the identity section.
 The section identifies the residue field at `e` with `k`. Restrict to an affine neighbourhood

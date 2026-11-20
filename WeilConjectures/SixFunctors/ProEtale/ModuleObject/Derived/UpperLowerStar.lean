@@ -100,7 +100,7 @@ The two displayed formulas are theorems about the total derived functors, not de
   (`ProEtale.CondensedRing.preservesKFlatQuasiIso_upperStar`), which is the functor-specific
   input of the K-flat machinery making `L((f)^*⟦Λ⟧)` meaningful; the other ingredient is that
   extension of scalars preserves quasi-isomorphisms between K-flat complexes
-  (`Mod.preservesKFlatQuasiIso`, itself sorried in
+  (`Mod.preservesKFlatQuasiIso`, proved in
   `WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars`).
 
 The remaining sorries are those of the module-object formalism

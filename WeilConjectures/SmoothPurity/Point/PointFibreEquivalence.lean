@@ -43,7 +43,7 @@ set_option linter.privateModule false
 /-!
 # Exact equivalences given by the four geometric-point fibre functors
 
-Source: Weil blueprint, `def-weil-finite-coefficient-point`, order 1509;
+Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509;
 main-20261015, sec-six-functors-basics/sk-def-sf-admissible, order 1868
 (blueprint: lem-weil-point-fibre-equivalence).
 

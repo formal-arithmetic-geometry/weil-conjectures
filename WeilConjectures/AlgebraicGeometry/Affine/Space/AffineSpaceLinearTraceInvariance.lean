@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearActionRigidit
 /-! # Linear changes of coordinates preserve the affine-space counit trace
 
 Source: blueprint sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.md,
-proof paragraphs 1 and 2 (blueprint: lem-amb-linear-trace-invariance).
+proof paragraphs 1 and 2 (blueprint: proposition-purity-vector-bundles).
 -/
 
 @[expose] public noncomputable section
@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.Etale
 counit trace. The existential square is the Cartesian-square certificate for the concrete
 polynomial map v ↦ gv; it is not an extra hypothesis on g or a choice of action.
 Source: blueprint linear-trace lemma, statement and both proof paragraphs
-(blueprint: lem-amb-linear-trace-invariance).
+(blueprint: proposition-purity-vector-bundles).
 
 Proof, following the node's seven steps:
 1. Construct G = D(det) in affine matrix space. Its coordinate ring on Spec R is
@@ -35,10 +35,10 @@ Proof, following the node's seven steps:
    define sections s_g and e. The coordinate formulas give the Cartesian square below.
 2. Compactify the affine-space projections by the standard open in projective space;
    these maps are separated and finite type, with quasi-compact open and proper factors.
-   Apply thm-cbc-finite-torsion to the universal automorphism square and base changes.
-   Use lem-asd-etale-finite-twist-pullback for theta_a. Exchange pasting gives
+   Apply proposition-composition-base-change-rf-shriek to the universal automorphism square and base
+   changes. Use lem-asd-etale-finite-twist-pullback for theta_a. Exchange pasting gives
    C_u u* rho_a = rho_(a_T) C_u; at the identity both factors are identities.
-3. Conjugate rho_a by the specified trace isomorphism of lem-amb-affine-space-top-trace.
+3. Conjugate rho_a by the specified trace isomorphism of lemma-integral-linear-character--1.
    Degree-zero full faithfulness identifies the resulting endomorphism of A_G with an
    ordinary module-sheaf map. Its value b on 1 determines it by linearity. The constant
    sheaf section lemmas identify b with a Zariski-locally-constant function beta on G.

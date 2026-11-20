@@ -32,7 +32,7 @@ Proof:
 1. By def-weil-pbc-essentially-smooth-ring-map, write `D` as `Localization S` for a
    smooth `R`-algebra `P`. For each `s ∈ S`, `Localization.Away s` is smooth by
    lem-weil-pbc-smooth-ring-map-principal-localization.
-2. By lem-weil-pbc-localization-colimit-principal-localizations, these principal
+2. By theorem-finite-etale-covers-proper-henselian--2, these principal
    localizations form a filtered diagram with colimit `Localization S`, in the sense of
    def-weil-pbc-category-colimit. The transition maps and coprojections commute with
    `P`'s structure map, hence are `R`-algebra maps.

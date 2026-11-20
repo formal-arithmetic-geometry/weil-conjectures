@@ -107,8 +107,11 @@ public import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-! # Tensor comparison for evaluated scalar extension
 
-Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03CY,
-applied to the vertical sequence topology.
+## References
+
+* Stacks Project, Modules on Sites, Section 03EK and Tag 03CY, applied to the vertical sequence
+  topology
+* Stacks Project, Section 03EK, the sectionwise construction of scalar extension
 -/
 
 @[expose] public noncomputable section
@@ -181,12 +184,7 @@ private theorem systemMap_app (n : ℕ) (U : Cᵒᵖ) :
     (congrArg RingCat.Hom.hom (evaluationRingHom_id.{c, v, r} J D σ n U))
     (M.val.obj (op (n, U.unop)))
 
-/-- The sectionwise comparison for evaluated tensor products fixes pure tensors.
-Source: Stacks Project, Section 03EK, the sectionwise construction of scalar extension.
-
-Proof: both section rings are unchanged by evaluation. The coefficient morphism has
-component alpha, and the two evaluation transports are the identity ring maps.
-After substituting these equalities, both extension modules and the map are identical. -/
+/-- The sectionwise comparison for evaluated tensor products fixes pure tensors. -/
 private theorem evaluationExtensionPresheafObjIso_pure
     (M : Systems.{c, v, max c v r} J B τ) (n : ℕ) (U : Cᵒᵖ)
     (a : (D n).obj.obj U) (x : M.val.obj (op (n, U.unop))) :
@@ -205,13 +203,7 @@ private theorem evaluationExtensionPresheafObjIso_pure
     (congrArg RingCat.Hom.hom (evaluationRingHom_id.{c, v, r} J D σ n U))
     (M.val.obj (op (n, U.unop))) a x
 
-/-- Evaluation identifies sectionwise scalar extensions, fixing pure tensors.
-Source: Stacks Project, Section 03EK, the sectionwise construction of scalar extension.
-(blueprint: lem-sp-scalar-extension-evaluation-objects).
-
-Proof: the evaluation coefficient transports are identity ring maps, and phi has
-component alpha. Substitute these equalities to identify the two tensor modules.
-The resulting identity isomorphism fixes every pure tensor. -/
+/-- Evaluation identifies sectionwise scalar extensions, fixing pure tensors. -/
 theorem scalarExtension_evaluation_objects
     (M : Systems.{c, v, max c v r} J B τ) (n : ℕ) :
     ∃ e : ∀ U : Cᵒᵖ,

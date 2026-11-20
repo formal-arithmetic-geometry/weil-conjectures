@@ -15,8 +15,10 @@ import Mathlib.RingTheory.TensorProduct.Pi
 
 /-! # Base change for punctured products of root algebras
 
-Source: Stacks Project, Tag 0EYG, descent paragraph; Tag 05N9.
-(blueprint: lem-sbc-punctured-root-product-base-change)
+## References
+
+* Stacks Project, Tag 0EYG, descent paragraph
+* Stacks Project, Tag 05N9
 -/
 
 @[expose] public section
@@ -28,44 +30,24 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The explicit finite product of root algebras in the descent argument.
-Source: Stacks Project, Tag 0EYG.
-(blueprint: lem-sbc-punctured-root-product-base-change) -/
+/-- The finite product of the root algebras `R[X] / (X ^ e k - g)`. -/
 abbrev puncturedRootProductRing (R : CommRingCat.{u}) (g : R) (m : ℕ)
     (e : Fin m → ℕ) :=
   ∀ k : Fin m, AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C g)
 
-/-- The basic open defined by the image of the prescribed coefficient.
-Source: Stacks Project, Tag 0EYG.
-(blueprint: lem-sbc-punctured-root-product-base-change) -/
+/-- The basic open defined by the image of the prescribed coefficient. -/
 abbrev puncturedRootProductOpen (R : CommRingCat.{u}) (g : R) (m : ℕ)
     (e : Fin m → ℕ) : (Spec (.of (puncturedRootProductRing R g m e))).Opens :=
   PrimeSpectrum.basicOpen (algebraMap R (puncturedRootProductRing R g m e) g)
 
-/-- The structural map of the explicitly constructed punctured chart.
-Source: Stacks Project, Tag 0EYG.
-(blueprint: lem-sbc-punctured-root-product-base-change) -/
+/-- The structural map of the explicitly constructed punctured chart. -/
 abbrev puncturedRootProductMap (R : CommRingCat.{u}) (g : R) (m : ℕ)
     (e : Fin m → ℕ) : (puncturedRootProductOpen R g m e).toScheme ⟶ Spec R :=
   (puncturedRootProductOpen R g m e).ι ≫
     Spec.map (CommRingCat.ofHom (algebraMap R (puncturedRootProductRing R g m e)))
 
 /-- Punctured products of root algebras are affine and finitely presented, and their
-formation commutes with arbitrary base change.
-
-Source: Stacks Project, Tag 0EYG, descent paragraph; Tag 05N9.
-(blueprint: lem-sbc-punctured-root-product-base-change)
-
-Proof: Each factor is a polynomial algebra modulo one relation, hence finitely
-presented. A finite product of finitely presented algebras is finitely presented,
-including the empty product, the zero algebra. Localize the product at the image
-of g: this is again finitely presented and its spectrum is the displayed basic
-open. The quotient universal property identifies S tensor_R R[t]/(t^e-g) with
-S[t]/(t^e-phi(g)). Tensor product commutes with finite products and localization.
-Applying Spec gives the stated base-change isomorphism. Its structural-map
-identity follows from preservation of the S-algebra maps. This requires no
-positivity, units, regularity, or nonzerodivisor condition. If g=0, the localization
-is zero and both schemes in the comparison are empty; e=0 also causes no problem. -/
+formation commutes with arbitrary base change. -/
 theorem punctured_root_product_base_change
     (R : CommRingCat.{u}) (g : R) (m : ℕ) (e : Fin m → ℕ) :
     IsAffineHom (puncturedRootProductMap R g m e) ∧

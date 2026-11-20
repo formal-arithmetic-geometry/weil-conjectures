@@ -37,8 +37,9 @@ its connected components.
 
 ## Blueprint
 
-- `sk-p-geometry`: structure of the identity component.
-- `lem-wf-algebraic-component-cosets`: the identity component, its cosets and the finite
+- `lemma-connected-components-images-homomorphisms`: structure of the identity component.
+- `lemma-connected-components-images-homomorphisms--1`: the identity component, its cosets and the
+finite
   component group.
 -/
 
@@ -103,7 +104,7 @@ theorem isIrreducible_connectedComponentIn_zeroLocus
   exact isIrreducible_irreducibleComponent.image _ continuous_subtype_val.continuousOn
 
 /-- The identity component `G°` of a closed subgroup `G = V(I)` of `GL_n` is irreducible: its
-ideal is prime. (blueprint: `sk-p-geometry`) -/
+ideal is prime. (blueprint: `lemma-connected-components-images-homomorphisms`) -/
 theorem isPrime_identityComponent : (identityComponent I).IsPrime :=
   PrimeSpectrum.isIrreducible_iff_vanishingIdeal_isPrime.1
     (isIrreducible_connectedComponentIn_zeroLocus I (zeroLocus I k).one_mem)
@@ -126,7 +127,7 @@ theorem mul_mul_inv_mem_zeroLocus_identityComponent {g h : GL n k} (hg : g ∈ z
 subgroup scheme: `G°(R)` is normal in `G(R)` for every `k`-algebra `R`.
 
 The conjugation map `G × G° → G` sends `k`-points into `G°`, and `G × G°` is reduced, so it
-factors through `G°`. (blueprint: `sk-p-geometry`) -/
+factors through `G°`. (blueprint: `lemma-connected-components-images-homomorphisms`) -/
 theorem normal_zeroLocus_identityComponent (hI : I.IsRadical) (R : Type*) [CommRing R]
     [Algebra k R] :
     ((zeroLocus (identityComponent I) R).subgroupOf (zeroLocus I R)).Normal := by
@@ -175,7 +176,7 @@ theorem normal_zeroLocus_identityComponent (hI : I.IsRadical) (R : Type*) [CommR
 
 omit [IsAlgClosed k] [I.IsHopfIdeal k] in
 /-- A closed subgroup `G = V(I)` of `GL_n` has finitely many connected components.
-(blueprint: `sk-p-geometry`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms`) -/
 theorem finite_connectedComponents_zeroLocus :
     Finite (_root_.ConnectedComponents
       (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))) :=
@@ -184,7 +185,7 @@ theorem finite_connectedComponents_zeroLocus :
 
 /-- The connected components of a closed subgroup `G = V(I)` of `GL_n` are the cosets of the
 identity component: a point `x` of `G` lies in the connected component of `g ∈ G` if and only if
-`g⁻¹ * x ∈ G°`. (blueprint: `sk-p-geometry`) -/
+`g⁻¹ * x ∈ G°`. (blueprint: `lemma-connected-components-images-homomorphisms`) -/
 theorem toPrimeSpectrum_mem_connectedComponentIn_iff {g x : GL n k} (hg : g ∈ zeroLocus I k) :
     toPrimeSpectrum x ∈ connectedComponentIn
         (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) (toPrimeSpectrum g) ↔
@@ -199,7 +200,7 @@ theorem toPrimeSpectrum_mem_connectedComponentIn_iff {g x : GL n k} (hg : g ∈ 
     (translateHomeomorph _ _).injective.mem_set_image]
 
 /-- The identity component `G°` of a closed subgroup `G = V(I)` of `GL_n` has finite index in `G`.
-(blueprint: `sk-p-geometry`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms`) -/
 theorem finiteIndex_zeroLocus_identityComponent :
     ((zeroLocus (identityComponent I) k).subgroupOf (zeroLocus I k)).FiniteIndex := by
   set X := PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))
@@ -223,7 +224,7 @@ omit [IsAlgClosed k] [I.IsHopfIdeal k] in
 with `g⁻¹ * x ∈ G°` (`toPrimeSpectrum_mem_connectedComponentIn_iff`). There are finitely many of
 them (`finite_connectedComponents_zeroLocus`, `finiteIndex_zeroLocus_identityComponent`), and `G°`
 is normal (`normal_zeroLocus_identityComponent`), so that `G(k) ⧸ G°(k)` is a finite group.
-(blueprint: `lem-wf-algebraic-component-cosets`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms--1`) -/
 theorem isClopen_connectedComponent_zeroLocus
     (p : PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) :
     IsClopen (connectedComponent p) :=

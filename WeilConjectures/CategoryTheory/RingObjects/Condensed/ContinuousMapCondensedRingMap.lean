@@ -17,7 +17,7 @@ Source: blueprint `sec-proetale-coefficients/sk-def-sfb-condensed-ring/`
 Postcomposition on the recorded universe-polymorphic continuous-map sheaves.
 The coefficient rings lie in an arbitrary common universe, independent of the
 universe of the profinite sets. The underlying ring objects and their tensor are
-exactly those of `def-sfb-continuous-map-condensed-ring`.
+exactly those of `proposition-pro-etale-site-separably-closed--3`.
 -/
 
 @[expose] public section
@@ -65,7 +65,7 @@ Source: blueprint `def-sfb-continuous-map-condensed-ring-map.proof.md`, part 3 c
 
 Proof: sectionwise postcomposition preserves all ring operations. Its naturality
 is φ ∘ (a ∘ u) = (φ ∘ a) ∘ u. Both presheaves are the sheaves supplied by
-`def-sfb-continuous-map-condensed-ring`, so this gives a morphism of sheaves of rings.
+`proposition-pro-etale-site-separably-closed--3`, so this gives a morphism of sheaves of rings.
 Part 3 of `sk-def-sfb-ring-object`, specifically `Sheaf.isMonHom_sheafCompose_map`,
 then makes its underlying abelian-sheaf map compatible with multiplication and unit.
 The structures used here are the dependency's counit transports for its sheafified

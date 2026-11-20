@@ -34,8 +34,9 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 /-!
 # Inverse image for possibly noncommutative pro-etale ring sheaves
 
-Source: Stacks Project, Tags 09A5, 00YV and 03D2
-(blueprint: def-weil-proetale-inverse-image).
+## References
+
+* Stacks Project, Tags 09A5, 00YV and 03D2
 -/
 
 @[expose] public section
@@ -47,8 +48,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The ring adjunction unit transported to the existing small site model.
-No commutativity is used. Source: Stacks, Tags 00YV and 03D2
-(blueprint: def-weil-proetale-inverse-image). -/
+No commutativity is used. -/
 noncomputable def proEtaleRingModelUnit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) RingCat.{u + 1}) :
     ((AsSmall.down : proEtaleSiteModel Y ⥤ Y.ProEt).sheafPushforwardContinuous

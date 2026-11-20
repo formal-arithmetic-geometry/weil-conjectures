@@ -10,12 +10,14 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenStructura
 import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenStructuralCoproductAdjunction
 
 /-! Structural tensor comparison and adjunction data for finite clopen partitions.
-Source: Stacks Project, sites-modules.tex, Tag 0GMW; sites-cohomology.tex, Tag 0FPQ.
-(blueprint: lem-pur-clopen-total-tensor-kflat-detection)
 
 This is the structural third conjunct of the parent result: normalized pure-tensor
 and total-complex comparisons, signed differential and symmetry formulas,
 coproduct preservation, and the zero-insertion adjunction.
+
+## References
+
+* Tag 0GMW, Tag 0FPQ
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +33,7 @@ open WeilConjectures
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Restriction has the normalized pure tensor and total tensor comparisons,
-preserves the displayed coproducts, and has the stated zero-insertion adjunction.
-Source: Stacks Project sites-modules.tex, Tag 0GMW, and sites-cohomology.tex, Tag 0FPQ.
-(blueprint: lem-pur-clopen-structural-data). -/
+preserves the displayed coproducts, and has the stated zero-insertion adjunction. -/
 theorem clopen_structural_data
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]

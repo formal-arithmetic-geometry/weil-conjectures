@@ -135,19 +135,19 @@ Source: Stacks Project, Tags 03DL (5), 03DE (4), (5); compare 01B8 and 093N.
 
 Proof (the node's seven steps):
 1. Write the stalk as the filtered colimit of sections on pointed neighbourhoods
-   (`def-weil-pbc-geometric-stalks`, `lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`);
+   (`def-weil-pbc-geometric-stalks`, `definition-torsion-sheaves--3`);
    `lem-weil-pbc-filtered-colimit-modules-elementwise` gives the scalar action on germs.
 2. Lift the geometric point to a member of a finite-type generating cover, using
-   `lem-weil-pbc-etale-cover-geometric-point-lift`. The precise assertion implies
+   `definition-torsion-sheaves--3`. The precise assertion implies
    finite generation (`def-weil-finitely-generated-module`).
 3. Represent a stalk element on a neighbourhood V and replace V by V times U over Y.
    Cofilteredness and `lem-weil-pbc-etale-scheme-base-change` give a representative over U.
 4. The generator epimorphism is locally surjective on underlying abelian sheaves by
-   `lem-weil-pbc-module-sheaves-colimits-forgetful` and
+   `situation-conventions` and
    `lem-weil-pbc-abelian-sheaf-epi-locally-surjective`. Locally the representative is a
    linear combination of the given sections with coefficients in the constant ring sheaf.
 5. Lift the geometric point to one member of that covering using
-   `lem-weil-pbc-etale-cover-geometric-point-lift`.
+   `definition-torsion-sheaves--3`.
 6. Successively make each of the finitely many coefficients constant on a further pointed
    neighbourhood, using `lem-weil-pbc-constant-ring-sheaf-sections-locally-constant` and the
    same geometric-point lifting lemma. Previously constant coefficients stay constant.

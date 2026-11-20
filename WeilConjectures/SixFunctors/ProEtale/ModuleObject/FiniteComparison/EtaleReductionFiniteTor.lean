@@ -23,18 +23,19 @@ For a bounded constructible `𝒪_E`-complex `K` on `X_proét`, the reduction mo
 small étale site, `Rν_* Φ (K ⊗ᴸ 𝒪_E ⧸ ℓⁿ)`, is bounded constructible of finite Tor amplitude over
 `A = 𝒪_E ⧸ ℓⁿ` (`ProEtale.CondensedRing.boundedConstructibleFiniteTor_etaleReduction_of_components`;
 this is `ProEtale.CondensedRing.boundedConstructibleFiniteTor_etaleReduction`, stated before the
-composite functor is named). This is blueprint `det-prop-scalar-six-ctf` (3) for the coefficient
-map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site.
+composite functor is named). This is blueprint `lemma-extension-scalars-preserves-dctf` (3) for the
+coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site.
 
 * `Φ (K ⊗ᴸ 𝒪_E ⧸ ℓⁿ)` is `ν^* K'` for a bounded constructible étale complex `K'`
-  (`ProEtale.isEtaleOrigin_of_isConstructible`, blueprint `lem-sf-proetale-constructible-origin`),
-  and `Rν_* ν^* K' ≅ K'`, so the étale reading is bounded constructible.
+  (`ProEtale.isEtaleOrigin_of_isConstructible`, blueprint
+  `theorem-comparison-constructible-sheaves`), and `Rν_* ν^* K' ≅ K'`, so the étale reading is
+  bounded constructible.
 * Tor amplitude is reflected by `ν^*`
   (`ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff`) and is tested on the residue
   field `κ = A ⧸ ϖ` of `A`
   (`ProEtale.DerivedCategory.torAmplitudeIn_iff_homologyConcentratedIn_tensor`, blueprint
-  `lem-exc-residue-tor-test`). Now `(K ⊗ᴸ_{𝒪_E} A) ⊗ᴸ_A κ` is, with scalars restricted to `A`, the
-  derived reduction `K ⊗ᴸ_{𝒪_E} 𝔽_E`
+  `theorem-f-shriek-finite-coefficients--1`). Now `(K ⊗ᴸ_{𝒪_E} A) ⊗ᴸ_A κ` is, with scalars
+  restricted to `A`, the derived reduction `K ⊗ᴸ_{𝒪_E} 𝔽_E`
   (`ProEtale.nonempty_iso_derivedRestrictScalars_derivedExtendScalars`,
   `ProEtale.finiteCoefficientDerivedEquivalenceExtendScalarsIso`,
   `CategoryTheory.Mod.derivedExtendScalarsCompIso`), which is bounded because `𝒪_E` is a discrete

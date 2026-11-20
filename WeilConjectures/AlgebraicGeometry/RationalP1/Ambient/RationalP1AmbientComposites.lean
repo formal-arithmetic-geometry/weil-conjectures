@@ -18,10 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveDiagonalComposition
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveDiagonalPullback
 
-/-! # The actual ambient diagonal unit and trace counit
-
-Source: blueprint main-20261015, rational projective-line unit/counit, clauses 2--3
-(blueprint: def-sfb-projective-ambient-unit-counit-composites).
+/-! # The ambient diagonal unit and trace counit
 -/
 
 @[expose] public noncomputable section
@@ -41,9 +38,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The given trace, through its full-unit-normalized derived-functor identification.
-Source: blueprint counit clause 3
-(blueprint: def-sfb-projective-ambient-unit-counit-composites). -/
+/-- The given trace, through its full-unit-normalized derived-functor identification. -/
 def trace (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L) :
     (moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)).obj
       (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
@@ -51,9 +46,7 @@ def trace (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram �
   (eqToIso d.q_canonical).inv.app _ ≫ d.traceq
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- Tensor the fixed diagonal class and then use the native tensor-shift comparison.
-Source: blueprint unit clause 2
-(blueprint: def-sfb-projective-ambient-unit-counit-composites). -/
+/-- Tensor the fixed diagonal class and then use the native tensor-shift comparison. -/
 def diagonalClassMap (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (d : Diagram Λ Y L) (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :
     (moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).obj M ⟶
@@ -65,9 +58,7 @@ def diagonalClassMap (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (tensorShiftIso Λ (diagonalSurface Y) (L (diagonalSurface Y)) _).hom
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The exact four-arrow unit paste, with inverses only of the specified maps.
-Source: blueprint unit clause 2
-(blueprint: def-sfb-projective-ambient-unit-counit-composites). -/
+/-- The exact four-arrow unit paste, with inverses only of the specified maps. -/
 def unitComponent (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (d : Diagram Λ Y L)
     (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj
@@ -94,9 +85,7 @@ def unitComponent (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
       (inv ((condensedAmbientExchange Λ (square Y)).app M))
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The specified inverse projection followed by identity tensor the trace and the unitor.
-Source: blueprint counit clause 3
-(blueprint: def-sfb-projective-ambient-unit-counit-composites). -/
+/-- The specified inverse projection followed by identity tensor the trace and the unitor. -/
 def counitComponent (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (d : Diagram Λ Y L) (K : DerivedCategory (Modules Λ Y))
     (hp : IsIso (projectionMap Λ (ProjectiveLine Y ↘ Y) K
@@ -113,10 +102,7 @@ def counitComponent (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
         (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)) ≫
     (K ◁ trace Λ Y L d) ≫ (K ◁ (singleUnitIso Λ Y).hom) ≫ (ρ_ K).hom
 
-/-- Componentwise agreement with the entire specified ambient unit formula.
-The quantified witnesses supply only invertibility proofs; the formula fixes all map data.
-Source: blueprint unit clause 2
-(blueprint: def-sfb-projective-ambient-unit-counit-composites). -/
+/-- Componentwise agreement with the entire specified ambient unit formula. -/
 def UnitComponentNormalized (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (d : Diagram Λ Y L)
     (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj
@@ -131,10 +117,7 @@ def UnitComponentNormalized (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ
       ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj M))),
     HEq f (unitComponent Λ Y L d e M hb hp)
 
-/-- Componentwise agreement with the entire specified ambient counit formula.
-Only invertibility of the fixed projection is existential, and its proof is irrelevant.
-Source: blueprint counit clause 3
-(blueprint: def-sfb-projective-ambient-unit-counit-composites). -/
+/-- Componentwise agreement with the entire specified ambient counit formula. -/
 def CounitComponentNormalized (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (d : Diagram Λ Y L) (K : DerivedCategory (Modules Λ Y)) {α : Type (u + 1)} (f : α) : Prop :=
   ∃ hp : IsIso (projectionMap Λ (ProjectiveLine Y ↘ Y) K

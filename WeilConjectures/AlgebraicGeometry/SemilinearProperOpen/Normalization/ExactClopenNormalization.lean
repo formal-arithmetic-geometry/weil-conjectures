@@ -18,7 +18,12 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenClopenProjector
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ConstantNormalization.ConstantTowerDirectImageNormalization
 
-/-! # Exact localization calculations for clopen mate comparisons -/
+/-! # Exact localization calculations for clopen mate comparisons
+
+## References
+
+* Stacks Project, Tags 015F and 07A7
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -80,9 +85,7 @@ private def localize
     _ _ F.mapDerivedCategory G.mapDerivedCategory
     (Functor.whiskerRight (NatTrans.mapHomologicalComplex a (.up ℤ)) DerivedCategory.Q)
 
-/-- Localize a square comparison and insert exactly the standard composition isomorphisms.
-Source: Stacks 015F, 07A7
-(blueprint: lem-sf-ambient-exact-clopen-comparison-localization). -/
+/-- Localize a square comparison and insert exactly the standard composition isomorphisms. -/
 private def localizeSquare
     {C : Type v₁} [Category.{h₁} C] [Abelian C] [HasDerivedCategory.{w₁} C]
     {D : Type v₂} [Category.{h₂} D] [Abelian D] [HasDerivedCategory.{w₂} D]
@@ -372,13 +375,7 @@ private theorem left_comp_unique
   exact (left_comp_unit a b c η M).symm
 
 /-- Exact localization carries the left-adjoint composition comparison to the
-composition comparison of the exact localized adjunctions.
-Source: Stacks Project, Tags 015F and 07A7.
-(blueprint: lem-sf-exact-localization-open-compositor).
-Proof: evaluate the unit of the composite adjunction on cochain complexes.
-The componentwise unit equation characterizes the ordinary left-adjoint comparison.
-Normalized adjunction composition and uniqueness carry that equation through the
-localization. Full faithfulness on natural transformations gives the asserted equality. -/
+composition comparison of the exact localized adjunctions. -/
 theorem open_comp_localized
     {A B D : Type v₁} [Category.{h₁} A] [Category.{h₁} B] [Category.{h₁} D]
     [Abelian A] [Abelian B] [Abelian D]

@@ -19,18 +19,19 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! Simultaneous affine strictly-perfect residue model data for a finite family.
 
-Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91.
-(blueprint: new-picard-derived-fibre-residue-model-data)
+## Implementation details
 
-Proof: Restrict the finitely many proper flat direct images to affine
+Restrict the finitely many proper flat direct images to affine
 neighbourhoods of the marked point and intersect those neighbourhoods.  Apply
 perfectness and the finite-free residue-model construction to the source and
 each target, transporting the derived localization isomorphisms along the
 restriction.  The residue ideal is the kernel of evaluation at the marked
 point.  The construction is simultaneous in `Fin n`, including the empty
-family.  The comparison equations are deliberately omitted; this theorem
-only supplies the affine and strictly-perfect model data used to construct
-those equations.
+family. The comparison equations are not part of this data.
+
+## References
+
+* Stacks Project, Tags 01IB, 064K, 06YJ and 0B91
 -/
 
 @[expose] public section
@@ -112,9 +113,7 @@ private theorem restrict_model_local
       (Functor.mapDerivedCategoryCompIso G F).symm.app E ≪≫ F.mapDerivedCategory.mapIso e ≪≫
         F.mapDerivedCategoryFactors.app K⟩
 
-/-- The common affine and strictly-perfect model data needed by the residue bridge.
-Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91.
-(blueprint: new-picard-derived-fibre-residue-model-data) -/
+/-- The common affine and strictly-perfect model data needed by the residue bridge. -/
 theorem picard_derived_fibre_residue_model_data
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

@@ -123,7 +123,7 @@ Source: literature/stacks-project/cohomology.tex, Lemma 08CQ, implication (1) =>
 Proof: refine a strictly perfect local model by affine opens and finite-free principal
 opens (`lem-weil-pbc-finite-projective-standard-free-cover`); this gives the
 bounded-above finite-free models required for pseudo-coherence.
-This uses `def-pc-perfect-complex` and `def-pur-pseudo-coherent-complex`.
+This uses `lemma-coherent-base-change-invertible-sheaves--1` and `def-pur-pseudo-coherent-complex`.
 The same bounded model is termwise flat and K-flat by the bounded-above-flat K-flat
 lemma (`lem-pc-bounded-above-flat-kflat`), and its tensor with any module is bounded
 in one common finite interval.

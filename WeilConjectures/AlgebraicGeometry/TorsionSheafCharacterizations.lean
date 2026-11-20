@@ -24,7 +24,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 Source: blueprint `sec-proper-base-change/sk-def-pbc`, statement, and
 `sec-abelian-varieties/def-weil-pbc-etale-sheaves`
-(blueprint: lem-weil-pbc-torsion-sheaf-characterizations).
+(blueprint: definition-torsion-sheaves--3).
 -/
 
 @[expose] public section
@@ -36,21 +36,21 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Source: blueprint `sec-proper-base-change/sk-def-pbc`, statement
-(blueprint: lem-weil-pbc-torsion-sheaf-characterizations).
+(blueprint: definition-torsion-sheaves--3).
 
-Proof: (1) Exactness of geometric stalks (prop-weil-pbc-geometric-stalks-exact) identifies
+Proof: (1) Exactness of geometric stalks (definition-torsion-sheaves--3) identifies
 stalks of the kernel of multiplication by n with n-torsion in the stalk. Commutation with
-colimits (lem-kun-stalks-commute-colimits) identifies the stalk of the canonical colimit map
+colimits (definition-torsion-sheaves--3) identifies the stalk of the canonical colimit map
 with inclusion of the union of these subgroups, namely the torsion subgroup.
 (2) Conservativity (lemma-weil-pbc-geometric-stalk-conservative, Stacks 03PU) gives the first
 condition iff every stalk is torsion. (3) Locally annihilated sections give torsion stalks:
 represent a germ on a pointed neighbourhood and lift its geometric point to the covering
-(lem-weil-pbc-etale-cover-geometric-point-lift, Stacks 03PR).
+(definition-torsion-sheaves--3, Stacks 03PR).
 (4) Conversely, choose a geometric point over each point of U; its germ is annihilated by a
 positive integer. Equality with zero in the filtered stalk is witnessed on a smaller pointed
 neighbourhood. These neighbourhoods cover U. The cofiltered-neighbourhood and composition
-facts are lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered and
-lem-weil-pbc-etale-composition-cancellation. Condition (2) is the recorded local-section
+facts are definition-torsion-sheaves--3 and
+definition-torsion-sheaves--3. Condition (2) is the recorded local-section
 predicate `CategoryTheory.Sheaf.IsTorsion` (a covering sieve on whose arrows the restriction
 has finite additive order), condition (3) is `IsAddTorsion` of every geometric stalk. -/
 theorem isTorsionAbelianSheaf_characterizations {T : Scheme.{u}}
@@ -212,12 +212,12 @@ private theorem ratModInt_dyadic_not_killed (k : ℕ) (hk : 0 < k) :
 -- The inherited statement names a nondependent index binder `n`.
 set_option linter.unusedVariables false in
 /-- Source: blueprint `sec-abelian-varieties/def-weil-pbc-etale-sheaves`, Q/Z example
-(blueprint: lem-weil-pbc-torsion-sheaf-characterizations).
+(blueprint: definition-torsion-sheaves--3).
 
 Proof: (5) The constant sheaf has geometric stalk Q/Z by
-lem-weil-pbc-constant-sheaf-geometric-stalk, hence is torsion by the characterization above.
+definition-torsion-sheaves--3, hence is torsion by the characterization above.
 (6) The coproduct of positive-integer-indexed copies of T is étale over T, with disjoint open
-coprojections (lem-weil-pbc-scheme-coproduct-copies). The sheaf condition gives the canonical
+coprojections (definition-torsion-sheaves--3). The sheaf condition gives the canonical
 restriction isomorphism onto the product of sections on T: off-diagonal overlaps are empty,
 and sections on the empty scheme form the zero group.
 (7) For nonempty T, a geometric stalk identifies the composite of the constant-presheaf unit
