@@ -162,7 +162,7 @@ private theorem localizing_preimage
   refine ⟨inferInstance, inferInstance, ?_⟩
   intro I G hG h
   let := hG
-  have hcol : P (colimit (G ⋙ F)) := hP.2.2 (G ⋙ F) inferInstance (fun i ↦ h i)
+  have hcol : P (colimit (G ⋙ F)) := hP.prop_colimit (G ⋙ F) inferInstance (fun i ↦ h i)
   exact P.prop_of_iso (preservesColimitIso F G).symm hcol
 
 attribute [local irreducible] tateLine

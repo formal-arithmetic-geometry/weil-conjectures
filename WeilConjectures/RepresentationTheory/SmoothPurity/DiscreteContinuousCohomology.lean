@@ -10,7 +10,7 @@ public import WeilConjectures.RepresentationTheory.Continuous.ContinuousCochains
 /-!
 # Continuous cohomology of discrete profinite modules
 
-Source: the blueprint, chapter `sec-curve-estimates`, unit `sk-prop-h2`,
+Source: the blueprint, chapter `chap-Cohomology-of-torsion-sheaves-on-curves`, unit `sk-prop-h2`,
 (blueprint: def-exc-continuous-cohomology); Stacks Project, Tags 04JP, 04JR and 0DVG.
 -/
 

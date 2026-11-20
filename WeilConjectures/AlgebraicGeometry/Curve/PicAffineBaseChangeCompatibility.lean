@@ -32,7 +32,8 @@ fields.  The proof uses base change of the compactification, the boundary restri
 and the Jacobian base-change compatibility.
 
 Source: Stacks Tags 03RQ and 01JF, and the affine case of
-`thm-sc-constant-invariance` (blueprint: lem-sc-pic-affine-base-change-compatibility).
+`proposition-cohomology-smooth-affine-curve` (blueprint:
+lem-sc-pic-affine-base-change-compatibility).
 -/
 theorem pic_affine_base_change_compatibility
     {k k' : Type u} [Field k] [Field k'] [Algebra k k'] [IsAlgClosed k] [IsAlgClosed k']

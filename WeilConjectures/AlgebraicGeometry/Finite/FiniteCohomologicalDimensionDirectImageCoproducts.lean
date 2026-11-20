@@ -19,7 +19,8 @@ import all WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
 # Finite cohomological dimension and coproducts of derived direct images
 
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-exc-direct-image-coproducts.md;
-Stacks Project, Tags 0F11 and 07K7 (blueprint: lem-exc-direct-image-coproducts).
+Stacks Project, Tags 0F11 and 07K7 (blueprint:
+corollary-proper-direct-image-finite-coefficients-localizing).
 -/
 
 @[expose] public section
@@ -39,7 +40,7 @@ Preservation means that the canonical comparison induced by the coprojections is
 
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-exc-direct-image-coproducts.md;
 Stacks Project, Tag 0F11, proof of (1), and Tag 07K7
-(blueprint: lem-exc-direct-image-coproducts).
+(blueprint: corollary-proper-direct-image-finite-coefficients-localizing).
 
 Proof:
 1. For indices in the coefficient universe, the qcqs higher-direct-image filtered-colimit

@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 
 `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_of_isAlgClosed` proves Verdier biduality
 on `Dctf(X, Λ)` for `X` separated of finite type over an algebraically closed field. This file
-extends it to other base fields `k` (blueprint `det-pd-biduality-coefficients`, (i)): biduality is
+extends it to other base fields `k` (blueprint `theorem-verdier-biduality`, (i)): biduality is
 local on `X` (`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_of_forall_isAffine`), and
 for `X` affine, closed in `𝔸ⁿ_k`, a field extension `k ⟶ k'` gives a surjective base change
 `g : X_{k'} ⟶ X`, along which `Lg^* ω_X ≅ ω_{X_{k'}} ⊗ᴸ L` with `L` invertible
@@ -110,9 +110,9 @@ lemma isIso_derivedHomUpperStarComparison_of_isUniversalHomeomorphism
 
 end UniversalHomeomorphism
 
-/-- Blueprint `det-pd-biduality-coefficients`, (i), **reduction to the affine case**: if
+/-- Blueprint `theorem-verdier-biduality`, (i), **reduction to the affine case**: if
 biduality holds for every affine scheme separated, quasi-compact and locally of finite type over
-`k`, it holds for every such `X`. Biduality is local (`lem-weil-delta-restriction`,
+`k`, it holds for every such `X`. Biduality is local (`corollary-verdier-exchange-formulas--5`,
 `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_leftDerivedUpperStar_iff`), and the
 affine opens cover `X`. -/
 theorem isIso_verdierDualDoubleDual_app_of_forall_isAffine {k : Type u} [Field k]
@@ -138,7 +138,7 @@ theorem isIso_verdierDualDoubleDual_app_of_forall_isAffine {k : Type u} [Field k
   rw [← isIso_verdierDualDoubleDual_app_leftDerivedUpperStar_iff Λ aX]
   exact haff _ (constructibleFiniteTor_leftDerivedUpperStar _ _ hK)
 
-/-- Blueprint `det-pd-biduality-coefficients`, (i), the affine case over a perfect field: for
+/-- Blueprint `theorem-verdier-biduality`, (i), the affine case over a perfect field: for
 `X` affine of finite type over a perfect field `k`, closed in `𝔸ⁿ_k`, the double-dual map `δ_K`
 is an isomorphism for every `K ∈ Dctf(X, Λ)`. The pullback `g : X_{k̄} ⟶ X` is surjective, so it
 suffices that `Lg^* δ_K` is an isomorphism; by the geometric generic fibre comparison
@@ -183,7 +183,7 @@ theorem isIso_verdierDualDoubleDual_app_of_perfectField_of_isAffine {k : Type u}
   exact ⟨PUnit.unit, y, hy⟩
 
 /-- **Finite-stage étale Verdier biduality over a perfect field** (blueprint
-`det-pd-biduality-coefficients`, (i)): for a finite ring `Λ` whose exponent is invertible on the
+`theorem-verdier-biduality`, (i)): for a finite ring `Λ` whose exponent is invertible on the
 perfect field `k` and `X` separated, quasi-compact and locally of finite type over `k`, the
 double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for every `K ∈ Dctf(X, Λ)`. -/
 theorem isIso_verdierDualDoubleDual_app_of_perfectField {k : Type u} [Field k] [PerfectField k]
@@ -196,7 +196,7 @@ theorem isIso_verdierDualDoubleDual_app_of_perfectField {k : Type u} [Field k] [
     (fun aU _ _ _ _ hN ↦ isIso_verdierDualDoubleDual_app_of_perfectField_of_isAffine Λ aU hN) aX
     hK
 
-/-- Blueprint `det-pd-biduality-coefficients`, (i), the affine case over an arbitrary field:
+/-- Blueprint `theorem-verdier-biduality`, (i), the affine case over an arbitrary field:
 for `X` affine of finite type over a field `k`, closed in `𝔸ⁿ_k`, the double-dual map `δ_K` is
 an isomorphism for every `K ∈ Dctf(X, Λ)`. Let `k'` be the perfect closure of `k` (in `k̄`);
 `Spec k' ⟶ Spec k` is a universal homeomorphism, hence so is the base change
@@ -250,7 +250,7 @@ theorem isIso_verdierDualDoubleDual_app_of_field_of_isAffine {k : Type u} [Field
   exact ⟨PUnit.unit, y, hy⟩
 
 /-- **Finite-stage étale Verdier biduality over an arbitrary field** (blueprint
-`det-pd-biduality-coefficients`, (i)): for a finite ring `Λ` whose exponent is invertible on the
+`theorem-verdier-biduality`, (i)): for a finite ring `Λ` whose exponent is invertible on the
 field `k` and `X` separated, quasi-compact and locally of finite type over `k`, the double-dual
 morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for every `K ∈ Dctf(X, Λ)`. -/
 theorem isIso_verdierDualDoubleDual_app_of_field {k : Type u} [Field k]

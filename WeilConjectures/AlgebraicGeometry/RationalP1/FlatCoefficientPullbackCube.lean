@@ -162,14 +162,7 @@ private theorem native_pull_cube_iso
   exact replace_iso_rectangle (derivedScalars a X') _ _ _ _ _ _ _ _
     (comparison_app Λ sq K) (comparison_app Λ' sq ((derivedScalars a Y).obj K)) h
 
-/-- Coefficient pullback comparisons commute with the canonical square comparison.
-Source: blueprint coefficient changes (2)--(3) and pullback-composition coherence.
-(blueprint: lem-sfb-flat-coefficient-pullback-cube).
-
-Proof: Apply derived_pull_comp to each of the two paths around the square. Transport
-between their equal composite scheme maps by equality induction. The generic mapped
-isomorphism rectangle cancels the composition comparisons, leaving the comparison
-around the square. Taking hom components gives the coefficientPullbackSquare equation. -/
+/-- Coefficient pullback comparisons commute with the canonical square comparison. -/
 theorem flat_coefficient_pullback_cube
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

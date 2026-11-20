@@ -80,7 +80,7 @@ direct image along `q : 𝔸(n; S) ×_S T ⟶ T` of the Artin–Schreier sheaf o
 `AlgebraicGeometry.AffineSpace.linearCoordHom` makes `ℓ` the coordinate of the affine line over
 `𝔸(n ∖ {i}; T)`; compact-support base change along it and the composition law reduce the
 statement to `AlgebraicGeometry.Etale.isZero_rightDerivedLowerShriek_artinSchreierSheafZMod_coord`.
-(sketch blueprint: `lem-fd-first-formula`, proof) -/
+(sketch blueprint: `lemma-fourier-transform-constant-sheaf`, proof) -/
 theorem isZero_rightDerivedLowerShriek_artinSchreierSheafZMod_linearForm [Finite Λ]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] {n : Type u} [Fintype n]
     {S T : Scheme.{u}} (g : T ⟶ S) [HasInvertibleExponent Λ T]
@@ -152,7 +152,7 @@ with a unit coordinate `ξᵢ` vanishes. By the stalk formula
 (`AlgebraicGeometry.Etale.fourierTransformStalkIso`) it is `Rq_! ℒ_{ψ(∑ⱼ ξⱼ xⱼ)}[r]` on the
 fibre `q : 𝔸(n; S) ×_S T ⟶ T`, which vanishes by
 `AlgebraicGeometry.Etale.isZero_rightDerivedLowerShriek_artinSchreierSheafZMod_linearForm`.
-(sketch blueprint: `lem-fd-first-formula`, proof) -/
+(sketch blueprint: `lemma-fourier-transform-constant-sheaf`, proof) -/
 theorem isZero_mapDerivedCategory_upperStar_affineFourierTransform_unit [Finite Λ]
     [HasInvertibleExponent Λ S] [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
     (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) {T : Scheme.{u}} [Nonempty T]
@@ -191,7 +191,7 @@ theorem isZero_mapDerivedCategory_upperStar_affineFourierTransform_unit [Finite 
 /-- The Fourier–Deligne transform of the constant sheaf on `𝔸(n; S)` vanishes off the origin:
 its restriction to the open complement `U` of the zero section of the dual is zero. The
 character must satisfy `IsUnit (Ψ 1 - 1)`, which is what makes `H^*_c(𝔸¹, ℒ_ψ)` vanish.
-(sketch blueprint: `lem-fd-first-formula`, proof) -/
+(sketch blueprint: `lemma-fourier-transform-constant-sheaf`, proof) -/
 theorem isZero_leftDerivedUpperStar_affineFourierTransform_unit [Finite Λ]
     [HasInvertibleExponent Λ S] [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
     (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) {U : Scheme.{u}} (j : U ⟶ 𝔸(n; S))

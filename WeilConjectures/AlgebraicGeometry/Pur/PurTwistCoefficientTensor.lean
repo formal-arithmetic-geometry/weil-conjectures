@@ -21,8 +21,10 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Finite coefficient extension and sheafwise completion
 
-Source: coefficient-twist blueprint, order 1505, proof step 6.
-(blueprint: lem-pur-twist-coefficient-tensor)
+## References
+
+* Bhatt--Scholze, Definition 6.8.1 and Lemma 4.2.12
+* Stacks Project, Tags 03EK and 03P5
 -/
 
 @[expose] public section
@@ -33,8 +35,7 @@ open CategoryTheory Opposite AlgebraicGeometry
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-/-- Continuous-function fpqc descent, restricted to the pro-etale site.
-Source: Bhatt--Scholze, Definition 6.8.1 and Lemma 4.2.12. -/
+/-- Continuous-function fpqc descent, restricted to the pro-etale site. -/
 private theorem coefficientContinuousPresheaf_isSheaf (X : Scheme.{u}) (T : Type v)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Presheaf.IsSheaf (Scheme.ProEt.topology X)
@@ -60,16 +61,14 @@ private theorem coefficientContinuousPresheaf_isSheaf (X : Scheme.{u}) (T : Type
   exact (isSheaf_fpqcTopology_continuousMapPresheaf T).of_le
     Scheme.proetaleTopology_le_fpqcTopology
 
-/-- The existing continuous-function presheaf with its proved sheaf condition.
-Source: Bhatt--Scholze, Definition 6.8.1. -/
+/-- The existing continuous-function presheaf with its proved sheaf condition. -/
 private noncomputable def coefficientContinuousSheaf (X : Scheme.{t})
     (T : Type (max u (t + 1))) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{max u (t + 1)} :=
   ⟨ProEtale.lisseContinuousCommRingPresheafUniverses X T,
     coefficientContinuousPresheaf_isSheaf X T⟩
 
-/-- The coefficient valuation ring is the finite integral closure of the base DVR.
-This is the arithmetic finite-basis step in the proof below. -/
+/-- The coefficient valuation ring is finite free over `ℤ_[l]`. -/
 private theorem integral_basis (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     ∃ k : ℕ, Nonempty (@Module.Basis (Fin k) ℤ_[l]
@@ -270,9 +269,8 @@ private noncomputable def continuousCoefficientConstants (S : Scheme.{t})
 open CategoryTheory.Limits in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Sheafified constants are discrete-valued continuous functions. Open fibres give
-local surjectivity; an empty object supplies local equality of distinct constants.
-This is the pro-etale ring version of the constant-sheaf argument in Stacks 03P5. -/
+/-- The constant pro-étale ring sheaf on a discrete ring is the sheaf of continuous
+(locally constant) coefficient functions, compatibly with the constants. -/
 private theorem discreteCoefficientComparisonOfUniverses (S : Scheme.{t})
     (R : Type (max u (t + 1))) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
     [DiscreteTopology R] :
@@ -340,7 +338,7 @@ private theorem discreteCoefficientComparisonOfUniverses (S : Scheme.{t})
   exact ⟨asIso φ, hφ⟩
 
 /-- The comparison of sheafified discrete constants at the tied universes, as used by
-`import all` importers. Source: Stacks 03P5. -/
+`import all` importers. -/
 private theorem discreteCoefficientComparison (S : Scheme.{t})
     (R : Type (t + 1)) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
     [DiscreteTopology R] :
@@ -494,7 +492,7 @@ private theorem constantSection_principal_quotientOfUniverses (S : Scheme.{t})
       exact (hqk _).mpr ⟨(er t).down, rfl⟩
 
 /-- The principal-quotient section formula at the tied universes, as used by
-`import all` importers. Source: Stacks 03P5. -/
+`import all` importers. -/
 private theorem constantSection_principal_quotient (S : Scheme.{t})
     {R T : Type (t + 1)} [CommRing R] [CommRing T]
     [TopologicalSpace R] [TopologicalSpace T] [IsTopologicalRing R] [IsTopologicalRing T]
@@ -973,10 +971,8 @@ end CompletionScalarTransport
 open CategoryTheory.Limits in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Finite freeness gives the tensor/completion bijection. To identify the map,
-approximate a completed scalar simultaneously at a target level and at the finite
-level through which its specified scalar map factors. The scalar square then proves
-the pure-tensor formula after every target projection. -/
+/-- For a finite free `A`-algebra `B`, a ring map `B ⊗[A] R →+* T` compatible with the
+given models `R` of the `I`-adic completion of `A` and `T` of that of `B` is bijective. -/
 private theorem tensor_completion_comparison
     {A B R T : Type v} [CommRing A] [CommRing B] [CommRing R] [CommRing T]
     [Algebra A B] [Algebra A R] [Module.Free A B] [Module.Finite A B]
@@ -1049,8 +1045,7 @@ private theorem tensor_completion_comparison
   exact hfg ▸ hg
 
 /-- The canonical balanced coefficient map, constructed from the two actual scalar
-inclusions. Its pure-tensor formula is definitional.
-Source: Stacks 03EK (blueprint: lem-pur-twist-coefficient-tensor). -/
+inclusions. Its pure-tensor formula is definitional. -/
 noncomputable def purTwistCoefficientTensorMap (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (U : S.ProEtᵒᵖ) :
@@ -1083,31 +1078,7 @@ noncomputable def purTwistCoefficientTensorMap (S : Scheme.{t}) (l : ℕ) [Fact 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 
-/-- Completion of the finite integral extension is the sectionwise scalar tensor.
-
-Source: coefficient-twist blueprint, order 1505, proof step 6; Stacks Project,
-Tag 03EK. (blueprint: lem-pur-twist-coefficient-tensor)
-
-Proof: identify O_E with the integral closure of Z_l in E. An element of O_E
-has monic minimal polynomial over Q_l with integral coefficients by the spectral
-norm criterion, hence is integral over Z_l. Conversely integrality over Z_l
-implies integrality over the integrally closed valuation ring O_E, hence membership
-in O_E. Finiteness of integral closure over the complete DVR, and torsion freeness
-in E, give a finite free Z_l-module. Choose a finite basis and its coordinate maps.
-Constant sheafification transports the basis and its inverse to every section
-ring, naturally under restriction. Reducing modulo l^r identifies the coefficient
-modules with a finite power of Z/l^r. Limits commute with this finite power.
-Writing l as a unit times a positive power of the chosen uniformizer identifies
-the l-power quotient limit with the uniformizer-power quotient limit: a tuple
-on the cofinal subsequence extends uniquely by reduction at any later index.
-The resulting additive comparison on each object sends b tensor a to the product
-of the two specified scalar inclusions. That formula makes it multiplicative
-and unital; it agrees definitionally with purTwistCoefficientTensorMap. The
-finite-basis inverse proves bijectivity. Pure tensors also prove compatibility
-with restrictions. Rank zero and the zero section ring cause no exception: their
-tensors and both limits are zero. No hypothesis on the characteristic of the
-base scheme is used in this coefficient calculation.
--/
+/-- Completion of the finite integral extension is the sectionwise scalar tensor. -/
 theorem purTwistCoefficientTensor (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (U : S.ProEtᵒᵖ) :

@@ -129,8 +129,8 @@ import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarUnitComposition
 /-! # Finite coefficient domains and evaluation transposition
 
 Source: Weil blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-thm-coef-finite-hom, opening proof paragraph; Stacks 03TT, 0GKB, 06YY, 07A4 and 08J9
-(blueprint: lem-coef-finite-hom-domain-calculus).
+lemma-change-coefficients-internal-hom--1, opening proof paragraph; Stacks 03TT, 0GKB, 06YY, 07A4
+and 08J9 (blueprint: lem-coef-finite-hom-domain-calculus).
 
 The index n denotes exponent n + 1, as in the recorded finite-Hom arrow.
 Thus all positive exponents and all identity quotients are included.

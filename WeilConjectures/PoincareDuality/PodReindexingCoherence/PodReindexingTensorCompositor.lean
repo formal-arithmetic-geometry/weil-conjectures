@@ -329,8 +329,7 @@ private theorem generator_restrict (W : Scheme.{u})
         ((SheafOfModules.tensorObjIsoSheafification (R := R) (P.X p) (L.X q)).inv.val.app V)
         hu.symm))))
 
-set_option maxHeartbeats 8000000 in
--- The three transported total-complex presentations need additional elaboration time.
+-- Compose the pure-section equations directly, without rewriting the transported total complexes.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
 private theorem tensor_chain_square {X Y Z : Scheme.{u}}
@@ -348,10 +347,14 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
         (podReindexingComplexFunctor l E h s).map (cg.tensorChain P L).hom ≫
           (ch.tensorChain ((podReindexingComplexFunctor l E g s).obj P)
             ((podReindexingComplexFunctor l E g s).obj L)).hom := by
-  apply (cancel_epi (cgh.tensorChain P L).inv).1
+  let c := cgh.tensorChain P L
+  apply (cancel_epi c.inv).1
   ext n : 1
-  apply ScalarHomTensor.total_pure_hom_ext (J := ProEt.topology Z)
-    (R := podReindexingRing l E Z s)
+  apply ScalarHomTensor.total_pure_hom_ext
+    (P := (podReindexingComplexFunctor l E (h ≫ g) s).obj P)
+    (Q := (podReindexingComplexFunctor l E (h ≫ g) s).obj L)
+    (n := n)
+    (J := ProEt.topology Z) (R := podReindexingRing l E Z s)
   intro p q hpq U x y
   let z := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
     (podReindexingRing l E Y s) P L p q n hpq
@@ -366,24 +369,92 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
         (podReindexingRing l E Z s) ((podReindexingComplexFunctor l E (h ≫ g) s).obj P)
         ((podReindexingComplexFunctor l E (h ≫ g) s).obj L) p q n hpq U x y) = z :=
     hi.symm.trans hcancel
-  simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
-    PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
-  rw [hi']
-  erw [cgh.tensorChain_pure, ScalarHomTensor.tensor_generator_map]
-  erw [k.degree, k.degree]
-  erw [eq_of_heq (k.sections (P.X p) U.unop x),
-    eq_of_heq (k.sections (L.X q) U.unop y)]
-  erw [k.degree]
-  erw [eq_of_heq (k.sections (((total l E Y s).obj (P, L)).X n) U.unop z)]
-  dsimp only [z]
-  erw [generator_restrict]
-  change _ = ((ch.tensorChain ((podReindexingComplexFunctor l E g s).obj P)
+  let m := (((total l E Z s).map
+    (Prod.mkHom (k.complex P).hom (k.complex L).hom)).f n).val.app U
+  let a := ((k.complex ((total l E Y s).obj (P, L))).hom.f n).val.app U
+  let b := ((cg.tensorChain P L).hom.f n).val.app
+    (op ((proEtaleIsoPostcompose h).obj U.unop))
+  let d := ((ch.tensorChain ((podReindexingComplexFunctor l E g s).obj P)
     ((podReindexingComplexFunctor l E g s).obj L)).hom.f n).val.app U
-      (((cg.tensorChain P L).hom.f n).val.app
-        (op ((proEtaleIsoPostcompose h).obj U.unop)) _)
-  erw [cg.tensorChain_pure, ch.tensorChain_pure]
+  let xp := (P.X p).val.map ((siteComp g h).inv.app U.unop).op x
+  let yq := (L.X q).val.map ((siteComp g h).inv.app U.unop).op y
+  have hx : ((k.complex P).hom.f p).val.app U x = xp :=
+    (congrArg (fun m ↦ m.val.app U x) (k.degree P p)).trans
+      (eq_of_heq (k.sections (P.X p) U.unop x))
+  have hy : ((k.complex L).hom.f q).val.app U y = yq :=
+    (congrArg (fun m ↦ m.val.app U y) (k.degree L q)).trans
+      (eq_of_heq (k.sections (L.X q) U.unop y))
+  have hz : a z = (((total l E Y s).obj (P, L)).X n).val.map
+      ((siteComp g h).inv.app U.unop).op z :=
+    (congrArg (fun m ↦ m.val.app U z)
+      (k.degree ((total l E Y s).obj (P, L)) n)).trans
+      (eq_of_heq (k.sections (((total l E Y s).obj (P, L)).X n) U.unop z))
+  have hleft := (congrArg (fun v ↦ m v)
+    (cgh.tensorChain_pure P L p q n hpq U.unop x y)).trans
+      ((ScalarHomTensor.tensor_generator_map (J := ProEt.topology Z)
+        (R := podReindexingRing l E Z s) (k.complex P).hom (k.complex L).hom
+          p q n hpq U x y).trans
+        (congrArg₂ (fun x y ↦ coefficientTensorGenerator.{u, u + 1, u}
+          (ProEt.topology Z) (podReindexingRing l E Z s)
+          ((podReindexingComplexFunctor l E h s).obj
+            ((podReindexingComplexFunctor l E g s).obj P))
+          ((podReindexingComplexFunctor l E h s).obj
+            ((podReindexingComplexFunctor l E g s).obj L)) p q n hpq U x y) hx hy))
+  have hright := (congrArg (fun v ↦ d (b v))
+    (hz.trans (generator_restrict l E Y s P L p q n hpq
+      ((siteComp g h).inv.app U.unop).op x y))).trans
+      ((congrArg (fun v ↦ d v)
+        (cg.tensorChain_pure P L p q n hpq
+          ((proEtaleIsoPostcompose h).obj U.unop) xp yq)).trans
+        (ch.tensorChain_pure ((podReindexingComplexFunctor l E g s).obj P)
+          ((podReindexingComplexFunctor l E g s).obj L) p q n hpq U.unop xp yq))
+  exact (congrArg (fun v ↦ m (((cgh.tensorChain P L).hom.f n).val.app U v)) hi').trans
+    (hleft.trans (hright.symm.trans (congrArg (fun v ↦ d (b (a v))) hi').symm))
 
-set_option maxHeartbeats 8000000 in
+/-- Paste the representative equations in an abstract category before specializing to sheaves. -/
+private theorem tensor_compositor_paste {C : Type*} [Category C]
+    {A₀ A B D B' D' T H F G K U V W M N S D₁ : C}
+    (u : A₀ ⟶ A) [Epi u] (t : D ⟶ D') [Mono t]
+    {c : A ⟶ B} {d : B ⟶ D} {k : A ⟶ V} {g : V ⟶ W} {h : W ⟶ D}
+    {a : A₀ ⟶ T} {qH : T ⟶ H} {rH : H ⟶ B'} {vA : B ⟶ B'}
+    {vK : B' ⟶ D'} {qT : H ⟶ U} {rZ : U ⟶ D'}
+    {qk : T ⟶ K} {qG : K ⟶ S} {qh : S ⟶ U}
+    {k₀ : A₀ ⟶ F} {e : F ⟶ G} {f : G ⟶ K} {r : F ⟶ V}
+    {vE : D ⟶ D₁} {vF : D₁ ⟶ D'} {gE : W ⟶ N} {h' : N ⟶ D₁}
+    {gq : G ⟶ M} {gr : M ⟶ N} {f' : M ⟶ S}
+    (hs : d ≫ t = vA ≫ vK)
+    (hc : u ≫ c ≫ vA = a ≫ qH ≫ rH)
+    (hr : qT ≫ rZ = rH ≫ vK)
+    (hchain : qH ≫ qT = qk ≫ qG ≫ qh)
+    (hk : k₀ ≫ e ≫ f = a ≫ qk)
+    (hnat : u ≫ k = k₀ ≫ r)
+    (ht : t = vE ≫ vF)
+    (hn : gE ≫ h' = h ≫ vE)
+    (ha : r ≫ g ≫ gE = e ≫ gq ≫ gr)
+    (hb : gr ≫ h' ≫ vF = f' ≫ qh ≫ rZ)
+    (hf : gq ≫ f' = f ≫ qG) :
+    c ≫ d = k ≫ g ≫ h := by
+  apply (cancel_epi u).1
+  apply (cancel_mono t).1
+  simp only [Category.assoc]
+  slice_lhs 3 4 => exact hs
+  slice_lhs 1 3 => exact hc
+  simp only [Category.assoc]
+  slice_lhs 3 4 => exact hr.symm
+  slice_lhs 2 3 => exact hchain
+  simp only [Category.assoc]
+  slice_lhs 1 2 => exact hk.symm
+  simp only [Category.assoc]
+  slice_rhs 1 2 => exact hnat
+  simp only [Category.assoc]
+  rw [ht]
+  slice_rhs 4 5 => exact hn.symm
+  slice_rhs 2 4 => exact ha
+  simp only [Category.assoc]
+  slice_rhs 4 6 => exact hb
+  slice_rhs 3 4 => exact hf
+  simp only [Category.assoc]
+
 -- Paste the three tensor models across the exact-functor factorization maps.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
@@ -484,30 +555,8 @@ private theorem tensor_on_representatives {X Y Z : Scheme.{u}}
   have hkNat := k.derived.hom.naturality rY
   change H.map rY ≫ k.derived.hom.app _ =
     k.derived.hom.app _ ≫ G.map (F.map rY) at hkNat
-  apply (cancel_epi (H.map rY)).1
-  apply (cancel_mono t).1
-  simp only [Category.assoc]
-  slice_lhs 3 4 => exact hs
-  slice_lhs 1 3 => exact hc
-  simp only [Category.assoc]
-  slice_lhs 3 4 => rw [← hr]
-  slice_lhs 2 3 => exact hchain
-  simp only [Category.assoc]
-  slice_lhs 1 2 => rw [← hk]
-  simp only [Category.assoc]
-  slice_rhs 1 2 => exact hkNat
-  simp only [Category.assoc]
-  change _ = k.derived.hom.app _ ≫ G.map (F.map rY) ≫
-    G.map (cg.tensor.hom.app _) ≫ ch.tensor.hom.app _ ≫ t
-  erw [ht']
-  slice_rhs 4 5 => erw [← hn]
-  slice_rhs 2 4 => exact hga
-  simp only [Category.assoc]
-  slice_rhs 4 6 => exact hb
-  slice_rhs 3 4 => exact hf
-  simp only [Category.assoc]; with_unfolding_all rfl
+  exact tensor_compositor_paste (H.map rY) t hs hc hr hchain hk hkNat ht' hn hga hb hf
 
-set_option maxHeartbeats 800000 in
 -- The representative argument involves three exact derived functors.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in

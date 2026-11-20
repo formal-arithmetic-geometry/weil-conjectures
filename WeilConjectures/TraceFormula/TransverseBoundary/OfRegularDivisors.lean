@@ -14,10 +14,10 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.Basic
 /-!
 # Transverse corners from regular divisors
 
-The transverse boundary calculation (blueprint `sk-lem-tf-transverse-boundary`) is proved for a
-`AlgebraicGeometry.Scheme.TransverseCorner`. This file builds such a corner from a `k`-scheme
-`Z ⟶ Spec k` (an object of `Over (Spec k)`) which is an étale limit of smooth surfaces, regular
-and locally noetherian, two regular divisors `X, Y` of `Z` meeting transversely at `z` whose
+The transverse boundary calculation (blueprint `lemma-cohomology-near-two-transverse-divisors`) is
+proved for a `AlgebraicGeometry.Scheme.TransverseCorner`. This file builds such a corner from a
+`k`-scheme `Z ⟶ Spec k` (an object of `Over (Spec k)`) which is an étale limit of smooth surfaces,
+regular and locally noetherian, two regular divisors `X, Y` of `Z` meeting transversely at `z` whose
 intersection has codimension two, and the open complements `Z - Y` and `Z - (X ∪ Y)`. It also
 compares the two restriction maps `RΓ(X, K) ⟶ RΓ(X', f^* K)` built from the derived pullback
 `Lf^*` and from the levelwise pullback `D(f^*)`.
@@ -59,12 +59,12 @@ theorem IsEtaleLimitOfSmoothSurfaces.scheme {Z : Over (Spec (.of k))}
 
 namespace Scheme.TransverseCorner
 
-/-- **The transverse corner of two regular divisors** (blueprint `sk-lem-tf-transverse-boundary`).
-Let `Z` be a regular, locally noetherian `k`-scheme which is an étale limit of smooth surfaces,
-`X, Y` regular divisors of `Z` meeting transversely at `z` (their scheme-theoretic intersection is
-the reduced point `z`) with intersection of codimension two, and `Z - Y`, `Z - (X ∪ Y)` the open
-complements. This is a transverse corner with `j : Z - Y ⟶ Z` and `i : Z - (X ∪ Y) ⟶ Z - Y` the
-inclusions. -/
+/-- **The transverse corner of two regular divisors** (blueprint
+`lemma-cohomology-near-two-transverse-divisors`). Let `Z` be a regular, locally noetherian
+`k`-scheme which is an étale limit of smooth surfaces, `X, Y` regular divisors of `Z` meeting
+transversely at `z` (their scheme-theoretic intersection is the reduced point `z`) with intersection
+of codimension two, and `Z - Y`, `Z - (X ∪ Y)` the open complements. This is a transverse corner
+with `j : Z - Y ⟶ Z` and `i : Z - (X ∪ Y) ⟶ Z - Y` the inclusions. -/
 @[simps]
 noncomputable def ofRegularDivisors {Z : Over (Spec (.of k))}
     (hZ : AlgebraicGeometry.IsEtaleLimitOfSmoothSurfaces Z) [IsLocallyNoetherian Z.left]

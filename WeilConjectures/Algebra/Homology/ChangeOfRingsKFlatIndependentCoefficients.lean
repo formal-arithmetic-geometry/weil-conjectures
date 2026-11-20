@@ -87,7 +87,7 @@ Proof:
 1. Restriction of scalars leaves underlying abelian sheaves unchanged. Kernels are
 sectionwise and cokernels are sheafified sectionwise cokernels; thus restriction preserves
 and reflects exactness and acyclicity (def-pc-sheaf-restrict-scalars,
-def-weil-sheaf-of-modules-category).
+situation-conventions).
 2. For an R-module M and S-module N, the balanced maps n tensor (m tensor s) maps to
 sn tensor m and n tensor m maps to n tensor (m tensor 1) give inverse natural maps
 U(N tensor_S (M tensor_R S)) and UN tensor_R M. Construct them on presheaf tensor

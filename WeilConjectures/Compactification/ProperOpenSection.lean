@@ -35,7 +35,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `lem-weil-pbc-open-section-clopen`: An open section is also closed.
+/-- Blueprint `proposition-construction-independence-rf-shriek--7`: An open section is also closed.
 Let `p : V ⟶ S` be separated and `s : S ⟶ V` an open immersion with `s ≫ p = 𝟙 S`. Then `s` is
 proper (`s ≫ p` is, and `p` is separated), so its range is open and closed in `V`; hence
 `V` is the disjoint union of the two open subschemes `s(S)` and `V \ s(S)`. -/
@@ -45,8 +45,8 @@ theorem Scheme.Hom.isClopen_range_of_comp_eq_id {V S : Scheme.{u}} (p : V ⟶ S)
   have : IsProper s := .of_comp s p
   exact Scheme.Hom.isClopen_range s
 
-/-- Blueprint `lem-weil-pbc-proper-open-p-proper`: Properness of the projection of the
-comparison square. For `u : T₁ ⟶ T₂` proper and any `j₂ : X ⟶ T₂` (in the blueprint an open
+/-- Blueprint `proposition-construction-independence-rf-shriek--7`: Properness of the projection of
+the comparison square. For `u : T₁ ⟶ T₂` proper and any `j₂ : X ⟶ T₂` (in the blueprint an open
 immersion), the projection `p : T₁ ×_{T₂} X ⟶ X` is the base change of `u` along `j₂`, hence
 proper and in particular separated. -/
 theorem isProper_pullback_snd_of_isProper {T₁ T₂ X : Scheme.{u}} (u : T₁ ⟶ T₂) (j₂ : X ⟶ T₂)
@@ -110,10 +110,11 @@ instance isOpenImmersion_section : IsOpenImmersion D.section := by
 lemma range_b : Set.range D.b.base = D.u.base ⁻¹' Set.range D.j₂.base :=
   Scheme.Pullback.range_fst _ _
 
-/-- Blueprint `lem-weil-pbc-proper-open-section`: The section of the comparison square and the
-open it fixes. The morphism `s : X ⟶ V` is an open immersion (`isOpenImmersion_section`) with
-`s ≫ p = 𝟙 X` and `s ≫ b = j₁`; its range is open and closed in `V`; through `b` it identifies `X`
-with the open `j₁(X)`; and `b` is an open immersion identifying `V` with `u⁻¹(j₂(X))`. -/
+/-- Blueprint `proposition-construction-independence-rf-shriek--7`: The section of the comparison
+square and the open it fixes. The morphism `s : X ⟶ V` is an open immersion
+(`isOpenImmersion_section`) with `s ≫ p = 𝟙 X` and `s ≫ b = j₁`; its range is open and closed in
+`V`; through `b` it identifies `X` with the open `j₁(X)`; and `b` is an open immersion identifying
+`V` with `u⁻¹(j₂(X))`. -/
 theorem section_spec :
     IsOpenImmersion D.section ∧ D.section ≫ D.p = 𝟙 X ∧ D.section ≫ D.b = D.j₁ ∧
       IsClopen (Set.range D.section.base) ∧

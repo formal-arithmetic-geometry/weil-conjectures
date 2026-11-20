@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Hom.EtaleHomComparisonMode
 
 /-! # Naturality of opposite-shift tensor cancellation
 
-Source: Stacks Project, Tags 08JC and 08J9; blueprint `thm-coef-finite-hom`,
+Source: Stacks Project, Tags 08JC and 08J9; blueprint `lemma-change-coefficients-internal-hom--1`,
 proof paragraph 2. (blueprint: lem-coef-etale-tensor-shift-cancellation-naturality) -/
 
 @[expose] public section
@@ -62,7 +62,7 @@ private theorem cancellation_natural_aux
 
 /-- Tensor cancellation of two opposite shifts is natural in its second variable.
 Source: Stacks Project, Tags 08JC and 08J9; the tensor-Hom shift diagram in
-blueprint `thm-coef-finite-hom`, proof paragraph 2.
+blueprint `lemma-change-coefficients-internal-hom--1`, proof paragraph 2.
 
 Proof. The first tensor-shift square commutes because maps of the tensor bifunctor
 commute with shifts. The second square is naturality of the other tensor shift,

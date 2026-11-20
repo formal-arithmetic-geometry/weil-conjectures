@@ -23,7 +23,7 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompact
 
 /-! # Ordinary locally finite adic compact-support realization
 
-Source: current blueprint, cor-coef-verdier-weil-equivariance, common-field
+Source: current blueprint, prose-10-20, common-field
 comparisons; Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
 (blueprint: lem-sf-locally-finite-adic-compact-support-realization).
 

@@ -20,7 +20,7 @@ which exist in `C`.
 The *localizing closure* `P.localizingClosure` of an arbitrary `P` is the smallest localizing
 property containing `P`, the intersection of all localizing properties containing `P`. In the
 blueprint it is written `Loc(P)`; it is used with `P = Dctf(X, Λ)` in blueprint
-`sk-def-localizing-closure`.
+`definition-localizing-subcategory`.
 
 The full subcategory of a localizing property is pretriangulated (by the instances of
 `Mathlib.CategoryTheory.Triangulated.Subcategory`), and has all coproducts indexed by `Type v`
@@ -118,7 +118,7 @@ lemma localizingClosure_eq_self [P.IsLocalizing] : P.localizingClosure = P :=
   le_antisymm (localizingClosure_le le_rfl) (le_localizingClosure P)
 
 
-/-- Blueprint `det-proper-image-localizing-principle`: a triangulated functor `F : C ⥤ D`
+/-- Blueprint `proposition-proper-direct-image-extension-zero`: a triangulated functor `F : C ⥤ D`
 preserving coproducts indexed by `Type v` which maps the objects of `P` into `Loc(P')` maps
 `Loc(P)` into `Loc(P')`: the objects `X` with `F X ∈ Loc(P')` form a localizing property. -/
 lemma localizingClosure_le_inverseImage {D : Type*} [Category.{v} D] [HasZeroObject D]

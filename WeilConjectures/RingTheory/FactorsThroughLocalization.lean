@@ -20,7 +20,7 @@ namespace Algebra
 
 /-- A map from a finitely presented algebra into a localization factors through a
 principal localization. Source: Stacks Project, Algebra, Tags 00CR and 00QO.
-(blueprint: lem-factors-through-localization-of-smooth)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 
 Proof: Present C as a polynomial algebra on finitely many generators modulo finitely many
 relations. Represent the images of the generators by fractions in P localized at S, and

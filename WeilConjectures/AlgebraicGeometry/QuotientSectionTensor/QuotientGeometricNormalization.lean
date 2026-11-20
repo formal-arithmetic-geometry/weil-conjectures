@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSe
 import WeilConjectures.CategoryTheory.SixFunctors.Monoidal
 import all WeilConjectures.AlgebraicGeometry.SectionDerivedTensorNormalization
 
-/-! # Normalization of the specified geometric operations -/
+/-! # Normalization of the specified geometric operations
+
+## References
+
+* Stacks 07A4 and 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -56,14 +61,7 @@ private theorem actual_tensor_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
   rw [CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison,
     internalDelta_eq_canonical]
 
-/-- The fixed section comparisons identify the actual geometric tensorator and adjunction.
-Source: Stacks 07A4 and 07A6; parent proof steps 7 and 9.
-(blueprint: lem-sfb-quotient-geometric-normalization).
-Proof: the native pullback tensorator and the generic derived tensorator have the
-same bifunctor computation counit, so uniqueness of derived lifts identifies them.
-Apply the section-derived tensor normalization and cancel the invertible tensor
-and pullback comparisons to isolate the actual map. The unit and counit equations
-are exactly those of section-derived pushpull normalization. -/
+/-- The fixed section comparisons identify the actual geometric tensorator and adjunction. -/
 theorem geometric_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
     GeometricCondition Λ f := by
   refine ⟨?_, ?_, ?_⟩

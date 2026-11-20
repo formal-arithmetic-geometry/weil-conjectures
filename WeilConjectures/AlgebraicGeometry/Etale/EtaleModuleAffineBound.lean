@@ -57,8 +57,8 @@ Proof (the six steps of the node):
 abelian sheaf of G. It is torsion, with no finiteness requirement on its sections.
 2. Mathlib supplies that the étale map w is weakly étale. The one-object constant
 presentation of the affine scheme W is a pro-étale affine presentation over X in the
-sense of `sk-def-pe-morphisms`; its only transition is the affine identity.
-3. Apply `det-pe-unbounded-classical-bounds` (1) with Y = X and g = identity. It gives
+sense of `definition-ind-etale-pro-etale-weakly`; its only transition is the affine identity.
+3. Apply `lemma-uniform-bounds-pro-etale-affines` (1) with Y = X and g = identity. It gives
 vanishing on W's pro-étale site above exactly the displayed bound, including empty X.
 4. `comparisonUpperStarCompUpperStarIso` identifies the two pulled-back coefficients.
 `lem-cbc-abelian-etale-proetale-cohomology-comparison` (Stacks 099W) transfers the

@@ -61,8 +61,47 @@ private noncomputable def scalarOver (V : X.Opens) :=
       ((Opens.grothendieckTopology X).over V) (Opens.grothendieckTopology X)).map
         f.toRingCatSheafHom) ⋙ (overEquiv V).functor
 
-set_option maxHeartbeats 500000 in
--- Transport through the over-site and scalar restriction unfolds several ring actions.
+private theorem scalarOver_isQuasicoherent [IsAffineHom f]
+    (F : U.Modules) [F.IsQuasicoherent] (V : X.Opens) :
+    ((scalarOver f V).obj (((PUSH).obj F).over V)).IsQuasicoherent := by
+  have := isQuasicoherent_pushforward_of_isAffineHom f F
+  have := isQuasicoherent_restrictFunctor V.ι ((pushforward f).obj F)
+  exact (SheafOfModules.isQuasicoherent.{u} (V : Scheme).ringCatSheaf).prop_of_iso
+    ((overFunctorEquiv V).app ((pushforward f).obj F)).symm inferInstance
+
+private theorem scalarOver_epi_iff (V : X.Opens)
+    {M N : SheafOfModules.{u} ((AR).over V)} (φ : M ⟶ N) :
+    Epi ((scalarOver f V).map φ) ↔ Epi φ := by
+  exact (Functor.epi_map_iff_epi (overEquiv V).functor _).trans
+    (epi_restrictScalars_iff _ φ)
+
+private theorem scalarOver_surjective_app_top_iff (V : X.Opens)
+    {M N : SheafOfModules.{u} ((AR).over V)} (φ : M ⟶ N) :
+    Function.Surjective (((scalarOver f V).map φ).app ⊤) ↔
+      Function.Surjective (φ.val.app (.op (Over.mk (𝟙 V)))) := by
+  change Function.Surjective (φ.val.app (.op _)) ↔ _
+  have htop : (Opens.overEquivalence V).symm.functor.obj ⊤ = Over.mk (𝟙 V) := by
+    refine CostructuredArrow.obj_ext _ _ ?_ (by apply Subsingleton.elim)
+    ext x
+    simp [Opens.overEquivalence]
+  rw [htop]
+
+private theorem epi_iff_surjective_app_top {Y : Scheme.{u}} [IsAffine Y]
+    {M N : Y.Modules} [M.IsQuasicoherent] [N.IsQuasicoherent] (φ : M ⟶ N) :
+    Epi φ ↔ Function.Surjective (φ.app ⊤) := by
+  constructor
+  · intro h
+    have hi := (quasiCoherent_cokernel_image φ).2.2.2.2.2.2.2.2 ⟨⊤, isAffineOpen_top _⟩
+    have : IsIso (CategoryTheory.Abelian.image.ι φ) := inferInstance
+    intro y
+    have hyr : y ∈ Set.range ((CategoryTheory.Abelian.image.ι φ).app ⊤) := by
+      exact ⟨(inv ((CategoryTheory.Abelian.image.ι φ).app ⊤)) y, by simp⟩
+    rw [hi.1] at hyr
+    exact hyr
+  · intro h
+    exact epi_of_surjective_app φ (fun _ : Unit ↦ ⊤)
+      (fun _ ↦ isAffineOpen_top _) (by simp) (fun _ ↦ h)
+
 /-- A finite free evaluation map into the algebra-valued direct image is epi on an
    affine open exactly when its map on sections over that open is surjective.
    Source: Stacks Project, Morphisms, Tag 01SB; Schemes, Tag 01IC
@@ -93,11 +132,8 @@ theorem affine_pushforward_free_evaluation [IsAffineHom f]
   let ψ := T.map φ
   have : IsAffine (V : Scheme) := hV
   have : F.IsQuasicoherent := hF
-  have htarget : (T.obj (((PUSH).obj F).over V)).IsQuasicoherent := by
-    have := isQuasicoherent_pushforward_of_isAffineHom f F
-    have := isQuasicoherent_restrictFunctor V.ι ((pushforward f).obj F)
-    exact (SheafOfModules.isQuasicoherent.{u} (V : Scheme).ringCatSheaf).prop_of_iso
-      ((overFunctorEquiv V).app ((pushforward f).obj F)).symm inferInstance
+  have htarget : (T.obj (((PUSH).obj F).over V)).IsQuasicoherent :=
+    scalarOver_isQuasicoherent f F V
   have hsource : (T.obj (SheafOfModules.free (R := (AR).over V) I)).IsQuasicoherent := by
     have : T.Additive := by
       constructor
@@ -106,41 +142,13 @@ theorem affine_pushforward_free_evaluation [IsAffineHom f]
       rfl
     have hunit : (T.obj (SheafOfModules.unit ((AR).over V))).IsQuasicoherent := by
       have := SheafOfModules.isQuasicoherent_unit (R := U.ringCatSheaf)
-      have := isQuasicoherent_pushforward_of_isAffineHom f
-        (SheafOfModules.unit U.ringCatSheaf)
-      have := isQuasicoherent_restrictFunctor V.ι
-        ((pushforward f).obj (SheafOfModules.unit U.ringCatSheaf))
-      exact (SheafOfModules.isQuasicoherent.{u} (V : Scheme).ringCatSheaf).prop_of_iso
-        ((overFunctorEquiv V).app
-          ((pushforward f).obj (SheafOfModules.unit U.ringCatSheaf))).symm inferInstance
+      exact scalarOver_isQuasicoherent f (SheafOfModules.unit U.ringCatSheaf) V
     have := isQuasicoherent_sigma
       (fun _ : I ↦ T.obj (SheafOfModules.unit ((AR).over V)))
     exact (SheafOfModules.isQuasicoherent.{u} (V : Scheme).ringCatSheaf).prop_of_iso
       (CategoryTheory.Limits.PreservesCoproduct.iso T
         (fun _ : I ↦ SheafOfModules.unit ((AR).over V))).symm inferInstance
-  have hepi : Epi ψ ↔ Epi φ := by
-    exact (Functor.epi_map_iff_epi (overEquiv V).functor _).trans
-      (epi_restrictScalars_iff _ φ)
-  have happ : Function.Surjective (ψ.app ⊤) ↔
-      Function.Surjective (φ.val.app (.op (Over.mk (𝟙 V)))) := by
-    change Function.Surjective (φ.val.app (.op _)) ↔ _
-    have htop : (Opens.overEquivalence V).symm.functor.obj ⊤ = Over.mk (𝟙 V) := by
-      refine CostructuredArrow.obj_ext _ _ ?_ (by apply Subsingleton.elim)
-      ext x
-      simp [Opens.overEquivalence]
-    rw [htop]
-  rw [← hepi, ← happ]
-  constructor
-  · intro h
-    have hi := (quasiCoherent_cokernel_image ψ).2.2.2.2.2.2.2.2 ⟨⊤, isAffineOpen_top _⟩
-    have : IsIso (CategoryTheory.Abelian.image.ι ψ) := inferInstance
-    intro y
-    have hyr : y ∈ Set.range ((CategoryTheory.Abelian.image.ι ψ).app ⊤) := by
-      exact ⟨(inv ((CategoryTheory.Abelian.image.ι ψ).app ⊤)) y, by simp⟩
-    rw [hi.1] at hyr
-    exact hyr
-  · intro h
-    exact epi_of_surjective_app ψ (fun _ : Unit ↦ ⊤)
-      (fun _ ↦ isAffineOpen_top _) (by simp) (fun _ ↦ h)
+  exact (scalarOver_epi_iff f V φ).symm.trans
+    ((epi_iff_surjective_app_top ψ).trans (scalarOver_surjective_app_top_iff f V φ))
 
 end AlgebraicGeometry.Scheme.Modules

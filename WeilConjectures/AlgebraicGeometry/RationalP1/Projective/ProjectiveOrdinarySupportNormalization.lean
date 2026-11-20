@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientCategory
 
 /-! # First-projection supported source normalization
-
-Source: current blueprint, rational projective-line triangle, First identity.
 -/
 
 @[expose] public noncomputable section
@@ -24,12 +22,7 @@ open DiagonalCoefficients CondensedRing
 
 attribute [local irreducible] CondensedRing.upperStar CondensedRing.lowerStar
 
-/-- The normalized ordinary supported-source inverse is the canonical direct-image composite.
-Source: the rational projective-line triangle, First identity, supported-source normalization
-(blueprint: lem-sfb-projective-ordinary-support-normalization).
-Proof: pass to underlying sheaf morphisms by Mod.hom_ext. Expand the three direct-image
-comparisons using their proved underlying-sheaf formulas. Rewrite the underlying objects
-by lowerStar_obj_X. The resulting heterogeneous equality is exactly SupportNormalization. -/
+/-- The normalized ordinary supported-source inverse is the canonical direct-image composite. -/
 theorem ordinary_source_normalization
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

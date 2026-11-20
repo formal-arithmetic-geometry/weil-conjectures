@@ -18,7 +18,7 @@ Let `K` be an algebraically closed field (or any field), `Y` locally of finite t
 `f : X ⟶ Y` smooth and proper and `F` a lisse `ℓ`-adic sheaf on `X`, `ℓ` invertible in `K`.
 Then every `Hⁿ(Rf_* F[0])` is lisse
 (`ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`,
-Step 1 of blueprint `prop-zl-smooth-proper-relative-purity`).
+Step 1 of blueprint `theorem-purity-higher-direct-images-under`).
 
 The proof follows the blueprint. Being lisse is local on `Y`, so `Y` may be assumed affine,
 hence `X` quasi-compact, and by the decomposition along connected components `X` may be assumed
@@ -138,8 +138,8 @@ theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isP
     hK s (ι ≫ f) (hF.upperStar ι) n
 
 /-- **Higher direct images of lisse sheaves along smooth proper morphisms are lisse** (Step 1 of
-blueprint `prop-zl-smooth-proper-relative-purity`): over a field `K` of characteristic `≠ ℓ`, the
-higher direct images `Rⁿf_* F` of a lisse `ℓ`-adic sheaf along a smooth proper morphism `f` of
+blueprint `theorem-purity-higher-direct-images-under`): over a field `K` of characteristic `≠ ℓ`,
+the higher direct images `Rⁿf_* F` of a lisse `ℓ`-adic sheaf along a smooth proper morphism `f` of
 schemes locally of finite type over `K` are lisse. -/
 theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper
     {K : Type u} [Field K] {X Y : Scheme.{u}} (s : Y ⟶ Spec (.of K)) (f : X ⟶ Y)

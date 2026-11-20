@@ -28,7 +28,7 @@ dimension at most one
   with closed complement `Z`;
 - for `X` smooth of relative dimension one and `G` lisse, `H_c^r(X, G)` vanishes for `r > 2`: it is
   Poincaré dual to `H^{2 - r}(X, G^∨(1))`, which vanishes in negative degrees
-  (blueprint `thm-pod-degreewise-perfectness-over-a-field`);
+  (blueprint `corollary-degreewise-duality-over-fields--1`);
 - on the affine line, `G` is lisse on a dense open with finite complement, so `H_c^r` vanishes for
   `r > 2`;
 - on an affine scheme of dimension at most one, a finite morphism to the affine line (Noether
@@ -104,7 +104,7 @@ theorem subsingleton_compactlySupportedCohomology_of_openClosed {U Z : Scheme.{u
 /-- **Vanishing above degree two for a lisse sheaf on a smooth curve.** If `X` is smooth of
 relative dimension one over `k₀` and `F` is a lisse Weil sheaf on `X`, then `H_c^r(X ⊗ k̄, F) = 0`
 for `r > 2`: by Poincaré duality it is dual to `H^{2 - r}(X ⊗ k̄, F^∨(1))`, which vanishes since
-`2 - r < 0` (blueprint: `thm-pod-degreewise-perfectness-over-a-field`). -/
+`2 - r < 0` (blueprint: `corollary-degreewise-duality-over-fields--1`). -/
 theorem subsingleton_compactlySupportedCohomology_of_isLisse
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X}
     (hF : F.IsLisse) {r : ℤ} (hr : 2 < r) :

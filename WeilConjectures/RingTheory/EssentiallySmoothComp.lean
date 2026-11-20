@@ -36,7 +36,7 @@ Proof (the node's five steps):
    subsets along the presentation isomorphisms. An `A`-algebra isomorphism is also an
    `R`-algebra isomorphism for the composite structure.
 2. Express `A` as the filtered colimit of `P` localized at each element of `S`, using
-   `lem-weil-pbc-localization-colimit-principal-localizations` (Stacks 00CR). Descend `Q`
+   `theorem-finite-etale-covers-proper-henselian--2` (Stacks 00CR). Descend `Q`
    to a smooth algebra `Q₀` over some principal localization `Pₛ`, with
    `Q ≅ A ⊗[Pₛ] Q₀`, by `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` (0CAQ).
 3. The map `R → Pₛ` is smooth by `lem-weil-pbc-smooth-ring-map-principal-localization`.

@@ -1050,8 +1050,23 @@ def compLB {T W Z : ScalarSite.{u, v, r, w} A B}
 section
 omit [Module.Finite A B] [Module.Free A B]
 
-set_option maxHeartbeats 1600000 in
--- Comparing the dependent module and sheaf presentations needs extra elaboration time.
+-- Perform the composition calculation before specializing to dependent module presentations.
+private theorem restriction_compositor_of_underlying_isos
+    {C₀ D₀ : Type*} [Category C₀] [Category D₀] (F : C₀ ⥤ D₀)
+    {X Y Z : C₀} {P Q R S V H : D₀}
+    (eA : X ≅ Z) (eB : Y ≅ Z)
+    (fA : P ≅ F.obj X) (fA' : Q ≅ F.obj Y) (fB : R ≅ F.obj Y)
+    (hA : S ≅ H) (hB : V ≅ H) (k : H ⟶ F.obj Z)
+    (m : X ⟶ Y) (n : P ⟶ Q)
+    (hm : m = eA.hom ≫ eB.inv)
+    (hn : F.map m ≫ fA'.inv = fA.inv ≫ n) :
+    (hA.hom ≫ k ≫ F.map eA.inv ≫ fA.inv) ≫ n ≫ (fA'.hom ≫ fB.inv) =
+      (hA.hom ≫ hB.inv) ≫ (hB.hom ≫ k ≫ F.map eB.inv ≫ fB.inv) := by
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← reassoc_of% hn, hm, F.map_comp]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← F.map_comp_assoc, eA.inv_hom_id, F.map_id, Category.id_comp]
+
 private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
     {f : Geometric T W} {g : Geometric W Z} {h : Geometric T Z}
     (c : Composite f g h) (M : Mod Z.toSite B) :
@@ -1060,18 +1075,23 @@ private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
           f.restriction.hom.app (g.liftB.modules.obj M) =
       h.restriction.hom.app M ≫ (res A B T.toSite).map (c.moduleB.hom.app M) := by
   apply (underlying (constantRing T.J A)).map_injective
-  simp only [Functor.map_comp, Category.assoc, f.restrictionFormula,
-    h.restrictionFormula, c.underlyingA]
-  change _ = h.liftA.moduleUnderlying.hom.app ((res A B Z.toSite).obj M) ≫
-    h.liftB.moduleUnderlying.inv.app M ≫
-      (underlying (constantRing T.J B)).map (c.moduleB.hom.app M)
-  erw [c.underlyingB, Iso.inv_hom_id_app_assoc]
-  have hn := f.liftA.moduleUnderlying.inv.naturality (g.restriction.hom.app M)
-  dsimp only [Functor.comp_map] at hn
-  erw [← reassoc_of% hn]
-  erw [g.restrictionFormula]
-  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
-  rfl
+  simp only [Functor.map_comp]
+  change _ = (underlying (constantRing T.J A)).map (h.restriction.hom.app M) ≫
+    (underlying (constantRing T.J B)).map (c.moduleB.hom.app M)
+  simp only [c.underlyingA, c.underlyingB, f.restrictionFormula, h.restrictionFormula]
+  exact restriction_compositor_of_underlying_isos f.inverse
+    (g.liftA.moduleUnderlying.app ((res A B Z.toSite).obj M))
+    (g.liftB.moduleUnderlying.app M)
+    (f.liftA.moduleUnderlying.app (g.liftA.modules.obj ((res A B Z.toSite).obj M)))
+    (f.liftA.moduleUnderlying.app ((res A B W.toSite).obj (g.liftB.modules.obj M)))
+    (f.liftB.moduleUnderlying.app (g.liftB.modules.obj M))
+    (h.liftA.moduleUnderlying.app ((res A B Z.toSite).obj M))
+    (h.liftB.moduleUnderlying.app M)
+    (c.inverse.hom.app ((underlying (constantRing Z.J B)).obj M))
+    ((underlying (constantRing W.J A)).map (g.restriction.hom.app M))
+    ((underlying (constantRing T.J A)).map (f.liftA.modules.map (g.restriction.hom.app M)))
+    (g.restrictionFormula M)
+    (f.liftA.moduleUnderlying.inv.naturality (g.restriction.hom.app M))
 
 -- Comparing the dependent module and sheaf presentations needs extra elaboration time.
 private theorem tau_comp {T W Z : ScalarSite.{u, v, r, w} A B}

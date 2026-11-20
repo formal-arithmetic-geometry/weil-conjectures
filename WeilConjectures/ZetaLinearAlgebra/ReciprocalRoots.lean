@@ -17,15 +17,15 @@ Let `P` be a polynomial over a field with `P(0) = 1`. Its *ordinary roots* are i
 they are nonzero. Its *reciprocal roots* are the nonzero `α` with `P(α⁻¹) = 0`; they are the
 roots of the reversed polynomial `P.reverse`, and if `P` splits then
 `P = ∏ (1 - α X)` over its reciprocal roots `α`, counted with multiplicity
-(blueprint `def-weil-ordinary-reciprocal-roots`).
+(blueprint `definition-reciprocal-root--1`).
 
 For an endomorphism `f` of a finite-dimensional vector space over an algebraically closed field,
 the reciprocal roots of `det (1 - X f)` are the nonzero eigenvalues of `f`, with algebraic
-multiplicity (blueprint `prop-weil-reciprocal-roots-eigenvalues`).
+multiplicity (blueprint `prose-19-08`).
 
 Finally, we name the normalized reduced integral presentations `Z = A / B` of an integral power
-series (blueprint `def-weil-normalized-integral-fraction`) and restate the integral Fatou
-theorem in these terms (blueprint `prop-weil-integral-rational-series`).
+series (blueprint `lemma-reduced-fractions-integer-coefficients--1`) and restate the integral Fatou
+theorem in these terms (blueprint `lemma-reduced-fractions-integer-coefficients--1`).
 
 ## Main declarations
 
@@ -34,12 +34,13 @@ theorem in these terms (blueprint `prop-weil-integral-rational-series`).
 - `Polynomial.IsReciprocalRoot`: `α` is a reciprocal root of `P` if `1 - α X` divides `P`; for
   `α ≠ 0` this means that `α` is a root of the reverse of `P`
   (`Polynomial.isReciprocalRoot_iff_mem_roots_reverse`).
-- `Polynomial.ordinary_reciprocal_roots`: blueprint `def-weil-ordinary-reciprocal-roots`.
+- `Polynomial.ordinary_reciprocal_roots`: blueprint `definition-reciprocal-root--1`.
 - `LinearMap.roots_reverse_charpolyRev`, `LinearMap.reciprocal_roots_eigenvalues`: blueprint
-  `prop-weil-reciprocal-roots-eigenvalues`.
-- `PowerSeries.IsNormalizedIntegralFraction`: blueprint `def-weil-normalized-integral-fraction`.
+  `prose-19-08`.
+- `PowerSeries.IsNormalizedIntegralFraction`: blueprint
+`lemma-reduced-fractions-integer-coefficients--1`.
 - `PowerSeries.existsUnique_isNormalizedIntegralFraction`: blueprint
-  `prop-weil-integral-rational-series`.
+  `lemma-reduced-fractions-integer-coefficients--1`.
 
 ## Implementation details
 
@@ -126,8 +127,8 @@ theorem isReciprocalRoot_iff_mem_roots_reverse {P : K[X]} (hP : P ≠ 0) {α : L
     mem_roots_reverse_iff ((Polynomial.map_ne_zero_iff (algebraMap K L).injective).2 hP)]
   exact ⟨fun h ↦ ⟨hα, h⟩, And.right⟩
 
-/-- Blueprints `def-weil-ordinary-reciprocal-roots` and `det-def-roots` (ordinary and reciprocal
-roots): let `P` be a polynomial with `P(0) = 1`.
+/-- Blueprints `definition-reciprocal-root--1` and `definition-reciprocal-root` (ordinary and
+reciprocal roots): let `P` be a polynomial with `P(0) = 1`.
 1. Its *ordinary roots* (the roots of `P`) are nonzero.
 2. Its *reciprocal roots*, the nonzero `α` with `P(α⁻¹) = 0`, are the roots of `P.reverse`.
 3. If `P` splits (e.g. over an algebraically closed field), the reciprocal roots are the
@@ -179,7 +180,7 @@ theorem roots_reverse_charpolyRev (f : Module.End K V) :
     roots_multiset_prod_X_sub_C]
 
 omit [DecidableEq K] in
-/-- Blueprint `prop-weil-reciprocal-roots-eigenvalues`: for an invertible endomorphism `f` of a
+/-- Blueprint `prose-19-08`: for an invertible endomorphism `f` of a
 finite-dimensional vector space over an algebraically closed field, the reciprocal roots of
 `P = det (1 - X f)` (the roots of `P.reverse`) are exactly the eigenvalues of `f` (the roots of
 its characteristic polynomial), counted with algebraic multiplicity, and
@@ -197,8 +198,8 @@ end LinearMap
 
 namespace PowerSeries
 
-/-- Blueprints `def-weil-normalized-integral-fraction` and `det-def-roots`: a *normalized reduced
-integral
+/-- Blueprints `lemma-reduced-fractions-integer-coefficients--1` and `definition-reciprocal-root`:
+a *normalized reduced integral
 presentation* of a power series `Z ∈ ℚ⟦X⟧` is a pair `A, B ∈ ℤ[X]` with `A(0) = B(0) = 1`, `A`
 and `B` coprime in `ℚ[X]`, and `Z * B = A` as power series. -/
 def IsNormalizedIntegralFraction (Z : ℚ⟦X⟧) (A B : ℤ[X]) : Prop :=
@@ -217,9 +218,9 @@ theorem isNormalizedIntegralFraction_map_iff (f : ℤ⟦X⟧) (A B : ℤ[X]) :
   rw [Polynomial.polynomial_map_coe, Polynomial.polynomial_map_coe, ← map_mul,
     (map_injective _ Int.cast_injective).eq_iff]
 
-/-- Blueprint `prop-weil-integral-rational-series` (Fatou): a power series `f ∈ 1 + X ℤ⟦X⟧`
-that is rational over `ℚ` has a unique normalized reduced integral presentation `f = A / B`.
-This restates `PowerSeries.exists_unique_reduced_int_fraction`. -/
+/-- Blueprint `lemma-reduced-fractions-integer-coefficients--1` (Fatou): a power series
+`f ∈ 1 + X ℤ⟦X⟧` that is rational over `ℚ` has a unique normalized reduced integral presentation
+`f = A / B`. This restates `PowerSeries.exists_unique_reduced_int_fraction`. -/
 theorem existsUnique_isNormalizedIntegralFraction (f : ℤ⟦X⟧) (h₀ : constantCoeff f = 1)
     (h : ∃ A B : ℚ[X], B.coeff 0 = 1 ∧
       map (Int.castRingHom ℚ) f * (B : ℚ⟦X⟧) = (A : ℚ⟦X⟧)) :

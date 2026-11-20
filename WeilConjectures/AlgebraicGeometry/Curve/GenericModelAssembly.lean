@@ -18,10 +18,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 # Assembling the generic curve model over a base
 
 The predicate `AlgebraicGeometry.IsGenericCurveModel F` for a morphism `F : X ⟶ S` records the
-conclusion of `lem-fin-generic-curve-model` over the base `S` (without the projective embeddings
-of the curve pieces, which are recovered from finiteness over an affine base): the reduction `T`
-of `X` receives a finite surjection `ν : ∐ Yₐ ⟶ T` from smooth curve families and finite étale
-families, which is an isomorphism outside a closed subscheme of `T` finite over `S`.
+conclusion of `proposition-proper-direct-image-finite-coefficients` over the base `S` (without the
+projective embeddings of the curve pieces, which are recovered from finiteness over an affine base):
+the reduction `T` of `X` receives a finite surjection `ν : ∐ Yₐ ⟶ T` from smooth curve families and
+finite étale families, which is an isomorphism outside a closed subscheme of `T` finite over `S`.
 
 `AlgebraicGeometry.isGenericCurveModel_morphismRestrict` assembles such a model over an open `V`
 of an integral base from finitely many finite morphisms `pₐ : Yₐ ⟶ X₀` whose generic fibres are
@@ -37,11 +37,11 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- The conclusion of `lem-fin-generic-curve-model` over a base `S` for `F : X ⟶ S` (without
-projective embeddings): a reduced scheme `T` with a surjective closed immersion `t : T ⟶ X`,
-finitely many `Yₐ` with a finite surjection `ν : ∐ Yₐ ⟶ T`, each `Yₐ` smooth of relative
-dimension one over `S` or finite étale over `S`, and a closed subscheme `d : D ⟶ T` finite over
-`S` outside of which `ν` is an isomorphism. -/
+/-- The conclusion of `proposition-proper-direct-image-finite-coefficients` over a base `S` for
+`F : X ⟶ S` (without projective embeddings): a reduced scheme `T` with a surjective closed immersion
+`t : T ⟶ X`, finitely many `Yₐ` with a finite surjection `ν : ∐ Yₐ ⟶ T`, each `Yₐ` smooth of
+relative dimension one over `S` or finite étale over `S`, and a closed subscheme `d : D ⟶ T` finite
+over `S` outside of which `ν` is an isomorphism. -/
 def IsGenericCurveModel {X S : Scheme.{u}} (F : X ⟶ S) : Prop :=
   ∃ (T : Scheme.{u}) (t : T ⟶ X) (_ : IsClosedImmersion t) (_ : Surjective t) (_ : IsReduced T)
     (ι : Type u) (_ : Finite ι) (Y : ι → Scheme.{u}) (ν : ∐ Y ⟶ T) (_ : IsFinite ν)
@@ -65,8 +65,6 @@ lemma smoothOfRelativeDimension_of_isPullback {Y S P : Scheme.{u}} [IrreducibleS
     rwa [zero_add] at this
   exact smoothOfRelativeDimension_of_pullback_snd g j hj d
 
-set_option maxHeartbeats 1000000 in
--- Elaborating the many restrictions over `V` exceeds the default heartbeat limit.
 /-- **Assembling the generic curve model over an open of the base.** Let `S₀` be integral and
 locally noetherian, `F₀ : X₀ ⟶ S₀` proper, `pₐ : Yₐ ⟶ X₀` finitely many finite morphisms whose
 base changes `gₐ` along a morphism `j : Spec L ⟶ S₀` to the generic point are smooth of relative
@@ -110,7 +108,8 @@ theorem isGenericCurveModel_morphismRestrict {S₀ X₀ : Scheme.{u}} [IsIntegra
   have Hσ : IsPullback (Limits.Sigma.map fun a ↦ (p a ⁻¹ᵁ X').ι) ν' ν₀ X'.ι :=
     isPullback_sigmaDesc p p' (fun a ↦ (p a ⁻¹ᵁ X').ι) X'.ι
       fun a ↦ (isPullback_morphismRestrict (p a) X').flip
-  have hcomp (a : ι) : p' a ≫ F' = (p a ≫ F₀) ∣_ V := (morphismRestrict_comp _ _ _).symm
+  have hcomp (a : ι) : p' a ≫ F' = (p a ≫ F₀) ∣_ V :=
+    (morphismRestrict_comp (p a) F₀ V).symm
   -- smoothness and relative dimension of the pieces over `V`
   have hrel (a : ι) : SmoothOfRelativeDimension (d a) (p' a ≫ F') := by
     rw [hcomp]

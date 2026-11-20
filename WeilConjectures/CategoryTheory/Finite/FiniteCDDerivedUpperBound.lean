@@ -175,7 +175,7 @@ Proof:
    of `H^(r+1)(L)` gives `0 → Z^r → L^r → Z^(r+1) → 0`. The long exact sequence
    and right acyclicity of `L^r` give `R^p F(Z^(r+1)) ≅ R^(p+1) F(Z^r)` for
    `p ≥ 1`. Left exactness identifies the cycles of `F(L)` with `F(Z^i)`;
-   `R^0 F ≅ F` from `lem-sp-derived-well-defined` identifies its degree `i > t`
+   `R^0 F ≅ F` from `lemma-acyclic-resolutions` identifies its degree `i > t`
    cohomology with `R^1 F(Z^(i-1))`. For `i > t + N`, iterate the connecting
    isomorphisms `N` times to identify this with `R^(N+1) F(Z^(i-N-1)) = 0`.
    Every sequence used has index at least `t`. If `N = 0`, the given vanishing

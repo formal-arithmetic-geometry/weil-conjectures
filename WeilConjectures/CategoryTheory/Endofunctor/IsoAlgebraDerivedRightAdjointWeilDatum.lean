@@ -28,7 +28,7 @@ underlying object `Y`, this file identifies the underlying object of `RW L'` wit
   provides as the mate of `e`).
 
 This is the formal content of "the Frobenius structure of the Weil `Rf^!` is the exceptional
-datum of the Frobenius square" (blueprint `thm-pur-weil-equivariance-of-purity-and-trace`): the
+datum of the Frobenius square" (blueprint `proposition-purity-trace-commute-frobenius`): the
 orientation of a smooth morphism is Frobenius equivariant as soon as it carries this
 counit-characterized datum to the Tate datum.
 -/

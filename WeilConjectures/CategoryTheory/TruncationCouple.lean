@@ -16,7 +16,7 @@ import WeilConjectures.Algebra.Homology.UpperTruncationStepSES
 /-!
 # The truncation couple
 
-Source: Weil conjectures blueprint, sec-abelian-varieties, cor-pqf-proper-quasifinite-finite,
+Source: Weil conjectures blueprint, chap-Abelian-varieties, cor-pqf-proper-quasifinite-finite,
 node def-sp-truncation-couple, order 520 (blueprint: def-sp-truncation-couple).
 
 The terms use the chosen-resolution convention of `def-sp-kinjective-bridge`.

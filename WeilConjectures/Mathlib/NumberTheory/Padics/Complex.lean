@@ -31,7 +31,7 @@ complex absolute values, exist.
 - `PadicAlgCl.mk_eq_continuum`: `#ℚ̄_p = 𝔠`.
 - `PadicAlgCl.nonempty_ringEquiv_complex`: `ℚ̄_p ≃+* ℂ`.
 - `PadicAlgCl.exists_ringEquiv_complex_extend`: every embedding of a number field `L ⊆ ℚ̄_p`
-  into `ℂ` extends to an isomorphism `ℚ̄_p ≃+* ℂ` (blueprint `lem-embedding-extension`).
+  into `ℂ` extends to an isomorphism `ℚ̄_p ≃+* ℂ` (blueprint `lemma-reciprocal-roots-zeta--6`).
 - `PadicAlgCl.exists_ringEquiv_complex_apply_eq`: an algebraic `β ∈ ℚ̄_p` can be sent to any
   conjugate by an isomorphism `ℚ̄_p ≃+* ℂ`.
 -/
@@ -79,7 +79,7 @@ theorem PadicAlgCl.nonempty_ringEquiv_complex : Nonempty (PadicAlgCl p ≃+* ℂ
 theorem PadicAlgCl.nonempty_ringHom_complex : Nonempty (PadicAlgCl p →+* ℂ) :=
   (PadicAlgCl.nonempty_ringEquiv_complex p).map RingEquiv.toRingHom
 
-/-- Blueprint `lem-embedding-extension` (extension of embeddings): every field embedding
+/-- Blueprint `lemma-reciprocal-roots-zeta--6` (extension of embeddings): every field embedding
 `σ : L → ℂ` of a number field `L ⊆ ℚ̄_p` extends to an abstract field isomorphism
 `ι : ℚ̄_p ≃ ℂ`. Both fields are algebraically closed of cardinality `𝔠`, so their transcendence
 bases over the countable field `L` (acting on `ℂ` through `σ`) are equipotent
@@ -100,7 +100,7 @@ theorem PadicAlgCl.exists_ringEquiv_complex_extend (L : IntermediateField ℚ (P
 open IntermediateField in
 /-- An element `β ∈ ℚ̄_p` algebraic over `ℚ` can be sent by a field isomorphism `ℚ̄_p ≃+* ℂ` to
 any complex root of its minimal polynomial over `ℚ`: embed `ℚ(β)` by `β ↦ z` and extend
-(`PadicAlgCl.exists_ringEquiv_complex_extend`, blueprint `lem-embedding-extension`). -/
+(`PadicAlgCl.exists_ringEquiv_complex_extend`, blueprint `lemma-reciprocal-roots-zeta--6`). -/
 theorem PadicAlgCl.exists_ringEquiv_complex_apply_eq {β : PadicAlgCl p} (hβ : IsIntegral ℚ β)
     {z : ℂ} (hz : Polynomial.aeval z (minpoly ℚ β) = 0) :
     ∃ ι : PadicAlgCl p ≃+* ℂ, ι β = z := by
@@ -116,7 +116,7 @@ theorem PadicAlgCl.exists_ringEquiv_complex_apply_eq {β : PadicAlgCl p} (hβ : 
 
 /-- An element `β ∈ ℚ̄_p` algebraic over `ℚ` can be sent by a field embedding `ℚ̄_p →+* ℂ` to any
 complex root of its minimal polynomial over `ℚ`: embed `ℚ(β)` by `β ↦ z` and extend
-(`PadicAlgCl.exists_ringEquiv_complex_extend`, blueprint `lem-embedding-extension`). -/
+(`PadicAlgCl.exists_ringEquiv_complex_extend`, blueprint `lemma-reciprocal-roots-zeta--6`). -/
 theorem PadicAlgCl.exists_ringHom_complex_apply_eq {β : PadicAlgCl p} (hβ : IsIntegral ℚ β)
     {z : ℂ} (hz : Polynomial.aeval z (minpoly ℚ β) = 0) :
     ∃ ι : PadicAlgCl p →+* ℂ, ι β = z :=

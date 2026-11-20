@@ -217,7 +217,6 @@ variable {J : GrothendieckTopology C} {K : GrothendieckTopology D}
   (A : CoefficientSystemOrdinaryImage (J := J) (K := K) O ell _ _
     (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous p (Type (u + 1)) J K))
 
-set_option maxHeartbeats 1200000 in
 -- Check the transported addition and scalar actions on generalized sections.
 private theorem finiteConstantRight (n : ℕ) :
     ∃ e : A.right n ⋙ finiteConstantModule J
@@ -295,11 +294,11 @@ private theorem finiteConstantRight (n : ℕ) :
     change (β.hom.app M).hom.app U (x + y) = _ at ht
     change (β.hom.app M).hom.app U x = _ at ha
     change (β.hom.app M).hom.app U y = _ at hb
-    rw [ht, ha, hb]
     dsimp only [id] at h
-    rw [h]
-    exact (((A.levelAdj n).counit.app M).val.app
-      (p.op.obj U)).hom.map_add _ _
+    exact ht.trans ((congrArg
+      (fun x ↦ ((A.levelAdj n).counit.app M).val.app (p.op.obj U) x) h).trans
+        ((((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom.map_add _ _ |>.trans
+          (congrArg₂ (fun x y : M.val.obj (p.op.obj U) ↦ x + y) ha.symm hb.symm)))
   have hsmul (M) (U : Cᵒᵖ) (q : O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))
       (x : (R.obj M).val.obj U) :
       (β.hom.app M).hom.app U
@@ -365,11 +364,7 @@ private theorem finiteConstantRight (n : ℕ) :
       ((show (coefficientQuotientSheaf (J := J)
         O ell n).obj.obj U from a.hom.app U z) • x) = _ at ht
     change (β.hom.app M).hom.app U x = _ at hb
-    rw [ha] at ht
-    rw [ht]
-    conv_rhs => rw [hb]
     dsimp only [id] at h
-    rw [h]
     have hconst := constantSection_apply K
       (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)) q (p.op.obj U)
       ((A.singleton.hom).hom.app (p.op.obj U)
@@ -379,9 +374,14 @@ private theorem finiteConstantRight (n : ℕ) :
       ((L.map a).hom.app (p.op.obj U)
         ((adj.unit.app T).hom.app U z)) = _ at hc'
     have hs := hc'.trans hconst
-    rw [hs]
-    exact (((A.levelAdj n).counit.app M).val.app
-      (p.op.obj U)).hom.map_smul _ _
+    have ht' := (congrArg (fun a : (coefficientQuotientSheaf (J := J)
+      O ell n).obj.obj U ↦ (β.hom.app M).hom.app U
+        (a • x)) ha).symm.trans ht
+    exact ht'.trans ((congrArg
+      (fun x ↦ ((A.levelAdj n).counit.app M).val.app (p.op.obj U) x) h).trans
+        ((((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom.map_smul _ _ |>.trans
+          (congrArg₂ (fun a : (coefficientQuotientSheaf (J := K) O ell n).obj.obj
+            (p.op.obj U) ↦ fun x : M.val.obj (p.op.obj U) ↦ a • x) hs hb.symm)))
   let B := CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))
   let F := R ⋙ finiteConstantModule J B
   let G := finiteConstantModule K B ⋙ p.sheafPushforwardContinuous (ModuleCat B) J K

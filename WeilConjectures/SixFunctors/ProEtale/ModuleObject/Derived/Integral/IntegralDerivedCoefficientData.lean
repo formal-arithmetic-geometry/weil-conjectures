@@ -58,7 +58,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 # Integral derived coefficient data
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-cor-int-compactness-ii,
-coefficient setup used by `det-cor-int-compactness-ii-extension-zero`
+coefficient setup used by `proposition-proper-direct-image-extension-zero`
 (blueprint: def-sfb-integral-derived-coefficient-data).
 
 The declarations below are canonical names for the coefficient ring, its unbounded derived

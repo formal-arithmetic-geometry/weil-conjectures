@@ -10,8 +10,9 @@ import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 
 /-! # Section normalization of native Frobenius transport
 
-Source: Stacks 03D6 and 03EO; native ringed-model proof, step 1.
-(blueprint: lem-sf-native-frobenius-section-transport)
+## References
+
+* Stacks 03D6 and 03EO
 -/
 
 @[expose] public section
@@ -31,8 +32,6 @@ attribute [local irreducible] PresheafOfModules.sheafificationAdjunction
 
 /-- Pullback along the inverse isomorphism is postcomposition along the isomorphism.
 
-Source: Stacks 03D6; the site-identification step in native Frobenius comparison.
-(blueprint: lem-sf-native-frobenius-section-transport)
 The first pullback projection is an isomorphism; its compatibility with the
 structure morphisms is the pullback square followed by `g.inv_hom_id`. -/
 noncomputable def pullbackPostcomposeIso (Y : Scheme.{u}) (g : Y ≅ Y) :
@@ -290,22 +289,7 @@ private theorem translationIso_sections (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime
     (congrArg (fun k ↦ k.val.app V) ((sectionCounit Y l).app
       ((sigma (topology Y) (translation g) (ring Y l) (ringIso Y l g)).obj M)).inv_hom_id) _
 
-/-- The concrete native translation isomorphism, with its section normalization.
-
-Source: Stacks 03D6 and 03EO; native ringed-model proof, step 1.
-(blueprint: lem-sf-native-frobenius-section-transport)
-
-Proof: the first projection identifies pullback along `g.inv` with postcomposition
-along `g`. Restrict module sections along its inverse. The native scalar action
-is evaluation of the action morphism on coefficient and module pure tensors.
-Naturality of the tensor comparison shows that pushforward acts by the native
-coefficient map. Restriction along the inverse first projection cancels this
-coefficient map, proving linearity. Naturality follows from the pullback square.
-On the small site, postcomposition with its identity ring map is the specified
-translation functor definitionally. Conjugate by the section counit and lift
-through the fully faithful section-module equivalence. Its counit identity gives
-the displayed normalization. This construction works for all modules, including
-zero modules, and for the empty scheme. -/
+/-- The concrete native translation isomorphism, with its section normalization. -/
 theorem nativeFrobeniusSectionTransport (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (g : Y ≅ Y) :
     let _ := (translation_continuous Y g).1

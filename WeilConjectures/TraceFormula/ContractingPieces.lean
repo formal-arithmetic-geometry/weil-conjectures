@@ -16,8 +16,8 @@ Let `c = (c₁, c₂) : C ⟶ X × X` be an endocorrespondence of `(X, K)` with 
 `u : Lc₂^* K ⟶ Rc₁^! K`, and let `x` be a rational point of `X` with open complement
 `j : U = X ∖ {x} ⟶ X`. If `{x}` is `c`-invariant, `c₁⁻¹(x) ⊆ c₂⁻¹(x)`, equivalently
 `V = c₂⁻¹(U) ⊆ W = c₁⁻¹(U)`, then `u` induces a coefficient map on the open piece
-`K^U = j_! Lj^* K` (blueprint `prop-trf-trace-class-additivity`,
-`lem-trf-trace-triangle-compatibility`):
+`K^U = j_! Lj^* K` (blueprint `proposition-additivity-trace-classes--2`,
+`proposition-additivity-trace-classes--2`):
 
 * `u^U = [j]_! (u|_U) : Lc₂^* K^U ⟶ Rc₁^! K^U`
   (`ProEtale.CondensedRing.Correspondence.pointOpenPieceCoeff`): the open base change

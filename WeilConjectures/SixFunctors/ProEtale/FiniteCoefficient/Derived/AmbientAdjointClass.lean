@@ -14,13 +14,13 @@ public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 # The exceptional adjoint on the bounded comparison class
 
 Let `f : X ⟶ Y` be a morphism admitting a compactification `X ⟶[j] X̄ ⟶[p] Y`, and let `Λ` be a
-finite ring. This file collects the statements of blueprint subsection `sk-prop-sf-existence`
-about the pro-étale exceptional adjoint relative to the class of bounded below objects of étale
-origin:
+finite ring. This file collects the statements of blueprint subsection
+`theorem-existence-exceptional-inverse-image` about the pro-étale exceptional adjoint relative to
+the class of bounded below objects of étale origin:
 
 * the compact-support comparison `Rf_!(c) K ≅ ν_Y^* Rf_!^{ét}(c) G` for a bounded below `K` of
   étale origin with witness `α : ν_X^* G ≅ K`, natural in the witness (blueprint
-  `lem-sf-class-compact-support-comparison`).
+  `proposition-comparison-immersions--4`).
 
 ## Main definitions
 
@@ -46,7 +46,7 @@ section CompactSupportComparison
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- Blueprint `lem-sf-class-compact-support-comparison`: On the coefficient class the
+/-- Blueprint `proposition-comparison-immersions--4`: On the coefficient class the
 compact-support functor is computed on the étale site.
 
 Let `c = (X ⟶[j] X̄ ⟶[p] Y)` be a compactification of `f`, let `G` be a bounded below complex of
@@ -425,8 +425,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} {f : X
 /-- The compactification comparison `Rf_!(c) ≅ Rf_!(d)` of the pro-étale compact-support functors
 on the bounded below objects of étale origin
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationEtaleOriginIso`, transported
-from the étale comparisons of blueprint `lem-amb-etale-compact-comparisons`), with values in the
-bounded below objects. -/
+from the étale comparisons of blueprint `proposition-construction-independence-rf-shriek--7`), with
+values in the bounded below objects. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso
     (c d : Compactification f) :
     rightDerivedLowerShriekOfCompactificationPlusEtaleOrigin (ModuleCat.{u + 1} Λ) c ≅
@@ -585,10 +585,10 @@ comparison class.
 
 For the bounded constructible coefficient class at a finite stage `Λ`, both halves of clause (1)
 of exceptional-adjoint admissibility hold relative to the class: the vanishing half is the
-class-restricted datum `FullCD_cls(p, Λ; 2d)` (blueprint `thm-sf-fullcd-class`) and the existence
-half is the exceptional adjoint relative to the class (blueprint `thm-sf-ambient-adjoint-class`),
-which restricts to an adjunction `Rf_! ⊣ Rf^!` on the bounded constructible complexes of finite
-Tor amplitude
+class-restricted datum `FullCD_cls(p, Λ; 2d)` (blueprint
+`lemma-uniform-bounds-pro-etale-affines--2`) and the existence half is the exceptional adjoint
+relative to the class (blueprint `thm-sf-ambient-adjoint-class`), which restricts to an adjunction
+`Rf_! ⊣ Rf^!` on the bounded constructible complexes of finite Tor amplitude
 (`AlgebraicGeometry.ProEtale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`). The
 unrestricted ambient datum `AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint` is not
 asserted: it is false in general (an elliptic curve over `𝔽̄_p` with `Λ = 𝔽_r`).
@@ -602,10 +602,11 @@ Blueprint `rem-ptr-pur-conventions-5`: Pointer to the properties of [def-pur-con
 
 Blueprint `rem-ptr-pur-td-datum-6`: Pointer to the properties of [def-pur-td-datum]
 
-Blueprint `rem-ptr-trf-admissibility-12`: Pointer to the properties of [def-trf-admissibility]
+Blueprint `rem-ptr-trf-admissibility-12`: Pointer to the properties of
+[theorem-f-shriek-finite-coefficients]
 
 Blueprint `rem-ptr-weil-exceptional-inverse-image-14`: Pointer to the properties of
-[def-weil-exceptional-inverse-image] -/
+[theorem-f-shriek-finite-coefficients] -/
 theorem hasCohomologicalDimensionLEOnEtaleOrigin_and_nonempty_adjunction_constructibleFiniteTor
     (d : ℕ) (hd : topologicalKrullDim (HasCompactification.compactification f).Z ≤
       (d : WithBot ℕ∞)) :
@@ -626,9 +627,9 @@ omit [QuasiCompact aY] in
 /-- Blueprint `rem-ptr-weil-ambient-exceptional-adjoint-11`: on the coefficient class of étale
 origin both halves of the ambient exceptional right adjoint datum are theorems: the vanishing
 half is the class-restricted datum `FullCD_cls(p, Λ; 2d)`, with the sharp comparison bound
-`M = 0` (`R^q ν_* ν^* G = 0` for `q > 0`, blueprint `prop-sf-comparison-bound-zero`), and the
-existence half, with its counit and compactification comparisons, is blueprint
-`thm-sf-ambient-adjoint-class`. -/
+`M = 0` (`R^q ν_* ν^* G = 0` for `q > 0`, blueprint
+`theorem-bounded-below-cohomology-comparison--1`), and the existence half, with its counit and
+compactification comparisons, is blueprint `thm-sf-ambient-adjoint-class`. -/
 theorem hasCohomologicalDimensionLEOnEtaleOrigin_and_comparisonBound_and_bijective
     (c : Compactification f) (d : ℕ) (hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) :
     HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} Λ) c.g (2 * d) ∧

@@ -113,7 +113,7 @@ its underlying sheaf, regular module, and root-limit normalizations.
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
 sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), using the integral
-comparison in sk-prop-sfb-qlbar-colimit-x.
+comparison in lemma-comparison-completed-coefficients.
 (blueprint: lem-diagonal-completed-coefficient-realization).
 
 Proof: the completed ring and the pulled-back condensed Z_l ring are limits of

@@ -17,9 +17,10 @@ import WeilConjectures.RingTheory.FinitePresentationKerRangeCokernel
 Source: Stacks Project, More on Algebra, Lemma 0EWZ and Algebra, Lemma 05CX
 (blueprint: lem-sc-coherent-ring-perfect-complex-cohomology).
 
-The complex here is the affine module complex mentioned in `def-pc-perfect-complex`,
-not its associated complex of sheaves. Coherence is expressed by the defining ideal
-condition of Stacks, Algebra, Definition 10.90.1 (section Tag 05CU).
+The complex here is the affine module complex mentioned in
+`lemma-coherent-base-change-invertible-sheaves--1`, not its associated complex of sheaves. Coherence
+is expressed by the defining ideal condition of Stacks, Algebra, Definition 10.90.1 (section Tag
+05CU).
 -/
 
 @[expose] public section

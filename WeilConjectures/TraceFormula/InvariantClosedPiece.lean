@@ -15,8 +15,8 @@ Let `c = (c₁, c₂) : C ⟶ X × X` be an endocorrespondence of `(X, K)` with 
 `u : Lc₂^* K ⟶ Rc₁^! K`, and let `i : Z ⟶ X` be a closed immersion. Let `i' : C_Z ⟶ C` be the
 preimage `c₁⁻¹(Z)`, so that the square `i' ≫ c₁ = c_{1Z} ≫ i` is cartesian, and suppose that
 `c₂` maps `C_Z` into `Z`, `i' ≫ c₂ = c_{2Z} ≫ i` (this forces `c₁⁻¹(Z) ⊆ c₂⁻¹(Z)`, and holds for
-instance when `c₁⁻¹(Z)` is reduced and `c₁⁻¹(Z) ⊆ c₂⁻¹(Z)`). Then (blueprint
-`lemma-lift-correspondence-invariant-decomposition`, `lemma-closed-piece-pushforward`):
+instance when `c₁⁻¹(Z)` is reduced and `c₁⁻¹(Z) ⊆ c₂⁻¹(Z)`). Then (the lift of a
+correspondence to an invariant decomposition, and the closed piece as a pushforward):
 
 * `u` restricts to a correspondence `c_Z = (C_Z, c_{1Z}, c_{2Z}, u_{|Z})` on `(Z, Li^* K)`
   (`ProEtale.CondensedRing.Correspondence.restrictClosed`), whose coefficient map
@@ -85,7 +85,7 @@ noncomputable def upperStarIsoOfComm :
 include sq in
 /-- The *restriction* `u_{|Z} : Lc_{2Z}^* Li^* K ⟶ Rc_{1Z}^! Li^* K` of a coefficient map
 `u : Lc₂^* K ⟶ Rc₁^! K` to a closed subscheme `i : Z ⟶ X`, along the cartesian square
-`i' ≫ c₁ = c_{1Z} ≫ i` and `i' ≫ c₂ = c_{2Z} ≫ i` (blueprint `lemma-closed-piece-pushforward`):
+`i' ≫ c₁ = c_{1Z} ≫ i` and `i' ≫ c₂ = c_{2Z} ≫ i` (the closed piece as a pushforward):
 ```
 Lc_{2Z}^* Li^* K ≅ Li'^* Lc₂^* K --Li'^* u--> Li'^* Rc₁^! K --β--> Rc_{1Z}^! Li^* K,
 ```
@@ -106,8 +106,8 @@ noncomputable def restrictedCoeffOfIsPullback :
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map
           ((boundedConstructibleUpperShriekAdjunction ℓ c₁).counit.app K))
 
-/-- **The exceptional adjoint of the restricted coefficient map** (blueprint
-`lemma-lift-correspondence-invariant-decomposition`, the closed piece): the
+/-- **The exceptional adjoint of the restricted coefficient map** (the lift of a correspondence
+to an invariant decomposition, the closed piece): the
 `Rc_{1Z!} ⊣ Rc_{1Z}^!` adjoint of `u_{|Z}` is
 ```
 Rc_{1Z!} Lc_{2Z}^* Li^* K ≅ Rc_{1Z!} Li'^* Lc₂^* K ≅ Li^* Rc₁_! Lc₂^* K --Li^* û--> Li^* K,
@@ -239,8 +239,8 @@ variable {X Z CZ : Over (Spec (.of k))}
   (sq : IsPullback i' c₁Z c.c₁ i) (w₂ : i' ≫ c.c₂ = c₂Z ≫ i)
 
 /-- The *restriction* `c_Z = (C_Z, c_{1Z}, c_{2Z}, u_{|Z})` of an endocorrespondence `c` of
-`(X, K)` to a closed subscheme `i : Z ⟶ X`, a correspondence of `(Z, Li^* K)` (blueprint
-`lemma-closed-piece-pushforward`): its support is `C_Z = c₁⁻¹(Z)` (the square
+`(X, K)` to a closed subscheme `i : Z ⟶ X`, a correspondence of `(Z, Li^* K)` (the closed piece as a
+pushforward): its support is `C_Z = c₁⁻¹(Z)` (the square
 `i' ≫ c₁ = c_{1Z} ≫ i` is cartesian), on which `c₂` factors through `Z`, and its coefficient map
 is the restriction `u_{|Z}` of `u` (`restrictedCoeffOfIsPullback`). -/
 noncomputable def restrictClosed :
@@ -257,7 +257,7 @@ include hi
 /-- The proper pushforward diagram `(i, i')` from the restriction `c_Z` of `c` to a closed
 subscheme back to `c`: a diagram since `i' ≫ c₁ = c_{1Z} ≫ i` and `i' ≫ c₂ = c_{2Z} ≫ i`. Its
 coefficient pushforward is the *closed piece coefficient* `u_Z = [i, i']_! u_{|Z}` on the closed
-piece `K_Z = Ri_* Li^* K` (blueprint `lemma-closed-piece-pushforward`). -/
+piece `K_Z = Ri_* Li^* K` (the closed piece as a pushforward). -/
 noncomputable abbrev closedPieceDiagram : (c.restrictClosed sq w₂).ProperPushforwardDiagram X where
   f := i
   D := c.C
@@ -268,8 +268,8 @@ noncomputable abbrev closedPieceDiagram : (c.restrictClosed sq w₂).ProperPushf
   w₁ := sq.w
   w₂ := w₂
 
-/-- **The closed piece is the pushforward of the restriction** (blueprint
-`lemma-closed-piece-pushforward`; Varshavsky, Lemma 1.5.9): for a closed subscheme
+/-- **The closed piece is the pushforward of the restriction** (Varshavsky, Lemma 1.5.9): for a
+closed subscheme
 `i : Z ⟶ X` with `C_Z = c₁⁻¹(Z)` mapped into `Z` by `c₂`, the closed piece coefficient
 `u_Z = [i, i']_! u_{|Z}`, the pushforward of the restriction of `u` to `Z`, is compatible with `u`
 along the unit `η : K ⟶ Ri_* Li^* K`: `u_Z ∘ Lc₂^* η = Rc₁^! η ∘ u`, i.e. the square
@@ -279,7 +279,16 @@ Lc₂^* K --Lc₂^* η--> Lc₂^* K_Z
    v                     v
 Rc₁^! K --Rc₁^! η--> Rc₁^! K_Z
 ```
-commutes, where `K_Z = Ri_* Li^* K`. -/
+commutes, where `K_Z = Ri_* Li^* K`.
+
+Proof: both sides are compared after the double transposition along `Rc₁_! ⊣ Rc₁^!` and
+`Li^* ⊣ Ri_*`. The double transpose of the left side is computed through the fields of the
+pushforward diagram (`map_map_comp_pushforwardCoeff_mk_comp_counit`) and the compact-support
+base change of the cartesian square; the exceptional adjoint of the restricted coefficient map
+`u_{|Z}` is `Li^* û` up to the base change
+(`AlgebraicGeometry.ProEtale.CondensedRing.homEquiv_symm_restrictedCoeffOfIsPullback`), and the
+remaining composite is the identity by the triangle identity
+(`upperStar_map_upperStar_map_unit_comp_counit_comp_eq_id`). -/
 theorem upperStar_map_unit_comp_closedPieceCoeff :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map
         ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K) ≫
@@ -288,11 +297,13 @@ theorem upperStar_map_unit_comp_closedPieceCoeff :
         ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K) := by
   have := isProper_left_of_isPullback sq
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
-  have h := map_map_comp_pushforwardCoeff_mk_comp_counit (c.restrictClosed sq w₂) i c.c₁ c.c₂ i'
+  -- the restriction `c_Z` as a structure literal, so that its projections reduce definitionally
+  have h := map_map_comp_pushforwardCoeff_mk_comp_counit
+    (Correspondence.mk CZ c₁Z c₂Z (restrictedCoeffOfIsPullback sq w₂ K c.u)) i c.c₁ c.c₂ i'
     sq.w w₂
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map
       ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K))
-  dsimp only [restrictClosed] at h
+  dsimp only at h
   refine Adjunction.eq_of_map_comp_counit_eq (boundedConstructibleUpperShriekAdjunction ℓ c.c₁)
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ i) _ _ ((h.trans ?_).trans
       (Adjunction.map_map_comp_map_unit_comp_counit
@@ -304,16 +315,21 @@ theorem upperStar_map_unit_comp_closedPieceCoeff :
       ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K))
   dsimp only [Functor.comp_map] at n₁
   rw [reassoc_of% n₁]
-  simp only [restrictedCoeffOfIsPullback, Category.assoc]
-  rw [← Functor.map_comp_assoc]
-  simp only [upperStar_map_upperStar_map_unit_comp_counit_comp_eq_id_assoc w₂ K]
-  rw [Adjunction.map_comp_homEquiv_comp_counit]
-  have n₂ := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).naturality c.u
-  dsimp only [Functor.comp_map] at n₂
-  have e := Iso.hom_inv_id_app (asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq))
-    ((boundedConstructibleUpperShriek ℓ c.c₁).obj K)
-  rw [asIso_hom] at e
-  rw [← reassoc_of% n₂, reassoc_of% e, Functor.map_comp]
+  -- the exceptional adjoint of the restricted coefficient map `u_{|Z}`
+  have key := homEquiv_symm_restrictedCoeffOfIsPullback sq w₂ K c.u
+  rw [Adjunction.homEquiv_counit] at key
+  simp only [Functor.map_comp, Category.assoc]
+  -- (the rewrites are focused with `conv`: a plain `rw` scans every composite of this goal)
+  conv_lhs => enter [2, 2, 2, 2, 2, 2]; rw [key]
+  conv_lhs =>
+    enter [2]
+    rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc,
+      ← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
+  simp only [Category.assoc]
+  conv_lhs => enter [2, 1, 2]; rw [upperStar_map_upperStar_map_unit_comp_counit_comp_eq_id w₂ K]
+  dsimp only [Functor.id_obj]
+  rw [CategoryTheory.Functor.map_id, Category.id_comp, IsIso.hom_inv_id_assoc,
+    Adjunction.homEquiv_counit, Functor.map_comp]
 
 end Correspondence
 

@@ -66,7 +66,7 @@ Proof (the node's ten steps):
 7. The sheaf condition for the disjoint étale cover U_i gives
    G(X^sh) = product G(U_i). Empty intersections have singleton sections, including
    the empty-family case (`lem-weil-pbc-open-immersion-etale`,
-   `lem-weil-pbc-open-fibre-product`, `def-weil-pbc-etale-sheaf-of-sets`).
+   `lem-weil-pbc-open-fibre-product`, `situation-conventions`).
 8. The germ map on each strictly henselian local U_i is bijective
    (`lem-weil-pbc-sets-strictly-henselian-open-sections-stalk`).
 9. Inverse-image stalks identify G at each lifted point with H at the corresponding

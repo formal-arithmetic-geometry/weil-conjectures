@@ -14,7 +14,7 @@ import Mathlib.RingTheory.Flat.Equalizer
 # Vanishing of the left base-change term of the Jacobi-Zariski sequence
 
 Source: Stacks Project, Algebra, Lemma 00S2, final assertion and its proof
-(blueprint: lem-weil-pbc-jacobi-zariski-left-term-vanishing).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -25,7 +25,7 @@ open TensorProduct
 
 namespace Algebra
 
-/-- (blueprint: lem-weil-pbc-jacobi-zariski-left-term-vanishing)
+/-- (blueprint: theorem-finite-etale-covers-proper-henselian--2)
 Stacks Project, Algebra, Lemma 00S2, final assertion, specialized to projective differentials
 and zero first cotangent homology. The presentation is the canonical `A[B] → B`.
 The tensor of the kernel inclusion is injective and identifies its source with the kernel

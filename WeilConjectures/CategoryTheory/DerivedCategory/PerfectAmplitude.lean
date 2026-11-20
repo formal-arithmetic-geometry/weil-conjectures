@@ -23,10 +23,10 @@ Tor amplitude is the same, but keeps track of the degrees.
 ## Main statements
 
 - `DerivedCategory.exists_iso_Q_obj_projective_of_torAmplitudeIn`
-  (`lem-weil-bounded-finite-tor-perfect`): the model by finite projective modules in degrees
+  (`lemma-perfect-complexes-geometric-point`): the model by finite projective modules in degrees
   `[a, b]`.
 - `DerivedCategory.exists_iso_Q_obj_free_of_torAmplitudeIn`
-  (`lem-weil-bounded-finite-tor-perfect`): over a local ring, the model by finite free modules
+  (`lemma-perfect-complexes-geometric-point`): over a local ring, the model by finite free modules
   in degrees `[a, b]`.
 -/
 
@@ -286,7 +286,7 @@ private lemma hasProjectiveModelIn_of_torAmplitudeIn (n : ℕ) {c b : ℤ} (hcb 
         exists_hasProjectiveModelIn_imp_of_torAmplitudeIn hbc hC hfin
       exact himp (ih (by omega) (by omega) hC' hfin')
 
-/-- Blueprint `lem-weil-bounded-finite-tor-perfect`: Bounded complexes of finite Tor amplitude
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Bounded complexes of finite Tor amplitude
 are perfect.
 
 Let `R` be a Noetherian ring and `C` an object of `D(R)` with finitely generated cohomology
@@ -302,7 +302,7 @@ theorem exists_iso_Q_obj_projective_of_torAmplitudeIn {a b : ℤ} (hab : a ≤ b
       (∀ i, Module.Projective R (P.X i) ∧ Module.Finite R (P.X i)) ∧ Nonempty (C ≅ Q.obj P) :=
   hasProjectiveModelIn_of_torAmplitudeIn (b - a).toNat hab (by omega) hC hfin
 
-/-- Blueprint `lem-weil-bounded-finite-tor-perfect`: Bounded complexes of finite Tor amplitude
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Bounded complexes of finite Tor amplitude
 are perfect, local case.
 
 Let `R` be a Noetherian local ring and `C` an object of `D(R)` with finitely generated

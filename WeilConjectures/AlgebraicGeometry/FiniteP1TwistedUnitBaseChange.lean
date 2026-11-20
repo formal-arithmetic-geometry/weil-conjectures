@@ -9,7 +9,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness
 
 /-! # Exchange for the twisted projective-line unit
 
-Source: blueprint thm-amb-p1-decomposition, base-change paragraph; the mate-unit
+Source: blueprint lemma-cohomology-projective-line-trace, base-change paragraph; the mate-unit
 calculation in lem-sp-finite-p1-kummer-naturality, step 3.
 -/
 
@@ -426,7 +426,7 @@ private theorem p1Unit_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)
   rfl
 
 /-- The twisted unit commutes with projective-line exchange over arbitrary bases.
-Source: blueprint thm-amb-p1-decomposition, base-change paragraph, and
+Source: blueprint lemma-cohomology-projective-line-trace, base-change paragraph, and
 lem-sp-finite-p1-kummer-naturality, step 3.
 (auxiliary; not a blueprint node).
 
