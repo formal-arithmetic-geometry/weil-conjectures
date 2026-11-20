@@ -7,16 +7,13 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalTowerCoefficients
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTowerTraceLimit
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientPullback
+public import WeilConjectures.AlgebraicGeometry.RationalP1.Tate.RationalTatePullback
 
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerSystem
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerLimit
 import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1CompletedLimitBridge
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckCoefficientUniverse
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Mathlib.CategoryTheory.Adjunction.Evaluation
-import Mathlib.CategoryTheory.Generator.Basic
+import WeilConjectures.AlgebraicGeometry.RationalP1.AffineLineAdjunctionAssembly
 
 /-!
 # The `ℓ`-adic cycle class of the diagonal
@@ -36,7 +33,10 @@ out by `AlgebraicGeometry.ProEtale.DiagonalCoefficients.Family.IsCanonical`.
 - `AlgebraicGeometry.ProEtale.DiagonalCoefficients.exists_family_isCanonical`: the canonical
   family exists.
 - The clause lemmas `Family.IsCanonical.integral_delta_reduction`, ...,
-  `Family.IsCanonical.trace_pullback`: the properties of the canonical family.
+  `Family.closure_integration₂`: the properties of the canonical family.
+- `AlgebraicGeometry.ProEtale.DiagonalCoefficients.Family.IsCanonical.pullbackCompatibility`:
+  the canonical families are compatible with base change, through the twist comparisons
+  `rationalTwistComparison` and `closureTwistComparison`.
 -/
 
 @[expose] public noncomputable section
@@ -218,48 +218,6 @@ def Family.IsCanonical (Y : Scheme.{u}) [IsNoetherian Y] (family : Family l Y) :
         DiagonalTrace.IsDiagonalLimit l Y hY D δ ∧ Nonempty (Reference l Y δ family) ∧
           FiniteReductions l Y family
 
-private theorem towerGrothendieck (A : Type*) [Category A] [Abelian A]
-    [IsGrothendieckAbelian.{u + 1} A] :
-    IsGrothendieckAbelian.{u + 1} (ℕᵒᵖ ⥤ A) := by
-  let G := separator A
-  have hG := isSeparator_separator A
-  have hS : ObjectProperty.IsSeparating
-      (.ofObj fun j : ℕᵒᵖ ↦ (evaluationLeftAdjoint A j).obj G) := by
-    intro F F' f g hfg
-    apply NatTrans.ext
-    funext j
-    apply hG.def
-    intro a
-    let adj := evaluationAdjunctionRight A j
-    apply (adj.homEquiv G F').symm.injective
-    have h := hfg _ (ObjectProperty.ofObj_apply _ j) ((adj.homEquiv G F).symm a)
-    exact (adj.homEquiv_naturality_right_symm a f).trans
-      (h.trans (adj.homEquiv_naturality_right_symm a g).symm)
-  have : HasSeparator (ℕᵒᵖ ⥤ A) := ⟨_, hS.isSeparator_coproduct⟩
-  have : HasFilteredColimitsOfSize.{u + 1, u + 1} (ℕᵒᵖ ⥤ A) :=
-    ⟨fun _ _ _ ↦ inferInstance⟩
-  have : AB5OfSize.{u + 1, u + 1} (ℕᵒᵖ ⥤ A) := ⟨fun _ _ _ ↦ inferInstance⟩
-  exact { locallySmall := ⟨fun P Q ↦ small_of_injective
-    (f := fun f : P ⟶ Q ↦ f.app) (fun f g h ↦ NatTrans.ext h)⟩ }
-
-@[irreducible] private def localizations (X : Scheme.{u}) : DiagonalTraceLocalizations l X := by
-  letI : IsGrothendieckAbelian.{u + 1} (DiagonalCompleted l X) :=
-    SheafOfModules.isGrothendieckAbelian_coefficientUniverse _
-  letI : IsGrothendieckAbelian.{u + 1} (DiagonalSystems l X) :=
-    towerGrothendieck (DiagonalMod l X)
-  letI : IsGrothendieckAbelian.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb X) :=
-    towerGrothendieck (DiagonalAb X)
-  letI : IsGrothendieckAbelian.{u + 1} (ℕᵒᵖ ⥤ DiagonalCompleted l X) :=
-    towerGrothendieck (DiagonalCompleted l X)
-  letI := HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} (DiagonalSystems l X)
-  exact ⟨HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} (DiagonalAb X),
-    HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} (DiagonalMod l X),
-    inferInstance,
-    HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb X),
-    HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} (DiagonalCompleted l X),
-    HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} (ℕᵒᵖ ⥤ DiagonalCompleted l X),
-    hasExt_of_hasDerivedCategory _⟩
-
 /-- Let `k` be a field of characteristic `p ≠ ℓ` and `Y` a separated `k`-scheme of finite type.
 There is a canonical family of diagonal classes `δ_Λ : Δ_* Λ ⟶ Λ(1)[2]` on
 `ℙ¹_Y ×_Y ℙ¹_Y` and traces `Tr_q : Rq_* Λ(1)[2] ⟶ Λ`, `Tr_{p_i}`, for
@@ -281,9 +239,9 @@ theorem exists_family_isCanonical (k : Type u) [Field k] [Fact (ringChar k).Prim
   have : IsNoetherian (diagonalSurface Y) :=
     isNoetherian_of_locallyOfFiniteType
       (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))
-  let aY := localizations l Y
-  let aP := localizations l (ProjectiveLine Y)
-  let aW := localizations l (diagonalSurface Y)
+  let aY := RationalP1.diagonalLocalizations l Y
+  let aP := RationalP1.diagonalLocalizations l (ProjectiveLine Y)
+  let aW := RationalP1.diagonalLocalizations l (diagonalSurface Y)
   obtain ⟨D, hcompletion, hsystem⟩ := exists_diagonalTowerSystem l Y hY
   obtain ⟨δ, hlimit⟩ := RationalP1.completedLimit_exists l Y hY D
     (diagonalTower_limit l k (ringChar k) (Fact.out : ringChar k ≠ l) Y hY D
@@ -416,56 +374,68 @@ theorem Family.closure_integration₂ {Y : Scheme.{u}} (family : Family l Y) :
 
 /-! ### Base change -/
 
-/-- The diagonal class of `d'` over `Y'` is the inverse image of the diagonal class of `d` over
-`Y` along `g : Y' ⟶ Y`, through the canonical supported-source comparison and the line
-comparison `mW`. -/
-def DiagramClassPullback
-    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    {Y Y' : Scheme.{u}} (g : Y' ⟶ Y) (L : ∀ X : Scheme.{u}, Modules R X)
-    (d : Diagram R Y L) (d' : Diagram R Y' L)
-    (mP : (upperStar Ab.{u + 1} (baseP g)).obj (L (ProjectiveLine Y)).X ⟶
-      (L (ProjectiveLine Y')).X)
-    (mW : (upperStar Ab.{u + 1} (baseW g)).obj (L (diagonalSurface Y)).X ⟶
-      (L (diagonalSurface Y')).X) : Prop :=
-  ∃ data : SourcePullback R g L mP mW,
-    (derivedUpper R (baseW g)).map d.delta ≫ data.endpoints.lineW.shift =
-      (singlePullback R (baseW g) (source R Y)).hom ≫
-        (DerivedCategory.singleFunctor (Modules R (diagonalSurface Y')) 0).map
-          data.supported.hom ≫ d'.delta
+variable (l)
 
-/-- The three traces `Tr_q, Tr_{p₁}, Tr_{p₂}` of `d'` over `Y'` are the inverse images of
-those of `d` over `Y` along `g : Y' ⟶ Y`, through the (invertible) base change maps of the
-direct images and the line comparisons `mP`, `mW`. -/
-def DiagramTracePullback
-    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    {Y Y' : Scheme.{u}} (g : Y' ⟶ Y) (L : ∀ X : Scheme.{u}, Modules R X)
-    (d : Diagram R Y L) (d' : Diagram R Y' L)
-    (mP : (upperStar Ab.{u + 1} (baseP g)).obj (L (ProjectiveLine Y)).X ⟶
-      (L (ProjectiveLine Y')).X)
-    (mW : (upperStar Ab.{u + 1} (baseW g)).obj (L (diagonalSurface Y)).X ⟶
-      (L (diagonalSurface Y')).X) : Prop :=
-  ∃ data : SourcePullback R g L mP mW,
-    TracePullback R (ProjectiveLine Y ↘ Y) (ProjectiveLine Y' ↘ Y')
-      (baseP g) g (ProjectiveSpace.map_over (ULift.{u} (Fin 2)) g).symm
-      d.Rq d'.Rq d.q_canonical d'.q_canonical
-      data.endpoints.lineP data.endpoints.cY d.traceq d'.traceq ∧
-    TracePullback R
-      (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))
-      (pullback.fst (ProjectiveLine Y' ↘ Y') (ProjectiveLine Y' ↘ Y'))
-      (baseW g) (baseP g) data.geometry.first_square d.R₁ d'.R₁ d.p₁_canonical d'.p₁_canonical
-      data.endpoints.lineW data.endpoints.cP d.trace₁ d'.trace₁ ∧
-    TracePullback R
-      (pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))
-      (pullback.snd (ProjectiveLine Y' ↘ Y') (ProjectiveLine Y' ↘ Y'))
-      (baseW g) (baseP g) data.geometry.second_square d.R₂ d'.R₂ d.p₂_canonical
-      d'.p₂_canonical data.endpoints.lineW data.endpoints.cP d.trace₂ d'.trace₂
+/-- `ℓ` is invertible in every residue field of a scheme `X` over a field `k` of characteristic
+different from `ℓ`. -/
+@[instance_reducible]
+def invertibleResidueField (k : Type u) [Field k] [Fact (ringChar k).Prime]
+    [Fact (ringChar k ≠ l)] {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) (x : X) :
+    Invertible (l : X.residueField x) :=
+  (RationalP1.residueIsUnit l k (ringChar k) (Fact.out : ringChar k ≠ l) X a x).invertible
 
-/-- The diagonal classes of the canonical families are compatible with base change along a morphism
-`g : Y' ⟶ Y` of separated `k`-schemes of finite type: for `𝒪_E`-coefficients through the canonical
-comparison of the Tate twists, and for `E`- and `ℚ̄_ℓ`-coefficients through some comparison of the
-Tate twists. -/
-theorem Family.IsCanonical.delta_pullback (k : Type u) [Field k] [Fact (ringChar k).Prime]
-    [Fact (ringChar k ≠ l)] {Y Y' : Scheme.{u}} [Y.Over (Spec (.of k))]
+/-- The comparison `f^* E(1) ⟶ E(1)` of the rational Tate twists along a morphism `f : X ⟶ S` of
+`k`-schemes. It is the extension of scalars of `spIntegralComparison f l E` along `𝒪_E ⟶ E`:
+this is the equation `CartesianAdicComparison.rational_scalar`, which determines it. -/
+def rationalTwistComparison (k : Type u) [Field k] [Fact (ringChar k).Prime]
+    [Fact (ringChar k ≠ l)] {X S : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aS : S ⟶ Spec (.of k))
+    (f : X ⟶ S) (E : PadicAlgCl.FiniteIntermediateField l) :
+    (upperStar Ab.{u + 1} f).obj (spRationalTwist S l E).X ⟶ (spRationalTwist X l E).X :=
+  letI := invertibleResidueField l k aX
+  letI := invertibleResidueField l k aS
+  (RationalP1.adicComparison l f).rational E
+
+/-- The comparison `f^* ℚ̄_ℓ(1) ⟶ ℚ̄_ℓ(1)` of the `ℚ̄_ℓ`-Tate twists along a morphism
+`f : X ⟶ S` of `k`-schemes. It is the colimit of the comparisons `rationalTwistComparison` over
+the finite stages `E`, see `closureTwistComparison_coprojection`. -/
+def closureTwistComparison (k : Type u) [Field k] [Fact (ringChar k).Prime]
+    [Fact (ringChar k ≠ l)] {X S : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aS : S ⟶ Spec (.of k))
+    (f : X ⟶ S) :
+    (upperStar Ab.{u + 1} f).obj (spQbarTwist S l).X ⟶ (spQbarTwist X l).X :=
+  letI := invertibleResidueField l k aX
+  letI := invertibleResidueField l k aS
+  (RationalP1.adicComparison l f).qbar
+
+/-- `closureTwistComparison` extends `rationalTwistComparison` along `E ⟶ ℚ̄_ℓ`. -/
+theorem closureTwistComparison_coprojection (k : Type u) [Field k] [Fact (ringChar k).Prime]
+    [Fact (ringChar k ≠ l)] {X S : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aS : S ⟶ Spec (.of k))
+    (f : X ⟶ S) (E : PadicAlgCl.FiniteIntermediateField l) :
+    (upperStar Ab.{u + 1} f).map (colimit.ι (spRationalTwistDiagram S l) E) ≫
+        closureTwistComparison l k aX aS f =
+      rationalTwistComparison l k aX aS f E ≫ colimit.ι (spRationalTwistDiagram X l) E :=
+  letI := invertibleResidueField l k aX
+  letI := invertibleResidueField l k aS
+  (RationalP1.adicComparison l f).qbar_coprojection E
+
+/-- The structure morphism `ℙ¹_Y ⟶ Spec k`. -/
+abbrev projectiveLineToSpec (k : Type u) [Field k] (Y : Scheme.{u}) [Y.Over (Spec (.of k))] :
+    ProjectiveLine Y ⟶ Spec (.of k) :=
+  (ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))
+
+/-- The structure morphism `ℙ¹_Y ×_Y ℙ¹_Y ⟶ Spec k`. -/
+abbrev diagonalSurfaceToSpec (k : Type u) [Field k] (Y : Scheme.{u}) [Y.Over (Spec (.of k))] :
+    diagonalSurface Y ⟶ Spec (.of k) :=
+  pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ≫ projectiveLineToSpec k Y
+
+variable {l}
+
+/-- The diagonal classes and the traces `Tr_q, Tr_{p₁}, Tr_{p₂}` of the canonical families are
+compatible with base change along a morphism `g : Y' ⟶ Y` of separated `k`-schemes of finite
+type, for `Λ = 𝒪_E, E, ℚ̄_ℓ`. The Tate twists are compared through `spIntegralComparison` and its
+scalar extensions `rationalTwistComparison` and `closureTwistComparison`, and the class and the
+three traces share one comparison of the sources and endpoints. -/
+theorem Family.IsCanonical.pullbackCompatibility (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] {Y Y' : Scheme.{u}} [Y.Over (Spec (.of k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
     [IsSeparated (Y ↘ Spec (.of k))] [IsNoetherian Y] [Y'.Over (Spec (.of k))]
     [LocallyOfFiniteType (Y' ↘ Spec (.of k))] [QuasiCompact (Y' ↘ Spec (.of k))]
@@ -473,37 +443,22 @@ theorem Family.IsCanonical.delta_pullback (k : Type u) [Field k] [Fact (ringChar
     [g.IsOver (Spec (.of k))] {family : Family l Y} {family' : Family l Y'}
     (_h : family.IsCanonical l Y) (_h' : family'.IsCanonical l Y') :
     (∀ E : PadicAlgCl.FiniteIntermediateField l,
-      DiagramClassPullback (Profinite.padicIntegersRingObj.{u} l E.1) g
+      Nonempty (PullbackCompatibility (Profinite.padicIntegersRingObj.{u} l E.1) g
         (fun X ↦ spIntegralTwist X l E) (family.integral E) (family'.integral E)
-        (spIntegralComparison (baseP g) l E) (spIntegralComparison (baseW g) l E)) ∧
-    (∀ E : PadicAlgCl.FiniteIntermediateField l, ∃ mP mW,
-      DiagramClassPullback (Profinite.continuousMapRingObj.{u} E.1) g
-        (fun X ↦ spRationalTwist X l E) (family.rational E) (family'.rational E) mP mW) ∧
-    ∃ mP mW, DiagramClassPullback (Profinite.padicAlgClRingObj.{u} l) g
-      (fun X ↦ spQbarTwist X l) family.closure family'.closure mP mW := by
-  sorry
-
-/-- The traces of the canonical families are compatible with base change along a morphism
-`g : Y' ⟶ Y` of separated `k`-schemes of finite type: for `𝒪_E`-coefficients through the
-canonical comparison of the Tate twists, and for `E`- and `ℚ̄_ℓ`-coefficients through some
-comparison of the Tate twists. -/
-theorem Family.IsCanonical.trace_pullback (k : Type u) [Field k] [Fact (ringChar k).Prime]
-    [Fact (ringChar k ≠ l)] {Y Y' : Scheme.{u}} [Y.Over (Spec (.of k))]
-    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
-    [IsSeparated (Y ↘ Spec (.of k))] [IsNoetherian Y] [Y'.Over (Spec (.of k))]
-    [LocallyOfFiniteType (Y' ↘ Spec (.of k))] [QuasiCompact (Y' ↘ Spec (.of k))]
-    [IsSeparated (Y' ↘ Spec (.of k))] [IsNoetherian Y'] (g : Y' ⟶ Y)
-    [g.IsOver (Spec (.of k))] {family : Family l Y} {family' : Family l Y'}
-    (_h : family.IsCanonical l Y) (_h' : family'.IsCanonical l Y') :
+        (spIntegralComparison (baseP g) l E) (spIntegralComparison (baseW g) l E))) ∧
     (∀ E : PadicAlgCl.FiniteIntermediateField l,
-      DiagramTracePullback (Profinite.padicIntegersRingObj.{u} l E.1) g
-        (fun X ↦ spIntegralTwist X l E) (family.integral E) (family'.integral E)
-        (spIntegralComparison (baseP g) l E) (spIntegralComparison (baseW g) l E)) ∧
-    (∀ E : PadicAlgCl.FiniteIntermediateField l, ∃ mP mW,
-      DiagramTracePullback (Profinite.continuousMapRingObj.{u} E.1) g
-        (fun X ↦ spRationalTwist X l E) (family.rational E) (family'.rational E) mP mW) ∧
-    ∃ mP mW, DiagramTracePullback (Profinite.padicAlgClRingObj.{u} l) g
-      (fun X ↦ spQbarTwist X l) family.closure family'.closure mP mW := by
+      Nonempty (PullbackCompatibility (Profinite.continuousMapRingObj.{u} E.1) g
+        (fun X ↦ spRationalTwist X l E) (family.rational E) (family'.rational E)
+        (rationalTwistComparison l k (projectiveLineToSpec k Y') (projectiveLineToSpec k Y)
+          (baseP g) E)
+        (rationalTwistComparison l k (diagonalSurfaceToSpec k Y') (diagonalSurfaceToSpec k Y)
+          (baseW g) E))) ∧
+    Nonempty (PullbackCompatibility (Profinite.padicAlgClRingObj.{u} l) g
+      (fun X ↦ spQbarTwist X l) family.closure family'.closure
+      (closureTwistComparison l k (projectiveLineToSpec k Y') (projectiveLineToSpec k Y)
+        (baseP g))
+      (closureTwistComparison l k (diagonalSurfaceToSpec k Y') (diagonalSurfaceToSpec k Y)
+        (baseW g))) := by
   sorry
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

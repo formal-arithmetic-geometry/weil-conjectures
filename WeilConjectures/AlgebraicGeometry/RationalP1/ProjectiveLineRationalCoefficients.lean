@@ -24,7 +24,8 @@ The functors are `AlgebraicGeometry.ProEtale.RationalP1.push` (`Rq_*`) and
 
 ## Main statements
 
-- `AlgebraicGeometry.ProEtale.RationalP1.nonempty_push_adjunction_exceptional`:
+- `AlgebraicGeometry.ProEtale.RationalP1.rationalP1_adjunction_assembly` (in
+  `WeilConjectures.AlgebraicGeometry.RationalP1.AffineLineAdjunctionAssembly`):
   `Rq_* ⊣ q^*(1)[2]`.
 - `AlgebraicGeometry.ProEtale.RationalP1.exists_rightAdjoint_iso_exceptional`:
   `q^! ≅ q^*(1)[2]`.
@@ -46,19 +47,6 @@ variable (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateFiel
   (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
   [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
   [IsSeparated (Y ↘ Spec (.of k))]
-
-/-- For `Λ = E` or `ℚ̄_ℓ`, the functor `q^*(1)[2] : Loc(D^b_ctf(Y, Λ)) ⥤ Loc(D^b_ctf(ℙ¹_Y, Λ))`
-is right adjoint to `Rq_*`. -/
-theorem nonempty_push_adjunction_exceptional :
-    Nonempty (push l c k (ringChar k) (Fact.out : ringChar k ≠ l) Y ⊣
-      exceptional l c k (ringChar k) (Fact.out : ringChar k ≠ l) Y) := by
-  have : IsNoetherian Y := isNoetherian_of_locallyOfFiniteType (Y ↘ Spec (.of k))
-  have : IsNoetherian (ProjectiveLine Y) :=
-    isNoetherian_of_locallyOfFiniteType (ProjectiveLine Y ↘ Y)
-  have : IsNoetherian (diagonalSurface Y) :=
-    isNoetherian_of_locallyOfFiniteType
-      (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))
-  exact rationalP1_adjunction_assembly l c k Y
 
 /-- For `Λ = E` or `ℚ̄_ℓ`, `q^! ≅ q^*(1)[2]`: for every compactification of `q` and every
 right adjoint `G` of the corresponding `Rq_! : Loc(D^b_ctf(ℙ¹_Y, Λ)) ⥤ Loc(D^b_ctf(Y, Λ))`,
