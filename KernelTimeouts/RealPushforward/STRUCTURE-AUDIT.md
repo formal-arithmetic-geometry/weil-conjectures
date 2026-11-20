@@ -84,3 +84,22 @@ Unknown: the Kernel's internal reduction order and exact child attribution.
 The small regular-head mismatch is sufficient to force the expensive initial
 comparison, but the evidence does not establish a large nested exposure as the
 primary mechanism. This is the required simple-unfolding control.
+## Round 2 and v2 addendum
+
+Fresh aligned diagnostics completed in 3.21 s wall (2.03 s user, 3.18 GB peak RSS), preserving the original consumer and changing only the polynomial representation. The immutable original final probe remains the restored mismatch (54.54 s and timeout). No large child conversion was isolated.
+
+### STRUCTURE EXPOSURE AND AMPLIFICATION ADDENDUM
+
+**A. MISMATCH SEMANTICS.** Syntactic divergence is LinearMap.charpolyRev versus FrobeniusModule.localPolynomial. The final conversion is a DefEq obstruction in the observed budget. Polynomial-head alignment is causal for this conversion, but exposes only a small regular definition: one trigger.
+
+**B. EXPOSURE.** The boundary is the polynomial argument of Polynomial.coeff. One-step bodies expose f.charpoly.reverse and M.frobeniusEnd.charpoly. The polynomial, stalk, Frobenius module, and semiring instances are visible; only the coefficient conversion is measured. The stalk/module tree is inferred.
+
+**C. COST MECHANISM.** This is one reduction-heavy site, with no established structural traversal or repeated conversion. Original is 54.54 s/timeout; aligned is 3.21 s. Counters do not identify a data-field traversal.
+
+**D. FIXED-TRIGGER ABLATION.** Not assigned: this is the required N negative control and no non-trigger amplifier was isolated.
+
+**E. REDUCTION-PATH AUDIT.** Polynomial.coeff is shared; the two regular polynomial definitions have different bodies. The aligned pair exposes a common polynomial representation. Internal Kernel order is inferred.
+
+**F. MISMATCH PROVENANCE.** The left producer is the linear-map characteristic-polynomial helper and the right producer is the Frobenius-module local-polynomial definition. Consumer rewrites make the difference relevant; no proof abstraction or dependent instantiation caused it.
+
+**G. CONCLUSION.** N, evidence level 1. Same-consumer alignment is strongest; absence of a measured large child exposure is contrary to a stronger amplification claim. A fixed-trigger ablation would be the falsifier.
