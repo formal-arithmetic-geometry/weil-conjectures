@@ -152,6 +152,7 @@ theorem heart_mapDerivedCategory_upperStar {C : Scheme.{u}} [CompactSpace C]
   · exact ((CondensedRing.upperStar Λ f).map_isZero (hl1 a ha)).of_iso (eH a).symm
   · exact (hasNoPunctualSubsheaf_upperStar f hl2).of_iso (eH (0 - 1))
 
+variable (Λ) in
 open CategoryTheory.Endofunctor in
 /-- **The forgetful functor on perverse Weil sheaves**: for an automorphism `g` of `C`, the
 functor forgetting the Weil structure, from perverse Weil sheaves to perverse sheaves on `C`,
