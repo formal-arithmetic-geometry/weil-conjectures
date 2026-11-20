@@ -47,7 +47,7 @@ source; fast times are dominated by fixed startup/import work.
 | Version and probe | Installed release | Source | Counters | Trace |
 | --- | ---: | ---: | ---: | ---: |
 | 4.35.0 `KernelSmoke.lean` | 1.32 s | 1.46 s | 1.48 s | 1.42 s |
-| 4.35.0 NativePullTensor domain pair | not rerun | 50.52 s | 53.79 s (+6.5%) | 59.81 s (+18.4%) |
+| 4.35.0 NativePullTensor domain pair | 49.39 s | 50.52 s | 53.79 s (+6.5%) | 59.81 s (+18.4%) |
 | 4.33.1 named-cone control | 2.39 s | 2.24 s | 2.15 s | 2.20 s |
 | 4.33.1 Tensor argument 2 | 48.20 s | 47.42 s | 50.19 s (+5.8%) | 60.98 s (+28.6%) |
 | 4.33.1 inline Cone timeout | 124.38 s | 115.96 s | 124.83 s (+7.6%) | 150.39 s (+29.7%) |
