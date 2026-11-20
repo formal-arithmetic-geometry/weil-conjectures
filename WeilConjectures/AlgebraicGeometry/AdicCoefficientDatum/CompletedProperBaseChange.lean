@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedBaseChangeMap
 import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedOrdinaryComparisons
+import WeilConjectures.Algebra.Homology.DerivedCategory.IsIsoEvaluation
 import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalDerivedPullbackNormalization
 import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
 import all WeilConjectures.SixFunctors.PurCompactSupport.ScalarGeometricPullComposition
@@ -364,25 +365,6 @@ theorem AdicCoefficientDatum.isIso_reduction_map_integralExchange [IsProper f]
     (d.finiteProjection f' ((d.pull g').obj K) n ≫
       (d.finitePush f' n).map (d.delta (g' := g') K n).hom)
 
-/-- A morphism of derived towers is invertible if all its evaluations are. -/
-private theorem isIso_of_isIso_evaluation
-    {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
-    [HasDerivedCategory (ℕᵒᵖ ⥤ B)]
-    {X Y : DerivedCategory (ℕᵒᵖ ⥤ B)} (a : X ⟶ Y)
-    (h : ∀ n : ℕᵒᵖ,
-      IsIso ((((CategoryTheory.evaluation ℕᵒᵖ B).obj n).mapDerivedCategory).map a)) :
-    IsIso a := by
-  rw [DerivedCategory.isIso_iff]
-  intro i
-  have (n : ℕᵒᵖ) : IsIso
-      (((DerivedCategory.homologyFunctor (ℕᵒᵖ ⥤ B) i).map a).app n) := by
-    let E := (CategoryTheory.evaluation ℕᵒᵖ B).obj n
-    have : IsIso ((E.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor B i).map a) := by
-      change IsIso ((DerivedCategory.homologyFunctor B i).map (E.mapDerivedCategory.map a))
-      infer_instance
-    exact (NatIso.isIso_map_iff (E.mapDerivedCategoryHomologyFunctorIso i) a).2 inferInstance
-  exact NatIso.isIso_of_isIso_app _
-
 /-- A morphism of complexes over the completed coefficients whose reductions are all invertible
 has an invertible reduction tower. -/
 theorem AdicCoefficientDatum.isIso_completedReductionTower_map {T : Scheme.{t}}
@@ -406,7 +388,7 @@ theorem AdicCoefficientDatum.isIso_completedReductionTower_map {T : Scheme.{t}}
       erw [hn]
       exact this
     exact IsIso.of_isIso_comp_right _ ((completedReductionEvaluation T d n).app N)
-  exact isIso_of_isIso_evaluation (B := ringedSiteModules.{t + 1}
+  exact DerivedCategory.isIso_of_isIso_evaluation (C := ringedSiteModules.{t + 1}
     (reductionModuleRing T (d.completedRing T))) ((completedReductionTower T d).map φ)
     (fun n ↦ he n.unop)
 
@@ -466,23 +448,23 @@ theorem AdicCoefficientDatum.isIso_completedBaseChangeMap [IsProper f] (K : d.de
   infer_instance
 
 /-- **Proper base change for complete complexes**: let `f` be proper and `K` complete with
-reductions of bounded below étale origin. Then `Rf_* K` is complete,
-`ĝ^* Rf_* K ≅ Rlim_n g^* Rf_* K_n`, `Rf'_* ĝ'^* K ≅ Rlim_n Rf'_* g'^* K_n`, and under these
-isomorphisms the derived limit of the finite base change maps is an isomorphism
-`ĝ^* Rf_* K ≅ Rf'_* ĝ'^* K`. -/
+reductions of bounded below étale origin. Then `Rf_* K` is complete; under the canonical
+isomorphisms `ĝ^* Rf_* K ≅ Rlim_n g^* Rf_* K_n` (`completedPullPushIso`) and
+`Rf'_* ĝ'^* K ≅ Rlim_n Rf'_* g'^* K_n` (`pushCompletedPullIso`) the completed base change map
+`ĝ^* Rf_* K ⟶ Rf'_* ĝ'^* K` is the derived limit of the finite base change maps; and both
+are isomorphisms. -/
 theorem AdicCoefficientDatum.properBaseChange_complete [IsProper f] (K : d.derived X)
     (hK : d.TowerComplete X K)
     (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1))
       ((d.reduction X n).obj K)) :
     d.TowerComplete Y ((d.push f).obj K) ∧
-      Nonempty ((d.completedPull g).obj ((d.push f).obj K) ≅
-        (completedRlim Y' (d.completedRing Y')).obj
-          ((d.towerPull g).obj ((d.towerPush f).obj ((completedReductionTower X d).obj K)))) ∧
-      Nonempty ((d.push f').obj ((d.completedPull g').obj K) ≅
-        (completedRlim Y' (d.completedRing Y')).obj
-          ((d.towerPush f').obj ((d.towerPull g').obj ((completedReductionTower X d).obj K)))) ∧
+      d.completedBaseChangeMap sq K hK W =
+        (d.completedPullPushIso (f' := f') (g' := g') K).hom ≫
+          (completedRlim Y' (d.completedRing Y')).map (d.towerV' sq K) ≫
+          (d.pushCompletedPullIso (g' := g') K).inv ∧
+      IsIso ((completedRlim Y' (d.completedRing Y')).map (d.towerV' sq K)) ∧
       IsIso (d.completedBaseChangeMap sq K hK W) :=
-  ⟨d.push_complete f K hK, ⟨d.completedPullPushIso (f' := f') (g' := g') K⟩,
-    ⟨d.pushCompletedPullIso (g' := g') K⟩, (d.isIso_completedBaseChangeMap sq K hK W).2⟩
+  ⟨d.push_complete f K hK, d.completedExchange_eq sq K,
+    (d.isIso_completedBaseChangeMap sq K hK W).1, (d.isIso_completedBaseChangeMap sq K hK W).2⟩
 
 end AlgebraicGeometry.Scheme
