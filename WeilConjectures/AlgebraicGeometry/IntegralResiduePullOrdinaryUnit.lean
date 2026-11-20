@@ -49,7 +49,7 @@ private theorem unitCompositeMate
     {U : A ⥤ C} {T : C ⥤ A} {V : B ⥤ D} {W : D ⥤ B}
     (af : F ⊣ R) (ag : G ⊣ S) (au : U ⊣ T) (av : V ⊣ W)
     (e : W ⋙ R ≅ S ⋙ T) (q : R ⋙ U ⟶ V ⋙ S)
-    (hq : ((mateEquiv av au).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans = q)
+    (hq : ((mateEquiv av au).symm (TwoSquare.mk _ _ _ _ e.hom)) = q)
     (M : A) :
     U.map (af.unit.app M) ≫ q.app (F.obj M) =
       ag.unit.app (U.obj M) ≫ S.map
@@ -70,7 +70,6 @@ namespace AlgebraicGeometry.ProEtale
 attribute [local irreducible] CondensedRing.upperStarLowerStarAdjunction
   CondensedRing.comapUpperStarIso CondensedRing.comapLowerStarIso
   profinitePointModuleForgetPullbackIso
-set_option maxHeartbeats 400000 in
 -- The concrete comparisons unfold several coefficient and module functor wrappers.
 private theorem comapUpperStar_forget
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -118,7 +117,6 @@ private theorem comapUpperStar_inv_forget_private
 (used by `import all` importers; linter.privateModule). -/
 alias comapUpperStar_inv_forget := comapUpperStar_inv_forget_private
 
-set_option maxHeartbeats 400000 in
 -- The concrete comparisons unfold several coefficient and module functor wrappers.
 private theorem ordinary_vertical_unit
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -172,7 +170,7 @@ private theorem ordinaryScalarUnit_private
   let au := CondensedRing.upperStarLowerStarAdjunction Λ f
   let av := CondensedRing.upperStarLowerStarAdjunction Λ' f
   let e := CondensedRing.comapLowerStarIso a f
-  have hq : ((mateEquiv av au).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans =
+  have hq : ((mateEquiv av au).symm (TwoSquare.mk _ _ _ _ e.hom)) =
       (CondensedRing.comapUpperStarIso a f).inv := by
     apply NatTrans.ext
     funext N

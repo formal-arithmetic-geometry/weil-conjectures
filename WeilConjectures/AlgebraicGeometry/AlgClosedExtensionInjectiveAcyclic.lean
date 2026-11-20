@@ -12,6 +12,8 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.CategoryTheory.Preadditive.LeftExact
 import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import WeilConjectures.AlgebraicGeometry.ConstantRingModuleSheafEquivalence
 import WeilConjectures.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic

@@ -105,7 +105,7 @@ import all Mathlib.CategoryTheory.Sites.Grothendieck
 import all Mathlib.CategoryTheory.Sites.Limits
 import all Mathlib.CategoryTheory.Sites.Sheaf
 import all Mathlib.Combinatorics.Quiver.ReflQuiver
-import all Mathlib.Data.Int.ConditionallyCompleteOrder
+import all Mathlib.Order.Int.ConditionallyCompleteOrder
 import all Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 import all Mathlib.Geometry.RingedSpace.PresheafedSpace
 import all Mathlib.Geometry.RingedSpace.SheafedSpace
@@ -393,7 +393,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-coefficient-heart/
 sk-lem-coefficient-heart-filtration.md and its proof
-(blueprint: det-lem-coefficient-heart-filtration).
+(blueprint: lemma-constructible-sheaves--7).
 
 The filtration steps are the images of the actual open-extension counits. The theorem
 asserts that those counits are monomorphisms, so the images represent exactly the given
@@ -418,7 +418,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The specified object `v_! v^* F` for an open subscheme V.
 Source: blueprint sk-lem-coefficient-heart-filtration, definition of F_k
-(blueprint: det-lem-coefficient-heart-filtration). -/
+(blueprint: lemma-constructible-sheaves--7). -/
 abbrev coefficientHeartOpenTerm {X : Scheme.{u}}
     (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (V : X.Opens) :=
@@ -427,7 +427,7 @@ abbrev coefficientHeartOpenTerm {X : Scheme.{u}}
 
 /-- The canonical map from the open-extension term to F, namely the adjunction counit.
 Source: blueprint sk-lem-coefficient-heart-filtration, definition of the inclusions
-(blueprint: det-lem-coefficient-heart-filtration). -/
+(blueprint: lemma-constructible-sheaves--7). -/
 abbrev coefficientHeartOpenCounit {X : Scheme.{u}}
     (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (V : X.Opens) : coefficientHeartOpenTerm Λ F V ⟶ F :=
@@ -436,7 +436,7 @@ abbrev coefficientHeartOpenCounit {X : Scheme.{u}}
 /-- The subsheaf represented by the image of the canonical counit. Its equality with the
 open-extension object as a subsheaf follows from the monomorphism assertion below.
 Source: blueprint sk-lem-coefficient-heart-filtration, F_k as a subsheaf of F
-(blueprint: det-lem-coefficient-heart-filtration). -/
+(blueprint: lemma-constructible-sheaves--7). -/
 abbrev coefficientHeartFiltrationStep {X : Scheme.{u}}
     (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (V : X.Opens) : Subobject F :=
@@ -448,7 +448,7 @@ The source is topologically Noetherian because an immersion is a topological emb
 therefore a is quasi-compact and the existing open-immersion instance for `a.toImage`
 applies. No choice of an extension functor is made.
 Source: blueprint sk-lem-coefficient-heart-filtration, definition `a_! = i_* u_!`
-(blueprint: det-lem-coefficient-heart-filtration). -/
+(blueprint: lemma-constructible-sheaves--7). -/
 def coefficientHeartLocallyClosedExtension {S X : Scheme.{u}} [TopologicalSpace.NoetherianSpace X]
     (a : S ⟶ X) (ha : IsImmersion a) :
     Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S) ⥤
@@ -783,8 +783,8 @@ successive quotients the extensions by zero of the lisse restrictions. `V` is si
 presentation of the open prefixes; its carrier equation fixes every V_k, including
 V_0 and V_m. No connectedness or strictness condition is imposed.
 
-Source: blueprint sk-lem-coefficient-heart-filtration and its proof
-(blueprint: det-lem-coefficient-heart-filtration).
+Source: blueprint lemma-constructible-sheaves--7 and its proof
+(blueprint: lemma-constructible-sheaves--7).
 
 Proof:
 1. The actual open counits are monic. The empty prefix has zero restriction and zero

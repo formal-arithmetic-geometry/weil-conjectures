@@ -17,6 +17,12 @@ import all WeilConjectures.Algebra.Homology.PrincipalConeExactEquivalence
 import all WeilConjectures.SixFunctors.Supporting.RoosIntrinsicCompletenessEquivalence
 
 /-! # Exact coefficient restriction preserves intrinsic completeness.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(1)
+* Stacks Tag 03DA
+* Stacks Tags 0999, 099B and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -37,9 +43,7 @@ variable (l : ℕ) [Fact l.Prime]
     [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F] (i : E →ₐ[ℚ_[l]] F)
     (W : Scheme.{u})
 
-/-- The completed scalar inclusion in the published coefficient presentation.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-pbc-scalar-restriction-complete). -/
+/-- The completed scalar inclusion in the coefficient presentation. -/
 private theorem pbcScalarModelCoefficientSquare :
     WeilConjectures.completedCoefficientMap l E F i W ≫
         (WeilConjectures.purCoefficientIso l F W).inv =
@@ -86,8 +90,7 @@ private def pbcScalarModelRestrictionIso :
     eqToIso (congrArg SheafOfModules.restrictScalars.{u + 1} h) ≪≫
     (scalarRestrictionCompose _ _).symm
 
-/-- Derived restriction in the published model commutes with the scalar restriction.
-Source: Stacks Tag 03DA (blueprint: lem-pbc-scalar-restriction-complete). -/
+/-- Derived restriction in the model commutes with the scalar restriction. -/
 private def pbcScalarModelDerivedRestrictionIso (K : PbcCompletedDerived W (pbcIntegralDatum l F)) :
     (pbcDerivedRestrict (WeilConjectures.purCoefficientIso l E W).inv).obj
         ((pbcDerivedRestrict (pbcScalarCoefficientMap l E F i W)).obj K) ≅
@@ -109,13 +112,13 @@ private theorem scalarPrincipalMap
     ∃ c : (F.mapHomologicalComplex (.up ℤ)).obj
         (CochainComplex.PrincipalCone.completion μ) ≅
           CochainComplex.PrincipalCone.completion
-            (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ)),
+            (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ.asHom)),
       (F.mapHomologicalComplex (.up ℤ)).map (CochainComplex.PrincipalCone.unit μ) ≫
         c.hom = CochainComplex.PrincipalCone.unit
-          (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ)) := by
+          (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ.asHom)) := by
   classical
   let G := F.mapHomologicalComplex (.up ℤ)
-  let ν := End.of (G.map μ)
+  let ν := End.of (G.map μ.asHom)
   let K := fun n ↦ CochainComplex.PrincipalCone.level μ n
   let L := fun n ↦ CochainComplex.PrincipalCone.level ν n
   let e := CochainComplex.principalLevelIso F μ
@@ -171,11 +174,7 @@ section LocalCriterion
 attribute [local instance] WeilConjectures.IntegralOnSlice.siteCategory
   WeilConjectures.IntegralOnSlice.hasDerived
 
-/-- The scalar inclusion sends the source uniformizer to a multiple of the target one.
-Source: Bhatt--Scholze, Lemma 6.8.2(1) (blueprint: lem-pbc-scalar-restriction-complete).
-Proof: the source uniformizer maps to a unit times a positive power of the target
-uniformizer in the valuation ring; constant sections and the completed coefficient
-map are compatible with this ring map on every finite quotient. -/
+/-- The scalar inclusion sends the source uniformizer to a multiple of the target one. -/
 private theorem scalarUniformizer_dvd (V : W.ProEtᵒᵖ) :
     ∃ c : (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l F W).obj.obj V,
       (WeilConjectures.completedCoefficientMap l E F i W).hom.app V
@@ -195,19 +194,7 @@ private theorem scalarUniformizer_dvd (V : W.ProEtᵒᵖ) :
 end LocalCriterion
 
 /-- Restriction along the completed scalar inclusion preserves derived completeness in
-the published coefficient model.
-Source: Stacks Tags 0999, 099B and 0A0E (blueprint: lem-pbc-scalar-restriction-complete).
-Proof: the source uniformizer maps to a unit times a positive power of the target
-uniformizer, so their powers are cofinal and completeness for the target uniformizer is
-completeness for the image of the source uniformizer. Restriction is exact, preserves
-products, and detects acyclicity; it carries the local Koszul completion criterion for
-that image to the source ring.
-Formally: rewrite completeness by the principal local criterion (`scalarSfLocalIff`).
-Completeness for the target uniformizer gives local completeness for the image of the
-source uniformizer (`scalarUniformizer_dvd`). By `IntegralPrincipalCone.localCriterion`
-this is invertibility of the principal-cone completion unit for multiplication by that
-image on a representative. Restriction carries this unit to the unit for multiplication
-by the source uniformizer (`scalarPrincipalMap`), and exactness preserves invertibility. -/
+the coefficient model. -/
 private theorem pbcScalarModelRestrictionComplete
     (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l F W))
     (hM : WeilConjectures.IsSfDerivedComplete l F W M) :
@@ -243,7 +230,7 @@ private theorem pbcScalarModelRestrictionComplete
   let Q := DerivedCategory.Q.objPreimage M
   let e : DerivedCategory.Q.obj Q ≅ M := DerivedCategory.Q.objObjPreimageIso M
   obtain ⟨μ, hμ⟩ : ∃ μ : End Q, ∀ (q : ℤ) (U : W.ProEtᵒᵖ) (x : (Q.X q).val.obj U),
-      (μ.f q).val.app U x = σ' U • x := by
+      (μ.asHom.f q).val.app U x = σ' U • x := by
     let μ : Q ⟶ Q :=
       { f := fun q ↦
           { val :=
@@ -271,14 +258,14 @@ private theorem pbcScalarModelRestrictionComplete
           intro U
           ext x
           exact ((Q.d a b).val.app U).hom.map_smul (σ' U) x }
-    exact ⟨μ, fun q U x ↦ rfl⟩
+    exact ⟨End.of μ, fun q U x ↦ rfl⟩
   have hF := (WeilConjectures.IntegralPrincipalCone.localCriterion l F W σ' hσ' Q μ hμ M e).2.mp
     hloc
   have hu : IsIso (DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit μ)) :=
     IsIso.of_isIso_comp_left e.inv _
   have := (pbcScalarAdjunction φ').rightAdjoint_preservesLimits
   obtain ⟨c, hc⟩ := scalarPrincipalMap G μ
-  let ν := End.of ((G.mapHomologicalComplex (.up ℤ)).map μ)
+  let ν := End.of ((G.mapHomologicalComplex (.up ℤ)).map μ.asHom)
   have hG : IsIso (DerivedCategory.Q.map
       ((G.mapHomologicalComplex (.up ℤ)).map (CochainComplex.PrincipalCone.unit μ))) := by
     have h := G.mapDerivedCategoryFactors.hom.naturality (CochainComplex.PrincipalCone.unit μ)
@@ -302,24 +289,7 @@ private theorem pbcScalarModelRestrictionComplete
     (fun q U x ↦ hμ q U x) _ e').2.mpr
   infer_instance
 
-/-- Exact coefficient restriction preserves intrinsic completeness.
-Source: Stacks Project, Tags 099B and 0A0E; the restriction and unit-power argument
-of lem-weil-pbc-finite-free-completion-transport, step 2.
-(blueprint: lem-pbc-scalar-restriction-complete).
-
-Proof: identify the actual completed coefficient rings with their published
-presentations by pbcCompletedComparison, retaining each finite quotient map.
-The source uniformizer maps to a unit times a positive power of the target
-uniformizer. Their powers are cofinal, so target-uniformizer completeness implies
-completeness for the image of the source uniformizer, by the unit-power Cech/Koszul
-criterion. Exact restriction carries this augmented Koszul computation to the
-source ring: scalar restriction preserves the products and cones in the local
-completion complex, and its scalar action on each differential is multiplication
-by that image. It also detects the acyclicity of the corresponding Cech Hom
-complexes. Consequently the restricted object is complete for the source
-uniformizer. The comparison of intrinsic completeness with this local criterion
-and transport back along pbcCompletedComparison give the stated predicate. This
-argument uses no scalar/completion isomorphism and no constructibility assumption. -/
+/-- Exact coefficient restriction preserves intrinsic completeness. -/
 theorem pbcScalarRestrictionComplete (K : PbcCompletedDerived W (pbcIntegralDatum l F))
     (hK : PbcIsIntrinsicallyComplete W (pbcIntegralDatum l F) K) :
     PbcIsIntrinsicallyComplete W (pbcIntegralDatum l E)

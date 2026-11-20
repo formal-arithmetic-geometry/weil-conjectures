@@ -138,7 +138,6 @@ lemma leftDerivedUpperStarTensorComparison_naturality {Z Y : Scheme.{u}} (g : Z 
   dsimp [derivedTensor] at h₁ h₂
   rw [tensorHom_def, tensorHom_def, Functor.map_comp, Category.assoc, ← reassoc_of% h₁, ← h₂]
 
-set_option maxHeartbeats 2000000 in
 -- One rewriting step unifies two instance paths to the tensor product of the homotopy category.
 /-- The pointwise form of `leftDerivedUpperStarTensorComparison_comp` on images of complexes,
 composed with the counit of the derived tensor bifunctor. -/

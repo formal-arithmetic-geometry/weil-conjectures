@@ -357,7 +357,7 @@ namespace SheafOfModules
 /-- The derived tensor supplied by localization of the flat-term K-flat subcategory.
 The representative comparison in site_derived_tensor_descent determines this functor
 up to the unique compatible natural isomorphism; no functorial representatives are chosen.
-Source: Stacks 06YS and 06YT (blueprint: def-wf-tensor-product). -/
+Source: Stacks 06YS and 06YT (blueprint: prose-03-02). -/
 def wfSiteDerivedTensor {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})]
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]

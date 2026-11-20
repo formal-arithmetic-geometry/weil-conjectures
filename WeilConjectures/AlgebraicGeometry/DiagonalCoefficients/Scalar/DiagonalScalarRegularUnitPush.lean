@@ -60,7 +60,6 @@ private theorem mate_transpose
   simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
   rw [hn]
 
-set_option maxHeartbeats 400000 in
 -- The two scalar adjunctions require conversion across dependent coefficient categories.
 /-- Scalar extension preserves the canonical regular coefficient-unit adjunct for any
 scheme morphism, through the normalized restriction/direct-image mate.

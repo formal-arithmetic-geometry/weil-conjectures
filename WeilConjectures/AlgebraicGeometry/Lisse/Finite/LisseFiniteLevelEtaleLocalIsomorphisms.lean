@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteLevelEtaleLocal
 
 /-! # Local isomorphism representatives for a finite-level model
 
-Source: Stacks Project, proetale.tex, Tags 099Y, 099Z, 09B1 and 09BV.
-(blueprint: lem-weil-pbc-lisse-finite-level-etale-local-isomorphisms).
+## References
+
+* Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV
 -/
 
 @[expose] public noncomputable section
@@ -33,19 +34,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   lisseTowerAlgebraArrow lisseTowerFixedRealization
 
 /-- The comparison and local model hypotheses produce an étale representative of an
-isomorphism at every geometric point.  This is the local comparison part of the
-finite-level descent argument; no sheafification or stalk evaluation is included.
-
-Source: Stacks Project, proetale.tex, Tags 099Y, 099Z, 09B1 and 09BV.
-(blueprint: lem-weil-pbc-lisse-finite-level-etale-local-isomorphisms).
-
-Proof: First obtain pointwise pro-etale derived Isom presheaf sections from the
-finite-level comparison and local model hypotheses. The lower half of hDbounded puts
-D in the bounded-below subcategory. Apply the bounded-below etale representative
-theorem to each section. That theorem lifts the isomorphism using derived comparison
-and its conservativity, so the resulting representative is an actual derived
-isomorphism. Empty schemes and zero complexes are included.
--/
+isomorphism at every geometric point. -/
 theorem lisse_finite_level_etale_local_isomorphisms
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

@@ -83,7 +83,7 @@ private theorem representativeComparison_isIso (n : ℕ)
 /-- The canonical K-flat augmented quotient tower computes the derived reduction
 units and their quotient transitions, for an arbitrary derived object.
 Source: Bhatt--Scholze, Definition 3.5.2; Stacks Tags 03EK, 06YY and 06YL;
-blueprint lem-coef-normalized-dvr-effectivity, final proof paragraph.
+blueprint lemma-sp-tower-adjunction-foundation--2, final proof paragraph.
 (blueprint: lem-coef-normalized-dvr-kflat-reduction-model).
 
 Proof: choose a complex representing M and a K-flat resolution with flat terms.

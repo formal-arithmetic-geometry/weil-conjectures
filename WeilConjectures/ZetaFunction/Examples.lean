@@ -154,7 +154,7 @@ lemma affineLinePoint_mem_basicOpen_iff (c : K) (x : Spec (.of K)) :
   rw [Scheme.preimage_basicOpen_top, affineLinePoint_appTop_coord, basicOpen_eq_of_affine,
     PrimeSpectrum.mem_basicOpen, Ideal.eq_bot_of_prime x.asIdeal, Ideal.mem_bot]
 
-/-- **Point count of the affine line** (blueprint `ex-weil-affine-line`):
+/-- **Point count of the affine line** (blueprint `prose-12-31`):
 `#𝔸¹(𝔽_{qⁿ}) = qⁿ` for `n ≥ 1`. -/
 theorem pointCount_affineLine [Finite k] {n : ℕ} (hn : n ≠ 0) :
     (affineLine k ↘ Spec (.of k)).pointCount n = Nat.card k ^ n :=
@@ -336,7 +336,7 @@ lemma projectiveLineFieldPoint_bijective :
       change _ ≫ ProjectiveLine.infinity _ = g.1
       rw [hg, ← hc, hc0, affineLinePoint_zero, ProjectiveLine.infinity, Category.assoc]
 
-/-- **Point count of the projective line** (blueprint `ex-weil-projective-line-endpoints`):
+/-- **Point count of the projective line** (blueprint `prose-12-31`):
 `#ℙ¹(𝔽_{qⁿ}) = 1 + qⁿ` for `n ≥ 1`. -/
 theorem pointCount_projectiveLine [Finite k] {n : ℕ} (hn : n ≠ 0) :
     (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).pointCount n = 1 + Nat.card k ^ n := by
@@ -355,7 +355,7 @@ section Zeta
 
 variable (k : Type u) [Field k] [Finite k]
 
-/-- **Zeta function of the affine line** (blueprint `ex-weil-affine-line`):
+/-- **Zeta function of the affine line** (blueprint `prose-12-31`):
 `Z(𝔸¹, T) = (1 - qT)⁻¹`. -/
 theorem zetaSeries_affineLine :
     (affineLine k ↘ Spec (.of k)).zetaSeries *
@@ -380,7 +380,7 @@ theorem zetaSeries_multiplicativeGroup :
       ring
   simpa using h
 
-/-- **Zeta function of the projective line** (blueprint `ex-weil-projective-line-endpoints`):
+/-- **Zeta function of the projective line** (blueprint `prose-12-31`):
 `Z(ℙ¹, T) = ((1 - T)(1 - qT))⁻¹`. -/
 theorem zetaSeries_projectiveLine :
     (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).zetaSeries *
@@ -393,7 +393,7 @@ theorem zetaSeries_projectiveLine :
   simpa using h
 
 open _root_.Polynomial in
-/-- The Weil factorization of the projective line (blueprint `ex-weil-projective-line-endpoints`):
+/-- The Weil factorization of the projective line (blueprint `prose-12-31`):
 `Z(ℙ¹, T) = P₁ / (P₀ P₂)` with the endpoint factors `P₀ = 1 - T`, `P₂ = 1 - qT` and `P₁ = 1`; in
 particular the Betti numbers are `b₀ = b₂ = 1` and `b₁ = 0`. -/
 theorem isWeilFactorization_projectiveLine :
@@ -431,7 +431,7 @@ theorem isWeilFactorization_projectiveLine :
 
 open _root_.Polynomial in
 /-- The integral Frobenius factors of the projective line (blueprint
-`ex-weil-projective-line-endpoints`): `P₀ = 1 - T`, `P₁ = 1` and `P₂ = 1 - qT`, so that for every
+`prose-12-31`): `P₀ = 1 - T`, `P₁ = 1` and `P₂ = 1 - qT`, so that for every
 prime `ℓ ≠ p` the Betti numbers are `b₀ = dim H⁰(ℙ¹ ⊗ k̄, ℚ̄_ℓ) = 1`, `b₁ = 0` and
 `b₂ = dim H²(ℙ¹ ⊗ k̄, ℚ̄_ℓ) = 1`. The factors of the smooth proper geometrically connected curve
 `ℙ¹` form a Weil factorization of its zeta function, which in dimension one is unique

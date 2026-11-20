@@ -23,7 +23,12 @@ invertible modules on `X[ε]` which become trivial on `X` are classified by `H¹
 
 and under this isomorphism rescaling the infinitesimal, `ε ↦ cε`, is multiplication by `c`.
 
-## Implementation notes
+## Main statements
+
+- `AlgebraicGeometry.Scheme.exists_addEquiv_ker_picMap_dualNumbersι`: the isomorphism
+  `ker (Pic(X[ε]) → Pic(X)) ≅ H¹(X, 𝒪_X)`, compatible with rescaling the infinitesimal.
+
+## Implementation details
 
 The two schemes have the same underlying space, so all sheaves live on the site of opens of
 `X`. The units of `𝒪_{X[ε]} = 𝒪_X[ε]` split as `𝒪_{X[ε]}ˣ ≅ 𝒪_X ⊕ 𝒪_Xˣ`,
@@ -31,11 +36,6 @@ The two schemes have the same underlying space, so all sheaves live on the site 
 `a + εb ↦ a`, which corresponds to the pullback along `i` under
 `Pic ≅ H¹(-, 𝒪ˣ)` (`AlgebraicGeometry.Scheme.Pic.toH1UnitsAddEquiv`). Taking `H¹` of this
 splitting gives the isomorphism; no long exact sequence is needed.
-
-## Main statements
-
-- `AlgebraicGeometry.Scheme.exists_addEquiv_ker_picMap_dualNumbersι`: the isomorphism
-  `ker (Pic(X[ε]) → Pic(X)) ≅ H¹(X, 𝒪_X)`, compatible with rescaling the infinitesimal.
 -/
 
 @[expose] public section
@@ -275,11 +275,7 @@ variable (X) in
 /-- **Invertible modules on `X[ε]` trivial on `X` are classified by `H¹(X, 𝒪_X)`.** For a
 scheme `X` with dual-number thickening `i : X ⟶ X[ε]`, the kernel of
 `i^* : Pic(X[ε]) → Pic(X)` is isomorphic to `H¹(X, 𝒪_X)`, compatibly with the scalar actions:
-the pullback along `ε ↦ cε` corresponds to multiplication by `c ∈ Γ(X, 𝒪_X)`.
-
-The isomorphism is `Pic(X[ε]) ≅ H¹(𝒪_{X[ε]}ˣ)` followed by the map induced by the `ε`-part
-`a + εb ↦ a⁻¹ b`; the units split as `𝒪_{X[ε]}ˣ ≅ 𝒪_X ⊕ 𝒪_Xˣ`, and the summand `H¹(𝒪_Xˣ)` is
-`Pic(X)` (`AlgebraicGeometry.Scheme.Pic.toH1Units_map_dualNumbersι`). -/
+the pullback along `ε ↦ cε` corresponds to multiplication by `c ∈ Γ(X, 𝒪_X)`. -/
 theorem exists_addEquiv_ker_picMap_dualNumbersι :
     ∃ Ψ : Additive (Pic.mapHom X.dualNumbersι).ker ≃+ (Modules.unit X).H 1,
       ∀ (c : Γ(X, ⊤)) (L L' : (Pic.mapHom X.dualNumbersι).ker),

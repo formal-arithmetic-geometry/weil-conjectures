@@ -154,8 +154,8 @@ lemma ker_map_le_of_comp_eq (h : c.C ⟶ X) (x : RationalPoint X) (hx : y ≫ h 
 
 namespace IsContractingAt
 
-/-- **The first ideal condition for `c₁`** (blueprint `det-tf-cone-zero-sections`): for `c`
-contracting at `y` and `x = c₁(y)`, functions vanishing at `x` pull back along `c₁` to functions
+/-- **The first ideal condition for `c₁`** (blueprint `lemma-normal-cones-contracting-ideals`): for
+`c` contracting at `y` and `x = c₁(y)`, functions vanishing at `x` pull back along `c₁` to functions
 vanishing at `y`. -/
 lemma ker_map_le_c₁ (_hc : c.IsContractingAt y) ⦃U' : c.C.left.AffineZariskiSite⦄
     ⦃U : X.left.AffineZariskiSite⦄ (hU : U'.1 ≤ c.c₁.left ⁻¹ᵁ U.1) :
@@ -163,8 +163,8 @@ lemma ker_map_le_c₁ (_hc : c.IsContractingAt y) ⦃U' : c.C.left.AffineZariski
       y.left.ker.siteIdeal U' :=
   ker_map_le_of_comp_eq c.c₁ _ rfl hU
 
-/-- **The first ideal condition for `c₂`** (blueprint `det-tf-cone-zero-sections`): for `c`
-contracting at `y` and `x = c₁(y) = c₂(y)`, functions vanishing at `x` pull back along `c₂` to
+/-- **The first ideal condition for `c₂`** (blueprint `lemma-normal-cones-contracting-ideals`): for
+`c` contracting at `y` and `x = c₁(y) = c₂(y)`, functions vanishing at `x` pull back along `c₂` to
 functions vanishing at `y`. -/
 lemma ker_map_le_c₂ (hc : c.IsContractingAt y) ⦃U' : c.C.left.AffineZariskiSite⦄
     ⦃U : X.left.AffineZariskiSite⦄ (hU : U'.1 ≤ c.c₂.left ⁻¹ᵁ U.1) :
@@ -231,8 +231,8 @@ lemma ker_map_pow_le_of_le_pow (hc : c.IsContractingAt y) {n : ℕ}
           (c.c₁.left.stalkMap y₀).hom) ^ (n + 1) := hle
     _ ≤ _ := Ideal.pow_right_mono (map_maximalIdeal_le _) _
 
-/-- **The contraction condition on ideals** (blueprint `det-tf-cone-zero-sections`): for `c`
-contracting at `y`, `x = c₁(y)`, `I` the ideal of `x` and `J` the ideal of `y`, there is `n ≥ 1`
+/-- **The contraction condition on ideals** (blueprint `lemma-normal-cones-contracting-ideals`): for
+`c` contracting at `y`, `x = c₁(y)`, `I` the ideal of `x` and `J` the ideal of `y`, there is `n ≥ 1`
 with `(c₂^* I)(U')^n ⊆ J(U')^{n+1}` for all affine opens `U' ⊆ c₂⁻¹ U`. -/
 lemma ker_map_pow_le (hc : c.IsContractingAt y) : ∃ n : ℕ, 0 < n ∧
     ∀ ⦃U' : c.C.left.AffineZariskiSite⦄ ⦃U : X.left.AffineZariskiSite⦄

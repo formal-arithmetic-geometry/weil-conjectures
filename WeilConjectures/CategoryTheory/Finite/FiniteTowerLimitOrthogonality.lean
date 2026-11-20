@@ -134,20 +134,20 @@ private theorem sequenceDifference_nilpotent
     (l : ℕ) (M : A) (e : ℕ) (he : l ^ e • 𝟙 M = 0) :
     IsIso ((sequenceDifference A l).app M) := by
   let s : End (∏ᶜ fun _ : ℕ ↦ M) :=
-    l • Pi.lift (fun n : ℕ ↦ Pi.π (fun _ : ℕ ↦ M) (n + 1))
-  have hs (r j : ℕ) : (s ^ r) ≫ Pi.π (fun _ : ℕ ↦ M) j =
+    .of (l • Pi.lift (fun n : ℕ ↦ Pi.π (fun _ : ℕ ↦ M) (n + 1)))
+  have hs (r j : ℕ) : ((s ^ r).asHom) ≫ Pi.π (fun _ : ℕ ↦ M) j =
       l ^ r • Pi.π (fun _ : ℕ ↦ M) (j + r) := by
     induction r generalizing j with
     | zero => simp
     | succ r ih =>
-      rw [pow_succ, End.mul_def, Category.assoc, ih]
+      rw [pow_succ, End.mul_asHom, Category.assoc, ih]
       simp only [s, Preadditive.nsmul_comp, Preadditive.comp_nsmul, Pi.lift_comp_π]
       rw [smul_smul, ← pow_succ]
       simp only [Nat.add_assoc]
   have hnil : IsNilpotent s := by
-    refine ⟨e, Pi.hom_ext _ _ fun j ↦ ?_⟩
+    refine ⟨e, End.ext (Pi.hom_ext _ _ fun j ↦ ?_)⟩
     rw [hs, ← Category.comp_id (Pi.π (fun _ : ℕ ↦ M) (j + e)),
-      ← Preadditive.comp_nsmul, he, comp_zero, zero_comp]
+      ← Preadditive.comp_nsmul, he, comp_zero, End.zero_asHom, zero_comp]
   exact (isUnit_iff_isIso (1 - s)).mp hnil.isUnit_one_sub
 
 private theorem sequenceDifference_orthogonal

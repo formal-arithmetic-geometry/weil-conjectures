@@ -94,9 +94,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- The comparison checks naturality through several large localization functors.
-set_option synthInstance.maxHeartbeats 100000 in
 /-- The natural additive identification of zeroth hypercohomology of derived internal Hom
 with derived morphisms, without identifying the site object and morphism universes.
 The sheafification instances are the canonical abelian-category infrastructure in a

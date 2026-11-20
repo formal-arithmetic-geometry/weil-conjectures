@@ -13,6 +13,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.StalkInternalHomEvaluation
 import WeilConjectures.AlgebraicGeometry.FinitePresentationStalkKernel
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Stalk of internal Hom with finitely presented source

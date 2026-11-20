@@ -120,14 +120,22 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 /-! # Normalized internal-to-sectionwise derived tensor comparison
 
-Source: Stacks Project, Tags 08J9, 08JA and 08JB; blueprint module objects and
-derived tensor--Hom (blueprint: def-sfb-internal-section-derived-tensor-comparison).
-
 ## Main definitions
 
 * `TensorComparison`: the canonical tensor comparison, normalized on K-flat models.
 * `totalComparison`: the fixed comparison of the concrete sum-total complexes.
 
+## Implementation details
+
+The normalization predicate `tensorComparisonNormalized` is a separate definition so that
+structure projections do not expand the concrete localization and total-complex
+implementations. K-flatness is tested on the images under the exact equivalence between internal
+and sectionwise modules; since this equivalence preserves and reflects K-flatness, this agrees
+with the internal K-flat test.
+
+## References
+
+* Stacks Project, Tags 03EK, 06YL, 06YS, 08J9, 08JA and 08JB
 -/
 
 @[expose] public noncomputable section
@@ -152,18 +160,14 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
 
 /-- The fixed comparison on the concrete native total complexes. The preceding
-unique characterization determines its data, including every summand map.
-Source: Stacks 03EK, 06YL
-(blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+unique characterization determines its data, including every summand map. -/
 def totalComparison (P Q : CochainComplex (Internal Λ X) ℤ) :
     (complexForward Λ X).obj (internalTotalTensor Λ X P Q) ≅
     (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X)).obj
       ((complexForward Λ X).obj P, (complexForward Λ X).obj Q) :=
   complexTensorIso Λ X P Q
 
-/-- The fixed global total map is the canonical summand-normalized site map.
-Source: Stacks 06YL (blueprint: def-sfb-internal-section-derived-tensor-comparison).
-Proof: unfold the two named specializations; both are the same normalized map. -/
+/-- The fixed global total map is the canonical summand-normalized site map. -/
 theorem totalComparison_heq (P Q : CochainComplex (Internal Λ X) ℤ) :
     HEq (totalComparison Λ X P Q)
       (ordinaryComplexTensorIsoForSite (Scheme.ProEt.topology X)
@@ -171,27 +175,21 @@ theorem totalComparison_heq (P Q : CochainComplex (Internal Λ X) ℤ) :
   unfold totalComparison complexTensorIso
   rfl
 
-/-- Closed structures for the fixed global ringed-site Hom.
-Source: Stacks 08J9 (blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+/-- Closed structures for the fixed global ringed-site Hom. -/
 def GlobalClosedStructureType := CoefficientClosedStructure (hom Λ X)
 
-/-- Tensor models for that fixed global closed structure.
-Source: Stacks 06YS (blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+/-- Tensor models for that fixed global closed structure. -/
 def GlobalTensorModelsType (S : GlobalClosedStructureType Λ X) :=
   CoefficientTensorModels.{u, u + 1, u, u + 1}
     (Scheme.ProEt.topology X) (ring Λ X) S
 
-/-- Natural comparisons of the fixed global native tensor.
-Source: Stacks 06YS (blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+/-- Natural comparisons of the fixed global native tensor. -/
 def GlobalTensorComparisonIsoType (S : GlobalClosedStructureType Λ X) :=
   Functor.uncurry.obj (CondensedRing.derivedTensor Λ X) ⋙ forward Λ X ≅
     ((forward Λ X).prod (forward Λ X)) ⋙ S.tensor
 
-/-- The representative-normalization predicate for a derived tensor comparison.
-Separating this predicate keeps structure projections from expanding the concrete
-localization and total-complex implementations.
-Source: Stacks 06YS, 08J9
-(blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+/-- The representative-normalization predicate for a derived tensor comparison: on K-flat
+representatives it agrees with the total-complex comparison. -/
 def tensorComparisonNormalized
     (S : GlobalClosedStructureType Λ X)
     (T : GlobalTensorModelsType Λ X S)
@@ -207,18 +205,12 @@ def tensorComparisonNormalized
     (CoefficientTensorModels.iso.{u, u + 1, u, u + 1}
       (Scheme.ProEt.topology X) (ring Λ X) S T) iso
 
-/-- Tensor comparison with the fixed K-flat localization normalization.
-The complex comparison is the dependency's canonical comparison, not extra data.
-K-flatness is tested on the images under the exact equivalence; preservation and
-reflection in lem-pe-internal-section-tensor-comparison identify this with the
-internal K-flat test, so it restricts only representatives and not derived inputs.
-Source: Stacks 06YS, 08J9 (blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+/-- A comparison `iso` satisfying the normalization `condition`. -/
 structure NormalizedGlobalTensorComparisonData {I : Type u₀} (condition : I → Prop) where
   iso : I
   normalization : condition iso
 
-/-- The fixed global comparison record, with abstract endpoints.
-Source: Stacks 06YS (blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+/-- The fixed global comparison record, with abstract endpoints. -/
 abbrev TensorComparison
     (S : GlobalClosedStructureType Λ X)
     (T : GlobalTensorModelsType Λ X S) :=

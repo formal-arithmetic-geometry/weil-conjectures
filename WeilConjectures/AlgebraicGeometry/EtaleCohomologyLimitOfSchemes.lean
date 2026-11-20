@@ -44,7 +44,7 @@ of qcqs schemes with affine transition maps. Source: Stacks Project, Tag 09YQ
 Proof:
 1. Inverse-image composition (lem-weil-pbc-inverse-image-composition) and its coherence
    turn the pulled-back sheaves into the diagram `G`. Cohomology pullback functoriality
-   (lem-weil-pbc-cohomology-pullback-functorial) gives the diagram `H` and cocone `B`.
+   (proposition-cohomology-p-1-over-henselian--1) gives the diagram `H` and cocone `B`.
 2. Restrict to any cofinal tail of the directed set using
    lem-weil-pbc-colimit-initial-full-subcategory and lem-weil-pbc-limit-affine-transition.
 3. For affine stages use lem-weil-pbc-affine-etale-site-topos and
@@ -194,7 +194,7 @@ Proof (step 9 of the node): lem-weil-pbc-spec-colimit-limit gives the limit and 
 transitions. Set F_i = v_i inverse image of G; inverse-image composition gives their
 transition isomorphisms and the cocycle law. On the limit all these sheaves identify with
 v inverse image of G, with identity transition maps. The directed index is connected,
-so lem-weil-pbc-colimit-constant-connected-diagram identifies their colimit with that
+so definition-torsion-sheaves--3 identifies their colimit with that
 sheaf. Apply the preceding eight-step argument. Its canonical maps become the pullbacks
 followed by the composition isomorphisms appearing in `hH` and `hB` below. -/
 theorem nonempty_isColimit_etale_cohomology_spec_ring_colimit

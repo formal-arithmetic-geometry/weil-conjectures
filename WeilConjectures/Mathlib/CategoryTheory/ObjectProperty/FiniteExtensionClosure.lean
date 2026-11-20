@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.CategoryTheory.ObjectProperty.ClosureShift
 public import Mathlib.CategoryTheory.Triangulated.Generators
 
 /-! # Finite extension presentations of thick envelopes

@@ -41,7 +41,7 @@ Proof plan, following the five steps of the node:
 standard cochain shift comparisons are degreewise identities, natural in the
 complex; their zero and addition coherence is the identity computation on the
 reindexed objects. These are the comparisons of
-`lem-weil-pbc-exact-functor-derived-factorization`.
+`situation-conventions`.
 2. Naturality of the original unit at each differential makes its degreewise
 components a cochain map. At a shifted complex the degree-m component is
 eta at X^(m+a). Thus the shifted unit equals the unit at the shifted complex

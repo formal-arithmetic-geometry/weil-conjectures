@@ -54,13 +54,14 @@ theorem isAdicLisseSheaf_frobeniusPullback_obj
     {H : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} (hH : IsAdicLisseSheaf H) :
     IsAdicLisseSheaf ((frobeniusPullback k₀ l X).obj H) :=
   (hH.upperStar _).of_iso
-    ((adicUpperStarIsoLowerStarInv l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).app H)
+    ((adicUpperStarIsoLowerStarInv l
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).app H)
 
 /-- A sheaf whose Frobenius pullback is lisse is lisse. -/
 theorem isAdicLisseSheaf_of_frobeniusPullback_obj
     {H : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     (hH : IsAdicLisseSheaf ((frobeniusPullback k₀ l X).obj H)) : IsAdicLisseSheaf H :=
-  let Fr := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+  let Fr := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
   (hH.upperStar Fr.inv).of_iso ((adicUpperStarIsoLowerStarInv l Fr.symm).app _ ≪≫
     ((adicLowerStarEquivalence l Fr.symm).unitIso.app H).symm)
 
@@ -69,7 +70,7 @@ noncomputable def frobeniusPullbackUnitIso :
     (frobeniusPullback k₀ l X).obj
         (AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≅
       AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  adicLowerStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm
+  adicLowerStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm
 
 
 variable {K : Type u} [Field K] [IsAlgClosed K]
@@ -84,7 +85,7 @@ theorem finrank_geometricStalkFunctor_frobeniusPullback_obj
       ((geometricStalkFunctor l s).obj ((frobeniusPullback k₀ l X).obj H))) =
     Module.finrank (PadicAlgCl l) ((WeilCoefficients.toModuleCat l).obj
       ((geometricStalkFunctor l s).obj H)) := by
-  let Fr := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+  let Fr := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
   let e : (s)^*ᵃ[l].obj ((frobeniusPullback k₀ l X).obj H) ≅ (s ≫ Fr.hom)^*ᵃ[l].obj H :=
     (s)^*ᵃ[l].mapIso ((adicUpperStarIsoLowerStarInv l Fr).app H).symm ≪≫
       ((adicUpperStarComp l s Fr.hom).app H).symm
@@ -98,7 +99,8 @@ theorem isIrreducibleAdicLocalSystem_frobeniusPullback_obj
     {H : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     (hH : IsIrreducibleAdicLocalSystem H) :
     IsIrreducibleAdicLocalSystem ((frobeniusPullback k₀ l X).obj H) := by
-  let eqv := adicLowerStarEquivalence l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm
+  let eqv := adicLowerStarEquivalence l
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm
   change IsIrreducibleAdicLocalSystem (eqv.functor.obj H)
   refine ⟨isAdicLisseSheaf_frobeniusPullback_obj hH.1, fun hz ↦ hH.2.1 ?_,
     fun A j _ hA ↦ ?_⟩

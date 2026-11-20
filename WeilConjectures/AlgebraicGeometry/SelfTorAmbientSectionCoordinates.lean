@@ -30,8 +30,6 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 700000 in
--- The chart scalar transports and projective homology comparisons need elaboration fuel.
 /-- Algebraic self-Tor gives linear coordinates on the affine sections of the
 ambient tensor homology, compatible with augmented resolution comparisons.
 Source: Stacks Project, Tag 08DX(2), Tag 06YG and Tag 00LS.
@@ -111,6 +109,7 @@ theorem exists_selfTor_ambient_section_coordinates
                 (e.hom (HomologicalComplex.homologyMap k n
                   ((P.isoLeftDerivedObj (tensorRight (ModuleCat.of A (A ⧸ I))) n).hom x)))
           ∀ x, Q.val.map (homOfLE h).op (c U x) = c V (q x) := by
+  intro B S Q
   obtain ⟨d, hc⟩ := exists_selfTor_ambient_localized_comparisons.{u, w} i n
   let c := fun U : Y.affineOpens ↦
     ((projectiveResolution (ModuleCat.of (Γ(Y, U.1) : Type u)
@@ -132,13 +131,13 @@ theorem exists_selfTor_ambient_section_coordinates
   have heq := H.homologyMap_eq n
   intro e q x
   have hnat := hc₀ ((P.isoLeftDerivedObj (tensorRight (ModuleCat.of A (A ⧸ I))) n).hom x)
-  simp only [c, LinearEquiv.trans_apply, CategoryTheory.Iso.toLinearEquiv_apply]
+  simp only [c]
   change _ = d V
     ((R.isoLeftDerivedObj (tensorRight (ModuleCat.of C (C ⧸ J))) n).hom
       ((R.isoLeftDerivedObj (tensorRight (ModuleCat.of C (C ⧸ J))) n).inv
         (e.hom (HomologicalComplex.homologyMap k n
           ((P.isoLeftDerivedObj (tensorRight (ModuleCat.of A (A ⧸ I))) n).hom x)))))
-  rw [← ModuleCat.comp_apply, Iso.inv_hom_id]
-  simpa only [heq, ModuleCat.id_apply] using! hnat
+  rw [Iso.inv_hom_id_apply]
+  simpa only [heq] using! hnat
 
 end AlgebraicGeometry

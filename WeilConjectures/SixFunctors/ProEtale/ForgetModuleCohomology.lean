@@ -82,6 +82,8 @@ instance preservesFiniteColimits_sheafForget₂ : PreservesFiniteColimits (sheaf
 abelian group preserves monomorphisms, `Λ` being flat over `ℤ`. -/
 lemma preservesMonomorphisms_extendScalarsAddCommGrp [IsAddTorsionFree Λ] :
     (ModuleCat.extendScalarsAddCommGrp Λ).PreservesMonomorphisms := by
+  have : HasUniqueDiv Λ :=
+    ⟨fun {_} hn {_ _} ↦ eq_of_nsmul_eq_nsmul_of_addCommute hn (add_comm _ _)⟩
   have : (ModuleCat.extendScalars.{0, u + 1, u + 1} (Int.castRingHom Λ)).PreservesMonomorphisms :=
     ⟨fun {M N} f hf ↦ by
       rw [ModuleCat.mono_iff_injective] at hf ⊢

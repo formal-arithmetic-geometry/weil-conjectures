@@ -65,7 +65,12 @@ import all WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import all Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
-/-! # Ordinary scalar section tensor square -/
+/-! # Ordinary scalar section tensor square
+
+## References
+
+* Stacks, Cohomology on Sites, Tags 06YY and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -215,11 +220,9 @@ attribute [local irreducible] ordinaryTensorComparison Mod.extendRestrictAdjunct
 
 -- Compare the concrete scalar-unit formulas through the section equivalence.
 /-- The scalar section comparison intertwines the ordinary tensor constraints.
-Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 Compare maps after the scalar and tensor coequalizer projections. Linearity reduces
 this to scalar-unit pure tensors, where the internal monoidal normalization and
-the two section normalization formulas agree by naturality of the tensor pairing.
-(blueprint: lem-sfb-quotient-section-tensor-ordinary-square). -/
+the two section normalization formulas agree by naturality of the tensor pairing. -/
 theorem section_tensor_ordinary_scalar_square (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (e : (Functor.postcompose₂.obj c.model.E).obj (curriedTensor (modules Λ T)) ⟶

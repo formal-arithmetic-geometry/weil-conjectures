@@ -173,7 +173,7 @@ Proof (the approximation portion of Stacks Lemma 01ZT):
    lem-weil-pbc-qcqs-over-affine, def-weil-surjective-morphism,
    lem-weil-pbc-finite-iff-integral-lft, pqf-lem-integral-univclosed,
    lem-weil-pbc-surjective-universally-closed-separated,
-   lem-weil-pbc-closed-immersion-integral-separated-uc, def-weil-pbc-scheme-conventions].
+   lem-weil-pbc-closed-immersion-integral-separated-uc, definition-ind-etale-pro-etale-weakly--3].
 2. Express the integral f as a directed limit of finite, finitely presented Y-schemes
    with affine transitions. These schemes are qcqs; since their limit X is affine,
    some stage is affine. Its map to Y is surjective since f factors through it.
@@ -183,15 +183,15 @@ Proof (the approximation portion of Stacks Lemma 01ZT):
    lem-weil-pbc-limit-affine-stage, def-weil-surjective-morphism].
 3. Approximate qcqs Y by schemes Y_i of finite type over ℤ with affine transitions,
    and reindex by a nonempty directed set. Each Y_i is Noetherian and qcqs
-   [prop-nagata-noetherian-inverse-system, def-nagata-noetherian-inverse-system,
+   [theorem-nagata-s-compactification-theorem--1, theorem-nagata-s-compactification-theorem--1,
    lem-weil-pbc-cofiltered-limit-directed-reindex, lem-weil-pbc-finite-type-over-noetherian,
    pqf-def-locnoeth, lem-weil-pbc-locally-noetherian-quasi-separated].
 4. Descend f to a finitely presented g₀ : X₀ → Y₀. Restrict to the cofinal tail and
    set X_i = X₀ ×_{Y₀} Y_i. These are qcqs with affine transitions, and their limit
    is X, compatibly with f
-   [thm-pd-spreading-out, def-sbc-locally-finite-presentation, def-pc-fibre-product,
-   lem-weil-pbc-colimit-initial-full-subcategory, lem-weil-pbc-scheme-over-limit,
-   lem-weil-pbc-qcqs-morphism-permanence].
+   [proposition-jacobian-over-ground-field--1, def-sbc-locally-finite-presentation,
+   def-pc-fibre-product, lem-weil-pbc-colimit-initial-full-subcategory,
+   lem-weil-pbc-scheme-over-limit, lem-weil-pbc-qcqs-morphism-permanence].
 5. Descend finiteness of f to some g_i; finite presentation supplies local finite type.
    All later g_i are finite by base change
    [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism,

@@ -995,7 +995,7 @@ The pair (h,0) therefore defines a chain map from R_L[0], with all other source
 components zero (def-weil-abstract-derived-category).
 6. The product coordinates and two graded cone projections determine the map.
 Linearity gives h_n(b)=b h_n(1), proving the equivalent unit-only normalization
-also when 1=0 (def-weil-sheaf-of-modules-category).
+also when 1=0 (situation-conventions).
 -/
 theorem regular_scalar_strict_unit (D : FiniteFieldDatum.{d}) (_hl : l ≠ D.p) :
     integralOperationsGoodComplex l E Y (regularComplex l E Y) ∧

@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Group.ForwardDiff
 public import Mathlib.Algebra.Polynomial.Taylor
 public import Mathlib.Analysis.Polynomial.Basic
 public import Mathlib.RingTheory.Polynomial.Pochhammer
+public import Mathlib.Algebra.Polynomial.Eval.SMul
 
 /-!
 # Functions on `ℕ` with polynomial forward differences

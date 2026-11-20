@@ -14,10 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 /-!
 # The canonical compact-support coefficient comparison
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-reduction,
-sk-lem-sp-reduction-direct-image.proof.md, Steps 1-2
-(blueprint: def-sp-reduction-direct-image-comparison).
-
 This definition interface reexports the existing constant direct image, scalar/pullback
 comparison and its counit mate (`directImageConstantPush`, `directImageScalarPullbackIso`,
 `directImageScalarComparison`), and `openExtension`, `openScalarIso`.
@@ -30,12 +26,17 @@ of s to the intrinsic-pullback unit of s. Explicitly, the equation is
 `(e.hom.app M).val.app (op ((proEtaleBaseChange f).obj V))
   (((proEtaleConstantRingAdjunction A f).unit.app M).val.app (op V) s) =
   ((sfIntrinsicConstantModuleAdjunction f A).unit.app M).val.app (op V) s`.
-Its source and proof are in the published declaration's docstring (Stacks 03D3, 00YV).
+Its source and proof are in the declaration's docstring (Stacks 03D3, 00YV).
 The unique normalized object, rather than a choice from bare existence, supplies the
 change of coordinates used below. No existing definition is duplicated or renamed.
 
-The four definitions below belong to this node: the open coordinate identification,
+The four definitions below are: the open coordinate identification,
 the transported open scalar isomorphism, Rp_* j_!, and its actual scalar comparison.
+
+## References
+
+* Stacks Tags 03DI and 03DJ
+* Stacks Tags 03DI and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -51,9 +52,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Identify the recorded sheafified extension by zero with the normalized left adjoint
 used by the open scalar comparison. The pullback coordinate change preserves the actual
-constant-section unit. Uniqueness of left adjoints therefore fixes this identification.
-Source: blueprint proof Step 2; Stacks Tags 03DI and 03DJ
-(blueprint: def-sp-reduction-direct-image-comparison). -/
+constant-section unit. Uniqueness of left adjoints therefore fixes this identification. -/
 def reductionOpenModel (A : Type u) [CommRing A] [Finite A]
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     (sfIntrinsicExtensionByZero j A).mapDerivedCategory ≅ openExtension (A := A) j :=
@@ -64,9 +63,7 @@ def reductionOpenModel (A : Type u) [CommRing A] [Finite A]
 
 /-- The canonical B-linear open tensor comparison for the recorded extension by zero.
 The outside factors only change its adjunction coordinates; the middle comparison is
-fixed by the identity on restricted sections, hence by the usual balanced tensor map.
-Source: blueprint proof Step 2; Stacks Tags 03DI and 06YY
-(blueprint: def-sp-reduction-direct-image-comparison). -/
+fixed by the identity on restricted sections, hence by the usual balanced tensor map. -/
 def reductionOpenScalarIso {A B : Type u} [CommRing A] [CommRing B]
     [Finite A] [Finite B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
@@ -77,9 +74,7 @@ def reductionOpenScalarIso {A B : Type u} [CommRing A] [CommRing B]
       isoWhiskerLeft (scalarExtensionFunctor φ X) (reductionOpenModel B j).symm
 
 /-- Compact support for the given open/proper factorization, exactly Rp_* j_!.
-The open factor is the recorded sectionwise extension by zero, descended termwise.
-Source: blueprint statement, definition of Rf_!
-(blueprint: def-sp-reduction-direct-image-comparison). -/
+The open factor is the recorded sectionwise extension by zero, descended termwise. -/
 abbrev reductionCompactSupport (A : Type u) [CommRing A] [Finite A]
     {X Z Y : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) :
     proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory Y A :=
@@ -87,9 +82,7 @@ abbrev reductionCompactSupport (A : Type u) [CommRing A] [Finite A]
 
 /-- The actual B-linear coefficient comparison b, natural on the entire ambient category.
 Its proper factor is the mate of the canonical tensor/pullback comparison under the
-specified derived geometric adjunctions; its open factor is the canonical tensor map.
-Source: blueprint proof Steps 1-2, b = Rp_*(e) gamma
-(blueprint: def-sp-reduction-direct-image-comparison). -/
+specified derived geometric adjunctions; its open factor is the canonical tensor map. -/
 def reductionDirectImageComparison {A B : Type u} [CommRing A] [CommRing B]
     [Finite A] [Finite B] (φ : A →+* B)
     {X Z Y : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) :

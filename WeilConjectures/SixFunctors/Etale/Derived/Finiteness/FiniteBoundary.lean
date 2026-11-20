@@ -19,7 +19,7 @@ Let `b : Y ⟶ S` be proper, let `a : G ⟶ Y` be an open immersion whose closed
 and its direct image to `S`: the part supported on `Z` is seen faithfully by `Rb_*`, since
 `Rb_* i_* = R(bi)_*` and the finite direct image `(bi)_*` is exact and conservative. These are
 the two boundary steps of Deligne's generic constructibility theorem
-(`thm-fin-deligne-generic-open`).
+(`theorem-generic-constructibility-base-change-rj`).
 
 ## Main statements
 
@@ -27,10 +27,10 @@ the two boundary steps of Deligne's generic constructibility theorem
   finite morphism detects the zero sheaf.
 - `AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map_of_isIso_rightDerivedLowerStar_map`:
   a morphism which is an isomorphism over `G` and after `Rb_*` is an isomorphism
-  (`lem-fin-finite-boundary-comparison`).
+  (`lemma-detection-proper-direct-image--2`).
 - `AlgebraicGeometry.Etale.boundedConstructible_of_upperStar_of_rightDerivedLowerStar`:
   a complex which is bounded constructible over `G` and after `Rb_*` is bounded constructible
-  (`lem-fin-finite-boundary-reconstruction`).
+  (`lemma-detection-proper-direct-image--1`).
 -/
 
 @[expose] public section
@@ -92,7 +92,7 @@ lemma isZero_of_forall_isZero_homology {X : Scheme.{u}}
   exact _root_.DerivedCategory.TStructure.t.isZero K (-1) 0 (by lia)
 
 open Pretriangulated in
-/-- Blueprint `lem-fin-finite-boundary-comparison`: A proper direct image detects a comparison
+/-- Blueprint `lemma-detection-proper-direct-image--2`: A proper direct image detects a comparison
 off a finite boundary.
 
 Let `b : Y ⟶ S` be a morphism (proper, in the blueprint), let `a : G ⟶ Y` be an open immersion
@@ -137,7 +137,7 @@ theorem isIso_of_isIso_upperStar_map_of_isIso_rightDerivedLowerStar_map {S Y G Z
   exact (Functor.map_isZero _ hN').of_iso (asIso
     ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app M))
 
-/-- Blueprint `lem-fin-finite-boundary-reconstruction`: Recovering constructibility at a finite
+/-- Blueprint `lemma-detection-proper-direct-image--1`: Recovering constructibility at a finite
 boundary.
 
 Let `b : Y ⟶ S` be a proper morphism between schemes of finite type over a field `k`, and let

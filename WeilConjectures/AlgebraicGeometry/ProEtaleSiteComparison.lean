@@ -42,7 +42,7 @@ followed by sheafification. The Kan extension at `W` is the colimit over
 `CostructuredArrow (toProEt X).op (op W)`, which is the opposite of the category of pairs
 `(U, W ⟶ u(U))` of Tag 00WX. It is definitionally `comparisonUpperStar` for abelian
 coefficients.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 099R, 00WX and 0B65. -/
 noncomputable abbrev comparisonCoefficientPullback (X : Scheme.{u}) :=
   Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X) D
@@ -50,7 +50,7 @@ noncomputable abbrev comparisonCoefficientPullback (X : Scheme.{u}) :=
 
 /-- The canonical comparison adjunction for the common coefficient category: the inverse
 image `comparisonCoefficientPullback` is left adjoint to restriction along `toProEt X`.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
 Stacks, Tags 099R, 00WX and 0B65. -/
 noncomputable abbrev comparisonCoefficientAdjunction (X : Scheme.{u}) :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Scheme.toProEt X) D
@@ -109,7 +109,7 @@ followed by sheafification and direct image by restriction along `toProEt T`.
 The Kan extension at `W` is the colimit over `CostructuredArrow (toProEt T).op (op W)`,
 which is the opposite of the category of pairs `(U, W ⟶ u(U))` of Tag 00WX.
 Source: Stacks Project, Tags 099R and 00WX
-(blueprint: def-weil-pbc-site-comparison-morphism). -/
+(blueprint: proposition-comparison-morphism-inverse-image). -/
 noncomputable def proEtaleSiteComparison (T : Scheme.{u}) :
     Functor.sheafPullbackConstruction.sheafPullback (toProEt T)
       (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T) ⊣

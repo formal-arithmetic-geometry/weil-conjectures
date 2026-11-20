@@ -12,8 +12,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 /-!
 # Classical module sheaves and complexes on the small pro-etale site
 
-Source: the Weil conjectures blueprint, `sk-def-pe-classical-definition`
-(blueprint: sk-def-pe-classical-definition).
+Source: the Weil conjectures blueprint, `definition-classical-pro-etale-sheaves`
+(blueprint: definition-classical-pro-etale-sheaves).
 -/
 
 @[expose] public section
@@ -27,8 +27,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale
 
 /-- A module sheaf is classical when its underlying sheaf of sets is classical in the
-continuity-map sense. Source: blueprint `sk-def-pe-classical-definition`, final module clause
-(blueprint: sk-def-pe-classical-definition). -/
+continuity-map sense. Source: blueprint `definition-classical-pro-etale-sheaves`, final module
+clause (blueprint: definition-classical-pro-etale-sheaves). -/
 def IsClassicalModuleSheaf {X : Scheme.{u}}
     {R : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}}
     (F : SheafOfModules.{u + 1} R) : Prop :=
@@ -37,8 +37,8 @@ def IsClassicalModuleSheaf {X : Scheme.{u}}
       ((SheafOfModules.toSheaf R).obj F))
 
 /-- A complex of module sheaves is classical when every cohomology sheaf is classical.
-Source: blueprint `sk-def-pe-classical-definition`, final complex clause
-(blueprint: sk-def-pe-classical-definition). -/
+Source: blueprint `definition-classical-pro-etale-sheaves`, final complex clause
+(blueprint: definition-classical-pro-etale-sheaves). -/
 def IsClassicalModuleComplex {X : Scheme.{u}}
     {R : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}}
     [HasDerivedCategory (SheafOfModules.{u + 1} R)]

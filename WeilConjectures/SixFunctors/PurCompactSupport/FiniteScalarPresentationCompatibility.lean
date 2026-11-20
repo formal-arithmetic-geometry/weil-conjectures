@@ -67,7 +67,7 @@ private theorem derivedSquare_equalityTransport
     Iso.refl_trans, Iso.trans_refl]
   exact ExactDerivedSquare.square_unique F G x y c d d' hd hd'
 
-attribute [local implicit_reducible] TwoSquare finite sfAmbientCompactSupportCandidate
+attribute [local implicit_reducible] finite sfAmbientCompactSupportCandidate
   sfIntrinsicCompactSupport proEtaleConstantRingMap pbcDerivedRestrict
 attribute [local implicit_reducible] proEtaleConstantModuleDirectImage
   proEtaleRingModuleDirectImage SheafOfModules.pushforward
@@ -88,8 +88,17 @@ private theorem pushforwardCongr_eqToIso
   ext M V x
   rfl
 
-set_option maxHeartbeats 2000000 in
--- Comparing the two chosen pullback adjunctions unfolds the sectionwise pushforward models.
+private theorem unit_leftAdjointUniq_ofNatIsoRight
+    {C D : Type*} [Category C] [Category D]
+    {F F' : C ⥤ D} {G G' : D ⥤ C} (a : F ⊣ G) (b : F' ⊣ G')
+    (e : G ≅ G') (c : F ≅ F') (hc : c = (a.ofNatIsoRight e).leftAdjointUniq b) (M : C) :
+    a.unit.app M ≫ e.hom.app (F.obj M) ≫ G'.map (c.hom.app M) = b.unit.app M := by
+  subst c
+  simpa only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Category.assoc] using
+    Adjunction.unit_leftAdjointUniq_hom_app (a.ofNatIsoRight e) b M
+
+-- Keep the pullback comparison named while transporting the direct-image unit.
 private theorem finitePullback_native
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -108,18 +117,10 @@ private theorem finitePullback_native
       SheafOfModules.pushforwardCongr hm := pushforwardCongr_eqToIso f hm
   apply (openSquarePullbackModel_existsUnique A f).unique
   · intro M V x
-    have h := Adjunction.unit_leftAdjointUniq_hom_app
-      ((proEtaleRingModuleAdjunction f (R.ring Y) (R.ring X) (R.pull f)).ofNatIsoRight
-        (eqToIso (finiteDirectImage_eq l E n f)))
-      (sfIntrinsicConstantModuleAdjunction f A) M
-    simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
-      Functor.whiskerLeft_app] at h
-    change (proEtaleRingModuleAdjunction f (R.ring Y) (R.ring X) (R.pull f)).unit.app M ≫
-      (eqToIso (finiteDirectImage_eq l E n f)).hom.app
-        ((proEtaleRingModulePullback f (R.ring Y) (R.ring X) (R.pull f)).obj M) ≫
-      (proEtaleConstantModuleDirectImage f A).map
-        ((finitePullbackIso l E n f).hom.app M) =
-      (sfIntrinsicConstantModuleAdjunction f A).unit.app M at h
+    have h := unit_leftAdjointUniq_ofNatIsoRight
+      (proEtaleRingModuleAdjunction f (R.ring Y) (R.ring X) (R.pull f))
+      (sfIntrinsicConstantModuleAdjunction f A) (eqToIso (finiteDirectImage_eq l E n f))
+      (finitePullbackIso l E n f) rfl M
     rw [he] at h
     have hv := congrArg (fun z ↦ z.val.app (Opposite.op V) x) h
     exact hv
@@ -501,7 +502,6 @@ private theorem finiteDerivedOpen_native
       Functor.mapDerivedCategoryNatIso_symm, proEtaleCoefficientRestrictScalars,
       proEtaleConstantRingMap]
 
-set_option maxHeartbeats 2000000 in
 -- Pasting compares the chosen derived proper/open functor models.
 private theorem finiteRestriction_native
     (l : ℕ) [Fact l.Prime]
@@ -615,25 +615,22 @@ private theorem mate_whisker
     {F F' : A ⥤ C} {G G' : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (t : TwoSquare F L₁ L₂ G)
     (f : F' ⟶ F) (g : G ⟶ G') :
-    (mateEquiv a₁ a₂ ((t.whiskerTop f).whiskerBottom g)).natTrans =
-      Functor.whiskerLeft R₁ f ≫ (mateEquiv a₁ a₂ t).natTrans ≫
+    (mateEquiv a₁ a₂ ((t.whiskerTop f).whiskerBottom g)) =
+      Functor.whiskerLeft R₁ f ≫ (mateEquiv a₁ a₂ t) ≫
         Functor.whiskerRight g R₂ := by
   ext N
-  dsimp only [TwoSquare.natTrans]
   simp only [mateEquiv_apply, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
     Functor.comp_obj, Category.id_comp, Functor.map_comp, Category.assoc]
   rw [← a₂.unit_naturality_assoc]
-  dsimp only [TwoSquare.natTrans]
   simp only [Functor.comp_map]
   have hg := congrArg R₂.map (g.naturality (a₁.counit.app N))
   simp only [R₂.map_comp] at hg
   rw [← reassoc_of% hg]
   simp
 
-set_option maxHeartbeats 2000000 in
 -- Normalizing the two presentations expands their derived scalar functor models.
 /-- The finite ringed presentation and the intrinsic constant-ring presentation give
 exactly the same scalar mate after the canonical presentation isomorphisms.
@@ -679,10 +676,10 @@ theorem finiteScalarPresentationCompatibility
       (TwoSquare.mk _ _ _ _ (ExceptionalFiniteScalar.leftScalarMap φ c))
       (finiteImageIso l E n c).hom (finiteImageIso l L m c).inv
     dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
-      TwoSquare.mk, TwoSquare.natTrans] at hw
+      TwoSquare.mk] at hw
     simp only [Category.assoc] at hw
     dsimp only [comparison, ExceptionalFiniteScalar.leftScalarMap,
-      TwoSquare.mk, TwoSquare.natTrans] at hw ⊢
+      TwoSquare.mk] at hw ⊢
     dsimp only [pbcDerivedRestrict, pbcRestrict, proEtaleCoefficientRestrictScalars,
       proEtaleConstantRingMap, sfAmbientCompactSupportCandidate,
       sfIntrinsicCompactSupport] at hw ⊢

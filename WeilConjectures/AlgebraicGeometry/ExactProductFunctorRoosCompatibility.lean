@@ -159,6 +159,91 @@ private theorem product_component_ext [HasCountableProducts A]
 
 end SignedCone
 
+-- Check the coordinate calculations over abstract abelian categories, before
+-- specializing to module sheaves and their products.
+section SignedConeMap
+
+variable {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    (F : A ⥤ B) [F.Additive]
+    {P U : CochainComplex A ℤ} {P' U' : CochainComplex B ℤ}
+    (χ : ∀ i : ℤ, U.X (i + 1) ≅ P.X (i + 1) ⊞ P.X i)
+    (χ' : ∀ i : ℤ, U'.X (i + 1) ≅ P'.X (i + 1) ⊞ P'.X i)
+    (k : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj U ⟶ U')
+    (ψ : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P ⟶ P')
+
+private theorem compatBoundary_map
+    (hd : ∀ i,
+      (k.f (i + 1) ≫ (χ' i).hom ≫ biprod.fst =
+        F.map ((χ i).hom ≫ biprod.fst) ≫ ψ.f (i + 1)) ∧
+      (k.f (i + 1) ≫ (χ' i).hom ≫ biprod.snd =
+        F.map ((χ i).hom ≫ biprod.snd) ≫ ψ.f i))
+    (δ : P ⟶ U⟦(1 : ℤ)⟧) (δ' : P' ⟶ U'⟦(1 : ℤ)⟧)
+    (hδ : ∀ i, δ.f i ≫ (U.shiftFunctorObjXIso 1 i (i + 1) rfl).hom ≫
+      (χ i).hom = -biprod.inr)
+    (hδ' : ∀ i, δ'.f i ≫ (U'.shiftFunctorObjXIso 1 i (i + 1) rfl).hom ≫
+      (χ' i).hom = -biprod.inr) :
+    (F.mapHomologicalComplex (ComplexShape.up ℤ)).map δ ≫
+      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).commShiftIso (1 : ℤ)).hom.app U ≫
+        k⟦(1 : ℤ)⟧' = ψ ≫ δ' := by
+  apply HomologicalComplex.Hom.ext
+  funext i
+  have hda : δ.f i ≫ (χ i).hom = -biprod.inr := by
+    simpa [CochainComplex.shiftFunctorObjXIso] using hδ i
+  have hdb : δ'.f i ≫ (χ' i).hom = -biprod.inr := by
+    simpa [CochainComplex.shiftFunctorObjXIso] using hδ' i
+  change F.map (δ.f i) ≫ 𝟙 _ ≫ k.f (i + 1) = ψ.f i ≫ δ'.f i
+  rw [Category.id_comp]
+  apply (cancel_mono (χ' i).hom).mp
+  apply biprod.hom_ext
+  · simp only [Category.assoc, (hd i).1]
+    rw [← Category.assoc, ← F.map_comp]
+    simp only [← Category.assoc, hda, hdb]
+    simp only [Preadditive.neg_comp, Preadditive.comp_neg, Category.assoc,
+      Functor.map_neg]
+    rw [biprod.inr_fst, biprod.inr_fst]
+    simp only [Functor.map_zero, zero_comp, comp_zero, neg_zero]
+  · simp only [Category.assoc, (hd i).2]
+    rw [← Category.assoc, ← F.map_comp]
+    simp only [← Category.assoc, hda, hdb]
+    simp only [Preadditive.neg_comp, Preadditive.comp_neg, Category.assoc,
+      Functor.map_neg]
+    rw [biprod.inr_snd, biprod.inr_snd]
+    simp only [Functor.map_id, Category.id_comp, Category.comp_id]
+
+private theorem compatAugment_map
+    (hd : ∀ i,
+      (k.f (i + 1) ≫ (χ' i).hom ≫ biprod.fst =
+        F.map ((χ i).hom ≫ biprod.fst) ≫ ψ.f (i + 1)) ∧
+      (k.f (i + 1) ≫ (χ' i).hom ≫ biprod.snd =
+        F.map ((χ i).hom ≫ biprod.snd) ≫ ψ.f i))
+    {V : CochainComplex A ℤ} (f : V ⟶ P)
+    (f' : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj V ⟶ P')
+    (b : V ⟶ U) (b' : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj V ⟶ U')
+    (hb : ∀ i, b.f (i + 1) ≫ (χ i).hom = biprod.lift (f.f (i + 1)) 0)
+    (hb' : ∀ i, b'.f (i + 1) ≫ (χ' i).hom = biprod.lift (f'.f (i + 1)) 0)
+    (hf : (F.mapHomologicalComplex (ComplexShape.up ℤ)).map f ≫ ψ = f') :
+    (F.mapHomologicalComplex (ComplexShape.up ℤ)).map b ≫ k = b' := by
+  apply HomologicalComplex.Hom.ext
+  funext i
+  obtain ⟨j, rfl⟩ : ∃ j : ℤ, i = j + 1 := ⟨i - 1, by omega⟩
+  change F.map (b.f (j + 1)) ≫ k.f (j + 1) = b'.f (j + 1)
+  apply (cancel_mono (χ' j).hom).mp
+  apply biprod.hom_ext
+  · simp only [Category.assoc, (hd j).1]
+    rw [← Category.assoc, ← F.map_comp]
+    rw [← Category.assoc, hb]
+    rw [← Category.assoc, hb']
+    rw [biprod.lift_fst, biprod.lift_fst]
+    exact congrArg (fun g ↦ g.f (j + 1)) hf
+  · simp only [Category.assoc, (hd j).2]
+    rw [← Category.assoc, ← F.map_comp]
+    rw [← Category.assoc, hb]
+    rw [← Category.assoc, hb']
+    rw [biprod.lift_snd, biprod.lift_snd]
+    simp only [Functor.map_zero, zero_comp]
+
+end SignedConeMap
+
 private theorem localizedBoundary
     {E E' A B : Type*} [Category* E] [Category* E'] [Category* A] [Category* B]
     [HasShift E ℤ] [HasShift E' ℤ] [HasShift A ℤ] [HasShift B ℤ]
@@ -238,8 +323,6 @@ private theorem localizedAugmentation
       rw [← Category.assoc, hn, Category.assoc, ← Q'.map_comp, hb]
       simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
-set_option maxHeartbeats 600000 in
--- The statement contains simultaneous universe-polymorphic cone comparisons.
 /-- Triangle and augmentation compatibility of a prescribed Roos square.
 
 Source: Stacks Project, Tags 0940 and 0941, and the final paragraph of
@@ -515,33 +598,8 @@ theorem exactProductFunctorRoosCompatibility
           simp only [Functor.map_comp, Category.assoc]
           dsimp only [Fc]
           rw [← F.mapDerivedCategoryFactors_hom_naturality_assoc p]
-    · have hboundary : Fc.map δ ≫ (Fc.commShiftIso (1 : ℤ)).hom.app (HA.obj X) ≫
-          ((kappa X).hom)⟦(1 : ℤ)⟧' = (psi X).hom ≫ δ' := by
-        apply HomologicalComplex.Hom.ext
-        funext i
-        have hda : δ.f i ≫ (chiA X i).hom = -biprod.inr := by
-          simpa [CochainComplex.shiftFunctorObjXIso] using hδ i
-        have hdb : δ'.f i ≫ (chiB (Ft.obj X) i).hom = -biprod.inr := by
-          simpa [CochainComplex.shiftFunctorObjXIso] using hδ' i
-        change (F.map (δ.f i) ≫ 𝟙 _) ≫ (kappa X).hom.f (i + 1) =
-          (psi X).hom.f i ≫ δ'.f i
-        rw [Category.comp_id]
-        apply (cancel_mono (chiB (Ft.obj X) i).hom).mp
-        apply biprod.hom_ext
-        · simp only [Category.assoc, (hd X i).1]
-          rw [← Category.assoc, ← F.map_comp]
-          simp only [← Category.assoc, hda, hdb]
-          simp only [Preadditive.neg_comp, Preadditive.comp_neg, Category.assoc,
-            Functor.map_neg]
-          erw [biprod.inr_fst, biprod.inr_fst]
-          simp only [Functor.map_zero, zero_comp, comp_zero, neg_zero]
-        · simp only [Category.assoc, (hd X i).2]
-          rw [← Category.assoc, ← F.map_comp]
-          simp only [← Category.assoc, hda, hdb]
-          simp only [Preadditive.neg_comp, Preadditive.comp_neg, Category.assoc,
-            Functor.map_neg]
-          erw [biprod.inr_snd, biprod.inr_snd]
-          simp only [Functor.map_id, Category.id_comp, Category.comp_id]
+    · have hboundary := compatBoundary_map F (chiA X) (chiB (Ft.obj X))
+        (kappa X).hom (psi X).hom (hd X) δ δ' hδ hδ'
       simpa only [Ft, Functor.comp_obj, Functor.map_comp, Iso.app_inv, Category.assoc] using
         localizedBoundary DerivedCategory.Q DerivedCategory.Q Fc F.mapDerivedCategory
           F.mapDerivedCategoryFactors (thetaA.app X) (thetaB.app (Ft.obj X))
@@ -582,25 +640,8 @@ theorem exactProductFunctorRoosCompatibility
       rw [Category.assoc, hpsi]
       change Fc.map (Pi.lift gamma) ≫ Fc.map _ = _
       rw [← Fc.map_comp, Pi.lift_comp_π, Pi.lift_comp_π]
-    have hmap : Fc.map b ≫ (kappa X).hom = b' := by
-      apply HomologicalComplex.Hom.ext
-      funext i
-      obtain ⟨j, rfl⟩ : ∃ j : ℤ, i = j + 1 := ⟨i - 1, by omega⟩
-      change F.map (b.f (j + 1)) ≫ (kappa X).hom.f (j + 1) = b'.f (j + 1)
-      apply (cancel_mono (chiB (Ft.obj X) j).hom).mp
-      apply biprod.hom_ext
-      · simp only [Category.assoc, (hd X j).1]
-        rw [← Category.assoc, ← F.map_comp]
-        rw [← Category.assoc, hb]
-        rw [← Category.assoc, hb']
-        rw [biprod.lift_fst, biprod.lift_fst]
-        exact congrArg (fun f ↦ f.f (j + 1)) hg
-      · simp only [Category.assoc, (hd X j).2]
-        rw [← Category.assoc, ← F.map_comp]
-        rw [← Category.assoc, hb]
-        rw [← Category.assoc, hb']
-        rw [biprod.lift_snd, biprod.lift_snd]
-        simp only [Functor.map_zero, zero_comp]
+    have hmap := compatAugment_map F (chiA X) (chiB (Ft.obj X))
+      (kappa X).hom (psi X).hom (hd X) (Pi.lift gamma) (Pi.lift gamma') b b' hb hb' hg
     refine ⟨b, b', hb, hb', ?_⟩
     change F.mapDerivedCategory.map (DerivedCategory.Q.map b ≫ thetaA.inv.app X) ≫
       lambda.hom.app (DerivedCategory.Q.obj X) ≫

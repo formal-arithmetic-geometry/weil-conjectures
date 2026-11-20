@@ -28,8 +28,17 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 700000 in
--- The chart carrier and the two localization universes require additional elaboration.
+private theorem chartModelFactorization_of_units
+    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
+    (adj : L ⊣ R) {X X' : C} {Y Z Z' : D} (s : X' ⟶ X) [Epi s]
+    (a : L.obj X ≅ Y) (b : Z ≅ Z') (c : Y ⟶ Z') (p : X ⟶ R.obj Z)
+    (h : s ≫ p ≫ R.map b.hom = s ≫ adj.homEquiv _ _ (a.hom ≫ c)) :
+    (adj.homEquiv _ _).symm p ≫ b.hom = a.hom ≫ c := by
+  apply (adj.homEquiv _ _).injective
+  apply (cancel_epi s).1
+  rw [Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply]
+  exact h
+
 /-- Localization transports the ordinary unit equation to the fixed mixed
 adjunction mate. No invertibility of the ordinary comparison c is assumed.
 Source: Stacks Project, Tags 06Z0, 08DW(2), 0AA7 and 0D5T.
@@ -114,17 +123,14 @@ theorem exists_mixedAffineSections_chart_model_factorization
             (mixedGlobalSectionsDirectImageIso g).hom.app ((derivedPullback g).obj Q))) ≫
               b.hom = a.hom ≫
                 DerivedCategory.Q.map ((c.mapHomologicalComplex (.up ℤ)).app P) := by
-  dsimp only
-  intro c hc instF instH instJ instE instK P hP
-  let F : ModuleCat.{u} Γ(S, ⊤) ⥤
-      SheafOfModules.{u} (moduleRings S.toRingedSpace) :=
-    tilde.functor Γ(S, ⊤) ⋙ Scheme.Modules.restrictFunctor S.toSpecΓ
-  let H := RingedSpace.globalSectionsFunctor S.toRingedSpace
-  let J := RingedSpace.globalSectionsFunctor T.toRingedSpace
-  let E := ModuleCat.extendScalars.{u, u, u} g.appTop.hom
-  let K : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
-      SheafOfModules.{u} (moduleRings T.toRingedSpace) := Scheme.Modules.tensorPullback g
+  intro F H J E K c hc instF instH instJ instE instK P hP Q
   let R := ModuleCat.restrictScalars.{u} g.appTop.hom
+  have : F.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive F
+  have : H.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive H
+  have : J.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive J
+  have : E.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive E
+  have : K.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive K
+  have : R.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive R
   let C := (F.mapHomologicalComplex (.up ℤ)).obj P
   let d : F ⋙ H ⟶ F ⋙ K ⋙ J ⋙ R :=
     Functor.whiskerRight (Functor.whiskerLeft F
@@ -142,9 +148,8 @@ theorem exists_mixedAffineSections_chart_model_factorization
   refine ⟨a, b, ?_⟩
   have : IsIso (mixedSectionsComplexUnit S C) :=
     mixedAffineChart_sectionsComplexUnit_isIso S P
-  apply ((mixedGlobalExtensionAdjunction g).homEquiv _ _).injective
-  apply (cancel_epi (mixedSectionsComplexUnit S C)).1
-  rw [Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply]
+  apply chartModelFactorization_of_units (mixedGlobalExtensionAdjunction g)
+    (mixedSectionsComplexUnit S C)
   have ha' := ha _ ((c.mapHomologicalComplex (.up ℤ)).app P)
   rw [hcP] at ha'
   simp only [Category.assoc] at hb ⊢

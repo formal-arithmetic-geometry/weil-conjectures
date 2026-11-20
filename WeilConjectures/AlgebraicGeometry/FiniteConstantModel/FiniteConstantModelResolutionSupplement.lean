@@ -459,7 +459,7 @@ finite powers of the constant ring. The scalar map is constant continuous functi
 and use (z_i) to sum z_i tensor e_i for its inverse. These maps identify the scalar
 extended differentials with the given matrices, including n=0.
 5. For integral coefficients, lem-weil-pbc-pid-noetherian-normal makes O_E Noetherian.
-The canonical A-algebra comparison det-prop-sfb-qlbar-colimit-x-integral-limit identifies
+The canonical A-algebra comparison lemma-comparison-completed-coefficients--1 identifies
 B with the limit of the constant A/(pi^n). Its projections send constant scalars to
 their residues, so lem-weil-pbc-completed-constant-sheaf-reduction (Stacks 093M)
 preserves the constant short exact sequence under scalar extension. In the field case

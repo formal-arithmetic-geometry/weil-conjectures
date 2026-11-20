@@ -23,15 +23,14 @@ import Mathlib.RingTheory.DedekindDomain.Dvr
 /-!
 # Filtered colimits and sums of ind-constructible module sheaves
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-ind-heart,
-`sk-prop-ind-heart-filtered-colimits.md` and its proof
-(blueprint: det-ind-heart-filtered-colimits).
-
-The standing geometric hypotheses are those of `sk-def-sfb-dc-setting`.
-`ObjectProperty.ind.{u + 1}` of `IsConstantModelConstructible` is precisely IndCons:
-small filtered presentations in the actual internal-module category, closed under isomorphism.
-The two statements cover respectively a finite coefficient subextension and the condensed
-algebraic closure. Coproducts are stated using arbitrary colimit cofans, including the empty one.
+Let `X` be a separated scheme of finite type over a field `k` of characteristic `p > 0`, and
+`ℓ ≠ p` a prime. Ind-constructible sheaves of modules on the pro-étale site of `X` (IndCons,
+`ObjectProperty.ind.{u + 1}` of `IsConstantModelConstructible`) are closed under filtered
+colimits and arbitrary sums, for coefficients a finite extension `E/ℚ_ℓ`
+(`AlgebraicGeometry.ProEtale.indConstructible_filteredColimits_and_sums`) and for the condensed
+algebraic closure
+(`AlgebraicGeometry.ProEtale.indConstructible_filteredColimits_and_sums_padicAlgCl`).
+Sums are stated using arbitrary colimit cofans, including the empty one.
 -/
 
 @[expose] public section
@@ -132,26 +131,7 @@ private theorem constructible_finite_coproduct
     (Discrete.functor B) (fun s ↦ hB s.as)
 
 set_option linter.unusedVariables false in
-/-- For finite `E/ℚ_ℓ`, IndCons is closed under ambient filtered colimits and arbitrary sums.
-Source: blueprint main-20261015, sk-prop-ind-heart-filtered-colimits, both assertions;
-standing setting: sk-def-sfb-dc-setting (blueprint: det-ind-heart-filtered-colimits).
-
-Proof: The standing finite-type hypotheses make X locally Noetherian and quasi-compact.
-The finite-presentability clause of det-ind-heart-full-faithfulness identifies every
-constructible module as finitely presentable. Mathlib ObjectProperty.ind_ind therefore
-flattens a filtered colimit of ind-constructible objects to a constructible presentation.
-For sums, constructibility is invariant under isomorphisms by composing the pulled-back
-isomorphism with each finite constant local model. The abelianity and finite-colimit
-preservation clauses of det-lem-coefficient-heart-closure then give closure of constructible
-objects under finite coproducts, including the empty coproduct.
-For a finite family of ind-constructible objects, choose filtered presentations and take
-their product index category. Evaluation at each coordinate is final, so the reindexed
-presentation still presents that summand. Assemble these cocones in the category of families
-and apply the coproduct functor, which preserves colimits. Its stages are finite coproducts
-of constructibles. The empty family is covered by the one-object empty product category.
-Finally, Mathlib's finite-subcoproduct cocone presents an arbitrary coproduct as the filtered
-colimit over finite subsets of the index set. Apply ind_ind again and transfer to the given
-colimiting cofan by the canonical isomorphism of colimit points. -/
+/-- For finite `E/ℚ_ℓ`, IndCons is closed under ambient filtered colimits and arbitrary sums. -/
 theorem indConstructible_filteredColimits_and_sums
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ)
@@ -213,23 +193,7 @@ theorem indConstructible_filteredColimits_and_sums
 
 set_option linter.unusedVariables false in
 /-- For the condensed algebraic closure, IndCons is closed under ambient filtered colimits
-and arbitrary sums. Source: blueprint main-20261015, sk-prop-ind-heart-filtered-colimits,
-both assertions; standing setting: sk-def-sfb-dc-setting
-(blueprint: det-ind-heart-filtered-colimits).
-
-Proof: As in the finite coefficient case, the standing hypotheses make X Noetherian.
-Use the algebraic-closure clause of det-ind-heart-full-faithfulness to obtain finite
-presentability of constructible modules. ObjectProperty.ind_ind then flattens every filtered
-colimit of ind-constructible objects.
-Constructibility is invariant under isomorphisms, by composing the local-model isomorphisms
-on each stratum. Apply det-lem-coefficient-heart-closure for the condensed algebraic closure:
-its abelian full subcategory and finite-colimit-preserving inclusion give constructible
-finite coproducts. Products of filtered presentation categories, final coordinate
-evaluations and the colimit-preserving coproduct functor give filtered constructible
-presentations of finite coproducts of ind-constructibles, also for the empty family.
-The finite subsets of the arbitrary index set form a filtered poset. Mathlib's
-finite-subcoproduct cocone has colimit the arbitrary coproduct, so ind_ind proves it
-ind-constructible. Transfer to the specified cofan by colimit uniqueness. -/
+and arbitrary sums. -/
 theorem indConstructible_filteredColimits_and_sums_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ)

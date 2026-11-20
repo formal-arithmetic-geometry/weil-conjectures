@@ -105,7 +105,12 @@ public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.CategoryTheory.Sites.CoverPreserving
 public import WeilConjectures.Algebra.Homology.DivisibleReduction.DivisibleExtensionDerivedReductionSupplement
 import all WeilConjectures.Algebra.Homology.DivisibleReduction.DivisibleExtensionDerivedReductionSupplement
-/-! # Uniqueness and the arbitrary-complex unit of scalar extension -/
+/-! # Uniqueness and the arbitrary-complex unit of scalar extension
+
+## References
+
+* Stacks 06YY, 07A6, and the representative equation in ScalarData
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -151,13 +156,7 @@ private theorem unit_model_flat (S : ScalarData.{c, v, r} φ)
     | erw [Category.comp_id] at ht
   simpa only [Category.assoc] using ht
 
-/-- The model-unit equation holds on arbitrary complexes, without flatness.
-Source: Stacks 06YY, 07A6, and the representative equation in ScalarData.
-(blueprint: lem-sfb-scalar-model-unit).
-Proof: the two composites are natural transformations on complexes. They agree
-on K-flat complexes by the representative transpose at the identity. Every complex
-has a K-flat resolution, whose image under Q is invertible. Naturality and
-cancellation of that image give equality on the original complex. -/
+/-- The model-unit equation holds on arbitrary complexes, without flatness. -/
 theorem ScalarData.unit_model (S : ScalarData.{c, v, r} φ)
     (P₀ : CochainComplex (Mod.{c, v, r} J R) ℤ) :
     S.adjunction.unit.app (DerivedCategory.Q.obj P₀) ≫
@@ -225,13 +224,7 @@ private theorem derived_unit_eq (S : ScalarData.{c, v, r} φ) :
     _ = _ := by
       simpa only [Functor.id_map] using
         ((SheafOfModules.sheafScalarDerivedAdjunction φ S.model).unit.naturality e'.hom).symm
-/-- The specified scalar adjunction is the normalized canonical adjunction.
-Source: Stacks 06YY and 07A6 (blueprint: lem-sfb-scalar-adjunction-unique).
-Proof: the section equation identifies the ordinary units. At a K-flat complex,
-transpose_model at the identity identifies the derived units, since the counit
-comparison is invertible there. A K-flat resolution and naturality extend this
-equality to every complex, then essential surjectivity to every derived object.
-An adjunction is determined by its unit. -/
+/-- The specified scalar adjunction is the normalized canonical adjunction. -/
 theorem ScalarData.adjunction_eq (S : ScalarData.{c, v, r} φ) :
     S.adjunction = SheafOfModules.sheafScalarDerivedAdjunction φ S.model :=
   Adjunction.ext (derived_unit_eq S)

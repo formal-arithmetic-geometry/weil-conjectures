@@ -10,9 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Charts
 /-!
 # Base change for smooth duality reduces to the dualizing complex
 
-The last step of the proof of blueprint `prop-asd-smooth-base-change`: the base change map of the
-exceptional inverse image respects the tensor isomorphisms of `thm-asd-smooth-tensor`. For a
-cartesian square
+The last step of the proof of blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`:
+the base change map of the exceptional inverse image respects the tensor isomorphisms of
+`proposition-exceptional-inverse-image-smooth-morphism`. For a cartesian square
 
 ```
   X' --g'--> X
@@ -66,24 +66,24 @@ theorem isIso_mateEquiv_app_of_isIso_projectionTensorMap
       Gb.map (φ ▷ N'') ≫ δb N' N'' = δb N N'' ≫ Gb.map φ ▷ Gb.obj N'')
     (κ : ∀ N : Cy, Ga.obj (F.obj N) ⟶ F'.obj (Gb.obj N)) [∀ N, IsIso (κ N)]
     (Ex : L ⋙ Gb ⟶ Ga ⋙ L') [IsIso Ex] (ξ : TwoSquare Ga L L' Gb)
-    (hExξ : ∀ M : Cx, Ex.app M ≫ ξ.natTrans.app M = 𝟙 _)
+    (hExξ : ∀ M : Cx, Ex.app M ≫ ξ.app M = 𝟙 _)
     (hEx : ∀ (M : Cx) (N : Cy), Gb.map (π M N) ≫ Ex.app (M ⊗ F.obj N) ≫
       L'.map (δa M (F.obj N)) ≫ L'.map (Ga.obj M ◁ κ N) =
         δb (L.obj M) N ≫ Ex.app M ▷ Gb.obj N ≫ π' (Ga.obj M) (Gb.obj N))
-    (h₁ : IsIso ((mateEquiv adj adj' ξ).natTrans.app (𝟙_ Cy))) {N : Cy}
+    (h₁ : IsIso ((mateEquiv adj adj' ξ).app (𝟙_ Cy))) {N : Cy}
     (hT : IsIso (adj.projectionTensorMap π (𝟙_ _) N))
     (hT' : IsIso (adj'.projectionTensorMap π' (Gb.obj (𝟙_ _)) (Gb.obj N))) :
-    IsIso ((mateEquiv adj adj' ξ).natTrans.app N) := by
+    IsIso ((mateEquiv adj adj' ξ).app N) := by
   have key := projectionTensorMap_mateEquiv adj adj' π π' hπ' δa δb hδb κ Ex ξ hExξ hEx (𝟙_ _) N
   have h₂ : IsIso (Ga.map (adj.projectionTensorMap π (𝟙_ _) N) ≫
-      (mateEquiv adj adj' ξ).natTrans.app (𝟙_ _ ⊗ N) ≫ R'.map (δb (𝟙_ _) N)) := by
+      (mateEquiv adj adj' ξ).app (𝟙_ _ ⊗ N) ≫ R'.map (δb (𝟙_ _) N)) := by
     rw [key]
     infer_instance
   have := (isIso_comp_left_iff _ _).1 h₂
-  have : IsIso ((mateEquiv adj adj' ξ).natTrans.app (𝟙_ _ ⊗ N)) :=
+  have : IsIso ((mateEquiv adj adj' ξ).app (𝟙_ _ ⊗ N)) :=
     IsIso.of_isIso_comp_right _ (R'.map (δb (𝟙_ _) N))
-  have hn := (mateEquiv adj adj' ξ).natTrans.naturality (λ_ N).hom
-  have h₄ : IsIso ((R ⋙ Ga).map (λ_ N).hom ≫ (mateEquiv adj adj' ξ).natTrans.app N) := by
+  have hn := (mateEquiv adj adj' ξ).naturality (λ_ N).hom
+  have h₄ : IsIso ((R ⋙ Ga).map (λ_ N).hom ≫ (mateEquiv adj adj' ξ).app N) := by
     rw [hn]
     infer_instance
   exact (isIso_comp_left_iff _ _).1 h₄

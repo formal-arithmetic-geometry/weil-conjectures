@@ -18,8 +18,8 @@ transition cocycle of a trivialisation of a lisse sheaf,
 `AlgebraicGeometry.ProEtale.AdicSheaf.isDescentCocycle_smul_compactOpenLattice`). Then `γ` has a
 twisted section with values in the lattices
 (`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice`): a lisse sheaf on a regular
-scheme has a lattice (blueprint `thm-lisse-qlbar-representations` (4), used in
-`prop-zl-smooth-proper-relative-purity`).
+scheme has a lattice (blueprint `proposition-lattices-representations-normal-scheme` (4), used in
+`theorem-purity-higher-direct-images-under`).
 
 On a connected `T`, the orbit of a lattice is contained in a finite invariant set of lattices
 (`AlgebraicGeometry.exists_finite_invariant_subset`, Bhatt–Scholze, Lemma 7.4.10), whose sum is an

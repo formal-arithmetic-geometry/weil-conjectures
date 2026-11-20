@@ -133,7 +133,7 @@ Proof:
 1. Apply lem-sf-scalar-pullback-composition to h followed by f and to f' followed
    by g, using their common composite h followed by f. These laws already use
    the K-flat-normalized scalar comparison transported to exact inverse image.
-   The specified square comparison of def-kun-unbounded-exchange is the inverse
+   The specified square comparison of definition-derived-base-change-map is the inverse
    of the second path's compositor followed by the first path's compositor.
    Cancel the second compositor and use the two composition laws to obtain the
    coefficient/pullback cube.
@@ -141,7 +141,7 @@ Proof:
    transpose is lambda followed by scalar extension of the A-counit. The
    definition of exactDerivedBaseChangeMap similarly says that its transpose is
    the square comparison followed by pullback of the geometric counit. The
-   canonical derived adjunctions are those of def-kun-projection-formula-map,
+   canonical derived adjunctions are those of definition-projection-formula-map--1,
    transported to exact termwise inverse image.
 3. Transpose the left-hand composite under the f'-adjunction with B coefficients.
    Counit naturality, the exchange transpose formula, square naturality, and the

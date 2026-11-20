@@ -19,7 +19,11 @@ import WeilConjectures.RingTheory.FiniteFreeMapResidueLocalization
 import Mathlib.LinearAlgebra.TensorProduct.Pi
 
 /-! # Local lifting of arbitrary marked-fibre sections
-Source: Stacks Project, Tag 0BF2, the degree-zero differential argument.
+
+## References
+
+* Stacks Project, Tag 0BF2, the degree-zero differential argument
+* Stacks Project, Tag 0BF2, the perfect-complex argument through d = 0
 -/
 
 @[expose] public section
@@ -28,32 +32,8 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 600000 in
--- The dependent section types require extra elaboration heartbeats.
 /-- Every marked-fibre section lifts after shrinking the base around the marked point.
-This asserts surjectivity of restriction, not existence of a generating section.
-Source: Stacks Project, Tag 0BF2, the perfect-complex argument through d = 0.
-(blueprint: lem-sc-picard-h1-base-descent-section-lifting)
-
-Proof: Base change to W. The immersion identifies the marked residue fields, transporting
-hLs and hH. Universal structure pushforward is preserved by this base change. Faithfully
-flat descent makes the finite locally free modules in hLi invertible; trivialize them
-on a common affine neighbourhood. Perfect direct-image base change and finite-free residue
-models give bounded complexes with degree-zero term of rank one and all residue
-differentials zero. The pullback maps can be represented by chain maps between these
-finite projective complexes. Their degree-zero residue maps are isomorphisms. Shrink to
-invert these maps. The joint degree-one map has injective residue map by hH; invert a
-nonzero maximal minor to make it split injective. In rank zero it is already injective,
-including the empty-family case. The target degree-zero differentials vanish since the
-trivial descended bundles have H0 equal to O and its generator spans the degree-zero term
-after shrinking. The chain-map equation forces the source differential to vanish.
-Thus every fibre section lifts after further shrinking: write its scalar coefficient
-in κ(w) as a fraction and invert its denominator, which is nonzero at w.
-The residue fibre of V is canonically
-isomorphic to the residue fibre of W; its inclusion j hits every point over w. Pullback
-composition supplies e; the adjunction unit is the canonical section restriction map.
-This proves the displayed restriction equation for every τ, without asserting that τ or
-its lift generates. -/
+This asserts surjectivity of restriction, not existence of a generating section. -/
 theorem picard_h1_base_descent_section_lifting {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}
     (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
@@ -101,13 +81,23 @@ theorem picard_h1_base_descent_section_lifting {X S : Scheme.{v}} (f : X ⟶ S) 
                         ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).val.app
                           (Opposite.op ⊤) σ)) = τ := by
   classical
-  obtain ⟨U, hwU, m, q, d, b, hp, hb, hbd, c, hcycles⟩ :=
-    picard_h1_base_descent_cycle_presentation f Xi fi ui hui hO hOi L W k w s hw hLi hLs hH
+  -- Explicit existential elimination avoids generalizing the dependent section types.
+  refine (picard_h1_base_descent_cycle_presentation
+    f Xi fi ui hui hO hOi L W k w s hw hLi hLs hH).elim fun U hU ↦ ?_
+  refine hU.elim fun hwU hU ↦ ?_
+  refine hU.elim fun m hU ↦ ?_
+  refine hU.elim fun q hU ↦ ?_
+  refine hU.elim fun d hU ↦ ?_
+  refine hU.elim fun b hU ↦ ?_
+  refine hU.elim fun hp hU ↦ ?_
   let A := Γ(W, U)
   let p : Ideal A := RingHom.ker (W.evaluation U w hwU).hom
   let : p.IsPrime := hp
-  obtain ⟨r, hr, hbr, _, _⟩ :=
-    (Module.finiteFreeMap_residue_localization m q b p).1 hb
+  have hb := hU.1
+  have hbd := hU.2.1
+  refine hU.2.2.elim fun c hcycles ↦ ?_
+  refine ((Module.finiteFreeMap_residue_localization m q b p).1 hb).elim fun r hr ↦ ?_
+  have hbr := hr.2.1
   let B := Localization.Away r
   have hdB : (1 : B) ⊗ₜ[A] d = 0 := by
     apply hbr
@@ -120,10 +110,13 @@ theorem picard_h1_base_descent_section_lifting {X S : Scheme.{v}} (f : X ⟶ S) 
   have hwr : w ∈ W.basicOpen r := by
     apply (W.mem_basicOpen r w hwU).mpr
     apply (IsLocalRing.residue_ne_zero_iff_isUnit _).mp
-    exact hr
+    exact hr.1
   intro τ
-  obtain ⟨t, ht⟩ := W.residue_surjective w (c τ)
-  obtain ⟨V, hVr, hwV, a, ha⟩ := W.presheaf.exists_le_germ_eq t hwr
+  refine (W.residue_surjective w (c τ)).elim fun t ht ↦ ?_
+  refine (W.presheaf.exists_le_germ_eq t hwr).elim fun V hV ↦ ?_
+  have hVr := hV.1
+  refine hV.2.elim fun hwV hV ↦ ?_
+  refine hV.elim fun a ha ↦ ?_
   have hVU : V ≤ U := hVr.trans (W.basicOpen_le r)
   have hrV : IsUnit (W.presheaf.map (homOfLE hVU).op r) := by
     have hunit := W.toRingedSpace.isUnit_res_basicOpen r
@@ -142,9 +135,10 @@ theorem picard_h1_base_descent_section_lifting {X S : Scheme.{v}} (f : X ⟶ S) 
       IsLocalization.Away.lift_eq r hrV (d i)
     rw [hρ, map_zero] at h
     exact h
-  obtain ⟨j, hj, e, hσ⟩ := hcycles V hwV hVU
-  obtain ⟨σ, hσ⟩ := hσ a (by intro i; rw [hdV i, zero_mul])
-  refine ⟨V, hwV, j, hj, e, σ, ?_⟩
+  refine (hcycles V hwV hVU).elim fun j hj ↦ ?_
+  refine hj.2.elim fun e hσ ↦ ?_
+  refine (hσ a (by intro i; rw [hdV i, zero_mul])).elim fun σ hσ ↦ ?_
+  refine ⟨V, hwV, j, hj.1, e, σ, ?_⟩
   have heval : W.evaluation V w hwV a = c τ := by
     change W.residue w (W.presheaf.germ V w hwV a) = c τ
     rw [ha, ht]

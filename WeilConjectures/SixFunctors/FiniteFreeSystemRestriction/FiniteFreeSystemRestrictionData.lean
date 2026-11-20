@@ -206,7 +206,7 @@ structure OrdinarySquare {X Y : Scheme.{u}} (f : X ⟶ Y) where
   /-- The ordinary comparison respects the specified adjunctions. -/
   mate : (mateEquiv (ordinaryAdj (B l E L i) (bTransition l E L i) f)
     (ordinaryAdj (A l E) (aTransition l E) f)
-      (TwoSquare.mk _ _ _ _ pull.inv)).natTrans = push.hom
+      (TwoSquare.mk _ _ _ _ pull.inv)) = push.hom
 
 /-- The exact pullback comparison on entire derived systems.
 Source: proof Step 8 of the node
@@ -226,7 +226,7 @@ def OrdinarySquare.derivedPush {X Y : Scheme.{u}} {f : X ⟶ Y}
       U l E L i X ⋙ R (A l E) (aTransition l E) f :=
   (mateEquiv (adj (B l E L i) (bTransition l E L i) f)
     (adj (A l E) (aTransition l E) f)
-      (TwoSquare.mk _ _ _ _ (q.derivedPull l E L i).inv)).natTrans
+      (TwoSquare.mk _ _ _ _ (q.derivedPull l E L i).inv))
 
 /-- The inverse open-extension comparison is the specified open-adjunction mate.
 Its invertibility is asserted separately, never inferred merely from a mate formula.
@@ -238,7 +238,7 @@ def OrdinarySquare.derivedOpenInv {X Y : Scheme.{u}} {f : X ⟶ Y}
       J (B l E L i) (bTransition l E L i) f ⋙ U l E L i Y :=
   ((mateEquiv (jAdj (B l E L i) (bTransition l E L i) f)
     (jAdj (A l E) (aTransition l E) f)).symm
-      (TwoSquare.mk _ _ _ _ (q.derivedPull l E L i).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (q.derivedPull l E L i).hom))
 
 /-- The simultaneous geometric comparisons on the specified finite-type k-schemes.
 Source: geometric comparison clauses of the node

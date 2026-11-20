@@ -67,7 +67,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The normalized pullback comparison is the prescribed pair endpoint comparison.
 
-Source: def-pur-section-invariant, common-stage subargument, steps 3–5.
+Source: lemma-section-normal-bundle--1, common-stage subargument, steps 3–5.
 Proof: Expand both comparisons into the recorded transition isomorphism, the rational
 pullback scalar comparison and the inverse source transition. Their component formulas
 are identical; equality of the hom components gives equality of the isomorphisms.

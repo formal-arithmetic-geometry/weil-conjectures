@@ -15,8 +15,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 /-!
 # Morphisms out of a dense compactification
 
-Source: blueprint main-20261015, sec-nagata-compactification,
-`det-nagata-refinement-morphisms` (blueprint: det-nagata-refinement-morphisms).
+Source: blueprint main-20261015, chap-Nagata-compactification-and-Chows-lemma,
+`proposition-dense-compactifications-form-cofiltered-category--2` (blueprint:
+proposition-dense-compactifications-form-cofiltered-category--2).
 -/
 
 @[expose] public section
@@ -29,8 +30,9 @@ namespace AlgebraicGeometry
 
 /-- A morphism from a dense compactification to a compactification is proper, preserves
 exactly the distinguished open, and is unique among morphisms satisfying the two
-commuting triangles. Source: blueprint main-20261015, sec-nagata-compactification,
-`det-nagata-refinement-morphisms` (blueprint: det-nagata-refinement-morphisms).
+commuting triangles. Source: blueprint main-20261015, chap-Nagata-compactification-and-Chows-lemma,
+`proposition-dense-compactifications-form-cofiltered-category--2` (blueprint:
+proposition-dense-compactifications-form-cofiltered-category--2).
 
 Proof: bundle the two triangles as an upstream refinement, whose ambient map is
 proper. The existing dense-refinement pullback theorem identifies its square over

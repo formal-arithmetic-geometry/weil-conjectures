@@ -16,7 +16,7 @@ import Mathlib.RingTheory.TensorProduct.Quotient
 # Models of finitely presented algebras over a union of subfields
 
 Source: Stacks Project, Algebra, Lemma 07QG, proof, the finite presentation and
-coefficient descent (blueprint: lem-weil-pbc-finite-presentation-subfield-model).
+coefficient descent (blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ namespace Algebra
 /-- A finitely presented algebra over a directed union of subfields is a scalar
 extension of an algebra over one member of the family.
 Source: Stacks Project, Algebra, Lemma 07QG, proof, first three sentences
-(blueprint: lem-weil-pbc-finite-presentation-subfield-model).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof: Write E as k[X₁,...,Xₙ]/(f₁,...,fₘ), using finite presentation. Each
 polynomial has finitely many coefficients. The union hypothesis puts each of

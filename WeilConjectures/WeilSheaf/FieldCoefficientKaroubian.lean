@@ -19,7 +19,7 @@ t-structure on `D^b_{c,W}(X, E)` (`AlgebraicGeometry.FieldWeilComplex.tStructure
 an exact equivalence, by the Karoubian bounded-t theorem.
 
 The common-stage category `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` of blueprint
-`def-weil-weil-sheaf-complex` (`AlgebraicGeometry.WeilComplexTwoColimit`) is then idempotent
+`definition-weil-structure` (`AlgebraicGeometry.WeilComplexTwoColimit`) is then idempotent
 complete as well, a filtered `2`-colimit of idempotent complete categories being idempotent
 complete (`CategoryTheory.StageSystem.PairCategory.isIdempotentComplete`); hence its canonical
 functor into its Karoubi envelope is an equivalence.
@@ -104,7 +104,7 @@ theorem isIdempotentComplete_and_isEquivalence_toKaroubi
 
 variable {k₀ l X}
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: the forgetful functor
+/-- Blueprint `definition-weil-structure`: the forgetful functor
 `For : D^b_{c,W}(X, ℚ̄_ℓ) ⥤ D(X̄_proét, ℚ̄_ℓ)` of the `2`-colimit model, `(E, K) ↦ For(ℚ̄_ℓ ⊗_E K)`:
 the comparison functor to the direct `ℚ̄_ℓ`-stage
 (`AlgebraicGeometry.WeilComplexTwoColimit.toWeilComplex`) followed by its forgetful functor
@@ -113,7 +113,7 @@ noncomputable def forget :=
   toWeilComplex (l := l) k₀ X ⋙ WeilComplex.forget (X := X)
 
 variable (X) in
-/-- Blueprint `def-weil-weil-sheaf-complex`: the derived Frobenius isomorphism
+/-- Blueprint `definition-weil-structure`: the derived Frobenius isomorphism
 `θ_K : Fr_X^* For(K) ≅ For(K)` of an object `K` of the `2`-colimit model, natural in `K`: that of
 its image `ℚ̄_ℓ ⊗_E K` in the direct `ℚ̄_ℓ`-stage (`AlgebraicGeometry.WeilComplex.frobeniusIso`). -/
 noncomputable def frobeniusIso :

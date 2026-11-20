@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstru
 
 /-! # Tensor closure of the finite geometric domain
 
-Source: latest blueprint thm-sf-ctf-stability (ii), lem-sf-tensor-ctf.
+Source: latest blueprint proposition-six-operations-dctf (ii), proposition-six-operations-dctf--14.
 (blueprint: lem-trf-finite-geometric-tensor-domain).
 -/
 
@@ -54,8 +54,8 @@ private theorem sfStabilityFiniteTorOfIso
   exact ht.2 M P (hM.map (fun j ↦ j ≪≫ e.symm)) f hf hP N i hi
 
 /-- The recorded finite intrinsic tensor preserves the geometric finite-Tor domain.
-Source: latest blueprint thm-sf-ctf-stability (ii) and lem-sf-tensor-ctf
-(blueprint: lem-trf-finite-geometric-tensor-domain).
+Source: latest blueprint proposition-six-operations-dctf (ii) and
+proposition-six-operations-dctf--14 (blueprint: lem-trf-finite-geometric-tensor-domain).
 
 Proof: take ordinary cochain representatives and a K-flat resolution of the first.
 The signed tensor comparison identifies the tensor on these representatives with the

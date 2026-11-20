@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 /-! # Conjugate adjunction transfer of the projection tensor transpose
 
 Source: blueprint, `lem-pur-co-smooth-etale-locality`, proof Step 1, serving
-`thm-pur-composition-coherence`, proof Step 1, remaining co-projection factors
+`proposition-compatibility-purity-composition--1`, proof Step 1, remaining co-projection factors
 (blueprint: lem-pur-adjoint-projection-tensor-transfer).
 
 The component formulas are definitions; the theorem includes their naturality so that
@@ -71,8 +71,8 @@ open AdjointProjectionTensorTransfer
 
 /-- Conjugating `d⁻¹` transports the projection/counit transpose to tensoring with
 `η`, naturally in `K`. Source: blueprint, `lem-pur-co-smooth-etale-locality`, proof
-Step 1, serving `thm-pur-composition-coherence`, proof Step 1, co-projection factors
-(blueprint: lem-pur-adjoint-projection-tensor-transfer).
+Step 1, serving `proposition-compatibility-purity-composition--1`, proof Step 1, co-projection
+factors (blueprint: lem-pur-adjoint-projection-tensor-transfer).
 
 Proof: (1) Apply `def-weil-pbc-adjunction-conjugate` to `d⁻¹`; its counit equation
 and injectivity of the inverse `S ⊣ T` Hom bijection give the characterization and

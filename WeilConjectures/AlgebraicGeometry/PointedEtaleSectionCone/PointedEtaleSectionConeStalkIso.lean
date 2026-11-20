@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 
 /-! # Invertibility of restriction along a pointed section cone
 
-Source: Stacks Project, Tags 03Q9 and 03QO, the pointed germ comparison.
+## References
+
+* Stacks Project, Tags 03Q9 and 03QO, the pointed germ comparison
 -/
 
 @[expose] public section
@@ -22,17 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale.PointedEtaleSectionCone
 
 /-- Restriction along a pointed section cone is invertible whenever evaluation at a
-compatible geometric point computes global sections of the pulled-back sheaf.
-Source: Stacks Project, Tags 03Q9 and 03QO
-(blueprint: lem-weil-pbc-pointed-section-cone-stalk-iso).
-
-Proof: the inverse-image stalk comparison identifies the stalk at y of g-inverse-image F
-with F_s. Its germ formula, and compatibility of every section with y, identify the
-component restrictions with the original germs followed by the inverse of that comparison
-and the inverse of the terminal-neighbourhood germ. Both maps are isomorphisms. The colimit
-uniqueness theorem for the pointed section cone identifies their composite with r. This
-uses neither a strict-local model nor a local-ring hypothesis: the sole hypothesis on the
-pulled-back sheaf is invertibility of its specified terminal-neighbourhood germ. -/
+compatible geometric point computes global sections of the pulled-back sheaf. -/
 theorem isIso_restriction
     {S T : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     {s : Spec (.of Ω) ⟶ S} {I : Type v} [Category.{v} I]

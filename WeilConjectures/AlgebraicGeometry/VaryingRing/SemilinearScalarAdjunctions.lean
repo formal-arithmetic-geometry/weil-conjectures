@@ -51,7 +51,7 @@ structure OrdinaryScalarAdjunctions (C : OrdinaryScalarRestriction R φ B ψ) wh
       HEq ((((d f).hom.app M).app (op n)).val.app H x) x
   /-- The orientation is d = mate of the inverse of b. -/
   mate : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
-    (mateEquiv (moduleAdj R φ f) (scalarTowerAdj B f) (b f).inv).natTrans = (d f).hom
+    (mateEquiv (moduleAdj R φ f) (scalarTowerAdj B f) (b f).inv) = (d f).hom
   /-- Ordinary open-extension comparison a. -/
   a : ∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j],
     extension R φ j ⋙ C.rho X ≅ C.rho U ⋙ StrictTower.towerJ B j
@@ -72,12 +72,12 @@ variable {A₀ A₁ D₀ D₁ : Type*}
 
 private theorem scalarMateUnit (adj : L ⊣ P) (adj' : L' ⊣ P')
     (b : L ⋙ K ≅ H ⋙ L') (d : P ⋙ H ≅ K ⋙ P')
-    (hm : (mateEquiv adj adj' b.inv).natTrans = d.hom) (M : A₀) :
+    (hm : (mateEquiv adj adj' b.inv) = d.hom) (M : A₀) :
     H.map (adj.unit.app M) ≫ d.hom.app (L.obj M) ≫ P'.map (b.hom.app M) =
       adj'.unit.app (H.obj M) := by
   have hu := unit_mateEquiv adj adj' (TwoSquare.mk _ _ _ _ b.inv) M
   change H.map (adj.unit.app M) ≫
-      ((mateEquiv adj adj' b.inv).natTrans.app (L.obj M)) =
+      ((mateEquiv adj adj' b.inv).app (L.obj M)) =
     adj'.unit.app (H.obj M) ≫ P'.map (b.inv.app M) at hu
   rw [hm] at hu
   rw [← Category.assoc, hu, Category.assoc, ← P'.map_comp, Iso.inv_hom_id_app]
@@ -86,22 +86,22 @@ private theorem scalarMateUnit (adj : L ⊣ P) (adj' : L' ⊣ P')
 
 private theorem scalarMateCounit (adj : L ⊣ P) (adj' : L' ⊣ P')
     (b : L ⋙ K ≅ H ⋙ L') (d : P ⋙ H ≅ K ⋙ P')
-    (hm : (mateEquiv adj adj' b.inv).natTrans = d.hom) (N : A₁) :
+    (hm : (mateEquiv adj adj' b.inv) = d.hom) (N : A₁) :
     L'.map (d.hom.app N) ≫ adj'.counit.app (K.obj N) =
       b.inv.app (P.obj N) ≫ K.map (adj.counit.app N) := by
   have hc := mateEquiv_counit adj adj' (TwoSquare.mk _ _ _ _ b.inv) N
-  change L'.map ((mateEquiv adj adj' b.inv).natTrans.app N) ≫
+  change L'.map ((mateEquiv adj adj' b.inv).app N) ≫
       adj'.counit.app (K.obj N) = _ at hc
   rw [hm] at hc
   exact hc
 
 private theorem scalarInverseMate_app (adj : L ⊣ P) (adj' : L' ⊣ P')
     (d : P ⋙ H ⟶ K ⋙ P') (M : A₀) :
-    (((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ d)).natTrans.app M) =
+    (((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ d)).app M) =
       L'.map (H.map (adj.unit.app M)) ≫ L'.map (d.app (L.obj M)) ≫
         adj'.counit.app (K.obj (L.obj M)) := by
   rw [mateEquiv_symm_apply]
-  simp only [TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+  simp only [TwoSquare.mk, NatTrans.comp_app,
     whiskerRight_app, whiskerLeft_app, Functor.comp_map,
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
     Functor.associator_inv_app, Functor.associator_hom_app,
@@ -114,9 +114,9 @@ private theorem scalarInverseMate_app (adj : L ⊣ P) (adj' : L' ⊣ P')
 private theorem scalarInverseMate_isIso (adj : L ⊣ P) (adj' : L' ⊣ P')
     (d : P ⋙ H ≅ K ⋙ P') [IsIso adj.unit]
     (hs : ∀ M : A₀, IsIso (adj'.counit.app (K.obj (L.obj M)))) :
-    IsIso (((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans) := by
+    IsIso (((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ d.hom))) := by
   have h (M : A₀) : IsIso
-      ((((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans).app M) := by
+      ((((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ d.hom))).app M) := by
     rw [scalarInverseMate_app]
     have := hs M
     infer_instance
@@ -369,7 +369,7 @@ private abbrev scalarBAdj {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 private theorem scalarLevelPullInv_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (mateEquiv (scalarLevelAdj R f n) (scalarBAdj B f)
-      (TwoSquare.mk _ _ _ _ (scalarLevelPullInv R B ψ f n))).natTrans =
+      (TwoSquare.mk _ _ _ _ (scalarLevelPullInv R B ψ f n))) =
         (scalarLevelDirect R B ψ f n).hom := by
   unfold scalarLevelPullInv scalarLevelDirect
   have h := Scheme.restrictionPullback_mate f
@@ -381,12 +381,12 @@ private theorem scalarLevelPullInv_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : �
   dsimp only [scalarLevelPullInv, scalarLevelDirect, scalarLevelAdj, scalarBAdj,
     StrictTower.modulePullback, StrictTower.moduleDirectImage, res,
     Scheme.proEtaleRingRestrictScalars, StrictTower.coefficients, coefficients,
-    CommRingCat.of_carrier, TwoSquare.mk, TwoSquare.natTrans] at h ⊢
+    CommRingCat.of_carrier, TwoSquare.mk] at h ⊢
   exact h
 
 private theorem scalarEvalPull_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (mateEquiv (moduleAdj R φ f) (scalarLevelAdj R f n)
-      (TwoSquare.mk _ _ _ _ (moduleEvalG R φ f n).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (moduleEvalG R φ f n).inv)) =
         (moduleEvalP R φ f n).hom := by
   have h := inverseMateEqOfUnit (moduleAdj R φ f) (scalarLevelAdj R f n)
     (eval R φ Y n) (eval R φ X n) (moduleEvalP R φ f n).hom
@@ -394,8 +394,7 @@ private theorem scalarEvalPull_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   have hs : (mateEquiv (moduleAdj R φ f) (scalarLevelAdj R f n)).symm
       (TwoSquare.mk _ _ _ _ (moduleEvalP R φ f n).hom) =
         TwoSquare.mk _ _ _ _ (moduleEvalG R φ f n).inv := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     exact congr_app h M
   rw [← hs, Equiv.apply_symm_apply]
 
@@ -439,7 +438,7 @@ private theorem scalarInverseLevel_mate (C : OrdinaryScalarRestriction R φ B ψ
         (C.rho Y ⋙ (evaluation ℕᵒᵖ (StrictTower.Modules B Y)).obj (op n))
         (pull R φ f) (StrictTower.modulePullback B f)
         (C.rho X ⋙ (evaluation ℕᵒᵖ (StrictTower.Modules B X)).obj (op n))
-        (scalarInverseLevel R φ B ψ C f n).hom)).natTrans =
+        (scalarInverseLevel R φ B ψ C f n).hom)) =
         (scalarDirectLevel R φ B ψ C f n).hom := by
   let q : TwoSquare (eval R φ Y n ⋙ res (ordinaryScalarMap R B ψ Y n))
       (pull R φ f) (StrictTower.modulePullback B f)
@@ -451,8 +450,7 @@ private theorem scalarInverseLevel_mate (C : OrdinaryScalarRestriction R φ B ψ
         (res (ordinaryScalarMap R B ψ X n)) (scalarLevelPullInv R B ψ f n))
   have hq : TwoSquare.mk _ _ _ _ (scalarInverseLevel R φ B ψ C f n).hom =
       (q.whiskerTop (C.level Y n).hom).whiskerBottom (C.level X n).inv := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     simp only [scalarInverseLevel, q, TwoSquare.hComp, TwoSquare.whiskerTop,
       TwoSquare.whiskerBottom, TwoSquare.mk, Iso.trans_hom, NatTrans.comp_app,
       isoWhiskerLeft_hom, isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app,
@@ -465,14 +463,12 @@ private theorem scalarInverseLevel_mate (C : OrdinaryScalarRestriction R φ B ψ
   have h₁ : mateEquiv (moduleAdj R φ f) (scalarLevelAdj R f n)
       (TwoSquare.mk _ _ _ _ (moduleEvalG R φ f n).inv) =
         TwoSquare.mk _ _ _ _ (moduleEvalP R φ f n).hom := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     exact congr_app (scalarEvalPull_mate R φ f n) M
   have h₂ : mateEquiv (scalarLevelAdj R f n) (scalarBAdj B f)
       (TwoSquare.mk _ _ _ _ (scalarLevelPullInv R B ψ f n)) =
         TwoSquare.mk _ _ _ _ (scalarLevelDirect R B ψ f n).hom := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     exact congr_app (scalarLevelPullInv_mate R B ψ f n) M
   change mateEquiv (moduleAdj R φ f) (scalarBAdj B f) q = _ at h
   rw [h, h₁, h₂]
@@ -488,7 +484,7 @@ private def scalarInverse (C : OrdinaryScalarRestriction R φ B ψ)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     C.rho Y ⋙ StrictTower.towerPullback B f ⟶ pull R φ f ⋙ C.rho X :=
   ((mateEquiv (moduleAdj R φ f) (scalarTowerAdj B f)).symm
-    (TwoSquare.mk _ _ _ _ (scalarDirect R φ B ψ C f).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (scalarDirect R φ B ψ C f).hom))
 
 private theorem scalarInverse_component (C : OrdinaryScalarRestriction R φ B ψ)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Modules R φ Y) (n : ℕ) :
@@ -511,7 +507,7 @@ private theorem scalarInverse_component (C : OrdinaryScalarRestriction R φ B ψ
           (C.rho Y ⋙ (evaluation ℕᵒᵖ (StrictTower.Modules B Y)).obj (op n))
           (pull R φ f) (StrictTower.modulePullback B f)
           (C.rho X ⋙ (evaluation ℕᵒᵖ (StrictTower.Modules B X)).obj (op n))
-          (scalarInverseLevel R φ B ψ C f n).hom)).natTrans.app
+          (scalarInverseLevel R φ B ψ C f n).hom)).app
             ((pull R φ f).obj M)) =
     (scalarBAdj B f).unit.app (((C.rho Y).obj M).obj (op n)) ≫
       (StrictTower.moduleDirectImage B f).map
@@ -562,7 +558,7 @@ private def scalarOpenInverse (C : OrdinaryScalarRestriction R φ B ψ)
   ((mateEquiv (moduleJAdj R φ j) (scalarTowerOpenAdj B j)).symm
     (TwoSquare.mk _ _ _ _
       (@asIso _ _ _ _ (scalarInverse R φ B ψ C j)
-        (scalarInverse_isIso R φ B ψ C j)).inv)).natTrans
+        (scalarInverse_isIso R φ B ψ C j)).inv))
 
 private theorem scalarOpenInverse_isIso (C : OrdinaryScalarRestriction R φ B ψ)
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
@@ -598,7 +594,7 @@ theorem ordinaryScalarAdjunctions (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n
     (@asIso _ _ _ _ (scalarOpenInverse R φ B ψ C j)
       (scalarOpenInverse_isIso R φ B ψ C j)).symm
   have hm {X Y : Scheme.{u}} (f : X ⟶ Y) :
-      (mateEquiv (moduleAdj R φ f) (scalarTowerAdj B f) (b f).inv).natTrans =
+      (mateEquiv (moduleAdj R φ f) (scalarTowerAdj B f) (b f).inv) =
         (scalarDirect R φ B ψ C f).hom := by
     simp only [b, Iso.symm_inv, asIso_hom, scalarInverse, Equiv.apply_symm_apply]
   refine ⟨{

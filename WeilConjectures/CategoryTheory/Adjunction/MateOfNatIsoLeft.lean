@@ -33,7 +33,7 @@ lemma mateEquiv_ofNatIsoLeft {G : A ⥤ C} {H : B ⥤ D} {L₁ L₁' : A ⥤ B} 
     {L₂ : C ⥤ D} {R₂ : D ⥤ C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e : L₁ ≅ L₁')
     (α : TwoSquare G L₁' L₂ H) :
     mateEquiv (adj₁.ofNatIsoLeft e) adj₂ α =
-      mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ (α.natTrans ≫ Functor.whiskerRight e.inv H)) := by
+      mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ (α ≫ Functor.whiskerRight e.inv H)) := by
   ext X
   simp [mateEquiv_apply, Adjunction.ofNatIsoLeft_counit]
 
@@ -43,9 +43,9 @@ lemma mateEquiv_ofNatIsoLeft {G : A ⥤ C} {H : B ⥤ D} {L₁ L₁' : A ⥤ B} 
 lemma isIso_mateEquiv_hComp {G₁ : A ⥤ C} {G₂ : C ⥤ E} {H₁ : B ⥤ D} {H₂ : D ⥤ F}
     {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C} {L₃ : E ⥤ F} {R₃ : F ⥤ E}
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₃ : L₃ ⊣ R₃) (α : TwoSquare G₁ L₁ L₂ H₁)
-    (β : TwoSquare G₂ L₂ L₃ H₂) [IsIso (mateEquiv adj₁ adj₂ α).natTrans]
-    [IsIso (mateEquiv adj₂ adj₃ β).natTrans] :
-    IsIso (mateEquiv adj₁ adj₃ (α ≫ₕ β)).natTrans := by
+    (β : TwoSquare G₂ L₂ L₃ H₂) [IsIso (mateEquiv adj₁ adj₂ α)]
+    [IsIso (mateEquiv adj₂ adj₃ β)] :
+    IsIso (mateEquiv adj₁ adj₃ (α ≫ₕ β)) := by
   rw [mateEquiv_vcomp adj₁ adj₂ adj₃]
   exact TwoSquare.isIso_vComp _ _
 

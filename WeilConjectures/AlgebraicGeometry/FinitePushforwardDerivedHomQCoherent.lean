@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.CoherentPseudoCoherent
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 import WeilConjectures.AlgebraicGeometry.PseudoCoherentRHomQuasiCoherent
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Quasi-coherence of derived Hom from a finite pushforward algebra
 

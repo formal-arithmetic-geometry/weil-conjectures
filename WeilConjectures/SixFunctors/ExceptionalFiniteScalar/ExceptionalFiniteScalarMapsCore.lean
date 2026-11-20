@@ -252,10 +252,10 @@ private theorem cubeMate_isIso
     (hc : ∀ X : A,
       K'.map (pG.inv.app X) ≫ pK.inv.app (G.obj X) ≫ d.map (θ.app X) =
         θ'.app (a.obj X) ≫ H'.map (pF.inv.app X) ≫ pH.inv.app (F.obj X))
-    (hF : IsIso (mateEquiv adj adj' (.mk _ _ _ _ pF.inv)).natTrans)
-    (hK : IsIso (mateEquiv adjK adjK' (.mk _ _ _ _ pK.inv)).natTrans)
-    (hθ : IsIso (mateEquiv adj' adjK' (.mk _ _ _ _ θ')).natTrans) :
-    IsIso (mateEquiv adj adjK (.mk _ _ _ _ θ)).natTrans := by
+    (hF : IsIso (mateEquiv adj adj' (.mk _ _ _ _ pF.inv)))
+    (hK : IsIso (mateEquiv adjK adjK' (.mk _ _ _ _ pK.inv)))
+    (hθ : IsIso (mateEquiv adj' adjK' (.mk _ _ _ _ θ'))) :
+    IsIso (mateEquiv adj adjK (.mk _ _ _ _ θ)) := by
   have hFapp (M : B) : IsIso ((mateEquiv adj adj'
       (.mk _ _ _ _ pF.inv)).app M) := NatIso.isIso_app_of_isIso _ M
   have hKapp (M : D) : IsIso ((mateEquiv adjK adjK'
@@ -349,7 +349,7 @@ private theorem leftScalarMap_app_isIso
     apply ((pbcDerivedScalarAdjunction (ρ Y)).homEquiv _ _).injective
     erw [Equiv.apply_symm_apply]
     simpa only [Adjunction.homEquiv_unit, leftScalarMap, TwoSquare.mk,
-      TwoSquare.natTrans, Functor.id_obj, Functor.comp_obj, A, B, ρ,
+      Functor.id_obj, Functor.comp_obj, A, B, ρ,
       FiniteCompactScalar.scalarRingMap, sfIntrinsicCompactSupport,
       sfAmbientCompactSupportCandidate] using
       (unit_mateEquiv_symm (pbcDerivedScalarAdjunction (ρ X))
@@ -833,7 +833,7 @@ private theorem leftScalarMap_origin
     (proEtaleConstantRingMap (T := Y) φ)).homEquiv _ _).injective
   erw [Equiv.apply_symm_apply]
   simpa only [Adjunction.homEquiv_unit, leftScalarMap, TwoSquare.mk,
-    TwoSquare.natTrans, Functor.id_obj, Functor.comp_obj,
+    Functor.id_obj, Functor.comp_obj,
     FiniteCompactScalar.scalarRingMap, sfIntrinsicCompactSupport,
     sfAmbientCompactSupportCandidate] using
     (unit_mateEquiv_symm
@@ -899,7 +899,6 @@ structure FiniteScalarMapsCore
   qShift : q.hom.CommShift ℤ
   bShift : b.hom.CommShift ℤ
 
-set_option maxHeartbeats 2000000 in
 -- The scalar comparison cube expands several derived naturality squares.
 attribute [local irreducible] originIso leftScalarMap leftOriginIso scalarOriginIso in
 attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian
@@ -1001,7 +1000,7 @@ theorem finiteScalarMapsCore_exists
     have : (whiskerRight q.hom IY).CommShift ℤ := by rw [hq]; exact heShift
     exact commShift_of_whiskerRight (I := IY) q.hom
   let beta := (mateEquiv source.adjunction target.adjunction
-    (TwoSquare.mk _ _ _ _ q.inv)).natTrans
+    (TwoSquare.mk _ _ _ _ q.inv))
   have hbeta : IsIso beta := by
     let pF := leftOriginIso l E n c source
     let pG := scalarOriginIso l E L n m a X scalarX
@@ -1013,16 +1012,16 @@ theorem finiteScalarMapsCore_exists
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l L (m + 1))) c
     obtain ⟨M⟩ := finiteScalarMapsEtale_exists D l _hl E L n m a f c
     have hf : IsIso (mateEquiv source.adjunction eA
-        (.mk _ _ _ _ pF.inv)).natTrans :=
+        (.mk _ _ _ _ pF.inv)) :=
       isIso_mateEquiv_of_fullyFaithful_of_essImage source.adjunction eA
         (origin_ff l E n X) (origin_ff l E n Y) pF.symm
         (rightOriginImage l E n c source)
     have hk : IsIso (mateEquiv target.adjunction eB
-        (.mk _ _ _ _ pK.inv)).natTrans :=
+        (.mk _ _ _ _ pK.inv)) :=
       isIso_mateEquiv_of_fullyFaithful_of_essImage target.adjunction eB
         (origin_ff l L m X) (origin_ff l L m Y) pK.symm
         (rightOriginImage l L m c target)
-    have ht : IsIso (mateEquiv eA eB (.mk _ _ _ _ M.q.inv)).natTrans := by
+    have ht : IsIso (mateEquiv eA eB (.mk _ _ _ _ M.q.inv)) := by
       rw [← M.b_normalized]
       infer_instance
     have : (origin l L m X).Full := (origin_ff l L m X).full

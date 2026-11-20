@@ -46,18 +46,18 @@ theorem projectionMate_square_of_tensor_coherence
     (E : B) (Q : A) :
     G.map (adj.homEquiv _ _ (tF.app (R.obj E, Q) ≫
         U.map (CategoryTheory.Prod.mkHom (adj.counit.app E) (𝟙 (F.obj Q))))) ≫
-      (mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).natTrans.app
+      (mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).app
         (U.obj (E, F.obj Q)) ≫
       S.map (tH.app (E, F.obj Q) ≫
         W.map (CategoryTheory.Prod.mkHom (𝟙 (H.obj E)) (theta.inv.app Q))) =
     tG.app (R.obj E, Q) ≫
       V.map (CategoryTheory.Prod.mkHom
-        ((mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).natTrans.app E)
+        ((mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).app E)
         (𝟙 (G.obj Q))) ≫
       adj'.homEquiv _ _ (tK.app (S.obj (H.obj E), G.obj Q) ≫
         W.map (CategoryTheory.Prod.mkHom (adj'.counit.app (H.obj E))
           (𝟙 (K.obj (G.obj Q))))) := by
-  let ex := (mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).natTrans
+  let ex := (mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom))
   let pi := adj.homEquiv _ _ (tF.app (R.obj E, Q) ≫
     U.map (CategoryTheory.Prod.mkHom (adj.counit.app E) (𝟙 (F.obj Q))))
   have hex (Z : B) : K.map (ex.app Z) ≫ adj'.counit.app (H.obj Z) =
@@ -116,12 +116,12 @@ theorem projectionMate_square_of_tensor_coherence_projection
     (E : B) (Q : A) :
     G.map (derivedProjectionFormulaMate F R adj T U
       tF E Q) ≫
-      (mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).natTrans.app (U.obj (E, F.obj Q)) ≫
+      (mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).app (U.obj (E, F.obj Q)) ≫
       S.map (tH.app (E, F.obj Q) ≫
         W.map (CategoryTheory.Prod.mkHom (𝟙 (H.obj E)) (theta.inv.app Q))) =
     tG.app (R.obj E, Q) ≫
       V.map (CategoryTheory.Prod.mkHom
-        ((mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).natTrans.app E) (𝟙 (G.obj Q))) ≫
+        ((mateEquiv adj adj' (TwoSquare.mk G F K H theta.hom)).app E) (𝟙 (G.obj Q))) ≫
       derivedProjectionFormulaMate K S adj' V W tK (H.obj E) (G.obj Q) := by
   simpa [derivedProjectionFormulaMate,
     CategoryTheory.Adjunction.rightAdjointProjectionMap_app_app,

@@ -251,7 +251,7 @@ Proof plan:
 3. Apply lem-weil-pbc-exact-functor-complex-cohomology. Exact tensor preserves
    acyclicity, so the single complex is K-flat by def-pc-kflat-complex. Its terms
    are L and zero, hence flat.
-4. Apply lem-weil-pbc-exact-functor-derived-factorization to tensorRight L.
+4. Apply situation-conventions to tensorRight L.
    Its mapDerivedCategoryFactors is phi; its termwise shift is degreewise identity.
 5. Apply lem-weil-pbc-kflat-fixed-tensor-triangulated to L[0]. Invert its right
    comparison to obtain chi on every complex, normalized by representativeIso on

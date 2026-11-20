@@ -16,8 +16,7 @@ stage `j ≥ i` whose base change to the limit is compatible with the charts `�
 instance the raw datum `AlgebraicGeometry.RelativeAffinePresentation.ChartModels.rawDatum`).
 Then each of the finitely many gluing axioms (overlap opens matching, identities, cocycles)
 holds for `d` at the limit, hence holds at every stage past a selected equality stage
-(`lemma-nagata-qc-open-eq-eventually`, `lemma-nagata-morphism-eq-eventually`, in the forms of
-`AlgebraicGeometry.exists_forall_map_preimage_le`,
+(`AlgebraicGeometry.exists_forall_map_preimage_le`,
 `AlgebraicGeometry.exists_forall_resLE_preimage_le` and
 `AlgebraicGeometry.exists_forall_resLE_comp_eq`). A common lower bound of these stages is the
 valid stage `λ_rel`.
@@ -203,33 +202,27 @@ lemma isCompact_openDatum_V (a b : R.J) :
       Set ↥(pullback (M.p a) (D.map (M.openStage hc).left.hom))) :=
   M.isCompact_stageTransport_V _ (M.isCompact_rawDatum_V hc) a b
 
-/-- (Implementation) The selected stage past `M.openStage` at which all gluing axioms hold. -/
+/-- The selected stage past `M.openStage` at which all gluing axioms hold. -/
 noncomputable def validStage : Over (M.openStage hc).left :=
   (M.exists_isValid hc (M.openDatum hc) (M.isCompatible_openDatum hc)
     (M.isOpenValid_openDatum hc) (M.isCompact_openDatum_V hc)).choose
 
-/-- Blueprint `def-nagata-relative-gluing-valid-stage`: Cocycle-valid stage for the relative
-datum.
-
-The stage `λ_rel`, lying past `λ_raw` (via `relStageToRawStage`),
-obtained as a selected common bound of the equality stages of the finitely many required
-equalities of overlap opens (first round, `M.openStage`) and of the identity and cocycle
-equalities (second round). -/
+/-- The cocycle-valid stage `λ_rel` of the relative datum, lying past `λ_raw`, at which all
+gluing axioms hold. -/
 noncomputable def relStage : Over M.stage := (M.validStage hc).left
 
 /-- The transition `λ_rel ⟶ λ_raw`. -/
 noncomputable def relStageToRawStage : M.relStage hc ⟶ M.rawStage hc :=
   (M.validStage hc).hom ≫ (M.openStage hc).hom
 
-/-- Part of blueprint `def-nagata-relative-gluing-valid-stage`: the raw datum transported to
-the stage `λ_rel`, the datum `R_{X,λ_rel}`. -/
+/-- The raw datum transported to the stage `λ_rel`, the datum `R_{X,λ_rel}`. -/
 noncomputable def validDatum : RelativeGluingDatum M.p (D.map (M.relStage hc).hom) :=
   M.stageTransport (M.validStage hc).hom (M.openDatum hc)
 
-/-- Blueprint `lemma-nagata-relative-gluing-axioms-eventually`: The relative gluing axioms hold
-at the selected stage. In `R_{X,λ_rel}` the overlap opens match, the overlap maps are inverse
-(`AlgebraicGeometry.RelativeGluingDatum.toOpensGlueData`) and all triple-overlap cocycle
-identities hold. -/
+/-- The relative gluing axioms hold at the selected stage: in `R_{X,λ_rel}` the
+overlap opens match, the overlap maps are inverse
+(`AlgebraicGeometry.RelativeGluingDatum.toOpensGlueData`) and all triple-overlap cocycle identities
+hold. -/
 theorem isValid_validDatum : (M.validDatum hc).IsValid :=
   (M.exists_isValid hc (M.openDatum hc) (M.isCompatible_openDatum hc)
     (M.isOpenValid_openDatum hc) (M.isCompact_openDatum_V hc)).choose_spec _ (𝟙 _)

@@ -303,8 +303,8 @@ private theorem restrictionOfAdjunction_smul
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
     {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (d : A ⟶ C)
     (p : a ≫ b = d) (F : C.Modules) (r : Γ(B, ⊤)) (s : Γ((L b).obj F, ⊤)) :
-    restrictionOfAdjunction L adj a b d p F ((((L b).obj F).smul r).hom s) =
-      (((L d).obj F).smul (a.appTop r)).hom (restrictionOfAdjunction L adj a b d p F s) := by
+    restrictionOfAdjunction L adj a b d p F ((((L b).obj F).smul r).asHom.hom s) =
+      (((L d).obj F).smul (a.appTop r)).asHom.hom (restrictionOfAdjunction L adj a b d p F s) := by
   change restrictionOfAdjunction L adj a b d p F (r • s) =
     a.appTop r • restrictionOfAdjunction L adj a b d p F s
   have hu : sectionsUnitOfAdjunction a (L a) (adj a) ((L b).obj F) (r • s) =
@@ -320,7 +320,7 @@ private theorem restrictionOfAdjunction_smul
 Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
 private theorem smulHom_eq_iff {A B : Scheme.{u}} (M : B.Modules) (N : A.Modules)
     (ρ : Γ(M, ⊤) ⟶ Γ(N, ⊤)) (r : Γ(B, ⊤)) (t : Γ(A, ⊤)) :
-    M.smul r ≫ ρ = ρ ≫ N.smul t ↔ ∀ s, ρ (r • s) = t • ρ s := by
+    (M.smul r).asHom ≫ ρ = ρ ≫ (N.smul t).asHom ↔ ∀ s, ρ (r • s) = t • ρ s := by
   constructor
   · intro h s
     exact congrArg (fun φ ↦ φ.hom s) h
@@ -335,8 +335,8 @@ private theorem restrictionOfAdjunction_smulHom
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
     {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (d : A ⟶ C)
     (p : a ≫ b = d) (F : C.Modules) (r : Γ(B, ⊤)) :
-    ((L b).obj F).smul r ≫ restrictionOfAdjunction L adj a b d p F =
-      restrictionOfAdjunction L adj a b d p F ≫ ((L d).obj F).smul (a.appTop r) := by
+    (((L b).obj F).smul r).asHom ≫ restrictionOfAdjunction L adj a b d p F =
+      restrictionOfAdjunction L adj a b d p F ≫ (((L d).obj F).smul (a.appTop r)).asHom := by
   apply (smulHom_eq_iff ((L b).obj F) ((L d).obj F)
     (restrictionOfAdjunction L adj a b d p F) r (a.appTop r)).mpr
   intro s
@@ -352,9 +352,9 @@ Proof: the unit is a module morphism into pushforward, whose scalar action is th
 and the transport are module morphisms on the source scheme, hence are linear there. -/
 theorem etaleTensorSectionsRestriction_smul {X : Scheme.{u}} (F : X.Modules)
     {U V : X.Etale} (g : V ⟶ U) (a : Γ(U.left, ⊤)) :
-    ((tensorPullback U.hom).obj F).smul a ≫ etaleTensorSectionsRestriction F g =
+    (((tensorPullback U.hom).obj F).smul a).asHom ≫ etaleTensorSectionsRestriction F g =
       etaleTensorSectionsRestriction F g ≫
-        ((tensorPullback V.hom).obj F).smul (g.left.appTop a) := by
+        (((tensorPullback V.hom).obj F).smul (g.left.appTop a)).asHom := by
   exact restrictionOfAdjunction_smulHom (@tensorPullback)
     (fun {A B} f ↦ Classical.choose (exists_tensorPullbackAdjunction f))
     g.left U.hom V.hom g.w F a

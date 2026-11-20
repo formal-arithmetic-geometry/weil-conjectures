@@ -11,5 +11,4 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtensio
 /-! # Quasi-coherent extensions
 
 The canonical result is `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_of_shortExact`.
-(blueprint: lem-pc-quasi-coherent-extension).
 -/

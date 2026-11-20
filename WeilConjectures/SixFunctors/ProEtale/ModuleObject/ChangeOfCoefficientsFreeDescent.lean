@@ -214,7 +214,7 @@ def IsDefinedOver {P V V' : Scheme.{u}} (p : P ⟶ V) (p' : P ⟶ V') {n m : ℕ
         (p)^*⟦Λ'⟧.map (biproduct.ι (fun _ : Fin n ↦ Mod.regular (condensedRingObj Λ' V)) i) ≫ Y ≫
         (p')^*⟦Λ'⟧.map (biproduct.π (fun _ : Fin m ↦ Mod.regular (condensedRingObj Λ' V')) j) ≫
         (upperStarObjRegularIso Λ' p').hom =
-      Mod.regularEndRingHom (Γ.map (coefficientMap a P) t)
+      (Mod.regularEndRingHom (Γ.map (coefficientMap a P) t)).asHom
 
 /-- **Descent of a morphism defined over `Λ`**: a morphism `Y : p^* Λ'_V^n ⟶ p'^* Λ'_{V'}^m`
 defined over `Λ` is, through (Pull), the extension of scalars of a morphism
@@ -233,7 +233,7 @@ lemma exists_extendScalars_map_eq_of_isDefinedOver {P V V' : Scheme.{u}} (p : P 
           (p)^*⟦Λ'⟧.map (extendScalarsFiniteFreeIso a V n).hom ≫ Y := by
   choose t ht using hY
   let M : Mod.finiteFree (condensedRingObj Λ P) n ⟶ Mod.finiteFree (condensedRingObj Λ P) m :=
-    biproduct.matrix fun i j ↦ Mod.regularEndRingHom (t i j)
+    biproduct.matrix fun i j ↦ (Mod.regularEndRingHom (t i j)).asHom
   refine ⟨(upperStarFiniteFreeIso Λ p n).hom ≫ M ≫ (upperStarFiniteFreeIso Λ p' m).inv, ?_⟩
   have h₁ := pullIso_hom_app_finiteFree_comp a p n
   have h₂ := pullIso_hom_app_finiteFree_comp a p' m
@@ -248,14 +248,14 @@ lemma exists_extendScalars_map_eq_of_isDefinedOver {P V V' : Scheme.{u}} (p : P 
       Mod.map_ι_comp_finiteFreeIsoMap_hom_assoc, Mod.ι_comp_finiteFreeIsoMap_inv_assoc]
     have hc : biproduct.ι (fun _ : Fin n ↦ Mod.regular (condensedRingObj Λ P)) i ≫ M ≫
         biproduct.π (fun _ : Fin m ↦ Mod.regular (condensedRingObj Λ P)) j =
-        Mod.regularEndRingHom (t i j) := by
+        (Mod.regularEndRingHom (t i j)).asHom := by
       simp [M]
     have hc' : (Mod.extendScalars (coefficientMap a P)).map
           (biproduct.ι (fun _ : Fin n ↦ Mod.regular (condensedRingObj Λ P)) i) ≫
         (Mod.extendScalars (coefficientMap a P)).map M ≫
         (Mod.extendScalars (coefficientMap a P)).map
           (biproduct.π (fun _ : Fin m ↦ Mod.regular (condensedRingObj Λ P)) j) =
-        (Mod.extendScalars (coefficientMap a P)).map (Mod.regularEndRingHom (t i j)) := by
+        (Mod.extendScalars (coefficientMap a P)).map (Mod.regularEndRingHom (t i j)).asHom := by
       rw [← hc, Functor.map_comp, Functor.map_comp]
     have key := Mod.extendScalarsObjRegularIso_inv_comp_map (coefficientMap a P) (t i j)
     rw [ht i j, ← Iso.inv_comp_eq, reassoc_of% hc', reassoc_of% key, Iso.inv_hom_id,

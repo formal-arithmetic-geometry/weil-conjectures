@@ -79,7 +79,6 @@ private theorem localize_termwise_comparison
 
 attribute [local irreducible] openPinnedTensorRestrictionIso
 
-set_option maxHeartbeats 500000 in
 -- Compare the homotopy and complex localization factors without unfolding the pinned iso.
 /-- The ordinary tensor restriction map is the localization of the termwise map
 followed by the inverse exact restriction factor.

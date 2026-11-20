@@ -175,7 +175,7 @@ public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEval
 
 Source: Stacks Project, Modules on Sites, Tag 0GMX; the derived and completed
 normalization is the enhancement in the node's sixteen proof steps, supplying
-main-20261015 prop-pod-dual-tate-data-compatibility Steps 1, 2, 4 and 5.
+main-20261015 theorem-poincare-duality-frobenius--2 Steps 1, 2, 4 and 5.
 (blueprint: lem-pod-derived-automorphism-hom-evaluation).
 
 Finite inputs are unbounded. Integral inputs have exactly the recorded

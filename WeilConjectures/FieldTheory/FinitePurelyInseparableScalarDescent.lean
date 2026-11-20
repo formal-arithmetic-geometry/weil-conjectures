@@ -17,7 +17,7 @@ import Mathlib.RingTheory.Flat.Basic
 
 Source: Stacks Project, Tag 07QG, the finite purely inseparable extension asserted in its proof;
 Tag 09HE for purely inseparable extensions
-(blueprint: lem-weil-pbc-finite-purely-inseparable-scalar-descent).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -32,7 +32,7 @@ namespace Algebra.TensorProduct
 
 /-- A finite purely inseparable field extension descends along extension of scalars.
 Source: Stacks Project, Tag 07QG (implicit in its proof), and Tag 09HE
-(blueprint: lem-weil-pbc-finite-purely-inseparable-scalar-descent).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof:
 1. Mathlib's `Module.finrank_baseChange` gives the finrank equality. The tensor
