@@ -22,10 +22,11 @@ Y' --v--> Y
 ```
 of separated `k`-schemes of finite type with `v` smooth, the base change map
 `Lv^* Rp_* K ⟶ Rp'_* Lu^* K` of `Dᵇc(-)⟦E⟧` is an isomorphism for every bounded constructible
-`K` (`ProEtale.CondensedRing.ContinuousMapRingObj.isIso_boundedConstructibleBaseChange_of_smooth`,
-blueprint `theorem-smooth-base-change-all-admissible--3`).
+`K` (`ProEtale.CondensedRing.ContinuousMapRingObj.isIso_boundedConstructibleBaseChange_of_smooth`).
 
-As in the blueprint proof, `K` has an integral model `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`
+## Implementation details
+
+`K` has an integral model `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`
 (`ProEtale.isLocalization_boundedConstructibleExtendScalars`), the extension of scalars of the
 integral base change morphism at `K₀` is the `E`-base change morphism at `E ⊗ᴸ_{𝒪_E} K₀`
 (`ProEtale.CondensedRing.nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational`),
@@ -56,19 +57,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {p : X ⟶ Y} {v : Y' ⟶ Y} {p' : X' ⟶ Y'} {u : X' ⟶ X}
 
 /-- **Smooth base change** for bounded constructible `E`-complexes, `E` a finite extension of
-`ℚ_ℓ` inside `ℚ̄_ℓ` (blueprint `theorem-smooth-base-change-all-admissible--3`): for a cartesian
-square of separated `k`-schemes of finite type with `v` smooth, the base change map
-`Lv^* Rp_* K ⟶ Rp'_* Lu^* K` of `Dᵇc(-)⟦E⟧` is an isomorphism for every bounded constructible
-`K`.
-
-The complex `K` is `E ⊗ᴸ_{𝒪_E} K₀` for some `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`, since the extension of scalars is
-a localization functor; the base change morphism at `E ⊗ᴸ_{𝒪_E} K₀` is the extension of scalars
-of the integral one at `K₀`
-(`nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational`), which derived Nakayama
-reduces to its first derived reduction
-(`isIso_boundedConstructibleBaseChange_integral_app_of_reduction`), the pro-étale base change
-morphism with coefficients `𝔽_E` at a complex of étale origin, invertible by finite-coefficient
-smooth base change (`ProEtale.isIso_derivedBaseChangeMap_app_of_smooth`). -/
+`ℚ_ℓ` inside `ℚ̄_ℓ`: for a cartesian square of separated `k`-schemes of finite type with `v`
+smooth, the base change map `Lv^* Rp_* K ⟶ Rp'_* Lu^* K` of `Dᵇc(-)⟦E⟧` is an isomorphism for
+every bounded constructible `K`. -/
 theorem isIso_boundedConstructibleBaseChange_of_smooth (sq : IsPullback u p' p v)
     [Smooth v.left] (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E.1⟧) :
     IsIso ((boundedConstructibleBaseChange ℓ E sq.toCommSq).app K) := by
