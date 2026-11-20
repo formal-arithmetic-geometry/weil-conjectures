@@ -21,7 +21,7 @@ Let `Λ` be a commutative ring. For sheaves of `Λ`-modules on the small étale 
   (`AlgebraicGeometry.Etale.isIso_ihomComparison_constantSheaf_app`): it is monoidal and exact;
 - for `Λ` noetherian, the internal hom `[L, M]` of two finite locally constant sheaves is finite
   locally constant (`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.ihom`, blueprint
-  `lem-pur-lisse-morphism-rigidity`, clause (1)): on a common trivialising cover, pullback
+  `lemma-section-normal-bundle--1`, clause (1)): on a common trivialising cover, pullback
   commuting with internal homs, it is the constant sheaf at `Hom_Λ(P, Q)` for finitely generated,
   hence finitely presented, modules `P` and `Q`.
 
@@ -109,7 +109,7 @@ constant sheaf functor is monoidal, additive, left exact and a left adjoint. -/
 theorem Etale.isIso_ihomComparison_constantSheaf_app (P Q : ModuleCat.{u + 1} Λ)
     [Module.FinitePresentation Λ P] :
     IsIso ((ihomComparison (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-      P).natTrans.app Q) := by
+      P).app Q) := by
   have := MonoidalClosed.monoidalPreadditive_of_braided
     (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   have : PreservesFiniteLimits (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
@@ -118,7 +118,7 @@ theorem Etale.isIso_ihomComparison_constantSheaf_app (P Q : ModuleCat.{u + 1} Λ
     (constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ) terminalIsTerminal).isLeftAdjoint
   exact ModuleCat.isIso_ihomComparison_app_of_finitePresentation _ P Q
 
-/-- Blueprint `lem-pur-lisse-morphism-rigidity`: Rigidity of morphisms of finite locally
+/-- Blueprint `lemma-section-normal-bundle--1`: Rigidity of morphisms of finite locally
 constant sheaves
 
 *The Hom sheaf*, clause (1): for `Λ` noetherian, the internal hom `[L, M]` of two finite
@@ -163,11 +163,11 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.ihom [IsNoetherianRing Λ]
     refine ⟨(CategoryTheory.ihom P).obj Q, ?_, ⟨?_⟩⟩
     · have : Module.Finite Λ (P →ₗ[Λ] Q) := Module.Finite.linearMap_of_isNoetherianRing
       exact Module.Finite.equiv ModuleCat.homLinearEquiv.symm
-    · exact asIso ((ihomComparison (Etale.upperStar (ModuleCat.{u + 1} Λ) g) L).natTrans.app M) ≪≫
+    · exact asIso ((ihomComparison (Etale.upperStar (ModuleCat.{u + 1} Λ) g) L).app M) ≪≫
         (CategoryTheory.ihom _).mapIso eM.symm ≪≫
         asIso ((MonoidalClosed.pre eL.hom).app _) ≪≫
         (asIso ((ihomComparison (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-          P).natTrans.app Q)).symm
+          P).app Q)).symm
   choose H hH e using key
   have hc (i : 𝒰.I₀) : ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj
       ((CategoryTheory.ihom L).obj M)).IsConstant (𝒰.X i).smallEtaleTopology :=

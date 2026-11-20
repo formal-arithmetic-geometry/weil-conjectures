@@ -105,7 +105,13 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.CategoryTheory.Sites.CoverPreserving
 
-/-! # Naturality of the normalized scalar-extension section -/
+/-! # Naturality of the normalized scalar-extension section
+
+## References
+
+* Zheng Construction 4.1 and Stacks 03CZ, the scalar-extension unit on sheaves
+* Zheng Construction 4.1 and Stacks 03CZ
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -132,17 +138,7 @@ private theorem section_unit (U : Cᵒᵖ) (x : M.val.obj U) :
   exact congrArg (fun f ↦ f.val.app U ((A.ordinaryAdjunction.unit.app M).val.app U x))
     (eqToIso (A.model.obj_eq M)).hom_inv_id
 
-/-- The normalized scalar-extension section commutes with all restrictions in the site.
-
-Source: Zheng Construction 4.1 and Stacks 03CZ, the scalar-extension unit on sheaves.
-(blueprint: lem-coef-scalar-extension-section-naturality).
-
-Proof: the defining unit_section equation identifies the specified section with the
-ordinary adjunction unit, after cancelling the canonical object comparison and its inverse.
-The unit is a morphism of sheaves of modules. Its presheaf naturality at the given site
-arrow is the asserted equation, since scalar restriction retains every underlying section
-and restriction map. This works for identities and for empty section groups as well.
--/
+/-- The normalized scalar-extension section commutes with all restrictions in the site. -/
 private theorem scalarExtensionSection_naturality {U V : Cᵒᵖ} (p : U ⟶ V)
     (x : M.val.obj U) :
     (A.model.E.obj M).val.map p (scalarExtensionSection.{c, v, max c v r} φ A M U x) =
@@ -166,17 +162,6 @@ private theorem generic_transition_apply
 
 /-- The scalar-adjunction unit commutes with the evaluated horizontal transition.
 The two explicit evaluated sections allow different scalar-restriction carriers.
-
-Source: Zheng Construction 4.1 and Stacks 03CZ.
-(blueprint: lem-coef-scalar-extension-section-naturality).
-
-Proof: identify the two sections with their normalized scalar-adjunction units.
-The defining transition equation identifies the finite-level map on sections with
-the original presheaf restriction in the sequence site. The scalar section equals
-the ordinary adjunction unit by unit_section and cancellation of the object
-comparison. The unit is a module-sheaf morphism; its presheaf naturality at the
-horizontal sequence-site arrow gives the formula. This includes equal indices,
-empty charts, and zero section groups.
 -/
 theorem scalarExtensionSection_transition
     {D : Type (u + 1)} [Category.{u} D] (K : GrothendieckTopology D)

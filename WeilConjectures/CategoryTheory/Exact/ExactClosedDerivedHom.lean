@@ -27,7 +27,7 @@ def closedComparison {C D : Type*} [Category C] [Category D]
     [MonoidalCategory C] [MonoidalCategory D] [MonoidalClosed C] [MonoidalClosed D]
     (F : C ⥤ D) [F.LaxMonoidal] (K M : C) :
     F.obj ((ihom K).obj M) ⟶ (ihom (F.obj K)).obj (F.obj M) :=
-  (LaxMonoidal.ihomComparison F K).natTrans.app M
+  (LaxMonoidal.ihomComparison F K).app M
 end Functor
 section Square
 open Category Functor.LaxMonoidal
@@ -38,13 +38,13 @@ variable {A B E H : Type*} [Category A] [Category B] [Category E] [Category H]
   [Q.LaxMonoidal] [R.LaxMonoidal] [F.LaxMonoidal] [G.LaxMonoidal]
   (e : Q ⋙ G ≅ F ⋙ R) [NatTrans.IsMonoidal e.hom] (K M : A)
 private theorem comparison_square :
-    G.map ((ihomComparison Q K).natTrans.app M) ≫
-        (ihomComparison G (Q.obj K)).natTrans.app (Q.obj M) ≫
+    G.map ((ihomComparison Q K).app M) ≫
+        (ihomComparison G (Q.obj K)).app (Q.obj M) ≫
         (pre (e.inv.app K)).app (G.obj (Q.obj M)) ≫
         (ihom (R.obj (F.obj K))).map (e.hom.app M) =
       e.hom.app ((ihom K).obj M) ≫
-        R.map ((ihomComparison F K).natTrans.app M) ≫
-        (ihomComparison R (F.obj K)).natTrans.app (F.obj M) := by
+        R.map ((ihomComparison F K).app M) ≫
+        (ihomComparison R (F.obj K)).app (F.obj M) := by
   have q := ihomComparison_app_comp_map_app e.inv K M
   have q' := congrArg (fun f ↦ e.hom.app ((ihom K).obj M) ≫ f ≫
     (ihom (R.obj (F.obj K))).map (e.hom.app M)) q
@@ -146,5 +146,5 @@ private theorem derivedFactorsh_monoidal :
   dsimp only [Functor.isoWhiskerLeft_hom, Iso.symm_hom]
   apply NatTrans.IsMonoidal.comp
 variable {L : D ⥤ C} [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-  (adj : L ⊣ F) [∀ P : C, IsIso (Functor.LaxMonoidal.ihomComparison F P).natTrans]
+  (adj : L ⊣ F) [∀ P : C, IsIso (Functor.LaxMonoidal.ihomComparison F P)]
 end CategoryTheory.Functor

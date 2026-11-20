@@ -95,7 +95,6 @@ private noncomputable def ringOne.{uC, vC, w} {C : Type uC} [Category.{vC} C]
        ext x
        exact (G.obj.map f).hom.map_one |>.symm }⟩
 
-set_option maxHeartbeats 400000 in
 -- The exposed operation formulas require repeated reduction of the étale sheaf functors.
 set_option backward.isDefEq.respectTransparency false in
 

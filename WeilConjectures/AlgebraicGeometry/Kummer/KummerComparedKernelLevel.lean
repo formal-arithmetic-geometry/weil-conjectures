@@ -17,9 +17,7 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.AlgebraicGeometry.Kummer.KummerComparedBoundaryFormula
 import WeilConjectures.AlgebraicGeometry.Kummer.KummerSignedTriangleTransport
 
-/-! # The signed Kummer triangle at one level
-Source: diagonal tower system proof, steps (3) and (4).
-(blueprint: lem-sfb-kummer-compared-kernel-level). -/
+/-! # The signed Kummer triangle at one level. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -35,18 +33,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext DerivedCategory.singleF
   cartierRootsIso cartierRootsComparison
   diagonalFiniteToPadic diagonalForget diagonalScalarExtension diagonalScalarAdjunction
 
-/-- The finite root map identifies the kernel in the signed multiplication triangle.
-Source: diagonal tower system proof, step (3), Kummer kernel, and step (4), sign
-(blueprint: lem-sfb-kummer-compared-kernel-level).
-Proof: the residue root tensor map is an isomorphism. Exact site comparison and
-coefficient forgetting give the actual pro-etale root isomorphism r. Transport
-the Kummer short exact sequence through r and the units comparison. Naturality
-of its boundary gives the compared Kummer class by the boundary formula. Rotate
-and shift once, correct the first object by negative identity, and use shift
-addition on the third object. This gives the stated signs. The transported
-inclusion followed by the units comparison is the original inclusion, and is
-monic because both changes of endpoints are isomorphisms. No division by two
-is used, including at ell=2; the zero sheaf and n=0 use the same argument. -/
+/-- The finite root map identifies the kernel in the signed multiplication triangle. -/
 theorem kummer_compared_kernel_level (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)] (n : ℕ) :

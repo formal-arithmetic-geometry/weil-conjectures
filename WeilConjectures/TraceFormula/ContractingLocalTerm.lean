@@ -14,26 +14,26 @@ import WeilConjectures.TraceFormula.ProperCompatibility
 # Local terms of contracting correspondences
 
 Varshavsky's theorem for contracting correspondences (blueprint
-`sk-thm-tf-contracting-local-term`, for `Z = {x}`;
+`theorem-contracting-correspondences-local-terms`, for `Z = {x}`;
 `ProEtale.CondensedRing.Correspondence.restrict_traceClass_eq_pushforward_of_isContractingAt`):
 if `c` is contracting at the `k`-point `y` of the fixed locus, the trace class of `c` on an open
 and closed subscheme `B` of the fixed locus with underlying set `{y}` is the pushforward of the
 trace class of the restricted coefficient map `u_Z : K_x ⟶ K_x`
 (`Correspondence.contractingStalkMap`).
 
-The proof follows the blueprint (`det-tf-contracting-closed-piece`):
+The proof follows the blueprint (`theorem-contracting-correspondences-local-terms`):
 * the additivity of trace classes along the pieces `K^U = j_! Lj^* K` and `K^Z = Rx_* Lx^* K`
   (`Correspondence.traceClass_eq_add_of_isPullback`);
 * the proper pushforward compatibility of trace classes for the closed piece
   (`Correspondence.ProperPushforwardDiagram.traceClassPushforward_eq`);
 * the vanishing of the trace class on `B` for coefficients with zero stalk at `x`, applied to the
   open piece (`Correspondence.restrict_traceClass_eq_zero_of_isContractingAt`, blueprint
-  `det-tf-contracting-vanishing`, proved by specialization to the normal cone in
+  `theorem-contracting-correspondences-local-terms`, proved by specialization to the normal cone in
   `WeilConjectures.TraceFormula.Specialization.Vanishing`).
 
 As consequences, the local term at a contracting fixed point with zero stalk vanishes
 (`Correspondence.localTerm_traceClass_eq_zero_of_isContractingAt`, blueprint
-`lem-trf-local-term-locality`, item 2), in particular for the graph of a Frobenius
+`corollary-contracting-local-terms-point`, item 2), in particular for the graph of a Frobenius
 (`Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero`, item 3).
 
 -/
@@ -62,16 +62,16 @@ namespace Correspondence
 variable (c : Correspondence ℓ K)
 
 /-- **Contracting correspondences and local terms** (blueprint
-`sk-thm-tf-contracting-local-term`, for the closed subscheme `Z = {x}` of the rational point
-`x = c₁(y)`; Varshavsky, *Lefschetz–Verdier trace formula and a generalization of a theorem of
-Fujiwara*, Thm. 2.1.3): let `c` be contracting at `y`, so that `C_Z = c₁⁻¹(x)` is the reduced
-point `y`, the correspondence `c_Z` induced on `Z` is the identity correspondence of the point and
-the restricted coefficient map is `u_Z = contractingStalkMap hc`. For an open and closed subscheme
-`B` of the fixed locus, proper over `s`, with underlying set `{y}` and point `e : s ⟶ B`, the
-restriction of the trace class of `c` to `B` is the pushforward along `e` of the trace class of
+`theorem-contracting-correspondences-local-terms`, for the closed subscheme `Z = {x}` of the
+rational point `x = c₁(y)`; Varshavsky, *Lefschetz–Verdier trace formula and a generalization of a
+theorem of Fujiwara*, Thm. 2.1.3): let `c` be contracting at `y`, so that `C_Z = c₁⁻¹(x)` is the
+reduced point `y`, the correspondence `c_Z` induced on `Z` is the identity correspondence of the
+point and the restricted coefficient map is `u_Z = contractingStalkMap hc`. For an open and closed
+subscheme `B` of the fixed locus, proper over `s`, with underlying set `{y}` and point `e : s ⟶ B`,
+the restriction of the trace class of `c` to `B` is the pushforward along `e` of the trace class of
 `u_Z`: `Tr_c(u)|_B = e_* Tr_{c_Z}(u_Z)`.
 
-This is the blueprint proof (`det-tf-contracting-closed-piece`): by additivity
+This is the blueprint proof (`theorem-contracting-correspondences-local-terms`): by additivity
 (`traceClass_eq_add_of_isPullback`) the trace class is the sum of the trace classes of the
 coefficient maps `u^Z = [x, y]_! u_Z` on `K^Z` and `u^U` on `K^U`; the first is the pushforward
 of the trace class of `u_Z` along the induced map of fixed loci by proper pushforward
@@ -116,9 +116,9 @@ theorem restrict_traceClass_eq_pushforward_of_isContractingAt (F : c.FixedLocus)
   change (P.pushforward.traceClass Fb).restrict j = _
   rw [← hZ, BorelMooreSection.restrict_pushforward_self]
 
-/-- **Zero-stalk vanishing of local terms** (blueprint `lem-trf-local-term-locality`, item 2;
-Varshavsky, Thm. 2.1.3): if `c` is contracting at the fixed point `y`, `B` is an open and closed
-subscheme of the fixed locus, proper over `s`, whose underlying set is `{y}`, and the stalk
+/-- **Zero-stalk vanishing of local terms** (blueprint `corollary-contracting-local-terms-point`,
+item 2; Varshavsky, Thm. 2.1.3): if `c` is contracting at the fixed point `y`, `B` is an open and
+closed subscheme of the fixed locus, proper over `s`, whose underlying set is `{y}`, and the stalk
 `K_{c₁ y}` vanishes, then the local term of the trace class of `c` along `B` is zero, whatever
 the coefficient map `u`: the restriction of the trace class to `B` vanishes
 (`restrict_traceClass_eq_zero_of_isContractingAt`). -/
@@ -137,12 +137,12 @@ theorem localTerm_traceClass_eq_zero_of_isContractingAt (F : c.FixedLocus)
 
 variable {c}
 
-/-- **Zero-stalk vanishing for the Frobenius graph** (blueprint `lem-trf-local-term-locality`,
-item 3): let `Φ` be the model Frobenius of a model `X₀` of finite type over a finite field
-`k₀`, `m ≥ 1`, let `v : LΦ_m^* K ⟶ K` be an arbitrary, not necessarily invertible, map (for
-instance the iterate `ψ_m` of a Frobenius coefficient morphism `ψ`, or `φ_m` for a Weil object)
-and `x` a rational point fixed by `Φ_m`. If the stalk `K_x` vanishes, the local term of the
-graph correspondence `(𝟙, Φ_m)` with coefficient map `v` along an open and
+/-- **Zero-stalk vanishing for the Frobenius graph** (blueprint
+`corollary-contracting-local-terms-point`, item 3): let `Φ` be the model Frobenius of a model `X₀`
+of finite type over a finite field `k₀`, `m ≥ 1`, let `v : LΦ_m^* K ⟶ K` be an arbitrary, not
+necessarily invertible, map (for instance the iterate `ψ_m` of a Frobenius coefficient morphism `ψ`,
+or `φ_m` for a Weil object) and `x` a rational point fixed by `Φ_m`. If the stalk `K_x` vanishes,
+the local term of the graph correspondence `(𝟙, Φ_m)` with coefficient map `v` along an open and
 closed subscheme `B` of the fixed locus, proper over `s`, with underlying set `{x}`, is zero.
 The graph is contracting at `x` since `Φ_m^♯ (t_i - a_i) = (t_i - a_i)^{q^m}` in affine
 coordinates, and the claim is item 2. -/

@@ -17,7 +17,7 @@ derived base change maps of the two squares, modulo the composition isomorphisms
 pushforwards (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert`). As a consequence
 the proper base change property is stable under composition
 (`AlgebraicGeometry.Etale.IsBaseChangeIso.comp`).
-(blueprint: `lemma-weil-pbc-derived-exchange-coherence`, vertical pasting;
+(blueprint: `lemma-identity-pasting`, vertical pasting;
 `lemma:weil-pbc-composition`, formal part)
 
 The pasting laws are collected in `WeilConjectures.SixFunctors.BaseChange.DerivedPasting`.
@@ -62,7 +62,7 @@ section Instances
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The pushforward `f_*` preserves injective objects, being right adjoint to the exact
-functor `f^*`. (blueprint: `lem-weil-pbc-direct-image-preserves-injectives`) -/
+functor `f^*`. (blueprint: `lemma-composition-cancellation`) -/
 instance Etale.preservesInjectiveObjects_lowerStar : ((f)_*[A]).PreservesInjectiveObjects :=
   Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
     (Etale.upperStarLowerStarAdjunction A f)
@@ -91,8 +91,8 @@ the derived base change map of the pasted square is the composite
 `k^* R(f ≫ e)_* ≅ k^* Re_* Rf_* ⟶ Re'_* g^* Rf_* ⟶ Re'_* Rf'_* g'^* ≅ R(f' ≫ e')_* g'^*` of
 the derived base change maps of the two squares, modulo the composition isomorphisms of the
 derived pushforwards along the vertical maps.
-(blueprint: `lemma-weil-pbc-derived-exchange-coherence`,
-`lem-weil-pbc-exchange-identity-pasting`) -/
+(blueprint: `lemma-identity-pasting`,
+`lemma-identity-pasting`) -/
 lemma Etale.derivedBaseChangeMapPlus_paste_vert (sq₁ : CommSq g' f' f g)
     (sq₂ : CommSq g e' e k) (sq : CommSq g' (f' ≫ e') (f ≫ e) k) :
     Etale.derivedBaseChangeMapPlus A sq =

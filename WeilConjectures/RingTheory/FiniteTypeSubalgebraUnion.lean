@@ -21,7 +21,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 * `Subalgebra.localizationSubalgebra`: for a subalgebra `S` of a domain `B` and a nonzero
   `g ∈ S`, the copy of `S_g` inside `Frac B`.
 * `Subalgebra.isFiltered_and_isColimit_localizationSubalgebras` (blueprint
-  `lem-kun-colim-of-localizations`): `Frac B` is the filtered colimit of the `(B_i)_g`.
+  `lemma-kunneth-finite-direct-image--1`): `Frac B` is the filtered colimit of the `(B_i)_g`.
 -/
 
 @[expose] public section
@@ -199,7 +199,7 @@ theorem exists_mem_localizationSubalgebras {F : Set (Subalgebra K B)}
   refine ⟨_, ⟨S, hS, _, hg, rfl⟩, (mem_localizationSubalgebra S hg _).2 ⟨⟨a, hSaS ha⟩, 1, ?_⟩⟩
   simp
 
-/-- Blueprint `lem-kun-colim-of-localizations`: let `B` be a domain which is the directed
+/-- Blueprint `lemma-kunneth-finite-direct-image--1`: let `B` be a domain which is the directed
 union of a set `F` of (finite type) `K`-subalgebras `B_i`. Then `Frac B` is the filtered
 colimit in `CommRingCat` of the subrings `(B_i)_g ⊆ Frac B` (`g ∈ B_i` nonzero), ordered by
 inclusion; each of them is isomorphic to the localization `(B_i)_g`

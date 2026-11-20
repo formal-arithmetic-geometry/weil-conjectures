@@ -20,7 +20,7 @@ Write `red_X : Dᵇc(X)⟦𝒪_E⟧ ⥤ D(X_ét, 𝒪_E ⧸ ℓⁿ)` for the red
 étale site (`ProEtale.CondensedRing.etaleReduction`). This file proves that an open immersion
 `j : U ⟶ X` has a reduction comparison for `Rj_!` and `Rj^!`
 (`ProEtale.CondensedRing.hasEtaleReductionLowerShriekIso_of_isOpenImmersion`), the open-immersion
-case of blueprint `det-prop-scalar-six-exceptional`.
+case of blueprint `lemma-change-coefficients-exceptional-inverse-image`.
 
 ## Strategy
 
@@ -119,10 +119,10 @@ noncomputable irreducible_def etaleReductionUpperShriekIsoOfIsOpenImmersion :
       (Etale.leftDerivedUpperStarIsoMapDerivedCategory _ j.left ≪≫
         (Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion _ j.left).symm)
 
-/-- Blueprint `det-prop-scalar-six-exceptional`, open-immersion case, for the coefficient map
-`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site. **Open immersions have a reduction comparison for
-`Rj_!` and `Rj^!`**: there is an isomorphism `γ : Rj_! ⋙ red_X ≅ red_U ⋙ Rj_!` whose transpose
-under `Rj_! ⊣ Rj^!` is an isomorphism.
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image`, open-immersion case, for the
+coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site. **Open immersions have a reduction
+comparison for `Rj_!` and `Rj^!`**: there is an isomorphism `γ : Rj_! ⋙ red_X ≅ red_U ⋙ Rj_!` whose
+transpose under `Rj_! ⊣ Rj^!` is an isomorphism.
 
 The comparison `γ` is the inverse of the transpose `θ` of
 `etaleReductionUpperShriekIsoOfIsOpenImmersion`, so that its own transpose is invertible by
@@ -153,7 +153,7 @@ theorem hasEtaleReductionLowerShriekIso_of_isOpenImmersion :
     have := ff.full
     have := ff.faithful
     infer_instance
-  have (K : Dᵇc(U.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) : IsIso (θ.natTrans.app K) := by
+  have (K : Dᵇc(U.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) : IsIso (θ.app K) := by
     let i := overClosedComplement j
     refine (Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar' A j.left i.left
       (range_overClosedComplement j)).isIso_of_pairFunctor _ ?_ ?_
@@ -187,8 +187,8 @@ theorem hasEtaleReductionLowerShriekIso_of_isOpenImmersion :
             ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicIntegers ℓ E j).app
               K))
       exact ⟨0, h₁.eq_of_src _ _, h₂.eq_of_src _ _⟩
-  have : IsIso θ.natTrans := NatIso.isIso_of_isIso_app _
-  refine ⟨(asIso θ.natTrans).symm, ?_⟩
+  have : IsIso θ := NatIso.isIso_of_isIso_app _
+  refine ⟨(asIso θ).symm, ?_⟩
   rw [Iso.symm_inv, asIso_hom]
   exact hθ ▸ inferInstance
 

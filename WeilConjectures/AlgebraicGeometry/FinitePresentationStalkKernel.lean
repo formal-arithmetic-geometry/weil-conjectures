@@ -18,6 +18,7 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationSourceStalk
 import WeilConjectures.AlgebraicGeometry.InternalHomGermZeroFiniteType
 import WeilConjectures.AlgebraicGeometry.StalkLinearMapLocalLiftFinitePresentation
 import Mathlib.LinearAlgebra.LeftExact
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # A local finite presentation and its internal-Hom stalk kernel

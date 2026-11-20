@@ -23,8 +23,8 @@ Let `Φ` be a finite universal homeomorphism of `X`, `j : U ⟶ X` an open immer
 `(K, φ)` this file defines the endomorphisms `E_U` and `E_Z` of `RΓ_c(X, Rj_! Lj^* K)` and
 `RΓ_c(X, Ri_* Li^* K)` induced by the compactly supported Frobenii of `K|_U` and `K|_Z`, and shows
 that they are compatible with the counit `Rj_! Lj^* K ⟶ K` and the unit `K ⟶ Ri_* Li^* K` of the
-localization triangle (blueprint `prop-trf-trace-additivity-open-closed`,
-`sk-i-global-additivity`).
+localization triangle (blueprint `lemma-additivity-open-subscheme-complement`,
+`lemma-additivity-open-subscheme-complement`).
 
 ## Main definitions
 
@@ -178,7 +178,6 @@ lemma compactFrobenius_weilUpperStar (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBounde
   -- the carrier of `K|_Z` is `Li^* K` by `rfl`; a bare `rfl` slowly unfolded the composites
   dsimp only [weilUpperStar_obj_carrier]
 
-set_option maxHeartbeats 1000000 in
 -- the coherence of the pullbacks along `Φ_Z ≫ i = i ≫ Φ` is a long elaboration
 omit [IsUniversalHomeomorphism ΦZ.left] in
 /-- **The compactly supported Frobenius commutes with the pullback to a closed piece**: for a
@@ -249,7 +248,6 @@ noncomputable def compactFrobeniusClosedPiece (hi : ΦZ ≫ i = i ≫ Φ)
     (boundedConstructibleLowerStarCompToPoint ℓ i).inv.app
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)
 
-set_option maxHeartbeats 1000000 in
 -- the closed-piece operator unfolds to a long composite
 omit [IsUniversalHomeomorphism ΦZ.left] in
 /-- The square of the closed piece: `E_Z ∘ RΓ_c(η) = RΓ_c(η) ∘ F_c(K)` for the unit
@@ -289,11 +287,10 @@ theorem compactFrobenius_comp_compactUnit (hi : ΦZ ≫ i = i ≫ Φ)
     Category.assoc, h]
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
-set_option maxHeartbeats 1000000 in
 -- the open-piece operator unfolds to a long composite
 omit [IsClosedImmersion i.left] in
-/-- The square of the open piece (blueprint `prop-trf-trace-additivity-open-closed`, Step 2(a)):
-`RΓ_c(ε) ∘ E_U = F_c(K) ∘ RΓ_c(ε)` for the counit `ε : Rj_! Lj^* K ⟶ K`. Through
+/-- The square of the open piece (blueprint `lemma-additivity-open-subscheme-complement`, Step
+2(a)): `RΓ_c(ε) ∘ E_U = F_c(K) ∘ RΓ_c(ε)` for the counit `ε : Rj_! Lj^* K ⟶ K`. Through
 `F_c = RΓ_c(φ) ∘ Φ^♯` this is the compatibility of the extension by zero with the pullbacks along
 the Frobenii, `compToPoint_inv_app_comp_counit_comp_compactPullback`. -/
 theorem compactFrobeniusOpenPiece_comp_counit (hj : ΦU ≫ j = j ≫ Φ)

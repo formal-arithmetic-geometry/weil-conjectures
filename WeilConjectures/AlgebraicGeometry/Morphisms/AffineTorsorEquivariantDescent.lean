@@ -18,7 +18,12 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunct
 import WeilConjectures.AlgebraicGeometry.Morphisms.EquivariantOrbitModelCompatible
 import WeilConjectures.AlgebraicGeometry.Morphisms.FixedOrbitProductEquiv
 
-/-! # Descent of a split cover to its equivariant function algebra -/
+/-! # Descent of a split cover to its equivariant function algebra
+
+## References
+
+* Stacks Project, Tag 03SF (finite Galois covers)
+-/
 
 @[expose] public section
 universe u
@@ -29,17 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The equivariant function algebra is reconstructed from orbit representatives
-as the product of the corresponding stabilizer equalizers.
-
-Source: Stacks Project, Tag 03SF (finite Galois covers).
-Proof: evaluate an equivariant function on one representative of each orbit.
-The equivariance equations determine all other coordinates uniquely by the group
-action. A coordinate at a representative is unrestricted exactly when it is
-fixed by its stabilizer, hence lies in the corresponding intersection of
-equalizers. Extending these coordinates along orbit representatives gives the
-inverse algebra map; the two maps are inverse by the orbit decomposition and
-preserve the H-algebra structures.
-(blueprint: lem-sbc-affine-torsor-equivariant-descent-algebra) -/
+as the product of the corresponding stabilizer equalizers. -/
 theorem affine_torsor_equivariant_descent_algebra
     (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]
     (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)
@@ -56,7 +51,10 @@ theorem affine_torsor_equivariant_descent_algebra
   obtain ⟨eA⟩ := eA
   exact ⟨eA.trans eD⟩
 
-/-- (blueprint: lem-sbc-affine-torsor-equivariant-descent) -/
+/-- A finite étale cover `p` of `D(g)` that splits into `d` copies after base change along `t`
+descends: for some permutation action `α` of `G` on `Fin d`, the base change of `p` along
+`Spec H ⟶ Spec R` is isomorphic over `Spec H` to the puncture `D(ι g)` of the spectrum of the
+equivariant function algebra `affineTorsorEquivariantAlgebra H C G ρ d α`. -/
 theorem affine_torsor_equivariant_descent
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

@@ -24,17 +24,18 @@ import Mathlib.CategoryTheory.Monad.Adjunction
 /-!
 # Normalized locally closed extensions with arbitrary pro-etale coefficients
 
-Source: Stacks Project, proetale.tex, Tags 09AA, 09BM, 09BN and 09AH;
-sites-modules.tex, Tags 03DI and 03DJ; schemes.tex, Tag 02V0;
-blueprint main-20261015, det-prop-scalar-six-pullback, proof (2)
-(blueprint: lem-sfb-locally-closed-extension-coherence).
-
 The structures below package the witnesses in this single coherence assertion.
 They do not choose a functor from a mere existence theorem. The only categories and
-inverse/direct images used are the published module-sheaf constructions. An open
+inverse/direct images used are the module-sheaf constructions. An open
 extension is specified by its adjunction, equivalently by slice extension followed
 by module sheafification. Closed extensions are identified with actual direct image.
 All derived functors are the exact termwise localizations of these same functors.
+
+## References
+
+* Stacks Project, Tags 09AA, 09BM, 09BN and 09AH
+* Tags 03DI and 03DJ
+* Tag 02V0
 -/
 
 @[expose] public noncomputable section

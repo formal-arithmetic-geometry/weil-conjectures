@@ -153,7 +153,7 @@ end Rationalization
 variable [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
   [∀ n : ℤ, (shiftFunctor C n).Linear R] [Pretriangulated C] [IsTriangulated C]
 
-/-- Blueprint `def-sfb-rationalization-quotient`: Rationalization (scalar localization),
+/-- Blueprint `proposition-inverting-ell--2`: Rationalization (scalar localization),
 `C[1/ϖ]`: the same objects as `C` (`CategoryTheory.Rationalization.essSurj_Q`) and morphisms
 `Hom_C(K, L) ⊗_{𝒪_E} E` (`CategoryTheory.Rationalization.isLocalizedModule_mapLinearMap`); no
 Karoubi completion is taken.

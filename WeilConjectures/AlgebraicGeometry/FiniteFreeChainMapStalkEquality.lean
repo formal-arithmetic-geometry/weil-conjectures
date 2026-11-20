@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 
 /-! # Detecting equality of bounded finite free chain maps near a point
 
-Source: lem-pc-perfect-locus, finite matrix equations after shrinking.
+Source: lemma-coherent-base-change-invertible-sheaves--3, finite matrix equations after shrinking.
 (blueprint: lem-pc-finite-free-chain-map-stalk-equality)
 -/
 
@@ -40,7 +40,7 @@ private lemma restrict_eq_of_le {Y : Scheme.{u}} {U V W : Y.Opens}
 /-- Equality of two fixed chain maps at the stalk holds on a smaller open.
 
 Source: lem-pc-finite-free-stalk-homotopy-p-only, step 3, expanding the finite
-calculation in lem-pc-perfect-locus (first two proof paragraphs).
+calculation in lemma-coherent-base-change-invertible-sheaves--3 (first two proof paragraphs).
 (blueprint: lem-pc-finite-free-chain-map-stalk-equality)
 
 Proof: Use the finite bases of P and their images under restriction, identified by

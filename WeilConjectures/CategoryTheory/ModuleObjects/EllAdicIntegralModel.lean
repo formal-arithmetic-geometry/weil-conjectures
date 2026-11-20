@@ -19,8 +19,9 @@ Let `X` be a topologically noetherian scheme, `ℓ` a prime and `E ⊆ ℚ̄_ℓ
 (`ProEtale.boundedConstructibleExtendScalars`) is a localization functor at the morphisms whose
 mapping cone is killed by a power of `ℓ`
 (`ProEtale.isLocalization_boundedConstructibleExtendScalars`,
-blueprint `sk-thm-sfb-rationalization-comparison`). This file draws the consequences used by the
-rational model of Frobenius correspondences (blueprint `sk-lem-tf-rational-model`):
+blueprint `proposition-inverting-ell`). This file draws the consequences used by the
+rational model of Frobenius correspondences (blueprint
+`lemma-integral-models-rational-frobenius-correspondences`):
 
 * every bounded constructible `E`-complex has an *integral model*: it is isomorphic to `E ⊗ᴸ K₀`
   for a bounded constructible `𝒪_E`-complex `K₀`
@@ -29,9 +30,9 @@ rational model of Frobenius correspondences (blueprint `sk-lem-tf-rational-model
   `ℓ^N • ψ = E ⊗ᴸ θ` for a morphism `θ : K₀ ⟶ L₀`
   (`ProEtale.exists_pow_smul_eq_boundedConstructibleExtendScalars_map`);
 * combined with the descent of `ℚ̄_ℓ`-complexes to a finite subextension (blueprint
-  `sk-thm-sfb-qlbar-two-colimit`, `ProEtale.constructibleCocone_essSurjObj`), every bounded
-  constructible `ℚ̄_ℓ`-complex is isomorphic to `ℚ̄_ℓ ⊗ᴸ_{E} (E ⊗ᴸ_{𝒪_E} K₀)` for some finite `E`
-  and some bounded constructible `𝒪_E`-complex `K₀`
+  `lemma-descent-finite-coefficient-field`, `ProEtale.constructibleCocone_essSurjObj`), every
+  bounded constructible `ℚ̄_ℓ`-complex is isomorphic to `ℚ̄_ℓ ⊗ᴸ_{E} (E ⊗ᴸ_{𝒪_E} K₀)` for some
+  finite `E` and some bounded constructible `𝒪_E`-complex `K₀`
   (`ProEtale.exists_padicAlgCl_iso_integralModel`).
 
 The `Hom` statement holds for every localization functor at the morphisms with torsion mapping
@@ -79,10 +80,11 @@ instance additive_boundedConstructibleExtendScalars (E : FiniteIntermediateField
     Functor.additive_of_preserves_binary_products _
   exact Functor.additive_of_iso (rationalizationQCompEquivalenceIso X ℓ E)
 
-/-- **Integral models of objects** (blueprint `sk-lem-tf-rational-model`, from
-`sk-thm-sfb-rationalization-comparison`): every bounded constructible `E`-complex `K` on a
-topologically noetherian scheme is isomorphic to `E ⊗ᴸ_{𝒪_E} K₀` for a bounded constructible
-`𝒪_E`-complex `K₀`, the extension of scalars being a localization functor. -/
+/-- **Integral models of objects** (blueprint
+`lemma-integral-models-rational-frobenius-correspondences`, from `proposition-inverting-ell`): every
+bounded constructible `E`-complex `K` on a topologically noetherian scheme is isomorphic to
+`E ⊗ᴸ_{𝒪_E} K₀` for a bounded constructible `𝒪_E`-complex `K₀`, the extension of scalars being a
+localization functor. -/
 lemma exists_boundedConstructibleExtendScalars_obj_iso (E : FiniteIntermediateField ℓ)
     (K : BoundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E.1) X)) :
     ∃ K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X),
@@ -91,10 +93,11 @@ lemma exists_boundedConstructibleExtendScalars_obj_iso (E : FiniteIntermediateFi
     (Rationalization.W (Submonoid.powers (ℓ : ℤ)) _)
   ⟨_, ⟨(boundedConstructibleExtendScalars X ℓ E).objObjPreimageIso K⟩⟩
 
-/-- **Integral models of morphisms** (blueprint `sk-lem-tf-rational-model`, from
-`sk-thm-sfb-rationalization-comparison`): every morphism `ψ : E ⊗ᴸ K₀ ⟶ E ⊗ᴸ L₀` between
-extensions of scalars of bounded constructible `𝒪_E`-complexes is integral up to a power of `ℓ`:
-`ℓ^N • ψ = E ⊗ᴸ θ` for some `N` and some `θ : K₀ ⟶ L₀`. -/
+/-- **Integral models of morphisms** (blueprint
+`lemma-integral-models-rational-frobenius-correspondences`, from `proposition-inverting-ell`): every
+morphism `ψ : E ⊗ᴸ K₀ ⟶ E ⊗ᴸ L₀` between extensions of scalars of bounded constructible
+`𝒪_E`-complexes is integral up to a power of `ℓ`: `ℓ^N • ψ = E ⊗ᴸ θ` for some `N` and some
+`θ : K₀ ⟶ L₀`. -/
 lemma exists_pow_smul_eq_boundedConstructibleExtendScalars_map (E : FiniteIntermediateField ℓ)
     {K₀ L₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)}
     (ψ : (boundedConstructibleExtendScalars X ℓ E).obj K₀ ⟶
@@ -107,11 +110,11 @@ lemma exists_pow_smul_eq_boundedConstructibleExtendScalars_map (E : FiniteInterm
       (boundedConstructibleExtendScalars X ℓ E) ψ
   exact ⟨N, θ, h⟩
 
-/-- **Integral models of `ℚ̄_ℓ`-complexes** (blueprints `sk-thm-sfb-qlbar-two-colimit` and
-`sk-lem-tf-rational-model`): every bounded constructible `ℚ̄_ℓ`-complex `K` on a topologically
-noetherian scheme is isomorphic to `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)` for a finite subextension `E` and a
-bounded constructible `𝒪_E`-complex `K₀`: `K` descends to some `E`, and the descended complex has
-an integral model. -/
+/-- **Integral models of `ℚ̄_ℓ`-complexes** (blueprints `lemma-descent-finite-coefficient-field` and
+`lemma-integral-models-rational-frobenius-correspondences`): every bounded constructible
+`ℚ̄_ℓ`-complex `K` on a topologically noetherian scheme is isomorphic to `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)`
+for a finite subextension `E` and a bounded constructible `𝒪_E`-complex `K₀`: `K` descends to some
+`E`, and the descended complex has an integral model. -/
 lemma exists_padicAlgCl_iso_integralModel (K : PadicAlgClConstructible X ℓ) :
     ∃ (E : FiniteIntermediateField ℓ)
       (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)),

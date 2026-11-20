@@ -131,12 +131,12 @@ Proof: first identify the comparison inverse image of the constant coefficient r
 its pro-étale constant ring, using the lifted ring-object adjunction and the universal
 property of the constant sheaf. The canonical intrinsic realization implements this
 identification. Exact comparison is applied termwise and commutes with cohomology
-(lem-weil-pbc-exact-functor-derived-factorization and its cohomology companion).
-Apply the étale clause of lem-sf-flat-model to obtain a flat model supported in [a,b].
-By lem-exc-constant-inverse-image-flat its pullback remains flat and has the same support.
-It is K-flat by lem-pc-bounded-above-flat-kflat-site, so tensoring with any degree-zero
+(situation-conventions and its cohomology companion).
+Apply the étale clause of lemma-flat-models-generators--1 to obtain a flat model supported in [a,b].
+By corollary-finite-tor-amplitude-under-comparison its pullback remains flat and has the same
+support. It is K-flat by lem-pc-bounded-above-flat-kflat-site, so tensoring with any degree-zero
 module computes derived tensor and has no cohomology outside [a,b]. Finally clause (ii)
-of lem-sf-proetale-constructible-origin gives bounded constructibility. -/
+of theorem-comparison-constructible-sheaves gives bounded constructibility. -/
 theorem finiteCoefficient_comparison_preserves_torAmplitude
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hlp : l ≠ D.p)
@@ -170,7 +170,7 @@ Source: blueprint `sec-six-functors/sk-prop-sf-rf-shriek-preservation/`
 
 Proof: A = A_{E,n} is finite for n ≥ 1. Regard K' as an object of D⁺ by the
 bounded-below hypothesis; the ordered interval a ≤ b is part of HasProEtaleTorAmplitude. Apply
-the reverse implication of lem-exc-comparison-tor-interval
+the reverse implication of corollary-finite-tor-amplitude-under-comparison--1
 (ProEtale.comparison_torAmplitudeIn_iff). Its pro-étale side is the intrinsic realization
 after the bounded-below site pullback, canonically isomorphic to the derived functor of
 the composite (mapDerivedCategoryCompIso). Compose with the given K ≅ ν*K'; any

@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Local.DiagonalLoca
 import WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwists
 
 /-! # Homological criterion for the scalar q splitting
-
-Source: diagonal-tower unit/Chern splitting and the first rational P1 triangle.
 -/
 
 @[expose] public noncomputable section
@@ -32,13 +30,13 @@ attribute [local irreducible] diagram trace singleUnitIso
 private theorem line_epi_end_isIso
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]
-    (q : End (line l c X)) [Epi q] : IsIso q := by
+    (q : End (line l c X)) [Epi q.asHom] : IsIso q.asHom := by
   let B := condensedRingObj (coefficient l c).X X
   let J := Scheme.ProEt.topology X
   let O := InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} J B
   let R := (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O
   let S := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} J B
-  let f := S.functor.map q
+  let f := S.functor.map q.asHom
   have : Epi f := inferInstance
   obtain ⟨I, U, v, _, _, hc, _, _, _, hrat, hcl⟩ := spTwists_commonCover X l
   have hU : J.CoversTop U := by
@@ -65,7 +63,7 @@ private theorem line_epi_end_isIso
     change IsIso ((SheafOfModules.toSheaf (R.over (U i))).map (f.over (U i)))
     infer_instance
   have : IsIso f := isIso_of_reflects_iso f (SheafOfModules.toSheaf R)
-  exact isIso_of_reflects_iso q S.functor
+  exact isIso_of_reflects_iso q.asHom S.functor
 
 private theorem line_splitMono_isIso
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -74,7 +72,7 @@ private theorem line_splitMono_isIso
     (e : M ≅ line l c X) (d : N ≅ line l c X) : IsIso f := by
   let q := d.inv ≫ retraction f ≫ e.hom
   have : Epi q := inferInstance
-  have : IsIso q := line_epi_end_isIso l c X q
+  have : IsIso q := line_epi_end_isIso l c X (.of q)
   have heq : retraction f = d.hom ≫ q ≫ e.inv := by
     simp only [q, Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
   have : IsIso (retraction f) := by rw [heq]; infer_instance
@@ -180,19 +178,7 @@ private theorem map_desc_left_iso
   rw [← he]
   infer_instance
 
-/-- The componentwise homological data needed by the abstract q biproduct criterion.
-
-Source: the positive twist and shift of the diagonal tower splitting, followed by
-restriction, completion, realization and scalar extension in the first rational
-P1 triangle (blueprint: lem-sfb-rational-p1-scalar-q-homology-criterion).
-
-Proof: evaluate the normalized completed splitting on strict constant systems,
-transport its two components through the prescribed realization and scalar mates,
-and use projective-line cohomological concentration in degrees `0` and `-2`.
-The normalized Chern equation identifies the degree-zero component with the actual
-scalarQChern arrow, while the unit component identifies the degree-minus-two map
-with scalarTwistedUnit. The same concentration gives vanishing of the pushforward
-in all other degrees, and the endpoint comparisons preserve invertibility. -/
+/-- The componentwise homological data needed by the abstract q biproduct criterion. -/
 theorem scalar_q_chern_homology_criterion
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

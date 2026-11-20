@@ -219,7 +219,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl 
 
 include instQ instT instF
 
-/-- Blueprint `det-d-real-log`: Small logarithm.
+/-- Blueprint `theorem-rank-one-sheaves-have-finite`: Small logarithm.
 
 The subgroup `U_E = 1 + ℓ² 𝒪_E` of `Eˣ`, where `𝒪_E = PadicAlgCl.integers l E` is the ring of
 integers of `E`. -/
@@ -252,7 +252,7 @@ def smallUnits : Subgroup Eˣ where
     rw [key]
     exact neg_mem (mul_mem ha (inv_mem_integers_of_sub_one_div ha))
 
-/-- Blueprint `det-d-real-log`: Small logarithm.
+/-- Blueprint `theorem-rank-one-sheaves-have-finite`: Small logarithm.
 
 `smallLog l E x` is the sum of the series `log (1 + x) = ∑_{n ≥ 1} (-1)^(n+1) x ^ n / n`,
 formed in the topology restricted from `ℚ̄_ℓ`. It converges for `x ∈ ℓ² 𝒪_E`
@@ -262,7 +262,7 @@ noncomputable def smallLog (x : E) : E :=
   letI := normedFieldOfAlgebra l E
   ∑' n : ℕ, (-1) ^ n * x ^ (n + 1) / (n + 1 : ℕ)
 
-/-- Blueprint `det-d-real-log`: Small logarithm.
+/-- Blueprint `theorem-rank-one-sheaves-have-finite`: Small logarithm.
 
 The logarithm series converges on `ℓ² 𝒪_E`: the `n`-th term has valuation at least
 `2 (n + 1) - v_ℓ(n + 1)`, which tends to infinity, and `E` is complete. -/
@@ -277,7 +277,7 @@ theorem summable_logSeries {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) :
     (norm_logSeries_term_le hx)
 
 omit instQ instT instF in
-/-- Blueprint `det-d-real-log`: Small logarithm.
+/-- Blueprint `theorem-rank-one-sheaves-have-finite`: Small logarithm.
 
 On `ℓ² 𝒪_E` the logarithm does not increase the norm, `‖log (1 + x)‖ ≤ ‖x‖`: the term
 `x ^ (n + 1) / (n + 1)` has norm `‖x‖ ^ (n + 1) / ‖n + 1‖ ≤ ‖x‖`, as
@@ -343,7 +343,7 @@ theorem eq_zero_of_smallLog_eq_zero {x : E} (hx : x / ((l : E) ^ 2) ∈ integers
   have hpos : 0 < ‖x‖ := norm_pos_iff.mpr hne
   nlinarith
 
-/-- Blueprint `det-d-real-log`: Small logarithm.
+/-- Blueprint `theorem-rank-one-sheaves-have-finite`: Small logarithm.
 
 The logarithm turns the multiplication of `U_E` into the addition of `E`: writing
 `a_n(u) = (u ^ ℓⁿ - 1) / ℓⁿ`, one has `a_n(uv) = ℓⁿ a_n(u) a_n(v) + a_n(u) + a_n(v)`, and
@@ -378,12 +378,12 @@ theorem smallLog_mul (u v : smallUnits l E) :
   rw [zero_mul, zero_mul, zero_add] at hlim
   exact tendsto_nhds_unique huv (hlim.congr key)
 
-/-- Blueprint `det-d-real-log`: Small logarithm.
+/-- Blueprint `theorem-rank-one-sheaves-have-finite`: Small logarithm.
 
 The logarithm is injective on `U_E = 1 + ℓ² 𝒪_E`: it is a homomorphism there, and its kernel
 is trivial since `‖log (1 + x) - x‖ ≤ ℓ⁻¹ ‖x‖` (`PadicAlgCl.eq_zero_of_smallLog_eq_zero`).
-This is what `sk-p-real-rankone` uses to turn a character of `π₁` with values in `U_E` into a
-continuous additive character. -/
+This is what `theorem-rank-one-sheaves-have-finite` uses to turn a character of `π₁` with values in
+`U_E` into a continuous additive character. -/
 theorem injOn_smallLog :
     Set.InjOn (fun u : Eˣ ↦ smallLog l E ((u : E) - 1)) (smallUnits l E) := by
   intro u hu v hv huv

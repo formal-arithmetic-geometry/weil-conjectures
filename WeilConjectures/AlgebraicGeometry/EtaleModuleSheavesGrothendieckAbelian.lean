@@ -44,8 +44,8 @@ Source: Stacks Project, Tags 03DA, 03DB, 03DI, 03EW, 021B and 04HR
 
 Proof:
 1. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels (03DA),
-   using `def-weil-sheaf-of-modules-category`. The forgetful functor to abelian sheaves
-   is faithful and exact by `lem-weil-pbc-module-sheaves-colimits-forgetful` (1).
+   using `situation-conventions`. The forgetful functor to abelian sheaves
+   is faithful and exact by `situation-conventions` (1).
 2. Sheafify sectionwise colimits, using that lemma's (2) and (3), to obtain all small
    colimits and their preservation by the forgetful functor (03DB).
 3. For a filtered diagram of short exact sequences, colimits preserve cokernels.

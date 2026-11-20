@@ -33,7 +33,8 @@ The case of the change of trait `Spec K⟦t⟧ ⟶ Spec k'⟦t⟧` of a model of
 (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_padicIntegers`,
 `NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_residueField`); it is the
 coefficient-generic form of the first "fact about traits" of the blueprint proof of
-`sk-prop-tf-nearby-external-kunneth`, needed by the induction with `𝒪_E`-coefficients.
+`proposition-external-kunneth-formula-nearby-cycles`, needed by the induction with
+`𝒪_E`-coefficients.
 
 -/
 

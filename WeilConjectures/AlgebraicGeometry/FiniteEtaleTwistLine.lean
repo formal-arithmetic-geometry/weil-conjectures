@@ -197,14 +197,14 @@ trivialising datum in [def-constructible-locally-constant], so each twist is loc
 every $W$ its single generator is a basis over $A_W$, exactly the local-freeness-of-rank-one
 assertion. Uses: def-pur-sheaf-tensor-product, def-constructible-locally-constant.
 
-5. Fix $r$ and put $L=A_T(r)$. By [lem-weil-pbc-etale-cover-geometric-point-lift], every geometric
+5. Fix $r$ and put $L=A_T(r)$. By [definition-torsion-sheaves--3], every geometric
 point has a lift to one member $W$ of the cover in step 1. The stalk definition
 [def-weil-pbc-geometric-stalks] gives the same stalk on $T$ and on the localized site at this
 pointed $W$: replace any pointed neighbourhood $U$ by $U\times_TW$ with its specified pair of
 lifts, a pointed refinement, and do the same for equalities of germs. These fibre products exist
 in [def-weil-pbc-etale-site]. Thus the local basis of step 4 and
-[lem-weil-pbc-constant-sheaf-geometric-stalk] give $L_{\bar t}\cong A$, as $A$-modules since the
-germ comparison respects multiplication. By [def-weil-sheaf-of-modules-category], the forgetful
+[definition-torsion-sheaves--3] give $L_{\bar t}\cong A$, as $A$-modules since the
+germ comparison respects multiplication. By [situation-conventions], the forgetful
 functor from module sheaves to abelian sheaves is exact. For any short exact sequence $0\to F'\to
 F\to F''\to0$ of $A_T$-module sheaves, [prop-weil-pbc-geometric-stalks-exact] gives a short exact
 sequence of underlying abelian stalks, with $A$-linear maps. By the natural tensor-stalk
@@ -219,9 +219,9 @@ zero stalks by exactness of the stalk functor; apply [lemma-weil-pbc-geometric-s
 to their maps to the zero sheaf. They vanish. Tensoring with $L$ preserves short exact sequences,
 and hence exact sequences by factoring through images. This is the claimed flatness. Uses:
 prop-weil-pbc-geometric-stalks-exact, lem-pod-etale-stalk-tensor-scalar,
-lemma-weil-pbc-geometric-stalk-conservative, lem-weil-pbc-etale-cover-geometric-point-lift,
-lem-weil-pbc-constant-sheaf-geometric-stalk, def-weil-pbc-geometric-stalks,
-def-weil-pbc-etale-site, def-weil-sheaf-of-modules-category. -/
+lemma-weil-pbc-geometric-stalk-conservative, definition-torsion-sheaves--3,
+definition-torsion-sheaves--3, def-weil-pbc-geometric-stalks,
+def-weil-pbc-etale-site, situation-conventions. -/
 theorem finite_etale_torsion_twist_line
     (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (hInvertible : ∀ t : T, IsUnit (N : T.presheaf.stalk t))

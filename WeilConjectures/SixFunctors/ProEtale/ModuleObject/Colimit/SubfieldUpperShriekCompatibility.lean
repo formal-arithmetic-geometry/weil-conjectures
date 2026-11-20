@@ -20,7 +20,8 @@ Let `E ≤ F` be finite subextensions of `ℚ̄_ℓ / ℚ_ℓ` and `g : Z ⟶ Y`
 `Rg_*^E ⋙ T_Y ≅ T_Z ⋙ Rg_*^F` is an isomorphism; we show that its mate
 `Rg^!_E ⋙ T_Z ⟶ T_Y ⋙ Rg^!_F` under the adjunctions `Rg_* ⊣ Rg^!` is an isomorphism as well
 (`ProEtale.CondensedRing.isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield`).
-This is the finite-stage `f^!` clause of blueprint `sk-prop-scalar-six` for proper morphisms.
+This is the finite-stage `f^!` clause of blueprint `proposition-six-operations-change-coefficients`
+for proper morphisms.
 
 The proof uses that the monads `Res ∘ T` are biproduct powers `K ↦ K ^ d`, via an `E`-basis of
 `F` (`ProEtale.CondensedRing.exists_isIso_biproductDesc_unit_smul`), compatibly with `Rg_*`,
@@ -62,7 +63,7 @@ theorem isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield [IsPr
         (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g)
         (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g)
         (boundedConstructibleExtendScalarsSubfield Y.left ℓ h)
-        (inv (boundedConstructibleLowerStarExtendScalarsSubfield ℓ h g)))).natTrans := by
+        (inv (boundedConstructibleLowerStarExtendScalarsSubfield ℓ h g)))) := by
   have := noetherianSpace_left_of_over Z
   have := noetherianSpace_left_of_over Y
   have hex := exists_isIso_biproductDesc_unit_smul.{u} ℓ h
@@ -84,8 +85,8 @@ theorem isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield [IsPr
     (boundedConstructibleLowerStarRestrictScalarsSubfieldIso ℓ h g)
     (TwoSquare.mk _ _ _ _ (boundedConstructibleLowerStarExtendScalarsSubfield ℓ h g))
     (Equiv.apply_symm_apply _ _)
-    (fun i ↦ Linear.toCatCenter F _ (b i))
-    (fun i ↦ Linear.toCatCenter F _ (b i))
+    (fun i ↦ (Linear.toCatCenter F _ (b i)).asHom)
+    (fun i ↦ (Linear.toCatCenter F _ (b i)).asHom)
     hμ hZ hY
   with_reducible exact H
 

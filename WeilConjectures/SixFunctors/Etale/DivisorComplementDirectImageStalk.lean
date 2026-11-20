@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 If `j : U ⟶ X` has the higher direct images of the complement of a divisor `i : D ⟶ X`
 (`AlgebraicGeometry.Etale.HasDivisorComplementDirectImages`), the stalks of `R^q j_* ℤ/ℓ` at a
 geometric point of `D` are `ℤ/ℓ` for `q ≤ 1` and zero for `q ≥ 2` (blueprint
-`det-tf-transverse-corner-constant`): the stalks of a constant sheaf are its value, and the
+`lemma-punctured-surface-punctured-curve--1`): the stalks of a constant sheaf are its value, and the
 stalk of `i_* G` at a geometric point of `D` is the stalk of `G = i^* i_* G`.
 
 ## Main statements

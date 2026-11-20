@@ -13,7 +13,7 @@ public import WeilConjectures.WeilSheaf.Fourier
 # Concentration of the zero-extension transform
 
 For a nonzero irreducible lisse Weil sheaf `M` on a dense open `j : U₀ ↪ 𝔸¹` which is
-constituent-nonexceptional, the blueprint lemma `lem-fd-constituent-nonexceptional-concentration`
+constituent-nonexceptional, the blueprint lemma `proposition-purity-lisse-part-fourier-transform`
 states:
 
 1. the twisted cohomology `H_c^q(U, M ⊗ ℒ_{ψ(ax)})` is concentrated in degree one;
@@ -84,7 +84,7 @@ noncomputable abbrev WeilSheaf.fourierKernelTensor (F : WeilSheaf k₀ l (affine
 
 /-- The compactly supported direct image `Rpr₂!(𝒦_ψ ⊗ pr₁^* F)` is the transform of `F` shifted
 by `-1`: the transform is `Rpr₂!(𝒦_ψ ⊗ pr₁^* -)[1]`, and the pullback and the tensor product
-with the lisse kernel are exact. (blueprint: `def-fd-transform`) -/
+with the lisse kernel are exact. (blueprint: `sec-Fourier-inversion`) -/
 noncomputable def WeilSheaf.derivedLowerShriekFourierKernelTensorIso
     (F : WeilSheaf k₀ l (affineLine k₀)) :
     (WeilComplex.derivedLowerShriek k₀ l (affinePlane.snd k₀)).obj

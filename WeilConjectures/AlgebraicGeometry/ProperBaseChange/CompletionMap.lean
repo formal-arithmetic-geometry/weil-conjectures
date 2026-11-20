@@ -33,8 +33,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 /-!
 # The completion map in the explicit shifted-cone model
 
-Source: Weil conjectures blueprint, proper base change, order 1258
-(blueprint: def-weil-pbc-completion-map). The strict reductions use one fixed K-flat
+The strict reductions use one fixed K-flat
 model. The target is `Cone(1-s)[-1]`; its lift has zero homotopy component.
 -/
 
@@ -51,14 +50,12 @@ variable (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
 variable (d : CompleteCoefficientDatum Λ) {K : proEtaleDerivedCategory X Λ}
 variable (M : AdicKFlatModel X Λ K)
 
-/-- The strict reduction complex at positive level n+1, with Λ scalars retained.
-Source: blueprint order 1258, strict tower (blueprint: def-weil-pbc-completion-map). -/
+/-- The strict reduction complex at positive level n+1, with Λ scalars retained. -/
 noncomputable abbrev adicReductionComplex (n : ℕ) :=
   adicRestrict X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
     (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) M.complex)
 
-/-- The strict quotient transition on the fixed model.
-Source: blueprint order 1258, strict tower (blueprint: def-weil-pbc-completion-map). -/
+/-- The strict quotient transition on the fixed model. -/
 noncomputable def adicReductionComplexStep (n : ℕ) :
     adicReductionComplex X d M (n + 1) ⟶ adicReductionComplex X d M n :=
   adicTransitionComplex X d.ideal M.complex
@@ -66,11 +63,7 @@ noncomputable def adicReductionComplexStep (n : ℕ) :
     (Nat.le_succ (n + 1))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The quotient augmentation is uniquely determined by m ↦ 1 tensor m on local sections.
-Source: blueprint order 1258, formula a_n (blueprint: def-weil-pbc-completion-map).
-Proof: the unit of extension/restriction of scalars has this formula. Its compatibility
-with restrictions and differentials follows from naturality of the tensor unit; these
-sectionwise formulas also give uniqueness. -/
+/-- The quotient augmentation is uniquely determined by m ↦ 1 tensor m on local sections. -/
 theorem adicReductionAugmentation_exists (n : ℕ) :
     ∃! f : M.complex ⟶ adicReductionComplex X d M n,
       ∀ (p : ℤ) (U : X.ProEtᵒᵖ) (m : (M.complex.X p).val.obj U),
@@ -137,36 +130,30 @@ theorem adicReductionAugmentation_exists (n : ℕ) :
     ext m
     exact (hg p U m).trans (ha p U m).symm
 
-/-- The actual quotient chain map, selected by its unique local formula.
-Source: blueprint order 1258, a_n (blueprint: def-weil-pbc-completion-map). -/
+/-- The actual quotient chain map, selected by its unique local formula. -/
 noncomputable def adicReductionAugmentation (n : ℕ) :
     M.complex ⟶ adicReductionComplex X d M n :=
   Classical.choose (adicReductionAugmentation_exists X d M n)
 
-/-- The termwise product complex B.
-Source: blueprint order 1258 (blueprint: def-weil-pbc-completion-map). -/
+/-- The termwise product complex B. -/
 noncomputable abbrev adicReductionProduct := ∏ᶜ (adicReductionComplex X d M)
 
-/-- The product shift, whose n-th coordinate is the next projection then transition.
-Source: blueprint order 1258 (blueprint: def-weil-pbc-completion-map). -/
+/-- The product shift, whose n-th coordinate is the next projection then transition. -/
 noncomputable def adicReductionProductShift :
     adicReductionProduct X d M ⟶ adicReductionProduct X d M :=
   towerProductShift (adicReductionComplexStep X d M)
 
 /-- The explicit shifted cone; mappingCocone is definitionally Cone(1-s)[-1].
 Its terms are B^(j-1) ⊕ B^j, with differential (-d y -(1-s)x, d x), after
-exchanging the two summands of Mathlib's cone convention.
-Source: blueprint order 1258 (blueprint: def-weil-pbc-completion-map). -/
+exchanging the two summands of Mathlib's cone convention. -/
 noncomputable def adicCompletionComplex :=
   CochainComplex.mappingCocone (𝟙 _ - adicReductionProductShift X d M)
 
-/-- The derived completion target is the localization of the displayed cone complex.
-Source: blueprint order 1258 (blueprint: def-weil-pbc-completion-map). -/
+/-- The derived completion target is the localization of the displayed cone complex. -/
 noncomputable def adicCompletionObject : proEtaleDerivedCategory X Λ :=
   (adicLocalization X Λ).obj (adicCompletionComplex X d M)
 
-/-- Projection from the shifted cone onto the product of reductions.
-Source: blueprint order 1258 (blueprint: def-weil-pbc-completion-map). -/
+/-- Projection from the shifted cone onto the product of reductions. -/
 noncomputable def adicCompletionProjection :
     adicCompletionComplex X d M ⟶ adicReductionProduct X d M :=
   CochainComplex.mappingCocone.fst _

@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Orientation.OrientationFiniteReduction
 public import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateSiteDescent
 
 /-! Canonical finite quotient and realization of the completed root lines.
-Source: def-coefficient-twists-detailed (blueprint: def-sf-orientation-finite-line-comparisons). -/
+Source: definition-tate-twists (blueprint: def-sf-orientation-finite-line-comparisons). -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false

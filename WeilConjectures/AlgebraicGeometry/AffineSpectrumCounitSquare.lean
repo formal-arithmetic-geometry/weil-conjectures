@@ -32,8 +32,32 @@ attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] DerivedCategory
   HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
 
-set_option maxHeartbeats 1500000 in
--- The quotient comparison normalization unfolds several derived-category factors.
+private theorem isoPullbackComplexCounitIso_hom_app
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :
+    (isoPullbackComplexCounitIso j).hom.app P =
+      (counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) := by
+  change (derivedPullback j).map (𝟙 _) ≫
+    (counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+    DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
+  erw [(derivedPullback j).map_id, DerivedCategory.Qh.map_id]
+  erw [Category.id_comp, Category.comp_id, Category.comp_id]
+
+private theorem affine_counit_inverse_square
+    {C : Type*} [Category C] {A B C₀ D E F : C}
+    (e : A ≅ B) (c : B ≅ C₀) (a : C₀ ≅ D)
+    (d : A ≅ E) (b : E ≅ F) (f : F ≅ D)
+    (ε : A ⟶ B) (φ : F ⟶ D) (he : e.hom = ε) (hf : f.hom = φ)
+    (h : ε ≫ c.hom ≫ a.hom = d.hom ≫ b.hom ≫ φ) :
+    b.inv ≫ d.inv = f.hom ≫ a.inv ≫ c.inv ≫ e.inv := by
+  rw [← he, ← hf] at h
+  apply (cancel_mono (d.hom ≫ b.hom ≫ f.hom)).1
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← h]
+  simp only [Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
+
 /-- The inverse pullback counits commute with the canonical affine coordinate comparison.
 This is an equation of derived morphisms, independent of f, g, z0 and stalk cohomology.
 
@@ -85,35 +109,6 @@ theorem affineSpectrum_counit_square
   let := hcP
   let := hcQ
   dsimp only
-  have h := affineSpectrum_composition_counit_square g' P
-  change (derivedPullback (Spec.map g'.appTop)).map
-      ((counit X.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-    (counit (Spec.map g'.appTop)).app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
-          (.up ℤ)).obj P)) ≫
-    DerivedCategory.Q.map (affineSpectrumTensorComplexIso g' P).hom = _ at h
-  have hj : (isoPullbackComplexCounitIso X.isoSpec.inv).hom.app P =
-      (counit X.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) := by
-    simp only [isoPullbackComplexCounitIso, DerivedCategory.quotientCompQhIso,
-      Functor.mapHomotopyCategoryFactors, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-      NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-      Iso.symm_hom, asIso_hom, Functor.comp_obj]
-    erw [(derivedPullback X.isoSpec.inv).map_id, DerivedCategory.Qh.map_id]
-    erw [Category.id_comp, Category.comp_id, Category.comp_id]
-  have hj' : (isoPullbackComplexCounitIso X'.isoSpec.inv).hom.app
-      (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) =
-      (counit X'.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) := by
-    simp only [isoPullbackComplexCounitIso, DerivedCategory.quotientCompQhIso,
-      Functor.mapHomotopyCategoryFactors, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-      NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-      Iso.symm_hom, asIso_hom, Functor.comp_obj]
-    erw [(derivedPullback X'.isoSpec.inv).map_id, DerivedCategory.Qh.map_id]
-    erw [Category.id_comp, Category.comp_id, Category.comp_id]
-  rw [← hj, ← hj'] at h
   let e := (derivedPullback (Spec.map g'.appTop)).mapIso
     ((isoPullbackComplexCounitIso X.isoSpec.inv).app P)
   let c := asIso ((counit (Spec.map g'.appTop)).app
@@ -126,10 +121,11 @@ theorem affineSpectrum_counit_square
   let f := (isoPullbackComplexCounitIso X'.isoSpec.inv).app
     (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)
   change b.inv ≫ d.inv = f.hom ≫ a.inv ≫ c.inv ≫ e.inv
-  change e.hom ≫ c.hom ≫ a.hom = d.hom ≫ b.hom ≫ f.hom at h
-  apply (cancel_mono (d.hom ≫ b.hom ≫ f.hom)).1
-  simp only [Category.assoc, Iso.inv_hom_id_assoc]
-  rw [← h]
-  simp only [Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
+  exact affine_counit_inverse_square e c a d b f _ _
+    (congrArg (derivedPullback (Spec.map g'.appTop)).map
+      (isoPullbackComplexCounitIso_hom_app X.isoSpec.inv P))
+    (isoPullbackComplexCounitIso_hom_app X'.isoSpec.inv
+      (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P))
+    (affineSpectrum_composition_counit_square g' P)
 
 end AlgebraicGeometry.SingleComplexBaseChange

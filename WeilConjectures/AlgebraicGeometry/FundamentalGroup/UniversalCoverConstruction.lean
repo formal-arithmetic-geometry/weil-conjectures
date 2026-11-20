@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PathTransport
 public import WeilConjectures.AlgebraicGeometry.Limits.AffineOverLimitProperties
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.PointedGaloisSmall
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.Prorepresentability
+public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
 # Construction of the universal profinite étale cover
@@ -514,11 +515,12 @@ omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 (`AlgebraicGeometry.Scheme.FiniteEtale.isIso_sigmaDesc_of_existsUnique`). -/
 lemma isIso_graphDesc (P : Y.FiniteEtale) [IsGalois P] :
     IsIso (Sigma.desc fun m : ULift.{u + 1} (Aut P) ↦
-      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) m.down.hom.hom.left (𝟙 P.obj.left)
-        (by rw [Category.id_comp]; exact hom_left_comp m.down.hom)) := by
+      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom)
+        m.down.asIso.hom.hom.left (𝟙 P.obj.left)
+        (by rw [Category.id_comp]; exact hom_left_comp m.down.asIso.hom)) := by
   have : Finite (ULift.{u + 1} (Aut P)) := Finite.of_equiv _ Equiv.ulift.symm
   refine isIso_sigmaDesc_of_existsUnique (M := ULift.{u + 1} (Aut P)) y P
-    (fun m ↦ m.down.hom) fun a b ↦ ?_
+    (fun m ↦ m.down.asIso.hom) fun a b ↦ ?_
   obtain ⟨σ, hσ, hu⟩ := (evaluation_aut_bijective_of_isGalois (fiber y) P a).existsUnique b
   exact ⟨⟨σ⟩, hσ, fun m hm ↦ ULift.ext (hu m.down hm)⟩
 
@@ -528,19 +530,20 @@ omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 lemma exists_aut_of_mem_pullback (P : Y.FiniteEtale) [IsGalois P]
     (q : (Limits.pullback P.obj.hom P.obj.hom : Scheme.{u})) :
     ∃ (σ : Aut P) (z : P.obj.left), (Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom)
-      σ.hom.hom.left (𝟙 P.obj.left)
-        (by rw [Category.id_comp]; exact hom_left_comp σ.hom)).base z = q := by
+      σ.asIso.hom.hom.left (𝟙 P.obj.left)
+        (by rw [Category.id_comp]; exact hom_left_comp σ.asIso.hom)).base z = q := by
   have := isIso_graphDesc y P
   set Φ := Sigma.desc fun m : ULift.{u + 1} (Aut P) ↦
-      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) m.down.hom.hom.left (𝟙 P.obj.left)
-        (by rw [Category.id_comp]; exact hom_left_comp m.down.hom)
+      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom)
+        m.down.asIso.hom.hom.left (𝟙 P.obj.left)
+        (by rw [Category.id_comp]; exact hom_left_comp m.down.asIso.hom)
   obtain ⟨m, z, hz⟩ := (sigmaOpenCover fun _ : ULift.{u + 1} (Aut P) ↦ P.obj.left).exists_eq
     ((inv Φ).base q)
   refine ⟨m.down, z, ?_⟩
   rw [sigmaOpenCover_f] at hz
   rw [← Sigma.ι_comp_desc (fun m : ULift.{u + 1} (Aut P) ↦ Limits.pullback.lift (f := P.obj.hom)
-    (g := P.obj.hom) m.down.hom.hom.left (𝟙 P.obj.left)
-      (by rw [Category.id_comp]; exact hom_left_comp m.down.hom)) m, Scheme.Hom.comp_apply]
+    (g := P.obj.hom) m.down.asIso.hom.hom.left (𝟙 P.obj.left)
+      (by rw [Category.id_comp]; exact hom_left_comp m.down.asIso.hom)) m, Scheme.Hom.comp_apply]
   erw [hz]
   rw [← Scheme.Hom.comp_apply, IsIso.inv_hom_id]
   rfl
@@ -550,16 +553,18 @@ omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 /-- The automorphism `σ` in `(σ z, z)` is determined by the point. -/
 lemma aut_eq_of_pullback_lift_eq (P : Y.FiniteEtale) [IsGalois P] (σ σ' : Aut P)
     (z z' : P.obj.left)
-    (h : (Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) σ.hom.hom.left (𝟙 P.obj.left)
-      (by rw [Category.id_comp]; exact hom_left_comp σ.hom)).base z =
-      (Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) σ'.hom.hom.left (𝟙 P.obj.left)
-        (by rw [Category.id_comp]; exact hom_left_comp σ'.hom)).base z') : σ = σ' := by
+    (h : (Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) σ.asIso.hom.hom.left (𝟙 P.obj.left)
+      (by rw [Category.id_comp]; exact hom_left_comp σ.asIso.hom)).base z =
+      (Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) σ'.asIso.hom.hom.left (𝟙 P.obj.left)
+        (by rw [Category.id_comp]; exact hom_left_comp σ'.asIso.hom)).base z') : σ = σ' := by
   have := isIso_graphDesc y P
   set Φ := Sigma.desc fun m : ULift.{u + 1} (Aut P) ↦
-      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) m.down.hom.hom.left (𝟙 P.obj.left)
-        (by rw [Category.id_comp]; exact hom_left_comp m.down.hom)
+      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom)
+        m.down.asIso.hom.hom.left (𝟙 P.obj.left)
+        (by rw [Category.id_comp]; exact hom_left_comp m.down.asIso.hom)
   have e (τ : Aut P) (w : P.obj.left) : (Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom)
-      τ.hom.hom.left (𝟙 P.obj.left) (by rw [Category.id_comp]; exact hom_left_comp τ.hom)).base w =
+      τ.asIso.hom.hom.left (𝟙 P.obj.left)
+        (by rw [Category.id_comp]; exact hom_left_comp τ.asIso.hom)).base w =
       Φ.base ((Sigma.ι (fun _ : ULift.{u + 1} (Aut P) ↦ P.obj.left) ⟨τ⟩).base w) := by
     rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
   rw [e, e] at h
@@ -573,7 +578,7 @@ components containing the images of `q` form a compatible family, i.e. an elemen
 `lim Aut A_j = π₁(Y, y)`. -/
 theorem exists_graph (q : (Limits.pullback (proj y) (proj y) : Scheme.{u})) :
     ∃ (g : Aut (fiber y)) (x : cover y),
-      (Limits.pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport g).hom
+      (Limits.pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport (g).asIso).hom
         (by rw [Category.id_comp, transport_hom, transportHom_proj])).base x = q := by
   have hc := isLimitPairCone (diagram y) (limit.isLimit _) (p y) (map_p y) (proj y) (π_p y)
   let c := pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)
@@ -583,12 +588,12 @@ theorem exists_graph (q : (Limits.pullback (proj y) (proj y) : Scheme.{u})) :
       Limits.pullback.snd _ _ ≫ limit.π (diagram y) j := Limits.pullback.lift_snd _ _ _
   let gr (j : Index y) (σ : Aut ((obj y).obj j)) :
       (diagram y).obj j ⟶ Limits.pullback (p y j) (p y j) :=
-    Limits.pullback.lift (f := p y j) (g := p y j) σ.hom.hom.left (𝟙 _)
-      (by rw [Category.id_comp]; exact hom_left_comp σ.hom)
+    Limits.pullback.lift (f := p y j) (g := p y j) σ.asIso.hom.hom.left (𝟙 _)
+      (by rw [Category.id_comp]; exact hom_left_comp σ.asIso.hom)
   choose σ z hσz₀ using fun j ↦ exists_aut_of_mem_pullback y ((obj y).obj j) ((c.π.app j).base q)
   have hσz (j : Index y) : (gr j (σ j)).base (z j) = (c.π.app j).base q := hσz₀ j
   have hσ {j j' : Index y} (f : j ⟶ j') :
-      (obj y).map f ≫ (σ j').hom = (σ j).hom ≫ (obj y).map f := by
+      (obj y).map f ≫ (σ j').asIso.hom = (σ j).asIso.hom ≫ (obj y).map f := by
     let φ := (obj y).map f
     have hgr : gr j (σ j) ≫ (pairDiagram (diagram y) (p y) (map_p y)).map f =
         φ.hom.left ≫ gr j' (autMap φ (σ j)) := by
@@ -609,22 +614,23 @@ theorem exists_graph (q : (Limits.pullback (proj y) (proj y) : Scheme.{u})) :
     rw [this]
     exact comp_autMap φ (σ j)
   have hσ' {j j' : Index y} (f : j ⟶ j') :
-      (σ j).inv ≫ (obj y).map f = (obj y).map f ≫ (σ j').inv := by
+      (σ j).asIso.inv ≫ (obj y).map f = (obj y).map f ≫ (σ j').asIso.inv := by
     rw [Iso.inv_comp_eq, ← Category.assoc, ← hσ f, Category.assoc, Iso.hom_inv_id,
       Category.comp_id]
-  obtain ⟨η, hη⟩ := exists_end_of_compatible y (fun j ↦ (fiber y).map (σ j).inv (point y j))
+  obtain ⟨η, hη⟩ := exists_end_of_compatible y (fun j ↦ (fiber y).map (σ j).asIso.inv (point y j))
     fun {j j'} f ↦ by
       rw [← ConcreteCategory.comp_apply, ← CategoryTheory.Functor.map_comp, hσ' f,
         CategoryTheory.Functor.map_comp, ConcreteCategory.comp_apply, map_point]
-  let g : Aut (fiber y) := (asIso η).symm
-  have hinvhom (j : Index y) : (σ j).inv.hom.left ≫ (σ j).hom.hom.left = 𝟙 _ :=
-    congrArg (fun ψ ↦ ψ.hom.left) (σ j).inv_hom_id
-  have hhominv (j : Index y) : (σ j).hom.hom.left ≫ (σ j).inv.hom.left = 𝟙 _ :=
-    congrArg (fun ψ ↦ ψ.hom.left) (σ j).hom_inv_id
+  have : IsIso η := isIso_of_fiberFunctor (fiber y) (fiber y) η
+  let g : Aut (fiber y) := Aut.of (asIso η).symm
+  have hinvhom (j : Index y) : (σ j).asIso.inv.hom.left ≫ (σ j).asIso.hom.hom.left = 𝟙 _ :=
+    congrArg (fun ψ ↦ ψ.hom.left) (σ j).asIso.inv_hom_id
+  have hhominv (j : Index y) : (σ j).asIso.hom.hom.left ≫ (σ j).asIso.inv.hom.left = 𝟙 _ :=
+    congrArg (fun ψ ↦ ψ.hom.left) (σ j).asIso.hom_inv_id
   refine ⟨g, (Limits.pullback.fst (proj y) (proj y)).base q, ext_of_isLimit _ hc fun j ↦ ?_⟩
-  have key : Limits.pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport g).hom
+  have key : Limits.pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport g.asIso).hom
       (by rw [Category.id_comp, transport_hom, transportHom_proj]) ≫ c.π.app j =
-      limit.π (diagram y) j ≫ (σ j).inv.hom.left ≫ gr j (σ j) := by
+      limit.π (diagram y) j ≫ (σ j).asIso.inv.hom.left ≫ gr j (σ j) := by
     refine Limits.pullback.hom_ext ?_ ?_
     · rw [Category.assoc, hfst, Limits.pullback.lift_fst_assoc, Category.id_comp]
       simp only [gr, Category.assoc, Limits.pullback.lift_fst]
@@ -632,13 +638,13 @@ theorem exists_graph (q : (Limits.pullback (proj y) (proj y) : Scheme.{u})) :
       exact (Category.comp_id _).symm
     · rw [Category.assoc, hsnd, Limits.pullback.lift_snd_assoc]
       simp only [gr, Category.assoc, Limits.pullback.lift_snd]
-      have h2 := π_comp_eq_toObj y j (σ j).inv
+      have h2 := π_comp_eq_toObj y j (σ j).asIso.inv
       rw [← hη j] at h2
       refine Eq.trans ?_ ((h2.symm.trans (Category.comp_id _).symm).trans (Category.assoc _ _ _))
       rw [π_eq_toObj y j, transport_hom, transportHom_toObj]
       rfl
   have h1 : (limit.π (diagram y) j).base ((Limits.pullback.fst (proj y) (proj y)).base q) =
-      (σ j).hom.hom.left.base (z j) := by
+      (σ j).asIso.hom.hom.left.base (z j) := by
     have e := congrArg (fun h ↦ h.base q) (hfst j)
     simp only [Scheme.Hom.comp_apply] at e
     refine e.symm.trans
@@ -659,7 +665,7 @@ in `A_j ×_Y A_j` only depends on `g⁻¹ a_j`, which is locally constant in `g`
 of opens of the `A_j ×_Y A_j` form a basis of the topology of `Ỹ_y ×_Y Ỹ_y`. -/
 theorem continuous_graph (x : Spec (.of K)) :
     Continuous fun g : Aut (fiber y) ↦ (Limits.pullback.lift (f := proj y) (g := proj y) (pt y)
-      (pt y ≫ (transport g).hom)
+      (pt y ≫ (transport (g).asIso).hom)
       (by rw [Category.assoc, transport_hom, transportHom_proj])).base x := by
   have hc := isLimitPairCone (diagram y) (limit.isLimit _) (p y) (map_p y) (proj y) (π_p y)
   refine (isBasis_preimage_isAffineOpen _ _ hc).continuous_iff.mpr ?_
@@ -668,9 +674,9 @@ theorem continuous_graph (x : Spec (.of K)) :
     (Limits.pullback.lift (point y j).left c.left
       ((fiber_left_comp y _).trans (fiber_left_comp y c).symm)).base x
   have key (g : Aut (fiber y)) : Limits.pullback.lift (f := proj y) (g := proj y) (pt y)
-      (pt y ≫ (transport g).hom) (by rw [Category.assoc, transport_hom, transportHom_proj]) ≫
+      (pt y ≫ (transport g.asIso).hom) (by rw [Category.assoc, transport_hom, transportHom_proj]) ≫
         (pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)).π.app j =
-      Limits.pullback.lift (point y j).left (g.inv.app _ (point y j)).left
+      Limits.pullback.lift (point y j).left (g.asIso.inv.app _ (point y j)).left
         ((fiber_left_comp y _).trans (fiber_left_comp y _).symm) := by
     refine Limits.pullback.hom_ext ?_ ?_
     · rw [Category.assoc, Limits.pullback.lift_fst]
@@ -678,13 +684,13 @@ theorem continuous_graph (x : Spec (.of K)) :
       exact (pt_π y j).trans (Limits.pullback.lift_fst _ _ _).symm
     · rw [Category.assoc, Limits.pullback.lift_snd]
       refine (Limits.pullback.lift_snd_assoc _ _ _ _).trans ?_
-      change pt y ≫ (transport g).hom ≫ limit.π (diagram y) j = _
+      change pt y ≫ (transport g.asIso).hom ≫ limit.π (diagram y) j = _
       rw [π_eq_toObj, transport_hom, transportHom_toObj, pt_toObj]
       exact (Limits.pullback.lift_snd _ _ _).symm
-  have hcont : Continuous fun g : Aut (fiber y) ↦ g.inv.app ((obj y).obj j) (point y j) :=
+  have hcont : Continuous fun g : Aut (fiber y) ↦ g.asIso.inv.app ((obj y).obj j) (point y j) :=
     Continuous.congr ((continuous_of_discreteTopology
       (f := fun σ : Aut ((fiber y).obj ((obj y).obj j)) ↦
-      σ.inv (point y j))).comp ((continuous_apply ((obj y).obj j)).comp
+      σ.asIso.inv (point y j))).comp ((continuous_apply ((obj y).obj j)).comp
       (continuous_induced_dom (f := autEmbedding (fiber y))))) fun _ ↦ rfl
   convert (isOpen_discrete {c | R c ∈ V}).preimage hcont using 1
   ext g
@@ -710,13 +716,11 @@ omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 the unique `σ` with `σ⁻¹ a_j = g⁻¹ a_j`. -/
 lemma existsUnique_autAt (j : Index y) (g : Aut (fiber y)) :
     ∃! σ : Aut ((obj y).obj j),
-      (fiber y).map σ.inv (point y j) = g.inv.app ((obj y).obj j) (point y j) := by
+      (fiber y).map σ.asIso.inv (point y j) = g.asIso.inv.app ((obj y).obj j) (point y j) := by
   obtain ⟨τ, hτ, hu⟩ := (evaluation_aut_bijective_of_isGalois (fiber y) ((obj y).obj j)
-    (point y j)).existsUnique (g.inv.app ((obj y).obj j) (point y j))
-  refine ⟨τ.symm, hτ, fun σ hσ ↦ ?_⟩
-  have := hu σ.symm hσ
-  rw [← this]
-  rfl
+    (point y j)).existsUnique (g.asIso.inv.app ((obj y).obj j) (point y j))
+  refine ⟨τ⁻¹, hτ, fun σ hσ ↦ ?_⟩
+  simpa only [inv_inv] using congrArg Inv.inv (hu σ⁻¹ hσ)
 
 /-- The automorphism of `A_j` through which a loop acts on the point `a_j`. -/
 noncomputable def autAt (j : Index y) (g : Aut (fiber y)) : Aut ((obj y).obj j) :=
@@ -725,38 +729,42 @@ noncomputable def autAt (j : Index y) (g : Aut (fiber y)) : Aut ((obj y).obj j) 
 omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 /-- The defining property of `autAt`. -/
 lemma autAt_spec (j : Index y) (g : Aut (fiber y)) :
-    (fiber y).map (autAt y j g).inv (point y j) = g.inv.app ((obj y).obj j) (point y j) :=
+    (fiber y).map (autAt y j g).asIso.inv (point y j) =
+      g.asIso.inv.app ((obj y).obj j) (point y j) :=
   (existsUnique_autAt y j g).exists.choose_spec
 
 omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 /-- A loop acts on the point `a_j` through `autAt`. -/
 lemma hom_app_point (j : Index y) (g : Aut (fiber y)) :
-    g.hom.app ((obj y).obj j) (point y j) = (fiber y).map (autAt y j g).hom (point y j) := by
-  have e := ConcreteCategory.congr_hom (g.inv.naturality (autAt y j g).hom) (point y j)
+    g.asIso.hom.app ((obj y).obj j) (point y j) =
+      (fiber y).map (autAt y j g).asIso.hom (point y j) := by
+  have e := ConcreteCategory.congr_hom (g.asIso.inv.naturality (autAt y j g).asIso.hom) (point y j)
   simp only [FintypeCat.comp_apply] at e
   rw [← autAt_spec] at e
-  have e₁ := ConcreteCategory.congr_hom ((fiber y).mapIso (autAt y j g)).inv_hom_id (point y j)
+  have e₁ := ConcreteCategory.congr_hom
+    ((fiber y).mapIso ((autAt y j g)).asIso).inv_hom_id (point y j)
   simp only [Functor.mapIso_inv, Functor.mapIso_hom, FintypeCat.comp_apply,
     FintypeCat.id_apply] at e₁
   rw [e₁] at e
-  calc g.hom.app ((obj y).obj j) (point y j)
-      = g.hom.app _ (g.inv.app _ ((fiber y).map (autAt y j g).hom (point y j))) := by rw [e]
-    _ = _ := inv_app_hom_app g.symm _ _
+  calc g.asIso.hom.app ((obj y).obj j) (point y j)
+      = g.asIso.hom.app _
+          (g.asIso.inv.app _ ((fiber y).map (autAt y j g).asIso.hom (point y j))) := by rw [e]
+    _ = _ := inv_app_hom_app g.asIso.symm _ _
 
 /-- The graph `x ↦ (x, g x)` of the transport along a loop. -/
 noncomputable abbrev loopGraph (g : Aut (fiber y)) :
     cover y ⟶ Limits.pullback (proj y) (proj y) :=
-  Limits.pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport g).hom
+  Limits.pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport (g).asIso).hom
     (by rw [Category.id_comp, transport_hom, transportHom_proj])
 
 /-- The graph of the transport along a loop `g` at the stage `A_j`: the graph of `autAt j g`. -/
 lemma loopGraph_comp_pairCone (g : Aut (fiber y)) (j : Index y) :
     loopGraph y g ≫ (pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)).π.app j =
-      limit.π (diagram y) j ≫ (autAt y j g).inv.hom.left ≫
-        Limits.pullback.lift (f := p y j) (g := p y j) (autAt y j g).hom.hom.left (𝟙 _)
-          (by rw [Category.id_comp]; exact hom_left_comp (autAt y j g).hom) := by
-  have hinvhom : (autAt y j g).inv.hom.left ≫ (autAt y j g).hom.hom.left = 𝟙 _ :=
-    congrArg (fun ψ ↦ ψ.hom.left) (autAt y j g).inv_hom_id
+      limit.π (diagram y) j ≫ (autAt y j g).asIso.inv.hom.left ≫
+        Limits.pullback.lift (f := p y j) (g := p y j) (autAt y j g).asIso.hom.hom.left (𝟙 _)
+          (by rw [Category.id_comp]; exact hom_left_comp (autAt y j g).asIso.hom) := by
+  have hinvhom : (autAt y j g).asIso.inv.hom.left ≫ (autAt y j g).asIso.hom.hom.left = 𝟙 _ :=
+    congrArg (fun ψ ↦ ψ.hom.left) (autAt y j g).asIso.inv_hom_id
   refine Limits.pullback.hom_ext ?_ ?_
   · simp only [Category.assoc, Limits.pullback.lift_fst,
       Limits.pullback.lift_fst_assoc, Category.id_comp]
@@ -764,10 +772,10 @@ lemma loopGraph_comp_pairCone (g : Aut (fiber y)) (j : Index y) :
     exact (Category.comp_id _).symm
   · simp only [Category.assoc, Limits.pullback.lift_snd,
       Limits.pullback.lift_snd_assoc, Category.comp_id]
-    have h2 := π_comp_eq_toObj y j (autAt y j g).inv
+    have h2 := π_comp_eq_toObj y j (autAt y j g).asIso.inv
     rw [autAt_spec] at h2
     rw [h2]
-    change (transport g).hom ≫ limit.π (diagram y) j = _
+    change (transport g.asIso).hom ≫ limit.π (diagram y) j = _
     rw [π_eq_toObj y j, transport_hom, transportHom_toObj]
 
 /-- **The loop of a point of `Ỹ_y ×_Y Ỹ_y` is unique**: the graphs of the transports along
@@ -782,9 +790,9 @@ lemma eq_of_loopGraph_eq {g g' : Aut (fiber y)} {x x' : cover y}
     rw [loopGraph_comp_pairCone, loopGraph_comp_pairCone] at e
     simp only [Scheme.Hom.comp_apply] at e
     exact aut_eq_of_pullback_lift_eq y _ _ _ _ _ e
-  have hinv : g.inv = g'.inv := natTrans_ext_point y fun j ↦ by
+  have hinv : g.asIso.inv = g'.asIso.inv := natTrans_ext_point y fun j ↦ by
     rw [← autAt_spec, ← autAt_spec, hj j]
-  exact Iso.ext (by rw [← Iso.inv_eq_inv]; exact hinv)
+  exact Aut.ext (Iso.ext (by rw [← Iso.inv_eq_inv]; exact hinv))
 
 /-- The loop `g ∈ π₁(Y, y)` of a point `q = (x, g x)` of `Ỹ_y ×_Y Ỹ_y`. -/
 noncomputable def loop (q : (Limits.pullback (proj y) (proj y) : Scheme.{u})) : Aut (fiber y) :=
@@ -803,8 +811,8 @@ omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 /-- The summand index is locally constant. -/
 lemma isLocallyConstant_pairIndex (j : Index y) : IsLocallyConstant (pairIndex y j) := by
   let gr (σ : Aut ((obj y).obj j)) : (diagram y).obj j ⟶ Limits.pullback (p y j) (p y j) :=
-    Limits.pullback.lift (f := p y j) (g := p y j) σ.hom.hom.left (𝟙 _)
-      (by rw [Category.id_comp]; exact hom_left_comp σ.hom)
+    Limits.pullback.lift (f := p y j) (g := p y j) σ.asIso.hom.hom.left (𝟙 _)
+      (by rw [Category.id_comp]; exact hom_left_comp σ.asIso.hom)
   have : IsIso (Sigma.desc fun m : ULift.{u + 1} (Aut ((obj y).obj j)) ↦ gr m.down) :=
     isIso_graphDesc y ((obj y).obj j)
   have hgr (σ : Aut ((obj y).obj j)) : IsOpenImmersion (gr σ) := by
@@ -845,25 +853,25 @@ lemma autAt_loop (j : Index y) (q : (Limits.pullback (proj y) (proj y) : Scheme.
 theorem continuous_loop : Continuous (loop y) := by
   refine continuous_induced_rng.2 (continuous_pi fun P ↦ ?_)
   refine IsLocallyConstant.continuous ?_
-  have hx (x : (fiber y).obj P) : IsLocallyConstant fun q ↦ (loop y q).hom.app P x := by
+  have hx (x : (fiber y).obj P) : IsLocallyConstant fun q ↦ (loop y q).asIso.hom.app P x := by
     obtain ⟨j, φ, rfl⟩ := exists_hom_point y P x
     have h (q : (Limits.pullback (proj y) (proj y) : Scheme.{u})) :
-        (loop y q).hom.app P ((fiber y).map φ (point y j)) = (fiber y).map φ ((fiber y).map
+        (loop y q).asIso.hom.app P ((fiber y).map φ (point y j)) = (fiber y).map φ ((fiber y).map
           (pairIndex y j (((pairCone (diagram y) (p y) (map_p y) (proj y)
-            (π_p y)).π.app j).base q)).hom (point y j)) := by
-      have e := ConcreteCategory.congr_hom ((loop y q).hom.naturality φ) (point y j)
+            (π_p y)).π.app j).base q)).asIso.hom (point y j)) := by
+      have e := ConcreteCategory.congr_hom ((loop y q).asIso.hom.naturality φ) (point y j)
       simp only [FintypeCat.comp_apply] at e
       rw [e, hom_app_point, autAt_loop]
     simp only [h]
     exact (((isLocallyConstant_pairIndex y j).comp_continuous
       (((pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)).π.app j).base.hom.continuous)).comp
-        fun σ ↦ (fiber y).map φ ((fiber y).map σ.hom (point y j)))
+        fun σ ↦ (fiber y).map φ ((fiber y).map σ.asIso.hom (point y j)))
   rw [IsLocallyConstant.iff_eventually_eq]
   intro q₀
   filter_upwards [Filter.eventually_all.2 fun x ↦ (IsLocallyConstant.iff_eventually_eq _).1
     (hx x) q₀] with q hq
-  change (loop y q).app P = (loop y q₀).app P
-  exact Iso.ext (ConcreteCategory.hom_ext _ _ hq)
+  change Aut.of ((loop y q).asIso.app P) = Aut.of ((loop y q₀).asIso.app P)
+  exact Aut.ext (Iso.ext (ConcreteCategory.hom_ext _ _ hq))
 
 end Graph
 

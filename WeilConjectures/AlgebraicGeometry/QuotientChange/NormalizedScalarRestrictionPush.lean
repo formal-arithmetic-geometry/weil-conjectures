@@ -14,6 +14,10 @@ public import WeilConjectures.AlgebraicGeometry.NormalizedScalarRestrictionPush
 
 The comparison obtained by uniqueness of right adjoints is the geometric mate of the
 canonical exact restriction/pullback comparison.
+
+## References
+
+* Stacks Project, Tags 0D6D, 0D6E and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -113,7 +117,7 @@ private theorem scalar_mate_fac (a : Λ ⟶ Λ') [IsMonHom a]
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory (CondensedRing.pullIso a f).hom (.up ℤ)).app P) =
       (((mateEquiv (scalarAdj a Y) (scalarAdj a X)).symm
-        (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv)).natTrans).app
+        (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv))).app
           (DerivedCategory.Qh.obj P) ≫
         (L Λ' f).map ((scalarCounit a Y).app P) ≫
         (pullCounit (Λ := Λ') f).app
@@ -233,7 +237,7 @@ private theorem normalized_inverse (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hb : PullNormalized a f b) :
     b.inv = ((mateEquiv (scalarAdj a Y) (scalarAdj a X)).symm
-      (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv)) := by
   have := comparisonCounit_derived a f
   apply Functor.leftDerived_ext _ (comparisonCounit a f)
     (HomotopyCategory.quasiIso (Modules Λ Y) (.up ℤ)) _
@@ -272,35 +276,7 @@ private theorem normalized_inverse (a : Λ ⟶ Λ') [IsMonHom a]
   rfl
 
 /-- Normalizing scalar extension against the ordinary balancing map identifies the
-right-adjoint-uniqueness comparison with the geometric mate of exact scalar restriction.
-
-Source: blueprint integral proper-base-change proof, paragraphs (1) and (3), the
-adjunction normalization in step 3 of the integral quotient direct-image comparison;
-Stacks Project, Tags 0D6D, 0D6E and 07A6
-(blueprint: lem-sfb-normalized-scalar-restriction-push).
-
-Proof:
-1. The inverse ordinary balancing map is the conjugate of comapLowerStarIso under
-extension/restriction and geometric pullback/direct image: this is the definition of
-CondensedRing.pullIso. Equivalently, its scalar-adjunction mate is the inverse of
-comapUpperStarIso. Check the latter identity on balanced generators; scalar units
-insert 1, geometric units pull sections back, and the counits multiply coefficients.
-The cartesian coefficient square makes the resulting two expressions equal.
-2. Apply these identities degreewise to cochain complexes and pass to homotopy
-categories. The defining factorization equations for the derived scalar and geometric
-adjunctions preserve the units and counits. PullNormalized identifies b with this
-localized balancing comparison: after the universal computation counits its equation
-is exactly the ordinary equation of step 1. On flat-term K-flat resolutions the
-computation counits are isomorphisms, since geometric pullback is exact and preserves
-flat-term K-flat complexes. Cancel them and descend along resolutions. Consequently
-the scalar-adjunction mate of b.inv is scalarRestrictionPull.inv.
-3. Take geometric mates of this equality. Expanding the two mates gives on one side
-the conjugate of b.inv for the composite adjunctions, and on the other side
-scalarRestrictionPush by its definition. The conjugate for the composite adjunctions
-is precisely restrictPush.hom by uniqueness of right adjoints. Naturality and the
-triangle identities identify the two composites, proving the asserted equality.
-The argument does not require flat scalar change: only the chosen resolutions are
-flat. It also applies to identity maps, zero coefficient rings and empty schemes. -/
+right-adjoint-uniqueness comparison with the geometric mate of exact scalar restriction. -/
 theorem normalized_scalar_restriction_push
     (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X)
@@ -308,11 +284,11 @@ theorem normalized_scalar_restriction_push
     (restrictPush a f b).hom = scalarRestrictionPush a f := by
   have h := normalized_inverse a f b hb
   have hq : (mateEquiv (scalarAdj a Y) (scalarAdj a X)
-      (TwoSquare.mk _ _ _ _ b.inv)).natTrans = (scalarRestrictionPull a f).inv := by
+      (TwoSquare.mk _ _ _ _ b.inv)) = (scalarRestrictionPull a f).inv := by
     rw [h]
     change (mateEquiv (scalarAdj a Y) (scalarAdj a X)
       ((mateEquiv (scalarAdj a Y) (scalarAdj a X)).symm
-        (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv))).natTrans = _
+        (TwoSquare.mk _ _ _ _ (scalarRestrictionPull a f).inv))) = _
     rw [Equiv.apply_symm_apply]
   have hi := iterated_mateEquiv_conjugateEquiv
     (scalarAdj a Y) (scalarAdj a X) (adj Λ f) (adj Λ' f)

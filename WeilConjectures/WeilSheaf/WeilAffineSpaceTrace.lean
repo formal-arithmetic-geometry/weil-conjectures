@@ -395,7 +395,7 @@ private theorem trace_all
 
 
 /-- The trace of the standard affine-space projection on arbitrary Weil complexes.
-Source: `thm-pur-vector-bundle-thom`, convolution-kernel proof Step 4.
+Source: `lemma-integral-linear-character--1`, convolution-kernel proof Step 4.
 
 Proof: induct on the finite coordinate type. For the empty type the structure
 map is an isomorphism, so its integral is the identity and the zero twist and

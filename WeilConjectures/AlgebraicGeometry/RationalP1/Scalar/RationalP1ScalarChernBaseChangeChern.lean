@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChern
 import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChernBaseChangeChernNone
 
 /-! # Component equations for scalar Chern base change
-
-Source: latest blueprint, sk-prop-diagonal-tower-coefficients.proof.md (3a)--(3c),
-and sk-prop-p1-adjunction-rational-triangle.proof.md, second identity.
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +34,7 @@ set_option linter.unusedVariables false in
 This is a strict component of scalar_chern_base_change. Its finite-coefficient
 option is split into the concrete finite-intermediate-field and closure cases;
 each case retains the geometric exchange mate, root-normalized Tate comparison,
-and whole-system normalized Chern construction as its remaining obligation.
-(blueprint: lem-sfb-rational-p1-scalar-chern-base-change). -/
+and whole-system normalized Chern construction as its remaining obligation. -/
 theorem scalar_chern_base_change_chern
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

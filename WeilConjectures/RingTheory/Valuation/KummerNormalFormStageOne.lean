@@ -379,7 +379,7 @@ lemma valuation_coeff_some_zero_lt (K L₂ : Subfield Ω) (hp : p.Prime) (hp1 : 
       fun j ↦ lt_of_le_of_ne (hcμ j) (h j))
   obtain ⟨γ, hγK, hγ⟩ := hroot (c j₀) (hcK j₀)
   have hvγ : v γ = σ := by
-    refine pow_left_injective (M := Γ₀) hp.ne_zero ?_
+    refine @pow_left_injective Γ₀ inferInstance inferInstance p hp.ne_zero _ _ ?_
     simp only
     rw [← map_pow, hγ, hj₀, hμσ]
   have hγ0 : γ ≠ 0 := by

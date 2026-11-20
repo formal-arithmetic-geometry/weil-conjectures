@@ -58,8 +58,8 @@ closed subgroup cut out by `E` has the Lie algebra of `G`, hence the dimension o
 
 ## Blueprint
 
-- `lem-ag-lie-stable-subspace`: group-invariant and Lie-invariant subspaces agree.
-- `lem-ag-lie-centre`: the Lie algebra of the centre.
+- `lemma-stable-subspaces-center--1`: group-invariant and Lie-invariant subspaces agree.
+- `lemma-stable-subspaces-center--2`: the Lie algebra of the centre.
 -/
 
 @[expose] public section
@@ -245,7 +245,7 @@ variable (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
 /-- The Lie algebra `𝔤 ⊆ gl_n` of the closed subgroup `G = V(I)` of `GL_n`: the matrices `X` with
 `1 + εX ∈ G(k[ε])`, the tangent space of `G` at the identity. The bracket is the mixed term of
 the commutator of tangent vectors over `k[ε₁][ε₂]`.
-(blueprint: `def-wf-lie-algebra-derivation`, `lem-ag-lie-stable-subspace`) -/
+(blueprint: `def-wf-lie-algebra-derivation`, `lemma-stable-subspaces-center--1`) -/
 noncomputable def lieSubalgebra : LieSubalgebra k (Matrix n n k) where
   carrier := {X | dualUnit X ∈ zeroLocus I (DualNumber k)}
   add_mem' {X Y} hX hY := by
@@ -274,7 +274,7 @@ theorem lieSubalgebra_anti {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] (h
   fun _ hX ↦ zeroLocus_anti h hX
 
 /-- If the commutators of `V(I)` lie in `V(J)` (over `k[ε₁][ε₂]`), then the brackets of
-`Lie V(I)` lie in `Lie V(J)`. (blueprint: `lem-ag-closure-commutators`) -/
+`Lie V(I)` lie in `Lie V(J)`. (blueprint: `lemma-normality-geometric-monodromy`) -/
 theorem lie_mem_lieSubalgebra_of_commutator_mem {J : Ideal (CoordinateRing n k)}
     [J.IsHopfIdeal k]
     (h : ∀ g ∈ zeroLocus I (DualNumber (DualNumber k)),
@@ -285,7 +285,7 @@ theorem lie_mem_lieSubalgebra_of_commutator_mem {J : Ideal (CoordinateRing n k)}
 
 variable (I) in
 /-- In characteristic zero, over an algebraically closed field, `G = V(I)` and its reduced
-identity component have the same Lie algebra. (blueprint: `sk-i-cartier`) -/
+identity component have the same Lie algebra. (blueprint: `proposition-cartier-s-theorem`) -/
 theorem lieSubalgebra_identityComponent [IsAlgClosed k] [CharZero k] :
     lieSubalgebra (identityComponent I) = lieSubalgebra I :=
   le_antisymm (lieSubalgebra_anti (le_identityComponent I))
@@ -300,7 +300,8 @@ theorem range_dualCotangentToMatrixₗ :
 
 variable (I) in
 /-- **Cartier's theorem, matrix form**: in characteristic zero, the Lie algebra of `V(I)` has the
-dimension of `V(I)`. (blueprint: `sk-i-cartier`, `lem-wf-same-lie-closed-subgroup`) -/
+dimension of `V(I)`. (blueprint: `proposition-cartier-s-theorem`,
+`lemma-connected-components-images-homomorphisms--3`) -/
 theorem finrank_lieSubalgebra [CharZero k] :
     (Module.finrank k (lieSubalgebra I) : WithBot ℕ∞) =
       ringKrullDim (CoordinateRing n k ⧸ I) := by
@@ -310,7 +311,7 @@ theorem finrank_lieSubalgebra [CharZero k] :
 
 /-- **A closed subgroup with the Lie algebra of a connected group is the whole group**: in
 characteristic zero, if `V(J) ⊆ V(I)` with `I` prime and `Lie V(J) = Lie V(I)`, then `J = I`.
-(blueprint: `lem-wf-same-lie-closed-subgroup`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms--3`) -/
 theorem eq_of_le_of_lieSubalgebra_eq [CharZero k] [I.IsPrime] {J : Ideal (CoordinateRing n k)}
     [J.IsHopfIdeal k] (hIJ : I ≤ J) (h : lieSubalgebra J = lieSubalgebra I) : J = I :=
   eq_of_le_of_ringKrullDim_eq I hIJ (by
@@ -368,7 +369,7 @@ group law. Then every point of `G(k)` has `P` if and only if every tangent vecto
 `X ∈ Lie G`, has `P`.
 
 The closed subgroup `V(I ⊔ span E)` of `G` has the Lie algebra of `G`, hence is `G`
-(`eq_of_le_of_lieSubalgebra_eq`). (blueprint: `lem-ag-lie-stable-subspace`) -/
+(`eq_of_le_of_lieSubalgebra_eq`). (blueprint: `lemma-stable-subspaces-center--1`) -/
 theorem forall_zeroLocus_iff_forall_lieSubalgebra [IsAlgClosed k] [CharZero k] [I.IsPrime]
     (E : Set (CoordinateRing n k))
     (P : (R : Type u) → [CommRing R] → [Algebra k R] → zeroLocus I R → Prop)
@@ -404,7 +405,7 @@ subgroup of `GL_n` (`I` prime) over an algebraically closed field of characteris
 `S` be a family of subalgebras `S R ⊆ Matrix n n R`, cut out by equations `E` on `GL_n`. Then
 every point of `G(k)` lies in `S k` if and only if every tangent vector `1 + εX`, `X ∈ Lie G`,
 lies in `S k[ε]`: invertible matrices of a subalgebra have their inverses in it
-(`Matrix.inv_mem_of_mem_subalgebra`). (blueprint: `lem-ag-lie-stable-subspace`) -/
+(`Matrix.inv_mem_of_mem_subalgebra`). (blueprint: `lemma-stable-subspaces-center--1`) -/
 theorem forall_mem_zeroLocus_iff_forall_mem_lieSubalgebra [IsAlgClosed k] [CharZero k]
     [I.IsPrime] (E : Set (CoordinateRing n k))
     (S : (R : Type u) → [CommRing R] → [Algebra k R] → Subalgebra R (Matrix n n R))
@@ -481,7 +482,7 @@ characteristic zero, a subspace `U ⊆ kⁿ` is stable under a connected closed 
 
 The stabilizer of `U` in `G` is the closed subgroup cut out by the linear equations
 `(1 - P) g P = 0` for a projection `P` onto `U`; its Lie algebra is the stabilizer of `U` in
-`Lie G`. (blueprint: `lem-ag-lie-stable-subspace`) -/
+`Lie G`. (blueprint: `lemma-stable-subspaces-center--1`) -/
 theorem forall_mulVec_mem_iff_forall_lieSubalgebra [IsAlgClosed k] [CharZero k] [I.IsPrime]
     (U : Submodule k (n → k)) :
     (∀ g ∈ zeroLocus I k, ∀ u ∈ U, (g : Matrix n n k) *ᵥ u ∈ U) ↔
@@ -534,7 +535,7 @@ theorem forall_centralizerEquations_iff {T : Set (Matrix n n k)} {R : Type*} [Co
 /-- **A matrix commutes with a connected group if and only if it commutes with its Lie algebra.**
 Over an algebraically closed field of characteristic zero, the matrices of a set `T` commute with
 all of `G(k)`, for `G = V(I)` connected, if and only if they commute with `Lie G`.
-(blueprint: `lem-ag-lie-centre`) -/
+(blueprint: `lemma-stable-subspaces-center--2`) -/
 theorem forall_commute_iff_forall_lieSubalgebra [IsAlgClosed k] [CharZero k] [I.IsPrime]
     (T : Set (Matrix n n k)) :
     (∀ g ∈ zeroLocus I k, ∀ Y ∈ T, Y * g = (g : Matrix n n k) * Y) ↔
@@ -592,7 +593,7 @@ centre of the Lie algebra of `G`: the `X ∈ Lie G` commuting with all of `Lie G
 A tangent vector of `Z(G)` is a tangent vector of `G` commuting with `G(k)` (the scheme-theoretic
 centralizer is reduced, `center_eq_sup_span`), and a matrix commutes with the connected `G(k)` if
 and only if it commutes with `Lie G` (`forall_commute_iff_forall_lieSubalgebra`).
-(blueprint: `lem-ag-lie-centre`) -/
+(blueprint: `lemma-stable-subspaces-center--2`) -/
 theorem mem_lieSubalgebra_center_iff [IsAlgClosed k] [CharZero k] [I.IsPrime]
     {X : Matrix n n k} :
     X ∈ lieSubalgebra (center I) ↔ X ∈ lieSubalgebra I ∧ ∀ Y ∈ lieSubalgebra I, X * Y = Y * X := by

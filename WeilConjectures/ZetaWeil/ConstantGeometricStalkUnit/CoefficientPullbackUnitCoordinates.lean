@@ -31,8 +31,8 @@ import WeilConjectures.ZetaWeil.ConstantPullbackUnitQuasiIsomorphism.ConstantPul
 
 /-! # Finite and completed coefficient pullback units
 
-Source: the constant-sheaf clause of `prop-every-iterate-trace`, reviewed expansion
-steps 2, 3, 5 and 6 (blueprint: lem-zl-coefficient-pullback-unit-coordinates).
+Source: the constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, reviewed
+expansion steps 2, 3, 5 and 6 (blueprint: lem-zl-coefficient-pullback-unit-coordinates).
 
 These are the unchanged coefficient-unit constructions formerly in
 `ConstantGeometricStalkUnit`, together with the proved arbitrary-map integral unit

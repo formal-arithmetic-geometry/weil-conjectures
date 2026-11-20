@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
 /-! # A global derived model for relatively flat higher direct images
 
 Source: Stacks Project, Tag 0B91(2), and the injective-resolution definition of
-higher direct images (blueprint: lem-pc-higher-direct-image-derived-model).
+higher direct images (blueprint: lemma-coherent-base-change-invertible-sheaves--2).
 -/
 
 @[expose] public section
@@ -32,7 +32,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 connective derived model, with cohomology computing every cartesian base change.
 
 Source: Stacks Project, Tag 0B91(2); Tag 079V for computation by injective resolutions.
-(blueprint: lem-pc-higher-direct-image-derived-model).
+(blueprint: lemma-coherent-base-change-invertible-sheaves--2).
 
 Proof: take E = Rf_*(F[0]). Resolve F by an injective resolution in nonnegative degrees.
 The resulting bounded-below complex of injectives is K-injective after embedding

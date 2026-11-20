@@ -10,7 +10,12 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.NativeWeilInduction.NativeWeilInductionComparisonData
 import WeilConjectures.CategoryTheory.DerivedExactCompositionComparison
 
-/-! # Unit normalization of the native proper comparison -/
+/-! # Unit normalization of the native proper comparison
+
+## References
+
+* Stacks Project, Tags 079P, 08BJ and 070Y
+-/
 
 @[expose] public noncomputable section
 
@@ -126,17 +131,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 
 omit [Fact (ringChar k₀ ≠ l)] in
-/-- The canonical proper comparison respects the actual right-derived units.
-Source: comparison proof step 4, Stacks Tags 079P, 08BJ and 070Y.
-(blueprint: lem-sf-native-weil-proper-normalization)
-
-Proof: forgetting preserves K-injectives by the exact free adjunction. For a
-K-injective Weil complex, the lift of proper direct image and ordinary direct image
-therefore use the same underlying complex. The canonical comparison is the composite
-of the right-derived composition isomorphisms, the localization of the literal
-forgetful square, and the exact forgetful comparison. Each factor respects its
-specified derived unit. Composing their unit equations and cancelling the adjacent
-localization factors gives exactly `ProperNormalization`. -/
+/-- The canonical proper comparison respects the actual right-derived units. -/
 theorem nativeWeil_proper_normalization
     {X Y : Scheme.{u}} [X.Over (Spec (.of k₀))] [Y.Over (Spec (.of k₀))]
     (f : X ⟶ Y) [f.IsOver (Spec (.of k₀))] (c : Compactification f) :

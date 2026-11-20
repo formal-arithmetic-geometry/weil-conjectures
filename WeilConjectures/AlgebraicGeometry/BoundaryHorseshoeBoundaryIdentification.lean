@@ -13,7 +13,32 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerivedTriangleConnecting
 universe u wC wD
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
-set_option maxHeartbeats 600000 in
+
+/-- The snake formula evaluated on cycles, with the cycle representatives already chosen. -/
+private theorem boundaryHorseshoe_delta_apply {R : Type u} [Ring R]
+    (H : ShortComplex (CochainComplex (ModuleCat.{u} R) ℕ)) (hH : H.ShortExact)
+    (z : H.X₃.cycles 0) (b : H.X₂.X 0) (a : H.X₁.cycles 1)
+    (hb : H.g.f 0 b = H.X₃.iCycles 0 z)
+    (ha : H.f.f 1 (H.X₁.iCycles 1 a) = H.X₂.d 0 1 b) :
+    hH.δ 0 1 rfl (H.X₃.homologyπ 0 z) = H.X₁.homologyπ 1 a := by
+  have hzero : H.X₃.d 0 1 (H.X₃.iCycles 0 z) = 0 :=
+    congrArg (fun f ↦ f z) (H.X₃.iCycles_d 0 1)
+  have hsnake := hH.δ_apply 0 1 rfl (H.X₃.iCycles 0 z) hzero b hb
+    (H.X₁.iCycles 1 a) ha 2 ((ComplexShape.up ℕ).next_eq' rfl)
+  have hza : H.X₃.cyclesMk (H.X₃.iCycles 0 z) 1
+      ((ComplexShape.up ℕ).next_eq' rfl) hzero = z := by
+    apply (Preadditive.mono_iff_injective (H.X₃.iCycles 0)).1 inferInstance
+    rw [HomologicalComplex.i_cyclesMk]
+    rfl
+  have haa : H.X₁.cyclesMk (H.X₁.iCycles 1 a) 2 ((ComplexShape.up ℕ).next_eq' rfl)
+      (ShortComplex.ShortExact.d_eq_zero_of_f_eq_d_apply hH 0 1 b
+        (H.X₁.iCycles 1 a) ha 2) = a := by
+    apply (Preadditive.mono_iff_injective (H.X₁.iCycles 1)).1 inferInstance
+    rw [HomologicalComplex.i_cyclesMk]
+    rfl
+  rw [hza, haa] at hsnake
+  exact hsnake
+
 -- Comparing X.Modules with module sheaves makes the isomorphism transports expensive.
 set_option backward.isDefEq.respectTransparency false in
 /-- The snake boundary of the global horseshoe equals the derived-triangle boundary.
@@ -70,20 +95,22 @@ theorem boundary_horseshoe_boundary_identification (X : Scheme.{u})
     inferInstanceAs (PreservesFiniteLimits
       (SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op ⊤)))
   obtain ⟨G, hF, hhorse, htriangle⟩ := rightDerived_triangle_connecting v
+  rcases G with ⟨F, add, delta, mono, exm, exr, exl, nat⟩
+  dsimp only at hF
+  subst F
+  dsimp only at hhorse htriangle
   obtain ⟨hH, hδ⟩ := hhorse S hS IA IB IC α β hαβ hιA hιB hrows
   have ht := htriangle S hS 0
   have hd := hδ 0
+  simp only [eqToHom_refl, Category.comp_id, Category.id_comp] at ht hd
   have hcompare : RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0 ≫
       (IA.isoRightDerivedObj v 1).hom =
       (IC.isoRightDerivedObj v 0).hom ≫ hH.δ 0 1 rfl := by
     apply (cancel_mono (IA.isoRightDerivedObj v 1).inv).1
     simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
-    apply (cancel_epi
-      (eqToHom (congrArg (fun F ↦ (F 0).obj S.X₃) hF))).1
     erw [← hd]
     apply (cancel_mono
       (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₁ 1).inv).1
-    simp only [Category.assoc]
     erw [ht]
     simp only [RingedSpace.moduleCohomologyBoundary,
       Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso,
@@ -97,25 +124,7 @@ theorem boundary_horseshoe_boundary_identification (X : Scheme.{u})
     change (IC.toRightDerivedZero' v ≫ H.X₃.iCycles 0) q = _
     erw [InjectiveResolution.toRightDerivedZero'_comp_iCycles]
     rfl
-  have hzero : H.X₃.d 0 1 ((IC.ι.f 0).val.app (op ⊤) q) = 0 := by
-    change (v.map (IC.ι.f 0) ≫ v.map (IC.cocomplex.d 0 1)) q = 0
-    rw [← v.map_comp, IC.ι_f_zero_comp_complex_d, v.map_zero]
-    rfl
-  have hsnake := hH.δ_apply 0 1 rfl
-    ((IC.ι.f 0).val.app (op ⊤) q) hzero b hb
-    (H.X₁.iCycles 1 a) ha 2 ((ComplexShape.up ℕ).next_eq' rfl)
-  have hza : H.X₃.cyclesMk ((IC.ι.f 0).val.app (op ⊤) q) 1
-      ((ComplexShape.up ℕ).next_eq' rfl) hzero = z := by
-    apply (Preadditive.mono_iff_injective (H.X₃.iCycles 0)).1 inferInstance
-    rw [HomologicalComplex.i_cyclesMk]
-    exact hz.symm
-  have haa : H.X₁.cyclesMk (H.X₁.iCycles 1 a) 2 ((ComplexShape.up ℕ).next_eq' rfl)
-      (ShortComplex.ShortExact.d_eq_zero_of_f_eq_d_apply hH 0 1 b
-        (H.X₁.iCycles 1 a) ha 2) = a := by
-    apply (Preadditive.mono_iff_injective (H.X₁.iCycles 1)).1 inferInstance
-    rw [HomologicalComplex.i_cyclesMk]
-    rfl
-  rw [hza, haa] at hsnake
+  have hsnake := boundaryHorseshoe_delta_apply H hH z b a (hb.trans hz.symm) ha
   have haug : v.toRightDerivedZero.app S.X₃ ≫ (IC.isoRightDerivedObj v 0).hom =
       IC.toRightDerivedZero' v ≫ H.X₃.homologyπ 0 := by
     erw [IC.toRightDerivedZero_eq v]

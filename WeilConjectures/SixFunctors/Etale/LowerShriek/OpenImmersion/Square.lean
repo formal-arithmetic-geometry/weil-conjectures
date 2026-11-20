@@ -10,7 +10,8 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseCh
 /-!
 # Open-immersion squares
 
-An *open-immersion square* (blueprint `def-cbc-open-immersion-square`) is a cartesian square
+An *open-immersion square* (blueprint `proposition-extension-zero-restriction-closed-subscheme--11`)
+is a cartesian square
 ```
 U' --g_U--> U
 |           |
@@ -34,7 +35,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `def-cbc-open-immersion-square`: Open-immersion square.
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--11`: Open-immersion square.
 
 A cartesian square `g_U ≫ j = j' ≫ g`
 ```

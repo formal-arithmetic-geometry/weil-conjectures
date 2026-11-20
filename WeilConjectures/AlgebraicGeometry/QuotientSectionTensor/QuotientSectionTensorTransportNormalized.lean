@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTe
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportNormalizedPure
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportNormalizedTotal
 
-/-! # Normalized section tensor comparison for quotient coefficients -/
+/-! # Normalized section tensor comparison for quotient coefficients
+
+## References
+
+* Stacks 03EK, 03EL, 06YS, 07A4 and 0G7D
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -50,18 +55,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- The section tensor comparison can be chosen with its complete balancing and
-derived-total normalization.  This is the presheaf balancing, sheafification,
-K-flat totalization, and resolving-class descent part of the transport proof.
-Source: Stacks 03EK, 03EL, 06YS, 07A4 and 0G7D; parent proof steps 1--5.
-(blueprint: lem-sfb-quotient-section-tensor-transport-normalized).
-
-Proof: define the ordinary map on local pure tensors by inserting the scalar unit,
-and define its inverse by multiplying the two scalar factors.  The balancing and
-restriction identities descend the maps through sheafification.  Apply the
-sectionwise derived tensor descent theorem to flat-term K-flat resolutions.  The
-signed total has the same Koszul sign in each bidegree, and the coproduct
-inclusions give the summand equations and the universal counit square in
-`SectionTensorNormalized`.  No flatness of the coefficient map is used. -/
+derived-total normalization. -/
 theorem section_tensor_transport_normalized (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b) :

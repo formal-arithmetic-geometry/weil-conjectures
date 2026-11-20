@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+public import Mathlib.Algebra.Category.Grp.Zero
 
 @[expose] public section
 

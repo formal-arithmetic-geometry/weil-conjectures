@@ -27,7 +27,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 400000 in
 -- Elaborate the dependent raw-resolution and presentation families together.
 /-- Construct coherent first-page comparisons while retaining the supplied bicomplexes.
 Source: Stacks Project, Tags 015J and 015K, and the quotient-page construction of

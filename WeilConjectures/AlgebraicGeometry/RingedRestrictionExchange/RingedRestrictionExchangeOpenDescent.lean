@@ -25,9 +25,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 /-!
 # Normalized ringed restriction exchange and open descent
 
-Source: Stacks Project, Tags 08FI, 09T5, 09A5 and 00XZ
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent).
-
 ## Main statements
 
 * `resolution_formula`: the two-resolution formula and its choice independence.
@@ -40,9 +37,14 @@ Source: Stacks Project, Tags 08FI, 09T5, 09A5 and 00XZ
 `actualSquare p h R` has exactly the four rings in the statement. The general
 `StrictTowerRingedSquare` interfaces allow their canonically isomorphic presentations;
 no arbitrary exchange transformation is an input. Every pullback here is exact.
-The tensor presentation in the published module pullback is extension only along an
+The tensor presentation in the module pullback is extension only along an
 isomorphism: its contraction is s ⊗ m ↦ c⁻¹(s)m, so it is precisely inverse image
 with transported action. No coefficient extension or finiteness condition is imposed.
+
+## References
+
+* Stacks 070I and 070K
+* Stacks 08FI, 09T5, 09A5, 03CB and 00XZ
 -/
 
 @[expose] public noncomputable section
@@ -97,8 +99,7 @@ attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleDirec
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
 
-/-- Exact localization of the canonical inverse-image square. Source: Stacks 09T5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- Exact localization of the canonical inverse-image square. -/
 abbrev pullSquare (r : StrictTowerRingedSquare sq) :
     (basePull r).mapDerivedCategory ⋙ (targetPull r).mapDerivedCategory ≅
       (verticalPull r).mapDerivedCategory ⋙ (upperPull r).mapDerivedCategory :=
@@ -106,8 +107,7 @@ abbrev pullSquare (r : StrictTowerRingedSquare sq) :
     r.cf r.cg r.cg' r.cf' r.coherent
 
 /-- The canonical quasi-isomorphism-independent resolution comparison; it does not require
-that the resolution map be monic. Source: Stacks 070I and 070K
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+that the resolution map be monic. -/
 def resolutionIso (r : StrictTowerRingedSquare sq)
     {K I : CochainComplex (proEtaleRingModules X r.RX) ℤ}
     [I.IsKInjective] (a : K ⟶ I) [QuasiIso a] :
@@ -342,20 +342,7 @@ private theorem scheme_derived_iso_of_chain (e : F ⋙ G ⟶ H ⋙ J) [IsIso e]
   exact derived_iso_of_chain F G H J e δ hδ
 end SchemeOpenComparisonTransfer
 
-/-- The open comparison is the specified derived mate and is an isomorphism.
-Source: Stacks 08FI, 09A5 and 00XZ
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent).
-Proof: step 6. On a K-injective I the two functors evaluate on Q → U as sections on
-S ×_Z Q and S_U ×_U Q. Their canonical fibre-product identification gives the ordinary
-comparison of proetale-open-restriction-counit, with the same ring action. Open restriction
-preserves K-injectives, so its termwise comparison computes both derived functors.
-The resolution formula identifies it with the derived mate. It is invertible and
-natural, independently of I. The ordinary geometric assertion is isolated as
-ordinary_open_isIso. For the derived assertion, exchange_chain on a K-injective
-resolution has invertible cochain units on both sides, since upper open pullback
-preserves K-injectives. The termwise ordinary exchange is invertible degreewise.
-Cancel the two comparison factors, then transport along the resolution isomorphism
-using naturality of exchange. -/
+/-- The open comparison is the specified derived mate and is an isomorphism. -/
 theorem open_comparison (r : StrictTowerRingedSquare sq) [IsOpenImmersion g] :
     IsIso (ordinary r) ∧ IsIso (exchange r) := by
   have ho : IsIso (ordinary r) := ordinary_open_isIso r
@@ -370,17 +357,7 @@ end OpenSectionwise
 variable {U : Scheme.{u}} {j : U ⟶ Y}
 
 /-- Restricting the global exchange equals the exchange of the restricted square,
-through the specified open comparisons and canonical pullback-composition maps.
-Source: Stacks 08FI, 09T5, 09A5, 03CB and 00XZ
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent).
-Proof: step 7. Restrict a and b; their targets remain K-injective by open restriction.
-The ordinary open comparison's counit equation rewrites the restricted counit as
-the local counit preceded by the local inverse-image comparison. Taking the local
-adjoint transpose consequently identifies restricted ordinary exchange with local
-ordinary exchange after the p/open comparison. The coefficient and composition maps
-agree by their shared projection-preserving fibre-product descriptions. Naturality of
-the p'/open comparison with b identifies the final direct-image arrow. Localizing
-these equal chain maps gives the displayed equality of derived morphisms. -/
+through the specified open comparisons and canonical pullback-composition maps. -/
 theorem open_restriction (r : StrictTowerRingedSquare sq) [IsOpenImmersion j]
     (C : OpenCube r j)
     (K : DerivedCategory (proEtaleRingModules X r.RX)) :
@@ -394,13 +371,7 @@ theorem open_restriction (r : StrictTowerRingedSquare sq) [IsOpenImmersion j]
   simpa only [pullSquare] using restriction_exchange_cube r C K
 
 /-- The identity direct-image comparison is uniquely fixed on every section by the
-actual identity fibre-product map. Source: Stacks 09A5 and 00XZ
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent).
-Proof: step 9. The direct image on an object V is the module on V ×_X X. Restriction
-along V → V ×_X X identifies it with the original module on V. These maps are linear
-because the coefficient identity is the adjunction conjugate of the same site identity.
-They are natural and inverse to restriction along the first projection. Equality on all
-sections proves uniqueness, with no condition on the ring or scheme. -/
+actual identity fibre-product map. -/
 theorem identityDirect_existsUnique (Z : Scheme.{u})
     (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) :
     ∃! e : proEtaleRingModuleDirectImage (𝟙 Z) R R
@@ -451,16 +422,14 @@ theorem identityDirect_existsUnique (Z : Scheme.{u})
   ext M V m
   exact (hd' M V.unop m).trans (hd M V.unop m).symm
 
-/-- The section-normalized identity direct image. Source: Stacks 09A5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- The section-normalized identity direct image. -/
 def identityDirect (Z : Scheme.{u}) (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) :
     proEtaleRingModuleDirectImage (𝟙 Z) R R
       (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) ≅ 𝟭 _ :=
   (identityDirect_existsUnique Z R).exists.choose
 
 /-- The identity inverse-image comparison is its adjunction conjugate, so has no
-freely chosen natural automorphism. Source: Stacks 09A5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+freely chosen natural automorphism. -/
 def identityPull (Z : Scheme.{u}) (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) :
     proEtaleRingModulePullback (𝟙 Z) R R
       (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) ≅ 𝟭 _ :=
@@ -468,20 +437,14 @@ def identityPull (Z : Scheme.{u}) (R : Sheaf (ProEt.topology Z) CommRingCat.{u +
     (AlgebraicGeometry.ProEtaleTensorComparison.ringId R)).ofNatIsoRight
       (identityDirect Z R)).leftAdjointUniq Adjunction.id
 
-/-- Exact localization of the normalized module identity. Source: Stacks 09T5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- Exact localization of the normalized module identity. -/
 def identityDerivedPull (Z : Scheme.{u})
     (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) :
     (proEtaleRingModulePullback (𝟙 Z) R R
       (AlgebraicGeometry.ProEtaleTensorComparison.ringId R)).mapDerivedCategory ≅ 𝟭 _ :=
   Functor.mapDerivedCategoryNatIso (identityPull Z R) ≪≫ Functor.mapDerivedCategoryIdIso _
 
-/-- Canonical coefficient identities commute with any inverse-image coefficient map.
-Source: Stacks 03CB and 09A5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent).
-Proof: step 9 and step 1. Both composites are the given coefficient map after the
-unit-normalized identity compositor. The identity triangles for the sheaf adjunction
-identify them. Naturality allows arbitrary isomorphic presentations of the coefficient. -/
+/-- Canonical coefficient identities commute with any inverse-image coefficient map. -/
 theorem identityCoefficients_coherent {P T : Scheme.{u}} (p : P ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology P) CommRingCat.{u + 1})
@@ -516,8 +479,7 @@ theorem identityCoefficients_coherent {P T : Scheme.{u}} (p : P ⟶ T)
       (Category.id_comp c.hom)).symm
 
 /-- The coefficient presentation of the identity square, with the actual identity
-ring comparisons. Source: Stacks 09A5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+ring comparisons. -/
 def identityRings {P T : Scheme.{u}} (p : P ⟶ T)
     (s : ChosenCartesianSquare (𝟙 P) p p (𝟙 T))
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
@@ -610,6 +572,27 @@ private theorem direct_transport {A B : Scheme.{u}}
   change m = N.val.map (𝟙 _) m
   rw [PresheafOfModules.map_id]
   rfl
+
+private theorem direct_transport_inv {A B : Scheme.{u}}
+    {R : Sheaf (ProEt.topology B) CommRingCat.{u + 1}}
+    {S : Sheaf (ProEt.topology A) CommRingCat.{u + 1}}
+    {z w : RingedArrow A B R S} (e : z = w)
+    (N : proEtaleRingModules A S) (V : B.ProEt)
+    (m : ((arrowPush w).obj N).val.obj (op V)) :
+    ((eqToIso (congrArg arrowPush e)).inv.app N).val.app (op V) m =
+      N.val.map ((eqToIso (congrArg arrowBase e)).hom.app V).op m := by
+  cases e
+  change m = N.val.map (𝟙 _) m
+  rw [PresheafOfModules.map_id]
+  rfl
+
+private theorem iso_trans_symm_eq_of_hom_comp {A : Type*} [Category A]
+    {W X Y Z : A} (a : W ≅ X) (t : X ≅ Y) (b : Z ≅ Y) (d : W ≅ Z)
+    (h : a.hom ≫ t.hom = d.hom ≫ b.hom) : a ≪≫ t ≪≫ b.symm = d := by
+  apply Iso.ext
+  change a.hom ≫ t.hom ≫ b.inv = d.hom
+  rw [← Category.assoc, h]
+  simp
 
 private theorem identityDirect_hom_sections (Z : Scheme.{u})
     (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})
@@ -716,7 +699,7 @@ private theorem identity_mate {C D : Type*} [Category C] [Category D]
     (B : C ⥤ C) (H : D ⥤ D) (b : B ≅ 𝟭 C) (h : H ≅ 𝟭 D)
     (θ : B ⋙ L ≅ L ⋙ H)
     (hθ : ∀ M, θ.hom.app M ≫ h.hom.app (L.obj M) = L.map (b.hom.app M)) (M : D) :
-    (mateEquiv a a (TwoSquare.mk B L L H θ.hom)).natTrans.app M ≫
+    (mateEquiv a a (TwoSquare.mk B L L H θ.hom)).app M ≫
         R.map (h.hom.app M) = b.hom.app (R.obj M) := by
   dsimp [mateEquiv]
   simp only [Category.id_comp, Category.comp_id, Category.assoc]
@@ -744,7 +727,7 @@ private theorem localized_exchange
       (mateEquiv (proEtaleRingDerivedAdjunction f r.RY r.RX r.cf)
         (proEtaleRingDerivedAdjunction f' r.RY' r.RX' r.cf')
         (TwoSquare.mk _ _ _ _
-          (Functor.mapDerivedCategorySquareIso r.exchangeModuleSquare).hom)).natTrans := by
+          (Functor.mapDerivedCategorySquareIso r.exchangeModuleSquare).hom)) := by
   unfold exchange proEtaleAmbientRingedExchange
   rw [r.ambientSquare_localization]
 
@@ -777,7 +760,6 @@ private theorem left_square_of_conjugate {C D : Type*} [Category C] [Category D]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.defeqAttrib.useBackward false in
-set_option maxHeartbeats 1300000 in
 -- Section comparisons reduce the chosen site pullbacks and their module structures.
 private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
@@ -828,40 +810,22 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   let da := conjugateIsoEquiv ah (arrowAdj z) a
   let db := conjugateIsoEquiv ab (arrowAdj w) b
   let t := (eqToIso (congrArg arrowPush e)).symm
-  have hc := conjugate_square_transport e ah ab a b
-  change conjugateIsoEquiv ah ab (b.symm ≪≫
-    eqToIso (congrArg arrowPull e) ≪≫ a) = _
-  rw [hc]
-  apply Iso.ext
+  rw [conjugate_square_transport e ah ab a b]
+  apply iso_trans_symm_eq_of_hom_comp
   apply NatTrans.ext
   funext N
-  apply (cancel_mono (db.hom.app N)).mp
-  change (da.hom.app N ≫ t.hom.app N ≫ db.inv.app N) ≫ db.hom.app N = _
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
-    Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
-  erw [Category.id_comp ((identityDirect T R).inv.app
-    ((proEtaleRingModuleDirectImage p R S c).obj N) ≫ db.hom.app N)]
+    Category.assoc, Category.id_comp]
   ext V m
   simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
     ModuleCat.comp_apply]
-  change (t.hom.app N).val.app V ((da.hom.app N).val.app V m) =
-    (db.hom.app N).val.app V (((identityDirect T R).inv.app
-      ((proEtaleRingModuleDirectImage p R S c).obj N)).val.app V
-      ((((proEtaleRingModuleDirectImage p R S c).map
-        ((identityDirect P S).hom.app N)).val.app V) m))
   have hda := ha N V.unop m
   change (da.hom.app N).val.app V m = _ at hda
   rw [hda]
-  have htr := direct_transport e.symm N V.unop
-    (N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-      (𝟙 P) p).hom.app V.unop).op m)
-  change (t.hom.app N).val.app V
-      (N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-        (𝟙 P) p).hom.app V.unop).op m) = _ at htr
-  rw [htr]
+  rw [direct_transport_inv e]
   have hidP := identityDirect_hom_sections P S N ((proEtaleBaseChange p).obj V.unop) m
   change (((proEtaleRingModuleDirectImage p R S c).map
     ((identityDirect P S).hom.app N)).val.app V) m = _ at hidP
@@ -870,7 +834,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     ((proEtaleRingModuleDirectImage p R S c).obj N) V.unop
     (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
       ((proEtaleBaseChange p).obj V.unop)).op m)
-  rw [hidT]
+  erw [hidT]
   have hdb := hb N V.unop
     (N.val.map ((proEtaleBaseChange p).map
       ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop)).op
@@ -878,37 +842,25 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
         ((proEtaleBaseChange p).obj V.unop)).op m))
   change (db.hom.app N).val.app V _ = _ at hdb
   erw [hdb]
+  let comp := (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
+    p (𝟙 T)).hom.app V.unop
+  let idT := (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop
+  let idP := (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
+    ((proEtaleBaseChange p).obj V.unop)
   set_option backward.isDefEq.respectTransparency false in
   have hcombine :
-      N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-          p (𝟙 T)).hom.app V.unop).op
-        (N.val.map ((proEtaleBaseChange p).map
-          ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop)).op
-          (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
-            ((proEtaleBaseChange p).obj V.unop)).op m)) =
-      N.val.map (((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-          p (𝟙 T)).hom.app V.unop) ≫
-        (proEtaleBaseChange p).map
-          ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop) ≫
-        (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
-          ((proEtaleBaseChange p).obj V.unop)).op m := by
+      N.val.map comp.op
+        (N.val.map ((proEtaleBaseChange p).map idT).op
+          (N.val.map idP.op m)) =
+      N.val.map (comp ≫ (proEtaleBaseChange p).map idT ≫ idP).op m := by
     simp only [op_comp, PresheafOfModules.map_comp_apply]
     rfl
   rw [hcombine]
   simp only [← PresheafOfModules.map_comp_apply, ← op_comp]
-  apply congrArg (fun k : (proEtaleBaseChange (p ≫ 𝟙 T)).obj V.unop ⟶
+  exact congrArg (fun k : (proEtaleBaseChange (p ≫ 𝟙 T)).obj V.unop ⟶
       (proEtaleBaseChange (𝟙 P)).obj ((proEtaleBaseChange p).obj V.unop) ↦
     N.val.map k.op m)
-  change (eqToIso (congrArg (fun q ↦ proEtaleBaseChange q)
-      (congrArg Sigma.fst e))).hom.app V.unop ≫
-      (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) (𝟙 P) p).hom.app
-        V.unop =
-      (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) p (𝟙 T)).hom.app V.unop ≫
-        (proEtaleBaseChange p).map
-          ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop) ≫
-        (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
-          ((proEtaleBaseChange p).obj V.unop)
-  exact site_identity p (congrArg Sigma.fst e) V.unop
+    (site_identity p (congrArg Sigma.fst e) V.unop)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -951,14 +903,7 @@ private theorem identity_square {P T : Scheme.{u}} (p : P ⟶ T)
 set_option backward.defeqAttrib.useBackward false in
 -- Compare the concrete derived functors with the localized ordinary identity square.
 /-- For the identity base change exchange is the identity under the canonical
-identity and resolution comparisons. Source: Stacks 09A5 and 09T5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent).
-Proof: normalize the ordinary identity square by conjugating its two compositors
-and its coefficient transport. Their sectionwise formulas reduce to the identity
-laws for fibre-product pullback. Exact localization preserves this equation and the
-canonical identity comparisons. Naturality and the adjunction triangle then identify
-the mate with the identity under these comparisons. Taking S = p⁻¹R and c = id gives
-the node's coefficients. -/
+identity and resolution comparisons. -/
 theorem identity_normalization {P T : Scheme.{u}} (p : P ⟶ T)
     (s : ChosenCartesianSquare (𝟙 P) p p (𝟙 T))
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})

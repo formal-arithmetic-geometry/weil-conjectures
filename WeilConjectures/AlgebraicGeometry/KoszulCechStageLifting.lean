@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.KoszulCechComparisonConstruction
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
+public import Mathlib.Algebra.Module.LocalizedModule.Away
 
 /-! # Finite-stage lifting for the Koszul-to-Čech cocone
 

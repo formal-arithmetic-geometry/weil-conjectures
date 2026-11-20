@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.Topology.InverseImageModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Scalar compatibility of the inverse-image extension unit
 

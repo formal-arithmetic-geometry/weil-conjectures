@@ -56,7 +56,7 @@ instance preservesColimitsOfShape_tensorLeft
             have hinl :
                 (binaryCofan M (K.obj j)).inl ≫ (M ◁ K.map u) = (binaryCofan M (K.obj j')).inl := by
               apply CommAlgCat.hom_ext
-              simp only [pair_obj_left, coe_tensorObj, binaryCofan_pt, binaryCofan_inl, hom_comp,
+              simp only [coe_tensorObj, binaryCofan_pt, binaryCofan_inl, hom_comp,
                 whiskerLeft_hom, ConcreteCategory.hom_ofHom]
               exact (Algebra.TensorProduct.map_comp_includeLeft _ _).trans (AlgHom.comp_id _)
             have hu' := congrArg (fun f => (binaryCofan M (K.obj j)).inl ≫ f) hu
@@ -83,7 +83,7 @@ instance preservesColimitsOfShape_tensorLeft
                 (binaryCofan M (K.obj j)).inr ≫ (M ◁ K.map u) =
                   K.map u ≫ (binaryCofan M (K.obj j')).inr := by
               apply CommAlgCat.hom_ext
-              simp only [pair_obj_right, coe_tensorObj, binaryCofan_pt, binaryCofan_inr, hom_comp,
+              simp only [coe_tensorObj, binaryCofan_pt, binaryCofan_inr, hom_comp,
                 whiskerLeft_hom, ConcreteCategory.hom_ofHom]
               exact Algebra.TensorProduct.map_comp_includeRight _ _
             have hu' := congrArg (fun f => (binaryCofan M (K.obj j)).inr ≫ f) hu
@@ -119,7 +119,7 @@ instance preservesColimitsOfShape_tensorLeft
     · have hinl :
           (binaryCofan M (K.obj j)).inl ≫ (M ◁ c.ι.app j) = (binaryCofan M c.pt).inl := by
         apply CommAlgCat.hom_ext
-        simp only [pair_obj_left, coe_tensorObj, binaryCofan_pt, binaryCofan_inl, hom_comp,
+        simp only [coe_tensorObj, binaryCofan_pt, binaryCofan_inl, hom_comp,
           whiskerLeft_hom, ConcreteCategory.hom_ofHom]
         exact (Algebra.TensorProduct.map_comp_includeLeft _ _).trans (AlgHom.comp_id _)
       -- left part
@@ -133,7 +133,7 @@ instance preservesColimitsOfShape_tensorLeft
           (binaryCofan M (K.obj j)).inr ≫ (M ◁ c.ι.app j) =
             c.ι.app j ≫ (binaryCofan M c.pt).inr := by
         apply CommAlgCat.hom_ext
-        simp only [pair_obj_right, coe_tensorObj, binaryCofan_pt, binaryCofan_inr, hom_comp,
+        simp only [coe_tensorObj, binaryCofan_pt, binaryCofan_inr, hom_comp,
           whiskerLeft_hom, ConcreteCategory.hom_ofHom]
         exact Algebra.TensorProduct.map_comp_includeRight _ _
       -- right part
@@ -158,7 +158,7 @@ instance preservesColimitsOfShape_tensorLeft
         have hinl :
             (binaryCofan M (K.obj j)).inl ≫ (M ◁ c.ι.app j) = (binaryCofan M c.pt).inl := by
           apply CommAlgCat.hom_ext
-          simp only [pair_obj_left, coe_tensorObj, binaryCofan_pt, binaryCofan_inl, hom_comp,
+          simp only [coe_tensorObj, binaryCofan_pt, binaryCofan_inl, hom_comp,
             whiskerLeft_hom, ConcreteCategory.hom_ofHom]
           exact (Algebra.TensorProduct.map_comp_includeLeft _ _).trans (AlgHom.comp_id _)
         have h := congrArg (fun f => (binaryCofan M (K.obj j)).inl ≫ f) (hm j)
@@ -189,7 +189,7 @@ instance preservesColimitsOfShape_tensorLeft
             (binaryCofan M (K.obj j)).inr ≫ (M ◁ c.ι.app j) =
               c.ι.app j ≫ (binaryCofan M c.pt).inr := by
           apply CommAlgCat.hom_ext
-          simp only [pair_obj_right, coe_tensorObj, binaryCofan_pt, binaryCofan_inr, hom_comp,
+          simp only [coe_tensorObj, binaryCofan_pt, binaryCofan_inr, hom_comp,
             whiskerLeft_hom, ConcreteCategory.hom_ofHom]
           exact Algebra.TensorProduct.map_comp_includeRight _ _
         have h := congrArg (fun f => (binaryCofan M (K.obj j)).inr ≫ f) (hm j)

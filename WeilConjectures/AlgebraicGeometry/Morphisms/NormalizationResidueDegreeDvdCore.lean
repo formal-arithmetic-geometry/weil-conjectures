@@ -11,8 +11,17 @@ import Mathlib.GroupTheory.Coset.Card
 
 /-! # The Galois arithmetic part of normalization residue-degree divisibility
 
-Source: Stacks Project, Tag 09EB. The geometric comparison with normalization is
+The geometric comparison with normalization is
 supplied separately; the Galois action is an explicit hypothesis here.
+
+## References
+
+* Stacks Project, Tag 09EB
+
+## Implementation details
+
+The statement is for finite flat extensions of domains, more general than the DVR case of
+the source.
 -/
 
 @[expose] public section
@@ -20,14 +29,7 @@ universe u v w
 namespace AlgebraicGeometry.Scheme
 
 /-- The residue degree of a prime in a finite flat Galois extension of domains divides
-any finite group containing its Galois group as a subgroup.
-
-Source: Stacks Project, Tag 09EB. Apply the fundamental Galois identity at the prime
-under `q`. Galois transitivity identifies its common inertia degree with `q.inertiaDeg R`.
-This degree divides the product of the number of primes, ramification index and residue
-degree, which is the order of `T`. Lagrange's theorem then gives divisibility by `|G|`.
-The finite flat domain version in Mathlib is more general than the DVR case of the source.
-(blueprint: lem-sbc-root-normalization-generic-stalk-residue-degree-dvd-core) -/
+any finite group containing its Galois group as a subgroup. -/
 theorem normalization_residue_degree_dvd_core
     {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     [IsDomain R] [IsDomain S] [Algebra R S] [Module.Finite R S] [Module.Flat R S]

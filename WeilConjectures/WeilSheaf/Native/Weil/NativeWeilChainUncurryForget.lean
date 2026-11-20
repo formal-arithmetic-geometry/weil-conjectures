@@ -21,7 +21,20 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 open TensorEvaluation
 variable {k₀ l X}
 
-set_option maxHeartbeats 800000 in
+-- Cancel the comparison before specializing to the concrete tensor complexes.
+private theorem uncurry_summand_comparison
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {A B T : C} {A' B' : D} (e : F.obj B ≅ B') (a : F.obj A ≅ A')
+    (i : A ⟶ B) (j : A' ⟶ B') (g : B ⟶ T) (g' : B' ⟶ F.obj T)
+    (u : A ⟶ T) (u' : A' ⟶ F.obj T)
+    (hi : F.map i ≫ e.hom = a.hom ≫ j) (hg : i ≫ g = u)
+    (hg' : j ≫ g' = u') (hu : a.inv ≫ F.map u = u') :
+    j ≫ (e.inv ≫ F.map g) = j ≫ g' := by
+  apply (cancel_epi a.hom).mp
+  rw [← Category.assoc, ← hi]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  rw [← F.map_comp, hg, hg', ← hu, Iso.hom_inv_id_assoc]
+
 -- Comparing total components instantiates the two native tensor-Hom adjunctions.
 /-- Forgetting the two normalized chain-level uncurrying maps gives the same map
 after the total-tensor comparison.
@@ -79,22 +92,15 @@ theorem native_weil_chain_uncurry_forget
   intro n
   apply HomologicalComplex.mapBifunctor.hom_ext
   intro p q hpq
-  have hi : HomologicalComplex.ιMapBifunctor ((UC).obj P) ((UC).obj Q)
-        (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-        (.up ℤ) p q n hpq ≫ (N.chain P Q).inv.f n =
-      N.underived.inv.app (P.X p, Q.X q) ≫
-        (U).map (HomologicalComplex.ιMapBifunctor P Q N.tensor (.up ℤ) p q n hpq) := by
-    apply (cancel_epi (N.underived.hom.app (P.X p, Q.X q))).mp
-    rw [← Category.assoc, ← N.chain_summand P Q p q n hpq]
-    simp only [Category.assoc, ← HomologicalComplex.comp_f, Iso.hom_inv_id,
-      HomologicalComplex.id_f, Iso.hom_inv_id_app_assoc]
-    exact Category.comp_id _
   change _ ≫ ((N.chain P Q).inv.f n ≫ (U).map (ψ.f n)) = _
-  rw [← Category.assoc, hi, Category.assoc, ← Functor.map_comp, hψ, hψ' p q n hpq]
+  refine uncurry_summand_comparison (U)
+    ((HomologicalComplex.eval _ (.up ℤ) n).mapIso (N.chain P Q))
+    (N.underived.app (P.X p, Q.X q)) _ _ _ _ _ _
+    (N.chain_summand P Q p q n hpq) (hψ p q n hpq) (hψ' p q n hpq) ?_
   have hu := N.underived_uncurry (P.X p) (Q.X q) (I.X n)
     (φ.f q ≫ CochainComplex.bifunctorHomπ (HW) P I q p n hpq)
   simp only [Adjunction.homEquiv_counit] at hu
-  rw [hu]
+  refine hu.trans ?_
   simp only [HomologicalComplex.comp_f, Category.assoc, hc]
   rfl
 

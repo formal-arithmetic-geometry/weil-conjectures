@@ -86,8 +86,8 @@ reparametrisation, `deg x = [κ(x) : k]`:
 theorem geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow [Finite k]
     (x : X.finitePoints) :
     f.geometricFiberPointOfFinitePoint x ≫
-        (f.geometricGaloisFrobenius ^ f.degreeOver x.1).hom =
-      (specGeometricFrobenius k ^ f.degreeOver x.1).hom ≫
+        (f.geometricGaloisFrobenius ^ f.degreeOver x.1).asIso.hom =
+      (specGeometricFrobenius k ^ f.degreeOver x.1).asIso.hom ≫
         f.geometricFiberPointOfFinitePoint x := by
   let := (f.residueFieldAlgebraMap x.1).toAlgebra
   have : Finite (X.residueField x.1) := X.mem_finitePoints.1 x.2
@@ -112,8 +112,8 @@ theorem geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow [Fini
 theorem geometricFiberPoint_fieldPoints_comp_geometricGaloisFrobenius_pow [Finite k] (n : ℕ)
     (ι : FiniteField.galoisExtension k n →ₐ[k] AlgebraicClosure k)
     (y : f.fieldPoints (FiniteField.galoisExtension k n)) :
-    f.geometricFiberPoint ι y.1 y.2 ≫ (f.geometricGaloisFrobenius ^ n).hom =
-      (specGeometricFrobenius k ^ n).hom ≫ f.geometricFiberPoint ι y.1 y.2 := by
+    f.geometricFiberPoint ι y.1 y.2 ≫ (f.geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius k ^ n).asIso.hom ≫ f.geometricFiberPoint ι y.1 y.2 := by
   rcases eq_or_ne n 0 with rfl | hn
   · exact (Category.comp_id _).trans (Category.id_comp _).symm
   have : Finite (FiniteField.galoisExtension k n) := Module.finite_of_finite k
@@ -164,9 +164,9 @@ theorem exists_iso_comp_eq_comp_geometricGaloisFrobenius_pow [Finite k]
       (s' ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _))
     (hx : (s ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _) ∈ X.finitePoints) :
     ∃ (g : Spec (.of (AlgebraicClosure k)) ≅ Spec (.of (AlgebraicClosure k))) (j : ℕ), 1 ≤ j ∧
-      g.hom ≫ s = s' ≫ (f.geometricGaloisFrobenius ^ j).hom ∧
-      ∀ m : ℕ, g.hom ≫ (specGeometricFrobenius k ^ m).hom =
-        (specGeometricFrobenius k ^ m).hom ≫ g.hom := by
+      g.hom ≫ s = s' ≫ (f.geometricGaloisFrobenius ^ j).asIso.hom ∧
+      ∀ m : ℕ, g.hom ≫ (specGeometricFrobenius k ^ m).asIso.hom =
+        (specGeometricFrobenius k ^ m).asIso.hom ≫ g.hom := by
   let := Fintype.ofFinite k
   set x := (s ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _)
   have : Finite (X.residueField x) := X.mem_finitePoints.1 hx

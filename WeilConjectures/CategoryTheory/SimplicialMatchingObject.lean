@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Terminal
 /-!
 # Blueprint statements
 
-lem-weil-pbc-hypercover-refinement.
+corollary-cohomology-pro-etale-affine.
 -/
 
 @[expose] public section
@@ -24,14 +24,14 @@ open scoped Simplicial
 
 namespace CategoryTheory.SimplicialObject
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 def matchingBoundaryShape (n : ℕ) : MulticospanShape where
   L := Fin (n + 3)
   R := {p : Fin (n + 3) × Fin (n + 3) // p.1 < p.2}
   fst p := p.val.1
   snd p := p.val.2
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- Required definitions for corollary-cohomology-pro-etale-affine. -/
 def matchingBoundaryIndex {C : Type u} [Category.{v} C] (K : SimplicialObject C) (n : ℕ) :
     MulticospanIndex (matchingBoundaryShape n) C where
   left _ := K _⦋n + 1⦌

@@ -37,7 +37,7 @@ Proof:
 1. Forget to sets and factor the map from the product presheaf through its sheafification
 by the universal property [def-weil-pbc-sheafification]. Underlying abelian and ring
 sheafifications agree with set sheafification [lem-pc-sites-sheafification-underlying-sets].
-2. Sheafification preserves binary products [lem-weil-pbc-sheafification-sets-exact];
+2. Sheafification preserves binary products [situation-conventions];
 transport the resulting map to the product of the two module sheafifications.
 3. Check additivity and scalar compatibility after precomposition with the units on the
 products of the ring and module presheaves. These identities hold by bilinearity of the

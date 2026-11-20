@@ -139,7 +139,6 @@ private theorem shift_iso_hom {B Y : Scheme.{u}} (h : Y ⟶ B) (q : ℤ)
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 400000 in
 -- Comparing the two canonical section functors requires substantial type reduction.
 set_option maxRecDepth 2048 in
 private theorem raw_pullback_homology {B Y Y' : Scheme.{u}}

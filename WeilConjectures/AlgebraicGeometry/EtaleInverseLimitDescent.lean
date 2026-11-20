@@ -39,7 +39,7 @@ Proof:
    themselves mapping into affine opens W of S₀. Local finite presentation makes the
    maps of their coordinate rings finitely presented
    (lem-weil-pbc-affine-open-spec-points, lem-weil-pbc-morphism-into-affine-scheme,
-   lem-weil-pbc-lfp-affine-opens-finite-presentation, def-weil-pbc-scheme-conventions).
+   lem-weil-pbc-lfp-affine-opens-finite-presentation, definition-ind-etale-pro-etale-weakly--3).
 2. The inverse images Wᵢ are affine by pqf-def-affine-morphism. Their coordinate rings
    have colimit A, and the inverse image of W in the limit is Spec A, compatibly with
    projections (lem-weil-pbc-limit-affine-transition, lem-weil-pbc-spec-colimit-limit,
@@ -50,15 +50,15 @@ Proof:
    lem-weil-pbc-open-fibre-product, lem-weil-pbc-fibre-product-affine-spectra,
    lem-weil-pbc-colimit-etale-ring-map). The source pieces cover every stage.
 4. Restrict the étale limit morphism to these opens and transport across the affine
-   identifications (lem-weil-pbc-etale-composition-cancellation).
+   identifications (definition-torsion-sheaves--3).
 5. Apply lem-weil-pbc-colimit-etale-ring-map to each affine triple. Étaleness persists
    at larger indices by tensor cancellation and étale base change
    (lem-weil-pbc-tensor-cancel-base-change, lem-weil-pbc-etale-ring-base-change,
-   lem-weil-pbc-etale-composition-cancellation).
+   definition-torsion-sheaves--3).
 6. Directedness gives a common upper bound of the finitely many indices and i₀.
    At this stage the restrictions are étale; their source opens cover, so the entire
    morphism is étale (lem-weil-pbc-etale-local-on-source,
-   lem-weil-pbc-etale-composition-cancellation). -/
+   definition-torsion-sheaves--3). -/
 theorem Etale.exists_stage_of_inverseLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

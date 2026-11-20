@@ -60,7 +60,8 @@ lemma frobeniusStr_upperStar_adicConstant_comp (φ : X ⟶ Y)
     ((upperStar φ).obj (adicConstant k₀ l Y)).frobeniusStr ≫
         ProEtale.upperStarAdicConstantSheafHom l
           (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀)))) =
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[
+        WeilCoefficients.{u} l].map
           (ProEtale.upperStarAdicConstantSheafHom l
             (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))) ≫
         (adicConstant k₀ l X).frobeniusStr := by
@@ -68,9 +69,9 @@ lemma frobeniusStr_upperStar_adicConstant_comp (φ : X ⟶ Y)
     Category.assoc, Category.assoc, Category.assoc]
   -- `exact` times out in the kernel, unfolding `adicConstant` against `adicConstantSheaf`
   convert ProEtale.upperStarAdicConstantSheafHom_exchange (l := l)
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
     (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ _).symm using 4
   all_goals rfl
 
@@ -85,11 +86,11 @@ noncomputable def upperStarAdicConstantIso (φ : X ⟶ Y) [φ.IsOver (Spec (Comm
       refine Mod.hom_ext _ _ ?_
       rw [Mod.comp_hom', Mod.comp_hom', ProEtale.adicLowerStar_map_hom,
         ← cancel_epi ((ProEtale.upperStarIsoLowerStarInv _
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app _),
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).hom.app _),
         ← (ProEtale.upperStarIsoLowerStarInv _
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.naturality_assoc,
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).hom.naturality_assoc,
         ← Category.assoc ((ProEtale.upperStarIsoLowerStarInv _
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app _)]
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).hom.app _)]
       convert (frobeniusStr_upperStar_adicConstant_comp φ).symm using 2
       all_goals rfl))
 

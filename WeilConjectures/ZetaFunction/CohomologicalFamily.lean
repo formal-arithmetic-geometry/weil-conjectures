@@ -35,20 +35,20 @@ recovered from it by the flat base change `Hⁱ(X, ℚ_ℓ) ⊗ ℚ̄_ℓ = Hⁱ
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.frobeniusCharpolyRev`: the polynomial `P_{i,ℓ}`
-  (`def-weil-smooth-proper-cohomological-family`, `det-def-cohfamily`).
+  (`prose-19-07`).
 - `AlgebraicGeometry.Scheme.IsIntegralFrobeniusFactor`: an integral polynomial realizing
-  `P_{i,ℓ}` for every `ℓ ≠ p` (`def-weil-integral-frobenius-factor`).
+  `P_{i,ℓ}` for every `ℓ ≠ p` (`theorem-weil-conjectures-smooth-proper-schemes--1`).
 - `AlgebraicGeometry.Scheme.oddFrobeniusProduct`, `AlgebraicGeometry.Scheme.evenFrobeniusProduct`:
-  the parity products `N_ℓ`, `D_ℓ` (`def-weil-parity-products`).
+  the parity products `N_ℓ`, `D_ℓ` (`lemma-reciprocal-roots-zeta`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.exists_traceDatum`: the cohomological family is a trace datum whose
   integers are the point counts.
 - `AlgebraicGeometry.Scheme.map_zetaSeries_mul_evenFrobeniusProduct`: the trace-to-determinant
-  identity (`det-thm-tracetodeterminant`, `thm-zl-lefschetz-weil-identity`).
+  identity (`corollary-point-counting-zeta-function--5`).
 - `LinearMap.inv_alternatingCharpolyRevProd_eq_exp` and
-  `AlgebraicGeometry.Scheme.trace_determinant`: `prop-trace-determinant`.
+  `AlgebraicGeometry.Scheme.trace_determinant`: `lemma-logarithm-determinant--3`.
 -/
 
 @[expose] public section
@@ -66,7 +66,7 @@ variable {K : Type*} [Field K] [CharZero K] {W : ℤ → Type*} [∀ i, AddCommG
 `(W i, u i)`: the inverse of the alternating determinant
 `∏ᵢ det (1 - T uᵢ)^{(-1)^i}` is `exp (∑_{n ≥ 1} (∑ᵢ (-1)ⁱ Tr(uᵢⁿ)) Tⁿ / n)`, the exponential of
 the alternating trace series. Equivalently, `log Δ` is the alternating trace series, for
-`Δ = ∏ᵢ det (1 - T uᵢ)^{(-1)^{i+1}}` (blueprint `prop-trace-determinant`). -/
+`Δ = ∏ᵢ det (1 - T uᵢ)^{(-1)^{i+1}}` (blueprint `lemma-logarithm-determinant--3`). -/
 theorem inv_alternatingCharpolyRevProd_eq_exp (s : Finset ℤ) (u : ∀ i, Module.End K (W i)) :
     (alternatingCharpolyRevProd s u 1)⁻¹ =
       (PowerSeries.exp K).subst (alternatingTraceSeries s u) := by
@@ -156,7 +156,7 @@ variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `def-weil-smooth-proper-cohomological-family` (and `det-def-cohfamily`): the
+/-- Blueprint `prose-19-07` (and `prose-19-07`): the
 determinant factor
 
 `P_{i,ℓ}(T) = det(1 - T Fᵢ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`
@@ -175,19 +175,19 @@ theorem frobeniusCharpolyRev_def (i : ℤ) :
       ((WeilSheaf.adicConstant k₀ l X).cohomology i).localPolynomial :=
   rfl
 
-/-- `P_{i,ℓ}` has constant coefficient `1` (`def-weil-smooth-proper-cohomological-family`). -/
+/-- `P_{i,ℓ}` has constant coefficient `1` (`prose-19-07`). -/
 @[simp]
 theorem coeff_zero_frobeniusCharpolyRev (i : ℤ) : (frobeniusCharpolyRev k₀ l X i).coeff 0 = 1 :=
   FrobeniusModule.coeff_zero_localPolynomial _
 
-/-- `P_{i,ℓ}` has degree `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`def-weil-smooth-proper-cohomological-family`). -/
+/-- `P_{i,ℓ}` has degree `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`prose-19-07`). -/
 theorem natDegree_frobeniusCharpolyRev (i : ℤ) :
     (frobeniusCharpolyRev k₀ l X i).natDegree =
       Module.finrank (PadicAlgCl l) ((WeilSheaf.adicConstant k₀ l X).cohomology i).carrier :=
   FrobeniusModule.natDegree_localPolynomial _
 
 /-- `P_{i,ℓ}` has leading coefficient `(-1)^{dim Hⁱ} det Fᵢ`
-(`def-weil-smooth-proper-cohomological-family`). -/
+(`prose-19-07`). -/
 theorem leadingCoeff_frobeniusCharpolyRev (i : ℤ) :
     (frobeniusCharpolyRev k₀ l X i).leadingCoeff =
       (-1) ^ Module.finrank (PadicAlgCl l)
@@ -195,21 +195,21 @@ theorem leadingCoeff_frobeniusCharpolyRev (i : ℤ) :
         LinearMap.det ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd :=
   FrobeniusModule.leadingCoeff_localPolynomial _
 
-/-- Blueprint `def-weil-parity-products`: the odd parity product
+/-- Blueprint `lemma-reciprocal-roots-zeta`: the odd parity product
 `N_ℓ(T) = ∏_{0 ≤ i ≤ 2d, i odd} P_{i,ℓ}(T)`. -/
 noncomputable def oddFrobeniusProduct (d : ℕ) : Polynomial (PadicAlgCl l) :=
   ∏ i ∈ (Finset.range (2 * d + 1)).filter Odd, frobeniusCharpolyRev k₀ l X i
 
-/-- Blueprint `def-weil-parity-products`: the even parity product
+/-- Blueprint `lemma-reciprocal-roots-zeta`: the even parity product
 `D_ℓ(T) = ∏_{0 ≤ i ≤ 2d, i even} P_{i,ℓ}(T)`. -/
 noncomputable def evenFrobeniusProduct (d : ℕ) : Polynomial (PadicAlgCl l) :=
   ∏ i ∈ (Finset.range (2 * d + 1)).filter Even, frobeniusCharpolyRev k₀ l X i
 
 end Defs
 
-/-- Blueprint `def-weil-integral-frobenius-factor`: an *integral realization-independent factor*
-in degree `i` of a `k₀`-scheme `X₀` is a polynomial `P ∈ ℤ[T]` whose coefficientwise extension
-`P^{(ℓ)}` to `ℚ̄_ℓ` is the determinant factor `P_{i,ℓ}` of
+/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes--1`: an *integral
+realization-independent factor* in degree `i` of a `k₀`-scheme `X₀` is a polynomial `P ∈ ℤ[T]` whose
+coefficientwise extension `P^{(ℓ)}` to `ℚ̄_ℓ` is the determinant factor `P_{i,ℓ}` of
 `AlgebraicGeometry.Scheme.frobeniusCharpolyRev`, for every prime `ℓ ≠ p`. -/
 def IsIntegralFrobeniusFactor (k₀ : Type u) [Field k₀] [Finite k₀] (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k₀))]
@@ -243,8 +243,9 @@ theorem exists_traceDatum :
          (((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).frobeniusEnd ^ n)) _).symm },
     fun _ ↦ rfl, fun _ ↦ rfl, fun _ ↦ rfl⟩
 
-/-- Blueprint `det-thm-tracetodeterminant` and `thm-zl-lefschetz-weil-identity`
-(trace-to-determinant identity): for `X₀` smooth and proper of pure dimension `d`,
+/-- Blueprint `corollary-point-counting-zeta-function--5` and
+`corollary-point-counting-zeta-function--5` (trace-to-determinant identity): for `X₀` smooth and
+proper of pure dimension `d`,
 
 `Z(X₀, T) = ∏_{i = 0}^{2d} P_{i,ℓ}(T)^{(-1)^{i+1}}` in `ℚ̄_ℓ⟦T⟧`,
 
@@ -272,7 +273,7 @@ theorem map_zetaSeries_mul_evenFrobeniusProduct :
   rw [hpar Even, hpar Odd] at h
   exact h
 
-/-- Blueprint `prop-trace-determinant` (trace-to-determinant factorization): for a finite
+/-- Blueprint `lemma-logarithm-determinant--3` (trace-to-determinant factorization): for a finite
 graded family `(Vᵢ, uᵢ)_{i ∈ I}` of endomorphisms of finite-dimensional vector spaces over a
 field `K` of characteristic zero, with `Pᵢ(T) = det(1 - T uᵢ | Vᵢ)` and
 `Δ(T) = ∏ᵢ Pᵢ(T)^{(-1)^{i+1}}`,

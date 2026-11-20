@@ -13,7 +13,7 @@ import Mathlib.Topology.Connected.Clopen
 
 /-! # Pure codimension of a section of a smooth morphism
 
-Source: the centred coordinates in complement (ii) of sk-cor-trace.
+Source: the centred coordinates in complement (ii) of corollary-cup-product-pairing--1.
 (blueprint: lem-pd-smooth-section-pure-regular-immersion).
 The connectedness condition includes the empty-list case in the adopted
 all-target-points definition of `IsRegularImmersion`.
@@ -28,7 +28,7 @@ namespace AlgebraicGeometry
 
 /-- A closed section of a smooth map of pure relative dimension d is regular of
 codimension d when the target of the section is connected and its source is
-nonempty. Source: sk-cor-trace, complement (ii), smooth-section coordinates
+nonempty. Source: corollary-cup-product-pairing--1, complement (ii), smooth-section coordinates
 (blueprint: lem-pd-smooth-section-pure-regular-immersion).
 
 Proof. At a point on the section use the centred affine chart: its d coordinates
