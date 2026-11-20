@@ -175,7 +175,7 @@ lemma cechComplexHomologyLinearEquivH_map {ι : Type u} (U : ι → X.Opens)
 homomorphism `φ : A →+* Γ(X, ⊤)` (e.g. `Γ(S, 𝒪_S) → Γ(X, 𝒪_X)` for `X` over `S = Spec A`),
 `cechComplexHomologyLinearEquivH` is `A`-linear after restricting scalars along `φ`.
 
-(blueprint: `det-lem-picard-cech-computes`, `lem-pc-cech-computes`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, `lem-pc-cech-computes`) -/
 noncomputable def cechComplexHomologyRestrictScalarsLinearEquivH {A : Type u} [CommRing A]
     (φ : A →+* Γ(X, ⊤)) {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ s : Finset ι, s.Nonempty → IsAffineOpen (⨅ i ∈ s, U i)) (hU' : iSup U = ⊤)
@@ -201,7 +201,7 @@ every quasi-coherent `𝒪_X`-module `ℱ` and every `q`, `Ȟ^q(𝔘, ℱ) ≅ H
 both sides being `A`-modules by restriction of scalars along
 `A ≅ Γ(Spec A, ⊤) → Γ(X, ⊤)`.
 
-(blueprint: `det-lem-picard-cech-computes`, `lem-pc-cech-computes`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, `lem-pc-cech-computes`) -/
 theorem nonempty_cechComplex_restrictScalars_linearEquiv_H_of_isSeparated {A : Type u}
     [CommRing A] (f : X ⟶ Spec (.of A)) [IsSeparated f] {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ i, IsAffineOpen (U i)) (hU' : iSup U = ⊤) (ℱ : X.Modules)
@@ -220,7 +220,7 @@ theorem nonempty_cechComplex_restrictScalars_linearEquiv_H_of_isSeparated {A : T
 separated over `Spec k` and a covering `𝔘 = (U i)` of `X` by open affines,
 `Ȟ^q(𝔘, ℱ) ≅ H^q(X, ℱ)` as `k`-vector spaces for every quasi-coherent `ℱ`.
 
-(blueprint: `det-lem-picard-cech-computes`, `lem-pc-cech-computes`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, `lem-pc-cech-computes`) -/
 theorem nonempty_cechComplex_linearEquiv_H_of_isSeparated_field (k : Type u) [Field k]
     [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ i, IsAffineOpen (U i)) (hU' : iSup U = ⊤) (ℱ : X.Modules)

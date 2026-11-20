@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 /-!
 # Compatible local bases for normalized towers
 
-Source: Bhatt--Scholze, Proposition 6.8.4(1), compatible-basis argument.
+## References
+
+* Bhatt--Scholze, Proposition 6.8.4(1), compatible-basis argument
 -/
 
 @[expose] public noncomputable section

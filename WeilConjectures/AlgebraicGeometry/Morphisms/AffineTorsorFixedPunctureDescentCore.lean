@@ -15,14 +15,21 @@ public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantDescent
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantOrbitProduct
 
+/-! # Fixed-orbit descent for affine torsors
+
+## References
+
+* Stacks Project, Tag 03SF
+* Stacks Project, Tag 023R (affine descent)
+-/
+
 @[expose] public section
 universe u
 set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Orbit enumeration for the finite descent action. 
-(blueprint: lem-sbc-affine-torsor-fixed-puncture-orbit-data)
+/-- Orbit enumeration for the finite descent action.
 -/
 theorem affine_torsor_orbit_data (d : ℕ) :
     ∃ (m : ℕ) (K : Fin m → Subgroup (Equiv.Perm (Fin d))),
@@ -31,15 +38,7 @@ theorem affine_torsor_orbit_data (d : ℕ) :
   refine ⟨0, fun i => ⊥, Nat.zero_le d, by simp⟩
 
 
-/-- Choose the actual orbit stabilizers and descend to their fixed-ring punctures.
-
-Source: Stacks Project, Tag 03SF and affine descent, Tag 023R.
-Proof: first descend the split cover to the explicitly constructed algebra of
-equivariant functions. Evaluation on orbit representatives identifies that
-algebra with the product of their stabilizer fixed rings. Restrict the resulting
-H-algebra isomorphism to D(ι(g)) and compose the two isomorphisms over Spec H.
-The number of orbits is at most the number of split components.
-(blueprint: lem-sbc-affine-torsor-fixed-puncture-descent-core) -/
+/-- Choose the actual orbit stabilizers and descend to their fixed-ring punctures. -/
 theorem affine_torsor_fixed_orbits
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
@@ -115,7 +114,8 @@ theorem affine_torsor_fixed_orbits
   rw [hb]
   exact Over.w e.hom
 
-/-- Certified evidence for the dispute, using only Mathlib, not the theorem above. -/
+/-- No nonempty scheme is isomorphic to the puncture of the spectrum of the empty product of
+fixed rings over `ℚ`. -/
 private theorem empty_fixed_ring_no_iso (X : Scheme) [Nonempty X] :
     let B := ∀ _k : Fin 0,
       (⨅ _ζ : (⊥ : Subgroup PUnit.{1}),
@@ -165,8 +165,8 @@ private theorem trivial_torsor_split_data
       simp [e]
     refine ⟨asIso (pullback.snd U.ι U.ι) ≪≫ e.symm, ?_⟩
     simp [← he]
-/-- The arbitrary-orbit tail of the former core is false for the trivial torsor
-and the identity finite etale cover of D(1). No disputed theorem is used here. -/
+/-- Fixed-orbit descent with arbitrary orbit data fails for the trivial torsor and the identity
+finite étale cover of `D(1)`. -/
 private theorem affine_torsor_fixed_orbits_counterexample
     (U : (Spec (CommRingCat.of ℚ)).Opens) (hU : U = ⊤) :
     ¬ (∀ (m : ℕ) (K : Fin m → Subgroup PUnit.{1}) (d : ℕ), m ≤ d →

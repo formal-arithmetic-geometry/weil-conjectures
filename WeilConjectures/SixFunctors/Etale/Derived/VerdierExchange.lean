@@ -12,8 +12,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
 
 Let `f : X ⟶ Y` and `a_Y : Y ⟶ S` admit compactifications, with `a_X = f ≫ a_Y`, and let
 `ω_X = Ra_X^! Λ_S`, `ω_Y = Ra_Y^! Λ_S` be the dualizing complexes. Given a composition
-isomorphism `R(a_Y ∘ f)_! ≅ Ra_{Y!} ∘ Rf_!` (`sk-thm-sf-comp-composition`), its mate is an
-isomorphism `Rf^! ω_Y ≅ ω_X`, and the tensor–Hom exchange at `N = ω_Y` then gives the
+isomorphism `R(a_Y ∘ f)_! ≅ Ra_{Y!} ∘ Rf_!` (`proposition-composition-base-change-rf-shriek--1`),
+its mate is an isomorphism `Rf^! ω_Y ≅ ω_X`, and the tensor–Hom exchange at `N = ω_Y` then gives the
 *Verdier-duality exchange*
 
 `𝔻_Y (Rf_! M) ≅ Rf_* 𝔻_X M`,
@@ -24,11 +24,14 @@ natural in `M`. This file constructs it as a natural isomorphism of functors
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.rightDerivedUpperShriekDualizingComplexIso`
-  (`thm-sf-verdier-exchange`, Step 1): `Rf^! ω_Y ≅ ω_X`, the mate of a composition isomorphism.
-- `AlgebraicGeometry.Etale.verdierDualRightDerivedLowerShriekIso` (`thm-sf-verdier-exchange`):
+  (`lemma-internal-adjunction-two-exchange-formulas--2`, Step 1): `Rf^! ω_Y ≅ ω_X`, the mate of a
+  composition isomorphism.
+- `AlgebraicGeometry.Etale.verdierDualRightDerivedLowerShriekIso`
+(`lemma-internal-adjunction-two-exchange-formulas--2`):
   the natural isomorphism `𝔻_Y ∘ Rf_! ≅ Rf_* ∘ 𝔻_X`.
 - `AlgebraicGeometry.Etale.verdierDualRightDerivedLowerShriekShiftIso`
-  (`thm-sf-verdier-exchange`, shifts): `𝔻_Y (Rf_!(M⟦a⟧)) ≅ (Rf_* 𝔻_X M)⟦-a⟧`.
+  (`lemma-internal-adjunction-two-exchange-formulas--2`, shifts):
+  `𝔻_Y (Rf_!(M⟦a⟧)) ≅ (Rf_* 𝔻_X M)⟦-a⟧`.
 
 ## Main statements
 
@@ -66,11 +69,12 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {X Y S : Scheme.{u}} (f : X ⟶ Y) (aY : Y ⟶ S) [HasCompactification f]
   [HasCompactification aY] [HasCompactification (f ≫ aY)]
 
-/-- Blueprint `thm-sf-verdier-exchange`, Step 1: `Rf^! ω_Y ≅ ω_X`.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--2`, Step 1: `Rf^! ω_Y ≅ ω_X`.
 
 For a composition isomorphism `e : R(f ≫ a_Y)_! ≅ Rf_! ⋙ Ra_{Y!}`
-(`sk-thm-sf-comp-composition`), the mate of `e` under the adjunctions `Rf_! ⊣ Rf^!` is an
-isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!` (`sk-lem-sf-mate`); evaluated at the unit `Λ_S` it
+(`proposition-composition-base-change-rf-shriek--1`), the mate of `e` under the adjunctions
+`Rf_! ⊣ Rf^!` is an isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!`
+(`proposition-composition-open-restriction-compactifications-f--1`); evaluated at the unit `Λ_S` it
 reads `Rf^! ω_Y ≅ ω_X`. -/
 noncomputable def rightDerivedUpperShriekDualizingComplexIso
     (e : R(f ≫ aY)_![ModuleCat.{u + 1} Λ] ≅ R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(aY)_![ModuleCat.{u + 1}
@@ -87,7 +91,7 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
-/-- Blueprint `thm-sf-verdier-exchange`: Verdier-duality exchange.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--2`: Verdier-duality exchange.
 
 Let `f : X ⟶ Y` and the structure morphism `a_Y : Y ⟶ S` admit compactifications, with
 `a_X = f ≫ a_Y`, and assume the projection formula for `f` (axiom (A3) of `def-sf-datum`). For a
@@ -129,7 +133,8 @@ lemma verdierDualRightDerivedLowerShriekIso_hom_app [IsIso (projectionMap (Modul
           (rightDerivedUpperShriekDualizingComplexIso Λ f aY e).hom) :=
   rfl
 
-/-- Blueprint `thm-sf-verdier-exchange`: Verdier-duality exchange, compatibility with shifts.
+/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--2`: Verdier-duality exchange,
+compatibility with shifts.
 
 For every `M` and `a : ℤ`, `𝔻_Y (Rf_!(M⟦a⟧)) ≅ (Rf_* 𝔻_X M)⟦-a⟧`: the Verdier dual of the
 commutation `Rf_!(M⟦a⟧) ≅ (Rf_! M)⟦a⟧`, then `RHom(N⟦a⟧, ω_Y) ≅ RHom(N, ω_Y)⟦-a⟧`

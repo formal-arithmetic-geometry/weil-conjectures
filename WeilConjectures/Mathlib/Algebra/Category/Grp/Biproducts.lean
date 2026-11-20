@@ -16,7 +16,8 @@ public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 A finite abelian group killed by a prime `ℓ` is a finite direct sum of copies of `ℤ/ℓ`. Hence an
 additive functor out of `AddCommGrpCat` which vanishes on `ℤ/ℓ` vanishes on every finite abelian
-group killed by `ℓ` (blueprint `det-tf-transverse-corner-vanishing`, constant coefficients).
+group killed by `ℓ` (blueprint `lemma-cohomology-near-two-transverse-divisors--1`, constant
+coefficients).
 
 ## Main statements
 
@@ -31,7 +32,7 @@ open CategoryTheory Limits
 
 /-- An additive functor out of `AddCommGrpCat` which vanishes on `ℤ/ℓ` vanishes on every finite
 abelian group killed by `ℓ`, such a group being a finite direct sum of copies of `ℤ/ℓ`
-(blueprint `det-tf-transverse-corner-vanishing`). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 theorem AddCommGrpCat.isZero_obj_of_nsmul_eq_zero {D : Type*} [Category D] [Preadditive D]
     [HasFiniteBiproducts D] (Φ : AddCommGrpCat.{v} ⥤ D) [Φ.Additive] {ℓ : ℕ} [Fact ℓ.Prime]
     (h : IsZero (Φ.obj (AddCommGrpCat.of (ULift.{v} (ZMod ℓ)))))

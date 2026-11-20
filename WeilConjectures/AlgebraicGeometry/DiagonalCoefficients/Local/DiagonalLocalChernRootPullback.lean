@@ -8,7 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Local.DiagonalLocalChernPullbackData
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceVaryingScalarSquare
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.Coefficient.DiagonalTraceCoefficientConePush
-import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteBoundaryEndpointMaps
+import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteBoundaryForgetComparison
+import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.TowerLinePullbackLowerTensor
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
@@ -33,8 +34,61 @@ attribute [local irreducible] SemilinearSections.scalarExtensionSection
 attribute [local implicit_reducible] spCoefficientCommRings SpTowerShriek.tau
   Functor.ofOpSequence Functor.ofSequence SemilinearSections.evaluation
 
-set_option maxHeartbeats 1000000 in
--- Compare the finite scalar-extension unit with the normalized root evaluation.
+-- Prove the carrier transports before specializing to the scalar-extended line.
+private theorem restrictionUnderlying_hom_section
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ)
+    (x : ((r.F.obj M).obj (op n)).obj.obj U) :
+    HEq (((restrictionUnderlying l T r n).hom.app M).hom.app U x) x :=
+  finiteBoundary_cast_heq (r.underlying M n U) x
+
+private theorem restrictionUnderlying_inv_section
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ)
+    (x : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj M).val.obj U) :
+    HEq (((restrictionUnderlying l T r n).inv.app M).hom.app U x) x :=
+  finiteBoundary_cast_heq (r.underlying M n U).symm x
+
+private theorem restrictionUnderlying_hom_injective
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ) :
+    Function.Injective (((restrictionUnderlying l T r n).hom.app M).hom.app U) := by
+  intro x y h
+  exact eq_of_heq ((restrictionUnderlying_hom_section l T r n M U x).symm.trans
+    ((heq_of_eq h).trans (restrictionUnderlying_hom_section l T r n M U y)))
+
+private theorem finiteEvaluationSection_exists
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ)
+    (x : M.val.obj (op (n, U.unop))) :
+    ∃ v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj M).val.obj U,
+      HEq v x := ⟨x, HEq.rfl⟩
+
+private def moduleIsoSectionEquiv
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u + 1}} {M N : SheafOfModules.{u + 1} R}
+    (e : M ≅ N) (U : Cᵒᵖ) : M.val.obj U ≃ N.val.obj U where
+  toFun := e.hom.val.app U
+  invFun := e.inv.val.app U
+  left_inv x := congrArg (fun q : M ⟶ M ↦ q.val.app U x) e.hom_inv_id
+  right_inv x := congrArg (fun q : N ⟶ N ↦ q.val.app U x) e.inv_hom_id
+
+private theorem constantPushforward_map_heq (A : Type u) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {M N : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A)}
+    (a : M ⟶ N) (U : Y.ProEtᵒᵖ) (x : M.val.obj (chart f U))
+    (y : ((Scheme.proEtaleConstantRingPushforward A f).obj M).val.obj U)
+    (hxy : HEq x y) :
+    a.val.app (chart f U) x =
+      ((Scheme.proEtaleConstantRingPushforward A f).map a).val.app U y := by
+  have h : x = y := eq_of_heq hxy
+  cases h
+  exact (pushforward_map_apply A f a U x).symm
+
+-- Compare the scalar-extension root section with its normalized finite evaluation.
 private theorem normalizedRootSection
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T]
@@ -54,48 +108,67 @@ private theorem normalizedRootSection
     (eqToHom (c.reduction.forget.sections c.rootModule n U)) x'
   have hx : HEq x' x := (finiteBoundary_cast_heq
     (c.reduction.forget.sections c.rootModule n U) x').symm
-  let η := c.scalar.ordinaryAdjunction.unit.app c.rootModule
-  have hf := finiteBoundary_forgetMapSection T _ c.reduction.forget η n U x x' hx
-  have he := finiteScalarForgetIso_section l (ULift.{u} (Padic l)) c n
-    (lineModule l (ULift.{u} (Padic l)) c) U _ _ hf
-  have hu : η.val.app (op (n, U.unop)) x =
-      SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
-        (coefficientSystemMap l (ULift.{u} (Padic l)) T)
-        c.scalar c.rootModule (op (n, U.unop)) x :=
-    scalarUnitSection.{u + 1, u, u + 1} _ c.scalar c.rootModule _ x
-  let v := ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
-    (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
-      (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
+  obtain ⟨v, hv⟩ := finiteEvaluationSection_exists l T n
+    (lineModule l (ULift.{u} (Padic l)) c) U
+    (SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
+      (coefficientSystemMap l (ULift.{u} (Padic l)) T) c.scalar c.rootModule
+      (op (n, U.unop)) x)
   let w := ((restrictionUnderlying l T r n).inv.app
     (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
-  have hw : HEq w v := by
-    change HEq ((eqToHom (r.underlying _ n U).symm) v) v
-    exact finiteBoundary_cast_heq _ _
-  have ht := k.line_tensor n U x x' w hx.symm
-    (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
-  have hz := congrArg (fun q ↦ q.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
-  change (c.rootForget.hom.app (op n)).hom.app U x' = z at hz
-  rw [hz] at ht
+  have hw : HEq w v := restrictionUnderlying_inv_section l T r n
+    (lineModule l (ULift.{u} (Padic l)) c) U v
+  have ht := k.line_tensor n U x x' w hx.symm (hw.trans hv)
+  have hz := (addSectionEquiv (c.rootForget.app (op n)) U).apply_symm_apply z
   have hw' : w = (k.lineForget.inv.app (op n)).hom.app U z := by
-    have hi := congrArg (fun q ↦ q.hom.app U w)
-      (k.lineForget.app (op n)).hom_inv_id
-    change (k.lineForget.inv.app (op n)).hom.app U
-      ((k.lineForget.hom.app (op n)).hom.app U w) = w at hi
-    exact hi.symm.trans (congrArg
-      (fun q ↦ (k.lineForget.inv.app (op n)).hom.app U q) ht)
-  rw [← hw']
-  have hv : ((restrictionUnderlying l T r n).hom.app
+    exact (addSectionEquiv (k.lineForget.app (op n)) U).injective
+      ((ht.trans hz).trans
+        ((addSectionEquiv (k.lineForget.app (op n)) U).apply_symm_apply z).symm)
+  have hwv : ((restrictionUnderlying l T r n).hom.app
       (lineModule l (ULift.{u} (Padic l)) c)).hom.app U w = v :=
-    congrArg (fun q ↦ q.hom.app U v)
-      ((restrictionUnderlying l T r n).app
-        (lineModule l (ULift.{u} (Padic l)) c)).inv_hom_id
-  rw [hv]
+    eq_of_heq ((restrictionUnderlying_hom_section l T r n
+      (lineModule l (ULift.{u} (Padic l)) c) U w).trans hw)
   have hnorm := (lineEvaluation_existsUnique l (ULift.{u} (Padic l)) c n).exists.choose_spec
     U 1 x x' v hx.symm
-    (by simpa only [one_smul] using (heq_of_eq he).trans (heq_of_eq hu))
-  exact hnorm.trans (by rw [hz])
+    (by simpa only [one_smul] using hv)
+  have hsection := (congrArg
+    (((restrictionUnderlying l T r n).hom.app
+      (lineModule l (ULift.{u} (Padic l)) c)).hom.app U) hw'.symm).trans hwv
+  exact (congrArg ((lineEvaluation l (ULift.{u} (Padic l)) c n).hom.val.app U)
+    hsection).trans (hnorm.trans (congrArg
+      (Scheme.tateFiniteTensor T l (FiniteRing l (ULift.{u} (Padic l)) n) n
+        (finiteScalar l (ULift.{u} (Padic l)) n) U.unop 1) hz))
 
-set_option maxHeartbeats 2000000 in
+-- Transport a module morphism before specializing to Chern-line modules.
+private theorem varyingPush_adjoint_section
+    (l : ℕ) [Fact l.Prime] {X S X' S' : Scheme.{u}}
+    {f : X ⟶ S} {f' : X' ⟶ S'} (hX : X' ⟶ X)
+    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
+    [DiagonalTraceLocalizations l X'] [DiagonalTraceLocalizations l S']
+    (p : Presentation l (ULift.{u} (Padic l)) f)
+    (p' : Presentation l (ULift.{u} (Padic l)) f')
+    (d : LocalChernPullbackData l hX p p') (n : ℕ)
+    (M : Systems X (Arings l (ULift.{u} (Padic l)) X))
+    (N : Systems X' (Arings l (ULift.{u} (Padic l)) X'))
+    (a : d.geometry.pull.obj M ⟶ N) (U : X.ProEtᵒᵖ)
+    (y : ((p.restrictionX.F.obj M).obj (op n)).obj.obj U)
+    (x : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) X n).obj M).val.obj U)
+    (hx : HEq y x) :
+    HEq (((d.varyingPush.hom.app N).app (op n)).hom.app U
+      (((p.restrictionX.F.map (d.geometry.ordinaryAdjunction.homEquiv M N a)).app
+        (op n)).hom.app U y))
+      (adjointSection l (ULift.{u} (Padic l)) d.geometry a n U x) := by
+  let α := d.geometry.ordinaryAdjunction.homEquiv M N a
+  have hα := additive_transport_apply
+    (p.restrictionX.underlying M n U)
+    (p.restrictionX.underlying (d.geometry.push.obj N) n U)
+    (AddCommGrpCat.ofHom
+      ((((p.restrictionX.F.map α).app (op n)).hom.app U).hom.toAddMonoidHom))
+    (AddCommGrpCat.ofHom ((α.val.app (op (n, U.unop))).hom.toAddMonoidHom))
+    (p.restrictionX.morphisms α n U) y x hx
+  have hp := push_sections l (ULift.{u} (Padic l)) d.base d.geometry n N U
+    ((α.val.app (op (n, U.unop))) x)
+  exact (d.varyingPush_sections N n U _).trans (hα.trans hp.symm)
+
 -- Compare the line sections in the two scalar restrictions and finite evaluations.
 private theorem horizontal_varying_root_square
     (l : ℕ) [Fact l.Prime] {X S X' S' : Scheme.{u}}
@@ -121,76 +194,51 @@ private theorem horizontal_varying_root_square
   let N' := lineModule l (ULift.{u} (Padic l)) p'.chernX
   let α := d.geometry.ordinaryAdjunction.homEquiv _ _ d.line.iso.hom
   let y := (p.coefficientsX.lineForget.inv.app (op n)).hom.app U z
-  let x := (((restrictionUnderlying l X p.restrictionX n).hom.app N).hom.app U) y
-  have hx : HEq y x := by
-    change HEq y ((eqToHom (p.restrictionX.underlying N n U)) y)
-    exact (finiteBoundary_cast_heq _ _).symm
+  let x : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) X n).obj N).val.obj U :=
+    (((restrictionUnderlying l X p.restrictionX n).hom.app N).hom.app U) y
+  have hx : HEq y x :=
+    (restrictionUnderlying_hom_section l X p.restrictionX n N U y).symm
   have hcoord := normalizedRootSection l X p.chernX p.restrictionX p.coefficientsX n U z
-  change (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).hom.val.app U x = _
-    at hcoord
-  have hinput : x =
-      (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).inv.val.app U
-        (Scheme.tateFiniteTensor X l (FiniteRing l (ULift.{u} (Padic l)) n) n
-          (finiteScalar l (ULift.{u} (Padic l)) n) U.unop 1 z) := by
-    have hi := congrArg (fun q ↦ q.val.app U x)
-      (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).hom_inv_id
-    change (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).inv.val.app U
-      ((lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).hom.val.app U x) = x at hi
-    exact hi.symm.trans (congrArg
-      (fun q ↦ (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).inv.val.app U q) hcoord)
-  have hα := additive_transport_apply
-    (p.restrictionX.underlying N n U)
-    (p.restrictionX.underlying (d.geometry.push.obj N') n U)
-    (AddCommGrpCat.ofHom
-      ((((p.restrictionX.F.map α).app (op n)).hom.app U).hom.toAddMonoidHom))
-    (AddCommGrpCat.ofHom ((α.val.app (op (n, U.unop))).hom.toAddMonoidHom))
-    (p.restrictionX.morphisms α n U) y x hx
-  have hp := push_sections l (ULift.{u} (Padic l)) d.base d.geometry n N' U
-    ((α.val.app (op (n, U.unop))) x)
+  have hinput :=
+    (moduleIsoSectionEquiv (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n) U).eq_symm_apply.mpr
+      hcoord
+  dsimp only [moduleIsoSectionEquiv, Equiv.symm, Equiv.coe_fn_mk] at hinput
   let v := (((d.varyingPush.hom.app N').app (op n)).hom.app U)
     (((p.restrictionX.F.map α).app (op n)).hom.app U y)
   have hv : HEq v (adjointSection l (ULift.{u} (Padic l)) d.geometry
       d.line.iso.hom n U x) :=
-    (d.varyingPush_sections N' n U _).trans (hα.trans hp.symm)
-  let U' := (Scheme.proEtaleBaseChange hX).op.obj U
-  let x' := (((restrictionUnderlying l X' p'.restrictionX n).hom.app N').hom.app U') v
+    varyingPush_adjoint_section l hX p p' d n N N' d.line.iso.hom U y x hx
+  let U' := chart hX U
+  let x' : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) X' n).obj N').val.obj U' :=
+    (((restrictionUnderlying l X' p'.restrictionX n).hom.app N').hom.app U') v
   have hx' : HEq x' (adjointSection l (ULift.{u} (Padic l)) d.geometry
       d.line.iso.hom n U x) := by
-    exact (finiteBoundary_cast_heq (p'.restrictionX.underlying N' n U') v).trans hv
-  have hn := d.line.normalization n U 1 z
-  rw [← hinput, map_one] at hn
-  have heval : (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom.val.app U' x' =
-      Scheme.tateFiniteTensor X' l (FiniteRing l (ULift.{u} (Padic l)) n) n
-        (finiteScalar l (ULift.{u} (Padic l)) n) U'.unop 1
-        (restrictRoot l hX n U z) := by
-    exact (congrArg
-      (fun q ↦ (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom.val.app U' q)
-      (eq_of_heq hx')).trans hn
+    exact (restrictionUnderlying_hom_section l X' p'.restrictionX n N' U' v).trans hv
+  dsimp only [x, N, y] at hx'
+  have heval := d.line.normalization n U 1 z
+  rw [← hinput, map_one] at heval
+  have hmap := constantPushforward_map_heq (SpTowerShriek.R l (ULift.{u} (Padic l)) n) hX
+    (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom U x' _ hx'
+  rw [← hmap] at heval
   let z' := (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' v
   have hroot : z' = restrictRoot l hX n U z := by
     have hleft := normalizedRootSection l X' p'.chernX p'.restrictionX
       p'.coefficientsX n U' (restrictRoot l hX n U z)
-    let e := lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n
-    have heinj : Function.Injective (e.hom.val.app U') :=
-      (show Function.LeftInverse (e.inv.val.app U') (e.hom.val.app U') from
-        fun v ↦ congrArg (fun q ↦ q.val.app U' v) e.hom_inv_id).injective
+    have heinj :=
+      (moduleIsoSectionEquiv (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n) U').injective
     have hxv := heinj (heval.trans hleft.symm)
-    let s := (restrictionUnderlying l X' p'.restrictionX n).app N'
-    have hsinj : Function.Injective (s.hom.hom.app U') :=
-      (show Function.LeftInverse (s.inv.hom.app U') (s.hom.hom.app U') from
-        fun v ↦ congrArg (fun q ↦ q.hom.app U' v) s.hom_inv_id).injective
-    have hv' := hsinj hxv
+    dsimp only [x', N'] at hxv
+    have hv' := restrictionUnderlying_hom_injective l X' p'.restrictionX n
+      (lineModule l (ULift.{u} (Padic l)) p'.chernX) U' hxv
     have hzv := congrArg
       (fun q ↦ (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' q) hv'
-    have hir := congrArg (fun q ↦ q.hom.app U' (restrictRoot l hX n U z))
-      (p'.coefficientsX.lineForget.app (op n)).inv_hom_id
+    have hir := (addSectionEquiv (p'.coefficientsX.lineForget.app (op n)) U').apply_symm_apply
+      (restrictRoot l hX n U z)
     exact hzv.trans hir
-  have hiS := congrArg (fun q ↦ q.hom.app U z)
-    (p.coefficientsX.lineForget.app (op n)).inv_hom_id
+  have hiS := (addSectionEquiv (p.coefficientsX.lineForget.app (op n)) U).apply_symm_apply z
   change (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' v =
     (Scheme.proEtaleRootsOfUnityDirectImageMap hX (l ^ (n + 1))).hom.app U
       ((p.coefficientsX.lineForget.hom.app (op n)).hom.app U y)
-  rw [show (p.coefficientsX.lineForget.hom.app (op n)).hom.app U y = z from hiS]
   have hr : (Scheme.proEtaleRootsOfUnityDirectImageMap hX (l ^ (n + 1))).hom.app U z =
       restrictRoot l hX n U z := by
     apply (Scheme.proEtaleRootsOfUnitySections X' (l ^ (n + 1))
@@ -199,7 +247,8 @@ private theorem horizontal_varying_root_square
     have hr :=
       (Scheme.existsUnique_proEtaleRootsOfUnityDirectImageMap hX (l ^ (n + 1))).exists
     exact hr.choose_spec U z
-  exact hroot.trans hr.symm
+  exact hroot.trans (hr.symm.trans (congrArg
+    ((Scheme.proEtaleRootsOfUnityDirectImageMap hX (l ^ (n + 1))).hom.app U) hiS.symm))
 
 -- Identify the completed and varying root cones through their actual finite projections.
 private theorem horizontal_root_cone_transposed

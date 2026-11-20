@@ -34,7 +34,7 @@ restricted morphisms. The pullback hypotheses require only the fiber products us
 Proof: Work in `C/U` (def-pur-localized-ringed-site). For `V → U`, pull back the cover to
 `V ×_U Uᵢ → V`. Apply the local maps to the restrictions of a section of `F(V)`.
 Compatibility identifies their values on pairwise overlaps. The sheaf axiom for `G` gives a
-unique section of `G(V)` (def-weil-sheaf-of-modules-category). Uniqueness applied to sums and
+unique section of `G(V)` (situation-conventions). Uniqueness applied to sums and
 restriction maps makes these assignments additive and natural. Their restrictions are the
 original local maps, again by sheaf uniqueness; the same argument identifies any other glued
 map with this one. Finally, for a scalar in `O(V)`, local linearity identifies the restrictions

@@ -17,8 +17,10 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 /-!
 # Descent of local twists on projective bundles
 
-Source: EGA II, Remark 4.2.7; Stacks, Tags 00AL, 00AM, 04TN and 01XS.
-(blueprint: lem-sfb-projective-bundle-local-twist-descent)
+## References
+
+* EGA II, Remark 4.2.7
+* Stacks Project, Tags 00AL, 00AM, 01XS, 04TN, 0BXJ
 -/
 
 @[expose] public section
@@ -102,35 +104,8 @@ private theorem decomposition_local_integer {S P : Scheme.{u}} (p : P ⟶ S)
   exact ⟨U, ⟨rfl, hsV⟩, ⟨(tensorPullback j).mapIso e ≪≫ tensor _ _ ≪≫
     (tw ⊗ᵢ coeff) ≪≫ ρ_ _⟩⟩
 
-/-- Local integer twists descend to a unique locally constant degree and coefficient
-line. The hypothesis gives local normal forms; this theorem only performs descent
-and proves uniqueness, without asserting that every line has such normal forms.
-
-Source: EGA II, Remark 4.2.7; Stacks, sheaves.tex, Tags 00AL, 00AM and 04TN;
-coherent.tex, Tag 01XS; divisors.tex, Tag 0BXJ.
-(blueprint: lem-sfb-projective-bundle-local-twist-descent)
-
-Proof: On intersecting trivializing base neighbourhoods, restrict to a residue-field
-fibre. The field chart calculation of Tag 0BXJ makes their exponents equal. The
-local integers therefore glue to a locally constant degree d. The specified product
-of direct images realizes the glued powers on the disjoint open degree strata.
-Tensor the local presentations by their inverse powers; the remaining invertible
-module F is trivial over each of those base neighbourhoods. For every open V of S,
-the structure map identifies Gamma(V,O_S) with Gamma(P_V,O_P). Indeed, on affine
-opens trivializing E this is the degree-zero constant monomial in the standard
-projective-space cohomology calculation; the inverses agree under restriction and
-glue by the sheaf axiom. In particular the same map identifies units. Express the
-transition maps of the local bases of F as units and descend them uniquely to
-units on the base overlaps. Injectivity on functions descends the cocycle equation.
-Glue the trivial base modules with those transitions to an invertible N. The
-compatible pulled-back local bases glue to p^*N isomorphic to F, and tensoring by
-the degree twist gives the asserted presentation. For uniqueness restrict two
-presentations to each residue-field fibre; field degree uniqueness gives d'=d.
-After cancelling the common twist, an isomorphism p^*N' ≅ p^*N is locally a unit
-on P_U in bases for N and N'. Descend those units by the same function-ring
-identification; injectivity descends compatibility on overlaps. Glue the resulting
-local maps to an isomorphism N' ≅ N. No section of p is required. On the empty
-base use the empty gluing family and the unique function to the integers. -/
+/-- An invertible module that is locally on the base an integer twist of the tautological line
+is a locally constant twist tensored with a pullback line, with unique degree and coefficient. -/
 theorem projective_bundle_local_twist_descent (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

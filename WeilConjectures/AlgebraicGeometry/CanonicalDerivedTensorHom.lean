@@ -55,8 +55,6 @@ theorem exists_canonicalDerivedTensorHom (X : Scheme.{uCD})
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option linter.style.haveILetI false in
-set_option maxHeartbeats 1000000 in
--- The representative predicate requires extra heartbeats to elaborate the sheaf tensor instances.
 /-- Uniqueness of the family specified on representatives.
 Source: Stacks, cohomology.tex, Tag 08DJ
 (blueprint: def-pc-canonical-derived-tensor-hom-bijection).
@@ -73,29 +71,24 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     (h' : IsCanonicalDerivedTensorHom X e') : e = e' := by
   classical
   let C := SheafOfModules.{uCD} (moduleRings X.toRingedSpace)
+  -- Share the sheafification and abelian instances throughout the proof.
+  let : HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{uCD} := inferInstance
+  have : (Opens.grothendieckTopology X).WEqualsLocallyBijective AddCommGrpCat.{uCD} :=
+    inferInstance
+  let : Abelian C := inferInstance
   let Q := DerivedCategory.Q.{wCD} (C := C)
   let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
     X.toRingedSpace.sheaf
-  have := SheafOfModules.isMonoidal_W X.sheaf
-  have : (Opens.grothendieckTopology X).WEqualsLocallyBijective AddCommGrpCat.{uCD} :=
-    inferInstance
-  have : HasWeakSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{uCD} :=
-    inferInstance
-  letI := SheafOfModules.monoidalCategory X.sheaf
-  letI := schemeDerivedTensorMonoidal X
-  letI := SheafOfModules.symmetricCategory X.sheaf
-  let := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
-  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
-  have : IsGrothendieckAbelian.{uCD} C := SheafOfModules.isGrothendieckAbelian _
-  have : Limits.HasColimitsOfSize.{0, 0} C :=
-    Limits.hasColimitsOfSizeShrink.{0, 0, uCD, uCD} C
   funext K L M
   apply Equiv.ext
   intro f
-  obtain ⟨P, p, hP, _, hp, _⟩ :=
+  -- Name the existential proofs before destructuring to avoid generalizing through the goal.
+  have hPResolution :=
     CochainComplex.exists_isKFlatResolution (R := X.sheaf) (Q.objPreimage K)
-  obtain ⟨Lc, l, hL, _, hl, _⟩ :=
+  rcases hPResolution with ⟨P, p, hP, _, hp, _⟩
+  have hLResolution :=
     CochainComplex.exists_isKFlatResolution (R := X.sheaf) (Q.objPreimage L)
+  rcases hLResolution with ⟨Lc, l, hL, _, hl, _⟩
   have : IsIso (Q.map p) := (DerivedCategory.isIso_Q_map_iff_quasiIso _ p).2 hp
   have : IsIso (Q.map l) := (DerivedCategory.isIso_Q_map_iff_quasiIso _ l).2 hl
   let a : Q.obj P ≅ K := asIso (Q.map p) ≪≫ Q.objObjPreimageIso K
@@ -103,6 +96,7 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
   let Mc := Q.objPreimage M
   let c : Q.obj Mc ≅ M := Q.objObjPreimageIso M
   let I := (schemeHomKInjectiveResolution X).obj Mc
+  have : IsGrothendieckAbelian.{uCD} C := SheafOfModules.isGrothendieckAbelian _
   have : I.IsKInjective :=
     CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{uCD} C Mc
   have : (homComplex (R := X.sheaf) Lc I).IsKInjective :=
@@ -112,23 +106,36 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     a.hom ≫ f ≫ H.map (b.hom.op, c.inv)
   let q := HomotopyCategory.quotient C (.up ℤ)
   let d := DerivedCategory.quotientCompQhIso.{wCD} C
-  obtain ⟨v, hv⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+  have hvSurj := (CochainComplex.IsKInjective.Qh_map_bijective
     (q.obj P) (homComplex (R := X.sheaf) Lc I)).surjective
       ((d.app P).hom ≫ g ≫ j.hom ≫ (d.app _).inv)
-  obtain ⟨φ, hφ⟩ := q.map_surjective v
+  rcases hvSurj with ⟨v, hv⟩
+  have hφSurj := q.map_surjective v
+  rcases hφSurj with ⟨φ, hφ⟩
   have hφQ : Q.map φ = g ≫ j.hom := by
-    have hn := DerivedCategory.quotientCompQhIso_hom_naturality φ
-    rw [hφ, hv] at hn
-    change ((d.app P).hom ≫ g ≫ j.hom ≫ (d.app _).inv) ≫
-      (d.app _).hom = (d.app P).hom ≫ Q.map φ at hn
-    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id] at hn
-    exact ((cancel_epi (d.app P).hom).1 hn).symm
+    have hmap := (congrArg DerivedCategory.Qh.map hφ).trans hv
+    have hn := (DerivedCategory.quotientCompQhIso_hom_naturality φ).symm.trans
+      (congrArg (fun v ↦ v ≫ (d.app _).hom) hmap)
+    change (d.app P).hom ≫ Q.map φ =
+      ((d.app P).hom ≫ g ≫ j.hom ≫ (d.app (homComplex (R := X.sheaf) Lc I)).inv) ≫
+        (d.app (homComplex (R := X.sheaf) Lc I)).hom at hn
+    apply (cancel_epi (d.app P).hom).1
+    simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using hn
   have hg : Q.map φ ≫ j.inv = g := by
-    rw [hφQ]
-    simp
-  obtain ⟨ψ, hψ, he⟩ := h.2 P Lc Mc hP φ
-  obtain ⟨ψ', hψ', he'⟩ := h'.2 P Lc Mc hP φ
+    exact (congrArg (fun t ↦ t ≫ j.inv) hφQ).trans
+      (by simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id])
+  have hrep := h.2 P Lc Mc hP φ
+  rcases hrep with ⟨ψ, hψ, he⟩
+  have hrep' := h'.2 P Lc Mc hP φ
+  rcases hrep' with ⟨ψ', hψ', he'⟩
   have eqψ : ψ = ψ' := by
+    have := SheafOfModules.isMonoidal_W X.sheaf
+    let := SheafOfModules.monoidalCategory X.sheaf
+    let := SheafOfModules.symmetricCategory X.sheaf
+    let := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
+    let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
+    have : Limits.HasColimitsOfSize.{0, 0} C :=
+      Limits.hasColimitsOfSizeShrink.{0, 0, uCD, uCD} C
     apply HomologicalComplex.hom_ext
     intro n
     apply HomologicalComplex.mapBifunctor.hom_ext
@@ -140,15 +147,16 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     DerivedCategory.Q.map t ≫ schemeHomResolutionInverse X Mc) eqψ).trans he'.symm)
   change e (Q.obj P) (Q.obj Lc) (Q.obj Mc) (Q.map φ ≫ j.inv) =
     e' (Q.obj P) (Q.obj Lc) (Q.obj Mc) (Q.map φ ≫ j.inv) at heq
-  rw [hg] at heq
+  have heqg := (congrArg (e (Q.obj P) (Q.obj Lc) (Q.obj Mc)) hg.symm).trans
+    (heq.trans (congrArg (e' (Q.obj P) (Q.obj Lc) (Q.obj Mc)) hg))
   have hn := h.1 K (Q.obj P) L (Q.obj Lc) M (Q.obj Mc) a.hom b.hom c.inv f
   have hn' := h'.1 K (Q.obj P) L (Q.obj Lc) M (Q.obj Mc) a.hom b.hom c.inv f
   change e (Q.obj P) (Q.obj Lc) (Q.obj Mc) g = _ at hn
   change e' (Q.obj P) (Q.obj Lc) (Q.obj Mc) g = _ at hn'
-  rw [hn, hn'] at heq
+  have heq' := hn.symm.trans (heqg.trans hn')
   have : IsIso (a.hom ⊗ₘ b.hom) := inferInstance
   exact (cancel_epi (a.hom ⊗ₘ b.hom)).1 ((cancel_mono c.inv).1
-    (by simpa only [← Category.assoc] using heq))
+    (by simpa only [← Category.assoc] using heq'))
 
 /-- Canonical family fixed by the representative equation.
 Source: Stacks, cohomology.tex, Tag 08DJ

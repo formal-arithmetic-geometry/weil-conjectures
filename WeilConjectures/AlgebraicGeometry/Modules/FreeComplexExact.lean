@@ -104,10 +104,7 @@ lemma freeSectionsEquivOpens_app (W : Y.Opens) {I J : Type u} [Fintype I] [Decid
 /-- **Vanishing of the cohomology of a complex of finite free modules.** Let `Q` be a cochain
 complex of `𝒪_Y`-modules with `Q^n ≅ 𝒪_Y^{r_n}`. If the matrix of `d^{q-1}` has an invertible
 `a × a` minor and the matrix of `d^q` an invertible `b × b` minor, with `a + b = r_q`, then
-`H^q(Q) = 0`.
-
-The kernel of `d^q` is the image of `d^{q-1}` on sections over every open, by
-`Matrix.exists_mulVec_eq_of_isUnit_det_submatrix` applied to the restricted matrices. -/
+`H^q(Q) = 0`. -/
 theorem isZero_homology_of_isUnit_det_submatrix (Q : CochainComplex Y.Modules ℤ) {r : ℤ → ℕ}
     (e : ∀ n, Q.X n ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin (r n)))) (q : ℤ)
     {α β : Type} [Fintype α] [Fintype β] [DecidableEq α] [DecidableEq β]

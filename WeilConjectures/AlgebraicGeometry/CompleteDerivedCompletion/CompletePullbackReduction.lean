@@ -19,7 +19,7 @@ import all WeilConjectures.CategoryTheory.Flat.FlatConstantTensorProZeroConesSup
 
 Source: literature/blueprint/latest/blueprint/sec-proper-base-change/
 sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.md
-(blueprint: lemma-weil-pbc-completed-pullback-reduction).
+(blueprint: definition-completed-inverse-image).
 
 The strict comparison is characterized on both cone summands in every degree and
 at every tower level. Its descent is characterized on every complex by localization.
@@ -185,7 +185,7 @@ private theorem strictCompare_inr
 /-- Normalization of the strict pullback/reduction comparison on the shifted and
 unshifted summands of the actual mapping cone. Level `n` means exponent `n+1`.
 Source: proof (1), exact pullback of the cones and their transitions
-(blueprint: lemma-weil-pbc-completed-pullback-reduction). -/
+(blueprint: definition-completed-inverse-image). -/
 def IsStrictPullReduction
     (e : strictRed l E T ⋙ (pull l E f).mapHomologicalComplex (.up ℤ) ≅
       (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f).mapHomologicalComplex
@@ -206,7 +206,7 @@ def IsStrictPullReduction
           (.up ℤ)).obj M))).f i).app (op n)
 
 /-- There is a unique strict comparison preserving both cone summands.
-Source: proof (1) (blueprint: lemma-weil-pbc-completed-pullback-reduction).
+Source: proof (1) (blueprint: definition-completed-inverse-image).
 Proof: exact additive pullback commutes with the finite biproduct defining each cone
 term. Its coefficient morphism takes multiplication by π to multiplication by π.
 The two identity summand maps therefore commute with the cone differential and the
@@ -236,11 +236,11 @@ theorem strictPullReduction_existsUnique :
     exact (he' M i n.unop).2.trans (hn M i n.unop).2.symm
 
 /-- The strict cone comparison, chosen from its summandwise unique characterization.
-Source: proof (1) (blueprint: lemma-weil-pbc-completed-pullback-reduction). -/
+Source: proof (1) (blueprint: definition-completed-inverse-image). -/
 def strictPullReduction := (strictPullReduction_existsUnique l E f).exists.choose
 
 /-- The localization equation defining the derived pullback/reduction comparison.
-Source: proof (1) (blueprint: lemma-weil-pbc-completed-pullback-reduction). -/
+Source: proof (1) (blueprint: definition-completed-inverse-image). -/
 def IsPullReduction
     (e : red l E T ⋙ dpull l E f ≅ dpullModule l E f ⋙ red l E T') : Prop :=
   ∀ M : CochainComplex (AdicCompletion.Modules l E T) ℤ,
@@ -256,7 +256,7 @@ def IsPullReduction
         DerivedCategory.Q.map ((strictPullReduction l E f).hom.app M)
 
 /-- Exact localization descends the strict normalized comparison uniquely.
-Source: proof (1) (blueprint: lemma-weil-pbc-completed-pullback-reduction).
+Source: proof (1) (blueprint: definition-completed-inverse-image).
 Proof: both composites invert quasi-isomorphisms, because pullback is exact and the
 strict reduction functor inverts quasi-isomorphisms. Descend the strict comparison
 and its inverse through the localization Q. Its universal property gives both the
@@ -311,11 +311,11 @@ theorem pullReduction_existsUnique :
   simpa only [Category.assoc] using (he' M).trans (hn M).symm
 
 /-- The canonical tower isomorphism f* red(M) ≅ red(f*M), not a levelwise choice.
-Source: assertion (1) (blueprint: lemma-weil-pbc-completed-pullback-reduction). -/
+Source: assertion (1) (blueprint: definition-completed-inverse-image). -/
 def pullReduction := (pullReduction_existsUnique l E f).exists.choose
 
 /-- Completed inverse image is Rlim of exact pullback of the reduction tower.
-Source: the defining display (blueprint: lemma-weil-pbc-completed-pullback-reduction). -/
+Source: the defining display (blueprint: definition-completed-inverse-image). -/
 def completedPull := red l E T ⋙ dpull l E f ⋙ rlim l E T'
 
 end AlgebraicGeometry.ProEtale.CompleteDerivedCompletion

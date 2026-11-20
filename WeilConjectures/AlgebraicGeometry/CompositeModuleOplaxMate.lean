@@ -39,15 +39,15 @@ Source: Stacks Project, Modules on Sites, Tags 03D7 and 03EL
 Proof:
 1. Write R = R_Y, A = F R, S = R_X and E = Ext_alpha. Relative tensor projections
    are coequalizer maps, so equality can be checked after those projections and after
-   forgetting module structure (def-sfb-modobj-relative-tensor,
+   forgetting module structure (prose-03-02,
    def-weil-pbc-category-colimit, sk-def-sfb-module-objects).
 2. The specified scalar Hom bijection is precomposition with its scalar unit a,
    and the lifted Hom bijection is the ambient abelian one. Thus Phi(h) = v ; G(a ; h)
    and u = v ; G(a). The right-adjoint identification is the identity on underlying
    sheaves, since the coefficient map is the mate of alpha
    (def-sfb-modobj-extend-restrict-adjunction, def-sfb-modobj-transport-adjunction,
-   def-sfb-module-upper-lower-adjunction, sk-def-sfb-coefficient-morphisms,
-   def-sfb-module-lower-star).
+   prose-03-02, sk-def-sfb-coefficient-morphisms,
+   prose-03-02).
 3. The actual scalar tensor map b sends s tensor (m tensor n) to
    (s tensor m) tensor (1 tensor n). Consequently q_A ; a ; b = (a tensor a) ; q_S.
    The normalized structure in lem-sfb-internal-extension-monoidal has this equation;
@@ -62,14 +62,14 @@ Proof:
 5. The descended map t satisfies F(q_R) ; t = delta_F ; q_A, and the composite
    map is E(t) ; b. Naturality of a therefore gives
    F(q_R) ; a ; d = delta_F ; (a tensor a) ; q_S
-   (def-sfb-modobj-relative-tensor, def-sfb-modobj-extend-restrict-adjunction).
+   (prose-03-02, def-sfb-modobj-extend-restrict-adjunction).
 6. The ambient mate identity is v ; G(delta_F) = (v tensor v) ; mu_G.
    Substitute Step 5 into the formula of Step 2 and use naturality of v and mu_G.
    This gives q_R ; Phi(d) = (u tensor u) ; mu_G ; G(q_S)
    (def-sfb-finite-upper-star-monoidal, lem-sfb-adjunction-oplax-mate).
 7. By the actual balanced direct-image construction, q_R ; m = mu_G ; G(q_S).
    Naturality of q_R for the two module units and cancellation of q_R now give
-   the tensor identity (def-sfb-modobj-relative-tensor, def-sfb-module-lower-star).
+   the tensor identity (prose-03-02, prose-03-02).
 8. Steps 2 and 4 give Phi(d_0) = v_R ; G(alpha) = e. These two identities say
    exactly that d and d_0 are the inverse Hom images defining the oplax mate;
    bijectivity makes that identification unique (sk-def-sfb-coefficient-morphisms,

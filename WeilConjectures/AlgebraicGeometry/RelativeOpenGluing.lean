@@ -24,9 +24,41 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 500000 in
--- Elaborating the derived restriction comparisons needs this larger budget.
-set_option synthInstance.maxHeartbeats 400000 in
+/-- Assemble relative gluing from an ambient object and gluing of morphisms.
+The compatibility calculation only uses functoriality and composition. -/
+private theorem exists_relative_gluing_of_ambient
+    {C D CW CV CI : Type*} [Category C] [Category D]
+    [Category CW] [Category CV] [Category CI]
+    (L : C ⥤ D) (JW : C ⥤ CW) (JV : C ⥤ CV) (JI : C ⥤ CI)
+    (PW : D ⥤ CW) (PV : D ⥤ CV) (SW : CW ⥤ CI) (SV : CV ⥤ CI)
+    (kW : L ⋙ PW ≅ JW) (kV : L ⋙ PV ≅ JV)
+    (sW : JW ⋙ SW ≅ JI) (sV : JV ⋙ SV ≅ JI)
+    {A : CW} {B : CV} (c : SW.obj A ≅ SV.obj B) (E : C)
+    (a : A ⟶ JW.obj E) (b : B ⟶ JV.obj E)
+    (hab : SW.map a ≫ sW.hom.app E = c.hom ≫ SV.map b ≫ sV.hom.app E)
+    (hobj : ∃ (G : C) (jW : JW.obj G ≅ A) (jV : JV.obj G ≅ B),
+      sW.inv.app G ≫ SW.map jW.hom ≫ c.hom = sV.inv.app G ≫ SV.map jV.hom)
+    (hhom : ∀ (G : C) (a' : JW.obj G ⟶ JW.obj E) (b' : JV.obj G ⟶ JV.obj E),
+      sW.inv.app G ≫ SW.map a' ≫ sW.hom.app E =
+        sV.inv.app G ≫ SV.map b' ≫ sV.hom.app E →
+      ∃ (α : L.obj G ⟶ L.obj E),
+        PW.map α ≫ kW.hom.app E = kW.hom.app G ≫ a' ∧
+        PV.map α ≫ kV.hom.app E = kV.hom.app G ≫ b') :
+    ∃ (F : D) (α : F ⟶ L.obj E) (iW : PW.obj F ≅ A) (iV : PV.obj F ≅ B),
+      PW.map α ≫ kW.hom.app E = iW.hom ≫ a ∧
+      PV.map α ≫ kV.hom.app E = iV.hom ≫ b := by
+  obtain ⟨G, jW, jV, ht⟩ := hobj
+  have hcompat : sW.inv.app G ≫ SW.map (jW.hom ≫ a) ≫ sW.hom.app E =
+      sV.inv.app G ≫ SV.map (jV.hom ≫ b) ≫ sV.hom.app E := by
+    simp only [Functor.map_comp, Category.assoc]
+    rw [hab]
+    simpa only [Category.assoc] using
+      congrArg (fun t ↦ t ≫ SV.map b ≫ sV.hom.app E) ht
+  obtain ⟨α, hW, hV⟩ := hhom G (jW.hom ≫ a) (jV.hom ≫ b) hcompat
+  refine ⟨L.obj G, α, kW.app G ≪≫ jW, kV.app G ≪≫ jV, ?_, ?_⟩
+  · simpa only [Iso.trans_hom, Iso.app_hom, Category.assoc] using hW
+  · simpa only [Iso.trans_hom, Iso.app_hom, Category.assoc] using hV
+
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Glue derived objects and compatible maps on the union, using ambient relative
@@ -78,38 +110,10 @@ theorem exists_relative_open_gluing
         ∃ (iW : PW.obj F ≅ A) (iV : PV.obj F ≅ B),
           PW.map α ≫ kW.hom.app E = iW.hom ≫ a ∧
           PV.map α ≫ kV.hom.app E = iV.hom ≫ b := by
-  dsimp only
-  intro c E a b hab
-  obtain ⟨G, jW, jV, ht⟩ := exists_ambient_open_gluing_object X W V A B c
-  have hcompat :
-      (schemeDerivedOpenRestrictionCompIso X
-        (homOfLE inf_le_left : W ⊓ V ⟶ W)).inv.app G ≫
-          (schemeOpenOverlapRestriction X
-            (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory.map (jW.hom ≫ a) ≫
-          (schemeDerivedOpenRestrictionCompIso X
-            (homOfLE inf_le_left : W ⊓ V ⟶ W)).hom.app E =
-      (schemeDerivedOpenRestrictionCompIso X
-        (homOfLE inf_le_right : W ⊓ V ⟶ V)).inv.app G ≫
-          (schemeOpenOverlapRestriction X
-            (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory.map (jV.hom ≫ b) ≫
-          (schemeDerivedOpenRestrictionCompIso X
-            (homOfLE inf_le_right : W ⊓ V ⟶ V)).hom.app E := by
-    simp only [Functor.map_comp, Category.assoc]
-    rw [hab]
-    simpa only [Category.assoc] using congrArg
-      (fun t ↦ t ≫
-        (schemeOpenOverlapRestriction X
-          (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory.map b ≫
-        (schemeDerivedOpenRestrictionCompIso X
-          (homOfLE inf_le_right : W ⊓ V ⟶ V)).hom.app E) ht
-  obtain ⟨α, hW, hV⟩ := exists_open_union_hom X W V G E
-    (jW.hom ≫ a) (jV.hom ≫ b) hcompat
-  refine ⟨(schemeOpenRestriction X (W ⊔ V)).mapDerivedCategory.obj G, α,
-    (schemeDerivedOpenRestrictionCompIso X
-      (homOfLE le_sup_left : W ⟶ W ⊔ V)).app G ≪≫ jW,
-    (schemeDerivedOpenRestrictionCompIso X
-      (homOfLE le_sup_right : V ⟶ W ⊔ V)).app G ≪≫ jV, ?_, ?_⟩
-  · simpa only [Iso.trans_hom, Iso.app_hom, Category.assoc] using hW
-  · simpa only [Iso.trans_hom, Iso.app_hom, Category.assoc] using hV
+  intro L JW JV PW PV SW SV kW kV sW sV c E a b hab
+  exact exists_relative_gluing_of_ambient L JW JV
+    (schemeOpenRestriction X (W ⊓ V)).mapDerivedCategory PW PV SW SV kW kV sW sV
+    c E a b hab (exists_ambient_open_gluing_object X W V A B c)
+    (fun G ↦ exists_open_union_hom X W V G E)
 
 end AlgebraicGeometry.Scheme

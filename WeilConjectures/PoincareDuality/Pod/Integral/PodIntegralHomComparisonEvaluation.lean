@@ -10,7 +10,7 @@ public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEval
 /-! # Evaluation square of the integral pullback Hom comparison
 
 Source: Stacks Project, Tag 0GMX; blueprint main-20261015
-prop-pod-dual-tate-data-compatibility, Steps 8--11
+theorem-poincare-duality-frobenius--2, Steps 8--11
 (blueprint: stage3-derived-automorphism-continuation-a-integral-evaluation).
 
 The evaluation field of `podIntegralHomComparison_laws`. It is formal: the

@@ -10,12 +10,13 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenStructura
 import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! K-flatness detection for finite clopen pro-etale partitions.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YN and 0FPQ.
-(blueprint: lem-pur-clopen-total-tensor-kflat-detection)
 
-The proof tests K-flatness against arbitrary unbounded acyclic complexes, using
-componentwise acyclicity and zero insertion. It is isolated from the parent
-conjunction so it can be proved independently.
+K-flatness is tested against arbitrary unbounded acyclic complexes, using componentwise
+acyclicity and zero insertion.
+
+## References
+
+* Stacks Project, Tags 06YN and 0FPQ
 -/
 
 @[expose] public noncomputable section
@@ -104,10 +105,7 @@ private theorem clopen_kflat_detection_small
     exact (h n).of_iso (b.app (F, P)).symm
 
 /-- K-flatness is detected componentwise by restriction along a finite disjoint
-open-and-closed covering. The proof uses the total tensor comparison and zero
-insertion for arbitrary unbounded acyclic complexes. Source: Stacks Project sites-cohomology.tex,
-Tag 06YN.
-(blueprint: lem-pur-clopen-kflat-detection). -/
+open-and-closed covering. -/
 theorem clopen_kflat_detection
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]

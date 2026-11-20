@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SmoothPurity.AcyclicFlatProperCo
 import all WeilConjectures.AlgebraicGeometry.SmoothPurity.AcyclicFlatProperCoefficientModel
 
 /-! # Proper coefficient model equation with only direct-image K-flatness
-
-Source: blueprint smooth-purity reduction, Charts.
-(blueprint: lem-pur-ordinary-chart-proper-model-scalar).
 -/
 
 @[expose] public noncomputable section
@@ -28,17 +25,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
   upperStar lowerStar
 
-/-- Proper coefficient model equation with only direct-image K-flatness.
-Source: blueprint smooth-purity reduction, Charts.
-(blueprint: lem-pur-ordinary-chart-proper-model-scalar).
-
-Proof: Apply scalar/pullback normalization to the direct-image complex, using precisely its
-assumed native K-flatness.
-Identify the mate of the complex-level scalar/pullback map with the actual coefficient
-direct-image complex map, by the complex mate equation.
-Paste the geometric derived counit and unit normalization equations with naturality of the scalar
-representative and acyclic comparison. The mate counit identity and adjunction triangular
-identities cancel the intervening terms and give the stated model equation. -/
+/-- Proper coefficient model equation with only direct-image K-flatness. -/
 theorem ordinaryChartProperModelScalar
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     {W V : Scheme.{u}} (r : W ⟶ V) [IsProper r] [IsNoetherian W] [IsNoetherian V]

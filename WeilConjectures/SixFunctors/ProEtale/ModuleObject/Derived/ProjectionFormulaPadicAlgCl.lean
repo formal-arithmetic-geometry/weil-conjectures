@@ -18,7 +18,7 @@ projection map `Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism for
 `𝒪_E`-complexes, for every finite subextension `E ⊆ ℚ̄_ℓ`, then it is an isomorphism for bounded
 constructible `ℚ̄_ℓ`-complexes
 (`ProEtale.CondensedRing.isIso_projectionMap_padicAlgClRingObj_of_integral`, blueprint
-`det-thm-sfb-proper-base-change-rational` (3)).
+`proposition-proper-direct-image-constructible-complexes` (3)).
 
 Bounded constructible `ℚ̄_ℓ`-complexes `K` and `M` have integral models `K₀`, `M₀` over a common
 `𝒪_E` (`ProEtale.exists_padicAlgCl_iso_integralModel_pair`): `K ≅ ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)`.

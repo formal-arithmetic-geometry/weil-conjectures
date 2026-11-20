@@ -297,21 +297,29 @@ variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ C) [I
   [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
   (F : WeilSheaf k₀ l U)
 
-omit [IsDominant j] [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))] in
 /-- For a dense open immersion `j : U₀ ↪ C₀` with `C₀` a smooth geometrically connected affine
 curve and `F` lisse on `U₀`, the compactly supported cohomology `H_c^r(C, j_*F)` vanishes for
 every `r` outside `{0, 1, 2}`: in negative degrees because `j_*F` is a sheaf, and in degrees
-above two by the cohomological range of the affine curve `C₀`
-(`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine`).
-(blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`) -/
-theorem subsingleton_compactlySupportedCohomology_directImage (_hF : F.IsLisse) {r : ℤ}
+above two because the boundary triangle identifies `H_c^r(C, j_*F)` with `H_c^r(U, F)` for
+`r ≥ 2` (`AlgebraicGeometry.nonempty_equiv_compactlySupportedCohomology_directImage_of_two_le`),
+which vanishes for `r > 2` by Poincaré duality for the lisse sheaf `F` on the smooth curve `U₀`
+(`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse`). -/
+theorem subsingleton_compactlySupportedCohomology_directImage (hF : F.IsLisse) {r : ℤ}
     (hr : r < 0 ∨ 2 < r) :
     Subsingleton
       (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology r).carrier := by
   rcases hr with hr | hr
   · exact WeilSheaf.subsingleton_globalSections_of_isZero
       (WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg _ hr)
-  · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine _ (Or.inr hr)
+  · have := isSeparated_over_of_isOpenImmersion (k₀ := k₀) j
+    have := locallyOfFiniteType_over_of_isOpenImmersion (k₀ := k₀) j
+    have := quasiCompact_over_of_isOpenImmersion (k₀ := k₀) j
+    have : SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀)) := by
+      rw [over_eq_comp j]
+      exact inferInstanceAs (SmoothOfRelativeDimension (0 + 1) _)
+    obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_directImage_of_two_le j F hr.le
+    have := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse hF hr
+    exact e.toLinearEquiv.toEquiv.symm.subsingleton
 
 /-- In the situation of `AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage`
 the degree-zero compactly supported cohomology `H_c^0(C, j_*F)` vanishes, because a nonzero
@@ -321,8 +329,7 @@ Concretely, for a compactification `C ⟶[i] Z ⟶ Spec k₀`, `H_c^0(C, j_*F) =
 (`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero_of_forall_eq_zero`).
 Such a section vanishes near the boundary `Z̄ \ C̄`, which is in the closure of the generic point
 of the irreducible curve `C̄` since `C̄` is affine and not finite; as `F` is lisse, it vanishes
-(`AlgebraicGeometry.ProEtale.eq_zero_of_forall_specializes_notMem_range`).
-(blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`) -/
+(`AlgebraicGeometry.ProEtale.eq_zero_of_forall_specializes_notMem_range`). -/
 theorem subsingleton_compactlySupportedCohomology_directImage_zero (hF : F.IsLisse) :
     Subsingleton
       (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 0).carrier := by
@@ -376,7 +383,6 @@ of the cohomology is `q` times the Frobenius of the coinvariants.
         ▼                 ▼
   H_c²(C, j_*F) ──e──▶ V_{π₁(U)}
 ```
-(blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`)
 -/
 theorem nonempty_equiv_compactlySupportedCohomology_directImage_two
     [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
@@ -405,7 +411,7 @@ theorem nonempty_equiv_compactlySupportedCohomology_directImage_two
 weight `w + 2`: the geometric coinvariants are pure of weight `w`
 (`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`) and the Tate twist of
 `AlgebraicGeometry.nonempty_equiv_compactlySupportedCohomology_directImage_two` raises weights
-by two. (blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`) -/
+by two. -/
 theorem isPureOfWeightOver_compactlySupportedCohomology_directImage_two
     (ι : PadicAlgCl l →+* ℂ) (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) :

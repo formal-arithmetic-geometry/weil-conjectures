@@ -19,7 +19,7 @@ composite of the extensions of scalars
 
 `ℚ̄_ℓ ⊗_Λ - ≅ ℚ̄_ℓ ⊗_{Λ'} (Λ' ⊗_Λ -)`,
 
-the compatibility of the transition functors of blueprint `def-weil-weil-sheaf-complex` with the
+the compatibility of the transition functors of blueprint `definition-weil-structure` with the
 functors to the `ℚ̄_ℓ`-stage. It is the conjugate of the identification of the right adjoints
 (`AlgebraicGeometry.ProEtale.fieldRestrictScalarsFromAdicCompIso`), restricting scalars along
 `Λ_X ⟶ Λ'_X ⟶ ℚ̄_ℓ,X` in two steps or in one, which is the identity on the underlying sheaves.

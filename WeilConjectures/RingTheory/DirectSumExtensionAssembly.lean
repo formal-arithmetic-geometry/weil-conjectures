@@ -159,8 +159,8 @@ the pullbacks `T_j` of the proof are submodules of `T`, so they lie in that univ
 
 Proof: Pull back the given extension along each base-changed canonical inclusion, and use
 its descent hypothesis to choose an R-extension of that summand. Surjectivity of the
-Ext-one direct-sum comparison (lem-weil-pbc-ext-one-direct-sum) assembles these classes into
-an R-extension of the direct sum. Base-changing extension equivalences preserves their
+Ext-one direct-sum comparison (theorem-finite-etale-covers-proper-henselian--2) assembles these
+classes into an R-extension of the direct sum. Base-changing extension equivalences preserves their
 fixed endpoints, by identity and composition compatibility of def-weil-module-base-change.
 Next use lem-weil-pbc-tensor-commutes-with-colimits to identify the base-changed direct sum
 and its inclusions. The assembled sequence stays short exact by lem-weil-pbc-flat-tensor-exact
@@ -169,7 +169,8 @@ pullback as the kernel of the difference map out of a finite direct sum, use ten
 compatibility with finite sums, and apply lem-weil-pbc-flat-tensor-exact to that kernel.
 Consequently the assembled base-changed extension has the same pullback class on each
 summand as the original extension. Injectivity of the Ext-one direct-sum comparison over S
-(lem-weil-pbc-ext-one-direct-sum) gives an isomorphism of extensions fixing both ends. -/
+(theorem-finite-etale-covers-proper-henselian--2) gives an isomorphism of extensions fixing both
+ends. -/
 theorem extension_descends_of_summands
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (hflat : (algebraMap R S).Flat)

@@ -10,7 +10,7 @@ public import WeilConjectures.WeilSheaf.DerivedHom
 
 /-! # Internal Hom along a specified native action-site realization
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom and evaluation paragraph;
+Source: prose-10-20, internal-Hom and evaluation paragraph;
 the twisted action-site calculation, steps 11--12.
 -/
 
@@ -101,7 +101,7 @@ private noncomputable def action_hom_component
 Hom, naturally in both module arguments. This asserts only compatibility for a
 specified functor; it does not construct a site or assert an equivalence.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/evaluation paragraph;
+Source: prose-10-20, internal-Hom/evaluation paragraph;
 native ringed presentation step 3; twisted action-site steps 11--12; Stacks 03EO
 (blueprint: lem-sf-native-action-site-hom-comparison).
 

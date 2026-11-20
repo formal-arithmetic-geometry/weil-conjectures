@@ -35,10 +35,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMate
 
 /-! # Coefficient and site naturality of proper/open interchange
 
-Source: Stacks Project, Tags 0F7B and 0GL6; blueprint main-20261015,
-sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md,
-existence, uniqueness and naturality
-(blueprint: lem-sp-proper-open-coefficient-mate).
+## References
+
+* Stacks Project, Tags 0F7B and 0GL6
+* Stacks Project, Tag 0F7B (exact extension and K-injective direct image)
 -/
 
 @[expose] public noncomputable section
@@ -823,9 +823,7 @@ variable {U V W Z : Scheme.{u}}
   {k : U ⟶ V} {r : U ⟶ W} {p : V ⟶ Z} {i : W ⟶ Z}
   [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
 
-/-- Existence with the exchange normalization that determines the proper/open isomorphism.
-Source: Stacks 0F7B, the recorded unbounded proper/open normalization
-(blueprint: lem-sp-proper-open-coefficient-mate). -/
+/-- Existence with the exchange normalization that determines the proper/open isomorphism. -/
 theorem properOpenCoefficientInterchange_normalized_exists
     (A : Type (u + 1)) [CommRing A] [Finite A] (sq : IsPullback k r p i) :
     ∃ γ :
@@ -851,8 +849,7 @@ theorem properOpenCoefficientInterchange_normalized_exists
     (unboundedProperOpenInterchange A).choose_spec.choose_spec.2.2.1 k r p i sq⟩
 
 /-- The proper/open isomorphism from the recorded theorem, whose representative and
-open adjunct determine it uniquely. Source: Stacks 0F7B
-(blueprint: lem-sp-proper-open-coefficient-mate). -/
+open adjunct determine it uniquely. -/
 def properOpenCoefficientInterchange (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i) :
     R((r)_*[ModuleCat.{u + 1} A]) ⋙ D((i)_!open[ModuleCat.{u + 1} A]) ≅
@@ -893,8 +890,7 @@ private theorem properOpenCoefficientInterchange_normalization
     infer_instance
 
 /-- The restriction isomorphism selected by its specified exchange and open-unit formula.
-The hom component, rather than just its endpoints, is fixed by the recorded theorem.
-Source: Stacks 0F7B (blueprint: lem-sp-proper-open-coefficient-mate). -/
+The hom component, rather than just its endpoints, is fixed by the recorded theorem. -/
 def properOpenCoefficientRestriction (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i) :
     D((k)_!open[ModuleCat.{u + 1} A]) ⋙ R((p)_*[ModuleCat.{u + 1} A]) ⋙
@@ -905,9 +901,7 @@ def properOpenCoefficientRestriction (A : Type (u + 1)) [CommRing A] [Finite A]
     Functor.isoWhiskerRight (properOpenCoefficientInterchange A sq)
       D((i)^*[ModuleCat.{u + 1} A])).symm
 
-/-- Canonical inclusion comparison for the target of proper/open interchange.
-Source: Stacks 0F7B, exact extension and K-injective direct image
-(blueprint: lem-sp-proper-open-coefficient-mate). -/
+/-- Canonical inclusion comparison for the target of proper/open interchange. -/
 def properOpenCoefficientTargetPlus (A : Type (u + 1)) [CommRing A]
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     ((p)_*[ModuleCat.{u + 1} A].rightDerivedFunctorPlus.obj
@@ -919,8 +913,7 @@ def properOpenCoefficientTargetPlus (A : Type (u + 1)) [CommRing A]
       (((k)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryPlusCompatibility.app E)
 
 /-- The specified etale interchange, expressed in the full bounded-below subcategories.
-Full faithfulness of the inclusion transports the actual morphism, not just its objects.
-Source: Stacks 0F7B (blueprint: lem-sp-proper-open-coefficient-mate). -/
+Full faithfulness of the inclusion transports the actual morphism, not just its objects. -/
 def properOpenCoefficientInterchangePlus (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i)
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -972,8 +965,7 @@ private lemma properOpenCoefficientInterchangePlusIso_app
   simp [properOpenCoefficientInterchangePlusIso, properOpenCoefficientInterchangePlus,
     properOpenCoefficientTargetPlus, Functor.preimageIso, Category.assoc]
 
-/-- The exact same restriction exchange in bounded-below coordinates.
-Source: Stacks 0F7B (blueprint: lem-sp-proper-open-coefficient-mate). -/
+/-- The exact same restriction exchange in bounded-below coordinates. -/
 def properOpenCoefficientRestrictionPlus (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i)
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -1027,8 +1019,7 @@ private lemma properOpenCoefficientRestrictionPlus_inv
 
 /-- The coefficient-square composite through the B proper/open map.
 The two scalar comparisons are the recorded summandwise maps, and the proper
-coefficient arrow is the uniquely specified B-linear counit transpose.
-Source: Stacks 0GL6 and 0F7B (blueprint: lem-sp-proper-open-coefficient-mate). -/
+coefficient arrow is the uniquely specified B-linear counit transpose. -/
 def properOpenCoefficientComposite
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (sq : IsPullback k r p i) (E : DerivedCategoryModule A U) :
@@ -1040,16 +1031,8 @@ def properOpenCoefficientComposite
     D((i)_!open[ModuleCat.{u + 1} B]).map (finiteCoefficientDirectImageMap φ r E) ≫
     (properOpenCoefficientInterchange B sq).hom.app ((scalarExtension φ U).obj E)
 
-/-- The transpose identity for the coefficient square.  This is the counit calculation
-that remains after applying the proper direct-image adjunction; it is strictly weaker than
-the coefficient-square equality and is the mate-pasting step of the blueprint.
-Source: Stacks 0F7B and 0GL6; blueprint lem-sp-proper-open-coefficient-mate, proof Step 1.
-(blueprint: lem-sp-proper-open-coefficient-mate-transposed).
-Proof in words: expand the coefficient direct-image map as the adjoint transpose of
-the scalar-extended counit, and expand the coefficient composite.  The tensor and
-open-extension comparison maps reassociate the two paths to the same inverse-image
-composite.  The proper/open interchange normalization and the mate-pasting identity
-then identify their inverse proper-adjunction transposes. -/
+/-- The transpose identity for the coefficient square: the two composites agree after
+transposing along the derived pullback/direct-image adjunction for `p`. -/
 theorem properOpen_coefficient_mate_transposed
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (sq : IsPullback k r p i) (E : DerivedCategoryModule A U)
@@ -1091,19 +1074,7 @@ theorem properOpen_coefficient_mate_transposed
   simpa only [exactCoefficientMap_app, properOpenCoefficientComposite] using h
 
 /-- The coefficient square, as equality of actual B-linear arrows in the unbounded
-category. Source: Stacks 0F7B/0GL6; blueprint exceptional coefficient comparison,
-existence, uniqueness and naturality (blueprint: lem-sp-proper-open-coefficient-mate).
-Proof: write the tensor/pullback comparison of
-lem-weil-pbc-ringed-topoi-derived-tensor-pullback. The definition of
-finiteCoefficientDirectImageMap is the B-adjoint transpose of tensor of the A-counit.
-The open comparisons are the summandwise tensor comparisons of lem-coef-etale-open-tensor.
-The normalization in lem-amb-unbounded-proper-open-interchange identifies Gamma as
-adjunct of inverse open exchange of def-kun-unbounded-exchange followed by inverse
-open unit. Apply lem-weil-pbc-mate-pasting to the rectangle of the two proper
-adjunctions, the two open adjunctions and scalar extension. Both displayed paths
-transpose to the same inverse-image composite. Injectivity of the adjunction Hom
-bijections gives the equation. This requires no flatness and no preservation of
-bounded-below objects by scalar extension: the two lower bounds are separate. -/
+category. -/
 theorem properOpen_coefficient_mate
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (sq : IsPullback k r p i) (E : DerivedCategoryModule A U)
@@ -1152,9 +1123,7 @@ variable {U V W Z : Scheme.{u}}
 
 /-- Inverse of the transported open-restriction exchange followed by the inverse
 open unit. The factors are the named counit mates, exact pullback comparison and
-open-extension comparison. It does not use the site square to define Gamma.
-Source: Stacks 0F7B and blueprint exceptional coefficient comparison,
-existence, uniqueness and naturality (blueprint: lem-sp-proper-open-coefficient-mate). -/
+open-extension comparison. It does not use the site square to define Gamma. -/
 def properOpenSiteRestrictionInverse (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i)
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -1202,9 +1171,7 @@ private lemma openComparisonPlus_counit
   exact (compactSupportSiteComparison_open_counits A c).2 B
 
 /-- Gamma on bounded-below etale-origin complexes, defined by the open adjunct of
-inverse transported restriction and open unit, with the retained origin E.
-Source: Stacks 0F7B; blueprint exceptional comparison, existence and naturality
-(blueprint: lem-sp-proper-open-coefficient-mate). -/
+inverse transported restriction and open unit, with the retained origin E. -/
 def properOpenSiteInterchange (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i)
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -1219,8 +1186,7 @@ def properOpenSiteInterchange (A : Type (u + 1)) [CommRing A] [Finite A]
       (properOpenSiteRestrictionInverse A sq E).hom
 
 /-- The path through the etale proper/open comparison, the specified proper counit
-mate and the open comparison. Source: Stacks 0F7B and blueprint exceptional comparison
-(blueprint: lem-sp-proper-open-coefficient-mate). -/
+mate and the open comparison. -/
 def properOpenSiteComposite (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i)
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :=
@@ -1232,18 +1198,7 @@ def properOpenSiteComposite (A : Type (u + 1)) [CommRing A] [Finite A]
       ((properOpenSiteExtensionIso A k).hom.app E)
 
 /-- Site naturality square for the specified open adjunct, as an equation in the
-unbounded category via the fully faithful bounded-below inclusion.
-Source: Stacks 0F7B and blueprint exceptional coefficient comparison, existence,
-uniqueness and naturality (blueprint: lem-sp-proper-open-coefficient-mate).
-Proof: use lem-weil-pbc-comparison-pullback for exact inverse-image compatibility.
-The proper edges are exactly the counit mates of
-lem-weil-pbc-comparison-direct-image-canonical-mate, with its counit normalization.
-The open edges are the natural comparison of lem-cbc-proetale-extension-zero-comparison.
-Transport the coefficient mate rectangle across exact comparison. The inverse exchange
-and inverse open unit give properOpenSiteRestrictionInverse; its open adjunct is
-properOpenSiteInterchange. Mate pasting (lem-weil-pbc-mate-pasting) identifies the two
-paths, because their open transposes are the same transported inverse-image composite.
-The fully faithful inclusion of D+ places this equation in D without changing maps. -/
+unbounded category via the fully faithful bounded-below inclusion. -/
 theorem properOpen_site_mate (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i)
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :

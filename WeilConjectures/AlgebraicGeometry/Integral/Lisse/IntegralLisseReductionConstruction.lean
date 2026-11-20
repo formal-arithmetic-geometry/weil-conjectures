@@ -11,8 +11,12 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 /-!
 # Canonical scalar quotient towers
 
-Source: Bhatt--Scholze, Proposition 6.8.4(1), pp. 58--59.
 The objects are actual sheaf cokernels, and the completion is an actual sheaf limit.
+
+## References
+
+* Bhatt--Scholze, Proposition 6.8.4(1), pp. 58--59
+* Bhatt--Scholze, Proposition 6.8.4(1), normalization of reductions
 -/
 
 @[expose] public noncomputable section
@@ -65,12 +69,7 @@ def integralLisseCokernelTower
   Functor.ofOpSequence (integralLisseCokernelTransition l E X M)
 
 /-- The transition between two successive scalar quotients is itself the smaller scalar
-quotient. This is purely a cokernel calculation and needs no local freeness.
-Source: Bhatt--Scholze, Proposition 6.8.4(1), normalization of reductions
-(blueprint: lem-sfb-integral-lisse-cokernel-transition-quotient).
-Proof: the smaller scalar kills the transition by naturality. Any map killed by that
-scalar descends from the original module through its smaller scalar cokernel. Uniqueness
-follows by cancelling the epic larger quotient projection. -/
+quotient. This is purely a cokernel calculation and needs no local freeness. -/
 theorem integralLisseCokernelTransition_quotient
     (M : ringedSiteModules.{u + 1} (integralLisseRing l E X)) (n : ℕ) :
     IsIntegralLisseQuotient l E X

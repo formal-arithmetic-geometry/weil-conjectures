@@ -15,7 +15,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantCtf
 Let `κ : F ≅ La^* 𝒞(g, s)` be the constancy comparison of the pro-étale family object of a
 deformation to the normal cone
 (`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.proEtaleFamilyObjectIso`). This file
-proves the pro-étale forms of `prop-pur-dnc-family-constancy` (3) and (4):
+proves the pro-étale forms of `lemma-section-normal-bundle--1` (3) and (4):
 
 * `κ` restricts at `t = 1` to the fibre identification `θ₁ : Li₁^* F ≅ 𝒞(g, s)`
   (`proEtaleFamilyObjectIso_normalization`);
@@ -49,9 +49,9 @@ namespace ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {Y : Scheme.{u}} [HasInvertibleExponent Λ Y]
 
-/-- Blueprint `sk-prop-a1-inv`, pro-étale, on complexes of étale origin: *invariance along the
-line.* Let `F` on `𝔸¹_Y` be invertible and `C` on `Y` be étale complexes such that `F`, `La^* C`
-and `Li₁^* La^* C` are bounded below. Two isomorphisms `α, β : F' ≅ La^* C'` of pro-étale
+/-- Blueprint `lemma-section-normal-bundle--1`, pro-étale, on complexes of étale origin: *invariance
+along the line.* Let `F` on `𝔸¹_Y` be invertible and `C` on `Y` be étale complexes such that `F`,
+`La^* C` and `Li₁^* La^* C` are bounded below. Two isomorphisms `α, β : F' ≅ La^* C'` of pro-étale
 complexes, for `F' ≅ ν^* F` and `C' ≅ ν^* C`, with `Li₁^* α = Li₁^* β` are equal: `D(ν^*)` is
 fully faithful on bounded below complexes, which reduces the statement to the étale one
 (`AlgebraicGeometry.Etale.eq_of_leftDerivedUpperStar_oneSection_eq`). -/
@@ -158,6 +158,50 @@ lemma leftDerivedUpperStarComp_inv_congr_comp_hom_naturality {T S S' R : Scheme.
   simp only [Functor.comp_obj, Functor.comp_map] at n₁ n₃
   rw [reassoc_of% n₁, reassoc_of% n₂, n₃, Category.assoc, Category.assoc]
 
+omit [Finite Λ] in
+/-- The compatibility of base change with section isomorphisms transports across an
+isomorphism to a complex of étale origin. -/
+private lemma leftDerivedUpperStar_map_comp_compSectionIso_of_iso {B B' P P' : Scheme.{u}}
+    (u : B' ⟶ B) (a : P ⟶ B) (a' : P' ⟶ B') (v : P' ⟶ P) (i : B ⟶ P) (i' : B' ⟶ P')
+    (hv : v ≫ a = a' ≫ u) (hi : i' ≫ v = u ≫ i) (h : i ≫ a = 𝟙 B) (h' : i' ≫ a' = 𝟙 B')
+    (C : _root_.DerivedCategory (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    {C' : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} Λ))}
+    (e : C' ≅ (comparisonUpperStar (ModuleCat.{u + 1} Λ) B).mapDerivedCategory.obj C) :
+    (ProEtale.upperStar (ModuleCat.{u + 1} Λ) i').leftDerivedFunctor.map
+        ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) v a).inv.app _ ≫
+          (leftDerivedUpperStarCongr (ModuleCat.{u + 1} Λ) hv).hom.app _ ≫
+          (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) a' u).hom.app C') ≫
+        (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} Λ) i' a' h').hom.app _ =
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) i' v).inv.app _ ≫
+          (leftDerivedUpperStarCongr (ModuleCat.{u + 1} Λ) hi).hom.app _ ≫
+          (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) u i).hom.app _) ≫
+        (ProEtale.upperStar (ModuleCat.{u + 1} Λ) u).leftDerivedFunctor.map
+          ((leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} Λ) i a h).hom.app C') := by
+  let A := ModuleCat.{u + 1} Λ
+  let ε := leftDerivedUpperStarCompSectionIso A i a h
+  let ε' := leftDerivedUpperStarCompSectionIso A i' a' h'
+  have hPC := leftDerivedUpperStar_map_comp_compSectionIso_comparisonUpperStar A
+    u a a' v i i' hv hi h h' C
+  have n₁ := leftDerivedUpperStarComp_inv_congr_comp_hom_naturality Λ v a a' u hv e.inv
+  have n₂ := leftDerivedUpperStarComp_inv_congr_comp_hom_naturality Λ i' v u i hi
+    ((ProEtale.upperStar A a).leftDerivedFunctor.map e.inv)
+  have nε' := ε'.hom.naturality ((ProEtale.upperStar A u).leftDerivedFunctor.map e.inv)
+  have nε := ε.hom.naturality e.inv
+  have n₁' := congrArg (ProEtale.upperStar A i').leftDerivedFunctor.map n₁
+  rw [← cancel_epi ((ProEtale.upperStar A i').leftDerivedFunctor.map
+    ((ProEtale.upperStar A v).leftDerivedFunctor.map
+      ((ProEtale.upperStar A a).leftDerivedFunctor.map e.inv)))]
+  simp only [Functor.map_comp, Category.assoc] at n₁' n₂ hPC ⊢
+  simp only [Functor.comp_obj, Functor.comp_map, Functor.id_map, Functor.id_obj] at nε nε'
+  have nε'' : (ProEtale.upperStar A u).leftDerivedFunctor.map
+        ((ProEtale.upperStar A i).leftDerivedFunctor.map
+          ((ProEtale.upperStar A a).leftDerivedFunctor.map e.inv)) ≫
+      (ProEtale.upperStar A u).leftDerivedFunctor.map (ε.hom.app C') =
+      (ProEtale.upperStar A u).leftDerivedFunctor.map (ε.hom.app _) ≫
+        (ProEtale.upperStar A u).leftDerivedFunctor.map e.inv := by
+    rw [← Functor.map_comp, nε, Functor.map_comp]
+  rw [reassoc_of% n₁', nε', reassoc_of% hPC, reassoc_of% n₂, nε'']
+
 end ProEtale
 
 namespace Scheme.Hom.DeformationToNormalConeData
@@ -170,7 +214,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} {d : �
   (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB] [QuasiCompact D.proj]
   [QuasiSeparatedSpace B] [QuasiCompact g]
 
-/-- Blueprint `prop-pur-dnc-family-constancy` (3), pro-étale: *normalization at `t = 1`.* The
+/-- Blueprint `lemma-section-normal-bundle--1` (3), pro-étale: *normalization at `t = 1`.* The
 constancy comparison `κ : F ≅ La^* 𝒞(g, s)` restricts at the unit section to the fibre
 identification `θ₁ : Li₁^* F ≅ 𝒞(g, s)`, under `Li₁^* La^* ≅ 𝟭`. -/
 theorem proEtaleFamilyObjectIso_normalization :
@@ -224,7 +268,7 @@ theorem boundedConstructible_familyObject_and_sectionInvariant :
       D.sect).2.1,
     (isInvertible_and_boundedConstructibleFiniteTor_sectionInvariant Λ (d := d) g s).2.1⟩
 
-/-- Blueprint `prop-pur-dnc-family-constancy` (3), pro-étale: *uniqueness.* The constancy
+/-- Blueprint `lemma-section-normal-bundle--1` (3), pro-étale: *uniqueness.* The constancy
 comparison is the only isomorphism `F ≅ La^* 𝒞(g, s)` restricting at the unit section to the
 fibre identification `θ₁ : Li₁^* F ≅ 𝒞(g, s)`. -/
 theorem eq_proEtaleFamilyObjectIso
@@ -251,9 +295,7 @@ theorem eq_proEtaleFamilyObjectIso
   simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom] at h
   exact (cancel_mono _).1 h
 
-set_option maxHeartbeats 400000 in
--- the proof chases a long diagram of naturality squares between derived categories
-/-- Blueprint `prop-pur-dnc-family-constancy` (4), pro-étale: *base change.* Let `u : B' ⟶ B`,
+/-- Blueprint `lemma-section-normal-bundle--1` (4), pro-étale: *base change.* Let `u : B' ⟶ B`,
 with base change `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B`. The restriction of the constancy comparison,
 `Lv₁^* κ : Lv₁^* F ≅ Lv₁^* La^* 𝒞(g, s) ≅ La'^* Lu^* 𝒞(g, s)`, restricts at `t = 1` to the
 restriction `Lu^* θ₁` of the fibre identification, and it is the only comparison
@@ -306,31 +348,10 @@ theorem proEtaleFamilyObjectIso_baseChange {B' : Scheme.{u}} (u : B' ⟶ B)
           (leftDerivedUpperStarComp A u i₁).hom.app _) ≫
         (ProEtale.upperStar A u).leftDerivedFunctor.map
           (ε.hom.app (ProEtale.sectionInvariant Λ g s)) := by
-    have hPC := leftDerivedUpperStar_map_comp_compSectionIso_comparisonUpperStar A u a a' v₁ i₁ i₁'
+    exact leftDerivedUpperStar_map_comp_compSectionIso_of_iso Λ u a a' v₁ i₁ i₁'
       (AffineSpace.map_over u) (AffineSpace.oneSection_comp_map u)
       (AffineSpace.oneSection_comp_over _ B) (AffineSpace.oneSection_comp_over _ B')
-      (Etale.sectionInvariant Λ g s)
-    have n₁ := leftDerivedUpperStarComp_inv_congr_comp_hom_naturality Λ v₁ a a' u
-      (AffineSpace.map_over u) cC.inv
-    have n₂ := leftDerivedUpperStarComp_inv_congr_comp_hom_naturality Λ i₁' v₁ u i₁
-      (AffineSpace.oneSection_comp_map u) ((ProEtale.upperStar A a).leftDerivedFunctor.map cC.inv)
-    have nε' := ε'.hom.naturality ((ProEtale.upperStar A u).leftDerivedFunctor.map cC.inv)
-    have nε := ε.hom.naturality cC.inv
-    have n₁' := congrArg (ProEtale.upperStar A i₁').leftDerivedFunctor.map n₁
-    rw [← cancel_epi ((ProEtale.upperStar A i₁').leftDerivedFunctor.map
-      ((ProEtale.upperStar A v₁).leftDerivedFunctor.map
-        ((ProEtale.upperStar A a).leftDerivedFunctor.map cC.inv)))]
-    simp only [Functor.map_comp, Category.assoc] at n₁' n₂ hPC ⊢
-    simp only [Functor.comp_obj, Functor.comp_map, Functor.id_map, Functor.id_obj] at nε nε'
-    have nε'' : (ProEtale.upperStar A u).leftDerivedFunctor.map
-          ((ProEtale.upperStar A i₁).leftDerivedFunctor.map
-            ((ProEtale.upperStar A a).leftDerivedFunctor.map cC.inv)) ≫
-        (ProEtale.upperStar A u).leftDerivedFunctor.map
-          (ε.hom.app (ProEtale.sectionInvariant Λ g s)) =
-        (ProEtale.upperStar A u).leftDerivedFunctor.map (ε.hom.app _) ≫
-          (ProEtale.upperStar A u).leftDerivedFunctor.map cC.inv := by
-      rw [← Functor.map_comp, nε, Functor.map_comp]
-    rw [reassoc_of% n₁', nε', reassoc_of% hPC, reassoc_of% n₂, nε'']
+      (Etale.sectionInvariant Λ g s) cC
   -- the restriction of `κ` restricts at `t = 1` to `Lu^* θ₁`
   have ha : (ProEtale.upperStar A i₁').leftDerivedFunctor.map
         ((ProEtale.upperStar A v₁).leftDerivedFunctor.map κ.hom ≫

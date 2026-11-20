@@ -568,7 +568,7 @@ lemma monoIso_evaluationPairing {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y}
 
 /-- **The monodromy of lisse sheaves from universal covers** on which lisse sheaves are free of
 finite rank: the transport `G_y ≅ Γ(Ỹ_y, p_y^* G) ≅ Γ(Ỹ_z, p_z^* G) ≅ G_z` of stalks along
-paths `τ : F_y ≅ F_z` (blueprint: `def-wf-fundamental-representation`). -/
+paths `τ : F_y ≅ F_z` (blueprint: `situation-weil`). -/
 noncomputable def lisseMonodromy : LisseMonodromy l Y Ω where
   mono τ := monoIso hU τ
   mono_refl := monoIso_refl hU

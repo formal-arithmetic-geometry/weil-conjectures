@@ -79,14 +79,18 @@ theorem nonempty_condensedRealizationTensorIso :
   exact ⟨Functor.postcompose₂CompIso
     (Functor.postcompose₂FlipIsoOfUncurry (tensorBifunctorForget k₀ l X)) τ⟩
 
-set_option synthInstance.maxHeartbeats 400000 in
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology _) Ab) _`
 /-- The condensed realization of a native K-flat complex of pro-étale Weil sheaves is a K-flat
 complex of module objects. -/
 theorem kFlat_condensedRealization_mapHomologicalComplex
     (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) (hP : NativeIsKFlat k₀ l X P) :
     (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
       (((condensedRealization k₀ l X).mapHomologicalComplex (.up ℤ)).obj P) := by
+  have (A B : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+        Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj l)
+          (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))) : A.HasTensor B := by
+    intro n
+    infer_instance
   obtain ⟨τ⟩ := nonempty_condensedTensorIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
   have h := native_two_sided_kflat_forget k₀ l X P hP
   have := Functor.flip_additive

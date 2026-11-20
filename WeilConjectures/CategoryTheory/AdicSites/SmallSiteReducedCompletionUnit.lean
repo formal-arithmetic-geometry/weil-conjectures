@@ -10,7 +10,8 @@ import all WeilConjectures.CategoryTheory.AdicSites.CompletionFiniteReductionSup
 
 /-! # Reduction inverts the completion unit
 
-Source: Stacks 099M, 091N; the reduction step of fix-lem-exchanges Step 5.
+Source: Stacks 099M, 091N; the reduction step of proposition-composition-base-change-rf-shriek Step
+5.
 -/
 
 -- After pruning, this module only keeps private declarations.

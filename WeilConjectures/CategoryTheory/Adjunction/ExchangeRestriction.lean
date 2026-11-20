@@ -16,8 +16,8 @@ For adjunctions `c_! ⊣ c^!` and `d_! ⊣ d^!`, functors `ι^*` and `Δ^*` and 
 `ι^* c^! P ⟶ d^! Δ^* P` the `d_! ⊣ d^!` adjoint of `σ⁻¹` followed by `Δ^*` of the counit of
 `c_! ⊣ c^!` (`CategoryTheory.Adjunction.mateEquiv_app_eq_homEquiv`). For the fixed square
 of a correspondence this is the supported restriction of the trace formula (blueprint
-`det-tf-supported-restriction`). This file proves how it behaves under a change of coefficients
-`T` commuting with `c_!`, `d_!` and `Δ^*`.
+`lemma-local-term-restriction-map--1`). This file proves how it behaves under a change of
+coefficients `T` commuting with `c_!`, `d_!` and `Δ^*`.
 
 ## Main statements
 

@@ -42,7 +42,7 @@ Proof:
 3. The opens `U` and `T.compl` cover `X` because `T ⊆ U`. Coherence is invariant under
    isomorphism, and the zero module is coherent, by
    `lem-weil-pbc-coherent-modules-kernel-cokernel-sum`. Thus both restrictions are coherent.
-   Apply `lem-weil-pbc-coherent-module-local-on-open-cover` to this two-element cover. -/
+   Apply `lemma-coherent-base-change-invertible-sheaves--1` to this two-element cover. -/
 theorem pushforward_coherent_on_open (X : Scheme.{u}) (U : X.Opens) (T : Closeds X)
     (hT : (T : Set X) ⊆ (U : Set X)) (F : U.toScheme.Modules)
     (hF : RingedSpace.IsCoherent U.toScheme.toRingedSpace F)

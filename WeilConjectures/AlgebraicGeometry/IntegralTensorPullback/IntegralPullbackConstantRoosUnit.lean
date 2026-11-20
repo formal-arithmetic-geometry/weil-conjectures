@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.Augmented.AugmentedTowerRoosTransport
 
 /-! # Constant scalar restriction of the strict pulled reduction tower
 
-Source: blueprint det-lem-int-tensor-pullback, comparison paragraph; Stacks 099I.
-(blueprint: lem-sfb-internal-pullback-constant-roos-unit).
+## References
+
+* Stacks 099I
 -/
 
 @[expose] public noncomputable section

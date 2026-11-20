@@ -33,7 +33,7 @@ inertia group of `Q` acting on the localization `B_Q` (`Ideal.inertiaInvariants`
   (`Ideal.isLocalization_away_inertiaInvariants`): `A` is a local domain of dimension one.
 
 This is the strict henselization at a boundary point of blueprint
-`lem-wf-boundary-stalk-invariants`, as an ind-étale algebra over an affine chart.
+`lemma-boundary-stalk--1`, as an ind-étale algebra over an affine chart.
 -/
 
 @[expose] public section
@@ -50,7 +50,7 @@ variable {R : Type*} (K : Type*) {Ω : Type*} [CommRing R] [Field K] [Field Ω] 
   (Q : Ideal (integralClosure R Ω)) [Q.IsPrime]
 
 /-- The ring `B_Q^{I_Q}` of inertia invariants of the localization `B_Q`, as an `R`-subalgebra.
-(blueprint `lem-wf-boundary-stalk-invariants`) -/
+(blueprint `lemma-boundary-stalk--1`) -/
 noncomputable def inertiaInvariants : Subalgebra R (Localization.AtPrime Q) :=
   letI := inertiaAtPrimeAction Q Gal(Ω/K)
   { FixedPoints.subring (Localization.AtPrime Q) (Q.inertia Gal(Ω/K)) with
@@ -547,7 +547,7 @@ omit [PerfectField m.ResidueField] in
 include m in
 /-- **The punctured spectrum of `B_Q^{I_Q}`.** For `0 ≠ ϖ ∈ m`, the localization `A[1/ϖ]` of
 `A = B_Q^{I_Q}` is the fixed field `Ω^{I_Q}` of the inertia group.
-(blueprint `lem-wf-boundary-stalk-invariants`) -/
+(blueprint `lemma-boundary-stalk--1`) -/
 theorem isLocalization_away_inertiaInvariants {ϖ : R} (hϖ : ϖ ∈ m) (hϖ0 : ϖ ≠ 0) :
     IsLocalization.Away (algebraMap R (inertiaInvariants K Q) ϖ)
       (IntermediateField.fixedField (Q.inertia Gal(Ω/K))) := by
@@ -598,7 +598,7 @@ variable {R : Type u} (K : Type*) {Ω : Type u} [CommRing R] [IsDedekindDomain R
 
 include m in
 /-- **The inertia invariants of `B_Q` are ind-étale** over `R`: they are the directed union of
-their étale `R`-subalgebras. (blueprint `lem-wf-boundary-stalk-invariants`) -/
+their étale `R`-subalgebras. (blueprint `lemma-boundary-stalk--1`) -/
 theorem indEtale_inertiaInvariants : Algebra.IndEtale R (inertiaInvariants K Q) := by
   classical
   refine Algebra.IndEtale.of_directedOn {E | Algebra.Etale R E} ?_ ?_ fun E hE ↦ hE

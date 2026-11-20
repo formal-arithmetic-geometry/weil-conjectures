@@ -31,10 +31,10 @@ on `Y`, and `p : 𝔸¹_Y → Y` is the projection, `s : Y → 𝔸¹_Y` the zer
 * consequently `Rs^! Λ(1)[2] ≅ Λ_Y`, the *fundamental class* of the zero section
   (`sk-prop-a1`);
 * a complex on `𝔸¹_Y` that is a pullback is determined by its restriction to `t = 1`, so its
-  fibres at `t = 0` and `t = 1` agree (`sk-prop-a1-inv`).
+  fibres at `t = 0` and `t = 1` agree (`lemma-section-normal-bundle--1`).
 
 Iterating the one-dimensional case gives the model purity `Rz^! Λ(c)[2c] ≅ Λ_B` for the zero
-section of `𝔸^c_B` (`sk-prop-an`), in
+section of `𝔸^c_B` (`proposition-purity-vector-bundles`), in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace`.
 
 The invertibility hypothesis is not decorative: for `Λ = ℤ/p` over a base of characteristic
@@ -65,8 +65,9 @@ Two clauses of the blueprint are stated only in part, and are TODOs.
   (`AlgebraicGeometry.Etale.kummerBoundary`) is this isomorphism is the orientation
   `AlgebraicGeometry.Etale.affineLineOrientation` of
   `WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation`.
-* The gluing half of `sk-prop-a1-inv` (ii) — that normalized local comparisons over an étale
-  cover of `Y` glue (`prop-pur-a1-invariance`) — is stated for a single surjective étale
+* The gluing half of `lemma-section-normal-bundle--1` (ii) — that normalized local comparisons over
+an étale
+  cover of `Y` glue (`lemma-section-normal-bundle--1`) — is stated for a single surjective étale
   `v : Y' ⟶ Y`, the disjoint union of the members of a covering family.
 
 ## Main statements
@@ -324,8 +325,8 @@ theorem isZero_homology_multiplicativeGroup [IsAlgClosed k] [QuasiCompact aY]
   exact (isZero_homology_constantComplex Λ Y (m - 1) (by omega)).of_iso e
 
 set_option linter.unusedSectionVars false in
-/-- Blueprint `lem-pur-lisse-uniqueness`: Uniqueness for lisse sheaf maps (first assertion,
-for the base `B = Y`); also clause (i) of `sk-prop-a1-inv` (Weak `𝔸¹`-invariance).
+/-- Blueprint `lemma-section-normal-bundle--1`: Uniqueness for lisse sheaf maps (first assertion,
+for the base `B = Y`); also clause (i) of `lemma-section-normal-bundle--1` (Weak `𝔸¹`-invariance).
 
 *Uniqueness for lisse sheaf maps on `𝔸¹_Y`.* Two morphisms between finite locally constant
 sheaves on `𝔸¹_Y` that agree after restriction to the open complement `G = 𝔾_{m,Y}` of the
@@ -343,13 +344,13 @@ theorem injective_upperStar_map_of_isFiniteLocallyConstantSheaf
 
 set_option linter.unusedSectionVars false in
 set_option linter.unusedVariables false in
-/-- Blueprint `lem-pur-lisse-uniqueness`: Uniqueness for lisse sheaf maps (second assertion,
-for the base `B = Y`); also clause (i) of `sk-prop-a1-inv` (Weak `𝔸¹`-invariance).
+/-- Blueprint `lemma-section-normal-bundle--1`: Uniqueness for lisse sheaf maps (second assertion,
+for the base `B = Y`); also clause (i) of `lemma-section-normal-bundle--1` (Weak `𝔸¹`-invariance).
 
 *Uniqueness for lisse sheaf maps on `𝔾_{m,Y}`.* Two morphisms between finite locally constant
 sheaves on `𝔾_{m,Y}` that agree after restriction along the unit section `i₁ : Y ⟶ 𝔾_{m,Y}`
-agree everywhere. This is the second assertion of clause (i), and it is what `sk-thm-dnc`
-Step 2 and `sk-prop-an` Step 3 use. -/
+agree everywhere. This is the second assertion of clause (i), and it is what
+`lemma-section-normal-bundle` Step 2 and `proposition-purity-vector-bundles` Step 3 use. -/
 theorem injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
     (i₁ : Y ⟶ G) (hi₁ : i₁ ≫ j = AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)
@@ -376,7 +377,7 @@ theorem injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf
   simpa using this
 
 set_option linter.unusedSectionVars false in
-/-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
+/-- Blueprint `lemma-section-normal-bundle--1`: Weak `𝔸¹`-invariance
 
 *Invariance along the line.* A comparison between an invertible complex `F` on `𝔸¹_Y` and a
 pullback from `Y` is determined by its restriction to the unit section `t = 1`: two
@@ -385,9 +386,9 @@ identifications `Li₀^* F ≅ C ≅ Li₁^* F` obtained from such a comparison 
 invariant is *constant* along the `𝔸¹`-direction: its values at `t = 0` and at `t = 1` agree.
 
 Invertibility of `F` is what puts the comparison inside the lisse rank-one world in which the
-uniqueness statements above apply; it is the hypothesis `sk-prop-a1-inv` (ii) imposes, in the
-weaker form available here (the blueprint asks that `F` be étale-locally a shift and twist of
-a lisse rank-one sheaf). -/
+uniqueness statements above apply; it is the hypothesis `lemma-section-normal-bundle--1` (ii)
+imposes, in the weaker form available here (the blueprint asks that `F` be étale-locally a shift and
+twist of a lisse rank-one sheaf). -/
 theorem eq_of_leftDerivedUpperStar_oneSection_eq
     (F : _root_.DerivedCategory
       (Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -421,7 +422,7 @@ theorem eq_of_leftDerivedUpperStar_oneSection_eq
 
 set_option linter.unusedSectionVars false in
 include aY in
-/-- Blueprint `prop-pur-a1-invariance`: Invariance along the affine line
+/-- Blueprint `lemma-section-normal-bundle--1`: Invariance along the affine line
 
 *Gluing.* Let `F ∈ D(𝔸¹_Y)`, `C ∈ D(Y)` and `θ : Li₁^* F ≅ C`. Let `v : Y' ⟶ Y` be surjective
 and étale with `Y'` separated of finite type over `k`, for instance the disjoint union of an
@@ -535,7 +536,7 @@ theorem existsUnique_iso_leftDerivedUpperStar_of_etale
 -- unifying the objects of the composition and section isomorphisms is expensive
 set_option linter.unusedSectionVars false in
 include aY in
-/-- Blueprint `prop-pur-a1-invariance`: Invariance along the affine line
+/-- Blueprint `lemma-section-normal-bundle--1`: Invariance along the affine line
 
 *Uniqueness and normalization*, clauses (1) and (2). In the situation of
 `AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`, the glued comparison

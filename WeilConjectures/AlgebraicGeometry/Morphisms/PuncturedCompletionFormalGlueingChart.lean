@@ -13,9 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartRestr
 
 /-! # Geometric realization of a formal glueing chart
 
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL,
-the definition of compatible sections.
-(blueprint: lem-sbc-punctured-completion-formal-glueing-chart)
+## References
+
+* Stacks Project, Tag 0BLH, first two proof paragraphs
+* Tag 05EL, the definition of compatible sections
+* Stacks Project, Tag 0BLH, first two proof paragraphs, and Tag 05EL, the displayed definition of H0
 -/
 
 @[expose] public section
@@ -24,44 +26,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
-set_option maxHeartbeats 800000 in
--- The dependent section modules and two pullback presentations require extra elaboration steps.
 /-- The sheaf equalizer identifies matching sections with compatible tuples,
-with the selected coordinate equal to restriction to the corresponding chart.
-
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs, and Tag 05EL,
-the displayed definition of H0.
-
-Proof: for each generator g j let V j be its principal open in U and let
-Y j be its inverse image under q. The generators span the maximal ideal, so
-these opens cover U. Finite q makes each Y j affine, and finite s makes E
-affine. Take M j to be Gamma(Y j), with its localization-algebra scalar
-action, and M' to be Gamma(E). Affine principal-open localization identifies
-the localized M' with sections of E over D(g j). The given overlapIso
-identifies that scheme with the completed base change of Y j. Its affine
-section ring is C tensor Gamma(Y j), giving alpha j. Similarly restriction
-to double principal opens gives alpha_overlap. On numerators these maps
-are the original section restrictions and scalar extensions; functoriality
-of restriction proves the square and cocycle equations. The overlap map is
-over Spec C, so alpha commutes with C-scalars. This constructs X.
-
-For a compatible tuple, its chart coordinates glue uniquely to a section
-on Y by the sheaf axiom. The prime/chart equations say that this section
-and its prime coordinate agree on the overlap: check on the same covering
-and use sheaf separatedness. They therefore give a matching pair. Conversely
-restrict a matching pair to each Y j and retain its completed coordinate;
-these satisfy both compatibility equations. These two operations are inverse
-and A-linear, giving b. By puncturedMap_over, the inverse image of W under
-puncturedMap is precisely Y i, up to the canonical restriction isomorphism.
-Its pullback on sections gives c. The Spec-Gamma adjunction and appTop
-functoriality identify c of the i-coordinate with psi(rho(b h)). The same
-calculation on a base element a identifies its A-action with multiplication
-by psi(rho(baseMap a)), hence c is A-linear for the action stated here.
-The construction uses no chart-power-lifting or algebraization theorem.
-If a generator is nilpotent its chart module is zero. An empty U has zero
-punctured sections and H0 retains just the prime coordinate; zero rings
-and redundant generators satisfy the same equalizer equations.
-(blueprint: lem-sbc-punctured-completion-formal-glueing-chart) -/
+with the selected coordinate equal to restriction to the corresponding chart. -/
 theorem exists_formalGlueingData_matching_chart
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}
@@ -97,8 +63,9 @@ theorem exists_formalGlueingData_matching_chart
   let : Algebra A Γ(E, ⊤) := aE.toAlgebra
   let : ∀ j, Algebra A Γ(Y, V j) := fun j ↦
     ((Y.presheaf.map (homOfLE (le_top : V j ≤ ⊤)).op).hom.comp aY).toAlgebra
-  obtain ⟨hcover, X, e, d, hmem⟩ :=
-    D.exists_formalGlueingData_affine_datum hU t g hgen
+  have hdatum := D.exists_formalGlueingData_affine_datum hU t g hgen
+  dsimp only at hdatum
+  obtain ⟨hcover, X, e, d, hmem⟩ := hdatum
   let O := pullback q (completionSpecMap A ∣_ U)
   let p : O ⟶ Y := pullback.fst q (completionSpecMap A ∣_ U)
   let F := p.appTop
@@ -229,14 +196,14 @@ theorem exists_formalGlueingData_matching_chart
       rw [hrchart, hJP]
       exact ha j
   let b := (LinearEquiv.ofBijective r ⟨hinj, hsurj⟩).symm
-  obtain ⟨c0, hc0⟩ := D.exists_matching_chart_restriction (g i)
+  have hrestriction := D.exists_matching_chart_restriction (g i)
+  dsimp only at hrestriction
+  obtain ⟨c0, hc0⟩ := hrestriction
   refine ⟨X, b, (d i).trans c0, ?_⟩
   intro h
-  rw [hc0]
-  change c0 (res i (P (b h))) = c0 (d i (h.val.2 i))
-  congr 1
   have hb : r (b h) = h := (LinearEquiv.ofBijective r ⟨hinj, hsurj⟩).apply_symm_apply h
-  exact (hrchart (b h) i).symm.trans (congrArg (fun h ↦ d i (h.val.2 i)) hb)
+  exact (hc0 (b h)).trans (congrArg c0
+    ((hrchart (b h) i).symm.trans (congrArg (fun h ↦ d i (h.val.2 i)) hb)))
 
 
 end AlgebraicGeometry.Scheme.CompletionGluingData

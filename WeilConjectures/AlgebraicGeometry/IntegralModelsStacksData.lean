@@ -36,7 +36,7 @@ import WeilConjectures.AlgebraicGeometry.ConstantModelStratificationTransport
 /-! # Coefficients and predicates for integral models
 
 Stacks Project,
-Tag 09C1 (blueprint: det-lem-integral-models-stacks).
+Tag 09C1 (blueprint: lemma-integral-models--2).
 -/
 
 @[expose] public noncomputable section
@@ -49,7 +49,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 /-- The discrete scalar ring on the pro-etale point. Source: Stacks Tag 09C1
-(blueprint: det-lem-integral-models-stacks). -/
+(blueprint: lemma-integral-models--2). -/
 abbrev discreteSheaf (A : Type u) [CommRing A] :
     Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} :=
   (sheafCompose (coherentTopology Profinite.{u})
@@ -58,12 +58,12 @@ abbrev discreteSheaf (A : Type u) [CommRing A] :
       (CommRingCat.of (ULift.{u + 1} A)))
 
 /-- Its underlying condensed abelian ring object. Source: Stacks Tag 09C1
-(blueprint: det-lem-integral-models-stacks). -/
+(blueprint: lemma-integral-models--2). -/
 abbrev discreteObj (A : Type u) [CommRing A] :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (discreteSheaf A)
 
 /-- The commutative ring structure comes from the actual constant commutative ring sheaf.
-Source: Stacks Tag 09C1 (blueprint: det-lem-integral-models-stacks). -/
+Source: Stacks Tag 09C1 (blueprint: lemma-integral-models--2). -/
 instance discreteObj_comm (A : Type u) [CommRing A] : IsCommMonObj (discreteObj A) :=
   Sheaf.isCommMonObj_sheafCompose_obj (coherentTopology Profinite.{u})
     (discreteSheaf A) (fun U a b ↦
@@ -72,7 +72,7 @@ instance discreteObj_comm (A : Type u) [CommRing A] : IsCommMonObj (discreteObj 
 
 /-- The scalar map on the point sends an element to its constant continuous function.
 Source: blueprint integral-models-stacks, the map from the constant sheaf
-(blueprint: det-lem-integral-models-stacks). -/
+(blueprint: lemma-integral-models--2). -/
 def constantToContinuous (A : Type u) [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] : discreteSheaf A ⟶ Profinite.continuousMapRingSheafOfUniverse A :=
   ((constantCommuteCompose (coherentTopology Profinite.{u})
@@ -86,7 +86,7 @@ def constantToContinuous (A : Type u) [CommRing A] [TopologicalSpace A]
         naturality := fun _ _ _ ↦ RingCat.hom_ext (by ext x; rfl) }
 
 /-- A scalar homomorphism induces the actual map between discrete condensed rings.
-Source: Stacks Tag 09C1 (blueprint: det-lem-integral-models-stacks). -/
+Source: Stacks Tag 09C1 (blueprint: lemma-integral-models--2). -/
 def discreteMap {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
     discreteObj A ⟶ discreteObj B :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
@@ -96,13 +96,13 @@ def discreteMap {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
           (f.comp ULift.ringEquiv.toRingHom)))))
 
 /-- The source and target ring structures are the sheafified scalar structures.
-Source: Stacks Tag 09C1 (blueprint: det-lem-integral-models-stacks). -/
+Source: Stacks Tag 09C1 (blueprint: lemma-integral-models--2). -/
 instance discreteMap_mon {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
     IsMonHom (discreteMap f) := inferInstanceAs (IsMonHom
       ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map _))
 
 /-- Reconstruct the section-ring map of a map of internal commutative rings.
-Source: Stacks Tag 00YV (blueprint: det-lem-integral-models-stacks). -/
+Source: Stacks Tag 00YV (blueprint: lemma-integral-models--2). -/
 def sectionMap (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
@@ -115,7 +115,7 @@ def sectionMap (X : Scheme.{u})
     InternalAbelianSheafModule.commMonToRing.{u + 1}⟩
 
 /-- The section ring on the equivalent coefficient-sized small pro-etale site.
-Source: Stacks Tags 00YV and 09A5 (blueprint: det-lem-integral-models-stacks). -/
+Source: Stacks Tags 00YV and 09A5 (blueprint: lemma-integral-models--2). -/
 abbrev smallRing (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :=
   ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤
@@ -125,7 +125,7 @@ abbrev smallRing (X : Scheme.{u})
     (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology X) R)
 
 /-- The same reconstructed coefficient homomorphism on the small site.
-Source: Stacks Tags 00YV and 09A5 (blueprint: det-lem-integral-models-stacks). -/
+Source: Stacks Tags 00YV and 09A5 (blueprint: lemma-integral-models--2). -/
 def smallMap (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
@@ -138,7 +138,7 @@ def smallMap (X : Scheme.{u})
 
 /-- Sectionwise module transport to the equivalent small site. It preserves sections
 and their scalar action. Source: Stacks Tags 00YV and 09A5
-(blueprint: det-lem-integral-models-stacks). -/
+(blueprint: lemma-integral-models--2). -/
 def smallModules (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R ⥤
@@ -149,7 +149,7 @@ def smallModules (X : Scheme.{u})
 /-- Transport a derived object by the sectionwise equivalence, on a localization
 representative. This is the exact transport to the identical small ringed topos.
 Source: Stacks Tags 00YV, 05RU and 09A5
-(blueprint: det-lem-integral-models-stacks). -/
+(blueprint: lemma-integral-models--2). -/
 def smallDerivedObject (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)) :
@@ -160,13 +160,13 @@ def smallDerivedObject (X : Scheme.{u})
     (ComplexShape.up ℤ)).obj (DerivedCategory.Q.objPreimage K))
 
 /-- The existing completed integral condensed ring, without any finite-field base datum.
-Source: blueprint integral-models-stacks (blueprint: det-lem-integral-models-stacks). -/
+Source: blueprint integral-models-stacks (blueprint: lemma-integral-models--2). -/
 abbrev integersObj (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :=
   (sfbCondensedIntegers l E).X
 
 /-- Commutativity of the continuous-function coefficient ring.
-Source: blueprint integral-models-stacks (blueprint: det-lem-integral-models-stacks). -/
+Source: blueprint integral-models-stacks (blueprint: lemma-integral-models--2). -/
 instance integersObj_comm (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     IsCommMonObj (integersObj l E) :=
@@ -177,7 +177,7 @@ instance integersObj_comm (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
       (ULift.{u + 1} C(S.unop, Padic.coefficientExtensionIntegers l E)) _ a b)
 
 /-- The canonical map from discrete to completed integral coefficients on the point.
-Source: blueprint integral-models-stacks (blueprint: det-lem-integral-models-stacks). -/
+Source: blueprint integral-models-stacks (blueprint: lemma-integral-models--2). -/
 def scalarPointMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     discreteObj (Padic.coefficientExtensionIntegers l E) ⟶ integersObj l E :=
@@ -186,7 +186,7 @@ def scalarPointMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (constantToContinuous (Padic.coefficientExtensionIntegers l E))
 
 /-- The scalar map preserves the ring operations by its construction from a ring map.
-Source: blueprint integral-models-stacks (blueprint: det-lem-integral-models-stacks). -/
+Source: blueprint integral-models-stacks (blueprint: lemma-integral-models--2). -/
 instance scalarPointMap_mon (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     IsMonHom (scalarPointMap l E) :=
@@ -195,27 +195,27 @@ instance scalarPointMap_mon (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (constantToContinuous (Padic.coefficientExtensionIntegers l E))
 
 /-- Pull back the specified constant-to-continuous map to X.
-Source: blueprint integral-models-stacks (blueprint: det-lem-integral-models-stacks). -/
+Source: blueprint integral-models-stacks (blueprint: lemma-integral-models--2). -/
 def scalarMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :=
   (upperStarFromPoint X).map (scalarPointMap l E)
 
 /-- Monoidality of the site inverse image preserves the specified coefficient map.
-Source: blueprint integral-models-stacks (blueprint: det-lem-integral-models-stacks). -/
+Source: blueprint integral-models-stacks (blueprint: lemma-integral-models--2). -/
 instance scalarMap_mon (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :
     IsMonHom (scalarMap l E X) := inferInstanceAs
       (IsMonHom ((upperStarFromPoint X).map (scalarPointMap l E)))
 
 /-- The canonical residue coefficient map on X, induced by the actual first quotient.
-Source: Stacks Tag 09C1 (blueprint: det-lem-integral-models-stacks). -/
+Source: Stacks Tag 09C1 (blueprint: lemma-integral-models--2). -/
 def residueMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :=
   (upperStarFromPoint X).map
     (discreteMap (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E 1)))
 
 /-- The residue map is a map of the actual pulled-back commutative ring objects.
-Source: Stacks Tag 09C1 (blueprint: det-lem-integral-models-stacks). -/
+Source: Stacks Tag 09C1 (blueprint: lemma-integral-models--2). -/
 instance residueMap_mon (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :
     IsMonHom (residueMap l E X) := inferInstanceAs
@@ -223,7 +223,7 @@ instance residueMap_mon (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
         (discreteMap (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E 1)))))
 
 /-- Exact, termwise restriction along the canonical map from the constant coefficient ring.
-Source: blueprint integral-models-stacks (blueprint: det-lem-integral-models-stacks). -/
+Source: blueprint integral-models-stacks (blueprint: lemma-integral-models--2). -/
 abbrev restriction (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :=
   (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -233,7 +233,7 @@ abbrev restriction (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 first residue map, constructible residue cohomology, and finite relative Tor amplitude.
 Transport to the equivalent small site is used only for the recorded local completeness
 predicate; no hypothesis on the complex is imposed by this transport.
-Source: Stacks Tag 09C1 (blueprint: det-lem-integral-models-stacks). -/
+Source: Stacks Tag 09C1 (blueprint: lemma-integral-models--2). -/
 def stacksConstructible (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X] :

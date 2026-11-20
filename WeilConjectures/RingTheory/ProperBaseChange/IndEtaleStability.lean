@@ -14,7 +14,7 @@ import Mathlib.RingTheory.Localization.Pi
 /-! # Stability of ind-etale and principal ind-Zariski maps
 
 Source: blueprint, proper base change, lemma "Stability and diagonal of an ind-etale algebra"
-(blueprint: lem-weil-pbc-ind-etale-stability).
+(blueprint: lemma-stability).
 -/
 
 @[expose] public section
@@ -415,7 +415,7 @@ namespace RingHom
 ind-Zariski maps; weak etaleness of ind-etale maps; the relative ind-etale assertion; and
 composition and base-change stability of weakly etale maps.
 Source: blueprint, proper base change, lemma "Stability and diagonal of an ind-etale algebra"
-(blueprint: lem-weil-pbc-ind-etale-stability).
+(blueprint: lemma-stability).
 
 Filtered colimits are expressed in the arrow category, allowing varying source rings.
 The principal ind-Zariski condition is evaluated using the algebra structure of each ring map.

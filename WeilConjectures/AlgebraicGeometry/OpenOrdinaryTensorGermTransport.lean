@@ -28,8 +28,6 @@ open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
 
-set_option maxHeartbeats 500000 in
--- The target combines two large categorical transports and needs extra elaboration budget.
 /-- Open restriction identifies the ordinary tensor stalk complexes in germ
 coordinates. This concerns only ordinary tensor complexes, not the cohomology
 of a base-derived tensor or its comparison map.
@@ -136,6 +134,7 @@ theorem exists_openOrdinaryTensor_germ_transport
             ((T₀.sc i).mapHomologyIso F₀).inv ≫
               HomologicalComplex.homologyMap τ.hom i ≫ ((T.sc i).mapHomologyIso F).hom ≫
                 F.map k := by
+  intro Q₀ R₀ A₀ B₀ C₀ R₁ A₁ B₁ C₁ K₀ K T₀ T F₀ F H₀ β ν k₀ k
   obtain ⟨eR, eA, eB, eC, hRA, hRB, hCA, hCB, α, hα, τ, hτ, hchain⟩ :=
     exists_openOrdinaryTensor_germ_coordinates f f' g g' sq V V' hV' j hj sq₀ P z
   refine ⟨eR, eA, eB, eC, hRA, hRB, hCA, hCB, α, hα, τ, hτ, ?_⟩

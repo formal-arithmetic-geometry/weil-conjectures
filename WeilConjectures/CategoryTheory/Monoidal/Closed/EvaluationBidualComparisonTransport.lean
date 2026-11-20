@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.ClosedUnderIsomorphisms
 /-! # Transport of evaluation and the specified double-dual map
 
 Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-rf-shriek-preservation,
-lem-weil-finite-duality-site-comparison, final proof paragraph
+proposition-six-operations-dctf--15, final proof paragraph
 (blueprint: lem-sf-evaluation-bidual-comparison-transport).
 
 The internal Hom, its evaluation-transpose comparison, and its double-dual morphism
@@ -37,7 +37,7 @@ variable {C : Type u} {C' : Type u'} [Category.{v} C] [Category.{v'} C']
 /-- The specified comparison `F [K,W] ≅ [FK,W']`: the evaluation-transpose comparison
 followed by the internal Hom of the chosen coefficient isomorphism. Its inverse uses only
 invertibility of the comparison at this particular `K`.
-Source: blueprint lem-weil-finite-duality-site-comparison, final proof paragraph
+Source: blueprint proposition-six-operations-dctf--15, final proof paragraph
 (blueprint: lem-sf-evaluation-bidual-comparison-transport). -/
 noncomputable def evaluationDualComparison (F : C ⥤ C') [F.LaxMonoidal]
     {W : C} {W' : C'} (w : F.obj W ≅ W') (K : C)
@@ -88,7 +88,7 @@ private lemma comparison_bidual [SymmetricCategory C] [SymmetricCategory C']
     Iso.inv_hom_id, pre_id, NatTrans.id_app, Category.comp_id]
 
 /-- Transport duality on replete full subcategories using the canonical evaluation comparison.
-Source: blueprint lem-weil-finite-duality-site-comparison, final proof paragraph
+Source: blueprint proposition-six-operations-dctf--15, final proof paragraph
 (blueprint: lem-sf-evaluation-bidual-comparison-transport).
 
 Proof plan:
