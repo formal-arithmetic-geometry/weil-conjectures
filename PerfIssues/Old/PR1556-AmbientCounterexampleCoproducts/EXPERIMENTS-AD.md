@@ -1,0 +1,47 @@
+# DefEq Internal Cost Experiments
+
+Case: `PR1556-AmbientCounterexampleCoproducts`
+Lean / Mathlib: Lean 4.35.0, snapshot `1ef1fddac73`
+
+## A1: decomposition
+
+Root: the generated congruence proposition domain containing the
+`CategoryStruct.comp`/`NatTrans.app` major premise. The selected counters root
+was 6,670,198 calls, depth 213, 77.188 s wall, split into 39.404 s exclusive
+comparison and 37.784 s reduction. The trace root was 95.643 s with the same
+call count. It recorded 276,829 Pi-domain comparisons, 126,864 proposition
+comparisons, and 3,352,429 proof attempts. WHNF took 42.864 s in the trace;
+Delta took 1.491 s across 13,242,067 unfolds. Thus reduction is substantial,
+but the recursive comparison share is also large.
+
+The bounded pair sample contained 3,428,653 distinct exact pairs and 1,571,347
+repeats; repeats contributed 565 ms (about 1.1%) of trace comparison-exclusive
+time. Top exclusive children were `SMul.smul` (528 ms), `HAdd.hAdd` (502 ms),
+`Eq` (251 ms), and `AddCommGroup.proj` (228 ms). Proposition timers are nested
+and cannot be added to the root categories. No allocation/GC counters were
+available.
+
+## A2: targeted ablation
+
+The A1 target is the `NatTrans.app` major premise. Replacing only the right
+major premise with the left term, while retaining the congruence consumer and
+dependent proposition, checked in 0 ms. The original A/B conversion was
+50,090 ms and the reverse B/A restoration was 50,585 ms. The exact result type
+was unchanged and the replacement Kernel-checked, so this is a valid causal
+ablation of that component. The remaining parent work is not attributable to a
+single child from the trace: it is a deep mixed tree with many small children.
+
+## B and C status
+
+No valid B three-way provider exists in this generated congruence: adding a
+shared local provider changes the generated proposition. No independent
+field-count control preserves the same theorem obligation. Both are recorded
+as invalid attempts. The old/fixed closing proof is an API control, not a
+provider-sharing measurement.
+
+## Accounting and artifacts
+
+`probes/ad/profile.txt` points to the replay/source trace and the A/A and B/A
+baseline probes. The source prefix was 60.57 s wall / 7,760,464 KB RSS; the
+fixed prefix was 5.73 s / 3,056,716 KB. Instrumentation overhead is reported
+from the validated common controls in the NativePullTensor record.
