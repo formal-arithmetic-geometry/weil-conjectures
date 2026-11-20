@@ -52,8 +52,8 @@ Experiment E: invalid until a whole endpoint bundle can be abstracted without ch
 
 7. CLASSIFICATION
 -----------------
-P2 bundle-triggered exposure; P4 reduction-heavy concrete endpoint expansion is plausible.
-Confidence: Strongly supported for the complete endpoint exposure, plausible for causal amplification.
+P2 is a candidate for the dependent endpoint bundle; the round-three target-check failure leaves the reduction mechanism U. P4 is not established.
+Confidence: plausible for the historical endpoint localization; unclassified for target-level reduction and causal amplification in this snapshot.
 Directly measured: exact dependent domain, endpoint times, shared heads, unequal child arguments, failed type-preserving replacements.
 Inferred: downstream Functor.mk field traversal and exact reduction order.
 Unresolved: whole-endpoint aligned/restored footprint.
@@ -111,7 +111,18 @@ Dependent instantiation: final isoWhiskerLeft domain after six Iso.trans argumen
 First provenance divergence: endpoint composition bundle.
 
 G. CONCLUSION
-P2/P4; evidence level 1 for localization, level 2 for exposure, not level 3.
+P2 candidate / U for mechanism; Level 1 historical localization, with no successful round-three target unfold comparison.
 Strongest supporting result: complete endpoint timings and invalid independent substitutions.
-Strongest contrary result: no valid whole-endpoint alignment.
+Strongest contrary result: no valid whole-endpoint alignment and neither historical source snapshot reaches a checked target in the current build tree.
 Next falsifying experiment: construct a whole dependent endpoint bundle control with the original Iso.trans consumer.
+
+ROUND 3: UNFOLD-COUNTER BLOCKER
+-------------------------------
+Both historical source snapshots fail before the target definition in the current generated build tree. Under `diagnostics=true` and threshold 1000, `Before.lean` and `After.lean` report tactic rewrite failures at lines 77, 110, and 112, an unknown free variable at line 85, and then `constantSheafTowerIsoQuotPow` is unknown in the old target at line 264. A synchronous target-declaration replay cannot obtain the old declaration after that failure. The smaller kernel tables printed before line 264 belong to preceding declarations and are not target counters.
+
+| Variant | Target checked? | Target kernel unfold table | Outcome |
+|---|---|---|---|
+| Original old endpoint | no | unavailable | preceding proof/declaration fails |
+| Best fixed helper | no in this historical snapshot | unavailable | same preceding failures |
+
+Consequently no original-versus-control unfold disappearance can be attributed to `homologyIntegersTowerIso` in this round. The prior endpoint timings remain historical/localized evidence, not a successful whole-source diagnostic comparison under this snapshot. A current, type-correct source reconstruction of the complete dependent telescope is required before R6 or P4 can be asserted. Round-three classification is P2 candidate / U for mechanism, evidence Level 1 from earlier localization; Level 3 is not established.
