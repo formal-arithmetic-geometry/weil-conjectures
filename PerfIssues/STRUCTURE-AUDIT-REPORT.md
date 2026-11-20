@@ -11,11 +11,11 @@ CASE RESULTS
 
 | Case | Principal cost site | Initial mismatch | Boundary | R7 classification | Confidence | Evidence |
 |---|---|---|---|---|---|---|
-| NativePullTensor | Iso endpoint / Exists.choose domains | Functor.obj major premise | abbrev Functor.obj projection | P1/P3 | confirmed | Level 3 trigger; Level 2 exposure |
-| PR1556 | congr proposition domain | NatTrans.app Iso.hom major premise | CategoryStruct.comp -> NatTrans.app | P1 | confirmed | Level 3 |
+| NativePullTensor | Iso endpoint / Exists.choose domains | Functor.obj major premise | abbrev Functor.obj projection | P1/P3 | confirmed child amplification | Level 3 child; Level 2 parent |
+| PR1556 | congr proposition domain | NatTrans.app Iso.hom major premise | CategoryStruct.comp -> NatTrans.app | P1 | confirmed trigger | Level 2 exposure; object ablation negative |
 | PR1563 | Eq.mpr final domain | seven dependent comp arguments | Eq.mpr -> CategoryStruct.comp | P2/P3, possible P4 | plausible | Level 1 |
-| PR1624 | isoWhiskerLeft final domain | four dependent endpoint arguments | Iso -> Functor.comp | P2/P4 | strongly supported exposure | Levels 1-2 |
-| PR1625 | final Eq type | nested NatTrans.app major premise | CategoryStruct.comp -> NatTrans.app | P1/P3 | confirmed | Level 3 |
+| PR1624 | isoWhiskerLeft final domain | four dependent endpoint arguments | Iso -> Functor.comp | P2 candidate / U | historical localization only | Level 1; target counters blocked |
+| PR1625 | final Eq type | nested NatTrans.app major premise | CategoryStruct.comp -> NatTrans.app | P1/P3 | confirmed trigger, bounded source | Level 2 exposure; object ablation negative |
 | PR1627 | generated law values | id argument-1 proposition domain | dependent forall/id domain | P3, inner U | plausible | Level 2 repeated exposure |
 | PR2122 | Exists.casesOn value branches | unknown | motive/witness/final dependent branch | U | unclassified | Level 1 branch cost only |
 
@@ -59,20 +59,27 @@ PR1556, and PR1625; partial for PR1563, PR1624, and PR1627; unresolved
 for PR2122.
 
 B. Causal coverage
-Three cases (NativePullTensor, PR1556, PR1625) have same-site,
-type-preserving alignment that removes both the expensive conversion and
-the measured child footprint. Four cases have no valid one-factor
-alignment because dependent bundles or branch telescopes would change.
+Three cases (NativePullTensor, PR1556, PR1625) have type-preserving
+same-site trigger alignment. Fixed-trigger abstraction of a non-trigger
+object establishes amplification only for NativePullTensor's two accessor
+children; the corresponding PR1556 and PR1625 object abstractions are
+valid negative controls. Four cases still lack a type-preserving
+one-factor alignment of their relevant dependent bundles or branches.
 
 C. Kernel-time coverage
 Using one principal historical/in-situ target per case:
 NativePullTensor 265 s, PR1556 54.9 s, PR1563 68.2 s, PR1624 102 s,
 PR1625 87.6 s, PR1627 97.7 s (three generated fields), and PR2122
 172.0 s for the replayed final value: 847.4 s total.
-The confirmed P1/P3 alignment cases account for 407.5 s, 48.1% of this
-principal total. Including the distributed/bundle PR1563 and PR1624
-sites gives 577.7 s, 68.2%, but their trigger is not isolated.
-PR2122 remains excluded from causal coverage.
+The three principal targets associated with established trigger
+alignments sum to 407.5 s (48.1% of the 847.4 s historical total), but
+that is an association, not attributed kernel cost. The localized
+controlled accessor children total about 168.5 s across those cases
+(two 11.4 s Native endpoints, 50 s PR1556, 95.7 s PR1625), or 19.9%
+of the historical principal total. Only the two Native children, about
+22.8 s, have a positive fixed-trigger subtree ablation. These site
+totals use different scopes and cannot establish project prevalence.
+PR1563, PR1624, and PR2122 are excluded from causal cost coverage.
 
 SECTION 15.4: PRODUCER-MECHANISM GROUPING
 
@@ -104,16 +111,17 @@ SECTION 16: MATCHED FAST CONTROLS
 
 SECTION 17: EVIDENCE LEVELS AND FALSIFICATION
 
-- NativePullTensor: Level 3. Falsifier: a valid fixed-trigger
-  endpoint abstraction leaves the same endpoint cost.
-- PR1556: Level 3. Falsifier: a typed whole-bundle abstraction leaves
-  the congr-domain cost after the major premise is fixed.
+- NativePullTensor: Level 3 for the shared object at the accessor child;
+  the full Iso/Exists parent remains Level 2. Falsifier: a wider
+  dependent bundle control leaves the full parent cost unchanged.
+- PR1556: Level 2. A valid object ablation leaves about 50 s of cost;
+  a wider typed dependent-bundle control is the next falsifier.
 - PR1563: Level 1. Falsifier: a valid whole-endpoint alignment leaves
   the distributed composition cost unchanged.
-- PR1624: Level 1 localization / Level 2 exposure. Falsifier: a typed
-  whole-endpoint control fails to change the endpoint footprint.
-- PR1625: Level 3. Falsifier: a typed bundle abstraction leaves the
-  nested NatTrans.app cost after major-premise alignment.
+- PR1624: Level 1 historical localization; the current source fails
+  before the target, so target-level reduction and Level 2 remain open.
+- PR1625: Level 2. A valid object ablation leaves about 99 s of cost;
+  a wider typed transformation bundle is the next falsifier.
 - PR1627: Level 2 repeated exposure. Falsifier: the two generated fields
   remain equally expensive after the first inner pullback-functor premise
   is aligned.
@@ -151,7 +159,26 @@ INTERPRETATIONS (LABELLED)
   concrete-functor leaf trigger.
 - PR2122 is a negative/unresolved control. Its Exists recursor is a
   consumer boundary, not an established cause.
-- The share therefore has confirmed Level-3 amplification for three of
-  seven cases, partial Level-1/2 exposure for three, and one unresolved
-  case. This is strong local evidence for the high-level mismatch to
-  large-structure mechanism, without claiming that it explains all seven.
+- The share has one confirmed Level-3 child amplification, two other
+  confirmed accessor triggers whose selected object subtrees do not
+  amplify cost, three partial bundle/repeated-work cases, and one
+  unresolved recursor case. The broad large-structure mechanism remains
+  a case-level hypothesis outside the Native accessor child.
+
+ROUND 3: KERNEL UNFOLD AND ABLATION RESULTS
+-------------------------------------------
+The exact three-way rows below are synchronous checks of the same stored value/proof against original, aligned, and restored types. Other rows are original versus best historical source controls and therefore change the producer. Counts are kernel unfolds, not a trace of field traversal.
+
+| Case | Counter (original / aligned or best / restored) | Fixed-trigger E result | Validity |
+|---|---|---|---|
+| NativePullTensor | `Functor.obj` 1,550,252 / 1,033,514 / 1,550,252 | object helper 11.5 s / 2 ms / 11.3 s; positive at child | exact declaration replay and helper pass |
+| PR1556 | `Add.add` 715,237 / 14 / 715,237 | object helper 53.3 / 50.4 / 46.8 s; negative for object | exact proof-domain replay and helper pass |
+| PR1563 | `Add.add` 1,287,366 / 246,362 / n.a. | no established trigger for E | both source controls pass; changed producer |
+| PR1624 | target table unavailable | E not assigned | old and fixed sources fail before target; missing `constantSheafTowerIsoQuotPow` |
+| PR1625 | `NatTrans.app` 1,044,058 / 33,124 / 1,044,058 | object helper 94.0 / 98.7 / 97.5 s; negative for object | target clone checks pass; earlier source errors remain |
+| PR1627 | `Eq.ndrec` 1,939,320 / no matching generated check / n.a. | E not assigned | both source controls pass; changed construction |
+| PR2122 | no round-three table requested | E not assigned | prior branch-local result remains unresolved |
+
+For Native, the aligned whole-declaration check still takes 51.6 s and retains about two thirds of the selected unfolds; the 2-3 ms result belongs specifically to the fixed-trigger accessor child. PR1556's exact aligned proof-domain check takes 9 ms and its selected counters fall to 2-44 events. PR1625's exact aligned theorem check takes 2.7 s and retains roughly 3% of the selected unfolds. Restored counts in all three exact replays match the original counts exactly.
+
+Level 3 amplification is established for Native's selected object subtree at two accessor children. The valid PR1556 and PR1625 object abstractions leave the trigger cost and so weaken amplification claims for those particular subtrees; a wider typed dependent bundle remains untested. No Level 4 or Level 5 project conclusion follows from this share. PR1624's target-level R6 remains blocked by the concrete source errors stated in its case report.
