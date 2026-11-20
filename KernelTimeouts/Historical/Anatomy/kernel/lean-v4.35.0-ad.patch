@@ -1,0 +1,1235 @@
+diff --git a/src/kernel/expr.cpp b/src/kernel/expr.cpp
+index f87e72aaee..1fa7478e6e 100644
+--- a/src/kernel/expr.cpp
++++ b/src/kernel/expr.cpp
+@@ -140,41 +140,47 @@ static expr const & get_dummy() {
+ 
+ expr::expr():expr(get_dummy()) {}
+ 
++extern "C" void lean_anatomy_expr_created(object * e);
++static expr tracked_expr(object * e) {
++    lean_anatomy_expr_created(e);
++    return expr(e);
++}
++
+ extern "C" object * lean_expr_mk_lit(obj_arg l);
+-expr mk_lit(literal const & l) { return expr(lean_expr_mk_lit(l.to_obj_arg())); }
++expr mk_lit(literal const & l) { return tracked_expr(lean_expr_mk_lit(l.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_mdata(obj_arg m, obj_arg e);
+-expr mk_mdata(kvmap const & m, expr const & e) { return expr(lean_expr_mk_mdata(m.to_obj_arg(), e.to_obj_arg())); }
++expr mk_mdata(kvmap const & m, expr const & e) { return tracked_expr(lean_expr_mk_mdata(m.to_obj_arg(), e.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_proj(obj_arg s, obj_arg idx, obj_arg e);
+-expr mk_proj(name const & s, nat const & idx, expr const & e) { return expr(lean_expr_mk_proj(s.to_obj_arg(), idx.to_obj_arg(), e.to_obj_arg())); }
++expr mk_proj(name const & s, nat const & idx, expr const & e) { return tracked_expr(lean_expr_mk_proj(s.to_obj_arg(), idx.to_obj_arg(), e.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_bvar(obj_arg idx);
+-expr mk_bvar(nat const & idx) { return expr(lean_expr_mk_bvar(idx.to_obj_arg())); }
++expr mk_bvar(nat const & idx) { return tracked_expr(lean_expr_mk_bvar(idx.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_fvar(obj_arg n);
+-expr mk_fvar(name const & n) { return expr(lean_expr_mk_fvar(n.to_obj_arg())); }
++expr mk_fvar(name const & n) { return tracked_expr(lean_expr_mk_fvar(n.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_mvar(object * n);
+-expr mk_mvar(name const & n) { return expr(lean_expr_mk_mvar(n.to_obj_arg())); }
++expr mk_mvar(name const & n) { return tracked_expr(lean_expr_mk_mvar(n.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_const(obj_arg n, obj_arg ls);
+-expr mk_const(name const & n, levels const & ls) { return expr(lean_expr_mk_const(n.to_obj_arg(), ls.to_obj_arg())); }
++expr mk_const(name const & n, levels const & ls) { return tracked_expr(lean_expr_mk_const(n.to_obj_arg(), ls.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_app(obj_arg f, obj_arg a);
+-expr mk_app(expr const & f, expr const & a) { return expr(lean_expr_mk_app(f.to_obj_arg(), a.to_obj_arg())); }
++expr mk_app(expr const & f, expr const & a) { return tracked_expr(lean_expr_mk_app(f.to_obj_arg(), a.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_sort(obj_arg l);
+-expr mk_sort(level const & l) { return expr(lean_expr_mk_sort(l.to_obj_arg())); }
++expr mk_sort(level const & l) { return tracked_expr(lean_expr_mk_sort(l.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_lambda(obj_arg n, obj_arg t, obj_arg e, uint8 bi);
+ expr mk_lambda(name const & n, expr const & t, expr const & e, binder_info bi) {
+-    return expr(lean_expr_mk_lambda(n.to_obj_arg(), t.to_obj_arg(), e.to_obj_arg(), static_cast<uint8>(bi)));
++    return tracked_expr(lean_expr_mk_lambda(n.to_obj_arg(), t.to_obj_arg(), e.to_obj_arg(), static_cast<uint8>(bi)));
+ }
+ 
+ extern "C" object * lean_expr_mk_forall(obj_arg n, obj_arg t, obj_arg e, uint8 bi);
+ expr mk_pi(name const & n, expr const & t, expr const & e, binder_info bi) {
+-    return expr(lean_expr_mk_forall(n.to_obj_arg(), t.to_obj_arg(), e.to_obj_arg(), static_cast<uint8>(bi)));
++    return tracked_expr(lean_expr_mk_forall(n.to_obj_arg(), t.to_obj_arg(), e.to_obj_arg(), static_cast<uint8>(bi)));
+ }
+ 
+ static name * g_default_name = nullptr;
+@@ -184,7 +190,7 @@ expr mk_arrow(expr const & t, expr const & e) {
+ 
+ extern "C" object * lean_expr_mk_let(object * n, object * t, object * v, object * b, uint8 nondep);
+ expr mk_let(name const & n, expr const & t, expr const & v, expr const & b, bool nondep) {
+-    return expr(lean_expr_mk_let(n.to_obj_arg(), t.to_obj_arg(), v.to_obj_arg(), b.to_obj_arg(), nondep));
++    return tracked_expr(lean_expr_mk_let(n.to_obj_arg(), t.to_obj_arg(), v.to_obj_arg(), b.to_obj_arg(), nondep));
+ }
+ 
+ static expr * g_Prop  = nullptr;
+diff --git a/src/kernel/type_checker.cpp b/src/kernel/type_checker.cpp
+index a735a6e42f..9edcff0e85 100644
+--- a/src/kernel/type_checker.cpp
++++ b/src/kernel/type_checker.cpp
+@@ -9,6 +9,14 @@ Author: Leonardo de Moura
+ #include <limits>
+ #include <climits>
+ #include <cstdlib>
++#include <chrono>
++#include <cstdio>
++#include <cstring>
++#include <map>
++#include <string>
++#include <unordered_map>
++#include <algorithm>
++#include "lean/mimalloc.h"
+ #include "runtime/interrupt.h"
+ #include "runtime/sstream.h"
+ #include "runtime/flet.h"
+@@ -24,6 +32,381 @@ Author: Leonardo de Moura
+ #include "kernel/inductive.h"
+ 
+ namespace lean {
++namespace anatomy {
++using clock = std::chrono::steady_clock;
++using ns = std::chrono::nanoseconds;
++enum branch : unsigned {
++    Quick, Reflection, QuickReduced, Proof, Delta, SameConstant, SameFVar, Projection,
++    Reduced, Application, Eta, EtaStructure, StringExpansion, UnitLike, Failure, Exception, Count
++};
++static char const * branch_names[] = {
++    "quick", "reflection", "quick_reduced", "proof_irrelevance", "lazy_delta",
++    "same_constant", "same_fvar", "projection", "second_whnf", "application",
++    "eta", "eta_structure", "string_expansion", "unit_like", "failure", "exception"
++};
++static int mode() {
++    static int value = [] {
++        char const * s = std::getenv("LEAN_DEFEQ_ANATOMY");
++        return s && std::strcmp(s, "trace") == 0 ? 2 : s && std::strcmp(s, "counters") == 0 ? 1 : 0;
++    }();
++    return value;
++}
++static double ms(uint64_t n) { return static_cast<double>(n) / 1000000.0; }
++static std::string head(expr const & e) {
++    expr const & f = get_app_fn(e);
++    if (is_constant(f)) return const_name(f).to_string();
++    if (is_proj(f)) return proj_sname(f).to_string() + ".proj";
++    return std::to_string(static_cast<unsigned>(e.kind()));
++}
++static std::string proposition_head(expr e) {
++    while (is_pi(e)) e = binding_body(e);
++    return head(e);
++}
++struct pair_key {
++    expr left;
++    expr right;
++    bool operator==(pair_key const & p) const { return is_eqp(left, p.left) && is_eqp(right, p.right); }
++};
++struct pair_hash {
++    size_t operator()(pair_key const & p) const {
++        return (static_cast<size_t>(reinterpret_cast<uintptr_t>(p.left.raw())) >> 4) ^
++            (static_cast<size_t>(reinterpret_cast<uintptr_t>(p.right.raw())) << 1);
++    }
++};
++struct top_call {
++    uint64_t id = 0, parent = 0, exclusive = 0, inclusive = 0, reduction = 0;
++    unsigned depth = 0, children = 0;
++    std::string left, right;
++    std::string path;
++};
++struct totals {
++    uint64_t calls = 0, successes = 0, failures = 0, max_depth = 0;
++    uint64_t whnf_calls = 0, whnf_ns = 0, delta_calls = 0, delta_ns = 0;
++    uint64_t beta = 0, iota = 0, zeta = 0, proj = 0;
++    uint64_t proof_attempts = 0, proof_prop = 0, proof_prop_ns = 0;
++    uint64_t app_attempts = 0, pi_domains = 0, cache_success = 0, cache_failure = 0;
++    uint64_t cache_success_miss = 0, cache_failure_miss = 0;
++    uint64_t comparison_exclusive = 0, reduction_exclusive = 0;
++    uint64_t dependent_comparison_exclusive = 0, dependent_reduction_exclusive = 0;
++    uint64_t proposition_comparison_exclusive = 0, proposition_reduction_exclusive = 0;
++    uint64_t instantiations = 0, instantiation_ns = 0;
++    uint64_t cpp_expr_created = 0, cpp_expr_bytes = 0;
++    size_t start_rss = 0, peak_rss = 0, start_commit = 0, peak_commit = 0;
++    uint64_t pair_captured = 0, pair_repeats = 0, pair_time = 0;
++    uint64_t prop_pair_captured = 0, prop_pair_repeats = 0;
++    uint64_t branches[Count] = {};
++    uint64_t branch_comparison_ns[Count] = {}, branch_reduction_ns[Count] = {};
++    std::map<unsigned, uint64_t> depth_hist, fanout_hist;
++    std::map<std::pair<unsigned, unsigned>, uint64_t> kinds;
++    std::map<std::pair<unsigned, unsigned>, uint64_t> structural;
++    std::map<std::pair<unsigned, unsigned>, uint64_t> prop_structural;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> delta_heads;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> prop_families;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> proof_positions;
++    std::unordered_map<pair_key, uint64_t, pair_hash> exact;
++    std::unordered_map<pair_key, uint64_t, pair_hash> prop_pairs;
++    std::vector<top_call> top;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> path_cost;
++    std::map<std::string, std::pair<std::string, std::string>> path_heads;
++};
++struct comparison;
++static thread_local comparison * current = nullptr;
++static thread_local comparison * next_owner = nullptr;
++static thread_local std::string next_path;
++static thread_local unsigned next_category = 0;
++struct path_scope {
++    std::string old_path;
++    unsigned old_category;
++    comparison * old_owner;
++    path_scope(char const * label, unsigned index, unsigned category):
++        old_path(std::move(next_path)), old_category(next_category), old_owner(next_owner) {
++        if (mode()) {
++            if (mode() == 2) next_path = std::string(label) + "[" + std::to_string(index) + "]";
++            next_category = category; next_owner = current;
++        }
++    }
++    path_scope(char const * label, unsigned category = 0):
++        old_path(std::move(next_path)), old_category(next_category), old_owner(next_owner) {
++        if (mode()) {
++            if (mode() == 2) next_path = label;
++            next_category = category; next_owner = current;
++        }
++    }
++    ~path_scope() {
++        if (mode()) { next_path = std::move(old_path); next_category = old_category; next_owner = old_owner; }
++    }
++};
++static void memory_snapshot(size_t & rss, size_t & commit) {
++    size_t elapsed, user, system, peak_rss, peak_commit, faults;
++    mi_process_info(&elapsed, &user, &system, &rss, &peak_rss, &commit, &peak_commit, &faults);
++}
++static thread_local comparison * reduction_owner = nullptr;
++static thread_local uint64_t * reduction_child_ns = nullptr;
++static thread_local totals data;
++static thread_local unsigned reduction_depth = 0;
++static thread_local uint64_t root_serial = 0;
++static unsigned bucket(unsigned n) { return n < 64 ? n : 64 + (n / 64); }
++static void report(uint64_t wall) {
++    char const * min = std::getenv("LEAN_DEFEQ_MIN_MS");
++    if (min && ms(wall) < std::atof(min)) return;
++    std::fprintf(stderr,
++        "ANATOMY root=%llu mode=%s wall_ms=%.3f calls=%llu success=%llu failure=%llu max_depth=%llu "
++        "comparison_exclusive_ms=%.3f reduction_exclusive_ms=%.3f whnf_calls=%llu whnf_ms=%.3f "
++        "delta_calls=%llu delta_ms=%.3f beta=%llu iota=%llu zeta=%llu projection=%llu "
++        "proof_attempts=%llu proposition_compares=%llu proposition_ms=%.3f app_attempts=%llu "
++        "pi_domains=%llu cache_success=%llu cache_failure=%llu cache_success_miss=%llu cache_failure_miss=%llu distinct_exact=%zu exact_repeats=%llu "
++        "pair_capture=%llu pair_repeat_exclusive_ms=%.3f distinct_structural=%zu "
++        "prop_pair_capture=%llu prop_pair_distinct=%zu prop_pair_repeats=%llu "
++        "prop_structural_distinct=%zu proof_position_groups=%zu "
++        "dependent_comparison_ms=%.3f dependent_reduction_ms=%.3f "
++        "proposition_comparison_ms=%.3f proposition_reduction_ms=%.3f "
++        "instantiations=%llu instantiation_ms=%.3f cpp_expr_created=%llu cpp_expr_bytes=%llu "
++        "rss_delta_bytes=%lld commit_delta_bytes=%lld\n",
++        static_cast<unsigned long long>(root_serial), mode() == 2 ? "trace" : "counters", ms(wall),
++        static_cast<unsigned long long>(data.calls), static_cast<unsigned long long>(data.successes),
++        static_cast<unsigned long long>(data.failures), static_cast<unsigned long long>(data.max_depth),
++        ms(data.comparison_exclusive), ms(data.reduction_exclusive),
++        static_cast<unsigned long long>(data.whnf_calls), ms(data.whnf_ns),
++        static_cast<unsigned long long>(data.delta_calls), ms(data.delta_ns),
++        static_cast<unsigned long long>(data.beta), static_cast<unsigned long long>(data.iota),
++        static_cast<unsigned long long>(data.zeta), static_cast<unsigned long long>(data.proj),
++        static_cast<unsigned long long>(data.proof_attempts), static_cast<unsigned long long>(data.proof_prop),
++        ms(data.proof_prop_ns), static_cast<unsigned long long>(data.app_attempts),
++        static_cast<unsigned long long>(data.pi_domains), static_cast<unsigned long long>(data.cache_success),
++        static_cast<unsigned long long>(data.cache_failure),
++        static_cast<unsigned long long>(data.cache_success_miss),
++        static_cast<unsigned long long>(data.cache_failure_miss), data.exact.size(),
++        static_cast<unsigned long long>(data.pair_repeats), static_cast<unsigned long long>(data.pair_captured),
++        ms(data.pair_time), data.structural.size(),
++        static_cast<unsigned long long>(data.prop_pair_captured), data.prop_pairs.size(),
++        static_cast<unsigned long long>(data.prop_pair_repeats),
++        data.prop_structural.size(), data.proof_positions.size(),
++        ms(data.dependent_comparison_exclusive), ms(data.dependent_reduction_exclusive),
++        ms(data.proposition_comparison_exclusive), ms(data.proposition_reduction_exclusive),
++        static_cast<unsigned long long>(data.instantiations), ms(data.instantiation_ns),
++        static_cast<unsigned long long>(data.cpp_expr_created),
++        static_cast<unsigned long long>(data.cpp_expr_bytes),
++        static_cast<long long>(data.peak_rss) - static_cast<long long>(data.start_rss),
++        static_cast<long long>(data.peak_commit) - static_cast<long long>(data.start_commit));
++    for (unsigned i = 0; i < Count; ++i)
++        if (data.branches[i])
++            std::fprintf(stderr, "ANATOMY branch=%s calls=%llu comparison_exclusive_ms=%.3f reduction_exclusive_ms=%.3f\n",
++                         branch_names[i], static_cast<unsigned long long>(data.branches[i]),
++                         ms(data.branch_comparison_ns[i]), ms(data.branch_reduction_ns[i]));
++    std::vector<std::pair<std::string, std::pair<uint64_t, uint64_t>>> families(
++        data.prop_families.begin(), data.prop_families.end());
++    std::sort(families.begin(), families.end(), [] (auto const & a, auto const & b) {
++        return a.second.second > b.second.second;
++    });
++    for (size_t i = 0; i < std::min<size_t>(20, families.size()); ++i)
++        std::fprintf(stderr, "ANATOMY proposition=%s calls=%llu exclusive_ms=%.3f\n",
++                     families[i].first.c_str(),
++                     static_cast<unsigned long long>(families[i].second.first),
++                     ms(families[i].second.second));
++    std::vector<std::pair<std::string, std::pair<uint64_t, uint64_t>>> positions(
++        data.proof_positions.begin(), data.proof_positions.end());
++    std::sort(positions.begin(), positions.end(), [] (auto const & a, auto const & b) {
++        return a.second.second > b.second.second;
++    });
++    for (size_t i = 0; i < (mode() == 2 ? positions.size() : std::min<size_t>(20, positions.size())); ++i)
++        std::fprintf(stderr, "ANATOMY proof_position=%s calls=%llu exclusive_ms=%.3f\n",
++                     positions[i].first.c_str(),
++                     static_cast<unsigned long long>(positions[i].second.first),
++                     ms(positions[i].second.second));
++    if (mode() != 2) return;
++    for (auto const & p : data.depth_hist)
++        std::fprintf(stderr, "ANATOMY depth=%u calls=%llu\n", p.first, static_cast<unsigned long long>(p.second));
++    for (auto const & p : data.fanout_hist)
++        std::fprintf(stderr, "ANATOMY fanout=%u calls=%llu\n", p.first, static_cast<unsigned long long>(p.second));
++    for (auto const & p : data.kinds)
++        std::fprintf(stderr, "ANATOMY kinds=%u,%u calls=%llu\n", p.first.first, p.first.second,
++                     static_cast<unsigned long long>(p.second));
++    for (auto const & p : data.delta_heads)
++        std::fprintf(stderr, "ANATOMY delta=%s calls=%llu ms=%.3f\n", p.first.c_str(),
++                     static_cast<unsigned long long>(p.second.first), ms(p.second.second));
++    std::sort(data.top.begin(), data.top.end(), [] (top_call const & a, top_call const & b) {
++        return a.exclusive > b.exclusive;
++    });
++    for (auto const & p : data.top)
++        std::fprintf(stderr, "ANATOMY child=%llu parent=%llu depth=%u children=%u left=%s right=%s "
++                     "path=%s exclusive_ms=%.3f inclusive_ms=%.3f reduction_ms=%.3f\n",
++                     static_cast<unsigned long long>(p.id), static_cast<unsigned long long>(p.parent),
++                     p.depth, p.children, p.left.c_str(), p.right.c_str(), p.path.c_str(), ms(p.exclusive), ms(p.inclusive),
++                     ms(p.reduction));
++    auto prefix_cost = data.path_cost;
++    for (auto const & p : data.path_cost) {
++        auto pos = p.first.rfind('/');
++        while (pos != std::string::npos) {
++            prefix_cost[p.first.substr(0, pos)].second += p.second.second;
++            pos = p.first.rfind('/', pos - 1);
++        }
++    }
++    std::vector<std::pair<std::string, std::pair<uint64_t, uint64_t>>> paths(prefix_cost.begin(), prefix_cost.end());
++    std::sort(paths.begin(), paths.end(), [](auto const & a, auto const & b) { return a.second.second > b.second.second; });
++    for (size_t i = 0; i < std::min<size_t>(40, paths.size()); ++i)
++        std::fprintf(stderr, "ANATOMY path=%s left=%s right=%s direct_calls=%llu direct_exclusive_ms=%.3f subtree_exclusive_ms=%.3f\n",
++                     paths[i].first.c_str(), data.path_heads[paths[i].first].first.c_str(),
++                     data.path_heads[paths[i].first].second.c_str(),
++                     static_cast<unsigned long long>(data.path_cost[paths[i].first].first),
++                     ms(data.path_cost[paths[i].first].second), ms(paths[i].second.second));
++}
++struct comparison {
++    comparison * parent;
++    expr const & left;
++    expr const & right;
++    clock::time_point start;
++    uint64_t id = 0, child_ns = 0, reduce_ns = 0;
++    unsigned depth = 0, children = 0;
++    unsigned category = 0;
++    std::string path;
++    bool result = false, completed = false, enabled = false, repeated = false;
++    branch outcome = Exception;
++    comparison(expr const & t, expr const & s): parent(current), left(t), right(s) {
++        if (!mode()) return;
++        enabled = true;
++        if (!parent) {
++            data = totals{}; ++root_serial;
++            memory_snapshot(data.start_rss, data.start_commit);
++        }
++        id = ++data.calls;
++        depth = parent ? parent->depth + 1 : 0;
++        category = parent == next_owner && next_category ? next_category : parent ? parent->category : 0;
++        if (mode() == 2) {
++            path = parent ? parent->path : "root";
++            if (parent == next_owner && !next_path.empty() && path.size() < 160) path += "/" + next_path;
++            if (data.path_heads.find(path) == data.path_heads.end())
++                data.path_heads.emplace(path, std::make_pair(head(t), head(s)));
++        }
++        if (parent) ++parent->children;
++        data.max_depth = std::max<uint64_t>(data.max_depth, depth);
++        ++data.depth_hist[bucket(depth)];
++        ++data.kinds[{static_cast<unsigned>(t.kind()), static_cast<unsigned>(s.kind())}];
++        if (mode() == 2 && data.pair_captured < 5000000) {
++            ++data.pair_captured;
++            auto pair = pair_key{t, s};
++            repeated = data.exact[pair]++ != 0;
++            ++data.structural[{hash(t), hash(s)}];
++        }
++        start = clock::now();
++        current = this;
++    }
++    void finish(bool r, branch b) { completed = true; result = r; outcome = b; }
++    ~comparison() {
++        if (!enabled) return;
++        uint64_t inclusive = std::chrono::duration_cast<ns>(clock::now() - start).count();
++        uint64_t exclusive = inclusive > child_ns + reduce_ns ? inclusive - child_ns - reduce_ns : 0;
++        if (reduction_child_ns && parent == reduction_owner) *reduction_child_ns += inclusive;
++        current = parent;
++        if (parent) parent->child_ns += inclusive;
++        if (completed && result) ++data.successes; else ++data.failures;
++        ++data.branches[outcome];
++        data.branch_comparison_ns[outcome] += exclusive;
++        data.branch_reduction_ns[outcome] += reduce_ns;
++        ++data.fanout_hist[bucket(children)];
++        data.comparison_exclusive += exclusive;
++        data.reduction_exclusive += reduce_ns;
++        if (category == 1) {
++            data.dependent_comparison_exclusive += exclusive;
++            data.dependent_reduction_exclusive += reduce_ns;
++        } else if (category == 2) {
++            data.proposition_comparison_exclusive += exclusive;
++            data.proposition_reduction_exclusive += reduce_ns;
++        }
++        if (mode() == 2) {
++            auto & cost = data.path_cost[path];
++            ++cost.first;
++            cost.second += exclusive + reduce_ns;
++            if (repeated) { ++data.pair_repeats; data.pair_time += exclusive; }
++            if (data.top.size() < 20 || exclusive > data.top.back().exclusive) {
++                top_call c;
++                c.id = id; c.parent = parent ? parent->id : 0; c.depth = depth; c.children = children;
++                c.exclusive = exclusive; c.inclusive = inclusive; c.reduction = reduce_ns;
++                c.left = head(left); c.right = head(right); c.path = path;
++                data.top.push_back(std::move(c));
++                std::sort(data.top.begin(), data.top.end(), [](top_call const & a, top_call const & b) {
++                    return a.exclusive > b.exclusive;
++                });
++                if (data.top.size() > 20) data.top.pop_back();
++            }
++        }
++        if (!parent) {
++            memory_snapshot(data.peak_rss, data.peak_commit);
++            report(inclusive);
++        }
++    }
++};
++struct reduction {
++    comparison * owner = current;
++    clock::time_point start;
++    uint64_t child_comparisons = 0;
++    bool enabled = false, outer = false;
++    reduction() {
++        if (!owner) return;
++        enabled = true;
++        outer = reduction_depth++ == 0;
++        if (outer) {
++            ++data.whnf_calls;
++            reduction_owner = owner;
++            reduction_child_ns = &child_comparisons;
++            start = clock::now();
++        }
++    }
++    ~reduction() {
++        if (!enabled) return;
++        --reduction_depth;
++        if (outer) {
++            uint64_t elapsed = std::chrono::duration_cast<ns>(clock::now() - start).count();
++            reduction_owner = nullptr;
++            reduction_child_ns = nullptr;
++            elapsed = elapsed > child_comparisons ? elapsed - child_comparisons : 0;
++            data.whnf_ns += elapsed;
++            owner->reduce_ns += elapsed;
++        }
++    }
++};
++struct prop_frame {
++    prop_frame * parent = nullptr;
++    clock::time_point start;
++    uint64_t child = 0;
++    std::string key;
++    std::string proof_key;
++    bool enabled = false;
++    static thread_local prop_frame * current_prop;
++    prop_frame(expr const & left, expr const & right, expr const & proof_left, expr const & proof_right) {
++        if (!current) return;
++        enabled = true;
++        parent = current_prop;
++        key = proposition_head(left) + "|" + proposition_head(right);
++        proof_key = head(proof_left) + "|" + head(proof_right);
++        if (mode() == 2) {
++            ++data.prop_pair_captured;
++            if (data.prop_pairs[pair_key{left, right}]++ != 0) ++data.prop_pair_repeats;
++            ++data.prop_structural[{hash(left), hash(right)}];
++        }
++        start = clock::now();
++        current_prop = this;
++    }
++    ~prop_frame() {
++        if (!enabled) return;
++        uint64_t inclusive = std::chrono::duration_cast<ns>(clock::now() - start).count();
++        current_prop = parent;
++        if (parent) parent->child += inclusive;
++        auto & entry = data.prop_families[key];
++        ++entry.first;
++        entry.second += inclusive > child ? inclusive - child : 0;
++        auto & position = data.proof_positions[proof_key];
++        ++position.first;
++        position.second += inclusive > child ? inclusive - child : 0;
++    }
++};
++thread_local prop_frame * prop_frame::current_prop = nullptr;
++} // namespace anatomy
++extern "C" void lean_anatomy_expr_created(object * e) {
++    if (anatomy::current && !is_scalar(e)) {
++        ++anatomy::data.cpp_expr_created;
++        anatomy::data.cpp_expr_bytes += lean_object_byte_size(e);
++    }
++}
+ static name * g_kernel_fresh = nullptr;
+ static expr * g_dont_care    = nullptr;
+ static name * g_bool_true    = nullptr;
+@@ -466,6 +849,7 @@ static bool is_let_fvar(local_ctx const & lctx, expr const & e) {
+     If `cheap == true`, then we don't perform delta-reduction when reducing major premise of recursors and projections.
+     We also do not cache results. */
+ expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
++    anatomy::reduction anatomy_reduction;
+     scope_rec_depth guard;
+     check_system("type checker: whnf", /* do_check_interrupted */ true);
+ 
+@@ -502,9 +886,10 @@ expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
+     case expr_kind::FVar:
+         return whnf_fvar(e, cheap_rec, cheap_proj);
+     case expr_kind::Proj: {
+-        if (auto m = reduce_proj(e, cheap_rec, cheap_proj))
++        if (auto m = reduce_proj(e, cheap_rec, cheap_proj)) {
++            if (anatomy::current) ++anatomy::data.proj;
+             r = whnf_core(*m, cheap_rec, cheap_proj);
+-        else
++        } else
+             r = e;
+         break;
+     }
+@@ -513,6 +898,7 @@ expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
+         expr f0 = get_app_rev_args(e, args);
+         expr f = whnf_core(f0, cheap_rec, cheap_proj);
+         if (is_lambda(f)) {
++            if (anatomy::current) ++anatomy::data.beta;
+             unsigned m = 1;
+             unsigned num_args = args.size();
+             while (is_lambda(binding_body(f)) && m < num_args) {
+@@ -524,6 +910,7 @@ expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
+                           cheap_rec, cheap_proj);
+         } else if (f == f0) {
+             if (auto r = reduce_recursor(e, cheap_rec, cheap_proj)) {
++                if (anatomy::current) ++anatomy::data.iota;
+                 if (m_diag) {
+                     auto f = get_app_fn(e);
+                     if (is_constant(f))
+@@ -540,6 +927,7 @@ expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
+         break;
+     }
+     case expr_kind::Let:
++        if (anatomy::current) ++anatomy::data.zeta;
+         r = whnf_core(instantiate(let_body(e), let_value(e)), cheap_rec, cheap_proj);
+         break;
+     }
+@@ -565,6 +953,18 @@ optional<constant_info> type_checker::is_delta(expr const & e) const {
+ optional<expr> type_checker::unfold_definition_core(expr const & e) {
+     if (is_constant(e)) {
+         if (auto d = is_delta(e)) {
++            auto anatomy_start = anatomy::clock::now();
++            if (anatomy::current) ++anatomy::data.delta_calls;
++            auto anatomy_record = [&] {
++                if (!anatomy::current) return;
++                auto elapsed = std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - anatomy_start).count();
++                anatomy::data.delta_ns += elapsed;
++                if (anatomy::mode() == 2) {
++                    auto & p = anatomy::data.delta_heads[d->get_name().to_string()];
++                    ++p.first;
++                    p.second += elapsed;
++                }
++            };
+             levels const & us = const_levels(e);
+             unsigned len = length(us);
+             if (m_diag) {
+@@ -572,13 +972,18 @@ optional<expr> type_checker::unfold_definition_core(expr const & e) {
+             }
+             if (len > 0) {
+                 auto it = m_st->m_unfold.find(e);
+-                if (it != m_st->m_unfold.end())
++                if (it != m_st->m_unfold.end()) {
++                    anatomy_record();
+                     return some_expr(it->second);
++                }
+                 expr result = instantiate_value_lparams(*d, us);
+                 m_st->m_unfold.insert(mk_pair(e, result));
++                anatomy_record();
+                 return some_expr(result);
+             } else {
+-                return some_expr(instantiate_value_lparams(*d, us));
++                expr result = instantiate_value_lparams(*d, us);
++                anatomy_record();
++                return some_expr(result);
+             }
+         }
+     }
+@@ -704,6 +1109,7 @@ optional<expr> type_checker::reduce_nat(expr const & e) {
+ 
+ /** \brief Put expression \c t in weak head normal form */
+ expr type_checker::whnf(expr const & e) {
++    anatomy::reduction anatomy_reduction;
+     // Do not cache easy cases
+     switch (e.kind()) {
+     case expr_kind::BVar:  case expr_kind::Sort: case expr_kind::MVar: case expr_kind::Pi:
+@@ -758,10 +1164,18 @@ bool type_checker::is_def_eq_binding(expr t, expr s) {
+     do {
+         optional<expr> var_s_type;
+         if (binding_domain(t) != binding_domain(s)) {
++            auto inst_start = anatomy::clock::now();
+             var_s_type = instantiate_rev(binding_domain(s), subst.size(), subst.data());
+             expr var_t_type = instantiate_rev(binding_domain(t), subst.size(), subst.data());
+-            if (!is_def_eq(var_t_type, *var_s_type))
+-                return false;
++            if (anatomy::current) {
++                anatomy::data.instantiations += 2;
++                anatomy::data.instantiation_ns += std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - inst_start).count();
++            }
++            {
++                anatomy::path_scope path("binder_domain", subst.size(), 1);
++                if (!is_def_eq(var_t_type, *var_s_type)) return false;
++            }
++            if (anatomy::current) ++anatomy::data.pi_domains;
+         }
+         if (has_loose_bvars(binding_body(t)) || has_loose_bvars(binding_body(s))) {
+             // free variable is used inside t or s
+@@ -774,8 +1188,15 @@ bool type_checker::is_def_eq_binding(expr t, expr s) {
+         t = binding_body(t);
+         s = binding_body(s);
+     } while (t.kind() == k && s.kind() == k);
+-    return is_def_eq(instantiate_rev(t, subst.size(), subst.data()),
+-                     instantiate_rev(s, subst.size(), subst.data()));
++    auto inst_start = anatomy::clock::now();
++    expr body_t = instantiate_rev(t, subst.size(), subst.data());
++    expr body_s = instantiate_rev(s, subst.size(), subst.data());
++    if (anatomy::current) {
++        anatomy::data.instantiations += 2;
++        anatomy::data.instantiation_ns += std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - inst_start).count();
++    }
++    anatomy::path_scope path("binder_body", subst.size(), 1);
++    return is_def_eq(body_t, body_s);
+ }
+ 
+ bool type_checker::is_def_eq(level const & l1, level const & l2) {
+@@ -828,9 +1249,12 @@ lbool type_checker::quick_is_def_eq(expr const & t, expr const & s) {
+ /** \brief Return true if arguments of \c t are definitionally equal to arguments of \c s.
+     This method is used to implement an optimization in the method \c is_def_eq. */
+ bool type_checker::is_def_eq_args(expr t, expr s) {
++    unsigned i = get_app_num_args(t);
+     while (is_app(t) && is_app(s)) {
+-        if (!is_def_eq(app_arg(t), app_arg(s)))
+-            return false;
++        {
++            anatomy::path_scope path("argument", i ? --i : 0, 0);
++            if (!is_def_eq(app_arg(t), app_arg(s))) return false;
++        }
+         t = app_fn(t);
+         s = app_fn(s);
+     }
+@@ -866,6 +1290,7 @@ bool type_checker::try_eta_struct_core(expr const & t, expr const & s) {
+     get_app_args(s, s_args);
+     for (unsigned i = f_val.get_nparams(); i < s_args.size(); i++) {
+         expr proj = mk_proj(f_val.get_induct(), i - f_val.get_nparams(), t);
++        anatomy::path_scope path("field", i - f_val.get_nparams(), 0);
+         if (!is_def_eq(proj, s_args[i])) return false;
+     }
+     return true;
+@@ -876,14 +1301,17 @@ bool type_checker::try_eta_struct_core(expr const & t, expr const & s) {
+     \c a_i and \c b_i are also definitionally equal for every 1 <= i <= n.
+     Return false otherwise. */
+ bool type_checker::is_def_eq_app(expr const & t, expr const & s) {
++    if (anatomy::current) ++anatomy::data.app_attempts;
+     if (is_app(t) && is_app(s)) {
+         buffer<expr> t_args;
+         buffer<expr> s_args;
+         expr t_fn = get_app_args(t, t_args);
+         expr s_fn = get_app_args(s, s_args);
++        anatomy::path_scope fn_path("function");
+         if (is_def_eq(t_fn, s_fn) && t_args.size() == s_args.size()) {
+             unsigned i = 0;
+             for (; i < t_args.size(); i++) {
++                anatomy::path_scope path("argument", i, 0);
+                 if (!is_def_eq(t_args[i], s_args[i]))
+                     break;
+             }
+@@ -897,24 +1325,36 @@ bool type_checker::is_def_eq_app(expr const & t, expr const & s) {
+ /** \brief Return true if \c t and \c s are definitionally equal due to proof irrelevant.
+     Return false otherwise. */
+ lbool type_checker::is_def_eq_proof_irrel(expr const & t, expr const & s) {
++    if (anatomy::current) ++anatomy::data.proof_attempts;
+     // Proof irrelevance support for Prop (aka Type.{0})
+     expr t_type = infer_type(t);
+     if (!is_prop(t_type))
+         return l_undef;
++    if (anatomy::current) ++anatomy::data.proof_prop;
+     expr s_type = infer_type(s);
+-    return to_lbool(is_def_eq(t_type, s_type));
++    auto anatomy_start = anatomy::clock::now();
++    anatomy::prop_frame anatomy_prop(t_type, s_type, t, s);
++    anatomy::path_scope path("proposition_type", 2);
++    bool result = is_def_eq(t_type, s_type);
++    if (anatomy::current)
++        anatomy::data.proof_prop_ns += std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - anatomy_start).count();
++    return to_lbool(result);
+ }
+ 
+ bool type_checker::failed_before(expr const & t, expr const & s) const {
++    bool found;
+     if (hash(t) < hash(s)) {
+-        return m_st->m_failure.find(mk_pair(t, s)) != m_st->m_failure.end();
++        found = m_st->m_failure.find(mk_pair(t, s)) != m_st->m_failure.end();
+     } else if (hash(t) > hash(s)) {
+-        return m_st->m_failure.find(mk_pair(s, t)) != m_st->m_failure.end();
++        found = m_st->m_failure.find(mk_pair(s, t)) != m_st->m_failure.end();
+     } else {
+-        return
++        found =
+             m_st->m_failure.find(mk_pair(t, s)) != m_st->m_failure.end() ||
+             m_st->m_failure.find(mk_pair(s, t)) != m_st->m_failure.end();
+     }
++    if (anatomy::current)
++        ++(found ? anatomy::data.cache_failure : anatomy::data.cache_failure_miss);
++    return found;
+ }
+ 
+ void type_checker::cache_failure(expr const & t, expr const & s) {
+@@ -925,15 +1365,19 @@ void type_checker::cache_failure(expr const & t, expr const & s) {
+ }
+ 
+ bool type_checker::succeeded_before(expr const & t, expr const & s) const {
++    bool found;
+     if (hash(t) < hash(s)) {
+-        return m_st->m_success.find(mk_pair(t, s)) != m_st->m_success.end();
++        found = m_st->m_success.find(mk_pair(t, s)) != m_st->m_success.end();
+     } else if (hash(t) > hash(s)) {
+-        return m_st->m_success.find(mk_pair(s, t)) != m_st->m_success.end();
++        found = m_st->m_success.find(mk_pair(s, t)) != m_st->m_success.end();
+     } else {
+-        return
++        found =
+             m_st->m_success.find(mk_pair(t, s)) != m_st->m_success.end() ||
+             m_st->m_success.find(mk_pair(s, t)) != m_st->m_success.end();
+     }
++    if (anatomy::current)
++        ++(found ? anatomy::data.cache_success : anatomy::data.cache_success_miss);
++    return found;
+ }
+ 
+ void type_checker::cache_success(expr const & t, expr const & s) {
+@@ -1130,10 +1574,12 @@ bool type_checker::is_def_eq_unit_like(expr const & t, expr const & s) {
+ }
+ 
+ bool type_checker::is_def_eq_core(expr const & t, expr const & s) {
++    anatomy::comparison anatomy_scope(t, s);
++    auto anatomy_finish = [&](bool result, anatomy::branch b) { anatomy_scope.finish(result, b); return result; };
+     scope_rec_depth guard;
+     check_system("is_definitionally_equal", /* do_check_interrupted */ true);
+     lbool r = quick_is_def_eq(t, s);
+-    if (r != l_undef) return r == l_true;
++    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Quick);
+ 
+     // Very basic support for proofs by reflection. If `t` has no free variables and `s` is `Bool.true`,
+     // we fully reduce `t` and check whether result is `s`.
+@@ -1141,7 +1587,7 @@ bool type_checker::is_def_eq_core(expr const & t, expr const & s) {
+     // proof terms of the form `Eq.refl true : decide p = true`.
+     if ((!has_fvar(t) || m_eager_reduce) && is_constant(s, *g_bool_true)) {
+         if (is_constant(whnf(t), *g_bool_true)) {
+-            return true;
++            return anatomy_finish(true, anatomy::Reflection);
+         }
+     }
+ 
+@@ -1157,53 +1603,53 @@ bool type_checker::is_def_eq_core(expr const & t, expr const & s) {
+ 
+     if (!is_eqp(t_n, t) || !is_eqp(s_n, s)) {
+         r = quick_is_def_eq(t_n, s_n);
+-        if (r != l_undef) return r == l_true;
++        if (r != l_undef) return anatomy_finish(r == l_true, anatomy::QuickReduced);
+     }
+ 
+     r = is_def_eq_proof_irrel(t_n, s_n);
+-    if (r != l_undef) return r == l_true;
++    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Proof);
+ 
+     /* NB: `lazy_delta_reduction` updates `t_n` and `s_n` even when returning `l_undef`. */
+     r = lazy_delta_reduction(t_n, s_n);
+-    if (r != l_undef) return r == l_true;
++    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Delta);
+ 
+     if (is_constant(t_n) && is_constant(s_n) && const_name(t_n) == const_name(s_n) &&
+         is_def_eq(const_levels(t_n), const_levels(s_n)))
+-        return true;
++        return anatomy_finish(true, anatomy::SameConstant);
+ 
+     if (is_fvar(t_n) && is_fvar(s_n) && fvar_name(t_n) == fvar_name(s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::SameFVar);
+ 
+     if (is_proj(t_n) && is_proj(s_n) && proj_sname(t_n) == proj_sname(s_n) && proj_idx(t_n) == proj_idx(s_n)) {
+         expr t_c = proj_expr(t_n);
+         expr s_c = proj_expr(s_n);
+         if (lazy_delta_proj_reduction(t_c, s_c, proj_sname(t_n), proj_idx(t_n)))
+-            return true;
++            return anatomy_finish(true, anatomy::Projection);
+     }
+ 
+     // Invoke `whnf_core` again, but now using `whnf` to reduce projections.
+     expr t_n_n = whnf_core(t_n);
+     expr s_n_n = whnf_core(s_n);
+     if (!is_eqp(t_n_n, t_n) || !is_eqp(s_n_n, s_n))
+-        return is_def_eq_core(t_n_n, s_n_n);
++        return anatomy_finish(is_def_eq_core(t_n_n, s_n_n), anatomy::Reduced);
+ 
+     // At this point, t_n and s_n are in weak head normal form (modulo metavariables and proof irrelevance)
+     if (is_def_eq_app(t_n, s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::Application);
+ 
+     if (try_eta_expansion(t_n, s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::Eta);
+ 
+     if (try_eta_struct(t_n, s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::EtaStructure);
+ 
+     r = try_string_lit_expansion(t_n, s_n);
+-    if (r != l_undef) return r == l_true;
++    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::StringExpansion);
+ 
+     if (is_def_eq_unit_like(t_n, s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::UnitLike);
+ 
+-    return false;
++    return anatomy_finish(false, anatomy::Failure);
+ }
+ 
+ bool type_checker::is_def_eq(expr const & t, expr const & s) {
+diff --git a/stage0/src/kernel/expr.cpp b/stage0/src/kernel/expr.cpp
+index f87e72aaee16620a4cef5ef324a8fe78496e2dc2..1fa7478e6e8329ad39f087cbf91915946080584a 100644
+GIT binary patch
+delta 312
+zcmbQz&)7YYaYMIoeOZ2Hib76mVqSb=USdgpZe@IGML|(~a#3nxNotBleo|Iya*2YL
+zLaL@US8+*VNoKMFNP$90QDSm-Y6@62vMPmYE(IXKZ6e4Zkcy(zlG36)cCcw0sgo6?
+z)F&?#w%~x7JNc&YLIkHu<Q#(IA-WR5`6$|k;FOECA~=7<mLfO{#n&S^0TNRXoF@`@
+X;GE3|B!w6eyh~EYka#m>{%8RJ-DPzT
+
+delta 124
+zcmeC4$T+2+aYMK8<aHuqlPyFnCVw^HpWH4o2}~P^?g!IsVza>XcCm6WeL<RKvZr_v
+rR1M4IYvK^~^%4ufVrG)9VEU5eSrEN>n-nu6m~laRJA^S$_N^8GPen73
+
+diff --git a/stage0/src/kernel/type_checker.cpp b/stage0/src/kernel/type_checker.cpp
+index a735a6e42febcc94b45808cbcf30afa4e4af1ca2..9edcff0e8591996b53b8374fbf0ecf36f08823ea 100644
+GIT binary patch
+literal 75232
+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%0D-qzcQ4`uz
+z;8|_}4j56gLPp_)E_PQm$MkMRl?cLt0~aS>`itkg$IJOl!tX?n#4Vh7hU8Fl7+BrG
+z>P^^SncxQ^)^N-34ELjq5qt}03Vz{PF#Ebqe^g^HY1ka=UIh<xbP>H;LmOh4AyOOQ
+zNr#cu46Ky{=5#3Q^?Mz;Ls*SN?Nf)X>ie>h4jN%azjM=E@SM)O`z#HkpABfawVP#Y
+ztz8n4?0vf3P$*bO92r3nU9f)0ltqye`Um$V9Zc%E%@V2kXLDY_vRG{l0p6a*5pl%*
+zX~bTi=wOh-?0{r_oFYK8qi<zk?0W0A9vO_Xr_zWInL&c{s6P$<XMN~w1J)NRw=nWQ
+z(#|9Qsfr9rqNI;ONWx`O<JKv@5?B_(LuP=}P3GB&WX?b&b2CO5^h`Etmg>JoK63h-
+zY3zV=V2WvDR*lCz$<qAU!AzBM9q4E(M;N)@jbJ-9F0Agq4$DLoli*v~V(7z#hZzh-
+zo1xVgZ-KX5XCxj2-1Uaz^ZfyW;o+13EA`hCOBiI%9Nmn?wqLzs_u(9ZXNcZ33zD}!
+z+eIk6NQ(hRa*0)!e(u35xbd{FC-f{r0nodZvc{YSS!wR?VMBmWP|^C&A;AmY%08Ja
+zR?DbCSl2VSN;83a0$Ie>IP9)*nG4&QlQ{?>|1e|%isot#_)HIR8`bW@jgz!5fGp|Q
+z34g#1|M|}kK0gE(!&1qH+i9EC6D7!b=UOGK9H|r6m$=|$sdR}OI8!g%!-YsfX`sAG
+z`J;`?kKnZ4c-H;$`B%?=eEEZQ@3O1={Wy<Xix-}(NPg`cWpDhPeaVh_{hT)w2PtW<
+zY);tkj_6zlc1M)!N9Lm61ReaVCEPUpCW9+4)aG)qN#f0bMKYndq3ZMWh$%Xmk<)vd
+zTyeOs?mONN#x5~5?C5<UuS^aE^|8L9x~1^|fI4vj07oUH{$T)6x~PxTnm4GA(nWpT
+zm2rdmC|%S?M8^&4qjXUp*JIqEK1vt$ak0e>>Z5c~AEx&W>Z5c~ANOY5pgu~M^|6gB
+zADKh@80cbxIh8RWFT*&zK1-JXunyb+z<gQM#~m0qsE^V`{csb;p>v3LV#wWFIUxj&
+z+?8?IREp&jgs@s*8SNr=1E1X^qD}ych56_u6oUW-ClRP8s4KI3SwqRiX6F)tF;IHm
+zbg)&F%H?FCz$VF#Wx^DdytXci;Z=~T#q(6C7Oz6;;^Mgrx0c5ggDsCCn_8Yi;<P-4
+z9BFw9>Co~NbH3#%W^&6@%+Hpmn00MWCuV^L^0CjHAuWX`bGy7CD-3RKDH}L?+dJXX
+N;$`4GYN79M{U5P*x5xkh
+
+delta 634
+zcmY+BT}YF06vjDo+iSCZz1!Suvo@@uRD&Wf`dD9AQqXR~P>5ByNukE37SWiCE(-ck
+zcpR^z))EcU^+kVZT^f{O$+DQXi)QJZOo+nh!XTk-iM4a}oadb1bMt(8E4~sec_JtF
+zh;9-abd=Y@da0IG^o7JY5HW%aZ$u`<V_!JMj@~hdaAas5daPnLdUuKN>$c+QKu-z#
+zao<W<tk%Ka&0+774DR7d1c!aA`+T$<jZwqu9*A0S@V61Bgc?3**yaaaT9z28m!kho
+z1D?M=g>b7Jo-w^dX3h<^b!*^AD$%tpWs755MQX3Bqtn}FKHctYa=D!@Pc<6GZQ!@)
+zackTrShQ4yk+_7J<LfyzP1YdPs>Ihx11^88Vw<LVCGedu#Y8j5l%HM@N~fRU`*a^p
+zj49cN&u0l2XRgCOYr(6u3g6z#pie9Fp%wU<-i73X9Eaz$SPpX7pV@<fIopb^#8Acx
+zQ$~eAQVP#Y9qKYyF>_4Mn&%}{1p2f8Kz}w5@_3k)LzmJ2g|p!TcyD3Ul&hph*ujy%
+z%xkvW%`MIjZ>KAk;%JJn;hiityM_Xy|8GL?T5=Q_3ONlH87VpS=U}N2RZwGI#B543
+z=JU#g3o1$o$BB5MO-(Z4nwlbo*Lt363*s?P+Y3UWp+iNnH#D>}f8h(gt+eDm+0yRX
+RjY!-A*Mv28MoZ_^e*jJ&2=o8|
+

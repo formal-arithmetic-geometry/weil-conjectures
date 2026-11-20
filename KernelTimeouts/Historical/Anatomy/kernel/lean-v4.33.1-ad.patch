@@ -1,0 +1,821 @@
+diff --git a/src/kernel/expr.cpp b/src/kernel/expr.cpp
+index f87e72aaee..1fa7478e6e 100644
+--- a/src/kernel/expr.cpp
++++ b/src/kernel/expr.cpp
+@@ -140,41 +140,47 @@ static expr const & get_dummy() {
+ 
+ expr::expr():expr(get_dummy()) {}
+ 
++extern "C" void lean_anatomy_expr_created(object * e);
++static expr tracked_expr(object * e) {
++    lean_anatomy_expr_created(e);
++    return expr(e);
++}
++
+ extern "C" object * lean_expr_mk_lit(obj_arg l);
+-expr mk_lit(literal const & l) { return expr(lean_expr_mk_lit(l.to_obj_arg())); }
++expr mk_lit(literal const & l) { return tracked_expr(lean_expr_mk_lit(l.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_mdata(obj_arg m, obj_arg e);
+-expr mk_mdata(kvmap const & m, expr const & e) { return expr(lean_expr_mk_mdata(m.to_obj_arg(), e.to_obj_arg())); }
++expr mk_mdata(kvmap const & m, expr const & e) { return tracked_expr(lean_expr_mk_mdata(m.to_obj_arg(), e.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_proj(obj_arg s, obj_arg idx, obj_arg e);
+-expr mk_proj(name const & s, nat const & idx, expr const & e) { return expr(lean_expr_mk_proj(s.to_obj_arg(), idx.to_obj_arg(), e.to_obj_arg())); }
++expr mk_proj(name const & s, nat const & idx, expr const & e) { return tracked_expr(lean_expr_mk_proj(s.to_obj_arg(), idx.to_obj_arg(), e.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_bvar(obj_arg idx);
+-expr mk_bvar(nat const & idx) { return expr(lean_expr_mk_bvar(idx.to_obj_arg())); }
++expr mk_bvar(nat const & idx) { return tracked_expr(lean_expr_mk_bvar(idx.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_fvar(obj_arg n);
+-expr mk_fvar(name const & n) { return expr(lean_expr_mk_fvar(n.to_obj_arg())); }
++expr mk_fvar(name const & n) { return tracked_expr(lean_expr_mk_fvar(n.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_mvar(object * n);
+-expr mk_mvar(name const & n) { return expr(lean_expr_mk_mvar(n.to_obj_arg())); }
++expr mk_mvar(name const & n) { return tracked_expr(lean_expr_mk_mvar(n.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_const(obj_arg n, obj_arg ls);
+-expr mk_const(name const & n, levels const & ls) { return expr(lean_expr_mk_const(n.to_obj_arg(), ls.to_obj_arg())); }
++expr mk_const(name const & n, levels const & ls) { return tracked_expr(lean_expr_mk_const(n.to_obj_arg(), ls.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_app(obj_arg f, obj_arg a);
+-expr mk_app(expr const & f, expr const & a) { return expr(lean_expr_mk_app(f.to_obj_arg(), a.to_obj_arg())); }
++expr mk_app(expr const & f, expr const & a) { return tracked_expr(lean_expr_mk_app(f.to_obj_arg(), a.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_sort(obj_arg l);
+-expr mk_sort(level const & l) { return expr(lean_expr_mk_sort(l.to_obj_arg())); }
++expr mk_sort(level const & l) { return tracked_expr(lean_expr_mk_sort(l.to_obj_arg())); }
+ 
+ extern "C" object * lean_expr_mk_lambda(obj_arg n, obj_arg t, obj_arg e, uint8 bi);
+ expr mk_lambda(name const & n, expr const & t, expr const & e, binder_info bi) {
+-    return expr(lean_expr_mk_lambda(n.to_obj_arg(), t.to_obj_arg(), e.to_obj_arg(), static_cast<uint8>(bi)));
++    return tracked_expr(lean_expr_mk_lambda(n.to_obj_arg(), t.to_obj_arg(), e.to_obj_arg(), static_cast<uint8>(bi)));
+ }
+ 
+ extern "C" object * lean_expr_mk_forall(obj_arg n, obj_arg t, obj_arg e, uint8 bi);
+ expr mk_pi(name const & n, expr const & t, expr const & e, binder_info bi) {
+-    return expr(lean_expr_mk_forall(n.to_obj_arg(), t.to_obj_arg(), e.to_obj_arg(), static_cast<uint8>(bi)));
++    return tracked_expr(lean_expr_mk_forall(n.to_obj_arg(), t.to_obj_arg(), e.to_obj_arg(), static_cast<uint8>(bi)));
+ }
+ 
+ static name * g_default_name = nullptr;
+@@ -184,7 +190,7 @@ expr mk_arrow(expr const & t, expr const & e) {
+ 
+ extern "C" object * lean_expr_mk_let(object * n, object * t, object * v, object * b, uint8 nondep);
+ expr mk_let(name const & n, expr const & t, expr const & v, expr const & b, bool nondep) {
+-    return expr(lean_expr_mk_let(n.to_obj_arg(), t.to_obj_arg(), v.to_obj_arg(), b.to_obj_arg(), nondep));
++    return tracked_expr(lean_expr_mk_let(n.to_obj_arg(), t.to_obj_arg(), v.to_obj_arg(), b.to_obj_arg(), nondep));
+ }
+ 
+ static expr * g_Prop  = nullptr;
+diff --git a/src/kernel/type_checker.cpp b/src/kernel/type_checker.cpp
+index 0fae62c2c1..8c8abd3e5f 100644
+--- a/src/kernel/type_checker.cpp
++++ b/src/kernel/type_checker.cpp
+@@ -9,6 +9,14 @@ Author: Leonardo de Moura
+ #include <limits>
+ #include <climits>
+ #include <cstdlib>
++#include <chrono>
++#include <cstdio>
++#include <cstring>
++#include <map>
++#include <string>
++#include <unordered_map>
++#include <algorithm>
++#include "lean/mimalloc.h"
+ #include "runtime/interrupt.h"
+ #include "runtime/sstream.h"
+ #include "runtime/flet.h"
+@@ -24,6 +32,381 @@ Author: Leonardo de Moura
+ #include "kernel/inductive.h"
+ 
+ namespace lean {
++namespace anatomy {
++using clock = std::chrono::steady_clock;
++using ns = std::chrono::nanoseconds;
++enum branch : unsigned {
++    Quick, Reflection, QuickReduced, Proof, Delta, SameConstant, SameFVar, Projection,
++    Reduced, Application, Eta, EtaStructure, StringExpansion, UnitLike, Failure, Exception, Count
++};
++static char const * branch_names[] = {
++    "quick", "reflection", "quick_reduced", "proof_irrelevance", "lazy_delta",
++    "same_constant", "same_fvar", "projection", "second_whnf", "application",
++    "eta", "eta_structure", "string_expansion", "unit_like", "failure", "exception"
++};
++static int mode() {
++    static int value = [] {
++        char const * s = std::getenv("LEAN_DEFEQ_ANATOMY");
++        return s && std::strcmp(s, "trace") == 0 ? 2 : s && std::strcmp(s, "counters") == 0 ? 1 : 0;
++    }();
++    return value;
++}
++static double ms(uint64_t n) { return static_cast<double>(n) / 1000000.0; }
++static std::string head(expr const & e) {
++    expr const & f = get_app_fn(e);
++    if (is_constant(f)) return const_name(f).to_string();
++    if (is_proj(f)) return proj_sname(f).to_string() + ".proj";
++    return std::to_string(static_cast<unsigned>(e.kind()));
++}
++static std::string proposition_head(expr e) {
++    while (is_pi(e)) e = binding_body(e);
++    return head(e);
++}
++struct pair_key {
++    expr left;
++    expr right;
++    bool operator==(pair_key const & p) const { return is_eqp(left, p.left) && is_eqp(right, p.right); }
++};
++struct pair_hash {
++    size_t operator()(pair_key const & p) const {
++        return (static_cast<size_t>(reinterpret_cast<uintptr_t>(p.left.raw())) >> 4) ^
++            (static_cast<size_t>(reinterpret_cast<uintptr_t>(p.right.raw())) << 1);
++    }
++};
++struct top_call {
++    uint64_t id = 0, parent = 0, exclusive = 0, inclusive = 0, reduction = 0;
++    unsigned depth = 0, children = 0;
++    std::string left, right;
++    std::string path;
++};
++struct totals {
++    uint64_t calls = 0, successes = 0, failures = 0, max_depth = 0;
++    uint64_t whnf_calls = 0, whnf_ns = 0, delta_calls = 0, delta_ns = 0;
++    uint64_t beta = 0, iota = 0, zeta = 0, proj = 0;
++    uint64_t proof_attempts = 0, proof_prop = 0, proof_prop_ns = 0;
++    uint64_t app_attempts = 0, pi_domains = 0, cache_success = 0, cache_failure = 0;
++    uint64_t cache_success_miss = 0, cache_failure_miss = 0;
++    uint64_t comparison_exclusive = 0, reduction_exclusive = 0;
++    uint64_t dependent_comparison_exclusive = 0, dependent_reduction_exclusive = 0;
++    uint64_t proposition_comparison_exclusive = 0, proposition_reduction_exclusive = 0;
++    uint64_t instantiations = 0, instantiation_ns = 0;
++    uint64_t cpp_expr_created = 0, cpp_expr_bytes = 0;
++    size_t start_rss = 0, peak_rss = 0, start_commit = 0, peak_commit = 0;
++    uint64_t pair_captured = 0, pair_repeats = 0, pair_time = 0;
++    uint64_t prop_pair_captured = 0, prop_pair_repeats = 0;
++    uint64_t branches[Count] = {};
++    uint64_t branch_comparison_ns[Count] = {}, branch_reduction_ns[Count] = {};
++    std::map<unsigned, uint64_t> depth_hist, fanout_hist;
++    std::map<std::pair<unsigned, unsigned>, uint64_t> kinds;
++    std::map<std::pair<unsigned, unsigned>, uint64_t> structural;
++    std::map<std::pair<unsigned, unsigned>, uint64_t> prop_structural;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> delta_heads;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> prop_families;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> proof_positions;
++    std::unordered_map<pair_key, uint64_t, pair_hash> exact;
++    std::unordered_map<pair_key, uint64_t, pair_hash> prop_pairs;
++    std::vector<top_call> top;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> path_cost;
++    std::map<std::string, std::pair<std::string, std::string>> path_heads;
++};
++struct comparison;
++static thread_local comparison * current = nullptr;
++static thread_local comparison * next_owner = nullptr;
++static thread_local std::string next_path;
++static thread_local unsigned next_category = 0;
++struct path_scope {
++    std::string old_path;
++    unsigned old_category;
++    comparison * old_owner;
++    path_scope(char const * label, unsigned index, unsigned category):
++        old_path(std::move(next_path)), old_category(next_category), old_owner(next_owner) {
++        if (mode()) {
++            if (mode() == 2) next_path = std::string(label) + "[" + std::to_string(index) + "]";
++            next_category = category; next_owner = current;
++        }
++    }
++    path_scope(char const * label, unsigned category = 0):
++        old_path(std::move(next_path)), old_category(next_category), old_owner(next_owner) {
++        if (mode()) {
++            if (mode() == 2) next_path = label;
++            next_category = category; next_owner = current;
++        }
++    }
++    ~path_scope() {
++        if (mode()) { next_path = std::move(old_path); next_category = old_category; next_owner = old_owner; }
++    }
++};
++static void memory_snapshot(size_t & rss, size_t & commit) {
++    size_t elapsed, user, system, peak_rss, peak_commit, faults;
++    mi_process_info(&elapsed, &user, &system, &rss, &peak_rss, &commit, &peak_commit, &faults);
++}
++static thread_local comparison * reduction_owner = nullptr;
++static thread_local uint64_t * reduction_child_ns = nullptr;
++static thread_local totals data;
++static thread_local unsigned reduction_depth = 0;
++static thread_local uint64_t root_serial = 0;
++static unsigned bucket(unsigned n) { return n < 64 ? n : 64 + (n / 64); }
++static void report(uint64_t wall) {
++    char const * min = std::getenv("LEAN_DEFEQ_MIN_MS");
++    if (min && ms(wall) < std::atof(min)) return;
++    std::fprintf(stderr,
++        "ANATOMY root=%llu mode=%s wall_ms=%.3f calls=%llu success=%llu failure=%llu max_depth=%llu "
++        "comparison_exclusive_ms=%.3f reduction_exclusive_ms=%.3f whnf_calls=%llu whnf_ms=%.3f "
++        "delta_calls=%llu delta_ms=%.3f beta=%llu iota=%llu zeta=%llu projection=%llu "
++        "proof_attempts=%llu proposition_compares=%llu proposition_ms=%.3f app_attempts=%llu "
++        "pi_domains=%llu cache_success=%llu cache_failure=%llu cache_success_miss=%llu cache_failure_miss=%llu distinct_exact=%zu exact_repeats=%llu "
++        "pair_capture=%llu pair_repeat_exclusive_ms=%.3f distinct_structural=%zu "
++        "prop_pair_capture=%llu prop_pair_distinct=%zu prop_pair_repeats=%llu "
++        "prop_structural_distinct=%zu proof_position_groups=%zu "
++        "dependent_comparison_ms=%.3f dependent_reduction_ms=%.3f "
++        "proposition_comparison_ms=%.3f proposition_reduction_ms=%.3f "
++        "instantiations=%llu instantiation_ms=%.3f cpp_expr_created=%llu cpp_expr_bytes=%llu "
++        "rss_delta_bytes=%lld commit_delta_bytes=%lld\n",
++        static_cast<unsigned long long>(root_serial), mode() == 2 ? "trace" : "counters", ms(wall),
++        static_cast<unsigned long long>(data.calls), static_cast<unsigned long long>(data.successes),
++        static_cast<unsigned long long>(data.failures), static_cast<unsigned long long>(data.max_depth),
++        ms(data.comparison_exclusive), ms(data.reduction_exclusive),
++        static_cast<unsigned long long>(data.whnf_calls), ms(data.whnf_ns),
++        static_cast<unsigned long long>(data.delta_calls), ms(data.delta_ns),
++        static_cast<unsigned long long>(data.beta), static_cast<unsigned long long>(data.iota),
++        static_cast<unsigned long long>(data.zeta), static_cast<unsigned long long>(data.proj),
++        static_cast<unsigned long long>(data.proof_attempts), static_cast<unsigned long long>(data.proof_prop),
++        ms(data.proof_prop_ns), static_cast<unsigned long long>(data.app_attempts),
++        static_cast<unsigned long long>(data.pi_domains), static_cast<unsigned long long>(data.cache_success),
++        static_cast<unsigned long long>(data.cache_failure),
++        static_cast<unsigned long long>(data.cache_success_miss),
++        static_cast<unsigned long long>(data.cache_failure_miss), data.exact.size(),
++        static_cast<unsigned long long>(data.pair_repeats), static_cast<unsigned long long>(data.pair_captured),
++        ms(data.pair_time), data.structural.size(),
++        static_cast<unsigned long long>(data.prop_pair_captured), data.prop_pairs.size(),
++        static_cast<unsigned long long>(data.prop_pair_repeats),
++        data.prop_structural.size(), data.proof_positions.size(),
++        ms(data.dependent_comparison_exclusive), ms(data.dependent_reduction_exclusive),
++        ms(data.proposition_comparison_exclusive), ms(data.proposition_reduction_exclusive),
++        static_cast<unsigned long long>(data.instantiations), ms(data.instantiation_ns),
++        static_cast<unsigned long long>(data.cpp_expr_created),
++        static_cast<unsigned long long>(data.cpp_expr_bytes),
++        static_cast<long long>(data.peak_rss) - static_cast<long long>(data.start_rss),
++        static_cast<long long>(data.peak_commit) - static_cast<long long>(data.start_commit));
++    for (unsigned i = 0; i < Count; ++i)
++        if (data.branches[i])
++            std::fprintf(stderr, "ANATOMY branch=%s calls=%llu comparison_exclusive_ms=%.3f reduction_exclusive_ms=%.3f\n",
++                         branch_names[i], static_cast<unsigned long long>(data.branches[i]),
++                         ms(data.branch_comparison_ns[i]), ms(data.branch_reduction_ns[i]));
++    std::vector<std::pair<std::string, std::pair<uint64_t, uint64_t>>> families(
++        data.prop_families.begin(), data.prop_families.end());
++    std::sort(families.begin(), families.end(), [] (auto const & a, auto const & b) {
++        return a.second.second > b.second.second;
++    });
++    for (size_t i = 0; i < std::min<size_t>(20, families.size()); ++i)
++        std::fprintf(stderr, "ANATOMY proposition=%s calls=%llu exclusive_ms=%.3f\n",
++                     families[i].first.c_str(),
++                     static_cast<unsigned long long>(families[i].second.first),
++                     ms(families[i].second.second));
++    std::vector<std::pair<std::string, std::pair<uint64_t, uint64_t>>> positions(
++        data.proof_positions.begin(), data.proof_positions.end());
++    std::sort(positions.begin(), positions.end(), [] (auto const & a, auto const & b) {
++        return a.second.second > b.second.second;
++    });
++    for (size_t i = 0; i < (mode() == 2 ? positions.size() : std::min<size_t>(20, positions.size())); ++i)
++        std::fprintf(stderr, "ANATOMY proof_position=%s calls=%llu exclusive_ms=%.3f\n",
++                     positions[i].first.c_str(),
++                     static_cast<unsigned long long>(positions[i].second.first),
++                     ms(positions[i].second.second));
++    if (mode() != 2) return;
++    for (auto const & p : data.depth_hist)
++        std::fprintf(stderr, "ANATOMY depth=%u calls=%llu\n", p.first, static_cast<unsigned long long>(p.second));
++    for (auto const & p : data.fanout_hist)
++        std::fprintf(stderr, "ANATOMY fanout=%u calls=%llu\n", p.first, static_cast<unsigned long long>(p.second));
++    for (auto const & p : data.kinds)
++        std::fprintf(stderr, "ANATOMY kinds=%u,%u calls=%llu\n", p.first.first, p.first.second,
++                     static_cast<unsigned long long>(p.second));
++    for (auto const & p : data.delta_heads)
++        std::fprintf(stderr, "ANATOMY delta=%s calls=%llu ms=%.3f\n", p.first.c_str(),
++                     static_cast<unsigned long long>(p.second.first), ms(p.second.second));
++    std::sort(data.top.begin(), data.top.end(), [] (top_call const & a, top_call const & b) {
++        return a.exclusive > b.exclusive;
++    });
++    for (auto const & p : data.top)
++        std::fprintf(stderr, "ANATOMY child=%llu parent=%llu depth=%u children=%u left=%s right=%s "
++                     "path=%s exclusive_ms=%.3f inclusive_ms=%.3f reduction_ms=%.3f\n",
++                     static_cast<unsigned long long>(p.id), static_cast<unsigned long long>(p.parent),
++                     p.depth, p.children, p.left.c_str(), p.right.c_str(), p.path.c_str(), ms(p.exclusive), ms(p.inclusive),
++                     ms(p.reduction));
++    auto prefix_cost = data.path_cost;
++    for (auto const & p : data.path_cost) {
++        auto pos = p.first.rfind('/');
++        while (pos != std::string::npos) {
++            prefix_cost[p.first.substr(0, pos)].second += p.second.second;
++            pos = p.first.rfind('/', pos - 1);
++        }
++    }
++    std::vector<std::pair<std::string, std::pair<uint64_t, uint64_t>>> paths(prefix_cost.begin(), prefix_cost.end());
++    std::sort(paths.begin(), paths.end(), [](auto const & a, auto const & b) { return a.second.second > b.second.second; });
++    for (size_t i = 0; i < std::min<size_t>(40, paths.size()); ++i)
++        std::fprintf(stderr, "ANATOMY path=%s left=%s right=%s direct_calls=%llu direct_exclusive_ms=%.3f subtree_exclusive_ms=%.3f\n",
++                     paths[i].first.c_str(), data.path_heads[paths[i].first].first.c_str(),
++                     data.path_heads[paths[i].first].second.c_str(),
++                     static_cast<unsigned long long>(data.path_cost[paths[i].first].first),
++                     ms(data.path_cost[paths[i].first].second), ms(paths[i].second.second));
++}
++struct comparison {
++    comparison * parent;
++    expr const & left;
++    expr const & right;
++    clock::time_point start;
++    uint64_t id = 0, child_ns = 0, reduce_ns = 0;
++    unsigned depth = 0, children = 0;
++    unsigned category = 0;
++    std::string path;
++    bool result = false, completed = false, enabled = false, repeated = false;
++    branch outcome = Exception;
++    comparison(expr const & t, expr const & s): parent(current), left(t), right(s) {
++        if (!mode()) return;
++        enabled = true;
++        if (!parent) {
++            data = totals{}; ++root_serial;
++            memory_snapshot(data.start_rss, data.start_commit);
++        }
++        id = ++data.calls;
++        depth = parent ? parent->depth + 1 : 0;
++        category = parent == next_owner && next_category ? next_category : parent ? parent->category : 0;
++        if (mode() == 2) {
++            path = parent ? parent->path : "root";
++            if (parent == next_owner && !next_path.empty() && path.size() < 160) path += "/" + next_path;
++            if (data.path_heads.find(path) == data.path_heads.end())
++                data.path_heads.emplace(path, std::make_pair(head(t), head(s)));
++        }
++        if (parent) ++parent->children;
++        data.max_depth = std::max<uint64_t>(data.max_depth, depth);
++        ++data.depth_hist[bucket(depth)];
++        ++data.kinds[{static_cast<unsigned>(t.kind()), static_cast<unsigned>(s.kind())}];
++        if (mode() == 2 && data.pair_captured < 5000000) {
++            ++data.pair_captured;
++            auto pair = pair_key{t, s};
++            repeated = data.exact[pair]++ != 0;
++            ++data.structural[{hash(t), hash(s)}];
++        }
++        start = clock::now();
++        current = this;
++    }
++    void finish(bool r, branch b) { completed = true; result = r; outcome = b; }
++    ~comparison() {
++        if (!enabled) return;
++        uint64_t inclusive = std::chrono::duration_cast<ns>(clock::now() - start).count();
++        uint64_t exclusive = inclusive > child_ns + reduce_ns ? inclusive - child_ns - reduce_ns : 0;
++        if (reduction_child_ns && parent == reduction_owner) *reduction_child_ns += inclusive;
++        current = parent;
++        if (parent) parent->child_ns += inclusive;
++        if (completed && result) ++data.successes; else ++data.failures;
++        ++data.branches[outcome];
++        data.branch_comparison_ns[outcome] += exclusive;
++        data.branch_reduction_ns[outcome] += reduce_ns;
++        ++data.fanout_hist[bucket(children)];
++        data.comparison_exclusive += exclusive;
++        data.reduction_exclusive += reduce_ns;
++        if (category == 1) {
++            data.dependent_comparison_exclusive += exclusive;
++            data.dependent_reduction_exclusive += reduce_ns;
++        } else if (category == 2) {
++            data.proposition_comparison_exclusive += exclusive;
++            data.proposition_reduction_exclusive += reduce_ns;
++        }
++        if (mode() == 2) {
++            auto & cost = data.path_cost[path];
++            ++cost.first;
++            cost.second += exclusive + reduce_ns;
++            if (repeated) { ++data.pair_repeats; data.pair_time += exclusive; }
++            if (data.top.size() < 20 || exclusive > data.top.back().exclusive) {
++                top_call c;
++                c.id = id; c.parent = parent ? parent->id : 0; c.depth = depth; c.children = children;
++                c.exclusive = exclusive; c.inclusive = inclusive; c.reduction = reduce_ns;
++                c.left = head(left); c.right = head(right); c.path = path;
++                data.top.push_back(std::move(c));
++                std::sort(data.top.begin(), data.top.end(), [](top_call const & a, top_call const & b) {
++                    return a.exclusive > b.exclusive;
++                });
++                if (data.top.size() > 20) data.top.pop_back();
++            }
++        }
++        if (!parent) {
++            memory_snapshot(data.peak_rss, data.peak_commit);
++            report(inclusive);
++        }
++    }
++};
++struct reduction {
++    comparison * owner = current;
++    clock::time_point start;
++    uint64_t child_comparisons = 0;
++    bool enabled = false, outer = false;
++    reduction() {
++        if (!owner) return;
++        enabled = true;
++        outer = reduction_depth++ == 0;
++        if (outer) {
++            ++data.whnf_calls;
++            reduction_owner = owner;
++            reduction_child_ns = &child_comparisons;
++            start = clock::now();
++        }
++    }
++    ~reduction() {
++        if (!enabled) return;
++        --reduction_depth;
++        if (outer) {
++            uint64_t elapsed = std::chrono::duration_cast<ns>(clock::now() - start).count();
++            reduction_owner = nullptr;
++            reduction_child_ns = nullptr;
++            elapsed = elapsed > child_comparisons ? elapsed - child_comparisons : 0;
++            data.whnf_ns += elapsed;
++            owner->reduce_ns += elapsed;
++        }
++    }
++};
++struct prop_frame {
++    prop_frame * parent = nullptr;
++    clock::time_point start;
++    uint64_t child = 0;
++    std::string key;
++    std::string proof_key;
++    bool enabled = false;
++    static thread_local prop_frame * current_prop;
++    prop_frame(expr const & left, expr const & right, expr const & proof_left, expr const & proof_right) {
++        if (!current) return;
++        enabled = true;
++        parent = current_prop;
++        key = proposition_head(left) + "|" + proposition_head(right);
++        proof_key = head(proof_left) + "|" + head(proof_right);
++        if (mode() == 2) {
++            ++data.prop_pair_captured;
++            if (data.prop_pairs[pair_key{left, right}]++ != 0) ++data.prop_pair_repeats;
++            ++data.prop_structural[{hash(left), hash(right)}];
++        }
++        start = clock::now();
++        current_prop = this;
++    }
++    ~prop_frame() {
++        if (!enabled) return;
++        uint64_t inclusive = std::chrono::duration_cast<ns>(clock::now() - start).count();
++        current_prop = parent;
++        if (parent) parent->child += inclusive;
++        auto & entry = data.prop_families[key];
++        ++entry.first;
++        entry.second += inclusive > child ? inclusive - child : 0;
++        auto & position = data.proof_positions[proof_key];
++        ++position.first;
++        position.second += inclusive > child ? inclusive - child : 0;
++    }
++};
++thread_local prop_frame * prop_frame::current_prop = nullptr;
++} // namespace anatomy
++extern "C" void lean_anatomy_expr_created(object * e) {
++    if (anatomy::current && !is_scalar(e)) {
++        ++anatomy::data.cpp_expr_created;
++        anatomy::data.cpp_expr_bytes += lean_object_byte_size(e);
++    }
++}
+ static name * g_kernel_fresh = nullptr;
+ static expr * g_dont_care    = nullptr;
+ static name * g_bool_true    = nullptr;
+@@ -466,6 +849,7 @@ static bool is_let_fvar(local_ctx const & lctx, expr const & e) {
+     If `cheap == true`, then we don't perform delta-reduction when reducing major premise of recursors and projections.
+     We also do not cache results. */
+ expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
++    anatomy::reduction anatomy_reduction;
+     scope_rec_depth guard;
+     check_system("type checker: whnf", /* do_check_interrupted */ true);
+ 
+@@ -502,9 +886,10 @@ expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
+     case expr_kind::FVar:
+         return whnf_fvar(e, cheap_rec, cheap_proj);
+     case expr_kind::Proj: {
+-        if (auto m = reduce_proj(e, cheap_rec, cheap_proj))
++        if (auto m = reduce_proj(e, cheap_rec, cheap_proj)) {
++            if (anatomy::current) ++anatomy::data.proj;
+             r = whnf_core(*m, cheap_rec, cheap_proj);
+-        else
++        } else
+             r = e;
+         break;
+     }
+@@ -513,6 +898,7 @@ expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
+         expr f0 = get_app_rev_args(e, args);
+         expr f = whnf_core(f0, cheap_rec, cheap_proj);
+         if (is_lambda(f)) {
++            if (anatomy::current) ++anatomy::data.beta;
+             unsigned m = 1;
+             unsigned num_args = args.size();
+             while (is_lambda(binding_body(f)) && m < num_args) {
+@@ -524,6 +910,7 @@ expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
+                           cheap_rec, cheap_proj);
+         } else if (f == f0) {
+             if (auto r = reduce_recursor(e, cheap_rec, cheap_proj)) {
++                if (anatomy::current) ++anatomy::data.iota;
+                 if (m_diag) {
+                     auto f = get_app_fn(e);
+                     if (is_constant(f))
+@@ -540,6 +927,7 @@ expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
+         break;
+     }
+     case expr_kind::Let:
++        if (anatomy::current) ++anatomy::data.zeta;
+         r = whnf_core(instantiate(let_body(e), let_value(e)), cheap_rec, cheap_proj);
+         break;
+     }
+@@ -565,6 +953,18 @@ optional<constant_info> type_checker::is_delta(expr const & e) const {
+ optional<expr> type_checker::unfold_definition_core(expr const & e) {
+     if (is_constant(e)) {
+         if (auto d = is_delta(e)) {
++            auto anatomy_start = anatomy::clock::now();
++            if (anatomy::current) ++anatomy::data.delta_calls;
++            auto anatomy_record = [&] {
++                if (!anatomy::current) return;
++                auto elapsed = std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - anatomy_start).count();
++                anatomy::data.delta_ns += elapsed;
++                if (anatomy::mode() == 2) {
++                    auto & p = anatomy::data.delta_heads[d->get_name().to_string()];
++                    ++p.first;
++                    p.second += elapsed;
++                }
++            };
+             levels const & us = const_levels(e);
+             unsigned len = length(us);
+             if (m_diag) {
+@@ -572,13 +972,18 @@ optional<expr> type_checker::unfold_definition_core(expr const & e) {
+             }
+             if (len > 0) {
+                 auto it = m_st->m_unfold.find(e);
+-                if (it != m_st->m_unfold.end())
++                if (it != m_st->m_unfold.end()) {
++                    anatomy_record();
+                     return some_expr(it->second);
++                }
+                 expr result = instantiate_value_lparams(*d, us);
+                 m_st->m_unfold.insert(mk_pair(e, result));
++                anatomy_record();
+                 return some_expr(result);
+             } else {
+-                return some_expr(instantiate_value_lparams(*d, us));
++                expr result = instantiate_value_lparams(*d, us);
++                anatomy_record();
++                return some_expr(result);
+             }
+         }
+     }
+@@ -601,16 +1006,16 @@ optional<expr> type_checker::unfold_definition(expr const & e) {
+     }
+ }
+ 
++expr mk_bool_true();
++expr mk_bool_false();
++
+ static expr * g_lean_reduce_bool = nullptr;
+-static expr * g_lean_reduce_nat  = nullptr;
++static expr * g_lean_reduce_nat = nullptr;
+ 
+ namespace ir {
+ object * run_boxed_kernel(environment const & env, options const & opts, name const & fn, unsigned n, object **args);
+ }
+ 
+-expr mk_bool_true();
+-expr mk_bool_false();
+-
+ optional<expr> reduce_native(environment const & env, expr const & e) {
+     if (!is_app(e)) return none_expr();
+     expr const & arg = app_arg(e);
+@@ -734,6 +1139,7 @@ optional<expr> type_checker::reduce_nat(expr const & e) {
+ 
+ /** \brief Put expression \c t in weak head normal form */
+ expr type_checker::whnf(expr const & e) {
++    anatomy::reduction anatomy_reduction;
+     // Do not cache easy cases
+     switch (e.kind()) {
+     case expr_kind::BVar:  case expr_kind::Sort: case expr_kind::MVar: case expr_kind::Pi:
+@@ -791,10 +1197,18 @@ bool type_checker::is_def_eq_binding(expr t, expr s) {
+     do {
+         optional<expr> var_s_type;
+         if (binding_domain(t) != binding_domain(s)) {
++            auto inst_start = anatomy::clock::now();
+             var_s_type = instantiate_rev(binding_domain(s), subst.size(), subst.data());
+             expr var_t_type = instantiate_rev(binding_domain(t), subst.size(), subst.data());
+-            if (!is_def_eq(var_t_type, *var_s_type))
+-                return false;
++            if (anatomy::current) {
++                anatomy::data.instantiations += 2;
++                anatomy::data.instantiation_ns += std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - inst_start).count();
++            }
++            {
++                anatomy::path_scope path("binder_domain", subst.size(), 1);
++                if (!is_def_eq(var_t_type, *var_s_type)) return false;
++            }
++            if (anatomy::current) ++anatomy::data.pi_domains;
+         }
+         if (has_loose_bvars(binding_body(t)) || has_loose_bvars(binding_body(s))) {
+             // free variable is used inside t or s
+@@ -807,8 +1221,15 @@ bool type_checker::is_def_eq_binding(expr t, expr s) {
+         t = binding_body(t);
+         s = binding_body(s);
+     } while (t.kind() == k && s.kind() == k);
+-    return is_def_eq(instantiate_rev(t, subst.size(), subst.data()),
+-                     instantiate_rev(s, subst.size(), subst.data()));
++    auto inst_start = anatomy::clock::now();
++    expr body_t = instantiate_rev(t, subst.size(), subst.data());
++    expr body_s = instantiate_rev(s, subst.size(), subst.data());
++    if (anatomy::current) {
++        anatomy::data.instantiations += 2;
++        anatomy::data.instantiation_ns += std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - inst_start).count();
++    }
++    anatomy::path_scope path("binder_body", subst.size(), 1);
++    return is_def_eq(body_t, body_s);
+ }
+ 
+ bool type_checker::is_def_eq(level const & l1, level const & l2) {
+@@ -861,9 +1282,12 @@ lbool type_checker::quick_is_def_eq(expr const & t, expr const & s) {
+ /** \brief Return true if arguments of \c t are definitionally equal to arguments of \c s.
+     This method is used to implement an optimization in the method \c is_def_eq. */
+ bool type_checker::is_def_eq_args(expr t, expr s) {
++    unsigned i = get_app_num_args(t);
+     while (is_app(t) && is_app(s)) {
+-        if (!is_def_eq(app_arg(t), app_arg(s)))
+-            return false;
++        {
++            anatomy::path_scope path("argument", i ? --i : 0, 0);
++            if (!is_def_eq(app_arg(t), app_arg(s))) return false;
++        }
+         t = app_fn(t);
+         s = app_fn(s);
+     }
+@@ -899,6 +1323,7 @@ bool type_checker::try_eta_struct_core(expr const & t, expr const & s) {
+     get_app_args(s, s_args);
+     for (unsigned i = f_val.get_nparams(); i < s_args.size(); i++) {
+         expr proj = mk_proj(f_val.get_induct(), i - f_val.get_nparams(), t);
++        anatomy::path_scope path("field", i - f_val.get_nparams(), 0);
+         if (!is_def_eq(proj, s_args[i])) return false;
+     }
+     return true;
+@@ -909,14 +1334,17 @@ bool type_checker::try_eta_struct_core(expr const & t, expr const & s) {
+     \c a_i and \c b_i are also definitionally equal for every 1 <= i <= n.
+     Return false otherwise. */
+ bool type_checker::is_def_eq_app(expr const & t, expr const & s) {
++    if (anatomy::current) ++anatomy::data.app_attempts;
+     if (is_app(t) && is_app(s)) {
+         buffer<expr> t_args;
+         buffer<expr> s_args;
+         expr t_fn = get_app_args(t, t_args);
+         expr s_fn = get_app_args(s, s_args);
++        anatomy::path_scope fn_path("function");
+         if (is_def_eq(t_fn, s_fn) && t_args.size() == s_args.size()) {
+             unsigned i = 0;
+             for (; i < t_args.size(); i++) {
++                anatomy::path_scope path("argument", i, 0);
+                 if (!is_def_eq(t_args[i], s_args[i]))
+                     break;
+             }
+@@ -930,24 +1358,36 @@ bool type_checker::is_def_eq_app(expr const & t, expr const & s) {
+ /** \brief Return true if \c t and \c s are definitionally equal due to proof irrelevant.
+     Return false otherwise. */
+ lbool type_checker::is_def_eq_proof_irrel(expr const & t, expr const & s) {
++    if (anatomy::current) ++anatomy::data.proof_attempts;
+     // Proof irrelevance support for Prop (aka Type.{0})
+     expr t_type = infer_type(t);
+     if (!is_prop(t_type))
+         return l_undef;
++    if (anatomy::current) ++anatomy::data.proof_prop;
+     expr s_type = infer_type(s);
+-    return to_lbool(is_def_eq(t_type, s_type));
++    auto anatomy_start = anatomy::clock::now();
++    anatomy::prop_frame anatomy_prop(t_type, s_type, t, s);
++    anatomy::path_scope path("proposition_type", 2);
++    bool result = is_def_eq(t_type, s_type);
++    if (anatomy::current)
++        anatomy::data.proof_prop_ns += std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - anatomy_start).count();
++    return to_lbool(result);
+ }
+ 
+ bool type_checker::failed_before(expr const & t, expr const & s) const {
++    bool found;
+     if (hash(t) < hash(s)) {
+-        return m_st->m_failure.find(mk_pair(t, s)) != m_st->m_failure.end();
++        found = m_st->m_failure.find(mk_pair(t, s)) != m_st->m_failure.end();
+     } else if (hash(t) > hash(s)) {
+-        return m_st->m_failure.find(mk_pair(s, t)) != m_st->m_failure.end();
++        found = m_st->m_failure.find(mk_pair(s, t)) != m_st->m_failure.end();
+     } else {
+-        return
++        found =
+             m_st->m_failure.find(mk_pair(t, s)) != m_st->m_failure.end() ||
+             m_st->m_failure.find(mk_pair(s, t)) != m_st->m_failure.end();
+     }
++    if (anatomy::current)
++        ++(found ? anatomy::data.cache_failure : anatomy::data.cache_failure_miss);
++    return found;
+ }
+ 
+ void type_checker::cache_failure(expr const & t, expr const & s) {
+@@ -958,15 +1398,19 @@ void type_checker::cache_failure(expr const & t, expr const & s) {
+ }
+ 
+ bool type_checker::succeeded_before(expr const & t, expr const & s) const {
++    bool found;
+     if (hash(t) < hash(s)) {
+-        return m_st->m_success.find(mk_pair(t, s)) != m_st->m_success.end();
++        found = m_st->m_success.find(mk_pair(t, s)) != m_st->m_success.end();
+     } else if (hash(t) > hash(s)) {
+-        return m_st->m_success.find(mk_pair(s, t)) != m_st->m_success.end();
++        found = m_st->m_success.find(mk_pair(s, t)) != m_st->m_success.end();
+     } else {
+-        return
++        found =
+             m_st->m_success.find(mk_pair(t, s)) != m_st->m_success.end() ||
+             m_st->m_success.find(mk_pair(s, t)) != m_st->m_success.end();
+     }
++    if (anatomy::current)
++        ++(found ? anatomy::data.cache_success : anatomy::data.cache_success_miss);
++    return found;
+ }
+ 
+ void type_checker::cache_success(expr const & t, expr const & s) {
+@@ -1169,10 +1613,12 @@ bool type_checker::is_def_eq_unit_like(expr const & t, expr const & s) {
+ }
+ 
+ bool type_checker::is_def_eq_core(expr const & t, expr const & s) {
++    anatomy::comparison anatomy_scope(t, s);
++    auto anatomy_finish = [&](bool result, anatomy::branch b) { anatomy_scope.finish(result, b); return result; };
+     scope_rec_depth guard;
+     check_system("is_definitionally_equal", /* do_check_interrupted */ true);
+     lbool r = quick_is_def_eq(t, s);
+-    if (r != l_undef) return r == l_true;
++    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Quick);
+ 
+     // Very basic support for proofs by reflection. If `t` has no free variables and `s` is `Bool.true`,
+     // we fully reduce `t` and check whether result is `s`.
+@@ -1180,7 +1626,7 @@ bool type_checker::is_def_eq_core(expr const & t, expr const & s) {
+     // proof terms of the form `Eq.refl true : decide p = true`.
+     if ((!has_fvar(t) || m_eager_reduce) && is_constant(s, *g_bool_true)) {
+         if (is_constant(whnf(t), *g_bool_true)) {
+-            return true;
++            return anatomy_finish(true, anatomy::Reflection);
+         }
+     }
+ 
+@@ -1196,53 +1642,53 @@ bool type_checker::is_def_eq_core(expr const & t, expr const & s) {
+ 
+     if (!is_eqp(t_n, t) || !is_eqp(s_n, s)) {
+         r = quick_is_def_eq(t_n, s_n);
+-        if (r != l_undef) return r == l_true;
++        if (r != l_undef) return anatomy_finish(r == l_true, anatomy::QuickReduced);
+     }
+ 
+     r = is_def_eq_proof_irrel(t_n, s_n);
+-    if (r != l_undef) return r == l_true;
++    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Proof);
+ 
+     /* NB: `lazy_delta_reduction` updates `t_n` and `s_n` even when returning `l_undef`. */
+     r = lazy_delta_reduction(t_n, s_n);
+-    if (r != l_undef) return r == l_true;
++    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Delta);
+ 
+     if (is_constant(t_n) && is_constant(s_n) && const_name(t_n) == const_name(s_n) &&
+         is_def_eq(const_levels(t_n), const_levels(s_n)))
+-        return true;
++        return anatomy_finish(true, anatomy::SameConstant);
+ 
+     if (is_fvar(t_n) && is_fvar(s_n) && fvar_name(t_n) == fvar_name(s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::SameFVar);
+ 
+     if (is_proj(t_n) && is_proj(s_n) && proj_sname(t_n) == proj_sname(s_n) && proj_idx(t_n) == proj_idx(s_n)) {
+         expr t_c = proj_expr(t_n);
+         expr s_c = proj_expr(s_n);
+         if (lazy_delta_proj_reduction(t_c, s_c, proj_sname(t_n), proj_idx(t_n)))
+-            return true;
++            return anatomy_finish(true, anatomy::Projection);
+     }
+ 
+     // Invoke `whnf_core` again, but now using `whnf` to reduce projections.
+     expr t_n_n = whnf_core(t_n);
+     expr s_n_n = whnf_core(s_n);
+     if (!is_eqp(t_n_n, t_n) || !is_eqp(s_n_n, s_n))
+-        return is_def_eq_core(t_n_n, s_n_n);
++        return anatomy_finish(is_def_eq_core(t_n_n, s_n_n), anatomy::Reduced);
+ 
+     // At this point, t_n and s_n are in weak head normal form (modulo metavariables and proof irrelevance)
+     if (is_def_eq_app(t_n, s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::Application);
+ 
+     if (try_eta_expansion(t_n, s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::Eta);
+ 
+     if (try_eta_struct(t_n, s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::EtaStructure);
+ 
+     r = try_string_lit_expansion(t_n, s_n);
+-    if (r != l_undef) return r == l_true;
++    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::StringExpansion);
+ 
+     if (is_def_eq_unit_like(t_n, s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::UnitLike);
+ 
+-    return false;
++    return anatomy_finish(false, anatomy::Failure);
+ }
+ 
+ bool type_checker::is_def_eq(expr const & t, expr const & s) {
