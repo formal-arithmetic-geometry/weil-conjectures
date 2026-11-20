@@ -17,9 +17,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 
 # Common modifications of two models
 
-This file constructs the **common modification of two models** (Stacks Project Tag 0F3X;
-blueprint `def:common-modification`, `thm:0F3X`, `def:nagata-common-modification`,
-`lemma:nagata-common-modification`; proof order item 32):
+This file constructs the **common modification of two models** (Stacks Project Tag 0F3X):
 
 - `AlgebraicGeometry.CommonModification`: the data of a common modification of two
   separated finite-type models `X₁`, `X₂` of a common open `U` over `S`;
@@ -28,8 +26,7 @@ blueprint `def:common-modification`, `thm:0F3X`, `def:nagata-common-modification
   finite-type model;
 - `AlgebraicGeometry.CommonModification.j`: the open immersion of `U` into the glued
   scheme, and `AlgebraicGeometry.CommonModification.dense_range_j`: density of `U` is
-  transported through the common modification (blueprint:
-  `lemma:nagata-two-open-density-transport`).
+  transported through the common modification.
 
 The extension step of the construction is recorded separately as
 
@@ -60,8 +57,7 @@ section CommonModification
 variable {S U X₁ X₂ : Scheme.{u}}
 
 /-- The data of a **common modification** of two separated finite-type models `X₁`,
-`X₂` of a common open `U` over `S` (Stacks Project Tag 0F3X; blueprint:
-`def:nagata-common-modification`). -/
+`X₂` of a common open `U` over `S` (Stacks Project Tag 0F3X). -/
 structure CommonModification (s₁ : X₁ ⟶ S) (s₂ : X₂ ⟶ S) (j₁ : U ⟶ X₁) (j₂ : U ⟶ X₂)
     [IsOpenImmersion j₁] [IsOpenImmersion j₂] where
   /-- The `U`-admissible blow-up of the first model. -/
@@ -118,8 +114,7 @@ the blow-up of `V` at the pulled-back centre `B.I.comap p`, so a further finite-
 of an open subscheme of `X'`. Extending `M` across that open
 (`IsAdmissible.exists_extend`) and composing the two admissible blow-ups
 (`IsAdmissible.exists_comp`) exhibits `Bl_M` as an open subscheme of a single
-`U`-admissible blow-up of `X`, lying over `V` as prescribed.
-(Blueprint: part of `lemma:nagata-common-modification`.) -/
+`U`-admissible blow-up of `X`, lying over `V` as prescribed. -/
 theorem IsAdmissible.exists_isOpenImmersion_blowup {X V : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] {U : X.Opens} (p : V ⟶ X) [QuasiCompact p]
     (hpU : (U : Set X) ⊆ Set.range p) (B : IsAdmissible X U)
@@ -204,10 +199,9 @@ theorem IsAdmissible.exists_isOpenImmersion_blowup {X V : Scheme.{u}} [CompactSp
         simp only [Category.assoc]
     _ = M.blowupMap ≫ (B.I.comap p).blowupMap ≫ p := by rw [hφι, hq]
 
-/-- **Existence of a common modification** (Stacks Project Tag 0F3X; blueprint:
-`lemma:nagata-common-modification`; proof order item 32).
+/-- **Existence of a common modification** (Stacks Project Tag 0F3X).
 
-The construction is the one of the blueprint: form the scheme-theoretic image
+Form the scheme-theoretic image
 `X₁₂ ⊆ X₁ ×_S X₂` of `U`, eliminate the indeterminacy of both projections
 (`exists_admissibleBlowup_isOpenImmersion_strictTransformMap`), dominate the two center
 ideals by their product (`Scheme.IdealSheafData.exists_blowup_mul_iso`) and extend the
@@ -277,8 +271,8 @@ theorem nonempty_commonModification [CompactSpace S] [QuasiSeparatedSpace S]
   -- Step 3: elimination of indeterminacy for both projections (Tag 081S).
   have hU₁ : IsCompact ((j₁.opensRange : X₁.Opens) : Set X₁) := isCompact_range j₁.continuous
   have hU₂ : IsCompact ((j₂.opensRange : X₂.Opens) : Set X₂) := isCompact_range j₂.continuous
-  obtain ⟨B₁, hB₁⟩ := exists_admissibleBlowup_isOpenImmersion_strictTransformMap hU₁ p₁ hiso₁
-  obtain ⟨B₂, hB₂⟩ := exists_admissibleBlowup_isOpenImmersion_strictTransformMap hU₂ p₂ hiso₂
+  obtain ⟨B₁, hB₁, -⟩ := exists_admissibleBlowup_isOpenImmersion_strictTransformMap hU₁ p₁ hiso₁
+  obtain ⟨B₂, hB₂, -⟩ := exists_admissibleBlowup_isOpenImmersion_strictTransformMap hU₂ p₂ hiso₂
   have hK₁ft : (B₁.I.comap p₁).ofFiniteType := B₁.finiteType.comap p₁
   have hK₂ft : (B₂.I.comap p₂).ofFiniteType := B₂.finiteType.comap p₂
   have hK₁supp : ((B₁.I.comap p₁).support : Set γ.image) = ⇑p₁ ⁻¹' (B₁.I.support : Set X₁) := by
@@ -479,11 +473,10 @@ lemma range_u₂ : Set.range cm.u₂ = cm.B₂.I.blowupMap ⁻¹' Set.range j₂
   range_eq_preimage_of_comp_of_isIso_restrict cm.u₂ cm.B₂.I.blowupMap j₂ cm.u₂_blowupMap
     cm.B₂.isIso_blowupMap_restrict
 
-/-- **Density transport through the common modification** (blueprint:
-`lemma:nagata-two-open-density-transport`): if `U` is dense in both Noetherian models,
-then it is dense in the glued common modification. The `U`-admissible blow-ups preserve
-the density of `U` (`IsAdmissible.dense_preimage_blowupMap`), and the two modified models
-form an open cover of the glued scheme. -/
+/-- **Density transport through the common modification**: if `U` is dense in both Noetherian
+models, then it is dense in the glued common modification. The `U`-admissible blow-ups preserve
+the density of `U` (`IsAdmissible.dense_preimage_blowupMap`), and the two modified models form an
+open cover of the glued scheme. -/
 theorem dense_range_j [IsNoetherian X₁] [IsNoetherian X₂] (h₁ : Dense (Set.range j₁))
     (h₂ : Dense (Set.range j₂)) : Dense (Set.range cm.j) := by
   have hd₁ : Dense (Set.range cm.u₁) := by

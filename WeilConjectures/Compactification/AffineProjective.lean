@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Compactification.Dense
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 
 /-!
 
@@ -28,6 +29,9 @@ which is therefore dense.
 - `AlgebraicGeometry.AffineSpace.projectiveClosure_spec` — the properties listed above.
 - `AlgebraicGeometry.Compactification.isDense_ofIsImmersionAffineSpace` — the compactification
   `Compactification.ofIsImmersionAffineSpace` is dense.
+- `AlgebraicGeometry.Compactification.exists_isProjective_of_isQuasiAffine` — a quasi-affine
+  scheme of finite type over `S` has a compactification whose structure morphism is projective
+  (the second assertion of the lemma on affine covers with dense intersection).
 
 -/
 
@@ -82,5 +86,22 @@ theorem Compactification.isDense_ofIsImmersionAffineSpace {f : U ⟶ S} (ι : U 
     exact .of_comp _ (ℙ(Option n; S) ↘ S)
   exact inferInstanceAs
     (IsSchemeTheoreticallyDominant (ι ≫ AffineSpace.toRelativeProjectiveSpace n S).toImage)
+
+/-- **Quasi-affine schemes have projective compactifications.** Let `f : X ⟶ S` be locally of
+finite type with `X` quasi-affine (e.g. affine) and `S` quasi-separated (e.g. Noetherian). Then
+`f` has a compactification `c` whose structure morphism `c.g : c.Z ⟶ S` is
+projective: `X` embeds into a relative affine space `𝔸(n; S)` (Stacks Tag 04II), and its closure
+in `ℙ(Option n; S)` (`AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace`) is a closed
+subscheme of the projective space (`AlgebraicGeometry.AffineSpace.projectiveClosure_spec`). -/
+theorem Compactification.exists_isProjective_of_isQuasiAffine (f : U ⟶ S) [U.IsQuasiAffine]
+    [LocallyOfFiniteType f] [QuasiSeparatedSpace S] :
+    ∃ c : Compactification f, IsProjective c.g := by
+  obtain ⟨n, ι, hι, hιi⟩ := exists_immersion_affineSpace_of_quasiAffine f
+  have : QuasiCompact f := quasiCompact_of_compactSpace f
+  obtain ⟨hcl, -, -, -, -, -⟩ := AffineSpace.projectiveClosure_spec ι hι
+  refine ⟨Compactification.ofIsImmersionAffineSpace ι hι, ?_⟩
+  have : IsHProjective (Compactification.ofIsImmersionAffineSpace ι hι).g :=
+    ⟨Option (ULift.{u} (Fin n)), inferInstance, _, hcl, rfl⟩
+  exact IsHProjective.isProjective _
 
 end AlgebraicGeometry
