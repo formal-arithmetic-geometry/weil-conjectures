@@ -82,3 +82,22 @@ tree. Unknown: separate site versus category-instance shares.
 The right-square proof argument, not the mate proof `hγ`, is the first expensive
 conversion. Giving it the exact instantiated dependent proposition removes the
 large downstream functor/module check.
+## Round 2 and v2 addendum
+
+Fresh diagnostics give 5.13 s wall (4.42 s user, 2.31 GB peak RSS) for aligned transport and 605.06 s wall (603.32 s user, 23.91 GB peak RSS) for restored original HB domain. Both retain the same helper application.
+
+### STRUCTURE EXPOSURE AND AMPLIFICATION ADDENDUM
+
+**A. MISMATCH SEMANTICS.** The site representation differs inside the instantiated FiniteModules binder. It becomes a DefEq obstruction only after 48 preceding arguments fix the dependent domain. hb is the single causal trigger; hgamma is not.
+
+**B. EXPOSURE.** The boundary is the Quiver.Hom site argument in the dependent forall. The tree contains scheme/site objects, finite-module binders, four equivalences, restriction/base-change functors, adjunctions, and additive/module instances. Functor.obj, PresheafOfModules.obj, and ModuleCat.isAddCommGroup counters connect this tree to measured work.
+
+**C. COST MECHANISM.** One dominant dependent-domain conversion is reduction-heavy and repeated on both square sides. Original/restored is 605.06 s; aligned is 5.13 s. Child counters are inclusive.
+
+**D. FIXED-TRIGGER ABLATION.** Invalid: the site is part of the dependent telescope, so independent abstraction changes the expected proposition. Transported whole-domain control is the valid restoration.
+
+**E. REDUCTION-PATH AUDIT.** Site ordinary unfolds to the pro-etale site, while Scheme.ProEt is a separate regular definition. Shared forall/Eq/Quiver.Hom heads compare cheaply until this argument. The iota order is inferred.
+
+**F. MISMATCH PROVENANCE.** The actual square uses Scheme.ProEt; the generic transport helper expects OpenTensorNormalization.Site ordinary. Preceding dependent arguments introduce the divergence at consumption. No proof abstraction is implicated.
+
+**G. CONCLUSION.** P1, evidence level 2. Reversible 605.06 s to 5.13 s control is strongest. Site versus category-instance shares remain unresolved. A typed control aligning one square-side functor while preserving the full telescope is the next falsifier.
