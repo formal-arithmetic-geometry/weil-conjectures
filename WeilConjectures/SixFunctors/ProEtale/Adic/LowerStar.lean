@@ -29,7 +29,7 @@ Let `K` be an algebraically closed field of characteristic different from `ℓ`,
 locally of finite type over `K` and `f : X ⟶ Y` a quasi-compact, quasi-separated morphism
 locally of finite type. The *finiteness theorem* (SGA 4½, *Th. finitude*, Th. 1.1, with
 `ℓ`-adic coefficients as in Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8, and the
-blueprint `det-thm-sf-ctf-stability-direct-images` (3), the `ℚ̄_ℓ` stage of the
+blueprint `proposition-six-operations-dctf` (3), the `ℚ̄_ℓ` stage of the
 finite-coefficient `sk-prop-sf-finiteness`) asserts that for a constructible `ℓ`-adic sheaf `F` on
 `X_proét` the derived pushforward `Rf_*(F[0])` has constructible cohomology sheaves, and is
 bounded if `Y` is quasi-compact. The theorem itself is proved in

@@ -10,10 +10,6 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarPullbackCounit
 
 /-! # Restricted scalar counits and exact pullback
-
-Source: blueprint scalar-six direct-image proof, formal properties and finite free
-coefficient extensions.
-(blueprint: new-sfb-finite-free-scalar-restricted-pullback-counit)
 -/
 
 @[expose] public noncomputable section
@@ -41,19 +37,42 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunc
 
 attribute [local irreducible] derivedComapUpperStarIso comapUpperStarIso
 
-set_option maxHeartbeats 1600000 in
+-- Perform the diagram calculations with abstract objects, before specializing to sheaves.
+private theorem scalarCounit_inverseSquare
+    {V : Type*} [Category V] {A B C D E H : V}
+    (e : A ≅ B) (p : D ≅ E) (u : A ⟶ C) (v : C ⟶ D) (w : B ⟶ H) (z : H ⟶ E)
+    (h : u ≫ v ≫ p.hom = e.hom ≫ w ≫ z) :
+    e.inv ≫ u ≫ v = w ≫ z ≫ p.inv := by
+  apply (cancel_epi e.hom).1
+  simp only [Iso.hom_inv_id_assoc]
+  rw [← reassoc_of% h]
+  simp only [Iso.hom_inv_id, Category.comp_id]
+
+private theorem restrictedCounit_paste
+    {V W T : Type*} [Category V] [Category W] [Category T]
+    (R : V ⥤ W) (F : T ⥤ W)
+    {A B C D E H : V} {U₀ U₁ U₂ : T} {Z₀ Z₁ Z₂ : W}
+    (t : A ⟶ B) (b : B ⟶ C) (c : C ⟶ D) (c' : A ⟶ E) (g : E ⟶ H) (p : H ⟶ D)
+    (cY : U₀ ⟶ U₁) (rY : U₁ ⟶ U₂)
+    (d₀ : F.obj U₀ ⟶ R.obj A) (d₁ : F.obj U₁ ⟶ R.obj E)
+    (r₀ : R.obj H ⟶ Z₀) (r₁ : R.obj D ⟶ Z₂) (s : F.obj U₂ ⟶ Z₁)
+    (q : Z₁ ⟶ Z₀) (p' : Z₀ ⟶ Z₂)
+    (hp : t ≫ b ≫ c = c' ≫ g ≫ p)
+    (hn : d₀ ≫ R.map c' = F.map cY ≫ d₁)
+    (hq : d₁ ≫ R.map g ≫ r₀ = F.map rY ≫ s ≫ q)
+    (hr : R.map p ≫ r₁ = r₀ ≫ p') :
+    d₀ ≫ R.map t ≫ R.map b ≫ (R.map c ≫ r₁) =
+      F.map (cY ≫ rY) ≫ s ≫ q ≫ p' := by
+  have hp' := congrArg R.map hp
+  simp only [Functor.map_comp] at hp'
+  rw [reassoc_of% hp', hr, ← Category.assoc d₀, hn]
+  simp only [Category.assoc]
+  rw [reassoc_of% hq]
+  simp only [Functor.map_comp, Category.assoc]
+
 -- Compute the scalar mate before using any K-flat invertibility.
 /-- Restricted scalar counits commute with exact geometric pullback and the normalized
-scalar mate.
-Source: blueprint scalar-six formal properties, pullback of scalar extension.
-(blueprint: new-sfb-finite-free-scalar-restricted-pullback-counit)
-
-Proof. The normalized scalar-mate counit equation gives the square before restriction.
-Map it through exact restriction. The inverse derived comap comparison is natural for
-that scalar counit. The exact-square factorization identifies its component on the
-ordinary extension complex with the localization of the ordinary comap square.
-Naturality of restriction's localization comparison moves the remaining ordinary
-pullback isomorphism through Q. Compose these equations and reassociate. -/
+scalar mate. -/
 theorem finiteFreeScalar_restrictedCounit_pullback
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -110,15 +129,15 @@ theorem finiteFreeScalar_restrictedCounit_pullback
       scalarCounit a X FC =
     (scalarSixPull Λ' f).map (scalarCounit a Y C) ≫
       G.mapDerivedCategoryFactors.hom.app EC ≫ DerivedCategory.Q.map p := by
-    apply (cancel_epi ((D.theta a f).hom.app (DerivedCategory.Q.obj C))).1
-    simp only [Iso.hom_inv_id_app_assoc]
-    have hs := finiteFreeScalar_pullback_scalarCounit D a f C
-    erw [← reassoc_of% hs]
-    simp only [← DerivedCategory.Q.map_comp]
-    erw [← NatTrans.comp_app, ← NatTrans.mapHomologicalComplex_comp]
-    simp only [Iso.hom_inv_id, NatTrans.mapHomologicalComplex_id,
-      NatTrans.id_app]
-    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+    let e := (NatIso.mapHomologicalComplex
+      (pullIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f) (.up ℤ)).app C
+    have h := scalarCounit_inverseSquare ((D.theta a f).app (DerivedCategory.Q.obj C))
+      (DerivedCategory.Q.mapIso e)
+      ((scalarSixChange a X).map (F.mapDerivedCategoryFactors.hom.app C))
+      (scalarCounit a X FC) ((scalarSixPull Λ' f).map (scalarCounit a Y C))
+      (G.mapDerivedCategoryFactors.hom.app EC)
+      (finiteFreeScalar_pullback_scalarCounit D a f C)
+    exact h
   have hq := Functor.exactSquare_fac
     (comapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).symm EC
   rw [Functor.square_symm_hom] at hq
@@ -130,15 +149,8 @@ theorem finiteFreeScalar_restrictedCounit_pullback
   rw [← hd] at hq
   have hn := d.inv.naturality (scalarCounit a Y C)
   dsimp only [Functor.comp_obj, Functor.comp_map] at hn
-  have hp' := congrArg RX.mapDerivedCategory.map hp
-  simp only [Functor.map_comp] at hp'
-  erw [reassoc_of% hp']
-  simp only [Functor.map_comp, Category.assoc]
-  erw [RX.mapDerivedCategoryFactors_hom_naturality p]
-  dsimp only [scalarSixPull, restriction]
-  slice_lhs 1 2 => exact hn.symm
-  slice_lhs 2 4 => exact hq
-  simp only [Category.assoc, Iso.symm_hom]
-  rfl
+  exact restrictedCounit_paste RX.mapDerivedCategory F.mapDerivedCategory
+    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ hp hn.symm hq
+    (RX.mapDerivedCategoryFactors_hom_naturality p)
 
 end AlgebraicGeometry.ProEtale.IntegralFiniteScalar

@@ -18,7 +18,7 @@ trace-dual-basis coordinates after applying the scalar extension functor.
 This compatibility statement belongs to the retired rationalization/Karoubi route.
 It remains for existing legacy consumers. The current blueprint definition of
 derived direct image uses the condensed module-object construction recorded by
-`def-weil-derived-direct-image`; this lemma is not an input to that definition.
+`prose-03-02`; this lemma is not an input to that definition.
 (blueprint: new-sf-rational-restriction-pullback-free-mate-after-extension).
 -/
 @[expose] public section
@@ -70,7 +70,7 @@ theorem rationalRestrictionPullback_freeMate_after_extension
       (((mateEquiv
         (rationalScalarExtension_leftAdjunction l E F ι Y)
         (rationalScalarExtension_leftAdjunction l E F ι X)).symm
-        (TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv)).natTrans.app
+        (TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv)).app
         ((sfRationalScalarExtension l E Y 0
           (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι).obj M))) := by
   classical

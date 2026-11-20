@@ -49,7 +49,7 @@ private theorem counitSquareComposite
   rw [← hp]
 
 /-- The affine-line counit square, before coordinate pasting.
-Source: blueprint lem-amb-affine-space-top-trace, proof step 8
+Source: blueprint lemma-integral-linear-character--1, proof step 8
 (blueprint: lem-amb-affine-trace-line-counit-base-change).
 
 Proof: expand the compact-support exchange into proper exchange followed by the

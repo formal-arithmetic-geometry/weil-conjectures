@@ -28,13 +28,13 @@ expected reduction Tor interval.
 
 * The dual formula is the Yoneda argument of `CategoryTheory.Verdier.nonempty_iso_obj_of_adjunction`
   (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedHom`): biduality
-  `L ≅ 𝔻_Y 𝔻_Y L` (`thm-coef-integral-verdier`), the projection formula modulo `ϖ`
-  (`lem-fix-operation-reduction`), which suffices for morphisms into the derived complete
-  dualizing complex, and the identification `Rf^! ω_Y ≅ ω_X` of the dualizing complexes
+  `L ≅ 𝔻_Y 𝔻_Y L` (`theorem-verdier-biduality--2`), the projection formula modulo `ϖ`
+  (`proposition-six-operations-change-coefficients`), which suffices for morphisms into the derived
+  complete dualizing complex, and the identification `Rf^! ω_Y ≅ ω_X` of the dualizing complexes
   (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_dualizing`).
 * Constructibility and the Tor interval then follow, as in the blueprint, from integral
   Verdier duality applied on `Y` and on `X`, the completed pullback being a derived completion
-  of `Lf^* 𝔻_Y L` and the dualizing complexes those of `prop-coef-integral-dualizing`.
+  of `Lf^* 𝔻_Y L` and the dualizing complexes those of `proposition-sp-integral-adjunction`.
 
 ## Implementation notes
 
@@ -400,7 +400,7 @@ include hϖ hI in
 complexes `ω_X`, `ω_Y` and a completed pullback `φ : Lf^* 𝔻_Y L ⟶ N` (an isomorphism modulo
 `ϖ`), the derived limit `c.pt = G_f L` is `𝔻_X N = RHom(N, ω_X)`. It is
 `nonempty_iso_rightDerivedUpperShriek_obj_derivedHom_of_isIso_reductionModIdeal`
-for `L ≅ 𝔻_Y 𝔻_Y L` (`thm-coef-integral-verdier`) and `γ : Rf^! ω_Y ≅ ω_X`. -/
+for `L ≅ 𝔻_Y 𝔻_Y L` (`theorem-verdier-biduality--2`) and `γ : Rf^! ω_Y ≅ ω_X`. -/
 theorem nonempty_iso_derivedHom_of_isHomotopyLimit {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
@@ -443,8 +443,8 @@ derived limit `c.pt = G_f L` lies in `Dᵇc(X, Λ)`, and if the reductions of `L
 in `[a, b]`, those of `G_f L` have Tor amplitude in `[a - 2 dim X, b + 2 dim Y]`. As in the
 blueprint, `G_f L ≅ 𝔻_X f^*_comp 𝔻_Y L`
 (`AlgebraicGeometry.Etale.nonempty_iso_derivedHom_of_isHomotopyLimit`) for the dualizing
-complexes of `prop-coef-integral-dualizing` and the derived completion of `Lf^* 𝔻_Y L`, and
-integral Verdier duality (`thm-coef-integral-verdier`) applies twice. -/
+complexes of `proposition-sp-integral-adjunction` and the derived completion of `Lf^* 𝔻_Y L`, and
+integral Verdier duality (`theorem-verdier-biduality--2`) applies twice. -/
 theorem boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
@@ -643,7 +643,7 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
   {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 include hϖ hI in
-/-- Blueprint `rem-sf-preservation-matrix`: Preservation results and their actual hypotheses,
+/-- Blueprint `proposition-six-operations-dctf`: Preservation results and their actual hypotheses,
 the integral entries (item 5).
 
 At the integral stage (`Λ` a Noetherian domain complete for `I = (ϖ)`, `Λ ⧸ I` finite of
@@ -652,8 +652,8 @@ finite-type `k`-schemes:
 
 * the internal hom commutes with reduction, both as `RHom(K, L) ⊗ᴸ A_n ≅ RHom(K, L ⊗ᴸ A_n)`
   and as `RHom_Λ(K, L) ⊗ᴸ A_n ≅ RHom_{A_n}(K_n, L_n)`, and preserves derived completeness
-  (`lem-coef-integral-hom-reduction`), and preserves `Dᵇc(-, Λ)`
-  (`cor-coef-integral-internal-hom`);
+  (`proposition-six-operations-change-coefficients--7`), and preserves `Dᵇc(-, Λ)`
+  (`proposition-six-operations-dctf--15`);
 * the derived limit `G_f L` of the reduced exceptional inverse images lies in `Dᵇc(X, Λ)` and
   is identified with `Rf^! L` compatibly with the maps to the `Rf^!(L ⊗ᴸ A_n)`, so that it is
   right adjoint to `Rf_!` on the constructible categories through
@@ -661,7 +661,7 @@ finite-type `k`-schemes:
   `(G_f L) ⊗ᴸ A_n ≅ Rf^!(L ⊗ᴸ A_n)`;
 * the derived reductions of any object form a normalized tower, and a normalized tower is the
   tower of reductions of its derived limit, which is derived complete
-  (`lem-coef-normalized-dvr-effectivity`). -/
+  (`lemma-sp-tower-adjunction-foundation--2`). -/
 theorem preservationMatrix_integral {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]

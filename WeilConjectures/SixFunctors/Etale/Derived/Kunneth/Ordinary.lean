@@ -14,11 +14,12 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 # The Künneth formula in ordinary étale cohomology
 
 This file proves the base change theorems for a pushforward tensored with a complex
-(`lem-kun-0f1j`, `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE`, and
-`lem-kun-0f1n`, `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`) and deduces the Künneth
-formula over a separably closed field (`thm-kun-0f1p`,
-`AlgebraicGeometry.Etale.isIso_kunnethMap_of_isSepClosed`). The Künneth map and the inputs which
-do not depend on these base change theorems are in
+(`lemma-kunneth-field-coefficients--1`, `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE`,
+and `lemma-kunneth-field-coefficients--1`, `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`) and
+deduces the Künneth formula over a separably closed field
+(`proposition-ordinary-external-kunneth--1`,
+`AlgebraicGeometry.Etale.isIso_kunnethMap_of_isSepClosed`). The Künneth map and the inputs which do
+not depend on these base change theorems are in
 `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap`.
 -/
 
@@ -40,7 +41,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 section Inputs
 
-/-- First step of the proof of blueprint `lem-kun-0f1j`: reduction to single sheaves.
+/-- First step of the proof of blueprint `lemma-kunneth-field-coefficients--1`: reduction to single
+sheaves.
 
 Under the hypotheses of `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE`, the base
 change map `Lp^* E ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Lp^* E ⊗ᴸ Le^* F)` is an isomorphism provided it
@@ -69,8 +71,8 @@ theorem isIso_tensorBaseChangeMap_of_isGE_of_single [Finite Λ] {K : Type u} [Fi
   isIso_tensorBaseChangeMap_of_single (ModuleCat.{u + 1} Λ) h e f' g sq₂.w p E F m n
     hEt hsingle
 
-/-- Blueprint `lem-kun-0f1j`: base change for a pushforward tensored with a bounded below complex
-of finite Tor amplitude.
+/-- Blueprint `lemma-kunneth-field-coefficients--1`: base change for a pushforward tensored with a
+bounded below complex of finite Tor amplitude.
 
 Let `K` be a field and `Λ` a finite ring whose exponent is invertible in `K`. For a diagram
 
@@ -91,7 +93,8 @@ is an isomorphism for every bounded below `E ∈ D(X_ét, Λ)` of Tor amplitude 
 bounded below `F ∈ D(T_ét, Λ)`.
 
 The blueprint statement does not require `X` to be of finite type over `K`, but its proof uses
-it: it applies `lem-kun-0f1i`, which is stated for schemes of finite type, to the `Xᵢ`. -/
+it: it applies `lemma-kunneth-field-coefficients--1`, which is stated for schemes of finite type, to
+the `Xᵢ`. -/
 theorem isIso_tensorBaseChangeMap_of_isGE [Finite Λ] {K : Type u} [Field K]
     [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y : Scheme.{u}}
     (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
@@ -111,9 +114,10 @@ theorem isIso_tensorBaseChangeMap_of_isGE [Finite Λ] {K : Type u} [Field K]
       isIso_tensorBaseChangeMap_singleFunctor_of_flat Λ a b p f' h e g _sq₁ sq₂ 𝓔 h𝓔 𝓕)
 
 variable {Λ} in
-/-- Blueprint `lem-kun-0f1n`, for `E` a strictly bounded complex of flat sheaves: the
-reduction of `F` to strictly bounded complexes, which are bounded below, and an application of
-blueprint `lem-kun-0f1j` (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE`). -/
+/-- Blueprint `lemma-kunneth-field-coefficients--1`, for `E` a strictly bounded complex of flat
+sheaves: the reduction of `F` to strictly bounded complexes, which are bounded below, and an
+application of blueprint `lemma-kunneth-field-coefficients--1`
+(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE`). -/
 lemma isIso_tensorBaseChangeMap_Q_obj_of_flat [Finite Λ] {K : Type u} [Field K]
     [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y : Scheme.{u}}
     (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
@@ -137,7 +141,8 @@ lemma isIso_tensorBaseChangeMap_Q_obj_of_flat [Finite Λ] {K : Type u} [Field K]
     (isZero_homology_derivedTensor_Q_obj_of_flat _ P m n hP)
     (DerivedCategory.TStructure.t.isGE_of_ge _ _ m' (min_le_right _ _))
 
-/-- Blueprint `lem-kun-0f1n`: base change for a pushforward tensored with an arbitrary complex.
+/-- Blueprint `lemma-kunneth-field-coefficients--1`: base change for a pushforward tensored with an
+arbitrary complex.
 
 Let `K` be a field and `Λ` a finite ring whose exponent is invertible in `K`. For a diagram
 
@@ -204,7 +209,7 @@ variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
   (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
 
-/-- Blueprint `thm-kun-0f1p`: the Künneth formula in étale cohomology.
+/-- Blueprint `proposition-ordinary-external-kunneth--1`: the Künneth formula in étale cohomology.
 
 Let `k` be a separably closed field, `Λ` a finite ring whose exponent is invertible in `k`, and
 `X`, `Y` schemes of finite type over `k`. For a cartesian square
@@ -226,11 +231,11 @@ is an isomorphism in `D((Spec k)_ét, Λ)`; through `RΓ(Spec k, -)` it is the m
 `RΓ(X, E) ⊗ᴸ RΓ(Y, K) ⟶ RΓ(W, Lp₁^* E ⊗ᴸ Lp₂^* K)`
 (`AlgebraicGeometry.Etale.nonempty_iso_kunneth_of_isSepClosed`).
 
-Following the blueprint, `κ_{E,K}` is the composite (`lem-kun-kunneth-via-0f1n`,
+Following the blueprint, `κ_{E,K}` is the composite (`proposition-ordinary-external-kunneth--1`,
 `AlgebraicGeometry.Etale.kunnethMap_eq`) of the projection map of `a_X`, an isomorphism by
-`lem-kun-0f12`, of `Ra_{X*}` applied to the base change map of `lem-kun-0f1n` for the diagram
-`X = X ⟵ W`, `Spec k = Spec k ⟵ Y`, and of the composition isomorphism
-`Ra_{X*} Rp₁_* ≅ Rc_*`. -/
+`proposition-open-direct-image-preserves-finite`, of `Ra_{X*}` applied to the base change map of
+`lemma-kunneth-field-coefficients--1` for the diagram `X = X ⟵ W`, `Spec k = Spec k ⟵ Y`, and of the
+composition isomorphism `Ra_{X*} Rp₁_* ≅ Rc_*`. -/
 theorem isIso_kunnethMap_of_isSepClosed {W : Scheme.{u}} (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
     (sq : IsPullback p₁ p₂ aX aY)
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -248,7 +253,7 @@ theorem isIso_kunnethMap_of_isSepClosed {W : Scheme.{u}} (p₁ : W ⟶ X) (p₂ 
   rw [kunnethMap_eq]
   infer_instance
 
-/-- Blueprint `thm-kun-0f1p`, in `D(Λ)`: the Künneth formula
+/-- Blueprint `proposition-ordinary-external-kunneth--1`, in `D(Λ)`: the Künneth formula
 `RΓ(X, E) ⊗ᴸ RΓ(Y, K) ≅ RΓ(W, Lp₁^* E ⊗ᴸ Lp₂^* K)` for schemes `X`, `Y` of finite type over a
 separably closed field `k`, `W = X ×_k Y`, and all `E ∈ D(X_ét, Λ)`, `K ∈ D(Y_ét, Λ)`. It is
 `RΓ(Spec k, -)` applied to the Künneth map (`isIso_kunnethMap_of_isSepClosed`), together with

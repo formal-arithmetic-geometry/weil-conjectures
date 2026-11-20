@@ -15,9 +15,6 @@ import Mathlib.CategoryTheory.Abelian.Basic
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-! # Tensor reduction under restriction to constant integral coefficients
-
-Source: the finite reduction part of `det-lem-int-tensor-pullback.proof.md`.
-(blueprint: lem-sfb-finite-scalar-tensor-iso).
 -/
 
 @[expose] public noncomputable section

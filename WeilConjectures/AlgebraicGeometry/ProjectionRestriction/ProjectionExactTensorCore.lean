@@ -80,8 +80,11 @@ import all WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.R
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 /-! Exact tensor functors on resolving representatives.
-Source: Stacks Project, Tags 06YU, 07A4 and 0FNH.
-(blueprint: lem-weil-pbc-projection-exact-tensor-core).
+
+## References
+
+* Stacks Project, Tags 06YU, 07A4 and 0FNH
+* Stacks 0735
 -/
 
 @[expose] public noncomputable section
@@ -99,8 +102,7 @@ variable {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
   {R : Sheaf J CommRingCat.{u + 1}} {S : Sheaf K CommRingCat.{u + 1}}
 
-/-- The fixed exact localization model of an additive exact module functor.
-Source: Stacks 0735 (blueprint: lem-weil-pbc-projection-exact-tensor-core). -/
+/-- The fixed exact localization model of an additive exact module functor. -/
 abbrev exactTensorModel (L : Mod R ⥤ Mod S) [L.Additive]
     [PreservesFiniteLimits L] [PreservesFiniteColimits L] : ExactModel L where
   additive := inferInstance
@@ -322,13 +324,7 @@ private theorem representative_square (o : Data R S)
   erw [Category.comp_id] at hh
   exact hh
 
-/-- The ordinary total comparison descends to the exact-derived model.
-Source: Stacks 06YU and 07A4
-(blueprint: lem-weil-pbc-projection-exact-tensor-core).
-Proof: totalize the ordinary natural tensor isomorphism. Its inverse is the
-specified contraction on every tensor summand. Resolving-pair full faithfulness
-then descends this isomorphism; cancel the representative isomorphisms to obtain
-the prescribed representative equation. -/
+/-- The ordinary total comparison descends to the exact-derived model. -/
 theorem exactTensorComparison_nonempty (L : Mod R ⥤ Mod S) [L.Additive]
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     [PreservesColimitsOfSize.{0, 0} L]

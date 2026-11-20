@@ -18,7 +18,7 @@ bijections (or surjections) on morphisms out of `s`, and when such bijections co
 distinguished triangles whose third (or first) term receives no morphisms from `s`.
 
 These are the formal steps of the truncation argument for compactness used in blueprint
-`det-ctf-finite-compact-proetale`.
+`proposition-compactness-finite-coefficients--1`.
 -/
 
 @[expose] public section

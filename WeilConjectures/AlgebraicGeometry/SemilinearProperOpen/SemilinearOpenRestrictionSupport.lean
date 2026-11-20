@@ -13,9 +13,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 
 /-! # Scalar restriction preserves open support of semilinear systems
 
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ; the support step in
-`def-pur-semilinear-compact-support-coefficient-transport`, proof Step 10.
-(blueprint: lem-pur-semilinear-open-restriction-support).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DI and 03DJ
 -/
 
 @[expose] public noncomputable section
@@ -39,16 +39,16 @@ private theorem support_reflect
     (hu : ∀ M, F.map (a.unit.app M) ≫ d.hom.app (L.obj M) ≫
       r.map (e.hom.app M) = b.unit.app (F.obj M))
     (N : B) (hN : IsIso (b.counit.app (G.obj N))) : L.essImage N := by
-  have hm : (mateEquiv a b e.inv).natTrans = d.hom := by
+  have hm : (mateEquiv a b e.inv) = d.hom := by
     have hh := mateEquiv_eq_of_unit a b (TwoSquare.mk _ _ _ _ e.inv)
       (TwoSquare.mk _ _ _ _ d.hom) (fun M ↦ ?_)
-    · exact congrArg TwoSquare.natTrans hh
+    · exact hh
     · have ht := congrArg (fun z ↦ z ≫ r.map (e.inv.app M)) (hu M)
       simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app] at ht
       erw [r.map_id, Category.comp_id] at ht
       exact ht
   have hc := mateEquiv_counit a b (TwoSquare.mk _ _ _ _ e.inv) N
-  change l.map ((mateEquiv a b e.inv).natTrans.app N) ≫ b.counit.app (G.obj N) =
+  change l.map ((mateEquiv a b e.inv).app N) ≫ b.counit.app (G.obj N) =
     e.inv.app (R.obj N) ≫ G.map (a.counit.app N) at hc
   rw [hm] at hc
   have : IsIso (b.counit.app (G.obj N)) := hN
@@ -325,23 +325,7 @@ private theorem ordinary_extension_eq {U X : Scheme.{u}} (j : U ⟶ X)
 end OrdinaryOpenComparison
 
 /-- Restricting the coefficient action preserves the essential image of ordinary
-extension by zero. This specifies no comparison map or adjunction mate.
-
-Source: Stacks Project, sites-modules.tex, Tags 03DI and 03DJ; support substep of
-blueprint `def-pur-semilinear-compact-support-coefficient-transport`, Step 10.
-(blueprint: lem-pur-semilinear-open-restriction-support).
-
-Proof: localize the vertical sequence topos at the subterminal open induced by j.
-Under the resulting equivalence, the specified open extension is the left adjoint
-to restriction, hence is the sheafified direct-sum extension of Tag 03DI. For a slice
-module N its extension presheaf at V is the sum of N(V → U) over arrows into the open.
-Give N the action restricted along a on that slice. The additive direct sums and
-all their restriction maps are unchanged; on each summand the scalar action on both
-sides is multiplication through the same component of a. The identity of these
-sums sheafifies to an isomorphism of module sheaves. Naturality is checked on the
-summand injections. This supplies an ordinary extension witness after restriction.
-For an empty open the sums and extension are zero; for the identity open their sole
-summand is N. No flatness or injective preservation is used. -/
+extension by zero. This specifies no comparison map or adjunction mate. -/
 theorem scalarRestriction_ordinaryOpenSupported
     (C D : ℕ → CommRingCat.{u + 1})
     (τ : ∀ n, C (n + 1) ⟶ C n) (σ : ∀ n, D (n + 1) ⟶ D n)

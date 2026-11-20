@@ -45,7 +45,7 @@ abbrev integralReductionPullbackMap (n : ℕ) :
     (Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E U n))).symm
       (TwoSquare.mk _ _ _ _
         (CondensedRing.derivedComapUpperStarIso
-          (DerivedNakayama.reductionRing l E (n + 1)) j).inv)).natTrans
+          (DerivedNakayama.reductionRing l E (n + 1)) j).inv))
 
 /-- A finite derived scalar/pullback comparison with the prescribed scalar-unit equation.
 Source: Stacks 06YY, 07A6; blueprint integral open direct image, Reduction paragraph

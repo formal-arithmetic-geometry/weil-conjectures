@@ -17,7 +17,7 @@ them half exact on these sequences, that `τ_q` is an isomorphism in negative de
 every object `X` of a class `P` embeds, by a sequence of the class, into a good object (at which
 all `τ_q` are isomorphisms) with cokernel in `P`. Then all `τ_q` are isomorphisms at the objects of
 `P` (`CategoryTheory.isIso_app_of_dimensionShift`). This is the dimension shifting argument of the
-proof of blueprint `lem-kun-0f1j`.
+proof of blueprint `lemma-kunneth-field-coefficients--1`.
 -/
 
 @[expose] public section

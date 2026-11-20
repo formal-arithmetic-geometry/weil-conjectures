@@ -9,13 +9,15 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Sites.LeftExact
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-!
 # The canonical map to the geometric stalk of a constant étale sheaf
 
 Source: Stacks Project, Étale Cohomology, Tags 03PT (2), 040R and 03PQ
-(blueprint: lem-weil-pbc-constant-sheaf-geometric-stalk).
+(blueprint: definition-torsion-sheaves--3).
 -/
 
 @[expose] public section
@@ -28,16 +30,16 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The global constant section followed by its germ is an isomorphism of abelian groups.
 Source: Stacks Project, Tags 03PT (2), 040R and 03PQ
-(blueprint: lem-weil-pbc-constant-sheaf-geometric-stalk).
+(blueprint: definition-torsion-sheaves--3).
 
 Proof:
 1. The stalk of the constant sheaf is the stalk of its constant presheaf, via the map
-   induced by sheafification (lem-weil-pbc-sheafification-geometric-stalk, Tag 03PT (2)).
+   induced by sheafification (definition-torsion-sheaves--3, Tag 03PT (2)).
 2. Pointed étale neighbourhoods are cofiltered and contain the identity neighbourhood
-   (lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered, Tag 03PQ). Their opposite category
+   (definition-torsion-sheaves--3, Tag 03PQ). Their opposite category
    is nonempty and connected. The stalk of the constant presheaf is the colimit of the
    constant diagram with identity transition maps; every coprojection is an isomorphism
-   (lem-weil-pbc-colimit-constant-connected-diagram). In particular the coprojection at
+   (definition-torsion-sheaves--3). In particular the coprojection at
    the identity neighbourhood sends an element to its constant-presheaf germ.
 3. Naturality of the stalk coprojections identifies the composite of these two
    isomorphisms with the map displayed below: an element goes to the germ of its global
@@ -74,6 +76,11 @@ theorem constantSheaf_geometricStalk_isIso (T : Scheme.{u})
   have hi : IsIso ((Φ.presheafFiberConstIso E).inv ≫
       Φ.presheafFiber.map (toSheafify T.smallEtaleTopology
         ((Functor.const T.Etaleᵒᵖ).obj E))) := by
+    have : T.smallEtaleTopology.WEqualsLocallyBijective AddCommGrpCat.{(max u v) + 1} :=
+      GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall _
+    have : Limits.PreservesFilteredColimitsOfSize.{u, u}
+        (CategoryTheory.forget AddCommGrpCat.{(max u v) + 1}) :=
+      Limits.preservesFilteredColimitsOfSize_shrink.{u, (max u v) + 1, u, (max u v) + 1} _
     infer_instance
   rw [← hcomp]
   exact hi

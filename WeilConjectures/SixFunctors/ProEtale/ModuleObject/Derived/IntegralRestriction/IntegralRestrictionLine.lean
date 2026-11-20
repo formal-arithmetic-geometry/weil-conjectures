@@ -33,7 +33,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-int-restriction,
 sk-thm-int-restriction-line.md, clauses (1)--(3)
-(blueprint: det-thm-int-restriction-line).
+(blueprint: theorem-f-shriek-ell-adic-coefficients--1).
 
 The twists use the published integral Tate line and its signed powers. The sectionwise
 module equivalence transports that line into the same internal-module category as Brown's
@@ -235,35 +235,37 @@ private noncomputable def residueUnits (k : Type u) [Field k]
 /-- Projective-line adjunction, affine-space purity, and preservation of Dbc by both
 explicit candidate right adjoints, on exactly Loc(Dbc) for condensed integral coefficients.
 Source: blueprint main-20261015, sk-thm-int-restriction-line.md, clauses (1)--(3)
-(blueprint: det-thm-int-restriction-line).
+(blueprint: theorem-f-shriek-ell-adic-coefficients--1).
 
 Proof plan:
-1. The Tate sheaves of sk-def-sp-tate-twist are locally free of rank one. The single
-stratum and scalar model put them in Dbc (sk-def-sfb-constructible). Pullback and tensor
-preserve Dbc by sk-lem-int-tensor; shifts reindex cohomology. Exact pullback is Cartesian
-(sk-prop-sfb-cartesian-coefficients) and left adjoint to Rf_* by
- def-sfb-module-derived-pushpull-adjunction, hence preserves sums. Twists and shifts are
-exact equivalences preserving sums. Minimality of sk-def-localizing-closure extends
+1. The Tate sheaves of definition-tate-twists are locally free of rank one. The single
+stratum and scalar model put them in Dbc (definition-constructible-sheaves). Pullback and tensor
+preserve Dbc by lemma-inverse-image-tensor-product; shifts reindex cohomology. Exact pullback is
+Cartesian (lemma-inverse-image-coefficient-sheaves) and left adjoint to Rf_* by
+ prose-03-02, hence preserves sums. Twists and shifts are
+exact equivalences preserving sums. Minimality of definition-localizing-subcategory extends
 preservation to Loc(Dbc). det-def-localizing-closure-ctf-equals-bc identifies it with
 Loc(Dctf) on the standing qcqs schemes. This also proves clause (3).
 2. Put P = P1_Y, W = P times_Y P, with projections p1,p2 and diagonal Delta.
 The projections are proper (lemma-nagata-projective-space-base-change-proper), Delta
 is closed and proper (def-weil-proper-morphism, lem-weil-pbc-closed-immersion-proper).
-Use det-prop-int-brown-construction to identify their compact-support and ordinary
+Use proposition-construction-independence-rf-shriek to identify their compact-support and ordinary
 pushforwards, compatibly with composition. For Delta the latter is exact by
- det-lem-formal-closed-support-sheaves.
-3. det-thm-sf-pf-adic-projection gives a_M : p1^*M tensor Delta_*R_P iso Delta_*M.
-Use delta : Delta_*R_P -> R_W(1)[2] and trace t_q from det-prop-diagonal-tower-limit,
- det-prop-diagonal-tower-coefficients and det-prop-diagonal-tower-trace. Set
+ lemma-sections-support-closed-subscheme--1.
+3. lemma-projection-formula-integral-coefficients--1 gives a_M : p1^*M tensor Delta_*R_P iso
+Delta_*M. Use delta : Delta_*R_P -> R_W(1)[2] and trace t_q from
+proposition-ell-adic-cycle-class-diagonal,
+ proposition-ell-adic-cycle-class-diagonal and proposition-ell-adic-cycle-class-diagonal. Set
 v_M = Rp2_*(1 tensor delta) Rp2_*(a_M inverse). The base-change mates b_i and projection
 formula give B_M : Rp2_*(p1^*M tensor R_W(1)[2]) iso q^*Rq_*M(1)[2]. Define eta_M = B_M v_M
 and epsilon_K = (1 tensor t_q) pi_q inverse. Use def-weil-pbc-adjunction-mate,
- sk-thm-sf-pf-adic and lem-weil-pbc-ringed-topoi-derived-tensor-pullback for these comparisons.
+ lemma-projection-formula-integral-coefficients and
+ lem-weil-pbc-ringed-topoi-derived-tensor-pullback for these comparisons.
 4. lem-sfb-trace-base-change-first rewrites epsilon_RqM Rq_*(B_M) as
 Rq_*(1 tensor t_p1) Rq_*(pi_p1 inverse). Precompose with Rq_*v_M and move delta by
 projection naturality. lem-sfb-projection-section-normalization for (p1,Delta) cancels
 a_M with pi_p1. The remaining scalar t_p1 Rp1_*delta is one by
- det-prop-diagonal-tower-trace(2), extended integrally by coefficients(1).
+ proposition-ell-adic-cycle-class-diagonal(2), extended integrally by coefficients(1).
 5. lem-sfb-trace-base-change-second similarly rewrites G(epsilon_K) B_GK.
 Identify p1^*GK with p2^*GK using Cartesian twists and pullback/tensor comparison.
 Precompose with v_GK; normalization for (p2,Delta) leaves
@@ -271,22 +273,23 @@ Precompose with v_GK; normalization for (p2,Delta) leaves
 6. The two triangles make h |-> G(h) eta and a |-> epsilon F(a) inverse natural Hom
 bijections, so Rq_* is left adjoint to G = q^*(-)(1)[2]. For any Brown adjoint transport
 its adjunction using the proper compactification comparison of
- det-prop-int-brown-construction. det-sp-unique-right-adjoint identifies it with G.
+ proposition-construction-independence-rf-shriek. proposition-sp-unique-adjoint--1 identifies it
+ with G.
 7. For the standard chart j : A1_T -> P1_T (def-amb-affine-trace-tower), quasi-compactness
 is checked over the two affine charts: their inverse images are Spec B[t] and
-Spec B[s,s^-1]. det-cor-int-compactness-ii-extension-zero preserves Loc(Dbc), so the
-open adjunction of def-sfb-dc-open-lower-shriek-adjunction restricts to those categories.
+Spec B[s,s^-1]. proposition-proper-direct-image-extension-zero preserves Loc(Dbc), so the
+open adjunction of prose-03-02 restricts to those categories.
 The compactification comparison gives Ru_! iso Rq_* j_! for u = qj.
 8. Compose this open adjunction with the projective-line adjunction by
  def-weil-pbc-composite-adjunction. Composition of pullback and Cartesian twists gives
 right adjoint u^*(-)(1)[2]. Transport to the chosen compactification before applying
- det-prop-int-brown-adjoint and det-sp-unique-right-adjoint.
+ theorem-existence-exceptional-inverse-image and proposition-sp-unique-adjoint--1.
 9. Induct on d using def-amb-affine-trace-tower. At zero the affine projection is an
 isomorphism, and its compact-support functor is the identity under the canonical
 identification; use the identity adjunction. At the successor compose the line
 adjunction with the induction adjunction, identify pullbacks and tensor powers, and
 add the even shifts to obtain d+1 and 2d+2. Compactification comparisons are compatible
-with composition (det-prop-int-brown-construction), so uniqueness identifies this
+with composition (proposition-construction-independence-rf-shriek), so uniqueness identifies this
 adjoint with the Brown adjoint. This proves clause (2), including d=0.
 -/
 theorem integralRestrictionLine (k : Type u) [Field k]

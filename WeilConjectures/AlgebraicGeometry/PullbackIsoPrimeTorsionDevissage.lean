@@ -36,15 +36,15 @@ higher direct images to global cohomology using Theorem 09YQ (`theorem-colimit`)
 Proof:
 1. Cohomology is functorial in the sheaf, sends isomorphisms to bijections, and the
 pullback maps are natural in the sheaf
-(`lem-weil-pbc-cohomology-pullback-functorial`).
-2. By `def-weil-pbc-torsion-etale-sheaf`, a torsion sheaf `F` is the colimit of
+(`proposition-cohomology-p-1-over-henselian--1`).
+2. By `definition-torsion-sheaves`, a torsion sheaf `F` is the colimit of
 `F[n] = ker (n : F ⟶ F)`, indexed by positive integers ordered by divisibility.
 The canonical colimit map to `F` is an isomorphism and `n F[n] = 0`.
 3. For a sheaf `G` killed by a positive integer `n`, induct on the number of prime
 factors of `n`. If `n = 1`, then `G = 0`, so the hypothesis for the prime 2 applies.
 For prime `n`, apply the hypothesis directly. Otherwise choose a prime `r ∣ n`.
 The short exact sequence `0 → G[r] → G → rG → 0` has its end terms killed by
-`r` and `n/r` (`lem-weil-pbc-prime-factor-devissage`). The pullback is exact and
+`r` and `n/r` (`theorem-proper-base-change-classical-pro`). The pullback is exact and
 the two long exact cohomology sequences form a commutative ladder
 (`lem-weil-pbc-pullback-cohomology-long-exact-ladder`). In degree `q`, the four
 outer vertical maps in the five-term segment are bijections by the prime
@@ -52,7 +52,7 @@ hypothesis and induction in all degrees. For `q = 0`, replace the preceding
 negative-degree term by zero. The five lemma (`lem-weil-pbc-five-lemma`) gives
 bijectivity for `G`.
 4. Apply step 3 to every `F[n]`. Cohomology commutes with this filtered colimit
-on both qcqs schemes (`lem-weil-pbc-cohomology-filtered-colimit`), and inverse
+on both qcqs schemes (`lemma-finiteness-small-etale-topoi--2`), and inverse
 image preserves colimits.
 Naturality makes the pullback maps a morphism of directed systems; their inverses
 are compatible too, so their colimit map is bijective. The canonical comparison

@@ -22,7 +22,7 @@ For the symmetric braiding of `ModuleCat R`, the categorical trace
 usual trace `LinearMap.trace R M f`, as an element of `End (𝟙_ (ModuleCat R))`
 (`ModuleCat.trace_eq_algebraMap_linearMapTrace`). This holds for any right dual of `M`.
 
-This is used for blueprint `sk-p-trace` and `lem-trf-chain-supertrace`.
+This is used for blueprint `proposition-properties-trace` and `proposition-properties-trace--4`.
 -/
 
 @[expose] public section
@@ -100,7 +100,7 @@ noncomputable def hasRightDualOfFree (M : ModuleCat.{u} R) [Module.Free R M]
 braiding of `ModuleCat R` and any right dual of `M`, is the trace `LinearMap.trace R M f`. -/
 theorem trace_eq_algebraMap_linearMapTrace {M : ModuleCat.{u} R} [HasRightDual M]
     [Module.Free R M] [Module.Finite R M] (f : M ⟶ M) :
-    trace f = algebraMap R (End (𝟙_ (ModuleCat.{u} R))) (LinearMap.trace R M f.hom) := by
+    trace f = (algebraMap R (End (𝟙_ (ModuleCat.{u} R))) (LinearMap.trace R M f.hom)).asHom := by
   classical
   let b := Module.Free.chooseBasis R M
   let := exactPairingOfBasis M b
@@ -114,7 +114,7 @@ theorem trace_eq_algebraMap_linearMapTrace {M : ModuleCat.{u} R} [HasRightDual M
   refine LinearMap.ext_ring ?_
   simp only [hom_comp, LinearMap.comp_apply, hom_ofHom]
   erw [LinearMap.toSpanSingleton_apply, one_smul]
-  simp only [map_sum, End.one_def, LinearMap.toMatrix_apply, Matrix.diag_apply]
+  simp only [map_sum, LinearMap.toMatrix_apply, Matrix.diag_apply]
   exact (Finset.sum_congr rfl fun i _ ↦ rfl).trans (mul_one _).symm
 
 end ModuleCat

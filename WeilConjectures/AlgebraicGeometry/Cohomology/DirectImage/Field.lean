@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 public import WeilConjectures.CategoryTheory.Abelian.DimensionShifting
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Connecting
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Higher direct images to the spectrum of a field

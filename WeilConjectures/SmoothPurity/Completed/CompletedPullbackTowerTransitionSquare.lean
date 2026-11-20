@@ -433,7 +433,6 @@ private theorem reductionInverse_transition_section (W : Scheme.{u})
       ((((a (n + 1)).inv.f k).val.app U) _) at hh
   exact (congrArg (fun z ↦ (((a n).inv.f k).val.app U) z) hc).symm.trans hh
 
-set_option maxHeartbeats 600000 in
 /-- Consecutive components of the normalized tensor tower comparison commute with the
 actual quotient transitions `n + 1 → n`.
 Source: Stacks 0941 and 07A4 (blueprint: lem-pur-completed-pullback-tower-level-transition).

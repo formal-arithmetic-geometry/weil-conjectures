@@ -46,7 +46,8 @@ The proof follows the blueprint.
 - `AlgebraicGeometry.Scheme.Modules.eulerChar_eq_coherentDegree_add`: Riemann–Roch for coherent
   modules.
 
-(blueprint: `lem-sc-riemann-roch`, `sk-thm-picard-rr`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`,
+`theorem-riemann-roch-coherent-serre-duality`)
 -/
 
 @[expose] public section
@@ -236,7 +237,7 @@ subsheaf `𝒯` is killed by its annihilator `I`, so `𝒯 ≅ ι_* ι^* 𝒯` f
 (`AlgebraicGeometry.Scheme.Modules.locallyQuasiFinite_annihilatorIdealSheaf_torsion`), hence
 affine, and `ι` is affine, so `H¹(X, 𝒯) ≅ H¹(V(I), ι^* 𝒯) = 0`.
 
-(blueprint: `lem-sc-riemann-roch`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 theorem subsingleton_H_one_torsion (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] :
@@ -315,7 +316,7 @@ point. Let `C` be the cokernel of `φ`, `Q = C / C_tors` and `L` the kernel of `
 locally free as a coherent submodule of the torsion-free `E`. The image of `φ` has rank one,
 being nonzero at the generic point and a quotient of `ℳ`, so `rk C = r` and `rk L = 1`.
 
-(blueprint: `lem-sc-riemann-roch`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 theorem exists_shortExact_of_stalkLinearMap_ne_zero {r : ℕ} (E ℳ : X.Modules)
     [E.IsFiniteLocallyFreeOfRank (r + 1)] [ℳ.IsInvertible] (φ : ℳ ⟶ E)
     (hφ : φ.stalkLinearMap (genericPoint X) ≠ 0) :
@@ -496,7 +497,8 @@ By induction on `r`. For `r = 0`, `E = 0` and `⋀⁰ E = 𝒪_X`. Otherwise
 sequence `0 ⟶ L ⟶ E ⟶ Q ⟶ 0` with `L` invertible and `Q` locally free of rank `r - 1`; then
 `⋀ʳ E ≅ L ⊗ ⋀^{r-1} Q`, and `χ` and the degree are additive.
 
-(blueprint: `lem-sc-riemann-roch`, `sk-thm-picard-rr`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`,
+`theorem-riemann-roch-coherent-serre-duality`) -/
 theorem eulerChar_eq_degree_exteriorPower_add (r : ℕ) (E : X.Modules)
     [E.IsFiniteLocallyFreeOfRank r] :
     E.eulerChar k = (E.exteriorPower r).degree k + r * (1 - (arithmeticGenus k X : ℤ)) := by
@@ -558,7 +560,8 @@ smooth curve is finite locally free of rank `rk ℱ`
 
 The value is meaningful for coherent modules on smooth proper curves.
 
-(blueprint: `lem-sc-riemann-roch`, `sk-thm-picard-rr`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`,
+`theorem-riemann-roch-coherent-serre-duality`) -/
 noncomputable def coherentDegree [IrreducibleSpace X] (ℱ : X.Modules) : ℤ :=
   (torsion ℱ).finrankH k 0 + ((torsionQuotient ℱ).exteriorPower ℱ.rank).degree k
 
@@ -575,7 +578,8 @@ By additivity of `χ` on `0 ⟶ 𝒯 ⟶ ℱ ⟶ ℰ ⟶ 0`, with `χ(𝒯) = h�
 `ℰ` of rank `rk ℱ`
 (`AlgebraicGeometry.Scheme.Modules.eulerChar_eq_degree_exteriorPower_add`).
 
-(blueprint: `lem-sc-riemann-roch`, part (2), `sk-thm-picard-rr`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`, part (2),
+`theorem-riemann-roch-coherent-serre-duality`) -/
 theorem eulerChar_eq_coherentDegree_add (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] :

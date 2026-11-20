@@ -62,7 +62,7 @@ The reduced quotient `A ⧸ nilradical A` is a finite product of fields, each fi
 hence equal to `k`, so `u` has an `n`-th root there. That root lifts to `A` because
 `A[T]/(Tⁿ - u)` is étale over `A` and the nilradical of the Artinian ring `A` is nilpotent.
 This is the input "the units of `𝒪_C(C)` are `n`-divisible for `C` proper" of blueprint
-`det-prop-h1`. -/
+`proposition-smooth-proper-curves-torsion-prime--2`. -/
 theorem IsAlgClosed.exists_pow_eq_of_finite {k A : Type*} [Field k] [IsAlgClosed k] [CommRing A]
     [Algebra k A] [Module.Finite k A] {n : ℕ} (hn : (n : k) ≠ 0) (u : Aˣ) :
     ∃ v : Aˣ, v ^ n = u := by

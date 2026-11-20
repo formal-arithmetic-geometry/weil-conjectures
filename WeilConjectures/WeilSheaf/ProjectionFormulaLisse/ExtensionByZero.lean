@@ -74,7 +74,7 @@ noncomputable def adicOpenImmersionLowerShriekIhomHom (B : AdicSheaf l X) :
     AdicSheaf.ihom ((j)^*ᵃ[l].obj B) ⋙ (j)_!ᵃ[l] ⟶ (j)_!ᵃ[l] ⋙ AdicSheaf.ihom B :=
   ((mateEquiv (adicOpenImmersionLowerShriekAdjunction l j)
     (adicOpenImmersionLowerShriekAdjunction l j)).symm
-      (TwoSquare.mk _ _ _ _ (inv (adicUpperStarIhomComparisonNatTrans l j B)))).natTrans
+      (TwoSquare.mk _ _ _ _ (inv (adicUpperStarIhomComparisonNatTrans l j B))))
 
 /-- The transpose of the comparison `j_! 𝓗om(j^* B, P) ⟶ 𝓗om(B, j_! P)` under `j_! ⊣ j^*`. -/
 @[reassoc]
@@ -96,7 +96,7 @@ lemma adicOpenImmersionLowerShriekIhomHom_app_comp (B : AdicSheaf l X) (P : Adic
     (adicOpenImmersionLowerShriekIhomHom l j B).app P ≫
         (AdicSheaf.ihom B).map ((adicOpenImmersionLowerShriekToLowerStar l j).app P) ≫
           (mateEquiv (adicUpperStarLowerStarAdjunction l j) (adicUpperStarLowerStarAdjunction l j)
-            (TwoSquare.mk _ _ _ _ (adicUpperStarIhomComparisonNatTrans l j B))).natTrans.app P =
+            (TwoSquare.mk _ _ _ _ (adicUpperStarIhomComparisonNatTrans l j B))).app P =
       (adicOpenImmersionLowerShriekToLowerStar l j).app
         ((AdicSheaf.ihom ((j)^*ᵃ[l].obj B)).obj P) := by
   apply ((adicOpenImmersionLowerShriekAdjunction l j).homEquiv _ _).injective
@@ -196,7 +196,7 @@ lemma ihomFunctorExtensionByZeroToLowerStar_hom_f (B : ProEtaleWeilSheaf k₀ l 
           (ProEtale.adicUpperStarLowerStarAdjunction l
             (Scheme.Hom.geometricFiberMap j (comp_over j _)))
           (TwoSquare.mk _ _ _ _ (ProEtale.adicUpperStarIhomComparisonNatTrans l
-            (Scheme.Hom.geometricFiberMap j (comp_over j _)) B.carrier))).natTrans.app
+            (Scheme.Hom.geometricFiberMap j (comp_over j _)) B.carrier))).app
           N.carrier := by
   rw [ihomFunctorExtensionByZeroToLowerStar, ← lowerStarCompIhomFunctorHom_app_hom_f]
   rfl

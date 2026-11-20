@@ -278,7 +278,7 @@ noncomputable def nuFixedScalarExtensionComparisonMap (X : Scheme.{u})
       (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ))
     (Adjunction.ofIsRightAdjoint
       (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ))
-    ).symm (TwoSquare.mk _ _ _ _ (Scheme.comparisonRestrictScalarsIso X A φ).hom)).natTrans
+    ).symm (TwoSquare.mk _ _ _ _ (Scheme.comparisonRestrictScalarsIso X A φ).hom))
 
 /-- The canonical `nu^*`/scalar-extension comparison is invertible.
 Source: Stacks 09B1 and 0F63 (blueprint: def-sfb-finite-coefficient-system-evaluation).

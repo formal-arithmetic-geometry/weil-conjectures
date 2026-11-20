@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 import WeilConjectures.Topology.InverseImageOperationExt
 import WeilConjectures.Topology.InverseImagePresheafModule
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Module structure on the topological inverse image

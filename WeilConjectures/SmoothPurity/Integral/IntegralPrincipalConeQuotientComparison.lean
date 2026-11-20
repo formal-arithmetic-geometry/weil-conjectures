@@ -38,7 +38,7 @@ private theorem principalConeComparison
     (ha : ∀ n, QuasiIso (a n))
     (hs : ∀ n, CochainComplex.PrincipalCone.step μ n ≫ a n =
       a (n + 1) ≫ integralOperationsTowerStep C n)
-    (hu : ∀ n, CochainComplex.mappingCone.inr (μ ^ (n + 1)) ≫ a n = u n) :
+    (hu : ∀ n, CochainComplex.mappingCone.inr (μ ^ (n + 1)).asHom ≫ a n = u n) :
     ∃ c : DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion μ) ≅
         DerivedCategory.Q.obj (integralOperationsRoos C),
       DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit μ) ≫ c.hom =
@@ -124,7 +124,7 @@ theorem integralPrincipalConeQuotientComparison
       (R := IntegralOnSlice.ring l E T none) P)
     (μ : End P)
     (hμ : ∀ (q : ℤ) (U : T.ProEtᵒᵖ) (x : (P.X q).val.obj U),
-      (μ.f q).val.app U x =
+      (μ.asHom.f q).val.app U x =
         (integralConstantToCompletionOfUniverses l E T).hom.app U
           ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology T)
             ((Functor.const T.ProEtᵒᵖ).obj

@@ -73,7 +73,7 @@ private theorem tower_counit_baseChange {C C' : ℕ → Type*}
     rw [ih, ← Functor.map_comp]
 
 /-- The actual coordinate-tower counit commutes with its pasted base-change exchange.
-Source: blueprint lem-amb-affine-space-top-trace, proof steps 8--9
+Source: blueprint lemma-integral-linear-character--1, proof steps 8--9
 (blueprint: lem-amb-affine-trace-tower-counit-base-change).
 
 Proof: first establish the one-coordinate counit square. Expand the affine-line

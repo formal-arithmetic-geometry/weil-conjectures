@@ -28,7 +28,7 @@ with `Ψ`, the commutations `Lg^* Ψ ≅ Ψ Lg^*` of `Ψ` with the derived pullb
 formed by these maps commutes. All maps are mates of isomorphisms of derived pullbacks, and the
 corresponding cube of derived pullbacks commutes by the coherence of
 `AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso` with the composition and
-congruence isomorphisms (blueprint `sk-p-trace-coeff`).
+congruence isomorphisms (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`).
 
 ## Main results
 
@@ -93,7 +93,7 @@ agree, where `BC` is the derived base change map
 (`AlgebraicGeometry.ProEtale.derivedBaseChangeMap`), `α` the commutation of `Ψ` with the
 derived pullbacks and `β` the base change map of `Ψ` along `Rf_*`. This is an input for the
 compatibility of compact cohomology with the change of coefficients (blueprint
-`sk-p-trace-coeff`). -/
+`theorem-grothendieck-lefschetz-trace-formula--7`). -/
 theorem derivedBaseChangeMap_extendScalars_app (sq : CommSq g' f' f g)
     (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))) :
     (leftDerivedUpperStarExtendScalarsIso R S g).hom.app (R((f)_*[ModuleCat.{u + 1} R]).obj K) ≫

@@ -314,9 +314,10 @@ Proof:
    The two recorded restrictions both send Q(C) to Q(C|U). The tensor models agree by
    `lem-weil-pbc-site-derived-tensor-descent`, since flat-term K-flat resolutions are K-flat.
 3. Conversely, quasi-compactness gives a finite affine open covering of X. Apply the local
-   hypothesis to each member. The affine-target finite refinement in `sk-def-pe-site`
-   refines each resulting covering to a finite affine covering. Compose these coverings,
-   using `def-weil-pbc-sites-and-cohomology`, to obtain a finite covering of X.
+   hypothesis to each member. The affine-target finite refinement in
+   `definition-small-pro-etale-site` refines each resulting covering to a finite affine covering.
+   Compose these coverings, using `def-weil-pbc-sites-and-cohomology`, to obtain a finite covering
+   of X.
 4. Restrict the selected intervals further along the refinement, again using
    `lem-sf-site-tor-interval-restriction`. Relocalization identifies the iterated restriction
    with restriction to the refined object (`def-pur-localized-ringed-site`). Take the minimum

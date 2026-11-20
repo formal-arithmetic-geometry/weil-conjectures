@@ -127,11 +127,11 @@ private theorem derivedBaseChangeMapPlus_app_eq_mate
     (derivedBaseChangeMapPlus B sq).app K =
       (mateEquiv (upperStarLowerStarAdjunction B f).derivedPlus
         (upperStarLowerStarAdjunction B f').derivedPlus
-        (TwoSquare.mk _ _ _ _ (pullbackSquareComparison B sq).hom)).natTrans.app K := by
+        (TwoSquare.mk _ _ _ _ (pullbackSquareComparison B sq).hom)).app K := by
   have h := derivedBaseChangeMapPlus_ext B sq
     (mateEquiv (upperStarLowerStarAdjunction B f).derivedPlus
       (upperStarLowerStarAdjunction B f').derivedPlus
-      (TwoSquare.mk _ _ _ _ (pullbackSquareComparison B sq).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (pullbackSquareComparison B sq).hom))
     (fun N ↦ Adjunction.derivedPlus_mateEquiv_app_fac
       (upperStarLowerStarAdjunction B f)
       (upperStarLowerStarAdjunction B f')
@@ -151,7 +151,7 @@ private theorem isIso_globalHomology_of_mate
       ((DerivedCategory.Plus.homologyFunctor _ n).map
         ((mateEquiv (upperStarLowerStarAdjunction B f).derivedPlus
           (upperStarLowerStarAdjunction B f').derivedPlus
-          (TwoSquare.mk _ _ _ _ (pullbackSquareComparison B sq).hom)).natTrans.app K)))) :
+          (TwoSquare.mk _ _ _ _ (pullbackSquareComparison B sq).hom)).app K)))) :
     IsIso ((Sheaf.Γ Y'.smallEtaleTopology B).map
       ((DerivedCategory.Plus.homologyFunctor _ n).map
         ((derivedBaseChangeMapPlus B sq).app K))) := by

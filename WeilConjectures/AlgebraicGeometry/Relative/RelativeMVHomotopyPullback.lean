@@ -10,8 +10,16 @@ public import Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.Limits
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
-/-! Generic exact rows and homotopy-pullback projections. -/
+/-! Generic exact rows and homotopy-pullback projections.
+
+## References
+
+* Stacks Project, Cohomology of Sheaves, Tags 08BV and 08HY
+-/
 
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits CochainComplex
@@ -283,20 +291,12 @@ private lemma map_cocone_span_eq (F : E ⥤ C) [F.Additive]
   simp only [Functor.map_add, Functor.map_comp, Functor.map_neg,
     Preadditive.comp_add, Preadditive.comp_neg, add_neg_eq_zero] at hz
   simp only [Functor.map_comp, Category.assoc]
-  try simp only [Category.assoc] at hz
   rw [biprod.desc_eq]
   exact hz
 
 /-- Strictify a pair of row maps whose second map is a derived isomorphism componentwise.
 The mapping-cocone row is short exact degreewise, its projection to the source row is a
-localized isomorphism, and the two projections satisfy the span equations.
-Source: Stacks Project, Cohomology of Sheaves, Tags 08BV and 08HY.
-(blueprint: lem-pc-relative-mv-direct-image-rows-strictification).
-Proof: transpose rows to complexes of rows. The mapping cocone is degreewise a biproduct
-of the source and target rows, hence short exact. The distinguished mapping-cocone
-triangle and the biproduct decomposition identify each projection with an isomorphism
-when the target map is a quasi-isomorphism. The triangle's zero composite gives the
-three span equations. -/
+localized isomorphism, and the two projections satisfy the span equations. -/
 theorem relativeMV_homotopyPullback_row_strictify
     (S T R : ShortComplex (CochainComplex C ℤ)) (u : S ⟶ R) (v : T ⟶ R)
     (hS : S.ShortExact) (hT : T.ShortExact) (hR : R.ShortExact)

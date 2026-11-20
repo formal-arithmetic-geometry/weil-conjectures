@@ -57,7 +57,7 @@ private theorem top_functional_det
   have h := (x.compAlternatingMap (exteriorPower.ιMulti A r)).eq_smul_basis_det e
   have hv := DFunLike.congr_fun h v
   have hm : e.toMatrix v = (Matrix.of fun i j ↦ v i j).transpose := rfl
-  simp only [AlternatingMap.smul_apply, LinearMap.compAlternatingMap_apply,
+  simp only [smul_apply, LinearMap.compAlternatingMap_apply,
     Module.Basis.det_apply, hm, Matrix.det_transpose, smul_eq_mul] at hv
   simpa [e] using hv
 

@@ -19,6 +19,9 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import WeilConjectures.RingTheory.PowerSeriesCompleteOverCompleteBase
 import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.KrullDimension.PID
+public import Mathlib.RingTheory.KrullDimension.Field
 
 /-!
 # Power series over a field or Cohen ring
@@ -203,7 +206,7 @@ theorem power_series_field_cohen_regular_complete
         Ideal.span (Set.range (X : Fin d → MvPowerSeries (Fin d) Λ)) := by
       rw [maximalIdeal_eq_map_sup, IsLocalRing.maximalIdeal_eq_bot, Ideal.map_bot, bot_sup_eq]
     have hlo : (d : WithBot ℕ∞) ≤ ringKrullDim (MvPowerSeries (Fin d) Λ) := by
-      simpa using dimension_lower (A := Λ) d
+      simpa [ringKrullDim_eq_zero_of_isField hfield] using dimension_lower (A := Λ) d
     have hrank : (IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ)).spanFinrank ≤ d := by
       rw [hm]
       exact rank_variables_le d

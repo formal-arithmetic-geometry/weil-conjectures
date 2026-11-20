@@ -50,8 +50,8 @@ def resCompResIso (φ : G →* G') (hφ : Continuous φ) (ψ : G' →* G) (hψ :
     (h : ∀ g, φ (ψ g) = g) : res.{w} φ hφ ⋙ res ψ hψ ≅ 𝟭 _ :=
   NatIso.ofComponents
     (fun M ↦ ObjectProperty.isoMk _ (Action.mkIso (Iso.refl _) fun g ↦ by
-      simp only [Iso.refl_hom]
-      exact congrArg M.obj.ρ (h g)))
+      simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+      exact congrArg (fun g ↦ (M.obj.ρ g).asHom) (h g)))
     fun _ ↦ rfl
 
 /-- An isomorphism of topological groups `e : G ≃ₜ* G'` induces an equivalence of categories

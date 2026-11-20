@@ -106,7 +106,6 @@ private theorem canonical_representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
   simp only [comparison_eq] at h
   exact h
 
-set_option maxHeartbeats 800000 in
 -- The four model squares involve several concrete derived-category instances.
 /-- Associativity for the canonical comparison on localized flat K-flat triples.
 Source: Stacks 07A4, lemma-pullback-tensor-product, its total-tensor construction;

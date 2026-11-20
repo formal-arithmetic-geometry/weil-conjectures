@@ -21,8 +21,8 @@ public import WeilConjectures.Tactic.ExactModProofs
 Let `M`, `N` be models of finite type over the henselian trait `S = Spec k'⟦t⟧`
 over an arbitrary field `k'` along proper structure morphisms `q_M`, `q_N`, and let `P` be their
 product over the trait. This file proves the global-sections step (blueprint
-`sk-prop-tf-nearby-external-kunneth`, equation (4)) of Illusie's proof of Gabber's Künneth
-formula: the direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles to the
+`proposition-external-kunneth-formula-nearby-cycles`, equation (4)) of Illusie's proof of Gabber's
+Künneth formula: the direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles to the
 point `Spec k'` is an isomorphism
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.isIso_lowerStar_kunnethMap`).
 Equivalently, the cone of `Π_{A,B}` has no global sections.
@@ -33,13 +33,14 @@ After passing to the models of the geometric generic fibres
 (`NearbyCyclesModel.isIso_map_kunnethMap_iff_toGeneric`), the structure morphisms are morphisms
 of models `ψ : M ⟶ T` to the trait `T` as a model of its geometric generic point
 (`NearbyCyclesModel.traitGenericModel`). The compatibility of the Künneth map with direct
-images (blueprint `det-nearby-kunneth-proper`,
+images (blueprint `lemma-kunneth-map-proper-direct-image--1`,
 `NearbyCyclesModel.kunnethMap_comp_pushforwardExchange`) identifies `R(a_{P_s})_* Π_{A,B}`, up
 to
-* the proper exchanges `χ_ψ` (blueprint `det-sp-nearby-cycles-exchanges` (2),
+* the proper exchanges `χ_ψ` (blueprint `prose-E-03` (2),
   `NearbyCyclesModel.IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app`),
 * the ordinary Künneth isomorphism `RΓ(X_s) ⊗ RΓ(Y_s) ≅ RΓ(X_s × Y_s)` over `k'` (blueprint
-  `sk-lem-sf-kunneth-star`, `ProEtale.CondensedRing.isIso_lowerStarKunnethMap'_of_isPullback`),
+  `lemma-kunneth-one-identity-factor--1`,
+  `ProEtale.CondensedRing.isIso_lowerStarKunnethMap'_of_isPullback`),
 
 with the Künneth map of the trait `T` at `(RΓ(X_η̄, A), RΓ(Y_η̄, B))` followed by the nearby cycles
 of the ordinary Künneth isomorphism on the geometric generic fibres; the former is an isomorphism
@@ -210,10 +211,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [Fact (ringChar k
   {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
-set_option maxHeartbeats 1000000 in
 -- the pushforward exchange of the model of the geometric generic fibre is slow to unify
 /-- **The proper exchange for the structure morphism** (blueprint
-`det-sp-nearby-cycles-exchanges` (2), for the proper morphism `f = q : 𝒳 ⟶ S` to the trait; SGA 7
+`prose-E-03` (2), for the proper morphism `f = q : 𝒳 ⟶ S` to the trait; SGA 7
 XIII (2.1.7.1)): for a model `M` of finite type over the henselian trait `Spec k'⟦t⟧` along a
 proper `q` and a bounded constructible complex `C₀` on the total space, the pushforward exchange
 `χ : Ψ_S Rg_* (Lj^* C₀) ⟶ R(q_s)_* Ψ_M (Lj^* C₀)` of the structure morphism
@@ -282,7 +282,6 @@ lemma nonempty_upperStar_obj_iso_comp {W T V : Scheme.{u}} {a : W ⟶ T} {b : T 
 variable {X Y Z X' Y' Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-set_option maxHeartbeats 400000 in
 -- the monoidal structure of the derived categories of module objects is slow to unify
 /-- If the identifications `ε` of `M` and `N` factor through the total spaces, the external
 product `Lφ₁^* Lε_M^* A ⊗ Lφ₂^* Lε_N^* B` on the geometric generic fibre of `P` is the pullback
@@ -335,7 +334,39 @@ lemma isIso_app_of_forall_upperStar {X'' : Scheme.{u}} {M : NearbyCyclesModel X 
   have := hτ C₀ hC₀
   exact NatTrans.isIso_app_of_iso' τ e
 
+/-- Passing to the geometric generic model preserves bounded constructibility of nearby
+cycles. -/
+private lemma boundedConstructible_nearbyCycles_toGeneric
+    (M : NearbyCyclesModel X X')
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (hA : boundedConstructible (condensedRingObj Λ X') ((M.nearbyCycles Λ).obj A)) :
+    boundedConstructible (condensedRingObj Λ X')
+      ((M.toGeneric.nearbyCycles Λ).obj (L((M.ε)^*⟦Λ⟧).obj A)) :=
+  (boundedConstructible _).prop_of_iso (L((M.i)^*⟦Λ⟧).mapIso
+    (R((M.j)_*⟦Λ⟧).mapIso ((leftDerivedUpperStarId _ M.generic).app _))).symm hA
+
 end Transport
+
+/-- The proper exchange is invertible at any complex isomorphic to the pullback of a bounded
+constructible complex on the total space. -/
+private lemma IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_of_iso
+    {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [Fact (ringChar k' ≠ ℓ)]
+    {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
+    {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
+    (h : M.IsTraitModelOver q g) [IsProper q]
+    (U : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.generic) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.generic)))
+    (hU : ∃ C₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.total) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total)),
+      boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total) C₀ ∧
+        Nonempty (U ≅ L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C₀)) :
+    IsIso ((h.toTraitGeneric.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app U) := by
+  obtain ⟨C₀, hC₀, ⟨e⟩⟩ := hU
+  have : IsIso ((h.toTraitGeneric.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app
+      (L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C₀)) := by
+    exact_mod_proofs h.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) C₀ hC₀
+  exact NatTrans.isIso_app_of_iso' _ e
 
 /-! ### The global-sections step, for general coefficients -/
 
@@ -366,7 +397,7 @@ direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map to the point `Spec k'` 
 as soon as the proper exchanges `χ` of the structure morphisms to the trait, the ordinary Künneth
 maps on the special and on the geometric generic fibres, and the Künneth map of the trait at
 `(Rg_{M*} Lε_M^* A, Rg_{N*} Lε_N^* B)` are isomorphisms (the identification
-`kunnethMap_comp_pushforwardExchange` of blueprint `det-nearby-kunneth-proper`). -/
+`kunnethMap_comp_pushforwardExchange` of blueprint `lemma-kunneth-map-proper-direct-image--1`). -/
 theorem isIso_lowerStar_kunnethMap_of_isIso (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
@@ -431,6 +462,26 @@ section Global
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
+omit [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+/-- Bounded constructible complexes on the total space of a trait model are closed under
+tensor products. -/
+private lemma IsTraitModelOver.boundedConstructible_tensor_total
+    {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
+    {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
+    (h : M.IsTraitModelOver q g)
+    (C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.total) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total)))
+    (hC : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total) C)
+    (hD : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total) D) :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total) (C ⊗ D) := by
+  have := h.locallyOfFiniteType
+  have := h.quasiCompact
+  have : IsLocallyNoetherian M.total := LocallyOfFiniteType.isLocallyNoetherian q
+  have : CompactSpace M.total := QuasiCompact.compactSpace_of_compactSpace q
+  have : IsNoetherian M.total := {}
+  exact boundedConstructible_tensorObj
+    (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hC hD
+
 variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {M : NearbyCyclesModel X X'.left} {N : NearbyCyclesModel Y Y'.left}
   {P : NearbyCyclesModel Z Z'.left} {f₁ : Z ⟶ X} {f₁' : Z'.left ⟶ X'.left} {f₂ : Z ⟶ Y}
@@ -438,13 +489,12 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {qM : M.total ⟶ trait k'} {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-set_option maxHeartbeats 1600000 in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, equation (4); Illusie, *Autour du théorème de monodromie
-locale*, proof of Thm. 4.7): let `P` be the product over the henselian trait `Spec k'⟦t⟧` of
-models `M`, `N` of finite type along proper structure morphisms `q_M`, `q_N`, whose projections are
-compatible with the structure morphisms `g` of the geometric generic fibres to `Spec Ω`. For
+`proposition-external-kunneth-formula-nearby-cycles`, equation (4); Illusie, *Autour du théorème de
+monodromie locale*, proof of Thm. 4.7): let `P` be the product over the henselian trait `Spec k'⟦t⟧`
+of models `M`, `N` of finite type along proper structure morphisms `q_M`, `q_N`, whose projections
+are compatible with the structure morphisms `g` of the geometric generic fibres to `Spec Ω`. For
 bounded constructible `A`, `B` (whose nearby cycles are bounded constructible, Deligne's
 finiteness theorem), the direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles
 to the point `Spec k'` is an isomorphism: under the proper exchanges and the ordinary Künneth
@@ -517,65 +567,30 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
   -- the complexes on the geometric generic fibres
   have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA
   have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B hB
-  have hΨA' : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X'.left)
-      ((M.toGeneric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
-        (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)) :=
-    (boundedConstructible _).prop_of_iso (L((M.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
-      (R((M.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
-        ((leftDerivedUpperStarId _ M.generic).app _))).symm hΨA
-  have hΨB' : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left)
-      ((N.toGeneric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
-        (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) :=
-    (boundedConstructible _).prop_of_iso (L((N.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
-      (R((N.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
-        ((leftDerivedUpperStarId _ N.generic).app _))).symm hΨB
-  have htensor : ∀ C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)),
-      boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) C →
-        boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) D →
-          boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)
-            (C ⊗ D) := by
-    have := hP.locallyOfFiniteType
-    have := hP.quasiCompact
-    have : IsLocallyNoetherian P.total := LocallyOfFiniteType.isLocallyNoetherian (φ₁.total ≫ qM)
-    have : CompactSpace P.total := QuasiCompact.compactSpace_of_compactSpace (φ₁.total ≫ qM)
-    have : IsNoetherian P.total := {}
-    exact fun C D hC hD ↦
-      boundedConstructible_tensorObj
-        (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hC hD
+  have hΨA' := boundedConstructible_nearbyCycles_toGeneric _ M A hΨA
+  have hΨB' := boundedConstructible_nearbyCycles_toGeneric _ N B hΨB
+  have htensor := hP.boundedConstructible_tensor_total (ℓ := ℓ)
   refine isIso_lowerStar_kunnethMap_of_isIso (Profinite.padicAlgClRingObj ℓ) hM hN hpb hP
     hgen A B ?_ ?_ ?_ ?_ ?_ hT
-  -- the proper exchanges
-  · have h₁ := fun C₀ hC₀ ↦
-      IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hM C₀ hC₀
-    have h₂ := isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _ h₁
-    have h₃ := h₂ (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
+  -- Transport each proper exchange directly along its pullback isomorphism.
+  · have hχ := hM.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ) _
       ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eM A hA,
         nonempty_upperStar_obj_iso_comp _ heM A⟩
-    exact_mod_proofs h₃
-  · have h₁ := fun C₀ hC₀ ↦
-      IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hN C₀ hC₀
-    have h₂ := isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _ h₁
-    have h₃ := h₂ (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)
+    exact_mod_proofs hχ
+  · have hχ := hN.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ) _
       ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eN B hB,
         nonempty_upperStar_obj_iso_comp _ heN B⟩
-    exact_mod_proofs h₃
-  · have hqP' : IsProper (φ₁.total ≫ qM) := hqP
-    have h₁ := fun C₀ hC₀ ↦
-      IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hP C₀ hC₀
-    have h₂ := isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _ h₁
-    have h₃ := h₂
-      (L((φ₁.generic)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-          (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) ⊗
-        L((φ₂.generic)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-          (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B))
+    exact_mod_proofs hχ
+  · have hχ := hP.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ) _
       (exists_boundedConstructible_tensor_iso _ φ₁ φ₂ heM heN hA hB htensor)
-    exact_mod_proofs h₃
+    exact_mod_proofs hχ
   -- the ordinary Künneth formulas on the special fibres and on the geometric generic fibres
-  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (X := X') (Y := Y') (P := Z') f₁' f₂'
+  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (ℓ := ℓ)
+      (X := X') (Y := Y') (P := Z') f₁' f₂'
       (hs₁.trans (Category.comp_id _).symm) (hs₂.trans (Category.comp_id _).symm)
       (isPullback_special hM hN hpb hP) _ hΨA' _ hΨB'
-  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (X := Over.mk gM)
+  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (ℓ := ℓ)
+      (K := traitGenericField k') (X := Over.mk gM)
       (Y := Over.mk gN)
       (P := Over.mk (φ₁.generic ≫ gM)) φ₁.generic φ₂.generic (Category.comp_id _).symm
       (hgen.trans (Category.comp_id _).symm) (isPullback_generic hM hN hpb hP hgen) _ hA' _ hB'

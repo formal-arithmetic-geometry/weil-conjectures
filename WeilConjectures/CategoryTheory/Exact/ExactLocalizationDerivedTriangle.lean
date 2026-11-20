@@ -15,7 +15,7 @@ import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 # Deriving an exact localization sequence
 
 Source: Stacks, Tags 0152, 070I and 070K; the construction used in blueprint
-`det-sf-open-closed-extension-zero-limits`, proof (1)
+`proposition-extension-zero-restriction-closed-subscheme`, proof (1)
 (blueprint: lem-sf-exact-localization-derived-triangle).
 -/
 

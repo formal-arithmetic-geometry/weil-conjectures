@@ -50,7 +50,7 @@ Proof:
    closed map by `lem-weil-pbc-finite-closed-map-finite-fibres`. Thus its image of the closed
    remainder `W` is closed and misses `u`.
 4. Remove that image from `U`. The new neighbourhood is still étale by
-   `def-weil-open-immersion` and `lem-weil-pbc-etale-composition-cancellation`. Identify its
+   `def-weil-open-immersion` and `definition-torsion-sheaves--3`. Identify its
    pullback with the corresponding open of the old pullback using
    `lem-weil-pbc-open-fibre-product` and the universal property `def-pc-fibre-product`.
 5. Intersect the finitely many pieces with this open. They remain open and closed, disjoint,

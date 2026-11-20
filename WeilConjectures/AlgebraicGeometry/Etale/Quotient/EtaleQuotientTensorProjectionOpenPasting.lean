@@ -419,7 +419,6 @@ private theorem constant_projection_pre
   simp only [Functor.map_comp] at hh
   have hp := proper_coefficient_naturality a c.g (J.obj K)
   simp only [Functor.map_comp]
-  try dsimp only [TZ, TX, O, Pi, Pg] at hh ⊢
   exact projection_pasting hcompact hh hp
 
 private theorem constant_projection_word

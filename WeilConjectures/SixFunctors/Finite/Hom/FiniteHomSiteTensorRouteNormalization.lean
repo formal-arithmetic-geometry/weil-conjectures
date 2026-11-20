@@ -22,7 +22,7 @@ attribute [local instance 2000] finiteHomTensorSiteSmall
 attribute [local instance] coefficientFiniteQuotientExtensionAdditive
 
 /-- The two derived tensor routes have their specified ordinary chain models.
-Source: Stacks 06YN, 06YY, 07A4, 07A6; blueprint thm-coef-finite-hom, final
+Source: Stacks 06YN, 06YY, 07A4, 07A6; blueprint lemma-change-coefficients-internal-hom--1, final
 site-comparison paragraph
 (blueprint: lem-coef-finite-hom-site-tensor-route-normalization).
 

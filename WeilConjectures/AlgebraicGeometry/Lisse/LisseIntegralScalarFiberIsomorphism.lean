@@ -12,8 +12,11 @@ import WeilConjectures.NumberTheory.Padics.AdicLimitFiniteModulesSupplement
 
 /-! # Integral scalar extension commutes with geometric fibres
 
-Source: Deligne, Weil II (1.1.1) b), d), pp. 146-147.
-(blueprint: lem-pod-lisse-integral-scalar-fiber-isomorphism).
+## References
+
+* Deligne, Weil II (1.1.1) b), d), pp. 146-147
+* Weil II (1.1.1) b), d), pp. 146-147
+* Stacks Project, Tag 09B8
 -/
 
 @[expose] public section
@@ -98,25 +101,7 @@ variable (Y : Scheme.{d}) {Ω : Type d} [Field Ω] [IsAlgClosed Ω]
   (L : Type (d + 1)) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The constructed integral scalar comparison is invertible.
-
-Source: Weil II (1.1.1) b), d), pp. 146-147; the finite-module reconstruction
-of Stacks Tag 09B8 and right exactness of scalar extension.
-(blueprint: lem-pod-lisse-integral-scalar-fiber-isomorphism).
-
-Proof: write R and S for the coefficient valuation rings, and M for the integral
-geometric fibre. The stalks of the input system are the quotients M/I^(n+1)M,
-by the projection theorem. The finite-level stalk/scalar comparison identifies
-the target level m with (S/J^(m+1)) tensor_R M: the source exponent is the
-ramification ceiling, so its ideal maps into J^(m+1) and disappears in this tensor.
-These identifications are compatible with transition maps, by their pure-germ
-formulas. The source of the comparison is S tensor_R M, a finite S-module.
-It is J-adically complete, since S is a complete Noetherian valuation ring.
-Its reductions are the displayed target levels. Thus completion identifies this
-source with their inverse limit. On pure tensors its projections are exactly the
-formula characterizing the constructed comparison, which is therefore the resulting
-isomorphism. For a zero module this is the unique map between zero modules; positive
-ramification ensures that all displayed source levels exist. -/
+/-- The constructed integral scalar comparison is invertible. -/
 theorem lisseIntegralScalarFiberComparison_isIso (F : LisseIntegralSheaf l E Y) :
     IsIso (lisseIntegralScalarFiberComparison Y y l E L ι F) := by
   let S := Padic.coefficientExtensionIntegers l L

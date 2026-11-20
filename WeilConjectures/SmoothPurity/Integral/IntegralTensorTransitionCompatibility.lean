@@ -412,7 +412,84 @@ private theorem tensor_transition_apply (n : ℕ)
       ((((unrestrictedIntegralTransition l E X n).app Q).f q).val.app V y) :=
   (integralOperationsTensorTransition_existsUnique l E X n).exists.choose_spec P Q p q V x y
 
-set_option maxHeartbeats 500000 in
+-- Check scalar normalization separately so the transition proof can reuse it directly.
+private theorem integralTensorComparison_apply_scalar
+    (b : ∀ m : ℕ, coefficientTotalTensor.{u, t + 1, t}
+      (AlgebraicGeometry.Scheme.ProEt.topology X)
+      (completedIntegralCommRingSheafUnrestricted l E X) ⋙
+        unrestrictedIntegralFiniteComplex l E X m ≅
+      (unrestrictedIntegralFiniteComplex l E X m).prod
+        (unrestrictedIntegralFiniteComplex l E X m) ⋙
+          Functor.uncurry.obj
+            ((MonoidalCategory.curriedTensor
+              (integralOperationsFiniteModules l E X m)).map₂CochainComplex))
+    (hb : ∀ (m : ℕ) (P Q : CochainComplex (integralTowerModules l E X) ℤ)
+      (p q : ℤ) (V : X.ProEtᵒᵖ) (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V),
+      (((b m).hom.app (P, Q)).f (p + q)).val.app V
+        (unrestrictedIntegralTensorSection l E X m _ V 1
+          (coefficientTensorGenerator.{u, t + 1, t}
+            (AlgebraicGeometry.Scheme.ProEt.topology X)
+            (completedIntegralCommRingSheafUnrestricted l E X) P Q p q (p + q) rfl V x y)) =
+        integralOperationsTotalTensorSection l E X m P Q p q V
+          (unrestrictedIntegralTensorSection l E X m _ V 1 x)
+          (unrestrictedIntegralTensorSection l E X m _ V 1 y))
+    (m : ℕ)
+    (P Q : CochainComplex (integralTowerModules l E X) ℤ) (p q : ℤ)
+    (V : X.ProEtᵒᵖ) (s : (integralCoefficientCommRingSheaf l E X m).obj.obj V)
+    (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V) :
+    (((b m).hom.app (P, Q)).f (p + q)).val.app V
+      (unrestrictedIntegralTensorSection l E X m _ V s
+        (coefficientTensorGenerator.{u, t + 1, t}
+          (AlgebraicGeometry.Scheme.ProEt.topology X)
+          (completedIntegralCommRingSheafUnrestricted l E X) P Q p q (p + q) rfl V x y)) =
+      integralOperationsTotalTensorSection l E X m P Q p q V
+        (unrestrictedIntegralTensorSection l E X m _ V s x)
+        (unrestrictedIntegralTensorSection l E X m _ V 1 y) := by
+  classical
+  let : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _
+  let F := (unrestrictedIntegralReductionExistence l E X m).choose
+  let hF := (unrestrictedIntegralReductionExistence l E X m).choose_spec.choose
+  have hs := identifiedSection_smul
+    (completedIntegralCommRingProjectionUnrestricted l E X m) F hF
+    (((coefficientTotalTensor.{u, t + 1, t}
+      (AlgebraicGeometry.Scheme.ProEt.topology X)
+      (completedIntegralCommRingSheafUnrestricted l E X)).obj (P, Q)).X (p + q)) V s
+    (coefficientTensorGenerator.{u, t + 1, t}
+      (AlgebraicGeometry.Scheme.ProEt.topology X)
+      (completedIntegralCommRingSheafUnrestricted l E X) P Q p q (p + q) rfl V x y)
+  have hx := identifiedSection_smul
+    (completedIntegralCommRingProjectionUnrestricted l E X m) F hF
+    (P.X p) V s x
+  have hg := tensorGenerator_smul_left.{t + 1, t, u}
+    (R := integralCoefficientCommRingSheaf l E X m)
+    ((unrestrictedIntegralFiniteComplex l E X m).obj P)
+    ((unrestrictedIntegralFiniteComplex l E X m).obj Q) p q (p + q) rfl V s
+    (unrestrictedIntegralTensorSection l E X m _ V 1 x)
+    (unrestrictedIntegralTensorSection l E X m _ V 1 y)
+  calc
+    _ = (((b m).hom.app (P, Q)).f (p + q)).val.app V
+        (s • unrestrictedIntegralTensorSection l E X m _ V 1
+          (coefficientTensorGenerator.{u, t + 1, t}
+            (AlgebraicGeometry.Scheme.ProEt.topology X)
+            (completedIntegralCommRingSheafUnrestricted l E X)
+            P Q p q (p + q) rfl V x y)) :=
+      congrArg ((((b m).hom.app (P, Q)).f (p + q)).val.app V) hs
+    _ = s • (((b m).hom.app (P, Q)).f (p + q)).val.app V
+        (unrestrictedIntegralTensorSection l E X m _ V 1
+          (coefficientTensorGenerator.{u, t + 1, t}
+            (AlgebraicGeometry.Scheme.ProEt.topology X)
+            (completedIntegralCommRingSheafUnrestricted l E X)
+            P Q p q (p + q) rfl V x y)) := map_smul _ s _
+    _ = s • integralOperationsTotalTensorSection l E X m P Q p q V
+        (unrestrictedIntegralTensorSection l E X m _ V 1 x)
+        (unrestrictedIntegralTensorSection l E X m _ V 1 y) := by rw [hb]
+    _ = integralOperationsTotalTensorSection l E X m P Q p q V
+        (s • unrestrictedIntegralTensorSection l E X m _ V 1 x)
+        (unrestrictedIntegralTensorSection l E X m _ V 1 y) := hg.symm
+    _ = _ := congrArg
+      (fun z ↦ integralOperationsTotalTensorSection l E X m P Q p q V z
+        (unrestrictedIntegralTensorSection l E X m _ V 1 y)) hx.symm
+
 -- Compare the two scalar presentations and their maps on total summand generators.
 /-- The generator-normalized total scalar-extension comparison commutes with the
 actual consecutive quotient transitions.
@@ -474,55 +551,8 @@ theorem integralTensorTransitionCompatibility
   have hbs (m : ℕ) (P Q : CochainComplex (integralTowerModules l E X) ℤ)
       (p q : ℤ) (V : X.ProEtᵒᵖ)
       (s : (integralCoefficientCommRingSheaf l E X m).obj.obj V)
-      (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V) :
-      (((b m).hom.app (P, Q)).f (p + q)).val.app V
-        (unrestrictedIntegralTensorSection l E X m _ V s
-          (coefficientTensorGenerator.{u, t + 1, t}
-            (AlgebraicGeometry.Scheme.ProEt.topology X)
-            (completedIntegralCommRingSheafUnrestricted l E X) P Q p q (p + q) rfl V x y)) =
-        integralOperationsTotalTensorSection l E X m P Q p q V
-          (unrestrictedIntegralTensorSection l E X m _ V s x)
-          (unrestrictedIntegralTensorSection l E X m _ V 1 y) := by
-    have hs := identifiedSection_smul
-      (completedIntegralCommRingProjectionUnrestricted l E X m) (F m) (hF m)
-      (((coefficientTotalTensor.{u, t + 1, t}
-        (AlgebraicGeometry.Scheme.ProEt.topology X)
-        (completedIntegralCommRingSheafUnrestricted l E X)).obj (P, Q)).X (p + q)) V s
-      (coefficientTensorGenerator.{u, t + 1, t}
-        (AlgebraicGeometry.Scheme.ProEt.topology X)
-        (completedIntegralCommRingSheafUnrestricted l E X) P Q p q (p + q) rfl V x y)
-    have hx := identifiedSection_smul
-      (completedIntegralCommRingProjectionUnrestricted l E X m) (F m) (hF m)
-      (P.X p) V s x
-    have hg := tensorGenerator_smul_left.{t + 1, t, u}
-      (R := integralCoefficientCommRingSheaf l E X m)
-      ((unrestrictedIntegralFiniteComplex l E X m).obj P)
-      ((unrestrictedIntegralFiniteComplex l E X m).obj Q) p q (p + q) rfl V s
-      (unrestrictedIntegralTensorSection l E X m _ V 1 x)
-      (unrestrictedIntegralTensorSection l E X m _ V 1 y)
-    calc
-      _ = (((b m).hom.app (P, Q)).f (p + q)).val.app V
-          (s • unrestrictedIntegralTensorSection l E X m _ V 1
-            (coefficientTensorGenerator.{u, t + 1, t}
-              (AlgebraicGeometry.Scheme.ProEt.topology X)
-              (completedIntegralCommRingSheafUnrestricted l E X)
-              P Q p q (p + q) rfl V x y)) :=
-        congrArg ((((b m).hom.app (P, Q)).f (p + q)).val.app V) hs
-      _ = s • (((b m).hom.app (P, Q)).f (p + q)).val.app V
-          (unrestrictedIntegralTensorSection l E X m _ V 1
-            (coefficientTensorGenerator.{u, t + 1, t}
-              (AlgebraicGeometry.Scheme.ProEt.topology X)
-              (completedIntegralCommRingSheafUnrestricted l E X)
-              P Q p q (p + q) rfl V x y)) := map_smul _ s _
-      _ = s • integralOperationsTotalTensorSection l E X m P Q p q V
-          (unrestrictedIntegralTensorSection l E X m _ V 1 x)
-          (unrestrictedIntegralTensorSection l E X m _ V 1 y) := by rw [hb]
-      _ = integralOperationsTotalTensorSection l E X m P Q p q V
-          (s • unrestrictedIntegralTensorSection l E X m _ V 1 x)
-          (unrestrictedIntegralTensorSection l E X m _ V 1 y) := hg.symm
-      _ = _ := congrArg
-        (fun z ↦ integralOperationsTotalTensorSection l E X m P Q p q V z
-          (unrestrictedIntegralTensorSection l E X m _ V 1 y)) hx.symm
+      (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V) :=
+    integralTensorComparison_apply_scalar l E X b hb m P Q p q V s x y
   apply NatTrans.ext
   funext Z
   rcases Z with ⟨P, Q⟩

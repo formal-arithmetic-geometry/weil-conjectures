@@ -21,7 +21,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 Source: Stacks Project, Cohomology on Sites, Tags 03F9, 03FB, 03FC;
 blueprint, Proper base change, Injectives and the Cech acyclicity criterion
-(blueprint: lem-weil-pbc-cech-criterion).
+(blueprint: lemma-acyclicity-pulled-back-injectives).
 -/
 
 @[expose] public section
@@ -121,7 +121,7 @@ injective resolution in module sheaves, rather than resolving the underlying abe
 `products` chooses the iterated products, and `hproducts` expresses closure of the basis
 for these choices. Ordered tuples, including repetitions, are built into `SiteCechComplex`.
 Source: Stacks Project, Cohomology on Sites, Tags 03F9, 03FB, 03FC
-(blueprint: lem-weil-pbc-cech-criterion).
+(blueprint: lemma-acyclicity-pulled-back-injectives).
 
 Proof:
 1. The finite basis coverings are cofinal by `hrefine`; their chosen iterated products
@@ -134,7 +134,7 @@ Proof:
    lem-weil-pbc-ring-sheaves-grothendieck, hence have enough injectives by
    lem-sp-grothendieck-enough-injectives. Embed a Čech-acyclic A into an injective I and
    take Q = I/A. The underlying abelian sheaves form a short exact sequence: kernels
-   are sectionwise (def-weil-sheaf-of-modules-category), and module sheafification has
+   are sectionwise (situation-conventions), and module sheafification has
    underlying abelian sheafification (def-weil-presheaf-modules-sheafification).
 4. For U in B, lem-weil-pbc-site-ses-cech-h1-surjective gives I(U) → Q(U) surjective.
    Indeed lift a section locally on a finite basis refinement. The differences form an

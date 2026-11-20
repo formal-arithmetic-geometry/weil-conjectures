@@ -59,7 +59,7 @@ private theorem on_representatives
 /-- The normalized reduction/pullback comparison preserves the ordinary tensor map.
 Source: blueprint sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md,
 "tensor reassociation, evaluation, and adjunction units and counits", and
-lem-fix-operation-reduction; Stacks 07A4, 07A6 and 0941.
+proposition-six-operations-change-coefficients; Stacks 07A4, 07A6 and 0941.
 (blueprint: lem-sf-canonical-reduction-tensor-pull).
 
 Proof: resolve K and H by flat-term K-flat complexes. Use the total tensor of these

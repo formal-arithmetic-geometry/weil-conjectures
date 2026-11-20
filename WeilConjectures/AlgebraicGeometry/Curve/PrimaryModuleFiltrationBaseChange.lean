@@ -129,7 +129,7 @@ theorem primary_fixedField_pullback_iso
         (V.obj.ρ g ((fiberIso.app F).inv (j.inv (i.hom v))))))) at h'
     simpa only [Iso.inv_hom_id_apply, Iso.hom_inv_id_apply] using h'
   obtain ⟨e⟩ := discreteRep_iso_of_additive_iso
-    (primaryRestrictedModule K Ks H R) V k (by intro g v; exact hk g v)
+    (primaryRestrictedModule K Ks H R) V k hk
   exact ⟨(C.unitIso.app F) ≪≫ C.inverse.mapIso e.symm⟩
 
 end AlgebraicGeometry.Scheme

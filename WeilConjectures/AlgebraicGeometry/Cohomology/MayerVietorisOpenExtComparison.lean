@@ -55,8 +55,8 @@ theorem H.openFreeExtComparison (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.
       (e' : ∀ n, HOver (baseChangeSnd (S := S) (W.ι ≫ f))
         (baseChangedModule (S := S) (W.ι ≫ f) ((pullback W.ι).obj M)) n ≃+
         Ext (G.obj (H.openFreeSheaf W)) N n),
-      (∀ n a x, e n (a • x) = (e n x).comp (Ext.mk₀ (ρ a)) (add_zero n)) ∧
-      (∀ n a x, e' n (a • x) = (e' n x).comp (Ext.mk₀ (τ a)) (add_zero n)) ∧
+      (∀ n a x, e n (a • x) = (e n x).comp (Ext.mk₀ (ρ a).asHom) (add_zero n)) ∧
+      (∀ n a x, e' n (a • x) = (e' n x).comp (Ext.mk₀ (τ a).asHom) (add_zero n)) ∧
       (∀ n x, e' n (H.baseChangeLinear (S := S) (W.ι ≫ f) ((pullback W.ι).obj M) n x) =
         ((e n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n)) := by
   obtain ⟨e, e', he, he', hb⟩ :=

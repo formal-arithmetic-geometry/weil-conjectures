@@ -26,7 +26,6 @@ attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-set_option maxHeartbeats 1000000 in
 -- The representative equations compare independently specified derived models.
 /-- The left derived path is the localization of its ordinary cochain path.
 Source: the representative normalizations in lem-sf-canonical-reduction-tensor-pull.

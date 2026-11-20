@@ -10,8 +10,8 @@ public import Mathlib.CategoryTheory.ObjectProperty.Small
 
 /-! # Essential smallness from bounded homology
 
-Source: blueprint `det-brown-hypotheses-small`, the Postnikov induction in steps 11–13.
-(blueprint: lem-sfb-bounded-homology-essentially-small)
+Source: blueprint `lemma-hypotheses-brown-representability--5`, the Postnikov induction in steps
+11–13. (blueprint: lem-sfb-bounded-homology-essentially-small)
 -/
 
 @[expose] public section
@@ -59,7 +59,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
 /-- Bounded complexes whose homology belongs to an essentially small class form an
 essentially small class. No stability of that class under extensions is required.
 
-Source: blueprint `det-brown-hypotheses-small`, steps 11–13, the ambient Postnikov
+Source: blueprint `lemma-hypotheses-brown-representability--5`, steps 11–13, the ambient Postnikov
 induction; Stacks Project, Tags 014A and 014B, uniqueness of cones up to isomorphism.
 (blueprint: lem-sfb-bounded-homology-essentially-small)
 

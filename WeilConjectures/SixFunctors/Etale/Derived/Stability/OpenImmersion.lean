@@ -54,7 +54,7 @@ section Tensor
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lem-sf-tor-sheaf-constructible`: Tor sheaves of constructible sheaves.
+/-- Blueprint `proposition-six-operations-dctf--14`: Tor sheaves of constructible sheaves.
 
 For a finite ring `Λ` and constructible sheaves `F` and `G` of `Λ`-modules on `X_ét`, every
 homology sheaf of `F ⊗ᴸ G` is constructible: on a common stratification both are locally
@@ -68,7 +68,7 @@ theorem isConstructibleSheaf_homology_tensor_singleFunctor {X : Scheme.{u}}
         ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) :=
   isConstructibleSheaf_torSheaf Λ F G r
 
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (ii), constructibility: for a finite ring `Λ`, the derived tensor product of two
@@ -77,7 +77,7 @@ Finite Tor amplitude of one factor is needed for boundedness: over `ℤ/ℓ²` o
 `ℤ/ℓ ⊗ᴸ ℤ/ℓ` has a nonzero `Tor_i` for every `i ≥ 0`. The coefficients cannot be an arbitrary
 coefficient category: over `R = k[x, y₁, y₂, …]` on a point, `R/(x yᵢ)ᵢ ⊗ᴸ R/(x)` has the
 non-finitely generated `Tor₁ = (yᵢ)ᵢ/(x yᵢ)ᵢ` in degree `-1`, although `R/(x)` has Tor
-amplitude in `[-1, 0]`. This is blueprint `lem-sf-tensor-ctf` (i).
+amplitude in `[-1, 0]`. This is blueprint `proposition-six-operations-dctf--14` (i).
 -/
 theorem boundedConstructible_tensor (X : Scheme.{u})
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -94,12 +94,12 @@ theorem boundedConstructible_tensor (X : Scheme.{u})
       exact (Etale.constructibleSheaf_iff _ _ _).mpr
         (isConstructibleSheaf_homology_tensor_singleFunctor Λ F G n)) hK hM⟩
 
-/-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
+/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
 subcategories.
 
 Clause (ii): `- ⊗ᴸ - : Dctf(X, Λ) × Dctf(X, Λ) ⥤ Dctf(X, Λ)` is defined, for a finite ring
 `Λ`. The internal-Hom half of the clause is `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`
-below. This is blueprint `lem-sf-tensor-ctf` (ii).
+below. This is blueprint `proposition-six-operations-dctf--14` (ii).
 -/
 theorem constructibleFiniteTor_tensor (X : Scheme.{u})
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -123,7 +123,7 @@ variable [UpperStarPreservesFlat A] {U Y : Scheme.{u}} (j : U ⟶ Y) [IsOpenImme
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
-/-- Blueprint `lem-trf-open-tensor`: Tensoring an extension by zero.
+/-- Blueprint `proposition-proper-direct-image-extension-zero--8`: Tensoring an extension by zero.
 
 For an open immersion `j : U ⟶ Y`, the natural isomorphism
 `(j_!K) ⊗ᴸ M ≅ j_!(K ⊗ᴸ Lj^*M)` of bifunctors `D(U_ét) ⥤ D(Y_ét) ⥤ D(Y_ét)`, where `j_!` is
@@ -159,8 +159,8 @@ noncomputable def rightDerivedLowerShriekIsoOfIsOpenImmersion :
     Functor.rightUnitor _
 
 omit [Finite Λ] [HasCompactification j] in
-/-- Blueprint `lem-trf-open-ctf`: Extension by zero preserves constructibility and Tor
-amplitude.
+/-- Blueprint `proposition-proper-direct-image-extension-zero--8`: Extension by zero preserves
+constructibility and Tor amplitude.
 
 Let `j : U ⟶ Y` be a quasi-compact open immersion (for instance any open immersion of
 finite-type schemes over a field) and `Λ` a ring. If `K` is a bounded constructible complex
@@ -168,7 +168,8 @@ on `U` with homology concentrated in `[a, b]` and Tor amplitude in `[c, d]`, the
 by zero `j_!K` is bounded constructible on `Y`, with homology concentrated in `[a, b]` and Tor
 amplitude in `[c, d]`; in particular `j_!K ∈ Dctf(Y, Λ)`. Indeed `j_!` is exact, so
 `Hʳ(j_!K) = j_!Hʳ(K)`, the extension by zero of a constructible sheaf is constructible, and
-`j_!K ⊗ᴸ G ≅ j_!(K ⊗ᴸ j^*G)` (`lem-trf-open-tensor`) for a sheaf `G` on `Y` in degree `0`. -/
+`j_!K ⊗ᴸ G ≅ j_!(K ⊗ᴸ j^*G)` (`proposition-proper-direct-image-extension-zero--8`) for a sheaf `G`
+on `Y` in degree `0`. -/
 theorem boundedConstructible_and_torAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek
     {a b c d : ℤ} {K : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) U K)
@@ -214,8 +215,8 @@ theorem constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek 
     Λ j hK.1.1 hK.1.2 hK.2
   ⟨⟨h.1, h.2.1⟩, h.2.2⟩
 
-/-- Blueprint `sk-lem-sf-open-ctf`: Extension by zero preserves the finite-Tor constructible
-category.
+/-- Blueprint `proposition-proper-direct-image-extension-zero--8`: Extension by zero preserves the
+finite-Tor constructible category.
 
 For a quasi-compact open immersion `j : U ⟶ Y` admitting a compactification and a finite ring
 `Λ`, extension by zero sends `Dctf(U, Λ)` into `Dctf(Y, Λ)` *without moving the interval*: if
@@ -240,7 +241,7 @@ noncomputable def rightDerivedUpperShriekIsoOfIsOpenImmersion :
     ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).ofNatIsoLeft
       (rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).symm)
 
-/-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
+/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for the exceptional inverse
 image.
 
 Clause (i), open-immersion case: for a quasi-compact open immersion `f` and a finite ring `Λ`,
@@ -268,7 +269,7 @@ section Functors
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (i): the restriction
+/-- Blueprint `proposition-six-operations-dctf`, clause (i): the restriction
 `Lf^* : Dctf(Y, A) ⥤ Dctf(X, A)` of the derived pullback to the small categories. -/
 noncomputable def DerivedCategoryFiniteTor.leftDerivedUpperStar [UpperStarPreservesFlat A]
     (f : X ⟶ Y) :
@@ -276,7 +277,7 @@ noncomputable def DerivedCategoryFiniteTor.leftDerivedUpperStar [UpperStarPreser
   ObjectProperty.lift _ (DerivedCategoryFiniteTor.ι A Y ⋙ L((f)^*[A]))
     fun K ↦ constructibleFiniteTor_leftDerivedUpperStar A f K.property
 
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (vi): the restriction
+/-- Blueprint `proposition-six-operations-dctf`, clause (vi): the restriction
 `𝔻_X : Dctf(X, A)ᵒᵖ ⥤ Dctf(X, A)` of the Verdier dual to the small categories, given that `𝔻_X`
 preserves `Dctf(X, A)`. For a finite `Λ` whose exponent is invertible on `k` and `X` separated of
 finite type over `k`, this is `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`; that

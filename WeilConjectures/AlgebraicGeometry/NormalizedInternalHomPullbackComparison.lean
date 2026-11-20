@@ -108,8 +108,6 @@ end EvaluationMate
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
--- Comparing the normalized adjunctions unfolds their canonical tensor-Hom data.
 /-- The natural evaluation mate for fixed pullback and tensor-Hom adjunctions.
 This statement concerns only sheaf internal Hom, with no global sections or base rings.
 Source: Stacks, Remark 08I3, Lemmas 08DJ and 079U
@@ -167,17 +165,24 @@ theorem exists_normalizedInternalHomPullbackComparison
               (derivedPullback g).map ((bS K).counit.app L))) := by
   have h := exists_mixedHomTensorPullbackIso.{u, w} g
   obtain ⟨t, ht⟩ := h
-  obtain ⟨γ, hγ⟩ := evaluationMate_exists
+  have hmate := evaluationMate_exists
+    (C := schemeDerivedCategory S) (D := schemeDerivedCategory T)
     (derivedInternalHom (Opens.grothendieckTopology S) S.sheaf)
     (derivedInternalHom (Opens.grothendieckTopology T) T.sheaf)
     (derivedPullback g) (schemeDerivedDirectImage g) a t
     (fun A K L => ((bS K).homEquiv A L).symm)
     (fun A K L => ((bT K).homEquiv A L).symm) hS.1 hT.1
+  obtain ⟨γ, hγ⟩ := hmate
   refine ⟨t, γ, ht, ?_⟩
   intro K L
   have h := hγ K L
   dsimp only [Functor.prod_obj, Functor.op_obj, Functor.comp_obj, Equiv.symm_symm] at h
-  rw [← (bS K).homEquiv_symm_id L]
-  exact h
+  refine h.trans ?_
+  exact congrArg
+    (fun e ↦ (bT ((derivedPullback g).obj K)).homEquiv _ _
+      (t.inv.app
+          ((derivedInternalHom (Opens.grothendieckTopology S) S.sheaf).obj (op K, L), K) ≫
+        (derivedPullback g).map e))
+    ((bS K).homEquiv_symm_id L)
 
 end AlgebraicGeometry

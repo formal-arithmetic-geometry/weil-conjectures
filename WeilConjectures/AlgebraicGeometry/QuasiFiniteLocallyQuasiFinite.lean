@@ -35,7 +35,7 @@ Source: Stacks Project, Morphisms of Schemes, Tag 01TJ
 
 Proof:
 1. Suppose `f` is quasi-finite. By `pqf-def-quasifinite` and
-   `def-weil-pbc-scheme-conventions`, it is locally of finite type and
+   `definition-ind-etale-pro-etale-weakly--3`, it is locally of finite type and
    quasi-compact, and every point is isolated in its fibre. Choose affine
    neighbourhoods of a source point and its image. Apply
    `lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs` to obtain
@@ -43,7 +43,7 @@ Proof:
    quasi-finiteness at every point, hence local quasi-finiteness.
 2. Conversely, `lem-weil-pbc-lqf-locally-finite-type` gives local finite
    type from local quasi-finiteness. Together with quasi-compactness this
-   gives finite type by `def-weil-pbc-scheme-conventions`. Apply
+   gives finite type by `definition-ind-etale-pro-etale-weakly--3`. Apply
    `lem-weil-pbc-quasi-finite-at-point-isolated` at each point to obtain
    isolated fibre points. The definition `pqf-def-quasifinite` now gives
    quasi-finiteness.

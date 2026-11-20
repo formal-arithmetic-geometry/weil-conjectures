@@ -17,7 +17,7 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Identification of the canonical map on the explicit alternating Čech model
 
-Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--5;
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, Steps 2--5;
 Stacks Project, Tags 02KH, 08HY, and 0A1D.
 -/
 
@@ -33,7 +33,7 @@ namespace AlgebraicGeometry
 /-- The module base-change composite factors through ordinary pullback of the
 explicit Čech model, via a left-derived counit. No relative flatness is assumed
 and no invertibility of that counit or of the composite is asserted.
-Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--5;
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, Steps 2--5;
 Stacks Project, Tags 02KH and 08HY.
 (blueprint: lem-pc-affine-alternating-cech-base-change-factorization).
 

@@ -58,7 +58,54 @@ private theorem evaluationSection_zsmul
   unfold coefficientEvaluationSection
   apply ab_eqToHom_zsmul
 
-set_option maxHeartbeats 800000 in
+private theorem signedTotal_generator
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{u + 1}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
+    (R : Sheaf J CommRingCat.{u + 1})
+    (P Q : CochainComplex (SheafOfModules.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) ℤ)
+    (p q k : ℤ) (h : p + q = k) (U : Cᵒᵖ)
+    (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U) :
+    ((pullbackTensorSignedTotal J R P Q).hom.f k).val.app U
+        (coefficientTensorGenerator.{u, u + 1, u} J R P Q p q k h U x y) =
+      (p * q).negOnePow • coefficientTensorGenerator.{u, u + 1, u} J R Q P q p k
+        ((add_comm q p).trans h) U y x :=
+  (pullbackTensorSignedTotal_existsUnique J R P Q).exists.choose_spec p q k h U x y
+
+private theorem evaluation_signed_section
+    (n : ℕ) (P Q : CochainComplex (coefficientSequenceModules l E X) ℤ)
+    (p q k : ℤ) (hpq : p + q = k) (U : X.ProEtᵒᵖ)
+    (x : (P.X p).val.obj (op (n, U.unop)))
+    (y : (Q.X q).val.obj (op (n, U.unop))) :
+    ((coefficientEvaluationTensorIso l E X n Q P).hom.f k).val.app U
+        (coefficientEvaluationSection l E X _ n U
+          (((pullbackTensorSignedTotal (coefficientSequenceTopology (ProEt.topology X))
+            (coefficientSequenceCommRingSheaf l E X) P Q).hom.f k).val.app
+              (op (n, U.unop))
+                (coefficientTensorGenerator.{u, u + 1, u}
+                  (coefficientSequenceTopology (ProEt.topology X))
+                  (coefficientSequenceCommRingSheaf l E X) P Q p q k hpq
+                  (op (n, U.unop)) x y))) =
+      ((pullbackTensorSignedTotal (ProEt.topology X)
+        (integralCoefficientCommRingSheaf l E X n)
+        (((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj P)
+        (((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj Q)).hom.f
+          k).val.app U
+            (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)
+              (integralCoefficientCommRingSheaf l E X n)
+              (((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj P)
+              (((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj Q)
+              p q k hpq U (coefficientEvaluationSection l E X (P.X p) n U x)
+                (coefficientEvaluationSection l E X (Q.X q) n U y)) := by
+  rw [signedTotal_generator]
+  simp only [Units.smul_def]
+  rw [evaluationSection_zsmul]
+  erw [map_zsmul]
+  erw [pullbackTensorEvaluationTensor_generator_cast]
+  simpa only [Units.smul_def] using (signedTotal_generator (ProEt.topology X)
+    (integralCoefficientCommRingSheaf l E X n) _ _ p q k hpq U _ _).symm
+
 -- Keep coefficient-site transport abstract during the pure-section calculation.
 private theorem evaluation_signed
     (n : ℕ) (P Q : CochainComplex (coefficientSequenceModules l E X) ℤ) :
@@ -90,22 +137,7 @@ private theorem evaluation_signed
           (coefficientSequenceCommRingSheaf l E X) P Q).hom.f k)).val.app U
         ((e.inv.f k).val.app U _)) = _
   erw [hi, evaluationSection_map]
-  have hb := (pullbackTensorSignedTotal_existsUnique
-    (coefficientSequenceTopology (ProEt.topology X))
-    (coefficientSequenceCommRingSheaf l E X) P Q).exists.choose_spec p q k hpq
-      (op (n, U.unop)) x0 y0
-  change ((pullbackTensorSignedTotal (coefficientSequenceTopology (ProEt.topology X))
-    (coefficientSequenceCommRingSheaf l E X) P Q).hom.f k).val.app (op (n, U.unop))
-      _ = _ at hb
-  rw [hb]
-  simp only [Units.smul_def]
-  rw [evaluationSection_zsmul]
-  erw [map_zsmul]
-  erw [pullbackTensorEvaluationTensor_generator_cast]
-  unfold pullbackTensorSignedTotal
-  simpa only [Units.smul_def] using ((pullbackTensorSignedTotal_existsUnique (ProEt.topology X)
-    (integralCoefficientCommRingSheaf l E X n) _ _).exists.choose_spec
-      p q k hpq U _ _).symm
+  exact evaluation_signed_section l E X n P Q p q k hpq U x0 y0
 
 private theorem signed_natural
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -164,7 +196,20 @@ private theorem restrictedLevel_natural
         ((coefficientSequenceEvaluation l E X n).map (b.f k))
   exact (eqToIso (coefficientSequenceRestriction_evaluation l E X n)).hom.naturality (b.f k)
 
-set_option maxHeartbeats 800000 in
+private theorem tensorTowerLevel_def
+    (P Q : CochainComplex (integralTowerModules l E X) ℤ) (n : ℕ) :
+    pullbackTensorTensorTowerLevel l E X P Q n =
+      pullbackTensorRestrictedLevel l E X _ n ≪≫
+      ((scalarReductionRestriction l E X n).mapHomologicalComplex (.up ℤ)).mapIso
+        (coefficientEvaluationTensorIso l E X n _ _) ≪≫
+      ((scalarReductionRestriction l E X n).mapHomologicalComplex (.up ℤ)).mapIso
+        ((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology X)
+          (integralCoefficientCommRingSheaf l E X n)).mapIso
+            (Iso.prod ((pullbackTensorReductionEvaluationComplex l E X n).app P).symm
+              ((pullbackTensorReductionEvaluationComplex l E X n).app Q).symm)) := by
+  unfold pullbackTensorTensorTowerLevel
+  rfl
+
 -- Assemble the three finite comparison squares without unfolding their choices.
 /-- Coherent signed total interchange commutes with the prescribed strict tower comparison.
 Source: Stacks 07A4 and 0941
@@ -219,7 +264,8 @@ theorem coefficientTensorTower_signed_square
         (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).map b)).app
           (op n) ≫ (pullbackTensorTensorTowerLevel l E X Q P n).hom =
       (pullbackTensorTensorTowerLevel l E X P Q n).hom ≫ S.map d := by
-    unfold pullbackTensorTensorTowerLevel
+    -- Keep the chosen comparisons folded during kernel checking.
+    rw [tensorTowerLevel_def, tensorTowerLevel_def]
     dsimp only [Iso.trans_hom, Functor.mapIso_hom]
     change _ ≫ (pullbackTensorRestrictedLevel l E X (B.obj (G.obj Q, G.obj P)) n).hom ≫
       S.map (coefficientEvaluationTensorIso l E X n (G.obj Q) (G.obj P)).hom ≫

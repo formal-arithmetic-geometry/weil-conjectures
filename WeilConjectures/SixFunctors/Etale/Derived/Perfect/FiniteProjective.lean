@@ -14,7 +14,7 @@ A sheaf `P` of `Λ`-modules on the small étale site of `X` is a *finite project
 `Λ_X`-module* if, étale locally on `X`, it is a direct summand of a finite free module
 `Λ_U^{⊕m}` (`AlgebraicGeometry.Etale.IsFiniteProjectiveSheaf`). Placed in degree `0` it is
 perfect on the coefficient site, hence dualizable in `D(X_ét, Λ)`. Consequently (blueprint
-`lem-pod-finite-projective-tensor-hom`) the canonical map `P^∨ ⊗ᴸ N ⟶ RHom(P, N)` is an
+`theorem-poincare-duality--5`) the canonical map `P^∨ ⊗ᴸ N ⟶ RHom(P, N)` is an
 isomorphism for every `N`
 (`AlgebraicGeometry.Etale.DerivedCategory.isIso_coefficientDualTensorToDerivedHom`) and the
 biduality map `P ⟶ P^∨∨` is an isomorphism

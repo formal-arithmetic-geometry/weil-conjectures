@@ -36,7 +36,7 @@ open scoped TensorProduct
 private theorem section_smul (T : Scheme.{u}) [IsCommMonObj (abRing l T)]
     (M : ProEtale.AdicSheaf l T) (W : T.ProEtᵒᵖ)
     (r : (ringSheaf l T).obj.obj W) (m : ((sections l T).obj M).val.obj W) :
-    ((ModuleCat.smul (((sections l T).obj M).val.obj W) r).hom) m =
+    ((ModuleCat.smul (((sections l T).obj M).val.obj W) r).asHom.hom) m =
       ProEtale.AdicSheaf.sectionAct M r m := by
   let F := ProEtale.weilCoefficientsForgetAb l T
   let I := sheafToPresheaf (ProEt.topology T) Ab.{u + 1}
@@ -97,14 +97,14 @@ theorem native_direct_image_sections [N : NativeRings.{u} l]
     proEtaleRingModuleDirectImage g (ringSheaf l V) (ringSheaf l U) (N.pull g)
   have h (M : ProEtale.AdicSheaf l U) (W : V.ProEtᵒᵖ)
       (r : (ringSheaf l V).obj.obj W) (m : (L.obj M).val.obj W) :
-      ((ModuleCat.smul ((L.obj M).val.obj W) r).hom) m =
-        ((ModuleCat.smul ((R.obj M).val.obj W) r).hom) m := by
+      ((ModuleCat.smul ((L.obj M).val.obj W) r).asHom.hom) m =
+        ((ModuleCat.smul ((R.obj M).val.obj W) r).asHom.hom) m := by
     erw [section_smul l V ((ProEtale.adicLowerStar l g).obj M) W r m,
       lower_sectionAct]
     let s := (proEtaleRingDirectImageMap g (ringSheaf l V) (ringSheaf l U)
       (N.pull g)).hom.app W r
     change _ = ((ModuleCat.smul
-      (((sections l U).obj M).val.obj ((proEtaleBaseChange g).op.obj W)) s).hom) m
+      (((sections l U).obj M).val.obj ((proEtaleBaseChange g).op.obj W)) s).asHom.hom) m
     erw [section_smul]
     congr 1
     apply ULift.ext

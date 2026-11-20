@@ -14,7 +14,7 @@ Let `Λ`, `Λ'` be fields with an ultrametric norm which are `ℚ_ℓ`-algebras,
 finite-dimensional over `ℚ_ℓ`, and let `e : Λ → Λ'` be a continuous `ℚ_ℓ`-algebra map; the case
 of interest is an inclusion `E ⊆ E'` of finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`, the transition
 functors of the `2`-colimit `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` of blueprint
-`def-weil-weil-sheaf-complex`. This file constructs the extension of scalars
+`definition-weil-structure`. This file constructs the extension of scalars
 
 `Λ' ⊗_Λ - : Sh(X_proét, Λ_X) ⥤ Sh(X_proét, Λ'_X)`
 
@@ -86,7 +86,6 @@ noncomputable def fieldConstantSheafToRestrictScalarsField :
       (fieldFunctionsToFieldFunctions he U.unop.left)
      naturality _ _ _ := rfl }⟩
 
-set_option maxHeartbeats 400000 in
 -- the pointwise computation goes through `erw` in tensor products of `ModuleCat` objects
 /-- Composing functions with `e` is a morphism of sheaves of rings: on sections, both
 multiplications are pointwise. -/

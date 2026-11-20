@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
 /-! Uniqueness of the normalized derived scalar/pullback comparison.
 
-Source: Stacks 07A4, 0G7E and 07A7 (blueprint: lem-pur-etale-scalar-pullback-uniqueness).
+## References
+
+* Stacks 07A4, 0G7E and 07A7
 -/
 
 @[expose] public noncomputable section
@@ -140,20 +142,7 @@ private theorem scalarRepresentative_isIso
     (L := scalarExtension φ X)
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)) P hP
 
-/-- Two normalized scalar/pullback isomorphisms coincide.
-Source: Stacks 07A4, 0G7E and 07A7
-(blueprint: lem-pur-etale-scalar-pullback-uniqueness).
-Proof: choose the reduced functorial flat resolution of an arbitrary cochain
-complex. The resolution is K-flat; inverse image preserves flat objects and
-colimits, so its inverse image is K-flat too. Ordinary scalar extension preserves
-quasi-isomorphisms between K-flat complexes, as exact faithful restriction
-identifies it with tensoring by the coefficient sheaf. Uniqueness of left adjoints
-identifies the specified scalar representative with the derived counit, which is
-invertible on a K-flat input. The geometric representative is invertible because
-inverse image is exact. Cancel these maps in the two normalization equations on
-the resolution. Naturality and cancellation along its quasi-isomorphism identify
-the components on every complex. Localization extensionality and Iso.ext finish.
--/
+/-- Two normalized scalar/pullback isomorphisms coincide. -/
 theorem scalarPullbackIso_unique
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W)

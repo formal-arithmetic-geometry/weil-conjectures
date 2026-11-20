@@ -24,14 +24,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 -- Expanding the concrete scalar-extension square needs additional type reduction.
-/-- Coefficient and basis successor squares imply the successor square for evaluation.
-Source: blueprint Compatible isomorphisms, successor entrywise reduction.
-(blueprint: lem-pe-internal-perfect-successor-compatibility).
-Proof: map the finite matrix through scalar extension. Its biproduct comparison is
-entrywise functorial; the coefficient square replaces every entry by its residue.
-The basis square cancels the two balancing maps around this matrix. Finally the
-actual quotient transition reduces each quotient coordinate, which gives precisely
-the matrix of the lower-level evaluation. Cochain extensionality concludes. -/
+/-- Coefficient and basis successor squares imply the successor square for evaluation. -/
 theorem evaluation_successor_of_squares (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -39,10 +32,10 @@ theorem evaluation_successor_of_squares (W : Scheme.{u})
     (hcoeff : ∀ z : LocallyConstant (ConnectedComponents W)
       (Padic.coefficientExtensionRing l E (n + 2)),
       let Φ := Mod.extendScalars (AdicCompletion.transition l E W n)
-      Φ.map (coefficientEndEquiv l E W (n + 1) z) ≫
+      Φ.map (coefficientEndEquiv l E W (n + 1) z).asHom ≫
           (Mod.regularExtensionIso (AdicCompletion.transition l E W n)).hom =
         (Mod.regularExtensionIso (AdicCompletion.transition l E W n)).hom ≫
-          coefficientEndEquiv l E W n (z.map (scalarStep l E n)))
+          (coefficientEndEquiv l E W n (z.map (scalarStep l E n))).asHom)
     (hbasis : ∀ i : ℤ,
       let Φ := Mod.extendScalars (AdicCompletion.transition l E W n)
       let r := Module.finrank (A l E) (P.X i)
@@ -80,10 +73,10 @@ theorem evaluation_successor_of_squares (W : Scheme.{u})
     rw [hbasis i, Category.assoc, Iso.hom_inv_id, Category.comp_id]
   have hm (i j : ℤ) (z : Fin (r i) → Fin (r j) →
       LocallyConstant (ConnectedComponents W) (Padic.coefficientExtensionRing l E (n + 2))) :
-      Φ.map (biproduct.matrix (fun s t ↦ coefficientEndEquiv l E W (n + 1) (z s t))) ≫
+      Φ.map (biproduct.matrix (fun s t ↦ (coefficientEndEquiv l E W (n + 1) (z s t)).asHom)) ≫
           (B j).hom =
         (B i).hom ≫ biproduct.matrix (fun s t ↦
-          coefficientEndEquiv l E W n ((z s t).map (scalarStep l E n))) := by
+          (coefficientEndEquiv l E W n ((z s t).map (scalarStep l E n))).asHom) := by
     dsimp only [B, Iso.trans_hom, biproduct.mapIso_hom]
     rw [← Category.assoc, Functor.mapBiproduct_matrix, Category.assoc, Category.assoc]
     congr 1
@@ -117,7 +110,7 @@ theorem evaluation_successor_of_squares (W : Scheme.{u})
   congr 2
   congr 1
   funext s t
-  congr 1
+  apply congrArg (fun v ↦ (coefficientEndEquiv l E W n v).asHom)
   apply LocallyConstant.ext
   intro x
   let w : LocallyConstant (ConnectedComponents W)

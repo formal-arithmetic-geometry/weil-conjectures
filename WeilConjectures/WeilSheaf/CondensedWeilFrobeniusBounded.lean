@@ -49,26 +49,28 @@ theorem boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff
     boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
       ((CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).mapDerivedCategory.obj M) ↔
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).mapDerivedCategory.obj
+          M) ↔
       boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) M := by
   set E := adicSheafDerivedEquivCondensedMod l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
   haveI : (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).IsEquivalence :=
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).IsEquivalence :=
     (CondensedRing.lowerStarEquivalenceOfIso (Profinite.padicAlgClRingObj l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).isEquivalence_functor
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm).isEquivalence_functor
   haveI : PreservesFiniteColimits (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv) :=
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv) :=
     inferInstance
   let c := Functor.mapDerivedCategoryCompIsoOfIso
     (ProEtaleWeilSheaf.condensedFrobeniusComparison k₀ l X)
   let K := E.inverse.obj M
   have eM : E.functor.obj K ≅ M := E.counitIso.app M
   have e1 : (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).mapDerivedCategory.obj M ≅
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).mapDerivedCategory.obj
+        M ≅
       E.functor.obj ((WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory.obj K) :=
     (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).mapDerivedCategory.mapIso
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).mapDerivedCategory.mapIso
         eM.symm ≪≫ c.app K
   have hA : ∀ K' : _root_.DerivedCategory
       (AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber),

@@ -164,8 +164,9 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   [HasCompactification f'] [QuasiCompact f'] [HasInvertibleExponent Λ X]
   [HasInvertibleExponent Λ X'] {k k' : Type u} [Field k] [Field k']
 
-/-- Blueprint `proposition-compatibility-purity-base-change` (formerly `sk-prop-sp-purity-bc`,
-`chap-Smooth-purity`): compatibility of purity with base change.
+/-- Blueprint `proposition-compatibility-purity-base-change` (formerly
+`proposition-compatibility-purity-base-change`, `chap-Smooth-purity`): compatibility of purity with
+base change.
 
 For a cartesian square `g' ≫ f = f' ≫ g` with `f` and `f'` smooth separated of relative
 dimension `d` and `K ∈ D(Y_ét, Λ)`, identify the sources of the canonical purity maps by

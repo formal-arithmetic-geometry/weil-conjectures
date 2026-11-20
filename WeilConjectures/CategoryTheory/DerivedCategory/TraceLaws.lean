@@ -12,9 +12,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 /-!
 # Formal laws of the trace on perfect complexes
 
-This file proves two of the formal laws of blueprint `prop-trf-trace-formal-laws`
-(subsection `sk-p-trace`) for the categorical trace in the derived category `D(R)`, with the
-Koszul braiding `DerivedCategory.braidedCategory'` of the derived tensor product.
+This file proves two of the formal laws of blueprint `proposition-properties-trace`
+(subsection `proposition-properties-trace`) for the categorical trace in the derived category
+`D(R)`, with the Koszul braiding `DerivedCategory.braidedCategory'` of the derived tensor product.
 
 ## Main results
 
@@ -51,7 +51,7 @@ section Additivity
 variable {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]
   [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]
 
-/-- Blueprint `prop-trf-trace-formal-laws`, item (2) (filtered additivity), for a triangle coming
+/-- Blueprint `proposition-properties-trace`, item (2) (filtered additivity), for a triangle coming
 from a short exact sequence: let `0 → P' → P → P'' → 0` be a short exact sequence `S` of bounded
 complexes of `R`-modules with `P'` and `P''` (hence also `P`) degreewise finitely generated and
 free, and let `φ = (v', v, v'')` be an endomorphism of `S`. Then the categorical traces in `D(R)`
@@ -89,8 +89,9 @@ theorem trace_eq_trace_add_trace_of_shortExact
   rw [trace_eq_algebraMap_sum_negOnePow_linearMapTrace S.X₁ φ.τ₁ s hs₁ hfree₁ hfin₁ K₁ w₁ e₁ hw₁,
     trace_eq_algebraMap_sum_negOnePow_linearMapTrace S.X₂ φ.τ₂ s hs hfree₂ hfin₂ K₂ w₂ e₂ hw₂,
     trace_eq_algebraMap_sum_negOnePow_linearMapTrace S.X₃ φ.τ₃ s hs₃ hfree₃ hfin₃ K₃ w₃ e₃ hw₃]
-  refine (congrArg (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))) ?_).trans
-    (map_add _ _ _)
+  refine congrArg End.asHom
+    ((congrArg (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))) ?_).trans
+      (map_add _ _ _))
   rw [← Finset.sum_add_distrib]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rw [← smul_add]
@@ -104,7 +105,7 @@ section Field
 variable {Λ : Type u} [Field Λ] [HasDerivedCategory.{u} (ModuleCat.{u} Λ)]
   [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} Λ)]
 
-/-- Blueprint `prop-trf-trace-formal-laws`, item (4) (supertrace over a field): for a field `Λ`,
+/-- Blueprint `proposition-properties-trace`, item (4) (supertrace over a field): for a field `Λ`,
 a bounded complex `P` of finite dimensional `Λ`-vector spaces and a chain endomorphism `v` of `P`,
 the categorical trace of `v` on the object of `D(Λ)` represented by `P` is the alternating sum of
 the traces of the maps induced by `v` on homology:
@@ -117,9 +118,9 @@ theorem trace_eq_algebraMap_sum_negOnePow_trace_homologyMap
     (e : K ≅ Q.obj P) (hw : w ≫ e.hom = e.hom ≫ Q.map v) :
     letI := braidedCategory' (ModuleCat.{u} Λ)
     MonoidalCategory.trace w =
-      algebraMap Λ (End (𝟙_ (DerivedCategory (ModuleCat.{u} Λ))))
+      (algebraMap Λ (End (𝟙_ (DerivedCategory (ModuleCat.{u} Λ))))
         (∑ i ∈ s, (i.negOnePow : ℤ) •
-          LinearMap.trace Λ (P.homology i) (HomologicalComplex.homologyMap v i).hom) := by
+          LinearMap.trace Λ (P.homology i) (HomologicalComplex.homologyMap v i).hom)).asHom := by
   rw [trace_eq_algebraMap_sum_negOnePow_linearMapTrace P v s hs (fun _ ↦ inferInstance) hfin K w e
     hw, CochainComplex.sum_negOnePow_smul_trace_f_eq_sum_negOnePow_smul_trace_homologyMap P v s hs
     hfin]

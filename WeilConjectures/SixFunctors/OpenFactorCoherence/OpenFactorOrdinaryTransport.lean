@@ -238,8 +238,8 @@ private def restrictionToSlice (o : IntegralOpenReduction.Operations l E j) :
 
 set_option linter.unusedVariables false in
 /-- The normalized slice operations and the published ordinary open operations agree.
-Source: Stacks 03DI, 03DJ, 098K, 0941; blueprint sk-prop-sf-pf-coherence, open factor.
-(blueprint: lem-sf-open-factor-ordinary-transport).
+Source: Stacks 03DI, 03DJ, 098K, 0941; blueprint proposition-composition-base-change-rf-shriek--1,
+open factor. (blueprint: lem-sf-open-factor-ordinary-transport).
 
 Proof: the finite coefficient maps in o are determined by their constant-section
 formulas: sheafification of the constant presheaf is left adjoint to inclusion.

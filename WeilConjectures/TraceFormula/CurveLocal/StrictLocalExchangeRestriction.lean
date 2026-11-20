@@ -57,7 +57,7 @@ lemma exchangeRestriction_naturality (sq : IsPullback ι d c Δ)
         (R(d)^![Λ]).map ((L((Δ)^*[ModuleCat.{u + 1} Λ])).map f) =
       (L((ι)^*[ModuleCat.{u + 1} Λ])).map ((R(c)^![Λ]).map f) ≫
         exchangeRestriction Λ sq P' :=
-  ((mateEquiv _ _ (TwoSquare.mk _ _ _ _ (lowerShriekBaseChangeIso Λ sq).inv)).natTrans.naturality
+  ((mateEquiv _ _ (TwoSquare.mk _ _ _ _ (lowerShriekBaseChangeIso Λ sq).inv)).naturality
     f).symm
 
 end Naturality

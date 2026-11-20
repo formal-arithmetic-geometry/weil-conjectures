@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Geometry.RingedSpace.Basic
 import Mathlib.Topology.Sheaves.Abelian
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Stalk functor for modules on a ringed space

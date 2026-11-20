@@ -176,7 +176,7 @@ noncomputable def descendedSmoothTrace :
 `Hom(K[n], ℚ̄_ℓ(d)[2d])` with `Hom(f̄_! K[n], ℚ̄_ℓ)` for every bounded constructible `K`.
 Equivalently, its transpose `ℚ̄_ℓ(d)[2d] ⟶ f̄^! ℚ̄_ℓ` is an isomorphism: this is the
 compatibility of `Rf^!` with the base change `k₀ ⟶ k̄` for the non-proper smooth `f`
-(blueprint `sk-prop-sp-purity-bc` across the field extension). -/
+(blueprint `proposition-compatibility-purity-base-change` across the field extension). -/
 def DescendedSmoothTraceUniversal : Prop :=
   ∀ (K : WeilComplex k₀ l X) (n : ℤ), Function.Bijective
     fun φ : (shiftFunctor _ n).obj (forget.obj K) ⟶

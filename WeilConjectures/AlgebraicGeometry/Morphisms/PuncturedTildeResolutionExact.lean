@@ -14,6 +14,14 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.TildePreservesFiniteLimits
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
+/-! # Exactness of restricted associated sheaves of a resolution
+
+## References
+
+* Stacks Project, Tag 01I6 (associated sheaf) and Tag 09T2
+* Stacks Project, Tag 0A6T (proof of Lemma 51.2.1)
+-/
+
 @[expose] public noncomputable section
 
 universe u
@@ -22,9 +30,7 @@ set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Associate a module sheaf, restrict it to W, and forget its scalar action.
-Source: Stacks Project, Tag 01I6 (associated sheaf) and Tag 09T2.
-(blueprint: new-punctured-restricted-abelian-functor). -/
+/-- Associate a module sheaf, restrict it to `W`, and forget its scalar action. -/
 def puncturedRestrictedAbelianFunctor (R : Type u) [CommRing R]
     (W : (Spec (.of R)).Opens) :
     ModuleCat.{u} R ⥤
@@ -33,9 +39,7 @@ def puncturedRestrictedAbelianFunctor (R : Type u) [CommRing R]
   tilde.functor (.of R) ⋙ Modules.restrictFunctor W.ι ⋙
     SheafOfModules.toSheaf W.toScheme.ringCatSheaf
 
-/-- The restricted associated-sheaf functor sends zero maps to zero.
-Source: the componentwise restriction and forgetful maps, and tilde.map_zero.
-(blueprint: new-punctured-restricted-abelian-functor). -/
+/-- The restricted associated-sheaf functor sends zero maps to zero. -/
 instance puncturedRestrictedAbelianFunctor_preservesZeroMorphisms
     (R : Type u) [CommRing R] (W : (Spec (.of R)).Opens) :
     (puncturedRestrictedAbelianFunctor R W).PreservesZeroMorphisms where
@@ -47,21 +51,7 @@ instance puncturedRestrictedAbelianFunctor_preservesZeroMorphisms
     rfl
 
 /-- Restricting the associated sheaves of a module resolution gives an exact
-augmented abelian-sheaf complex on W.
-Source: Stacks Project, Tags 01I6 and 0A6T, proof of Lemma 51.2.1.
-(blueprint: new-punctured-tilde-resolution-exact).
-
-Proof: The resolution augmentation R -> I^0 has kernel zero, cokernel the
-image of I^0 -> I^1, and the complex is exact in positive degrees. On a basic
-open D(f), association to a sheaf is localization at f. Localization is exact,
-so association preserves these assertions on a basis, hence on stalks.
-Restriction to W leaves the stalks unchanged and forgetting scalars is exact.
-The associated sheaf of R is the structure module, and restricting it is the
-structure module of W. Compose these canonical identifications with the
-associated augmentation to obtain the asserted chain map. Its homology in
-degree zero is the identity on the underlying structure sheaf, and in positive
-degrees both source and target homology vanish. Thus it is a quasi-isomorphism.
-For empty W all sheaves involved are zero; the same augmentation works. -/
+augmented abelian-sheaf complex on `W`. -/
 theorem punctured_tilde_resolution_exact
     (R : Type u) [CommRing R] (W : (Spec (.of R)).Opens)
     (I : InjectiveResolution (ModuleCat.of R R : ModuleCat.{u} R)) :

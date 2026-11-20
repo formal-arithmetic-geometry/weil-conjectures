@@ -69,7 +69,7 @@ theorem etaleBrownImageRealization_inverse_exists
       (mateEquiv B.adjunction
         (Etale.upperStarLowerStarAdjunction
           (ModuleCat (strictEtaleBrownRing O t n)) g).mapDerivedCategoryRightDerivedAdjunction
-        (.mk _ _ _ _ inverse.hom)).natTrans = right.hom := by
+        (.mk _ _ _ _ inverse.hom)) = right.hom := by
   classical
   have _ := hright
   have : (RV.derived n).IsEquivalence := RV.val.equivalence n
@@ -78,10 +78,10 @@ theorem etaleBrownImageRealization_inverse_exists
     (Etale.upperStarLowerStarAdjunction
       (ModuleCat (strictEtaleBrownRing O t n)) g).mapDerivedCategoryRightDerivedAdjunction
   let α := ((mateEquiv B.adjunction adj₂).symm
-    (.mk _ _ _ _ right.hom)).natTrans
+    (.mk _ _ _ _ right.hom))
   have : IsIso α := isIso_inverseMate_of_equivalences B.adjunction adj₂ right
   refine ⟨asIso α, ?_⟩
-  exact congrArg TwoSquare.natTrans
+  exact
     ((mateEquiv B.adjunction adj₂).apply_symm_apply (.mk _ _ _ _ right.hom))
 
 end AlgebraicGeometry

@@ -204,9 +204,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 
 /-! # Base change of the projective-line evaluation recipe
-
-Source: the current blueprint, thm-amb-p1-decomposition.proof.md
-(blueprint: lem-asd-ordinary-finite-p1-evaluation-recipe-base-change).
 -/
 
 @[expose] public noncomputable section
@@ -404,20 +401,7 @@ private theorem recipe_pasting_point
     simp only [Functor.map_comp, NatTrans.comp_app, Category.assoc]
   rw [h₁', h₂', h]
 
-/-- Pullback preserves the evaluation recipe defining the negative-twist component.
-Source: the defining adjoint of h and its base-change paragraph in the current blueprint,
-thm-amb-p1-decomposition.proof.md
-(blueprint: lem-asd-ordinary-finite-p1-evaluation-recipe-base-change).
-
-Proof: composition of the normalized signed sheaf transport gives its square for
-any commutative square of schemes. Lift this identity through the canonical single
-embedding and shift comparisons. Apply inverse image to the evaluation recipe.
-Tensor naturality, preservation of evaluation and the inverse right unit, and the
-assumed Chern-map square identify it with the recipe on the new scheme, precomposed
-by the derived square comparison. Naturality of the inverse right unit and the
-negative-twist square move this precomposition through the recipe. This gives the
-displayed equality before applying any adjunction. No exchange invertibility or
-Cartesian hypothesis is required, and zero coefficients and empty schemes are allowed. -/
+/-- Pullback preserves the evaluation recipe defining the negative-twist component. -/
 theorem ordinaryFiniteP1_evaluationRecipe_baseChange
     (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)

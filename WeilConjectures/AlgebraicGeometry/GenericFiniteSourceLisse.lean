@@ -57,7 +57,7 @@ point, so its complement U is dense, and the restriction of E to g⁻¹(U) is li
 If there are no dominating components, g⁻¹(U) is empty; its unique underlying
 abelian sheaf is lisse (the geometric-stalk condition is vacuous).
 Transport back through reduction, which is an equivalence of etale sites.
-4. The comparison in `lem-weil-pbc-etale-inverse-image-algebraic-structures`
+4. The comparison in `situation-conventions`
 identifies set pullback of the underlying sheaf with the underlying sheaf of
 abelian pullback. Transport the trivializing cover and finite stalks through
 this isomorphism to obtain exactly the displayed underlying abelian restriction. -/

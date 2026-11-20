@@ -137,20 +137,21 @@ lemma upperStar_obj_obj_str :
 private lemma frobeniusStr_upperStar_aux :
     ((upperStar φ).obj F).frobeniusStr =
       (ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).hom.app
           ((upperStar φ).obj F).obj.carrier.X ≫
       (ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.app
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).inv.app
           ((Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))^*ᵃ[l].obj
             F.obj.carrier).X ≫
-      (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+      (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
           (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))).inv.app
           F.obj.carrier.X ≫
         (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app F.obj.carrier.X ≫
         (ProEtale.upperStarComp _
           (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app F.obj.carrier.X ≫
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.app
+            F.obj.carrier.X ≫
         (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))^*[_].map
           F.frobeniusStr := by
   rw [frobeniusStr, upperStar_obj_obj_str, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
@@ -180,14 +181,15 @@ of the Weil structure of `F`, through `Fr_X^* φ̄^* ≅ (Fr_X ≫ φ̄)^* = (φ
 -/
 lemma frobeniusStr_upperStar :
     ((upperStar φ).obj F).frobeniusStr =
-      (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+      (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
           (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))).inv.app
           F.obj.carrier.X ≫
         (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app F.obj.carrier.X ≫
         (ProEtale.upperStarComp _
           (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app F.obj.carrier.X ≫
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.app
+            F.obj.carrier.X ≫
         (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))^*[_].map
           F.frobeniusStr :=
   (frobeniusStr_upperStar_aux φ F).trans (hom_inv_id_app_upperStar_assoc φ F _ _)
@@ -223,51 +225,59 @@ variable {φ G θ}
 /-- The maps of stalks induced by a compatible `θ` intertwine the transports along the first
 iterates of the Weil structures. -/
 lemma globalSectionsTransport_frobeniusPowStr_one_comp_stalkObjHomOfUpperStar
-    (hθ : (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+    (hθ : (ProEtale.upperStarComp _
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
       (φ̄)).hom.app F.obj.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map θ ≫ G.frobeniusStr =
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map θ ≫
+          G.frobeniusStr =
       (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app F.obj.carrier.X ≫
         (ProEtale.upperStarComp _ (φ̄)
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app F.obj.carrier.X ≫
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.app
+            F.obj.carrier.X ≫
         (φ̄)^*[_].map F.frobeniusStr ≫ θ)
     {t t' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     {τ : Spec (.of (AlgebraicClosure k₀)) ⟶ Spec (.of (AlgebraicClosure k₀))}
-    (hX : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).hom)
+    (hX : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).asIso.hom)
     (hY : τ ≫ (t ≫ φ̄) =
-      (t' ≫ φ̄) ≫ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).hom) :
+      (t' ≫ φ̄) ≫ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 1).asIso.hom) :
     ProEtale.globalSectionsTransport _ hY (F.frobeniusPowStr 1) ≫
         stalkObjHomOfUpperStar φ G θ t' =
       stalkObjHomOfUpperStar φ G θ t ≫ ProEtale.globalSectionsTransport _ hX
         (G.frobeniusPowStr 1) := by
-  have pX := congrArg Iso.hom (pow_one (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius)
-  have pY := congrArg Iso.hom (pow_one (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius)
+  have pX := congrArg (fun e ↦ e.asIso.hom)
+    (pow_one (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius)
+  have pY := congrArg (fun e ↦ e.asIso.hom)
+    (pow_one (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius)
   rw [ProEtale.globalSectionsTransport_congr _ hX pX _ _ (G.frobeniusPowStr_one pX),
     ProEtale.globalSectionsTransport_congr _ hY pY _ _ (F.frobeniusPowStr_one pY),
     stalkObjHomOfUpperStar, stalkObjHomOfUpperStar]
   exact ProEtale.globalSectionsTransport_comm_of_upperStar _ (φ̄)
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ
       (comp_over φ (Spec (CommRingCat.of k₀)))).symm F.frobeniusStr G.frobeniusStr θ hθ _ _
 
 /-- The maps of stalks induced by a `θ : φ̄^* F ⟶ G` compatible with the Weil structures
 intertwine the transports along the iterated Weil structures `φ_m`, `m ≥ 1`. -/
 lemma globalSectionsTransport_frobeniusPowStr_comp_stalkObjHomOfUpperStar
-    (hθ : (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+    (hθ : (ProEtale.upperStarComp _
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
       (φ̄)).hom.app F.obj.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map θ ≫ G.frobeniusStr =
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map θ ≫
+          G.frobeniusStr =
       (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app F.obj.carrier.X ≫
         (ProEtale.upperStarComp _ (φ̄)
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app F.obj.carrier.X ≫
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.app
+            F.obj.carrier.X ≫
         (φ̄)^*[_].map F.frobeniusStr ≫ θ)
     (m : ℕ) (hm : 1 ≤ m)
     {t t' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     {τ : Spec (.of (AlgebraicClosure k₀)) ⟶ Spec (.of (AlgebraicClosure k₀))}
-    (hX : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)
+    (hX : τ ≫ t = t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)
     (hY : τ ≫ (t ≫ φ̄) =
-      (t' ≫ φ̄) ≫ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom) :
+      (t' ≫ φ̄) ≫ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom) :
     ProEtale.globalSectionsTransport _ hY (F.frobeniusPowStr m) ≫
         stalkObjHomOfUpperStar φ G θ t' =
       stalkObjHomOfUpperStar φ G θ t ≫ ProEtale.globalSectionsTransport _ hX
@@ -280,14 +290,15 @@ lemma globalSectionsTransport_frobeniusPowStr_comp_stalkObjHomOfUpperStar
     set FX := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
     set FY := (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
     have e₁ := FX.pow_hom_comp_pow_hom m 1
-    have haX : (Iso.refl _).hom ≫ t = (t ≫ (FX ^ m).inv) ≫ (FX ^ m).hom := by simp
-    have hbX : τ ≫ (t ≫ (FX ^ m).inv) = t' ≫ (FX ^ 1).hom := by
-      rw [← cancel_mono (FX ^ m).hom, Category.assoc, Category.assoc, Iso.inv_hom_id,
+    have haX : (Iso.refl _).hom ≫ t = (t ≫ (FX ^ m).asIso.inv) ≫ (FX ^ m).asIso.hom := by simp
+    have hbX : τ ≫ (t ≫ (FX ^ m).asIso.inv) = t' ≫ (FX ^ 1).asIso.hom := by
+      rw [← cancel_mono (FX ^ m).asIso.hom, Category.assoc, Category.assoc, Iso.inv_hom_id,
         Category.comp_id, hX, Category.assoc, e₁]
-    have haY : (Iso.refl _).hom ≫ (t ≫ φ̄) = ((t ≫ (FX ^ m).inv) ≫ φ̄) ≫ (FY ^ m).hom := by
+    have haY : (Iso.refl _).hom ≫ (t ≫ φ̄) =
+        ((t ≫ (FX ^ m).asIso.inv) ≫ φ̄) ≫ (FY ^ m).asIso.hom := by
       rw [Category.assoc, pc]
       simp
-    have hbY : τ ≫ ((t ≫ (FX ^ m).inv) ≫ φ̄) = (t' ≫ φ̄) ≫ (FY ^ 1).hom := by
+    have hbY : τ ≫ ((t ≫ (FX ^ m).asIso.inv) ≫ φ̄) = (t' ≫ φ̄) ≫ (FY ^ 1).asIso.hom := by
       rw [Category.assoc t', pc, ← Category.assoc t', ← hbX]
       simp
     have hτ : τ ≫ (Iso.refl _).hom = τ := Category.comp_id τ
@@ -314,19 +325,22 @@ private lemma toModuleCat_map_comp_hom' {M N P : WeilCoefficients.{u} l} (f : M 
 /-- For `θ : φ̄^* F ≅ G` compatible with the Weil structures, the stalk of `F` at `t ≫ φ̄` and
 the stalk of `G` at `t`, with their Frobenius relative to `𝔽_{qᵐ}`, are isomorphic. -/
 lemma nonempty_equiv_stalkAt_of_upperStar [IsIso θ]
-    (hθ : (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+    (hθ : (ProEtale.upperStarComp _
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
       (φ̄)).hom.app F.obj.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map θ ≫ G.frobeniusStr =
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map θ ≫
+          G.frobeniusStr =
       (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app F.obj.carrier.X ≫
         (ProEtale.upperStarComp _ (φ̄)
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app F.obj.carrier.X ≫
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.app
+            F.obj.carrier.X ≫
         (φ̄)^*[_].map F.frobeniusStr ≫ θ)
     (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (m : ℕ)
-    (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ t)
-    (ht' : (t ≫ φ̄) ≫ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ (t ≫ φ̄)) :
+    (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ t)
+    (ht' : (t ≫ φ̄) ≫ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ (t ≫ φ̄)) :
     Nonempty ((F.stalkAt (t ≫ φ̄) m ht').Equiv (G.stalkAt t m ht)) := by
   refine ⟨.ofComp (WeilCoefficients.linearEquivOfIso (asIso (stalkObjHomOfUpperStar φ G θ t)))
     ?_⟩
@@ -346,14 +360,15 @@ section UpperStar
 
 lemma upperStarComp_hom_app_comp_frobeniusStr_upperStar :
     @CategoryStruct.comp _ _ _
-      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].obj
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].obj
         ((φ̄)^*[_].obj F.obj.carrier.X)) ((upperStar φ).obj F).obj.carrier.X
-      ((ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+      ((ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
         (φ̄)).hom.app F.obj.carrier.X) ((upperStar φ).obj F).frobeniusStr =
       (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app F.obj.carrier.X ≫
         (ProEtale.upperStarComp _ (φ̄)
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app F.obj.carrier.X ≫
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.app
+            F.obj.carrier.X ≫
         (φ̄)^*[_].map F.frobeniusStr :=
   (congrArg (_ ≫ ·) (frobeniusStr_upperStar φ F)).trans (Iso.hom_inv_id_app_assoc _ _ _)
 
@@ -376,15 +391,16 @@ private lemma comp_id_upperStar {W} (f : W ⟶ (φ̄)^*[WeilCoefficients.{u} l].
 /-- The identity `φ̄^* F ⟶ φ^* F` of the underlying sheaves is compatible with the Weil
 structures. -/
 lemma upperStar_frobeniusStr_compatible :
-    (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+    (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
       (φ̄)).hom.app F.obj.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map
           (𝟙 _ : (φ̄)^*[_].obj F.obj.carrier.X ⟶ ((upperStar φ).obj F).obj.carrier.X) ≫
         ((upperStar φ).obj F).frobeniusStr =
       (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app F.obj.carrier.X ≫
         (ProEtale.upperStarComp _ (φ̄)
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app F.obj.carrier.X ≫
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.app
+            F.obj.carrier.X ≫
         (φ̄)^*[_].map F.frobeniusStr ≫
           (𝟙 _ : (φ̄)^*[_].obj F.obj.carrier.X ⟶ ((upperStar φ).obj F).obj.carrier.X) :=
   ((congrArg (_ ≫ ·) (map_id_comp_upperStar φ F _)).trans
@@ -406,7 +422,7 @@ at a closed point `z` of `X` over `x = φ z`, with `r = [κ(z) : κ(x)]`, the lo
 The blueprint states this for the inclusion `X_y ⟶ X` of the fibre of a morphism `X ⟶ Y` over a
 closed point `y`, with purity on `X_y` relative to `κ(y)`; since residue cardinalities do not
 depend on the base field, purity relative to `κ(y)` and relative to `k₀` agree
-(blueprint: `lem-tw-punctual-rescaling`). -/
+(blueprint: `proposition-weights-under-usual-operations--7`). -/
 theorem IsPunctuallyPureOfWeight.upperStar {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l Y}
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] :
@@ -425,8 +441,8 @@ theorem IsPunctuallyPureOfWeight.upperStar {ι : PadicAlgCl l →+* ℂ} {F : We
     (X ↘ Spec (CommRingCat.of k₀)) z
   have ht' : (s ≫ Scheme.Hom.geometricFiberMap φ hφ) ≫
       ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom =
-      (specGeometricFrobenius k₀ ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom ≫
+        (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).asIso.hom ≫
         (s ≫ Scheme.Hom.geometricFiberMap φ hφ) := by
     rw [Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow,
       ← Category.assoc, ht, Category.assoc]

@@ -87,7 +87,6 @@ private theorem normalized_three_squares_heq {C : Type*} [Category C]
     _ = bi ≫ qi ≫ (v ≫ dEcanonical) := by simp only [Category.assoc]
     _ = _ := by rw [hd]; simp only [Category.assoc]
 
-set_option maxHeartbeats 400000 in
 -- The three square interfaces use several equivalent coefficient presentations.
 /-- The three boundary transition squares paste on their prescribed factors.
 Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.

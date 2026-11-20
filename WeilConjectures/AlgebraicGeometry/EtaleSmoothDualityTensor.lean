@@ -17,13 +17,13 @@ import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineSpace
 # Smooth duality from the étale and affine-line cases
 
 `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor_of_finite` has the statement of
-`thm-asd-smooth-tensor`. It applies the tip's reduction
+`proposition-exceptional-inverse-image-smooth-morphism`. It applies the tip's reduction
 `exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine` to two lemmas: the étale case
 (the unit/tensor comparison for an étale map over an arbitrary base) and the affine-line case
 (the canonical duality on the compactified affine line). This module does not import
 `WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality`, so that the smooth generic direct
-image (`lem-asd-smooth-generic-direct-image`), which uses smooth duality, has no import path back
-to `Finiteness/Deligne.lean`.
+image (`lemma-smooth-morphisms-locally-constant-sheaves`), which uses smooth duality, has no import
+path back to `Finiteness/Deligne.lean`.
 -/
 
 @[expose] public section
@@ -169,10 +169,11 @@ private lemma affineLineSmoothDuality : AffineLineSmoothDuality Λ := by
 
 include d in
 /-- Smooth cohomological duality without a chosen orientation (the statement of blueprint
-`thm-asd-smooth-tensor`, `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`), proved
-from `exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine` by the étale case and the
+`proposition-exceptional-inverse-image-smooth-morphism`,
+`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`), proved from
+`exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine` by the étale case and the
 affine-line case below. It is kept apart from `SmoothDuality.lean` so that the prime-field case of
-`lem-asd-smooth-generic-direct-image` does not import that file.
+`lemma-smooth-morphisms-locally-constant-sheaves` does not import that file.
 
 Let `f : X ⟶ Y` be smooth, separated, compactifiable and of pure relative dimension `d`, let `Λ`
 be a finite ring whose exponent is invertible on `X`, and put `ω_f = Rf^! Λ_Y`. Then `ω_f[-2d]` is

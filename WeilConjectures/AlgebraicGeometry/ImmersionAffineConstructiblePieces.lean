@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.Topology.Constructible
 import WeilConjectures.RingTheory.AffineBasicSetsDisjointRefinement
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Affine constructible pieces of an immersed scheme
 
