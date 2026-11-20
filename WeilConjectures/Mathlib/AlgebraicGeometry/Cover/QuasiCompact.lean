@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-!
 # Quasi-compact covers obtained by refinement

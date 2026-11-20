@@ -23,7 +23,7 @@ curve with geometric Galois Frobenius `Fr`, and fix base point data `B`
 (`AlgebraicGeometry.WeilGroup.BasePointData`: a point `t` of `C`, a path `β : F_t ≅ F_{t ≫ Fr}`)
 and a monodromy `M` of lisse sheaves on `C` (`AlgebraicGeometry.ProEtale.LisseMonodromy`).
 
-Following `def-wf-fundamental-representation`, a lisse Weil sheaf `ℱ` with Weil structure
+Following `situation-weil`, a lisse Weil sheaf `ℱ` with Weil structure
 `φ : Fr^* ℱ ≅ ℱ` gives:
 
 * the geometric fundamental representation `ρ_geom` of `π₁(C, t) = Aut F_t` on the stalk
@@ -68,13 +68,15 @@ noncomputable abbrev toLisse (F : WeilSheaf K l C) (hF : F.IsLisse) :
 /-- The Weil structure as an isomorphism `Fr^* ℱ ≅ ℱ` of `ℓ`-adic sheaves, through
 `Fr^* ≅ (Fr⁻¹)_*`. -/
 noncomputable def adicFrobStr (F : WeilSheaf K l C) :
-    ((C ↘ Spec (.of K)).geometricGaloisFrobenius.hom)^*ᵃ[l].obj F.obj.carrier ≅ F.obj.carrier :=
-  (adicUpperStarIsoLowerStarInv l (C ↘ Spec (.of K)).geometricGaloisFrobenius).app _ ≪≫
+    ((C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].obj F.obj.carrier ≅
+      F.obj.carrier :=
+  (adicUpperStarIsoLowerStarInv l (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso).app _ ≪≫
     F.obj.str
 
 /-- The Weil structure as an isomorphism `Fr^* ℱ ≅ ℱ` of lisse sheaves. -/
 noncomputable def lisseFrobStr (F : WeilSheaf K l C) (hF : F.IsLisse) :
-    (F.toLisse hF).upperStar l (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom ≅ F.toLisse hF :=
+    (F.toLisse hF).upperStar l (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom ≅
+      F.toLisse hF :=
   (ObjectProperty.fullyFaithfulι _).preimageIso F.adicFrobStr
 
 end WeilSheaf
@@ -86,13 +88,13 @@ variable [IsCurve (C ↘ Spec (.of K))] {W : WeilGroup (C ↘ Spec (.of K))}
   (B : BasePointData W)
 
 /-- The Frobenius `Φ : ℱ_t ≅ ℱ_t` of the Weil fundamental representation
-(`def-wf-fundamental-representation`): the transport `ℱ_t ≅ ℱ_{t ≫ Fr}` along the path `β`, the
+(`situation-weil`): the transport `ℱ_t ≅ ℱ_{t ≫ Fr}` along the path `β`, the
 identification `ℱ_{t ≫ Fr} = (Fr^* ℱ)_t`, and the stalk at `t` of the Weil structure
 `Fr^* ℱ ≅ ℱ`. -/
 noncomputable def frobStalkIso (F : WeilSheaf K l C) (hF : F.IsLisse) :
     (lisseStalk l B.t).obj (F.toLisse hF) ≅ (lisseStalk l B.t).obj (F.toLisse hF) :=
   (M.mono B.frobPath).app (F.toLisse hF) ≪≫
-    upperStarStalkIso l (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom B.t F.obj.carrier.X ≪≫
+    upperStarStalkIso l (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom B.t F.obj.carrier.X ≪≫
     (lisseStalk l B.t).mapIso (F.lisseFrobStr hF)
 
 /-- The Frobenius `Φ` of the Weil fundamental representation, as a `ℚ̄_ℓ`-linear automorphism of
@@ -105,27 +107,32 @@ noncomputable def frobStalk (F : WeilSheaf K l C) (hF : F.IsLisse) :
 /-- Twisted equivariance of the Frobenius, as an identity of morphisms of stalks. -/
 theorem mono_hom_app_comp_frobStalkIso_hom (F : WeilSheaf K l C) (hF : F.IsLisse)
     (g : Aut (fiber B.t)) :
-    (M.mono (B.frobPath ≪≫ pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom g ≪≫
+    (M.mono (B.frobPath ≪≫
+      pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso ≪≫
         B.frobPath.symm)).hom.app (F.toLisse hF) ≫ (frobStalkIso M B F hF).hom =
-      (frobStalkIso M B F hF).hom ≫ (M.mono g).hom.app (F.toLisse hF) := by
-  have h₁ : (B.frobPath ≪≫ pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom g ≪≫
+      (frobStalkIso M B F hF).hom ≫ (M.mono g.asIso).hom.app (F.toLisse hF) := by
+  have h₁ : (B.frobPath ≪≫
+      pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso ≪≫
       B.frobPath.symm) ≪≫ B.frobPath =
-      B.frobPath ≪≫ pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom g := by
+      B.frobPath ≪≫
+      pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso := by
     simp
   have e₁ := congrArg (fun τ ↦ (M.mono τ).hom.app (F.toLisse hF)) h₁
-  rw [M.mono_trans (B.frobPath ≪≫ pullbackPathIso _ g ≪≫ B.frobPath.symm) B.frobPath,
-    M.mono_trans B.frobPath (pullbackPathIso _ g)] at e₁
+  rw [M.mono_trans (B.frobPath ≪≫ pullbackPathIso _ g.asIso ≪≫ B.frobPath.symm) B.frobPath,
+    M.mono_trans B.frobPath (pullbackPathIso _ g.asIso)] at e₁
   simp only [Iso.trans_hom, NatTrans.comp_app] at e₁
-  have e₂ := M.mono_upperStar (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom g (F.toLisse hF)
-  have e₃ := (M.mono g).hom.naturality (F.lisseFrobStr hF).hom
+  have e₂ := M.mono_upperStar (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso
+    (F.toLisse hF)
+  have e₃ := (M.mono g.asIso).hom.naturality (F.lisseFrobStr hF).hom
   simp only [frobStalkIso, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
   rw [reassoc_of% e₁, reassoc_of% e₂, e₃]
 
 /-- **Twisted equivariance of the Frobenius**: `Φ ρ_geom(β ≫ Fr_* g ≫ β⁻¹) = ρ_geom(g) Φ`. -/
 theorem frobStalk_rep (F : WeilSheaf K l C) (hF : F.IsLisse) (g : Aut (fiber B.t))
     (v : LisseMonodromy.StalkSpace B.t (F.toLisse hF)) :
-    frobStalk M B F hF (M.rep B.t (F.toLisse hF) (B.frobPath ≪≫
-        pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom g ≪≫ B.frobPath.symm) v) =
+    frobStalk M B F hF (M.rep B.t (F.toLisse hF) (.of (B.frobPath ≪≫
+        pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso ≪≫
+          B.frobPath.symm)) v) =
       M.rep B.t (F.toLisse hF) g (frobStalk M B F hF v) := by
   have h := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v)
     (mono_hom_app_comp_frobStalkIso_hom M B F hF g)
@@ -144,8 +151,9 @@ structure WeilMonodromyData where
   frobLift : W.carrier
   deg_frobLift : W.deg frobLift = Multiplicative.ofAdd 1
   geomEquiv_conj (g : Aut (fiber B.t)) :
-    (geomEquiv (B.frobPath ≪≫ pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom g ≪≫
-      B.frobPath.symm) : W.carrier) = frobLift⁻¹ * geomEquiv g * frobLift
+    (geomEquiv (.of (B.frobPath ≪≫
+      pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso ≪≫
+      B.frobPath.symm)) : W.carrier) = frobLift⁻¹ * geomEquiv g * frobLift
 
 variable {B} (D : WeilMonodromyData B)
 
@@ -175,8 +183,9 @@ theorem frobUnit_conj (F : WeilSheaf K l C) (hF : F.IsLisse) (u : W.carrier)
         D.degreeDatum.deg.normal_ker.conj_mem u hu _⟩ := by
   set g := D.geomEquiv.symm ⟨D.frobLift * u * D.frobLift⁻¹,
     D.degreeDatum.deg.normal_ker.conj_mem u hu _⟩
-  have hk : D.geomEquiv.symm ⟨u, hu⟩ = B.frobPath ≪≫
-      pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom g ≪≫ B.frobPath.symm := by
+  have hk : D.geomEquiv.symm ⟨u, hu⟩ = .of (B.frobPath ≪≫
+      pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso ≪≫
+      B.frobPath.symm) := by
     apply D.geomEquiv.injective
     apply Subtype.ext
     rw [ContinuousMulEquiv.apply_symm_apply, D.geomEquiv_conj, ContinuousMulEquiv.apply_symm_apply]
@@ -190,10 +199,10 @@ theorem frobUnit_conj (F : WeilSheaf K l C) (hF : F.IsLisse) (u : W.carrier)
   rw [LinearEquiv.symm_apply_apply, hk, frobStalk_rep]
 
 /-- **The Weil fundamental representation** of a lisse Weil sheaf (blueprint:
-`def-wf-fundamental-representation`): the representation `ρ(u γⁿ) = ρ_geom(u) Φⁿ` of the Weil
+`situation-weil`): the representation `ρ(u γⁿ) = ρ_geom(u) Φⁿ` of the Weil
 group on the stalk `ℱ_t`, extending the geometric fundamental representation by the Frobenius
 `Φ` of the Weil structure (`AlgebraicGeometry.Monodromy.DegreeDatum.lift`,
-`lem-wf-weil-fundamental-representation`). -/
+`situation-weil`). -/
 noncomputable def fundamentalRep (F : WeilSheaf K l C) (hF : F.IsLisse) :
     Representation (PadicAlgCl l) W.carrier (LisseMonodromy.StalkSpace B.t (F.toLisse hF)) :=
   (Units.coeHom _).comp
@@ -224,7 +233,7 @@ noncomputable abbrev toLisseMap {F G : WeilSheaf K l C} (φ : F ⟶ G) (hF : F.I
 
 /-- A morphism of Weil sheaves commutes with the Weil structures `Fr^* ℱ ≅ ℱ`. -/
 theorem adicFrobStr_naturality {F G : WeilSheaf K l C} (φ : F ⟶ G) :
-    ((C ↘ Spec (.of K)).geometricGaloisFrobenius.hom)^*ᵃ[l].map
+    ((C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map
         ((Endofunctor.IsoAlgebra.forget _).map φ.hom) ≫ G.adicFrobStr.hom =
       F.adicFrobStr.hom ≫ (Endofunctor.IsoAlgebra.forget _).map φ.hom := by
   have h := φ.hom.hom.h
@@ -253,7 +262,7 @@ theorem frobStalkIso_naturality {F G : WeilSheaf K l C} (φ : F ⟶ G) (hF : F.I
     (M.mono B.frobPath).hom.naturality (WeilSheaf.toLisseMap φ hF hG)
   have e₃ := (lisseStalk l B.t).congr_map (ObjectProperty.hom_ext _
     (WeilSheaf.adicFrobStr_naturality φ) :
-      (ObjectProperty.homMk (((C ↘ Spec (.of K)).geometricGaloisFrobenius.hom)^*ᵃ[l].map
+      (ObjectProperty.homMk (((C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map
         ((Endofunctor.IsoAlgebra.forget _).map φ.hom)) :
           (F.toLisse hF).upperStar l _ ⟶ (G.toLisse hG).upperStar l _) ≫
         (G.lisseFrobStr hG).hom =
@@ -267,7 +276,7 @@ theorem frobStalkIso_naturality {F G : WeilSheaf K l C} (φ : F ⟶ G) (hF : F.I
   rw [e₁']
   congr 1
   have key := upperStarStalkIso_hom_naturality l
-    (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom B.t
+    (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom B.t
     ((Endofunctor.IsoAlgebra.forget _).map φ.hom).hom
   erw [reassoc_of% key]
   congr 1
@@ -296,7 +305,7 @@ theorem stalkMap_rep {F G : WeilSheaf K l C} (φ : F ⟶ G) (hF : F.IsLisse)
     stalkMap (B := B) φ hF hG (M.rep B.t (F.toLisse hF) g v) =
       M.rep B.t (G.toLisse hG) g (stalkMap (B := B) φ hF hG v) := by
   have h := congrArg (fun ψ ↦ ((WeilCoefficients.toModuleCat l).map ψ).hom v)
-    ((M.mono g).hom.naturality (WeilSheaf.toLisseMap φ hF hG))
+    ((M.mono g.asIso).hom.naturality (WeilSheaf.toLisseMap φ hF hG))
   simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at h
   exact h.symm
 
@@ -364,9 +373,10 @@ variable (M) in
 identification `𝒢_{t ≫ Fr} = (Fr^* 𝒢)_t`. -/
 noncomputable def frobPathStalkIso (G : LisseSheaf l (C ↘ Spec (.of K)).geometricFiber) :
     (lisseStalk l B.t).obj G ≅
-      (lisseStalk l B.t).obj (G.upperStar l (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom) :=
+      (lisseStalk l B.t).obj (G.upperStar l
+        (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom) :=
   (M.mono B.frobPath).app G ≪≫
-    upperStarStalkIso l (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom B.t G.obj.X
+    upperStarStalkIso l (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom B.t G.obj.X
 
 omit [Fact (ringChar K ≠ l)] in
 variable (M) in
@@ -375,13 +385,13 @@ theorem frobPathStalkIso_naturality {G H : LisseSheaf l (C ↘ Spec (.of K)).geo
     (f : G ⟶ H) :
     (lisseStalk l B.t).map f ≫ (frobPathStalkIso M (B := B) H).hom =
       (frobPathStalkIso M G).hom ≫ (lisseStalk l B.t).map
-        (ObjectProperty.homMk (((C ↘ Spec (.of K)).geometricGaloisFrobenius.hom)^*ᵃ[l].map
+        (ObjectProperty.homMk (((C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map
           f.hom) : G.upperStar l _ ⟶ H.upperStar l _) := by
   have e₁ : (lisseStalk l B.t).map f ≫ (M.mono B.frobPath).hom.app H =
       (M.mono B.frobPath).hom.app G ≫ (lisseStalk l _).map f :=
     (M.mono B.frobPath).hom.naturality f
   have key := upperStarStalkIso_hom_naturality l
-    (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom B.t f.hom.hom
+    (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom B.t f.hom.hom
   simp only [frobPathStalkIso, Iso.trans_hom, Iso.app_hom]
   rw [← Category.assoc, e₁, Category.assoc]
   exact congrArg ((M.mono B.frobPath).hom.app G ≫ ·) key
@@ -392,19 +402,23 @@ variable (M) in
 `g` on `Fr^* 𝒢`. -/
 theorem frobPathStalkIso_conj (G : LisseSheaf l (C ↘ Spec (.of K)).geometricFiber)
     (g : Aut (fiber B.t)) :
-    (M.mono (B.frobPath ≪≫ pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom g ≪≫
+    (M.mono (B.frobPath ≪≫
+      pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso ≪≫
         B.frobPath.symm)).hom.app G ≫ (frobPathStalkIso M G).hom =
-      (frobPathStalkIso M G).hom ≫ (M.mono g).hom.app
-        (G.upperStar l (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom) := by
-  have h₁ : (B.frobPath ≪≫ pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom g ≪≫
+      (frobPathStalkIso M G).hom ≫ (M.mono g.asIso).hom.app
+        (G.upperStar l
+        (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom) := by
+  have h₁ : (B.frobPath ≪≫
+      pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso ≪≫
       B.frobPath.symm) ≪≫ B.frobPath =
-      B.frobPath ≪≫ pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom g := by
+      B.frobPath ≪≫
+      pullbackPathIso (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso := by
     simp
   have e₁ := congrArg (fun τ ↦ (M.mono τ).hom.app G) h₁
-  rw [M.mono_trans (B.frobPath ≪≫ pullbackPathIso _ g ≪≫ B.frobPath.symm) B.frobPath,
-    M.mono_trans B.frobPath (pullbackPathIso _ g)] at e₁
+  rw [M.mono_trans (B.frobPath ≪≫ pullbackPathIso _ g.asIso ≪≫ B.frobPath.symm) B.frobPath,
+    M.mono_trans B.frobPath (pullbackPathIso _ g.asIso)] at e₁
   simp only [Iso.trans_hom, NatTrans.comp_app] at e₁
-  have e₂ := M.mono_upperStar (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom g G
+  have e₂ := M.mono_upperStar (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso G
   simp only [frobPathStalkIso, Iso.trans_hom, Iso.app_hom]
   rw [reassoc_of% e₁, e₂]
   simp only [Category.assoc]
@@ -452,7 +466,8 @@ theorem upperStar_comp_lisseFrobStr_of_frobStalk (hM : M.IsEquivalenceAt B.t)
         (frobStalk M B F hF v) =
       frobStalk M B G hG
         (((WeilCoefficients.toModuleCat l).map ((lisseStalk l B.t).map f)).hom v)) :
-    (ObjectProperty.homMk (((C ↘ Spec (.of K)).geometricGaloisFrobenius.hom)^*ᵃ[l].map f.hom) :
+    (ObjectProperty.homMk
+      (((C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map f.hom) :
         (F.toLisse hF).upperStar l _ ⟶ (G.toLisse hG).upperStar l _) ≫ (G.lisseFrobStr hG).hom =
       (F.lisseFrobStr hF).hom ≫ f := by
   apply hM.faithful
@@ -470,8 +485,8 @@ theorem upperStar_comp_lisseFrobStr_of_frobStalk (hM : M.IsEquivalenceAt B.t)
 /-- **Fullness of the Weil fundamental representation**: a linear map of stalks intertwining the
 Weil fundamental representations is the stalk of a morphism of lisse Weil sheaves. On the
 geometric part it is the stalk of a morphism of lisse sheaves, by
-`cor-galois-lisse-representations`; commuting with `Φ`, this morphism commutes with the Weil
-structures. -/
+`proposition-lattices-representations-normal-scheme`; commuting with `Φ`, this morphism commutes
+with the Weil structures. -/
 theorem exists_stalkMap_eq (hM : M.IsEquivalenceAt B.t) {X Y : LisseWeilSheaf K l C}
     (φ : LisseMonodromy.StalkSpace B.t (X.obj.toLisse X.property) →ₗ[PadicAlgCl l]
       LisseMonodromy.StalkSpace B.t (Y.obj.toLisse Y.property))
@@ -493,7 +508,7 @@ theorem exists_stalkMap_eq (hM : M.IsEquivalenceAt B.t) {X Y : LisseWeilSheaf K 
   have hstr : (WeilSheaf.frobeniusPullback K l C).map f₀.hom ≫ Y.obj.obj.obj.str =
       X.obj.obj.obj.str ≫ f₀.hom := by
     rw [← cancel_epi ((adicUpperStarIsoLowerStarInv l
-      (C ↘ Spec (.of K)).geometricGaloisFrobenius).hom.app X.obj.obj.carrier),
+      (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso).hom.app X.obj.obj.carrier),
       ← (adicUpperStarIsoLowerStarInv l _).hom.naturality_assoc]
     exact key'
   exact ⟨ObjectProperty.homMk (ObjectProperty.homMk (ObjectProperty.homMk ⟨f₀.hom, hstr⟩)), hf₀⟩
@@ -501,9 +516,9 @@ theorem exists_stalkMap_eq (hM : M.IsEquivalenceAt B.t) {X Y : LisseWeilSheaf K 
 /-- **Essential surjectivity of the Weil fundamental representation**: every finite-dimensional
 representation of the Weil group which is continuous on the geometric part is the Weil fundamental
 representation of a lisse Weil sheaf. Its restriction to the geometric part is the monodromy of a
-lisse sheaf `𝒢` (`cor-galois-lisse-representations`), and the action of the lift `γ` of the
-Frobenius defines the Weil structure `Fr^* 𝒢 ≅ 𝒢` through `frobPathStalkIso`
-(`prop-wf-weil-sheaf-representation-equivalence`, Frobenius descent). -/
+lisse sheaf `𝒢` (`proposition-lattices-representations-normal-scheme`), and the action of the lift
+`γ` of the Frobenius defines the Weil structure `Fr^* 𝒢 ≅ 𝒢` through `frobPathStalkIso`
+(`definition-weil-representation--1`, Frobenius descent). -/
 theorem exists_fundamentalRep_linearEquiv (hM : M.IsEquivalenceAt B.t) (V : Type (u + 1))
     [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
     (ρ : Representation (PadicAlgCl l) W.carrier V) (hρ : ρ.IsContinuousOn W.geometric.subtype) :
@@ -517,8 +532,9 @@ theorem exists_fundamentalRep_linearEquiv (hM : M.IsEquivalenceAt B.t) (V : Type
     rw [LinearEquiv.symm_apply_eq, he, LinearEquiv.apply_symm_apply]
   let P := WeilCoefficients.linearEquivOfIso (frobPathStalkIso M (B := B) G₀)
   have hP (g : Aut (fiber B.t)) (v : LisseMonodromy.StalkSpace B.t G₀) :
-      P (M.rep B.t G₀ (B.frobPath ≪≫ pullbackPathIso
-        (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom g ≪≫ B.frobPath.symm) v) =
+      P (M.rep B.t G₀ (.of (B.frobPath ≪≫ pullbackPathIso
+        (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso ≪≫
+          B.frobPath.symm)) v) =
       M.rep B.t _ g (P v) := by
     have h := congrArg (fun ψ ↦ ((WeilCoefficients.toModuleCat l).map ψ).hom v)
       (frobPathStalkIso_conj M (B := B) G₀ g)
@@ -527,7 +543,7 @@ theorem exists_fundamentalRep_linearEquiv (hM : M.IsEquivalenceAt B.t) (V : Type
   let Rγ := LinearMap.GeneralLinearGroup.toLinearEquiv (ρ.asGroupHom D.frobLift)
   have hRγ (x : V) : Rγ x = ρ D.frobLift x := rfl
   let φ : LisseMonodromy.StalkSpace B.t
-      (G₀.upperStar l (C ↘ Spec (.of K)).geometricGaloisFrobenius.hom) ≃ₗ[PadicAlgCl l]
+      (G₀.upperStar l (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom) ≃ₗ[PadicAlgCl l]
       LisseMonodromy.StalkSpace B.t G₀ :=
     P.symm ≪≫ₗ e ≪≫ₗ Rγ ≪≫ₗ e.symm
   have hφP (w : LisseMonodromy.StalkSpace B.t G₀) : φ (P w) = e.symm (ρ D.frobLift (e w)) := by
@@ -545,7 +561,7 @@ theorem exists_fundamentalRep_linearEquiv (hM : M.IsEquivalenceAt B.t) (V : Type
   obtain ⟨ψ, hψ⟩ := hM.full φ.toLinearMap hφ
   have : IsIso ψ := hM.isIso_of_bijective ψ (by rw [hψ]; exact φ.bijective)
   let str : (WeilSheaf.frobeniusPullback K l C).obj G₀.obj ≅ G₀.obj :=
-    ((adicUpperStarIsoLowerStarInv l (C ↘ Spec (.of K)).geometricGaloisFrobenius).app
+    ((adicUpperStarIsoLowerStarInv l (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso).app
       G₀.obj).symm ≪≫ (ObjectProperty.ι _).mapIso (asIso ψ)
   let F : WeilSheaf K l C :=
     ⟨Endofunctor.IsoAlgebra.mk G₀.obj str, G₀.property.isAdicConstructibleSheaf⟩
@@ -577,10 +593,10 @@ instance (X : LisseWeilSheaf K l C) :
 
 variable (M) in
 /-- **The lisse sheaf–representation equivalence** at the level of the Weil fundamental
-representation (blueprint: `prop-wf-weil-sheaf-representation-equivalence`): if the monodromy
-at `t` is an equivalence (`cor-galois-lisse-representations`), the Weil fundamental
-representation is an equivalence between lisse Weil sheaves and lisse representations of the
-Weil group, under which every lisse Weil sheaf goes to a representation isomorphic to its Weil
+representation (blueprint: `definition-weil-representation--1`): if the monodromy
+at `t` is an equivalence (`proposition-lattices-representations-normal-scheme`), the Weil
+fundamental representation is an equivalence between lisse Weil sheaves and lisse representations of
+the Weil group, under which every lisse Weil sheaf goes to a representation isomorphic to its Weil
 fundamental representation. -/
 theorem exists_equivalence_fundamentalRep (hM : M.IsEquivalenceAt B.t) :
     ∃ e : LisseWeilSheaf K l C ≌ (W.isLisseRep l).FullSubcategory,

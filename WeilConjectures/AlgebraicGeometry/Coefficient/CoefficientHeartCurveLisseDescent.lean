@@ -32,7 +32,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 /-!
 # Lisse condensed-coefficient descent through a surjective closed immersion
 
-Source: blueprint main-20261015, sk-lem-coefficient-heart, final curve paragraph;
+Source: blueprint main-20261015, lemma-constructible-sheaves, final curve paragraph;
 Stacks Project, Tag 09AB (lemma-thickening) and Tag 09BK (lemma-closed-immersion-affines).
 (blueprint: lem-sfb-coefficient-heart-curve-lisse-descent)
 
@@ -55,7 +55,7 @@ namespace AlgebraicGeometry.ProEtale
 then identify the transported regular module using extension along the Cartesian
 coefficient isomorphism, restriction along its inverse, and the coefficient map itself.
 This also constructs the rank-zero comparison without a choice of basis.
-Source: blueprint sk-lem-coefficient-heart, curve descent, proof step 1;
+Source: blueprint lemma-constructible-sheaves, curve descent, proof step 1;
 Stacks Project Tag 09AB (blueprint: lem-sfb-coefficient-heart-curve-lisse-descent). -/
 def coefficientHeartFiniteFreePullbackIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -72,7 +72,7 @@ def coefficientHeartFiniteFreePullbackIso
 to the iterated pullback through its specified refinement map. Only the commutativity
 witness is supplied; every isomorphism is the existing coefficient-module composition
 isomorphism or transport along that equality.
-Source: blueprint sk-lem-coefficient-heart, curve descent, proof step 4;
+Source: blueprint lemma-constructible-sheaves, curve descent, proof step 4;
 Stacks Project Tag 09AB (blueprint: lem-sfb-coefficient-heart-curve-lisse-descent). -/
 def coefficientHeartRefinementPullbackIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -172,15 +172,15 @@ private theorem compatible_trivializations
 /-- Lissity descends and ascends through a surjective closed immersion, with a covering
 refinement that lifts every specified finite-free trivialization, in its specified rank.
 
-Source: blueprint main-20261015, sk-lem-coefficient-heart, final curve paragraph;
+Source: blueprint main-20261015, lemma-constructible-sheaves, final curve paragraph;
 Stacks Project Tag 09AB (lemma-thickening), Tag 09BK (lemma-closed-immersion-affines).
 (blueprint: lem-sfb-coefficient-heart-curve-lisse-descent)
 
 Proof:
 1. The actual module pullback is extension along alpha after mapMod of abelian inverse
-   image (def-sfb-module-upper-star). Alpha is invertible for every condensed ring
-   (lem-sfb-alpha-iso). Additive monoidal finite-free transport, followed by extension
-   along this isomorphism (lem-sfb-monoidal-finite-free-transport and
+   image (prose-03-02). Alpha is invertible for every condensed ring
+   (lemma-inverse-image-coefficient-sheaves--1). Additive monoidal finite-free transport, followed
+   by extension along this isomorphism (lem-sfb-monoidal-finite-free-transport and
    def-sfb-modobj-extension-along-iso), gives coefficientHeartFiniteFreePullbackIso.
    Localization identifies this with slice restriction, including the coefficient ring
    (lem-sfb-coefficient-sections-localization).

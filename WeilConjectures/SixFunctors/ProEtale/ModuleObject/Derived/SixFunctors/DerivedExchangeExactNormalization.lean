@@ -178,7 +178,7 @@ private theorem exchange_eq_mate {X Y X' Y' : Scheme.{u}}
       (mateEquiv (derivedUpperStarLowerStarAdjunction Λ p)
         (derivedUpperStarLowerStarAdjunction Λ p')
         (TwoSquare.mk _ _ _ _
-          (moduleObjectDerivedPullbackSquareComparison Λ sq).hom)).natTrans := rfl
+          (moduleObjectDerivedPullbackSquareComparison Λ sq).hom)) := rfl
 
 section ShiftProofs
 
@@ -317,7 +317,7 @@ local notation "ambientMate" =>
       (derivedUpperStarLowerStarAdjunction Λ p'.left)
       (TwoSquare.mk _ _ _ _ (moduleObjectDerivedPullbackSquareComparison Λ
         (show CommSq g'.left p'.left p.left g.left from
-          (Over.forget _).map_commSq sq)).hom)).natTrans
+          (Over.forget _).map_commSq sq)).hom))
 
 set_option linter.unusedSectionVars false
 

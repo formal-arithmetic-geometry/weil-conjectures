@@ -18,7 +18,7 @@ monomorphism whose idempotent, times `n`, is a sum of natural endomorphisms of t
 of `M''` (the inclusion of the invariants of a finite group), then so is the pullback exchange of
 `χ` (`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp`). This is the formal part of
 the generic-slicing identification of nearby cycles with invariants (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Facts about traits", identification (2)).
+`proposition-external-kunneth-formula-nearby-cycles`, "Facts about traits", identification (2)).
 
 -/
 
@@ -100,7 +100,6 @@ lemma eq_id_of_naturality_of_iso {DX DS : Type*} [Category DX] [Category DS] {Ψ
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 400000 in
 -- the exchanges of the three models are large terms
 /-- **Exchanges of a composite and inclusions of invariants**: let `χ : M'' ⟶ M` be the composite
 of `ρ : M'' ⟶ M₁` and `ψ : M₁ ⟶ M`, both over `𝟙 X`. If the pullback exchange of

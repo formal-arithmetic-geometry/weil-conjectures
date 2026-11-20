@@ -103,7 +103,7 @@ theorem range_rTensor_h1Cotangentι [Module.Projective S Ω[S⁄R]] :
 
 end Extension
 
-/-- (blueprint: `lem-weil-pbc-jacobi-zariski-left-term-vanishing`)
+/-- (blueprint: `theorem-finite-etale-covers-proper-henselian--2`)
 Let `R → S` be a ring map with `H₁(L_{S/R}) = 0` and `Ω[S⁄R]` projective, let `𝔞` be an
 ideal of `S` and `C = S ⧸ 𝔞`. For the naive cotangent complex
 `δ : I/I² → S ⊗[P] Ω[P⁄R]`

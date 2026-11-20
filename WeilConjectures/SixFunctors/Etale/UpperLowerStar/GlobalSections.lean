@@ -53,7 +53,7 @@ given by the unit `G ⟶ f_* f^* G` of the adjunction `f^* ⊣ f_*` evaluated at
 object `Y` of the small étale site of `Y`, and the identification of its base change
 `Y ×_Y X` with the terminal object `X` of the small étale site of `X`. For a finite `f` this is
 the pullback `f^♯ a` of a section along a finite morphism.
-(blueprint: `def-weil-pbc-finite-section-pullback`) -/
+(blueprint: `theorem-comparison-over-henselian-pair-degree`) -/
 noncomputable def globalSectionsUpperStarMap :
     (Sheaf.Γ _ A).obj G ⟶ (Sheaf.Γ _ A).obj ((f)^*[A].obj G) :=
   (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app G ≫

@@ -106,7 +106,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 omit [Fact (ringChar k₀ ≠ l)] in
 private lemma native_pull_tensor_str (A B : ProEtaleWeilSheaf k₀ l Y) :
     (tensor k₀ l Y A B).str =
-      ProEtale.nativePullTensorStr (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+      ProEtale.nativePullTensorStr (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
         A.str B.str := by
   unfold ProEtale.nativePullTensorStr
   exact Endofunctor.IsoAlgebra.mk_str _ _

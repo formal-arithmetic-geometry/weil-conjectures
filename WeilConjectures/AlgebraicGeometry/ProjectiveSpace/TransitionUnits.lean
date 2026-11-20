@@ -163,18 +163,14 @@ lemma map_ratio_mul_map_ratio (i j k : n) :
 variable (n S) in
 /-- **The transition units of the twisting sheaf `𝒪(d)`**: `u_{ij} = (xᵢ / xⱼ)^d` on
 `Uᵢ ∩ Uⱼ`. The twisting sheaf `𝒪(d)` is glued from free rank-one modules on the `Uᵢ` with
-bases `eᵢ^{(d)}` along `eᵢ^{(d)} = u_{ij} eⱼ^{(d)}`.
-
-(blueprint: `def-pc-projective-space-twist`) -/
+bases `eᵢ^{(d)}` along `eᵢ^{(d)} = u_{ij} eⱼ^{(d)}`. -/
 def transitionUnit (d : ℤ) (i j : n) : Γ(ℙ(n; S), standardOpen n S i ⊓ standardOpen n S j)ˣ :=
   ratioUnit n S i j ^ d
 
 /-- **The cocycle rule for the transition units of the twists**: on the triple overlap
 `Uᵢ ∩ Uⱼ ∩ U_k` of standard opens of `ℙ(n; S)`, `u_{ij} u_{jk} = u_{ik}` for the units
 `u_{ij} = (xᵢ / xⱼ)^d`. Indeed `(xᵢ / xⱼ) (xⱼ / x_k) = xᵢ / x_k`, and the power map is
-multiplicative on units.
-
-(blueprint: `lem-pc-twist-cocycle`) -/
+multiplicative on units. -/
 theorem transitionUnit_mul_transitionUnit (d : ℤ) (i j k : n) :
     Units.map (ℙ(n; S).presheaf.map (homOfLE (inf_le_left :
         standardOpen n S i ⊓ standardOpen n S j ⊓ standardOpen n S k ≤ _)).op).hom.toMonoidHom
@@ -204,9 +200,7 @@ variable (S : Scheme.{u})
 and `g₁` over `U₁` which trivialize it over `U₀` and over `U₁` (every section over an open
 `V ⊆ Uᵢ` is uniquely `a • gᵢ`), and satisfy the glueing relation `g₀ = t^{-d} g₁` over
 `U₀ ∩ U₁`, where `t = x₁ / x₀`; that is, `g₀ = (x₀ / x₁)^d g₁ = u₀₁ g₁` for the transition unit
-`u₀₁` of `transitionUnit`.
-
-(blueprint: `def-sc-p1-standard`) -/
+`u₀₁` of `transitionUnit`. -/
 structure TwistData (d : ℤ) (𝓛 : (ProjectiveLine S).Modules) where
   /-- The generator over `U₀ = D₊(x₀)`. -/
   g₀ : Γ(𝓛, standardOpen _ S ⟨0⟩)

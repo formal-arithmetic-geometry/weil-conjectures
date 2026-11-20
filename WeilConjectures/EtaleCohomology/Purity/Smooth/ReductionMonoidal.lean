@@ -25,7 +25,7 @@ compatible with the left unitors through the counit `Ψ Λ_X ≅ Λ'_X`
 (`AlgebraicGeometry.Etale.derivedExtendScalarsConstantComplexEtaIso`). These are the first fields
 of `AlgebraicGeometry.Etale.MonoidalSupportedCoefficientChange` for
 `AlgebraicGeometry.Etale.reductionSupportedCoefficientChange` (blueprint
-`det-sp-purity-coefficient-change`).
+`proposition-compatibility-purity-change-coefficients`).
 
 The extension of scalars of sheaves is compatible with the braidings
 (`AlgebraicGeometry.Etale.sheafExtendScalars_map_braiding_hom_δ`), hence so is `Ψ`

@@ -25,7 +25,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactificatio
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-existence,
 det-sf-existence-brown.proof.md, parts (1)--(3); Stacks Tags 0A8F, 0A8G, 0A8D
-(blueprint: det-sf-existence-brown).
+(blueprint: theorem-existence-exceptional-inverse-image).
 
 All functors act on the recorded localizing closures in the ordinary derived categories
 of internal modules. Comparisons are normalized by the existing open-adjunction refinement

@@ -16,7 +16,7 @@ Let `C` be a braided monoidal closed category and `ω` an object of `C`. The dou
 `CategoryTheory.Verdier.bidualityMap ω K : K ⟶ D D K`, `D = RHom(-, ω)`, of the abstract Verdier
 formalism is the double-dual map `CategoryTheory.MonoidalClosed.toIhomIhom ω K`. This file
 records the consequences of this identification. The first one is the formal "lisse" step of
-constructible biduality (blueprint `det-pd-biduality-coefficients`): when `ω` is invertible, as the
+constructible biduality (blueprint `theorem-verdier-biduality`): when `ω` is invertible, as the
 dualizing complex `ω_S ≅ Λ_S(d)[2d]` of a smooth stratum `S` is, and `K` is dualizable, as a
 lisse complex is, the double-dual morphism `δ_K` is an isomorphism.
 
@@ -44,7 +44,7 @@ lemma bidualityMap_eq_toIhomIhom (ω K : C) : bidualityMap ω K = toIhomIhom ω 
   rfl
 
 /-- **Biduality for dualizable objects** (the formal lisse step of the blueprint theorem
-`det-pd-biduality-coefficients`): if `ω` is isomorphic to an invertible object and `K` is
+`theorem-verdier-biduality`): if `ω` is isomorphic to an invertible object and `K` is
 dualizable, the double-dual morphism `δ_K : K ⟶ D D K`, `D = RHom(-, ω)`, is an isomorphism. -/
 theorem isIso_bidualityMap_of_isDualizable {T ω : C} (γ : T ≅ ω) (hT : IsInvertible T) {K : C}
     (hK : IsDualizable K) : IsIso (bidualityMap ω K) :=

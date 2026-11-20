@@ -157,8 +157,8 @@ theorem fieldIntegralPullShift_existsUnique :
   let : ∀ x : T, Invertible (l : T.residueField x) := fun x ↦ PEmpty.elim x
   obtain ⟨C, _⟩ := automorphismConstructibleStage_comparison_system.{u} l
   obtain ⟨c, d, hc, hd⟩ :=
-    (automorphismConstructibleStage_integral_shifts l E C (𝟙 T) (Iso.refl T)
-      (Iso.refl T) (by simp)).1 X Y f
+    (automorphismConstructibleStage_integral_shifts l E C (𝟙 T) (1 : Aut T)
+      (1 : Aut T) (by simp)).1 X Y f
   refine ⟨d, ⟨c, hc, hd⟩, ?_⟩
   rintro d' ⟨c', hc', hd'⟩
   have he := fieldChainShift_unique l E f c' c hc' hc
@@ -240,7 +240,7 @@ theorem fieldRationalPullShift_existsUnique :
   obtain ⟨C, _⟩ := automorphismConstructibleStage_comparison_system.{u} l
   obtain ⟨c, _, _, hc, _⟩ :=
     (automorphismConstructibleStage_descended_shifts l (AlgebraicClosure (Padic l)) C f
-      (Iso.refl Y) (Iso.refl X) (by simp)).1 E
+      (1 : Aut Y) (1 : Aut X) (by simp)).1 E
   obtain ⟨s, hs, hn⟩ := hc
   have he := fieldConstructibleShift_normalization l E f s hs
   subst s
@@ -306,7 +306,7 @@ theorem fieldCommonPullShift_existsUnique :
   obtain ⟨C, _⟩ := automorphismConstructibleStage_comparison_system.{u} l
   obtain ⟨c, _, _, hc, _⟩ :=
     (automorphismConstructibleStage_descended_shifts l Ω C f
-      (Iso.refl Y) (Iso.refl X) (by simp)).2
+      (1 : Aut Y) (1 : Aut X) (by simp)).2
   have hn (L : AlgebraicallyClosedCoefficients.Index l Ω)
       (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y L) :
       HEq ((Functor.commShiftIso (commonStageDerivedPullback l Ω f)
@@ -658,10 +658,10 @@ def fieldWeilPullSquare (f₀ : X₀ ⟶ Y₀) :
       sfWeilFrobeniusPullback D l hl Y₀ E ⋙ fieldWeilPull D l hl E f₀ :=
   letI := sfWeilPrimeInvertible D l hl X₀
   letI := sfWeilPrimeInvertible D l hl Y₀
-  (fieldRationalPullComp l E (D.geometricFrobenius X₀).hom (zlFiberMap D f₀)).symm ≪≫
+  (fieldRationalPullComp l E (D.geometricFrobenius X₀).asIso.hom (zlFiberMap D f₀)).symm ≪≫
     eqToIso (congrArg (fun f ↦ rationalDerivedPullback l E f)
       (zlFrobenius_naturality D f₀)) ≪≫
-    fieldRationalPullComp l E (zlFiberMap D f₀) (D.geometricFrobenius Y₀).hom
+    fieldRationalPullComp l E (zlFiberMap D f₀) (D.geometricFrobenius Y₀).asIso.hom
 
 /-- Proper rational pullback has its constructible right adjoint, and open rational
 pullback has its extension-by-zero left adjoint. Source: SGA 4 XVII, sections 5--6
@@ -735,14 +735,14 @@ Source: blueprint lem-fix-weil-operations.proof, first paragraph
 (blueprint: def-zl-field-weil-shriek-shift-data). -/
 def fieldWeilProperExchangeMap (p₀ : X₀ ⟶ Y₀) [IsProper p₀.left] :=
   (mateEquiv (fieldWeilProperAdj D l hl E p₀) (fieldWeilProperAdj D l hl E p₀)
-    (TwoSquare.mk _ _ _ _ (fieldWeilPullSquare D l hl E p₀).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (fieldWeilPullSquare D l hl E p₀).inv))
 
 /-- The inverse open exchange is the left mate of inverse-image exchange.
 Source: blueprint lem-fix-weil-operations.proof, first paragraph
 (blueprint: def-zl-field-weil-shriek-shift-data). -/
 def fieldWeilOpenExchangeInverseMap (j₀ : X₀ ⟶ Y₀) [IsOpenImmersion j₀.left] :=
   ((mateEquiv (fieldWeilOpenAdj D l hl E j₀) (fieldWeilOpenAdj D l hl E j₀)).symm
-    (TwoSquare.mk _ _ _ _ (fieldWeilPullSquare D l hl E j₀).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (fieldWeilPullSquare D l hl E j₀).hom))
 
 -- The finite Frobenius equivalence is already part of the recorded semilinear transport.
 set_option backward.isDefEq.respectTransparency false in
@@ -762,12 +762,12 @@ private theorem fieldInverseMate_isIso
     {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ F} {R' : F ⥤ C}
     {G : A ⥤ C} {H : B ⥤ F} [G.IsEquivalence] [H.IsEquivalence]
     (a : L ⊣ R) (b : L' ⊣ R') (β : R ⋙ G ≅ H ⋙ R') :
-    IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom)).natTrans) := by
-  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom)).natTrans
+    IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom))) := by
+  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom))
   let βop : TwoSquare H.op R.op R'.op G.op :=
     TwoSquare.mk _ _ _ _ (NatTrans.op β.hom)
   have hi := isIso_mateEquiv_of_isEquivalence a.op b.op βop
-  have he : NatTrans.op α = (mateEquiv a.op b.op βop).natTrans := by
+  have he : NatTrans.op α = (mateEquiv a.op b.op βop) := by
     ext X
     simp [α, βop, mateEquiv]
   have : IsIso (NatTrans.op α) := by rw [he]; exact hi
@@ -850,7 +850,7 @@ geometric Frobenius (blueprint: def-zl-field-weil-shriek-shift-data). -/
 instance fieldWeilFrobeniusShift (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     (sfWeilFrobeniusPullback D l hl X₀ E).CommShift ℤ :=
-  @fieldRationalPullShift l _ E _ _ _ _ _ (D.geometricFrobenius X₀).hom
+  @fieldRationalPullShift l _ E _ _ _ _ _ (D.geometricFrobenius X₀).asIso.hom
     (sfWeilPrimeInvertible D l hl X₀) (sfWeilPrimeInvertible D l hl X₀)
 
 /-- The canonical common-stage Frobenius shift. Source: blueprint geometric Frobenius
@@ -858,7 +858,7 @@ instance fieldWeilFrobeniusShift (X₀ : Over (Spec (.of D.k₀)))
 instance fieldCommonWeilFrobeniusShift (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).CommShift ℤ :=
-  @fieldCommonPullShift l _ Ω _ _ _ _ _ (D.geometricFrobenius X₀).hom
+  @fieldCommonPullShift l _ Ω _ _ _ _ _ (D.geometricFrobenius X₀).asIso.hom
     (sfWeilPrimeInvertible D l hl X₀) (sfWeilPrimeInvertible D l hl X₀)
 
 end WeilConjectures

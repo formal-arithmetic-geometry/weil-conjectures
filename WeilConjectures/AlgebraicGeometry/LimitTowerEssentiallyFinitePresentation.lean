@@ -47,13 +47,13 @@ Source: Stacks Project, Algebra, proof of Tag 00R7, with the constructions of Ta
 Proof:
 1. (Base system.) Write `R` as a directed colimit of local rings `R_λ` essentially of
    finite type over `ℤ` with local transition maps and local maps `π_λ : R_λ → R`
-   [lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z].
+   [lemma-quasi-finite-coordinates--1].
 2. (Middle ring.) Apply [lem-weil-pbc-limit-module-essentially-finite-presentation-over-system]
    to this system, `T = S`, `τ = α` and the zero module: on a tail `Λ₁` get local `S_λ`,
    local `ρ_λ`, `s_{μλ}`, `κ_λ` with `S = colim S_λ`, `S_λ` essentially of finite type over
    `R_λ`, and the base changes `S_λ ⊗ R_μ → S_μ`, `S_λ ⊗ R → S` localizations.
 3. `S'` is essentially of finite presentation over `S` via `β`
-   [lem-weil-pbc-essentially-finite-presentation-over-intermediate].
+   [lemma-quasi-finite-coordinates--1].
 4. (Top ring and module.) Apply the same node to `(S_λ)_{Λ₁}`, `T = S'`, `τ = β` and `M`:
    on a tail `Λ₂` get `S'_λ`, `σ_λ`, `s'_{μλ}`, `κ'_λ`, modules `M_λ` with semilinear maps,
    `S' = colim S'_λ`, `M = colim M_λ`, the `M_λ` cokernels of `t × s` matrices, and the

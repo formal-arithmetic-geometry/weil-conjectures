@@ -18,7 +18,7 @@ constructible `K` and an arbitrary map `ψ : LΦ^* K ⟶ K`, the *trace formula 
 tr(RΓ_c(X, ψ) ∘ Φ^♯ | RΓ_c(X, K)) = ∑_{x ∈ X(k), Φ x = x} tr(ψ_x | K_x),
 ```
 the statement `TF(X, K, ψ, 1)` of the proof of blueprint
-`thm-trf-coefficient-morphism-trace-formula`, Step 0. For the model Frobenius `Φ` the trace
+`theorem-trace-formula-frobenius-correspondence--1`, Step 0. For the model Frobenius `Φ` the trace
 formula in degree `m` is the trace formula in degree one for the iterate `Φ_m` with the
 coefficient map `ψ_m` (`ProEtale.CondensedRing.TraceFormulaHolds.trace_frobeniusCompactOperator`),
 and `Φ_m` is again a model Frobenius, over the extension of degree `m` of the finite field.
@@ -48,11 +48,11 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 /-- The *trace formula in degree one* for the proper endomorphism `Φ` of `X` (blueprint
-`thm-trf-coefficient-morphism-trace-formula`, the statement `TF(X, K, ψ, 1)` of Step 0): for every
-bounded constructible `K` and every, not necessarily invertible, map `ψ : LΦ^* K ⟶ K`, the trace of
-the operator `RΓ_c(X, ψ) ∘ Φ^♯` on `RΓ_c(X, K)` is the sum over the rational points `x` fixed by
-`Φ` of the traces of the stalk maps `ψ_x : K_x ⟶ K_x`. The identity is required for all choices of
-duals and of the finiteness of the fixed points. -/
+`theorem-trace-formula-frobenius-correspondence--1`, the statement `TF(X, K, ψ, 1)` of Step 0): for
+every bounded constructible `K` and every, not necessarily invertible, map `ψ : LΦ^* K ⟶ K`, the
+trace of the operator `RΓ_c(X, ψ) ∘ Φ^♯` on `RΓ_c(X, K)` is the sum over the rational points `x`
+fixed by `Φ` of the traces of the stalk maps `ψ_x : K_x ⟶ K_x`. The identity is required for all
+choices of duals and of the finiteness of the fixed points. -/
 def TraceFormulaHolds (Φ : X ⟶ X) [IsProper Φ.left] : Prop :=
   ∀ (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K)
@@ -142,8 +142,8 @@ lemma graphStalkMap_upperStar_aux {𝒞 : Type*} [Category 𝒞] {S' U' X' : �
   rw [reassoc_of% hA, eqToHom_trans_assoc]
   exact (hcast _ hx _ _ hP _ _ _ _).symm
 
-/-- **The stalk maps of a restriction** (blueprint `prop-trf-trace-additivity-open-closed`, the
-stalk side, and `lem-trf-weil-shriek-operator-fibres` (3)): for a morphism `j : U ⟶ X` with
+/-- **The stalk maps of a restriction** (blueprint `lemma-additivity-open-subscheme-complement`, the
+stalk side, and `lemma-comparison-via-relative-frobenius--4` (3)): for a morphism `j : U ⟶ X` with
 `P ≫ j = j ≫ T`, a map `ψ : LT^* K ⟶ K` and a rational point `x` of `U` fixed by `P`, the
 stalk map at `x` of the restriction `Lj^* ψ` (composed with the comparison
 `LP^* Lj^* K ≅ Lj^* LT^* K`) has the trace of the stalk map of `ψ` at `x ≫ j`. -/

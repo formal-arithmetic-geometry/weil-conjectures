@@ -30,10 +30,6 @@ public import WeilConjectures.AlgebraicGeometry.Complete.CompleteCompactSupportP
 
 /-! # Normalized coefficient-family data
 
-Source: blueprint main-20261015, `sk-thm-sf-pf-field/thm-cbc-qbar.proof.md`,
-opening scalar-extension paragraph; Stacks Tag 0E8I for the open tensor factor
-(blueprint: def-cbc-normalized-coefficient-families).
-
 ## Main definitions
 
 * `cbcScalarCompactSupportInverse`: the actual open/proper scalar mate composite.
@@ -41,6 +37,10 @@ opening scalar-extension paragraph; Stacks Tag 0E8I for the open tensor factor
   integral, shift and scalar normalization.
 * `CbcCompletedPullCoefficientFamily`: completed pullback families with their
   ordinary-balancing and completion-unit normalization.
+
+## References
+
+* Stacks Tag 0E8I for the open tensor factor
 -/
 
 @[expose] public noncomputable section

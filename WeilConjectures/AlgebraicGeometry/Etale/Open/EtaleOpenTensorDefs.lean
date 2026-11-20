@@ -163,7 +163,7 @@ def openScalarRestrictionMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
   ((mateEquiv
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ))
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ))).symm
-      (TwoSquare.mk _ _ _ _ (openDerivedRestrictScalarsIso φ j).inv)).natTrans
+      (TwoSquare.mk _ _ _ _ (openDerivedRestrictScalarsIso φ j).inv))
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
@@ -244,8 +244,8 @@ private theorem inverse_mate_transport
     (x : TwoSquare U H G V) (e : G ≅ G') (f : H ≅ H') :
     ((mateEquiv a b).symm
       (TwoSquare.mk U H' G' V
-        (Functor.whiskerLeft U e.inv ≫ x.natTrans ≫ Functor.whiskerRight f.hom V))).natTrans =
-      Functor.whiskerRight e.inv M ≫ ((mateEquiv a b).symm x).natTrans ≫
+        (Functor.whiskerLeft U e.inv ≫ x ≫ Functor.whiskerRight f.hom V))) =
+      Functor.whiskerRight e.inv M ≫ ((mateEquiv a b).symm x) ≫
         Functor.whiskerLeft L f.hom := by
   ext z
   simp only [mateEquiv_symm_apply, NatTrans.comp_app, Functor.whiskerRight_app,
@@ -284,22 +284,22 @@ private theorem exact_scalar_mate_etale
       (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology q))).symm
       (TwoSquare.mk _ _ _ _
         (Functor.mapDerivedCategorySquareIso
-          (upperStarRestrictScalarsIsoSheaf q f)).hom)).natTrans := by
+          (upperStarRestrictScalarsIsoSheaf q f)).hom)) := by
   let a := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Y.smallEtaleTopology q)
   let b := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology q)
   let x := TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso q f).hom
   let e := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} R) f
   let e' := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} S) f
-  have hx : IsIso ((mateEquiv a b).symm x).natTrans := (ProEtale.scalarPullbackReverse_isIso q f).2
+  have hx : IsIso ((mateEquiv a b).symm x) := (ProEtale.scalarPullbackReverse_isIso q f).2
   have h := inverse_mate_transport a b x e e'
   have ht : IsIso (Functor.whiskerRight e.inv _ ≫
-      ((mateEquiv a b).symm x).natTrans ≫ Functor.whiskerLeft _ e'.hom) := inferInstance
+      ((mateEquiv a b).symm x) ≫ Functor.whiskerLeft _ e'.hom) := inferInstance
   rw [← h] at ht
   have heq : TwoSquare.mk _ _ _ _
       (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf q f)).hom =
       TwoSquare.mk _ _ _ _
         (Functor.whiskerLeft (Sheaf.derivedRestrictScalars Y.smallEtaleTopology q)
-          e.inv ≫ x.natTrans ≫
+          e.inv ≫ x ≫
           Functor.whiskerRight e'.hom
             (Sheaf.derivedRestrictScalars X.smallEtaleTopology q)) := by
     ext M

@@ -9,7 +9,7 @@ import WeilConjectures.AlgebraicGeometry.P1DiagonalLocalIdeal
 
 /-! # The divisor line of the projective-line diagonal
 
-Source: blueprint lem-amb-p1-diagonal-integrals, the equation x0*y1-x1*y0.
+Source: blueprint lemma-class-diagonal-projective-line, the equation x0*y1-x1*y0.
 -/
 
 @[expose] public noncomputable section
@@ -59,7 +59,7 @@ private lemma pic_map_ofIsInvertible {X Y : Scheme.{u}} (g : X ⟶ Y) (M : Y.Mod
 
 /-- Under either projection chart, the dual diagonal ideal is the tensor product
 of the relative hyperplane line and the pullback of the base hyperplane line.
-Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart calculation;
+Source: blueprint lemma-class-diagonal-projective-line, standard-chart calculation;
 lem-sp-finite-p1-diagonal-kummer-component-formula, proof step 1.
 (auxiliary; not a blueprint node)
 

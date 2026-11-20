@@ -18,7 +18,7 @@ Let `c = (c₁, c₂)` be an endocorrespondence of `(X, K)` with coefficient map
 `c₁⁻¹(x)`, `x = c₁(y)`, is the reduced point `y`. The closed piece coefficient
 `u^Z = [x, y]_! u_Z` on `K^Z = Rx_* Lx^* K` (the coefficient pushforward of the restricted
 coefficient map `u_Z` along `Correspondence.restrictedClosedPieceDiagram`) is compatible with `u`
-along the unit `η : K ⟶ Rx_* Lx^* K` (blueprint `prop-trf-trace-class-additivity`, proof of
+along the unit `η : K ⟶ Rx_* Lx^* K` (blueprint `proposition-additivity-trace-classes--2`, proof of
 item 1, step (b)):
 ```
 u^Z ∘ Lc₂^* η = Rc₁^! η ∘ u,
@@ -31,7 +31,7 @@ cartesian square `y ≫ c₁ = 𝟙 ≫ x` through the units and counits of the 
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_eq`), a
 consequence of the mate description of `Ex_!`
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv`,
-blueprint `fix-lem-exchanges`, clause (4)).
+blueprint `proposition-composition-base-change-rf-shriek`, clause (4)).
 
 -/
 
@@ -214,7 +214,6 @@ end Unit
 
 namespace Correspondence
 
-set_option maxHeartbeats 800000 in
 -- matching the per-ring adjunctions against the generic mate lemma unfolds the pullbacks
 /-- The double transpose of a composite with the coefficient pushforward of a proper pushforward
 diagram, for the adjunctions `Rb₁_! ⊣ Rb₁^!` and `Lf^* ⊣ Rf_*`. -/
@@ -271,7 +270,6 @@ lemma ProperPushforwardDiagram.map_map_comp_pushforwardCoeff_comp_counit
               ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
                 P.f).counit.app A)) c.u
 
-set_option maxHeartbeats 1000000 in
 -- unfolding the diagonal correspondence `ofEnd` in the instantiated statement is slow
 /-- The double transpose of a composite with the coefficient pushforward of a proper pushforward
 diagram `(f, g)` out of the diagonal correspondence of `v`, for the adjunctions
@@ -328,9 +326,10 @@ variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.h
   [IsSeparated X.hom] {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ K}
 
 /-- **The closed piece coefficient is compatible with the unit** (blueprint
-`prop-trf-trace-class-additivity`, proof of item 1, step (b), for `Z = {x}`): for a `k`-point `y`
-of the fixed locus with reduced fibre `c₁⁻¹(x) = {y}`, `x = c₁(y)`, the closed piece coefficient
-`u^Z = [x, y]_! u_Z` satisfies `u^Z ∘ Lc₂^* η = Rc₁^! η ∘ u` for the unit `η : K ⟶ Rx_* Lx^* K`. -/
+`proposition-additivity-trace-classes--2`, proof of item 1, step (b), for `Z = {x}`): for a
+`k`-point `y` of the fixed locus with reduced fibre `c₁⁻¹(x) = {y}`, `x = c₁(y)`, the closed piece
+coefficient `u^Z = [x, y]_! u_Z` satisfies `u^Z ∘ Lc₂^* η = Rc₁^! η ∘ u` for the unit
+`η : K ⟶ Rx_* Lx^* K`. -/
 theorem upperStar_map_unit_comp_restrictedClosedPieceCoeff {y : RationalPoint c.C}
     (hy : y ≫ c.c₁ = y ≫ c.c₂) (sq : IsPullback y (𝟙 (point k)) c.c₁ (y ≫ c.c₁)) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).map

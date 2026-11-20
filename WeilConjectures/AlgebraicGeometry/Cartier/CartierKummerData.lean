@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-! # Data for the simultaneous Cartier Kummer map
 
-Source: blueprint main-20261015, lem-amb-cartier-kummer-map, paragraphs 1--4.
+Source: blueprint main-20261015, lemma-cycle-class-cartier-divisor, paragraphs 1--4.
 (blueprint: def-amb-cartier-kummer-data)
 
 The declarations are the original fixed-coefficient interfaces, without changes

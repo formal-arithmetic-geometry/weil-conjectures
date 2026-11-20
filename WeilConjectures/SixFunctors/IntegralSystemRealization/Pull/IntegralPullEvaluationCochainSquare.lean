@@ -34,8 +34,6 @@ def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
       ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
-set_option maxHeartbeats 600000 in
--- Extensionality unfolds the cochain comparison components and needs extra heartbeats.
 /-- The pullback transition square already commutes as a square of cochain maps.
 Source: Zheng Construction 4.1, p. 21; the sectionwise calculation preceding
 Lemma 4.10, p. 23; Stacks 03D2 and 0941
@@ -77,12 +75,14 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
         ((mateEquiv
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
-          (TwoSquare.mk _ _ _ _ r₀.inv)).natTrans (.up ℤ)).app
+          (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
   apply HomologicalComplex.hom_ext
   intro i
-  simpa only [integralPullEvaluationComplex, ordinaryPullEvaluationComplex,
-    HomologicalComplex.comp_f] using
-    integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
+  have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
+  -- Normalize hidden successor indices before comparing the evaluation functor applications.
+  dsimp only [Nat.succ_eq_add_one, integralPullEvaluationComplex, ordinaryPullEvaluationComplex,
+    HomologicalComplex.comp_f] at h ⊢
+  exact h
 
 end WeilConjectures.IntegralSystemRealization

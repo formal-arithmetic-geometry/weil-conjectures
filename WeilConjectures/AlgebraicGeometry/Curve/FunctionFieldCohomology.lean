@@ -95,7 +95,7 @@ its function field `k(C)`. Then `Hᵠ(Spec L_ét, M) = 0` for every torsion abel
 `M` on `Spec L` and every `q ≥ 2`: the field `L` is `C₁` by Tsen's theorem
 (`AlgebraicGeometry.IsCurve.isQuasiAlgClosed_functionField`), and
 `AlgebraicGeometry.Scheme.subsingleton_sheafH_of_isQuasiAlgClosed` applies.
-(blueprint: `lem-sc-function-field-cd-one`) -/
+(blueprint: `theorem-cohomology-curves`) -/
 theorem subsingleton_sheafH_of_isAlgebraic_functionField {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsIntegral C] (L : Type u) [Field L]
     [Algebra C.functionField L] [Algebra.IsAlgebraic C.functionField L]

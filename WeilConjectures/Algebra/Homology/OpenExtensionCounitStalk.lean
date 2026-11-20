@@ -12,6 +12,8 @@ import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
 import Mathlib.CategoryTheory.Adjunction.Triple
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Sheafify
+import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Stalks of the open-extension counit
 

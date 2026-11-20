@@ -10,10 +10,14 @@ public import WeilConjectures.RingTheory.Depth
 public import Mathlib.Algebra.Homology.LocalCohomology
 import Mathlib.RingTheory.Depth.Rees
 import Mathlib.CategoryTheory.Abelian.Projective.Ext
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # DepthThreeLocalCohomologyVanishing
 
-Source: Stacks Project, Tags 0AVY and 0BK0.
+## References
+
+* Stacks Project, Tags 0AVY and 0BK0
+* Stacks Project, Tag 0AVY, Lemma 47.11.1
 -/
 
 @[expose] public section
@@ -22,8 +26,8 @@ universe u
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Compare degree-two vanishing for the two Ext implementations by computing both
-with a projective resolution (`isoExt` and `extMk_eq_zero_iff`). -/
+/-- If `Abelian.Ext N M 2` vanishes, then so does the degree-two `Ext` computed by the derived
+functor `Ext R (ModuleCat R) 2`. -/
 private theorem old_ext_two_isZero {R : Type u} [CommRing R]
     (N M : ModuleCat.{u} R)
     (h : Subsingleton (CategoryTheory.Abelian.Ext N M 2)) :
@@ -42,20 +46,7 @@ private theorem old_ext_two_isZero {R : Type u} [CommRing R]
     (h.elim _ 0)
   exact ⟨g, hg⟩
 
-/-- Algebraic vanishing of second local cohomology under depth at least three.
-
-Source: Stacks Project, Tag 0AVY, Lemma 47.11.1.
-(blueprint: lem-sbc-depth-three-puncture-h-one-local-vanishing)
-
-Proof: Write m for the maximal ideal. Since m is proper, mR is not R, and R
-is a finite module over itself. The regular-sequence definition of m-depth
-therefore agrees with the depth in Lemma 47.11.1. That lemma identifies depth
-with the first degree of nonzero local cohomology. More explicitly, depth is
-unchanged on replacing m by a positive power; the Ext groups from R/m^n to R
-vanish below depth, and their filtered colimit is local cohomology. Mathlib's
-localCohomology uses exactly this colimit of Ext modules. Since 2 < 3 and
-3 is at most depth R, every module in the degree-two diagram is zero and
-so is its colimit. Its underlying additive group is thus subsingleton. -/
+/-- Algebraic vanishing of second local cohomology under depth at least three. -/
 theorem depth_three_local_cohomology_vanishing
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (hdepth : (3 : ℕ∞) ≤ IsLocalRing.depth (R := R) R) :

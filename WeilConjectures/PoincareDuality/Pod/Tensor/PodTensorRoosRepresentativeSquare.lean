@@ -10,7 +10,7 @@ import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorRoosRepresentativeSqu
 
 /-! # One strict tensor tower and its canonical completed representative square
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 07A4 and 0941 (blueprint: lem-pod-tensor-roos-representative-square).
 -/
 
@@ -45,7 +45,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The canonical completed comparison is the realization of one normalized strict
 finite tensor tower arrow, before comparison with any chosen derived tensor family.
 
-Source: blueprint prop-pod-dual-tate-data-compatibility Steps 1 and 5; Stacks 07A4
+Source: blueprint theorem-poincare-duality-frobenius--2 Steps 1 and 5; Stacks 07A4
 and 0941 (blueprint: lem-pod-tensor-roos-representative-square).
 
 Proof: on each quotient, the generator formula identifies τ with the balanced

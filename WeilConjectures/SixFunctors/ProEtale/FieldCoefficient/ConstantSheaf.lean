@@ -21,7 +21,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 Let `Λ` be a commutative ring with an ultrametric norm, for instance a finite extension `E` of
 `ℚ_ℓ` inside `ℚ̄_ℓ` with the restricted norm, or its ring of integers `𝒪_E`. Following
 Bhatt–Scholze (*The pro-étale topology for schemes*, §6.8), the constructible `E`-sheaves of the
-blueprint (`def-weil-weil-sheaf-complex`) are modules over the
+blueprint (`definition-weil-structure`) are modules over the
 pro-étale sheaf `E_X : U ↦ C(U, E)` of continuous `E`-valued functions. This file constructs
 `Λ_X` (`AlgebraicGeometry.ProEtale.fieldConstantSheaf Λ X`) for any such `Λ`: it is the
 restriction to the small pro-étale site of `X` of the presheaf `U ↦ C(U, Λ)` on all schemes,

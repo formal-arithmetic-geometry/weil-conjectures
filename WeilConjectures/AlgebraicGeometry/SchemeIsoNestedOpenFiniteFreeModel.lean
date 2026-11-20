@@ -26,8 +26,45 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 500000 in
--- The nested functor comparisons require additional definitional equality checks.
+-- Transport a complex model through an exact functor square before specializing to sheaves.
+private theorem nestedOpenModel_localizationIso
+    {C₀ C₁ C₂ C₃ C₄ : Type*}
+    [Category C₀] [Category C₁] [Category C₂] [Category C₃] [Category C₄]
+    [Abelian C₀] [Abelian C₁] [Abelian C₂] [Abelian C₃] [Abelian C₄]
+    [HasDerivedCategory C₀] [HasDerivedCategory C₁] [HasDerivedCategory C₂]
+    [HasDerivedCategory C₃] [HasDerivedCategory C₄]
+    (R : C₀ ⥤ C₁) (G : C₁ ⥤ C₂) (H : C₂ ⥤ C₃) (F : C₃ ⥤ C₄) (L : C₀ ⥤ C₄)
+    [R.Additive] [G.Additive] [H.Additive] [F.Additive] [L.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (c : ((R ⋙ G) ⋙ H) ⋙ F ≅ L)
+    (C : CochainComplex C₁ ℤ) (D : CochainComplex C₀ ℤ) (P : CochainComplex C₃ ℤ)
+    (hC : C ≅ (R.mapHomologicalComplex (.up ℤ)).obj D)
+    (hiso : H.mapDerivedCategory.obj (G.mapDerivedCategory.obj (DerivedCategory.Q.obj C)) ≅
+      DerivedCategory.Q.obj P) :
+    Nonempty (L.mapDerivedCategory.obj (DerivedCategory.Q.obj D) ≅
+      DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)) := by
+  let eC : (G.mapHomologicalComplex (.up ℤ)).obj C ≅
+      ((R ⋙ G).mapHomologicalComplex (.up ℤ)).obj D :=
+    (G.mapHomologicalComplex (.up ℤ)).mapIso hC ≪≫
+      (Functor.mapHomologicalComplexCompIso (Iso.refl (R ⋙ G)) (.up ℤ)).app D
+  let eH : (H.mapHomologicalComplex (.up ℤ)).obj
+      ((G.mapHomologicalComplex (.up ℤ)).obj C) ≅
+      (((R ⋙ G) ⋙ H).mapHomologicalComplex (.up ℤ)).obj D :=
+    (H.mapHomologicalComplex (.up ℤ)).mapIso eC ≪≫
+      (Functor.mapHomologicalComplexCompIso (Iso.refl ((R ⋙ G) ⋙ H)) (.up ℤ)).app D
+  let q : DerivedCategory.Q.obj
+      ((((R ⋙ G) ⋙ H).mapHomologicalComplex (.up ℤ)).obj D) ≅ DerivedCategory.Q.obj P :=
+    DerivedCategory.Q.mapIso eH.symm ≪≫
+      (H.mapDerivedCategoryFactors.app _).symm ≪≫
+      H.mapDerivedCategory.mapIso (G.mapDerivedCategoryFactors.app C).symm ≪≫ hiso
+  exact ⟨L.mapDerivedCategoryFactors.app D ≪≫
+    DerivedCategory.Q.mapIso ((Functor.mapHomologicalComplexCompIso c (.up ℤ)).app D).symm ≪≫
+    (F.mapDerivedCategoryFactors.app _).symm ≪≫
+    F.mapDerivedCategory.mapIso q ≪≫ F.mapDerivedCategoryFactors.app P⟩
+
 set_option backward.isDefEq.respectTransparency false in
 /-- Transport one specified bounded-above finite-free model on a nested open across a
 scheme isomorphism. Neither scheme is assumed affine, and no module localization is used.
@@ -94,6 +131,15 @@ theorem exists_scheme_iso_nested_open_finite_free_model
   classical
   let j := U.ι ≫ s.hom
   let W := j ''ᵁ V
+  -- Free modules and the derived functors share these sheafification instances.
+  let : HasSheafify ((Opens.grothendieckTopology U.toScheme.toRingedSpace).over V)
+      AddCommGrpCat.{u} := inferInstance
+  let : HasSheafify ((Opens.grothendieckTopology Y.toRingedSpace).over W)
+      AddCommGrpCat.{u} := inferInstance
+  let : ((Opens.grothendieckTopology U.toScheme.toRingedSpace).over V).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
+  let : ((Opens.grothendieckTopology Y.toRingedSpace).over W).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
   let a := j.isoImage V
   let EV := Modules.overEquiv V
   let EW := Modules.overEquiv W
@@ -139,15 +185,27 @@ theorem exists_scheme_iso_nested_open_finite_free_model
     let GY := R ⋙ G
     let H := SheafOfModules.overFunctor.{u} (moduleRings U.toScheme.toRingedSpace) V
     let L := SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) W
-    have : G.Additive := Functor.additive_of_preserves_binary_products G
     let ER := CategoryTheory.Equivalence.mk R (Modules.restrictFunctor s.inv)
       ((Modules.restrictFunctorComp s.inv s.hom).symm ≪≫
         Modules.restrictFunctorCongr s.inv_hom_id ≪≫ Modules.restrictFunctorId).symm
       ((Modules.restrictFunctorComp s.hom s.inv).symm ≪≫
         Modules.restrictFunctorCongr s.hom_inv_id ≪≫ Modules.restrictFunctorId)
     have : R.IsEquivalence := ER.isEquivalence_functor
+    -- Reuse zero preservation when deriving additivity and mapping complexes.
+    have : (SheafOfModules.overFunctor.{u}
+        (moduleRings X.toRingedSpace) U).PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
+    have : (Modules.overEquiv U).functor.PreservesZeroMorphisms :=
+      Functor.preservesZeroMorphisms_of_full _
+    have : G.PreservesZeroMorphisms := inferInstance
+    have : R.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full _
+    have : H.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
+    have : L.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
+    let : Abelian (SheafOfModules.{u}
+        ((moduleRings U.toScheme.toRingedSpace).over V)) := inferInstance
+    let : Abelian (SheafOfModules.{u}
+        ((moduleRings Y.toRingedSpace).over W)) := inferInstance
+    have : G.Additive := Functor.additive_of_preserves_binary_products G
     have : R.Additive := Functor.additive_of_preserves_binary_products R
-    have : GY.Additive := inferInstance
     have : H.Additive := Functor.additive_of_preserves_binary_products H
     have : L.Additive := Functor.additive_of_preserves_binary_products L
     have : A.functor.Additive := inferInstance
@@ -170,23 +228,6 @@ theorem exists_scheme_iso_nested_open_finite_free_model
           Functor.rightUnitor L
     obtain ⟨hC⟩ := hC
     obtain ⟨hiso⟩ := hiso
-    let eC : (G.mapHomologicalComplex (.up ℤ)).obj C ≅
-        (GY.mapHomologicalComplex (.up ℤ)).obj D :=
-      (G.mapHomologicalComplex (.up ℤ)).mapIso hC ≪≫
-        (Functor.mapHomologicalComplexCompIso (Iso.refl GY) (.up ℤ)).app D
-    let eH : (H.mapHomologicalComplex (.up ℤ)).obj
-        ((G.mapHomologicalComplex (.up ℤ)).obj C) ≅
-        ((GY ⋙ H).mapHomologicalComplex (.up ℤ)).obj D :=
-      (H.mapHomologicalComplex (.up ℤ)).mapIso eC ≪≫
-        (Functor.mapHomologicalComplexCompIso (Iso.refl (GY ⋙ H)) (.up ℤ)).app D
-    let q : DerivedCategory.Q.obj
-        (((GY ⋙ H).mapHomologicalComplex (.up ℤ)).obj D) ≅ DerivedCategory.Q.obj P :=
-      DerivedCategory.Q.mapIso eH.symm ≪≫
-        (H.mapDerivedCategoryFactors.app _).symm ≪≫
-        H.mapDerivedCategory.mapIso (G.mapDerivedCategoryFactors.app C).symm ≪≫ hiso
-    exact ⟨L.mapDerivedCategoryFactors.app D ≪≫
-      DerivedCategory.Q.mapIso ((Functor.mapHomologicalComplexCompIso c (.up ℤ)).app D).symm ≪≫
-      (A.functor.mapDerivedCategoryFactors.app _).symm ≪≫
-      A.functor.mapDerivedCategory.mapIso q ≪≫ A.functor.mapDerivedCategoryFactors.app P⟩
+    exact nestedOpenModel_localizationIso R G H A.functor L c C D P hC hiso
 
 end AlgebraicGeometry.Scheme

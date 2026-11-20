@@ -13,7 +13,7 @@ import all WeilConjectures.TraceFormula.Isomorphism.IsomorphismStrictQuotientMul
 /-! # Normalized isomorphism of ordinary quotient towers
 
 Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of
-def-weil-frobenius-coefficient-twists.
+prose-10-21.
 (blueprint: lem-pur-isomorphism-ordinary-quotient-tower-normalization).
 -/
 

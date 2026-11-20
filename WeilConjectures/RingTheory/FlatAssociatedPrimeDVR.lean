@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Ideal.Colon
 public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.Flat.TorsionFree
 

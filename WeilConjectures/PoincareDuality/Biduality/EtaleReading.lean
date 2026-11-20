@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 
 Let `Λ = 𝒪_E ⧸ ℓⁿ` and write `ρ_X = Rν_* ∘ Φ : D(Mod_{Λ_X}) ⥤ D(X_ét, Λ)` for the étale reading of
 condensed `Λ`-module objects (`ProEtale.CondensedRing.finiteEtaleReading` on bounded constructible
-complexes). This file proves the finite step (i) of blueprint `det-pd-biduality-coefficients` for
+complexes). This file proves the finite step (i) of blueprint `theorem-verdier-biduality` for
 the reductions `R K₀` of bounded constructible `𝒪_E`-complexes `K₀`: the étale reading is fully
 faithful on them, carries `R ω_{X, 𝒪_E}` to the étale dualizing complex and commutes with the
 internal homs into it, so the condensed Verdier dual `RHom(-, R ω_{X, 𝒪_E})` is fully faithful on
@@ -62,7 +62,7 @@ noncomputable def integersModPowReductionIhomIso
         ((boundedConstructibleIntegersModPowReduction X.left ℓ E.1 n).obj L).obj :=
   haveI := isIso_ihomComparison_integersModPowReduction ℓ E n X K L
   asIso ((Functor.LaxMonoidal.ihomComparison
-    L(Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)) K.obj).natTrans.app L.obj)
+    L(Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)) K.obj).app L.obj)
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- The étale reading `ρ_X` is fully faithful on bounded constructible condensed
@@ -168,7 +168,7 @@ lemma bijective_pre_app_integersModPowReduction
       (integersModPowReductionIhomIso ℓ E n L (PadicIntegersRingObj.dualizingComplex ℓ E.1 X)))
 
 /-- **Finite-coefficient biduality on the reductions of integral complexes** (blueprint
-`det-pd-biduality-coefficients`, (i)): if étale Verdier biduality holds on `Dctf(X_ét, Λ)`,
+`theorem-verdier-biduality`, (i)): if étale Verdier biduality holds on `Dctf(X_ét, Λ)`,
 `Λ = 𝒪_E ⧸ ℓⁿ`, then for every bounded constructible `𝒪_E`-complex `K₀` the double-dual morphism
 of its reduction `R K₀`, relative to the reduction `R ω_{X, 𝒪_E}` of the integral dualizing
 complex, is an isomorphism. -/

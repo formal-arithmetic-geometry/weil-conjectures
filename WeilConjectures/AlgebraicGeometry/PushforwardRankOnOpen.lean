@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 
 /-! Rank of a finite flat structure-sheaf pushforward on a constant-rank open.
 Source: Stacks Project, Tags 02KB and 04MH.

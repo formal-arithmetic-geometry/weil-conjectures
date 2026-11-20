@@ -114,8 +114,10 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # The singleton evaluation mate below its source vertex
 
-Source: Zheng Construction 4.1; Stacks 06YT and 0FND.
-(blueprint: lem-coef-semilinear-singleton-evaluation-mate).
+## References
+
+* Zheng Construction 4.1
+* Stacks 06YT, 0FND
 -/
 
 @[expose] public noncomputable section
@@ -163,18 +165,18 @@ private theorem mate_isIso_transfer
 private theorem mate_transpose_identity
     {E : X ⥤ Y} {F : X ⥤ Z} {R : Z ⥤ Y} {L : Y ⥤ X} {S : Y ⥤ Z}
     (a : L ⊣ E) (b : S ⊣ R) (τ : E ⟶ F ⋙ R) (P : Y) :
-    ((mateEquiv a b).symm (TwoSquare.mk E F (𝟭 Y) R τ)).natTrans.app P =
+    ((mateEquiv a b).symm (TwoSquare.mk E F (𝟭 Y) R τ)).app P =
       (b.homEquiv _ _).symm (a.unit.app P ≫ τ.app (L.obj P)) := by
   apply (b.homEquiv P (F.obj (L.obj P))).injective
   change (b.homEquiv P (F.obj (L.obj P)))
-      (((mateEquiv a b).symm (TwoSquare.mk E F (𝟭 Y) R τ)).natTrans.app P) =
+      (((mateEquiv a b).symm (TwoSquare.mk E F (𝟭 Y) R τ)).app P) =
     (b.homEquiv P (F.obj (L.obj P)))
       ((b.homEquiv P (F.obj (L.obj P))).symm (a.unit.app P ≫ τ.app (L.obj P)))
   rw [Equiv.apply_symm_apply]
   have he := adjunctionMate_transpose a b (TwoSquare.mk E F (𝟭 Y) R τ)
     P (L.obj P) (𝟙 _)
   change (b.homEquiv P (F.obj (L.obj P)))
-      (((mateEquiv a b).symm (TwoSquare.mk E F (𝟭 Y) R τ)).natTrans.app P ≫
+      (((mateEquiv a b).symm (TwoSquare.mk E F (𝟭 Y) R τ)).app P ≫
         F.map (𝟙 (L.obj P))) =
     (𝟭 Y).map (a.homEquiv P (L.obj P) (𝟙 _)) ≫ τ.app (L.obj P) at he
   erw [F.map_id, Category.comp_id, Adjunction.homEquiv_id, Functor.id_map] at he
@@ -186,7 +188,7 @@ private theorem transfer_from_mate
     (a₀ : L₀ ⊣ E) (a : L ⊣ E) (b₀ : S₀ ⊣ R) (b : S ⊣ R)
     (τ : E ⟶ F ⋙ R) (P : Y)
     (hk : IsIso (((mateEquiv a₀ b₀).symm
-      (TwoSquare.mk E F (𝟭 Y) R τ)).natTrans.app P)) :
+      (TwoSquare.mk E F (𝟭 Y) R τ)).app P)) :
     IsIso ((b.homEquiv _ _).symm (a.unit.app P ≫ τ.app (L.obj P))) := by
   have hk₀ : IsIso ((b₀.homEquiv _ _).symm
       (a₀.unit.app P ≫ τ.app (L₀.obj P))) := by
@@ -234,22 +236,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r}) (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- Below a singleton vertex, the mate of the actual transition is invertible.
-This assertion involves no tensor product or projection map.
-Source: Zheng Construction 4.1; Stacks 06YT, 0FND
-(blueprint: lem-coef-semilinear-singleton-evaluation-mate).
-Proof: use the strict-system/sequence-site equivalence, which identifies ordinary
-evaluations and their actual horizontal transitions. Localize those identities.
-Choose ordinary singleton extension and its normalized derived adjunction. The
-below-level singleton comparison is the inverse mate of the localized transition:
-the ordinary singleton unit square, its localized transition square and the
-normalized derived-mate comparison prove this identification. The common resolving
-class is the flat-term K-flat complexes. The given L and adj are identified with
-this left adjoint by the unique unit-compatible left-adjoint isomorphism. The
-scalar left adjoints are likewise identified by uniqueness of left adjoints. The
-mate for L and A is conjugate to the invertible singleton mate by these two
-isomorphisms, hence invertible. Its component is exactly scalar extension of the
-unit followed by reduction, since reduction is the transpose of the transition.
-Identity indices, zero coefficient rings and empty sites use the same argument. -/
+This assertion involves no tensor product or projection map. -/
 theorem semilinearSingletonEvaluationMate_isIso
     (n q : ℕ) (h : q ≤ n)
     (A : ScalarData.{c, v, max c v r}

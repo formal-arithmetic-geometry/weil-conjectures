@@ -79,7 +79,7 @@ lemma isSheafFor_ofArrows_of_finite_of_disjoint {F : (AffineProEt S)ᵒᵖ ⥤ T
     exists_surjective_factorization_disjoint V f hsurj
   rw [Presieve.isSheafFor_arrows_iff]
   intro x hx
-  -- Step 1: glue the `x i` over the disjoint cover `{j i}` of `W` to obtain `z : F(W)`.
+  -- Step 1: glue the `x i` over the disjoint cover `{j i}` of `W` to obtain `z: F(W)`.
   have hW : (Presieve.ofArrows V j).IsSheafFor F := h₁ V j hoi hcov hdisj
   rw [Presieve.isSheafFor_arrows_iff] at hW
   obtain ⟨z, hz, hzuniq⟩ := hW x (fun a b Q ga gb hab ↦ hx a b Q ga gb (by

@@ -14,8 +14,7 @@ public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
 # The compact-support upper bound on affine curves
 
 Let `C₀` be a smooth geometrically connected affine curve over `k₀ = 𝔽_q` and `𝓕` a lisse Weil
-sheaf on `C₀`, punctually `ι`-pure of weight `w`. Then `H_c^i(C, 𝓕)` has weights at most `w + i`
-(blueprint: `thm-a1-affine-curve-upper`).
+sheaf on `C₀`, punctually `ι`-pure of weight `w`. Then `H_c^i(C, 𝓕)` has weights at most `w + i`.
 
 The degree-one bound is reduced to the Deligne–Laumon estimate on the affine line for a sheaf
 unramified at infinity
@@ -29,7 +28,7 @@ unramified at infinity
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_zero_of_isFinite`:
-  blueprint `lem-a1-finite-boundary-weights`.
+  the weights of `H_c^0` of a Weil sheaf on a finite `k₀`-scheme.
 - `WeilSheaf.LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology_one_sheaf`:
   the degree-one bound on `U₀` for a sheaf unramified at infinity.
 -/
@@ -52,7 +51,7 @@ namespace WeilSheaf
 
 /-- **Weights of the cohomology of a finite boundary.** Let `Z` be finite over `k₀` and `𝓖` a
 Weil sheaf on `Z` whose stalks have weights at most `w`. Then `H_c^0(Z, 𝓖)` has weights at most
-`w`. (blueprint: `lem-a1-finite-boundary-weights`) -/
+`w`. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_zero_of_isFinite
     {Z : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] [IsFinite (Z ↘ Spec (CommRingCat.of k₀))]
     {ι : PadicAlgCl l →+* ℂ} {G : WeilSheaf k₀ l Z} {w : ℝ} (hG : G.HasWeightsAtMost ι w) :
@@ -225,8 +224,8 @@ quasi-finite morphism and `W ⊆ ℙ¹` an open containing `∞`, with finite co
 `H_c^1(U, 𝓕) = H_c^1(ℙ¹, H₀!𝓕)` is a quotient of `H_c^1(W, (H₀!𝓕)|_W)`, the finite complement of
 `W` having no `H_c^1`, and
 `hasWeightsAtMostOver_compactlySupportedCohomology_one_of_opens_projectiveLine`
-applies on `W`. This replaces the constant field extension and the homography of the blueprint
-(`lem-a1-unramified-at-infinity`). -/
+applies on `W`. No constant field extension and no homography of `ℙ¹` moving a point to `∞`
+are needed. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_projectiveLine
     {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
@@ -262,8 +261,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_projectiveLine
 `H : U ⟶ Y` be a separated quasi-finite morphism of separated `k₀`-schemes of finite type, and
 `W ⊆ Y` an open over which `H` is finite étale. If `𝓕` is a lisse Weil sheaf on `U`, then the
 restriction `(H₀!𝓕)|_W` is lisse: by base change it is `(H|_W)₀!(𝓕|_{H⁻¹W}) = (H|_W)_*(𝓕|_{H⁻¹W})`,
-the direct image of a lisse sheaf along a finite étale morphism.
-(blueprint: `lem-a1-reduction-lisse-pure`, lissity) -/
+the direct image of a lisse sheaf along a finite étale morphism. -/
 theorem isLisse_upperStar_higherLowerShriek_zero_of_isFinite_of_etale
     {U Y : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
@@ -299,7 +297,7 @@ theorem isLisse_upperStar_higherLowerShriek_zero_of_isFinite_of_etale
 /-- **Purity of `H_c^2` on an affine curve.** Let `C` be a smooth geometrically connected affine
 curve over `k₀` and `𝓕` a lisse Weil sheaf on `C`, punctually `ι`-pure of weight `w`. Then
 `H_c^2(C, 𝓕)` is `ι`-pure of weight `w + 2`: it is the degree-two endpoint statement for the
-middle extension `(𝟙_C)_* 𝓕 = 𝓕`. (blueprint: `lem-a1-affine-hc2-pure`) -/
+middle extension `(𝟙_C)_* 𝓕 = 𝓕`. -/
 theorem IsPunctuallyPureOfWeight.isPureOfWeightOver_compactlySupportedCohomology_two
     {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
@@ -315,7 +313,9 @@ theorem IsPunctuallyPureOfWeight.isPureOfWeightOver_compactlySupportedCohomology
 
 /-- **Vanishing outside degrees one and two on an affine curve.** Let `C` be a smooth
 geometrically connected affine curve over `k₀` and `𝓕` a lisse Weil sheaf on `C`. Then
-`H_c^r(C, 𝓕) = 0` for `r ∉ {1, 2}`. (blueprint: `lem-a1-affine-hc0`, `lem-zl-affine-curve-range`) -/
+`H_c^r(C, 𝓕) = 0` for `r ∉ {1, 2}`: in negative degrees because `Rf_!` of a sheaf is concentrated
+in nonnegative degrees, in degree zero because `C` is affine, and above degree two by Poincaré
+duality for the lisse sheaf `𝓕`. -/
 theorem subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine
     {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
@@ -326,9 +326,9 @@ theorem subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine
   have := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
   rcases hr with hr | hr
   · rcases hr.lt_or_eq with hr | rfl
-    · exact subsingleton_compactlySupportedCohomology_of_isAffine F (Or.inl hr)
+    · exact subsingleton_compactlySupportedCohomology_of_neg F hr
     · exact subsingleton_compactlySupportedCohomology_zero F hF
-  · exact subsingleton_compactlySupportedCohomology_of_isAffine F (Or.inr hr)
+  · exact subsingleton_compactlySupportedCohomology_of_isLisse hF hr
 
 namespace LisseOnDenseOpen
 
@@ -336,9 +336,8 @@ namespace LisseOnDenseOpen
 punctually `ι`-pure of weight `w`. Then `H_c^1(U, 𝓕)` has weights at most `w + 1`, with no
 condition at infinity: a separated quasi-finite map `H : U₀ ⟶ ℙ¹` sends a closed point of `U₀` to
 `∞` and is finite étale over an open `W ∋ ∞`, so that `(H₀!𝓕)|_W` is lisse, and
-`hasWeightsAtMostOver_compactlySupportedCohomology_one_of_projectiveLine` applies. This replaces
-the constant field extension and the homography of the blueprint.
-(blueprint: `lem-a1-unramified-at-infinity`) -/
+`hasWeightsAtMostOver_compactlySupportedCohomology_one_of_projectiveLine` applies. No constant
+field extension and no homography of `ℙ¹` moving a point to `∞` are needed. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_isPunctuallyPureOfWeight
     (D : LisseOnDenseOpen k₀ l) {w : ℝ} (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
     (D.sheaf.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
@@ -351,7 +350,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_isPunctuallyPur
 /-- **The compact-support upper bound on a dense open of the line.** Let `𝓕` be lisse on the
 dense open `U₀ ⊆ 𝔸¹`, punctually `ι`-pure of weight `w`. Then `H_c^r(U, 𝓕)` has weights at most
 `w + r` for every `r`; it vanishes for `r ∉ {1, 2}` and is pure of weight `w + 2` for `r = 2`.
-This is the case of the line of `thm-a1-affine-curve-upper`. -/
+This is the case `C₀ = U₀ ⊆ 𝔸¹` of the compact-support upper bound on affine curves. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology (D : LisseOnDenseOpen k₀ l) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (r : ℤ) :
     (D.sheaf.compactlySupportedCohomology r).HasWeightsAtMostOver k₀ ι (w + r) := by
@@ -390,8 +389,7 @@ theorem IsPunctuallyPureOfWeight.upperStar_of_comp_eq {X Y Z : Scheme.{u}}
 `g : C' ⟶ Y` a finite morphism of separated `k₀`-schemes of finite type, and `W ⊆ Y` an open over
 which `g` is étale and whose preimage lies in `C`. If `𝓕` is lisse on `C` and punctually `ι`-pure
 of weight `w`, then the restriction of `𝓚 = g_* j_! 𝓕` to `W` is lisse and punctually `ι`-pure of
-weight `w`: by base change it is the finite étale direct image `(g|_W)_*(𝓕|_{g⁻¹W})`.
-(blueprint: `lem-a1-reduction-lisse-pure`) -/
+weight `w`: by base change it is the finite étale direct image `(g|_W)_*(𝓕|_{g⁻¹W})`. -/
 theorem isLisse_and_isPunctuallyPureOfWeight_upperStar_lowerStar_extensionByZero
     {C C' Y : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] [C'.Over (Spec (CommRingCat.of k₀))]
     [Y.Over (Spec (CommRingCat.of k₀))]
@@ -453,9 +451,8 @@ theorem isLisse_and_isPunctuallyPureOfWeight_upperStar_lowerStar_extensionByZero
 Weil sheaf on `U₀` which is either a constant twist `ℚ̄_ℓ(b)` of the constant sheaf or the
 restriction of a twisted Artin–Schreier sheaf `ℒ_{ψ(a x)}(b)` with `a ≠ 0`. If `𝓔` is punctually
 `ι`-pure of weight `w`, then `H_c^i(U, 𝓔)` has weights at most `w + i` for every `i`: `𝓔` is
-lisse, and the estimate on dense opens of the line applies. The blueprint computes the
-cohomology of the line instead; the general estimate makes this unnecessary.
-(blueprint: `lem-a1-exceptional-constituents`) -/
+lisse, and the estimate on dense opens of the line
+(`LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology`) applies. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_exceptional {U : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ affineLine k₀) [IsOpenImmersion j]
     [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] [IsDominant j]
@@ -478,8 +475,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_exceptional {U : Sc
 
 /-- **Subquotients of pure sheaves are pure.** If `𝓖` is punctually `ι`-pure of weight `w` and
 `𝓢` is a subquotient of `𝓖`, a quotient `A ↠ 𝓢` of a subobject `A ↪ 𝓖`, then `𝓢` is punctually
-`ι`-pure of weight `w`: its stalks are Frobenius-stable subquotients of those of `𝓖`.
-(blueprint: `lem-a1-subquotient-pure`) -/
+`ι`-pure of weight `w`: its stalks are Frobenius-stable subquotients of those of `𝓖`. -/
 theorem IsPunctuallyPureOfWeight.of_subquotient {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     {G A S : WeilSheaf k₀ l X} (i : A ⟶ G) [Mono i] (p : A ⟶ S) [Epi p] {w : ℝ}

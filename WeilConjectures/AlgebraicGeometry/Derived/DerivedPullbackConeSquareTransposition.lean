@@ -89,11 +89,109 @@ private theorem cone_precompose
   · simp [CochainComplex.mappingCone.mapOfHomotopy, CochainComplex.mappingCone.map,
       Category.assoc]
 
+private theorem mappingCone_map_isIso
+    {E : Type*} [Category E] [Abelian E] [HasDerivedCategory.{w} E]
+    {P Q A B : CochainComplex E ℤ}
+    (p : P ⟶ Q) (t : A ⟶ B) (x : P ⟶ A) (y : Q ⟶ B)
+    (h : p ≫ y = x ≫ t) [IsIso (DerivedCategory.Q.map x)]
+    [IsIso (DerivedCategory.Q.map y)] :
+    IsIso (DerivedCategory.Q.map (CochainComplex.mappingCone.map p t x y h)) := by
+  let m := DerivedCategory.Q.mapTriangle.map
+    (CochainComplex.mappingCone.triangleMap p t x y h)
+  have h₁ : IsIso m.hom₁ := inferInstanceAs (IsIso (DerivedCategory.Q.map x))
+  have h₂ : IsIso m.hom₂ := inferInstanceAs (IsIso (DerivedCategory.Q.map y))
+  exact CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ m
+    (DerivedCategory.mappingCone_triangle_distinguished p)
+    (DerivedCategory.mappingCone_triangle_distinguished t) h₁ h₂
+
+private theorem map_transpose_of_composite
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (Q : C ⥤ C') (Q' : D ⥤ D')
+    {Ld : C' ⥤ D'} {Rd : D' ⥤ C'} (adj' : Ld ⊣ Rd)
+    {P A : C} {I Z : D} (c : P ⟶ A) (b : P ⟶ R.obj I) (α : A ⟶ R.obj I)
+    (k : Z ⟶ L.obj P) (a : Z ⟶ I)
+    (e : Q'.obj (L.obj P) ⟶ Ld.obj (Q.obj P))
+    (η : Q.obj (R.obj I) ⟶ Rd.obj (Q'.obj I))
+    (ha : a = k ≫ (adj.homEquiv _ _).symm b) (hb : b = c ≫ α)
+    (he : Q'.map ((adj.homEquiv _ _).symm b) =
+      e ≫ (adj'.homEquiv _ _).symm (Q.map b ≫ η)) :
+    Q'.map a = (Q'.map k ≫ e ≫ Ld.map (Q.map c)) ≫
+      (adj'.homEquiv _ _).symm (Q.map α ≫ η) := by
+  rw [ha, Functor.map_comp, he, hb, Functor.map_comp, Category.assoc,
+    Adjunction.homEquiv_naturality_left_symm]
+  simp only [Category.assoc]
+
+-- Perform the cone construction with abstract functors, so its proof does not
+-- repeatedly unfold the chosen tensor pullback and derived sheaf adjunction.
+private theorem localized_cone_square_transposition
+    {E E' : Type*} [Category E] [Category E'] [Abelian E] [Abelian E']
+    [HasDerivedCategory.{w} E] [HasDerivedCategory.{w} E']
+    {L : E ⥤ E'} {R : E' ⥤ E} [L.Additive] [R.Additive] (adj₀ : L ⊣ R)
+    {Ld : DerivedCategory E ⥤ DerivedCategory E'}
+    {Rd : DerivedCategory E' ⥤ DerivedCategory E} (adj : Ld ⊣ Rd)
+    (η : R.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ Rd)
+    (K : CochainComplex E ℤ → Prop)
+    (e : ∀ P (_ : K P), DerivedCategory.Q.obj ((L.mapHomologicalComplex (.up ℤ)).obj P) ≅
+      Ld.obj (DerivedCategory.Q.obj P))
+    (he : ∀ P (hP : K P) I (α : P ⟶ (R.mapHomologicalComplex (.up ℤ)).obj I),
+      DerivedCategory.Q.map (((adj₀.mapHomologicalComplex (.up ℤ)).homEquiv _ _).symm α) =
+        (e P hP).hom ≫ (adj.homEquiv _ _).symm (DerivedCategory.Q.map α ≫ η.app I))
+    {P Q A B : CochainComplex E ℤ} {A' B' : CochainComplex E' ℤ}
+    (p : P ⟶ Q) (t : A ⟶ B) (t' : A' ⟶ B')
+    (x : P ⟶ A) (y : Q ⟶ B) (hc : p ≫ y = x ≫ t)
+    (hP : K P) (hQ : K Q) (hconeP : K (CochainComplex.mappingCone p))
+    (hx : QuasiIso x) (hy : QuasiIso y)
+    (α : A ⟶ (R.mapHomologicalComplex (.up ℤ)).obj A')
+    (β : B ⟶ (R.mapHomologicalComplex (.up ℤ)).obj B')
+    (H : Homotopy (t ≫ β) (α ≫ (R.mapHomologicalComplex (.up ℤ)).map t')) :
+    ∃ (C D : CochainComplex E' ℤ) (s : C ⟶ D) (a : C ⟶ A') (b : D ⟶ B')
+      (H' : Homotopy (s ≫ b) (a ≫ t'))
+      (d₁ : DerivedCategory.Q.obj C ≅ Ld.obj (DerivedCategory.Q.obj A))
+      (d₂ : DerivedCategory.Q.obj D ≅ Ld.obj (DerivedCategory.Q.obj B))
+      (d₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone s) ≅
+        Ld.obj (DerivedCategory.Q.obj (CochainComplex.mappingCone t))),
+      DerivedCategory.Q.map a =
+        d₁.hom ≫ (adj.homEquiv _ _).symm (DerivedCategory.Q.map α ≫ η.app A') ∧
+      DerivedCategory.Q.map b =
+        d₂.hom ≫ (adj.homEquiv _ _).symm (DerivedCategory.Q.map β ≫ η.app B') ∧
+      DerivedCategory.Q.map (CochainComplex.mappingCone.mapOfHomotopy H') =
+        d₃.hom ≫ (adj.homEquiv _ _).symm
+          (DerivedCategory.Q.map (CochainComplex.mappingCone.mapOfHomotopy H ≫
+            (CochainComplex.mappingCone.mapHomologicalComplexIso t' R).inv) ≫
+              η.app (CochainComplex.mappingCone t')) := by
+  let lc := L.mapHomologicalComplex (.up ℤ)
+  let ac := adj₀.mapHomologicalComplex (.up ℤ)
+  obtain ⟨H₀, hcone⟩ := cone_precompose p t _ x y hc α β H
+  obtain ⟨H', htrans⟩ := CochainComplex.additiveAdjunction_cone_square
+    adj₀ p t' (x ≫ α) (y ≫ β) H₀
+  let c := CochainComplex.mappingCone.map p t x y hc
+  have : IsIso (DerivedCategory.Q.map x) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ x).2 hx
+  have : IsIso (DerivedCategory.Q.map y) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ y).2 hy
+  have : IsIso (DerivedCategory.Q.map c) := mappingCone_map_isIso p t x y hc
+  refine ⟨lc.obj P, lc.obj Q, lc.map p, (ac.homEquiv _ _).symm (x ≫ α),
+    (ac.homEquiv _ _).symm (y ≫ β), H',
+    e P hP ≪≫ Ld.mapIso (asIso (DerivedCategory.Q.map x)),
+    e Q hQ ≪≫ Ld.mapIso (asIso (DerivedCategory.Q.map y)),
+    DerivedCategory.Q.mapIso (CochainComplex.mappingCone.mapHomologicalComplexIso p L).symm ≪≫
+      e _ hconeP ≪≫ Ld.mapIso (asIso (DerivedCategory.Q.map c)), ?_, ?_, ?_⟩
+  · simpa only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
+      Adjunction.homEquiv_naturality_left_symm, Category.assoc] using he P hP A' (x ≫ α)
+  · simpa only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
+      Adjunction.homEquiv_naturality_left_symm, Category.assoc] using he Q hQ B' (y ≫ β)
+  · simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
+    apply map_transpose_of_composite ac DerivedCategory.Q DerivedCategory.Q adj
+      c _ _ (CochainComplex.mappingCone.mapHomologicalComplexIso p L).inv _
+      (e _ hconeP).hom _ htrans
+    · exact (congrArg (fun k ↦ k ≫
+        (CochainComplex.mappingCone.mapHomologicalComplexIso t' R).inv) hcone).trans
+          (Category.assoc _ _ _)
+    · exact he _ hconeP _ _
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 800000 in
--- The functorial flat resolution and the concrete sheaf adjunction need more heartbeats.
 /-- Transpose a specified cone-square through derived pullback/direct image.
 This is independent of open covers and of base-change comparison maps.
 Source: Stacks Project, Cohomology, Tags 06YI and 06YJ (K-flat computations),
@@ -159,60 +257,15 @@ theorem derivedPullback_cone_square_transposition
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf, moduleRings] at *
   intro α β H
   obtain ⟨hL, e, he⟩ := kFlat_pullback_adjunction_comparison g
-  let E : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
-      SheafOfModules.{u} (moduleRings S'.toRingedSpace) := Scheme.Modules.tensorPullback g
-  let G := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
-  let L := E.mapHomologicalComplex (.up ℤ)
-  let F := G.mapHomologicalComplex (.up ℤ)
-  let adj₀ : E ⊣ G := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)
-  let ac := adj₀.mapHomologicalComplex (.up ℤ)
   obtain ⟨P, Q, p, x, y, hc, hP, hQ, hx, hy⟩ := replacement S A B t
-  obtain ⟨H₀, hcone⟩ := cone_precompose p t (F.map t') x y hc α β H
-  obtain ⟨H', htrans⟩ := CochainComplex.additiveAdjunction_cone_square
-    adj₀ p t' (x ≫ α) (y ≫ β) H₀
-  let c := CochainComplex.mappingCone.map p t x y hc
-  have : IsIso (DerivedCategory.Q.map x) :=
-    (DerivedCategory.isIso_Q_map_iff_quasiIso _ x).2 hx
-  have : IsIso (DerivedCategory.Q.map y) :=
-    (DerivedCategory.isIso_Q_map_iff_quasiIso _ y).2 hy
-  have : IsIso (DerivedCategory.Q.map c) := by
-    let m := DerivedCategory.Q.mapTriangle.map
-      (CochainComplex.mappingCone.triangleMap p t x y hc)
-    have h₁ : IsIso m.hom₁ := by
-      change IsIso (DerivedCategory.Q.map x)
-      infer_instance
-    have h₂ : IsIso m.hom₂ := by
-      change IsIso (DerivedCategory.Q.map y)
-      infer_instance
-    exact CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ m
-      (DerivedCategory.mappingCone_triangle_distinguished p)
-      (DerivedCategory.mappingCone_triangle_distinguished t) h₁ h₂
-  have hconeP := CochainComplex.isKFlat_mappingCone p hP hQ
-  refine ⟨L.obj P, L.obj Q, L.map p, (ac.homEquiv _ _).symm (x ≫ α),
-    (ac.homEquiv _ _).symm (y ≫ β), H',
-    e P hP ≪≫ (derivedPullback g).mapIso (asIso (DerivedCategory.Q.map x)),
-    e Q hQ ≪≫ (derivedPullback g).mapIso (asIso (DerivedCategory.Q.map y)),
-    DerivedCategory.Q.mapIso (CochainComplex.mappingCone.mapHomologicalComplexIso p E).symm ≪≫
-      e _ hconeP ≪≫ (derivedPullback g).mapIso (asIso (DerivedCategory.Q.map c)), ?_, ?_, ?_⟩
-  · have hh := he P hP A' (x ≫ α)
-    simp only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
-      Adjunction.homEquiv_naturality_left_symm, Category.assoc, ac, adj₀, E, L] at hh ⊢
-    convert hh using 2
-  · have hh := he Q hQ B' (y ≫ β)
-    simp only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
-      Adjunction.homEquiv_naturality_left_symm, Category.assoc, ac, adj₀, E, L] at hh ⊢
-    convert hh using 2
-  · rw [htrans, Functor.map_comp]
-    have h := he _ hconeP (CochainComplex.mappingCone t')
-      (CochainComplex.mappingCone.mapOfHomotopy H₀ ≫
-        (CochainComplex.mappingCone.mapHomologicalComplexIso t' G).inv)
-    rw [hcone] at h
-    rw [hcone]
-    have hh := congrArg (fun k ↦ DerivedCategory.Q.map
-      (CochainComplex.mappingCone.mapHomologicalComplexIso p E).inv ≫ k) h
-    simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom,
-      Functor.map_comp, Adjunction.homEquiv_naturality_left_symm, Category.assoc,
-      adj₀, E, L, c, F, G] at hh ⊢
-    convert hh using 2
+  exact localized_cone_square_transposition
+    (E := SheafOfModules.{u} (moduleRings S.toRingedSpace))
+    (E' := SheafOfModules.{u} (moduleRings S'.toRingedSpace))
+    (L := Scheme.Modules.tensorPullback g)
+    (R := RingedSpace.moduleDirectImage g.toLRSHom.toShHom)
+    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g))
+    (relativeMVAdj g) (schemeMVDirectImageLocalization g)
+    (CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf)) e he
+    p t t' x y hc hP hQ (CochainComplex.isKFlat_mappingCone p hP hQ) hx hy α β H
 
 end AlgebraicGeometry

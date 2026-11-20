@@ -37,7 +37,7 @@ generic connectedness of fibres (`exists_ne_zero_forall_connectedSpace_fiber`) a
 
 ## Blueprint
 
-- `lem-zl-bertini-finite-cover-curve`: the Bertini lemma for finite covers.
+- `lemma-curve-preserving-finite-cover--1`: the Bertini lemma for finite covers.
 -/
 
 @[expose] public section
@@ -372,7 +372,7 @@ a finite nonempty set `S` of closed points of `Spec A`. Then there is a nonzero 
 the parameters such that `Spec (B ⧸ (∑ bᵢ vᵢ))` is connected whenever `a(b) ≠ 0`.
 
 This is an input of the Bertini lemma for finite covers
-(blueprint: `lem-zl-bertini-finite-cover-curve`). The universal member
+(blueprint: `lemma-curve-preserving-finite-cover--1`). The universal member
 `D = B[X₁, …, X_M] ⧸ (∑ vᵢ Xᵢ)` over `k[X₁, …, X_M]` has a unique minimal prime
 (`BertiniConnected.exists_isPrime_forall_le`), since the base locus has codimension `≥ 2` in
 `Spec B`; so its generic fibre is irreducible, a point of `S` provides a section, and generic

@@ -16,8 +16,10 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
 
 /-! # The sheaf part of coefficient generation
-Source: blueprint generation, Single sheaves paragraph.
-(blueprint: lem-sfb-coefficient-heart-sheaf-cone-witness)
+
+A constructible sheaf of `E`- or `ℚ̄_ℓ`-modules on a Noetherian scheme has a finite filtration
+with lisse subquotients on the strata (`coefficientHeart_lisse_filtration`), and hence a finite
+cone witness from shifted lisse extensions (`coefficientHeart_sheaf_cone_witness`).
 -/
 
 @[expose] public noncomputable section
@@ -258,7 +260,12 @@ private theorem common_lisse_refinement
       (fun S a ↦ HasFiniteConstantLocalModel Λ₀ S ((CondensedRing.upperStar Λ₀ a).obj M))
       P hP) hc
 
-private theorem coefficientHeart_lisse_filtration (ℓ : ℕ) [Fact ℓ.Prime]
+/-- Every constructible sheaf of `E`- or `ℚ̄_ℓ`-modules on a Noetherian scheme has a finite
+filtration whose successive quotients are extensions by zero `a_! L` of lisse modules `L`
+on the strata of a finite locally closed stratification: the existence form of
+`coefficientHeart_filtration`, with the adapted stratification chosen from
+constructibility. -/
+theorem coefficientHeart_lisse_filtration (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)]
     (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
@@ -267,8 +274,7 @@ private theorem coefficientHeart_lisse_filtration (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) [IsNoetherian X]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (coefficientHeartRingObj Λ) X))
-    (hM : IsConstantModelConstructible (coefficientHeartRingObj Λ) X M)
- :
+    (hM : IsConstantModelConstructible (coefficientHeartRingObj Λ) X M) :
     ∃ (Q : X.FiniteLocallyClosedStratification) (B : Fin (Q.n + 1) → Subobject M),
       B 0 = ⊥ ∧ B (Fin.last Q.n) = ⊤ ∧
       ∃ hle : ∀ a : Fin Q.n, B a.castSucc ≤ B a.succ,
@@ -298,10 +304,8 @@ private theorem locallyClosedExtension_zero
     ((CondensedRing.openImmersionLowerShriek Λ a.toImage).map_isZero (isZero_zero _))
 
 /-- A shifted constructible sheaf has a finite cone witness from shifted lisse
-extensions. The conclusion also permits an isomorphic choice of its derived object.
-
-Source: blueprint generation, Single sheaves paragraph, and Stacks Tag 0152
-(blueprint: lem-sfb-coefficient-heart-sheaf-cone-witness).
+extensions. The conclusion also permits an isomorphic choice of its derived object
+(Stacks Tag 0152).
 
 Proof: refine an adapted finite stratification to have open prefixes, using common
 stratification. Apply coefficientHeart_filtration to its prefixes. The bottom image

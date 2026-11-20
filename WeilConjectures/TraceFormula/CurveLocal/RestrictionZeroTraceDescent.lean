@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 # Descent of a vanishing along a trace of invertible degree
 
-The formal core of blueprint `det-tf-restriction-zero-trace-descent`: in the derived category of
+The formal core of blueprint `lemma-descent-vanishing-finite-etale`: in the derived category of
 `Λ`-modules, consider a commutative square
 ```
 M₁ --r--> M₂
@@ -56,7 +56,7 @@ lemma isIso_smul_id_of_isUnit (K : DerivedCategory (ModuleCat.{v} Λ)) {d : ℤ}
     simp [← hw, smul_smul, ← Int.cast_smul_eq_zsmul Λ]
 
 /-- **Descent of a vanishing along a trace of invertible degree** (blueprint
-`det-tf-restriction-zero-trace-descent`, formal core): for a commutative square
+`lemma-descent-vanishing-finite-etale`, formal core): for a commutative square
 `r ≫ p₂ = p₁ ≫ r'` and a trace `t` with `p₂ ≫ t = d • 𝟙`, `d` invertible in `Λ`, the vanishing
 of `r'` implies that of `r`. -/
 theorem eq_zero_of_comp_trace_of_isUnit {M₁ M₂ M₁' M₂' : DerivedCategory (ModuleCat.{v} Λ)}

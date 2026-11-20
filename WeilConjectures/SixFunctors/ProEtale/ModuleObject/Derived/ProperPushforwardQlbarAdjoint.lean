@@ -16,7 +16,7 @@ public import
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-coefficients-constructible/
 sec-n-brown/sk-thm-existence/
 lem-sfb-dc-proper-pushforward-left-adjoint-qlbar.md and its adjacent proof file
-(blueprint: lem-sfb-dc-proper-pushforward-left-adjoint-qlbar).
+(blueprint: theorem-exceptional-inverse-image--17).
 
 The functor is the existing restriction of ambient derived direct image, with coefficient
 ring `Profinite.padicAlgClRingObj`, whose sections take values in a finite subextension.
@@ -38,7 +38,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-coefficients-constructible/
 sec-n-brown/sk-thm-existence/
 lem-sfb-dc-proper-pushforward-left-adjoint-qlbar.md; adjacent proof, sentences 1--3
-(blueprint: lem-sfb-dc-proper-pushforward-left-adjoint-qlbar).
+(blueprint: theorem-exceptional-inverse-image--17).
 
 Proof:
 1. Index the finite coefficient fields by finite intermediate extensions of Q_l in its

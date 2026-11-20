@@ -12,9 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.Can
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 
 /-! # First-projection section coherence
-
-Source: rational projective-line triangle, First identity; the categorical proof follows
-CanonicalSectionProjectionCorePrecomposition with the first diagonal section.
 -/
 
 @[expose] public noncomputable section
@@ -286,18 +283,6 @@ attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPus
 /--
 The categorical section/projection composite before postcomposition by the inverse
 of the canonical pushforward comparison.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-First identity before supported-source normalization.
-(blueprint: lem-sfb-first-canonical-section-projection).
-
-Proof: compose the symmetry-ordered projection mates and transpose along the
-composite adjunction. The conjugate comparison transposes to `pullSectionIso`.
-Its component at the tensor unit is the composite oplax unit, by the published
-derived pullback composition and identity equations. Oplax unitality and
-naturality cancel the coefficient isomorphism, giving `firstPushSectionIso`. Finally
-use the fixed tensor bundle and the normalization of `projectionMap`.
 -/
 theorem first_canonical_section_projection
     (Y : Scheme.{u})

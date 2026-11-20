@@ -73,9 +73,9 @@ theorem tensorGradedAction_projection {X Z : Scheme.{u}} (j : Z ⟶ X)
       T.I.val.map a.op (σ U g y) = σ V (T.C.right.obj.map a.op g) (T.I.val.map a.op y))
     (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)
       (y : T.I.val.obj (op U)),
-      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y)
+      (μ g).asHom.val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y)
     (haction : ∀ g : T.C.right.obj.obj (op ⊤), ρ g =
-      ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g)).hom) :
+      ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g).asHom).hom) :
     let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)
     let N : Z.Modules := ((tensorPullback j).obj L).tensorPow n
     let H := RingedSpace.moduleCohomology Z.toRingedSpace 1

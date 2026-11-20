@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Presentation.Diago
 
 /-! # Explicit scalar transport of the two positive Chern adjuncts
 
-Source: diagonal-tower coefficient changes (1), and the second rational P1 triangle.
 The input Chern arrows are supplied with their whole-system normalization. No arrow
 is chosen by a mere existence assertion.
 -/
@@ -32,9 +31,7 @@ attribute [local irreducible] diagram derivedScalars
 attribute [local irreducible] moduleObjectDerivedPullback
 attribute [local irreducible] firstProjection secondProjection square
 
-/-- The whole-system equation determining a completed Chern adjunct.
-Source: the completed Chern lift, diagonal-tower trace proof (1)
-(blueprint: def-sfb-rational-p1-scalar-chern-maps). -/
+/-- The whole-system equation determining a completed Chern adjunct. -/
 def CompletedChernNormalized (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     {f : X ⟶ S} (p : DiagonalTrace.Presentation l (ULift.{u} (Padic l)) f)
@@ -44,9 +41,7 @@ def CompletedChernNormalized (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     p.coefficientsS.unitMap l (ULift.{u} (Padic l)) p.LS ≫
       p.LS.R.map (p.systemChern l)
 
-/-- Realize a completed positive Chern adjunct, using the prescribed unit and line maps.
-Source: diagonal-tower coefficient changes (1)
-(blueprint: def-sfb-rational-p1-scalar-chern-maps). -/
+/-- Realize a completed positive Chern adjunct, using the prescribed unit and line maps. -/
 @[irreducible]
 def realizeScalarChern (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
@@ -67,9 +62,7 @@ def realizeScalarChern (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
   inv (eS.singleUnit l S) ≫ eS.F.mapDerivedCategory.map c ≫
     s.derived.iso.hom.app _ ≫ R'.R.map (eX.shiftedLine l X)
 
-/-- Extend one actual Chern arrow through a specified scalar/direct-image mate.
-Source: diagonal-tower coefficient changes (1)
-(blueprint: def-sfb-rational-p1-scalar-chern-maps). -/
+/-- Extend one actual Chern arrow through a specified scalar/direct-image mate. -/
 @[irreducible]
 def extendScalarChern
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -89,9 +82,7 @@ def extendScalarChern
   cU.iso.inv ≫ (derivedScalars a S).map c ≫
     (s.mate a).app _ ≫ R'.R.map (cL.shift a)
 
-/-- The scalar extension of the q Chern adjunct, then its canonical pushforward comparison.
-Source: diagonal-tower coefficient changes (1)
-(blueprint: def-sfb-rational-p1-scalar-chern-maps). -/
+/-- The scalar extension of the q Chern adjunct, then its canonical pushforward comparison. -/
 @[irreducible]
 def scalarQChern (l : ℕ) [Fact l.Prime]
     (c : Option (PadicAlgCl.FiniteIntermediateField l)) (Y : Scheme.{u})
@@ -125,9 +116,7 @@ def scalarQChern (l : ℕ) [Fact l.Prime]
       (family.rational E).Rq family.closure.Rq (family.toClosure E).q.square (q E) ≫
         (eqToIso family.closure.q_canonical).hom.app _
 
-/-- The independent p2 Chern adjunct, extended through its own scalar mates.
-Source: diagonal-tower coefficient changes (1)
-(blueprint: def-sfb-rational-p1-scalar-chern-maps). -/
+/-- The independent p2 Chern adjunct, extended through its own scalar mates. -/
 @[irreducible]
 def scalarP2Chern (l : ℕ) [Fact l.Prime]
     (c : Option (PadicAlgCl.FiniteIntermediateField l)) (Y : Scheme.{u})
@@ -161,9 +150,7 @@ def scalarP2Chern (l : ℕ) [Fact l.Prime]
       (family.rational E).R₂ family.closure.R₂ (family.toClosure E).p₂.square (q E) ≫
         (secondDiagramPushIso _ Y _ family.closure).hom.app _
 
-/-- The unit comparison with degree-zero coefficient units as endpoints.
-Source: the second rational P1 triangle
-(blueprint: def-sfb-rational-p1-scalar-chern-maps). -/
+/-- The unit comparison with degree-zero coefficient units as endpoints. -/
 @[irreducible]
 def scalarUnitPullIso (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u}) :
@@ -172,9 +159,7 @@ def scalarUnitPullIso (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   (moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).mapIso (singleUnitIso Λ Y) ≪≫
     secondTraceUnitIso Λ Y ≪≫ (singleUnitIso Λ (ProjectiveLine Y)).symm
 
-/-- The shifted root-normalized line comparison along q.
-Source: Cartesian Tate comparison in the second rational P1 triangle
-(blueprint: def-sfb-rational-p1-scalar-chern-maps). -/
+/-- The shifted root-normalized line comparison along q. -/
 @[irreducible]
 def scalarQLineIso (l : ℕ) [Fact l.Prime]
     (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -192,9 +177,7 @@ def scalarQLineIso (l : ℕ) [Fact l.Prime]
       ((ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))) x).invertible
   exact shiftedLineComparison l c (ProjectiveLine Y ↘ Y)
 
-/-- The twisted unit adjunct of a specified shifted-line comparison.
-Source: the unit summand of the projective-line Chern splitting
-(blueprint: def-sfb-rational-p1-scalar-chern-maps). -/
+/-- The twisted unit adjunct of a specified shifted-line comparison. -/
 @[irreducible]
 def scalarTwistedUnit (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}} (f : X ⟶ S)

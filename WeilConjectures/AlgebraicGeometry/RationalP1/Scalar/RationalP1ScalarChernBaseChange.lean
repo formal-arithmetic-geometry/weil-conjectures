@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChern
 import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChernBaseChangeChern
 
 /-! # Exchange on the two actual Chern generators
-
-Source: diagonal-tower unit/Chern splitting and the second rational P1 triangle.
 -/
 
 @[expose] public noncomputable section
@@ -32,31 +30,7 @@ attribute [local irreducible] firstProjection secondProjection square condensedA
 
 /-- The self-square exchange preserves the twisted unit and positive Chern
 adjuncts. This is an equation on each specified generator, before any trace
-or inverse splitting is applied.
-
-Source: latest blueprint, sk-prop-diagonal-tower-coefficients.proof.md (3a)--(3c),
-and sk-prop-p1-adjunction-rational-triangle.proof.md, second identity
-(blueprint: lem-sfb-rational-p1-scalar-chern-base-change).
-
-Proof: Expand the exchange as the adjunction mate. The adjunction triangle and
-the pullback-composition comparison identify the image of the twisted unit
-with the p2 twisted unit after the q line comparison. For the second component,
-pull the positive Cartier class of the standard section along q. In the product
-model this is the section of the second projection: r.q_model is the identity
-model, and r.p2_model is the factor-swapped product model. On the affine chart
-the section equation is t, which remains a nonzerodivisor over every base. The
-units pullback and generator t^-1 preserve its positive quotient generator +1.
-Consequently the complete Kummer-system diagram commutes, including all root
-transitions. Apply its actual derived limit and normalized unit/line comparisons;
-ha and hb identify the resulting completed Chern adjuncts. The full universal
-units in Reference carry its mate to the condensed exchange. Apply the actual
-scalar-extension functors and their normalized mates; mate pasting commutes
-with this geometric square. Family's root and unit endpoint normalizations
-identify the endpoint maps with firstLineComparisonForTrace, scalarQLineIso and
-scalarUnitPullIso. Apply the bottom finite-field leg for the closure coefficient,
-whose comparisons are already invertible in Family.toClosure. This proves the
-two displayed generator equations, without using a trace, a diagonal class,
-an integration equation or invertibility of the geometric exchange. -/
+or inverse splitting is applied. -/
 theorem scalar_chern_base_change
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

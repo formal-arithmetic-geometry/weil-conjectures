@@ -11,17 +11,18 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficien
 /-!
 # Étale projection morphisms at a finite coefficient ring
 
-The étale projection morphisms of the blueprint subsection `sk-prop-sf-kunneth-ordinary`, for a
-commutative coefficient ring `Λ` (in the blueprint `Λ = 𝒪_E/ϖⁿ`): they are the projection maps
-of the repository specialised to the coefficients `ModuleCat Λ`.
+The étale projection morphisms of the blueprint subsection
+`proposition-ordinary-external-kunneth--1`, for a commutative coefficient ring `Λ` (in the blueprint
+`Λ = 𝒪_E/ϖⁿ`): they are the projection maps of the repository specialised to the coefficients
+`ModuleCat Λ`.
 
-- `AlgebraicGeometry.Etale.lowerStarProjectionMapModule` (`pur7710-def-etale-projection`):
+- `AlgebraicGeometry.Etale.lowerStarProjectionMapModule` (`definition-projection-formula-map--1`):
   `Rf_* K ⊗ᴸ M ⟶ Rf_*(K ⊗ᴸ Lf^* M)`.
 - `AlgebraicGeometry.Etale.unboundedLowerShriekCandidate`
-  (`pur9-def-etale-unbounded-candidate`): `Rf^un_! = Rp_* ∘ D(j_!)`.
-- `AlgebraicGeometry.Etale.openProjectionMapModule` (`pur9-def-etale-open-projection`):
+  (`proposition-construction-independence-rf-shriek`): `Rf^un_! = Rp_* ∘ D(j_!)`.
+- `AlgebraicGeometry.Etale.openProjectionMapModule` (`proposition-purity-vector-bundles`):
   `σ_{j,K,N} : j_!(K ⊗ᴸ Lj^* N) ⟶ j_! K ⊗ᴸ N`.
-- `AlgebraicGeometry.Etale.compactProjectionMapModule` (`pur9-def-etale-compact-projection`):
+- `AlgebraicGeometry.Etale.compactProjectionMapModule` (`proposition-purity-vector-bundles`):
   `PF_{f,K,L} : Rf^un_! K ⊗ᴸ L ⟶ Rf^un_!(K ⊗ᴸ Lf^* L)`.
 -/
 
@@ -41,7 +42,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `pur7710-def-etale-projection`: the étale direct-image projection morphism.
+/-- Blueprint `definition-projection-formula-map--1`: the étale direct-image projection morphism.
 
 For `f : X ⟶ Y`, `K ∈ D(X_ét, Λ)` and `M ∈ D(Y_ét, Λ)`, the morphism
 `P_{f,K,M} : Rf_* K ⊗ᴸ M ⟶ Rf_*(K ⊗ᴸ Lf^* M)` (with the unbounded direct image
@@ -56,8 +57,8 @@ noncomputable abbrev lowerStarProjectionMapModule {X Y : Scheme.{u}} (f : X ⟶ 
         (L((f)^*[ModuleCat.{u + 1} Λ]).obj M)) :=
   ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app K).app M
 
-/-- Blueprint `pur9-def-etale-unbounded-candidate`: the unbounded étale compactification
-candidate.
+/-- Blueprint `proposition-construction-independence-rf-shriek`: the unbounded étale
+compactification candidate.
 
 For a compactification `c = (j, p)` of `f : X ⟶ Y` (`f = j ≫ p`, `j` an open immersion, `p`
 proper), `Rf^un_! := Rp_* ∘ D(j_!) : D(X_ét, Λ) ⥤ D(Y_ét, Λ)`, the unbounded direct image
@@ -76,7 +77,7 @@ lemma unboundedLowerShriekCandidate_eq {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Com
       D((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙ rightDerivedLowerStarModule Λ c.g :=
   rfl
 
-/-- Blueprint `pur9-def-etale-open-projection`: the étale open-extension projection map.
+/-- Blueprint `proposition-purity-vector-bundles`: the étale open-extension projection map.
 
 For an open immersion `j : U ⟶ X`, `K ∈ D(U_ét, Λ)` and `N ∈ D(X_ét, Λ)`,
 `σ_{j,K,N} : j_!(K ⊗ᴸ Lj^* N) ⟶ j_! K ⊗ᴸ N`, the adjoint under `j_! ⊣ j^*` of the unit at `K`
@@ -90,7 +91,7 @@ noncomputable abbrev openProjectionMapModule {U X : Scheme.{u}} (j : U ⟶ X) [I
       ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj (D((j)_!open[ModuleCat.{u + 1} Λ]).obj K)).obj N :=
   ((derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} Λ) j).app K).app N
 
-/-- Blueprint `pur9-def-etale-compact-projection`: the étale compact-support projection map.
+/-- Blueprint `proposition-purity-vector-bundles`: the étale compact-support projection map.
 
 For a compactification `c = (j, p)` of `f`, `K ∈ D(X_ét, Λ)` and `L ∈ D(Y_ét, Λ)`,
 `PF_{f,K,L} : Rf^un_! K ⊗ᴸ L ⟶ Rf^un_!(K ⊗ᴸ Lf^* L)` is the composite of the projection map

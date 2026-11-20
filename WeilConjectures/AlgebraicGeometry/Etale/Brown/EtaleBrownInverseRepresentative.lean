@@ -6,7 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownProjectionRealization
-import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
+import all WeilConjectures.CategoryTheory.Cochain.CochainInverseMateComparison
+import all WeilConjectures.CategoryTheory.Derived.DerivedMateUnitComparison
 import Mathlib.CategoryTheory.Adjunction.Mates
 import all WeilConjectures.CategoryTheory.ExactDerivedSquare.DerivedExactSquareCoherence
 
@@ -50,9 +51,8 @@ abbrev strictEtaleBrownOrdinaryInverse
   ((mateEquiv (A.levelAdj n)
     (Etale.upperStarLowerStarAdjunction
       (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g)).symm
-      (.mk _ _ _ _ R.val.ordinaryRight.hom)).natTrans
+      (.mk _ _ _ _ R.val.ordinaryRight.hom))
 
-set_option maxHeartbeats 1600000 in
 -- The transpose compares all four realization factors.
 /-- The inverse Brown comparison is the exact localization of its ordinary mate.
 Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4 and 0FND.
@@ -97,55 +97,36 @@ theorem strictEtaleBrownInverse_representative
             (strictEtaleBrownOrdinaryInverse O t g n A B R) (.up ℤ)).app K) := by
   let : (strictEtaleBrownConstant O t V n).Additive := RV.val.ordinaryAdditive n
   let : (strictEtaleBrownConstant O t W n).Additive := RW.val.ordinaryAdditive n
-  let a := (A.levelAdj n).mapHomologicalComplex (.up ℤ)
+  have : Functor.PreservesZeroMorphisms
+      ((A.lift n).modules ⋙ strictEtaleBrownConstant O t V n) :=
+    Functor.preservesZeroMorphisms_comp _ _
   let b := Etale.upperStarLowerStarAdjunction
     (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g
-  let bd := b.mapDerivedCategoryRightDerivedAdjunction
-  let F := (A.lift n).modules.mapHomologicalComplex (.up ℤ)
-  have hm : ((mateEquiv B.adjunction bd).symm
-      (.mk _ _ _ _ R.right.hom)).natTrans = R.inverse.hom := by
-    have he : mateEquiv B.adjunction bd (.mk _ _ _ _ R.inverse.hom) =
-        .mk _ _ _ _ R.right.hom := by
-      exact R.property.2.2
-    exact congrArg TwoSquare.natTrans
-      ((mateEquiv B.adjunction bd).symm_apply_eq.mpr he.symm)
-  have he : B.adjunction.homEquiv _ _ (B.inverseFactors.hom.app K) =
-      DerivedCategory.Q.map (a.unit.app K) ≫ B.directUnit.app (F.obj K) := by
-    have hh := B.transpose K (F.obj K) (𝟙 (F.obj K))
-    change B.adjunction.homEquiv _ _
-      (B.inverseFactors.hom.app K ≫ DerivedCategory.Q.map (𝟙 (F.obj K))) = _ at hh
-    erw [DerivedCategory.Q.map_id, Category.comp_id] at hh
-    change _ = DerivedCategory.Q.map (a.unit.app K ≫
-      ((A.right n).mapHomologicalComplex (.up ℤ)).map (𝟙 (F.obj K))) ≫ _ at hh
-    erw [CategoryTheory.Functor.map_id, Category.comp_id] at hh
-    exact hh
-  apply (bd.homEquiv _ _).injective
-  rw [← Category.assoc, bd.homEquiv_naturality_right, ← hm,
-    adjunctionMate_transpose, he, CategoryTheory.Functor.map_comp, Category.assoc]
-  simp only [Category.assoc, TwoSquare.mk]
-  erw [R.property.2.1 (F.obj K)]
-  rw [bd.homEquiv_naturality_left]
-  erw [CategoryTheory.ExactDerivedSquare.cochain_hom_formula _ _ b]
-  have hn := (RW.factors n).hom.naturality (a.unit.app K)
-  dsimp only [CategoryTheory.Functor.comp_map] at hn
-  rw [← Category.assoc]
-  erw [hn]
-  simp only [Category.assoc]
-  rw [← DerivedCategory.Q.map_comp_assoc]
-  congr 2
-  congr 1
-  apply HomologicalComplex.hom_ext
-  intro i
-  have hh := adjunctionMate_transpose (A.levelAdj n) b
-    (.mk _ _ _ _ R.val.ordinaryRight.hom) (K.X i)
-    ((A.lift n).modules.obj (K.X i)) (𝟙 _)
-  simpa only [a, F, TwoSquare.mk, strictEtaleBrownOrdinaryInverse,
-    CategoryTheory.Functor.mapHomologicalComplex_obj_X, HomologicalComplex.comp_f,
-    CategoryTheory.Functor.mapHomologicalComplex_map_f,
-    NatTrans.mapHomologicalComplex_app_f,
-    Adjunction.mapHomologicalComplex_unit_app_f,
-    CategoryTheory.Functor.map_id, Category.comp_id,
-    Adjunction.homEquiv_unit, CategoryTheory.Functor.comp_obj,
-    CategoryTheory.Functor.id_obj] using hh.symm
+  have hm : ((mateEquiv B.adjunction b.mapDerivedCategoryRightDerivedAdjunction).symm
+      (.mk _ _ _ _ R.right.hom)) = R.inverse.hom :=
+    (mateEquiv B.adjunction b.mapDerivedCategoryRightDerivedAdjunction).symm_apply_eq.mpr
+      R.property.2.2.symm
+  rw [← hm]
+  exact CategoryTheory.unitComparison_aux
+    (QA := DerivedCategory.Q (C := strictEtaleLevel W O t n))
+    (QB := DerivedCategory.Q (C := strictEtaleLevel V O t n))
+    (QC := DerivedCategory.Q
+      (C := Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))))
+    (QD := DerivedCategory.Q
+      (C := Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))))
+    ((A.levelAdj n).mapHomologicalComplex (.up ℤ)) (b.mapHomologicalComplex (.up ℤ))
+    B.adjunction b.mapDerivedCategoryRightDerivedAdjunction
+    B.inverseFactors.hom
+    (Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))
+      g).mapDerivedCategoryFactors.hom
+    B.directUnit
+    (CategoryTheory.ExactDerivedSquare.canonicalUnit
+      (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g))
+    (RW.factors n) (RV.factors n) B.transpose
+    (CategoryTheory.ExactDerivedSquare.cochain_hom_formula _ _ b)
+    (.mk _ _ _ _ (R.val.ordinaryRight.hom.mapHomologicalComplex (.up ℤ)))
+    (.mk _ _ _ _ R.right.hom) R.property.2.1
+    ((strictEtaleBrownOrdinaryInverse O t g n A B R).mapHomologicalComplex (.up ℤ))
+    (CategoryTheory.cochainMate_unit (A.levelAdj n) b R.val.ordinaryRight.hom) K
 
 end AlgebraicGeometry

@@ -24,7 +24,7 @@ open WeilConjectures
 namespace AlgebraicGeometry.ProEtale
 
 /-- The constant set sheaves with finite labels, regarded as presheaves.
-(blueprint: det-prop-sfb-qlbar-colimit-x-integral-limit). -/
+(blueprint: lemma-comparison-completed-coefficients--1). -/
 noncomputable def sfbFiniteConstantSets (X : Scheme.{u}) :
     FintypeCat.{u} ⥤ X.ProEtᵒᵖ ⥤ Type (u + 1) :=
   forget FintypeCat.{u} ⋙ uliftFunctor.{u + 1} ⋙
@@ -33,20 +33,20 @@ noncomputable def sfbFiniteConstantSets (X : Scheme.{u}) :
 
 /-- The presheaves represented by the relative finite test schemes, namely the coproducts
 of copies of X by `profinite_test_object_functor`.
-(blueprint: det-prop-sfb-qlbar-colimit-x-integral-limit). -/
+(blueprint: lemma-comparison-completed-coefficients--1). -/
 noncomputable def sfbFiniteRepresentables (X : Scheme.{u}) :
     FintypeCat.{u} ⥤ X.ProEtᵒᵖ ⥤ Type (u + 1) :=
   FintypeCat.toProfinite ⋙ profiniteToProEtOf X ⋙ uliftYoneda.{u + 1}
 
 /-- The finite quotient at exponent n+1, bundled using its recorded finiteness theorem.
-(blueprint: det-prop-sfb-qlbar-colimit-x-integral-limit). -/
+(blueprint: lemma-comparison-completed-coefficients--1). -/
 noncomputable def sfbIntegralFiniteLevel (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) : FintypeCat.{u} :=
   letI := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.le_add_left 1 n)
   FintypeCat.of (Padic.coefficientExtensionRing l E (n + 1))
 
 /-- The finite quotient tower with exactly the specified reduction maps.
-(blueprint: det-prop-sfb-qlbar-colimit-x-integral-limit). -/
+(blueprint: lemma-comparison-completed-coefficients--1). -/
 noncomputable def sfbIntegralFiniteTower (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] : ℕᵒᵖ ⥤ FintypeCat.{u} :=
   Functor.ofOpSequence (fun n ↦
@@ -55,7 +55,7 @@ noncomputable def sfbIntegralFiniteTower (l : ℕ) [Fact l.Prime] (E : Type u) [
 
 /-- The integers with their extending absolute-value topology, bundled as a profinite set.
 integers-profinite-tower
-(blueprint: det-prop-sfb-qlbar-colimit-x-integral-limit). -/
+(blueprint: lemma-comparison-completed-coefficients--1). -/
 noncomputable def sfbIntegralProfinite (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] : Profinite.{u} :=
   letI := Padic.coefficientExtensionIntegersTopology l E
@@ -65,7 +65,7 @@ noncomputable def sfbIntegralProfinite (l : ℕ) [Fact l.Prime] (E : Type u) [Fi
   Profinite.of (Padic.coefficientExtensionIntegers l E)
 
 /-- The condensed integer ring, using its actual continuous-function sections.
-(blueprint: det-prop-sfb-qlbar-colimit-x-integral-limit). -/
+(blueprint: lemma-comparison-completed-coefficients--1). -/
 noncomputable def sfbCondensedIntegers (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
@@ -77,14 +77,14 @@ noncomputable def sfbCondensedIntegers (l : ℕ) [Fact l.Prime] (E : Type u) [Fi
   Mon.mk (Profinite.continuousMapRingObjOfUniverse (Padic.coefficientExtensionIntegers l E))
 
 /-- The existing completed ring sheaf, as an abelian sheaf with its ring-object structure.
-(blueprint: det-prop-sfb-qlbar-colimit-x-integral-limit). -/
+(blueprint: lemma-comparison-completed-coefficients--1). -/
 noncomputable abbrev sfbCompletedIntegersAb (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :=
   (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
     (completedIntegralCoefficientSheafUnrestricted l E X)
 
 /-- The canonical adjunction whose unit specifies sections pulled back from the point.
-(blueprint: det-prop-sfb-qlbar-colimit-x-integral-limit). -/
+(blueprint: lemma-comparison-completed-coefficients--1). -/
 noncomputable def sfbIntegralPointAdjunction (X : Scheme.{u}) :
     sfbPullbackFromPoint X ⊣ sfbPullbackFromPointRightAdjoint X :=
   pointUpperStarLowerStarAdjunction.comp
@@ -92,7 +92,7 @@ noncomputable def sfbIntegralPointAdjunction (X : Scheme.{u}) :
 
 /-- The finite-level set representation, including the canonical comparison between
 constant ring sheaves and constant set sheaves.
-(blueprint: det-prop-sfb-qlbar-colimit-x-integral-limit). -/
+(blueprint: lemma-comparison-completed-coefficients--1). -/
 noncomputable def sfbIntegralFiniteRepresentation (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) (a : sfbFiniteConstantSets X ≅ sfbFiniteRepresentables X) (n : ℕ) :

@@ -75,7 +75,6 @@ private theorem generator_map_apply
   simpa only [f, SheafOfModules.comp_val, PresheafOfModules.comp_app,
     ModuleCat.comp_apply] using hlin'
 
-set_option maxHeartbeats 800000 in
 -- The restricted-site free sheaf and its biproduct require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite type gives finitely many sections near a point such that every section is locally

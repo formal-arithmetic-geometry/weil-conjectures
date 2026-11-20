@@ -15,9 +15,9 @@ Let `i : Z ⟶ X` be a closed immersion which has Thom frames of codimension `c`
 (`AlgebraicGeometry.Etale.HasThomFrames`) and regular Zariski frames
 (`AlgebraicGeometry.Etale.HasRegularZariskiFrames`), with `X` locally of finite type over a
 field. This file reruns the construction of the fundamental class `[Z ⊂ X]` of blueprint
-`sk-thm-regular` (`WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion`) under these
-hypotheses, which hold étale-locally for the zero section of affine space, e.g. for the diagonal
-of a smooth morphism, and without using smooth purity: clause (a) is
+`lemma-class-of-point--1` (`WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion`) under
+these hypotheses, which hold étale-locally for the zero section of affine space, e.g. for the
+diagonal of a smooth morphism, and without using smooth purity: clause (a) is
 `AlgebraicGeometry.Etale.HasThomFrames.isZero_homology_rightDerivedLowerShriek`, and frame
 independence is the version over a field
 `AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec_of_field`.
@@ -63,7 +63,7 @@ attribute [local instance] HasInvertibleExponent.opens
 variable {Λ}
 
 omit [HasKummerClass.IsNormalized Λ] in
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 *Uniqueness of the fundamental class, for closed immersions with Thom frames.* Two classes in
 `H^{2c}_Z(X, Λ(c))` are equal if every point of `Z` lies in a Zariski frame on which their
@@ -113,7 +113,7 @@ theorem HasThomFrames.eq_of_forall_exists_frameRestriction_eq (hT : HasThomFrame
       Functor.comp_map, he]
 
 omit [HasKummerClass.IsNormalized Λ] in
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 *Uniqueness of the fundamental class, for closed immersions with Thom frames.* Two classes in
 `H^{2c}_Z(X, Λ(c))` whose restrictions to every Zariski frame agree are equal
@@ -130,7 +130,7 @@ theorem HasThomFrames.eq_of_frameRestriction_eq (hT : HasThomFrames Λ c i)
     have ⟨F, hF, hz, _⟩ := hR z
     ⟨F, hF, hz, h F hF⟩
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 **Frame classes agree on overlaps, for closed immersions with Thom frames.** Two frames `F₁`,
 `F₂`, with `F₁` given by a weakly regular sequence on an affine scheme, have the same restriction
@@ -265,7 +265,7 @@ theorem HasThomFrames.restrictSupportedClass_frameClass_eq (hT : HasThomFrames �
     exact key w' hw' g₀ hg₀
   rw [h₁, h₂]
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 **(b) The fundamental class, for closed immersions with Thom frames.** Let `i : Z ⟶ X` be a
 closed immersion with Thom frames and regular Zariski frames of codimension `c`, with `X` locally
@@ -429,7 +429,7 @@ theorem HasThomFrames.existsUnique_fundamentalClass (hT : HasThomFrames Λ c i)
 
 variable (Λ)
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 The *fundamental class* `[Z ⊂ X] = cl_{Z/X} ∈ H^{2c}_Z(X, Λ(c))` of a closed immersion
 `i : Z ⟶ X` with Thom frames and regular Zariski frames of codimension `c`, with `X` locally of
@@ -454,7 +454,7 @@ theorem frameRestriction_thomFundamentalClass (hT : HasThomFrames Λ c i)
     frameRestriction Λ F (thomFundamentalClass Λ hT hR aX) = frameClass Λ F :=
   (hT.existsUnique_fundamentalClass hR aX).exists.choose_spec F
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 The morphism `cl_i : Λ_Z ⟶ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`, for a closed immersion with Thom
 frames: the adjoint (`AlgebraicGeometry.Etale.supportedClassMap`) of the fundamental class
@@ -465,7 +465,7 @@ noncomputable def thomFundamentalClassMap (hT : HasThomFrames Λ c i)
     constantComplex Λ Z ⟶ (R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧) :=
   supportedClassMap Λ i (thomFundamentalClass Λ hT hR aX)
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 **(c) `cl_i` is an isomorphism, for closed immersions with Thom frames.** On a Thom frame
 `(e : U ⟶ X, f)`, the fundamental class restricts to the frame class
@@ -502,7 +502,7 @@ theorem isIso_thomFundamentalClassMap (hT : HasThomFrames Λ c i)
     (Functor.map_isIso (_root_.DerivedCategory.homologyFunctor _ n)
       (D(((F z).toZ)^*[ModuleCat.{u + 1} Λ]).map (thomFundamentalClassMap Λ hT hR aX)))
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 **Purity for closed immersions with Thom frames**, `Ri^! (Λ_X(c)[2c]) ≅ Λ_Z`, for a closed
 immersion `i : Z ⟶ X` with Thom frames and regular Zariski frames of codimension `c`, with `X`

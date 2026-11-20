@@ -63,14 +63,14 @@ private theorem inverseMate
     (a : LA ⊣ JA) (b : LB ⊣ JB) (x : SX ⊣ RX) (v : SU ⊣ RU)
     (q : JB ⋙ RU ≅ RX ⋙ JA) :
     ((mateEquiv a b).symm
-      ((mateEquiv x v).symm (TwoSquare.mk _ _ _ _ q.inv))).natTrans =
+      ((mateEquiv x v).symm (TwoSquare.mk _ _ _ _ q.inv))) =
       ((a.comp x).leftAdjointUniq ((v.comp b).ofNatIsoRight q)).inv := by
   have h : (a.comp x).leftAdjointUniq ((v.comp b).ofNatIsoRight q) =
       (conjugateIsoEquiv (v.comp b) (a.comp x)).symm q := by
     ext K
     simp [Adjunction.leftAdjointUniq, conjugateEquiv_symm_apply_app]
   rw [h]
-  exact congrArg TwoSquare.natTrans
+  exact
     (iterated_mateEquiv_conjugateEquiv_symm a b v x (TwoSquare.mk _ _ _ _ q.inv))
 
 private theorem scalar_open_unit
@@ -93,7 +93,7 @@ private theorem scalar_open_unit
   have h := unit_mateEquiv_symm a b α P
   have hm := inverseMate a b x v (openDerivedRestrictScalarsIso φ j)
   change _ = b.unit.app _ ≫ (derivedRestriction (A := B) j).map
-    (((mateEquiv a b).symm α).natTrans.app P) at h
+    (((mateEquiv a b).symm α).app P) at h
   rw [hm] at h
   exact h.symm
 

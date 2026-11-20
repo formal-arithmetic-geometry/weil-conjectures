@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleSheafHomFamilyGluing
 # Integration along a vector bundle
 
 Source: blueprint sec-smooth-purity/sk-prop-an, order 1972
-(blueprint: def-amb-vector-integration).
+(blueprint: proposition-purity-vector-bundles).
 
 The coefficient is expressed by the existing ordered tensor of shifted finite Tate lines:
 its pullback to E is A_E(d)[2d]. The local map is the actual compact-support exchange for
@@ -113,22 +113,22 @@ private theorem existsUnique_normalized_sheaf_trace (N : ℕ) (hN : 0 < N)
 
 /-- The unique sheaf-glued derived trace. This is the existence and uniqueness needed
 by the definition, not a choice of a morphism from a mere nonempty Hom set.
-Source: blueprint order 1972, full construction (blueprint: def-amb-vector-integration).
+Source: blueprint order 1972, full construction (blueprint: proposition-purity-vector-bundles).
 
 Proof:
-1. Use the finite locally free frames of def-asd-vector-bundle-zero-section to cover S.
+1. Use the finite locally free frames of proposition-purity-vector-bundles to cover S.
 The coefficient is the ordered tensor of d Tate lines shifted by two, hence bounded below.
 The geometry theorem and Nagata give compactifications between Noetherian schemes.
-The canonical D+ comparisons of lem-amb-etale-compact-comparisons and exchange of
-thm-cbc-finite-torsion identify each restriction with the existing affine trace source.
-lem-amb-affine-space-top-trace gives its actual isomorphism to A[0]. Exact inverse image
-(prop-weil-pbc-inverse-image-modules-exact) commutes with cohomology; the cover detects
+The canonical D+ comparisons of proposition-construction-independence-rf-shriek--7 and exchange of
+proposition-composition-base-change-rf-shriek identify each restriction with the existing affine
+trace source. lemma-integral-linear-character--1 gives its actual isomorphism to A[0]. Exact inverse
+image (situation-conventions) commutes with cohomology; the cover detects
 vanishing (lem-weil-pbc-etale-cover-detects-iso). Thus C_pi has only H^0 = L_pi.
 2. For frames i,j on W, write a_g = phi_i phi_j^{-1}. If e_j = e_i G, then
 phi_j = a_(G transpose) phi_i and g = (G transpose)^{-1}. Thus phi_j^{-1} = phi_i^{-1} a_g.
 Horizontal pasting of the two inverse-coordinate squares and normalized Tate composition
 give B_j = rho_g B_i, with rho_g exactly affineLinearTraceAction. Base-change compatibility
-of the affine trace and lem-amb-linear-trace-invariance give t rho_g B_i = t B_i.
+of the affine trace and proposition-purity-vector-bundles give t rho_g B_i = t B_i.
 All hypotheses hold on the Noetherian overlap W, with N invertible and the same finite A.
 3. Take H^0 of these maps. The resulting module-sheaf maps lambda_i agree on overlaps.
 Use lem-pur-sheaf-hom-cover-gluing to obtain a unique lambda: L_pi → A_S. Its application
@@ -137,7 +137,7 @@ here uses the usual equivalence between constant A-module sheaves and sheaves of
 The degree-zero component of c is cycles → cohomology; it kills boundaries, hence is a
 chain map. Both maps induce the identity in degree zero; every other cohomology vanishes
 by lem-weil-pbc-truncation-cohomology. Thus they are quasi-isomorphisms and
-alpha = Q(c) Q(b)^{-1} is an isomorphism. Theorem lem-weil-pbc-truncation-descends gives
+alpha = Q(c) Q(b)^{-1} is an isomorphism. Theorem theorem-pbc-injective-acyclicity gives
 the descended truncation and projection; naturality of b and c, also after inversion of
 quasi-isomorphisms, proves independence of the representative and compatibility with
 exact open restriction. H^0(alpha) is the identity under the standard single-H^0 comparison.
@@ -181,7 +181,7 @@ theorem existsUnique_vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
 /-- The canonical truncation identification alpha_pi and the glued sheaf map lambda.
 The H^0 normalization determines alpha_pi, and all frame restrictions determine lambda.
 Thus the theorem used here specifies the pair uniquely, rather than asserting bare existence.
-Source: blueprint order 1972, alpha_pi and lambda (blueprint: def-amb-vector-integration). -/
+Source: blueprint order 1972, alpha_pi and lambda (blueprint: proposition-purity-vector-bundles). -/
 def vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
@@ -194,7 +194,7 @@ def vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
 /-- Integration t_pi, the unique map restricting on each linear trivialization to the
 specified affine-space trace. Its existence proof is precisely sheaf gluing followed by
 the canonical truncation roof; uniqueness determines the data in this definition.
-Source: blueprint order 1972, t_pi (blueprint: def-amb-vector-integration). -/
+Source: blueprint order 1972, t_pi (blueprint: proposition-purity-vector-bundles). -/
 def vectorBundleIntegration (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)

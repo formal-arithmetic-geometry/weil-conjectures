@@ -40,11 +40,11 @@ Proof:
    comparisons of T and lem-sp-derived-cohomology-shift identify the cohomology in
    degree i of T(H^q(K)[-q]) with that in degree i-q of T(H^q(K)[0]). It therefore
    vanishes outside [q+c,q+d], hence outside [a+c,b+d].
-3. The bounded-below clause of lem-weil-pbc-truncation-triangle makes K_{a-1}
+3. The bounded-below clause of theorem-pbc-injective-acyclicity makes K_{a-1}
    lie in degrees >= a, while truncation puts it in degrees <= a-1. It is therefore
    zero by the standard t-structure. Exactness implies additivity of T, hence T
    preserves zero objects. This gives the base case.
-4. Use lem-weil-pbc-truncation-triangle to obtain the distinguished triangle
+4. Use theorem-pbc-injective-acyclicity to obtain the distinguished triangle
    K_{q-1} -> K_q -> H^q(K)[-q] -> K_{q-1}[1]. Exactness of T preserves this triangle.
    By lem-sf-derived-homology-long-exact, its degree-i cohomology is exact at the
    middle term. Outside [a+c,b+d], the adjacent terms vanish by induction and step 2,

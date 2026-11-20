@@ -17,12 +17,15 @@ import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
 /-!
 # Morphisms into projective space from generating sections
 
-Source: Stacks Project, Constructions, Lemma 01NE, Definition 01NF and its following paragraph
-(blueprint: def-weil-pbc-morphism-to-projective-space-by-sections).
-
 The integral projective space used by the functor-of-points declaration is the base change
 of the raw integral Proj to `Spec ℤ`. Its second projection identifies it with that Proj.
 Thus the second component of the defining pairing below is `ψ ≫ toProjInt`.
+
+## References
+
+* Stacks Project, Constructions, Lemma 01NE, Definition 01NF and its following paragraph
+* Stacks Project, Constructions, Lemma 01NE
+* Stacks Project, Constructions, Definition 01NF, paragraph following it
 -/
 
 @[expose] public section
@@ -40,22 +43,7 @@ variable (I : Type u) [Finite I] {Y S : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The integral morphism attached to an invertible module and generating sections exists
-uniquely, including for an arbitrary finite coordinate set.
-
-Source: Stacks Project, Constructions, Lemma 01NE
-(blueprint: def-weil-pbc-morphism-to-projective-space-by-sections).
-
-Proof: For `I = ULift (Fin (n+1))`, use
-`Scheme.Modules.invertible_generating_sections_fibre_criterion` to turn the epimorphism
-hypothesis into nonvanishing at every point. Apply the second clause of
-`AlgebraicGeometry.projectiveSpace_functor_of_points` to the sections evaluated at the top
-open. For a nonempty finite `I`, enumerate its elements by `Fin (card I)` and reindex the
-polynomial variables, the twisting sheaf, and its coordinate sections along that bijection;
-this transports the same unique classification. If `I` is empty, generation forces every
-stalk to be zero; invertibility then forces `Y` to be empty. Both integral projective space
-and `Y` are empty, so the unique morphism and the unique module isomorphism give the claim.
-The identification of the base-changed integral model with raw Proj is the second
-projection of the pullback over the terminal scheme. -/
+uniquely, including for an arbitrary finite coordinate set. -/
 theorem generatingSections_integralHom_exists (L : Y.Modules) [L.IsInvertible]
     (s : I → L.sections) (hs : Epi (L.freeHomEquiv.symm s)) :
     ∃! ψ : Y ⟶ ℙ(I; Spec (CommRingCat.of (ULift.{u} ℤ))),
@@ -193,18 +181,14 @@ theorem generatingSections_integralHom_exists (L : Y.Modules) [L.IsInvertible]
       rw [← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]
     rw [e₁, e₂, hcoeff]
 
-/-- The morphism `ψ` into integral projective space classified by the given pair.
-Source: Stacks Project, Constructions, Lemma 01NE
-(blueprint: def-weil-pbc-morphism-to-projective-space-by-sections). -/
+/-- The morphism `ψ` into integral projective space classified by the given pair. -/
 noncomputable def integralHomOfGeneratingSections (L : Y.Modules) [L.IsInvertible]
     (s : I → L.sections) (hs : Epi (L.freeHomEquiv.symm s)) :
     Y ⟶ ℙ(I; Spec (CommRingCat.of (ULift.{u} ℤ))) :=
   Classical.choose (generatingSections_integralHom_exists I L s hs)
 
 /-- Pair `g` with the integral morphism classified by `(L,s)` using the universal property
-of the fibre product. No trivialization of `L` is an additional input.
-Source: Stacks Project, Constructions, Definition 01NF, paragraph following it
-(blueprint: def-weil-pbc-morphism-to-projective-space-by-sections). -/
+of the fibre product. No trivialization of `L` is an additional input. -/
 noncomputable def homOfGeneratingSections (g : Y ⟶ S) (L : Y.Modules) [L.IsInvertible]
     (s : I → L.sections) (hs : Epi (L.freeHomEquiv.symm s)) : Y ⟶ ℙ(I; S) :=
   pullback.lift g

@@ -26,7 +26,7 @@ counit of `i ⊣ i^!` and the unit of `j^* ⊣ j_*` extend to a distinguished tr
 `i i^! K ⟶ K ⟶ j_* j^* K ⟶ (i i^! K)⟦1⟧`
 
 whose third map is unique; moreover `i^! j_* = 0`. This is the formal part of the supported
-localization triangle (blueprint `sk-prop-sf-localization`, `prop-sf-localization-all-stages`):
+localization triangle (blueprint `lemma-local-cohomology-right-adjoint--2`):
 it gives the right adjoint `Ri^!` of `Ri_*` on any of the categories `Dᵇc(-, Λ)` that are stable
 under `j^*`, `Rj_*` and the fibres of the open unit, without an ambient exceptional adjoint.
 
@@ -42,7 +42,8 @@ under `j^*`, `Rj_*` and the fibres of the open unit, without an ambient exceptio
   `A ⟶ K ⟶ B ⟶` with `A` in the essential image of `i` and `B` in that of `j_*` is isomorphic to
   the supported localization triangle of `K`, by an isomorphism which is the identity on `K`.
   This is how the supported localization triangle is compared along functors, e.g. for the
-  equivariance of the triangle of Weil complexes (blueprint `prop-sf-localization-all-stages`).
+  equivariance of the triangle of Weil complexes (blueprint
+  `lemma-local-cohomology-right-adjoint--2`).
 - `CategoryTheory.Adjunction.isIso_mateEquiv_app`: a criterion for the mate of an isomorphism
   `ΦZ ⋙ i' ≅ i ⋙ Φ` along adjunctions `i ⊣ G`, `i' ⊣ G'` to be invertible, used to compare the
   right adjoints `i^!` along such functors.
@@ -67,14 +68,14 @@ lemma Adjunction.isIso_mateEquiv_app (adj : i ⊣ G) (adj' : i' ⊣ G') (hi' : i
     (α : ΦZ ⋙ i' ⟶ i ⋙ Φ) [IsIso α] (K : C)
     (f : Φ.obj (i.obj (G.obj K)) ≅ i'.obj (G'.obj (Φ.obj K)))
     (hf : f.hom ≫ adj'.counit.app (Φ.obj K) = Φ.map (adj.counit.app K)) :
-    IsIso ((mateEquiv adj adj' α).natTrans.app K) := by
-  have h : i'.map ((mateEquiv adj adj' α).natTrans.app K) = α.app (G.obj K) ≫ f.hom := by
+    IsIso ((mateEquiv adj adj' α).app K) := by
+  have h : i'.map ((mateEquiv adj adj' α).app K) = α.app (G.obj K) ≫ f.hom := by
     rw [← hi'.map_preimage (α.app (G.obj K) ≫ f.hom)]
     congr 1
     apply (adj'.homEquiv _ _).symm.injective
     simp only [Adjunction.homEquiv_counit, hi'.map_preimage, Category.assoc, hf]
     exact mateEquiv_counit adj adj' α K
-  have : IsIso (i'.map ((mateEquiv adj adj' α).natTrans.app K)) := by
+  have : IsIso (i'.map ((mateEquiv adj adj' α).app K)) := by
     rw [h]
     infer_instance
   exact hi'.isIso_of_isIso_map _

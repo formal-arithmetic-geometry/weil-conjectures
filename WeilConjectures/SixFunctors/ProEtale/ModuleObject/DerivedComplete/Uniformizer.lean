@@ -56,8 +56,8 @@ variable {C : Type*} [Category.{v} C] [Abelian C] [MonoidalCategory C] [Monoidal
 /-- The action `r_M : M ⟶ M` of an endomorphism `r` of the regular `R`-module on the `R`-modules
 `M`, as an element of the center of `Mod_R(C)`. -/
 noncomputable def regularEndCenter (r : 𝟙_ (Mod C R) ⟶ 𝟙_ (Mod C R)) : CatCenter (Mod C R) where
-  app M := regularEndSMul r M
-  naturality _ _ g := (regularEndSMul_naturality r g).symm
+  asHom.app M := regularEndSMul r M
+  asHom.naturality _ _ g := (regularEndSMul_naturality r g).symm
 
 omit [MonoidalPreadditive C] in
 @[simp]

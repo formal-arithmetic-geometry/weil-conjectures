@@ -65,7 +65,7 @@ import Mathlib.LinearAlgebra.Basis.Basic
 
 /-! # The exact scalar periodic resolution
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 sk-def-localizing-closure-ctf-equals-bc.proof.md, "The examples";
 Stacks Project, Tags 03ER, 06YN, 06YQ
 (blueprint: lem-sfb-exact-scalar-periodic-resolution).

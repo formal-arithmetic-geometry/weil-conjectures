@@ -38,7 +38,7 @@ comparison maps are unique in the homotopy category and are homotopy equivalence
 - `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_eq_termwise`: the comparison maps are
   isomorphisms, and the derived base change map on `K` agrees with the termwise one.
 
-(blueprint: `lem-weil-pbc-derived-exchange-termwise`)
+(blueprint: `prose-04-06`)
 -/
 
 @[expose] public section
@@ -61,7 +61,7 @@ complex `I` via `s : K ≅ Qh I`, and let `j : g'^* I ⟶ J` be a K-injective re
 `DerivedCategory.Plus.injectiveObjectEquivalence`, with the isomorphisms `ρ : K ≅ Qh P` and
 `ρ' : g'^* K ≅ Qh P'`. Then there are unique maps `h₁ : I ⟶ P` and `h₂ : J ⟶ P'` in the
 homotopy category compatible with `s`, `ρ` and with `t : g'^* K ≅ Qh J` (induced by `s` and
-`j`), `ρ'` respectively. (blueprint: `lem-weil-pbc-derived-exchange-termwise`) -/
+`j`), `ρ'` respectively. (blueprint: `prose-04-06`) -/
 lemma Etale.existsUnique_derivedBaseChangeMapPlus_comparison
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A))
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [I.IsKInjective]
@@ -116,7 +116,7 @@ identifications `χ : f_* I ≅ Rf_* K`, `χ' : f'_* J ≅ Rf'_* (g'^* K)` and
       ↓                            ↓
   g^* Rf_* K --(base change)--> Rf'_* g'^* K
 ```
-commutes. (blueprint: `lem-weil-pbc-derived-exchange-termwise`) -/
+commutes. (blueprint: `prose-04-06`) -/
 lemma Etale.derivedBaseChangeMapPlus_eq_termwise (sq : CommSq g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A))
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [I.IsKInjective]
