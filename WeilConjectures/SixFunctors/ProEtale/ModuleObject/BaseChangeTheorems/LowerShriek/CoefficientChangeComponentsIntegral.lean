@@ -39,7 +39,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y)
 
-/-- Blueprint `proposition-six-operations-dctf--16`, the coefficient ring `𝒪_E`: on the ambient
+/-- Coefficient ring `𝒪_E`: on the ambient
 derived category, the unit of `Lf^* ⊣ Rf_*` on bounded constructible complexes is the unit of
 `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction`. -/
 lemma boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom'
@@ -49,7 +49,7 @@ lemma boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom'
         K.obj :=
   restrictFullyFaithful_derivedUpperStarLowerStarAdjunction_unit_app_hom ℓ f _ K
 
-/-- Blueprint `proposition-six-operations-dctf--16`, the coefficient ring `𝒪_E`: on the ambient
+/-- Coefficient ring `𝒪_E`: on the ambient
 derived category, the counit of `Lf^* ⊣ Rf_*` on bounded constructible complexes is the counit
 of `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction`. -/
 lemma boundedConstructibleUpperStarLowerStarAdjunction_counit_app_hom'

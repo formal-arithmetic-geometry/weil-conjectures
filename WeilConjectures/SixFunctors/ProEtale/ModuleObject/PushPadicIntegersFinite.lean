@@ -23,7 +23,6 @@ its inverse is given by the coordinates, which are continuous. Hence the compari
 morphism of schemes `f` and every `K`
 (`AlgebraicGeometry.ProEtale.isIso_derivedPushHom_finiteCoefficientIntegersPointMap`), by
 `AlgebraicGeometry.ProEtale.CondensedRing.isIso_derivedPushHom_of_isIso_biproductDesc_globalSmul`.
-This is the integral case of blueprint `lemma-change-coefficients-direct-image--3`.
 -/
 
 @[expose] public section
@@ -138,11 +137,10 @@ instance preservesFiniteLimits_extendScalars_finiteCoefficientIntegersPointMap
       (Mod.extendScalars (coefficientMap (finiteCoefficientIntegersPointMap ℓ h) Z)) :=
   ((cartesianCoefficients_finiteFree.{u} ℓ h).2.2 Z).1
 
-/-- Blueprint `lemma-change-coefficients-direct-image--3` for the integral coefficients
-`(𝒪_E, 𝒪_F)` of a finite extension `F/E`: the comparison `(Rf_* K)_{𝒪_F} ⟶ Rf_*(K_{𝒪_F})` for
-the coefficient change `𝒪̲_E ⟶ 𝒪̲_F` is an isomorphism, for every morphism of schemes `f` and
-on all unbounded objects. Indeed `𝒪̲_F` is finite free over `𝒪̲_E`, so both sides are finite
-direct sums of copies of `Rf_*^{𝒪_E}`. -/
+/-- Integral coefficients `(𝒪_E, 𝒪_F)` of a finite extension `F/E`: the comparison
+`(Rf_* K)_{𝒪_F} ⟶ Rf_*(K_{𝒪_F})` for the coefficient change `𝒪̲_E ⟶ 𝒪̲_F` is an isomorphism, for
+every morphism of schemes `f` and on all unbounded objects. Indeed `𝒪̲_F` is finite free over
+`𝒪̲_E`, so both sides are finite direct sums of copies of `Rf_*^{𝒪_E}`. -/
 instance isIso_derivedPushHom_finiteCoefficientIntegersPointMap {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (CondensedRing.derivedPushHom (finiteCoefficientIntegersPointMap ℓ h) f) :=
   (exists_isIso_biproductDesc_finiteCoefficientIntegersPointMap_globalSmul.{u} ℓ h).elim

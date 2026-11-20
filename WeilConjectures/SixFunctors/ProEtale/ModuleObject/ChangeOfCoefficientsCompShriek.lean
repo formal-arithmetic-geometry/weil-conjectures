@@ -20,7 +20,7 @@ the comparison for `c` is the composite of the comparisons for `a` and `b`, up t
 transitivity isomorphisms `T_c ≅ T_a ⋙ T_b` of the derived extensions of scalars
 (`ProEtale.CondensedRing.derivedLowerShriekHom_comp_app`).
 
-Following the blueprint, `Rf_! = Rg_* ∘ Dj_!` for the chosen compactification and the
+`Rf_! = Rg_* ∘ Dj_!` for the chosen compactification and the
 comparison is the composite of the (Push) comparison for `g`, which is transitive by
 `ProEtale.CondensedRing.derivedPushHom_comp_app`, and of the (Shriek) isomorphism for the open
 immersion `j`, which is transitive because it is the conjugate of the isomorphisms
@@ -183,7 +183,7 @@ lemma derivedLowerShriekHom_app
     Functor.associator_inv_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
   erw [Category.id_comp, Category.id_comp, Category.comp_id]
 
-/-- Blueprint `proposition-six-operations-change-coefficients--10`: **(Shriek) is compatible
+/-- **(Shriek) is compatible
 with the composition of coefficient changes.** For `c = a ≫ b`, the comparison
 `Rf_! ⋙ T_c ⟶ T_c ⋙ Rf_!` is the composite of the comparisons for `a` and `b`, up to the
 transitivity isomorphisms `T_c ≅ T_a ⋙ T_b` of the derived extensions of scalars
@@ -220,7 +220,7 @@ theorem derivedLowerShriekHom_comp_app (hc : a ≫ b = c)
     reassoc_of% hn]
   rfl
 
-/-- Blueprint `proposition-six-operations-change-coefficients--11`: **the `f^!` comparison is
+/-- **The `f^!` comparison is
 transitive in the coefficients.** Let `Rf_! ⊣ f^!` be right adjoints of the compactly supported
 direct images over `Λ`, `Λ'` and `Λ''`, and suppose that the (Shriek) comparisons for `a`, `b`
 and `c = a ≫ b` are isomorphisms (as they are on bounded constructible complexes). The `f^!`

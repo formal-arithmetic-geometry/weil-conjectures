@@ -59,7 +59,7 @@ lemma exists_constructibleFiniteTor_iso_mapDerivedCategory {X : Scheme.{u}}
   exact ⟨G, ⟨hG, a, b, (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b G).1
     ((DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso e.symm hab)⟩, ⟨e⟩⟩
 
-/-- Blueprint `proposition-six-operations-dctf--2`: for a finite ring `Λ` whose exponent is
+/-- For a finite ring `Λ` whose exponent is
 invertible on `Y` and a separated morphism `f : X ⟶ Y` of finite-type `k`-schemes, the pro-étale
 derived direct image `Rf_*` carries `Dctf(X_proét, Λ)` into `Dctf(Y_proét, Λ)`. On `ν^* G` it is
 `ν^* Rf_*^{ét} G` (`AlgebraicGeometry.ProEtale.rightDerivedLowerStarMapDerivedCategoryObjIso`),
@@ -86,7 +86,7 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {k : Type u} [Field k]
     (DerivedCategory.constructibleFiniteTor_mapDerivedCategory Λ
       (Etale.constructibleFiniteTor_rightDerivedLowerStar Λ aX aY f hf hG))
 
-/-- Blueprint `proposition-six-operations-dctf--14`, the finite coefficients: for a finite ring
+/-- Finite coefficients: for a finite ring
 `Λ` and `K, L ∈ Dctf(X_proét, Λ)`, the derived tensor product `K ⊗ᴸ L` lies in
 `Dctf(X_proét, Λ)`. Writing `K ≅ ν^* G` and `L ≅ ν^* G'`, it is `ν^*(G ⊗ᴸ G')` (`ν^*` is
 monoidal), and the étale `⊗ᴸ` preserves `Dctf`
@@ -106,7 +106,7 @@ theorem constructibleFiniteTor_tensor {X : Scheme.{u}}
     (DerivedCategory.constructibleFiniteTor_mapDerivedCategory Λ
       (Etale.constructibleFiniteTor_tensor Λ X hG hG'))
 
-/-- Blueprint `proposition-six-operations-dctf--16`, the finite coefficients: for a finite ring
+/-- Finite coefficients: for a finite ring
 `Λ` whose exponent is invertible on `Y` and a separated morphism `f : X ⟶ Y` of finite-type
 `k`-schemes, the adjunction `Lf^* ⊣ Rf_*` on `Dctf(-_proét, Λ)`, the restriction of the ambient
 adjunction `AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction` on the pro-étale

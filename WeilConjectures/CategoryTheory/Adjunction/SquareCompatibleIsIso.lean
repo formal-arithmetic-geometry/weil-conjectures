@@ -29,8 +29,7 @@ commutes. Then `T' (α_K)` is an isomorphism if and only if
   to some `T K`, then `α'` is an isomorphism at every object
   (`CategoryTheory.NatTrans.SquareCompatible.isIso_app_of_exists_iso`).
 
-These are the formal steps of the reduction of isomorphism statements to finite coefficients
-(blueprint `proposition-isomorphisms-reduce-finite-coefficients`).
+These are the formal steps of the reduction of isomorphism statements to finite coefficients.
 -/
 
 @[expose] public section

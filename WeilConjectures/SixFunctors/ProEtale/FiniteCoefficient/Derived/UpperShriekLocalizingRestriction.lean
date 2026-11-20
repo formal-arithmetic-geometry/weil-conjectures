@@ -33,8 +33,6 @@ representability) restricts to `Dctf`:
   (`DerivedCategoryFiniteTor.rightDerivedLowerShriekLocalizingAdjunction`),
   whose right adjoint is the constructible exceptional inverse image `Rf^!`
   (`AlgebraicGeometry.ProEtale.DerivedCategoryFiniteTor.rightDerivedUpperShriekLocalizingIso`).
-
-This is blueprint `proposition-six-operations-dctf--17` for finite coefficient rings.
 -/
 
 @[expose] public section
@@ -57,7 +55,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   [IsSeparated aY] [HasInvertibleExponent Λ Y] {f : X ⟶ Y} (c : Compactification f)
   [HasCompactification f] [QuasiCompact f]
 
-/-- Blueprint `proposition-six-operations-dctf--17`: the exceptional inverse image
+/-- The exceptional inverse image
 `f^! : Loc(Dctf(Y, Λ)) ⥤ Loc(Dctf(X, Λ))` (right adjoint of `Rf_!(c)`, obtained by Brown
 representability) agrees on objects of `Dctf(Y, Λ)` with the constructible exceptional inverse
 image `Rf^!`. The inverse of this isomorphism is the adjunct of the counit
@@ -103,7 +101,7 @@ noncomputable def rightDerivedUpperShriekLocalizingObjIso
   have := ObjectProperty.isIso_homEquiv_of_bijective_localizingClosure adj ε hε
   exact ((ObjectProperty.ι _).mapIso (asIso (adj.homEquiv T L ε))).symm
 
-/-- Blueprint `proposition-six-operations-dctf--17`: the exceptional inverse image
+/-- The exceptional inverse image
 `f^! : Loc(Dctf(Y, Λ)) ⥤ Loc(Dctf(X, Λ))` carries objects of `Dctf(Y, Λ)` to objects of
 `Dctf(X, Λ)`. -/
 theorem constructibleFiniteTor_rightDerivedUpperShriekLocalizing_obj
@@ -150,7 +148,7 @@ noncomputable abbrev rightDerivedUpperShriekLocalizingRestrict :
     (fun L ↦ constructibleFiniteTor_rightDerivedUpperShriekLocalizing_obj Λ hk aX aY c
       ((toLocalizing Λ Y).obj L) L.property)
 
-/-- Blueprint `proposition-six-operations-dctf--17`: the adjunction `Rf_! ⊣ f^!` on `Dctf`, the
+/-- The adjunction `Rf_! ⊣ f^!` on `Dctf`, the
 restriction of the ambient adjunction `Rf_! ⊣ f^!` on the localizing closures `Loc(Dctf)`
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekLocalizingAdjunction`) to the full
 subcategories `Dctf`, which both functors preserve. Its units and counits are the ambient ones
@@ -208,7 +206,7 @@ noncomputable def rightDerivedLowerShriekClassAdjunction :
     (ObjectProperty.fullyFaithfulιOfLE (fun _ hL ↦ DerivedCategory.constructibleFiniteTor.plus hL))
     (Iso.refl _) (Iso.refl _)
 
-/-- Blueprint `proposition-six-operations-dctf--17`: the right adjoint of the adjunction on
+/-- The right adjoint of the adjunction on
 `Dctf` restricted from `Loc(Dctf)` is the constructible exceptional inverse image `Rf^!`
 restricted to `Dctf`, compatibly with the counits
 (`rightDerivedUpperShriekLocalizingIso_hom_app_counit`). -/

@@ -52,7 +52,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) {k : Typ
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
   [IsSeparated S.hom] (f : X ⟶ Y) (g : Y ⟶ S)
 
-/-- Blueprint `proposition-six-operations-change-coefficients--16`: **the (Shriek) comparison is
+/-- **The (Shriek) comparison is
 compatible with the composition of morphisms.** For the extension of scalars `T` along
 `E ⟶ ℚ̄_ℓ`, the comparison `R(f ≫ g)_! ⋙ T ≅ T ⋙ R(f ≫ g)_!` corresponds, under the composition
 isomorphisms `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` over `E` and over `ℚ̄_ℓ`, to the comparison pasted from
@@ -76,7 +76,7 @@ theorem squareCompatible_boundedConstructibleLowerShriekComp_toPadicAlgCl :
   rw [boundedConstructibleLowerShriekToPadicAlgClIso_eq_shriekOfCompactification ℓ E k f,
     boundedConstructibleLowerShriekToPadicAlgClIso_eq_shriekOfCompactification ℓ E k g]
 
-/-- Blueprint `proposition-six-operations-change-coefficients--17`: **the `f^!` comparison is
+/-- **The `f^!` comparison is
 compatible with the composition of morphisms.** For the extension of scalars `T` along
 `E ⟶ ℚ̄_ℓ`, the comparison `R(f ≫ g)^! ⋙ T ⟶ T ⋙ R(f ≫ g)^!` followed by the composition
 isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` over `ℚ̄_ℓ` equals the composition isomorphism over `E`

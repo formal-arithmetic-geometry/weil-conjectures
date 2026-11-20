@@ -28,8 +28,8 @@ Stacks 0F12). This removes the properness assumption of
 
 For a morphism `f` of schemes of finite type over a field `k`, the vanishing bound holds since
 `f` has finite cohomological dimension for torsion coefficients
-(`AlgebraicGeometry.Etale.hasFiniteCohomologicalDimensionMorphism`, Stacks 0F10), which gives
-blueprint `lemma-change-coefficients-direct-image--1` on the étale site
+(`AlgebraicGeometry.Etale.hasFiniteCohomologicalDimensionMorphism`, Stacks 0F10), which gives the
+comparison for finite ring maps on the étale site
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarExtendScalarsMap_app_of_finiteType`).
 -/
 
@@ -141,12 +141,11 @@ theorem isIso_rightDerivedLowerStarExtendScalarsMap_app_of_cohomologicalDimensio
     isIso_mateEquiv_leftDerivedUpperStarEtaleSheafExtendScalarsIso_app_of_cohomologicalDimension
     Λ Λ' f d hd K
 
-/-- Blueprint `lemma-change-coefficients-direct-image--1` (**finite ring maps**), on the étale
-site: for a homomorphism `ρ : Λ →+* Λ'` with `Λ` finite and a morphism `f : X ⟶ Y` of schemes of
-finite type over a field `k` (here: locally of finite type and quasi-compact over `k`), the
-comparison `(Rf_* K)_{Λ'} ⟶ Rf_*(K_{Λ'})` is an isomorphism for every `K ∈ D(X_ét, Λ)`. The
-higher direct images of `f` vanish in large degrees (Stacks 0F10), so this is the projection
-formula for constant coefficients (Stacks 0F12). -/
+/-- **Finite ring maps**, on the étale site: for a homomorphism `ρ : Λ →+* Λ'` with `Λ` finite and a
+morphism `f : X ⟶ Y` of schemes of finite type over a field `k` (here: locally of finite type and
+quasi-compact over `k`), the comparison `(Rf_* K)_{Λ'} ⟶ Rf_*(K_{Λ'})` is an isomorphism for every
+`K ∈ D(X_ét, Λ)`. The higher direct images of `f` vanish in large degrees (Stacks 0F10), so this is
+the projection formula for constant coefficients (Stacks 0F12). -/
 theorem isIso_rightDerivedLowerStarExtendScalarsMap_app_of_finiteType [Finite Λ]
     {k : Type u} [Field k] {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]

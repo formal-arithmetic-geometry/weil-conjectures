@@ -33,8 +33,7 @@ every map in this construction is compatible with the coefficient comparisons:
 * the exchange `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` (`...squareCompatible_exchange`), the exchange
   morphism of the base change isomorphism of the extension by zero;
 
-hence so is the composition isomorphism (`...squareCompatible_lowerShriekComp`): this is
-blueprint `proposition-six-operations-change-coefficients--16`.
+hence so is the composition isomorphism (`...squareCompatible_lowerShriekComp`).
 -/
 
 @[expose] public section
@@ -196,7 +195,7 @@ variable (hP : P.IsIsoRefinementPushforward) (hE : P.IsIsoExchange)
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
   [IsSeparated S.hom] (f : X ⟶ Y) (g : Y ⟶ S)
 
-/-- Blueprint `proposition-six-operations-change-coefficients--16`: **the coefficient comparison
+/-- **The coefficient comparison
 for `Rf_!` is compatible with the composition of morphisms.** For a coefficient change `C`, the
 comparison `R(f ≫ g)_! ⋙ T ≅ T ⋙ R(f ≫ g)_!` (along the chosen compactifications) corresponds,
 under the composition isomorphisms `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` over `Λ` and over `Λ'`, to the

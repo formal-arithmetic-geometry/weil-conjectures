@@ -27,8 +27,8 @@ This removes the properness assumption of
 `AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarExtendScalarsMap_app`.
 
 For a morphism of schemes of finite type over a field the vanishing bound holds (Stacks 0F10,
-`AlgebraicGeometry.Etale.hasFiniteCohomologicalDimensionMorphism`), which gives blueprint
-`lemma-change-coefficients-direct-image--1`
+`AlgebraicGeometry.Etale.hasFiniteCohomologicalDimensionMorphism`), which gives the comparison for
+finite ring maps
 (`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarExtendScalarsMap_app_of_finiteType`).
 -/
 
@@ -141,11 +141,10 @@ theorem isIso_rightDerivedLowerStarExtendScalarsMap_app_of_cohomologicalDimensio
   exact isIso_rightDerivedLowerStarExtendScalarsMap_app_of_isIso_mateEquiv R S g _
 
 omit [QuasiCompact g] [QuasiSeparated g] in
-/-- Blueprint `lemma-change-coefficients-direct-image--1` (**finite ring maps**): for a finite
-ring `R`, an `R`-algebra `S` (i.e. a ring map `R →+* S`), a morphism `g : Z ⟶ Y` of schemes of
-finite type over a field `k` (here: locally of finite type and quasi-compact over `k`) and
-`K ∈ Dᵇctf(Z_proét, R)`, the comparison `(Rg_* K)_S ⟶ Rg_*(K_S)` is an isomorphism in
-`D(Y_proét, S)`. -/
+/-- **Finite ring maps**: for a finite ring `R`, an `R`-algebra `S` (i.e. a ring map `R →+* S`), a
+morphism `g : Z ⟶ Y` of schemes of finite type over a field `k` (here: locally of finite type and
+quasi-compact over `k`) and `K ∈ Dᵇctf(Z_proét, R)`, the comparison `(Rg_* K)_S ⟶ Rg_*(K_S)` is an
+isomorphism in `D(Y_proét, S)`. -/
 theorem isIso_rightDerivedLowerStarExtendScalarsMap_app_of_finiteType {k : Type u} [Field k]
     (aZ : Z ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ]
     [LocallyOfFiniteType aY] [QuasiCompact aY] (hg : g ≫ aY = aZ)

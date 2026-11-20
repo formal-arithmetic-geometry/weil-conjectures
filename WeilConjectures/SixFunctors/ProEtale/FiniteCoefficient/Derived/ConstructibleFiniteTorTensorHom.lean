@@ -47,7 +47,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] {p
 
 include p aX
 
-/-- Blueprint `proposition-six-operations-dctf--15`, the finite coefficients over `k = 𝔽̄_p`:
+/-- Finite coefficients over `k = 𝔽̄_p`:
 for `K, M ∈ Dctf(X_proét, Λ)`, the derived internal Hom `RHom(K, M)` lies in
 `Dctf(X_proét, Λ)`. Writing `K ≅ ν^* G` and `M ≅ ν^* G'` with `G, G' ∈ Dctf(X_ét, Λ)`, this is
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_derivedHom_mapDerivedCategory`.
@@ -65,7 +65,7 @@ theorem constructibleFiniteTor_derivedHom
       ((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso e')
     (DerivedCategory.constructibleFiniteTor_derivedHom_mapDerivedCategory Λ (p := p) aX hG hG')
 
-/-- Blueprint `proposition-six-operations-dctf--18`, the finite coefficients over `k = 𝔽̄_p`:
+/-- Finite coefficients over `k = 𝔽̄_p`:
 for `K ∈ Dctf(X_proét, Λ)`, the tensor–Hom adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` on
 `Dctf(X_proét, Λ)` is the restriction of the ambient adjunction
 `AlgebraicGeometry.ProEtale.derivedTensorHomAdjunction` along the fully faithful inclusions, so

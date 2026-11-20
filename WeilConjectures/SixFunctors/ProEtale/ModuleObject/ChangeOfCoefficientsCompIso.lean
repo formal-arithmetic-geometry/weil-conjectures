@@ -26,8 +26,7 @@ Consequently the comparison for `c` is invertible at `K` as soon as the comparis
 invertible at `K` and the comparison for `b` is invertible at `T_a K`
 (`ProEtale.CondensedRing.isIso_derivedUpperStarExtendScalarsPushHom_app_of_coefficient_comp`),
 and similarly for the flat comparison `ProEtale.CondensedRing.derivedPushHom`
-(`ProEtale.CondensedRing.isIso_derivedPushHom_app_of_comp`). This is blueprint
-`lemma-change-coefficients-direct-image--6`.
+(`ProEtale.CondensedRing.isIso_derivedPushHom_app_of_comp`).
 -/
 
 @[expose] public section
@@ -116,10 +115,9 @@ theorem derivedUpperStarExtendScalarsPushHom_app_of_coefficient_comp (hc : a ≫
     CategoryTheory.Functor.map_id, Category.comp_id]
   rfl
 
-/-- Blueprint `lemma-change-coefficients-direct-image--6` (**composite coefficient maps**): for a
-composite `c = a ≫ b` of coefficient changes (no flatness assumed), the comparison
-`(Rf_* K)_{Λ''} ⟶ Rf_*(K_{Λ''})` is an isomorphism as soon as the comparison
-`(Rf_* K)_{Λ'} ⟶ Rf_*(K_{Λ'})` for `a` at `K` and the comparison for `b` at `K_{Λ'}` are
+/-- **Composite coefficient maps**: for a composite `c = a ≫ b` of coefficient changes (no flatness
+assumed), the comparison `(Rf_* K)_{Λ''} ⟶ Rf_*(K_{Λ''})` is an isomorphism as soon as the
+comparison `(Rf_* K)_{Λ'} ⟶ Rf_*(K_{Λ'})` for `a` at `K` and the comparison for `b` at `K_{Λ'}` are
 isomorphisms. By induction this covers finite composites. -/
 theorem isIso_derivedUpperStarExtendScalarsPushHom_app_of_coefficient_comp (hc : a ≫ b = c)
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
@@ -136,10 +134,9 @@ variable [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coeffici
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap b X))]
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap c X))]
 
-/-- Blueprint `lemma-change-coefficients-direct-image--6` for flat coefficient changes: for a
-composite `c = a ≫ b`, the comparison `ProEtale.CondensedRing.derivedPushHom c f` is invertible
-at `K` as soon as the comparison for `a` is invertible at `K` and the comparison for `b` is
-invertible at `T_a K`. -/
+/-- Flat coefficient changes: for a composite `c = a ≫ b`, the comparison
+`ProEtale.CondensedRing.derivedPushHom c f` is invertible at `K` as soon as the comparison for `a`
+is invertible at `K` and the comparison for `b` is invertible at `T_a K`. -/
 theorem isIso_derivedPushHom_app_of_comp (hc : a ≫ b = c)
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
     [IsIso ((derivedPushHom a f).app K)]
