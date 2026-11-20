@@ -364,6 +364,7 @@ public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimitIso
 public import WeilConjectures.Algebra.Homology.DerivedCategory.HomToInjective
 public import WeilConjectures.Algebra.Homology.DerivedCategory.HomologyDevissage
 public import WeilConjectures.Algebra.Homology.DerivedCategory.InjectiveHom
+public import WeilConjectures.Algebra.Homology.DerivedCategory.IsIsoEvaluation
 public import WeilConjectures.Algebra.Homology.DerivedCategory.MappingConeCoimage
 public import WeilConjectures.Algebra.Homology.DerivedCategory.MittagLefflerArtinian
 public import WeilConjectures.Algebra.Homology.DerivedCategory.MittagLefflerTower
@@ -1362,6 +1363,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedEx
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedExchangeUnit
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedOrdinaryBaseChange
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedOrdinaryComparisons
+public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedProperBaseChange
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullback
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackInterface
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackReflection
@@ -14147,6 +14149,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestriction
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrictionOfHomEq
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightCube
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPasteLaws
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeTransport
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 public import WeilConjectures.CategoryTheory.Adjunction.FreeComparisonComp
@@ -20491,6 +20494,7 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Counit
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
+public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.IdentityPasting
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars
 public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars.IsIso
@@ -23053,6 +23057,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapCom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdjunctionShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AffineLineUnitLocal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BaseChangeCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BaseChangePaste
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedConstructibleBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedConstructibleHomPreservation
