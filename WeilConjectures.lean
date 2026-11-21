@@ -17254,6 +17254,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariant
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantCtf
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantEtale
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantEtaleComp
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantTransport
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantTwist
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionNormalBundleEtale
@@ -20962,6 +20963,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Correspondence
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
+public import WeilConjectures.SixFunctors.Etale.Derived.DerivedEtaleLowerShriekAdjunctionEq
 public import WeilConjectures.SixFunctors.Etale.Derived.DiagonalSectionRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageCohomologicalDimension

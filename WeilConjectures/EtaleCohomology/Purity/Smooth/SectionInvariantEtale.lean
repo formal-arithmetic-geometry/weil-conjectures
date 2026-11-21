@@ -32,10 +32,9 @@ and `s'` of `g'` with `s' ≫ e = s` this gives an identification of section inv
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.sectionInvariantEtaleIso_id`,
-  `AlgebraicGeometry.Etale.sectionInvariantEtaleIso_comp`,
-  `AlgebraicGeometry.Etale.sectionInvariantEtaleIso_baseChange`: these identifications respect
-  identities, composition and base change.
+- `AlgebraicGeometry.Etale.sectionInvariantEtaleIso_baseChange`: these identifications commute
+  with base change. Their compatibility with identities and composition is in
+  `WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantEtaleComp`.
 -/
 
 @[expose] public section
@@ -342,28 +341,6 @@ end BaseChange
 section Coherence
 
 variable {V'' V' V B : Scheme.{u}}
-
-/-- The identification of section invariants along the identity is the identity. -/
-theorem sectionInvariantEtaleIso_id (g : V ⟶ B) [HasCompactification g] [QuasiCompact g]
-    [HasCompactification (𝟙 V)] (s : B ⟶ V) :
-    sectionInvariantEtaleIso Λ (𝟙 V) g g (Category.id_comp g) s s (Category.comp_id s) =
-      Iso.refl _ := by
-  sorry
-
-/-- The identifications of section invariants along étale maps are compatible with
-composition. -/
-theorem sectionInvariantEtaleIso_comp (e₁ : V'' ⟶ V') (e₂ : V' ⟶ V)
-    [_root_.AlgebraicGeometry.Etale e₁] [_root_.AlgebraicGeometry.Etale e₂]
-    [HasCompactification e₁] [HasCompactification e₂] [HasCompactification (e₁ ≫ e₂)]
-    (g : V ⟶ B) (g' : V' ⟶ B) (g'' : V'' ⟶ B) (w₂ : e₂ ≫ g = g') (w₁ : e₁ ≫ g' = g'')
-    [HasCompactification g] [HasCompactification g'] [HasCompactification g''] [QuasiCompact g']
-    [QuasiCompact g''] (s : B ⟶ V) (s' : B ⟶ V') (s'' : B ⟶ V'') (h₂ : s' ≫ e₂ = s)
-    (h₁ : s'' ≫ e₁ = s') :
-    sectionInvariantEtaleIso Λ (e₁ ≫ e₂) g g'' (by rw [Category.assoc, w₂, w₁]) s s''
-        (by rw [← Category.assoc, h₁, h₂]) =
-      sectionInvariantEtaleIso Λ e₁ g' g'' w₁ s' s'' h₁ ≪≫
-        sectionInvariantEtaleIso Λ e₂ g g' w₂ s s' h₂ := by
-  sorry
 
 /-- The identifications of section invariants along étale maps commute with base change: for
 `b : B₁ ⟶ B`, base changes `g₁` of `g` and `g₁'` of `g' = e ≫ g`, and the base change `e₁` of

@@ -22,12 +22,8 @@ i.e. the square
 ```
 
 is cartesian. Then the ideal of `s'` is the pullback of the ideal of `s`, so that `e` induces a
-morphism of deformation spaces `D_{s'} V' ⟶ D_s V` and of normal cones `N_{s'} ⟶ N_s`.
-
-* The morphism of deformation spaces is étale: it is the base change of `e`.
-* The morphism of normal cones is an isomorphism: by flat base change it is the base change of `e`
-  along `N_s ⟶ V`, which factors through `s`, and the base change of `e` along `s` is the identity
-  of `B`. It is linear, being induced by the map of associated graded algebras.
+morphism of deformation spaces `D_{s'} V' ⟶ D_s V` and of normal cones `N_{s'} ⟶ N_s`. The
+first is étale and the second is an isomorphism.
 
 ## Main statements
 
@@ -37,6 +33,14 @@ morphism of deformation spaces `D_{s'} V' ⟶ D_s V` and of normal cones `N_{s'}
   deformation spaces is étale.
 - `AlgebraicGeometry.Scheme.Hom.isIso_normalConeMap_of_isPullback`: the induced morphism of normal
   cones is an isomorphism.
+
+## Implementation details
+
+* The morphism of deformation spaces is étale: it is the base change of `e` along
+  `D_s V ⟶ V`.
+* The morphism of normal cones is an isomorphism: by flat base change it is the base change of `e`
+  along `N_s ⟶ V`, which factors through `s`, and the base change of `e` along `s` is the identity
+  of `B`. It is linear, being induced by the map of associated graded algebras.
 -/
 
 @[expose] public section
@@ -136,7 +140,7 @@ lemma normalCone_toBase_eq {W : Scheme.{u}} (t : B ⟶ W) [IsClosedImmersion t] 
 variable [IsClosedImmersion s]
 
 /-- The morphism `D_{s'} V' ⟶ D_s V` of deformation spaces induced by an étale map of pairs is
-étale: it is the base change of `e` along `D_s V ⟶ V`. -/
+étale. -/
 theorem etale_deformationSpaceMap_of_isPullback [Etale e] :
     Etale (IdealSheafData.deformationSpaceMap e s.ker s'.ker
       (map_siteIdeal_ker_le_of_isPullback s e s' he)) :=
@@ -223,6 +227,7 @@ lemma normalConeZeroSection_normalConeMap_of_isPullback :
   rw [normalConeZeroSection, Category.assoc, ← IdealSheafData.normalConeZeroSection,
     IdealSheafData.normalConeZeroSection_normalConeMap, reassoc_of% hq, normalConeZeroSection,
     IdealSheafData.normalConeZeroSection]
+
 /-- The morphism of deformation spaces induced by an étale map of pairs restricts to `e` on the
 fibres over `t = 1`. -/
 @[reassoc]
