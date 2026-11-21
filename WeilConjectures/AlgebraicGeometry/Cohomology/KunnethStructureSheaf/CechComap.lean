@@ -144,6 +144,18 @@ lemma pushforwardUnitPresheafComap_unitToPushforwardObjUnit (i : X ⟶ Z) (π : 
   ext t
   exact ConcreteCategory.congr_hom key t
 
+lemma map_pushforwardUnitPresheafComap_apply (i : X ⟶ Z) (π : Z ⟶ X) {V₁ V₂ V' : Z.Opens}
+    (h₁ : V₂ ≤ V₁) (h₂ : V' ≤ π ⁻¹ᵁ i ⁻¹ᵁ V₂) (t : (pushforwardUnitPresheaf i).obj (op V₁)) :
+    pushforwardUnitPresheafComap i π h₂ ((pushforwardUnitPresheaf i).map (homOfLE h₁).op t) =
+      pushforwardUnitPresheafComap i π (h₂.trans (π.preimage_mono (i.preimage_mono h₁))) t := by
+  rw [← ConcreteCategory.comp_apply, map_pushforwardUnitPresheafComap]
+
+lemma pushforwardUnitPresheafComap_map_apply (i : X ⟶ Z) (π : Z ⟶ X) {V V'₁ V'₂ : Z.Opens}
+    (h₁ : V'₁ ≤ π ⁻¹ᵁ i ⁻¹ᵁ V) (h₂ : V'₂ ≤ V'₁) (t : (pushforwardUnitPresheaf i).obj (op V)) :
+    Z.unitPresheaf.map (homOfLE h₂).op (pushforwardUnitPresheafComap i π h₁ t) =
+      pushforwardUnitPresheafComap i π (h₂.trans h₁) t := by
+  rw [← ConcreteCategory.comp_apply, pushforwardUnitPresheafComap_map]
+
 lemma le_preimage_preimage_iInf (i : X ⟶ Z) (π : Z ⟶ X) (s : ι → ι)
     (hs : ∀ q, ∀ z ∈ W q, i (π z) ∈ W (s q)) {k : ℕ} (y : Fin (k + 1) → ι) :
     ⨅ l, W (y l) ≤ π ⁻¹ᵁ i ⁻¹ᵁ ⨅ l, W (s (y l)) := by
@@ -181,10 +193,10 @@ lemma cechCochainComap_d (k : ℕ)
   rw [TopCat.Presheaf.cechComplex_d_apply,
     TopCat.Presheaf.cechComplex_d_apply, map_sum]
   refine Finset.sum_congr rfl fun l _ ↦ ?_
-  rw [map_zsmul, ← ConcreteCategory.comp_apply,
-    ← ConcreteCategory.comp_apply, map_pushforwardUnitPresheafComap,
-    pushforwardUnitPresheafComap_map]
-  rfl
+  rw [map_zsmul]
+  congr 1
+  exact (map_pushforwardUnitPresheafComap_apply i π _ _ _).trans
+    (pushforwardUnitPresheafComap_map_apply i π _ _ _).symm
 
 /-- If `i ≫ π = 𝟙` and `s` fixes every index `q` with `i ⁻¹ᵁ W q ≠ ⊥`, then `i^♯` is a left
 inverse of `cechCochainComap`. -/
@@ -200,9 +212,9 @@ lemma cechComplex_map_f_cechCochainComap (hiπ : i ≫ π = 𝟙 X)
   · have hle : ⨅ l, W (y l) ≤ ⨅ l, W (s (y l)) :=
       le_iInf fun l ↦ (iInf_le _ l).trans (congrArg W (h l)).ge
     rw [← ConcreteCategory.comp_apply,
-      pushforwardUnitPresheafComap_unitToPushforwardObjUnit i π hiπ _ hle,
-      TopCat.Presheaf.map_homOfLE_apply_congr W _ e (funext h : s ∘ y = y) hle le_rfl,
-      TopCat.Presheaf.map_homOfLE_self_apply]
+      pushforwardUnitPresheafComap_unitToPushforwardObjUnit i π hiπ _ hle]
+    exact (TopCat.Presheaf.map_homOfLE_apply_congr W _ e (funext h : s ∘ y = y) hle le_rfl).trans
+      (TopCat.Presheaf.map_homOfLE_self_apply _ _ _)
   · obtain ⟨l, hl⟩ := not_forall.1 h
     have hbot : i ⁻¹ᵁ ⨅ l, W (y l) = ⊥ :=
       eq_bot_iff.2 ((i.preimage_mono (iInf_le _ l)).trans ((hfix (y l)).resolve_left hl).le)
