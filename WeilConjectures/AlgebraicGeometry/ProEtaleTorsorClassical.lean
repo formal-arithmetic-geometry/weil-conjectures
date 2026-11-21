@@ -29,6 +29,13 @@ trivialized by an étale covering.
   of groups is classical.
 - `AlgebraicGeometry.Scheme.exists_etale_trivialization_grpTorsor`: a torsor under a classical
   sheaf of groups is trivialized by an étale covering.
+
+## Implementation details
+
+The direct images `ν_X_* f_*` and `f_* ν_Y_*` agree since both take sections over the base
+changes `E ×_X Y` of étale `X`-schemes `E`. Both sides of
+`proEtaleSetRestrictionComparisonIso` are left adjoint to this functor, so the isomorphism
+comes from uniqueness of left adjoints.
 -/
 
 @[expose] public section
@@ -47,8 +54,8 @@ local instance : (MorphismProperty.Over.pullback @Etale ⊤ f).IsContinuous X.sm
     Y.smallEtaleTopology :=
   Etale.isContinuous_overPullback f
 
-/-- The direct images `ν_X_* f_*` and `f_* ν_Y_*` of set-valued sheaves on `Y_proét` agree:
-both take sections over the base changes `E ×_X Y` of étale `X`-schemes `E`. -/
+/-- The direct images `ν_X_* f_*` and `f_* ν_Y_*` of set-valued sheaves on `Y_proét`
+agree. -/
 noncomputable def proEtaleSetLowerStarComparisonIso :
     (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).sheafPushforwardContinuous
         (Type (u + 1)) (ProEt.topology X) (ProEt.topology Y) ⋙
@@ -72,7 +79,7 @@ noncomputable def proEtaleSetLowerStarComparisonIso :
 
 /-- For a weakly étale morphism `f : Y ⟶ X`, restricting the inverse image `ν_X^* G` of an
 étale sheaf of sets `G` to the localization `Y_proét` of `X_proét` gives the inverse image
-`ν_Y^* f^* G`. Both functors are left adjoint to `ν_X_* f_* ≅ f_* ν_Y_*`. -/
+`ν_Y^* f^* G`. -/
 noncomputable def proEtaleSetRestrictionComparisonIso (hf : WeaklyEtale f) :
     ProEtale.comparisonCoefficientPullback (Type (u + 1)) X ⋙
         (MorphismProperty.Over.map ⊤ hf).sheafPushforwardContinuous (Type (u + 1))
@@ -141,19 +148,19 @@ theorem isProEtaleLocallyClassical_grpTorsor : IsProEtaleLocallyClassical X T.sh
   exact ⟨H, ⟨(proEtaleSetRestrictionGrpTorsorIso T V.1 t).symm ≪≫ e⟩⟩
 
 include hG in
-/-- **Torsors under classical groups are classical** (Stacks 099X). Let `G` be a sheaf of
-groups on `X_proét` whose underlying sheaf of sets is classical, i.e. of the form `ν^* G₀`.
-Then every `G`-torsor is classical.
-(blueprint: `lemma-torsors-under-classical-groups--1`) -/
+/-- **Torsors under classical groups are classical.** Let `G` be a sheaf of groups on
+`X_proét` whose underlying sheaf of sets is classical, i.e. of the form `ν^* G₀`. Then every
+`G`-torsor is classical. -/
+@[stacks 099X]
 theorem isProEtaleClassical_grpTorsor : IsProEtaleClassical X T.sheaf :=
   (proEtale_locallyClassical_etaleCover X T.sheaf).1 (isProEtaleLocallyClassical_grpTorsor hG T)
 
 include hG in
-/-- **Torsors under classical groups are étale locally trivial** (Stacks 099X). Let `G` be a
-sheaf of groups on `X_proét` whose underlying sheaf of sets is classical. Then every
-`G`-torsor `T` is trivialized by an étale covering `Yᵢ → X`: there is a section `t` of `T`
-over each `Yᵢ`, and `g ↦ g • t` identifies `G` with `T` over every object mapping to `Yᵢ`.
-(blueprint: `lemma-torsors-under-classical-groups--2`) -/
+/-- **Torsors under classical groups are étale locally trivial.** Let `G` be a sheaf of groups
+on `X_proét` whose underlying sheaf of sets is classical. Then every `G`-torsor `T` is
+trivialized by an étale covering `Yᵢ → X`: there is a section `t` of `T` over each `Yᵢ`, and
+`g ↦ g • t` identifies `G` with `T` over every object mapping to `Yᵢ`. -/
+@[stacks 099X]
 theorem exists_etale_trivialization_grpTorsor :
     ∃ (I : Type (u + 1)) (Y : I → X.Etale), X.smallEtaleTopology.CoversTop Y ∧
       ∀ i, ∃ t : T.sheaf.obj.obj (op ((toProEt X).obj (Y i))),

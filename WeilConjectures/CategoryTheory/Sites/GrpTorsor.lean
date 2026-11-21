@@ -34,10 +34,11 @@ namespace CategoryTheory.Sheaf
 
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
-/-- **Stacks 03AH.** A *torsor* under a sheaf `G` of groups: a sheaf of sets `T` with a left
+/-- A *torsor* under a sheaf `G` of groups: a sheaf of sets `T` with a left
 action `G × T → T` of `G`, compatible with restrictions, which is simply transitive on the
 sections over every object, and such that `T` has sections locally, i.e. every object is
 covered by objects over which `T` has a section. -/
+@[stacks 03AH]
 structure GrpTorsor (G : Sheaf J GrpCat.{w}) where
   /-- The underlying sheaf of sets. -/
   sheaf : Sheaf J (Type w)
