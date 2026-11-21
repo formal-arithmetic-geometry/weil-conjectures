@@ -18,7 +18,7 @@ import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 /-! # Exactness of internal Hom from finite free sheaves
 
 Source: literature/stacks-project/cohomology.tex, Tag 0GM8, finite locally free Hom
-calculation used in case (2) (blueprint: lem-sc-finite-free-internal-hom-exact).
+calculation used in case (2).
 -/
 
 @[expose] public section
@@ -148,7 +148,6 @@ private theorem finiteSumShortExact
 /-- Internal Hom from a finite free sheaf preserves a short exact sequence, with the
 canonical finite-sum identifications and the induced coordinatewise sequence maps.
 Source: literature/stacks-project/cohomology.tex, Tag 0GM8, finite locally free calculation
-(blueprint: lem-sc-finite-free-internal-hom-exact).
 
 Proof:
 1. On every localized site, precompose with the chosen isomorphism `hE.inv` and evaluate

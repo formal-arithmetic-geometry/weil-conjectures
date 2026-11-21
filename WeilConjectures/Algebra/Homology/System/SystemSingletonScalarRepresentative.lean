@@ -33,7 +33,6 @@ coefficient comparison, with the actual universal comparison maps.
 Source: Stacks, Derived Categories, lemmas pre-derived-adjoint-functors (0FND) and
 derived-adjoint-functors (09T5), and Cohomology on Sites, 0D6D; the singleton
 calculation is the argument in the parent node, Steps 7--8.
-(blueprint: lem-pur-system-singleton-scalar-representative)
 
 Proof: transport the normalized singleton transpose through the exact sequence
  equivalence and its derived compositor. Compose this transpose with the normalized

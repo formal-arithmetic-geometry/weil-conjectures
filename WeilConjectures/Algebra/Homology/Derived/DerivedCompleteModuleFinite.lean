@@ -28,7 +28,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 Source: Stacks Project, More on Algebra, Tag 09BA (`lemma-derived-complete-finite`),
 specialized to an `I`-adically complete Noetherian ring
-(blueprint: lem-weil-derived-complete-module-finite).
 -/
 
 @[expose] public section
@@ -334,7 +333,7 @@ private theorem difference_of_derived_complete {A : Type u} [CommRing A]
 modulo the ideal is finite, and its canonical map to its adic completion is bijective.
 The completion consists of compatible residue classes, with componentwise operations.
 Source: Stacks Project, More on Algebra, Tag 09BA (`lemma-derived-complete-finite`),
-specialized to a complete ring (blueprint: lem-weil-derived-complete-module-finite).
+specialized to a complete ring.
 
 Proof:
 1. Exact countable products of modules give countable products in the derived category,

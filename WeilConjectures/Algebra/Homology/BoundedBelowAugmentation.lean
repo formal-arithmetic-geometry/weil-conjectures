@@ -27,7 +27,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A rowwise quasi-isomorphic augmentation of a bounded-below bicomplex is
 quasi-isomorphic on totals.
 Source: Stacks Project, Tags 0133 and 01EQ.
-(auxiliary; not a blueprint node).
 Proof: regard the augmentation as a map from the single column in degree zero.
 Its row maps are quasi-isomorphisms by hypothesis. Both bicomplexes have common
 lower bounds, so row comparison makes the total map a quasi-isomorphism. The

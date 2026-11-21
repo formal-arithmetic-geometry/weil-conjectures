@@ -123,7 +123,6 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 /-! # Algebraic inverse image recovered from module-operation transport
 
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D7.
-(blueprint: lem-weil-pbc-algebraic-inverse-image-of-module-transport)
 -/
 
 @[expose] public section
@@ -136,7 +135,6 @@ set_option backward.isDefEq.respectTransparency false
 
 /-- The explicit operation-transport witnesses determine an algebraic inverse-image lift.
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D7.
-(blueprint: lem-weil-pbc-algebraic-inverse-image-of-module-transport)
 Proof: evaluate the binary-operation transport equations on a generalized pair to obtain
 preservation of addition and scalar multiplication on all generalized sections. For the
 regular module R, the underlying set sheaf is R itself. Let v be the inverse image of its

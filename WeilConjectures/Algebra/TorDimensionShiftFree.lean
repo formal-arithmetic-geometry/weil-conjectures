@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.TorDimensionShiftNatural
 # Dimension shifting for Tor along a free presentation
 
 Source: Stacks Project, Algebra, proof of Tag 00S2, and Tags 00LY and 00LZ
-(blueprint: lem-weil-pbc-tor-dimension-shift-free).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ The objects `S.X₁`, `S.X₂`, `S.X₃` represent `K`, `F`, `M`, respectively,
 and `S.f`, `S.g` represent the maps `j`, `p`. Tor is derived in its first variable.
 
 Source: Stacks Project, Algebra, proof of Tag 00S2, and Tags 00LY and 00LZ
-(blueprint: lem-weil-pbc-tor-dimension-shift-free).
 
 1. Apply `theorem-finite-etale-covers-proper-henselian--2` to `0 → K → K → 0 → 0`
    with identity first map, obtaining an augmented free resolution `G` of `K`.

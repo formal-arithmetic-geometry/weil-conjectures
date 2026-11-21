@@ -25,7 +25,6 @@ namespace LocalizedModule
 set_option linter.unusedVariables false in
 /-- Clearing denominators for degree-zero ring restriction maps.
 Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), (1)(e).
-(blueprint: lem-weil-pbc-graded-module-away-clearing-ring)
 
 Proof: Mathlib's homogeneous fraction representation, including its nilpotent
 case, gives y = b/g^n with b of degree n*deg(g). Write deg(f) = d+1 and put

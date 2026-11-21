@@ -97,7 +97,7 @@ set_option linter.privateModule false
 /-! # Derived scalar extension of locally finite free module sheaves
 
 Source: Stacks Project, Modules on Sites, Tags 0GN1 and 08FC; Cohomology on Sites,
-Tags 06YQ and 06YY (blueprint: lem-sfb-locally-free-derived-scalars).
+Tags 06YQ and 06YY.
 
 The ordinary functor and its universal derived comparison are those of
 `DerivedChangeOfRingsCochainModel`. Its object and map equations fix ordinary extension

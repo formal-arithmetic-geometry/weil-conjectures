@@ -19,7 +19,6 @@ import Mathlib.Data.Finset.Order
 /-! # Descent of bounded families of graded maps
 
 Source: Stacks Project, Tag 09RE, affine case (1), and Tag 05N7, map clause.
-(blueprint: lem-pc-bounded-graded-map-colimit-descent)
 -/
 
 @[expose] public section
@@ -114,8 +113,7 @@ uses only finitely many coefficients, relations and directed upper bounds, so wo
 without antisymmetry, using the filtered-ring elementwise criterion. Equivalently,
 pass to the antisymmetrization, transport along its category equivalence, and lift the
 resulting index to an upper bound with i₀. If b < a all source terms are zero, and the
-zero family at i₀ suffices.
-(blueprint: lem-pc-bounded-graded-map-colimit-descent) -/
+zero family at i₀ suffices. -/
 theorem exists_bounded_graded_map_of_directed_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

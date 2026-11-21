@@ -12,8 +12,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # TensorColimitsIndependentCoefficients
 
-Source: Stacks Project, Tag 03EP (lemma-tensor-commute-colimits), item (2).
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 03EP (lemma-tensor-commute-colimits), item (2). -/
 
 @[expose] public section
 
@@ -27,7 +26,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Tensoring on the left preserves coefficient-sized colimits of module sheaves.
 Source: Stacks Project, Modules on Sites, Tag 03EP, lemma-tensor-commute-colimits,
 item (2), with tensor product constructed by sheafification
-(auxiliary; not a blueprint node).
 
 Proof: write a for module sheafification. Its counit is an isomorphism on a sheaf M.
 The monoidal comparison of a identifies a followed by tensorLeft M with presheaf
@@ -65,7 +63,6 @@ theorem tensorLeft_preservesColimits_independentCoefficients
 set_option backward.isDefEq.respectTransparency false in
 /-- Tensoring module sheaves is additive at independent coefficient universes.
 Source: Stacks Project, Modules on Sites, Tag 03EP, item (2).
-(auxiliary; not a blueprint node).
 
 Proof: tensor preserves coefficient-sized colimits and zero morphisms. Shrink its
 colimit preservation to finite diagrams, so it preserves binary coproducts and hence
@@ -87,7 +84,7 @@ theorem tensorLeft_additive_independent
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit sectionwise tensor functor agrees with the presheaf monoidal tensor.
-Source: Stacks Project, Tag 03EK (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 03EK.
 The identity on each section commutes with restrictions and tensor maps. -/
 noncomputable def siteTensorRightIso
     (M : PresheafOfModules.{w}
@@ -107,7 +104,7 @@ noncomputable def siteTensorRightIso
     rfl
 set_option backward.isDefEq.respectTransparency false in
 /-- The monoidal sheaf tensor is sheafification of the tensor of underlying presheaves.
-Source: Stacks Project, Tag 03EK (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 03EK.
 Apply the monoidal sheafification comparison and its invertible counit on sheaves. -/
 noncomputable def tensorRightPresentation
     (M : SheafOfModules.{w}
@@ -131,7 +128,7 @@ noncomputable def tensorRightPresentation
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit site tensor functor agrees with the monoidal tensor of module sheaves.
-Source: Stacks Project, Tag 03EK (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 03EK.
 Sheafify the sectionwise comparison and compose with the monoidal presentation. -/
 noncomputable def siteSheafTensorRightIso
     (M : SheafOfModules.{w}

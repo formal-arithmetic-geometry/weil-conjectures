@@ -16,7 +16,6 @@ import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 # Canonical comparison for sections of a sheaf Hom complex
 
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-(blueprint: lem-pur-hom-complex-sections-canonical-comparison)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace CategoryTheory
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical shifted section comparison, specified on cocycle representatives.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-(blueprint: lem-pur-hom-complex-sections-canonical-comparison)
 
 Proof: sections preserve the product cone specifying the sheaf Hom complex.
 Its projections therefore identify degree-n sections with all degree-n cochains

@@ -94,7 +94,6 @@ private lemma rowCutMap_total_quasiIsoAt {C : Type u} [Category.{v} C] [Abelian 
 /-- A columnwise quasi-isomorphism of first-quadrant bicomplexes induces a
 quasi-isomorphism on their total complexes.
 Source: Stacks Project, Section 12.25 (Tags 012X and 0133), finite filtration argument.
-(blueprint: lem-sc-first-quadrant-total-column-comparison).
 
 Proof: in each homology degree n truncate the vertical complexes above N=n+1
 by restricting to the finite shape 0,...,N and extending by zero. The canonical

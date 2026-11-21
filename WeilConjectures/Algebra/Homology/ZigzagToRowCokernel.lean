@@ -16,7 +16,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 # The canonical map from zig-zags to row-cokernel homology
 
 Source: Stacks Project, Algebra, Tag 00M1, proof and functoriality paragraph
-(blueprint: lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map).
 -/
 
 @[expose] public section
@@ -153,7 +152,6 @@ open Classical in
 /-- The endpoint of a zig-zag induces a natural linear map to row-cokernel homology.
 Source: Stacks Project, Algebra, Tag 00M1, proof, canonical homomorphisms and the
 right-hand square of the functoriality diagram
-(blueprint: lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map).
 
 Here `C A = A.opcycles 0` is formed in the abelian category of chain complexes:
 its degree `q` is the cokernel of `d : A₁,ᵩ → A₀,ᵩ`. The projection `π A` is a

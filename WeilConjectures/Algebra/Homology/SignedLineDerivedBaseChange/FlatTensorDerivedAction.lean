@@ -35,7 +35,6 @@ omit [J.HasSheafCompose (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})]
   [K.HasSheafCompose (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})] in
 /-- Localizing a tensor comparison with flat fixed factors gives a unique derived action.
 Source: Stacks Project, Tags 06YU, 07A4 and 015F.
-(blueprint: lem-pur-flat-tensor-derived-action)
 Proof: compose the two flat-factor resolving comparisons, the exact functor
 factorization and the termwise tensor comparison. This gives an isomorphism after
 precomposition with the cochain localization. Lift it uniquely through that

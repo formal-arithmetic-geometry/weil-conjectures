@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 # Natural-degree deformation retract from split functionals
 
 Source: Stacks Project, Algebra, Tag 00MT, the last three sentences of the proof.
-(blueprint: lem-weil-pbc-nat-split-functionals-homotopy)
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ the submodule inclusion in each degree and is therefore injective. Identify
 the special terms with the two kernels, and the others with the full terms.
 When `j=0` there is no outgoing nonzero differential: `C.d 0 0=0` by the
 chain shape, so the same construction and equations apply at the boundary.
-No finite bases or unit matrix coefficients are used in this construction.
-(blueprint: lem-weil-pbc-nat-split-functionals-homotopy) -/
+No finite bases or unit matrix coefficients are used in this construction. -/
 theorem exists_nat_homotopy_equiv_of_split_functionals
     {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℕ)
     (j : ℕ) (α : C.X (j + 1) →ₗ[R] R) (β : C.X j →ₗ[R] R)

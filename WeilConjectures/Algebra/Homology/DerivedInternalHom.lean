@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 # Derived internal Hom on a ringed site
 
 Source: Stacks Project, sites-cohomology.tex, Sections 08J7, 0A8X and 07A5
-(blueprint: def-pur-derived-internal-hom).
 
 `derivedInternalHom J R : D(O)ᵒᵖ × D(O) ⥤ D(O)` is the functor induced, through the
 product localization `Q.op.prod Q`, by `(L, M) ↦ Q (Hom^•(L, I(M)))`, where `I` is the
@@ -40,7 +39,6 @@ localized Hom-complex bifunctor sends quasi-isomorphisms in either variable to
 isomorphisms.
 
 Source: Stacks Project, sites-cohomology.tex, Section 08J7, Lemma 0A95
-(blueprint: def-pur-derived-internal-hom).
 
 Proof:
 1. A morphism of `W.op.prod W` is a pair `(t.op, s)` of quasi-isomorphisms; it factors as
@@ -94,8 +92,7 @@ functor induced through the localization `Q.op.prod Q` by
 first variable it agrees with the internal hom `DerivedCategory.internalHomQhObj` of the derived
 tensor product (`derivedInternalHomIsoInternalHomQhObj`).
 
-Source: Stacks Project, sites-cohomology.tex, Sections 08J7, 0A8X and 07A5
-(blueprint: def-pur-derived-internal-hom). -/
+Source: Stacks Project, sites-cohomology.tex, Sections 08J7, 0A8X and 07A5 -/
 noncomputable def derivedInternalHom
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
@@ -122,7 +119,6 @@ noncomputable def derivedInternalHom
 (contravariant in `L`, covariant in `M`).
 
 Source: Stacks Project, sites-cohomology.tex, Section 08J7 and Lemma 0A95
-(blueprint: def-pur-derived-internal-hom).
 
 Proof:
 1. For the resolution used in `derivedInternalHom`, this is `Localization.fac`.
@@ -196,7 +192,6 @@ for complexes `Lc` representing `L` and a K-injective `Ic` representing `M`,
 `R𝓗om(L, M) ≅ Q (𝓗om^•(Lc, Ic))`.
 
 Source: Stacks Project, sites-cohomology.tex, Section 08J7 and Lemma 0A95
-(blueprint: def-pur-derived-internal-hom).
 
 Proof:
 1. Compute with the functorial resolution via `derivedInternalHom_comparison`.

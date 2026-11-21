@@ -11,7 +11,6 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 /-! # The native localization tensor at independent ringed-site universes
 
 Source: Stacks Project, Tags 06YS, 06YT and 0FPT.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section

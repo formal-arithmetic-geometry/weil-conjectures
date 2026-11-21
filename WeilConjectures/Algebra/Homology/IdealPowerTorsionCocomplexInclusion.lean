@@ -23,8 +23,7 @@ open CategoryTheory
 namespace ModuleCat
 
 /-- The degreewise subtype inclusions form the inclusion of the torsion subcomplex.
-Source: Stacks Project, Tags 0BJA and 0A6T.
-(blueprint: def-sbc-ideal-power-torsion-cocomplex-inclusion). -/
+Source: Stacks Project, Tags 0BJA and 0A6T. -/
 def idealPowerTorsionCocomplexι {R : Type u} [CommRing R] (J : Ideal R)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) :
     ((idealPowerTorsion J).mapHomologicalComplex (ComplexShape.up ℕ)).obj K ⟶ K where
@@ -35,7 +34,6 @@ def idealPowerTorsionCocomplexι {R : Type u} [CommRing R] (J : Ideal R)
 
 /-- Each component of the torsion inclusion is monic.
 Source: Stacks Project, Tag 0A6T.
-(blueprint: def-sbc-ideal-power-torsion-cocomplex-inclusion).
 Proof: each component is a submodule inclusion, hence injective and therefore monic. -/
 instance idealPowerTorsionCocomplexι_f_mono {R : Type u} [CommRing R] (J : Ideal R)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) (n : ℕ) :
@@ -45,7 +43,6 @@ instance idealPowerTorsionCocomplexι_f_mono {R : Type u} [CommRing R] (J : Idea
 
 /-- The torsion subcomplex inclusion is monic.
 Source: Stacks Project, Tag 0A6T.
-(blueprint: def-sbc-ideal-power-torsion-cocomplex-inclusion).
 Proof: cancel a morphism into the inclusion at each degree using subtype injectivity;
 extensionality of cochain maps then cancels the whole inclusion. -/
 instance idealPowerTorsionCocomplexι_mono {R : Type u} [CommRing R] (J : Ideal R)

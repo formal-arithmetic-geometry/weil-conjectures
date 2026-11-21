@@ -22,7 +22,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-! # Projectivity of zeroth opcycles from connective residue homology
 
 Source: Stacks Project, Tag 00O0, negative-tail splitting argument.
-(blueprint: lem-sc-residue-connective-projective-opcycles).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ if every residue complex is exact in negative degrees.
 
 Source: Stacks Project, Tag 00O0; the negative-tail cancellation argument in
 lem-sc-universal-h0-projective-normalization.
-(blueprint: lem-sc-residue-connective-projective-opcycles).
 
 Proof: Choose a lower support bound a and induct on max(0,-a). If a is nonnegative,
 P^(-1) is zero, so opcycles in degree zero is P^0 and is finite projective.

@@ -91,7 +91,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.LeftDerivedEquival
 
 Source: Stacks Project, derived.tex, Tags 05SU(2), 05SE (left derived functor part),
 and sites-cohomology.tex, Tag 06YY
-(blueprint: lem-sbc-derived-scalar-extension-counit-shift).
 
 The ordinary functor is identified on both objects and maps with the existing
 change of rings. Its induced homotopy functor has the canonical shift comparison
@@ -116,7 +115,6 @@ namespace SheafOfModules
 and this comparison makes derived scalar extension triangulated.
 Source: Stacks Project, derived.tex, Tags 05SU(2), 05SE (LF part), and
 sites-cohomology.tex, Tag 06YY
-(blueprint: lem-sbc-derived-scalar-extension-counit-shift).
 
 Here `E` is ordinary change of rings on module sheaves; its homotopy functor is the
 statement's termwise functor. The objects and maps of `E` are fixed by `h` and `hmap`.

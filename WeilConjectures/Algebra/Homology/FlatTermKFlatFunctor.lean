@@ -117,7 +117,6 @@ private theorem kFlat_of_cone {D : Type*} [Category D] [Abelian D]
 /-- An additive functor preserving flat objects and integer-indexed colimits preserves
 K-flat complexes with flat terms.
 Source: Stacks Project, Tag 0G7E, the resolution and acyclic-cone argument
-(auxiliary; not a blueprint node).
 Proof: choose the functorial flat resolution L of P. Its image is K-flat, since L is
 an integer-indexed colimit of bounded-above flat complexes. The cone of L → P is
 acyclic, K-flat, and termwise flat. Its cycles are flat by the Tor criterion. Thus

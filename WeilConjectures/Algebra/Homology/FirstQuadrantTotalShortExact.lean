@@ -88,7 +88,6 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite-diagonal totalization, followed by extension by zero, preserves short exactness.
 Source: Stacks Project, tag 012X, definition of the total complex and finite diagonals.
-(blueprint: lem-sp-first-quadrant-total-extend-short-exact).
 
 Proof: evaluate the short complex in bidegree (p,q). Evaluation in either complex
 category preserves kernels and cokernels, so the resulting sequence in C is short exact.

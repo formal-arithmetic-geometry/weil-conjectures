@@ -184,7 +184,6 @@ private lemma tensor_inv_shift (M : CochainComplex A ℤ) (b : B) (t : ℤ) :
 
 /-- The canonical reduction comparison commutes with signed integer shifts.
 Source: blueprint derived Nakayama resolution, On X, and first reduction, Cones.
-(auxiliary; not a blueprint node).
 
 Proof: the total-tensor comparison on coefficient degrees zero and minus one has
 respectively the unitor and the signed unitor as components. Shifting the first

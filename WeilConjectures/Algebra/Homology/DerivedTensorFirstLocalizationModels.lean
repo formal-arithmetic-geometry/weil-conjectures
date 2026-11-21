@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.FirstLocalizationNaturality
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, first localization identity;
 More on Algebra, Tags 064K and 06Y6.
-(blueprint: lem-pc-derived-tensor-first-localization-models).
 -/
 
 @[expose] public section
@@ -48,7 +47,6 @@ variable (R A B Aq D : Type u)
 include tRA tAD tBD tAqD tBqD tAAqD in
 /-- Exact localization in the first algebra, with R and B unchanged.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, first displayed localization identity.
-(blueprint: lem-pc-derived-tensor-first-localization-models).
 
 Proof: choose a K-flat A-resolution P -> Q and a K-flat R-resolution F -> B[0].
 The balanced complex Tot(P tensor_R F) computes Q tensor-derived_R B. The

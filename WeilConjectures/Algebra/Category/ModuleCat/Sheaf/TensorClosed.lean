@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 # Tensor closed structure on sheaves of modules
 
 Source: Stacks Project, Modules on Sites, Section 03EK and Lemma 03EO
-(blueprint: lem-pc-sheaf-modules-tensor-closed).
 -/
 
 @[expose] public section
@@ -43,7 +42,6 @@ commutes with precomposition in both tensor factors and postcomposition in the t
 This packages `monoidalClosed`, `tensorHomEquiv`, their naturality lemmas and the
 additivity instances of `tensorLeft` and `tensorRight`; it adds no new tensor or Hom data.
 Source: Stacks Project, Section 03EK and Lemma 03EO
-(blueprint: lem-pc-sheaf-modules-tensor-closed).
 
 Proof: (1) The tensor product is the sheafification of the sectionwise tensor product
 [def-pur-sheaf-tensor-product]. Sectionwise associativity, symmetry, unit and inverse maps

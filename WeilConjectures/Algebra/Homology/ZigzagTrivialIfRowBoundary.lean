@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.ZigzagBoundaryReduction
 /-! # Exact-row zig-zags are trivial
 
 Source: Stacks Project, Algebra, Lemma Tag 00M1, injectivity argument
-(blueprint: lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary).
 -/
 
 @[expose] public section
@@ -39,7 +38,6 @@ the image of `δʳᵗ : Aʳᵗₙ₊₁ → Aʳᵗₙ`. Row exactness is `ShortC
 `Aₚ₊₁,ᵩ → Aₚ,ᵩ → Aₚ₋₁,ᵩ` for `p ≥ 1`.
 
 Source: Stacks Project, Algebra, Lemma Tag 00M1, injectivity argument
-(blueprint: lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary).
 
 First lift a boundary preimage `y` through the cokernel projection in degree `n+1`
 to `c` in `A₀,ₙ₊₁`. Since `π` is a chain map, the difference `a₀,ₙ - δ c` has zero

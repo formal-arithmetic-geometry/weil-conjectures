@@ -102,7 +102,6 @@ import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YQ and 06YU;
 Modules on Sites, Tags 03EI and 03ER
-(blueprint: lem-sfb-flat-scalar-cyclic-resolution).
 
 The cone of scalar multiplication on the degree-zero ring complex is the displayed
 complex in degrees -1 and 0. Its quotient is the sheaf cokernel, and the augmentation
@@ -125,13 +124,13 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [HasWeakSheafify J CommRingCat.{r}]
 
 /-- The existing constant commutative ring sheaf.
-Source: Stacks Tag 093I (blueprint: lem-sfb-flat-scalar-cyclic-resolution). -/
+Source: Stacks Tag 093I. -/
 noncomputable abbrev scalarCyclicBase := (constantSheaf J CommRingCat.{r}).obj (CommRingCat.of A)
 
 variable {J}
 
 /-- Forget commutativity for the existing module-sheaf category.
-Source: Stacks Tag 03CY (blueprint: lem-sfb-flat-scalar-cyclic-resolution). -/
+Source: Stacks Tag 03CY. -/
 noncomputable abbrev scalarCyclicRing (R : Sheaf J CommRingCat.{r}) :=
   (sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R
 
@@ -139,13 +138,13 @@ variable {A} (R : Sheaf J CommRingCat.{r})
   (α : scalarCyclicBase J A ⟶ R)
 
 /-- The constant presheaf map adjoint to the given constant-sheaf algebra structure.
-Source: Stacks Tags 03CY, 093I (blueprint: lem-sfb-flat-scalar-cyclic-resolution). -/
+Source: Stacks Tags 03CY, 093I. -/
 noncomputable def scalarCyclicPresheafMap :
     (Functor.const Cᵒᵖ).obj (CommRingCat.of A) ⟶ R.obj :=
   (sheafificationAdjunction J CommRingCat.{r}).homEquiv _ _ α
 
 /-- Multiplication by the constant scalar, constructed from its compatible sections.
-Source: Stacks Tags 03CY, 03ER (blueprint: lem-sfb-flat-scalar-cyclic-resolution). -/
+Source: Stacks Tags 03CY, 03ER. -/
 noncomputable def scalarCyclicMultiplication (a : A) :
     unit (scalarCyclicRing R) ⟶ unit (scalarCyclicRing R) :=
   (unit (scalarCyclicRing R)).unitHomEquiv.symm

@@ -18,7 +18,6 @@ import WeilConjectures.Algebra.Homology.BaseTensorLocalizationHomologyNaturality
 /-! Generator calculation for base localization comparison.
 
 Source: Stacks Project, perfect.tex, Tags 0DJ8 and 06Y6.
-(blueprint: lem-pc-base-localization-comparison-aux).
 -/
 
 @[expose] public section
@@ -49,7 +48,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 include tRpA tRpB tAD tBD tApD tBpD in
 /-- The base-localization comparison identity on extension generators.
 Source: Stacks Project, perfect.tex, Tags 0DJ8 and 06Y6.
-(blueprint: lem-pc-base-localization-comparison-aux).
 
 Proof: expand the two localized comparisons using their `localized_eq`
 identities and the comparison equations of the two models.  The universal

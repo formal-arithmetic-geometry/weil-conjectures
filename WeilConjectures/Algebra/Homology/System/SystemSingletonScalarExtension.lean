@@ -161,7 +161,6 @@ public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 
 Source: Stacks 0D6D, lemma-derived-pullback-composition, and Zheng, Construction 4.1.
 The singleton functor is an extension left adjoint, not a geometric inverse image.
-(blueprint: lem-pur-system-singleton-scalar-extension)
 -/
 
 @[expose] public noncomputable section
@@ -313,7 +312,6 @@ private theorem singletonScalarOrdinary_tmul (n : ℕ) (P : systemLevel B n)
 Hom transposes, actual system-complex representatives, and lower-singleton maps.
 Source: Stacks 0D6D (lemma-derived-pullback-composition), with the agent singleton
 argument over Zheng Construction 4.1
-(blueprint: lem-pur-system-singleton-scalar-extension).
 
 Proof: (1) Vertical coverings make sheafification, scalar restriction and evaluation
 levelwise, giving the identity right-adjoint square. (2) The ordinary comparison sends

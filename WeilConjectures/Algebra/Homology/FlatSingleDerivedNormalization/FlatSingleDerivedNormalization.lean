@@ -36,7 +36,6 @@ public import Mathlib.Combinatorics.SetFamily.FourFunctions
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YN and 06YU;
 derived.tex, Tag 015F; homology.tex, Tag 010N; more-algebra.tex, Tag 0FNH.
-(blueprint: lem-pur-flat-single-derived-normalization)
 
 The derived tensor and its resolving comparisons are the published site descent data.
 The normalization is imposed on every unbounded input complex.
@@ -60,8 +59,7 @@ attribute [local instance 2000] KFlatFixedTensor.tensorHasMapBifunctor
 
 /-- The existing single-summand totalization isomorphism, with no flatness needed.
 Its component is the projection onto bidegree (i,0), using the identity of L.
-Source: Stacks 06YU and the direct-sum totalization convention 012Z
-(blueprint: lem-pur-flat-single-derived-normalization). -/
+Source: Stacks 06YU and the direct-sum totalization convention 012Z -/
 abbrev collapse (L : KFlatFixedTensor.Modules R) :=
   CochainComplex.map₂HomologicalComplexFlipObjSingleIso
     (KFlatFixedTensor.ordinaryTensor R) L
@@ -231,7 +229,7 @@ private def termwiseHomologyIso
 variable [HasDerivedCategory.{w} (KFlatFixedTensor.Modules R)]
 
 /-- Tensor with Q(L[0]) using the specified site-derived tensor, with no new choice.
-Source: Stacks 06YU (blueprint: lem-pur-flat-single-derived-normalization). -/
+Source: Stacks 06YU. -/
 abbrev derived (L : KFlatFixedTensor.Modules R) :=
   (KFlatFixedTensor.derivedTensor R).flip.obj
     (DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj L))
@@ -239,7 +237,6 @@ abbrev derived (L : KFlatFixedTensor.Modules R) :=
 /-- Flat degree-zero tensor is termwise on every unbounded complex, normalized by
 fixed-factor descent, and compatible with integer shifts, triangles and cohomology.
 Source: Stacks 06YN, 06YU, 015F, 010N and 0FNH
-(blueprint: lem-pur-flat-single-derived-normalization).
 
 Proof plan:
 1. By def-pc-flat-sheaf-modules, tensorRight L is exact; the canonical

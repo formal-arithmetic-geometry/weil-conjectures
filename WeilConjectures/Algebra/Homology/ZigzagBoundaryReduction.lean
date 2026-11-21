@@ -17,7 +17,7 @@ import WeilConjectures.Algebra.Homology.ZigzagToRowCokernel
 /-! # Removing the zeroth component of a row boundary
 
 Source: Stacks Project, Algebra, Tag 00M1 (`lemma-no-spectral-sequence`),
-injectivity argument. (blueprint: new-zigzag-boundary-reduction).
+injectivity argument.
 -/
 
 @[expose] public section
@@ -31,7 +31,6 @@ variable {R : Type u} [CommRing R]
 
 Source: Stacks Project, Algebra, Tag 00M1 (`lemma-no-spectral-sequence`),
 injectivity argument, lines 18488--18496.
-(blueprint: new-zigzag-boundary-reduction).
 
 Let `π = A.pOpcycles 0`. Lift the witness `y` of `hboundary` through the
 surjective cokernel projection `π` in degree `n+1`, obtaining `c` in `A₀,ₙ₊₁`.

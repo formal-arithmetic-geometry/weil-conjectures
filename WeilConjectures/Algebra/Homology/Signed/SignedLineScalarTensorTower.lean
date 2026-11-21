@@ -36,7 +36,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 
 Source: blueprint main-20261015, prop-weil-twist-preserves.proof.md, tensor-power/internal-Hom
 and common-finite-stage sentences; Stacks Project, Tags 03EK, 04TT and 0GMX.
-(blueprint: lem-pur-signed-line-scalar-tensor-tower)
 
 The coefficient and module universe is `max uC vC u`, so slice internal Homs stay in that
 universe without equating the site's object and morphism universes. The scalar-extension
@@ -677,8 +676,7 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
   [HasWeakSheafify J AddCommGrpCat.{max uC vC u}]
 
 /-- The node's signed powers, with the existing tensor powers and slice sheaf Hom.
-Source: blueprint prop-weil-twist-preserves.proof.md; Stacks 03EK and 04TT.
-(blueprint: lem-pur-signed-line-scalar-tensor-tower) -/
+Source: blueprint prop-weil-twist-preserves.proof.md; Stacks 03EK and 04TT. -/
 noncomputable def signedLinePower {R : Sheaf J CommRingCat.{max uC vC u}}
     (L : ringedSiteModules.{max uC vC u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
@@ -690,8 +688,7 @@ noncomputable def signedLinePower {R : Sheaf J CommRingCat.{max uC vC u}}
 
 /-- Local signed basis normalization: a genuine basis after every restriction, positive
 powers by tensors, and negative powers dual to the positive ones on every slice object.
-Source: Stacks 03EK and 04TT, local rank-one coordinates.
-(blueprint: lem-pur-signed-line-scalar-tensor-tower) -/
+Source: Stacks 03EK and 04TT, local rank-one coordinates. -/
 def SignedLineBasisPowers {R : Sheaf J CommRingCat.{max uC vC u}}
     (L : ringedSiteModules.{max uC vC u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (U : Cᵒᵖ)
@@ -709,8 +706,7 @@ def SignedLineBasisPowers {R : Sheaf J CommRingCat.{max uC vC u}}
 
 /-- Normalization of the signed extension of the given exponent-one comparison.
 The negative formula is the actual dual map followed by precomposition with the inverse
-positive comparison. Source: Stacks 0GMX and 03EK.
-(blueprint: lem-pur-signed-line-scalar-tensor-tower) -/
+positive comparison. Source: Stacks 0GMX and 03EK. -/
 def SignedLineComparisonNormalized
     [∀ X : C, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}]
     {R S : Sheaf J CommRingCat.{max uC vC u}} (α : R ⟶ S)
@@ -739,8 +735,7 @@ def SignedLineComparisonNormalized
 
 /-- The canonical multiplication is specified by its normalization on every local basis.
 Its normalization determines the contraction map uniquely, including mixed signs.
-Source: Stacks 03EK and 04TT, tensor associativity, symmetry and evaluation.
-(blueprint: lem-pur-signed-line-scalar-tensor-tower) -/
+Source: Stacks 03EK and 04TT, tensor associativity, symmetry and evaluation. -/
 def SignedLineProductNormalized {R : Sheaf J CommRingCat.{max uC vC u}}
     (L : ringedSiteModules.{max uC vC u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -914,7 +909,6 @@ private theorem normalized_on_basis
 
 /-- Every local basis has its uniquely normalized positive and dual powers.
 Source: Stacks 03EK and 04TT, node proof step 2.
-(blueprint: lem-pur-signed-line-scalar-tensor-tower)
 Proof: tensor the basis recursively, starting at 1 in degree zero. On each slice the
 negative basis functional sends r times the positive basis to r. These linear maps
 commute with restriction, hence are sections of the recorded slice Hom. A functional
@@ -965,7 +959,6 @@ theorem existsUnique_signedLineBasisPowers [HasFiniteLimits C]
 
 /-- Dual scalar comparison on every positive power of a line is invertible.
 Source: Stacks 0GMX, specialized using 04TT and 03EK; node proof steps 1, 2 and 4.
-(blueprint: lem-pur-signed-line-scalar-tensor-tower)
 Proof: restrict to a trivializing cover using localized tensor restriction. The canonical
 dual map sends the dual tensor basis to the functional taking the extended basis to 1.
 Its inverse sends h to h(e tensor 1) times the extended dual basis. On overlaps inverses
@@ -1054,7 +1047,6 @@ private theorem signedComparison_normalized [HasFiniteLimits C]
 
 /-- Existence of all signed comparison isomorphisms, with the precise evaluation and
 local coordinate formulas. Source: Stacks 0GMX, 03EK and 04TT, node proof steps 1--5.
-(blueprint: lem-pur-signed-line-scalar-tensor-tower)
 Proof: start with the scalar unit and b. Iterate the normalized binary scalar comparison
 and tensor b to obtain the positive maps. For negative degrees compose the dual comparison,
 which is invertible by the preceding line argument, with precomposition by the inverse
@@ -1432,7 +1424,6 @@ private theorem exists_signedProductMap [HasFiniteLimits C]
 
 /-- Canonical multiplication on all signed powers, characterized on every local basis.
 Source: Stacks 03EK and 04TT, node proof steps 1, 2, 6 and 7.
-(blueprint: lem-pur-signed-line-scalar-tensor-tower)
 Proof: locally send (r e^a) tensor (q e^b) to rq e^(a+b); its inverse sends c e^(a+b)
 to (c e^a) tensor e^b. Changing e to u e multiplies the degree m basis by u^m, including
 negative m since u is a unit. Thus both maps agree on overlaps and glue uniquely by Hom

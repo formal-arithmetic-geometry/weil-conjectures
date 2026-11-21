@@ -132,8 +132,7 @@ a linear map out of `B m →₀ A` is uniquely determined by its values on the b
 vectors. Transport that property along `e m`. Evaluation jointly detects
 colimits of complexes, so these inclusions exhibit `K` as the coproduct of the
 single complexes. Uniqueness of colimits gives the required isomorphism.
-This includes empty basis types and the zero ring.
-(blueprint: lem-pc-zero-differential-free-coproduct) -/
+This includes empty basis types and the zero ring. -/
 theorem nonempty_iso_coproduct_single_of_zero_d
     {A : Type u} [CommRing A] (K : CochainComplex (ModuleCat.{u} A) ℤ)
     (B : ℤ → Type u) (e : ∀ n : ℤ, K.X n ≃ₗ[A] (B n →₀ A))

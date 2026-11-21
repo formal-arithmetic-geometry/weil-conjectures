@@ -15,7 +15,6 @@ import Mathlib.Algebra.DirectSum.Decomposition
 # Homogeneous lifting in an away localization
 
 Source: Stacks Project, Algebra, Section 00JM; Constructions, Lemma 01M7.
-(blueprint: lem-sc-p1-away-degreezero-lift)
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ private theorem shift_component
 /-- A degree-zero fraction in the image of a graded localized map has a degree-zero preimage.
 Source: Stacks Project, Algebra, Section 00JM, homogeneous localization; Constructions,
 Lemma 01M7, final functoriality paragraph.
-(blueprint: lem-sc-p1-away-degreezero-lift)
 
 Proof: If f = 0, localization is the zero module and its zero fraction is a preimage.
 Otherwise a power f^m is nonzero and has degree m*d. The total degree of this nonzero

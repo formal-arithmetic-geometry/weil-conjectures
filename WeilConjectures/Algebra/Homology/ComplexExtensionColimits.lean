@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 Source: the degreewise colimit construction in Mathlib's
 `Algebra.Homology.HomologicalComplexLimits`, applied to extension by zero.
 The proof is moved unchanged from `ProEtaleModuleCohomologyCoproducts`.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ open CategoryTheory CategoryTheory.Limits
 Source: Mathlib, `Algebra.Homology.HomologicalComplexLimits` and
 `Algebra.Homology.Embedding.Extend`; the existing proof in
 `WeilConjectures.AlgebraicGeometry.ProEtaleModuleCohomologyCoproducts`.
-(auxiliary; not a blueprint node).
 Proof: after evaluation at a degree in the embedding range, extension is naturally
 isomorphic to evaluation at its preimage. Outside the range, it is the zero
 functor. Both preserve colimits, including empty ones. Colimits of complexes are

@@ -17,7 +17,6 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 # K-flat base change over commutative rings
 
 Source: Stacks Project, More on Algebra, Tag 06Y1.
-(blueprint: lem-pc-kflat-extension-of-scalars)
 -/
 
 @[expose] public section
@@ -51,7 +50,6 @@ private theorem acyclic_restrictScalars
 
 /-- Extension of scalars preserves K-flatness without requiring the ring map to be flat.
 Source: Stacks Project, More on Algebra, Tag 06Y1.
-(blueprint: lem-pc-kflat-extension-of-scalars)
 
 Proof: let `L` be an acyclic complex of `B`-modules. Restriction of scalars along `ρ`
 is exact: kernels and images have the same underlying additive groups. Thus the

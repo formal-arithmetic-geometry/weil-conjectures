@@ -19,7 +19,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 # Tensor-Hom adjunction on a ringed space
 
 Source: Stacks Project, Modules, Lemma 01CN, the morphism correspondence
-(blueprint: lem-weil-pbc-module-tensor-hom-adjunction).
 -/
 
 @[expose] public section
@@ -184,7 +183,6 @@ tensors and natural in the first factor. The tensor product `A ⊗ G` is the sou
 `SheafOfModules.monoidalCategory R` [def-pur-sheaf-tensor-product]; `t_W` is the
 sheafification unit followed by `SheafOfModules.tensorObjIsoSheafification`.
 Source: Stacks Project, Modules, Lemma 01CN
-(blueprint: lem-weil-pbc-module-tensor-hom-adjunction).
 
 Proof: (1) On opens, internal Hom consists of module maps on the slice; restriction
 restricts these maps, and scalars act sectionwise [def-pur-sheaf-hom].

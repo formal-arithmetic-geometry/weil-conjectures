@@ -13,7 +13,6 @@ import Mathlib.Algebra.Category.ModuleCat.Descent
 /-! # Cohomology of flat extension of coefficients
 
 Source: Stacks Project, Tags 00HD and 0A1D, lemma-base-change-tensor.
-(blueprint: lem-pc-flat-scalar-extension-homology-adjunct).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace ModuleCat
 /-- The cohomology adjunct of the canonical coefficient map is an isomorphism
 when the final extension is flat. Source: Stacks Project, Tag 00HD (lemma-flat)
 and the coefficient associativity used in Tag 0A1D (lemma-base-change-tensor).
-(blueprint: lem-pc-flat-scalar-extension-homology-adjunct).
 
 Proof: Flatness makes extension E to D exact by tensoring exact sequences
 (Tag 00HD). Applying it to the cycle and boundary sequences gives the canonical

@@ -138,7 +138,6 @@ private theorem telescope_exact {A : Type u} [CommRing A]
 
 /-- The explicitly constructed telescope sequence is split exact in each degree.
 Source: Stacks Project, Tags 09KL--09KM, admissible telescope sequence.
-(blueprint: lem-pc-filtered-free-telescope-splitting)
 
 Proof: write S = direct sum of F n, a = identity minus successor, and b for the
 augmentation induced by the compatible inclusions. These are precisely the maps

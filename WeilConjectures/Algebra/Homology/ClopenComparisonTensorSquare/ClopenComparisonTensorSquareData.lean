@@ -112,7 +112,6 @@ public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverse
 # Tensor squares for the normalized clopen comparison
 
 Source: Stacks 0F7B, 07A4, 0GL1 and 04TS; the seven-step tensor refinement
-(blueprint: def-sf-clopen-comparison-tensor-data).
 
 The composite presentations `J_s ⋙ J_b` and `P_q ⋙ P_s` are used for `J_k`
 and `P_r`. Their adjunctions fix the canonical compositors. All ringed-site
@@ -139,7 +138,7 @@ namespace SheafOfModules.ClopenComparisonTensorSquare
 
 /-- The Cartesian open square inside the proper/open square. The ring map is
 written in its adjoint direct-image form, exactly as in `Input`.
-Source: Stacks 0F7B, 03D7 (blueprint: def-sf-clopen-comparison-tensor-data). -/
+Source: Stacks 0F7B, 03D7. -/
 def input (m : Mode) {B C D : Scheme.{u}} (p : B ⟶ D) (i : C ⟶ D)
     [IsOpenImmersion i] (R : Sheaf (topology m D) CommRingCat.{u + 1})
     (S : Sheaf (topology m B) CommRingCat.{u + 1})
@@ -168,7 +167,7 @@ def input (m : Mode) {B C D : Scheme.{u}} (p : B ⟶ D) (i : C ⟶ D)
 ringed pullback. Its ordinary unit formula fixes pure tensors. The representative
 square uses the published signed ProjectionRestriction.total map and the actual left-derived counit;
 it does not assume the ordinary pullback exact.
-Source: Stacks 03EL, 07A4 (blueprint: def-sf-clopen-comparison-tensor-data). -/
+Source: Stacks 03EL, 07A4. -/
 structure PullTensor (m : Mode) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (topology m Y) CommRingCat.{u + 1})
     (S : Sheaf (topology m X) CommRingCat.{u + 1})
@@ -213,7 +212,7 @@ structure PullTensor (m : Mode) {X Y : Scheme.{u}} (f : X ⟶ Y)
 The ordinary comparison retains the literal restriction of ProjectionRestriction.pure sections;
 `TensorComparison` pins its derived map on all flat K-flat representatives.
 The inverse transpose is precisely the open-unit normalization.
-Source: Stacks 0GL1, 07A4 (blueprint: def-sf-clopen-comparison-tensor-data). -/
+Source: Stacks 0GL1, 07A4. -/
 structure OpenTensor (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology m X) CommRingCat.{u + 1})
     (e : OpenExtension m j R) (a : TensorModel R)
@@ -246,7 +245,7 @@ of the theorem, not an extra hypothesis on rings or derived objects. The reverse
 clopen adjunction has the inverse open unit as its counit; hence its localized unit
 is exactly the first-factor projection `(1,0)`. The composite-open tensor map has
 its own prescribed transpose, independently of the composite-open equality below.
-Source: Stacks 04TS, 0GL1 (blueprint: def-sf-clopen-comparison-tensor-data). -/
+Source: Stacks 04TS, 0GL1. -/
 structure Data {m : Mode} {d : Input.{u} m} {t : SiteSquare d}
     (o : Operations d t) {A : Scheme.{u}} (s : A ⟶ d.U') [IsOpenImmersion s] where
   tensorP : PullTensor m d.g d.R d.S d.coefficient o.gPull o.tensorX o.tensorX'
@@ -279,7 +278,7 @@ structure Data {m : Mode} {d : Input.{u} m} {t : SiteSquare d}
             (o.opens.jShriek'.obj (extensionS.ordinary.mapDerivedCategory.obj M), N))
 
 /-- The actual localized clopen projection, given by the exact reverse adjunction.
-Source: Stacks 04TS (blueprint: def-sf-clopen-comparison-tensor-data). -/
+Source: Stacks 04TS. -/
 def Data.rho {m : Mode} {d : Input.{u} m} {t : SiteSquare d}
     {o : Operations d t} {A : Scheme.{u}} {s : A ⟶ d.U'} [IsOpenImmersion s]
     (v : Data o s) : 𝟭 (ProjectionRestriction.Der (restrictRing m d.j' d.S)) ⟶
@@ -289,7 +288,7 @@ def Data.rho {m : Mode} {d : Input.{u} m} {t : SiteSquare d}
 
 /-- The comparison is beta followed by the first-factor projection, with `k_!`
 presented by the composite open extension and `P_r` by the composite pullback.
-Source: Stacks 0F7B (blueprint: def-sf-clopen-comparison-tensor-data). -/
+Source: Stacks 0F7B. -/
 def alpha {m : Mode} {d : Input.{u} m} {t : SiteSquare d}
     {o : Operations d t} (a : Assertion o) {A : Scheme.{u}}
     {s : A ⟶ d.U'} [IsOpenImmersion s] (v : Data o s)
@@ -303,8 +302,7 @@ def alpha {m : Mode} {d : Input.{u} m} {t : SiteSquare d}
 /-- The three tensor identities and the composite-open normalization, as equalities
 of morphisms on the whole ringed-site derived category, naturally in all inputs.
 The theta factors write out `P_q P_i = P_b P_p`; no equality after evaluation is used.
-Source: Stacks 07A4, 0GL1 and the node's tensor refinement
-(blueprint: def-sf-clopen-comparison-tensor-data). -/
+Source: Stacks 07A4, 0GL1 and the node's tensor refinement -/
 def Equations {m : Mode} {d : Input.{u} m} {t : SiteSquare d}
     {o : Operations d t} (a : Assertion o) {A : Scheme.{u}}
     {s : A ⟶ d.U'} [IsOpenImmersion s] (v : Data o s) : Prop :=

@@ -77,8 +77,7 @@ formula reduces both paths to the inverse ordinary module tensor square followed
 by the pullback of the same inclusion. Naturality of the specified module square
 moves it past the inclusion. The inverse module square follows by conjugating the
 ordinary module tensor identity by the two canonical tensor isomorphisms.
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0E48.
-(blueprint: lem-weil-pbc-ringed-square-ordinary-tensor-hom-compatibility). -/
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0E48. -/
 theorem ringedSquareOrdinaryTensorHomCompatibility
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (P Q : CochainComplex (SheafOfModules.{u}

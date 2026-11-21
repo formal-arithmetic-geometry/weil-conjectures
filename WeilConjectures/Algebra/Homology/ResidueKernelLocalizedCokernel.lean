@@ -34,8 +34,7 @@ IsLocalizedModule.linearEquiv to the canonical localization map of Y/range f
 and (range f).toLocalizedQuotient' A S iY, then extend its scalars to A and
 transport the quotient along the range equality. Finally identify the canonical
 tensor-product action with the action used by ModuleCat.extendScalars; these
-actions agree by algebraMap_smul. This argument needs no finiteness assumptions.
-(blueprint: new-residue-kernel-localized-cokernel) -/
+actions agree by algebraMap_smul. This argument needs no finiteness assumptions. -/
 theorem residue_kernel_localized_cokernel
     (R : Type v) [CommRing R] (X Y : ModuleCat.{v} R) (f : X ⟶ Y)
     (𝔭 : Ideal R) [𝔭.IsPrime] :

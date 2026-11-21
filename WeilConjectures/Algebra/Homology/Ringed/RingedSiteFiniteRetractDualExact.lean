@@ -22,7 +22,6 @@ import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
 Source: Stacks Project, sites-cohomology.tex, Tag 08JJ, final finite-free/direct-summand
 calculation, expanded in the node into dual-basis and kernel/epimorphism calculations
-(blueprint: lem-sfb-ringed-site-finite-retract-dual-exact).
 
 The coefficient universe contains both site universes, without equating them. All maps
 below use the existing internal Hom. The bidual isomorphism is specified by evaluation
@@ -264,8 +263,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   {R : Sheaf J CommRingCat.{max c v w}}
 
 /-- The standard coordinate projection from the existing finite free sheaf.
-Source: Stacks 08JJ, coordinate calculation
-(blueprint: lem-sfb-ringed-site-finite-retract-dual-exact). -/
+Source: Stacks 08JJ, coordinate calculation -/
 def finiteRetractCoordinate (n : ℕ) (j : ULift.{max c v w} (Fin n)) :
     free (R := (sheafCompose J (forget₂ CommRingCat.{max c v w} RingCat.{max c v w})).obj R)
       (ULift.{max c v w} (Fin n)) ⟶
@@ -273,8 +271,7 @@ def finiteRetractCoordinate (n : ℕ) (j : ULift.{max c v w} (Fin n)) :
   Sigma.desc (fun k : ULift.{max c v w} (Fin n) ↦ if k = j then 𝟙 _ else 0)
 
 /-- The section `t_j = p(u_j)`, evaluated on any object of the site.
-Source: Stacks 08JJ, dual-basis calculation
-(blueprint: lem-sfb-ringed-site-finite-retract-dual-exact). -/
+Source: Stacks 08JJ, dual-basis calculation -/
 def finiteRetractVector {n : ℕ}
     {T : ringedSiteModules.{max c v w} ((sheafCompose J (forget₂ CommRingCat.{max c v w}
       RingCat.{max c v w})).obj R)}
@@ -284,8 +281,7 @@ def finiteRetractVector {n : ℕ}
   (ιFree j ≫ p).val.app U (1 : R.obj.obj U)
 
 /-- The section `λ_j = u_j^* i` of the existing internal dual, as a map on the slice.
-Source: Stacks 08JJ, dual-basis calculation
-(blueprint: lem-sfb-ringed-site-finite-retract-dual-exact). -/
+Source: Stacks 08JJ, dual-basis calculation -/
 def finiteRetractCovector {n : ℕ}
     {T : ringedSiteModules.{max c v w} ((sheafCompose J (forget₂ CommRingCat.{max c v w}
       RingCat.{max c v w})).obj R)}
@@ -730,7 +726,6 @@ attribute [-instance] proofAbelian proofHomContraAdditive
 
 Source: Stacks Project, sites-cohomology.tex, Tag 08JJ, final two paragraphs;
 sites-modules.tex, Tags 03EM and 03DA supply internal Hom and the abelian category
-(blueprint: lem-sfb-ringed-site-finite-retract-dual-exact).
 
 Proof: (1) Coordinate inclusions and projections identify the finite product of copies
 of the coefficient sheaf with its coproduct. On each slice, evaluation on the standard

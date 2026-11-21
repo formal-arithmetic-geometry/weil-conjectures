@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 # Internal Hom and a finite free presentation
 
 Source: Stacks Project, Modules, Lemma 01CO (1), and the proofs of Lemmas 01CQ and 0GMV
-(blueprint: lem-weil-pbc-sheaf-hom-finite-presentation-kernel).
 
 ## Main statements
 
@@ -73,7 +72,6 @@ private theorem leftExact {C : Type (u + 1)} [Category.{u} C] [Abelian C]
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Precomposition with a right exact sequence gives a left exact internal Hom sequence.
 Source: Stacks Project, Modules, Lemma 01CO (1)
-(blueprint: lem-weil-pbc-sheaf-hom-finite-presentation-kernel).
 
 Proof: Install the existing symmetric monoidal closed structure on module sheaves.
 The contravariant internal Hom functor preserves limits by Mathlib's parametrized
@@ -188,7 +186,6 @@ private theorem coefficients_apply (m n : ℕ)
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The coordinate kernel sequence attached to a finite free presentation.
 Source: Stacks Project, Modules, proofs of Lemmas 01CQ and 0GMV, using Lemma 01CO (1)
-(blueprint: lem-weil-pbc-sheaf-hom-finite-presentation-kernel).
 
 The coefficient `c i k` is the coefficient of the `i`-th basis section in `a(e_k)`.
 The projection of `β` is evaluation at `b(e_i)` on every open, and the `k`-th projection

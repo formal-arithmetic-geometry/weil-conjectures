@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
 /-! # Coproduct closure of the localized tensor comparison predicate
 
 Source: Stacks Project, Tags 0DJA(1), 0BYJ and 09PB.
-(blueprint: lem-pc-localized-tensor-comparison-closure-coproducts).
 -/
 
 @[expose] public section
@@ -116,8 +115,7 @@ degree. For any K-flat representative V of S and any model, apply the existing
 representative-square theorem to V and the sum; its two isomorphisms transport
 invertibility to V. This gives exactly the all-representatives and all-models
 predicate. The constructions include an empty family: the coproduct of zero
-complexes and every coproduct comparison used above are zero-object maps.
-(blueprint: lem-pc-localized-tensor-comparison-closure-coproducts). -/
+complexes and every coproduct comparison used above are zero-object maps. -/
 theorem localizedTensorComparisonProperty_closure_coproducts
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :
@@ -168,8 +166,7 @@ theorem localizedTensorComparisonProperty_closure_coproducts
 /-- Fixed representative, model, and degree component of coproduct closure.
 Source: Stacks Project, Tag 0DJA(1), coproduct component of the localizing argument.
 Proof: apply the proved all-representatives coproduct closure theorem to the
-given cocone and summand predicates, then specialize to U, e, hU, mU and i.
-(blueprint: lem-pc-localized-tensor-comparison-closure-coproducts-fixed-degree). -/
+given cocone and summand predicates, then specialize to U, e, hU, mU and i. -/
 theorem localizedTensorComparisonProperty_closure_coproducts_fixed_degree
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)

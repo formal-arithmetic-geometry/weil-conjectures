@@ -15,8 +15,7 @@ import WeilConjectures.Algebra.Homology.ScalarCoefficientTriangleBoundary
 
 /-! # Universal base-change counits on distinguished triangles
 
-Source: Stacks Project, Tag 06Y6, exactness and independence of derived change of rings.
-(blueprint: lem-pc-base-derived-tensor-cohomology-triangle-rows). -/
+Source: Stacks Project, Tag 06Y6, exactness and independence of derived change of rings. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -158,8 +157,7 @@ naturality of the homology shift isomorphism give the boundary square. Transpose
 these squares under extension/restriction adjunction; comparison_eq and localized_eq
 identify their vertical arrows with the specified localizedComparison maps. This
 construction uses only a distinguished localized triangle, not termwise exactness
-of its scalar extension. Zero rings and unbounded or zero complexes are included.
-(blueprint: lem-pc-base-derived-tensor-cohomology-triangle-rows). -/
+of its scalar extension. Zero rings and unbounded or zero complexes are included. -/
 theorem exists_baseDerivedTensorCohomologyModel_triangle_rows
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkMaps
 /-! # Restriction of extension by zero on an open
 
 Source: Stacks Project, Tag 00A7 (4).
-(blueprint: lem-pc-open-extension-restriction-iso).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry
 
 /-- Restricting extension by zero to the original open gives the identity functor.
 Source: Stacks Project, Tag 00A7 (4), and Modules on Sites, Tag 03DI.
-(blueprint: lem-pc-open-extension-restriction-iso).
 
 Proof: Choose the extension-by-zero/restriction adjunction from
 `open_restriction_adjunction_exact`. Transfer its unit to module sheaves on U through

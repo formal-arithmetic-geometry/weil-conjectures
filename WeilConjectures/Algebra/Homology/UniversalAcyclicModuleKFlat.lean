@@ -22,7 +22,6 @@ public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 
 Source: Stacks Project, More on Algebra, Tag 0E8F,
 `lemma-universally-acyclic-K-flat`, specialized to commutative rings
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -108,7 +107,6 @@ termwise flatness hypothesis.
 
 Source: Stacks Project, More on Algebra, Tag 0E8F,
 `lemma-universally-acyclic-K-flat`
-(auxiliary; not a blueprint node).
 
 Proof:
 1. Filtered colimits of acyclic module complexes are acyclic: represent a cycle

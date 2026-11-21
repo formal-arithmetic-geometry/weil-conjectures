@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-! # Eventual vanishing of a class in a filtered colimit of module complexes
 
 Source: Stacks Project, Tags 00DB and 08DC.
-(blueprint: lem-sc-filtered-module-complex-homology-zero).
 -/
 
 @[expose] public section
@@ -71,7 +70,6 @@ private theorem shortComplexHomologyPreserves
 set_option backward.isDefEq.respectTransparency false in
 /-- A cohomology class zero in the colimit is killed at a later stage.
 Source: Stacks Project, Tag 00DB (exactness) and Tag 08DC (Koszul application).
-(blueprint: lem-sc-filtered-module-complex-homology-zero)
 
 Proof: Colimits of modules indexed by the natural numbers are exact. Apply their
 exact colimit functor to the three adjacent terms of a complex: it preserves

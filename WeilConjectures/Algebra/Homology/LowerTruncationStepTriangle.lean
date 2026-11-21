@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 # Successive lower truncation triangle
 
 Source: literature/stacks-project/perfect.tex, Tag 08D4 proof of part (2)
-(blueprint: lem-pc-derived-lower-truncation-step-triangle).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace DerivedCategory
 /-- The canonical transition between successive lower truncations lies in a
 triangle with the shifted cohomology object.
 Source: Stacks Project, Tag 08D4, proof of part (2)
-(blueprint: lem-pc-derived-lower-truncation-step-triangle).
 
 Choose a complex representative K. The canonical lower truncations represent
 these derived truncations: the quotient representatives are quasi-isomorphic to

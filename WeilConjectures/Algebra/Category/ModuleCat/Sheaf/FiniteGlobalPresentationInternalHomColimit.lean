@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Opposite
 # Internal Hom from a module with a finite global presentation
 
 Source: Stacks Project, Modules on Sites, Tag 0GMZ, the finite global presentation case
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -379,7 +378,6 @@ namespace SheafOfModules
 /-- Internal Hom from a module with a finite global presentation preserves filtered colimits.
 
 Source: Stacks Project, Modules on Sites, Tag 0GMZ, proof after the local reduction.
-(auxiliary; not a blueprint node)
 
 Proof: Let `G` and `K` be the finite sets of generators and relations in `p`.
 The presentation is the cokernel of `free K → free G`. Restriction to any slice site

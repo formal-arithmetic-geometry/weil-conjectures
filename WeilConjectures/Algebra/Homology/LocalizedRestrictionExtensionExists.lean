@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 # Exact extension for localized restriction of module sheaves
 
 Source: Stacks Project, Modules on Sites, Lemmas 03DI and 03DJ.
-(blueprint: new-localized-restriction-extension-exists)
 
 The private Hom-equivalence helpers generalize the proved helpers of
 `WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact` to independent object and
@@ -251,7 +250,6 @@ No assumption of commutativity of the rings or of pullbacks in `C` is needed.
 
 Source: Stacks Project, Tags 03DI and 03DJ (Modules on Sites, Lemmas 18.19.2
 and 18.19.3); Tag 08FI uses this exact left adjoint.
-(blueprint: new-localized-restriction-extension-exists)
 -/
 theorem localized_restriction_extension_exists
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}

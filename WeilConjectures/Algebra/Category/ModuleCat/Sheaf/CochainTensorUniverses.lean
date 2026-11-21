@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 /-! # Tensor complexes with independent site universes
 
 Source: Stacks Project, Modules on Sites, Section 03EK.
-(blueprint: def-pur-sheaf-tensor-product)
 
 The tensor is the existing localization tensor, with no restriction equating
 site object, site morphism, and coefficient universes.
@@ -69,7 +68,7 @@ private theorem tensor_W_right
       rfl))).2 hi
 
 /-- Tensoring preserves local equivalences on any essentially small site.
-Source: Stacks 03EK (blueprint: def-pur-sheaf-tensor-product).
+Source: Stacks 03EK.
 Proof: replace the site by its small model in universe w. The tensor and
 sheafification universal properties commute with this equivalence. On the
 small model local tensoring preserves local equivalences, and transport back
@@ -90,14 +89,14 @@ theorem cochainTensorLocalizationIsMonoidal :
       whiskerRight f hf G := tensor_W_right R f hf G }
 
 /-- The existing localization tensor, with independent site sizes.
-Source: Stacks 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+Source: Stacks 03EK. -/
 noncomputable instance cochainModulesMonoidal :
     MonoidalCategory (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :=
   @monoidalCategory.{vC, uC, w} C _ J _ R _ _ (cochainTensorLocalizationIsMonoidal R)
 
 /-- The existing symmetric structure of the localization tensor.
-Source: Stacks 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+Source: Stacks 03EK. -/
 noncomputable instance cochainModulesSymmetric :
     SymmetricCategory (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :=
@@ -126,7 +125,7 @@ private theorem tensorLeft_preserves_smallColimits
   exact (adj.preservesColimitsOfSize_iff (tensorLeft M)).2 this
 
 /-- The sheaf tensor is additive in each variable, independently of site sizes.
-Source: Stacks 03EK (blueprint: def-pur-sheaf-tensor-product).
+Source: Stacks 03EK.
 Proof: additivity holds sectionwise on pure tensors and descends through the
 additive sheafification functor; the localization tensor has those same maps. -/
 @[instance]
@@ -150,7 +149,7 @@ theorem cochainModulesPreadditive :
       add_whiskerRight := fun {X Y Z} f g ↦ (tensorRight X).map_add (f := f) (g := g) }
 
 /-- Left tensoring preserves the coproducts used in unbounded total tensor.
-Source: Stacks 03EK (blueprint: def-pur-sheaf-tensor-product).
+Source: Stacks 03EK.
 Proof: bilinear maps out of a direct sum are families of bilinear maps.
 The tensor universal property and sheafification adjunction identify the
 coproduct comparison with this bijection, so it is invertible. -/
@@ -161,7 +160,7 @@ theorem cochainTensorLeftPreservesColimits
   exact tensorLeft_preserves_smallColimits R M
 
 /-- Right tensoring preserves the coproducts used in unbounded total tensor.
-Source: Stacks 03EK (blueprint: def-pur-sheaf-tensor-product).
+Source: Stacks 03EK.
 Proof: conjugate left tensoring by the existing symmetric braiding. -/
 @[instance]
 theorem cochainTensorRightPreservesColimits

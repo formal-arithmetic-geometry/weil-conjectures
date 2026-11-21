@@ -35,7 +35,7 @@ local notation "Mod" => SheafOfModules.{max u v}
 set_option synthInstance.maxSize 256 in
 /-- Degreewise currying commutes with the Hom-complex differentials.
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1 (Tag 0A90),
-compatibility with differentials (blueprint: lem-sc-hom-tensor-differential).
+compatibility with differentials.
 
 Proof: Test the equality using the Hom product projections, restricting to
 `K^p ⊗ L^q` in each total tensor term and evaluating on localized pure tensors.

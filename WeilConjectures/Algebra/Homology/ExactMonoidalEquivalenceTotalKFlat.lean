@@ -23,7 +23,6 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 Source: Stacks Project, Tag 06YP, `lemma-K-flat-quasi-isomorphism`, and the
 explicit exact-equivalence and signed-total extension in the blueprint
-(auxiliary; not a blueprint node).
 
 The comparison is specified by its action on every summand, together with
 naturality, associativity, unit, and Koszul symmetry equations. The inverse
@@ -476,7 +475,6 @@ private theorem inverse_braiding {C D : Type*} [Category C] [Category D]
 /-- An additive exact symmetric strong monoidal equivalence commutes coherently
 with signed total tensor, reflects flatness, and identifies both K-flat tests.
 Source: Stacks Project, Tag 06YP and the explicit abstract extension
-(auxiliary; not a blueprint node).
 
 Proof:
 1. `lem-weil-pbc-exact-functor-complex-cohomology` identifies the homology of

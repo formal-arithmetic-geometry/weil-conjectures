@@ -114,8 +114,7 @@ Exact restriction has a homology isomorphism compatible with the homology
 shift isomorphisms, as follows by its cycle and boundary universal properties.
 Composing the naturality equation with these restriction isomorphisms gives
 the formula below. No distinguishedness, flatness, boundedness, or invertibility
-of the boundary is needed; in particular it holds for zero rings and zero maps.
-(blueprint: lem-pc-scalar-coefficient-triangle-boundary). -/
+of the boundary is needed; in particular it holds for zero rings and zero maps. -/
 theorem scalarCoefficient_triangle_boundary
     {A E C : Type u} [CommRing A] [CommRing E] [CommRing C]
     (f : A →+* E) (g : E →+* C)

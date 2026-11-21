@@ -18,7 +18,6 @@ import Mathlib.Data.Int.Interval
 /-! # Descent of differentials on fixed bounded graded module models
 
 Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1), descent of maps and relations.
-(blueprint: lem-pc-affine-differential-colimit-descent).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace CochainComplex
 /-- On fixed bounded finitely presented term models, the differentials and their zero-composite
 relations descend after extending those models to a later stage.
 Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1), via Algebra, Tag 05N7.
-(blueprint: lem-pc-affine-differential-colimit-descent).
 
 Proof: Transport each differential of P across the given term isomorphisms. Only adjacent
 pairs with both degrees in [a,b] can have a nonzero differential. Descend this finite list

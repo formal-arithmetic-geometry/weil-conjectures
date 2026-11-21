@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.RingedDerivedTensorHomAdjunction
 /-! # Covariant exactness of derived internal Hom
 
 Source: Stacks Project, Tag 08JC (lemma-RHom-triangulated).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace CategoryTheory
 /-- Covariant exactness, including the coherent integer shift structure.
 
 Source: Stacks Project, Tag 08JC (lemma-RHom-triangulated).
-(auxiliary; not a blueprint node).
 
 Proof: Fix a complex A representing L. Represent the first arrow of a distinguished target triangle
 by a map g between K-injective complexes J and I. Its cone is K-injective: apply Hom from every

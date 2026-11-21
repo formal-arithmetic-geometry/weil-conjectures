@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 Source: literature/stacks-project/cohomology.tex, Tag 08BT (used in Tag 08BW);
 literature/stacks-project/derived.tex, Tags 015F and 09T5
-(blueprint: lem-sc-derived-open-shriek-derived-adjunction).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ exactness and additivity of `j_!` passed to `mapDerivedCategory` are the proofs 
 
 Source: literature/stacks-project/cohomology.tex, Tag 08BT (used in Tag 08BW);
 literature/stacks-project/derived.tex, Tags 015F and 09T5
-(blueprint: lem-sc-derived-open-shriek-derived-adjunction).
 
 Proof: (1) Take the exact underived adjunction from
 `open_restriction_adjunction_exact`. Its left adjoint is additive by

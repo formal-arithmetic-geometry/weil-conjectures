@@ -445,7 +445,6 @@ end Evaluation
 /-- Two cycle-compatible evaluations agree after passage through a common source.
 
 Source: Stacks Project, Tag 0A8X, product projections and the Hom differential.
-(blueprint: new-e3-homology-evaluation-roof-naturality).
 
 The projection family is assumed to obey the Hom differential and naturality
 identities, as supplied by `homComplex_projections_exists`.

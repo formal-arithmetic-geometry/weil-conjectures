@@ -23,8 +23,7 @@ universe v
 
 namespace LocalizedModule
 
-/-- The coordinate map from a localized finite power to the power of the localization. 
-(blueprint: lem-sc-finite-pi-away-fractions)
+/-- The coordinate map from a localized finite power to the power of the localization.
 -/
 noncomputable def awayPi {A : Type v} [CommRing A] (r : ℕ) (f : A) :
     LocalizedModule.Away f (Fin r → A) →ₗ[A] (Fin r → LocalizedModule.Away f A) :=
@@ -32,14 +31,14 @@ noncomputable def awayPi {A : Type v} [CommRing A] (r : ℕ) (f : A) :
     (mkLinearMap (Submonoid.powers f) (Fin r → A))
     (mkLinearMap (Submonoid.powers f) A) (LinearMap.proj i)
 
-/-- (blueprint: lem-sc-finite-pi-away-fractions) -/
+/-- -/
 @[simp]
 theorem awayPi_mk {A : Type v} [CommRing A] (r : ℕ) (f : A)
     (y : Fin r → A) (s : Submonoid.powers f) (i : Fin r) :
     awayPi r f (mk y s) i = mk (y i) s := by
   exact IsLocalizedModule.map_LocalizedModules _ _ _ _
 
-/-- (blueprint: lem-sc-finite-pi-away-fractions) -/
+/-- -/
 theorem awayPi_smul {A : Type v} [CommRing A] (r : ℕ) (f : A)
     (q : Localization.Away f) (x : LocalizedModule.Away f (Fin r → A)) :
     awayPi r f (q • x) = q • awayPi r f x := by
@@ -51,8 +50,7 @@ theorem awayPi_smul {A : Type v} [CommRing A] (r : ℕ) (f : A)
       ext i
       simp only [mk_smul_mk, awayPi_mk, Pi.smul_apply]
 
-/-- Localization commutes with finite powers, without any homogeneity assumption. 
-(blueprint: lem-sc-finite-pi-away-fractions)
+/-- Localization commutes with finite powers, without any homogeneity assumption.
 -/
 theorem awayPi_bijective {A : Type v} [CommRing A] (r : ℕ) (f : A) :
     Function.Bijective (awayPi r f) := by
@@ -74,7 +72,6 @@ theorem awayPi_bijective {A : Type v} [CommRing A] (r : ℕ) (f : A) :
 /-- Localization of a finite power is its coordinate product, and equal-degree fractions
 are exactly those whose coordinates are equal-degree fractions for the individual shifts.
 Source: Stacks Project, Constructions, Lemma 27.8.4 (2), Tag 01M7; Algebra Section 00JM.
-(blueprint: lem-sc-finite-pi-away-fractions)
 
 Proof: the coordinate map sends y/s to (y_i/s)_i. Mathlib's IsLocalizedModule.pi
 identifies the finite product of localized modules as a localization of the finite product;

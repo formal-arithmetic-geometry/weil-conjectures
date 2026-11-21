@@ -16,7 +16,7 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyAction
 # Models of base-derived tensor cohomology and its localization comparison
 
 Source: Stacks Project, Tag 08IB, lemma-compare-base-change, and Tag 06Y6,
-lemma-derived-base-change (blueprint: def-pc-base-derived-tensor-cohomology-model).
+lemma-derived-base-change.
 
 The model records a total left derived functor with its universal counit, actual
 cohomology objects with their tensor-algebra action, and the comparison maps.
@@ -34,7 +34,7 @@ open scoped TensorProduct ChangeOfRings
 
 namespace ModuleCat
 
-/-- (blueprint: def-pc-base-derived-tensor-cohomology-model) Stacks, Tag 06Y6.
+/-- Stacks, Tag 06Y6.
 Extension of scalars is additive. Proof: its maps send `s ⊗ x` to `s ⊗ f x`;
 the sum of two maps thus gives `s ⊗ (f x + g x)`, the sum of their two images.
 Tensor induction proves equality on all tensors. -/
@@ -52,7 +52,7 @@ theorem baseDerivedTensor_extendScalars_additive
   simp only [ExtendScalars.map_tmul, TensorProduct.tmul_add]
 
 /-- The scalar-extension unit transposes to the termwise coefficient map.
-Source: Stacks Project, Tag 05G3; (blueprint: def-pc-base-derived-tensor-cohomology-model). -/
+Source: Stacks Project, Tag 05G3. -/
 private theorem exists_tensorExtensionMap {S : Type uS} {T : Type uT} {U : Type uD}
     [CommRing S] [CommRing T] [CommRing U] (f : S →+* T) (g : T →+* U)
     (K : CochainComplex (ModuleCat.{max uS uT uD v} S) ℤ) :
@@ -92,7 +92,7 @@ variable (R : Type uR) (A : Type uA) (B : Type uB) [CommRing R] [CommRing A] [Co
   [HasDerivedCategory.{w} (ModuleCat.{max uR uA uB uD v} R)]
   [HasDerivedCategory.{w} (ModuleCat.{max uR uA uB uD v} B)]
 
-/-- (blueprint: def-pc-base-derived-tensor-cohomology-model) Stacks, Tags 08IB and
+/-- Stacks, Tags 08IB and
 06Y6. A model of the cohomology of `Q ⊗ᴸ_R B`, its `A ⊗_R B`-action, and its
 canonical comparison after extension to `D`. The derived functor is characterized
 by its universal counit. `ordinaryIso` is the tensor-associativity identification,
@@ -189,7 +189,7 @@ structure BaseDerivedTensorCohomologyModel
         (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj Q).sc i
         |>.mapHomologyIso (restrictScalars.{max uR uA uB uD v} (algebraMap (A ⊗[R] B) D))).hom
 
-/-- (blueprint: def-pc-base-derived-tensor-cohomology-model) Stacks, Tags 06Y6 and
+/-- Stacks, Tags 06Y6 and
 08IB: the model exists without flatness or Tor-independence assumptions.
 
 Proof: resolve complexes of R-modules by K-flat complexes and apply extension of
@@ -246,7 +246,7 @@ theorem nonempty_baseDerivedTensorCohomologyModel
   intro i
   exact (adj.homEquiv _ _).apply_symm_apply _
 
-/-- (blueprint: def-pc-base-derived-tensor-cohomology-model) Stacks, Tags 06Y6 and
+/-- Stacks, Tags 06Y6 and
 08IB. Choose a model of derived tensor cohomology and its canonical localization
 comparison. Only the existence proof is deferred, in the named theorem
 `nonempty_baseDerivedTensorCohomologyModel`; the data are selected by choice. -/

@@ -29,7 +29,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [EssentiallySmall.{w} C]
 
 /-- A scalar adjunction evaluates on a local pure tensor by scalar multiplication of
-its transpose. Source: Stacks 03D7 (blueprint: lem-pur-system-scalar-coherence).
+its transpose. Source: Stacks 03D7.
 Proof: the transpose is the unit followed by restriction of the map. The normalized
 unit sends x to 1 tensor x. Linearity gives the formula for c tensor x. -/
 theorem systemScalarModel_transpose_tmul {R S : Sheaf J CommRingCat.{w}}
@@ -48,7 +48,7 @@ theorem systemScalarModel_transpose_tmul {R S : Sheaf J CommRingCat.{w}}
   exact (f.val.app U).hom.map_smul c _
 
 /-- Restriction along a composite is successive restriction, with identity section maps.
-Source: Stacks 03CZ (blueprint: lem-pur-system-scalar-coherence). -/
+Source: Stacks 03CZ. -/
 def systemScalarRestrictionComposition {R S T : Sheaf J CommRingCat.{w}}
     (φ : R ⟶ S) (ψ : S ⟶ T) (γ : R ⟶ T) (hγ : γ = φ ≫ ψ) :
     (restrictScalars.{w}
@@ -63,7 +63,7 @@ def systemScalarRestrictionComposition {R S T : Sheaf J CommRingCat.{w}}
     (by intros; ext U x; rfl)
 
 /-- Ordinary scalar-extension composition, determined by the restriction adjunctions.
-Source: Stacks 03EK (blueprint: lem-pur-system-scalar-coherence). -/
+Source: Stacks 03EK. -/
 def systemScalarModelComposition {R S T : Sheaf J CommRingCat.{w}}
     {φ : R ⟶ S} {ψ : S ⟶ T} {γ : R ⟶ T} (hγ : γ = φ ≫ ψ)
     (A : SystemScalarModel φ) (B : SystemScalarModel ψ) (D : SystemScalarModel γ) :
@@ -73,7 +73,7 @@ def systemScalarModelComposition {R S T : Sheaf J CommRingCat.{w}}
       (systemScalarRestrictionComposition φ ψ γ hγ)) D.ordinaryAdj
 
 /-- The ordinary associator multiplies the two scalar factors.
-Source: Stacks 03EK (blueprint: lem-pur-system-scalar-coherence).
+Source: Stacks 03EK.
 Proof: transposing the adjoint-uniqueness isomorphism twice gives the unit of the
 composite-ring adjunction. The two pure-tensor transpose formulas evaluate its left
 side; linearity of restriction multiplies c by the image of d. -/
@@ -116,7 +116,7 @@ theorem systemScalarModelComposition_tmul {R S T : Sheaf J CommRingCat.{w}}
           (P.val.obj U)) x)))).symm
 
 /-- Restriction along an identity coefficient map is the identity on sections.
-Source: Stacks 03CZ (blueprint: lem-pur-system-scalar-coherence). -/
+Source: Stacks 03CZ. -/
 def systemScalarRestrictionUnit {R : Sheaf J CommRingCat.{w}}
     (φ : R ⟶ R) (hφ : φ = 𝟙 R) :
     restrictScalars.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ) ≅
@@ -128,7 +128,7 @@ def systemScalarRestrictionUnit {R : Sheaf J CommRingCat.{w}}
       (by intros; ext x; rfl))) (by intros; ext U x; rfl)
 
 /-- The ordinary tensor unit, determined by the scalar adjunction.
-Source: Stacks 03EK (blueprint: lem-pur-system-scalar-coherence). -/
+Source: Stacks 03EK. -/
 def systemScalarModelUnit {R : Sheaf J CommRingCat.{w}} {φ : R ⟶ R}
     (hφ : φ = 𝟙 R) (A : SystemScalarModel φ) :
     A.model.E ≅ 𝟭 (ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J R)) :=
@@ -136,7 +136,7 @@ def systemScalarModelUnit {R : Sheaf J CommRingCat.{w}} {φ : R ⟶ R}
     (A.ordinaryAdj.ofNatIsoRight (systemScalarRestrictionUnit φ hφ)) (Adjunction.id)
 
 /-- The ordinary tensor unit multiplies a local pure tensor.
-Source: Stacks 03EK (blueprint: lem-pur-system-scalar-coherence).
+Source: Stacks 03EK.
 Proof: the adjoint-uniqueness map transposes to the identity, so its value on 1 tensor x
 is x. The scalar transpose formula gives its value on c tensor x. -/
 theorem systemScalarModelUnit_tmul {R : Sheaf J CommRingCat.{w}} {φ : R ⟶ R}
@@ -155,8 +155,7 @@ theorem systemScalarModelUnit_tmul {R : Sheaf J CommRingCat.{w}} {φ : R ⟶ R}
   erw [systemScalarModel_transpose_tmul A P P f U c x, hx]
 
 /-- The derived associator is the left-adjoint uniqueness map of the exact restriction
-comparison. Source: Stacks 06YT
-(blueprint: lem-pur-system-scalar-coherence). -/
+comparison. Source: Stacks 06YT -/
 def systemScalarModelDerivedComposition {R S T : Sheaf J CommRingCat.{w}}
     {φ : R ⟶ S} {ψ : S ⟶ T} {γ : R ⟶ T} (hγ : γ = φ ≫ ψ)
     (A : SystemScalarModel φ) (B : SystemScalarModel ψ) (D : SystemScalarModel γ) :
@@ -167,7 +166,7 @@ def systemScalarModelDerivedComposition {R S T : Sheaf J CommRingCat.{w}}
         (systemScalarRestrictionComposition φ ψ γ hγ))) D.adjunction
 
 /-- The derived associator respects the universal comparisons, on every complex.
-Source: Stacks 06YT and 0FND (blueprint: lem-pur-system-scalar-coherence).
+Source: Stacks 06YT and 0FND.
 Proof: compose the two normalized transpose formulas. Exact restriction's inverse
 factorizations compose by localization functoriality. The ordinary associator transposes
 to the unit of the composite-ring adjunction in every degree. The uniqueness comparison
@@ -244,7 +243,7 @@ theorem systemScalarModelDerivedComposition_rep {R S T : Sheaf J CommRingCat.{w}
   simpa only [Category.assoc] using h
 
 /-- The derived tensor unit, fixed by the identity restriction adjunction.
-Source: Stacks 06YT (blueprint: lem-pur-system-scalar-coherence). -/
+Source: Stacks 06YT. -/
 def systemScalarModelDerivedUnit {R : Sheaf J CommRingCat.{w}} {φ : R ⟶ R}
     (hφ : φ = 𝟙 R) (A : SystemScalarModel φ) :
     A.model.T ≅ 𝟭 (DerivedCategory
@@ -254,7 +253,7 @@ def systemScalarModelDerivedUnit {R : Sheaf J CommRingCat.{w}} {φ : R ⟶ R}
       (systemScalarRestrictionUnit φ hφ))) Adjunction.id
 
 /-- The derived tensor unit respects the universal comparison on every complex.
-Source: Stacks 06YT and 0FND (blueprint: lem-pur-system-scalar-coherence).
+Source: Stacks 06YT and 0FND.
 Proof: the ordinary tensor unit transposes to the identity in each degree. The exact
 restriction identity comparison is its localized right mate. The normalized transpose
 formula and adjoint uniqueness therefore identify the displayed two maps. -/

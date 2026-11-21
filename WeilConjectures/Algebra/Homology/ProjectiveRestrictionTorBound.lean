@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.FreeRestrictionTorBound
 /-! # Tor bounds for projective modules after scalar restriction
 
 Source: Stacks Project, Tags 066K and 0655, the one-module case.
-(blueprint: lem-pc-projective-restriction-tor-bound).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace ModuleCat
 /-- Projective B-modules inherit the Tor bound of B after restriction to A.
 
 Source: Stacks Project, Tags 066K and 0655, applied to a projective module in degree zero.
-(blueprint: lem-pc-projective-restriction-tor-bound).
 
 Proof: a projective B-module E is a retract of the free module on its underlying set,
 via the split surjection sending the basis element indexed by x to x. After scalar

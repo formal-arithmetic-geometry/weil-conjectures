@@ -51,7 +51,6 @@ set_option backward.isDefEq.respectTransparency false in
 -- Restricting sections unfolds the localized internal-Hom module structures.
 /-- Cycle formulas determine a morphism once every local cycle has a target-cycle lift.
 Source: Stacks Project, Tag 08DH, separatedness of internal Hom.
-(blueprint: new-b2-homology-evaluation-uniqueness-ext).
 
 Cancel the epimorphism from Hom cycles to Hom homology. For a fixed cycle section
 on U, its two images are morphisms of module sheaves on the site over U. Restriction

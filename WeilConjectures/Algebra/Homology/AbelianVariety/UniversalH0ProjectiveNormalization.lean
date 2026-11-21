@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-! # Global normalization of a universally rank-one projective complex
 
 Source: Stacks Project, Tags 00O0, 0BCD and 0BF2 (projective affine adaptation).
-(blueprint: lem-sc-universal-h0-projective-normalization).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ The output terms are exhibited as retracts of finite free modules.
 
 Source: Stacks Project, Tags 00O0 and 0BCD; the target-complex argument of 0BF2,
 with finite projective terms on a fixed affine instead of shrinking to free terms.
-(blueprint: lem-sc-universal-h0-projective-normalization).
 
 Proof: Cancel negative terms from the bottom. Choose finite support bounds for P.
 If its bottom degree is negative, negative residue homology says that its outgoing

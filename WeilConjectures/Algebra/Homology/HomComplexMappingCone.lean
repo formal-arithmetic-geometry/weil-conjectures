@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.HomComplexMappingConeDifferential
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X (Hom complexes), and
 sites-cohomology.tex, Section 08J7, proof of Lemma 21.35.4.
-(blueprint: lem-sc-hom-complex-mapping-cone).
 -/
 
 @[expose] public section
@@ -56,7 +55,6 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X (the differential of the
 Hom complex), and Section 08J7, the proof of Lemma 21.35.4.
-(blueprint: lem-sc-hom-complex-mapping-cone).
 
 Proof: in degree `n`, the cone of `Hom(E,f)` is
 `Hom(E,G)^(n+1) ⊞ Hom(E,I)^n`. Its product components are pairs of local maps

@@ -19,8 +19,7 @@ categories: there is a functor `E : D(B) ⥤ D(B₀)` whose composite with the l
 cochain complexes is the termwise restriction followed by localization.
 Source: Stacks Project, Tag 06Y6.
 Proof: take `E` to be the derived functor of the exact functor `restrictScalars eB`; it is
-compatible with the localization functors by construction.
-(blueprint: lem-pc-derived-extension-ring-equiv-raw-transport). -/
+compatible with the localization functors by construction. -/
 theorem exists_raw_transport {B₀ B : Type u} [CommRing B₀] [CommRing B]
     [HasDerivedCategory.{w} (ModuleCat.{u} B₀)]
     [HasDerivedCategory.{w'} (ModuleCat.{u} B)]

@@ -18,7 +18,6 @@ import WeilConjectures.Algebra.Module.AwayDegreeZeroLift
 # Exact pairs on equal-degree fractions
 
 Source: Stacks Project, Tag 01M7; Algebra, Tag 00JM.
-(blueprint: lem-sc-p1-away-degreezero-exact-pair)
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- Localization and degree zero preserve exact pairs, with either endpoint property when given.
 Source: Stacks Project, Tag 01M7, final paragraph; Algebra, Tag 00JM.
-(blueprint: lem-sc-p1-away-degreezero-exact-pair).
 
 Proof: If f is zero, all three localized modules vanish and injective chart maps
 make all three chart groups zero. Otherwise localize the exact pair at powers of f.

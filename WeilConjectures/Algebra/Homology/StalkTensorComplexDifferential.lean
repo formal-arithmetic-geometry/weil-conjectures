@@ -14,7 +14,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 # Differential compatibility of the stalk tensor comparison
 
 Source: Stacks Project, Cohomology, Tag 06YB, tensor-stalk identification
-(blueprint: lem-pc-stalk-tensor-complex-differential).
 -/
 
 @[expose] public section
@@ -136,7 +135,7 @@ noncomputable local instance stalkTensorDifferentialMonoidal :
   SheafOfModules.monoidalCategory X.sheaf
 
 /-- Source: Stacks Project, Cohomology, Tag 06YB, tensor-stalk identification,
-third step (blueprint: lem-pc-stalk-tensor-complex-differential).
+third step.
 
 Proof: conjugating by the degree isomorphism reduces equality to equality after each
 stalked summand injection, since the target degree is a coproduct and the component

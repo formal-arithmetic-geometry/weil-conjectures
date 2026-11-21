@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 The comparison is fixed by the underlying inverse image of sheaves of sets.
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03DA.
-(blueprint: lem-pur-inverse-image-scalar-restriction-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -234,7 +233,6 @@ ring square. The underlying morphism is the identity between the two presentatio
 of the same inverse image of a sheaf of sets.
 
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03DA
-(blueprint: lem-pur-inverse-image-scalar-restriction-comparison).
 
 Proof: Transport the identity of underlying inverse-image sheaves through the two
 specified underlying isomorphisms. To verify additivity, apply the two graph equations

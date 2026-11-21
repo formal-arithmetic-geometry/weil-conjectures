@@ -42,7 +42,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-! # Descent of the principal-reduction comparison
 
 The flat-resolution comparison descends by the calculus of fractions, with no choice of
-unit normalization. (blueprint: lem-pod-principal-reduction-comparison) -/
+unit normalization. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -127,8 +127,7 @@ isomorphism by the regular-complex quotient argument. Any derived morphism betwe
 models is a roof of chain maps; resolving the roof's source by a flat-term K-flat complex
 lets resolution-independence naturality apply to both legs. Cancel the invertible denominator.
 Transport along the chosen models and assemble a natural isomorphism.
-Source: Stacks Tags 06Y6, 06YY; original blueprint steps 8--10.
-(blueprint: lem-pod-principal-reduction-comparison) -/
+Source: Stacks Tags 06Y6, 06YY; original blueprint steps 8--10. -/
 theorem comparison [IsDomain R] (ht : D.t ≠ 0) :
     Nonempty (D.G ⋙ D.L ≅ D.T ⋙ D.G') := by
   choose P hP hf he using D.good_model

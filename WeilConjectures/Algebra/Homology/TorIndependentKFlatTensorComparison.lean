@@ -22,7 +22,6 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 
 Source: Stacks Project, More on Algebra, Section 06Y5 and Tag 06Y6;
 perfect.tex, Tag 08IB, the Tor-independent affine calculation.
-(blueprint: lem-pc-tor-independent-kflat-localized-comparison).
 -/
 
 @[expose] public section
@@ -42,7 +41,6 @@ map, not the existence of an unrelated isomorphism.
 
 Source: Stacks Project, More on Algebra, Section 06Y5 and Tag 06Y6;
 perfect.tex, Tag 08IB, the Tor-independent affine calculation.
-(blueprint: lem-pc-tor-independent-kflat-localized-comparison).
 
 Proof:
 1. Resolve B[0] over R by a bounded-above projective complex F with augmentation

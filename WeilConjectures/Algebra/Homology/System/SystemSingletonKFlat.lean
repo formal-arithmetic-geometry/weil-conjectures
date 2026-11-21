@@ -31,7 +31,6 @@ variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
 ringed sequence site. Source: Zheng, Construction 4.1; Stacks, Cohomology on Sites,
 definition-K-flat (06YN), lemma-pullback-K-flat (0G7E), and the representative argument
 of lemma-derived-pullback-composition (0D6D).
-(blueprint: lem-pur-system-singleton-kflat)
 
 Proof: vertical coverings make tensor products and sheafification levelwise. At a
 level j at most n the singleton is extension of scalars from B_n to B_j; at a

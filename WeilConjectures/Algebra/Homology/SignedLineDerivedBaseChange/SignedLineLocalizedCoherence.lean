@@ -718,7 +718,6 @@ private theorem derived_family_of_ordinary
 
 /-- Normalized ordinary line comparisons yield coherent derived line actions.
 Source: Stacks Project, Tags 03EL, 0FNY and 07A4; Powers and duals, step 11.
-(blueprint: lem-pur-signed-line-localized-coherence)
 Proof: construct the ordinary unit, positive-power reassociation and dual evaluation.
 Their pure-tensor formulas determine them. The normalization of T and the pure-tensor
 formula for gamma make the three ordinary squares commute, by tensor generation and

@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 /-! # Scalar compatibility of the canonical localization cohomology map
 
 Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-first-localization-cohomology-semilinear).
 -/
 
 @[expose] public section
@@ -39,8 +38,7 @@ variable (R A Aq B D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
 /-- Canonical cohomology map induced by the localization unit and universal counits.
-Source: Stacks Project, Tag 06Y6.
-(blueprint: lem-pc-first-localization-cohomology-semilinear). -/
+Source: Stacks Project, Tag 06Y6. -/
 noncomputable def localizationModelMap (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
@@ -128,7 +126,6 @@ private theorem localizationModelMap_left (i : ℤ)
 
 /-- The unit-induced map respects the tensor coefficient actions.
 Source: Stacks Project, Tag 06Y6, naturality of derived tensor and scalar multiplication.
-(blueprint: lem-pc-first-localization-cohomology-semilinear).
 
 Proof: the termwise unit intertwines multiplication by a on Q with multiplication
 by its image on Aq tensor_A Q, by tensor balancing. Apply the homotopy quotient,

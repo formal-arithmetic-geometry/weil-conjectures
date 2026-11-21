@@ -17,7 +17,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 Source: Stacks Project, Modules on Sites, Tag 03D7,
 lemma-adjoint-pullback-pushforward-modules.
-(auxiliary; not a blueprint node).
 
 The scalar-extension Hom equivalence generalizes the private construction in
 ModulePullbackPushforwardAdjunction to independent site and coefficient universes.
@@ -265,8 +264,7 @@ private noncomputable def tensorAdjunction
 /-- Extension of scalars, specified on both objects and maps, preserves colimits.
 Source: Stacks Project, Modules on Sites, Tags 03D7 and 03EP.
 The tensor/restriction adjunction gives preservation for its tensor functor;
-the two specifications give a natural isomorphism to E.
-(auxiliary; not a blueprint node). -/
+the two specifications give a natural isomorphism to E. -/
 theorem preservesColimits_specifiedChangeOfRings
     {D : Type uD} [Category.{vD} D] [EssentiallySmall.{w} D]
     {K : GrothendieckTopology D} {A S : Sheaf K CommRingCat.{w}} (c : A ⟶ S)
@@ -292,7 +290,6 @@ theorem preservesColimits_specifiedChangeOfRings
 /-- The specified algebraic module pullback preserves coefficient-sized filtered colimits.
 Source: Stacks Project, Modules on Sites, Tag 03D7,
 lemma-adjoint-pullback-pushforward-modules, and Tag 03EP.
-(auxiliary; not a blueprint node).
 
 Proof: forgetting module sheaves to sheaves of abelian groups preserves colimits, by
 module sheafification. Forgetting abelian sheaves to sheaves of sets preserves filtered

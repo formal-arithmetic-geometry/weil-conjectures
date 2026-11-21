@@ -27,7 +27,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 /-! # Scalar restriction and normalized slice extension
 
 Source: Stacks Project, Modules on Sites, Tags 03DI, 03CY and 03DJ
-(blueprint: lem-cbc-ringed-open-scalar-adjunction).
 -/
 
 @[expose] public noncomputable section
@@ -41,7 +40,7 @@ namespace SheafOfModules
 namespace RingedOpenScalar
 
 /-- The two unit and counit equations, with the restriction comparison displayed.
-Source: Stacks 03DI (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 03DI. -/
 def Equations {A B C D : Type t} [Category.{h} A] [Category.{h} B]
     [Category.{h} C] [Category.{h} D]
     {JS : A ⥤ C} {JR : B ⥤ D} {rU : A ⥤ B} {rT : C ⥤ D}
@@ -53,7 +52,7 @@ def Equations {A B C D : Type t} [Category.{h} A] [Category.{h} B]
   (∀ Q : C, e.hom.app (qS.obj Q) ≫ JR.map (d.inv.app Q) ≫
     adjR.counit.app (rT.obj Q) = rT.map (adjS.counit.app Q))
 /-- The canonical exact-derived square, retaining the standard composition factors.
-Source: Stacks 015F (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 015F. -/
 def derivedSquare {A B C D : Type t} [Category.{h} A] [Category.{h} B]
     [Category.{h} C] [Category.{h} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
@@ -71,8 +70,7 @@ def derivedSquare {A B C D : Type t} [Category.{h} A] [Category.{h} B]
 
 /-- All termwise and localized forms of the two equations for the same square.
 The tower index 0 denotes the original index 1.
-Source: Stacks 03DI, 03DJ, 015F
-(blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 03DI, 03DJ, 015F -/
 def Transport {A B C D : Type t} [Category.{h} A] [Category.{h} B]
     [Category.{h} C] [Category.{h} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
@@ -354,18 +352,18 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   {R S : Sheaf J CommRingCat.{max c v r}} (U : C) (a : R ⟶ S)
 
 /-- Forget only commutativity of the given ring sheaf.
-Source: Stacks 03DA (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 03DA. -/
 abbrev rings (R : Sheaf J CommRingCat.{max c v r}) :=
   (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R
 
 /-- The recorded scalar restriction, on the original site.
-Source: Stacks 03DA (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 03DA. -/
 abbrev scalars :=
   restrictScalars.{max c v r}
     ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).map a)
 
 /-- The same recorded scalar restriction on the localized site.
-Source: Stacks 03DI (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 03DI. -/
 abbrev sliceScalars : SheafOfModules.{max c v r} ((rings.{c, v, r} S).over U) ⥤
     SheafOfModules.{max c v r} ((rings.{c, v, r} R).over U) :=
   restrictScalars ((J.overPullback RingCat.{max c v r} U).map
@@ -390,7 +388,7 @@ private theorem restrictScalarsExact {D : Type t} [Category.{h} D]
     preservesFiniteColimits_of_reflects_of_preserves F (toSheaf.{r} B)⟩
 
 /-- Scalar restriction is exact on either site, without flatness.
-Source: Stacks 03CY, 03DI (blueprint: lem-cbc-ringed-open-scalar-adjunction).
+Source: Stacks 03CY, 03DI.
 Proof: kernels are sectionwise and retain their underlying subgroup under scalar
 restriction. Cokernels are abelian sheafifications of sectionwise quotients; their
 module actions agree by uniqueness of extending the quotient action. Thus scalar
@@ -403,7 +401,6 @@ theorem scalarExact :
 
 set_option linter.unusedSectionVars false in
 /-- Scalar exactness on the slice. Source: Stacks 03CY, 03DI
-(blueprint: lem-cbc-ringed-open-scalar-adjunction).
 Proof: the same sectionwise kernel and sheafified cokernel argument as scalarExact,
 applied on the localized site; no flatness is used. -/
 theorem sliceExact :
@@ -418,25 +415,21 @@ theorem sliceExact :
       max c v r, max c v r + 1, v, max c v, max c v r} _ _
   exact restrictScalarsExact _
 
-/-- Finite-limit component of scalar exactness. Source: Stacks 03CY, 03DI
-(blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+/-- Finite-limit component of scalar exactness. Source: Stacks 03CY, 03DI -/
 instance scalarLimits : PreservesFiniteLimits (scalars.{c, v, r} a) :=
   (scalarExact.{c, v, r} a).1
-/-- Finite-colimit component of scalar exactness. Source: Stacks 03CY, 03DI
-(blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+/-- Finite-colimit component of scalar exactness. Source: Stacks 03CY, 03DI -/
 instance scalarColimits : PreservesFiniteColimits (scalars.{c, v, r} a) :=
   (scalarExact.{c, v, r} a).2
-/-- Finite-limit component on the slice. Source: Stacks 03CY, 03DI
-(blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+/-- Finite-limit component on the slice. Source: Stacks 03CY, 03DI -/
 instance sliceLimits : PreservesFiniteLimits (sliceScalars.{c, v, r} U a) :=
   (sliceExact.{c, v, r} U a).1
-/-- Finite-colimit component on the slice. Source: Stacks 03CY, 03DI
-(blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+/-- Finite-colimit component on the slice. Source: Stacks 03CY, 03DI -/
 instance sliceColimits : PreservesFiniteColimits (sliceScalars.{c, v, r} U a) :=
   (sliceExact.{c, v, r} U a).2
 
 /-- The canonical sectionwise identity commuting scalar and slice restriction.
-Source: Stacks 03DI (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 03DI. -/
 def restrictionIso :
     scalars.{c, v, r} a ⋙ localizedSystemRestriction.{c, v, r} R U ≅
       localizedSystemRestriction.{c, v, r} S U ⋙ sliceScalars.{c, v, r} U a :=
@@ -446,7 +439,7 @@ def restrictionIso :
 
 open Classical in
 /-- The sheafification of an actual direct-sum generator.
-Source: Stacks 03DI, 03CY (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 03DI, 03CY. -/
 def generator (B : Sheaf J CommRingCat.{max c v r})
     (N : SheafOfModules.{max c v r} ((rings.{c, v, r} B).over U))
     (V : Cᵒᵖ) (phi : V.unop ⟶ U) (x : N.val.obj (op (Over.mk phi))) :
@@ -456,7 +449,7 @@ def generator (B : Sheaf J CommRingCat.{max c v r})
       (DirectSum.of (fun psi : V.unop ⟶ U ↦ N.val.obj (op (Over.mk psi))) phi x)
 
 /-- The section normalization of the fixed adjunctions, including their counits.
-Source: Stacks 03DI, 03CY (blueprint: lem-cbc-ringed-open-scalar-adjunction).
+Source: Stacks 03DI, 03CY.
 Proof: transpose the identity under the direct-sum Hom correspondence of 03DI.
 The unit includes a section in its structure-arrow summand and sheafifies it.
 The counit evaluates every summand by the identity on that section. Uniqueness
@@ -486,7 +479,7 @@ theorem adjunctionGenerators (B : Sheaf J CommRingCat.{max c v r}) :
       (op (Over.mk phi)) x)).symm.trans hx
 
 /-- Sheafification on the slice in the same module universe.
-Source: Stacks 03CY (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 03CY. -/
 abbrev sliceSheafify : HasSheafify (J.over U) AddCommGrpCat.{max c v r} := by
   let : PreservesFilteredColimitsOfSize.{max c v, max c v}
       (CategoryTheory.forget AddCommGrpCat.{max c v r}) :=
@@ -496,26 +489,25 @@ abbrev sliceSheafify : HasSheafify (J.over U) AddCommGrpCat.{max c v r} := by
     max c v r, max c v r + 1, v, max c v, max c v r} _ _
 
 /-- Local bijections characterize slice sheafification equivalences.
-Source: Stacks 03CY (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 03CY. -/
 abbrev sliceLocallyBijective :
     (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r} := inferInstance
 
 /-- Use Mathlib's exact abelian structure with explicit universe arguments.
-Source: Stacks 03CY (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 03CY. -/
 abbrev ambientAbelian (B : Sheaf J RingCat.{max c v r}) :
     Abelian (SheafOfModules.{max c v r} B) :=
   SheafOfModules.instAbelian.{max c v r, v, max c v r, c} B
 
 /-- Use Mathlib's exact slice abelian structure with explicit universe arguments.
-Source: Stacks 03CY (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 03CY. -/
 abbrev sliceAbelian (B : Sheaf (J.over U) RingCat.{max c v r}) :
     Abelian (SheafOfModules.{max c v r} B) :=
   @SheafOfModules.instAbelian.{max c v r, v, max c v r, max c v}
     (Over U) _ (J.over U) B (sliceSheafify.{c, v, r} U)
       (sliceLocallyBijective.{c, v, r} U)
 /-- The concrete transported equations, with the recorded exactness instances explicit.
-Source: Stacks 03DI, 03DJ, 015F
-(blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
+Source: Stacks 03DI, 03DJ, 015F -/
 def transportedEquations
     (e : localizedSystemExtension.{c, v, r} S U ⋙ scalars.{c, v, r} a ≅
       sliceScalars.{c, v, r} U a ⋙ localizedSystemExtension.{c, v, r} R U) : Prop := by
@@ -750,7 +742,6 @@ private theorem sheafComparison_equations :
 /-- The identity-induced scalar/slice-extension comparison, with the fixed units,
 counits, and all its termwise and localized tower identities.
 Source: Stacks 03DI, 03CY, 03DJ and 015F
-(blueprint: lem-cbc-ringed-open-scalar-adjunction).
 Proof: (1) The direct sums, reindexing maps and induced maps on sections coincide;
 the scalar action in either presentation is multiplication through a_V.
 (2) Extend the inverse presheaf comparison through module sheafification. Its

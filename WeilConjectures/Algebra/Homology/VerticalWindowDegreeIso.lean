@@ -22,8 +22,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 Source: blueprint thm-sp-double-complex-spectral-sequences, proof steps 1 and 2.
 Proof: the upper boundary is the cycles of the lower truncation. Its incoming
 term is zero, so cycles equal homology. The lower truncation projection induces
-an isomorphism on this homology, and extension by zero preserves homology.
-(blueprint: lem-sp-vertical-window-degree-iso). -/
+an isomorphism on this homology, and extension by zero preserves homology. -/
 noncomputable def verticalWindowDegreeIso (q : ℕ) (K : CochainComplex C ℕ) :
     ((verticalWindow (C := C) (q : ℤ) (q + 1)).obj K).X q ≅ K.homology q := by
   let E : CochainComplex C ℤ := K.extend ComplexShape.embeddingUpNat

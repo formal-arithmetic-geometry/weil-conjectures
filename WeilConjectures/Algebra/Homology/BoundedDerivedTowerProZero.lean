@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.Triangulated.ProZeroMiddle
 # Uniformly bounded derived towers with pro-zero cohomology
 
 Source: Stacks Project, Derived Categories, Tag 0G3B, specialized to zero-valued systems
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -94,7 +93,6 @@ The index `n : ℕ` represents the paper's index `n + 1`; the functor laws encod
 and composition of all transition maps.
 
 Source: Stacks Project, Derived Categories, Tag 0G3B
-(auxiliary; not a blueprint node).
 
 Proof plan: for a fixed target index choose a later index dominating the finitely many
 indices killing the cohomology maps in degrees `[a, b]`; outside this interval cohomology

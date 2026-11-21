@@ -52,7 +52,6 @@ private theorem awayKernelFraction
 set_option linter.unusedVariables false in
 /-- Detection of the kernel by powers of the principal comparison denominator.
 Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), (1)(e),(h).
-(blueprint: lem-weil-pbc-graded-module-away-kernel)
 
 Proof: Represent z in Z f by x/f^m and choose the homogeneous relation g^e = a*f.
 If rho(z) = 0, the lambda fraction formula gives a^m • x/g^(e*m) = 0.

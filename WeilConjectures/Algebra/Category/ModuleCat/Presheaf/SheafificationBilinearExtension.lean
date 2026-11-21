@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafifyBilinearExtUn
 # Extension of bilinear maps through module sheafification
 
 Source: Stacks Project, Modules on Sites, Lemma 18.26.1 (Tag 0GMW), proof hint
-(blueprint: lem-pc-sites-module-sheafification-bilinear-extension).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ module sheafification units. The locally bijective ring map `α` presents `R` as
 sheafification of `O`. Curried linear maps encode sectionwise bilinearity; the naturality
 identities encode morphisms of (pre)sheaves of sets.
 Source: Stacks Project, Tag 0GMW, proof hint
-(blueprint: lem-pc-sites-module-sheafification-bilinear-extension).
 
 Proof:
 1. Forget to sets and factor the map from the product presheaf through its sheafification

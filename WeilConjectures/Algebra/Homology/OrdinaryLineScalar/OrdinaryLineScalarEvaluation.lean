@@ -375,7 +375,6 @@ private theorem ordinary_evaluation
 
 /-- Evaluation is preserved by any representative-normalized scalar comparison.
 Source: blueprint Tate-twist local freeness proof (3); Stacks 07A4 and 06YU.
-(blueprint: lem-pur-ordinary-line-scalar-evaluation).
 Proof: choose a flat-term K-flat representative P of the derived input. Both line
 tensors and scalar extension preserve this class. Substitute the representative
 squares for m and -m and the two epsilon_computed equations. The remaining equality

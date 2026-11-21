@@ -82,8 +82,7 @@ private theorem biprod_cover_shortExact
 /-- Given the two canonical counit compatibility equations, the open-cover mate
 sequence is short exact. The proof uses the extension-by-zero stalk calculation,
 then reflects exactness, monicity and epimorphicity through module stalks.
-Source: Stacks Project, Tag 08BU and Tag 00A7.
-(blueprint: lem-sc-open-cover-mate-module-short-exact-core). -/
+Source: Stacks Project, Tag 08BU and Tag 00A7. -/
 theorem open_cover_mate_module_shortExact_core (X : AlgebraicGeometry.RingedSpace.{u})
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
     (_hR : R = (sheafCompose (Opens.grothendieckTopology X)
@@ -162,8 +161,7 @@ theorem open_cover_mate_module_shortExact_core (X : AlgebraicGeometry.RingedSpac
     apply ((S₀.map (T x)).exact_iff_epi (by simp [S₀])).mpr
     exact (hs x).epi_g
 /-- Compatibility of nested mates with counits.
-Source: Stacks Project, Tag 08BU.
-(blueprint: lem-sc-open-cover-mate-module-counit-compatibility). -/
+Source: Stacks Project, Tag 08BU. -/
 theorem open_cover_mate_module_counit_compatibility (X : AlgebraicGeometry.RingedSpace.{u})
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
     (_hR : R = (sheafCompose (Opens.grothendieckTopology X)

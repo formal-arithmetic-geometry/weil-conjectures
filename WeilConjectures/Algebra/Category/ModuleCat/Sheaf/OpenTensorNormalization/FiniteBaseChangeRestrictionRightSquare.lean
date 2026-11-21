@@ -9,7 +9,6 @@ public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTenso
 import WeilConjectures.AlgebraicGeometry.FixedScalarOpenSquareSectionMate
 
 /-! Right-adjoint ordinary square for the finite restriction construction.
-(blueprint: new-lem-sf-finite-base-change-restriction-right-square)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -269,7 +268,6 @@ coherence of evaluation, units, and counits. The proof identifies the site-squar
 inverse by pullback hom extensionality and evaluates the four pin sections; the
 fixed-scalar section-mate closes the remaining equality. This is
 strictly smaller than the parent because it contains no mate transport.
-(blueprint: new-lem-sf-finite-base-change-restriction-right-square)
 -/
 theorem finite_base_change_restriction_right_square
     (A : Type (u + 1)) [CommRing A] [Finite A]

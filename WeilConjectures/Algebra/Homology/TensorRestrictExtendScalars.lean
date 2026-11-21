@@ -16,7 +16,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 # Tensor total complexes and restriction of scalars
 
 Source: Stacks Project, More on Algebra, Tag 06Y1, proof.
-(blueprint: lem-pc-tensor-restrict-extend-scalars)
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace CochainComplex
 /-- Restricting a tensor total complex after extension of the second factor agrees
 with tensoring its restriction with the original second factor.
 Source: Stacks Project, More on Algebra, Tag 06Y1, proof.
-(blueprint: lem-pc-tensor-restrict-extend-scalars)
 
 Proof: in bidegree (p,q), define the A-linear map on balanced pure tensors by
 `l ⊗ (b ⊗ k) ↦ (b • l) ⊗ k`. The inverse is `l ⊗ k ↦ l ⊗ (1 ⊗ k)`.

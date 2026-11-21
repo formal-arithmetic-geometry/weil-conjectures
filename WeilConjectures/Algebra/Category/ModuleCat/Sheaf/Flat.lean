@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Limits.ExactFunctor
 # Flat sheaves of modules
 
 Source: Stacks Project, Modules on Sites, Definition 03ER, item (3)
-(blueprint: def-pc-flat-sheaf-modules).
 
 The tensor product is the one of `def-pur-sheaf-tensor-product`, the source's
 `SheafOfModules.monoidalCategory R` (the sheafification of the sectionwise tensor product,
@@ -40,7 +39,7 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
 `G ↦ G ⊗_R F` on sheaves of `R`-modules (the tensor product `SheafOfModules.monoidalCategory R`)
 is exact: it preserves finite limits and finite colimits. The two instance arguments on the
 site provide the sheafification of presheaves of modules, hence the abelian category `Mod(R)`.
-Source: Stacks Project, Tag 03ER, item (3) (blueprint: def-pc-flat-sheaf-modules). -/
+Source: Stacks Project, Tag 03ER, item (3). -/
 def IsFlat
     (F : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) :
     Prop :=

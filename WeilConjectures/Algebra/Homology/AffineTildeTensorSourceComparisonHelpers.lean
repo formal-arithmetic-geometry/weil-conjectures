@@ -27,7 +27,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 /-! # Counit-normalized affine derived tensor source
 
 Source: Stacks Project, Tags 06Y6, 08DW and 06Z0.
-(blueprint: lem-pc-affine-tilde-tensor-source-comparison).
 -/
 
 @[expose] public section

@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 Source: Stacks Project, Tag 05G3, scalar extension and its adjunction;
 Tag 06Y6, passage from ordinary tensor comparison to coefficient extension.
-(blueprint: lem-pc-semilinear-scalar-extension-homology-square).
 -/
 
 @[expose] public section
@@ -151,8 +150,7 @@ naturality of adjunction. For zero modules or complexes it is the zero square.
 Nonflat structural maps are allowed: only restriction and forgetting, not
 extension, must preserve homology. Neither a nor b must be invertible.
 Source: Stacks Project, Tag 05G3, extension of scalars; Tag 06Y6,
-lemma-derived-base-change, ordinary comparison followed by coefficient extension.
-(blueprint: lem-pc-semilinear-scalar-extension-homology-square). -/
+lemma-derived-base-change, ordinary comparison followed by coefficient extension. -/
 theorem exists_scalarExtension_homology_square
     {S₀ S D₀ D : Type u}
     [CommRing S₀] [CommRing S] [CommRing D₀] [CommRing D]

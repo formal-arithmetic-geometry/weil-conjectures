@@ -26,7 +26,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 Source: Stacks Project, Modules on Sites, Tag 03EK.
 This is the normalized tensor comparison without identifying the site and coefficient universes.
-(blueprint: lem-cbc-extension-tensor-comparison-independent).
 -/
 
 @[expose] public noncomputable section
@@ -130,8 +129,7 @@ private theorem restrictionSheafificationComparison_unit
 end
 
 /-- The canonical map from the presheaf tensor to the underlying sheaf tensor.
-Source: Stacks Project, Modules on Sites, Tag 03EK.
-(blueprint: lem-cbc-extension-tensor-comparison-independent). -/
+Source: Stacks Project, Modules on Sites, Tag 03EK. -/
 def tensorPresheafUnit
     (M N : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     M.val ⊗ N.val ⟶ ((monoidalCategory R).tensorObj M N).val :=
@@ -143,7 +141,6 @@ set_option maxHeartbeats 50000 in
 -- Mixed tensor coefficient structures require additional elaboration.
 /-- Restricted extension of scalars is tensoring with the restricted target ring.
 Source: Stacks Project, Modules on Sites, Tag 03EK.
-(blueprint: lem-cbc-extension-tensor-comparison-independent).
 
 Proof: the presheaf tensor of the restricted target ring with M has exactly the
 same section modules as restricted sectionwise scalar extension. Both restriction
@@ -219,8 +216,7 @@ theorem exists_extensionTensorComparison (φ : R ⟶ S)
       ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ) P).val.app V) hn'.symm).trans hr'
 
 /-- A concrete tensor-unit isomorphism, normalized on every local pure tensor.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-cbc-extension-tensor-comparison-independent). -/
+Source: Stacks Project, Tag 03EK -/
 def regularTensorIso
     (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     (monoidalCategory R).tensorObj
@@ -232,8 +228,7 @@ def regularTensorIso
       (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).counit).app M
 
 /-- Pure tensor sections commute with maps of the first factor.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-cbc-extension-tensor-comparison-independent). -/
+Source: Stacks Project, Tag 03EK -/
 theorem tensorPresheafUnit_naturality
     {L L' : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
     (f : L ⟶ L')
@@ -268,8 +263,7 @@ theorem tensorPresheafUnit_naturality
     (adj.unit.naturality (f.val ▷ M.val)).symm
 
 /-- Tensoring a first-factor map acts on the corresponding local pure tensor.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-cbc-extension-tensor-comparison-independent). -/
+Source: Stacks Project, Tag 03EK -/
 theorem tensorPresheafUnit_whiskerRight_apply
     {L L' : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
     (f : L ⟶ L')
@@ -287,8 +281,7 @@ theorem tensorPresheafUnit_whiskerRight_apply
 set_option maxHeartbeats 50000 in
 -- Elaborating the tensor unitor requires additional coefficient comparisons.
 /-- The inverse regular tensor unitor sends a section to the local tensor of one with it.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-cbc-extension-tensor-comparison-independent). -/
+Source: Stacks Project, Tag 03EK -/
 theorem regularTensorIso_inv_apply
     (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
     (V : Cᵒᵖ) (x : M.val.obj V) :

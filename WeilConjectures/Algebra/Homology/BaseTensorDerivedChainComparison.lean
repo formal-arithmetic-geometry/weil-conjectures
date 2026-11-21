@@ -38,7 +38,6 @@ variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
 /-- Derived coefficient chain comparison.
 Source: Stacks Project, Tag 065Y, construction of equation-comparison-map
 (Tag 065Z); Tag 06Y6; perfect.tex equation-bc (Tag 0DJ7).
-(blueprint: lem-pc-base-tensor-derived-chain-comparison).
 
 Proof: resolve an A-complex by an A-K-flat complex U and its restriction by an
 R-K-flat complex V. The map V to Res(U) induces on pure tensors the displayed

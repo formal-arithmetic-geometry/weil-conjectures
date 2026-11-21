@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonShift
 /-! # The generators satisfy localized tensor comparison
 
 Source: Stacks Project, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-localized-tensor-comparison-generators).
 -/
 
 @[expose] public section
@@ -52,8 +51,7 @@ R-to-B derived counit identifies the base-derived cohomology models, including
 their A tensor B actions; tensoring their homology isomorphisms with C and using
 the natural localized comparison squares proves the condition for every mU.
 Thus the predicate's universal quantification over representatives holds. The
-argument allows arbitrary shifts, unbounded Q and N, and zero rings.
-(blueprint: lem-pc-localized-tensor-comparison-generators). -/
+argument allows arbitrary shifts, unbounded Q and N, and zero rings. -/
 theorem localizedTensorComparisonProperty_generators
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)

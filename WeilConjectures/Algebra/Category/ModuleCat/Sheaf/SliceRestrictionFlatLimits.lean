@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.RingedSliceExtensionTensor
 # Finite-limit part of flatness after restriction to a slice
 
 Source: Stacks Project, Modules on Sites, Tag 0E8J, Lemma `lemma-restriction-flat`
-(auxiliary; not a blueprint node).
 
 This is the finite-limit component of the tensor exactness argument used for restriction
 of a flat module sheaf to a slice. The remaining colimit component follows from the
@@ -44,8 +43,7 @@ The extension exactness equivalence identifies exactness and monomorphisms after
 Tensor the extended cone with the flat sheaf, then use the natural extension-by-zero tensor
 comparison to identify it with the extension of the restricted tensor cone. Reflect the
 resulting exactness and monomorphism statements back to the slice.
-Source: Stacks Project, Modules on Sites, Tag 0E8J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 0E8J -/
 theorem isFlat_over_preservesFiniteLimits
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{u}}

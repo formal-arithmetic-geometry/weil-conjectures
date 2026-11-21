@@ -40,7 +40,6 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 Source: Stacks Project, Modules on Sites, Tags 03DI, 03DJ and 0E8I
 (lemma-j-shriek-and-tensor); the cochain and strict-tower refinement is agent-written
-(blueprint: lem-cbc-ringed-open-flat-resolution).
 
 Extension is the existing direct-sum presheaf followed by module sheafification.
 All complexes are integer-indexed and may be unbounded. Strict inverse sequences
@@ -63,7 +62,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace SheafOfModules
 
 /-- Present the fixed-right-factor site tensor using the left presheaf tensor.
-Source: Stacks Project, Tag 03EK (blueprint: lem-cbc-ringed-open-flat-resolution).
+Source: Stacks Project, Tag 03EK.
 Proof: braid the presheaf factors, apply the shared sectionwise tensor comparison,
 and whisker by the forgetful functor and module sheafification. -/
 private def siteLeftTensorIso {T : Type c} [Category.{v} T]
@@ -87,8 +86,7 @@ variable {S : Type c} [Category.{v} S] {J : GrothendieckTopology S}
 
 /-- The existing quasi-isomorphism predicate with canonical small-site sheafification
 witnesses supplied explicitly. No homology theory or notion of quasi-isomorphism is changed.
-Source: Stacks Project, Modules on Sites, Tags 03DI--03DJ, and Homology, Tag 010N
-(blueprint: lem-cbc-ringed-open-flat-resolution). -/
+Source: Stacks Project, Modules on Sites, Tags 03DI--03DJ, and Homology, Tag 010N -/
 abbrev ringedOpenQuasiIso {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r})
     {P Q : CochainComplex (SheafOfModules.{max c v r}
@@ -105,7 +103,6 @@ quasi-isomorphisms, without a boundedness assumption.
 
 Source: Stacks Project, Modules on Sites, Tags 03DI, 03DJ and 0E8I
 (lemma-j-shriek-and-tensor); agent-written resolution refinement
-(blueprint: lem-cbc-ringed-open-flat-resolution).
 
 Proof:
 1. Reuse the K-flat preservation conjunct of ringedOpen_totalTensor_kFlat. That theorem

@@ -101,7 +101,6 @@ private theorem comm_top (T : A ⥤ A) (π : T ⟶ 𝟭 A)
 /-- The integer-indexed differentials square to zero and commute with the augmentation.
 
 Source: Stacks Project, Derived Categories, Lemma 05T7 (1).
-(blueprint: lem-pc-cycle-pullback-tower-laws-stage3).
 
 Proof: In a successor stage the differential is pi, followed by the second pullback
 projection and the inclusion of the kernel of the preceding stage's differential.

@@ -34,7 +34,6 @@ if it is invertible on the free rank-one module.
 Source: the free-module presentation argument in
 WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator,
 `PresheafOfModules.isIso_app_of_freeYoneda`, specialized to a point.
-(blueprint: lem-sc-modulecat-cocontinuous-generator)
 Proof: each free module is a coproduct of copies of R, so preservation of coproducts
 and naturality extend invertibility from R to every free module. Present any module
 M by the surjection R^(M) → M sending the basis vector [m] to m. Map the free module

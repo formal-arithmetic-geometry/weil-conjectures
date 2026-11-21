@@ -10,7 +10,6 @@ public import WeilConjectures.Algebra.Homology.SixFunctors.SemilinearSliceScalar
 /-! # Scalar extension commutes with localized extension
 
 Source: Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03CY and 03EK.
-(blueprint: lem-sf-slice-scalar-adjunction-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -296,7 +295,6 @@ end ScalarLevelProof
 /-- The two orders of scalar extension and localized extension have a uniquely
 normalized coefficient-linear comparison.
 Source: Stacks 0E8I, via 03DI, 03CY and 03EK
-(blueprint: lem-sf-slice-scalar-adjunction-comparison).
 Proof: Both represented Hom functors are naturally equivalent to maps from G to
 scalar restriction followed by slice restriction. Apply the equivalence and its
 inverse to identity maps. Naturality proves both inverse equations. Evaluate the
@@ -327,7 +325,6 @@ theorem exists_scalarSliceAdjunctionComparison
 /-- Unit tensors of original summands detect maps out of scalar-extended localized
 extension, even though arbitrary sheaf sections need not be globally generated.
 Source: Stacks 03DI, 03CY, 03EK and 0E8I
-(blueprint: lem-sf-slice-scalar-adjunction-comparison).
 Proof: Under the scalar adjunction followed by the localized-extension adjunction,
 the transpose evaluates a morphism on precisely these unit tensors. The proposed
 equality therefore gives equal transposes sectionwise. Injectivity gives equality. -/

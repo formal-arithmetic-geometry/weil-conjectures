@@ -35,8 +35,7 @@ namespace ModuleCat
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), local computation using Tag 0BYJ.
 The localizing-subcategory argument, mixed-ring associator, and flat scalar-extension
 comparison prove the asserted isomorphism in one cohomological degree.  This is the
-single-degree component assembled by `localizedTensorComparison_inheritance`.
-(blueprint: lem-pc-localized-tensor-comparison-inheritance-fixed-degree) -/
+single-degree component assembled by `localizedTensorComparison_inheritance`. -/
 theorem localizedTensorComparison_inheritance_fixed_degree
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

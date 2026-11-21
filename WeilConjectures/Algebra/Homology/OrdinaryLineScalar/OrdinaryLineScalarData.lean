@@ -55,7 +55,6 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 Source: Stacks Project, Tags 07A4, 0G7E and 0D6D; blueprint Tate-twist local freeness,
 proof (3).
-(blueprint: def-pur-ordinary-line-scalar-data)
 -/
 
 @[expose] public noncomputable section
@@ -80,20 +79,17 @@ namespace SheafOfModules.OrdinaryLineScalar
 variable (X : Scheme.{t}) [EssentiallySmall.{max a (t + 1)} X.ProEt]
 
 /-- The existing module category on the small pro-etale site.
-Source: Stacks 03DA (blueprint: def-pur-ordinary-line-scalar-data). -/
+Source: Stacks 03DA. -/
 abbrev Modules (R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}) :=
   LineUnbounded.Modules.{t, a} X R
 
-/-- Cache the existing category instance without changing its data.
-(blueprint: def-pur-ordinary-line-scalar-data). -/
+/-- Cache the existing category instance without changing its data. -/
 local instance modulesCategory (R : Sheaf (Scheme.ProEt.topology X)
     CommRingCat.{max a (t + 1)}) : Category (Modules.{t, a} X R) := inferInstance
-/-- Cache the existing abelian instance without changing its data.
-(blueprint: def-pur-ordinary-line-scalar-data). -/
+/-- Cache the existing abelian instance without changing its data. -/
 local instance modulesAbelian (R : Sheaf (Scheme.ProEt.topology X)
     CommRingCat.{max a (t + 1)}) : Abelian (Modules.{t, a} X R) := inferInstance
-/-- Cache the existing monoidal instance without changing its data.
-(blueprint: def-pur-ordinary-line-scalar-data). -/
+/-- Cache the existing monoidal instance without changing its data. -/
 local instance modulesMonoidal (R : Sheaf (Scheme.ProEt.topology X)
     CommRingCat.{max a (t + 1)}) : MonoidalCategory (Modules.{t, a} X R) := inferInstance
 
@@ -108,22 +104,22 @@ variable {X}
 local notation "𝒬[" R "]" => (DerivedCategory.Q (C := Modules X R))
 
 /-- The recorded signed powers, with no new choice of dual.
-Source: blueprint proof (3) (blueprint: def-pur-ordinary-line-scalar-data). -/
+Source: blueprint proof (3). -/
 abbrev power {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
     (L : Modules.{t, a} X R) (m : ℤ) := signedLinePower.{t + 1, t, a} L m
 
 /-- The ordinary additive line-tensor functor.
-Source: Stacks 03EK (blueprint: def-pur-ordinary-line-scalar-data). -/
+Source: Stacks 03EK. -/
 abbrev tensor {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
     (L : Modules.{t, a} X R) (m : ℤ) := LineUnbounded.tensor.{t, a} X R (power.{t, a} L m)
 
 /-- The published K-flat derived tensor with the signed power in degree zero.
-Source: Stacks 06YU (blueprint: def-pur-ordinary-line-scalar-data). -/
+Source: Stacks 06YU. -/
 abbrev twist {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
     (L : Modules.{t, a} X R) (m : ℤ) := LineUnbounded.derived.{t, a, w} X R (power.{t, a} L m)
 
 /-- Flat-term K-flat is the conjunction of the two recorded predicates.
-Source: Stacks 06YN (blueprint: def-pur-ordinary-line-scalar-data). -/
+Source: Stacks 06YN. -/
 def FlatModel {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
     (P : CochainComplex (Modules.{t, a} X R) ℤ) : Prop :=
   CochainComplex.IsKFlatIndependentCoefficients (R := R) P ∧
@@ -132,7 +128,7 @@ def FlatModel {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
 
 /-- The canonical cochain computation map of a universal homotopy-category presentation.
 Only the published quotient comparison is inserted; no map is chosen.
-Source: Stacks 06YY (blueprint: def-pur-ordinary-line-scalar-data). -/
+Source: Stacks 06YY. -/
 def compute {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
     {α : R ⟶ S} (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}
       (J := Scheme.ProEt.topology X) α)
@@ -147,7 +143,7 @@ def compute {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
       ((p.ordinary.mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- Pure scalar tensor in the ordinary presentation, transported by its fixed object equation.
-Source: Stacks 03EK (blueprint: def-pur-ordinary-line-scalar-data). -/
+Source: Stacks 03EK. -/
 def scalar {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
     {α : R ⟶ S} (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}
       (J := Scheme.ProEt.topology X) α)
@@ -161,8 +157,7 @@ attribute [local irreducible] LineUnbounded.derived LineUnbounded.normalization
 
 /-- Fixed exact termwise and derived line tensors, with actual signed evaluation.
 The evaluation is characterized on every local signed basis, hence is not a freely
-chosen equivalence counit. Source: blueprint proof (3), Stacks 03EK and 06YU
-(blueprint: def-pur-ordinary-line-scalar-data). -/
+chosen equivalence counit. Source: blueprint proof (3), Stacks 03EK and 06YU -/
 structure LineData {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
     (L : Modules.{t, a} X R) where
   rank : ∀ m : ℤ, (power.{t, a} L m).IsFiniteLocallyFreeOfRank 1
@@ -196,8 +191,7 @@ structure LineData {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 
   flat : ∀ (m : ℤ) (P : CochainComplex (Modules.{t, a} X R) ℤ), FlatModel P →
     FlatModel (((tensor.{t, a} L m).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- Normalized comparison before and after localization. Source: Stacks 07A4 and 06YY
-(blueprint: def-pur-ordinary-line-scalar-data). -/
+/-- Normalized comparison before and after localization. Source: Stacks 07A4 and 06YY -/
 structure Comparison {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
     {α : R ⟶ S} (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}
       (J := Scheme.ProEt.topology X) α)
@@ -240,7 +234,7 @@ structure Comparison {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Identity scalar extension with its multiplication normalization before and after Q.
-Source: Stacks 03EK and 06YY (blueprint: def-pur-ordinary-line-scalar-data). -/
+Source: Stacks 03EK and 06YY. -/
 structure UnitData
     (p : ∀ {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
       (α : R ⟶ S), SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}

@@ -39,7 +39,6 @@ Restriction preserves addition sectionwise.
 
 Source: Stacks Project, Tags 03DI and 03DJ, the exact left adjoint used in
 Tag 08FI, Lemma 21.20.1.
-(blueprint: lem-pur-kinjective-restrict-localized-adjunction)
 -/
 theorem localized_restriction_adjunction
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}

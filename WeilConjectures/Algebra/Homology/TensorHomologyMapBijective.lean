@@ -22,7 +22,6 @@ import WeilConjectures.Algebra.Homology.TensorHomologyPairing
 Source: Stacks Project, Varieties, Tag 0BED, field-linear Kunneth identification
 at `equation-kunneth-on-cech`, with the complement argument of
 `lem-sc-qcoh-cech-total-tensor-iso`, steps 1 and 2.
-(blueprint: lem-sc-tensor-homology-map-bijective)
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ namespace HomologicalComplex
 /-- Any linear map with the canonical action on tensors of homology classes is bijective.
 Source: Stacks Project, Varieties, Tag 0BED, `equation-kunneth-on-cech`;
 the field-linear complement argument in steps 1 and 2 of the parent node.
-(blueprint: lem-sc-tensor-homology-map-bijective)
 
 Proof: In every degree choose complements Z_A = B_A direct-sum H_A and
 A = Z_A direct-sum C_A, and likewise for B. The restriction of d_A from C_A^p

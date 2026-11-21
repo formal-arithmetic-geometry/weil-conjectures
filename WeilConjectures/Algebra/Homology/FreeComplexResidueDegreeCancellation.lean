@@ -21,7 +21,6 @@ import WeilConjectures.Algebra.Homology.MinimalComplex
 
 Source: Stacks Project, More on Algebra, Tag 068U, `lemma-cut-complex-in-two`,
 the direct matrix proof.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -170,7 +169,6 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, More on Algebra, Tag 068U, `lemma-cut-complex-in-two`,
 the direct matrix proof.
-(auxiliary; not a blueprint node)
 
 Proof: Residue homology vanishing says that the two adjacent maps are exact.
 Apply exists_localized_exact_pair_contraction to obtain a principal localization

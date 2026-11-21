@@ -25,8 +25,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 
 /-! # RingedToposAcyclicKFlatPullback
 
-Source: Stacks Project, Tag 0G7E (lemma-pullback-K-flat), acyclic case.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0G7E (lemma-pullback-K-flat), acyclic case. -/
 
 @[expose] public section
 universe uC vC uD vD w
@@ -335,7 +334,6 @@ end InverseImage
 /-- The acyclic case of K-flat pullback along a morphism of ringed topoi.
 Source: Stacks Project, Cohomology on Sites, Tag 0G7E, the acyclic-case paragraph,
 using Tag 0G7C for flatness of cycles.
-(auxiliary; not a blueprint node).
 
 Proof: because P is acyclic, K-flat, and flat in every degree, its cycles are flat
 by the acyclic K-flat cycles criterion. Its good truncation at n therefore has flat

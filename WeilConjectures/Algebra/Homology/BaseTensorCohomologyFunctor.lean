@@ -52,8 +52,7 @@ Counit compatibility, counit naturality, the two homology factorization
 naturality squares, and the generator square prove the equality. This constructs
 sigma with its actual model.comparison components. No extension to C, tensor
 with a second complex, or localized comparison is constructed here. Zero rings,
-zero complexes, identity maps and unbounded complexes use the same argument.
-(blueprint: lem-pc-base-tensor-cohomology-functor). -/
+zero complexes, identity maps and unbounded complexes use the same argument. -/
 theorem exists_baseTensorCohomologyFunctor (i : ℤ) :
     let m := fun P : CochainComplex (ModuleCat.{u} A) ℤ ↦
       baseDerivedTensorCohomologyModel R A B P C

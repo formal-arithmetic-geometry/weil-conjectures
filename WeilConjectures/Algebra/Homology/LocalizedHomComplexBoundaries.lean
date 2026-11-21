@@ -18,7 +18,6 @@ import Mathlib.Algebra.Category.Grp.EpiMono
 
 Source: Stacks Project, Tag 0A8X, differential of the Hom complex,
 and Equation 0A8Y, degree zero.
-(blueprint: lem-pur-localized-hom-complex-boundaries)
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ set_option backward.isDefEq.respectTransparency true in
 that cycle is a boundary in the section complex.
 Source: Stacks Project, Tag 0A8X, differential of the Hom complex,
 and Equation 0A8Y, degree zero.
-(blueprint: lem-pur-localized-hom-complex-boundaries)
 
 Proof: the product fan specified by homComplex_exists remains limiting after
 forgetting module sheaves, evaluating at U, and forgetting modules to abelian

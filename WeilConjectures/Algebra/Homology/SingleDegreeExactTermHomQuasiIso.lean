@@ -20,7 +20,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
 
 Source: Stacks Project, Tag 0A8X, Hom complexes; Tag 08DM, bounded Hom calculation;
 Tag 010N, exact functors. The argument isolates step 1 of the bounded exact-term proof.
-(blueprint: lem-pc-single-degree-exact-term-hom-quasi-iso).
 -/
 
 @[expose] public section
@@ -66,7 +65,6 @@ if internal Hom from its sole possibly nonzero term preserves short exact sequen
 
 Source: Stacks Project, Tag 0A8X, Hom complexes; Tag 08DM, bounded Hom calculation;
 Tag 010N, exact functors.
-(blueprint: lem-pc-single-degree-exact-term-hom-quasi-iso).
 
 Proof: all factors of the degree-n Hom product other than the factor at k are zero:
 internal Hom from a zero object is zero. The product universal property identifies

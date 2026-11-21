@@ -14,8 +14,7 @@ import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeOrdinaryComparison
 
 /-! # AffineBaseChangeTildeCanonicalGlobalComparison
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-tilde-canonical-global-comparison). -/
+Source: Stacks Project, Tag 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -64,7 +63,6 @@ variable [∀ Y : Scheme.{u},
 /-- Affine mate calculation for the fixed module-derived tensor construction.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, affine proof and equation-bc;
 more-algebra.tex, Tag 06Y6; perfect.tex, Tag 08IB.
-(blueprint: lem-pc-affine-base-change-tilde-canonical-global-comparison).
 
 Proof: unfold the fixed tensor model, whose functor is constructed by an R-K-flat
 resolution and extension of scalars. Affine higher-direct-image vanishing, with

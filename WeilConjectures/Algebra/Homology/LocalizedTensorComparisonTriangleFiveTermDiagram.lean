@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonRepresentativeS
 /-! # Exact five-term diagrams for localized tensor comparison
 
 Source: Stacks Project, Tags 06Y6, 0BYJ and 0DJA(1).
-(blueprint: lem-pc-localized-tensor-comparison-triangle-five-term-diagram).
 -/
 
 @[expose] public section
@@ -85,8 +84,7 @@ already accepts arbitrary prescribed models, so no separate model-independence
 step is needed in this transport. The rows remain those constructed for the
 actual cone; their component arrows are identified with the requested ones.
 No comparison-isomorphism hypothesis or five lemma is used. Zero rings, zero
-maps, split cones, unbounded complexes and arbitrary degrees are included.
-(blueprint: lem-pc-localized-tensor-comparison-triangle-five-term-diagram). -/
+maps, split cones, unbounded complexes and arbitrary degrees are included. -/
 theorem exists_localizedTensorComparison_triangle_five_term_diagram
     (hC : Module.Flat (A ⊗[R] B) C)
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise
 # Eventual vanishing of finitely many tensor elements
 
 Source: Stacks Project, Algebra, Tag 05LI, proof of (1).
-(blueprint: lem-pc-finite-tensor-vanishing-colimit).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ the ring colimit all vanish after tensoring with one later ring.
 
 Source: Stacks Project, Algebra, Tag 05LI, proof of (1),
 label algebra-lemma-module-map-property-in-colimit.
-(blueprint: lem-pc-finite-tensor-vanishing-colimit).
 
 Proof: apply the already-proved directed ring base-change elementwise theorem
 `TensorProduct.directedColimitBaseChangeElementwise` to the unit tensor at i.

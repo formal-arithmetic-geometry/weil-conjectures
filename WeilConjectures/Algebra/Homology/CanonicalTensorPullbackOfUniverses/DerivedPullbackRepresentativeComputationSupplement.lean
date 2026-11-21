@@ -329,7 +329,6 @@ set_option synthInstance.maxSize 2048 in
 /-- Derived pullback computes the ordinary pullback on a K-flat flat-term complex and
 on the total tensor of two such complexes.
 Source: Stacks Project, Cohomology on Sites, Tags 06YY, 07A4 and 0G7E.
-(blueprint: lem-weil-pbc-kflat-tensor-pullback-computation-universes).
 Proof: algebraic inverse image preserves finite limits and epimorphisms, hence
 homology. Its image of a K-flat flat-term complex is K-flat by applying the ringed-topos
 pullback theorem with identity scalar extension and cancelling the canonical identity

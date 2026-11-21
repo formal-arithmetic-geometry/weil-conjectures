@@ -15,8 +15,7 @@ import WeilConjectures.Algebra.Homology.AffineDirectLocalizedTensorSquare
 
 /-! # AffineScalarLocalizedTensorSquare
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-scalar-localized-tensor-square). -/
+Source: Stacks Project, Tag 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -34,7 +33,6 @@ variable [∀ Y : Scheme.{u},
 /-- Algebraic comparison after extension to the fourth stalk ring, before exact
 stalk homology coordinates. Source: Stacks Project, Tag 0DJ8, affine displayed
 localization identity; Tags 06Y6, 01HV and 01I9.
-(blueprint: lem-pc-affine-scalar-localized-tensor-square).
 
 Proof: first change only the final coefficient ring from A' to its flat stalk D.
 exists_flatFinalCoefficientModelComparison constructs the source isomorphism

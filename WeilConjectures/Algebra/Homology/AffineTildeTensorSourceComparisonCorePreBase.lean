@@ -28,7 +28,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 /-! # Counit-normalized affine derived tensor source
 
 Source: Stacks Project, Tags 06Y6, 08DW and 06Z0.
-(blueprint: lem-pc-affine-tilde-tensor-source-comparison).
 -/
 
 @[expose] public section
@@ -79,8 +78,7 @@ attribute [local irreducible] tilde tilde.functor Functor.mapDerivedCategory
 
 /-- Ordinary source identification: inverse tensor/tilde comparison followed by
 pullback of the affine pushforward comparison. This is a concrete construction.
-Source: Stacks Project, Tags 01I9 and 08DW.
-(blueprint: lem-pc-affine-tilde-tensor-source-comparison). -/
+Source: Stacks Project, Tags 01I9 and 08DW. -/
 def affineTildeTensorOrdinarySourceIso
     (R A B : Type u) [CommRing R] [CommRing A] [CommRing B]
     [Algebra R A] [Algebra R B] (M : CochainComplex (ModuleCat.{u} A) ℤ) :
@@ -124,8 +122,7 @@ def affineTildeTensorOrdinarySourceIso
     ((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).mapIso s
 
 /-- The first two factors of the raw tensor map, before any coefficient map.
-Source: Stacks Project, Tags 06Y6 and 06Z0.
-(blueprint: lem-pc-affine-tilde-tensor-source-comparison). -/
+Source: Stacks Project, Tags 06Y6 and 06Z0. -/
 def affineTildeTensorDerivedCounit
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]

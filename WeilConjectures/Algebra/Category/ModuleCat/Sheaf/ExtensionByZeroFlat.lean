@@ -15,7 +15,6 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 # Flatness of the localized unit extended by zero
 
 Source: Stacks Project, Modules on Sites, Lemma 18.28.7, Tag 03EV, clause (2)
-(blueprint: lem-pc-sites-modules-j-shriek-flat).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ is flat over `R`. Before sheafification, the extension-by-zero presheaf at `V` i
 direct sum of copies of `R(V)` indexed by morphisms `V ⟶ U`.
 
 Source: Stacks Project, Modules on Sites, Lemma 18.28.7, Tag 03EV, clause (2)
-(blueprint: lem-pc-sites-modules-j-shriek-flat).
 
 Proof:
 1. By `def-weil-extension-by-zero-presheaf`, the unit on the localized ringed site

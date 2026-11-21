@@ -140,7 +140,6 @@ private theorem compatible_preimages (A : Type u) [CommRing A]
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 087W, proof through the
 short exact sequence with middle term the completed finite free module.
-(blueprint: lem-weil-pbc-adic-tower-completed-free-surjection).
 
 Proof: Choose generators of T_0 and lift them to the limit by recursive lifting
 along the surjective transitions. Compose these lifts with e inverse. Their

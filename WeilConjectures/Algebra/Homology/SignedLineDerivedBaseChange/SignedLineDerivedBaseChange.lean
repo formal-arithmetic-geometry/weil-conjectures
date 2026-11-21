@@ -46,7 +46,6 @@ variable
 /-- The unique normalized signed comparisons, their naturality, and their canonical
 unbounded derived tensor action.
 Source: Stacks 03EL, 0GMX, 0FNY, 06YQ, 07A4 and 015F; blueprint Powers and duals
-(blueprint: lem-pur-signed-line-derived-base-change).
 Proof: exactness and the adjunction give the exact module pullback. The identity
 scalar-extension square gives a normalized signed family. Tensor recursion and
 evaluation prove it unique. Apply ordinary naturality and the derived-action

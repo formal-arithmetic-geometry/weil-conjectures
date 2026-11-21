@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.FunctorialObjectResolution
 # Functorial injective resolutions preserving every lower bound
 
 Source: Stacks Project, Derived Categories, Tag 0141, assertion (1) and its construction
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -269,7 +268,6 @@ end FunctorialInjectiveTotal
 /-- Totalize a supplied functorial objectwise injective resolution.
 
 Source: Stacks Project, Derived Categories, Tag 0141, assertion (1) and its construction.
-(auxiliary; not a blueprint node).
 
 Apply the supplied nonnegative augmented resolutions termwise to an integer-indexed
 bounded-below complex, form the first-quadrant bicomplex, and take finite diagonal
@@ -302,7 +300,6 @@ theorem exists_functorial_bounded_injective_resolution_of_object_resolution
 /-- A functorial injective embedding gives one injective replacement functor on all
 bounded-below complexes, preserving every termwise lower bound simultaneously.
 Source: Stacks Project, `derived.tex`, Tag 0141, assertion (1) and its construction
-(auxiliary; not a blueprint node).
 
 Proof:
 1. Normalize J by replacing J(A) with the kernel of J(A) → J(0). The maps induced by

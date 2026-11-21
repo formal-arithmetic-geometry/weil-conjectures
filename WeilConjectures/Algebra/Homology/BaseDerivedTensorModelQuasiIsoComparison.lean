@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorModelQuasiIsoOrdinaryCo
 /-! # Transport of base-derived tensor models along quasi-isomorphisms
 
 Source: Stacks Project, More on Algebra, Tags 06Y6 and 08IB.
-(blueprint: lem-pc-base-derived-tensor-model-quasiiso-comparison).
 -/
 
 @[expose] public section
@@ -52,8 +51,7 @@ and compose with the ordinary comparison square. Finally transpose along the
 extension/restriction adjunction. Naturality of its unit and localized_eq identify
 the two transposes, hence give the asserted localized square. This does not claim
 that ordinary extension of the quasi-isomorphism is invertible.
-Source: Stacks Project, Tags 06Y6 and 08IB, and perfect.tex, equation-bc before Tag 0DJ8.
-(blueprint: lem-pc-base-derived-tensor-model-quasiiso-comparison). -/
+Source: Stacks Project, Tags 06Y6 and 08IB, and perfect.tex, equation-bc before Tag 0DJ8. -/
 theorem exists_baseDerivedTensorModel_quasiIso_comparison
     {P G : CochainComplex (ModuleCat.{u} A) ℤ} (s : P ⟶ G) (hs : QuasiIso s)
     (MP : BaseDerivedTensorCohomologyModel R A B P D)

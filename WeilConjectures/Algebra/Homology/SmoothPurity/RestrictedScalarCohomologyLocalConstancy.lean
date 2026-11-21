@@ -82,7 +82,6 @@ import Mathlib.Algebra.Homology.SingleHomology
 Source: Stacks Project, sites-cohomology.tex, Tag 094H,
 lemma-locally-constant-tensor-product; sites-modules.tex, Tag 093S,
 lemma-morphism-locally-constant; blueprint scalar-extension proof (2)
-(blueprint: lem-sp-restricted-scalar-cohomology-local-constancy).
 
 The scalar-extension helper retains independent site and localization universes.
 The theorem gives finite B-module models separately in each cohomological degree.
@@ -97,7 +96,6 @@ namespace SheafOfModules
 
 /-- Constant-coefficient derived scalar extension, with the right-factor target action.
 Source: Stacks Project, Tag 06YY
-(blueprint: lem-sp-restricted-scalar-cohomology-local-constancy).
 The universal left-derived pair determines the selected functor up to its canonical
 counit-compatible isomorphism. Its ordinary functor is sheafified scalar extension,
 and its counit computes the tensor on K-flat representatives. -/
@@ -136,7 +134,6 @@ attribute [-instance] WeilConjectures.integralCoefficientAbLocallyBijective
 in every degree after any restriction satisfying the stated input hypotheses.
 
 Source: Stacks Project, Tags 094H and 093S; blueprint scalar-extension proof (2)
-(blueprint: lem-sp-restricted-scalar-cohomology-local-constancy).
 
 Proof:
 1. Choose a cochain representative of K and a K-flat resolution P. Localization

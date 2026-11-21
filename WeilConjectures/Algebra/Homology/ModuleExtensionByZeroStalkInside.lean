@@ -35,8 +35,7 @@ compare the canonical adjunction with it by the unique natural automorphism of t
 adjoint compatible with units. Compose the canonical stalk comparison with the stalk of that
 automorphism. It remains an isomorphism, and sends a germ to the germ of the chosen unit by the
 unit comparison formula. This proves the displayed germ identity on every V. Source: Stacks
-Project, Sheaves Lemma 00A7 (2)-(3), Lemma 00A5, and Lemma 007Z.
-(blueprint: lem-sc-module-extension-by-zero-stalk-maps-inside) -/
+Project, Sheaves Lemma 00A7 (2)-(3), Lemma 00A5, and Lemma 007Z. -/
 theorem moduleExtensionByZero_stalk_inside (X : RingedSpace.{u}) :
     (∀ (W : Opens X) (x : X) (hx : x ∈ W),
       ∃ e : (W.sheafOfModulesEquivOver (moduleRings X)).functor ⋙

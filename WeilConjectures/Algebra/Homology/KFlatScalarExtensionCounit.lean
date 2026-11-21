@@ -17,7 +17,6 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 /-! # Universal scalar extension counit on a K-flat complex
 
 Source: Stacks Project, Tag 06Y6, lemma-derived-base-change.
-(blueprint: lem-pc-kflat-scalar-extension-counit).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace ModuleCat
 
 /-- The universal derived scalar extension counit is invertible on K-flat complexes.
 Source: Stacks Project, Tag 06Y6, lemma-derived-base-change, using Tag 064L.
-(blueprint: lem-pc-kflat-scalar-extension-counit).
 
 Proof: Convert the acyclic-tensor hypothesis to the source-library K-flat
 predicate. Scalar extension sends quasi-isomorphisms between K-flat complexes

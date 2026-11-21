@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.FinitePresentationColimit
 /-! # Finitely presented models over a directed preorder
 
 Source: Stacks Project, Algebra, Tag 05N7, object clause.
-(blueprint: lem-pc-fp-preorder-colimit-model).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace ModuleCat
 
 /-- The object clause of finite-presentation descent for a nonempty directed preorder.
 Source: Stacks Project, Algebra, Tag 05N7, label lemma-colimit-category-fp-modules, (1).
-(blueprint: lem-pc-fp-preorder-colimit-model).
 
 Proof: Form the antisymmetrization of the preorder. It is a nonempty directed partial
 order. Choosing a representative of each equivalence class gives a monotone functor

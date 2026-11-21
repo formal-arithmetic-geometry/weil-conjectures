@@ -14,7 +14,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Extensionality on original balanced tensor sections
 
 Source: Stacks Project, Cohomology, Tag 08DE, proof.
-(blueprint: lem-pc-balanced-sheaf-tensor-original-sections-ext)
 -/
 
 @[expose] public section
@@ -54,8 +53,7 @@ presheaf sections. Induct on the outer B-tensor and then on the inner R-tensor.
 The zero and addition cases follow from additivity. On m tensor (b tensor n),
 naturality of the module sheafification unit identifies both evaluations with
 exactly the tests in h. No B-linearity of f or g is needed. The localization and
-tensor induction arguments include empty spaces and zero rings or modules.
-(blueprint: lem-pc-balanced-sheaf-tensor-original-sections-ext) -/
+tensor induction arguments include empty spaces and zero rings or modules. -/
 theorem balancedTensor_originalSections_hom_ext (α : R ⟶ B)
     (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 R))
     {H : SheafOfModules.{u} (𝓡 R)}

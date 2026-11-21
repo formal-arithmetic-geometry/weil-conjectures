@@ -12,8 +12,7 @@ public import WeilConjectures.Algebra.Module.RationalPerfectPairing
 # Transport of finite-level duality to an extension of `ℚ_p`
 
 This file proves the linear algebra of the transport of Poincaré duality from the finite
-coefficient rings `ℤ/ℓᵐ` to `ℚ̄_ℓ` (blueprint `theorem-poincare-duality--9`,
-`theorem-poincare-duality--6`), in the following abstract form
+coefficient rings `ℤ/ℓᵐ` to `ℚ̄_ℓ`, in the following abstract form
 (`LinearMap.exists_isPerfPair_of_finiteLevel`).
 
 Let `A`, `B` be finitely generated `ℤ_p`-modules (the integral cohomology groups `Hⁱ(X, ℤ_ℓ)`,

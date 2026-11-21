@@ -32,7 +32,6 @@ private lemma homObjMap_section_component
 -- Projection comparisons involve several composed functors and chosen product objects.
 /-- The shifted section Hom-complex comparison in the homotopy category is natural.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-(blueprint: lem-pur-hom-complex-sections-homotopy-naturality)
 
 Proof: evaluate the product projections of the sheaf Hom complex at U. Sections
 in degree n are families of maps L^p|U to I^(p+n)|U. The differential formula

@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonShiftSquare
 /-! # Shift stability of localized tensor comparison
 
 Source: Stacks Project, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-localized-tensor-comparison-shift).
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ Proof: shift U by -n to a representative of X, transport its tensor model and
 comparison square across the canonical tensor, scalar-extension and cohomology
 shift isomorphisms, and apply hX. Naturality identifies the transported map
 with the displayed comparison composite.
-Source: Stacks Project, Tag 0DJA(1).
-(blueprint: lem-pc-localized-tensor-comparison-shift-component). -/
+Source: Stacks Project, Tag 0DJA(1). -/
 theorem localizedTensorComparisonProperty_shift_component
     (X : DerivedCategory (ModuleCat.{u} A))
     (hX : localizedTensorComparisonProperty R A B C Q N t X) (n : ℤ)
@@ -103,8 +101,7 @@ with the shifted comparison square. Scalar extension to C preserves these
 source isomorphisms and cohomology supplies target isomorphisms. Its unshifted
 horizontal arrow is invertible by hX; hence the shifted arrow is invertible.
 This proves the predicate for each U, model and degree. For n=0 these are the
-identity transports. The argument needs neither flatness of C nor bounds on Q.
-(blueprint: lem-pc-localized-tensor-comparison-shift). -/
+identity transports. The argument needs neither flatness of C nor bounds on Q. -/
 theorem localizedTensorComparisonProperty_shift
     (X : DerivedCategory (ModuleCat.{u} A))
     (hX : localizedTensorComparisonProperty R A B C Q N t X) (n : ℤ) :

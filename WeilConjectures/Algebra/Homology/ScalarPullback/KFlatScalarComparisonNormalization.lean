@@ -239,7 +239,6 @@ import WeilConjectures.Algebra.Homology.ProperBaseChange.ExtensionTensorComparis
 
 Source: blueprint main-20261015, proposition-six-operations-change-coefficients (1); Stacks Project,
 Tags 03EL, 0G7E, 06YY, 07A6 and 0D6D
-(blueprint: lem-sfb-kflat-scalar-comparison-normalization).
 
 ## Main statements
 
@@ -261,20 +260,20 @@ open scoped ChangeOfRings
 namespace SheafOfModules.ScalarPullback
 
 /-- The module category already used by the scalar-change model.
-Source: Stacks 03D2 (blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
+Source: Stacks 03D2. -/
 abbrev Modules {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (A : Sheaf J CommRingCat.{u}) :=
   ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A)
 
 /-- Forget a module to its underlying sheaf of sets.
-Source: Stacks 03D2 (blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
+Source: Stacks 03D2. -/
 noncomputable abbrev underlying {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (A : Sheaf J CommRingCat.{u}) : Modules A ⥤ Sheaf J (Type u) :=
   toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙
     sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u} ⋙ uliftFunctor.{u, u})
 
 /-- Restriction of scalars along the given sheaf ring map.
-Source: Stacks 03D2 (blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
+Source: Stacks 03D2. -/
 noncomputable abbrev restriction {C : Type u} [Category.{u} C]
     {J : GrothendieckTopology C} {A B : Sheaf J CommRingCat.{u}} (φ : A ⟶ B) :
     Modules B ⥤ Modules A :=
@@ -286,8 +285,7 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
 
 /-- The existing algebraic inverse-image presentation in the small-site universe.
-Source: Stacks 03D2
-(blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
+Source: Stacks 03D2 -/
 abbrev InverseImage (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
     (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u}) :=
   AlgebraicInverseImageOfUniverses.{u, u, u, u, u, u} L A B
@@ -296,13 +294,11 @@ variable {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
   {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
 
 /-- The existing module projection, with its sheaf-composition instances elaborated once.
-Source: Stacks 03D2
-(blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
+Source: Stacks 03D2 -/
 abbrev inverseModules (I : InverseImage L A B) : Modules A ⥤ Modules B := I.modules
 
 /-- The existing ring identification of the algebraic inverse-image presentation.
-Source: Stacks 03D2
-(blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
+Source: Stacks 03D2 -/
 abbrev inverseRing (I : InverseImage L A B) :
     L.obj ((sheafCompose J
       (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).obj A) ≅
@@ -310,8 +306,7 @@ abbrev inverseRing (I : InverseImage L A B) :
   I.ringUnderlying
 
 /-- The existing underlying-module identification of the inverse-image presentation.
-Source: Stacks 03D2
-(blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
+Source: Stacks 03D2 -/
 abbrev inverseUnderlying (I : InverseImage L A B) :
     inverseModules I ⋙ underlying B ≅ underlying A ⋙ L :=
   I.moduleUnderlying
@@ -320,7 +315,7 @@ end InverseImageAliases
 
 /-- The image of a balanced pure tensor in the model's ordinary scalar extension.
 The equality transport only identifies the model's object with the existing sheafification.
-Source: Stacks 03EL (blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
+Source: Stacks 03EL. -/
 noncomputable def pure {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {A B : Sheaf J CommRingCat.{u}} {φ : A ⟶ B}
     [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -332,7 +327,7 @@ noncomputable def pure {C : Type u} [Category.{u} C] {J : GrothendieckTopology C
       (b ⊗ₜ[A.obj.obj U, (φ.hom.app U).hom] x))
 
 /-- The inverse scalar-adjunction mate of a restriction/action square.
-Source: Stacks 07A7 (blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
+Source: Stacks 07A7. -/
 def mate {AY : Type u₁} {BY : Type u₂} {AX : Type u₃} {BX : Type u₄}
     [Category.{v₁} AY] [Category.{v₂} BY] [Category.{v₃} AX] [Category.{v₄} BX]
     {TY : AY ⥤ BY} {rY : BY ⥤ AY} {TX : AX ⥤ BX} {rX : BX ⥤ AX}

@@ -266,7 +266,6 @@ set_option linter.unusedVariables false in
 /-- Construction of the ordinary and degree-zero restriction maps, before imposing coherence.
 Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), proof of
 (1)(a),(c),(d),(g).
-(blueprint: lem-weil-pbc-graded-module-away-maps)
 
 Proof: Equal-degree fractions form a submodule: put sums over a common denominator,
 and multiply homogeneous numerators and denominators to check scalar closure. If g is

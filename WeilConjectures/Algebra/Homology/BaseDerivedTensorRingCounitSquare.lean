@@ -10,8 +10,7 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # Ordinary comparison square from a transported counit square
 
-Source: Stacks Project, Tag 06Y6, independence of choices.
-(blueprint: lem-pc-base-derived-tensor-ring-counit-square). -/
+Source: Stacks Project, Tag 06Y6, independence of choices. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -101,8 +100,7 @@ flatness, or properties of the maps to C0 and C are needed. This is just the
 ordinary-complex and exact-homology part of the coefficient transport argument;
 it also applies to zero maps, zero rings, and zero complexes.
 Source: Stacks Project, Tag 06Y6, Lemma 15.61.1; exact-restriction homology
-naturality as in Tag 05RR.
-(blueprint: lem-pc-base-derived-tensor-ring-counit-square). -/
+naturality as in Tag 05RR. -/
 theorem baseDerivedTensor_ring_counit_square
     {R₀ A₀ B₀ C₀ R A B C : Type u}
     [CommRing R₀] [CommRing A₀] [CommRing B₀] [CommRing C₀]

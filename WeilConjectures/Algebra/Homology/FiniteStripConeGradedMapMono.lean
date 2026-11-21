@@ -205,7 +205,6 @@ private theorem finiteStripGradedMap_hasLeftInverse
 /-- The canonical finite-strip graded map is monic.
 Source: Stacks Project, Homology, Lemma 12.25.4 (Tag 0133), diagonal quotient argument;
 explicit cone refinement of lem-sc-finite-strip-cone-filtration, step 3.
-(blueprint: lem-sc-finite-strip-cone-graded-map-mono)
 
 Proof: project the ambient cone in degree n onto its target diagonal summand
 K.X (n-p).X p, using the total coproduct projection, and onto its source summand

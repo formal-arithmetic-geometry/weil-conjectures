@@ -20,7 +20,6 @@ import WeilConjectures.Algebra.Homology.ResidueKernelUnitMinor
 /-! # Local freeness of the first cokernel under universal rank-one H0
 
 Source: Stacks Project, Tags 00O0 and 00NX, local matrix argument.
-(blueprint: new-universal-h0-cokernel-local-free)
 -/
 
 @[expose] public section
@@ -92,8 +91,7 @@ injective. Every entry of the remaining map annihilates c, so every entry is
 zero. The localized cokernel is consequently free. Localization is exact, so it
 is the localization of the quotient by the global image.
 For n=1 the identity block is empty. Rank zero cannot occur over a nonzero
-local ring, by the residue-field test. Over the zero ring all modules are zero.
-(blueprint: new-universal-h0-cokernel-local-free) -/
+local ring, by the residue-field test. Over the zero ring all modules are zero. -/
 theorem universalH0_cokernel_local_free
     (R : Type v) [CommRing R]
     (P : CochainComplex (ModuleCat.{v} R) ℤ)

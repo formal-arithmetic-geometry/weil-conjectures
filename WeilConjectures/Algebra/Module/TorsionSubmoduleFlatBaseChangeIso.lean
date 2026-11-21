@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.TorsionModuleFlatBaseChangeIso
 # Flat base change of an ideal-power torsion submodule
 
 Source: More on Algebra, Lemma 05EC, part (1)
-(blueprint: lem-weil-pbc-torsion-submodule-flat-base-change-iso).
 -/
 
 @[expose] public section
@@ -75,7 +74,6 @@ private theorem killed_by_fg_lift
 base change identifies the ideal-power torsion submodule.
 
 Source: More on Algebra, Lemma 05EC, part (1)
-(blueprint: lem-weil-pbc-torsion-submodule-flat-base-change-iso).
 Proof:
 Put `T = primaryComponent M I`. Every element of T is killed by a positive power
 of I, so the torsion-module comparison of Lemma 05E9 gives a bijection

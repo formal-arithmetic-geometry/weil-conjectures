@@ -14,7 +14,6 @@ import Mathlib.Algebra.Homology.ShortComplex.Linear
 # Scalar compatibility from a resolution counit
 
 Source: Stacks Project, Tag 06Y6, lemma-derived-base-change
-(blueprint: lem-pc-base-derived-extension-scalar).
 -/
 
 @[expose] public section
@@ -60,7 +59,6 @@ private theorem homologyMap_smul_id
 set_option backward.isDefEq.respectTransparency false in
 -- Several localization and homology factorization functors occur in the scalar transport.
 /-- Source: Stacks Project, Tag 06Y6, lemma-derived-base-change.
-(blueprint: lem-pc-base-derived-extension-scalar).
 
 Proof: First compute the scalar identity for ordinary extension of a complex P.
 On a pure tensor b tensor p, extension of r times identity sends it to b tensor

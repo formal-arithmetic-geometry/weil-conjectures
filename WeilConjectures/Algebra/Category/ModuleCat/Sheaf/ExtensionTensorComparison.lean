@@ -118,8 +118,7 @@ private theorem restrictionSheafificationComparison_unit
 end
 
 /-- The canonical map from the presheaf tensor to the underlying sheaf tensor.
-Source: Stacks Project, Modules on Sites, Tag 03EK.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 03EK. -/
 def tensorPresheafUnit
     (M N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     M.val ⊗ N.val ⟶ ((monoidalCategory R).tensorObj M N).val :=
@@ -130,7 +129,6 @@ def tensorPresheafUnit
 -- Mixed tensor coefficient structures require additional elaboration.
 /-- Restricted extension of scalars is tensoring with the restricted target ring.
 Source: Stacks Project, Modules on Sites, Tag 03EK.
-(auxiliary; not a blueprint node).
 
 Proof: the presheaf tensor of the restricted target ring with M has exactly the
 same section modules as restricted sectionwise scalar extension. Both restriction

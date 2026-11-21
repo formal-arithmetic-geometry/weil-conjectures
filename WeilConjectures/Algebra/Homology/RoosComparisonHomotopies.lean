@@ -212,8 +212,7 @@ transition maps, or K-injectivity is used.
 
 Source: the explicit homotopy-invariance extension in the docstring of
 roos_comparison_homotopy_retract (lem-weil-derived-limit-roos-complex);
-Stacks Project, Derived Categories, Tag 070M provides the underlying Roos setup.
-(blueprint: lem-weil-roos-comparison-homotopies). -/
+Stacks Project, Derived Categories, Tag 070M provides the underlying Roos setup. -/
 theorem roos_comparison_homotopies
     (A : Type u) [Category.{v} A] [Abelian A]
     [HasLimitsOfShape (Discrete ℕ) A]

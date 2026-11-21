@@ -9,7 +9,6 @@ public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTenso
 import WeilConjectures.CategoryTheory.ProEtaleCoefficients.EquivalenceAdjunctionComparisonSupplement
 
 /-! Mate transport for the finite restriction square.
-(blueprint: new-lem-sf-finite-base-change-restriction-mate-transport)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -160,7 +159,6 @@ smaller than the parent because its right-square identity is supplied as a
 hypothesis. The categorical normalization and cancellation are an independent
 obstacle estimated at more than four hours from the currently published
 interfaces.
-(blueprint: new-lem-sf-finite-base-change-restriction-mate-transport)
 -/
 theorem finite_base_change_restriction_mate_transport
     (A : Type (u + 1)) [CommRing A] [Finite A]

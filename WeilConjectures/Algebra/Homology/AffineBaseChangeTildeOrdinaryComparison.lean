@@ -15,8 +15,7 @@ import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeMateFactorization
 
 /-! # AffineBaseChangeTildeOrdinaryComparison
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-tilde-ordinary-comparison). -/
+Source: Stacks Project, Tag 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -35,7 +34,6 @@ set_option linter.unusedVariables false in
 /-- Ordinary affine mate calculation before extension of the source cohomology.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc and its affine proof;
 more-algebra.tex, Tag 06Y6; perfect.tex, Tag 08IB.
-(blueprint: lem-pc-affine-base-change-tilde-ordinary-comparison).
 
 Proof: Resolve the restriction of M to R by an R-K-flat complex P. The universal
 counit of m.derived identifies its value with scalar extension of P to R'.

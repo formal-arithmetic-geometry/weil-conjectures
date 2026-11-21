@@ -25,7 +25,6 @@ namespace CochainComplex
 /-- Splice an already constructed differential and compatible term comparison into a tail.
 
 Source: Stacks Project, Tag 0BC9, proof, final sentence of the second paragraph
-(blueprint: lem-sc-splice-incoming-differential).
 
 Proof. Replace the term in degree n-1 by M, keeping every other term of C.
 The new outgoing differential is d, transported along the equality (n-1)+1=n.

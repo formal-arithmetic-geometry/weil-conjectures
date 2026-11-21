@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.KFlat
 # Currying a pair of sheaf evaluations
 
 Source: Stacks Project, Modules on Sites, Lemma 03EO, and Cohomology on Sites, Tag 0A90.
-(blueprint: lem-sc-hom-tensor-pair-construction)
 -/
 
 @[expose] public section
@@ -247,7 +246,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Two sheaf evaluations factor through the tensor of their inputs.
 Source: Stacks Project, Modules on Sites, Lemma internal-hom-adjoint-tensor (Tag 03EO),
 and Cohomology on Sites, Lemma sites-cohomology-lemma-compose (Tag 0A90).
-(blueprint: lem-sc-hom-tensor-pair-construction).
 
 Proof: Uncurry the underlying presheaf maps f and g by the balanced tensor
 universal property. Braiding and associativity order the three inputs as y, x, s;

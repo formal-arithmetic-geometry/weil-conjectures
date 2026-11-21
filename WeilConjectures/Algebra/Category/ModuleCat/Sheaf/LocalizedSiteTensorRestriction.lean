@@ -14,7 +14,6 @@ set_option linter.privateModule false
 # Tensor products and restriction to a localized ringed site
 
 Source: Stacks Project, Modules on Sites, Tags 03EL and 03DH
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section

@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 # Derived extension and coherence relative to a strict evaluation adjunction
 
 Source: Zheng, Construction 4.1, p. 21; Stacks Project, Tags 06XN, 0FND and 09T5.
-(blueprint: lem-pur-coefficient-evaluation-derived-extension-coherence).
 -/
 
 @[expose] public noncomputable section
@@ -156,8 +155,7 @@ local notation "tensor" => coefficientTensor (J := J) (O := O) (ell := ell)
 local notation "tensorAdj" => coefficientTensorAdj (J := J) (O := O) (ell := ell)
 
 /-- The truncation map is constructed as the mate of the derived system transition.
-Source: Zheng, Construction 4.1, p. 21
-(blueprint: lem-pur-coefficient-evaluation-derived-extension-coherence). -/
+Source: Zheng, Construction 4.1, p. 21 -/
 def coefficientEvaluationSigma
     {ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell)}
     [∀ n, (ordinary.extension n).Additive]
@@ -175,8 +173,7 @@ attribute [local irreducible] coefficientEvaluationSigma
 /-- Index coherence for fixed strict, scalar-derived and evaluation-derived adjunctions.
 All adjunctions, their universal comparisons and their normalized representative
 transposes have already been constructed.
-Source: Zheng, Construction 4.1, p. 21; Stacks 06XN and 09T5
-(blueprint: lem-pur-coefficient-evaluation-derived-extension-coherence). -/
+Source: Zheng, Construction 4.1, p. 21; Stacks 06XN and 09T5 -/
 structure CoefficientEvaluationDerivedCoherenceData
     (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))
     [∀ n, (ordinary.extension n).Additive]
@@ -354,7 +351,6 @@ private theorem sigma_representative
 /-- Derived compatibility of the strict truncation inclusions, with identity and
 composition laws for their adjunction mates.
 Source: Zheng, Construction 4.1, p. 21; Stacks Tags 06XN, 0FND and 09T5
-(blueprint: lem-pur-coefficient-evaluation-derived-extension-coherence).
 Proof: scalar extension takes flat-term K-flat complexes to flat-term K-flat complexes.
 For such a complex P, transpose the proposed sigma representative equation first under
 the normalized evaluation adjunction and then under the normalized scalar adjunction.

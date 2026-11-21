@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.TotalFreeFiltrationTerms
 # Exhaustiveness of the alternating column submodules
 
 Source: Stacks Project, Tag 09KP, filtration construction.
-(blueprint: lem-pc-derived-total-filtration-exhaustive)
 -/
 
 @[expose] public section
@@ -87,7 +86,6 @@ private lemma directed_mem (T : CochainComplex (ModuleCat.{u} A) ℤ)
 
 /-- Every total-degree element belongs to an alternating column stage.
 Source: Stacks Project, Tag 09KP, proof, finite support argument.
-(blueprint: lem-pc-derived-total-filtration-exhaustive)
 
 Proof. The full column inclusions generate each total-degree coproduct. Positive
 columns contribute zero; every nonpositive column is `-j` and its full image lies

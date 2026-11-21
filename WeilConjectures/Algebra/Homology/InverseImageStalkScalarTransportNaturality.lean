@@ -15,7 +15,6 @@ import Mathlib.Topology.Sheaves.Sheafify
 # Natural semilinear inverse-image stalk comparison
 
 Source: Stacks Project, Sheaves, Tags 008H and 0098.
-(blueprint: lem-pc-ringed-inverse-image-stalk-scalar-transport-naturality).
 -/
 
 @[expose] public section
@@ -105,8 +104,7 @@ then gives the asserted equation. For naturality, represent m by a germ, use
 naturality of the abelian inverse-image unit, and use stalkFunctor_map_germ_apply.
 The map on the right is exactly stalkAddMap of inverseImageModuleMap by definition.
 The construction applies to zero modules and zero rings; with empty X there is
-no x. No flatness or nonvanishing hypothesis is used.
-(blueprint: lem-pc-ringed-inverse-image-stalk-scalar-transport-naturality). -/
+no x. No flatness or nonvanishing hypothesis is used. -/
 theorem exists_inverseImage_stalk_comparison_natural
     (X Y : RingedSpace.{u}) (f : X.carrier ⟶ Y.carrier) (x : X) :
     let k : Y.presheaf.stalk (f x) ⟶

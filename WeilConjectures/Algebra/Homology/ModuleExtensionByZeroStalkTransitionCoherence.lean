@@ -46,8 +46,7 @@ of asIso of the counit stalk map, which determines e uniquely and gives its inve
 Apply the stalk functor to general counit compatibility and cancel e(W',x).inv to obtain
 the final equation. All stalk maps are O_X,x-linear. The argument uses the units of the
 chosen adjunctions themselves and requires no agreement between separate choices. Empty W
-has no inside points; equal opens and the top open require no extra hypotheses.
-(blueprint: new-module-extension-by-zero-coherence) -/
+has no inside points; equal opens and the top open require no extra hypotheses. -/
 theorem ModuleExtensionByZeroStalkTransitionCoherence (X : RingedSpace.{u})
     (F : SheafOfModules.{u} (moduleRings X)) :
     let iota := fun (W W' : Opens X) (h : W ≤ W') ↦

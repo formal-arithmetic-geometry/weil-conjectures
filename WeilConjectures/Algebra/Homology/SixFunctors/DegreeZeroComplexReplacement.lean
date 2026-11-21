@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 
 Source: Stacks Project, Derived Categories, Tag 07K6, `lemma-replace-resolution`,
 the uniformly bounded finite-degree specialization
-(blueprint: lem-sf-degree-zero-complex-replacement).
 -/
 
 @[expose] public section
@@ -149,7 +148,6 @@ objects, bounded on binary direct sums by the maximum, and decreasing on cokerne
 specified below admits a degree-zero replacement of every integer-indexed cochain complex.
 
 Source: Stacks Project, Derived Categories, Tag 07K6, `lemma-replace-resolution`
-(blueprint: lem-sf-degree-zero-complex-replacement).
 
 Proof (finite induction for the uniformly bounded specialization):
 1. Embed zero in an object E of degree zero. The inequality for E → E → 0 gives

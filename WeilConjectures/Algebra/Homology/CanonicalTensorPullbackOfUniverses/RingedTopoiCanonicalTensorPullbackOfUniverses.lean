@@ -96,7 +96,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
 Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E;
 Modules on Sites, Tag 03EL
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
 
 This is the general canonical representative interface, with a site-object universe s and an
 independent site-morphism universe h. Rings and modules live in max s h, as in the
@@ -184,7 +183,6 @@ set_option synthInstance.maxSize 2048 in
 -- Elaborate the full two-variable representative square.
 /-- Canonical derived comparison, uniquely characterized on K-flat flat-term representatives.
 Source: Stacks 07A4 and 0G7E
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
 Proof: resolve both inputs by K-flat flat-term complexes; pullback preserves that class
 by 0G7E. Their total tensor is K-flat by reassociating an acyclic test tensor and applying
 K-flatness twice, and has flat terms by tensor-flatness and countable flat sums.
@@ -391,7 +389,7 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
 set_option synthInstance.maxSize 2048 in
 -- Keep both tensor representative interfaces explicit.
 /-- The canonical derived comparison selected by its unique representative characterization.
-Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
+Source: Stacks 07A4.
 The theorem specifies the natural isomorphism uniquely, so only its proof is postponed. -/
 noncomputable def ringedTopoiCanonicalDerivedTensorComparison
     {C D : Type s} [Category.{h} C] [Category.{h} D]

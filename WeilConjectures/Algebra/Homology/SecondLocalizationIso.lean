@@ -11,8 +11,7 @@ public import Mathlib.RingTheory.Localization.Basic
 import WeilConjectures.Algebra.Homology.DerivedTensorFlatSecondLocalization
 import WeilConjectures.Algebra.Homology.SecondLocalizationIsoAux
 /-! # Invertibility of the second localization map
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-second-localization-iso). -/
+Source: Stacks Project, Tags 06Y6 and 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -40,7 +39,6 @@ variable (R A B Bp D : Type u)
 include tRB tAD tBD tApD tBpD tBBpD in
 /-- The characterized coefficient map becomes invertible after extension to D.
 Source: Stacks Project, Tag 0DJ8 affine localization identity; Tag 06Y6.
-(blueprint: lem-pc-second-localization-iso).
 
 Proof: compute both universal derived functors on an R-K-flat resolution of Q.
 Extension along the flat localization B to Bp is exact, so its homology is

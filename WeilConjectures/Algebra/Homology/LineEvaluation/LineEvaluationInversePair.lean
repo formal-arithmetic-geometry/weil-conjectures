@@ -60,7 +60,6 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 /-! # Specified evaluation and inverse tensor pair for a sheaf line
 
 Source: Stacks Project, Modules on Sites, Tags 0B8Q and 0B8N.
-(blueprint: lem-pur-sheaf-line-evaluation-inverse-pair)
 -/
 
 @[expose] public noncomputable section
@@ -78,17 +77,17 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{max uC vC r})
 
 /-- The module category already defined on the given ringed site.
-Source: Stacks 03DD (blueprint: lem-pur-sheaf-line-evaluation-inverse-pair). -/
+Source: Stacks 03DD. -/
 abbrev Modules := ringedSiteModules.{max uC vC r}
   ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
 
 /-- The existing internal Hom dual to the coefficient unit.
-Source: Stacks 0B8Q (blueprint: lem-pur-sheaf-line-evaluation-inverse-pair). -/
+Source: Stacks 0B8Q. -/
 abbrev dual (P : Modules.{uC, vC, r} R) : Modules.{uC, vC, r} R :=
   homObj (R := R) P (𝟙_ (Modules.{uC, vC, r} R))
 
 /-- The image of a pure tensor under the sheafification unit and tensor comparison.
-Source: Stacks 03EK (blueprint: lem-pur-sheaf-line-evaluation-inverse-pair). -/
+Source: Stacks 03EK. -/
 def pureTensor (M N : Modules.{uC, vC, r} R) (U : Cᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) : (M ⊗ N).val.obj U :=
   (tensorObjIsoSheafification M N).inv.val.app U
@@ -97,18 +96,18 @@ def pureTensor (M N : Modules.{uC, vC, r} R) (U : Cᵒᵖ)
         (M.val ⊗ N.val)).app U (x ⊗ₜ[R.obj.obj U] y))
 
 /-- Reassociation, evaluation of the last two factors, and the right unitor.
-Source: Stacks 0B8N (blueprint: lem-pur-sheaf-line-evaluation-inverse-pair). -/
+Source: Stacks 0B8N. -/
 def cancellation (P Q : Modules.{uC, vC, r} R) (e : P ⊗ Q ≅ 𝟙_ (Modules.{uC, vC, r} R)) :
     tensorRight P ⋙ tensorRight Q ≅ 𝟭 (Modules.{uC, vC, r} R) :=
   (tensorRightTensor P Q).symm ≪≫ (tensoringRight (Modules.{uC, vC, r} R)).mapIso e ≪≫
     rightUnitorNatIso (Modules.{uC, vC, r} R)
 
 /-- Global ring sections, acting componentwise on module morphisms.
-Source: Stacks 04TT (blueprint: lem-pur-sheaf-line-evaluation-inverse-pair). -/
+Source: Stacks 04TT. -/
 abbrev scalars := RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)
 
 /-- The existing sectionwise scalar action, with no chosen linear structure.
-Source: Stacks 04TT (blueprint: lem-pur-sheaf-line-evaluation-inverse-pair). -/
+Source: Stacks 04TT. -/
 instance coefficientLinear : Linear (scalars.{uC, vC, r} R) (Modules.{uC, vC, r} R) :=
   homLinear R.obj ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).property
 
@@ -817,7 +816,6 @@ Linearity over global sections implies the asserted B-linearity by restriction a
 any ring homomorphism B → Γ(R); all displayed components are R-module morphisms.
 
 Source: Stacks Project, Modules on Sites, Tags 0B8Q and 0B8N.
-(blueprint: lem-pur-sheaf-line-evaluation-inverse-pair)
 
 Proof plan:
 1. On each trivializing slice write P = Rp. Restricting internal Hom is

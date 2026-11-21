@@ -17,7 +17,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 # Row-cycle lifts to a zig-zag
 
 Source: Stacks Project, Algebra, Lemma Tag 00M1, proof lines 18464--18481
-(blueprint: lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag).
 -/
 
 @[expose] public section
@@ -67,7 +66,7 @@ private theorem next_lift
   rw [← hh, hu]
   exact congrArg (fun f => f v) ((A.X (p - 1)).d_comp_d (q + 2) (q + 1) q)
 
-/-- (blueprint: lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag)
+/--
 In a first-quadrant homological double complex whose rows are exact in positive
 horizontal degrees, every cycle in the cokernel of the first horizontal map
 has a representative which extends to a zig-zag. The row-cokernel complex

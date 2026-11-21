@@ -12,8 +12,7 @@ import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # Scalar extension coordinates for exact affine stalk homology
 
-Source: Stacks Project, Tags 01I9 and 01AG.
-(blueprint: lem-pc-affine-stalk-scalar-extension-coordinates). -/
+Source: Stacks Project, Tags 01I9 and 01AG. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -199,7 +198,6 @@ variable [∀ Y : Scheme.{u},
 
 /-- Exact affine stalk homology in scalar-extension coordinates, natural for every
 module map into ordinary cohomology. Source: Stacks Project, Tags 01I9 and 01AG.
-(blueprint: lem-pc-affine-stalk-scalar-extension-coordinates).
 
 Proof: the structure-sheaf stalk D is the localization of A at p. For every
 A-module V, the map to the stalk of tilde V is a module localization. Its

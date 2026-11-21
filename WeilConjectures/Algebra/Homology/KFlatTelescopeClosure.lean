@@ -24,7 +24,7 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 # K-flatness and flatness under the telescope construction
 
 Source: Stacks Project, Cohomology on Sites, proof of Lemma 06YS, with Lemmas 06YQ,
-06YR and 07A3; Modules on Sites, Lemma 03EU (blueprint: lem-pc-kflat-closure).
+06YR and 07A3; Modules on Sites, Lemma 03EU.
 
 The site and module universes are those of the landed `SheafOfModules.IsFlat`
 (`C : Type u`, `Category.{u} C`, rings and modules in `u`).
@@ -92,7 +92,6 @@ private theorem isKFlat_coproduct_small
 cones, countable direct sums and sequential homotopy colimits; countable sums of flat
 sheaves of modules are flat.
 Source: Stacks Project, proof of Tag 06YS, Tags 06YQ, 06YR, 07A3 and 03EU
-(blueprint: lem-pc-kflat-closure).
 
 Proof:
 1. Apply `lem-pc-bounded-above-flat-kflat-site`: truncate an acyclic test complex above,

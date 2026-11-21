@@ -42,14 +42,13 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{da} A]
     H.mapDerivedCategory ⋙ R₂.mapDerivedCategory)
 
 /-- The evaluation comparison before proving invertibility is the actual derived mate.
-Source: Stacks 0FND (blueprint: lem-pur-extension-evaluation-comparison). -/
+Source: Stacks 0FND. -/
 def derivedExtensionMate :
     GD ⋙ d₂.derived ⟶ d₁.derived ⋙ H.mapDerivedCategory :=
   ((mateEquiv d₁.adjunction d₂.adjunction).symm (TwoSquare.mk _ _ _ _ τD))
 
 /-- A normalized derived mate has the prescribed cochain comparison.
 Source: Stacks 0FND and 09T5
-(blueprint: lem-pur-extension-evaluation-comparison).
 Proof: the ordinary unit-transpose identity holds degreewise on complexes. Apply
 the categorical derived-mate comparison to the two termwise adjunctions, their
 normalized derived pairs, and the canonical exact-functor factorization isomorphisms. -/
@@ -112,7 +111,6 @@ variable
 include τ hτ ι hι in
 /-- The evaluation mate is invertible when the two normalized models compute on a
 common resolving class. Source: Stacks 06YT and 09T5
-(blueprint: lem-pur-extension-evaluation-comparison).
 Proof: on a resolving complex its representative formula has invertible factors,
 so cancellation makes the mate invertible. Every complex admits a quasi-isomorphic
 resolving representative, and every derived object is isomorphic to a localized
@@ -149,8 +147,7 @@ theorem derivedExtensionMate_isIso
   exact NatIso.isIso_of_isIso_app α
 
 /-- The evaluated derived extension is identified with the level derived tensor by
-the inverse of its normalized mate. Source: Stacks 0FND and 06YT
-(blueprint: lem-pur-extension-evaluation-comparison). -/
+the inverse of its normalized mate. Source: Stacks 0FND and 06YT -/
 def derivedExtensionEvaluationIso
     (γ : (DerivedCategory.Q (C := A)) ⋙ GD ≅
       G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
@@ -177,7 +174,7 @@ def derivedExtensionEvaluationIso
   exact (asIso (derivedExtensionMate d₁ d₂ H GD τD)).symm
 
 /-- The evaluated derived comparison intertwines the actual adjunction transposes.
-Source: Stacks 0FND (blueprint: lem-pur-extension-evaluation-comparison).
+Source: Stacks 0FND.
 Proof: the inverse comparison is the mate of the right square by construction.
 Apply the general mate-transpose identity. -/
 theorem derivedExtensionEvaluationIso_transpose

@@ -15,7 +15,6 @@ public import WeilConjectures.Algebra.Homology.BaseLocalizationMap
 /-! Ordinary comparison square for base localization.
 
 Source: Stacks Project, perfect.tex, Tags 0DJ8 and 06Y6.
-(blueprint: lem-pc-base-localization-ordinary-comparison).
 -/
 
 @[expose] public section
@@ -46,7 +45,6 @@ omit [Algebra A D] [Algebra B D] tAD tBD tApD tBpD in
 include tRpA tRpB in
 /-- Ordinary comparison commutes with localization of the tensor base.
 Source: Stacks Project, perfect.tex, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-base-localization-ordinary-comparison).
 
 Proof: compose restriction-of-scalars composition with the ordinary localization
 isomorphism `baseLocalizationTensorIso`, and conjugate by the two ordinaryIso

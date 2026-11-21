@@ -28,7 +28,6 @@ namespace ModuleCat
 
 /-- The Ext-colimit computes the right derived functors of ideal-power torsion.
 Source: Stacks Project, Tag 0954, Lemma 47.8.2.
-(blueprint: lem-sbc-local-cohomology-derived-torsion).
 
 Proof: Choose an injective resolution M → E. For each n, compute Mathlib's
 projectively defined Ext by a projective resolution P of R/J^n. The first-quadrant

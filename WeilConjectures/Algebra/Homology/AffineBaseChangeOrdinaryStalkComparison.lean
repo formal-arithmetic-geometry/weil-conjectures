@@ -12,8 +12,7 @@ import WeilConjectures.Algebra.Homology.AffineLocalizedTensorStalkSquare
 
 /-! # AffineBaseChangeOrdinaryStalkComparison
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-ordinary-stalk-comparison). -/
+Source: Stacks Project, Tag 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -31,7 +30,6 @@ variable [∀ Y : Scheme.{u},
 /-- Localize the tensor comparison before passing through the derived pullback counit.
 Source: Stacks Project, Tag 0DJ8, affine displayed localization identity;
 Tags 06Y6, 01HV and 01I9.
-(blueprint: lem-pc-affine-base-change-ordinary-stalk-comparison).
 
 Proof: the cartesian spectrum square identifies A tensor_R R' with A'. Contract
 p to the other three rings. Their structure-sheaf stalk maps are localizations at

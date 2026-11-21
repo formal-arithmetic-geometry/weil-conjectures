@@ -18,7 +18,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorTriangulated
 /-! # Exact tensor-comparison rows for a chain-level mapping cone
 
 Source: Stacks Project, Tags 06Y6, 0BYJ and 0DJA(1).
-(blueprint: lem-pc-localized-tensor-comparison-cone-rows).
 -/
 
 @[expose] public section
@@ -69,8 +68,7 @@ shifted P1 summands they commute with projection as well: the same Koszul sign
 occurs on both sides. Thus taking homology gives the four displayed squares,
 including the connecting square. This argument concerns an actual chain map
 and its cone, not unrelated exact rows or arbitrary derived representatives.
-Zero rings, zero maps, split cones and unbounded complexes require no changes.
-(blueprint: lem-pc-localized-tensor-comparison-cone-rows). -/
+Zero rings, zero maps, split cones and unbounded complexes require no changes. -/
 theorem exists_localizedTensorComparison_cone_rows
     (hC : Module.Flat (A ⊗[R] B) C)
     (P₁ P₂ : CochainComplex (ModuleCat.{u} A) ℤ) (f : P₁ ⟶ P₂)

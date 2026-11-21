@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
 # Section projections respect the external Hom differential
 
 Source: Stacks Project, Tag 0A8X, differential of the Hom complex.
-(blueprint: lem-pur-hom-complex-sections-cochains-comm)
 -/
 
 @[expose] public section
@@ -71,7 +70,6 @@ private lemma section_sub_units_component
 
 /-- Any degreewise identification given by the section projections respects differentials.
 Source: Stacks Project, Tag 0A8X, differential of the Hom complex; Tag 0A8Y.
-(blueprint: lem-pur-hom-complex-sections-cochains-comm)
 
 Proof: compare the two external cochains on each component p,q with p+j=q.
 For j=i+1, apply the differential projection identity of homComplex_exists at

@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorModelQuasiIsoComparison
 /-! # Localized tensor comparison for the unit
 
 Source: Stacks Project, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-localized-tensor-comparison-unit).
 -/
 
 @[expose] public section
@@ -59,8 +58,7 @@ its naturality gives commuting cohomology squares. The same scalar-action
 argument makes their source maps A tensor_R B-linear isomorphisms. After
 extension to C, the localized_eq equations give the comparison squares.
 Invertibility for S transports along both roof legs to U, for every model
-and every degree. No flatness of C is used; all transports are isomorphisms.
-(blueprint: lem-pc-localized-tensor-comparison-unit). -/
+and every degree. No flatness of C is used; all transports are isomorphisms. -/
 theorem localizedTensorComparisonProperty_unit
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)

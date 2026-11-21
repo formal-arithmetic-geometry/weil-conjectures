@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorAcyclic
 # Extension of scalars of acyclic K-flat complexes
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YT and 06YY.
-(blueprint: lem-pur-change-of-rings-acyclic-kflat).
 -/
 
 @[expose] public section
@@ -46,8 +45,7 @@ therefore reflects acyclicity. Finally the equalities h and hm give the natural
 isomorphism from E to extension of scalars (naturality is exactly hm), and its
 termwise complex isomorphism transports acyclicity. No flatness of O' is required.
 The zero complex and the zero ring also satisfy the argument: all their relevant
-cohomology sheaves vanish.
-(blueprint: lem-pur-change-of-rings-acyclic-kflat) -/
+cohomology sheaves vanish. -/
 theorem changeOfRings_acyclic_of_isKFlat
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]

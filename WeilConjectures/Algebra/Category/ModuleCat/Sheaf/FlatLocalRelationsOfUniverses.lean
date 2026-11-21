@@ -40,7 +40,6 @@ variable {R : Type*} [CommRing R] {M : Type*} [AddCommGroup M] [Module R M]
 /-- A finite tensor relation has coefficient identities that remain valid after
 arbitrary scalar restriction. Source: the proof of the finite tensor vanishing
 criterion, Stacks Project, Algebra, Tag 04VX
-(auxiliary; not a blueprint node).
 
 Proof: Commute the vanishing tensor sum and place its second factors in their
 finitely generated span. Tensor vanishing holds in a larger finitely generated
@@ -392,7 +391,6 @@ namespace SheafOfModules
 /-- Every finite relation between sections of a flat module sheaf is locally trivial.
 Source: Stacks Project, Modules on Sites, Tag 08FC, implication (1) to (2), and
 Tag 04VX for the finite tensor-vanishing criterion
-(auxiliary; not a blueprint node).
 
 Proof: For each V let T(V) be the coefficient n-tuples over V, lifted to the
 module universe, and let Q(V) be the free module on T(V). Its restriction sends

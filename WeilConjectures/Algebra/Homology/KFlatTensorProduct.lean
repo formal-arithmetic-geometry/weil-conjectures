@@ -17,7 +17,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 # Tensor products of K-flat complexes
 
 Source: Stacks Project, Cohomology, Lemma 079R
-(blueprint: lem-pc-kflat-tensor-product).
 -/
 
 @[expose] public section
@@ -37,7 +36,7 @@ noncomputable local instance instMonoidalCategoryModulesOfKFlatTensorProduct : M
       (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)) :=
   SheafOfModules.monoidalCategory X.sheaf
 
-/-- (blueprint: lem-pc-kflat-tensor-product) Stacks Project, Cohomology, Lemma 079R.
+/-- Stacks Project, Cohomology, Lemma 079R.
 Let `(X, O_X)` be a ringed space. The total tensor product `Tot(K ⊗_{O_X} L)` of two K-flat
 complexes of `O_X`-modules is K-flat.
 

@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.HomComplexGlobalCochains
 
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.8 (Tag 0A96),
 `sites-cohomology-lemma-RHom-from-K-flat-into-K-injective`
-(blueprint: lem-pur-hom-kflat-into-kinjective).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 256 in
 /-- The sheaf Hom complex from a K-flat complex into a K-injective complex is K-injective.
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.8 (Tag 0A96)
-(blueprint: lem-pur-hom-kflat-into-kinjective).
 
 Proof: let `K` be any acyclic complex of sheaves of modules. K-flatness of `L`
 (`def-pc-kflat-complex`) makes `Tot(K ⊗ L)` acyclic. The tensor-Hom isomorphism

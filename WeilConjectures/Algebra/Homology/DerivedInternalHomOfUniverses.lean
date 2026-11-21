@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
 /-! # Derived internal Hom without identifying the site universes
 
 Source: Stacks Project, Sections 08J7, 0A8X and 07A5
-(auxiliary; not a blueprint node).
 This is the same Hom-complex localization as derivedInternalHom, with the module
 universe large enough to contain the site objects and arrows independently.
 The ordinary-etale fixed-coefficient specialization is also publicly available through
@@ -33,7 +32,6 @@ namespace CategoryTheory
 /-- The usual Hom-complex bifunctor with functorial K-injective replacement
 inverts quasi-isomorphisms in each variable.
 Source: Stacks Project, Section 08J7, Lemma 0A95
-(auxiliary; not a blueprint node).
 Proof:
 1. Factor a pair of quasi-isomorphisms into its two separate variable maps.
 2. Naturality of η and two-out-of-three show that I sends quasi-isomorphisms
@@ -86,8 +84,7 @@ theorem derivedInternalHomOfUniverses_inverts
 
 /-- Derived internal Hom on the full module derived category, computed with the
 canonical functorial K-injective replacement in its second variable.
-Source: Stacks Project, Sections 08J7, 0A8X and 07A5
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Sections 08J7, 0A8X and 07A5 -/
 noncomputable def derivedInternalHomOfUniverses
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]
@@ -117,7 +114,6 @@ noncomputable def derivedInternalHomOfUniverses
 
 /-- Comparison with any functorial K-injective replacement, naturally in both variables.
 Source: Stacks Project, Section 08J7 and Lemma 0A95
-(auxiliary; not a blueprint node).
 Proof:
 1. For the canonical replacement I₀ used in the definition, apply Localization.fac.
 2. For another replacement I compare both through I(I₀(M)). Naturality and
@@ -194,7 +190,6 @@ theorem derivedInternalHomOfUniverses_comparison
 
 /-- Independence of the source representative and of any K-injective target representative.
 Source: Stacks Project, Section 08J7 and Lemma 0A95
-(auxiliary; not a blueprint node).
 Proof:
 1. Apply derivedInternalHomOfUniverses_comparison to the canonical replacement I₀
    and evaluate at (op Lc, Ic).

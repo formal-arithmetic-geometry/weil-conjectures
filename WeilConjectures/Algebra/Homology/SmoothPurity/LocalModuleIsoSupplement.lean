@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.LocalModuleIso
 /-! # Local isomorphisms of module sheaves
 
 Source: Stacks Project, Modules on Sites, Tag 093T, inverse-pair description.
-(blueprint: lem-sf-local-module-isom-sheaf).
 -/
 
 @[expose] public noncomputable section

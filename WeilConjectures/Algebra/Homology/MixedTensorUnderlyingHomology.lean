@@ -16,7 +16,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 /-! # Underlying additive homology of mixed total tensors
 
 Source: Stacks Project, Tag 06Y6, the ordinary balanced tensor identifications.
-(blueprint: new-lem-pc-mixed-tensor-underlying-homology).
 -/
 
 @[expose] public section
@@ -433,7 +432,6 @@ private theorem homComp_scalar (R A : Type u)
 /-- The mixed total tensor has the ordinary underlying R-tensor homology, naturally
 for maps specified on diagonal pure tensors, and compatibly with first-factor scalars.
 Source: Stacks Project, Tag 06Y6, ordinary balanced tensor identifications.
-(blueprint: new-lem-pc-mixed-tensor-underlying-homology).
 
 Proof: on modules the map x tensor_R y -> x tensor_A (1 tensor_R y)
 is an R-linear isomorphism to the restriction of M tensor_A (A tensor_R N).

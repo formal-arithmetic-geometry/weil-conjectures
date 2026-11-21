@@ -32,8 +32,7 @@ Source: Stacks 0941, strict systems as modules on the sequence site.
 Proof: use the equivalence between sequence modules and strict semilinear systems.
 In degree i the finite maps form a system morphism by the horizontal equation.
 Their chain equations hold at every level, hence in the system category. Full
-faithfulness of the equivalence lifts this chain map uniquely to sequence modules.
-(blueprint: lem-coef-sequence-complex-hom-assembly). -/
+faithfulness of the equivalence lifts this chain map uniquely to sequence modules. -/
 theorem sequenceComplexHom_existsUnique
     (X Y : CochainComplex (systemSequenceModules B) ℤ)
     (f : ∀ n : ℕ,

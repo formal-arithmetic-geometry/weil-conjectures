@@ -36,8 +36,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
 
 /-- The ordinary evaluation comparison is the identity on the prescribed level
-objects. Source: theorem-sp-qbar, proof (2), open evaluation
-(blueprint: lem-pur-native-open-finite-evaluation). -/
+objects. Source: theorem-sp-qbar, proof (2), open evaluation -/
 def SliceSystemExtensionPresentation.evaluationIso
     (P : SliceSystemExtensionPresentation.{c, v, r} B U) (n : ℕ) :
     P.F ⋙ systemEvaluation.{c, v, max c v r} B n ≅
@@ -72,7 +71,6 @@ private theorem sliceExtension_map_exact
 
 /-- Extension is exact on whole strict systems, as detected by ordinary evaluation.
 Source: theorem-sp-qbar, proof (2), exact open factor
-(blueprint: lem-pur-native-open-finite-evaluation).
 Proof: the evaluation comparison identifies each component with exact slice
 extension. Exact evaluation and the componentwise isomorphism criterion jointly
 detect exact short complexes. The abelian exactness criterion gives both finite
@@ -93,7 +91,7 @@ transition, including equal levels. Thus this is a map of whole derived systems.
 For the purity application B is the diagram of section rings of the pulled-back
 continuous condensed O_E/ell^(n+1), and U is the open object of a compactification.
 Source: current blueprint theorem-sp-qbar, proof (2), open factor;
-Stacks 03DI and 03DJ (blueprint: lem-pur-native-open-finite-evaluation).
+Stacks 03DI and 03DJ.
 
 Proof: construct ordinary strict extension by direct sums and sheafification.
 Its transitions extend the input transitions on each original summand, so their

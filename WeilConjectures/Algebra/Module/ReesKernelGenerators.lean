@@ -26,7 +26,6 @@ open Classical in
 /-- A graded submodule of a finite Rees module is generated in bounded degree.
 Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, proof of (3), the paragraph
 choosing homogeneous generators of the graded kernel.
-(blueprint: lem-weil-pbc-rees-kernel-bounded-generators).
 
 Proof: Form the submodule K of the direct sum consisting of elements whose n-th
 component lies in K_n. The convolution formula and hK show that K is closed under

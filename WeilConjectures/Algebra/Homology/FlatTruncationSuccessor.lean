@@ -20,7 +20,6 @@ import WeilConjectures.Algebra.Homology.FlatAugmentationEpicification
 
 Source: Stacks Project, Derived Categories, Lemma 06XX, induction step;
 Cohomology on Sites, Lemma 077J
-(blueprint: lem-pc-flat-truncation-successor).
 -/
 
 @[expose] public section
@@ -39,7 +38,6 @@ it does not assert the existence of an infinite tower.
 
 Source: Stacks Project, Derived Categories, Lemma 06XX, induction step, specialized
 as in Cohomology on Sites, Lemma 077J
-(blueprint: lem-pc-flat-truncation-successor).
 
 Proof: Compose q with the inclusion j from the n-th to the (n+1)-st good truncation
 and form its mapping cone C. Both its source and target are bounded above, so C is

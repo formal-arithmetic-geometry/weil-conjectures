@@ -8,8 +8,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.SecondLocalizationMap
 /-! # Naturality for second localization
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-second-localization-naturality). -/
+Source: Stacks Project, Tags 06Y6 and 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -39,7 +38,6 @@ set_option linter.unusedSectionVars false in
 include tRB tAD tBD tApD tBpD tBBpD in
 /-- Naturality of the characterized coefficient map on arbitrary models.
 Source: Stacks Project, Tag 06Y6; Tag 0DJ8.
-(blueprint: lem-pc-second-localization-naturality).
 
 Proof: leftDerived_ext applied to the target model K' proves that the derived
 lift for L followed by epsilon equals delta extended to Bp followed by the

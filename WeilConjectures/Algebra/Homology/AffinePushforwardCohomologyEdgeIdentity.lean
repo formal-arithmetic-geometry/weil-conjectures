@@ -26,7 +26,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine edge equation for the canonical representative. The proof is the
 identity-representative part of the affine cohomology edge construction, using
 Stacks Project, perfect.tex, Tags 0AVW and 08D4.
-(blueprint: lem-pc-affine-pushforward-cohomology-edge-identity).
 
 Proof: construct the edge transformation from the sheaf-level edge, the supplied
 ordinary comparison, and the tilde/Gamma counit. Exactness of tilde identifies

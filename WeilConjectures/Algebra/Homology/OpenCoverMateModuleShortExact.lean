@@ -32,7 +32,6 @@ The caller supplies a proof that the displayed composite is zero.
 
 Source: Stacks Project, Cohomology, Tag 08BU (the short exact sequence in the
 proof), and Tag 00A7 (extension-by-zero adjunction and stalks).
-(blueprint: lem-sc-open-cover-mate-module-short-exact).
 
 Proof: Use the extension-by-zero functors constructed by extensionByZeroPresheaf
 followed by module sheafification. Their adjunctions exist by the exact localized

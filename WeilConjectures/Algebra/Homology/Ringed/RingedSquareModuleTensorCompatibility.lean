@@ -200,8 +200,7 @@ scalar multiples, linearity extends it to sums, and the tensor and sheafificatio
 universal properties give equality of module-sheaf morphisms. Structural ring
 maps need not be flat; the same calculation works for zero rings and zero modules.
 Source: Stacks, Cohomology on Sites, Tag 07A4 (lemma-pullback-tensor-product),
-and the tensor part of Tag 0E48 (remark-compatible-with-diagram).
-(blueprint: lem-weil-pbc-ringed-square-module-tensor-compatibility). -/
+and the tensor part of Tag 0E48 (remark-compatible-with-diagram). -/
 theorem ringedSquareModuleTensorCompatibility
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (M N : SheafOfModules.{u}

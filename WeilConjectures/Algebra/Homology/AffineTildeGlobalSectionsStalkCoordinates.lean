@@ -11,8 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.AffineDerivedCohomologyPresentation
 
 /-! # Global sections and stalk coordinates for an affine tilde presentation
 
-Source: Stacks Project, Tags 01HV and 01I9.
-(blueprint: new-lem-pc-affine-tilde-global-sections-stalk-coordinates). -/
+Source: Stacks Project, Tags 01HV and 01I9. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -28,7 +27,6 @@ variable [∀ Y : Scheme.{u},
 
 /-- The localization of global sections of a tilde presentation agrees with its stalk map.
 Source: Stacks Project, Tags 01HV and 01I9.
-(blueprint: new-lem-pc-affine-tilde-global-sections-stalk-coordinates).
 Proof: the tilde stalk localization is natural for module maps: check on numerators
 using naturality of germs, then use the localization universal property. Apply it
 to the global-sections map composed with the tilde/global-sections unit. Naturality

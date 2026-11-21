@@ -112,7 +112,6 @@ import all Mathlib.CategoryTheory.Localization.CalculusOfFractions
 /-! # The canonical inverse-image coefficient comparison
 
 Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 0G7E and 07A6
-(blueprint: lem-pur-coefficient-pullback-comparison).
 -/
 
 -- After pruning, this module only keeps private declarations.

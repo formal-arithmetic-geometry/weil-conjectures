@@ -20,7 +20,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 Source: Stacks Project, Derived Categories, Lemma 06XX, triangle and homotopy
 correction part of the induction step.
-(blueprint: lem-pc-relative-flat-extension).
 -/
 
 @[expose] public section
@@ -235,7 +234,6 @@ Termwise epimorphy of the new resolution is not asserted here.
 
 Source: Stacks Project, Derived Categories, Lemma 06XX, triangle construction
 and homotopy correction (https://stacks.math.columbia.edu/tag/06XX).
-(blueprint: lem-pc-relative-flat-extension).
 
 Proof: The prescribed quasi-isomorphism r : Q -> Cone(f), followed by the
 cone projection to E[1], determines a triangle

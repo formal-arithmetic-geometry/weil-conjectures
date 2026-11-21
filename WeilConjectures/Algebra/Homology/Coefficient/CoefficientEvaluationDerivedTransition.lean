@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Localization.Predicate
 # Localizing the transitions of coefficient systems
 
 Source: Zheng, Construction 4.1, p. 21, the transition morphisms of a complex of systems.
-(blueprint: lem-pur-coefficient-evaluation-derived-transition).
 -/
 
 @[expose] public noncomputable section
@@ -43,7 +42,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Strict system transitions descend with their specified comparison equation.
 Source: Zheng, Construction 4.1, p. 21
-(blueprint: lem-pur-coefficient-evaluation-derived-transition).
 Proof: conjugate the termwise strict transition by the evaluation and scalar-restriction
 localization comparisons. This is a natural transformation between the composites of
 the required derived functors with localization. Precomposition with localization is

@@ -12,8 +12,7 @@ public import WeilConjectures.Blowup.QuasiAffineGeneral
 # Conrad's Theorem 2.4, general case: the closed graph is quasi-finite over the blow-up
 
 This file proves the construction half of the General Case of Theorem 2.4 in Conrad's
-*Deligne's notes on Nagata compactifications* (blueprint:
-`lemma:nagata-conrad-graph-closure-quasi-finite`): for a separated morphism `p : Y ⟶ X`
+*Deligne's notes on Nagata compactifications*: for a separated morphism `p : Y ⟶ X`
 locally of finite type between qcqs schemes and a section `f` of `p` over a quasi-compact
 open `U` whose image is closed over a larger quasi-compact open `V`, there is a
 `V`-admissible blow-up `q : X̃ ⟶ X` such that the scheme-theoretic image of the graph
@@ -47,7 +46,6 @@ over `X`, and the closed graph of `g_Z` pulls back to a closed subset of the ope
 `Y ×[X] X̃` and the closure of the range of `F` meets each of them inside the corresponding
 section, the fibres of `F(U)‾ ⟶ X̃` are finite, whence
 `AlgebraicGeometry.LocallyQuasiFinite.of_finite_preimage_singleton` applies.
-
 -/
 
 @[expose] public section
@@ -254,7 +252,7 @@ theorem exists_isAdmissible_extend_of_isAffineOpen_of_le
     _ = (f ⁻¹ᵁ Z).ι ≫ f := by rw [hid, Category.id_comp, morphismRestrict_ι]
 
 /-- **Conrad's Theorem 2.4, General Case: the closed graph is quasi-finite over the
-blow-up** (blueprint: `lemma:nagata-conrad-graph-closure-quasi-finite`).
+blow-up**.
 
 "Quasi-finite and separated over `X̃`" is spelled out as the four properties
 `LocallyQuasiFinite`, `LocallyOfFiniteType`, `IsSeparated` and `QuasiCompact` of

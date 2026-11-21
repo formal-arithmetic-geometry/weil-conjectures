@@ -14,7 +14,6 @@ public import Mathlib.RingTheory.Flat.CategoryTheory
 # Bounded flat models of complexes of modules of finite Tor amplitude
 
 Source: Stacks Project, More on Algebra, Lemma 15.59.3 (Tag 0654)
-(blueprint: lem-pc-module-tor-amplitude-flat-model).
 -/
 
 @[expose] public section
@@ -27,7 +26,7 @@ namespace DerivedCategory
 
 -- The fixed interface includes `hab`; the generic equivalence needs no interval ordering.
 set_option linter.unusedVariables false in
-/-- (blueprint: lem-pc-module-tor-amplitude-flat-model) Stacks Project, More on Algebra,
+/-- Stacks Project, More on Algebra,
 Lemma 15.59.3 (Tag 0654): for a commutative ring `A`, a cochain complex `M` of `A`-modules and
 integers `a ≤ b`, the complex `M` has Tor amplitude in `[a, b]` (that is,
 `H^i(M ⊗ᴸ_A N) = 0` for every `A`-module `N` and every `i ∉ [a, b]`) if and only if there is a

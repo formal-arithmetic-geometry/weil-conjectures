@@ -27,7 +27,6 @@ variable [∀ Y : Scheme.{u},
 asserting that it is invertible. The ordinary comparison σ is supplied, not chosen.
 Source: Stacks Project, perfect.tex, lemma-affine-morphism-equivalence (Tag 0AVW),
 and perfect.tex, lemma-application-nice-K-injective (Tag 08D4).
-(blueprint: lem-pc-affine-pushforward-cohomology-edge-exists).
 
 Proof: Resolve a quasi-coherent derived object by a K-injective complex. On inverse
 images of affine opens use the cycle-to-cohomology-class map and the truncation

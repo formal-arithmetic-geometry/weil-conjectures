@@ -65,7 +65,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A columnwise quasi-isomorphism of double complexes uniformly bounded below in both
 coordinates is a quasi-isomorphism on coproduct total complexes.
 Source: Stacks Project, Homology, Tags 012X and 0132.
-(auxiliary; not a blueprint node).
 
 Proof: in total homology degree n discard columns p>M=n-Q+1. The projection changes
 none of the three terms computing that homology: every discarded summand has q<Q
@@ -121,7 +120,6 @@ theorem quasiIso_totalMap_of_boundedBelow_columns
 set_option backward.isDefEq.respectTransparency false in
 /-- The transposed form of bounded-below column comparison.
 Source: Stacks Project, Tag 0133, using signed symmetry of total complexes.
-(auxiliary; not a blueprint node).
 Proof: flip both bicomplexes, apply column comparison, and conjugate by the
 natural signed total-flip isomorphisms. -/
 theorem quasiIso_totalMap_of_boundedBelow_rows

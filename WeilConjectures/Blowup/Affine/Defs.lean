@@ -57,14 +57,13 @@ namespace AlgebraicGeometry
 variable {A : Type u} [CommRing A] (I : Ideal A)
 
 /-- The blow-up of `Spec A` along the ideal `I`, defined as `Proj` of the Rees algebra
-of `I`. (blueprint: `def:nagata-affine-blowup`) -/
+of `I`. -/
 noncomputable def AffineBlowup : Scheme.{u} :=
   Proj (reesGrading I)
 
 namespace AffineBlowup
 
-/-- The structure morphism `Bl_I (Spec A) ⟶ Spec A` of the affine blow-up.
-(blueprint: `def:nagata-affine-blowup`) -/
+/-- The structure morphism `Bl_I (Spec A) ⟶ Spec A` of the affine blow-up. -/
 noncomputable def toSpec : AffineBlowup I ⟶ Spec (.of A) :=
   Proj.toSpecZero (reesGrading I) ≫
     Spec.map (CommRingCat.ofHom (reesGradingZero I).toRingHom)
@@ -76,8 +75,7 @@ noncomputable def awayAlgebraMap (x : reesAlgebra I) :
   (fromZeroRingHom (reesGrading I) (Submonoid.powers x)).comp
     (reesGradingZero I).toRingHom
 
-/-- The affine chart of the blow-up at a degree-one element `x` of the Rees algebra.
-(blueprint: `prop:nagata-affine-blowup-chart`) -/
+/-- The affine chart of the blow-up at a degree-one element `x` of the Rees algebra. -/
 noncomputable def chart (x : reesAlgebra I) (hx : x ∈ reesGrading I 1) :
     Spec (.of (HomogeneousLocalization.Away (reesGrading I) x)) ⟶ AffineBlowup I :=
   Proj.awayι (reesGrading I) x hx one_pos
@@ -96,8 +94,7 @@ lemma chart_toSpec (x : reesAlgebra I) (hx : x ∈ reesGrading I 1) :
   unfold chart toSpec awayAlgebraMap
   rw [Proj.awayι_toSpecZero_assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
 
-/-- The basic opens at the degree-one elements `a·X`, `a ∈ I` cover the blow-up.
-(blueprint: `lemma:nagata-rees-generators-cover-proj`) -/
+/-- The basic opens at the degree-one elements `a·X`, `a ∈ I` cover the blow-up. -/
 lemma iSup_basicOpen_reesX_eq_top :
     ⨆ a : I, Proj.basicOpen (reesGrading I) (reesX I a a.2) = ⊤ :=
   Proj.iSup_basicOpen_eq_top (reesGrading I) (fun a : I ↦ reesX I a a.2)
@@ -199,8 +196,7 @@ theorem isIso_toSpec_of_eq_span (ha : a ∈ I) (h : I = Ideal.span {a})
     simpa using bijective_awayAlgebraMap_of_eq_span ha h hreg
   exact IsIso.of_isIso_comp_left (chart I (reesX I a ha) (reesX_mem I a ha)) (toSpec I)
 
-/-- **Blowing up an already-invertible centre is an isomorphism**, affine case.
-(blueprint: part of `cor:nagata-blowup-cartier-iso`) -/
+/-- **Blowing up an already-invertible centre is an isomorphism**, affine case. -/
 theorem isIso_toSpec_of_isRegularPrincipal (hI : I.IsRegularPrincipal) : IsIso (toSpec I) := by
   obtain ⟨s, hs, rfl⟩ := hI
   exact isIso_toSpec_of_eq_span (Ideal.mem_span_singleton_self s) rfl hs
@@ -221,8 +217,7 @@ lemma bijective_awayAlgebraMap_of_eq_top (h : I = ⊤) :
     Function.Bijective (awayAlgebraMap I (reesX I 1 (by rw [h]; trivial))) :=
   bijective_awayAlgebraMap_of_eq_span _ (by rw [h, Ideal.span_singleton_one]) (one_mem _)
 
-/-- The blow-up of the unit ideal is trivial: the structure morphism is an isomorphism.
-(blueprint: `lemma:nagata-affine-blowup-top`) -/
+/-- The blow-up of the unit ideal is trivial: the structure morphism is an isomorphism. -/
 theorem isIso_toSpec_of_eq_top (h : I = ⊤) : IsIso (toSpec I) :=
   isIso_toSpec_of_eq_span (a := 1) (by rw [h]; trivial)
     (by rw [h, Ideal.span_singleton_one]) (one_mem _)

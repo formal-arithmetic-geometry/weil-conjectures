@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise
 /-! # Canonical descent of a single finitely presented module map
 
 Source: Stacks Project, Algebra Tag 05N7 (2), used in Perfect Tag 09RE (1).
-(blueprint: lem-pc-fp-module-map-canonical-preorder)
 -/
 
 @[expose] public section
@@ -144,8 +143,7 @@ lift has the asserted conjugated extension, by linearity and generation by pure
 tensors. Only directedness and finite lists of coefficients and relations enter,
 so this argument works for a preorder, including mutually comparable distinct indices.
 If M or N is zero the same presentation argument applies, and the unique zero map
-also gives the result.
-(blueprint: lem-pc-fp-module-map-canonical-preorder) -/
+also gives the result. -/
 theorem finitePresentation_map_directedColimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I) (M N : ModuleCat.{u} (F.obj i₀))

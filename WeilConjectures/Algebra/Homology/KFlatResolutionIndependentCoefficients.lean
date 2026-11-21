@@ -22,7 +22,6 @@ import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 /-! # K-flat resolutions without identifying the site universes
 
 Source: Stacks Project, Cohomology on Sites, Tag 06YS
-(blueprint: lem-pc-kflat-resolution).
 -/
 
 @[expose] public section
@@ -423,7 +422,6 @@ private noncomputable def monoidalClosed_kfi : MonoidalClosed (SheafOfModules.{r
 
 /-- The sheafified tensor is closed at independent site and coefficient universes.
 Source: Stacks Project, Modules on Sites, Tag 03EO
-(blueprint: lem-pc-sheaf-modules-tensor-closed).
 
 Proof: the already constructed small internal Hom represents the tensor-Hom
 adjunction. Package that adjunction as the existing closed monoidal structure. -/
@@ -474,8 +472,7 @@ private noncomputable def tensorSheafificationIso_kfi
       (Functor.Monoidal.commTensorRight a F)
 
 /-- The canonical free-presheaf cover gives functorial categorical flat resolutions.
-Source: Stacks Project, Tag 03EW; used for the independent-coefficient K-flat resolution
-(blueprint: lem-pc-kflat-resolution). -/
+Source: Stacks Project, Tag 03EW; used for the independent-coefficient K-flat resolution -/
 theorem hasFunctorialFlatResolution_kfi : Abelian.HasFunctorialFlatResolution A := by
   let a := PresheafOfModules.sheafification.{r} (𝟙 (O).obj)
   let V := SheafOfModules.forget.{r} O ⋙ PresheafOfModules.restrictScalars (𝟙 (O).obj)
@@ -646,7 +643,7 @@ private theorem flat_epicification_kfi
 set_option synthInstance.maxSize 1024 in
 /-- Every complex has a K-flat resolution with flat terms and degreewise epimorphic
 augmentation. The site object and morphism universes are independent.
-Source: Stacks Tag 06YS (blueprint: lem-pc-kflat-resolution).
+Source: Stacks Tag 06YS.
 Proof:
 1. Choose the strictly compatible bounded-above flat replacement tower of the good
 truncations, with degreewise epimorphic quasi-isomorphisms q_n

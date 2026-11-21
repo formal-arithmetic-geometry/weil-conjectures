@@ -58,7 +58,6 @@ private theorem normalize_pivot
     abel
 
 /--
-(blueprint: new-residue-kernel-unit-minor-matrix-core)
 Matrix unit-minor normalization over a local ring, assuming the localized modules are free.
 Source: Stacks Project, Tags 00O0 and 00NX, matrix unit-minor argument.
 The proof chooses a maximal nonzero residue minor and performs elementary row

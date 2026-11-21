@@ -14,7 +14,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-! # Exact-row induction for a zero-component zig-zag
 
 Source: Stacks Project, Algebra, Tag 00M1 (`lemma-no-spectral-sequence`),
-injectivity argument. (blueprint: new-zigzag-zero-component-boundary).
+injectivity argument.
 -/
 
 @[expose] public section
@@ -79,7 +79,6 @@ private lemma boundary_single_lower
 
 Source: Stacks Project, Algebra, Tag 00M1 (`lemma-no-spectral-sequence`),
 injectivity argument, lines 18496--18504.
-(blueprint: new-zigzag-zero-component-boundary).
 
 Maintain a residual cycle whose components of horizontal index below `k` are
 zero, together with a tuple whose boundary is the difference from the original

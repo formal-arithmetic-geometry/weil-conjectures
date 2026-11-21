@@ -179,7 +179,6 @@ private lemma transpose_pre {A M M' N : Mod} (f : A ⟶ homObj (R := R) M N)
 
 /-- Internal Hom into a fixed sheaf takes any coproduct cofan to a product fan.
 Source: Stacks Project, Modules on Sites, Section 03EK and Lemma 03EO
-(blueprint: lem-sc-internal-hom-coproduct-fan).
 
 Proof: A map A → homObj M N defines a restriction-compatible bilinear pairing:
 evaluate its component at U and a section a at the identity object of the slice over U.

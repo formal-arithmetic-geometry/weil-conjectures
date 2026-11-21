@@ -281,7 +281,6 @@ private theorem inverse_tensor_source_unit
 -- The proof compares the algebraic and explicit site tensors through their unit sections.
 /-- Coefficient-identified pullback preserves tensor, with the source-unit normalization.
 Source: Stacks Project, Modules on Sites, Tag 03EL.
-(blueprint: lem-pur-signed-line-pullback-tensor)
 Proof: construct the algebraic inverse-image lift from its ring and module unit
 presentations. Apply the existing inverse-image tensor comparison. Its generalized
 pairing formula, evaluated on the unit of the product of the two underlying sheaves,

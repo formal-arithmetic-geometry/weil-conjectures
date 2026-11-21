@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 /-! # The first-page cycles and boundaries of a filtered complex
 
 Source: Stacks Project, Homology, Tag 012K
-(blueprint: lem-sp-filtered-complex-first-page-cycles-boundaries).
 -/
 
 @[expose] public section
@@ -121,7 +120,6 @@ private theorem step_next_image (F : DecreasingFiltration K) (p n : ℤ) :
 
 /-- The page-one cycle and boundary formulas.
 Source: Stacks Project, Tag 012K, displayed formulas and Lemma 12.24.2.
-(blueprint: lem-sp-filtered-complex-first-page-cycles-boundaries)
 
 Proof: Write m_n for the inclusion F^pK^n → K^n, l_n for the inclusion
 F^{p+1}K^n → F^pK^n and q_n for the graded projection. Evaluation of the cokernel

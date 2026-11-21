@@ -29,8 +29,7 @@ abelian presheaf stalk is zero. Mathlib's stalkFunctor_map_unit_toSheafify_isIso
 with the abelian stalk of the module sheafification: the underlying abelian sheafification is
 definitionally the same construction. Transport subsingletonness across this isomorphism and apply
 ModuleCat.isZero_iff_subsingleton. Source: Stacks Project, Sheaves Lemma 00A7 (3), via Lemma 00A5
-and Lemma 007Z.
-(blueprint: lem-sc-module-extension-by-zero-stalk-maps-outside) -/
+and Lemma 007Z. -/
 theorem moduleExtensionByZero_stalk_outside (X : RingedSpace.{u}) :
     (∀ (W : Opens X) (G : SheafOfModules.{u} ((moduleRings X).over W)) (x : X),
       x ∉ W → IsZero ((RingedSpace.moduleStalkFunctor X x).obj

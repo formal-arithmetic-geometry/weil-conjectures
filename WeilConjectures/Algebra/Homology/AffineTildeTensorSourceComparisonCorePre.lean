@@ -61,7 +61,6 @@ attribute [local irreducible] tilde tilde.functor Functor.mapDerivedCategory
 -- Comparing affine tensor units and counits requires substantial reduction.
 /-- The source counit comparison before the affine pushforward unit and square transport.
 Source: Stacks Project, Tags 06Y6, 08DW and 0AVW.
-(blueprint: lem-pc-affine-tilde-tensor-source-comparison).
 This is the strict precomparison used to construct the target source isomorphism. -/
 theorem affineTildeTensorSourcePrecomparison
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]

@@ -51,7 +51,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ)
 
 /-- Flat-term K-flat complexes resolve every level complex.
-Source: Stacks 06YS (blueprint: lem-pur-system-single-derived-extension).
+Source: Stacks 06YS.
 Proof: use the coefficient-universe K-flat resolution and convert its tensor-exact
 terms to the site-flat predicate using the tensor identification. -/
 theorem systemLevel_kFlatResolution (K : CochainComplex (systemLevel B n) ℤ) :
@@ -64,7 +64,6 @@ theorem systemLevel_kFlatResolution (K : CochainComplex (systemLevel B n) ℤ) :
 
 /-- The singleton extension preserves quasi-isomorphisms between its resolving objects.
 Source: Zheng 4.1; Stacks 06YT
-(blueprint: lem-pur-system-single-derived-extension).
 Proof: below n its evaluated complex is ordinary scalar extension, which preserves
 quasi-isomorphisms between K-flat objects. Above n both evaluated complexes vanish.
 Joint detection by exact evaluations then gives the strict quasi-isomorphism. -/
@@ -96,8 +95,7 @@ theorem systemSingle_preserves {K L : CochainComplex (systemLevel B n) ℤ} (f :
 
 /-- The determined normalized derivation of the fixed ordinary singleton adjunction.
 Keeping the selected derivation named prevents repeated reduction of its resolving-class
-construction when comparing fields. Source: Zheng 4.1; Stacks 06XN and 0FND
-(blueprint: lem-pur-system-single-derived-extension). -/
+construction when comparing fields. Source: Zheng 4.1; Stacks 06XN and 0FND -/
 @[irreducible]
 def systemSingleDerivation (S : SystemScalarAssignment (J := J))
     (T : SystemTensorCoherence S) :
@@ -110,7 +108,6 @@ def systemSingleDerivation (S : SystemScalarAssignment (J := J))
 
 /-- The ordinary singleton adjunction has its everywhere-defined normalized derived
 adjunction. Source: Zheng 4.1; Stacks 06XN and 0FND
-(blueprint: lem-pur-system-single-derived-extension).
 Proof: apply normalized derivation to the flat-term K-flat resolving class, using
 the preceding resolution and invariance lemmas. -/
 def systemSingleDerivedExtension (S : SystemScalarAssignment (J := J))

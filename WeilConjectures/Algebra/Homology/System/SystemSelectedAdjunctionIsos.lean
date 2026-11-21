@@ -11,7 +11,7 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 /-! # Isomorphisms in the selected-system adjunction
 
 Source: Zheng, Construction 4.1, and the selected-level calculation in the proof of
-exceptional integral scalar mates (blueprint: lem-pur-system-selected-adjunction-isos).
+exceptional integral scalar mates.
 -/
 
 @[expose] public noncomputable section

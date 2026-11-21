@@ -19,7 +19,6 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 # Symmetry of Tor for modules over a commutative ring
 
 Source: Stacks Project, Algebra, Lemma Tag 00M3.
-(blueprint: lem-weil-pbc-tor-symmetry).
 -/
 
 @[expose] public section
@@ -61,7 +60,6 @@ private theorem tor_resolution_naturality
 The components of the natural isomorphism are isomorphisms of `R`-modules.
 
 Source: Stacks Project, Algebra, Lemma Tag 00M3 (lemma-tor-left-right).
-(blueprint: lem-weil-pbc-tor-symmetry)
 
 Proof: Form the tensor bicomplex of chosen projective resolutions. Its rows and columns
 are exact in positive degrees by flatness of projective modules. Identify the column

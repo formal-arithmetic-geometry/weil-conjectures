@@ -43,7 +43,6 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
 
 /-- Unit-preserving presentations make the existing pullback an algebraic inverse image.
 Source: Stacks Project, Modules on Sites, Tag 03D2.
-(blueprint: lem-pur-signed-line-algebraic-pullback)
 Proof: use the ring presentation and the natural module presentation for the underlying
 isomorphisms. Ring addition and multiplication and module addition and scalar multiplication
 are maps of sheaves of sets. Their compatibility on source units follows from the ring-map

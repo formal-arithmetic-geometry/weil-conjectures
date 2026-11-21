@@ -29,7 +29,6 @@ namespace CochainComplex
 set_option backward.isDefEq.respectTransparency false in
 /-- Homotopy classes of module-complex maps are degree-zero module Hom homology.
 Source: Stacks Project, Tag 0A8H; Mathlib HomComplexCohomology.
-(blueprint: lem-sc-module-hom-complex-quotient)
 
 Proof: Forget the module structure on the Hom complex. This gives Mathlib's
 abelian-group Hom complex, with the same cochains and differential. The forgetful

@@ -87,8 +87,7 @@ private theorem indexedStage_step (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     rw [hd, tower]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Evaluate a pullback over a kernel, using the canonical limit comparisons.
-(blueprint: def-tower-canonical-comparison-g3). -/
+/-- Evaluate a pullback over a kernel, using the canonical limit comparisons. -/
 noncomputable def evaluatedPullbackIso {X Y Y' Z : B ⥤ A}
     (f : X ⟶ Z) (d : Y ⟶ Y') (e : Y ⟶ Z) (b : B) :
     (pullback f (kernel.ι d ≫ e)).obj b ≅
@@ -124,16 +123,14 @@ private theorem evaluatedPullbackIso_snd {X Y Y' Z : B ⥤ A}
   rw [hk, ← Category.assoc]
   simpa only [evaluation_obj_map, NatTrans.comp_app] using hp =≫ (kernel.ι d).app b
 
-/-- The functor-category pullback used at degree `i`.
-(blueprint: def-tower-canonical-comparison-g3). -/
+/-- The functor-category pullback used at degree `i`. -/
 noncomputable def indexedPullback (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     (F : B ⥤ CochainComplex A ℤ) (N i : ℤ) : B ⥤ A :=
   pullback (targetD F i (i + 1))
     (kernel.ι (differential T π F N (i + 1)) ≫ augmentation T π F N (i + 1))
 
 /-- The term is the explicit next pullback followed by `T`.
-Source: Stacks Project, Derived Categories, Lemma 05T7 (1).
-(blueprint: def-tower-canonical-comparison-g3). -/
+Source: Stacks Project, Derived Categories, Lemma 05T7 (1). -/
 theorem term_step_eq (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     (F : B ⥤ CochainComplex A ℤ) (N i : ℤ) (hi : i ≤ N) :
     term T π F N i = indexedPullback T π F N i ⋙ T := by
@@ -233,8 +230,7 @@ private theorem indexed_differential (T : A ⥤ A) (π : T ⟶ 𝟭 A)
 
 /-- The canonical comparison is obtained by evaluating the recursive pullback and
 kernel and applying `T.mapIso`; its data uses only proved equalities.
-Source: Stacks Project, Derived Categories, Lemma 05T7 (1).
-(blueprint: def-tower-canonical-comparison-g3). -/
+Source: Stacks Project, Derived Categories, Lemma 05T7 (1). -/
 noncomputable def canonicalComparison (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     (F : B ⥤ CochainComplex A ℤ) (N : ℤ) (b : B) (i : ℤ) (hi : i ≤ N) :
     (term T π F N i).obj b ≅
@@ -247,8 +243,7 @@ noncomputable def canonicalComparison (T : A ⥤ A) (π : T ⟶ 𝟭 A)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- First projection equation for the canonical comparison.
-Source: Stacks Project, Derived Categories, Lemma 05T7 (1).
-(blueprint: new-tower-comparison-first). -/
+Source: Stacks Project, Derived Categories, Lemma 05T7 (1). -/
 theorem tower_comparison_canonical_first (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     (F : B ⥤ CochainComplex A ℤ) (N : ℤ) (b : B) (i : ℤ) (hi : i ≤ N) :
     (canonicalComparison T π F N b i hi).hom ≫ π.app _ ≫ pullback.fst _ _ =
@@ -265,8 +260,7 @@ theorem tower_comparison_canonical_first (T : A ⥤ A) (π : T ⟶ 𝟭 A)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Second projection equation for the explicitly constructed canonical comparison.
-Source: Stacks Project, Derived Categories, Lemma 05T7 (1).
-(blueprint: new-tower-comparison-second). -/
+Source: Stacks Project, Derived Categories, Lemma 05T7 (1). -/
 theorem tower_comparison_second {A : Type u} [Category.{v} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     (F : B ⥤ CochainComplex A ℤ) (N : ℤ) (b : B) (i : ℤ) (hi : i ≤ N) :
@@ -283,7 +277,7 @@ theorem tower_comparison_second {A : Type u} [Category.{v} A] [Abelian A]
   have h := NatTrans.congr_app (indexed_differential T π F N i hi) b
   simpa [indexedPullback, targetTerm, Category.assoc] using h
 
-/-- (blueprint: lem-pc-cycle-pullback-tower-comparison-stage3) -/
+/-- -/
 theorem tower_comparison {A : Type u} [Category.{v} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     (F : B ⥤ CochainComplex A ℤ) (N : ℤ) (b : B) (i : ℤ) (hi : i ≤ N) :

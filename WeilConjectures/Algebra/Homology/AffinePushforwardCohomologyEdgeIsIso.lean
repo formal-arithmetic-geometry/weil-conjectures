@@ -28,7 +28,6 @@ variable [∀ Y : Scheme.{u},
 /-- Every component of a normalized affine edge morphism is invertible.
 Source: Stacks Project, perfect.tex, lemma-affine-morphism-equivalence (Tag 0AVW),
 and perfect.tex, lemma-application-nice-K-injective (Tag 08D4).
-(blueprint: lem-pc-affine-pushforward-cohomology-edge-isIso).
 
 Proof: For a complex C of A-modules, associated sheaves and their kernels, images
 and cohomology are quasi-coherent. Affine higher-direct-image vanishing, with

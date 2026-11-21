@@ -12,7 +12,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 # Presentations of ringed tensor squares
 
 Source: Stacks Project, Cohomology on Sites, Tags 07A4, 0D6D and 0E48
-(blueprint: def-weil-pbc-ringed-tensor-square-presentation).
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace SheafOfModules
 
 set_option linter.checkUnivs false in
 /-- A small ringed site and a model of its derived tensor on flat K-flat representatives.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: def-weil-pbc-ringed-tensor-square-presentation). -/
+Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48 -/
 structure RingedTensorCorner where
   site : Type u
   [category : Category.{u} site]
@@ -46,8 +44,7 @@ structure RingedTensorCorner where
 attribute [instance] RingedTensorCorner.category RingedTensorCorner.derived
 
 /-- The representative identification specifying the derived tensor functor.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: def-weil-pbc-ringed-tensor-square-presentation). -/
+Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48 -/
 structure RingedTensorModel (A : RingedTensorCorner.{u, w}) where
   representative : ((ObjectProperty.ι (fun P : CochainComplex (SheafOfModules.{u} ((sheafCompose
       A.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj A.ring)) ℤ ↦ P.IsAcyclicTensorKFlat ∧
@@ -69,8 +66,7 @@ structure RingedTensorModel (A : RingedTensorCorner.{u, w}) where
 
 /-- A ringed-topos inverse image and its total derived module pullback. All comparisons
 are the existing canonical comparisons, with no chosen arbitrary tensor isomorphism.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: def-weil-pbc-ringed-tensor-square-presentation). -/
+Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48 -/
 structure RingedTensorEdge (A B : RingedTensorCorner.{u, w}) where
   inverse : Sheaf A.topology (Type u) ⥤ Sheaf B.topology (Type u)
   direct : Sheaf B.topology (Type u) ⥤ Sheaf A.topology (Type u)
@@ -111,8 +107,7 @@ structure RingedTensorEdge (A B : RingedTensorCorner.{u, w}) where
 attribute [instance] RingedTensorEdge.finiteLimits RingedTensorEdge.additive
 
 /-- The canonical derived tensor comparison from its unique representative characterization.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: def-weil-pbc-ringed-tensor-square-presentation). -/
+Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48 -/
 noncomputable def RingedTensorEdge.tensorComparison
     {A B : RingedTensorCorner.{u, w}} (e : RingedTensorEdge A B)
     (a : RingedTensorModel A) (b : RingedTensorModel B) :
@@ -130,8 +125,7 @@ noncomputable def RingedTensorEdge.tensorComparison
     e.pushforward e.moduleAdjunction
 
 /-- The canonical map of underlying sheaves m ↦ 1 tensor m, after inverse image.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: def-weil-pbc-ringed-tensor-square-presentation). -/
+Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48 -/
 noncomputable def RingedTensorEdge.insertion
     {A B : RingedTensorCorner.{u, w}} (e : RingedTensorEdge A B)
     (M : SheafOfModules.{u} ((sheafCompose A.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj
@@ -146,8 +140,7 @@ noncomputable def RingedTensorEdge.insertion
 its linear module comparison. The insertion equation fixes the latter on generators,
 and linearity enforces compatibility with the structural ring maps. No tensor or
 derived coherence equation is assumed.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: def-weil-pbc-ringed-tensor-square-presentation). -/
+Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48 -/
 structure RingedTensorSquare
     (Y X Y' X' : RingedTensorCorner.{u, w})
     (f : RingedTensorEdge Y X) (g : RingedTensorEdge Y Y')

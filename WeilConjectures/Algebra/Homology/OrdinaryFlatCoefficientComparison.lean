@@ -422,7 +422,6 @@ S tensor_R Res(M) to S tensor_B M is a natural isomorphism. Flatness is unnecess
 for this ordinary assertion.
 
 Source: Stacks Project, Modules on Sites, Tags 03EK and 05V4, displayed cancellation.
-(auxiliary; not a blueprint node).
 
 Proof: restriction of scalars commutes with module sheafification, since both
 underlying abelian sheafifications coincide. The sectionwise balanced isomorphism

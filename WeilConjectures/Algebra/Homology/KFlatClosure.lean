@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 # Closure of K-flat complexes under countable sums and cones
 
 Source: Stacks Project, Cohomology on Sites, Lemmas 06YR and 07A3
-(blueprint: lem-pc-kflat-cone-direct-sum).
 
 ## Main statements
 
@@ -66,7 +65,7 @@ private theorem acyclic_coproduct_nat
     ((HomologicalComplex.acyclic_of_isZero _ hz) i)).1 inferInstance
 
 set_option synthInstance.maxSize 512 in
-/-- (blueprint: lem-pc-kflat-cone-direct-sum) Stacks, Cohomology on Sites, Lemma 06YR:
+/-- Stacks, Cohomology on Sites, Lemma 06YR:
 the countable direct sum of K-flat complexes of sheaves of `R`-modules is K-flat.
 
 Proof: for every acyclic `F`, total tensor commutes with the coproduct. This coproduct is
@@ -91,7 +90,7 @@ theorem isKFlat_coproduct_nat
   exact (hsum i).of_iso e.symm
 
 
-/-- (blueprint: lem-pc-kflat-cone-direct-sum) Stacks, Cohomology on Sites, Lemma 07A3:
+/-- Stacks, Cohomology on Sites, Lemma 07A3:
 the mapping cone of a morphism of K-flat complexes of sheaves of `R`-modules is K-flat.
 
 Proof: tensoring an acyclic complex with the cone triangle gives the cone triangle of the

@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Homology.LocalizedModuleRestrictionQuasiIso
 # Sectionwise invariance of Hom complexes into K-injectives
 
 Source: Stacks Project, sites-cohomology.tex, Lemmas 0A94 and 0A95
-(blueprint: lem-pur-hom-complex-sections-quasi-iso).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace CategoryTheory
 
 /-- The map of Hom complexes induces a quasi-isomorphism on sections over every site object.
 Source: Stacks Project, sites-cohomology.tex, Lemma 0A95, using Lemma 0A94
-(blueprint: lem-pur-hom-complex-sections-quasi-iso).
 
 Proof: fix an object `U` and a degree `n`. The product projections in `homComplex_exists`
 identify sections with families of morphisms on `C/U`. In degree zero the cocycle equation

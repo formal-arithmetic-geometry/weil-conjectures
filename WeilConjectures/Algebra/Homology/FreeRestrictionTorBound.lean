@@ -21,7 +21,6 @@ import Mathlib.Algebra.Category.ModuleCat.Products
 /-! # Tor bounds for restricted free modules
 
 Source: Stacks Project, Tags 066H, 066K and 0655.
-(blueprint: lem-pc-free-restriction-tor-bound).
 -/
 
 @[expose] public section
@@ -156,7 +155,6 @@ private theorem tor'_preserves_coproducts (A : Type u) [CommRing A]
 /-- A free B-module inherits the Tor bound of the restricted regular B-module.
 
 Source: Stacks Project, Tags 066H, 066K and 0655.
-(blueprint: lem-pc-free-restriction-tor-bound).
 
 Proof: restricted finitely supported B-valued functions on I are the direct sum,
 indexed by I, of restricted copies of B. Use the natural symmetry of Tor to

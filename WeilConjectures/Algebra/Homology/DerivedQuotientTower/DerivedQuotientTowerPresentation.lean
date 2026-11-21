@@ -74,7 +74,6 @@ import Mathlib.Algebra.Category.Grp.Abelian
 Source: Stacks Project, proetale.tex, Tag 099M (lemma-naive-completion), for the
 ordinary reduction tower; sites-cohomology.tex, Tags 06YT and 06YS, and derived.tex,
 Tag 06XN (dual assertion), for its universal K-flat homotopy presentation.
-(blueprint: lem-weil-pbc-derived-quotient-tower-presentation).
 
 The input maps are arbitrary compatible maps of commutative ring sheaves. The
 augmentation is specified before deriving, by the sheafification image of `1 ⊗ m`.
@@ -99,21 +98,18 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [HasSheafify J AddCommGrpCat.{r}]
 
 /-- The recorded category of modules over a commutative ring sheaf, forgetting
-commutativity only. Source: Stacks 03EK
-(blueprint: lem-weil-pbc-derived-quotient-tower-presentation). -/
+commutativity only. Source: Stacks 03EK -/
 abbrev Mod (R : Sheaf J CommRingCat.{r}) :=
   ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
 
 /-- Ordinary scalar extension with the original scalar action retained.
-Source: Stacks 03EK, 06YY
-(blueprint: lem-weil-pbc-derived-quotient-tower-presentation). -/
+Source: Stacks 03EK, 06YY -/
 abbrev reductionObj {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R) :=
   (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map q)).obj
     (changeOfRings q M)
 
 /-- The actual local pure tensor in ordinary scalar extension, including the
-sheafification unit. Source: Stacks 03EK, 06YY
-(blueprint: lem-weil-pbc-derived-quotient-tower-presentation). -/
+sheafification unit. Source: Stacks 03EK, 06YY -/
 def tensorSection {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R)
     (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
     (reductionObj q M).val.obj U :=

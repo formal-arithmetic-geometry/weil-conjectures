@@ -22,7 +22,6 @@ namespace CategoryTheory
 
 /-- Evaluation is locally an isomorphism under the finite-free model hypotheses.
 Source: Stacks Project, Tag 0BQY, zero-differential Hom calculation.
-(blueprint: new-b2-homology-evaluation-local-iso).
 
 Proof: Termwise open restriction is exact and commutes with the Hom complex,
 internal Hom, cycles and homology. Hence the restricted cycle formula describes

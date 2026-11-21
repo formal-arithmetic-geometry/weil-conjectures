@@ -26,7 +26,6 @@ namespace CategoryTheory.RingedSitePoint
 /-- Universal tensor acyclicity descends to finite module tests at a topos point.
 Source: Stacks Project, Cohomology on Sites, Tag 0DEN, proof of (1), the argument
 with a finitely presented module; here replaced by a universal matrix retract.
-(auxiliary; not a blueprint node)
 
 Proof: realize the finitely presented module M as a retract of s.modules(F)
 for a global module sheaf F, by the universal finite matrix construction.

@@ -22,7 +22,6 @@ quotient of nested smart cutoffs.
 Source: Stacks Project, Homology, tag 0118, canonical cochain truncations; Mathlib's
 `shortComplexTruncLEX₃ToTruncGE` for complementary truncations. The nested-cutoff
 argument below is an explicit specialization.
-(blueprint: lem-sp-vertical-cutoff-column-quasiiso)
 
 Proof: extend L by zero to the integers. The smart cutoff inclusions are degreewise
 monic, so the inclusion compatibility uniquely determines g. Evaluation and

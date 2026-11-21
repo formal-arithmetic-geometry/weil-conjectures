@@ -13,8 +13,7 @@ import WeilConjectures.Algebra.Homology.FlatIteratedScalarExtensionHomologySquar
 
 /-! # Flat change of the final coefficient ring of a tensor cohomology model
 
-Source: Stacks Project, Tags 06Y6 and 00HD.
-(blueprint: lem-pc-flat-final-coefficient-model-comparison). -/
+Source: Stacks Project, Tags 06Y6 and 00HD. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -192,7 +191,6 @@ private theorem equalScalarComplexIso_inv_one
 /-- Flat change of the final coefficient ring commutes with a model's comparison.
 Source: Stacks Project, Tag 06Y6 (uniqueness of derived tensor) and Tag 00HD
 (exact tensor by a flat module).
-(blueprint: lem-pc-flat-final-coefficient-model-comparison).
 
 Proof: the universal counits identify the two models' derived functors. Apply
 cohomology at the restricted complex, and conjugate by their cohomologyIso maps.

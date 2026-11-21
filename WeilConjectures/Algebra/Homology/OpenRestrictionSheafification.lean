@@ -13,7 +13,6 @@ public import Mathlib.Topology.Sheaves.Abelian
 /-! # Module sheafification and localization at an open
 
 Source: Stacks Project, Tag 03DH.
-(blueprint: lem-pc-open-localized-module-sheafification)
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ codomain is a sheaf on the localized site. Its extension from the sheafification
 restricted presheaf is an isomorphism. The extension is natural in the presheaf by the
 uniqueness clause of the sheafification universal property. Taking its inverse gives
 the displayed natural isomorphism. Empty opens and zero rings require no separate case:
-the same covering-sieve argument and universal property apply.
-(blueprint: lem-pc-open-localized-module-sheafification) -/
+the same covering-sieve argument and universal property apply. -/
 theorem exists_open_localized_sheafification
     {X : TopCat.{u}} (A : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
     (U : TopologicalSpace.Opens X) :

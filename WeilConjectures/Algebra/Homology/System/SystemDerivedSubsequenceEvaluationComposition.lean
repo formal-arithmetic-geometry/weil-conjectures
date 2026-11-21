@@ -27,7 +27,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- The exact subsequence compositor commutes with the selected evaluation
 comparisons. Source: Stacks 015F
-(blueprint: lem-pur-system-derived-subsequence-evaluation-composition).
 Proof: localize and cancel the final evaluation factorization. On complexes the
 restriction compositor factorization and the two evaluation factorization equations
 reduce both sides to the same three successive factorization maps. Naturality of the

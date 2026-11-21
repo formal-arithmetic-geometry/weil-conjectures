@@ -70,7 +70,6 @@ import all Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 
 Source: Stacks Project, algebraization.tex, Tag 099J; Modules on Sites, Tag 04J0;
 Cohomology on Sites, Tag 07A6
-(blueprint: lem-weil-pbc-ringed-slice-localization-model).
 -/
 
 @[expose] public noncomputable section

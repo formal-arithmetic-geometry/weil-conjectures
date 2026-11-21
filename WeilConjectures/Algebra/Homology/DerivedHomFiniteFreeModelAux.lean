@@ -27,7 +27,6 @@ namespace AlgebraicGeometry
 second complex is bounded below. This is the injective-resolution and acyclic-Hom
 part of `derivedInternalHom_of_boundedAbove_finiteFree`.
 Source: Stacks Project, Cohomology, Tag 0GM8, case (2), and Section 08J7
-(blueprint: lem-sc-derived-hom-finite-free-model-aux).
 Proof: replace `G` by a bounded-below K-injective resolution `I`; the cone of the
 replacement is bounded below and acyclic, so finite-free Hom preserves the
 quasi-isomorphism. The derived internal Hom computation with `I` and the

@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.MixedTensorUnderlyingHomology
 /-! # Universal derived cohomology comparisons for a fixed balanced tensor complex
 
 Source: Stacks Project, Tags 064L and 06Y6. The K-flat resolution is supplied explicitly.
-(blueprint: new-lem-pc-balanced-tensor-unit-model-comparison).
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ variable (B D : Type u) [CommRing B] [CommRing D] [Algebra R B]
 Source: Stacks Project, Tags 064L and 06Y6; the balanced computation and
 naturality explained by lem-pc-balanced-derived-tensor-model and
 lem-pc-derived-tensor-action-naturality.
-(blueprint: new-lem-pc-balanced-tensor-unit-model-comparison).
 
 Proof: use the quasi-isomorphism f : F -> B[0] to compute Q tensor_R^L B by
 Tot(Q tensor_R F). To compare this computation with L.derived, resolve the

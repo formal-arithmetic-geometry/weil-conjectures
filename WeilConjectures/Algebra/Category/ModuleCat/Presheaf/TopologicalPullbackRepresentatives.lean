@@ -34,8 +34,7 @@ open, and filtered, since intersection gives a common later open. The forgetful
 functors from commutative rings and abelian groups preserve its colimit. Thus each
 section has a representative. Intersect their two neighbourhoods and restrict the
 two representatives; the cocone identity preserves their images. This also works
-for empty opens and zero rings or groups.
-(blueprint: lem-pc-topological-pullback-common-representatives) -/
+for empty opens and zero rings or groups. -/
 theorem topologicalPullbackCommonRepresentatives {X Y : TopCat.{u}} (f : X ⟶ Y)
     (O : Y.Presheaf CommRingCat.{u}) (A : Y.Presheaf Ab.{u}) (U : Opens X)
     (x : ((TopCat.Presheaf.pullback CommRingCat.{u} f).obj O).obj (op U))

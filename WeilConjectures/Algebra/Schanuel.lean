@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Module.Projective
 /-! # Schanuel's lemma
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00O3
-(blueprint: lem-weil-pbc-schanuel)
 -/
 
 @[expose] public section
@@ -24,7 +23,6 @@ universe u v₁ v₂ v₃ v₄ v₅
 /-- Schanuel's lemma for two projective presentations.
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00O3
-(blueprint: lem-weil-pbc-schanuel).
 
 Proof:
 1. Form `N = {(u, v) ∈ P₁ ⊕ P₂ | p₁(u) + p₂(v) = 0}`. Its coordinate

@@ -17,7 +17,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 # Zeroth hypercohomology on a small ringed site
 
 Source: Stacks Project, Cohomology on Sites, Section 07A5 and Lemma 08JA
-(blueprint: def-pur-ringed-site-zeroth-hypercohomology).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace CategoryTheory
 ringed site. Here `Γ = Hom_O(O, -)` is `preadditiveCoyoneda` at the unit module.
 
 Source: Stacks Project, Cohomology on Sites, Section 07A5 and Lemma 08JA
-(blueprint: def-pur-ringed-site-zeroth-hypercohomology).
 
 The Grothendieck property (`prop-pur-kinjective-resolutions-exist`) is the proved
 `SheafOfModules.isGrothendieckAbelian`, as in `derivedInternalHom`. The existing

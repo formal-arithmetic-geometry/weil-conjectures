@@ -26,7 +26,6 @@ namespace CochainComplex
 /-- The termwise product of a family of K-injective complexes is K-injective and, with the
 images of its projections, is a product in the derived category.
 Source: Stacks Project, Tag 0BK6, Lemma 13.31.5
-(auxiliary; not a blueprint node).
 
 The degreewise product assumption is expressed as existence of the limits of the discrete
 family after evaluation in each integer degree. Mathlib's `coneOfHasLimitEval` constructs

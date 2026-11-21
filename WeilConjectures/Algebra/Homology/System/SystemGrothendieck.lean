@@ -45,7 +45,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- Strict coefficient systems form a Grothendieck abelian category.
 Source: Zheng 4.1; Stacks 03DA, 03DB and 079Q
-(blueprint: lem-pur-system-grothendieck).
 Proof: the ringed sequence site is essentially small in the coefficient universe.
 Its module sheaves are Grothendieck abelian by the free-sheaf separator and exactness
 of filtered colimits. Transport this property across the explicit equivalence with

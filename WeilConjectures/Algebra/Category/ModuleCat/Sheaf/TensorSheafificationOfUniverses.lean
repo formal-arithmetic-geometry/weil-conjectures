@@ -328,7 +328,6 @@ private theorem tensor_precomp_injective
 omit hH g in
 /-- Tensoring a locally bijective module map becomes an isomorphism after sheafification.
 Source: Stacks Project, Modules on Sites, Tag 03EK and Tag 05V4
-(auxiliary; not a blueprint node).
 Proof: a bilinear map out of the source tensor product descends uniquely to the target:
 locally lift the first operand, apply the original pairing, and glue in the target sheaf.
 Local injectivity makes this independent of the lifts. Additivity and homogeneity can

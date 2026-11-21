@@ -370,7 +370,6 @@ private def oppositeAdjunction
 
 /-- An exact open extension has a normalized reverse adjunction on a clopen piece.
 Source: Stacks 04TS, disjoint two-open module gluing.
-(blueprint: lem-sf-clopen-reverse-module-adjunction).
 
 Proof: decompose the ambient scheme into the image of s and its complementary
 open. Ringed-module gluing identifies modules with pairs on those two pieces.

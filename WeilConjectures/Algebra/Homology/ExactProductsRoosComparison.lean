@@ -16,7 +16,6 @@ import all WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimitIndepend
 /-! # The Roos fibre computes total derived inverse limit when products are exact
 
 Source: Stacks Project, Tags 0940 and 0941.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -31,7 +30,7 @@ variable {B : Type u} [Category.{v} B] [Abelian B]
   [HasCountableProducts B]
 
 /-- The degreewise product of the levels of a strict tower of complexes.
-Source: Stacks Tag 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0941. -/
 @[reducible]
 def product : CochainComplex (ℕᵒᵖ ⥤ B) ℤ ⥤ CochainComplex B ℤ where
   obj X := ∏ᶜ (fun n : ℕ ↦ X.asFunctor.obj (op n))
@@ -45,7 +44,7 @@ def product : CochainComplex (ℕᵒᵖ ⥤ B) ℤ ⥤ CochainComplex B ℤ wher
   map_comp _ _ := by simp [Limits.Pi.map_comp_map]
 
 /-- The endomorphism with coordinates x_n minus t_n(x_(n+1)).
-Source: Stacks Tag 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0941. -/
 @[reducible]
 def difference : product (B := B) ⟶ product where
   app X := towerTransitionEndomorphism
@@ -57,8 +56,7 @@ def difference : product (B := B) ⟶ product where
     exact ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map f).naturality
       (homOfLE (Nat.le_succ n)).op).symm
 
-/-- Canonical Roos model map. Source: Stacks Tag 0941
-(auxiliary; not a blueprint node). -/
+/-- Canonical Roos model map. Source: Stacks Tag 0941 -/
 @[reducible]
 def arrowMap {X Y : CochainComplex (ℕᵒᵖ ⥤ B) ℤ} (f : X ⟶ Y) :
     Arrow.mk (-difference.app X) ⟶ Arrow.mk (-difference.app Y) where
@@ -70,7 +68,7 @@ def arrowMap {X Y : CochainComplex (ℕᵒᵖ ⥤ B) ℤ} (f : X ⟶ Y) :
       congrArg Neg.neg (difference.naturality f)
 
 /-- The functorial mapping fibre of minus the Roos difference map.
-Source: Stacks Tag 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0941. -/
 @[reducible]
 def fibre : CochainComplex (ℕᵒᵖ ⥤ B) ℤ ⥤ CochainComplex B ℤ where
   obj X := CochainComplex.mappingCocone (-difference.app X)
@@ -90,12 +88,12 @@ def fibre : CochainComplex (ℕᵒᵖ ⥤ B) ℤ ⥤ CochainComplex B ℤ where
 variable [HasLimitsOfShape ℕᵒᵖ B]
 
 /-- The ordinary strict inverse limit, applied termwise.
-Source: Stacks Tag 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0941. -/
 abbrev ordinary : CochainComplex (ℕᵒᵖ ⥤ B) ℤ ⥤ CochainComplex B ℤ :=
   (lim : (ℕᵒᵖ ⥤ B) ⥤ B).mapHomologicalComplex (.up ℤ)
 
 /-- The ordinary limit inclusion into the product of the levels.
-Source: Stacks Tag 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0941. -/
 @[reducible]
 def inclusion : ordinary (B := B) ⟶ product where
   app X := Limits.Pi.lift (f := fun n : ℕ ↦ X.asFunctor.obj (op n)) (fun n : ℕ ↦
@@ -108,8 +106,7 @@ def inclusion : ordinary (B := B) ⟶ product where
       Limits.Pi.lift_comp_π]
     exact (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).naturality f
 
-/-- The specified Roos maps satisfy the displayed equation. Source: Stacks Tag 0941
-(auxiliary; not a blueprint node). -/
+/-- The specified Roos maps satisfy the displayed equation. Source: Stacks Tag 0941 -/
 theorem inclusion_difference (X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) :
     inclusion.app X ≫ difference.app X = 0 := by
   change (Limits.Pi.lift (fun n : ℕ ↦
@@ -123,8 +120,7 @@ theorem inclusion_difference (X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) :
   ext p
   exact (limit.w (X.X p) (homOfLE (Nat.le_succ n)).op).symm
 
-/-- The specified Roos maps satisfy the displayed equation. Source: Stacks Tag 0941
-(auxiliary; not a blueprint node). -/
+/-- The specified Roos maps satisfy the displayed equation. Source: Stacks Tag 0941 -/
 theorem comparison_condition (X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) :
     CochainComplex.HomComplex.δ (-1) 0
         (0 : CochainComplex.HomComplex.Cochain (ordinary.obj X) (product.obj X) (-1)) +
@@ -133,8 +129,7 @@ theorem comparison_condition (X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) :
   rw [Preadditive.comp_neg, inclusion_difference, neg_zero]
   simp
 
-/-- Canonical Roos model map. Source: Stacks Tag 0941
-(auxiliary; not a blueprint node). -/
+/-- Canonical Roos model map. Source: Stacks Tag 0941 -/
 @[reducible]
 def comparisonApp (X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) :
     ordinary.obj X ⟶ fibre.obj X :=
@@ -142,8 +137,7 @@ def comparisonApp (X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) :
     (comparison_condition X)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The specified Roos maps satisfy the displayed equation. Source: Stacks Tag 0941
-(auxiliary; not a blueprint node). -/
+/-- The specified Roos maps satisfy the displayed equation. Source: Stacks Tag 0941 -/
 theorem comparisonApp_f (X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) (p : ℤ) :
     (comparisonApp X).f p = (inclusion.app X).f p ≫
       HomologicalComplex.homotopyCofiber.inlX (-difference.app X) p (p + (-1))
@@ -164,8 +158,7 @@ theorem comparisonApp_f (X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) (p : ℤ) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical map from ordinary inverse limit to the Roos fibre, with zero second
-coordinate. Source: Stacks Tag 0941
-(auxiliary; not a blueprint node). -/
+coordinate. Source: Stacks Tag 0941 -/
 @[reducible]
 def comparison : ordinary (B := B) ⟶ fibre where
   app := comparisonApp

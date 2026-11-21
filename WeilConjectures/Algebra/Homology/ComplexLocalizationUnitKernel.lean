@@ -24,7 +24,6 @@ namespace RingTensorCohomology
 
 /-- Ordinary complex cohomology has denominator torsion in the localization-unit kernel.
 Source: Stacks Project, Tags 00CS and 00DK, exactness of module localization.
-(blueprint: new-lem-pc-complex-localization-unit-kernel).
 
 Proof: represent x by a cycle z in degree i. Its localized image is a boundary,
 so write a boundary witness as y/t with y in C^(i-1) and t in S. The equation

@@ -11,8 +11,7 @@ import WeilConjectures.Algebra.Homology.FirstLocalizationOrdinarySquare
 import WeilConjectures.Algebra.Homology.ScalarExtensionHomologySquare
 /-! # Comparison square for the characterized localization map
 
-Source: Stacks Project, Tag 06Y6; Tag 0DJ8.
-(blueprint: lem-pc-first-localization-comparison). -/
+Source: Stacks Project, Tag 06Y6; Tag 0DJ8. -/
 
 @[expose] public section
 
@@ -45,7 +44,6 @@ set_option linter.unusedSectionVars false in
 include tAD tBD tAqD tBqD tAAqD in
 /-- Comparison square for the characterized localization map.
 Source: Stacks Project, Tag 06Y6; Tag 0DJ8, affine localization identity.
-(blueprint: lem-pc-first-localization-comparison).
 
 Proof: apply naturality of the universal derived-functor counit to the
 localization unit. The ordinary tensor associativity maps commute with that unit:

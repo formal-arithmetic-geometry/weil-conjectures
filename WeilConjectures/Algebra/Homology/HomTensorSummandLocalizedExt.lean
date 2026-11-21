@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.HomTensorDegreewise
 # Localized tensor-summand extensionality
 
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
-(blueprint: lem-sc-hom-tensor-summand-localized-ext)
 -/
 
 @[expose] public section
@@ -209,7 +208,6 @@ local notation "Mod" => SheafOfModules.{max u v}
 set_option synthInstance.maxSize 256 in
 /-- Morphisms to an internal Hom from a sheaf tensor are determined on localized pure tensors.
 Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03EO.
-(blueprint: lem-sc-hom-tensor-summand-localized-ext)
 
 Proof: Transpose both morphisms using the presheaf tensor-Hom equivalence and
 symmetry. This gives maps from the sheaf tensor to internal Hom from X to N.

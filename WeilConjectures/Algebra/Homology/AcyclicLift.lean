@@ -24,7 +24,6 @@ import Mathlib.Tactic.Choose
 # Lifting bounded-above acyclic complexes modulo an ideal
 
 Source: Stacks Project, More on Algebra, Tag 0BC9, lemma-lift-acyclic-complex
-(blueprint: lem-sc-complex-lift-acyclic-projective).
 -/
 
 @[expose] public section
@@ -35,7 +34,7 @@ open CategoryTheory
 
 namespace CochainComplex
 
-/-- Stacks Project, Tag 0BC9 (blueprint: lem-sc-complex-lift-acyclic-projective).
+/-- Stacks Project, Tag 0BC9.
 Reduction modulo `I` is extension of scalars to `R ⧸ I`, canonically `P / IP`.
 The direct-sum condition is stated for any module isomorphic to the binary direct sum,
 as membership in a class of modules is understood up to isomorphism.

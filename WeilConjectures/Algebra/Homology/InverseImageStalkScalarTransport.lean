@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.InverseImageStalkScalarTransportNaturali
 # Scalar transport for inverse-image stalks on ringed spaces
 
 Source: Stacks Project, Sheaves, Tags 008H and 0098.
-(blueprint: lem-pc-ringed-inverse-image-stalk-scalar-transport).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Transport tensor scalars through the inverse-image ring and module stalk comparisons.
 Source: Stacks Project, Sheaves, Tag 0098, proof using Tag 008H.
-(blueprint: lem-pc-ringed-inverse-image-stalk-scalar-transport).
 
 Proof: the canonical ring comparison is the presheaf inverse-image stalk map followed
 by the stalk of sheafification. Both factors are isomorphisms. The analogous abelian

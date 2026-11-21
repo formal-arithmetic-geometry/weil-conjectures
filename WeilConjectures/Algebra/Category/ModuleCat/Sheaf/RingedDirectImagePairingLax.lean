@@ -16,7 +16,6 @@ import all WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 
 Source: Stacks Project, Modules on Sites, Tags 03D6 and 03EK; lax coherence and
 regular-unit uniqueness extracted from their sectionwise constructions.
-(auxiliary; not a blueprint node)
 
 The tensor, associators and unitors are the existing localization construction.
 The pushforward is Mathlib's precomposition with restriction of scalars.
@@ -417,8 +416,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
 
 /-- The local pure-tensor normalization for a lax structure on ringed direct image.
 This is only a predicate on the existing tensor and pushforward, with no additional data.
-Source: Stacks Project, Modules on Sites, Tags 03D6 and 03EK
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tags 03D6 and 03EK -/
 def RingedPushforwardPureTensor
     (L : (pushforward.{w} c).LaxMonoidal) : Prop :=
   ∀ (M N : CategoryTheory.ringedSiteModules.{w}
@@ -558,7 +556,6 @@ end PrivateAssembly
 its unit is the given coefficient map. Uniqueness assumes only the tensor normalization.
 Source: Stacks Project, Modules on Sites, Tags 03D6 and 03EK; agent extraction of
 coherence and regular-unit uniqueness
-(auxiliary; not a blueprint node).
 
 Proof:
 1. Restrict scalars along `c` in the precomposition functor. Naturality and the ring-map

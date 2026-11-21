@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.TotalFreeFiltrationCokernelOdd
 # Splittings and free quotients of the alternating column filtration
 
 Source: Stacks Project, Tag 09KP, filtration construction.
-(blueprint: lem-pc-derived-total-filtration-quotients)
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ variable (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
 /-- The explicitly constructed stage inclusions split degreewise, and their
 cokernels are coproducts of single-degree copies of the ring.
 Source: Stacks Project, Tag 09KP, proof, successive quotients.
-(blueprint: lem-pc-derived-total-filtration-quotients)
 
 Proof. The coproduct description of the total terms identifies the even stage
 `2*j` with the direct sum of the complete columns `-i` for `i<j`. The odd stage

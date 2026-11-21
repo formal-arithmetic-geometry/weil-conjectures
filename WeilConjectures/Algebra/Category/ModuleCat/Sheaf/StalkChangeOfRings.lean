@@ -16,7 +16,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 # Stalks of change of rings
 
 Source: Stacks Project, Sheaves, Lemma 008B, from Lemmas 007K and 007Z
-(blueprint: lem-weil-pbc-stalk-change-of-rings-tensor).
 -/
 
 @[expose] public section
@@ -82,7 +81,6 @@ private theorem stalkSheafification_unit_app_naturality {X : TopCat.{u}}
 Mathlib writes extension of scalars with the coefficient factor first: `a ⊗ s`
 represents the paper's `s ⊗ a` under the canonical tensor commutation.
 Source: Stacks Project, Sheaves, Lemma 008B
-(blueprint: lem-weil-pbc-stalk-change-of-rings-tensor).
 
 Proof:
 1. On neighborhoods of `x`, take the section rings and module sections with their

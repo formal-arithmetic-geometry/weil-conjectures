@@ -42,7 +42,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 Source: Stacks Project, Modules on Sites, Tags 03D1--03D3, 03CZ and 03D7,
 `lemma-adjoint-pullback-pushforward-modules`.
-(blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
 
 The construction is stated existentially, with explicit underlying-sheaf and
 operation identifications. No module adjunction or module functor is assumed.

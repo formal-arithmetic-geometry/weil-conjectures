@@ -18,7 +18,6 @@ public import Mathlib.CategoryTheory.Abelian.Exact
 /-! # The two edges of the resolution Hom double complex
 
 Source: Stacks Project, Tag 0954, proof of Lemma 47.8.2.
-(blueprint: lem-sbc-ext-projective-edge-quasi-iso).
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ local instance : (linearCoyoneda R (ModuleCat.{u} R)).PreservesZeroMorphisms whe
     simp
 
 /-- Reverse a nonnegative chain complex in the opposite category.
-Source: Stacks Project, Tag 0954, the contravariance of the Hom complex.
-(blueprint: lem-sbc-ext-projective-edge-quasi-iso). -/
+Source: Stacks Project, Tag 0954, the contravariance of the Hom complex. -/
 def resolutionHomOpposite (P : ChainComplex (ModuleCat.{u} R) ℕ) :
     CochainComplex (ModuleCat.{u} R)ᵒᵖ ℕ where
   X n := op (P.X n)
@@ -52,8 +50,7 @@ def resolutionHomOpposite (P : ChainComplex (ModuleCat.{u} R) ℕ) :
     rw [← op_comp, P.d_comp_d, op_zero]
 
 /-- The first-quadrant total complex of `Hom(P,E)`.
-Source: Stacks Project, Tag 0954, injective-resolution computation of Ext.
-(blueprint: lem-sbc-ext-projective-edge-quasi-iso). -/
+Source: Stacks Project, Tag 0954, injective-resolution computation of Ext. -/
 noncomputable abbrev resolutionHomTotal
     (P : ChainComplex (ModuleCat.{u} R) ℕ) (E : CochainComplex (ModuleCat.{u} R) ℕ) :
     CochainComplex (ModuleCat.{u} R) ℕ :=
@@ -61,8 +58,7 @@ noncomputable abbrev resolutionHomTotal
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The vertical augmentation from `Hom(P,M)` to `Tot Hom(P,E)`.
-Source: Stacks Project, Tag 0954, injective-resolution computation of Ext.
-(blueprint: lem-sbc-ext-projective-edge-quasi-iso). -/
+Source: Stacks Project, Tag 0954, injective-resolution computation of Ext. -/
 noncomputable def resolutionHomProjectiveEdge
     {X M : ModuleCat.{u} R} (P : ProjectiveResolution X) (E : InjectiveResolution M) :
     P.complex.linearYonedaObj R M ⟶ resolutionHomTotal P.complex E.cocomplex where
@@ -93,8 +89,7 @@ noncomputable def resolutionHomProjectiveEdge
     congr 1
 
 /-- The horizontal augmentation from `Hom(X,E)` to `Tot Hom(P,E)`.
-Source: Stacks Project, Tag 0954, injective-resolution computation of Ext.
-(blueprint: lem-sbc-ext-projective-edge-quasi-iso). -/
+Source: Stacks Project, Tag 0954, injective-resolution computation of Ext. -/
 noncomputable def resolutionHomInjectiveEdge
     {X M : ModuleCat.{u} R} (P : ProjectiveResolution X) (E : InjectiveResolution M) :
     (((linearCoyoneda R (ModuleCat.{u} R)).obj (op X)).mapHomologicalComplex
@@ -146,8 +141,7 @@ private theorem coyoneda_preservesHomology (X : ModuleCat.{u} R) [Projective X] 
   apply Functor.preservesHomology_of_preservesEpis_and_kernels
 
 /-- Precomposition on the projective Hom complex.
-Source: Stacks Project, Tag 0954, naturality of the resolution computation.
-(blueprint: lem-sbc-ext-projective-edge-quasi-iso). -/
+Source: Stacks Project, Tag 0954, naturality of the resolution computation. -/
 def resolutionHomPrecomp {P P' : ChainComplex (ModuleCat.{u} R) ℕ}
     (f : P' ⟶ P) (M : ModuleCat.{u} R) :
     P.linearYonedaObj R M ⟶ P'.linearYonedaObj R M where
@@ -160,8 +154,7 @@ def resolutionHomPrecomp {P P' : ChainComplex (ModuleCat.{u} R) ℕ}
     rw [← Category.assoc, ← f.comm, Category.assoc]
 
 /-- Precomposition on the total resolution Hom complex.
-Source: Stacks Project, Tag 0954, naturality of the resolution computation.
-(blueprint: lem-sbc-ext-projective-edge-quasi-iso). -/
+Source: Stacks Project, Tag 0954, naturality of the resolution computation. -/
 noncomputable def resolutionHomTotalPrecomp
     {P P' : ChainComplex (ModuleCat.{u} R) ℕ} (f : P' ⟶ P)
     (E : CochainComplex (ModuleCat.{u} R) ℕ) :
@@ -173,8 +166,7 @@ noncomputable def resolutionHomTotalPrecomp
     (𝟙 E) (linearCoyoneda R (ModuleCat.{u} R)) (ComplexShape.up ℕ)
 
 /-- Precomposition commutes with the projective edge.
-Source: Stacks Project, Tag 0954, naturality of the Ext computation.
-(blueprint: lem-sbc-ext-projective-edge-quasi-iso). -/
+Source: Stacks Project, Tag 0954, naturality of the Ext computation. -/
 theorem projectiveEdge_naturality
     {X X' M : ModuleCat.{u} R} (P : ProjectiveResolution X)
     (P' : ProjectiveResolution X') (E : InjectiveResolution M) (f : P'.complex ⟶ P.complex) :
@@ -189,8 +181,7 @@ theorem projectiveEdge_naturality
   rfl
 
 /-- A chain map compatible with the augmentation commutes with the injective edge.
-Source: Stacks Project, Tag 0954, naturality of the Ext computation.
-(blueprint: lem-sbc-ext-projective-edge-quasi-iso). -/
+Source: Stacks Project, Tag 0954, naturality of the Ext computation. -/
 theorem injectiveEdge_naturality
     {X X' M : ModuleCat.{u} R} (g : X' ⟶ X) (P : ProjectiveResolution X)
     (P' : ProjectiveResolution X') (E : InjectiveResolution M)
@@ -235,7 +226,6 @@ private def resolutionHomTotalSymmetry :
 
 /-- The projective edge is a quasi-isomorphism.
 Source: Stacks Project, Tag 0954, injective-resolution computation of Ext.
-(blueprint: lem-sbc-ext-projective-edge-quasi-iso).
 
 Proof: each vertical augmented column is Hom(P^i,M) → Hom(P^i,E).
 Projectivity of P^i makes Hom(P^i,-) exact, so this augmentation is a

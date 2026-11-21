@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ, proof of
 `lemma-dual-perfect-complex`, finite-free and direct-summand calculation.
-(blueprint: lem-pc-finite-projective-internal-hom-evaluation).
 -/
 
 @[expose] public section
@@ -48,8 +47,7 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
 
 /-- The canonical map sending `b tensor phi` to `e ↦ b * phi(e)`.
-Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`.
-(blueprint: lem-pc-finite-projective-internal-hom-evaluation). -/
+Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`. -/
 def moduleDualEvaluation (R : Sheaf J CommRingCat.{u})
     (E B : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     B ⊗ homObj E (𝟙_ _) ⟶ homObj E B :=
@@ -180,7 +178,6 @@ private theorem free_evaluation (R : Sheaf J CommRingCat.{u})
 
 /-- Canonical tensor-dual evaluation is invertible for a retract of a finite free sheaf.
 Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`.
-(blueprint: lem-pc-finite-projective-internal-hom-evaluation).
 
 Proof: for the free sheaf on `Fin m`, internal Hom is the finite product of `m`
 copies of the target, and the dual is the free sheaf on the same basis. Tensoring

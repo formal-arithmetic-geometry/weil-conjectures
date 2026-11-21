@@ -26,7 +26,6 @@ import all WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 
 Source: Stacks Project, Modules on Sites, Section 03EK, and Cohomology on Sites,
 Tags 06YN, 06YP, 06YS and 06YT
-(auxiliary; not a blueprint node).
 
 The derived clause supplies symmetric derived tensors whose
 monoidal localization maps are invertible on K-flat pairs. The normalization square
@@ -272,24 +271,21 @@ local instance scalarSheafSmallCoproducts (A : Sheaf J CommRingCat.{r})
   exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
 /-- The existing monoidal structure on module cochain complexes, cached for elaboration.
-Source: Stacks 03EK and 06YT
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03EK and 06YT -/
 noncomputable instance (priority := 2000) ringIsoCochainMonoidal
     (A : Sheaf J CommRingCat.{r}) :
     MonoidalCategory (CochainComplex (scalarModules J A) ℤ) :=
   HomologicalComplex.monoidalCategory (C := scalarModules J A) (c := .up ℤ)
 
 /-- The underlying structure of the existing total tensor, cached for elaboration.
-Source: Stacks 03EK and 06YT
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03EK and 06YT -/
 noncomputable instance (priority := 2000) ringIsoCochainMonoidalStruct
     (A : Sheaf J CommRingCat.{r}) :
     MonoidalCategoryStruct (CochainComplex (scalarModules J A) ℤ) :=
   HomologicalComplex.monoidalCategoryStruct (C := scalarModules J A) (c := .up ℤ)
 
 /-- Localization of termwise restriction, allowing independent localization universes.
-Source: Stacks 04VG and 06YP
-(auxiliary; not a blueprint node). -/
+Source: Stacks 04VG and 06YP -/
 noncomputable def ringIsoDerivedRestriction (c : R ≅ S)
     [HasDerivedCategory.{wR} (scalarModules J R)]
     [HasDerivedCategory.{wS} (scalarModules J S)]
@@ -300,8 +296,7 @@ noncomputable def ringIsoDerivedRestriction (c : R ≅ S)
   (scalarRestriction c.hom).mapDerivedCategory
 
 /-- The canonical localization comparison for termwise scalar restriction.
-Source: Stacks 04VG and 06YP
-(auxiliary; not a blueprint node). -/
+Source: Stacks 04VG and 06YP -/
 noncomputable def ringIsoRestrictionComparison (c : R ≅ S)
     [HasDerivedCategory.{wR} (scalarModules J R)]
     [HasDerivedCategory.{wS} (scalarModules J S)]
@@ -316,8 +311,7 @@ noncomputable def ringIsoRestrictionComparison (c : R ≅ S)
 The existential presentations include their localization maps, invertible on K-flat pairs
 and at the unit. Thus they present the actual derived tensor, rather than impose
 additional tensor hypotheses on the input categories or derived objects.
-Source: Stacks 06YS, 06YT and 06YP
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YS, 06YT and 06YP -/
 def RingIsoDerivedTensorCompatible
     (c : R ≅ S)
     [HasDerivedCategory.{wR} (scalarModules J R)]
@@ -364,8 +358,7 @@ def RingIsoDerivedTensorCompatible
 
 /-- All clauses of scalar-coordinate tensor transport, with the tensor and unit maps
 normalized on sections and the total-complex map normalized on every summand.
-Source: Stacks 03EK, 06YN and 06YP
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03EK, 06YN and 06YP -/
 structure RingIsoTensorTransport (c : R ≅ S)
     [HasDerivedCategory.{wR} (scalarModules J R)]
     [HasDerivedCategory.{wS} (scalarModules J S)] where
@@ -860,7 +853,6 @@ private theorem scalarRestriction_derived (c : R ≅ S)
 /-- Restriction along a ring-sheaf isomorphism transports tensor, flatness and K-flatness,
 and its unbounded derived extension has the coherent normalized tensor comparison.
 Source: Stacks 03EK, 03CY, 06YN, 06YP, 06YS and 06YT
-(auxiliary; not a blueprint node).
 
 Proof:
 1. Restrict back along the inverse. Both composites are identity on abelian sheaves;

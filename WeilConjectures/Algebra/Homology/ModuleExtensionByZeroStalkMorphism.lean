@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.ModuleRestrictionStalkLinear
 /-! # The unit-induced linear stalk morphism
 
 Source: Stacks Project, Sheaves Lemma 00A7 (2), (3).
-(blueprint: lem-sc-module-extension-by-zero-stalk-morphism).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry
 /-- The unit induces a natural linear morphism from the restricted stalk to the extension stalk,
 with its value on every germ. This asserts construction and the germ formula only.
 Source: Stacks Project, Sheaves Lemma 00A7 (2), Lemma 007Z and Modules Lemma 01AK.
-(blueprint: lem-sc-module-extension-by-zero-stalk-morphism).
 
 Proof: Apply the module stalk functor to the unit after converting from the slice site to W.
 Compose with the restriction-stalk comparison for the underlying abelian sheaf. To prove

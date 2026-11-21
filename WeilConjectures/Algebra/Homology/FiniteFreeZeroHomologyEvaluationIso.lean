@@ -61,7 +61,6 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, Tag 0BQY, finite-free Hom calculation in Lemma 48.15.4;
 Tag 0A8X, the product terms and differential of the Hom complex.
-(blueprint: new-v4-finite-free-zero-homology-evaluation-iso).
 
 Proof: The fixed projections identify the Hom complex with the product over p
 of complexes having terms Hom(E.X p,K.X(p+n)). Their differentials have only the

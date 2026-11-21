@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 # Quasi-isomorphisms for mixed total tensor
 
 Source: Stacks Project, More on Algebra, Tags 064L and 06Y0.
-(blueprint: lem-pc-mixed-tensor-kflat-quasi-iso)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace CochainComplex
 
 /-- Mixed total tensor preserves quasi-isomorphisms in the two K-flat situations.
 Source: Stacks Project, Tags 064L and 06Y0.
-(blueprint: lem-pc-mixed-tensor-kflat-quasi-iso)
 
 Proof: Restrict the A-complexes to R. The canonical associativity isomorphism
 N ⊗_A (A ⊗_R E) ≅ E ⊗_R N, applied in each bidegree of the flipped

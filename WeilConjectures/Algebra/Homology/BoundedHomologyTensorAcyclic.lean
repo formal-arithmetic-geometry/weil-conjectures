@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.Triangulated.BoundedPostnikovTower
 /-! # Vanishing of bounded tensor products detected on homology factors
 
 Source: Stacks Project, derived.tex, Tag 08J5, and sites-cohomology.tex, Tags 06YM and 06YU.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -30,7 +29,6 @@ on each of its homology sheaves placed in degree zero.
 
 Source: Stacks Project, derived.tex, Tag 08J5, finite truncation triangles;
 sites-cohomology.tex, Tags 06YM and 06YU, exactness and definition of derived tensor.
-(auxiliary; not a blueprint node).
 
 Proof: descend the fixed K-flat tensor to an exact functor on the derived category.
 The finite ordered Postnikov tower of the bounded input has shifted homology sheaves

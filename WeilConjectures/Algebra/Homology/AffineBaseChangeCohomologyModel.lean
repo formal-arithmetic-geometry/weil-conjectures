@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 /-! # Cohomology coordinates for affine derived base change
 
 Source: Stacks Project, Tag 0DJ8, affine proof and equation-bc.
-(blueprint: lem-pc-affine-base-change-cohomology-model).
 -/
 
 @[expose] public section
@@ -103,7 +102,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The degree-i affine module comparison and its prime localizations, without any
 invertibility hypothesis. Source: Stacks Project, perfect.tex, Tag 0DJ8, affine
 proof, equation-bc and the displayed localization identity.
-(blueprint: lem-pc-affine-base-change-cohomology-model).
 
 Proof: first apply exists_affineBaseChangeSourceModel to K and the supplied
 K-flat representative c.P, with target the canonical pullback Lg'^*K. This provides

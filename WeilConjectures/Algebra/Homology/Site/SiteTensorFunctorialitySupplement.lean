@@ -14,7 +14,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctor
 # Functoriality and local pure tensors for the general-site tensor product
 
 Source: Stacks Project, Modules on Sites, Section 03EK
-(blueprint: def-pur-sheaf-tensor-product).
 The existing independent-universe tensor product is retained. This module exposes its
 zero preservation, its action in the second variable and its sheafification-unit pure tensors.
 -/
@@ -37,7 +36,7 @@ attribute [instance] siteSheafTensorRight_preservesZeroMorphisms
 -- Keep the existing sheafification parameters in this theorem's public signature.
 set_option linter.unusedSectionVars false in
 /-- The map in the second variable is natural in the first variable.
-Source: Stacks, Section 03EK (blueprint: def-pur-sheaf-tensor-product).
+Source: Stacks, Section 03EK.
 Proof: before sheafification both composites send `x ⊗ y` to `f(x) ⊗ g(y)`.
 Tensor induction gives equality, and sheafification preserves that equality. -/
 theorem siteSheafTensorSecondMap_naturality
@@ -58,7 +57,7 @@ theorem siteSheafTensorSecondMap_naturality
   rfl
 
 /-- The canonical natural transformation `- ⊗ N → - ⊗ N'` induced by `g`.
-Source: Stacks, Section 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+Source: Stacks, Section 03EK. -/
 noncomputable def siteSheafTensorRightMap
     {N N' : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)}
     (g : N ⟶ N') : siteSheafTensorRight N ⟶ siteSheafTensorRight N' where

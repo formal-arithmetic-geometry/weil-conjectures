@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
 Source: literature/stacks-project/cohomology.tex, Lemma 08BS (proof), citing
 literature/stacks-project/sheaves.tex, Lemma 00A7 and
 literature/stacks-project/modules.tex, Lemma 01AK
-(blueprint: lem-sc-derived-open-restriction-adjunction-exact).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ of finite limits and finite colimits.
 
 Source: literature/stacks-project/cohomology.tex, Lemma 08BS, with
 Sheaves Lemma 00A7 and Modules Lemma 01AK
-(blueprint: lem-sc-derived-open-restriction-adjunction-exact).
 
 Proof: (1) Exactness of `j⁻¹` is checked stalkwise
 (`lem-weil-pbc-module-stalk-exact` (5)): the stalk of a restriction at `x ∈ U` is the

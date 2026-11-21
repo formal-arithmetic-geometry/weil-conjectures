@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 # Row cokernel of the tensor of two resolutions
 
 Source: Stacks Project, Algebra, Tag 00M3, cokernel computation and functoriality.
-(blueprint: lem-weil-pbc-tensor-resolution-row-cokernel-iso)
 -/
 
 @[expose] public section
@@ -110,7 +109,6 @@ with respect to augmentation-compatible maps of both resolutions.
 
 Source: Stacks Project, Algebra, Tag 00M3, proof, cokernel computation and
 functoriality paragraph.
-(blueprint: lem-weil-pbc-tensor-resolution-row-cokernel-iso)
 
 Proof: Tensor the cokernel cofork P₁ → P₀ → M with Q_q. Right exactness
 of tensor makes the augmentation P₀ ⊗ Q_q → M ⊗ Q_q a cokernel of

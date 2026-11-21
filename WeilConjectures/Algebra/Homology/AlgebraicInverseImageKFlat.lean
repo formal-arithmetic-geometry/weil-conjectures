@@ -13,7 +13,6 @@ public import WeilConjectures.Algebra.Homology.RingedSiteKFlatStalkCriterion
 # K-flatness under algebraic inverse image
 
 Source: Stacks Project, Cohomology on Sites, Tags 0DEN and 0DEP.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -173,7 +172,6 @@ private theorem precoverageTopology {E : Type uC} [Category.{vC} E]
 /-- Algebraic inverse image preserves K-flat complexes when the target has a specified
 conservative family of points. No termwise flatness or boundedness is required.
 Source: Stacks Project, Cohomology on Sites, Tags 0DEN and 0DEP
-(auxiliary; not a blueprint node).
 
 Proof: for every target point, compose its ring and module presentation with the
 algebraic inverse image. The ring is the target stalk ring, the module functor is the

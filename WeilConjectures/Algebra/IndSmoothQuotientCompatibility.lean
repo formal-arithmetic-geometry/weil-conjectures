@@ -32,7 +32,6 @@ hypothesis on that reduction.
 
 Source: Stacks Project, Smoothing Ring Maps, proof of Proposition Tag 07CM,
 the induction on the nilpotence exponent
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof: Put `R' = R / K`, `Λ' = Λ / KΛ`, and `I' = I / K`. The third isomorphism
 theorem identifies `R' / I'` with `R / I`. Since `KΛ ≤ IΛ`, it also identifies

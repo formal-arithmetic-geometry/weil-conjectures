@@ -34,7 +34,6 @@ set_option synthInstance.maxSize 256 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Curry a map from one tensor product, keeping the source parameter sheaf.
 Source: Stacks Project, Modules on Sites, Lemma internal-hom-adjoint-tensor (03EO).
-(blueprint: lem-sc-hom-tensor-reverse-pair).
 
 Proof: For a section s over U, precompose its localized tensor map with the
 presheaf-to-sheaf tensor map. For x over W/U, define the local map on B over W

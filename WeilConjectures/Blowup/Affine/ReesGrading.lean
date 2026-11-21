@@ -51,8 +51,7 @@ namespace AlgebraicGeometry
 variable {A : Type u} [CommRing A] (I : Ideal A)
 
 /-- The degree-`n` piece of the Rees algebra: those elements whose underlying polynomial
-has all coefficients in degrees `≠ n` equal to zero.
-(blueprint: `def:nagata-rees-piece`) -/
+has all coefficients in degrees `≠ n` equal to zero. -/
 def reesGrading (n : ℕ) : Submodule A (reesAlgebra I) where
   carrier := { F | ∀ k, k ≠ n → ((F : A[X]).coeff k) = 0 }
   add_mem' {F G} hF hG k hk := by
@@ -66,8 +65,7 @@ lemma mem_reesGrading_iff {n : ℕ} {F : reesAlgebra I} :
     F ∈ reesGrading I n ↔ ∀ k, k ≠ n → ((F : A[X]).coeff k) = 0 :=
   Iff.rfl
 
-/-- The monomial `a·Xⁿ` as an element of the Rees algebra, for `a ∈ I ^ n`.
-(blueprint: `def:nagata-rees-components`) -/
+/-- The monomial `a·Xⁿ` as an element of the Rees algebra, for `a ∈ I ^ n`. -/
 noncomputable def reesMonomial {n : ℕ} (a : A) (ha : a ∈ I ^ n) : reesAlgebra I :=
   ⟨Polynomial.monomial n a, reesAlgebra.monomial_mem.mpr ha⟩
 
@@ -94,8 +92,7 @@ lemma reesMonomial_pow {n : ℕ} (a : A) (ha : a ∈ I ^ n) (k : ℕ) :
         (by rw [pow_mul]; exact Ideal.pow_mem_pow ha k) :=
   Subtype.ext <| by simp [Polynomial.monomial_pow]
 
-/-- Membership in the degree-`n` piece of the Rees algebra: `F = a·Xⁿ` for some `a ∈ I ^ n`.
-(blueprint: `lemma:nagata-rees-piece-membership`) -/
+/-- Membership in the degree-`n` piece of the Rees algebra: `F = a·Xⁿ` for some `a ∈ I ^ n`. -/
 lemma mem_reesGrading_iff_exists {n : ℕ} {F : reesAlgebra I} :
     F ∈ reesGrading I n ↔ ∃ (a : A) (ha : a ∈ I ^ n), F = reesMonomial I a ha := by
   constructor
@@ -118,9 +115,7 @@ instance reesGrading.instGradedMonoid : SetLike.GradedMonoid (reesGrading I) whe
     rw [reesMonomial_mul]
     exact reesMonomial_mem I _ _
 
-/-- The Rees grading is an internal direct sum decomposition of the Rees algebra.
-(blueprint: `lemma:nagata-rees-sum-components`,
-`lemma:nagata-rees-component-finite-support`) -/
+/-- The Rees grading is an internal direct sum decomposition of the Rees algebra. -/
 lemma reesGrading_isInternal : DirectSum.IsInternal (reesGrading I) := by
   classical
   constructor
@@ -161,8 +156,7 @@ noncomputable instance reesGrading.instGradedRing : GradedRing (reesGrading I) w
   __ := (inferInstance : SetLike.GradedMonoid (reesGrading I))
   __ := (reesGrading_isInternal I).chooseDecomposition
 
-/-- The base ring is isomorphic to the degree-zero piece of the Rees algebra, `a ↦ a·X⁰`.
-(blueprint: `lemma:nagata-rees-degree-zero`) -/
+/-- The base ring is isomorphic to the degree-zero piece of the Rees algebra, `a ↦ a·X⁰`. -/
 noncomputable def reesGradingZero : A ≃+* reesGrading I 0 where
   toFun a := ⟨reesMonomial I (n := 0) a (by rw [pow_zero, Ideal.one_eq_top]; trivial),
     reesMonomial_mem I a _⟩
@@ -201,8 +195,7 @@ lemma coeff_zero_coe_reesGradingZero_symm (F : reesGrading I 0) :
     (reesGradingZero I).symm F = ((F : reesAlgebra I) : A[X]).coeff 0 :=
   rfl
 
-/-- The degree-one element `a·X` of the Rees algebra, for `a ∈ I`.
-(blueprint: part of `def:nagata-rees-components`) -/
+/-- The degree-one element `a·X` of the Rees algebra, for `a ∈ I`. -/
 noncomputable def reesX (a : A) (ha : a ∈ I) : reesAlgebra I :=
   reesMonomial I (n := 1) a (by rwa [pow_one])
 
@@ -216,8 +209,7 @@ lemma reesX_mem (a : A) (ha : a ∈ I) : reesX I a ha ∈ reesGrading I 1 :=
 
 /-- The irrelevant ideal of the Rees grading is contained in the ideal spanned by the
 degree-one elements `a·X`, `a ∈ I`. Together with `Proj.iSup_basicOpen_eq_top` this shows
-that the charts at the elements `a·X` cover the blow-up.
-(blueprint: `lemma:nagata-rees-generators-cover-proj`, cover form) -/
+that the charts at the elements `a·X` cover the blow-up. -/
 private lemma reesMonomial_mem_span_of_mem_mul {m : ℕ} {a : A} (ha : a ∈ I ^ m * I) :
     ∀ h : a ∈ I ^ (m + 1), reesMonomial I a h ∈
       Ideal.span (Set.range fun a : I ↦ reesX I a a.2) := by

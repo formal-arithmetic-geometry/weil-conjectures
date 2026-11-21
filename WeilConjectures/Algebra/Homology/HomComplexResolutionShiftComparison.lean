@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 
 /-! # Right shifts of the Hom complex
 Source: Stacks Project, Cohomology on Sites, Sections 21.34--21.35.
-(blueprint: lem-pur-hom-complex-resolution-shift-comparison).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace CategoryTheory
 localized Hom complexes, naturally in both input complexes.
 Source: Stacks Project, sites-cohomology.tex, Sections 21.34 and 21.35
 (Tags 0A8X and 08JA), and Lemma 0A95.
-(blueprint: lem-pur-hom-complex-resolution-shift-comparison).
 Proof: Put S = shift(n). For each M compare I(M)[n] and I(M[n]) through
 I(I(M)[n]). The first arrow is the resolution map of I(M)[n]. The second
 is I applied to the shifted resolution map M[n] -> I(M)[n]. Both arrows

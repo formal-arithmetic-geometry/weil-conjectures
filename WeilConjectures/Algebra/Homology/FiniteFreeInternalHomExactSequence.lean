@@ -21,8 +21,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 /-! # Finite-free internal Hom exactness in arbitrary universes
 
 Source: Stacks Project, Tag 0GM8 via Tag 0GM7; the explicit proof is the
-explicit calculation described below
-(blueprint: lem-sc-finite-free-internal-hom-exact-sequence). -/
+explicit calculation described below -/
 
 @[expose] public section
 
@@ -252,7 +251,6 @@ private theorem finiteFreeHom_epi
 /-- Internal Hom from a finite free module preserves exactness, allowing different
 universes for the site and the module sections.
 Source: Stacks Project, cohomology.tex, Tag 0GM8, case (2), finite free Hom calculation.
-(blueprint: lem-sc-finite-free-internal-hom-exact-sequence)
 
 Proof: choose the displayed finite free basis. On each localized site, evaluate a
 linear map on its basis to identify internal Hom with a finite product of the target

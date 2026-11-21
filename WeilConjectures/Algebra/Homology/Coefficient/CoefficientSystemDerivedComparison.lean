@@ -43,7 +43,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21,
 and Lemma 4.10, printed pp. 23--24
-(blueprint: lem-pur-coefficient-system-derived-comparison).
 
 The index `n` denotes the positive exponent `n+1`. All systems, evaluation functors,
 scalar extensions and adjoint transitions are the recorded coefficient-evaluation
@@ -188,7 +187,6 @@ private theorem coefficientEvaluation_detectsIso
 unit, counit and coefficient-change compatibility; bounded-below objects of levelwise
 origin descend, and normalized ones stay normalized.
 Source: Zheng, Construction 4.1 and Lemma 4.10, printed pp. 21, 23--24
-(blueprint: lem-pur-coefficient-system-derived-comparison).
 
 Proof plan:
 1. Present strict systems as modules on the product sequence site. Kernels and cokernels

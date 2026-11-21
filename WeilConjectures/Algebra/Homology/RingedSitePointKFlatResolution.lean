@@ -30,7 +30,6 @@ namespace CategoryTheory.RingedSitePoint
 /-- There is a K-flat resolution whose stalk at a specified point is K-flat.
 Source: Stacks Project, Cohomology on Sites, Tag 0G7E, first paragraph, using
 Tags 077J, 06YQ and 06YR.
-(auxiliary; not a blueprint node)
 
 Proof: use the reduced flat-resolution functor to present a resolution as a
 countable filtered colimit of bounded-above flat complexes. The module stalk

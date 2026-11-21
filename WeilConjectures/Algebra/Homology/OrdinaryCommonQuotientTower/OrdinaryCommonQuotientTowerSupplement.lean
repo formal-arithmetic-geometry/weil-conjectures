@@ -456,7 +456,7 @@ private theorem quotientUnit_epi
 
 omit [EssentiallySmall.{r} C] in
 /-- The actual quotient unit has the prescribed section formula.
-Source: Stacks 03EK (blueprint: lem-weil-pbc-ordinary-common-quotient-tower). -/
+Source: Stacks 03EK. -/
 theorem commonQuotientUnit_sections
     {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R)
     (U : Cᵒᵖ) (x : M.val.obj U) :
@@ -1002,7 +1002,7 @@ variable {R B : Sheaf J CommRingCat.{r}} {φ : R ⟶ B}
 variable {D a b}
 
 /-- The constructed quotient units have the normalized pure-section formula.
-Source: Stacks 03EK (blueprint: lem-weil-pbc-ordinary-common-quotient-tower). -/
+Source: Stacks 03EK. -/
 theorem OrdinaryCommonQuotientTower.unit_sections
     (O : OrdinaryCommonQuotientTower D a b) (n : ℕ) (M : Mod R)
     (U : Cᵒᵖ) (x : M.val.obj U) :
@@ -1015,7 +1015,6 @@ theorem OrdinaryCommonQuotientTower.unit_sections
 
 /-- The pure-section transition formula forces compatibility of quotient units.
 Source: Stacks 03EK
-(blueprint: lem-weil-pbc-ordinary-common-quotient-tower).
 Proof: evaluate the transition on 1 tensor x. Ring transitions preserve 1,
 so the result is exactly the unit at the next level. Equality on sections proves
 componentwise equality and therefore equality of natural transformations. -/
@@ -1035,7 +1034,6 @@ theorem OrdinaryCommonQuotientTower.unit_transition
 
 /-- The normalized quotient unit is epi using local scalar lifts and tensor generation.
 Source: Stacks 03EK
-(blueprint: lem-weil-pbc-ordinary-common-quotient-tower).
 Proof: the presheaf unit is locally surjective by induction on tensors: lift a pure
 scalar along the local quotient projection; sums lift on the intersection cover.
 Sheafification units are locally surjective, so the composite is locally surjective
@@ -1062,7 +1060,6 @@ theorem OrdinaryCommonQuotientTower.unit_epi
 
 /-- The section normalizations determine all ordinary comparison data uniquely.
 Source: Stacks 03EK
-(blueprint: lem-weil-pbc-ordinary-common-quotient-tower).
 Proof: units agree on every section. For a transition or a comparison, restrict
 scalars to R and precompose with the epic quotient unit. The formulas at 1 tensor x
 make the resulting maps equal on every section. Cancel the unit; restriction leaves

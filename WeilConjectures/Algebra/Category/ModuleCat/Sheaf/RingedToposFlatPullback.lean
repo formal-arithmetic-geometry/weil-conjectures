@@ -17,7 +17,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 # Pullback of flat modules along morphisms of ringed topoi
 
 Source: Stacks Project, Modules on Sites, Tag 05VD, lemma-pullback-flat
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -136,7 +135,6 @@ end ScalarExtension
 The algebraic inverse-image presentation specifies transport of all ring and module
 operations along the underlying inverse image. The pullback is its change of rings.
 Source: Stacks Project, Tag 05VD, lemma-pullback-flat
-(auxiliary; not a blueprint node).
 
 Proof plan:
 1. Use lem-weil-pbc-ringed-topos-site-presentation to present the geometric morphism by

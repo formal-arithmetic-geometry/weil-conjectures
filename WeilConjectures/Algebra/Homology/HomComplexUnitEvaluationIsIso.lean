@@ -12,7 +12,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 /-! # HomComplexUnitEvaluationIsIso
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-unit-evaluation-is-iso).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ set_option backward.isDefEq.respectTransparency true in
 -- Dependent projection and sheaf types require extra elaboration steps.
 /-- The degreewise evaluation map is invertible.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-unit-evaluation-is-iso).
 
 Proof: the specified projections form a limit fan. For nonzero source degree p,
 the single complex has zero object, and its internal Hom to any target is zero:

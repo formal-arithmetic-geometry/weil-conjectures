@@ -224,7 +224,6 @@ end
 homomorphism as the transpose of its inverse unit constraint.
 Source: Stacks Project, sites-modules.tex, section-presheaves-modules and
 lemma-tensor-product-pullback.
-(auxiliary; not a blueprint node).
 
 Proof: construct extension sectionwise as S(X) tensor over R(X) with M(X).
 Its restriction sends s tensor m to S(f)(s) tensor M(f)(m); naturality of the

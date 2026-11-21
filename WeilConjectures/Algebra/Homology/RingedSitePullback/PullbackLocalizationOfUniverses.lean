@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Limits.Constructions.Over.Basic
 # Localization of module pullback
 
 Source: Stacks Project, Modules on Sites, Tag 04J0.
-(blueprint: lem-pur-ringed-site-pullback-localization-universes)
 -/
 
 @[expose] public section
@@ -167,7 +166,6 @@ lemma local_over_val_map_apply (M : SheafOfModules.{max u v w} S) (V : D)
 -- Elaborate the comparison of composite adjunctions and their component units.
 /-- The canonical localization comparison agrees with the isomorphism of left adjoints.
 Source: Stacks Project, Modules on Sites, Tag 04J0.
-(blueprint: lem-pur-ringed-site-pullback-localization-universes).
 
 Proof: The right adjoints are identified using the product comparison
 U(V × X) ≅ U(V) × U(X). Uniqueness of left adjoints gives an isomorphism.

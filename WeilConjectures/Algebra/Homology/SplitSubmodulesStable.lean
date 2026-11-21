@@ -31,7 +31,6 @@ noncomputable def splitLineTerms
 
 /-- The kernel terms and the explicitly generated line terms are invariant under the differential.
 Source: Stacks Project, Algebra, Tag 00MT, proof, final three sentences.
-(blueprint: lem-weil-pbc-split-submodules-stable).
 
 Proof: Off the chain shape the differential is zero, so its image belongs to every submodule.
 For a differential j → j - 1, the kernel condition is nontrivial only when its target is i

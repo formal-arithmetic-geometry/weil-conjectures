@@ -28,7 +28,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   {R S : Sheaf J CommRingCat.{w}} {φ : R ⟶ S} (A : SystemScalarModel φ)
 
 /-- Maps out of scalar extension agree if they agree on all local unit tensors.
-Source: Stacks 03D7 and 03EK (blueprint: lem-pur-system-scalar-generators).
+Source: Stacks 03D7 and 03EK.
 Proof: apply the injective scalar Hom correspondence. Its transpose evaluates a map
 on the normalized adjunction unit, namely one tensor x. Equality of these section maps
 is equality of the transposed module-sheaf morphisms. -/
@@ -52,7 +52,7 @@ theorem systemScalarModel_hom_ext
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Scalar-extension maps send c tensor x to c tensor the image of x.
-Source: Stacks 03EK (blueprint: lem-pur-system-scalar-generators).
+Source: Stacks 03EK.
 Proof: naturality of the adjunction identifies the transpose of extension of f with
 f followed by the unit. Apply the normalized pure-tensor transpose formula and use
 linearity and the unit normalization. -/

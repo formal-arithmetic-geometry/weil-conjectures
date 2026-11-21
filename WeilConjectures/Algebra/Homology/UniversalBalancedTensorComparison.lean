@@ -14,7 +14,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 /-! # Universal scalar extension computed by a fixed second-factor resolution
 
 Source: Stacks Project, Tags 064L and 06Y6.
-(blueprint: new-lem-pc-universal-balanced-tensor-comparison).
 -/
 
 @[expose] public section
@@ -120,7 +119,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The resolved scalar-extension model and tensor with a K-flat second factor
 have naturally isomorphic additive homology functors.
 Source: Stacks Project, Tags 064L and 06Y6.
-(blueprint: new-lem-pc-universal-balanced-tensor-comparison).
 
 Proof: Write P(X) for the functorial K-flat resolution of X, and s_X for its
 augmentation. Form the natural span P(X) tensor F -> X tensor F and
@@ -252,7 +250,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Natural additive comparisons for universal scalar extension and a fixed K-flat
 second factor. Source: Stacks Project, Tags 064L and 06Y6.
-(blueprint: new-lem-pc-universal-balanced-tensor-comparison).
 
 Proof: use the functorial R-K-flat resolution P(X) -> X. Tensoring its augmentation
 with F is a quasi-isomorphism because F is K-flat. Tensoring F -> B[0] with P(X)

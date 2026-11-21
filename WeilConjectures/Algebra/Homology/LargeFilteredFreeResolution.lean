@@ -17,7 +17,6 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 /-! # Filtered free resolutions in a larger carrier universe
 
 Source: Stacks Project, Remark 15.60.11 (Tag 09PB) and Lemma 22.20.4 (Tag 09KP).
-(blueprint: lem-pc-large-filtered-free-resolution).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace CochainComplex
 
 /-- The filtered free resolution construction with carriers in `Type (max u v)`.
 Source: Stacks Project, Remark 15.60.11 (Tag 09PB), Lemma 22.20.4 (Tag 09KP).
-(blueprint: lem-pc-large-filtered-free-resolution).
 
 Proof: let `B = ULift.{v} A`, a ring in the carrier universe. Restrict the scalar
 structure of `M` along `B ≃+* A`. Apply `exists_filtered_free_resolution` over `B`.

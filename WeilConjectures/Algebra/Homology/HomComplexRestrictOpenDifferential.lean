@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.InternalHomOverNaturality
 # Differential compatibility for the product comparison under open restriction
 
 Source: Stacks Project, Cohomology, Tag 08DL, and Cohomology on Sites, Tag 0A8X.
-(blueprint: lem-sc-hom-complex-restrict-open-differential).
 -/
 
 @[expose] public section
@@ -107,8 +106,7 @@ so restricting the pre- and post-compositions gives precisely the pre- and
 post-compositions of the restricted maps. Thus both summands, with the same sign,
 agree after every product projection, proving the asserted equality. The argument
 uses all integer-indexed factors, and applies unchanged to zero complexes, the
-empty open, and unbounded complexes.
-(blueprint: lem-sc-hom-complex-restrict-open-differential). -/
+empty open, and unbounded complexes. -/
 theorem homComplex_restrict_open_differential (X : RingedSpace.{u}) (U : Opens X)
     (L M : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) :
     let F := SheafOfModules.overFunctor.{u} (moduleRings X) U

@@ -29,8 +29,6 @@ Reference: Brian Conrad, *Deligne's notes on Nagata compactifications*, Theorem 
 ## Main results
 
 - `AlgebraicGeometry.exists_admissibleBlowup_quasiDomination_extends`: the statement above
-  (blueprint: `theorem-extension-partial-section--1`).
-
 -/
 
 public section

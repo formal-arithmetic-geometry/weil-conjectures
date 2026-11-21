@@ -16,7 +16,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 
 Source: Stacks Project, Tag 06Y4; Mathlib's cone presentation of
 triangles in the derived category.
-(blueprint: lem-pc-kflat-cone-triangle-presentation).
 -/
 
 @[expose] public section
@@ -43,8 +42,7 @@ tensors. For an acyclic V, tensoring the cone with V identifies with the cone
 of the tensor map, whose first two objects are acyclic. The triangulated
 subcategory of acyclic complexes therefore contains that cone, proving the
 third displayed condition.
-No boundedness or nonzero-ring hypothesis is used.
-(blueprint: lem-pc-kflat-cone-triangle-presentation). -/
+No boundedness or nonzero-ring hypothesis is used. -/
 theorem exists_kFlat_cone_triangle_presentation
     (A : Type u) [CommRing A] [HasDerivedCategory (ModuleCat.{u} A)]
     (T : Pretriangulated.Triangle (DerivedCategory (ModuleCat.{u} A)))

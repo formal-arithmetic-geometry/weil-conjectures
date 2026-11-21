@@ -24,7 +24,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
 
 Source: Stacks Project, Cohomology on Sites, proof of Lemma 06YS and Lemma 077J;
 Derived Categories, Lemma 0949
-(blueprint: lem-pc-flat-truncation-telescope-comparison).
 -/
 
 @[expose] public section
@@ -89,7 +88,7 @@ private theorem quasiIso_of_cone_map_augmentation
 /-- A canonical augmentation from the telescope of replacements of good truncations
 is a quasi-isomorphism. No flatness or boundedness of the replacements is needed.
 Source: Stacks Project, proof of Lemma 06YS via Lemma 077J; Derived Categories,
-Lemma 0949 (blueprint: lem-pc-flat-truncation-telescope-comparison).
+Lemma 0949.
 
 Proof: Take the truncation transition maps and canonical telescope augmentation
 supplied by `quasiIso_hocolim_truncLE_and_filtered_colimit`. Truncation inclusions

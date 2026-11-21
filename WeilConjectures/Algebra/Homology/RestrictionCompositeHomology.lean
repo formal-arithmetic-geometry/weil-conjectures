@@ -52,7 +52,6 @@ private theorem homologyIso_comp
 
 /-- Restriction to two successive coefficient rings commutes with homology.
 Source: Stacks Project, Tag 06Y6; the exactness of restriction of scalars.
-(blueprint: lem-pc-restriction-composite-homology).
 
 Proof: all three maps are the canonical maps induced on kernel modulo image by
 restriction of scalars. Compose their defining equations with the quotient map

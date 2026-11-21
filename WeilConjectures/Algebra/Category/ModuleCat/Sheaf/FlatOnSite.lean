@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 # Flat sheaves of modules with independent universes
 
 Source: Stacks Project, Modules on Sites, Definition 03ER, item (3)
-(auxiliary; not a blueprint node).
 
 The blueprint node `def-pc-flat-sheaf-modules` is `SheafOfModules.IsFlat`, which needs the
 site and the coefficients in one universe. `SheafOfModules.IsFlatOnSite` is the same notion
@@ -45,7 +44,7 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
 sheafification instance arguments on the site provide the sheafification of presheaves of
 modules, hence the abelian category `Mod(R)`. This is `SheafOfModules.IsFlat` with independent
 universes, see `SheafOfModules.isFlatOnSite_iff_isFlat`.
-Source: Stacks Project, Tag 03ER, item (3) (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 03ER, item (3). -/
 def IsFlatOnSite
     (F : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :
     Prop :=
@@ -57,7 +56,6 @@ namespace SheafOfModules
 
 /-- When the site and the coefficients live in one universe, `IsFlatOnSite` agrees with
 `SheafOfModules.IsFlat`, the formalisation of `def-pc-flat-sheaf-modules`
-(auxiliary; not a blueprint node).
 
 Proof: `siteSheafTensorRightIso` identifies `siteSheafTensorRight F` with `tensorRight F` for
 the monoidal structure `SheafOfModules.monoidalCategory R`, and exactness is invariant under

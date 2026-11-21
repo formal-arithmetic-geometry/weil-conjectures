@@ -11,7 +11,6 @@ import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 /-! # Normalized descent of an ordinary internal Hom comparison
 
 Source: Stacks Project, Tags 08J7, 0A95 and 08JB.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -36,7 +35,7 @@ abbrev ordinary {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   Functor.uncurry.obj (homComplexFunctor (R := R))
 
 /-- Transport both arguments of a Hom bifunctor along the same natural isomorphism.
-Source: Stacks 08JB (auxiliary; not a blueprint node). -/
+Source: Stacks 08JB. -/
 def pairIso {A B : Type*} [Category A] [Category B] {F G : A ⥤ B} (c : F ≅ G) :
     F.op.prod F ≅ G.op.prod G :=
   NatIso.ofComponents (fun X ↦ ((c.app X.1.unop).symm.op).prod (c.app X.2)) (by
@@ -46,7 +45,7 @@ def pairIso {A B : Type*} [Category A] [Category B] {F G : A ⥤ B} (c : F ≅ G
     · exact c.hom.naturality f.2)
 
 /-- The composite of two internal Hom comparisons, transported along composition.
-Source: Stacks 08JB (auxiliary; not a blueprint node). -/
+Source: Stacks 08JB. -/
 def composite {A B E : Type*} [Category A] [Category B] [Category E]
     {H : Aᵒᵖ × A ⥤ A} {HU : Bᵒᵖ × B ⥤ B} {HV : Eᵒᵖ × E ⥤ E}
     {F : A ⥤ B} {G : B ⥤ E} {V : A ⥤ E} (c : F ⋙ G ≅ V)
@@ -56,7 +55,7 @@ def composite {A B E : Type*} [Category A] [Category B] [Category E]
     Functor.isoWhiskerLeft (F.op.prod F) b ≪≫ Functor.isoWhiskerRight (pairIso c) HV
 
 /-- Compatibility of three comparisons with a specified composition isomorphism.
-Source: Stacks 08JB (auxiliary; not a blueprint node). -/
+Source: Stacks 08JB. -/
 def Compatible {A B E : Type*} [Category A] [Category B] [Category E]
     (H : Aᵒᵖ × A ⥤ A) (HU : Bᵒᵖ × B ⥤ B) (HV : Eᵒᵖ × E ⥤ E)
     (F : A ⥤ B) (G : B ⥤ E) (V : A ⥤ E) (c : F ⋙ G ≅ V)
@@ -70,7 +69,7 @@ def Compatible {A B E : Type*} [Category A] [Category B] [Category E]
       c.hom.app (H.obj (op L, M)) ≫ d.hom.app (op L, M)
 
 /-- Compatibility says precisely that the transported composite is the direct comparison.
-Source: Stacks 08JB (auxiliary; not a blueprint node).
+Source: Stacks 08JB.
 Proof: cancel the given composition isomorphism in each component. -/
 theorem compatible_iff {A B E : Type*} [Category A] [Category B] [Category E]
     (H : Aᵒᵖ × A ⥤ A) (HU : Bᵒᵖ × B ⥤ B) (HV : Eᵒᵖ × E ⥤ E)
@@ -96,8 +95,7 @@ theorem compatible_iff {A B E : Type*} [Category A] [Category B] [Category E]
     simpa [composite, pairIso, Category.assoc] using hh
 
 /-- The fixed augmentation comparison, using the factorization that defines derived Hom.
-Source: Stacks 08J7 and 0A95
-(auxiliary; not a blueprint node). -/
+Source: Stacks 08J7 and 0A95 -/
 def augmentation {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (Modules R)] :
     ordinary R ⋙ DerivedCategory.Q ⟶
@@ -116,8 +114,7 @@ def augmentation {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (ordinary R ⋙ DerivedCategory.Q) ≫ c.inv
 
 /-- Normalization on actual K-injective representatives. The chain comparison is supplied,
-rather than chosen by the predicate. Source: Stacks 08JB
-(auxiliary; not a blueprint node). -/
+rather than chosen by the predicate. Source: Stacks 08JB -/
 def Normalized
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -176,7 +173,6 @@ private theorem augmentation_isIso
 /-- An ordinary natural Hom comparison descends uniquely after K-injective restriction.
 
 Source: Stacks Project, Tags 08J7, 0A95 and 08JB.
-(auxiliary; not a blueprint node).
 
 Proof: precompose with Q in the source variable and with the K-injective inclusion followed
 by Q in the target variable. Both are localizations. The augmentation is invertible on
@@ -260,7 +256,6 @@ theorem comparison_exists
 
 /-- The representative equation determines a derived comparison uniquely.
 Source: Stacks 08J7, 0A95 and 08JB
-(auxiliary; not a blueprint node).
 Proof: evaluate after Q in the first variable and K-injective representatives in the
 second. Cancel the invertible augmentation and restriction factorization. The product of
 these localizations is essentially surjective, so equality there is equality everywhere. -/

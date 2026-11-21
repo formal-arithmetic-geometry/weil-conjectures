@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 # Universal property of the sheaf tensor product
 
 Source: literature/stacks-project/sites-modules.tex, Section 03EK, display after Tag 0GMW
-(blueprint: lem-pc-sites-sheaf-tensor-bilinear-universal)
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ set_option autoImplicit false
 attribute [local instance] monoidalCategory
 
 /-- Existence part of the sheaf tensor universal property.
-(blueprint: lem-pc-sites-sheaf-tensor-bilinear-universal)
 The sectionwise tensor maps are assembled into a presheaf morphism and uniquely factored
 through module sheafification; this is exactly the existence construction in the source proof. -/
 private theorem tensor_bilinear_universal_exists {C : Type u} [Category.{u} C]
@@ -83,7 +81,6 @@ private theorem tensor_bilinear_universal_exists {C : Type u} [Category.{u} C]
   rw [hi]
   exact hh
 /-- Uniqueness part of the sheaf tensor universal property.
-(blueprint: lem-pc-sites-sheaf-tensor-bilinear-universal)
 A morphism out of the sheafified presheaf tensor is determined by its values on pure tensors,
 by the generating property of the sectionwise module tensor and sheafification. -/
 private theorem tensor_bilinear_universal_unique {C : Type u} [Category.{u} C]
@@ -132,7 +129,6 @@ unit of the presheaf tensor product, identified with `F ⊗ G` by
 exactly one morphism `F ⊗ G ⟶ H` with the pure-tensor map (naturality in `H` holds by
 definition of the composite).
 Source: literature/stacks-project/sites-modules.tex, Section 03EK, display after Tag 0GMW
-(blueprint: lem-pc-sites-sheaf-tensor-bilinear-universal)
 Proof: sectionwise, `O(U)`-bilinear maps `F(U) × G(U) → H(U)` correspond to `O(U)`-linear
 maps `F(U) ⊗_{O(U)} G(U) → H(U)` (Tag 00CV), compatibly with restrictions, so restriction-
 compatible bilinear families correspond to morphisms from the presheaf tensor product

@@ -12,7 +12,6 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-! # The colimit of the models from their final pushout squares
 Source: Stacks Tag 00R0, colimit clause, expanded using pushout universal properties.
-(blueprint: lem-weil-pbc-limit-finite-presentation-colimits)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ indices these maps agree by pushout uniqueness and cocone naturality. A common u
 bound then shows they agree at any two indices. Choose one index using nonemptiness;
 its map factors every cocone leg. Uniqueness follows by pushout uniqueness at this index:
 the `Sfun` leg is prescribed, and the base leg is prescribed by base-colimit uniqueness.
-(blueprint: lem-weil-pbc-limit-finite-presentation-colimits)
 -/
 theorem colimits_of_limit_finite_presentation_core
     {Λ : Type u} [Preorder Λ] [Nonempty Λ]

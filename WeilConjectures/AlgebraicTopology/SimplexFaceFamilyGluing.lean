@@ -13,7 +13,6 @@ import Mathlib.Tactic
 
 Source: Stacks, Tag 017J: maps from a union of simplicial subsets are exactly maps
 from the subsets agreeing on their intersections.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -51,8 +50,7 @@ lemma faceUnion_generator_mem {ι : Type*} {N : ℕ} (d : ι → ℕ)
 Source: Stacks, Tag 017J. Choose a generator factorization for each simplex of the
 union. The pairwise compatibility hypothesis makes its assigned value independent of
 that choice. Precomposing a chosen factorization proves naturality, and taking the
-identity factorization proves the asserted values on all generators.
-(auxiliary; not a blueprint node) -/
+identity factorization proves the asserted values on all generators. -/
 theorem glue_face_family {C : Type u} [Category.{v} C]
     (V : SimplicialObject C) (T : C) {ι : Type*} {N : ℕ} (d : ι → ℕ)
     (e : ∀ i, ⦋d i⦌ ⟶ ⦋N⦌) (t : ∀ i, T ⟶ V.obj (op ⦋d i⦌))

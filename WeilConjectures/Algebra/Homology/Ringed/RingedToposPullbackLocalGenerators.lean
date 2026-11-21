@@ -29,7 +29,6 @@ namespace SheafOfModules
 /-- A section of the inverse image of a represented localization transports generators.
 
 Source: Stacks Project, Modules on Sites, Tags 03DO (5), 03DF, and 04IF.
-(blueprint: lem-weil-pbc-ringed-topos-pullback-local-generators).
 
 Proof: Put H = h_U^#. The equivalence between sheaves on D/U and the topos slice
 Sh(D)/H identifies the restriction of M and the finite free epimorphism defined by

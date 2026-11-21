@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.Embedding.Extend
 
 Source: Stacks Project, Section 12.18, Definition 12.18.3 (Tag 012Z),
 by the diagonal direct-sum formula for the total complex.
-(blueprint: lem-sc-total-extension-nat-arrow-iso)
 -/
 
 @[expose] public section
@@ -330,7 +329,6 @@ end firstQuadrantExtension
 /-- Extending both indices by zero commutes naturally with totalization.
 Source: Stacks Project, Section 12.18, Definition 12.18.3 (Tag 012Z);
 the reindexing verification below is written by J2.
-(blueprint: lem-sc-total-extension-nat-arrow-iso)
 
 Proof: write E for extension of the inner index and then the outer index.
 For n<0, every integer pair p+q=n has a negative coordinate, so every summand

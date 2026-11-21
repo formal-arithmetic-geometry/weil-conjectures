@@ -199,7 +199,6 @@ is needed.
 Source: Stacks Project, Sheaves on Spaces, Tag 006R,
 lemma-adjointness-tensor-restrict-presheaves; the balanced scalar-extension
 construction of `ModuleCat.ringExtendScalars`.
-(blueprint: lem-sc-field-scalar-presheaf-pullback-evaluation).
 
 Proof: write alpha_U for the component of the ring-presheaf map. Construct a module presheaf
 whose value on U is the balanced tensor R(U) tensor_k M(U), or equivalently

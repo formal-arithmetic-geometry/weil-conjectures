@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
 # Degreewise sections of the sheaf Hom complex
 
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-(blueprint: lem-pur-hom-complex-sections-cochains)
 -/
 
 @[expose] public section
@@ -52,7 +51,6 @@ private noncomputable def localizedSectionAddEquiv
 set_option backward.isDefEq.respectTransparency false in
 /-- Product projections identify degreewise sections with all localized cochains.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-(blueprint: lem-pur-hom-complex-sections-cochains)
 
 Proof: the product cone specified by homComplex_exists remains a product after
 forgetting module sheaves, evaluating at U, and forgetting to abelian groups.

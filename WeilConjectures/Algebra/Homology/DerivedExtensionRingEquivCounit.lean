@@ -12,8 +12,7 @@ import WeilConjectures.Algebra.Homology.DerivedRestrictionHomologyFactors
 
 /-! # Transporting universal derived counits along coefficient equivalences
 
-Source: Stacks Project, Tags 06Y6 and 05RR.
-(blueprint: lem-pc-derived-extension-ring-equiv-counit). -/
+Source: Stacks Project, Tags 06Y6 and 05RR. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -44,8 +43,7 @@ Zero rings and complexes are allowed; no extra algebra action, cohomology model,
 or comparison invertibility occurs in the statement.
 Source: Stacks Project, Tag 06Y6, Lemma 15.61.1, independence of choices;
 Tag 05RR, localization of homotopy categories. This is steps 1--2 and the raw
-counit part of step 3 of lem-pc-base-derived-tensor-restricted-ring-comparison.
-(blueprint: lem-pc-derived-extension-ring-equiv-counit). -/
+counit part of step 3 of lem-pc-base-derived-tensor-restricted-ring-comparison. -/
 theorem exists_derivedExtension_ringEquiv_counit
     {R₀ B₀ R B : Type u}
     [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]

@@ -11,7 +11,6 @@ import all WeilConjectures.Algebra.Homology.DerivedExtensionRingEquivRawTranspor
 /-! # Counit-compatible transport of derived scalar extension
 
 Source: Stacks Project, Tag 06Y6, and the right Kan extension universal property.
-(blueprint: lem-pc-derived-extension-ring-equiv-raw-counit-equation)
 -/
 
 @[expose] public section
@@ -70,8 +69,7 @@ Source: Stacks Project, Tag 06Y6.
 Proof: for additive functors between abelian categories, transport the two universal
 counits through additive equivalences and
 compare their right Kan extensions. The canonical comparison commutes with the
-counits by the defining factorization equation of a right Kan extension lift.
-(blueprint: lem-pc-derived-extension-ring-equiv-raw-counit-equation). -/
+counits by the defining factorization equation of a right Kan extension lift. -/
 theorem raw_transport_counit_equation
     {C₀ D₀ C D : Type u}
     [Category.{v} C₀] [Category.{v} D₀] [Category.{v} C] [Category.{v} D]

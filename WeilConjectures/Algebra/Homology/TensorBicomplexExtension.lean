@@ -26,7 +26,6 @@ bifunctor, so its chain-map identities are inherited from Mathlib.
 The compatibility names therefore unfold directly to the library's canonical map.
 
 Source: Stacks Project, Algebra, Tag 00M3, functoriality paragraph.
-(blueprint: def-weil-pbc-tensor-bicomplex)
 -/
 
 @[expose] public section
@@ -42,8 +41,7 @@ variable {R : Type u} [CommRing R]
 /-- The commuting tensor bicomplex, with terms `Pᵢ ⊗ Qⱼ` and no totalization signs.
 This compatibility abbreviation is the canonical Mathlib bifunctor object.
 Its terms and commuting differentials are inherited definitionally.
-Source: Stacks Project, Algebra, Tag 00M3, proof, first paragraph.
-(blueprint: def-weil-pbc-tensor-bicomplex) -/
+Source: Stacks Project, Algebra, Tag 00M3, proof, first paragraph. -/
 abbrev tensorBicomplex (P Q : ChainComplex (ModuleCat.{u} R) ℕ) :
     HomologicalComplex₂ (ModuleCat.{u} R) (.down ℕ) (.down ℕ) :=
   ((Functor.mapBifunctorHomologicalComplex (curriedTensor (ModuleCat.{u} R)) (.down ℕ)
@@ -51,8 +49,7 @@ abbrev tensorBicomplex (P Q : ChainComplex (ModuleCat.{u} R) ℕ) :
 
 /-- Compatibility abbreviation for the canonical Mathlib bifunctor map.
 A pair of chain maps acts termwise on the tensor bicomplex.
-Source: Stacks Project, Algebra, Tag 00M3, functoriality paragraph.
-(blueprint: def-weil-pbc-tensor-bicomplex) -/
+Source: Stacks Project, Algebra, Tag 00M3, functoriality paragraph. -/
 abbrev tensorBicomplexMap {P P' Q Q' : ChainComplex (ModuleCat.{u} R) ℕ}
     (a : P ⟶ P') (b : Q ⟶ Q') :=
   dsimp% only [Functor.uncurry] (Functor.uncurry.obj

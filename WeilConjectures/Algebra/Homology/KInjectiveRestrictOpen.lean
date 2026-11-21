@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 # Restriction to an open preserves K-injective complexes
 
 Source: literature/stacks-project/cohomology.tex, Lemma 08BS
-(blueprint: lem-sc-derived-k-injective-restrict-open).
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ functor by `AlgebraicGeometry.open_restriction_adjunction_exact`
 hypothesis holds for the module categories on `U` and `X`.
 (2) Apply `CategoryTheory.Adjunction.preservesKInjectiveComplexes`
 (lem-weil-pbc-right-adjoint-preserves-kinjective) to this adjunction and the given
-K-injective `I`. Its termwise restriction is therefore K-injective on `U`.
-(blueprint: lem-sc-derived-k-injective-restrict-open). -/
+K-injective `I`. Its termwise restriction is therefore K-injective on `U`. -/
 theorem kInjective_of_restrict_open (X : RingedSpace.{u}) (U : Opens X)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ)
     [I.IsKInjective] :

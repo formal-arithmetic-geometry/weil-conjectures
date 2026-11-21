@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 Source: Stacks Project, sites-cohomology.tex, Tag 06YU, definition-derived-tor and
 its preceding construction, specialized to a degree-zero second factor.
-(auxiliary; not a blueprint node)
 
 The tensor and its representative comparison are the published site-descent construction.
 The termwise tensor is the existing tensor functor applied to a cochain complex.
@@ -271,7 +270,6 @@ objects, differentials and map components are respectively `P.X q tensor M`,
 No boundedness, termwise flatness of P, or flatness of M is assumed.
 
 Source: Stacks Project, Tag 06YU, definition-derived-tor and preceding construction
-(auxiliary; not a blueprint node).
 
 Proof plan (the node's seven steps):
 1. Work on a coefficient-universe small model of the site (prose-01-10).

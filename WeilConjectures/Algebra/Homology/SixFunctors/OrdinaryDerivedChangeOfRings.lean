@@ -58,7 +58,6 @@ import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructur
 /-! # Ordinary-module presentation of derived change of rings
 
 Source: Stacks Project, Tags 06YY, 06XN, 06Y1 and 0A6A.
-(blueprint: lem-pur-derived-change-of-rings).
 The generic ringed-site construction remains publicly imported. The additional
 presentation retains ordinary module complexes and normalizes the tensor comparison
 by the ordinary scalar-extension tensor comparison on K-flat representatives.
@@ -99,7 +98,7 @@ end ModuleCat
 namespace ModuleCat
 
 /-- The ordinary-module universal pair, including its canonical tensor structure.
-Source: Stacks 06YY and 0A6A (blueprint: lem-pur-derived-change-of-rings).
+Source: Stacks 06YY and 0A6A.
 The tensor equation fixes the structure on resolving representatives, so the
 monoidal structure is not arbitrary extra data. -/
 structure OrdinaryDerivedChangeOfRings {R S : Type u} [CommRing R] [CommRing S]

@@ -33,7 +33,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 /-- Total cohomology of the vertical smart layer `[q,q+1)` is iterated cohomology.
 Source: blueprint thm-sp-double-complex-spectral-sequences, proof step 2;
 Stacks, Homology, lemma-ss-double-complex, item (5).
-(blueprint: lem-sp-double-complex-vertical-window-homology).
 
 Proof: after extension by zero, smart truncation at q from below replaces the
 q-th column term by its opcycles. Smart truncation at q from above then replaces

@@ -35,7 +35,6 @@ import Mathlib.CategoryTheory.HomCongr
 /-! # The trilinear universal property of the sheaf tensor product
 
 Source: Stacks Project, Modules on Sites, Sections 03EK, 04TT and Lemma 03EO.
-(blueprint: lem-pd-sheaf-trilinear-universal)
 
 The trilinear maps are expressed directly as restriction-compatible families of
 separately linear functions, without introducing a second notion of sheaf morphism.
@@ -257,7 +256,6 @@ end Helpers
 
 /-- The natural trilinear bijection and its pure-triple equality criterion.
 Source: Stacks Project, Modules on Sites, Sections 03EK, 04TT and Lemma 03EO
-(blueprint: lem-pd-sheaf-trilinear-universal).
 
 The three IsLinearMap conditions express linearity in each variable. The
 subtype's restriction equation says precisely that the maps form a morphism of

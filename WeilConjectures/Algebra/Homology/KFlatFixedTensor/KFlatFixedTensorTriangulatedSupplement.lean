@@ -70,7 +70,6 @@ public import WeilConjectures.Algebra.Homology.KFlatFixedTensorTriangulated
 Source: Stacks Project, sites-cohomology.tex, Tags 06YM, 06YP and 06YU;
 derived.tex, definition-cone and definition-distinguished-triangle;
 more-algebra.tex, Tag 0FNH, item-shift-tensor.
-(blueprint: lem-weil-pbc-kflat-fixed-tensor-triangulated)
 
 The derived bifunctor and its resolving comparison are the ones already supplied
 by site-derived-tensor descent. The presentation packages the existing choices once,
@@ -800,8 +799,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
 
 /-- K-flatness for the canonical sheaf tensor is stable under shifts.
-Source: Stacks, Tag 06YU
-(blueprint: lem-weil-pbc-kflat-fixed-tensor-triangulated). -/
+Source: Stacks, Tag 06YU -/
 theorem shift_kFlat
     (A : CochainComplex (Modules R) ℤ)
     (hA : CochainComplex.IsKFlatIndependentCoefficients A) (n : ℤ) :

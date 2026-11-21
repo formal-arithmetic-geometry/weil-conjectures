@@ -66,7 +66,6 @@ private theorem scalarExtension_flat (M : realizationModules J A)
 
 /-- Canonical scalar realization carries flat scalar modules to flat module sheaves.
 Source: Stacks Project, Tags 03ET, 08FC and 05VD
-(auxiliary; not a blueprint node).
 Proof: the constant-module flatness theorem factors each finite scalar relation
 locally, and so makes the constant module sheaf flat. Scalar extension preserves
 this flatness: its tensor functor, after forgetting to abelian sheaves, is tensor

@@ -17,7 +17,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
 # K-flat resolutions on a ringed site
 
 Source: Stacks Project, Cohomology on Sites, Lemma 06YS
-(`sites-cohomology-lemma-K-flat-resolution`) (blueprint: lem-pc-kflat-resolution).
+(`sites-cohomology-lemma-K-flat-resolution`).
 -/
 
 @[expose] public section
@@ -74,7 +74,7 @@ private theorem flat_terms_mappingCone
 /-- Every complex of modules over a sheaf of commutative rings on a site admits a K-flat
 resolution with flat terms and a degreewise surjective augmentation. Surjectivity is in the
 category of sheaves of modules, i.e. an epimorphism, rather than surjectivity on all sections.
-Source: Stacks Project, Lemma 06YS (blueprint: lem-pc-kflat-resolution).
+Source: Stacks Project, Lemma 06YS.
 
 Proof outline recorded in the blueprint:
 1. Replace each good truncation of `G` by a bounded-above flat complex with a termwise

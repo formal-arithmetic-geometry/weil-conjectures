@@ -23,7 +23,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 # Localized derived morphisms into a K-injective complex
 
 Source: Stacks Project, Lemma 21.34.6, Tag 0A94
-(blueprint: lem-pur-rhom-into-kinjective-local).
 
 ## Main statements
 
@@ -42,7 +41,6 @@ namespace CategoryTheory
 
 /-- Restriction of module sheaves preserves zero morphisms.
 Source: Stacks Project, Lemma 21.20.1, as used in Tag 0A94
-(blueprint: lem-pur-rhom-into-kinjective-local).
 
 Proof: restriction evaluates a morphism at objects of the localized site. The restriction
 of a zero morphism therefore has zero at every component, and is the zero morphism. -/
@@ -59,7 +57,6 @@ theorem module_overFunctor_preservesZero
 chain maps. The induced map on degree-zero cohomology sends a chain map to its image under
 localization and is bijective.
 Source: Stacks Project, Lemma 21.34.6, Tag 0A94
-(blueprint: lem-pur-rhom-into-kinjective-local).
 
 Proof: restriction to `C/U` is right adjoint to exact extension by zero in module categories
 (lem-pur-site-restriction-module-adjunction-exact). Thus restriction preserves K-injective

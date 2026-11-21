@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomProduct
 # Reverse degreewise currying construction
 
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
-(blueprint: lem-sc-hom-tensor-reverse-construction)
 -/
 
 @[expose] public section
@@ -47,7 +46,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- Reverse currying construction with its evaluation equation, without inverse laws.
 Source: Stacks Project, Cohomology on Sites, Tag 0A90, inverse construction;
 Modules on Sites, Tag 03EO and Section 03EK.
-(blueprint: lem-sc-hom-tensor-reverse-construction).
 
 Proof: Restrict a localized map out of the total tensor term to each (p,q)
 summand. Pull it back along the presheaf-to-sheaf tensor map. Curry the resulting

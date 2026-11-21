@@ -17,7 +17,6 @@ import Mathlib.RingTheory.RingHom.FiniteType
 
 /-! # Approximation data with the base colimit
 Source: Stacks Tag 00R0, expanded from the non-local version of Tag 00QV.
-(blueprint: lem-weil-pbc-limit-finite-presentation-core)
 -/
 
 @[expose] public section
@@ -49,7 +48,6 @@ variable classes, hence are inverse. The tensor-product universal property
 makes the transition square a pushout. Taking `U = R` and composing with the
 chosen presentation gives the final pushout square at every index. The same
 argument permits zero variables, zero relations, and the zero ring.
-(blueprint: lem-weil-pbc-limit-finite-presentation-core)
 -/
 theorem exists_limit_finite_presentation_core
     {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S)

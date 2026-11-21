@@ -35,7 +35,6 @@ local notation "Mod" => SheafOfModules.{max u v}
 set_option synthInstance.maxSize 256 in
 /-- On one tensor summand the curried iterated Hom differential has three terms.
 Source: Stacks Project, Tag 0A90, using the sign calculation of Tag 0A5Y
-(blueprint: lem-sc-hom-tensor-iterated-differential-summand).
 
 Proof: Restrict to K^p tensor L^q. On any localized site expand the outer Hom
 projection formula in homComplex_exists: its postcomposition term applies the

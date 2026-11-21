@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.TotalFreeFiltrationOddQuotientMap
 # Degreewise bijectivity of the odd quotient map
 
 Source: Stacks Project, Tag 09KP, alternating column filtration.
-(blueprint: lem-pc-derived-total-filtration-odd-quotient-bijective)
 -/
 
 @[expose] public section
@@ -226,7 +225,6 @@ private lemma oddFullQuotientMap_surjective (j : ℕ) (k : ℤ) :
 
 /-- The descended odd quotient map is degreewise bijective.
 Source: Stacks Project, Tag 09KP, proof of lemma-resolve, successive quotients.
-(blueprint: lem-pc-derived-total-filtration-odd-quotient-bijective)
 
 Proof. Define a map from the total degree object to the third endpoint by
 projecting to column -j, applying e_j inverse, and applying (S j).g. The total

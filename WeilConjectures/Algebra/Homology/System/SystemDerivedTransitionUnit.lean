@@ -27,8 +27,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
 /-- The identity coefficient restriction and its canonical derived unit comparison.
-Source: Stacks 015F and 0FND
-(blueprint: lem-pur-system-derived-transition-unit). -/
+Source: Stacks 015F and 0FND -/
 def systemDerivedRestrictionUnit (n : ℕ) :
     (systemRestriction B (Nat.le_refl n)).mapDerivedCategory ≅
       𝟭 (DerivedCategory (systemLevel B n)) :=
@@ -37,7 +36,6 @@ def systemDerivedRestrictionUnit (n : ℕ) :
 
 /-- The identity derived transition is the inverse identity-restriction comparison.
 Source: Zheng 4.1; Stacks 015F
-(blueprint: lem-pur-system-derived-transition-unit).
 Proof: localization detects equality of natural transformations. On Q(K), postcompose
 with the two invertible exact evaluation factorizations. The transition representative
 formula and the inverse unit factorization identify both sides with Q of the strict
@@ -94,7 +92,6 @@ variable [EssentiallySmall.{w} C]
 
 /-- The canonical derived tensor unit is the transpose of the actual identity transition.
 Source: Zheng 4.1; Stacks 0FND
-(blueprint: lem-pur-system-derived-transition-unit).
 Proof: the canonical tensor unit is the left-adjoint uniqueness comparison with the
 identity adjunction. Its transpose becomes the identity after the restriction unit
 comparison, hence is the inverse of that comparison. The preceding theorem identifies

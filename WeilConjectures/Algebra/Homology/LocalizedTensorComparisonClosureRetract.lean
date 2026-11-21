@@ -50,8 +50,7 @@ retraction. The two naturality squares and the retract identities show that
 both composites are identities. Thus b is an isomorphism whenever a is.
 Transport through the identifications above proves the assertion for all
 K-flat representatives, all models and all degrees. This argument includes
-zero objects and identity retracts; no invertibility of t is assumed.
-(blueprint: lem-pc-localized-tensor-comparison-closure-retracts). -/
+zero objects and identity retracts; no invertibility of t is assumed. -/
 theorem localizedTensorComparisonProperty_closure_retracts
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :

@@ -34,7 +34,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ) (m : ℕ)
 
 /-- The selected evaluation square is represented by the actual strict transition.
-Source: Zheng 4.1 (blueprint: lem-pur-system-selected-derived-evaluation).
+Source: Zheng 4.1.
 Proof: compose the representative formula for exact subsequence evaluation with the
 representative formula for the actual strict transition from r(t(m)) to m. -/
 theorem systemSelectedDerivedSquare_rep (K : CochainComplex (StrictRingSystem B) ℤ) :
@@ -58,7 +58,7 @@ theorem systemSelectedDerivedSquare_rep (K : CochainComplex (StrictRingSystem B)
     systemDerivedSubsequenceEvaluation_rep, Category.assoc]
 
 /-- The ordinary selected comparison is the mate at the ordinary unit.
-Source: Zheng 4.1 (blueprint: lem-pur-system-selected-derived-evaluation).
+Source: Zheng 4.1.
 Proof: apply the ordinary selected transpose formula to the identity system map.
 Restriction preserves that identity, and its adjunction transpose is its unit. -/
 theorem systemSelectedOrdinaryUnitSquare
@@ -76,8 +76,7 @@ theorem systemSelectedOrdinaryUnitSquare
   exact ht
 
 /-- Derived subsequence extension evaluates as the derived tensor of the first
-selected component above m. Source: Zheng 4.1; Stacks 06YT and 0FND
-(blueprint: lem-pur-system-selected-derived-evaluation). -/
+selected component above m. Source: Zheng 4.1; Stacks 06YT and 0FND -/
 def systemSelectedDerivedBelow (S : SystemScalarAssignment (J := J))
     (T : SystemTensorCoherence S) :
     (systemSelectedDerivedExtension B r S T).derived ⋙ derivedSystemEvaluation B m ≅
@@ -99,7 +98,6 @@ def systemSelectedDerivedBelow (S : SystemScalarAssignment (J := J))
 
 /-- The selected derived comparison intertwines the actual normalized Hom transposes.
 Source: Zheng 4.1; Stacks 0FND
-(blueprint: lem-pur-system-selected-derived-evaluation).
 Proof: apply the general mate-transpose identity to the localized selected evaluation
 and strict transition square used to construct the comparison. -/
 theorem systemSelectedDerivedTranspose

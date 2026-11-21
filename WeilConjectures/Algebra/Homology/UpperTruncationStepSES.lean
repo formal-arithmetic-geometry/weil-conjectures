@@ -16,7 +16,7 @@ import WeilConjectures.Algebra.Homology.TwoTermCoimageQuasiIso
 # Successive canonical upper truncations
 
 Source: Stacks Project, Homology, Section 12.15 (Tag 0118), and Derived Categories,
-Remark 13.12.4 (Tag 08J5) (blueprint: theorem-pbc-injective-acyclicity).
+Remark 13.12.4 (Tag 08J5).
 -/
 
 @[expose] public section
@@ -164,7 +164,6 @@ private lemma stepInclusion_naturality {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- Successive canonical upper truncations and their cohomology quotient.
 Source: Stacks, Homology Tag 0118 and Derived Categories Remark 08J5
-(blueprint: theorem-pbc-injective-acyclicity).
 
 Proof, following the node's seven steps:
 1. Define the inclusion by the identity below `q - 1`, the cycles inclusion at

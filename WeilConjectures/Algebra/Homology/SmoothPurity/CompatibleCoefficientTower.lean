@@ -40,7 +40,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 /-! # Compatible coefficient tensor towers
 
 Source: Stacks Project, Modules on Sites, Tags 03EK, 03CY and 03DA;
-Homology, Tag 011G (blueprint: lem-pur-compatible-coefficient-tower).
+Homology, Tag 011G.
 
 The natural-number index `n` represents the paper's positive index `n + 1`.
 The tensor API writes the coefficient factor first, so `z ⊗ x` below is the
@@ -62,7 +62,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   {J : GrothendieckTopology C}
 
 /-- Forget commutativity of the coefficient sheaf, using the existing sheaf-composition
-functor. Source: Stacks 03EK (blueprint: lem-pur-compatible-coefficient-tower). -/
+functor. Source: Stacks 03EK. -/
 abbrev coefficientTensorRing (R : Sheaf J CommRingCat.{u}) : Sheaf J RingCat.{u} :=
   (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R
 

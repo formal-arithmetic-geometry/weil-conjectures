@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 
 Source: Stacks Project, Tags 05SU, 06Y6 and 08IB; the explicit square is an
 explicit compatibility calculation for the ordinary shift model.
-(blueprint: lem-pc-base-derived-tensor-counit-shift-square).
 -/
 
 @[expose] public section
@@ -125,8 +124,7 @@ compose this square with the preceding ones. Their interior edges cancel to give
 the displayed equality. No E-action, transported model, localized comparison,
 flatness or invertibility of counit is used. For n=0 the shift edges are the unit
 comparisons; zero complexes give the zero square; nonflat extensions cause no
-problem because only restriction is required to preserve homology.
-(blueprint: lem-pc-base-derived-tensor-counit-shift-square). -/
+problem because only restriction is required to preserve homology. -/
 theorem baseDerivedTensor_counit_shift_square
     (derived : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))
     [derived.CommShift ℤ]

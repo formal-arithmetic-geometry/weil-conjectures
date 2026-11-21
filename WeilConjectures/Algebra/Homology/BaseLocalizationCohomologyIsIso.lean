@@ -16,7 +16,6 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 /-! # B-linear invertibility of base localization
 
 Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-base-localization-cohomology-is-iso).
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ variable (R Rp B A D : Type u)
 
 /-- The canonical base-localization map is an isomorphism on B-linear cohomology.
 Source: Stacks Project, Tag 06Y6, lemma-derived-base-change; Tag 0DJ8.
-(blueprint: lem-pc-base-localization-cohomology-is-iso).
 
 Proof: choose a K-flat Rp-resolution P of the restricted input Q. Restriction to R
 preserves K-flatness: tensor an acyclic R-complex with Rp, use exactness of localization,

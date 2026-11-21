@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 Source: Stacks Project, Derived Categories, Lemma 13.18.7 (Tag 013S),
 `lemma-morphisms-equal-up-to-homotopy`
-(blueprint: lem-weil-pbc-lift-to-injective-unique-up-to-homotopy).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace CochainComplex
 /-- Maps into a bounded below complex of injectives are homotopic whenever their
 composites with a quasi-isomorphism are homotopic.
 Source: Stacks Project, Derived Categories, Lemma 13.18.7 (Tag 013S)
-(blueprint: lem-weil-pbc-lift-to-injective-unique-up-to-homotopy).
 
 Proof:
 1. Convert the lower bound to `IsStrictlyGE` and use Mathlib's

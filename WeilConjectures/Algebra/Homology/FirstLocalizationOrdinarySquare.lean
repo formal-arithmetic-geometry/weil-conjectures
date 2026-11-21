@@ -10,8 +10,7 @@ public import WeilConjectures.Algebra.Homology.FirstLocalizationMap
 
 /-! # Comparison square for the characterized localization map
 
-Source: Stacks Project, Tag 06Y6; Tag 0DJ8.
-(blueprint: lem-pc-first-localization-ordinary-square). -/
+Source: Stacks Project, Tag 06Y6; Tag 0DJ8. -/
 
 @[expose] public section
 
@@ -180,7 +179,6 @@ private theorem ordinary_B_square (i : ℤ)
 
 /-- Naturality of the ordinary comparison under the first-factor unit, after
 forgetting scalar actions. Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-first-localization-ordinary-square).
 
 Proof: install the universal derived-functor instances of L and K. Their unique
 comparison zeta intertwines the two counits. Apply counit naturality to

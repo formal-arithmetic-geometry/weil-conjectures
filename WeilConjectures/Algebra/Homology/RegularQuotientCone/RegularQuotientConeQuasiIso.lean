@@ -38,7 +38,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # The strict quotient augmentation is a quasi-isomorphism on K-flat complexes
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YP, 06YS and 06YY.
-(blueprint: lem-cbc-regular-quotient-cone-quasi-iso).
 -/
 
 @[expose] public section
@@ -77,7 +76,6 @@ include hexact hsections in
 /-- The normalized zero-shifted-component augmentation computes the quotient on all K-flats.
 
 Source: Stacks Project, Tags 06YP, 06YS and 06YY
-(blueprint: lem-cbc-regular-quotient-cone-quasi-iso).
 
 Proof: For a complex with flat terms, tensor the coefficient-ring short exact sequence
 in each degree. The normalized tensor comparisons identify it with multiplication by t

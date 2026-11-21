@@ -77,7 +77,6 @@ private lemma restriction_quasiIso {K M : CochainComplex C ℤ} (f : K ⟶ M)
 to the restricted complementary truncation is a quasi-isomorphism.
 Source: Mathlib Algebra/Homology/Embedding/AreComplementary.lean,
 `shortComplexTruncLEX₃ToTruncGE` and its `QuasiIso` instance.
-(blueprint: lem-sp-restricted-complementary-truncation-comparison).
 
 Proof: put E = L.extend embeddingUpNat. Restriction to natural vertical indices
 preserves cokernels, since colimits of complexes are computed degreewise. Thus the

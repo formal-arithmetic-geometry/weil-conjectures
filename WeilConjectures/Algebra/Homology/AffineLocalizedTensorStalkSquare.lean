@@ -13,8 +13,7 @@ import WeilConjectures.Algebra.Homology.AffineScalarLocalizedTensorSquare
 
 /-! # AffineLocalizedTensorStalkSquare
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-localized-tensor-stalk-square). -/
+Source: Stacks Project, Tag 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,7 +32,6 @@ set_option linter.unusedVariables false in
 /-- The algebraic localization square before ordinary pullback target coordinates.
 Source: Stacks Project, Tag 0DJ8, displayed affine localization identity;
 Tags 06Y6, 01HV and 01I9.
-(blueprint: lem-pc-affine-localized-tensor-stalk-square).
 
 Proof: exists_affineStalkScalarExtensionCoordinates supplies a chain isomorphism
 chi from scalar extension of C to the stalk of tilde C, its germ formula, and

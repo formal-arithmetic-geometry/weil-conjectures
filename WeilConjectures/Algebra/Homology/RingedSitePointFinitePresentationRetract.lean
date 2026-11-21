@@ -409,7 +409,6 @@ end Matrix
 /-- Any finitely presented stalk module is a retract of the stalk of a global module sheaf.
 Source: Stacks Project, Cohomology on Sites, Tag 0DEN, finite-presentation descent,
 with extension by zero of the local realization.
-(auxiliary; not a blueprint node)
 
 Proof: choose a finite presentation of M. On the sheaf of all matrices of its fixed
 finite size, form the universal matrix cokernel: its rows and columns are copies

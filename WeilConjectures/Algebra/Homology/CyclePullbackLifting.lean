@@ -25,8 +25,7 @@ namespace CochainComplex
 
 /-- A compatible pair factors through the kernel-pullback. Pulling back an epimorphic
 comparison to that pullback gives a simultaneous lift of its two components.
-Source: Stacks Project, Derived Categories, Lemma 05T7 (1), local lifting step
-(blueprint: lem-pc-functorial-cycle-pullback-lifting-stage3). -/
+Source: Stacks Project, Derived Categories, Lemma 05T7 (1), local lifting step -/
 theorem cyclePullback_lifting_pointwise {A : Type u} [Category.{v} A] [Abelian A]
     {E F : CochainComplex A ℤ} (ε : E ⟶ F) (i : ℤ)
     (e : E.X i ⟶ pullback (F.d i (i + 1))

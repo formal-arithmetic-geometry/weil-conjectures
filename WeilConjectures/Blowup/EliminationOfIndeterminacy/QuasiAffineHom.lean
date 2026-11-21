@@ -19,7 +19,6 @@ Conrad's Theorem 2.4, Case 2: a separated quasi-affine target locally of finite 
 quasi-compact quasi-separated base
 (`AlgebraicGeometry.exists_isAdmissible_extend_of_isAffineOpen`,
 `AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom`).
-(Blueprint: `lemma:nagata-conrad-quasi-affine-equal-opens`.)
 -/
 
 @[expose] public section

@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.KFlat
 # Naturality of the sheaf tensor comparison
 
 Source: Stacks Project, Modules on Sites, Section 03EK.
-(blueprint: lem-sc-hom-tensor-comparison-natural)
 -/
 
 @[expose] public section
@@ -49,7 +48,6 @@ local notation "Mod" => SheafOfModules.{max u v}
 set_option backward.isDefEq.respectTransparency false in
 /-- Naturality of the tensor comparison isomorphism.
 Source: Stacks Project, Section 03EK and Lemma 03CY.
-(blueprint: lem-sc-hom-tensor-comparison-natural)
 
 Proof: Let S be module sheafification and epsilon its invertible counit.
 The comparison is the tensor of the inverse counit components followed by

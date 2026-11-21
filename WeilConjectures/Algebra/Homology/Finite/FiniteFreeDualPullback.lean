@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 
 Source: Stacks Project, Modules on Sites, Tags 0GMX and 0FNY; the Powers and duals
 paragraph of `lemma-inverse-image-coefficient-sheaves--2`, main-20261015
-(blueprint: lem-pur-ringed-site-finite-free-dual-pullback).
 
 The coefficient morphism `a : R → u_* S` is the adjunct of the source's
 `c : f⁻¹ R → S`. The module pullback is Mathlib's left adjoint, hence the same
@@ -52,16 +51,14 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
 /-- Mathlib's module pullback with its existence proof supplied explicitly.
 This transparent abbreviation permits the statement to assert existence of the
 adjoint instead of imposing it as a further hypothesis. Source: Stacks Project,
-Modules on Sites, Tags 03D7 and 0GMX
-(blueprint: lem-pur-ringed-site-finite-free-dual-pullback). -/
+Modules on Sites, Tags 03D7 and 0GMX -/
 noncomputable abbrev ringedSitePullbackFunctor
     (hAdj : (pushforward.{max u v w} a).IsRightAdjoint) :=
   @pullback _ _ _ _ _ _ _ _ _ _ a hAdj
 
 /-- A section pulled back along a ringed site morphism, using the unit of the
 module pullback adjunction. This is the image `1 ⊗ f⁻¹(m)` in the sheafified tensor
-product. Source: Stacks Project, Modules on Sites, Tag 0GMX
-(blueprint: lem-pur-ringed-site-finite-free-dual-pullback). -/
+product. Source: Stacks Project, Modules on Sites, Tag 0GMX -/
 noncomputable def ringedSitePullbackSection
     (hAdj : (pushforward.{max u v w} a).IsRightAdjoint)
     (M : ringedSiteModules.{max u v w}
@@ -89,7 +86,6 @@ private theorem isIso_of_over_cover
 /-- The evaluation comparison is invertible for a finite locally free module,
 contravariantly natural, and carries pulled-back dual bases to dual bases.
 Source: Stacks Project, Modules on Sites, Tags 0GMX, 0FNY, 03EL and 04J0
-(blueprint: lem-pur-ringed-site-finite-free-dual-pullback).
 
 The comparison is specified, rather than taken as an arbitrary morphism: for
 all local functionals `φ` and sections `m`, its evaluation on their pullbacks

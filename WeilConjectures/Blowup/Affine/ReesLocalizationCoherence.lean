@@ -31,11 +31,8 @@ that these maps are coherent with the canonical identifications of iterated loca
   underlying ring maps.
 - `AlgebraicGeometry.reesGrading.hom_localization_mul` /
   `AlgebraicGeometry.AffineBlowup.hom_localization_mul` — iterated localization coherence
-  (blueprint: `definition-admissible-blow-up--1`).
 - `AlgebraicGeometry.reesGrading.hom_localization_one` /
   `AlgebraicGeometry.AffineBlowup.hom_localization_one` — localization at one
-  (blueprint: `definition-admissible-blow-up--1`).
-
 -/
 
 @[expose] public section

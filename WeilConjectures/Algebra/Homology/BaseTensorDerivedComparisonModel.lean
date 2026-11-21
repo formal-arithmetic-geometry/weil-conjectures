@@ -11,7 +11,6 @@ public import WeilConjectures.Algebra.Homology.BaseTensorDerivedComparison
 /-! # Evaluation of the derived coefficient comparison on a cohomology model
 
 Source: Stacks Project, Tags 06Y6 and 0DJ7.
-(blueprint: lem-pc-base-tensor-derived-comparison-model).
 -/
 
 @[expose] public section
@@ -50,8 +49,7 @@ to the derived restricted input. This gives the equation after composing both
 sides with restriction of s.hom. Cancel that invertible map to get the formula
 with s.inv. Tensor induction proves each chain-map identification, so there is
 no choice of associativity or coefficient maps and no flatness assumption.
-Source: Stacks Project, Tag 06Y6 and equation-bc (Tag 0DJ7).
-(blueprint: lem-pc-base-tensor-derived-comparison-model). -/
+Source: Stacks Project, Tag 06Y6 and equation-bc (Tag 0DJ7). -/
 theorem baseTensorDerivedComparison_model
     (F : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))
     (δ : DerivedCategory.Qh ⋙ F ⟶

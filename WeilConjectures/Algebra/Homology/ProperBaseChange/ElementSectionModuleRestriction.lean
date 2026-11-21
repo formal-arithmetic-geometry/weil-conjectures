@@ -24,7 +24,6 @@ set_option maxRecDepth 4000 in
 /-- Restriction along a generalized section preserves colimits and the rank-one module.
 
 Source: Stacks Project, Modules on Sites, Tags 04IE and 04IF; Sites, Tag 0791.
-(blueprint: lem-weil-pbc-element-section-module-restriction).
 
 Proof: The sheafification adjunction and Yoneda turn t into a map b:H to A,
 where H is the sheafified representable at V. Restrict along its element-site

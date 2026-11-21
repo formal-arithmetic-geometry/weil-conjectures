@@ -21,7 +21,6 @@ import WeilConjectures.Algebra.Homology.ZigzagTrivialIfRowBoundary
 
 Source: Stacks Project, Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence),
 including its preceding cokernel-complex construction and functoriality paragraph
-(blueprint: lem-weil-pbc-double-complex-cokernel-homology-iso).
 -/
 
 @[expose] public section
@@ -261,7 +260,6 @@ The single family `θ` is chosen before quantifying over morphisms, and its homs
 satisfy the naturality square `H_n(Φʳᵗ) ∘ θ^A = θ^B ∘ H_n(Φᵘᵖ)`.
 
 Source: Stacks Project, Algebra, Tag 00M1 (lemma-no-spectral-sequence), setup and proof
-(blueprint: lem-weil-pbc-double-complex-cokernel-homology-iso).
 
 Proof: (1) Transpose the bicomplex. Its row-cokernel complex is the original
 column-cokernel complex, and its zig-zag module is the same, by exchanging coordinates

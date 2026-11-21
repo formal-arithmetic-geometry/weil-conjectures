@@ -14,7 +14,6 @@ import Mathlib.Algebra.Homology.Embedding.HomEquiv
 # Assembling an ascending cokernel and pushout system
 
 Source: Stacks Project, Tag 05T6(1), the ascending recursion dual to Tag 05T7(1).
-(blueprint: lem-weil-pbc-subcategory-right-resolution-assembly).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace CochainComplex
 pushout factorizations into an integer-indexed complex. This is only the assembly step:
 the sequence, all its monomorphisms, and its pushouts are inputs; no quasi-isomorphism
 is asserted. Source: Stacks Project, Tag 05T6(1), the recursion in the dual of Tag 05T7(1).
-(blueprint: lem-weil-pbc-subcategory-right-resolution-assembly).
 
 Proof: Put `I.X (a + m) = X m` for `m : ℕ`, and put the chosen zero object in every
 smaller degree. Use the supplied `d m` as the differential in degree `a + m`; all other

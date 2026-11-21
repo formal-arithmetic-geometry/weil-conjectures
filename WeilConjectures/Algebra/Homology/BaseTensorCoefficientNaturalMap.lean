@@ -26,7 +26,6 @@ variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
 
 /-- Natural coefficient extension on complexes.
 Source: Stacks Project, Tag 065Y, equation-comparison-map (Tag 065Z).
-(blueprint: lem-pc-base-tensor-coefficient-natural-map).
 
 Proof: the scalar-extension adjunction transposes the A-to-D unit, restricted
 along R-to-A, to a B-linear map sending b tensor p to includeRight(b) tensor p.

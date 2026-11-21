@@ -21,7 +21,6 @@ import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 
 Source: Stacks Project, Algebra, Lemma Tag 00MN
 (`literature/stacks-project/algebra.tex`, lemma-surjective-on-tor-one-trivial).
-(blueprint: lem-weil-pbc-tor-one-surjective-change-rings)
 
 The first homology of a tensor product of a free resolution is the Tor module
 of `def-weil-pbc-tor-modules`, realized by Mathlib's `CategoryTheory.Tor'`.
@@ -115,7 +114,6 @@ private theorem epi_homology_one_of_right_exact
 
 Source: Stacks Project, Algebra, Lemma Tag 00MN
 (`literature/stacks-project/algebra.tex`, lines 23881--23919).
-(blueprint: lem-weil-pbc-tor-one-surjective-change-rings)
 
 Proof (a shorter comparison argument using the right-exact presentation of Stacks 00MN):
 Scalar extension is a left adjoint, hence preserves the exact augmented pair in

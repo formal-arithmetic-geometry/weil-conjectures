@@ -17,8 +17,7 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Explicit coordinates for affine base-change cohomology
 
-Source: Stacks Project, Tags 0DJ8, 06Y6 and 01I9.
-(blueprint: def-pc-affine-base-change-tilde-coordinates). -/
+Source: Stacks Project, Tags 0DJ8, 06Y6 and 01I9. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,8 +29,7 @@ open scoped TensorProduct
 noncomputable section
 namespace AlgebraicGeometry
 
-/-- Exact tilde preserves zero morphisms. Source: Stacks, Tag 01I9.
-(blueprint: def-pc-affine-base-change-tilde-coordinates). -/
+/-- Exact tilde preserves zero morphisms. Source: Stacks, Tag 01I9. -/
 @[instance] theorem affineBaseChangeTilde_preservesZero (A : Type u) [CommRing A] :
     (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u}
       (moduleRings (Spec (.of A)).toRingedSpace))
@@ -39,7 +37,6 @@ namespace AlgebraicGeometry
   ⟨fun _ _ ↦ tilde.map_zero⟩
 
 /-- Exact tilde commutes with cohomology. Source: Stacks, Tag 01I9.
-(blueprint: def-pc-affine-base-change-tilde-coordinates).
 Proof: tilde is left adjoint to global sections, so preserves cokernels. Its maps
 on sections are maps of localizations, which preserve injectivity. Thus it preserves
 monomorphisms and cokernels, and consequently homology. -/
@@ -76,7 +73,6 @@ variable [∀ Y : Scheme.{u},
 
 /-- The canonical target coordinates, obtained from ordinary tensor pullback and its
 universal derived counit. Source: Stacks, Tags 01I9 and 0DJ8.
-(blueprint: def-pc-affine-base-change-tilde-coordinates).
 This is an actual composite of isomorphisms: exact tilde commutes with homology;
 the termwise pullback comparison identifies the extended complex; the inverse
 counit and the supplied representative isomorphism identify its derived object. -/
@@ -151,8 +147,7 @@ def affineBaseChangeTildeCohomologyIso
           ((TB.mapHomologicalComplex (.up ℤ)).obj C)).symm ≪≫ H.mapIso eC)
 
 /-- Extend the tensor-algebra source cohomology to the actual upper-left ring.
-Source: Stacks, Tag 0DJ8, displayed affine cohomology map.
-(blueprint: def-pc-affine-base-change-tilde-coordinates). -/
+Source: Stacks, Tag 0DJ8, displayed affine cohomology map. -/
 def affineBaseChangeTildeModule
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]
@@ -164,7 +159,6 @@ def affineBaseChangeTildeModule
 
 /-- The actual module arrow is the tensor comparison followed by canonical target
 coordinates. Source: Stacks, Tag 0DJ8, affine proof.
-(blueprint: def-pc-affine-base-change-tilde-coordinates).
 The equality hφ transports the extended complex along the specified ring map;
 no module is chosen from a mere existence theorem. -/
 def affineBaseChangeTildeModuleMap

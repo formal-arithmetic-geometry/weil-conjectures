@@ -22,7 +22,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 Source: Stacks Project, Cohomology on Sites, Tags 0A96, 06YQ, 0FPR;
 Modules on Sites, Tag 0FNY; More on Algebra, Tag 0FNK
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -69,7 +68,6 @@ set_option synthInstance.maxSize 2048 in
 /-- Tensoring a K-injective complex with a bounded complex of finite-free retracts
 preserves K-injectivity. Neither boundedness of `I` nor a zero differential on `P` is required.
 Source: Stacks Project, Tags 0A96, 06YQ, 0FPR, 0FNY, 0FNK
-(auxiliary; not a blueprint node).
 
 Proof:
 1. Finite powers of the tensor unit are dualizable, by induction using the zero object

@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.Embedding.TruncLEHomology
 
 Source: Stacks Project, More on Algebra, Tag 066Q; the explicit tail-splitting
 argument in lem-sc-strict-perfect-closed-pushforward-stalk-resolution, step 3.
-(blueprint: lem-sc-bounded-projective-nonpositive-model).
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- Cycles in nonnegative degrees of a bounded-above projective complex are projective
-when its positive homology vanishes. The descending split-epimorphism argument for
-(blueprint: lem-sc-bounded-projective-nonpositive-model), source Stacks Tag 066Q. -/
+when its positive homology vanishes. The descending split-epimorphism argument for, source Stacks Tag 066Q. -/
 private theorem projective_cycles
     {C : Type u} [Category.{v} C] [Abelian C]
     (L : CochainComplex C ℤ) (hproj : ∀ j : ℤ, Projective (L.X j))
@@ -81,7 +79,6 @@ model with zero positive terms, together with a quasi-isomorphism to the origina
 
 Source: Stacks Project, More on Algebra, Tag 066Q; explicit tail splitting in
 lem-sc-strict-perfect-closed-pushforward-stalk-resolution, step 3.
-(blueprint: lem-sc-bounded-projective-nonpositive-model).
 
 Proof. First show that the cycle object in degree j ≥ 0 is projective by downward
 induction from an upper bound. At the upper end the outgoing differential is zero,

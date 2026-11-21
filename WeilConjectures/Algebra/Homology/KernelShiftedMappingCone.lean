@@ -17,7 +17,6 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 Source: Stacks Project, Derived Categories, Tags 070M and 014Q; the chain-level
 comparison implicit in the proof of Tag 070M
-(blueprint: lem-weil-degreewise-epi-kernel-cocone-qis).
 -/
 
 @[expose] public section
@@ -227,7 +226,6 @@ private lemma comparison_quasiIso
     exact isIso_of_mono_of_epi _
 
 /-- Source: Stacks Project, Derived Categories, Tags 070M and 014Q
-(blueprint: lem-weil-degreewise-epi-kernel-cocone-qis).
 The termwise kernel of a degreewise epimorphism maps quasi-isomorphically to the cone
 shifted by `-1`. Mathlib orders the cone summands as `P^(r+1) ⊞ Q^r`, so the two
 projection identities below specify the map written `(0, ι)` with the source's ordering.

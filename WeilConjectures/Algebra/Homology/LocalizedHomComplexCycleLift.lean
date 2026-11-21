@@ -31,7 +31,6 @@ namespace CategoryTheory
 set_option backward.isDefEq.respectTransparency true in
 /-- A localized chain map lifts to a sectionwise degree-zero cycle.
 Source: Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y.
-(blueprint: lem-pur-localized-hom-complex-cycle-lift)
 
 Proof: evaluation at U preserves the degree-zero product cone in homComplex_exists.
 Each component of g is an internal-Hom section over U, so this product cone supplies

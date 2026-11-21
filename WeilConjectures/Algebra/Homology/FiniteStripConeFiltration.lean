@@ -286,7 +286,7 @@ private theorem stripStep_stable
   apply (pullback_factors_iff d Q _).1
   exact Subobject.factors_of_le _ hle (Subobject.factors_self _)
 
-/-- (blueprint: lem-sc-finite-strip-cone-filtration-steps)
+/--
 Proof: construct the finite joins of source and target image subobjects, verify
 stability under the cone differential, and use the support bounds to obtain the
 two endpoint identities. -/
@@ -322,7 +322,7 @@ theorem finite_strip_cone_filtration_steps
   rw [hF, hF]
   exact ⟨stripStep_top K r hsupport A b n, stripStep_bot K r A b n⟩
 
-/-- (blueprint: lem-sc-finite-strip-cone-filtration-graded)
+/--
 Proof: quotient successive filtration steps, identify the surviving diagonal
 with the translated row cone, and transport the resulting short-complex
 homology isomorphism. -/
@@ -354,7 +354,7 @@ theorem finite_strip_cone_filtration_graded
   obtain ⟨e⟩ := finite_strip_cone_filtration_graded_point K r hsupport A a b hb f hf F hsteps p n
   exact ⟨ShortComplex.homologyMapIso e⟩
 
-/-- (blueprint: lem-sc-finite-strip-cone-filtration) -/
+/-- -/
 theorem finite_strip_cone_filtration
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))

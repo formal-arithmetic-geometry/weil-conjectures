@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.BoundedAboveFlatTensorAcyclicDegree
 # Tensoring bounded-above acyclic complexes with bounded-above flat complexes
 
 Source: Stacks Project, Cohomology on Sites, Lemma 21.17.8 (Tag 06YQ) (bounded-above case)
-(blueprint: lem-pc-bounded-above-flat-tensor-acyclic).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
 then their total tensor complex is acyclic. The tensor is the sheaf tensor product
 in `SheafOfModules.monoidalCategory R`.
 Source: Stacks Project, Cohomology on Sites, Lemma 21.17.8 (Tag 06YQ)
-(blueprint: lem-pc-bounded-above-flat-tensor-acyclic).
 
 Proof:
 1. Choose upper bounds `a` and `b`. For a fixed total degree `n`, put `j = n - 2 - b`

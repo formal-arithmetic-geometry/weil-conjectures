@@ -16,7 +16,7 @@ import WeilConjectures.Algebra.Homology.CyclePullbackLifting
 # Functorial cycle-pullback constructions
 
 Source: Stacks Project, Derived Categories, Lemma 05T7 (1), and Cohomology on Sites,
-Lemma 06YS (blueprint: lem-pc-functorial-cycle-pullback-construction).
+Lemma 06YS.
 -/
 
 @[expose] public section
@@ -33,7 +33,7 @@ cycle in the next degree and a compatible element of the target in the current d
 This statement concerns the recursive construction, not its homology.
 
 Source: Stacks Project, Derived Categories, Lemma 05T7 (1), and Cohomology on Sites,
-Lemma 06YS (blueprint: lem-pc-functorial-cycle-pullback-construction).
+Lemma 06YS.
 
 Proof: Put zero in all degrees above `N`. Starting at `N` and descending, form
 `P^i = F^i ×_{F^{i+1}} ker(d_E^{i+1})` and put `E^i = T(P^i)`.

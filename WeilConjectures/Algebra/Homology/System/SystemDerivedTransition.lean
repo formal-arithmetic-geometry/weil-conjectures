@@ -27,7 +27,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
 /-- Localize the strict transition and use the canonical exact-functor compositor.
-Source: Zheng 4.1; Stacks 015F (blueprint: lem-pur-system-derived-transition). -/
+Source: Zheng 4.1; Stacks 015F. -/
 def systemDerivedTransition {m n : ℕ} (h : m ≤ n) :
     derivedSystemEvaluation B n ⟶
       derivedSystemEvaluation B m ⋙ (systemRestriction B h).mapDerivedCategory :=
@@ -41,7 +41,7 @@ def systemDerivedTransition {m n : ℕ} (h : m ≤ n) :
     (Functor.mapDerivedCategoryCompIso (systemEvaluation B m) (systemRestriction B h)).inv
 
 /-- The localized transition is represented by the original strict transition.
-Source: Zheng 4.1; Stacks 015F (blueprint: lem-pur-system-derived-transition).
+Source: Zheng 4.1; Stacks 015F.
 Proof: the formula for the lifted natural transformation gives its value on Q(K).
 The canonical exact-functor compositor cancels against the two evaluation factorizations,
 leaving precisely the localized termwise strict transition. -/

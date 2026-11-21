@@ -57,8 +57,7 @@ comparisons preserve i and j, so no factors are exchanged and no extra sign occu
 Degreewise equality proves the equality of complex morphisms. This argument uses
 no flatness: it includes zero rings, nonflat structural maps, and zero complexes.
 Source: Stacks, Cohomology on Sites, Tag 07A4 (lemma-pullback-tensor-product),
-and the tensor part of Tag 0E48 (remark-compatible-with-diagram).
-(blueprint: lem-weil-pbc-ringed-square-ordinary-tensor-compatibility). -/
+and the tensor part of Tag 0E48 (remark-compatible-with-diagram). -/
 theorem ringedSquareOrdinaryTensorCompatibility
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (P Q : CochainComplex (SheafOfModules.{u}

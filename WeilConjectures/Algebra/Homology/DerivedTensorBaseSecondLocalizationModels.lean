@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Homology.DerivedTensorBaseLocalizationModels
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
 second coefficient ring; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-derived-tensor-base-second-localization-models).
 -/
 
 @[expose] public section
@@ -79,7 +78,6 @@ variable (R A B Rp Bp D : Type u)
 include tRpA tRB tRpB tAD tBD tApD tBpD tBBpD in
 /-- Change a localized base and localize the second algebra, keeping Q fixed.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, second localization identity.
-(blueprint: lem-pc-derived-tensor-base-second-localization-models).
 
 Proof: let F -> B[0] be a K-flat R-resolution. As Q is an Rp-complex after
 restriction from A, the tensor-localization formula identifies Q tensor_R F

@@ -77,8 +77,7 @@ comes from the K-flat computation above; naturality of the monoidal
 scalar-extension isomorphism identifies the rest of the arrow with the
 displayed homology map. These two identifications give an arrow
 isomorphism. No comparison is assumed invertible and no flatness of C is used.
-The construction works for unbounded and zero complexes and zero rings.
-(blueprint: lem-pc-localized-tensor-comparison-derived-arrow). -/
+The construction works for unbounded and zero complexes and zero rings. -/
 theorem exists_localizedTensorComparison_derived_arrow
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) (i : ℤ) :

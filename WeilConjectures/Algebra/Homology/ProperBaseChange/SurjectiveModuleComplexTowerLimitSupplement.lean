@@ -22,7 +22,6 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 # Surjective towers of module complexes
 
 Source: Stacks Project, Tags 091D (3), (5) and 0CQD
-(blueprint: lem-weil-pbc-surjective-module-complex-tower-limit).
 Natural index `n` denotes the source's positive index `n + 1`.
 -/
 

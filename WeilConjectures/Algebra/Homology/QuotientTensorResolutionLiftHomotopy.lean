@@ -14,8 +14,7 @@ import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 /-! # Homotopy independence of quotient tensor resolution lifts
 
-Source: Stacks Project, Tag 00LS(2), projective lifting proof.
-(blueprint: new-h2-quotient-tensor-resolution-lift-homotopy). -/
+Source: Stacks Project, Tag 00LS(2), projective lifting proof. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -105,7 +104,6 @@ private theorem quotientTensorLift_tmul
 /-- Two augmented lifts of the same quotient map induce homotopic quotient tensor maps,
 even when restriction of scalars does not preserve projective objects.
 Source: Stacks Project, Tag 00LS(2); its proof uses only the projective lifting property.
-(blueprint: new-h2-quotient-tensor-resolution-lift-homotopy).
 
 Proof: Restriction of scalars is exact, so the augmented complex Res(R) is
 an exact resolution of Res(C/J); its terms need not be projective over A.

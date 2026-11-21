@@ -18,7 +18,6 @@ import Mathlib.Data.Int.Interval
 /-! # Descent of bounded graded finite projective modules
 
 Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1), descent of terms.
-(blueprint: lem-pc-finite-projective-graded-colimit-descent).
 -/
 
 @[expose] public section
@@ -67,7 +66,6 @@ private noncomputable def model_baseChange_iso
 
 /-- A bounded graded family of finite projective modules descends with the same support bounds.
 Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1), and Algebra, Tags 05N7, 00NX.
-(blueprint: lem-pc-finite-projective-graded-colimit-descent).
 
 Proof: Only the finitely many degrees in [a,b] need models. Each term is finitely presented,
 so descend a finite presentation by the object clause of finite-presentation colimit descent.

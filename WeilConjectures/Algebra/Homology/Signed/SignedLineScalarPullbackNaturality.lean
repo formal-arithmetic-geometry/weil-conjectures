@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.RingedSitePullback.PullbackLocalizationO
 /-! # Scalar-square compatibility of normalized signed pullbacks
 
 Source: Stacks Project, Modules on Sites, Tags 03EL, 0GMX and 04J0.
-(blueprint: lem-pur-signed-line-scalar-pullback-naturality)
 -/
 
 @[expose] public section
@@ -282,7 +281,6 @@ private theorem pullback_signed_basis
 /-- A compatible scalar square remains compatible in every signed degree.
 Source: Stacks Project, Modules on Sites, Tags 03EL, 0GMX and 04J0;
 steps 2 and 6--8 of the signed-line scalar/pullback argument.
-(blueprint: lem-pur-signed-line-scalar-pullback-naturality)
 
 Proof: Use the pullback localization comparison to pull a trivializing cover of L
 to a cover on the target site. On a member choose a basis e, and let v be its image

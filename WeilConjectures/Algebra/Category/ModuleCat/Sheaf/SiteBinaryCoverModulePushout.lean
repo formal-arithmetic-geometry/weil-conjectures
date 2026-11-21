@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 /-! # The counit square of a binary covering is a pushout
 
 Source: Stacks Project, Modules on Sites, Tags 03DI and 03EM and the sheaf gluing condition.
-(blueprint: lem-dla1-site-binary-cover-module-pushout)
 -/
 
 @[expose] public noncomputable section
@@ -158,7 +157,6 @@ private theorem binary_hom_gluing
 
 /-- The overlap and the two counits give the pushout associated to a binary covering.
 Source: Stacks Project, Modules on Sites, Tags 03DI and 03EM; Sites, the sheaf gluing condition
-(blueprint: lem-dla1-site-binary-cover-module-pushout).
 
 Proof: the two paths around the square agree by transposing with the overlap
 adjunction and using its triangle identities and the restriction comparison.

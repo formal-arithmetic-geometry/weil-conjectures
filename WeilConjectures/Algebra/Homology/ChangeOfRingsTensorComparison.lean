@@ -266,8 +266,7 @@ Thus these presheaf identifications sheafify to the asserted isomorphisms.
 The counit at the already-sheaf module S and the monoidal localization comparison
 identify the resulting sheafification with S tensor M. Naturality survives each
 comparison and sheafification, giving the displayed equation for every a.
-This uses no flatness; the identity on tensors also covers zero rings and modules.
-(blueprint: lem-pur-change-of-rings-tensor-comparison) -/
+This uses no flatness; the identity on tensors also covers zero rings and modules. -/
 theorem exists_changeOfRings_tensor_comparison
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]

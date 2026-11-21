@@ -25,7 +25,6 @@ that carries the localized range of f to the range of the scalar-extended map.
 Use `LocalizedModule.equivTensorProduct` and
 `LinearMap.localized'_range_eq_range_localizedMap`, then compare the tensor
 product object with `ModuleCat.extendScalars`.
-(blueprint: new-residue-kernel-localized-cokernel-transport-aux)
 Source: Mathlib.RingTheory.Localization.BaseChange and
 Mathlib.Algebra.Module.LocalizedModule.Submodule.
 -/
@@ -100,7 +99,6 @@ theorem localized_range_quotient_extendScalars_aux
 The quotient of a localized module by the localized range is the quotient of the
 extension of scalars by the extended range, obtained by transporting the range
 identification through `Submodule.Quotient.equiv`.
-(blueprint: new-residue-kernel-localized-cokernel-transport)
 -/
 theorem localized_range_quotient_extendScalars
     (R : Type v) [CommRing R] (X Y : ModuleCat.{v} R) (f : X ⟶ Y)

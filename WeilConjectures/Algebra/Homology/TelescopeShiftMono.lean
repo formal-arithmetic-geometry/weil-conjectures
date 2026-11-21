@@ -31,16 +31,14 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- The sum of the transition maps into a fixed term, extended by zero on later terms.
-Source: Stacks Project, Tag 093W, the transition-map sum in its proof
-(blueprint: lem-pc-telescope-shift-mono). -/
+Source: Stacks Project, Tag 093W, the transition-map sum in its proof -/
 private noncomputable def telescopeProjection
     {A : Type*} [Category A] [Preadditive A] [HasCoproducts.{0} A]
     (E : ℕ ⥤ A) (j : ℕ) : (∐ fun n : ℕ ↦ E.obj n) ⟶ E.obj j :=
   Sigma.desc fun k ↦ if h : k ≤ j then E.map (homOfLE h) else 0
 
 /-- The transition-map sum cancels consecutive transitions, leaving a single diagonal entry.
-Source: Stacks Project, Tag 093W, the finite short exact sequence in its proof
-(blueprint: lem-pc-telescope-shift-mono). -/
+Source: Stacks Project, Tag 093W, the finite short exact sequence in its proof -/
 private lemma telescopeProjection_formula
     {A : Type*} [Category A] [Preadditive A] [HasCoproducts.{0} A]
     (E : ℕ ⥤ A) (j k : ℕ) :
@@ -63,8 +61,7 @@ private lemma telescopeProjection_formula
 
 /-- Restrict one minus shift to each finite subcoproduct, give an explicit retraction,
 then take the exact filtered colimit of these monomorphisms into the constant target.
-Source: Stacks Project, Tag 093W, proof by finite sums and exact colimits
-(blueprint: lem-pc-telescope-shift-mono). -/
+Source: Stacks Project, Tag 093W, proof by finite sums and exact colimits -/
 private lemma sequentialCoproduct_mono
     {A : Type*} [Category A] [Preadditive A] [HasCoproducts.{0} A]
     [HasColimitsOfShape (Finset (Discrete ℕ)) A]
@@ -112,7 +109,7 @@ private lemma sequentialCoproduct_mono
 
 /-- One minus shift is monic on the coproduct of a sequential system of complexes
 of sheaves of modules. Source: Stacks Project, Derived Categories, Lemma 093W,
-proof, used in Lemma 0949 (blueprint: lem-pc-telescope-shift-mono).
+proof, used in Lemma 0949.
 
 Proof: For each j, define q_j from the coproduct to E_j by the transition
 E_k → E_j when k ≤ j, and zero when k > j. Composing the k-th component of

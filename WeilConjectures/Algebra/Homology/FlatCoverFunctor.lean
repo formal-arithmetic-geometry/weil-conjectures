@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 # Functorial flat covers of module sheaves
 
 Source: Stacks Project, Modules on Sites, Lemma 03EW (3), (4)
-(blueprint: lem-pc-sites-modules-functorial-flat-cover).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ namespace SheafOfModules
 /-- Module sheaves admit a functorial epimorphism from a flat module sheaf.
 
 Source: Stacks Project, Modules on Sites, Lemma 03EW (3), (4)
-(blueprint: lem-pc-sites-modules-functorial-flat-cover).
 
 Proof: Forget a module sheaf to a presheaf, take the free module presheaf on
 its underlying presheaf of sets, and sheafify. Evaluation on a free generator

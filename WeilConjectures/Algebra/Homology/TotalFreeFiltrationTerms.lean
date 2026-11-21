@@ -15,7 +15,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Colimits
 # Concrete terms of the alternating column filtration
 
 Source: Stacks Project, Tag 09KP, filtration construction.
-(blueprint: lem-pc-derived-total-filtration-stable)
 -/
 
 @[expose] public section
@@ -33,34 +32,31 @@ variable (S : ℕ → ShortComplex (CochainComplex (ModuleCat.{u} A) ℤ))
 variable (e : ∀ j : ℕ, (S j).X₂ ≅ K.X (-(j : ℤ)))
 
 /-- The inclusion of the full column `-j` into total degree `k`.
-Source: Stacks Project, Tag 09KP, proof. 
-(blueprint: lem-pc-derived-total-filtration-stable)
+Source: Stacks Project, Tag 09KP, proof.
 -/
 noncomputable def full (j : ℕ) (k : ℤ) :
     (K.X (-(j : ℤ))).X (k + j) ⟶ (K.total (ComplexShape.up ℤ)).X k :=
   K.ιTotal (ComplexShape.up ℤ) (-(j : ℤ)) (k + j) k (by simp)
 
 /-- The inclusion of the lower column piece into total degree `k`.
-Source: Stacks Project, Tag 09KP, proof. 
-(blueprint: lem-pc-derived-total-filtration-stable)
+Source: Stacks Project, Tag 09KP, proof.
 -/
 noncomputable def lower (j : ℕ) (k : ℤ) :
     (S j).X₁.X (k + j) ⟶ (K.total (ComplexShape.up ℤ)).X k :=
   (S j).f.f (k + j) ≫ (e j).hom.f (k + j) ≫ full K j k
 
 /-- The actual submodule defining stage `n` in degree `k`: full columns enter at
-`2*j+2`, their lower pieces at `2*j+1`. Source: Stacks Project, Tag 09KP, proof.
-(blueprint: lem-pc-derived-total-filtration-stable) -/
+`2*j+2`, their lower pieces at `2*j+1`. Source: Stacks Project, Tag 09KP, proof. -/
 noncomputable def term (n : ℕ) (k : ℤ) :
     Submodule A ((K.total (ComplexShape.up ℤ)).X k) :=
   ⨆ j : ℕ, (if 2 * j + 2 ≤ n then LinearMap.range (full K j k).hom else ⊥) ⊔
     (if 2 * j + 1 ≤ n then LinearMap.range (lower K S e j k).hom else ⊥)
 
-/-- (blueprint: lem-pc-derived-total-filtration-stable) -/
+/-- -/
 lemma term_zero (k : ℤ) : term K S e 0 k = ⊥ := by
   simp [term]
 
-/-- (blueprint: lem-pc-derived-total-filtration-stable) -/
+/-- -/
 lemma term_mono {n m : ℕ} (h : n ≤ m) (k : ℤ) :
     term K S e n k ≤ term K S e m k := by
   apply iSup_mono
@@ -160,7 +156,6 @@ private lemma lower_d_mem
 
 /-- The alternating column submodules are preserved by the total differential.
 Source: Stacks Project, Tag 09KP, proof, filtration construction.
-(blueprint: lem-pc-derived-total-filtration-stable)
 
 Proof. It suffices to check the generators in each range defining `term`.
 For a full-column generator the vertical differential remains in that column,
@@ -200,8 +195,7 @@ theorem differential_mem
     exact (term K S e n l).zero_mem
 
 /-- Restriction of a module complex to differential-stable submodules.
-Source: Stacks Project, Tag 09KP, proof. 
-(blueprint: lem-pc-derived-total-filtration-stable)
+Source: Stacks Project, Tag 09KP, proof.
 -/
 noncomputable def restrictComplex (T : CochainComplex (ModuleCat.{u} A) ℤ)
     (M : ∀ k : ℤ, Submodule A (T.X k))
@@ -222,8 +216,7 @@ noncomputable def restrictComplex (T : CochainComplex (ModuleCat.{u} A) ℤ)
     exact congrArg (fun f ↦ f x.val) (T.d_comp_d k l m)
 
 /-- Inclusion from a restricted complex.
-Source: Stacks Project, Tag 09KP, proof. 
-(blueprint: lem-pc-derived-total-filtration-stable)
+Source: Stacks Project, Tag 09KP, proof.
 -/
 noncomputable def restrictInclusion (T : CochainComplex (ModuleCat.{u} A) ℤ)
     (M : ∀ k : ℤ, Submodule A (T.X k))
@@ -233,8 +226,7 @@ noncomputable def restrictInclusion (T : CochainComplex (ModuleCat.{u} A) ℤ)
   comm' k l _ := by ext x; rfl
 
 /-- Inclusion for two nested differential-stable submodule families.
-Source: Stacks Project, Tag 09KP, proof. 
-(blueprint: lem-pc-derived-total-filtration-stable)
+Source: Stacks Project, Tag 09KP, proof.
 -/
 noncomputable def restrictMap (T : CochainComplex (ModuleCat.{u} A) ℤ)
     (M N : ∀ k : ℤ, Submodule A (T.X k))
@@ -244,7 +236,7 @@ noncomputable def restrictMap (T : CochainComplex (ModuleCat.{u} A) ℤ)
   f k := ModuleCat.ofHom (Submodule.inclusion (hMN k))
   comm' k l _ := by ext x; rfl
 
-/-- (blueprint: lem-pc-derived-total-filtration-stable) -/
+/-- -/
 lemma restrict_zero (T : CochainComplex (ModuleCat.{u} A) ℤ)
     (M : ∀ k : ℤ, Submodule A (T.X k))
     (h : ∀ k l (x : T.X k), x ∈ M k → T.d k l x ∈ M l)
@@ -254,7 +246,7 @@ lemma restrict_zero (T : CochainComplex (ModuleCat.{u} A) ℤ)
   apply Subtype.ext
   exact (Submodule.mem_bot A).mp ((h0 k) ▸ x.property)
 
-/-- (blueprint: lem-pc-derived-total-filtration-stable) -/
+/-- -/
 lemma restrict_mono (T : CochainComplex (ModuleCat.{u} A) ℤ)
     (M : ∀ k : ℤ, Submodule A (T.X k))
     (h : ∀ k l (x : T.X k), x ∈ M k → T.d k l x ∈ M l) :
@@ -264,7 +256,7 @@ lemma restrict_mono (T : CochainComplex (ModuleCat.{u} A) ℤ)
   apply (ModuleCat.mono_iff_injective _).mpr
   exact Subtype.val_injective
 
-/-- (blueprint: lem-pc-derived-total-filtration-stable) -/
+/-- -/
 lemma restrict_comp (T : CochainComplex (ModuleCat.{u} A) ℤ)
     (M N : ∀ k : ℤ, Submodule A (T.X k))
     (hM : ∀ k l (x : T.X k), x ∈ M k → T.d k l x ∈ M l)
@@ -275,7 +267,7 @@ lemma restrict_comp (T : CochainComplex (ModuleCat.{u} A) ℤ)
   ext k x
   rfl
 
-/-- (blueprint: lem-pc-derived-total-filtration-stable) -/
+/-- -/
 lemma restrict_surjective (T : CochainComplex (ModuleCat.{u} A) ℤ)
     (M : ℕ → ∀ k : ℤ, Submodule A (T.X k))
     (h : ∀ n k l (x : T.X k), x ∈ M n k → T.d k l x ∈ M n l)
@@ -288,16 +280,14 @@ lemma restrict_surjective (T : CochainComplex (ModuleCat.{u} A) ℤ)
 variable (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
 
 /-- Restrict the total differential to the explicitly constructed submodules.
-Source: Stacks Project, Tag 09KP, proof. 
-(blueprint: lem-pc-derived-total-filtration-stable)
+Source: Stacks Project, Tag 09KP, proof.
 -/
 noncomputable def complex (n : ℕ) : CochainComplex (ModuleCat.{u} A) ℤ :=
   restrictComplex (K.total (ComplexShape.up ℤ)) (term K S e n)
     (differential_mem K S e h_positive n)
 
 /-- Inclusion of a constructed stage into the total complex.
-Source: Stacks Project, Tag 09KP, proof. 
-(blueprint: lem-pc-derived-total-filtration-stable)
+Source: Stacks Project, Tag 09KP, proof.
 -/
 noncomputable def inclusion (n : ℕ) : complex K S e h_positive n ⟶
     K.total (ComplexShape.up ℤ) :=
@@ -305,8 +295,7 @@ noncomputable def inclusion (n : ℕ) : complex K S e h_positive n ⟶
     (differential_mem K S e h_positive n)
 
 /-- Successive inclusion between constructed stages.
-Source: Stacks Project, Tag 09KP, proof. 
-(blueprint: lem-pc-derived-total-filtration-stable)
+Source: Stacks Project, Tag 09KP, proof.
 -/
 noncomputable def step (n : ℕ) : complex K S e h_positive n ⟶
     complex K S e h_positive (n + 1) :=

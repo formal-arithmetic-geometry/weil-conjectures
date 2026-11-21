@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 # Scalar extension along an isomorphism of ring sheaves
 
 Source: Stacks Project, Modules on Sites, Tags 03CZ, 03EK and 03CY
-(auxiliary; not a blueprint node).
 
 The transported module functor is the existing restriction of scalars along the inverse.
 The tensor convention in the existing change-of-rings construction puts the scalar first:
@@ -38,7 +37,6 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
 
 /-- The canonical sheafification-unit image of a local scalar-extension pure tensor.
 Source: Stacks, Tags 03EK and 03CY
-(auxiliary; not a blueprint node).
 This is `eta(x ⊗ s)` in the node's factor order, with no choice of a sectionwise inverse. -/
 noncomputable def scalarExtensionRingIsoTmul (a : R ⟶ S)
     (M : ringedSiteModules.{max r m}

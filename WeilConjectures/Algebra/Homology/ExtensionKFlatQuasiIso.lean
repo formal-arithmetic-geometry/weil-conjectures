@@ -26,7 +26,6 @@ namespace ModuleCat
 /-- Extension of scalars preserves quasi-isomorphisms between K-flat complexes,
 without a flatness assumption on the ring map.
 Source: Stacks Project, More on Algebra, Tags 064L and 06Y0.
-(blueprint: lem-pc-extension-kflat-quasi-iso).
 Proof: reuse scalarExtension_quasiIso_of_kFlat from KFlatScalarExtensionDerivedIso.
 It specializes mixedTensor_kFlat_quasiIso to the B-module tensor unit in degree
 zero. The single-complex comparison identifies this total tensor with termwise

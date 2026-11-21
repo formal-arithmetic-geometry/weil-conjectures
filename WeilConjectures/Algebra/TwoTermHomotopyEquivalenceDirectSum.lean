@@ -11,7 +11,6 @@ public import Mathlib.Algebra.DirectSum.Module
 /-! # Direct sums of the terms of homotopy equivalent two-term complexes
 
 Source: Stacks Project, Algebra, Lemma 00S3 (lemma-sum-two-terms)
-(blueprint: lem-weil-pbc-two-term-homotopy-equivalence-direct-sum).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ The binary direct sum of modules is represented by the product with componentwis
 this is the finite two-summand case of `DirectSum` (def-weil-pbc-direct-sum-modules).
 
 Source: Stacks Project, Algebra, Lemma 00S3 (lemma-sum-two-terms)
-(blueprint: lem-weil-pbc-two-term-homotopy-equivalence-direct-sum).
 
 Proof plan:
 1. Set `P = A₁ × B₀` and `Q = B₁ × A₀`, the binary direct sums from

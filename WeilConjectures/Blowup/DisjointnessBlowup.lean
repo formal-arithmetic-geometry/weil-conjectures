@@ -12,9 +12,7 @@ public import WeilConjectures.Blowup.AdmissibleBlowup
 # Deligne's disjointness blow-up
 
 This file proves Deligne's *Lemme* 0.3, in the form of Conrad's Lemma 1.5 of
-*Deligne's notes on Nagata compactifications* (blueprint:
-`lemma:nagata-conrad-disjointness-blowup`, with the setting
-`def:nagata-conrad-disjointness-setup`).
+*Deligne's notes on Nagata compactifications*.
 
 The setting is a morphism `p : Z ⟶ X`, a morphism `f : Y ⟶ Z` over `X` whose source lies
 over an open `U ≤ V` of `X`, and two quasi-coherent ideals `I₁` and `I₂` of `X` with
@@ -33,8 +31,7 @@ change of `Z` lying over the closure of `q ⁻¹ (V ∖ U)`.
 ## Main results
 
 - `AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup`: the disjointness statement
-  itself, with the scheme-theoretic image written as the closure of the range
-  (blueprint: `lemma:nagata-conrad-disjointness-blowup`). To read the conclusion in
+  itself, with the scheme-theoretic image written as the closure of the range. To read the conclusion in
   ideal-sheaf language instead, rewrite with `Scheme.Hom.support_ker`.
 
 ## Implementation notes
@@ -59,7 +56,6 @@ base change of `Y` is the unit ideal, so multiplying by `σ` does not change the
 `1 - h ∈ n`. Then `1 = h + (1 - h)` shows that the inverse images of `I₁` and the kernel
 generate the unit ideal on the probe, so their supports do not meet — which is exactly the
 assertion at the chosen point.
-
 -/
 
 @[expose] public section

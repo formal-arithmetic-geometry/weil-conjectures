@@ -132,7 +132,6 @@ import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 
 Source: Stacks Project, algebraization.tex, Tag 099J; Modules on Sites, Tag 04J0;
 Cohomology on Sites, Tag 07A6
-(blueprint: lem-weil-pbc-ringed-slice-derived-comparisons).
 -/
 
 @[expose] public noncomputable section

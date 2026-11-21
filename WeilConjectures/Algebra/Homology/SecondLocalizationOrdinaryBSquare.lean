@@ -9,8 +9,7 @@ module
 public import WeilConjectures.Algebra.Homology.SecondLocalizationMap
 import WeilConjectures.Algebra.Homology.SecondLocalizationRawCounitSquare
 /-! # Ordinary comparison for second localization
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-second-localization-ordinary-B-square). -/
+Source: Stacks Project, Tags 06Y6 and 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -34,7 +33,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 include tRB in
 /-- The B-linear ordinary counit square, before forgetting module structures.
 Source: Stacks Project, Tag 06Y6, lemma-derived-base-change; Tag 0DJ8.
-(blueprint: lem-pc-second-localization-ordinary-B-square).
 
 Proof: install the target model's universal left-derived-functor instance.
 The defining leftDerivedLift factorization of secondLocalizationDerivedMap

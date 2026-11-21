@@ -32,7 +32,6 @@ private noncomputable def windowProjection (a b : ℤ) :
 /-- The quotient of nested cutoffs has a columnwise quasi-isomorphism to the window.
 Source: Stacks Project, Homology, Tag 012X, smart truncation filtration construction;
 Mathlib's complementary smart truncations.
-(blueprint: lem-sp-vertical-cutoff-quotient-comparison)
 
 Proof: each column inclusion is the unique map between the smart cutoffs compatible
 with their inclusions into the original column. Compose the b-cutoff with the smart

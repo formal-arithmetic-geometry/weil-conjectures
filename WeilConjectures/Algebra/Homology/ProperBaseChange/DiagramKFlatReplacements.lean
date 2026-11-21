@@ -133,7 +133,7 @@ import Mathlib.Algebra.Homology.Functor
 # K-flat replacements of strict diagrams
 
 Source: Stacks Project, Cohomology on Sites, Tags 077J, 0G7E and 06YY,
-via functorial flat resolutions (blueprint: lem-weil-pbc-diagram-kflat-replacements).
+via functorial flat resolutions.
 
 A strict diagram of complexes is a functor into cochain complexes. Applying a single
 functorial flat resolution preserves all its transition maps. Adding contractible flat
@@ -261,7 +261,6 @@ private theorem epicification
 set_option synthInstance.maxSize 1024 in
 /-- Strict diagrams admit objectwise K-flat resolutions with flat terms.
 Source: Stacks Project, Tags 077J and 06YS, functorial resolution construction
-(blueprint: lem-weil-pbc-diagram-kflat-replacements).
 
 Proof:
 1. Use the functorial flat cover constructed in the proof of Tag 06YS. Its reduced

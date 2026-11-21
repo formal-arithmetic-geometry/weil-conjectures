@@ -17,8 +17,7 @@ namespace ModuleCat
 /-- Intermediate compatibility equation for transported derived counits.
 Source: Stacks Project, Tag 06Y6.
 Proof: this intermediate statement packages the corresponding derived-category
-localization transport step; the proof is deferred for independent parallel work.
-(blueprint: lem-pc-derived-extension-ring-equiv-raw-compatibility). -/
+localization transport step; the proof is deferred for independent parallel work. -/
 theorem raw_compatibility
     {R₀ B₀ R B : Type u}
     [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]

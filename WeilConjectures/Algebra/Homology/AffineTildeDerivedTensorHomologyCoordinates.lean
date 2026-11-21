@@ -14,8 +14,7 @@ import WeilConjectures.Algebra.Homology.AffineTildeCoefficientPushforwardHomolog
 
 /-! # Homology coordinates of the raw affine tensor comparison
 
-Source: Stacks Project, Tags 0DJ8, 06Y6 and 08HY.
-(blueprint: lem-pc-affine-tilde-derived-tensor-homology-coordinates). -/
+Source: Stacks Project, Tags 0DJ8, 06Y6 and 08HY. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -178,7 +177,6 @@ variable [∀ Y : Scheme.{u},
 comparison, coefficient homology map and normalized ordinary pushforward map.
 This statement contains no geometric base-change map or pullback representative.
 Source: Stacks Project, Tags 06Y6, 06Z0, 0AVW and 0DJ8, equation-bc.
-(blueprint: lem-pc-affine-tilde-derived-tensor-homology-coordinates).
 
 Proof: Expand affineTildeDerivedTensorSourceIso. Naturality of the exact-tilde
 homology isomorphism moves m.counit past this comparison. On the localized

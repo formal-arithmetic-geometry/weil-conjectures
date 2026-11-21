@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.Coefficient.CoefficientTensorDerivedUnit
 # Derived extension from a coefficient level
 Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21;
 Stacks Project, Tags 03D7, 06XN and 09T5
-(blueprint: lem-pur-coefficient-evaluation-derived-left-adjoint).
 Indices in this module are Zheng's nonnegative indices: `n` denotes the paper node's
 positive level `n + 1`. No normalization or cartesianness is imposed on a system.
 The auxiliary declarations construct the actual strict systems and their evaluations;
@@ -43,7 +42,6 @@ set_option linter.unusedVariables false in
 coherent truncation maps, and their specified adjunction mates.
 Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21;
 Stacks Project, Tags 03D7, 06XN and 09T5
-(blueprint: lem-pur-coefficient-evaluation-derived-left-adjoint).
 Proof plan, following the seven steps of the node:
 1. The strict systems are modules over the inverse coefficient-ring sheaf on the
 projective-system topos. Kernels, cokernels and cohomology are componentwise, so a chain

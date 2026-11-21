@@ -9,8 +9,7 @@ module
 public import WeilConjectures.Algebra.Homology.SecondLocalizationMap
 import WeilConjectures.Algebra.Homology.SecondLocalizationOrdinaryBSquare
 /-! # Ordinary comparison for second localization
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-second-localization-ordinary-square). -/
+Source: Stacks Project, Tags 06Y6 and 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -105,7 +104,6 @@ variable (R A B Bp D : Type u)
 include tRB in
 /-- The ordinary counit comparison commutes with flat change of the second coefficient.
 Source: Stacks Project, Tag 06Y6, lemma-derived-base-change; Tag 0DJ8.
-(blueprint: lem-pc-second-localization-ordinary-square).
 
 Proof: exact extension of scalars from B to Bp preserves homology. The defining
 leftDerivedLift factorization of secondLocalizationDerivedMap makes its composite

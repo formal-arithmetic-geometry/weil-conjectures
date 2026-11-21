@@ -22,7 +22,6 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 Source: Stacks Project, Tag 08IB, final affine calculation; More on Algebra,
 Section 15.60 (Tag 06XY), independence of K-flat resolutions.
-(blueprint: lem-pc-single-support-tor-acyclic-tensor).
 -/
 
 @[expose] public section
@@ -171,7 +170,6 @@ any K-flat resolution to compute its ordinary tensor product.
 Source: Stacks Project, Tag 08IB, final affine Tor calculation, and Tag 06XY,
 Lemmas 15.60.7 and 15.60.12. The following fills in the one-term calculation
 of the parent node; it is not an assertion of the entire bounded-complex result.
-(blueprint: lem-pc-single-support-tor-acyclic-tensor).
 
 Proof:
 1. The support hypothesis identifies Q with the single complex on Q.X k in

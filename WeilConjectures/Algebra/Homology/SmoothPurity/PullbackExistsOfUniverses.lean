@@ -18,7 +18,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 Source: Stacks Project, Modules on Sites, Tag 03D7, and Mathlib's free-representable
 presentation construction in `ModuleCat.Presheaf.Pullback`.
-(blueprint: lem-pur-ringed-site-module-pullback-exists-universes)
 -/
 
 @[expose] public section
@@ -117,8 +116,7 @@ private theorem presheaf_pushforward_isRightAdjoint
 
 /-- Abelian sheafification exists in any universe in which the site is essentially small.
 Source: Mathlib `hasSheafifyEssentiallySmallSite` and
-`GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall`.
-(blueprint: lem-pur-ringed-site-module-pullback-exists-universes). -/
+`GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall`. -/
 theorem coefficientSheafification {C : Type u} [Category.{v} C]
     [EssentiallySmall.{w} C] (J : GrothendieckTopology C) :
     HasSheafify J AddCommGrpCat.{w} ∧ J.WEqualsLocallyBijective AddCommGrpCat.{w} := by
@@ -141,7 +139,6 @@ theorem coefficientSheafification {C : Type u} [Category.{v} C]
 Source: Stacks Project, Modules on Sites, Tag 03D7,
 `lemma-adjoint-pullback-pushforward-modules`; the free-representable presentation
 construction of Mathlib `PresheafOfModules.pullbackObjIsDefined_eq_top`.
-(blueprint: lem-pur-ringed-site-module-pullback-exists-universes).
 
 Proof: The free module presheaf on the lifted representable at X corepresents
 sections at X. Direct image therefore has a left adjoint on this free presheaf,

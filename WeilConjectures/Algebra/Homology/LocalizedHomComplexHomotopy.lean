@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.LocalizedHomComplexHomology
 # Sections of the sheaf Hom complex and homotopy classes
 
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1), used in Tag 0A94
-(blueprint: lem-pur-localized-hom-complex-homotopy).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ maps, and its degree-zero homology identifies with their homotopy classes. No
 K-injectivity or derived category is needed.
 
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1)
-(blueprint: lem-pur-localized-hom-complex-homotopy).
 
 Proof: evaluation of the product projections in `homComplex_exists` identifies a
 section of degree n with a family of maps L^p|U to I^(p+n)|U. Evaluation preserves

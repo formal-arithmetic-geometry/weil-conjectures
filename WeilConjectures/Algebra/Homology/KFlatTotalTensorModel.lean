@@ -20,7 +20,7 @@ public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 # Flat-term K-flat total tensor models
 
 Source: Stacks Project, Cohomology on Sites, Tags 07A2 and 07A4;
-Modules on Sites, Tag 0G6Q (auxiliary; not a blueprint node).
+Modules on Sites, Tag 0G6Q.
 
 The helpers below only specialize existing category and tensor constructions.
 The derived tensor in the conclusion is exactly the localized bifunctor supplied by
@@ -44,12 +44,12 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   (R : Sheaf J CommRingCat.{r})
 
 /-- Use the recorded small-site sheafification in the coefficient universe.
-Source: Stacks, Section 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks, Section 03DA. -/
 instance smallSiteHasSheafify : HasSheafify J AddCommGrpCat.{r} :=
   SheafOfModules.hasSheafify_coefficientUniverse.{u, v, r}
 
 /-- Use the recorded locally-bijective criterion in the coefficient universe.
-Source: Stacks, Section 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks, Section 03DA. -/
 instance smallSiteWEqualsLocallyBijective : J.WEqualsLocallyBijective AddCommGrpCat.{r} :=
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{u, v, r}
 
@@ -67,12 +67,12 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   (R : Sheaf J CommRingCat.{r})
 
 /-- The existing category of module sheaves on the given small site.
-Source: Stacks, Tag 07A2 (blueprint: lem-pur-kflat-total-tensor-model). -/
+Source: Stacks, Tag 07A2. -/
 abbrev Modules := SheafOfModules.{r}
   ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
 /-- The canonical monoidal structure with every universe-sensitive instance fixed explicitly.
-Source: Stacks, Tag 03EK (blueprint: lem-pur-kflat-total-tensor-model). -/
+Source: Stacks, Tag 03EK. -/
 @[instance_reducible]
 def monoidal : MonoidalCategory (Modules R) :=
   @SheafOfModules.monoidalCategory.{v, u, r} C _ J
@@ -83,17 +83,17 @@ def monoidal : MonoidalCategory (Modules R) :=
     (SheafOfModules.isMonoidal_W_independentCoefficients.{u, v, r} R)
 
 /-- The existing sheaf tensor, with its canonical monoidal structure explicitly supplied.
-Source: Stacks, Tags 03EK and 07A2 (blueprint: lem-pur-kflat-total-tensor-model). -/
+Source: Stacks, Tags 03EK and 07A2. -/
 def tensor : Modules R ⥤ Modules R ⥤ Modules R :=
   @curriedTensor (Modules R) _ (monoidal R)
 
 /-- Reuse the existing zero-map preservation for the canonical tensor alias.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03EK. -/
 instance tensor_preservesZeroMorphisms : (tensor R).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients.{u, v, r} R
 
 /-- Reuse zero-map preservation in the second tensor variable.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03EK. -/
 instance tensor_obj_preservesZeroMorphisms (M : Modules R) :
     ((tensor R).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients.{u, v, r} R M
@@ -113,13 +113,13 @@ private local instance (I : Type) : HasColimitsOfShape (Discrete I) (Modules R) 
   exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
 /-- Reuse the coproduct totalization of the canonical tensor bicomplex.
-Source: Stacks, Tag 06YM (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YM. -/
 instance hasTotal (K L : CochainComplex (Modules R) ℤ) :
     CochainComplex.HasMapBifunctor K L (tensor R) := inferInstance
 
 /-- The direct-sum total tensor bifunctor, with the usual cochain Koszul differential.
 This is `CochainComplex.mapBifunctor` on objects, not a new totalization.
-Source: Stacks, Tags 06YM and 07A2 (blueprint: lem-pur-kflat-total-tensor-model). -/
+Source: Stacks, Tags 06YM and 07A2. -/
 def total : CochainComplex (Modules R) ℤ × CochainComplex (Modules R) ℤ ⥤
     CochainComplex (Modules R) ℤ :=
   Functor.uncurry.obj ((tensor R).map₂CochainComplex)
@@ -237,7 +237,7 @@ The last bifunctor is the chosen descent of the total tensor from the cited reso
 subcategory; its natural comparison determines it up to compatible natural isomorphism.
 
 Source: Stacks Project, Cohomology on Sites, Tags 07A2 and 07A4, and Modules on Sites,
-Tag 0G6Q (blueprint: lem-pur-kflat-total-tensor-model).
+Tag 0G6Q.
 
 Proof plan:
 1. Given an acyclic H, K-flatness of P makes Tot(H tensor P) acyclic, and K-flatness

@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Homology.BaseLocalizationDLinearGlue
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
 second coefficient ring; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-base-localization-iso).
 -/
 
 @[expose] public section
@@ -52,7 +51,6 @@ variable (R A B Rp D : Type u)
 include tRpA tRpB tAD tBD tApD tBpD in
 /-- The canonical map is invertible after extension to D.
 Source: Stacks Project, Tag 0DJ8, affine localization identity; Tag 06Y6.
-(blueprint: lem-pc-base-localization-iso).
 
 Proof: choose a K-flat Rp-resolution P of the underlying Rp-complex of Q.
 Its restriction to R is K-flat: for an acyclic R-complex F, exact localization

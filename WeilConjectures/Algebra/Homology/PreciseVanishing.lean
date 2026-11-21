@@ -12,7 +12,7 @@ import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
 /-! # Precise vanishing for truncated bounded projective complexes
 
-Source: Stacks Project, Tag 064D (blueprint: lem-pc-ring-precise-vanishing).
+Source: Stacks Project, Tag 064D.
 -/
 
 @[expose] public section
@@ -26,7 +26,7 @@ universe u v w
 namespace CategoryTheory
 
 /-- Precise vanishing for maps from a truncated bounded projective complex.
-Source: Stacks Project, Tag 064D (blueprint: lem-pc-ring-precise-vanishing).
+Source: Stacks Project, Tag 064D.
 Proof (Stacks, Tag 064D), following the node's three steps:
 1. By `lem-pc-ring-derived-map-representative`, bounded-above projectivity identifies
    morphisms out of `P` in the homotopy category with morphisms out of `Q(P)` in the

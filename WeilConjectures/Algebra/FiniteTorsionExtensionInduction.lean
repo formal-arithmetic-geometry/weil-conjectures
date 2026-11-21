@@ -19,7 +19,6 @@ import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 Source: Stacks Project, Tag 0F08, cyclic-coefficient reduction;
 Mathlib.GroupTheory.FiniteAbelian.Basic, finite abelian group structure theorem.
-(blueprint: lem-sbc-finite-torsion-extension-induction)
 -/
 
 @[expose] public section
@@ -42,7 +41,6 @@ multiplication by `r` and the second is reduction modulo `r`. The kernel of the
 second map is the image of the first, and the first map is injective. Apply
 `hext` to the induction hypothesis and `hprime`, transporting along the
 canonical module isomorphisms with `hiso`.
-(blueprint: lem-sbc-finite-torsion-prime-power-step)
 -/
 theorem finite_torsion_prime_power_step
     (P : ModuleCat.{u + 1} (ULift.{u + 1} ℤ) → Prop)
@@ -134,7 +132,6 @@ gives `P` for every nontrivial summand, and `hzero` handles trivial ones. Induct
 finite index set of summands, using the split short exact sequence for adjoining
 a direct summand, and transport the result back to `M` with `hiso`; the empty
 sum is zero and is handled by `hzero`.
-(blueprint: lem-sbc-finite-torsion-assemble-prime-powers)
 -/
 theorem finite_torsion_assemble_prime_powers
     (P : ModuleCat.{u + 1} (ULift.{u + 1} ℤ) → Prop)
@@ -188,7 +185,7 @@ theorem finite_torsion_assemble_prime_powers
       omega
     exact hp (p i) (e i) (hprime i) hdiv hni
 
-/-- (blueprint: lem-sbc-finite-torsion-extension-induction) -/
+/-- -/
 theorem finite_torsion_property_of_prime
     (P : ModuleCat.{u + 1} (ULift.{u + 1} ℤ) → Prop)
     (hzero : ∀ A, IsZero A → P A)

@@ -11,7 +11,6 @@ public import WeilConjectures.Algebra.Homology.Coefficient.CoefficientEvaluation
 # Strict truncation maps between extensions from coefficient levels
 
 Source: Zheng, Construction 4.1, p. 21, truncation inclusions in the explicit formula.
-(blueprint: lem-pur-coefficient-evaluation-strict-sigma).
 -/
 
 @[expose] public noncomputable section
@@ -226,7 +225,6 @@ variable {O : Type w} [CommRing O] {ell : O}
 /-- Ordinary truncation inclusions are tensor associators below the smaller index and
 zero above it.
 Source: Zheng, Construction 4.1, printed p. 21
-(blueprint: lem-pur-coefficient-evaluation-strict-sigma).
 Proof: define the map by transposing the inverse below-level comparison under the
 ordinary evaluation adjunction. At q below n, transpose its evaluated component twice
 by the scalar adjunctions. The ordinary extension Hom formula identifies this with the

@@ -108,8 +108,7 @@ private abbrev CoeffSet {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     ((constantSheaf J CommRingCat.{w}).obj (CommRingCat.of Λ))
 
 /-- Characterization of the addition map of the constant ring sheaf by its values
-on sections. Source: Stacks, ring paragraph of the proof of 00YV
-(blueprint: lem-pur-coefficient-constant-ring-images). -/
+on sections. Source: Stacks, ring paragraph of the proof of 00YV -/
 private def IsRingAdd {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C)
     (Λ : Type w) [CommRing Λ] [HasWeakSheafify J CommRingCat.{w}]
@@ -123,7 +122,7 @@ private def IsRingAdd {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
 
 /-- Characterization of the multiplication map of the constant ring sheaf by its
 values on sections, in the given order (no commutativity). Source: Stacks, ring
-paragraph of the proof of 00YV (blueprint: lem-pur-coefficient-constant-ring-images). -/
+paragraph of the proof of 00YV. -/
 private def IsRingMul {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C)
     (Λ : Type w) [CommRing Λ] [HasWeakSheafify J CommRingCat.{w}]
@@ -564,8 +563,7 @@ private theorem section_constantMap_unit
     (toSheafify_naturality J ((Functor.const Cᵒᵖ).map (TypeCat.ofHom f)))).symm
 
 /-- The canonical comparison fixes sheafified constant sections.
-Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV
-(blueprint: lem-pur-coefficient-constant-ring-images). -/
+Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV -/
 private theorem canonicalConstantSectionComparison
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]
@@ -806,7 +804,6 @@ private theorem constantRingLift (A : CommRingCat.{w}) :
 include V adj in
 /-- Constant rings have algebraic inverse images normalized by one natural comparison
 on all constant sets. Source: Stacks Project, Tags 00YV and 03D2.
-(blueprint: lem-pur-coefficient-constant-ring-images).
 
 Proof: identify global sections with maps from the constant singleton, and use the
 set adjunction and preservation of the terminal object to compare global sections.

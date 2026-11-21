@@ -14,8 +14,7 @@ import WeilConjectures.Algebra.Homology.HomComplexProjections
 /-! # Comparison of the Hom complex with an opposite total complex
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, product Hom differential;
-cohomology.tex, Tags 0GM7 and 0GM8, finite-diagonal Hom calculation.
-(blueprint: lem-sc-hom-complex-dual-total-comparison) -/
+cohomology.tex, Tags 0GM7 and 0GM8, finite-diagonal Hom calculation. -/
 
 @[expose] public section
 
@@ -204,7 +203,6 @@ This comparison does not assume exact columns or boundedness.
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, product Hom differential;
 cohomology.tex, Tags 0GM7 and 0GM8, the Hom calculation.
-(blueprint: lem-sc-hom-complex-dual-total-comparison)
 
 Proof: unop the coproduct cocone of the total in degree `-n`. It is a product
 cone in module sheaves with factors indexed by `p+q=-n`. Reindex by `p`, so

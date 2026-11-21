@@ -12,7 +12,6 @@ import Mathlib.Tactic.Ring
 /-! # Signed contraction of the sheaf Koszul complex
 
 Source: Stacks Project, Tags 0626, 0663, 0913 and 099H
-(blueprint: lem-weil-pbc-localization-koszul-contractions).
 -/
 
 -- After pruning, this module only keeps private declarations.

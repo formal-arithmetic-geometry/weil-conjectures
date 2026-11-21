@@ -22,7 +22,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 /-! # Tensor comparison for the algebraic inverse image
 
 Source: Stacks Project, Modules on Sites, Tags 03D1--03D3, 03D7 and 03EL.
-(auxiliary; not a blueprint node).
 
 Transport the right-adjoint module operations, restrict the set adjunction to
 linear and bilinear maps, and apply the sheaf tensor universal property.
@@ -141,7 +140,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   (R : Sheaf J CommRingCat.{u})
 
 /-- The image of a sectionwise pure tensor in the sheaf tensor.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 private noncomputable def pure (M N : SheafOfModules.{u} (ringSheaf R))
     (W : Cᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
     ((monoidalCategory R).tensorObj M N).val.obj W :=
@@ -149,8 +148,7 @@ private noncomputable def pure (M N : SheafOfModules.{u} (ringSheaf R))
     (((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf R).obj)).unit.app
       (M.val ⊗ N.val)).app W (m ⊗ₜ[R.obj.obj W] n))
 
-/-- Pure tensors commute with restriction. Source: Stacks 03EK
-(auxiliary; not a blueprint node). -/
+/-- Pure tensors commute with restriction. Source: Stacks 03EK -/
 private theorem pure_restrict (M N : SheafOfModules.{u} (ringSheaf R))
     {W V : Cᵒᵖ} (i : W ⟶ V) (m : M.val.obj W) (n : N.val.obj W) :
     ((monoidalCategory R).tensorObj M N).val.map i (pure R M N W m n) =
@@ -163,14 +161,13 @@ private theorem pure_restrict (M N : SheafOfModules.{u} (ringSheaf R))
   exact hi.symm.trans (congrArg ((tensorObjIsoSheafification M N).inv.val.app V) hu.symm)
 
 /-- The canonical bilinear pairing, as a presheaf morphism.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 private noncomputable def pureMap (M N : SheafOfModules.{u} (ringSheaf R)) :
     M.val ⊗ N.val ⟶ ((monoidalCategory R).tensorObj M N).val :=
   (PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf R).obj)).unit.app
     (M.val ⊗ N.val) ≫ (tensorObjIsoSheafification M N).inv.val
 
-/-- The linear pairing on sections. Source: Stacks 03EK
-(auxiliary; not a blueprint node). -/
+/-- The linear pairing on sections. Source: Stacks 03EK -/
 private noncomputable def pureBilin (M N : SheafOfModules.{u} (ringSheaf R)) (W : Cᵒᵖ) :
     M.val.obj W →ₗ[R.obj.obj W] N.val.obj W →ₗ[R.obj.obj W]
       ((monoidalCategory R).tensorObj M N).val.obj W :=
@@ -197,7 +194,6 @@ private theorem pure_smul_right (M N : SheafOfModules.{u} (ringSheaf R)) (W : C�
   (pureBilin R M N W x).map_smul r y
 
 /-- A map from a tensor is determined by pure sections. Source: Stacks 03EK
-(auxiliary; not a blueprint node).
 Proof: use the module sheafification adjunction, then sectionwise tensor generation. -/
 private theorem pure_hom_ext (M N H : SheafOfModules.{u} (ringSheaf R))
     {f g : (monoidalCategory R).tensorObj M N ⟶ H}
@@ -270,8 +266,7 @@ private lemma tensorIso_natural
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The presheaf pairing into the sheaf tensor is natural in both modules.
-Source: Stacks Project, Modules on Sites, Tag 03EK
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 03EK -/
 private theorem pureMap_natural
     {F F' G G' : SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
@@ -298,8 +293,7 @@ private theorem pureMap_natural
   erw [Category.assoc, hval, ← Category.assoc, ← hn]
   rfl
 
-/-- Tensor morphisms act componentwise on pure sections. Source: Stacks 03EK
-(auxiliary; not a blueprint node). -/
+/-- Tensor morphisms act componentwise on pure sections. Source: Stacks 03EK -/
 private theorem pure_map {M M' N N' : SheafOfModules.{u} (ringSheaf R)}
     (f : M ⟶ M') (g : N ⟶ N') (W : Cᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
     ((monoidalCategory R).tensorHom f g).val.app W (pure R M N W m n) =
@@ -307,7 +301,6 @@ private theorem pure_map {M M' N N' : SheafOfModules.{u} (ringSheaf R)}
   exact congrArg (fun k ↦ k.app W (m ⊗ₜ[R.obj.obj W] n)) (pureMap_natural R f g)
 end Pure
 /-- Existence part of the sheaf tensor universal property.
-(blueprint: lem-pc-sites-sheaf-tensor-bilinear-universal)
 The sectionwise tensor maps are assembled into a presheaf morphism and uniquely factored
 through module sheafification; this is exactly the existence construction in the source proof. -/
 private theorem tensor_bilinear_exists {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
@@ -396,8 +389,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
 /-- The pure tensor pairing, viewed in the cartesian category of set sheaves.
-Source: Stacks Project, Modules on Sites, Tag 03EL
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 03EL -/
 private noncomputable def pureSheaf (R : Sheaf J CommRingCat.{u})
     (M N : SheafOfModules.{u} (ringSheaf R)) :
     (underlying R).obj M ⊗ (underlying R).obj N ⟶
@@ -763,8 +755,7 @@ private theorem transportedPairing_smul_right
 
 
 /-- Transport of the actual pure pairing through the specified inverse-image lift.
-Source: Stacks Project, Modules on Sites, Tag 03EL
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 03EL -/
 private noncomputable def inverseImagePurePairing
     (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [PreservesFiniteLimits F] [F.Braided]
@@ -777,8 +768,7 @@ private noncomputable def inverseImagePurePairing
       I.moduleUnderlying.inv.app ((monoidalCategory R).tensorObj M N)
 
 /-- Naturality of the ordinary pure pairing.
-Source: Stacks Project, Modules on Sites, Tag 03EL
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 03EL -/
 private theorem pureSheaf_natural (R : Sheaf J CommRingCat.{u})
     {M M' N N' : SheafOfModules.{u} (ringSheaf R)} (f : M ⟶ M') (g : N ⟶ N') :
     ((underlying R).map f ⊗ₘ (underlying R).map g) ≫ pureSheaf R M' N' =
@@ -787,8 +777,7 @@ private theorem pureSheaf_natural (R : Sheaf J CommRingCat.{u})
   exact (pure_map R f g W p.1 p.2).symm
 
 /-- Naturality of the transported pure pairing.
-Source: Stacks Project, Modules on Sites, Tag 03EL
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 03EL -/
 private theorem inverseImagePurePairing_natural
     (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [PreservesFiniteLimits F] [F.Braided]
@@ -820,7 +809,6 @@ private theorem inverseImagePurePairing_natural
 /-- A canonical morphism from the tensor of inverse images to the inverse image of the
  tensor, with its normalization on every generalized pair.
 Source: Stacks Project, Modules on Sites, Tag 03EL.
-(auxiliary; not a blueprint node).
 
 Proof: transport the ordinary pure pairing using the finite-product comparison and the
 specified module-underlying isomorphisms. To check each additivity or scalar equation,
@@ -1183,7 +1171,6 @@ attribute [local irreducible] CochainScalarConstruction.pure
 -- The proof checks transported module structures in four bilinear identities and two inverses.
 /-- The map representing the transported pure pairing is invertible.
 Source: Stacks Project, Modules on Sites, Tag 03EL, the third equality of the Hom chain.
-(blueprint: lem-weil-pbc-algebraic-inverse-image-pairing-isIso).
 
 Proof: transport the product-preserving right adjoint on set sheaves to modules over R,
 using the adjoint of I.ringUnderlying as the structural ring map. The graph identities for
@@ -1655,7 +1642,6 @@ local notation "𝓤" R =>
 
 /-- The specified algebraic inverse image preserves tensor products with their pairings.
 Source: Stacks Project, Modules on Sites, Tag 03EL, third equality of the proof.
-(auxiliary; not a blueprint node).
 
 Proof: The right adjoint preserves products. Transport its additive operations and the
 RI-action along the adjunction to give its module direct image, with action of R through

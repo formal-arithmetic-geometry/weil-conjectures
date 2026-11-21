@@ -33,7 +33,6 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSup
 
 Source: Stacks Project, Cohomology on Sites, Tag 08JJ, final evaluation comparison;
 Modules on Sites, Tags 03CY, 0GMW, 03EL, 04TT and 03DH.
-(blueprint: lem-sfb-scalar-dual-evaluation-descent).
 
 The scalar realization is the existing change of rings of the recorded constant module
 functor, transported along its existing canonical coefficient-ring isomorphism.
@@ -62,7 +61,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
 /-- The node's `C_B(V) = B ⊗_{R̲} V̲`, using the recorded constant module functor and
 ordinary change of rings. The canonical coefficient transport is already defined in
 `constantModuleHomFunctor`; no second constant module or tensor construction is made.
-Source: Stacks Tags 03CY and 03EK (blueprint: lem-sfb-scalar-dual-evaluation-descent). -/
+Source: Stacks Tags 03CY and 03EK. -/
 abbrev scalarConstantRealization (V : ModuleCat.{max u v} R) :
     ringedSiteModules.{max u v}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B) :=
@@ -70,7 +69,7 @@ abbrev scalarConstantRealization (V : ModuleCat.{max u v} R) :
     ((constantModuleHomFunctor J R).obj V)
 
 /-- The existing change-of-rings map applied to the constant module map `f`.
-Source: Stacks Tags 03CY and 03EK (blueprint: lem-sfb-scalar-dual-evaluation-descent). -/
+Source: Stacks Tags 03CY and 03EK. -/
 def scalarConstantRealizationMap {V W : ModuleCat.{max u v} R} (f : V ⟶ W) :
     scalarConstantRealization J R B α V ⟶ scalarConstantRealization J R B α W :=
   changeOfRingsHomOfUniverses α ((constantModuleHomFunctor J R).obj V)
@@ -78,15 +77,14 @@ def scalarConstantRealizationMap {V W : ModuleCat.{max u v} R} (f : V ⟶ W) :
 
 /-- The generator `b ⊗ v` in scalar realization: first insert the constant module section,
 then insert its scalar tensor using the existing change-of-rings sheafification unit.
-Source: Stacks Tags 03CY and 03EK (blueprint: lem-sfb-scalar-dual-evaluation-descent). -/
+Source: Stacks Tags 03CY and 03EK. -/
 def scalarConstantGenerator (V : ModuleCat.{max u v} R) (U : Cᵒᵖ)
     (b : B.obj.obj U) (x : V) : (scalarConstantRealization J R B α V).val.obj U :=
   scalarExtensionRingIsoTmul α ((constantModuleHomFunctor J R).obj V) U
     ((constantModuleHomUnit J R V).app U x) b
 
 /-- The internal dual of the specified scalar realization, with the actual unit module
-sheaf as target. Source: Stacks Tag 04TT
-(blueprint: lem-sfb-scalar-dual-evaluation-descent). -/
+sheaf as target. Source: Stacks Tag 04TT -/
 abbrev scalarDualEvaluationTarget (V : ModuleCat.{max u v} R) :=
   homObj (R := B) (scalarConstantRealization J R B α V)
     (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))

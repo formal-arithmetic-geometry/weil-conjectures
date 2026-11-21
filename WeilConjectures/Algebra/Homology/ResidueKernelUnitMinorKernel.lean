@@ -33,8 +33,7 @@ The resulting matrix is diag(id,g), where g(a) = (d - D B⁻¹ b)a. The inverses
 reverse these operations, giving the asserted source and target equivalences. Take U
 to be the selected coordinates and C the remaining target coordinates, so C is free.
 When n = 1 the selected block is empty and these operations are identity operations.
-No kernel or quotient comparison is asserted here.
-(blueprint: new-residue-kernel-unit-minor-kernel) -/
+No kernel or quotient comparison is asserted here. -/
 theorem residue_kernel_unit_minor_normal_form
     (R : Type v) [CommRing R] (X Y : ModuleCat.{v} R) (f : X ⟶ Y)
     (hfX : Module.Finite R X) (hfY : Module.Finite R Y)

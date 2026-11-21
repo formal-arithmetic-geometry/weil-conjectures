@@ -14,8 +14,7 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelIndepend
 
 /-! # AffineBaseChangeTildeGlobalComparison
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-tilde-global-comparison). -/
+Source: Stacks Project, Tag 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -32,7 +31,6 @@ variable [∀ Y : Scheme.{u},
 
 /-- The global base-change square for the explicit tensor cohomology module and arrow.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, affine proof; Tags 08HY and 06Y6.
-(blueprint: lem-pc-affine-base-change-tilde-global-comparison).
 
 Proof: use an R-K-flat resolution of the restricted M. The universal property of
 m.derived identifies it, compatibly with m.counit, with the module scalar-extension

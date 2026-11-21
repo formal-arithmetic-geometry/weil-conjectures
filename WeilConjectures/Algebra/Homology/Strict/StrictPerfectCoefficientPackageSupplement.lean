@@ -23,7 +23,6 @@ public import WeilConjectures.AlgebraicGeometry.StrictPerfectCoefficientPackage
 # Strict-perfect coefficient packages
 
 Source: the Weil conjectures blueprint, proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
 
 ## Main definitions
 
@@ -52,8 +51,7 @@ namespace SheafOfModules
 variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
 
 /-- The degreewise idempotent associated to the chosen splitting.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: proper base change, definition 1263 -/
 noncomputable def StrictPerfectCoefficientPackage.e {R : Sheaf J RingCat.{u}}
     {F : CochainComplex (SheafOfModules.{u} R) ℤ}
     (P : StrictPerfectCoefficientPackage R F) (r : ℤ) := P.p r ≫ P.i r
@@ -87,14 +85,12 @@ variable {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
 attribute [instance] strictPerfectConstantFiniteFreeComparison_isIso
 
 /-- Termwise sheafification, including the differential.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: proper base change, definition 1263 -/
 noncomputable def strictPerfectConstantComplex (F : CochainComplex (ModuleCat.{u} Λ) ℤ) :=
   ((strictPerfectConstantSheaf J Λ).mapHomologicalComplex (ComplexShape.up ℤ)).obj F
 
 /-- Transport of a degreewise splitting through sheafification and the finite-free comparison.
 Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
 Proof: cancel the adjacent comparison and its inverse. The remaining composite is the
 image of `i_r ≫ p_r`; use the original splitting and preservation of identity maps. -/
 theorem strictPerfectConstant_splitting {F : CochainComplex (ModuleCat.{u} Λ) ℤ}
@@ -110,8 +106,7 @@ theorem strictPerfectConstant_splitting {F : CochainComplex (ModuleCat.{u} Λ) �
 
 /-- The associated constant package: sheafify the complex and both splitting maps termwise,
 then identify the constant finite tuples with finite tuples of the constant ring sheaf.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: proper base change, definition 1263 -/
 noncomputable def _root_.ModuleCat.StrictPerfectCoefficientPackage.constant
     {F : CochainComplex (ModuleCat.{u} Λ) ℤ} (P : ModuleCat.StrictPerfectCoefficientPackage F) :
     SheafOfModules.StrictPerfectCoefficientPackage _ (strictPerfectConstantComplex J Λ F) where
@@ -124,7 +119,6 @@ noncomputable def _root_.ModuleCat.StrictPerfectCoefficientPackage.constant
 
 /-- The idempotent identities of a sheaf coefficient package.
 Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
 Proof: reassociate each composite and substitute `i_r ≫ p_r = 1`. The three results
 are respectively `p_r ≫ i_r`, `p_r` and `i_r`. -/
 theorem StrictPerfectCoefficientPackage.identities {R : Sheaf J RingCat.{u}}
@@ -146,14 +140,12 @@ namespace ModuleCat
 variable {Λ : Type u} [CommRing Λ]
 
 /-- The degreewise idempotent of a global coefficient package.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: proper base change, definition 1263 -/
 def StrictPerfectCoefficientPackage.e {F : CochainComplex (ModuleCat.{u} Λ) ℤ}
     (P : StrictPerfectCoefficientPackage F) (r : ℤ) := P.p r ≫ P.i r
 
 /-- The idempotent identities of a global coefficient package.
 Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
 Proof: reassociate each composite, replace the middle `i_r ≫ p_r` by the identity,
 and remove the identity. -/
 theorem StrictPerfectCoefficientPackage.identities {F : CochainComplex (ModuleCat.{u} Λ) ℤ}

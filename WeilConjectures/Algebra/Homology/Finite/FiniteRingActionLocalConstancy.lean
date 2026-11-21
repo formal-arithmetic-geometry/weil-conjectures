@@ -28,7 +28,7 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 # Local constancy of a finite ring action
 
 Source: Stacks Project, Modules on Sites, Tag 093S, finite-operation refinement;
-Sites, Tag 00WK (blueprint: lem-sp-finite-ring-action-local-constancy).
+Sites, Tag 00WK.
 -/
 
 @[expose] public section
@@ -339,7 +339,7 @@ private theorem covering_refinement {C : Type uC} [Category.{vC} C]
 its underlying set sheaf is finite locally constant.
 
 Source: Stacks Project, Modules on Sites, Tag 093S, finite-operation refinement, and
-Sites, Tag 00WK (blueprint: lem-sp-finite-ring-action-local-constancy).
+Sites, Tag 00WK.
 
 Proof:
 1. Fix an object and a cover trivializing the underlying set sheaf by a finite set S.

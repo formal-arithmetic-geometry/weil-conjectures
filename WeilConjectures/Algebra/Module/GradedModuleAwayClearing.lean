@@ -26,7 +26,6 @@ namespace LocalizedModule
 set_option linter.unusedVariables false in
 /-- Clearing denominators for degree-zero module and ring restriction maps.
 Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), (1)(e),(h).
-(blueprint: lem-weil-pbc-graded-module-away-clearing)
 
 Proof: If g is nilpotent, the target localizations are zero and take n = 0, x = 0.
 Otherwise hZ represents a target module fraction as y/g^n with y and g^n of the

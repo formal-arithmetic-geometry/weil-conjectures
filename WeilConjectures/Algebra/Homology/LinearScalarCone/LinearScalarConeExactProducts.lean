@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Linear.FunctorCategory
 /-! # Exactness and products for the localized scalar cone
 
 Source: Stacks, Tags 06YS and 0941, the bounded finite-free tensor argument.
-(blueprint: lem-coef-linear-scalar-cone-exact-products).
 -/
 
 @[expose] public section
@@ -631,7 +630,7 @@ private theorem derived_products (s : R) :
 
 /-- The localized two-term scalar cone is exact and preserves countable products.
 Source: blueprint DVR effectivity proof, bounded-free tensor paragraph; Stacks 06YS,
-0941. (blueprint: lem-coef-linear-scalar-cone-exact-products).
+0941.
 
 Proof: on complexes the functor is tensor with the two-term free scalar complex,
 using the scalar action of R. Its degree-q object is X^(q+1) plus X^q.

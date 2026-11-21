@@ -20,7 +20,6 @@ import WeilConjectures.Algebra.Homology.FlatTruncationSuccessor
 Source: Stacks Project, Cohomology on Sites, Lemma 077J
 (`sites-cohomology-lemma-resolution-by-direct-sums-extensions-by-zero`), using
 Derived Categories, `lemma-special-direct-system`
-(blueprint: lem-pc-flat-truncation-tower).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ namespace CochainComplex
 
 /-- Good truncations admit a strictly compatible tower of bounded-above flat replacements.
 Source: Stacks Project, Lemma 077J and Derived Categories, `lemma-special-direct-system`
-(blueprint: lem-pc-flat-truncation-tower).
 
 Proof: Use flat module sheaves as the resolving class. Zero and finite sums are flat.
 Every module has a flat epimorphic cover: use the canonical section-indexed sum of

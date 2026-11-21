@@ -10,8 +10,7 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # Independence of localized tensor cohomology from its universal derived model
 
-Source: Stacks Project, Tag 06Y6.
-(blueprint: lem-pc-base-derived-tensor-cohomology-model-localized-independence). -/
+Source: Stacks Project, Tag 06Y6. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -61,7 +60,6 @@ private theorem tensorLinearLift
 /-- Two universal base-derived tensor models have isomorphic localized source
 modules, compatibly with their specified localized comparison maps.
 Source: Stacks Project, more-algebra.tex, Tag 06Y6 (independence of choices).
-(blueprint: lem-pc-base-derived-tensor-cohomology-model-localized-independence).
 
 Proof: uniqueness of total left derived functors gives a natural isomorphism
 between m.derived and n.derived, commuting with their counits. Apply homology to

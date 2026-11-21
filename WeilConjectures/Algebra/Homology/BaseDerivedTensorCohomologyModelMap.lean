@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 
 Source: Stacks Project, More on Algebra, Tag 06Y6, functoriality of the
 derived tensor product and its commuting coefficient actions.
-(blueprint: lem-pc-base-derived-tensor-cohomology-model-map).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ variable (R A B D : Type u)
 set_option backward.isDefEq.respectTransparency false in
 /-- Functoriality lifted to the tensor-algebra cohomology objects of any two models.
 Source: Stacks Project, More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-base-derived-tensor-cohomology-model-map).
 
 Proof: the universal counits determine the unique derived-functor isomorphism
 from L.derived to K.derived. Let delta be its forward natural transformation.

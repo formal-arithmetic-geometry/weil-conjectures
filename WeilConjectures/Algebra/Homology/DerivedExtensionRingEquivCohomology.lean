@@ -11,8 +11,7 @@ import WeilConjectures.Algebra.Homology.DerivedExtensionRingEquivCounit
 
 /-! # Universal derived extension under coefficient equivalences
 
-Source: Stacks Project, Tags 06Y6 and 05RR.
-(blueprint: lem-pc-derived-extension-ring-equiv-cohomology). -/
+Source: Stacks Project, Tags 06Y6 and 05RR. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -102,8 +101,7 @@ and its cohomology square. Combine t, d, and their two established properties.
 No additional algebra action, model cohomology, or chosen input complex is used.
 The construction includes zero rings and complexes and every degree.
 Source: Stacks Project, Tag 06Y6, Lemma 15.61.1 (independence of choices),
-and Tag 05RR, localization of homotopy categories.
-(blueprint: lem-pc-derived-extension-ring-equiv-cohomology). -/
+and Tag 05RR, localization of homotopy categories. -/
 theorem exists_derivedExtension_ringEquiv_cohomology
     {R₀ B₀ R B : Type u}
     [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]

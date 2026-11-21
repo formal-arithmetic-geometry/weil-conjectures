@@ -171,8 +171,7 @@ Its restriction is exactly the stated formula by construction. The B-linear
 row is conjugate to the long exact row; exact faithful restriction E to B
 reflects exactness, proving the first conclusion. No ordinary counit comparison
 square is claimed here. Zero rings, zero complexes and arbitrary degrees use
-the same universal-property and tensor-induction arguments.
-(blueprint: lem-pc-base-derived-tensor-canonical-row-completion). -/
+the same universal-property and tensor-induction arguments. -/
 theorem exists_baseDerivedTensor_canonical_row_completion
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

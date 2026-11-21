@@ -15,8 +15,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 # The disjointness reduction in Conrad's Theorem 2.4, Case 3
 
 This file contains the first of the two opening reductions of Conrad's proof of Case 3 of
-Theorem 2.4 in *Deligne's notes on Nagata compactifications* (blueprint:
-`lemma:nagata-conrad-case3-disjointness-reduction`).
+Theorem 2.4 in *Deligne's notes on Nagata compactifications*.
 
 The data is a qcqs scheme `X` with quasi-compact opens `U ≤ V`, a morphism `p : Y ⟶ X`
 from a qcqs scheme and a section `f : U ⟶ Y` of `p` over `U` whose image is closed in
@@ -41,8 +40,7 @@ directed supremum of the finite-type subideals
 ## Main results
 
 - `AlgebraicGeometry.exists_isAdmissible_disjoint_closure_range_of_le`: the disjointness
-  blow-up (blueprint: `lemma:nagata-conrad-case3-disjointness-reduction`).
-
+  blow-up.
 -/
 
 @[expose] public section
@@ -64,8 +62,7 @@ of the base change of `f` is disjoint from the part lying over the closure of `V
 
 The base change is left flexible: `Z'` is an arbitrary scheme over `Y` and over
 `(I₁ ⊔ I₂).blowup`, and `Y'` an arbitrary scheme over `U` and over `Z'`, fitting into the two
-commuting squares, exactly as in `AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup`.
-(Blueprint: `lemma:nagata-conrad-case3-disjointness-reduction`.) -/
+commuting squares, exactly as in `AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup`. -/
 theorem exists_isAdmissible_disjoint_closure_range_of_le
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : X.Opens} (hUV : U ≤ V)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

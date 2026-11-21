@@ -20,7 +20,6 @@ import Mathlib.RingTheory.Flat.Localization
 /-! # K-flatness after restricting a localized base
 
 Source: Stacks Project, Tags 06Y6 and 00CS.
-(blueprint: lem-pc-localization-restriction-kflat).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ namespace ModuleCat
 
 /-- Restriction along a localization preserves K-flat complexes.
 Source: Stacks Project, Tag 06Y6, computation of derived base change; Tag 00CS.
-(blueprint: lem-pc-localization-restriction-kflat).
 
 Proof: let F be any acyclic R-complex. Flatness of the localization makes
 Rp tensor_R F acyclic. Tensor associativity identifies the restriction of

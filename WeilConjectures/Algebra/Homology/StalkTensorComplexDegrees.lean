@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 # Degreewise stalk tensor comparison
 
 Source: Stacks Project, Cohomology, Tag 06YB, tensor-stalk identification
-(blueprint: lem-pc-stalk-tensor-complex-degrees).
 -/
 
 @[expose] public section
@@ -61,7 +60,7 @@ private theorem stalk_preserves_colimits (J : Type) [SmallCategory J] :
     (forget₂ (ModuleCat.{u₁} (X.presheaf.stalk x)) AddCommGrpCat.{u₁})
 
 /-- Source: Stacks Project, Cohomology, Tag 06YB, tensor-stalk identification,
-first two steps (blueprint: lem-pc-stalk-tensor-complex-degrees).
+first two steps.
 
 Proof: express the degree as the coproduct indexed by pairs `(p,q)` with `p+q=n`.
 The canonical stalk/direct-sum comparison of Tag 009E identifies its stalk with

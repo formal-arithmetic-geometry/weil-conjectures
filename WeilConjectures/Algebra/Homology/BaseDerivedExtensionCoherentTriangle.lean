@@ -44,8 +44,7 @@ isomorphism. Restriction A to R is exact and induces a triangulated functor
 D(A) to D(R). Compose it with this triangulated derived extension and apply it
 to the distinguished image of T. Its factorization through the homotopy
 quotient and Qh gives precisely the displayed triangle, including its third
-arrow. No flatness, boundedness or nonzero-ring hypothesis is needed.
-(blueprint: lem-pc-base-derived-extension-coherent-triangle). -/
+arrow. No flatness, boundedness or nonzero-ring hypothesis is needed. -/
 theorem baseDerivedExtension_coherent_triangle_distinguished
     (R A B : Type u) [CommRing R] [CommRing A] [CommRing B]
     [Algebra R A] [Algebra R B]

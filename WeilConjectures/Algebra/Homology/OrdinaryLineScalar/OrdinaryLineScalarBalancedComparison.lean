@@ -368,7 +368,6 @@ private theorem balancedComponent_natural (α : R ⟶ S)
 
 /-- The balanced ordinary comparison, before passage to complexes or localization.
 Source: Stacks 07A4, proof of lemma-pullback-tensor-product; Modules on Sites 03EK.
-(blueprint: lem-pur-ordinary-line-scalar-balanced-comparison).
 Proof: scalar extension is strong monoidal by its sheafified balanced tensor maps.
 Compose its binary tensor comparison with B_m on the second factor. The forward
 map sends s tensor (x tensor y) to (s tensor x) tensor B_m(1 tensor y).

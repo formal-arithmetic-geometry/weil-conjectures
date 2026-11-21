@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.HorizontalProjectionTailDifferential
 
 Source: Stacks Project, Homology, Tag 012X, Lemma 12.25.1(1), with the
 explicit column-cone refinement of lem-sp-cone-horizontal-graded-iso.
-(blueprint: lem-sp-cone-horizontal-projection-generator-vanishing)
 -/
 
 @[expose] public section
@@ -92,7 +91,6 @@ private theorem inrX_coneHorizontalProjection
 source and target generator with horizontal index at least `p`.
 Source: Stacks Project, Homology, Tag 012X, Lemma 12.25.1(1); the cone refinement
 is the elementary sign calculation of lem-sp-cone-horizontal-graded-iso, step 2.
-(blueprint: lem-sp-cone-horizontal-projection-generator-vanishing)
 
 Proof: write `e = (-1)^p`. A valid summand of total degree `m` and horizontal
 index `h` has vertical degree `m-h`. The total differential sends it to the

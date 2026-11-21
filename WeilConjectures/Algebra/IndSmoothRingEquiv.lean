@@ -54,8 +54,7 @@ Source: the scalar transport argument in Stacks Project, Smoothing Ring Maps, Ta
 Restrict scalars along the base isomorphism; its inverse supplies an inverse functor.
 Map the filtered colimit presentation through this equivalence. Each term stays smooth
 because its structure homomorphism is composed with a ring isomorphism. Finally use the
-compatible algebra isomorphism to change the vertex.
-(blueprint: lem-weil-pbc-ind-smooth-ring-equiv) -/
+compatible algebra isomorphism to change the vertex. -/
 theorem ind_smooth_of_ringEquiv
     {R S : Type u} [CommRing R] [CommRing S]
     {A B : Type v} [CommRing A] [CommRing B] [Algebra S A] [Algebra R B]

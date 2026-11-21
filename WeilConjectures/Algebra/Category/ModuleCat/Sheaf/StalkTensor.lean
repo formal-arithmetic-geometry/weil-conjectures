@@ -17,7 +17,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 # Stalk of a tensor product of modules on a ringed space
 
 Source: Stacks Project, Modules, Lemma 17.16.1 (Tag 01CB,
-label lemma-stalk-tensor-product) (blueprint: lem-pc-ringed-space-module-stalk-tensor).
+label lemma-stalk-tensor-product).
 -/
 
 @[expose] public section
@@ -140,7 +140,6 @@ end Helpers
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical tensor comparison on stalks is linear and natural in both sheaves.
 Source: Stacks Project, Modules, Lemma 17.16.1 (Tag 01CB)
-(blueprint: lem-pc-ringed-space-module-stalk-tensor).
 
 Proof:
 1. Neighbourhoods of `x` are directed. Module stalks are colimits, with scalar action
@@ -155,8 +154,7 @@ Proof:
 4. Compose this identification with the inverse of the sheafification stalk map.
    Pure tensor germs generate, so the displayed germ formula characterizes the map.
 5. Both sides of the naturality equation send each pure tensor germ to the tensor
-   of its image germs (`def-weil-pbc-module-stalk`). Generation gives equality. 
-(blueprint: lem-weil-pbc-module-stalk-tensor)
+   of its image germs (`def-weil-pbc-module-stalk`). Generation gives equality.
 -/
 theorem stalkTensorIso (X : AlgebraicGeometry.RingedSpace.{u}) (x : X) :
     let R := (sheafCompose (Opens.grothendieckTopology X)

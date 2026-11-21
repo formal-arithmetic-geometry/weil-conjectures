@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.LocalizedRestrictionExtensionExistsOfUni
 # Exact left adjunction for restriction to a localized ringed site
 
 Source: Stacks Project, Tags 03DI, 03DJ and 08FI.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -45,7 +44,6 @@ Restriction preserves addition sectionwise.
 
 Source: Stacks Project, Tags 03DI and 03DJ, the exact left adjoint used in
 Tag 08FI, Lemma 21.20.1.
-(auxiliary; not a blueprint node)
 -/
 theorem localized_restriction_adjunctionOfUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}

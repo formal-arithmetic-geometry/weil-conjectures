@@ -13,8 +13,7 @@ import WeilConjectures.Algebra.Homology.DerivedTensorBaseSecondLocalizationModel
 
 /-! # Base and second-factor localization after taking the affine input stalk
 
-Source: Stacks Project, Tags 0DJ8 and 06Y6.
-(blueprint: new-affine-stalk-base-second-localization-comparison). -/
+Source: Stacks Project, Tags 0DJ8 and 06Y6. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -217,7 +216,6 @@ variable [∀ Y : Scheme.{u},
 /-- Localize only the base and second factor of an already stalk-localized input.
 Source: Stacks Project, Tag 0DJ8, base and second-factor part of the localization
 identity; Tag 06Y6.
-(blueprint: new-affine-stalk-base-second-localization-comparison).
 
 Proof: the maps from R and R' to their spectrum stalks are prime localizations.
 Their maps into the A-stalk and D agree by stalk-map naturality and the cartesian

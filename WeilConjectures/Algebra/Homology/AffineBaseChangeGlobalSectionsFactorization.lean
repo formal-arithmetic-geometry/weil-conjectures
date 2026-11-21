@@ -12,8 +12,7 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Sheaf-level affine ordinary tensor homology coordinates
 
-Source: Stacks Project, Tag 01I9.
-(blueprint: new-lem-pc-affine-base-change-global-sections-factorization). -/
+Source: Stacks Project, Tag 01I9. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -29,7 +28,6 @@ variable [∀ Y : Scheme.{u},
 /-- Factorization of the affine global-sections coordinate before localization.
 Source: Stacks Project, Tags 01I9 and 0DJ8; the coordinate is defined in
 `affineBaseChangeTildeCohomologyIso`.
-(blueprint: new-lem-pc-affine-base-change-global-sections-factorization).
 Proof: write C for the scalar-extended complex and delta for the termwise
 pullback comparison. The coordinate's sheaf isomorphism is the inverse exact
  tilde homology map, then the inverse derived homology factorization, then

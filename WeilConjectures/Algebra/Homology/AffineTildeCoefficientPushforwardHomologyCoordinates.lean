@@ -16,8 +16,7 @@ import WeilConjectures.Algebra.Homology.AffineTildePushforwardHomologyFactorizat
 
 /-! # Homology coordinates of the raw affine tensor comparison
 
-Source: Stacks Project, Tags 0DJ8, 06Y6 and 08HY.
-(blueprint: lem-pc-affine-tilde-coefficient-pushforward-homology-coordinates). -/
+Source: Stacks Project, Tags 0DJ8, 06Y6 and 08HY. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -45,7 +44,6 @@ variable [∀ Y : Scheme.{u},
 
 /-- Ordinary coefficient maps followed by the pushforward homology comparison.
 Source: Stacks Project, Tags 06Z0 and 0AVW; parent proof step 2.
-(blueprint: lem-pc-affine-tilde-coefficient-pushforward-homology-coordinates).
 
 Proof: Put v = s followed by restriction of z₀. Apply the factorization of the
 pushforward homology map into the inverse restriction homology comparison,

@@ -13,7 +13,6 @@ import Mathlib.RingTheory.TensorProduct.Maps
 # Tensor coefficient actions from an additive functor
 
 Source: Stacks Project, Tag 06Y6, functorial coefficient actions
-(blueprint: lem-pc-tensor-action-additive-functor).
 -/
 
 @[expose] public section
@@ -76,7 +75,6 @@ private theorem action_of_endomorphisms
 
 -- The coefficient actions use explicit module carriers.
 /-- Source: Stacks Project, Tag 06Y6, functorial coefficient actions
-(blueprint: lem-pc-tensor-action-additive-functor).
 
 Proof: The additive functor induces a ring map on endomorphisms. Compose it with
 scalar multiplication by A. Its restriction to R is scalar multiplication through B

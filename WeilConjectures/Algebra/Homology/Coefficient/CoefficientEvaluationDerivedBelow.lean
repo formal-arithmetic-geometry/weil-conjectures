@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 # Evaluation of a derived extension below its defining level
 
 Source: Zheng, Construction 4.1, p. 21; Stacks Project, Tag 06XN.
-(blueprint: lem-pur-coefficient-evaluation-derived-below).
 -/
 
 @[expose] public noncomputable section
@@ -41,7 +40,6 @@ set_option backward.isDefEq.respectTransparency.types false
 /-- Evaluation of the derived extension below its level is derived scalar extension,
 with the comparison induced by the ordinary below-level formula on complexes.
 Source: Zheng, Construction 4.1, p. 21; Stacks Project, Tag 06XN
-(blueprint: lem-pur-coefficient-evaluation-derived-below).
 Proof: derived evaluation is a right adjoint, so it preserves the limits defining the
 pointwise right Kan extension of the ordinary extension functor. Postcompose that Kan
 extension by evaluation. The evaluation localization comparison and the ordinary

@@ -134,7 +134,6 @@ private theorem lower_bound_colimit
 from all finite upper truncations of a complex.
 Source: Stacks Project, Cohomology on Sites, Tag 077J; Modules on Sites,
 Tags 03DB and 03EP. Agent consequence, not a verbatim assertion of those tags.
-(blueprint: lem-sbc-derived-scalar-truncation-continuity).
 
 Proof: use the reduced functorial flat resolution to resolve every good upper
 truncation of G compatibly. The integer-indexed degreewise colimit P of these

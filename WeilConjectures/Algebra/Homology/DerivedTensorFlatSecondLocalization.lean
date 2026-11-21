@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Localization.Basic
 # Flat localization of the second derived tensor factor
 
 Source: Stacks Project, More on Algebra, Tag 06Y6, flat cohomology base change and
-comparison-map (blueprint: lem-pc-derived-tensor-flat-second-localization).
+comparison-map.
 -/
 
 @[expose] public section
@@ -73,8 +73,7 @@ Proof using the canonical flat cohomology map already defined in the models:
    A-resolution. The left span arrow is invertible on cohomology by `spanLeft_isIso`.
    Cancel its scalar extension, then cancel the left arrow over C. The two resulting
    composites agree by naturality for the right span arrow.
-This proves the assertions for every flat B → C; the localization hypotheses are retained.
-(blueprint: lem-pc-derived-tensor-flat-second-localization) -/
+This proves the assertions for every flat B → C; the localization hypotheses are retained. -/
 theorem derivedTensor_flat_second_localization
     (R A B C : Type v) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra R C] [Algebra B C] [IsScalarTower R B C]

@@ -38,7 +38,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-! # The canonical module comparison for localization of a ringed site
 
 Source: Stacks Project, Modules on Sites, Tag 04J0.
-(blueprint: lem-weil-pbc-slice-module-pullback-isIso).
 -/
 
 @[expose] public noncomputable section

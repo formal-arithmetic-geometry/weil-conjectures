@@ -37,7 +37,6 @@ O-modules, and requires neither an algebra structure nor an adjunction.
 
 Source: Stacks Project, Cohomology on Sites, Section 08J7, Lemma 0A95;
 Duality for Schemes, Tag 0BV1, lemma-sheafhom-affine-ext
-(blueprint: lem-sc-derived-internal-hom-single-comparison).
 
 Proof:
 1. Let I be the functorial K-injective resolution of the Grothendieck abelian category

@@ -57,7 +57,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Componentwise linear stalk comparison for restriction, with its germ formula.
 Source: Stacks Project, Sheaves Section 6.31, Lemma 6.31.1 (3).
-(blueprint: new-module-restriction-stalk-components).
 
 Proof: represent a restricted stalk element by a germ on a neighborhood in the open,
 then send it to the germ on its image in the ambient space.  The additive stalk

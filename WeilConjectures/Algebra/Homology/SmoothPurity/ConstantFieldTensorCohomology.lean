@@ -49,7 +49,6 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 Source: the blueprint, `lem-exc-residue-tor-test.proof.md`, second paragraph;
 Stacks Project, Tags 03CY, 03ET, 0GMW, 00WJ and 010N
-(blueprint: lem-exc-constant-field-sheaf-tensor-cohomology).
 -/
 
 @[expose] public section
@@ -82,7 +81,6 @@ private theorem tensorMap_tmul
 naturally in both variables, and sends `[z] ⊗ y` to `[z ⊗ y]` on local sections.
 Source: blueprint `lem-exc-residue-tor-test.proof.md`, second paragraph, expanded by Stacks
 Tags 03CY, 03ET, 0GMW, 00WJ and 010N
-(blueprint: lem-exc-constant-field-sheaf-tensor-cohomology).
 
 Proof:
 1. Restrict a module sheaf N along the map from the constant presheaf field to its

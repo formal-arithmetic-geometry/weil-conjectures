@@ -13,7 +13,6 @@ import Mathlib.Algebra.Module.Submodule.EqLocus
 # Degreewise retractions of the alternating column filtration
 
 Source: Stacks Project, Tag 09KP, filtration construction.
-(blueprint: lem-pc-derived-total-filtration-step-retraction)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ variable (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
 
 /-- Each filtration inclusion has a left inverse in each degree.
 Source: Stacks Project, Tag 09KP, alternating column filtration.
-(blueprint: lem-pc-derived-total-filtration-step-retraction)
 
 Proof. Decompose the total module in degree k as the coproduct of its column
 terms. At stage 2j the submodule is the sum of full columns -i for i<j;

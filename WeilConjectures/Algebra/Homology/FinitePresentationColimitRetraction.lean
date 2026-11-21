@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.PreorderModuleMapEqualityDescent
 
 Source: Stacks Project, More on Algebra, Tag 0BC7, first proof paragraph,
 using Algebra, Tag 05N7, map and equality clauses.
-(blueprint: lem-pc-fp-colimit-retraction).
 -/
 
 @[expose] public section
@@ -128,7 +127,6 @@ private theorem conjugation_retraction
 /-- A retraction between two fixed finitely presented models descends to a later stage.
 Source: Stacks Project, More on Algebra, Tag 0BC7, label lemma-colimit-perfect,
 first proof paragraph, using Algebra, Tag 05N7, (2) and (3).
-(blueprint: lem-pc-fp-colimit-retraction).
 
 Proof: Replace the directed preorder by its antisymmetrization and transport the ring
 colimit and the fixed models along the equivalence of indexing categories. Apply the

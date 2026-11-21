@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Sites.Equivalence
 /-! # Internal Hom under the lifted small-site equivalence
 
 Source: Stacks 03D6 and 03EO, restriction to an equivalent site.
-(blueprint: lem-sf-small-site-module-hom)
 -/
 
 @[expose] public noncomputable section
@@ -26,12 +25,12 @@ namespace SheafOfModules.SmallSite
 variable {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
 
 /-- The topology on the lifted small category.
-Source: Stacks 03D6 (blueprint: lem-sf-small-site-module-hom). -/
+Source: Stacks 03D6. -/
 abbrev topology : GrothendieckTopology (AsSmall.{u + 1} C) :=
   AsSmall.down.{u, u + 1, u + 1}.inducedTopology J
 
 /-- Lifting preserves the transported topology.
-Source: Stacks 03D6 (blueprint: lem-sf-small-site-module-hom). -/
+Source: Stacks 03D6. -/
 instance up_continuous : AsSmall.up.{u, u + 1, u + 1}.IsContinuous J (topology J) := by
   have : AsSmall.up.{u, u + 1, u + 1}.IsDenseSubsite J (topology J) := by
     change (AsSmall.equiv.{u, u + 1, u + 1} : C ≌ AsSmall.{u + 1} C).functor.IsDenseSubsite J
@@ -42,12 +41,12 @@ instance up_continuous : AsSmall.up.{u, u + 1, u + 1}.IsContinuous J (topology J
 variable (R : Sheaf J CommRingCat.{u + 1})
 
 /-- Restrict the coefficient sheaf without changing its sections.
-Source: Stacks 03D6 (blueprint: lem-sf-small-site-module-hom). -/
+Source: Stacks 03D6. -/
 def coefficient : Sheaf (topology J) CommRingCat.{u + 1} :=
   (AsSmall.down.{u, u + 1, u + 1}.sheafPushforwardContinuous _ (topology J) J).obj R
 
 /-- Module restriction along the inverse lift, from the small site to the original site.
-Source: Stacks 03D6 (blueprint: lem-sf-small-site-module-hom). -/
+Source: Stacks 03D6. -/
 def restriction : SheafOfModules.{u + 1}
     ((sheafCompose (topology J)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficient J R)) ⥤
@@ -55,7 +54,7 @@ def restriction : SheafOfModules.{u + 1}
   pushforward (F := AsSmall.up.{u, u + 1, u + 1}) (𝟙 _)
 
 /-- Both lift directions restrict modules and give inverse equivalences.
-Source: Stacks 03D6 (blueprint: lem-sf-small-site-module-hom).
+Source: Stacks 03D6.
 The coefficient maps are identities. The lifted category's unit and counit have
 identity underlying arrows, so the pushforward composition equations are identities. -/
 def equivalence : SheafOfModules.{u + 1}
@@ -84,21 +83,21 @@ def equivalence : SheafOfModules.{u + 1}
         exact ConcreteCategory.congr_hom (R.obj.map_id _) x)
 
 /-- The forward functor of the lifted equivalence is the specified restriction.
-Source: Stacks 03D6 (blueprint: lem-sf-small-site-module-hom). -/
+Source: Stacks 03D6. -/
 theorem equivalence_functor : (equivalence J R).functor = restriction J R := rfl
 
 /-- Restriction leaves addition of module maps unchanged.
-Source: Stacks 03D6 (blueprint: lem-sf-small-site-module-hom). -/
+Source: Stacks 03D6. -/
 instance restriction_additive : (restriction J R).Additive where
   map_add := by intros; ext U x; rfl
 
 /-- Modules on the lifted site.
-Source: Stacks 03D6 (blueprint: lem-sf-small-site-module-hom). -/
+Source: Stacks 03D6. -/
 abbrev SmallModules := SheafOfModules.{u + 1}
   ((sheafCompose (topology J) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficient J R))
 
 /-- The sectionwise lift comparison.
-Source: Stacks 03EO (blueprint: lem-sf-small-site-module-hom). -/
+Source: Stacks 03EO. -/
 def unliftSliceMap (M N : SmallModules J R) (U : C)
     (f : (PresheafOfModules.restrictOver (coefficient J R).obj
         (AsSmall.up.{u, u + 1, u + 1}.obj U)).obj M.val ⟶
@@ -114,7 +113,7 @@ def unliftSliceMap (M N : SmallModules J R) (U : C)
     exact f.naturality j.op
 
 /-- The sectionwise lift comparison.
-Source: Stacks 03EO (blueprint: lem-sf-small-site-module-hom). -/
+Source: Stacks 03EO. -/
 def liftSliceMap (M N : SmallModules J R) (U : C)
     (f : (PresheafOfModules.restrictOver R.obj U).obj ((restriction J R).obj M).val ⟶
       (PresheafOfModules.restrictOver R.obj U).obj ((restriction J R).obj N).val) :
@@ -131,7 +130,7 @@ def liftSliceMap (M N : SmallModules J R) (U : C)
     exact f.naturality j.op
 
 /-- The sectionwise lift comparison.
-Source: Stacks 03EO (blueprint: lem-sf-small-site-module-hom). -/
+Source: Stacks 03EO. -/
 def homApp (M N : SmallModules J R) (U : Cᵒᵖ) :
     ((restriction J R).obj (homObj (R := coefficient J R) M N)).val.obj U ≅
       (homObj (R := R) ((restriction J R).obj M) ((restriction J R).obj N)).val.obj U :=
@@ -175,7 +174,7 @@ def homApp (M N : SmallModules J R) (U : Cᵒᵖ) :
 
 /-- Lifted slice maps and original slice maps have the same components. This identifies
 internal Hom, naturally in both module variables.
-Source: Stacks 03D6 and 03EO (blueprint: lem-sf-small-site-module-hom).
+Source: Stacks 03D6 and 03EO.
 At U, send a map on the lifted slice to its components at the lifts of W -> U.
 The inverse reads a map at the underlying arrows. These operations are inverse,
 linear, and commute with every slice restriction and with composition. -/
@@ -186,7 +185,7 @@ def homIso (M N : SmallModules J R) :
     (fun _ _ _ ↦ by ext f; rfl)
 
 /-- The internal Hom identification commutes with precomposition and postcomposition.
-Source: Stacks 03EO (blueprint: lem-sf-small-site-module-hom). -/
+Source: Stacks 03EO. -/
 theorem homIso_naturality {M M' N N' : SmallModules J R} (f : M' ⟶ M) (g : N ⟶ N') :
     (restriction J R).map (homObjMap (R := coefficient J R) f g) ≫
         (homIso J R M' N').hom =

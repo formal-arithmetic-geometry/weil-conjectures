@@ -22,8 +22,7 @@ adjoint of derived restriction is computed at `X⟦1⟧` by the restricted ordin
 quotient-linear coinduction trace is invertible at `X⟦1⟧`.
 
 Source: Stacks Tags 06YP, 06YY, 07A6, 0A70 and 08FZ; the principal short exact sequence of
-complexes and its cone-boundary/coinduction comparison.
-(blueprint: lem-sf-regular-quotient-trace-on-injective-terms). -/
+complexes and its cone-boundary/coinduction comparison. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -42,8 +41,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- Derived restriction of a normalized augmentation is additive and conservative.
 Source: Stacks Tags 05SS and 06YY; restriction is exact and faithful, so it commutes with
-cohomology and reflects isomorphisms of module sheaves
-(blueprint: lem-sf-regular-quotient-trace-on-injective-terms). -/
+cohomology and reflects isomorphisms of module sheaves -/
 theorem Augmentation.V_additive_and_reflectsIsomorphisms (b : Augmentation φ t d) :
     b.V.Additive ∧ b.V.ReflectsIsomorphisms := by
   obtain ⟨hlim, hcol, -⟩ := sheafRingCoefficientOrdinaryAdjunction φ
@@ -69,8 +67,7 @@ theorem Augmentation.V_additive_and_reflectsIsomorphisms (b : Augmentation φ t 
   exact ⟨Functor.additive_of_iso e.symm, reflectsIsomorphisms_of_iso e.symm⟩
 
 /-- Shifting back the shift by `-1` of an isomorphism `z : Z⟦1⟧ ≅ W` recovers `z`.
-Source: Stacks Tag 0145; the compatibilities of the shift functors
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0145; the compatibilities of the shift functors -/
 theorem shift_one_neg_one_transpose {D : Type*} [Category D] [HasShift D ℤ] {Z W : D}
     (z : Z⟦(1 : ℤ)⟧ ≅ W) :
     ((shiftFunctorCompIsoId D (1 : ℤ) (-1) (by omega)).symm.app Z ≪≫
@@ -86,8 +83,7 @@ theorem shift_one_neg_one_transpose {D : Type*} [Category D] [HasShift D ℤ] {Z
   simp
 
 /-- The normalized cone boundary at a localized complex is the localized strict cone projection.
-Source: Stacks Tags 06YP and 07A6; the definition of the descended boundary
-(blueprint: lem-sf-regular-quotient-cone-boundary). -/
+Source: Stacks Tags 06YP and 07A6; the definition of the descended boundary -/
 theorem Augmentation.boundary_app_Q (b : Augmentation φ t d)
     (P : CochainComplex (Modules R) ℤ) :
     b.boundary.app (DerivedCategory.Q.obj P) =
@@ -103,7 +99,6 @@ map, `A⟦1⟧` is restricted from a quotient complex `N`, and the counit of the
 `Y` is computed by a strict map `N ⟶ Y` extending `ε⟦1⟧`.
 Source: Stacks Tags 06YP, 06YY, 07A6, 0A70 and 08FZ; the principal short exact sequence of
 complexes and its cone-boundary/coinduction comparison
-(blueprint: lem-sf-regular-quotient-trace-on-injective-terms).
 
 Proof: let `P` be the mapping cone of `ε`, a model of `X` through the quasi-isomorphism
 `p : P ⟶ X`. The cone boundary `P ⟶ A⟦1⟧` is killed by the scalar, and the augmentation

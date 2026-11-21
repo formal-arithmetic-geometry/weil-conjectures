@@ -157,7 +157,6 @@ private noncomputable def rawTensorComparison :
 omit N in
 /-- Scalar-extension tensor associativity on underlying abelian sheaves.
 Source: Stacks Project, Modules on Sites, Tag 05V4 (lemma-flat-change-of-rings)
-(auxiliary; not a blueprint node).
 Proof: before sheafification the comparison is `n ⊗ m ↦ n ⊗ (1 ⊗ m)`, with
 inverse `n ⊗ (s ⊗ m) ↦ (s • n) ⊗ m`. The standard base-change tensor equivalence
 supplies this isomorphism sectionwise, and its pure-tensor formula proves naturality.

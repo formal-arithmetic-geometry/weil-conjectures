@@ -15,7 +15,6 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 /-! # Dimension shifting for Tor
 
 Source: literature/stacks-project/algebra.tex, Tags 00LY, 00LZ, 00M0, 00S2
-(blueprint: lem-sc-p1-tor-dimension-shift-natural).
 -/
 
 @[expose] public section
@@ -175,7 +174,6 @@ end Helpers
 
 /-- Dimension shifting for Tor along a free presentation, natural in the second variable.
 Source: literature/stacks-project/algebra.tex, Tags 00LY, 00LZ, 00M0, 00S2
-(blueprint: lem-sc-p1-tor-dimension-shift-natural).
 
 Step 1. Fix Mathlib's projective resolution `G` of `K = S.X₁`, independently
 of the second module `N`. Projective resolutions suffice to compute Tor.

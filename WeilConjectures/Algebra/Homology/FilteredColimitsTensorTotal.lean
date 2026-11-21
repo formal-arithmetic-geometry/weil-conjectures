@@ -33,7 +33,7 @@ local notation "Mod" R => SheafOfModules.{u}
 
 /-- Tensor totalization with a fixed complex preserves filtered colimits.
 Source: Stacks Project, Modules on Sites, Lemma 03EP, together with the direct-sum
-construction of total complexes (blueprint: lem-pc-module-filtered-colimits-tensor-preserves).
+construction of total complexes.
 
 Proof: Tensoring with a fixed module is a left adjoint by
 `lem-pc-sheaf-modules-tensor-closed`, using symmetry for the right tensor factor.

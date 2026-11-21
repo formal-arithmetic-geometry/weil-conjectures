@@ -18,7 +18,7 @@ import Mathlib.CategoryTheory.Sites.Abelian
 # Local lifting for epimorphisms and exact complexes of module sheaves
 
 Source: Stacks Project, Modules, Section 01AF and Lemma 01AG; Sheaves, Definition
-007U and Lemma 0H7H (blueprint: lem-weil-pbc-ringed-space-module-exactness-local-lifting).
+007U and Lemma 0H7H.
 -/
 
 @[expose] public section
@@ -72,7 +72,7 @@ private theorem local_lifts_iff_epi (X : RingedSpace.{u})
 
 /--
 Source: Stacks Project, Modules, Section 01AF and Lemma 01AG; Sheaves, Definition
-007U and Lemma 0H7H (blueprint: lem-weil-pbc-ringed-space-module-exactness-local-lifting).
+007U and Lemma 0H7H.
 
 The category of modules on a ringed space is abelian (Mathlib's
 `SheafOfModules.instAbelian`) and its kernels are computed sectionwise.

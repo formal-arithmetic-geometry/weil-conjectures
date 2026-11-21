@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.Slice.SliceScalarLevelAdjunction
 /-! # Coefficient-linear comparisons at each scalar level
 
 Source: Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03CY and 03EK.
-(blueprint: lem-sf-slice-scalar-level-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -308,7 +307,6 @@ private theorem comparison_naturality {G G'} (g : G ⟶ G') (n : ℕ) :
 /-- The scalar-linear level comparison exists for the prescribed tower presentations.
 Source: Stacks 0E8I, 03DI, 03CY, 03EK and Sites 00WK; coefficient refinement of
 lem-sf-semilinear-slice-scalar-generators, steps 1--6
-(blueprint: lem-sf-slice-scalar-level-comparison).
 
 Proof: The normalized coefficient adjunction followed by the normalized slice-extension
 adjunction identifies maps from B_n tensor j_!G to N with maps from G to the slice of

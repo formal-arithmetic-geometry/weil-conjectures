@@ -684,7 +684,6 @@ end ImageOperations
 
 /-- Inverse image transports a flat module to a flat module over the inverse-image ring.
 Source: Stacks Project, Modules on Sites, Tags 05VD and 08FC
-(auxiliary; not a blueprint node).
 
 Proof: For each finite length n, form the sheaf of tuples (a_i, s_i) satisfying
 Σ a_i • s_i = 0, as an equalizer inside the product of n copies of the underlying

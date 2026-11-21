@@ -48,7 +48,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 /-! # Normalized principal-quotient cone augmentation
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YP, 06YS, 06YT, 06YY and 07A6.
-(blueprint: def-cbc-regular-quotient-cone-basic).
 
 The cone is Mathlib's cone, with unshifted summand second in its biproduct API.
 The ordinary extension is the existing sheafified tensor, whose pure tensors have
@@ -67,19 +66,18 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
 
 /-- The recorded module category, as a transparent abbreviation.
-Source: Stacks 06YY (blueprint: def-cbc-regular-quotient-cone-basic). -/
+Source: Stacks 06YY. -/
 abbrev Modules (R : Sheaf J CommRingCat.{r}) :=
   ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)
 
 /-- The recorded restriction functor, as a transparent abbreviation.
-Source: Stacks 03D7 (blueprint: def-cbc-regular-quotient-cone-basic). -/
+Source: Stacks 03D7. -/
 noncomputable abbrev restriction {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S) :
     Modules S ⥤ Modules R :=
   restrictScalars ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)
 
 /-- Multiplication by the compatible family of local scalars defining a global section.
-Source: Stacks 06YP, principal-resolution construction
-(blueprint: def-cbc-regular-quotient-cone-basic). -/
+Source: Stacks 06YP, principal-resolution construction -/
 noncomputable def scalar (R : Sheaf J CommRingCat.{r})
     (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections) :
     𝟭 (Modules R) ⟶ 𝟭 (Modules R) where
@@ -97,8 +95,7 @@ noncomputable def scalar (R : Sheaf J CommRingCat.{r})
     exact ((f.val.app U).hom.map_smul (t.val U) x).symm
 
 /-- The map of unit modules induced by the ring-sheaf map.
-Source: Stacks 06YP, principal-resolution construction
-(blueprint: def-cbc-regular-quotient-cone-basic). -/
+Source: Stacks 06YP, principal-resolution construction -/
 noncomputable def ringMap {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S) :
     unit (derivedChangeRingIndependentCoefficients J R) ⟶
       (restriction φ).obj (unit (derivedChangeRingIndependentCoefficients J S)) :=
@@ -107,8 +104,7 @@ noncomputable def ringMap {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S) :
       (fun {_ _} f ↦ map_one (S.obj.map f).hom))
 
 /-- Multiplication by the global section on an unbounded cochain complex.
-Source: Stacks 06YP, principal-resolution construction
-(blueprint: def-cbc-regular-quotient-cone-basic). -/
+Source: Stacks 06YP, principal-resolution construction -/
 noncomputable def complexScalar (R : Sheaf J CommRingCat.{r})
     (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections) :
     𝟭 (CochainComplex (Modules R) ℤ) ⟶ 𝟭 (CochainComplex (Modules R) ℤ) where
@@ -123,8 +119,7 @@ variable [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
   [HasSheafify J AddCommGrpCat.{r}]
 
 /-- The strict cone functor, with diagonal action on chain maps.
-Source: Stacks 06YP, principal quotient construction
-(blueprint: def-cbc-regular-quotient-cone-basic). -/
+Source: Stacks 06YP, principal quotient construction -/
 noncomputable def cone (R : Sheaf J CommRingCat.{r})
     (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections) :
     CochainComplex (Modules R) ℤ ⥤ CochainComplex (Modules R) ℤ where
@@ -135,7 +130,7 @@ noncomputable def cone (R : Sheaf J CommRingCat.{r})
   map_comp _f _g := CochainComplex.mappingCone.map_comp _ _ _ _ _ _ _ _ _
 
 /-- The canonical inclusion into the unshifted summand of the cone.
-Source: Stacks 06YP (blueprint: def-cbc-regular-quotient-cone-basic). -/
+Source: Stacks 06YP. -/
 noncomputable def inclusion (R : Sheaf J CommRingCat.{r})
     (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections) :
     𝟭 (CochainComplex (Modules R) ℤ) ⟶ cone R t where

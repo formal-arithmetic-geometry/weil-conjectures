@@ -28,7 +28,6 @@ namespace ModuleCat
 
 /-- Restriction of a universal derived scalar-extension pair is universal.
 Source: Stacks Project, Tags 06Y6 and 06XN, the K-flat derived-functor construction.
-(blueprint: lem-pc-scalar-extension-derived-restriction).
 
 Proof: resolve every source complex by a K-flat complex. Scalar extension inverts
 quasi-isomorphisms between such complexes. Restriction is exact and therefore

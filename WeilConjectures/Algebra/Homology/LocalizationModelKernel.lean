@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.ComplexLocalizationUnitKernel
 /-! # Torsion kernel of the canonical localization cohomology map
 
 Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-first-localization-cohomology-kernel).
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ variable (R A Aq B D : Type u)
 
 /-- A cohomology class killed by the localization unit is killed by a denominator.
 Source: Stacks Project, Tags 06Y6 and 0DJ8; exactness of localization.
-(blueprint: lem-pc-first-localization-cohomology-kernel).
 
 Proof: choose a K-flat R-resolution F of B[0]. Its tensor with Q computes the
 balanced derived tensor. Localization in A is exact and commutes with the direct

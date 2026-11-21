@@ -18,7 +18,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 # Pullback preserves K-flat complexes
 
 Source: Stacks Project, Cohomology, Lemma 20.26.8, Tag 06YC
-(blueprint: lem-pc-kflat-pullback-preservation).
 
 The pulled-back complex has terms given by the topological module inverse image
 followed by sheafified sectionwise change of rings along the adjoint structure map.
@@ -46,7 +45,7 @@ variable {X Y : TopCat.{w}} (f : X ⟶ Y)
       (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).obj OX)
 
 /-- The ring map `f⁻¹ OY → OX` adjoint to the structure-sheaf map.
-Source: Stacks, Tag 0095 (blueprint: lem-pc-kflat-pullback-preservation). -/
+Source: Stacks, Tag 0095. -/
 def tensorPullbackRingMap : TopCat.Sheaf.inverseImageRing f OY ⟶ OX :=
   ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (Opens.map f) CommRingCat.{w} _ _).homEquiv OY OX).symm φ
@@ -131,7 +130,7 @@ variable (K : CochainComplex (SheafOfModules.{w}
       (forget₂ CommRingCat.{w} RingCat.{w})).obj OY)) ℤ)
 
 /-- The differential obtained by inverse image and the sectionwise tensor map.
-Source: Stacks, Tags 0095 and 06YC (blueprint: lem-pc-kflat-pullback-preservation). -/
+Source: Stacks, Tags 0095 and 06YC. -/
 def tensorPullbackDifferential (i j : ℤ) :
     SheafOfModules.changeOfRings.{w, w, w} (tensorPullbackRingMap f OX OY φ)
       (TopCat.Sheaf.inverseImageModule f OY (K.X i)) ⟶
@@ -142,7 +141,7 @@ def tensorPullbackDifferential (i j : ℤ) :
     (TopCat.Sheaf.inverseImageModuleMap f OY (K.X i) (K.d i j))
 
 /-- The tensor pullback differential has cochain shape.
-Source: Stacks, Tags 0095 and 06YC (blueprint: lem-pc-kflat-pullback-preservation).
+Source: Stacks, Tags 0095 and 06YC.
 Proof: outside the cochain shape the original differential is zero. The inverse-image
 abelian-sheaf functor preserves zero maps, as do sectionwise extension of scalars and
 module sheafification. Hence the displayed differential is zero. -/
@@ -153,7 +152,7 @@ theorem tensorPullbackDifferential_shape (i j : ℤ)
   rw [K.shape i j h, inverseImageModuleMap_zero, changeOfRingsHom_zero]
 
 /-- Consecutive tensor pullback differentials compose to zero.
-Source: Stacks, Tags 0095 and 06YC (blueprint: lem-pc-kflat-pullback-preservation).
+Source: Stacks, Tags 0095 and 06YC.
 Proof: the inverse-image abelian-sheaf functor preserves composition and zero maps;
 the module maps have exactly those underlying abelian maps. Sectionwise extension of
 scalars and sheafification preserve composition and zero maps as well. Apply these
@@ -166,7 +165,7 @@ theorem tensorPullbackDifferential_comp (i j k : ℤ) :
     inverseImageModuleMap_zero, changeOfRingsHom_zero]
 
 /-- The termwise formula `f⁻¹ K ⊗_{f⁻¹ OY} OX`, including its differentials.
-Source: Stacks, Tags 0095 and 06YC (blueprint: lem-pc-kflat-pullback-preservation). -/
+Source: Stacks, Tags 0095 and 06YC. -/
 def tensorPullbackComplex : CochainComplex (SheafOfModules.{w}
     ((sheafCompose (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{w} RingCat.{w})).obj OX)) ℤ where
@@ -178,7 +177,7 @@ def tensorPullbackComplex : CochainComplex (SheafOfModules.{w}
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Pullback along a morphism of ringed spaces preserves K-flatness. Source: Stacks,
-Tag 06YC (blueprint: lem-pc-kflat-pullback-preservation).
+Tag 06YC.
 
 Proof:
 1. At `x : X`, set `y = f x`, `A = OY_y`, and `B = OX_x`. The inverse-image stalk

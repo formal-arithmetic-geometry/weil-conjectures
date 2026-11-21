@@ -15,7 +15,6 @@ import Mathlib.Tactic
 # The finite boundary family for the ordered path construction
 
 Source: Stacks, Tags 017J and 01GN, the endpoint-and-boundary gluing argument.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -56,8 +55,7 @@ endpoints are disjoint. The intersection of an endpoint with a doubled face is t
 corresponding endpoint of that face, where the supplied endpoint equations give
 agreement. Two doubled faces intersect in the double of their nonempty common face;
 the lower matching family's naturality gives agreement there. Apply face-family
-gluing to these pairwise agreements.
-(auxiliary; not a blueprint node) -/
+gluing to these pairwise agreements. -/
 theorem exists_family {C : Type u} [Category.{v} C] (V : SimplicialObject C)
     (n : ℕ) (T : C) (l r : T ⟶ V.obj (op ⦋n⦌))
     (p : (Functor.const _).obj T ⟶ (ordinalPath V).properFaceDiagram n)

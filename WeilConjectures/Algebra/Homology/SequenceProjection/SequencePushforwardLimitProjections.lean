@@ -172,7 +172,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 Source: Stacks Project, Cohomology on Sites, Tags 0D6E, 0941 and 07A6;
 Derived Categories, Tag 09T5.
-(blueprint: lem-coef-sequence-pushforward-limit-projections).
 
 All functors act on the existing strict-system and module derived categories.
 The initial existential data are exactly the normalized presentation provided by

@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Homology.TensorTotalExtendNaturalIso
 /-! # Tensor Kunneth in natural degrees
 
 Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech.
-(blueprint: lem-sc-tensor-kunneth-natural-complexes).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace HomologicalComplex
 /-- Natural-indexed field tensor Kunneth, with its cocycle representative formula.
 Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech; the field tensor
 calculation underlying lem-sc-qcoh-cech-total-tensor-nat-iso.
-(blueprint: lem-sc-tensor-kunneth-natural-complexes).
 
 Proof: Split each term into boundaries, representatives for homology, and a
 complement of cycles. The differential identifies the last complement in degree

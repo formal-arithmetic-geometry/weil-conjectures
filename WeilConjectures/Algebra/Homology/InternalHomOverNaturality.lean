@@ -11,7 +11,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver
 /-! # Naturality of internal Hom under restriction
 
 Source: Stacks Project, Modules on Sites, Sections 04TT and 04IX.
-(blueprint: lem-sc-internal-hom-over-naturality).
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ On every object V over W, both expressions act by f at V.left.left, then φ at
 V.left.left, then g at V.left.left. Equality of the component linear maps gives
 equality of presheaf morphisms; the fully faithful forgetful functor gives equality
 of sheaf morphisms. No nonempty-open, finiteness, or boundedness hypothesis is used;
-identity maps and zero maps satisfy the same formula.
-(blueprint: lem-sc-internal-hom-over-naturality). -/
+identity maps and zero maps satisfy the same formula. -/
 theorem overHomObjIso_naturality
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat RingCat.{u})]

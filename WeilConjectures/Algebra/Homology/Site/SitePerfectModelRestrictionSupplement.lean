@@ -73,8 +73,7 @@ private theorem pushforward_finiteColimits
 
 /-- Further slice restriction is exact, at independent universes.
 Source: Stacks Project, Tag 04IX. Restriction commutes with kernels and sheafified
-cokernels through the same abelian-sheaf comparison.
-(blueprint: lem-sf-site-perfect-overmap-exact). -/
+cokernels through the same abelian-sheaf comparison. -/
 theorem overMap_exact_ofUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) {U V : C} (f : V ⟶ U)
@@ -89,8 +88,7 @@ theorem overMap_exact_ofUniverses
       (Sheaf.pushforwardOverMapIso _ f).inv⟩
 
 /-- Successive slice restrictions compose. Source: Stacks Project, Tag 04IX.
-The comparison is induced by associativity of arrows in the slice.
-(blueprint: lem-sf-site-perfect-overmap-comp). -/
+The comparison is induced by associativity of arrows in the slice. -/
 def sitePerfectOverMapComp
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) {U V W : C} (f : V ⟶ U) (g : W ⟶ V) :
@@ -107,8 +105,7 @@ def sitePerfectOverMapComp
 /-- The chosen representative definition of derived restriction agrees with the
 functor induced by exact module restriction. Source: Stacks Project, Tag 03DJ.
 The comparison first uses the localization comparison on the chosen representative,
-then applies the derived functor to the representative's canonical isomorphism.
-(blueprint: lem-sf-site-perfect-derived-restriction-iso). -/
+then applies the derived functor to the representative's canonical isomorphism. -/
 def overFunctor_derivedRestrictionIso
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{max u v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}]
@@ -132,8 +129,7 @@ def overFunctor_derivedRestrictionIso
 
 /-- An additive finite-limit-preserving functor that preserves the rank-one free module
 transports every displayed finite-free splitting. Source: Stacks Project, Tag 04IX.
-The comparison is the product comparison followed by the given rank-one isomorphisms.
-(blueprint: lem-sf-site-perfect-package-map). -/
+The comparison is the product comparison followed by the given rank-one isomorphisms. -/
 def StrictPerfectCoefficientPackageOnSite.map
     {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

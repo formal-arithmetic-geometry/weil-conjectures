@@ -13,8 +13,7 @@ import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeMateIdentityFactori
 
 /-! # AffineBaseChangeTildeMateFactorization
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-tilde-mate-factorization). -/
+Source: Stacks Project, Tag 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -96,7 +95,6 @@ coefficient map followed by the actual right-derived pushforward unit. This
 contains no natural presentation of target cohomology and no global sections.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, affine proof and equation-bc;
 more-algebra.tex, Tag 06Y6; cohomology.tex, Tag 08HY, derived mate construction.
-(blueprint: lem-pc-affine-base-change-tilde-mate-factorization).
 
 Proof: Resolve the restriction of M to R by a flat K-flat complex P. The universal
 left-derived scalar extension and the counit in m identify its value with scalar

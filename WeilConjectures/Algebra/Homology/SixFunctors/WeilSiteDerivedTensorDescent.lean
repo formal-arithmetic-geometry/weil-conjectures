@@ -65,7 +65,6 @@ This is the same K-flat localization and tensor comparison as the recorded inter
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS, 0G7D, 06YT and 06YU;
 Categories, Tags 04VI, 04VJ and 04VK
-(blueprint: lem-weil-pbc-site-derived-tensor-descent).
 
 ## Main statements
 
@@ -92,7 +91,6 @@ by the inverses of the denominator images. The final bijection includes arbitrar
 transformations, without an invertibility assumption.
 
 Source: Stacks Project, Tags 06YS, 0G7D, 06YT, 06YU and Categories 04VK
-(blueprint: lem-weil-pbc-site-derived-tensor-descent).
 
 Proof plan:
 1. Resolve the vertex of each Ore square and cancellation witness by a K-flat flat-term

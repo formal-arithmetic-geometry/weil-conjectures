@@ -41,7 +41,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 Source: Stacks Project, Tags 06YM, 06YP, 0G6E, 0FNH and 0GWR;
 derived.tex, definition-cone and definition-distinguished-triangle.
-(blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs)
 -/
 
 @[expose] public noncomputable section
@@ -66,7 +65,6 @@ namespace SheafOfModules.TotalTensorSigns
 /-- Coefficient composition on an independently small site.
 Source: Mathlib's transport of sheaf composition along an equivalence of sites;
 Stacks, Modules on Sites, Section 03DA.
-(blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs).
 Proof: use the equivalent small model in the coefficient universe, where forgetting
 commutative rings to rings preserves limits, and transport sheaf composition back. -/
 local instance coefficientCompose {C : Type u} [Category.{v} C]
@@ -86,14 +84,12 @@ attribute [local instance 10000] coefficientCompose
   SheafOfModules.hasSheafify_coefficientUniverse
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 
-/-- The existing category of module sheaves. Source: Stacks, Modules on Sites, Section 03DA
-(blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+/-- The existing category of module sheaves. Source: Stacks, Modules on Sites, Section 03DA -/
 abbrev Modules := CategoryTheory.ringedSiteModules.{r}
   ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
 /-- The existing Abelian structure with its pointwise additive field exposed.
 Source: Mathlib's Abelian module-sheaf category.
-(blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs).
 The finite-product, kernel, cokernel and normality fields are the native ones; the
 additive field is the same pointwise structure, named directly for specialization. -/
 local instance modulesAbelian : Abelian (Modules R) := by
@@ -111,8 +107,7 @@ variable (D : Type d) [Category.{e} D] [Abelian D] [HasBinaryBiproducts D]
   [HasCoproducts.{0} D]
 
 /-- Countable coproducts supply the generic total tensor.
-Source: Mathlib's totalization coproduct instance.
-(blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: Mathlib's totalization coproduct instance. -/
 local instance genericTotalExists (A B : CochainComplex D ℤ) :
     HomologicalComplex.HasMapBifunctor A B (curriedTensor D) (.up ℤ) := inferInstance
 
@@ -120,65 +115,59 @@ end Generic
 
 attribute [local instance] Generic.genericTotalExists
 
-/-- The existing sheafified balanced tensor. Source: Stacks, Tag 03EK
-(blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+/-- The existing sheafified balanced tensor. Source: Stacks, Tag 03EK -/
 def tensor := curriedTensor (Modules R)
 
 /-- The sheaf tensor is additive in both variables.
-Source: the existing monoidal preadditive instance.
-(blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: the existing monoidal preadditive instance. -/
 instance tensorAdditive : (tensor R).Additive := by
   unfold tensor
   infer_instance
 
 /-- Tensoring with one module sheaf is additive.
-Source: the existing monoidal preadditive instance.
-(blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: the existing monoidal preadditive instance. -/
 instance tensorObjAdditive (M : Modules R) : ((tensor R).obj M).Additive := by
   unfold tensor
   infer_instance
 
 /-- Countable total tensor sums exist for these module sheaves.
-Source: the existing coproduct and tensor-colimit instances.
-(blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: the existing coproduct and tensor-colimit instances. -/
 instance totalExists (A B : CochainComplex (Modules R) ℤ) :
     HomologicalComplex.HasMapBifunctor A B (tensor R) (.up ℤ) := by
   unfold tensor
   exact Generic.genericTotalExists (Modules R) A B
 
 /-- The direct-sum total tensor bifunctor, with differential d tensor 1 + (-1)^p 1 tensor d.
-Source: Stacks, Tag 0G6E (blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: Stacks, Tag 0G6E. -/
 def total := (tensor R).map₂CochainComplex
 
 /-- The total tensor is additive in its second argument.
-Source: the additive bifunctor API for cochain totalization.
-(blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: the additive bifunctor API for cochain totalization. -/
 instance totalObjAdditive (A : CochainComplex (Modules R) ℤ) :
     ((total R).obj A).Additive := by
   unfold total
   infer_instance
 
 /-- The total tensor is additive in its first argument.
-Source: the additive bifunctor API for cochain totalization.
-(blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: the additive bifunctor API for cochain totalization. -/
 instance totalFlipObjAdditive (A : CochainComplex (Modules R) ℤ) :
     ((total R).flip.obj A).Additive := by
   unfold total
   infer_instance
 
 /-- The same bifunctor modulo homotopies, with the inherited coherent integer shifts.
-Source: Stacks, Tag 06YM (blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: Stacks, Tag 06YM. -/
 abbrev homotopyTensor := (tensor R).bifunctorMapHomotopyCategory (.up ℤ) (.up ℤ) (.up ℤ)
 
 /-- The canonical signed comparison A tensor Cone(u) to Cone(A tensor u).
-Source: Stacks, Tag 0G6E (blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: Stacks, Tag 0G6E. -/
 def coneLeft (A : CochainComplex (Modules R) ℤ)
     {X Y : CochainComplex (Modules R) ℤ} (f : X ⟶ Y) :
     ((total R).obj A).obj (mappingCone f) ≅ mappingCone (((total R).obj A).map f) :=
   CochainComplex.mapBifunctorMappingCone₂Iso A f (tensor R)
 
 /-- The canonical unsigned comparison Cone(u) tensor A to Cone(u tensor A).
-Source: Stacks, Tag 0G6E (blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: Stacks, Tag 0G6E. -/
 def coneRight (A : CochainComplex (Modules R) ℤ)
     {X Y : CochainComplex (Modules R) ℤ} (f : X ⟶ Y) :
     ((total R).flip.obj A).obj (mappingCone f) ≅
@@ -187,40 +176,40 @@ def coneRight (A : CochainComplex (Modules R) ℤ)
 
 /-- The existing signed total flip after the presheaf-induced sheaf symmetry, without
 requesting the unused associativity data of the monoidal structure on all complexes.
-Source: Stacks, Tag 0GWR (blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: Stacks, Tag 0GWR. -/
 def swap (B A : CochainComplex (Modules R) ℤ) :
     ((total R).obj B).obj A ≅ ((total R).obj A).obj B :=
   HomologicalComplex₂.total.mapIso (CochainComplex.Monoidal.braidingBicomplexIso B A)
     (.up ℤ) ≪≫ HomologicalComplex.mapBifunctorFlipIso A B (tensor R) (.up ℤ)
 
 /-- The existing inclusion of a total-tensor summand, with its endpoint type exposed.
-Source: Stacks, Tag 0G6E (blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: Stacks, Tag 0G6E. -/
 def ι (A B : CochainComplex (Modules R) ℤ) (p q n : ℤ) (hpq : p + q = n) :
     A.X p ⊗ B.X q ⟶ (((total R).obj A).obj B).X n :=
   CochainComplex.ιMapBifunctor A B (tensor R) p q n hpq
 
 /-- The existing second-variable tensor homotopy, with its endpoints exposed.
-Source: Stacks, Tag 0G6E (blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: Stacks, Tag 0G6E. -/
 def homotopyLeft (A : CochainComplex (Modules R) ℤ)
     {X Y : CochainComplex (Modules R) ℤ} {f g : X ⟶ Y} (h : Homotopy f g) :
     Homotopy (((total R).obj A).map f) (((total R).obj A).map g) :=
   HomologicalComplex.mapBifunctorMapHomotopy₂ (𝟙 A) h (tensor R) (.up ℤ)
 
 /-- The existing first-variable tensor homotopy, with its endpoints exposed.
-Source: Stacks, Tag 0G6E (blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: Stacks, Tag 0G6E. -/
 def homotopyRight (A : CochainComplex (Modules R) ℤ)
     {X Y : CochainComplex (Modules R) ℤ} {f g : X ⟶ Y} (h : Homotopy f g) :
     Homotopy (((total R).flip.obj A).map f) (((total R).flip.obj A).map g) :=
   HomologicalComplex.mapBifunctorMapHomotopy₁ h (𝟙 A) (tensor R) (.up ℤ)
 
 /-- The existing coherent second-factor shift, with its endpoints exposed.
-Source: Stacks, Tag 0FNH (blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: Stacks, Tag 0FNH. -/
 def shiftLeft (A X : CochainComplex (Modules R) ℤ) (n : ℤ) :
     ((total R).obj A).obj (X⟦n⟧) ≅ (((total R).obj A).obj X)⟦n⟧ :=
   CochainComplex.mapBifunctorShift₂Iso A X (tensor R) n
 
 /-- The existing coherent first-factor shift, with its endpoints exposed.
-Source: Stacks, Tag 0FNH (blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs). -/
+Source: Stacks, Tag 0FNH. -/
 def shiftRight (A X : CochainComplex (Modules R) ℤ) (n : ℤ) :
     ((total R).flip.obj A).obj (X⟦n⟧) ≅ (((total R).flip.obj A).obj X)⟦n⟧ :=
   CochainComplex.mapBifunctorShift₁Iso X A (tensor R) n
@@ -721,7 +710,7 @@ balanced presheaf tensor maps, rather than arbitrary maps on the associated shea
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YM and 06YP; derived.tex,
 definition-cone, definition-distinguished-triangle and Tag 0G6E; more-algebra.tex,
-Tags 0FNH and 0GWR (blueprint: lem-weil-pbc-total-tensor-homotopy-cone-signs).
+Tags 0FNH and 0GWR.
 
 Proof (the node's eleven steps):
 1. The existing independent-universe localization tensor is monoidal preadditive

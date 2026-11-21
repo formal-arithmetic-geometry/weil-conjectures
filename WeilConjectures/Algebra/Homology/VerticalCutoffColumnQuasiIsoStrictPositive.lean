@@ -55,7 +55,6 @@ private lemma acyclic_twoTerm (K : CochainComplex C ℕ) (m : ℕ)
 
 /-- The positive endpoint reduction for the strict cutoff comparison.
 Source: Stacks Project, Homology, Section 12.15, tag 0118.
-(blueprint: lem-sp-vertical-cutoff-column-quasiiso-strict-positive)
 Proof: put E = L extended by zero and I = image of E.d (a - 1) a.
 Monicity of the upper cutoff inclusion forces g to be the canonical nested
 inclusion. Degreewise cokernels show that its quotient is zero below a - 1,

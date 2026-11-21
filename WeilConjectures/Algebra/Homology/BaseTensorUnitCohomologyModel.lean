@@ -30,7 +30,6 @@ variable (R A Aq B D : Type u)
 
 /-- Compute the coefficient-unit map using a balanced complex, before any localization.
 Source: Stacks Project, Tags 064L and 06Y6, balanced computation of derived tensor.
-(blueprint: new-lem-pc-base-tensor-unit-cohomology-model).
 
 Proof: take a K-flat R-resolution F of the complex B concentrated in degree zero,
 and put C = Tot(Q tensor_R F), with its termwise A-action. Tensor associativity

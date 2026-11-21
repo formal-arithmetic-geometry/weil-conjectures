@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryDegreeIso
 # Ordinary base tensor associativity
 
 Source: Stacks Project, Tags 06Y6 and 08IB
-(blueprint: lem-pc-base-tensor-ordinary-iso).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ variable (R : Type uR) (A : Type uA) (B : Type uB) [CommRing R] [CommRing A] [Co
   [Algebra R A] [Algebra R B]
 
 /-- Stacks Project, Tag 08IB (affine tensor identification), and Tag 06Y6
-(blueprint: lem-pc-base-tensor-ordinary-iso).
 
 Proof: in each degree the forward map sends b tensor q to (1 tensor b) tensor q.
 Its inverse sends (a tensor b) tensor q to b tensor (a q). The balancing relations

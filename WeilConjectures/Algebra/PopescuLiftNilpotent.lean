@@ -21,7 +21,6 @@ import WeilConjectures.RingTheory.PopescuLiftTwice
 # Lifting ind-smoothness across nilpotent thickenings
 
 Source: Stacks Project, Smoothing Ring Maps, Proposition Tag 07CM
-(blueprint: lem-weil-pbc-popescu-lift-nilpotent).
 -/
 
 @[expose] public section
@@ -85,7 +84,6 @@ private theorem lift_square_zero
 `R / I`-algebras, then `Λ` is a filtered colimit of smooth `R`-algebras.
 
 Source: Stacks Project, Smoothing Ring Maps, Proposition Tag 07CM
-(blueprint: lem-weil-pbc-popescu-lift-nilpotent).
 
 Proof (the four steps of the node):
 1. Square-zero case, criterion: for an ideal `K` with `K² = 0`, `Λ / KΛ` ind-smooth over

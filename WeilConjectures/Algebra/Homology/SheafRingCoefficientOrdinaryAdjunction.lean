@@ -11,7 +11,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 # Ordinary coefficient adjunction on a ringed site
 
 Source: Stacks Project, Modules on Sites, Tags 03D7 and 03DA
-(auxiliary; not a blueprint node).
 
 Sheafification of the sectionwise tensor/restriction Hom equivalence gives the normalized
 ordinary adjunction. Exactness of restriction follows through the forgetful functor to
@@ -208,7 +207,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Restriction of scalars is exact, and sheafified sectionwise tensor is its left adjoint,
 with Hom map given by evaluation at the image of `1 ⊗ x`.
 Source: Stacks Project, Modules on Sites, Tags 03D7 and 03DA.
-(auxiliary; not a blueprint node)
 Proof: The sectionwise extension/restriction Hom equivalence commutes with restriction maps:
 this follows on pure tensors from naturality of the ring morphism. Compose it with the
 module sheafification Hom equivalence to obtain the displayed Hom equivalence. Its

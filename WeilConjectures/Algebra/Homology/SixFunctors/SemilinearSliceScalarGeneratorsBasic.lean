@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.Additive
 
 Source: Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03CY and 03EK;
 Sites, Tag 00WK. The coefficient-generator refinement is described in the DAG proof.
-(blueprint: def-sf-semilinear-slice-scalar-data).
 -/
 
 @[expose] public noncomputable section
@@ -42,7 +41,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 /-- The pure section `x tensor b` in actual sheafified extension of scalars.
 The existing change-of-rings construction places the coefficient first, so this is
 represented by `b tensor x` before sheafification.
-Source: Stacks 03EK (blueprint: lem-sf-semilinear-slice-scalar-generators). -/
+Source: Stacks 03EK. -/
 def sliceScalarPure {O B : Sheaf J CommRingCat.{max c v r}} (α : O ⟶ B)
     (H : ringedSiteModules.{max c v r}
       (derivedChangeRingIndependentCoefficients.{max c v r, c, v} J O))
@@ -54,14 +53,14 @@ def sliceScalarPure {O B : Sheaf J CommRingCat.{max c v r}} (α : O ⟶ B)
         (b ⊗ₜ[O.obj.obj W, (α.hom.app W).hom] x)
 
 /-- The existing coefficient tower restricted termwise to the localized site.
-Source: Stacks 03DI (blueprint: lem-sf-semilinear-slice-scalar-generators). -/
+Source: Stacks 03DI. -/
 abbrev sliceScalarRings (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{max c v r}) (U : C) :=
   B ⋙ J.overPullback CommRingCat.{max c v r} U
 
 /-- A presentation of the specified scalar-extension tower functor, including its
 actual level objects and maps, all pure-tensor transitions and the scalar-unit
 augmentation. This is result data, not a hypothesis supplying a scalar comparison.
-Source: Stacks 03EK, 03CZ (blueprint: lem-sf-semilinear-slice-scalar-generators). -/
+Source: Stacks 03EK, 03CZ. -/
 structure SliceScalarTowerPresentation (O : Sheaf J CommRingCat.{max c v r})
     (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{max c v r})
     (α : (Functor.const ℕᵒᵖ).obj O ⟶ B) where
@@ -108,7 +107,7 @@ variable (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{max c v r}) (U : C)
 
 /-- The termwise extension functor on strict systems, fixed on every original
 extension summand, including transitions and maps between systems.
-Source: Stacks 03DI, 03CY (blueprint: lem-sf-semilinear-slice-scalar-generators). -/
+Source: Stacks 03DI, 03CY. -/
 structure SliceSystemExtensionPresentation where
   /-- Extension of each coefficient module before forgetting scalars. -/
   F : StrictRingSystem.{max c v, v, max c v r} (sliceScalarRings.{c, v, r} B U) ⥤
@@ -136,7 +135,7 @@ structure SliceSystemExtensionPresentation where
 attribute [instance] SliceSystemExtensionPresentation.additive
 
 /-- Restriction of the O-algebra structure, with the canonical constant-functor transport.
-Source: Stacks 03DI, 03CZ (blueprint: lem-sf-semilinear-slice-scalar-generators). -/
+Source: Stacks 03DI, 03CZ. -/
 def sliceScalarAlgebra (O : Sheaf J CommRingCat.{max c v r})
     (α : (Functor.const ℕᵒᵖ).obj O ⟶ B) :
     (Functor.const ℕᵒᵖ).obj (O.over U) ⟶ sliceScalarRings.{c, v, r} B U :=
@@ -146,8 +145,7 @@ def sliceScalarAlgebra (O : Sheaf J CommRingCat.{max c v r})
 /-- The full generator-normalized comparison, including its construction on strict
 systems before forgetting coefficients. All fields are asserted to exist by the
 statement below; none is an extra input hypothesis.
-Source: Stacks 0E8I, 03DI, 03CY, 03EK, refined as in the DAG proof
-(blueprint: lem-sf-semilinear-slice-scalar-generators). -/
+Source: Stacks 0E8I, 03DI, 03CY, 03EK, refined as in the DAG proof -/
 structure SemilinearSliceScalarGenerators (O : Sheaf J CommRingCat.{max c v r})
     (α : (Functor.const ℕᵒᵖ).obj O ⟶ B) where
   /-- A_X on the actual modules, with strict coefficient transitions. -/

@@ -33,7 +33,6 @@ variable [∀ Y : Scheme.{u},
 Source: Stacks Project, perfect.tex, Tag 0AVW, affine morphism equivalence proof;
 Mathlib `ShortComplex.homologyMap_mapNatTrans` and naturality of
 `DerivedCategory.homologyFunctorFactors`.
-(blueprint: lem-pc-affine-pushforward-comparison-factorization).
 
 Proof: Write F = res_phi followed by tilde_B and G = tilde_A followed by pushforward.
 Expand the defined comparison map as the exact homology comparison for F, the

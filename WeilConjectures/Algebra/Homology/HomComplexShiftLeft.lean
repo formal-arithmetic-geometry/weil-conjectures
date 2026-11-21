@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.HomComplexProjections
 /-! # Signed source shift for the sheaf Hom complex
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0A8X, section-hom-complexes.
-(blueprint: lem-pur-hom-complex-shift-left).
 -/
 
 @[expose] public section
@@ -57,7 +56,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The signed reindexing for a source shift is natural in the target complex.
 Source: Stacks Project, sites-cohomology.tex, Tag 0A8X, section-hom-complexes;
 the signed calculation is step 2 of the source-shift comparison.
-(blueprint: lem-pur-hom-complex-shift-left).
 
 Proof: In degree k the p-th component of the forward map is (-1)^(m*k)
 times the input component p+m, with the index identifications

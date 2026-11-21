@@ -365,7 +365,6 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
 /-- The prescribed complex-level derived-pullback counit is invertible on every
 flat-term K-flat complex, with independent site and coefficient universes.
 Source: Stacks 06YY and 0G7E
-(blueprint: lem-weil-pbc-pullback-resolving-computation).
 
 Proof: inverse image preserves finite limits and epimorphisms, hence homology.
 Use identity scalar extension to see that it preserves the resolving K-flat class.

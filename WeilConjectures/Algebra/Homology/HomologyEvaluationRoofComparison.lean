@@ -123,7 +123,6 @@ invertibility hypothesis on the model evaluation is used.
 
 Source: Stacks Project, Tag 0A8X, Hom-complex projections; Tag 0A95,
 quasi-isomorphism invariance into K-injectives; Tag 08DL, open restriction.
-(blueprint: new-v4-homology-evaluation-roof-comparison).
 
 Proof: Write F for the two restrictions and K = F(J). Exactness of restriction
 identifies F(H^n(Hom(T,J))) with H^n(Hom(F(T),K)), and identifies restricted

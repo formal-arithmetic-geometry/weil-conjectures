@@ -15,7 +15,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 Source: Stacks Project, More on Algebra, Tags 0628 and 0629, and
 Homological Algebra, the definition of a mapping cone.
-(blueprint: lem-pc-chain-cone-coordinates-iso).
 -/
 
 @[expose] public section
@@ -236,7 +235,6 @@ private lemma coneZeroIso_comm (A : Type u) [CommRing A]
 /-- Degreewise scalar-cone coordinates compatible with the differentials assemble
 into an isomorphism after extension from homological degree `n` to cochain degree `-n`.
 Source: Stacks Project, Tags 0628 and 0629; the matrix of the cone differential.
-(blueprint: lem-pc-chain-cone-coordinates-iso).
 
 Proof: In cochain degree `-(n+1)`, use `e n` followed by the exchange of the two
 factors to identify `K_(n+1)` with `L_n ⊕ L_(n+1)`. These are the source-shift

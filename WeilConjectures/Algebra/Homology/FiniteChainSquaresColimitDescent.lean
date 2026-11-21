@@ -20,7 +20,6 @@ import Mathlib.Data.Int.Interval
 /-! # Eventual commutativity of finitely many chain squares
 
 Source: Stacks Project, Tag 09RE, affine case (1), via Tag 05N7, equality clause.
-(blueprint: lem-pc-finite-chain-squares-colimit-descent)
 -/
 
 @[expose] public section
@@ -100,8 +99,7 @@ every degree, including degrees outside [a,b]. This uses no descent of new maps.
 For a preorder, use the same finite-presentation relation proof with directed upper
 bounds and the filtered-ring elementwise criterion, or transport Tag 05N7 through
 the antisymmetrization equivalence and lift its index back. If b < a there are no
-equations: choose j = i, with the identity scalar-extension comparisons.
-(blueprint: lem-pc-finite-chain-squares-colimit-descent) -/
+equations: choose j = i, with the identity scalar-extension comparisons. -/
 theorem eventually_commuting_finite_chain_squares
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

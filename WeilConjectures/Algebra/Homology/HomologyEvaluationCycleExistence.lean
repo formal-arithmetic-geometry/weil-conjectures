@@ -39,8 +39,7 @@ attribute [local instance] evaluationClosed
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-b2-homology-evaluation-cycle-existence). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private lemma homMap_zero_left (X : Scheme.{u}) {A A' B B' : X.Modules} (g : B ⟶ B') :
     SheafOfModules.homObjMap (R := X.sheaf) (0 : A' ⟶ A) g = 0 := by
   apply SheafOfModules.hom_ext
@@ -53,8 +52,7 @@ private lemma homMap_zero_left (X : Scheme.{u}) {A A' B B' : X.Modules} (g : B �
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-b2-homology-evaluation-cycle-existence). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private lemma homMap_zero_right (X : Scheme.{u}) {A A' B B' : X.Modules} (f : A' ⟶ A) :
     SheafOfModules.homObjMap (R := X.sheaf) f (0 : B ⟶ B') = 0 := by
   apply SheafOfModules.hom_ext
@@ -66,8 +64,7 @@ private lemma homMap_zero_right (X : Scheme.{u}) {A A' B B' : X.Modules} (f : A'
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-b2-homology-evaluation-cycle-existence). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private lemma tensorHomEquiv_zero (X : Scheme.{u}) (A B N : X.Modules) :
     SheafOfModules.tensorHomEquiv (R := X.sheaf) A B N 0 = 0 := by
   have h := SheafOfModules.tensorHomEquiv_comp_homObjMap (R := X.sheaf) A
@@ -77,8 +74,7 @@ private lemma tensorHomEquiv_zero (X : Scheme.{u}) (A B N : X.Modules) :
 set_option backward.isDefEq.respectTransparency false in
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-b2-homology-evaluation-cycle-existence). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private theorem homObj_cokernel_desc (X : Scheme.{u})
     {A B B' Q N : X.Modules} (f : B' ⟶ B) (p : B ⟶ Q) (hp : f ≫ p = 0)
     (hc : IsColimit (CokernelCofork.ofπ p hp))
@@ -110,8 +106,7 @@ private theorem homObj_cokernel_desc (X : Scheme.{u})
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-b2-homology-evaluation-cycle-existence). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private theorem homMap_mono_right (X : Scheme.{u}) (A : X.Modules)
     {B B' : X.Modules} (f : B ⟶ B') [Mono f] :
     Mono (SheafOfModules.homObjMap (R := X.sheaf) (𝟙 A) f) := by
@@ -121,8 +116,7 @@ private theorem homMap_mono_right (X : Scheme.{u}) (A : X.Modules)
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-b2-homology-evaluation-cycle-existence). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private theorem homObj_liftCycles (X : Scheme.{u}) (K : CochainComplex X.Modules ℤ)
     (i : ℤ) {A B : X.Modules}
     (a : A ⟶ SheafOfModules.homObj (R := X.sheaf) B (K.X i))
@@ -145,8 +139,7 @@ private theorem homObj_liftCycles (X : Scheme.{u}) (K : CochainComplex X.Modules
 set_option backward.isDefEq.respectTransparency false in
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-b2-homology-evaluation-cycle-existence). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private theorem cyclePairing_lift (X : Scheme.{u}) (P T J : CochainComplex X.Modules ℤ)
     (π : ∀ (n p q : ℤ), p + n = q →
       (P.X n ⟶ SheafOfModules.homObj (R := X.sheaf) (T.X p) (J.X q)))
@@ -193,8 +186,7 @@ private theorem cyclePairing_lift (X : Scheme.{u}) (P T J : CochainComplex X.Mod
 set_option backward.isDefEq.respectTransparency false in
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-b2-homology-evaluation-cycle-existence). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private theorem cyclePairing_boundary_left (X : Scheme.{u}) (P T J : CochainComplex X.Modules ℤ)
     (π : ∀ (n p q : ℤ), p + n = q →
       (P.X n ⟶ SheafOfModules.homObj (R := X.sheaf) (T.X p) (J.X q)))
@@ -239,8 +231,7 @@ private theorem cyclePairing_boundary_left (X : Scheme.{u}) (P T J : CochainComp
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-b2-homology-evaluation-cycle-existence). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private lemma homMap_swap (X : Scheme.{u}) {A A' B B' : X.Modules}
     (f : A' ⟶ A) (g : B ⟶ B') :
     SheafOfModules.homObjMap (R := X.sheaf) f (𝟙 B) ≫
@@ -252,8 +243,7 @@ private lemma homMap_swap (X : Scheme.{u}) {A A' B B' : X.Modules}
 set_option backward.isDefEq.respectTransparency false in
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-b2-homology-evaluation-cycle-existence). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private theorem cyclePairing_boundary_right (X : Scheme.{u}) (P T J : CochainComplex X.Modules ℤ)
     (π : ∀ (n p q : ℤ), p + n = q →
       (P.X n ⟶ SheafOfModules.homObj (R := X.sheaf) (T.X p) (J.X q)))
@@ -308,8 +298,7 @@ private theorem cyclePairing_boundary_right (X : Scheme.{u}) (P T J : CochainCom
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-b2-homology-evaluation-cycle-existence). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private theorem cyclePairing_representative (X : Scheme.{u})
     (P T J : CochainComplex X.Modules ℤ) (n : ℤ)
     (π : P.X n ⟶ SheafOfModules.homObj (R := X.sheaf) (T.X (-n)) (J.X 0))
@@ -337,8 +326,7 @@ private theorem cyclePairing_representative (X : Scheme.{u})
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-b2-homology-evaluation-cycle-existence). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private theorem homologyEvaluation_of_projections (X : Scheme.{u})
     (P T J : CochainComplex X.Modules ℤ)
     (π : ∀ (n p q : ℤ), p + n = q →
@@ -399,7 +387,6 @@ private theorem homologyEvaluation_of_projections (X : Scheme.{u})
 
 /-- Existence of the cycle-evaluation morphism.
 Source: Stacks Project, Tag 0A8X, descent of the evaluation pairing.
-(blueprint: new-b2-homology-evaluation-cycle-existence).
 
 Proof: Write P = Hom(T,J). Its product projection defines the bilinear pairing
 from P-cycles in degree n and T-cycles in degree -n to J in degree zero. For a

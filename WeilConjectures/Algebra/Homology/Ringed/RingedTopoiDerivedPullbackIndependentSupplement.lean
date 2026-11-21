@@ -193,7 +193,6 @@ import Mathlib.CategoryTheory.Sites.Abelian
 /-! # Ringed-topos derived pullback with independent site universes
 
 Source: Stacks Project, sites-cohomology.tex, Tag 06YY (lemma-derived-base-change).
-(blueprint: lem-weil-pbc-ringed-topoi-derived-pullback).
 
 This generalizes the existing interface to sites small relative to the coefficient
 universe, keeping their object and morphism universes independent. The original
@@ -455,7 +454,7 @@ private theorem kFlat_inverseImage_independent
 
 /-- The resolution comparison witnesses of derived ringed pullback, with the explicit
 computation formula and its naturality, identity and composition equations.
-Source: Stacks Project, Tag 06YY (blueprint: lem-weil-pbc-ringed-topoi-derived-pullback).
+Source: Stacks Project, Tag 06YY.
 This packages the resolution clauses of the existing node, without new assumptions. -/
 structure RingedPullbackResolutionComparisons
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
@@ -522,7 +521,7 @@ structure RingedPullbackResolutionComparisons
 
 /-- The exact universal derived ringed pullback, its computation on flat-term K-flat
 complexes, and natural resolution comparisons with their identity and composition laws.
-Source: Stacks Project, Tag 06YY (blueprint: lem-weil-pbc-ringed-topoi-derived-pullback).
+Source: Stacks Project, Tag 06YY.
 Proof: exact algebraic inverse image and extension of scalars preserve quasi-isomorphisms
 between flat-term K-flat complexes, by the K-flat ringed pullback lemma. Flat-term K-flat
 resolutions give a resolving class, so localization supplies the universal left derived

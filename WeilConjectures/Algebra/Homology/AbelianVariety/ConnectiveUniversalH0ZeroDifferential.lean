@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.AbelianVariety.UniversalH0SplitDifferent
 /-! # Cancelling the degree-zero complement of universal rank-one homology
 
 Source: Stacks Project, Tags 0BCC and 00O0, fixed-affine adaptation.
-(blueprint: lem-sc-connective-universal-h0-zero-differential).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ permits cancellation of the complementary degree-zero summand.
 
 Source: Stacks Project, Tags 0BCC and 00O0; degree-zero part of the fixed-affine
 normalization argument in lem-sc-universal-h0-projective-normalization.
-(blueprint: lem-sc-connective-universal-h0-zero-differential).
 
 Proof: At a prime localize P over A = R_p. Finite projective modules over this
 local ring are finite free. Tag 0BCC represents this perfect complex by a finite

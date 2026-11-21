@@ -128,9 +128,7 @@ It is indexed by the filtration degree `p` and the total degree `n = p + q`, wit
 maps `τ_{≤ q} M ⟶ τ_{≤ q + 1} M`, `g : D^{p, n} ⟶ E^{p, n}` induced by the maps of the triangles
 and `f : E^{p, n} ⟶ D^{p + 2, n + 1}` the connecting maps. In the coordinates `(p, q)` the maps
 `α`, `f`, `g` have bidegrees `(-1, 1)`, `(2, -1)` and `(0, 0)`. This data is an exact couple
-(remark `rem-ptr-sp-truncation-couple-1`), by `TriangleTower.exactCoupleTotal`.
-
-(blueprint: `def-sp-truncation-couple`, `rem-ptr-sp-truncation-couple-1`) -/
+(remark `rem-ptr-sp-truncation-couple-1`), by `TriangleTower.exactCoupleTotal`. -/
 noncomputable def truncationCouple (M : DerivedCategory.Plus A) :
     ExactCouple B ((-1, 0) : ℤ × ℤ) (2, 1) 0 :=
   (v.truncationTower M).exactCoupleTotal (DerivedCategory.Plus.homologyFunctor B 0)
@@ -145,9 +143,7 @@ lemma truncationCouple_E (M : DerivedCategory.Plus A) (p n : ℤ) :
     (v.truncationCouple M).E (p, n) = (DerivedCategory.Plus.homologyFunctor B n).obj
       (v.rightDerivedFunctorPlus.obj ((truncLETower M).Y (n - p))) := rfl
 
-/-- The `E`-objects of the truncation couple: `E^{p, n} ≅ Hⁿ(R⁺v(Hᵠ(M)[-q]))` with `q = n - p`.
-
-(blueprint: `def-sp-truncation-couple`) -/
+/-- The `E`-objects of the truncation couple: `E^{p, n} ≅ Hⁿ(R⁺v(Hᵠ(M)[-q]))` with `q = n - p`. -/
 noncomputable def truncationCoupleEIso (M : DerivedCategory.Plus A) (p n : ℤ) :
     (v.truncationCouple M).E (p, n) ≅ (DerivedCategory.Plus.homologyFunctor B n).obj
       (v.rightDerivedFunctorPlus.obj ((singleFunctor A (n - p)).obj
@@ -174,9 +170,7 @@ lemma isZero_homologyRightDerivedFunctorPlusObjSingle (X : A) (m : ℤ) (hm : m 
   v.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE _ 0 hm
 
 /-- The `E`-objects of the truncation couple are the right derived functors of the cohomology
-objects of `M`: `E^{p, p + q} ≅ Rᵖv(Hᵠ(M))`.
-
-(blueprint: `def-sp-truncation-couple`) -/
+objects of `M`: `E^{p, p + q} ≅ Rᵖv(Hᵠ(M))`. -/
 noncomputable def truncationCoupleEIsoRightDerived (M : DerivedCategory.Plus A) (p : ℕ) (q : ℤ) :
     (v.truncationCouple M).E (p, p + q) ≅
       (v.rightDerived p).obj ((DerivedCategory.Plus.homologyFunctor A q).obj M) :=
@@ -185,9 +179,7 @@ noncomputable def truncationCoupleEIsoRightDerived (M : DerivedCategory.Plus A) 
     v.homologyRightDerivedFunctorPlusObjSingleFunctorIso _ p
 
 /-- If `M` has no cohomology in degrees `< a`, the truncation couple is a half-plane couple: with
-`q = n - p`, `D^{p, n} = 0` for `q < a` and `E^{p, n} = 0` unless `p ≥ 0` and `q ≥ a`.
-
-(blueprint: `thm-sp-half-plane-convergence`) -/
+`q = n - p`, `D^{p, n} = 0` for `q < a` and `E^{p, n} = 0` unless `p ≥ 0` and `q ≥ a`. -/
 lemma truncationCouple_isHalfPlane (M : DerivedCategory.Plus A) (a : ℤ) [M.IsGE a] :
     (v.truncationCouple M).IsHalfPlane a where
   isZero_D p n h := by
@@ -204,9 +196,7 @@ lemma truncationCouple_isHalfPlane (M : DerivedCategory.Plus A) (a : ℤ) [M.IsG
 /-- **Convergence of the truncation couple.** If `M` has no cohomology in degrees `< a`, the
 spectral sequence of the truncation couple, with `E₂^{p, q} = Rᵖv(Hᵠ(M))`, converges to
 `Aⁿ = D^{0, n} = Hⁿ(R⁺v(τ_{≤ n} M))`, with the finite filtration
-`Fᵖ Aⁿ = im (D^{p, n} ⟶ D^{0, n})`.
-
-(blueprint: `thm-sp-half-plane-convergence`) -/
+`Fᵖ Aⁿ = im (D^{p, n} ⟶ D^{0, n})`. -/
 theorem convergesTo_truncationCouple (M : DerivedCategory.Plus A) (a : ℤ) [M.IsGE a] :
     (v.truncationCouple M).ConvergesTo
       (ExactCouple.halfPlaneι (v.truncationCouple_isHalfPlane M a) (by norm_num))
@@ -235,9 +225,7 @@ lemma isIso_homologyFunctor_map_rightDerivedFunctorPlus_map_truncLTι
   exact isIso_of_mono_of_epi ((H.shift n).map T.mor₁)
 
 /-- The abutment `Aⁿ = D^{0, n} = Hⁿ(R⁺v(τ_{≤ n} M))` of the truncation couple is
-`Hⁿ(R⁺v(M))`.
-
-(blueprint: `thm-sp-half-plane-convergence`) -/
+`Hⁿ(R⁺v(M))`. -/
 noncomputable def truncationCoupleAbutmentIso (M : DerivedCategory.Plus A) (n : ℤ) :
     (v.truncationCouple M).D (0, n) ≅
       (DerivedCategory.Plus.homologyFunctor B n).obj (v.rightDerivedFunctorPlus.obj M) :=

@@ -38,7 +38,6 @@ private theorem isKProjective_of_degreewise_split
 
 /-- The union of a degreewise split filtration by K-projective stages is K-projective.
 Source: Stacks Project, Tags 09KL--09KM.
-(blueprint: lem-pc-filtered-free-kprojective-assembly)
 
 Proof: form the actual direct sum S of the stages and the maps a = identity minus
 successor and b = augmentation. Compatibility proves a followed by b is zero.

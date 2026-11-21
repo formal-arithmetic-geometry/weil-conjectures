@@ -35,7 +35,7 @@ local notation "Mod" => SheafOfModules.{max u v}
 set_option synthInstance.maxSize 256 in
 /-- The degreewise currying maps commute with simultaneous maps of all three complexes.
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1 (Tag 0A90),
-functoriality (blueprint: lem-sc-hom-tensor-naturality).
+functoriality.
 
 Proof: Apply the product projections of the target Hom term and restrict to
 each total-tensor summand, before sheafification. Evaluate on pure tensors

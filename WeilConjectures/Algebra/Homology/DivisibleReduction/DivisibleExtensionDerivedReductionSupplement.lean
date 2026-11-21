@@ -121,7 +121,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 Source: the Cartier unit proof, paragraphs 4 and 5, in blueprint main-20261015;
 Stacks Tags 06YU, 06YV, 06YY, 0152, 09T5 and 0FND
-(blueprint: lem-sfb-divisible-extension-derived-reduction).
 Kernel and quotient objects are specified by their short exact sequences, including
 existence of their residue-coefficient structures. The normalized identifications are
 unique, so the definition of the reduced boundary makes no arbitrary choice of map.
@@ -936,8 +935,7 @@ private theorem ordinary_scalar_adjunction_exists :
 set_option backward.isDefEq.respectTransparency true in
 /-- The canonical shift comparison, induced from exact restriction by the normalized
 adjunction. This fixes compatibility with its unit, instead of choosing an unrelated
-triangulated shift structure. Source: Stacks 06YY and 09T5
-(blueprint: lem-sfb-divisible-extension-derived-reduction). -/
+triangulated shift structure. Source: Stacks 06YY and 09T5 -/
 noncomputable instance sheafScalarModelCommShift : D.T.CommShift ℤ :=
   (sheafScalarDerivedAdjunction q D).leftAdjointCommShift ℤ
 

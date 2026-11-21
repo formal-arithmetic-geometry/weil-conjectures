@@ -18,7 +18,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Stalks of the open-extension counit
 
 Source: Stacks Project, Sheaves, Tag 00A7, clauses (2)--(4).
-(blueprint: lem-sc-open-extension-counit-stalk)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace SheafOfModules
 /-- The counit of any left adjoint to open restriction is an isomorphism on
 stalks inside the open, and its source has zero stalks outside the open.
 Source: Stacks Project, Sheaves, Tag 00A7, clauses (2)--(4).
-(blueprint: lem-sc-open-extension-counit-stalk)
 
 Proof: Restriction has a right adjoint (direct image) whose counit is invertible:
 the forgetful functor from opens over W is fully faithful, so its adjunction unit

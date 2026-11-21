@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 
 Source: Stacks Project, Derived Categories, Tag 070M, and the split-envelope
 extension recorded in lem-weil-derived-limit-roos-complex.
-(blueprint: lem-weil-roos-split-comparison).
 -/
 
 @[expose] public section
@@ -115,8 +114,7 @@ identify it with (0,iJ). It is already a quasi-isomorphism into CJ. Evaluation
 functors preserve kernels, giving the required limiting kernel forks.
 
 Source: Stacks Project, Derived Categories, Tag 070M; the explicit extension
-in lem-weil-derived-limit-roos-complex.
-(blueprint: lem-weil-roos-split-comparison). -/
+in lem-weil-derived-limit-roos-complex. -/
 theorem roos_split_comparison
     (A : Type u) [Category.{v} A] [Abelian A]
     [HasLimitsOfShape (Discrete ℕ) A]

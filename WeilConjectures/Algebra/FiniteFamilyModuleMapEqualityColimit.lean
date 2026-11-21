@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.PreorderModuleMapEqualityDescent
 /-! # Simultaneous eventual equality of finitely many module maps
 
 Source: Stacks Project, Algebra, Tag 05N7, clause (3).
-(blueprint: lem-pc-finite-family-module-map-equality-colimit).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace ModuleCat
 
 Source: Stacks Project, Algebra, Tag 05N7, clause (3), used in More on Algebra,
 Tag 0BC7, proof of (1).
-(blueprint: lem-pc-finite-family-module-map-equality-colimit).
 
 Proof: For each t, apply the equality clause of finite-presentation descent to f t and
  g t and choose a stage above i where they agree. Directedness supplies a common upper

@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.HomComplexShiftLeft
 /-! # Left-argument shift comparison for internal derived Hom
 Source: Stacks Project, Cohomology on Sites, Section 21.34 (Tag 0A8X)
 and Section 21.35 (Tag 08JA); the signed shift calculation is written here.
-(blueprint: lem-pur-derived-internal-hom-shift-left).
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ internal derived Hom. Quasi-isomorphism invariance descends the comparison
 and its naturality to the derived category. The construction also works for
 negative m and zero objects; m=0 has identity reindexing and signs.
 Source: Stacks Project, sites-cohomology.tex, Sections 21.34 and 21.35,
-Tags 0A8X and 08JA.
-(blueprint: lem-pur-derived-internal-hom-shift-left) -/
+Tags 0A8X and 08JA. -/
 theorem derivedInternalHom_shift_left
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})

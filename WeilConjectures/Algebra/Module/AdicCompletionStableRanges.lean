@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-! # Completion and inverse systems with stable ranges
 
 Source: Stacks Project, Theorem 02OC, the inverse-limit argument in its proof.
-(blueprint: lem-weil-pbc-adic-completion-stable-ranges).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 /-- An inverse system whose stable images come from H and whose reduction kernels
 are cofinal with the I-adic filtration has the same limit as the completion of H.
 Source: Stacks Project, Theorem 02OC, proof after applying Lemma 02OB.
-(blueprint: lem-weil-pbc-adic-completion-stable-ranges).
 
 Proof: Write K_n = ker rho_n and N_n = range rho_n. Compatibility makes N an
 inverse subsystem of M. A compatible family x in M has x_n in N_n because

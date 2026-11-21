@@ -41,7 +41,6 @@ private instance forgetCommRing_reflectsLimits :
 /-- Sections of the associated constant field sheaf locally come from field elements.
 Source: Stacks Project, Sites, Tag 0H7J and the associated-sheaf construction, Tag 00W1;
 Modules on Sites, Tag 03CY
-(auxiliary; not a blueprint node).
 
 Proof: in the plus construction a section is represented by a matching family on a
 covering sieve. Restricting to any arrow of that sieve gives a section coming from

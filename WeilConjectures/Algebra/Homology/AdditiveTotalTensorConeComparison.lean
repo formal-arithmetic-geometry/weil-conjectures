@@ -16,7 +16,6 @@ Source: Stacks Project, derived.tex, Tag 0G6E,
 `remark-double-complex-as-tensor-product-of`, first exactness assertion;
 `WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone`, second-variable
 cone comparison, and `WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality`
-(auxiliary; not a blueprint node).
 
 The total tensor below is the binary signed direct-sum tensor from
 `def-sfb-preserves-kflat-quasi-iso`. The cone is Mathlib's `mappingCone`: its
@@ -39,7 +38,6 @@ namespace CochainComplex
 cone inclusions; localization sends the same chain isomorphisms to derived isomorphisms.
 Source: Stacks Project, derived.tex, Tag 0G6E, first exactness assertion, with the
 chain comparison and naturality in the two upstream modules cited above
-(auxiliary; not a blueprint node).
 
 Proof:
 1. In total degree n, distribute P^p tensor (Y^q direct-sum X^(q+1)) by

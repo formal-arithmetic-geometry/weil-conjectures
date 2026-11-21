@@ -247,18 +247,14 @@ lemma homologyMap_d_comp_E₁Iso_inv (k q : ℕ) :
 
 /-- **The first spectral sequence of a first quadrant double complex** `K`: the spectral
 sequence, from the `E₂`-page on, of the filtration by the columns of the total complex of `K`
-(extended by zero to `ℤ × ℤ`).
-
-(blueprint: `thm-sp-double-complex-spectral-sequences`) -/
+(extended by zero to `ℤ × ℤ`). -/
 noncomputable def firstSpectralSequence : E₂CohomologicalSpectralSequenceNat C :=
   K.extendNat.columnFiltration.exactCouple.firstQuadrantSpectralSequence
     K.extendNat_columnFiltration_isFirstQuadrant
 
 /-- The `E₂`-term of the first spectral sequence of a first quadrant double complex:
 `E₂^{p, q} ≅ H^p_I H^q_{II}(K)`, the `p`-th cohomology of the complex `p ↦ H^q(K^{p, •})` whose
-differential is induced by the horizontal differential of `K`.
-
-(blueprint: `thm-sp-double-complex-spectral-sequences`) -/
+differential is induced by the horizontal differential of `K`. -/
 noncomputable def firstSpectralSequencePageTwoIso (p q : ℕ) :
     (K.firstSpectralSequence.page 2).X (p, q) ≅
       (((HomologicalComplex.homologyFunctor C (up ℕ) q).mapHomologicalComplex
@@ -285,9 +281,7 @@ noncomputable def firstSpectralSequencePageTwoIso (p q : ℕ) :
     (fun h ↦ (h (by simp)).elim)).symm
 
 /-- The first spectral sequence of a first quadrant double complex `K` abuts to the cohomology
-of the total complex of `K`, with the filtration induced by the column filtration.
-
-(blueprint: `thm-sp-double-complex-spectral-sequences`, `det-def-groth-ss`) -/
+of the total complex of `K`, with the filtration induced by the column filtration. -/
 lemma firstSpectralSequence_abutsTo :
     K.firstSpectralSequence.AbutsTo fun n ↦ (K.total (up ℕ)).homology n :=
   (K.extendNat.columnFiltration.exactCouple.firstQuadrantSpectralSequence_abutsTo
@@ -312,9 +306,7 @@ lemma _root_.CategoryTheory.Limits.mk_imageSubobject_arrow_comp_iso {X Y Z : C}
 /-- **The abutment of the first spectral sequence** of a first quadrant double complex `K`: the
 filtration of `Hⁿ(Tot K)` induced by the column filtration of the total complex, whose graded
 pieces are the `E∞`-terms. Its filtration is described by
-`firstSpectralSequenceAbutment_filtration`.
-
-(blueprint: `det-def-groth-ss`, `thm-sp-double-complex-spectral-sequences`) -/
+`firstSpectralSequenceAbutment_filtration`. -/
 noncomputable def firstSpectralSequenceAbutment :
     K.firstSpectralSequence.Abutment fun n ↦ (K.total (up ℕ)).homology n :=
   (K.extendNat.columnFiltration.exactCouple.firstQuadrantAbutment
@@ -327,9 +319,7 @@ noncomputable def firstSpectralSequenceAbutment :
 /-- The filtration of the abutment of the first spectral sequence is the image filtration
 `Fᵖ Hⁿ(Tot K) = im (Hⁿ(Fᵖ Tot K) ⟶ Hⁿ(Tot K))` of the column filtration `Fᵖ Tot K` (computed
 on the extension by zero `K.extendNat`, whose total cohomology in degree `n ≥ 0` is identified
-with that of `K` by `totalExtendNatHomologyIso`).
-
-(blueprint: `det-def-groth-ss`) -/
+with that of `K` by `totalExtendNatHomologyIso`). -/
 lemma firstSpectralSequenceAbutment_filtration (n p : ℕ) :
     K.firstSpectralSequenceAbutment.filtration n p =
       imageSubobject (HomologicalComplex.homologyMap
@@ -340,18 +330,14 @@ lemma firstSpectralSequenceAbutment_filtration (n p : ℕ) :
 /-- **The abutment of the second spectral sequence** of a first quadrant double complex `K`
 (the first spectral sequence of `K.flip`): the filtration of `Hⁿ(Tot K)` induced by the row
 filtration, transported along `Tot K.flip ≅ Tot K`. Its filtration is described by
-`flipFirstSpectralSequenceAbutment_filtration`.
-
-(blueprint: `det-def-groth-ss`, `thm-sp-double-complex-spectral-sequences`) -/
+`flipFirstSpectralSequenceAbutment_filtration`. -/
 noncomputable def flipFirstSpectralSequenceAbutment :
     K.flip.firstSpectralSequence.Abutment fun n ↦ (K.total (up ℕ)).homology n :=
   K.flip.firstSpectralSequenceAbutment.ofIso fun n ↦
     HomologicalComplex.homologyMapIso (K.totalFlipIso (up ℕ)) n
 
 /-- The filtration of the abutment of the second spectral sequence is the image filtration
-`Fᵖ Hⁿ(Tot K) = im (Hⁿ(Fᵖ Tot K.flip) ⟶ Hⁿ(Tot K.flip) ≅ Hⁿ(Tot K))` of the row filtration.
-
-(blueprint: `det-def-groth-ss`) -/
+`Fᵖ Hⁿ(Tot K) = im (Hⁿ(Fᵖ Tot K.flip) ⟶ Hⁿ(Tot K.flip) ≅ Hⁿ(Tot K))` of the row filtration. -/
 lemma flipFirstSpectralSequenceAbutment_filtration (n p : ℕ) :
     K.flipFirstSpectralSequenceAbutment.filtration n p =
       imageSubobject (HomologicalComplex.homologyMap
@@ -377,9 +363,7 @@ gives a first quadrant cohomological spectral sequence with
 `p ↦ H^q(K^{p, •})` whose differential is induced by the horizontal differential of `K` —
 abutting to the cohomology `H^{p + q}(Tot K)` of the total complex.
 
-This is the first of the two spectral sequences of a double complex.
-
-(blueprint: `thm-sp-double-complex-spectral-sequences`) -/
+This is the first of the two spectral sequences of a double complex. -/
 theorem exists_spectralSequence {C : Type*} [Category* C] [Abelian C]
     (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)) :
     ∃ E : E₂CohomologicalSpectralSequenceNat C,
@@ -397,9 +381,7 @@ gives a first quadrant cohomological spectral sequence with
 `q ↦ H^p(K^{•, q})` whose differential is induced by the vertical differential of `K` —
 abutting to the cohomology `H^{p + q}(Tot K)` of the total complex. It is the first spectral
 sequence of the transposed double complex `K.flip`, whose total complex is isomorphic to that
-of `K`.
-
-(blueprint: `thm-sp-double-complex-spectral-sequences`) -/
+of `K`. -/
 theorem exists_spectralSequence_flip {C : Type*} [Category* C] [Abelian C]
     (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)) :
     ∃ E : E₂CohomologicalSpectralSequenceNat C,

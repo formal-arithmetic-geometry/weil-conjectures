@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 # Restriction to a localized ringed site preserves K-injectivity
 
 Source: Stacks Project, Tag 08FI, Lemma 21.20.1
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace CategoryTheory
 Grothendieck topology on C.
 
 Source: Stacks Project, Tag 08FI, Lemma 21.20.1, also used in Tag 0A94
-(auxiliary; not a blueprint node).
 
 Proof: extension by zero sends a module presheaf N on C/U to the presheaf whose
 sections at V are the direct sum of N(V,f) over arrows f : V to U, with the

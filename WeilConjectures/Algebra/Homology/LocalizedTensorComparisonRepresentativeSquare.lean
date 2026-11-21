@@ -18,8 +18,6 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 /-! # Transport of tensor comparison squares between K-flat representatives
 
 Source: Stacks Project, Tags 0DJA(1), 064L, 06Y1 and 06Y6.
-
-(blueprint: lem-pc-localized-tensor-comparison-representative-square)
 -/
 
 @[expose] public section
@@ -123,8 +121,7 @@ Naturality of the monoidal tensorator and of the universal counit gives the
 comparison square for each roof leg, using comparison_eq and localized_eq.
 Compose one square with the inverse of the other to obtain the stated square.
 No flatness of C or N is required, since only isomorphisms are extended.
-The argument includes unbounded complexes and zero rings.
-(blueprint: lem-pc-localized-tensor-comparison-representative-square). -/
+The argument includes unbounded complexes and zero rings. -/
 theorem exists_localizedTensorComparison_representative_square
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)

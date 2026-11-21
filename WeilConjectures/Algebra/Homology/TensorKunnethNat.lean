@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.TensorKunneth
 /-! # Natural-degree indexing of the field-linear tensor Kunneth map
 
 Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech.
-(blueprint: lem-sc-qcoh-cech-total-tensor-nat-iso).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace HomologicalComplex
 /-- Reindex the field-linear tensor Kunneth map for complexes supported in nonnegative degrees.
 Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech;
 the zero extension and reindexing in the proof of lem-sc-picard-kunneth-qcoh-iso-exists.
-(blueprint: lem-sc-qcoh-cech-total-tensor-nat-iso).
 
 Proof: Apply tensor_kunneth with lower bounds zero and integer degree n. A complex zero
 in negative degrees has zero homology there: its cycles are a subobject of its zero

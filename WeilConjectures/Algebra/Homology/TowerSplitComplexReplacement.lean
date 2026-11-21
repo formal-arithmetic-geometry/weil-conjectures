@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 
 Source: Stacks Project, Derived Categories, Tag 070M, and the split-envelope
 extension recorded in lem-weil-derived-limit-roos-complex.
-(blueprint: lem-weil-tower-split-complex-replacement).
 -/
 
 @[expose] public section
@@ -70,8 +69,7 @@ of this shifted cone is a binary biproduct of two split towers. Biproducts of
 sections are sections, so all transitions of this replacement split.
 
 Source: Stacks Project, Derived Categories, Tag 070M; the explicit extension
-in lem-weil-derived-limit-roos-complex.
-(blueprint: lem-weil-tower-split-complex-replacement). -/
+in lem-weil-derived-limit-roos-complex. -/
 theorem tower_split_complex_replacement
     (A : Type u) [Category.{v} A] [Abelian A]
     (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :

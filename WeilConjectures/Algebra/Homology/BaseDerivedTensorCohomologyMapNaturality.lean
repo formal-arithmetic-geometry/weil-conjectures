@@ -10,8 +10,7 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # Naturality of localized comparison along canonical model maps
 
-Source: Stacks Project, Tags 06Y6 and 08IB.
-(blueprint: lem-pc-base-derived-tensor-model-map-localized-naturality). -/
+Source: Stacks Project, Tags 06Y6 and 08IB. -/
 
 @[expose] public section
 
@@ -45,8 +44,7 @@ identities reduce the transposed equation to these two ordinary squares and
 naturality of mapHomologyIso. The adjunction homEquiv is injective, proving
 the claim. This uses no exactness of extension from A tensor_R B to C.
 Zero rings and zero complexes cause no exception, since tensor extensionality
-and the adjunction still apply.
-(blueprint: lem-pc-base-derived-tensor-model-map-localized-naturality). -/
+and the adjunction still apply. -/
 theorem baseDerivedTensorCohomologyMap_localized_naturality
     (Q Q' : CochainComplex (ModuleCat.{u} A) ℤ) (f : Q ⟶ Q')
     (m : BaseDerivedTensorCohomologyModel R A B Q C)

@@ -30,7 +30,6 @@ namespace HomologicalComplex₂
 /-- The three-term short complexes of the graded cone and translated row cone agree.
 Source: Stacks Project, Homology, Lemma 12.25.4 (Tag 0133), second-variable variant;
 explicit cone refinement in lem-sc-finite-strip-cone-filtration, step 3.
-(blueprint: lem-sc-finite-strip-cone-filtration-graded-point)
 
 Proof: Evaluation of cochain complexes preserves cokernels, so evaluate the
 cokernel defining the graded piece degreewise. In degree m, quotient the vertical

@@ -12,7 +12,6 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 # Scalar extension of a locally free rank-one module
 
 Source: Stacks Project, Tags 03EK, 03EM, 04TT.
-(blueprint: lem-sp-scalar-extension-dual-local-iso).
 -/
 
 @[expose] public section
@@ -387,7 +386,6 @@ end LocalBasis
 
 /-- Scalar extension preserves rank one, and its explicit internal-dual map is invertible.
 Source: Stacks Project, Tags 03EK, 03EM and 04TT
-(blueprint: lem-sp-scalar-extension-dual-local-iso).
 
 Proof: choose local generators data witnessing that `N` is locally free of rank one.
 Its presentation is an isomorphism from the free module on a singleton over every

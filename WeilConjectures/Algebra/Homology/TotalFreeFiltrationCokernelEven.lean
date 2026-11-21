@@ -14,7 +14,6 @@ import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 # Splittings and free quotients of the alternating column filtration
 
 Source: Stacks Project, Tag 09KP, filtration construction.
-(blueprint: lem-pc-derived-total-filtration-cokernel-even)
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ variable (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
 
 /-- The even successive quotient has the prescribed endpoint basis in shifted degrees.
 Source: Stacks Project, Tag 09KP, successive quotients of the column filtration.
-(blueprint: lem-pc-derived-total-filtration-cokernel-even)
 
 Proof. In total degree k, remove the full columns with index less than j.
 The remaining inclusion is zero into the image of the first arrow of S j.

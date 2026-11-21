@@ -38,7 +38,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 Source: Stacks Project, more-algebra.tex, Tag 0G1T, proof of
 lemma-derived-vanishing-mod-I, finite ideal-power filtration.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -180,7 +179,6 @@ any module killed by a power of the sectionwise quotient kernel is acyclic.
 
 Source: Stacks Project, more-algebra.tex, Tag 0G1T, proof of
 lemma-derived-vanishing-mod-I; Modules on Sites, Tags 03DD and 05V4.
-(auxiliary; not a blueprint node).
 
 Proof: global sections act on all morphisms of module sheaves. The finitely generated
 ideal of these global scalars has a finite image/cokernel filtration on a module killed

@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.BaseTensorUnitCohomologyModel
 /-! # Fractions before transport to tensor cohomology models
 
 Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-localization-derived-fractions).
 -/
 
 @[expose] public section
@@ -111,7 +110,6 @@ homology classes admit fractions. The denominator acts by the derived image of
 multiplication on the localized input complex, before any tensor-coefficient
 module structure or chosen cohomology model is introduced.
 Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-localization-derived-fractions).
 
 Proof in words: take a K-flat R-resolution F of B concentrated in degree zero.
 The balanced derived tensor calculation computes the functor on an A-complex Q

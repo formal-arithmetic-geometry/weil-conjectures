@@ -104,7 +104,6 @@ set_option linter.unusedVariables false in
 /-- Principal localization comparisons for a fixed family of restriction maps.
 Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), proof of
 (1)(e),(h), and the fraction formulas in its proof.
-(blueprint: lem-weil-pbc-graded-module-away-comparison)
 
 Proof: Restrict scalars on Z g along rhoS. The unit rhoS(U) makes multiplication by U
 invertible, so the module and ring universal properties give theta and thetaS with the

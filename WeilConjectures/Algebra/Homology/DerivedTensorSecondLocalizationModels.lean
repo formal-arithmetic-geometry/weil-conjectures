@@ -20,7 +20,6 @@ import Mathlib.RingTheory.Flat.Localization
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
 second coefficient ring; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-derived-tensor-second-localization-models).
 -/
 
 @[expose] public section
@@ -55,7 +54,6 @@ include tRB tAD tBD tApD tBpD tBBpD in
 /-- Localization with one factor fixed.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, affine localization identity;
 More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-derived-tensor-second-localization-models).
 
 Proof: compute the derived tensor using a K-flat R-resolution of Q. Since
 B -> Bp is a localization, it is flat, and extending its B-tensor complex

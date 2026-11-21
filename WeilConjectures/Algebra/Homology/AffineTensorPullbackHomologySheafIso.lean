@@ -10,8 +10,7 @@ public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeCoordinates
 
 /-! # Sheaf-level affine ordinary tensor homology coordinates
 
-Source: Stacks Project, Tag 01I9.
-(blueprint: new-def-pc-affine-tensor-pullback-homology-sheaf-iso). -/
+Source: Stacks Project, Tag 01I9. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,8 +24,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Exact tilde homology followed by homology factorization and the inverse
-termwise tensor-pullback comparison. Source: Stacks Project, Tag 01I9.
-(blueprint: new-def-pc-affine-tensor-pullback-homology-sheaf-iso). -/
+termwise tensor-pullback comparison. Source: Stacks Project, Tag 01I9. -/
 def affineTensorPullbackHomologySheafIso
     (A A' : Type u) [CommRing A] [CommRing A'] (φ : A →+* A')
     (M : CochainComplex (ModuleCat.{u} A) ℤ) (i : ℤ) :

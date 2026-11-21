@@ -16,7 +16,6 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 Source: Stacks Project, More on Algebra, Tag 068G, the construction of
 `equation-simple-tor-product`, and Varieties, Tag 0BED, `equation-kunneth-on-cech`.
-(blueprint: lem-sc-tensor-homology-pairing)
 -/
 
 @[expose] public section
@@ -109,7 +108,6 @@ private theorem tensor_cycles_lift {k : Type u} [CommRing k]
 /-- The class of a tensor of cocycles depends bilinearly on their homology classes.
 Source: Stacks Project, Tag 068G, construction preceding Lemma 068K;
 Tag 0BED, `equation-kunneth-on-cech`.
-(blueprint: lem-sc-tensor-homology-pairing)
 
 Proof: Put T = Tot(A tensor B). For cocycles a and b the signed Leibniz formula
 makes the inclusion of a tensor b a cocycle of T. The kernel property of iCycles

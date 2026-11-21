@@ -14,8 +14,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine cohomology coordinates for a supplied ordinary comparison
 
-Source: Stacks Project, Tags 01I9, 06Z0 and 0AVW.
-(blueprint: def-pc-affine-pushforward-comparison-coordinates). -/
+Source: Stacks Project, Tags 01I9, 06Z0 and 0AVW. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -26,15 +25,13 @@ open CategoryTheory CategoryTheory.Limits
 noncomputable section
 namespace AlgebraicGeometry
 /-- The associated sheaf functor with the scheme-module category displayed.
-Source: Stacks Project, Tag 01I9.
-(blueprint: def-pc-affine-pushforward-comparison-coordinates). -/
+Source: Stacks Project, Tag 01I9. -/
 abbrev affinePushforwardTilde (A : Type u) [CommRing A] :
     ModuleCat.{u} A ⥤ SheafOfModules.{u}
       (moduleRings (Spec (.of A)).toRingedSpace) := tilde.functor (.of A)
 
 /-- The existing exact-tilde zero-map instance in displayed coordinates.
-Source: Stacks Project, Tag 01I9.
-(blueprint: def-pc-affine-pushforward-comparison-coordinates). -/
+Source: Stacks Project, Tag 01I9. -/
 @[instance] theorem affinePushforwardTilde_preservesZero (A : Type u) [CommRing A] :
     (affinePushforwardTilde A).PreservesZeroMorphisms :=
   affineBaseChangeTilde_preservesZero A
@@ -44,8 +41,7 @@ variable [∀ Y : Scheme.{u},
 
 /-- Cohomology of the termwise ordinary comparison followed by the actual derived unit.
 The ordinary comparison is an input; all other maps are the canonical exactness maps.
-Source: Stacks Project, Tags 0AVW and 06Z0.
-(blueprint: def-pc-affine-pushforward-comparison-coordinates). -/
+Source: Stacks Project, Tags 0AVW and 06Z0. -/
 def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [CommRing B]
     (φ : B →+* A)
     (σ : ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅
@@ -94,8 +90,7 @@ def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [Comm
     cast (by rfl) (H.map (β.app ((HomotopyCategory.quotient _ (.up ℤ)).obj D)))
 
 /-- Cohomology coordinates from the tilde unit and exact homology comparisons.
-Source: Stacks Project, Tags 01I9 and 06Z0.
-(blueprint: def-pc-affine-pushforward-comparison-coordinates). -/
+Source: Stacks Project, Tags 01I9 and 06Z0. -/
 def affinePushforwardRepresentativeCohomologyIso (A : Type u) [CommRing A]
     (C : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : schemeDerivedCategory (Spec (.of A)))

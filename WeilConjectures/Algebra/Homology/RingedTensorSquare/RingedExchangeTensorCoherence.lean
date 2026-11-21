@@ -104,7 +104,6 @@ import WeilConjectures.Algebra.Homology.Site.SiteDerivedTensorDescent
 # Projection-formula coherence for a square of ringed topoi
 
 Source: Stacks Project, Cohomology on Sites, Tags 0E48, 07A4 and 0D6D
-(blueprint: lem-weil-pbc-ringed-exchange-tensor-coherence).
 -/
 
 @[expose] public section
@@ -266,8 +265,7 @@ private theorem edge_preserves_flat_kflat
     (siteSheafTensorRightIso B.ring _) (ht n)
 
 /-- The canonical ordinary module square applied termwise to a complex.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: lem-weil-pbc-ringed-exchange-tensor-coherence). -/
+Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48 -/
 noncomputable def RingedTensorSquare.complexComparison
     (s : RingedTensorSquare Y X Y' X' f g h k) :
     g.pullback.mapHomologicalComplex (ComplexShape.up ℤ) ⋙
@@ -390,8 +388,7 @@ route and apply the ordinary square termwise. Full faithfulness of precompositio
 along localization gives a unique derived isomorphism. Naturality of the comparison
 between Qh and Q, followed by cancellation of its components, gives precisely the
 stated complex representative equation. This also proves uniqueness.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: lem-weil-pbc-ringed-exchange-tensor-coherence). -/
+Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48 -/
 theorem RingedTensorSquare.derivedComparison_existsUnique
     (s : RingedTensorSquare Y X Y' X' f g h k) :
     ∃! theta : g.left ⋙ k.left ≅ f.left ⋙ h.left,
@@ -449,8 +446,7 @@ theorem RingedTensorSquare.derivedComparison_existsUnique
 
 /-- The specified derived commutation isomorphism, selected by its unique
 K-flat representative characterization. Only a uniqueness-determining proof is postponed.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: lem-weil-pbc-ringed-exchange-tensor-coherence). -/
+Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48 -/
 noncomputable def RingedTensorSquare.derivedComparison
     (s : RingedTensorSquare Y X Y' X' f g h k) :
     g.left ⋙ k.left ≅ f.left ⋙ h.left :=
@@ -458,8 +454,7 @@ noncomputable def RingedTensorSquare.derivedComparison
 
 /-- The exchange transformation is exactly the mate of the canonical derived square,
 using the existing Mathlib mate equivalence (def-weil-pbc-adjunction-mate).
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: lem-weil-pbc-ringed-exchange-tensor-coherence). -/
+Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48 -/
 noncomputable def RingedTensorSquare.exchange
     (s : RingedTensorSquare Y X Y' X' f g h k) :
     f.right ⋙ g.left ⟶ h.left ⋙ k.right :=
@@ -468,8 +463,7 @@ noncomputable def RingedTensorSquare.exchange
 
 /-- The projection map is the adjunct of tensor comparison followed by counit tensor
 identity. In particular no projection-formula isomorphism is assumed.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: lem-weil-pbc-ringed-exchange-tensor-coherence). -/
+Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48 -/
 noncomputable def RingedTensorEdge.projection
     {A B : RingedTensorCorner.{u, w}} (e : RingedTensorEdge A B)
     (a : RingedTensorModel A) (b : RingedTensorModel B)

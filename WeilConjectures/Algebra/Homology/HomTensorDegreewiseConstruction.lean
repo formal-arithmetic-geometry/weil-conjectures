@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.HomComplexProjections
 # Forward degreewise currying construction
 
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
-(blueprint: lem-sc-hom-tensor-degreewise-construction)
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ local notation "Mod" => SheafOfModules.{max u v}
 set_option synthInstance.maxSize 256 in
 set_option backward.isDefEq.respectTransparency true in
 /-- Forward degreewise construction, without uniqueness or invertibility.
-Source: Stacks Project, Tag 0A90, degreewise construction 
-(blueprint: lem-sc-hom-tensor-degreewise-construction).
+Source: Stacks Project, Tag 0A90, degreewise construction
 
 Proof: Expand the product projections in both Hom complexes. For each p and q,
 evaluate the outer localized map on x and the inner map on y. These evaluations

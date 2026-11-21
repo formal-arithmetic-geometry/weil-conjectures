@@ -42,7 +42,6 @@ both its ring and module carriers to the next universe.
 
 Source: Stacks Project, more-algebra.tex, lemma-K-flat-resolution and
 remark-P-resolution (the filtered-free resolution).
-(blueprint: lem-weil-pbc-coefficient-lift-kflat-resolution).
 
 Proof: choose a flat-term K-flat resolution in the original module universe.
 The coefficient-lift functor is additive, preserves flat modules (universe lift

@@ -12,8 +12,7 @@ import WeilConjectures.Algebra.Homology.OpenOverHomComplexCycleProjectionHomolog
 
 /-! # Cycle projection and quotient comparisons for restricted Hom complexes
 
-Source: Stacks Project, Tags 0A8X and 08DL.
-(blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison). -/
+Source: Stacks Project, Tags 0A8X and 08DL. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -46,7 +45,6 @@ private theorem openOver_projection_square_comp
 
 /-- The projection square on Hom cycles and the cycle-to-homology quotient square.
 Source: Stacks Project, Tags 0A8X and 08DL; steps 1 and 2 of the parent plan.
-(blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison).
 
 Proof: Restriction preserves products by sectionwise computation and the open-site
 equivalence. The limiting fans of the chosen Hom projections and e give a unique

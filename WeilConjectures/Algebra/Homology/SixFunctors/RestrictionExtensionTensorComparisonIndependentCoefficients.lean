@@ -44,8 +44,7 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 /-- Tensor cancellation at the quotient unit identifies restricted scalar extension.
 Source: Stacks Tag 07A4. The cancellation comparison is natural in both variables;
 take its first variable to be the quotient unit and compose its left unitor.
-The sheaf braiding puts the fixed coefficient in the second variable.
-(blueprint: lem-sf-ordinary-restriction-extension-tensor-comparison). -/
+The sheaf braiding puts the fixed coefficient in the second variable. -/
 theorem restrictionExtensionTensorComparisonIndependentCoefficients (F : A ⥤ B)
     (h : ∀ M, F.obj M = SheafOfModules.changeOfRings φ M)
     (hm : ∀ {M N} (f : M ⟶ N), F.map f = eqToHom (h M) ≫

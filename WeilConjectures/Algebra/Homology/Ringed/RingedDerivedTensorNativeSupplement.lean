@@ -50,7 +50,6 @@ public import WeilConjectures.Algebra.Homology.RingedDerivedTensorNative
 /-! # The native localization tensor at independent ringed-site universes
 
 Source: Stacks Project, Tags 06YS, 06YT and 0FPT.
-(blueprint: lem-sf-ringed-derived-native-tensor).
 -/
 
 @[expose] public noncomputable section

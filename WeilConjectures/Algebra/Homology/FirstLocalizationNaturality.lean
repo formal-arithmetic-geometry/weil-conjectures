@@ -9,8 +9,7 @@ module
 public import WeilConjectures.Algebra.Homology.FirstLocalizationMap
 /-! # Naturality for characterized localization maps
 
-Source: Stacks Project, Tag 06Y6; Tag 0DJ8.
-(blueprint: lem-pc-first-localization-naturality). -/
+Source: Stacks Project, Tag 06Y6; Tag 0DJ8. -/
 
 @[expose] public section
 
@@ -50,7 +49,6 @@ private theorem firstLocalizationUnit_naturality
 
 /-- Naturality for characterized localization maps.
 Source: Stacks Project, Tag 06Y6; Tag 0DJ8, affine localization identity.
-(blueprint: lem-pc-first-localization-naturality).
 
 Proof: naturality of the extension/restriction unit gives a commuting square
 of underlying R-complexes for f and its extension to Aq. Apply the derived

@@ -19,7 +19,7 @@ import WeilConjectures.Algebra.Homology.TensorHomologyMapBijective
 # The field-linear Kunneth isomorphism
 
 Source: Stacks Project, Varieties, Tag 0BED, `lemma-kunneth`, the tensor-total Cech
-step `equation-kunneth-on-cech` (blueprint: lem-sc-qcoh-cech-total-tensor-iso).
+step `equation-kunneth-on-cech`.
 -/
 
 @[expose] public section
@@ -33,7 +33,6 @@ namespace HomologicalComplex
 
 /-- Source: Stacks Project, Varieties, Tag 0BED, `lemma-kunneth`, the field-linear
 identification in `equation-kunneth-on-cech`
-(blueprint: lem-sc-qcoh-cech-total-tensor-iso).
 
 For bounded-below cochain complexes over a field, the direct sum of the tensor products
 of their cohomologies is the cohomology of their total tensor complex. The equation on

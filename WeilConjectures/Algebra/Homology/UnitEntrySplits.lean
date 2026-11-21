@@ -18,7 +18,6 @@ import WeilConjectures.Algebra.Homology.SplitIdentityFromFunctionals
 # Splitting off a unit entry in a finite free chain complex
 
 Source: Stacks Project, Algebra, Lemma 10.102.2, Tag 00MT
-(blueprint: lem-weil-pbc-free-complex-unit-entry-splits).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace ChainComplex
 
 /-- A unit matrix entry splits off the identity complex in degrees `i` and `i - 1`.
 Source: Stacks Project, Algebra, Lemma 10.102.2, Tag 00MT
-(blueprint: lem-weil-pbc-free-complex-unit-entry-splits).
 
 The natural numbers `n j` are the sizes of the chosen bases, as in the source's `R^{n_j}`.
 The unit coefficient is the entry `(q, p)` of the matrix `LinearMap.toMatrix (b i) (b (i - 1))`

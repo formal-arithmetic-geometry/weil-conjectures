@@ -12,7 +12,6 @@ public import Mathlib.Algebra.DirectSum.Basic
 /-! # Single-degree generation of finite Rees modules
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, proof of (1).
-(blueprint: lem-weil-pbc-finite-rees-module-single-degree-generation)
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry
 open Classical in
 /-- A finite graded Rees module is generated from any sufficiently high single degree.
 Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, proof of (1).
-(blueprint: lem-weil-pbc-finite-rees-module-single-degree-generation)
 
 Proof: Choose a finite Rees-module generating set T and let c0 be the maximum of
 all degrees in the supports of its elements, taking zero for an empty set. The case

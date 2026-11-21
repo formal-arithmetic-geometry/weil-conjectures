@@ -17,7 +17,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- The nonpositive endpoint reduction for the strict cutoff comparison.
 Source: Stacks Project, Homology, Section 12.15, tag 0118.
-(blueprint: lem-sp-vertical-cutoff-column-quasiiso-strict-nonpositive)
 Proof: in every nonnegative degree n, the cutoff below a vanishes because
 n > a - 1. Its identity is therefore zero, and g is zero. The cokernel
 projection of g is an isomorphism. Extension of L by zero is strictly supported

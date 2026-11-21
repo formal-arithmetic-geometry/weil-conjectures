@@ -214,7 +214,6 @@ private lemma objectAugmentation_quasiIso (K : C ⥤ C) (ι : 𝟭 C ⟶ K)
 /-- A functorial injective resolution of objects, indexed in nonnegative degrees.
 
 Source: Stacks Project, Derived Categories, Tag 0141, construction preceding assertion (1).
-(auxiliary; not a blueprint node).
 
 The construction first replaces the given embedding by its kernel over the zero object,
 so that the resulting functor preserves the zero object and zero morphisms.  It then iterates

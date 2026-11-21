@@ -24,8 +24,7 @@ objects in all other degrees.
 Source: blueprint thm-sp-double-complex-spectral-sequences, proof steps 1 and 2.
 Proof: lower and upper truncation force all terms except q to vanish. Use the
 canonical degree-q isomorphism for the only nonzero component, and zero maps
-elsewhere. The differential conditions and inverse equations follow degreewise.
-(blueprint: lem-sp-vertical-window-component-iso). -/
+elsewhere. The differential conditions and inverse equations follow degreewise. -/
 noncomputable def verticalWindowComponentIso (q : ℕ) (K : CochainComplex C ℕ) :
     (verticalWindow (C := C) (q : ℤ) (q + 1)).obj K ≅
       (HomologicalComplex.single C (ComplexShape.up ℕ) q).obj (K.homology q) := by

@@ -34,7 +34,7 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
 attribute [local instance 2000] cochainModulesMonoidal
 
 /-- Multiplication in degree zero and the actual internal Hom evaluation otherwise.
-Source: Stacks 03EO and 04TT (blueprint: lem-pur-signed-line-native-evaluation). -/
+Source: Stacks 03EO and 04TT. -/
 def signedLinePairing (L : LineEvaluation.Modules.{uC, vC, r} R) (m : ℤ) (U : Cᵒᵖ) :
     (signedLinePower.{uC, vC, r} L m).val.obj U →
       (signedLinePower.{uC, vC, r} L (-m)).val.obj U → R.obj.obj U :=
@@ -81,7 +81,6 @@ private theorem dualEvaluation (P : LineEvaluation.Modules.{uC, vC, r} R)
 
 /-- The specified signed-power evaluation comes from an actual sheaf isomorphism.
 Source: Stacks 03EO and 04TT
-(blueprint: lem-pur-signed-line-native-evaluation).
 Proof: on a trivializing covering, each positive tensor power is the unit. Hence
 it is a line. Its Hom evaluation is invertible by local rank-one evaluation and
 gluing. Use this evaluation in positive degrees, precompose it with symmetry in

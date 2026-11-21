@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 # Module tensor change of rings comparison
 
 Source: Stacks Project, More on Algebra, Tag 06Y1, proof.
-(blueprint: lem-pc-tensor-restrict-extend-module-natural)
 -/
 
 @[expose] public section
@@ -23,7 +22,6 @@ open CategoryTheory MonoidalCategory
 
 namespace ModuleCat
 /-- Source: Stacks Project, More on Algebra, Tag 06Y1, proof.
-(blueprint: lem-pc-tensor-restrict-extend-module-natural)
 
 Proof: use the balanced maps l tensor (b tensor k) to (b l) tensor k and
 l tensor k to l tensor (1 tensor k). The A-balancing uses the action through ρ;

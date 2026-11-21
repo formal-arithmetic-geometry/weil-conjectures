@@ -80,7 +80,6 @@ end AbstractCochains
 unbounded derived tensor as the native tensor of its images.
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS, 06YT and 0G7E.
-(auxiliary; not a blueprint node).
 
 Proof: choose flat-term K-flat representatives of both inputs. The published tensor's
 cochain comparison computes their tensor. Flat-term K-flat preservation makes the

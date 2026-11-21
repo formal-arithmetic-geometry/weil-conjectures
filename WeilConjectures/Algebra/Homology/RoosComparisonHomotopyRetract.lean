@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.RoosComparisonHomotopies
 
 Source: Stacks Project, Derived Categories, Tag 070M, and the split-envelope
 extension recorded in lem-weil-derived-limit-roos-complex.
-(blueprint: lem-weil-roos-comparison-homotopy-retract).
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ endomorphism: -s P(h)x + P(h)s x = 0. Thus cU cR ~ id as well. The specified
 comparison equations ensure that the two squares use exactly eta and etaJ.
 
 Source: Stacks Project, Derived Categories, Tag 070M; the explicit extension
-in lem-weil-derived-limit-roos-complex.
-(blueprint: lem-weil-roos-comparison-homotopy-retract). -/
+in lem-weil-derived-limit-roos-complex. -/
 theorem roos_comparison_homotopy_retract
     (A : Type u) [Category.{v} A] [Abelian A]
     [HasLimitsOfShape (Discrete ℕ) A]

@@ -711,7 +711,6 @@ its unit and transition equations use the specified adjunctions.
 
 Source: the natural balanced comparison and computation-counit argument in
 `lem-pe-internal-kflat-scalar-tower-realization`.
-(auxiliary; not a blueprint node).
 
 Proof: use the natural derived computation counit, the exact restriction
 comparison and the balanced tensor comparison. Transport the coefficient by eB.
@@ -1051,7 +1050,6 @@ end
 restricted derived scalar extension, preserving the canonical transitions and units.
 Source: the balanced tensor computation and localization argument of
 `lem-pe-internal-kflat-scalar-tower-realization`.
-(auxiliary; not a blueprint node).
 Proof: compare both functors with termwise tensor on K-flat complexes, using the
 lax tensorator and natural_computation. Their component isomorphisms intertwine
 transitions and units. Fully faithful precomposition with the localization of
@@ -1146,7 +1144,6 @@ including its canonical units.
 
 Source: Stacks Project, Tags 064K and 06XY; the scalar-realization argument of
 `lem-pe-kflat-scalar-tower-realization`, in internal module objects
-(blueprint: lem-pe-internal-kflat-scalar-tower-realization).
 
 Proof: the coequalizers defining extension of scalars and tensor with the restricted
 regular module are the same coequalizer. Its comparison is linear for the common

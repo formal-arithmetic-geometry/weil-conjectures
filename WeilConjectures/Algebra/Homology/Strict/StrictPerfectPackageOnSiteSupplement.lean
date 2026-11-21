@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
 # Strict-perfect packages with independent site universes
 
 Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
 The original package is reexported; this interface retains the small pro-etale site.
 -/
 
@@ -29,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace SheafOfModules
 
 /-- Degreewise finite-free splittings with independent site and coefficient universes.
-Source: proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: proper base change, definition 1263 -/
 structure StrictPerfectCoefficientPackageOnSite {C : Type v} [Category.{w} C]
     {J : GrothendieckTopology C} (R : Sheaf J RingCat.{r})
     (F : CochainComplex (SheafOfModules.{r} R) ℤ) where
@@ -53,8 +51,7 @@ variable {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
 
 /-- Local perfectness: covering sieves admit bounded, finite-free retract models mapping
 quasi-isomorphically to the restricted complex. Bounds and ranks vary with the cover member.
-Source: Stacks, Tag 08G5, and proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: Stacks, Tag 08G5, and proper base change, definition 1263 -/
 def IsLocallyStrictPerfectComplexOnSite (R : Sheaf J CommRingCat.{u + 1})
     (K : CochainComplex (SheafOfModules.{u + 1}
       ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) ℤ) : Prop :=
@@ -68,8 +65,7 @@ def IsLocallyStrictPerfectComplexOnSite (R : Sheaf J CommRingCat.{u + 1})
           (ComplexShape.up ℤ)).obj K, QuasiIso α
 
 /-- Perfect objects are exactly the objects represented by locally perfect complexes.
-Source: Stacks, Tag 08G5, and proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: Stacks, Tag 08G5, and proper base change, definition 1263 -/
 def IsPerfectOnSmallRingedSite (R : Sheaf J CommRingCat.{u + 1})
     [HasDerivedCategory.{w} (SheafOfModules.{u + 1}
       ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))]
@@ -86,8 +82,7 @@ end SheafOfModules
 namespace AlgebraicGeometry.Scheme
 
 /-- A site-perfect derived object is represented by a locally strictly perfect complex.
-Source: Stacks, Tag 08G5; proper base change, definition 1263
-(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+Source: Stacks, Tag 08G5; proper base change, definition 1263 -/
 def IsProEtaleSitePerfect (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (Q : DerivedCategory (proEtaleRingModules X R)) : Prop :=

@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.IndependentExtensionTensor.ExtensionTens
 /-! # The coefficient quotient sequence tensored with a flat module
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YP and 06YY.
-(blueprint: lem-cbc-regular-quotient-flat-sequence).
 -/
 
 @[expose] public section
@@ -44,7 +43,6 @@ attribute [local instance] monoidalCategory
 on any flat module, without requiring quotient maps to be surjective on sections.
 
 Source: Stacks Project, Tags 06YP and 06YY
-(blueprint: lem-cbc-regular-quotient-flat-sequence).
 
 Proof: Tensor the coefficient-ring short exact sequence with M, using its exact tensor
 functor. The normalized regular-tensor isomorphism identifies both first terms with M;

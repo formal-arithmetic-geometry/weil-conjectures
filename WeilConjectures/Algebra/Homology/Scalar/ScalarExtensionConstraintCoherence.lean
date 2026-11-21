@@ -50,7 +50,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 /-! # Coherence of sheaf scalar extension
 
 Source: Stacks Project, Modules on Sites, Section 03EK, Tags 03CY and 0GMW.
-(blueprint: lem-pd-sheaf-scalar-extension-constraint-coherence)
 
 All section formulas explicitly apply the module sheafification unit. Pure tensors
 in a monoidal tensor object are transported by `tensorObjIsoSheafification`.
@@ -79,8 +78,7 @@ attribute [local irreducible] tensorObjIsoSheafification
 attribute [local irreducible] Localization.Monoidal.tensorBifunctor
 
 /-- Transparent notation for the existing modules on the ringed site.
-Source: Stacks Project, Modules on Sites, Tag 03DD.
-(blueprint: lem-pd-sheaf-scalar-extension-constraint-coherence) -/
+Source: Stacks Project, Modules on Sites, Tag 03DD. -/
 abbrev ScalarExtensionConstraintModules
     {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     [EssentiallySmall.{w} C]
@@ -91,7 +89,6 @@ abbrev ScalarExtensionConstraintModules
 
 /-- The image of a local pure tensor in the existing localization tensor.
 Source: Stacks Project, Modules on Sites, Tags 03EK and 03CY.
-(blueprint: lem-pd-sheaf-scalar-extension-constraint-coherence)
 This helper only spells out the module-sheafification unit and its canonical
 comparison with the tensor object; it introduces no new tensor construction. -/
 noncomputable def scalarExtensionConstraintPureTensor
@@ -109,7 +106,6 @@ noncomputable def scalarExtensionConstraintPureTensor
 
 /-- The image of `s tensor h` in the existing scalar extension sheaf.
 Source: Stacks Project, Modules on Sites, Tags 03EK and 03CY.
-(blueprint: lem-pd-sheaf-scalar-extension-constraint-coherence)
 This only names the module sheafification unit of `changeOfRingsPresheaf`;
 it does not choose or reconstruct a module sheaf. -/
 noncomputable def scalarExtensionConstraintTmul
@@ -131,8 +127,7 @@ attribute [local irreducible] changeOfRings changeOfRingsHom
 
 /-- The tensor and unit isomorphisms, with their prescribed section formulas and coherences.
 This is a package of the conclusions of the theorem, with no chosen comparison data.
-Source: Stacks Project, Modules on Sites, Section 03EK, Tags 03CY and 0GMW.
-(blueprint: lem-pd-sheaf-scalar-extension-constraint-coherence) -/
+Source: Stacks Project, Modules on Sites, Section 03EK, Tags 03CY and 0GMW. -/
 structure ScalarExtensionConstraintData
     {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     [EssentiallySmall.{w} C]
@@ -888,7 +883,6 @@ three oplax and three lax coherence equations.
 
 Source: Stacks Project, Modules on Sites, Section 03EK, Tags 03CY and 0GMW;
 explicit scalar-extension argument extracted in the DAG node.
-(blueprint: lem-pd-sheaf-scalar-extension-constraint-coherence)
 
 Proof:
 1. The sheafification adjunction and tensorObjIsoSheafification detect binary

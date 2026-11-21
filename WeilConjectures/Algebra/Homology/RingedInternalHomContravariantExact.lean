@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 /-! # Contravariant exactness of derived internal Hom
 
 Source: Stacks Project, Tag 08JC (lemma-RHom-triangulated).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -235,7 +234,6 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 /-- Contravariant exactness, including the coherent integer shift structure.
 
 Source: Stacks Project, Tag 08JC (lemma-RHom-triangulated).
-(auxiliary; not a blueprint node).
 
 Proof: Choose a representative K of M and its functorial K-injective replacement I.
 Multiplication by (-1)^(p*n) in degree n on the p-th factor identifies the ordinary

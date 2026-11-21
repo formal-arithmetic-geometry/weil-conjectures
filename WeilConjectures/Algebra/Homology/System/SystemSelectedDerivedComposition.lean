@@ -32,8 +32,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r s : ℕ ↪o ℕ)
 
 /-- Composite extension is the canonical identification of the two left adjoints
-to composite restriction. Source: Zheng 4.1; Stacks 0FND
-(blueprint: lem-pur-system-selected-derived-composition). -/
+to composite restriction. Source: Zheng 4.1; Stacks 0FND -/
 def systemSelectedDerivedComposition :
     (systemSelectedDerivedExtension (selectedSystemRings B r) s S T).derived ⋙
       (systemSelectedDerivedExtension B r S T).derived ≅
@@ -45,7 +44,6 @@ def systemSelectedDerivedComposition :
 
 /-- Composition of extensions preserves every actual transpose, including its
 restriction compositor. Source: Stacks 0FND
-(blueprint: lem-pur-system-selected-derived-composition).
 Proof: the inverse adjoint-uniqueness comparison is the forward comparison for the
 reversed adjunction pair. Its Hom normalization identifies the transpose with the
 composite adjunction. Expand the latter and its right-functor transport. -/

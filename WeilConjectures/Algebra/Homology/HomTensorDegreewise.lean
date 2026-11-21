@@ -64,7 +64,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option synthInstance.maxSize 256 in
 /-- There is a unique degreewise currying map, and it is invertible.
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1 (Tag 0A90),
-degreewise construction and inverse (blueprint: lem-sc-hom-tensor-degreewise).
+degreewise construction and inverse.
 
 Proof: Expand both Hom terms by the product projections of `homComplex_exists`.
 A section of the iterated Hom is a family of localized maps indexed by `p,q`.

@@ -20,7 +20,6 @@ namespace PresheafOfModules
 /-- Natural bilinear families agreeing on the two module units are equal.
 Source: Stacks Project, Modules on Sites, Tag 0GMW, uniqueness in the
 sheafification universal property.
-(blueprint: lem-pc-sites-module-sheafification-bilinear-extension-uniqueness)
 
 Proof: For sections `x,y`, intersect the covering image sieves of the two units.
 Every arrow in this covering sieve gives lifts `a,b` of both restrictions.

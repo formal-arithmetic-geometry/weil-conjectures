@@ -20,7 +20,6 @@ import WeilConjectures.Algebra.Homology.ResidueKernelLocalizedCokernel
 /-! # Unit-minor reduction for a residue rank-one kernel
 
 Source: Stacks Project, Tags 00O0 and 00NX, local matrix argument.
-(blueprint: new-residue-kernel-unit-minor)
 -/
 
 @[expose] public section
@@ -58,8 +57,7 @@ Proof:
    the localized-range identity identify the global localized quotient with
    this cokernel. A prime localization is nonzero; n=0 is excluded by hres.
 The conclusion retains a potentially nonzero g; its vanishing requires the
-separate local-ring kernel test in the parent theorem.
-(blueprint: new-residue-kernel-unit-minor) -/
+separate local-ring kernel test in the parent theorem. -/
 theorem residue_kernel_unit_minor
     (R : Type v) [CommRing R] (X Y : ModuleCat.{v} R) (f : X ⟶ Y)
     (hfX : Module.Finite R X) (hfY : Module.Finite R Y)

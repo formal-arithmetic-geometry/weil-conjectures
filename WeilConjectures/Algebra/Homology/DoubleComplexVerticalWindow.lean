@@ -53,8 +53,7 @@ end VerticalWindowAux
 
 /-- Smart truncation of a nonnegative cochain complex to the interval `[a,b)`.
 Extend by zero to the integers, truncate, and restrict back to nonnegative degrees.
-Source: Mathlib's canonical truncation functors
-(blueprint: def-sp-double-complex-vertical-window). -/
+Source: Mathlib's canonical truncation functors -/
 noncomputable def verticalWindow (a b : ℤ) : CochainComplex C ℕ ⥤ CochainComplex C ℕ :=
   (ComplexShape.embeddingUpNat.extendFunctor C) ⋙
     (ComplexShape.embeddingUpIntGE a).truncGEFunctor C ⋙

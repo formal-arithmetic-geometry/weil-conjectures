@@ -11,7 +11,6 @@ import Mathlib.Algebra.Module.Basic
 import Mathlib.CategoryTheory.Linear.Basic
 /-! # Product Hom complexes for a separately additive coefficient bifunctor
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, and Algebraization, Tag 099I
-(auxiliary; not a blueprint node).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -225,8 +224,7 @@ private noncomputable def homBifunctor :
 omit [Preadditive A] [Preadditive B] [HasProducts D]
     [H.Additive] [∀ a, (H.obj a).Additive] in
 /-- The projection data of a product Hom complex, with each law stored separately.
-Source: Stacks Project, Algebraization, Tag 099I; sites-cohomology.tex, Section 0A8X.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Algebraization, Tag 099I; sites-cohomology.tex, Section 0A8X. -/
 structure ProductHomComplexData [HasZeroMorphisms A] [HasZeroMorphisms B]
     (F : (CochainComplex A ℤ)ᵒᵖ ⥤ CochainComplex B ℤ ⥤ CochainComplex D ℤ) where
   π : ∀ (L : CochainComplex A ℤ) (M : CochainComplex B ℤ) (n p q : ℤ), p + n = q →
@@ -255,7 +253,6 @@ omit [Preadditive A] [Preadditive B] [HasProducts D]
     [H.Additive] [∀ a, (H.obj a).Additive] in
 /-- Product projections, differential, and functoriality specifying a product Hom complex.
 Source: Stacks Project, Algebraization, Tag 099I; sites-cohomology.tex, Section 0A8X
-(auxiliary; not a blueprint node).
 This proposition packages the full formulas so coefficient specializations can use the
 abstract preadditive hom structures without re-elaborating them after substitution. -/
 def ProductHomComplexSpecification [HasZeroMorphisms A] [HasZeroMorphisms B]
@@ -264,7 +261,6 @@ def ProductHomComplexSpecification [HasZeroMorphisms A] [HasZeroMorphisms B]
 
 /-- Existence of the Hom-complex bifunctor with its product projections and exact sign.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, and Algebraization, Tag 099I
-(auxiliary; not a blueprint node).
 Proof: take in degree `n` the product of the internal sheaf Homs from `L^p` to
 `M^(p+n)`. Products are computed sectionwise, so sections are families of maps
 on the localized site. Define the differential on these families by

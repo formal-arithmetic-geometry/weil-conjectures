@@ -30,7 +30,6 @@ the derived tensor product (that is, when K-flat complexes form a left derivabil
   computed on the K-injective complex `I M`.
 
 Source: Stacks Project, sites-cohomology.tex, Sections 08J7 and 0A8X
-(blueprint: def-pur-derived-internal-hom).
 -/
 
 @[expose] public section

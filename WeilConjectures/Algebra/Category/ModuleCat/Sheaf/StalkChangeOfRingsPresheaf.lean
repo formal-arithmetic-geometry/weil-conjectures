@@ -12,8 +12,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Stalks of sectionwise extension of scalars
 
-Source: Stacks Project, Sheaves, Lemma 007K (blueprint:
-lem-weil-pbc-presheaf-stalk-change-of-rings-tensor).
+Source: Stacks Project, Sheaves, Lemma 007K.
 -/
 
 @[expose] public section
@@ -221,7 +220,6 @@ private theorem stalkChangeOfRingsMap_injective (X : TopCat.{u})
 
 /-- The stalk comparison before sheafification, with its germ formula.
 Source: Stacks Project, Sheaves, Lemma 007K (lemma-stalk-tensor-presheaf-modules).
-(blueprint: lem-weil-pbc-presheaf-stalk-change-of-rings-tensor).
 
 Proof: The section maps s ↦ 1 ⊗ s define an additive presheaf morphism. Its stalk
 map is semilinear along α_x: represent a scalar and vector on a common neighborhood

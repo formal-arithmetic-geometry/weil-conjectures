@@ -19,7 +19,6 @@ import Mathlib.Algebra.Homology.Linear
 # Derived base tensor cohomology with its coefficient action
 
 Source: Stacks Project, Tags 06Y6 and 08IB
-(blueprint: lem-pc-base-derived-tensor-cohomology-action).
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ variable (R : Type uR) (A : Type uA) (B : Type uB) [CommRing R] [CommRing A] [Co
 set_option maxHeartbeats 800000 in
 -- The dependent existential includes both the derived and homology comparison equations.
 /-- Stacks Project, Tag 06Y6 (derived extension and its counit), and Tag 08IB
-(blueprint: lem-pc-base-derived-tensor-cohomology-action).
 
 Proof: K-flat resolutions over R compute the total left derived extension to B.
 Quasi-isomorphisms between K-flat complexes remain quasi-isomorphisms after

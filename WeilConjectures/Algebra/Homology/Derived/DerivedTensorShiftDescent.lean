@@ -97,7 +97,6 @@ import Mathlib.CategoryTheory.ObjectProperty.Shift
 
 Source: Stacks Project, more-algebra.tex, Tag 0FNH, item-shift-tensor;
 sites-cohomology.tex, Tags 06YS and 06YU; Categories, Tag 04VK.
-(blueprint: lem-weil-pbc-derived-tensor-shift-descent)
 
 The representative comparison is the published resolving comparison exposed by
 `tensorDescentPair`. The predicates below spell out its normalization and the
@@ -140,8 +139,7 @@ local instance (I : Type) :
 
 /-- A transparent abbreviation of Mathlib's existing total tensor functor, exposing its
 canonical signed shift instances. This is definitionally `SiteTensorComplexFunctor R`.
-Source: Stacks, Tags 06YM and 0FNH
-(blueprint: lem-weil-pbc-derived-tensor-shift-descent). -/
+Source: Stacks, Tags 06YM and 0FNH -/
 abbrev tensorShiftTotal :=
   (MonoidalCategory.curriedTensor (ringedSiteModules.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))).map₂CochainComplex
@@ -150,8 +148,7 @@ abbrev tensorShiftTotal :=
 This is the conjugation by the published representative comparison and the canonical
 localization shift comparison, written without inverse arrows by clearing the two
 invertible initial factors.
-Source: Stacks, Tags 0FNH and 06YU
-(blueprint: lem-weil-pbc-derived-tensor-shift-descent). -/
+Source: Stacks, Tags 0FNH and 06YU -/
 def tensorResolvingShiftCompatible
     (stable : ∀ (P : CochainComplex (ringedSiteModules.{r}
         ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ),
@@ -200,8 +197,7 @@ Thus their naturality is exactly naturality on the homotopy category; the quotie
 canonical shift comparison identifies these squares with the homotopy-level squares.
 `NatTrans.CommShift` says that the given shifts coincide with the shifts descended in
 one variable under this factorization.
-Source: Stacks, Tags 06YS, 06YU and 04VK
-(blueprint: lem-weil-pbc-derived-tensor-shift-descent). -/
+Source: Stacks, Tags 06YS, 06YU and 04VK -/
 def tensorFixedComparisonsShiftCompatible
     (s : (siteRestrictionDerivedTensor (J := J) (R := R)).CommShift₂Int) : Prop :=
   letI := s
@@ -230,8 +226,7 @@ def tensorFixedComparisonsShiftCompatible
 /-- Uniqueness of the normalized natural isomorphisms themselves, without assuming
 coherence laws on a competing isomorphism. Once the restriction of a candidate agrees
 with the prescribed shifts on resolving pairs, all of its components agree.
-Source: Stacks, Tag 04VK, and the arbitrary-transformation clause of tensor descent
-(blueprint: lem-weil-pbc-derived-tensor-shift-descent). -/
+Source: Stacks, Tag 04VK, and the arbitrary-transformation clause of tensor descent -/
 def tensorShiftComparisonsUnique
     (s : (siteRestrictionDerivedTensor (J := J) (R := R)).CommShift₂Int) : Prop :=
   letI := s
@@ -1081,7 +1076,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The published derived tensor has unique normalized coherent signed integer shifts,
 and every normalized fixed-factor comparison respects them.
 Source: Stacks, Tag 0FNH (item-shift-tensor), Tags 06YS, 06YU and 04VK
-(blueprint: lem-weil-pbc-derived-tensor-shift-descent).
 
 Proof:
 1. Localize the signed total tensor along the homotopy quotient in both variables,

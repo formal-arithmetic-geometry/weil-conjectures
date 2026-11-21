@@ -10,7 +10,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.OpenTensorNormali
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.OpenTensorNormalization.FiniteBaseChangeRestrictionRightSquare
 
 /-! The sectionwise ordinary mate identity for the finite restriction square.
-(blueprint: lem-sf-finite-base-change-restriction-ordinary-pin-mate)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,8 +32,7 @@ underlying sheaf functors gives equality of the square maps. Take mates under
 the two finite pull adjunctions and the two ringed pull adjunctions, using
 `FinitePullPin.mate` and `Operations.ordinaryTheta_mate`. The ordinary
 fixed-scalar square has mate `upperStarCompIso`; this gives the displayed
-identity between the four pinned left-adjoint comparisons.
-(blueprint: lem-sf-finite-base-change-restriction-ordinary-pin-mate) -/
+identity between the four pinned left-adjoint comparisons. -/
 theorem finite_base_change_restriction_ordinary_pin_mate
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

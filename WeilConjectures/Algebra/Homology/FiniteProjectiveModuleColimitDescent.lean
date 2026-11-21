@@ -18,7 +18,6 @@ import WeilConjectures.Algebra.Homology.FinitePresentationColimitRetraction
 /-! # Descent of one finite projective module
 
 Source: Stacks Project, More on Algebra, Tag 0BC7, first paragraph of the proof.
-(blueprint: lem-pc-finite-projective-module-colimit-descent).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace ModuleCat
 /-- A single finite projective module over a directed ring colimit has a finite projective model.
 Source: Stacks Project, More on Algebra, Tag 0BC7, first paragraph of the proof,
 and Algebra, Tags 05N7 and 00NX.
-(blueprint: lem-pc-finite-projective-module-colimit-descent).
 
 Proof: Replace the directed preorder by its antisymmetrization, choosing representatives.
 The resulting equivalence of indexing categories transports the diagram and its colimit.

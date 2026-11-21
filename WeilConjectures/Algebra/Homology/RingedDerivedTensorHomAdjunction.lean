@@ -978,7 +978,6 @@ The equality fixes only the existing monoidal structure; this theorem constructs
 its adjunctions and checks evaluation, and asserts no symmetry or constraint formulas.
 
 Source: Stacks Project, Tag 08J9, proved using 0A90 and 0A8Z
-(auxiliary; not a blueprint node).
 
 Proof: choose K-flat representatives P,L and a K-injective replacement I(M).
 The sheaf Hom complex Hom(L,I(M)) is K-injective because L is K-flat.

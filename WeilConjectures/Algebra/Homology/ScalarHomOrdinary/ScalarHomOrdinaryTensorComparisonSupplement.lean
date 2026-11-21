@@ -245,7 +245,6 @@ private theorem extendedTensor_hom_ext (M N : scalarModules J R)
 
 /-- Scalar extension preserves the sheaf tensor product with its unit normalization.
 Source: Stacks Project, Modules on Sites, Tag 03EL, and Tag 0GMW for sheafification.
-(blueprint: lem-sfb-scalar-ordinary-tensor-comparison).
 
 Proof: transport the existing binary scalar-extension tensor core along its identity
 sectionwise identification with the ordinary extension presheaf. Identify both sheaf

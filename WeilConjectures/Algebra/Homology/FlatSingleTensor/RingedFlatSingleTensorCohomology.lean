@@ -91,7 +91,6 @@ import Mathlib.CategoryTheory.Localization.Predicate
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YN, 06YS, 06YU and its preceding
 localization construction; homology.tex, Tag 010N, exact functors on abelian categories.
-(blueprint: lem-fd-ringed-flat-single-tensor-cohomology)
 
 The derived-object comparison is included before its cohomology comparisons. All tensors
 and representative comparisons are the published site-derived-tensor constructions.

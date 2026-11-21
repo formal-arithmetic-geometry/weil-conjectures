@@ -15,7 +15,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
 # Totalization of a single row
 
 Source: blueprint thm-sp-double-complex-spectral-sequences, proof step 2.
-(blueprint: lem-sp-double-complex-single-row-total-iso).
 -/
 
 @[expose] public section
@@ -136,7 +135,6 @@ set_option backward.isDefEq.respectTransparency false in
 extension by zero along the degree translation p ↦ p+q.
 Source: blueprint thm-sp-double-complex-spectral-sequences, proof step 2;
 Stacks, Homology, lemma-ss-double-complex, item (5).
-(blueprint: lem-sp-double-complex-single-row-total-iso).
 
 Proof: in total degree n the summands are indexed by pairs (i,j) with i+j=n.
 Every summand with j different from q is zero. If n is in the image of i ↦ i+q,

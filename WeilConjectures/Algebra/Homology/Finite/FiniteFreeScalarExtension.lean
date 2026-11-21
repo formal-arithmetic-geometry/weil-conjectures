@@ -26,7 +26,6 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK;
 Bhatt--Scholze, Lemma 3.4.12.
-(blueprint: lem-pur-finite-free-scalar-extension).
 -/
 
 -- After pruning, this module only keeps private declarations.

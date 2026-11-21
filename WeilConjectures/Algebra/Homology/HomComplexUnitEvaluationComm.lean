@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
 /-! # HomComplexUnitEvaluationComm
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-unit-evaluation-comm).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ private lemma homMap_zero_left
 
 /-- Evaluation at one commutes with the Hom-complex differential.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-unit-evaluation-comm).
 
 Proof: apply the differential-projection identity in `homComplex_exists` at
 source index zero, with q=m, q'=n and p'=m-n. The precomposition term vanishes

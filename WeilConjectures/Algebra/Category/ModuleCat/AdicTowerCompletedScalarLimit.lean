@@ -33,7 +33,6 @@ the residue equation determines the completed action coordinatewise. Thus the pa
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 087W, the sentence defining
 `M = lim M_n` as a module over the completion.
-(blueprint: lem-weil-pbc-adic-tower-completed-scalar-limit).
 
 Proof: Annihilation makes the scalar endomorphism map A -> End_A(T_n) factor
 through A/I^(n+1). Composing it with the completion residue gives d_n(r).

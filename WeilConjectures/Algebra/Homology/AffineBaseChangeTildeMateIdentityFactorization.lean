@@ -13,8 +13,7 @@ import WeilConjectures.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordina
 
 /-! # AffineBaseChangeTildeMateIdentityFactorization
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-tilde-mate-identity-factorization). -/
+Source: Stacks Project, Tag 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -43,7 +42,6 @@ variable [∀ Y : Scheme.{u},
 
 /-- Affine mate compatibility for the identity tilde representative.
 Source: Stacks Project, Tags 0DJ8, 06Y6 and 08HY.
-(blueprint: lem-pc-affine-base-change-tilde-mate-identity-factorization).
 Proof: Restrict M to R and choose a flat K-flat resolution P with a
 quasi-isomorphism to that restriction. Scalar extension of P to R' computes the
 universal left-derived scalar-extension functor in m. Its universal comparison

@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.TotalFreeFiltrationCokernelOddAux
 # Splittings and free quotients of the alternating column filtration
 
 Source: Stacks Project, Tag 09KP, filtration construction.
-(blueprint: lem-pc-derived-total-filtration-cokernel-odd)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ variable (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
 
 /-- The odd successive quotient has the prescribed endpoint basis in shifted degrees.
 Source: Stacks Project, Tag 09KP, successive quotients of the column filtration.
-(blueprint: lem-pc-derived-total-filtration-cokernel-odd)
 
 Proof. In total degree k, remove the full columns with index less than j.
 The remaining inclusion is the image of the first arrow into the full column -j.

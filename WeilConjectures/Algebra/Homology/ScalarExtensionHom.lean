@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.Additive
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 09RE, affine proof;
 Mathlib's `ModuleCat.extendScalarsComp`
-(blueprint: def-pc-complex-scalar-extension-hom).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace CochainComplex
 
 /-- Extend a chain map over `S` between complexes extended from `R` to `T`, transporting
 along the canonical associativity of extension of scalars and the equality `h = g.comp f`.
-Source: Stacks Project, Derived Categories of Schemes, Tag 09RE, affine proof
-(blueprint: def-pc-complex-scalar-extension-hom). -/
+Source: Stacks Project, Derived Categories of Schemes, Tag 09RE, affine proof -/
 noncomputable def scalarExtensionHom
     {R S T : Type u₁} [CommRing R] [CommRing S] [CommRing T]
     (f : R →+* S) (g : S →+* T) (h : R →+* T) (hc : h = g.comp f)

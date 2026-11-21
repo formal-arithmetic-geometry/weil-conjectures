@@ -43,7 +43,6 @@ Apply `hext` to this short exact sequence, using `hind` and `hprime` on its
 end terms and `hiso` for the canonical identifications. For `e = 0`, the
 sequence is `0 → ℤ/rℤ → ℤ/rℤ` with identity quotient, so the same argument
 also covers the boundary case.
-(blueprint: lem-sbc-finite-torsion-prime-power-successor)
 -/
 theorem finite_torsion_prime_power_successor
     (P : ModuleCat.{u + 1} (ULift.{u + 1} ℤ) → Prop)

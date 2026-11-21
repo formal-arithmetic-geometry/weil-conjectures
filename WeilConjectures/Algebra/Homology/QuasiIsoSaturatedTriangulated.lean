@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.Localization
 # Quasi-isomorphisms as a saturated triangulated multiplicative system
 
 Source: Stacks Project, Lemma 05RT and Situation 05S8
-(blueprint: lem-pur-quasi-isos-saturated-triangulated).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ cones. The derived-category functor is an exact localization. These are the cate
 multiplicative-system hypotheses in Stacks Situation 05S8.
 
 Source: Stacks Project, Lemma 05RT, Definitions 04VB--04VD and 05R2, and Situation 05S8
-(blueprint: lem-pur-quasi-isos-saturated-triangulated).
 
 Proof outline:
 1. Homotopic maps induce equal cohomology maps, so the quasi-isomorphism class is well defined.

@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0944, first locality sentence;
 categories.tex, localization and cohomology criteria.
-(blueprint: lem-weil-pbc-ringed-restriction-local-iso).
 -/
 
 @[expose] public noncomputable section
@@ -27,7 +26,6 @@ namespace SheafOfModules
 
 /-- Exact slice restriction detects derived isomorphisms on covering sieves.
 Source: Stacks Project, sites-cohomology.tex, Tag 0944, first locality sentence.
-(blueprint: lem-weil-pbc-ringed-restriction-local-iso).
 
 Proof: choose a covering sieve on each object as in the hypothesis. The domains of
 all arrows in these sieves form a family covering every object. Exact restriction

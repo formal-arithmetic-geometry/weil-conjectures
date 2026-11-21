@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Homology.Additive
 # Zero morphisms and the general-site tensor product
 
 Source: Stacks Project, Modules on Sites, Section 03EK
-(blueprint: def-pur-sheaf-tensor-product).
 The existing independent-universe tensor product is retained. This module shows that tensoring
 with a fixed right factor preserves zero morphisms.
 -/
@@ -31,7 +30,7 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
   {A : Sheaf J CommRingCat.{r}}
 
 /-- Tensor with a fixed right factor preserves zero morphisms.
-Source: Stacks, Section 03EK (blueprint: def-pur-sheaf-tensor-product).
+Source: Stacks, Section 03EK.
 Proof: sectionwise, `0 ⊗ id` vanishes on pure tensors, hence is the zero linear map.
 The forgetful functor and additive module sheafification preserve zero maps as well. -/
 theorem siteSheafTensorRight_preservesZeroMorphisms
@@ -65,7 +64,7 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
 
 set_option linter.unusedSectionVars false in
 /-- The map on tensor presheaves in the second variable commutes with restrictions.
-Source: Stacks, Section 03EK (blueprint: def-pur-sheaf-tensor-product).
+Source: Stacks, Section 03EK.
 Proof: both composites send `x ⊗ y` to the tensor of the restriction of `x` and
 of the image of `y`; naturality of the second-factor morphism identifies these.
 Pure tensors generate the sectionwise tensor product. -/
@@ -86,7 +85,7 @@ theorem siteTensorSecondMap_naturality
     (PresheafOfModules.naturality_apply g f y)
 
 /-- Tensor a presheaf morphism in the second variable, sectionwise `id ⊗ g`.
-Source: Stacks, Section 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+Source: Stacks, Section 03EK. -/
 noncomputable def siteTensorSecondMap
     (M : PresheafOfModules.{m} (A.obj ⋙ forget₂ CommRingCat RingCat))
     {N N' : PresheafOfModules.{m} (A.obj ⋙ forget₂ CommRingCat RingCat)} (g : N ⟶ N') :
@@ -96,7 +95,7 @@ noncomputable def siteTensorSecondMap
   naturality f := siteTensorSecondMap_naturality M g f
 
 /-- Sheafify the sectionwise map `id ⊗ g`, using the existing tensor objects.
-Source: Stacks, Section 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+Source: Stacks, Section 03EK. -/
 noncomputable def siteSheafTensorSecondMap
     (M : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     {N N' : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)}
@@ -110,7 +109,7 @@ noncomputable def siteSheafTensorSecondMap
       (siteTensorSecondMap M.val g.val)
 
 /-- A local pure tensor, mapped into the sheaf tensor product by the sheafification unit.
-Source: Stacks, Section 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+Source: Stacks, Section 03EK. -/
 noncomputable def siteSheafTensorTmul
     (M N : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :

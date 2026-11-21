@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
 # Degreewise sections of the sheaf Hom complex
 
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -84,7 +83,6 @@ private noncomputable def sectionToLocalizedHomEquiv
 set_option backward.isDefEq.respectTransparency true in
 /-- Product projections identify degreewise sections with all localized cochains.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-(auxiliary; not a blueprint node)
 
 Proof: the product cone specified by homComplex_exists remains a product after
 forgetting module sheaves, evaluating at U, and forgetting to abelian groups.

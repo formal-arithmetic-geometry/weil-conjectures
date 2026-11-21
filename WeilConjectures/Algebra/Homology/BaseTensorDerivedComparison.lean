@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.RestrictionCompositeHomology
 /-! # Construction of the derived coefficient comparison
 
 Source: Stacks Project, Tag 06Y6, and equation-bc (Tag 0DJ7).
-(blueprint: lem-pc-base-tensor-derived-comparison).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ noncomputable section
 namespace ModuleCat
 
 /-- The scalar-extension counit on homology, without an invertibility assumption.
-Source: Stacks Project, Tag 06Y6.
-(blueprint: lem-pc-base-tensor-derived-comparison). -/
+Source: Stacks Project, Tag 06Y6. -/
 def scalarExtensionHomologyMap {A D : Type u} [CommRing A] [CommRing D]
     [HasDerivedCategory.{w} (ModuleCat.{u} A)]
     [HasDerivedCategory.{w} (ModuleCat.{u} D)] (ρ : A →+* D)
@@ -59,8 +57,7 @@ variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
 /-- The representative formula characterizing the derived coefficient comparison.
 The coefficient map is quantified with its generator formula, so this condition
 makes no choice of a tensor model.
-Source: Stacks Project, Tag 06Y6; equation-bc, Tag 0DJ7.
-(blueprint: lem-pc-base-tensor-derived-comparison). -/
+Source: Stacks Project, Tag 06Y6; equation-bc, Tag 0DJ7. -/
 def IsBaseTensorDerivedComparison
     (F : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))
     (δ : DerivedCategory.Qh ⋙ F ⟶
@@ -129,8 +126,7 @@ coefficient map from its generator formula. The universal properties identify
 arbitrary F and L with the resolution functors by their unique counit-compatible
 isomorphisms. No flatness of A over R or of D is used.
 Source: Stacks Project, Section 06Y5, Tag 06Y6 (derived change of rings), and
-perfect.tex, the construction preceding equation-bc (Tag 0DJ7).
-(blueprint: lem-pc-base-tensor-derived-comparison). -/
+perfect.tex, the construction preceding equation-bc (Tag 0DJ7). -/
 theorem exists_baseTensorDerivedComparison
     (F : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))
     (δ : DerivedCategory.Qh ⋙ F ⟶

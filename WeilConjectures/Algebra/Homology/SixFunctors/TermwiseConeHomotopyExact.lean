@@ -148,7 +148,6 @@ attribute [local instance] TermwiseConeProof.additive_limits TermwiseConeProof.a
 homotopy categories.
 Source: Stacks Project, derived.tex, definitions of cones and distinguished triangles;
 blueprint lem-coef-integral-finite-extension.proof.md, first paragraph
-(blueprint: lem-sf-termwise-cone-homotopy-exact).
 
 Proof: on a degree-minus-one homotopy use the diagonal homotopy on the two cone
 summands, with a minus sign on the shifted F summand. Naturality of τ cancels the

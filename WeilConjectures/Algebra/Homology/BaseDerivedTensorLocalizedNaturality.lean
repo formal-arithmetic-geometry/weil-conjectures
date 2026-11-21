@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.BaseTensorDerivedComparisonModel
 /-! # Naturality of localized base-derived tensor comparison
 
 Source: Stacks Project, More on Algebra, Tag 06Y6; perfect.tex, equation-bc (Tag 0DJ7).
-(blueprint: lem-pc-base-derived-tensor-localized-naturality).
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ variable {A D : Type u} [CommRing A] [CommRing D]
   [HasDerivedCategory.{w} (ModuleCat.{u} D)]
 
 /-- The homology identification supplied by an invertible scalar-extension counit.
-Source: Stacks Project, More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-base-derived-tensor-localized-naturality). -/
+Source: Stacks Project, More on Algebra, Tag 06Y6. -/
 def scalarExtensionHomologyIso (ρ : A →+* D)
     (L : DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} D))
     (ε : DerivedCategory.Qh ⋙ L ⟶
@@ -60,8 +58,7 @@ variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
   [HasDerivedCategory.{w} (ModuleCat.{u} D)]
 
 /-- Localization factors identify the input to a base tensor model with derived
-restriction of an A-complex. Source: Stacks Project, Tag 06Y6.
-(blueprint: lem-pc-base-derived-tensor-localized-naturality). -/
+restriction of an A-complex. Source: Stacks Project, Tag 06Y6. -/
 def baseTensorInputIso (P : CochainComplex (ModuleCat.{u} A) ℤ) :
     DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj
       (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj P)) ≅
@@ -71,8 +68,7 @@ def baseTensorInputIso (P : CochainComplex (ModuleCat.{u} A) ℤ) :
     (restrictScalars.{u} (algebraMap R A)).mapDerivedCategoryFactors.symm.app P
 
 /-- Transport on model cohomology along a derived A-linear isomorphism, before
-lifting the transport from B to the tensor algebra. Source: Stacks Project, Tag 06Y6.
-(blueprint: lem-pc-base-derived-tensor-localized-naturality). -/
+lifting the transport from B to the tensor algebra. Source: Stacks Project, Tag 06Y6. -/
 def baseTensorSourceIso
     {P Q : CochainComplex (ModuleCat.{u} A) ℤ}
     (M : BaseDerivedTensorCohomologyModel R A B P D)
@@ -115,8 +111,7 @@ invertibility of localizedComparison, R-flatness, or flatness of D is used.
 The identity morphism, zero complexes and zero coefficient rings follow the same
 adjunction calculation.
 Source: Stacks Project, More on Algebra, Tag 06Y6, lemma-derived-base-change;
-perfect.tex, equation-bc (Tag 0DJ7).
-(blueprint: lem-pc-base-derived-tensor-localized-naturality). -/
+perfect.tex, equation-bc (Tag 0DJ7). -/
 theorem baseDerivedTensor_localized_naturality
     {P Q : CochainComplex (ModuleCat.{u} A) ℤ}
     (M : BaseDerivedTensorCohomologyModel R A B P D)

@@ -11,7 +11,6 @@ public import Mathlib.Topology.Sheaves.Abelian
 /-! # Module sheafification under continuous cocontinuous restriction
 
 Source: Stacks Project, Tags 03CY, 03DH and 04IX.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -35,17 +34,17 @@ set_option quotPrecheck false in
 local notation "A" => (F.sheafPushforwardContinuous RingCat.{u} J K).obj R
 
 /-- Restriction of module presheaves along the given site functor.
-Source: Stacks 04IX (auxiliary; not a blueprint node). -/
+Source: Stacks 04IX. -/
 abbrev slicePresheafRestriction : PresheafOfModules.{u} R.obj ⥤ PresheafOfModules.{u} (A).obj :=
   PresheafOfModules.pushforward₀.{u} F R.obj
 
 /-- The corresponding restriction of sheaf modules.
-Source: Stacks 04IX (auxiliary; not a blueprint node). -/
+Source: Stacks 04IX. -/
 abbrev sliceModuleRestriction : SheafOfModules.{u} R ⥤ SheafOfModules.{u} A :=
   pushforward.{u} (F := F) (𝟙 A)
 
 /-- Extend the restricted global sheafification unit by the local sheafification adjunction.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 def sliceSheafificationComparison :
     slicePresheafRestriction (J := J) F R ⋙ PresheafOfModules.sheafification (𝟙 (A).obj) ⟶
       PresheafOfModules.sheafification (𝟙 R.obj) ⋙ sliceModuleRestriction (J := J) F R := by
@@ -72,7 +71,6 @@ def sliceSheafificationComparison :
 
 /-- The comparison is an isomorphism for continuous cocontinuous restriction.
 Source: Stacks 03CY and 03DH
-(auxiliary; not a blueprint node).
 Proof: The sheafification adjunction identifies the comparison composed with the
 local unit with the restricted global unit. The global unit is locally bijective,
 and cocontinuity preserves local injectivity and local surjectivity under restriction.
@@ -116,8 +114,7 @@ theorem sliceSheafificationComparison_isIso :
     (Presheaf.comp_isLocallySurjective_iff _ _ _).mp h₂⟩
 
 /-- The canonical sheafification/restriction isomorphism, with its fixed orientation.
-Source: Stacks 03CY, 03DH and 04IX
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03CY, 03DH and 04IX -/
 def sliceSheafificationIso :
     PresheafOfModules.sheafification (𝟙 R.obj) ⋙ sliceModuleRestriction (J := J) F R ≅
       slicePresheafRestriction (J := J) F R ⋙ PresheafOfModules.sheafification (𝟙 (A).obj) :=

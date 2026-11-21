@@ -20,7 +20,6 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 /-! # Cancelling the negative tail of a residue-connective projective complex
 
 Source: Stacks Project, Tag 00O0, finite-projective cancellation argument.
-(blueprint: lem-sc-universal-connective-projective-model).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ without any condition on degree-zero homology.
 
 Source: Stacks Project, Tag 00O0, fixed-affine negative-tail argument in
 lem-sc-universal-h0-projective-normalization; Mathlib good truncation and K-projectivity.
-(blueprint: lem-sc-universal-connective-projective-model).
 
 Proof: Define Q to be the good truncation P.truncGE 0. Its negative terms are
 zero, its zeroth term is canonically isomorphic to P.opcycles 0, and its positive

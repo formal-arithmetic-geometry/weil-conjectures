@@ -13,7 +13,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorTriangulated
 /-! # Exact cohomology of the extended and tensored cone triangle
 
 Source: Stacks Project, Tag 06Y6.
-(blueprint: lem-pc-tensor-cone-five-term-exact).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ variable {A C : Type u} [CommRing A] [CommRing C]
   (f : P₁ ⟶ P₂) (N : CochainComplex (ModuleCat.{u} C) ℤ)
 
 /-- The concrete triangle obtained by scalar extension and tensoring the cone triangle.
-Source: Stacks Project, Tag 06Y6.
-(blueprint: lem-pc-tensor-cone-five-term-exact). -/
+Source: Stacks Project, Tag 06Y6. -/
 noncomputable def tensorConeTriangle :
     Pretriangulated.Triangle (CochainComplex (ModuleCat.{u} C) ℤ) :=
   (((extendScalars ρ).mapHomologicalComplex (.up ℤ)).mapTriangle ⋙
@@ -46,8 +44,7 @@ triangle with the cone of the extended chain map. Tensoring with N identifies th
 triangle with the cone of the tensored map. These are chain isomorphisms, so no
 flatness of the ring map or N is necessary. The cone triangle is distinguished;
 its long exact homology sequence is exact at each of the three interior terms.
-Truncate it after the second term in degree i+1.
-(blueprint: lem-pc-tensor-cone-five-term-exact). -/
+Truncate it after the second term in degree i+1. -/
 theorem tensorConeTriangle_five_term_exact (i : ℤ) :
     let T := tensorConeTriangle ρ f N
     (ComposableArrows.mk₄ (HomologicalComplex.homologyMap T.mor₁ i)

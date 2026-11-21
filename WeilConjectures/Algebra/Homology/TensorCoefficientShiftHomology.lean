@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 
 Source: Stacks Project, Tags 06Y6 and 08IB; an explicit shift reduction
 for the tensor inheritance in Tag 0DJA(1).
-(blueprint: lem-pc-tensor-coefficient-shift-homology).
 -/
 
 @[expose] public section
@@ -45,8 +44,7 @@ mapHomologyIso for restriction moves its components through that square and
 gives the displayed equality. Restriction is exact for every ring map g;
 extension need not be exact. For n=0 the signs are one, and zero complexes and
 zero rings present no exceptions. This uses no derived functor, model action,
-or localized comparison.
-(blueprint: lem-pc-tensor-coefficient-shift-homology). -/
+or localized comparison. -/
 theorem tensorCoefficient_shift_homology
     (f : A →+* E) (g : E →+* C)
     (K L : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ) (e : L ≅ K⟦-n⟧)

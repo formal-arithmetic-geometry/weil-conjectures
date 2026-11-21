@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.HomTensorSectionNaturality
 # Pure-tensor evaluation of currying naturality
 
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
-(blueprint: lem-sc-hom-tensor-curry-natural-pure)
 -/
 
 @[expose] public section
@@ -114,7 +113,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- Naturality of the pure-tensor equation for two degreewise currying maps.
 Source: Stacks Project, Cohomology on Sites, Tag 0A90, functoriality,
 referring to More on Algebra, Lemma 15.73.1.
-(blueprint: lem-sc-hom-tensor-curry-natural-pure)
 
 Proof: Apply the currying condition for the primed complexes to the image of s
 under the iterated Hom map. The componentwise action specified by

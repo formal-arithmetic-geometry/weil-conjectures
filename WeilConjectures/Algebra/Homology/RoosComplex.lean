@@ -20,7 +20,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 Source: Stacks Project, derived.tex, Tag 070M (lemma-difficulty-K-injectives),
 extended to arbitrary K-injective towers by the node's split-envelope argument
-(blueprint: lem-weil-derived-limit-roos-complex).
 -/
 
 @[expose] public section
@@ -57,7 +56,6 @@ private theorem homotopy_retraction_of_quasiIso
 identify the product and shifted cone terms; their differential equations specify the
 complexes, and the kernel and comparison equations specify the canonical map.
 Source: Stacks Project, derived.tex, Tag 070M (lemma-difficulty-K-injectives)
-(blueprint: lem-weil-derived-limit-roos-complex).
 
 Proof: (1) The kernel of the transition endomorphism is the inverse limit, naturally in
 families (tower-transition-endomorphism and inverse-system definitions). (2) Applying

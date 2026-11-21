@@ -20,7 +20,6 @@ namespace CategoryTheory
 /-- Restriction of a quasi-isomorphism of module complexes to `C/U` is a quasi-isomorphism.
 Source: Stacks Project, Section 18.19 (Tag 03DH), restriction exactness recalled in
 Lemma 18.19.4 (Tag 03DK), as used in Tag 0A95.
-(auxiliary; not a blueprint node).
 
 Proof: restriction to the slice site preserves kernels: kernels of module sheaves are
 computed sectionwise. It also preserves cokernels: the presheaf cokernel is computed

@@ -386,7 +386,6 @@ private def semilinearEvaluationIso :
 
 /-- Every acyclic complex at one coefficient level lifts to an acyclic sequence complex.
 Source: Zheng, Construction 4.1, with the elementary right extension at a vertex
-(blueprint: lem-coef-semilinear-evaluation-acyclic-lift).
 Proof: at level k at least n use restriction of scalars from B_n to B_k; below n use
 zero. Above n the transitions are the identity on sections, and all other transitions
 are zero. Restriction of scalars is exact, so each level complex is acyclic. Exactness

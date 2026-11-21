@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Homology.QuasiIsoOfSections
 
 Source: Stacks Project, sites-cohomology.tex, Lemma 0A95
 (sites-cohomology-lemma-RHom-well-defined), using Lemma 0A94
-(blueprint: lem-pur-rhom-well-defined).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ namespace CategoryTheory
 with `s` is a quasi-isomorphism when `s` and `t` are quasi-isomorphisms and both targets
 of the Hom complexes are K-injective.
 Source: Stacks Project, sites-cohomology.tex, Lemma 0A95, using Lemma 0A94
-(blueprint: lem-pur-rhom-well-defined).
 
 Proof:
 1. Fix a site object `U` and an integer `n`. The formula in `def-pur-hom-complex`

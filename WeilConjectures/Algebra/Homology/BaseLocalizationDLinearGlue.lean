@@ -8,8 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 /-! # Scalar extension along equal coefficient maps
-Source: Stacks Project, Tag 05G3, tensor associativity and scalar extension.
-(blueprint: lem-pc-base-localization-dlinear-glue). -/
+Source: Stacks Project, Tag 05G3, tensor associativity and scalar extension. -/
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -27,7 +26,6 @@ private theorem extendScalars_eqToIso_one_tmul
   rfl
 /-- Transport an invertible semilinear map through a coefficient-ring isomorphism.
 Source: Stacks Project, Tag 05G3, tensor associativity.
-(blueprint: lem-pc-base-localization-dlinear-glue).
 
 Proof: the ring isomorphism makes restriction of scalars an equivalence, so
 its scalar-extension counit is invertible. Extend g and compose with that

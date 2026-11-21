@@ -33,7 +33,6 @@ set_option backward.isDefEq.respectTransparency true in
 -- Evaluated product projections unfold composed functors and restriction wrappers.
 /-- A function with the localized cycle projection formula is bijective.
 Source: Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y.
-(blueprint: lem-pur-localized-hom-complex-cycles-bijective)
 
 Proof: section evaluation preserves the product cone supplied by
 homComplex_exists: forgetful functors for sheaves and modules preserve limits,

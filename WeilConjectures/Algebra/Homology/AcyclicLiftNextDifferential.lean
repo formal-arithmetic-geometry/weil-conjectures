@@ -43,7 +43,6 @@ private theorem quotient_unit_surjective
 /-- Lift a prescribed next term's incoming differential into an exact finite projective tail.
 
 Source: Stacks Project, Tag 0BC9, proof, first two paragraphs
-(blueprint: lem-sc-acyclic-lift-next-differential).
 
 Proof. Descend from the upper bound, splitting each epimorphism onto the next cycle
 module by projectivity. The summand condition first supplies zero and invariance under

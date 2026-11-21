@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-/-! Cycle projection comparison square.
-(blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison-cycle-square). -/
+/-! Cycle projection comparison square. -/
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -77,7 +76,6 @@ private theorem factor_differential
 set_option backward.isDefEq.respectTransparency true in
 /-- Restriction of a Hom complex has a chain isomorphism compatible with its projection.
 Source: Stacks Project, Tags 0A8X and 08DL, product construction of the Hom complex.
-(blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison-cycle-square).
 Proof: Restriction to an open preserves products, computed sectionwise, and passing
 through the open-site equivalence preserves limits. Apply the universal properties
 of the limiting product fans of the fixed Hom projections to the isomorphisms e.

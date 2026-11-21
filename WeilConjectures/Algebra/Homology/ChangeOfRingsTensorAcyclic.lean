@@ -55,8 +55,7 @@ vanishing of homology. It therefore reflects acyclicity of the extended complex.
 Finally the components eqToIso (h M) form a natural isomorphism, since hm is precisely
 its naturality square after cancelling equality transports. Map this isomorphism
 termwise to identify the prescribed E-complex with that extension of scalars complex.
-No K-flatness, acyclicity of K, or flatness of O' is assumed in this comparison lemma.
-(blueprint: lem-pur-change-of-rings-tensor-acyclic) -/
+No K-flatness, acyclicity of K, or flatness of O' is assumed in this comparison lemma. -/
 theorem changeOfRings_acyclic_of_tensor_acyclic
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]

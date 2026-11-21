@@ -44,7 +44,6 @@ private theorem flatRepresentative {C : Type w} [SmallCategory C]
 unbounded derived tensor.
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS, 06YT and 0G7E.
-(auxiliary; not a blueprint node).
 
 Proof: choose cochain preimages under Q and apply the independent-coefficient K-flat
 resolution theorem. Localize the quasi-isomorphisms and compose with the preimage

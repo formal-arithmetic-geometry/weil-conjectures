@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
 # Component of the iterated Hom differential after currying
 
 Source: Stacks Project, Tag 0A90 and its referenced calculation in Tag 0A5Y.
-(blueprint: lem-sc-hom-tensor-iterated-differential-component).
 -/
 
 @[expose] public section
@@ -46,7 +45,6 @@ set_option synthInstance.maxSize 256 in
 /-- The component of the iterated Hom differential after degreewise currying.
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1 (Tag 0A90),
 compatibility with differentials
-(blueprint: lem-sc-hom-tensor-iterated-differential-component).
 
 Proof: Fix the total source degree t. Expand the outer Hom differential and
 then the inner Hom differential using the projection formula in

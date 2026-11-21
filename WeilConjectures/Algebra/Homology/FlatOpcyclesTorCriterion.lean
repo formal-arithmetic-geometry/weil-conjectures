@@ -16,7 +16,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 # Flatness of opcycles from exactness after tensoring
 
 Source: Stacks Project, More on Algebra, Lemma 15.59.2 (Tag 0653), Tor argument
-(blueprint: lem-pc-module-flat-opcycles-tor-criterion).
 -/
 
 @[expose] public section
@@ -27,7 +26,7 @@ open CategoryTheory MonoidalCategory
 
 namespace Module.Flat
 
-/-- (blueprint: lem-pc-module-flat-opcycles-tor-criterion) Stacks Project, More on Algebra,
+/-- Stacks Project, More on Algebra,
 Lemma 15.59.2 (Tag 0653). For a complex of flat modules, if tensoring with every module
 is exact in degree `a - 1`, its degree-`a` opcycles are flat. Put
 `Q = P^a / im(d^{a-1})`. The Tor argument gives a surjection from the preceding tensor

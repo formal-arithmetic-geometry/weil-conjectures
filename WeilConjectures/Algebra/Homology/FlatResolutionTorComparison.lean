@@ -24,7 +24,6 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 /-! # Computing Tor from a flat resolution
 
 Source: Stacks Project, Algebra, Section Tag 00LY, especially Lemmas 00M1 and 00M3.
-(blueprint: lem-pc-flat-resolution-tor-comparison).
 -/
 
 @[expose] public section
@@ -176,8 +175,7 @@ F tensor N; the row cokernel complex is M tensor Q. Tag 00M1 identifies their
 homology. Computing Tor from Q and using Tag 00M3 identifies the latter homology
 with Tor'_j(M,N). All these are isomorphisms of R-modules. Degree zero is included:
 right exactness identifies both augmentations with the ordinary tensor product.
-The zero complex and zero modules satisfy the same argument.
-(blueprint: lem-pc-flat-resolution-tor-comparison). -/
+The zero complex and zero modules satisfy the same argument. -/
 theorem flatResolution_torComparison
     {R : Type u} [CommRing R] (M : ModuleCat.{u} R)
     (F : ChainComplex (ModuleCat.{u} R) ℕ)

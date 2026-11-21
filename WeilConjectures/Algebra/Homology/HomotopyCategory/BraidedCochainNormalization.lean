@@ -11,7 +11,6 @@ import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 /-! # Braided lift of an additive functor to signed cochain complexes
 
 Source: Stacks Project, Tags 06YU and 0FPT.
-(blueprint: lem-pur-braided-cochain-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -114,7 +113,6 @@ with inverse tensorator characterized on total summands and the canonical single
 
 Source: Stacks Project, Tags 06YU and 0FPT; the canonical strong cochain construction of
 WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex.
-(blueprint: lem-pur-braided-cochain-normalization).
 
 Proof: Use mapCochainComplexMonoidal for the strong structure. On every total summand,
 the two braiding composites have the same Koszul sign. The ordinary braided equation

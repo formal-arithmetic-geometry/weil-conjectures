@@ -248,8 +248,7 @@ transitions, using that comparison for inverse image and its adjoint mate for di
 Transposing the component maps identifies their transition compatibility equations, so
 the component adjunctions restrict to the system adjunction with the stated formula.
 Kernels and cokernels of strict systems are componentwise, proving system exactness.
-Neither regularity nor completeness of the coefficient ring is needed here.
-(blueprint: lem-pur-coefficient-system-ordinary-images). -/
+Neither regularity nor completeness of the coefficient ring is needed here. -/
 theorem coefficientSystemOrdinaryImage_exists [PreservesFiniteLimits L] :
     Nonempty (CoefficientSystemOrdinaryImage (J := J) (K := K) O ell L V adj) := by
   obtain ⟨S⟩ := coefficientLevelOrdinaryImage_exists O ell L V adj

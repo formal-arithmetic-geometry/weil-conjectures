@@ -66,7 +66,6 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 Source: Stacks Project, Cohomology on Sites, Tag 06YQ; Homology, Tag 0115;
 Derived Categories, definition-cone
-(blueprint: lem-sfb-finite-free-mono-cokernel-kflat).
 
 The cone of the degree-zero map represents the two-term complex with differential `+u`.
 Its augmentation uses the specified cokernel projection, without choosing another map.
@@ -114,16 +113,14 @@ variable {A : Type a} [Category.{b} A] [Abelian A]
 /-- The two-term complex of a morphism, represented by the canonical cone on its
 degree-zero single complex. Under the canonical identifications its terms are `P` in
 degree `-1`, `Q` in degree `0`, and zero elsewhere; its differential is `+u`.
-Source: Stacks Project, Derived Categories, definition-cone
-(blueprint: lem-sfb-finite-free-mono-cokernel-kflat). -/
+Source: Stacks Project, Derived Categories, definition-cone -/
 noncomputable def monoCokernelComplex {P Q : A} (u : P ⟶ Q) : CochainComplex A ℤ :=
   mappingCone ((singleFunctor A 0).map u)
 
 /-- The specified quotient augmentation: zero on the shifted source summand and the
 given projection on the unshifted target summand. `S.zero` is exactly the condition
 that the projection kills the differential; no exactness is needed to construct it.
-Source: Stacks Project, Derived Categories, discussion before Tag 0152
-(blueprint: lem-sfb-finite-free-mono-cokernel-kflat). -/
+Source: Stacks Project, Derived Categories, discussion before Tag 0152 -/
 noncomputable def monoCokernelAugmentation (S : ShortComplex A) :
     monoCokernelComplex S.f ⟶ (singleFunctor A 0).obj S.X₃ :=
   mappingCone.descShortComplex (S.map (singleFunctor A 0))

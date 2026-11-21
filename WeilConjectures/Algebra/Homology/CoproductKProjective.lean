@@ -24,7 +24,6 @@ namespace CochainComplex
 
 /-- Coproducts of K-projective complexes are K-projective.
 Source: Stacks Project, Tag 09KM, coproduct null-homotopy argument.
-(blueprint: lem-pc-coproduct-kprojective)
 
 Proof: restrict a map to each summand and choose a null homotopy by K-projectivity.
 Evaluation preserves coproducts, so the homotopy components assemble degreewise.

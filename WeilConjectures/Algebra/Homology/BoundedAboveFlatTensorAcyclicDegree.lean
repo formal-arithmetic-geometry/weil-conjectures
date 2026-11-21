@@ -27,7 +27,6 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
 /-- The bounded-above flat tensor argument vanishes in one fixed degree.
 This is the bounded-above case in Stacks Project, Cohomology on Sites,
 Lemma 21.17.8 (Tag 06YQ), proved here by finite-column total comparison.
-(blueprint: lem-pc-bounded-above-flat-tensor-acyclic-degree)
 
 Proof: flip the tensor double complex so its columns are A tensored with a term of P.
 Flatness makes these columns acyclic. Both degreewise upper bounds give uniform bounds

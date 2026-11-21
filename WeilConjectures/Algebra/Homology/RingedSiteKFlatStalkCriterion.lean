@@ -23,7 +23,6 @@ import WeilConjectures.Algebra.Homology.UniversalAcyclicModuleKFlat
 # K-flatness and stalks of a ringed site
 
 Source: Stacks Project, Cohomology on Sites, Tag 0DEN, lemma-check-K-flat-stalks
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -77,7 +76,7 @@ conservative family detects K-flatness. RingedSitePoint fixes the ordinary stalk
 ring, module action and functor on maps by inverse-image operation graphs. Such
 presentations exist for every point, and both assertions hold for every presentation.
 There is no flat-term or boundedness hypothesis, and the family may be empty.
-Source: Stacks 0DEN (auxiliary; not a blueprint node).
+Source: Stacks 0DEN.
 
 Proof:
 1. The exact module stalk functor commutes with signed total tensor. A conservative

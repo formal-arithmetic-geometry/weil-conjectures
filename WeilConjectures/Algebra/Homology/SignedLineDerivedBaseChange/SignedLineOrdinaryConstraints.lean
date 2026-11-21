@@ -159,7 +159,6 @@ private def ordinary_evaluation (L : KFlatFixedTensor.Modules A) :
 
 /-- The unit, reassociation and evaluation of signed powers have their sectionwise formulas.
 Source: Stacks Project, Modules on Sites, Tags 03EK, 03EL and 0FNY.
-(blueprint: lem-pur-signed-line-ordinary-constraints)
 Proof: sheafify the sectionwise tensor unitor and associator. Their naturality follows
 by generation by pure tensors; for a triple tensor, first pass to a cover on which the
 inner section comes from its presheaf tensor. Evaluation is reassociation, the tensor

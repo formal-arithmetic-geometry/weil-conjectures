@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 # Internal Hom from a locally finitely presented module on a site
 
 Source: Stacks Project, Modules on Sites, Tag 0GMZ, restriction and the local reduction
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -160,7 +159,6 @@ end CommRing
 /-- Internal Hom from a locally finitely presented sheaf preserves filtered colimits.
 
 Source: Stacks Project, Modules on Sites, Tag 0GMZ, first paragraph of the proof.
-(auxiliary; not a blueprint node)
 
 Proof: Choose the covering family and finite presentations supplied by finite
 presentation. Slice restriction preserves colimits, and its comparison with internal

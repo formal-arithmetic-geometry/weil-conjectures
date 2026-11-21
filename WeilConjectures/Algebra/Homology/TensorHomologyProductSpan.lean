@@ -22,7 +22,6 @@ import WeilConjectures.CategoryTheory.SplitCategoryNullHomotopy
 # Generation of total homology by product classes
 
 Source: Stacks Project, Varieties, Tag 0BED, `equation-kunneth-on-cech`.
-(blueprint: lem-sc-tensor-homology-product-span)
 -/
 
 @[expose] public section
@@ -74,7 +73,6 @@ set_option backward.isDefEq.respectTransparency false in
 Source: Stacks Project, Varieties, Tag 0BED, `equation-kunneth-on-cech`,
 and the complement and contraction argument of
 `lem-sc-qcoh-cech-total-tensor-iso`, steps 1 and 2.
-(blueprint: lem-sc-tensor-homology-product-span)
 
 Proof: Choose complements H to boundaries inside cycles and C to cycles inside
 each term, for both complexes. The differential identifies C in degree p with

@@ -45,8 +45,7 @@ The inverse monoidal comparison sends c tensor (u tensor q) to
 reindexed tensor, then apply t to its second factor. Tensor induction and the universal
 property of the total-complex coproduct give equality in every degree, hence equality
 of complex maps. The differentials commute because each constituent is a complex map.
-This also works for n=0, zero factors and t=0, and uses no derived model or flatness.
-(blueprint: lem-pc-localized-tensor-comparison-shift-square-transport). -/
+This also works for n=0, zero factors and t=0, and uses no derived model or flatness. -/
 theorem localizedTensorComparison_shift_transport
     (U Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (N : CochainComplex (ModuleCat.{u} C) ℤ) (n : ℤ) :

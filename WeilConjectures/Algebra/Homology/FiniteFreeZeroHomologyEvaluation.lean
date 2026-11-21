@@ -51,7 +51,6 @@ with its action on cycles expressed by two factorization identities.
 
 Source: Stacks Project, Tag 0BQY, proof of Lemma 48.15.4, finite-free Hom calculation;
 Tag 0A8X, the product-component definition of the Hom complex.
-(blueprint: new-v4-finite-free-zero-homology-evaluation).
 
 Proof: Put P = Hom(E,K), with the fixed product projections. Since E has zero
 differentials, P is the product over p of factor complexes

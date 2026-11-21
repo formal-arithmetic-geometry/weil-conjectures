@@ -20,7 +20,6 @@ import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonInheritanceFixe
 /-! # Tensor inheritance for localized cohomology comparisons
 
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), local computation using Tag 0BYJ.
-(blueprint: lem-pc-localized-tensor-comparison-inheritance).
 -/
 
 @[expose] public section
@@ -50,8 +49,7 @@ It contains A and all its shifts by the hypothesis. The shifts of A generate
 D(A), so it contains every U. K-flatness of U and Q makes the displayed total
 complexes compute these derived tensors, and naturality identifies the map
 with the inverse scalar-extension tensorator followed by tensoring t.
-This applies to arbitrary unbounded complexes and to the zero ring.
-(blueprint: lem-pc-localized-tensor-comparison-inheritance). -/
+This applies to arbitrary unbounded complexes and to the zero ring. -/
 theorem localizedTensorComparison_inheritance
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

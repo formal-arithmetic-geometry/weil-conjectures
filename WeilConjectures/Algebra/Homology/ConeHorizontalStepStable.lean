@@ -30,8 +30,7 @@ variable [∀ L : HomologicalComplex₂ C (ComplexShape.up ℕ)
   (ComplexShape.up ℕ), L.HasTotal (ComplexShape.up ℕ)]
 
 /-- Inclusion of a horizontal summand in the integer extension of a total complex.
-It is zero if the total degree is negative. Source: Stacks 012X, first filtration.
-(blueprint: lem-sp-cone-horizontal-step-stable) -/
+It is zero if the total degree is negative. Source: Stacks 012X, first filtration. -/
 noncomputable def coneHorizontalSummand
     (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ))
     (h : ℕ) (n : ℤ) :
@@ -44,8 +43,7 @@ noncomputable def coneHorizontalSummand
   else 0
 
 /-- Source and target summands with horizontal index `h` generate this subobject
-of the cone in degree `n`. Source: Stacks 012X, columnwise cone refinement.
-(blueprint: lem-sp-cone-horizontal-step-stable) -/
+of the cone in degree `n`. Source: Stacks 012X, columnwise cone refinement. -/
 noncomputable def coneHorizontalImage
     {A B : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)}
     (f : A ⟶ B) (h : ℕ) (n : ℤ) :
@@ -63,8 +61,7 @@ noncomputable def coneHorizontalImage
 
 /-- The horizontal tail is the finite sum of the source and target cone summands
 whose horizontal index is at least `p`. The source total degree is `n+1`, so
-indices below `n+2` suffice, also at `n=-1`. Source: Stacks 012X, first filtration.
-(blueprint: lem-sp-cone-horizontal-step-stable) -/
+indices below `n+2` suffice, also at `n=-1`. Source: Stacks 012X, first filtration. -/
 noncomputable def coneHorizontalStep
     {A B : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)}
     (f : A ⟶ B) (p n : ℤ) :
@@ -202,7 +199,6 @@ private theorem coneHorizontalSummand_map_factors
 /-- The cone differential preserves the explicit finite horizontal tails.
 Source: Stacks Project, Homology, Tag 012X, first filtration, and the source/target
 cone decomposition of the parent node, proof step 1.
-(blueprint: lem-sp-cone-horizontal-step-stable)
 
 Proof: the differential on each source summand is minus its total differential,
 plus the map to the target summand in the same horizontal index. The target

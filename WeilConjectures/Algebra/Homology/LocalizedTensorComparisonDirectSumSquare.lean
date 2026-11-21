@@ -19,7 +19,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorColimits
 /-! # Direct-sum square for localized tensor comparisons
 
 Source: Stacks Project, Tags 0DJA(1) and 0BYJ.
-(blueprint: lem-pc-localized-tensor-comparison-direct-sum-square).
 -/
 
 @[expose] public section
@@ -62,8 +61,7 @@ therefore identify the restriction of the comparison for the sum with the
 comparison for that summand. Coproduct extensionality gives the displayed
 square. No K-flatness of Q or of the summands, no flatness of C over A tensor_R B,
 no flatness of N and no flatness of A to C is used. For an empty family
-all sources and targets are zero and the same coproduct argument applies.
-(blueprint: lem-pc-localized-tensor-comparison-direct-sum-square). -/
+all sources and targets are zero and the same coproduct argument applies. -/
 theorem exists_localizedTensorComparison_direct_sum_square
     {I : Type u} (U : I → CochainComplex (ModuleCat.{u} A) ℤ)
     (m : ∀ j, BaseDerivedTensorCohomologyModel R A B (U j ⊗ Q) C)

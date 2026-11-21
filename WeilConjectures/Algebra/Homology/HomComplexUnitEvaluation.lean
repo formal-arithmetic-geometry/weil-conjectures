@@ -14,7 +14,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 /-! # HomComplexUnitEvaluation
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: def-sc-hom-complex-unit-evaluation).
 -/
 
 @[expose] public section
@@ -39,7 +38,6 @@ noncomputable abbrev homComplexUnitFunctor :=
 set_option backward.isDefEq.respectTransparency true in
 /-- Projection to the zero source degree followed by evaluation at one.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: def-sc-hom-complex-unit-evaluation).
 The projection is the specified projection of the actual Hom-complex construction;
 transport the source degree zero along the single-complex isomorphism, then evaluate. -/
 noncomputable def homComplexUnitEvaluation

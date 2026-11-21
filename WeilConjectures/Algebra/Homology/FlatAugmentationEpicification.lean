@@ -22,7 +22,6 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 # Making a bounded flat augmentation termwise epic using identity disks
 
 Source: Stacks Project, Derived Categories, Lemma 06XX, contractible-disk step.
-(blueprint: lem-pc-flat-augmentation-epicification).
 -/
 
 @[expose] public section
@@ -76,7 +75,6 @@ bounded-above complex epic without changing the source up to quasi-isomorphism.
 
 Source: Stacks Project, Derived Categories, Lemma 06XX, final contractible-disk
 addition (https://stacks.math.columbia.edu/tag/06XX), applied in every degree.
-(blueprint: lem-pc-flat-augmentation-epicification).
 
 Proof: Choose a bound N for H. In each degree i <= N choose a flat epic cover
 p_i : P_i -> H^i using a flat cover; put P_i = 0 for i > N. Construct the direct

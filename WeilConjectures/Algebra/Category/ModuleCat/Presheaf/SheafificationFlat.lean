@@ -15,7 +15,6 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 # Sheafification preserves flatness of module presheaves
 
 Source: Stacks Project, Modules on Sites, Lemma 18.28.3, Tag 03ET
-(blueprint: lem-pc-sites-modules-sheafification-flat).
 -/
 
 @[expose] public section
@@ -33,7 +32,7 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
 /-- Sheafification of a flat presheaf of modules is flat. The locally bijective map `α`
 identifies the sheaf of rings underlying `R` with the associated sheaf of `O`; module
 sheafification equips the associated abelian sheaf with its induced module structure.
-Source: Stacks Project, Tag 03ET (blueprint: lem-pc-sites-modules-sheafification-flat).
+Source: Stacks Project, Tag 03ET.
 
 Proof:
 1. Module sheafification `a` and restriction `ι` preserve finite limits, as can be checked

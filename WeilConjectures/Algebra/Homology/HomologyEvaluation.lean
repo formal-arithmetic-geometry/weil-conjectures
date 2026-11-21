@@ -14,8 +14,7 @@ import WeilConjectures.Algebra.Homology.HomologyEvaluationLocalIso
 
 /-! # Homology evaluation and locally split finite free complexes
 
-Source: Stacks Project, Tags 0A8X, 08DH and 0BQY.
-(blueprint: lem-sc-homology-evaluation-formal-complex). -/
+Source: Stacks Project, Tags 0A8X, 08DH and 0BQY. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,7 +29,6 @@ of a degree-zero module. No closed immersion or Koszul regularity enters this le
 Source: Stacks Project, sites-cohomology.tex, section-hom-complexes (0A8X);
 cohomology.tex, section-internal-hom (08DH); duality.tex,
 lemma-regular-ideal-ext (0BQY), zero-differential Hom calculation.
-(blueprint: lem-sc-homology-evaluation-formal-complex).
 
 Proof: Evaluate a degree-n Hom cocycle on a degree-minus-n cycle using the displayed
 product projection. The Hom differential equation says the result is a degree-zero
@@ -73,8 +71,7 @@ theorem exists_homologyEvaluation (X : AlgebraicGeometry.Scheme.{u})
     exact (homologyEvaluation_unique_of_cycle X T J n e e' he h'.1).symm
 
 /-- Homology evaluation, specified uniquely by cycle evaluation and its local calculation.
-Source: Stacks Project, Tags 0A8X and 08DH.
-(blueprint: lem-sc-homology-evaluation-formal-complex). -/
+Source: Stacks Project, Tags 0A8X and 08DH. -/
 noncomputable def homologyEvaluation (X : AlgebraicGeometry.Scheme.{u})
     (T J : CochainComplex X.Modules ℤ) (n : ℤ)
     (hJ : ∀ k : ℤ, k ≠ 0 → IsZero (J.homology k)) :
@@ -83,8 +80,7 @@ noncomputable def homologyEvaluation (X : AlgebraicGeometry.Scheme.{u})
   (exists_homologyEvaluation X T J n hJ).exists.choose
 
 /-- The local perfection assertion for the uniquely specified evaluation map.
-Source: Stacks Project, Tags 0A8X, 08DH and 0BQY.
-(blueprint: lem-sc-homology-evaluation-formal-complex). -/
+Source: Stacks Project, Tags 0A8X, 08DH and 0BQY. -/
 theorem homologyEvaluation_isIso (X : AlgebraicGeometry.Scheme.{u})
     (T J : CochainComplex X.Modules ℤ) (n : ℤ)
     (hJ : ∀ k : ℤ, k ≠ 0 → IsZero (J.homology k))

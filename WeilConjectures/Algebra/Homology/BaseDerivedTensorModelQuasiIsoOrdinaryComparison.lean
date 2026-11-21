@@ -11,7 +11,6 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 /-! # Ordinary counit transport of base-derived tensor models
 
 Source: Stacks Project, More on Algebra, Tags 06Y6 and 08IB.
-(blueprint: lem-pc-base-derived-tensor-model-quasiiso-ordinary-comparison).
 -/
 
 @[expose] public section
@@ -84,8 +83,7 @@ homology factorization maps, and of restriction-of-scalars homology
 isomorphisms now gives the comparison square after substituting comparison_eq.
 Faithfulness of restriction of scalars identifies it as the claimed square
 of A-tensor-R-B-linear maps. No localization or extension to D is used here.
-Source: Stacks Project, Tags 06Y6 and 08IB, perfect.tex equation-bc before Tag 0DJ8.
-(blueprint: lem-pc-base-derived-tensor-model-quasiiso-ordinary-comparison). -/
+Source: Stacks Project, Tags 06Y6 and 08IB, perfect.tex equation-bc before Tag 0DJ8. -/
 theorem exists_baseDerivedTensorModel_quasiIso_ordinary_comparison
     {P G : CochainComplex (ModuleCat.{u} A) ℤ} (s : P ⟶ G) (hs : QuasiIso s)
     (MP : BaseDerivedTensorCohomologyModel R A B P D)

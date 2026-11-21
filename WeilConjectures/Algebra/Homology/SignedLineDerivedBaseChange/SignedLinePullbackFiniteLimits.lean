@@ -72,7 +72,6 @@ variable
 /-- Pullback with invertible structural ring map preserves finite limits.
 Source: Stacks Project, Tags 00X6, 03DA, 03DB and 03EL; step 1 of the
 Powers and duals argument.
-(blueprint: lem-pur-identified-ring-pullback-finite-limits)
 Proof: construct the left exact abelian inverse image using filtered comma
 categories and left exact sheafification. The invertible adjunct of a identifies
 its transported ring with S. Transport scalar multiplication through the
@@ -210,7 +209,6 @@ theorem identified_ring_pullback_presentations
 
 /-- Coefficient-identified module pullback preserves finite limits.
 Source: Stacks Project, Tags 03D2 and 03D3.
-(blueprint: lem-pur-identified-ring-pullback-finite-limits)
 Proof: use the unit-preserving abelian inverse-image presentation. The abelian
 inverse image preserves finite limits, while the module forgetful functor reflects them. -/
 theorem identified_ring_pullback_finiteLimits

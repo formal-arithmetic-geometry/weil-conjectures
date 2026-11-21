@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 # Normalized composition of derived coefficient extensions
 
 Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 0G7E, 06YY and 07A6
-(auxiliary; not a blueprint node).
 
 The scalar-first tensor convention of `changeOfRings` writes the paper's
 `(x ⊗ s) ⊗ t` as `t ⊗ (s ⊗ x)`. All the comparison maps below refer to the
@@ -739,7 +738,6 @@ required to be bounded. Ordinary rings are the specialization to the singleton c
 with the bottom (identity-cover) topology.
 
 Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 0G7E, 06YS, 06YY and 07A6
-(auxiliary; not a blueprint node).
 
 Proof:
 1. Use lem-pur-derived-change-of-rings to present each ordinary extension and its

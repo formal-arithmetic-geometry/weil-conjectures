@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-! # Tor-independent scalar augmentation
 
 Source: Stacks Project, Tag 08IB, final affine calculation; Tags 06Y6 and 06XY.
-(blueprint: lem-pc-tor-independent-scalar-augmentation).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace ModuleCat
 /-- Scalar extension of a K-flat resolution of B is an augmentation quasi-isomorphism
 when A and B are Tor independent over R.
 Source: Stacks Project, Tag 08IB, final affine calculation; Tag 06Y6 and Section 06XY.
-(blueprint: lem-pc-tor-independent-scalar-augmentation).
 
 Proof: Take a functorial K-flat resolution p:P -> A[0]. Apply the existing
 one-term Tor-acyclic tensor lemma to p and B. Its hypothesis is exactly the

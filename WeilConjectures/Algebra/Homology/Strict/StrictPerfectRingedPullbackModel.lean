@@ -191,7 +191,6 @@ import Mathlib.CategoryTheory.Sites.Abelian
 
 Source: Stacks Project, Cohomology on Sites, Tag 08H3, lemma-strictly-perfect-pullback;
 Tag 06YQ and Section derived-pullback, Tag 06YY
-(blueprint: lem-weil-pbc-strict-perfect-ringed-pullback-model).
 
 The finite-free comparison is characterized on all local pure tensors, so its choice
 is uniquely determined. The transported splittings are degreewise, with no assertion

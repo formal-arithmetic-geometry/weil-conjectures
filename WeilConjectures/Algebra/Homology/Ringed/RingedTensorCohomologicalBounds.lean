@@ -91,7 +91,6 @@ import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 077J; the bounds are the
 agent consequence detailed in the DAG proof, not a verbatim assertion of either tag
-(blueprint: lem-weil-pbc-ringed-tensor-cohomological-bounds).
 
 `ringedDerivedScalarExtension` selects the existing universal derived-change-of-rings
 functor. Its ordinary functor is fixed on both objects and maps by that dependency;
@@ -116,7 +115,6 @@ namespace SheafOfModules
 
 /-- The universal derived scalar-extension functor from the recorded K-flat construction.
 Source: Stacks Project, Tag 06YU, using the universal pair of Tag 06YY
-(blueprint: lem-weil-pbc-ringed-tensor-cohomological-bounds).
 The choice is from `derivedChangeOfRingsIndependentCoefficients`: the ordinary tensor
 functor has its objects and maps specified, and the derived pair has the left-derived
 universal property and its canonical counit is invertible on K-flat representatives.
@@ -231,7 +229,6 @@ any lower bound when the cohomology sheaves in the retained range have zero high
 Here `Tor_p(N,S)` is exactly `H^(-p)(F(Q(N[0])))`, and `IsLE` and `IsGE` are the standard
 bounds, equivalent to cohomology vanishing above and below the stated integer.
 Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 077J, agent consequence
-(blueprint: lem-weil-pbc-ringed-tensor-cohomological-bounds).
 
 Proof:
 1. For the upper bound, choose a good upper-truncated representative of M

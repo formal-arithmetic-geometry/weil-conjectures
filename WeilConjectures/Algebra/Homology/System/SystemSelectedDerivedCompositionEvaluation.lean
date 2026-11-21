@@ -39,7 +39,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 /-- Evaluating composition of derived subsequence extensions gives the canonical
 scalar associator at the actual first composite selected index. Source: Zheng 4.1
 and its subsequence extension; Stacks 0FND
-(blueprint: lem-pur-system-selected-derived-composition-evaluation).
 Proof: reindex composite evaluation by t_(r∘s)(m)=t_s(t_r(m)). The right evaluation
 squares paste: selected evaluation respects restriction composition, selected transition
 commutes with restriction, and strict derived transitions compose. Apply evaluation

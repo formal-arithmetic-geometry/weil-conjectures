@@ -16,7 +16,6 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-! # Cohomology under localization of the first coefficient ring
 
 Source: Stacks Project, More on Algebra, Tag 06Y6; perfect.tex, Tag 0DJ8.
-(blueprint: lem-pc-first-localization-cohomology-base-change).
 -/
 
 @[expose] public section
@@ -42,7 +41,6 @@ variable (R A Aq B D : Type u)
 
 /-- Cohomology localizes over the tensor coefficient ring, before further extension to D.
 Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-first-localization-cohomology-base-change).
 
 Proof: take a K-flat R-resolution F of B[0] and compute the balanced derived tensor
 of Q with F. Since F is K-flat over R, it preserves quasi-isomorphisms in Q; no

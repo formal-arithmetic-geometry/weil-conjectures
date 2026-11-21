@@ -24,7 +24,6 @@ namespace LocalizedModule
 set_option linter.unusedVariables false in
 /-- Clearing denominators for degree-zero module restriction maps.
 Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), (1)(h).
-(blueprint: lem-weil-pbc-graded-module-away-clearing-module)
 
 Proof: If g is nilpotent, M_g and its submodule Z_g are zero; choose n = 0 and x = 0.
 Otherwise represent y in Z_g as v/g^n with numerator and denominator of equal degree,

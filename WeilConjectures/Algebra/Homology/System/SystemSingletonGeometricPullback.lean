@@ -160,7 +160,6 @@ public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 
 Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21,
 and the base-change sentence before Lemma 4.10, printed p. 23
-(blueprint: lem-pur-system-singleton-geometric-pullback).
 
 The comparison includes its common flat-term K-flat model, transported tensor generators,
 actual strict transitions, multiplication normalization and lower-singleton square.
@@ -192,7 +191,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
 
 /-- The ordinary underlying-set functor at a coefficient level, used only to express
 transport of the actual semilinear transition. Source: Zheng, Construction 4.1, p. 21;
-Stacks 03D2 (blueprint: lem-pur-system-singleton-geometric-pullback). -/
+Stacks 03D2. -/
 abbrev systemGeometricUnderlying (n : ℕ) :=
   toSheaf (derivedChangeRingIndependentCoefficients J (BY.obj (op n))) ⋙
     sheafCompose J (CategoryTheory.forget AddCommGrpCat.{w})
@@ -202,8 +201,7 @@ set_option genSizeOfSpec false in
 /-- An exact termwise inverse image with its specified underlying transition maps.
 The transition equation fixes the functor on systems, rather than merely specifying
 unrelated level objects. All exactness fields are conclusions of the existence theorem.
-Source: Zheng, Construction 4.1 and the sentence before Lemma 4.10; Stacks 03D2
-(blueprint: lem-pur-system-singleton-geometric-pullback). -/
+Source: Zheng, Construction 4.1 and the sentence before Lemma 4.10; Stacks 03D2 -/
 structure SystemGeometricInverseImageData where
   functor : StrictRingSystem BY ⥤ StrictRingSystem BX
   [additive : functor.Additive]
@@ -228,31 +226,27 @@ attribute [instance] SystemGeometricInverseImageData.additive
 variable {BY BX u I}
 
 /-- The specified level inverse image, retaining the exactness witness in its interface.
-Source: Stacks 03D2 (blueprint: lem-pur-system-singleton-geometric-pullback). -/
+Source: Stacks 03D2. -/
 def SystemGeometricInverseImageData.levelFunctor
     (_F : SystemGeometricInverseImageData BY BX u I) (n : ℕ) := (I n).modules
 
-/-- Additivity of the level inverse image. Source: Stacks 03D2
-(blueprint: lem-pur-system-singleton-geometric-pullback). -/
+/-- Additivity of the level inverse image. Source: Stacks 03D2 -/
 instance SystemGeometricInverseImageData.levelFunctorAdditive
     (F : SystemGeometricInverseImageData BY BX u I) (n : ℕ) :
     (F.levelFunctor n).Additive := F.levelAdditive n
 
-/-- Left exactness of the level inverse image. Source: Stacks 03DA
-(blueprint: lem-pur-system-singleton-geometric-pullback). -/
+/-- Left exactness of the level inverse image. Source: Stacks 03DA -/
 instance SystemGeometricInverseImageData.levelFunctorLimits
     (F : SystemGeometricInverseImageData BY BX u I) (n : ℕ) :
     PreservesFiniteLimits (F.levelFunctor n) := F.levelLimits n
 
-/-- Right exactness of the level inverse image. Source: Stacks 03DB
-(blueprint: lem-pur-system-singleton-geometric-pullback). -/
+/-- Right exactness of the level inverse image. Source: Stacks 03DB -/
 instance SystemGeometricInverseImageData.levelFunctorColimits
     (F : SystemGeometricInverseImageData BY BX u I) (n : ℕ) :
     PreservesFiniteColimits (F.levelFunctor n) := F.levelColimits n
 
 /-- The canonical localization of the termwise evaluation square.
-Source: Zheng, Construction 4.1; Stacks 015F
-(blueprint: lem-pur-system-singleton-geometric-pullback). -/
+Source: Zheng, Construction 4.1; Stacks 015F -/
 def SystemGeometricInverseImageData.derivedEvaluation
     (F : SystemGeometricInverseImageData BY BX u I) (n : ℕ) :
     F.functor.mapDerivedCategory ⋙ derivedSystemEvaluation BX n ≅
@@ -271,15 +265,13 @@ set_option linter.unusedVariables false
 set_option linter.unusedSectionVars false
 
 /-- Multiplication at the selected level of ordinary singleton extension.
-Source: Zheng, Construction 4.1, p. 21
-(blueprint: lem-pur-system-singleton-geometric-pullback). -/
+Source: Zheng, Construction 4.1, p. 21 -/
 def systemSingletonOrdinaryMultiplication (n : ℕ) :
     systemSingleFunctor SY TY BY n ⋙ systemEvaluation BY n ≅ 𝟭 (systemLevel BY n) :=
   systemSingleBelow SY TY BY n (Nat.le_refl n) ≪≫ TY.ordinaryUnit BY n
 
 /-- Multiplication at the selected level of derived singleton extension.
-Source: Zheng, Construction 4.1, p. 21
-(blueprint: lem-pur-system-singleton-geometric-pullback). -/
+Source: Zheng, Construction 4.1, p. 21 -/
 def systemSingletonDerivedMultiplication (n : ℕ) :
     (systemSingleDerivedExtension BY n SY TY).derived ⋙ derivedSystemEvaluation BY n ≅
       𝟭 (DerivedCategory (systemLevel BY n)) :=
@@ -287,8 +279,7 @@ def systemSingletonDerivedMultiplication (n : ℕ) :
 
 /-- The canonical lower-singleton arrow is the transpose of the inverse below-level
 comparison. Its components are the tensor associators below `n`, and zero above `n`.
-Source: Zheng, Construction 4.1, p. 21
-(blueprint: lem-pur-system-singleton-geometric-pullback). -/
+Source: Zheng, Construction 4.1, p. 21 -/
 def systemSingletonLowerMap {n m : ℕ} (h : n ≤ m)
     (P : DerivedCategory (systemLevel BY m)) :
     (systemSingleDerivedExtension BY n SY TY).derived.obj
@@ -302,7 +293,7 @@ This is the full conclusion of the node, including the ordinary representatives 
 canonical scalar comparison used in the lower-singleton square. It is not an unnormalized
 existence assertion about an arbitrary isomorphism.
 Source: Zheng, Construction 4.1 and the sentence before Lemma 4.10, pp. 21 and 23;
-Stacks 03EL and 0G7E (blueprint: lem-pur-system-singleton-geometric-pullback). -/
+Stacks 03EL and 0G7E. -/
 def SystemSingletonGeometricComparisons
     (F : SystemGeometricInverseImageData BY BX u I) : Prop :=
   ∃ (ordinary : ∀ n : ℕ,
@@ -465,7 +456,7 @@ transitions. The source and target sites are small relative to the module univer
 coefficient transitions may be nonflat and the complexes may be unbounded.
 
 Source: Zheng, Construction 4.1, printed p. 21, and the base-change sentence before
-Lemma 4.10, printed p. 23 (blueprint: lem-pur-system-singleton-geometric-pullback).
+Lemma 4.10, printed p. 23.
 
 Proof:
 1. On the ringed sequence site covers are vertical. Tensor, exactness and coproducts

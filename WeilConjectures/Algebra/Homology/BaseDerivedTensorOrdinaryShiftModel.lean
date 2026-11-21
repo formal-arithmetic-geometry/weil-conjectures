@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorCounitShiftSquare
 
 Source: Stacks Project, Tags 06Y6 and 08IB; an explicit shift reduction
 for the tensor inheritance in Tag 0DJA(1).
-(blueprint: lem-pc-base-derived-tensor-ordinary-shift-model).
 -/
 
 @[expose] public section
@@ -135,8 +134,7 @@ At j=i+n, reindexing by j-n=i gives eT. Cancel the ordinary shift isomorphism
 against its inverse to prove the displayed square. No localized shift square is
 asserted. Zero complexes, n=0, nonflat coefficient maps and arbitrary e are
 included: no invertibility of a comparison map and no arbitrary model witness
-is used.
-(blueprint: lem-pc-base-derived-tensor-ordinary-shift-model). -/
+is used. -/
 theorem exists_baseDerivedTensor_ordinary_shift_model
     (K L : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ) (e : L ≅ K⟦-n⟧)
     (mK : BaseDerivedTensorCohomologyModel R A B K C) (i : ℤ) :

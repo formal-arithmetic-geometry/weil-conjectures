@@ -18,13 +18,11 @@ The proof of Conrad's Theorem 2.4
 bring the general case back to the case of a quasi-affine target. This file isolates them;
 neither uses any of Conrad's mathematics.
 
-* `AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_blowup`
-  (blueprint: `lemma:nagata-conrad-blowup-base-change-reduction`): one may base change the
+* `AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_blowup`: one may base change the
   whole situation along a `V`-admissible blow-up `q : X' ⟶ X` without leaving the statement
   of the theorem. The blow-up produced downstairs is the composite blow-up supplied by
   `AlgebraicGeometry.IsAdmissible.exists_comp` (Stacks Project Tag 080L);
-* `AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_isClosedImmersion`
-  (blueprint: `lemma:nagata-conrad-closed-target-reduction`): one may replace the target `Y`
+* `AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_isClosedImmersion`: one may replace the target `Y`
   by a closed subscheme through which the section factors, e.g. by the scheme-theoretic
   image of `U`.
 
@@ -32,7 +30,6 @@ The base-changed section itself is `AlgebraicGeometry.baseChangeSection`, and th
 hypotheses of the theorem are transported along the base change by the lemmas in the
 `AlgebraicGeometry.IsAdmissible` namespace at the end of the file. Density is *not*
 reproved here: it is `AlgebraicGeometry.IsAdmissible.dense_coe_preimage_blowupMap`.
-
 -/
 
 @[expose] public section
@@ -143,8 +140,7 @@ lemma exists_extend_partialSection_of_iso {X' X'' : Scheme.{u}} {f : U.toScheme 
 
 /-! ### Reduction along an admissible blow-up of the base -/
 
-/-- **Base change along an admissible blow-up** (blueprint:
-`lemma:nagata-conrad-blowup-base-change-reduction`). If the conclusion of Conrad's Theorem
+/-- **Base change along an admissible blow-up**. If the conclusion of Conrad's Theorem
 2.4 holds for the data base changed along a `V`-admissible blow-up `π` of `X` — that is, for
 the projection `pullback.fst π p` and the section `AlgebraicGeometry.baseChangeSection` — then
 it holds for the original data.
@@ -217,8 +213,7 @@ theorem exists_isAdmissible_extend_partialSection_of_blowup
 
 /-! ### Reduction to a closed subscheme of the target -/
 
-/-- **Reduction to a closed subscheme of the target** (blueprint:
-`lemma:nagata-conrad-closed-target-reduction`). A quasi-domination extending `f` into a
+/-- **Reduction to a closed subscheme of the target**. A quasi-domination extending `f` into a
 closed subscheme `Y'` of `Y` is one into `Y`: the graph of the former is the preimage of the
 graph of the latter under the closed immersion `Y' ↪ Y`. -/
 theorem exists_isAdmissible_extend_partialSection_of_isClosedImmersion {Y' : Scheme.{u}}

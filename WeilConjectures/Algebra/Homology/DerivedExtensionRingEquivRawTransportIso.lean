@@ -160,8 +160,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
 /-- Existence of the transported derived-functor isomorphism, before its counit equation.
 Source: Stacks Project, Tag 06Y6.
-The proof uses uniqueness of left derived functors after transport through ring equivalences.
-(blueprint: lem-pc-derived-extension-ring-equiv-raw-transport-iso). -/
+The proof uses uniqueness of left derived functors after transport through ring equivalences. -/
 theorem exists_raw_transport_iso
     {R₀ B₀ R B : Type u}
     [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]

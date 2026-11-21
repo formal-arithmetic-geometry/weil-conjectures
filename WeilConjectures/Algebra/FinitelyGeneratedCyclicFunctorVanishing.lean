@@ -17,7 +17,6 @@ import Mathlib.GroupTheory.FiniteAbelian.Basic
 
 Source: Mathlib.GroupTheory.FiniteAbelian.Basic, the structure theorem, and the
 cyclic-decomposition step of the constant-coefficient reduction in Stacks Tag 0F08.
-(blueprint: lem-sbc-fg-cyclic-functor-vanishing)
 -/
 
 @[expose] public section
@@ -61,7 +60,6 @@ if it vanishes on the cyclic modules of every order dividing d.
 
 Source: AddCommGroup.equiv_free_prod_directSum_zmod, Mathlib/GroupTheory/FiniteAbelian/Basic,
 and the cyclic-decomposition argument in Stacks Tag 0F08.
-(blueprint: lem-sbc-fg-cyclic-functor-vanishing)
 
 Proof: Apply the structure theorem to the additive group of M. Each torsion factor
 Z/e is killed by d, so evaluating d on its generator gives e dividing d. A nonempty

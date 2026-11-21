@@ -151,7 +151,7 @@ variable [(𝓦).IsMonoidal]
 /-- The monoidal category structure on sheaves of modules over `R`, obtained by localizing the
 monoidal category structure on presheaves of modules. The tensor product `M ⊗ N` is the
 sheafification of the sectionwise tensor product, see
-`SheafOfModules.tensorObjIsoSheafification`. (blueprint: `def-pur-sheaf-tensor-product`) -/
+`SheafOfModules.tensorObjIsoSheafification`. -/
 @[instance_reducible]
 noncomputable def monoidalCategory : MonoidalCategory (SheafOfModules.{u} 𝓡) :=
   inferInstanceAs (MonoidalCategory (LocalizedMonoidal
@@ -188,7 +188,6 @@ sheafification adjunction and `μ` for the tensorator of the monoidal functor `a
 ```
   M ⊗ N ──ε⁻¹ ⊗ ε⁻¹──▶ a(M.val) ⊗ a(N.val) ──μ──▶ a(M.val ⊗ N.val)
 ```
-(blueprint: `def-pur-sheaf-tensor-product`)
 -/
 noncomputable def tensorObjIsoSheafification (M N : SheafOfModules.{u} 𝓡) :
     M ⊗ N ≅ (𝓢).obj

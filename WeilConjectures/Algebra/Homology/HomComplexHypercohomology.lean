@@ -20,7 +20,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 # Hypercohomology of a sheaf Hom complex with K-injective target
 
 Source: Stacks Project, Tags 08JA, 0A95, and 0A96.
-(blueprint: lem-pur-hom-complex-hypercohomology)
 -/
 
 @[expose] public section
@@ -59,7 +58,6 @@ private theorem bijective_precomp_quotient
 homotopy classes, naturally in the source and in any functorial K-injective target.
 
 Source: Stacks Project, Lemma 08JA, using Lemmas 0A95 and 0A96.
-(blueprint: lem-pur-hom-complex-hypercohomology)
 
 Proof: first suppose the source L is K-flat. The sheaf Hom complex Hom(L,I(M))
 is K-injective by Lemma 0A96. The comparison for the right derived global sections

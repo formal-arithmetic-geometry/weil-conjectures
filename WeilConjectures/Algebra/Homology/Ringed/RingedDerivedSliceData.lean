@@ -32,7 +32,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
 Source: Stacks Project, algebraization.tex, Tag 099J; Modules on Sites, Tag 04J0;
 Cohomology on Sites, Tag 07A6
-(blueprint: def-weil-pbc-ringed-slice-derived-data).
 -/
 
 @[expose] public noncomputable section

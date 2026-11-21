@@ -144,7 +144,6 @@ set_option maxRecDepth 4000 in
 
 Source: Stacks Project, Modules on Sites, Tags 03D2, 03DF and 04IF;
 Sites, Tag 0791.
-(blueprint: lem-weil-pbc-representable-slice-module-pullback).
 
 Proof: Write H for the sheafified representable of U. Transport modules from D/U
 through the fibre equivalence Sh(D/U) = Sh(D)/H. The ring becomes the restriction

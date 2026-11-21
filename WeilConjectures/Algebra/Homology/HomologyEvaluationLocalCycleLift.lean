@@ -51,7 +51,6 @@ set_option backward.isDefEq.respectTransparency false in
 -- The differential formula unfolds localized Hom and evaluated kernel structures.
 /-- Every pair of local cycle representatives has a representative in the target cycles.
 Source: Stacks Project, Tag 0A8X, Hom differential formula.
-(blueprint: new-b2-homology-evaluation-local-cycle-lift).
 
 Apply the differential projection formula in degree n to the Hom cocycle, at source
 index -n and target index 1. Evaluation on the given T-cycle kills the precomposition

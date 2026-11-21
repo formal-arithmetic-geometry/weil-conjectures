@@ -18,7 +18,6 @@ import Mathlib.CategoryTheory.Abelian.Exact
 # Homology descent of the canonical localized chain-map comparison
 
 Source: Stacks Project, Tag 0A8X, Hom complexes; Equation 0A8Y (degree zero)
-(blueprint: lem-pur-localized-hom-complex-homology-aux).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ set_option backward.isDefEq.respectTransparency false in
 The component formula is essential: an arbitrary equivalence of sets need not
 respect boundaries.
 Source: Stacks Project, Tag 0A8X (Hom complexes), Equation 0A8Y
-(blueprint: lem-pur-localized-hom-complex-homology-aux).
 
 Proof: identify every degree n section with a family of localized maps using
 the sectionwise product cone of `homComplex_exists`. Under this identification,

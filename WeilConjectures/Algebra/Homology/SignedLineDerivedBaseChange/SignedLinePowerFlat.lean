@@ -70,7 +70,6 @@ private theorem chart_sieve (M : KFlatFixedTensor.Modules A)
 
 /-- Every signed power of a locally trivial line is flat.
 Source: Stacks Project, Modules on Sites, Tags 03EL and 0B8Q.
-(blueprint: lem-pur-signed-line-power-flat)
 Proof: on each given line chart, induction identifies every positive tensor power with
 the unit. Restriction commutes with the specified site tensor. Tensor isomorphisms and
 the right unitor identify the induction step with the unit. These charts give a covering

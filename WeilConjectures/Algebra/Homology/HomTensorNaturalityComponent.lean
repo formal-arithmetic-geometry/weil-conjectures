@@ -36,7 +36,6 @@ set_option synthInstance.maxSize 256 in
 /-- Naturality after one projection of the target Hom complex.
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1 (Tag 0A90),
 functoriality; its proof refers to More on Algebra, Lemma 15.73.1.
-(blueprint: lem-sc-hom-tensor-naturality-component)
 
 Proof: Fix the total source degree `p` and target degree `q = p + n`.
 Use extensionality of sheaf morphisms, then of sections of the internal Hom:

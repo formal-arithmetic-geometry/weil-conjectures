@@ -18,7 +18,6 @@ import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 # Column cokernel of the tensor of two resolutions
 
 Source: Stacks Project, Algebra, Tag 00M3, cokernel computation and functoriality.
-(blueprint: lem-weil-pbc-tensor-resolution-column-cokernel-iso)
 -/
 
 @[expose] public section
@@ -86,7 +85,6 @@ with respect to augmentation-compatible maps of both resolutions.
 
 Source: Stacks Project, Algebra, Tag 00M3, proof, cokernel computation and
 functoriality paragraph.
-(blueprint: lem-weil-pbc-tensor-resolution-column-cokernel-iso)
 
 Proof: Tensor the cokernel cofork Q₁ → Q₀ → N with Pₚ. Tensoring is a left
 adjoint, so the resulting cofork is a cokernel cofork. The evaluated column

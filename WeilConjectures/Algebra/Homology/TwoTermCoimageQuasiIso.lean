@@ -28,7 +28,6 @@ and the cycles maps quasi-isomorphically to the single cohomology object.
 Source: Stacks Project, [Section 010V](https://stacks.math.columbia.edu/tag/010V),
 [Tag 0118](https://stacks.math.columbia.edu/tag/0118), and
 [Remark 08J5](https://stacks.math.columbia.edu/tag/08J5)
-(blueprint: lem-weil-pbc-two-term-coimage-quasiiso).
 
 Proof: away from `q - 1` and `q`, the source has a zero term, hence zero
 cohomology. At `q - 1`, its outgoing differential is mono and its incoming

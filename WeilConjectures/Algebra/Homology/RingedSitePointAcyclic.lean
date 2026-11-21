@@ -49,7 +49,6 @@ private theorem jointlyReflectModules
 /-- A conservative family of topos points detects acyclicity of module complexes,
 including when the family is empty.
 Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0DEN.
-(auxiliary; not a blueprint node)
 
 Proof: exactness of each module inverse image preserves the homology of every
 consecutive triple. Conversely, vanishing of these images of homology makes the map

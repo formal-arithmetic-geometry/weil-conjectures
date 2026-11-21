@@ -14,7 +14,6 @@ import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 # The odd filtration quotient with a specified free endpoint
 
 Source: Stacks Project, Tag 09KP, proof of lemma-resolve.
-(blueprint: lem-pc-derived-total-filtration-cokernel-odd-core)
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ variable (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
 
 /-- Core odd filtration quotient calculation, with a specified endpoint isomorphism.
 Source: Stacks Project, Tag 09KP, proof, alternating two-step column filtration.
-(blueprint: lem-pc-derived-total-filtration-cokernel-odd-core)
 Proof. The canonical full-column map to the odd quotient kills the lower
 piece and commutes with the shifted differential. Descend it through the shifted
 short exact sequence to a map from the shifted third endpoint. This map is

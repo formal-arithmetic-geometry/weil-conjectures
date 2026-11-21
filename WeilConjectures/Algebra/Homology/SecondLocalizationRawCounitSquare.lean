@@ -8,8 +8,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.SecondLocalizationMap
 /-! # Raw cohomological counit square for second localization
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-second-localization-raw-counit-square). -/
+Source: Stacks Project, Tags 06Y6 and 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -171,7 +170,6 @@ set_option backward.defeqAttrib.useBackward true in
 include tRB in
 /-- Flat coefficient extension commutes with the raw derived counits on homology.
 Source: Stacks Project, Tag 06Y6, lemma-derived-base-change; Tag 0DJ8.
-(blueprint: lem-pc-second-localization-raw-counit-square).
 
 Proof: install K.universal and apply leftDerived_fac to the lift defining
 secondLocalizationDerivedMap. Its composite with K.counit is L.counit extended

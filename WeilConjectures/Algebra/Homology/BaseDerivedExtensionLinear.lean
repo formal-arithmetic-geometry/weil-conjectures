@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.BaseDerivedExtensionScalar
 # Linear total derived extension of scalars
 
 Source: Stacks Project, Tag 06Y6, lemma-derived-base-change
-(blueprint: lem-pc-base-derived-extension-linear).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ variable (R : Type uR) (B : Type uB) [CommRing R] [CommRing B]
 
 -- Derived scalar extension is expressed in a common module universe.
 /-- Source: Stacks Project, Tag 06Y6, lemma-derived-base-change
-(blueprint: lem-pc-base-derived-extension-linear).
 
 Proof: Resolve R-complexes by K-flat complexes on the one-point site. Tensor with B
 in degree zero preserves quasi-isomorphisms between K-flat models. Apply the

@@ -28,7 +28,6 @@ namespace HomologicalComplex₂
 quasi-isomorphism, without a bound in the vertical direction.
 
 Source: Stacks Project, Homology, Lemma 12.25.4, and Tag 08C1, first paragraph.
-(blueprint: lem-sc-finite-strip-row-augmentation)
 
 Proof: The degree-zero equalities specify the maps from the single complexes
 uniquely. Their commutation with the horizontal differential, and the commutation

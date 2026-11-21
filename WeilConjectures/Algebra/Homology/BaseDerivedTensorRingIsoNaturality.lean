@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorRingTransport
 /-! # Naturality of the localized tensor counit under ring isomorphisms
 
 Source: Stacks Project, Tag 06Y6, derived change of rings; Tag 0DJ7, equation-bc.
-(blueprint: lem-pc-base-derived-tensor-ring-iso-naturality).
 -/
 
 @[expose] public section
@@ -89,8 +88,7 @@ cycles and homology. Homology naturality at t then cancels the forgetful homolog
 isomorphisms in the transport theorem and gives exactly the displayed square.
 No flatness, boundedness, or invertibility of either comparison is required.
 The proof also applies to zero rings and zero complexes.
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change; Tag 0DJ7, equation-bc.
-(blueprint: lem-pc-base-derived-tensor-ring-iso-naturality). -/
+Source: Stacks Project, Tag 06Y6, lemma-derived-base-change; Tag 0DJ7, equation-bc. -/
 theorem exists_baseDerivedTensor_ringIso_square
     {R A B D R0 A0 B0 D0 : Type u}
     [CommRing R] [CommRing A] [CommRing B] [CommRing D]

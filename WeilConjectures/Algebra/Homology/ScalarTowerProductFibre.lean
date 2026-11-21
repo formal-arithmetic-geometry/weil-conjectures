@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 /-! # Inverting the transition on the fibre of a scalar tower
 
 Source: Stacks Project, Tags 0941 and 0A0E.
-(blueprint: lem-pbc-scalar-tower-product-fibre).
 -/
 
 @[expose] public noncomputable section
@@ -55,7 +54,6 @@ private noncomputable def coneContract (P : CochainComplex A ℤ) (d c e h : P �
 system is a quasi-isomorphism.
 
 Source: Stacks Project, Tags 0941 and 0A0E
-(blueprint: lem-pbc-scalar-tower-product-fibre).
 Proof: let a be the diagonal scalar on the product and b the index shift. They commute.
 The fibre is Cone(-(1-ba))[-1]. Both a and b induce diagonal cone maps. The identity
 minus their composite is nullhomotopic, with off-diagonal homotopy minus the identity
@@ -115,7 +113,6 @@ private theorem scalarTowerProductFibre_quasiIso (P : CochainComplex A ℤ) (μ 
 
 /-- The scalar acts invertibly on the fibre of its own inverse tower.
 Source: Stacks Project, Tags 0941 and 0A0E
-(blueprint: lem-pbc-scalar-tower-product-fibre).
 Proof: the diagonal scalar on the product is scalar multiplication of the identity.
 The induced diagonal cone map is scalar multiplication on the cone, since its two
 components have this value. Its shift is scalar multiplication on the fibre. Apply

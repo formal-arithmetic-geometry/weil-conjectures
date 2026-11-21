@@ -19,7 +19,7 @@ open AlgebraicGeometry.Scheme.ProjectionRestriction
 namespace SheafOfModules.OpenTensorNormalization
 
 /-- A complex isomorphic to a resolving (K-flat, termwise flat) complex is resolving.
-Source: Stacks 06YS (blueprint: lem-sf-finite-restriction-representative-square). -/
+Source: Stacks 06YS. -/
 theorem resolving_prop_of_iso {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     {P Q : CochainComplex (Mod R) ℤ} (a : P ≅ Q) (hQ : resolving R Q) :

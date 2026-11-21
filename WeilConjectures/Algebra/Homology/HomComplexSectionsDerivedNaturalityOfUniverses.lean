@@ -35,7 +35,6 @@ private lemma map_homCongr_naturality_hcs
 /-- The shifted comparison is natural for arbitrary maps of the two arguments.
 The maps `s` and `t` need not be quasi-isomorphisms.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1), and Tag 0A94.
-(auxiliary; not a blueprint node).
 
 Proof: a section of degree `n` is a family of localized maps `L^p → I^(p+n)`.
 The equation `d_I f - (-1)^n f d_L = 0` identifies cocycles with chain maps

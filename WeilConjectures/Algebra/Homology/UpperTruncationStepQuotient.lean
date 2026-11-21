@@ -87,7 +87,6 @@ supported in degrees `q - 1` and `q`, with its induced differential a monomorphi
 Source: Stacks Project, [Tag 0118](https://stacks.math.columbia.edu/tag/0118),
 [Tag 0114](https://stacks.math.columbia.edu/tag/0114), and
 [Remark 08J5](https://stacks.math.columbia.edu/tag/08J5)
-(blueprint: lem-weil-pbc-upper-step-quotient-coordinates).
 
 Proof: the compatibility with the inclusions into `K` determines `i` uniquely,
 since the latter inclusion is mono. Below `q - 1`, identify both truncations

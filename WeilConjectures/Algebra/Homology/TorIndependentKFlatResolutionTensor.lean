@@ -20,7 +20,6 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 
 Source: Stacks Project, More on Algebra, Section 06Y5 and Tag 06Y6;
 Tag 08IB, the Tor-independent affine calculation.
-(blueprint: lem-pc-tor-independent-kflat-resolution-tensor).
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ private noncomputable def tensorScalarIso
 /-- A K-flat resolution over R of the restriction of an A-K-flat complex
 still computes ordinary extension to B if A and B are Tor independent over R.
 Source: Stacks Project, Tags 06Y5, 06Y6 and 08IB.
-(blueprint: lem-pc-tor-independent-kflat-resolution-tensor).
 
 Proof: Resolve B[0] over R by a bounded-above projective complex F with
 augmentation f. The complex A tensor_R F has cohomology E = A tensor_R B in

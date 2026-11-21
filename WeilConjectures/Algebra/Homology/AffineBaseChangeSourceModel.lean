@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 /-! # Source model for the affine derived base-change arrow
 
 Source: Stacks Project, Tag 0DJ8, affine proof and equation-bc.
-(blueprint: lem-pc-affine-base-change-source-model).
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ variable [∀ Y : Scheme.{u},
 canonical module of pullback cohomology. No target K', map phi or target coordinates
 are involved.
 Source: Stacks, Tag 0DJ8, affine proof and its displayed localization identity.
-(blueprint: lem-pc-affine-base-change-source-model).
 
 Proof: represent K by a complex of A-modules using the affine derived equivalence.
 Resolve over A and then over R. The comparison span of

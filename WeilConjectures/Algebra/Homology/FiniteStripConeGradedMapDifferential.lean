@@ -316,7 +316,6 @@ private theorem rowSource_defect_factors
 /-- The surviving diagonal maps commute with the adjacent differentials.
 Source: Stacks Project, Homology, Lemma 12.25.4 (Tag 0133), second-variable variant;
 explicit diagonal quotient argument of lem-sc-finite-strip-cone-filtration, step 3.
-(blueprint: lem-sc-finite-strip-cone-graded-map-differential)
 
 Proof: use the biproduct decomposition of the row cone and check on its source
 and target inclusions. For the target `(n-p,p)` summand, the horizontal total

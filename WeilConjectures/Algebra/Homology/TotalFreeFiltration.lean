@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.TotalFreeFiltrationQuotients
 # A free filtration on a direct-sum total complex
 
 Source: Stacks Project, Tag 09KP, construction of the filtration of the total complex.
-(blueprint: lem-pc-derived-total-free-filtration)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace CochainComplex
 has an exhaustive, degreewise split filtration with free zero-differential quotients.
 Source: Stacks Project, Differential Graded Algebra, Tag 09KP, proof, filtration
 construction, specialized to a ring in degree zero.
-(blueprint: lem-pc-derived-total-free-filtration)
 
 Proof. Choose the split short exact sequence for column `-i` and transport its
 left term to a subcomplex `Uᵢ` of that column using the middle-object isomorphism.

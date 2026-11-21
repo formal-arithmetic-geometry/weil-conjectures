@@ -39,7 +39,6 @@ attribute [local irreducible] Scheme.Modules.restrictFunctor SheafOfModules.over
 
 /-- Composite restriction commutes naturally with internal Hom.
 Source: Stacks Project, Tag 08DL, restriction of internal Hom.
-(blueprint: new-t4-open-over-internal-hom-comparison).
 
 Proof: First use overHomObjIso for V. Transport it through the open-site
 module equivalence using internalHom_overEquiv, then transport along the

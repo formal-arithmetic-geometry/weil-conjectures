@@ -252,7 +252,6 @@ set_option synthInstance.maxSize 256 in
 /-- The iterated Hom differential agrees with the three tensor differential terms
 on one localized pure tensor.
 Source: Stacks Project, Tag 0A90 and the calculation in More on Algebra Tag 0A5Y.
-(blueprint: lem-sc-hom-tensor-differential-summand-pure)
 
 Proof: Apply the degree-(n+1) curry equation to the image of s under the outer
 Hom differential. Expand that differential using its product projection identity.

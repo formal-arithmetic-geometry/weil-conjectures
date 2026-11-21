@@ -34,7 +34,6 @@ with surjective kernel transitions the second induced map is surjective.
 The levelwise maps `α` and `β` are required to commute with the transition maps
 (hypotheses `hα` and `hβ`); without them the statement fails.
 Source: Stacks Project, Algebra Lemma 03CA and Homology Lemma 02N1.
-(blueprint: new-tower-limit-exact-coordinate-maps).
 -/
 theorem tower_limit_exact_of_coordinate_maps
     (R : Type u) [CommRing R]

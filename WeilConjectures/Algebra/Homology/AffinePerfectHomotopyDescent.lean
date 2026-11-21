@@ -20,7 +20,6 @@ import WeilConjectures.Algebra.Homology.AffinePerfectChainMapEqualityDetection
 /-! # Descent of homotopies between affine perfect chain maps
 
 Source: Stacks Project, Tag 09RE, affine case (1).
-(blueprint: lem-pc-affine-perfect-homotopy-descent)
 -/
 
 @[expose] public section
@@ -117,8 +116,7 @@ and their colimits and scalar extensions are canonically identified. Apply the
 partial-order finite-presentation descent theorem to this representative diagram,
 then transport back and choose an upper bound with the requested original index.
 Alternatively its presentation-matrix proof works verbatim with directedness alone,
-using the filtered-ring elementwise criterion, which requires no antisymmetry.
-(blueprint: lem-pc-affine-perfect-homotopy-descent) -/
+using the filtered-ring elementwise criterion, which requires no antisymmetry. -/
 theorem affine_perfect_homotopy_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

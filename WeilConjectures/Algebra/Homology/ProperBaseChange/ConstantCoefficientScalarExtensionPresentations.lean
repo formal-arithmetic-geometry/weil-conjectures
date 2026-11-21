@@ -17,7 +17,6 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedScalar
 /-! # Scalar extension in ringed and fixed-coefficient presentations
 
 Source: Stacks Project, Tags 06YY and 08FZ
-(blueprint: def-weil-pbc-constant-coefficient-scalar-extension).
 
 The original interface is retained; its fixed-coefficient specialization uses the
 existing module-sheaf localization, scalar adjunction and derived tensor.
@@ -29,7 +28,7 @@ universe u
 open CategoryTheory
 namespace SheafOfModules
 /-- The same existing scalar adjunction on the original small pro-etale site.
-Source: Stacks 06YY (blueprint: def-weil-pbc-constant-coefficient-scalar-extension). -/
+Source: Stacks 06YY. -/
 abbrev constantCoefficientProEtaleScalarExtension
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (X : AlgebraicGeometry.Scheme.{u}) :=

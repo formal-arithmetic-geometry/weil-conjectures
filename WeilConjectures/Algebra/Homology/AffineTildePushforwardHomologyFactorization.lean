@@ -16,8 +16,7 @@ import all WeilConjectures.Algebra.Homology.MixedTensorUnderlyingHomology
 
 /-! # Composition of the exact homology comparisons in affine pushforward
 
-Source: Stacks Project, Tags 06Z0 and 0AVW.
-(blueprint: lem-pc-affine-tilde-pushforward-homology-factorization). -/
+Source: Stacks Project, Tags 06Z0 and 0AVW. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -40,7 +39,6 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFu
 
 /-- Inverse homology comparisons compose in the opposite order.
 Source: Mathlib's canonical short-complex homology comparison; Stacks, Tag 06Z0.
-(blueprint: lem-pc-affine-tilde-pushforward-homology-factorization).
 
 Proof: Cancel the forward comparison for the composite functor. Apply the existing
 RingTensorCohomology.mapHomologyIso_hom_comp and cancel the two inverse/forward
@@ -68,7 +66,6 @@ exact tilde homology, the quotient/homology comparison, the ordinary termwise
 comparison and the actual derived unit. No tensor model or derived counit occurs.
 Source: Stacks Project, Tags 06Z0 and 0AVW; definition of the affine pushforward
 cohomology comparison.
-(blueprint: lem-pc-affine-tilde-pushforward-homology-factorization).
 
 Proof: Set F = restrictScalars psi and T = affinePushforwardTilde B. Expand
 affineTildePushforwardCohomologyMap and its comparison-coordinate definition.

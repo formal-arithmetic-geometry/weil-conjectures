@@ -27,8 +27,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 
 /-! # The affine derived edge before choosing module coordinates
 
-Source: Stacks Project, Tags 0AVW and 08D4.
-(blueprint: lem-pc-affine-derived-pushforward-sheaf-edge). -/
+Source: Stacks Project, Tags 0AVW and 08D4. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -115,7 +114,6 @@ exact family of quasi-coherent sheaves. No tilde/Gamma coordinates or ordinary
 comparison isomorphism occur here.
 Source: Stacks Project, Tag 0AVW, proof of lemma-affine-morphism-equivalence,
 and Tag 08D4, lemma-application-nice-K-injective with bound one.
-(blueprint: lem-pc-affine-derived-pushforward-sheaf-edge).
 
 Proof: On the inverse image of an affine open, higher cohomology of a
 quasi-coherent module vanishes. Apply the bound-one truncation calculation of

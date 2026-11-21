@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 /-! # The injective edge of the resolution Hom double complex
 
 Source: Stacks Project, Tag 0954, proof of Lemma 47.8.2.
-(blueprint: lem-sbc-ext-injective-edge-quasi-iso).
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ private theorem yoneda_preservesHomology {R : Type u} [CommRing R]
 
 /-- The injective edge is a quasi-isomorphism.
 Source: Stacks Project, Tag 0954, injective-resolution computation of Ext.
-(blueprint: lem-sbc-ext-injective-edge-quasi-iso).
 
 Proof: the horizontal augmented complex in vertical degree j is
 Hom(X,E^j) → Hom(P,E^j). Injectivity of E^j makes Hom(-,E^j) exact,

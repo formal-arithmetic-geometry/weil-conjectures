@@ -77,7 +77,6 @@ private lemma cycles_projection_epi (K : CochainComplex C ℤ) (a t : ℤ) (hat 
 /-- The lower truncation projection remains degreewise epic after an upper
 truncation whose endpoint is at least the lower endpoint.
 Source: Stacks Project, Homology Tag 0118 (homology-section-truncations).
-(blueprint: lem-sp-vertical-cutoff-comparison-epi)
 
 Proof: above t the target is zero. Below t the upper truncation inclusions
 are invertible, and naturality identifies the map with the epic lower

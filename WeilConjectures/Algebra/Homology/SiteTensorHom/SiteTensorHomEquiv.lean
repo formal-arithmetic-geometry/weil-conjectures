@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 Source: Stacks Project, Modules on Sites, Tag 03EO. The two module universes agree,
 while the site and coefficient universes remain independent.
-(blueprint: lem-sf-site-tensor-hom-equiv).
 -/
 
 @[expose] public section
@@ -31,7 +30,7 @@ local notation "PMod" => PresheafOfModules.{max a b m} (R ⋙ forget₂ CommRing
 variable {P M N : PMod}
 
 /-- Curry a bilinear map after restricting its first argument to each further slice.
-Source: Stacks 03EO (blueprint: lem-sf-site-tensor-hom-equiv). -/
+Source: Stacks 03EO. -/
 noncomputable def curryApp (φ : siteTensorPresheaf P M ⟶ N) {U : C}
     (p : P.obj (op U)) :
     (PresheafOfModules.restrictOver R U).obj M ⟶
@@ -54,7 +53,7 @@ noncomputable def curryApp (φ : siteTensorPresheaf P M ⟶ N) {U : C}
     rw [← P.map_comp_apply, ← op_comp, Over.w]
 
 /-- Currying is linear in the first section and commutes with restriction.
-Source: Stacks 03EO (blueprint: lem-sf-site-tensor-hom-equiv). -/
+Source: Stacks 03EO. -/
 noncomputable def curry (φ : siteTensorPresheaf P M ⟶ N) :
     P ⟶ PresheafOfModules.homObj M N where
   app U := ModuleCat.ofHom (X := P.obj U)
@@ -105,7 +104,7 @@ noncomputable def curry (φ : siteTensorPresheaf P M ⟶ N) :
     rfl
 
 /-- Evaluation on the identity slice is bilinear.
-Source: Stacks 03EO (blueprint: lem-sf-site-tensor-hom-equiv). -/
+Source: Stacks 03EO. -/
 noncomputable def evalId (M N : PMod) (U : C) :
     (PresheafOfModules.homObj M N).obj (op U) →ₗ[R.obj (op U)]
       M.obj (op U) →ₗ[R.obj (op U)] N.obj (op U) where
@@ -118,7 +117,7 @@ noncomputable def evalId (M N : PMod) (U : C) :
     simp
 
 /-- Uncurry by evaluating a slice homomorphism on the identity slice.
-Source: Stacks 03EO (blueprint: lem-sf-site-tensor-hom-equiv). -/
+Source: Stacks 03EO. -/
 noncomputable def uncurry (ψ : P ⟶ PresheafOfModules.homObj M N) :
     siteTensorPresheaf P M ⟶ N where
   app U := ModuleCat.ofHom (TensorProduct.lift
@@ -138,8 +137,7 @@ noncomputable def uncurry (ψ : P ⟶ PresheafOfModules.homObj M N) :
 /-- The sectionwise tensor–slice-Hom bijection.
 Source: Stacks 03EO. Its inverse evaluates on the identity slice. Restriction
 naturality identifies evaluation on every other slice with the restriction of
-that evaluation, proving the second inverse identity. Pure tensors prove the first
-(blueprint: lem-sf-site-tensor-hom-equiv). -/
+that evaluation, proving the second inverse identity. Pure tensors prove the first -/
 noncomputable def presheafEquiv (P M N : PMod) :
     (siteTensorPresheaf P M ⟶ N) ≃ (P ⟶ PresheafOfModules.homObj M N) where
   toFun := curry
@@ -182,8 +180,7 @@ local notation "SMod" => SheafOfModules.{max a b m}
 
 /-- Sheafification followed by sectionwise currying.
 Source: Stacks 03EO. The sheafification adjunction and the presheaf currying
-bijection compose; forgetting sheaf descent is fully faithful
-(blueprint: lem-sf-site-tensor-hom-equiv). -/
+bijection compose; forgetting sheaf descent is fully faithful -/
 noncomputable def equiv (P M N : SMod) :
     ((siteSheafTensorRight M).obj P ⟶ N) ≃ (P ⟶ homObj M N) :=
   ((PresheafOfModules.sheafificationAdjunction (𝟙
@@ -197,8 +194,7 @@ noncomputable def equiv (P M N : SMod) :
 
 /-- The curry formula on every further slice.
 Source: Stacks 03EO. The sheafification Hom bijection precomposes with its unit,
-which is exactly the definition of a local pure tensor
-(blueprint: lem-sf-site-tensor-hom-equiv). -/
+which is exactly the definition of a local pure tensor -/
 theorem equiv_apply (P M N : SMod) (φ : (siteSheafTensorRight M).obj P ⟶ N)
     (U : Cᵒᵖ) (p : P.val.obj U) (W : Over U.unop) (x : M.val.obj (op W.left)) :
     (((equiv P M N φ).val.app U p).app (op W)) x =
@@ -208,8 +204,7 @@ theorem equiv_apply (P M N : SMod) (φ : (siteSheafTensorRight M).obj P ⟶ N)
 
 /-- Currying commutes with precomposition in its first factor.
 Source: Stacks 03EO. Both sides restrict the first section, apply the given
-morphism, and evaluate the same bilinear map
-(blueprint: lem-sf-site-tensor-hom-equiv). -/
+morphism, and evaluate the same bilinear map -/
 theorem equiv_naturality {P P' M N : SMod} (f : P' ⟶ P)
     (φ : (siteSheafTensorRight M).obj P ⟶ N) :
     equiv P' M N ((siteSheafTensorRight M).map f ≫ φ) = f ≫ equiv P M N φ := by

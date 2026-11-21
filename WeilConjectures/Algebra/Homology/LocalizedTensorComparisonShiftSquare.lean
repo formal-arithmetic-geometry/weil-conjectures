@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonShiftSquareTran
 /-! # Shift square for localized tensor comparison
 
 Source: Stacks Project, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-localized-tensor-comparison-shift-square).
 -/
 
 @[expose] public section
@@ -61,8 +60,7 @@ The counit shift compatibility gives its derived source square; transposing
 localized_eq through the scalar adjunction gives the displayed conjugacy.
 The first-variable tensor shift involves no extra signs. For n=0
 use identity reindexing; zero complexes and arbitrary t are included. Neither
-flatness of C nor K-flatness of U or Q is used by this transport statement.
-(blueprint: lem-pc-localized-tensor-comparison-shift-square). -/
+flatness of C nor K-flatness of U or Q is used by this transport statement. -/
 theorem exists_localizedTensorComparison_shift_square
     (U : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ)
     (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C) (i : ℤ) :

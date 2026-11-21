@@ -30,7 +30,6 @@ namespace ModuleCat
 /-- Filtered colimits of module complexes commute with homology.
 Source: Stacks Project, Tag 0954, proof of Lemma 47.8.2, passage of the
 filtered colimit through cohomology.
-(blueprint: lem-sbc-filtered-colimit-cochain-homology).
 
 Proof: Colimits of module complexes are computed in every degree. Filtered
 colimits of modules are exact: a finite equation holds in a filtered colimit

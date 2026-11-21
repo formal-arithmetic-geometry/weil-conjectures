@@ -22,7 +22,6 @@ natural isomorphism `(M_{f x}) ⊗_ρ 𝒪_{X,x} ≅ (𝒪_X ⊗_{f⁻¹𝒪_Y} 
 (`CochainComplex.tensorPullbackStalkComplexIso`).
 
 Source: Stacks Project, Sheaves, Tag 0098; Cohomology, Tag 06YC.
-(blueprint: lem-pc-tensor-pullback-stalk-complex)
 -/
 
 @[expose] public section
@@ -123,7 +122,6 @@ variable (X Y : RingedSpace.{u}) (f : X.carrier ⟶ Y.carrier)
 the stalk of `P` at `x` is the extension of scalars of the stalk of `K` at `f x` along the
 canonical ring map `RingedSpace.tensorPullbackStalkRingHom`.
 Source: Stacks Project, Sheaves, Tag 0098; Cohomology, Tag 06YC, stalk comparison.
-(blueprint: lem-pc-tensor-pullback-stalk-complex)
 
 Proof: at `x`, the natural inverse-image stalk isomorphisms identify the source
 ring and module stalks with those at `f x`. Their formulas on adjunction-unit germs,

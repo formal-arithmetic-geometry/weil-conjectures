@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.SheafRingDerivedHomComparison
 
 Source: Stacks Project, Cohomology on Sites, Tag 07A6; Derived Categories,
 Tags 0FND and 09T5; Modules on Sites, Tags 03D7 and 03DA
-(auxiliary; not a blueprint node).
 
 The left derived pair is the pair supplied by derived change of rings. We quantify over
 its presentation rather than choosing a second derived functor. The localization used below
@@ -115,7 +114,6 @@ identity is the counit formula whenever the localized `g` is invertible, equival
 when `g` is a quasi-isomorphism. Quantifying over homotopy maps includes every chain map.
 
 Source: Stacks Project, Tags 07A6, 0FND, 09T5, 03D7 and 03DA
-(auxiliary; not a blueprint node).
 
 Proof:
 1. The ringed-topos module adjunction on the identity topos gives the ordinary adjunction.

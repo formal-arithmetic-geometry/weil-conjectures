@@ -18,7 +18,6 @@ import WeilConjectures.Algebra.FiniteTensorVanishingColimit
 
 Source: Stacks Project, Algebra, Lemma 10.127.6 (Tag 05N7), used in Limits,
 Lemma 32.10.2 (Tag 01ZR), affine case
-(blueprint: lem-pc-fp-module-map-descent-affine).
 -/
 
 @[expose] public section
@@ -56,8 +55,7 @@ extensionality on their span. The elementwise ring-colimit criterion remains
 needed in the three lower lemmas.
 The module universes are explicitly chosen to contain the ring universe, so that
 stage modules and their scalar extensions lie in the same module category.
-Source: Stacks Project, Algebra, Lemma 10.127.6 (Tag 05N7)
-(blueprint: lem-pc-fp-module-map-descent-affine). -/
+Source: Stacks Project, Algebra, Lemma 10.127.6 (Tag 05N7) -/
 theorem finitePresentation_descent_directedColimit
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat) :

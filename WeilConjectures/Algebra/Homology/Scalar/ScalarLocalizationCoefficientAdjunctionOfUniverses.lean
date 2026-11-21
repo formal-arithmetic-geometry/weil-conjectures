@@ -215,7 +215,6 @@ omit [EssentiallySmall.{r} C] in
 /-- Restriction of scalars is exact, and sheafified sectionwise tensor is its left adjoint,
 with Hom map given by evaluation at the image of `1 ⊗ x`.
 Source: Stacks Project, Modules on Sites, Tags 03CZ, 03DA and 03DB.
-(blueprint: lem-weil-pbc-scalar-localization-coefficient-adjunction-of-universes)
 Proof: The sectionwise extension/restriction Hom equivalence commutes with restriction maps:
 this follows on pure tensors from naturality of the ring morphism. Compose it with the
 module sheafification Hom equivalence to obtain the displayed Hom equivalence. Its

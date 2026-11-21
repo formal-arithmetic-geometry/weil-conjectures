@@ -19,7 +19,6 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 # Bounded-above flat module complexes are K-flat
 
 Source: Stacks Project, More on Algebra, Lemma 15.59.1 (Tag 064K)
-(blueprint: lem-pc-module-bounded-flat-kflat).
 -/
 
 @[expose] public section
@@ -30,7 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
-/-- (blueprint: lem-pc-module-bounded-flat-kflat) Stacks Project, More on Algebra,
+/-- Stacks Project, More on Algebra,
 Lemma 15.59.1 (Tag 064K): a bounded-above cochain complex of flat modules over a
 commutative ring is K-flat. Concretely, tensoring it with every acyclic complex
 and taking the total complex gives an acyclic complex.

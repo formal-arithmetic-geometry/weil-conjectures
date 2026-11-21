@@ -19,7 +19,6 @@ namespace AlgebraicGeometry
 
 /-- The componentwise restriction-stalk maps are natural in the module sheaf.
 Source: Stacks Project, Sheaves Section 6.31, Lemma 6.31.1 (3).
-(blueprint: new-module-restriction-stalk-naturality).
 
 Proof: on a germ represented by a section over an open neighborhood, both
 composites apply the module morphism to that section and then pass to its ambient

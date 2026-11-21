@@ -22,8 +22,7 @@ namespace ModuleCat
 
 /-- The submodule of elements annihilated by some power of `J`, with maps obtained
 by restricting the original linear maps. No object is selected from an existence theorem.
-Source: Stacks Project, Tag 0BJA, the functor defining algebraic local cohomology.
-(blueprint: def-sbc-ideal-power-torsion-functor). -/
+Source: Stacks Project, Tag 0BJA, the functor defining algebraic local cohomology. -/
 def idealPowerTorsion {R : Type u} [CommRing R] (J : Ideal R) :
     ModuleCat.{u} R ⥤ ModuleCat.{u} R where
   obj M := ModuleCat.of R (Ideal.primaryComponent M J)
@@ -37,7 +36,6 @@ def idealPowerTorsion {R : Type u} [CommRing R] (J : Ideal R) :
 
 /-- Restriction to the ideal-power torsion submodules preserves addition of maps.
 Source: Stacks Project, Tag 0BJA.
-(blueprint: def-sbc-ideal-power-torsion-functor).
 Proof: both sides send a torsion element x to f(x)+g(x), and subtype extensionality
 identifies the resulting torsion elements. -/
 instance idealPowerTorsion_additive {R : Type u} [CommRing R] (J : Ideal R) :

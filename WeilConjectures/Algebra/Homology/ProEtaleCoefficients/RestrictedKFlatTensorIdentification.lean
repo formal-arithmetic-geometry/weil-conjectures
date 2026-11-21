@@ -94,7 +94,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 06YT, and
 sites-modules.tex, Tags 03EK and 03CY.
-(blueprint: lem-pe-restricted-kflat-tensor-identification)
 
 The scalar-last complex is specified by its underlying B-linear tensor complex and
 its S-linear swap from the existing scalar-first extension. The pure-tensor equation
@@ -116,12 +115,12 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
 
 /-- Ordinary scalar restriction on the given site.
-Source: Stacks 03DA (blueprint: lem-pe-restricted-kflat-tensor-identification). -/
+Source: Stacks 03DA. -/
 noncomputable abbrev restrictedTensorScalars {A S : Sheaf J CommRingCat.{r}} (v : A ⟶ S) :=
   restrictScalars.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).map v)
 
 /-- The coefficient sheaf as a module over the source ring.
-Source: Stacks 03EK (blueprint: lem-pe-restricted-kflat-tensor-identification). -/
+Source: Stacks 03EK. -/
 noncomputable abbrev restrictedTensorCoefficient
     {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S) :=
   (restrictedTensorScalars φ).obj (unit (derivedChangeRingIndependentCoefficients J S))

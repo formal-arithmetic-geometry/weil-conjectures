@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.FiniteRelationQuotientComparison
 # Descent of a finite relation cokernel
 
 Source: Stacks Project, Algebra, Tag 05N7, proof of (1).
-(blueprint: lem-pc-finite-relation-cokernel-colimit).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ extension is the original cokernel.
 
 Source: Stacks Project, Algebra, Tag 05N7, proof of (1),
 label algebra-lemma-colimit-category-fp-modules.
-(blueprint: lem-pc-finite-relation-cokernel-colimit).
 
 Proof: express q in the standard bases of the two finite free modules. Represent
 its finitely many coefficients at stages and take a common upper bound. The

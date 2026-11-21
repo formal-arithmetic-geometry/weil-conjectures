@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Module.AwayDegreeZeroLift
 # Exactness of the degree-zero part of an away localization
 
 Source: Stacks Project, Constructions, Lemma 01M7 and Algebra, Section 00JM.
-(blueprint: lem-sc-p1-away-degreezero-exact)
 -/
 
 @[expose] public section
@@ -34,7 +33,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 positive homogeneous element, and this exactness transfers along additive chart identifications.
 
 Source: Stacks Project, Constructions, Lemma 01M7, final paragraph; Algebra,
-Section 00JM. (blueprint: lem-sc-p1-away-degreezero-exact)
+Section 00JM.
 
 Proof: If f=0, its powers include zero, so every localized module is zero.
 Injectivity of alpha then makes every A_j zero, proving all three assertions.

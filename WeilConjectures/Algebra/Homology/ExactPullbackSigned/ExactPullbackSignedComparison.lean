@@ -93,7 +93,6 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 06YS, 0G7E and 07A4;
 sites-modules.tex, Tags 05VD and 03EL; derived.tex, Tag 015F;
 more-algebra.tex, Tags 0FNG and 0FNH.
-(blueprint: lem-pur-exact-pullback-signed-comparison).
 
 The tensor and its representative isomorphisms are the published K-flat descent.
 The helper structure records just the normalized associativity and symmetry maps
@@ -129,11 +128,11 @@ local instance (priority := 20000) : J.HasSheafCompose (forget₂ CommRingCat.{r
   inferInstance
 
 /-- Evaluation of the existing K-flat-derived tensor, without changing its data.
-Source: Stacks 06YU (blueprint: lem-pur-exact-pullback-signed-comparison). -/
+Source: Stacks 06YU. -/
 abbrev tensor (A B : DerivedCategory (Modules R)) := ((derivedTensor R).obj A).obj B
 
 /-- The existing derived bifunctor applied to a pair of morphisms.
-Source: Stacks 06YU (blueprint: lem-pur-exact-pullback-signed-comparison). -/
+Source: Stacks 06YU. -/
 def tensorMap {A A' B B' : DerivedCategory (Modules R)} (a : A ⟶ A') (b : B ⟶ B') :
     tensor R A B ⟶ tensor R A' B' :=
   (Functor.uncurry.obj (derivedTensor R)).map (Prod.mkHom a b)

@@ -162,7 +162,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 Source: Stacks Project, Cohomology on Sites, Tags 0940, 0941, 06YY, 07A6;
 Modules on Sites, Tag 03D7; Derived Categories, Tags 09T5 and 0FND.
-(blueprint: lem-coef-sequence-projection-derived-adjunction).
 
 The ordinary functors are characterized by their tensor generators and limit
 projections. The derived adjunction is normalized on every chain map, so localization
@@ -189,12 +188,12 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
 
 /-- The existing module category over the base ring sheaf, with coefficient universe `w`.
-Source: Stacks 03CZ (blueprint: lem-coef-sequence-projection-derived-adjunction). -/
+Source: Stacks 03CZ. -/
 abbrev Modules (A : Sheaf J CommRingCat.{w}) :=
   ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A)
 
 /-- The actual restriction from level `n+1` along its specified structural ring map.
-Source: Stacks 03D7 (blueprint: lem-coef-sequence-projection-derived-adjunction). -/
+Source: Stacks 03D7. -/
 abbrev restriction (A : Sheaf J CommRingCat.{w})
     (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
     (α : (Functor.const ℕᵒᵖ).obj A ⟶ B) (n : ℕ) : systemLevel B n ⥤ Modules A :=
@@ -202,7 +201,7 @@ abbrev restriction (A : Sheaf J CommRingCat.{w})
     (α.app (op n)))
 
 /-- The image of the local tensor `b ⊗ x` in the existing sheafified scalar extension.
-Source: Stacks 03EK (blueprint: lem-coef-sequence-projection-derived-adjunction).
+Source: Stacks 03EK.
 The scalar-first convention is the symmetry of the node's notation `x ⊗ b`. -/
 def tensorSection {A S : Sheaf J CommRingCat.{w}} (φ : A ⟶ S)
     (M : Modules A) (U : Cᵒᵖ) (b : S.obj.obj U) (x : M.val.obj U) :
@@ -595,7 +594,6 @@ private theorem extensionIso_tensor (M : Modules A) (n : ℕ) (U : Cᵒᵖ)
 /-- The sequence projection has the canonical unbounded derived adjunction, its ordinary
 limit direct image, and its simultaneous flat-term K-flat tensor model.
 Source: Stacks 0940/0941, 06YY, 07A6, 03D7, 09T5 and 0FND
-(blueprint: lem-coef-sequence-projection-derived-adjunction).
 
 Proof plan:
 1. Use `strictSystemSequenceEquivalence` (lem-pur-system-ringed-sequence-site).

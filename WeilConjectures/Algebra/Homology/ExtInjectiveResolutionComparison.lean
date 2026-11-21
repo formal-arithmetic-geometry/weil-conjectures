@@ -24,8 +24,7 @@ open CategoryTheory Limits Opposite
 namespace ModuleCat
 
 /-- The complex `Hom(X,K)` as a functor contravariant in the module `X`.
-Source: Stacks Project, Tag 0954, the Hom complexes used to compute local cohomology.
-(blueprint: lem-sbc-ext-injective-resolution-comparison). -/
+Source: Stacks Project, Tag 0954, the Hom complexes used to compute local cohomology. -/
 def homComplexDiagram {R : Type u} [CommRing R]
     (K : CochainComplex (ModuleCat.{u} R) ℕ) :
     (ModuleCat.{u} R)ᵒᵖ ⥤ CochainComplex (ModuleCat.{u} R) ℕ where
@@ -75,7 +74,6 @@ set_option backward.isDefEq.respectTransparency false in
 resolution, naturally in the first argument.
 Source: Stacks Project, Tag 0954, proof of Lemma 47.8.2, the injective-resolution
 computation of the Ext terms.
-(blueprint: lem-sbc-ext-injective-resolution-comparison).
 
 Proof: For a module X, choose a projective resolution P of X. Form the
 first-quadrant double complex Hom(P,E). The augmentation from Hom(P,M)

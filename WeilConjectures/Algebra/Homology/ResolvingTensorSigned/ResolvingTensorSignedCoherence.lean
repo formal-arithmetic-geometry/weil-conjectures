@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4, 06YU and 0FPT;
 more-algebra.tex, section-sign-rules, item-shift-tensor and item-flip-tensor-product.
-(blueprint: lem-pur-resolving-tensor-signed-coherence).
 
 All tensors and representative comparisons are the published K-flat constructions.
 The sole construction below conjugates the specified natural isomorphism by eta.

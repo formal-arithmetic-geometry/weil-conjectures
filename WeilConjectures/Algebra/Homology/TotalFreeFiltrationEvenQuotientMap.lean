@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 # The canonical degree maps into the even column quotient
 
 Source: Stacks Project, Tag 09KP, alternating column filtration.
-(blueprint: lem-pc-derived-total-filtration-even-quotient-map)
 -/
 
 @[expose] public section
@@ -114,7 +113,6 @@ private lemma vertical_eq (j : ℕ) (k l : ℤ)
 
 /-- The canonical degree maps commute with the shifted endpoint differential.
 Source: Stacks Project, Tag 09KP, proof, alternating column filtration.
-(blueprint: lem-pc-derived-total-filtration-even-quotient-map)
 
 Proof. Compose with the inclusion of the odd filtration term into the total
 complex. The total differential of the lower-column map is the sum of a

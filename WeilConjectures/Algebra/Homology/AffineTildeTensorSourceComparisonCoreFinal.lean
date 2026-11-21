@@ -72,7 +72,6 @@ attribute [local irreducible] tilde tilde.functor Functor.mapDerivedCategory
 -- Comparing affine tensor units and counits requires substantial reduction.
 /-- The affine source comparison is normalized by its derived counit.
 Source: Stacks Project, Tags 06Y6, 08DW, 06Z0, 08D4, 08HY and 0AVW.
-(blueprint: lem-pc-affine-tilde-tensor-source-comparison).
 
 Proof: first transport along the supplied defining equality of F0.
 Resolve the R-restriction of M by a termwise flat K-flat complex P.

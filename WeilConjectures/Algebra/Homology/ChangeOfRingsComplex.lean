@@ -11,7 +11,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 # Termwise change of rings of a cochain complex
 
 Source: Stacks Project, Cohomology on Sites, Tag 0G7E, coefficient-change specialization
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -58,7 +57,6 @@ private theorem changeOfRingsHom_comp
   exact Functor.map_comp _ _ _
 
 /-- The changed differentials have cochain shape. Source: Stacks, Tag 0G7E
-(auxiliary; not a blueprint node).
 Proof: outside the shape, K's differential is zero. Sectionwise extension of scalars
 preserves zero, and so does the additive module sheafification functor. -/
 theorem changeOfRingsComplex_shape (i j : ℤ) (h : ¬ (ComplexShape.up ℤ).Rel i j) :
@@ -66,7 +64,6 @@ theorem changeOfRingsComplex_shape (i j : ℤ) (h : ¬ (ComplexShape.up ℤ).Rel
   rw [K.shape i j h, changeOfRingsHom_zero]
 
 /-- The changed differentials square to zero. Source: Stacks, Tag 0G7E
-(auxiliary; not a blueprint node).
 Proof: sectionwise extension of scalars and module sheafification preserve composition
 and zero. Apply these identities to K.d_comp_d i j k. -/
 theorem changeOfRingsComplex_comp (i j k : ℤ) :
@@ -75,7 +72,7 @@ theorem changeOfRingsComplex_comp (i j k : ℤ) :
   rw [← changeOfRingsHom_comp, K.d_comp_d, changeOfRingsHom_zero]
 
 /-- Apply the existing change of rings to every term and differential.
-Source: Stacks, Tag 0G7E (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 0G7E. -/
 noncomputable def changeOfRingsComplex : CochainComplex (SheafOfModules.{max u v}
     ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj S)) ℤ where
   X i := changeOfRings φ (K.X i)

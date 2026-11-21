@@ -12,7 +12,6 @@ import all WeilConjectures.Algebra.Homology.FirstLocalizationMap
 
 /-! Auxiliary interfaces for the second localization isomorphism.
 Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-second-localization-iso-aux)
 -/
 
 @[expose] public section
@@ -364,7 +363,6 @@ private theorem secondLocalization_algebraMap_comp :
 
 /-- The canonical characterized coefficient map exists before proving it invertible.
 Source: Stacks Project, Tag 0DJ8, affine localization identity; Tag 06Y6.
-(blueprint: lem-pc-second-localization-iso-aux-hom)
 
 Proof: naturality of the derived comparison and flat homology comparison,
 together with the model cohomology action compatibility, shows that the
@@ -424,7 +422,6 @@ theorem exists_secondLocalization_hom
 
 /-- A characterized second-localization map is invertible.
 Source: Stacks Project, Tag 0DJ8, affine localization identity; Tag 06Y6.
-(blueprint: lem-pc-second-localization-iso-aux-isIso)
 
 Proof: take a common functorial K-flat resolution of the R-restriction of Q.
 The universal scalar-extension counits are invertible on that resolution.

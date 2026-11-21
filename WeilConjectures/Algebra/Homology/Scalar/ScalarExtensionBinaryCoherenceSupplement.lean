@@ -16,7 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.ScalarExtensionBinaryCoherence
 # Binary scalar-extension comparisons
 
 Source: Stacks Project, Tag 03EK.
-(blueprint: lem-sp-scalar-extension-binary-coherence).
 -/
 
 @[expose] public section
@@ -45,7 +44,7 @@ set_option hygiene false in
 local notation:max "𝒯" N:arg P:arg => (siteSheafTensorRight P).obj N
 
 /-- The unit comparison is multiplication on scalar-extension pure sections.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: the sheafification adjunction sends the comparison back to sectionwise multiplication. -/
 theorem scalarExtensionUnitIso_tmul {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (U : Cᵒᵖ) (s : S.obj.obj U) (a : R.obj.obj U) :
@@ -66,14 +65,14 @@ theorem scalarExtensionUnitIso_tmul {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ 
     exact mul_comm _ _)
 
 /-- The unit comparison is the explicit multiplication construction.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence). -/
+Source: Stacks, Tag 03EK. -/
 noncomputable def ScalarExtensionTensorCore.unitComparison
     {R S : Sheaf J CommRingCat.{u}} {α : R ⟶ S}
     (_e : ScalarExtensionTensorCore R S α) :
     changeOfRingsOfUniverses α (𝒪 R) ≅ 𝒪 S := scalarExtensionUnitIso α
 
 /-- scalarTensor_hom_ext for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -91,7 +90,7 @@ theorem scalarTensor_hom_ext {R : Sheaf J CommRingCat.{u}}
   exact h U x y
 
 /-- scalarTensorTmul_naturality for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -104,7 +103,7 @@ theorem scalarTensorTmul_naturality {R : Sheaf J CommRingCat.{u}} (N P : Mod R)
       (x ⊗ₜ[R.obj.obj U] y)).symm
 
 /-- scalarTensor_first_tmul for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -116,7 +115,7 @@ theorem scalarTensor_first_tmul {R : Sheaf J CommRingCat.{u}}
   scalarSheafification_map_unit (siteTensorHom f.val P.val) U (x ⊗ₜ[R.obj.obj U] y)
 
 /-- scalarTensor_second_tmul for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -130,7 +129,7 @@ theorem scalarTensor_second_tmul {R : Sheaf J CommRingCat.{u}}
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarExtensionSection_add for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -147,7 +146,7 @@ theorem scalarExtensionSection_add
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarExtensionSection_zero for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -161,7 +160,7 @@ theorem scalarExtensionSection_zero
   rw [TensorProduct.tmul_zero, map_zero]
 
 /-- scalarExtension_tensor_hom_ext for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -190,7 +189,7 @@ theorem scalarExtension_tensor_hom_ext {R S : Sheaf J CommRingCat.{u}} (α : R �
   | tmul x y => exact h (op V) (S.obj.map i.op s) x y
 
 /-- scalarTensorTmul_add_first for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -202,7 +201,7 @@ theorem scalarTensorTmul_add_first {R : Sheaf J CommRingCat.{u}} (N P : Mod R)
   rw [TensorProduct.add_tmul, map_add]
 
 /-- scalarTensorTmul_zero_first for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -212,7 +211,7 @@ theorem scalarTensorTmul_zero_first {R : Sheaf J CommRingCat.{u}} (N P : Mod R)
   rw [TensorProduct.zero_tmul, map_zero]
 
 /-- scalarExtension_tensor3_hom_ext for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -257,7 +256,7 @@ variable {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
 include hk
 
 /-- scalarTensorComparison_associator for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -276,7 +275,7 @@ theorem scalarTensorComparison_associator (N P Q : Mod R) :
     hk, scalarTensor_first_tmul, scalarTensor_second_tmul]
 
 /-- scalarTensorComparison_leftUnitor for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -294,7 +293,7 @@ theorem scalarTensorComparison_leftUnitor (N : Mod R) :
   rw [scalarExtensionSection_base_smul, scalarExtensionSection_smul, mul_one]
 
 /-- scalarTensorComparison_rightUnitor for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -312,7 +311,7 @@ theorem scalarTensorComparison_rightUnitor (N : Mod R) :
   rw [scalarExtensionSection_base_smul, scalarExtensionSection_smul, mul_comm]
 
 /-- scalarTensorComparison_natural for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -332,7 +331,7 @@ theorem scalarTensorComparison_natural {N N' P P' : Mod R} (f : N ⟶ N') (g : P
 end Coherence
 
 /-- scalarTensorBinaryInverseApp for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 -/
 noncomputable def scalarTensorBinaryInverseApp {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N P : Mod R) (U : Cᵒᵖ) :
@@ -346,7 +345,7 @@ noncomputable def scalarTensorBinaryInverseApp {R S : Sheaf J CommRingCat.{u}} (
         ((scalarSheafificationUnit (siteTensorPresheaf N.val P.val)).app U)
 
 /-- scalarTensorBinaryInverseApp_tmul for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -367,7 +366,7 @@ theorem scalarTensorBinaryInverseApp_tmul {R S : Sheaf J CommRingCat.{u}} (α : 
   rfl
 
 /-- scalarTensorBinaryRawInverse for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 -/
 noncomputable def scalarTensorBinaryRawInverse {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N P : Mod R) :
@@ -399,7 +398,7 @@ noncomputable def scalarTensorBinaryRawInverse {R S : Sheaf J CommRingCat.{u}} (
           changeOfRingsMap_tmulOfUniverses, map_mul, scalarTensorTmul_naturality]
 
 /-- scalarTensorBinaryDescentIso for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 -/
 noncomputable def scalarTensorBinaryDescentIso {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N P : Mod R) :
@@ -414,7 +413,7 @@ noncomputable def scalarTensorBinaryDescentIso {R S : Sheaf J CommRingCat.{u}} (
       (changeOfRingsOfUniverses α N).val
 
 /-- scalarTensorBinaryDescentIso_hom for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -438,7 +437,7 @@ theorem scalarTensorBinaryDescentIso_hom {R S : Sheaf J CommRingCat.{u}} (α : R
   rfl
 
 /-- scalarTensorBinaryInverse for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 -/
 noncomputable def scalarTensorBinaryInverse {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N P : Mod R) :
@@ -450,7 +449,7 @@ noncomputable def scalarTensorBinaryInverse {R S : Sheaf J CommRingCat.{u}} (α 
         (scalarTensorBinaryRawInverse α N P)
 
 /-- scalarTensorBinaryInverse_tmul for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -485,7 +484,7 @@ theorem scalarTensorBinaryInverse_tmul {R S : Sheaf J CommRingCat.{u}} (α : R �
       (scalarTensorBinaryInverseApp_tmul α N P U s t x y)
 
 /-- scalarTensorTmul_smul_first for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -496,7 +495,7 @@ theorem scalarTensorTmul_smul_first {R : Sheaf J CommRingCat.{u}} (N P : Mod R)
   rw [← TensorProduct.smul_tmul', map_smul]
 
 /-- scalarTensorTmul_smul_second for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -507,7 +506,7 @@ theorem scalarTensorTmul_smul_second {R : Sheaf J CommRingCat.{u}} (N P : Mod R)
   erw [TensorProduct.tmul_smul, map_smul]
 
 /-- scalarTensorBinaryPair for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 -/
 noncomputable def scalarTensorBinaryPair {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N P : Mod R) (U : Cᵒᵖ) :
@@ -541,7 +540,7 @@ noncomputable def scalarTensorBinaryPair {R S : Sheaf J CommRingCat.{u}} (α : R
       ← scalarTensorTmul_smul_second, scalarExtensionSection_smul, mul_one]
 
 /-- scalarTensorBinaryRawForward for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 -/
 noncomputable def scalarTensorBinaryRawForward {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N P : Mod R) :
@@ -570,7 +569,7 @@ noncomputable def scalarTensorBinaryRawForward {R S : Sheaf J CommRingCat.{u}} (
       scalarExtensionSection_naturality, map_one]
 
 /-- scalarTensorBinaryBaseForward for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 -/
 noncomputable def scalarTensorBinaryBaseForward {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N P : Mod R) :
@@ -581,7 +580,7 @@ noncomputable def scalarTensorBinaryBaseForward {R S : Sheaf J CommRingCat.{u}} 
       (scalarTensorBinaryRawForward α N P)
 
 /-- scalarTensorBinaryBaseForward_tmul for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -602,7 +601,7 @@ theorem scalarTensorBinaryBaseForward_tmul {R S : Sheaf J CommRingCat.{u}} (α :
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarTensorBinaryForward for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 -/
 noncomputable def scalarTensorBinaryForward {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N P : Mod R) :
@@ -611,7 +610,7 @@ noncomputable def scalarTensorBinaryForward {R S : Sheaf J CommRingCat.{u}} (α 
   scalarExtensionLift α (𝒯 N P) _ (scalarTensorBinaryBaseForward α N P)
 
 /-- scalarTensorBinaryForward_tmul for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -625,7 +624,7 @@ theorem scalarTensorBinaryForward_tmul {R S : Sheaf J CommRingCat.{u}} (α : R �
   rw [← scalarTensorTmul_smul_first, scalarExtensionSection_smul, mul_one]
 
 /-- scalarTensorBinaryForward_inverse for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -639,7 +638,7 @@ theorem scalarTensorBinaryForward_inverse {R S : Sheaf J CommRingCat.{u}} (α : 
     id_val, PresheafOfModules.id_app, ModuleCat.id_apply]
 
 /-- scalarTensorBinaryInverse_forward for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
 pure-tensor formulas; scalar balancing and the isomorphism identities give the result.
 -/
@@ -690,7 +689,7 @@ theorem scalarTensorBinaryInverse_forward {R S : Sheaf J CommRingCat.{u}} (α : 
       rw [← ht, scalarTensorTmul_smul_second]
 
 /-- scalarTensorBinaryIso for the normalized binary comparison.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
+Source: Stacks, Tag 03EK.
 -/
 noncomputable def scalarTensorBinaryIso {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N P : Mod R) :
@@ -703,7 +702,6 @@ noncomputable def scalarTensorBinaryIso {R S : Sheaf J CommRingCat.{u}} (α : R 
 
 /-- Existence of normalized binary scalar-extension comparisons.
 Source: Stacks Project, Tag 03EK, tensor-product formulas
-(blueprint: lem-sp-scalar-extension-binary-coherence).
 
 Proof: construct the sectionwise associator and the two unitors from the tensor
 universal property, and descend through module sheafification. Their inverses send
@@ -733,7 +731,6 @@ theorem exists_scalarExtensionTensorCore
 
 /-- Scalar extension preserves identity morphisms.
 Source: Stacks Project, Tag 03EK
-(blueprint: lem-sp-scalar-extension-binary-coherence).
 Proof: extension of scalars preserves identities sectionwise, and so does sheafification. -/
 theorem scalarExtension_map_id {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N : Mod R) : changeOfRingsHomOfUniverses α N (𝟙 N) = 𝟙 _ := by
@@ -752,7 +749,6 @@ theorem scalarExtension_map_id {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
 
 /-- Scalar extension preserves composites of module morphisms.
 Source: Stacks Project, Tag 03EK
-(blueprint: lem-sp-scalar-extension-binary-coherence).
 Proof: both extension of scalars on sections and module sheafification are functors. -/
 theorem scalarExtension_map_comp {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     {N P Q : Mod R} (f : N ⟶ P) (g : P ⟶ Q) :
@@ -767,7 +763,6 @@ theorem scalarExtension_map_comp {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
 
 /-- An identity in the second tensor factor induces the identity.
 Source: Stacks Project, Tag 03EK
-(blueprint: lem-sp-scalar-extension-binary-coherence).
 Proof: `id ⊗ id` is the identity sectionwise; sheafification preserves identities. -/
 theorem scalarTensor_second_id {R : Sheaf J CommRingCat.{u}} (N P : Mod R) :
     siteSheafTensorSecondMap N (𝟙 P) = 𝟙 (𝒯 N P) := by
@@ -792,7 +787,6 @@ variable {R S : Sheaf J CommRingCat.{u}} {α : R ⟶ S}
 
 /-- Binary comparison naturality with the right factor fixed.
 Source: Stacks Project, Tag 03EK
-(blueprint: lem-sp-scalar-extension-binary-coherence).
 Proof: specialize bifunctor naturality to an identity in the second factor. -/
 theorem first_natural (e : ScalarExtensionTensorCore R S α)
     {N N' : Mod R} (f : N ⟶ N') (P : Mod R) :
@@ -805,8 +799,7 @@ theorem first_natural (e : ScalarExtensionTensorCore R S α)
     e.tensor_natural f (𝟙 P)
 
 /-- Construct power comparisons recursively from the binary comparison.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-sp-scalar-extension-binary-coherence). -/
+Source: Stacks Project, Tag 03EK -/
 noncomputable def power (e : ScalarExtensionTensorCore R S α) (N : Mod R) :
     ∀ r : ℕ, changeOfRingsOfUniverses α (scalarTensorPower R N r) ≅
       scalarTensorPower S (changeOfRingsOfUniverses α N) r

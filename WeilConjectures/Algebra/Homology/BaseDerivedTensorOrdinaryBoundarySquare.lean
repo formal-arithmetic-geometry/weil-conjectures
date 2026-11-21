@@ -293,8 +293,7 @@ substitute both comparison_eq identities and the displayed formula for s₂,
 and cancel the restriction homology isomorphism. Faithfulness of restriction
 E to B yields the asserted E-linear square. This argument uses only the
 third arrow of T, not distinguishedness or exactness of any ordinary triangle.
-Zero rings, zero complexes and nonflat scalar extensions cause no exception.
-(blueprint: lem-pc-base-derived-tensor-ordinary-boundary-square). -/
+Zero rings, zero complexes and nonflat scalar extensions cause no exception. -/
 theorem baseDerivedTensor_ordinary_boundary_square
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

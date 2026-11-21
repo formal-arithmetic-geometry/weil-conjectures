@@ -32,8 +32,7 @@ variable {KX KU KR KS DX DU DR DS : Type*} [Category KX] [Category KU] [Category
 `QX, QU, QR, QS` are the localizations, `xc, uc, fc, lc` the complex-level realizations,
 pullback and restriction, `x, y, a, b` their localization factorizations, `tXd, tUd` the
 tensor comparisons, `cmp` the ringed tensor comparison, `oP` the open pullback comparison and
-`v` the ordinary open pin. Source: Stacks 07A4 and 0GL1
-(blueprint: lem-sf-finite-restriction-representative-square). -/
+`v` the ordinary open pin. Source: Stacks 07A4 and 0GL1 -/
 theorem representative_square_of_models
     {QX : KX ⥤ DX} {QU : KU ⥤ DU} {QR : KR ⥤ DR} {QS : KS ⥤ DS}
     {fc : KX ⥤ KU} {xc : KX ⥤ KR} {uc : KU ⥤ KS} {lc : KR ⥤ KS}
@@ -171,8 +170,7 @@ theorem representative_square_of_models
 
 /-- The left half of `representative_square_of_models`: the left side followed by the
 cancellable suffix `k` is the transport prefix `tr` followed by the localized chain-level
-left side. Source: Stacks 07A4 and 0GL1
-(blueprint: lem-sf-finite-restriction-representative-square). -/
+left side. Source: Stacks 07A4 and 0GL1 -/
 theorem representative_square_left
     {QX : KX ⥤ DX} {QU : KU ⥤ DU} {QR : KR ⥤ DR} {QS : KS ⥤ DS}
     {fc : KX ⥤ KU} {xc : KX ⥤ KR} {uc : KU ⥤ KS} {lc : KR ⥤ KS}
@@ -253,8 +251,7 @@ theorem representative_suffix_isIso
 
 /-- The right half of `representative_square_of_models`: the right side followed by the
 cancellable suffix `k` is the transport prefix `tr` followed by the localized chain-level
-right side. Source: Stacks 07A4 and 0GL1
-(blueprint: lem-sf-finite-restriction-representative-square). -/
+right side. Source: Stacks 07A4 and 0GL1 -/
 theorem representative_square_right
     {QX : KX ⥤ DX} {QU : KU ⥤ DU} {QR : KR ⥤ DR} {QS : KS ⥤ DS}
     {fc : KX ⥤ KU} {xc : KX ⥤ KR} {uc : KU ⥤ KS} {lc : KR ⥤ KS}

@@ -15,8 +15,7 @@ import WeilConjectures.Algebra.Homology.AffinePushforwardCohomologyEdgeIsIso
 
 /-! # Normalized affine pushforward cohomology
 
-Source: Stacks Project, Tags 0AVW, 08D4 and 0DJ8.
-(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization). -/
+Source: Stacks Project, Tags 0AVW, 08D4 and 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,8 +32,7 @@ namespace AlgebraicGeometry
 
 
 /-- The ordinary affine pushforward comparison, constructed from the tilde unit,
-sections restriction and the tilde counit. Source: Stacks, Tag 01I9.
-(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization). -/
+sections restriction and the tilde counit. Source: Stacks, Tag 01I9. -/
 def affineTildePushforwardComparison (A B : Type u) [CommRing A] [CommRing B]
     (φ : B →+* A) :
     ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅
@@ -84,8 +82,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The actual map from ordinary module cohomology to derived affine pushforward.
-No object or map is chosen from an existence theorem. Source: Stacks, Tags 0AVW and 0DJ8.
-(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization). -/
+No object or map is chosen from an existence theorem. Source: Stacks, Tags 0AVW and 0DJ8. -/
 abbrev affineTildePushforwardCohomologyMap (A B : Type u) [CommRing A] [CommRing B]
     (φ : B →+* A) (C : CochainComplex (ModuleCat.{u} A) ℤ) (i : ℤ) :
     (affinePushforwardTilde B).obj ((ModuleCat.restrictScalars φ).obj (C.homology i)) ⟶
@@ -98,8 +95,7 @@ abbrev affineTildePushforwardCohomologyMap (A B : Type u) [CommRing A] [CommRing
     (affineTildePushforwardComparison A B φ) C i
 
 /-- Coordinates of the cohomology of any tilde representative.
-Source: Stacks Project, Tags 01I9 and 06Z0.
-(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization). -/
+Source: Stacks Project, Tags 01I9 and 06Z0. -/
 abbrev affineTildeRepresentativeCohomologyIso (A : Type u) [CommRing A]
     (C : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : schemeDerivedCategory (Spec (.of A)))
@@ -111,8 +107,7 @@ abbrev affineTildeRepresentativeCohomologyIso (A : Type u) [CommRing A]
   affinePushforwardRepresentativeCohomologyIso A C L t i
 
 /-- The normalization equation for a fixed representative.
-Source: Stacks Project, Tags 0AVW, 08D4 and 0DJ8.
-(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization). -/
+Source: Stacks Project, Tags 0AVW, 08D4 and 0DJ8. -/
 def affineTildePushforwardNormalizationEquation
     (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)
     (d : affineDerivedCohomologyModules A i ⋙
@@ -135,8 +130,7 @@ def affineTildePushforwardNormalizationEquation
 /-- The identity-representative part of affine pushforward normalization.
 Source: Stacks Project, Tags 0AVW, 08D4 and 0DJ8.
 Proof: construct the affine comparison using acyclic pushforward and verify the
-canonical representative by the tilde/Gamma counit and derived unit identities.
-(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization-base). -/
+canonical representative by the tilde/Gamma counit and derived unit identities. -/
 def affineTildePushforwardIdentityNormalization
     (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)
     (d : affineDerivedCohomologyModules A i ⋙
@@ -157,8 +151,7 @@ def affineTildePushforwardIdentityNormalization
 /-- Identity representatives determine the comparison by naturality.
 Source: Stacks Project, Tag 0AVW.
 Proof: transport the identity equation along the representative isomorphism,
-using functoriality of derived pushforward, homology, and the cohomology coordinates.
-(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization-extend). -/
+using functoriality of derived pushforward, homology, and the cohomology coordinates. -/
 theorem affineTildePushforwardCohomologyNormalization_extend
     (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)
     (d : affineDerivedCohomologyModules A i ⋙
@@ -228,8 +221,7 @@ identity makes the preceding ordinary comparison precisely the termwise map
 in affineTildePushforwardCohomologyMap. Its composite with the derived unit
 is thus the coordinate map followed by d. This proves the identity case.
 For t.hom = eqToHom h, eliminate h and use uniqueness of inverses to reduce
-t to the identity isomorphism. No step requires a nonzero ring or a bound on C.
-(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization-base). -/
+t to the identity isomorphism. No step requires a nonzero ring or a bound on C. -/
 theorem affineTildePushforwardCohomologyNormalization_base
     (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) :
     ∃ d : affineDerivedCohomologyModules A i ⋙
@@ -253,7 +245,6 @@ theorem affineTildePushforwardCohomologyNormalization_base
 on all complexes of associated sheaves, and hence on every representative.
 Source: Stacks Project, perfect.tex, Tag 0AVW, proof of
 lemma-affine-morphism-equivalence; Tags 08D4 and 0DJ8, affine cohomology calculation.
-(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization).
 
 Proof: For the affine morphism Spec A to Spec B, higher direct images of
 quasi-coherent modules vanish. Apply the unbounded acyclic-pushforward theorem

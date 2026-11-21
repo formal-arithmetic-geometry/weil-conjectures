@@ -34,7 +34,7 @@ at or below the bound with T of the pullback of F and the next cycles. The cover
 by the pullback projections defines its augmentation and differential.
 
 Source: Stacks Project, Derived Categories, Lemma 05T7 (1), and Cohomology on Sites,
-Lemma 06YS (blueprint: lem-pc-functorial-cycle-pullback-core-stage3).
+Lemma 06YS.
 
 Proof: For degrees above N put E equal to zero. Descend through degrees N-k. Having
 constructed the next two terms, form the kernel of the next differential and its map

@@ -11,7 +11,6 @@ public import WeilConjectures.Algebra.Homology.SixFunctors.SemilinearSliceScalar
 
 The existing coefficient-linear comparison API, separated from its construction.
 Source: Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03CY and 03EK.
-(blueprint: def-sf-slice-scalar-level-comparison-data).
 -/
 
 @[expose] public noncomputable section
@@ -36,7 +35,7 @@ variable (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{max c v r}) (U : C)
   (extension : SliceSystemExtensionPresentation.{c, v, r} B U)
 
 /-- Transport a level comparison along the specified object identifications.
-Source: Stacks 03EK (blueprint: def-sf-slice-scalar-level-comparison-data). -/
+Source: Stacks 03EK. -/
 def sliceScalarComponentHom
     (e : ∀ G n,
       changeOfRings.{v, c, max c v r} (α.app (op n))
@@ -54,8 +53,7 @@ def sliceScalarComponentHom
 
 /-- Levelwise scalar projection formula and its generator equations, prior to assembling
 an isomorphism of strict systems or complexes.
-Source: Stacks 0E8I, 03DI, 03CY and 03EK
-(blueprint: def-sf-slice-scalar-level-comparison-data). -/
+Source: Stacks 0E8I, 03DI, 03CY and 03EK -/
 structure SliceScalarLevelComparison where
   /-- Its coefficient-linear component on the actual sheafified tensor objects. -/
   component : ∀ G n,

@@ -22,7 +22,6 @@ import WeilConjectures.Algebra.Homology.ProperBaseChange.LocalizedModulePullback
 # Localization of ringed-site morphisms without extra covering axioms
 
 Source: Stacks Project, Modules on Sites, Tag 04J0; Sites, Tag 03CF
-(blueprint: lem-weil-pbc-localize-ringed-site-morphism).
 -/
 
 @[expose] public noncomputable section

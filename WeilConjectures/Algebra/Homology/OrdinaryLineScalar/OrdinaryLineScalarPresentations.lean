@@ -126,7 +126,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 
 Source: Stacks Project, Tags 07A4, 0G7E and 0D6D; blueprint main-20261015,
 Tate-twist local freeness, proof (3).
-(blueprint: lem-pur-ordinary-line-scalar-presentations)
 -/
 
 -- After pruning, this module only keeps private declarations.

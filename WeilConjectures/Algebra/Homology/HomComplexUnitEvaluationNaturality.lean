@@ -11,7 +11,6 @@ public import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluation
 /-! # HomComplexUnitEvaluationNaturality
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-unit-evaluation-naturality).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ variable {C : Type u} [SmallCategory C]
 
 /-- Evaluation at one commutes with postcomposition.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-unit-evaluation-naturality).
 Proof: on each localized site both composites send a linear map φ to g(φ(1));
 extensionality of the underlying presheaf morphisms proves the equality. -/
 lemma evaluation_naturality
@@ -41,7 +39,6 @@ lemma evaluation_naturality
 -- Dependent projection and sheaf types require extra elaboration steps.
 /-- Degreewise evaluation at one commutes with a chain map.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-unit-evaluation-naturality).
 
 Proof: specialize the componentwise map identity in `homComplex_exists` to
 the identity on the unit single complex, a chain map f in the target, and source

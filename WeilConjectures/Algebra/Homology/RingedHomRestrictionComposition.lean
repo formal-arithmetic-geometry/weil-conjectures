@@ -9,7 +9,6 @@ public import WeilConjectures.Algebra.Homology.RingedHomRestrictionComparison
 /-! # Composition of augmentation-normalized internal Hom comparisons
 
 Source: Stacks Project, Tags 08J7, 0A95 and 08JB.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -132,7 +131,6 @@ nor compatibility of an independently specified direct comparison.
 
 Source: Stacks Project, Tag 08JB, identity of successive restrictions, with the representative
 calculation of Tags 08J7 and 0A95.
-(auxiliary; not a blueprint node).
 
 Proof: fix a complex L and a K-injective I. Normalize the first comparison on L,I and apply
 G to its equation. The complex F(I) is K-injective, so normalize the second comparison on

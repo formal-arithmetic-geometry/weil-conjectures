@@ -29,8 +29,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ) (m : ℕ)
 
 /-- Reindex the evaluated derived extension along an equality of selected indices.
-Source: Zheng 4.1
-(blueprint: lem-pur-system-selected-derived-evaluation-index). -/
+Source: Zheng 4.1 -/
 def systemSelectedDerivedBelowIndex {i : ℕ} (hi : systemNextSelected r m = i)
     (h : m ≤ r i) :
     (systemSelectedDerivedExtension B r S T).derived ⋙ derivedSystemEvaluation B m ≅
@@ -40,7 +39,6 @@ def systemSelectedDerivedBelowIndex {i : ℕ} (hi : systemNextSelected r m = i)
 
 /-- Reindexing preserves the normalized transpose formula.
 Source: Zheng 4.1
-(blueprint: lem-pur-system-selected-derived-evaluation-index).
 Proof: substitute the index equality; the coefficient inequality proofs are equal by
 proof irrelevance, and the result is the original derived evaluation transpose. -/
 theorem systemSelectedDerivedBelowIndex_transpose {i : ℕ}
@@ -60,7 +58,6 @@ theorem systemSelectedDerivedBelowIndex_transpose {i : ℕ}
 
 /-- The reindexed comparison is the original comparison followed by the object
 transport. Source: equality transport
-(blueprint: lem-pur-system-selected-derived-evaluation-index).
 Proof: substitute the index equality. Both coefficient inequalities coincide by proof
 irrelevance and the object equality becomes reflexivity; the transport is the identity. -/
 theorem systemSelectedDerivedBelowIndex_hom {i : ℕ}

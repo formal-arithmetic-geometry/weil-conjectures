@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorRestrictedRingCompariso
 /-! # Coefficient transport for the ordinary derived tensor comparison
 
 Source: Stacks Project, Tag 06Y6, lemma-derived-base-change.
-(blueprint: lem-pc-base-derived-tensor-ordinary-ring-comparison).
 -/
 
 @[expose] public section
@@ -172,8 +171,7 @@ nor ordinaryToLocalized occurs in this conclusion. Zero rings and zero complexes
 are allowed; no flatness or invertibility of comparisons is used.
 Source: Stacks Project, Tag 06Y6, lemma-derived-base-change, independence of
 choices and derived change of rings; the two-universe formulation uses
-localization uniqueness.
-(blueprint: lem-pc-base-derived-tensor-ordinary-ring-comparison). -/
+localization uniqueness. -/
 theorem exists_baseDerivedTensor_ordinary_ring_comparison
     {R₀ A₀ B₀ C₀ R A B C : Type u}
     [CommRing R₀] [CommRing A₀] [CommRing B₀] [CommRing C₀]

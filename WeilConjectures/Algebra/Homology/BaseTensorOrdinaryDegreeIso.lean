@@ -14,7 +14,6 @@ import Mathlib.RingTheory.IsTensorProduct
 # Degreewise ordinary base tensor comparison
 
 Source: Stacks Project, Tags 00CX, 05G3 and 08IB.
-(blueprint: lem-pc-base-tensor-ordinary-degree-iso).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace ModuleCat
 
 /-- Stacks Project, Tags 00CX and 05G3 (tensor universal property and base change),
 and Tag 08IB (affine comparison).
-(blueprint: lem-pc-base-tensor-ordinary-degree-iso).
 
 Proof: define the forward B-linear map on generators by
 b tensor m ↦ (1 tensor b) tensor m. Define the inverse on double pure tensors by

@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # K-flat tensor transport at independent coefficient universes
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YN and 06YP
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -91,7 +90,7 @@ private theorem tensorRight_additive_reconstruction (N : 𝒜) :
 /-- Tensor in the K-flat second variable preserves quasi-isomorphisms.
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YN and 06YP,
-lemma-K-flat-quasi-isomorphism (auxiliary; not a blueprint node).
+lemma-K-flat-quasi-isomorphism.
 
 Proof: the cone of a quasi-isomorphism is acyclic. By the stated K-flatness its
 termwise total tensor with P is acyclic. The additive tensor bifunctor identifies

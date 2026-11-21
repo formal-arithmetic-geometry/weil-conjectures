@@ -17,7 +17,6 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 Source: Stacks Project, Algebra, Tag 058G, proof of Lazard's theorem, paragraph beginning
 "For the converse, first recall that any module M can be written as the colimit of a
  directed system of finitely presented modules"
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -222,7 +221,6 @@ private def presentationIsColimit (R : Type u) [CommRing R]
 
 /-- Every module is a colimit of a small nonempty directed poset of finitely presented modules.
 Source: Stacks Project, Algebra, Tag 058G, proof of Lazard's theorem
-(auxiliary; not a blueprint node).
 
 The common universe `max u v` accommodates the finite free modules over `R`, their quotients,
 and the index set. The cocone vertex is the canonical universe lift of `M`; this is the same

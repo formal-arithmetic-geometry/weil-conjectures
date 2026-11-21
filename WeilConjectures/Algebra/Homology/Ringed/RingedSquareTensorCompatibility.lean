@@ -93,7 +93,6 @@ import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorMo
 # Tensor compatibility of a ringed square on flat K-flat representatives
 
 Source: Stacks Project, Cohomology on Sites, Tags 07A4, 0D6D and 0E48
-(blueprint: lem-weil-pbc-ringed-square-tensor-compatibility).
 -/
 
 @[expose] public section
@@ -320,8 +319,7 @@ conjugated equality; cancellation proves the asserted derived equality.
 This is only the representative calculation: extension to arbitrary derived objects
 and the mate argument are separate steps.
 Source: Stacks, Cohomology on Sites, Tags 07A4 (pullback and tensor),
-0D6D (composition), and 0E48 (compatibility; verification omitted there)
-(blueprint: lem-weil-pbc-ringed-square-tensor-compatibility). -/
+0D6D (composition), and 0E48 (compatibility; verification omitted there) -/
 theorem ringedSquareTensorCompatibility
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (aY : RingedTensorModel Y) (aX : RingedTensorModel X)

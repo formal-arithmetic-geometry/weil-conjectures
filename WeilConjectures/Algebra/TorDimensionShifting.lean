@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.TorDimensionShiftNatural
 
 Source: blueprint, `theorem-riemann-roch-coherent-serre-duality`, proof; Stacks Project,
 Algebra, proof of Lemma Tag 00S2 and Section Tag 00LY
-(blueprint: lem-sc-p1-tor-dimension-shifting).
 -/
 
 @[expose] public section
@@ -52,7 +51,6 @@ Step 3. If `M` has a projective resolution of length at most two, choose one
 concentrated in degrees 0, 1, and 2. By `def-weil-pbc-tor-modules`, `Tor₃(M,k)`
 is its third homology after tensoring with `k`; the degree-3 and degree-4 terms
 vanish, so this homology is zero. Transport the vanishing across `θ k`.
-(blueprint: lem-sc-p1-tor-dimension-shifting)
 -/
 theorem tor_dimension_shifting
     {S : Type u} [CommRing S] (k : ModuleCat.{u} S)

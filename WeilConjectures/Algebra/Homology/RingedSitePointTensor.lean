@@ -254,7 +254,6 @@ private theorem moduleTensor (s : RingedSitePoint R p) :
 
 /-- Taking a module stalk commutes with the unbounded direct-sum total tensor.
 Source: Stacks Project, Cohomology on Sites, Tag 07A4 and Tag 0DEN.
-(auxiliary; not a blueprint node)
 
 Proof: encode modules over the stalk ring as constant module sheaves on the
 one-object site with bottom topology. The prescribed operation graphs give an

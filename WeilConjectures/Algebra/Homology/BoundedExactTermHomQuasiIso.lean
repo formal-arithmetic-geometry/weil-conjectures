@@ -19,7 +19,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08DM, bounded Hom calculation,
 and Homology, Tag 0117, long exact cohomology sequence.
-(blueprint: lem-pc-bounded-exact-term-hom-quasi-iso).
 -/
 
 @[expose] public section
@@ -212,7 +211,6 @@ variable is arbitrary, and no K-injective resolution or derived category occurs 
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08DM, bounded Hom calculation;
 Homology, Tag 0117, long exact cohomology sequence.
-(blueprint: lem-pc-bounded-exact-term-hom-quasi-iso).
 
 Proof:
 1. Prove the assertion for a source supported in [a,a+d], by induction on the

@@ -28,7 +28,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- Selected derived evaluations intertwine the actual derived transition maps.
 Source: Zheng 4.1; Stacks 015F
-(blueprint: lem-pur-system-derived-subsequence-transition).
 Proof: localization detects equality. On each cochain representative, cancel the
 exact evaluation and restriction factorization isomorphisms. The selected-evaluation
 factorization and transition formulas reduce the result to the same strict transition

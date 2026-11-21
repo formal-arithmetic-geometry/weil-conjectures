@@ -22,7 +22,6 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 Source: Stacks Project, Tag 0B6G, lemma-perfect-proper-perfect-direct-image,
 condition (3); More on Algebra, Tags 066H, 066K and 0655.
-(blueprint: lem-pc-bounded-projective-restriction-tor-amplitude).
 -/
 
 @[expose] public section
@@ -99,7 +98,6 @@ when the regular B-module has Tor dimension at most d over A.
 
 Source: Stacks Project, Tag 0B6G, lemma-perfect-proper-perfect-direct-image,
 condition (3); More on Algebra, Tags 066H, 066K and 0655.
-(blueprint: lem-pc-bounded-projective-restriction-tor-amplitude).
 
 Proof: each projective B-term, restricted to A, inherits B's Tor bound by
 projective_restriction_tor_bound. Reindex its projective A-resolution in degrees

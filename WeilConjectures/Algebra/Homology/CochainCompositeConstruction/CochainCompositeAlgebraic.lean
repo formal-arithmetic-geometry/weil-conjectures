@@ -30,7 +30,6 @@ import all Mathlib.CategoryTheory.Adjunction.Limits
 /-! # Algebraic inverse image of a composite geometric morphism
 
 Source: Stacks Project, Modules on Sites, Tags 03D7 and 0D6D.
-(blueprint: lem-pur-independent-composite-algebraic-image).
 
 Finite-product transport constructs the ring and module structures. The graph
 laws of the two coefficient maps construct the composite coefficient morphism.

@@ -19,7 +19,6 @@ import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 # Ordinary global cohomology of a sheaf Hom complex
 
 Source: Stacks Project, Tag 0A8Z and the global computation in Tag 08JA.
-(blueprint: lem-pur-hom-complex-global-homotopy)
 -/
 
 @[expose] public section
@@ -236,7 +235,6 @@ private lemma externalHomologyIso_naturality
 set_option backward.isDefEq.respectTransparency false in
 /-- Ordinary zeroth cohomology of global cochains is naturally the group of homotopy classes.
 Source: Stacks Project, Tag 0A8Z and Tag 08JA, first global-cochain computation.
-(blueprint: lem-pur-hom-complex-global-homotopy)
 
 Proof: take the projections furnished by `homComplex_projections_exists` once for the
 whole bifunctor. Their product universal property identifies maps from the unit to

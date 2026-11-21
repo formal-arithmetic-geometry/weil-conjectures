@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 Source: Stacks Project, Cohomology on Sites, Tag 06YN and the scalar-change argument
 underlying Tag 06YY; Modules on Sites, Tags 03EK and 03ER.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -50,7 +49,6 @@ private theorem restriction_exact
 /-- Restriction along a flat map of commutative ring sheaves preserves K-flatness of
 possibly unbounded complexes, and preserves flatness of their terms.
 Source: Stacks Project, Tags 06YN, 06YY (scalar-change context), 03EK and 03ER.
-(auxiliary; not a blueprint node).
 
 Proof:
 1. Write U for scalar restriction. Its composite with forgetting to abelian sheaves is

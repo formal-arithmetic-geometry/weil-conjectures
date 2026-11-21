@@ -88,8 +88,7 @@ instance isProper_toSpec_of_finiteType : IsProper (toSpec I) := by
 end FiniteType
 
 /-- **Properness of the affine blow-up**: the blow-up of `Spec A` along a finitely
-generated ideal is proper over `Spec A`.
-(blueprint: `lemma:nagata-affine-blowup-proper`) -/
+generated ideal is proper over `Spec A`. -/
 theorem isProper_toSpec (hI : I.FG) : IsProper (toSpec I) :=
   have := finiteType_reesGrading_zero I hI
   inferInstance

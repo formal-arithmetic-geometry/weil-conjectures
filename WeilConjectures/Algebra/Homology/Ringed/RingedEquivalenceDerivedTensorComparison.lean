@@ -224,7 +224,6 @@ against a module in degree zero. No Tor bound, scalar reduction or slice site is
 Source: Stacks Project, sites-cohomology.tex, definition-K-flat, lemma-K-flat-resolution
 and definition-derived-tor (Tags 06YN, 06YS and 06YU); the exact-equivalence paragraph
 of lem-sf-clopen-preserves-residue-tor.
-(blueprint: lem-sf-ringed-equivalence-derived-tensor-comparison).
 
 Proof: Apply the additive equivalence F termwise to cochain complexes. F and its
 inverse are exact and F preserves coproducts, so the ordinary tensor comparison

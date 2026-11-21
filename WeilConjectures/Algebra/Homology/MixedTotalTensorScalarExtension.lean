@@ -15,7 +15,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 The comparison is at the level of complexes, without derived-category or flatness assumptions.
 Source: Stacks Project, Tag 06Y6, tensor associativity in the proof of derived change of rings.
-(blueprint: new-lem-pc-mixed-total-tensor-scalar-extension).
 -/
 
 @[expose] public section
@@ -216,7 +215,6 @@ private theorem mixedTotalIso_formula
 
 /-- Scalar extension commutes with the mixed total tensor, with its pure-tensor formula.
 Source: Stacks Project, Tag 06Y6, the total-tensor identifications in its proof.
-(blueprint: new-lem-pc-mixed-total-tensor-scalar-extension).
 
 Proof: in bidegree (p,q), the source is Aq tensor_A
 (Q^p tensor_A (A tensor_R F^q)). Reassociate tensors, extend the second factor

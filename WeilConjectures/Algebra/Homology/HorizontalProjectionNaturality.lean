@@ -11,7 +11,6 @@ public import WeilConjectures.Algebra.Homology.ConeHorizontalProjection
 /-! # Naturality of the extended column projection
 
 Source: Stacks Project, Homology, Tag 012X, first horizontal filtration.
-(blueprint: lem-sp-horizontal-projection-naturality)
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ private theorem extendedProjection_naturality
 
 /-- Projection onto a column commutes with a bicomplex morphism.
 Source: Stacks Project, Tag 012X, functorial first-filtration decomposition.
-(blueprint: lem-sp-horizontal-projection-naturality)
 
 Proof: if m < p, both extended column objects are zero and both projections
 are zero. Otherwise conjugate by the canonical extension isomorphisms and

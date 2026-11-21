@@ -25,7 +25,6 @@ for K-flatness: `Tot(Z ⊗ P)` is acyclic for every acyclic `Z`.
 No monoidal coherence of the comparison isomorphism is needed.
 
 Source: Stacks Project, Cohomology on Sites, Tag 06YN
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -42,7 +41,7 @@ variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
 
 /-- An additive equivalence compatible with tensor products carries total tensor complexes of
 cochain complexes to total tensor complexes of their images.
-Source: Stacks Project, Tag 06YN (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 06YN.
 
 Proof: the tensor comparison is a natural transformation between the two bifunctors, and an
 equivalence preserves the coproducts defining the total complexes; the induced comparison of
@@ -73,7 +72,7 @@ theorem nonempty_mapHomologicalComplex_mapBifunctor_tensor_iso
   exact ⟨asIso (HomologicalComplex.mapBifunctorComparison τ (.up ℤ) V W)⟩
 
 /-- Acyclicity is preserved and reflected by an additive equivalence applied termwise.
-Source: Stacks Project, Tag 06YN (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 06YN.
 
 Proof: a faithful exact functor preserves and reflects exactness of each short complex. -/
 theorem acyclic_mapHomologicalComplex_iff_of_isEquivalence [Abelian C] [Abelian D]
@@ -83,7 +82,7 @@ theorem acyclic_mapHomologicalComplex_iff_of_isEquivalence [Abelian C] [Abelian 
     fun h i ↦ (P.sc i).exact_map_iff_of_faithful F |>.2 (h i)⟩
 
 /-- The acyclic tensor test for K-flatness is invariant under isomorphism.
-Source: Stacks Project, Tag 06YN (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 06YN.
 
 Proof: the total tensor complex is functorial in its second variable. -/
 theorem acyclicTensorTest_of_iso [Abelian C] [MonoidalCategory C]
@@ -100,7 +99,7 @@ theorem acyclicTensorTest_of_iso [Abelian C] [MonoidalCategory C]
 
 /-- An additive equivalence compatible with tensor products preserves and reflects the acyclic
 tensor test for K-flatness.
-Source: Stacks Project, Tag 06YN (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 06YN.
 
 Proof: write a test complex of `D` as the image of a test complex of `C` up to the counit.
 The equivalence preserves and reflects acyclicity, and it identifies the image of a total
@@ -141,7 +140,7 @@ theorem acyclicTensorTest_mapHomologicalComplex_iff [Abelian C] [Abelian D]
 
 
 /-- The acyclic tensor test implies K-flatness for the class of quasi-isomorphisms.
-Source: Stacks Project, Tag 06YN (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 06YN.
 
 Proof: in the homotopy category, K-flatness means that tensoring with the complex on either
 side preserves acyclic objects; the braiding exchanges the two sides. -/

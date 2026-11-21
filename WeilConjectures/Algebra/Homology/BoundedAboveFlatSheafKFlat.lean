@@ -18,7 +18,7 @@ import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 # Bounded-above flat complexes on a ringed site are K-flat
 
 Source: Stacks Project, Cohomology on Sites, Lemma 21.17.8 (Tag 06YQ), also used in the
-proof of Lemma 06YS (blueprint: lem-pc-bounded-above-flat-kflat-site).
+proof of Lemma 06YS.
 -/
 
 @[expose] public section
@@ -52,7 +52,7 @@ private lemma acyclic_of_isColimit
     (c.pt.d _ i) (c.pt.d i _)
     (fun j ↦ (c.ι.app j).comm _ _) (fun j ↦ (c.ι.app j).comm _ _)
 
-/-- (blueprint: lem-pc-bounded-above-flat-kflat-site) A bounded-above cochain complex of
+/-- A bounded-above cochain complex of
 flat sheaves of modules over a sheaf of commutative rings on a site is K-flat.
 Source: Stacks Project, Cohomology on Sites, Lemma 21.17.8 (Tag 06YQ), used in Tag 06YS.
 

@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.HomComplexProjections
 
 /-! # Right shifts of the Hom complex
 Source: Stacks Project, Cohomology on Sites, Sections 21.34--21.35.
-(blueprint: lem-pur-hom-complex-shift-right).
 -/
 
 @[expose] public section
@@ -88,7 +87,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- The Hom-complex bifunctor commutes with shifts in its second complex.
 Source: Stacks Project, sites-cohomology.tex, Sections 21.34 and 21.35
 (Tags 0A8X and 08JA).
-(blueprint: lem-pur-hom-complex-shift-right).
 Proof: In degree k both sides are products indexed by p of internal Hom from
 L^p to M^(p+k+n). Use the product universal property and the shift degree
 isomorphisms to identify these products. The inverse uses the inverse degree

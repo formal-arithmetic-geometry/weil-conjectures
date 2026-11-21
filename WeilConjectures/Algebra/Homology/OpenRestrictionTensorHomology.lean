@@ -19,7 +19,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Open restriction of ordinary tensor homology
 
 Source: Stacks Project, Tags 03DH and 01CD, and the local tensor calculation of Tag 0DJQ.
-(blueprint: lem-pc-open-localized-tensor-homology).
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Additivity of the localized tensor; Stacks Project, Tag 01CD.
-(blueprint: lem-pc-open-localized-tensor-homology). -/
+/-- Additivity of the localized tensor; Stacks Project, Tag 01CD. -/
 noncomputable local instance localizedTensorPreadditive
     {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (U : TopologicalSpace.Opens X) :
@@ -61,8 +59,7 @@ The proved mapBifunctorSingle₂Iso identifies tensor with F[0] with termwise te
 on both sites. Compose those chain isomorphisms, take homology, and prepend the inverse
 of ShortComplex.mapHomologyIso for the short complex computing homology in degree i.
 This works for every P, even non-K-flat P, and for empty opens and zero sheaves.
-No comparison of infinite coproducts is needed for this degree-zero second factor.
-(blueprint: lem-pc-open-localized-tensor-homology). -/
+No comparison of infinite coproducts is needed for this degree-zero second factor. -/
 theorem open_localized_tensor_homology_iso
     {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (U : TopologicalSpace.Opens X)

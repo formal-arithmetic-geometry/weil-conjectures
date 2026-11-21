@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.LocalizationDerivedFractions
 /-! # Denominators for localized derived tensor cohomology
 
 Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-first-localization-cohomology-denominators).
 -/
 
 @[expose] public section
@@ -39,7 +38,6 @@ variable (R A Aq B D : Type u)
 
 /-- Every localized cohomology class has a denominator and a pre-localization numerator.
 Source: Stacks Project, Tags 06Y6 and 0DJ8; exactness of localization.
-(blueprint: lem-pc-first-localization-cohomology-denominators).
 
 Proof: resolve B[0] by a K-flat R-complex F and compute with Q tensor_R F.
 Exact extension from A to Aq commutes with the total-complex direct sums and

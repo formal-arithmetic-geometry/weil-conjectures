@@ -12,8 +12,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift
 /-! # The coefficient comparison commutes with a concrete cone boundary
 
 Source: Stacks Project, Tags 06Y6 and 0BYJ; cone summand calculation in the
-parent tensor-comparison argument.
-(blueprint: lem-pc-tensor-coefficient-cone-boundary). -/
+parent tensor-comparison argument. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -40,8 +39,7 @@ same reindexing followed by t, so the projection square commutes.
 Apply homology to this triangle morphism and the naturality of the homology
 shift isomorphism: H(a(P₃)) followed by the target boundary equals the source
 boundary followed by H(a(P₁)) in degree i+1. No flatness, K-flatness or boundedness
-is needed; this also applies to zero maps and zero rings.
-(blueprint: lem-pc-tensor-coefficient-cone-boundary). -/
+is needed; this also applies to zero maps and zero rings. -/
 theorem tensorCoefficient_cone_boundary
     (A C : Type u) [CommRing A] [CommRing C] (ρ : A →+* C)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

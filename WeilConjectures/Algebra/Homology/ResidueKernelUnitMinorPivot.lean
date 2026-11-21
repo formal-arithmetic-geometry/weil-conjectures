@@ -146,7 +146,6 @@ private theorem mulVec_splitCoordinates
 
 /-- Finite free coordinates with an invertible leading block; the off-diagonal blocks
 are unrestricted. Source: Stacks Project, Tags 00O0 and 00NX, unit-minor argument.
-(blueprint: new-residue-kernel-unit-minor-pivot)
 
 Proof: Choose finite bases for the two scalar extensions. Tensor associativity
 identifies reduction of their matrix modulo the maximal ideal of A with the given

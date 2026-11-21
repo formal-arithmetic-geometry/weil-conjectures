@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-! # Bounded flat complexes at independent coefficient universes
 
-Source: Stacks Project, Tag 06YQ.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 06YQ. -/
 
 @[expose] public section
 universe u v w
@@ -63,7 +62,6 @@ theorem flat_to_cat (M : 𝒜) (h : IsFlatOnSite (J := J) (R := R) M) :
 
 /-- A bounded-above complex with flat terms is K-flat at independent universes.
 Source: Stacks Project, Cohomology on Sites, Tag 06YQ.
-(auxiliary; not a blueprint node).
 
 Proof: the site tensor functor is naturally isomorphic to the monoidal tensor
 functor, by the sheafification counit and its monoidal tensor comparison. Thus

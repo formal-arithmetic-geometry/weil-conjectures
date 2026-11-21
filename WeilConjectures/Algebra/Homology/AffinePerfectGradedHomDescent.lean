@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.BoundedGradedMapColimitDescent
 /-! # AffinePerfectGradedHomDescent
 
 Source: Stacks Project, Tags 09RE and 05N7.
-(blueprint: lem-pc-affine-perfect-graded-hom-descent)
 -/
 
 @[expose] public section
@@ -116,8 +115,7 @@ any differential or prescribed chain map is asserted. For a preorder take the
 quotient by mutual comparability, choose representatives, and use the equivalent
 partial-order index category in finite-presentation descent. Ring maps between
 equivalent indices are inverse isomorphisms. Transport back and take an upper
-bound with i. An empty support interval gives the zero family at any stage above i.
-(blueprint: lem-pc-affine-perfect-graded-hom-descent) -/
+bound with i. An empty support interval gives the zero family at any stage above i. -/
 theorem affine_perfect_gradedHom_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

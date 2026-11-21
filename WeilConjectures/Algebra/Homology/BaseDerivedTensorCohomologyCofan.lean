@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Coproducts of universal base-derived tensor cohomology models
 
-Source: Stacks Project, Tags 06Y6, 07D9 and 0DJA(1).
-(blueprint: lem-pc-base-derived-tensor-cohomology-canonical-cofan). -/
+Source: Stacks Project, Tags 06Y6, 07D9 and 0DJA(1). -/
 
 @[expose] public section
 
@@ -79,8 +78,7 @@ isomorphism by leftDerived_ext. Its naturality at s_j, followed by homology
 and the equations hg, identifies the legs after transport through cohomologyIso.
 This makes the B-module cofan colimiting. Restriction from A tensor_R B to B
 preserves colimits and reflects isomorphisms, so it reflects this colimit.
-No nonempty-index assumption, boundedness, or flatness of B is used.
-(blueprint: lem-pc-base-derived-tensor-cohomology-canonical-cofan). -/
+No nonempty-index assumption, boundedness, or flatness of B is used. -/
 theorem baseDerivedTensorCohomology_canonical_cofan
     {I : Type u} (M : I → CochainComplex (ModuleCat.{u} A) ℤ)
     (S : CochainComplex (ModuleCat.{u} A) ℤ) (s : ∀ j, M j ⟶ S)

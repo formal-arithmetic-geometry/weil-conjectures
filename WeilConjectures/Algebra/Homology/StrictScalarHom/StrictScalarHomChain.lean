@@ -95,7 +95,6 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 Source: Stacks Project, sites-modules.tex, Tags 03CZ, 03CY and 03EL;
 sites-cohomology.tex, Tag 0A8X. The extension to the strict chain square and
 coefficient compatibility is the agent argument recorded in the DAG.
-(blueprint: lem-sfb-hom-scalar-chain-identification).
 
 The structures below package the normalized maps and their equations. Their
 simultaneous existence is constructed from the scalar adjunction and the actual
@@ -135,20 +134,20 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [HasWeakSheafify J AddCommGrpCat.{max c v u}]
 
 /-- Transparent notation for the existing unbounded module complexes.
-Source: Stacks 0A8X (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 0A8X. -/
 abbrev Complex (R : Sheaf J CommRingCat.{max c v u}) :=
   CochainComplex (ringedSiteModules.{max c v u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ
 
 /-- Termwise Mathlib restriction of scalars.
-Source: Stacks 03CZ (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 03CZ. -/
 def restriction {R S : Sheaf J CommRingCat.{max c v u}} (φ : R ⟶ S) :
     Complex.{c, v, u} S ⥤ Complex.{c, v, u} R :=
   (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapHomologicalComplex
     (.up ℤ)
 
 /-- The fixed R-module S, obtained by restricting the unit S-module.
-Source: Stacks 03CZ (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 03CZ. -/
 def scalarModule {R S : Sheaf J CommRingCat.{max c v u}} (φ : R ⟶ S) :
     ringedSiteModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) :=
@@ -156,13 +155,13 @@ def scalarModule {R S : Sheaf J CommRingCat.{max c v u}} (φ : R ⟶ S) :
     (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))
 
 /-- The ordinary R-linear tensor S tensor A, applied termwise, using the existing tensor.
-Source: Stacks 03EK (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 03EK. -/
 def tensor {R S : Sheaf J CommRingCat.{max c v u}} (φ : R ⟶ S) :
     Complex.{c, v, u} R ⥤ Complex.{c, v, u} R :=
   (tensorLeft (scalarModule.{c, v, u} φ)).mapHomologicalComplex (.up ℤ)
 
 /-- The sheafification-unit image of s tensor x in the R-linear tensor.
-Source: Stacks 03CY, 03EK (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 03CY, 03EK. -/
 def tensorSection {R S : Sheaf J CommRingCat.{max c v u}} (φ : R ⟶ S)
     (A : Complex.{c, v, u} R) (n : ℤ) (V : Cᵒᵖ) (s : S.obj.obj V) (x : (A.X n).val.obj V) :
     (((tensor.{c, v, u} φ).obj A).X n).val.obj V :=
@@ -171,8 +170,7 @@ def tensorSection {R S : Sheaf J CommRingCat.{max c v u}} (φ : R ⟶ S)
       ((scalarModule.{c, v, u} φ).val ⊗ (A.X n).val)).app V (s ⊗ₜ[R.obj.obj V] x))
 
 /-- Actual local evaluation, using the chosen product projection and slice identity.
-Source: Stacks 0A8X; the convention of def-coef-hom-representative-evaluation
-(blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 0A8X; the convention of def-coef-hom-representative-evaluation -/
 def evaluate {R : Sheaf J CommRingCat.{max c v u}} (P N : Complex.{c, v, u} R)
     (n i k : ℤ) (h : i + n = k) (V : Cᵒᵖ)
     (g : ((homComplex (R := R) P N).X n).val.obj V)
@@ -181,7 +179,7 @@ def evaluate {R : Sheaf J CommRingCat.{max c v u}} (P N : Complex.{c, v, u} R)
     (op (Over.mk (𝟙 V.unop)))).hom x
 
 /-- The existing componentwise action of the actual product Hom bifunctor.
-Source: Stacks 0A8X (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 0A8X. -/
 def homMap {R : Sheaf J CommRingCat.{max c v u}}
     {P P' N N' : Complex.{c, v, u} R} (a : P' ⟶ P) (b : N ⟶ N') :
     homComplex (R := R) P N ⟶ homComplex (R := R) P' N' :=
@@ -189,7 +187,7 @@ def homMap {R : Sheaf J CommRingCat.{max c v u}}
 
 /-- Ordinary scalar extension with its object and map functions pinned to the existing
 sheafification construction. Additivity permits termwise application.
-Source: Stacks 03CZ, 03CY (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 03CZ, 03CY. -/
 structure Extension {R S : Sheaf J CommRingCat.{max c v u}} (φ : R ⟶ S) where
   /-- The ordinary module functor. -/
   functor : ringedSiteModules.{max c v u}
@@ -207,13 +205,13 @@ structure Extension {R S : Sheaf J CommRingCat.{max c v u}} (φ : R ⟶ S) where
 attribute [instance] Extension.additive
 
 /-- The termwise functor associated to ordinary extension.
-Source: Stacks 03CZ, 0A8X (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 03CZ, 0A8X. -/
 def Extension.complex {R S : Sheaf J CommRingCat.{max c v u}} {φ : R ⟶ S}
     (E : Extension.{c, v, u} φ) : Complex.{c, v, u} R ⥤ Complex.{c, v, u} S :=
   E.functor.mapHomologicalComplex (.up ℤ)
 
 /-- Pure sections transported by the explicit object equality, with no arbitrary map.
-Source: Stacks 03CY (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 03CY. -/
 def Extension.section {R S : Sheaf J CommRingCat.{max c v u}} {φ : R ⟶ S}
     (E : Extension.{c, v, u} φ) (A : Complex.{c, v, u} R) (n : ℤ) (V : Cᵒᵖ)
     (s : S.obj.obj V) (x : (A.X n).val.obj V) :
@@ -222,7 +220,7 @@ def Extension.section {R S : Sheaf J CommRingCat.{max c v u}} {φ : R ⟶ S}
     (scalarExtensionSection φ (A.X n) V s x)
 
 /-- The normalization predicate for the S-linear evaluation map.
-Source: Stacks 03CZ, 0A8X (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 03CZ, 0A8X. -/
 def SigmaFormula {R S : Sheaf J CommRingCat.{max c v u}} {φ : R ⟶ S}
     (E : Extension.{c, v, u} φ) (P A : Complex.{c, v, u} R) (N : Complex.{c, v, u} S)
     (q : E.complex.obj A ⟶ N)
@@ -237,8 +235,7 @@ def SigmaFormula {R S : Sheaf J CommRingCat.{max c v u}} {φ : R ⟶ S}
 
 /-- All normalized chain maps for one coefficient morphism, with their strict square
 and input naturality. No boundedness, flatness, or resolution is part of this data.
-Source: Stacks 03CZ, 03CY and 0A8X
-(blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 03CZ, 03CY and 0A8X -/
 structure Data {R S : Sheaf J CommRingCat.{max c v u}} (φ : R ⟶ S) where
   /-- The actual ordinary extension. -/
   extension : Extension.{c, v, u} φ
@@ -315,7 +312,7 @@ structure Data {R S : Sheaf J CommRingCat.{max c v u}} (φ : R ⟶ S) where
 
 /-- The canonical extension identification and restriction mate for a commuting
 square of coefficient sheaves, both pinned by local tensor generators.
-Source: Stacks 03CZ, 03CY (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 03CZ, 03CY. -/
 structure CoefficientSquare
     {R S R' S' : Sheaf J CommRingCat.{max c v u}}
     {φ : R ⟶ S} {a : R ⟶ R'} {b : S ⟶ S'} {φ' : R' ⟶ S'}
@@ -344,7 +341,7 @@ structure CoefficientSquare
 
 /-- The canonical coefficient map on S tensor A, transported through the normalized
 nu maps and the generator-normalized mate. It need not be an isomorphism.
-Source: Stacks 03CZ, 03EK (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+Source: Stacks 03CZ, 03EK. -/
 def CoefficientSquare.tensorComparison
     {R S R' S' : Sheaf J CommRingCat.{max c v u}}
     {φ : R ⟶ S} {a : R ⟶ R'} {b : S ⟶ S'} {φ' : R' ⟶ S'}

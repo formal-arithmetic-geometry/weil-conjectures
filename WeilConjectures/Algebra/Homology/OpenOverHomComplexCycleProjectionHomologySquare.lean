@@ -8,8 +8,7 @@ module
 public import WeilConjectures.Algebra.Homology.HomologyEvaluationDefinitions
 import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
-/-! Homology quotient comparison square.
-(blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison-homology-square). -/
+/-! Homology quotient comparison square. -/
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -30,7 +29,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A restricted chain isomorphism induces compatible cycle and homology comparisons.
 Source: Stacks Project, Tag 08DL, exactness of restriction; Mathlib's short-complex
 mapCyclesIso and mapHomologyIso comparison and naturality identities.
-(blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison-homology-square).
 Proof: Restriction to an open is exact, since it computes kernels sectionwise and
 cokernels after sheafification, which commutes with open restriction. The over-site
 functor has the same properties, transported through the open-site equivalence.

@@ -22,7 +22,6 @@ namespace CategoryTheory
 set_option backward.isDefEq.respectTransparency true in
 /-- The projection components of a localized degree-zero cycle form a chain map.
 Source: Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y.
-(blueprint: lem-pur-localized-hom-complex-cycles-forward)
 
 Proof: for a cycle z, define the degree-p component by applying the chosen
 projection pi at U to iCycles z. An internal-Hom section is a linear natural

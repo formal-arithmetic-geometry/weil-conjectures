@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 # Flatness characterized by first Tor with ideal quotients
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00M5
-(blueprint: lem-weil-pbc-flat-tor-ideal-criterion).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ namespace CategoryTheory
 
 /--
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00M5
-(blueprint: lem-weil-pbc-flat-tor-ideal-criterion).
 The proof uses the first-variable Tor exact sequence, Tor symmetry, and the
 finitely generated ideal criterion for flatness, as detailed in the node proof.
 -/

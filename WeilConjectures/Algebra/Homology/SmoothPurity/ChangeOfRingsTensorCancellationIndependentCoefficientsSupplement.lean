@@ -227,8 +227,7 @@ private theorem cancellationTensorIso_naturality
 
 /-- Naturality of the tensor/sheafification comparison at independent site universes.
 This exposes the comparison used in the constructed cancellation map.
-Source: Stacks, Tag 03EK
-(blueprint: lem-pur-change-of-rings-tensor-cancellation-independent). -/
+Source: Stacks, Tag 03EK -/
 theorem changeOfRingsTensorIso_naturality_independentCoefficients
     (A : Sheaf J CommRingCat.{r})
     {M M' N N' : SheafOfModules.{r} (𝓡 A)} (f : M ⟶ M') (g : N ⟶ N') :

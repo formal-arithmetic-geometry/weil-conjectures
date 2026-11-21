@@ -17,7 +17,6 @@ import all WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 /-! # K-injective Hom complexes with independent coefficient universes
 
 Source: Stacks Project, Tag 0A96.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -423,7 +422,6 @@ namespace CochainComplex
 
 /-- Hom from a K-flat complex into a K-injective complex is K-injective.
 Source: Stacks Project, Tag 0A96.
-(auxiliary; not a blueprint node).
 
 Proof: for any acyclic Z, K-flatness makes Z tensor L acyclic. Symmetry makes
 L tensor Z acyclic too. Tensor-Hom adjunction identifies maps Z to Hom(L,I)

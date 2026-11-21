@@ -14,7 +14,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Devissage
 /-! # Bounded complexes and the amplitudes of their terms
 
 Source: Stacks Project, Tag 066H.
-(blueprint: lem-pc-bounded-complex-term-amplitude).
 -/
 
 @[expose] public section
@@ -87,7 +86,6 @@ private lemma bounded_mem_of_single_terms
 cochain degree, has that amplitude.
 
 Source: Stacks Project, Tag 066H.
-(blueprint: lem-pc-bounded-complex-term-amplitude).
 
 Proof: induct on the finite number of supported degrees, using the degreewise split
 stupid-truncation triangle. Tensoring this distinguished triangle with a module in degree

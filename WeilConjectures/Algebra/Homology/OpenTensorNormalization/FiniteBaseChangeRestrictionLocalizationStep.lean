@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.FiniteBaseChangeRestrictionOrdinaryPinMate
 
 /-! Localization of the finite restriction representative.
-(blueprint: lem-sf-finite-base-change-restriction-localization-step)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -469,8 +468,7 @@ same prefix `C` followed by `Q(β_P)`, where `β_P` is the right complex map
 in the degreewise hypothesis. Applying `Q.map` to the cochain equality equates
 these tails. Finally cancel
 only the appended exact restriction factor. No flatness cancellation of `B`
-is performed in this lemma.
-(blueprint: lem-sf-finite-base-change-restriction-localization-step) -/
+is performed in this lemma. -/
 theorem finite_base_change_restriction_localization_step
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

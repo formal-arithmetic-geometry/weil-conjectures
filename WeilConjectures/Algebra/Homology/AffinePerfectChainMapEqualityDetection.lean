@@ -17,7 +17,6 @@ import Mathlib.Data.Int.Interval
 /-! # AffinePerfectChainMapEqualityDetection
 
 Source: Stacks Project, Tags 09RE and 05N7.
-(blueprint: lem-pc-affine-perfect-chain-map-equality-detection)
 -/
 
 @[expose] public section
@@ -158,8 +157,7 @@ identifies these maps with the displayed scalarExtensionHom expressions.
 For a preorder pass to its quotient by mutual comparability, choose representatives,
 apply the partial-order finite-presentation theorem to the equivalent diagram,
 and transport the equalities back. The chosen stage can be enlarged above the
-original indices. Empty support needs only directedness to choose a common stage.
-(blueprint: lem-pc-affine-perfect-chain-map-equality-detection) -/
+original indices. Empty support needs only directedness to choose a common stage. -/
 theorem affine_perfect_chainMap_equality_detection
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

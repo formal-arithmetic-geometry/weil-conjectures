@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Sites.SheafHom
 # Gluing morphisms of sheaves of modules on a covering family
 
 Source: Stacks Project, Modules on Sites, Lemma 03EM, using Sites Lemma 04TQ
-(blueprint: lem-pur-sheaf-hom-cover-gluing).
 -/
 
 @[expose] public section
@@ -24,7 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace SheafOfModules
 
-/-- (blueprint: lem-pur-sheaf-hom-cover-gluing) Compatible local linear maps glue uniquely.
+/-- Compatible local linear maps glue uniquely.
 Source: Stacks Project, Modules on Sites, Lemma 03EM, via Sites Lemma 04TQ.
 
 The hypothesis `hcompatible` states equality on every object of the localized overlap site.

@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 # Exact K-injective replacement
 
 Source: Stacks Project, Tags 070K and 070Y; upstream KInjectives.Qh construction
-(blueprint: lem-sf-kinjective-replacement-triangulated).
 
 ## Main definitions and statements
 
@@ -34,15 +33,13 @@ universe w v u
 namespace HomotopyCategory.KInjectives
 
 /-- The inclusion uses the inherited integer shifts of the full right orthogonal.
-Source: Stacks Project, Tags 0FXC and 05QX
-(blueprint: lem-sf-kinjective-replacement-triangulated). -/
+Source: Stacks Project, Tags 0FXC and 05QX -/
 noncomputable instance inclusionCommShift (C : Type u) [Category.{v} C] [Abelian C] :
     (ι (C := C)).CommShift ℤ :=
   inferInstanceAs ((ObjectProperty.ι (subcategoryAcyclic C).rightOrthogonal).CommShift ℤ)
 
 /-- Localization on K-injectives uses the composite shift comparison of inclusion and Qh.
-Source: Stacks Project, Tags 070K and 05QX
-(blueprint: lem-sf-kinjective-replacement-triangulated). -/
+Source: Stacks Project, Tags 070K and 05QX -/
 noncomputable instance localizationCommShift (C : Type u) [Category.{v} C] [Abelian C]
     [HasDerivedCategory.{w} C] : (Qh (C := C)).CommShift ℤ :=
   inferInstanceAs ((ι (C := C) ⋙ DerivedCategory.Qh).CommShift ℤ)
@@ -64,7 +61,6 @@ set_option linter.unusedVariables false in
 /-- K-injective localization is a triangulated equivalence, and every quasi-inverse gives
 an exact replacement functor, also on opposite categories.
 Source: Stacks Project, Tags 070K and 070Y
-(blueprint: lem-sf-kinjective-replacement-triangulated).
 
 Proof plan: The cone triangulation of K(C) and exactness of Qh are supplied by
 lem-pur-homotopy-category-triangulated. K-injectivity is the right orthogonal of acyclics

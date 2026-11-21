@@ -34,7 +34,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- Selected extension preserves quasi-isomorphisms between componentwise flat-term
 K-flat representatives. Source: Zheng 4.1; Stacks 06YT
-(blueprint: lem-pur-system-selected-derived-extension).
 Proof: exact evaluation takes the original map to a quasi-isomorphism at the first
 selected index. Scalar extension preserves that quasi-isomorphism between the K-flat
 components. These are the actual evaluations of the extended strict map. Joint
@@ -56,7 +55,6 @@ theorem systemSelected_preserves
 
 /-- The selected ordinary adjunction has its normalized total derived adjunction.
 Source: Zheng 4.1; Stacks 06XN and 0FND
-(blueprint: lem-pur-system-selected-derived-extension).
 Proof: the simultaneous strict K-flat resolution resolves the componentwise class.
 Selected extension preserves quasi-isomorphisms on this class, so normalized derivation
 applies to the ordinary selected adjunction. -/

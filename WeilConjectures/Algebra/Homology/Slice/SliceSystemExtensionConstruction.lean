@@ -10,7 +10,6 @@ public import WeilConjectures.Algebra.Homology.SixFunctors.SemilinearSliceScalar
 /-! # Extension of strict coefficient systems to the ambient site
 
 Source: Stacks Project, Modules on Sites, Tags 03DI and 03CY.
-(blueprint: lem-sf-slice-system-extension-construction).
 -/
 
 @[expose] public noncomputable section
@@ -198,7 +197,6 @@ private theorem extensionFunctor_additive : (extensionFunctor.{c, v, r} B U).Add
 
 /-- Direct-sum extension and module sheafification extend strict semilinear systems.
 Source: Stacks Project, Modules on Sites, Tags 03DI and 03CY
-(blueprint: lem-sf-slice-system-extension-construction).
 
 Proof: At level n apply the actual localizedSystemExtension for B_n. On the
 extension presheaves send the original summand [x]_f to [t(x)]_f for each system

@@ -408,7 +408,6 @@ namespace SheafOfModules
 
 /-- The local relation criterion implies flatness with an independent module universe.
 Source: Stacks Project, Modules on Sites, Tag 08FC, (2) implies (1)
-(auxiliary; not a blueprint node).
 Proof: the finite-matrix argument below factors the coefficients of any tensor
 killed by a monomorphism. It makes this tensor locally zero, so tensoring
 preserves monomorphisms. The tensor functor preserves finite colimits by its
@@ -447,7 +446,6 @@ theorem isFlatOnSite_of_local_equationalCriterion
 
 /-- Flatness is equivalent to local finite relation factorization on a ringed site.
 Source: Stacks Project, Modules on Sites, Tag 08FC, (1) iff (2)
-(auxiliary; not a blueprint node).
 
 Proof: The forward direction is the local relation theorem. For the converse,
 induct on the rows of a finite relation matrix, applying the one-row condition

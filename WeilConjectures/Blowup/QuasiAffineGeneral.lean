@@ -13,8 +13,7 @@ public import WeilConjectures.Mathlib.Topology.Constructions
 
 # Conrad's Theorem 2.4, Case 3: a quasi-affine target and two nested opens
 
-This file proves Case 3 of Theorem 2.4 in Conrad's *Deligne's notes on Nagata compactifications*
-(blueprint: `lemma:nagata-conrad-quasi-affine-general`): the elimination of indeterminacy for a
+This file proves Case 3 of Theorem 2.4 in Conrad's *Deligne's notes on Nagata compactifications*: the elimination of indeterminacy for a
 quasi-affine morphism `p : Y ⟶ X` over a qcqs base, for an arbitrary pair `U ≤ V` of
 quasi-compact opens of `X`, with the resulting blow-up centre disjoint from the *larger* open
 `V`.
@@ -54,7 +53,6 @@ its affine open.
 Density of `U` in `X` is **not** assumed: what the closedness argument needs is that the inverse
 image of `U` is topologically dense in the blow-up of `X₀`, and that is the scheme-theoretic
 dominance which Case 2 hands back as its third conclusion.
-
 -/
 
 @[expose] public section
@@ -70,8 +68,7 @@ namespace AlgebraicGeometry
 variable {X : Scheme.{u}}
 
 /-- **Conrad's Theorem 2.4, Case 3**: elimination of indeterminacy for a quasi-affine
-morphism and two nested quasi-compact opens (blueprint:
-`lemma:nagata-conrad-quasi-affine-general`).
+morphism and two nested quasi-compact opens.
 
 The centre of the blow-up is disjoint from the *larger* open `V`; that is what makes this
 statement stronger than

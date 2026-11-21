@@ -43,7 +43,6 @@ private theorem epi_of_joint_images {X Y Z W Q : C} (e : W ⟶ Y) [Mono e]
 
 /-- The row and the next tail jointly generate the current tail.
 Source: Stacks Project, Homology, Tag 0133, diagonal quotient argument.
-(blueprint: lem-sc-finite-strip-cone-graded-map-split-epi)
 Proof: each current-tail generator either has vertical index exactly p and is
 in the row image, or has larger vertical index and belongs to the next tail.
 The source generator is in the row when n+1=p, and in the next tail otherwise.
@@ -142,7 +141,6 @@ private theorem filtrationLift_arrow
 /-- The canonical finite-strip graded map is epic.
 Source: Stacks Project, Homology, Lemma 12.25.4 (Tag 0133), diagonal quotient argument;
 explicit cone refinement of lem-sc-finite-strip-cone-filtration, step 3.
-(blueprint: lem-sc-finite-strip-cone-graded-map-epi)
 
 Proof: write the ambient cone in degree n as the biproduct of A.X (n+1)
 and the total diagonal coproduct. The given hsteps identifies the current tail

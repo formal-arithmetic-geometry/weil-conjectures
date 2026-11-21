@@ -16,7 +16,6 @@ public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 /-! # The localizing predicate for localized tensor comparisons
 
 Source: Stacks Project, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: def-pc-localized-tensor-comparison-property).
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
 
 /-- All K-flat representatives of X satisfy tensor comparison in every degree.
 This is an explicit predicate; it assumes no comparison map to be invertible.
-Source: Stacks Project, Tag 0DJA(1).
-(blueprint: def-pc-localized-tensor-comparison-property). -/
+Source: Stacks Project, Tag 0DJA(1). -/
 def localizedTensorComparisonProperty : ObjectProperty (DerivedCategory (ModuleCat.{u} A)) :=
   fun X ↦ ∀ (U : CochainComplex (ModuleCat.{u} A) ℤ),
     Nonempty (DerivedCategory.Q.obj U ≅ X) →

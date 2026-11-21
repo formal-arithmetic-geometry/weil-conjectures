@@ -35,7 +35,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Apply internal Hom from a fixed module sheaf to a product fan.
 Source: Stacks Project, Modules on Sites, Section internal-hom and
 Lemma internal-hom-adjoint-tensor (03EO).
-(blueprint: lem-sc-internal-hom-product-fan).
 
 Proof: Products of module sheaves are computed sectionwise. Restrict the product
 fan to the slice over U; it is still a product, since at each slice object its

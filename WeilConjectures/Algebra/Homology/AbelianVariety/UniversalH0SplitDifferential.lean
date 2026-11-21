@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.AbelianVariety.UniversalH0SplitFactoriza
 /-! # A generalized inverse for the first differential
 
 Source: Stacks Project, Tags 00O0 and 00NX, fixed-affine adaptation.
-(blueprint: lem-sc-universal-h0-split-differential).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ its image, with the image a direct summand of the next term.
 
 Source: Stacks Project, Tags 00O0 and 00NX; the local algebra and splitting
 steps of lem-sc-connective-universal-h0-zero-differential.
-(blueprint: lem-sc-universal-h0-split-differential).
 
 Proof: Only the terms in degrees minus one, zero, and one affect H0. Scalar
 extension preserves the zero term in degree minus one, so H0 after each extension

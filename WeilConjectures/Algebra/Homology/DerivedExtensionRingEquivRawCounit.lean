@@ -11,8 +11,7 @@ import WeilConjectures.Algebra.Homology.DerivedExtensionRingEquivRawTransport
 import WeilConjectures.Algebra.Homology.DerivedExtensionRingEquivRawCompatibility
 
 /-! # Derived counit transport before homology
-Source: Stacks Project, Tags 06Y6 and 05RR.
-(blueprint: lem-pc-derived-extension-ring-equiv-raw-counit). -/
+Source: Stacks Project, Tags 06Y6 and 05RR. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -23,7 +22,6 @@ namespace ModuleCat
 
 /-- Transport of universal scalar-extension counits in the derived category.
 Source: Stacks Project, Tag 06Y6 (independence of choices) and Tag 05RR.
-(blueprint: lem-pc-derived-extension-ring-equiv-raw-counit).
 
 Proof: restriction along each ring equivalence is an exact equivalence with
 inverse restriction along the inverse ring equivalence. Lift the equivalences

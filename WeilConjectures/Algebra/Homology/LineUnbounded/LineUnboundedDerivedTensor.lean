@@ -25,7 +25,6 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 Source: Stacks Project, Tags 0B8N, 0B8Q, 06YN, 06YT, 06YU and 015F;
 blueprint main-20261015, Tate-twist local freeness, proof (3).
-(blueprint: lem-pur-line-unbounded-derived-tensor)
 
 The tensor bifunctor is the published K-flat derived tensor. The representative
 normalizations below specify the actual evaluation transformations, including their
@@ -51,8 +50,7 @@ of the line-tensor assertion, written over an abstract abelian category to avoid
 repeated expansion of the concrete sheaf category. `nP` and `nD` specify the
 representative normalization, and `evP`, `evD` are the specified ordinary evaluations.
 This is a transparent proposition, with no chosen functor, map or proof.
-Source: Stacks, 0B8N, 06YU, 015F and 010N
-(blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 0B8N, 06YU, 015F and 010N -/
 def comparisonData {A : Type u} [Category.{v} A] [Abelian A]
     [HasDerivedCategory.{w} A] (B : Type b) [CommRing B] [Linear B A]
     (T S : A ⥤ A) [T.Additive] [S.Additive]
@@ -272,43 +270,43 @@ variable (X : Scheme.{t})
   (R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)})
 
 /-- The existing module category on the small pro-etale site.
-Source: Stacks, 03DA (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 03DA. -/
 abbrev Modules := KFlatFixedTensor.Modules.{t + 1, t, max a (t + 1)} R
 
 /-- Global sections of the given commutative ring sheaf, with the coefficient size fixed.
-Source: Stacks, 04TT (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 04TT. -/
 abbrev scalars := RingCat.sectionsSubring
   (R.obj ⋙ forget₂ CommRingCat.{max a (t + 1)} RingCat.{max a (t + 1)})
 
 /-- The existing global-section action on module morphisms, componentwise on sections.
-Source: Stacks, 04TT (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 04TT. -/
 instance coefficientLinear : Linear (scalars.{t, a} X R) (Modules.{t, a} X R) :=
   SheafOfModules.homLinear.{max a (t + 1), t, t + 1, max a (t + 1)} R.obj
     ((sheafCompose (Scheme.ProEt.topology X)
       (forget₂ CommRingCat.{max a (t + 1)} RingCat.{max a (t + 1)})).obj R).property
 
 /-- The existing internal sheaf dual, without a change of site or module universe.
-Source: Stacks, 0B8Q (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 0B8Q. -/
 abbrev dual (P : Modules.{t, a} X R) : Modules.{t, a} X R :=
   homObj.{max a (t + 1), t, t + 1, max a (t + 1)} (R := R) P
     (𝟙_ (Modules.{t, a} X R))
 
 /-- Ordinary tensor with a fixed right factor.
-Source: Stacks, 03EK (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 03EK. -/
 def tensor (P : Modules.{t, a} X R) : Modules.{t, a} X R ⥤ Modules.{t, a} X R := tensorRight P
 
 /-- Additivity of the existing ordinary tensor functor.
-Source: Stacks, 03EK (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 03EK. -/
 instance tensorAdditive (P : Modules.{t, a} X R) : (tensor.{t, a} X R P).Additive :=
   inferInstanceAs (tensorRight P).Additive
 
 /-- A module in degree zero in the unbounded cochain category.
-Source: Stacks, 06YN (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 06YN. -/
 abbrev single (P : Modules.{t, a} X R) : CochainComplex (Modules.{t, a} X R) ℤ :=
   (CochainComplex.singleFunctor (Modules.{t, a} X R) 0).obj P
 
 /-- The canonical pure tensor in the localization tensor, via the sheafification unit.
-Source: Stacks, 03EK (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 03EK. -/
 def pureTensor (P Q : Modules.{t, a} X R) (U : X.ProEtᵒᵖ)
     (p : P.val.obj U) (q : Q.val.obj U) : (P ⊗ Q).val.obj U :=
   (tensorObjIsoSheafification P Q).inv.val.app U
@@ -318,7 +316,7 @@ def pureTensor (P Q : Modules.{t, a} X R) (U : X.ProEtᵒᵖ)
           (p ⊗ₜ[R.obj.obj U] q))
 
 /-- Associate, evaluate the last two factors, then apply the right unitor.
-Source: Stacks, 0B8N (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 0B8N. -/
 def cancellation (P Q : Modules.{t, a} X R) (e : P ⊗ Q ≅ 𝟙_ (Modules.{t, a} X R)) :
     tensor.{t, a} X R P ⋙ tensor.{t, a} X R Q ≅ 𝟭 (Modules.{t, a} X R) :=
   (tensorRightTensor P Q).symm ≪≫ (tensoringRight (Modules.{t, a} X R)).mapIso e ≪≫
@@ -329,7 +327,7 @@ private theorem cancellation_eq (P Q : Modules.{t, a} X R)
     cancellation X R P Q e = LineEvaluation.cancellation R P Q e := rfl
 
 /-- Collapse the total tensor with a degree-zero right factor to termwise tensor.
-Source: Stacks, 06YU (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 06YU. -/
 def collapse (P : Modules.{t, a} X R) :
     (KFlatFixedTensor.totalTensor.{t + 1, t, max a (t + 1)} R).flip.obj (single.{t, a} X R P) ≅
       (tensor.{t, a} X R P).mapHomologicalComplex (.up ℤ) :=
@@ -339,7 +337,7 @@ def collapse (P : Modules.{t, a} X R) :
 variable [HasDerivedCategory.{w} (Modules.{t, a} X R)]
 
 /-- Tensor with the degree-zero object using exactly the published derived tensor.
-Source: Stacks, 06YU (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 06YU. -/
 def derived (P : Modules.{t, a} X R) :
     DerivedCategory (Modules.{t, a} X R) ⥤ DerivedCategory (Modules.{t, a} X R) :=
   (KFlatFixedTensor.derivedTensor.{t + 1, t, max a (t + 1), w} R).flip.obj
@@ -347,7 +345,7 @@ def derived (P : Modules.{t, a} X R) :
 
 /-- The canonical normalization of a termwise comparison on resolving complexes.
 It uses the actual K-flat representative comparison and the degree-zero total collapse.
-Source: Stacks, 06YU and 015F (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+Source: Stacks, 06YU and 015F. -/
 def normalization (P : Modules.{t, a} X R)
     (hP : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max a (t + 1)}
       (J := Scheme.ProEt.topology X) (R := R) (single.{t, a} X R P))
@@ -375,7 +373,6 @@ as required by the two representative equations.
 
 Source: Stacks, Tags 0B8Q, 0B8N, 06YN, 06YU, 015F and 010N;
 blueprint Tate-twist local freeness, proof (3)
-(blueprint: lem-pur-line-unbounded-derived-tensor).
 
 Proof plan (all eight steps of the node):
 1. On a trivializing slice write P = Rp and its internal dual = Rp*. Evaluation

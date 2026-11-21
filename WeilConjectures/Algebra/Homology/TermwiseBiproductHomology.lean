@@ -15,7 +15,6 @@ public import Mathlib.CategoryTheory.Preadditive.Biproducts
 Source: Stacks Project, Homology, Tag 0130. The termwise inclusions and projections
 are chain maps and satisfy the finite biproduct identities. Their homology maps
 satisfy the same identities because homology is additive.
-(blueprint: new-finite-cover-termwise-biproduct-homology)
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +32,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
   (hB : ∀ j, HasBiproduct (fun i ↦ (A i).X j))
 
 /-- The complex whose terms and differentials are biproducts of those of `A`.
-Source: Stacks Project, Tag 0130.
-(blueprint: new-finite-cover-termwise-biproduct-homology) -/
+Source: Stacks Project, Tag 0130. -/
 def termwiseBiproduct : HomologicalComplex C c where
   X j := by letI := hB j; exact ⨁ (fun i ↦ (A i).X j)
   d j k := by letI := hB j; letI := hB k; exact biproduct.map (fun i ↦ (A i).d j k)
@@ -54,8 +52,7 @@ def termwiseBiproduct : HomologicalComplex C c where
       (A i).d_comp_d, comp_zero, zero_comp]
 
 /-- The projection from the termwise biproduct to one complex.
-Source: Stacks Project, Tag 0130.
-(blueprint: new-finite-cover-termwise-biproduct-homology) -/
+Source: Stacks Project, Tag 0130. -/
 def termwiseBiproductπ (i : I) : termwiseBiproduct A hB ⟶ A i where
   f j := by letI := hB j; exact biproduct.π (fun i ↦ (A i).X j) i
   comm' j k _ := by
@@ -64,8 +61,7 @@ def termwiseBiproductπ (i : I) : termwiseBiproduct A hB ⟶ A i where
     exact (biproduct.map_π (fun i ↦ (A i).d j k) i).symm
 
 /-- The inclusion of one complex in the termwise biproduct.
-Source: Stacks Project, Tag 0130.
-(blueprint: new-finite-cover-termwise-biproduct-homology) -/
+Source: Stacks Project, Tag 0130. -/
 def termwiseBiproductι (i : I) : A i ⟶ termwiseBiproduct A hB where
   f j := by letI := hB j; exact biproduct.ι (fun i ↦ (A i).X j) i
   comm' j k _ := by
@@ -75,8 +71,7 @@ def termwiseBiproductι (i : I) : A i ⟶ termwiseBiproduct A hB where
 
 /-- The homology inclusions and projections form a bicone.
 Source: Stacks Project, Tag 0130. Apply the homology functor to the termwise
-inclusion-projection identity, separately on and off the diagonal.
-(blueprint: new-finite-cover-termwise-biproduct-homology) -/
+inclusion-projection identity, separately on and off the diagonal. -/
 def termwiseBiproductHomologyBicone (q : J) : Bicone (fun i ↦ (A i).homology q) where
   pt := (termwiseBiproduct A hB).homology q
   π i := homologyMap (termwiseBiproductπ A hB i) q
@@ -99,8 +94,7 @@ def termwiseBiproductHomologyBicone (q : J) : Bicone (fun i ↦ (A i).homology q
 
 /-- The preceding bicone is a biproduct when its index type is finite.
 Source: Stacks Project, Tag 0130. Apply additive homology to the sum of termwise
-projection-inclusion composites, which equals the identity in every degree.
-(blueprint: new-finite-cover-termwise-biproduct-homology) -/
+projection-inclusion composites, which equals the identity in every degree. -/
 def termwiseBiproductHomologyIsBilimit [Fintype I] (q : J) :
     (termwiseBiproductHomologyBicone A hB q).IsBilimit := by
   apply isBilimitOfTotal
@@ -123,8 +117,7 @@ def termwiseBiproductHomologyIsBilimit [Fintype I] (q : J) :
 
 /-- The canonical finite-biproduct comparison for homology.
 Source: Stacks Project, Tag 0130. The homology bicone is a bilimit, hence is
-canonically isomorphic to the chosen biproduct.
-(blueprint: new-finite-cover-termwise-biproduct-homology) -/
+canonically isomorphic to the chosen biproduct. -/
 def termwiseBiproductHomologyIso [Fintype I] (q : J)
     [HasBiproduct (fun i ↦ (A i).homology q)] :
     (termwiseBiproduct A hB).homology q ≅ ⨁ (fun i ↦ (A i).homology q) :=
@@ -132,8 +125,7 @@ def termwiseBiproductHomologyIso [Fintype I] (q : J)
 
 /-- The canonical comparison preserves every projection.
 Source: Stacks Project, Tag 0130. Its defining map is the biproduct lift of the
-homology projections.
-(blueprint: new-finite-cover-termwise-biproduct-homology) -/
+homology projections. -/
 @[reassoc]
 theorem termwiseBiproductHomologyIso_hom_π [Fintype I] (q : J)
     [HasBiproduct (fun i ↦ (A i).homology q)] (i : I) :
@@ -144,8 +136,7 @@ theorem termwiseBiproductHomologyIso_hom_π [Fintype I] (q : J)
 
 /-- Inverse projection formula for the finite-biproduct homology comparison.
 Source: Stacks Project, Tag 0130. Cancel the comparison isomorphism in the
-projection formula.
-(blueprint: new-finite-cover-termwise-biproduct-homology) -/
+projection formula. -/
 @[reassoc]
 theorem termwiseBiproductHomologyIso_inv_homologyMap_π [Fintype I] (q : J)
     [HasBiproduct (fun i ↦ (A i).homology q)] (i : I) :

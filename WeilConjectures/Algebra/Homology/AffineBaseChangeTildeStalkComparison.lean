@@ -13,8 +13,7 @@ import WeilConjectures.Algebra.Homology.AffineTensorPullbackStalkCoordinates
 
 /-! # AffineBaseChangeTildeStalkComparison
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-tilde-stalk-comparison). -/
+Source: Stacks Project, Tag 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -43,7 +42,6 @@ variable [∀ Y : Scheme.{u},
 /-- Localization of the explicit tensor cohomology arrow agrees with the stalk arrow.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, last displayed localization identity;
 Tags 06Y6, 01HV and 08IB.
-(blueprint: lem-pc-affine-base-change-tilde-stalk-comparison).
 
 Proof: identify A tensor_R R' with A' by the cartesian square and localize its source
 cohomology at p. Derived tensor localization identifies this module with the derived

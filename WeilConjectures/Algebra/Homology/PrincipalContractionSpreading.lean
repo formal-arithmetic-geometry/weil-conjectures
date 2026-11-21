@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.MinimalComplex
 
 Source: Stacks Project, More on Algebra, Tag 068U, `lemma-cut-complex-in-two`,
 and Algebra, Tag 00NX, finite projective modules and local freeness.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -463,7 +462,6 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, More on Algebra, Tag 068U, `lemma-cut-complex-in-two`,
 and Algebra, Tag 00NX, `lemma-finite-projective`.
-(auxiliary; not a blueprint node)
 
 Proof: Finite presentation lifts the local s,t after multiplying them by a
 common denominator outside p. Finiteness clears the error in their middle

@@ -34,7 +34,6 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 # Deriving the coefficient evaluation adjunction
 
 Source: Zheng, Construction 4.1, p. 21; Stacks Project, Tags 06XN and 09T5.
-(blueprint: lem-pur-coefficient-evaluation-derived-core).
 -/
 
 @[expose] public noncomputable section
@@ -173,8 +172,7 @@ private theorem coefficient_extension_preserves_quasiIso
     infer_instance
 
 /-- A derived evaluation adjunction and its comparison on complex representatives.
-Source: Zheng, Construction 4.1, p. 21; Stacks Tags 06XN and 09T5
-(blueprint: lem-pur-coefficient-evaluation-derived-core). -/
+Source: Zheng, Construction 4.1, p. 21; Stacks Tags 06XN and 09T5 -/
 structure CoefficientEvaluationDerivedCoreData
     (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))
     [∀ n, (ordinary.extension n).Additive] where
@@ -204,7 +202,6 @@ structure CoefficientEvaluationDerivedCoreData
 
 /-- Derive the fixed strict extension adjunction using flat-term K-flat resolutions.
 Source: Zheng, Construction 4.1, p. 21; Stacks Project, Tags 06XN and 09T5
-(blueprint: lem-pur-coefficient-evaluation-derived-core).
 Proof: exact componentwise evaluation jointly detects quasi-isomorphisms. Below the
 chosen level, extension is tensor scalar change and preserves quasi-isomorphisms between
 K-flat complexes; above that level, both complexes are zero. Thus extension preserves

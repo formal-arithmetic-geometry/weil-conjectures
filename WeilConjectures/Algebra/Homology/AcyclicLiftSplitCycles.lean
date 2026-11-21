@@ -32,7 +32,6 @@ namespace CochainComplex
 and its kernel sequence stays exact and monic after reduction.
 
 Source: Stacks Project, Tag 0BC9, proof, first paragraph
-(blueprint: lem-sc-acyclic-lift-split-cycles).
 
 Proof. Obtain a zero member of P by applying the summand condition to any term
 and its decomposition as itself plus zero. The same condition, using this zero

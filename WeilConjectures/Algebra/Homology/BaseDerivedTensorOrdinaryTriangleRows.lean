@@ -151,8 +151,7 @@ is natural and compatible with shifts since its pure-tensor formula fixes it.
 Substitution of comparison_eq proves the three arrow squares and boundary square.
 Only the image of T in D(A) need be distinguished: neither T nor its ordinary
 extension must be termwise exact. The construction applies unchanged to zero
-rings, zero complexes, arbitrary degrees and unbounded complexes.
-(blueprint: lem-pc-base-derived-tensor-ordinary-triangle-rows). -/
+rings, zero complexes, arbitrary degrees and unbounded complexes. -/
 theorem exists_baseDerivedTensorCohomologyModel_ordinary_triangle_rows
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

@@ -11,7 +11,6 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarGenerators
 /-! # Scalar-extension towers
 
 Source: Stacks Project, Modules on Sites, Tags 03EK and 03CZ.
-(blueprint: lem-sf-slice-scalar-tower-construction).
 -/
 
 @[expose] public noncomputable section
@@ -204,7 +203,6 @@ private theorem model_pure_inv {R S : Sheaf J CommRingCat.{max c v r}} {φ : R �
 
 /-- Scalar extension along an algebra tower gives its prescribed additive strict tower.
 Source: Stacks Project, Modules on Sites, Tags 03EK and 03CZ
-(blueprint: lem-sf-slice-scalar-tower-construction).
 
 Proof: At level n use sheafification of the presheaf B_n tensor_O H, and on a
 module map use sheafification of id tensor f. For m ≤ n, the presheaf map sends

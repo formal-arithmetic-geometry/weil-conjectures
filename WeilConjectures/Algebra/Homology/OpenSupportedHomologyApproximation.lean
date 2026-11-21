@@ -48,7 +48,6 @@ This is a statement about a local approximation, not an isomorphism with `K`.
 
 Source: Stacks Project, Cohomology, Tags 08BS and 08BT (exact extension by zero
 and its adjunction); Modules, Tag 01AG (stalkwise detection).
-(blueprint: lem-sc-open-supported-homology-approximation)
 
 Proof: Let j be the inclusion of U. Restriction R and extension by zero J
 are exact and additive, with sheaf adjunction counit epsilon : R followed by J

@@ -13,7 +13,6 @@ public import Mathlib.Algebra.DirectSum.Module
 /-! # Contracting a split two-term identity complex
 
 Source: Stacks Project, Tag 00MT, the identity summand and its contraction.
-(blueprint: lem-pc-split-identity-homotopy-equiv)
 -/
 
 @[expose] public section
@@ -93,7 +92,6 @@ private theorem contractIdentity {R : Type u} [CommRing R]
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Projection away from a differential-compatible split identity complex is a homotopy
  equivalence. Source: Stacks Project, Tag 00MT, the two-term identity summand.
-(blueprint: lem-pc-split-identity-homotopy-equiv)
 
 Proof: Use ψ to define the projection C → C' and the inclusion C' → C degreewise.
 The compatibility equation, first with t = 0 and then x = 0, proves these are chain

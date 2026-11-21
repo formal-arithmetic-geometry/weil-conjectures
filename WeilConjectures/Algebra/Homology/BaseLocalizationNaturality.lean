@@ -16,7 +16,6 @@ public import WeilConjectures.Algebra.Homology.BaseLocalizationMap
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
 second coefficient ring; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-base-localization-naturality).
 -/
 
 @[expose] public section
@@ -44,7 +43,7 @@ variable (R A B Rp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} Rp)]
 
 /-- Naturality of the characterized base-localization map.
-Source: Stacks Project, Tag 06Y6 (blueprint: lem-pc-base-localization-naturality).
+Source: Stacks Project, Tag 06Y6.
 
 Proof: write T for exact restriction from Rp to R on derived categories, and
 eta and eta-prime for the universal lifts defining the two canonical maps.

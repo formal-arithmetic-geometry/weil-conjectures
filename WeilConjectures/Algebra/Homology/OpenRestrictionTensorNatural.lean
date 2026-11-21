@@ -17,7 +17,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Natural tensor comparison on an open localized site
 
 Source: Stacks Project, Tags 01CD and 03DH.
-(blueprint: lem-pc-open-localized-tensor-natural).
 -/
 
 @[expose] public section
@@ -129,8 +128,7 @@ the comparison and its inverse. The two composites are identities by the univers
 property of sheafification. A pair of module maps acts by f tensor g before
 sheafification, so these identities commute with both module maps after sheafification.
 This proves the displayed naturality square. The empty open, zero modules and zero
-coefficient rings use the same construction without any nonzero assumption.
-(blueprint: lem-pc-open-localized-tensor-natural). -/
+coefficient rings use the same construction without any nonzero assumption. -/
 theorem exists_open_localized_tensor_natural
     {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (U : TopologicalSpace.Opens X) :

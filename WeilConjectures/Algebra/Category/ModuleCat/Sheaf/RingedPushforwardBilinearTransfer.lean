@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 /-! # Transfer of bilinear pairings along ringed precomposition
 
 Source: Stacks Project, Modules on Sites, Tags 03D6 and 03EK, Hom/Bilin display.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -30,7 +29,7 @@ attribute [local irreducible] monoidalCategory tensorObjIsoSheafification
   PresheafOfModules.sheafificationAdjunction
 
 /-- Existence part of the sheaf tensor universal property.
-Source: Stacks 03EK (auxiliary; not a blueprint node).
+Source: Stacks 03EK.
 The sectionwise tensor maps are assembled into a presheaf morphism and uniquely factored
 through module sheafification; this is the source construction at independent universes. -/
 private theorem transfer_exists {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
@@ -86,7 +85,7 @@ private theorem transfer_exists {C : Type uC} [Category.{vC} C] [EssentiallySmal
   exact hh
 
 /-- Uniqueness part of the sheaf tensor universal property.
-Source: Stacks 03EK (auxiliary; not a blueprint node).
+Source: Stacks 03EK.
 A morphism out of the sheafified presheaf tensor is determined by its values on pure tensors,
 by the generating property of the sectionwise module tensor and sheafification. -/
 private theorem transfer_unique {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
@@ -126,7 +125,7 @@ private theorem transfer_unique {C : Type uC} [Category.{vC} C] [EssentiallySmal
   | add t s ht hs => simp only [map_add, ht, hs]
 
 /-- Naturality of the canonical sheafification comparison, in both factors.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 private theorem transfer_tensor_naturality
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
@@ -158,7 +157,7 @@ private theorem transfer_tensor_naturality
   exact congrArg (fun z ↦ z ≫ _) (congrArg₂ (fun a b ↦ a ⊗ₘ b) hf hg)
 
 /-- Tensor maps carry the canonical pure tensors to the tensors of the images.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 private theorem transfer_tensor_pure
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
@@ -215,7 +214,6 @@ The pure tensors below are their canonical images under the sheafification unit,
 by the canonical identification with the localization tensor. The functor `pushforward c`
 is precomposition on sections and morphisms, with scalars restricted along `c`.
 Source: Stacks Project, Modules on Sites, Tags 03D6 and 03EK, Hom/Bilin display.
-(auxiliary; not a blueprint node)
 
 Proof:
 1. On precomposed sections define `r • x = c_U(r) • x`. The unital ring-map laws give

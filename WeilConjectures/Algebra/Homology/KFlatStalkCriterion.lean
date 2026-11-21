@@ -19,7 +19,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 # K-flatness detected on stalks
 
 Source: Stacks Project, Cohomology, Lemma 06YB, label `lemma-check-K-flat-stalks`
-(blueprint: lem-pc-kflat-stalk-criterion).
 -/
 
 @[expose] public section
@@ -42,7 +41,7 @@ private theorem acyclic_iff_stalk (X : RingedSpace.{v})
     exact ((module_stalk_exact X (F.sc i).f).2.2.2.2
       (F.sc i).X₃ (F.sc i).f (F.sc i).g (F.sc i).zero).mpr (fun x ↦ h x i)
 
-/-- (blueprint: lem-pc-kflat-stalk-criterion) A complex of sheaves of modules on a
+/-- A complex of sheaves of modules on a
 ringed space is K-flat precisely when every stalk complex is K-flat over its
 stalk ring (Stacks, Cohomology, Lemma 06YB).
 

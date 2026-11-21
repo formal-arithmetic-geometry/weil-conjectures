@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedTotalResolutionQuasiIso
 
 Source: Stacks Project, Differential Graded Algebra, Lemma 15.60.9 (Tag 09KP),
 specialized in More on Algebra, Remark 15.60.11 (Tag 09PB)
-(blueprint: lem-pc-derived-filtered-free-resolution).
 -/
 
 @[expose] public section
@@ -31,7 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
-/-- (blueprint: lem-pc-derived-filtered-free-resolution) Stacks, Tags 09KP and 09PB.
+/-- Stacks, Tags 09KP and 09PB.
 For every complex `M` of modules over a commutative ring `A`, there is a quasi-isomorphism from a
 complex `P` with an exhaustive filtration by subcomplexes. The filtration is indexed
 here by natural numbers with `F 0 = 0`, corresponding to `F₋₁ = 0` in the source.

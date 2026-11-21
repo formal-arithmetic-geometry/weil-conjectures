@@ -25,7 +25,6 @@ namespace AlgebraicGeometry
 /-- Hom out of a bounded finite free complex preserves every quasi-isomorphism,
 without a boundedness hypothesis on its target.
 Source: Stacks Project, Cohomology, Tag 08DM, finite locally free Hom computation.
-(blueprint: lem-sc-strictly-perfect-hom-quasi-iso).
 
 Proof: The cone of s is acyclic. Filter the total Hom from E into this cone by
 source degree. Both bounds on E make this a finite filtration. Each associated

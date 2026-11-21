@@ -20,7 +20,6 @@ namespace CategoryTheory
 
 /-- Cycle evaluation determines the morphism uniquely.
 Source: Stacks Project, Tag 08DH, separatedness of internal Hom.
-(blueprint: new-b2-homology-evaluation-uniqueness).
 
 Proof: Fix an open U and a Hom-cocycle phi over U. To compare the two
 internal-Hom sections obtained by applying e and e' to [phi], restrict to any

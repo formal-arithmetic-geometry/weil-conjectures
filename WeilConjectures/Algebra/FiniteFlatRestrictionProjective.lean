@@ -17,7 +17,6 @@ public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 
 If `B` is a finite, finitely presented and flat `A`-algebra, then every finitely presented
 projective `B`-module is finitely presented and projective over `A`
-(blueprint: lem-pc-finite-flat-restriction-projective).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ universe u v w
 namespace Module
 
 /--
-(blueprint: lem-pc-finite-flat-restriction-projective)
 
 Let `A → B` be a map of commutative rings with `B` finite, finitely presented as an
 `A`-algebra, and flat over `A`. If `M` is a finitely presented projective `B`-module, then

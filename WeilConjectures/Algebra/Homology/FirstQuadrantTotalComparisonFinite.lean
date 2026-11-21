@@ -122,7 +122,6 @@ private theorem extendBicomplexNat_column_quasiIso {C : Type u} [Category.{v} C]
 set_option backward.isDefEq.respectTransparency false in
 /-- Column comparison when only finitely many rows can be nonzero.
 Source: Stacks Project, Section 12.25 (Tags 012X and 0133), finite filtration argument.
-(blueprint: lem-sc-finite-row-total-column-comparison).
 
 Proof: filter both total complexes by the vertical degree, starting with the largest
 possible degree N. The successive subquotients are the horizontal complexes in

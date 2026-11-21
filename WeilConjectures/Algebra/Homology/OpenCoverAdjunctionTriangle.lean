@@ -21,7 +21,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Canonical adjunction maps in the geometric open-cover triangle
 
 Source: Stacks Project, Tags 08BU, 08BT and 08BW.
-(blueprint: lem-sc-open-cover-adjunction-triangle).
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ namespace SheafOfModules
 
 
 /-- The canonical comparison between nested derived restrictions.
-Source: Stacks Project, Tag 08BW
-(blueprint: lem-sc-open-cover-adjunction-triangle). -/
+Source: Stacks Project, Tag 08BW -/
 def openRestrictionComparison {S : Type u} [TopologicalSpace S]
     (R : Sheaf (Opens.grothendieckTopology S) RingCat.{u})
     {W U : Opens S} (i : W ⟶ U)
@@ -98,7 +96,6 @@ No Hom identifications or shifted Hom groups are part of this statement.
 
 Source: Stacks Project, Tags 08BU (lower-shriek triangle), 08BT (derived adjunction),
 and 08BW (nested-open identifications).
-(blueprint: lem-sc-open-cover-adjunction-triangle).
 
 Proof: Represent E by a cochain complex K. For W = U ∩ V the exact extension by zero
 functors give the termwise short exact sequence

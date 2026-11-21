@@ -166,7 +166,7 @@ private theorem pureTensor_rightUnitor (M : Modules.{c, v, u} J R) (U : Cᵒᵖ)
 end
 
 /-- The symmetry equation on homogeneous pure sections.
-Source: Stacks 0FPQ (blueprint: lem-sf-ringed-tensor-complex-constraints). -/
+Source: Stacks 0FPQ. -/
 def symmetryPure : Prop :=
   ∀ (P Q : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (p q n : ℤ) (h : p + q = n) (h' : q + p = n) (U : Cᵒᵖ)
@@ -176,7 +176,7 @@ def symmetryPure : Prop :=
     (p * q).negOnePow • coefficientTensorGenerator.{u, c, v} J R Q P q p n h' U y x
 
 /-- The associator equation on homogeneous pure sections.
-Source: Stacks 0FPQ (blueprint: lem-sf-ringed-tensor-complex-constraints). -/
+Source: Stacks 0FPQ. -/
 def associatorPure : Prop :=
   ∀ (P Q N : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (p q r pq qr n : ℤ) (hpq : p + q = pq) (hqr : q + r = qr)
@@ -189,7 +189,7 @@ def associatorPure : Prop :=
       (coefficientTensorGenerator.{u, c, v} J R Q N q r qr hqr U y z)
 
 /-- The leftUnitor equation on homogeneous pure sections.
-Source: Stacks 0FPQ (blueprint: lem-sf-ringed-tensor-complex-constraints). -/
+Source: Stacks 0FPQ. -/
 def leftUnitorPure : Prop :=
   ∀ (P : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (n : ℤ) (h : 0 + n = n) (U : Cᵒᵖ) (a : R.obj.obj U) (x : (P.X n).val.obj U),
@@ -199,7 +199,7 @@ def leftUnitorPure : Prop :=
           (𝟙_ (Modules.{c, v, u} J R))).inv.val.app U) a) x) = a • x
 
 /-- The rightUnitor equation on homogeneous pure sections.
-Source: Stacks 0FPQ (blueprint: lem-sf-ringed-tensor-complex-constraints). -/
+Source: Stacks 0FPQ. -/
 def rightUnitorPure : Prop :=
   ∀ (P : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (n : ℤ) (h : n + 0 = n) (U : Cᵒᵖ) (a : R.obj.obj U) (x : (P.X n).val.obj U),
@@ -209,7 +209,7 @@ def rightUnitorPure : Prop :=
           (𝟙_ (Modules.{c, v, u} J R))).inv.val.app U) a)) = a • x
 
 /-- Pure-section descriptions of the constructed complex constraints.
-Source: Stacks 0FPQ (blueprint: lem-sf-ringed-tensor-complex-constraints). -/
+Source: Stacks 0FPQ. -/
 structure ComplexConstraints : Prop where
   symmetry : symmetryPure.{c, v, u} J R
   associator : associatorPure.{c, v, u} J R
@@ -290,7 +290,6 @@ end
 
 /-- The native complex constraints have the usual signed pure-section formulas.
 Source: Stacks Project, Tag 0FPQ, and More on Algebra, sign rules
-(blueprint: lem-sf-ringed-tensor-complex-constraints).
 
 Proof: write a generator as the sheafification unit on a presheaf pure tensor,
 followed by the inverse tensor-sheafification comparison and the inclusion of its

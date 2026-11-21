@@ -43,7 +43,6 @@ import Mathlib.LinearAlgebra.DirectSum.TensorProduct
 /-! # Generator-normalized tensor comparison on a ringed slice site
 
 Source: Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03EK and 0GMW
-(blueprint: lem-sf-ringed-slice-tensor-generators).
 -/
 
 @[expose] public noncomputable section
@@ -67,7 +66,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 open Classical in
 /-- The original extension summand, followed by the actual module sheafification unit.
 This is the section denoted `[x]_f`, rather than an arbitrary extension generator.
-Source: Stacks 03DI (blueprint: lem-sf-ringed-slice-tensor-generators). -/
+Source: Stacks 03DI. -/
 def ringedSliceExtensionSection
     (G : ringedSiteModules.{max c v r}
       (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A).over U))
@@ -84,7 +83,7 @@ def ringedSliceExtensionSection
 /-- The restriction comparison from the recorded dependency, selected with its prescribed
 pure-tensor normalization. That normalization determines the comparison on all sheaf maps
 by the tensor and sheafification universal properties, so this selects no arbitrary map.
-Source: Stacks 03EL (blueprint: lem-sf-ringed-slice-tensor-generators). -/
+Source: Stacks 03EL. -/
 def ringedSliceTensorRestriction
     [HasWeakSheafify (J.over U) AddCommGrpCat.{max c v r}]
     [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
@@ -458,7 +457,6 @@ end Slice
 in both variables, and its inverse is the prescribed adjunction transpose. The two inverse
 identities are included in the `Iso` structure, as equalities of sheaf morphisms.
 Source: Stacks 0E8I, refined by Tags 03DI, 03EK and 0GMW
-(blueprint: lem-sf-ringed-slice-tensor-generators).
 
 Proof:
 1. The direct-sum Hom formula sends a slice map b to the presheaf map which on the

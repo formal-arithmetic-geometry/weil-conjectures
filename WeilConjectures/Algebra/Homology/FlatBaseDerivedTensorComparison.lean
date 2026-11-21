@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.FlatScalarExtensionHomologyAdjunct
 /-! # Localized base-derived tensor comparison for K-flat complexes
 
 Source: Stacks Project, Tags 06Y6 and 0A1D, condition (1) of Tag 0DJ8.
-(blueprint: lem-pc-flat-base-derived-tensor-comparison).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace ModuleCat
 
 /-- K-flatness over the base and a flat final extension make the canonical localized
 comparison invertible. Source: Stacks Project, Tags 06Y6 and 0A1D (Tag 0DJ8 (1)).
-(blueprint: lem-pc-flat-base-derived-tensor-comparison).
 
 Proof: Put P = Q restricted from A to R and E = A ⊗[R] B. Since tensoring P with
 every acyclic R-complex is acyclic, P is K-flat, and the identity resolution computes

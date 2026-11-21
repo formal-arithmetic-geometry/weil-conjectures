@@ -18,7 +18,6 @@ import WeilConjectures.Algebra.Homology.LocalizedHomComplexCyclesBijective
 # Canonical localized chain maps from section cocycles
 
 Source: Stacks Project, Tag 0A8X, Hom complexes; Equation 0A8Y (degree zero)
-(blueprint: lem-pur-localized-hom-complex-cycles-aux).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace CategoryTheory
 
 /-- Degree-zero sections that are cocycles are exactly chain maps on the slice site.
 Source: Stacks Project, Tag 0A8X (Hom complexes), leading to Equation 0A8Y
-(blueprint: lem-pur-localized-hom-complex-cycles-aux).
 
 Proof: apply section evaluation at U to the product cone specified by
 `homComplex_exists`. The forgetful functor from sheaves of modules and evaluation

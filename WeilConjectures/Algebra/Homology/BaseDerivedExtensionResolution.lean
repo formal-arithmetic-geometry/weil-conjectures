@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 # Total derived scalar extension computed on resolutions
 
 Source: Stacks Project, Tag 06Y6, lemma-derived-base-change
-(blueprint: lem-pc-base-derived-extension-resolution).
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ variable (R : Type uR) (B : Type uB) [CommRing R] [CommRing B]
   [HasDerivedCategory.{w} (ModuleCat.{max uR uB v} B)]
 
 /-- Source: Stacks Project, Tag 06Y6, lemma-derived-base-change, and Tag 06XN.
-(blueprint: lem-pc-base-derived-extension-resolution).
 
 Proof: Take K-flat resolutions of all R-complexes. Tensoring a quasi-isomorphism
 between K-flat complexes with B in degree zero is a quasi-isomorphism, by the

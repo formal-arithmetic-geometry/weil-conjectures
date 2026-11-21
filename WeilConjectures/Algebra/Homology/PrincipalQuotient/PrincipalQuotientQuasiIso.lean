@@ -14,8 +14,7 @@ import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 
 /-! # Principal quotient preserves quasi-isomorphisms on regular complexes
 
-Source: Stacks Project, Derived Categories, Tag 05RT; steps 4--7 of the original plan.
-(blueprint: lem-pod-principal-quotient-quasi-iso) -/
+Source: Stacks Project, Derived Categories, Tag 05RT; steps 4--7 of the original plan. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -112,8 +111,7 @@ The unit maps give short exact sequences C --t--> C → C/tC and D --t--> D → 
 Naturality gives a map between them with the original quasi-isomorphism on the first two
 terms. The homology long exact sequence makes the third map a quasi-isomorphism, and
 faithful restriction of scalars reflects that property.
-Source: Stacks Tag 05RT; blueprint steps 5--7.
-(blueprint: lem-pod-principal-quotient-quasi-iso) -/
+Source: Stacks Tag 05RT; blueprint steps 5--7. -/
 theorem quasiIso_map {C D : CochainComplex (ModuleCat.{u} R) ℤ} (g : C ⟶ D)
     (hg : QuasiIso g)
     (hC : ∀ i : ℤ, Function.Injective (fun x : C.X i ↦ t • x))

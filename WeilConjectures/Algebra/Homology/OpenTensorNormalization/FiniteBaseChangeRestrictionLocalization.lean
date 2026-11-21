@@ -59,7 +59,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 
 /-! Extension of the finite restriction square from resolving representatives.
-(blueprint: lem-sf-finite-base-change-restriction-localization)
 -/
 
 @[expose] public noncomputable section
@@ -145,8 +144,7 @@ realization of `R`; the termwise counit gives `finiteComplexRealization P ≅ R`
 so it is resolving (flatness and K-flatness are invariant under isomorphism of
 complexes), and `Q P ≅ M`.  Both displayed composites are components at `M` of
 composites of natural transformations between the same two functors of `M`,
-so naturality carries the equality `hrep P` across `Q P ≅ M`.
-(blueprint: lem-sf-finite-base-change-restriction-localization) -/
+so naturality carries the equality `hrep P` across `Q P ≅ M`. -/
 theorem finite_base_change_restriction_of_representatives
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

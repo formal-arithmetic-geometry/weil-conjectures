@@ -74,8 +74,7 @@ Precomposition through an equivalence preserves sheaves and their sheafification
 the sheafification adjunctions correspond under the inverse equivalence. Apply this
 sheafification comparison to the presheaf tensor isomorphism. The sheafified tensor
 presentation then gives the displayed isomorphism, natural in both module variables.
-The argument includes the zero ring and empty site, and requires no flatness of sections.
-(blueprint: lem-sf-ringed-site-equivalence-tensor). -/
+The argument includes the zero ring and empty site, and requires no flatness of sections. -/
 theorem pushforward_equivalence_tensor_iso
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     {D : Type u'} [Category.{v'} D] [EssentiallySmall.{w} D]

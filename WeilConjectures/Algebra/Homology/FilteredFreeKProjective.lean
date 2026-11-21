@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.FilteredFreeKProjectiveAssembly
 # Filtered free complexes are K-projective
 
 Source: Stacks Project, Differential Graded Algebra, Tag 09KM, lemma-property-P-K-projective.
-(blueprint: lem-pc-filtered-free-kprojective).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace CochainComplex
 
 /-- Finite-stage induction for filtered free complexes.
 (source: Stacks Project, Tag 09KM)
-(blueprint: lem-pc-filtered-free-kprojective-stage)
 
 Proof: induct on the filtration index. At zero, every map from `F 0` is zero, hence
 homotopic to zero. At a successor, apply the split-extension theorem to the induction
@@ -62,7 +60,6 @@ theorem isKProjective_of_filtered_free_stage {A : Type u} [CommRing A]
 
 /-- Telescope assembly for an exhaustive split filtration.
 (source: Stacks Project, Tags 09KL to 09KM)
-(blueprint: lem-pc-filtered-free-kprojective-telescope)
 
 Proof: on `S = ⨁ n, F n`, define `a : S → S` on summand `n` as its inclusion into
 summand `n` minus `step n` followed by inclusion into summand `n + 1`. Define `b : S → P`
@@ -100,7 +97,6 @@ theorem isKProjective_of_filtered_free_telescope
 /-- An exhaustive, degreewise split filtration with shifted free quotients is K-projective.
 Source: Stacks Project, Tag 09KM, lemma-property-P-K-projective, specialized to the algebra
 concentrated in degree zero; the larger carrier universe uses the rank-one module `ULift A`.
-(blueprint: lem-pc-filtered-free-kprojective).
 
 Proof: each shifted free module has no maps up to homotopy to an acyclic complex:
 a chain map is determined by a cycle, and acyclicity writes that cycle as a boundary.

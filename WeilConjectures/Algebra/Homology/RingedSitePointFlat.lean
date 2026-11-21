@@ -27,7 +27,6 @@ namespace CategoryTheory.RingedSitePoint
 
 /-- Geometric module inverse image preserves flat objects at a point.
 Source: Stacks Project, Modules on Sites, Tag 05VD.
-(auxiliary; not a blueprint node)
 
 Proof: present the point as a morphism to the bottom-topology one-object site,
 using its prescribed ring and module operation graphs. The algebraic inverse-image

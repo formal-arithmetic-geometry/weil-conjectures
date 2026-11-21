@@ -27,7 +27,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
 /-- Derived subsequence restriction followed by evaluation is the actual selected evaluation.
-Source: Stacks 015F (blueprint: lem-pur-system-derived-subsequence). -/
+Source: Stacks 015F. -/
 def systemDerivedSubsequenceEvaluation (r : ℕ ↪o ℕ) (n : ℕ) :
     derivedSystemSubsequence B r ⋙ derivedSystemEvaluation (selectedSystemRings B r) n ≅
       derivedSystemEvaluation B (r n) :=
@@ -35,7 +35,7 @@ def systemDerivedSubsequenceEvaluation (r : ℕ ↪o ℕ) (n : ℕ) :
     (systemEvaluation (selectedSystemRings B r) n)
 
 /-- The selected-evaluation comparison has the canonical cochain representative formula.
-Source: Stacks 015F (blueprint: lem-pur-system-derived-subsequence).
+Source: Stacks 015F.
 Proof: compose with the exact-functor compositor in the opposite direction, then apply
 its factorization equation. The compositor and its inverse cancel. -/
 theorem systemDerivedSubsequenceEvaluation_rep (r : ℕ ↪o ℕ) (n : ℕ)
@@ -55,7 +55,7 @@ theorem systemDerivedSubsequenceEvaluation_rep (r : ℕ ↪o ℕ) (n : ℕ)
     (systemSubsequence B r) (systemEvaluation (selectedSystemRings B r) n) K).symm
 
 /-- Successive derived restrictions are the exact restriction along the composite selection.
-Source: Stacks 015F (blueprint: lem-pur-system-derived-subsequence). -/
+Source: Stacks 015F. -/
 def systemDerivedSubsequenceComposition (r s : ℕ ↪o ℕ) :
     derivedSystemSubsequence B r ⋙ derivedSystemSubsequence (selectedSystemRings B r) s ≅
       derivedSystemSubsequence B (s.trans r) :=
@@ -63,7 +63,7 @@ def systemDerivedSubsequenceComposition (r s : ℕ ↪o ℕ) :
     (systemSubsequence (selectedSystemRings B r) s)
 
 /-- The subsequence compositor has the canonical cochain representative formula.
-Source: Stacks 015F (blueprint: lem-pur-system-derived-subsequence).
+Source: Stacks 015F.
 Proof: the ordinary composite subsequence functor is definitionally the composite-index
 restriction. Cancel the exact-functor compositor against its inverse and apply its
 factorization identity. -/

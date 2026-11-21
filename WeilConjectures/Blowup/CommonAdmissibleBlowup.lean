@@ -30,8 +30,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- **Finitely many `U`-admissible blow-ups admit a common `U`-admissible blow-up** (blueprint
-`lemma-products-composites-u-admissible-blow--1`): for a finite family of `U`-admissible centers
+/-- **Finitely many `U`-admissible blow-ups admit a common `U`-admissible blow-up**: for a finite family of `U`-admissible centers
 `B i` on `X`, there is a `U`-admissible center `B'` whose blow-up dominates each blow-up of
 `B i` over `X`. One takes for `B'` the product of the centers. -/
 theorem IsAdmissible.exists_common_blowup {X : Scheme.{u}} {U : X.Opens} {ι : Type*} [Finite ι]

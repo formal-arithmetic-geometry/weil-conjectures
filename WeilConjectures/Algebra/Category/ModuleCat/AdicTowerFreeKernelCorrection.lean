@@ -92,7 +92,6 @@ presentation-kernel vector with the same free residue at that level.
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 087W, proof, the surjection
 K → K_n used in the final cokernel calculation.
-(blueprint: lem-weil-pbc-adic-tower-free-kernel-correction).
 
 Proof: Put P = A^d and P_n = P/I^(n+1)P. The map q followed by the nth
 projection factors through P_n: identify the completed free module with a

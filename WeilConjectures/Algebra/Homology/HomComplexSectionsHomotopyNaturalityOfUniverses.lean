@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.HomComplexSectionsCanonicalComparisonOfU
 # Naturality of the local Hom-complex comparison in the homotopy category
 
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ lemma homObjMap_section_component
 -- Projection comparisons involve several composed functors and chosen product objects.
 /-- The shifted section Hom-complex comparison in the homotopy category is natural.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-(auxiliary; not a blueprint node)
 
 Proof: evaluate the product projections of the sheaf Hom complex at U. Sections
 in degree n are families of maps L^p|U to I^(p+n)|U. The differential formula

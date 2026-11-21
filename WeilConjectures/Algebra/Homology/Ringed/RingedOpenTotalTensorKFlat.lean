@@ -45,7 +45,6 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 Source: Stacks Project, Modules on Sites, Tag 0E8I (lemma-j-shriek-and-tensor),
 Homology, Tag 012Z, and Cohomology on Sites, Tags 06YN and 06YS
-(blueprint: lem-sf-ringed-open-total-tensor-kflat).
 
 The total tensor is Mathlib's direct-sum total cochain complex. Both module functors
 are the existing localized-system functors, applied termwise. The site object and
@@ -70,8 +69,7 @@ variable {S : Type c} [Category.{v} S] {J : GrothendieckTopology S}
   (R : Sheaf J CommRingCat.{max c v r}) (U : S)
 
 /-- The recorded ringed-slice functor, with canonical sheafification instances explicit.
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I -/
 def ringedOpenExtension :=
   letI : HasSheafify J AddCommGrpCat.{max c v r} :=
     hasSheafify_coefficientUniverse.{c, v, max c v r} (J := J)
@@ -84,8 +82,7 @@ def ringedOpenExtension :=
   localizedSystemExtension.{c, v, r} R U
 
 /-- The recorded ringed-slice functor, with canonical sheafification instances explicit.
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I -/
 def ringedOpenRestriction :=
   letI : HasSheafify J AddCommGrpCat.{max c v r} :=
     hasSheafify_coefficientUniverse.{c, v, max c v r} (J := J)
@@ -98,8 +95,7 @@ def ringedOpenRestriction :=
   localizedSystemRestriction.{c, v, r} R U
 
 /-- The recorded ringed-slice functor, with canonical sheafification instances explicit.
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I -/
 def ringedOpenSheafTensorLeft :=
   letI : HasSheafify J AddCommGrpCat.{max c v r} :=
     hasSheafify_coefficientUniverse.{c, v, max c v r} (J := J)
@@ -112,8 +108,7 @@ def ringedOpenSheafTensorLeft :=
   ringedSliceTensorLeft.{c, max c r, v} J R U
 
 /-- The recorded ringed-slice functor, with canonical sheafification instances explicit.
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I -/
 def ringedOpenSheafTensorRight :=
   letI : HasSheafify J AddCommGrpCat.{max c v r} :=
     hasSheafify_coefficientUniverse.{c, v, max c v r} (J := J)
@@ -126,8 +121,7 @@ def ringedOpenSheafTensorRight :=
   ringedSliceTensorRight.{c, max c r, v} J R U
 
 /-- Termwise application of the actual direct-sum extension followed by sheafification.
-Source: Stacks Project, Modules on Sites, Tags 03DI--03DJ and 0E8I
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Modules on Sites, Tags 03DI--03DJ and 0E8I -/
 abbrev ringedOpenExtensionOnComplexes :
     CochainComplex (SheafOfModules.{max c v r}
       (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj
@@ -140,8 +134,7 @@ abbrev ringedOpenExtensionOnComplexes :
   (localizedSystemExtension.{c, v, r} R U).mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- Termwise restriction to the localized ringed site.
-Source: Stacks Project, Modules on Sites, Tags 04IX and 0E8I
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Modules on Sites, Tags 04IX and 0E8I -/
 abbrev ringedOpenRestrictionOnComplexes :
     CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ ⥤
@@ -154,8 +147,7 @@ abbrev ringedOpenRestrictionOnComplexes :
   (localizedSystemRestriction.{c, v, r} R U).mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- The existing sheaf tensor with its coefficient ring specified explicitly.
-Source: Stacks Project, Modules on Sites, Section 03EK
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Modules on Sites, Section 03EK -/
 def ringedOpenTensor {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r}) :=
   @curriedTensor (SheafOfModules.{max c v r}
@@ -163,8 +155,7 @@ def ringedOpenTensor {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (cochainModulesMonoidal.{c, v, max c v r} A)
 
 /-- Zero-map preservation for the specified existing tensor.
-Source: Stacks Project, Modules on Sites, Section 03EK
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Modules on Sites, Section 03EK -/
 instance ringedOpenTensorZero {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r}) :
     (ringedOpenTensor.{c, v, r} A).PreservesZeroMorphisms :=
@@ -175,8 +166,7 @@ instance ringedOpenTensorZero {T : Type c} [Category.{v} T] {K : GrothendieckTop
       (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A))).PreservesZeroMorphisms)
 
 /-- Zero-map preservation in the second variable of the existing tensor.
-Source: Stacks Project, Modules on Sites, Section 03EK
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Modules on Sites, Section 03EK -/
 instance ringedOpenTensorObjZero {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r})
     (M : SheafOfModules.{max c v r}
@@ -189,8 +179,7 @@ instance ringedOpenTensorObjZero {T : Type c} [Category.{v} T] {K : Grothendieck
       (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A))).obj M).PreservesZeroMorphisms)
 
 /-- The existing total tensor has the required direct sums on this small ringed site.
-Source: Stacks Project, Homology, Tag 012Z
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Homology, Tag 012Z -/
 instance ringedOpenHasTotalTensor {T : Type c} [Category.{v} T]
     {K : GrothendieckTopology T} (A : Sheaf K CommRingCat.{max c v r})
     (P C : CochainComplex (SheafOfModules.{max c v r}
@@ -203,8 +192,7 @@ instance ringedOpenHasTotalTensor {T : Type c} [Category.{v} T]
   inferInstance
 
 /-- The existing total tensor bifunctor, with its canonical instances supplied explicitly.
-Source: Stacks Project, Homology, Tag 012Z
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Homology, Tag 012Z -/
 def ringedOpenTotalTensor {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r}) :=
   letI := ringedOpenTensorZero.{c, v, r} A
@@ -213,8 +201,7 @@ def ringedOpenTotalTensor {T : Type c} [Category.{v} T] {K : GrothendieckTopolog
   (ringedOpenTensor.{c, v, r} A).map₂CochainComplex
 
 /-- The canonical insertion of one bidegree into the existing direct-sum total tensor.
-Source: Stacks Project, Homology, Tag 012Z
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Homology, Tag 012Z -/
 def ringedOpenTensorι {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r})
     (P C : CochainComplex (SheafOfModules.{max c v r}
@@ -228,8 +215,7 @@ def ringedOpenTensorι {T : Type c} [Category.{v} T] {K : GrothendieckTopology T
   CochainComplex.ιMapBifunctor P C (ringedOpenTensor.{c, v, r} A) p q n h
 
 /-- The simultaneous map of the existing total tensor bifunctor on two chain maps.
-Source: Stacks Project, Homology, Tag 012Z
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Homology, Tag 012Z -/
 def ringedOpenTotalTensorMap {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r})
     {P P' C C' : CochainComplex (SheafOfModules.{max c v r}
@@ -241,8 +227,7 @@ def ringedOpenTotalTensorMap {T : Type c} [Category.{v} T] {K : GrothendieckTopo
     ((ringedOpenTotalTensor.{c, v, r} A).obj P').map b
 
 /-- The recorded sheaf comparison, expressed in the existing monoidal tensor.
-Source: Stacks Project, Modules on Sites, Tag 0E8I
-(blueprint: lem-sf-ringed-open-total-tensor-kflat). -/
+Source: Stacks Project, Modules on Sites, Tag 0E8I -/
 def ringedOpenSheafComparison
     (θ : ringedOpenSheafTensorLeft.{c, v, r} R U ≅
       ringedOpenSheafTensorRight.{c, v, r} R U)
@@ -940,7 +925,6 @@ also preserves K-flat complexes and K-flat resolutions.
 
 Source: Stacks Project, Modules on Sites, Tag 0E8I (lemma-j-shriek-and-tensor),
 Homology, Tags 012Z and 010N, and Cohomology on Sites, Tags 06YN and 06YS
-(blueprint: lem-sf-ringed-open-total-tensor-kflat).
 
 Proof:
 1. In each degree n use the extension/restriction adjunction

@@ -59,7 +59,6 @@ variable {C : Type c} [Category.{v} C] {D : Type d} [Category.{z} D]
 coefficient map commutes with the ordinary tensor, naturally in both factors and
 with the identity formula on pure sections.
 Source: Stacks Project Tags 03EK and 04B8
-(blueprint: lem-sf-sectionwise-tensor-comparison).
 
 Proof: use the balanced presheaf tensor comparison for the invertible scalar map,
 then commute restriction with sheafification. Naturality of the sheafification unit

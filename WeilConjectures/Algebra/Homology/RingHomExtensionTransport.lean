@@ -21,7 +21,6 @@ set_option linter.privateModule false
 
 Source: Stacks Project, more-algebra.tex, equation-base-change-RHom and
 Lemma 0A6A; the one-point-site realization used in the parent statement.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section

@@ -13,7 +13,6 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainInverseCompar
 
 /-! # Module adjunction for an independently sized inverse image
 Source: Stacks Project, Modules on Sites, Tags 03D3 and 03D7.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -70,7 +69,6 @@ private theorem restrictHomEquiv_map
 
 /-- The specified algebraic inverse image has a module right adjoint.
 Source: Stacks Project, Modules on Sites, Tags 03D3 and 03D7.
-(auxiliary; not a blueprint node).
 
 Proof: transport modules along the product-preserving right adjoint, with the
 coefficient action induced by the adjunct of the ring comparison. The graph equations

@@ -12,8 +12,7 @@ import WeilConjectures.Algebra.Homology.AffineDirectLocalizedTensorSquareCore
 
 /-! # AffineDirectLocalizedTensorSquare
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-direct-localized-tensor-square). -/
+Source: Stacks Project, Tag 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -31,7 +30,6 @@ variable [∀ Y : Scheme.{u},
 /-- Localize the input and the two base rings, with the final coefficient ring
 already the fourth stalk. Source: Stacks Project, Tag 0DJ8, displayed affine
 localization identity, and Tags 06Y6 and 01I9.
-(blueprint: lem-pc-affine-direct-localized-tensor-square).
 
 Proof: the cartesian spectrum square identifies A' with A tensor_R R'. The
 canonical maps from A, R, R' to their stalks are localizations at the contracted

@@ -233,7 +233,6 @@ set_option backward.isDefEq.respectTransparency false in
 with invertible differential.
 Source: Stacks Project, Homology Tag 0118 (homology-section-truncations),
 canonical truncations; the kernel identification is explicit.
-(blueprint: lem-sp-vertical-cutoff-comparison-kernel-two-term)
 
 Proof: write E for L extended by zero and I for image of E.d (a - 1) a.
 Monicity of the upper cutoff inclusion identifies g with the nested inclusion.

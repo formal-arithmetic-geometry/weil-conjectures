@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.BoundedGradedMapColimitDescent
 /-! # Descent of the maps of a bounded graded family
 
 Source: Stacks Project, Tag 0BC7, proof of (1), using Tag 05N7, clause (2).
-(blueprint: lem-pc-bounded-graded-family-map-colimit-descent).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace ModuleCat
 
 Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1), using Algebra,
 Tag 05N7, clause (2).
-(blueprint: lem-pc-bounded-graded-family-map-colimit-descent).
 
 Proof: Regard the fixed terms M n as a cochain complex C with zero differentials,
 and the shifted terms M (n+1) as a second such complex B. Conjugate the adjacent

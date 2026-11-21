@@ -15,7 +15,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
 
 Conrad's Theorem 2.4, Case 1: a quasi-affine target of finite type over an affine base
 (`AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffine`).
-(Blueprint: `lemma:nagata-conrad-quasi-affine-affine-base`.)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ section Statement
 variable {X : Scheme.{u}}
 
 /-- **Conrad's Theorem 2.4, Case 1: a quasi-affine target over an affine base**
-(blueprint: `lemma:nagata-conrad-quasi-affine-affine-base`).
 
 Over an affine base, the quasi-affineness of `Y` as a scheme is the same as the
 quasi-affineness of `p` as a morphism, so this is the absolute form of the hypothesis.

@@ -17,7 +17,6 @@ public import WeilConjectures.Algebra.Homology.RingedSitePullback.PullbackLocali
 # Transfer of pairings along a morphism of ringed sites
 
 Source: Stacks Project, Modules on Sites, Tags 03EL, 03EO and 0GMX.
-(blueprint: lem-pur-ringed-site-pullback-pairing-transfer)
 -/
 
 @[expose] public section
@@ -262,7 +261,6 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
 
 /-- A pairing extends uniquely to module pullback, with the adjunction-unit formula.
 Source: Stacks Project, Modules on Sites, Tags 03EO, 0GMX and 04J0.
-(blueprint: lem-pur-ringed-site-pullback-pairing-transfer).
 
 Proof: Over each V, apply the localized module adjunction to the functional b(p)
 followed by the coefficient map. The localization comparison identifies its source

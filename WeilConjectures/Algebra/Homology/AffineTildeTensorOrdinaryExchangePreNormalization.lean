@@ -172,7 +172,6 @@ attribute [local irreducible] affineTildePushforwardComparison
 set_option cleanup.letToHave false in
 /-- The affine exchange calculation before expanding the target coefficient map.
 Source: Stacks Project, Tags 06Y6 and 08HY.
-(blueprint: lem-pc-affine-tilde-tensor-ordinary-exchange-prenormalization).
 Proof: transpose the ordinary base-change mate under tensor pullback along f'.
 The pullback/tilde comparisons send the unit to 1 tensor q, while the affine
 pushforward comparison uses the same tilde unit, sections restriction and counit.

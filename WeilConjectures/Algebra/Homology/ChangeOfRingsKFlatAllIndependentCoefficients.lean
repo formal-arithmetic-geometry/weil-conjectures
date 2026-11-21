@@ -86,7 +86,6 @@ complex, with independent site and coefficient universes.
 
 Source: Stacks Project, Tag 0G7E; the first half of the tensor-cancellation proof in
 lem-pur-kflat-change-of-rings-independent
-(auxiliary; not a blueprint node).
 
 Proof: Restriction of scalars is faithful and exact, and preserves the direct sums
 forming total complexes. The balanced cancellation isomorphism identifies the

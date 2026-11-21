@@ -44,8 +44,7 @@ isomorphism on cohomology in every degree. Tensoring with O' in degree zero is t
 extension of scalars after forgetting the O'-action. The forgetful restriction functor
 is exact and faithful, and reflects vanishing of cohomology, so the same map is a
 quasi-isomorphism as a complex of O'-modules. The supplied object and morphism equalities
-identify E's map of complexes with this map, including the equality transports.
-(blueprint: lem-pur-change-of-rings-kflat-quasi-iso) -/
+identify E's map of complexes with this map, including the equality transports. -/
 theorem changeOfRings_kFlat_quasiIso
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]

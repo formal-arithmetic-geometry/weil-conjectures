@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Homology.FiniteChainSquaresColimitDescent
 /-! # Descent of chain maps between affine perfect complexes
 
 Source: Stacks Project, Tag 09RE, affine case (1).
-(blueprint: lem-pc-affine-perfect-chain-map-descent)
 -/
 
 @[expose] public section
@@ -66,8 +65,7 @@ scalars preserves the zero source, so the equations hold automatically. These
 components define g. The two componentwise comparison equalities compose, and
 unfolding `scalarExtensionHom` and componentwise extensionality give its required
 equality with f. The two descent lemmas handle directed preorders; no partial-order
-assumption is added here.
-(blueprint: lem-pc-affine-perfect-chain-map-descent) -/
+assumption is added here. -/
 theorem affine_perfect_chainMap_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

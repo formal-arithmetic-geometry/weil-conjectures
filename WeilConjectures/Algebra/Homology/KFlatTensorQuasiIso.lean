@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 # Tensoring a K-flat quasi-isomorphism with an arbitrary complex
 
 Source: Stacks Project, Lemma 15.60.12, Tag 064L
-(blueprint: lem-pc-kflat-tensor-quasi-iso).
 
 The ring is regarded as a constant sheaf on the one-point site with the bottom topology.
 K-flatness is the existing `CochainComplex.IsKFlatTensor` for sheaves of modules on this site.
@@ -33,7 +32,7 @@ namespace CochainComplex
 
 variable {R : Type u} [CommRing R]
 
-/-- (blueprint: lem-pc-kflat-tensor-quasi-iso) The commutative ring `R` regarded as a
+/-- The commutative ring `R` regarded as a
 sheaf on the one-point site, as in the node's interpretation of Stacks, Tag 064L.
 The bottom topology imposes no additional sheaf condition; the constant presheaf
 has value `R` at the unique object. -/
@@ -107,7 +106,7 @@ private theorem kFlat_tensor_left_of_quasiIso
   intro i
   exact (ht' i).of_iso (mapBifunctorMappingCone₂Iso K α F)
 
-/-- (blueprint: lem-pc-kflat-tensor-quasi-iso) Stacks, Tag 064L: if `α` is a
+/-- Stacks, Tag 064L: if `α` is a
 quasi-isomorphism between K-flat complexes of `R`-modules, then `Tot(α ⊗ 1_N)`
 is a quasi-isomorphism for every complex `N`. Here `R` is a sheaf on the one-point site.
 

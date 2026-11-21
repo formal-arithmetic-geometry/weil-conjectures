@@ -11,8 +11,6 @@ import WeilConjectures.Algebra.Homology.OpenTensorNormalization.FiniteBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Finite base-change restriction coherence
-
-(blueprint: lem-sf-finite-base-change-restriction-coherence)
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +37,7 @@ ordinary transformations. Taking mates with the pinned pull adjunctions gives
 the corresponding square of ordinary left pullbacks. On a resolving complex,
 the pull model equations, the exact open model equations, and theta_model
 identify the localized square with the displayed one. Left-derived uniqueness
-and localization in the source identify the transformations on all objects.
-(blueprint: lem-sf-finite-base-change-restriction-coherence) -/
+and localization in the source identify the transformations on all objects. -/
 theorem finite_base_change_restriction_coherence
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

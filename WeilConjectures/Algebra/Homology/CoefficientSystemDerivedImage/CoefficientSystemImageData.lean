@@ -34,7 +34,6 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21,
 and Lemma 4.10, printed pp. 23--24
-(blueprint: lem-pur-coefficient-system-derived-comparison).
 
 The index `n` denotes the positive exponent `n+1`. All systems, evaluation functors,
 scalar extensions and adjoint transitions are the recorded coefficient-evaluation
@@ -99,13 +98,13 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (O : Type w) [CommRing O] (ell : O)
 
 /-- The existing forgetful functor at a coefficient level.
-Source: Zheng, Construction 4.1 (blueprint: lem-pur-coefficient-system-derived-comparison). -/
+Source: Zheng, Construction 4.1. -/
 abbrev coefficientUnderlying (n : ℕ) :
     coefficientLevelModules (J := J) O ell n ⥤ Sheaf J (Type w) :=
   toSheaf _ ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{w})
 
 /-- Constant coefficient generators, obtained from the actual ring-sheafification unit.
-Source: Zheng, Construction 4.1 (blueprint: lem-pur-coefficient-system-derived-comparison). -/
+Source: Zheng, Construction 4.1. -/
 def coefficientConstantSection (n : ℕ)
     (x : O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)) :
     (constantSheaf J (Type w)).obj PUnit ⟶
@@ -118,7 +117,7 @@ def coefficientConstantSection (n : ℕ)
           (CategoryTheory.forget CommRingCat.{w}))
 
 /-- Scalar restriction leaves the underlying sheaf of sets unchanged.
-Source: Stacks 03CZ (blueprint: lem-pur-coefficient-system-derived-comparison). -/
+Source: Stacks 03CZ. -/
 def coefficientRestrictionUnderlying {m n : ℕ} (h : n ≤ m) :
     coefficientRestriction (J := J) O ell h ⋙ coefficientUnderlying (J := J) O ell m ≅
       coefficientUnderlying (J := J) O ell n :=
@@ -134,8 +133,7 @@ variable {A : Type a} {B : Type b} [Category.{av} A] [Category.{bv} B]
 /-- Exact inverse image and total right direct image, with their normalized adjunction.
 The universal right-derived pair and its K-injective comparison fix the right functor;
 the transpose equation fixes its adjunction relative to the ordinary one.
-Source: Zheng, Lemma 4.10; Stacks 09T5, 0FND
-(blueprint: lem-pur-coefficient-system-derived-comparison). -/
+Source: Zheng, Lemma 4.10; Stacks 09T5, 0FND -/
 structure CoefficientDerivedImage where
   inverse : DerivedCategory A ⥤ DerivedCategory B
   inverseFactors : DerivedCategory.Q ⋙ inverse ≅
@@ -167,8 +165,7 @@ variable {A : Type ga} [Category.{gav} A] [Abelian A] [HasDerivedCategory.{d} A]
 /-- Evaluation comparison data over arbitrary abelian categories.
 Using category parameters keeps the generated recursors independent of the large
 ringed-site presentations. The specialization below fixes all parameters.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: lem-pur-coefficient-system-unbounded-comparison). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 structure CoefficientEvaluationImageData
     (F : A ⥤ B) (G : B ⥤ A) [F.Additive] [G.Additive] (adj : F ⊣ G)
     (Flevel : ∀ n, MA n ⥤ MB n) (Glevel : ∀ n, MB n ⥤ MA n)
@@ -226,8 +223,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 Source: Zheng Lemma 4.10. Proof: transpose the proposed unit under the level
 adjunction, precompose with the inverse-evaluation isomorphism, and use its
 naturality. The evaluated counit identity reduces the result to the system
-triangle identity. Injectivity of transposition gives the unit equation.
-(blueprint: def-pur-coefficient-system-image-data). -/
+triangle identity. Injectivity of transposition gives the unit equation. -/
 theorem CoefficientEvaluationImageData.unit
     (E : CoefficientEvaluationImageData F G adj Flevel Glevel adjLevel eA eB
       EA EB factorsA factorsB alpha) (n : ℕ) (H : DerivedCategory A) :
@@ -240,8 +236,7 @@ theorem CoefficientEvaluationImageData.unit
 
 /-- Coefficient comparison data for fixed evaluation images and scalar adjunctions.
 All functors and flatness predicates are specialized to the actual coefficient data below.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: lem-pur-coefficient-system-unbounded-comparison). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 structure CoefficientScalarImageData
     (TA : ∀ {m n : ℕ}, n ≤ m → MA m ⥤ MA n)
     (RA : ∀ {m n : ℕ}, n ≤ m → MA n ⥤ MA m)
@@ -313,8 +308,7 @@ structure CoefficientScalarImageData
 
 /-- Formal descent conditions, parameterized by the already fixed construction data.
 All predicates and functors are specialized below; no extra choice is introduced.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 structure CoefficientImageDescentData {gt : Type*}
     (EB : ∀ n, DerivedCategory B ⥤ DerivedCategory (MB n))
     (systemDirect : gt → DerivedCategory B ⥤ DerivedCategory A)
@@ -354,8 +348,7 @@ variable {D : Type u'} [Category.{v'} D] [EssentiallySmall.{w} C]
 constants are fixed on every coefficient generator, and the displayed Hom formula is
 the underlying set-sheaf adjunction. Evaluation and transition equations fix the actual
 levelwise system functors, on objects and maps, rather than arbitrary adjoint functors.
-Source: Zheng, Construction 4.1, and the paragraph before Lemma 4.10
-(blueprint: lem-pur-coefficient-system-derived-comparison). -/
+Source: Zheng, Construction 4.1, and the paragraph before Lemma 4.10 -/
 structure CoefficientSystemOrdinaryImage where
   singleton : L.obj ((constantSheaf J (Type w)).obj PUnit) ≅
     (constantSheaf K (Type w)).obj PUnit
@@ -421,8 +414,7 @@ variable [∀ n : ℕ, HasDerivedCategory.{d} (coefficientLevelModules (J := J) 
   [HasDerivedCategory.{d} (CoefficientSystem (J := K) O ell)]
 
 /-- The evaluation data specialized to the prescribed coefficient-system functors.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: lem-pur-coefficient-system-unbounded-comparison). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev CoefficientEvaluationImage
     (S : CoefficientSystemOrdinaryImage (J := J) (K := K) O ell L V adj)
     (PY : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell))
@@ -433,8 +425,7 @@ abbrev CoefficientEvaluationImage
     PY.evaluation PX.evaluation PY.evaluationFactors PX.evaluationFactors S.inverseEvaluation
 
 /-- The scalar data specialized to the actual quotient tensors and scalar packages.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: lem-pur-coefficient-system-unbounded-comparison). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev CoefficientScalarImage
     (S : CoefficientSystemOrdinaryImage (J := J) (K := K) O ell L V adj)
     (PY : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell))
@@ -464,8 +455,7 @@ abbrev CoefficientScalarImage
     (fun {_ _} h ↦ S.restrictInverse h) E
 
 /-- Unbounded construction data, grouped to keep generated recursors small.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: lem-pur-coefficient-system-unbounded-comparison). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 structure CoefficientSystemUnboundedImage
     (S : CoefficientSystemOrdinaryImage (J := J) (K := K) O ell L V adj)
     (PY : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell))
@@ -474,7 +464,7 @@ structure CoefficientSystemUnboundedImage
   scalar : CoefficientScalarImage O ell L V adj S PY PX evaluation
 
 /-- Normalization means invertibility of the actual adjoint derived transitions.
-Source: Zheng, Construction 4.1 (blueprint: lem-pur-coefficient-system-derived-comparison). -/
+Source: Zheng, Construction 4.1. -/
 def IsNormalizedCoefficientSystem
     (P : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell))
     (M : DerivedCategory (CoefficientSystem (J := J) O ell)) : Prop :=
@@ -488,8 +478,7 @@ set_option genSizeOfSpec false in
 /-- The full derived comparison and its coherence on systems and all derived maps.
 Every functor is tied to the ordinary geometric functors or to the universal derived
 scalar extension; the two adjunction equations fix the evaluation comparison.
-Source: Zheng, Construction 4.1 and Lemma 4.10
-(blueprint: lem-pur-coefficient-system-derived-comparison). -/
+Source: Zheng, Construction 4.1 and Lemma 4.10 -/
 abbrev CoefficientSystemDerivedImage
     (S : CoefficientSystemOrdinaryImage (J := J) (K := K) O ell L V adj)
     (PY : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell))
@@ -507,139 +496,119 @@ variable {O ell L V adj}
   {PX : CoefficientEvaluationDerivedPackage (J := K) (O := O) (ell := ell)}
 
 /-- Detection of isomorphisms in the grouped representation.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev detectsIso (T : CoefficientSystemDerivedImage O ell L V adj S PY PX)
     {M N : DerivedCategory (CoefficientSystem (J := K) O ell)} :=
   CoefficientImageDescentData.detectsIso T (M := M) (N := N)
 
 /-- Lower-bound preservation in the grouped representation.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev boundedBelow (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
   CoefficientImageDescentData.boundedBelow T
 
 /-- Essential-image and normalization descent in the grouped representation.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev origin (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
   CoefficientImageDescentData.origin T
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev system
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
   T.construction.evaluation.system
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev level
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
   T.construction.evaluation.level
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev inverseEvaluation
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
   T.construction.evaluation.inverseEvaluation
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev inverseEvaluation_rep
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
   T.construction.evaluation.inverseEvaluation_rep
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev directEvaluation
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
   T.construction.evaluation.directEvaluation
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev counit
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
   T.construction.evaluation.counit
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev unit
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
   T.construction.evaluation.unit
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev tensor
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
   T.construction.scalar.tensor h
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev tensor_unit
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
   T.construction.scalar.tensor_unit h
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev derivedTensor
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
   T.construction.scalar.derivedTensor h
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev derivedTensor_rep
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
   T.construction.scalar.derivedTensor_rep h
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev restrictedDirect
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
   T.construction.scalar.restrictedDirect h
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev restrictedDirect_mate
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
   T.construction.scalar.restrictedDirect_mate h
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev restrictedInverse
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
   T.construction.scalar.restrictedInverse h
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev restrictedInverse_mate
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
   T.construction.scalar.restrictedInverse_mate h
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev inverseTransition
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
   T.construction.scalar.inverseTransition h
 
 /-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
+Source: Zheng Construction 4.1 and Lemma 4.10 -/
 abbrev directTransition
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
   T.construction.scalar.directTransition h

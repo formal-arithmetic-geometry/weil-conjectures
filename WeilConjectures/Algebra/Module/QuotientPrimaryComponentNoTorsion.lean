@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
 # The quotient by ideal-power torsion has no ideal torsion
 
 Source: Stacks Project, More on Algebra, Lemma 05EB (lemma-divide-by-torsion), part (1)
-(blueprint: lem-weil-pbc-quotient-by-power-torsion-no-torsion).
 -/
 
 @[expose] public section
@@ -24,7 +23,6 @@ namespace Ideal
 /-- Every class in the quotient by the `I`-power torsion submodule that is annihilated
 by every element of `I` is zero, when `I` is finitely generated.
 Source: Stacks Project, More on Algebra, Lemma 05EB (lemma-divide-by-torsion), part (1)
-(blueprint: lem-weil-pbc-quotient-by-power-torsion-no-torsion).
 
 The submodule `primaryComponent M I` is exactly `M[I^∞]`: allowing exponent zero adds
 only the zero element, which is also killed by `I^1`.

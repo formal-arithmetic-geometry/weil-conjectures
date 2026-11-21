@@ -18,7 +18,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # K-flatness under restriction to an open localized site
 
 Source: Stacks Project, Tags 06YB and 03DH.
-(blueprint: lem-pc-open-localized-restriction-kflat).
 -/
 
 @[expose] public section
@@ -125,8 +124,7 @@ commutes with totalization. Thus its restriction is Tot(V(G) ⊗ V(P)). Transpor
 more along the unit complex isomorphism to obtain acyclicity of Tot(F ⊗ V(P)).
 No bounds or termwise-flatness assumptions are used, and the construction also applies
 to the empty open and zero complexes. The zero-map witness only defines the termwise
-restriction and adds no mathematical hypothesis.
-(blueprint: lem-pc-open-localized-restriction-kflat). -/
+restriction and adds no mathematical hypothesis. -/
 theorem open_localized_restriction_isKFlat
     {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (U : TopologicalSpace.Opens X)

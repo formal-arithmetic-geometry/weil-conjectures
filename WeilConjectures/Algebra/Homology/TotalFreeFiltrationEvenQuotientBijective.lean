@@ -13,7 +13,6 @@ import all WeilConjectures.Algebra.Homology.TotalFreeFiltrationOddQuotientBiject
 # Degreewise bijectivity of the even column quotient map
 
 Source: Stacks Project, Tag 09KP, alternating column filtration.
-(blueprint: lem-pc-derived-total-filtration-even-quotient-bijective)
 -/
 
 @[expose] public section
@@ -84,7 +83,6 @@ private lemma column_projection (j : ℕ) (k : ℤ) :
 Source: Stacks Project, Tag 09KP, proof, disjointness of the lower range and even term.
 Proof. Projecting to column -j kills earlier columns and proves the lower range meets
 the even term trivially.
-(blueprint: lem-pc-derived-total-filtration-even-quotient-injective)
 -/
 theorem evenQuotientComponent_injective
     (h_exact : ∀ j, (S j).ShortExact) (j : ℕ) (k : ℤ) :
@@ -142,7 +140,6 @@ theorem evenQuotientComponent_injective
 Source: Stacks Project, Tag 09KP, proof, decomposition of the odd term by the new lower range.
 Proof. Every odd filtration element is an even element plus a lower-column element;
 the cokernel projection kills the even part.
-(blueprint: lem-pc-derived-total-filtration-even-quotient-surjective)
 -/
 theorem evenQuotientComponent_surjective
     (h_exact : ∀ j, (S j).ShortExact) (j : ℕ) (k : ℤ) :
@@ -169,7 +166,7 @@ theorem evenQuotientComponent_surjective
   change π ((step K S e h_positive (2 * j)).f k y') = 0 at hzero
   rw [hzero, zero_add]
 
-/-- (blueprint: lem-pc-derived-total-filtration-even-quotient-bijective) -/
+/-- -/
 theorem evenQuotientComponent_bijective
     (h_exact : ∀ j, (S j).ShortExact) (j : ℕ) (k : ℤ) :
     Function.Bijective (evenQuotientComponent K S e h_positive j k) := by

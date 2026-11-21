@@ -230,7 +230,6 @@ private theorem restrictionSectionsOfEquivalence
 sections after scalar restriction. The restricted complex need not be K-injective.
 Source: Stacks Project, sites-cohomology.tex, Tag 0D6E,
 lemma-derived-pushforward-composition, specialized to scalar restriction and sections
-(blueprint: lem-coef-restriction-sections-acyclic).
 
 Proof: replace the site by its small model in the coefficient universe and transport
 its topology. Restriction of module sheaves along the site equivalence is an exact

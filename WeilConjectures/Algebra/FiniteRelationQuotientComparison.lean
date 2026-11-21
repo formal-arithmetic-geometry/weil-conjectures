@@ -25,7 +25,6 @@ namespace ModuleCat
 quotient by the corresponding colimit matrix.
 
 Source: Stacks Project, Algebra, Tag 05N7, proof of (1).
-(blueprint: lem-pc-finite-relation-quotient-comparison).
 
 Proof: put R = F.obj i, A = colimit F, and let R act on A through the
 coprojection. The sequence R^m --qi--> R^n --> R^n / range qi --> 0 is

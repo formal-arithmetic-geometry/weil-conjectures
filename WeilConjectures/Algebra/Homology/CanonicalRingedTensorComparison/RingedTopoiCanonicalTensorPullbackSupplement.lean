@@ -173,7 +173,6 @@ public import WeilConjectures.AlgebraicGeometry.RingedTopoiCanonicalTensorPullba
 
 Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E;
 Modules on Sites, Tag 03EL
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
 -/
 
 @[expose] public section
@@ -197,7 +196,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 
 /-- Transport the homotopy right-derived comparison to the complex localization Q.
-Source: Stacks 070K (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks 070K. -/
 noncomputable def derivedPushforwardComplexComparison
     [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
     (V : B ⥤ A) [V.Additive] (RF : DerivedCategory B ⥤ DerivedCategory A)
@@ -284,7 +283,7 @@ set_option backward.isDefEq.respectTransparency.types false
 end TensorUniqueness
 
 /-- Chain-level representative of the canonical comparison.
-Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks 07A4. -/
 noncomputable def CanonicalRingedTensorComparison.total [L.Additive]
     (k : CanonicalRingedTensorComparison R S RI uInv I c L hobj)
     (P Q : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
@@ -305,7 +304,7 @@ noncomputable def CanonicalRingedTensorComparison.total [L.Additive]
   exact tensorPullbackTotal L k.mu k.naturality P Q
 
 /-- The specified total comparison is an isomorphism.
-Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
+Source: Stacks 07A4.
 Proof: its summand maps are the inverse ordinary comparisons. Pullback is a left
 adjoint and preserves the coproducts defining total complexes. Thus each component
 is an isomorphism, and so is the chain map. -/
@@ -324,7 +323,7 @@ theorem CanonicalRingedTensorComparison.total_isIso [L.Additive]
   exact tensorPullbackTotal_isIso L k.mu k.naturality V am P Q
 
 /-- The canonical chain comparison as an isomorphism, with no arbitrary choice.
-Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks 07A4. -/
 noncomputable def CanonicalRingedTensorComparison.totalIso [L.Additive]
     (k : CanonicalRingedTensorComparison R S RI uInv I c L hobj)
     (V : SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⥤
@@ -430,7 +429,6 @@ set_option synthInstance.maxSize 2048 in
 set_option linter.style.longLine false in
 /-- Canonical derived comparison, uniquely characterized on K-flat flat-term representatives.
 Source: Stacks 07A4 and 0G7E
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
 Proof: resolve both inputs by K-flat flat-term complexes; pullback preserves that class
 by 0G7E. Their total tensor is K-flat by reassociating an acyclic test tensor and applying
 K-flatness twice, and has flat terms by tensor-flatness and countable flat sums.
@@ -665,7 +663,7 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
 set_option synthInstance.maxSize 2048 in
 -- Keep both tensor representative interfaces explicit.
 /-- The canonical derived comparison selected by its unique representative characterization.
-Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
+Source: Stacks 07A4.
 The theorem specifies the natural isomorphism uniquely, so only its proof is postponed. -/
 noncomputable def ringedTopoiCanonicalDerivedTensorComparison
     {C D : Type u} [Category.{u} C] [Category.{u} D]

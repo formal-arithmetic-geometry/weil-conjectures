@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.HomComplexProjections
 
 Source: Stacks Project, Cohomology on Sites, Section 21.34, Equation (21.34.0.2)
 (Tag 0A8Z), and Lemma 21.34.8 (Tag 0A96).
-(blueprint: lem-pur-hom-complex-global-cochains)
 -/
 
 @[expose] public section
@@ -51,7 +50,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Global sections, represented by morphisms from the rank-one free module sheaf,
 identify the sheaf Hom complex with the ordinary complex of cochains.
 Source: Stacks Project, Cohomology on Sites, Equation (21.34.0.2) (Tag 0A8Z).
-(blueprint: lem-pur-hom-complex-global-cochains)
 
 Proof: choose the product projections specified by `homComplex_exists`.
 The universal property of each product identifies maps from the rank-one free

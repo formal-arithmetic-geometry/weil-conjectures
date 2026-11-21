@@ -50,8 +50,7 @@ the concrete unit gives dM : P(G) → M. Apply the module adjunction bijection t
 dM ≫ cM = id, and the abelian adjunction bijection to show c ≫ forget(dM) = id.
 Forgetting the first identity supplies the other inverse identity for c. All these
 identities use the units, so this is the canonical comparison, not an arbitrary
-isomorphism. Empty opens and trivial rings are covered by the same filtered diagrams.
-(blueprint: lem-pc-topological-module-pullback-comparison) -/
+isomorphism. Empty opens and trivial rings are covered by the same filtered diagrams. -/
 theorem topologicalModulePullbackComparison {X Y : TopCat.{u}} (f : X ⟶ Y)
     (O : Y.Presheaf CommRingCat.{u}) :
     let R := O ⋙ forget₂ CommRingCat RingCat

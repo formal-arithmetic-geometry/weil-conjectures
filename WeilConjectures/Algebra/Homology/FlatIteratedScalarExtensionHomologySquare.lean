@@ -11,8 +11,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Iterating an adjoint coefficient comparison through a flat extension
 
-Source: Stacks Project, Tags 00HD and 05G3.
-(blueprint: lem-pc-flat-iterated-scalar-extension-homology-square). -/
+Source: Stacks Project, Tags 00HD and 05G3. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -209,7 +208,6 @@ private theorem forgetAdjunct
 /-- The coefficient adjunction and exact homology comparison commute with iteration.
 Source: Stacks Project, Tag 00HD (exact tensor by a flat module) and Tag 05G3
 (extension/restriction adjunction).
-(blueprint: lem-pc-flat-iterated-scalar-extension-homology-square).
 
 Proof: transpose the desired equality twice, first through extension from E to D
 and then through extension from T to E. On 1 tensor (1 tensor x), the hypothesis

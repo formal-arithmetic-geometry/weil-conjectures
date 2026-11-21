@@ -287,8 +287,7 @@ Restriction of scalars commutes with sheafification because the underlying abeli
 sheafification is unchanged. Tensoring the extension-presheaf unit becomes invertible
 under sheafification by monoidal localization. Compose these identifications with the
 sheaf tensor comparison. All comparisons are natural, hence so is their composite.
-Zero modules and zero rings satisfy the same formulas; no flatness assumption is used.
-(auxiliary; not a blueprint node) -/
+Zero modules and zero rings satisfy the same formulas; no flatness assumption is used. -/
 theorem exists_changeOfRings_tensorCancellation (α : R ⟶ S) :
     ∃ e : ∀ (M : SheafOfModules.{max u v} (𝓡 S))
         (N : SheafOfModules.{max u v} (𝓡 R)),

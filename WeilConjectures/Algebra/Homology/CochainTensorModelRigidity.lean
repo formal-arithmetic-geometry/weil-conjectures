@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 
 Source: Stacks Project, Tags 013H, 06YS, 06YT and 06YU; blueprint
 `prose-03-02`, first sentence
-(auxiliary; not a blueprint node).
 
 The helpers expose the given homotopy model and its comparisons, then write the four
 arrows of the canonical cochain comparison. No resolutions are chosen functorially.
@@ -40,7 +39,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))]
 
 /-- The cochain representative property: precisely K-flatness and flatness in every degree.
-Source: Stacks 06YS, 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YS, 06YU. -/
 def cochainTensorFlatRepresentatives : ObjectProperty (CochainComplex (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) :=
   fun K ↦ CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) K ∧
@@ -48,7 +47,7 @@ def cochainTensorFlatRepresentatives : ObjectProperty (CochainComplex (SheafOfMo
 
 /-- The given homotopy representative subcategory from tensor descent. Its membership is
 characterized by the exact same K-flat and degreewise flat predicates as the cochain property.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 noncomputable def cochainTensorHomotopyRepresentatives :
     ObjectProperty (HomotopyCategory (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) (.up ℤ)) :=
@@ -56,7 +55,7 @@ noncomputable def cochainTensorHomotopyRepresentatives :
 
 /-- Restriction of the homotopy quotient to flat-term K-flat representatives. The membership
 proof uses the characterization supplied by the existing descent theorem, not a new predicate.
-Source: Stacks 013H, 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 013H, 06YU. -/
 noncomputable def cochainTensorRepresentativeQuotient :
     (cochainTensorFlatRepresentatives J R).FullSubcategory ⥤
       (cochainTensorHomotopyRepresentatives J R).FullSubcategory :=
@@ -66,14 +65,14 @@ noncomputable def cochainTensorRepresentativeQuotient :
       J R).choose_spec.1 _).2 K.property)
 
 /-- The cochain localization restricted to these representatives.
-Source: Stacks 013H, 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 013H, 06YU. -/
 noncomputable def cochainTensorRepresentativeLocalization :
     (cochainTensorFlatRepresentatives J R).FullSubcategory ⥤ DerivedCategory (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) :=
   (cochainTensorFlatRepresentatives J R).ι ⋙ DerivedCategory.Q
 
 /-- The signed direct-sum total tensor on cochain complexes, using the existing sheaf tensor.
-Source: Stacks 06YN, 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YN, 06YU. -/
 noncomputable def cochainTensorTotal : (CochainComplex (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) ×
     (CochainComplex (SheafOfModules.{w}
@@ -85,7 +84,7 @@ noncomputable def cochainTensorTotal : (CochainComplex (SheafOfModules.{w}
     (.up ℤ) (.up ℤ) (.up ℤ))
 
 /-- The homotopy total tensor selected together with its comparison by the descent theorem.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 noncomputable def cochainTensorHomotopyTotal : (HomotopyCategory (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) (.up ℤ)) ×
     (HomotopyCategory (SheafOfModules.{w}
@@ -96,7 +95,7 @@ noncomputable def cochainTensorHomotopyTotal : (HomotopyCategory (SheafOfModules
     J R).choose_spec.2.2.1.choose
 
 /-- The given comparison between homotopy tensor and the quotient of cochain tensor.
-Source: Stacks 013H, 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 013H, 06YU. -/
 noncomputable def cochainTensorHomotopyTotalComparison :
     ((HomotopyCategory.quotient (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) (.up ℤ)).prod
@@ -110,7 +109,7 @@ noncomputable def cochainTensorHomotopyTotalComparison :
 
 /-- The given representative comparison for the selected derived tensor model. The choices
 are exactly the packet defining `siteDerivedTensorIndependentCoefficients`, with its comparison.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 noncomputable def cochainTensorHomotopyDerivedComparison :
     ((cochainTensorHomotopyRepresentatives J R).ι.prod
       (cochainTensorHomotopyRepresentatives J R).ι) ⋙
@@ -123,7 +122,7 @@ noncomputable def cochainTensorHomotopyDerivedComparison :
 
 /-- The four-arrow composite: Q→Qhπ, the cochain/homotopy tensor comparison, the given
 homotopy representative comparison, and T applied to Qhπ→Q in both variables.
-Source: Stacks 013H, 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 013H, 06YU. -/
 noncomputable def cochainTensorRepresentativeArrow
     (X : (cochainTensorFlatRepresentatives J R).FullSubcategory ×
       (cochainTensorFlatRepresentatives J R).FullSubcategory) :
@@ -252,7 +251,6 @@ private theorem normalized_iso_unique
 /-- The canonical cochain tensor comparison, its normalized uniqueness, and full faithfulness
 of restriction along the product of the cochain representative localizations.
 Source: Stacks 013H, 06YS, 06YT, 06YU; blueprint `prose-03-02`, first sentence
-(auxiliary; not a blueprint node).
 
 Proof:
 1. The restricted quotient to the homotopy representative category is identity on objects

@@ -170,7 +170,6 @@ private noncomputable def fan_postcompose_iso
 
 Source: Stacks Project, Tag 0BQY, finite-free Hom calculation in Lemma 48.15.4,
 expanded using Tag 0A8X, the product terms and differential of the Hom complex.
-(blueprint: new-h3-finite-free-zero-homology-product).
 
 Proof: Write P = Hom(E,K) and F_p = Hom(E.X p,-). The fixed product projections
 and the zero differential of E give a map from the three-term short complex of P

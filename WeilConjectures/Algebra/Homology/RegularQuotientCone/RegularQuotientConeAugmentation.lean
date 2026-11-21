@@ -50,7 +50,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 /-! # Normalized principal-quotient cone augmentation
 
 Source: Stacks Project, Tags 06YP, 06YY and 07A6.
-(blueprint: lem-cbc-regular-quotient-cone-augmentation).
 -/
 
 @[expose] public section
@@ -77,8 +76,7 @@ variable [EssentiallySmall.{r} C]
 change-of-rings model. The section equation fixes the coefficient unit, and the cone
 component equation fixes the augmentation, including its zero shifted component.
 The factorization isomorphisms specify localizations, not freely chosen comparisons.
-Source: Stacks 06YP, 06YY and 07A6
-(blueprint: lem-cbc-regular-quotient-cone-augmentation). -/
+Source: Stacks 06YP, 06YY and 07A6 -/
 structure Augmentation
     (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections)
     (d : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ) where
@@ -158,7 +156,6 @@ The zero composite says precisely `φ(t) = 0`; short exactness is in module shea
 so no surjectivity on sections or existence of points is assumed.
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YP, 06YS, 06YT, 06YY and 07A6
-(blueprint: lem-cbc-regular-quotient-cone-augmentation).
 
 Proof:
 1. Use the normalized ordinary coefficient adjunction to define its unit termwise.

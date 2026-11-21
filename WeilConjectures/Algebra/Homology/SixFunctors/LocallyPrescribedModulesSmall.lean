@@ -22,7 +22,6 @@ import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
 
 Source: Stacks Project, Sites, Tag 04TQ and Modules on Sites, Tag 03EM; the
 Essentially small paragraph of the current blueprint's Brown hypotheses proof
-(blueprint: lem-sfb-locally-prescribed-modules-small).
 -/
 
 -- After pruning, this module only keeps private declarations.

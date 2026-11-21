@@ -21,7 +21,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 Source: Stacks Project, Homology, Section 12.15, tag 0118, canonical cochain
 truncations (https://stacks.math.columbia.edu/tag/0118); the nested-cutoff kernel
 argument is an explicit specialization.
-(blueprint: lem-sp-vertical-cutoff-column-quasiiso-strict)
 
 Proof: put E = L extended by zero to the integers. Monicity of the cutoff inclusions
 identifies g with the natural inclusion of the cutoff below a into the cutoff below b.

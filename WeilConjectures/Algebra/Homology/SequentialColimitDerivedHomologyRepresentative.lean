@@ -71,7 +71,6 @@ private theorem shortComplexHomologyPreserves
 set_option backward.isDefEq.respectTransparency false in
 /-- Every zeroth cohomology class of a sequential colimit is represented at a finite stage.
 Source: Stacks Project, Tag 00DB.
-(blueprint: lem-sc-sequential-colimit-derived-homology-representative)
 
 Proof: exactness of filtered colimits of modules makes short-complex homology preserve
 filtered colimits. The functor taking the three adjacent terms of a complex preserves

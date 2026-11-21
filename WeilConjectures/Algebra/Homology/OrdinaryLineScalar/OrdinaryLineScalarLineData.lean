@@ -14,7 +14,6 @@ import all WeilConjectures.Algebra.Homology.LineUnbounded.LineUnboundedDerivedTe
 
 Source: Stacks Project, Tags 07A4, 0G7E and 0D6D; blueprint main-20261015,
 Tate-twist local freeness, proof (3).
-(blueprint: lem-pur-ordinary-line-scalar-line-data)
 -/
 
 @[expose] public noncomputable section
@@ -220,7 +219,6 @@ attribute [local semireducible] monoidalCategory
 /-- All signed powers are lines and their unbounded derived tensors are the exact
 termwise tensors with inverse the opposite signed power and actual evaluation.
 Source: blueprint proof (3), Stacks 0B8N, 06YN and 06YU
-(blueprint: lem-pur-ordinary-line-scalar-line-data).
 Proof: on a trivializing slice tensor the chosen basis to get positive powers, and
 use the dual basis for negative powers. The normalized signed contraction is actual
 evaluation. Apply line_unbounded_derived_tensor to each power. Its degree-zero total

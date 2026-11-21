@@ -14,7 +14,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 # Change of rings preserves K-flat complexes with flat terms
 
 Source: Stacks Project, Cohomology on Sites, Lemma 21.18.1, Tag 0G7E,
-identity-topos coefficient-change case (auxiliary; not a blueprint node).
+identity-topos coefficient-change case.
 -/
 
 @[expose] public section
@@ -81,7 +81,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : Grothendiec
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ)
 
 /-- Change of rings preserves K-flatness and flatness of every term.
-Source: Stacks, Tag 0G7E (auxiliary; not a blueprint node).
+Source: Stacks, Tag 0G7E.
 
 Proof:
 1. Restriction of scalars leaves underlying abelian sheaves unchanged. Kernels are

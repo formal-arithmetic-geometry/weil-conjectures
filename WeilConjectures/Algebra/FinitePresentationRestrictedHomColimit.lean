@@ -16,7 +16,6 @@ import Mathlib.Data.Fintype.Order
 # Lifting maps into a tensor colimit
 
 Source: Stacks Project, Algebra, Tag 05LI, proof of (3).
-(blueprint: lem-pc-fp-restricted-hom-colimit).
 -/
 
 @[expose] public section
@@ -94,7 +93,6 @@ an uncurried map at a later stage. The target module need not be finitely presen
 
 Source: Stacks Project, Algebra, Tag 05LI, proof of (3),
 label algebra-lemma-module-map-property-in-colimit.
-(blueprint: lem-pc-fp-restricted-hom-colimit).
 
 Proof: choose finite generators and finitely many generators of their relations
 in M. Each generator image in A tensor N is a finite sum of pure tensors, whose

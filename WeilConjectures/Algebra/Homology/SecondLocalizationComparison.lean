@@ -10,8 +10,7 @@ public import WeilConjectures.Algebra.Homology.SecondLocalizationMap
 import WeilConjectures.Algebra.Homology.SecondLocalizationOrdinarySquare
 import WeilConjectures.Algebra.Homology.ScalarExtensionHomologySquare
 /-! # Comparison for second localization
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-second-localization-comparison). -/
+Source: Stacks Project, Tags 06Y6 and 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -81,7 +80,6 @@ set_option linter.unusedSectionVars false in
 include tRB tAD tBD tApD tBpD tBBpD in
 /-- The localized comparison commutes with the characterized coefficient map.
 Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-second-localization-comparison).
 
 Proof: the defining leftDerivedLift factorization identifies the composite of
 secondLocalizationDerivedMap with the target counit with the source counit

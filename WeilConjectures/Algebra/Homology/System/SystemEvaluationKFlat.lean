@@ -106,7 +106,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
 /-- Sequence-site flat-term K-flat complexes remain flat-term K-flat at every level.
-Source: Stacks 0G7E (blueprint: lem-pur-system-evaluation-kflat).
+Source: Stacks 0G7E.
 Proof: vertical evaluation is the algebraic inverse image of a geometric morphism.
 Apply K-flat pullback along its identity structural ring map. The normalized scalar
 unit identifies extension along that identity with the original evaluation. Transport
@@ -137,7 +137,6 @@ theorem systemSequenceEvaluation_preservesKFlat (n : ℕ)
 
 /-- Every complex of strict systems has one strict representative which is flat-term
 K-flat at every level. Source: Stacks 06YS and 0G7E; Zheng 4.1
-(blueprint: lem-pur-system-evaluation-kflat).
 Proof: transport the complex to the ringed sequence site and resolve it there by a
 flat-term K-flat complex. Pull the resolution back through the sequence-site equivalence.
 The unit identifies its augmentation target with the original strict complex. Exactness

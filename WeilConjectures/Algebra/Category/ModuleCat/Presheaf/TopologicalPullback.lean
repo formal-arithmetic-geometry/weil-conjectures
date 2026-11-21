@@ -18,7 +18,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.TopologicalPullbackRe
 # Pullback of presheaves of modules along a continuous map
 
 Source: Stacks Project, Sheaves, Tags 008T, 008S and 008U
-(blueprint: lem-pc-presheaf-module-inverse-image-adjunction).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace PresheafOfModules
 
 /-- The section map from an open neighbourhood of `f(U)` into the presheaf pullback.
-Source: Stacks Project, Sheaves, Tag 008T
-(blueprint: lem-pc-presheaf-module-inverse-image-adjunction). -/
+Source: Stacks Project, Sheaves, Tag 008T -/
 noncomputable def topologicalPullbackSectionMap {X Y : TopCat.{u}} (f : X ⟶ Y)
     (C : Type (u + 1)) [Category.{u} C] [HasColimits C] (G : Y.Presheaf C)
     (U : Opens X) (V : Opens Y) (h : U ≤ (Opens.map f).obj V) :
@@ -52,8 +50,7 @@ and independent of representatives. The module laws, semilinear restrictions, an
 linearity of pulled-back maps follow at that common neighbourhood. Direct image uses
 restriction of scalars along the ring-presheaf unit. The abelian adjunction sends a
 map `ψ` to `f_*ψ ∘ i_G`; the unit is linear, and the converse follows by checking
-linearity on colimit representatives. These checks are compatible with both variables.
-(blueprint: lem-pc-presheaf-module-inverse-image-adjunction) -/
+linearity on colimit representatives. These checks are compatible with both variables. -/
 def topologicalPullbackAdjunctionSpec {X Y : TopCat.{u}} (f : X ⟶ Y)
     (O : Y.Presheaf CommRingCat.{u}) : Prop :=
     let R := O ⋙ forget₂ CommRingCat RingCat
@@ -110,8 +107,7 @@ the inverse identities. `topologicalPullbackCommonRepresentatives` represents an
 and section at one common neighbourhood, so that formula uniquely determines the action.
 Finally, expand both Hom equivalences as composition with their units. The established
 unit formula makes their underlying abelian maps equal. This proves the required Hom
-formula with the module adjunction already supplied by Mathlib.
-(blueprint: lem-pc-presheaf-module-inverse-image-adjunction) -/
+formula with the module adjunction already supplied by Mathlib. -/
 theorem topologicalPullbackAdjunction {X Y : TopCat.{u}} (f : X ⟶ Y)
     (O : Y.Presheaf CommRingCat.{u}) :
     topologicalPullbackAdjunctionSpec f O := by

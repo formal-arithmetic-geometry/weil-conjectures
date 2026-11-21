@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSup
 
 Source: Stacks Project, Tags 03EL, 0GMX, 0FNY and 07A4; the current blueprint,
 Powers and duals in lemma-inverse-image-coefficient-sheaves--2.
-(blueprint: lem-pur-signed-line-pullback-unique)
 -/
 
 @[expose] public noncomputable section
@@ -82,7 +81,6 @@ private theorem pullback_hom_ext
 include hcover in
 /-- Evaluation and tensor recursion determine all signed pullback comparisons.
 Source: Stacks 03EL and 0GMX; Powers and duals, uniqueness of the normalized extension.
-(blueprint: lem-pur-signed-line-pullback-unique)
 Proof: the adjunction unit detects morphisms out of a pullback. Degree zero and one
 are fixed. Induction and tensor generation determine every positive degree. For a
 negative degree, postcompose with the dual of the positive comparison. Both resulting

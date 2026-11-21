@@ -16,7 +16,6 @@ Hom complex of two complexes of sheaves of modules (`p + n = q`), with the formu
 differential (`homComplex_d_π`) and for its functoriality (`homComplexFunctor_map_f_π`).
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-projections).
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ set_option backward.isDefEq.respectTransparency true
 
 /-- The product projections `(homComplex L M)^n ⟶ 𝓗om(L^p, M^q)`, for `p + n = q`, specified
 together with `homComplexFunctor` (`homComplex_projections_exists`).
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-projections). -/
+Source: Stacks Project, sites-cohomology.tex, Section 0A8X. -/
 noncomputable def homComplexπ
     (L M : CochainComplex (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (n p q : ℤ)

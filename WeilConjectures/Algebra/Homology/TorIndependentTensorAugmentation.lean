@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 /-! # Tor independence and tensor augmentation
 
 Source: Stacks Project, Tags 06Y6 and 08IB.
-(blueprint: lem-pc-tor-independent-tensor-augmentation).
 -/
 
 @[expose] public section
@@ -69,7 +68,6 @@ private theorem tensor_restricted_quasiIso_of_scalarExtension
 
 /-- Tensoring a K-flat resolution of B with an A-K-flat complex preserves its augmentation.
 Source: Stacks Project, Tags 06Y6 and 08IB.
-(blueprint: lem-pc-tor-independent-tensor-augmentation).
 
 Proof: Resolve A[0] by an R-K-flat complex P. The one-term Tor-acyclic
 comparison proves that P tensor B[0] -> A[0] tensor B[0] is a quasi-isomorphism.

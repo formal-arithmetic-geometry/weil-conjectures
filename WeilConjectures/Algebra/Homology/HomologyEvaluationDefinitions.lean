@@ -12,8 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Shared definitions for homology evaluation
 
-Source: Stacks Project, Tags 0A8X, 08DH and 0BQY.
-(blueprint: lem-sc-homology-evaluation-formal-complex). -/
+Source: Stacks Project, Tags 0A8X, 08DH and 0BQY. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -23,8 +22,6 @@ namespace CategoryTheory
 
 /-- Restriction to an open scheme followed by an over site preserves zero morphisms.
 Source: Stacks Project, Tag 08DL, termwise restriction.
-(blueprint: lem-sc-homology-evaluation-formal-complex). 
-(blueprint: new-b2-homology-evaluation-definitions)
 -/
 theorem moduleOpenOver_preservesZeroMorphisms (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens) :
@@ -37,8 +34,6 @@ theorem moduleOpenOver_preservesZeroMorphisms (X : Scheme.{u})
 
 /-- Termwise restriction to an open scheme followed by an over site.
 Source: Stacks Project, Tag 08DL, termwise restriction.
-(blueprint: lem-sc-homology-evaluation-formal-complex). 
-(blueprint: new-b2-homology-evaluation-definitions)
 -/
 noncomputable def moduleOpenOverComplexFunctor (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens) :
@@ -51,8 +46,6 @@ noncomputable def moduleOpenOverComplexFunctor (X : Scheme.{u})
 
 /-- A complex admits a finite free, zero-differential model by a quasi-isomorphism roof.
 Source: Stacks Project, Tag 0BQY, zero-differential Koszul calculation.
-(blueprint: lem-sc-homology-evaluation-formal-complex). 
-(blueprint: new-b2-homology-evaluation-definitions)
 -/
 def HasFiniteFreeZeroModel
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
@@ -67,8 +60,6 @@ def HasFiniteFreeZeroModel
 
 /-- The degree component used to evaluate a Hom cocycle on a cycle.
 Source: Stacks Project, Tag 0A8X, product definition of the Hom complex.
-(blueprint: lem-sc-homology-evaluation-formal-complex). 
-(blueprint: new-b2-homology-evaluation-definitions)
 -/
 noncomputable def homologyEvaluationProjection (X : AlgebraicGeometry.Scheme.{u})
     (T J : CochainComplex X.Modules ℤ) (n : ℤ) :
@@ -79,8 +70,6 @@ noncomputable def homologyEvaluationProjection (X : AlgebraicGeometry.Scheme.{u}
 
 /-- Characterization of evaluation on classes by its action on local cycle representatives.
 Source: Stacks Project, Tags 0A8X and 08DH, evaluation of the Hom complex.
-(blueprint: lem-sc-homology-evaluation-formal-complex). 
-(blueprint: new-b2-homology-evaluation-definitions)
 -/
 def IsHomologyEvaluation (X : AlgebraicGeometry.Scheme.{u})
     (T J : CochainComplex X.Modules ℤ) (n : ℤ)

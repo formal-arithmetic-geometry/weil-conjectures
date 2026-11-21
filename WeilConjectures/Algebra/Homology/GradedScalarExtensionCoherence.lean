@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.NatIso
 
 Source: Stacks Project, Tag 09RE, affine base-change comparisons;
 Mathlib `ModuleCat.extendScalars_assoc`.
-(blueprint: lem-pc-graded-scalar-extension-coherence)
 -/
 
 @[expose] public section
@@ -119,8 +118,7 @@ claimed conjugation identity degreewise. The eqToIso factors simply replace equa
 ring maps; their compatibility follows by equality induction. Equivalently, the two
 sides agree on each 1 tensor x because all associativity comparisons send it to the
 same iterated unit tensor; linearity and tensor-product induction prove equality.
-This works in every degree, including zero terms, and when i=j.
-(blueprint: lem-pc-graded-scalar-extension-coherence) -/
+This works in every degree, including zero terms, and when i=j. -/
 theorem graded_scalarExtension_colimit_coherence
     {I : Type u} [Preorder I] (F : I ⥤ CommRingCat.{u}) (i₀ : I)
     (P Q : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ)

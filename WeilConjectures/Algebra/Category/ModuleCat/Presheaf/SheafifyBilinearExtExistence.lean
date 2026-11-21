@@ -22,7 +22,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A restriction-compatible bilinear family extends to the module sheafifications.
 Source: Stacks Project, Modules on Sites, Tag 0GMW, the sheafification step of the
 construction of tensor products.
-(blueprint: lem-pc-sites-module-sheafification-bilinear-extension-existence)
 
 Proof: Forget the module structures. The underlying maps of the two module
 sheafification units are locally bijective maps of presheaves of sets, so their

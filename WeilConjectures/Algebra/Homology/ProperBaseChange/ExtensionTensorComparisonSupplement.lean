@@ -126,8 +126,7 @@ end
 set_option maxHeartbeats 50000 in
 -- Mixed tensor coefficient structures require additional elaboration.
 /-- A concrete tensor-unit isomorphism, normalized on every local pure tensor.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-weil-pbc-extension-tensor-comparison). -/
+Source: Stacks Project, Tag 03EK -/
 def regularTensorIso
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     (monoidalCategory R).tensorObj
@@ -139,8 +138,7 @@ def regularTensorIso
       (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).counit).app M
 
 /-- Pure tensor sections commute with maps of the first factor.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-weil-pbc-extension-tensor-comparison). -/
+Source: Stacks Project, Tag 03EK -/
 theorem tensorPresheafUnit_naturality
     {L L' : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
     (f : L ⟶ L')
@@ -163,8 +161,7 @@ theorem tensorPresheafUnit_naturality
 set_option maxHeartbeats 50000 in
 -- Elaborating the tensor unitor requires additional coefficient comparisons.
 /-- The inverse regular tensor unitor sends a section to the local tensor of one with it.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-weil-pbc-extension-tensor-comparison). -/
+Source: Stacks Project, Tag 03EK -/
 theorem regularTensorIso_inv_apply
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
     (V : Cᵒᵖ) (x : M.val.obj V) :

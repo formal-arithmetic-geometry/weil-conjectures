@@ -18,7 +18,6 @@ import WeilConjectures.Algebra.Homology.FreeCoverColumns
 # An exact bicomplex of free two-step covers
 
 Source: Stacks Project, Tag 09KP, construction of the resolution and total augmentation.
-(blueprint: lem-pc-derived-free-cover-bicomplex)
 -/
 
 @[expose] public section
@@ -96,7 +95,6 @@ set_option linter.unusedVariables false in
 /-- Iteration of the free-complex cover, followed by direct-sum totalization.
 Source: Stacks Project, Differential Graded Algebra, Tag 09KP, proof, construction
 of the resolution and its augmentation (using Tag 09KN).
-(blueprint: lem-pc-derived-free-cover-bicomplex)
 
 Proof. Starting at `N₀ = M`, choose the cover `Pᵢ → Nᵢ` of Tag 09KN and set
 `Nᵢ₊₁` equal to its kernel. Define `Pᵢ₊₁ → Pᵢ` as the cover of `Nᵢ₊₁` followed

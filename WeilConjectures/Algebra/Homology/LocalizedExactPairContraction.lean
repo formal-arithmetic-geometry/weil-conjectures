@@ -22,7 +22,6 @@ import WeilConjectures.Algebra.Homology.PrincipalContractionSpreading
 Source: Stacks Project, More on Algebra, Tag 068U, `lemma-cut-complex-in-two`;
 the local minimal-complex proof uses the proved source library's
 `CochainComplex.exists_homotopyEquiv_isMinimal` and Nakayama.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -382,7 +381,6 @@ namespace ModuleCat
 /-- A residue-exact pair admits complementary split identity blocks on a principal open.
 
 Source: Stacks Project, More on Algebra, Tag 068U, `lemma-cut-complex-in-two`.
-(auxiliary; not a blueprint node)
 
 Proof: Localize at p and compare the residue field with FractionRing (R/p).
 Place the two maps in a complex in degrees -1, 0, 1. The proved minimal-complex

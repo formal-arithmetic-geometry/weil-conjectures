@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.BaseLocalizationComparisonAux
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
 second coefficient ring; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-base-localization-comparison).
 -/
 
 @[expose] public section
@@ -50,7 +49,6 @@ variable (R A B Rp D : Type u)
 include tRpA tRpB tAD tBD tApD tBpD in
 /-- Compatibility of the characterized map with localized augmentation.
 Source: Stacks Project, Tags 0DJ8 and 06Y6.
-(blueprint: lem-pc-base-localization-comparison).
 
 Proof: the universal lift defining baseLocalizationDerivedMap satisfies its
 counit equation by leftDerived_fac. Apply it to the restricted complex Q and

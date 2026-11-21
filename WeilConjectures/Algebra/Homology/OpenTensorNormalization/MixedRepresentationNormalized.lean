@@ -25,8 +25,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 by the restriction square. Source: Stacks Tag 07A4, clause (3) of
 `finiteOpenMixedTensorRepresentative`. The proof expands the canonical map-derived tensor
 comparison, transports the inverse of the oplax map by `Functor.map_inv`, and identifies the
-derived tensor map with tensoring by the identity; see `mixed_representation_general`.
-(blueprint: lem-sf-mixed-representation-normalized) -/
+derived tensor map with tensoring by the identity; see `mixed_representation_general`. -/
 theorem mixed_representation_normalized
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (P Q : CochainComplex (Sheaf (Scheme.ProEt.topology X) A) ℤ) :

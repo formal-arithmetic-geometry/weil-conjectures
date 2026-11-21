@@ -27,7 +27,6 @@ every localization, representative-comparison, and transformation-extension clau
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS, 0G7D, 06YT and 06YU;
 Categories, Tags 04VI, 04VJ and 04VK
-(auxiliary; not a blueprint node).
 
 ## Main statements
 
@@ -253,7 +252,7 @@ local notation "𝓜" => SheafOfModules.{r}
   ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
 /-- The derived-comparison predicate used in the recorded descent witness.
-Source: Stacks, Tag 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YU. -/
 noncomputable def SiteDerivedTensorDescentDerivedSpec
     (P : ObjectProperty (HomotopyCategory 𝓜 (.up ℤ)))
     (B : HomotopyCategory 𝓜 (.up ℤ) × HomotopyCategory 𝓜 (.up ℤ) ⥤
@@ -263,7 +262,7 @@ noncomputable def SiteDerivedTensorDescentDerivedSpec
     ((P.ι ⋙ DerivedCategory.Qh).prod (P.ι ⋙ DerivedCategory.Qh)) ⋙ T)
 
 /-- The homotopy-comparison predicate, with its derived witness named separately.
-Source: Stacks, Tag 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YU. -/
 noncomputable def SiteDerivedTensorDescentHomotopySpec
     (P : ObjectProperty (HomotopyCategory 𝓜 (.up ℤ)))
     (B : HomotopyCategory 𝓜 (.up ℤ) × HomotopyCategory 𝓜 (.up ℤ) ⥤
@@ -278,8 +277,7 @@ noncomputable def SiteDerivedTensorDescentHomotopySpec
 
 /-- The full descent predicate, transparently identical to the expanded statement.
 Naming its nested predicates keeps selected witnesses small during kernel checking.
-Source: Stacks, Tags 06YS, 06YU, 04VK
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 06YS, 06YU, 04VK -/
 noncomputable def SiteDerivedTensorDescentSpec
     (P : ObjectProperty (HomotopyCategory 𝓜 (.up ℤ))) : Prop :=
   (∀ X, P X ↔ CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) X.as ∧
@@ -308,7 +306,6 @@ by the inverses of the denominator images. The final bijection includes arbitrar
 transformations, without an invertibility assumption.
 
 Source: Stacks Project, Tags 06YS, 0G7D, 06YT, 06YU and Categories 04VK
-(auxiliary; not a blueprint node).
 
 Proof plan:
 The recorded site flatness predicate is exactness of sheafified sectionwise tensor,
@@ -400,7 +397,7 @@ theorem site_derived_tensor_descent_independentCoefficients
 
 /-- The original homotopy-tensor existence proof, with its predicate kept named.
 The quotient comparison determines this bifunctor up to compatible natural isomorphism.
-Source: Stacks, Tag 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YU. -/
 theorem siteHomotopyTensorExistsIndependentCoefficients
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})
@@ -419,7 +416,7 @@ theorem siteHomotopyTensorExistsIndependentCoefficients
 
 /-- The original derived-tensor existence proof, with its predicate kept named.
 This separates the proof from the selected data and retains the original witnesses.
-Source: Stacks, Tag 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YU. -/
 theorem siteDerivedTensorExistsIndependentCoefficients
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})
@@ -440,8 +437,7 @@ theorem siteDerivedTensorExistsIndependentCoefficients
 The natural representative comparison and unique-extension property of
 `site_derived_tensor_descent_independentCoefficients` determine this functor up to the
 unique compatible natural isomorphism. No functorial resolutions are chosen.
-Source: Stacks, Tags 06YS, 0G7D, 06YT, 06YU
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 06YS, 0G7D, 06YT, 06YU -/
 noncomputable def siteDerivedTensorIndependentCoefficients
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})

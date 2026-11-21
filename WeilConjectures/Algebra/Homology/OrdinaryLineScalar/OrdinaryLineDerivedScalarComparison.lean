@@ -260,7 +260,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 
 Source: Stacks Project, Tags 07A4, 0G7E and 0D6D; blueprint main-20261015,
 Tate-twist local freeness, proof (3).
-(blueprint: lem-pur-ordinary-line-derived-scalar-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -340,7 +339,6 @@ end ScalarTowerProof
 /-- The ordinary derived scalar comparison, normalized on flat-term K-flat models,
 including its inverse, arbitrary-derived-morphism naturality and evaluation square.
 Source: Stacks 07A4, 0G7E and blueprint proof (3)
-(blueprint: lem-pur-ordinary-line-derived-scalar-comparison).
 Proof: (1) trivialize the lines and identify signed opposite powers by actual dual
  evaluation. (2) exact line tensor is termwise on unbounded complexes by the preceding
  theorem. (3) reassociate the total tensor and use exactness and preservation of sums
@@ -568,7 +566,6 @@ private theorem ordinary_identity_normalized
 /-- Over an identical coefficient ring an arbitrary line comparison remains its actual
 signed-power tensor map after scalar-unitor normalization; it need not be identity.
 Source: blueprint proof (3), Stacks 03EK and 07A4
-(blueprint: lem-pur-ordinary-line-derived-scalar-comparison).
 Proof: insert the inverse scalar multiplication at the source and multiplication at
 the target. On generators the comparison then sends p tensor l to p tensor a_m(l).
 It is therefore the termwise tensor natural transformation displayed below. Apply the
@@ -617,7 +614,6 @@ theorem comparison_identity_arbitrary
 
 /-- The multiplication line datum gives the scalar-unitor equation on every derived object.
 Source: blueprint proof (3), Stacks 03EK and 06YY
-(blueprint: lem-pur-ordinary-line-derived-scalar-comparison).
 Proof: the signed-line identity theorem gives B_m(l tensor s) = sl for every sign.
 Both chain-level paths send (p tensor l) tensor s to sp tensor l. The balanced
 universal property and localization's faithfulness give the equation for all objects. -/

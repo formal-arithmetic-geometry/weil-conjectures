@@ -15,7 +15,6 @@ import Mathlib.Tactic.Ring
 /-! # Signed coherence of total cochain tensors
 
 Source: Stacks Project, Tag 0FPQ and More on Algebra, integer sign rules
-(blueprint: lem-pur-total-tensor-signed-coherence).
 -/
 
 @[expose] public noncomputable section

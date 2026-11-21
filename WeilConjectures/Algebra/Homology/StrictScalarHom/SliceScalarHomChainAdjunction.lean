@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 Source: Stacks Project, sites-modules.tex, Tags 03CZ, 03CY, 03DH and 04IX;
 sites-cohomology.tex, Tag 0A8X
-(blueprint: lem-sfb-slice-scalar-hom-chain-adjunction).
 
 The interfaces below reuse the existing scalar extension, tensor and actual Hom
 product projections. They specify the ordinary slice adjunctions and precisely

@@ -21,7 +21,6 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 /-! # Scalar extension homology is invariant among K-flat derived models
 
 Source: Stacks Project, More on Algebra, Tags 064L and 06Y0.
-(blueprint: lem-sc-kflat-scalar-extension-derived-iso).
 -/
 
 @[expose] public section
@@ -85,7 +84,6 @@ private theorem scalarExtension_quasiIso_of_kFlat
 
 /-- Termwise scalar extension of K-flat models respects derived isomorphisms.
 Source: Stacks Project, More on Algebra, Tags 064L and 06Y0.
-(blueprint: lem-sc-kflat-scalar-extension-derived-iso).
 
 Proof: Represent e by a roof P <- L -> Q, with the left leg a quasi-isomorphism.
 Since e is invertible, its right leg is also a quasi-isomorphism: apply Q to both

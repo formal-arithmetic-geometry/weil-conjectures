@@ -19,7 +19,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 # Restricting the mixed total tensor
 
 Source: Stacks Project, More on Algebra, Section 06Y5 and Lemma 06Y6.
-(blueprint: lem-pc-mixed-tensor-restriction-comparison)
 -/
 
 @[expose] public section
@@ -197,7 +196,6 @@ private theorem totalComparison_naturality₂ {R A : Type u} [CommRing R] [CommR
 
 /-- Restricting the mixed total tensor gives the ordinary total tensor, naturally in
 both complexes. Source: Stacks Project, More on Algebra, Section 06Y5 and Lemma 06Y6.
-(blueprint: lem-pc-mixed-tensor-restriction-comparison)
 
 Proof: In bidegree `(p,q)`, identify the restriction of
 `N^q ⊗_A (A ⊗_R E^p)` with `E^p ⊗_R N^q` by

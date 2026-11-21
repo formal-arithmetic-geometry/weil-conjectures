@@ -21,7 +21,6 @@ Source: Stacks Project, Tag 08JC, `lemma-RHom-triangulated`, termwise-split Hom 
 generalized to a separately additive bifunctor; the signed model is
 `CochainComplex.bifunctorHomObj` in
 `WeilConjectures.Algebra.Homology.BifunctorHomComplex`.
-(blueprint: lem-sf-bifunctor-homotopy-exact)
 
 The existing `bifunctorHomHomotopyFunctor H I` takes values in the opposite derived
 category. Its `leftOp` is the functor from the opposite homotopy category to the derived
@@ -502,7 +501,6 @@ end ShiftConstruction
 
 /-- The exact Hom-complex structure with its degree-one inverse recorded on products.
 Source: Stacks Project, Tag 08JC, signed reindexing in the Hom-complex cone calculation.
-(blueprint: lem-sf-bifunctor-homotopy-exact).
 
 The witness is the explicit shift structure used in the proof above. Its inverse at the
 opposite shift one reindexes the source by minus one and multiplies the p-factor by

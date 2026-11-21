@@ -64,8 +64,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
       (.up ℤ)).obj Q) ⟶ N)
 
 /-- Core component of retract closure, with the representative and model quantifiers exposed.
-Source: Stacks Project, Tag 0DJA(1), retract part.
-(blueprint: lem-pc-localized-tensor-comparison-closure-retracts-core) -/
+Source: Stacks Project, Tag 0DJA(1), retract part. -/
 theorem localizedTensorComparisonProperty_retract_core
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)

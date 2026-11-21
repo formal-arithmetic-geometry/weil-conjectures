@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.ShortComplex.Linear
 # Linearity of the cohomological scalar extension counit
 
 Source: Stacks Project, Tags 06Y6 and 08IB, canonical tensor comparison
-(blueprint: lem-pc-base-derived-tensor-counit-linear).
 -/
 
 @[expose] public section
@@ -72,7 +71,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 -- The comparison uses the exact restriction-of-scalars homology isomorphism.
 /-- Source: Stacks Project, Tags 06Y6 and 08IB, canonical tensor comparison
-(blueprint: lem-pc-base-derived-tensor-counit-linear).
 
 Proof: For each a in A, the supplied generator equation shows that ordinaryIso
 intertwines multiplication by a: on b tensor q both composites are

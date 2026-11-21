@@ -16,7 +16,6 @@ import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
 # Split extensions by shifted free complexes
 
 Source: Stacks Project, Differential Graded Algebra, Tag 09KM, finite-filtration argument.
-(blueprint: lem-pc-filtered-free-kprojective-step).
 -/
 
 @[expose] public section
@@ -83,7 +82,6 @@ private theorem coproduct_projective {C : Type*} [Category* C] [Abelian C]
 is K-projective.
 Source: Stacks Project, Tag 09KM, finite-filtration argument, with the algebra concentrated
 in degree zero; admissible exact sequences give triangles by Tag 09KJ.
-(blueprint: lem-pc-filtered-free-kprojective-step).
 
 Proof: let `Q` be the cokernel of `f`. The degreewise retractions make `f` a monomorphism,
 so `0 → K → L → Q → 0` is a short exact sequence split on underlying graded modules.

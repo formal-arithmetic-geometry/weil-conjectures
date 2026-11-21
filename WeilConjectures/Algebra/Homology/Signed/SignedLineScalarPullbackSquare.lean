@@ -18,7 +18,6 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.PullbackPairingTransfer
 
 Source: blueprint main-20261015, prop-weil-twist-preserves.proof.md, first and final
 sentences; Stacks Project, Modules on Sites, Tags 03EL, 0GMX and 04J0.
-(blueprint: lem-pur-signed-line-scalar-pullback-square)
 
 The structural ring maps are written as adjuncts R → u_* R' and S → u_* S'.
 The pullbacks are Mathlib's actual module left adjoints, with existence supplied by
@@ -181,7 +180,6 @@ private theorem signedLinePullbackNormalized_unique
 /-- Unique normalized signed pullbacks and compatibility with the scalar square in every
 integer degree. Source: blueprint prop-weil-twist-preserves.proof.md, first/final sentences;
 Stacks 03EL, 0GMX, 0FNY and 04J0.
-(blueprint: lem-pur-signed-line-scalar-pullback-square)
 
 Proof:
 1. The inverse image and module tensor comparison give normalized tensor and unit maps.

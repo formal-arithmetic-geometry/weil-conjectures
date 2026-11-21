@@ -20,7 +20,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Hom identifications for the open-cover triangle
 
 Source: Stacks Project, Tags 08BU, 08BT and 08BW.
-(blueprint: lem-sc-open-hom-triangle-realization).
 -/
 
 @[expose] public section
@@ -35,7 +34,7 @@ namespace SheafOfModules
 
 /-- Restrict derived Hom along an inclusion of opens, using the composition and
 localization comparison isomorphisms.
-Source: Stacks Project, Tag 08BW (blueprint: lem-sc-open-hom-triangle-realization). -/
+Source: Stacks Project, Tag 08BW. -/
 def openHomRestriction {S : Type u} [TopologicalSpace S]
     (R : Sheaf (Opens.grothendieckTopology S) RingCat.{u})
     {W U : Opens S} (i : W ⟶ U)
@@ -223,7 +222,6 @@ This statement supplies the geometric triangle and the map identifications, not 
 of Hom. The latter follows separately from the pretriangulated-category axioms.
 
 Source: Stacks Project, Tags 08BU (triangle), 08BT (adjunction), and 08BW (identifications).
-(blueprint: lem-sc-open-hom-triangle-realization).
 
 Proof: Represent E by a complex K. In each degree use the short exact sequence
 0 → j_{U∩V,!} K|_{U∩V} → j_{U,!} K|_U ⊕ j_{V,!} K|_V → K → 0,

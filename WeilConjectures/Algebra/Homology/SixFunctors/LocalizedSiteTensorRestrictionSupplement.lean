@@ -16,7 +16,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 # Tensor products and restriction to a localized ringed site
 
 Source: Stacks Project, Modules on Sites, Tags 03EL and 03DH
-(blueprint: lem-sfb-localized-site-tensor-restriction).
 -/
 
 @[expose] public section
@@ -223,7 +222,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Restriction to a localized ringed site commutes naturally with tensor products,
 with the comparison sending each sheafified pure tensor to the same pure tensor.
 Source: Stacks Project, Modules on Sites, Tags 03EL and 03DH
-(blueprint: lem-sfb-localized-site-tensor-restriction).
 
 Proof:
 1. The restriction of the sectionwise tensor presheaf equals the tensor presheaf of

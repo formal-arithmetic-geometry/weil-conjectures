@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.Slice.SliceScalarLevelComparison
 /-! # Assembly of the scalar comparison on strict systems and complexes
 
 Source: Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03CY and 03EK.
-(blueprint: lem-sf-semilinear-slice-scalar-generators).
 -/
 
 @[expose] public noncomputable section
@@ -82,7 +81,6 @@ variable
 /-- The normalized scalar comparison exists on strict semilinear systems and on
 arbitrary unbounded complexes, with no flatness, surjectivity or completeness assumption.
 Source: Stacks 0E8I, with Tags 03DI, 03CY, 03EK and Sites 00WK
-(blueprint: lem-sf-semilinear-slice-scalar-generators).
 
 Proof:
 1. Extension over B_n and extension over O after scalar restriction have the same

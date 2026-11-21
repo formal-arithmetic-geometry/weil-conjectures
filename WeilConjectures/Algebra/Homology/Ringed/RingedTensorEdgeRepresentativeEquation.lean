@@ -40,8 +40,7 @@ characterization to P and Q. The preservation proofs supplied by that theorem
 and the specified target proofs hp' and hq' are equal by proof irrelevance, so
 the resulting equation is exactly the asserted one.
 Source: Stacks Project, Cohomology on Sites, Tag 07A4, representative construction
-of pullback and tensor product; the canonical comparison's defining property.
-(blueprint: lem-weil-pbc-ringed-tensor-edge-representative-equation). -/
+of pullback and tensor product; the canonical comparison's defining property. -/
 theorem ringedTensorEdgeRepresentativeEquation {A B : RingedTensorCorner.{u, w}}
     (e : RingedTensorEdge A B) (a : RingedTensorModel A) (b : RingedTensorModel B)
     (P Q : CochainComplex (SheafOfModules.{u} ((sheafCompose A.topology (forget₂ CommRingCat.{u}

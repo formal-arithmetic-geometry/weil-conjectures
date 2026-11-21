@@ -23,7 +23,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Opposite
 # Finite-free chart calculation for the pulled dual
 
 Source: Stacks Project, Modules on Sites, Tags 03EL, 03EO and 0GMX.
-(blueprint: lem-pur-ringed-site-pullback-dual-free-chart)
 -/
 
 @[expose] public section
@@ -450,7 +449,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- On a finite free chart the comparison defined by evaluation is invertible.
 Source: Stacks Project, Modules on Sites, Tags 04J0, 0GMX and 0FNY.
-(blueprint: lem-pur-ringed-site-pullback-dual-free-chart)
 
 Restrict pullback to the slice using the canonical localization comparison.
 Restriction of internal Hom identifies the two duals on that slice. Pairing-transfer

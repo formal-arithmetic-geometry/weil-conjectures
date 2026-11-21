@@ -29,7 +29,6 @@ computes finite limits pointwise, so the left adjoint preserves finite limits;
 it preserves colimits by adjunction and is additive. The exact-adjoint criterion
 therefore makes evaluation preserve K-injectivity. Mapping a complex by this
 functor is definitionally its evaluated complex.
-(blueprint: lem-weil-tower-evaluation-kinjective)
 -/
 theorem tower_evaluation_isKInjective
     (A : Type u) [Category.{v} A] [Abelian A]

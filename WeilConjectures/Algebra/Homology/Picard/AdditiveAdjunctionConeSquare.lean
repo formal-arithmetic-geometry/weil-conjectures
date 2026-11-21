@@ -20,7 +20,6 @@ namespace CochainComplex
 cone map, using the canonical additive cone comparisons.
 Source: Stacks Project, Derived Categories, Tag 014P (cone formulas), combined with
 the termwise additive adjunction.
-(blueprint: lem-pc-additive-adjunction-cone-square).
 
 Proof: transpose the two chain maps using the termwise adjunction. Apply the left functor
 to the given homotopy, then postcompose with the counit. Naturality of the counit

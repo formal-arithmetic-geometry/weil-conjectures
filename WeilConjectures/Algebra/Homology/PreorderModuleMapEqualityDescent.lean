@@ -18,7 +18,6 @@ import WeilConjectures.Algebra.FinitePresentationColimit
 /-! # Equality descent for module maps over a directed preorder
 
 Source: Stacks Project, Algebra, Tag 05N7 (3).
-(blueprint: lem-pc-preorder-module-map-equality-descent)
 -/
 
 @[expose] public section
@@ -80,8 +79,7 @@ maps. Apply the equality clause of finitePresentation_descent_directedColimit to
 H ⋙ F at the class of i. Its later quotient index j gives p ≤ H(j), hence i ≤ H(j).
 Naturality of extendScalarsComp identifies the iterated extension of f,g through p
 with direct extension from i to H(j), proving the result. This includes mutually
-comparable distinct indices, equal maps, and zero modules; i ensures nonemptiness.
-(blueprint: lem-pc-preorder-module-map-equality-descent) -/
+comparable distinct indices, equal maps, and zero modules; i ensures nonemptiness. -/
 theorem eventually_equal_maps_of_directed_preorder_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i : I) (M N : ModuleCat.{u} (F.obj i))

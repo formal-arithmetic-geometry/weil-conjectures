@@ -13,7 +13,6 @@ import Mathlib.Data.Fintype.Basic
 /-! # Common stages for a finite family of module map equalities
 
 Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1).
-(blueprint: lem-pc-finite-family-common-stage).
 -/
 
 @[expose] public section
@@ -22,7 +21,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace ModuleCat
 /-- A finite family of stage equalities admits one common upper stage.
 Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1).
-(blueprint: lem-pc-finite-family-common-stage).
 
 Proof: Induct on the finite index type. At each step directedness supplies an upper
 bound for the current stage and the previously obtained common stage; functoriality

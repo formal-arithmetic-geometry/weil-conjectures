@@ -20,7 +20,6 @@ set_option linter.privateModule false
 # Surjective towers of module complexes
 
 Source: Stacks Project, Tags 091D (3), (5) and 0CQD
-(auxiliary; not a blueprint node).
 Natural index `n` denotes the source's positive index `n + 1`.
 -/
 

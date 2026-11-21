@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 # Kernel of a successive lower truncation transition
 
 Source: Stacks Project, Homology Tag 0118 (homology-section-truncations).
-(blueprint: lem-pc-lower-truncation-transition-kernel)
 -/
 
 @[expose] public section
@@ -209,7 +208,6 @@ private theorem quasiIso_single_of_kernel
     · exact HomologicalComplex.ExactAt.of_isZero (hz r hr hr')
 
 /-- Source: Stacks Tag 0118 (homology-section-truncations).
-(blueprint: lem-pc-lower-truncation-transition-kernel)
 
 Since the projections are epimorphisms, the factorization determines `q` uniquely.
 In degree `m` its target is zero, and its kernel is the source, identified with

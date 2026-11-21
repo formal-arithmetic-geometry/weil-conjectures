@@ -23,7 +23,6 @@ namespace ModuleCat
 /-- Finite matrix coefficients over a ring colimit can be represented at one stage.
 
 Source: Stacks Project, Algebra, Tag 05N7, proof of (1).
-(blueprint: lem-pc-finite-relation-matrix-lift).
 
 Proof: represent each entry q(e_k)_j at some stage using the concrete filtered
 colimit representation theorem. Filteredness gives a common receiving stage for

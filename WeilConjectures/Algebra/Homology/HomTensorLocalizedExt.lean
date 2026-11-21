@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.HomTensorSummandLocalizedExt
 # Localized pure-tensor extensionality
 
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
-(blueprint: lem-sc-hom-tensor-localized-ext)
 -/
 
 @[expose] public section
@@ -213,7 +212,6 @@ set_option synthInstance.maxSize 256 in
 /-- Maps to the internal Hom out of a total tensor are determined on localized pure tensors.
 Source: Stacks Project, Cohomology on Sites, Tag 0A90, degreewise construction;
 Modules on Sites, Section 03EK, tensor product universal property.
-(blueprint: lem-sc-hom-tensor-localized-ext)
 
 Proof: Fix a source section over U and regard its images as morphisms on the
 localized site over U. Restrict each such morphism to every total tensor summand.

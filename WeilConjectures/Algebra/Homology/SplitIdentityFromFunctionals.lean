@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.SplitSubmodulesStable
 # Assembling cancellation from two split functionals
 
 Source: Stacks Project, Algebra, Tag 00MT, proof, final three sentences.
-(blueprint: lem-weil-pbc-split-identity-from-functionals).
 -/
 
 @[expose] public section
@@ -88,7 +87,6 @@ private theorem submoduleSumEquiv_apply {R M : Type*} [CommRing R]
 set_option linter.unusedVariables false in
 /-- Assemble the complement and identity complex once the neighboring maps respect the split.
 Source: Stacks Project, Algebra, Tag 00MT, proof, final three sentences.
-(blueprint: lem-weil-pbc-split-identity-from-functionals).
 
 Proof: Let the complementary terms be `ker α`, `ker β` at `i`, `i - 1`, and the original
 terms elsewhere. The equality `β ∘ d = α` restricts the middle differential to these

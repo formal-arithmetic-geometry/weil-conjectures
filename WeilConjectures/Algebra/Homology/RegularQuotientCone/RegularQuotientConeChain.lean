@@ -10,7 +10,6 @@ public import WeilConjectures.Algebra.Homology.RegularQuotientCone.RegularQuotie
 /-! # Strict scalar cone augmentations
 
 Source: Stacks Project, sites-cohomology.tex, principal quotient formulas, Tag 06YP.
-(blueprint: lem-cbc-regular-quotient-cone-chain).
 -/
 
 @[expose] public section
@@ -32,7 +31,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (hz : ∀ P, (complexScalar R t).app P ≫ ρ.app P = 0)
 
 /-- Extend a chain map annihilating the scalar to its cone, with zero shifted component.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+Source: Stacks 06YP. -/
 noncomputable def chainAugmentation : cone R t ⟶ T where
   app P := CochainComplex.mappingCone.desc ((complexScalar R t).app P) 0 (ρ.app P)
     (by simp [hz P])
@@ -44,7 +43,7 @@ noncomputable def chainAugmentation : cone R t ⟶ T where
         congrArg (fun f ↦ f.f n) (ρ.naturality h)
 
 /-- The augmentation is the second projection followed by the coefficient map.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+Source: Stacks 06YP. -/
 theorem chainAugmentation_components (P : CochainComplex (Modules R) ℤ) (n : ℤ) :
     ((chainAugmentation t T ρ hz).app P).f n =
       (CochainComplex.mappingCone.snd ((complexScalar R t).app P)).v n n (add_zero n) ≫
@@ -53,7 +52,7 @@ theorem chainAugmentation_components (P : CochainComplex (Modules R) ℤ) (n : �
   simp
 
 /-- The augmentation composed with the unshifted inclusion is the coefficient map.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+Source: Stacks 06YP. -/
 theorem inclusion_chainAugmentation :
     inclusion R t ≫ chainAugmentation t T ρ hz = ρ := by
   apply NatTrans.ext
@@ -65,7 +64,7 @@ variable {S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S)
   (E : Modules R ⥤ Modules S) [E.Additive] (adj : E ⊣ restriction φ)
 
 /-- The ordinary adjunction unit applied termwise.
-Source: Stacks 03D7 (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+Source: Stacks 03D7. -/
 noncomputable def coefficientUnit : 𝟭 (CochainComplex (Modules R) ℤ) ⟶
     E.mapHomologicalComplex (.up ℤ) ⋙ (restriction φ).mapHomologicalComplex (.up ℤ) where
   app P := {
@@ -77,7 +76,7 @@ noncomputable def coefficientUnit : 𝟭 (CochainComplex (Modules R) ℤ) ⟶
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasSheafify J AddCommGrpCat] in
 /-- The vanishing composite with the coefficient-ring map says the section maps to zero.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+Source: Stacks 06YP. -/
 theorem section_image_zero
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
       ringMap φ = 0) (U : Cᵒᵖ) : (φ.hom.app U).hom (t.val U) = 0 := by
@@ -87,7 +86,7 @@ theorem section_image_zero
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasSheafify J AddCommGrpCat] in
 /-- The scalar acts trivially on any module restricted from the quotient.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+Source: Stacks 06YP. -/
 theorem scalar_restriction_zero
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
       ringMap φ = 0) (M : Modules S) :
@@ -98,7 +97,7 @@ theorem scalar_restriction_zero
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasSheafify J AddCommGrpCat] in
 /-- The coefficient unit kills the scalar whenever the coefficient-ring map does.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+Source: Stacks 06YP. -/
 theorem coefficientUnit_zero
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
       ringMap φ = 0) (P : CochainComplex (Modules R) ℤ) :
@@ -113,8 +112,7 @@ theorem coefficientUnit_zero
   rw [← hn, scalar_restriction_zero t φ ht, comp_zero]
 
 /-- Scalar cone formation preserves every quasi-isomorphism, without a flatness condition.
-Source: Stacks, derived.tex, Tag 014A
-(blueprint: lem-cbc-regular-quotient-cone-chain). -/
+Source: Stacks, derived.tex, Tag 014A -/
 theorem cone_quasiIso {P Q : CochainComplex (Modules R) ℤ} (h : P ⟶ Q)
     (hh : QuasiIso h) : QuasiIso ((cone R t).map h) := by
   let := HasDerivedCategory.standard (Modules R)

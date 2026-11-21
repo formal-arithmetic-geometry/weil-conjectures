@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
 /-! # Hom complexes from the structure sheaf
 
 Source: Stacks Project, sites-cohomology.tex, Sections 0A8X and 08J7.
-(blueprint: lem-sc-hom-complex-unit-iso).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace CategoryTheory
 /-- Hom from the unit concentrated in degree zero is naturally the identity on complexes.
 
 Source: Stacks Project, sites-cohomology.tex, Sections 0A8X and 08J7.
-(blueprint: lem-sc-hom-complex-unit-iso).
 
 Proof:
 1. In degree n, the product defining Hom has factors Hom(L^p, M^(p+n)). For

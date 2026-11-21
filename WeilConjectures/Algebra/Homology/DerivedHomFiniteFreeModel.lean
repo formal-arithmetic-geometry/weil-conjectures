@@ -15,7 +15,7 @@ import WeilConjectures.Algebra.Homology.DerivedHomFiniteFreeModelAux
 # Derived internal Hom from a bounded-above finite free model
 
 Source: Stacks Project, Cohomology, Tag 0GM8, case (2), and Cohomology on Sites,
-Section 08J7 (blueprint: lem-sc-derived-hom-finite-free-model).
+Section 08J7.
 -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry
 /-- A bounded-above finite free model computes derived internal Hom into a bounded-below
 complex of module sheaves on a ringed space.
 Source: Stacks Project, Cohomology, Tag 0GM8, case (2), and Cohomology on Sites,
-Section 08J7 (blueprint: lem-sc-derived-hom-finite-free-model).
+Section 08J7.
 
 Proof:
 1. By `lem-sc-bounded-below-injective-resolution`, choose a quasi-isomorphism `G ⟶ I`

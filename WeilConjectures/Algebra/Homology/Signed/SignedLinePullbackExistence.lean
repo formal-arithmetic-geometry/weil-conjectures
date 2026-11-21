@@ -20,7 +20,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 /-! # Existence of normalized signed line pullbacks
 
 Source: Stacks Project, Modules on Sites, Tags 03EL, 0GMX and 04J0.
-(blueprint: lem-pur-normalized-signed-line-pullback-exists)
 -/
 
 @[expose] public section
@@ -715,7 +714,6 @@ end TensorPullback
 /-- Normalized pullback comparisons for the signed powers of one line.
 Source: Stacks Project, Modules on Sites, Tags 03EL, 0GMX, 0FNY and 04J0;
 steps 1, 3 and 4 of the signed-line pullback argument.
-(blueprint: lem-pur-normalized-signed-line-pullback-exists)
 
 Proof: In degree zero use the coefficient-unit comparison, and in degree one use p.
 For n at least one, apply the tensor pullback comparison to the nth power tensor L,

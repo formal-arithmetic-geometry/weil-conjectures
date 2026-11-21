@@ -102,7 +102,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
 
 /-- The ordinary underlying-set functor at a coefficient level, used only to express
 transport of the actual semilinear transition. Source: Zheng, Construction 4.1, p. 21;
-Stacks 03D2 (blueprint: lem-pur-system-geometric-ordinary-comparison). -/
+Stacks 03D2. -/
 abbrev geometricSystemUnderlying (n : ℕ) :=
   toSheaf (derivedChangeRingIndependentCoefficients J (BY.obj (op n))) ⋙
     sheafCompose J (CategoryTheory.forget AddCommGrpCat.{w})
@@ -112,8 +112,7 @@ set_option genSizeOfSpec false in
 /-- An exact termwise inverse image with its specified underlying transition maps.
 The transition equation fixes the functor on systems, rather than merely specifying
 unrelated level objects. All exactness fields are conclusions of the existence theorem.
-Source: Zheng, Construction 4.1 and the sentence before Lemma 4.10; Stacks 03D2
-(blueprint: lem-pur-system-geometric-ordinary-comparison). -/
+Source: Zheng, Construction 4.1 and the sentence before Lemma 4.10; Stacks 03D2 -/
 structure GeometricSystemOrdinaryData where
   functor : StrictRingSystem BY ⥤ StrictRingSystem BX
   [additive : functor.Additive]
@@ -138,31 +137,27 @@ attribute [instance] GeometricSystemOrdinaryData.additive
 variable {BY BX u I}
 
 /-- The specified level inverse image, retaining the exactness witness in its interface.
-Source: Stacks 03D2 (blueprint: lem-pur-system-geometric-ordinary-comparison). -/
+Source: Stacks 03D2. -/
 def GeometricSystemOrdinaryData.levelInverseImage
     (_F : GeometricSystemOrdinaryData BY BX u I) (n : ℕ) := (I n).modules
 
-/-- Additivity of the level inverse image. Source: Stacks 03D2
-(blueprint: lem-pur-system-geometric-ordinary-comparison). -/
+/-- Additivity of the level inverse image. Source: Stacks 03D2 -/
 instance GeometricSystemOrdinaryData.levelInverseImageAdditive
     (F : GeometricSystemOrdinaryData BY BX u I) (n : ℕ) :
     (F.levelInverseImage n).Additive := F.levelAdditive n
 
-/-- Left exactness of the level inverse image. Source: Stacks 03DA
-(blueprint: lem-pur-system-geometric-ordinary-comparison). -/
+/-- Left exactness of the level inverse image. Source: Stacks 03DA -/
 instance GeometricSystemOrdinaryData.levelInverseImageLimits
     (F : GeometricSystemOrdinaryData BY BX u I) (n : ℕ) :
     PreservesFiniteLimits (F.levelInverseImage n) := F.levelLimits n
 
-/-- Right exactness of the level inverse image. Source: Stacks 03DB
-(blueprint: lem-pur-system-geometric-ordinary-comparison). -/
+/-- Right exactness of the level inverse image. Source: Stacks 03DB -/
 instance GeometricSystemOrdinaryData.levelInverseImageColimits
     (F : GeometricSystemOrdinaryData BY BX u I) (n : ℕ) :
     PreservesFiniteColimits (F.levelInverseImage n) := F.levelColimits n
 
 /-- The canonical localization of the termwise evaluation square.
-Source: Zheng, Construction 4.1; Stacks 015F
-(blueprint: lem-pur-system-geometric-ordinary-comparison). -/
+Source: Zheng, Construction 4.1; Stacks 015F -/
 def GeometricSystemOrdinaryData.derivedEvaluation
     (F : GeometricSystemOrdinaryData BY BX u I) (n : ℕ) :
     F.functor.mapDerivedCategory ⋙ derivedSystemEvaluation BX n ≅
@@ -176,7 +171,6 @@ def GeometricSystemOrdinaryData.derivedEvaluation
 
 /-- Exact termwise inverse image and its ordinary singleton comparison.
 Source: Zheng, Construction 4.1, printed p. 21; Stacks 03D2 and 03EL.
-(blueprint: lem-pur-system-geometric-ordinary-comparison).
 
 Proof: Conjugate each semilinear transition by the recorded underlying-sheaf
 isomorphisms. Test on the universal pairs of sections; the module addition and scalar

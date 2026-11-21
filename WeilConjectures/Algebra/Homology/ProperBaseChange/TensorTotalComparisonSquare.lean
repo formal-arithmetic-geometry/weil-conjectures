@@ -23,8 +23,7 @@ local notation "Tot[" F "]" => CategoryTheory.Functor.uncurry.obj
   (CategoryTheory.Functor.map₂HomologicalComplex F
     (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ))
 
-/-- The uncurried total bifunctor sends a pair of maps to the totalized bifunctor map.
-(blueprint: lem-pbc-tensor-total-comparison-square) -/
+/-- The uncurried total bifunctor sends a pair of maps to the totalized bifunctor map. -/
 theorem mapTotalBifunctor {A : Type*} [Category* A] [Abelian A]
     [HasCoproducts.{0} A] (F : A ⥤ A ⥤ A)
     [F.PreservesZeroMorphisms] [∀ M, (F.obj M).PreservesZeroMorphisms]
@@ -45,7 +44,6 @@ variable {A B D : Type*} [Category* A] [Category* B] [Category* D]
 
 /-- An ordinary bifunctor square induces the corresponding square on total complexes.
 Source: Stacks, Cohomology on Sites, Tag 07A4, signed direct-sum totalization.
-(blueprint: lem-pbc-tensor-total-comparison-square)
 
 Proof: cancel the two total-comparison isomorphisms. In each degree, U preserves
 the coproduct since it is an equivalence. Test on every bidegree injection. The

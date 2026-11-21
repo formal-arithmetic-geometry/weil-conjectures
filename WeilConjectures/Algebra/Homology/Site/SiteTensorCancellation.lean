@@ -133,7 +133,6 @@ private theorem siteCancel_pure (P Q M : LineEvaluation.Modules.{uC, vC, r} R)
 attribute [local irreducible] tensorToSite siteCancel
 /-- A specified evaluation pairing gives the unique cancellation on pure site tensors.
 Source: Stacks 03EK and 0B8N
-(blueprint: lem-pur-site-tensor-cancellation).
 Proof: compare the explicit site tensor with the monoidal sheaf tensor. Transport
 reassociation, the specified pairing and the unitor through that comparison. Its
 formula follows on pure sections from the comparison formulas. The trilinear

@@ -29,12 +29,10 @@ and thereby reduces to the case `S = X`. Only that reduced form is stated here:
   quasi-compact morphism locally of finite type with `Y` qcqs. A section `f` of `p` over
   `U` whose image is closed in `p⁻¹(V)` extends, after a `V`-admissible blow-up of `X`,
   to a section of `p` over an open `W` of the blow-up containing the preimage of `U`, and
-  the graph of the extension is closed in `Y ×_X X'`
-  (blueprint: `thm:nagata-conrad-elimination`, in the form reduced to the base `X`);
+  the graph of the extension is closed in `Y ×_X X'`;
 - `AlgebraicGeometry.exists_admissibleBlowup_extend_section`: **Conrad's Remark 2.5**, the
   case `V = U`. Here the closed-image hypothesis is automatic: `f` is then a section of
   the separated morphism `p ∣_ U`, hence a closed immersion
-  (blueprint: `lemma:nagata-conrad-morphism-is-quasi-domination`).
 
 The first statement is what
 `AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap` (Tag 081S)
@@ -69,7 +67,6 @@ The two orientations of the fibre product have to be reconciled: step 2 works in
 `CategoryTheory.Limits.pullbackSymmetry`, and it is used only through the closed immersion
 `F.imageι ≫ (pullbackSymmetry p q).hom`, so that no transport of scheme-theoretic images
 along an isomorphism is needed.
-
 -/
 
 @[expose] public section
@@ -84,9 +81,7 @@ namespace AlgebraicGeometry
 
 variable {X : Scheme.{u}}
 
-/-- **Conrad's Theorem 2.4, reduced to the base `X`** (blueprint:
-`thm:nagata-conrad-elimination`, in the form reduced to the base `X`;
-`def:nagata-conrad-quasi-domination`).
+/-- **Conrad's Theorem 2.4, reduced to the base `X`**.
 
 Conrad's Theorem 2.4 is stated for a rational map over an auxiliary base `S`; the first
 step of his proof replaces `Y` by `Y ×_S X`, which is the reduction to the form stated
@@ -219,9 +214,7 @@ theorem exists_admissibleBlowup_extend_partialSection
 /-- Blueprint `corollary-extension-proper-target--1`, section form.
 
 **Conrad's Remark 2.5**: the case `V = U` of
-`AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection` (blueprint:
-`thm:nagata-conrad-elimination` with `V = U`, together with
-`lemma:nagata-conrad-morphism-is-quasi-domination`). Combined with
+`AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection`. Combined with
 `AlgebraicGeometry.QuasiDomination.U_eq_top` it yields the extension to a proper target
 `AlgebraicGeometry.exists_admissibleBlowup_extend_of_isProper`.
 

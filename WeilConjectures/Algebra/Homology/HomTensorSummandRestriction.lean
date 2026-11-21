@@ -35,7 +35,7 @@ local notation "Mod" => SheafOfModules.{max u v}
 set_option synthInstance.maxSize 256 in
 /-- Restriction to every summand determines a morphism into the internal Hom
 from a total tensor term. Source: Stacks Project, Modules on Sites, Section 03EK
-and Lemma 03EO (blueprint: lem-sc-hom-tensor-summand-restriction-ext).
+and Lemma 03EO.
 
 Proof: Uncurry both morphisms by the tensor-Hom adjunction. Tensoring the
 coproduct defining the total term with A preserves this coproduct, since tensor

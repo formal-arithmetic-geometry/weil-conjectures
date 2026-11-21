@@ -16,7 +16,6 @@ import Mathlib.Tactic.Abel
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, the displayed Hom
 differential, and Section 08J7, the proof of Lemma 21.35.4.
-(blueprint: lem-sc-hom-complex-mapping-cone-differential).
 -/
 
 @[expose] public section
@@ -73,7 +72,6 @@ This assertion constructs no degreewise isomorphism.
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, the displayed Hom
 differential, and Section 08J7, the proof of Lemma 21.35.4.
-(blueprint: lem-sc-hom-complex-mapping-cone-differential).
 
 Proof: fix adjacent degrees `n` and `m = n+1`. Postcompose the proposed equality
 with each product projection in degree `m`. The projections are jointly monic.

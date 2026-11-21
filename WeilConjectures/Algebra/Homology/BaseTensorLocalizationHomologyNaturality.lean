@@ -15,7 +15,6 @@ import all WeilConjectures.Algebra.Homology.SemilinearScalarExtensionHomologySqu
 /-! Ordinary tensor localization and homology.
 
 Source: Stacks Project, perfect.tex, Tags 0DJ8 and 06Y6.
-(blueprint: lem-pc-base-tensor-localization-homology-naturality).
 -/
 
 @[expose] public section
@@ -46,7 +45,6 @@ omit [Algebra R Rp] tRpA tRpB [Algebra A D] tAD tApD in
 include tBD tBpD in
 /-- Naturality of the ordinary tensor-to-localized homology maps.
 Source: Stacks Project, perfect.tex, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-base-tensor-localization-homology-naturality).
 
 Proof: restrict the ordinary tensor complexes and their maps to B.
 The B-action on the localized complex is the same whether restricted through

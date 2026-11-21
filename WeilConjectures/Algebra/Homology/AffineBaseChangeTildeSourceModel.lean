@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeStalkComparison
 /-! # Affine base change computed on a module K-flat resolution
 
 Source: Stacks Project, Tag 0DJ8, affine proof and equation-bc.
-(blueprint: lem-pc-affine-base-change-tilde-source-model).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ variable [∀ Y : Scheme.{u},
 
 /-- Compute the source model on a termwise tilde of a K-flat module complex.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, affine proof and equation-bc.
-(blueprint: lem-pc-affine-base-change-tilde-source-model).
 
 Proof: use the functorial R-K-flat resolution of the restricted module complex M.
 The comparison span in exists_affineDerivedBaseChangeComparison computes the

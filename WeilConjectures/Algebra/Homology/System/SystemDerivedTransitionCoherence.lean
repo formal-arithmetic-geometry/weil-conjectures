@@ -27,8 +27,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
 /-- The actual coefficient restriction compositor.
-Source: Zheng 4.1; Stacks 015F
-(blueprint: lem-pur-system-derived-transition-coherence). -/
+Source: Zheng 4.1; Stacks 015F -/
 def systemDerivedRestrictionComposition {l m n : ℕ} (h : l ≤ m) (k : m ≤ n) :
     (systemRestriction B h).mapDerivedCategory ⋙
       (systemRestriction B k).mapDerivedCategory ≅
@@ -41,7 +40,6 @@ def systemDerivedRestrictionComposition {l m n : ℕ} (h : l ≤ m) (k : m ≤ n
 
 /-- Derived transitions compose with the canonical coefficient restriction comparison.
 Source: Zheng 4.1; Stacks 015F
-(blueprint: lem-pur-system-derived-transition-coherence).
 Proof: localization detects equality of natural transformations. Postcompose on a
 cochain complex with the exact evaluation and restriction factorization isomorphisms.
 The transition and compositor representative formulas reduce the two composites to

@@ -21,7 +21,6 @@ import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 Source: Stacks Project, Tag 0A8X, product Hom differential;
 Tag 0117, natural long exact cohomology sequence.
-(blueprint: lem-pc-stupid-tail-hom-short-exact).
 -/
 
 @[expose] public section
@@ -168,7 +167,6 @@ so the statement supplies naturality in the second variable as well as exactness
 
 Source: Stacks Project, Tag 0A8X, product Hom differential;
 Tag 0117, natural long exact cohomology sequence.
-(blueprint: lem-pc-stupid-tail-hom-short-exact).
 
 Proof: let T be the stupid tail of P in degrees at least k+1 and let G be P.X k
 placed in degree k. Since P vanishes below k, inclusion of T and projection to G

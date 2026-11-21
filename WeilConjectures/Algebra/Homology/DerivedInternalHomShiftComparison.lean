@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftRight
 
 /-! # Shift comparison for derived internal Hom
 Source: Stacks Project, Cohomology on Sites, Sections 21.34 and 21.35, Tag 08JA.
-(blueprint: lem-pur-derived-internal-hom-shift-comparison).
 -/
 
 @[expose] public section
@@ -53,7 +52,6 @@ private theorem shiftComparisonOfOneVariable
 relative degree, naturally in the second argument. This is a comparison in the
 sheaf derived category; no global-section or cohomology functor occurs here.
 Source: Stacks Project, Cohomology on Sites, Sections 21.34 and 21.35, Tag 08JA.
-(blueprint: lem-pur-derived-internal-hom-shift-comparison).
 
 Proof: Represent P by a complex L and Q by a K-injective complex I. Shifting I by n
 preserves K-injectivity: shift an acyclic test complex by -n in the null-homotopy

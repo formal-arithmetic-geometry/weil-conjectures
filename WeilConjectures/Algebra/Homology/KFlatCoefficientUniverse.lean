@@ -21,7 +21,6 @@ import Mathlib.CategoryTheory.Limits.EssentiallySmall
 
 Sheafification of abelian presheaves in a coefficient universe containing the site, as used
 by the K-flatness predicates of `WeilConjectures.Algebra.Homology.KFlat`
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -40,7 +39,7 @@ variable {C : Type u} [Category.{v} C] [hsmall : EssentiallySmall.{w} C]
 
 /-- Abelian sheafification exists and is left exact in any universe containing the site.
 Source: Stacks Project, Modules on Sites, Section 03DA, and Cohomology on Sites,
-Definition 06YN (blueprint: def-pc-kflat-complex).
+Definition 06YN.
 
 Proof: choose the small model of the site in the coefficient universe, where the usual
 abelian sheafification exists. Conjugate its adjunction by the equivalences of presheaf
@@ -58,7 +57,7 @@ theorem hasSheafify_coefficientUniverse : HasSheafify J AddCommGrpCat.{w} := by
 /-- Locally bijective maps are exactly sheafification equivalences for abelian groups
 in any coefficient universe relative to which the site is essentially small.
 Source: Stacks Project, Modules on Sites, Section 03DA, and Cohomology on Sites,
-Definition 06YN (blueprint: def-pc-kflat-complex).
+Definition 06YN.
 
 Proof: replace the site by its small model in the coefficient universe. On that model,
 apply the usual concrete sheafification criterion for abelian groups. Transport the

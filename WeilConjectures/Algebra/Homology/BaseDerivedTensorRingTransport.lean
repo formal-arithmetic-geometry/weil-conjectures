@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.SemilinearScalarExtensionHomologySquare
 /-! # Change of all coefficient rings in the localized tensor comparison
 
 Source: Stacks Project, Tags 06Y6 and 08IB, derived tensor functoriality.
-(blueprint: lem-pc-base-derived-tensor-ring-transport).
 -/
 
 @[expose] public section
@@ -99,8 +98,7 @@ its given tau, by tensor induction. Finally the exact forgetful homology
 isomorphisms yield the displayed equality. The comparisons need not be
 invertible, the inputs need not be K-flat, and all rings may be zero rings.
 Source: Stacks Project, Tag 06Y6, lemma-derived-base-change, and Tag 08IB,
-lemma-compare-base-change; the coefficient equivalences are exact.
-(blueprint: lem-pc-base-derived-tensor-ring-transport). -/
+lemma-compare-base-change; the coefficient equivalences are exact. -/
 theorem exists_baseDerivedTensor_ring_transport
     {R₀ A₀ B₀ C₀ R A B C : Type u}
     [CommRing R₀] [CommRing A₀] [CommRing B₀] [CommRing C₀]

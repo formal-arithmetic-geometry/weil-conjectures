@@ -21,7 +21,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Localization
 Source: Stacks Project, sites-cohomology.tex, Tags 06YM, 06YP and 06YU;
 derived.tex, definition-cone and definition-distinguished-triangle;
 more-algebra.tex, Tag 0FNH, item-shift-tensor.
-(auxiliary; not a blueprint node)
 
 The derived bifunctor and its resolving comparison are the ones already supplied
 by site-derived-tensor descent. The presentation packages the existing choices once,
@@ -622,8 +621,7 @@ private theorem homotopyBifunctor_inverts
 
 /-- A tensor descent presentation: homotopy tensor, derived tensor, and their comparisons.
 Packing the selected data keeps the dependent types of the comparisons shared.
-Source: Stacks, Tag 06YU
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YU -/
 structure TensorPresentation
     {CC H D : Type*} [Category* CC] [Category* H] [Category* D]
     (q : CC ⥤ H) (Q : H ⥤ D) (F : CC × CC ⥤ CC) (P : ObjectProperty H) where
@@ -635,8 +633,7 @@ structure TensorPresentation
 
 /-- Pack precisely the witnesses and comparisons specified by a descent theorem.
 The projections reduce to the original choices, without selecting any additional object.
-Source: Stacks, Tag 06YU
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YU -/
 def TensorPresentation.ofExists
     {CC H D : Type*} [Category* CC] [Category* H] [Category* D]
     (q : CC ⥤ H) (Q : H ⥤ D) (F : CC × CC ⥤ CC) (P : ObjectProperty H)
@@ -650,8 +647,7 @@ def TensorPresentation.ofExists
 
 /-- Compose the selected homotopy and resolving comparisons on a resolving pair.
 This is the representative comparison in site tensor descent, expressed generically.
-Source: Stacks, Tag 06YU
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YU -/
 def TensorPresentation.representativeIso
     {CC H D : Type*} [Category* CC] [Category* H] [Category* D]
     {q : CC ⥤ H} {Q : H ⥤ D} {F : CC × CC ⥤ CC} {P : ObjectProperty H}
@@ -700,8 +696,7 @@ private theorem tensorPresentation_comparison_app
 /-- The resolving subcategory, its localization, and its existing tensor presentation.
 The membership and localization fields prevent repeated expansion of the site descent
 statement when using the dependent tensor comparisons.
-Source: Stacks, Tags 06YS and 06YU
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 06YS and 06YU -/
 structure ResolvingTensorPresentation
     {CC H D : Type*} [Category* CC] [Category* H] [Category* D]
     (q : CC ⥤ H) (Q : H ⥤ D) (W : MorphismProperty H)
@@ -713,8 +708,7 @@ structure ResolvingTensorPresentation
 
 /-- Package all selected site descent data without changing any selected witness.
 The localization field follows from the stated equivalence and its comparison to Q.
-Source: Stacks, Tags 06YS and 06YU
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 06YS and 06YU -/
 def ResolvingTensorPresentation.ofExists
     {CC H D : Type*} [Category* CC] [Category* H] [Category* D]
     (q : CC ⥤ H) (Q : H ⥤ D) (W : MorphismProperty H)
@@ -826,21 +820,19 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
 
 /-- The dependency's module-sheaf category on the given ringed site.
-Source: Stacks, Modules on Sites, Section 03DA
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Modules on Sites, Section 03DA -/
 abbrev Modules := CategoryTheory.ringedSiteModules.{r}
   ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
 section LocalTensorDefinitions
 
 /-- The existing canonical tensor of module sheaves.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03EK. -/
 def ordinaryTensor : Modules R ⥤ Modules R ⥤ Modules R :=
   @curriedTensor (Modules R) _ (SheafOfModules.monoidalCategory R)
 
 /-- The canonical sheaf tensor is additive in its first argument.
-Source: Stacks, Tag 03EK
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03EK -/
 theorem tensorAdditive : (ordinaryTensor R).Additive := by
   unfold ordinaryTensor
   infer_instance
@@ -848,8 +840,7 @@ theorem tensorAdditive : (ordinaryTensor R).Additive := by
 attribute [local instance 2000] tensorAdditive
 
 /-- The canonical sheaf tensor is additive in its second argument.
-Source: Stacks, Tag 03EK
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 03EK -/
 theorem tensorObjAdditive (M : Modules R) :
     ((ordinaryTensor R).obj M).Additive := by
   unfold ordinaryTensor
@@ -859,8 +850,7 @@ attribute [local instance 2000] tensorObjAdditive
 
 /-- The canonical direct-sum total tensor exists for every pair of complexes.
 These named instances provide the interface of the unexpanded ordinary tensor.
-Source: Stacks, Tag 06YM
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YM -/
 theorem tensorHasMapBifunctor (A B : CochainComplex (Modules R) ℤ) :
     CochainComplex.HasMapBifunctor A B (ordinaryTensor R) := by
   unfold ordinaryTensor
@@ -870,7 +860,7 @@ attribute [local instance 2000] tensorHasMapBifunctor
 attribute [local irreducible] ordinaryTensor
 
 /-- The existing direct-sum total tensor, as a curried bifunctor on complexes.
-Source: Stacks, Tag 06YM (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YM. -/
 abbrev totalTensor : CochainComplex (Modules R) ℤ ⥤
     CochainComplex (Modules R) ℤ ⥤ CochainComplex (Modules R) ℤ :=
   (ordinaryTensor R).map₂CochainComplex
@@ -879,8 +869,7 @@ variable [HasDerivedCategory.{w} (Modules R)]
 
 /-- All the witnesses and proof fields of the published site tensor descent theorem.
 This is a typed package of the original nested choices, rather than a new descent.
-Source: Stacks, Tags 06YS and 06YU
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 06YS and 06YU -/
 def selectedResolvingTensorPresentation : ResolvingTensorPresentation
     (HomotopyCategory.quotient (Modules R) (.up ℤ))
     (DerivedCategory.Qh : HomotopyCategory (Modules R) (.up ℤ) ⥤ DerivedCategory (Modules R))
@@ -906,14 +895,12 @@ def selectedResolvingTensorPresentation : ResolvingTensorPresentation
 attribute [local irreducible] selectedResolvingTensorPresentation
 
 /-- The resolving property already selected by site tensor descent.
-Source: Stacks, Tags 06YS and 06YU
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 06YS and 06YU -/
 abbrev resolvingProperty : ObjectProperty (HomotopyCategory (Modules R) (.up ℤ)) :=
   (selectedResolvingTensorPresentation R).property
 
 /-- The published membership equivalence for the resolving subcategory.
-Source: Stacks, Tags 06YS and 06YU
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 06YS and 06YU -/
 theorem resolvingProperty_spec (X : HomotopyCategory (Modules R) (.up ℤ)) :
     resolvingProperty R X ↔ CochainComplex.IsKFlatIndependentCoefficients X.as ∧
       ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (X.as.X n) :=
@@ -923,8 +910,7 @@ theorem resolvingProperty_spec (X : HomotopyCategory (Modules R) (.up ℤ)) :
 The derived tensor field is literally the published `siteDerivedTensorIndependentCoefficients`,
 so the exported `derivedTensor` unfolds reducibly to the original abbreviation; the other
 fields are the selected choices, unchanged.
-Source: Stacks, Tag 06YU
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YU -/
 def selectedTensorPresentation : TensorPresentation
     (HomotopyCategory.quotient (Modules R) (.up ℤ))
     (DerivedCategory.Qh : HomotopyCategory (Modules R) (.up ℤ) ⥤ DerivedCategory (Modules R))
@@ -940,8 +926,7 @@ attribute [local irreducible] selectedTensorPresentation
 /-- The published derived tensor, curried directly from the published bifunctor.
 The shared presentation has this same field. Naming the bifunctor directly avoids
 unfolding that large record when consumers compare the tensor with its published form.
-Source: Stacks, Tag 06YU
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YU -/
 def derivedTensor : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules R) ⥤
     DerivedCategory (Modules R) := Functor.curry.obj
       (SheafOfModules.siteDerivedTensorIndependentCoefficients.{u, v, r, w} J R)
@@ -954,7 +939,7 @@ attribute [local semireducible] selectedTensorPresentation
 It is oriented from the localized total tensor to the derived tensor. Its arguments
 are exactly flat-term K-flat complexes; the homotopy comparison is composed with the
 resolving comparison, using the dependency's membership equivalence.
-Source: Stacks, Tag 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 06YU. -/
 def representativeIso
     (A B : CochainComplex (Modules R) ℤ)
     (hA : CochainComplex.IsKFlatIndependentCoefficients A)
@@ -1040,7 +1025,6 @@ and addition laws, naturality in every derived fixed argument, and the mixed sig
 
 Source: Stacks, Tags 06YM, 06YP and 06YU; derived.tex, definition-cone and
  definition-distinguished-triangle; more-algebra.tex, Tag 0FNH, item-shift-tensor
-(auxiliary; not a blueprint node).
 
 Proof (the node's nine steps):
 1. Use the existing additive total tensor and its induced homotopy bifunctor.

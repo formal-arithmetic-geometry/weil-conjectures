@@ -14,7 +14,6 @@ import Mathlib.RingTheory.LocalProperties.Exactness
 /-! # The affine single-complex base-change criterion
 
 Source: Stacks Project, Tag 0DJ8, affine proof, and Tag 0DJ9
-(blueprint: lem-pc-rf-single-complex-affine-base-change).
 
 The affine case of the single-complex criterion, stated with the objects of the
 qcqs statement `singleComplexBaseChangeQcqsInduction`: a cartesian square of the
@@ -36,7 +35,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Stacks, Tag 0DJ8, affine proof (and the affine case of Tag 0DJ9).
-(blueprint: lem-pc-rf-single-complex-affine-base-change)
 
 For a cartesian square of affine schemes X = Spec A, S = Spec R, S' = Spec R',
 X' = Spec A', objects K, K' of the quasi-coherent derived categories and a morphism

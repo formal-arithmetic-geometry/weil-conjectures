@@ -204,7 +204,6 @@ private lemma towerFiniteFactor (K : HomologicalComplexâ‚‚ C (ComplexShape.up â„
 /-- The cutoff inclusions are monomorphisms and nested.
 Source: blueprint thm-sp-double-complex-spectral-sequences, proof step 1, canonical
 smart truncations; Stacks tag 012X, filtration construction.
-(blueprint: lem-sp-double-complex-vertical-tower-maps).
 
 Proof: each smart cutoff inclusion is degreewise a kernel inclusion in its boundary
 vertical degree, an identity below it, and the unique map from zero above it. Restriction

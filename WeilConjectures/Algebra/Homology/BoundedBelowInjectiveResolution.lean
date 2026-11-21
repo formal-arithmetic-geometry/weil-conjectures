@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 Source: Stacks Project, Cohomology on Sites, Section 21.19 (Tag 07A5), using
 Injectives, Theorem 19.12.6 (Tag 079P)
-(blueprint: lem-sc-bounded-below-injective-resolution).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ into a bounded-below complex with injective terms which is also K-injective.
 
 Source: Stacks Project, Tags 07A5 and 079P, with the bounded-below replacement furnished by
 `CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective`
-(blueprint: lem-sc-bounded-below-injective-resolution).
 
 Proof:
 1. The category of module sheaves on a small ringed site is Grothendieck abelian by the

@@ -16,7 +16,6 @@ import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
 # Filtered colimits of flat modules
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 05UT
-(blueprint: lem-weil-pbc-filtered-colimit-flat-modules).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace ModuleCat
 
 /-- A filtered colimit of flat modules over a commutative ring is flat.
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 05UT.
-(blueprint: lem-weil-pbc-filtered-colimit-flat-modules)
 
 Proof:
 1. Lift modules to `Type (max u v)` with `ModuleCat.uliftFunctor`. This preserves
@@ -39,8 +37,7 @@ Proof:
    module categories, and reindex along `AsSmall.down`. The resulting colimit
    presentation has its ring, modules and filtered index category in one universe.
 3. Each lifted stage is flat by `Module.Flat.ulift_left_iff` and flatness of
-   lifted modules. Apply the proved `ModuleCat.flat_of_colimitPresentation`
-   (blueprint: lem-weil-pbc-flat-colimit-presentation-same-universe), which uses
+   lifted modules. Apply the proved `ModuleCat.flat_of_colimitPresentation`, which uses
    tensor-colimit compatibility and exactness of filtered colimits. Transfer its
    conclusion back using `Module.Flat.ulift_left_iff` and `ulift_right_iff`. -/
 theorem filteredColimit_flat

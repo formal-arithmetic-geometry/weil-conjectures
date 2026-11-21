@@ -76,7 +76,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The termwise open-cover short exact sequence, before localization.
 
 Source: Stacks Project, Tag 08BU, proof, and Tag 08BW (nested restriction maps).
-(blueprint: lem-sc-open-cover-mate-complex-short-exact).
 
 Proof: First use the actual extension-by-zero functors, namely the direct-sum
 extension presheaf followed by module sheafification. For W contained in U, the

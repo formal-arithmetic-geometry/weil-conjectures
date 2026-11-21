@@ -39,8 +39,7 @@ property and the cone isomorphisms also determine these maps uniquely.
 
 Source: the explicit naturality extension in the docstring of
 roos_comparison_homotopy_retract (lem-weil-derived-limit-roos-complex);
-Stacks Project, Derived Categories, Tag 070M provides the underlying Roos setup.
-(blueprint: lem-weil-roos-comparison-maps). -/
+Stacks Project, Derived Categories, Tag 070M provides the underlying Roos setup. -/
 theorem roos_comparison_maps
     (A : Type u) [Category.{v} A] [Abelian A]
     [HasLimitsOfShape (Discrete ℕ) A]

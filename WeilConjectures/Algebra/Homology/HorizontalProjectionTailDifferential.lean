@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.ConeHorizontalStepStable
 /-! # Differential equation for the extended column projection
 
 Source: Stacks Project, Homology, Tag 012X, first horizontal filtration.
-(blueprint: lem-sp-horizontal-projection-tail-differential)
 -/
 
 @[expose] public section
@@ -80,7 +79,6 @@ private theorem extendIso_inv_transport
 /-- On a horizontal tail, column projection intertwines the total differential
 with the signed vertical differential. Source: Stacks Project, Tag 012X,
 first filtration and Lemma 12.25.1(1).
-(blueprint: lem-sp-horizontal-projection-tail-differential)
 
 Proof: if the total degree is negative or the horizontal index exceeds it,
 the summand inclusion is zero. Otherwise write the total differential on the

@@ -12,7 +12,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 # The derived extension vanishes above its defining level
 
 Source: Zheng, Construction 4.1, p. 21, the zero components of `e_n!`.
-(blueprint: lem-pur-coefficient-evaluation-derived-above).
 -/
 
 @[expose] public noncomputable section
@@ -32,7 +31,6 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Above the defining level every evaluated derived extension is zero.
 Source: Zheng, Construction 4.1, p. 21
-(blueprint: lem-pur-coefficient-evaluation-derived-above).
 Proof: represent the input by a complex and replace it by a K-flat resolution. The
 resolution augmentation becomes invertible in the derived category. The derived
 comparison is invertible on that resolution, so exact evaluation and its localization

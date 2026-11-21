@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Module.GradedModuleAwayComparison
 
 Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open),
 parts (1)(a),(c),(d),(e),(g),(h); Algebra, Section 00JM
-(blueprint: lem-weil-pbc-graded-module-away-restriction).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ relation `g ^ e = a * f`. The submodules `Z f` have exactly the equal-degree fra
 as carriers; the scalar action is restricted from the ordinary localized module.
 
 Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open).
-(blueprint: lem-weil-pbc-graded-module-away-restriction)
 
 Proof:
 1. If the target denominator is nilpotent, its localizations are zero; otherwise the

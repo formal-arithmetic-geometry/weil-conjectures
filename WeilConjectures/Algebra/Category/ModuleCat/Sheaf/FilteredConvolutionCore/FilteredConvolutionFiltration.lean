@@ -39,8 +39,7 @@ theorem level_succ_le {P Q : Complex R} (F : DecreasingFiltration P)
 
 /-- The image-sum subobjects form a decreasing filtration of the total tensor.
 The proof is the degreewise tensor coherence and the image-subobject universal property.
-Source: the convolution filtration step in the blueprint proof.
-(blueprint: lem-trf-filtered-convolution-graded-quotient). -/
+Source: the convolution filtration step in the blueprint proof. -/
 theorem convolution_filtration_exists
     (P Q : Complex R) (F : DecreasingFiltration P) (G : DecreasingFiltration Q) :
     ∃ H : DecreasingFiltration (P ⊗ Q), ∀ r : ℤ, H.F r = level F G r :=

@@ -112,8 +112,7 @@ previous comparison. Extend the ordinary model isomorphism to C; associativity
 and the component equation give the displayed equality. No flatness of C, no
 invertibility of t and no K-flatness of N is used. Zero rings, zero complexes and
 unbounded complexes
-are covered by the same maps and tensor generator equations.
-(blueprint: lem-pc-kflat-localized-tensor-comparison-natural). -/
+are covered by the same maps and tensor generator equations. -/
 theorem exists_kFlatLocalizedTensorComparison_natural
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)

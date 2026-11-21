@@ -145,7 +145,6 @@ private theorem positive_naturality
 /-- Naturality of any normalized signed line pullback family.
 Source: Stacks Project, Tags 03EL, 0GMX and 0FNY; Powers and duals,
 steps 5--7 of the signed-line base-change argument.
-(blueprint: lem-pur-signed-line-pullback-naturality)
 Proof: the unit comparison is natural and degree one is the given compatible
 square. For positive degrees, induct on the tensor recursion; unit naturality
 and the bilinear pullback comparison identify both maps on pulled pure tensors,
@@ -219,7 +218,6 @@ theorem signed_line_pullback_scalar_naturality
 
 /-- One normalized family commutes with both line isomorphisms and coefficient extension.
 Source: Stacks 03EL and 0FNY.
-(blueprint: lem-pur-signed-line-pullback-naturality)
 Proof: combine the isomorphism square with the scalar-extension square proved above. -/
 theorem signed_line_pullback_naturality
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]

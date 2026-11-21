@@ -16,7 +16,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Invertibility of the balanced sheaf tensor map
 
 Source: Stacks Project, Cohomology, Tag 08DE, proof.
-(blueprint: lem-pc-balanced-sheaf-tensor-comparison-isIso)
 -/
 
 @[expose] public section
@@ -79,8 +78,7 @@ maps induce inverse maps of abelian sheaves. The given formula identifies the
 underlying map of φ with the inverse sectionwise map, by the tensor universal property
 and uniqueness of sheafification. Hence its underlying map is an isomorphism.
 The functor forgetting R-module structure reflects isomorphisms, so φ is invertible.
-No flatness is used; zero rings, zero modules and the empty space are included.
-(blueprint: lem-pc-balanced-sheaf-tensor-comparison-isIso) -/
+No flatness is used; zero rings, zero modules and the empty space are included. -/
 theorem balancedTensorComparison_isIso (α : R ⟶ B)
     (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 R))
     (φ : (monoidalCategory R).tensorObj ((restrictScalars (𝓻 α)).obj M) N ⟶

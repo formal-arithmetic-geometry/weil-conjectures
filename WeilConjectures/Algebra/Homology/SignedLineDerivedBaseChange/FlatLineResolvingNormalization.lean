@@ -28,7 +28,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 omit [J.HasSheafCompose (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})] in
 /-- A flat degree-zero factor has the published resolving tensor normalization.
 Source: Stacks 06YQ and 06YU; the flat-single normalization theorem.
-(blueprint: lem-pur-flat-line-resolving-normalization)
 Proof: take the K-flatness and flat-term proofs and the resolving comparison chi
 from flat_single_derived_normalization. Compose chi with the canonical collapse
 from total tensor to the termwise site tensor. The collapse and its inverse cancel,

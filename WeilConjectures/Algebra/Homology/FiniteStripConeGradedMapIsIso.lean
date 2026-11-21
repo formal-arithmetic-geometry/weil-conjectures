@@ -24,7 +24,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 /-- The surviving diagonal map is an isomorphism in each degree.
 Source: Stacks Project, Homology, Lemma 12.25.4 (Tag 0133), second-variable variant;
 explicit diagonal quotient argument of lem-sc-finite-strip-cone-filtration, step 3.
-(blueprint: lem-sc-finite-strip-cone-graded-map-isIso)
 
 Proof: projection from the total coproduct onto its `(n-p,p)` summand, together
 with the source projection when `n=p-1`, kills the next tail. Restrict this

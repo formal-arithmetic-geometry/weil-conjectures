@@ -17,7 +17,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 # Exactness of stalks of sheaves of modules
 
 Source: Stacks Project, Modules, Section 17.3 (Tag 01AF, `section-kernels`)
-and Lemma 01AG (`lemma-abelian`) (blueprint: lem-weil-pbc-module-stalk-exact).
+and Lemma 01AG (`lemma-abelian`).
 -/
 
 @[expose] public section
@@ -68,7 +68,7 @@ private instance stalk_preservesFiniteColimits (X : RingedSpace.{u}) (x : X) :
 
 /--
 Source: Stacks Project, Modules, Section 17.3 (Tag 01AF, `section-kernels`),
-and Lemma 01AG (`lemma-abelian`) (blueprint: lem-weil-pbc-module-stalk-exact).
+and Lemma 01AG (`lemma-abelian`).
 
 Sectionwise injectivity implies stalkwise injectivity. Stalks preserve the canonical
 kernel, cokernel and image (the stalk of the image inclusion has the same range

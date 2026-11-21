@@ -20,7 +20,6 @@ import WeilConjectures.RingTheory.PrincipalCokernelProjectiveDescent
 /-! # A single bottom differential tested on residue fields
 
 Source: Stacks Project, Tag 00O0 and Tag 00NX.
-(blueprint: lem-sc-residue-bottom-differential).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ set_option backward.isDefEq.respectTransparency false in
 injection with projective cokernel.
 
 Source: Stacks Project, Tag 00O0, Lemma `cokernel-flat`, and Tag 00NX.
-(blueprint: lem-sc-residue-bottom-differential).
 
 Proof: Extension of scalars sends the zero incoming term to zero. Thus zero homology
 at a says exactly that the residue extension of d(a,a+1) is injective. Apply

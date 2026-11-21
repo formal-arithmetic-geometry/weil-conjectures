@@ -44,7 +44,6 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 # Intrinsic derived tensor with independent site and coefficient sizes
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS and 06YU
-(blueprint: prose-03-02).
 
 This is the same K-flat construction on the actual site, including its localized sites.
 -/

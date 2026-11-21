@@ -15,7 +15,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
 /-! # Tensor totalization and extension by zero
 
 Source: Stacks Project, Tag 012Z, the diagonal direct-sum total formula.
-(blueprint: lem-sc-tensor-total-extend-nat).
 -/
 
 @[expose] public section
@@ -201,7 +200,6 @@ private theorem degreeIso_ι
 
 /-- Zero extension commutes with tensor totalization, preserving summand inclusions.
 Source: Stacks Project, Tag 012Z, the diagonal direct-sum total formula.
-(blueprint: lem-sc-tensor-total-extend-nat).
 
 Proof: In total degree n>=0 only summands with two nonnegative indices survive.
 The map sends each integer summand (p,q) to the natural summand (p.toNat,q.toNat)

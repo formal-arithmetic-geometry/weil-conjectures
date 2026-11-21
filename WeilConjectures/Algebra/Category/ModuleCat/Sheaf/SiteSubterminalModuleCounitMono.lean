@@ -10,7 +10,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteNestedExtensi
 /-! # The extension counit of a subterminal object is monic
 
 Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ.
-(blueprint: lem-dla1-site-subterminal-module-counit-mono)
 -/
 
 @[expose] public noncomputable section
@@ -107,7 +106,6 @@ private theorem counit_transpose_mono
 
 /-- Extension of restriction along a subterminal object has a monic counit.
 Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ
-(blueprint: lem-dla1-site-subterminal-module-counit-mono).
 
 Proof: transpose the extension counit through the module sheafification
 adjunction. The prescribed summand-inclusion formula for the localized unit,

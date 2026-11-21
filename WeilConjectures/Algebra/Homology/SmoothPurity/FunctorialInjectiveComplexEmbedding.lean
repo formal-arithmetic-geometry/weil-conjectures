@@ -14,7 +14,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResol
 # Functorial complex embeddings through injective subobjects
 
 Source: Stacks Project, Injectives, Lemma `lemma-functorial-injective`
-(blueprint: lem-pur-kinjective-functorial-injective).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ open CategoryTheory
 namespace CochainComplex
 
 /-- Source: Stacks Project, Injectives, Lemma `lemma-functorial-injective`
-(blueprint: lem-pur-kinjective-functorial-injective).
 In a Grothendieck abelian category there is a functorial termwise monomorphic
 quasi-isomorphism into a complex, factoring in each degree through an injective subobject.
 The subobject is represented by the monomorphism `b` from the injective object `I`.

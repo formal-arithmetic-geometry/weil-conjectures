@@ -134,13 +134,11 @@ public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
 
 Source: Stacks Project, Cohomology on Sites, Tag 0B56,
 `equation-projection-formula-map`; Categories, Tag 0DV0, `lemma-compose-counits`
-(blueprint: lem-sfb-ringed-projection-tensor-composition).
 
 We use the recorded ringed-site tensor models, their canonical tensor comparisons,
 and `RingedTensorEdge.projection`. Associators and symmetries below are specified
 on flat K-flat representatives. A section comparison is specified by the given
 ringed isomorphism on underlying sheaves, ordinary modules, and representatives.
-(blueprint: def-sfb-ringed-projection-coherence-data).
 
 The composite adjunction is the normal form of the canonical pullback/direct-image
 comparisons: its tensor map is the composite of the two canonical tensor maps.
@@ -161,15 +159,13 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace SheafOfModules.ProjectionCoherence
 
 /-- The recorded direct-sum total tensor, abbreviated only to keep representative
-normalizations readable. Source: Stacks 06YN and 0B56
-(blueprint: lem-sfb-ringed-projection-tensor-composition). -/
+normalizations readable. Source: Stacks 06YN and 0B56 -/
 abbrev total (A : RingedTensorCorner.{u, w})
     (P Q : CochainComplex A.mateModules ℤ) :=
   CochainComplex.mapBifunctor P Q A.mateTensor
 
 /-- The ordinary associator of the signed total tensor: it reassociates pure tensors
-without a sign. Source: Stacks 06YN, 07A4 and 0B56
-(blueprint: lem-sfb-ringed-projection-tensor-composition). -/
+without a sign. Source: Stacks 06YN, 07A4 and 0B56 -/
 def totalAssociator (A : RingedTensorCorner.{u, w})
     (P Q T : CochainComplex A.mateModules ℤ) :
     total A (total A P Q) T ≅ total A P (total A Q T) := by
@@ -183,8 +179,7 @@ def totalAssociator (A : RingedTensorCorner.{u, w})
 /-- The projection mate for the composite in the canonical comparison normal form.
 This is defined by transposing the composite tensor comparison followed by the
 composite counit; it is not defined as the two projection maps whose equality is asserted.
-Source: Stacks 0B56 and Categories 0DV0
-(blueprint: lem-sfb-ringed-projection-tensor-composition). -/
+Source: Stacks 0B56 and Categories 0DV0 -/
 def compositeProjection {X Y Z : RingedTensorCorner.{u, w}}
     (f : RingedTensorEdge Y X) (g : RingedTensorEdge Z Y)
     (a : RingedTensorModel X) (b : RingedTensorModel Y) (c : RingedTensorModel Z)
@@ -202,8 +197,7 @@ def compositeProjection {X Y Z : RingedTensorCorner.{u, w}}
 /-- Ordinary comparisons presenting a chosen ringed-topos composite `h = g f`.
 The insertion equation fixes the module comparison from the underlying geometric
 comparison and the structural ring maps. It is not a tensor or projection equation.
-Source: Stacks 0D6D, 0D6E and 0FPI
-(blueprint: lem-sfb-ringed-projection-tensor-composition). -/
+Source: Stacks 0D6D, 0D6E and 0FPI -/
 structure Composition {X Y Z : RingedTensorCorner.{u, w}}
     (f : RingedTensorEdge Y X) (g : RingedTensorEdge Z Y) (h : RingedTensorEdge Z X) where
   sets : h.inverse ≅ g.inverse ⋙ f.inverse
@@ -220,8 +214,7 @@ structure Composition {X Y Z : RingedTensorCorner.{u, w}}
         f.inverse.map (g.insertion M) ≫ f.insertion (g.pullback.obj M)
 
 /-- The defining K-flat normalization of the canonical derived composition comparison.
-Source: Stacks 0D6D and 0FPI
-(blueprint: lem-sfb-ringed-projection-tensor-composition). -/
+Source: Stacks 0D6D and 0FPI -/
 def Composition.Normalized {X Y Z : RingedTensorCorner.{u, w}}
     {f : RingedTensorEdge Y X} {g : RingedTensorEdge Z Y} {h : RingedTensorEdge Z X}
     (s : Composition f g h) (l : h.left ≅ g.left ⋙ f.left) : Prop :=
@@ -236,8 +229,7 @@ def Composition.Normalized {X Y Z : RingedTensorCorner.{u, w}}
 
 /-- An ordinary ringed-topos comparison with the identity morphism. The insertion
 condition includes compatibility with the structural ring map.
-Source: Stacks 0D6D, 0FPI and 0B56
-(blueprint: lem-sfb-ringed-projection-tensor-composition). -/
+Source: Stacks 0D6D, 0FPI and 0B56 -/
 structure Identity {X : RingedTensorCorner.{u, w}} (h : RingedTensorEdge X X) where
   sets : h.inverse ≅ 𝟭 (Sheaf X.topology (Type u))
   modules : h.pullback ≅ 𝟭 X.mateModules
@@ -252,8 +244,7 @@ structure Identity {X : RingedTensorCorner.{u, w}} (h : RingedTensorEdge X X) wh
           sheafCompose X.topology (CategoryTheory.forget AddCommGrpCat.{u})).obj M)
 
 /-- The identity pullback comparison, specified on all flat K-flat representatives.
-Source: Stacks 0D6D, 0FPI and 0B56
-(blueprint: lem-sfb-ringed-projection-tensor-composition). -/
+Source: Stacks 0D6D, 0FPI and 0B56 -/
 def Identity.Normalized {X : RingedTensorCorner.{u, w}} {h : RingedTensorEdge X X}
     (s : Identity h) (l : h.left ≅ 𝟭 X.mateDerived) : Prop :=
   ∀ (P : CochainComplex X.mateModules ℤ), X.mateFlat P →
@@ -263,8 +254,7 @@ def Identity.Normalized {X : RingedTensorCorner.{u, w}} {h : RingedTensorEdge X 
           ((NatIso.mapHomologicalComplex s.modules (ComplexShape.up ℤ)).hom.app P)
 
 /-- The direct-image identity comparison adjunction-conjugate to its pullback comparison.
-Source: Stacks 0FPI and Categories 0DV0
-(blueprint: lem-sfb-ringed-projection-tensor-composition). -/
+Source: Stacks 0FPI and Categories 0DV0 -/
 def identityRight {X : RingedTensorCorner.{u, w}} (h : RingedTensorEdge X X)
     (l : h.left ≅ 𝟭 X.mateDerived) : h.right ≅ 𝟭 X.mateDerived :=
   conjugateIsoEquiv h.derivedAdjunction Adjunction.id l.symm
@@ -272,8 +262,7 @@ def identityRight {X : RingedTensorCorner.{u, w}} (h : RingedTensorEdge X X)
 /-- A specified ringed isomorphism `p i ≅ id`, including its ordinary module map.
 The insertion equation is the compatibility with the structural ring maps, written
 on generalized module elements. It assumes no derived tensor or projection equation.
-Source: Stacks 0D6D, 0FPI and the section specialization of 0B56
-(blueprint: lem-sfb-ringed-projection-tensor-composition). -/
+Source: Stacks 0D6D, 0FPI and the section specialization of 0B56 -/
 structure Section {X W : RingedTensorCorner.{u, w}}
     (i : RingedTensorEdge W X) (p : RingedTensorEdge X W) where
   sets : p.inverse ⋙ i.inverse ≅ 𝟭 (Sheaf X.topology (Type u))
@@ -289,8 +278,7 @@ structure Section {X W : RingedTensorCorner.{u, w}}
           sheafCompose X.topology (CategoryTheory.forget AddCommGrpCat.{u})).obj M)
 
 /-- The normalization defining the canonical derived pullback comparison for a section.
-Source: Stacks 0D6D and 0FPI; section specialization of 0B56
-(blueprint: lem-sfb-ringed-projection-tensor-composition). -/
+Source: Stacks 0D6D and 0FPI; section specialization of 0B56 -/
 def Section.Normalized {X W : RingedTensorCorner.{u, w}}
     {i : RingedTensorEdge W X} {p : RingedTensorEdge X W} (s : Section i p)
     (l : p.left ⋙ i.left ≅ 𝟭 X.mateDerived) : Prop :=

@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.BoundedHomExactColumns
 
 Source: Stacks Project, cohomology.tex, Tag 0GM8 (Lemma 20.51.4), case (2),
 bounded-above finite free Hom calculation
-(blueprint: lem-sc-bounded-above-finite-free-hom-acyclic).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace CochainComplex
 /-- The total sheaf Hom from a bounded-above complex with finite free terms to a
 bounded-below acyclic complex is acyclic.
 Source: Stacks Project, cohomology.tex, Tag 0GM8, case (2)
-(blueprint: lem-sc-bounded-above-finite-free-hom-acyclic).
 
 Proof:
 1. Choose an upper bound `N` for `E`. For every degree `p`, internal Hom from `E.X p`

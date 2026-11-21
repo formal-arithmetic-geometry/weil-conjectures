@@ -10,8 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Homology of exact restriction after localization
-Source: Stacks Project, Tag 05RR.
-(blueprint: lem-pc-derived-restriction-homology-factors). -/
+Source: Stacks Project, Tag 05RR. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,7 +24,6 @@ namespace ModuleCat
 /-- A localization factorization of exact restriction induces its homology
 comparison, including compatibility with the homotopy factorization.
 Source: Stacks Project, Tag 05RR (localization universal property).
-(blueprint: lem-pc-derived-restriction-homology-factors).
 
 Proof: combine q with the degree-i derived/homotopy homology factorization
 isomorphisms and the exact-restriction short-complex homology isomorphism.

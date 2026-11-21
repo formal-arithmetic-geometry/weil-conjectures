@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.FlatSheafStalk
 # Bounded-above flat complexes on a ringed space are K-flat
 
 Source: Stacks Project, Cohomology, Lemma 20.26.9 (Tag 06YD),
-label `lemma-bounded-flat-K-flat` (blueprint: lem-pc-bounded-above-flat-kflat).
+label `lemma-bounded-flat-K-flat`.
 -/
 
 @[expose] public section
@@ -31,7 +31,6 @@ namespace CochainComplex
 
 /-- Every bounded-above complex of flat module sheaves on a ringed space is K-flat.
 Source: Stacks Project, Cohomology, Lemma 20.26.9 (Tag 06YD)
-(blueprint: lem-pc-bounded-above-flat-kflat).
 
 Proof:
 1. Fix a point `x`. By `lem-pc-flat-sheaf-stalk-flat`, each stalk of each term is

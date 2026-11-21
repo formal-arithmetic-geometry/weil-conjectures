@@ -65,7 +65,7 @@ import Mathlib.CategoryTheory.Localization.Pi
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0FPT
 (lemma-symmetric-monoidal-derived), lemma-tensor-product-K-flat and
- definition-derived-tor (blueprint: lem-pur-derived-tensor-additive-constraints).
+ definition-derived-tor.
 
 The tensor and representative comparison are the published descent constructions.
 The auxiliary definitions just specialize existing categories, tensor functors and
@@ -144,59 +144,57 @@ local instance (I : Type) :
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj (Discrete I)
 
 /-- The existing ordinary module-sheaf category.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 abbrev Modules := KFlatFixedTensor.Modules R
 
 /-- The existing category of integer-indexed, unbounded cochain complexes.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 abbrev Complex := CochainComplex (Modules R) ℤ
 
 /-- The native complex monoidal dictionary, named once for the public tensor formulas.
-Source: Mathlib.Algebra.Homology.Monoidal
-(blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Mathlib.Algebra.Homology.Monoidal -/
 abbrev complexMonoidal : MonoidalCategory (Complex R) :=
   HomologicalComplex.monoidalCategory (Modules R) (.up ℤ)
 
 /-- The native complex tensor data, shared by the public formulas and their proofs.
-Source: Mathlib.Algebra.Homology.Monoidal
-(blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Mathlib.Algebra.Homology.Monoidal -/
 abbrev complexMonoidalStruct : MonoidalCategoryStruct (Complex R) :=
   HomologicalComplex.monoidalCategoryStruct (Modules R) (.up ℤ)
 
 attribute [local instance 4001] complexMonoidal complexMonoidalStruct
 
 /-- The resolving property on complexes, using the recorded K-flatness and flatness.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 def resolvingComplex : ObjectProperty (Complex R) := fun E ↦
   CochainComplex.IsKFlatIndependentCoefficients E ∧
     ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (E.X n)
 
 /-- The full subcategory of flat-term K-flat complex representatives.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 abbrev Model := (resolvingComplex R).FullSubcategory
 
 /-- The same resolving property in the homotopy category.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 def resolvingHomotopy : ObjectProperty (HomotopyCategory (Modules R) (.up ℤ)) :=
   fun E ↦ resolvingComplex R E.as
 
 variable [HasDerivedCategory.{w} (Modules R)]
 
 /-- The existing derived category, with independent localization universe.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 abbrev D := DerivedCategory (Modules R)
 
 /-- The fixed tensor from site-derived-tensor descent; no new tensor is selected.
-Source: Stacks 06YU and 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 06YU and 0FPT. -/
 abbrev tensor := siteDerivedTensorIndependentCoefficients.{u, v, r, w} J R
 
 /-- Localization restricted to the full resolving homotopy subcategory.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 abbrev localization := (resolvingHomotopy R).ι ⋙
   (DerivedCategory.Qh : HomotopyCategory (Modules R) (.up ℤ) ⥤ D R)
 
 /-- Total tensor with its resolving proof supplied by the recorded model theorem.
-Source: Stacks 07A2 and 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 07A2 and 0FPT. -/
 def totalModel (E F : Model R) : Model R :=
   ⟨E.obj ⊗ F.obj,
     (KFlatTotalTensorModel.kFlat_total_tensor_model R E.obj F.obj
@@ -205,14 +203,14 @@ def totalModel (E F : Model R) : Model R :=
       E.property.1 F.property.1 E.property.2 F.property.2).2.1⟩
 
 /-- Shift with the resolving proof supplied by the fixed-tensor theorem.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 def shiftModel (E : Model R) (a : ℤ) : Model R :=
   ⟨E.obj⟦a⟧,
     ((KFlatFixedTensor.kFlat_fixed_tensor_triangulated R).choose_spec
       E.obj E.property.1 E.property.2).2.1 a⟩
 
 /-- The actual published representative isomorphism, on bundled resolving models.
-Source: Stacks 06YU and 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 06YU and 0FPT. -/
 def representative (E F : Model R) :
     DerivedCategory.Q.obj (E.obj ⊗ F.obj) ≅
       (tensor R).obj (DerivedCategory.Q.obj E.obj, DerivedCategory.Q.obj F.obj) :=
@@ -221,8 +219,7 @@ def representative (E F : Model R) :
 
 /-- Extract the right shift first and the left shift second. The first map has
 coefficient (-1)^(bp) in shifted first-factor degree p, and the second is unsigned.
-Source: Stacks more-algebra.tex, sign rules, and sites-cohomology.tex, 0FPT
-(blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks more-algebra.tex, sign rules, and sites-cohomology.tex, 0FPT -/
 def chainShift (E F : Complex R) (a b : ℤ) :
     (E⟦a⟧ ⊗ F⟦b⟧) ≅ (E ⊗ F)⟦a + b⟧ :=
   CochainComplex.mapBifunctorShift₂Iso (E⟦a⟧) F (KFlatFixedTensor.ordinaryTensor R) b ≪≫
@@ -231,29 +228,29 @@ def chainShift (E F : Complex R) (a b : ℤ) :
     ((shiftFunctorAdd (Complex R) a b).app (E ⊗ F)).symm
 
 /-- The two-variable functor with shifts inside the fixed derived tensor.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 abbrev shiftedSource (a b : ℤ) :=
   ((shiftFunctor (D R) a).prod (shiftFunctor (D R) b)) ⋙ tensor R
 
 /-- The two-variable functor with the sum of the shifts outside tensor.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 abbrev shiftedTarget (a b : ℤ) := tensor R ⋙ shiftFunctor (D R) (a + b)
 
 /-- The left-parenthesized ternary derived tensor functor.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 abbrev leftAssociated := ((tensor R).prod (𝟭 (D R))) ⋙ tensor R
 
 /-- The right-parenthesized ternary derived tensor functor on the same domain.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 abbrev rightAssociated := CategoryTheory.prod.associator (D R) (D R) (D R) ⋙
   ((𝟭 (D R)).prod (tensor R)) ⋙ tensor R
 
 /-- The swapped tensor functor.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 abbrev swapped := CategoryTheory.Prod.swap (D R) (D R) ⋙ tensor R
 
 /-- The normalized shift comparison on resolving pairs, with every comparison inserted.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 def shiftRepresentative (E F : Model R) (a b : ℤ) :
     (shiftedSource R a b).obj (DerivedCategory.Q.obj E.obj, DerivedCategory.Q.obj F.obj) ≅
       (shiftedTarget R a b).obj (DerivedCategory.Q.obj E.obj, DerivedCategory.Q.obj F.obj) :=
@@ -265,7 +262,7 @@ def shiftRepresentative (E F : Model R) (a b : ℤ) :
     (shiftFunctor (D R) (a + b)).mapIso (representative R E F)
 
 /-- Comparison from the iterated total to the left-parenthesized derived tensor.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 def leftRepresentative (E F G : Model R) :
     DerivedCategory.Q.obj ((E.obj ⊗ F.obj) ⊗ G.obj) ≅
       (leftAssociated R).obj
@@ -274,7 +271,7 @@ def leftRepresentative (E F G : Model R) :
     (tensor R).mapIso (Iso.prod (representative R E F) (Iso.refl _))
 
 /-- Comparison from the other iterated total to the right-parenthesized derived tensor.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 def rightRepresentative (E F G : Model R) :
     DerivedCategory.Q.obj (E.obj ⊗ (F.obj ⊗ G.obj)) ≅
       (rightAssociated R).obj
@@ -284,7 +281,7 @@ def rightRepresentative (E F G : Model R) :
 
 /-- The complete representative normalization of the shift, associator and symmetry.
 The equalities compare natural isomorphisms through their actual components.
-Source: Stacks 0FPT (blueprint: lem-pur-derived-tensor-additive-constraints). -/
+Source: Stacks 0FPT. -/
 def IsNormalized
     (t : ∀ a b : ℤ, shiftedSource R a b ≅ shiftedTarget R a b)
     (α : leftAssociated R ≅ rightAssociated R) (σ : tensor R ≅ swapped R) : Prop :=

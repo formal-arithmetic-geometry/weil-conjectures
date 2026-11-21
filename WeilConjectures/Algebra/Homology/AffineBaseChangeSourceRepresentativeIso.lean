@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality
 /-! # Independence of the source-only stalk comparison from its representative
 
 Source: Stacks Project, Tags 06Y6, 08IB and 0DJ8, equation-bc.
-(blueprint: lem-pc-affine-base-change-source-representative-iso).
 -/
 
 @[expose] public section
@@ -66,7 +65,6 @@ private theorem exists_stalkCohomologyComparison (Y : Scheme.{u}) (p : Y) (i : â
 -- The original 200000 budget times out at the final equivalence construction in 13s.
 /-- The source-only comparison is unchanged under K-flat representative change.
 Source: Stacks Project, Tags 06Y6, 08IB and perfect.tex, equation-bc before Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-source-representative-iso).
 
 Proof: the exact stalk functor sends eQ followed by eP inverse to an isomorphism
 between the derived stalk complexes. The universal derived extension functors

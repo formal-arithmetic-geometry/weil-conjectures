@@ -16,7 +16,6 @@ public import Mathlib.CategoryTheory.Abelian.Refinements
 
 Source: Stacks Project, Derived Categories, section Cones and termwise split sequences;
 Homology, lemma-long-exact-sequence-cochain (Tag 0117)
-(blueprint: lem-pur-kernel-shifted-cone-boundary).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The shifted cone inclusion induces the connecting map of the kernel sequence.
 Source: Stacks Project, Derived Categories, section Cones and termwise split sequences;
 Homology, lemma-long-exact-sequence-cochain (Tag 0117)
-(blueprint: lem-pur-kernel-shifted-cone-boundary).
 
 Proof. Fix a cycle b of B in degree q-1 and lift it to a in A, using degreewise
 surjectivity. Its differential da lies in the kernel and represents the connecting

@@ -18,7 +18,6 @@ import WeilConjectures.Algebra.Homology.TensorTotalExtendNat
 
 Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech; natural-degree
 zero extension in lem-sc-qcoh-cech-total-tensor-nat-iso.
-(blueprint: lem-sc-tensor-total-extend-natural-iso).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace HomologicalComplex
 value on each natural bidegree summand. No homology assertion occurs here.
 Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech;
 the zero-extension/reindexing step of lem-sc-qcoh-cech-total-tensor-nat-iso.
-(blueprint: lem-sc-tensor-total-extend-natural-iso).
 
 Proof: In degree n>=0 the nonzero integer tensor summands have p,q>=0.
 Reindex these by natural pairs p+q=n. On each use the tensor of the two

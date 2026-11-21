@@ -26,8 +26,7 @@ Lifting along the injective scalar on a flat cover shows that the scalar is an e
 every injective module sheaf.
 
 Source: Stacks Tags 03D7, 06YS and 079P; the free lifted representable test for injectivity and the
-elementary divisibility property of injectives for a regular scalar.
-(blueprint: lem-sf-regular-scalar-injective-divisibility). -/
+elementary divisibility property of injectives for a regular scalar. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -46,7 +45,7 @@ attribute [local instance] isMonoidal_W_independentCoefficients monoidalCategory
 
 /-- Every module sheaf is a quotient of a flat module sheaf.
 Source: Stacks Tag 06YS; degree zero of a K-flat resolution with flat terms and degreewise
-epimorphic augmentation (blueprint: lem-sf-regular-scalar-injective-divisibility). -/
+epimorphic augmentation. -/
 theorem exists_flat_epi (M : Modules R) :
     ∃ (X : Modules R) (p : X ⟶ M), Epi p ∧ exactFunctor _ _ (tensorRight X) := by
   obtain ⟨K, f, -, hflat, -, hepi⟩ :=
@@ -62,8 +61,7 @@ variable [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wS} (Modules
 /-- On a flat module the regular scalar is followed by a cokernel map to a restricted module,
 through which every map to a restricted module factors.
 Source: Stacks Tags 06YP and 06YY; the regular quotient sequence tensored with a flat module
-and the normalized ordinary scalar-extension adjunction
-(blueprint: lem-sf-regular-scalar-injective-divisibility). -/
+and the normalized ordinary scalar-extension adjunction -/
 theorem exists_scalar_shortExact_of_flat
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
       ringMap φ = 0)
@@ -100,7 +98,6 @@ theorem exists_scalar_shortExact_of_flat
 
 /-- The regular scalar is an epimorphism on every injective module sheaf.
 Source: Stacks Tags 03D7 and 079P; a flat cover lifts along the injective scalar on the cover
-(blueprint: lem-sf-regular-scalar-injective-divisibility).
 
 Proof: choose an epimorphism `p : X ⟶ M` from a flat module. The scalar on `X` is a
 monomorphism, so injectivity of `M` extends `p` along it. Naturality of the scalar then

@@ -22,7 +22,6 @@ namespace CategoryTheory
 
 /-- The finite-free roof calculation proves local invertibility once its roof is exposed.
 Source: Stacks Project, Tag 0BQY, zero-differential Hom calculation.
-(blueprint: new-b2-homology-evaluation-local-iso-core).
 
 The proof is the explicit finite-free zero-differential calculation together with the
 quasi-isomorphism comparison square. -/

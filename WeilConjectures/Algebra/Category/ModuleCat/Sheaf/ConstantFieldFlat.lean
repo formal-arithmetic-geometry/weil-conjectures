@@ -30,7 +30,6 @@ set_option backward.isDefEq.respectTransparency false
 
 /-- Every module sheaf over a constant field sheaf is flat.
 Source: Stacks Project, Tags 03ER, 08FC and 09FN
-(auxiliary; not a blueprint node).
 Proof: intersect the finitely many covering image sieves of the coefficients of a relation.
 On each arrow of this covering sieve the coefficients lift to field elements. Restrict the
 module action along the field-to-sections ring map. This gives a vector space, hence a flat

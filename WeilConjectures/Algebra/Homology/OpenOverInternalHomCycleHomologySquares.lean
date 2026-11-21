@@ -12,8 +12,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
 
 /-! # Internal Hom transport squares for cycles and homology
 
-Source: Stacks Project, Tags 0A8X and 08DL.
-(blueprint: new-t4-open-over-internal-hom-cycle-homology-squares). -/
+Source: Stacks Project, Tags 0A8X and 08DL. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -43,7 +42,6 @@ private theorem openOver_comp_naturality
 
 /- Transport of source and target cycles and homology through internal Hom.
 Source: Stacks Project, Tag 08DL; step 2 of the parent restriction-diagram plan.
-(blueprint: new-t4-open-over-internal-hom-cycle-homology-squares).
 
 Proof: Restriction is exact by the localization finite-limit and finite-colimit
  comparisons, the open-site equivalence and overFunctorEquiv. For L=T,J, take
@@ -58,7 +56,7 @@ Proof: Restriction is exact by the localization finite-limit and finite-colimit
  squares to obtain the four equations. This uses neither the Hom complex nor its
  products or differential. No finiteness or nonempty-open assumption is needed;
  zero and identity maps satisfy the same naturality equations. -/
-/-- (blueprint: new-t4-open-over-internal-hom-cycle-homology-squares) -/
+/-- -/
 theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens)
     (e : ∀ M N : X.Modules,

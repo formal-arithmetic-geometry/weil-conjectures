@@ -122,7 +122,6 @@ lemma limit_π_towerLimitMap {R : Type u} [Ring R]
 /-- Componentwise maps on inverse limits exist and are characterized by their
 coordinate projections, under the stated naturality hypotheses.
 Source: the componentwise construction in Stacks Project, Algebra Lemma 03CA.
-(blueprint: new-tower-limit-induced-maps).
 -/
 theorem tower_limit_induced_maps
     (R : Type u) [CommRing R]

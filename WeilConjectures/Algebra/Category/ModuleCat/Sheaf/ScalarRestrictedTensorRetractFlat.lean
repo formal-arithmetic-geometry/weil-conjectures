@@ -18,7 +18,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-! # Tensoring a base-flat module with a finite free retract
 
 Source: Stacks Project, Tags 03EU and 00HD, the retract argument in Tag 0DJQ.
-(blueprint: lem-pc-scalar-restricted-tensor-retract-flat).
 -/
 
 @[expose] public section
@@ -52,7 +51,6 @@ private theorem restrictScalars_preservesColimits
 /-- Tensoring with a retract of a finite free module preserves flatness after
 restriction of scalars; the algebra itself need not be flat over the base ring.
 Source: Stacks Project, Tags 03EU and 00HD, applied to the tensor calculation of 0DJQ.
-(blueprint: lem-pc-scalar-restricted-tensor-retract-flat).
 
 Proof: tensor the given inclusion and retraction with N. Functoriality carries
 ι ≫ π = identity to the same equation for P tensor N as a retract of A^m tensor N.

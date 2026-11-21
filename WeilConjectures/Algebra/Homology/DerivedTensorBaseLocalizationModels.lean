@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Homology.BaseLocalizationNaturality
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
 second coefficient ring; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-derived-tensor-base-localization-models).
 -/
 
 @[expose] public section
@@ -53,7 +52,6 @@ include tRpA tRpB tAD tBD tApD tBpD in
 /-- Localization with one factor fixed.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, affine localization identity;
 More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-derived-tensor-base-localization-models).
 
 Proof: choose a K-flat R-resolution F of B[0]. Localization to Rp is exact
 and preserves K-flatness, so Rp tensor_R F resolves Rp tensor_R B. Since B is

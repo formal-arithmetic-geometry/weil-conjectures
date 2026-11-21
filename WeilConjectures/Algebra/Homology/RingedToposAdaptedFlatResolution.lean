@@ -27,8 +27,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # RingedToposAdaptedFlatResolution
 
-Source: Stacks Project, Tag 0G7E (lemma-pullback-K-flat), adapted resolution step.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0G7E (lemma-pullback-K-flat), adapted resolution step. -/
 
 @[expose] public section
 universe uC vC uD vD w
@@ -304,7 +303,6 @@ end ResolutionHelpers
 /-- A flat K-flat resolution may be chosen with K-flat termwise pullback.
 Source: Stacks Project, Cohomology on Sites, Tag 0G7E, first paragraph of the proof
 of lemma-pullback-K-flat, using Tags 077J, 06YQ and 06YR.
-(auxiliary; not a blueprint node).
 
 Proof: choose a strictly compatible tower E_n of bounded-above flat resolutions of
 P.truncLE n. Each augmentation is a quasi-isomorphism. Take its degreewise filtered

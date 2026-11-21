@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 /-! # The telescope Hom arrow and the ordinary-limit Roos arrow
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0A0A; derived.tex, Tag 0949.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -421,7 +420,6 @@ K-injectivity nor a quasi-isomorphism hypothesis is part of this assertion.
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0A0A,
 lemma-colim-and-lim-of-duals; derived.tex, Tag 0949, lemma-colim-hocolim.
-(auxiliary; not a blueprint node).
 
 Proof: write S for the direct sum of the sequence E. Internal Hom of the colimit
 is the inverse limit of Hom(E_m,I): transpose a local bilinear pairing to use the

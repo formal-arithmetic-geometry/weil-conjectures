@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.RingedSliceExtensionTensor
 
 Source: Stacks Project, Cohomology on Sites, Tag 0E8K, lemma-restriction-K-flat;
 Modules on Sites, Tags 03DJ and 0E8G
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -289,7 +288,6 @@ private theorem tensor_acyclic_of_extension
 K-flatness of possibly unbounded complexes, without flatness of their terms.
 Source: Stacks Project, Cohomology on Sites, Tag 0E8K, lemma-restriction-K-flat;
 Modules on Sites, Tags 03DJ, 0E8G and 0E8I
-(auxiliary; not a blueprint node).
 
 Proof plan:
 1. Use lem-pur-site-restriction-module-adjunction-exact for exact restriction

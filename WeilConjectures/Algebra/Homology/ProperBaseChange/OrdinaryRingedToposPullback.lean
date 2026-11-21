@@ -35,7 +35,6 @@ public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 /-! # Ordinary tensor pullback along a ringed geometric morphism
 
 Source: Stacks Project, Modules on Sites, Definition 03D6 (2) and Lemma 03D2
-(blueprint: def-weil-pbc-ordinary-ringed-topos-pullback).
 
 The algebraic inverse-image lift records the transported operations, and the ring map
 is the structural map expressed in that lift. The construction is the existing
@@ -55,7 +54,6 @@ namespace SheafOfModules
 
 /-- The ordinary pullback object, expressed in any algebraic inverse-image presentation.
 Source: Stacks Project, Modules on Sites, Definition 03D6 (2) and Lemma 03D2
-(blueprint: def-weil-pbc-ordinary-ringed-topos-pullback).
 
 For a geometric inverse image `L`, `I` transports both ring and module operations by
 finite-limit preservation. A map `c : RI ⟶ A` is the structural ring map in this

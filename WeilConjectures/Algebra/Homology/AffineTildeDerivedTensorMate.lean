@@ -17,8 +17,7 @@ public import WeilConjectures.Algebra.Homology.AffineTildeTensorOrdinaryExchange
 
 /-! # The derived affine tensor mate before taking homology
 
-Source: Stacks Project, Tags 0DJ8, 06Y6 and 08HY.
-(blueprint: lem-pc-affine-tilde-derived-tensor-mate). -/
+Source: Stacks Project, Tags 0DJ8, 06Y6 and 08HY. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -34,8 +33,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The induced exact associated-sheaf functor, using the proved exactness of tilde.
-Source: Stacks Project, Tag 06Z0.
-(blueprint: lem-pc-affine-tilde-derived-tensor-mate). -/
+Source: Stacks Project, Tag 06Z0. -/
 def affineExactTildeDerived (B : Type u) [CommRing B]
     [HasDerivedCategory.{wM} (ModuleCat.{u} B)] :
     DerivedCategory.{wM} (ModuleCat.{u} B) ⥤
@@ -58,8 +56,7 @@ variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
   (m : ModuleCat.BaseDerivedTensorCohomologyModel R A B M D)
 
 /-- The actual cohomology coordinates of derived associated sheaf of the tensor model.
-Source: Stacks Project, Tags 06Z0 and 06Y6.
-(blueprint: lem-pc-affine-tilde-derived-tensor-mate). -/
+Source: Stacks Project, Tags 06Z0 and 06Y6. -/
 def affineTildeDerivedTensorSourceIso (i : ℤ) :
     (affinePushforwardTilde B).obj
         ((ModuleCat.restrictScalars Algebra.TensorProduct.includeRight.toRingHom).obj
@@ -82,8 +79,7 @@ def affineTildeDerivedTensorSourceIso (i : ℤ) :
     (T.mapDerivedCategoryHomologyFunctorIso i).app _
 
 /-- Scalar-extension augmentation and coefficient map, as a map of B-complexes.
-Source: Stacks Project, Tag 06Y6, ordinary comparison in equation-bc.
-(blueprint: lem-pc-affine-tilde-derived-tensor-mate). -/
+Source: Stacks Project, Tag 06Y6, ordinary comparison in equation-bc. -/
 def affineTildeTensorCoefficientComplexMap
     (φ : A →+* D) (ψ : B →+* D)
     (hφ : (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)) = φ)
@@ -129,8 +125,7 @@ private theorem affineTildeTensorCoefficientComplexMap_tmul
 /-- The raw derived tensor counit followed by the coefficient map, ordinary affine
 pushforward comparison and right-derived pushforward unit. This construction uses
 no base-change mate, pullback counit or cohomological degree.
-Source: Stacks Project, Tags 06Y6, 01I9 and 08HY.
-(blueprint: lem-pc-affine-tilde-derived-tensor-mate). -/
+Source: Stacks Project, Tags 06Y6, 01I9 and 08HY. -/
 def affineTildeDerivedTensorToPushforward
     (φ : A →+* D) (ψ : B →+* D)
     (hφ : (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)) = φ)
@@ -190,7 +185,6 @@ set_option linter.unusedVariables false in
 /-- The affine base-change mate on the derived scalar-extension object, before
 applying any homology functor. Its source comparison is independent of D.
 Source: Stacks Project, Tags 0DJ8 (affine proof and equation-bc), 06Y6 and 08HY.
-(blueprint: lem-pc-affine-tilde-derived-tensor-mate).
 
 Proof: Resolve the restriction of M to R by a flat K-flat complex P and its
 quasi-isomorphic augmentation. The universal property of m.derived and m.counit

@@ -19,7 +19,6 @@ import Mathlib.RingTheory.TensorProduct.Finite
 /-! # Affine descent of bounded finite projective complexes
 
 Source: Stacks Project, More on Algebra, Lemma 15.76.18 (Tag 0BC7), affine complex case
-(blueprint: lem-pc-affine-perfect-colimit-descent).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ namespace CochainComplex
 /-- A bounded complex of finite projective modules over a directed colimit of commutative
 rings descends, as a complex, to one stage.
 Source: Stacks Project, More on Algebra, Lemma 15.76.18 (Tag 0BC7), affine complex case
-(blueprint: lem-pc-affine-perfect-colimit-descent).
 
 Proof: Choose bounds outside which the complex is zero. Its finitely many terms are finite
 projective, hence finitely presented. Descend them by

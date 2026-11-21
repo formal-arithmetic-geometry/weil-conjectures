@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 # Acyclicity in a tensored cone sequence
 
 Source: Stacks Project, sites-cohomology.tex, Lemma 07A3, with the cone of Definition 06YN
-(blueprint: lem-pc-kflat-tensor-cone-two-out-of-three).
 -/
 
 @[expose] public section
@@ -36,7 +35,7 @@ abbrev moduleCategory :=
 
 noncomputable local instance : MonoidalCategory (moduleCategory R) := monoidalCategory R
 
-/-- (blueprint: lem-pc-kflat-tensor-cone-two-out-of-three) Stacks Project, Lemma 07A3.
+/-- Stacks Project, Lemma 07A3.
 The cone comparison for the total tensor complex identifies tensoring the cone of `f`
 with the cone of the induced tensor map. The cone triangle is distinguished in the
 homotopy category; since acyclic complexes form a triangulated subcategory, any two

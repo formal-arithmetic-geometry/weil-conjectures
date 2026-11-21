@@ -16,7 +16,6 @@ public import Mathlib.Basic.Finite.Sigma
 # Finite initial truncation of the simplicial indexing category
 
 Source: Stacks Project, Tag 017K, proof, and Tag 002R
-(auxiliary; not a blueprint node).
 
 `S.Elements` is the opposite of the category of simplices in the node: a morphism
 `(n,s) ⟶ (m,t)` lies over `[m] ⟶ [n]` and satisfies `S(φ)(s) = t`.
@@ -147,7 +146,6 @@ private lemma four_step (S : SSet.{u}) (m : ℕ)
   exact ⟨⟨u, by omega⟩, ⟨a, ha⟩, ⟨u', by omega⟩, β, p, q, β', t, hp, hq⟩
 
 /-- Stacks Project, Tag 017K, proof; limit comparison by Tag 002R.
-(auxiliary; not a blueprint node)
 
 Proof:
 1. The truncated category has finitely many objects, the union of the finite `S_n`

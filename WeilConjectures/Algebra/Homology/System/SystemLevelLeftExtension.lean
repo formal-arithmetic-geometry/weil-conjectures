@@ -49,7 +49,7 @@ coefficient comparisons and the selected transition, including repeated next ind
 Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21;
 the adic-stage paragraph of theorem-f-shriek-finite-coefficients in the main-20261015
 blueprint, before taking inverse limits; Stacks Tags 03DA, 03DB, 06YS, 06YT, 06XN,
-0FND and 09T5 (blueprint: lem-pur-system-level-left-extension).
+0FND and 09T5.
 
 Proof, following the ordinary-derived route of the node, with explicit normalized mates:
 

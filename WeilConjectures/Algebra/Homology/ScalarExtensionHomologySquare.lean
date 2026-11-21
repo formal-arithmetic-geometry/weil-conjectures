@@ -11,8 +11,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Transposing an ordinary homology square by scalar extension
 
-Source: Stacks Project, Tags 05G3 and 06Y6.
-(blueprint: lem-pc-scalar-extension-homology-square). -/
+Source: Stacks Project, Tags 05G3 and 06Y6. -/
 
 @[expose] public section
 
@@ -76,7 +75,6 @@ private theorem forget_restrict_homologyIso
 
 /-- An ordinary additive cohomology square and a coefficient-complex square imply
 its scalar-extended square. Source: Stacks Project, Tags 05G3 and 06Y6.
-(blueprint: lem-pc-scalar-extension-homology-square).
 
 Proof: equality of D-linear maps is tested on the generators 1 tensor m.
 The adjunction identities express both localized maps on these generators through

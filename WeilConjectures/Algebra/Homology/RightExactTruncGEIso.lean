@@ -11,7 +11,6 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 /-! # Right exact functors commute with lower truncation
 
 Source: Stacks Project, Tags 0118 and 0654, the explicit good truncation construction.
-(blueprint: lem-pc-right-exact-truncge-iso).
 -/
 
 @[expose] public section
@@ -61,7 +60,6 @@ private theorem isIso_projection_f
 
 /-- An additive functor preserving finite colimits commutes with good lower truncation.
 Source: Stacks Project, Tag 0118 (canonical truncation) and Tag 0654.
-(blueprint: lem-pc-right-exact-truncge-iso).
 
 Proof: In degrees below n both complexes are zero, since an additive functor
 preserves zero objects. Above n both terms are F.obj (K.X i), with the same

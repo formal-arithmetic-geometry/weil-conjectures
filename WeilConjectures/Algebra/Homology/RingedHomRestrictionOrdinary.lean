@@ -14,7 +14,6 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 /-! # Coherent restriction of ordinary internal Hom complexes
 
 Source: Stacks Project, Tags 0A8X and 08JB.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -790,7 +789,6 @@ compatible family. No derived category, K-injective replacement, or boundedness 
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0A8X and 08JB; the latter's proof refers to
 this computation in the construction of internal Hom.
-(auxiliary; not a blueprint node).
 
 Proof: In degree n restrict the product over p of the sheaves Hom(L^p,M^(p+n)). Slice
 restriction and relocalization preserve these products, since their underlying presheaves

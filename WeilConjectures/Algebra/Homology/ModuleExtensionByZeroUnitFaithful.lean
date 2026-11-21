@@ -22,8 +22,7 @@ there is only one summand, and separation is separation of the input sheaf;
 on any other open the direct sum is zero. The sheafification unit is locally
 injective, hence injective for this separated presheaf. Naturality of this unit
 therefore reflects equality of extended morphisms back to presheaf morphisms.
-Evaluating on the unique summand recovers the input morphism.
-(blueprint: lem-sc-module-extension-by-zero-unit-mono-faithful-aux) -/
+Evaluating on the unique summand recovers the input morphism. -/
 theorem extensionByZero_faithful (X : RingedSpace.{u}) (W : Opens X) :
     (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙
       PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).Faithful := by

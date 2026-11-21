@@ -27,14 +27,14 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
 /-- Cohomology of strict systems is evaluated componentwise.
-Source: Stacks 015F (blueprint: lem-pur-system-derived-evaluation). -/
+Source: Stacks 015F. -/
 def systemDerivedCohomology (n : ℕ) (q : ℤ) :
     DerivedCategory.homologyFunctor (StrictRingSystem B) q ⋙ systemEvaluation B n ≅
       derivedSystemEvaluation B n ⋙ DerivedCategory.homologyFunctor (systemLevel B n) q :=
   (systemEvaluation B n).mapDerivedCategoryHomologyFunctorIso q
 
 /-- Cohomology vanishes exactly when it vanishes at every coefficient level.
-Source: Zheng 4.1 (blueprint: lem-pur-system-derived-evaluation).
+Source: Zheng 4.1.
 Proof: commute exact evaluation with cohomology and apply joint detection of zero
 objects in the strict abelian category. -/
 theorem systemDerivedHomology_isZero_iff (M : DerivedCategory (StrictRingSystem B)) (q : ℤ) :
@@ -45,7 +45,7 @@ theorem systemDerivedHomology_isZero_iff (M : DerivedCategory (StrictRingSystem 
   exact forall_congr' (fun n ↦ ((systemDerivedCohomology B n q).app M).isZero_iff)
 
 /-- Derived evaluations jointly detect isomorphisms.
-Source: Zheng 4.1 (blueprint: lem-pur-system-derived-evaluation).
+Source: Zheng 4.1.
 Proof: isomorphisms in a derived category are detected by all cohomology functors.
 Exact evaluation commutes with cohomology; the strict evaluations jointly detect
 isomorphisms of the resulting systems. The forward direction is functoriality. -/
@@ -66,7 +66,7 @@ theorem systemDerivedEvaluation_isIso_iff
     exact (NatIso.isIso_map_iff (systemDerivedCohomology B n q) f).2 hi
 
 /-- A common cohomological bound is detected level by level.
-Source: Zheng 4.1 (blueprint: lem-pur-system-derived-evaluation).
+Source: Zheng 4.1.
 Proof: both bounds are equivalent to vanishing of cohomology in the corresponding
 half-line. Interchange the level and degree quantifiers and use componentwise
 cohomology and joint detection of zero objects. The same bound is used at every level. -/
@@ -101,7 +101,7 @@ theorem systemDerivedEvaluation_bounds_iff
       exact (DerivedCategory.isLE_iff _ q).1 (h n) i hi
 
 /-- A strict cochain map is a quasi-isomorphism exactly when every evaluation is.
-Source: Zheng 4.1 (blueprint: lem-pur-system-derived-evaluation).
+Source: Zheng 4.1.
 Proof: localization detects quasi-isomorphisms. Commute it with evaluation and use
 joint detection of isomorphisms by derived evaluations. -/
 theorem strictRingSystem_quasiIso_iff {K L : CochainComplex (StrictRingSystem B) ℤ}

@@ -20,7 +20,6 @@ import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 
 Source: literature/stacks-project/sites-cohomology.tex, Tags 06YT, 06YY, and
 literature/stacks-project/derived.tex, Tag 06XN
-(blueprint: lem-pur-derived-change-of-rings).
 
 The change of rings `- ⊗_O O'` is the landed `SheafOfModules.changeOfRings φ` on objects
 and `SheafOfModules.changeOfRingsHom φ` on morphisms (def-pur-sheaf-tensor-product); the
@@ -62,8 +61,7 @@ cones). The K-flat complexes form a resolving class by lem-pc-kflat-resolution a
 to isomorphisms on quasi-isomorphisms by (1); lem-pur-left-derived-from-kflat-class (Tags
 06XN, 05SE) gives the everywhere defined triangulated left derived functor whose counit is an
 isomorphism on K-flat complexes. (3) The canonical maps are composites of `ε_P` and inverses of
-images of quasi-isomorphisms, hence isomorphisms and compatible with composition.
-(blueprint: lem-pur-derived-change-of-rings) -/
+images of quasi-isomorphisms, hence isomorphisms and compatible with composition. -/
 theorem derivedChangeOfRings
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]

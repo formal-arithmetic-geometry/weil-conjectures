@@ -20,7 +20,6 @@ import Mathlib.Algebra.Homology.Embedding.Extend
 # Successive free-cover columns
 
 Source: Stacks Project, Tag 09KP, the kernel iteration before totalization.
-(blueprint: lem-pc-derived-free-cover-columns)
 -/
 
 @[expose] public section
@@ -160,7 +159,6 @@ private theorem exact_functor_iso {A : Type u} [CommRing A]
 /-- The kernel iteration produces an augmented bicomplex exact on terms and cycles.
 Source: Stacks Project, Differential Graded Algebra, Tag 09KP, proof, the successive
 short exact sequences before totalization, using Tag 09KN.
-(blueprint: lem-pc-derived-free-cover-columns)
 
 Proof. Set `N₀ = M`. Apply `exists_freeComplexCover` to `Nᵢ`, retaining its
 short complex `Sᵢ`, map `bᵢ : Sᵢ.X₂ ⟶ Nᵢ`, degreewise and cycle surjectivity,

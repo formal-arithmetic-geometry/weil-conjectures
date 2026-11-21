@@ -52,8 +52,7 @@ five consecutive terms from vertices 1, 2, 3, 1 shifted, and 2 shifted.
 The four outer vertical maps are isomorphisms by the two hypotheses, which
 hold in every degree. The five lemma makes the middle map an isomorphism.
 Transport through the identifications above gives the stated comparison for
-every representative and every model of the third vertex in every degree.
-(blueprint: lem-pc-localized-tensor-comparison-closure-triangles). -/
+every representative and every model of the third vertex in every degree. -/
 theorem localizedTensorComparisonProperty_closure_triangles
     (hC : Module.Flat (A ⊗[R] B) C)
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →

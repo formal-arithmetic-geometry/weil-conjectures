@@ -17,7 +17,6 @@ public import Mathlib.Geometry.RingedSpace.Stalks
 
 Source: Stacks Project, Sheaves Section 6.31, Lemma 6.31.1 (3),
 Definition 6.31.2 (4) (Tags 009Z, 00A1).
-(blueprint: lem-sc-module-restriction-stalk-linear).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry
 /-- Restriction alone induces a natural linear stalk comparison, with its germ formula.
 Source: Stacks Project, Sheaves Section 6.31, Lemma 6.31.1 (3),
 Definition 6.31.2 (4) (Tags 009Z, 00A1).
-(blueprint: lem-sc-module-restriction-stalk-linear).
 
 Proof: Forget F to its abelian sheaf S. The slice-site equivalence identifies the
 underlying presheaf of its restriction with S restricted to W. Use the additive

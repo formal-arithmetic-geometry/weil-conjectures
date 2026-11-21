@@ -24,7 +24,6 @@ public import Mathlib.CategoryTheory.Abelian.Refinements
 
 Source: Stacks Project, Cohomology on Sites, Lemma 06YS, via Lemma 077J;
 Derived Categories, Lemma 05T7 (1); Modules on Sites, Lemma 03EW (3), (4)
-(blueprint: lem-pc-kflat-bounded-flat-replacement).
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ The full subcategory below consists of complexes whose terms vanish above `N`.
 Epimorphisms here are epimorphisms of sheaves, hence locally surjective maps.
 Source: Stacks Project, Lemma 06YS via 077J and 06XX, using the cycle-pullback
 construction of Lemma 05T7 (1) and the canonical flat covers of Lemma 03EW (3), (4)
-(blueprint: lem-pc-kflat-bounded-flat-replacement).
 
 Proof: (1) Sheafify the free module presheaf on the underlying presheaf of sets.
 Its evaluation counit is epic, and sheafification preserves flatness and epimorphisms;

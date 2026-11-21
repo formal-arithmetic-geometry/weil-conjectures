@@ -25,8 +25,7 @@ namespace ModuleCat
 Source: Stacks Project, Tag 06Y6, using the source library's functorial flat resolution.
 Apply its reduced resolution to a preimage of X, then compose the localized augmentation
 with the preimage isomorphism. The homotopy quotient characterization gives acyclic tensor
-preservation. This helper is proved without any postponed statement.
-(blueprint: lem-pc-localized-tensor-comparison-closure-triangles-core). -/
+preservation. This helper is proved without any postponed statement. -/
 private theorem exists_kFlat_representative
     (A : Type u) [CommRing A] [HasDerivedCategory (ModuleCat.{u} A)]
     (X : DerivedCategory (ModuleCat.{u} A)) :
@@ -78,8 +77,7 @@ sequences are connected by the canonical comparison maps.  Flatness of C over
 A tensor_R B makes extension exact.  Naturality, including the connecting maps and
 shifts, gives a morphism of exact sequences; the five lemma at the chosen degree
 proves the displayed comparison is an isomorphism.  The construction is independent
-of the chosen representative and model by the counit and associator identities.
-(blueprint: lem-pc-localized-tensor-comparison-closure-triangles-core). -/
+of the chosen representative and model by the counit and associator identities. -/
 theorem localizedTensorComparisonProperty_triangle_core
     (hC : Module.Flat (A ⊗[R] B) C)
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →

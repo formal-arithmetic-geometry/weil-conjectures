@@ -103,7 +103,6 @@ import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
 
 Source: Stacks Project, sites-modules.tex, Tags 03EU (2), 03EP (2), and Section 03EK;
 sites-cohomology.tex, Tags 06YT and 06YY; derived.tex, Tag 015F.
-(blueprint: lem-sfb-ind-finite-free-scalar-model).
 The auxiliary functors spell out the coefficient diagram and its termwise tensor colimit.
 All derived scalar extensions are the existing universal cochain models.
 -/
@@ -125,19 +124,19 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [HasSheafify J AddCommGrpCat.{r}]
 
 /-- The existing module category at the coefficient universe.
-Source: Stacks 03D2 (blueprint: lem-sfb-ind-finite-free-scalar-model). -/
+Source: Stacks 03D2. -/
 abbrev Modules (R : Sheaf J CommRingCat.{r}) :=
   ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)
 
 /-- Ordinary scalar restriction, with the same sections and restricted action.
-Source: Stacks 03D2 (blueprint: lem-sfb-ind-finite-free-scalar-model). -/
+Source: Stacks 03D2. -/
 abbrev restriction {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S) :
     Modules S ⥤ Modules R :=
   restrictScalars.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
 
 /-- Forget the algebra structure of an algebra sheaf, retaining its R-module structure.
 On morphisms this is the original section map, linear by the triangle over R.
-Source: Stacks 03EK (blueprint: lem-sfb-ind-finite-free-scalar-model). -/
+Source: Stacks 03EK. -/
 def algebraModules (R : Sheaf J CommRingCat.{r}) : Under R ⥤ Modules R where
   obj A := (restriction A.hom).obj
     (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A.right))
@@ -155,7 +154,7 @@ def algebraModules (R : Sheaf J CommRingCat.{r}) : Under R ⥤ Modules R where
           exact congrArg (fun t ↦ t.hom.app V x) (Under.w f)) }
 
 /-- Tensor a complex termwise with a coefficient module; coefficient maps act by tensor.
-Source: Stacks 03EK (blueprint: lem-sfb-ind-finite-free-scalar-model). -/
+Source: Stacks 03EK. -/
 def tensorComplex (R : Sheaf J CommRingCat.{r}) :
     Modules R ⥤ (CochainComplex (Modules R) ℤ ⥤ CochainComplex (Modules R) ℤ) where
   obj M := (tensorLeft M).mapHomologicalComplex (.up ℤ)
@@ -164,14 +163,14 @@ def tensorComplex (R : Sheaf J CommRingCat.{r}) :
   map_comp f g := by simp
 
 /-- The diagram i ↦ S_i tensor A, with all differentials and transitions termwise.
-Source: Stacks 03EP (blueprint: lem-sfb-ind-finite-free-scalar-model). -/
+Source: Stacks 03EP. -/
 def tensorDiagram {R : Sheaf J CommRingCat.{r}} {I : Type r} [SmallCategory I]
     (D : I ⥤ Under R) (A : CochainComplex (Modules R) ℤ) :
     I ⥤ CochainComplex (Modules R) ℤ :=
   (D ⋙ algebraModules R ⋙ tensorComplex R).flip.obj A
 
 /-- The actual colimit functor on these complexes. Colimits of complexes are termwise.
-Source: Stacks 03EP (blueprint: lem-sfb-ind-finite-free-scalar-model). -/
+Source: Stacks 03EP. -/
 def tensorColimit {R : Sheaf J CommRingCat.{r}} {I : Type r} [SmallCategory I]
     (D : I ⥤ Under R) :
     CochainComplex (Modules R) ℤ ⥤ CochainComplex (Modules R) ℤ :=
@@ -179,7 +178,7 @@ def tensorColimit {R : Sheaf J CommRingCat.{r}} {I : Type r} [SmallCategory I]
 
 /-- A pure tensor in the sheaf tensor, using its presheaf-to-sheaf unit.
 The supplied factor is the actual underlying module, not a choice of basis.
-Source: Stacks 03EK, 03CY (blueprint: lem-sfb-ind-finite-free-scalar-model). -/
+Source: Stacks 03EK, 03CY. -/
 def pureTensor {R : Sheaf J CommRingCat.{r}} (M N : Modules R)
     (V : Cᵒᵖ) (x : M.val.obj V) (y : N.val.obj V) : (M ⊗ N).val.obj V :=
   ((PresheafOfModules.sheafificationAdjunction
@@ -414,8 +413,7 @@ private theorem restrictionSheafificationComparison_unit
 end
 
 /-- The canonical map from the presheaf tensor to the underlying sheaf tensor.
-Source: Stacks Project, Modules on Sites, Tag 03EK.
-(blueprint: lem-weil-pbc-extension-tensor-comparison). -/
+Source: Stacks Project, Modules on Sites, Tag 03EK. -/
 private def tensorPresheafUnit
     (M N : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     M.val ⊗ N.val ⟶ ((monoidalCategory R).tensorObj M N).val :=
@@ -427,7 +425,6 @@ set_option maxHeartbeats 50000 in
 -- Mixed tensor coefficient structures require additional elaboration.
 /-- Restricted extension of scalars is tensoring with the restricted target ring.
 Source: Stacks Project, Modules on Sites, Tag 03EK.
-(blueprint: lem-weil-pbc-extension-tensor-comparison).
 
 Proof: the presheaf tensor of the restricted target ring with M has exactly the
 same section modules as restricted sectionwise scalar extension. Both restriction
@@ -508,7 +505,7 @@ variable {R S : Sheaf J CommRingCat.{r}} {φ : R ⟶ S}
   [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wS} (Modules S)]
 
 /-- The pure tensor in the ordinary functor of the existing derived scalar model.
-Source: Stacks 03EK, 06YY (blueprint: lem-sfb-ind-finite-free-scalar-model). -/
+Source: Stacks 03EK, 06YY. -/
 def extensionPure (m : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ)
     (M : Modules R) (V : Cᵒᵖ) (s : S.obj.obj V) (a : M.val.obj V) :
     (m.E.obj M).val.obj V :=
@@ -579,7 +576,7 @@ private noncomputable def ordinaryComparison
 
 /-- Normalization of the chain comparison on the sheafification-unit images of local
 pure tensors. The coprojections are those of the supplied algebra colimit.
-Source: Stacks 03EP, 03CY (blueprint: lem-sfb-ind-finite-free-scalar-model). -/
+Source: Stacks 03EP, 03CY. -/
 def Normalized {I : Type r} [SmallCategory I] (D : I ⥤ Under R) (c : Cocone D)
     [HasDerivedCategory.{wS} (Modules c.pt.right)]
     (m : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} c.pt.hom)

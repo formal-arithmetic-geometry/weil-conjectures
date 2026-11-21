@@ -33,15 +33,14 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {m n : ℕ} (h : m ≤ n)
 
 /-- Exact localization of the identity agrees with the identity cochain model.
-Source: functoriality of localization
-(blueprint: lem-pur-system-single-derived-evaluation). -/
+Source: functoriality of localization -/
 def systemSingleIdentityFactors :
     (DerivedCategory.Q (C := systemLevel B n)) ⋙ 𝟭 _ ≅
       (𝟭 (systemLevel B n)).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
   Iso.refl _
 
 /-- The singleton comparison's right square is the localized actual transition.
-Source: Zheng 4.1 (blueprint: lem-pur-system-single-derived-evaluation).
+Source: Zheng 4.1.
 Proof: the identity functor and its factorization have identity components, so this
 is precisely the representative formula for the strict derived transition. -/
 theorem systemSingleDerivedSquare_rep (K : CochainComplex (StrictRingSystem B) ℤ) :
@@ -70,7 +69,7 @@ theorem systemSingleDerivedSquare_rep (K : CochainComplex (StrictRingSystem B) �
   exact systemDerivedTransition_rep B h K
 
 /-- The ordinary singleton comparison is the mate at the ordinary unit.
-Source: Zheng 4.1 (blueprint: lem-pur-system-single-derived-evaluation).
+Source: Zheng 4.1.
 Proof: use the ordinary transpose formula with the identity map; its transpose
 under the singleton adjunction is its unit. -/
 theorem systemSingleOrdinaryUnitSquare (P : systemLevel B n) :
@@ -86,8 +85,7 @@ theorem systemSingleOrdinaryUnitSquare (P : systemLevel B n) :
   exact ht
 
 /-- Evaluating derived singleton extension below n is the derived scalar tensor.
-Source: Zheng 4.1; Stacks 06YT and 0FND
-(blueprint: lem-pur-system-single-derived-evaluation). -/
+Source: Zheng 4.1; Stacks 06YT and 0FND -/
 def systemSingleDerivedBelow (S : SystemScalarAssignment (J := J))
     (T : SystemTensorCoherence S) :
     (systemSingleDerivedExtension B n S T).derived ⋙ derivedSystemEvaluation B m ≅
@@ -104,7 +102,6 @@ def systemSingleDerivedBelow (S : SystemScalarAssignment (J := J))
 
 /-- The below-level derived tensor comparison preserves the two actual Hom transposes.
 Source: Zheng 4.1; Stacks 0FND
-(blueprint: lem-pur-system-single-derived-evaluation).
 Proof: it is the inverse of the mate of the strict derived transition, so the general
 mate-transpose identity gives exactly the displayed equation. -/
 theorem systemSingleDerivedTranspose (P : DerivedCategory (systemLevel B n))
@@ -132,7 +129,6 @@ theorem systemSingleDerivedTranspose (P : DerivedCategory (systemLevel B n))
 
 /-- Derived singleton extension vanishes above its input level, without boundedness
 conditions. Source: Zheng 4.1; Stacks 06YT
-(blueprint: lem-pur-system-single-derived-evaluation).
 Proof: represent P by a flat-term K-flat resolution. The derived extension is then
 its ordinary extension, whose terms at m are zero. Exact evaluation and localization
 preserve that zero complex. Transport vanishing back through the resolution and

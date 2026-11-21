@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 Source: Stacks Project, Cohomology, Tag 08DL, construction of internal Hom;
 Cohomology on Sites, Section 0A8X.
-(blueprint: lem-sc-hom-complex-restrict-open).
 -/
 
 @[expose] public section
@@ -85,8 +84,7 @@ additive, so these isomorphisms identify the differential
  d_M f - (-1)^n f d_L with the differential of the restricted Hom complex.
 They therefore define a chain isomorphism. This works also for the empty
 open, zero complexes and unbounded complexes: no finite-product truncation
-or global-section acyclicity assertion is involved.
-(blueprint: lem-sc-hom-complex-restrict-open). -/
+or global-section acyclicity assertion is involved. -/
 theorem homComplex_restrict_open (X : RingedSpace.{u}) (U : Opens X)
     (L M : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) :
     Nonempty (

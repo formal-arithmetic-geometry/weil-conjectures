@@ -12,7 +12,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 # Exact extension for localized restriction of module sheaves
 
 Source: Stacks Project, Modules on Sites, Lemmas 03DI and 03DJ.
-(auxiliary; not a blueprint node)
 
 The private Hom-equivalence helpers generalize the proved helpers of
 `Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact` to independent object and
@@ -258,7 +257,6 @@ No assumption of commutativity of the rings or of pullbacks in `C` is needed.
 
 Source: Stacks Project, Tags 03DI and 03DJ (Modules on Sites, Lemmas 18.19.2
 and 18.19.3); Tag 08FI uses this exact left adjoint.
-(auxiliary; not a blueprint node)
 -/
 theorem localized_restriction_extension_existsOfUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}

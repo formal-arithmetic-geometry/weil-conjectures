@@ -26,7 +26,6 @@ namespace HomologicalComplex₂
 /-- A degree-zero augmentation of a first-quadrant bicomplex is a quasi-isomorphism
 on total complexes if its augmentations of all resolution columns are quasi-isomorphisms.
 Source: Stacks Project, Tag 0133 (finite diagonal argument), as used in Tag 01EQ.
-(blueprint: lem-sc-first-quadrant-column-augmentation).
 
 Proof: the cone of the total augmentation is the totalization of the augmented
 columns, with the resolution degree shifted by one and the usual total signs.

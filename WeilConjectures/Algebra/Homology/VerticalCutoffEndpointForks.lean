@@ -170,7 +170,6 @@ private lemma upper_projection_cokernel (K : CochainComplex C ℤ) (a t : ℤ)
 /-- The boundary inclusion is a kernel, and the boundary comparison is a cokernel.
 Source: Stacks Project, Tag 0118 (homology-section-truncations), canonical
 truncations (3) and (4); the specialization to the upper cutoff is explicit.
-(blueprint: lem-sp-vertical-cutoff-endpoint-forks)
 
 Proof: put E = L extended by zero, B = tau-le-(b-1) E, and m = a-1.
 The inclusion of tau-le-m E into B in degree m is the kernel of B.d m a:

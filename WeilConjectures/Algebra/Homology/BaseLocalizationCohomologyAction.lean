@@ -11,7 +11,6 @@ public import WeilConjectures.Algebra.Homology.BaseLocalizationMap
 /-! # The A-action on the canonical base-localization cohomology map
 
 Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-base-localization-cohomology-action).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ variable (R Rp B A D : Type u)
 
 /-- The canonical B-linear comparison also intertwines multiplication from A.
 Source: Stacks Project, Tag 06Y6, functoriality of lemma-derived-base-change; Tag 0DJ8.
-(blueprint: lem-pc-base-localization-cohomology-action).
 
 Proof: apply naturality of the input restriction isomorphism and of the universal
 left-derived lift to multiplication by a on Q. Their composite commutes with the

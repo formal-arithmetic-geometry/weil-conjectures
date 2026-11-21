@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.VerticalWindowComponentNaturality
 # The single-degree smart window as a functor
 
 Source: blueprint thm-sp-double-complex-spectral-sequences, proof step 2.
-(blueprint: lem-sp-vertical-window-single-iso).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 placed in a single-term complex.
 Source: blueprint thm-sp-double-complex-spectral-sequences, proof step 2;
 Stacks, Homology, lemma-ss-double-complex, item (5).
-(blueprint: lem-sp-vertical-window-single-iso).
 
 Proof: extend a nonnegative complex by zero to the integers. Truncation from below
 at q gives the cokernel of the incoming differential in degree q. Truncation from

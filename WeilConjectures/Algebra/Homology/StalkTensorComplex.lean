@@ -18,7 +18,6 @@ import Mathlib.Topology.Sheaves.Abelian
 # Stalks commute with total tensor complexes
 
 Source: Stacks Project, Cohomology, Lemma 06YB, tensor-stalk identification
-(blueprint: lem-pc-stalk-tensor-complex).
 -/
 
 @[expose] public section
@@ -146,7 +145,7 @@ private instance stalk_additive : (RingedSpace.moduleStalkFunctor X x).Additive 
     rw [Functor.map_add, Functor.map_add]
     rfl
 
-/-- (blueprint: lem-pc-stalk-tensor-complex) Stacks Project, Cohomology, Lemma 06YB:
+/-- Stacks Project, Cohomology, Lemma 06YB:
 there is an isomorphism from the stalk of the total tensor complex to the total tensor
 complex of the stalks, natural in both complexes. Both total complexes use direct sums
 in degree `n` over `p + q = n` and differential `d_F ⊗ 1 + (-1)^p 1 ⊗ d_K`.

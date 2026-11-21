@@ -805,7 +805,6 @@ end SliceHelpers
 /-- Ordinary module pullback commutes with localization once the sliced data are given.
 
 Source: Stacks Project, Modules on Sites, Tags 04IF, 04IE, 03EL and 03EK
-(blueprint: lem-weil-pbc-geometric-ringed-pullback-slice-modules).
 
 Proof: Put B = f.inverse.obj A. Restrict RI and I.modules to the element site of B.
 For the source restrictions, transport these objects through a and the underlying

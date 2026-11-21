@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.OpenTensorNormalization.FiniteBaseChange
 This is the representative calculation in the proof of the finite restriction
 coherence theorem.  It is separated from the localization step so that the
 ordinary pin and model equations can be checked independently.
-(blueprint: lem-sf-finite-base-change-restriction-representative)
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +43,7 @@ postcompose both sides with the invertible comparison
 `B_R = φ_{I'} D(I')(a_g R)` (`Operations.gPull.flat`); `theta_model`, the pull
 and open model equations and naturality of `a_h` reduce both sides to the
 localization of the two sides of the ordinary identity followed by the same
-exact factors; cancel `B_R`.
-(blueprint: lem-sf-finite-base-change-restriction-representative) -/
+exact factors; cancel `B_R`. -/
 theorem finite_base_change_restriction_representative
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

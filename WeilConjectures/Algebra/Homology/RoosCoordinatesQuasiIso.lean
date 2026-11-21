@@ -11,7 +11,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 /-! # Quasi-isomorphisms of complexes in Roos coordinates
 
 Source: Stacks Project, Derived Categories, Tag 08TC, exact-product cone model.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -113,7 +112,6 @@ map on the unshifted complexes is a quasi-isomorphism.
 
 Source: Stacks Project, Derived Categories, Tag 08TC, product-cone model, and the
 mapping-cone comparison for a commuting square
-(auxiliary; not a blueprint node).
 
 Proof: Filter each displayed complex by its second coordinate. The subcomplex is the
 shift by minus one of V, with differential minus d, and the quotient is V. The

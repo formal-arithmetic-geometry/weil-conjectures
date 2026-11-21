@@ -11,7 +11,6 @@ import WeilConjectures.Algebra.Homology.System.SystemLevelLeftExtension
 # Normalized ordinary quotient tensor coherence
 
 Source: Zheng, Construction 4.1, p. 21; Stacks Tags 03D7 and 03EK.
-(blueprint: lem-pur-coefficient-tensor-ordinary-coherence).
 -/
 
 @[expose] public noncomputable section
@@ -209,7 +208,6 @@ private theorem ordinaryTensorCoherence
 /-- The specified quotient tensors have the unit and associator determined by their
 canonical scalar-extension units.
 Source: Stacks Tags 03D7 and 03EK; Zheng, Construction 4.1
-(blueprint: lem-pur-coefficient-tensor-ordinary-coherence).
 Proof: use the ordinary scalar coherence of the strict-system theory on the diagram
 of constant quotient rings. Its scalar models equal the prescribed tensor functors by
 their object and map formulas. Transport its unit and associator along these equalities.

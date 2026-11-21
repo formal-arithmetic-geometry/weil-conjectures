@@ -35,8 +35,7 @@ restriction factor isomorphisms. Substitute the ringed tensor comparison's store
 representative equation, and use its naturality to move the ordinary open pin
 across the representative isomorphisms. Cancel those isomorphisms and the native
 tensorators. The remaining equality is Q applied to h_total at P,Q. Reverse the
-cancellations to obtain the displayed representative square.
-(blueprint: lem-sf-finite-restriction-representative-square) -/
+cancellations to obtain the displayed representative square. -/
 theorem finite_restriction_representative_square
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

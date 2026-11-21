@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 /-! # Invertibility of the open extension unit
 
 Source: Stacks Project, Sheaves Lemma 00A7 (4).
-(blueprint: lem-sc-module-extension-by-zero-unit-isiso).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry
 /-- The unit of the chosen extension-by-zero/restriction adjunction is an isomorphism.
 Source: Stacks Project, Sheaves Lemma 00A7 (4), label lemma-j-shriek-modules;
 Modules on Sites Lemma 03DI, label lemma-extension-by-zero.
-(blueprint: lem-sc-module-extension-by-zero-unit-isiso).
 
 Proof: First use the canonical adjunction obtained by direct-sum injections followed by
 module sheafification. On opens contained in W the extension presheaf has one summand,

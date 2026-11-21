@@ -30,7 +30,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ)
 
 /-- The scalar-adjoint tensor transition below the selected level.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 def systemSingleBelowTransition (P : systemLevel B n) {l m : ℕ}
     (h : l ≤ m) (hm : m ≤ n) :
     (systemTensor S B hm).obj P ⟶
@@ -39,7 +39,6 @@ def systemSingleBelowTransition (P : systemLevel B n) {l m : ℕ}
 
 /-- The below-level transition changes the scalar through the actual coefficient map.
 Source: Zheng 4.1; Stacks 03EK
-(blueprint: lem-pur-system-ordinary-single-extension).
 Proof: the transition is the transpose of the associator. Its unit inserts one tensor,
 and the normalized associator multiplies that one with the image of the original scalar. -/
 theorem systemSingleBelowTransition_tmul (P : systemLevel B n) {l m : ℕ}
@@ -59,18 +58,18 @@ theorem systemSingleBelowTransition_tmul (P : systemLevel B n) {l m : ℕ}
   simp only [one_mul]
 
 /-- The actual level of extension from n, with zero above n.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 def systemSingleLevel (P : systemLevel B n) (m : ℕ) : systemLevel B m :=
   if h : m ≤ n then (systemTensor S B h).obj P else 0
 
 /-- Below n the constructed level is the prescribed tensor extension.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 def systemSingleLevelBelow (P : systemLevel B n) {m : ℕ} (h : m ≤ n) :
     systemSingleLevel S B n P m ≅ (systemTensor S B h).obj P :=
   eqToIso (dite_eq_left h)
 
 /-- The transition below n is the tensor transition; from a zero level it is zero.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 def systemSingleTransition (P : systemLevel B n) {l m : ℕ} (h : l ≤ m) :
     systemSingleLevel S B n P m ⟶
       (systemRestriction B h).obj (systemSingleLevel S B n P l) :=
@@ -81,7 +80,7 @@ def systemSingleTransition (P : systemLevel B n) {l m : ℕ} (h : l ≤ m) :
   else 0
 
 /-- The below-level coordinates remove all branch transports in the transition.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension).
+Source: Zheng 4.1.
 Proof: expand the positive branch and cancel the two level identifications. -/
 theorem systemSingleTransition_below (P : systemLevel B n) {l m : ℕ}
     (h : l ≤ m) (hm : m ≤ n) :
@@ -94,7 +93,6 @@ theorem systemSingleTransition_below (P : systemLevel B n) {l m : ℕ}
 
 /-- The constructed transition has the expected formula on each local generator.
 Source: Zheng 4.1; Stacks 03EK
-(blueprint: lem-pur-system-ordinary-single-extension).
 Proof: cancel the below-level coordinate isomorphism and apply the pure tensor formula
 for the scalar-adjoint transition. -/
 theorem systemSingleTransition_tmul (P : systemLevel B n) {l m : ℕ}
@@ -117,7 +115,7 @@ theorem systemSingleTransition_tmul (P : systemLevel B n) {l m : ℕ}
   exact he
 
 /-- Above n the chosen ordinary level is a zero object.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension).
+Source: Zheng 4.1.
 Proof: the defining branch is the zero object. -/
 theorem systemSingleLevelAbove (P : systemLevel B n) {m : ℕ} (h : n < m) :
     IsZero (systemSingleLevel S B n P m) := by
@@ -127,7 +125,6 @@ theorem systemSingleLevelAbove (P : systemLevel B n) {m : ℕ} (h : n < m) :
 
 /-- Unit tensors detect morphisms out of any constructed level, with the zero case automatic.
 Source: Zheng 4.1; Stacks 03EK
-(blueprint: lem-pur-system-ordinary-single-extension).
 Proof: below n transport along the tensor-level identification and apply scalar Hom
 injectivity. Above n every map from the zero object is equal. -/
 theorem systemSingleLevel_hom_ext (P : systemLevel B n) (m : ℕ) (M : systemLevel B m)
@@ -145,7 +142,7 @@ theorem systemSingleLevel_hom_ext (P : systemLevel B n) (m : ℕ) (M : systemLev
   · exact (systemSingleLevelAbove S B n P (Nat.lt_of_not_ge hm)).eq_of_src f g
 
 /-- The identity transition of ordinary singleton extension is the identity on sections.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension).
+Source: Zheng 4.1.
 Proof: compare the transition with inverse scalar restriction along the identity. Their
 values on unit tensors agree by the transition formula. Unit tensors detect maps below n,
 and the source is zero above n. -/
@@ -166,7 +163,7 @@ theorem systemSingleTransition_identity (P : systemLevel B n) (m : ℕ) (U : C�
   exact congrArg (fun f ↦ f.val.app U x) he
 
 /-- Singleton-extension transitions compose on all sections.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension).
+Source: Zheng 4.1.
 Proof: insert the canonical identity-on-sections restriction compositor. Compare the
 composite and direct transition on unit tensors: both send one tensor x to one tensor x.
 The tensor-generator criterion, including its zero-source case, gives equality of the
@@ -201,7 +198,7 @@ theorem systemSingleTransition_compose (P : systemLevel B n) {l m k : ℕ}
   exact congrArg (fun f ↦ f.val.app U x) he
 
 /-- The strict system underlying extension from the singleton level.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 def systemSingleObject (P : systemLevel B n) : StrictRingSystem B where
   level := systemSingleLevel S B n P
   transition := systemSingleTransition S T B n P
@@ -209,7 +206,7 @@ def systemSingleObject (P : systemLevel B n) : StrictRingSystem B where
   compose := systemSingleTransition_compose S T B n P
 
 /-- Extension of a module map at one ordinary singleton level.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 def systemSingleMapLevel {P Q : systemLevel B n} (f : P ⟶ Q) (m : ℕ) :
     systemSingleLevel S B n P m ⟶ systemSingleLevel S B n Q m :=
   if hm : m ≤ n then
@@ -218,7 +215,7 @@ def systemSingleMapLevel {P Q : systemLevel B n} (f : P ⟶ Q) (m : ℕ) :
   else 0
 
 /-- A singleton-extension map preserves local tensors in below-level coordinates.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension).
+Source: Zheng 4.1.
 Proof: the branch is scalar extension of f, conjugated by the level identifications.
 Cancel the identifications and apply naturality of local tensors. -/
 theorem systemSingleMapLevel_tmul {P Q : systemLevel B n} (f : P ⟶ Q) {m : ℕ}
@@ -243,7 +240,7 @@ theorem systemSingleMapLevel_tmul {P Q : systemLevel B n} (f : P ⟶ Q) {m : ℕ
   exact ht
 
 /-- Extension of a module morphism commutes with every strict transition.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension).
+Source: Zheng 4.1.
 Proof: test on local unit tensors; the map applies f to x and the transition changes
 one scalar to one, in either order. The zero-level case follows from uniqueness of
 maps out of zero. -/
@@ -262,7 +259,7 @@ theorem systemSingleMap_comm {P Q : systemLevel B n} (f : P ⟶ Q)
     systemSingleTransition_tmul, systemSingleMapLevel_tmul]
 
 /-- Ordinary singleton extension as an actual functor of strict systems.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 def systemSingleFunctor : systemLevel B n ⥤ StrictRingSystem B where
   obj := systemSingleObject S T B n
   map f := { app := systemSingleMapLevel S B n f, comm := systemSingleMap_comm S T B n f }
@@ -286,7 +283,7 @@ def systemSingleFunctor : systemLevel B n ⥤ StrictRingSystem B where
     rfl
 
 /-- Ordinary singleton extension is naturally the prescribed tensor functor below n.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 def systemSingleBelow {m : ℕ} (h : m ≤ n) :
     systemSingleFunctor S T B n ⋙ systemEvaluation B m ≅ systemTensor S B h :=
   NatIso.ofComponents (fun P ↦ systemSingleLevelBelow S B n P h) (by
@@ -297,14 +294,14 @@ def systemSingleBelow {m : ℕ} (h : m ≤ n) :
     erw [Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id])
 
 /-- The unit map inserts a local unit tensor at level n.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 def systemSingleUnit (P : systemLevel B n) :
     P ⟶ (systemSingleObject S T B n P).level n :=
   (T.ordinaryUnit B n).inv.app P ≫
     (systemSingleLevelBelow S B n P (Nat.le_refl n)).inv
 
 /-- The scalar-unit inverse is the local unit tensor.
-Source: Stacks 03EK (blueprint: lem-pur-system-ordinary-single-extension).
+Source: Stacks 03EK.
 Proof: apply the tensor unitor to both sides. Its normalized multiplication formula
 sends one tensor x to x, while the inverse unitor cancels against the unitor. -/
 theorem systemTensorUnit_inv_tmul (P : systemLevel B n) (U : Cᵒᵖ) (x : P.val.obj U) :
@@ -322,7 +319,7 @@ theorem systemTensorUnit_inv_tmul (P : systemLevel B n) (U : Cᵒᵖ) (x : P.val
   rw [hi, T.unit_normalized, one_smul]
 
 /-- The singleton unit in coordinates is exactly one tensor x.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension).
+Source: Zheng 4.1.
 Proof: apply the scalar-unit inverse formula before the below-level coordinate map. -/
 theorem systemSingleUnit_tmul (P : systemLevel B n) (U : Cᵒᵖ) (x : P.val.obj U) :
     (systemSingleUnit S T B n P).val.app U x =
@@ -333,7 +330,7 @@ theorem systemSingleUnit_tmul (P : systemLevel B n) (U : Cᵒᵖ) (x : P.val.obj
   rw [systemTensorUnit_inv_tmul]
 
 /-- A map to the nth component extends to all lower levels by scalar transposition.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 def systemSingleAdjunctLevel (P : systemLevel B n) (M : StrictRingSystem B)
     (f : P ⟶ M.level n) (m : ℕ) : systemSingleLevel S B n P m ⟶ M.level m :=
   if hm : m ≤ n then
@@ -345,7 +342,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The extended map sends c tensor x to c times the actual transition of f(x).
 Source: Zheng 4.1; Stacks 03D7
-(blueprint: lem-pur-system-ordinary-single-extension).
 Proof: in below-level coordinates cancel the coordinate isomorphisms. The scalar
 transpose formula and the inverse law for the Hom bijection give the result. -/
 theorem systemSingleAdjunctLevel_tmul (P : systemLevel B n) (M : StrictRingSystem B)
@@ -372,7 +368,7 @@ theorem systemSingleAdjunctLevel_tmul (P : systemLevel B n) (M : StrictRingSyste
   exact ht
 
 /-- The transposed component maps are a strict system map.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension).
+Source: Zheng 4.1.
 Proof: on one tensor x, the two paths are the direct transition of f(x) and the two
 successive transitions of f(x); these agree by the strict composition law of M. -/
 theorem systemSingleAdjunct_comm (P : systemLevel B n) (M : StrictRingSystem B)
@@ -391,14 +387,14 @@ theorem systemSingleAdjunct_comm (P : systemLevel B n) (M : StrictRingSystem B)
   exact (M.compose h hm U (f.val.app U x)).symm
 
 /-- Extend a map to the selected component into a map of strict systems.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 def systemSingleAdjunct (P : systemLevel B n) (M : StrictRingSystem B)
     (f : P ⟶ M.level n) : systemSingleObject S T B n P ⟶ M where
   app := systemSingleAdjunctLevel S B n P M f
   comm := systemSingleAdjunct_comm S T B n P M f
 
 /-- Taking the selected component of the extension of f recovers f.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension).
+Source: Zheng 4.1.
 Proof: the unit is one tensor x; its image is the identity transition applied to f(x),
 which is f(x). -/
 theorem systemSingleAdjunct_right_inv (P : systemLevel B n) (M : StrictRingSystem B)
@@ -413,7 +409,7 @@ theorem systemSingleAdjunct_right_inv (P : systemLevel B n) (M : StrictRingSyste
   rw [systemSingleUnit_tmul, systemSingleAdjunctLevel_tmul, one_smul, M.identity]
 
 /-- Every map from singleton extension is determined by its unit at the selected level.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension).
+Source: Zheng 4.1.
 Proof: the strict-map square for n to m, evaluated on the unit tensor, identifies the
 mth component with the transition of the nth component. Those are exactly the scalar
 adjunct component formulas. Unit tensors detect maps below n and maps out of zero agree
@@ -441,7 +437,7 @@ theorem systemSingleAdjunct_left_inv (P : systemLevel B n) (M : StrictRingSystem
   exact he
 
 /-- The ordinary singleton left-extension adjunction, with its strict transpose.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 def systemSingleAdjunction : systemSingleFunctor S T B n ⊣ systemEvaluation B n :=
   Adjunction.mkOfHomEquiv
     { homEquiv := fun P M ↦
@@ -470,7 +466,7 @@ def systemSingleAdjunction : systemSingleFunctor S T B n ⊣ systemEvaluation B 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Singleton extension is additive, as is already visible on tensor coordinates.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
+Source: Zheng 4.1. -/
 instance systemSingleFunctorAdditive : (systemSingleFunctor S T B n).Additive where
   map_add := by
     intro P Q f g
@@ -491,7 +487,6 @@ instance systemSingleFunctorAdditive : (systemSingleFunctor S T B n).Additive wh
 
 /-- The ordinary below-level formula intertwines the two actual adjunction transposes.
 Source: Zheng 4.1; Stacks 03D7
-(blueprint: lem-pur-system-ordinary-single-extension).
 Proof: evaluate the scalar transpose on x using its unit tensor. The strict-map
 square from n to m and the singleton unit identify the result with the nth transpose
 followed by the strict transition. -/

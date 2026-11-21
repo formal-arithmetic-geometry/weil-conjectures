@@ -32,7 +32,6 @@ variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
 lower-singleton maps and the specified scalar associators.
 Source: Zheng, Construction 4.1, and Stacks, Cohomology on Sites, 0D6D and 06YT;
 this is Step 9 of the parent singleton/scalar argument.
-(blueprint: lem-pur-system-singleton-scalar-lower)
 
 Proof: resolve the input by a flat-term K-flat B_m-complex Q. Every scalar extension
 in the square remains flat-term K-flat by ringed-topos pullback for the identity

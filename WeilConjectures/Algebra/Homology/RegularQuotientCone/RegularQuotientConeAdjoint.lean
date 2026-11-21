@@ -48,7 +48,6 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 /-! # Adjoint formula for the normalized regular quotient cone
 
 Source: Stacks 06YY and 07A6, normalized derived tensor adjunction.
-(blueprint: lem-cbc-regular-quotient-cone-adjoint).
 -/
 
 @[expose] public noncomputable section
@@ -103,7 +102,6 @@ private theorem ordinary_unit
 map to a quotient complex. The equation fixes the nullhomotopy to be zero.
 
 Source: Stacks 06YY and 07A6, normalization of derived tensor on resolutions
-(blueprint: lem-cbc-regular-quotient-cone-adjoint).
 
 Proof: use the normalized ordinary tensor adjunction to transpose f to g. Its unit
 is b.rho by the section formula. On a K-flat source, the universal counit followed

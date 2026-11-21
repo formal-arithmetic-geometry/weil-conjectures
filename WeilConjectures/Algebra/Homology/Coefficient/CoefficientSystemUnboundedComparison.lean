@@ -1600,8 +1600,7 @@ underlying identity gives restrictedInverse_mate. On complexes the inverse evalu
 square is the ordinary transition square. For direct image, transpose the sigma
 compatibility through the Hom chain above. Its explicit sigma-mate formula is exactly
 directTransition. These arguments are natural in every derived system morphism and
-use no preservation of K-injectives by evaluation or flatness of a coefficient quotient.
-(blueprint: lem-pur-coefficient-system-unbounded-comparison). -/
+use no preservation of K-injectives by evaluation or flatness of a coefficient quotient. -/
 theorem coefficientSystemUnboundedComparison
     (S : CoefficientSystemOrdinaryImage (J := J) (K := K) O ell L V adj)
     (PY : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell))

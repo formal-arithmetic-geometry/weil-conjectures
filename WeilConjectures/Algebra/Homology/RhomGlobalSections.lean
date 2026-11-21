@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 # Global sections of derived internal Hom
 
 Source: Stacks Project, Lemma 21.35.1, Tag 08JA, global statement
-(blueprint: lem-pur-rhom-global-sections).
 -/
 
 @[expose] public section
@@ -131,7 +130,6 @@ set_option synthInstance.maxHeartbeats 40000 in
 natural contravariantly in `L` and covariantly in `M`.
 
 Source: Stacks Project, Lemma 21.35.1, Tag 08JA, global statement
-(blueprint: lem-pur-rhom-global-sections).
 
 Proof:
 1. Choose a K-flat representative of `L` using `lem-pc-kflat-resolution` and a

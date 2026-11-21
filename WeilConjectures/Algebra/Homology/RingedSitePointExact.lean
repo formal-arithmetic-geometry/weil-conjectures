@@ -31,7 +31,6 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
 
 /-- Module inverse image at a topos point is exact.
 Source: Stacks Project, Modules on Sites, Tag 05V3.
-(auxiliary; not a blueprint node)
 
 Proof: underlying sheaves of sets detect finite limits of modules. The prescribed
 underlying functor is inverse image composed with forgetting module structure, hence

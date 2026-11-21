@@ -24,8 +24,6 @@ import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 
 /-! # K-flat tensor homology at a stalk, with transported scalars
-
-(blueprint: lem-pc-stalk-kflat-tensor-homology).
 -/
 
 @[expose] public section
@@ -123,8 +121,7 @@ comparison for derived tensor identifies Q of that tensor with Q of the transpor
 stalk of P tensor Q of the single transported stalk of F. The latter Q-single is
 the derived single functor. Apply degree-i homology and forget scalars. No replacement
 of P or choice of a module is made: the module is the image of F under S.
-The argument applies to zero rings, zero modules and unbounded complexes.
-(blueprint: lem-pc-stalk-kflat-tensor-homology). -/
+The argument applies to zero rings, zero modules and unbounded complexes. -/
 theorem stalk_kFlat_tensor_homology_iso
     (Z : RingedSpace.{u}) (x : Z) (A : CommRingCat.{u})
     (e : A ≅ Z.presheaf.stalk x)

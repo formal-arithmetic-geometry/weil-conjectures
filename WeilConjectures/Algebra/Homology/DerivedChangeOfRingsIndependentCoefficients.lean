@@ -22,7 +22,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 Source: literature/stacks-project/sites-cohomology.tex, Tags 06YT, 06YY, and
 literature/stacks-project/derived.tex, Tag 06XN
-(auxiliary; not a blueprint node).
 
 The change of rings `- ⊗_O O'` is the landed `SheafOfModules.changeOfRings φ` on objects
 and `SheafOfModules.changeOfRingsHom φ` on morphisms (def-pur-sheaf-tensor-product); the
@@ -50,7 +49,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace SheafOfModules
 
 /-- Forget commutativity without identifying the two universes of the site.
-Source: Stacks Tag 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YY. -/
 noncomputable abbrev derivedChangeRingIndependentCoefficients {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C)
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
@@ -230,8 +229,7 @@ asserted isomorphisms of abelian sheaves, sufficient to detect acyclicity.
 The counit at the already-sheaf module S and the monoidal localization comparison
 identify the resulting sheafification with S tensor M. Naturality survives each
 comparison and sheafification, giving the displayed equation for every a.
-This uses no flatness; the identity on tensors also covers zero rings and modules.
-(auxiliary; not a blueprint node) -/
+This uses no flatness; the identity on tensors also covers zero rings and modules. -/
 private theorem exists_changeOfRings_tensor_comparison_independent
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
@@ -353,8 +351,7 @@ The signed symmetry sends the (p,q) summand by (-1)^(pq) times the module braidi
 and identifies this with Tot(P ⊗ K). It is a chain isomorphism because
 (p+1)q = pq+q and p+p(q+1) = pq modulo two. Thus the quasi-isomorphism
 Tot(P ⊗ K) → Tot(F ⊗ K) transports vanishing of every homology object.
-This also covers F = 0 and K = 0 without any nonzero hypothesis.
-(auxiliary; not a blueprint node) -/
+This also covers F = 0 and K = 0 without any nonzero hypothesis. -/
 private theorem tensor_acyclic_of_isKFlat_independent
     (K : CochainComplex (SheafOfModules.{r} (𝓡 O)) ℤ)
     (hK : K.IsKFlatIndependentCoefficients) (hA : K.Acyclic)
@@ -395,7 +392,7 @@ private theorem isKFlat_mappingCone_independent
 end TensorAcyclicity
 
 /-- The K-flat invariance component needed by derived change of rings.
-Source: Stacks Project, Tag 06YT (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 06YT.
 Proof: the cone of the quasi-isomorphism is acyclic and K-flat. Resolve an arbitrary
 complex by a K-flat complex; the tensor-cone comparison and signed symmetry show that
 tensoring the acyclic K-flat cone with any complex is acyclic. Specialize to the target
@@ -497,8 +494,7 @@ Step 2 and localization make its F-image invertible. Apply
 lem-pur-left-derived-from-kflat-class to obtain pointwise existence, the universal derived
 pair, triangulatedness, and the counit isomorphism on every K-flat complex. The canonical
 resolution comparisons are composites of these counit maps and inverses of images of
-quasi-isomorphisms, hence are isomorphisms and compatible with a third resolution.
-(auxiliary; not a blueprint node) -/
+quasi-isomorphisms, hence are isomorphisms and compatible with a third resolution. -/
 theorem derivedChangeOfRingsIndependentCoefficients
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     {J : GrothendieckTopology C}

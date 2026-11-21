@@ -47,8 +47,7 @@ attribute [local instance] evaluationClosed
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-v4-finite-free-zero-homology-evaluation-cycles). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private lemma homMap_zero_left (R : Sheaf S CommRingCat.{u}) {A A' B B' : (SheafOfModules.{u}
       ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R))} (g : B ⟶ B') :
     SheafOfModules.homObjMap (R := R) (0 : A' ⟶ A) g = 0 := by
@@ -62,8 +61,7 @@ private lemma homMap_zero_left (R : Sheaf S CommRingCat.{u}) {A A' B B' : (Sheaf
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-v4-finite-free-zero-homology-evaluation-cycles). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private lemma homMap_zero_right (R : Sheaf S CommRingCat.{u}) {A A' B B' : (SheafOfModules.{u}
       ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R))} (f : A' ⟶ A) :
     SheafOfModules.homObjMap (R := R) f (0 : B ⟶ B') = 0 := by
@@ -76,8 +74,7 @@ private lemma homMap_zero_right (R : Sheaf S CommRingCat.{u}) {A A' B B' : (Shea
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-v4-finite-free-zero-homology-evaluation-cycles). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private lemma tensorHomEquiv_zero (R : Sheaf S CommRingCat.{u}) (A B N : (SheafOfModules.{u}
       ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) :
     SheafOfModules.tensorHomEquiv (R := R) A B N 0 = 0 := by
@@ -87,8 +84,7 @@ private lemma tensorHomEquiv_zero (R : Sheaf S CommRingCat.{u}) (A B N : (SheafO
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-v4-finite-free-zero-homology-evaluation-cycles). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private theorem homMap_mono_right (R : Sheaf S CommRingCat.{u}) (A : (SheafOfModules.{u}
       ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R)))
     {B B' : (SheafOfModules.{u}
@@ -100,8 +96,7 @@ private theorem homMap_mono_right (R : Sheaf S CommRingCat.{u}) (A : (SheafOfMod
 
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-v4-finite-free-zero-homology-evaluation-cycles). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private theorem homObj_liftCycles (R : Sheaf S CommRingCat.{u}) (K : CochainComplex
     (SheafOfModules.{u}
       ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
@@ -127,8 +122,7 @@ private theorem homObj_liftCycles (R : Sheaf S CommRingCat.{u}) (K : CochainComp
 set_option backward.isDefEq.respectTransparency false in
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-v4-finite-free-zero-homology-evaluation-cycles). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private theorem cyclePairing_lift (R : Sheaf S CommRingCat.{u}) (P T J : CochainComplex
     (SheafOfModules.{u}
       ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
@@ -177,8 +171,7 @@ private theorem cyclePairing_lift (R : Sheaf S CommRingCat.{u}) (P T J : Cochain
 set_option backward.isDefEq.respectTransparency false in
 /-- Auxiliary step of cycle evaluation.
 Source: Stacks Project, Tag 0A8X, the Hom differential and its descent;
-Tag 03EO, tensor-Hom adjunction.
-(blueprint: new-v4-finite-free-zero-homology-evaluation-cycles). -/
+Tag 03EO, tensor-Hom adjunction. -/
 private theorem cyclePairing_boundary_left (R : Sheaf S CommRingCat.{u})
     (P T J : CochainComplex (SheafOfModules.{u}
       ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
@@ -227,7 +220,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Canonical cycle evaluation and its descent for a zero-differential source.
 
 Source: Stacks Project, Tag 0A8X, Hom differential and evaluation on cohomology.
-(blueprint: new-v4-finite-free-zero-homology-evaluation-cycles).
 
 Proof: The differential identity shows that evaluating a Hom cycle on an E cycle
 lands in K cycles. Lift through the kernel inclusion using tensor-Hom adjunction.

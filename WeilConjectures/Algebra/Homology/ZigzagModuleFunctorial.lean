@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.ZigzagModule
 # Functoriality of zig-zag modules
 
 Source: Stacks Project, Algebra, Tag 00M1, proof and preceding functoriality paragraph
-(blueprint: lem-weil-pbc-double-complex-zigzag-module-functorial).
 -/
 
 @[expose] public section
@@ -133,7 +132,7 @@ private lemma map_mk {R : Type u} [CommRing R]
   exact h.symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- (blueprint: lem-weil-pbc-double-complex-zigzag-module-functorial)
+/--
 Trivial zig-zags are zig-zags, and the quotient maps are functorial
 (Stacks Project, Algebra, Tag 00M1, proof and preceding paragraph).
 

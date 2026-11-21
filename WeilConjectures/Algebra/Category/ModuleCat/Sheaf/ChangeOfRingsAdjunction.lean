@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.PresheafChangeOfRingsAdjunction
 # The tensor change-of-rings adjunction on sheaves of modules
 
 Source: Stacks Project, Sheaves on Spaces, Lemma 6.20.2, Tag 008A
-(blueprint: lem-pc-module-change-of-rings-adjunction).
 -/
 
 @[expose] public section
@@ -46,7 +45,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Change of rings by the sheafified sectionwise tensor product is left adjoint to
 restriction of scalars. The hom correspondence first applies the sheafification unit
 to `1 ⊗ m`, then evaluates the map. Its naturality in both modules is part of `adj`.
-Source: Stacks Project, Tag 008A (blueprint: lem-pc-module-change-of-rings-adjunction).
+Source: Stacks Project, Tag 008A.
 
 Proof: (1) Apply the sectionwise tensor adjunction and compatibility with restrictions
 (`lem-pc-presheaf-change-of-rings-adjunction`, Tag 006R) to obtain the natural presheaf

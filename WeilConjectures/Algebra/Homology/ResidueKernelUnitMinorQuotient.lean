@@ -22,8 +22,7 @@ unit-minor operations. Proof: a vector is in the kernel precisely when its U
 coordinate is zero and its last coordinate is in ker g. The source equivalence
 therefore identifies ker g with ker f. Project the target along eY onto C/range g.
 This map is onto, and its kernel consists precisely of vectors whose C coordinate
-is g(a), hence precisely the image of f. The first isomorphism theorem finishes.
-(blueprint: new-residue-kernel-unit-minor-quotient) -/
+is g(a), hence precisely the image of f. The first isomorphism theorem finishes. -/
 theorem residue_kernel_unit_minor_quotient
     (A : Type v) [CommRing A] (X Y U C : ModuleCat.{v} A)
     (f : X →ₗ[A] Y) (g : A →ₗ[A] C)

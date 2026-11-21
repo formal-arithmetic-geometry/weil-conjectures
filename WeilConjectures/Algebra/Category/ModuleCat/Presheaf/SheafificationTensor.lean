@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 # Module sheafification commutes with tensor products
 
 Source: Stacks Project, Modules on Sites, Tag 0GMW, lemma-sheafification-tensor
-(blueprint: lem-pc-sites-module-sheafification-tensor).
 -/
 
 @[expose] public section
@@ -359,7 +358,7 @@ end Comparison
 /-- The canonical tensor comparison is an isomorphism, natural in both presheaf modules.
 The locally bijective ring map identifies `R` with the sheafification of `O`. The displayed
 pure-tensor identity specifies the canonical comparison, using the sheafification units.
-Source: Stacks Project, Tag 0GMW (blueprint: lem-pc-sites-module-sheafification-tensor).
+Source: Stacks Project, Tag 0GMW.
 
 Proof:
 1. Sectionwise pure tensors of the module sheafification maps define a balanced map from
@@ -410,7 +409,7 @@ theorem exists_sheafificationTensorIso
 /-- With an already sheafified first factor, tensoring commutes with module sheafification,
 including restriction of scalars along the ring sheafification map. The isomorphism of
 bifunctors expresses naturality in the sheaf and the presheaf simultaneously.
-Source: Stacks Project, Tag 0GMW (blueprint: lem-pc-sites-module-sheafification-tensor).
+Source: Stacks Project, Tag 0GMW.
 
 Proof: apply the preceding comparison to the restricted underlying presheaf of `G` and
 `F`. The counit of lem-pc-sites-module-sheafification-interface identifies the associated

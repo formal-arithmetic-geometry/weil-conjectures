@@ -85,7 +85,6 @@ private theorem projective_single_homology_bijective
 
 /-- Maps from the free rank-one module in degree zero compute zeroth cohomology.
 Source: Stacks Project, Tag 09M1, proof, first paragraph (the affine module calculation).
-(blueprint: lem-pc-derived-free-module-hom-homology).
 Proof: Maps from a projective module in degree zero to any strictly negative
 complex vanish, by Mathlib's projective-source vanishing theorem and a strictly
 bounded-above representative. In the canonical truncation triangle

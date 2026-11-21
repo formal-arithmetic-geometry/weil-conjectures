@@ -743,7 +743,6 @@ end
 
 /-- Tensor presentation of the left adjoint to continuous module direct image.
 Source: Stacks Project, Modules on Sites, Tag 03D7
-(blueprint: lem-pur-ringed-pullback-presentation-on-sites).
 Proof: transport the ring and its modules along the finite-limit-preserving set
 inverse image. Transpose the given coefficient map to obtain the structural map
 from the transported ring to the target ring. The geometric set adjunction

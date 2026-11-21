@@ -88,8 +88,7 @@ variable {D : Type u'} [Category.{v'} D] [EssentiallySmall.{w} C]
   (V : Sheaf K (Type w) ⥤ Sheaf J (Type w)) (adj : L ⊣ V)
 
 /-- Levelwise ordinary lifts, before forming the category of strict systems.
-Source: Stacks 03D7; Zheng Construction 4.1
-(blueprint: lem-pur-coefficient-level-ordinary-images). -/
+Source: Stacks 03D7; Zheng Construction 4.1 -/
 structure CoefficientLevelOrdinaryImage where
   singleton : L.obj ((constantSheaf J (Type w)).obj PUnit) ≅
     (constantSheaf K (Type w)).obj PUnit
@@ -505,8 +504,7 @@ restrictInverse; its mate under the level adjunctions is restrictRight, invertib
 because its underlying map is the composite of the right-underlying isomorphisms
 and forgetting reflects isomorphisms; faithfulness gives restrictTranspose. These
 comparisons hold for every pair of indices, including equal indices and the zero
-quotient ring.
-(blueprint: lem-pur-coefficient-level-ordinary-images). -/
+quotient ring. -/
 theorem coefficientLevelOrdinaryImage_exists [PreservesFiniteLimits L] :
     Nonempty (CoefficientLevelOrdinaryImage (J := J) (K := K) O ell L V adj) := by
   classical

@@ -37,7 +37,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- The derived selected extension has precisely the tensor-adjoint transition
 specified by its actual iterated transition. Source: Zheng 4.1; Stacks 0FND
-(blueprint: lem-pur-system-selected-derived-transition).
 Proof: the selected evaluation comparisons are the normalized mates of evaluation
 followed by the actual strict transition. Derived transitions compose by localization
 of the strict composition law, and selected evaluations commute with transitions.

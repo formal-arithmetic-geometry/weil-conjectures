@@ -17,7 +17,6 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 # Tensor homology coordinates
 
 Source: Stacks Project, Varieties, Tag 0BED, `equation-kunneth-on-cech`.
-(blueprint: lem-sc-tensor-homology-coordinates)
 -/
 
 @[expose] public section
@@ -52,7 +51,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Extract tensor homology coordinates from the total homology over a field.
 Source: Stacks Project, Varieties, Tag 0BED, `equation-kunneth-on-cech`,
 and the complement argument of `lem-sc-qcoh-cech-total-tensor-iso`, steps 1 and 2.
-(blueprint: lem-sc-tensor-homology-coordinates)
 
 Proof: Extend the quotient map from cycles to homology linearly to each full
 term of A and B, using complements to their cycle subspaces. These extensions

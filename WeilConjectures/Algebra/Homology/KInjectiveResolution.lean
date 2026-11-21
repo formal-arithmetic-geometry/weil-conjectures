@@ -57,9 +57,7 @@ namespace CochainComplex
 variable {C : Type*} [Category* C] [Abelian C]
 
 /-- A **K-injective resolution** of a cochain complex `K`: a quasi-isomorphism `ι : K ⟶ I` to a
-K-injective complex `I`.
-
-(blueprint: `def-sp-kinjective-bridge`) -/
+K-injective complex `I`. -/
 structure KInjectiveResolution (K : CochainComplex C ℤ) where
   /-- The K-injective complex `I`. -/
   I : CochainComplex C ℤ
@@ -139,9 +137,7 @@ variable (R' : K.KInjectiveResolution)
 /-- **Uniqueness of K-injective resolutions.** Two K-injective resolutions `K ⟶ I` and `K ⟶ I'`
 of the same complex are homotopy equivalent, by a homotopy equivalence compatible with the maps
 from `K` up to homotopy (`KInjectiveResolution.homotopyEquivHomotopy`); it is unique up to
-homotopy (`KInjectiveResolution.homotopyEquivUnique`).
-
-(blueprint: `lem-sp-kinjective-computes`) -/
+homotopy (`KInjectiveResolution.homotopyEquivUnique`). -/
 noncomputable def homotopyEquiv : HomotopyEquiv R.I R'.I where
   hom := R.lift R'.ι
   inv := R'.lift R.ι
@@ -205,22 +201,16 @@ variable {L : CochainComplex C ℤ} (S : L.KInjectiveResolution)
   {D : Type*} [Category* D] [Abelian D] (v : C ⥤ D) [v.Additive]
 
 /-- The complex `Rv(K) = v(I)`, in the homotopy category, computed from a K-injective resolution
-`K ⟶ I`.
-
-(blueprint: `def-sp-kinjective-bridge`) -/
+`K ⟶ I`. -/
 noncomputable def rightDerived : HomotopyCategory D (.up ℤ) :=
   (HomotopyCategory.quotient D (.up ℤ)).obj ((v.mapHomologicalComplex _).obj R.I)
 
-/-- The cohomology `Rᵖv(K) = Hᵖ(Rv(K))` computed from a K-injective resolution.
-
-(blueprint: `def-sp-kinjective-bridge`) -/
+/-- The cohomology `Rᵖv(K) = Hᵖ(Rv(K))` computed from a K-injective resolution. -/
 noncomputable def rightDerivedHomology (p : ℤ) : D :=
   ((v.mapHomologicalComplex _).obj R.I).homology p
 
 /-- **`Rv(K)` does not depend on the K-injective resolution**: two K-injective resolutions give
-canonically isomorphic complexes `v(I) ≅ v(I')` in the homotopy category.
-
-(blueprint: `lem-sp-kinjective-computes`) -/
+canonically isomorphic complexes `v(I) ≅ v(I')` in the homotopy category. -/
 noncomputable def rightDerivedIso : R.rightDerived v ≅ R'.rightDerived v :=
   HomotopyCategory.isoOfHomotopyEquiv (v.mapHomotopyEquiv (R.homotopyEquiv R'))
 
@@ -232,9 +222,7 @@ noncomputable def rightDerivedHomologyIso (p : ℤ) :
     (HomotopyCategory.homologyFunctorFactors D (.up ℤ) p).app _
 
 
-/-- **Functoriality of `Rv`**: the morphism `Rv(K) ⟶ Rv(L)` induced by a morphism `K ⟶ L`.
-
-(blueprint: `lem-sp-kinjective-computes`) -/
+/-- **Functoriality of `Rv`**: the morphism `Rv(K) ⟶ Rv(L)` induced by a morphism `K ⟶ L`. -/
 noncomputable def rightDerivedMap (φ : K ⟶ L) : R.rightDerived v ⟶ S.rightDerived v :=
   (HomotopyCategory.quotient D (.up ℤ)).map ((v.mapHomologicalComplex _).map (R.map S φ))
 
@@ -275,9 +263,7 @@ section Existence
 
 /-- **Existence of K-injective resolutions.** In an abelian category with enough injectives
 (e.g. a Grothendieck abelian category), a complex `K` concentrated in degrees `≥ n` has a
-K-injective resolution by a complex of injective objects concentrated in degrees `≥ n`.
-
-(blueprint: `def-sp-kinjective-bridge`) -/
+K-injective resolution by a complex of injective objects concentrated in degrees `≥ n`. -/
 lemma exists_of_isStrictlyGE [EnoughInjectives C] (K : CochainComplex C ℤ) (n : ℤ)
     [K.IsStrictlyGE n] :
     ∃ R : K.KInjectiveResolution, R.I.IsStrictlyGE n ∧ ∀ i, Injective (R.I.X i) := by
@@ -287,9 +273,7 @@ lemma exists_of_isStrictlyGE [EnoughInjectives C] (K : CochainComplex C ℤ) (n 
 
 /-- **Existence of K-injective resolutions.** In an abelian category with enough injectives
 (e.g. a Grothendieck abelian category), every cohomologically bounded below complex has a
-K-injective resolution.
-
-(blueprint: `def-sp-kinjective-bridge`) -/
+K-injective resolution. -/
 lemma nonempty_of_isGE [EnoughInjectives C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n] :
     Nonempty K.KInjectiveResolution := by
   obtain ⟨R, -, -⟩ := exists_of_isStrictlyGE (K.truncGE n) n
@@ -305,9 +289,7 @@ end Existence
 section Shift
 
 /-- **Shifts of K-injective resolutions.** If `K ⟶ I` is a K-injective resolution, then
-`K[n] ⟶ I[n]` is a K-injective resolution.
-
-(blueprint: `lem-sp-kinjective-computes`) -/
+`K[n] ⟶ I[n]` is a K-injective resolution. -/
 @[simps]
 noncomputable def shift (n : ℤ) : (K⟦n⟧).KInjectiveResolution where
   I := R.I⟦n⟧
@@ -316,9 +298,7 @@ noncomputable def shift (n : ℤ) : (K⟦n⟧).KInjectiveResolution where
 variable {D : Type*} [Category* D] [Abelian D] (v : C ⥤ D) [v.Additive]
 
 /-- **`Rv` commutes with shifts**: `Rv(K[n]) ≅ Rv(K)[n]`, computed from the shifted
-resolution.
-
-(blueprint: `lem-sp-kinjective-computes`) -/
+resolution. -/
 noncomputable def rightDerivedShiftIso (n : ℤ) :
     (R.shift n).rightDerived v ≅ (R.rightDerived v)⟦n⟧ :=
   (HomotopyCategory.quotient D (.up ℤ)).mapIso
@@ -326,9 +306,7 @@ noncomputable def rightDerivedShiftIso (n : ℤ) :
     ((HomotopyCategory.quotient D (.up ℤ)).commShiftIso n).app _
 
 /-- **`Rv` commutes with shifts**: for any K-injective resolution `S` of `K[n]`,
-`Rv(K[n]) ≅ Rv(K)[n]`.
-
-(blueprint: `lem-sp-kinjective-computes`) -/
+`Rv(K[n]) ≅ Rv(K)[n]`. -/
 noncomputable def rightDerivedShiftIso' (n : ℤ) (S : (K⟦n⟧).KInjectiveResolution) :
     S.rightDerived v ≅ (R.rightDerived v)⟦n⟧ :=
   S.rightDerivedIso (R.shift n) v ≪≫ R.rightDerivedShiftIso v n
@@ -346,14 +324,10 @@ open CochainComplex
 variable {C : Type*} [Category* C] [Abelian C] {X : C} (R : InjectiveResolution X)
 
 /-- A bounded below complex of injectives is K-injective: the `ℤ`-indexed complex of an
-injective resolution is K-injective (`CochainComplex.isKInjective_of_injective`).
-
-(blueprint: `lem-sp-kinjective-computes`) -/
+injective resolution is K-injective (`CochainComplex.isKInjective_of_injective`). -/
 instance : R.cochainComplex.IsKInjective := isKInjective_of_injective _ 0
 
-/-- **An injective resolution `X ⟶ I•` is a K-injective resolution of `X[0]`.**
-
-(blueprint: `lem-sp-kinjective-computes`) -/
+/-- **An injective resolution `X ⟶ I•` is a K-injective resolution of `X[0]`.** -/
 @[simps]
 noncomputable def kInjectiveResolution :
     ((CochainComplex.singleFunctor C 0).obj X).KInjectiveResolution where

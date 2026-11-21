@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 # Filtered colimits and tensor complexes of sheaves of modules
 
 Source: Stacks Project, Modules on Sites, Lemmas 03DB and 03EP
-(blueprint: lem-pc-module-filtered-colimits-tensor).
 -/
 
 @[expose] public section
@@ -36,7 +35,7 @@ local notation "Mod" R => SheafOfModules.{u}
 
 /-- Filtered colimits of sheaves of modules are exact, and commute with tensor
 complexes and their direct-sum totalizations. Source: Stacks Project, Modules
-on Sites, Lemmas 03DB and 03EP (blueprint: lem-pc-module-filtered-colimits-tensor).
+on Sites, Lemmas 03DB and 03EP.
 
 Proof: (1) `prop-pur-kinjective-resolutions-exist` supplies the Grothendieck
 abelian property and exact filtered colimits; consequently they preserve kernels,

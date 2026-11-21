@@ -36,7 +36,6 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 Source: Stacks, Modules on Sites, 03DA and 03EK, using the invariance of
 sheaf conditions and balanced tensors under sectionwise isomorphism
-(blueprint: def-pur-cochain-coefficient-universe-transport).
 
 All carriers below are explicitly ULift, all restrictions apply the original
 restriction to ULift.down, and all scalars act through ULift.down. In particular
@@ -51,8 +50,7 @@ set_option autoImplicit false
 set_option linter.checkUnivs false
 
 /-- Ring-universe transport is the usual sectionwise ULift ring functor.
-Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport). -/
+Source: Stacks 03DA -/
 def ringFunctor : CommRingCat.{r} ⥤ CommRingCat.{max r m w} where
   obj A := CommRingCat.of (ULift.{max m w} A)
   map f := CommRingCat.ofHom f.hom.ulift
@@ -76,7 +74,6 @@ private theorem commRing_isSheaf_of_forget (P : Cᵒᵖ ⥤ CommRingCat.{z})
 
 /-- Sectionwise ring lifting preserves the sheaf condition.
 Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport).
 Proof: matching families lift and descend componentwise through ULift.up/down.
 Apply the original unique gluing axiom and lift the resulting section. The ring
 operations are transported by the same bijections. -/
@@ -92,14 +89,12 @@ theorem ringFunctor_hasSheafCompose : J.HasSheafCompose (ringFunctor.{r, m, w}) 
     (Presheaf.isSheaf_comp_of_isSheaf J P (CategoryTheory.forget CommRingCat) hP)
 
 /-- The genuinely constructed coefficient ring in the common ambient universe.
-Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport). -/
+Source: Stacks 03DA -/
 abbrev ring (R : Sheaf J CommRingCat.{r}) : Sheaf J CommRingCat.{max r m w} :=
   (sheafCompose J (ringFunctor.{r, m, w})).obj R
 
 /-- Forgetting a lifted commutative ring to a ring preserves sheaves.
 Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport).
 Proof: the forgetful functor creates limits, so it preserves the matching-family
 limit expressing the sheaf condition. -/
 @[instance]
@@ -127,14 +122,12 @@ theorem liftedRingForgetHasSheafCompose :
 variable (R : Sheaf J CommRingCat.{r})
 
 /-- Original module sheaves, retaining their independent carrier universe m.
-Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport). -/
+Source: Stacks 03DA -/
 abbrev OriginalModules := ringedSiteModules.{m}
   ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
 /-- The lifted scalar acts by its down-map on the lifted module carrier.
-Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport). -/
+Source: Stacks 03DA -/
 noncomputable instance moduleAction (M : OriginalModules.{uC, vC, r, m} R) (U : Cᵒᵖ) :
     Module ((ring.{uC, vC, r, m, w} R).obj.obj U)
       (ULift.{max r w} (M.val.obj U)) :=
@@ -143,8 +136,7 @@ noncomputable instance moduleAction (M : OriginalModules.{uC, vC, r, m} R) (U : 
     (ULift.{max r w} (M.val.obj U)))
 
 /-- Lift a local restriction, applying the original map to the descended section.
-Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport). -/
+Source: Stacks 03DA -/
 noncomputable def moduleMap (M : OriginalModules.{uC, vC, r, m} R) {U V : Cᵒᵖ} (f : U ⟶ V) :
     ModuleCat.of ((ring.{uC, vC, r, m, w} R).obj.obj U) (ULift.{max r w} (M.val.obj U)) ⟶
       (ModuleCat.restrictScalars ((ring.{uC, vC, r, m, w} R).obj.map f).hom).obj
@@ -161,7 +153,6 @@ noncomputable def moduleMap (M : OriginalModules.{uC, vC, r, m} R) {U V : Cᵒ�
 
 /-- Functoriality of lifted restrictions.
 Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport).
 Proof: evaluate on ULift.up(x), descend, and use the original identity and
 composition equations. ULift.up/down are inverse functions. -/
 theorem moduleMap_laws (M : OriginalModules.{uC, vC, r, m} R) :
@@ -192,8 +183,7 @@ theorem moduleMap_laws (M : OriginalModules.{uC, vC, r, m} R) :
     exact congrArg ULift.up (M.val.map_comp_apply f g x.down)
 
 /-- The lifted module presheaf, with explicit ULift carriers and restrictions.
-Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport). -/
+Source: Stacks 03DA -/
 noncomputable def modulePresheaf (M : OriginalModules.{uC, vC, r, m} R) :
     PresheafOfModules.{max r m w}
       (((ring.{uC, vC, r, m, w} R).obj ⋙ forget₂ CommRingCat RingCat)) where
@@ -204,7 +194,6 @@ noncomputable def modulePresheaf (M : OriginalModules.{uC, vC, r, m} R) :
 
 /-- The explicitly lifted abelian presheaf is a sheaf.
 Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport).
 Proof: forget the transported action. The presheaf is the original abelian
 presheaf followed by ULift. Unique gluing transports through ULift.up/down. -/
 theorem modulePresheaf_isSheaf (M : OriginalModules.{uC, vC, r, m} R) :
@@ -217,8 +206,7 @@ theorem modulePresheaf_isSheaf (M : OriginalModules.{uC, vC, r, m} R) :
     (Presheaf.isSheaf_comp_of_isSheaf J _ (CategoryTheory.forget AddCommGrpCat) M.isSheaf)
 
 /-- The genuinely constructed module sheaf in the common ambient universe.
-Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport). -/
+Source: Stacks 03DA -/
 noncomputable def module (M : OriginalModules.{uC, vC, r, m} R) :
     ringedSiteModules.{max r m w}
       ((sheafCompose J (forget₂ CommRingCat.{max r m w} RingCat.{max r m w})).obj (ring.{uC, vC,
@@ -226,8 +214,7 @@ noncomputable def module (M : OriginalModules.{uC, vC, r, m} R) :
   ⟨modulePresheaf.{uC, vC, r, m, w} R M, modulePresheaf_isSheaf.{uC, vC, r, m, w} R M⟩
 
 /-- Lift a module homomorphism by its explicit sectionwise ULift formula.
-Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport). -/
+Source: Stacks 03DA -/
 noncomputable def moduleHomComponent {M N : OriginalModules.{uC, vC, r, m} R} (h : M ⟶ N) (U :
   Cᵒᵖ) :
     (module.{uC, vC, r, m, w} R M).val.obj U ⟶ (module.{uC, vC, r, m, w} R N).val.obj U :=
@@ -238,7 +225,6 @@ noncomputable def moduleHomComponent {M N : OriginalModules.{uC, vC, r, m} R} (h
 
 /-- Lifted homomorphisms commute with restrictions.
 Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport).
 Proof: descend a section and use the original morphism's naturality, then lift. -/
 theorem moduleHomComponent_naturality {M N : OriginalModules.{uC, vC, r, m} R} (h : M ⟶ N)
     {U V : Cᵒᵖ} (f : U ⟶ V) :
@@ -250,8 +236,7 @@ theorem moduleHomComponent_naturality {M N : OriginalModules.{uC, vC, r, m} R} (
   exact congrArg ULift.up (PresheafOfModules.naturality_apply h.val f x.down)
 
 /-- The explicitly lifted morphism of module sheaves.
-Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport). -/
+Source: Stacks 03DA -/
 noncomputable def moduleHom {M N : OriginalModules.{uC, vC, r, m} R} (h : M ⟶ N) :
     module.{uC, vC, r, m, w} R M ⟶ module.{uC, vC, r, m, w} R N :=
   ⟨{ app := moduleHomComponent.{uC, vC, r, m, w} R h, naturality :=
@@ -259,7 +244,6 @@ noncomputable def moduleHom {M N : OriginalModules.{uC, vC, r, m} R} (h : M ⟶ 
 
 /-- The sectionwise lift is functorial on module homomorphisms.
 Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport).
 Proof: identities and compositions act on ULift.up(x) by the corresponding
 original maps. Extensionality of module sheaf maps gives the equations. -/
 theorem moduleHom_laws :
@@ -276,8 +260,7 @@ theorem moduleHom_laws :
     rfl
 
 /-- Canonical common-universe embedding; every carrier and every map is explicit.
-Source: Stacks 03DA
-(blueprint: def-pur-cochain-coefficient-universe-transport). -/
+Source: Stacks 03DA -/
 noncomputable def functor : OriginalModules.{uC, vC, r, m} R ⥤ ringedSiteModules.{max r m w}
     ((sheafCompose J (forget₂ CommRingCat.{max r m w} RingCat.{max r m w})).obj (ring.{uC, vC, r,
       m, w} R)) where

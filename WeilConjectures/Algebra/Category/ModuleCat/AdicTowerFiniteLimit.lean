@@ -35,7 +35,6 @@ neither modules, functors nor morphism lifts.
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 087W, generator-lifting,
 Nakayama, Mittag-Leffler and the final cokernel calculation.
-(blueprint: lem-weil-pbc-adic-tower-finite-limit).
 
 Proof: Surjectivity of successive transitions implies surjectivity of every limit
 projection by recursive lifting. Lift a finite generating family at level zero to the

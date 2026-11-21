@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonClosureRetract
 /-! # Closure of the localized tensor comparison predicate
 
 Source: Stacks Project, Tag 0DJA(1), using Tags 0BYJ and 09PB.
-(blueprint: lem-pc-localized-tensor-comparison-closure).
 -/
 
 @[expose] public section
@@ -63,8 +62,7 @@ isomorphism is an isomorphism. Naturality and invariance under roofs of
 K-flat quasi-isomorphisms prove all assertions for every representative and
 every model in the definition. Neither the initial comparison for Q nor any
 map t is assumed a quasi-isomorphism in this closure assertion. Empty sums,
-zero rings, arbitrary unbounded complexes and nonflat A-to-C maps are included.
-(blueprint: lem-pc-localized-tensor-comparison-closure). -/
+zero rings, arbitrary unbounded complexes and nonflat A-to-C maps are included. -/
 theorem localizedTensorComparisonProperty_closure
     (hC : Module.Flat (A ⊗[R] B) C)
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →

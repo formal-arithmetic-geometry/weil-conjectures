@@ -16,7 +16,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 # Bounded-above projective models of derived module objects
 
 Source: Stacks Project, Tags 0645 and 0646, and the downward construction of Tag 05T7
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -44,7 +43,6 @@ namespace DerivedCategory
 
 /-- An object with no cohomology above `b` has a projective complex model zero above `b`.
 Source: Stacks Project, Tags 0645 and 0646, parts (2) and (3)
-(auxiliary; not a blueprint node).
 
 Proof:
 1. The standard t-structure supplies a representative K strictly zero above b.

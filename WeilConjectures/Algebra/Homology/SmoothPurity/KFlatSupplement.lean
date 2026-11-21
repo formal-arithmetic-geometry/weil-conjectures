@@ -15,7 +15,6 @@ The legacy predicate names below unfold to its identical constructions. This avo
 copying the sectionwise tensor-Hom and sheafification proofs.
 
 Source: Stacks Project, Cohomology on Sites, Definition 06YN and Lemma 06YS
-(blueprint: def-pc-kflat-complex).
 -/
 
 @[expose] public section
@@ -30,7 +29,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   {R : Sheaf J CommRingCat.{max u v}}
 
 /-- K-flatness against acyclic complexes, with the legacy name.
-Source: Stacks Project, Definition 06YN (blueprint: def-pc-kflat-complex). -/
+Source: Stacks Project, Definition 06YN. -/
 def IsAcyclicTensorKFlat
     (K : CochainComplex
       (SheafOfModules.{max u v} ((sheafCompose J

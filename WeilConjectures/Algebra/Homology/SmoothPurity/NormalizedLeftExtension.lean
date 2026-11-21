@@ -82,7 +82,7 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{dA} A]
 
 /-- Derived data for a fixed ordinary adjunction. The universal property determines
 its functor and comparison up to unique isomorphism.
-Source: Stacks 06XN (blueprint: lem-pur-normalized-left-extension). -/
+Source: Stacks 06XN. -/
 structure SystemLeftExtensionDerivation
     (R : D ⥤ A) [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     (E : A ⥤ D) [E.Additive] (adj : E ⊣ R) (p : CochainComplex A ℤ → Prop) where
@@ -105,7 +105,7 @@ structure SystemLeftExtensionDerivation
           R.mapDerivedCategoryFactors.inv.app K
 
 /-- Include the fixed ordinary adjunction in its derived package.
-Source: Stacks 06XN (blueprint: lem-pur-normalized-left-extension). -/
+Source: Stacks 06XN. -/
 def SystemLeftExtensionDerivation.toExtension
     {R : D ⥤ A} [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     {E : A ⥤ D} [E.Additive] {adj : E ⊣ R} {p : CochainComplex A ℤ → Prop}
@@ -125,7 +125,6 @@ def SystemLeftExtensionDerivation.toExtension
 /-- Derive an additive left adjoint on any resolving class on which it preserves
 quasi-isomorphisms, retaining the representative-normalized derived transpose.
 Source: Stacks 06XN, 09T5 and 0FND
-(blueprint: lem-pur-normalized-left-extension).
 Proof: pass the resolving class to the homotopy category. The resolving-class theorem
 constructs the pointwise universal left derived pair, triangulated and computing on
 the class. Transfer its pointwise Kan property through the full essentially surjective

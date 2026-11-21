@@ -26,7 +26,6 @@ namespace DerivedCategory
 # Direct summands of pseudo-coherent complexes
 
 Source: literature/stacks-project/more-algebra.tex, Tags 064X and 064U
-(blueprint: lem-pc-ring-pseudo-coherent-summand).
 -/
 
 private theorem mPseudoCoherent_of_homology_map {R : Type u} [CommRing R]
@@ -83,8 +82,7 @@ the split triangles `K → K ⊞ L → L` and `L → L ⊞ K → K`, together wi
 `isMPseudoCoherent_of_distinguished_triangle`, make both `n`-pseudo-coherent.
 The original witness gives `n`-pseudo-coherence of the middle terms whenever `m ≤ n`.
 This is a simultaneous degree descent in place of the shift descent of Tag 064X.
-Source: Stacks Project, More on Algebra, Tag 064X.
-(blueprint: lem-pc-ring-pseudo-coherent-summand) -/
+Source: Stacks Project, More on Algebra, Tag 064X. -/
 theorem mPseudoCoherent_summand {R : Type u} [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)] (m : ℤ)
     (K L : DerivedCategory (ModuleCat.{v} R))
@@ -139,8 +137,7 @@ Proof (node): stupid truncations of a bounded-above finite free model show `K �
 `m`-pseudo-coherent for every `m`, hence so are `K` and `L` by the first clause, and an
 object that is `m`-pseudo-coherent for every `m` has a bounded-above finite free model,
 built downward degree by degree (Stacks, Tag 064U).
-Source: Stacks Project, More on Algebra, Tags 064X and 064U.
-(blueprint: lem-pc-ring-pseudo-coherent-summand) -/
+Source: Stacks Project, More on Algebra, Tags 064X and 064U. -/
 theorem pseudoCoherent_summand {R : Type u} [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)]
     (K L : DerivedCategory (ModuleCat.{v} R))

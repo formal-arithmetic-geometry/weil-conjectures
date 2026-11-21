@@ -219,7 +219,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- Restriction transports evaluation to a cycle-compatible evaluation on the over site.
 
 Source: Stacks Project, Tags 0A8X (Hom differential) and 08DL (open restriction).
-(blueprint: new-e3-homology-evaluation-restriction-comparison).
 
 Proof: Write F for restriction to V followed by restriction to the site over W.
 Both restrictions are exact and preserve products. Construct the comparison

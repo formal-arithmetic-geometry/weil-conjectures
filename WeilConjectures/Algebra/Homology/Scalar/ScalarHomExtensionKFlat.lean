@@ -37,7 +37,6 @@ attribute [local irreducible] monoidalCategory
 
 /-- Scalar extension preserves K-flatness without any flat-term assumption.
 Source: Stacks 05V4 (tensor cancellation) and 0G7E (K-flat pullback)
-(blueprint: lem-sfb-scalar-extension-kflat).
 Proof: restriction is exact and reflects exactness on underlying abelian sheaves.
 For any acyclic S-complex Z, restriction of Tot(Z tensor_S E(P)) is naturally
 isomorphic to Tot(U(Z) tensor_R P), by the balanced tensor cancellation map
@@ -137,7 +136,6 @@ private theorem kflatOfScalarExtensionIdentification
 
 /-- Scalar extension preserves K-flatness without any flat-term assumption.
 Source: Stacks 05V4 (tensor cancellation) and 0G7E (K-flat pullback)
-(blueprint: lem-sfb-scalar-extension-kflat).
 Proof: restriction is exact and reflects exactness on underlying abelian sheaves.
 For any acyclic S-complex Z, restriction of Tot(Z tensor_S E(P)) is naturally
 isomorphic to Tot(U(Z) tensor_R P), by the balanced tensor cancellation map

@@ -10,8 +10,7 @@ public import WeilConjectures.Algebra.Homology.AffineTensorPullbackStalkCoordina
 
 /-! # AffineOrdinaryTensorStalkCoordinates
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-ordinary-tensor-stalk-coordinates). -/
+Source: Stacks Project, Tag 0DJ8. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -74,7 +73,6 @@ variable [∀ Y : Scheme.{u},
 
 /-- Localization of ordinary cohomology into the stalk complex of its tilde.
 Source: Stacks Project, Tags 01I9 and 01AG.
-(blueprint: lem-pc-affine-ordinary-tensor-stalk-coordinates).
 Constructed from the tilde stalk localization, exact tilde homology and exact stalks. -/
 def affineTildeHomologyLocalization
     (D : Type u) [CommRing D] (C : CochainComplex (ModuleCat.{u} D) ℤ)
@@ -140,7 +138,6 @@ set_option maxHeartbeats 200000 in
 -- Normalize the stalk, scalar-extension and homology functor identifications.
 /-- The ordinary tensor target has canonical stalk-complex coordinates.
 Source: Stacks Project, Tags 01I9, 01HV, 01AG and 0DJ8.
-(blueprint: lem-pc-affine-ordinary-tensor-stalk-coordinates).
 
 Proof: exact tilde homology and exact stalks give affineTildeHomologyLocalization.
 The tensor-pullback/tilde natural isomorphism identifies T with tilde C. Take its

@@ -123,7 +123,6 @@ private theorem commutativeRingLift (B : Sheaf J RingCat.{max a v r})
 /-- A scalar-restriction resolution is a quasi-isomorphism on sections over every object.
 Source: Stacks Project, Cohomology on Sites, Tag 0D6E, applied on the slice over U;
 Modules on Sites, Tags 03DI and 03DJ, for exact extension by zero and slice restriction.
-(blueprint: lem-coef-restriction-sections-evaluation-acyclic).
 
 Proof: retain commutativity on B and D without changing the underlying ring sheaves.
 Restrict I, K and j to the slice over U. Exact slice restriction preserves the

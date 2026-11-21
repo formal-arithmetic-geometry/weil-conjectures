@@ -18,7 +18,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 /-- The equal-endpoint case of the nested-cutoff comparison; both sides are zero.
 Source: Stacks Project, Homology, Section 12.15, tag 0118, canonical cochain
 truncations (https://stacks.math.columbia.edu/tag/0118).
-(blueprint: lem-sp-vertical-cutoff-column-quasiiso-equal)
 
 Proof: the cutoff inclusion is degreewise monic, so its compatibility with g forces
 g to be the identity. Its cokernel is therefore zero. The lower smart truncation

@@ -16,8 +16,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplex
 /-! # Invertibility of the flat-resolution comparison
 
 The ordinary principal-quotient counit is invertible on complexes with regular terms,
-and exact sections of flat sheaves have regular terms.
-(blueprint: lem-pod-principal-reduction-flat-comparison) -/
+and exact sections of flat sheaves have regular terms. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -111,8 +110,7 @@ flat-term ordinary K-flat complex; principal quotient preserves the augmentation
 quasi-isomorphism because t is injective on both complexes. Naturality transfers the
 invertible tensor counit from that resolution to the section complex. All remaining
 factors of alpha are the quotient-section isomorphism and localization isomorphisms.
-Source: Stacks Tags 06Y6 and 06YY, blueprint steps 3--9.
-(blueprint: lem-pod-principal-reduction-flat-comparison) -/
+Source: Stacks Tags 06Y6 and 06YY, blueprint steps 3--9. -/
 theorem alpha_isIso [IsDomain R] (ht : D.t ≠ 0)
     (P : CochainComplex
       (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J D.O)) ℤ)

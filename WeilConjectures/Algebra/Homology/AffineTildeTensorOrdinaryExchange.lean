@@ -17,7 +17,6 @@ import all WeilConjectures.Algebra.Homology.AffineTildeTensorOrdinaryExchangePre
 /-! # Ordinary affine exchange in tensor coordinates
 
 Source: Stacks Project, Tags 01I9, 06Y6 and 08HY.
-(blueprint: lem-pc-affine-tilde-tensor-ordinary-exchange).
 -/
 
 @[expose] public section
@@ -53,8 +52,7 @@ local instance ordinaryExchangePullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The ordinary coefficient map, affine pushforward comparison and derived unit.
 This is a concrete map, independent of any derived scalar-extension model.
-Source: Stacks Project, Tags 06Y6 and 08HY.
-(blueprint: lem-pc-affine-tilde-tensor-ordinary-exchange). -/
+Source: Stacks Project, Tags 06Y6 and 08HY. -/
 def affineTildeTensorOrdinaryTargetMap
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B]
@@ -84,7 +82,6 @@ def affineTildeTensorOrdinaryTargetMap
 /-- Ordinary exchange, in unit-normalized affine tensor coordinates, followed by
 its right-derived unit. This is independent of any derived tensor model or counit.
 Source: Stacks Project, Tags 01I9, 06Y6 (coefficient map) and 08HY (ordinary exchange).
-(blueprint: lem-pc-affine-tilde-tensor-ordinary-exchange).
 
 Proof: on each term, transpose ordinary exchange under tensor pullback along f'.
 The defining ordinary mate is pushforward of the p-pullback unit followed by

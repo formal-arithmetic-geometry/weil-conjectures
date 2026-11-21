@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.HomComplexResolutionShiftComparison
 /-! # Right-argument shift comparison for internal derived Hom
 Source: Stacks Project, Cohomology on Sites, Section 21.34 (Tag 0A8X)
 and Section 21.35 (Tag 08JA); the signed shift calculation is written here.
-(blueprint: lem-pur-derived-internal-hom-shift-right).
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ quasi-isomorphism invariance makes it independent of the representative and
 natural for all derived morphisms. All integers n are allowed, including zero,
 and the construction preserves zero complexes.
 Source: Stacks Project, sites-cohomology.tex, Sections 21.34 and 21.35,
-Tags 0A8X and 08JA.
-(blueprint: lem-pur-derived-internal-hom-shift-right) -/
+Tags 0A8X and 08JA. -/
 theorem derivedInternalHom_shift_right
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})

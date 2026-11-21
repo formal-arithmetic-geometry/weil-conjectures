@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 # Tensor transport along a semilinear additive equivalence
 
 Source: Stacks Project, Sheaves, Tag 0098, balanced tensor construction.
-(blueprint: lem-pc-ringed-inverse-image-stalk-scalar-transport-beta).
 -/
 
 @[expose] public section
@@ -38,8 +37,7 @@ Apply the forward compatibility to e inverse(s) and c inverse(n) and cancel c
 to prove inverse compatibility. The resulting balanced maps are B-linear because
 B acts by multiplication on the first factor. The two composites fix every pure
 tensor; tensor induction proves they are identities. Zero rings and modules
-satisfy the same equations. No flatness is required.
-(blueprint: lem-pc-ringed-inverse-image-stalk-scalar-transport-beta). -/
+satisfy the same equations. No flatness is required. -/
 theorem exists_inverseImage_stalk_scalar_transport_beta
     {R S B : Type u} [CommRing R] [CommRing S] [CommRing B]
     (k : R →+* S) (hk : Function.Bijective k) (ψ : S →+* B)

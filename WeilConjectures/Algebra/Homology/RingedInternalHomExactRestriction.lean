@@ -24,7 +24,6 @@ import WeilConjectures.CategoryTheory.SiteRelocalizationKInjective
 # Internal derived Hom calculus on small ringed sites
 
 Source: Stacks Project, Cohomology on Sites, Tags 08J9, 08JB and 08JC
-(auxiliary; not a blueprint node).
 
 The tensor functor is specified by its natural total-tensor comparison on K-flat
 representatives. Restriction uses Mathlib's slice functors and their induced functors
@@ -80,7 +79,6 @@ private theorem ringedSite_pushforward_colimits
 /-- The overFunctor slice restriction is additive.
 
 Source: Stacks Project, Tag 08JB, restriction to a localized ringed site.
-(auxiliary; not a blueprint node).
 
 Proof: Restriction evaluates a sectionwise linear natural transformation on the slice site.
     Addition of such transformations is sectionwise, so restriction preserves addition. -/
@@ -97,7 +95,6 @@ theorem ringedSite_overFunctor_additive
 /-- The overFunctor slice restriction preserves finite limits.
 
 Source: Stacks Project, Tag 08JB, restriction to a localized ringed site.
-(auxiliary; not a blueprint node).
 
 Proof: Kernels and finite products of module sheaves are computed sectionwise. Evaluation along
     the forgetful functor from the slice preserves these constructions. The ring transport in
@@ -112,7 +109,6 @@ theorem ringedSite_overFunctor_limits
 /-- The overFunctor slice restriction preserves finite colimits.
 
 Source: Stacks Project, Tag 08JB, restriction to a localized ringed site.
-(auxiliary; not a blueprint node).
 
 Proof: Finite sums are sectionwise and cokernels are sheafified sectionwise cokernels. Coverings
     of an object of a slice are exactly coverings of its domain with the given structural arrow.
@@ -128,7 +124,6 @@ theorem ringedSite_overFunctor_colimits
 /-- The overMap slice restriction is additive.
 
 Source: Stacks Project, Tag 08JB, restriction to a localized ringed site.
-(auxiliary; not a blueprint node).
 
 Proof: Restriction evaluates a sectionwise linear natural transformation on the slice site.
     Addition of such transformations is sectionwise, so restriction preserves addition. -/
@@ -145,7 +140,6 @@ theorem ringedSite_overMap_additive
 /-- The overMap slice restriction preserves finite limits.
 
 Source: Stacks Project, Tag 08JB, restriction to a localized ringed site.
-(auxiliary; not a blueprint node).
 
 Proof: Kernels and finite products of module sheaves are computed sectionwise. Evaluation along
     the forgetful functor from the slice preserves these constructions. The ring transport in
@@ -160,7 +154,6 @@ theorem ringedSite_overMap_limits
 /-- The overMap slice restriction preserves finite colimits.
 
 Source: Stacks Project, Tag 08JB, restriction to a localized ringed site.
-(auxiliary; not a blueprint node).
 
 Proof: Finite sums are sectionwise and cokernels are sheafified sectionwise cokernels. Coverings
     of an object of a slice are exactly coverings of its domain with the given structural arrow.
@@ -188,7 +181,6 @@ with successive restrictions. The comparison for V to U, followed by transport
 along the canonical derived overFunctorMap, equals direct restriction to V.
 
 Source: Stacks Project, Tag 08JB (lemma-restriction-RHom-to-U).
-(auxiliary; not a blueprint node).
 
 Proof: Represent M by a K-injective I and L by A. The sections of Hom(A,I) restricted to U, over
     each arrow W to U, are the same families of local maps as the sections of Hom(A restricted to
@@ -316,7 +308,6 @@ and commutes with shifts. The first variable is a functor from the opposite
 triangulated category, whose shift by m is the original shift by -m.
 
 Source: Stacks Project, Tag 08JC (lemma-RHom-triangulated).
-(auxiliary; not a blueprint node).
 
 Proof: For the first variable fix a K-injective I representing M. The graded splitting of the cone
     gives Hom(C(f),I) as Hom(B,I) plus Hom(A[1],I). Put X=Hom(B,I), Y=Hom(A,I), h=f*. In degree n

@@ -14,7 +14,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Balanced contraction on sheaf tensors
 
 Source: Stacks Project, Cohomology, Tag 08DE, proof.
-(blueprint: lem-pc-balanced-sheaf-tensor-contraction)
 -/
 
 @[expose] public section
@@ -164,8 +163,7 @@ tensorObjIsoSheafification.inv to obtain an isomorphism onto M tensor_B E. Restr
 this isomorphism, invert it and the preceding coefficient comparison, and compose with
 R-sheafification of the presheaf contraction and tensorObjIsoSheafification.inv.
 Naturality of both units gives the claimed section formula. No inverse identity for
-the forward map is asserted here. Zero rings, zero modules and empty spaces are included.
-(blueprint: lem-pc-balanced-sheaf-tensor-contraction) -/
+the forward map is asserted here. Zero rings, zero modules and empty spaces are included. -/
 theorem exists_balancedTensorContraction (α : R ⟶ B)
     (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 R)) :
     ∃ ψ : (restrictScalars (𝓻 α)).obj

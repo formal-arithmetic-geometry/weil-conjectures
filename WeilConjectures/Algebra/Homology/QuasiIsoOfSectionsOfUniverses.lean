@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 # Detecting quasi-isomorphisms through sections
 
 Source: Stacks Project, sites-cohomology.tex, proof of Lemma 0A95
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace CategoryTheory
 
 /-- Sectionwise quasi-isomorphisms induce quasi-isomorphisms of module sheaves.
 Source: Stacks Project, sites-cohomology.tex, proof of Lemma 0A95
-(auxiliary; not a blueprint node).
 
 Proof: forget the module structure and view the complexes as complexes of presheaves of
 abelian groups. Evaluation at each site object is exact and jointly detects their cohomology

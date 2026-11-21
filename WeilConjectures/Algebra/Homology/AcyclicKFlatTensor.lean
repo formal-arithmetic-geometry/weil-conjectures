@@ -66,8 +66,7 @@ The signed symmetry sends the (p,q) summand by (-1)^(pq) times the module braidi
 and identifies this with Tot(P ⊗ K). It is a chain isomorphism because
 (p+1)q = pq+q and p+p(q+1) = pq modulo two. Thus the quasi-isomorphism
 Tot(P ⊗ K) → Tot(F ⊗ K) transports vanishing of every homology object.
-This also covers F = 0 and K = 0 without any nonzero hypothesis.
-(blueprint: lem-pur-acyclic-kflat-tensor-arbitrary) -/
+This also covers F = 0 and K = 0 without any nonzero hypothesis. -/
 theorem tensor_acyclic_of_isKFlat
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {O : Sheaf J CommRingCat.{u}}

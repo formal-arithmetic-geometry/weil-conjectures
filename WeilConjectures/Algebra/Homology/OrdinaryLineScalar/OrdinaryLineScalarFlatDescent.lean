@@ -227,7 +227,6 @@ private theorem flat_restriction_fullyFaithful :
 set_option linter.flexible false in
 /-- Descend a fixed ordinary comparison with exact signed-line tensors.
 Source: Stacks 06YY and 07A4, via resolving-class localization 06YS and 06YU.
-(blueprint: lem-pur-ordinary-line-scalar-flat-descent).
 Proof: restrict both composite functors to flat-term K-flat complexes. The scalar
 computation maps are invertible there by the universal derived scalar computation;
 line tensors are computed termwise. Tensoring by a line preserves flat-term K-flat

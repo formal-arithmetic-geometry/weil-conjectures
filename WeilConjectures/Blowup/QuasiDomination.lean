@@ -27,17 +27,14 @@ extension theorem `AlgebraicGeometry.exists_admissibleBlowup_extend_section`.
 - `AlgebraicGeometry.QuasiDomination`: the data of a quasi-domination of `X` over `Y`;
 - `AlgebraicGeometry.QuasiDomination.graph`: the graph `U ⟶ Y ×ₛ X` of a quasi-domination;
 - `AlgebraicGeometry.QuasiDomination.Extends`: a quasi-domination extends a morphism defined
-  on a smaller open (blueprint: `definition-quasi-domination--1`).
+  on a smaller open.
 
 ## Main results
 
 - `AlgebraicGeometry.QuasiDomination.of_isSeparated`: a morphism to a separated target is a
-  quasi-domination of its own source (blueprint:
-  `corollary-extension-proper-target--1`);
+  quasi-domination of its own source;
 - `AlgebraicGeometry.QuasiDomination.U_eq_top`: a quasi-domination over a universally closed
-  target is defined everywhere (blueprint:
-  `lemma:nagata-conrad-quasi-domination-proper-target`).
-
+  target is defined everywhere.
 -/
 
 @[expose] public section

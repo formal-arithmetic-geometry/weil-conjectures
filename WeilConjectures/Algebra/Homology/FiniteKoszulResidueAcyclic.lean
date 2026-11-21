@@ -37,7 +37,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 
 Source: Stacks Project, more-algebra.tex, Tags 0G1T and 0G1U;
 algebraization.tex, Tag 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -54,7 +53,6 @@ There is no completeness, boundedness or Noetherian hypothesis on the input comp
 Source: Stacks Project, more-algebra.tex, Tag 0G1T, lemma-derived-vanishing-mod-I,
 and the finite-stage calculation in Tag 0G1U, lemma-derived-complete-zero-bis;
 algebraization.tex, Tag 0A0E, identifies the dual positive complex with the negative model.
-(auxiliary; not a blueprint node).
 
 Proof: replace P by a termwise-flat K-flat complex. The specified derived extension
 comparison makes its scalar extension along q acyclic; scalar extension preserves

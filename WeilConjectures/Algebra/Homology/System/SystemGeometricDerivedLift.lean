@@ -44,7 +44,6 @@ variable (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)
 
 /-- Lift an already specified ordinary singleton comparison to derived categories.
 Source: Zheng, base-change sentence before Lemma 4.10, printed p. 23; Stacks 0FND.
-(blueprint: lem-pur-system-geometric-derived-lift).
 
 Proof: Localize the exact evaluation square using the exact-functor compositor.
 Flat-term K-flat resolutions exist at each coefficient level, and geometric inverse

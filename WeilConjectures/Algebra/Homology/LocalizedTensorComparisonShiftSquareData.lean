@@ -42,8 +42,7 @@ constructions from mK, e and the uniquely determined derived shift map. At j=i+n
 identifies the source with mK.cohomology i; extension to C gives eS. The counit shift equation,
 comparison_eq and localized_eq give the displayed equation with the prescribed homology
 shift map. No arbitrary existence witness is chosen. The construction works for n=0,
-zero complexes and any complex isomorphism e, without flatness hypotheses.
-(blueprint: lem-pc-localized-tensor-comparison-shift-square-data). -/
+zero complexes and any complex isomorphism e, without flatness hypotheses. -/
 theorem exists_shift_square_data
     (K L : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ) (e : L ≅ K⟦-n⟧)
     (mK : BaseDerivedTensorCohomologyModel R A B K C) (i : ℤ) :

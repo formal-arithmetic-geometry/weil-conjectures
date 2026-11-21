@@ -23,8 +23,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [EssentiallySmall.{w} C]
 
 /-- A scalar model already has all normalized extension data. Its resolving class
-is the class of K-flat complexes. Source: Stacks 06YY and 0FND
-(blueprint: lem-pur-system-scalar-derived-extension). -/
+is the class of K-flat complexes. Source: Stacks 06YY and 0FND -/
 def systemScalarModelExtension {R S : Sheaf J CommRingCat.{w}} {φ : R ⟶ S}
     (A : SystemScalarModel φ) :
     SystemDerivedLeftExtension

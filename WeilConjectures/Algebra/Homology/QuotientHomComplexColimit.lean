@@ -127,7 +127,6 @@ private def quotientHomCocone {R : Type u} [CommRing R] (J : Ideal R)
 /-- Taking the colimit of the complexes `Hom(R/J^n,K)` gives the ideal-power
  torsion subcomplex of `K`.
 Source: Stacks Project, Tag 0954, proof of Lemma 47.8.2.
-(blueprint: lem-sbc-quotient-hom-complex-colimit).
 
 Proof: In each degree, evaluation of a linear map at the class of 1 identifies
 `Hom(R/J^n,K^k)` with the submodule annihilated by `J^n`. The quotient transition

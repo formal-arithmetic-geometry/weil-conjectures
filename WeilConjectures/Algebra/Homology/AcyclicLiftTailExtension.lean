@@ -48,7 +48,6 @@ structure AcyclicLiftTail (R : Type u) [CommRing R] (I : Ideal R)
 /-- Extend a finite projective lift tail by one degree.
 
 Source: Stacks Project, Tag 0BC9, proof, the split-tail and next-term construction
-(blueprint: lem-sc-acyclic-lift-tail-extension).
 
 Proof: Starting at degree b, split the surjections onto cycles using projectivity.
 Descending through the finite tail identifies each term with the sum of its cycle

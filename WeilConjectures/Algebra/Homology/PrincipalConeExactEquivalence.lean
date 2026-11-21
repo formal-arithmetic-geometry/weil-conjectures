@@ -7,8 +7,7 @@ module
 public import WeilConjectures.Algebra.Homology.PrincipalConeTower
 import all WeilConjectures.AlgebraicGeometry.IntegralDerivedOperationsOnSlices
 /-! # Exact equivalences preserve principal cone completion and its unit
-Source: Stacks Tags 0941 and 0A0E.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 0941 and 0A0E. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -226,7 +225,6 @@ private theorem principalLevelIso_step {P : CochainComplex A ℤ} (μ : End P) (
 
 /-- An additive equivalence preserves the principal completion and its specified unit.
 Source: Stacks Tags 0941 and 0A0E.
-(auxiliary; not a blueprint node).
 Proof: identify each finite mapping cone with the cone of the image endomorphism.
 The comparison preserves its two inclusions, hence the transition squares and the
 augmentation. The product comparison intertwines one minus the transition shift.

@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 # Coproducts of flat sheaves of modules
 
 Source: Stacks Project, Modules on Sites, Lemma 18.28.5, Tag 03EU, clause (2)
-(blueprint: lem-pc-sites-modules-coproduct-flat).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace SheafOfModules
 is flat, including the empty coproduct.
 
 Source: Stacks Project, Modules on Sites, Lemma 18.28.5, Tag 03EU, clause (2)
-(blueprint: lem-pc-sites-modules-coproduct-flat).
 
 Proof:
 1. The site is already small by the universe hypotheses. The source theorem

@@ -82,8 +82,7 @@ lemma blowupRestrictIso_inv_comp {U V : X.affineOpens} (hUV : U ≤ V) :
 /-- **The basic-overlap comparison isomorphism** `ω_{ij,U} = r_{j,U} ∘ r_{i,U}⁻¹` between the
 parts of the local blow-ups over `V_i` and over `V_j` lying over an affine open `U ⊆ V_i ∩ V_j`.
 The blueprint takes `U = D(s)` basic, where `r_{i,U}` is an isomorphism onto the preimage by
-`isPullback_blowupNatTrans_of_basicOpen`. Here `U` may be any affine open.
-(blueprint: `definition-admissible-blow-up--1`) -/
+`isPullback_blowupNatTrans_of_basicOpen`. Here `U` may be any affine open. -/
 noncomputable def blowupOverlapIso {U Vi Vj : X.affineOpens} (hi : U ≤ Vi) (hj : U ≤ Vj) :
     (I.blowupOverlapOpen hi : Scheme.{u}) ≅ I.blowupOverlapOpen hj :=
   (I.blowupRestrictIso hi).symm ≪≫ I.blowupRestrictIso hj
@@ -120,23 +119,20 @@ lemma blowupOverlapIso_hom_structure {U Vi Vj : X.affineOpens} (hi : U ≤ Vi) (
   rw [blowupOverlapIso_hom_ι_assoc, blowupFunctor_map_blowupNatTrans_app,
     ← blowupRestrictIso_inv_comp, Category.assoc, blowupFunctor_map_blowupNatTrans_app]
 
-/-- The overlap isomorphism of a chart with itself is the identity.
-(blueprint: `definition-admissible-blow-up--1`) -/
+/-- The overlap isomorphism of a chart with itself is the identity. -/
 @[simp]
 lemma blowupOverlapIso_self {U V : X.affineOpens} (h : U ≤ V) :
     I.blowupOverlapIso h h = Iso.refl _ :=
   Iso.symm_self_id _
 
-/-- The overlap isomorphism from chart `i` to chart `j` is inverse to the one from `j` to `i`.
-(blueprint: `definition-admissible-blow-up--1`) -/
+/-- The overlap isomorphism from chart `i` to chart `j` is inverse to the one from `j` to `i`. -/
 lemma blowupOverlapIso_symm {U Vi Vj : X.affineOpens} (hi : U ≤ Vi) (hj : U ≤ Vj) :
     (I.blowupOverlapIso hi hj).symm = I.blowupOverlapIso hj hi :=
   Iso.ext rfl
 
 /-- **Cocycle condition**: `ω_{jk,U} ∘ ω_{ij,U} = ω_{ik,U}` over an affine open `U` contained
 in `V_i ∩ V_j ∩ V_k`. Together with `blowupOverlapIso_independent` this gives the cocycle
-condition on triple overlaps covered by such opens.
-(blueprint: `definition-admissible-blow-up--1`) -/
+condition on triple overlaps covered by such opens. -/
 @[simp]
 lemma blowupOverlapIso_trans {U Vi Vj Vk : X.affineOpens} (hi : U ≤ Vi) (hj : U ≤ Vj)
     (hk : U ≤ Vk) :
@@ -152,8 +148,7 @@ lemma blowupOverlapOpen_mono {W U V : X.affineOpens} (hWU : W ≤ U) (hUV : U �
 
 /-- **Independence of the refinement**: for affine opens `W ≤ U ≤ V_i ∩ V_j`, the overlap
 isomorphism over `U` restricts on the part over `W` to the overlap isomorphism over `W`. Hence
-overlap isomorphisms constructed from two refinements agree on their intersection.
-(blueprint: `definition-admissible-blow-up--1`) -/
+overlap isomorphisms constructed from two refinements agree on their intersection. -/
 lemma blowupOverlapIso_independent {W U Vi Vj : X.affineOpens} (hWU : W ≤ U) (hi : U ≤ Vi)
     (hj : U ≤ Vj) :
     (I.blowupFunctor.obj Vi).homOfLE (I.blowupOverlapOpen_mono hWU hi) ≫

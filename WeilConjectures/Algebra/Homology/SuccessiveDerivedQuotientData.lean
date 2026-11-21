@@ -14,7 +14,6 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 07A6, 0D6D;
 sites-modules.tex, Tags 03D7 and 03EK.
-(auxiliary; not a blueprint node).
 
 These definitions are extracted, without changing their data, from the successive
 normalization theorem module. They package the canonical ordinary scalar extension,
@@ -34,18 +33,18 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
 
 /-- The existing module-sheaf category, with no new objects or morphisms.
-Source: Stacks 03D7 (auxiliary; not a blueprint node). -/
+Source: Stacks 03D7. -/
 abbrev Modules (R : Sheaf J CommRingCat.{r}) :=
   ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)
 
 /-- The existing restriction-of-scalars functor.
-Source: Stacks 03D7 (auxiliary; not a blueprint node). -/
+Source: Stacks 03D7. -/
 noncomputable abbrev restriction {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) :
     Modules S ⥤ Modules R :=
   restrictScalars ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map a)
 
 /-- The sheafification image of a sectionwise scalar-first pure tensor.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 noncomputable def pure {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S)
     (M : Modules R) (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
     (changeOfRings a M).val.obj U :=
@@ -58,7 +57,7 @@ variable [hD : ∀ R : Sheaf J CommRingCat.{r}, HasDerivedCategory.{w} (Modules 
 map equations fix the ordinary functor, and the universal counit fixes the derived pair
 up to its unique compatible isomorphism. This bundles the interfaces of 06YY and 07A6;
 it introduces no alternative tensor product or derived-category construction.
-Source: Stacks 06YY, 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY, 07A6. -/
 structure Presentation {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) where
   /-- The ordinary, sheafified scalar-extension functor. -/
   ordinary : Modules R ⥤ Modules S
@@ -82,7 +81,7 @@ structure Presentation {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) where
 attribute [instance] Presentation.additive
 
 /-- A pure section of the presented ordinary extension, transported only by `obj_eq`.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 noncomputable def sectionTensor {R S : Sheaf J CommRingCat.{r}} {a : R ⟶ S}
     (p : Presentation a) (M : Modules R) (U : Cᵒᵖ) (s : S.obj.obj U)
     (x : M.val.obj U) : (p.ordinary.obj M).val.obj U :=
@@ -90,7 +89,7 @@ noncomputable def sectionTensor {R S : Sheaf J CommRingCat.{r}} {a : R ⟶ S}
 
 /-- The canonical coefficient-change square made from two composition comparisons.
 The equality is the commuting square of ring maps, not a chosen module comparison.
-Source: Stacks 0D6D (auxiliary; not a blueprint node). -/
+Source: Stacks 0D6D. -/
 noncomputable def squareComparison
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
     (δ : ∀ {R S T : Sheaf J CommRingCat.{r}} (a : R ⟶ S) (b : S ⟶ T),
@@ -103,8 +102,7 @@ noncomputable def squareComparison
 /-- The complete normalized, coherent family of successive extensions. The fields
 spell out the tensor formulas, their descent through the universal counits, the
 restriction identifications, the scalar-extension units, and coefficient naturality.
-Source: Stacks 0D6D, 0G7E, 06YY and 07A6
-(auxiliary; not a blueprint node). -/
+Source: Stacks 0D6D, 0G7E, 06YY and 07A6 -/
 structure Normalization
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a) where
   /-- The actual ordinary scalar-extension comparison, natural in the module. -/

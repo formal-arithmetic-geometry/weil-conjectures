@@ -13,8 +13,7 @@ import WeilConjectures.Algebra.Homology.OpenOverInternalHomCycleHomologySquares
 
 /-! # Restriction comparisons for the cycle-evaluation diagram
 
-Source: Stacks Project, Tags 0A8X and 08DL.
-(blueprint: new-v2-homology-evaluation-restriction-diagrams). -/
+Source: Stacks Project, Tags 0A8X and 08DL. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -42,7 +41,6 @@ map on homology.
 Source: Stacks Project, Tag 0A8X, the product differential of the Hom complex;
 Tag 08DL, restriction of internal Hom. This is steps 1 and 2 of
 new-e3-homology-evaluation-restriction-comparison, with the cycle comparisons explicit.
-(blueprint: new-v2-homology-evaluation-restriction-diagrams).
 
 Proof: Let F be restriction to V followed by localization over W. On each internal
 Hom factor use the local-map identification, first along the open-site equivalence

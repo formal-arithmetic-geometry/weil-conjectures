@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 # The canonical degree maps into the odd column quotient
 
 Source: Stacks Project, Tag 09KP, alternating column filtration.
-(blueprint: lem-pc-derived-total-filtration-odd-quotient-map)
 -/
 
 @[expose] public section
@@ -114,7 +113,6 @@ private lemma vertical_eq (j : ℕ) (k l : ℤ)
 
 /-- The full-column projection to the odd quotient is a chain map.
 Source: Stacks Project, Tag 09KP, proof of lemma-resolve, alternating filtration.
-(blueprint: lem-pc-derived-total-filtration-odd-quotient-map)
 
 Proof. Restrict the full-column inclusion to stage 2j+2. Its horizontal
 differential lands in an earlier full column in stage 2j+1 when j>0;

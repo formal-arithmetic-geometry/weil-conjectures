@@ -12,7 +12,7 @@ import Mathlib.CategoryTheory.Limits.Types.Pushouts
 
 /-! # Gluing a simplex to a simplicial subset
 Source: literature/stacks-project/simplicial.tex,
-Lemma 018R (auxiliary; not a blueprint node)
+Lemma 018R
 -/
 
 @[expose] public section
@@ -24,7 +24,7 @@ universe u
 namespace SSet
 
 /-- Adding one simplex to a simplicial subset is a pushout along its boundary.
-Source: Stacks Project, Lemma 018R (auxiliary; not a blueprint node).
+Source: Stacks Project, Lemma 018R.
 Proof:
 1. The simplex `x` is nondegenerate: a lower-dimensional ancestor belongs to `U` by
    `hbelow`, contradicting `hx`. A non-surjective map to `[n]` factors through a missing

@@ -17,7 +17,6 @@ public import Mathlib.Topology.Sheaves.Module
 
 Source: literature/stacks-project/sheaves.tex, Tag 00A7, clauses (2)--(4),
 and the presheaf construction preceding it.
-(blueprint: lem-sc-module-extension-by-zero-stalk-maps)
 -/
 
 @[expose] public section
@@ -44,7 +43,6 @@ identifies extension by zero with the identity; the top-open compatibility equat
 expresses `iota W X` as the counit in this encoding.
 
 Source: Stacks Project, Sheaves Tag 00A7, clauses (2)--(4), and Tag 00A5.
-(blueprint: lem-sc-module-extension-by-zero-stalk-maps)
 
 Proof: (1) Form the presheaf equal to `G` on opens contained in `W` and zero otherwise.
 Its module sheafification has the adjunction universal property

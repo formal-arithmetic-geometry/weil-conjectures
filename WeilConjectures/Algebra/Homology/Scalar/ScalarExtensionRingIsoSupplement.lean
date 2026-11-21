@@ -19,7 +19,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRi
 # Scalar extension along an isomorphism of ring sheaves
 
 Source: Stacks Project, Modules on Sites, Tags 03CZ, 03EK and 03CY
-(blueprint: lem-weil-sheaf-scalar-extension-ring-iso).
 
 The transported module functor is the existing restriction of scalars along the inverse.
 The tensor convention in the existing change-of-rings construction puts the scalar first:
@@ -192,7 +191,6 @@ private theorem scalarIsoSheaf_unit (c : R ≅ S)
 /-- Scalar extension along a ring-sheaf isomorphism is naturally the original abelian
 sheaf with action transported along its inverse, with both specified section formulas.
 Source: Stacks, Tags 03CZ, 03EK and 03CY
-(blueprint: lem-weil-sheaf-scalar-extension-ring-iso).
 
 Proof: (1) restriction of scalars along `c.inv` retains the abelian sheaf and all maps;
 its action is `s • x = c.inv(s) • x`, compatible with restrictions by naturality of

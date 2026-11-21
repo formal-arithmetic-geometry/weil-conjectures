@@ -11,7 +11,6 @@ public import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoher
 # The explicit scalar-extension map on internal duals
 
 Source: Stacks Project, Tags 03EK, 03EM, 04TT.
-(blueprint: lem-sp-scalar-extension-dual-evaluation).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ local notation:max "𝒪" R:arg => unit ((sheafCompose J (forget₂ CommRingCat 
 
 /-- scalarDual_section_ext: the scalar-extension evaluation construction.
 Source: Stacks Project, Tags 03EK and 04TT
-(blueprint: lem-sp-scalar-extension-dual-evaluation).
 The balanced section formula descends through the locally bijective sheafification
 unit on each slice. Equality on pure tensors proves linearity and naturality. -/
 theorem scalarDual_section_ext {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
@@ -74,7 +72,6 @@ theorem scalarDual_section_ext {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
 
 /-- scalarDualRawSection: the scalar-extension evaluation construction.
 Source: Stacks Project, Tags 03EK and 04TT
-(blueprint: lem-sp-scalar-extension-dual-evaluation).
 The balanced section formula descends through the locally bijective sheafification
 unit on each slice. Equality on pure tensors proves linearity and naturality. -/
 noncomputable def scalarDualRawSection {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
@@ -110,7 +107,6 @@ noncomputable def scalarDualRawSection {R S : Sheaf J CommRingCat.{u}} (α : R �
 
 /-- scalarDualSliceUnit: the scalar-extension evaluation construction.
 Source: Stacks Project, Tags 03EK and 04TT
-(blueprint: lem-sp-scalar-extension-dual-evaluation).
 The balanced section formula descends through the locally bijective sheafification
 unit on each slice. Equality on pure tensors proves linearity and naturality. -/
 noncomputable def scalarDualSliceUnit {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
@@ -120,7 +116,6 @@ noncomputable def scalarDualSliceUnit {R S : Sheaf J CommRingCat.{u}} (α : R �
 
 /-- scalarDualSliceUnit_locallyInjective: the scalar-extension evaluation construction.
 Source: Stacks Project, Tags 03EK and 04TT
-(blueprint: lem-sp-scalar-extension-dual-evaluation).
 The balanced section formula descends through the locally bijective sheafification
 unit on each slice. Equality on pure tensors proves linearity and naturality. -/
 instance scalarDualSliceUnit_locallyInjective {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
@@ -132,7 +127,6 @@ instance scalarDualSliceUnit_locallyInjective {R S : Sheaf J CommRingCat.{u}} (�
 
 /-- scalarDualSliceUnit_locallySurjective: the scalar-extension evaluation construction.
 Source: Stacks Project, Tags 03EK and 04TT
-(blueprint: lem-sp-scalar-extension-dual-evaluation).
 The balanced section formula descends through the locally bijective sheafification
 unit on each slice. Equality on pure tensors proves linearity and naturality. -/
 instance scalarDualSliceUnit_locallySurjective {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
@@ -144,7 +138,6 @@ instance scalarDualSliceUnit_locallySurjective {R S : Sheaf J CommRingCat.{u}} (
 
 /-- scalarDualBaseSection: the scalar-extension evaluation construction.
 Source: Stacks Project, Tags 03EK and 04TT
-(blueprint: lem-sp-scalar-extension-dual-evaluation).
 The balanced section formula descends through the locally bijective sheafification
 unit on each slice. Equality on pure tensors proves linearity and naturality. -/
 noncomputable def scalarDualBaseSection
@@ -157,7 +150,6 @@ noncomputable def scalarDualBaseSection
 
 /-- scalarDualBaseSection_tmul: the scalar-extension evaluation construction.
 Source: Stacks Project, Tags 03EK and 04TT
-(blueprint: lem-sp-scalar-extension-dual-evaluation).
 The balanced section formula descends through the locally bijective sheafification
 unit on each slice. Equality on pure tensors proves linearity and naturality. -/
 theorem scalarDualBaseSection_tmul
@@ -178,7 +170,6 @@ theorem scalarDualBaseSection_tmul
 
 /-- scalarDualBaseMap: the scalar-extension evaluation construction.
 Source: Stacks Project, Tags 03EK and 04TT
-(blueprint: lem-sp-scalar-extension-dual-evaluation).
 The balanced section formula descends through the locally bijective sheafification
 unit on each slice. Equality on pure tensors proves linearity and naturality. -/
 noncomputable def scalarDualBaseMap
@@ -247,7 +238,6 @@ noncomputable def scalarDualBaseMap
 
 /-- scalarExtensionDualMap: the scalar-extension evaluation construction.
 Source: Stacks Project, Tags 03EK and 04TT
-(blueprint: lem-sp-scalar-extension-dual-evaluation).
 The balanced section formula descends through the locally bijective sheafification
 unit on each slice. Equality on pure tensors proves linearity and naturality. -/
 noncomputable def scalarExtensionDualMap
@@ -262,7 +252,6 @@ noncomputable def scalarExtensionDualMap
 
 /-- scalarExtensionDualMap_tmul: the scalar-extension evaluation construction.
 Source: Stacks Project, Tags 03EK and 04TT
-(blueprint: lem-sp-scalar-extension-dual-evaluation).
 The balanced section formula descends through the locally bijective sheafification
 unit on each slice. Equality on pure tensors proves linearity and naturality. -/
 theorem scalarExtensionDualMap_tmul
@@ -289,7 +278,6 @@ theorem scalarExtensionDualMap_tmul
 
 /-- scalarExtensionDual_hom_ext: the scalar-extension evaluation construction.
 Source: Stacks Project, Tags 03EK and 04TT
-(blueprint: lem-sp-scalar-extension-dual-evaluation).
 The balanced section formula descends through the locally bijective sheafification
 unit on each slice. Equality on pure tensors proves linearity and naturality. -/
 theorem scalarExtensionDual_hom_ext
@@ -331,8 +319,7 @@ theorem scalarExtensionDual_hom_ext
         (Category.id_comp W.unop.hom) _))
 
 /-- The dual comparison evaluates by its balanced formula on every slice.
-Source: Stacks Project, Tag 04TT
-(blueprint: lem-sp-scalar-extension-dual-evaluation). -/
+Source: Stacks Project, Tag 04TT -/
 theorem scalarExtensionDualMap_tmul_slice
     [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}]
     [HasWeakSheafify J AddCommGrpCat.{max uC vC u}]

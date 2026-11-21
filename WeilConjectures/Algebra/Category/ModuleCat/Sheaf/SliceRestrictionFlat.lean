@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 # Flatness under restriction to a slice site
 
 Source: Stacks Project, Modules on Sites, Tag 0E8J, Lemma `lemma-restriction-flat`
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace SheafOfModules
 
 /-- Restricting a flat module sheaf to the slice site over any object preserves flatness.
 Source: Stacks Project, Modules on Sites, Tag 0E8J, Lemma `lemma-restriction-flat`
-(auxiliary; not a blueprint node).
 
 Proof:
 1. Given an exact three-term complex of modules on the slice, extend it by the

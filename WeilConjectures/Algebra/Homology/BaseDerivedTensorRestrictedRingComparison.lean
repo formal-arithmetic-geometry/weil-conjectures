@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorRingCounitSquare
 /-! # Derived tensor comparison after restriction to the second coefficient ring
 
 Source: Stacks Project, Tag 06Y6, Lemma 15.61.1, independence of choices.
-(blueprint: lem-pc-base-derived-tensor-restricted-ring-comparison).
 -/
 
 @[expose] public section
@@ -48,8 +47,7 @@ flatness or invertibility of comparison maps is used. Zero rings and complexes
 are permitted, and the maps to C₀ and C do not enter this argument.
 Source: Stacks Project, Tag 06Y6, Lemma 15.61.1, independence of choices and
 universal derived change of rings; localization uniqueness supplies the
-possibly different morphism universes.
-(blueprint: lem-pc-base-derived-tensor-restricted-ring-comparison). -/
+possibly different morphism universes. -/
 theorem exists_baseDerivedTensor_restricted_ring_comparison
     {R₀ A₀ B₀ C₀ R A B C : Type u}
     [CommRing R₀] [CommRing A₀] [CommRing B₀] [CommRing C₀]

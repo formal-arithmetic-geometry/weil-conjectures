@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.SignedLinePullbackConstruction.Shea
 public import Mathlib.Algebra.Category.Ring.Limits
 /-! # Constructing scalar actions from set inverse-image presentations
 Source: Stacks Project, Modules on Sites, Tag 03D2.
-(blueprint: lem-pur-signed-line-module-action-presentations).
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -33,7 +32,6 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   (M : SheafOfModules.{max u v w} A)
 /-- Transport the scalar operation, and test each module law on products of unit sections.
 Source: Stacks Project, Tag 03D2.
-(blueprint: lem-pur-signed-line-module-action-presentations).
 Proof: transport the source scalar-action morphism using the product of the two
 presentations. Naturality gives semilinear restrictions. Its defining equation on
 units gives unit linearity. Each module axiom is an equality of sheaf maps out of a

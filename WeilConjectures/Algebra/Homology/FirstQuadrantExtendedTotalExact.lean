@@ -72,7 +72,6 @@ private theorem shortExact_total_aux
 /-- Totalizing a short exact sequence in the first quadrant and extending by zero
 preserves short exactness.
 Source: Stacks Project, Homology, Tag 012X, total complex construction.
-(blueprint: lem-sp-first-quadrant-extended-total-exact)
 
 Proof: evaluate the short exact sequence in both indices. In total degree n >= 0,
 its maps are the direct sums of these maps over p + q = n. This is a finite set;

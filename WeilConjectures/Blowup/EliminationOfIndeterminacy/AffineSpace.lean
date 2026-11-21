@@ -14,7 +14,6 @@ public import WeilConjectures.Blowup.EliminationOfIndeterminacy.CommonDenominato
 
 Conrad's Theorem 2.4, Case 1, for a relative affine-space target over an affine base
 (`AlgebraicGeometry.exists_isAdmissible_extend_affineSpace`).
-(Blueprint: `lemma:nagata-conrad-affine-space-extension`.)
 -/
 
 @[expose] public section

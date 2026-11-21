@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.NatSplitFunctionalsHomotopy
 # Natural-degree unit cancellation as a homotopy equivalence
 
 Source: Stacks Project, Algebra, Tag 00MT, the splitting of the trivial complex.
-(blueprint: lem-weil-pbc-nat-unit-entry-homotopy-cancellation)
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ the original basis through the identification with the full submodule.
 Define `n'` to subtract one at `j+1` and `j`, and agree with `n` elsewhere.
 The indices `p` and `q` imply that both original sizes are positive, so the
 two asserted successor equations follow by natural-number arithmetic.
-This argument requires no augmentation, boundedness, or nontriviality.
-(blueprint: lem-weil-pbc-nat-unit-entry-homotopy-cancellation) -/
+This argument requires no augmentation, boundedness, or nontriviality. -/
 theorem exists_nat_homotopy_cancellation_of_isUnit_entry
     {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℕ)
     (n : ℕ → ℕ) (b : ∀ i : ℕ, Module.Basis (Fin (n i)) R (C.X i))

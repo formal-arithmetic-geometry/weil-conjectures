@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # The source coproduct for localized derived tensor comparison
 
-Source: Stacks Project, Tags 06Y6 and 0DJA(1).
-(blueprint: lem-pc-localized-comparison-coproduct-source). -/
+Source: Stacks Project, Tags 06Y6 and 0DJA(1). -/
 
 @[expose] public section
 
@@ -54,8 +53,7 @@ squares. Apply the extension/restriction adjunction to this equation; its
 naturality and localized_eq give the displayed equation. No exactness of
 extension to C is required: only its preservation of coproducts is used.
 Empty families give zero homology and the unique map between zero objects;
-zero rings and zero complexes are included by the same construction.
-(blueprint: lem-pc-localized-comparison-coproduct-source). -/
+zero rings and zero complexes are included by the same construction. -/
 theorem exists_localizedComparison_coproduct_source
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

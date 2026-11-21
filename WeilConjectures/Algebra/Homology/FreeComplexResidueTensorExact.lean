@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.FreeComplexResidueDegreeCancellation
 /-! # Residue exactness of a finite free complex is universal in one degree
 
 Source: Stacks Project, More on Algebra, Tags 068U and 068V.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -176,8 +175,7 @@ its homology in that degree is therefore zero. Localization is exact and commute
 with termwise tensor and homology. The principal neighborhoods cover the maximal
 spectrum, so exactness of the three-term sequence descends by localization.
 This argument uses only the three adjacent finite free terms, no boundedness.
-It includes the zero ring: exactness follows from the empty principal cover.
-(auxiliary; not a blueprint node). -/
+It includes the zero ring: exactness follows from the empty principal cover. -/
 theorem isZero_homology_tensor_of_residue
     {R : Type u} [CommRing R] (P : CochainComplex (ModuleCat.{u} R) ℤ)
     (hfree : ∀ j : ℤ, Module.Free R (P.X j))

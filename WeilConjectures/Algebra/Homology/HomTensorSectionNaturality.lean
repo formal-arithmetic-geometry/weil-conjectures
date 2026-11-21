@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 # Naturality of the canonical map to the sheaf tensor product
 
 Source: Stacks Project, Modules on Sites, Section 03EK.
-(blueprint: lem-sc-hom-tensor-section-natural)
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The canonical map from the presheaf tensor to the sheaf tensor is natural.
 Source: Stacks Project, Modules on Sites, Section 03EK (tensor product of sheaves),
 and the sheafification universal property of Lemma 03CY.
-(blueprint: lem-sc-hom-tensor-section-natural)
 
 Proof: Write S for module sheafification, eta for its unit and epsilon for its
 counit. The tensor comparison c(A,B) is the tensor of the inverses of the

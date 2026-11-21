@@ -78,7 +78,6 @@ import Mathlib.CategoryTheory.Limits.Types.Products
 
 Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E;
 Modules on Sites, Tag 03EL
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
 
 This is the general canonical representative interface, with a site-object universe s and an
 independent site-morphism universe h. Rings and modules live in max s h, as in the
@@ -122,7 +121,7 @@ variable {C D : Type s} [Category.{h} C] [Category.{h} D]
 open scoped ChangeOfRings
 
 /-- Bilinearity of the existing sheaf tensor, assembled from its additive tensor functors.
-Source: Stacks 03EK (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
+Source: Stacks 03EK.
 Proof: the additive tensorLeft and tensorRight functors of MonoidalFree give the
 four zero and addition laws of MonoidalPreadditive. Assemble those four laws. -/
 theorem ringedTensorPreadditive :
@@ -133,8 +132,7 @@ theorem ringedTensorPreadditive :
 /-- The ordinary tensor comparison with its pure-tensor characterization.
 The maps q insert 1 in scalar extension; the generalized-element equation fixes
 mu on the inverse images of all pure tensors, hence on their sheafification.
-Source: Stacks, Modules on Sites, 03EL
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks, Modules on Sites, 03EL -/
 abbrev CanonicalRingedTensorComparison :=
   CanonicalRingedTensorComparisonOnSmallSites.{max s h, s, h, s, h}
     R S RI uInv I c L hobj
@@ -421,7 +419,7 @@ private theorem comparison_subsingleton [PreservesFiniteLimits uInv]
   exact comparison_ext R S RI uInv I c L hobj a b hqq hmm
 
 /-- The pure-tensor conditions determine the ordinary comparison uniquely and are attainable.
-Source: Stacks 03EL (blueprint: def-pur-cochain-tensor-coherence-data).
+Source: Stacks 03EL.
 Proof: apply the ordinary comparison theorem to the given inverse-image lift.
 Its generalized-element normalization gives q and mu. Scalar-extension pure tensors
 generate after sheafification, giving uniqueness of q. Bilinear generalized pure tensors
@@ -468,7 +466,7 @@ private theorem normalizedComparison
 end TensorUniqueness
 
 /-- The pure-tensor conditions determine the ordinary comparison uniquely and are attainable.
-Source: Stacks 03EL (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
+Source: Stacks 03EL.
 Proof: apply the ordinary comparison theorem to the given inverse-image lift.
 Its generalized-element normalization gives q and mu. Scalar-extension pure tensors
 generate after sheafification, giving uniqueness of q. Bilinear generalized pure tensors
@@ -916,7 +914,6 @@ private theorem unitComparisonIso_insertion
 set_option backward.isDefEq.respectTransparency true in
 /-- The ordinary unit normalization of the canonical tensor comparison.
 Source: Stacks 03EL, pure tensors with the second factor the coefficient ring
-(blueprint: def-pur-cochain-tensor-coherence-data).
 Proof: scalar multiplication gives L(R) = S. On a generalized pure tensor m tensor r,
 both composites multiply by the image of r in S. Sheafification extends equality.
 The equation at M=R, together with the tensor unitors, uniquely determines j.
@@ -1097,7 +1094,6 @@ attribute [local semireducible] UnitConstruction.explicitRightUnitor
 
 /-- The ordinary unit normalization of the canonical tensor comparison.
 Source: Stacks 03EL, pure tensors with the second factor the coefficient ring
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
 Proof: scalar multiplication gives L(R) = S. On a generalized pure tensor m tensor r,
 both composites multiply by the image of r in S. Sheafification extends equality.
 The equation at M=R, together with the tensor unitors, uniquely determines j. -/
@@ -1126,7 +1122,7 @@ attribute [local instance 20000] cochainTensorLeftPreservesColimits
   cochainTensorRightPreservesColimits
 
 /-- Chain-level representative of the canonical comparison.
-Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks 07A4. -/
 noncomputable def CanonicalRingedTensorComparison.total [L.Additive]
     (k : CanonicalRingedTensorComparison R S RI uInv I c L hobj)
     (P Q : CochainComplex (SheafOfModules.{max s h} ((sheafCompose JC (forget₂ CommRingCat.{max s h}
@@ -1149,7 +1145,7 @@ noncomputable def CanonicalRingedTensorComparison.total [L.Additive]
 attribute [local irreducible] CanonicalRingedTensorComparison.total
 
 /-- The specified total comparison is an isomorphism.
-Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
+Source: Stacks 07A4.
 Proof: its summand maps are the inverse ordinary comparisons. Pullback is a left
 adjoint and preserves the coproducts defining total complexes. Thus each component
 is an isomorphism, and so is the chain map. -/
@@ -1171,7 +1167,7 @@ theorem CanonicalRingedTensorComparison.total_isIso [L.Additive]
   exact tensorPullbackTotal_isIso L k.mu k.naturality V am P Q
 
 /-- The canonical chain comparison as an isomorphism, with no arbitrary choice.
-Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks 07A4. -/
 noncomputable def CanonicalRingedTensorComparison.totalIso [L.Additive]
     (k : CanonicalRingedTensorComparison R S RI uInv I c L hobj)
     (V : SheafOfModules.{max s h} ((sheafCompose JD (forget₂ CommRingCat.{max s h}

@@ -38,8 +38,7 @@ noncomputable def finiteStripSourceInclusion
   else 0
 
 /-- The row cone's source and target inclusions into the ambient cone.
-Source: Stacks, Tag 0133; finite-strip cone refinement, step 3.
-(blueprint: def-sc-finite-strip-cone-graded-map) -/
+Source: Stacks, Tag 0133; finite-strip cone refinement, step 3. -/
 noncomputable def finiteStripRowInclusion
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))
     [K.HasTotal (ComplexShape.up ℤ)] (A : CochainComplex C ℤ)
@@ -56,7 +55,6 @@ noncomputable def finiteStripRowInclusion
 
 /-- The explicit row inclusion lands in the filtration tail.
 Source: Stacks, Tag 0133; finite-strip cone refinement, step 3.
-(blueprint: def-sc-finite-strip-cone-graded-map)
 Proof: the source generator belongs to the tail at `n+1=p`. The target generator
 has vertical index `p` and belongs to the tail whenever its horizontal index is
 in the strip. Outside the strip its source is zero. Add the two factorizations. -/
@@ -132,8 +130,7 @@ theorem finiteStripStep_image_isIso
 
 /-- The canonical surviving diagonal map to the graded object, constructed by
 factorization through the tail followed by its cokernel projection.
-Source: Stacks, Tag 0133; finite-strip cone refinement, step 3.
-(blueprint: def-sc-finite-strip-cone-graded-map) -/
+Source: Stacks, Tag 0133; finite-strip cone refinement, step 3. -/
 noncomputable def finiteStripGradedMap
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))
     [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)

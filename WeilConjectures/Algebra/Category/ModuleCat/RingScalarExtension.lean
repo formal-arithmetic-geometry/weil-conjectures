@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Adjunction.Lifting.Left
 
 Source: Stacks Project, Modules on Sites, Section 6.3, scalar extension construction;
 its balanced-tensor universal property
-(blueprint: def-pod-ring-scalar-extension).
 -/
 
 @[expose] public section
@@ -67,7 +66,6 @@ private noncomputable def largeFreeAdj (A : Type uR) [Ring A] :
 
 /-- Restriction of scalars has a left adjoint for arbitrary rings.
 Source: the balanced-tensor construction, Stacks Project, Modules on Sites, Section 6.3
-(blueprint: def-pod-ring-scalar-extension).
 Proof: the free-module/forgetful adjunction has surjective counit, since the
 basis vector at m maps to m. In the abelian category of modules this counit is a
 regular epimorphism. Restriction followed by forgetting is the forgetful functor
@@ -94,31 +92,27 @@ theorem isRightAdjoint_restrictScalars (f : R →+* S) :
 
 /-- The balanced tensor S tensor_R M, characterized as the left adjoint to restriction.
 The chosen data satisfy the full adjunction.
-Source: Stacks Project, Modules on Sites, Section 6.3
-(blueprint: def-pod-ring-scalar-extension). -/
+Source: Stacks Project, Modules on Sites, Section 6.3 -/
 noncomputable def ringExtendScalars (f : R →+* S) :
     ModuleCat.{max uR vC} R ⥤ ModuleCat.{max uR vC} S :=
   @Functor.leftAdjoint _ _ _ _ (restrictScalars f) (isRightAdjoint_restrictScalars f)
 
 /-- The universal property of the balanced tensor.
-Source: Stacks Project, Modules on Sites, Section 6.3
-(blueprint: def-pod-ring-scalar-extension). -/
+Source: Stacks Project, Modules on Sites, Section 6.3 -/
 noncomputable def ringExtendScalarsAdj (f : R →+* S) :
     ringExtendScalars.{uR, vC} f ⊣ restrictScalars f :=
   @Adjunction.ofIsRightAdjoint _ _ _ _ (restrictScalars f)
     (isRightAdjoint_restrictScalars f)
 
 /-- The pure tensor s tensor m is s times the universal image of m.
-Source: Stacks Project, Modules on Sites, Section 6.3
-(blueprint: def-pod-ring-scalar-extension). -/
+Source: Stacks Project, Modules on Sites, Section 6.3 -/
 noncomputable def ringExtensionTmul (f : R →+* S) (M : ModuleCat.{max uR vC} R)
     (s : S) (m : M) : (ringExtendScalars.{uR, vC} f).obj M :=
   s • (show (ringExtendScalars.{uR, vC} f).obj M from
     (ringExtendScalarsAdj.{uR, vC} f).unit.app M m)
 
 /-- The canonical comparison for composite scalar extensions, by adjoint uniqueness.
-Source: Stacks Project, Modules on Sites, Section 6.3
-(blueprint: def-pod-ring-scalar-extension). -/
+Source: Stacks Project, Modules on Sites, Section 6.3 -/
 noncomputable def ringExtensionComp {T : Type uR} [Ring T]
     (f : R →+* S) (g : S →+* T) :
     ringExtendScalars.{uR, vC} f ⋙ ringExtendScalars g ≅ ringExtendScalars (g.comp f) :=
@@ -135,8 +129,7 @@ variable {C : Type vC} [Category C] (J : GrothendieckTopology C)
   [HasWeakSheafify J (ModuleCat.{max uR vC} S)]
 
 /-- Scalar extension of module sheaves is the sheafification of sectionwise extension.
-Source: Stacks Project, Modules on Sites, Section 6.3
-(blueprint: def-pod-ring-scalar-extension). -/
+Source: Stacks Project, Modules on Sites, Section 6.3 -/
 noncomputable def Sheaf.ringExtendScalars (f : R →+* S) :
     Sheaf J (ModuleCat.{max uR vC} R) ⥤ Sheaf J (ModuleCat.{max uR vC} S) :=
   sheafToPresheaf J _ ⋙

@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 
 Source: the Weil conjectures blueprint, `prose-03-02`, order 663;
 Stacks Project, Cohomology on Sites, Tags 06YN, 06YS and 06YU
-(blueprint: prose-03-02).
 
 The constant sheaf is formed in commutative rings before forgetting to rings,
 so the recorded K-flat predicate and sheaf tensor product apply directly.
@@ -48,7 +47,7 @@ and differential `d_P ⊗ 1 + (-1)^p 1 ⊗ d_K₂`, mapped into the derived cate
 No independence-of-resolution theorem is asserted here.
 
 Source: blueprint `prose-03-02`, order 663; Stacks Project, Tags 06YN,
-06YS and 06YU (blueprint: prose-03-02). -/
+06YS and 06YU. -/
 noncomputable def derivedTensor
     (K₁ K₂ P : CochainComplex (SheafOfModules.{w + 1} 𝓢) ℤ)
     (_f : P ⟶ K₁) (_hf : QuasiIso _f)

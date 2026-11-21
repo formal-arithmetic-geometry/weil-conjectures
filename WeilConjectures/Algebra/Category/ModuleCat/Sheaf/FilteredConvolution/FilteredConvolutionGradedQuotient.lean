@@ -24,7 +24,6 @@ Source: latest blueprint, part-duality-trace-formula/sec-lefschetz-verdier/
 sec-trace-classes-and-the-lefschetz-verdier-formula/sec-additivity-of-trace-classes/
 sk-i-additivity/sk-i-additivity.proof.md,
 "Filtered operations", third graded identity and the sentence on Koszul signs
-(blueprint: lem-trf-filtered-convolution-graded-quotient).
 
 The helper predicates specify the convolution by its actual image sum and the comparison
 by its composites with tensor quotient projections. They impose no chosen splitting on Q
@@ -49,14 +48,12 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   {R : Sheaf J CommRingCat.{w}}
 
 /-- The recorded general-site module category, with coefficient-sized modules.
-Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations
-(blueprint: lem-trf-filtered-convolution-graded-quotient). -/
+Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations -/
 abbrev Modules (R : Sheaf J CommRingCat.{w}) :=
   ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
 
 /-- Integer cochain complexes in the recorded category of module sheaves.
-Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations
-(blueprint: lem-trf-filtered-convolution-graded-quotient). -/
+Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations -/
 abbrev Complex (R : Sheaf J CommRingCat.{w}) := CochainComplex (Modules R) ℤ
 
 /-- The convolution filtration level. -/
@@ -65,8 +62,7 @@ abbrev level {P Q : Complex R} (F : DecreasingFiltration P)
   FilteredConvolutionCore.level F G r
 
 /-- The direct sum of tensor products of the existing graded quotient complexes.
-Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations, third graded identity
-(blueprint: lem-trf-filtered-convolution-graded-quotient). -/
+Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations, third graded identity -/
 abbrev gradedSource {P Q : Complex R} (F : DecreasingFiltration P) (G : DecreasingFiltration Q)
     (r : ℤ) : Complex R :=
   ∐ (fun p : ℤ ↦ F.gradedPiece p ⊗ G.gradedPiece (r - p))
@@ -80,7 +76,6 @@ abbrev IsCanonical {P Q : Complex R} (F : DecreasingFiltration P)
 /-- The graded quotient of the convolution filtration, for a termwise split filtration
 with flat graded terms in the first factor and any finite filtration in the second.
 Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations, tensor identity
-(blueprint: lem-trf-filtered-convolution-graded-quotient).
 
 Proof:
 1. Sums in module sheaves are exact: express them as filtered colimits of finite sums.

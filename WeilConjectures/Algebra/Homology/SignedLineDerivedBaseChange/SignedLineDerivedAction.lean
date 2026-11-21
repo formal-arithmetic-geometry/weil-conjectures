@@ -44,7 +44,6 @@ variable
 /-- The normalized signed line family acts canonically on unbounded derived tensor.
 Source: Stacks Project, Tags 03EL, 0FNY, 06YQ, 06YU, 07A4 and 015F;
 Powers and duals, steps 8--11 of the signed-line base-change argument.
-(blueprint: lem-pur-signed-line-derived-action)
 Proof: restriction to a line chart shows that all positive powers and their
 duals are lines. Their evaluation maps are locally multiplication with the
 basis-dual inverse, and glue independently of the basis. Tensoring with each

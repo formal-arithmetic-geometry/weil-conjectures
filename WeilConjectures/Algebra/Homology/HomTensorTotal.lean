@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.HomTensorNaturality
 # Hom complexes and the total tensor complex
 
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1 (Tag 0A90)
-(blueprint: lem-sc-derived-hom-tensor-total).
 -/
 
 @[expose] public section
@@ -39,7 +38,7 @@ local notation "Mod" => SheafOfModules.{max u v}
 set_option synthInstance.maxSize 256 in
 /-- The Hom-total-tensor isomorphism, natural contravariantly in `K` and `L` and
 covariantly in `M`. Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1
-(Tag 0A90) (blueprint: lem-sc-derived-hom-tensor-total).
+(Tag 0A90).
 
 Proof:
 1. Expand the degree-`n` terms using `def-pur-hom-complex`. The left side is
