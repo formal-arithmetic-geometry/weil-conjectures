@@ -53,10 +53,9 @@ open Scheme PadicAlgCl CondensedRing
 variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
 
 /-- **The reductions of a locally free `𝒪_{E,X}`-module are finite locally constant étale
-sheaves.** Let `M` be a locally free
-`𝒪_{E,X}`-module on a Noetherian scheme `X` and `ϖ` a uniformiser of `𝒪_E`. The reduction
-`M/ϖⁿM` is, as a sheaf of abelian groups, the pullback `ν^* G` of a finite locally constant sheaf
-`G` of abelian groups on the small étale site of `X`. -/
+sheaves.** Let `M` be a locally free `𝒪_{E,X}`-module on a Noetherian scheme `X` and `ϖ` a
+uniformiser of `𝒪_E`. The reduction `M/ϖⁿM` is, as a sheaf of abelian groups, the pullback
+`ν^* G` of a finite locally constant sheaf `G` of abelian groups on the small étale site of `X`. -/
 theorem exists_isFiniteLocallyConstantSheaf_iso_of_isLocallyFree {X : Scheme.{u}}
     [IsNoetherian X]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

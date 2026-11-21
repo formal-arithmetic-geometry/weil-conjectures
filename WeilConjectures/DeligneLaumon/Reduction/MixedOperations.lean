@@ -8,15 +8,10 @@ module
 public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
 
 /-!
-# Mixedness under extensions and inverse images
+# Mixedness under extensions
 
-Two closure properties of mixed Weil sheaves:
-
-* an extension of mixed Weil sheaves is mixed
-  (`AlgebraicGeometry.WeilSheaf.IsMixed.of_shortExact`);
-* the inverse image along any morphism of `k₀`-schemes locally of finite type preserves mixed
-  upper weight bounds
-  (`AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_upperStar_obj`).
+An extension of mixed Weil sheaves is mixed
+(`AlgebraicGeometry.WeilSheaf.IsMixed.of_shortExact`).
 -/
 
 @[expose] public section
@@ -39,16 +34,5 @@ theorem IsMixed.of_shortExact {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k�
   let ⟨w₃, hw₃⟩ := h₃
   ⟨max w₁ w₃, (hw₁.mono_weight (le_max_left _ _)).of_shortExact hS
     (hw₃.mono_weight (le_max_right _ _))⟩
-
-/-- **Upper bounds under inverse image.** Pulling back along any morphism `φ : X ⟶ Y` of
-`k₀`-schemes locally of finite type carries Weil sheaves mixed of weights at most `w` to Weil
-sheaves mixed of weights at most `w`. -/
-theorem isMixedOfWeightsAtMost_upperStar_obj {X Y : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l Y} {w : ℝ}
-    (hF : F.IsMixedOfWeightsAtMost ι w) (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] :
-    ((WeilSheaf.upperStar φ).obj F).IsMixedOfWeightsAtMost ι w :=
-  hF.upperStar φ
 
 end AlgebraicGeometry.WeilSheaf
