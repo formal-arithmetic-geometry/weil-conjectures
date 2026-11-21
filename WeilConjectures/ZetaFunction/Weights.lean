@@ -33,6 +33,11 @@ morphism of `X₀` and the constant Weil sheaf, which is punctually pure of weig
   `H_c^i(X₀ ⊗ k̄, ℚ̄_ℓ)` has weights at most `i`.
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_cohomology_adicConstant`: `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`
   has weights at most `i` for `X₀` proper.
+- `WeilComplex.IsMixedOfWeightsAtMost.hasWeightsAtMostOver_compactlySupportedCohomology`:
+  for a Weil complex `K` mixed of weights at most `w`, `H_c^n(X₀ ⊗ k̄, K)` has weights at most
+  `w + n`.
+- `WeilComplex.isMixedOfWeightsAtMost_derivedLowerShriek_and_compactlySupportedCohomology`:
+  the weights of `Rf_!` and of compactly supported cohomology.
 
 The purity of `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for `X₀` smooth and proper
 (`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_cohomology_adicConstant`,
@@ -158,5 +163,41 @@ theorem hasWeightsAtMostOver_cohomology_adicConstant (ι : PadicAlgCl l →+* �
       e.toLinearEquiv.surjective hα)
 
 end WeilSheaf
+
+namespace WeilComplex
+
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- For a separated `k₀`-scheme `X₀` of finite type and a Weil complex `K` on `X₀` mixed of
+weights at most `w`, `H_c^n(X₀ ⊗ k̄, K)` has weights at most `w + n` over `k₀`. -/
+theorem IsMixedOfWeightsAtMost.hasWeightsAtMostOver_compactlySupportedCohomology
+    {ι : PadicAlgCl l →+* ℂ} {w : ℝ} {K : WeilComplex k₀ l X}
+    (hK : K.IsMixedOfWeightsAtMost ι w) (n : ℤ) :
+    (K.compactlySupportedCohomology n).HasWeightsAtMostOver k₀ ι (w + n) :=
+  WeilSheaf.IsMixedOfWeightsAtMost.hasWeightsAtMostOver_globalSections
+    (hK.derivedLowerShriek (X ↘ Spec (CommRingCat.of k₀)) n)
+
+/-- **Weights of `Rf_!`.** For a separated morphism of finite type `f : X₀ ⟶ Y₀` of separated
+`k₀`-schemes of finite type, `Rf_!` carries Weil complexes mixed of weights at most `w` to Weil
+complexes mixed of weights at most `w`; and for `K` on `X₀` mixed of weights at most `w`,
+`H_c^n(X₀ ⊗ k̄, K)` has weights at most `w + n`. -/
+theorem isMixedOfWeightsAtMost_derivedLowerShriek_and_compactlySupportedCohomology
+    {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+    [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    (ι : PadicAlgCl l →+* ℂ) (w : ℝ) (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
+    (∀ K : WeilComplex k₀ l X, K.IsMixedOfWeightsAtMost ι w →
+      ((derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w) ∧
+    ∀ K : WeilComplex k₀ l X, K.IsMixedOfWeightsAtMost ι w → ∀ n : ℤ,
+      (K.compactlySupportedCohomology n).HasWeightsAtMostOver k₀ ι (w + n) :=
+  ⟨fun _ hK ↦ hK.derivedLowerShriek f,
+    fun _ hK ↦ hK.hasWeightsAtMostOver_compactlySupportedCohomology⟩
+
+end WeilComplex
 
 end AlgebraicGeometry
