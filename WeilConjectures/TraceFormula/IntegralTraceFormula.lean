@@ -20,30 +20,28 @@ public import WeilConjectures.TraceFormula.PointFiberFunctorIntegral
 Let `E ⊆ ℚ̄_ℓ` be a finite extension of `ℚ_ℓ` with ring of integers `𝒪_E`, `Φ` the model Frobenius
 of `X = X₀ ×_{k₀} k`, `K` a bounded constructible `𝒪_E`-complex on `X` and `θ : LΦ^* K ⟶ K` an
 arbitrary morphism (an integral Frobenius correspondence). The *integral trace formula*
-(blueprint `proposition-integral-trace-formula`) states that for every `m ≥ 1`
+states that for every `m ≥ 1`
 ```
 tr_{𝒪_E}(T_{c_m}(θ_m) | RΓ_c(X, K)) = ∑_{x ∈ X₀(𝔽_{q^m})} tr_{𝒪_E}(θ_{m,x} | K_x)
 ```
 (`ProEtale.CondensedRing.PadicIntegersRingObj.trace_frobeniusCompactOperator_eq_sum`), both sides
 being categorical traces in `Dᵇc(Spec k)⟦𝒪_E⟧`.
 
-## Proof
+## Implementation details
 
-The blueprint deduces the integral formula from the formula with finite coefficients `𝒪_E ⧸ πⁿ`
-by reduction. In this library the trace formula for Frobenius correspondences is proved directly
+One can deduce the integral formula from the formula with finite coefficients `𝒪_E ⧸ πⁿ` by
+reduction. In this library the trace formula for Frobenius correspondences is proved directly
 with `ℚ̄_ℓ`-coefficients (`ProEtale.CondensedRing.trace_frobeniusCompactOperator_eq_sum`), so the
 integral formula is deduced from it by the extension of scalars
 `T = ℚ̄_ℓ ⊗ᴸ_{𝒪_E} -` (`ProEtale.CondensedRing.boundedConstructibleIntegersToPadicAlgCl`) instead:
 
 * `T` is braided monoidal on the point, so it carries traces to traces through the ring map
   `ρ_T : End(𝟙) ⟶ End(𝟙)` it induces on the endomorphisms of the units
-  (`CategoryTheory.Functor.trace_eq_unitEndRingHom_trace`, blueprint
-  `proposition-properties-trace`); on the separably closed point this map is the inclusion
+  (`CategoryTheory.Functor.trace_eq_unitEndRingHom_trace`); on the separably closed point this map is the inclusion
   `𝒪_E ⊆ ℚ̄_ℓ`, hence injective
   (`ProEtale.CondensedRing.injective_unitEndRingHom_boundedConstructibleIntegersToPadicAlgCl`);
 * `T` commutes with `RΓ_c`, with the pullbacks and with the operators `h^♯`
-  (`ProEtale.CondensedRing.integersToPadicAlgCl_map_compactPullback_app`, blueprint
-  `proposition-six-operations-change-coefficients`), so it carries the global operator and the
+  (`ProEtale.CondensedRing.integersToPadicAlgCl_map_compactPullback_app`), so it carries the global operator and the
   stalk maps of `θ` to those of the `ℚ̄_ℓ`-coefficient map `ψ = T θ`.
 
 Applying `ρ_T` to both sides of the integral formula therefore gives the two sides of the
@@ -287,9 +285,7 @@ in degree one holds for a proper endomorphism `Φ` with `ℚ̄_ℓ`-coefficients
 constructible `𝒪_E`-complex `K` and every morphism `θ : LΦ^* K ⟶ K`,
 ```
 tr_{𝒪_E}(RΓ_c(X, θ) ∘ Φ^♯ | RΓ_c(X, K)) = ∑_{x ∈ X(k), Φ x = x} tr_{𝒪_E}(θ_x | K_x).
-```
-The extension of scalars `T = ℚ̄_ℓ ⊗ᴸ_{𝒪_E} -` carries both sides to the two sides of the
-`ℚ̄_ℓ`-formula for `T K` and `T θ`, and is injective on the scalars of the point. -/
+``` -/
 theorem PadicIntegersRingObj.trace_compactPullback_comp_eq_sum [IsSepClosed k] {Φ : X ⟶ X}
     [IsProper Φ.left] (hΦ : TraceFormulaHolds ℓ Φ) (K : Dᵇc(X.left)⟦𝒪⟧)
     (θ : (boundedConstructibleUpperStar 𝒪 ℓ Φ).obj K ⟶ K)
@@ -355,8 +351,7 @@ theorem PadicIntegersRingObj.trace_compactPullback_comp_eq_sum [IsSepClosed k] {
     congrArg End.asHom (injective_unitEndRingHom_boundedConstructibleIntegersToPadicAlgCl ℓ E key)
 
 
-/-- **The integral trace formula** (blueprint `proposition-integral-trace-formula`,
-`proposition-integral-trace-formula--1`): let `Φ` be the model Frobenius of a separated model `X₀`
+/-- **The integral trace formula**: let `Φ` be the model Frobenius of a separated model `X₀`
 of finite type over a finite field `k₀`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` with ring of
 integers `𝒪_E`, `K` a bounded constructible `𝒪_E`-complex on `X` and `θ : LΦ^* K ⟶ K` an arbitrary
 morphism. For every `m ≥ 1`,
@@ -364,10 +359,8 @@ morphism. For every `m ≥ 1`,
 tr_{𝒪_E}(T_{c_m}(θ_m) | RΓ_c(X, K)) = ∑_{x ∈ X₀(𝔽_{q^m})} tr_{𝒪_E}(θ_{m,x} | K_x),
 ```
 the sum running over the rational points `x` fixed by `Φ_m`, both sides being categorical traces
-in `Dᵇc(Spec k)⟦𝒪_E⟧`. The dualizability of `RΓ_c(X, K)` and of the stalks `K_x` (blueprint
-`lemma-perfect-complexes-geometric-point`) is assumed, as in the `ℚ̄_ℓ`-formula
-`ProEtale.CondensedRing.trace_frobeniusCompactOperator_eq_sum`, from which it is deduced by
-extension of scalars (`PadicIntegersRingObj.trace_compactPullback_comp_eq_sum`). -/
+in `Dᵇc(Spec k)⟦𝒪_E⟧`. The dualizability of `RΓ_c(X, K)` and of the stalks `K_x` is
+assumed, as in the `ℚ̄_ℓ`-formula `ProEtale.CondensedRing.trace_frobeniusCompactOperator_eq_sum`. -/
 theorem PadicIntegersRingObj.trace_frobeniusCompactOperator_eq_sum [IsAlgClosed k]
     {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}
     {f₀ : X₀ ⟶ Spec (.of k₀)} [LocallyOfFiniteType f₀] {p : X.left ⟶ X₀} {Φ : X ⟶ X}

@@ -23,7 +23,7 @@ public import WeilConjectures.TraceFormula.IntegralCompactPullback
 Let `E ⊆ ℚ̄_ℓ` be a finite extension of `ℚ_ℓ` with ring of integers `𝒪_E`, and write
 `T = ℚ̄_ℓ ⊗ᴸ_{𝒪_E} -` for the extension of scalars on bounded constructible complexes
 (`ProEtale.CondensedRing.boundedConstructibleIntegersToPadicAlgCl`). This file shows that `T`
-carries the operators of blueprint `definition-frobenius-correspondences-their-operators` with
+carries the operators of Frobenius correspondences with
 `𝒪_E`-coefficients (`WeilConjectures.TraceFormula.IntegralCompactPullback`) to the same operators
 with `ℚ̄_ℓ`-coefficients (`WeilConjectures.TraceFormula.CompactPullback`):
 
@@ -32,16 +32,16 @@ with `ℚ̄_ℓ`-coefficients (`WeilConjectures.TraceFormula.CompactPullback`):
   `h^♯ : RΓ_c(X, K) ⟶ RΓ_c(Y, Lh^* K)` on compactly supported cohomology along a proper `h` is
   `h^♯` at `T K`.
 
-It is assembled from the compatibilities of the coefficient comparisons of blueprint
-`proposition-six-operations-change-coefficients` with the structure maps entering `h^♯`:
+It is assembled from the compatibilities of the coefficient comparisons with the structure
+maps entering `h^♯`:
 
-* with the composition of pullbacks (`integersToPadicAlgCl_map_upperStarComp_hom_app`, clause
-  `--14`);
-* with the unit of `Lh^* ⊣ Rh_*` (`integersToPadicAlgCl_map_unit_app`, clause `--18`);
+* with the composition of pullbacks (`integersToPadicAlgCl_map_upperStarComp_hom_app`);
+* with the unit of `Lh^* ⊣ Rh_*` (`integersToPadicAlgCl_map_unit_app`);
 * with the identification `Rh_! ≅ Rh_*` for a proper `h`
-  (`integersToPadicAlgCl_map_lowerShriekIsoLowerStar_inv_app`, clause `--4`);
-* with the composition of lower shrieks (`integersToPadicAlgCl_map_lowerShriekComp_hom_app`,
-  clause `--16`).
+  (`integersToPadicAlgCl_map_lowerShriekIsoLowerStar_inv_app`);
+* with the composition of lower shrieks (`integersToPadicAlgCl_map_lowerShriekComp_hom_app`).
+
+## Implementation details
 
 The assembly is done once for abstract functors (`map_compactPullback_aux`,
 `map_graphStalkMap_aux`, ...): rewriting directly with these identities in the categories
@@ -274,9 +274,8 @@ lemma toPadicAlgCl_extendScalars_map_upperStarComp_hom_app (x : Z ⟶ Y) (h : Y 
   exact _ ≫= _ ≫= ((Category.assoc _ _ _).symm.trans
     ((e₃ =≫ _).trans (Category.assoc _ _ _))).symm
 
-/-- **The pullback comparison commutes with composition** (blueprint
-`proposition-six-operations-change-coefficients--14`, on bounded constructible complexes, for
-`𝒪_E ⟶ ℚ̄_ℓ`): for `x : Z ⟶ Y` and `h : Y ⟶ X`, the comparison `T L(x ≫ h)^* ≅ L(x ≫ h)^* T`
+/-- **The pullback comparison commutes with composition** (on bounded constructible
+complexes, for `𝒪_E ⟶ ℚ̄_ℓ`): for `x : Z ⟶ Y` and `h : Y ⟶ X`, the comparison `T L(x ≫ h)^* ≅ L(x ≫ h)^* T`
 followed by `L(x ≫ h)^* ≅ Lx^* Lh^*` is `T` of the composition isomorphism followed by the
 comparisons for `x` and `h`. -/
 theorem integersToPadicAlgCl_map_upperStarComp_hom_app (x : Z ⟶ Y) (h : Y ⟶ X)
@@ -364,8 +363,7 @@ lemma toPadicAlgCl_map_unit_app (h : Y ⟶ X)
     boundedConstructibleToPadicAlgCl_obj_obj, boundedConstructibleUpperStar_obj_obj]
   exact Adjunction.map_unit_comp_pushHomOfComapIso_app _ _ _ _ _ L.obj
 
-/-- **Transport of the unit of `Lh^* ⊣ Rh_*`** (blueprint
-`proposition-six-operations-change-coefficients--18`, for `𝒪_E ⟶ ℚ̄_ℓ`): under the comparisons
+/-- **Transport of the unit of `Lh^* ⊣ Rh_*`** (for `𝒪_E ⟶ ℚ̄_ℓ`): under the comparisons
 `T Rh_* ≅ Rh_* T` and `T Lh^* ≅ Lh^* T`, the extension of scalars of the unit
 `K ⟶ Rh_* Lh^* K` is the unit at `T K`. -/
 theorem integersToPadicAlgCl_map_unit_app (h : Y ⟶ X) (K : Dᵇc(X.left)⟦𝒪⟧) :
@@ -394,9 +392,7 @@ theorem integersToPadicAlgCl_map_unit_app (h : Y ⟶ X) (K : Dᵇc(X.left)⟦�
   simp only [← hn, reassoc_of% h₁]
   exact h₂
 
-/-- **`Rh_! ≅ Rh_*` commutes with the coefficient comparisons** for a proper `h` (blueprint
-`proposition-six-operations-change-coefficients--4`, the comparison for `Rh_!` of a proper `h`
-being the one for `Rh_*`): the comparison `T Rh_! ≅ Rh_! T` corresponds to the comparison
+/-- **`Rh_! ≅ Rh_*` commutes with the coefficient comparisons** for a proper `h`: the comparison `T Rh_! ≅ Rh_! T` corresponds to the comparison
 `T Rh_* ≅ Rh_* T` under the identifications `Rh_! ≅ Rh_*` over `𝒪_E` and over `ℚ̄_ℓ`. -/
 theorem integersToPadicAlgCl_map_lowerShriekIsoLowerStar_inv_app (h : Y ⟶ X) [IsProper h.left]
     (M : Dᵇc(Y.left)⟦𝒪⟧) :
@@ -406,8 +402,7 @@ theorem integersToPadicAlgCl_map_lowerShriekIsoLowerStar_inv_app (h : Y ⟶ X) [
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ h).inv.app ((𝐓 Y).obj M) := by
   sorry
 
-/-- **The compactly supported comparison commutes with composition** (blueprint
-`proposition-six-operations-change-coefficients--16`, for `𝒪_E ⟶ ℚ̄_ℓ`): for `f : Y ⟶ X` and
+/-- **The compactly supported comparison commutes with composition** (for `𝒪_E ⟶ ℚ̄_ℓ`): for `f : Y ⟶ X` and
 `g : X ⟶ Z`, the comparison `T R(f ≫ g)_! ≅ R(f ≫ g)_! T` followed by the composition isomorphism
 `R(f ≫ g)_! ≅ Rg_! Rf_!` is `T` of the composition isomorphism followed by the comparisons for `g`
 and `f`. -/
@@ -423,8 +418,7 @@ theorem integersToPadicAlgCl_map_lowerShriekComp_hom_app (f : Y ⟶ X) (g : X �
   sorry
 
 /-- The comparison `Rf_! ⋙ T_X ≅ T_Y ⋙ Rf_!` of the compactly supported direct images along
-`𝒪_E ⟶ ℚ̄_ℓ` (`boundedConstructibleLowerShriekIntegersToPadicAlgClIso`, blueprint
-`proposition-six-operations-change-coefficients--4`), with the extension of scalars written as
+`𝒪_E ⟶ ℚ̄_ℓ` (`boundedConstructibleLowerShriekIntegersToPadicAlgClIso`), with the extension of scalars written as
 `T = boundedConstructibleIntegersToPadicAlgCl`. -/
 noncomputable def lowerShriekIntegersToPadicAlgClIso (f : Y ⟶ X) :
     PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E.1 f ⋙ 𝐓 X ≅

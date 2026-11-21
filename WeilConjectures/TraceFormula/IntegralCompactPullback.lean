@@ -14,8 +14,7 @@ public import WeilConjectures.TraceFormula.CompactPullback
 # Frobenius operators with integral coefficients
 
 Let `E ⊆ ℚ̄_ℓ` be a finite extension of `ℚ_ℓ` with ring of integers `𝒪_E`. This file defines, for
-bounded constructible `𝒪_E`-complexes, the operators of blueprint
-`definition-frobenius-correspondences-their-operators` that
+bounded constructible `𝒪_E`-complexes, the operators of Frobenius correspondences that
 `WeilConjectures.TraceFormula.CompactPullback` defines for `ℚ̄_ℓ`-coefficients:
 
 * the pullback `h^♯ : RΓ_c(X, K) ⟶ RΓ_c(Y, Lh^* K)` on compactly supported cohomology along a
@@ -95,8 +94,7 @@ variable {ℓ E} {Φ : X ⟶ X} {K : Dᵇc(X.left)⟦Profinite.padicIntegersRing
 
 variable (ℓ E) in
 /-- The *global operator in degree `m`* `T_{c_m}(θ_m) = RΓ_c(X, θ_m) ∘ Φ_m^♯` of an integral
-Frobenius correspondence `θ : LΦ^* K ⟶ K` for a proper `Φ` (blueprint
-`definition-frobenius-correspondences-their-operators`):
+Frobenius correspondence `θ : LΦ^* K ⟶ K` for a proper `Φ`:
 ```
 RΓ_c(X, K) --Φ_m^♯--> RΓ_c(X, LΦ_m^* K) --RΓ_c(X, θ_m)--> RΓ_c(X, K),
 ```
@@ -117,8 +115,7 @@ rational point `x` fixed by the endomorphism `h`:
 K_x = L(x ≫ h)^* K ≅ Lx^* Lh^* K --Lx^* v--> Lx^* K = K_x.
 ```
 This is the `𝒪_E`-coefficient version of `ProEtale.CondensedRing.Correspondence.graphStalkMap`;
-for `h = Φ_m` and `v = θ_m` it is the stalk map `θ_{m, x}` of blueprint
-`definition-frobenius-correspondences-their-operators`. -/
+for `h = Φ_m` and `v = θ_m` it is the stalk map `θ_{m, x}`. -/
 noncomputable def graphStalkMap (h : X ⟶ X)
     (v : (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ h).obj K ⟶ K)
     (x : RationalPoint X) (hx : x ≫ h = x) :
