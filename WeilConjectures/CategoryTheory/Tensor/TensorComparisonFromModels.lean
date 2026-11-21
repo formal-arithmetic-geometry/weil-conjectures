@@ -21,12 +21,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory
 
 /-- Four binary model squares and a localized chain square imply associativity.
-Source: Stacks 06YU, 0FPT.
-
-Proof: use inverse tensorator naturality to paste the two left binary squares
-and the two right binary squares. The inverse lax tensorators satisfy the
-associativity equation. Substitute the native associator model and the chain
-square, then cancel the two model isomorphisms. -/
+Source: Stacks 06YU, 0FPT. -/
 theorem associativity_from_inverse_tensor_models
     {C D A : Type*} [Category C] [Category D] [Category A]
     [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory A]

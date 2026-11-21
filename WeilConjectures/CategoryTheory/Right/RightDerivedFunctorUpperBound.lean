@@ -74,15 +74,7 @@ variable [HasDerivedCategory C] [HasDerivedCategory D]
 /-- A uniform classical cohomological-dimension bound gives the same upper amplitude
 on the unbounded derived category.
 
-Source: Stacks Project, Tag 07K7, part (4)(c).
-
-Proof: represent L by a K-injective complex I with injective components. Its cycles in
-degrees n above b satisfy the short exact sequences of cycles. Repeatedly inject
-R^(q+1) F(Z^n I) into R^(q+2) F(Z^(n-1) I); after d steps the latter vanishes by hF,
-provided n ≥ b+d. Thus these cycles are F-acyclic, so F preserves the corresponding
-short exact sequences of cycles. This makes F(I) exact above b+d. The comparison
-RF(QI) ≅ Q(FI), followed by the original representing isomorphism, gives the result.
--/
+Source: Stacks Project, Tag 07K7, part (4)(c). -/
 theorem isLE_rightDerivedFunctor_obj_of_dimension
     (d : ℕ) (hF : ∀ (X : C) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj X))
     (L : DerivedCategory C) (b : ℤ) (hL : DerivedCategory.TStructure.t.IsLE L b) :

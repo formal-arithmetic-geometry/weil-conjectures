@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-!
 # Unbounded sections and localization of a ringed site
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6F and its K-injective proof.
+## References
+
+Stacks Project, Cohomology on Sites, Tag 0D6F.
 -/
 
 @[expose] public noncomputable section

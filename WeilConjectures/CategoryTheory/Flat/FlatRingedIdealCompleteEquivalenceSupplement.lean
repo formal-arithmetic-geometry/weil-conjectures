@@ -271,11 +271,7 @@ attribute [local instance 20000] ringedCompletionHasSheafCompose
 attribute [local irreducible] homComplexFunctor ringedHomUnitEvaluationIso
 
 /-- Restriction of scalars preserves small limits, in particular the products in Hom complexes.
-Source: Stacks Project, Algebraization, Tag 099I, the construction of E prime.
-Proof: compose with the faithful forgetful functor to additive presheaves. Both
-forgetful functors preserve small limits, and this composite is the same over B.
-The forgetful composite reflects isomorphisms and therefore reflects limits.
-Reflection then gives preservation of limits by restriction itself. -/
+Source: Stacks Project, Algebraization, Tag 099I, the construction of E prime. -/
 theorem siteRestrictScalars_preservesLimits
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :

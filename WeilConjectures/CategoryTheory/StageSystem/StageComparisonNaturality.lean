@@ -16,13 +16,7 @@ open CategoryTheory
 namespace CategoryTheory.StageSystem
 
 /-- Naturality on finite stages and their transition isomorphisms gives naturality
-on every common-stage representative.
-
-Proof: write any common-stage arrow as the source isoToStage, the stage inclusion of
-its representative, and the inverse target isoToStage. The compatibility equation gives
-naturality for the source transition. Precompose the target compatibility with its
-inverse to obtain naturality for the inverse target transition. Compose these equations
-with naturality of the stagewise comparison on the middle representative. -/
+on every common-stage representative. -/
 theorem stageComparison_naturality
     {I : Type*} [Preorder I] [IsDirectedOrder I]
     {C : I → Type*} [∀ i, Category (C i)]

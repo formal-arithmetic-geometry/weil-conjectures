@@ -25,17 +25,7 @@ namespace CategoryTheory.Functor
 set_option backward.isDefEq.respectTransparency false in
 /-- The graded differential of the lifted K summand is the column augmentation.
 Source: Stacks Project, Homology, Tags 0133 and 012X, canonical augmentation and
-second filtration.
-
-Proof: hm and hmm' identify m=p-1 and m'=p. Use chain compatibility of the
-quotient projection and cancel the monic filtration inclusion to compute the
-differential of l. The cone formula gives the augmentation to the right summand
-minus d_K to the left summand in degree p. By haug and hl', the augmentation
-is the inclusion of (a.f p).f 0 followed by l'. The remaining left summand has
-complex index p+1, hence its image belongs to step p+1 by the first summand
-of hF. Factor through that step, then through its inclusion into step p;
-monicity identifies this with the difference just computed. The quotient kills
-this factorization by the cokernel relation. No below-bound vanishing is needed. -/
+second filtration. -/
 theorem cartanEilenberg_cone_graded_augmentation_representative
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

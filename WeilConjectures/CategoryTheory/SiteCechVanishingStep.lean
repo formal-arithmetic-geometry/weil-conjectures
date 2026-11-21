@@ -24,14 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Sheaf
 
 /-- The injective-resolution and Čech-complex argument of Stacks 03F9 produces the
-base case and the dimension-shifting step. The remaining proof is the standard
-strong induction on the degree.
-
-Proof in words: embed a Čech-acyclic sheaf into an injective, use the short exact
-section sequences and the long exact sequences of derived functors and Čech
-complexes. The injective is Čech-acyclic and has vanishing higher derived
-functors; section surjectivity gives degree one, and dimension shifting gives
-higher degrees. -/
+base case and the dimension-shifting step of the induction on the degree. -/
 theorem siteCech_vanishing_dimension_shift
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

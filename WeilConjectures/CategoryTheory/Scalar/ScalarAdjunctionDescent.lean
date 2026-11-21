@@ -24,12 +24,7 @@ namespace CategoryTheory
 
 /-- In a scalar-change square, an invertible adjoint transition descends along a
 conservative inverse image, provided the two counits at its endpoints are invertible.
-The direct-image comparison is required to be the mate of the inverse-image comparison.
-Proof: transpose the transition square first by scalar
-change and then by geometric inverse image. The mate equation identifies the result
-with the original adjoint transition composed with the two counits and the scalar
-comparison. Every other arrow is invertible. Conservativity then applies to the
-adjoint transition downstairs, including when its scalar-extension source is unbounded. -/
+The direct-image comparison is required to be the mate of the inverse-image comparison. -/
 theorem isIso_scalar_transpose_of_mate
     {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
     {C : Type c} [Category.{cv} C] {D : Type d} [Category.{dv} D]

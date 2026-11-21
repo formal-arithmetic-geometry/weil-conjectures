@@ -21,14 +21,7 @@ universe u₁ u₂ u₃ v₁ v₂ v₃
 namespace CategoryTheory
 
 /-- Rewrite a normalized descent universal property as equations on representatives.
-Source: Stacks Project, Tag 099N(5), the categorical part of normalized descent.
-Proof: apply the given universal property to G and c. Evaluate its compatibility
-equation at each representative P, then cancel c(P) to obtain the component formula.
-Conversely, compose every proposed component formula with c(P). Cancel the inverse
-and apply natural-transformation extensionality to recover the full compatibility
-equation. The uniqueness clause of the universal property then identifies the
-proposed natural isomorphism. This uses only isomorphism cancellation, and therefore
-also applies to zero objects or empty representative categories. -/
+Source: Stacks Project, Tag 099N(5), the categorical part of normalized descent. -/
 theorem normalizedDescentComponents_existsUnique
     {A : Type u₁} [Category.{v₁} A] {B : Type u₂} [Category.{v₂} B]
     {C : Type u₃} [Category.{v₃} C]

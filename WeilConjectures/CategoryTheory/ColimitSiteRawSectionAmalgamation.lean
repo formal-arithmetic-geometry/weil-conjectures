@@ -30,39 +30,8 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 matching-family calculation, with the raw Kan presentation explicit.
-
-Proof: First compute raw sections by the pointwise Kan formula. A generator is
-represented by a stage section and an arrow from the object in the limit site
-to the image of its stage object. Move that arrow, its endpoints, and the stage
-section to a common stage receiving i and the stage of the object, using the
-object and arrow set-colimit hypotheses, and restrict the section along the
-lifted arrow. This represents the generator at the lifted object. For any
-finite chain of Kan relations, lift its arrows and equations to a later common
-stage. Naturality of beta and hβmap identify each lifted relation with section
-restriction or transport by theta. Conversely these operations are Kan
-relations. Thus two representatives agree precisely when they agree after
-further stage refinement. The unit condition hθ identifies theta with the
-adjunction transpose of the unit at the target stage; uniqueness of transposes
-makes these transports compatible with composition and with the stage sheaves.
-
-For a compatible family on the image of a stage cover R, pull the family back
-to the finite indexing set R.uncurry. Choose stage representatives for its
-finitely many sections, and transport all representatives and covering arrows
-to a common stage receiving i and the cover's stage. Stage covering pullbacks
-exist. For each pair of covering arrows, compatibility gives equality on its
-pullback in the limit category; hVpullback and hpullback identify that object
-with the image of the corresponding stage pullback. The raw equality
-criterion puts the finitely many overlap equalities at one further stage.
-There the transported local sections form a matching family: the pairwise
-pullback equalities imply compatibility on every common test object by its
-universal property. hcover keeps the family covering. The stage sheaf glues
-it to a section. Apply beta and the presheaf colimit coprojection; naturality
-and hβmap show that this section restricts to the given family. If different
-stage arrows have the same image, the pulled-back family uses the same given
-section on both, so repetitions cause no ambiguity. For the empty cover the
-stage sheaf supplies its unique section without any local representatives.
--/
+/-- Existence of amalgamations of matching families of sections for the raw colimit site.
+Stacks Project, Sites, Tag 0A35. -/
 theorem colimit_site_raw_section_exists_amalgamation
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

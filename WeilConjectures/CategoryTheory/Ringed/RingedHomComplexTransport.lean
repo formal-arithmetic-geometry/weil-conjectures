@@ -38,15 +38,7 @@ attribute [local irreducible] homComplexFunctor
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- An additive functor preserving countable products transports Hom complexes
 naturally whenever it transports ordinary sheaf Hom naturally.
-Source: Stacks Project, Tags 08J7 and 0A95.
-
-Proof: form the product comparison in every degree, using the ordinary Hom
-comparisons on its factors. The defining projection equations make this comparison
-invertible. Projecting the differential square gives the two signed terms of the
-Hom differential, and naturality of the ordinary comparison identifies them.
-Projecting the naturality square for arbitrary cochain maps gives precomposition
-and postcomposition by their degree maps; ordinary naturality identifies these too.
-Thus the comparisons assemble into a natural cochain isomorphism. -/
+Source: Stacks Project, Tags 08J7 and 0A95. -/
 theorem homComplex_transport
     {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

@@ -28,20 +28,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
 
 /-- The left edge on a complex supported in a single degree is the identity, under the
 canonical identifications of its cohomology with its sole term.
-Source: Stacks Project, derived.tex, Tag 015J, second spectral sequence for a single complex.
-
-Proof: extend the single complex by zero. Its image in the derived category is the object
-A placed in degree n. Its truncations in degrees below n are zero and those containing n
-are the object itself, so both arrows defining the left edge are identities under the
-canonical truncation isomorphisms. Express this object as A[0] shifted by minus n
-and use shift compatibility to reduce the remaining composite to degree zero. The derived unit
-on A[0], followed by the degree-zero right-derived
-comparison and rightDerivedZeroIsoSelf, is the original functor applied to A, by the
-normalization of the right derived unit. The extension, quotient, single-complex homology,
-and shift comparisons are natural canonical isomorphisms and cancel in inverse pairs.
-The degree-n cycle representative is the inverse of the single-complex term comparison;
-its homology quotient is the inverse of the single-complex homology comparison. This
-proves the identity displayed below, including n=0 and the zero object. -/
+Source: Stacks Project, derived.tex, Tag 015J, second spectral sequence for a single complex. -/
 theorem cochainHypercohomologyLeftEdge_single (A : B) (n : ℕ) :
     (let S := (HomologicalComplex.single B (ComplexShape.up ℕ) n).obj A
      let T := (G.mapHomologicalComplex (ComplexShape.up ℕ)).obj S

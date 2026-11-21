@@ -39,15 +39,11 @@ variable {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
   [EssentiallySmall.{u + 1} C] [HasTerminal C]
 
 /-- In the site and derived-category setting of residue Kummer reduction
-[lem-sp-residue-kummer-derived-unit], suppose 0→K→G→G→0 has last map n>0 and f:K≅UH for a
-ULift(Z/n)-module sheaf H. Then the connecting class followed by mk0(f) is a degree-one derived Ext
-unit [def-sp-derived-scalar-ext-unit].
-Source: Stacks 0152,
-06YY and 0GLZ.
-Proof: Replace the kernel map by f inverse followed by the original inclusion. The resulting short
-complex is isomorphic to the original one and is therefore short exact. Apply the residue Kummer
-unit theorem to it. Naturality of Ext classes for the isomorphism of short exact sequences
-identifies its class with the original connecting class followed by f. -/
+(`kummer_derived_unit`), suppose 0→K→G→G→0 has last map n>0 and f:K≅UH for a
+ULift(Z/n)-module sheaf H. Then the connecting class followed by mk0(f) is a degree-one derived
+Ext unit.
+
+Stacks Project, Tags 0152, 06YY and 0GLZ. -/
 theorem kummer_iso_derived_unit (n : ℕ) (hn : 0 < n)
     (K G : Sheaf J AddCommGrpCat.{u + 1})
     (H : Sheaf J (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))))

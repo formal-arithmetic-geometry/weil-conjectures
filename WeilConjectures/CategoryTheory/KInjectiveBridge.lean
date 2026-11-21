@@ -24,11 +24,11 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResol
   resolution of a bounded-below complex.
 * `CategoryTheory.Functor.rightDerivedCohomologyWithResolution`: `R^p v(K) := H^p(v(I))`.
 
-K-injectivity uses Mathlib's `CochainComplex.IsKInjective`, as in
-`prose-03-02`: every map from an acyclic complex is null-homotopic.
+K-injectivity uses Mathlib's `CochainComplex.IsKInjective`:
+every map from an acyclic complex is null-homotopic.
 The Hom-complex formulation follows by applying this in every shifted degree.
 Independence of the choice and agreement with `Functor.rightDerived` on objects in degree zero
-are deferred to `lem-sp-kinjective-computes`; the definitions retain the chosen resolution.
+are not addressed here; the definitions retain the chosen resolution.
 -/
 
 @[expose] public section
@@ -50,8 +50,7 @@ structure KInjectiveResolutionChoice {C : Type u₁} [Category.{v₁} C] [Abelia
   isKInjective : complex.IsKInjective
 
 /-- Every complex in a Grothendieck abelian category has a chosen K-injective resolution,
-obtained from the functor and natural transformation of
-`lem-weil-pbc-kinjective-functorial-existence`. This includes every bounded-below complex. -/
+obtained functorially. This includes every bounded-below complex. -/
 noncomputable def grothendieckKInjectiveResolutionChoice
     {C : Type u₁} [Category.{v₁} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     (K : CochainComplex C ℤ) : KInjectiveResolutionChoice K where
@@ -76,9 +75,7 @@ def rightDerivedComplexWithResolution
   (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj r.complex
 
 /-- For a left exact additive functor `F`, a bounded-below complex `K`, and a chosen
-K-injective resolution `r`, define `R^p F(K)` as `H^p(RFK)`, for every integer `p`.
-Agreement with ordinary right derived functors on objects in degree zero is the later
-comparison lemma `lem-sp-kinjective-computes`. -/
+K-injective resolution `r`, define `R^p F(K)` as `H^p(RFK)`, for every integer `p`. -/
 noncomputable def rightDerivedCohomologyWithResolution
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]

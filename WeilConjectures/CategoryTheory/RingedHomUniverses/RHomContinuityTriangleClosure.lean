@@ -310,15 +310,9 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v r})
   [HasDerivedCategory.{w} (Modules.{c, v, r} J R)]
 
-/-- The property P of the node: continuity for all uniformly cohomologically bounded-below
+/-- The property P: continuity for all uniformly cohomologically bounded-below
 filtered complex diagrams, and a uniform lower-bound offset for the target variable.
-Source: Stacks 08JC and the bounded-target closure extraction in the node.
-
-The canonical map is Q(colimit.post M (homFixed L)); its coprojection at i is the
-localized Hom map of the target coprojection. Exact termwise sheaf colimits compute
-its source. Quantification over source representatives avoids a choice of an object
-or a noncanonical comparison. The colimit structures quantified here exist for small
-module-sheaf diagrams and are only the structures needed to form the displayed map. -/
+Source: Stacks 08JC. -/
 def BoundedTargetHomContinuous (A : D.{c, v, r, w} J R) : Prop :=
   (∀ (L : Complex.{c, v, r} J R), Nonempty (DerivedCategory.Q.obj L ≅ A) →
     ∀ (I : Type (max c v r)) [SmallCategory I] [IsFiltered I]

@@ -15,12 +15,13 @@ import WeilConjectures.CategoryTheory.SubobjectHomologyStep
 /-!
 # Convergence of bigraded exact couples
 
-Source: Stacks Project, Homology, Sections 12.20 and 12.21,
-and Definition 12.24.9 (Tag 012U).
-
 The natural-number index `r` below represents page `r + 2`. Colimits and inverse limits
 are expressed by their universal properties on the consecutive arrows of the integer chain.
 No infinite (co)limits or complete lattice of subobjects are assumed in the ambient category.
+
+## References
+
+* Stacks Project, Homology, Sections 12.20 and 12.21, and Definition 12.24.9 (Tag 012U).
 -/
 
 @[expose] public section
@@ -36,7 +37,8 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 /-- Cycles and boundaries inside the initial page, with its canonical quotient maps.
 The successor projection is induced by the preceding projection on cycles; this rules out
 arbitrary identifications of the quotient with the next page.
-Source: Stacks Section 12.20. -/
+
+Stacks Project, Section 12.20. -/
 structure CycleBoundaryTower (X : BigradedExactCouple C 0) where
   Z : ℕ → ∀ p q : ℤ, Subobject (X.E p q)
   B : ℕ → ∀ p q : ℤ, Subobject (X.E p q)
@@ -147,14 +149,9 @@ private noncomputable def towerStages (X : BigradedExactCouple C 0) :
   | 0 => initialStage X
   | r + 1 => nextStage (towerStages X r)
 
-/-- The canonical cycle/boundary tower exists. Start with the whole initial page and zero,
-with its identity quotient. Inductively pull back the kernel and image of the differential
-along the quotient, and embed these pullbacks in the initial page. Since the differential
-squares to zero, boundaries lie in cycles. The epimorphic quotient of the lifted cycles by
-the lifted boundaries is the homology object defining the next derived couple. Its projection
-is the kernel lift followed by `derivedEProjection`. Pullback along an epimorphism preserves
-these quotient presentations. This also gives the decreasing and increasing inclusions.
-Source: Stacks Sections 12.20--12.21. -/
+/-- The canonical cycle/boundary tower exists.
+
+Stacks Project, Sections 12.20 and 12.21. -/
 theorem cycleBoundaryTower_exists (X : BigradedExactCouple C 0) :
     Nonempty (CycleBoundaryTower X) := by
   refine ⟨{
@@ -181,7 +178,8 @@ noncomputable def cycleBoundaryTower (X : BigradedExactCouple C 0) : CycleBounda
 
 /-- Regularity means eventual constancy of boundaries at every bidegree, with a bound that may
 vary with the bidegree, i.e. the incoming differentials vanish for `r ≫ 0`.
-Source: Stacks Section 12.20. -/
+
+Stacks Project, Section 12.20. -/
 def IsRegular (X : BigradedExactCouple C 0) : Prop :=
   ∀ p q : ℤ, ∃ r : ℕ, ∀ t : ℕ, r ≤ t →
     X.cycleBoundaryTower.B t p q = X.cycleBoundaryTower.B r p q
@@ -216,9 +214,7 @@ structure LimitSubobjects (X : BigradedExactCouple C 0) where
   Z_glb : ∀ p q, IsGLB (Set.range (fun r ↦ X.cycleBoundaryTower.Z r p q)) (Z p q)
   B_lub : ∀ p q, IsLUB (Set.range (fun r ↦ X.cycleBoundaryTower.B r p q)) (B p q)
 
-/-- Every limiting boundary lies in every limiting cycle. For any two finite indices,
-move to their maximum: increasing boundaries lie in the cycles there, which lie in the
-earlier cycles. The universal properties of the union and intersection give the result. -/
+/-- Every limiting boundary lies in every limiting cycle. -/
 theorem limitBoundary_le_cycle (X : BigradedExactCouple C 0) (L : LimitSubobjects X)
     (p q : ℤ) : L.B p q ≤ L.Z p q := by
   let T := X.cycleBoundaryTower
@@ -243,14 +239,8 @@ def initialG (X : BigradedExactCouple C 0) (p q : ℤ) : X.D p q ⟶ X.E p q :=
   X.g p q ≫ eqToHom (by congr 1 <;> omega)
 
 /-- The initial `g` lands in every finite cycle object, hence in their intersection.
-The exact-couple cycle formula is `Z_{r+2} = f⁻¹(im alpha^r)` inside the initial page,
-with the component indices determined by the bidegrees. Prove it by induction from
-`Z₂ = E₂`, using the derived-couple restriction equations and the successor projection.
-Since `g ≫ f = 0`, the image of the initial `g` lies in every such inverse image:
-the zero morphism factors through each incoming iterate of `alpha`. Thus its image is
-a common lower bound of the finite cycles, so `L.Z_glb` places it below `L.Z`.
-The image factorization then gives the required morphism into the limiting cycles.
-Source: Stacks Section 12.21. -/
+
+Stacks Project, Section 12.21. -/
 theorem g_factors_limitCycles (X : BigradedExactCouple C 0) (L : LimitSubobjects X)
     (p q : ℤ) : (L.Z p q).Factors (X.initialG p q) := by
   let T := X.cycleBoundaryTower
@@ -358,7 +348,8 @@ noncomputable def toGradedPiece (X : BigradedExactCouple C 0)
       ((X.imageFiltration (p + q) (A (p + q))).antitone_step (by omega)))
 
 /-- Weak convergence: the two canonical maps are epimorphic and have identical kernels.
-Source: Stacks Tag 012U. -/
+
+Stacks Project, Tag 012U. -/
 def WeaklyConvergesTo (X : BigradedExactCouple C 0) (L : LimitSubobjects X)
     (A : ∀ n : ℤ, AlphaColimit X n) : Prop :=
   ∀ p q : ℤ, Epi (X.toPageInfinity L p q) ∧ Epi (X.toGradedPiece A p q) ∧
@@ -368,7 +359,8 @@ def WeaklyConvergesTo (X : BigradedExactCouple C 0) (L : LimitSubobjects X)
 Both targets are the quotient of `D^{p,q}` by the same kernel, because both maps are
 epimorphisms in an abelian category. The first isomorphism theorem gives their unique
 comparison isomorphism commuting with the two quotient maps.
-Source: Stacks Tag 012U. -/
+
+Stacks Project, Tag 012U. -/
 theorem weakConvergence_comparison (X : BigradedExactCouple C 0) (L : LimitSubobjects X)
     (A : ∀ n : ℤ, AlphaColimit X n) (h : X.WeaklyConvergesTo L A) (p q : ℤ) :
     ∃! e : X.pageInfinity L p q ≅
@@ -404,21 +396,22 @@ theorem weakConvergence_comparison (X : BigradedExactCouple C 0) (L : LimitSubob
   exact he'.trans (Abelian.comp_epiDesc f g hfg).symm
 
 /-- Abutting means weak convergence and separated, exhaustive image filtrations.
-Source: Stacks Tag 012U. -/
+
+Stacks Project, Tag 012U. -/
 def AbutsTo (X : BigradedExactCouple C 0) (L : LimitSubobjects X)
     (A : ∀ n : ℤ, AlphaColimit X n) : Prop :=
   X.WeaklyConvergesTo L A ∧ ∀ n : ℤ,
     (X.imageFiltration n (A n)).IsSeparated ∧ (X.imageFiltration n (A n)).IsExhaustive
 
-/-- A later filtration step is killed by the earlier quotient map: its inclusion factors
-through the earlier step, whose composite with its cokernel projection is zero. -/
+/-- A later filtration step is killed by the earlier quotient map. -/
 theorem filtrationStep_comp_quotient_zero {T : C} (F : PBCDecreasingFiltration T) (p : ℤ) :
     (F.step (p + 1)).arrow ≫ cokernel.π (F.step p).arrow = 0 := by
   rw [← Subobject.ofLE_arrow (F.antitone_step (show p ≤ p + 1 by omega)), Category.assoc]
   simp
 
 /-- The transition `A/F^{p+1} → A/F^p` of the inverse system of quotients.
-Source: Stacks Tag 012U. -/
+
+Stacks Project, Tag 012U. -/
 noncomputable def quotientTransition {T : C} (F : PBCDecreasingFiltration T) (p : ℤ) :
     cokernel (F.step (p + 1)).arrow ⟶ cokernel (F.step p).arrow :=
   cokernel.desc (F.step (p + 1)).arrow (cokernel.π (F.step p).arrow)
@@ -426,7 +419,8 @@ noncomputable def quotientTransition {T : C} (F : PBCDecreasingFiltration T) (p 
 
 /-- The canonical cone `A → A/F^p` is an inverse limit. This is equivalent to the
 canonical map `A → lim_p A/F^p` being an isomorphism, and includes existence of that limit.
-Source: Stacks Tag 012U. -/
+
+Stacks Project, Tag 012U. -/
 def IsInverseLimit {T : C} (F : PBCDecreasingFiltration T) : Prop :=
   ∀ (S : C) (f : ∀ p : ℤ, S ⟶ cokernel (F.step p).arrow),
     (∀ p, f (p + 1) ≫ quotientTransition F p = f p) →
@@ -434,7 +428,7 @@ def IsInverseLimit {T : C} (F : PBCDecreasingFiltration T) : Prop :=
 
 /-- Convergence means regularity, abutting, and completeness of every abutment filtration
 in the inverse-limit sense. Completeness of the couple itself is the separate predicate
-`IsComplete` above. Source: Stacks Tag 012U. -/
+`IsComplete` above. Stacks Project, Tag 012U. -/
 def ConvergesTo (X : BigradedExactCouple C 0) (L : LimitSubobjects X)
     (A : ∀ n : ℤ, AlphaColimit X n) : Prop :=
   X.IsRegular ∧ X.AbutsTo L A ∧ ∀ n : ℤ, IsInverseLimit (X.imageFiltration n (A n))

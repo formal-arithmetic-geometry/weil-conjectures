@@ -14,9 +14,10 @@ import WeilConjectures.CategoryTheory.CartanEilenbergConeGradedHomExt
 
 /-! # Normalized degreewise comparison for the Cartan--Eilenberg cone filtration
 
-Source: Stacks Project, Homology, Tag 0133, canonical augmentation, and Tag 012X,
-column filtration of a total complex. This is the augmented-cone refinement used
-in the parent node's second proof step.
+## References
+
+* Stacks Project, Homology, Tag 0133 (canonical augmentation) and Tag 012X
+  (column filtration of a total complex).
 -/
 
 @[expose] public section
@@ -72,23 +73,7 @@ def CartanEilenbergConeGradedNormalized
           (m - p + 1) (m - p) (by omega) ≫ e.inv)
 
 /-- In the possible support range, the column-tail quotient has a normalized isomorphism.
-Source: Stacks Project, Tags 012X and 0133.
-
-Proof: project the ambient cone onto its complex-index-p summands. On the K
-summand retain only degree m+1=p; on the diagonal coproduct retain index p.
-This kills the next filtration step. Restrict to step p and descend through
-its cokernel; evaluation preserves that cokernel. Conversely each retained
-summand factors through step p by the image-supremum formula. Composing these
-lifts with the quotient projection gives the inverse map. The projection after
-inclusion is identity. For the other composite cancel the epic quotient map
-and check the finite generating image summands of step p: index p is identity,
-and larger indices factor through step p+1 and vanish. Identify the retained
-I term using extendXIso and the retained K term using the extended single
-complex. These constructions give exactly the two normalization equations.
-When p<b both column terms vanish by the below-bound assumptions. The range
-hypothesis excludes m<p-1. At m=p-1 only K remains; at m>=p only the corresponding
-I resolution term remains. The construction therefore includes empty intervals
-and columns below the lower bound. -/
+Source: Stacks Project, Tags 012X and 0133. -/
 theorem cartanEilenberg_cone_graded_normalized_iso
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

@@ -33,12 +33,7 @@ variable {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
 
 /-- A derived mate is computed by the ordinary mate and the normalized derived
 comparisons. Source: Stacks 0FND and 09T5.
-Proof: apply the second derived Hom bijection and postcompose with the invertible
-right factorization. The mate transpose identity moves the first comparison through
-the first adjunction. Its normalization, the right-square comparison, and naturality
-of the G factorization reduce that side to the ordinary unit followed by the ordinary
-square. The ordinary mate identity identifies this with the second ordinary transpose.
-The second normalization gives the other side, and both cancellations are injective. -/
+-/
 theorem derivedMate_comparison
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (ad₁ : LD₁ ⊣ RD₁) (ad₂ : LD₂ ⊣ RD₂)
     (ε₁ : QA ⋙ LD₁ ⟶ L₁ ⋙ QB) (ε₂ : QC ⋙ LD₂ ⟶ L₂ ⋙ QD)

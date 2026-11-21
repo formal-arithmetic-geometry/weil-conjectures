@@ -1085,22 +1085,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [HasDerivedCategory.{w} (Modules.{c, v, r} J R)]
 
 /-- Contravariant derived Hom is exact with the coherently normalized signed source shift.
-Source: Stacks 08JC and 0A8X (Hom-complex differential).
-Proof: Represent M by a K-injective I. The signed source comparison on Hom complexes
-multiplies the reindexed degree-q family for E[m] by (-1)^(m*q). For the opposite-category
-shift n this uses m=-n. Raw comparisons have the addition discrepancy (-1)^(n*m).
-Multiply the degree-n comparison by (-1)^(n*(n+1)/2). The identity
-q(n+m)=q(n)+q(m)+n*m cancels that discrepancy and gives zero and addition coherence for
-all integers. At n=1 this correction is -1; at n=-1 it is 1. The fixed ordinary-to-derived
-augmentation and its uniqueness therefore give exactly the two displayed normalizations.
-For a cone of E -> G, ordinary Hom into I is the graded direct sum of Hom(G,I) and
-Hom(E,I)[-1]. Its differential is (d*x,d*y+(-1)^(q+1)*f*(x)). The degree-q map
-(x,y) -> (x,(-1)^(q+1)*y), in cone-summand order, identifies it with Cone(f*)[-1].
-Rotation and the specified opposite triangle sign identify all three arrows. For the connecting
-arrow, the minus in the degree-one comparison turns the reversed third arrow into cone inclusion.
-Hom into I inverts quasi-isomorphisms, so localize these identities.
-Every distinguished derived triangle is isomorphic to a localized cone triangle; transport
-along this isomorphism proves exactness. No double dual or bidual evaluation map is used. -/
+Source: Stacks 08JC and 0A8X (Hom-complex differential). -/
 theorem signedDerivedInternalHom_exact (M : D.{c, v, r, w} J R) :
     let T := Prod.sectL _ M ⋙ derivedInternalHomOfUniverses.{c, v, r, w} J R
     ∃ S : T.CommShift ℤ,

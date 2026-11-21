@@ -26,8 +26,7 @@ namespace CategoryTheory
 
 /-- Enlarging a finite generator support enlarges its thick envelope.
 Source: Stacks Project, Tag 09SP.
-Proof: include the smaller coproduct into the larger and retract by zero on the
-extra summands. Retract closure and minimality of the thick envelope give inclusion. -/
+-/
 theorem finite_thick_mono
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]
@@ -53,14 +52,8 @@ theorem finite_thick_mono
     ((ObjectProperty.singleton (∐ B)).le_triangEnvelope _ (by simp))
 
 /-- A compact-source map into a coproduct of shifted generators has finite thick support.
-Source: Stacks Project, Derived Categories, Tag 09SP, initial-stage argument.
-
-Proof: compactness writes the map as a finite sum of maps to individual summands.
-Take the image of the finite support in the generator index set. Each corresponding
-unshifted generator is a retract of the coproduct over this image, hence belongs to
-its thick envelope. Closure under shifts and finite sums puts the finite supported
-coproduct in the same envelope. Its canonical inclusion into the original coproduct
-and the finite sum of the supported components give the required factorization. -/
+Source: Stacks Project, Derived Categories, Tag 09SP.
+-/
 theorem compact_coproduct_finite_thick_support
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]

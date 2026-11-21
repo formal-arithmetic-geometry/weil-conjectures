@@ -303,18 +303,7 @@ private theorem colimit_site_raw_comparison_unit_compatibility
 
 /-- Source: Stacks Project, Sites, Tag 0A35,
 presentation construction and adjunction paragraphs; abelian colimits
-as in Modules on Sites, Tag 03CO.
-
-Proof: Construct B(t) as the left Kan extension of the underlying stage inverse-image
-sheaf along V(t.right).op, and β(t) as its universal unit. For b : t to t',
-compose θ(b) with β(t') and transport along V.w; the Kan universal property
-constructs B.map b. Adjunction uniqueness under hθ proves identities and
-composition. Extend α(t) by the same Kan property to γ(t); hα and hθ prove
-naturality. This constructs the raw diagram and its comparison maps only;
-no sheaf condition or isomorphism after sheafification is asserted here.
-The universal units determine B, its maps and γ up to the unique compatible
-isomorphism; no arbitrary existence witness is used to define an object.
--/
+as in Modules on Sites, Tag 03CO. -/
 theorem colimit_site_raw_abelian_section_diagram
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

@@ -18,10 +18,13 @@ import WeilConjectures.CategoryTheory.Triangulated.MilnorProjectionFactorization
 /-!
 # Milnor exact sequence for a derived inverse limit
 
-Source: Stacks Project, More on Algebra, Tags 07KY and 08U5; Derived Categories of Schemes, Tag 08D4, proof of (2).
-
 The maps are chosen simultaneously for all specified Roos triangles and are natural
 for morphisms of these triangles. No functorial choice of a derived-limit object is assumed.
+
+## References
+
+* Stacks Project, More on Algebra, Tags 07KY and 08U5.
+* Stacks Project, Derived Categories of Schemes, Tag 08D4, proof of (2).
 -/
 
 @[expose] public section
@@ -67,27 +70,7 @@ private def milnorProjectionCone [HasDerivedCategory.{v} AddCommGrpCat.{u}]
 
 /-- The natural Milnor short exact sequence for every derived inverse limit of abelian groups.
 Source: Stacks Project, Tags 07KY and 08U5; Tag 08D4, proof of (2).
-
-Proof, following the node:
-1. Use the defining distinguished Roos triangle. Exactness of
-countable products in abelian groups and part (2)
-of `lemma-reduction-derived-nakayama` identify the cohomology of the product with the
-product of the cohomology groups, compatibly with every projection. Under this identification
-cohomology sends the transition endomorphism to the transition endomorphism of the cohomology
-system, since its projection is `pr n - pr (n + 1) ≫ f n`.
-2. Apply `lem-sf-derived-homology-long-exact` to this triangle. The resulting five-term
-segment starts with `1 - s` on the product in degree `i - 1` and ends with `1 - s` in
-degree `i`. By `lem-pc-derived-limit-roos-abelian-groups`, their cokernel and kernel are
-respectively the actual first right derived functor of inverse limit and inverse limit.
-Factor the connecting map through that cokernel and the cohomology of `p` through that
-kernel. Exactness gives the displayed short exact complex. The factorization of the latter
-map is recorded by its equations after every limit projection. The natural Roos
-identifications and natural long exact sequence give both commuting squares for every
-morphism of specified triangles. This construction chooses the maps simultaneously.
-
-`K` is the tower functor. The transition maps are recovered from its successor arrows.
-The product instance supplies the product already present in the specified derived-limit
-triangle, rather than a finiteness or boundedness hypothesis. All degrees are integers. -/
+`K` is the tower functor, and the transition maps are recovered from its successor arrows. -/
 theorem milnor_shortExact [HasDerivedCategory.{v} AddCommGrpCat.{u}] (i : ℤ) :
     ∃ (a : ∀ (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u})
         [HasProduct (fun n : ℕ => K.obj (Opposite.op n))]

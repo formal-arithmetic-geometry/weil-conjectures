@@ -67,9 +67,7 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   {P : C ⥤ C} [P.Monoidal] {Q : D ⥤ D} [Q.Monoidal]
   (B : C ⥤ D) [B.Monoidal] (c : B ⋙ Q ≅ P ⋙ B) [c.hom.IsMonoidal]
 
-/-- The cotensor square associated to a monoidal commuting comparison.
-Proof: precompose with the composite tensorator, apply the monoidal equation for
-c, and cancel each tensorator with its inverse. -/
+/--  The cotensor square associated to a monoidal commuting comparison. -/
 lemma scalar_cotensor_square (K L : C) :
     Q.map (Functor.OplaxMonoidal.δ B K L) ≫
         Functor.OplaxMonoidal.δ Q (B.obj K) (B.obj L) ≫
@@ -87,12 +85,7 @@ lemma scalar_cotensor_square (K L : C) :
     Category.id_comp, Category.comp_id]
 
 /-- A monoidal scalar comparison and an equivariant line isomorphism induce a
-natural isomorphism between the corresponding strict tensor functors.
-Proof: inverse tensorators are natural. The monoidal square for c identifies their
-composites on the two sides; the line equation replaces Q(b) followed by sigma.
-Bifunctoriality and naturality of B's tensorator then give the strict morphism
-square for beta. The inverse is inherited from its underlying isomorphism, and
-naturality follows from tensorator naturality. -/
+natural isomorphism between the corresponding strict tensor functors. -/
 def tensorRightScalarIso {L : C} {M : D} (τ : P.obj L ≅ L) (σ : Q.obj M ≅ M)
     (b : B.obj L ≅ M)
     (hb : Q.map b.hom ≫ σ.hom = c.hom.app L ≫ B.map τ.hom ≫ b.hom) :
@@ -148,10 +141,7 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   {D : Type u'} [Category.{v'} D] [MonoidalCategory D]
   {P : C ⥤ C} [P.Monoidal] {Q : D ⥤ D} [Q.Monoidal]
 
-/-- Existential monoidal and line data suffice to construct the strict comparison.
-Proof: eliminate the two witnesses and use tensorRightScalarIso. This elimination
-is performed for abstract monoidal categories, so applications need not expand
-monoidal structures in the concrete derived category. -/
+/--  Existential monoidal and line data suffice to construct the strict comparison. -/
 theorem tensorRightScalarIso_nonempty (B : C ⥤ D) (c : B ⋙ Q ≅ P ⋙ B)
     {L : C} {M : D} (τ : P.obj L ≅ L) (σ : Q.obj M ≅ M)
     (h : ∃ hB : B.Monoidal, letI := hB

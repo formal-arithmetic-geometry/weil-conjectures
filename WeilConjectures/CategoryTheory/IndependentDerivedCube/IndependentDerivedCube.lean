@@ -117,11 +117,7 @@ def unitNormalized
 omit [PreservesFiniteLimits x] [PreservesFiniteColimits x]
   [PreservesFiniteLimits y] [PreservesFiniteColimits y] in
 /-- A square normalized by right-derived units respects a morphism of ordinary squares.
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E, uniqueness of right derivation.
-Proof: evaluate on a K-injective representative, cancel the invertible source unit,
-and use the two normalization equations. The ordinary square's naturality and the
-naturality of the target derived unit then identify the two composites. Essential
-surjectivity of K-injective representatives gives the equation on every object. -/
+Source: Stacks Project, Cohomology on Sites, Tag 0D6E, uniqueness of right derivation. -/
 private theorem normalized_naturality
     (x' : A ⥤ Ap) (y' : B ⥤ Bp) [x'.Additive] [y'.Additive]
     (X X' : DerivedCategory.{wA} A ⥤ DerivedCategory.{wAp} Ap)
@@ -330,14 +326,7 @@ end CompositeSquares
 /-- Right-derived unit normalization transports an ordinary cube with independently
 chosen localization universes.
 
-Source: Stacks, Cohomology on Sites, Tag 0D6E.
-
-Proof: paste the two full-unit equations along each route. The ordinary cube is a
-morphism of these pasted squares. Its exact-localization factors agree by the
-composition factor equations. Evaluate the resulting naturality equation on a
-K-injective representative, cancel its invertible right-derived unit, and transport
-along the representative isomorphism to every derived object. All operations are
-in the supplied derived categories; their morphism universes need not agree. -/
+Source: Stacks, Cohomology on Sites, Tag 0D6E. -/
 private theorem normalized_cube
     {App Bpp A2 B2 : Type (u + 1)}
     [Category.{u} App] [Category.{u} Bpp] [Category.{u} A2] [Category.{u} B2]
@@ -526,12 +515,7 @@ include b0 b1 x y d hb0 hb1 hx hy hd h in
 /-- The normalized cube for two successive exact restrictions, expressed using the
 composite of their two specified localized functors.
 
-Source: Stacks, Cohomology on Sites, Tag 0D6E.
-
-Proof: apply normalized_cube to the ordinary composite restriction. Its derived
-comparison is compDerivedSquare, normalized by the two full-unit equations. Conjugate
-the horizontal functors by mapDerivedCategoryCompIso; naturality of X cancels the
-composition factors. This gives the cube with the two specified derived restrictions. -/
+Source: Stacks, Cohomology on Sites, Tag 0D6E. -/
 theorem normalized_composite_cube :
     let KU := Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso sU tU)
       iU.mapDerivedCategory ≪≫ localizedSquare kU

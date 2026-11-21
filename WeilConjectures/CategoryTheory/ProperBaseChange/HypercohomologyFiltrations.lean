@@ -439,26 +439,11 @@ returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 / -- The three spectral sequences have the stated E₂ terms, finite filtrations, and unconditional
-  convergence, the first couple is the truncation couple of def-sp-truncation-couple for f_*
+  convergence, the first couple is the truncation couple for f_*
   through `TruncationCouple.bridgeIso`, and the middle one is the exact inverse image of the
   first.
 Source: Stacks Tags 0DDE, 015J.
-
-Proof: Transfer the lower cohomological bound along the supplied representative isomorphism.
-  Each of the three functors preserves lower bounds: use the bounded-below compatibility of
-  right derived functors and exact inverse image. The truncation cone then shows that the
-  degree-n abutment map from tau≤n is invertible. Apply half-plane convergence and
-  lem-sp-abutment-image-filtration, using the actual truncation inclusions as the cocone, to
-  obtain the finite canonical image filtrations and all three abutments. The bridge equations
-  follow from the definitions and equality-transport naturality. Shift the single complex to
-  degree zero to identify each E₂ term with the classical right derived functor. For termwise
-  inverse image, factor the mapped truncation inclusion through the target truncation; its
-  components are invertible below the cutoff, its top cycle map is invertible by exactness,
-  and both sides vanish above it. The cohomology comparison is natural and commutes with shifts,
-  hence with all three couple maps, including the boundary. Apply lem-sp-exact-functor-couple
-  and couple functoriality in both directions; cancellation at the kernel inclusions and
-  quotient projections proves that the page maps are inverses. Finally, exactness preserves
-  the epi-image factorization of each abutment map, giving the stated filtration comparison. - /
+ - /
 theorem hypercohomologyFiltrations_spec
     (sq : IsPullback g' f' f g)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

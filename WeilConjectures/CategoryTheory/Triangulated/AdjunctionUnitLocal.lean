@@ -28,7 +28,6 @@ coefficients:
 * `CategoryTheory.Adjunction.isZero_of_isIso_unit_app`: a local object killed by `L` is zero;
 * `CategoryTheory.Adjunction.isIso_unit_app_of_isIso_unit_app_map`: locality descends along a
   triangulated functor reflecting zero objects and commuting with the adjunctions.
-
 -/
 
 @[expose] public section
@@ -138,11 +137,7 @@ lemma isIso_unit_app_obj₁_of_distTriang (T : Triangle C) (hT : T ∈ distTrian
 categories compatible with the shifts, with triangulated functors and invertible counits, and let
 `F : C' ⥤ C` be a triangulated functor reflecting zero objects, such that `F (R' M) ≅ R (F' M)`
 naturally and `L (F X) = 0` whenever `L' X = 0`. If `F N` is local for `L ⊣ R`, then `N` is local
-for `L' ⊣ R'`.
-
-The fibre `G` of the unit `N ⟶ R' L' N` is killed by `L'`; its image `F G` is the fibre of
-`F N ⟶ F (R' L' N) ≅ R (F' L' N)`, a morphism between local objects, so `F G` is local and
-killed by `L`, hence zero; so `G` is zero and the unit is invertible. -/
+for `L' ⊣ R'`. -/
 theorem isIso_unit_app_of_isIso_unit_app_map
     {C' D' : Type*} [Category* C'] [Category* D']
     [Preadditive C'] [HasZeroObject C'] [HasShift C' ℤ] [∀ n : ℤ, (shiftFunctor C' n).Additive]

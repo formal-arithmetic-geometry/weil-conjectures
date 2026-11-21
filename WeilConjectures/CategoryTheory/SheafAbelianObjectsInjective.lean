@@ -15,7 +15,9 @@ import Mathlib.Algebra.Group.Ext
 /-!
 # Sectionwise abelian sheaves and commutative group objects
 
-Source: Stacks Project, Section 00YR and Proposition 00YV.
+## References
+
+* Stacks Project, Section 00YR and Proposition 00YV.
 -/
 
 @[expose] public section
@@ -57,21 +59,10 @@ private theorem section_mul_cast {C : Type u} [Category.{v} C]
   subst Q
   rfl
 
-/-- Source: Stacks Project Section 00YR, quadruples and Proposition 00YV.
-Proof: for an internal commutative group object, evaluate multiplication, unit, and
-inverse on every section. These operations give an additive commutative group by
-evaluating the internal group identities, using that products and the terminal sheaf
-are sectionwise. Naturality makes every restriction additive. The underlying sets
-already form a sheaf, so Presheaf.isSheaf_iff_isSheaf_forget makes the algebraic
-presheaf a sheaf as well. No choice of a new underlying set is needed.
-For surjectivity, apply F to the reconstructed sheaf. The section formulas identify
-its three internal operations with the original operations, and hF identifies the
-underlying sheaf. Extensionality and proof irrelevance give equality of objects.
-For injectivity, an equality F(A)=F(B) identifies underlying sheaves through hF;
-the section formulas identify their addition, zero and negation. Natural and integer
-scalar multiplication and subtraction are determined by these operations and their
-recursion laws. Thus the additive group structures agree. Restrictions agree by
-extensionality of homomorphisms, and sheaf witnesses agree by proof irrelevance. -/
+/-- A functor from abelian sheaves to internal commutative group objects in sheaves of sets,
+compatible with the forgetful functors and the sectionwise operations, is injective on objects.
+
+Stacks Project, Section 00YR (quadruples) and Proposition 00YV. -/
 theorem sheafAbelianObjects_injective
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (F : Sheaf J AddCommGrpCat.{max u v w} ⥤ CommGrp (Sheaf J (Type (max u v w))))

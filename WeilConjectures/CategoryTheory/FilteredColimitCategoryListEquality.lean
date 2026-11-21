@@ -46,16 +46,7 @@ private theorem finite_stage_eq
     · simpa only [G.map_comp, ConcreteCategory.comp_apply] using
         congrArg (fun a ↦ G.map g a) (hf q)
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph; Categories, Section Tag 04AX.
-
-Proof: Apply the equality criterion of filtered colimits of sets to every
-pair of corresponding objects, and apply it to the arrow cocone through its
-equivalence with Arrow O for every pair of corresponding arrows. This gives
-finitely many common refinements, with maps out of j and k. Filteredness gives
-a cocone on this finite family of refinements and their maps, making the maps
-out of j and k common to all equations. Transition functors preserve the
-object and arrow equalities, so all equalities hold in that cocone's apex.
-For empty lists choose any common successor of j and k. -/
+/-- Stacks Project, Tags 09YL and 04AX. -/
 theorem filteredColimit_category_list_equality
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

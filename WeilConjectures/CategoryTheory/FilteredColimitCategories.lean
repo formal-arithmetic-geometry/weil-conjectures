@@ -15,7 +15,9 @@ import WeilConjectures.CategoryTheory.FilteredColimitCategoryIso
 
 /-! # Filtered colimits of categories
 
-Source: Stacks Project, Sites, proof of Tag 09YL; Categories, Section Tag 04AX.
+## References
+
+* Stacks Project, Sites, Tag 09YL; Categories, Tag 04AX.
 -/
 
 @[expose] public section
@@ -26,31 +28,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL; Categories, Section Tag 04AX.
+/-- The chosen object colimit admits the induced category structure. Its arrows are the
+set colimit of the arrows at the stages.
 
-The chosen object colimit admits the induced category structure. Its arrows are the
-set colimit of the arrows at the stages. Finite lists lift with their source, target,
-composition and identity relations, and two lifts agree eventually. Finite functors lift.
-The Hom colimit over the under category is bijective, expressed by representability and
-its equality criterion (the common refinements commute with the arrows out of `j`).
-An arrow is invertible exactly when it has an invertible representative.
-
-Proof:
-1. Use representatives in the two set colimits.
-Move finitely many representatives to a common stage; the equality criterion of
-lem-weil-pbc-filtered-colimit-sets-elementwise makes all operations independent of the
-representatives and proves the category axioms and compatibility of the functors.
-2. Represent the finite lists and their relations. Move them to one stage using
-filteredness and the same equality criterion. Apply it again to two finite lists of
-lifts to obtain eventual equality. The functor assertion encodes the finite list of
-objects and arrows with their composition and identity relations.
-3. For fixed `X,Y`, represent an arrow and move its endpoint equalities to a stage
-out of `j`. This proves surjectivity of the Hom colimit. Eventual equality proves
-injectivity; equalize the parallel arrows out of `j` to obtain a common refinement
-in the under category. These steps use lem-weil-pbc-filtered-colimit-sets-elementwise.
-4. Functors preserve inverses. Conversely lift an arrow, an inverse and the two
-inverse equations using step 2; its representative is then invertible at that stage.
--/
+Stacks Project, Tags 09YL and 04AX. -/
 theorem exists_filteredColimit_category
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

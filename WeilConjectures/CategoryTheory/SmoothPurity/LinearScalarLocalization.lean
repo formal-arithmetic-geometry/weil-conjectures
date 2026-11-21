@@ -123,26 +123,7 @@ end LinearScalarConstruction
 open LinearScalarConstruction
 
 /-- The raw tensor-Hom localization is a linear category, with a linear localization functor
-and induced strict automorphisms.
-
-Proof plan:
-1. Extend the bilinear composition of the original category by the unique bilinear extension
-of module base change (Stacks 00CV, 00CX, 05G4).
-2. Every tensor is a finite sum of pure tensors. On three pure tensors associativity is the
-associativity of the original composition and of scalar multiplication; extend by additivity.
-The original identities tensored with one give the two identity laws in the same way.
-3. The maps `f ↦ 1 ⊗ f` are R-linear, preserve identities by construction, and preserve
-composition because `1 * 1 = 1`. They therefore define the linear functor Q.
-4. Base change the linear Hom maps of T. These preserve composition and identities on pure
-tensors, hence on finite sums, and give an A-linear functor T'.
-5. The strict inverse S of T is linear: apply the bijective Hom maps of T to the additivity
-and scalar equations for S. Its base change gives S'. The inverse equations hold on objects
-and on pure tensors and therefore on all morphisms. The two composites with Q agree on
-objects and on `1 ⊗ f`, giving the strict commuting square.
-
-The linear Hom equivalences below give tensor coordinates for the morphisms. The category
-instance supplies associativity and both identity laws. Instance-binding lambdas merely
-scope the existential category and linear structures; they introduce no extra hypotheses. -/
+and induced strict automorphisms. -/
 theorem exists_linear_scalarLocalization_category
     (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
     [Preadditive C] [Linear R C] (p : R) :

@@ -29,27 +29,9 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35,
-unit-transposed transition maps in the section formula.
-
-Proof: At t : Under i assign to G the sections of F(t.hom) inverse image at
-F(t.hom)(U). For b : t to t', transpose the unit of the inverse image at t'
-under the adjunction at t. Under.w and functoriality of F identify the composite
-restriction with restriction along F(t'.hom). This defines theta and its unit
-equation. Naturality of the hom equivalence gives naturality in G. For identity
-b, the identity map satisfies the same unit equation, hence equals theta by
-injectivity of the hom equivalence. For successive b and c, the composite of
-transposes (after restriction) and the transpose for b followed by c have the
-same adjunct, namely the unit at the last stage, hence agree. Evaluate at the
-transported U. The object equalities obtained from F.map_comp identify the
-codomains; their transports cancel by functoriality. Thus the evaluated maps
-satisfy the identity and composition laws and define the diagram L(G).
-Naturality in G assembles these diagrams into L. Its evaluation is exactly
-the stage section functor, so E consists of the identity identifications.
-The transported naturality equations are the displayed Arrow equalities.
-There are no colimits or cover lifting in this construction. Empty stages
-have no U, and identity refinements give identity section maps.
--/
+/-- The section diagram of the stage inverse images over `Under i`, evaluated at the image of
+`U`, is functorial in the sheaf `G` and compatible with the unit-transposed transitions.
+Stacks Project, Sites, Tag 0A35. -/
 theorem colimit_site_stage_section_diagram
     (J : Type u) [SmallCategory J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

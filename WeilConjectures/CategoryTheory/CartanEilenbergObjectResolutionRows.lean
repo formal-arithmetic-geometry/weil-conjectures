@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.Abelian.HorseshoePrescribedResolutions
 
 /-! # Alternating resolutions of the object-level rows
 
-Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--3.
+## References
+
+* Stacks Project, Derived Categories, Lemma 015I.
 -/
 
 @[expose] public section
@@ -26,24 +28,7 @@ universe u v
 /-- Resolve the boundary/cycle/homology short exact sequences. This makes no
 choice of resolutions of the terms of K, nor of the cycle/term/next-boundary rows.
 
-Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--3; Tag 013T, prescribed-end horseshoe lemma.
-
-Proof: The image inclusion of d^(p-1) factors through Z^p since d^(p-1)d^p=0.
-The resulting sequence 0 -> B^p -> Z^p -> H^p -> 0 is short exact, because
-homology is the cokernel of the map from boundaries to cycles. Choose resolutions
-of B^p and H^p independently for every integer p. For p<=0 the boundary object is
-zero, since K^(p-1) is zero; use its single-degree-zero resolution. For p<0 the
-homology object is zero, since K^p is zero; use its single-degree-zero resolution.
-Apply the prescribed-end horseshoe lemma in each degree p to these two chosen
-resolutions. It produces a resolution of Z^p and maps w and x with both displayed
-augmentation squares and degreewise short exactness. Degreewise short exactness
-implies short exactness in the category of complexes. At p<0 both end resolution
-complexes are zero. The short exact row therefore forces the middle resolution
-complex to be zero too. At p=0 only the boundary resolution is zero: the resulting
-map from the cycle resolution to the homology resolution is an isomorphism, as
-required by H^0=Z^0. No recursion or prescribed initial cycle resolution is needed
-for this existence statement: each boundary resolution will later be reused in
-the cycle/term row at the preceding degree. -/
+Stacks Project, Derived Categories, Lemma 015I and Tag 013T. -/
 theorem exists_cartanEilenberg_object_resolution_rows
     (B : Type u) [Category.{v} B] [Abelian B] [EnoughInjectives B]
     (K : CochainComplex B ℤ) (hK : ∀ p : ℤ, p < 0 → IsZero (K.X p)) :

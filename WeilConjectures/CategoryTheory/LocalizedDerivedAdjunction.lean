@@ -63,45 +63,7 @@ shifts; the shift structure `hRbar` on `Rbar` is the one induced from that of
 `R ⋙ Q` through `β` (the conjunct making `β` shift-compatible pins it), so the
 adjunction is compatible with the canonical shift of `Rbar` and not merely
 with the one `Adjunction.commShift_of_leftAdjoint` would supply for any `L`.
-No ordinary-complex realization is assumed.
-
-Proof:
-1. `W` has a right calculus of fractions and two-out-of-three (MS1–MS4).  The
-   resolving-class lemma (Tag 06XN) makes every denominator diagram
-   `W/X → B` of `F = E ⋙ Q'` essentially constant, with cone `u_s`, and
-   `u_{id_X}` is invertible for `X ∈ P`.
-2. The pointwise-Kan bridge identifies these values with the pointwise right
-   Kan extension of `F` along `Q`; total-left-derived assembly gives `L` and
-   `c : Q ⋙ L ⟶ F`, universal (Tags 05S9, 05SE), with `c_X = u_{id_X}`.
-3. `(L, c)` is absolute. For any `G : B ⥤ J`, the functor `F ⋙ G` again
-   satisfies the hypotheses of steps 1–2, so it has a pointwise left derived
-   functor whose counit is invertible on `P`. The comparison from
-   `(L ⋙ G, c ⋙ G)` to it is therefore invertible at `Q(X)` for `X ∈ P`,
-   hence everywhere since every object is isomorphic to such a `Q(X)`. Thus
-   `(L ⋙ G, c ⋙ G)` is a left derived functor, and pointwise because
-   `F ⋙ G` has a pointwise left derived functor.
-4. `(Rbar, β)` is an absolute right derived pair, because precomposition with
-   `Q'` is fully faithful on natural transformations.
-5. The absolute-derived-adjunction theorem (Tag 0FND) gives `L ⊣ Rbar`.
-6. The unit is the unique lift of `Q(u_X) ≫ β_{EX}` through the universal
-   property of `(L ⋙ Rbar, whiskerRight c Rbar)`. The counit descends
-   `L(β_Y⁻¹) ≫ c_{RY} ≫ Q'(v_Y)` along `Q'`. These universal properties
-   also give uniqueness among all natural transformations satisfying the
-   respective normalization equation, not just among adjunctions.
-7. Set `h = L(η) ≫ ε_L`. Naturality of `ε`, the two normalization equations,
-   naturality of `c`, and the underived left triangle give `h_Q ≫ c = c`.
-   Injectivity of the derived universal bijection gives `h = 1`; individual
-   `c_X` need not be invertible. For `k = η_Rbar ≫ Rbar(ε)`, naturality of
-   `η`, the two normalization equations and naturality of `β` give
-   `β_Y ≫ k_{Q'Y} = Q(u_{RY} ≫ R(v_Y)) ≫ β_Y = β_Y`. Cancel `β_Y`, then
-   use full faithfulness of precomposition with `Q'` to obtain `k = 1`.
-8. The shift on `Rbar` is induced from `R ⋙ Q` through `β` by the
-   localization property of `Q'`, which makes `β` shift-compatible.
-9. The shift on `L` is the one induced from that of `Rbar` through the
-   adjunction, so the adjunction is shift-compatible. By the unit equation,
-   `c_X = L(Q(u_X) ≫ β_{EX}) ≫ ε_{Q'EX}`, a composite of shift-compatible
-   transformations, so `c` is shift-compatible (Tag 05SU).
--/
+No ordinary-complex realization is assumed. -/
 theorem exists_localizedDerivedAdjunction
     {K : Type uK} [Category.{vK} K] [HasZeroObject K] [HasShift K ℤ]
     [Preadditive K] [∀ n : ℤ, (shiftFunctor K n).Additive]

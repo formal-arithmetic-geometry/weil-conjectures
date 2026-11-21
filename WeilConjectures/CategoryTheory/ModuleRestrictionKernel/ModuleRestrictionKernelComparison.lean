@@ -87,9 +87,7 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
   {W T : C} (m : W ⟶ T)
 
 /-- Additivity of module restriction kernels.
-Source: Stacks, 03DA and 093X.
-Proof: evaluation and restriction are additive; the induced kernel maps preserve
-addition because their composites with the monic kernel inclusion do. -/
+Source: Stacks, 03DA and 093X. -/
 theorem sAdditiveProof : (S J A m).Additive := by
   constructor
   intro M N f g
@@ -104,9 +102,7 @@ instance sAdditive : (S J A m).Additive :=
 
 omit [HasWeakSheafify J RingCat.{u}] in
 /-- Additivity of abelian restriction kernels.
-Source: Stacks, 01FT and 093X.
-Proof: evaluation is additive. Composing the induced maps with the monic kernel
-inclusion reduces addition to sectionwise addition. -/
+Source: Stacks, 01FT and 093X. -/
 theorem s₀AdditiveProof : (S₀ J m).Additive := by
   constructor
   intro M N f g
@@ -126,10 +122,7 @@ def kernelIdentityObj (M : Modules J A) :
   PreservesKernel.iso (v A) ((restriction J A m).app M)
 
 /-- Naturality of the kernel-preservation comparison.
-Source: Stacks, 03DA/03FD.
-Proof: compose both maps with the monic target kernel inclusion. Both composites
-are the underlying section map followed by the source inclusion; kernel
-uniqueness gives the equation. -/
+Source: Stacks, 03DA/03FD. -/
 theorem kernelIdentity_naturality {M N : Modules J A} (f : M ⟶ N) :
     (S J A m ⋙ v A).map f ≫ (kernelIdentityObj J A m N).hom =
       (kernelIdentityObj J A m M).hom ≫ (V J A ⋙ S₀ J m).map f := by
@@ -149,11 +142,7 @@ def kernelIdentity : S J A m ⋙ v A ≅ V J A ⋙ S₀ J m :=
   NatIso.ofComponents (kernelIdentityObj J A m) (kernelIdentity_naturality J A m)
 
 /-- Enough injectives for constant module sheaves on the small site.
-Source: Stacks, Injectives, 01DU.
-Proof: module sheaves form a Grothendieck abelian category. The functorial
-injective embedding theorem embeds every object monomorphically into an
-injective object. The abelian structure is Mathlib's sectionwise-kernel,
-sheafified-cokernel structure on `SheafOfModules`. -/
+Source: Stacks, Injectives, 01DU. -/
 theorem moduleEnoughInjectivesProof : EnoughInjectives (Modules J A) := by
   let := SheafOfModules.isGrothendieckAbelian
     ((constantSheaf J RingCat.{u}).obj (RingCat.of A))

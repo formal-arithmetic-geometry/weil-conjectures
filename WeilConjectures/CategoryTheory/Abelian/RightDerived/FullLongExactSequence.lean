@@ -26,25 +26,7 @@ open CategoryTheory.Limits
 namespace CategoryTheory.ShortComplex.ShortExact
 
 /-- A short exact sequence gives a full long exact sequence of right derived functors,
-including the initial monomorphism. Source: Stacks Project, Tag 015B (1)-(2).
-
-Proof:
-1. Choose compatible injective resolutions of the three objects using the horseshoe
-lemma (lem-weil-pbc-injective-resolution-ses, Stacks Tag 013T). Their augmentations commute
-with the two maps of the short exact sequence.
-2. Each degreewise short exact sequence splits, because its first term is injective
-(def-sp-injective-resolutions, Stacks Tag 0136). Additivity of `F`
-preserves the splitting identities, so applying `F` gives
-another degreewise short exact sequence of complexes in the abelian target category.
-3. Apply the long exact cohomology sequence (lem-weil-pbc-complex-ses-homology-long-exact,
-Stacks Tag 0117). This gives connecting maps and exactness at every term after the first.
-4. The complexes vanish in negative degrees. Their zeroth cohomology is the kernel of
-the first differential; the induced map between these kernels is mono, since the
-map between the degree-zero objects is a split mono. This supplies the initial zero.
-5. Identify the cohomology objects and maps with the right derived functors using
-lem-weil-pbc-derived-functor-map-via-lift. Conjugate each connecting map by these
-comparison isomorphisms. Exactness and the initial monomorphism transport across them.
--/
+including the initial monomorphism. Source: Stacks Project, Tag 015B (1)-(2). -/
 theorem exists_rightDerived_full_long_exact
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]
     [Abelian A] [EnoughInjectives A] [Abelian B]

@@ -18,13 +18,7 @@ namespace CategoryTheory
 
 
 /-- Auxiliary compatibility package for the normalized truncation cocone.
-Source: Stacks Tag 05TC (2), blueprint step 5. For c, the inclusion tau_{<=n}K -> K is a
-cohomology isomorphism through n and has zero source cohomology in degree n+1. Apply the
-proved low-degree right-derived map theorem on D+ and transport it by the natural
-bounded-below/unbounded derived-functor comparison. Composing with the inverse bridge
-and the object transports proves c invertible. Finally normalize j to a diagonal family
-k; induct on the alpha iterate, using the cocone identity at each successor and hc at
-the endpoint. This also covers page zero, where the iterate is the identity. -/
+Source: Stacks Tag 05TC (2). -/
 theorem truncation_abutment_cocone_aux
     {A : Type u₁} [Category.{v₁} A] [Abelian A]
     [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A]

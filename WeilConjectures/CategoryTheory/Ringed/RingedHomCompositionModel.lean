@@ -634,14 +634,7 @@ private lemma formula_unique
 end HomCompositionProof
 
 /-- There is exactly one chain map with the specified homogeneous composition formula.
-Source: Stacks 0A91 and More on Algebra 0A8I.
-Proof: use the sign-free chain tensor-Hom equivalence. Evaluation is the inverse
-transpose of the identity, and composition is the transpose of two evaluations
-and the native associator. These constructions already give chain maps. Their
-homogeneous pure-section formulas give f(g(x)); restriction naturality gives the
-formula on every slice. The total-tensor summand inclusions, Hom-product projections,
-and sheaf-tensor universal property prove uniqueness. No infinite sum of Hom-product
-coordinates is used. -/
+Source: Stacks 0A91 and More on Algebra 0A8I. -/
 theorem ringedHomComposition_existsUnique
     (E F G : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) :
     ∃! m : (coefficientTotalTensor.{u, c, v} J R).obj

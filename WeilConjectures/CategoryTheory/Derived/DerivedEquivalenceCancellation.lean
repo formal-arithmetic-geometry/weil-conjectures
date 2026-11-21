@@ -103,18 +103,7 @@ variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
 
 Source: Stacks 015F and the equivalence cancellation in the finite coefficient
 realization of.
-
-Proof: the counit of the derived equivalence is the localized ordinary counit
-with its composition factors. Apply the faithful forward equivalence and its
-triangle identity to obtain the analogous inverse-unit factorization. Equality
-of natural transformations on a derived category is detected on localized
-cochain complexes. On such a complex, postcompose both sides with the invertible
-factors for H and L. Naturality moves the derived unit to the resulting complex;
-its factorization cancels the forward-equivalence factor. The composition and
-natural-isomorphism factorization equations leave the localization of the
-ordinary cancellation word on both sides, degree by degree. Cancel the factors.
-This argument includes zero objects and empty categories whenever the displayed
-category and equivalence data exist. -/
+-/
 theorem mapDerivedCategory_cancelEquivalence (q : P ≅ H ⋙ L ⋙ R.functor) :
     let δ := Functor.isoWhiskerRight q R.inverse ≪≫
       Functor.isoWhiskerLeft H (Functor.isoWhiskerLeft L R.unitIso.symm) ≪≫

@@ -20,13 +20,7 @@ namespace CategoryTheory.Localization
 
 /-- Two transformations which become isomorphisms on functorial resolutions determine
 one normalized isomorphism after localization.
-Source: Stacks Project, Tag 0D6E.
-Proof: on a resolution invert the first transformation and follow it by the second.
-Conjugate by the localized resolution maps, which are invertible. Full faithfulness
-of precomposition with localization descends this isomorphism. Naturality along the
-resolution map proves normalization on every object. For uniqueness, cancel the
-first transformation on a resolution, and then cancel the localized resolution map;
-essential surjectivity of localization proves equality. -/
+Source: Stacks Project, Tag 0D6E. -/
 private theorem resolutionNormalizedComparison_aux
     {C D H : Type*} [Category C] [Category D] [Category H]
     (Q : C ⥤ D) (W : MorphismProperty C) [Q.IsLocalization W]
@@ -78,11 +72,7 @@ private theorem resolutionNormalizedComparison_aux
   exact (he' (P.obj X)).trans (hn (P.obj X)).symm
 
 /-- A specified model isomorphism may be retained in the normalization equation.
-Source: Stacks Project, Tag 0D6E.
-Proof: compose the second transformation with the inverse of the model isomorphism.
-The resolution comparison lemma descends the resulting unique isomorphism through
-localization. Postcomposition with the model isomorphism gives the stated equation;
-cancelling it proves the converse equation and uniqueness. -/
+Source: Stacks Project, Tag 0D6E. -/
 theorem resolutionNormalizedComparison
     {C D H : Type*} [Category C] [Category D] [Category H]
     (Q : C ⥤ D) (W : MorphismProperty C) [Q.IsLocalization W]

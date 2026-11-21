@@ -18,21 +18,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.LocalRing
 Let `R` be an Artinian local ring with residue field `κ`, for instance the finite coefficient
 ring `A_{E,n} = 𝒪_E/ϖⁿ`. An object `C` of `D(R)` has Tor amplitude in `[a, b]` as soon as
 `C ⊗ᴸ κ` has cohomology in `[a, b]`; the converse is the definition of Tor amplitude. This is the
-module-theoretic half of blueprint `theorem-f-shriek-finite-coefficients--1`.
-
-## Proof
-
-Represent `C` by a K-flat complex `P` of flat modules, so that `C ⊗ᴸ M[0]` is the complex
-`P ⊗ M`. For a fixed degree `q`, the class of modules `M` for which `P ⊗ M` is exact at `q` is
-closed under extensions (`LinearMap.exact_rTensor_of_exact`, a diagram chase using the flatness
-of `P^{q+1}`) and under directed unions of finitely generated submodules
-(`LinearMap.exact_rTensor_of_forall_finite`). Every finitely generated module over the Artinian
-local ring `R` is an iterated extension of copies of `κ`, by induction on its length, so the
-class contains every module as soon as it contains `κ`.
+module-theoretic half of this criterion.
 
 No boundedness or finiteness of `C` is needed.
 
-## Main statements
+## Main results
 
 - `LinearMap.exact_rTensor_of_exact_rTensor_residueField`: the module-theoretic core.
 - `DerivedCategory.torAmplitudeIn_of_homologyConcentratedIn_tensor_residueField` and
@@ -262,9 +252,7 @@ field (over a point).
 
 Let `R` be an Artinian local ring with residue field `κ` (for instance `A_{E,n} = 𝒪_E/ϖⁿ`), and
 let `C ∈ D(R)` be such that `C ⊗ᴸ κ` has cohomology in `[a, b]`. Then `C` has Tor amplitude in
-`[a, b]`. Represent `C` by a K-flat complex `P` of flat modules: the exactness of `P ⊗ κ` in a
-degree `q` propagates to the exactness of `P ⊗ M` for every module `M`
-(`LinearMap.exact_rTensor_of_exact_rTensor_residueField`). -/
+`[a, b]`. -/
 theorem torAmplitudeIn_of_homologyConcentratedIn_tensor_residueField [IsLocalRing R]
     [IsArtinianRing R] {a b : ℤ} (C : DerivedCategory (ModuleCat.{u} R))
     (hC : homologyConcentratedIn a b (C ⊗ (singleFunctor (ModuleCat.{u} R) 0).obj

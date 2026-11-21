@@ -16,7 +16,9 @@ import WeilConjectures.CategoryTheory.SheafRingObjectsInjective
 /-!
 # Recovering ring sheaves from internal ring objects
 
-Source: Stacks Project, Section 00YR and Proposition 00YV.
+## References
+
+* Stacks Project, Section 00YR and Proposition 00YV.
 -/
 
 @[expose] public section
@@ -25,7 +27,11 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
-/--  -/
+/-- A functor from sheaves of commutative rings to internal commutative ring objects in sheaves
+of sets, compatible with the forgetful functors and the sectionwise operations, is bijective
+on objects.
+
+Stacks Project, Section 00YR and Proposition 00YV. -/
 theorem sheafRingObjects_bijective
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (F : Sheaf J CommRingCat.{max u v w} ⥤

@@ -42,10 +42,7 @@ theorem IsAlphaCompact.factorizationClass (α : Cardinal.{v}) :
   obtain ⟨Z, hZ, a, g, hg⟩ := hfactor U hSU I Y f
   exact ⟨Z, fun i ↦ ⟨S, hZ i, hsmall, hfactor⟩, a, g, hg⟩
 
-/-- Krause's factorization condition (G4) implies perfectness (G2).
-
-Proof: factor a map through a coproduct of objects of S, lift each component by
-the given surjectivity, and compose the coproduct of lifts with the factorization. -/
+/-- Krause's factorization condition (G4) implies perfectness (G2). -/
 theorem ObjectProperty.IsCoproductFactorizationClass.perfect
     {S : ObjectProperty C} (hS : S.IsCoproductFactorizationClass)
     (I : Type v) (X Y : I → C) (f : ∀ i, X i ⟶ Y i)
@@ -99,11 +96,7 @@ instance isAlphaCompact_isClosedUnderIsomorphisms (α : Cardinal.{v}) :
     (alphaCompactObjects C α).IsClosedUnderIsomorphisms where
   of_iso e hU := hU.of_iso e
 
-/-- A coproduct of fewer than alpha alpha-small objects is alpha-small.
-
-Proof: factor each component map through a support of size less than alpha.
-Regularity bounds the union of these supports by alpha. Map every component
-factorization into that union, then use the coproduct universal property. -/
+/-- A coproduct of fewer than alpha alpha-small objects is alpha-small. -/
 theorem IsAlphaSmall.coproduct (α : Cardinal.{v}) [Fact α.IsRegular]
     (I : Type v) (U : I → C) (hI : HasCardinalLT I α)
     (hU : ∀ i, IsAlphaSmall (U i) α) : IsAlphaSmall (∐ U) α := by
@@ -126,14 +119,7 @@ theorem IsAlphaSmall.coproduct (α : Cardinal.{v}) [Fact α.IsRegular]
     simp [k]
   rw [hk, hg]
 
-/-- Coproducts of fewer than alpha alpha-compact objects are alpha-compact.
-
-Proof: take the replete class of coproducts of fewer than alpha alpha-compact
-objects. Its objects are alpha-small by regularity. To factor a map from such
-a coproduct, apply (G4) to each of its components. For each target summand take
-the coproduct of the resulting component objects, still indexed by fewer than
-alpha objects. These objects belong to the witnessing class. The two coproduct
-universal properties assemble the factorizations and verify (G4). -/
+/-- Coproducts of fewer than alpha alpha-compact objects are alpha-compact. -/
 theorem IsAlphaCompact.coproduct (α : Cardinal.{v}) [Fact α.IsRegular]
     (I : Type v) (U : I → C) (hI : HasCardinalLT I α)
     (hU : ∀ i, IsAlphaCompact (U i) α) : IsAlphaCompact (∐ U) α := by
@@ -193,12 +179,7 @@ private theorem alphaSmall_of_equivalence (e : C ≌ D)
   rw [ht, ← Category.assoc, hg, Category.assoc]
   simp [s]
 
-/-- Equivalences preserve alpha-compactness.
-
-Proof: pull the canonical class back along the inverse equivalence. Coproduct
-comparison isomorphisms transfer the support condition. For (G4), factor the
-inverse image of the map, then transport its component objects and morphisms
-back by fullness. Naturality of the coproduct comparisons verifies the equation. -/
+/-- Equivalences preserve alpha-compactness. -/
 theorem IsAlphaCompact.of_equivalence (e : C ≌ D)
     {U : C} {α : Cardinal.{v}} (hU : IsAlphaCompact U α) :
     IsAlphaCompact (e.functor.obj U) α := by
@@ -247,10 +228,7 @@ theorem IsAlphaCompact.shift [HasShift C ℤ]
     IsAlphaCompact (U⟦n⟧) α := hU.of_equivalence (shiftEquiv C n)
 
 open scoped ZeroObject in
-/-- The zero object is alpha-compact for every regular alpha.
-
-Proof: the class of zero objects satisfies (G4) using zero component maps.
-Every map from a zero object factors through the empty subcoproduct. -/
+/-- The zero object is alpha-compact for every regular alpha. -/
 theorem isAlphaCompact_zero [HasZeroObject C] [HasZeroMorphisms C]
     (α : Cardinal.{v}) [Fact α.IsRegular] : IsAlphaCompact (0 : C) α := by
   let S : ObjectProperty C := fun X ↦ IsZero X
@@ -280,14 +258,7 @@ variable [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
 
 open Pretriangulated
 
-/-- Alpha-small objects are closed under extensions.
-
-Proof: restrict a map from the middle vertex to the first vertex and factor it
-through a small support J. The subcoproduct inclusion is split monic, so the
-obstruction to extending that factorization vanishes. Triangle exactness lifts
-it to a map from the middle vertex to the J-subcoproduct. The difference from
-the original map factors through the third vertex, and hence through another
-small support K. The union J union K is still small and contains both maps. -/
+/-- Alpha-small objects are closed under extensions. -/
 theorem IsAlphaSmall.extension (α : Cardinal.{v}) [Fact α.IsRegular]
     (T : Triangle C) (hT : T ∈ distTriang C)
     (h₁ : IsAlphaSmall T.obj₁ α) (h₃ : IsAlphaSmall T.obj₃ α) :
@@ -334,12 +305,7 @@ theorem IsAlphaSmall.extension (α : Cardinal.{v}) [Fact α.IsRegular]
 
 end Triangle
 
-/-- Bounded coproducts of an essentially small class form an essentially small class.
-
-Proof: embed every indexing set of cardinality less than alpha into a fixed set
-of cardinality alpha. Reindex its coproduct by the image. The resulting shapes
-are indexed by the v-small powerset of this fixed set; Mathlib's smallness of
-colimits closure bounds all of the coproducts at once. -/
+/-- Bounded coproducts of an essentially small class form an essentially small class. -/
 theorem ObjectProperty.EssentiallySmall.bounded_coproducts
     (P : ObjectProperty C) [ObjectProperty.EssentiallySmall.{v} P]
     (α : Cardinal.{v}) :
@@ -367,13 +333,7 @@ theorem ObjectProperty.EssentiallySmall.bounded_coproducts
   exact Q.prop_of_iso (e ≪≫ er).symm hZ
 
 omit [HasCoproducts.{v} C] in
-/-- Extensions of two essentially small classes form an essentially small class.
-
-Proof: choose small representative sets for both outer vertices. The connecting
-maps between their representatives form a small set by local smallness. Choose
-a distinguished triangle for each such map. The triangle isomorphism axiom
-identifies every extension with the chosen middle vertex for its transported
-connecting map. These middle vertices therefore form a small representative set. -/
+/-- Extensions of two essentially small classes form an essentially small class. -/
 theorem ObjectProperty.EssentiallySmall.extensionProduct
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -404,10 +364,7 @@ theorem ObjectProperty.EssentiallySmall.extensionProduct
   exact ⟨M r, ⟨r, rfl⟩, ⟨Pretriangulated.Triangle.π₂.mapIso e⟩⟩
 
 omit [HasCoproducts.{v} C] in
-/-- The shift closure of an essentially small class is essentially small.
-
-Proof: shift every member of a small representative set by every integer. These
-objects form a small representative set for the shift closure. -/
+/-- The shift closure of an essentially small class is essentially small. -/
 theorem ObjectProperty.EssentiallySmall.shiftClosure [HasShift C ℤ]
     (P : ObjectProperty C) [ObjectProperty.EssentiallySmall.{v} P] :
     ObjectProperty.EssentiallySmall.{v} (P.shiftClosure ℤ) := by

@@ -149,8 +149,7 @@ private theorem inclusion_mono (S : AlgebraicGeometry.Scheme.{u})
   exact mono_of_mono_fac hl.1
 
 /-- The extension presentation sequence is short exact.
-Source: Stacks 03AJ. Proof: construct the augmentation as a cokernel and verify
-exactness using the universal property and local torsor sections. -/
+Source: Stacks 03AJ. -/
 theorem extension_presentation_shortExact (S : AlgebraicGeometry.Scheme.{u})
     {G : Sheaf S.smallEtaleTopology AddCommGrpCat.{max u w + 1}} {T : Torsor G}
     (E : ExtensionPresentation.{u, w} S T) :

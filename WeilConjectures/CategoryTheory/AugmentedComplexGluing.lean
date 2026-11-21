@@ -13,8 +13,9 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 /-!
 # Effective gluing of augmented complexes of module sheaves
 
-Source: Stacks Project, Sites, Tag 04TR, applied degreewise, and algebraization,
-Tag 099E, the gluing of the complexes K_U.
+## References
+
+* Stacks Project, Sites, Tag 04TR, and algebraization, Tag 099E.
 -/
 
 @[expose] public noncomputable section
@@ -344,16 +345,7 @@ private def gluedComplexOverIso (D : AugmentedComplexGlueData R U B L a) (i : A)
 
 /-- Strict descent data of augmented module complexes are effective on any covering
 family of objects. No boundedness or existence of fibre products is required.
-Source: Stacks Project, Sites, Tag 04TR; algebraization, Tag 099E.
-
-Proof: in degree n form the sheaf of compatible tuples supplied by ModuleGlueData.
-Apply the local differentials coordinatewise. Their chain equations and their square-zero
-relations hold coordinatewise, giving a global complex. The diagonal from a global module
-to the tuples of its restrictions is invertible: on each covering slice, evaluation at the
-graph is its inverse, and isomorphisms of sheaves are local. Descend each augmentation
-component by this diagonal. Its chain equation holds after restriction to each covering
-slice, hence globally. Graph evaluation gives the asserted chain isomorphisms and the
-augmentation equation. The construction also applies to the empty site and empty covers. -/
+Stacks Project, Sites, Tag 04TR; algebraization, Tag 099E. -/
 theorem exists_augmentedComplex_of_glueData (hU : J.CoversTop U)
     (D : AugmentedComplexGlueData R U B L a) :
     ∃ (K : CochainComplex (SheafOfModules.{u} R) ℤ) (ε : K ⟶ B),

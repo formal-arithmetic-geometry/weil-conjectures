@@ -28,39 +28,7 @@ namespace CategoryTheory.Functor
 /-- The cone of the specified diagonal augmentation has a degreewise finite
 complex-degree filtration. Its graded cohomology is the cohomology of the
 extended column augmentation cones. No exactness assumption is made here.
-Source: Stacks Project, Homology, Tag 0133, Lemma, the canonical augmentation and filtration, with Tag 012W for the degreewise bounds.
-
-Proof.
-1. Write J for the identity-mapped, extended and flipped bicomplex. The cone
-in degree n is K^(n+1) plus the diagonal coproduct of J in degree n.
-Put its K^(n+1) summand in complex degree n+1, and put the diagonal summand
-I^(s,r), where s+r=n, in complex degree s. Define the step p to be the
-sum of the images of precisely the summands with complex degree at least p.
-This is an actual subobject construction from the cone biproduct inclusions
-and diagonal coprojections, not a choice of a filtered model up to isomorphism.
-2. The cone differential is minus d_K on the K summands, the total differential
-on the I summands, and aug on the off-diagonal block. Each preserves or raises
-complex degree. The specified equation haug puts the off-diagonal block into
-complex degree n+1, so it too preserves the filtration. The resulting lifts
-through the monic step inclusions are unique. They square to zero because the
-cone differential does, giving subcomplexes and an antitone subobject filtration.
-3. For n fixed, all I summands have b <= s <= n, and the only additional summand
-is K^(n+1), which is zero if n+1 < b. Thus step b is the whole cone object and
-step n+2 is zero, including empty diagonals. These are the required degreewise
-finite bounds. No common global upper bound for the filtration is claimed.
-4. In the quotient of step p by step p+1 all summands except complex degree p
-disappear. What remains is the column I^(p,bullet), extended by zero, augmented
-by K^p in resolution degree -1. The off-diagonal differential is exactly
-(a.f p).f 0, using haug and the extension identifications. The differentials
-raising complex degree vanish in this quotient. Its short complex in degree n
-is therefore isomorphic to the short complex in degree n-p of the mapping cone
-of extendMap (a.f p), with its negative-degree zero terms. This gives the
-claimed homology isomorphism. Alternatively identify the entire graded complex
-with that column cone shifted by -p, removing the shift differential sign by
-the degreewise factors (-1)^(p*(n-p)). The identity functor's component
-identifications remove the harmless identity-mapping wrapper on I.
-This construction also applies to a zero column, a zero bicomplex, and all
-integers p,n; no quasi-isomorphism hypothesis is used. -/
+Stacks Project, Homology, Tag 0133 and Tag 012W. -/
 theorem cartanEilenberg_cone_filtration
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

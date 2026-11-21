@@ -21,7 +21,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure
 /-!
 # Derived constant towers and the actual inverse-limit counit
 
-Source: Stacks Project, Derived Categories, Tags 09T5 and 0FND; Cohomology on Sites, Tag 0941.
+## References
+
+* Stacks Project, Derived Categories, Tags 09T5 and 0FND; Cohomology on Sites, Tag 0941.
 -/
 
 @[expose] public noncomputable section
@@ -92,46 +94,11 @@ instance strictTowerLimitAdditive : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).Additive :=
 variable [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wT} (ℕᵒᵖ ⥤ A)]
 
 /-- The derived constant/limit adjunction, normalized by its actual tower projections.
-Source: Stacks Project, Derived Categories, Tags 09T5 and 0FND; Cohomology on Sites,
-Tag 0941.
-
-Here `n : ℕ` denotes the paper's level `n + 1`. The transformation `κ` is the total
-right-derived comparison on complexes. Its universal property is `hRL`, and `hκ`
-expresses computation on K-injective towers. The isomorphisms `c` implement
-`e_n Δ ≅ id`; their displayed formula fixes the canonical termwise identification.
-The counit is normalized as a morphism in the derived tower category itself.
-The formula for every resolution `q : M ⟶ I` is written after composing with the
-invertible `κ.app I` and `Q(q_n)`, so it is exactly the inverse-projection formula
-without choosing additional inverses. The transformations `π n` encode both
-naturality in the derived tower and independence of the resolution.
-
-Proof plan:
-1. The limit universal property gives `constLimAdj`, whose counit is the family
-   of limit projections. Constants and evaluations are exact by levelwise
-   abelianity. Apply the exact-functor
-   factorization and the termwise
-   homotopy adjunction.
-2. The exact constant left adjoint shows that the termwise limit of a K-injective
-   tower is K-injective. The
-   total-derived comparison is invertible on those towers. For q : M → I the comparison is
-   rho_q = RL(Qq) followed by the inverse of κ_I.
-3. Compute Hom into I and LI in the homotopy categories by
-   lem-weil-pbc-kinjective-hom-derived. The ordinary adjunction then gives the
-   derived Hom bijection. Its inverse sends h to Q(gamma_I) after Δ(rho_q h),
-   followed by the inverse of Qq.
-4. Lift a derived map between two resolutions uniquely to a homotopy class.
-   Naturality of κ and of the ordinary counit gives naturality of the Hom
-   bijection and independence of resolutions. Naturality in the other variable
-   extends from chain maps and inverse quasi-isomorphisms by localization.
-5. Take the transpose of the identity for the counit and the inverse transpose
-   of the identity for the unit. Naturality gives both triangle identities.
-6. On a K-injective tower the transpose of the identity is the ordinary counit.
-   Its evaluation is the limit projection. Counit naturality transports this
-   equality along every resolution q, giving the displayed resolution formula.
-   No equality of derived tower maps is inferred merely from their evaluations.
-7. For λ, compose Δλ with the counit. Counit naturality and λ-naturality prove
-   naturality in the arbitrary parameter category J. Evaluation, step 6, and
-   the canonical c give the final component formula. -/
+The transformation `κ` is the total right-derived comparison on complexes, with universal property
+`hRL`, and `hκ` expresses computation on K-injective towers. The isomorphisms `c` implement
+`e_n Δ ≅ id`, and the transformations `π n` are the projections, natural in the derived tower and
+independent of the resolution.
+Stacks Project, Tags 09T5, 0FND and 0941. -/
 theorem derived_tower_counit_projections
     (h : ∀ M : CochainComplex (ℕᵒᵖ ⥤ A) ℤ,
       ∃ (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (q : M ⟶ I), CochainComplex.IsKInjective I ∧ QuasiIso q)

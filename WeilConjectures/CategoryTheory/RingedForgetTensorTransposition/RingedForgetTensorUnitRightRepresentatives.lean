@@ -441,18 +441,7 @@ include u SB TB βB cB SA TA βA cA
 set_option linter.unusedSectionVars false in
 /--
 The representative unit calculation for the right unitor is reduced to the
-componentwise model equation for the normalized tensor comparison.
-Proof in words: apply the representative model equation to the unit complex and
-`P`. Naturality of the tensor-model comparisons, together with the exact-functor
-localization factor, reduces the assertion to the unit square on total complexes.
-In degree `n`, restrict to the only nonzero unit summand: `(0,n)` on the left
-and `(n,0)` on the right. Use the summand formula and the single-complex comparison
-in the displayed composite to obtain `u.coherence.right_unit`.
-The corresponding unitor model equations of `cB` and `cA` transport this equality
-back to the derived category. Local pure tensors and sheafification detect the
-component maps, so no hypothesis of generation by global sections is needed.
-Source: Stacks Project, sites-cohomology.tex, Tags 0FPT and 06YU.
--/
+componentwise model equation for the normalized tensor comparison. -/
 theorem ringed_forget_tensor_right_representatives
     (hU : ∀ P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ,
       P.IsKFlatIndependentCoefficients →

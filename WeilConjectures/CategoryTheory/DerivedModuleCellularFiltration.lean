@@ -23,23 +23,7 @@ namespace CategoryTheory
 
 /-- A derived module object has an exhaustive cellular filtration of a representative.
 Source: Stacks Project, More on Algebra, Remark 15.60.11 (Tag 09PB), and
-Differential Graded Algebra, Lemma 22.20.4 (Tag 09KP).
-
-Proof: choose a cochain representative of `K` using essential surjectivity of `Q`.
-Apply the filtered free resolution theorem, with the zero initial term reindexed as
-`F 0`. For the larger module universe, use the same free resolution construction:
-the free bases are indexed by sets in `Type (max u v)` and the free rank-one module
-is `ULift R`. Equivalently, lift the ring to that universe, apply the stated resolution
-there, and transport modules and complexes along the ring equivalence `ULift R ≃+* R`.
-Its inclusions are monomorphisms, compatible with the filtration steps, and their union
-is the resolution `L`. Localization of the augmentation gives `K ≅ Q(L)`.
-For each filtration step, take the short exact sequence with its quotient and apply
-`DerivedCategory.triangleOfSES_distinguished`. Inverse rotation places the quotient
-shifted by `-1` first, `Q(F n)` second, and `Q(F (n+1))` third. Each shifted quotient
-is a direct sum of shifts of the rank-one module: shifts preserve coproducts and
-`derivedModuleDirectSums` identifies the complex coproduct with the derived coproduct.
-Transport the rotated triangle along this identification to obtain the displayed maps.
-No closure property of objects, and no telescope argument, is used here. -/
+Differential Graded Algebra, Lemma 22.20.4 (Tag 09KP). -/
 theorem derivedModuleCellularFiltration (R : Type u) [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{max u v} R)]
     (K : DerivedCategory (ModuleCat.{max u v} R)) :

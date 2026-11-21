@@ -18,13 +18,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace CategoryTheory
 
 /-- An additive sheaf map is linear when coefficients are locally integers modulo
-all powers and the target is separated for local divisibility by those powers.
-
-Proof: subtract the two sides. On a covering sieve write r=a+l^(n+1)b.
-Naturality and additivity identify the restricted defect with l^(n+1) times
-g(bx)-c(b)g(x); the integer terms cancel because c preserves integers and g
-preserves integer multiples. Thus every power-image sieve of the defect covers.
-The separation hypothesis makes the defect zero. -/
+all powers and the target is separated for local divisibility by those powers. -/
 theorem linearity_of_localIntegers_adicSeparated
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (l : ℕ) {S R : Sheaf J RingCat.{w}} (c : S ≅ R)

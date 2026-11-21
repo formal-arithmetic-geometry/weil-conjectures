@@ -228,23 +228,7 @@ variable [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ SheafOfModules.{u}
 /-- The ordinary-to-derived inverse-limit comparison is invertible on the actual
 Koszul tensor tower of a K-injective coefficient complex.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0A0A and 0941 and; derived.tex, Tag 0949.
-
-Proof: finite Koszul evaluation identifies the tower with Hom(P_m,I). Its ordinary
-limit is Hom(colim P_m,I). The telescope-to-colimit quasi-isomorphism becomes a
-quasi-isomorphism after Hom(-,I), and Hom of the telescope is the shifted cone of
-one minus shift on the termwise product of Hom(P_m,I). Finite split-perfect tensor
-preserves K-injectivity, and termwise products of K-injectives compute derived
-products. The Roos calculation for the strict tower therefore identifies the image
-of the ordinary limit with its derived inverse limit. To check that this is the
-specified comparison, resolve the strict tower by a K-injective tower. Naturality
-of D.comparison gives its map on the resolution; the Roos construction commutes
-with that map and with the ordinary-limit inclusion. On the resolved tower the
-comparison is invertible by D.comparison_isIso, so the square proves the claim.
-Equivalently one may first replace I by a homotopy-equivalent termwise-injective
-K-injective complex; Hom of the telescope is then the usual exact-product Roos
-calculation. No termwise injectivity is assumed of the given I. The empty list is
-the constant tower, and the same argument covers zero or invertible generators. -/
+Source: Stacks Project, sites-cohomology.tex, Tags 0A0A and 0941 and; derived.tex, Tag 0949. -/
 theorem ringedKoszulTensorTower_limit_comparison_isIso
     (D : RingedKoszulLimitPresentation O r b) (I : ringedSiteComplex O)
     [I.IsKInjective] :

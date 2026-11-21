@@ -490,35 +490,7 @@ def InternalSectionScalarAdjunction : Prop :=
 
 /-- Scalar reconstruction preserves restriction, balanced extension and their specified
 ordinary and unbounded derived adjunctions, with no flatness hypothesis on the ring map.
-Source: Stacks 03EK, 0GMW, 06YS, 06YY, 07A6 and 09T5.
-
-Proof:
-1. Internal restriction acts on each section by a(r)n. Reconstruction leaves the
-underlying sheaf and every morphism fixed, giving the identity restriction comparison.
-2. Apply lem-pe-internal-section-tensor-comparison to the restricted regular S-module
-and M. Both extensions impose (s a(r)) tensor m = s tensor (rm). The comparison sends
-s tensor m to itself and respects the S-action. Naturality is checked on these generators
-using lem-pc-sites-sheaf-tensor-bilinear-universal.
-3. The ordinary transpose sends f to (m ↦ f(1 tensor m)); its inverse sends g to
-(s tensor m ↦ s g(m)). Balancing and the module axioms prove they are inverse.
-The generator comparison preserves these formulas, including the unit and counit.
-4. The exact section equivalences preserve quasi-isomorphisms, flat objects and K-flat
-complexes by lem-pe-internal-section-tensor-comparison. Localizing them and the termwise
-restriction identity gives the derived equivalences and exact restriction comparison.
-5. Use lem-pc-kflat-resolution on the section side and pull the resolution back through
-reconstruction. Transport the universal derived pair of lem-pur-derived-change-of-rings.
-Its universal property is invariant under equivalences, and its comparison on a flat-term
-K-flat resolution is localization of the generator-preserving termwise isomorphism.
-6. The internal derived adjunction is normalized by the ordinary internal unit:
-after internalCounit and the exact comap factorization, its unit on Q(P) is Q of
-the ordinary chain unit. This is the defining unit compatibility of the derived
-adjunction, transported along rightDerivedComapIsoMapDerivedCategory; it depends
-only on the internal ordinary adjunction and universal derived comparison.
-Apply lem-pur-sheaf-ring-derived-hom-comparison. The unit roof has second arrow
-p ↦ 1 tensor p; the counit on a resolution q has map s tensor p ↦ s q(p).
-The ordinary and representative comparisons preserve both maps and every resolution
-arrow, so the normalized derived Hom transposes, units and counits agree. No step
-requires flatness of a or preservation of K-flatness by restriction. -/
+Source: Stacks 03EK, 0GMW, 06YS, 06YY, 07A6 and 09T5. -/
 theorem internal_section_scalar_adjunction : InternalSectionScalarAdjunction J a := by
   obtain ⟨s⟩ := sectionPair_exists J a
   refine ⟨s, scalarRestrictionIso J a, ?_, scalarExtensionIso J a s, ?_, ?_, ?_⟩

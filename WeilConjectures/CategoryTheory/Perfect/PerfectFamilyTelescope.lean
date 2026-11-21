@@ -308,24 +308,7 @@ private theorem perfectFamily_tower_separation
 end TowerSeparation
 
 /-- A compatible telescope element is universal on a perfect family if the initial
-stage surjects and each transition kills the preceding kernel.
-
-Proof: cover each X n by X 0 plus the evaluation coproduct of generator maps
-in the kernel of its element. Perfectness lifts generator maps into the sum of X n
-through the sum of these covers. Since every kernel summand dies at the next stage,
-its composite to the telescope vanishes. Consequently, any generator map which
-lifts through the telescope projection factors through X 0.
-
-For the lifting, prove that identity minus the transition is injective on generator
-maps into the sum. If f is fixed by the transition, use the preceding covers to
-factor it through the sum of copies of X 0. Perfectness and coproducts of weak
-kernels show that the difference from its constant-sequence shift is killed by the
-sum of the first transition a 0. Both shift and identity-minus-shift on a constant
-sequence are split monomorphisms, with explicit retractions. Cancelling these
-monomorphisms makes f zero. Shift closure and exactness of the telescope triangle
-now give the required lifting. Surjectivity follows from the initial stage;
-injectivity follows because its kernel is killed by a 0.
--/
+stage surjects and each transition kills the preceding kernel. -/
 theorem perfectFamily_telescope_bijective
     {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C]
     [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]

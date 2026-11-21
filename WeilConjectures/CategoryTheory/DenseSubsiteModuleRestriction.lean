@@ -190,15 +190,7 @@ private noncomputable def liftedModuleIso (M : SheafOfModules.{max u₁ v₁ u�
 ring-sheaf modules.
 
 Source: Bhatt--Scholze, Example 4.2.11, transport of coefficient structures.
-
-Proof: Lift the underlying abelian sheaf through the restriction equivalence.
-Conjugate the scalar action by its counit isomorphism on the smaller site and lift
-this map of set sheaves using fullness of restriction. Check each module law on
-covering test objects, where it is the original module law. Naturality gives a
-presheaf of modules and its abelian sheaf property gives a sheaf of modules.
-The counit isomorphism is linear, proving essential surjectivity. A map lifts by
-fullness on abelian sheaves; test scalar compatibility on the dense subsite to
-prove it is linear. Faithfulness follows from faithfulness on abelian sheaves. -/
+-/
 theorem isEquivalence_pushforward_of_dense :
     (pushforward.{max u₁ v₁ u₂ v₂ w} (F := F) (J := J) (𝟙
       ((F.sheafPushforwardContinuous RingCat.{max u₁ v₁ u₂ v₂ w} J K).obj R))).IsEquivalence := by

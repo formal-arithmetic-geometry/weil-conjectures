@@ -11,7 +11,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 /-!
 # Derived slice restriction with independent universes
 
-Source: Stacks Project, Modules on Sites, Section 03DH (including Tag 03DJ); Cohomology on Sites, Tag 08JB.
+Source: Stacks Project, Modules on Sites, Section 03DH (including Tag 03DJ);
+Cohomology on Sites, Tag 08JB.
 -/
 
 @[expose] public noncomputable section
@@ -29,12 +30,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [HasSheafify J AddCommGrpCat.{m}] [J.WEqualsLocallyBijective AddCommGrpCat.{m}]
 
 /-- Exactness of the existing slice module restriction, with independent sizes.
-Source: Stacks, Modules on Sites, Section 03DH (localization of ringed sites).
-Proof: restriction evaluates on the objects of the slice, so preserves addition and
-kernels. A covering of an object of the slice is exactly a covering of its underlying
-object. Consequently local lifts of sections of an epimorphism remain local lifts
-on the slice. Restriction therefore preserves cokernels, and is additive and exact.
-The abelian exactness criterion gives preservation of finite limits and colimits. -/
+Source: Stacks, Modules on Sites, Section 03DH (localization of ringed sites). -/
 theorem ringedOverFunctor_exactGeneral (U : C)
     [HasSheafify (J.over U) AddCommGrpCat.{m}]
     [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{m}] :

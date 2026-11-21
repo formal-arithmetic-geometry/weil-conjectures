@@ -16,7 +16,7 @@ public import WeilConjectures.Compactification.RefinementCategory
 
 The upstream `Compactification.Refinement` records the two commuting triangles only.
 Here morphisms additionally preserve the inverse image of the distinguished open.
-Objects have quasi-compact open immersions, as required in this node. Equality in
+Objects have quasi-compact open immersions. Equality in
 `Scheme.Opens` is equality of open subschemes, each with its restricted structure sheaf.
 -/
 
@@ -42,13 +42,7 @@ def boundaryRefinementProperty {X S : Scheme.{u}} (f : X ⟶ S) :
     MorphismProperty (QuasiCompactObjects f) :=
   fun c d r ↦ r.hom.hom ⁻¹ᵁ d.obj.i.opensRange = c.obj.i.opensRange
 
-/-- Identity refinements preserve the open, and boundary-preserving refinements compose.
-
-Proof: the identity has inverse image equal to the same open. For consecutive refinements
-`r : c ⟶ d` and `s : d ⟶ e`, inverse image under their ambient composite is the iterated
-inverse image. Substitute `s⁻¹(e.i(X)) = d.i(X)` and then
-`r⁻¹(d.i(X)) = c.i(X)`. The upstream identity and composition already satisfy both triangle
-equalities, with ambient maps the scheme identity and composite, respectively. -/
+/-- Identity refinements preserve the open, and boundary-preserving refinements compose. -/
 theorem boundaryRefinementProperty_isMultiplicative {X S : Scheme.{u}} (f : X ⟶ S) :
     (boundaryRefinementProperty f).IsMultiplicative := by
   refine { id_mem := fun c ↦ ?_, comp_mem := fun r s hr hs ↦ ?_ }

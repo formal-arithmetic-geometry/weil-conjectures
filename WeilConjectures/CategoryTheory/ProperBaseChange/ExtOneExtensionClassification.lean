@@ -85,26 +85,8 @@ set_option backward.isDefEq.respectTransparency false in
 Source: Stacks Project, Tags 06XU and 06XV.
 
 The first clause gives every class a representative. The second says precisely that equal
-classes have an isomorphism of middle objects inducing identities on both endpoints; its
-reverse implication also makes the class assignment well-defined on isomorphism classes.
-The third clause is compatibility with every exact additive functor. Under `Ext.homAddEquiv`,
-`h.extClass` is the connecting map `h.singleδ` by `ShortExact.extClass_hom`, and
-`Ext.mapExactFunctor_hom` identifies `mapExactFunctor` with the termwise derived functor,
-including its single-complex and shift comparisons.
-
-Proof plan: identify the standard heart with the original abelian category using concentration
-in degree zero and full faithfulness of the single functor. Transfer short exactness across
-this equivalence. The single-complex short exact sequence triangle supplies the boundary;
-its naturality makes endpoint-identity isomorphisms preserve the class. Complete an arbitrary
-degree-one arrow to a triangle and inverse-rotate twice. Extension closure of the standard
-heart puts the middle object in the heart, so it is a single object, and the heart criterion
-makes the lifted sequence short exact with the prescribed boundary. For injectivity, rotate
-two triangles with equal boundaries twice and apply TR3 with identities on the common first
-two objects. The third component is an isomorphism by the two-isomorphisms criterion; shift
-back and lift it through the fully faithful single functor to the required middle-object
-isomorphism. Finally apply the exact-functor short-exact-triangle comparison; uniqueness of
-the heart boundary identifies it with the canonical boundary of the image sequence.
--/
+classes have an isomorphism of middle objects inducing identities on both endpoints. The third
+clause is compatibility with every exact additive functor. -/
 theorem ext_one_extension_classification
     {C : Type u} [Category.{v} C] [Abelian C]
     [HasDerivedCategory.{t} C] [HasExt.{w} C] (P Q : C) :

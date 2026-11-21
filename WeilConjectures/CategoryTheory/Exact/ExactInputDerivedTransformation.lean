@@ -13,10 +13,12 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.KInjectives.KInjectiveR
 /-!
 # Right-derived transformations through an exact input functor
 
-Source: Stacks Project, Derived Categories, Tags 05SE, 070Y and 070K.
-
 The unit equation characterizes the transformation without requiring the exact input
 functor to preserve K-injectives. Its computation uses a second K-injective resolution.
+
+## References
+
+* Stacks Project, Derived Categories, Tags 05SE, 070Y and 070K.
 -/
 
 @[expose] public section
@@ -44,7 +46,8 @@ variable {A : Type uA} {B : Type uB} {C : Type uC}
 
 /-- The unit equation defining the exact-input comparison, written on the homotopy
 category with the canonical localization and composition identifications inserted.
-Source: the exact-input assembly from Stacks Tags 05SE and 070Y. -/
+
+Stacks Project, Tags 05SE and 070Y. -/
 def IsExactInputDerivedTransformation
     (τ : F.rightDerivedFunctorOfQuasiIsoResolutions hA ⟶
       E.mapDerivedCategory ⋙ G.rightDerivedFunctorOfQuasiIsoResolutions hB) : Prop :=
@@ -492,28 +495,8 @@ set_option backward.isDefEq.respectTransparency false in
 compatibility with all signed shifts and distinguished triangles. The existential shift
 structures are normalized by commutation of the computation units with the standard
 signed shifts; thus they are the canonical structures on the chosen universal pairs.
-Source: Stacks Tags 05SE, 070Y and 070K, exact-input assembly in the DAG.
 
-Proof:
-1. Restrict each computation unit to K-injectives, where it is invertible. The
-   K-injective localization is an equivalence. Descend shifts along this equivalence
-   using the inverse restricted unit, and transport triangulatedness along the same
-   comparison. Naturality along a K-injective resolution extends unit compatibility
-   with shifts from K-injectives to all homotopy objects.
-2. Compose beta on homotopy categories with the G-unit and the inverse exact-input
-   factorization. The universal bijection for the chosen F-pair gives a unique tau
-   satisfying the displayed unit equation.
-3. Write the units on complexes through the quotient identifications. Naturality of
-   tau at Qs, the unit equation at I, and naturality of the G-unit at j give the
-   two-resolution formula after cancelling the invertible units at I and H. Every
-   choice computes the same tau, so no separate change-of-resolution maps are needed.
-4. Termwise beta commutes with the signed shifts degreewise. Descend this fact to
-   homotopy categories using the quotient factorization isomorphisms. Restrict the
-   defining equation of tau to K-injectives and cancel the invertible F-unit to prove
-   shift compatibility there. Essential surjectivity extends it to all derived objects.
-5. The triangle morphism has tau as its three components. Its first two squares are
-   naturality; the third is naturality at the connecting arrow followed by the shift
-   equation for r = 1. -/
+Stacks Project, Tags 05SE, 070Y and 070K. -/
 theorem exists_unique_exactInputDerivedTransformation :
     ∃ SF : (F.rightDerivedFunctorOfQuasiIsoResolutions hA).CommShift ℤ,
     ∃ SG : (G.rightDerivedFunctorOfQuasiIsoResolutions hB).CommShift ℤ,

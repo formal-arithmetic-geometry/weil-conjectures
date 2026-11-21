@@ -87,22 +87,7 @@ set_option linter.unusedVariables false in
 /-- The differential induced by K exists and is uniquely specified by its action
 on filtered cycle representatives. This assertion concerns only one page; it
 asserts neither a successor page nor a homology identification.
-Source: Stacks Project, Tag 012K, the displayed differential formula preceding.
-
-Proof. Put n = p+q. Restrict d to F^p K^n ∩ d⁻¹(F^(p+r) K^(n+1)).
-It lands in F^(p+r) K^(n+1) ∩ ker d, hence in the target r-cycles. Project
-there to the target quotient. Changing a representative by an element of
-F^(p+1) that is an r-cycle changes its differential by an r-boundary in
-filtration degree p+r: the allowed incoming filtration degree there is p+1.
-Changing it by a source r-boundary has zero differential. The two cokernel
-universal properties therefore descend d to the stated quotient map.
-Put this map at related bidegrees and zero elsewhere. Its square is zero
-because it is induced by d squared. For the displayed representative equation,
-precompose the descended map with the cycle representative projection. This
-projection is epic onto the graded cycles, and the cycles-to-page projection
-is epic too; thus their composite is epic and the equation determines the
-map uniquely. This is a componentwise finite-limit and cokernel construction,
-valid without infinite sums or a finite-filtration assumption. -/
+Source: Stacks Project, Tag 012K, the displayed differential formula preceding. -/
 theorem filteredComplex_page_differential_exists_unique
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r) :
     ∃! D : FilteredComplexPageDifferential K F r, True := by

@@ -10,9 +10,9 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Invertibility of mates along an equivalence and a fully faithful functor
 
-Source: the abstract transport argument used for Deligne, La conjecture de Weil II,
-(1.1.7), p. 151, and (1.1.14), p. 153.
-The abstract lemma is agent-written; those passages motivate its use but do not state it.
+## References
+
+* Deligne, La conjecture de Weil II, (1.1.7), p. 151, and (1.1.14), p. 153.
 -/
 
 @[expose] public section
@@ -26,26 +26,7 @@ and `G'` is fully faithful. Its component at `d` is
 `adj'.unit.app (G.obj (R.obj d)) ≫ R'.map (θ.hom.app (R.obj d)) ≫
 R'.map (G'.map (adj.counit.app d))`.
 
-Source: agent-written abstract transport lemma for Deligne, La conjecture de Weil II,
-(1.1.7), p. 151, and (1.1.14), p. 153.
-
-Proof:
-1. For `c : C` and `d : D`, full faithfulness of `G` and `G'`, the two adjunction
-bijections, and precomposition with `θ.hom.app c` give a bijection from
-`Hom(G c, G (R d))` to `Hom(G c, R' (G' d))`.
-2. Write a morphism in the first Hom set as `G.map t`. The adjunction formulas
-send it to
-`adj'.unit.app (G.obj c) ≫
-R'.map (θ.hom.app c ≫ G'.map (L.map t) ≫ G'.map (adj.counit.app d))`.
-3. Naturality of `θ` at `t` and of `adj'.unit` at `G.map t` identify this
-bijection with postcomposition by the displayed mate component.
-4. Essential surjectivity of `G` transports the same bijectivity from sources
-`G.obj c` to every object of `C'`, by precomposition with an isomorphism.
-5. Surjectivity at the target of the mate supplies a right inverse. Injectivity
-at its source then gives the left inverse equation. Every component is invertible.
-6. Counit naturality, naturality of `θ`, and unit naturality give naturality of
-the mate. Multiplying this equation by the component inverses proves their
-naturality, so they form a natural inverse. -/
+Source: Deligne, La conjecture de Weil II, (1.1.7), p. 151, and (1.1.14), p. 153. -/
 theorem isIso_mateEquiv_of_isEquivalence_of_fullyFaithful
     {C : Type u₁} {D : Type u₂} {C' : Type u₃} {D' : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} C'] [Category.{v₄} D']

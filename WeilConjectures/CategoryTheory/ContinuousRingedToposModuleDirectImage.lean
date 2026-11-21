@@ -198,10 +198,7 @@ end
 
 /-- A continuous site functor and a structural ring map induce the specified module
 pushforward. Source: Stacks, Modules on Sites, ringed topoi and module direct images.
-Proof: transpose the structural map through the given sheaf adjunction. Transposition
-of product maps gives preservation of the ring operations and scalar multiplication.
-Take sectionwise module pushforward; its underlying set sheaf is precomposition, and
-linearity is exactly the transposed action-and-addition identity. -/
+-/
 theorem continuousRingedToposModuleDirectImage_exists
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

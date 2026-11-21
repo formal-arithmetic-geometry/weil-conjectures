@@ -18,10 +18,7 @@ universe u₁ u₂ u₃ u₄ v₁ v₂ v₃ v₄
 open CategoryTheory
 namespace CategoryTheory.Adjunction
 
-/-- The projection and evaluation square at the objects used by the tensor transpose.
-Proof: precompose by the scalar projection isomorphism and compact-support
-comparison. The projection square, projection naturality and evaluation square
-reduce both sides to tensor naturality followed by the scalar right-unit law. -/
+/-- The projection and evaluation square at the objects used by the tensor transpose. -/
 theorem orderedTensor_coefficient_arrow_square
     {C : Type u₁} {D : Type u₂} {C' : Type u₃} {D' : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} C'] [Category.{v₄} D']

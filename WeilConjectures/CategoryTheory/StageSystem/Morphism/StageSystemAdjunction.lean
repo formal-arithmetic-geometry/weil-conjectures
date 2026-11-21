@@ -33,14 +33,7 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I]
   (unit_eq : ∀ i, unit.τ i = (a i).unit)
   (counit_eq : ∀ i, counit.τ i = (a i).counit)
 
-/-- A stage-compatible adjunction descends with its actual finite unit and counit.
-
-Proof: descend the two compatible families using `descNatTrans`, and conjugate by
-the canonical identity and composition comparisons. These comparisons have identity
-components. At a pair `(i,x)` the left triangle is the inclusion of the left triangle
-of `a i`; the right triangle is its right triangle. Functoriality of inclusion proves
-both equations. This includes repeated stages and requires neither full faithfulness
-of the inclusions nor faithfulness of a scalar transition. -/
+/-- A stage-compatible adjunction descends with its actual finite unit and counit. -/
 def adjunction : F.functor ⊣ G.functor where
   unit := (functorIdIso (S := S)).inv ≫ descNatTrans unit ≫ (functorCompIso F G).hom
   counit := (functorCompIso G F).inv ≫ descNatTrans counit ≫

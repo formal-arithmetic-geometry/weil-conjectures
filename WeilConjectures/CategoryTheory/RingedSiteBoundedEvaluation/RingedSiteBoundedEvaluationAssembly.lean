@@ -1001,33 +1001,7 @@ private theorem evaluationDegree_slice
 
 /-- Finite-support assembly of the actual ordinary tensor-Hom evaluation.
 Source: Stacks 08JJ, last three displays of, and
-0A8X, the Hom and total tensor differentials.
-
-Proof: (1) Project the dual onto Hom(E^i,R) in degree -i; all other factors
-vanish. Inserting zero maps in the other factors constructs the inverse by
-the product universal property. Project its Hom differential to obtain its sign.
-(2) Discard zero tensor summands outside the finite interval and reindex by
-(p,q)=(i+n,-i). The coproduct universal property gives the source identification.
-Zero tensor factors follow sectionwise and then by module sheafification.
-(3) Discard zero Hom factors outside that interval. The remaining finite product
-is the biproduct: its inclusions have identity diagonal and zero off-diagonal,
-and the sum of inclusion-projection composites is the identity.
-(4) The slice formula y tensor phi maps to (x maps to phi(x) times y) is balanced
-and compatible with restriction. Sheafification and the coproduct universal
-property give the degree maps. The analogous construction defines theta.
-(5) On a pure tensor in degrees p,q, the tensor differential gives d_F y tensor
-phi + (-1)^(p+q+1) y tensor (phi d_E). The Hom differential gives d_F f -
-(-1)^(p+q) f d_E. Both have the same two components, at -q and -q-1, and zero
-elsewhere, so the maps form a chain map without an additional sign.
-(6) Under the specified identifications its matrix is diagonal with blocks theta.
-(7) The finite diagonal of the inverses of theta is an inverse in each degree;
-this includes the empty interval and requires no bound on F.
-(8) Invert the chain-map equation to show that these degreewise inverses form
-an inverse chain map. These eight steps are the node's complete proof plan.
-
-The first existential constructs the canonical module comparisons and pins their
-values on all slices. The implication then imposes precisely their invertibility,
-so no additional existence assumption about those comparisons is needed. -/
+0A8X, the Hom and total tensor differentials. -/
 theorem assembly (E F : CochainComplex (Modules.{u, v, w} R) ℤ) (a b : ℤ)
     (hbounded : ∀ i : ℤ, i < a ∨ b < i → IsZero (E.X i)) :
     ∃ θ : ∀ (i : ℤ) (M : Modules.{u, v, w} R),

@@ -50,15 +50,9 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 -- instance so the search does not time out through the cocompleteness instances.
 attribute [local instance high] HomologicalComplex.instHasColimitsOfShape
 
-/-- The property P of the node: continuity for all uniformly cohomologically bounded-below
+/-- The property P: continuity for all uniformly cohomologically bounded-below
 discrete complex diagrams, and a uniform lower-bound offset for the target variable.
-Source: Stacks 08JC and the bounded-target closure extraction in the node.
-
-The canonical map is Q(colimit.post M (homFixed L)); its coprojection at i is the
-localized Hom map of the target coprojection. Exact termwise sheaf colimits compute
-its source. Quantification over source representatives avoids a choice of an object
-or a noncanonical comparison. The colimit structures quantified here exist for small
-module-sheaf diagrams and are only the structures needed to form the displayed map. -/
+Source: Stacks 08JC. -/
 def BoundedCoproductHomContinuous (A : D.{c, v, r, w} J R) : Prop :=
   (∀ (L : Complex.{c, v, r} J R), Nonempty (DerivedCategory.Q.obj L ≅ A) →
     ∀ (I : Type (max c v r))
@@ -190,34 +184,7 @@ private theorem continuous_middle
 triangulated subcategory. The source shift by n takes any lower-bound offset d to d+n.
 Finite iterated extensions of isomorphic shifts of any family satisfying P satisfy P.
 Source: Stacks 08JC, with exact coproducts (03DB), the cohomology long exact
-sequence (05RS), and the five lemma (05QB).
-
-Proof:
-1. Exact coproducts of module sheaves commute with cycles, boundaries and
-cohomology. Thus termwise colimits preserve quasi-isomorphisms and common cohomological
-lower bounds; the specified complex models compute the comparisons in D(O).
-2. Hom(0,N) is zero, its comparison is the zero isomorphism, and offset 0 works.
-Precomposition with a source isomorphism identifies both comparison maps and bounds.
-3. The signed, natural source-shift isomorphism identifies H(A[n],N) with H(A,N)[-n].
-Termwise colimits commute with shifts and exact coproducts commute with cohomology.
-The fixed localization comparison transports the shifted continuity comparison degreewise.
-Since H^q(K[-n])=H^(q-n)(K), the new offset is d+n.
-4. Present the triangle by a cone with the requested middle representative L.
-Contravariant Hom exactness for this cone triangle and its two rotations gives
-three exact middle cohomology sequences. Naturality of the fixed localization
-comparison identifies their arrows with actual homFixed precomposition maps.
-5. These form a five-term row with sources K[1], Cone(f), L, K, Cone(f)[-1].
-The four outer comparisons are quasi-isomorphisms by P(A), P(C), and shift closure.
-Exact coproducts commute with cohomology; the five lemma therefore makes
-the comparison for L a quasi-isomorphism, and hence an isomorphism in D(O).
-6. Exactness of the three middle cohomology terms gives B the offset min(d_A,d_C),
-uniformly in b,N. This proves both clauses of P for the middle vertex.
-7. Rotate the triangle. The other two cases follow with offsets min(d_C-1,d_B)
-and min(d_B,d_A+1). Thus two-out-of-three holds at every position.
-8. Induct on a finite construction. Use zero and source isomorphism invariance at the
-base, source-shift closure at each shift, and two-out-of-three at each triangle.
-Equivalently, shifts and isomorphisms can be moved through triangles, so finite
-constructions are finite iterated extensions of isomorphic shifted initial sources. -/
+sequence (05RS), and the five lemma (05QB). -/
 theorem boundedCoproductHomContinuous_triangle_closure :
     ObjectProperty.IsClosedUnderIsomorphisms
       (BoundedCoproductHomContinuous.{c, v, r, w} J R) ∧
@@ -254,13 +221,7 @@ theorem boundedCoproductHomContinuous_triangle_closure :
 
 /-- The complex-level coproduct property gives preservation of each actual derived
 coproduct of uniformly bounded-below objects.
-Source: Stacks 07D9 and the representative comparison for RHom.
-Proof: choose source and target complex representatives. Their termwise coproduct is
-also a derived coproduct. The normalized Hom comparison identifies Q followed by RHom
-with homFixed followed by Q. The latter carries the coproduct cocone to a colimit:
-its comparison factors as the coproduct comparison for Q followed by the localized
-homFixed comparison. Both factors are invertible. Transport along the representative
-isomorphisms and the natural Hom comparison. -/
+Source: Stacks 07D9 and the representative comparison for RHom. -/
 theorem boundedCoproductHomContinuous_preservesColimit
     (K : D.{c, v, r, w} J R)
     (hK : BoundedCoproductHomContinuous.{c, v, r, w} J R K)
@@ -302,11 +263,7 @@ theorem boundedCoproductHomContinuous_preservesColimit
 
 /-- Derived coproduct preservation and a uniform lower bound imply the representative
 comparison used by the triangle closure theorem.
-Source: Stacks 07D9.
-Proof: identify Q followed by derived Hom with homFixed followed by Q. The derived
-preservation assumption gives preservation for a discrete diagram of representatives.
-The post comparison for the composite factors through the invertible post comparison
-for Q. Cancel that factor to obtain the localized homFixed comparison. -/
+Source: Stacks 07D9. -/
 theorem boundedCoproductHomContinuous_of_preservesColimits
     (K : D.{c, v, r, w} J R)
     (hpres : ∀ (I : Type (max c v r)) (M : I → D.{c, v, r, w} J R) (b : ℤ),

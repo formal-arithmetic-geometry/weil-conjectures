@@ -23,11 +23,12 @@ public import WeilConjectures.CategoryTheory.ConstantLeftModuleTransport
 /-!
 # Exact inverse image for constant left-module sheaves
 
-Source: Stacks Project, Sites, Proposition 00YV (2), (5), (6), its fixed-ring proof, and Section 00XZ; Derived Categories, Tag 015F.
-
 The lift is characterized by its underlying-set comparison, addition and scalar
-endomorphisms, and the original geometric adjunction unit. Comparisons have a
-normalization equation and uniqueness; arbitrary unrelated functors are never compared.
+endomorphisms, and the original geometric adjunction unit.
+
+## References
+
+* Stacks Project, Sites, Proposition 00YV and Section 00XZ; Derived Categories, Tag 015F.
 -/
 
 -- After pruning, this module only keeps private declarations.

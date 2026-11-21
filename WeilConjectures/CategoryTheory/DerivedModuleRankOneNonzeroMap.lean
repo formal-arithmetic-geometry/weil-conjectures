@@ -18,15 +18,7 @@ namespace CategoryTheory
 open Limits
 
 /-- Every nonzero derived module object receives a nonzero map from the rank-one
-single complex into an integer shift. Source: Stacks Project, Tag 0F5X, first paragraph.
-
-Proof in words: represent the object by a complex. Nonvanishing of the object implies
-nonvanishing of some cohomology module, since an acyclic representative is zero in the
-derived category. A nonzero cohomology class is represented by a cycle. Evaluation at
-the lifted unit turns that cycle into a chain map from the free rank-one single complex
-to the corresponding shift. The map is nonzero because its cohomology class is nonzero;
-the K-projective localization calculation identifies this chain map with a derived map.
--/
+single complex into an integer shift. Source: Stacks Project, Tag 0F5X, first paragraph. -/
 theorem derivedModule_rankOne_nonzero_map
     {S : Type w} [Ring S]
     [HasDerivedCategory.{max w vH} (ModuleCat.{max w vH} S)]

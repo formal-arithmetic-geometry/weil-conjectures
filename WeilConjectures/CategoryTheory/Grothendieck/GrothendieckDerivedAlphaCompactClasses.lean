@@ -32,17 +32,7 @@ attribute [local instance] derived_hasCoproducts
 /-- Above a fixed rank, alpha-compact objects form an essentially small
 extension-closed subcategory.
 
-Source: Neeman, On the derived category of sheaves on a manifold, Theorem 0.2.
-
-Proof in words: choose the small shift-closed generating class G and its regular
-smallness bound beta from derived_exists_perfect_well_generators. For every
-regular alpha at least beta, monotonicity makes each object of G alpha-small.
-Its (G4) and generation properties are independent of the cardinal. Apply
-alphaCompactObjects_small_closed to obtain essential smallness and extension
-closure of the canonical class at alpha. Thus beta works simultaneously for all
-larger regular alpha. Repletion, zero, shifts, retracts and bounded coproducts
-are separately proved by the alpha-compact API.
--/
+Source: Neeman, On the derived category of sheaves on a manifold, Theorem 0.2. -/
 theorem derived_alphaCompact_classes_eventually_small
     {A : Type u} [Category.{v} A] [Abelian A]
     [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A] :

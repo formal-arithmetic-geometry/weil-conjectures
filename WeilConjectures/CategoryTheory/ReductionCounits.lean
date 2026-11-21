@@ -42,13 +42,7 @@ variable {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
 
 include adj en em hn hm hs
 
-/-- Naturality of the tower counit forces the actual coefficient-reduction formula.
-Proof: apply the inverse finite adjunction bijection at the lower level. The support
-reduction square and naturality of the actual reduction at the tower counit rewrite
-the left transpose as the scalar-reduced upper counit after the compact-support
-comparison. On the right, counit naturality and the defining mate equation give
-the same map, by naturality of the support comparison. Injectivity of the bijection
-proves equality. No normalized-tower or coefficient-flatness hypothesis is used. -/
+/-- Naturality of the tower counit forces the actual coefficient-reduction formula. -/
 theorem reductionCounits (K : D) :
     rX.app (G.obj K) ≫ rm.hom.app K =
       SX.map (rn.hom.app K) ≫ coefficientCounitMate an am SX SY b (Yn.obj K) ≫

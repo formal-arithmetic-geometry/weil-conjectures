@@ -43,9 +43,7 @@ noncomputable def composition (K L M : C) :
       (Localization.Away p ⊗[R] (K ⟶ M)) :=
   Classical.choose ((exists_linear_scalarLocalization_category R C p).1 K L M).exists
 
-/-- Composition has the specified pure-tensor formula.
-Proof: apply the specification of the unique bilinear extension in
-`lem-weil-linear-scalar-localization-category` to the chosen composition. -/
+/-- Composition has the specified pure-tensor formula. -/
 theorem composition_tmul (K L M : C) (f : L ⟶ M) (g : K ⟶ L)
     (a b : Localization.Away p) :
     composition R C p K L M (a ⊗ₜ[R] f) (b ⊗ₜ[R] g) =
@@ -53,11 +51,7 @@ theorem composition_tmul (K L M : C) (f : L ⟶ M) (g : K ⟶ L)
   exact Classical.choose_spec
     ((exists_linear_scalarLocalization_category R C p).1 K L M).exists f g a b
 
-/-- Associativity and identity laws for the uniquely specified composition.
-Proof: use `composition_tmul` on pure tensors. The two identity equations reduce to
-identity laws in C and multiplication by one. Associativity reduces to associativity
-in C and the localized ring. Extend each equation to sums of pure tensors using the
-bilinearity from `lem-weil-linear-scalar-localization-category`. -/
+/-- Associativity and identity laws for the uniquely specified composition. -/
 theorem composition_laws :
     (∀ (K L : C) (f : Localization.Away p ⊗[R] (K ⟶ L)),
       composition R C p K K L f ((1 : Localization.Away p) ⊗ₜ[R] 𝟙 K) = f) ∧
@@ -126,9 +120,7 @@ noncomputable instance linearOriginal : Linear R (ScalarLocalization R C p) wher
   comp_smul K L M f a g := congrArg (fun β ↦ β f)
     (((composition R C p K.obj L.obj M.obj).restrictScalars R).map_smul a g)
 
-/-- The tensor-with-one maps preserve identities and composition.
-Proof: identities hold by definition; composition follows from `composition_tmul`
-and `1 * 1 = 1`, as in `lem-weil-linear-scalar-localization-category`. -/
+/-- The tensor-with-one maps preserve identities and composition. -/
 theorem localization_laws (K L M : C) (f : K ⟶ L) (g : L ⟶ M) :
     ((1 : Localization.Away p) ⊗ₜ[R] (f ≫ g)) =
       composition R C p K L M ((1 : Localization.Away p) ⊗ₜ[R] g)
@@ -142,10 +134,7 @@ noncomputable def localization : C ⥤ ScalarLocalization R C p where
   map_id _ := rfl
   map_comp f g := localization_laws R C p _ _ _ f g
 
-/-- The localization functor is R-linear (including additivity).
-Proof: the tensor-with-one map is additive by the tensor relations; its R-homogeneity
-is the balancing relation and restriction along the localization ring map. This is
-clause (3) of `lem-weil-linear-scalar-localization-category`. -/
+/-- The localization functor is R-linear (including additivity). -/
 theorem localization_linear :
     (localization R C p).Additive ∧ (localization R C p).Linear R := by
   constructor
@@ -168,10 +157,7 @@ noncomputable def mapHom (K L : C) :
       (Localization.Away p ⊗[R] (T.obj K ⟶ T.obj L)) :=
   (T.mapLinearMap R).baseChange (Localization.Away p)
 
-/-- Extended Hom maps preserve identities and composition.
-Proof: on pure tensors use `LinearMap.baseChange_tmul`, functoriality of T, and
-`composition_tmul`. Extend the composition identity by additivity in both variables,
-as in clause (4) of `lem-weil-linear-scalar-localization-category`. -/
+/-- Extended Hom maps preserve identities and composition. -/
 theorem map_laws :
     (∀ K : C, mapHom R C p T K K ((1 : Localization.Away p) ⊗ₜ[R] 𝟙 K) =
       (1 : Localization.Away p) ⊗ₜ[R] 𝟙 (T.obj K)) ∧

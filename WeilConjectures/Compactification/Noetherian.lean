@@ -14,29 +14,9 @@ public import WeilConjectures.Mathlib.Topology.Maps.Basic
 
 # Nagata compactification over a Noetherian base
 
-This file proves **Nagata's compactification theorem over a Noetherian base**
-: a separated, quasi-compact morphism locally of finite type to a
-Noetherian scheme factors as an open immersion followed by a proper morphism.
-
-The proof is an induction over a finite affine open cover of the source with dense total
-intersection. Such a cover exists because the source is Noetherian, hence has finitely many
-irreducible components
-(`AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter`); a
-choice of one is packaged as `AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter`.
-Writing `U 0, …, U (n - 1)` for the cover and `X_r = U 0 ∪ ⋯ ∪ U (r - 1)` for its partial
-unions (`AlgebraicGeometry.Scheme.partialAffineOpenUnions`), the induction runs as follows:
-
-- `X_0` is empty, so `X_0 ⟶ S` is proper and in particular compactifiable;
-- `X_1 = U 0` is affine, so the affine case
-  `AlgebraicGeometry.HasCompactification.of_isQuasiAffine` applies;
-- `X_{r+1} = X_r ∪ U r` is covered by the two opens `X_r` and `U r`, whose intersection
-  contains the (dense) total intersection of the cover and is therefore dense in `X_{r+1}`
-  (`Dense.preimage_val_inter`); the two-open theorem
-  `AlgebraicGeometry.HasCompactification.of_two_open_cover` then compactifies `X_{r+1} ⟶ S`.
-
-Separatedness, finite type and quasi-compactness of `X_r ⟶ S` — the hypotheses of the
-two-open theorem — hold at every stage because they are inherited from `X ⟶ S` by the open
-subscheme `X_r`. Since `X_n = X`, the last stage compactifies `X ⟶ S`.
+This file proves **Nagata's compactification theorem over a Noetherian base**: a separated,
+quasi-compact morphism locally of finite type to a Noetherian scheme factors as an open immersion
+followed by a proper morphism.
 
 ## Main definitions
 
@@ -182,12 +162,7 @@ theorem HasCompactification.of_sup_of_dense_subset [IsNoetherian S] (f : X ⟶ S
 
 /-- **The recursive Noetherian compactification construction**: given a finite family of
 affine opens `U` of `X` with dense total intersection, a compactification of every partial
-union `X_r = U 0 ∪ ⋯ ∪ U (r - 1)` over `S`, constructed by recursion on `r`.
-
-`X_0` is empty, hence proper over `S`; `X_1 = U 0` is affine, so the affine case applies;
-and `X_{r+1} = X_r ∪ U r` is obtained from `X_r` and `U r` by the two-open theorem, whose
-density hypothesis holds because the total intersection of the cover is contained in both
-`X_r` and `U r`. -/
+union `X_r = U 0 ∪ ⋯ ∪ U (r - 1)` over `S`, constructed by recursion on `r`. -/
 noncomputable def noetherianCompactificationConstruction [IsNoetherian S] (f : X ⟶ S)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] {n : ℕ} (U : Fin n → X.Opens)
     (hUaff : ∀ i, IsAffineOpen (U i)) (hUdense : Dense (⋂ i, (U i : Set X))) (r : ℕ) :

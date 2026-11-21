@@ -63,27 +63,7 @@ private theorem exists_transition
 
 /-- Finite additive expressions in stage images refine to a single forward stage.
 Source: Stacks Project, Sites, Tag 0A35, independence of presentations and the
-restriction construction, together with Tag 04AX on filtered category colimits.
-
-Proof: First consider a generator: a section at W of the pullback along i to j,
-restricted by r : V i U to V j W. Represent r in the arrow colimit. Move its
-representative and j to a common stage. Eventual equality in the object
-colimit aligns its source with the image of U along i to j to that stage, and
-then its target with the image of W. Compose with the two endpoint transports.
-Cocone naturality shows that the resulting stage arrow maps exactly to r.
-Use the composite arrow out of i as the new forward presentation.
-Transpose the adjunction unit to obtain the transition map between the stage
-pullbacks. Its composite with alpha is the original alpha by h-alpha and
-uniqueness of adjuncts. Naturality at the lifted restriction arrow then shows
-that restricting the transitioned section gives a forward representative of
-the generator. Negative representatives are obtained by negation. For a sum,
-move the two forward stages to a common object of Under i, use the same
-unit-characterized transition maps and add the two sections there. Zero is
-represented by zero at the identity object of Under i. AddSubgroup closure
-induction now handles every finite additive expression. Cocone naturality
-identifies the target objects; HEq expresses the induced element transport.
-No finite-cover, pullback-preservation, or sheaf gluing hypothesis is used.
--/
+restriction construction, together with Tag 04AX on filtered category colimits. -/
 theorem colimit_site_abelian_stage_image_refinement
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

@@ -18,7 +18,9 @@ import WeilConjectures.CategoryTheory.SiteCechVanishingStep
 /-!
 # The Čech vanishing criterion for a general site
 
-Source: Stacks Project, Cohomology on Sites, Lemma 03F9.
+## References
+
+* Stacks Project, Cohomology on Sites, Lemma 03F9.
 -/
 
 @[expose] public section
@@ -32,29 +34,8 @@ namespace CategoryTheory.Sheaf
 /-- Higher Čech vanishing on a cofinal collection of coverings implies higher cohomology
 vanishing over the specified objects. `S` supplies the chosen products of each covering
 in `Cov`; no finite products of the whole category or of its slices are required.
-Source: Stacks Project, Cohomology on Sites, Lemma 03F9.
 
-Proof, following the node's seven steps and Stacks 03F9:
-1. Induct on positive degree, quantifying over every sheaf Čech-acyclic on `Cov`.
-2. Embed such a sheaf `G` into an injective `I`, and take its cokernel `Q`, by
-   lem-weil-pbc-site-sheaves-enough-injectives and def-sp-injective-resolutions.
-3. `I` is Čech-acyclic by lem-weil-pbc-site-injective-cech-acyclic (03AW).
-4. For each object in `B`, left exact evaluation gives exactness at the first two terms
-   of the section sequence. Cofinality and lem-weil-pbc-site-ses-cech-h1-surjective (03F8)
-   give surjectivity onto `Q(U)`. Equivalently use the beginning of
-   lem-weil-pbc-derived-functor-long-exact and the degree-zero identification in
-   lem-weil-pbc-right-derived-universal-delta-functor.
-5. Every chosen intersection lies in `B`. Products of the short exact section sequences
-   therefore give a short exact sequence of Čech complexes, degree by degree, using
-   def-weil-pbc-site-cech-complex and lem-weil-pbc-cochain-complexes-degreewise-exact.
-   This uses sectionwise exactness, not exactness of the sequence as presheaves.
-6. The long exact sequence from lem-weil-pbc-complex-ses-homology-long-exact shows that
-   `Q` is again Čech-acyclic: its positive cohomology sits between that of `I` and `G`.
-7. Apply lem-weil-pbc-derived-functor-long-exact. Injective cohomology vanishes by
-   lem-weil-pbc-derived-functor-injective-vanishing. Section surjectivity gives degree-one
-   vanishing; dimension shifting and the induction hypothesis for `Q` give every higher
-   degree. Specialize to `F`. Cohomology over an object is `H'`, as recorded in
-   def-weil-pbc-sites-and-cohomology. -/
+Stacks Project, Cohomology on Sites, Lemma 03F9. -/
 theorem isZero_H'_of_siteCech_vanishing
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

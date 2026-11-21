@@ -129,21 +129,7 @@ private theorem lift_under_arrow
   exact hvc.trans hg
 
 /-- Source: Stacks Project, Sites, Tag 0A35,
-section construction, independence of the presentation and restriction arrows.
-
-Proof: Evaluate the outer presheaf colimit at V_i(U). Evaluation preserves
-colimits, so every element comes from B_t at V_i(U). The pointwise left Kan
-extension formula expresses such an element as a section s at an object W of
-F(t.right), paired with an arrow V_i(U) to V_t(W). Represent this arrow in the
-arrow colimit. Move its representative, t.right and i to a common stage. The
-object-colimit equality criterion aligns its endpoints with the forward images
-of U and W; equalize the two maps out of i so the refinement defines an arrow
-b out of t in Under i. Apply theta_b to s and restrict along the lifted arrow.
-The inverse of E at that refinement turns the resulting section into y in D.
-Naturality of beta and hbeta_map identify its raw image with the original Kan
-generator. The displayed formula for kappa then gives kappa(y) = x. This uses
-only one Kan generator, not the relation or injectivity calculation.
--/
+section construction, independence of the presentation and restriction arrows. -/
 theorem raw_section_generators
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

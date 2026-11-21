@@ -120,17 +120,7 @@ private instance shiftedBidualityLocus_triangulated (W : DerivedCategory C) :
 /-- Biduality on heart objects implies biduality on bounded objects.
 
 Source: the finite truncation argument in Bhatt--Scholze, Proposition 6.8.11(3),
-and the formal exactness of internal Hom (Stacks Project, Tag 08JC).
-
-Proof: let P(K) assert invertibility of the canonical biduality map for every
-integral shift of K. Naturality makes P invariant under isomorphisms, and the
-shift-addition isomorphism makes it stable under shifts. It contains zero since
-both internal Homs of zero are zero. Apply internal Hom twice to a distinguished
-triangle. The triangulated five lemma, applied at each shift and to the adjacent
-rotations, proves extension closure of P. Finite truncation induction applies
-because every homology object and all its shifts have P: tensoring with the
-invertible shifted unit preserves biduality by the self-adjunction argument.
-Finally transport the assertion at shift zero along the zero-shift isomorphism. -/
+and the formal exactness of internal Hom (Stacks Project, Tag 08JC). -/
 theorem biduality_of_bounded_heart (W : DerivedCategory C)
     (Q : ObjectProperty C) [Q.IsClosedUnderIsomorphisms]
     (hQ : ∀ (M : C), Q M →

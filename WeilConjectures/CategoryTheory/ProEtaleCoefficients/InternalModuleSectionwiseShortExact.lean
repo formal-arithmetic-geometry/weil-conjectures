@@ -29,8 +29,8 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 Source: Stacks Tags 03CL, 03CN, 03CO.
 
-The canonical sheaf tensor of `sk-def-sfb-sheaf-tensor` is selected as an instance, with
-the sheafification, additivity and colimit-preservation interfaces derived from that node's
+The canonical sheaf tensor is selected as an instance, with
+the sheafification, additivity and colimit-preservation interfaces derived from its
 recorded declarations. All three short complexes retain the prescribed arrows by functorial
 mapping.
 -/
@@ -54,7 +54,7 @@ noncomputable instance sectionwiseShortExactSheafify
       AddCommGrpCat.{w} := GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian _ _
   exact hasSheafifyEssentiallySmallSite J AddCommGrpCat.{w}
 
-/-- The canonical sheafified tensor over the integers of `sk-def-sfb-sheaf-tensor`. -/
+/-- The canonical sheafified tensor over the integers. -/
 noncomputable instance sectionwiseShortExactSheafMonoidal
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C) : MonoidalCategory (Sheaf J AddCommGrpCat.{w}) :=
@@ -66,9 +66,7 @@ noncomputable instance sectionwiseShortExactSheafSymmetric
     (J : GrothendieckTopology C) : SymmetricCategory (Sheaf J AddCommGrpCat.{w}) :=
   (sfbSheafTensorStructure (A := AddCommGrpCat.{w}) J).symmetric
 
-/-- Closedness of the canonical sheaf tensor, from the recorded properties theorem of
-`sk-def-sfb-sheaf-tensor`. Not an instance: it only serves to derive the Prop-valued
-additivity below. A right adjoint of a fixed functor; the tensor itself is not chosen. -/
+/-- Closedness of the canonical sheaf tensor. -/
 @[instance_reducible]
 noncomputable def sectionwiseShortExactSheafClosed
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
@@ -76,14 +74,14 @@ noncomputable def sectionwiseShortExactSheafClosed
   (sfbSheafTensor_properties.{uC, vC, w + 1, w, 0, 0}
     (A := AddCommGrpCat.{w}) J).2.1.some
 
-/-- Additivity of the canonical sheaf tensor in each variable (proof step 3). -/
+/-- Additivity of the canonical sheaf tensor in each variable. -/
 noncomputable instance sectionwiseShortExactSheafPreadditive
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C) : MonoidalPreadditive (Sheaf J AddCommGrpCat.{w}) :=
   letI := sectionwiseShortExactSheafClosed J
   sfbSheafTensor_monoidalPreadditive
 
-/-- Left tensor with a sheaf preserves finite colimits (closedness, proof step 3). -/
+/-- Left tensor with a sheaf preserves finite colimits. -/
 noncomputable instance sectionwiseShortExactSheafLeftColimits
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C) (F : Sheaf J AddCommGrpCat.{w}) :
@@ -98,34 +96,7 @@ namespace CategoryTheory.Mod
 /-- Sectionwise short exactness implies short exactness of the underlying presheaves,
 the underlying sheaves, and the internal modules, with the same arrows.
 
-Source: blueprint, On the point,
-final sentence, and Stacks Tags 03CL, 03CN, 03CO.
-
-Proof, following the node:
-1. By `lem-weil-pbc-abelian-presheaves-evaluation-exact`, kernels and cokernels
-of abelian presheaves are sectionwise. The evaluated hypotheses give zero kernel
-of the first arrow, zero cokernel of the second, and image equal to kernel.
-The restrictions agree as subpresheaves of the middle term. This proves the
-first conclusion, using `def-weil-pbc-exact-sequence`.
-2. Apply exact abelian sheafification.
-The sheaf category is abelian by `lem-sfb-abelian-sheaves-left-exact-reflector`;
-for an essentially small site transport from its small model in the coefficient
-universe. The sheafification counits are isomorphisms by
-`situation-conventions`, and their naturality identifies
-the sheafified arrows with precisely the original underlying sheaf arrows.
-3. Closedness of `sk-def-sfb-sheaf-tensor` gives tensor colimit preservation,
-and `lem-sfb-preserving-colimits-additive` gives additivity. Thus
-`prose-03-02` applies. Its forgetful functor preserves finite limits
-and finite colimits by `lem-sfb-modobj-forget-left-exact` and
-`lem-sfb-modobj-forget-right-exact`.
-4. Forgetting preserves zero morphisms and is faithful by
-`lem-sfb-modobj-forget-faithful`. An inverse of an invertible underlying module
-map is linear: compose its action equation on the left by its inverse and on
-the right by the tensor of that inverse. Thus forgetting reflects isomorphisms.
-5. Apply `lem-weil-pbc-jointly-reflect-short-exact` to the singleton family
-consisting of this forgetful functor. Step 2 gives short exactness of its image;
-reflection proves short exactness of the original internal-module sequence.
--/
+Source: Stacks Tags 03CL, 03CN, 03CO. -/
 theorem shortExact_of_sectionwise
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C)

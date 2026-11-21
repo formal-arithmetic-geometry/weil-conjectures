@@ -38,7 +38,6 @@ chart models.
   strict transform meets the chart `Spec C_a` in `Spec C_a^st`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.strictTransformChartModel_eq`: the glued chart model
   is the strict transform.
-
 -/
 
 @[expose] public section

@@ -16,10 +16,9 @@ import WeilConjectures.Algebra.Homology.UpperTruncationStepSES
 /-!
 # The truncation couple
 
-The terms use the chosen-resolution convention of `def-sp-kinjective-bridge`.
 The maps are transported from the image of the canonical truncation triangle
-under the K-injective right derived functor. Exactness is a separate statement,
-`lem-sp-truncation-couple-exact`; it is not a field of the construction here.
+under the K-injective right derived functor. Exactness is a separate statement
+(`truncation_raw_exact`); it is not a field of the construction here.
 -/
 
 @[expose] public section
@@ -68,10 +67,7 @@ noncomputable def transition (K : CochainComplex.Plus A) (q : ℤ) :
   inv ((K.obj.truncLE (q - 1)).ιTruncLE q) ≫
     CochainComplex.truncLEMap (K.obj.ιTruncLE (q - 1)) q
 
-/-- The transition commutes with the two inclusions into K.
-Proof: by `ιTruncLE_naturality` the truncated inclusion followed by the
-inclusion of tau_{<=q}K is the inclusion of tau_{<=q}(tau_{<=q-1}K) followed by
-the inclusion of tau_{<=q-1}K; cancel the inverse. -/
+/-- The transition commutes with the two inclusions into K. -/
 theorem transition_comp_ιTruncLE (K : CochainComplex.Plus A) (q : ℤ) :
     transition K q ≫ K.obj.ιTruncLE q = K.obj.ιTruncLE (q - 1) := by
   simp [transition, Category.assoc]
@@ -102,13 +98,7 @@ section Derived
 variable [HasDerivedCategory A]
 
 /-- The canonical truncation triangle has a unique connecting arrow with these
-first two arrows. The cone of the transition is quasi-isomorphic to the single
-cohomology complex by the projection just defined. Transport the mapping-cone
-triangle across that quasi-isomorphism. For uniqueness, TR3 compares two such
-triangles with identities on their first two terms; the map on the third term
-induces identity on H^q (the projection induces an isomorphism there). An
-endomorphism of this single cohomology object is determined by H^q, so that
-third map is identity, and the connecting arrows coincide. -/
+first two arrows. -/
 theorem existsUnique_boundary (K : CochainComplex.Plus A) (q : ℤ) :
     ∃! δ : DerivedCategory.Q.obj (cohomologyComplex K q).obj ⟶
         (DerivedCategory.Q.obj (truncation K (q - 1)).obj)⟦(1 : ℤ)⟧,
@@ -205,9 +195,7 @@ end TruncationCouple
 
 /-- The truncation couple is the displayed pair of bigraded objects with the
 three maps induced by the truncation triangles. The lower cohomological bound
-is recorded even though the construction of the maps does not depend on it.
-The bidegrees agree with the type-zero `BigradedExactCouple` convention;
-exactness is reserved for lem-sp-truncation-couple-exact. -/
+is recorded even though the construction of the maps does not depend on it. -/
 noncomputable def truncationCouple
     {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
     {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]

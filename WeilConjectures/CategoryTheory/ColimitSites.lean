@@ -21,7 +21,17 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Filtered colimits of sites
 
-Source: Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35.
+## Implementation details
+
+We use the filtered opposite of Stacks' cofiltered index category. A cocone in `Cat` whose
+object and arrow cocones are set colimits encodes the category in Lemma 09YL. Base change and
+composition are required only for finite indexed families, as in Lemma 09YL. Equality in `Arrow`
+includes endpoint equalities, so the section formula uses the strict functor and cocone
+identities without choosing transport proofs.
+
+## References
+
+* Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35.
 -/
 
 @[expose] public section
@@ -33,109 +43,16 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35.
-
-We use the filtered opposite of Stacks' cofiltered index category. A cocone in `Cat`
-whose object and arrow cocones are set colimits encodes the category in 09YL.
-Covering presieves are precisely images of covering presieves at the stages.
-Base change and composition are required only for finite indexed families, as in
-Stacks 09YL; a finite presieve may also have an infinite repeated-index presentation.
-The section formula is a colimit cocone, with all its maps characterized by the
-adjunction units. Equality in `Arrow` includes endpoint equalities, so the formula
-uses the strict functor and cocone identities without choosing transport proofs.
-
-Proof:
-1. Apply lem-weil-pbc-filtered-colimit-categories. Finite objects, arrows and
-   relations lift to one stage; two lifts become equal at a further stage.
-2. A finite covering and any finite further data lift together, even over a fixed
-   stage, by filteredness and the equality criterion for filtered colimits of sets.
-3. The image of a pullback along a covering arrow is a pullback: its Hom universal
-   property is the filtered colimit of the stagewise Hom pullbacks, using
-   lem-weil-pbc-filtered-colimits-commute-finite-limits.
-4. Composite coverings lift to a common stage since the outer covering is finite;
-   their composites cover there. Pullback coverings lift and cover by step 3.
-5. Lift an isomorphism and its inverse equations to a stage to obtain the singleton
-   covering axiom. Thus the union of image coverings is a site (09YL).
-6. Steps 3 and 4 show that each canonical functor preserves coverings and their
-   pullbacks. Precomposition therefore preserves sheaves, using
-   lem-weil-pbc-site-continuous-pushforward-sheaf. Cocone naturality gives composition.
-7. The constructed sheaf inverse image is left adjoint to precomposition, hence preserves finite colimits by
-   situation-conventions.
-8. For a refinement, transpose the unit of inverse image at the refined stage
-   through the original stage adjunction. The result is the transition morphism.
-   Uniqueness of adjuncts gives identities, the cocycle equation and naturality.
-9. For a limit-site object form the filtered colimit of these sections over all
-   its stage presentations. The category of presentations is cofiltered, and the
-   slice at any presentation is initial, by
-   lem-weil-pbc-initial-functor-cofiltered-criterion. Finite lifting and eventual
-   equality make restriction maps independent of the lifts; they form a presheaf.
-10. Lift a finite covering to a stage. Its sheaf equalizer diagram remains an
-    equalizer on taking filtered colimits, by
-    lem-weil-pbc-filtered-colimits-commute-finite-limits, so this presheaf is a sheaf.
-11. Maps from this sheaf to H are compatible families of maps from stage inverse
-    images to stage restrictions of H. Adjunction identifies these with one map
-    from the original sheaf to the canonical restriction of H. Thus the constructed
-    sheaf is inverse image, by situation-conventions. Evaluating
-    at the image of U gives exactly the colimit cocone asserted below.
-12. The same formula at every object proves preservation of finite limits, using
-    situation-conventions and commutation of filtered
-    colimits with finite limits. Together with step 7 this is a morphism of sites.
-    Steps 8--11 apply to abelian groups too: their filtered colimits and finite
-    limits are computed on underlying sets, and every map is additive. -/
-/- A filtered category has a nonempty object type. -/
+/-- A filtered category has a nonempty object type. -/
 theorem filtered_index_nonempty (J : Type u) [SmallCategory J] [IsFiltered J] :
     Nonempty J := by
   exact IsFiltered.nonempty
 
-/-- Source: Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35.
-
-We use the filtered opposite of Stacks' cofiltered index category. A cocone in `Cat`
-whose object and arrow cocones are set colimits encodes the category in 09YL.
-Covering presieves are precisely images of covering presieves at the stages.
-Base change and composition are required only for finite indexed families, as in
-Stacks 09YL; a finite presieve may also have an infinite repeated-index presentation.
-The section formula is a colimit cocone, with all its maps characterized by the
-adjunction units. Equality in `Arrow` includes endpoint equalities, so the formula
-uses the strict functor and cocone identities without choosing transport proofs.
-
-Proof:
-1. Apply lem-weil-pbc-filtered-colimit-categories. Finite objects, arrows and
-   relations lift to one stage; two lifts become equal at a further stage.
-2. A finite covering and any finite further data lift together, even over a fixed
-   stage, by filteredness and the equality criterion for filtered colimits of sets.
-3. The image of a pullback along a covering arrow is a pullback: its Hom universal
-   property is the filtered colimit of the stagewise Hom pullbacks, using
-   lem-weil-pbc-filtered-colimits-commute-finite-limits.
-4. Composite coverings lift to a common stage since the outer covering is finite;
-   their composites cover there. Pullback coverings lift and cover by step 3.
-5. Lift an isomorphism and its inverse equations to a stage to obtain the singleton
-   covering axiom. Thus the union of image coverings is a site (09YL).
-6. Steps 3 and 4 show that each canonical functor preserves coverings and their
-   pullbacks. Precomposition therefore preserves sheaves, using
-   lem-weil-pbc-site-continuous-pushforward-sheaf. Cocone naturality gives composition.
-7. The constructed sheaf inverse image is left adjoint to precomposition, hence preserves finite colimits by
-   situation-conventions.
-8. For a refinement, transpose the unit of inverse image at the refined stage
-   through the original stage adjunction. The result is the transition morphism.
-   Uniqueness of adjuncts gives identities, the cocycle equation and naturality.
-9. For a limit-site object form the filtered colimit of these sections over all
-   its stage presentations. The category of presentations is cofiltered, and the
-   slice at any presentation is initial, by
-   lem-weil-pbc-initial-functor-cofiltered-criterion. Finite lifting and eventual
-   equality make restriction maps independent of the lifts; they form a presheaf.
-10. Lift a finite covering to a stage. Its sheaf equalizer diagram remains an
-    equalizer on taking filtered colimits, by
-    lem-weil-pbc-filtered-colimits-commute-finite-limits, so this presheaf is a sheaf.
-11. Maps from this sheaf to H are compatible families of maps from stage inverse
-    images to stage restrictions of H. Adjunction identifies these with one map
-    from the original sheaf to the canonical restriction of H. Thus the constructed
-    sheaf is inverse image, by situation-conventions. Evaluating
-    at the image of U gives exactly the colimit cocone asserted below.
-12. The same formula at every object proves preservation of finite limits, using
-    situation-conventions and commutation of filtered
-    colimits with finite limits. Together with step 7 this is a morphism of sites.
-    Steps 8--11 apply to abelian groups too: their filtered colimits and finite
-    limits are computed on underlying sets, and every map is additive. -/
+/-- Filtered colimit of sites: for a filtered system of sites with finite covering presieves,
+there is a cocone `V` in `Cat` whose object and arrow cocones are set colimits, whose
+covering presieves are the images of stage coverings, and whose inverse images from the
+stages preserve finite limits and colimits and have the filtered-colimit section formula.
+Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35. -/
 theorem exists_colimit_site_reduced
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))
@@ -349,7 +266,11 @@ theorem exists_colimit_site_reduced
   exact ⟨V, ⟨hobjects⟩, ⟨harrows⟩, hLift, hFinite, Q, hQ, hisos, hcomp, hbase, hpb,
     hVcover, hVpullback, hcontinuous, hlimits, hcolimits, hsets, hgroups⟩
 
-/--  -/
+/-- Filtered colimit of sites: for a filtered system of sites with finite covering presieves,
+there is a cocone `V` in `Cat` whose object and arrow cocones are set colimits, whose
+covering presieves are the images of stage coverings, and whose inverse images from the
+stages preserve finite limits and colimits and have the filtered-colimit section formula.
+Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35. -/
 theorem exists_colimit_site
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

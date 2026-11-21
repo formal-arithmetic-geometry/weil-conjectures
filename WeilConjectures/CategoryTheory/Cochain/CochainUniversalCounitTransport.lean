@@ -9,9 +9,9 @@ public import WeilConjectures.CategoryTheory.Exact.ExactEquivalenceDerivedSquare
 
 /-! # Universal cochain counit transported from homotopy localization
 
-Source: the agent-written homotopy-to-cochain refinement of Stacks Tag 099M,
-`proetale-, in the constant-completion argument for the blueprint's
-completed pullback.
+## References
+
+* Stacks Project, Tag 099M.
 -/
 
 @[expose] public section
@@ -67,30 +67,7 @@ private theorem counitTransport_iso
 /-- The specified cochain counit retains homotopy-level universality and precisely the
 same invertible components, for an additive functor with no exactness assumption.
 
-Source: agent-written categorical refinement of Stacks Tag 099M
-(`proetale-), the constant-completion argument for the blueprint's.
-
-Proof:
-1. Put `p = HomotopyCategory.quotient A (.up ℤ)`, `H = F^h ⋙ Qh`,
-   `s = DerivedCategory.quotientCompQhIso A`, and
-   `t = (derivedCochainComparisonFactors F).symm`. The definition
-   `derivedCochainCounit` gives beta at P as `L(s.inv.app P) ≫ ε.app (p.obj P) ≫ t.hom.app P`.
-   For any `a : Q ⋙ G ⟶ F^c ⋙ Q`, conjugate its components to
-   `G(s.hom.app P) ≫ a.app P ≫ t.inv.app P`; naturality follows from that of s, a, and t.
-2. The quotient p has the complexes as objects and is full on arrows. The same components
-   therefore descend uniquely to a transformation `Qh ⋙ G ⟶ H`: naturality at a homotopy
-   class follows by choosing a representing cochain map. Equality of transformations is
-   detected after p. The assumed homotopy Kan property supplies a unique `b : G ⟶ L`.
-3. Naturality of any `c : G ⟶ L` at `s.inv.app P` identifies the conjugate of
-   `(Functor.whiskerLeft Q c ≫ beta).app P` with
-   `(Functor.whiskerLeft Qh c ≫ ε).app (p.obj P)`. Thus the cochain factorization equation
-   is equivalent to the homotopy factorization equation, and the unique b in step 2
-   proves the Kan property for the prescribed beta.
-4. The outside factors `L(s.inv.app P)` and `t.hom.app P` are isomorphisms. If ε at pP
-   is invertible, the inverse of beta is `t.inv.app P ≫ inv (ε.app (p.obj P)) ≫ L(s.hom.app P)`.
-   Conversely, the inverse of ε at pP is
-   `t.hom.app P ≫ inv (beta.app P) ≫ L(s.inv.app P)`. The inverse equations follow by
-   cancellation. This proves the componentwise equivalence on every resolving class. -/
+Stacks Project, Tag 099M. -/
 theorem cochainUniversalCounitTransport
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]

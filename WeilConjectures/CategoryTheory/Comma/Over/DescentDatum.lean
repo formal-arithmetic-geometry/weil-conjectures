@@ -40,6 +40,14 @@ over `f₂`, because `f₁` and `f₂` define the same object of `Over Y`.
 
 - `CategoryTheory.Functor.RepresentableBy.overTransport_overTransport`: the cocycle condition for
   the canonical descent datum.
+
+## Implementation details
+
+Mathlib's `CategoryTheory.Pseudofunctor.DescentData` is the same transport-style notion for a
+pseudofunctor `F` on `C`: its `hom` compares the pullbacks of the object along any two morphisms
+`T ⟶ X` with the same composite to `Y`. It is not used here because there is no pullback
+pseudofunctor `X ↦ Over X` available, and the points of `V` are what the descent arguments
+manipulate.
 -/
 
 @[expose] public section
@@ -62,12 +70,6 @@ of `V` lying over `f₁` to `T`-points of `V` lying over `f₂`. It is natural i
 By the Yoneda lemma this is the same as an isomorphism `φ : pr₀^* V ≅ pr₁^* V` over `X ×_Y X`
 satisfying `pr₀₂^* φ = pr₁₂^* φ ∘ pr₀₁^* φ` over `X ×_Y X ×_Y X` (Stacks 023V): `φ` is the
 transport for the universal pair `pr₀, pr₁`.
-
-Mathlib's `CategoryTheory.Pseudofunctor.DescentData` is the same transport-style notion for a
-pseudofunctor `F` on `C`: its `hom` compares the pullbacks of the object along any two morphisms
-`T ⟶ X` with the same composite to `Y`. It is not used here because there is no pullback
-pseudofunctor `X ↦ Over X` available, and the points of `V` are what the descent arguments
-below manipulate.
 -/
 structure DescentDatum (V : Over X) where
   /-- The transport of points of `V` over `f₁` to points of `V` over `f₂`. -/

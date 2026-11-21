@@ -110,15 +110,7 @@ private theorem exact_scalar (a b : ℕ) (hreg : Mono (s ^ b • 𝟙 V)) :
   simp only [Linear.smul_comp, Linear.comp_smul, Category.comp_id]
 
 /-- A regular scalar gives a normalized adic tower of ordinary quotient complexes.
-Source: Stacks 099M and 0941.
-Proof: cancellation of the quotient epimorphism proves scalar annihilation. The
-universal property of the two successive cokernels identifies reduction to a
-smaller exponent with its ordinary quotient. For exactness, lift an element of
-the kernel through the quotient epimorphism after an epimorphic refinement.
-Its scalar multiple lifts through the defining scalar map after a second
-refinement. Cancel the regular scalar power on the original complex. The lift
-is then a multiple of the complementary scalar power, as required. This includes
-exponent zero, where the scalar is the identity and the quotient is zero. -/
+Source: Stacks 099M and 0941. -/
 theorem normalized {B : Type u} [Category.{v} B] [Abelian B] [Linear R B]
     (P : CochainComplex B ℤ) (hP : ∀ n : ℕ, Mono (s ^ n • 𝟙 P)) :
     CochainComplex.IsNormalizedAdicTower s (tower s P) where

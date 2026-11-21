@@ -37,8 +37,7 @@ open CategoryTheory.MonoidalCategory CategoryTheory.CartesianMonoidalCategory
 namespace CategoryTheory
 
 /-- Transport the section formulas along equality of internal rings.
-Source: Stacks Tag 00YR, rings as sextuples. Eliminate the equality of rings;
-proof irrelevance identifies the two carrier equalities, so the formulas agree. -/
+Source: Stacks Tag 00YR, rings as sextuples. -/
 private theorem transportRingSectionOperations.{v, w} {C : Type v} [Category C]
     {J : GrothendieckTopology C} [J.HasSheafCompose (forget CommRingCat.{w})]
     (A : Sheaf J CommRingCat.{w}) (Y X : CommRingObjCat (Sheaf J (Type w)))

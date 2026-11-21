@@ -157,30 +157,7 @@ private theorem homEquivCast
 /-- A finite-limit-preserving left adjoint on set sheaves lifts to commutative ring
 sheaves, naturally on underlying sheaves and compatibly with operations and adjunction.
 Source: Stacks Project, Sites, Tag 00YV, discussion before the proposition and proof
-for rings as sextuples.
-
-The components of `e` are the stated `e_R`; its naturality is exactly the equation
-for every ring-sheaf morphism. The comparison `v` identifies the underlying right
-adjoint, so that the final equation compares hom-equivalences in the same hom-set.
-The operation equations have domain `L (|R| × |R|)` or `L (*)`, respectively, and
-are equivalent to transporting by the inverses of the canonical comparisons.
-
-Proof:
-1. Use `sheaves_algebraicStructures_objects`
-   on each site to identify ring
-   sheaves with internal commutative ring objects, compatibly with forgetting.
-2. Finite-limit preservation implies preservation of binary products and the terminal
-   object. Apply `Adjunction.liftsGroupRingObjects`
-   to the given adjunction. Its
-   ring branch supplies both functors, their adjunction, underlying comparisons,
-   and the transport equations for all ring operations.
-3. Conjugate both functors and the adjunction by the identifications from step 1.
-   The underlying comparisons give `e` and `v`; their naturality gives the asserted
-   equation on ring morphisms. The sectionwise operations in step 1 convert the
-   operation equations from step 2 to the four displayed equations here.
-4. Transport the hom-equivalence clause from step 2 through the same identifications.
-   This gives the last equation, hence exactly the original set-sheaf hom-equivalence
-   after forgetting rings and applying the underlying comparisons. -/
+for rings as sextuples. -/
 theorem inverseImage_ring_functor
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

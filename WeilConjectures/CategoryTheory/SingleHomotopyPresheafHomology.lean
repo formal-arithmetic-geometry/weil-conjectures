@@ -205,20 +205,7 @@ private lemma homotopyHomologyObjIso_naturality {U V : Cᵒᵖ} (f : U ⟶ V) (n
 end SingleHomotopyAux
 
 /-- Homotopy maps out of degree-zero single objects are homology of the degreewise
-Hom presheaf.
-
-Proof: At U, cochains from A(U)[0] to L are precisely maps A(U) -> L^n.
-The equivalence `Cochain.fromSingleEquiv` commutes with the differentials:
-`delta_fromSingleMk` identifies the differential with postcomposition by d_L.
-It therefore identifies the Hom complex with evaluation at U of the degreewise
-Hom presheaf complex. Mathlib's `leftHomologyData` identifies its homology with
-cohomology classes, and `CohomologyClass.homAddEquiv` identifies those classes with
-maps from A(U)[0] to L[n] in the homotopy category. Evaluation preserves homology.
-All these identifications commute with precomposition by A(f): on cochains this
-is `fromSingleMk_precomp`, on cocycles it is precomposition, and on the quotient
-it follows by surjectivity of the cocycle projection. Thus the component
-isomorphisms commute with restriction maps and assemble into a natural isomorphism.
-This works in all integer degrees and for an empty indexing category. -/
+Hom presheaf. -/
 theorem singleHomotopyPresheaf_homology
     {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
     [Abelian D] (A : C ⥤ D) (L : CochainComplex D ℤ) (n : ℤ) :

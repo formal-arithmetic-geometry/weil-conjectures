@@ -51,14 +51,7 @@ private theorem image_eigen (χ : AddChar G K) (b : G) :
   exact eigen τ hτ χ b
 
 /-- Multiplication preserving a finite translation action sends products of character
-images into the image of the product character, and constant sections into the trivial image.
-
-Proof. Reindexing the projector sum proves `eχ τ(b) = χ(b)eχ`, hence the image inclusion
-has the same eigenvalue after cancellation of its image epimorphism. Equivariance and
-bilinearity make a product of eigensections have eigenvalue `χ(b)χ'(b)`. Averaging with
-weights `(χχ')(-b)/|G|` fixes it, because the character factors cancel and the normalized
-sum is one. Invariant constant sections satisfy the same computation for the trivial
-character. Neither a nontrivial character nor a nonzero coefficient ring is required. -/
+images into the image of the product character, and constant sections into the trivial image. -/
 theorem characterProjector_products_fixed
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalLinear K C]
     (m : P ⊗ P ⟶ P) (η : 𝟙_ C ⟶ P)

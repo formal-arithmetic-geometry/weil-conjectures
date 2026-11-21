@@ -1240,16 +1240,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 -- Normalize localization comparisons without unfolding the tensor construction.
 include K KU hd in
 /-- The normalized slice tensor comparison preserves the derived associator.
-Source: Stacks Tags 07A4 and 0FPT.
-
-Proof: choose flat-term K-flat representatives for the three arguments. Their total
-products again have flat terms and are K-flat. The four tensor comparison squares
-identify both sides with restrictions of the two reassociation maps of total complexes.
-They agree on every triple of local pure tensors, because tensor restriction sends
-pure tensors to the identical pure tensors and reassociation changes no sign.
-The universal properties of sheafification, coproducts, and tensor-Hom adjunction
-detect this equality. Naturality transports it along resolving quasi-isomorphisms
-and the localization comparisons to arbitrary derived objects. -/
+Source: Stacks Tags 07A4 and 0FPT. -/
 theorem ringedSlice_tensor_associator :
     let r := ringedSliceDerivedRestriction.{c, v, r, w, w'} J R U
     ∀ X Y Z,

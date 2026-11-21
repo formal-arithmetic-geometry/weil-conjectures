@@ -166,34 +166,9 @@ of restriction to restriction of inverse image. The structural-map equation spec
 exactly the restriction of `f.ringMap` under `a`.
 
 For every algebraic presentation `I,c` of the ordinary pullback, the conclusion supplies
-a compatible presentation `IA,ca` on the slices. The isomorphisms `e` lie in the category
-of modules over the restricted source ring. Their naturality uses the existing tensor
-map on module morphisms. The last equation uses the module-sheafification unit on both
-sides: its input is `r tensor m`, and its output is `r tensor` the image of `m` through
-`IA.moduleUnderlying`, `a`, and `I.moduleUnderlying`. Thus it is a local-pure-tensor
-normalization, without asserting that global sections are pure tensors.
-
-Proof, following the four DAG steps:
-1. Apply `Over.postAdjunctionLeft` to `f.adj`. Its right adjoint sends `K -> f⁻¹A`
-   to the pullback of `f_*K -> f_*f⁻¹A` along the unit `A -> f_*f⁻¹A`.
-   Transport through the fibre equivalences of the element-site localizations.
-   Terminal objects and pullbacks in the slice are preserved because `f.inverse`
-   preserves finite limits. This gives the sliced geometric adjunction.
-2. The product comparison `f⁻¹(H × A) ≅ f⁻¹H × f⁻¹A` gives `a`, naturally in H.
-   Every ring or module operation is a map from a finite product, so this comparison
-   respects those operations. Compose its ring component with the restriction of
-   `f.ringMap` to obtain the structural map, as in 04IF. By 04IE module localization
-   is the recorded sectionwise `elementModulePullback`.
-3. Apply `module_pullback_tensor_iso` to localization with coefficient ring f⁻¹R_Y,
-   identity structural map, and modules R_X and f⁻¹M. Invert its tensor comparison.
-   Its balanced pairing sends each local pure tensor to the same tensor and is
-   linear for the restricted R_X-action. The tensor sheaves are sheafifications,
-   so the pairing identities give identities of sheaf morphisms.
-4. First change coefficients through the ring component of `a`, then compose with
-   the inverse tensor comparison of step 3. The balancing relation follows from
-   the structural-map equation. Naturality of `a` and tensor functoriality prove
-   naturality in M. Evaluating the balanced pairing gives the final equation.
-   No flatness, points, or functor between the presented sites is used. -/
+a compatible presentation `IA,ca` on the slices, with isomorphisms `e` in the category
+of modules over the restricted source ring, compatible with the module-sheafification unit
+on pure tensors `r tensor m`. -/
 theorem geometric_ringed_pullback_slice
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

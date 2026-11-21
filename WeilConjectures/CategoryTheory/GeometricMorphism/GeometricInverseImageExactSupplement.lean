@@ -683,33 +683,7 @@ private noncomputable def inverseImageUniverses
 /-- Geometric inverse image induces exact functors on abelian sheaves and on modules
 with transported scalars. The existence clauses supply the transports; the universal
 clauses make exactness available for every normalized presentation of them.
-Source: Stacks Project, Modules on Sites, 04JC (first assertion), 03D2, 03DA and 03DB.
-
-Proof, following the five steps of the node:
-1. The adjunction and left exactness are `f.adj` and `f.leftExact`. The right adjoint
-preserves limits. Identify abelian sheaves
-with commutative group objects.
-The adjunction lifts to those objects,
-with the transported operations and the underlying set-sheaf adjunction. This gives an
-abelian presentation, and applies to any presentation by its operation normalization.
-2. Finite abelian-sheaf limits are sectionwise.
-Their underlying sets are the same compatible tuples as in set sheaves. Applying `f.inverse` gives a limiting
-underlying cone. Its unique factorizations are additive by joint uniqueness of the
-projections, applied to addition, zero and negation. Thus abelian inverse image is left exact.
-3. The lifted adjunction preserves colimits,
-in particular finite colimits and cokernels. This proves exactness as defined in
-`def-galois-exact-functor`. Abelian sheaves are abelian categories, so preservation of kernels and cokernels
-also preserves images and exact sequences. Transported addition makes the functor additive.
-4. Apply inverse image to the ring operations and module action through the finite-product
-comparisons (03D2). Applying it to each axiom diagram proves all ring and module laws.
-Naturality of the action gives linearity on maps. This supplies the algebraic presentation;
-its underlying abelian functor is the one of steps 1--3, including its action on maps.
-5. Scalar forgetting preserves limits and colimits, and reflects isomorphisms: the inverse of
-an invertible linear map is linear, sectionwise. The finite-limit and finite-colimit
-comparisons for module inverse image become those of step 2 and step 3 after forgetting,
-so they are isomorphisms. Hence module inverse image and its underlying-abelian-sheaf
-functor are exact, including preservation of relation-map cokernels. The target ring
-throughout is the transported ring itself, with no further change of scalars. -/
+Source: Stacks Project, Modules on Sites, 04JC (first assertion), 03D2, 03DA and 03DB. -/
 theorem geometric_inverse_image_exact
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]

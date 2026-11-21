@@ -56,16 +56,7 @@ private theorem generator_eq (M N : Modules S) (X : Dᵒᵖ)
 attribute [local irreducible] pureTensor evaluationMap
 
 /-- A sheaf-Hom evaluation pairing with the prescribed pure-tensor values is canonical.
-
-Source: Stacks Project, Tags 03EK and 03EO: the sheaf tensor-Hom adjunction and evaluation.
-
-Proof: the tensor-Hom adjunction computes evaluationMap on a pure tensor x tensor phi
-as phi applied to x. The sheafification adjunction transports this computation from
-presheaves to sheaves. The right evaluation is the braiding followed by evaluationMap;
-braiding interchanges the two pure factors. Both this composite and the given pairing
-therefore have the prescribed values on all local pure tensors. Pure-tensor
-extensionality, proved using the sheafification adjunction, identifies the two maps.
-The argument applies on empty sites and to zero modules and zero coefficient rings. -/
+Source: Stacks Project, Tags 03EK and 03EO. -/
 theorem right_evaluation_eq (M N : Modules S)
     (e : SheafOfModules.homObj (R := S) M N ⊗ M ⟶ N)
     (h : RingedForgetTensorTransposition.IsSheafEvaluation.{u, u, u} K S M N e) :

@@ -77,12 +77,7 @@ private theorem restrictionComparison_isIso (M : PresheafOfModules.{u} R.obj) :
 /-- Module sheafification commutes with restriction along a continuous and cocontinuous
 functor of small sites, with the canonical unit-compatible comparison.
 Source: Stacks Project, Sites, Tag 04B8,
-and Modules on Sites, Tag 04IY, as used in Tag 099E.
-
-Proof: restrict the sheafification unit and transpose it under sheafification on the source
-site. Cocontinuity preserves local bijectivity of the unit. Its transpose is an isomorphism:
-it is the sheafification of that local bijection followed by an invertible counit. The unit
-naturality equation proves naturality of the comparison. -/
+and Modules on Sites, Tag 04IY, as used in Tag 099E. -/
 theorem exists_moduleSheafificationRestrictionIso :
     ∃ z : pushforward (F := F) (𝟙 ((F.sheafPushforwardContinuous RingCat.{u} J K).obj R).obj) ⋙
         sheafification (𝟙 ((F.sheafPushforwardContinuous RingCat.{u} J K).obj R).obj) ≅
@@ -121,10 +116,7 @@ theorem exists_moduleSheafificationRestrictionIso :
 
 /-- Maps from a restricted module sheafification are determined by original presheaf
 unit sections on any covering locus of the source site.
-Source: Stacks Project, Tag 04B8, and Tag 099E.
-
-Proof: precompose with the canonical unit-compatible restriction comparison. Use the
-covering-locus hom-ext theorem for the source-site sheafification and its unit formula. -/
+Source: Stacks Project, Tag 04B8, and Tag 099E. -/
 theorem restricted_sheafification_hom_ext
     (M : PresheafOfModules.{u} R.obj)
     (E : Cᵒᵖ → Prop)

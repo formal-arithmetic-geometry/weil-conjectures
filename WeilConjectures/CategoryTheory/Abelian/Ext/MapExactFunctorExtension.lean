@@ -45,16 +45,7 @@ The Ext universes of the three categories may be chosen independently.
 The comparison is established on localized single complexes and then shifted.
 Source: Stacks Project, derived.tex, Tag 015F (:
 every complex computes an exact functor), and Mathlib Ext.Map's definition through
-localized shifted morphisms.
-
-Proof: identify Ext with shifted morphisms between complexes concentrated in degree zero.
-The induced functor for F followed by G agrees with that for their composite, through
-its canonical comparison. The natural isomorphism e induces an isomorphism on complexes
-and their localization. Its naturality for the shifted morphism representing x says
-that mapping x by H and then e at Y equals e at X followed by mapping x by F then G.
-The degree-zero components are precisely Ext.mk₀ of e.hom.app. The comparison with
-single complexes and the shift isomorphisms cancel on both sides, giving the equality.
--/
+localized shifted morphisms. -/
 theorem mapExactFunctor_comp_mk₀_eq_sheaf
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]

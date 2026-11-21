@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Subobject.Limits
 
 /-! # Refining finite subobject filtrations
 
-Source: Stacks Project, Tag 01YF, proof, induced filtrations in extensions.
+Source: Stacks Project, Tag 01YF.
 -/
 
 @[expose] public section
@@ -146,29 +146,7 @@ private theorem closure_of_subobject_filtration
 /-- A finite filtration can be refined by finite filtrations of its successive quotients.
 A quotient already satisfying the isomorphism-invariant property needs no refinement.
 
-Source: Stacks Project, Tag 01YF (`coherent.tex`), proof,
-induced filtrations in extensions and refinement of the J-adic filtration.
-
-Proof: Use the proved source-library property P.filtrationClosure, which contains P
-and zero objects and is closed under isomorphisms and extensions. First convert any
-subobject chain with quotients in P.filtrationClosure into membership in this closure:
-induct on the chain index, starting at the zero bottom object, and apply extension
-closure to each canonical short exact cokernel sequence. Transport the last top object
-to the ambient object by the underlyingIso of its identity morphism. A quotient satisfying
-P belongs to the closure; one with its own P-filtration belongs to the closure by the
-same index induction. Thus every quotient of the outer chain belongs to the closure,
-and hence so does F.
-Finally convert closure membership into the required subobject chain, by induction on
-the constructors of filtrationClosure. For a zero object, subobjects are subsingleton
-and the constant bottom chain of length zero works. For a monomorphism A to B with
-cokernel in P, map the existing chain of A along this monomorphism and append the top
-subobject of B. Map preserves bottom and order. Its consecutive cokernels are isomorphic
-to those of the original chain: use the underlyingIso of the composite inclusions and
-cokernel.mapIso on their commuting square. The last quotient is isomorphic to the
-cokernel of A to B, again by cokernel.mapIso with the top underlyingIso. The mapped
-chain ends at the subobject represented by A to B, so it is monotone through the appended
-top. Transport P through these isomorphisms. Repeated subobjects and zero-length inner
-chains cause no exception; no assumption that P contains zero is needed. -/
+Source: Stacks Project, Tag 01YF. -/
 theorem finite_filtration_refinement
     {C : Type u} [Category.{v} C] [Abelian C] (P : C → Prop)
     (hP : ∀ (A B : C), Nonempty (A ≅ B) → P A → P B)

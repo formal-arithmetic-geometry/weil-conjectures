@@ -331,11 +331,7 @@ lemma mapCochainComplex_rightUnitor_inv (K : CochainComplex C ℤ) :
   erw [LaxMonoidal.μ_natural_right_assoc, LaxMonoidal.right_unitality_inv_assoc]
   rfl
 
-/-- The signed-total lax monoidal structure on the termwise functor.
-
-Proof: the summand formula defines a chain map by additivity and naturality of the
-ordinary tensorator. Its naturality follows on double summands, associativity on
-triple summands, and the two unit identities on the degree-zero summands of the unit. -/
+/-- The signed-total lax monoidal structure on the termwise functor. -/
 @[instance_reducible]
 def mapCochainComplexLax : (G.mapHomologicalComplex (.up ℤ)).LaxMonoidal where
   ε := chainUnit G

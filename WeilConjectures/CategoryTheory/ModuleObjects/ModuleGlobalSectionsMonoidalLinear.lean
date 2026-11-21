@@ -23,12 +23,7 @@ open CategoryTheory.BraidedCategory
 
 namespace CategoryTheory.Mod
 
-/-- Relative tensor product is bilinear for any scalar action through global sections.
-
-Proof. A scalar acts through the natural transformation multiplying a module by the
-corresponding global section. Its value on a tensor product equals multiplication on
-the second factor, by the balancing relation. This proves linearity of left tensoring.
-Naturality of the braiding transfers it to right tensoring. -/
+/-- Relative tensor product is bilinear for any scalar action through global sections. -/
 theorem monoidalLinearOfRingHom
     {C : Type u} [Category.{v} C] [MonoidalCategory C] [SymmetricCategory C]
     [Preadditive C] [MonoidalPreadditive C] [HasCoequalizers C]

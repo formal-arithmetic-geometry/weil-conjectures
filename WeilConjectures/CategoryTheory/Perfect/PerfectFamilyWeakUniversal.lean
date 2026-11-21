@@ -171,19 +171,7 @@ private theorem solutionSet_universal_iso
 end PerfectFamily
 
 /-- A shift-closed perfect family detecting zero objects gives a single weakly
-universal pair for every cohomological functor that sends coproducts to products.
-
-Proof: for each initial pair (W,w), adjoin the coproduct of all pairs (S_j,z).
-At every subsequent stage take the cone of the evaluation coproduct of generator
-maps annihilated by the current element. Product preservation and cohomological
-exactness lift that element to the next stage. Take the sequential telescope and
-lift the compatible elements; the perfect-family telescope calculation makes the
-resulting element universal on every S_j. Start with W=0 to obtain (X,x). For an
-arbitrary (Y,y), repeat the construction starting at X plus Y. The resulting map
-from X to the new telescope preserves elements and is bijective on Hom from S_j.
-Its cone is zero by shift closure, triangle exactness, and zero detection, so the
-map is invertible. Composing the map from Y with its inverse pulls x back to y.
--/
+universal pair for every cohomological functor that sends coproducts to products. -/
 theorem perfectFamily_exists_weakUniversal
     {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C]
     [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]

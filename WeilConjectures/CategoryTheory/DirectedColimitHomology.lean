@@ -66,20 +66,7 @@ private theorem shortComplexHomologyPreserves
 
 /-- Homology preserves directed colimits, including the empty colimit.
 
-Source: Stacks Project, Tag 00DB (directed-colimit exactness).
-
-Proof: if the indexing preorder is nonempty, it is filtered. Regard a diagram of
-short complexes as a short complex S of diagrams. For each index i, evaluation
-preserves homology, giving H(S)(i) ≅ H(S(i)); naturality gives an isomorphism of
-diagrams. Filtered-colimit exactness gives H(colim S) ≅ colim H(S). Composing
-these isomorphisms identifies colim H(S(i)) with H(colim S), and
-homologyMap_mapNatTrans applied to evaluation → colim verifies the cocone equations.
-Thus short-complex homology preserves the colimit. Taking the three adjacent terms
-of a complex preserves colimits, since all three evaluations do. Compose this
-preservation with short-complex homology, and use the natural isomorphism identifying
-complex homology with its adjacent short-complex homology. If the preorder is empty,
-homology preserves zero morphisms and hence the initial object. Transport preservation
-of the empty colimit along the equivalence of the index category with the empty category. -/
+Source: Stacks Project, Tag 00DB (directed-colimit exactness). -/
 theorem directed_colimit_homology
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (c : ComplexShape (ℤ × ℤ)) (pq : ℤ × ℤ) :

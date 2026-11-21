@@ -34,11 +34,7 @@ def restrictedSection (s : (R.obj ⋙ forget CommRingCat).sections) :
 
 /-- Restriction commutes with localization at a compatible section.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 04IY and 0996.
-
-Proof: sectionwise restriction of the localization presheaf is the localization
-presheaf of the restricted section: the rings, the sections and the universal
-localization lifts are identical. Apply the sheafification restriction comparison. -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 04IY and 0996. -/
 theorem localizationRestriction [F.IsCocontinuous K J]
     [HasSheafify J CommRingCat.{max c d vc vd r}]
     [HasSheafify K CommRingCat.{max c d vc vd r}]

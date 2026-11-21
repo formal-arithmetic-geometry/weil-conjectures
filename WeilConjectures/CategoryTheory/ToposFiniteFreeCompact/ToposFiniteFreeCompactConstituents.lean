@@ -226,12 +226,7 @@ private theorem exact_derived_counit_isIso
 
 /-- Finite-free extension is exact and its universal derived counit is invertible
 on every unbounded complex.
-Source: Stacks 06YY.
-Proof: use a finite basis and its coordinate maps to identify restricted extension
-with a finite direct sum. The two inverse formulas hold locally on pure tensors,
-then sheafify. Restriction is exact and detects zero sheaves. Thus extension is exact,
-and its universal left-derived counit is the exact-functor localization isomorphism.
-The empty basis gives the zero functor; no boundedness is used. -/
+Source: Stacks 06YY. -/
 theorem scalar_exact (T : Site.{u, v, r})
     [HasDerivedCategory.{w} (Mod T A)] [HasDerivedCategory.{w} (Mod T B)]
     [Module.Finite A B] [Module.Free A B]
@@ -547,11 +542,7 @@ private theorem ordinary_tensor_mate_isIso {T W : ScalarSite.{u, v, r, w} A B}
 end
 
 /-- Tensor and geometric inverse image commute, with the canonical scalar adjunct.
-Source: Stacks 03EL, 07A6.
-Proof: the ordinary tensor balancing map and its inverse send each local pure tensor
-of a pulled-back section to the same tensor. Sheafification gives inverse natural
-maps. Their scalar adjunct is the identity on underlying inverse images, hence is
-tau. Exact localization and its Hom bijection give precisely tensorPullbackInv. -/
+Source: Stacks 03EL, 07A6. -/
 theorem tensorPullbackInv_isIso {T W : ScalarSite.{u, v, r, w} A B}
     (f : Geometric T W) : IsIso (tensorPullbackInv f) := by
   let := ordinary_tensor_mate_isIso f
@@ -580,11 +571,7 @@ def restrictionPushforward {T W : ScalarSite.{u, v, r, w} A B}
   (mateEquiv (adjB f) (adjA f) (TwoSquare.mk _ _ _ _ (tau f).hom))
 
 /-- Restriction commutes with the derived direct image by its canonical mate.
-Source: Stacks 03D7, 07A6, 0D6E.
-Proof: on underlying section modules restriction and direct image are identical.
-Their ordinary adjunction transposes give the displayed mate. Resolve by K-injectives
-and use the two universal right-derived factorizations. The resulting comparison is
-invertible and its counit square identifies it with restrictionPushforward. -/
+Source: Stacks 03D7, 07A6, 0D6E. -/
 theorem restrictionPushforward_isIso {T W : ScalarSite.{u, v, r, w} A B}
     (f : Geometric T W) : IsIso (restrictionPushforward f) := by
   let := tensorPullbackInv_isIso f
@@ -650,11 +637,7 @@ def betaInv {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     (TwoSquare.mk _ _ _ _ (lambda j.geometric).inv))
 
 /-- The balancing mate is invertible, on unbounded inputs.
-Source: Stacks 03DI, 03DJ, 0E8I.
-Proof: on the localized-site sum presheaf both maps send a summand tensor to the same
-summand tensor; on the complement the module is zero. Tensor balancing and sheafification
-prove the inverse identities. All ordinary functors are exact, so termwise localization
-preserves them. The open Hom formula identifies the inverse with betaInv. -/
+Source: Stacks 03DI, 03DJ, 0E8I. -/
 theorem betaInv_isIso {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IsIso (betaInv j) := by
   have h := iterated_mateEquiv_conjugateEquiv_symm (openAdjA j) (openAdjB j)
@@ -733,10 +716,7 @@ private theorem matrix_isIso
 
 set_option linter.unusedSectionVars false in
 /-- The restriction/open comparison is the identity on defining section sums.
-Source: Stacks 03DI, 03DJ, 03CZ.
-Proof: the ordinary sum-presheaf identity is invertible on the open and zero on its
-complement. Its adjoint is the restriction/inverse-image identity tau. Exact
-localization retains this adjoint equation and both inverse identities. -/
+Source: Stacks 03DI, 03DJ, 03CZ. -/
 theorem restrictionOpen_isIso {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IsIso (restrictionOpen j) := by
   let : IsIso ((mateEquiv j.adjB j.adjA).symm
@@ -944,9 +924,7 @@ private theorem localized_unit_isIso
 
 set_option linter.unusedSectionVars false in
 /-- The localized open units retain the ordinary full-faithfulness normalization.
-Source: Stacks 03DI, 03DJ, 07A6.
-Proof: exact localization sends the inverse ordinary unit to an inverse derived
-unit, by the localization factorization of the original adjunction. -/
+Source: Stacks 03DI, 03DJ, 07A6. -/
 theorem open_units_isIso {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IsIso (openAdjA j).unit ∧ IsIso (openAdjB j).unit := by
   exact ⟨localized_unit_isIso j.adjA, localized_unit_isIso j.adjB⟩
@@ -962,11 +940,7 @@ instance openUnitB {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IsIso (openAdjB j).unit := (open_units_isIso j).2
 
 /-- The unit-normalization identity for the specified B-linear balancing map.
-Source: Stacks 03DI, 03CZ, 07A6.
-Proof: under the open Hom bijection the inverse balancing map is lambda inverse
-following scalar extension of the open unit: both send each local summand tensor
-to that same tensor. Exact localization preserves this equation. Invert the two
-open units and rearrange; this yields exactly the displayed identity. -/
+Source: Stacks 03DI, 03CZ, 07A6. -/
 theorem beta_unit {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T)
     (M : DerivedCategory (Mod V.toSite A)) :
     (lambda j.geometric).hom.app ((IA j).obj M) ≫

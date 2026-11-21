@@ -18,16 +18,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 /-- Degree-zero evaluation `Sheaf.objectCohomologyEval₀` on the identity generator of the free
-sheaf is injective, preserves zero, and is natural in the sheaf.
-
-Proof: Ext in degree zero is additively equivalent to Hom. The sheafification
-adjunction identifies Hom from the free sheaf with natural transformations from
-its free representable presheaf. The free-forgetful adjunction then identifies
-these with maps from the representable to the underlying presheaf. Yoneda
-identifies such maps with sections at X, by evaluation on the identity. All
-three identifications preserve zero. Postcomposition with a sheaf morphism
-commutes with each identification, proving the displayed naturality equation.
--/
+sheaf is injective, preserves zero, and is natural in the sheaf. -/
 theorem siteCohomology_zero_section_properties
     {C : Type u} [SmallCategory C] (T : GrothendieckTopology C)
     [HasExt.{u} (Sheaf T AddCommGrpCat.{u})] :

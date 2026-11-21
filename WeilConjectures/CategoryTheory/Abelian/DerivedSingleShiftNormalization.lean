@@ -375,18 +375,7 @@ noncomputable def rightDerivedPlusSingleShiftIso (n : ℤ) :
 /-- Shift normalization of the actual unit on a single object.
 
 Source: Stacks Project, Tag 05TC (2), using the degree-zero identification
-in Tag 05TD (3).
-
-Proof: Shift the single object in degree n by -n to the single object in
-degree zero. The quotient/single comparison and the actual derived unit
-commute with this shift; use the commShift square of the right-derived unit.
-Apply homology with its shift isomorphism. Naturality of these three
-isomorphisms identifies the displayed composite with the degree-zero
-single-unit composite. The proved single-unit homology comparison makes
-this toRightDerivedZero followed by rightDerivedZeroIsoSelf.hom. These
-are inverse maps, because S is left exact. Cancel the shift isomorphisms
-on source and target to obtain the identity in degree n. This works for
-negative n as well; n=0 is precisely the established degree-zero calculation. -/
+in Tag 05TD (3). -/
 theorem rightDerivedPlusSingleUnitHomologyAt_comp_shiftIso (n : ℤ) (Y : C) :
     S.rightDerivedPlusSingleUnitHomologyAt n Y ≫
       (S.rightDerivedPlusSingleShiftIso n).hom.app Y = 𝟙 (S.obj Y) := by

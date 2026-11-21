@@ -37,12 +37,6 @@ proof starts from an affine open of the scheme to be compactified.
   finite type morphism `f : X ⟶ S` with `X` quasi-affine admits a compactification. In
   particular this holds for `X` affine, and the hypothesis `QuasiCompact f` is automatic as
   soon as `S` is quasi-separated.
-
-## Blueprint
-
-This file implements `def:nagata-affine-compactification` and
-`prop:nagata-affine-compactification` of the Nagata compactification blueprint.
-
 -/
 
 @[expose] public section

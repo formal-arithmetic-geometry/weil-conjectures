@@ -83,27 +83,7 @@ private theorem comparison_kernel_iff
 
 /-- Source: Stacks Project, Sites, Tag 0A35, presentation independence and
 unit-compatible adjunction identification; abelian extension by Modules on Sites,
-Tag 03CO.
-
-Proof: Write H for the inverse image of G at t.right, and W for the image of U.
-For continuous f, g and h with f followed by g equal to h, the composite
-adjunction and the h-adjunction have the same right adjoint. Their unique left
-adjoint isomorphism is unit-compatible. The supplied unit equation therefore
-identifies a comparison map with the g-unit followed by the restriction of this
-isomorphism. Injectivity of each component of the isomorphism proves that the
-comparison and the g-unit have the same kernel. This argument is formalized in
-comparison_kernel_iff and uses no colimit or covering assumptions.
-Apply it first to F(t.hom), V(t.right) and V(i). The equality hxy says that the
-V(t.right) unit kills x - y in H(W). Apply the finite-cover source-unit
-zero-detection theorem to H, W and x - y. It gives d : t.right to k such that
-the d-unit kills x - y. Set t' to t.hom followed by d, and let b have right
-component d. Apply the same kernel comparison to F(t.hom), F(d) and F(t'.hom).
-The unit equation hθ identifies the kernel of θ b with the kernel of the
-d-unit. Additivity translates vanishing of x - y into equality of the two
-θ images. No transport of section elements or choice of data is needed.
-The presentation and finite-cover argument is confined to the source-unit
-zero-detection lemma; comparison-map coherence is proved here.
--/
+Tag 03CO. -/
 theorem colimit_site_abelian_section_eventual_equality
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

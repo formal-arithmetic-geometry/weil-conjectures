@@ -277,22 +277,7 @@ private theorem pullback_fibre_pushforward_equivariant {Z X : TopCat.{u}} (f : Z
 sections, has fibre torsor canonically equal to the direct image of the original fibre.
 The isomorphism is specified on sections by the first projection of the pullback, and it
 commutes with translation by the direct-image group sheaf.
-Source: Stacks Project, Tags 02UV, 02FQ and 01AX.
-
-Proof:
-1. Identify the closed immersion with its closed image. Apply
-`lem-sc-closed-immersion-pushforward-exact` to the original short exact sequence, obtaining
-short exactness of its direct image. Restriction sends a constant integer to the same
-integer on the inverse-image open. Pull back the sequence along this restriction map:
-the kernel embeds by the unique map whose projections are the original inclusion and zero,
-and epimorphy of the second projection follows from local lifting along the original
-projection. This gives the asserted short exact pullback sequence.
-2. On an open U, a lift of 1 in the pullback is a pair (e,1), where e is a section over
-its inverse image and p(e)=1. First projection therefore identifies these lifts with
-sections of the original fibre over the inverse-image open. These bijections commute with
-restriction. They commute with translation because the kernel inclusion has first
-projection equal to the pushed-forward inclusion. Consequently they form the canonical
-isomorphism of torsors asserted in the statement. -/
+Source: Stacks Project, Tags 02UV, 02FQ and 01AX. -/
 theorem closedImmersion_extension_fibre_pushforward
     (Z X : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i]
     (F E : Z.carrier.Sheaf AddCommGrpCat.{u})

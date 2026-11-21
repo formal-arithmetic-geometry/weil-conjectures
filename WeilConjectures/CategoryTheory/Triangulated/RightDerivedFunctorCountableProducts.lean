@@ -27,24 +27,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- An additive countable-product-preserving functor from sheaves of modules to abelian
- groups has a countable-product-preserving unbounded right derived functor.
-Source: Stacks Project, Tag 08U1.
-
-Proof: For a countable family `K n`, choose K-injective representatives `I n`, together
-with isomorphisms `Q(I n) ≅ K n`. The termwise product `P` of the representatives is
-K-injective and its localized projections form a product cone by
-`HomotopyCategory.isLimitFanQuotient` and the K-injective Hom comparison
-(Tag 0BK6). The unit of the right derived
-functor is invertible on each `I n` and on `P`. Its naturality on every projection
-identifies the image product cone with the localization of the cone obtained by applying
-`F` termwise to `P`. Since `F` preserves countable products, that cone is the termwise
-product cone of the complexes `F(I n)`. Abelian groups have exact countable products,
-so the termwise-product clause of `derivedCategory_countableProducts_and_towerLimit`
-(Tag 07KC) makes its localization a product cone, even though the complexes `F(I n)`
-need not be K-injective. Transport this limit property along the unit isomorphisms and
-the representative isomorphisms. Thus the image of the product cone of `K` is a limit
-cone. Every discrete countable diagram is isomorphic to such a family diagram, which
-proves preservation of all limits of shape `Discrete ℕ`. -/
+groups has a countable-product-preserving unbounded right derived functor.
+Source: Stacks Project, Tag 08U1. -/
 theorem rightDerivedFunctor_preservesCountableProducts (X : Scheme.{u})
     (F : X.Modules ⥤ AddCommGrpCat.{u}) [F.Additive]
     [PreservesLimitsOfShape (Discrete ℕ) F]

@@ -80,31 +80,7 @@ private theorem solutionSet_generators_detect_zero
 localizing subcategory of a Grothendieck derived category have a small weakly
 universal family. This asserts neither uniqueness nor a representing object.
 
-Source: Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2.
-
-Proof: choose an ambient essentially small replete triangulated perfect class
-containing P, with bounded-subcoproduct factorization, using Neeman 0.2 and Krause
-Sections 6.2-6.3. Intersect it with Q. The proved localizing-hull factorization
-argument and minimality give a small shift-closed perfect family in Q containing
-representatives of P. To see that it detects zero objects, let K be the right
-orthogonal of its shift closure. The left orthogonal of K is localizing and
-contains P, hence contains Q. An object of Q orthogonal to the family then has
-zero identity.
-
-For each pair (W,w), adjoin the coproduct of all pairs (generator, H-element).
-Iteratively attach cones of all generator maps killed by the current element.
-Product preservation and cohomological exactness lift the element at each stage
-and to the sequential telescope. Perfectness gives coproduct weak kernels;
-comparison with constant sequences, whose telescope maps have explicit
-retractions, makes evaluation at the lifted element bijective on all generators.
-Start at W=0 to obtain (X,x). For an arbitrary pair (Y,y), repeat the construction
-starting at X plus Y. The map from X to the new telescope preserves elements and
-is bijective on Hom from the generators. Its cone is zero by shift closure and
-triangle exactness, so it is invertible. Compose the map from Y with this inverse
-to pull x back to y. Thus the singleton family (X,x) is a solution set.
-Every index used is v-small: the perfect family, Hom sets and H-values are in
-universe v. No compactness of the original P is used.
--/
+Source: Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2. -/
 theorem setGeneratedDerived_cohomological_solutionSet
     {A : Type u} [Category.{v} A] [Abelian A]
     [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A]

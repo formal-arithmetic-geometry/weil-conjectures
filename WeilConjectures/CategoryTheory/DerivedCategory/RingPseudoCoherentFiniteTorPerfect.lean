@@ -31,20 +31,7 @@ namespace DerivedCategory
 /-- A pseudo-coherent object `C` of `D(R)` with Tor amplitude in some interval `[a, b]`,
 `a ≤ b`, is isomorphic in `D(R)` to a bounded complex of finitely generated projective
 `R`-modules, i.e. it is perfect in the affine sense.
-Source: Stacks Project, More on Algebra, Lemma 15.76.2 (Tag 0658).
-
-Proof: Use the bounded-above finite-free model `P` supplied by pseudo-coherence,
-with upper bound `c`. Testing the Tor amplitude against `R` gives `H^i(P) = 0`
-for `i < a`. The bounded-above flat complex `P` is K-flat, so its ordinary tensor
-with every module has zero homology in degree `a - 1`. The cokernel criterion
-`ObjectProperty.flat_opcycles_of_exactAt` makes `P.opcycles a` flat. It is finitely
-presented: the kernel of the surjection from the finite free module `P.X a` is the
-image of the finite module `P.X (a - 1)`. Hence it is finite projective. The good
-truncation `P.truncGE a` has this cokernel in degree `a`, zero terms below `a`,
-and the original finite free terms above `a`. It vanishes above `c` and its
-canonical map from `P` is a quasi-isomorphism. Transport finite generation and
-projectivity along the truncation's termwise isomorphisms and compose its derived
-isomorphism with `Q.obj P ≅ C`. -/
+Source: Stacks Project, More on Algebra, Lemma 15.76.2 (Tag 0658). -/
 theorem isPerfect_of_pseudoCoherent_finiteTorAmplitude
     {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)]
     (C : DerivedCategory (ModuleCat.{u} R)) (hPC : IsPseudoCoherent C)

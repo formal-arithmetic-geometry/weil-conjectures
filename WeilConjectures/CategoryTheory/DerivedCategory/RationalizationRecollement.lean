@@ -261,10 +261,8 @@ lemma isZero_map_obj_map_obj (h₀ : ∀ X, IsZero (jUp.obj (i.obj X)))
 omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
   [∀ n : ℤ, (shiftFunctor D n).Linear R] in
 /-- rational stage `E`: in a recollement
-situation, every object of the rationalization killed by `map M jUp` lies in the essential image of
-`map M i`. The proof: write the object as `Q K`; then `jUp K` is `M`-torsion, hence so is
-`jLow (jUp K)`, so that the first map of the triangle `F ⟶ K ⟶ jLow (jUp K) ⟶` (with `F` in the
-essential image of `i`) becomes invertible in the rationalization. -/
+situation, every object of the rationalization killed by `map M jUp` lies in the essential image
+of `map M i`. -/
 lemma essImage_map_of_isZero (adj : jUp ⊣ jLow) [IsIso adj.counit]
     (hess : ∀ K, IsZero (jUp.obj K) → i.essImage K) (K : Rationalization M D)
     (hK : IsZero ((map M jUp).obj K)) : (map M i).essImage K := by

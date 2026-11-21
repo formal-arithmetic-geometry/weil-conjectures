@@ -30,21 +30,9 @@ attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
   AlgebraicGeometry.etaleFieldActionForget₂
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Tag 03QT.
-
-Proof: Give the underlying type of M its action specified by M.obj.obj.ρ and
-let I be its quotient by the orbit equivalence relation. For each orbit take
-its subtype with the restricted action and discrete topology. The restricted
-action is continuous since its inclusion in M is an embedding. The stabilizer
-of any point is open, as it is the inverse image of the open singleton under
-the continuous orbit map. Its coset quotient is finite by compactness of G,
-and the orbit-stabilizer bijection makes the orbit finite. The subtype
-inclusions are equivariant. Every element belongs to exactly one orbit, so
-maps out of the disjoint union are precisely families of maps out of the
-orbits; if those maps are equivariant their union is equivariant. This proves
-the coproduct universal property in discrete continuous actions. The same
-argument with arbitrary set maps proves the underlying set coproduct property.
-For empty M the quotient and family are empty and both cocones are initial. -/
+/-- A discrete continuous action of a compact group is the coproduct of a family of actions on
+finite sets, and the forgetful functor to types preserves this coproduct.
+Source: Stacks Project, Tag 03QT. -/
 theorem discreteContAction_finite_orbit_coproduct
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] (M : DiscreteContAction (Type w) G) :

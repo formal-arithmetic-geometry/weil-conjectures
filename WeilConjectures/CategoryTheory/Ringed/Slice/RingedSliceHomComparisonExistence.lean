@@ -624,23 +624,7 @@ private theorem modelSquare
     Iso.inv_hom_id, Category.comp_id] using hh.symm
 
 /-- The local-family comparison descends to derived Hom with its fixed augmentations.
-Source: Stacks Project, Tags 08JB, 08FI, 0A8X and 0A95.
-
-Proof: relocalization identifies (C/U)/(V/U) with C/V, with identical covering
-sieves. In degree n this identifies the product of local maps from L^p to I^(p+n)
-on the two sites. The identification is natural in both complexes. The differential
-is d_I h - (-1)^n h d_L on either side, so it is a chain isomorphism gamma with the
-displayed component formula. Exact slice restriction preserves K-injectivity,
-since it has an exact extension-by-zero left adjoint (08FI). Thus these complexes
-compute both derived Homs. Localize the comparison using K-injective targets;
-quasi-isomorphisms between K-injectives are homotopy equivalences and Hom into a
-K-injective inverts quasi-isomorphisms in its first argument. The localization
-universal property gives eta and its two-variable naturality. For an already
-K-injective I, the map Hom(L,I) to Hom(L,I(I)) induced by the fixed augmentation
-is a quasi-isomorphism. Compose the fixed localization factorization with its
-inverse to obtain kappa, and do the same on the slice for kappa_U. Naturality of
-gamma with respect to these augmentations gives exactly the last displayed
-square. Zero complexes and empty covers require no separate hypothesis. -/
+Source: Stacks Project, Tags 08JB, 08FI, 0A8X and 0A95. -/
 theorem ringedSlice_homComparison_exists
     (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U)
       (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))] :

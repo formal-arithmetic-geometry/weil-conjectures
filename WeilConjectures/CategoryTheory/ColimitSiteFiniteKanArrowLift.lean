@@ -29,25 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- Source: Stacks Project, Sites, Tag 0A35, omitted independence-of-presentation
-verification, expanded using Categories, Section Tag 04AX.
-
-Proof: A costructured arrow p for the opposite stage functor is an arrow
-V_t(U) to V_t(p.left.unop). Represent each of the finitely many such arrows
-in the arrow colimit, and move all representatives and t.right to one stage.
-Use eventual equality in the object colimit to align every source with the
-image of U and every target with the image of p.left.unop. Equalize the
-finitely many competing maps from t.right, so all stage objects use one map.
-The costructured-arrow triangle for each listed h says that the image of
-its proposed lifted triangle commutes in V.pt. Eventual equality in the arrow
-colimit makes each triangle commute at a later stage. The same criterion
-makes the lift of the distinguished identity arrow an identity. Enforce these
-finitely many equations successively; their validity persists under further
-refinement. If a is the resulting arrow from t.right, put r = Under.mk
-(t.hom followed by a), and let b be the associated Under morphism. The lifted
-arrows at this stage are the required g. Empty arrow lists impose no triangles;
-the distinguished identity still has its identity lift. Repeated objects and
-arrows cause no problem because every prescribed equality is imposed before
-choosing g. There is no presheaf or choice of section in this construction. -/
+verification, expanded using Categories, Section Tag 04AX. -/
 theorem colimit_site_finite_kan_arrow_lift
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (V : Cocone F)

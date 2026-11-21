@@ -26,15 +26,6 @@ sense (`CategoryTheory.CategoryCocone.LevelwiseLeftAdjoint`):
 If `c` and `c'` are filtered 2-colimits, then `F` is a left adjoint
 (`CategoryTheory.CategoryCocone.LevelwiseLeftAdjoint.isLeftAdjoint`). Only (Obj) and the
 surjectivity half of (Hom) are needed for `c`.
-
-The proof shows that for `y : C' k`, the morphism
-`ε : F (c.Φ k (R k y)) ⟶ c'.Φ k (L k (R k y)) ⟶ c'.Φ k y` (given by `α k` and the counit of
-`L k ⊣ R k`) is a terminal object of `CostructuredArrow F (c'.Φ k y)`, i.e. that
-`f ↦ F.map f ≫ ε` is bijective on morphisms from any `X : D`. Writing `X ≅ c.Φ j x` and
-moving to a common stage `n ≥ j, k` (the object `c.Φ k (R k y)` becomes `c.Φ n (R n (T y))`
-thanks to the invertibility of the mates), one reduces to source and target at the same stage,
-where the bijectivity follows from the adjunctions at the finite stages and the (Hom)
-properties of `c` and `c'`. No coherence between the transition functors is used.
 -/
 
 @[expose] public section

@@ -19,15 +19,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
 /-- Strict inverse functors over the underlying sheaf functor give the morphism criterion.
-Source: Stacks Project Section 00YR and Proposition 00YV, structure-preserving morphisms.
 
-Proof in words: the identity G ⋙ F makes G faithful; the identity F ⋙ G then
-makes F full. Naturality of eqToIso hF identifies the underlying map of F.map f
-with the conjugate of the underlying map of f. Thus a lift gives an IsRingHom,
-and Mathlib's AddGrpObj.neg_comp supplies compatibility with negation.
-Conversely package an IsRingHom as a CommRingObjCat morphism and use fullness of
-F to lift it. Conjugating the map_preimage equality back gives exactly the
-requested underlying map. Neither h₁ nor operation formulas are needed. -/
+Stacks Project, Section 00YR and Proposition 00YV, structure-preserving morphisms. -/
 theorem sheavesAlgebraicStructuresRing_morphism
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (F : Sheaf J CommRingCat.{max u v w} ⥤

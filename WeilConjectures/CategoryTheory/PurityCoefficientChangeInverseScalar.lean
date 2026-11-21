@@ -17,9 +17,7 @@ universe u₁ u₂ v₁ v₂
 open CategoryTheory
 namespace CategoryTheory
 
-/-- The ring inverse of an invertible endomorphism is its categorical inverse.
-Proof: its product with the endomorphism is the identity by the unit inverse law;
-cancel that endomorphism against the categorical inverse. -/
+/-- The ring inverse of an invertible endomorphism is its categorical inverse. -/
 theorem ringInverse_eq_categoricalInv
     {C : Type u₁} [Category.{v₁} C] [Preadditive C] {X : C} (f : End X) [IsIso (f).asHom] :
     Ring.inverse f = .of (inv (f).asHom) := by
@@ -30,10 +28,7 @@ theorem ringInverse_eq_categoricalInv
     simpa only [End.mul_asHom, End.one_asHom] using congr($(h).asHom)
   exact h'.trans (IsIso.inv_hom_id f.asHom).symm
 
-/-- Every arrow intertwines an invertible natural-number scalar and its inverse.
-Proof: additive functors preserve natural-number multiples of identities. Such
-multiples commute with every morphism. Cancel the target scalar; the two inverse
-identities reduce the desired equation to that scalar commutation equation. -/
+/-- Every arrow intertwines an invertible natural-number scalar and its inverse. -/
 theorem map_inverse_nsmul_id_natural
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Additive]

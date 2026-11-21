@@ -178,7 +178,8 @@ public import Mathlib.CategoryTheory.Sites.EpiMono
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 /-! # Data for normalized derived monoidal comparisons on ringed topoi
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4, 0D6D, 07A6, 0D6E, 0FPI; Modules on Sites, Tags 03D7, 03D8, 03EL.
+Source: Stacks Project, Cohomology on Sites, Tags 07A4, 0D6D, 07A6, 0D6E, 0FPI; Modules on Sites,
+Tags 03D7, 03D8, 03EL.
 
 The structures below only package the simultaneous witnesses of the statement. In
 particular an ordinary pullback is tied to the geometric morphism by scalar extension
@@ -248,7 +249,7 @@ def Site.corner (X : Site.{u, w}) : RingedTensorCorner.{u, w} where
   ring := X.A
   tensor := X.closed.tensor
 
-/-- Morphisms are exactly the DAG's geometric ringed-topos morphisms.
+/-- Morphisms are the geometric morphisms of ringed topoi.
 Source: Stacks 03D7. -/
 abbrev Morphism (X Y : Site.{u, w}) := RingedToposMorphism X.ring Y.ring
 

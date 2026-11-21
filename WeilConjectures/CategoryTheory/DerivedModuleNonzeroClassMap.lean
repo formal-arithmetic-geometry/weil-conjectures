@@ -21,16 +21,7 @@ namespace CategoryTheory
 open Limits
 
 /-- A nonzero homology class yields a nonzero rank-one derived morphism.
-Source: Stacks Project, Tag 064B, applied to the projective rank-one single complex.
-
-Proof in words: choose a complex C and an isomorphism Q(C) ≅ K, and transport x
-through the homology isomorphism. Choose a cycle z representing that class.
-The linear map ULift S → C.X n sending ULift.up s to s • z defines a chain map
-from the rank-one single complex into C[n], since z is a cycle. After localization
-and transport along Q(C[n]) ≅ K[n], its degree-zero homology map sends the lifted
-unit to x under the canonical homology identifications. A zero derived morphism
-induces the zero homology map, contradicting hx. This proves nonvanishing.
--/
+Source: Stacks Project, Tag 064B, applied to the projective rank-one single complex. -/
 theorem derivedModule_nonzero_class_map
     {S : Type w} [Ring S]
     [HasDerivedCategory.{max w vH} (ModuleCat.{max w vH} S)]

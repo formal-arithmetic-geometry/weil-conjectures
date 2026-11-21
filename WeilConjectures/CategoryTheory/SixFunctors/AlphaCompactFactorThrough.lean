@@ -31,18 +31,7 @@ private def ReceivesThrough (S H : ObjectProperty C) (Y : C) : Prop :=
     ∃ Z, H Z ∧ ∃ (a : X ⟶ Z) (b : Z ⟶ Y), a ≫ b = f
 
 /-- Alpha-compact objects are retracts of objects of any triangulated bounded-sum
-hull contained in the canonical class and containing localizing generators.
-
-Proof: let R be the objects receiving only maps from alpha-compact objects which
-factor through H. It contains H and is invariant under isomorphism and shifts.
-For a coproduct, (G4) factors component maps through alpha-compact objects;
-membership in R factors these through H, and alpha-smallness restricts the
-result to fewer than alpha summands. For a cone, factor the connecting map
-through H0 and take its fiber X'. Extension closure puts X' in the canonical
-class. Factor its lift to the preceding vertex through H1. Complete the square
-to a cone H2 of H0[-1] to H1. The discrepancy factors through H0, so the original
-map factors through H2 plus H0. Hence R is localizing. Generation makes R all
-of C, and the factorization of each identity exhibits the claimed retract. -/
+hull contained in the canonical class and containing localizing generators. -/
 theorem alphaCompactObjects_le_retractClosure
     (α : Cardinal.{v}) [Fact α.IsRegular]
     (G H : ObjectProperty C) [H.IsClosedUnderIsomorphisms] [H.IsTriangulated]

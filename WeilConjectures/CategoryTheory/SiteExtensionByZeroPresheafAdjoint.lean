@@ -130,18 +130,7 @@ private noncomputable def sumAdjunction {C : Type u} [SmallCategory C] (W : C) :
       funext Y
       simp [sumHomEquiv, sumRestrict, sliceRestrict, Category.assoc] }
 
-/-- The sheafified direct-sum presheaf is left adjoint to restriction.
-
-Given a morphism `α : F ⟶ G|_W`, the first proof step defines a presheaf map by
-sending the section in the `φ`-summand to `α.app (Over.mk φ)`. Naturality in the
-slice gives compatibility with restrictions, and the direct-sum universal property
-provides the unique map on each section. The second step factors this map uniquely
-through sheafification. Conversely, composing a map from the sheafification with
-the canonical presheaf map and restricting to each summand gives the inverse map.
-The sheafification universal property proves that these constructions are inverse;
-naturality in `F` and `G` follows componentwise. The displayed hom-set
-bijections are represented by the hom-equivalences of the resulting adjunction.
--/
+/-- The sheafified direct-sum presheaf is left adjoint to restriction. -/
 theorem siteExtensionByZeroPresheaf_adjunction
     {C : Type u} [SmallCategory C]
     (J : Precoverage C)

@@ -25,17 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Abelian.Ext
 
 /-- A positive Ext class becomes zero after pullback along some epimorphism.
-Source: Stacks Project, Derived Categories, Tag 06XU.
-
-Proof: follow the fraction construction in the first paragraph of Tag 06XU.
-Write the derived morphism representing x as s inverse followed by f, where
-s : L -> X[0] is a quasi-isomorphism and f : L -> Y[q]. Take G to be the
-object of degree-zero cycles of L. Its map g to X factors as the homology
-projection followed by the degree-zero homology isomorphism of s, so g is
-epic. The cycle inclusion defines a chain map l : G[0] -> L with l s = g[0].
-The composite l f vanishes because Y[q] has zero component in degree zero
-when q is positive. Cancelling s in the fraction proves g pulls x back to
-zero. All choices remain local witnesses in a theorem, not public data. -/
+Source: Stacks Project, Derived Categories, Tag 06XU. -/
 theorem exists_epi_comp_eq_zero
     {A : Type u} [Category.{v} A] [Abelian A] [HasExt.{w} A]
     {X Y : A} (q : ℕ) (hq : 0 < q) (x : Ext X Y q) :

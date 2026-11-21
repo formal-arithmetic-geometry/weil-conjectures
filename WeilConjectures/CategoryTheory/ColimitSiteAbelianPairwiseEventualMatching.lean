@@ -109,42 +109,7 @@ private theorem unit_kernel_mono
 
 /-- One pair of restrictions with matching colimit images agrees at a later stage.
 Source: Stacks Project, Sites, Tag 0A35, section formula and equalizer
-and adjunction paragraphs; Modules on Sites, Tag 03CO, abelian interpretation.
-
-Proof: Put A = F(t.hom) inverse image of G and let x and z be the two restrictions
-along gs and gr. Compatibility hy and naturality of alpha imply alpha_t(x) =
-alpha_t(z). The composite adjunction for F(t.hom) and V_t and the direct V_i
-adjunction have the same right adjoint. Their unique left-adjoint isomorphism,
-compatible with their units, identifies alpha_t with the V_t unit on A followed
-by that isomorphism. Each component of the isomorphism is injective. Thus the
-V_t unit kills x - z in A(Z).
-
-Use the section formula of Tag 0A35 for the source stage t.right, sheaf A, and
-object Z: the sections of V_t inverse image of A at V_t(Z) are the filtered
-colimit of sections of the later inverse images at the images of Z. The formula
-is proved independently by constructing the presheaf of filtered section
-colimits over presentations of each colimit-site object. The object and arrow
-set colimits lift finite object, arrow, and relation data to a common stage and
-make presentation refinements filtered and the refinements of any presentation
-final. Restriction maps are induced by those lifts and independent of lifts by
-eventual equality. Every covering family is the image of a finite stage cover;
-preserved covering pullbacks and commutation of filtered abelian colimits with
-finite limits give the sheaf equalizer, also for an empty cover. Transposing maps
-out of this sheaf through the stage adjunctions identifies it with V_t inverse
-image of A, compatibly with the source unit. This is a raw section-colimit
-construction, not the already assembled stage-image sheaf that needs the present
-finite-family stabilization theorem.
-
-In this filtered colimit the representative x - z from the identity stage equals
-zero. Equality of representatives is witnessed by a transition d : t.right to k;
-unit compatibility says that the d adjunction unit kills x - z. Take t' to be
-Under.mk(t.hom followed by d) and b its morphism with right component d. Apply
-left-adjoint uniqueness once more to F(t.hom), F(d), and F(t'.hom): htheta
-identifies the kernel of theta_b with that of the d unit. Therefore theta_b(x)
-equals theta_b(z). This concerns one prescribed pair and one prescribed test
-object only. It supplies neither a simultaneous transition for all pairs nor
-compatibility at every object of a later stage nor descent to an image presieve.
--/
+and adjunction paragraphs; Modules on Sites, Tag 03CO, abelian interpretation. -/
 theorem colimit_site_abelian_pairwise_eventual_matching
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

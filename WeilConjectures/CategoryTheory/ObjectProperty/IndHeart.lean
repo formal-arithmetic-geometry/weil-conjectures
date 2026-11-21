@@ -22,28 +22,26 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 Let `C` be a Grothendieck abelian category and `P` a class of objects of `C` (the constructible
 sheaves) containing zero and closed under kernels, cokernels and extensions, such that for `M`
 in `P`, every morphism `M[0] ⟶ B[n]` in `D(C)` to a filtered colimit `B = colim Bᵢ` factors
-through some `Bᵢ[n]` (`DerivedCategory.HomFactorsThroughFilteredColimits`). We show (blueprint
-`proposition-ind-constructible-sheaves` (2)) that the ind-objects `ind P` are closed under kernels,
-cokernels, extensions and direct sums
+through some `Bᵢ[n]` (`DerivedCategory.HomFactorsThroughFilteredColimits`). We show that the
+ind-objects `ind P` are closed under kernels, cokernels, extensions and direct sums
 (`CategoryTheory.ObjectProperty.isClosedUnder_ind_of_homFactorsThroughFilteredColimits`):
 
-* `proposition-ind-constructible-sheaves`: the objects of `P` are finitely presentable
+* the objects of `P` are finitely presentable
   (`DerivedCategory.HomFactorsThroughFilteredColimits.isFinitelyPresentable`); injectivity of
   `colim Hom(M, Bᵢ) ⟶ Hom(M, colim Bᵢ)` comes from surjectivity applied to the kernels of
   `M ⟶ Bⱼ`;
-* `proposition-ind-constructible-sheaves`: any presentation of an object of `ind P` is final in
+* any presentation of an object of `ind P` is final in
   the category of morphisms from objects of `P`
   (`CategoryTheory.ObjectProperty.ColimitOfShape.final_toCostructuredArrow`), so that a morphism
   between objects of `ind P` is a filtered colimit of morphisms between objects of `P`
   (`CategoryTheory.ObjectProperty.exists_colimitOfShape_hom`);
-* `proposition-ind-constructible-sheaves`: filtered colimits being exact, kernels and cokernels are
+* filtered colimits being exact, kernels and cokernels are
   computed termwise (`CategoryTheory.ObjectProperty.ind_isClosedUnderKernels`,
   `CategoryTheory.ObjectProperty.ind_isClosedUnderCokernels`);
-* `proposition-ind-constructible-sheaves--3`: `ind P` is closed under binary biproducts and, using
+* `ind P` is closed under binary biproducts and, using
   `ind (ind P) = ind P`, under direct sums
   (`CategoryTheory.ObjectProperty.ind_isClosedUnderColimitsOfShape_discrete`);
-* `proposition-ind-constructible-sheaves--7`: an extension of `B = colim Cₖ` by `N` is the filtered
-colimit of
+* an extension of `B = colim Cₖ` by `N` is the filtered colimit of
   its pullbacks to the `Cₖ`; an extension of `C` in `P` by `N = colim Dᵢ` is, by the case
   `n = -1` of the factorization property applied to its class `C[0] ⟶ N[0][1]`, a pushout of an
   extension of `C` by some `Dᵢ` (`CategoryTheory.ObjectProperty.ind_isClosedUnderExtensions`).
@@ -290,7 +288,7 @@ lemma ColimitOfShape.final_toCostructuredArrow (hP : P ≤ isFinitelyPresentable
       ((CostructuredArrow.w g₁).trans (CostructuredArrow.w g₂).symm)
     exact ⟨k, a, by cat_disch⟩
 
-/-- Blueprint `proposition-ind-constructible-sheaves` (the category `P_f`): if the objects of `P`
+/-- If the objects of `P`
 are finitely presentable, a morphism `f : X ⟶ Y` between filtered colimits of objects of `P` is a
 filtered colimit of morphisms between objects of `P`, indexed by the category of squares from
 morphisms of the given presentations to `f`. -/
@@ -412,10 +410,9 @@ lemma ind_isClosedUnderColimitsOfShape_discrete (hP : P ≤ isFinitelyPresentabl
       fun S ↦ (ind.{w} P).prop_coproduct fun x ↦ h.prop_diag_obj _⟩
 
 attribute [local instance] IsFiltered.isConnected in
-/-- Blueprint `proposition-ind-constructible-sheaves--7` (pullback step): let `0 ⟶ X₁ ⟶ X₂ ⟶ X₃ ⟶ 0`
-be short exact with `X₃ = colim Cₖ` in `ind P`. If the pullbacks `X₂ ×_{X₃} Y` along all morphisms
-`Y ⟶ X₃` with `Y` in `P` lie in `ind P`, then so does `X₂`, which is the filtered colimit of the
-pullbacks `X₂ ×_{X₃} Cₖ` by exactness of filtered colimits. -/
+/-- Let `0 ⟶ X₁ ⟶ X₂ ⟶ X₃ ⟶ 0` be short exact with `X₃ = colim Cₖ` in `ind P`. If the
+pullbacks `X₂ ×_{X₃} Y` along all morphisms `Y ⟶ X₃` with `Y` in `P` lie in `ind P`, then so
+does `X₂`, which is the filtered colimit of the pullbacks `X₂ ×_{X₃} Cₖ`. -/
 lemma ind_X₂_of_shortExact_of_pullback (hP : P ≤ isFinitelyPresentable.{w} C)
     {S : ShortComplex C} (hS : S.ShortExact) (hX₃ : ind.{w} P S.X₃)
     (h : ∀ ⦃Y : C⦄ (c : Y ⟶ S.X₃), P Y → ind.{w} P (pullback S.g c)) : ind.{w} P S.X₂ := by
@@ -497,9 +494,8 @@ lemma ind_X₂_of_shortExact_of_pullback (hP : P ≤ isFinitelyPresentable.{w} C
 
 variable [HasDerivedCategory C]
 
-/-- Blueprint `proposition-ind-constructible-sheaves--7` (case of a constructible quotient): let
-`0 ⟶ X₁ ⟶ X₂ ⟶ X₃ ⟶ 0` be short exact with `X₁` in `ind P` and `X₃` in `P`, such that morphisms
-out of `X₃[0]` factor through filtered colimits. Then `X₂` is the pushout of an extension
+/-- Let `0 ⟶ X₁ ⟶ X₂ ⟶ X₃ ⟶ 0` be short exact with `X₁` in `ind P` and `X₃` in `P`, such that
+morphisms out of `X₃[0]` factor through filtered colimits. Then `X₂` is the pushout of an extension
 `0 ⟶ Dᵢ ⟶ E ⟶ X₃ ⟶ 0` along `Dᵢ ⟶ X₁` (`E` lies in `P`), hence the cokernel of
 `Dᵢ ⟶ X₁ ⊞ E`, which lies in `ind P`. -/
 lemma ind_X₂_of_shortExact_of_prop (hP : P ≤ isFinitelyPresentable.{w} C)
@@ -538,9 +534,7 @@ lemma le_isFinitelyPresentable_of_homFactorsThroughFilteredColimits
     P ≤ isFinitelyPresentable.{w} C :=
   fun M hM ↦ (hfac M hM).isFinitelyPresentable
 
-/-- Blueprints `proposition-ind-constructible-sheaves` (2), `proposition-ind-constructible-sheaves`,
-`proposition-ind-constructible-sheaves`, `proposition-ind-constructible-sheaves--3`,
-`proposition-ind-constructible-sheaves` and `proposition-ind-constructible-sheaves--7`: let `P` be a
+/-- Let `P` be a
 class of objects of a Grothendieck abelian category, containing zero and closed under kernels,
 cokernels and extensions, such that morphisms out of `M[0]` (`M` in `P`) to `B[n]` factor through
 filtered colimits `B = colim Bᵢ`. Then the ind-objects of `P` are closed under kernels, cokernels,

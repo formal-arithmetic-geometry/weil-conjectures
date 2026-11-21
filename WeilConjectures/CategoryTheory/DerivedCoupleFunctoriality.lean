@@ -50,24 +50,6 @@ private theorem transport_square {C : Type u} [Category.{v} C]
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction to the alpha image and passage to differential homology preserve
 all three exact-couple squares for one derivation.
-
-Proof. Write d = f ≫ g. The f and g squares give tE ≫ dY = dX ≫ tE at the
-outgoing bidegree. Use the kernel universal property to restrict tE to cycles.
-At the incoming bidegree the same equation makes the induced cycle map carry the
-lifted incoming differential to the target's lifted incoming differential. Compose
-with the target cokernel projection; this kills the source boundary map and so
-uniquely descends to the source cokernel. The alpha square induces the map on its
-image, with the prescribed equation for derivedDInclusion. For the derived alpha
-square, postcompose with the target image inclusion and use the original alpha
-square and the DerivedMaps.alpha_comm equations. For the derived f square, first
-precompose with the source derivedEProjection, then postcompose with the target
-image inclusion: the two DerivedMaps.f_comm equations reduce it to the original
-f square and the kernel-map equation. For the derived g square, precompose with
-the source factorThruImage(alpha): the two DerivedMaps.g_comm equations reduce it
-to the original g square, the cycle-map equation, and the quotient-map equation.
-These inclusions are monic and projections epimorphic, so cancellation proves
-all three squares. The chosen DerivedMaps in derived are characterized by their
-restriction equations, so the argument applies to the actual derived couples.
 Source: Stacks Project, Definition 12.21.1 and Lemma 12.21.2, Tags 011Q, 011R. -/
 private theorem derivedCoupleMorphismStep {C : Type u} [Category.{v} C] [Abelian C]
     {s : ℕ} (X Y : BigradedExactCouple C s)
@@ -245,22 +227,7 @@ private theorem extendedPullback_transport {C : Type u} [Category.{v} C] [Abelia
 
 /-- A compatible family of differential maps preserves the finite cycle and boundary
 subobjects in the initial page. No limiting subobjects are assumed.
-
-Proof. Induct on r, simultaneously proving preservation of Z_r and B_r and the
-commutation of the restricted initial map with the tower projection to page r.
-For r = 0, Z_0 is the whole page, B_0 is zero, and the projection is its inclusion;
-projection commutation is the given equality e_0 = t. At the successor, differential
-commutation sends the kernel of d_r into the target kernel and its incoming image
-into the target incoming image (rewrite the incoming bidegrees in dInto). The
-projection square from the induction hypothesis therefore maps their pullbacks
-into the target pullbacks. Postcomposing these maps with the Z_r inclusions and
-using Z_succ and B_succ proves preservation of the next cycles and boundaries.
-The kernel inclusion cancels to identify the new cycleLift map with the old
-cycleLift followed by the given kernel map. Compose that equation with the target
-derivedEProjection and use the kernel/projection compatibility and projection_succ
-to prove the successor projection square. This completes the simultaneous induction.
-Source: Stacks Project, Definition 12.21.3 and Lemma 12.21.2, Tags 011S, 011R,
-and blueprint. -/
+Source: Stacks Project, Definition 12.21.3 and Lemma 12.21.2, Tags 011S, 011R. -/
 private theorem exactCoupleFiniteTransport {C : Type u} [Category.{v} C] [Abelian C]
     (X Y : BigradedExactCouple C 0)
     (t : ∀ p q : ℤ, X.E p q ⟶ Y.E p q)
@@ -399,21 +366,6 @@ private theorem factors_iff_image_le {A B : C} (P : Subobject B) (f : A ⟶ B) :
 /-- A morphism of exact couples induces compatible morphisms on every derived page,
 and on the limiting page. The latter carries limiting cycles and boundaries into those
 of the target and hence descends to the quotient at infinity, when the limits exist.
-
-Proof, Step 1: the three squares
-imply differential commutation. Restrict tE to differential kernels and descend through
-boundaries to obtain the derived E map. Restrict tD to the incoming alpha image to obtain
-the derived D map. The restriction and quotient equations uniquely characterize these
-maps. The three structure-map squares descend, since alpha, f and g in the derived
-couple are defined by these same restrictions, factorizations and quotient projections.
-Step 2: each derived couple is again exact. Induct on n
-to obtain morphisms M n of the type-n couples, beginning with T. The successor D map
-commutes with derivedDInclusion and the successor E map with derivedEProjection through
-the induced kernel map. The f and g squares imply commutation with each d_r.
-Step 3: induction in the cycle/boundary recursion shows that tE
-preserves every finite Z_r and B_r and induces the page maps on Z_r/B_r. The universal
-properties of the greatest lower bound and least upper bound give preservation of Z∞
-and B∞. Restrict tE to Z∞ and use the cokernel universal property to descend to E∞.
 Source: Stacks Project, Homological Algebra, Definitions 12.21.1 and 12.21.3,
 Lemmas 12.21.2 and 12.21.4 (Tags 011Q, 011R, 011S, 011T). -/
 theorem derivedCoupleFunctoriality (X Y : BigradedExactCouple C 0)

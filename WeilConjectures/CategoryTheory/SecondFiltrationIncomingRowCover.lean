@@ -147,26 +147,7 @@ private theorem diagonal_step_graded_epi
 set_option backward.isDefEq.respectTransparency false in
 /-- In positive resolution degree, the incoming graded differential is covered
 by the incoming row term.
-Source: Stacks Project, Tag 0130, clause 2, the second-filtration differential.
-
-Proof. Put n = s+r and project the diagonal coproduct in degree n-1 onto
-its summand with second coordinate s. This projection kills the next filtration
-step. For r>0, lift the diagonal inclusion of the extended row term r-1
-through the step s and then take its graded class. The projection descends to
-the quotient and is inverse to this class: on the generating summand s the
-composite is identity, and the other summands factor through step s+1 and
-vanish. The interval is [s,n-1], so negative s is allowed. Composing with the
-extension isomorphism identifies this source with row degree prev r = r-1.
-The resulting e is an isomorphism, hence epic. Compute the total differential
-on this inclusion. Its resolution component is the row differential and its
-component raising s factors through step s+1. The latter vanishes after the
-graded projection. Monicity of the step inclusion identifies the target lift
-with the prescribed a, proving the displayed square.
-A zero row is handled by the same projection/lift calculation, using the
-unique morphisms between zero objects. No sign condition on s is used.
-This statement concerns terms and differentials only, with no cycles,
-filtered boundaries, or homology quotient.
--/
+Source: Stacks Project, Tag 0130, clause 2, the second-filtration differential. -/
 theorem secondFiltration_incoming_row_cover
     {A : Type uA} [Category.{vA} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]

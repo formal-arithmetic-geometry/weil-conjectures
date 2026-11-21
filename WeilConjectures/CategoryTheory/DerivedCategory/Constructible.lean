@@ -166,8 +166,7 @@ end BoundedConstructible
 section Triangulated
 
 /-- The property of being constructible, as a property of objects of the category of étale
-sheaves; the closure of this property under kernels, cokernels and extensions is the blueprint
-theorem `thm:constructible-serre`. -/
+sheaves. -/
 def Etale.constructibleSheaf : ObjectProperty (Sheaf X.smallEtaleTopology A) :=
   fun F ↦ IsConstructibleSheaf F
 

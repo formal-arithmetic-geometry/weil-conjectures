@@ -10,7 +10,9 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # The scalar unit determined by a sections comparison
 
-Source: the Yoneda calculation underlying Stacks 03CZ and 08JA.
+## References
+
+* Stacks Project, Tags 03CZ and 08JA.
 -/
 
 @[expose] public section
@@ -21,16 +23,7 @@ open CategoryTheory
 namespace CategoryTheory
 
 /-- A natural sections comparison is determined by its value at the identity of
-the object representing target sections. This formulation records that value as
-an explicit morphism, rather than choosing a witness of an existence theorem.
-Source: Yoneda, applied to the global-sections comparison of Stacks 03CZ and 08JA.
-
-Proof: put r equal to the target representation of the transported section.
-Naturality of the target representation identifies its image of the identity
-section with the transported section. Naturality of the inverse sections
-comparison pulls this equality back to source sections. Naturality of the source
-representation then identifies the composite of the recorded unit with U(r)
-with the source representation of the original section. -/
+the object representing target sections. Stacks Project, Tags 03CZ and 08JA. -/
 theorem representedSections_scalar_unit
     {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
     (U : B ⥤ A) (ΓA : A ⥤ AddCommGrpCat.{g}) (ΓB : B ⥤ AddCommGrpCat.{g})

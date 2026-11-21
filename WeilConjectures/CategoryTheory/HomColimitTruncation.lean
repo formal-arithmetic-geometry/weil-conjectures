@@ -62,18 +62,7 @@ private theorem comparison_iso_transfer
   exact IsIso.of_isIso_comp_right (colimit.desc D c) v.hom
 
 /-- It suffices to check canonical Hom continuity on termwise bounded-below diagrams.
-Source: Bhatt--Scholze, proof of Lemma 6.3.14, and Lemma 6.8.12.
-
-Proof. Truncate the diagram at its common cohomological lower bound. Each truncation
-map is a quasi-isomorphism. Exact colimits preserve these quasi-isomorphisms, since
-homology preserves exact colimits and the homology-colimit comparisons are natural.
-The original colimit cocone maps canonically to the truncated colimit cocone. Its
-vertex map is the composite of the unique colimit isomorphism and the colimit of the
-truncation maps, so it too is a quasi-isomorphism. Apply localization, shifting and
-additive Hom. The resulting diagrams and vertices are isomorphic with compatible
-cocone legs. The colimit universal property identifies the two comparison arrows;
-invertibility for the truncated diagram implies invertibility for the original one.
--/
+Source: Bhatt--Scholze, proof of Lemma 6.3.14, and Lemma 6.8.12. -/
 theorem homColimitProperty_of_strictly_bounded [IsFiltered I]
     (K : DerivedCategory A)
     (h : ∀ (N : I ⥤ CochainComplex A ℤ),

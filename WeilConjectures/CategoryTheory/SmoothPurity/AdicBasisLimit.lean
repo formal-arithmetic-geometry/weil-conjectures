@@ -28,7 +28,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 # Finite bases of completed constant quotient sheaves
 
 Source: Bhatt--Scholze, Lemma 6.8.2(1), pp. 58--59, for the inverse-limit model.
-The finite-basis and cofinal-filtration refinement is the agent argument in the DAG.
 
 Levels of the inverse sequence are numbered by n : ℕ and have exponent n+1.
 Finite products in module sheaves are the finite direct sums in the statement.
@@ -106,11 +105,7 @@ def adicBasisCoordinate (R : Sheaf J RingCat.{max uC vC r}) (d : ℕ) (U : Cᵒ�
 
 variable {A B : Type r} [CommRing A] [CommRing B] [Algebra A B]
 
-/-- The two ideal inclusions needed for the same-level and cofinal quotient maps.
-Proof: t^n maps to u^n v^(en), so t^n B = v^(en) B because u^n is a unit.
-Since en ≥ n, this ideal is contained in v^n B. Taking inverse images gives
-both displayed inclusions at the positive exponent n+1. The subtraction in the
-second exponent merely converts its positive exponent to a natural-number level. -/
+/-- The two ideal inclusions needed for the same-level and cofinal quotient maps. -/
 theorem adicBasis_ideal_bounds (t : A) (v : B) (a : Bˣ) (e : ℕ)
     (he : 1 ≤ e) (ht : algebraMap A B t = (a : B) * v ^ e) (n : ℕ) :
     (Ideal.span {t}) ^ (n + 1) ≤
@@ -662,26 +657,7 @@ private theorem adicBasisForward_isIso (d : ℕ) (b : Module.Basis (Fin d) A B)
 /-- Finite bases pass to completed constant quotient sheaves, with their specified
 columns and their cofinal projection factorization.
 
-Source: Bhatt--Scholze, Lemma 6.8.2(1), pp. 58--59, for the inverse-limit model;
-finite-basis/cofinal-filtration refinement: DAG agent argument.
-
-Proof: (1) The basis map A^d -> B descends modulo t^n, with inverse given by
-reducing the coordinate maps. Both commute with reductions, including d=0.
-(2) Constant presheaves and sheafification carry these maps to quotient basis
-isomorphisms, since sheafification preserves finite products. The module-sheafification universal property
-and its underlying-set comparison
-identify the target with the ring sheaf.
-(3) The ideal identities t^n B=v^(en)B and inclusions t^m B ⊆ v^m B give
-compatible quotient ring maps. Their sectionwise limit is f; its coordinates give
-uniqueness. (4) Restriction to exponents en identifies the two B-towers cofinally:
-the inverse reduces the em-th component to exponent m. The two composites are
-identities by tower compatibility. (5) Passing the compatible quotient basis
-isomorphisms and their coordinate inverses to sectionwise limits gives Φ.
-Finite sums of coordinate inclusions identify the finite product with the direct
-sum. (6) At cofinal exponent en the scalar action factors through A/t^n, so Φ
-is R-linear. Its columns have residues b_i at every level, and its en-th
-projection is precisely the quotient basis map after coordinatewise projection.
--/
+Source: Bhatt--Scholze, Lemma 6.8.2(1), pp. 58--59, for the inverse-limit model. -/
 theorem adic_basis_limit (d : ℕ) (b : Module.Basis (Fin d) A B)
     (t : A) (v : B) (a : Bˣ) (e : ℕ) (he : 1 ≤ e)
     (ht : algebraMap A B t = (a : B) * v ^ e) :

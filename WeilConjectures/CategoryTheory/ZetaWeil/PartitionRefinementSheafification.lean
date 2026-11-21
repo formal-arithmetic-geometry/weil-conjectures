@@ -17,7 +17,8 @@ import Mathlib.CategoryTheory.Limits.EssentiallySmall
 /-!
 # Sheafification at an object with finite partition refinements
 
-Source: Stacks Project, Pro-étale Topology, Tag 0F63, abstract form; Sites, Tags 00WB, 00WK and 00WH.
+Source: Stacks Project, Pro-étale Topology, Tag 0F63, abstract form; Sites, Tags 00WB, 00WK and
+00WH.
 -/
 
 -- After pruning, this module only keeps private declarations.

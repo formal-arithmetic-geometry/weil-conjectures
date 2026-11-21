@@ -123,8 +123,7 @@ Here `J,J'` are the open extensions, `P,P'` the proper pullbacks, `R,R'` their
 right adjoints, and `G,H,B` the three horizontal pullbacks. `theta` is the specified
 composition comparison for the proper square; `beta` is the specified open base change.
 This is `Ex_{*,p}(j_! K)` followed by `Rp'_*(beta_K)`, with functor associators inserted.
-At the integral, rational, and algebraically closed stages these are respectively the
-completed, rationalized, and common-finite-field operations supplied by the node. -/
+-/
 noncomputable def compactificationExchangeFromData
     (J : DX ⥤ DB) (J' : DX' ⥤ DB')
     (P : DY ⥤ DB) (R : DB ⥤ DY) (adj : P ⊣ R)
@@ -277,11 +276,7 @@ structure ExchangeProjectionAdjunctionComparison
 
 /-- Identity and tower normalization for the supplied scalar-extension comparisons of
 one operation. The transition functors and their identity/composition isomorphisms are
-those of rationalization and the common-stage coefficient category, not new choices.
-Use the property for every operation/comparison in an exchange-projection stage. For
-integral reductions use the opposite ordering on positive exponents: the composition
-clause is precisely compatibility with all successive finite transition maps.
-The equations retain identity field extensions and arbitrary towers. -/
+those of rationalization and the common-stage coefficient category. -/
 structure ExchangeProjectionScalarCocycle
     {I : Type u} [Preorder I]
     (C : I → Type uX) (D : I → Type uY)

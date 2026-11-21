@@ -362,27 +362,7 @@ private theorem roos_tower_grothendieck
 right-derived unit. On every K-injective tower with injective terms the inclusion is
 a quasi-isomorphism.
 
-Source: Stacks Project, Cohomology on Sites, Tag 0941,
-with the strict-cone refinement of steps 2--5 of.
-
-Proof: Exact countable products preserve quasi-isomorphisms of evaluated complexes.
-The natural mapping-cone triangles and two-out-of-three show that roosF preserves
-quasi-isomorphisms; localization gives CF and κ. Identify the ordinary-limit inclusion
-as the kernel of 1-s using the product and limit universal properties. Transport these
-properties to every degree and compute the signed cone differential. The existing
-roosComplex_quasiIso theorem then proves that the explicitly constructed roosι is a
-quasi-isomorphism on K-injective towers.
-
-Module sheaves are Grothendieck abelian. In a small diagram category, evaluation left
-adjoints applied to a separator form a separating family; their coproduct is a separator,
-and filtered colimits are exact pointwise. Lift the tower index to the module universe
-and transport along its equivalence to obtain functorial K-injective tower resolutions.
-For a functor G, a natural map ν:G→F invertible on resolutions q:X→T X, and β:G→Q E,
-the formula F(q) ν(T X)⁻¹ β(T X) E(Qq)⁻¹ defines a natural map F→Q E. Fully faithful
-whiskering along the localization descends it to CF→E. Naturality proves its unit
-factorization, and cancellation on resolutions proves uniqueness, then naturality along
-Qq gives uniqueness everywhere. Apply this construction with ν=Q(roosι). Zero towers,
-identity transitions and zero transitions satisfy the same kernel computation. -/
+Source: Stacks Project, Cohomology on Sites, Tag 0941. -/
 theorem strictRoosDerivation
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max uC vC r}]

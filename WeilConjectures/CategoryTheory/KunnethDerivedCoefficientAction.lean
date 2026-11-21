@@ -19,9 +19,7 @@ namespace CategoryTheory
 variable (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)]
 
 /-- The single-object unit identification agrees with the lax unit of localization.
-Source: Stacks Project, Tags 064L and 06Y0.
-Proof: expand the unit identification. The inverse consists of the unit of Qh, its image
-of the quotient unit, and the quotient comparison, which is precisely the unit of Q. -/
+Source: Stacks Project, Tags 064L and 06Y0. -/
 theorem singleFunctorObjUnitIso_inv_comp :
     (DerivedCategory.singleFunctorObjUnitIso (ModuleCat.{u} R)).inv ≫
       (DerivedCategory.singleFunctorIsoCompQ (ModuleCat.{u} R) 0).hom.app
@@ -38,10 +36,7 @@ theorem singleFunctorObjUnitIso_inv_comp :
 
 /-- Localization sends the ordinary coefficient cochain map to the derived coefficient
 map followed by its tensor-model comparison.
-Source: Stacks Project, Tag 0H7Z, simple-tor-product.
-Proof: naturality of the single-to-localization comparison reduces the coefficient map
-to Q of the single coefficient map. The unit comparison is the lax unit. Lax tensorator
-naturality and its right unit axiom then give Q of the ordinary right-unitor formula. -/
+Source: Stacks Project, Tag 0H7Z, simple-tor-product. -/
 theorem derived_model_coefficient_action
     (P : CochainComplex (ModuleCat.{u} R) ℤ) (M : ModuleCat.{u} R) (a : M) :
     ((ρ_ (DerivedCategory.Q.obj P)).inv ≫

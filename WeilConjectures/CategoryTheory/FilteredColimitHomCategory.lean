@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Types.Colimits
 
 /-! # Fibers of the filtered arrow colimit
 
-Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph.
+Source: Stacks Project, Sites, Tag 09YL.
 -/
 
 @[expose] public section
@@ -24,8 +24,7 @@ namespace CategoryTheory
 
 variable {J : Type z} [SmallCategory J] (F : J ⥤ Cat.{z, z})
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph.
-The source map descended from the source maps of the stage categories. -/
+/-- The source map descended from the source maps of the stage categories. -/
 noncomputable def filteredColimitArrowSource :
     colimit (F ⋙ Cat.arrows) → colimit (F ⋙ Cat.objects) :=
   colimit.desc (F ⋙ Cat.arrows)
@@ -50,14 +49,16 @@ noncomputable def filteredColimitArrowTarget :
             ext a
             exact ConcreteCategory.congr_hom (colimit.w (F ⋙ Cat.objects) f) a.right } }
 
-/--  -/
+/-- The source map of the arrow colimit sends the class of a stage arrow to the class of its
+source. -/
 @[simp] theorem filteredColimitArrowSource_ι (j : J) (a : Arrow (F.obj j)) :
     filteredColimitArrowSource F (colimit.ι (F ⋙ Cat.arrows) j a) =
       colimit.ι (F ⋙ Cat.objects) j a.left := by
   unfold filteredColimitArrowSource
   exact ConcreteCategory.congr_hom (colimit.ι_desc (F := F ⋙ Cat.arrows) _ j) a
 
-/--  -/
+/-- The target map of the arrow colimit sends the class of a stage arrow to the class of its
+target. -/
 @[simp] theorem filteredColimitArrowTarget_ι (j : J) (a : Arrow (F.obj j)) :
     filteredColimitArrowTarget F (colimit.ι (F ⋙ Cat.arrows) j a) =
       colimit.ι (F ⋙ Cat.objects) j a.right := by

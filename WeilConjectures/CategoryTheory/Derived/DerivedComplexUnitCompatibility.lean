@@ -28,7 +28,8 @@ variable {C : Type u₁} [Category.{v₁} C] [Abelian C] [HasDerivedCategory.{w�
 
 /-- The right-derived unit transferred from homotopy complexes to complexes by the
 canonical quotient comparison. This is an explicit composite, with no chosen data.
-Source: Stacks Tag 015F. -/
+Source: Stacks Tag 015F.
+-/
 @[no_expose] def derivedComplexUnit (F : C ⥤ D) [F.Additive] (J : CochainComplex C ℤ) :
     DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj J) ⟶
       F.rightDerivedFunctor.obj (DerivedCategory.Q.obj J) :=
@@ -38,9 +39,7 @@ Source: Stacks Tag 015F. -/
 
 /-- The transferred unit is inverse to its K-injective value isomorphism, is natural,
 respects exact factorization, and restricts to the bounded-below derived unit.
-Proof: unfold the explicit quotient-unit-quotient composite and use the
-naturality of the quotient comparisons and of the derived units.
-Source: Stacks Tags 070I and 015F. -/
+-/
 theorem derivedComplexUnitCompatibility :
     (∀ (F : C ⥤ D) [F.Additive] (J : CochainComplex C ℤ) [J.IsKInjective],
       derivedComplexUnit F J ≫ (F.rightDerivedFunctorObjQIso J).hom = 𝟙 _) ∧

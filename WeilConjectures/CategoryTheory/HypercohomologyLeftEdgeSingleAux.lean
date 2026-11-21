@@ -23,14 +23,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
   (G : B ⥤ C) [G.Additive] [PreservesFiniteLimits G]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, derived.tex, Tag 015J.
-
-Proof: For the single complex, the cycle inclusion identifies its degree-n cycles
-with the sole term. The canonical lift of the mapped inclusion is characterized by
-its composite with the mapped cycle inclusion. The definition of the hypercohomology
-left edge and its truncation maps then gives the mapped homology projection; this is
-the single-complex edge calculation from Tag 015J. The displayed equality follows
-by cancellation through that canonical characterization. -/
+/-- Source: Stacks Project, derived.tex, Tag 015J. -/
 theorem cochainHypercohomologyLeftEdge_single_aux (A : B) (n : ℕ) :
     let S := (HomologicalComplex.single B (ComplexShape.up ℕ) n).obj A
     let T := (G.mapHomologicalComplex (ComplexShape.up ℕ)).obj S

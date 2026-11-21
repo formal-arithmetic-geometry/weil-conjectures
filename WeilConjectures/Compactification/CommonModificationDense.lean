@@ -19,10 +19,6 @@ Let `cm` be a common modification of two models `X₁`, `X₂` of a common open 
 density of `U` in both models is inherited by `cm.W`, both topologically and
 scheme-theoretically.
 
-The arguments are local on `cm.W`: the two modified models form an open cover of `cm.W`,
-`cm.j` restricts on them to the lifts `cm.u₁`, `cm.u₂`, and those are dense since admissible
-blow-ups preserve density.
-
 ## Main results
 
 - `AlgebraicGeometry.dense_range_of_cover₂`,

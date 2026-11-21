@@ -17,7 +17,9 @@ import WeilConjectures.CategoryTheory.CechZeroCocycleCompatibility
 /-!
 # The canonical augmented Čech row of an injective sheaf
 
-Source: Stacks Project, Cohomology on Sites, Tags 03AW and 03F6.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 03AW and 03F6.
 -/
 
 @[expose] public section
@@ -31,21 +33,8 @@ open Limits Opposite
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
 /-- Canonical degree-zero descent for the categorical Čech complex of any sheaf.
-Source: Stacks Project, Cohomology on Sites, Tag 03AN.
 
-Proof: The single complex has zero differentials, hence its degree-zero homology
-is I(X). The Čech complex has no incoming differential in degree zero, hence its
-homology there is the kernel of d^0. The projection of d^0 to a pair (i,j) is
-restriction from j minus restriction from i. A zero cocycle therefore gives
-compatible sections on U_i: identify the single-factor product with U_i by its
-unique projection, and pull the pair equation along any pair of arrows with equal
-composites to X. The sheaf condition gives a unique section on X restricting to
-these sections. Conversely, restriction of a section has zero differential by
-functoriality. These constructions are additive and mutually inverse. Product
-projection uniqueness and he identify the given e.f 0 with this restriction map,
-so its homology map is this isomorphism. For an empty covering family the sheaf
-condition says I(X) is zero; the same uniqueness argument works without choosing
-an index. Neither injectivity nor sheafification is needed. -/
+Stacks Project, Cohomology on Sites, Tag 03AN. -/
 theorem sheaf_cech_augmentation_quasiIsoAt_zero
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasFiniteWidePullbacks C]

@@ -15,7 +15,8 @@ public import Mathlib.CategoryTheory.Types.Basic
 /-!
 # Algebraic inverse image along a morphism of topoi
 
-Source: Stacks Project, Modules on Sites, Tag 03D2, and Sites, Tag 00YV; Cohomology on Sites, Tag 06YY.
+Source: Stacks Project, Modules on Sites, Tag 03D2, and Sites, Tag 00YV; Cohomology on Sites, Tag
+06YY.
 
 The underlying sheaves are identified with inverse images of sheaves of sets.
 Operations are transported by requiring preservation of their graphs on generalized

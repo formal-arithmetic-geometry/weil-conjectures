@@ -130,10 +130,7 @@ structure ConeComparison (A : Algebra.{u}) {M N : RightModule A} (f : M ⟶ N)
 /-- The standard triangulated structure on the specified localization. Its comparisons
 are natural for every map of shifted dg modules, and the distinguished-triangle
 predicate is fixed by an iff with the actual dg mapping cones. The coproduct universe
-is the universe of the component modules. This is structural data of D(A,d), not an
-assumption of generation or of a theorem about an adjunction.
-Source: Stacks, dga.tex, section-derived and
-section-distinguished. -/
+is the universe of the component modules. -/
 class DerivedStructure (A : Algebra.{u}) where
   [preadditive : Preadditive (Derived A)]
   [zero : HasZeroObject (Derived A)]

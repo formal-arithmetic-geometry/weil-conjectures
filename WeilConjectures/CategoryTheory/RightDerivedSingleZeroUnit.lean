@@ -142,19 +142,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The right-derived unit induces the inverse of the canonical zeroth comparison.
-Source: Stacks Project, Tag 0156.
-
-Proof: Choose the injective resolution I of M used in the single comparison.
-The localization unit is represented by F applied to the augmentation M[0] → I.
-The bounded-below/unbounded compatibility carries this unit to the same map,
-by its defining equality with the two right-derived units. On zeroth homology,
-the augmentation is precisely toRightDerivedZero: this follows by the description
-of the kernel of F(I⁰) → F(I¹). The single homology comparison identifies the
-source with F(M). The single right-derived homology comparison identifies the
-target with R⁰F(M). Finally rightDerivedZeroIsoSelf is the inverse of
- toRightDerivedZero for a left exact F. Their composite is the identity of F(M),
-which proves the formula. This uses no exactness beyond left exactness of F;
-zero objects and the zero functor give the same identity. -/
+Source: Stacks Project, Tag 0156. -/
 theorem rightDerivedSingleUnit_zero (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] (M : C) :
     (DerivedCategory.homologyFunctor D 0).map (F.rightDerivedSingleUnit M) ≫

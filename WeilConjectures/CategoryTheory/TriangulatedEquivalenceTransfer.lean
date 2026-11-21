@@ -29,19 +29,7 @@ open Limits
 
 /-- An equivalent category inherits a triangulated structure with a compatible shift.
 Source: Stacks Project, Derived Categories, Tags 05QK and 05QL, the axioms for exact
-functors and triangulated categories.
-
-Proof: Transport the additive groups on Hom sets along the fully faithful inverse
-functor. The image of a zero object is zero. Define the shift by conjugating each
-shift functor by the equivalence, with coherence maps induced by its unit and counit.
-These shifts are additive since all factors are additive. Declare a triangle to be
-distinguished if it is isomorphic to the image of a distinguished triangle of C.
-The unit and counit identify rotations, contractible triangles and triangle morphisms
-with their originals. Therefore the existence of cone triangles, completion of
-triangle morphisms and the octahedral axiom all transport along the equivalence.
-Both directions preserve distinguished triangles, and the inverse shift compatibility
-is the one induced by the adjunction of the equivalence. No nonempty generating
-family or compactness hypothesis is used. -/
+functors and triangulated categories. -/
 theorem triangulatedEquivalenceTransfer
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]

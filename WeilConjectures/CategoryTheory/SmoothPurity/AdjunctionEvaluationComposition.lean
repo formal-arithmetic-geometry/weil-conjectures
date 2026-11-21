@@ -27,13 +27,7 @@ variable {X Y Z A B C : Type*}
   {L₃ : A ⥤ C} {R₃ : C ⥤ A}
 
 /-- Evaluation of the canonical composite extension is the canonical scalar
-associator. Source: Stacks 0FND.
-Proof: compare the inverses of the two isomorphisms and transpose through the total
-scalar adjunction. The composite scalar transpose formula and the three evaluation
-transpose equations identify both sides with the composite extension unit. The
-right-square pasting law and naturality of the first right square move the intermediate
-extension unit into this common expression. The normalized uniqueness equation for
-the composite extension supplies its restriction compositor. -/
+associator. Source: Stacks 0FND. -/
 theorem adjunctionEvaluation_composition
     (af : F ⊣ U) (ag : G ⊣ V) (ah : H ⊣ W)
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (a₃ : L₃ ⊣ R₃)

@@ -11,7 +11,9 @@ public import Mathlib.CategoryTheory.Limits.Types.ColimitType
 
 /-! # Hom out of an essentially constant pro-diagram
 
-Source: Stacks Project, Categories, Definition 05PU(2), Lemma 05PZ.
+## References
+
+* Stacks Project, Categories, Definition 05PU(2), Lemma 05PZ.
 -/
 
 @[expose] public section
@@ -26,20 +28,6 @@ namespace CategoryTheory
 of `IsEssentiallyConstantProDiagram`, precomposition induces a bijection from the
 colimit of `Hom(D.obj j, Y)` over `Jᵒᵖ` to `Hom(X, Y)`. The representative equation
 specifies the canonical map uniquely, without choosing a different cone for each `Y`.
-
-Proof: (1) Naturality of `u` gives `D.map a ≫` compatibility: precomposing a
-representative with a transition does not change its composite with `u`. Thus the
-representative formula descends to the colimit. (2) Choose `j₀` and `r` from the
-retraction and factorization clauses of Definition 05PU(2). For `t : X ⟶ Y`, the
-representative `r ≫ t` at `j₀` maps to `t`, proving surjectivity. (3) If representatives
-`f` at `j` and `g` at `k` have equal composites with the cone maps, cofilteredness gives
-a common earlier stage `l`. Apply the factorization clause there to obtain an earlier
-stage `m` whose transition to `l` factors through `D.obj j₀`, `r`, and `u.app l`.
-The transitions of `f` and `g` to `m` are then equal by their assumed equality on `X`.
-They therefore represent the same colimit element, proving injectivity. These are
-exactly the three elementary steps of the node's proof; no additional proof nodes
-are required.
-
 Source: Stacks Project, Categories, Definition 05PU(2), Lemma 05PZ. -/
 theorem essentiallyConstantPro_hom_colimit
     {J : Type uJ} {C : Type uC} [Category.{vJ} J] [Category.{vC} C]

@@ -29,7 +29,6 @@ open scoped CategoryTheory.Obj
 namespace CategoryTheory
 
 /-- Structural part of the Brown-hypotheses conclusion.
-The proof packages the generic localizing-closure ambient structures.
 No field or coefficient admissibility hypothesis is needed. -/
 theorem brownHypotheses_structural
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

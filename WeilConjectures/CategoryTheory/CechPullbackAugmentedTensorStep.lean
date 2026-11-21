@@ -26,17 +26,7 @@ namespace CategoryTheory
 set_option maxHeartbeats 2000000 in
 -- The successor clause contains several chosen total-complex instances.
 /-- One successor step of the finite Cech comparison, including its augmentation.
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
-Proof: expand the successor clause of ringedExtendedCech. The adjunction makes F additive
-and preserves the coproducts of totalization. Apply t in each bidegree to obtain the
-comparison from F of the tensor complex to the tensor of the images. Naturality of t
-makes it commute with both signed differentials. The inverse comparison on coproduct
-summands gives its inverse. Compose with the tensor of the factor isomorphism and ly.
-For augmentation compatibility, precompose in each degree with every image of a tensor
-summand inclusion. Naturality replaces both augmentations by their images under F;
-the factor equation and hy reduce the calculation to the normalized unit equation hu.
-The degree-zero single-complex comparison is the unit identification and the other target
-components vanish. Coproduct extensionality gives the asserted chain-map equality. -/
+Source: Stacks Project, algebraization.tex, Tags 0996 and 099E. -/
 theorem cech_pullback_augmented_tensor_step
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

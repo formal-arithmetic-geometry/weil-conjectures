@@ -23,8 +23,7 @@ isomorphism, `Φ(N) = 0`, so that `Hom(N, ΨΦ(L)) = Hom(Φ(N), Φ(L)) = 0` and
 `Hom(N⟦-1⟧, L) = Hom(FΦ(N⟦-1⟧), Y) = 0`, which forces `N = 0`.
 
 This is the formal part of the proof of Stacks Tag 0F5Y (Stacks Lemma 19.15.1), where `Φ` is the
-exact functor `D(R) ⥤ D(A)` given by the Gabriel-Popescu theorem; it is used in the blueprint
-node `theorem-existence-exceptional-inverse-image--1`.
+exact functor `D(R) ⥤ D(A)` given by the Gabriel-Popescu theorem.
 -/
 
 @[expose] public section

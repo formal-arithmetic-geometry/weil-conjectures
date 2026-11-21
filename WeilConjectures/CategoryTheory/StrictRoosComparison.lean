@@ -18,8 +18,7 @@ import WeilConjectures.CategoryTheory.StrictRoosNormalization
 /-!
 # Natural strict Roos comparison with total derived inverse limit
 
-Source: Stacks Project, Cohomology on Sites, Tag 0941,
-and the strict-cone naturality and augmentation refinement of its proof.
+Source: Stacks Project, Cohomology on Sites, Tag 0941.
 
 The complex functor `F` has exactly the displayed shifted-cone objects. The coordinates
 `χ` are the canonical shift/cone coordinates, and determine its maps. This spells out
@@ -49,37 +48,7 @@ The equations pin the chain evaluation `a`, the derived evaluation `e`, the augm
 `b` and its ordinary-limit lift `λ`. The last clause gives the canonical transport between
 any two resolutions along a comparison map compatible up to homotopy.
 
-Source: Stacks Project, Tag 0941, proof, with the strict-cone
-naturality and augmentation refinement in the blueprint.
-
-Proof plan, following the eight steps of the node:
-1. Take the shifted cone of `1-s` on the termwise product. Strict maps act by the product
-   map on both coordinates, and a homotopy H acts by (-H,H) in the signed coordinates.
-2. Exact countable products preserve quasi-isomorphisms. The cone triangle and
-   two-out-of-three show that F inverts quasi-isomorphisms after Q, giving CF and κ.
-3. Identify strict module towers with modules on the small tower site. Functorial
-   K-injective resolutions with injective tower terms exist by
-   prop-pur-kinjective-resolutions-exist. The total-derived-limit dependency identifies
-   their termwise limits with RF via its unit η.
-4. For an injective tower, each transition splits by the finite-prefix lifting argument.
-   Recursively solve y_n-t_n y_(n+1)=x_n using those splittings. Thus 1-s is split epic
-   in each degree and its kernel is the ordinary inverse limit.
-5. Include that kernel into the cone as (0,z). The quotient has differential
-   (-dy-w,dw), contracted by (y,w)↦(0,-y), so the inclusion is a quasi-isomorphism.
-   The complex-SES triangle and triangle-morphism isomorphism lemma give εI. Define
-   the comparison by Q(F(q)) followed by εI inverse and dI. Its coordinate identities
-   give both evaluation equations.
-6. Functorial resolutions give F(I(f))ηI=ηJ lim(I(f)). Cancel the inclusions and use
-   the derived-limit map computation to obtain strict-map naturality. Localization
-   extends this equality to all derived morphisms, giving the natural isomorphism ρ.
-7. K-injective comparison gives a:I→J with aq homotopic to q', unique up to homotopy.
-   It is a homotopy equivalence. Termwise limit preserves these homotopies; naturality
-   of η gives Q(lim a)dJ=dI. The formula for the same fixed ρ holds for every q,
-   so both its normalization and evaluations are independent of the resolution.
-8. Strict compatibility of γ gives (1-s)γ=0, hence b=(0,γ) is a chain map. The family
-   q_nγ_n defines λ by the limit universal property. The coordinate identity
-   F(q)b=ηI λ gives Q(b)κρ=Q(λ)dI. The formula for every resolution, together with
-   the transport in step 7, proves independence of the augmentation assertion. -/
+Source: Stacks Project, Tag 0941. -/
 theorem strictRoosComparison
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max uC vC r}]

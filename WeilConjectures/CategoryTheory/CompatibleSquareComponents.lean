@@ -84,9 +84,7 @@ private theorem comparison_eq
 /-- Pasting the two compositor comparisons and the comparison induced by an equality
 of indices gives the comparison around the whole square.
 Source: Stacks Categories Tag 0B65.
-Proof: substitute the equality of indices for the middle comparison. Cancel the right
-compositor in the second comparison and concatenate the three equalities, using
-functoriality and associativity of composition. -/
+-/
 theorem square_pasting
     {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
     {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]
@@ -109,7 +107,8 @@ theorem square_pasting
     ab (eqToIso (congrArg G w)) kb M _ _ _ _ _ _ hl he hr'
 
 /-- The two composition-square isomorphisms and their component transport equation.
-Source: Stacks Categories Tag 0B65. -/
+Source: Stacks Categories Tag 0B65.
+-/
 structure CompatibleSquareComponents
     {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
     {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]
@@ -124,7 +123,8 @@ structure CompatibleSquareComponents
 
 /-- Construct compatible component squares by pasting the normalized comparisons.
 Source: Stacks Categories Tag 0B65. Pasting the two
-comparison equations and their inverses proves the compatibility field. -/
+comparison equations and their inverses proves the compatibility field.
+-/
 noncomputable def compatibleSquareComponents
     {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
     {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]

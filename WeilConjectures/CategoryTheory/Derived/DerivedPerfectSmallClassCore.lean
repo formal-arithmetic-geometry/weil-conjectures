@@ -28,9 +28,7 @@ attribute [local instance] derived_hasCoproducts
 /-- The well-generation and common cardinal-bound part of the perfect-class argument.
 
 Source: Neeman, Theorem 0.2.
-
-Proof: construct a sufficiently large regular cardinal above the well-generation bound and
-above representatives for `P`; the alpha-compact objects form the required class. -/
+-/
 theorem derived_exists_perfectSmallClass_core
     {A : Type u} [Category.{v} A] [Abelian A]
     [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A]

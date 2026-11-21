@@ -26,12 +26,7 @@ variable {C D : Type u} [SmallCategory C] [SmallCategory D]
   {A : Sheaf J RingCat.{u}} {B : Sheaf K RingCat.{u}}
   (φ : A ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj B)
 /-- The underlying module inverse image comparison respects the adjunction unit.
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-Proof: use the ring and abelian unit presentations to construct the scalar action
-on the actual abelian inverse image. Unit generators detect linearity of adjoints.
-The restricted adjunction therefore has the abelian unit as its underlying unit.
-Uniqueness of left adjoints compares the chosen module pullback with this lift;
-the unit equation for that comparison gives the asserted equation. -/
+Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3. -/
 theorem inverseImage_underlying_unit_of_ring_presentation
     [RepresentablyFlat F] [PreservesFiniteLimits (sheafPullback F (Type u) J K)]
     (pr : SheafPullbackUnitPresentation (F := F)

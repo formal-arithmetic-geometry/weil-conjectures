@@ -9,10 +9,12 @@ public import WeilConjectures.CategoryTheory.SignedKoszulCompletionModel
 /-!
 # Transport of one signed Koszul summand
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, finite free tensor calculation.
-
 This isolates the scalar-action and equality-transport calculation for one erased
 index. It is strictly smaller than the finite sum differential theorem.
+
+## References
+
+* Stacks Project, algebraization.tex, Tag 0A0E.
 -/
 
 @[expose] public section
@@ -279,22 +281,10 @@ end Scalars
 attribute [local irreducible] ringedNegativeKoszul ringedNegativeKoszulBasis
 
 /-- One erased-index term after the ordered basis differential is tensorized.
+This statement is one summand of the finite sum and does not assert the differential
+formula for the full subset.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E.
-
-Proof in words: rewrite the tensor-left map of a composite as the composite of
-its tensor-left maps. On presheaf pure tensors, the signed (m+1)-st power of
-multiplication by a_i acts by rho((-1)^c a_i^(m+1)), where c counts preceding
-selected indices. Tensor balancing moves this scalar onto the coefficient
-module; the equality descends to sheafification. Naturality of the right unitor
-moves the equality
-transport on the coefficient degree across the tensor inclusion. The global
-section scalar action is the recorded `ringedKoszulCoefficientSMul`; its scalar
-is the total-tensor sign times the earlier-index sign and the power of `a i`.
-The two degree equalities identify the equality transports by proof
-irrelevance. This statement is one summand of the finite sum and does not
-assert the differential formula for the full subset.
--/
+Stacks Project, algebraization.tex, Tag 0A0E. -/
 theorem ringedNegativeKoszulSummand_D₂_term
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A]

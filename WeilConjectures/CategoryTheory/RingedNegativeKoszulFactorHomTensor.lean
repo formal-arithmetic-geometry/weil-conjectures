@@ -1098,30 +1098,7 @@ attribute [-instance] moduleMonoidalStruct moduleMonoidal complexTensorExists
 This is a one-factor calculation with an arbitrary remaining complex `K`; it contains
 no induction on a list of generators and no finite negative tensor.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, the finite free dual identification, expanded for
-one two-term factor and the tensor-Hom adjunction.
-
-Proof: write `P = [O --b^(m+1)--> O]` in degrees 0,1 and
-`D = [O --b^(m+1)--> O]` in degrees -1,0. Projection to the unique
-nonzero target coordinate identifies each degree of Hom(P,O[0]) with the
-corresponding internal Hom into O. Evaluation at one identifies its two
-rank-one terms with those of D. Normalize them against the prescribed Hom-unit
-isomorphism. The correction is an automorphism of O; unit endomorphisms commute,
-so every scalar compatibility is preserved. The Hom differential in degree -1 is
-positive precomposition, giving a chain isomorphism. It sends the inclusion
-O[0] to D to the dual of the projection P to O[0], and intertwines the (b,1) and (1,b) steps.
-
-In a braided closed category, tensoring two internal Homs into the unit and
-then evaluating defines a natural product into Hom(P tensor K,O[0]).
-The product factors through the closed currying isomorphism and the standard
-map Hom(P,unit) tensor H to Hom(P,H). The latter is invertible because P
-is dualizable. Applying this to the canonical dual identification gives e.
-Naturality proves the first two equations. The product sends the tensor of
-two curried functionals to the curry of their tensor followed by the unit
-unitor. Taking degree zero and using the canonical tensor inclusion proves
-the last equation, including its specified basis normalization.
-The construction also applies to b=0, units b, zero ring sheaves, K=0,
-and empty sites; it uses no inverses of sections or boundedness of K. -/
+Source: Stacks Project, algebraization.tex, Tag 0A0E. -/
 theorem ringedNegativeKoszulFactorHomTensor
     (b : (O.obj ⋙ forget CommRingCat).sections) :
     ∃ e : ∀ (m : ℕ) (K : ringedSiteComplex O),

@@ -10,7 +10,9 @@ import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Module sheafification under restriction, at independent universes
 
-Source: Stacks Project, Tags 03CY, 03DH and 04IX.
+## References
+
+* Stacks Project, Tags 03CY, 03DH and 04IX.
 -/
 
 @[expose] public noncomputable section
@@ -78,12 +80,7 @@ def sliceSheafificationComparisonIndependent :
         exact congrArg P.map (a.unit.naturality f) }
 
 /-- The comparison is an isomorphism for continuous cocontinuous restriction.
-Source: Stacks 03CY and 03DH.
-Proof: The sheafification adjunction identifies the comparison composed with the
-local unit with the restricted global unit. The global unit is locally bijective,
-and cocontinuity preserves local injectivity and local surjectivity under restriction.
-Cancel the locally bijective local unit to see that the comparison is locally
-bijective. Its source and target are sheaves, so it is an isomorphism. -/
+Source: Stacks 03CY and 03DH. -/
 theorem sliceSheafificationComparisonIndependent_isIso :
     IsIso (sliceSheafificationComparisonIndependent (J := J) F R) := by
   let P := slicePresheafRestrictionIndependent (J := J) F R

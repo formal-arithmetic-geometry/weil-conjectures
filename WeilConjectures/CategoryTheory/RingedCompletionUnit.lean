@@ -33,9 +33,7 @@ attribute [local instance 20000] CategoryTheory.hasSheafCompose_of_preservesLimi
 
 namespace CategoryTheory
 
-/-- The forgetful functor preserves the sheaf condition on a small site.
-Proof: use the existing instance; the named proof prevents repeated instance search
-through the concrete sheaf category in the completion constructions. -/
+/-- The forgetful functor preserves the sheaf condition on a small site. -/
 theorem ringedCompletionHasSheafCompose {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) :
     J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := by infer_instance
@@ -56,16 +54,12 @@ def ringedHomUnitEvaluationMap (M : ringedSiteComplex O) (n : ℤ) :
       (𝟙 _) ≫ (SheafOfModules.homObjUnitIso (M.X n)).hom
 
 /-- The projection formula is the original evaluation map, definitionally.
-Source: Stacks Project, sites-cohomology.tex, Section 08J7.
-Proof: both maps project to source degree zero, identify that term with the ring sheaf,
-and evaluate the resulting localized module homomorphism at one. -/
+Source: Stacks Project, sites-cohomology.tex, Section 08J7. -/
 theorem ringedHomUnitEvaluationMap_eq (M : ringedSiteComplex O) (n : ℤ) :
     ringedHomUnitEvaluationMap O M n = homComplexUnitEvaluation J O M n := rfl
 
 /-- Evaluation in literal degree zero needs no change of the source basis.
-Source: Stacks Project, sites-cohomology.tex, Section 08J7.
-Proof: the single-complex identification at literal zero is the identity.
-Precomposition by that identity is the identity internal-Hom map. -/
+Source: Stacks Project, sites-cohomology.tex, Section 08J7. -/
 theorem ringedHomUnitEvaluationMap_normalized (M : ringedSiteComplex O) (n : ℤ) :
     ringedHomUnitEvaluationMap O M n =
       homComplexπ (ringedSiteRingComplex O) M n 0 n (by omega) ≫
@@ -83,17 +77,14 @@ theorem ringedHomUnitEvaluationMap_normalized (M : ringedSiteComplex O) (n : ℤ
 attribute [local irreducible] ringedHomUnitEvaluationMap
 
 /-- The actual evaluation component is invertible.
-Source: Stacks Project, sites-cohomology.tex, Section 08J7.
-Proof: identify it with `homComplexUnitEvaluation` and use its proved invertibility. -/
+Source: Stacks Project, sites-cohomology.tex, Section 08J7. -/
 theorem ringedHomUnitEvaluationMap_isIso (M : ringedSiteComplex O) (n : ℤ) :
     IsIso (ringedHomUnitEvaluationMap O M n) := by
   rw [ringedHomUnitEvaluationMap_eq]
   exact homComplex_unit_evaluation_isIso J O M n
 
 /-- Evaluation at one commutes with the differential.
-Source: Stacks Project, sites-cohomology.tex, Section 08J7.
-Proof: identify both components with the original evaluation maps and use their chain
-compatibility. -/
+Source: Stacks Project, sites-cohomology.tex, Section 08J7. -/
 theorem ringedHomUnitEvaluationMap_comm (M : ringedSiteComplex O) (n m : ℤ)
     (h : (ComplexShape.up ℤ).Rel n m) :
     ringedHomUnitEvaluationMap O M n ≫ M.d n m =
@@ -116,23 +107,19 @@ section FunctorEvaluation
 variable [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
 /-- Evaluation with its source expressed by the actual Hom-complex functor.
-Source: Stacks Project, sites-cohomology.tex, Section 08J7.
-Proof: the Hom-complex functor uses the same product complex as `homComplex`;
-this is the existing canonical evaluation isomorphism with that endpoint. -/
+Source: Stacks Project, sites-cohomology.tex, Section 08J7. -/
 def ringedHomUnitFunctorEvaluationIso (M : ringedSiteComplex O) :
     ((homComplexFunctor (R := O)).obj (op (ringedSiteRingComplex O))).obj M ≅ M :=
   ringedHomUnitEvaluationIso O M
 
 /-- The functor presentation has the original inverse, including its normalization.
-Source: Stacks Project, sites-cohomology.tex, Section 08J7.
-Proof: the functor presentation is defined to be the original isomorphism. -/
+Source: Stacks Project, sites-cohomology.tex, Section 08J7. -/
 theorem ringedHomUnitFunctorEvaluationIso_inv_eq (M : ringedSiteComplex O) :
     (ringedHomUnitFunctorEvaluationIso O M).inv =
       (ringedHomUnitEvaluationIso O M).inv := rfl
 
 /-- The functor presentation retains the actual evaluation component.
-Source: Stacks Project, sites-cohomology.tex, Section 08J7.
-Proof: the forward map of the componentwise isomorphism is its defining map. -/
+Source: Stacks Project, sites-cohomology.tex, Section 08J7. -/
 theorem ringedHomUnitFunctorEvaluationIso_hom_f (M : ringedSiteComplex O) (n : ℤ) :
     (ringedHomUnitFunctorEvaluationIso O M).hom.f n =
       ringedHomUnitEvaluationMap O M n := rfl
@@ -145,18 +132,13 @@ set_option backward.isDefEq.respectTransparency true
 attribute [local irreducible] homComplexFunctor
 
 /-- The specified component of the canonical evaluation isomorphism.
-Source: Stacks Project, sites-cohomology.tex, Section 08J7.
-Proof: expose the isomorphism of components; its forward map is the specified
-unit evaluation, independently of the inverse used by `asIso`. -/
+Source: Stacks Project, sites-cohomology.tex, Section 08J7. -/
 theorem ringedHomUnitEvaluationIso_hom_f (M : ringedSiteComplex O) (n : ℤ) :
     (ringedHomUnitEvaluationIso O M).hom.f n = homComplexUnitEvaluation J O M n := by
   exact ringedHomUnitEvaluationMap_eq O M n
 
 /-- Unit evaluation projects to source degree zero and evaluates at one.
-Source: Stacks Project, sites-cohomology.tex, Section 08J7.
-Proof: expose the specified component, then the definition of unit evaluation.
-The preferred single functor and the ordinary single complex have identical underlying
-functors. Thus their specified projections and degree-zero identifications agree. -/
+Source: Stacks Project, sites-cohomology.tex, Section 08J7. -/
 theorem ringedHomUnitEvaluationIso_hom_f_projection (M : ringedSiteComplex O) (n : ℤ) :
     (ringedHomUnitEvaluationIso O M).hom.f n =
       homComplexπ (ringedSiteRingComplex O) M n 0 n (zero_add n) ≫
@@ -169,9 +151,7 @@ theorem ringedHomUnitEvaluationIso_hom_f_projection (M : ringedSiteComplex O) (n
   rfl
 
 /-- Canonical unit evaluation is natural in the target complex.
-Source: Stacks Project, sites-cohomology.tex, Section 08J7.
-Proof: compare chain maps degreewise, expose their specified evaluation components,
-and apply naturality of degreewise evaluation at one. -/
+Source: Stacks Project, sites-cohomology.tex, Section 08J7. -/
 theorem ringedHomUnitEvaluationIso_naturality {M N : ringedSiteComplex O} (f : M ⟶ N) :
     ((homComplexFunctor (R := O)).obj (op (ringedSiteRingComplex O))).map f ≫
         (ringedHomUnitEvaluationIso O N).hom =

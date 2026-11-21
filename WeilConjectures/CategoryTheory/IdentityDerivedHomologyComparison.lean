@@ -20,17 +20,7 @@ namespace CategoryTheory.Functor
 /-- The homology comparison of the identity functor is homology of its inverse
 canonical derived identity comparison.
 
-Source: Stacks Project, Tag 01F8, equation 01FA.
-
-Proof: on complexes the identity functor acts as identity on kernels, cokernels,
-and hence homology. The induced homology comparison is therefore homology of the
-canonical comparison of the complex mapped by identity with the original complex.
-The localization factorization equations transport this equality to the derived
-category: equality of natural transformations can be checked after precomposition
-with the localization functor. Restrict the resulting natural-transformation
-identity along the fully faithful inclusion of bounded below derived objects.
-The bounded below compatibility isomorphisms cancel and give the displayed
-formula. All degrees and all bounded below objects are allowed. -/
+Source: Stacks Project, Tag 01F8, equation 01FA. -/
 theorem identityDerivedHomologyComparison {C : Type*} [Category C] [Abelian C]
     [HasDerivedCategory C] (n : ℤ) (K : DerivedCategory.Plus C) :
     ((𝟭 C).mapDerivedCategoryPlusHomologyFunctorIso n).hom.app K =

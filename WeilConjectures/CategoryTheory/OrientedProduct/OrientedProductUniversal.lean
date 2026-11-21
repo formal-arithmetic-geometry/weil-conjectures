@@ -206,40 +206,7 @@ def HasLiftFormula (J₁ : Pretopology C₁) (J₂ : Pretopology C₂) (K : Pret
         (b.inverse.map ((associated J₂.toGrothendieck).map Z.hom.2 ≫ ηG.inv.app Z.right))
 
 /-- The triple-site construction has its stated projections, canonical orientation,
-universal compatible lift, and inverse-image pullback formula.
-
-Proof plan (the ten steps of the DAG node):
-1. Form the comma category of triples. Finite limits are componentwise. The generators
-are stable under base change; their saturation defines the topology, using
-lem-weil-pbc-pretopology-sheaf-condition.
-2. Descent for the first two types is ordinary descent. A type-(c) map has covering
- diagonal, so restriction is bijective. Yoneda and the sheafification adjunction
-make its associated map invertible.
-3. The functors first and second preserve finite limits and covers. Apply
-lem-weil-pbc-left-exact-site-inverse-image-tensor; adjunction and Yoneda identify their
-inverse images on associated representables with the two projection formulas.
-4. At V use the inverse of the type-(c) map from middle V to first (F V), followed by
-its map to second (G V). Taking mates defines the displayed orientation.
-5. Compute the componentwise pullbacks in XI Lemma 1.5. Yoneda and
-situation-conventions preserve them. Cancel the type-(c) isomorphisms.
-6. For a cone (a,b,t) form H(Z) by the displayed pullback. Naturality gives its action
-on arrows. Finite limits commute with pullbacks by
-lem-weil-pbc-site-sheaf-sets-limits-sectionwise, so H preserves finite limits.
-7. The first two covering types map to pullbacks of epimorphic families; inverse images
-preserve them using lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer, and their
-pullbacks remain epimorphic by lem-weil-pbc-site-sheaf-sets-epi-locally-surjective.
-The third type maps to an isomorphism by naturality of the inverse-image mate of t.
-8. Enlarge generators of a presentation of E by the H(Z) and finite limits. Apply
-lem-weil-pbc-site-of-sheaf-generators, then the left exact site inverse image theorem.
-9. Evaluation on first and second gives alpha and beta. On middle V the inverse of
-the first pullback projection followed by the second is exactly the mate of t.
-Colimits of associated representables extend this equality to all sheaves.
-10. Any other compatible lift preserves the pullback of step 5, forcing its inverse
-image and its maps. Adjunction and Yoneda determine its direct image and the unique
-projection-compatible isomorphism. Applying this to two site presentations gives
-inverse equivalences, unique with projection and orientation compatibilities, which
-is the site independence asserted in Definition 1.7.
--/
+universal compatible lift, and inverse-image pullback formula. -/
 theorem universal (J₁ : Pretopology C₁) (J₂ : Pretopology C₂) (K : Pretopology D)
     [F.IsContinuous K.toGrothendieck J₁.toGrothendieck]
     [G.IsContinuous K.toGrothendieck J₂.toGrothendieck]

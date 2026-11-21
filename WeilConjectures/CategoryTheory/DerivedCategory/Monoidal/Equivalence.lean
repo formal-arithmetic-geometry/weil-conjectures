@@ -30,7 +30,7 @@ products, and its quasi-inverse `D(F⁻¹)` commutes with the derived internal h
 - `DerivedCategory.ihomCompMapDerivedCategoryInvIso`:
   `D(F⁻¹)(RHom(X, Y)) ≅ RHom(D(F⁻¹) X, D(F⁻¹) Y)`, naturally in `Y`.
 
-## Implementation notes
+## Implementation details
 
 The comparison of the tensor products is computed on a K-flat representative `P` of `N`
 whose image `F(P)` is again K-flat: the functorial flat resolutions are such representatives,

@@ -65,22 +65,7 @@ structure PresheafCechSheafResolution
   differential : ∀ n, p n ≫ i n = (presheafCechSheafComplex J f).d (n + 1) n
 
 /-- A locally surjective presheaf map has an exact augmented sheafified free nerve.
-Source: Stacks Project, Hypercoverings, Tag 01GC, and Cohomology on Sites, Tag 079Z.
-
-Proof: evaluate the free presheaf chain complex objectwise. Replace the target
-set by the image of the evaluated map; this does not change the nerve. Choose
-one vertex in every nonempty fibre and prefix it to tuples. The alternating
-faces give a contraction, so the free presheaf chain complex is exact in positive
-degrees and its degree-zero cokernel is the free abelian presheaf on the image.
-Sheafification is exact. Local surjectivity identifies the sheafification of
-that image with the sheafification of the target, so the augmented sheaf complex
-is exact also at degree zero and the augmentation is epic. Identify the zeroth
-nerve term with the source presheaf to obtain e₀. Take K₀ to be the kernel of
-the augmentation and Kₙ₊₁ to be the kernel of the map onto Kₙ. Exactness factors
-each differential as an epimorphism pₙ followed by the kernel inclusion iₙ;
-these maps give the asserted short exact sequences and differential identities.
-The kernel universal properties determine all chosen syzygies up to unique iso.
--/
+Source: Stacks Project, Hypercoverings, Tag 01GC, and Cohomology on Sites, Tag 079Z. -/
 theorem exists_presheafCechSheafResolution
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}] (f : Arrow (Cᵒᵖ ⥤ Type v))

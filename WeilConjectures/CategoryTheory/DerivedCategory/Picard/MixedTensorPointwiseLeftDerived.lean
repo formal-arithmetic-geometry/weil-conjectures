@@ -37,23 +37,7 @@ open CategoryTheory CategoryTheory.Functor
 namespace DerivedCategory
 
 /-- Existence, exactness, and computation on K-flat complexes for one fixed A-complex.
-Source: Stacks Project, Section 06Y5, Tag 06Y6.
-
-Proof: Mixed total tensor in the R-variable sends a chain homotopy h to the
-termwise tensor homotopy h ⊗ 1. Thus it factors through K(R). Its signed
-shift isomorphism identifies Tot(E[1] ⊗ N) with Tot(E ⊗ N)[1]. Reindex the
-summands of the total of Cone(a) ⊗ N to identify it with Cone(Tot(a ⊗ 1));
-the block differentials agree, so the homotopy functor is triangulated.
-Every R-complex has a K-flat resolution by the functorial flat resolution
-construction. The first clause of mixedTensor_kFlat_quasiIso inverts maps
-between these models. Apply leftDerived_from_resolvingClass on K(R) to
-obtain an exact left derived functor with counit invertible on K-flat objects.
-Whisker its counit by the homotopy quotient. The quotient is full and
-surjective on objects, so the right Kan universal property on K(R) is
-also the right Kan universal property along the composite Q_R on complexes.
-Transport through quotientCompQhIso to obtain the stated counit.
-Exactness is unchanged by this transport, and its components on K-flat
-complexes remain isomorphisms. -/
+Source: Stacks Project, Section 06Y5, Tag 06Y6. -/
 theorem exists_mixedTensor_pointwise_leftDerived
     {R A : Type u} [CommRing R] [CommRing A]
     [HasDerivedCategory.{wR} (ModuleCat.{u} R)]

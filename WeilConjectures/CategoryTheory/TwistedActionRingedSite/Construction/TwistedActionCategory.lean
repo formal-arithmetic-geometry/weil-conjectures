@@ -12,9 +12,14 @@ public import Mathlib.CategoryTheory.InducedCategory
 
 /-! # The category of integer-labelled arrows of an autoequivalence
 
-Source: the first step of the agent-formulated twisted variant of Stacks 00W0.
+## Implementation details
+
 Coherence is supplied by the source library's integer tensor powers, applied to
 endofunctors, rather than by an additional coherence assumption.
+
+## References
+
+* Stacks Project, Tag 00W0 (twisted variant).
 -/
 
 @[expose] public section

@@ -40,13 +40,7 @@ private theorem quasiIso_pullback_snd_of_epi
 
 /-- Comparisons fixed on every resolving quasi-isomorphism are natural.
 Source: argument for flat tensor representatives,
-Stacks 07A4 and ProjectionFormulaArrows.
-Proof: choose an epimorphic resolving quasi-isomorphism q to the target of f, and resolve
-its pullback along f. The composite v to the source is a quasi-isomorphism, since pulling
-back an epimorphic quasi-isomorphism preserves its acyclic kernel. Both comparison squares
-at v and q are prescribed. Naturality on resolving objects identifies the remaining maps
-along the other projection w. The pullback equation w q = v f identifies the two composites.
-Cancel the invertible image of v under G. -/
+Stacks 07A4 and ProjectionFormulaArrows. -/
 theorem resolutionComparison_naturality
     {A : Type u} [Category.{v} A] [Abelian A] {B : Type u'} [Category.{v'} B]
     (P : ObjectProperty (CochainComplex A ℤ))

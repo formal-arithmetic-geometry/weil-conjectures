@@ -37,8 +37,7 @@ variable (O : Sheaf J CommRingCat.{u})
 
 set_option linter.unusedSectionVars false in
 /-- The sectionwise units form a section of the localization presheaf.
-Source: Stacks Project, algebraization.tex, Tag 0996.
-Proof: the restriction maps are ring homomorphisms and therefore preserve one. -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedSectionLocalizationPresheaf_one_naturalOfUniverses
     (s : (O.obj ⋙ forget CommRingCat).sections) {X Y : Cᵒᵖ} (a : X ⟶ Y) :
     (ringedSectionLocalizationPresheafOfUniverses O s).map a
@@ -69,8 +68,7 @@ variable (R : Sheaf J CommRingCat.{u})
 variable (s : (R.obj ⋙ forget CommRingCat).sections)
 
 /-- The localization restrictions preserve identities as ring maps.
-Source: Stacks Tags 0996 and 099E.
-Proof: both maps extend the identity of R(U); uniqueness of localization lifts applies. -/
+Source: Stacks Tags 0996 and 099E. -/
 theorem ringedLocalizationRing_map_idOfUniverses (U : Cᵒᵖ) :
     ringedSectionLocalizationMapOfUniverses R s (𝟙 U) = RingHom.id _ := by
   apply IsLocalization.ringHom_ext (R := R.obj.obj U) (Submonoid.powers (s.val U))
@@ -78,9 +76,7 @@ theorem ringedLocalizationRing_map_idOfUniverses (U : Cᵒᵖ) :
   simp [ringedSectionLocalizationMapOfUniverses]
 
 /-- The localization restrictions preserve composites as ring maps.
-Source: Stacks Tags 0996 and 099E.
-Proof: both composites extend the same restriction of R, by naturality of s;
-uniqueness of localization lifts gives equality. -/
+Source: Stacks Tags 0996 and 099E. -/
 theorem ringedLocalizationRing_map_compOfUniverses {U V W : Cᵒᵖ} (f : U ⟶ V) (g : V ⟶ W) :
     ringedSectionLocalizationMapOfUniverses R s (f ≫ g) =
       (ringedSectionLocalizationMapOfUniverses R s g).comp
@@ -98,8 +94,7 @@ def ringedLocalizationRingPresheafOfUniverses : Cᵒᵖ ⥤ CommRingCat.{u} wher
   map_comp f g := congrArg CommRingCat.ofHom (ringedLocalizationRing_map_compOfUniverses R s f g)
 
 /-- The section localization algebra maps commute with restrictions.
-Source: Stacks Tags 0996 and 099E.
-Proof: each localization lift extends exactly the specified restriction map. -/
+Source: Stacks Tags 0996 and 099E. -/
 theorem ringedLocalizationRing_unit_naturalityOfUniverses {U V : Cᵒᵖ} (f : U ⟶ V) :
     R.obj.map f ≫
         CommRingCat.ofHom (algebraMap _ (ringedSectionLocalizationCarrierOfUniverses R s V)) =
@@ -488,12 +483,7 @@ end
 
 /-- The ring-sheaf construction is the original module sheafification, with the
 canonical identification on every local fraction.
-Source: Stacks Tags 0996 and 099E.
-Proof: both underlying module sheaves represent restriction-compatible linear
-maps out of the section-localization presheaf. Ring sheafification carries the
-sectionwise scalar action, since multiplication and its identities sheafify.
-The two sheafification universal properties give mutually inverse module maps;
-they agree on every section of the presheaf, giving the displayed normalization. -/
+Source: Stacks Tags 0996 and 099E. -/
 theorem ringedLocalizationRing_moduleComparisonOfUniverses :
     ∃ e :
       (SheafOfModules.restrictScalars

@@ -39,20 +39,9 @@ sheaf.  Its first displayed equation identifies the underlying component with th
 inverse of the supplied ring comparison followed by that canonical map.  The last
 clause pins that map: it carries `L` of every map whose sections are the sheafified
 constant section of `a` (in particular `L` of the coprojection `i_a`) to the
-sheafified constant section of `a`; since `L(underline A_C)` is the coproduct of the
-`L(i_a)` and `L` of the terminal sheaf is terminal, this determines it.
+sheafified constant section of `a`.
 
-Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV.
-
-Proof: express each constant set sheaf as the coproduct of copies of the
-terminal sheaf, apply the left-adjoint colimit theorem and the finite-limit
-terminal comparison, and use coprojection extensionality for naturality.  The
-underlying set and finite-product sheafification comparisons transport the four
-ring operations; the operation graph equations in `RingInverseImage` then make
-the component a ring-sheaf isomorphism.  Naturality in coefficient maps follows
-from the naturality equation for the supplied ring comparisons and the naturality
-of the set-level coproduct comparison.
--/
+Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV. -/
 theorem inverseImageConstantComparison
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (JC : GrothendieckTopology C) (JD : GrothendieckTopology D)

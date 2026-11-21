@@ -306,22 +306,7 @@ theorem derivedCoupleMapData_unique (D E : ℤ → ℤ → C)
   rfl
 
 /-- Construct the induced maps, without asserting exactness of the new triangle.
-Source: Stacks Project, Lemma 12.21.2, Tag 011R, and Remark 12.21.5, Tag 0AMJ.
-
-Proof. Restrict `a` to its incoming image: its composite with the next image
-inclusion factors through that image, using the image factorization of the incoming
-`a`. The restriction is unique because image inclusions are monomorphisms.
-The restriction of `f` to `ker(f ≫ g)` lands in `ker g`, which is the incoming
-image of `a` by `hgg` (after reindexing). Lift to that image. The lifted incoming
-boundary is killed by this map: after composing with the mono image inclusion,
-the composite is `f ≫ g ≫ f`, zero by `hg`. Thus descend through its cokernel.
-This gives `forward` and its defining equation, uniquely by epi cancellation.
-Finally `g` lands in cycles by `hg`. Its composite with the cycle quotient
-kills `ker a = im f`: on that image it is the incoming differential, which the
-quotient kills by `hβeq`. Every epi image factorization in an abelian category
-is a cokernel of its kernel, so this map descends uniquely through the incoming
-image epimorphism of `a`. This gives `backward` and its equation. The three
-universal properties determine all maps uniquely; no arbitrary object is chosen. -/
+Source: Stacks Project, Lemma 12.21.2, Tag 011R, and Remark 12.21.5, Tag 0AMJ. -/
 theorem derivedCoupleMapData_exists (D E : ℤ → ℤ → C)
     (a : ∀ p q, D p q ⟶ D (p - 1) (q + 1))
     (f : ∀ p q, E p q ⟶ D (p + 2) (q - 1))

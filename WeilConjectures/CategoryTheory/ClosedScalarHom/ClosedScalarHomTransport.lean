@@ -29,11 +29,7 @@ variable {A : Type u₁} [Category.{v₁} A] {B : Type u₂} [Category.{v₂} B]
 
 include hc hμ in
 /-- Transporting a scalar adjunction and its tensor comparison transports the closed-Hom map.
-Source: Stacks 07A6 and 0D6D.
-Proof: apply the closed transpose, followed by the inverse scalar transpose, to both
-sides. The adjunction compatibility moves d across the scalar transpose. Naturality
-of evaluation moves c in the internal-Hom input to the second tensor factor. The
-compatibility of mu and nu then identifies the two maps. -/
+Source: Stacks 07A6 and 0D6D. -/
 theorem transport (K : A) (N : B) :
     (iso S T adj' ν).hom.app (op K, N) ≫ H.map (Prod.mkHom (𝟙 (op K)) (d.hom.app N)) =
       d.hom.app (I.obj (op (F'.obj K), N)) ≫
@@ -91,9 +87,7 @@ theorem transport (K : A) (N : B) :
   rw [hT]
 
 /-- The canonical left-adjoint uniqueness map has the required transpose compatibility.
-Source: adjoint uniqueness, Stacks 07A6.
-Proof: naturality moves the final map past the hom equivalence. The unit identity
-for leftAdjointUniq and the transported-adjunction hom equivalence finish. -/
+Source: adjoint uniqueness, Stacks 07A6. -/
 theorem adjunction_compatibility (X : A) (N : B) (f : F'.obj X ⟶ N) :
     adj.homEquiv X N
         ((Adjunction.leftAdjointUniq adj (adj'.ofNatIsoRight d)).hom.app X ≫ f) =
@@ -103,9 +97,7 @@ theorem adjunction_compatibility (X : A) (N : B) (f : F'.obj X ⟶ N) :
   exact Adjunction.homEquiv_ofNatIsoRight_apply adj' d f
 
 /-- The closed-Hom comparison for the identity tensor adjunction is the identity.
-Source: Stacks 07A6.
-Proof: expand the five equivalences; the identity scalar equivalences and tensor
-comparison disappear and the two closed transposes cancel. -/
+Source: Stacks 07A6. -/
 theorem identity (K N : A) :
     (iso S S Adjunction.id (Iso.refl S.tensor)).hom.app (op K, N) = 𝟙 _ := by
   have hi (X Y : A) (f : X ⟶ Y) : Adjunction.id.homEquiv X Y f = f := by
@@ -124,9 +116,7 @@ theorem identity (K N : A) :
   rw [Category.id_comp, Equiv.apply_symm_apply]
 
 /-- Identity transport of the five-Hom comparison, with its identity map simplified.
-Source: Stacks 07A6.
-Proof: specialize transport to the identity adjunction and use the identity
-comparison proved above. The last identity morphism disappears. -/
+Source: Stacks 07A6. -/
 theorem transport_identity {F₀ U₀ : A ⥤ A} (a₀ : F₀ ⊣ U₀)
     (d₀ : U₀ ≅ 𝟭 A) (c₀ : 𝟭 A ≅ F₀)
     (hc₀ : ∀ X N (f : F₀.obj X ⟶ N),

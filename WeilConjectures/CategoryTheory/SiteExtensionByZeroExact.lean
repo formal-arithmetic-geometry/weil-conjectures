@@ -20,10 +20,11 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 /-! # Exactness of extension by zero on a localized site
 
 This statement asserts preservation of short exact sequences by the constructed left
-adjoint to restriction recorded by the restriction-adjunction dependency.
-The proof follows the direct-sum
-presheaf construction of 03DH--03DJ, sectionwise injectivity, exact sheafification,
-and right exactness from the adjunction.
+adjoint to restriction.
+
+## References
+
+* Stacks Project, Tags 03DH--03DJ (the direct-sum presheaf construction).
 -/
 
 @[expose] public section
@@ -80,29 +81,9 @@ private theorem siteExtensionByZero_preserves_monomorphisms
     (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
       (Over.forget W) AddCommGrpCat.{u} (J.toGrothendieck.over W) J.toGrothendieck))
 
-/-- Extension by zero from the localized site is exact.
-
-The site is the precoverage encoding of `def-weil-pbc-sites-and-cohomology`.
-Extension by zero is the constructed left adjoint recorded by
-`lem-weil-pbc-site-restriction-adjunction`. The zero-morphism witness permits mapping
-short complexes; it is a conclusion, not an additional hypothesis.
-
-Proof:
-1. Rewrite the component map of the explicit presheaf construction as `DirectSum.map`.
-   Evaluation sends a monomorphism of presheaves to an injective homomorphism, so
-   `DirectSum.map_injective` proves that presheaf extension by zero preserves monos.
-2. The sheaf inclusion and sheafification preserve finite limits, hence monos.
-   Thus the sheafified direct-sum functor preserves monos as well.
-3. The existing presheaf adjunction and `sheafAdjunctionContinuous` identify the
-   explicit functor and the chosen pullback by uniqueness of left adjoints. Transfer
-   preservation of monos along this natural isomorphism.
-4. Restriction is additive by its sectionwise formula. Its left adjoint is additive,
-   so it preserves zero morphisms. The adjunction also gives preservation of colimits.
-5. The final map of a short exact sequence is a cokernel of the first. Map its
-   cokernel cofork using colimit preservation; the mapped complex is exact and its
-   final map is epic. Its first map is monic by Steps 1--3. These three properties
-   give the required short exact sequence.
--/
+/-- Extension by zero from the localized site is exact. Extension by zero is the constructed
+left adjoint to restriction. The zero-morphism witness permits mapping short complexes; it
+is a conclusion, not an additional hypothesis. -/
 theorem site_extensionByZero_exact
     {C : Type u} [SmallCategory C]
     (J : Precoverage C)

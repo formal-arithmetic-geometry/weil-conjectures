@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Whiskering
 
 /-! # Restricting an oriented dualizing comparison
 
-The formal naturality calculation in Step 4(ii) of the regular-immersion proof,
+The formal naturality calculation for the regular-immersion comparison,
 before applying co-projection or cancelling Tate factors.
 -/
 
@@ -22,13 +22,7 @@ namespace CategoryTheory
 
 /-- Naturality transports the oriented comparison once the dualizing and orientation
 squares commute. Here `B` is the specified exceptional restriction map; `Cu` and
-`Cv` keep the coefficient pullback identifications explicit.
-
-Proof: substitute the orientation identity for `PU`, cancel `Cu` with its inverse,
-and use naturality of `B` at `PX.hom`. The dualizing square then replaces the middle
-word by `Ev.hom` followed by the pullback of `b.hom`. The orientation identity for
-`PV` implies `PV.inv ≫ Ev.hom = Cv.inv ≫ T.map PZ.inv`. Substitution and functoriality
-of `T` give the result. No tensor, invertibility detection, or choice of maps is used. -/
+`Cv` keep the coefficient pullback identifications explicit. -/
 theorem regularOrientedRestrictionNaturality
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
     (S : C ⥤ D) (G : C ⥤ E) (H : D ⥤ F) (T : E ⥤ F)

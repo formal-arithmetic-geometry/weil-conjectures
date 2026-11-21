@@ -19,10 +19,7 @@ cohomological dimension*: there is `d` with `R^q F X = 0` for every object `X` a
 `q > d`. Then:
 
 * `F` sends exact complexes of `F`-acyclic objects to exact complexes, with no boundedness
-  assumption (`HomologicalComplex.Acyclic.map_of_rightAcyclic_of_isZero_rightDerived`). The
-  proof is the dimension shifting argument of the bounded below case
-  (`HomologicalComplex.Acyclic.map_of_rightAcyclic`): for an exact complex `K` the cycles
-  satisfy `R^q F(Zⁿ) ⊆ R^{q+1} F(Zⁿ⁻¹) ⊆ ⋯ ⊆ R^{q+d} F(Zⁿ⁻ᵈ) = 0` for `q ≥ 1`.
+  assumption (`HomologicalComplex.Acyclic.map_of_rightAcyclic_of_isZero_rightDerived`).
 * Consequently `F` preserves quasi-isomorphisms between unbounded complexes of `F`-acyclic
   objects, and the unbounded right derived functor `RF` is computed by applying `F` termwise to
   any complex of `F`-acyclic objects
@@ -30,9 +27,7 @@ cohomological dimension*: there is `d` with `R^q F X = 0` for every object `X` a
   Grothendieck abelian category (whose K-injective resolutions have injective components).
 * If moreover `F` commutes with coproducts of shape `J` and `F`-acyclic objects are stable under
   such coproducts, then `RF` commutes with coproducts of shape `J`
-  (`CategoryTheory.Functor.preservesColimitsOfShape_rightDerivedFunctor`): a family in `D(C)` is
-  represented by K-injective complexes with injective components, whose coproduct is a complex of
-  `F`-acyclic objects computing the coproduct in `D(C)`.
+  (`CategoryTheory.Functor.preservesColimitsOfShape_rightDerivedFunctor`).
 
 This is the abstract part of Stacks, Tag 0F11.
 

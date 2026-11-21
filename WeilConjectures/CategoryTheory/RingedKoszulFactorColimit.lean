@@ -369,18 +369,7 @@ private def factorCoconeIsColimit
 
 /-- The fraction cocone of the one-section Koszul system is a colimit and preserves
 its degree-zero augmentation.
-Source: Stacks Project, More on Algebra, Tag 0913.
-
-Proof: in degree zero use the identity cocone on the constant ring module.
-In degree one send a section a at stage m to a/s^(m+1). The identity
-(sa)/s^(m+2)=a/s^(m+1) proves transition compatibility, while
-s^(m+1)a/s^(m+1)=a proves compatibility with the differential. Sectionwise the
-fraction maps exhibit localization as the filtered colimit of multiplication by s:
-every fraction occurs and an element vanishes exactly when some power of s kills it.
-Sheafification preserves this colimit. Outside degrees zero and one use the zero
-cocone. Evaluation jointly reflects colimits of complexes, so these degreewise
-colimits give the asserted complex colimit. The map in degree zero is the identity,
-which proves the augmentation equation. This includes s=0 and s a zero divisor. -/
+Source: Stacks Project, More on Algebra, Tag 0913. -/
 theorem exists_ringedKoszulFactor_colimit
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     ∃ ι : ringedKoszulFactors O s ⟶

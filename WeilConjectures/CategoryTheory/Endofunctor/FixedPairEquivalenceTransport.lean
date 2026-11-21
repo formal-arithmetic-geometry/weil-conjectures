@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFullyFaithful
 
 /-! # Equivalence transport for invertible endofunctor fixed pairs
 
-Source: Stacks Project, Categories, Tag 02C3.
+## References
+
+* Stacks Project, Categories, Tag 02C3.
 -/
 
 @[expose] public section
@@ -23,35 +25,11 @@ universe u v u' v'
 namespace CategoryTheory.Endofunctor.IsoAlgebra
 
 /-- An equivalence commuting with two endofunctors transports their invertible fixed pairs.
-The functor is the existing `mapOfNatIso b.symm`; the displayed carrier and structure
-formulas and its map on arrows specify it, rather than just an abstract equivalence.
-The Hom bijection is the underlying equivalence's map restricted to intertwining arrows.
-Every prescribed carrier isomorphism lifts after uniquely transporting the structure
-and its inverse. No equivalence hypothesis is imposed on either endofunctor.
+The functor is `mapOfNatIso b.symm`, and its Hom bijection is the underlying equivalence's
+map restricted to intertwining arrows. Every prescribed carrier isomorphism lifts after
+uniquely transporting the structure and its inverse.
 
-Source: Stacks Tag 02C3.
-
-Proof plan:
-1. Apply lem-sf-quasi-inverse-hom-bijection (`J.fullyFaithfulFunctor.map_bijective`).
-   The transported structure is b inverse followed by J(theta), hence invertible.
-2. Naturality of b rewrites the target intertwining equation as J applied to the
-   source equation, followed by b inverse. Cancel b inverse and use faithfulness;
-   this proves both directions for every underlying arrow.
-3. The existing mapOfNatIso acts on arrows by J.map and preserves composition and
-   identities. By step 2 the Hom bijection of J restricts to the intertwining arrows,
-   giving precisely the asserted bijection on fixed-pair morphisms. This is also
-   fullyFaithfulMapOfNatIso applied to J.fullyFaithfulFunctor.
-4. For H and v, form w = b followed by G(v), the structure of H, and v inverse.
-   Its inverse is v followed by the inverse structure, G(v inverse), and b inverse.
-   Apply lem-cbc-fully-faithful-isomorphism-lift (`FullyFaithful.isoEquiv`) to w.
-   The Hom bijection gives uniqueness among all arrows of both the lift and its inverse.
-5. Cancellation shows that v intertwines the transported lift with H; the same
-   calculation for v inverse makes it an isomorphism of fixed pairs, using
-   def-weil-endofunctor-fixed-pair-category.
-6. Use J's counit to choose such a carrier isomorphism for every H. Step 5 gives
-   essential surjectivity and step 3 full faithfulness. Apply
-   lem-trf-fully-faithful-ess-surj-equivalence (`Functor.asEquivalence`, Stacks 02C3).
-   None of these steps uses an inverse functor for F or G. -/
+Stacks Project, Tag 02C3. -/
 theorem fixedPair_equivalence_transport
     {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
     (F : C ⥤ C) (G : D ⥤ D) (J : C ≌ D) (b : F ⋙ J.functor ≅ J.functor ⋙ G) :

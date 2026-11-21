@@ -227,31 +227,7 @@ private theorem augmentation_boundary
 /-- The explicit comparisons respect the connecting arrow of the derived
 horseshoe triangle.
 
-Source: Stacks Project, Derived Categories, Tags 014Q, 0159 and 015B.
-
-Proof:
-1. Extend the compatible horseshoe and its augmentations by zero. Each degree
-row splits because its first term is injective. Use the split triangle with
-connecting chain map section, differential, retraction; its cone comparison fixes
-the sign. The augmentation maps are quasi-isomorphisms.
-2. Transport this triangle to the single objects. Maps from X₁[0][1] to X₃[0]
-vanish: compute into the bounded below injective resolution of X₃ in the homotopy
-category, where the supports are disjoint. Third-map uniqueness identifies the
-transported boundary with the canonical single-triangle boundary.
-3. Apply the derived functor. The unit is invertible on the three bounded below
-injective complexes. Its naturality supplies the first two squares; its shift
-compatibility supplies the third square. Termwise additivity preserves the split
-connecting map and the minus sign in the shifted differential. Commute the
-termwise functor past extension by zero using mapExtendIso.
-4. The comparisons in Steps 2-3 equal the explicit comparisons below: compose
-with a lift of the identity from the chosen resolution. Any two such lifts are
-homotopic, so their localized maps agree. Naturality of the derived unit applied
-to this lift identifies the inverse-unit comparison for the fixed resolution
-with the chosen-resolution comparison followed by the lift. The quotient
-factorization and mapExtendIso identify its target with Q(EvI). Thus the first
-and third components are exactly the displayed explicit comparisons, and the
-third triangle square is the asserted equation.
--/
+Source: Stacks Project, Derived Categories, Tags 014Q, 0159 and 015B. -/
 theorem horseshoe_comparison_boundary
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
     [EnoughInjectives A] [Category.{v₂} B] [Abelian B]

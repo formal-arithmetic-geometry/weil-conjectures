@@ -323,31 +323,7 @@ preserves the structural constraints of the two fixed derived tensor presentatio
 This statement constructs neither the chain comparison nor its derived extension and
 makes no uniqueness assertion.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0FPT, with Tags 06YS, 06YU and 0G7D.
-
-Proof: define the unit comparison by composing the image of cB.unitIso, the
-termwise exact-functor factor, the single-complex comparison, the degree-zero
-image of u.coherence.unit, and cA.unitIso inverse. Its normalization follows by
-cancelling cA.unitIso. For flat-term K-flat P,Q,N, their total tensor complexes
-are flat-term K-flat; their termwise U-images
-have the same properties by hypothesis. Apply the representative square to the
-inner and outer tensor pairs. Apply the associator-model equations of cB and cA
-and naturality of the representative comparisons. Cancel these isomorphisms to
-reduce the derived associativity square to an equality of localized chain maps.
-Before localization it suffices to restrict to each triple coproduct summand:
-the summand law for chain changes the two paths into the underived associativity
-square u.coherence.associativity. These equalities are equalities of sheaf maps;
-the universal property of the sheafified tensor and its locally generating pure
-tensors justifies the structural-model identifications without a global-pure-tensor
-assumption. For the unit squares use the left- and right-unitor models of cB and
-cA; on each summand in degree n they are u.coherence.left_unit and right_unit.
-For symmetry use cB.symmetry_model and cA.symmetry_model: on (p,q) both paths
-are the underived symmetry square multiplied by (-1)^(pq), and U preserves this
-integer multiple by additivity. Finally every derived object is isomorphic to a
-flat-term K-flat representative by lem-pc-kflat-resolution. Naturality of the
-tensor comparison, associators, unitors and braidings transports each checked
-square along these objectwise isomorphisms, proving the four constraints for all
-derived objects. -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0FPT, with Tags 06YS, 06YU and 0G7D. -/
 theorem ringed_forget_tensor_coherence
     (hU : ∀ P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ,
       P.IsKFlatIndependentCoefficients →

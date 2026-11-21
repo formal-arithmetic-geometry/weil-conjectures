@@ -20,8 +20,8 @@ This file defines the strict transform of a morphism `f : Y ⟶ X` along a morph
 
 Given `f : Y ⟶ X`, `π : X' ⟶ X` and an open `U ⊆ X`, the fibre product `Y ×_X X'`
 contains the open locus lying over `U`. The strict transform of `Y` is the
-scheme-theoretic image of this open locus inside `Y ×_X X'`. For a blow-up `π = Bl_I(X) ⟶ X` and `U` the
-complement of the support of `I`, this recovers the classical strict transform; the
+scheme-theoretic image of this open locus inside `Y ×_X X'`. For a blow-up `π = Bl_I(X) ⟶ X` and `U`
+the complement of the support of `I`, this recovers the classical strict transform; the
 specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
 
 ## Main definitions

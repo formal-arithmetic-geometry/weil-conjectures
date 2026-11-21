@@ -35,20 +35,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   (M : ScalarHomModels.{c, v, r, w} J) {R S : Sheaf J CommRingCat.{max c v r}}
 
 /-- The normalized closed-Hom comparisons respect coefficient towers and identities.
-Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 07A4 and 07A6.
-
-Proof: on a K-flat representative, the unit-normalized left-adjoint composition
-comparison is t tensor (s tensor x) mapped to t b(s) tensor x. It intertwines the
-tensor comparisons: both paths send t tensor (s tensor (x tensor y)) to
-(t b(s) tensor x) tensor (1 tensor y). The inverse inserts 1. Naturality and the
-scalar-unit equation identify this with the canonical leftAdjointUniq comparison.
-The equality of tensor maps descends through the fully faithful restriction to
-K-flat pairs. The five Hom equivalences for the composite adjunction are the
-successive five equivalences, using this tensor equality and the normalized units.
-Evaluate at the source identity to obtain the tower equation. For an identity map,
-scalar multiplication identifies extension with the identity; the same calculation
-makes the five Hom equivalences the identity after the specified transports.
-All computations include zero rings and require no flatness of a coefficient map. -/
+Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 07A4 and 07A6. -/
 theorem scalarInternalHomTowerCoherence
     (μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S),
       ScalarHomTensorComparison M a) :

@@ -38,14 +38,7 @@ private theorem tensor_map₂_eq
   rw [tensorHom_comp_tensorHom, Category.comp_id, Category.id_comp]
 
 /-- A summand-normalized tensor comparison lifts inverse associativity to cochain complexes.
-Source: Stacks Project, Tag 06YN.
-
-Proof: invert the summand equation by cancelling the comparison component. Restrict
-both sides to each triple coproduct summand. Apply this equation twice, naturality
-of the inverse underived comparison, and its associativity equation. The native
-complex associator has exactly the same summand equation. Coproduct extensionality
-and degreewise extensionality finish the proof; preservation of coproducts by the
-functor is not required. -/
+Source: Stacks Project, Tag 06YN. -/
 private theorem chain_inverse_associativity
     {B : Type b} [Category.{vb} B] [Preadditive B] [HasZeroObject B]
     [MonoidalCategory B] [MonoidalPreadditive B]
@@ -154,16 +147,7 @@ private theorem chain_inverse_associativity
   exact (reassoc_of% hν (P.X p) (Q.X q) (N.X t)) _
 
 /-- A summand-normalized comparison respects the cochain tensor associator.
-Source: Stacks Project, Tag 06YN.
-
-Proof: the uncurried total tensor maps a pair of morphisms in two successive
-steps, whose composite is the native tensor of morphisms by tensor functoriality.
-Use this equality to view the comparison as one for the native tensor functors.
-Invert the summand equation and restrict the two inverse associativity composites
-to each target triple coproduct summand. The summand equation twice, naturality,
-and the given underived associativity identify them. Cancel the comparison
-isomorphisms to recover the forward equation. No coproduct preservation by F is
-required. -/
+Source: Stacks Project, Tag 06YN. -/
 theorem tensorComparison_chain_associativity
     {B : Type b} [Category.{vb} B] [Preadditive B] [HasZeroObject B]
     [MonoidalCategory B] [MonoidalPreadditive B]

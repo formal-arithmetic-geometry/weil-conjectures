@@ -9,8 +9,12 @@ public import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActi
 
 /-! # Canonical Hom comparison for translation
 
-Source: Stacks, sites-modules.tex, section-internal-hom
-and.
+The transpose of the inverse tensor comparison followed by translated evaluation is an
+isomorphism.
+
+## References
+
+Stacks Project, `sites-modules.tex`.
 -/
 
 @[expose] public section
@@ -107,15 +111,7 @@ private theorem translationHomComparison_isIso (P : RestrictionPresentation J s 
 
 omit [s.functor.IsContinuous J J] in
 /-- The transpose of inverse tensor comparison followed by translated evaluation is invertible.
-Source: Stacks, sites-modules.tex.
-
-Proof: on test objects FQ, full faithfulness identifies maps into F Hom(M,N)
-with maps Q to Hom(M,N). Untranspose, apply F, precompose with the inverse
-tensor comparison and transpose again. This is a composite of equivalences.
-Tensor naturality identifies it with postcomposition by the displayed map.
-Essential surjectivity extends this bijectivity to every test object, and the
-Yoneda isomorphism criterion finishes. Only naturality of sigmaTensor and the
-translation equivalence are used; zero objects and empty sites cause no exception. -/
+Source: Stacks, sites-modules.tex. -/
 theorem isIso_translationHomComparison (P : RestrictionPresentation J s R a)
     (T : TensorComparisons J s R a P) (M N : Modules R) :
     IsIso (SheafOfModules.tensorHomEquiv (R := R) _ _ _

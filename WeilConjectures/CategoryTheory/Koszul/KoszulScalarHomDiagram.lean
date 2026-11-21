@@ -136,14 +136,7 @@ private def koszulEvaluation (O : Sheaf J CommRingCat.{u}) (r : ℕ)
       ((ringedKoszulDiagram O r a).map f.unop) N)
 
 /-- Comparison through the finite Koszul Hom diagram.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: The theta isomorphisms of the normalized scalar-Hom adjunction form a natural
-transformation in the source by theta_natural. Precompose the B Hom diagram by the given positive
-comparison and compose with theta to obtain homDiagramComparison.
-Proof step 2: Every finite positive Koszul stage is dualizable, so canonical tensor-Hom
-evaluation is an isomorphism. Its source naturality makes these stage isomorphisms natural in the
-inverse diagram. Whisker B evaluation with restriction, compose with homDiagramComparison and
-inverse R evaluation. -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 private def tensorDiagramComparison (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections)
     (e : ringedKoszulDiagram R r a ⋙

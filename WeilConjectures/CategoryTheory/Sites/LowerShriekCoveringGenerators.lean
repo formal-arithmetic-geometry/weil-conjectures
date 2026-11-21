@@ -24,30 +24,7 @@ namespace CategoryTheory
 /-- A geometric inverse image has a left adjoint if its evaluations on a covering set
 of site objects are corepresentable.
 
-Source: Stacks Project, Sites, Tag 09YX.
-
-Proof:
-1. Yoneda and the sheafification adjunction identify evaluation on V with maps from
-its sheafified representable h_V#. The assumed natural bijections therefore identify
-Hom(G_V,F) with Hom(h_V#,R(F)). Let i_V be the image of the identity of G_V.
-Naturality says that the bijection sends a to R(a) composed with i_V.
-2. Construct coproducts and coequalizers of sheaves by sheafifying the objectwise
-presheaf constructions. Their universal properties follow from sheafification.
-3. For a set-indexed family of objects in E, take coproducts of h_V# and of G_V.
-The product of the preceding bijections gives the representing bijection for these
-coproducts, including the empty coproduct, with unit induced by the i_V.
-4. Define the image of any arrow between these coproducts by its unique representing
-map. The characterization R(L(a)) composed with i_A = i_B composed with a proves
-identity and composition laws and compatibility of all representing bijections.
-5. By lem-weil-pbc-sheaf-covering-representable-coequalizer-presentation, every sheaf H
-is a coequalizer of two such coproducts, since E covers every site object. Define L_H
-as the corresponding coequalizer of their images. This needs no subcanonicity.
-6. Maps from L_H to F form the equalizer of the two maps between the representing
-Hom sets. Compatibility in step 4 identifies it with Hom(H,R(F)). The resulting
-bijection is natural in F by uniqueness of factorization through the coequalizer.
-7. Its value on the identity gives i_H. Define L on arrows by the unique equation
-R(L(c)) composed with i_H = i_H' composed with c. Uniqueness proves the functor laws
-and naturality in H. These bijections yield the claimed adjunction. -/
+Source: Stacks Project, Sites, Tag 09YX. -/
 theorem exists_leftAdjoint_of_covering_corepresentable_evaluations
     {C : Type u} [SmallCategory C] {D : Type v} [SmallCategory D]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

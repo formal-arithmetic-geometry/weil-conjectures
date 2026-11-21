@@ -11,7 +11,9 @@ public import WeilConjectures.CategoryTheory.RoosFinitePrefixes
 /-!
 # Limits of finite-prefix towers
 
-Source: Stacks Project, Tag 07KW, proof of Lemma 15.88.1.
+## References
+
+* Stacks Project, Tag 07KW (Lemma 15.88.1).
 -/
 
 @[expose] public section
@@ -44,7 +46,7 @@ noncomputable def roosPrefixCone (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
           map_add' := by intros; ext i; exact map_add _ _ _ }
       naturality := by intros; rfl }
 
-/--  -/
+/-- The coordinates of a cone over the finite-prefix tower are compatible across levels. -/
 theorem roosPrefixCone_coordinate (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
     (c : Cone (roosPrefixTower s A)) (n m i : ℕ) (hn : i < n + s) (hm : i < m + s) :
     c.π.app (Opposite.op n) ≫ roosPrefixEval s A n i hn =
@@ -57,12 +59,7 @@ theorem roosPrefixCone_coordinate (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}
 
 /-- Compatible finite prefixes are exactly infinite tuples.
 
-Source: Stacks Project, Tag 07KW, proof of Lemma 15.88.1.
-
-Extract coordinate i from prefix i+1. Compatibility makes this the same as its
-value in any prefix containing i: compare both with the prefix of maximum length.
-These extractions define the unique map to the product; conversely restriction
-of a tuple gives compatible prefixes. The argument includes the empty prefix. -/
+Stacks Project, Tag 07KW (Lemma 15.88.1). -/
 noncomputable def roosPrefixConeIsLimit (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
     IsLimit (roosPrefixCone s A) where
   lift c := Pi.lift (fun i ↦ c.π.app (Opposite.op (i + 1)) ≫

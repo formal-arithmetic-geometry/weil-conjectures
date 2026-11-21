@@ -53,8 +53,7 @@ def ringedLocalizationTwoTermX (s : (O.obj ⋙ forget CommRingCat).sections) (n 
   else if n = 1 then ringedSectionLocalization O s else 0
 
 /-- The degree-zero term is the ring sheaf.
-Source: Stacks Project, algebraization.tex, Tag 0996.
-Proof: evaluate the first branch of the definition of the graded terms. -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedLocalizationTwoTermX_zero
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     ringedLocalizationTwoTermX O s 0 =
@@ -62,8 +61,7 @@ theorem ringedLocalizationTwoTermX_zero
   simp [ringedLocalizationTwoTermX]
 
 /-- The degree-one term is the localization sheaf.
-Source: Stacks Project, algebraization.tex, Tag 0996.
-Proof: zero and one are distinct integers, so the second branch gives the localization. -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedLocalizationTwoTermX_one
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     ringedLocalizationTwoTermX O s 1 = ringedSectionLocalization O s := by
@@ -82,9 +80,7 @@ def ringedLocalizationTwoTermD (s : (O.obj ⋙ forget CommRingCat).sections) (n 
   else 0
 
 /-- The localization differential squares to zero.
-Source: Stacks Project, algebraization.tex, Tag 0996.
-Proof: the only possibly nonzero differential has source degree zero and target degree one;
-its two neighbours vanish, so every composite is zero. -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedLocalizationTwoTermD_comp
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℤ) :
     ringedLocalizationTwoTermD O s n ≫ ringedLocalizationTwoTermD O s (n + 1) = 0 := by
@@ -114,9 +110,7 @@ def ringedLocalizationTwoTermAugmentationF
   else 0
 
 /-- The projection to `O[0]` is a chain map.
-Source: Stacks Project, algebraization.tex, Tag 0996.
-Proof: in degree zero the target differential and the degree-one projection are both zero;
-in all other degrees the assertion follows from a zero component or a zero differential. -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedLocalizationTwoTermAugmentationF_comm
     (s : (O.obj ⋙ forget CommRingCat).sections) (n m : ℤ)
     (h : (ComplexShape.up ℤ).Rel n m) :

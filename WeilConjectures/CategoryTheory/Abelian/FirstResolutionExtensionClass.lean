@@ -89,11 +89,7 @@ private lemma firstBoundary_homotopy :
       R.cochainComplex_d 0 1 0 1 rfl rfl]
 
 /-- The cycles inclusion represents the negative of the first resolution extension.
-Source: Stacks Project, Tags 06XR and 06XV.
-Proof: the cone on G into I0 maps to the quotient cycles sheaf and to the shifted
-resolution. The degree-zero identity of I0 gives a homotopy between the quotient
-followed by the cycles inclusion and the negative cone boundary followed by the
-augmentation. Apply the derived localization and invert the two quasi-isomorphisms. -/
+Source: Stacks Project, Tags 06XR and 06XV. -/
 theorem extMk_firstCycles :
     R.extMk (R.cocomplex.iCycles 1) 2 rfl (by simp) = -hS.extClass := by
   let := HasDerivedCategory.standard C

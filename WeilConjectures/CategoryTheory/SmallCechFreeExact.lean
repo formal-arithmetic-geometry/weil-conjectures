@@ -346,19 +346,7 @@ private theorem freeComplex_evaluation_contracting (n : ℕ) (Z : Cᵒᵖ) :
   simp
 
 /-- The free Čech presheaf chains are exact in positive degrees, for any family.
-Source: Stacks Project, Cohomology on Sites, Tags 03AT and 03AU.
-
-Proof: Evaluate the chain complex at Z. Its basis in degree n consists of an
-(n+1)-tuple of family indices together with a map from Z to the corresponding
-product over X. Partition the basis by the composite Z -> X. The product universal
-property identifies each fibre with (n+1)-tuples of lifts of that composite to the
-family. Face maps delete coordinates. If the lift set is empty, every chain group
-of that fibre is zero. Otherwise choose a lift and prepend it: the alternating
-boundary satisfies d h + h d = id in positive degrees. Thus every fibre complex
-is exact, and so is their direct sum. Kernels and cokernels in abelian presheaves
-are evaluated objectwise, so objectwise exactness proves the assertion.
-Only the basis and Hom sets must be v-small; Z ranges over C without being part
-of a product indexing set. The argument uses no covering assumption. -/
+Source: Stacks Project, Cohomology on Sites, Tags 03AT and 03AU. -/
 theorem freeComplex_exactAt (q : ℕ) : (freeComplex X U π).ExactAt (q + 1) := by
   rw [HomologicalComplex.exactAt_iff' _ (q + 2) (q + 1) q (by simp) (by simp)]
   let L := (freeComplex X U π).sc' (q + 2) (q + 1) q

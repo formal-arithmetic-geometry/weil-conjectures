@@ -67,14 +67,7 @@ private lemma whiskerIsoInjectiveFromEnd {C D A : Type*}
 
 /-- Comparisons of fibres over a preorder with a least object can be normalized when
 restriction from that least object is bijective on natural endomorphisms.
-Source: the coherence step of Weil II (1.1.1) d), proved here from pseudofunctor axioms.
-
-Proof: compare all fibres with the least one. Lift the resulting transition comparison
-along the bijection on endomorphisms, after dividing by any supplied comparison; lift
-its inverse too and use injectivity to prove the inverse identities. Identity and
-composition follow after whiskering from the unit and associativity laws of P.
-The prescribed restriction from the least object also makes the family unique,
-by injectivity of whiskering. -/
+Cf. Weil II, (1.1.1) d). -/
 theorem Pseudofunctor.normalizedFiberComparisons_exists {B : Type*} [Preorder B]
     (b₀ : B) (hb : ∀ b : B, b₀ ≤ b)
     (P : Pseudofunctor (LocallyDiscrete B) Cat.{d + 1, d + 2})
@@ -203,8 +196,7 @@ def Pseudofunctor.normalizedFiberComparisons {B : Type*} [Preorder B]
   (Pseudofunctor.normalizedFiberComparisons_exists b₀ hb P J a h).exists.choose
 
 /-- The normalization and coherence of the selected, unique comparison family.
-Source: Weil II (1.1.1) d), pp.146-147.
-Proof: apply the specification of the uniquely determined comparison family. -/
+Source: Weil II (1.1.1) d), pp.146-147. -/
 theorem Pseudofunctor.normalizedFiberComparisons_spec {B : Type*} [Preorder B]
     (b₀ : B) (hb : ∀ b : B, b₀ ≤ b)
     (P : Pseudofunctor (LocallyDiscrete B) Cat.{d + 1, d + 2})

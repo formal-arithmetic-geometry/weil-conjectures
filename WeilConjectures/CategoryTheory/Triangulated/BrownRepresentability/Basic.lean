@@ -38,8 +38,7 @@ which preserves coproducts is a left adjoint
   hence `f = 0`. Surjectivity: given `y ∈ H(Y)`, applying the construction to `X ⊞ Y` shows that
   `X ⟶ X ⊞ Y ⟶ X'` is an isomorphism, which gives a preimage of `y`.
 
-This is the abstract input for Stacks Tag 0F5Y, used in the blueprint node
-`theorem-existence-exceptional-inverse-image--1`.
+This is the abstract input for Stacks Tag 0F5Y.
 -/
 
 @[expose] public section
@@ -275,8 +274,9 @@ lemma isCohomological_comp_preadditiveYoneda (F : C ⥤ D) [F.CommShift ℤ] [F.
   obtain ⟨y, hy⟩ := Triangle.yoneda_exact₂ _ (F.map_distinguished T hT) x hx
   exact ⟨y, hy.symm⟩
 
-/-- **Brown representability, adjoint functor form** (Stacks Tag 0F5Y): if `C` has a family of compact generators, every
-triangulated functor `F : C ⥤ D` which preserves coproducts is a left adjoint. -/
+/-- **Brown representability, adjoint functor form** (Stacks Tag 0F5Y): if `C` has a family of
+compact generators, every triangulated functor `F : C ⥤ D` which preserves coproducts is a left
+adjoint. -/
 theorem isLeftAdjoint_of_compactGenerators [HasCoproducts.{v} C] {ι : Type v} {S : ι → C}
     (hS : CompactGenerators S) (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
     [∀ J : Type v, PreservesColimitsOfShape (Discrete J) F] : F.IsLeftAdjoint := by

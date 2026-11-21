@@ -196,22 +196,7 @@ private theorem exists_presheaf_cover_lift
 /-- A positive Ext class from the sheafified free abelian presheaf is killed after a
 locally surjective map of small-valued presheaves.
 Source: Stacks Project, Derived Categories, Tag 06XU (Yoneda representatives), and
-Cohomology on Sites, Tag 03F9 (local lifting in the vanishing argument).
-
-Proof: apply Ext.exists_epi_comp_eq_zero, whose fraction argument from Tag 06XU
-provides an epimorphism g : G -> Z[P] that kills x. At each object V construct
-E(V) as the subtype of P(V) times G(V) consisting of pairs (p,t) for which g(t)
-is the image of the free generator p in Z[P](V). Restrictions act on both
-coordinates; naturality of the generator map proves that they preserve the
-defining equality. Projection to the first coordinate defines f : E -> P.
-This is locally surjective because g is an epimorphism of abelian sheaves;
-the private image-subsheaf argument proves the required local surjectivity
-without enlarging the value universe. E(V) remains in Type v. Projection to
-the second coordinate extends by FreeAbelianGroup.lift and sheafifyLift to
-l : Z[E] -> G. Checking on free generators gives l followed by g equal to Z[f].
-Ext composition associativity therefore identifies pullback along Z[f] with
-pullback along l of the zero pullback along g. This is zero, including for q=1.
-No representative of a mere existence theorem is used to define public data. -/
+Cohomology on Sites, Tag 03F9 (local lifting in the vanishing argument). -/
 theorem exists_presheaf_ext_local_killing_witness
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}]
@@ -229,10 +214,7 @@ theorem exists_presheaf_ext_local_killing_witness
   refine ⟨E, f, hf, ?_⟩
   rw [← hl, ← Ext.mk₀_comp_mk₀_assoc, hx, Ext.comp_zero]
 
-/-- The local Ext killing conclusion.
-Proof: apply the preceding Yoneda witness theorem, which directly supplies the
-presheaf, locally surjective map, and vanishing equation. No existential proof
-witness or auxiliary True proposition is needed. -/
+/-- The local Ext killing conclusion. -/
 theorem exists_presheaf_ext_local_killing
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}]

@@ -172,13 +172,7 @@ variable [HasDerivedCategory.{w} A]
   [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u} ((R).over U))]
 
 
-/-- The principal image ideal gives exactly the covering-sieve formulation of local completeness. An
-image section locally lifts along the epimorphism onto the image and therefore is locally a
-scalar multiple. Conversely local scalar multiples locally lie in the image subsheaf, and the
-sheaf property of this subobject descends them to an image section. A compatible slice section
-is determined by its terminal value; substitute this value in both formulations. Their
-localization and exact derived-restriction tests then agree. This includes the zero and unit
-ideals.
+/-- The principal image ideal gives exactly the covering-sieve formulation of local completeness.
 
 Source: Stacks 0999, 099B and 03DA. -/
 theorem principalLocallyComplete_iff

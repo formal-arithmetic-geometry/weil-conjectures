@@ -23,9 +23,7 @@ variable {C₀ D₀ C D : Type*} [Category* C₀] [Category* D₀] [Category* C]
   (A₀ : F₀ ⊣ J₀) (A : F ⊣ J) (QX : C₀ ⥤ C) (QY : D₀ ⥤ D)
   (a : J₀ ⋙ QX ≅ QY ⋙ J) (b : F₀ ⋙ QY ≅ QX ⋙ F)
 
-/-- On integral arrows the normalized unit determines the entire Hom comparison.
-Proof: express the transpose using the unit. Substitute its normalization, cancel
-b against its inverse, use naturality of a, and combine QX's two maps. -/
+/-- On integral arrows the normalized unit determines the entire Hom comparison. -/
 private theorem homEquiv_integral_of_unit
     (hu : ∀ M₀, A.unit.app (QX.obj M₀) =
       QX.map (A₀.unit.app M₀) ≫ a.hom.app _ ≫ J.map (b.hom.app M₀))
@@ -43,17 +41,12 @@ section Linear
 variable {R : Type*} [Semiring R] [Preadditive C] [Preadditive D]
   [Linear R C] [Linear R D] [J.Linear R]
 
-/-- Transposition is linear when the right adjoint is linear.
-Proof: transposition is unit followed by J applied to the arrow, so linearity of
-J and bilinearity of composition give the equation. -/
+/-- Transposition is linear when the right adjoint is linear. -/
 private theorem homEquiv_smul_of_right_linear {M : C} {K : D} (h : F.obj M ⟶ K) (r : R) :
     A.homEquiv M K (r • h) = r • A.homEquiv M K h := by
   simp only [A.homEquiv_unit, Functor.map_smul, Linear.comp_smul]
 
-/-- The pure-tensor formula is valid for every pair of model identifications.
-Proof: naturality removes the model isomorphisms; move the scalar across b by
-bilinearity, use linearity of transposition and the integral formula, then move
-the scalar past a. Reinsert the two model isomorphisms. -/
+/-- The pure-tensor formula is valid for every pair of model identifications. -/
 theorem homEquiv_model_of_unit
     (hu : ∀ M₀, A.unit.app (QX.obj M₀) =
       QX.map (A₀.unit.app M₀) ≫ a.hom.app _ ≫ J.map (b.hom.app M₀))

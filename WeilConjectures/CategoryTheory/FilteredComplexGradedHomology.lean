@@ -43,20 +43,7 @@ private theorem homology_quotient (S : ShortComplex C) :
 
 /-- Homology of any page-zero complex identified with the associated graded complex.
 Source: Stacks Project, Homology, Tag 012K, displayed Z and B formulas and the
-page-one assertion of.
-
-Proof. In degree n = p+q the differential of gr^p K is induced from K.d.
-Its kernel consists of the classes represented in F^p K^n whose differential lies
-in F^(p+1) K^(n+1). Its image from degree n-1 consists of classes represented by
-d(F^p K^(n-1)). The quotient projection from F^p K has kernel F^(p+1) K, so these
-subobjects of gr^p K are precisely complexCycles p n 1 and complexBoundaries p n 1,
-respectively, including the sums with F^(p+1) in their definitions. Thus d squared
-= 0 gives the required containment, and homology, the cokernel of the inclusion
-of image into kernel, is the stated quotient. The isomorphisms e and their
-compatibility with outgoing differentials identify the short complex at (p,q)
-with that of gr^p K at n, also for its incoming differential at (p,q-1).
-The induced homology isomorphism gives the assertion for P.
--/
+page-one assertion of. -/
 theorem filteredComplex_graded_homology
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K)
     (P : HomologicalComplex C (ComplexShape.up' (⟨0, 1⟩ : ℤ × ℤ)))

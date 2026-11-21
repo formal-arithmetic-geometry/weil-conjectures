@@ -52,10 +52,7 @@ def towerBaseChange (σ : R₀' ⋙ Ψ ≅ M₀ ⋙ R₀) (β : Ψ ⋙ E₀ ≅ 
   σ.app (E₀'.obj K) ≪≫ R₀.mapIso (β.app K).symm
 
 include adj₀ adj₁ adj₀' adj₁' in
-/-- Base change intertwines the transitions.
-Proof: transpose the reduction maps along `E₁ ⊣ R₁`. The unit compatibilities of the base
-change isomorphisms and the coherence of the comparison isomorphisms identify the two
-adjoints; whiskering by `R₁` and the comparison gives the transitions. -/
+/-- Base change intertwines the transitions. -/
 theorem towerTransition_baseChange
     (hβ₀ : ∀ K : A', Ψ.map (adj₀'.unit.app K) ≫ σ₀.hom.app (E₀'.obj K) =
       adj₀.unit.app (Ψ.obj K) ≫ R₀.map (β₀.hom.app K))

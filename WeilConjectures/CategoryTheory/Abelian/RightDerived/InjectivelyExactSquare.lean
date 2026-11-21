@@ -119,11 +119,7 @@ noncomputable def resolutionSequence (F : C) : ShortComplex (CochainComplex AddC
         S.diagonal_difference)
 
 /-- The resolution sequence is short exact, because every resolution term is injective.
-Source: Stacks, Cohomology, proof of Lemma 01EB.
-Proof: Evaluate in each degree. The maps are exactly the diagonal and the difference
-in the three hypotheses on S; all resolution terms are injective. Injectivity makes
-the first morphism mono, exactness is kernel=image, and surjectivity makes the second
-morphism epi. Degreewise short exactness is short exactness of complexes. -/
+Source: Stacks, Cohomology, proof of Lemma 01EB. -/
 theorem resolutionSequence_shortExact (F : C) : (S.resolutionSequence F).ShortExact := by
   rw [HomologicalComplex.shortExact_iff_degreewise_shortExact]
   intro n

@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.Right.RightDerivedExactRestrictionNormaliz
 
 /-! # Transport a commuting cube through equivalences
 
-Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites, Tag 0D6E.
+## References
+
+* Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites, Tag 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -50,7 +52,8 @@ variable {A B C D : Type (u + 1)}
   [F.Additive] [G.Additive] [eU.functor.Additive] [eV.functor.Additive]
   (c : F ⋙ eV.inverse ≅ eU.inverse ⋙ G)
 /-- Right derive an inverse-equivalence direct-image comparison.
-Source: Stacks, Cohomology on Sites, Tag 0D6E. -/
+
+Stacks Project, Tag 0D6E. -/
 def inverseDerivedPush :
     F.rightDerivedFunctor ⋙ eV.inverse.mapDerivedCategory ≅
       eU.inverse.mapDerivedCategory ⋙ G.rightDerivedFunctor :=
@@ -60,9 +63,7 @@ def inverseDerivedPush :
         Functor.isoWhiskerRight eU.inverse.rightDerivedFunctorIsoMapDerivedCategory
           G.rightDerivedFunctor
 /-- This comparison has the canonical full cochain-unit normalization.
-Source: Stacks, Cohomology on Sites, Tag 0D6E.
-Proof: specialize the proved exact-restriction normalization to the two inverse
-equivalences. Its composite is exactly inverseDerivedPush. -/
+Source: Stacks, Cohomology on Sites, Tag 0D6E. -/
 theorem inverseDerivedPush_normalized :
     IndependentDerivedCube.unitNormalized F G eU.inverse eV.inverse
       eU.inverse.mapDerivedCategory eV.inverse.mapDerivedCategory
@@ -103,11 +104,7 @@ private theorem forwardOfInverse_unit
   erw [Category.comp_id]
 
 /-- An inverse-presentation cube gives the corresponding forward-presentation cube.
-Source: Stacks, Modules on Sites, Tags 03D6 and 03D7.
-Proof: apply the faithful inverse functor and postcompose with the inverse cube's
-isomorphisms. Naturality moves the four comparison maps through the cube. Their unit
-equations cancel each equivalence unit; canceling the remaining isomorphisms proves
-the displayed forward equation. No derived or scalar-extension hypothesis is needed. -/
+Source: Stacks, Modules on Sites, Tags 03D6 and 03D7. -/
 theorem forwardCube
     {A0 A1 B0 B1 C0 C1 D0 D1 : Type*}
     [Category A0] [Category A1] [Category B0] [Category B1]

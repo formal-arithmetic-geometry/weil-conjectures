@@ -162,15 +162,7 @@ private theorem freeHomEquiv_map {Y Y' : FormalCoproduct.{v} (Over X)}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The comparison takes the alternating projection boundary to the Čech differential.
-Source: Stacks Project, Cohomology on Sites, Tags 03AS and 03AT.
-
-Proof: The free representable adjunction sends a natural transformation to its
-value on the generator given by the identity of the represented product. For each
-face, naturality identifies precomposition by the projection with restriction of
-that value along the projection. The product universal property identifies the
-family of these values with the categorical product used in cechComplexFunctor.
-Both differentials are the sum of these face maps with coefficient (-1)^j,
-so the additive degreewise comparison intertwines their differentials. -/
+Source: Stacks Project, Cohomology on Sites, Tags 03AS and 03AT. -/
 theorem cochainEquiv_boundary (n : ℕ) (a : (freeComplex X U π).X n ⟶ P) :
     cochainEquiv X U π P (n + 1) ((freeComplex X U π).d (n + 1) n ≫ a) =
       (((cechComplexFunctor (fun i ↦ Over.mk (π i))).obj

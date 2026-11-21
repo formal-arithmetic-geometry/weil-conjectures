@@ -910,30 +910,7 @@ exterior coordinate, their coaugmentations, and their normalized total derived l
 The index m : ℕ represents exponent m+1, hence includes exactly the positive powers.
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E; sites-cohomology.tex, Tags 0A07
-and 0941; more-algebra.tex, Tag 0913.
-
-Proof:
-1. Use the strict ordered-coordinate comparison and its coaugmentation equation.
-2. The proved single-site Cech/Koszul comparison supplies both presentations and their
-   normalized unit comparisons. Conjugating the localization of the strict comparison
-   gives hD with its normalization.
-3. Flat extension is an additive exact left adjoint. Its tower adjunction shows that
-   restriction preserves K-injective towers. Ordinary restriction preserves limits.
-   The generic normalized right-derived limit comparison gives alpha. Right-derived
-   descent of each ordinary projection supplies pB and pR.
-4. Define gamma as alpha on the tensor tower followed by inverse limit of hD.
-   Lift the ordinary Koszul unit to a natural transformation on the derived category;
-   its value is the specified representative formula D.unit. The strict unit equation,
-   the two normalization equations and comparison naturality give the derived unit
-   equation on complexes, hence on the localization.
-5. Right-derived uniqueness, evaluated on the ordinary limit projection identity,
-   proves the alpha evaluation square. Naturality with hD gives the gamma square.
-6. For the empty list use the normalized Cech/Koszul comparison. The Cech
-   complex is the ring in degree zero with identity augmentation, so its completion
-   unit is the invertible derived Hom-unit. Thus both strict presentation units are
-   invertible. Their inverses give eB and eR, and cancellation in the unit equation
-   gives the last normalization.
--/
+and 0941; more-algebra.tex, Tag 0913. -/
 theorem flatScalarKoszulTowerComparison (φ : R ⟶ B)
     (_hflat : PreservesFiniteLimits (SheafOfModules.RingedTensor.tensorFunctor φ) ∧
       PreservesFiniteColimits (SheafOfModules.RingedTensor.tensorFunctor φ))

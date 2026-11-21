@@ -262,19 +262,7 @@ private theorem exactSquare_comp_forward
 
 /-- Exact derived square comparisons respect a specified composition identity as natural
 isomorphisms, before taking components.
-Source: the localization universal property, Stacks Project, Tags 05S7 and 014F.
-
-Proof: First invert the ordinary comparison square by cancelling its three isomorphisms.
-Apply its resulting component equation degreewise to cochain complexes. Form the two
-natural transformations after localization and use localization extensionality for Q.
-Postcompose both sides with the three invertible localization factors for F₀₁, F₁₂ and U₂.
-Naturality and the square/compositor factorization identities reduce both sides to Q
-applied to the given degreewise equation, preceded by the same factors. Cancel the
-factors and use localization extensionality. Invert the derived square by the same
-cancellation, and apply natural-transformation extensionality to obtain the displayed
-identity of natural isomorphisms. Keeping this equality before taking components avoids
-unfolding concrete localization morphisms when specializing to chosen category models.
-No boundedness, nonzero-object, resolution, or preservation-of-injectives hypothesis is used. -/
+Source: Stacks Project, Tags 05S7 and 014F. -/
 theorem mapDerivedCategorySquareIso_comp
     (q₀₁ : F₀₁ ⋙ U₁ ≅ U₀ ⋙ G₀₁)
     (q₁₂ : F₁₂ ⋙ U₂ ≅ U₁ ⋙ G₁₂)

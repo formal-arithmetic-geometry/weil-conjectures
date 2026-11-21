@@ -33,21 +33,7 @@ private theorem lift_to_complex
 /-- A commuting derived square admits representatives commuting up to chain homotopy.
 
 Source: Stacks Project, Derived Categories, Tag 05RR (localization of the homotopy
-category at quasi-isomorphisms).
-
-Proof: Choose complexes for X,Y,X',Y'. Fix the complex for the sink Y'. Use right
-fractions to replace the representatives of Y and X' so that b and f' are chain
-maps into this fixed sink. Lift f into the new Y, and a into the new X', by right
-fractions. Take a common right denominator of these two roofs out of X. Both
-composites then have chain representatives from this common source to the fixed
-sink. The equality f b = a f' in the localization gives a further right
-denominator after which the two composites agree in the homotopy category.
-Choose a chain representative of this denominator and precompose both arrows
-out of X. The quotient functor's equality criterion supplies a chain homotopy
-between the composites. Compose the denominator isomorphisms with the original
-object comparisons to get eX,eY,eX',eY'. Each of the four map equations follows
-from its roof factorization. This argument applies without bounds or enough
-injectives, and includes zero objects. -/
+category at quasi-isomorphisms). -/
 private theorem derived_homotopy_square_lift
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     {X Y X' Y' : DerivedCategory C}
@@ -126,20 +112,7 @@ private theorem derived_homotopy_square_lift
 representatives, allowing all four representatives to vary.
 
 Source: Stacks Project, Derived Categories, Tag 05RR (fractions) and Tag 014D,
-Lemmas 13.9.5 and 13.9.6 (homotopy adjustment and cylinder factorization).
-
-Proof: Choose complexes for the four objects. Express the four derived maps by
-roofs in the homotopy category. Common refinements first give representatives of
-the two horizontal and two vertical arrows, and then witness the equality of the
-composites. Lift the resulting maps to chain maps and the equality to a homotopy.
-Replace its top-right complex L by L direct-sum Cone(id K). Replace the top
-arrow g by the pair (g,inr(id K)). The homotopy gives a map z from Cone(id K)
-to L' whose restriction to K is s g' - g r; take the right arrow to be (r,z).
-The resulting square commutes strictly by addition. Cone(id K) is contractible,
-so the projection onto L becomes an isomorphism in the derived category, and
-z becomes zero. Thus the four localized maps agree with the original square.
-No boundedness
-or injective resolutions are required, and zero complexes cause no exception. -/
+Lemmas 13.9.5 and 13.9.6 (homotopy adjustment and cylinder factorization). -/
 theorem derived_commutative_square_lift
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     {X Y X' Y' : DerivedCategory C}

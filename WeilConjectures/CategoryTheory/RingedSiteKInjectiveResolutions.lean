@@ -41,18 +41,7 @@ with the coproduct of the localized rank-one extensions as a generator. Every
 integer-indexed cochain complex has a functorial K-injective resolution whose
 terms are injective.
 
-Source: Stacks Project, Section 07A5 and Theorem 079P.
-
-Proof:
-1. Apply `lem-pur-ringed-site-grothendieck-abelian` to obtain the Grothendieck
-   property and the stated generator: sheafify the extension-by-zero presheaf
-   of the unit module on each localized site and take their coproduct.
-2. Use the source-library `kInjectiveResolutionFunctor` and `toKInjectiveResolution`
-   on this Grothendieck abelian category. `monoQuasiIso_toKInjectiveResolution_app`
-   supplies the quasi-isomorphisms, and the source instances give K-injectivity
-   and injective terms. These realize `lem-pur-kinjective-degreewise-existence`
-   without its separate statement module. Naturality of the transformation and
-   the functor's action on chain maps give precisely the asserted functoriality. -/
+Source: Stacks Project, Section 07A5 and Theorem 079P. -/
 theorem grothendieckAbelian_and_functorial_kInjective_resolutions
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u}) :

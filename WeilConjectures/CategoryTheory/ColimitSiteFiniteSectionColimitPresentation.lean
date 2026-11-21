@@ -20,7 +20,9 @@ import WeilConjectures.CategoryTheory.ColimitSiteFiniteSectionComparisonBijectiv
 
 /-! # A section-colimit presentation with finite covering axioms
 
-Source: Stacks Project, Sites, Tag 0A35, the section formula and adjunction proof; Modules on Sites, Tag 03CO, abelian extension.
+## References
+
+* Stacks Project, Sites, Tag 0A35; Modules on Sites, Tag 03CO.
 -/
 
 @[expose] public section
@@ -39,44 +41,7 @@ private theorem arrow_precomp
 
 /-- Source: Stacks Project, Sites, Tag 0A35, equation-compute-pullback-to-limit
 and the presentation, sheaf-condition and adjunction paragraphs; abelian extension
-by Modules on Sites, Tag 03CO.
-
-Proof: For each arrow a : j to k take the group of sections of a inverse image
-of H at F(a)(X). The transition for a refinement b is the unit for F(b), followed
-by the canonical comparison between iterated and composite inverse images and
-transport along F.map_comp. The comparison is characterized by its adjunction
-unit equation; uniqueness of adjuncts proves identity, composition and naturality
-of the source units. These groups and maps give D and e, with the displayed
-object isomorphisms alpha.
-
-For an arbitrary limit object Y use the category of its stage presentations
-above j. Lift finitely many objects and arrows using the supplied set colimits;
-filteredness gives a common stage and eventual equality imposes endpoint and
-composition equations there. This makes the presentation category filtered,
-and the subcategory of refinements of any fixed presentation final. Take its
-filtered abelian section colimit. Lift each restriction arrow to a common stage;
-eventual equality and naturality make the restriction independent of the lift,
-and give the presheaf identity and composition laws.
-
-Each Q cover is the transported image of a finite stage cover by hQ and hfinite.
-Covering pullbacks are preserved by hpullback and hVpullback. Lift the finitely
-many matching-family objects and equations to a common stage. The sheaf equalizer
-is then the filtered colimit of the stage sheaf equalizers. Filtered abelian
-colimits commute with finite limits, including the empty product, so the
-presheaf is a sheaf. Only finite composition and finite base change are needed.
-
-Maps from this sheaf to T are compatible stage maps. Transpose them by the
-stage adjunctions: the identity presentation gives a map from H to restriction
-of T along V(j). Conversely that map supplies all the stage adjuncts, and the
-colimit universal property assembles them. Adjunct uniqueness makes these
-assignments mutually inverse and natural. Uniqueness of left adjoints identifies
-this sheaf with the canonical V(j) inverse image, preserving the units.
-At V(j)(X), presentations obtained by carrying X forward are final, by the
-common-refinement and eventual-equality argument. Their colimit is therefore
-the section group at V(j)(X). This supplies c and beta, and the unit comparison
-is precisely the last displayed equation for every source section. This is a
-section-colimit construction, with no vanishing assumption or detection claim.
--/
+by Modules on Sites, Tag 03CO. -/
 theorem colimit_site_finite_section_colimit_presentation
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

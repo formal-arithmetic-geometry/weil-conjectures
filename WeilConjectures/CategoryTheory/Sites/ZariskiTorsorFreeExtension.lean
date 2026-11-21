@@ -233,26 +233,7 @@ private lemma projection_exact :
 /-- The free abelian relation presentation of a torsor is a short exact extension.
 
 Source: Stacks Project, Lemma 02FQ, first construction
-(https://stacks.math.columbia.edu/tag/02FQ).
-Proof: The augmentation sends every free generator to one, and annihilates each
-pair difference. Push it out against the pair-displacement map to define the degree
-projection. Given an integer `n`, a local torsor section `t` gives the preimage
-`n[t]`, so augmentation and projection are epimorphisms after sheafification.
-The displacement map kills the kernel of pair differences, by
-`Torsor.kernel_ι_pairsDiff_comp_pairsSub`. Sheafification preserves this kernel.
-In an abelian pushout, the induced map from the kernel of the top arrow to the
-kernel of the bottom arrow is epi (`Abelian.epi_kernel_map_of_isPushout`). Its
-composite with the bottom kernel inclusion is zero, hence that inclusion is zero
-and the coefficient inclusion is mono.
-For exactness, a map out of the free sheaf killing pair differences has equal values
-on every pair of torsor sections, so its values are invariant under the torsor action.
-`Torsor.exists_section_of_invariant` glues them to a global section of the codomain.
-Integer multiples of its restrictions define a map from the constant integer sheaf.
-Checking on free generators proves the factorization through augmentation. The
-pushout universal property therefore makes projection a cokernel of inclusion;
-uniqueness follows from projection being epi. A monomorphism followed by its
-cokernel is short exact. The construction uses only sheafification, free groups,
-and an abelian pushout in universe `u`, including for empty `X` and zero `G`. -/
+(https://stacks.math.columbia.edu/tag/02FQ). -/
 theorem shortExact :
     (ShortComplex.mk (inclusion X T) (projection X T) (inclusion_projection X T)).ShortExact := by
   have := projection_epi X T

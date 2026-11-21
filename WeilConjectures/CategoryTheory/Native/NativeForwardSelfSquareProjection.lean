@@ -373,12 +373,7 @@ attribute [local irreducible] upperStar lowerStar
   CategoryTheory.Functor.rightDerivedFunctor
 
 /-- The forward projection square for the canonical pullback square and its mate.
-Source: Stacks 07A7 and 0D6D.
-
-Proof: the canonical pullback composition comparison preserves the derived tensor
-comparison. Apply the adjunction mate square with both tensor variables reversed.
-This uses only the tensor comparison and the unit/counit triangle identities; no
-projection or exchange map is assumed invertible. -/
+Source: Stacks 07A7 and 0D6D. -/
 theorem native_forward_self_square_projection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y W : Scheme.{u}}

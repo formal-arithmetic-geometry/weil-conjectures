@@ -49,13 +49,7 @@ def IsConstantZModSheafModuleStructure (N : ℕ) (F : Sheaf J AddCommGrpCat.{w})
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A sheaf killed by `N` has exactly one normalized constant `Z/N` module structure.
-Source: Stacks Project, Tag 03CY.
-Proof: the annihilation hypothesis makes each group a `ZMod N`-module, with integer
-representatives acting by integer multiples. Additive restriction maps are linear over this
-constant presheaf. Lemma 03CY uniquely extends this action to the sheafification of that
-presheaf of rings; the abelian sheaf is already a sheaf, so its sheafification is itself.
-The resulting action commutes with restrictions. The uniqueness part of 03CY proves
-uniqueness of the family of module structures. -/
+Source: Stacks Project, Tag 03CY. -/
 theorem existsUnique_constantZModSheafModuleStructure (N : ℕ) (hN : 0 < N)
     (F : Sheaf J AddCommGrpCat.{w}) (hF : ∀ (U : Cᵒᵖ) (x : F.obj.obj U), N • x = 0) :
     ∃! M : ∀ U : Cᵒᵖ, Module ((constantZModRingSheaf J N).obj.obj U) (F.obj.obj U),
@@ -131,9 +125,7 @@ noncomputable def torsionSheafModuleStructure (N : ℕ) (hN : 0 < N)
   (existsUnique_constantZModSheafModuleStructure J N hN F hF).exists.choose
 
 /-- The chosen unique action satisfies normalization and semilinearity.
-Source: Stacks Project, Tag 03CY.
-Proof: apply the specification of the unique witness in
-`existsUnique_constantZModSheafModuleStructure`, which constructs the action by 03CY. -/
+Source: Stacks Project, Tag 03CY. -/
 theorem torsionSheafModuleStructure_spec (N : ℕ) (hN : 0 < N)
     (F : Sheaf J AddCommGrpCat.{w}) (hF : ∀ (U : Cᵒᵖ) (x : F.obj.obj U), N • x = 0) :
     IsConstantZModSheafModuleStructure J N F (torsionSheafModuleStructure J N hN F hF) := by
@@ -149,10 +141,7 @@ noncomputable def torsionSheafModule (N : ℕ) (hN : 0 < N)
     F.property⟩
 
 /-- Conversely, every module sheaf over the constant `Z/N` ring is killed by `N`.
-Source: Stacks Project, Tag 03CY.
-Proof: the image of the integer `N` in the constant presheaf `ZMod N` is zero.
-The sheafified image is still zero. Its action is multiplication by `N`, so the
-module axioms give `N • x = 0` on every section. -/
+Source: Stacks Project, Tag 03CY. -/
 theorem constantZModModuleSheaf_nsmul (N : ℕ) (hN : 0 < N)
     (F : ringedSiteModules (constantZModRingSheaf J N))
     (U : Cᵒᵖ) (x : F.val.obj U) : N • x = 0 := by
@@ -223,13 +212,7 @@ private theorem normalized_automorphism_linear (N : ℕ) (hN : 0 < N)
 set_option backward.isDefEq.respectTransparency false in
 /-- Every additive sheaf morphism between `N`-torsion sheaves is linear for their canonical
 constant `Z/N` module structures.
-Source: Stacks Project, Tag 03CY.
-Proof: first, transport a normalized action by an additive sheaf automorphism. The
-transported action is normalized and commutes with restrictions, so uniqueness makes it
-the original action; hence the automorphism is linear. On the direct sum of the two given
-module sheaves, apply this to the shear `(x, y) ↦ (x, y + φ(x))`, whose inverse subtracts
-`φ(x)`. Composing this linear shear with the first inclusion and second projection gives
-exactly `φ`, which is therefore linear. -/
+Source: Stacks Project, Tag 03CY. -/
 theorem torsionSheaf_hom_linear (N : ℕ) (hN : 0 < N)
     (F G : Sheaf J AddCommGrpCat.{w})
     (hF : ∀ (U : Cᵒᵖ) (x : F.obj.obj U), N • x = 0)

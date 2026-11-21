@@ -32,18 +32,7 @@ private theorem arrow_comp_congr {C : Type z} [Category.{z} C]
   subst d
   rfl
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph; Categories, Section Tag 04AX.
-
-Proof: Enumerate the finitely many objects of D and the finitely many
-arrows (the dependent sum over pairs of objects). Apply finite-list lifting to
-the images under d of these enumerations. The endpoint clauses identify the
-lifted arrows' endpoints with the lifted objects; transport each arrow along
-these equalities to define the map of the lifted functor. The identity and
-composition clauses prove its functor laws after these transports. Equality
-of its composite with V j and d follows by functor extensionality: the object
-images are the specified object images, and the arrow-image clause gives the
-map equality with the corresponding endpoint transports. The argument includes
-the empty category, where the lifted functor is empty. -/
+/-- Stacks Project, Tags 09YL and 04AX. -/
 theorem filteredColimit_category_finite_functor_lift
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

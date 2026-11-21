@@ -208,19 +208,7 @@ private theorem exact_products (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The derived direct image of the canonical Postnikov cone is a homotopy limit cone,
-and cohomology on the target preserves countable products.
-
-Proof: Transfer exact countable products across the internal/sectionwise module
- equivalence. The general derived-product theorem then makes cohomology preserve them.
-Complete 1-T on the product of the lower truncations to a distinguished triangle,
-with first object L. The canonical projection cone factors through L by exactness.
-In each cohomological degree the truncation projections and transitions are eventually
-isomorphisms. The eventual-tower Milnor lemma therefore shows that the factor K -> L
-is an isomorphism on every cohomology object, hence an isomorphism. Transport the
-homotopy-limit cone along its inverse, keeping all canonical projections. Finally the
-derived direct image is triangulated and a right adjoint, so preserves the product
-and the entire homotopy-limit cone. No properness or boundedness is used.
--/
+and cohomology on the target preserves countable products. -/
 theorem moduleObjectDerivedPushforward_postnikov_roos
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (p : X ⟶ Y)

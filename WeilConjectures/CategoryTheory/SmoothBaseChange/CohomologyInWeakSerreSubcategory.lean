@@ -26,8 +26,7 @@ namespace CategoryTheory
 cohomology lies in `P`, together with their bounded-below and bounded intersections,
 form full triangulated subcategories.
 
-Source: Stacks Project, Tag 06UQ, with the
-weak Serre hypotheses expanded by Homology, Tag 0754.
+Source: Stacks Project, Tags 06UQ and 0754.
 -/
 lemma cohomology_in_weak_serre_subcategory
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]

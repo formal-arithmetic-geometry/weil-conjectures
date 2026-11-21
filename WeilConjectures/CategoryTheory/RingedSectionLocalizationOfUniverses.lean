@@ -43,9 +43,7 @@ abbrev ringedSectionLocalizationCarrierOfUniverses
 
 set_option linter.unusedSectionVars false in
 /-- The image of a global section is invertible after localization on the target object.
-Source: Stacks Project, algebraization.tex, Tag 0996.
-Proof: naturality identifies the restricted section with the target section, whose image
-in its localization is a unit by `IsLocalization.Away.algebraMap_isUnit`. -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedSectionLocalization_isUnitOfUniverses
     (s : (O.obj ⋙ forget CommRingCat).sections) {X Y : Cᵒᵖ} (a : X ⟶ Y) :
     IsUnit ((algebraMap (O.obj.obj Y) (ringedSectionLocalizationCarrierOfUniverses O s Y))
@@ -67,9 +65,7 @@ def ringedSectionLocalizationMapOfUniverses
     (ringedSectionLocalization_isUnitOfUniverses O s a)
 
 /-- Localization restriction is semilinear over restriction of coefficients.
-Source: Stacks Project, algebraization.tex, Tag 0996.
-Proof: the localization lift extends the restriction ring homomorphism; apply
-multiplicativity to the scalar action defined by the algebra map. -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedSectionLocalizationMap_smulOfUniverses
     (s : (O.obj ⋙ forget CommRingCat).sections) {X Y : Cᵒᵖ} (a : X ⟶ Y)
     (r : O.obj.obj X) (x : ringedSectionLocalizationCarrierOfUniverses O s X) :
@@ -94,8 +90,7 @@ def ringedSectionLocalizationLinearMapOfUniverses
       map_smul' := ringedSectionLocalizationMap_smulOfUniverses O s a }
 
 /-- Identity compatibility of sectionwise localization restriction.
-Source: Stacks Project, algebraization.tex, Tag 0996.
-Proof: both sides extend the identity ring map, so localization uniqueness identifies them. -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedSectionLocalizationLinearMap_idOfUniverses
     (s : (O.obj ⋙ forget CommRingCat).sections) (X : Cᵒᵖ) :
     ringedSectionLocalizationLinearMapOfUniverses O s (𝟙 X) =
@@ -112,9 +107,7 @@ theorem ringedSectionLocalizationLinearMap_idOfUniverses
   exact DFunLike.congr_fun h x
 
 /-- Composition compatibility of sectionwise localization restriction.
-Source: Stacks Project, algebraization.tex, Tag 0996.
-Proof: both maps extend the composite restriction on the coefficient ring; uniqueness
-of localization lifts identifies them, including the restriction-of-scalars comparison. -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedSectionLocalizationLinearMap_compOfUniverses
     (s : (O.obj ⋙ forget CommRingCat).sections) {X Y Z : Cᵒᵖ}
     (a : X ⟶ Y) (b : Y ⟶ Z) :

@@ -207,15 +207,7 @@ private lemma extRightDerivedHomObjIso_naturality (X : A) {Y Z : A} (f : Y ⟶ Z
   rfl
 
 /-- Ext in the second variable is the right-derived additive Hom functor.
-Source: Stacks Project, Tag 06XR, Lemma 13.27.2 (injective-resolution computation).
-
-Proof: Choose the standard injective resolution of each object. Mathlib identifies Ext
-with cohomology classes in its Hom complex. The from-single additive equivalence gives
-an isomorphism from that Hom complex to the complex obtained by applying additive Hom.
-Taking homology and the right-derived computation gives the component isomorphisms.
-For a morphism, lift it to a comparison map of injective resolutions. The Ext computation,
-the Hom-complex isomorphism, and the derived computation all commute with that map,
-so the component isomorphisms form a natural isomorphism. -/
+Source: Stacks Project, Tag 06XR, Lemma 13.27.2 (injective-resolution computation). -/
 theorem nonempty_extFunctor_iso_rightDerivedHom (X : A) (q : ℕ) :
     Nonempty ((extFunctor q).obj (op X) ≅
       (preadditiveCoyoneda.obj (op X)).rightDerived q) := by

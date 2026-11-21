@@ -334,14 +334,7 @@ attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Applying L to the actual semilinear extension gives a semilinear map over Lb,
 including additivity and zero compatibility. The equation hb merely identifies Lb
 in the chosen ring presentations; it does not assume it invertible.
-Source: Stacks 08TQ and 04BL, operation transport and generator extension.
-
-Proof: node step 1 constructs change by scalar restriction and sheafification; it is
-additive and satisfies c(ax)=b(a)c(x). Step 2 writes these laws as operation diagrams
-on universal generalized sections. Apply L to the diagrams. The graph laws in F and
-F' transport addition, zero, and scalar multiplication. Naturality of the finite-product
-comparisons, and hb, identify the transported coefficient map with bi. The three
-resulting sectionwise equations are precisely those below. No adjoint is used. -/
+Source: Stacks 08TQ and 04BL, operation transport and generator extension. -/
 theorem normalizedFreeModule_change_semilinear
     (L : Sheaf J (Type w) ⥤ Sheaf K (Type w)) [PreservesFiniteLimits L]
     {B B' : Sheaf J CommRingCat.{w}} {BI BI' : Sheaf K CommRingCat.{w}}
@@ -374,16 +367,7 @@ theorem normalizedFreeModule_change_semilinear
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Simultaneous naturality for arbitrary coefficient maps and generator maps.
-Source: Stacks 08TQ and 04BL, normalized free identifications.
-
-Proof: node step 1 identifies change with the sheafified semilinear extension and proves
-its generator equation, using lem-trf-free-module-sheaf-universal-property. Step 2
-transports its semilinearity by the operation graphs. In step 3 restrict scalars of the
-target (BI')[LE'] along bi. Both displayed composites are then BI-linear. Their
-restrictions along Li are i followed by Lu: this follows from the generator equation,
-functoriality of L, and the two normalization hypotheses. The assumed representing
-bijection for F,E is injective at that scalar-restricted target, so the composites agree.
-Faithfulness of the underlying-sheaf description gives equality as semilinear maps. -/
+Source: Stacks 08TQ and 04BL, normalized free identifications. -/
 theorem normalizedFreeModule_naturality
     (L : Sheaf J (Type w) ⥤ Sheaf K (Type w)) [PreservesFiniteLimits L]
     {B B' : Sheaf J CommRingCat.{w}} {BI BI' : Sheaf K CommRingCat.{w}}
@@ -447,11 +431,7 @@ theorem normalizedFreeModule_naturality
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Generator compatibility after an arbitrary map out of LE, without requiring that map
-be invertible. Source: Stacks 08TQ and 04BL, generator extensions.
-
-Proof: node step 4 composes normalization with the generator equation for c(1,v).
-That equation follows by evaluating the sectionwise extension on [e] and factoring
-through module sheafification (step 1). Associativity yields the displayed equality. -/
+be invertible. Source: Stacks 08TQ and 04BL, generator extensions. -/
 theorem normalizedFreeModule_generators
     (L : Sheaf J (Type w) ⥤ Sheaf K (Type w)) [PreservesFiniteLimits L]
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
@@ -466,16 +446,7 @@ theorem normalizedFreeModule_generators
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Finite-product generator normalization, including the empty product, and every
-projection square. Source: Stacks 08TQ, free module on the product of generator sheaves.
-
-Proof: in node step 5 apply step 4 with v the canonical finite-product comparison.
-Finite-limit preservation makes this comparison an isomorphism, even for the empty
-index type. For each i, its composite with the i-th target projection is L of the
-source projection. Both maps in the projection square restrict along Li to the same
-generator map followed by L of that projection, by step 1 and normalization. Injectivity
-of hL at the target free module identifies them. For the empty index type there are
-no projection equations, and the generator equation still concerns the terminal sheaf;
-the free module on that terminal sheaf is not confused with the zero module. -/
+projection square. Source: Stacks 08TQ, free module on the product of generator sheaves. -/
 theorem normalizedFreeModule_products
     (L : Sheaf J (Type w) ⥤ Sheaf K (Type w)) [PreservesFiniteLimits L]
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
@@ -509,11 +480,7 @@ theorem normalizedFreeModule_products
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- For identity transport with the original operations, a normalized comparison is
-literally the identity isomorphism. Source: Stacks 04BL and 08TQ, normalized uniqueness.
-
-Proof: node step 6 applies the free-sheaf restriction bijection of
-lem-trf-free-module-sheaf-universal-property. The comparison and the identity both
-restrict to i by normalization, so their homs are equal; hence the isomorphisms agree. -/
+literally the identity isomorphism. Source: Stacks 04BL and 08TQ, normalized uniqueness. -/
 theorem normalizedFreeModule_identity
     (B : Sheaf J CommRingCat.{w}) (E : Sheaf J (Type w))
     (p : (free B).obj E ≅ (free B).obj E)
@@ -618,15 +585,7 @@ private def compositePresentation
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Coherence for composite transported operations and their underlying identifications.
-Source: Stacks 08TQ and 04BL, composite normalized free identifications.
-
-Proof: in node step 7, step 2 makes K of the first linear comparison linear over KLB.
-The ring equation hB identifies the composite scalar action with the one of FG.
-Applying K to the first normalization and then using the second shows that the
-successive comparison and r both restrict along KLi to the target generator. The
-representing bijection hKL is injective at the target free module, giving equality.
-The displayed equation retains every underlying identification rather than requiring
-chosen module functors to be definitionally equal. No adjunction is used anywhere. -/
+Source: Stacks 08TQ and 04BL, composite normalized free identifications. -/
 theorem normalizedFreeModule_composition
     (L : Sheaf J (Type w) ⥤ Sheaf K (Type w)) [PreservesFiniteLimits L]
     (N : Sheaf K (Type w) ⥤ Sheaf T (Type w)) [PreservesFiniteLimits N]

@@ -179,24 +179,7 @@ private theorem injectiveHomMap_bijective [T.CommShift ℤ]
   rw [← hb]
   exact b'.bijective
 
-/-- Unbounded positive cohomology prevents coproduct preservation and either right adjoint.
-
-Proof: In each degree the family of shifted single complexes has at most one nonzero term,
-so its direct sum and product coincide. The Grothendieck derived coproduct theorem and
-exact-product localization identify them in the derived category. Exactness and shift
-compatibility give `shiftIdentification`. Applying degree-zero evaluated cohomology to
-the coproduct comparison gives the canonical inclusion of the direct sum into the product:
-the two characterizations below check this on every summand and coordinate. Choose a
-nonzero element in each cohomology module; the resulting infinite-support tuple proves
-that inclusion is not surjective. Thus `T` cannot preserve countable coproducts, and cannot
-be a left adjoint. For any injective cogenerator `J`, its image under the exact right
-adjoint `v` is injective. Computing derived Hom into its injective single complex, then
-applying the ordinary adjunction and the exact-functor homology comparison, shows that the
-canonical map `injectiveHomMap` to module Hom into `J` is bijective.
-They are nonzero by cogeneration. If the restriction to `D⁺` had a right adjoint `G`, these
-same groups would equal `Hom(F[n+1],G(v(J)[0]))`; bounded-below t-structure orthogonality
-makes these vanish for all sufficiently large `n`, a contradiction.
--/
+/-- Unbounded positive cohomology prevents coproduct preservation and either right adjoint. -/
 theorem obstruction
     [IsGrothendieckAbelian.{vA} A] [IsGrothendieckAbelian.{vB} B]
     [HasExactLimitsOfShape (Discrete ℕ) A] [HasExactLimitsOfShape (Discrete ℕ) B]

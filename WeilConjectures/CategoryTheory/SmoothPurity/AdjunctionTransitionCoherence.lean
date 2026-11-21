@@ -29,13 +29,7 @@ variable {X Y A B C D : Type*}
   {Lt : B ⥤ C} {Rt : C ⥤ B}
 
 /-- Tensor-adjoint transitions in an evaluated left extension are determined by
-composition of the right cocone. Source: Stacks 0FND.
-Proof: precompose with the inverse upper evaluation comparison and the inverse first
-associator. Transpose both sides to the total scalar adjunction. The composite
-transpose formula replaces the associators by restriction compositors. The two
-evaluation transpose equations reduce the result to the right cocone composition
-law and naturality of the original transition with respect to the extension unit.
-Invertibility of the two precomposing maps gives the desired equation. -/
+composition of the right cocone. Source: Stacks 0FND. -/
 theorem adjunctionTransition_coherence
     (a : F ⊣ U) (ap : Lp ⊣ Rp) (aq : Lq ⊣ Rq) (ah : Lh ⊣ Rh)
     (ak : Lk ⊣ Rk) (ac : Lt ⊣ Rt)

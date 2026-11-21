@@ -33,11 +33,6 @@ def termwiseAdjunctionIso {I A B C D : Type*}
 
 /-- A normalized transpose equation is preserved by passage to functor categories.
 
-Apply extensionality of natural transformations. At each indexing object, the
-whiskered adjunction unit and the mapped natural isomorphism evaluate to the original
-unit and isomorphism component. The resulting equation is exactly the assumed one,
-written using the unit formula for the adjunction bijection.
-
 Source: Stacks Project, Modules on Sites, Tag 03DI. -/
 theorem termwiseAdjunctionSquareUnit {I A B C D : Type*}
     [Category I] [Category A] [Category B] [Category C] [Category D]

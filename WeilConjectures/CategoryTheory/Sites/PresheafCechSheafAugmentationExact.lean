@@ -294,19 +294,7 @@ private theorem presheaf_augmentation_exact
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical free Čech augmentation is exact and epic for a locally
 surjective presheaf map.
-Source: Stacks Project, Tag 01GC, degree-zero part.
-
-Proof: the augmentation sends each vertex to its image. Both faces of an edge
-have the same image, so its composite with the first differential is zero.
-Objectwise the free nerve resolves the free abelian group on the image of the
-map, by `AlgebraicTopology.setCechNerve_free_resolution`. Sheafification is exact.
-For the image inclusion, free abelianization is injective. A finite sum of target
-generators lifts locally: lift each generator using local surjectivity and take
-a common covering refinement for their finitely many covers. Thus the free image
-inclusion is a local bijection, and its sheafification is an isomorphism. Hence
-the augmentation is epic with kernel the first differential's image. Empty
-fibres cause no problem: only the image is used before sheafification.
--/
+Source: Stacks Project, Tag 01GC, degree-zero part. -/
 theorem presheafCechSheaf_augmentation_exact
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}] (f : Arrow (Cᵒᵖ ⥤ Type v))

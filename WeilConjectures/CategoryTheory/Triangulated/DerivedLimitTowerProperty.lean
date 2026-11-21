@@ -25,22 +25,7 @@ namespace CategoryTheory
 
 /-- A limit cone of a represented K-injective tower has the derived-limit property.
 This is the Roos comparison part of `derivedCategory_towerLimit_core`.
-Source: Stacks Project, Derived Categories, Tags 0BK6, 0BK7 and 070M. Proof:
-evaluation at level n has the exact left adjoint which is X through level n
-and zero at higher levels. Therefore each evaluated complex is K-injective.
-The theorem `termwise_product_isKInjective_and_isLimit` makes their termwise
-product represent the derived-category product. The chain map one minus the
-shift has the prescribed transition endomorphism after projection to each
-factor. Rotate its cone triangle backwards to obtain a derived-limit triangle.
-Construct the inverse-limit complex as the degreewise kernel of this chain map;
-`roosComplex_quasiIso` identifies it with the shifted cone, including for
-K-injective towers whose terms need not be injective or have epi transitions.
-Its image under Q is an isomorphism. The uniqueness isomorphism from the supplied
-limit cone to this kernel cone transports that triangle to Q(c.pt). Finally e
-induces an isomorphism of the products intertwining their transition
-endomorphisms. Transport the distinguished triangle along this product
-isomorphism to obtain `IsDerivedLimit` for the prescribed tower.
--/
+Source: Stacks Project, Derived Categories, Tags 0BK6, 0BK7 and 070M. -/
 theorem derivedCategory_towerLimit_property
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     [HasCountableProducts A] [CountableAB4Star A]

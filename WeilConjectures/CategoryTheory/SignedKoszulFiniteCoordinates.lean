@@ -12,7 +12,9 @@ import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 /-!
 # Finite coordinates of the normalized negative Koszul tensors
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, finite free tensor calculation.
+## References
+
+* Stacks Project, algebraization.tex, Tag 0A0E.
 -/
 
 @[expose] public section
@@ -179,33 +181,7 @@ scalar-diagonal transitions, compatible empty-coordinate inclusions, and preserv
 quasi-isomorphisms. No countable product, fibre, localization, or coefficient functor
 comparison occurs in this finite statement.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, bounded finite free Koszul calculation.
-
-Proof in words: induct on the number of ordered factors. The empty tensor is O[0]
-and its tensor with K is K by the right unitor. Split a subset into whether it contains
-the first index and the subset of successor indices. The two supported degrees of the
-first factor and distribution of tensor over finite direct sums identify the next
-ordered tensor with the direct sum indexed by those subsets. The inclusion into a
-subset coordinate is the inverse unitor, tensor of the specified basis maps, and the
-total tensor inclusion; these are exactly ringedNegativeKoszulSummand. Multiplication
-in the rank-one factors supplies inverse coordinates. Naturality of the unitors and
-total tensor inclusions makes coefficient maps diagonal in these coordinates.
-The first total differential is d_K. The differential of the ith negative factor
-has coefficient a_i^(m+1), preceded by one sign for each earlier negative factor and
-by (-1)^(q+|I|) for the coefficient degree. This is exactly the displayed erased-index
-matrix, including all equality transports. Conjugate the diagonal scalar product over
-I by these coordinates to construct the transition. Its chain equation reduces to
-(product over I of a_j) a_i^(m+1) = a_i^(m+2) (product over I.erase i of a_j).
-The empty-coordinate inclusions are chain maps and commute with transitions because
-the empty product is one. Filter the tensor by subset cardinality at most k.
-The kth quotient is the finite direct sum of reindexed copies of K with |I|=k,
-whose differential is d_K; a degreewise sign twist identifies them with the usual
-shifts. This filtration is finite and degreewise split. A quasi-isomorphism of K
-induces quasi-isomorphisms on the quotients; the long exact homology sequences and
-induction give a quasi-isomorphism on each tensor. This works for unbounded K.
-For r=0 only the empty coordinate occurs. For r=1 the negative summand has
-coefficient (-1)^(q+1) a_0^(m+1) and transition a_0. No inverse scalar is used, so
-zero and unit scalars, zero rings, and empty sites are all allowed. -/
+Stacks Project, algebraization.tex, Tag 0A0E. -/
 theorem exists_ringedSignedKoszulFiniteCoordinates
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A]

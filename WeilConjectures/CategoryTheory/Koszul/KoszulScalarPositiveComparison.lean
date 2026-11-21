@@ -133,12 +133,7 @@ private theorem positiveIso_projection (φ : R ⟶ B) (r : ℕ)
     simpa only [← ScalarKoszulTransport.koszulUnit_right] using! hp
 
 /-- Positive Koszul comparison preserving projection.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Intertwine the scalar maps for each entry of the list using the scalar-extension
-generator formula. Powers intertwine by the generic power lemma.
-Proof step 2: Apply the generic factor comparison and its transition naturality to obtain the
-positive diagram isomorphism. Tensor induction and the normalized right-unit formula give the
-projection identity. Pair the explicitly constructed isomorphism with this proved identity. -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 private def positiveComparison (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections)
     (H : ScalarKoszulTransport.TensorPullbackComparison

@@ -16,14 +16,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory
 
 /-- A counit normalized by a trace respects the coefficient action.
-Source: the coefficient-action calculation in the affine-space trace proof,
-Stacks Tags 0B56 and 0GL1.
-
-Proof: precompose by the invertible map `H tensor p B W`. The action equation
-replaces the two projections by the projection for `H tensor B` and its
-associator. The inverse associator and inverse tensorator then cancel. Apply
-normalization at `H tensor B` and at `B`. Naturality of the associator moves
-the trace to the last factor, and the right-unitor coherence finishes. -/
+Source: Stacks Tags 0B56 and 0GL1. -/
 theorem normalizedTensorCounit_action
     {C D : Type*} [Category* C] [Category* D]
     [MonoidalCategory C] [MonoidalCategory D]

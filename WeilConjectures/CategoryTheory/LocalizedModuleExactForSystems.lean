@@ -232,16 +232,7 @@ private noncomputable def extensionSheafAdjunction
     exact extensionPresheafHomEquiv_naturality_right.{c, v, r} R U F G H _ b
 
 /-- Exactness of both actual localized module functors.
-Source: Stacks 03DI--03DJ.
-Proof: the direct-sum Hom correspondence followed by module sheafification gives the
-extension/restriction adjunction. Restriction is additive componentwise, and its left
-adjoint is additive. Extension preserves colimits by adjunction and monomorphisms by
-sectionwise injectivity of direct sums and left exactness of module sheafification.
-The abelian exactness criteria then give its finite-limit preservation. Restriction
-preserves limits by adjunction. Its composite with the module forgetful functor is
-abelian-sheaf restriction, which preserves colimits by the cocontinuous site adjunction.
-Reflect finite colimits through the faithful exact module forgetful functor.
-All constructions remain in max c v r; no equality of the site universes is imposed. -/
+Source: Stacks 03DI--03DJ. -/
 theorem localizedSystemExact :
     (localizedSystemExtension.{c, v, r} R U).Additive ∧
     PreservesFiniteLimits (localizedSystemExtension.{c, v, r} R U) ∧
@@ -341,11 +332,7 @@ instance localizedSystemRestrictionColimits :
 
 open Classical in
 /-- The normalized localized adjunction, uniquely fixed by the summand injection unit.
-Source: Stacks 03DI--03DJ.
-Proof: direct-sum elimination sends a map from the extension to a compatible map on each
-slice object. Its inverse includes each section in the summand of its structure arrow.
-Sheafification extends this natural bijection uniquely to sheaves. The summands generate
-locally, so the displayed unit determines the adjunction uniquely. -/
+Source: Stacks 03DI--03DJ. -/
 theorem localizedSystemAdjunction_existsUnique :
     ∃! adj : localizedSystemExtension.{c, v, r} R U ⊣
       localizedSystemRestriction.{c, v, r} R U,

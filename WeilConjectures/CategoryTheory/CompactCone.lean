@@ -28,8 +28,7 @@ namespace CategoryTheory
 
 /-- Integer shifts preserve compactness.
 Source: Stacks Project, Tag 09QH.
-Proof: conjugate the compact-Hom comparison by the additive Hom equivalences of
-shift and inverse shift, using the inverse-shift coproduct comparison. -/
+-/
 theorem compact_shift {C : Type u} [Category.{v} C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [HasCoproducts.{w} C]
     (K : C) (hK : IsCompactObject K) (n : ℤ) :
@@ -88,7 +87,7 @@ theorem compact_shift {C : Type u} [Category.{v} C] [HasShift C ℤ]
 open Classical in
 /-- The compact-Hom comparison is natural in its source.
 Source: Stacks Project, Tag 09QH.
-Proof: evaluate on a single direct-sum component and use composition associativity. -/
+-/
 theorem compact_comparison_naturality
     {C : Type u} [Category.{v} C] [Preadditive C] [HasCoproducts.{w} C]
     {K L : C} (s : K ⟶ L) {J : Type w} (A : J → C) :
@@ -139,14 +138,7 @@ private theorem triangle_hom_exact
 
 /-- The third term of a distinguished triangle of compact objects is compact.
 Source: Stacks Project, Derived Categories, Lemma 13.37.2, Tag 09QH.
-
-Proof: apply Hom(-,A_j) to the triangle and to its rotations. The resulting
-five-term exact sequences have the five Hom groups from Y[1], X[1], Z, Y, X.
-Take their direct sum over j; it remains exact since direct sums of abelian groups
-are exact. Compare with Hom(-,the coproduct of A_j) using the canonical compactness
-maps. Naturality makes the diagram commute. The outer four comparison maps are
-bijective because X and Y and their shifts are compact. The five lemma proves
-bijectivity for Z, for every family A_j, hence Z is compact. -/
+-/
 theorem compact_cone
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]

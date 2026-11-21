@@ -116,21 +116,7 @@ private theorem transport_constant
 
 /-- Coherent inverse image of ring sheaves, including the natural constant comparison.
 Source: Stacks Project, Sites, Tag 00YV (ring objects and constant objects), and
-Modules on Sites, Tag 03D2.
-
-Proof: identify a ring sheaf with a commutative ring object in the category of set
-sheaves. Apply L to its underlying object and every operation, using the inverse
-finite-product comparisons for binary operations and the inverse terminal comparison
-for zero and one. The ring identities follow by applying L to their finite-product
-identity diagrams. On a ring morphism use L of its underlying morphism; the operation
-comparison equations show this is a ring morphism. The underlying maps then satisfy
-the displayed naturality equation. Since L is a left adjoint preserving the terminal
-object, it preserves coproducts of terminal objects. A constant set sheaf is such a
-coproduct. The resulting natural constant-set isomorphism preserves every operation:
-check on the summands indexed by the operands and use the product comparison.
-It therefore lifts to the natural isomorphism of constant ring sheaves. The graph
-identities follow by expressing each generalized operation as the universal operation
-precomposed with the tuple of its operands. -/
+Modules on Sites, Tag 03D2. -/
 theorem coherentRingInverseImage_exists
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

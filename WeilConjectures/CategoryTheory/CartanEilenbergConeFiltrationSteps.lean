@@ -48,18 +48,7 @@ private theorem cone_factors_units
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit cone steps are antitone and stable under the cone differential.
-Source: Stacks Project, Tags 0133 and 012W, augmented-cone variant.
-Proof: raising the cutoff shrinks the interval of generators and removes the K
-summand when necessary. Pull the target step back along the cone differential.
-The K generator maps to minus its differential and the augmentation: the former
-lands in the next K generator, and the latter lands in complex index n+1 by haug.
-If n+1<b, the augmentation component is zero because its source is zero.
-A total generator of complex index s maps to signed terms of indices s and s+1.
-Both indices lie in the next interval [max b p,n+1]. Thus every generating image
-lies in the pullback, so their finite supremum does too. The pullback universal
-property supplies the required factorization. Empty intervals require no cases.
-The hypothesis on I below b is unnecessary for stability but is retained here
-for compatibility with the parent's hypotheses. -/
+Source: Stacks Project, Tags 0133 and 012W, augmented-cone variant. -/
 theorem coneFiltrationStep_props
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

@@ -12,7 +12,7 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 
 /-! # Unbounded right derivation commutes with tower evaluation
 
-Source: Stacks Project, Sites Cohomology, Tag 0941, and Derived Categories, Tags 070I, 070Y and 070K.
+Source: Stacks Project, Tags 0941, 070I, 070Y and 070K.
 
 The units and resolution comparisons are those of
 `Functor.rightDerivedFunctorOfQuasiIsoResolutions`. Natural number `n` denotes positive
@@ -242,32 +242,7 @@ exact evaluation, with its universal units, every K-injective resolution and eve
 actual tower transition. The resolution equation identifies both sides with Q(F(I_n));
 since it holds for every resolution and the same natural isomorphism, it includes
 resolution independence and naturality for all derived morphisms.
-Source: Stacks Project, Sites Cohomology, Tag 0941, exact-left-adjoint paragraph; Derived Categories, Tags 070I, 070Y and 070K.
-
-Proof:
-1. Use the universal derived pairs of `def-sfb-right-derived-functor`. The two
-   exact evaluation factors and their cochain units give natural transformations
-   a and b with the same source, since termwise F commutes strictly with evaluation.
-2. Both transformations are invertible on K-injective towers: the derived units
-   are invertible there and `lem-weil-tower-evaluation-kinjective` applies to b.
-   Define the comparison on such a tower by a inverse followed by b.
-3. By `lem-weil-pbc-kinjective-hom-derived`, every derived morphism between
-   K-injective towers comes from a homotopy class and hence a complex map.
-   Naturality of a and b proves naturality of the comparison on these morphisms.
-   Resolve a representative of each derived object and conjugate the comparison
-   by its resolution isomorphism. Naturality also proves agreement with every
-   K-injective representative. Naturality along any resolution gives a beta = b
-   on all complexes, which is exactly the asserted unit equation.
-4. Unfold the canonical resolution comparison to obtain c_f eta_I = RF(Qf).
-   Postcompose the desired resolution equation with the invertible evaluated
-   unit. Naturality of beta and the exact evaluation factor, followed by the
-   unit equation at I, identifies both sides with evaluation of RT(Qf).
-5. The localized transition conjugated by the evaluation factors is Q of the
-   actual transition of complexes. Naturality of the units therefore gives the
-   same transition map on the sources of a and b. Cancel a on K-injective
-   towers to prove transition compatibility there. Naturality along a resolution
-   extends this equality to every derived object.
--/
+Source: Stacks Project, Tags 0941, 070I, 070Y and 070K. -/
 theorem exists_normalized
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     [Abelian A] [Abelian B]

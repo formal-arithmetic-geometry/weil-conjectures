@@ -146,15 +146,7 @@ private lemma unitQ_homotopy (H : C ⥤ D) [H.Additive] (P : CochainComplex C �
 omit [Abelian.HasKInjectiveResolutions D] in
 /-- The exact restriction square satisfies its full canonical cochain-unit equation.
 
-Source: Stacks Project Tag 070G, uniqueness and composition of right-derived functors.
-
-Proof: cancel the inverse exact-functor comparison. The defining equations for the
-composition comparison and the comparison of naturally isomorphic functors reduce the
-homotopy-category square to the two right-derived units. The exact functor's comparison
-unit supplies the remaining factor. On a cochain complex, the quotient comparison
-components and the homotopy-factor comparison components are identities. Substitute
-these into the homotopy equation, then cancel the inverse/direct exact-functor factors
-inside the second right-derived functor. No computation hypothesis on the complex is used. -/
+Source: Stacks Project Tag 070G, uniqueness and composition of right-derived functors. -/
 theorem rightDerivedExactRestriction_normalization (F : C ⥤ D) (G : C' ⥤ D')
     (R : C ⥤ C') (S : D ⥤ D') [F.Additive] [G.Additive] [R.Additive] [S.Additive]
     [PreservesFiniteLimits R] [PreservesFiniteColimits R]

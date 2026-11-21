@@ -129,14 +129,7 @@ def componentNatIso
     exact hn f n m
 
 /-- Naturality and transposition of the strict Koszul comparison.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Use target naturality of theta and functoriality of precomposition to show
-homDiagramComparison is natural in the coefficient complex. Cancel R evaluation and apply its
-target naturality to transfer this identity to tensorDiagramComparison.
-Proof step 2: Construct the isomorphism degree by degree using componentNatIso. Naturality in the
-tower variable is the diagram isomorphism naturality; differential compatibility is its component
-cochain-map identity; coefficient naturality is step 1. These establish all naturality and
-cochain conditions of the transposed natural isomorphism. -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 private def strictComparisonFromPositive (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections)
     (e : ringedKoszulDiagram R r a ⋙

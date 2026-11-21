@@ -19,12 +19,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory
 
 /-- A canonical tensorator pullback square and naturality imply the square for pairings.
-Source: Stacks, Cohomology on Sites, Tag 06YU, functoriality of derived tensor comparisons.
-Proof: use naturality of the single/pullback comparison on the pairing map. Apply the
-ordinary pullback square under the single functor. Its initial tensor comparison is
-the assumed canonical square. Naturality of the target tensorator moves the two
-remaining ordinary arrows to the tensor factors; tensor bifunctoriality combines them
-with the two single/pullback components. No invertibility is required in this argument. -/
+Source: Stacks, Cohomology on Sites, Tag 06YU, functoriality of derived tensor comparisons. -/
 theorem flatPairing_pullback_assembly
     {C : Type uC} {E : Type uE} {D : Type uD} {F : Type uF}
     [Category.{vC} C] [Category.{vE} E] [Category.{vD} D] [Category.{vF} F]

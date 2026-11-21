@@ -44,23 +44,7 @@ private theorem extensionPresheaf_preservesMonomorphisms
 
 /-- The sheafified direct-sum extension preserves exactness at the middle term.
 
-Source: Stacks Project, Modules on Sites, Tags 03DI, 03DJ and 0E8G.
-
-Proof: Write L for the displayed extension and T for restriction to the slice.
-A map from the direct-sum presheaf of G to a module sheaf F is specified by
-its maps on each summand. Naturality identifies these maps with a morphism
-G → T(F); conversely such a morphism extends by the direct-sum universal
-property. Module sheafification extends this bijection uniquely to maps
-L(G) → F, giving L ⊣ T. Thus L preserves colimits and is right exact.
-A monomorphism of module sheaves is injective on sections. Its direct-sum
-extension is injective on every summand and hence on the whole direct sum.
-Exact module sheafification preserves this injection, so L preserves monos.
-An additive right exact functor between abelian categories that preserves
-monos is exact: factor the first arrow through its image, then use the
-short exact sequence from that image to the middle and final image.
-Consequently L sends S.Exact to exactness of S.map L, which is the displayed
-image-kernel equality. This argument uses arbitrary covering sieves and
-requires neither pullbacks in C nor equality of its two universes. -/
+Source: Stacks Project, Modules on Sites, Tags 03DI, 03DJ and 0E8G. -/
 theorem ringedSliceExtension_preserves_exact
     {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C)

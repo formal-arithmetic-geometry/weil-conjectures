@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationaliz
 
 /-! # The tensor Hom localization has the localization universal property
 
-The proof reuses the generic tensor comparison argument, independently of any
-coefficient model or tower category.
+The statement is independent of any coefficient model or tower category.
 -/
 
 @[expose] public noncomputable section
@@ -20,9 +19,7 @@ universe r u v
 open TensorProduct CategoryTheory.Limits
 namespace CategoryTheory.ScalarLocalization
 
-/-- Compare tensor Hom modules with the Hom modules of the torsion localization.
-Proof: the tensor-Hom equivalence sends a tensor f to a times Q(f). Its pure-tensor
-formula preserves identities and composition; tensor induction gives all arrows. -/
+/-- Compare tensor Hom modules with the Hom modules of the torsion localization. -/
 noncomputable def tensorRationalComparison
     (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
     [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ]
@@ -56,11 +53,7 @@ noncomputable def tensorRationalComparison
       rw [hf, hh]
       exact (Preadditive.add_comp _ _ _ _ _ _).symm
 
-/-- The raw tensor category is a localization at scalar-torsion cones.
-Proof: the preceding comparison is fully faithful by its tensor-Hom bijections and
-essentially surjective because every localized object comes from the source.
-It commutes with the two localization functors, so transport the localization
-universal property through this equivalence. -/
+/-- The raw tensor category is a localization at scalar-torsion cones. -/
 theorem tensor_localization_isLocalization
     (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
     [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ]

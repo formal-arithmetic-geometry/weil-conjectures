@@ -53,18 +53,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 classical augmentation.
 
 Source: Stacks Project, Derived Categories, Tag 05TD, part (3), and the definitions of
-`homologyRightDerivedFunctorPlusObjSingleFunctorIso` and `toRightDerivedZero`.
-
-Proof: choose the injective resolution of Y used in both definitions. Naturality of the
-right-derived unit along the resolution augmentation identifies the unit on Y[0] with
-its map into the resolution followed by the unit on that resolution. The latter unit
-is invertible, and cancels with its inverse in the definition of the single-complex
-comparison. Apply homologyFunctorObjQIso naturality to the remaining resolution map.
-The embedding from natural-number complexes to integer complexes preserves degree-zero
-homology. Under this identification the remaining map is the lift of G applied to the
-resolution augmentation into degree-zero cycles, followed by isoHomologyπ₀. This is
-exactly InjectiveResolution.toRightDerivedZero', and composing isoRightDerivedObj.inv
-gives G.toRightDerivedZero.app Y. -/
+`homologyRightDerivedFunctorPlusObjSingleFunctorIso` and `toRightDerivedZero`. -/
 theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) :
     G.rightDerivedPlusSingleUnitHomology Y ≫
       (G.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0).hom.app Y =

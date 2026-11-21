@@ -158,50 +158,7 @@ private theorem raw_colimit_comparison_iso
   exact hi
 
 /-- Source: Stacks Project, Sites, Tag 0A35, presentation construction and
-adjunction identification; abelian groups as in Modules on Sites, Tag 03CO.
-
-Proof: For each limit object Y, consider presentations (t,W,p), where t is in Under i,
-W belongs to F(t.right), and p identifies V(t.right)(W) with Y. Move two presentations
-to a common stage and use eventual object equality to refine their representatives
-until equal. Equalize parallel refinements using filteredness. Thus the presentation
-category is filtered. Evaluate the unit-characterized adjunct stage maps at W;
-adjunction uniqueness gives their identity and composition laws. Take their filtered
-colimit in abelian groups. Lift restriction arrows by harrows and correct endpoints
-using hobjects; eventual arrow equality makes the restriction independent of the
-lift. Lifting finite arrow diagrams proves the presheaf laws. By hQ, every cover is
-an image of a stage cover, and by hfinite it has finitely many arrows. Lift its
-matching data and the finitely many compatibility equations to a common stage.
-The preserved covering pullbacks identify the stage matching diagram. Filtered
-abelian colimits commute with its finite products and equalizer, so the presheaf
-is a sheaf; the empty matching diagram gives the zero group.
-
-A morphism from this sheaf to T is a compatible family of maps on presentation
-section groups. Identity refinements give stage sheaf maps, and the stage
-adjunctions identify their compatible family with a map G to the restriction of T
-along V i. The reverse assignment takes the adjunct at every stage. Adjunction
-identities and colimit hom_ext show that the assignments are inverse and natural.
-Uniqueness of left adjoints identifies the constructed sheaf with the canonical
-inverse image, preserving its unit. At V i U, presentations carrying U forward
-are final: lift any presentation to a common stage, enforce eventual object
-equality, and equalize the refinement arrows. These constructions use only
-object/arrow colimits, finite covers, and adjunctions; they do not use the parent
-comparison-bijectivity theorem or any of its downstream zero-detection results.
-
-Suppose (K.ι.app t).hom x is zero. By hK its representative (E t).hom x
-maps to zero in the canonical inverse-image sections. Under the constructed
-sheaf identification, compare this representative with zero. Equality in a
-filtered colimit holds at a common refinement. Equalize the two refinement
-arrows if necessary; additivity sends the zero representative to zero. Finality
-of the carried-U presentations moves this refinement into Under i. The unit
-equations hα and hθ identify its maps with α and θ by adjunct uniqueness.
-The equation hD identifies its transported stage value with (E t').hom
-((D.map b).hom x). Injectivity and additivity of E t' imply (D.map b).hom x = 0.
-
-Edge cases: a zero section is killed by the identity refinement; zero section
-groups satisfy the assertion by map_zero. In a constant identity diagram the
-hypothesis already says x = 0. This asserts only eventual vanishing of a single
-stage section, not surjectivity or bijectivity of a comparison.
--/
+adjunction identification; abelian groups as in Modules on Sites, Tag 03CO. -/
 theorem colimit_site_finite_section_eventual_zero
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

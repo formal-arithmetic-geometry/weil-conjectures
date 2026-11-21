@@ -17,14 +17,7 @@ namespace CategoryTheory
 
 /-- Right unitality needs the tensor square only at the chosen representative
 and the coefficient unit, rather than on every pair of complexes.
-Source: Stacks Project, Tag 07A4.
-Proof: postcompose by the monic computation counit at X. Substitute the unit
-normalization in its tensor with that counit. Naturality of the derived tensor
-comparison moves the localized source unit into the representative tensor square.
-Its normalization and ordinary right unitality give the localized right unitor.
-Naturality of the counit then gives the other side. Cancel the monomorphism.
-Only the displayed tensor square at X and the unit is used.
--/
+Source: Stacks Project, Tag 07A4. -/
 theorem rightUnit_at_representative
     {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
     [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E] [MonoidalCategory H]

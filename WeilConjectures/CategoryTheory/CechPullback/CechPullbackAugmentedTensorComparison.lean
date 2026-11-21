@@ -35,10 +35,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [MonoidalCategory A]
 
 include ht in
 /-- Tensor products of comparisons preserving their augmentations also preserve augmentation.
-Proof: totalization preserves the coefficient comparison because F is a left adjoint.
-Naturality moves both augmentations through it. The two factor equations reduce the
-assertion to the comparison of degree-zero units.
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E; sites-modules.tex, Tag 03EL. -/
+Stacks Project, Tags 0996, 099E and 03EL. -/
 theorem augmented_tensor (G : B ⥤ A) (adj : F ⊣ G)
     (e : F.obj (𝟙_ A) ≅ 𝟙_ B)
     (hu : (t (𝟙_ A) (𝟙_ A)).hom ≫ (e.hom ⊗ₘ e.hom) ≫ (λ_ (𝟙_ B)).hom =

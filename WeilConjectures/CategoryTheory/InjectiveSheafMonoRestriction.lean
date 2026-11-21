@@ -27,16 +27,7 @@ namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   [HasSheafify J AddCommGrpCat.{max w v}]
 
-/-- Source: Stacks Project, Tag 093X, specialized to abelian sheaves.
-
-Proof: Evaluation at U is represented by the sheafification of the free abelian
-presheaf on the (universe-lifted) representable U. A monomorphism a : U' → U gives
-an objectwise injective map between the representables, hence a monomorphism of
-free abelian presheaves. Sheafification preserves this monomorphism. A section of
-an injective sheaf over U' corresponds to a morphism from that free sheaf; extend
-it along the monomorphism by injectivity. Evaluate the extension on the generator
-id_U. Naturality and the extension identity show its restriction is the given
-section. This also works for an empty object and for the zero sheaf. -/
+/-- Source: Stacks Project, Tag 093X, specialized to abelian sheaves. -/
 theorem injective_sheaf_mono_restriction
     (I : Sheaf J AddCommGrpCat.{max w v}) [Injective I]
     {U' U : C} (a : U' ⟶ U) [Mono a] : Function.Surjective (I.obj.map a.op) := by

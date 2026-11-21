@@ -377,21 +377,7 @@ private theorem tensorComplexOverComparison (U : C) :
 end NativeTensorRestriction
 
 /-- Ordinary slice restriction commutes with total tensor by the pure-tensor identity.
-Source: Stacks Project, Tags 03EL, 06YN and 07A4.
-
-Proof: use the natural module tensor restriction isomorphism on every (p,q)
-summand. Its pure-section formula is x tensor y mapped to x tensor y, including
-the sheafification units. Restriction preserves coproducts: the sheafification
-adjunction and sectionwise restriction identify sheaf coproducts as restricted
-sheafified presheaf coproducts, using the slice-sheafification comparison.
-Therefore the direct sum of these summand isomorphisms identifies
-the degree-k terms. Naturality on each summand commutes with d_P tensor 1 and
-1 tensor d_Q; additivity preserves the coefficient (-1)^p in the second term.
-The degreewise maps are consequently a chain isomorphism, with inverse given
-by the inverse summand maps. Summand naturality also proves naturality in both
-complexes. Composing the pure-section formula with the total summand inclusion
-gives the stated formula for the actual coefficientTensorGenerator. No K-flatness,
-flat terms or boundedness are needed; zero and unbounded complexes are included. -/
+Source: Stacks Project, Tags 03EL, 06YN and 07A4. -/
 theorem ringedSlice_totalTensorComparison_exists (U : C) :
     ∃ γ : coefficientTotalTensor.{u, c, v} J A ⋙
         ringedSliceComplexRestriction.{c, v, u} J A U ≅

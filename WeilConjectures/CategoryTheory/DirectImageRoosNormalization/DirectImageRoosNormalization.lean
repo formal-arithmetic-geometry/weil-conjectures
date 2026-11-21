@@ -47,7 +47,7 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 /-! # Normalized direct image of canonical Roos triangles
 
 Source: Stacks Project, Cohomology on Sites, Tags 0A07 and 0941; Derived Categories,
-Tag 0BK6, with the explicit strict cone normalization in the DAG.
+Tag 0BK6.
 
 The structures below only package the choices of total derived functors, units and
 canonical comparisons already appearing in the statement. The conclusion constructs
@@ -370,7 +370,7 @@ private def derivedProducts :
 end PrivateComparisons
 
 /-- The canonical Roos triangle, specified on every representing complex.
-Source: Stacks Tags 0941 and 0A07, with the DAG's explicit cone convention.
+Source: Stacks Tags 0941 and 0A07.
 `normalization` characterizes the comparison with total derived limit by its unit.
 It is equivalently the exact-products fibre comparison followed by `(y,x) ↦ (-y,x)`:
 both carry the ordinary-limit inclusion to that unit. The last two fields transport

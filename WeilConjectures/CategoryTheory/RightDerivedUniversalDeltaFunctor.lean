@@ -29,28 +29,7 @@ namespace CategoryTheory
 making them a universal cohomological delta-functor, and degree zero is naturally
 isomorphic to the original functor.
 
-Source: Stacks Project, Derived Categories, Lemmas 015B (2), (4) and 05TE.
-
-Proof:
-1. Choose injective resolutions and lift each morphism to a chain map. The sum of lifts
-lifts the sum, so additivity of the functor and homology makes every right derived functor
-additive.
-2. Left exactness identifies the degree-zero homology of the image resolution with the
-original object image. Lifts respect the augmentations, so these identifications are
-natural.
-3. A short exact sequence, viewed as complexes concentrated in degree zero, gives a
-natural distinguished triangle.
-4. Apply the triangulated right derived functor, using its natural shift isomorphism.
-5. Take the long exact cohomology sequence and transport along the natural identification
-with the right derived functors on objects. These give the connecting maps.
-6. The degree-zero identification and left exactness make the initial map monic.
-7. Naturality of the cohomology ladder and the identifications makes the connecting maps
-natural.
-8. Additivity, exactness including the initial zero, and naturality give the required
-delta-functor.
-9. Embed each object into an injective. Positive right derived functors vanish on it,
-so the induced map effaces each positive degree.
-10. Effaceability implies universality by Homology, Lemma 010T. -/
+Source: Stacks Project, Derived Categories, Lemmas 015B (2), (4) and 05TE. -/
 theorem Functor.exists_universal_rightDerived_deltaFunctor
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
     [EnoughInjectives A] [Category.{v₂} B] [Abelian B]

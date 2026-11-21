@@ -23,8 +23,7 @@ namespace CategoryTheory
 
 /-- Source: Stacks Project, Sites, Lemma 09YN.
 The sections of the colimit of inverse-image sheaves are the filtered colimit of the
-sections at the corresponding stage objects. The proof applies the finite-covering
-section theorem to the diagram `D`.
+sections at the corresponding stage objects.
 -/
 theorem colimitSite_sections_bijective
     {J : Type u} [SmallCategory J] [IsFiltered J]

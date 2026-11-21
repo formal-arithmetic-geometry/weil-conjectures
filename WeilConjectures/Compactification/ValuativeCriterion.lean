@@ -40,10 +40,10 @@ valuative squares whose generic point factors through `h`.
 
 The valuation-theoretic inputs live in the Mathlib helper files: the composite of two
 valuation rings `ValuationSubring.comapResidue`, the intersection with a dominating valuation
-ring `ValuationSubring.comap_eq_of_toLocalSubring_le` (Stacks Tag 052K) and the extension of a valuation ring along a field
-extension `ValuationSubring.exists_comap_eq` (Stacks Tag 00IA).
+ring `ValuationSubring.comap_eq_of_toLocalSubring_le` (Stacks Tag 052K) and the extension of a
+valuation ring along a field extension `ValuationSubring.exists_comap_eq` (Stacks Tag 00IA).
 
-## Implementation notes
+## Implementation details
 
 The criterion is proved in the form `ValuativeCriterion.Existence f`, which applies more
 widely than `UniversallyClosed f`: Mathlib's `UniversallyClosed.eq_valuativeCriterion` reads
@@ -278,12 +278,7 @@ end ValuativeCriterion
 
 /-- **Flat polynomial presentation of a morphism from the spectrum of a field**: every
 morphism `Spec K ⟶ X` with `K` a field factors as a surjection `P ↠ K` followed by a flat
-morphism `Spec P ⟶ X`.
-
-The presentation takes for `P` the polynomial `Γ(X, V)`-algebra on variables indexed by the
-underlying set of `K`, where `V` is an affine open containing the image of the point. The
-surjection `P ↠ K` sends a variable `X k` to `k` and acts on coefficients through the ring map
-`Γ(X, V) ⟶ K` defining the point, and the flatness is that of `algebraMap Γ(X, V) P`. -/
+morphism `Spec P ⟶ X`. -/
 theorem exists_flat_polynomial_presentation {X : Scheme.{u}} {K : Type u} [Field K]
     (i₁ : Spec (CommRingCat.of K) ⟶ X) :
     ∃ (P : CommRingCat.{u}) (π : P ⟶ CommRingCat.of K) (p : Spec P ⟶ X),

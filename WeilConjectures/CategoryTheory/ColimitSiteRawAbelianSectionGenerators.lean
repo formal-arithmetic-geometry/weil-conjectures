@@ -57,29 +57,7 @@ private theorem colimit_mem_subgroup {I : Type u} [SmallCategory I]
   exact hx ▸ (hc.desc c' x).property
 
 /-- Source: Stacks Project, Sites, Tag 0A35,
-section presentation; Modules on Sites, Tag 03CO (abelian colimits).
-
-Proof: First lift one pointwise Kan generator (W, s, f : Y → V_t(W)), where
-Y = V_i(U). The object and arrow set-colimit hypotheses lift f with its prescribed
-endpoints at a common stage receiving i and t.right. Equalize the two arrows out
-of i to obtain b in Under i. Apply theta_b to s, restrict along the lifted arrow,
-and apply E inverse. Naturality of beta and hbeta_map identify this section's
-kappa image with the outer image of the original Kan generator.
-
-Let S be the union of the ranges of kappa. It is an additive subgroup: zero and
-negatives come from one stage, and a sum comes from a common upper stage by
-hkappa_map and additivity of D. For fixed t, take the preimage of S under the
-evaluated coprojection B_t(Y) → (colimit B)(Y). Every pointwise Kan generator
-lies in that subgroup by the preceding lift. A subgroup of an abelian colimit
-containing all coprojection images is the whole group: corestrict the cocone
-legs to the subgroup, use the colimit universal property to descend to it,
-and compose with the inclusion. Colimit hom_ext makes the composite the
-identity. The private proved lemma colimit_mem_subgroup formalizes this fact.
-Apply it to the pointwise Kan cocone. Finally, evaluation and the abelian
-forgetful functor preserve the outer filtered colimit, so every outer section
-comes from some B_t(Y) and therefore belongs to S. This argument includes the
-empty sum and proves representative existence without any relation criterion.
--/
+section presentation; Modules on Sites, Tag 03CO (abelian colimits). -/
 theorem raw_abelian_section_generators
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

@@ -10,7 +10,9 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionHomEv
 
 /-! # Tensor and internal Hom on the twisted action site
 
-Source: steps 9--13 of the agent-formulated twisted variant of Stacks Tag 00W0.
+## References
+
+* Stacks Project, Tag 00W0 (twisted variant).
 -/
 
 @[expose] public section
@@ -281,30 +283,7 @@ private theorem hom_action_of_evaluation (P : RestrictionPresentation J s R a)
               (H.sigmaHom (U.obj M) (U.obj N)).hom)).symm
 
 /-- Restriction of tensor and internal Hom along a displayed action-site presentation.
-Source: steps 9--13 of the twisted action-site argument, Stacks 03EK and 04TT.
-
-Proof: sheafification commutes with translation, since the site equivalence identifies
-maps into translated sheaves before and after sheafification. Its universal property
-therefore extends the presheaf action uniquely to the sheafification. Apply this to the
-sectionwise tensor presheaf: restriction gives the ordinary tensor presheaf on C, whose
-action sends each pure tensor to the tensor of its translated factors. The resulting
-comparison preserves the displayed pure tensors and identifies the diagonal action.
-For the tensor unit this is precisely coefficient restriction and the chosen ring action.
-For internal Hom use the equivalence of localized action sites with the base slices:
-a slice arrow of degree n is normalized by its inverse n-th power. The slice relation
-forces every map's degree, so this normalization is fully faithful and essentially
-surjective, and preserves coverings in both directions. Restriction of module sheaves
-on the slices is consequently an equivalence. Sections of internal Hom on each slice
-are thus all local linear maps, with no extra equivariance condition. Their restriction
-maps commute with normalization, giving a sheaf isomorphism. Translating a local map
-conjugates it by the target and source actions, giving the stated contragredient formula.
-The translation comparison is uniquely determined by preservation of evaluation.
-Naturality follows by composition of local maps. Symmetry interchanges the pure factors,
-and evaluation sends a local map and an argument to its value, so both agree under the
-comparisons. Equality before sheafification gives equality afterward by uniqueness.
-The induction data are retained exactly; neither induction nor its exactness is used
-in any comparison. Zero modules and the zero coefficient ring satisfy the same formulas.
--/
+Source: Stacks 03EK and 04TT. -/
 theorem closedComparisons [HasPullbacks C] (P : OrbitPresentation J s R a) :
     Nonempty {Q : Presentation J s R a // Q.toOrbitPresentation = P} := by
   let := P.category

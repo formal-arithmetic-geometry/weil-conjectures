@@ -29,19 +29,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A resolving class gives a denominator cone with the retraction/factorization
 criterion of essential constancy. At an object of the class its identity leg is invertible.
-Source: Stacks Project, Tag 06XN (dual proof), and Categories, Tag 05PU(2).
-
-Proof: The right fraction calculus makes `W.Over ⊤ X` cofiltered. Resolve the source of
-any denominator to obtain a denominator whose source lies in `P`. These form an initial
-full subcategory: common refinements and equalizations in the denominator category can
-again be resolved. Two-out-of-three makes every transition between such resolutions a
-member of `W`, hence its image under `F` is invertible. Choose a resolution `j₀`. For any
-`j`, choose a common resolution `k` mapping to `j₀` and `j`, and define the leg to `j` as
-`inv (F.map (k ⟶ j₀)) ≫ F.map (k ⟶ j)`. Common refinements and equalizations show
-independence of this choice and naturality. The leg at `j₀` is the identity, so take
-`r = 𝟙 _`; the chosen common refinements give the factorization criterion. If `X ∈ P`,
-include its identity denominator in the initial subcategory; the leg there is a composite
-of invertible transition maps and is therefore invertible. -/
+Source: Stacks Project, Tag 06XN (dual proof), and Categories, Tag 05PU(2). -/
 theorem resolvingClass_essentialConstancy
     {C : Type u} [Category.{v} C] {H : Type uH} [Category.{vH} H]
     (W : MorphismProperty C) [W.HasRightCalculusOfFractions]

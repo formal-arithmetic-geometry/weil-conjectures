@@ -813,17 +813,7 @@ end PointTransport
 open PointTransport
 
 /-- The finite-product transport has a normalized presentation at every point.
-Source: Stacks 00YV, 03D2.
-
-Proof: use the inverse binary-product and terminal comparisons of p.inverse to
-transport the ring operations, and the addition and scalar action of every module.
-Apply p.inverse to each algebraic identity and cancel its finite-product comparison;
-this proves the ring and module axioms. Naturality makes the inverse image of a
-module map linear and gives the natural underlying-set isomorphism. Addition of
-module maps is addition followed by the diagonal pairing, so its transport also
-proves additivity. The same calculation for arbitrary generalized sections gives
-all the displayed operation-graph equations. No choice of unrelated ring or module
-structures is involved: their operations are prescribed by these formulas. -/
+Source: Stacks 00YV, 03D2. -/
 theorem RingedSitePoint.nonempty
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})

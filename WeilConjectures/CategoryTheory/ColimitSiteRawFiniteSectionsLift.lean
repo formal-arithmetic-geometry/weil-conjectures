@@ -175,23 +175,7 @@ private theorem untransport_raw
 
 set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Sites, Tag 0A35,
-the raw section presentation and construction.
-
-Proof: Evaluation preserves the outer presheaf colimit, so each of the finitely
-many given elements has a representative in some B(t). The pointwise Kan formula
-represents it by a section at Z and an arrow from V(j)(Y(p)) to V(t)(Z).
-Lift that arrow and its endpoint equalities using the arrow and object set colimits.
-Move to a stage receiving j and t.right, and equalize the two maps from i so that
-it is an object of Under i receiving t. Transport the section by theta and restrict
-along the lifted arrow. Naturality of beta, the colimit coprojections and h-beta-map
-identify its raw image with the given element transported along the cocone equality.
-The unit condition identifies theta with the unique adjunction transpose, so these
-transports compose. Filteredness gives a common refinement for the finite list of
-representatives and equalizes the finitely many arrows from j. At this refinement
-all elements are represented at F(a)(Y(p)). The cocone equation gives e for every
-object of F(j). If the index is empty, take any common successor of i and j and the
-empty family. No compatibility, covering family, or amalgamation is involved.
--/
+the raw section presentation and construction. -/
 theorem colimit_site_raw_finite_sections_lift
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

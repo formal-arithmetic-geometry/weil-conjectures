@@ -46,7 +46,8 @@ theorem Scheme.Hom.isClopen_range_of_comp_eq_id {V S : Scheme.{u}} (p : V ⟶ S)
   exact Scheme.Hom.isClopen_range s
 
 /-- Properness of the projection of
-the comparison square. For `u : T₁ ⟶ T₂` proper and any `j₂ : X ⟶ T₂`, the projection `p : T₁ ×_{T₂} X ⟶ X` is the base change of `u` along `j₂`, hence
+the comparison square. For `u : T₁ ⟶ T₂` proper and any `j₂ : X ⟶ T₂`, the projection `p : T₁ ×_{T₂}
+X ⟶ X` is the base change of `u` along `j₂`, hence
 proper and in particular separated. -/
 theorem isProper_pullback_snd_of_isProper {T₁ T₂ X : Scheme.{u}} (u : T₁ ⟶ T₂) (j₂ : X ⟶ T₂)
     [IsProper u] : IsProper (pullback.snd u j₂) ∧ IsSeparated (pullback.snd u j₂) :=

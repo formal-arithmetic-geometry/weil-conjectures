@@ -86,18 +86,8 @@ variable [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ SheafOfModules.{u}
 Koszul tensor tower, including the degree-zero unit. No restriction or uniqueness
 assertion is part of this calculation.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0A0A and 0941; more-algebra.tex, Tag 0913; derived.tex, Tag 0949.
-
-Proof: evaluate the transposed strict tensor tower at each index to identify its
-map with tensor by the finite dual Koszul complex. K-flatness of those finite duals,
-and the tensor mapping-cone isomorphism, show that the tower functor sends every
-quasi-isomorphism to a quasi-isomorphism. Descend that actual functor by the
-localization lifting universal property; its factorization is tensorFactors. Obtain
-total right derived inverse limit, its comparison, and its computation on K-injective
-towers from the strict-tower theorem. These fields explicitly construct D. Apply
-the prescribed-presentation telescope/Hom comparison to D; its natural isomorphism
-and unit equation give the result. No slice comparison or normalization uniqueness
-is used. -/
+Source: Stacks Project, sites-cohomology.tex, Tags 0A0A and 0941;
+more-algebra.tex, Tag 0913; derived.tex, Tag 0949. -/
 theorem exists_ringed_cech_koszul_comparison_on_site :
     ∃ (D : RingedKoszulLimitPresentation O r b)
       (theta : ringedCechCompletionFunctor O (ringedExtendedCech O r b).1 ≅ D.completion),

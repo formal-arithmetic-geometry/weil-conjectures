@@ -39,7 +39,8 @@ namespace CategoryTheory
 comparison and generalized-element equation specify the transported addition and every
 scalar endomorphism. The inverse image is its specified left adjoint; hence uniqueness
 of left adjoints identifies it with the induced geometric inverse image.
-Source: Stacks Project, Sites, Tag 00YV (6), proof by scalar endomorphisms. -/
+Stacks Project, Sites, Tag 00YV.
+-/
 structure FixedScalarGeometricAdjunction
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)
@@ -296,7 +297,8 @@ private theorem scalarComparison
 /-- A right-adjoint comparison across fully faithful functors induces an invertible
 left-adjoint mate when the target horizontal functor is essentially surjective.
 The Hom, unit and counit equations specify the comparison.
-Source: Stacks Project, Categories, Tag 0B65. -/
+Source: Stacks Project, Categories, Tag 0B65.
+-/
 theorem adjunctionSquare
     {A A' D D' : Type*} [Category A] [Category A'] [Category D] [Category D']
     (F : A ⥤ A') (G : D ⥤ D') [F.Full] [F.Faithful]

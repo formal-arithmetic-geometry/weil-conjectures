@@ -18,11 +18,13 @@ import Mathlib.CategoryTheory.Sites.Sheafification
 /-!
 # Symmetric tensor structure on sheaves
 
-Source: blueprint and Stacks Tags 00WH, 0H7J.
-
 The tensor is the sheafification of the objectwise presheaf tensor.  The canonical
 localized symmetric structure and the canonical strong monoidal and braided structures
 on sheafification are packaged together here.
+
+## References
+
+* Stacks Project, Tags 00WH, 0H7J.
 -/
 
 @[expose] public section

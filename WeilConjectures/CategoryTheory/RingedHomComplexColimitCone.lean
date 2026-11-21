@@ -133,18 +133,7 @@ attribute [local irreducible] sheafHomAdjunction homColimitConeIsLimit
 
 /-- Internal Hom converts any sequential colimit of complexes into a limit.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A (the Hom-of-colimit step).
-
-Proof: evaluation in each source degree preserves the colimit of complexes.
-Internal sheaf Hom from that colimit is the inverse limit of internal Homs:
-tensor with a test sheaf preserves colimits by the tensor--Hom adjunction,
-and maps out of a colimit are compatible families of maps. In Hom degree n,
-commute this inverse limit with the product over source degrees p. Both orders
-represent exactly the compatible families of maps into Hom(F_m^p,N^(p+n)),
-so their canonical cones have the same universal property. These degreewise
-universal properties prove that the displayed cone of complexes is limiting,
-since evaluation in every degree jointly creates limits. This argument uses
-neither finite freeness nor Koszul generators. -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0A0A (the Hom-of-colimit step). -/
 theorem ringedHomComplexColimitCone_isLimit
     (F : ℕ ⥤ ringedSiteComplex O) (N : ringedSiteComplex O) :
     Nonempty (IsLimit (ringedHomComplexColimitCone O F N)) := by

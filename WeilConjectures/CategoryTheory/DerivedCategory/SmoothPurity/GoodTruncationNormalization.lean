@@ -19,7 +19,7 @@ Source: Stacks Project, Homology, Tags 0118 and 010N; Derived Categories,
 Tags 06XS and 015F.
 
 The projection is constructed using the cycles-to-homology quotient. The normalization
-is selected from the landed uniqueness theorem
+is selected from the uniqueness theorem
 `DerivedCategory.existsUnique_iso_single_homology_zero`, not from an undetermined
 existence statement.
 The comparisons for exact functors, identities and composition are the existing termwise
@@ -69,10 +69,7 @@ private theorem truncation_cycles_inclusion (A : CochainComplex C ℤ) :
 
 set_option linter.unusedSectionVars false in
 /-- The quotient of cycles kills the incoming differential of the good truncation.
-Source: Stacks Tag 0118.
-Proof: the degree-zero truncation term is the kernel of d⁰. The incoming differential
-is d⁻¹ factored through that kernel, and the homology quotient kills its image.
-This is Step 1 of the node's proof; it applies to every complex, without concentration. -/
+Source: Stacks Tag 0118. -/
 theorem goodTruncationProjection_condition (A : CochainComplex C ℤ) (i : ℤ)
     (hi : (ComplexShape.up ℤ).Rel i 0) :
     (A.truncLE 0).d i 0 ≫ (A.truncLEXIsoCycles 0).hom ≫ A.homologyπ 0 = 0 := by
@@ -97,7 +94,6 @@ noncomputable def goodTruncationProjection (A : CochainComplex C ℤ) :
 
 /-- The representative-independent good-truncation normalization ε_K: the unique
 isomorphism whose H⁰ map, followed by the single-cohomology comparison, is the identity.
-It is selected from the uniqueness theorem `existsUnique_iso_single_homology_zero`, which fixes the morphism.
 Source: Stacks Tags 0118 and 06XS(2). -/
 noncomputable def goodTruncationNormalization (K : DerivedCategory C)
     (hK : ∀ n : ℤ, n ≠ 0 → IsZero ((homologyFunctor C n).obj K)) :
@@ -181,13 +177,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Both arrows in the specified roof are quasi-isomorphisms, and every representative
 isomorphism r gives the same ε_K. The equation is the roof formula multiplied by Q(c_A).
-Source: Stacks Tags 0118 and 06XS(2).
-Proof: Step 1 computes Hⁿ(c_A): it is the identity in retained degrees, and the other
-cohomology vanishes by hK and the representative isomorphism. The projection has the
-identity quotient map on H⁰ and zero cohomology in other degrees. Both arrows are
-quasi-isomorphisms. Localize and transport the roof along r; its action on H⁰ is the
-identity. The uniqueness theorem, as in Steps 2--3, identifies it with ε_K, independently
-of A and r and of kernel/quotient models under their canonical identifications. -/
+Source: Stacks Tags 0118 and 06XS(2). -/
 theorem goodTruncationNormalization_roof (K : DerivedCategory C)
     (hK : ∀ n : ℤ, n ≠ 0 → IsZero ((homologyFunctor C n).obj K))
     (A : CochainComplex C ℤ) (r : Q.obj A ≅ K) :
@@ -244,13 +234,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Naturality, the H⁰ Hom bijection, and the unique-b characterization for the
 specified normalization on the full subcategory with cohomology only in degree zero.
-Source: Stacks Tag 06XS(2).
-Proof: Step 2 conjugates by the roofs and uses full faithfulness of the single functor.
-Applying H⁰ recovers the unique morphism b. This proves the Hom bijection. In Step 3,
-both sides of naturality induce H⁰(a), so injectivity identifies them. Conjugating this
-equality and using faithfulness of the single functor proves the equivalence for b.
-The inverse family is natural by multiplying by inverses. In the zero category all
-Hom sets are singletons and the same argument applies (Step 8). -/
+Source: Stacks Tag 06XS(2). -/
 theorem goodTruncationNormalization_naturality_hom
     (K L : DerivedCategory C)
     (hK : ∀ n : ℤ, n ≠ 0 → IsZero ((homologyFunctor C n).obj K))
@@ -304,11 +288,7 @@ theorem goodTruncationNormalization_naturality_hom
       simp [eK]
 
 /-- Exact functors preserve the full subcategory with cohomology only in degree zero.
-Source: Stacks Tag 015F and Homology Tag 010N.
-Proof (Step 4): lem-weil-pbc-exact-functor-complex-cohomology gives the canonical
-kernel/image/quotient comparison on complexes. Descend it using the factorization
-and localization universal property. In nonzero degrees its source is zero,
-since an exact additive functor preserves zero objects. -/
+Source: Stacks Tag 015F and Homology Tag 010N. -/
 theorem goodTruncationNormalization_exact_concentrated (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] (K : DerivedCategory C)
     (hK : ∀ n : ℤ, n ≠ 0 → IsZero ((homologyFunctor C n).obj K)) :
@@ -324,13 +304,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- The roof normalization commutes with the canonical exact-functor comparisons χ and σ;
 χ is natural on all derived morphisms in the full subcategory.
-Source: Stacks Tags 010N, 0118, 015F.
-Proof: apply H⁰-injectivity between objects identified with single complexes and
-postcompose with the single-homology comparison. Naturality of χ on ε_K and the
-compatibility of χ with σ on single objects reduce the right-hand side to F applied
-to the normalization equation H⁰(ε_K) followed by the single-homology comparison.
-This is the identity. Cancel χ_K to obtain the formula. The second equation is
-naturality of the canonical exact-functor homology comparison. -/
+Source: Stacks Tags 010N, 0118, 015F. -/
 theorem goodTruncationNormalization_exact (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] (K L : DerivedCategory C)
     (hK : ∀ n : ℤ, n ≠ 0 → IsZero ((homologyFunctor C n).obj K))

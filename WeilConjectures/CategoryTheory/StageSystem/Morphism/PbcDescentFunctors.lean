@@ -305,24 +305,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type w)
   [iS : Fact (∀ t : S, IsUnit (l : S.presheaf.stalk t))]
 
 /-- Exact descent on the actual Qbar coefficient categories, with the prescribed
-representative formula and all compatible transformation equations.
-
-Proof: use the canonical stage-system functor, with objects (E, Φ_E K) and
-representative map β.hom.app K ≫ Φ_M.map u ≫ β.inv.app L. Associator coherence
-and naturality identify the transport of this composite at any larger stage,
-proving representative independence. Inverse β components cancel to give
-identities and composition. Additivity follows at a common stage. Descend the
-finite-stage shift comparisons componentwise; betaCommShift gives their
-naturality. Applying the exact Φ_M to a distinguished stage triangle and using
-β to identify its first two vertices proves preservation of the common-stage
-triangles. These are exactly the distinguished triangles in pbcQbarCategory.
-For compatible transformations use the components j_E(τ_E K); Hom.comm proves
-naturality at every representative. Identities and vertical composites descend
-componentwise. Every equation between compatible transformations holds at each
-(E,K), hence holds after descent by natural-transformation extensionality.
-This applies to compatible transformation families formed by whiskering and
-horizontal composition as well. The concrete operation application below uses
-four distinct systems and their composite exchange. -/
+representative formula and all compatible transformation equations. -/
 theorem pbcDescentFunctors
     (F : StageSystem.CoherentExactMorphism
       (pbcScalarSystem l Ω T dT.out iT.out) (pbcScalarSystem l Ω S dS.out iS.out)) :
@@ -362,14 +345,7 @@ transport admit coherent stage-system structures and their canonical exchange de
 The four stage functors are identified with `pbcDescentDirectImage` and
 `pbcDescentPullback`. All four scalar-comparison families are characterized by
 `PbcDirectImageBetaSpec` and `PbcPullbackBetaSpec`; their exchange is identified
-with the localization of `pbcActualCompletedExchange`.
-
-Proof: use pbcDirectImageCoherentFamily twice and pbcPullbackCoherentFamily twice.
-Their canonical normalizations let pbcExchangeCompatibleFamily supply the compatible
-finite-stage exchange. Apply pbcDescentFunctors to each family to obtain exactness.
-Descend the exchange by descNatTrans and conjugate with the two functorCompIso
-comparisons. Their components are identities, so descNatTrans_app proves the stated
-component formula -/
+with the localization of `pbcActualCompletedExchange`. -/
 theorem pbcDescentOperations
     (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (g' : X' ⟶ X)
     (sq : ChosenCartesianSquare g' f' f g)

@@ -18,8 +18,7 @@ import WeilConjectures.CategoryTheory.Triangulated.CompactBoundedHom
 /-!
 # Coefficient-isomorphism invariance of Brown hypotheses
 
-The proof uses an equivalence of localizing categories and the compact-object
-adjunction theorem, independently of the geometric finite-field compactness inputs.
+This is independent of the geometric finite-field compactness inputs.
 -/
 
 @[expose] public section
@@ -166,17 +165,7 @@ private theorem brownHypothesesFor_of_coefficientIso
 
 open scoped CategoryTheory.Obj in
 /-- Brown's bundle is invariant under isomorphisms of commutative condensed rings.
-No admissibility, Noetherian, finite-type, or field hypothesis is required.
-
-Proof: scalar restriction along the inverse ring isomorphism is an exact monoidal
-equivalence. Its derived functor preserves and reflects constructibility, boundedness,
-and finite Tor amplitude. Consequently Dctf is the inverse image of Dctf for the other
-coefficient. Triangulation and closure under retracts pull back along this functor;
-the induced equivalence of full subcategories transports essential smallness.
-Compactness transports across the induced equivalence of localizing full subcategories
-by the compact-object adjunction theorem. The objectwise Brown
-criterion supplies generation and the other structural clauses. Repeat with the inverse
-ring isomorphism for the converse. No arbitrary-field compactness assertion is used. -/
+No admissibility, Noetherian, finite-type, or field hypothesis is required. -/
 theorem brownHypothesesFor_coefficientIso_iff
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [MonObj Λ'] [IsCommMonObj Λ] [IsCommMonObj Λ']

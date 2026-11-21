@@ -123,11 +123,7 @@ variable [HasDerivedCategory.{w} (NativeModules.{max c d vc vd r, d, vd} R)]
   [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{max c d vc vd r} ((Rs).over U))]
 attribute [local instance] sliceDense globalModulesEquivalence sliceModulesEquivalence
 
-/-- The derived localization test commutes with restriction to the equivalent slice. Compare derived
-internal Hom, compare the localized module by the localization restriction isomorphism, and
-compare its degree-zero derived object. The exact derived slice square compares the second Hom
-argument. Compose these isomorphisms, reversing the localization isomorphism in the
-contravariant argument.
+/-- The derived localization test commutes with restriction to the equivalent slice.
 
 Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0999. -/
 theorem localTestRestriction (U : C)

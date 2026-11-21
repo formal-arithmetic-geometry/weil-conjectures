@@ -25,12 +25,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- Covering corepresentability makes every sheaf lie in the domain of the
-partial left adjoint.  The proof combines the covering representable
-coequalizer presentation with stability of corepresentability under coproducts
-and coequalizers.
+partial left adjoint.
 
-Source: Stacks Project, Sites, Tag 09YX, together with Tag 00WS.
--/
+Source: Stacks Project, Sites, Tag 09YX, together with Tag 00WS. -/
 theorem leftAdjointObjIsDefined_of_covering_corepresentable_evaluations
     {C : Type u} [SmallCategory C] {D : Type v} [SmallCategory D]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

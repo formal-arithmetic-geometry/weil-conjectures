@@ -387,21 +387,7 @@ end SliceChains
 
 -- Assemble the dependent tensor and Hom normalization squares without unfolding their data.
 /-- Normalized slice evaluation on a flat-term K-flat source and K-injective target.
-Source: Stacks Project, Tags 08J9 and 08JB.
-
-Proof: resolve Hom(P,I) by a flat-term K-flat Q. Use the ordinary chain-level
-uncurrying equivalence on q:Q to Hom(P,I), and on its restriction followed by the
-local-family Hom comparison. The tensor comparison sends every pure-tensor summand
-to the same summand, and the Hom comparison evaluates the same local family on every
-further slice. Thus the two uncurried maps agree after restriction, by sheafification
-and total-summand extensionality. The already proved coefficientTensorCurry_normalize
-identifies each localized uncurried map with the derived counit, using precisely the
-fixed augmentation equations of kappa and kappa_U. Naturality of the localization
-comparison then gives the chain-level equality in the derived category. Substitute
-the given tensor and Hom normalization squares. Naturality of evaluation under the
-localization isomorphisms identifies their endpoints. Finally cancel the localized
-resolution, kappa, and tensor comparison isomorphisms. No evaluation map is inverted,
-and the Hom complex is not assumed K-flat. -/
+Source: Stacks Project, Tags 08J9 and 08JB. -/
 theorem ringedSlice_representativeEvaluation
     (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂
       CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]

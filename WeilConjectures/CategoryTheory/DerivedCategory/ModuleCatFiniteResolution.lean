@@ -205,12 +205,7 @@ lemma isIso_app_singleFunctor_obj_of_isZero {M : ModuleCat.{v} R} (hM : IsZero M
 `R` be noetherian and `τ : F ⟶ G` a natural transformation, compatible with the shifts, between
 triangulated functors `D(R) ⥤ T` which preserve countable coproducts. If `τ` is an isomorphism at
 every free module of finite rank `(Fin n → R)[0]`, then it is an isomorphism at `M[0]` for every
-finitely generated module `M`.
-
-The finite free resolution `P` of `M` (`ModuleCat.finiteFreeResolution`) is the union of its
-stupid truncations, bounded complexes of free modules of finite rank, at which `τ` is an
-isomorphism by induction on the length; the telescope triangle
-(`DerivedCategory.isIso_app_Q_obj_of_telescope_of_nat`) concludes. -/
+finitely generated module `M`. -/
 theorem isIso_app_singleFunctor_obj_of_finite [IsNoetherianRing R]
     [PreservesColimitsOfShape (Discrete ℕ) F] [PreservesColimitsOfShape (Discrete ℕ) G]
     (h : ∀ n : ℕ, IsIso (τ.app ((singleFunctor _ 0).obj (ModuleCat.of R (Fin n → R)))))

@@ -25,7 +25,8 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 /-!
 # Exact unbounded adjunctions, strict towers, and square mates
 
-Source: Stacks Project, Derived Categories, Tags 0DVC, 0FND, 08BJ and 070I; Cohomology on Sites, Tag 07A7.
+Source: Stacks Project, Derived Categories, Tags 0DVC, 0FND, 08BJ and 070I; Cohomology on Sites, Tag
+07A7.
 
 The index `op n` denotes positive level `n + 1`. All comparisons below are constructed
 from the specified ordinary adjunction and exact-localization comparisons. In particular,

@@ -35,8 +35,7 @@ variable (R : Sheaf J CommRingCat.{u})
 variable (s : (R.obj ⋙ forget CommRingCat).sections)
 
 /-- The localization restrictions preserve identities as ring maps.
-Source: Stacks Tags 0996 and 099E.
-Proof: both maps extend the identity of R(U); uniqueness of localization lifts applies. -/
+Source: Stacks Tags 0996 and 099E. -/
 theorem ringedLocalizationRing_map_id (U : Cᵒᵖ) :
     ringedSectionLocalizationMap R s (𝟙 U) = RingHom.id _ := by
   apply IsLocalization.ringHom_ext (R := R.obj.obj U) (Submonoid.powers (s.val U))
@@ -44,9 +43,7 @@ theorem ringedLocalizationRing_map_id (U : Cᵒᵖ) :
   simp [ringedSectionLocalizationMap]
 
 /-- The localization restrictions preserve composites as ring maps.
-Source: Stacks Tags 0996 and 099E.
-Proof: both composites extend the same restriction of R, by naturality of s;
-uniqueness of localization lifts gives equality. -/
+Source: Stacks Tags 0996 and 099E. -/
 theorem ringedLocalizationRing_map_comp {U V W : Cᵒᵖ} (f : U ⟶ V) (g : V ⟶ W) :
     ringedSectionLocalizationMap R s (f ≫ g) =
       (ringedSectionLocalizationMap R s g).comp (ringedSectionLocalizationMap R s f) := by
@@ -63,8 +60,7 @@ def ringedLocalizationRingPresheaf : Cᵒᵖ ⥤ CommRingCat.{u} where
   map_comp f g := congrArg CommRingCat.ofHom (ringedLocalizationRing_map_comp R s f g)
 
 /-- The section localization algebra maps commute with restrictions.
-Source: Stacks Tags 0996 and 099E.
-Proof: each localization lift extends exactly the specified restriction map. -/
+Source: Stacks Tags 0996 and 099E. -/
 theorem ringedLocalizationRing_unit_naturality {U V : Cᵒᵖ} (f : U ⟶ V) :
     R.obj.map f ≫ CommRingCat.ofHom (algebraMap _ (ringedSectionLocalizationCarrier R s V)) =
       CommRingCat.ofHom (algebraMap _ (ringedSectionLocalizationCarrier R s U)) ≫

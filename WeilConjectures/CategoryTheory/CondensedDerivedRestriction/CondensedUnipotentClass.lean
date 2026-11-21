@@ -157,11 +157,7 @@ private lemma sectionMap_natural {M N : Modules A} (k : M ⟶ N)
   ConcreteCategory.congr_hom (k.hom.hom.naturality f.op).symm x
 
 set_option linter.unusedVariables false in
-/-- There is a unique unipotent action with the displayed two coordinates.
-Proof: the sectionwise biproduct is a product. Conjugate the linear matrix with entries
-1,a(g),0,1 by its coordinate equivalence. The character multiplication law proves the
-action law, its naturality proves restriction compatibility. The two projections are
-jointly injective, so any action satisfying these equations is this one. -/
+/-- There is a unique unipotent action with the displayed two coordinates. -/
 theorem unipotentActionExist (a : Character A G) : ∃! d : UnipotentAction a, True := by
   let d : UnipotentAction a :=
     { act := fun S ↦
@@ -239,9 +235,7 @@ def extension (a : Character A G) : Equivariant A G where
   act := (unipotentAction a).act
   naturality := (unipotentAction a).naturality
 
-/-- Inclusion in the first coordinate and projection to the second are equivariant.
-Proof: substitute (x,0) into the first action equation and read the second equation for
-an arbitrary pair. These equations say exactly that both underlying maps are equivariant. -/
+/-- Inclusion in the first coordinate and projection to the second are equivariant. -/
 theorem extensionMaps (a : Character A G) :
     Profinite.CondensedAction.Equivariant
       ((trivial (R := A.toMon) (P := G)).obj (Mod.regular A.X)) (extension a) biprod.inl ∧
@@ -267,9 +261,7 @@ def extensionInclusion (a : Character A G) : regularTrivial A G ⟶ extension a 
 def extensionProjection (a : Character A G) : extension a ⟶ regularTrivial A G :=
   ⟨biprod.snd, (extensionMaps a).2⟩
 
-/-- The exact equivariant extension with its specified endpoint maps.
-Proof: the underlying biproduct inclusion followed by the second projection is zero.
-This equality is the equivariant equality because forgetting the action is faithful. -/
+/-- The exact equivariant extension with its specified endpoint maps. -/
 theorem extensionZero (a : Character A G) :
     extensionInclusion a ≫ extensionProjection a = 0 := by
   apply Subtype.ext
@@ -279,11 +271,7 @@ theorem extensionZero (a : Character A G) :
 def extensionSequence (a : Character A G) : ShortComplex (Equivariant A G) :=
   ShortComplex.mk (extensionInclusion a) (extensionProjection a) (extensionZero a)
 
-/-- The unipotent sequence is short exact in the action category.
-Proof: forgetting the action gives the standard split biproduct sequence. Its inclusion
-is monic, its projection is epic and the first coordinate is the kernel of the second.
-Exactness is detected by forgetting; the faithful exact forgetful functor detects these
-monomorphisms and epimorphisms as well. -/
+/-- The unipotent sequence is short exact in the action category. -/
 theorem extensionExact (a : Character A G) : (extensionSequence a).ShortExact := by
   let F := CondensedBar.forgetAction (A := A) (G := G)
   let : F.Faithful := ⟨fun h ↦ Subtype.ext h⟩

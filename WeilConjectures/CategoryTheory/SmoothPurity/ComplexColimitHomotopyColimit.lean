@@ -249,9 +249,7 @@ private theorem complex_colimit_homotopyColimit_of_shortExact
 
 /-- The telescope comparison in any abelian category with exact sequential colimits.
 This is the site-independent form of the two preceding specializations.
-Source: Stacks Project, Derived Categories, Tags 093W, 0949 and 0A5L.
-Proof: the cocone is the cokernel of the injective telescope map, giving a short
-exact sequence; apply the cone comparison and preservation of countable sums. -/
+Source: Stacks Project, Derived Categories, Tags 093W, 0949 and 0A5L. -/
 theorem complex_colimit_homotopyColimit
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     [HasCountableCoproducts A]

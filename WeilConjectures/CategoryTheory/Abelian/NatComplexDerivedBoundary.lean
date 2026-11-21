@@ -168,26 +168,7 @@ private theorem extension_boundary (S : ShortComplex (CochainComplex C ℕ))
 complexes, and its derived triangle boundary is the original snake boundary under
 `natComplexDerivedHomologyIso`.
 
-Source: Stacks Project, Homology, Tag 0117; Derived Categories, Tag 014Q.
-
-Proof:
-1. Check exactness degreewise. In a nonnegative degree the extended row is
-isomorphic, through `extendXIso`, to the original short exact row. In a negative
-degree all three terms are zero. Thus the extended sequence is short exact.
-2. For an integer-indexed short exact sequence use its cone triangle. The map
-from the cone to the third complex is a quasi-isomorphism. The formula
-`CochainComplex.mappingCone.homologySequenceδ_triangleh` identifies the cone
-boundary with the snake boundary after this quasi-isomorphism. Localizing and
-cancelling that isomorphism gives the same formula for `triangleOfSES`.
-3. In degrees n and n+1, the cycles and opcycles identifications of extension
-commute with the snake diagram: the differentials and the two sequence maps
-are transported by `extendXIso`. Naturality of the snake boundary identifies the
-extended boundary with the original boundary. This holds also for n=0: the
-incoming differential in degree -1 is zero, just as it is for the initial degree
-of the original complex. Compose with `homologyFunctorFactors` to obtain the
-asserted equation. The cone uses its third map minus the projection, so the
-boundary here has the same sign as the snake boundary.
--/
+Source: Stacks Project, Homology, Tag 0117; Derived Categories, Tag 014Q. -/
 theorem natComplex_boundary_derived
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (S : ShortComplex (CochainComplex C ℕ)) (hS : S.ShortExact) :

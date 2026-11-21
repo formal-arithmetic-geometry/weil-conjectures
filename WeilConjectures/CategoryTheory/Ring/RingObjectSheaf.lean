@@ -19,10 +19,7 @@ universe u v w
 open CategoryTheory CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
-/-- Forgetting a ring sheaf to abelian groups preserves the sheaf condition.
-Proof: a matching family of underlying sections is exactly a matching family
-of ring sections. Glue it uniquely in the ring sheaf. Addition, zero and negation
-commute with this gluing by uniqueness, proving the abelian sheaf condition. -/
+/-- Forgetting a ring sheaf to abelian groups preserves the sheaf condition. -/
 @[instance] theorem hasSheafCompose_forget₂_ringCat_ab
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) :
     J.HasSheafCompose (forget₂ RingCat.{w} AddCommGrpCat.{w}) := by

@@ -63,15 +63,12 @@ def IsHom (A B : InternalModule R C) (f : A.X ⟶ B.X) : Prop :=
   A.add ≫ f = prod.map f f ≫ B.add ∧ A.zero ≫ f = B.zero ∧
     A.neg ≫ f = f ≫ B.neg ∧ ∀ a : R, A.smul a ≫ f = f ≫ B.smul a
 
-/-- Identity maps preserve the operations. Source: Stacks Tag 0DV5.
-Proof: compose each operation with the identity and use the product identity law. -/
+/-- Identity maps preserve the operations. Source: Stacks Tag 0DV5. -/
 theorem isHom_id (A : InternalModule R C) : IsHom A A (𝟙 A.X) := by
   simp only [IsHom, Category.comp_id, Category.id_comp, prod.map_id_id, and_self,
     implies_true]
 
-/-- Composites preserve the operations. Source: Stacks Tag 0DV5.
-Proof: substitute the two compatibility equations successively, use associativity,
-and use functoriality of the binary product map. -/
+/-- Composites preserve the operations. Source: Stacks Tag 0DV5. -/
 theorem isHom_comp (A B D : InternalModule R C) (f : A.X ⟶ B.X) (g : B.X ⟶ D.X)
     (hf : IsHom A B f) (hg : IsHom B D g) : IsHom A D (f ≫ g) := by
   rcases hf with ⟨hf_add, hf_zero, hf_neg, hf_smul⟩

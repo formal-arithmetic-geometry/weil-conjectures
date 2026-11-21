@@ -15,17 +15,8 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 /-- Transport right adjoints along an equivalence and a comparison of left adjoints.
-Source: Stacks Project, Tag 0D5S.
 
-Proof: Form the comparison j from e.inverse followed by P to Q by whiskering
-p inverse with e.inverse, then applying the counit isomorphism of e. Compose
-the adjunction e.symm.toAdjunction with ac, and transport its left functor along
-j. This yields an adjunction Q to c followed by e.functor. Its counit at Z is
-j inverse at e(c(Z)), then P of the inverse unit of e, then ac counit. Naturality
-of p and the triangle identity of the equivalence reduce this to p at c(Z)
-followed by ac counit. Right adjoint uniqueness against ad gives t, and the
-counit identity for rightAdjointUniq proves the assertion. This works without
-nonemptiness assumptions on any category. -/
+Stacks Project, Tag 0D5S. -/
 private theorem transport
     {E J T : Type*} [Category* E] [Category* J] [Category* T]
     (e : E ≌ J)
@@ -55,12 +46,8 @@ private theorem transport
   simp
 
 /-- The functor form of counit transport along an equivalence.
-Source: Stacks Project, Tag 0D5S.
 
-Proof: Apply the preceding equivalence calculation to L.asEquivalence, whose
-functor is definitionally L. The calculation composes adjunctions and applies
-rightAdjointUniq; naturality of p and the equivalence triangle identity identify
-the resulting counit with p followed by the original counit. -/
+Stacks Project, Tag 0D5S. -/
 theorem equivalence_rightAdjoint_counit_transport
     {E J T : Type*} [Category* E] [Category* J] [Category* T]
     (L : E ⥤ J) [L.IsEquivalence]

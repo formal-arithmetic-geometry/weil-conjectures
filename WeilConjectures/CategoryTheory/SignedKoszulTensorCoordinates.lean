@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.SignedKoszulTensorCoproduct
 /-!
 # The normalized finite tensor calculation
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, finite free tensor calculation.
+## References
+
+* Stacks Project, algebraization.tex, Tag 0A0E.
 -/
 
 @[expose] public section
@@ -139,24 +141,7 @@ private theorem zeroKoszulSummands_isColimit
 matrix for its differential and the canonical pure-tensor normalization.
 This does not construct transitions or assert quasi-isomorphism invariance.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, the finite free negative Koszul calculation.
-
-Proof in words: induct on the number of ordered factors. For zero factors, identify
-K tensor O[0] with K by its right unitor and identify the sole subset with the empty
-set. For the successor, split subsets according to membership of the first index.
-The negative double complex is O in degrees -1 and 0 and zero otherwise. Distributing
-the tensor over these two terms and over the finite subset decomposition of the tail
-therefore gives the indicated biproduct. Define its inverse by the specified pure
-tensors, using the inverse unitors and total-tensor inclusions. The projections are
-multiplication by the rank-one coordinates, so their composites with the inclusions
-are the Kronecker identities and their sum is the identity. Thus these maps are inverse.
-In the total differential the K part has sign one. The ith factor part has sign (-1)^(q+|I|)
-from K and one extra minus sign for every preceding negative factor. Its coefficient
-is a_i^(m+1) and it erases i. Sum over i, inserting the equality transports between
-the indicated degrees, to obtain the stated matrix. This also proves normalization.
-At r=0 only the K differential survives; at r=1 the off-diagonal coefficient is
-(-1)^(q+1) a_0^(m+1). Nothing divides by a scalar, so zero rings and zero sections
-are allowed. The calculation is degreewise finite and places no bound on K. -/
+Stacks Project, algebraization.tex, Tag 0A0E. -/
 theorem exists_ringedSignedKoszulTensorCoordinates
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A]

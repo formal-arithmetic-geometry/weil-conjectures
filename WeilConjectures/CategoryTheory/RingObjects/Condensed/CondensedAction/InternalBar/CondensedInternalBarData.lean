@@ -68,8 +68,7 @@ abbrev tuples (n : ℕ) : Profinite.{u} := Profinite.of (Fin n → G)
 def freePower (n : ℕ) : Modules R :=
   (free R).obj (((coherentTopology Profinite.{u}).uliftYoneda.{u + 1}).obj (tuples G n))
 
-/-- The canonical local generator from the unit of the free adjunction.
-Source: step 1, the generator [g_1,...,g_n]. -/
+/-- The canonical local generator from the unit of the free adjunction. -/
 def generator (n : ℕ) (S : Profinite.{u}) (x : Fin n → C(S, G)) :
     sectionModule R (freePower R G n) S :=
   (((freeAdjunction R).unit.app

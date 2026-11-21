@@ -30,24 +30,7 @@ preserves and reflects exactness at the middle term. Equality is equality of
 subobjects of the middle module sheaf, so it expresses precisely `im(a) = ker(b)`.
 The module universe `max u v` contains both the objects and arrows of the site.
 
-Source: Stacks Project, Modules on Sites, Tag 0E8G.
-
-Proof plan:
-1. By `lem-pur-site-restriction-module-adjunction-exact`, the sheafified direct-sum
-extension is exact, hence preserves the equality of image and kernel.
-2. The adjunction unit sends a section over `(V, φ)` into the `φ` summand and then
-into its sheafification. This is natural and module-linear. The underlying abelian
-and set sheafification comparisons and the local equality criterion
-show that a section in its kernel
-vanishes locally. Coordinate injection into a direct sum is injective, and sheaf
-separatedness makes the section zero. This includes empty covering families.
-3. This monic unit implies that extension detects zero objects: if the extension
-of a module is zero, that module injects into its zero restriction.
-4. Factor the first arrow through the kernel of the second and take the cokernel
-of this factorization. The original complex is exact precisely when this cokernel
-is zero. Exact extension identifies its extension with the analogous cokernel of
-the extended complex. Exactness there makes that extension zero; step 3 makes the
-original cokernel zero and proves reflection. -/
+Source: Stacks Project, Modules on Sites, Tag 0E8G. -/
 theorem ringedSliceExtension_exact_iff
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{max u v}) (U : C)

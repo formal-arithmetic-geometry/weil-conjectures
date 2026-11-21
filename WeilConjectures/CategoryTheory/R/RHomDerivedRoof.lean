@@ -30,23 +30,7 @@ open CochainComplex.HomComplex
 namespace CategoryTheory.Functor
 
 /-- The natural RHom comparison with its cocycle roof formula, before shift compatibility.
-Source: Stacks Project, Tags 06XR (part 1) and 070I.
-
-Proof: represent a bounded below derived object by a bounded below complex of injectives.
-Cocycles from M to its degree n terms are degree n Hom-complex cocycles from M[0].
-The boundary subgroup consists precisely of null-homotopic maps, so taking the quotient
-identifies H^n(Hom(M,I)) with homotopy-category maps M[0] to I[n]. Bounded below
-injective complexes and their shifts are K-injective. The K-injective localization
-bijection identifies these maps with derived-category maps. Postcompose with the inverse
-of the resolution map to obtain the stated roof. All operations preserve addition.
-The derived unit on an injective complex is invertible and identifies the source with
-H^n(RHom(M,Q(I))). Extend the comparison along a representing isomorphism to every
-object of D+. For a derived morphism between two such objects, the K-injective
-localization bijection gives a lift between resolutions, unique up to homotopy.
-Applying Hom(M,-) to the lift and passing to cohomology yields naturality, since the
-lift commutes with the resolution maps in the derived category. Taking the identity
-morphism with two resolutions proves independence of the resolution and hence the
-formula for every r, not only the resolution used to construct the comparison. -/
+Source: Stacks Project, Tags 06XR (part 1) and 070I. -/
 theorem exists_rhom_hom_derived_roof
     {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]
     [HasDerivedCategory.{w} C] [HasDerivedCategory.{w₂} AddCommGrpCat.{v}] (M : C) :

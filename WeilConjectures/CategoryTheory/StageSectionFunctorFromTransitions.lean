@@ -21,32 +21,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
 /-- Construct the section diagram from transition maps satisfying the unit equation.
-Source: Stacks Project, Sites, Tag 0A35, section formula and adjunction paragraph.
-
-Proof: Write S_t for inverse image along f_t = F(t.hom), R_t for restriction,
-and eta_t for its unit. For each b : t to t', the hypothesis at every X is the
-sheaf equation eta_t(G) followed by R_t(theta_b(G)) = eta_t'(G), after identifying
-iterated restriction using F.map_comp and Under.w. Equality of Arrow objects
-retains precisely this identification of endpoints. The adjunction hom-set
-bijection at t is injective, so this equation determines theta_b(G) uniquely.
-For an identity refinement, the identity on S_t(G), transported along F.map_id,
-satisfies that equation; therefore theta_id is that identity. For composable
-b and c, theta_b followed by restriction of theta_c satisfies the equation
-for c composed with b: apply the unit equation for b and then for c.
-Functoriality of precomposition identifies the iterated restrictions, with
-transports along F.map_comp. Injectivity gives the composition law.
-
-Set L(G)(t) = S_t(G)(f_t(U)). Define L(G)(b) by evaluating theta_b(G) at f_t(U),
-then transporting from S_t'(G)(F(b.right)(f_t(U))) to S_t'(G)(f_t'(U)). The laws
-just established, together with cancellation of equality transports, give
-map_id and map_comp. For a sheaf morphism G to H, evaluate S_t on that morphism
-at f_t(U); naturality of theta makes these components a map of diagrams.
-Functoriality of each S_t gives the identity and composition laws in G, hence
-L is a functor. Its evaluation at t has the stated object and morphism maps,
-so the identity identifications give E_t. Unfolding L(G)(b) and cancelling the
-endpoint transport gives the final Arrow equality. This construction uses the
-given theta; it does not choose transition maps from a mere existence theorem.
--/
+Source: Stacks Project, Sites, Tag 0A35, section formula and adjunction paragraph. -/
 theorem stage_section_functor_from_transitions
     (J : Type u) [SmallCategory J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

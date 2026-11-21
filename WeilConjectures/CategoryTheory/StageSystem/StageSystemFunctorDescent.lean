@@ -49,24 +49,13 @@ def coefficientPairFunctorObject (P : S.PairCategory) : T.PairCategory :=
   | ⟨i, X⟩ => ⟨i, (φ i).obj X⟩
 
 omit [IsDirectedOrder I] in
-/-- Matching the pair first preserves the original stagewise object formula.
-Proof: destruct the pair; both sides are the same pair constructor. -/
+/-- Matching the pair first preserves the original stagewise object formula. -/
 theorem coefficientPairFunctorObject_eq (P : S.PairCategory) :
     coefficientPairFunctorObject S T φ P = ⟨P.stage, (φ P.stage).obj P.obj⟩ := by
   cases P
   rfl
 
-/-- The functor on the upstream quotient is uniquely prescribed by all representatives.
-Proof: conjugate a representative by b at its source and inverse b at its target.
-The tower equation identifies this formula after every further transport: expand
-transport, use naturality of b, and cancel inverse comparisons. Thus eventual
-equality of representatives is preserved and the map descends to the actual
-quotient. At a common stage composition cancels the middle comparisons and uses
-functoriality of φ; the identity representative cancels b with its inverse.
-These are exactly the upstream quotient's category operations. Every arrow has
-a representative, so the object and representative formulas give uniqueness.
-No extra unit assumption is needed on this quotient: identity representatives
-already have both endpoints extended along the same repeated-stage transition. -/
+/-- The functor on the upstream quotient is uniquely prescribed by all representatives. -/
 theorem coefficientPairFunctor_exists (hb : pairFunctorCoherent S T φ b) :
     ∃! F : S.PairCategory ⥤ T.PairCategory,
       (∀ P, F.obj P = coefficientPairFunctorObject S T φ P) ∧

@@ -18,15 +18,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Compatible morphisms into a finite cokernel presentation have a limit when
-endomorphisms of the projective generator are continuous functions into a compact ring.
-
-Proof. Lift each morphism through the finite free presentation by projectivity.
-Lift each scalar-divisible difference by exactness of the scalar cokernel sequence,
-and lift the remaining presentation relation. The endomorphism-ring equivalence
-turns these lifts into continuous matrix congruences. Compact matrix completeness
-produces a vector satisfying all of them. Its image in the presentation cokernel
-has the prescribed reductions: matrix terms vanish and each remaining correction
-is divisible by the required scalar power. -/
+endomorphisms of the projective generator are continuous functions into a compact ring. -/
 theorem exists_cokernel_limit_of_continuous_end
     {C : Type*} [Category C] [Abelian C] [HasFiniteBiproducts C] (P : C) [Projective P]
     {S : Type*} {R : Type} [TopologicalSpace S] [CompactSpace S] [T2Space S]

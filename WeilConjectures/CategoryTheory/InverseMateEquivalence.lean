@@ -17,16 +17,7 @@ universe v₁ v₂ v₃ v₄ u₁ u₂ u₃ u₄
 namespace CategoryTheory
 
 /-- Source: Stacks Project, Categories 0B65, applied after transporting adjunctions
-across equivalences (the transport in Topologies 04HR).
-Proof: let alpha be the inverse mate. For any x and z, choose z0 and an
-isomorphism H(z0) to z. Full faithfulness of H, the first adjunction, full
-faithfulness of G, beta at z0, and the second adjunction give successive
-bijections from Hom(H(L1(x)), z) to Hom(L2(G(x)), z). The mate unit equation
-and naturality of beta identify the resulting function with precomposition
-by alpha at x. This function is bijective for every z. Taking z equal to
-L2(G(x)) supplies a left inverse of alpha; injectivity with z equal to
-H(L1(x)) then proves the other inverse equation. Each component of alpha
-is therefore invertible, so alpha is a natural isomorphism. -/
+across equivalences (the transport in Topologies 04HR). -/
 theorem isIso_inverseMate_of_equivalences
     {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Category.{v₄} F]

@@ -118,17 +118,7 @@ private theorem restrictionUnit_isIso (B E : Type w) [CommRing B] [CommRing E]
 
 /-- Restriction with invertible scalar map along a continuous, cocontinuous functor is
 strong monoidal, for the existing sheaf tensor products.
-Source: Stacks, Modules on Sites, Tags 03CY and 03EK; Sites, Tag 04B8.
-
-Proof: the presheaf restriction is strong monoidal. Its unit is the invertible coefficient
-map; its tensorator is the scalar-restriction tensorator, invertible by the semilinear
-change-of-ring tensor equivalence. Module sheafification commutes with restriction:
-restrict its unit and transpose under sheafification. Cocontinuity preserves the local
-bijection, so the transpose is invertible. The unit naturality equation makes these maps
-natural. Both sheafification functors are monoidal localizations; their universal property
-therefore equips the sheaf restriction with a strong monoidal structure. The proof uses
-no points, no nonzero-ring hypothesis and no equality of the site and coefficient universes.
--/
+Source: Stacks, Modules on Sites, Tags 03CY and 03EK; Sites, Tag 04B8. -/
 theorem ringed_cocontinuous_monoidal : Nonempty (pushforward.{w} a.hom).Monoidal := by
   let L := PresheafOfModules.sheafification.{w} (R :=
     (sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).obj S) (𝟙 _)

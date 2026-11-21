@@ -24,21 +24,8 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [EnoughInjectives B]
   (G : B ⥤ C) [G.Additive]
 
 /-- Transport of the single-complex unit from degree n to degree zero.
-Source: Stacks Project, derived.tex, Tag 015J, proof, remark (1), and
-`Functor.commShift_rightDerivedFunctorPlusUnit`.
-
-Proof: Identify the degree-n single object with the shift by -n of the degree-zero
-single object using singleFunctors.shiftIso. Apply naturality of the derived unit
-along this identification and its NatTrans.CommShift equation at -n. Apply H^n
-and the homology shift isomorphism H^n(K[-n]) = H^0(K). The three isomorphisms
-in c are exactly these target transports. On the source, naturality of
-homologyFunctorObjQIso and the single-complex homology comparison identify the
-transported cycles projection with iCycles followed by the sole-term coefficient
-identification and singleFunctorCompHomologyFunctorIso 0 inverse. The remaining
-morphism is H^0 of rightDerivedPlusSingleUnit, hence the displayed degree-zero
-unit homology map. For n=0 the shift unit laws give the same equation; zero X
-requires no special choice. This calculation uses only additivity, and does not
-use either the classical derived-functor comparison or left exactness. -/
+Source: Stacks Project, Tag 015J, and
+`Functor.commShift_rightDerivedFunctorPlusUnit`. -/
 theorem rightDerivedFunctorPlusUnit_canonical_single_shift (X : B) (n : ℕ) :
     let S : CochainComplex.Plus B :=
       ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩

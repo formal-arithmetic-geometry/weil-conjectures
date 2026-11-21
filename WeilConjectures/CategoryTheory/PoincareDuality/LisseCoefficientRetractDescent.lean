@@ -20,12 +20,7 @@ open CategoryTheory
 namespace CategoryTheory
 
 /-- Natural transformations descend from scalar generators to their retracts.
-Source: the retract and argument of Weil II (1.1.1) d).
-Proof: naturality on image morphisms extends to their scalar span by linearity.
-Choose each object as a retract of an image object and sandwich the given component
-between the inclusion and projection. Naturality for the sandwich of any morphism
-proves naturality of the extension. Naturality for the inclusion of an image object
-proves its restriction is the original transformation. Retracts prove uniqueness. -/
+Source: the retract and argument of Weil II (1.1.1) d). -/
 theorem bijective_whiskerLeft_of_span_retract
     {C D : Type*} [Category C] [Category D]
     {K : Type*} [Field K] (T : C ⥤ D) (F : D ⥤ ModuleCat K)

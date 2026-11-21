@@ -20,14 +20,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace SheafOfModules
 
 /-- The constant module sheaf functor preserves finite limits and finite colimits.
-Source: Stacks Project, Modules on Sites, Tag 093U (3).
-
-Proof: Evaluation of the constant module presheaf functor at any object is the identity
-functor on modules. Limits and colimits of presheaves of modules are sectionwise, so this
-functor preserves both. Module sheafification preserves finite limits and, as a left
-adjoint, all colimits. Compose these preservation properties. In particular, applying
-the kernel and cokernel comparisons identifies the kernel and cokernel of a constant
-linear map with the constants of its algebraic kernel and cokernel. -/
+Source: Stacks Project, Modules on Sites, Tag 093U (3). -/
 theorem strictPerfectConstantSheaf_exact {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (B : Type u) [CommRing B] :
     PreservesFiniteLimits (strictPerfectConstantSheaf J B) ∧

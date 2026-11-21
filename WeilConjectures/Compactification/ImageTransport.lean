@@ -42,7 +42,7 @@ variable {S X Y V : Scheme.{u}} {x : X ⟶ S} {y : Y ⟶ S}
 
 Differences from the informal statement. The two closed subschemes of `X' ×_S Y` are
 recorded by the kernels of the corresponding closed immersions, so the statement is in
-kernel ideal sheaf form. The Stacks Project and the blueprint also assume `h`
+kernel ideal sheaf form. The Stacks Project also assumes `h`
 quasi-separated; Mathlib's kernel ideal sheaf theory only needs quasi-compactness, so that
 hypothesis is dropped here.
 

@@ -9,7 +9,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 
 /-! # Compatibility of an exact composite comparison with single complexes
 
-Source: Stacks Project, Tag 07A6, and localization functoriality.
+## References
+
+* Stacks Project, Tag 07A6, and localization functoriality.
 -/
 
 @[expose] public section
@@ -79,12 +81,7 @@ private theorem single_nat {C D : Type*} [Category C] [Category D]
   erw [Category.id_comp]
 
 /-- A descended comparison between a composite and another exact functor has its
-ordinary value on single complexes. Source: Stacks Project, Tag 07A6.
-
-Proof: the localization factorization gives compatibility of exact composition
-with the single comparisons. Naturality gives compatibility for an ordinary
-natural isomorphism, as can be checked in degree zero. Compose these two identities
-and cancel the inverse composition comparison. -/
+ordinary value on single complexes. Source: Stacks Project, Tag 07A6. -/
 theorem derived_single_constants_comparison
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]

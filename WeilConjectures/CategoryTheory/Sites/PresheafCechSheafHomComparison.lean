@@ -26,19 +26,7 @@ namespace CategoryTheory.Sheaf
 
 /-- The free-sheaf adjunction identifies Hom cochains with presheaf Čech cochains,
 including their differentials. No covering or Ext vanishing is assumed.
-Source: Stacks Project, Cohomology on Sites, Tag 079Z, zero-row identification.
-
-Proof: in every degree apply the sheafification adjunction to identify morphisms
-from the sheafified free nerve term to F with presheaf morphisms from the free
-nerve term to F.obj. These Hom equivalences are additive: their forward and
-inverse maps are composition with the unit and counit and application of the
-additive sheafification and forgetful functors. The nerve terms, after applying
-free abelian presheaves, are exactly the terms defining presheafCechComplex.
-Naturality of the adjunction identifies precomposition with every face map.
-Additivity then identifies precomposition with the alternating sum of faces
-with the alternating coface differential. This gives the displayed identity
-for every n and every cochain a, including degree zero and empty fibres.
--/
+Source: Stacks Project, Cohomology on Sites, Tag 079Z, zero-row identification. -/
 theorem presheafCechSheafComplex_hom_comparison
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}]

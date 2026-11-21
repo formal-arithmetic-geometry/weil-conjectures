@@ -51,24 +51,7 @@ private theorem arrow_precomp {X Y Z Z' : AddCommGrpCat.{u}}
   simpa using congrArg (fun k ↦ Arrow.mk (f ≫ k)) hg
 
 /-- Source: Stacks Project, Sites, Tag 0A35,
-section presentation; Modules on Sites, Tag 03CO (abelian colimits).
-
-Proof: Normalize the two section images to Y = V_i(U) using the equalities in
-hkappa. The equations hbeta_map and hm make these normalized maps compatible
-with D and B. Evaluation and the abelian forgetful functor preserve filtered
-colimits; their eventual equality criterion moves both images to a common stage
-k, where cancellation of the endpoint transport yields equality of beta_k unit
-images. In the abelian pointwise Kan colimit, their difference is a finite sum
-of defining relations: additivity within one group and restriction along a
-stage arrow. Lift all endpoints, arrows and defining triangles for this finite
-sum to a further common stage in Under i. Eventual object and arrow equality
-make each lifted triangle commute. Naturality of theta makes each restriction
-relation vanish after restriction to the forward image of U; additivity makes
-the linear relations vanish. Thus the two transported sections agree there.
-The equation hm and injectivity of E identify the two D images. Compose the
-refinement arrows with those to k to get the displayed eventual equality.
-This proves identification of representatives only, not their existence.
--/
+section presentation; Modules on Sites, Tag 03CO (abelian colimits). -/
 theorem raw_abelian_section_relations
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

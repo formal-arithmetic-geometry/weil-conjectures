@@ -71,18 +71,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- The scalar tensor mate of normalized reduction is invertible on arbitrary inputs.
 This assertion has no internal Hom, evaluation, or coefficient-duality conclusion.
 
-Source: Stacks 03CZ, 05V4, 06YY and 07A4.
-Proof: resolve the first input P by a K-flat complex. On complexes the balanced
-contraction P tensor Res(Ext Q) to Res(Ext(P tensor Q)) sends
-x tensor (s tensor y) to s tensor (x tensor y). The sheaf tensor cancellation
-isomorphism proves it invertible, degreewise and then on signed total complexes.
-For the derived calculation, resolve the restricted extension of the second
-input again by a K-flat complex. The normalization square of mu on these two
-K-flat pairs identifies its scalar adjunct with that contraction. The derived
-scalar unit is the localized ordinary unit x to 1 tensor x, so the counit in the
-displayed mate is precisely the contraction counit. Cancel the invertible K-flat
-comparison maps. Naturality and localization extend the result to all inputs.
-No boundedness, flatness of the quotient, or nonempty-site hypothesis is used. -/
+Source: Stacks 03CZ, 05V4, 06YY and 07A4. -/
 theorem reductionTensorStrength_isIso
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))
     (n : ℕ) (m : ReductionPresentation l E Y D hl a n)

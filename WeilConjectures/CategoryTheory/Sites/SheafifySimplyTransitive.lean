@@ -26,19 +26,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [Presheaf.IsLocallySurjective J (toSheafify J P)]
 
 /-- Simple transitivity passes to sheafification.
-Source: Stacks Project, Tags 03AH and 00WH.
-
-Proof: Represent a section of the associated sheaf locally in P. Equality of two
-translations of this section becomes equality in P on a refinement, by local
-injectivity of the unit. Naturality of the original action and its freeness give
-local equality of the group sections. Separatedness of G gives global equality.
-For two associated-sheaf sections, intersect their image sieves. On this cover
-choose the unique group sections translating their representatives. Compatibility
-with the extended operation and its just-proved freeness show that these local
-group sections agree under restriction. Glue in G, and use separatedness of the
-associated sheaf to verify that the glued group section translates the first
-section to the second. No nonemptiness hypothesis is needed; both sections are
-given. Empty covers and zero groups satisfy the same argument. -/
+Source: Stacks Project, Tags 03AH and 00WH. -/
 theorem bijective_sheafify_add_action
     (a : ∀ U, G.obj.obj U → P.obj U → P.obj U)
     (han : ∀ ⦃U V⦄ (f : U ⟶ V) g t,

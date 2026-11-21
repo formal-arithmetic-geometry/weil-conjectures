@@ -11,7 +11,10 @@ import WeilConjectures.CategoryTheory.TruncationTriangle
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Finite cohomology cone witnesses
-Source: Stacks Project, Derived Categories, Tags 08J5 and 0118.
+
+## References
+
+* Stacks Project, Derived Categories, Tags 08J5 and 0118.
 -/
 
 @[expose] public section
@@ -83,17 +86,7 @@ private theorem constructionWitness_step {C : Type*} {G : C → Prop}
 cohomology objects, placed in degree zero. This is independent of any constructibility
 condition or coefficient field.
 
-Source: Stacks Project, Derived Categories, Tags 08J5 and 0118.
-
-Proof: choose bounds a,b for the canonical t-structure and a complex representing K.
-The upper truncations at a-1 and b are respectively zero and isomorphic to K. For each
-integer q from a through b, the successive truncation triangle has third vertex
-H^q(K)[-q]. Inverse rotation expresses the next truncation as the cone of a morphism
-from H^q(K)[-q-1] to the previous truncation. Begin with zero, which is isomorphic to
-H^(a-1)(K)[0], concatenate the finitely many leaves and append those cones. Transport
-the final triangle by the isomorphism from the last truncation to K, so the final entry
-is literally K. The same zero-base construction handles acyclic objects and crossed
-bounds. No retract or infinite construction is used. -/
+Source: Stacks Project, Derived Categories, Tags 08J5 and 0118. -/
 theorem bounded_cohomology_cone_witness (A : Type u) [Category.{v} A] [Abelian A]
     [HasDerivedCategory.{w} A] (K : DerivedCategory A)
     (hK : TStructure.t.bounded K) :

@@ -50,7 +50,7 @@ product is additive, and `Λ`-linear if the tensor product of `A` is, in each va
 - `DerivedCategory.monoidalPreadditive`, `DerivedCategory.monoidalLinear`: the derived tensor
   product is additive, and `Λ`-linear if the tensor product of `A` is, in each variable.
 
-## Implementation notes
+## Implementation details
 
 `hasDerivedMonoidalCategory` is the K-flat route of
 `WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat`: the hypotheses above give
@@ -65,7 +65,6 @@ additive (it is triangulated) and `Λ`-linear (`WeilConjectures.Algebra.Homology
 so `Qh.obj P ⊗ᴸ -` is additive and `Λ`-linear by `Localization.functor_additive_iff` and
 `Localization.functor_linear_iff`. Every object of `D(A)` is isomorphic to `Qh.obj P` for a
 K-flat `P` (`DerivedCategory.exists_kFlat_iso`), and the same holds for `- ⊗ᴸ K`.
-
 -/
 
 @[expose] public section

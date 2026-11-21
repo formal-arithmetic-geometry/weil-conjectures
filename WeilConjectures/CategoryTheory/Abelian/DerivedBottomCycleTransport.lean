@@ -86,22 +86,7 @@ noncomputable def rightDerivedBottomToSingleIso (n : ℤ) :
 
 /-- Transport of canonical cycles to the actual unit on the single homology object.
 
-Source: Stacks Project, Tag 05TC (2), with the unit of Tag 05TD (3).
-
-Proof: Lift the lower truncation to the bounded-below derived category and
-map the single object of cycles into it using the canonical cycle inclusion.
-The cycle-map homology formula identifies its homology coefficient with
-the quotient followed by the lower-truncation homology map. Actual derived-unit
-naturality, including bounded-below/unbounded compatibility, identifies the
-original cycle prefix with the single unit followed by the derived cycle map.
-Factor that map through the canonical bottom-homology inclusion. Naturality
-of the single unit follows by cancelling its shifted comparison and applying
-shift normalization. Move the homology coefficient across the unit, expand
-the bottom inclusion, and cancel the upper inclusion, lower projection and
-double-truncation identification against the explicit comparison. The upper
-inclusion induces invertible derived bottom homology by the distinguished
-triangle and vanishing below n + 1. The result stops at the actual single
-unit; it does not compose the conclusion with the shifted comparison. -/
+Source: Stacks Project, Tag 05TC (2), with the unit of Tag 05TD (3). -/
 theorem rightDerivedBottom_cycle_transport (n : ℤ) (K : CochainComplex C ℤ) :
     ((((S.mapHomologicalComplex (.up ℤ)).obj K).sc n).liftCycles
         (S.map (K.sc n).iCycles) (by

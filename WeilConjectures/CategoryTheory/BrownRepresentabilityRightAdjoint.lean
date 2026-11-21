@@ -30,19 +30,9 @@ open CategoryTheory.Pretriangulated.Opposite
 namespace CategoryTheory
 
 /-- An exact functor from a compactly generated triangulated category that preserves
-set-indexed coproducts has a right adjoint. Source: Stacks Project, Tag 0A8G,
-Proposition.
+set-indexed coproducts has a right adjoint. Stacks Project, Tag 0A8G.
 The indexing universe contains both morphism universes and an arbitrary universe `w`
-for the generating set; object universes are independent.
-
-Proof: Replace `C` and `D` by `ULiftHom.{max w v₁ v₂}` models, whose morphism types live
-in the coproduct indexing universe, transporting the triangulated structures, coproducts
-and compact generation along `ULiftHom.equiv`. The transported functor is triangulated and
-preserves coproducts, and the transported source has a family of compact generators
-(`IsCompactlyGeneratedTriangulated.exists_compactGenerators`), so it is a left adjoint by
-`Functor.isLeftAdjoint_of_compactGenerators`. Being a left adjoint is invariant under
-composition with equivalences, so `F` is a left adjoint.
--/
+for the generating set; object universes are independent. -/
 theorem brownRepresentabilityRightAdjoint
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [HasZeroObject C] [HasZeroObject D] [HasShift C ℤ] [HasShift D ℤ]

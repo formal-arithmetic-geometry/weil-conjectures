@@ -29,7 +29,7 @@ three properties over one of the stages (Stacks Tag 01ZQ,
 `Dᵢ` is Noetherian, so `p` has a compactification; base changing it back along `S ⟶ Dᵢ`
 (`AlgebraicGeometry.HasCompactification.of_isPullback`) compactifies `f`.
 
-The blueprint's compactification datum for `Rf_!` asks for more than mere existence: the
+The compactification datum for `Rf_!` asks for more than mere existence: the
 proper structure morphism `g` of the compactification must itself be *locally of finite
 presentation*. Over a locally Noetherian base this is automatic, since `g` is proper, hence
 locally of finite type (`AlgebraicGeometry.Compactification.locallyOfFinitePresentation_g`).
@@ -49,7 +49,6 @@ because `AlgebraicGeometry.LocallyOfFinitePresentation` is stable under base cha
 - `AlgebraicGeometry.exists_compactification_locallyOfFinitePresentation`: such a morphism
   admits a compactification whose structure morphism is locally of finite presentation.
 - `AlgebraicGeometry.finitelyPresentedCompactification`: a choice of such a compactification.
-
 -/
 
 @[expose] public section
@@ -128,8 +127,7 @@ instance locallyOfFinitePresentation_finitelyPresentedCompactification_g {X S : 
 
 The proof of `AlgebraicGeometry.nagataCompactification_of_locallyOfFinitePresentation` makes
 three selections: an absolute Noetherian approximation of the base, a separated descended model
-over one of its stages, and a compactification of that model. We record them as definitions,
-following the blueprint's final assembly. -/
+over one of its stages, and a compactification of that model. We record them as definitions. -/
 
 section FinalAssembly
 

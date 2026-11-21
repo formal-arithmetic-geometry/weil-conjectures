@@ -39,14 +39,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
 omit [s.functor.IsContinuous J J] in
 /-- The specified tensor and Hom components preserve right sheaf-Hom evaluation.
-
-Source: Stacks 03EK and 03EO.
-
-Proof: the complete pure-tensor characterization of each evaluation identifies it
-with braiding followed by canonical left evaluation. Braiding naturality moves the
-specified Hom comparison across the braiding. The presentation symmetry moves the
-tensor comparison across it as well. The given left-evaluation square then proves
-the required right-evaluation square. -/
+Source: Stacks 03EK and 03EO. -/
 theorem specified_evaluation_square (P : Presentation J s R a) :
     letI := P.category
     let U := P.modules.functor ⋙ forgetPairs (sigma J s R a)

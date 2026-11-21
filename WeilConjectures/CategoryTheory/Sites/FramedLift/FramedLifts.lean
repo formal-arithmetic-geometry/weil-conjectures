@@ -10,8 +10,8 @@ public import WeilConjectures.CategoryTheory.Sites.WithSection.TorsorWithSection
 /-!
 # Lifting torsors with a prescribed section
 
-Source: Stacks Project, Tag 03AJ, relative refinement: the lifting-torsor construction
-with its chosen lift over an object of the site.
+Source: Stacks Project, Tag 03AJ (the lifting-torsor construction
+with its chosen lift over an object of the site).
 -/
 
 @[expose] public section
@@ -30,19 +30,17 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   {T : C} (hT : IsTerminal T) (hS : (ShortComplex.mk ι d w₀).ShortExact) (U : C)
 
 /-- A global quotient section together with its lift over U.
-Source: Stacks Project, Tag 03AJ, relative refinement. -/
+Source: Stacks Project, Tag 03AJ. -/
 def FramedLift :=
   (s : Q.obj.obj (op T)) × (lifts hT hS s).sheaf.obj.obj (op U)
 
 /-- The lifting torsor with its specified local lift.
-Source: Stacks Project, Tag 03AJ, relative refinement. -/
+Source: Stacks Project, Tag 03AJ. -/
 def FramedLift.toPair (z : FramedLift hT hS U) : WithSection G U :=
   ⟨lifts hT hS z.1, z.2⟩
 
 /-- Every pointed torsor has a pointed lifting presentation when E is injective.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 5.
-Proof: present the underlying torsor as a lifting torsor using injectivity, and transport
-its specified section along that isomorphism. -/
+Source: Stacks Project, Tag 03AJ. -/
 theorem FramedLift.surjective [Injective E] :
     Function.Surjective (fun z : FramedLift hT hS U ↦
       (_root_.Quotient.mk _ z.toPair : WithSection.Classes G U)) := by
@@ -56,11 +54,7 @@ theorem FramedLift.surjective [Injective E] :
       exact congrArg (fun f ↦ f.hom.app (op U) p.2) e.iso.hom_inv_id⟩
 
 /-- An isomorphism of pointed lifting torsors is translation by a global section of E.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 4.
-Proof: the difference between an equivariant isomorphism and the inclusion into E is
-invariant under G, hence glues to a global section x of E. Applying d computes its image
-as the difference of the quotient sections; evaluating on the specified lift gives the
-second equality. Conversely translate every local lift by the restriction of x. -/
+Source: Stacks Project, Tag 03AJ. -/
 theorem FramedLift.isIsomorphic_iff (z z' : FramedLift hT hS U) :
     WithSection.IsIsomorphic z.toPair z'.toPair ↔
       ∃ x : E.obj.obj (op T),
@@ -136,14 +130,12 @@ theorem FramedLift.isIsomorphic_iff (z z' : FramedLift hT hS U) :
       rw [hU, add_sub_cancel]
 
 /-- The zero quotient section with its zero lift.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 6. -/
+Source: Stacks Project, Tag 03AJ. -/
 def FramedLift.zero : FramedLift hT hS U :=
   ⟨0, ⟨0, by change d.hom.app (op U) 0 = Q.obj.map _ 0; simp⟩⟩
 
 /-- Zero lifts give the trivial torsor with its zero section.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 6.
-Proof: send g to its image under the inclusion G into E. Exactness makes this an
-isomorphism onto the lifts of zero, and it carries zero to zero. -/
+Source: Stacks Project, Tag 03AJ. -/
 theorem FramedLift.zero_isIsomorphic :
     WithSection.IsIsomorphic
       (⟨trivial G, @id (G.obj.obj (op U)) 0⟩ : WithSection G U)
@@ -167,16 +159,16 @@ theorem FramedLift.zero_isIsomorphic :
     exact (ι.hom.app (op U)).hom.map_zero
 
 /-- Classes of framed lifts, identifying precisely global translations.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 3 and 4. -/
+Source: Stacks Project, Tag 03AJ. -/
 def FramedLift.setoid : Setoid (FramedLift hT hS U) :=
   Setoid.comap (FramedLift.toPair hT hS U) (WithSection.setoid G U)
 
 /-- Framed lifting presentations modulo global translation.
-Source: Stacks Project, Tag 03AJ, relative refinement. -/
+Source: Stacks Project, Tag 03AJ. -/
 def FramedLift.Classes := _root_.Quotient (FramedLift.setoid hT hS U)
 
 /-- The canonical identification of framed lifting classes with pointed torsor classes.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 3 through 5. -/
+Source: Stacks Project, Tag 03AJ. -/
 noncomputable def FramedLift.classEquiv [Injective E] :
     FramedLift.Classes hT hS U ≃ WithSection.Classes G U :=
   Equiv.ofBijective
@@ -200,10 +192,7 @@ def liftsEmbedding (s : Q.obj.obj (op T)) :
 
 omit [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrpCat.{w}] in
 /-- Two equivariant lifting maps differ by one global section.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 4 and 8.
-Proof: their difference is invariant under the torsor action and natural in the site
-object, hence glues to a global section. Compute its image under d after restriction
-to any object carrying a torsor section; these objects cover the terminal object. -/
+Source: Stacks Project, Tag 03AJ. -/
 theorem difference_of_equivariant_lifts (P : Torsor G)
     (F H : Sheaf J AddCommGrpCat.{w}) (δ : F ⟶ H) (φ : G ⟶ F)
     (μ ν : P.sheaf.obj ⟶ F.obj ⋙ forget AddCommGrpCat.{w})

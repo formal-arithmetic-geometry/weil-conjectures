@@ -64,28 +64,7 @@ private theorem finite_sections_equal
 
 /-- A filtered colimit of presheaves satisfying the sheaf condition for one finite
 presieve with pairwise pullbacks satisfies that same condition.
-Source: Stacks Project, Sites, Tag 0738(4) and Tag 00VM; Categories, Tag 002W.
-
-Proof: Index the arrows of R by its finite subtype of uncurried arrows. Evaluation
-preserves presheaf colimits. For separatedness, lift two sections over X to a common
-stage. Their restrictions agree in the colimit over each arrow of R, so each such
-equality holds after a transition. The finite wide-span lemma for filtered categories
-makes all of these transitions factor through a single transition. Separatedness at
-that stage identifies the two sections, hence their images in the colimit agree.
-
-For existence, lift the finitely many members of a compatible family to stages of
-the diagram, and take a cocone over the finite discrete diagram of those stages.
-This gives a family at one stage. For each pair of arrows of R, compatibility of its
-image implies equality of the two restrictions over the pairwise pullback after a
-transition. There are finitely many pairs, so the finite wide-span lemma again gives
-one transition making every compatibility equation hold. At that stage the sheaf
-condition provides an amalgamation. Its image amalgamates the original family by
-naturality and the cocone equations. Empty R causes no exception: the finite discrete
-cocone and the wide-span construction also apply to empty index sets, and the
-stagewise empty-presieve sheaf condition supplies the unique section over X.
-
-This is the finite-stage argument of Sites Tag 0738(4), applied directly to the
-sectionwise presheaf colimit and the sheaf condition of Tag 00VM. -/
+Source: Stacks Project, Sites, Tag 0738(4) and Tag 00VM; Categories, Tag 002W. -/
 theorem finitePresieve_isSheafFor_filteredColimit
     {C : Type u₁} [Category.{v} C]
     {Λ : Type t} [SmallCategory Λ] [IsFiltered Λ] [UnivLE.{t, w}]

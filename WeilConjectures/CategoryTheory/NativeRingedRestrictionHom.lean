@@ -148,9 +148,7 @@ Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95. -/
 abbrev restrictedCommRing :=
   (F.sheafPushforwardContinuous CommRingCat K J).obj R
 
-/-- Direct module restriction along a continuous site functor. Restrict the underlying module
-presheaf and its sheaf proof. This construction keeps the underlying module objects unchanged
-and omits the redundant identity restriction of scalars.
+/-- Direct module restriction along a continuous site functor.
 
 Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95. -/
 def restrictModules :
@@ -395,12 +393,7 @@ private theorem homComplexFromComparison
   intro L M
   exact ⟨HomologicalComplex.Hom.isoOfComponents (a L M) (comm L M)⟩
 
-/-- Restriction along a site equivalence commutes with the sheaf Hom complex. Full faithfulness of
-the induced slice restrictions identifies the sheaves of module homomorphisms. Products of these
-comparisons give an isomorphism in each degree. Naturality with respect to precomposition and
-postcomposition identifies the two terms of the Hom differential, so these degreewise
-isomorphisms form a cochain isomorphism. All products have indices in the fixed coefficient
-universe; no site or coefficient universe is identified.
+/-- Restriction along a site equivalence commutes with the sheaf Hom complex.
 
 Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95. -/
 theorem homComplexRestriction

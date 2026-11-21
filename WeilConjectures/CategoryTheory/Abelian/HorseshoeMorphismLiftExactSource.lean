@@ -223,29 +223,7 @@ The target horseshoe data use the same declarations and equations as
 `exists_horseshoe_morphism_lift`.
 
 Source: the classical horseshoe comparison calculation, using Stacks Project, Tags 0136
-and 013R, in the setting of the Cartan--Eilenberg construction of Tag 015I.
-
-Proof:
-1. By lem-weil-pbc-ses-injective-kernel-splits, split the target row in each degree,
-   choosing a section sigma' of beta'. Extend phiA^n across the source monomorphism
-   i^n into JA^n by injectivity, obtaining t^n.
-   Set chi^n = alpha'^n t^n + sigma'^n phiC^n p^n in ordinary composition order.
-   Then chi i = alpha' phiA and beta' chi = phiC p.
-2. By row exactness in the abelian category, the differential defect
-   D = d' chi - chi d factors uniquely as D^n = alpha'^{n+1} E^n p^n.
-   The identity d' D = -D d gives d' E + E d = 0. Likewise the augmentation defect
-   w = chi^0 sB - sB' b factors as alpha'^0 e g, with E^0 sC = d' e.
-3. The quasi-isomorphism sC gives monicity of sC^0, exactness of (sC^0, dC^0),
-   and exactness of XC in every positive degree. Extend e along sC^0 into JA^0
-   to obtain k^0. The augmentation identity gives sC^0 (d' k^0 - E^0) = 0,
-   so exactness and injectivity give k^1 with k^1 dC^0 = d' k^0 - E^0.
-   Inductively, dC^n annihilates d' k^{n+1} - E^{n+1}, by d'^2 = 0 and
-   d' E^n = -E^{n+1} dC^n. Exactness and injectivity give k^{n+2}.
-   Recursion on consecutive pairs constructs all k^n, with e = k^0 sC and
-   E^n = d' k^n - k^{n+1} d. This is the successive-extension argument of Tag 013R.
-4. Set phiB^n = chi^n - alpha'^n k^n p^n. These identities kill the differential
-   and augmentation defects. The zero composites beta' alpha' and p i preserve
-   both outer squares. Thus phiB is the required augmented middle chain map. -/
+and 013R, in the setting of the Cartan--Eilenberg construction of Tag 015I. -/
 theorem exists_horseshoe_morphism_lift_exact_source
     {C : Type u} [Category.{v} C] [Abelian C]
     (S T : ShortComplex C) (hS : S.ShortExact) (hT : T.ShortExact) (F : S ⟶ T)

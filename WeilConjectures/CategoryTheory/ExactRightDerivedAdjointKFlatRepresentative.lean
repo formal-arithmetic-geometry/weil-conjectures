@@ -194,13 +194,7 @@ private theorem cochainCounit {L : DerivedCategory C ⥤ DerivedCategory D}
 
 /-- On a K-flat complex, the canonical transpose of the localized ordinary unit is
 invertible for any chosen left adjoint to the derived exact right adjoint.
-Source: Stacks Project, Tag 06YY.
-Proof: the K-flat left derivability structure makes the total left derived functor
-absolute. Exactness makes the derived right functor and all its postcomposites right
-derived. The derived-adjunction theorem therefore gives an adjunction normalized by
-the ordinary unit. Its counit is invertible on K-flat complexes. Naturality of the
-homotopy-to-cochain quotient comparisons and uniqueness of left adjoints identify
-the displayed transpose with that counit conjugated by three isomorphisms. -/
+Source: Stacks Project, Tag 06YY. -/
 theorem Adjunction.isIso_cochainTranspose_of_kFlat
     {L : DerivedCategory C ⥤ DerivedCategory D}
     (adj : E ⊣ U) (ad : L ⊣ U.mapDerivedCategory) (X : CochainComplex C ℤ)

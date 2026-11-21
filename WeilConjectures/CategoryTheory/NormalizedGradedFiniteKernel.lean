@@ -150,21 +150,6 @@ private theorem incomingAlphaIter_cocone (X : BigradedExactCouple C 0)
   exact hleft.trans (heq_of_eq hh)
 
 /-- In the normalized left half-plane, the graded quotient has the finite alpha kernel.
-
-Proof: Exactness and vanishing of the two adjacent initial E terms show that
-alpha is invertible at nonpositive first index. The normalized zeroth cocone map
-is invertible, so iteration of the cocone equation shows the cocone map at
-u=p-r is invertible when p<=r. The cocone equations identify iota_p with
-alphaIter r followed by this invertible cocone map, with the source transport.
-They identify iota_(p+1) with incomingAlphaIter (r+1) at (u,q+r) followed
-by the same map. Thus the next filtration image is that incoming image transported
-through an isomorphism. The kernel of the graded-piece projection is the next
-filtration step inside the current step: a monomorphism is the kernel of its
-cokernel in an abelian category. Pulling this kernel back along the image
-projection of iota_p gives the inverse image of the next filtration step along
-iota_p. Cancel the invertible cocone map in this pullback, obtaining the formula.
-This also covers r=0 and negative p: the transported identities and zero graded
-pieces obey the same kernel calculation.
 Source: Stacks Tags 011T and 0AMJ. -/
 theorem normalizedGraded_finite_kernel (X : BigradedExactCouple C 0)
     (hE : ∀ p q : ℤ, p < 0 → IsZero (X.E p q))

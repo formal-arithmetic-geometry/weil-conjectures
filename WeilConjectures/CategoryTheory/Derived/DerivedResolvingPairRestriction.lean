@@ -26,11 +26,7 @@ namespace CategoryTheory
 /-- Restriction to pairs of resolving cochain complexes detects and lifts natural
 transformations of derived bifunctors.
 Source: Stacks Project, categories.tex, localization universal property.
-
-Proof: put the resolving predicate on the underlying complexes of homotopy objects.
-A resolving quasi-isomorphism of complexes maps to such a homotopy morphism. Apply
-fully faithful restriction for resolving homotopy representatives, then transport
-along the canonical quotientCompQhIso in both variables. -/
+-/
 theorem derivedResolvingPairRestriction
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
     (B : Type*) [Category B] (P : ObjectProperty (CochainComplex A ℤ))

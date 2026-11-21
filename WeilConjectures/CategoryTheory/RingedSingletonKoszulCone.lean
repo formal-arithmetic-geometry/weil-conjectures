@@ -189,23 +189,7 @@ projection. This is a finite linear algebra statement on an arbitrary ringed sit
 it mentions no quotient, residue map, coefficient field or flatness hypothesis.
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
-the two-term finite free Koszul complex and its dual.
-
-Proof: identify the negative singleton complex with the internal dual by
-ringedNegativeKoszulSuccDuality at rank one. The tail factor is O[0], removed
-by the right unitor. The remaining negative factor is O --a^(n+1)--> O in
-degrees -1 and 0. Identify this double complex with the mapping cone of the
-same scalar on O[0], using its two supported degrees. Tensor with P and apply
-the second-variable tensor-cone comparison. The resulting
-endomorphism is exactly the specified tensor of the positive scalar power. In degree q
-its cone coordinates are (P tensor O[0])^(q+1) and (P tensor O[0])^q;
-the shifted coordinate has the usual (-1)^p tensor-cone sign. The dual unit
-is the inclusion of the second coordinate, giving the first equation.
-The cone's second projection is zero on every nonzero Koszul-degree summand,
-giving the second equation, including unsupported degrees. The successor map
-has diagonal entries a and 1, so it preserves the second projection. This is
-the last equation. All maps use finite free bases and unitors, so the formulas
-also hold on an empty site, over the zero ring, and for a zero complex. -/
+the two-term finite free Koszul complex and its dual. -/
 theorem ringedSingletonKoszulCone
     (a : (O.obj ⋙ forget CommRingCat).sections) (P : ringedSiteComplex O) :
     ∃ e : ∀ n : ℕ,

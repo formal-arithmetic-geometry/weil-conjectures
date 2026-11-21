@@ -25,34 +25,7 @@ namespace CategoryTheory
 
 /-- A finite stage family whose alpha images match becomes matching after refinement.
 Source: Stacks Project, Sites, Tag 0A35 matching equalizer
-paragraph and the adjunction paragraph; Modules on Sites, Tag 03CO.
-
-Proof: For each pair of arrows of T form the stage covering pullback. The
-hypothesis hy, applied to its two projections, says that the alpha image of the
-difference of the two restrictions of y is zero. Uniqueness of left adjoints,
-compatibly with the units, identifies alpha with the inverse-image unit along
-the cocone functor followed by the canonical composition isomorphism. The
-isomorphism is injective on sections, so the cocone unit kills each difference.
-Apply finite source-unit zero detection with the stage inverse image of G as
-source sheaf, and this pullback object as source object. It gives a transition
-unit killing the difference. The composition isomorphism for the two stage
-inverse images identifies the transitioned difference with the difference of
-the canonical transitioned restrictions. These maps are the transposes of the
-direct stage units; uniqueness of adjuncts gives their composition laws and
-identifies their composites with alpha using h-alpha. Since T is finite, there
-are finitely many pairs. Filteredness of Under i gives a single later stage
-where all the differences vanish. Transition functors preserve the covering
-pullbacks, so the transitioned indexed family is pullback compatible, hence
-compatible. Compatibility also identifies any duplicate arrows, yielding a
-family on the transported presieve T'. This presieve covers by hcover. Cocone
-naturality supplies the target equality hW and the factorization of every new
-cover arrow through an old one. The unit comparison and naturality supply the
-alpha-image formula along that factorization. The refinement arrows r can be
-taken to be the endpoint transports for these transitions. For an empty cover
-the empty family is already compatible and the identity transition suffices.
-This statement involves only a given finite stage family and its compatibility
-after alpha, not a sieve on the colimit site or generated-subgroup membership.
--/
+paragraph and the adjunction paragraph; Modules on Sites, Tag 03CO. -/
 theorem colimit_site_abelian_finite_family_stabilization
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

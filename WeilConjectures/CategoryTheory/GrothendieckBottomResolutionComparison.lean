@@ -27,23 +27,7 @@ namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Homology of the canonical resolution comparison transports the composite derived unit.
-Source: Stacks Project, Tags 015M and 015N, composition unit and abutment identification.
-
-Proof: Expand grothendieckSpectralObjectHBotTopIso as the inverse composition comparison
-followed by the single-object homology comparison. Apply the ordinary canonical
-resolution homology identity to F composed with G and cancel its resolution comparison.
-The resulting map is homology of the composition comparison followed by RG applied to
-the canonical F comparison. Before applying homology, the defining unit equation for
-the composition comparison and its naturality along the resolution augmentation give
-resolutionDerivedIso_comp above: invert the GF unit and cancel the F unit on the complex
-of injectives. Naturality of the G unit along the F map/extension comparison moves that
-comparison to its source. The map/extension comparison for GF equals the composite of
-G applied to the F comparison and the G comparison; this equality holds degreewise
-from the definitions, including the zero terms in negative degrees. Apply homology and
-naturality of homologyFunctorObjQIso, then cancel the extension homology comparisons.
-The remaining factors are exactly the inverse G map/extension comparison and the G unit
-shown on the right. No positive-degree condition is used.
--/
+Source: Stacks Project, Tags 015M and 015N, composition unit and abutment identification. -/
 private lemma bottom_resolution_composite_unit_transport
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [IsGrothendieckAbelian.{vA} A] {B : Type uB} [Category.{vB} B]
@@ -339,22 +323,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The bottom edge is computed by applying the second functor to a comparison
 from a resolution of `F(X)` to `F(I)`.
 
-Source: Stacks Project, Tags 015M, 015N and 015J, the degree-zero augmentation.
-
-Proof: Extend both complexes by zero to the bounded below homotopy category.
-The augmentation of J identifies J with F(X) in the derived category. The supplied
-comparison represents the canonical map F(X)[0] to RF(X): its degree-zero
-augmentation identity identifies it with the derived unit. Indeed, after
-precomposition with the quasi-isomorphism F(X)[0] to J, the maps agree as
-complex maps; cancelling that isomorphism in the derived category proves
-independence of the comparison. Under the truncation comparison for H^0(RF(X)), this is
-exactly the map from the bottom interval into the full interval. Apply RG and
-homology. The G unit on J is invertible since J has injective terms; the G unit
-on F(I) is invertible by hFG. Naturality of that unit makes the resulting map
-homology of G(phi). The canonical resolution computations identify its endpoints
-with R^n G(F(X)) and R^n(GF)(X). Their order is the displayed hom/inv order.
-This works also for n=0, with no incoming differential and no shift sign.
--/
+Source: Stacks Project, Tags 015M, 015N and 015J, the degree-zero augmentation. -/
 theorem grothendieckBottomEdgeMap_eq_resolution
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]

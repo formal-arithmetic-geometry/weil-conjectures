@@ -304,17 +304,7 @@ structure RingedRepresentatives extends Representatives
       (coefficientHomResolutionIso.{r, c, v, wb} J R K I).hom
 
 /-- All K-injective representative choices give the same, natural internal-Hom model.
-Source: Stacks 0A95 and 08J7.
-Proof: factor RHom through its fixed functorial K-injective replacement. For a K-injective
-I the augmentation I → I(I) is a quasi-isomorphism between K-injectives, so the Hom complex
-inverts it. Invert this map after Q to obtain the normalized iso.
-Naturality of the augmentation gives both squares. Source quasi-isomorphisms and target
-quasi-isomorphisms between K-injectives are inverted by the same lemma. Derived arrows are
-unique homotopy classes between K-injectives, hence these
-squares give independence, the cocycle identity, and naturality for all derived arrows.
-In particular take a K-injective source J representing K and any K-injective I representing L;
-transport along their specified derived identifications. Precomposition by K° → J gives
-exactly the source-resolution arrow Q Hom(J,I) → Q Hom(K°,I), with its stated direction. -/
+Source: Stacks 0A95 and 08J7. -/
 theorem ringedRepresentatives : Nonempty (RingedRepresentatives.{wb, c, v, r} J R) := by
   let : IsGrothendieckAbelian.{max c v r} (RingedTensorModules.{c, v, r} J R) :=
     (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{c, v, r}
@@ -403,7 +393,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     (U.op.prod U) ⋙ Functor.uncurry.obj (SheafOfModules.homFunctor (R := R')))
 
 /-- The specified sheaf-Hom comparison on product-total complexes and on derived objects.
-Source: Stacks 0A95 and 08J7, componentwise forgetting calculation in the blueprint. -/
+Source: Stacks 0A95 and 08J7. -/
 structure Comparison where
   /-- The normalized representative model on the source site. -/
   source : RingedRepresentatives.{wb, c, v, r} J R
@@ -496,8 +486,8 @@ def underlyingHomBifunctor :
   map_id M := Mod.ihomMap_id M.unop
   map_comp f g := Mod.ihomMap_comp g.unop f.unop
 
-/-- The existing exact orbit-induction criterion, with the countable index universe
-specified explicitly. This is the existing preservation proof, not an extra hypothesis. -/
+/-- The exact orbit-induction criterion, with the countable index universe specified
+explicitly. -/
 abbrev forgetKInjective : (Endofunctor.IsoAlgebra.forget
     (WeilSheaf.frobeniusPullback k₀ l X)).PreservesKInjectiveComplexes :=
   let A := ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber

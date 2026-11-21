@@ -29,10 +29,7 @@ namespace CategoryTheory
 
 Source: Stacks Project, Modules on Sites, sheaves of modules.
 The objects are presheaves of modules with a sheaf condition; morphisms are the sectionwise
-linear natural maps `SheafOfModules.Hom`. The inherited `SheafOfModules.instAbelian` applies
-when sheafification and locally bijective equivalences are available, in particular on
-small sites relative to the module universe. Kernels are sectionwise and cokernels are
-sheafified sectionwise cokernels, as in Mathlib's sheafification-adjunction construction. -/
+linear natural maps `SheafOfModules.Hom`. -/
 abbrev ringedSiteModules {C : Type uC} [Category.{vC} C]
     {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) :=
   SheafOfModules.{v} R

@@ -42,13 +42,6 @@ over `S`, so the construction above applies to it and produces a compactificatio
 - `AlgebraicGeometry.HasCompactification.of_isClosedImmersion`: if a quasi-compact
   `f' : X' ⟶ S` admits a compactification, then so does its restriction `i ≫ f'` to any
   closed subscheme `i : X ⟶ X'`.
-
-## Blueprint
-
-This file implements `def:nagata-immersion-compactification`,
-`lemma:nagata-immersion-into-proper`, `def:nagata-closed-subscheme-compactification` and
-`prop:nagata-closed-subscheme-compactifiable` of the Nagata compactification blueprint.
-
 -/
 
 @[expose] public section

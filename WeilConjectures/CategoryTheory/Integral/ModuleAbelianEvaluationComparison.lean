@@ -193,20 +193,7 @@ set_option backward.isDefEq.respectTransparency false in
  on sections under the canonical degree-zero identifications. The final clause characterizes
  the canonical map by every lift from a module resolution to an abelian resolution.
 
-Source: Stacks Project, Cohomology on Sites, Tag 03FD, objectwise equality.
-
-Proof: Forgetting module structure is exact by moduleSheaves_colimits_forgetful.
-The existing general-site theorem injective_module_abelian_acyclic gives positive
-abelian cohomology vanishing on forgotten injective module sheaves. The comparison
-between object cohomology and right derived evaluation turns this into evaluation
-acyclicity. Thus a forgotten injective module resolution computes abelian derived
-evaluation as well as module derived evaluation. Compose the two resolution
-isomorphisms. Their naturality for one lift of each module morphism assembles the
-components into natural isomorphisms. The canonical exact-composite comparison
-identifies their maps with the homology maps of every augmentation-compatible lift.
-In degree zero, the augmentation equation gives equality after the cycle inclusion;
-naturality of the homology projection and toRightDerivedZero_eq then prove the
-specified normalization. No injectivity after forgetting or coefficient flatness is used. -/
+Source: Stacks Project, Cohomology on Sites, Tag 03FD, objectwise equality. -/
 theorem module_abelian_evaluation_comparison_general
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J RingCat.{u})

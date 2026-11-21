@@ -23,23 +23,7 @@ namespace CategoryTheory.Functor
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- An exact functor carries the resolution augmentation square to its derived image.
-Source: Stacks Project, Tag 01F8 (cohomology.tex), and
-Tag 05TH (derived.tex).
-
-Proof: Apply the fully faithful inclusion from D+ to D. Its image of a and a'
-is the single-complex comparison followed by Q of the respective augmentation
-and the inverse quotient/Qh comparison. The image of the exact-functor
-factorization is mapDerivedCategoryFactorsh on the resolution. Expand it into
-the Q factorization and cancel the adjacent quotient/Qh comparisons.
-Naturality of mapDerivedCategoryFactors along the augmentation moves L past
-that augmentation. Expand mapDerivedCategorySingleFunctor; its final inverse
-single-complex comparison cancels the first comparison in a'. Both sides now
-have the same initial single-complex comparison and exact-functor factorization.
-The remaining equality is Q(L(ι') ≫ φ) = Q(singleMap.hom ≫ ι'). It follows from
-the supplied homotopy, since Q identifies homotopic maps. Faithfulness gives
-the original equality. No preservation of injective objects is used; no separate
-quasi-isomorphism hypothesis on φ is needed. Zero objects and zero complexes
-satisfy the same calculation. -/
+Source: Stacks Project, Tags 01F8 and 05TH. -/
 theorem resolution_pullback_augmentation
     {A A' : Type*} [Category* A] [Category* A'] [Abelian A] [Abelian A']
     [HasDerivedCategory A] [HasDerivedCategory A']

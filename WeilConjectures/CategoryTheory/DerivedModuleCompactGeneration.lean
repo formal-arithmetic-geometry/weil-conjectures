@@ -23,22 +23,7 @@ namespace CategoryTheory
 open Limits
 
 /-- The derived module category is compactly generated in the modules' universe.
-Source: Stacks Project, Tag 0F5X, first paragraph, and Tag 07D9.
-
-Proof in words: let P be the single complex in degree zero on the free left S-module
-of rank one, represented at the modules' universe by ULift S. It is K-projective.
-Maps from P into an arbitrary derived object compute its degree-zero cohomology;
-more generally, maps from P into the n-th shift compute degree-n cohomology.
-This identification is additive and natural in the derived object. The universal
-property of module direct sums and the fact that cohomology commutes with exact
-termwise sums identify the canonical direct sum of Hom groups out of P with the
-Hom group into the derived coproduct. Thus P is compact. If all maps from P into
-all shifts of K vanish, every cohomology module of K vanishes, so its representative
-is acyclic and K is zero. Hence P is a weak generator. Take the singleton family
-with value P; its coproduct is canonically isomorphic to P, so it is a compact
-triangulated generating family. For the zero ring the category is zero and the
-same argument is valid; no nonzero-ring hypothesis is needed. The argument uses
-only left-module structures and does not require commutativity of S. -/
+Source: Stacks Project, Tag 0F5X, first paragraph, and Tag 07D9. -/
 theorem derivedModuleCompactGeneration
     {S : Type w} [Ring S]
     [HasDerivedCategory.{max w vH} (ModuleCat.{max w vH} S)]

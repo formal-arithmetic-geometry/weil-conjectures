@@ -23,18 +23,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory.GrothendieckTopology
 
-/-- A Grothendieck topology `J` is *replete* (Bhatt–Scholze) when, in the topos of set-valued sheaves on `J`, every
+/-- A Grothendieck topology `J` is *replete* (Bhatt–Scholze) when, in the topos of set-valued
+sheaves on `J`, every
 inverse sequence of epimorphisms has epimorphic projections from its limit, at every index.
 An inverse sequence is `F : ℕᵒᵖ ⥤ Sheaf J (Type (max u v w))`; its adjacent transition
-is `F.map (homOfLE (Nat.le_succ n)).op`.
-
-The existing sectionwise-limit construction (`Sheaf.createsLimitsOfShape`, Stacks 00W2)
-identifies `limit F` at `V` with the tuples `x n ∈ (F.obj (op n))(V)` satisfying
-`t_n (x (n + 1)) = x n`; `limit.π F (op m)` is the coordinate projection `x ↦ x m`.
-By `Sheaf.isLocallySurjective_iff_epi` (Stacks 00WM and 00WN), epimorphism here means
-that each target section admits lifts after passing to a covering. Thus neither the
-transition hypothesis nor the projection conclusion asserts surjectivity on all sections.
-The extra universe `w` allows section sets larger than the site. -/
+is `F.map (homOfLE (Nat.le_succ n)).op`. Here epimorphism means that each target section admits
+lifts after passing to a covering (Stacks 00WM and 00WN), and the limit is computed sectionwise
+(Stacks 00W2). The universe `w` allows section sets larger than the site. -/
 def IsReplete {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) : Prop :=
   ∀ (F : ℕᵒᵖ ⥤ Sheaf J (Type (max u v w))),
     (∀ n : ℕ, Epi (F.map (homOfLE (Nat.le_succ n)).op)) →

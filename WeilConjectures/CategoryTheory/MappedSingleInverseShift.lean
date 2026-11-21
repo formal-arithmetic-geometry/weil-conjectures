@@ -50,20 +50,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The mapped-single comparison intertwines inverse single shifts.
-
-Proof: Apply the faithful inclusion into the unbounded derived category.
-Expand mapHomotopyCategoryPlusSingleFunctorQhObjIso as Q applied to the
-termwise mapped-single isomorphism. Expand each single shift as the image of
-the complex single shift followed by the quotient shift comparison. The
-termwise mapped-single isomorphism commutes with the single shift by the
-upstream mapHomologicalComplex_map_singleFunctors_shiftIso_hom_app. Precompose
-with the image of the forward single shift and cancel its inverse to obtain
-the inverse-shift equation. Its quotient therefore commutes as well. Naturality
-and composition of the quotient commShiftIso combine the two quotient shift
-comparisons on the right. Faithfulness lifts
-the resulting equation back to the bounded-below category. No exactness of G
-is needed, and n = 0 gives the shift-zero comparison on both sides. -/
+/-- The mapped-single comparison intertwines inverse single shifts. -/
 theorem mapped_single_inverse_shift (G : B ⥤ C) [G.Additive] (X : B) (n : ℕ) :
     let K₀ := (HomotopyCategory.Plus.singleFunctor B 0).obj X
     let h := ((HomotopyCategory.Plus.singleFunctors B).shiftIso

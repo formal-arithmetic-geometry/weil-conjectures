@@ -38,13 +38,7 @@ private def clopenUnitWord {A X : Type*} [Category A] [Category X]
 
 /-- The canonical word from the leftmost to the rightmost functor of a triple adjunction
 has transpose inverse to the first unit, when that unit is invertible.
-
-On each object, the unitors and associator are identities. The word therefore evaluates
-as the second unit followed by the rightmost functor applied to the inverse first unit.
-The adjunction bijection sends the latter inverse to exactly this composite. Applying
-its inverse cancels the bijection, and the first unit cancels its inverse.
-
-Source: Stacks Project, Modules on Sites, Tag 03DI. -/
+Stacks Project, Modules on Sites, Tag 03DI. -/
 theorem clopenAdjunctionUnitNormalization {A X : Type*} [Category A] [Category X]
     {L : A ⥤ X} {G : X ⥤ A} {D : A ⥤ X}
     (a : L ⊣ G) (b : G ⊣ D) [IsIso a.unit] (M : A) :

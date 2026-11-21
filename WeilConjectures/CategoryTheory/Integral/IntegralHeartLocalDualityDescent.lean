@@ -33,21 +33,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Local dualizability of a degree-zero module gives invertibility of its global
 canonical tensor--Hom comparison; local Tor bounds descend on the same cover.
 
-Source: Stacks Project, Tags 08JJ, 08J9 and 0G7E.
-
-Proof: each member of the pro-etale cover is weakly etale, so its inverse image is
-exact slice restriction. Exact restriction commutes with cohomology, derived tensor,
-and derived internal Hom, with the canonical evaluation maps. Consequently the
-restriction of the global tensor--Hom comparison is its local comparison. For a
-local dualizable object that comparison is invertible, by the closed monoidal
-duality criterion. Its cohomology maps are thus isomorphisms on every chart.
-Cover-local detection of isomorphisms of sheaves and the unbounded derived
-cohomology criterion make the global comparison invertible. For any module sheaf G,
-restrict K tensor G[0]. Tensor compatibility identifies this with the local derived
-tensor against the restricted G. The assumed local Tor bound gives vanishing
-outside [a,b]; exactness and cover-local detection of zero sheaves give the same
-vanishing globally. This quantifies over every G, without a finiteness condition.
-Only isomorphisms and cohomology vanishing are detected locally. -/
+Source: Stacks Project, Tags 08JJ, 08J9 and 0G7E. -/
 theorem integralHeart_local_duality_descent
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})

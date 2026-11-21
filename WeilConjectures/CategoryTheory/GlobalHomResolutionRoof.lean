@@ -74,9 +74,7 @@ def globalLinearHomMapTerm {X X' Y Y' : CochainComplex A ℤ}
       map_smul' := by intros; simp }
 
 /-- The pre/postcomposition maps commute with the Hom differential.
-Source: Stacks 09L9.
-Proof: expand both differentials as `d_Y f - (-1)^n f d_X`, and use the chain-map
-identities for `a` and `b`. The two expressions agree componentwise. -/
+Source: Stacks 09L9. -/
 theorem globalLinearHomMap_comm {X X' Y Y' : CochainComplex A ℤ}
     (a : X' ⟶ X) (b : Y ⟶ Y') (n m : ℤ) :
     globalLinearHomMapTerm B a b n ≫ (globalLinearHom B X' Y').d n m =
@@ -722,14 +720,7 @@ private theorem roof_targetShift_naturality
 
 /-- The shift square holds for every `c` satisfying the roof equation and every `targetShift`
 given by the family identification (both hypotheses of the field).
-Source: Stacks 09L9 and step 7 of.
-Proof: the roof equation determines `c`, since `Q (globalLinearHomMap B R.ι (𝟙 S.I))` is
-invertible (precomposition by a quasi-isomorphism into a K-injective is a quasi-isomorphism),
-and the family formula determines `targetShift`. Pre- and postcomposition by degree-0 chain
-maps commute with `rightUnshift`, so the family identification is natural for the
-precomposition leg `j` (by `R.ι`) and the postcomposition leg `p` (by `S.ι`, resp. its shift).
-Apply `Q` and naturality of `Q.commShiftIso`. Postcompose both sides with the shift of the
-invertible `Q.map j`; by the roof equation both become the image of `Q.map p`; cancel. -/
+Source: Stacks 09L9. -/
 theorem globalHom_resolution_roof_shift_fields
     (c : ∀ (X Y : CochainComplex A ℤ) (R : GlobalHomResolution X)
       (S : GlobalHomResolution Y),
@@ -898,8 +889,7 @@ end CompositionChainMap
 omit [HasDerivedCategory.{w} A] in
 /-- Abstract composition roof: if `c₁, c₂, c₃` satisfy roof equations along `a, b, e`, with the
 final precomposition by `a` invertible after `Q`, then they are compatible with composition.
-Source: Stacks 09L9, 06XY.
-Proof: naturality of `μ` and the three naturality squares of composition; cancel `Q.map j`. -/
+Source: Stacks 09L9, 06XY. -/
 theorem globalLinearHomComp_roof {X Y Z X' Y' Z' : CochainComplex A ℤ}
     (a : X ⟶ X') (b : Y ⟶ Y') (e : Z ⟶ Z')
     (c₁ : DerivedCategory.Q.obj (globalLinearHom B Y Z) ⟶
@@ -946,17 +936,7 @@ private theorem roof_conj_roof {X X' Y Y' : CochainComplex A ℤ}
 /-- Ordinary composition out of the total tensor exists, and is compatible with every `c`
 satisfying the roof equation and every `comparison` given by conjugation with representing
 homotopy equivalences (the hypotheses of the two coherence fields).
-Source: Stacks 09L9, 06XY and steps 1, 8-10 of.
-Proof: composition is bilinear and satisfies `d(gf) = d(g)f + (-1)^|g| g d(f)`, so it
-descends through the total-tensor coproduct, with the pure-tensor formula by construction.
-For `composition_roof` use the mixed pairings `A : H(I_Y,I_Z) ⊗ H(X,I_Y) → H(X,I_Z)` and
-`B' : H(Y,I_Z) ⊗ H(X,Y) → H(X,I_Z)`: associativity gives `j comp = A(1 ⊗ j)`,
-`A(1 ⊗ p) = B'(j ⊗ 1)`, `B'(p ⊗ 1) = p comp`; apply `Q`, naturality of `μ`, the roof
-equation twice, and cancel the invertible final `Q.map j`. For `composition_comparison`,
-choose representing homotopy equivalences `a, b` (they exist by the K-injective lifting);
-the hypothesis makes the comparison conjugation by them, with `b a - 1 = dh + hd`;
-`S(g ⊗ f) = (-1)^|g| a g h f b` is a homotopy on the total tensor, so the inserted
-middle factor disappears after `Q`. -/
+Source: Stacks 09L9, 06XY. -/
 theorem globalHom_resolution_roof_composition_fields
     (c : ∀ (X Y : CochainComplex A ℤ) (R : GlobalHomResolution X)
       (S : GlobalHomResolution Y),
@@ -1264,15 +1244,7 @@ theorem globalHomResolutionCohomology_class {X Y : CochainComplex A ℤ}
 
 /-- The unit roof (for every `c` satisfying the roof equation and every `unit` given by the
 scalar formula) and the cohomology interpretation of resolved Hom.
-Source: Stacks 070I, 0B6E and steps 10-11 of.
-Proof: by the scalar formula `p (unit X) = R.ι = j (unit R.I)` on the generator, so the roof
-equation and cancellation of the invertible `Q.map j` give `unit_roof`. Cohomology of
-`H(R.I,S.I)` is maps `R.I → S.I⟦n⟧` modulo homotopy
-(`CochainComplex.HomComplex.CohomologyClass.toHom_bijective`), and maps into the K-injective
-`S.I⟦n⟧` in the homotopy category are maps in `D(A)` (`IsKInjective.Qh_map_bijective`);
-conjugating by `Q.map R.ι` and `Q.map S.ι` defines `cohomology` and gives
-`cohomology_resolved`. The roof equation on a cocycle `f : X → Y⟦n⟧` gives `cohomology_roof`;
-naturality follows on representatives from the homotopy squares of the lifts. -/
+Source: Stacks 070I, 0B6E and steps 10-11 of. -/
 theorem globalHom_resolution_roof_cohomology_fields
     (c : ∀ (X Y : CochainComplex A ℤ) (R : GlobalHomResolution X)
       (S : GlobalHomResolution Y),
@@ -1530,48 +1502,7 @@ structure GlobalHomResolutionRoof where
         (shiftFunctor (DerivedCategory A) n).map (DerivedCategory.Q.map b)
 
 /-- Canonical ordinary-to-resolved global Hom roof, including composition and cohomology.
-Source: Stacks 09L9, 070I, 0B6E and 06XY.
-
-Proof (the node's eleven steps):
-1. The product cochains are B-modules. Expand the differential: its square is zero,
-   and `d(gf) = d(g)f + (-1)^|g| g d(f)`. Composition therefore defines a map from
-   the direct-sum total tensor, without any boundedness requirement.
-2. By lem-sc-hom-cocycle-homotopy-quotient-formulas, Hom cohomology is maps to shifts
-   modulo homotopy. Shifts preserve K-injectivity. Apply lem-weil-pbc-kinjective-hom-derived
-   to conclude that precomposition by a quasi-isomorphism into a K-injective target
-   is an isomorphism on every cohomology group, hence a quasi-isomorphism.
-3. A homotopy `h` of target maps gives the Hom homotopy `f ↦ hf`; for source maps
-   use `f ↦ (-1)^|f| fh`. Thus localized Hom arrows depend only on homotopy classes.
-4. Define the roof by inverting its precomposition leg. The K-injective Hom bijection
-   lifts derived arrows to chain maps uniquely up to homotopy, with augmentation squares.
-5. For either variable, postcompose both naturality expressions with the invertible
-   precomposition leg. The augmentation homotopies reduce both to the same map; cancel.
-6. Lift identity derived arrows between two resolutions to homotopy equivalences.
-   Conjugation on Hom is independent of representatives, preserves the roof, and
-   satisfies the cocycle law by uniqueness of the lifted homotopy classes. Identities
-   give the identity roof when both original complexes are K-injective.
-7. The family identity gives `H(X,Y[n]) ≅ H(X,Y)[n]`: both differentials are
-   `(-1)^n d_Y f - (-1)^s f d_X`. Shift the augmentation and use the preceding comparison.
-8. Use prose-03-02 for the canonical lax localization map;
-   the module Grothendieck and functorial-flat-resolution inputs are supplied by
-   lem-weil-pbc-ring-modules-grothendieck-abelian and
-   lem-sfb-abelian-functorial-flat-resolution. Define resolved composition by ordinary
-   composition after this comparison.
-9. For R=H(I,I), M=H(X,I), O=H(X,X), the three mixed-composition identities are
-   `j comp_R = A(1 ⊗ j)`, `A(1 ⊗ p) = B(j ⊗ 1)`, `B(p ⊗ 1) = p comp_O`.
-   Apply localization and naturality of the tensor comparison, substitute `j c = p`
-   twice, and cancel the invertible final j. No tensor of a quasi-isomorphism with
-   an arbitrary nonflat complex is inverted.
-10. Both sides of the identity assertion map to the augmentation under j. Conjugation
-    preserves composition: insert `b_Y a_Y - 1 = dh + hd`, and use the tensor homotopy
-    `S(g ⊗ f) = (-1)^|g| a_Z g h f b_X`. Ordinary associativity and units and lax
-    localization coherence give derived associativity and units.
-11. Identify resolved Hom cohomology with derived arrows between the resolutions,
-    then conjugate by the augmentations. The roof equation sends the class of an
-    ordinary cocycle to exactly Qf. All constructions use products of sets only,
-    with no flatness, boundedness or scalar-linear choice of resolutions.
-In Lean, the roof data above are assembled with the shift, composition and cohomology
-field theorems; the K-injective resolution hypothesis is not needed for this. -/
+Source: Stacks 09L9, 070I, 0B6E and 06XY. -/
 theorem globalHom_resolution_roof
     (_hres : ∀ X : CochainComplex A ℤ,
       ∃ (I : CochainComplex A ℤ) (uX : X ⟶ I), I.IsKInjective ∧ QuasiIso uX) :

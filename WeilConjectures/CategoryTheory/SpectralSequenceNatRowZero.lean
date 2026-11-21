@@ -24,16 +24,7 @@ open Limits
 /-- A first-quadrant spectral sequence with zero positive rows on page two computes
 its abutment from the bottom row of page two.
 
-Source: Stacks Project, Tags 011O and 0132.
-
-Proof: Vanishing of the positive rows propagates by taking homology. Every
-bottom-row differential is zero: the outgoing differential has no target in the
-first quadrant and the incoming differential has source in a positive row.
-Thus the bottom row is stationary. In total degree n, all filtration quotients
-before the nth are zero, so successive inclusions are isomorphisms and the nth
-step is the whole abutment. Its next step is zero, so its quotient is itself.
-The convergence identification and the stationary-page identification give the
-claimed isomorphism. This argument also applies in degree zero. -/
+Source: Stacks Project, Tags 011O and 0132. -/
 theorem SpectralSequence.nonempty_abutment_iso_row_zero
     {C : Type u} [Category.{v} C] [Abelian C]
     (E : E₂CohomologicalSpectralSequenceNat C) (H : ℕ → C)

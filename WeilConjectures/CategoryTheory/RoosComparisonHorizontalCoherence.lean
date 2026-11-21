@@ -8,12 +8,13 @@ public import WeilConjectures.CategoryTheory.StrictRoosModel
 
 /-! # Horizontal coherence of the canonical additive Roos comparison
 
-Source: Stacks Tag 0941, product-cone context, and the
-explicit coordinate calculation in the blueprint proof.
-
 The comparison is constructed directly by Mathlib's `mappingCocone.lift` on the fixed
 `roosF` model, using the two mapped projections and the canonical product comparison.
 No exactness or preservation of products is assumed for its definition.
+
+## References
+
+* Stacks Project, Tag 0941 (product-cone context).
 -/
 
 @[expose] public noncomputable section
@@ -76,15 +77,7 @@ private lemma cocone_snd_delta (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     simp [CochainComplex.mappingCocone.fst]
 
 /-- The compatibility equation for the two coordinates of the additive Roos lift.
-Source: Stacks Tag 0941, product-cone context.
-Proof: DAG steps 1-3. The mapping cocone projections satisfy
-δ(snd) + ofHom(fst ≫ u) = 0, by the signed cone differential. Applying the additive
-functor preserves this equation, since it preserves sums, negatives and composition.
-Postcompose both coordinates with the product comparison. Its square with u = 1-s
-commutes: after the nth product projection both sides are F(π_n - π_(n+1) ≫ t_n),
-using `towerTransitionEndomorphism` and additivity. The differential of a cochain
-postcomposed with a chain map is its differential postcomposed with that map.
-Thus the mapped cocone equation becomes exactly the displayed lift condition. -/
+Source: Stacks Tag 0941, product-cone context. -/
 theorem roosAdditiveComparison_lift_condition (F : A ⥤ B) [F.Additive]
     (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     CochainComplex.HomComplex.δ (-1) 0
@@ -145,13 +138,7 @@ private lemma cocone_snd_coordinates (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) 
 
 /-- The fixed degree-p+1 formula: biproduct comparison followed by the product
 comparisons in degrees p and p+1.
-Source: Stacks Tag 0941.
-Proof: DAG steps 1-3. The biproduct comparison is determined by the images of the
-projections, with inverse determined by the images of the inclusions. Additivity
-preserves negatives and sums. The product comparison commutes with d and 1-s after
-each product projection. The signed differential matrix therefore commutes with
-the displayed comparison. The two projection identities for `mappingCocone.lift`,
-transported through `roosχ`, give precisely the displayed coordinate formula. -/
+Source: Stacks Tag 0941. -/
 theorem roosAdditiveComparison_coordinates (F : A ⥤ B) [F.Additive]
     (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ) :
     (roosAdditiveComparison F X).f (p + 1) ≫
@@ -204,11 +191,7 @@ private lemma comparison_snd (F : A ⥤ B) [F.Additive]
     simp [Functor.map_comp]
 
 /-- Preservation of countable products makes this very comparison an isomorphism.
-Source: Stacks Tag 0941.
-Proof: DAG step 6. Each product comparison is invertible by preservation of its
-product cone. The biproduct comparison is invertible by additivity. Thus the
-coordinate formula gives degreewise inverses; the chain-map equation implies
-that these inverses commute with differentials, giving an inverse chain map. -/
+Source: Stacks Tag 0941. -/
 theorem roosAdditiveComparison_isIso (F : A ⥤ B) [F.Additive]
     [PreservesLimitsOfShape (Discrete ℕ) F]
     (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) : IsIso (roosAdditiveComparison F X) := by
@@ -248,11 +231,7 @@ theorem roosAdditiveComparison_isIso (F : A ⥤ B) [F.Additive]
     exact HomologicalComplex.Hom.isIso_of_components _
 
 /-- A strict augmentation retains its zero shifted coordinate and its mapped family.
-Source: Stacks Tag 0941.
-Proof: DAG step 7. Compose the coordinate formula with F(q). Its first product
-coordinates are F(0)=0 and its second product coordinates are F(q_n).
-The original compatibility equation remains true after applying F. Product
-extensionality gives the displayed biproduct-coordinate equality. -/
+Source: Stacks Tag 0941. -/
 theorem roosAdditiveComparison_augmentation (F : A ⥤ B) [F.Additive]
     (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (P : CochainComplex A ℤ)
     (q : ∀ n : ℕ, P ⟶ X.asFunctor.obj (op n))

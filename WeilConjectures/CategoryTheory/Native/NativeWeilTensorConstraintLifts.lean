@@ -577,44 +577,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 ringed model and under forgetting. This theorem supplies no monoidal structure
 on the specified tensor T, and no pentagon, triangle or braiding axioms for it.
 
-Source: Stacks 06YS and 0FPT.
-
-Proof: present native Weil sheaves as modules on the small Frobenius action
-site using frobenius_action_resolutions. If Φ is the ordinary restriction
-model, inverse-image composition and the coefficient identification give a
-natural isomorphism c: Φ composed with the site action to native pullback
-composed with Φ. It fixes the same finite-subextension-valued functions.
-Send (N,θ) to (ΦN,c_N followed by Φθ). Naturality gives the intertwining
-condition, and the inverse of Φ gives the inverse equivalence of fixed pairs.
-This equivalence commutes with forgetting. Localize the additive equivalence.
-Transport the ringed closed symmetric monoidal structure
-back along this equivalence; this gives modelMonoidal and modelSymmetry.
-The tensor right-adjoint functors on this model identify with M.weilHom by
-the product-total representative models on K-injectives. Compare their left
-adjoints with a using Adjunction.leftAdjointUniq. Its counit identity and ha
-make these slice comparisons natural in the tensor parameter, hence an
-isomorphism of bifunctors. Conjugate the model associator and swap by this
-isomorphism; conjugate the model unitors also by the canonical identification
-of its unit with single_0(adicConstant). Take precisely T.map for all raw
-tensor and whiskering maps. The inverse bifunctor comparison gives modelData
-for the universe-lift realization into the transported ringed model, which is
-faithful. These assertions concern individual isomorphisms and their images;
-no coherence law for the new operations is used here.
-
-For forgetData, use the ringed forgetful tensor descent on flat-term K-flat
-models, which forgetting preserves. The unit-mate formula hτ identifies its
-tensorator with τ inverse: evaluate the two Hom representatives componentwise
-and use hη and the ordinary adjunction normalization in hS. The signed swap
-normalization in hS identifies the ordinary symmetry with the ringed one.
-Since hmonoidal fixes the ordinary associator and unitors, the ringed descent
-squares give exactly the three displayed inducing-constraint equations and
-the swap equation. The whiskering and tensor-map equations follow directly
-from naturality of τ. Transport the ringed coefficient-unit identification to
-ordinaryUnit; the single-functor factorization of exact forgetting turns the
-ringed unit-normalization equation into forget_unit. All comparisons are
-natural on the localization, not just on cohomology. The same construction
-works for zero complexes and the empty site, and all Koszul signs are retained.
--/
+Source: Stacks 06YS and 0FPT. -/
 theorem native_weil_tensor_constraint_lifts
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]

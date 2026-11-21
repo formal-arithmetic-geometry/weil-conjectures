@@ -12,8 +12,7 @@ public import WeilConjectures.CategoryTheory.Sites.MonObj
 
 /-! # Normalized lifting of sectionwise actions
 
-proof.md`, first two sentences;
-the expanded proof of `lem-sfb-section-action-internal`.
+Sectionwise actions of a ring presheaf on a module presheaf lift to the internal action.
 -/
 
 @[expose] public noncomputable section
@@ -24,10 +23,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped TensorProduct CategoryTheory.MonoidalClosed
 namespace CategoryTheory
 
-/-- The prescribed sheafification-local maps are stable under tensor.
-Proof: use `presheaf_enrichedHoms_exist` for the essentially small site. The
-presheaf tensor-Hom adjunction and the sheaf property of Hom into a sheaf show
-stability under left tensor; symmetry gives stability under right tensor. -/
+/-- The prescribed sheafification-local maps are stable under tensor. -/
 @[instance] theorem sfbSectionAction_isMonoidal
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C) : (J.W (A := AddCommGrpCat.{w})).IsMonoidal := by

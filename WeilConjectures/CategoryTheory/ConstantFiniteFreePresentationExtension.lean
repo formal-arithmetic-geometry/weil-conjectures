@@ -31,7 +31,8 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Type (max u v)) [CommRing R]
 
 /-- The finite categorical power of the regular module, including the empty power.
-Source: Stacks 03EK. -/
+Source: Stacks 03EK.
+-/
 abbrev power (T : Sheaf J RingCat.{max u v}) (s : ℕ) : SheafOfModules.{max u v} T :=
   ∏ᶜ (fun _ : Fin s ↦ SheafOfModules.unit T)
 
@@ -41,7 +42,8 @@ abbrev coordinate (T : Sheaf J RingCat.{max u v}) (s : ℕ) (U : Cᵒᵖ)
   (Pi.π (fun _ : Fin s ↦ SheafOfModules.unit T) i).val.app U x
 
 /-- Evaluate coordinates with the original commutative coefficient carrier.
-Source: Stacks 03EK. -/
+Source: Stacks 03EK.
+-/
 abbrev commCoordinate (T : Sheaf J CommRingCat.{max u v}) (s : ℕ) (U : Cᵒᵖ)
     (x : (power J ((sheafCompose J (forget₂ CommRingCat RingCat)).obj T) s).val.obj U)
     (i : Fin s) : T.obj.obj U :=
@@ -51,7 +53,8 @@ variable (B : Sheaf J CommRingCat.{max u v})
   (σ : (constantSheaf J CommRingCat.{max u v}).obj (CommRingCat.of R) ⟶ B)
 
 /-- The specified object B tensor P_C, using the recorded scalar-extension construction.
-Source: Stacks 03EK. -/
+Source: Stacks 03EK.
+-/
 def extension (P : ModuleCat.{max u v} R) :
     SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B) :=
   SheafOfModules.changeOfRingsOfUniverses (C := C) (J := J) σ ((constantModuleHomFunctor J R).obj P)
@@ -760,26 +763,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- All finite-power coordinate identifications, the same-matrix equation, and the
 specified short exact presentation and isomorphism after scalar extension.
 Source: Stacks 03EI, 03DA, 03ER(3), 03EK.
-
-Proof: (1) Exact module sequences are exact constant presheaf sequences sectionwise;
-exact module sheafification
-gives exactness of the recorded constant functor, with the extended scalar actions.
-(2) Sheafify coordinate projections; finite-limit preservation gives alpha, including
-the empty product. Constant basis vectors go to coordinate basis sections.
-(3) On section tensors define beta by b tensor x -> (b sigma(x_i))_i and its inverse
-by (b_i) -> sum_i b_i tensor e_i. Balancing and basis expansion show the two composites
-are identities. Restrictions commute with both formulas, and the finite power is a
-sheaf, so module sheafification gives the asserted isomorphisms.
-(4) Apply these formulas to A(e_j); its ith coordinate is a_ij. Thus conjugation gives
-exactly the matrix with entries sigma(a_ij). This also proves naturality on finite free
-modules. Empty sums handle either rank zero.
-(5) Flatness makes tensor exact. The tensor symmetry
-identifies its order with this scalar extension. Exactness is detected on underlying
-abelian sheaves, since kernels are sectionwise and cokernels sheafified sectionwise.
-Apply lem-sp-exact-functor-preserves-homology and conjugate by beta: the arrows are
-precisely A_B and beta_n.inv followed by E(v).
-(6) A specified inverse to v remains inverse after constant sheafification and tensor;
-compose with beta.inv. No flatness is used in this last step, including rank zero. -/
+-/
 theorem constantFiniteFreePresentationExtension :
     exactFunctor _ _ (siteConstantModuleFunctorGeneral J R) ∧
     ∃ α : ∀ s : ℕ, (constantModuleHomFunctor J R).obj (ModuleCat.of R (Fin s → R)) ≅

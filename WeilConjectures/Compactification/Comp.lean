@@ -42,11 +42,6 @@ cartesian squares
 
 - `AlgebraicGeometry.Compactification.isPullback_i_restrict` and
   `AlgebraicGeometry.Compactification.isPullback_restrict`: the two cartesian squares above.
-
-## Blueprint
-
-The constructions of this file are ingredients of the successive compactifications used in
-`thm:ambient-shriek-composition`.
 -/
 
 @[expose] public section
@@ -68,8 +63,6 @@ compactifies `g : Y ⟶ S` and `e` compactifies `f ≫ d.i`, then `X ⟶[e.i] e.
 compactifies `f ≫ g`. This is `Compactification.postcomp e d.g`, transported along
 `f ≫ g = (f ≫ d.i) ≫ d.g`; it does not produce a compactification of `f ≫ g` from
 compactifications of `f` and `g` alone.
-
-Note that `d` must come first since the type of `e` depends on `d.i`.
 ```
   X --e.i--> e.Z
   |           |

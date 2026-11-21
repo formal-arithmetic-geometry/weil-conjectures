@@ -67,17 +67,7 @@ set_option backward.defeqAttrib.useBackward true in
 /-- An exact functor gives a surjective fixed-source derived Hom comparison if the
 ordinary Hom comparison is surjective and images of injectives are acyclic for Hom
 from the fixed target source.
-Source: Stacks Project, Tag 03FD.
-
-Proof: In degree zero use the fully faithful single functor and hzero. For degree
-n+1 embed the coefficient N into an injective I and form its cokernel Q. Exactness
-of F preserves this short exact sequence. Acyclicity makes the connecting map from
-Ext^n(B,F(Q)) onto Ext^(n+1)(B,F(N)) surjective. Lift an abelian class through this
-connecting map, then lift its preimage using the induction hypothesis for Q.
-Apply the module connecting map to this lift. Exact functors preserve extension
-classes, and associativity of Yoneda composition proves that its image is the
-original class. The fully faithful inclusion of D+ into D and the single/shift
-comparisons identify this Ext calculation with the displayed map. -/
+Source: Stacks Project, Tag 03FD. -/
 theorem derivedHomComparison_surjective
     {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]
     [HasDerivedCategory C] [HasExt.{w} C]

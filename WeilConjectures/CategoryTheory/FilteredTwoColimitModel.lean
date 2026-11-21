@@ -407,7 +407,8 @@ theorem mapHom_id (a : Object c) : mapHom c (identityHom c a) = 𝟙 _ := by
   simp [mapHomRepresentative]
 
 /-- Represent the two arrows at one
-stage, cancel the middle theta and its inverse, and use that Phi at that stage preserves products. -/
+stage, cancel the middle theta and its inverse, and use that Phi at that stage preserves products.
+-/
 theorem mapHom_comp {a b d : Object c} (f : HomSet c a b) (g : HomSet c b d) :
     mapHom c (compHom c f g) = mapHom c f ≫ mapHom c g := by
   induction f using Quot.inductionOn with

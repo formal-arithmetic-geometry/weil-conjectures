@@ -15,11 +15,12 @@ import Mathlib.CategoryTheory.Sites.GlobalSections
 /-!
 # Exact inverse image for constant left-module sheaves
 
-Source: Stacks Project, Sites, Proposition 00YV (2), (5), (6), its fixed-ring proof, and Section 00XZ; Derived Categories, Tag 015F.
-
 The lift is characterized by its underlying-set comparison, addition and scalar
-endomorphisms, and the original geometric adjunction unit. Comparisons have a
-normalization equation and uniqueness; arbitrary unrelated functors are never compared.
+endomorphisms, and the original geometric adjunction unit.
+
+## References
+
+* Stacks Project, Sites, Proposition 00YV and Section 00XZ; Derived Categories, Tag 015F.
 -/
 
 @[expose] public noncomputable section
@@ -31,33 +32,38 @@ namespace CategoryTheory
 namespace ConstantLeftModuleInverseImage
 
 /-- Constant-coefficient module sheaves, using the recorded general-site category.
-Source: Stacks, 00YV (6). -/
+Source: Stacks, 00YV (6).
+-/
 abbrev Modules {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}] :=
   ringedSiteModules.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ))
 
 /-- Forget constant scalars, retaining the abelian sheaf.
-Source: Stacks, 00YV (6). -/
+Source: Stacks, 00YV (6).
+-/
 abbrev V {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}] :
     Modules J Λ ⥤ Sheaf J AddCommGrpCat.{u} :=
   SheafOfModules.toSheaf ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ))
 
 /-- Forget the abelian group structure.
-Source: Stacks, 00YV (2). -/
+Source: Stacks, 00YV (2).
+-/
 abbrev U {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) :
     Sheaf J AddCommGrpCat.{u} ⥤ Sheaf J (Type u) :=
   sheafCompose J (forget AddCommGrpCat.{u})
 
 /-- The underlying-set functor on constant-coefficient modules.
-Source: Stacks, 00YV (6). -/
+Source: Stacks, 00YV (6).
+-/
 abbrev W {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}] :
     Modules J Λ ⥤ Sheaf J (Type u) := V J Λ ⋙ U J
 
 /-- Characterization of a sheaf's addition map by its values on sections.
 The projections allow arbitrary choices of categorical products.
-Source: Stacks, discussion preceding 00YV. -/
+Source: Stacks, discussion preceding 00YV.
+-/
 def IsAddition {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Sheaf J AddCommGrpCat.{u})
     (a : (U J).obj A ⨯ (U J).obj A ⟶ (U J).obj A) : Prop :=
@@ -70,7 +76,8 @@ def IsAddition {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 
 /-- A constant scalar endomorphism of the underlying abelian sheaf. This is
 not required to be a module morphism when the ring is noncommutative.
-Source: Stacks, fixed-ring paragraph in the proof of 00YV. -/
+Stacks Project, Tag 00YV.
+-/
 def IsScalar {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}]
     (M : Modules J Λ) (r : Λ) (a : (V J Λ).obj M ⟶ (V J Λ).obj M) : Prop :=
@@ -79,13 +86,15 @@ def IsScalar {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
       ((toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))).app T r) • x
 
 /-- The underlying set sheaf of the sheafified constant ring `Λ_C`.
-Source: Stacks, 00YV (2) and 0H7J. -/
+Source: Stacks, 00YV (2) and 0H7J.
+-/
 abbrev CoeffSet {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}] : Sheaf J (Type u) :=
   (sheafCompose J (forget RingCat.{u})).obj ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ))
 
 /-- Characterization of the addition map of the constant ring sheaf by its values
-on sections. Source: Stacks, ring paragraph of the proof of 00YV. -/
+on sections. Stacks Project, Tag 00YV.
+-/
 def IsRingAdd {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}]
     (m : CoeffSet J Λ ⨯ CoeffSet J Λ ⟶ CoeffSet J Λ) : Prop :=
@@ -97,8 +106,8 @@ def IsRingAdd {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
         ((prod.snd : CoeffSet J Λ ⨯ CoeffSet J Λ ⟶ CoeffSet J Λ).hom.app T x)
 
 /-- Characterization of the multiplication map of the constant ring sheaf by its
-values on sections, in the given order (no commutativity). Source: Stacks, ring
-paragraph of the proof of 00YV. -/
+values on sections, in the given order (no commutativity). Stacks Project, Tag 00YV.
+-/
 def IsRingMul {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}]
     (m : CoeffSet J Λ ⨯ CoeffSet J Λ ⟶ CoeffSet J Λ) : Prop :=
@@ -118,7 +127,8 @@ specify the transported operations. Zero and negation are determined by addition
 The ring comparison is normalized on every scalar summand of the constant sheaf
 (these summands determine it uniquely) and carries the addition and multiplication
 transported by `L` to those of the target constant ring.
-Source: Stacks, 00YV (2), (5), (6), 0H7J, and the node's proof steps 1--6. -/
+Stacks Project, Tags 00YV and 0H7J.
+-/
 structure ConstantLeftModuleInverseImageLift
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

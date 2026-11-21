@@ -29,7 +29,8 @@ namespace DerivedCategory
 
 /-- An exact scalar extension to a field preserves finite cohomological support and
 turns finite modules into finite-dimensional vector spaces.
-Source: Stacks Project, Tag 00HD, exactness of flat tensor products. An exact additive functor preserves zero objects, so the
+Source: Stacks Project, Tag 00HD, exactness of flat tensor products. An exact additive functor
+preserves zero objects, so the
 same finite support works. Tensor products of finitely generated modules are finitely
 generated over the target field, which is finite dimensionality. -/
 theorem pointFiniteDimensional_of_flat_scalar_extension

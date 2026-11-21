@@ -17,7 +17,7 @@ ring (for instance the finite coefficient ring `A_{E,n} = 𝒪_E/ϖⁿ`), a boun
 finite cohomology modules therefore has finite Tor amplitude exactly when it is quasi-isomorphic
 to a bounded complex of finite free modules.
 
-## Main statements
+## Main results
 
 - `DerivedCategory.IsPerfect.torAmplitudeIn`, `DerivedCategory.IsPerfect.finiteTorAmplitude`:
   a perfect complex has finite Tor amplitude.
@@ -71,10 +71,7 @@ Let `R` be a Noetherian local ring (for instance the finite coefficient ring
 `A_{E,n} = 𝒪_E/ϖⁿ`, a local Artinian ring) and `C` a bounded complex of `R`-modules with finite
 cohomology modules. Then `C` has finite Tor amplitude if and only if it is quasi-isomorphic to
 a bounded complex of finitely generated free `R`-modules, that is, lies in the category
-`D^b_fin(R)` of `definition-categorical-trace`. The direct implication is
-`DerivedCategory.isPerfect_of_finiteTorAmplitude` followed by freeness of finite projective
-modules over a local ring; the converse holds since free modules are flat. The Tor amplitude
-hypothesis cannot be dropped: `R/𝔪` has infinite Tor dimension unless `R` is regular. -/
+`D^b_fin(R)`. -/
 theorem finiteTorAmplitude_iff_exists_free [IsLocalRing R] [IsNoetherianRing R]
     {C : DerivedCategory (ModuleCat.{u} R)} (hC : TStructure.t.bounded C)
     (hfin : ∀ i, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj C)) :

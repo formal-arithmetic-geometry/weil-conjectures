@@ -18,19 +18,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- The successor-cycle inclusion into the page factors through its cycles.
 Source: Stacks Project, Homology, Tag 012K, displayed cycle, boundary and
-differential formulas preceding.
-
-Proof. Put p = pq.1, n = pq.1 + pq.2 and j = (p+r,pq.2-r+1). Let a be the
-successor-cycle inclusion followed by the page quotient projection. The image
-factorization defining graded successor cycles gives an epimorphism from their
-unquotiented representatives onto them: adding F^(p+1) does not change this image
-because the graded projection kills F^(p+1). On these representatives, dx lies in
-F^(p+r+1). Regard dx as a representative in F^(p+r); its graded class is zero, so
-in D.on_representatives take the target graded cycle to be zero. This gives
-(a followed by D.d pq j) = 0 after the representative epimorphism, hence before
-it by cancellation. The kernel universal property, HomologicalComplex.liftCycles,
-now gives f with f followed by D.page.iCycles pq equal to a. No epimorphy claim
-about f is needed for this factorization. -/
+differential formulas preceding. -/
 theorem filteredComplex_successor_cycles_cover_exists
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)
     (D : FilteredComplexPageDifferential K F r) (pq : ℤ × ℤ)

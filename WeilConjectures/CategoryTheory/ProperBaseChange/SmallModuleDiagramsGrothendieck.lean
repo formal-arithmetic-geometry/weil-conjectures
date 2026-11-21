@@ -29,24 +29,7 @@ open CategoryTheory
 namespace CategoryTheory
 
 /-- Small diagrams of left module sheaves over an arbitrary ring sheaf are Grothendieck abelian.
-Source: Stacks Project, Injectives, Tags 05AB, 079B and 079Q, with the small-diagram extension.
-
-Proof plan:
-1. By `lem-weil-pbc-ring-sheaves-grothendieck`, module sheaves are abelian, have small
-colimits and exact filtered colimits, and have a generator `G`.
-2. By `lem-weil-pbc-functor-abelian-colimits`, the functor category is abelian and has
-small colimits, computed pointwise.
-3. By `lem-weil-pbc-functor-exact-colimits`, filtered colimits in the functor category
-preserve finite limits, since this holds in module sheaves.
-4. By `lem-weil-pbc-evaluation-free-diagram-adjunction`, evaluation at each `j` has a
-left adjoint `L_j`, whose value at `k` is the coproduct indexed by morphisms `j ⟶ k`.
-Form the small coproduct `H` of all `L_j(G)`.
-5. Distinct natural transformations differ at some `j`. The generator `G` detects this
-difference; the evaluation adjunction gives a detecting map from `L_j(G)`. Extend it to
-`H` by zero on the other summands. Thus `H` is a generator. For an empty diagram category,
-all parallel morphisms agree, so the empty coproduct is a generator vacuously.
-6. Abelianness, small colimits, exact filtered colimits and a generator give exactly
-`def-sp-grothendieck-abelian`. -/
+Source: Stacks Project, Injectives, Tags 05AB, 079B and 079Q, with the small-diagram extension. -/
 theorem smallModuleDiagrams_isGrothendieckAbelian
     {C : Type u} [SmallCategory C] (τ : GrothendieckTopology C)
     (R : Sheaf τ RingCat.{u}) (J : Type u) [SmallCategory J] :

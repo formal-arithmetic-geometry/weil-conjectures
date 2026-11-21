@@ -90,7 +90,7 @@ Source: Stacks Tags 08TC,
 
 The construction is `CategoryTheory.roosF`, without a second Roos model.
 The helper predicates specify its comparisons by their actual component maps.
-Natural-number level n means the positive level n+1 of the blueprint.
+Natural-number level n means the positive level n+1.
 -/
 
 @[expose] public section
@@ -134,7 +134,7 @@ noncomputable abbrev coneSource {B : Type a} [Category.{b} B] [Abelian B]
   (mappingCone.fst f).1.v q p h
 
 /-- Four projection equations for (b,a,b',a') ↦ (b,b',a,-a').
-Source: Stacks 014E and blueprint Cones paragraph. -/
+Source: Stacks 014E. -/
 def ConeFormula {N N' : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : N ⟶ N')
     (e : roosF.obj (mappingCone f) ≅ mappingCone (roosF.map f)) : Prop :=
   ∀ (q : ℤ) (n : ℕ),
@@ -154,7 +154,7 @@ def ConeFormula {N N' : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : N ⟶ N')
         (coneSource f (q - 1) q (by omega)).app (op n)))
 
 /-- The component equations for the signed coherent shift comparison.
-Source: Stacks 011G and blueprint Cones paragraph. -/
+Source: Stacks 011G. -/
 def ShiftFormula (cs : (roosF (A := A)).CommShift ℤ) : Prop :=
   ∀ (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (r q : ℤ) (n : ℕ),
     (((Functor.commShiftIso roosF (self := cs) r).hom.app N).f q ≫
@@ -191,7 +191,7 @@ def AugmentationNaturality (A : Type a) [Category.{b} A] [Abelian A]
       augmentation j ≫ roosF.map f = g ≫ augmentation j'
 
 /-- Naturality and preservation of inclusion and the signed cone boundary.
-Source: blueprint Cones paragraph and Stacks 014E. -/
+Source: Stacks 014E. -/
 def ConeCompatibility (cs : (roosF (A := A)).CommShift ℤ)
     (e : ∀ {N N' : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : N ⟶ N'),
       roosF.obj (mappingCone f) ≅ mappingCone (roosF.map f)) : Prop :=
@@ -228,7 +228,7 @@ def ConeAugmentation
         (hnat f j j' g h).symm
 
 /-- Induced shifted augmentations commute with the coherent comparison.
-Source: blueprint Cones paragraph and Stacks 011G. -/
+Source: Stacks 011G. -/
 def ShiftAugmentation (cs : (roosF (A := A)).CommShift ℤ) : Prop :=
   ∀ (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (j : Cone N.asFunctor) (r : ℤ)
     (js : Cone (N⟦r⟧).asFunctor) (c : js.pt ⟶ j.pt⟦r⟧),
@@ -1499,40 +1499,7 @@ Roos derived limits, and has the specified natural cone and coherent shift compa
 including compatibility with the actual zero-second-coordinate augmentations.
 
 Source: Stacks 08TC, 07KC,
-014E and 011G.
-
-Proof plan:
-1. Use the product universal property to define the transition
-   shift and verify it commutes with d and strict product maps.
-   The existing roosF of def-weil-strict-roos-model is Cone(1-T)[-1]; expanding its
-   coordinates gives (dv,-du-(1-T)v). Projectionwise verification gives additivity,
-   the diagonal map formula and naturality of the zero-second-coordinate augmentation.
-2. By proposition-exact-products--2, the product of levelwise quasi-isomorphisms is a
-   quasi-isomorphism. Apply lem-pe-roos-coordinates-quasi-iso with endomorphism -(1-T)
-   to get the same result for the diagonal Roos map; no boundedness is required.
-3. The actual localized product cone is limiting by proposition-exact-products--2. Thus Q(1-T)
-   is the derived transition endomorphism. Inverse rotation of the cone triangle using
-   def-weil-triangulated-category gives the localized mapping-cocone triangle, with
-   projection v and last map w↦(0,w). This is def-weil-derived-limit's Roos triangle;
-   transport along the unique projection-preserving product isomorphism.
-4. For epsilon=(-1)^r the shift comparison (v,u)↦(v,epsilon u) commutes with d, is
-   natural, and is involutive in these coordinates. The identities epsilon(0)=1 and
-   epsilon(r+s)=epsilon(r)epsilon(s) give coherent shifts. This is the existing signed
-   comparison of lem-weil-roos-comm-shift transported to the strict-tower presentation.
-5. Expand both double cones: the source differential on (b,a,b',a') is
-   (db+Fa,-da,-db'-Fa'-(1-T')b,da'-(1-T)a). The permutation with sign
-   (b,a,b',a')↦(b,b',a,-a') intertwines it with the target differential, and has
-   inverse (b,b',a,c)↦(b,a,b',-c). The four projection equations uniquely specify it.
-6. Every strict square acts by the four diagonal product maps, which commute with
-   this permutation and sign. The inclusion sends (b,b') to (b,0,b',0).
-   The boundary -p followed by the shift comparison is (-a,a'), also -p after
-   the cone comparison. These establish naturality, inclusion and boundary identities.
-7. For a compatible family j, (1-T)J=0 after every product projection. Therefore
-   (J,0) is the existing chain map roosAugment; diagonal product maps give naturality.
-8. Shifts multiply its zero coordinate by a sign and preserve it. The induced cone
-   augmentation ((J'm',Jm),(0,0)) goes to ((J'm',0),(Jm,0)), the cone map of the
-   two augmentations. Checking the two levelwise coordinates proves the stated
-   conditional compatibility for every induced cone and shifted augmentation. -/
+014E and 011G. -/
 theorem roos_cone_calculus
     (X : AlgebraicGeometry.Scheme.{t})
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) RingCat.{max u (t + 1)})

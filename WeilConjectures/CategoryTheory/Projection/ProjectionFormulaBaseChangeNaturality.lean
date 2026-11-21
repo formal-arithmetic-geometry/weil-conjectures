@@ -34,11 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Naturality in the first variable of the specified counit mate for an arbitrary coefficient.
-Source: Stacks 0B56 and blueprint order 1274, paragraph 1.
-Proof: transpose both composites under adj. Naturality of alpha identifies the second
-transpose with counit tensor identity followed by u tensor identity. Naturality of the
-counit identifies it with the first transpose. Injectivity of the Hom equivalence
-proves equality. This applies to every u and in particular to endomorphisms. -/
+Stacks Project, Tag 0B56. -/
 theorem derivedProjectionFormulaMate_naturality
     {A : Type u} [Category.{v} A] {B : Type u'} [Category.{v'} B]
     (L : A ⥤ B) (V : B ⥤ A) (adj : L ⊣ V)

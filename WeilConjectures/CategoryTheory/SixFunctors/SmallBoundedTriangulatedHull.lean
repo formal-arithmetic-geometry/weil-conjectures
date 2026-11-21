@@ -121,16 +121,7 @@ private theorem stages_bounded (α : Cardinal.{v}) [Fact α.IsRegular]
 
 /-- Inside a triangulated class closed under coproducts of fewer than alpha
 summands, every essentially small family lies in a class with the same closure
-properties which is still essentially small.
-
-Proof: at each stage adjoin shifts, middle vertices of triangles and coproducts
-of fewer than alpha inputs, then take isomorphism closure. Start with G and
-zero, and include all earlier stages at each step. Each stage is essentially
-small by the smallness APIs for shifts, extensions and bounded coproducts.
-Index the stages by the initial ordinal of alpha. The union is essentially
-small since this index type is small. Regularity puts every family of fewer
-than alpha input stages strictly below one stage, so the union has all the
-required closure properties. Every stage stays inside S by induction. -/
+properties which is still essentially small. -/
 theorem exists_small_bounded_triangulated_hull
     (G S : ObjectProperty C) [ObjectProperty.EssentiallySmall.{v} G]
     [S.IsClosedUnderIsomorphisms] [S.IsTriangulated]

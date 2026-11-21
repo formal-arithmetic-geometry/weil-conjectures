@@ -15,9 +15,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreti
 # Boundary preparation for the two-open compactification theorem
 
 This file provides the boundary-preparation inputs of the two-open compactification
-theorem, following the blueprint chapter "Nagata compactification", sections
-"Separating boundary pieces" and "The two-open compactification theorem"
-(proof order items 34 and 36):
+theorem:
 
 - `AlgebraicGeometry.Compactification.denseRefinement`: the scheme-theoretically dense
   refinement of a compactification, replacing the ambient scheme by the
@@ -27,13 +25,6 @@ theorem, following the blueprint chapter "Nagata compactification", sections
   **constructible-boundary separation blow-up** (Stacks Project Tags 080P and 0F3V):
   two disjoint constructible closed subsets of a quasi-compact open `U ⊆ X` acquire
   disjoint closures of their inverse images after a `U`-admissible blow-up.
-
-The proof of `exists_admissibleBlowup_disjoint_closures` combines the boundary
-separation theorem `disjoint_range_strictTransformMap_sup` of
-`WeilConjectures.Blowup.AdmissibleBlowup` (Stacks Tag 0F3V) with the range
-comparisons of `WeilConjectures.Compactification.StrictTransform`: the closure of
-the inverse image of the `U`-part of a closed center is contained in the strict
-transform (`IsAdmissible.closure_preimage_subset_range_strictTransformMap`).
 -/
 
 @[expose] public section
@@ -116,14 +107,8 @@ theorem IsAdmissible.closure_preimage_subset_range_strictTransformMap
   exact hT htT
 
 /-- **The constructible-boundary separation blow-up** (Stacks Project Tags 080P and
-0F3V).
-
-The blow-up is the boundary-separation blow-up of the sum of two finite-type ideals
-`I₁`, `I₂` extending the vanishing ideals of `T₁`, `T₂` from `U` (Stacks Tags 01PH
-and 01PF, `Scheme.IdealSheafData.exists_finiteType_preimage_coe_support_eq`); the
-closure of the inverse image of `Tᵢ` is contained in the strict transform of `V(Iᵢ)`
-(`IsAdmissible.closure_preimage_subset_range_strictTransformMap`), and these strict
-transforms are disjoint by `disjoint_range_strictTransformMap_sup`. -/
+0F3V): two disjoint constructible closed subsets `T₁`, `T₂` of a quasi-compact open `U ⊆ X`
+acquire disjoint closures of their inverse images after a `U`-admissible blow-up. -/
 theorem exists_admissibleBlowup_disjoint_closures
     [CompactSpace X] [QuasiSeparatedSpace X] (hU : IsCompact (U : Set X))
     {T₁ T₂ : Set U.toScheme} (hT₁ : IsClosed T₁) (hT₂ : IsClosed T₂)

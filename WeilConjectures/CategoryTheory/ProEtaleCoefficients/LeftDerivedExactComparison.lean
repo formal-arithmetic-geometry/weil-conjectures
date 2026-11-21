@@ -14,9 +14,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 Source: Stacks, derived.tex, Tag 015F.
 
 The comparison is expressed in terms of its universal counit. This accepts both the
-recorded total-tensor implementation and the published module-object implementation,
-without changing either construction or requiring their K-flat interfaces to coincide.
-The previous total-tensor interface remains publicly available.
+total-tensor implementation and the module-object implementation, without requiring their
+K-flat interfaces to coincide.
 -/
 
 @[expose] public noncomputable section

@@ -58,12 +58,7 @@ private theorem factor_dualizable
         (HomologicalComplex.isZero_double_X _ _ n h0 h1)
 
 /-- Every actual finite positive Koszul stage is dualizable as an ordinary complex.
-Source: Stacks 08JJ, 0913.
-
-Proof: one factor has the unit in degrees zero and one, and zero elsewhere.
-These terms are dualizable, so the bounded-complex dual construction gives a dual
-for the factor. Induct on the number of factors, using dualizability of the unit
-for the empty tensor and closure under tensor products for the successor. -/
+Source: Stacks 08JJ, 0913. -/
 theorem ringedKoszulStage_dualizable (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :
     IsDualizable ((ringedKoszulDiagram O r b).obj m) := by

@@ -58,9 +58,7 @@ set_option linter.privateModule false
 /-! # Quasi-isomorphism invariance of the Hom complex with smaller coefficient rings
 
 Source: Stacks Project, Tags 03DI, 03DJ, 08FI, 0A8Y, 0A94 and 0A95.
-The sectionwise proof uses rings in r and module sections in max u v r throughout.
-The private helpers generalize the existing independent-universe proofs without changing
-any existing interface or replacing the ring sheaf.
+Rings live in universe r and module sections in universe max u v r.
 -/
 
 @[expose] public section
@@ -98,14 +96,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 100000 in
 -- Projection comparisons involve several composed functors and chosen product objects.
 /-- Sectionwise quasi-isomorphisms induce quasi-isomorphisms of module sheaves.
-Source: Stacks Project, sites-cohomology.tex, proof of Lemma 0A95
-
-Proof: forget the module structure and view the complexes as complexes of presheaves of
-abelian groups. Evaluation at each site object is exact and jointly detects their cohomology
-isomorphisms. Sheafification is exact, so the presheaf quasi-isomorphism remains one after
-sheafification. The counit of sheafification identifies the resulting complexes naturally
-with the original abelian-sheaf complexes. Finally the exact forgetful functor from module
-sheaves to abelian sheaves reflects isomorphisms, hence reflects quasi-isomorphisms. -/
+Source: Stacks Project, Tag 0A95. -/
 private theorem quasiIso_of_sectionsOfUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]

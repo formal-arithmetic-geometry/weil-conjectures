@@ -25,12 +25,7 @@ variable {C : Type u₁} {D : Type u₂} {C' : Type u₃} {D' : Type u₄}
 
 /-- The purity coefficient equation is equivalent to its smooth-trace equation.
 The exceptional comparison is the mate of the inverse compact-support comparison;
-the source arrow may be any specified arrow, including a nonflat scalar map.
-
-Proof: apply the injective transposition bijection for `F' ⊣ G'`. The mate's
-counit equation rewrites the transpose of the first side as `b⁻¹ T(ε Fγ)`;
-naturality of `b⁻¹` moves `γ` through this expression. The second transpose is
-`F'(a) ε' F'(γ')`. Cancel the invertible `b` to obtain the trace equation. -/
+the source arrow may be any specified arrow, including a nonflat scalar map. -/
 theorem purityCoefficientChange_iff_trace
     (adj : F ⊣ G) (adj' : F' ⊣ G') (b : F ⋙ T ≅ S ⋙ F')
     (γ : J ≅ G) (γ' : J' ≅ G') (K : D)

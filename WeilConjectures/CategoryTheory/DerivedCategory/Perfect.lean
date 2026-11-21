@@ -42,37 +42,31 @@ perfect objects of `D(R)` are the *perfect point complexes*.
 - `DerivedCategory.IsPerfect`: `C` is quasi-isomorphic to a bounded complex of finitely
   generated projective `R`-modules.
 
-## Main statements
+## Main results
 
 - `DerivedCategory.isPerfect_iff`: over a field, `C`
   is perfect if and only if it is bounded with finite-dimensional cohomology.
 - `DerivedCategory.IsPerfect.bounded`, `DerivedCategory.IsPerfect.finite_homology`: a perfect
   complex over a Noetherian ring is bounded with finitely generated cohomology.
-- `DerivedCategory.isPerfect_of_finiteTorAmplitude` (`lemma-perfect-complexes-geometric-point`, Step
-2): conversely, over a
+- `DerivedCategory.isPerfect_of_finiteTorAmplitude`: conversely, over a
   Noetherian ring a bounded complex with finitely generated cohomology and finite Tor amplitude
   is perfect.
-- `DerivedCategory.IsPerfect.tensor_homology` (`lemma-perfect-complexes-geometric-point`, Step 3):
-after a flat extension
+- `DerivedCategory.IsPerfect.tensor_homology`: after a flat extension
   of scalars to a field the cohomology is finite dimensional and bounded.
-- `DerivedCategory.IsPerfect.ihom_unit` (`lemma-perfect-complexes-geometric-point`, Step 3): the
-dual
+- `DerivedCategory.IsPerfect.ihom_unit`: the dual
   `C^∨ = RHom_R(C, R)` of a perfect complex is perfect.
-- `DerivedCategory.IsPerfect.isDualizable` (`lemma-perfect-complexes-geometric-point--8`, Steps
-1–3): a
+- `DerivedCategory.IsPerfect.isDualizable`: a
   perfect complex is dualizable for the derived tensor product.
-- `DerivedCategory.IsPerfect.isIso_toIhomIhomUnit`:
-for
+- `DerivedCategory.IsPerfect.isIso_toIhomIhomUnit`: for
   any braiding of `D(R)`, the canonical biduality map `C ⟶ C^∨∨` is an isomorphism for a
   perfect `C`, where `C^∨ = RHom_R(C, R)`.
-- `DerivedCategory.IsPerfect.isIso_ihomUnitTensorToIhom`
-:
+- `DerivedCategory.IsPerfect.isIso_ihomUnitTensorToIhom`:
   the canonical comparison `C^∨ ⊗ᴸ_R D ⟶ RHom_R(C, D)` is an isomorphism for a perfect `C` and
   any `D`.
 - `DerivedCategory.nonempty_iso_homology_ihom`: over
   a field, `H^{-i}(C^∨) ≅ H^i(C)^∨`.
 
-## Implementation notes
+## Implementation details
 
 The biduality statements are deduced from the dualizability of a perfect complex for the
 derived tensor product (`DerivedCategory.IsPerfect.isDualizable`), by the formal arguments of a
@@ -95,10 +89,7 @@ namespace DerivedCategory
 
 variable {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]
 
-/-- Perfect complex of finite modules.
-
-Also blueprint `sk-def-perfect`: perfect point
-complexes.
+/-- Perfect complex of finite modules (perfect point complexes).
 
 An object `C` of `D(R)` is *perfect* if it is isomorphic to the image of a bounded complex of
 finitely generated projective `R`-modules. -/
@@ -155,8 +146,7 @@ theorem IsPerfect.finite_homology [IsNoetherianRing R] {C : DerivedCategory (Mod
       ((ModuleCat.epi_iff_surjective _).1 inferInstance)
   exact Module.Finite.equiv eH.toLinearEquiv.symm
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point` (Step 3 of its proof): flat extension of
-scalars to a field.
+/-- Flat extension of scalars to a field.
 
 For a perfect complex `C` over a Noetherian ring `R` and an `R`-algebra `E` which is a field
 (such as `E = Frac 𝒪_E` over `𝒪_E`), the spaces `E ⊗_R Hⁱ(C)` are finite dimensional and vanish
@@ -296,12 +286,8 @@ private lemma isPerfect_of_torAmplitudeIn_of_le {c b : ℤ} (hbc : b ≤ c)
     ((homologyFunctor _ b).mapIso e.symm ≪≫ (homologyFunctorFactors _ b).app P).toLinearEquiv
 
 /-- The induction step of `DerivedCategory.isPerfect_of_finiteTorAmplitude`. Let `C` have Tor
-amplitude in `[c, b]` with `c < b` and finitely generated cohomology. Represent `C` by a complex
-`P` of flat modules in degrees `[c, b]`, choose a finite free module `F` mapping onto
-`H^b(C) = P^b / d(P^{b-1})` and lift it to a map `φ : F[-b] ⟶ P`. Its mapping cone `C'` is a
-complex of flat modules in degrees `[c, b]` with `H^b(C') = 0`, so it has Tor amplitude in
-`[c, b - 1]`, and its cohomology is finitely generated. If `C'` is perfect, so is `C`, as an
-extension of `C'` by the perfect complex `F[-b]`. -/
+amplitude in `[c, b]` with `c < b` and finitely generated cohomology. Then there is `C'` with Tor
+amplitude in `[c, b - 1]` and finitely generated cohomology such that `C` is perfect if `C'` is. -/
 private lemma exists_isPerfect_imp_of_torAmplitudeIn {c b : ℤ} (hcb : c < b)
     {C : DerivedCategory (ModuleCat.{u} R)} (hC : torAmplitudeIn _ c b C)
     (hfin : ∀ i, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj C)) :
@@ -419,16 +405,10 @@ private lemma isPerfect_of_torAmplitudeIn (n : ℕ) {c b : ℤ} (hn : b - c ≤ 
 
 end FiniteTorAmplitude
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point` (Step 2 of its proof): perfectness over a
-Noetherian ring.
+/-- Perfectness over a Noetherian ring.
 
 Over a Noetherian ring `R`, a bounded complex `C` with finitely generated cohomology modules and
-finite Tor amplitude is perfect. The proof is by induction on the length of the Tor amplitude
-`[c, b]`. If `b ≤ c`, then `C` is represented by a complex of flat modules concentrated in
-degree `b`, whose term is finitely presented and flat, hence projective. Otherwise a finite free
-module `F` maps onto `H^b(C)`, and the cone of the lifted map `F[-b] ⟶ C` has Tor amplitude in
-`[c, b - 1]` and finitely generated cohomology; `C` is an extension of it by `F[-b]`. The
-boundedness hypothesis is implied by the finite Tor amplitude. -/
+finite Tor amplitude is perfect. -/
 theorem isPerfect_of_finiteTorAmplitude [IsNoetherianRing R]
     {C : DerivedCategory (ModuleCat.{u} R)} (_hC : TStructure.t.bounded C)
     (hfin : ∀ i, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj C))
@@ -436,8 +416,7 @@ theorem isPerfect_of_finiteTorAmplitude [IsNoetherianRing R]
   obtain ⟨c, d, hcd⟩ := hTor
   exact isPerfect_of_torAmplitudeIn (d - c).toNat (by omega) hcd hfin
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point` (Step 3 of its proof): the dual of a perfect
-point complex.
+/-- The dual of a perfect point complex.
 
 The dual `C^∨ = RHom_R(C, R)` of a perfect complex `C` is perfect: if `C` is represented by a
 bounded complex `P` of finitely generated projective modules, `C^∨` is represented by the
@@ -585,15 +564,12 @@ end Field
 
 section Biduality
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point--8` (Steps 1–3 of its proof): a perfect point
-complex is dualizable for the derived tensor product of `D(R)`.
+/-- A perfect point complex is dualizable for the derived tensor product of `D(R)`.
 
 A finitely generated projective module is dualizable, with dual `Hom_R(P, R)`
 (`ModuleCat.isDualizable_of_projective`). A bounded complex `P` of such modules is paired with
 its termwise dual complex for the tensor product of complexes, and `P` and its dual are K-flat,
-so the pairing descends to `D(R)` (`DerivedCategory.isDualizable_Q_obj`). This replaces the
-blueprint's induction along the truncation triangles by a direct chain-level construction of the
-evaluation and coevaluation. Dualizability is invariant under isomorphism. -/
+so the pairing descends to `D(R)` (`DerivedCategory.isDualizable_Q_obj`). -/
 theorem IsPerfect.isDualizable {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
     IsDualizable C := by
   obtain ⟨P, a, b, _, _, hP, ⟨e⟩⟩ := hC
@@ -602,12 +578,10 @@ theorem IsPerfect.isDualizable {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.I
   have := (hP n).2
   exact ModuleCat.isDualizable_of_projective (P.X n)
 
-/-- biduality at the point.
+/-- Biduality at the point.
 
 For a perfect point complex `C` and any braiding of `D(R)`, the canonical biduality map
-`C ⟶ C^∨∨`, where `C^∨ = RHom_R(C, R)`, is an isomorphism. This is also clause (3) of blueprint
-`lemma-perfect-complexes-geometric-point--8`: derived evaluation into the coefficient double dual is
-an isomorphism for every perfect complex over any ring. -/
+`C ⟶ C^∨∨`, where `C^∨ = RHom_R(C, R)`, is an isomorphism. -/
 theorem IsPerfect.isIso_toIhomIhomUnit [BraidedCategory (DerivedCategory (ModuleCat.{u} R))]
     {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
     IsIso (MonoidalClosed.toIhomIhomUnit C) :=
@@ -640,23 +614,12 @@ end Biduality
 
 section CohomologyDual
 
-/-- cohomology of the dual of a finite
-complex over a field.
+/-- Cohomology of the dual of a complex over a field.
 
 Over a field `R`, the cohomology of the dual `C^∨ = RHom_R(C, R)` of a complex `C` is the dual
-of the cohomology: `H^{-i}(C^∨) ≅ H^i(C)^∨` for every `i`. The blueprint states this for a
-perfect point complex `C` (a bounded complex of finite-dimensional vector spaces); it holds for
-every `C`. Biduality `C ≅ C^∨∨` for perfect `C`, the other half of the node, is
-`DerivedCategory.IsPerfect.isIso_toIhomIhomUnit`.
-
-As in the blueprint, `C` is split: it is quasi-isomorphic to the complex `H` of its cohomology
-spaces with zero differential. The single complex `R[0]` is K-injective, `R` being an injective
-`R`-module, so `C^∨` is computed by the internal hom complex `Hom^•(H, R[0])`, which has zero
-differential and the dual `Hom_R(H^i(C), R)` in degree `-i`.
-
-The field is a commutative ring `R` with `IsField R`, so that the statement applies to the module
-categories of the coefficient rings of the six-functor formalism, which are commutative
-rings. -/
+of the cohomology: `H^{-i}(C^∨) ≅ H^i(C)^∨` for every `i`. The field is a commutative ring `R`
+with `IsField R`, so that the statement applies to the module categories of the coefficient
+rings of the six-functor formalism, which are commutative rings. -/
 theorem nonempty_iso_homology_ihom (hR : IsField R) (C : DerivedCategory (ModuleCat.{u} R))
     (i : ℤ) :
     Nonempty ((homologyFunctor (ModuleCat.{u} R) (-i)).obj ((ihom C).obj (𝟙_ _)) ≅
@@ -724,12 +687,7 @@ theorem nonempty_iso_homology_ihom (hR : IsField R) (C : DerivedCategory (Module
 cohomology modules `Hʲ(C)` are finitely generated projective `R`-modules, then the cohomology of
 the dual `C^∨ = RHom_R(C, R)` is the dual of the cohomology: `H^{-i}(C^∨) ≅ Hom_R(H^i(C), R)`.
 This is the form of `DerivedCategory.nonempty_iso_homology_ihom` over a ring which is not a
-field, used for the degreewise duality at the integral stage `𝒪_E`.
-
-As over a field, `C` is split: it is quasi-isomorphic to the bounded complex `H` of its
-cohomology modules with zero differential
-(`DerivedCategory.exists_quasiIso_of_zero_differential_of_projective`), whose dual is the
-termwise dual complex, again with zero differential. -/
+field, used for the degreewise duality at the integral stage `𝒪_E`. -/
 theorem nonempty_iso_homology_ihom_of_projective {C : DerivedCategory (ModuleCat.{u} R)}
     {a b : ℤ} (ha : C.IsGE a) (hb : C.IsLE b)
     (hC : ∀ j, Module.Projective R ((homologyFunctor (ModuleCat.{u} R) j).obj C) ∧

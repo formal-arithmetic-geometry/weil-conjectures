@@ -18,10 +18,7 @@ set_option linter.privateModule false
 open CategoryTheory
 namespace CategoryTheory.BilinearCoefficientDescent
 
-/-- A tensor tower survives replacement of its transitions and associators by equal data.
-Proof: substitute the transition equalities, then the associator equalities by function
-extensionality. The equality isomorphisms are now identities, so the assertion reduces
-to the given tower equation by the product and whiskering component formulas. -/
+/-- A tensor tower survives replacement of its transitions and associators by equal data. -/
 theorem familyTower_of_transport
     {I : Type*} [Preorder I] {C : I → Type*} [∀ i, Category (C i)]
     (R : ∀ {i j : I}, i ≤ j → C i ⥤ C j)

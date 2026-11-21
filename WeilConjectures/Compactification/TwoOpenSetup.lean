@@ -14,9 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 
 # The prepared sides of the two-open compactification theorem
 
-This file sets up the per-side data of the two-open compactification theorem,
-following the blueprint chapter "Nagata compactification", section "The two-open
-compactification theorem" (proof order items 34–37 applied to the two opens):
+This file sets up the per-side data of the two-open compactification theorem:
 
 Let `u : U ⟶ S` be separated and of finite type over a Noetherian scheme `S` and let `O`
 be an open of `U`. The structure `AlgebraicGeometry.TwoOpenSide u O` records the state of
@@ -41,8 +39,8 @@ ambient scheme; boundary loci transport to preimages
 
 Finally `AlgebraicGeometry.exists_prepared_twoOpenSide` constructs a prepared side for
 a compactifiable open `O` covering `U` together with `O'`: choose a
-scheme-theoretically dense compactification (proof order item 34,
-`exists_compactification_isSchemeTheoreticallyDominant`), extend it by the graph
+scheme-theoretically dense compactification
+(`exists_compactification_isSchemeTheoreticallyDominant`), extend it by the graph
 construction (Stacks Project Tag 0F3Z), and separate the boundary closures by the
 constructible-boundary separation blow-up (Stacks Project Tags 080P and 0F3V,
 `exists_admissibleBlowup_disjoint_closures`).
@@ -128,7 +126,7 @@ def selfBoundary (O' : U.Opens) : Set σ.X := closure (σ.V.ι '' (σ.ψ ⁻¹' 
 
 /-- The **forbidden boundary** of a side: the closure in the ambient scheme of the
 inverse image under `ψ` of the closed complement `U ∖ O` of its own open. Removing it
-yields the intermediate locus `Xᵢ°` of the blueprint. -/
+yields the intermediate locus `Xᵢ°`. -/
 def forbiddenBoundary : Set σ.X := closure (σ.V.ι '' (σ.ψ ⁻¹' ((O : Set U)ᶜ)))
 
 /-- A side is **prepared** relative to the other open `O'` if its two boundary closures
@@ -172,7 +170,7 @@ lemma disjoint_range_embX_forbiddenBoundary :
     exact h1
   exact this hmemO
 
-/-- The complement of the forbidden boundary, i.e. the locus `Xᵢ°` of the blueprint. -/
+/-- The complement of the forbidden boundary, i.e. the locus `Xᵢ°`. -/
 def interior : σ.X.Opens := ⟨σ.forbiddenBoundaryᶜ, isClosed_closure.isOpen_compl⟩
 
 lemma range_embX_subset_interior : Set.range σ.embX ⊆ (σ.interior : Set σ.X) :=
@@ -348,7 +346,7 @@ theorem exists_prepared_twoOpenSide [IsNoetherian S] (u : U ⟶ S) [IsSeparated 
   have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace u
   have : IsNoetherian U := ⟨⟩
   have : QuasiCompact (O.ι ≫ u) := inferInstance
-  -- item 34: a scheme-theoretically dense compactification of `O ⟶ S`
+  -- a scheme-theoretically dense compactification of `O ⟶ S`
   obtain ⟨c, hc⟩ := exists_compactification_isSchemeTheoreticallyDominant (O.ι ≫ u)
   have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
   have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g

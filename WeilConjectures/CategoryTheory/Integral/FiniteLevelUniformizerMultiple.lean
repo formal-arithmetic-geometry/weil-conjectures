@@ -27,13 +27,7 @@ universe u
 namespace Padic
 
 /-- A positive power of the chosen uniformizer is a multiple of a prescribed positive
-power of the residual prime.
-
-Proof: the prime has absolute value less than one, and so is a nonunit in the
-valuation ring. It is nonzero since its image in the coefficient field is nonzero.
-Factor it as a unit times a positive uniformizer power. Raise this factorization
-to the requested power and multiply by the inverse of the unit power.
--/
+power of the residual prime. -/
 theorem exists_uniformizer_power_multiple
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

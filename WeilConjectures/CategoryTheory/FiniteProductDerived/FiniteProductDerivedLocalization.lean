@@ -103,14 +103,7 @@ private def tupleEquivalence : CochainComplex A ℤ ≌ (∀ i, CochainComplex (
 
 include G hzero η ε in
 /-- Localize an exact finite-product equivalence coordinatewise.
-Source: Stacks Project, Tags 015F and 05RU localization calculation.
-
-Proof: form the inverse complex degreewise with the given zero-preserving inverse functor.
-The unit and counit make it inverse to the tuple of exact complex restrictions. Joint
-reflection of isomorphisms, the exact-derived factorization, and the localization test
-identify the source quasi-isomorphisms with the coordinate quasi-isomorphisms. Descend
-both directions through the product localization. The localized unit and counit give
-the derived tuple functor an equivalence structure. No boundedness is used. -/
+Source: Stacks Project, Tags 015F and 05RU localization calculation. -/
 theorem derivedPi_isEquivalence
     (hr : JointlyReflectIsomorphisms r) :
     (Functor.pi' (fun i ↦ (r i).mapDerivedCategory)).IsEquivalence := by

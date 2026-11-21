@@ -23,7 +23,9 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
 /-! # The finite Čech criterion with Grothendieck abelian coefficients
 
-Source: Stacks Project, Tag 03F9, using the categorical section-lifting lemma.
+## References
+
+* Stacks Project, Tag 03F9, using the categorical section-lifting lemma.
 -/
 
 @[expose] public section
@@ -138,16 +140,7 @@ private theorem finiteCech_shortExact {S : ShortComplex (Sheaf J A)} (hS : S.Sho
   exact ShortComplex.ShortExact.mk' hleft.1 hleft.2 (hepi k y)
 
 /-- Categorical finite Čech exactness implies vanishing of positive derived evaluation.
-Source: Stacks Project, Tag 03F9.
-
-Proof: The local section-lifting lemma makes evaluation on B right exact for every
-short exact sequence whose first term has positive Čech exactness. Injective sheaves
-have this property by the cofree contraction. Every nerve object remains in B, so
-finite products of the section sequences form a short exact sequence of Čech complexes.
-The homology sequence shows that the cokernel of a monomorphism between two such
-sheaves again has positive Čech exactness. The acyclicity criterion for derived functors
-now applies to evaluation, which is left exact. Its dimension-shifting induction gives
-vanishing in all positive degrees. -/
+Source: Stacks Project, Tag 03F9. -/
 theorem isZero_rightDerived_eval_of_finiteCech
     [HasInjectiveResolutions (Sheaf J A)]
     (B : C → Prop)

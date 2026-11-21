@@ -23,14 +23,7 @@ universe v₁ v₂ u₁ u₂ w₁ w₂
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A compatible resolution computes the natural derived connecting map.
-Source: Stacks Project, Tags 015B and 01DZ.
-Proof: Obtain the cohomological delta-functor and both comparison identities from
-rightDerived_triangle_connecting. Eliminate the equality identifying its functors with
-rightDerived. Its first comparison identifies the source delta with the boundary of the
-supplied compatible resolutions; short exactness witnesses are equal by proof irrelevance.
-Use delta-functor naturality for the supplied short-complex morphism. Its second comparison
-identifies the target delta with the canonical triangle boundary after postcomposition with
-the homology/right-derived comparison. Cancel that comparison with its inverse. -/
+Source: Stacks Project, Tags 015B and 01DZ. -/
 private theorem resolvedBoundary_naturality_aux
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
     [EnoughInjectives A] [Category.{v₂} B] [Abelian B]
@@ -81,12 +74,7 @@ private theorem resolvedBoundary_naturality_aux
 set_option backward.isDefEq.respectTransparency false in
 /-- The resolved boundary comparison, precomposed with the section comparison and
 evaluated on a module element, with the quotient component explicitly identified.
-Source: Stacks Project, Tags 015B and 01DZ.
-Proof: Apply the abstract resolution/triangle comparison and delta naturality above.
-Precompose by toRightDerivedZero, move it past the third component by its naturality,
-and evaluate. Composition of module maps is composition of their linear maps.
-Finally substitute the supplied identities for the quotient component, its image
-element, and the target boundary composite. These equalities specify the data uniquely. -/
+Source: Stacks Project, Tags 015B and 01DZ. -/
 theorem resolvedBoundary_naturality
     {A : Type u₁} [Category.{v₁} A] [Abelian A] [EnoughInjectives A]
     {R : Type u₂} [Ring R]

@@ -22,21 +22,7 @@ open scoped Simplicial
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
 /-- A categorical degree-zero Cech cocycle gives compatible local morphisms.
-Source: Stacks Project, Cohomology on Sites, Tags 03AM and 03AN.
-
-Proof: For indices i and j, project the equation z d^0 = 0 onto the (i,j)
-component. The alternating coface differential there is the restriction of
-z_j minus the restriction of z_i to the product U_i x_X U_j, with singleton
-products identified with U_i and U_j by their projections and diagonal inverses.
-Thus the two restrictions are equal. Given a : W -> U_i and b : W -> U_j
-with equal composites to X, regard W as an object over X with this common
-composite. The product universal property gives a morphism from W to the
-(i,j) product with projections a and b. Restrict the component equation along
-this morphism. Functoriality and the singleton-product identities give the
-claimed compatibility equation. This argument applies to morphisms from
-any abelian group E, since the coface calculation is an equality of morphisms.
-An empty index type has no i,j, so the statement is vacuous.
--/
+Source: Stacks Project, Cohomology on Sites, Tags 03AM and 03AN. -/
 theorem cech_zero_cocycle_compatibility
     {C : Type u} [Category.{v} C] [HasFiniteWidePullbacks C]
     (P : Cᵒᵖ ⥤ AddCommGrpCat.{v}) (X : C)

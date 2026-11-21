@@ -245,22 +245,7 @@ set_option linter.unusedSectionVars false
 This only concerns three specified complexes, not arbitrary derived objects, and
 constructs neither a unit comparison nor any other structural constraint.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0FPT, via Tag 06YU.
-
-Proof: total tensors of the three complexes have flat terms and are K-flat by
-lem-pur-kflat-total-tensor-model, so the given representative square applies to
-both inner pairs and both outer pairs. Rewrite both derived associators by their
-associator_model equations, replacing tensorIso by T.iso using tensorIso_both.
-Naturality of T.iso and of the exact-functor localization factor moves the four
-chain comparison maps next to these associators. Cancel the resulting model
-isomorphisms. It remains to compare the two total-complex maps. Precompose with
-the inverse outer comparison and restrict to each triple coproduct summand.
-The summand hypothesis and naturality of the underived comparison identify the
-two restrictions with u.coherence.associativity. The structural model maps have
-these same restrictions: detect equality using the sheafification universal
-property and local pure-tensor generators, then the coproduct universal property.
-Apply localization and undo the cancellations. No claim about generation by
-global pure tensors is used. -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0FPT, via Tag 06YU. -/
 theorem ringed_forget_tensor_associator_representatives
     (hU : ∀ P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ,
       P.IsKFlatIndependentCoefficients →

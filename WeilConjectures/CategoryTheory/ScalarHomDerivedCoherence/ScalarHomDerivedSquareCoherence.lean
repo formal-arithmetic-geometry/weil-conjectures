@@ -206,16 +206,7 @@ abbrev DerivedCoherence :=
 
 /-- Derived scalar-Hom comparison is natural and coherent for composition, identities
 and coefficient squares on arbitrary derived inputs.
-Source: Stacks 07A4, 08J9, 0D6D.
-
-Proof: the normalized scalar tensor coherence supplies the unit and composition
-equations, and the scalar-Hom comparison tower transfers these through the
-closed adjunction. For a commuting coefficient square, the direct composite
-comparisons agree after transport along equality of the coefficient maps.
-Conjugate both composition equations by their source and target composition
-isomorphisms. Functoriality of Hom and cancellation of the inverse isomorphisms
-identify the two square routes. These are equations for all derived morphisms,
-so inverse quasi-isomorphisms are included. -/
+Source: Stacks 07A4, 08J9, 0D6D. -/
 theorem coherence : DerivedCoherence.{c, v, r, w} (J := J) M μ := by
   obtain ⟨ht, hid⟩ := scalarHomTensorCoherence (J := J) M μ
   obtain ⟨hn, hc, hi⟩ := scalarHomComparisonTower (J := J) M μ ht hid

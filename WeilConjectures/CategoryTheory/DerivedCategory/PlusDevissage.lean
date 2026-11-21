@@ -16,9 +16,8 @@ triangulated functors `D⁺(C) ⥤ D⁺(D)`, compatible with the shifts. We show
 
 - if `τ` is an isomorphism on the objects of `C` satisfying a property `P`, placed in degree `0`,
   then `τ` is an isomorphism on every bounded object all of whose cohomology objects satisfy `P`
-  (`DerivedCategory.Plus.isIso_app_of_isGE_of_isLE`). This is the finite-range comparison of
-  blueprint `theorem-smooth-base-change-classical-torsion-2`, with the comparison of the two
-  hypercohomology spectral sequences replaced by an induction along the truncation triangles;
+  (`DerivedCategory.Plus.isIso_app_of_isGE_of_isLE`). This is the finite-range comparison,
+  proved by induction along the truncation triangles;
 - if `F` does not lower the cohomological degree, then `Hⁿ(F(τ_{≤ n} X)) ⟶ Hⁿ(F X)` is an
   isomorphism;
 - if both `F` and `G` do not lower the cohomological degree, then the bounded statement extends
@@ -140,7 +139,7 @@ lemma isIso_homologyFunctor_map_map_truncLEι_app (F : Plus C ⥤ Plus D) [F.Com
     (hF ((t.truncGE (n + 1)).obj X) (n + 1) (n - 1) (by lia))
     (hF ((t.truncGE (n + 1)).obj X) (n + 1) n (by lia))
 
-/-- Blueprint `theorem-smooth-base-change-classical-torsion-2--1` (the formal part): if `F` and `G`
+/-- If `F` and `G`
 do not lower the cohomological degree and `τ` is an isomorphism on the objects of `C` satisfying
 `P`, placed in degree `0`, then `τ` is an isomorphism at every object of `D⁺(C)` all of whose
 cohomology objects satisfy `P`. -/

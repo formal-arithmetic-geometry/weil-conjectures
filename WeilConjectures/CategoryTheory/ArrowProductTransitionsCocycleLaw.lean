@@ -17,9 +17,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Canonical product transitions satisfying their cocycle law once their projections
-are known.
-Source: Stacks Project, Sites, Tag 0EXZ. Proof by testing both sides after every product
-projection, using naturality of the composition comparison and associativity. -/
+are known. Stacks Project, Sites, Tag 0EXZ. -/
 theorem arrow_product_transitions_cocycle_of_projections
     {J : Type u} [SmallCategory J]
     (F : J ⥤ Cat.{u, u}) (T : ∀ j : J, GrothendieckTopology (F.obj j))

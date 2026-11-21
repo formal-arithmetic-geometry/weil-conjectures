@@ -22,31 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- The localized evaluation tower of a K-injective complex has a Roos triangle.
-Source: Stacks Project, Derived Categories, Tags 0BK6, 0BK7 and 070M, with the
-arbitrary K-injective tower extension proved by `roosComplex_quasiIso`.
-
-Proof: Evaluation at n is right adjoint to the exact functor sending X to the
-inverse system which is X at levels at most n and zero above n, with identity
-transitions between nonzero terms. Thus evaluation preserves K-injective
-complexes by `Adjunction.preservesKInjectiveComplexes`. Form the termwise
-product P of these evaluated complexes. By
-`HomotopyCategory.isLimitFanQuotient` and the K-injective Hom comparison, Q(P), with its
-projections, is their product in the derived category. Define s by its
-components pr(n+1) followed by the transition to level n, and set t = 1-s.
-The differential commutes with t by naturality of the tower's differentials.
-The cone c identifies degreewise with the kernel of t: compatible families
-are precisely the families killed by 1-s, and evaluation preserves limits
-of complexes. Construct the shifted cone of t. The canonical map from this
-kernel to the shifted cone is a quasi-isomorphism by `roosComplex_quasiIso`;
-this applies to K-injective complexes of towers without assuming their
-terms are injective or their transitions are epimorphisms. Localizing the
-backwards rotated cone triangle gives a distinguished triangle starting at
-Q(c.pt). The product isomorphism Q(P) to the chosen product intertwines t
-with `towerTransitionEndomorphism`, as checked on each projection. Transport
-along this isomorphism gives the asserted triangle, whose first map is the
-product lift of the localized legs of c. No representation of a
-second tower is used here; that transport is proved by the caller.
--/
+Source: Stacks Project, Derived Categories, Tags 0BK6, 0BK7 and 070M. -/
 theorem derivedCategory_towerLimit_triangle
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     [HasCountableProducts A] [CountableAB4Star A]

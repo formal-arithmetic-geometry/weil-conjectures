@@ -86,11 +86,7 @@ lemma laxTensor_app_app' {X₁ X₂ : C} {Y₁ Y₂ : D}
     tensorHom_comp_tensorHom, Iso.inv_hom_id, Iso.inv_hom_id, tensorHom_id, id_whiskerRight,
     Category.comp_id]
 
-/-- Descend a lax structure along `L`, normalized by the specified lifting isomorphism.
-
-Proof: lift the curried tensor natural transformation in both variables and transport
-its unit by the lifting isomorphism. Localization extensionality reduces all three
-coherence diagrams to those of `G` and `L`. Only the tensorators of `L` are inverted. -/
+/-- Descend a lax structure along `L`, normalized by the specified lifting isomorphism. -/
 @[simps!, instance_reducible]
 noncomputable def functorLaxMonoidalOfComp : F.LaxMonoidal := by
   letI e := Lifting.iso L W G F

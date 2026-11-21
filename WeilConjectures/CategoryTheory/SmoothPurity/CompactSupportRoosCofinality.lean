@@ -47,8 +47,7 @@ Tag 03EK.
 
 The category parameter below is instantiated by `Mod (underline A)` for a
 small site and its constant ring sheaf.  The recorded arithmetic restriction,
-selection and block maps are the canonical constructions from Tags 0H9K and
-0941.  The proofs use these constructions before passing to the derived category.
+selection and block maps are the canonical constructions from Tags 0H9K and 0941.
 -/
 
 -- After pruning, this module only keeps private declarations.

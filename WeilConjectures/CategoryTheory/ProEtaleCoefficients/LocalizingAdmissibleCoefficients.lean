@@ -11,16 +11,16 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 /-!
 # Admissible condensed coefficients for localizing closures
 
-This supplies the coefficient convention omitted from the recorded localizing-closure
-interface. The localizing closure itself is the imported `localizingClosureProEtale`.
-The algebraic-closure clause is the finite-subextension-valued ring `padicAlgClRingObj`. The ring of all continuous maps to the algebraic
-closure is not an admissible coefficient (removed 2026-10-25).
+This supplies the coefficient convention for the localizing-closure interface. The localizing
+closure itself is the imported `localizingClosureProEtale`. The algebraic-closure clause is the
+finite-subextension-valued ring `padicAlgClRingObj`. The ring of all continuous maps to the
+algebraic closure is not an admissible coefficient.
 
 It also supplies `IsLocalizingSubcategoryOfSize` and `localizingClosureOfSize`, the
 imported `IsLocalizingSubcategory` and `localizingClosure` with the index universe of
 the direct sums given as a free parameter `w`. At `w = u`, the object universe, they
 are the imported definitions. A fixed index universe shared by two categories of
-different sizes, as in proposition-proper-direct-image-extension-zero, needs this form.
+different sizes needs this form.
 -/
 
 @[expose] public section
@@ -62,11 +62,9 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The admissible coefficients are the finite discrete rings killed by a power of `ℓ`,
 `ℤ_ℓ`, `ℚ_ℓ`, finite subextensions of `ℚ_ℓ` in its fixed algebraic closure, their valuation
-rings, and the finite-subextension-valued algebraic closure `padicAlgClRingObj`; the ring of all continuous maps to the algebraic closure is
-not admissible. Isomorphisms are in monoid objects of condensed abelian groups,
-hence preserve both the additive and ring
-structures. Finite rings can be represented in `Type 0` without restricting their
-isomorphism classes. -/
+rings, and the finite-subextension-valued algebraic closure `padicAlgClRingObj`; the ring of
+all continuous maps to the algebraic closure is not admissible. Isomorphisms are in monoid
+objects of condensed abelian groups, hence preserve both the additive and ring structures. -/
 def IsLocalizingAdmissibleCoefficient (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] : Prop :=
   (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A)

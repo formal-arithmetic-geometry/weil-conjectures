@@ -56,23 +56,27 @@ abbrev Modules (A : Ring.{u}) :=
   Profinite.CondensedAction.Modules A.toMon
 
 /-- The existing section-module equivalence, used to express generalized-element formulas.
-Source: Stacks 00YV. -/
+Source: Stacks 00YV.
+-/
 abbrev sectionsFunctor (A : Ring.{u}) :=
   InternalAbelianSheafModule.sectionModuleFunctor (coherentTopology Profinite.{u}) A.X
 
 /-- The section ring of an internal condensed ring.
-Source: Stacks 00YV. -/
+Source: Stacks 00YV.
+-/
 abbrev sectionRing (A : Ring.{u}) (S : Profinite.{u}) :=
   (InternalAbelianSheafModule.sectionRingSheaf
     (coherentTopology Profinite.{u}) A.X).obj.obj (op S)
 
 /-- Sections of the actual module sheaf associated to an internal module.
-Source: Stacks 00YV. -/
+Source: Stacks 00YV.
+-/
 abbrev sections (A : Ring.{u}) (M : Modules A) (S : Profinite.{u}) :=
   M.X.obj.obj (op S)
 
 /-- The section-module structure transported by the recorded equivalence.
-Source: Stacks 00YV. -/
+Source: Stacks 00YV.
+-/
 instance sectionModule (A : Ring.{u}) (M : Modules A) (S : Profinite.{u}) :
     Module (sectionRing A S) (sections A M S) :=
   (((sectionsFunctor A).obj M).val.obj (op S)).isModule
@@ -82,7 +86,7 @@ variable (A : Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologic
 /-- The bundled commutativity proof on the underlying condensed ring. -/
 instance ringComm (A : Ring.{u}) : IsCommMonObj A.toMon.X := A.comm
 
-/-- The landed internal-action category, specialized to the bundled commutative ring. -/
+/-- The internal-action category, specialized to the bundled commutative ring. -/
 abbrev Equivariant (A : Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] := Profinite.CondensedAction.ActionModule A.toMon G
 
@@ -122,7 +126,7 @@ def mergeTuple {n : ℕ} {T : Profinite.{u}} (i : Fin (n + 2))
   fun j ↦ if j.val + 1 < i.val then g j.castSucc
     else if j.val + 1 = i.val then g j.castSucc * g j.succ else g j.succ
 
-/-- The landed invariant-submodule functor and its normalized inclusion adjunction. -/
+/-- The invariant-submodule functor and its normalized inclusion adjunction. -/
 abbrev Invariants (A : Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] := Profinite.CondensedAction.Invariants A.toMon G
 

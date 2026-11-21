@@ -162,9 +162,7 @@ def ringedSiteDualEvaluation (P N : D) :
       S.tensor.map (Prod.mkHom (𝟙 N) u.inv) ≫ (S.monoidal.rightUnitor N).hom)
 
 /-- Naturality of the actual evaluation comparison in the second variable.
-Source: Stacks 08JD, 0A98.
-Proof: transpose both sides. Naturality of the associator, tensor, right unitor,
-and the adjunction counit makes the resulting composite evaluations equal. -/
+Source: Stacks 08JD, 0A98. -/
 theorem ringedSiteDualEvaluation_naturality (P : D) {N N' : D} (f : N ⟶ N') :
     S.tensor.map (Prod.mkHom f (𝟙 (H.obj (op P, O)))) ≫
         ringedSiteDualEvaluation S O u P N' =
@@ -209,9 +207,7 @@ private theorem ringedSiteTranspose_source (T : D) {P P' Q : D} (f : P' ⟶ P)
     id_tensorHom]
 
 /-- Naturality of signed bidual evaluation in the source complex.
-Source: Stacks 0A97.
-Proof: transpose, apply naturality of braiding, and then evaluation_naturality.
-Adjunction naturality turns this identity back into the displayed equation. -/
+Source: Stacks 0A97. -/
 theorem ringedSiteBidual_naturality {P P' : D} (f : P ⟶ P') :
     f ≫ ringedSiteBidual S s O P' =
       ringedSiteBidual S s O P ≫ H.map
@@ -230,8 +226,7 @@ theorem ringedSiteBidual_naturality {P P' : D} (f : P ⟶ P') :
   exact (S.evaluation_naturality P' P O f).symm
 
 /-- Evaluation is contravariantly natural in the first argument too.
-Source: Stacks 08JD, 0A98.
-Proof: transpose and use evaluation_naturality, then associator naturality. -/
+Source: Stacks 08JD, 0A98. -/
 theorem ringedSiteDualEvaluation_source_naturality {P P' : D} (f : P' ⟶ P) (N : D) :
     S.tensor.map (Prod.mkHom (𝟙 N) (H.map (Prod.mkHom f.op (𝟙 O)))) ≫
         ringedSiteDualEvaluation S O u P' N =
@@ -249,15 +244,14 @@ theorem ringedSiteDualEvaluation_source_naturality {P P' : D} (f : P' ⟶ P) (N 
   rw [← whiskerLeft_comp_assoc, ev]
   simp only [whiskerLeft_comp, Category.assoc]
 
-/-- The canonical comparison with dual tensor the target, in the node's order.
+/-- The canonical comparison with dual tensor the target.
 Source: Stacks 08JE, 08JJ. -/
 def ringedSiteDualEvaluationLeft (P N : D) :
     S.tensor.obj (H.obj (op P, O), N) ⟶ H.obj (op P, N) :=
   (s.braiding (H.obj (op P, O)) N).hom ≫ ringedSiteDualEvaluation S O u P N
 
 /-- Naturality after the Koszul symmetry that interchanges the two tensor factors.
-Source: Stacks 08JE.
-Proof: use braiding naturality, then ringedSiteDualEvaluation_naturality. -/
+Source: Stacks 08JE. -/
 theorem ringedSiteDualEvaluationLeft_naturality (P : D) {N N' : D} (f : N ⟶ N') :
     S.tensor.map (Prod.mkHom (𝟙 (H.obj (op P, O))) f) ≫
         ringedSiteDualEvaluationLeft S s O u P N' =
@@ -271,7 +265,7 @@ theorem ringedSiteDualEvaluationLeft_naturality (P : D) {N N' : D} (f : N ⟶ N'
     congrArg ((β_ (H.obj (op P, O)) N).hom ≫ ·)
       (ringedSiteDualEvaluation_naturality S O u P f)
 
-/-- The node's actual canonical comparison as a natural transformation.
+/-- The actual canonical comparison as a natural transformation.
 Source: Stacks 08JE, 08JJ. -/
 def ringedSiteDualEvaluationLeftNatTrans (P : D) :
     Prod.sectR (H.obj (op P, O)) D ⋙ S.tensor ⟶ Prod.sectR (op P) D ⋙ H where
@@ -710,20 +704,7 @@ set_option Elab.async false in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Canonical evaluation data exist without any perfectness hypothesis.
-Source: Stacks 08JD, 0A97, 0A98.
-Proof: descend total tensor on K-flats by site-derived-tensor descent, and derive the
-ordinary componentwise tensor-Hom adjunction with a K-injective target. Its counit
-has exactly the representative formula of CoefficientTensorModels. Descend the
-ordinary scalar unit, reassociation, and signed interchange; their coherence
-identities hold on pure tensor generators and hence after localization. The unit
-is flat in degree zero. The formulas ringedSiteBidual and ringedSiteDualEvaluation
-are respectively transposed signed evaluation and composition after the Hom-unit
-identification. On ordinary Hom-computable representatives their components are
-x ↦ (φ ↦ (-1)^{|x||φ|} φ(x)) and y tensor φ ↦ (x ↦ y φ(x)). These formulas commute
-with slice restriction: restriction is exact, retains sections and the displayed
-formulas, and commutes with K-flat tensor and K-injective Hom under the canonical
-restriction comparisons. Naturality follows by transposing composite evaluations.
-No isomorphism of either of these two maps is used or asserted. -/
+Source: Stacks 08JD, 0A97, 0A98. -/
 theorem ringedSiteDualityMaps_exists : Nonempty (RingedSiteDualityModel.{c, v, r, w} J R) := by
   obtain ⟨S, T, β, ⟨K⟩⟩ := ringedDerived_closed_symmetric_monoidal.{c, v, r, w} J R
   have hunit : CochainComplex.IsKFlatIndependentCoefficients
@@ -873,12 +854,7 @@ set_option backward.isDefEq.respectTransparency false
 end OrdinaryBidualComponents
 
 /-- The ordinary signed evaluation chain map is uniquely determined by its section formula.
-Source: Stacks 0A97, 0A8X.
-Proof: the existing signed-bidual localization theorem constructs an ordinary family
-with precisely this formula on all slice sections and proves uniqueness for that formula.
-Choose any of the existing normalized closed tensor models, apply that theorem, and
-retain the existence and uniqueness clauses for E. The coefficient complexes and
-product projections in the two formulas are definitionally the same. -/
+Source: Stacks 0A97, 0A8X. -/
 theorem ringedSiteOrdinaryBidual_existsUnique (E : CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) :
     ∃! β : E ⟶ homComplex.{c, v, max c v r, max c v r} (R := R) (homComplex.{c, v, max c v r, max c
@@ -1070,12 +1046,7 @@ private theorem ringedSiteEvaluationFormula_iff
       exact hn'.symm.trans hlocal
 
 /-- The ordinary evaluation chain map, uniquely specified on the actual tensor generators.
-Source: Stacks 08JE, 0A98.
-Proof: define every Hom-product projection on a total-tensor summand by the
-specified sheaf-bilinear evaluation. Sheafification and the coproduct universal
-property supply each degree map. The tensor and Hom differentials give the same
-two terms, with the second sign (-1)^(p+q+1). Thus these are chain maps. Pure tensor
-generators, Hom-product projections and sheaf separation give uniqueness. -/
+Source: Stacks 08JE, 0A98. -/
 theorem ringedSiteOrdinaryEvaluation_existsUnique (E F : CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) :
     ∃! ε : (WeilConjectures.coefficientTotalTensor.{r, c, v} J R).obj (F, homComplex.{c, v, max c v
@@ -1311,12 +1282,7 @@ private theorem ringedSiteTensorCoherence
     ringedSiteTensorRightUnitorModel J R M t ht⟩, rfl⟩
 
 /-- Biduality is the signed ordinary map under the two specified Hom comparisons.
-Source: Stacks 0A97, 08JJ.
-Proof: the closed transposition is pinned by models.uncurry_model. The normalized
-symmetry supplies precisely the interchange sign. Apply this twice and use the
-specified scalar unit. Localize the resulting ordinary chain map and its two
-augmentation comparisons. The tensor-Hom adjunction identifies it with the
-transpose that defines ringedSiteBidual; no K-flatness is needed for E or its dual. -/
+Source: Stacks 0A97, 08JJ. -/
 theorem ringedSiteBidual_normalization (M : RingedSiteDualityModel.{c, v, r, w} J R)
     (E : CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)
@@ -1366,13 +1332,7 @@ theorem ringedSiteBidual_normalization (M : RingedSiteDualityModel.{c, v, r, w} 
     (hn.trans (congrArg₂ (· ≫ ·) (congrArg DerivedCategory.Q.map hβeq.symm) hd'))
 
 /-- Evaluation is the unsigned ordinary map under the specified tensor and Hom comparisons.
-Source: Stacks 08JE, 08JJ.
-Proof: transpose the comparison using the normalized tensor-Hom adjunction.
-Associator normalization identifies its summand maps with ordinary composite
-evaluation. Unit normalization gives y*phi(x), with no extra sign. Both tensor
-arguments are K-flat, so models.iso is the specified tensor comparison. Localizing
-the unique ordinary evaluation map gives the equation. The hypotheses are exactly
-those required for the two augmentation comparisons to be invertible. -/
+Source: Stacks 08JE, 08JJ. -/
 theorem ringedSiteDualEvaluation_normalization
     (M : RingedSiteDualityModel.{c, v, r, w} J R) (E F : CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)
@@ -1415,9 +1375,7 @@ theorem ringedSiteDualEvaluation_normalization
     ringedSiteDualityUnit, ringedSiteDualityUnitComplex, ringedTensorUnitComplex] using hn
 
 /-- Slice restriction sends zero maps to zero, by its sectionwise construction.
-Source: Stacks 03DJ.
-Proof: overFunctor keeps the components of a module morphism and only restricts
-its index category. Each component of a zero morphism remains zero. -/
+Source: Stacks 03DJ. -/
 theorem ringedSiteDualityRestriction_preservesZero (U : C) :
     (SheafOfModules.overFunctor.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)
@@ -1434,10 +1392,7 @@ theorem ringedSiteDualityRestriction_preservesZero (U : C) :
   rfl
 
 /-- Forgetting commutativity commutes with slice restriction as sheaves of rings.
-Source: Stacks 03DJ.
-Proof: both sides have the section ring R(V), and the same ring restriction map,
-on an object V to U of the slice. Extensionality of ring sheaves gives equality;
-the sheaf-condition proofs are propositionally irrelevant. -/
+Source: Stacks 03DJ. -/
 theorem ringedSiteDualityRestrictionCoefficient_eq (U : C) :
     (sheafCompose (J.over U)
       (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj (R.over U) =
@@ -1478,15 +1433,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 by termwise restriction and localization. Its tensor and Hom comparisons are the
 closed evaluation-compatible comparisons, not separate choices of bidual/evaluation
 maps. The two equations state compatibility for the actual previously defined maps.
-Source: Stacks 08JB, 08JD, 0A97, 0A98, 03DJ.
-Proof: exact module restriction inverts quasi-isomorphisms on complexes, hence
-factors through Q with the displayed comparison. It preserves the ordinary unit
-and sheafified tensor generators, so K-flat descent gives the tensor comparison.
-Restriction preserves K-injectives and the actual Hom-product projections; the
-fixed augmentation comparisons give the Hom comparison. These comparisons commute
-with componentwise evaluation. Transpose this evaluation square, first after
-signed interchange and then after composite evaluation, to obtain the bidual
-and tensor-Hom squares. This proof does not assume perfectness. -/
+Source: Stacks 08JB, 08JD, 0A97, 0A98, 03DJ. -/
 theorem ringedSiteDualityMaps_restriction
     (M : RingedSiteDualityModel.{c, v, r, w} J R) (U : C)
     [HasSheafify (J.over U) AddCommGrpCat.{max c v r}]

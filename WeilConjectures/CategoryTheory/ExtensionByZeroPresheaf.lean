@@ -12,7 +12,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Ulift
 /-!
 # The extension-by-zero presheaf on a localized ringed site
 
-Source: Stacks Project, Modules on Sites, Lemma 03DI, first paragraph of proof.
+## References
+
+* Stacks Project, Modules on Sites, Lemma 03DI.
 -/
 
 @[expose] public section

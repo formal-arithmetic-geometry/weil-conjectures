@@ -24,10 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- A normalized termwise unit intertwines target scalars under derived factorization.
-Source: Stacks Project, Derived Categories, Tag 015F.
-Proof: commute the scalar through the extension factorization isomorphism by
-bilinearity; then use naturality of the restriction factorization and the unit
-normalization. No linearity of restriction over the target ring is required. -/
+Source: Stacks Project, Derived Categories, Tag 015F. -/
 theorem scalarLocalization_unit_factors
     {B : Type u} [Category.{v} B] [Abelian B] [HasDerivedCategory.{w} B]
     {B' : Type u'} [Category.{v'} B'] [Abelian B'] [HasDerivedCategory.{w'} B']

@@ -217,7 +217,7 @@ structure TensorComparison where
       u.tensor.hom.app (P.X p, Q.X q) ≫
         tensorSummand.{d, vd, s} J' R' ((U.mapHomologicalComplex (.up ℤ)).obj P)
           ((U.mapHomologicalComplex (.up ℤ)).obj Q) p q n hpq
-  /-- The natural derived isomorphism μ, in the orientation of the node. -/
+  /-- The natural derived isomorphism μ. -/
   derived : SB.tensor ⋙ U.mapDerivedCategory ≅
     (U.mapDerivedCategory.prod U.mapDerivedCategory) ⋙ SA.tensor
   /-- The extension agrees with the total comparison on all flat-term K-flat models. -/
@@ -326,23 +326,7 @@ private theorem representative_unique
 /-- The summandwise underived comparison extends uniquely and coherently to derived tensors.
 This assertion concerns tensors only; it has no internal-Hom comparison or transpose law.
 
-Source: Stacks 06YU, 0G7D, 0FPT.
-
-Proof: take coproducts of the given tensor comparison in total degree n. The coproduct
-inclusions show that the resulting maps commute with both tensor differentials:
-naturality handles d tensor 1 and 1 tensor d, and additivity preserves (-1)^p.
-The inverse maps give a natural chain isomorphism. Restrict to flat-term K-flat pairs;
-the image pairs are K-flat by the displayed hypothesis. Transport the localized chain
-comparison across the two specified tensor-model isomorphisms. The transformation
-extension bijection in site-derived-tensor-descent extends it uniquely. Extend its
-inverse as well; injectivity proves the composites are identities. On triple summands,
-underived associativity gives derived associativity. Unit diagrams are the given unit
-diagrams in each degree. Symmetry is the underived swap times (-1)^(pq), preserved by
-additivity. Tensor closure of flat-term K-flat complexes makes these tests legitimate;
-K-flat resolutions and naturality extend the coherence equations to all objects.
-The degree-zero unit comparison is exactly the two single-complex factors displayed
-in unit_normalization. Finally the same extension bijection gives uniqueness even
-among arbitrary natural transformations, not only among isomorphisms. -/
+Source: Stacks 06YU, 0G7D, 0FPT. -/
 theorem ringed_forget_tensor_descent
     [∀ I : Type (max c v r), PreservesColimitsOfShape (Discrete I) U]
     (_preserves_flat_models :

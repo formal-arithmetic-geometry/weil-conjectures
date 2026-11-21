@@ -280,28 +280,7 @@ lemma hypercohomologyExactComparisonH_app (e : G ⋙ 𝟭 C ⟶ β ⋙ G')
 
 -- Keep the original Grothendieck hypotheses in the public signature.
 set_option linter.unusedSectionVars false in
-/-- Exact comparison preserves the canonical normalized hypercohomology left edge.
-
-Proof:
-1. Write τ for the normalized derived comparison. It commutes with shifts: the
-canonical derived-identity isomorphism does so after restriction to the bounded-below
-homotopy category, and `rightDerivedFunctorPlusBaseChange` commutes with shifts by
-its unit characterization. The comparison of truncation spectral objects is the
-composite of `τ.mapTriangulatedSpectralObject`, the functor-composition comparison,
-and the image under RG' of `β.mapTriangulatedSpectralObjectObjIso`.
-2. Apply `Abelian.SpectralObject.leftEdge_naturality`. On the interval from bottom
-to top its component is H^q(τ_K), because both extended truncations are identities.
-3. On the interval [q,q+1), identify each truncation with H^q(K)[-q]. The identity
-`mapDerivedCategoryPlus_eTruncGELTIsoApp_eTruncLTCompETruncGEIso`, with ψ the identity,
-identifies the β-truncation comparison with β applied to the single-degree
-identification, followed by β's shift comparison, its single-functor comparison,
-and the single functor applied to its homology comparison.
-4. Naturality of τ moves the single-degree identification past τ. Its shift
-compatibility and homology-shift naturality reduce the remaining comparison to
-an object in degree zero. Apply `rightDerivedBaseChange_zero_unit`: cancel the
-invertible degree-zero unit of G, and use the canonical single/derived homology
-isomorphisms. This gives e at H^q(K), followed by G' of β's homology comparison.
-Substitute this target component in Step 2 and associate the composites. -/
+/-- Exact comparison preserves the canonical normalized hypercohomology left edge. -/
 theorem hypercohomologyLeftEdge_exactComparison (e : G ⋙ 𝟭 C ⟶ β ⋙ G')
     (K : DerivedCategory.Plus B) [K.IsGE 0]
     [(β.mapDerivedCategoryPlus.obj K).IsGE 0] (q : ℕ) :

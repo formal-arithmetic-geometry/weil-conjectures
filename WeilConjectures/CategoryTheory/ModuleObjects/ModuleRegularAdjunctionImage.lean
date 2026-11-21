@@ -95,8 +95,7 @@ then the unit of `G` corestricts to an isomorphism from the monoidal unit onto `
    ╲ ≅           ▼
     ╲─────▶ image e ──ι──▶ G (regular S)
 ```
-The composite `ε ≫ e` equals `ε` by `h`, so `ε` factors through `image e`, and the factor
-`ε ≫ factorThruImage e` is an isomorphism. -/
+The factor `ε ≫ factorThruImage e` is an isomorphism. -/
 theorem unit_image_regular_isIso (e : End (G.obj (Mod.regular S)))
     [IsIso (F.map (image.ι e.asHom) ≫ adj.counit.app (Mod.regular S))]
     (h : ε G ≫ (e).asHom = ε G) :

@@ -11,7 +11,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Exact transport of strict cyclic presentations
 
-Source: Stacks Project, Derived Categories, Tag 0152.
+## References
+
+* Stacks Project, Derived Categories, Tag 0152.
 -/
 
 @[expose] public noncomputable section
@@ -216,18 +218,7 @@ private theorem exactTransport_class
 /-- Applying the exact equivariant functor to a strict presentation preserves its
 underlying shifted class and its native connecting morphism.
 
-Proof: apply the termwise functor to the short exact complex sequence. The image of
-its underlying splitting is still a splitting. Apply L to the off-diagonal equation
-and use naturality of e to move it through the two chain maps; this gives exactly
-the target off-diagonal equation. The endpoint isomorphisms are the images of the
-old ones composed with the exact localization factors and the canonical shift
-comparison. The localization composition comparisons identify the new shifted class
-with cyclicDerivedHomTransport of the old one. Finally
-DerivedCategory.map_triangleOfSESδ identifies the transported native morphism with
-the image SES boundary, including its sign. No injective representative or bound is
-needed, since L is exact on all short exact sequences.
-
-Source: Stacks Tag 0152. -/
+Stacks Project, Tag 0152. -/
 theorem cyclicDerivedOffDiagonalPresentation_mapExact
     {M N : DerivedCategory (IsoAlgebra F)} {u : CyclicDerivedHom F M N (-1)}
     {f : M ⟶ N} (hp : CyclicDerivedOffDiagonalPresentation F u f) :

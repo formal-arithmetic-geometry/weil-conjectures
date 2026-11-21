@@ -13,7 +13,9 @@ import all WeilConjectures.CategoryTheory.SmoothPurity.CanonicalRightDerivedAdju
 
 /-! # Cyclic Hom functoriality for the canonical total right derived functor
 
-Source: Stacks Project, Derived Categories, Tags 070I, 070K and 070Y.
+## References
+
+* Stacks Project, Derived Categories, Tags 070I, 070K and 070Y.
 -/
 
 @[expose] public noncomputable section
@@ -160,20 +162,7 @@ private theorem standard_universal (T : C ⥤ D) [T.Additive]
 /-- Cyclic graded-Hom functoriality does not depend on the implementation of total
 right derivation when the forgetting comparison obeys the exact-square unit equation.
 
-Proof: compare each arbitrary-resolution derived functor with the canonical total
-right derived functor by the unique isomorphism preserving its unit. The isomorphism
-on underlying categories commutes with shifts, since both units commute with shifts
-and are invertible on K-injectives. Transport the supplied forgetting comparison back
-along these two isomorphisms. Its unit equation identifies it with the unique comparison
-used by cyclicDerivedHom_rightDerived_functorial. Apply that theorem with boundedness
-transported along the native comparison. Naturality of the target boundary with respect
-to the native comparison identifies the two output boundaries. Naturality and shift
-compatibility of the underlying comparison cancel it from the degree-minus-one map.
-Naturality of the cyclic structure identifies the endpoint-conjugated actions as
-well. Additivity and degree-zero forgetting follow directly from the transport
-formula and its zero-shift axiom. Thus all four functoriality components hold.
-
-Source: Stacks Project, Derived Categories, Tags 070I, 070K and 070Y. -/
+Stacks Project, Tags 070I, 070K and 070Y. -/
 theorem cyclicDerivedCanonicalRight_functorial
     (α : (mapOfNatIso e).rightDerivedFunctor ⋙ (forget G).mapDerivedCategory ≅
       (forget F).mapDerivedCategory ⋙ L.rightDerivedFunctor)

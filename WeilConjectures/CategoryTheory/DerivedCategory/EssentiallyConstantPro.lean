@@ -11,7 +11,9 @@ public import Mathlib.CategoryTheory.Limits.Cones
 
 /-! # Essentially constant cofiltered diagrams
 
-Source: Stacks Project, Categories, Definition 05PU.
+## References
+
+* Stacks Project, Categories, Definition 05PU.
 -/
 
 @[expose] public section

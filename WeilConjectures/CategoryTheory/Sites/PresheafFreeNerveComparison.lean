@@ -78,18 +78,7 @@ private lemma freeNerveHomAddEquiv_natural {Q : Cᵒᵖ ⥤ Type v} (t : P ⟶ Q
 set_option backward.isDefEq.respectTransparency false in
 /-- The free module and free abelian adjunctions identify nerve Hom groups
 additively, compatibly with the alternating boundaries. No injectivity is used.
-Source: Stacks Project, Cohomology on Sites, Tags 03AS and 03FC.
-
-Proof: in each degree the free module adjunction identifies a module morphism
-from the free module presheaf on the nerve with a natural map from that nerve
-to the underlying set presheaf of M. The objectwise free abelian adjunction
-identifies the same maps with morphisms from the free abelian presheaf into
-M.presheaf. Both identifications evaluate a morphism on its basis generators,
-so their composite is additive and bijective. They are natural in the nerve
-presheaf: precomposing by a free map induced by a face is the same as
-precomposing the corresponding abelian map by its free abelian face.
-Summing over faces with coefficients (-1)^j proves the displayed boundary
-compatibility. This also covers degree zero and empty nerve terms. -/
+Source: Stacks Project, Cohomology on Sites, Tags 03AS and 03FC. -/
 theorem presheafFreeNerveComplex_comparison
     {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v})
     (M : PresheafOfModules.{v} R) (f : Arrow (Cᵒᵖ ⥤ Type v)) :

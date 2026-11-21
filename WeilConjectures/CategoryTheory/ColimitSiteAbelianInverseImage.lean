@@ -61,35 +61,7 @@ private theorem sheaf_triangle_unit
 
 /-- Source: Stacks Project, Sites, Tag 0A35,
 the presentation construction and adjunction argument; the abelian extension uses
-Sites, Modules, Tag 03CO.
-
-Proof: Transpose the later-stage inverse-image unit through the original abelian
-sheaf adjunction. The unit characterization and uniqueness of adjuncts give the
-identity, composition and naturality equations for transition maps. For a limit
-object take all stage presentations over i. Filteredness, finite lifting and
-eventual equality for the object and arrow colimits give common refinements and
-equalizers of parallel refinements; the category above each presentation is final.
-Take the filtered colimit of the abelian groups of inverse-image sections over
-these presentations. Restrictions are obtained by lifting arrows; naturality of
-the transition maps and eventual equality make them independent of the lifts and
-prove the presheaf laws. All maps are additive. Lift a Q-cover to a finite stage
-cover and its preserved covering pullbacks. The stage sheaf equalizer remains an
-equalizer after filtered colimits: underlying sets of filtered abelian group
-colimits are their set colimits, and the forgetful functor preserves finite limits
-and reflects isomorphisms. This gives an abelian sheaf. For every abelian sheaf H,
-its maps to H are compatible families of stage maps, and the stage adjunctions
-identify these with one map from G to V i's restriction of H. The inverse uses
-the identity presentation and the unit; adjunct uniqueness and the colimit
-universal property prove mutual inverseness. Uniqueness of the left adjoint
-identifies this constructed sheaf with sheafPullback compatibly with units.
-The final presentation functor at V i U gives D, E, K and e; its coprojections and
-transition maps satisfy exactly the two unit equations and the final map equation.
-An empty covering imposes the zero group of sections. If all stage categories
-are empty the assertions are vacuous; an empty source stage has no U to evaluate.
-The general presentation construction remains valid at later nonempty stages.
-No abelian-group object is chosen from an unproved
-existence: this theorem asserts a colimit universal property and its compatible maps.
--/
+Sites, Modules, Tag 03CO. -/
 theorem colimit_site_abelian_inverse_image
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

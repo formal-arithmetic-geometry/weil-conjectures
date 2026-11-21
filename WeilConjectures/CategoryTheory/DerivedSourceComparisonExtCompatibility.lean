@@ -29,26 +29,9 @@ namespace CategoryTheory
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Compatibility of the Ext resolution map with the displayed derived morphism.
-Source: Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic, Abelian.Ext.comp_hom,
-Abelian.Ext.mk₀_hom and Abelian.Ext.homEquiv; Mathlib.Algebra.Homology.DerivedCategory.Ext.Map,
-Abelian.Ext.mapExactFunctor_hom;
-WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor,
-Functor.mapDerivedCategoryPlusSingleFunctor,
-Functor.ι_map_mapDerivedCategoryPlusSingleFunctor_hom_app.
-Proof: Apply the bounded-below inclusion to hxy. Expand sourceExtMap and use
-Ext.comp_hom, Ext.mk₀_hom, Ext.mapExactFunctor_hom, and Ext.homEquiv to express
-both Ext images as derived morphisms. The included inverse single comparison
-is the inverse comparison in the full derived category, by cancellation against
-its hom and ι_map_mapDerivedCategoryPlusSingleFunctor_hom_app. The included
-mapDerivedCategoryPlus morphism is definitionally the full derived functor
-applied to the included morphism. Postcompose the included equality with the
-image of the source inclusion's shift comparison, the derived functor's shift
-comparison, and the shifted target single comparison. Associativity and map_comp
-identify this with equality of the Ext representatives; Ext.homEquiv is injective.
-The argument covers q = 0 and zero objects and needs neither Hom-bijectivity
-nor acyclicity.
--/
+/-- Compatibility of the Ext resolution map with the displayed derived morphism: if two
+morphisms `x y` from `L[0]` to `Y[0][q]` in the bounded below derived category agree after
+precomposition with the image of `a`, then their images under `sourceExtMap` agree. -/
 theorem derivedSourceComparison_ext_compatibility
     {C : Type u₁} {D : Type u₂} [Category.{v} C] [Category.{v} D]
     [Abelian C] [Abelian D] [EnoughInjectives C] [EnoughInjectives D]

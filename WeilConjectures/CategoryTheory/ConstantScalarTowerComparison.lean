@@ -13,9 +13,11 @@ import all WeilConjectures.CategoryTheory.Site.SiteConstantModuleHomSupplement
 
 /-! # Generic scalar comparison used in the rational stratum proof
 
-This is the existing private generic scalar-comparison argument extracted from
-RationalStratumFiniteFreeModel to keep compilation below the per-file limit.
-Source: Stacks, Tags 03EK and 0GMW; Bhatt--Scholze, Proposition 6.8.14(2).
+Generic comparison of constant scalar realizations along ordinary scalar towers.
+
+## References
+
+* Stacks Project, Tags 03EK and 0GMW; Bhatt--Scholze, Proposition 6.8.14(2).
 -/
 
 @[expose] public noncomputable section
@@ -381,15 +383,9 @@ private theorem scalarModelIso_natural
   rfl
 
 /-- Constant scalar realization commutes with an ordinary scalar tower, naturally
-and with its prescribed constant generators. Source: Stacks, Tags 03EK and 0GMW; Bhatt--Scholze, Proposition 6.8.14(2).
-
-Proof: Send each generator a tensor x to a tensor (1 tensor x). In the reverse
-direction, the ordinary extension/restriction adjunction extends x mapped to
-1 tensor x to a linear map on each section. Compatibility of the two scalar units
-makes these maps balanced. The adjunction and constant-module universal property
-prove naturality and both inverse identities on generators. The same generator
-calculation proves naturality in the original module. No finite presentation or
-flatness hypothesis is needed. -/
+and with its prescribed constant generators. Stacks Project, Tags 03EK and 0GMW;
+Bhatt--Scholze, Proposition 6.8.14(2).
+-/
 private theorem scalarModel_spec
     (hcompat : Compatible (J := J) (f := f) (σ := σ) (τ := τ)) :
     ∃ e : ∀ N : ModuleCat.{u + 1} R,

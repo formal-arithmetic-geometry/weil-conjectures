@@ -12,11 +12,10 @@ public import WeilConjectures.Compactification.RefinementUniqueness
 
 # Strict refinements of compactifications
 
-In the blueprint a refinement `h : c ⟶ d` of
-compactifications of `f : X ⟶ Y` is required to satisfy, besides the two commutativity
+A *strict* refinement `h : c ⟶ d` of
+compactifications of `f : X ⟶ Y` satisfies, besides the two commutativity
 conditions of `AlgebraicGeometry.Compactification.Refinement`, the condition
-`h⁻¹(d.i(X)) = c.i(X)`: the refinement maps the boundary of `c` into the boundary of `d`. We
-call such refinements *strict*.
+`h⁻¹(d.i(X)) = c.i(X)`: the refinement maps the boundary of `c` into the boundary of `d`.
 
 ## Main definitions
 
@@ -56,11 +55,8 @@ namespace Refinement
 
 variable {c d e : Compactification f}
 
-/-- Refinement of compactifications.
-
-A refinement `r` of `d` by `c` is *strict* if `r.hom⁻¹(d.i(X)) = c.i(X)`, i.e. the refinement
-maps the boundary of `c` into the boundary of `d`. The refinements of the blueprint are the
-strict refinements in this sense. -/
+/-- A refinement `r` of `d` by `c` is *strict* if `r.hom⁻¹(d.i(X)) = c.i(X)`, i.e. the
+refinement maps the boundary of `c` into the boundary of `d`. -/
 def IsStrict (r : c.Refinement d) : Prop :=
   r.hom ⁻¹ᵁ d.i.opensRange = c.i.opensRange
 

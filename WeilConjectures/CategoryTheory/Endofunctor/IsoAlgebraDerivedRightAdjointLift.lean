@@ -19,13 +19,6 @@ Every object `U A` carries the derived structure isomorphism `F (U A) ≅ U A`
 morphism `g : U A ⟶ U B` which commutes with these structure isomorphisms is of the form `U f`
 (`CategoryTheory.Endofunctor.IsoAlgebra.exists_forget_mapDerivedCategory_map_eq`).
 
-The proof uses the free resolution triangle `I U A ⟶ I U A ⟶ A ⟶ (I U A)[1]`
-(`CategoryTheory.Endofunctor.IsoAlgebra.exists_freeDerivedWeilResolution`), whose first morphism
-is `1 - τ` for the derived shift `τ` of the free algebra
-(`CategoryTheory.Endofunctor.IsoAlgebra.derivedFreeShift`) followed by the structure
-isomorphism. The morphism `I g ≫ ε : I U A ⟶ B` is killed by `1 - τ` by equivariance of `g`,
-hence factors through the counit `I U A ⟶ A`.
-
 Since `U` reflects isomorphisms, an equivariant isomorphism `U A ≅ U B` lifts to an isomorphism
 `A ≅ B` (`CategoryTheory.Endofunctor.IsoAlgebra.nonempty_iso_of_forget_mapDerivedCategory_iso`).
 -/

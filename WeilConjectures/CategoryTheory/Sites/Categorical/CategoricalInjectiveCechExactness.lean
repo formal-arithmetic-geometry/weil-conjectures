@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 
 /-! # Positive Čech exactness of injective categorical presheaves
 
-Source: Stacks Project, Tag 03AW.
+## References
+
+* Stacks Project, Tag 03AW.
 -/
 
 @[expose] public section
@@ -183,18 +185,7 @@ private theorem exactAt_categoricalCech_cofree (q : ℕ) :
 
 /-- An injective categorical presheaf is a retract of its cofree presheaf, so its
 finite Čech complex is exact in every positive degree.
-Source: Stacks Project, Tag 03AW, and the cofree insertion contraction.
-
-Proof: Restrict sections along every arrow into an object to embed the presheaf
-in the product of the right adjoints of the evaluation functors. Evaluation at
-its identity arrow splits this map objectwise, so it is a monomorphism. Injectivity
-splits it as a map of presheaves. After taking morphisms from any coefficient
-object, the cofree Čech complex becomes the ordinary abelian cofree Čech complex;
-inserting a chosen lift depending only on the composite arrow into the covered
-object contracts its positive degrees. Apply this with the kernel of a differential
-to obtain categorical exactness. Finally the split presheaf maps induce split maps
-on Čech homology, and a retract of a zero object is zero. This also treats the empty
-family, whose positive Čech terms are zero. -/
+Source: Stacks Project, Tag 03AW, and the cofree insertion contraction. -/
 theorem exactAt_categoricalCech_of_injective [Injective P] (q : ℕ) :
     ((cechComplexFunctor U).obj ((Over.forget V).op ⋙ P)).ExactAt (q + 1) := by
   let T := (Functor.whiskeringLeft (Over V)ᵒᵖ Cᵒᵖ A).obj (Over.forget V).op ⋙

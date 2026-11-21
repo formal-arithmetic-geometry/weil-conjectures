@@ -37,30 +37,7 @@ Source: Stacks Project, Derived Categories, Tags 05TE and 015B.
 The first conjunct specifies that `G.delta` is the horseshoe boundary, using exactly
 all the compatible resolutions and the comparison of
 `exists_horseshoe_rightDerived_deltaFunctor`; it does not leave `G` arbitrary.
-The second conjunct compares these same boundary maps with the derived triangle.
-
-Proof:
-1. Choose a horseshoe resolution using lem-weil-pbc-horseshoe-delta-functor and
-lem-weil-pbc-injective-resolution-ses. Split each row because its first term is
-injective. By lem-weil-pbc-degreewise-split-connecting-morphism its chain boundary
-is π d s; lem-weil-pbc-complex-ses-homology-long-exact constructs the horseshoe maps.
-2. Use lem-weil-pbc-degreewise-split-derived-triangle to identify the split triangle
-with the cone triangle, with third cone map -p, fixing the sign. By
-lem-weil-pbc-complex-ses-connecting-formula the boundary on a cocycle z is π d s z.
-3. The horseshoe augmentations are compatible quasi-isomorphisms, by
-def-sp-injective-resolutions and lem-weil-pbc-horseshoe-delta-functor. Transport
-its distinguished triangle through them. The group Hom(A[0][1], C[0]) vanishes:
-lem-weil-pbc-bounded-below-injectives-kinjective and lem-weil-pbc-kinjective-hom-derived
-compute it in the homotopy category, where all chain maps are zero by degree bounds.
-By lem-weil-pbc-triangle-morphism-extension(3), the transported third map is the
-unique boundary of lem-sf-derived-ses-triangle, with no additional sign.
-4. Compute the triangulated functor of lem-weil-pbc-derived-direct-image-triangulated
-on these bounded-below injective resolutions. The shifted resolution has differential
--d, so its comparison shift isomorphism is the identity, and the third map is v(π d s).
-The boundary of lem-sf-derived-homology-long-exact therefore agrees on cocycles with
-the horseshoe boundary. Transport along the canonical identifications of
-lem-sp-derived-functor-single-identification to obtain the displayed equality.
--/
+The second conjunct compares these same boundary maps with the derived triangle. -/
 theorem rightDerived_triangle_connecting
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
     [EnoughInjectives A] [Category.{v₂} B] [Abelian B]

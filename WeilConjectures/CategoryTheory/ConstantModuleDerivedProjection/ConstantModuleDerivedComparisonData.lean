@@ -10,7 +10,8 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 
 /-! # Normalized derived constant-module comparison data
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6; Derived Categories, Tags 013K and 070J.
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6; Derived Categories, Tags 013K and
+070J.
 
 The localization, Hom, tensor and inclusion equations retain all the canonical normalizations.
 -/

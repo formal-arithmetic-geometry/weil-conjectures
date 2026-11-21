@@ -38,21 +38,7 @@ set_option linter.unusedSectionVars false in
 underived functors.
 
 Source: Stacks Project, Derived Categories, Tag 05TD, part (3), applied to the defining
-unit equation of `rightDerivedFunctorPlusBaseChange`.
-
-Proof:
-1. Represent `Y[0]` by a nonnegative injective resolution `Y → I`. The defining equation
-   `rightDerivedFunctorPlusBaseChange_fac` expresses derived base change after the
-   augmentation as the levelwise transformation `e`, followed by the target augmentation.
-2. Apply degree-zero homology. The comparisons in `rightDerivedBaseChange` identify
-   this homology with the classical zeroth right derived functors; exactness of `β` and
-   `γ` identifies their images of cycles and boundaries with cycles and boundaries of
-   their image complexes.
-3. In a nonnegative complex there are no degree-zero boundaries. Thus the augmentation
-   on homology is the map induced from `G(Y) → G(I⁰)` into the kernel of `G(d⁰)`, which is
-   precisely `G.toRightDerivedZero`; the same assertion holds for `G'` and `β(Y)`.
-   Naturality of `e` with the resolution augmentation identifies the two composites.
-   These are the two sides of the asserted equality. -/
+unit equation of `rightDerivedFunctorPlusBaseChange`. -/
 theorem rightDerivedBaseChange_zero_unit (e : G ⋙ γ ⟶ β ⋙ G') (Y : B) :
     γ.map (G.toRightDerivedZero.app Y) ≫ (rightDerivedBaseChange e 0).app Y =
       e.app Y ≫ G'.toRightDerivedZero.app (β.obj Y) := by

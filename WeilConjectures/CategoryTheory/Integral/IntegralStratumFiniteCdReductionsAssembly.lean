@@ -68,21 +68,7 @@ end
 classical locally ell-power torsion cohomology. This assertion does not involve
 an ambient scheme, a closed support, a reduction functor, or a constructible target.
 
-Source: Stacks Tag 08JJ.
-
-Proof: transport the continuous integral coefficient to integralCoefficientRing.
-Since cd_ell(S) <= s, choose its finite natural value s0 <= s. The finite local
-model makes L[0] perfect, including its torsion summands, by the length-one DVR
-resolutions. Put D=RHom(L[0],A[0]). The integral dual-torsion heart-sections theorem
-places RΓ(D tensor F[0]) in [0,s0+1] for every classical local torsion module F;
-use the equivalence of local torsion with the filtered prime-power-kernel union.
-A K-flat representative of D makes tensoring triangulated, and derived sections
-are triangulated. Bounded-heart devissage along the truncation triangles of K
-therefore puts RΓ(D tensor K) in [a,b+s0+1]. The perfect-dual tensor adjunction
-and the derived internal-Hom sections comparison identify Hom(L[0],K[r]) with
-its r-th cohomology. This is zero when r>b+s+1, hence that Hom type is a
-subsingleton. The zero module, zero complex and empty scheme satisfy the same
-argument; no uniform prime-power annihilator is required. -/
+Source: Stacks Tag 08JJ. -/
 theorem integralStratumFiniteCdReductions_assembly
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

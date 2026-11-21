@@ -62,11 +62,7 @@ omit [MonoidalClosed E] in
 omit [MonoidalClosed E] in
 /-- The augmentation supported on Koszul degree zero is a cochain map when the
 incoming differential is killed by the reduction unit.
-Source: Stacks Project, Tag 099M, construction of the Koszul augmentation; Tag 0913.
-
-Proof: test the equation on every total-tensor summand. Degree zero gives the
-naturality equation for the reduction unit, degree minus one gives the assumed
-vanishing of the incoming differential, and all remaining summands are zero. -/
+Source: Stacks Project, Tag 099M, construction of the Koszul augmentation; Tag 0913. -/
 theorem quotientTensorComponent_comm (P D : CochainComplex E ℤ)
     (e : D.X 0 ≅ 𝟙_ E) (F : E ⥤ E) (η : 𝟭 E ⟶ F)
     (hz : ∀ M : E, M ◁ (D.d (-1) 0 ≫ e.hom) ≫ (ρ_ M).hom ≫ η.app M = 0)

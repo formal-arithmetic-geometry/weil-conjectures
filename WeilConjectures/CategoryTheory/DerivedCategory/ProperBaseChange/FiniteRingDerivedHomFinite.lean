@@ -70,15 +70,7 @@ private theorem derived_maps_surjective
   a finite set.
 
 Source: Stacks Project, Tags 064U and 09BE.
-
-Proof: Each cone of a finite free complex mapping to E has finite terms, hence finite
-cohomology. Apply the finite-cone free-model theorem to obtain a bounded-above finite
-free resolution P of E. Such a complex is K-projective, so every derived map P to G is
-represented by a chain map. Only the finitely many degrees in the support of G matter,
-and every degreewise map belongs to a finite set of functions between finite sets.
-Thus the set of chain maps is finite, and so is its quotient of derived maps. The
-quasi-isomorphism P to E transports this finiteness to the required Hom set. Zero
-complexes and empty support intervals are included in the same argument. -/
+-/
 theorem finite_derived_hom_of_bounded_finite
     (B : Type u) [CommRing B] [Finite B]
     (E G : CochainComplex (ModuleCat.{u} B) ℤ)

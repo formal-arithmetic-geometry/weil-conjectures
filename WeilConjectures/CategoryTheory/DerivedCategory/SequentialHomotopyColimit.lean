@@ -98,19 +98,12 @@ lemma map {X : ℕ ⥤ T} {s : Cofan X.obj} {hs : IsColimit s} {H : T} {π : s.p
   rw [← e]
   exact F.map_distinguished _ hT
 
-/-- let `F : T ⥤ T'` be a triangulated functor
+/-- Let `F : T ⥤ T'` be a triangulated functor
 between pretriangulated categories which preserves coproducts indexed by `ℕ`. For every
 sequence `X` with homotopy colimit `π : ∐ₙ Xₙ ⟶ H`, and every homotopy colimit
 `π' : ∐ₙ F(Xₙ) ⟶ H'` of the image sequence `X ⋙ F`, there is an isomorphism
 `H' ≅ F(H)` compatible with the canonical maps from `∐ₙ F(Xₙ) ≅ F(∐ₙ Xₙ)`: the homotopy
-colimit of the `F(Xₙ)` is `F` of the homotopy colimit of the `Xₙ`.
-
-Since homotopy colimits are only unique up to non-unique isomorphism, "the canonical morphism"
-of the blueprint is formalized as the existence of an isomorphism compatible with the maps
-from the coproduct. The proof is that of the blueprint: `F` maps the defining distinguished
-triangle of `H` to a distinguished triangle, which, as `F` preserves the coproduct, is a
-defining triangle of the homotopy colimit of `X ⋙ F`
-(`CategoryTheory.Pretriangulated.IsHomotopyColimit.map`). -/
+colimit of the `F(Xₙ)` is `F` of the homotopy colimit of the `Xₙ`. -/
 theorem exists_iso_map [PreservesColimitsOfShape (Discrete ℕ) F] {X : ℕ ⥤ T}
     {s : Cofan X.obj} {hs : IsColimit s} {H : T} {π : s.pt ⟶ H}
     (h : IsHomotopyColimit X hs π) {H' : T'} {π' : F.obj s.pt ⟶ H'}

@@ -15,7 +15,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Derived squares under exact equivalences
 
-Source: Stacks Tags 05RR and 0941.
+## References
+
+* Stacks Tags 05RR and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -300,7 +302,8 @@ variable {B H : Type*} [Category* B] [Category* H] [Abelian B] [Abelian H]
 
 /-- Canonical identification between complex localization and homotopy localization
 for the mapped additive functor.
-Source: Stacks Tags 05RR and 0941. -/
+
+Stacks Project, Tags 05RR and 0941. -/
 def derivedCochainComparisonFactors :
     F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ≅
       HomotopyCategory.quotient B (.up ℤ) ⋙
@@ -312,7 +315,8 @@ def derivedCochainComparisonFactors :
     CategoryTheory.Functor.associator _ _ _
 
 /-- Transport a derived counit on homotopy categories to complex localization.
-Source: Stacks Tags 05RR and 0941. -/
+
+Stacks Project, Tags 05RR and 0941. -/
 def derivedCochainCounit : DerivedCategory.Q ⋙ LF ⟶
     F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
   (CategoryTheory.Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso B) LF).inv ≫
@@ -350,7 +354,8 @@ private theorem cochainCounit_app_eq (P : CochainComplex B ℤ) :
   simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
 /-- Transport a derived unit on homotopy categories to complex localization.
-Source: Stacks Tags 05RR and 0941. -/
+
+Stacks Project, Tags 05RR and 0941. -/
 def derivedCochainRightUnit
     (η : F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶
       DerivedCategory.Qh ⋙ LF) :
@@ -514,7 +519,8 @@ private theorem rightDerivedSquare
 
 /-- Data of compatible derived comparison squares, retaining the induced equivalences
 and their localization factors as fields.
-Source: Stacks Tags 05RR and 0941. -/
+
+Stacks Project, Tags 05RR and 0941. -/
 structure ExactEquivalenceDerivedSquareData
     {B B' H H' : Type*} [Category* B] [Category* B']
     [Category* H] [Category* H'] [Abelian B] [Abelian B']
@@ -560,14 +566,7 @@ structure ExactEquivalenceDerivedSquareData
 /-- Exact equivalences carry a universal left-derived square and a universal
 right-derived square to compatible natural isomorphisms on derived categories.
 
-Source: Stacks Tags 05RR and 0941.
-
-Proof: precomposition by an equivalence and postcomposition by an equivalence give
-equivalences of the categories of Kan extensions. Transport the two universal pairs
-through these equivalences and the ordinary comparison isomorphisms. Uniqueness of
-universal extensions gives both derived isomorphisms. Their defining factorization
-identities, evaluated on a complex and composed with the localization factorization,
-are precisely the two equations below. -/
+Stacks Project, Tags 05RR and 0941. -/
 theorem exactEquivalenceDerivedSquares
     {B B' H H' : Type*} [Category* B] [Category* B']
     [Category* H] [Category* H'] [Abelian B] [Abelian B']

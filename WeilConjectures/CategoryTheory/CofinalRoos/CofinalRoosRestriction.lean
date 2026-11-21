@@ -23,13 +23,12 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 /-!
 # Cofinal subsequence comparison of strict Roos complexes
 
-Source: Stacks Project, Cohomology on Sites, Tag 0941; More on Algebra, Tag 0H9K, explicit product maps.
-The strict cochain refinement is the nine-step agent proof of.
-
 Positive indices are encoded by their predecessors. Thus an order embedding `φ`
-represents the positive-index function `n + 1 ↦ φ n + 1`. The two product maps
-are real constructions; the theorem specifies one family of cone maps by both
-coordinates, so its existential quantifier leaves no choice of cone completion.
+represents the positive-index function `n + 1 ↦ φ n + 1`.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0941; More on Algebra, Tag 0H9K.
 -/
 
 @[expose] public section

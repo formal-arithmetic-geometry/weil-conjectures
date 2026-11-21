@@ -126,13 +126,7 @@ private theorem constantModule_colimits
 
 /-- Constant realization preserves K-flat complexes whose terms are flat.
 Source: Stacks Project, Tag 0G7E.
-Proof: constant module presheaves preserve colimits by evaluation, and module
-sheafification is a left adjoint. Constant realization preserves flat objects by
-the local relation criterion. Apply preservation of flat-term K-flat complexes
-by additive functors preserving flat objects and integer-indexed colimits. The
-categorical K-flat conclusion implies that tensoring any acyclic complex with
-the realized complex is acyclic by applying it to the quasi-isomorphism 0 → Z.
-This uses neither a terminal site object nor enough points. -/
+-/
 theorem isKFlat_constantModule
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (R : Type (max u v)) [CommRing R] (P : CochainComplex (ModuleCat.{max u v} R) ℤ)

@@ -25,14 +25,10 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- 
-
-The proof transports continuity and exactness through the two equivalences, using
-site-equivalence-is-morphism, site-morphism-composition, and invariance under
-isomorphic covering families.  The natural isomorphism identifies the two
-functors and hence identifies their sheaf pullbacks; exactness is invariant under
-that identification.
--/
+/-- Transport of morphisms of sites across equivalences. Given equivalences `p : A ⥤ C` and
+`q : B ⥤ D` of sites, a morphism of sites `u : C ⥤ D`, and `u' : A ⥤ B` with
+`u' ⋙ q ≅ p ⋙ u`, the functor `u'` preserves coverings and the relevant pullbacks, is
+continuous, and its sheaf pullback preserves finite limits and finite colimits. -/
 theorem site_equivalence_morphism_transport
     {A B C D : Type u}
     [SmallCategory A] [SmallCategory B] [SmallCategory C] [SmallCategory D]

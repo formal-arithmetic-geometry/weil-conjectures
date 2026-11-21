@@ -108,7 +108,8 @@ public import WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
 
 /-! # Flat constant extension and tensor of pro-zero cone towers
 
-Source: Stacks Project, proetale.tex, Tag 099M, transport of the Koszul pro-isomorphism; sites-cohomology.tex, Tags 06YN and 0941.
+Source: Stacks Project, proetale.tex, Tag 099M, transport of the Koszul pro-isomorphism;
+sites-cohomology.tex, Tags 06YN and 0941.
 
 ## Main declarations
 

@@ -18,9 +18,7 @@ open CategoryTheory
 
 namespace CategoryTheory.Functor
 
-/-- The explicit homotopy-factor comparison in the complex derived unit is identity.
-Proof: the inverse homotopy-factor comparison is identity by construction. Its image
-under Qh is identity, so deleting that factor gives the canonical complex unit. -/
+/-- The explicit homotopy-factor comparison in the complex derived unit is identity. -/
 theorem rightDerivedComplexUnitNormalization
     {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]

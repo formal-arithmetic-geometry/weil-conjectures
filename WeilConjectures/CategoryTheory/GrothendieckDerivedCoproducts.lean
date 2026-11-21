@@ -72,15 +72,7 @@ private theorem derivedCoproductCofan
 
 /-- A derived category with K-injective resolutions has coproducts at every size
 at which the underlying abelian category has coproducts.
-Source: Stacks Project, Tag 07D9, Lemma 19.13.4, coproduct clauses (1)-(2).
-
-Proof in words: choose a complex representative of each derived object and form
-its termwise coproduct. Resolve any target by a K-injective complex. Derived maps
-into it are chain maps modulo homotopy. The degreewise coproduct property assembles
-chain maps, and also assembles homotopies. Thus restriction to the coprojections
-is a bijection on derived Hom sets. Transport the coprojections along the chosen
-representative isomorphisms to obtain a coproduct of the original family. This
-works also for the empty family; no exactness of coproducts is needed. -/
+Source: Stacks Project, Tag 07D9, Lemma 19.13.4, coproduct clauses (1)-(2). -/
 theorem derived_hasCoproducts
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     [Abelian.HasKInjectiveResolutions C] [HasCoproducts.{s} C] :

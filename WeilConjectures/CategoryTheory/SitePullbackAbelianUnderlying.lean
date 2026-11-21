@@ -13,8 +13,10 @@ import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 /-!
 # Underlying sets of abelian inverse image
 
-Source: Stacks Project, Sites, Section 00YR and Proposition 00YV (2), and
-Modules on Sites, proof of Lemma 04JC.
+## References
+
+* Stacks Project, Sites, Section 00YR and Proposition 00YV (2), and
+  Modules on Sites, proof of Lemma 04JC.
 -/
 
 @[expose] public section
@@ -26,24 +28,12 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Section 00YR and Proposition 00YV (2), and
-Modules on Sites, first paragraph of the proof of Lemma 04JC.
-
-The site object and morphism universes may differ. Sheafification and left Kan
+/-- The abelian inverse image has the same underlying sheaf of sets as the set-valued inverse
+image. The site object and morphism universes may differ. Sheafification and left Kan
 extension existence are explicit hypotheses; coefficients live in `max u v w`.
 
-Proof: Identify abelian sheaves on both sites with commutative group objects in
-sheaves of sets, using `sheavesAlgebraicStructuresAbelian`. Lift the set-valued
-pullback-pushforward adjunction using `Adjunction.mapCommGrp`: finite
-limit preservation implies finite product preservation, so the left lift has
-underlying functor equal to set-valued pullback. The right lift is naturally
-isomorphic to abelian pushforward: precomposition computes products sectionwise,
-so its transported multiplication, unit and inverse are the original sectionwise
-addition, zero and negation. Transport the lifted adjunction across the two
-identifications. Both its left adjoint and the constructed abelian pullback are
-left adjoint to abelian pushforward. Uniqueness of left adjoints gives a natural
-isomorphism between them. Composing with the forgetful identifications gives the
-asserted isomorphism of underlying sheaves, on objects and morphisms. -/
+Stacks Project, Sites, Section 00YR and Proposition 00YV (2), and Modules on Sites, proof of
+Lemma 04JC. -/
 theorem sitePullback_abelian_underlying_of_hasSheafify
     {C D : Type u} [Category.{v} C] [Category.{v} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D) (U : C ⥤ D)

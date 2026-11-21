@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.LeftUnitor
 /-! # Slotwise shifts of the native derived monoidal constraints
 
 A proved packaging of the existing native associator, unitor and Koszul braiding
-shift equations. Source: blueprint maps-used sentence, Stacks 0FPQ and 0FNH.
+shift equations. Source: Stacks 0FPQ and 0FNH.
 -/
 
 @[expose] public section
@@ -36,14 +36,7 @@ variable [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (.up ℤ))]
 
 /-- The three native associator slots, the left unitor and the Koszul braiding commute
 with the native integer shift comparisons.
-Source: Stacks 0FPQ and 0FNH.
-
-Proof: the native associator shift instances descend the signed cochain associator
-through K-flat localization in each slot, and transport along resolving isomorphisms.
-The native left-unitor theorem descends the unit-complex equation. The native braiding
-shift theorem descends the Koszul chain swap and transports along representative
-isomorphisms. These source theorems use precisely the native derived monoidal structure;
-assemble their three associator assertions and the two displayed equations. -/
+Source: Stacks 0FPQ and 0FNH. -/
 theorem nativeDerivedMonoidalConstraintShifts :
     (∀ K L : DerivedCategory C,
       NatTrans.CommShift (associatorNatTrans₁ (DerivedCategory C) K L) ℤ ∧

@@ -410,36 +410,7 @@ private theorem coversTop_of_epi
 /-- A cover of the terminal sheaf by sheafified representables whose slices have finite
 limits and finite covering refinements gives a conservative set of points.
 Source: Stacks Project, Sites, Lemma 0DW0, Section 00YN.
-
-The localized covering families are exactly `J.comap (Over.forget (U i))`: membership
-means that the underlying family covers in `C`, and its generated topology is
-`J.toGrothendieck.over (U i)`. The representables
-are explicitly sheafified; subcanonicity is not assumed. The value and point-index
-universe `max u v w` contains both site universes.
-Every covering presieve has a presentation indexed in `Type (max u v)`, so the
-finite-refinement condition covers arbitrary presentations, including repetitions.
-
-Proof, following Stacks 0DW0:
-1. The site axioms pass to each slice. A covering sieve contains an actual covering
-   presieve, by induction on the generated topology using bind composition and the
-   chosen covering pullbacks. This identifies the slice's generated topology with
-   `J.toGrothendieck.over (U i)`. Transport each slice to `AsSmall`, apply
-   `finitarySite_enoughPoints`, and transport its conservative family back through
-   the sheaf equivalence. All transports preserve the displayed universes.
-2. Mathlib's continuous and cocontinuous `Over.forget` gives the restriction
-   adjunction; restriction preserves finite limits. Compose its geometric morphism
-   with the slice points and index the result by the dependent sum of their indices.
-3. Sheafification preserves coproducts and the terminal object. Consequently the
-   terminal map from the presheaf coproduct becomes epic after sheafification.
-   Epimorphisms of sheaves are locally surjective, and the sheafification unit is
-   locally surjective (the proved `unit_locally_surjective` helper in the source's
-   local-sections module). Naturality of the unit and its being an isomorphism on
-   the terminal presheaf give local surjectivity before sheafification. Every local
-   section of the coproduct belongs to a representable summand, hence gives a map
-   to some `U i`. This proves `CoversTop U`.
-4. Conservativity on every slice gives an isomorphism after every restriction.
-   Mathlib's `Sheaf.isIso_of_coversTop` descends these to an isomorphism globally.
-   The dependent sum and the descent theorem also handle an empty covering family. -/
+ -/
 theorem finitarySlice_enoughPoints
     {C : Type u} [Category.{v} C]
     (J : Precoverage C) (hJ : J.IsSiteForCoverings)

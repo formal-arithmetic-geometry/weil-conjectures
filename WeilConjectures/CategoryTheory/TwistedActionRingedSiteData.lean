@@ -17,12 +17,13 @@ public import Mathlib.CategoryTheory.Limits.Creates
 public import Mathlib.CategoryTheory.Sites.Equivalence
 /-! # The ringed site of a site automorphism
 
-Source: Stacks, Sites, Tag 00W0 is motivation for the agent-formulated twisted
-construction.
-
 The presentation below characterizes the integer-labelled arrows, the topology,
 the coefficient ring, the two restriction functors, and the orbit-sum adjunction.
 No object is selected from the existence theorem.
+
+## References
+
+Motivated by Stacks Project, Tag 00W0.
 -/
 
 @[expose] public section

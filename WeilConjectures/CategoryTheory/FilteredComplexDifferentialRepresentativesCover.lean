@@ -68,18 +68,7 @@ private theorem graded_image_sup {A B D : C} (f : A ⟶ B) [Mono f] (g : A ⟶ D
 
 /-- For related bidegrees there is an epimorphic family of source graded cycles
 with simultaneous representatives for the source and its differential.
-Source: Stacks Project, Tag 012K, the displayed cycle and differential formulas.
-
-Proof. Put p = i.1 and n = i.1+i.2, so j.1 = p+r and j.1+j.2 = n+1.
-Take A to be R = F^p K^n intersect d-inverse(F^(p+r) K^(n+1)), regarded
-as a subobject of F^p K^n, and take t to be its inclusion. Its composite
-with d factors through F^(p+r), giving t'. The graded projection of R
-has image Z_r^i: adding F^(p+1) before projection does not change this
-image, since the graded projection kills F^(p+1). Thus the factorization
-x through Z_r^i is epic. The equality d squared = 0 shows that t' lies
-in the target cycle representatives, so its graded projection factors
-through Z_r^j, giving y. These image factorizations give the three stated
-equalities. No elementwise lifting through an epimorphism is used. -/
+Source: Stacks Project, Tag 012K, the displayed cycle and differential formulas. -/
 theorem filteredComplex_differential_representatives_cover
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ)
     (i j : ℤ × ℤ) (hij : (ComplexShape.up' (r, 1 - r)).Rel i j) :

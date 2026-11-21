@@ -49,9 +49,7 @@ variable {C : Padic.FiniteCoefficientFields l Qbar → Type u}
 
 set_option linter.unusedSectionVars false in
 include qbarClosure in
-/-- A scalar in the algebraic closure generates a finite simple extension.
-Proof: the scalar is algebraic over Q_l since Qbar is an algebraic closure.
-Its minimal polynomial gives a finite spanning set of powers in the simple extension. -/
+/-- A scalar in the algebraic closure generates a finite simple extension. -/
 theorem qbarScalarField_finite (α : Qbar) :
     FiniteDimensional ℚ_[l] (IntermediateField.adjoin ℚ_[l] ({α} : Set Qbar)) := by
   exact IntermediateField.adjoin.finiteDimensional
@@ -62,8 +60,7 @@ in morphism classes. -/
 def qbarScalarField (α : Qbar) : Padic.FiniteCoefficientFields l Qbar :=
   ⟨IntermediateField.adjoin ℚ_[l] ({α} : Set Qbar), qbarScalarField_finite l Qbar α⟩
 
-/-- The chosen finite field contains the scalar.
-Proof: the generating singleton is contained in its intermediate-field adjoin. -/
+/-- The chosen finite field contains the scalar. -/
 theorem qbarScalarField_mem (α : Qbar) : α ∈ (qbarScalarField l Qbar α).val := by
   exact IntermediateField.subset_adjoin ℚ_[l] {α} (Set.mem_singleton α)
 
@@ -96,13 +93,7 @@ private lemma qbar_tr_smul (hS : QbarScalarCompatible l Qbar S)
   unfold QbarScalarCompatible at hS
   simp only [tr, hS, Linear.comp_smul, Linear.smul_comp]
 
-/-- Scalar multiplication respects eventual equality of representatives.
-Proof: choose a common stage witnessing equality of the original representatives,
-then enlarge it to contain both scalar-field composita. Semilinearity moves the
-scalar through each transition functor. Bilinearity of composition moves the scalar
-through the two associator components in transport. Both resulting scalars are the
-same element of the enlarged intermediate field, and the original transported
-arrows agree there. Thus the multiplied representatives are eventually equal. -/
+/-- Scalar multiplication respects eventual equality of representatives. -/
 theorem qbarScalarRep_rel (hS : QbarScalarCompatible l Qbar S) (α : Qbar)
     {X Y : S.PairCategory} {r s : PairCategory.Rep X Y} (h : PairCategory.Rep.Rel r s) :
     PairCategory.Rep.Rel (qbarScalarRep l Qbar S α r) (qbarScalarRep l Qbar S α s) := by
@@ -124,11 +115,7 @@ def qbarScalarHom (hS : QbarScalarCompatible l Qbar S) (α : Qbar)
     (fun _ _ h ↦ qbarScalarRep_rel l Qbar S hS α h) f
 
 /-- The scalar action can be computed at any overfield containing the scalar and
-representative stage; this includes equal stages.
-Proof: compare the chosen compositum representative and the displayed representative
-at a common finite overfield. The coefficient inclusions send both scalar elements
-to the same element, and semilinearity and the transport cocycle identify the arrows.
-Quotient equality is exactly eventual equality at such a common stage. -/
+representative stage; this includes equal stages. -/
 theorem qbarScalarHom_mkHom (hS : QbarScalarCompatible l Qbar S) (α : Qbar)
     {X Y : S.PairCategory} (M : Padic.FiniteCoefficientFields l Qbar)
     (hX : X.stage ≤ M) (hY : Y.stage ≤ M)
@@ -161,11 +148,7 @@ variable [transitionAdditive : ∀ {E F : Padic.FiniteCoefficientFields l Qbar}
     (h : E ≤ F), (S.T h).Additive]
 include transitionAdditive
 
-/-- The actual quotient scalar action satisfies the module and bilinearity laws.
-Proof: choose a common field containing all scalar coefficients and all representatives
-in each displayed identity. Use the action formula at this field. The six module laws
-are the corresponding field-module laws there. Both composition laws follow from
-finite-stage linearity. The common-stage equality criterion then descends each law. -/
+/-- The actual quotient scalar action satisfies the module and bilinearity laws. -/
 theorem qbarScalarHom_laws (hS : QbarScalarCompatible l Qbar S) :
     (∀ (X Y : S.PairCategory) (f : X ⟶ Y), qbarScalarHom l Qbar S hS 1 f = f) ∧
     (∀ (X Y : S.PairCategory) (a b : Qbar) (f : X ⟶ Y),
@@ -307,12 +290,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedSectionVars false in
 /-- The fraction field of the actual lifted integer ring is the original finite
-intermediate field, fixed by its inclusion of integral elements.
-Proof: apply coefficientExtension_localization_uniformizer to the canonical small
-field. Transport across ULift on the integer ring and Shrink.algEquiv on its field.
-The resulting ring equivalence fixes every integral element. Every localization
-element is an integral numerator divided by a uniformizer power, so this property
-determines the equivalence uniquely. -/
+intermediate field, fixed by its inclusion of integral elements. -/
 theorem qbarStageFieldEquiv_exists (E : Padic.FiniteCoefficientFields l Qbar) :
     ∃! e : Localization.Away (pbcStageUniformizer.{u} l Qbar E) ≃+* E.val,
       ∀ a : PbcIntegralRing l (pbcFiniteField.{u} l Qbar E),
@@ -366,14 +344,7 @@ abbrev pbcQbarCategory := PbcFiniteStagePairCategory l Qbar T hDim.out hInv.out
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] ULift.module in
-/-- Coefficient transport is semilinear for the actual intermediate-field inclusions.
-Proof: the completed coefficient map sends each constant integral scalar to its
-actual field-inclusion image, as can be checked after every finite quotient. On
-K-flat tensor representatives this gives integral semilinearity. Pass to the
-raw tensor Homs and invert the uniformizer: the integral-normalized fraction-field
-equivalences identify the resulting scalar map with IntermediateField.inclusion.
-The tensor-unit conjugations used at repeated fields commute with these actions.
-Thus the literal-identity normalization has the same semilinearity formula. -/
+/-- Coefficient transport is semilinear for the actual intermediate-field inclusions. -/
 theorem pbcQbarScalarCompatible :
     StageSystem.QbarScalarCompatible l Qbar (pbcScalarSystem l Qbar T hDim.out hInv.out) := by
   classical

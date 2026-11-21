@@ -80,14 +80,7 @@ private theorem linear_of_adjunct_linear
   exact congrArg (fun q ↦ q.hom.app V (r, m)) hmaps
 include hgen in
 /-- Identify module pullback after constructing its action and testing scalar maps on units.
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-Proof: The unit is linear by the action hypothesis. The scalar-pair testing property
-shows that an abelian map is linear whenever its adjunct is linear: compare its two
-scalar-action composites on pairs of unit sections. Lift the abelian inverse-image
-maps using this criterion. Faithfulness proves the functor laws. The abelian hom
-bijection restricts to linear maps in both directions, naturally. This gives a module
-adjunction to the specified scalar-restricted pushforward. Uniqueness of left adjoints
-identifies it with Mathlib's pullback. Forgetting gives the stated comparison. -/
+Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3. -/
 private theorem inverseImage_underlying_of_actions
     (actions : ∀ M : SheafOfModules.{u} A, InverseImageAction φ M) :
     ∃ e : pullback.{u} φ ⋙ toSheaf B ≅
@@ -201,12 +194,7 @@ private theorem inverseImage_underlying_of_actions
     P.map (T.map (q.hom.app M)) = _
   exact hh.trans hu0
 /-- A ring unit presenting the set inverse image identifies the underlying module pullback.
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-Proof: the canonical abelian/set comparison is compatible with its unit. Pair this
-presentation with the given ring presentation. It both constructs scalar actions and
-shows that linearity can be tested on unit pairs. Apply the restricted adjunction
-comparison proved above. The unit equation for leftAdjointUniq identifies the chosen
-module unit, followed by this comparison, with the original abelian unit. -/
+Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3. -/
 theorem inverseImage_underlying_of_ring_presentation
     [RepresentablyFlat F] [PreservesFiniteLimits (sheafPullback F (Type u) J K)]
     (pr : SheafPullbackUnitPresentation (F := F)

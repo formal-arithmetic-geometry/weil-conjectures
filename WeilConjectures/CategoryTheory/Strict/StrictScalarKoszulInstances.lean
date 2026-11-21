@@ -195,13 +195,7 @@ Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -
 attribute [local instance] cachedComplexBraided
 
 /-- The existing signed tensor-Hom adjunction on integer cochain complexes.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Use the canonical site tensor, symmetric structure and tensor-Hom adjunction of
-module sheaves. The monoidal preadditivity witness is the first component of tensorClosed; the
-closed structure is the existing monoidalClosed definition.
-Proof step 2: The sheaf module category is Grothendieck abelian, hence has the coproducts needed
-for the total tensor. Synthesize the monoidal and braided structures of cochain complexes, and
-use ringedComplexClosed for its chosen closed structure. -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 @[instance_reducible] def cachedComplexClosed (O : Sheaf J CommRingCat.{u}) :
     MonoidalClosed (ringedSiteComplex O) := by
   let : IsGrothendieckAbelian.{u} (Modules O) := SheafOfModules.isGrothendieckAbelian _

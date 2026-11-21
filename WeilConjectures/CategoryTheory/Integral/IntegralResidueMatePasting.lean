@@ -31,13 +31,7 @@ variable {A₀ : Type u₀} {A₁ : Type u₁} {A₂ : Type u₂}
   (qf : R₀ ⋙ F ⟶ F' ⋙ R₁) (qg : R₁ ⋙ G ⟶ G' ⋙ R₂)
   (qh : R₀ ⋙ H ⟶ H' ⋙ R₂) (c : H ⟶ F ⋙ G) (c' : H' ⟶ F' ⋙ G')
 
-/-- Inverse mates preserve a pasted square, including the two comparison maps.
-
-Proof. Transpose the desired equation under the last adjunction. Expand the three
-transposes with `unit_mateEquiv_symm`. Move units through the comparison maps by
-naturality, use the given restriction-square composition equation, and apply the
-composite unit equation for the last square. Injectivity of the adjunction hom
-bijection gives the result. -/
+/-- Inverse mates preserve a pasted square, including the two comparison maps. -/
 theorem inverseMate_pasting
     (hq : ∀ N : B₀,
       c.app (R₀.obj N) ≫ G.map (qf.app N) ≫ qg.app (F'.obj N) =

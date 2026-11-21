@@ -17,8 +17,7 @@ of uniformly bounded below families (`DerivedCategory.isIso_sigmaComparison_of_i
 Indeed `Hᵐ(G M)` only depends on the truncation `τ_{≤ m} M`: the map `Hᵐ(G(τ_{≤ m} M)) ⟶ Hᵐ(G M)`
 is an isomorphism because `G(τ_{> m} M)` lies in degrees `> m`
 (`DerivedCategory.isIso_homologyFunctor_map_map_of_isLE`), and the truncations `τ_{≤ m}` of a
-family uniformly in degrees `≥ a` are uniformly bounded. This is the way-out argument of
-blueprint `corollary-continuity-cohomology--2`.
+family uniformly in degrees `≥ a` are uniformly bounded.
 -/
 
 @[expose] public section

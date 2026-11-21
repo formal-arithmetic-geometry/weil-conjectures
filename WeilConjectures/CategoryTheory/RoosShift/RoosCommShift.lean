@@ -133,9 +133,7 @@ attribute [local instance] endomorphism_commShift
 noncomputable abbrev roosFunctor := K ⋙ WeilConjectures.integralOperationsRoosFunctor
 
 /-- The native strict Roos functor has the signed mapping-cocone shift.
-Source: Stacks 011G, 014E, 08TC.
-Proof: the level shifts identify products and conjugate the transition endomorphism.
-Apply the signed cocone shift. Its zero and addition laws give coherence. -/
+Source: Stacks 011G, 014E, 08TC. -/
 @[instance_reducible]
 noncomputable def commShift : (roosFunctor K).CommShift ℤ := by
   change (SignedCoconeShift.coconeFunctor (productFunctor K)
@@ -190,8 +188,7 @@ def ConeFormula
             m j (j + m) rfl).inv))
 
 /-- The constructed native shift satisfies its coordinate API for the canonical product shift.
-Source: Stacks 011G and 014E.
-Proof: substitute the prescribed product comparison and use the two inclusion formulas. -/
+Source: Stacks 011G and 014E. -/
 theorem commShift_formula
     (productIso : ∀ (X : S) (m : ℤ),
       (∏ᶜ fun n ↦ (levelFunctor K n).obj (X⟦m⟧)) ≅
@@ -204,10 +201,7 @@ theorem commShift_formula
 
 /-- A map with zero second coordinate commutes with the Roos shift when its first
 coordinate commutes with the product shift.
-Source: Stacks 011G and 08TC.
-Proof: the two cocone projections determine a map. The first-coordinate hypothesis
-identifies the first components. The signed second inclusion multiplies zero by a sign,
-so the second components are both zero. -/
+Source: Stacks 011G and 08TC. -/
 lemma chain_shift (T : S ⥤ CochainComplex A ℤ) (b : T ⟶ roosFunctor K)
     (hz : ∀ (X : S) (j : ℤ), (b.app X).f j ≫
       (CochainComplex.mappingCocone.snd ((endomorphism K).app X)).v j (j - 1) (by omega) = 0)

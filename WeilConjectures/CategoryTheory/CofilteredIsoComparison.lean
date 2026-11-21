@@ -27,9 +27,7 @@ def cofilteredIsoComparison (i j : C) : F.obj (op i) ≅ F.obj (op j) :=
   @asIso _ _ _ _ (F.map (IsCofiltered.minToLeft i j).op) (hF _) ≪≫
     (@asIso _ _ _ _ (F.map (IsCofiltered.minToRight i j).op) (hF _)).symm
 
-/-- Every cone gives the same comparison, characterized by cancellation.
-Proof: refine the two cones by a bowtie. Apply the diagram to its two equalities,
-cancel the second chosen cone arrow and then cancel the arrow of the common refinement. -/
+/-- Every cone gives the same comparison, characterized by cancellation. -/
 theorem cofilteredIsoComparison_normalized {i j d : C} (u : d ⟶ i) (v : d ⟶ j) :
     (cofilteredIsoComparison F hF i j).hom ≫ F.map v.op = F.map u.op := by
   let u₀ := IsCofiltered.minToLeft i j
@@ -52,16 +50,13 @@ theorem cofilteredIsoComparison_normalized {i j d : C} (u : d ⟶ i) (v : d ⟶ 
     _ = F.map u₀.op ≫ F.map a.op := by simp
     _ = _ := hi'
 
-/-- The comparison with itself is the identity.
-Proof: apply normalization to the identity cone and use the diagram's identity law. -/
+/-- The comparison with itself is the identity. -/
 theorem cofilteredIsoComparison_refl (i : C) :
     cofilteredIsoComparison F hF i i = Iso.refl _ := by
   apply Iso.ext
   simpa using cofilteredIsoComparison_normalized F hF (𝟙 i) (𝟙 i)
 
-/-- Comparison composes strictly.
-Proof: choose a cone over the three objects, normalize all three comparisons on it,
-then cancel the invertible arrow to the third object. -/
+/-- Comparison composes strictly. -/
 theorem cofilteredIsoComparison_trans (i j k : C) :
     cofilteredIsoComparison F hF i j ≪≫ cofilteredIsoComparison F hF j k =
       cofilteredIsoComparison F hF i k := by
@@ -78,9 +73,7 @@ theorem cofilteredIsoComparison_trans (i j k : C) :
     cofilteredIsoComparison_normalized F hF u v,
     cofilteredIsoComparison_normalized F hF u w]
 
-/-- Normalization determines the whole family up to strict equality.
-Proof: apply both normalizations to the chosen binary cone and cancel its second arrow;
-isomorphism extensionality and function extensionality give equality of families. -/
+/-- Normalization determines the whole family up to strict equality. -/
 theorem cofilteredIsoComparison_unique
     (σ : ∀ i j : C, F.obj (op i) ≅ F.obj (op j))
     (hσ : ∀ (i j d : C) (u : d ⟶ i) (v : d ⟶ j),

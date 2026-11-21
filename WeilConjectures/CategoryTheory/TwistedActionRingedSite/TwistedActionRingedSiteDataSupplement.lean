@@ -36,12 +36,18 @@ public import WeilConjectures.CategoryTheory.TwistedActionRingedSiteData
 
 /-! # The ringed site of a site automorphism
 
-Source: Stacks, Sites, Tag 00W0 is motivation for the agent-formulated twisted
-construction.
-
 The presentation below characterizes the integer-labelled arrows, the topology,
 the coefficient ring, the two restriction functors, and the orbit-sum adjunction.
 No object is selected from the existence theorem.
+
+## Implementation details
+
+Powers of a chosen equivalence are associated only up to their displayed natural
+isomorphisms; the arrow-composition equation of `Site` includes this necessary associator.
+
+## References
+
+* Stacks Project, Tag 00W0 (motivation for the twisted construction).
 -/
 
 @[expose] public section
@@ -102,13 +108,7 @@ noncomputable def sigma : Modules R ⥤ Modules R :=
 
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- All the data and normalizations asserted by the twisted ringed-site lemma.
-Source: the agent-formulated twisted version of Stacks 00W0.
-
-Powers of a chosen equivalence are associated only up to their displayed natural
-isomorphisms; the arrow-composition equation includes this necessary associator.
-Every comparison below is a sheaf morphism or natural isomorphism.
--/
+/-- All the data and normalizations of the twisted ringed site. -/
 structure Site where
   /-- The semidirect category on the original objects. -/
   [category : SmallCategory (Object C)]
@@ -154,8 +154,7 @@ structure Site where
         ((coefficientRestriction.hom.hom.app (op X)) r)
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- The module and set presentations and the geometric restriction.
-Source: the agent-formulated twisted version of Stacks 00W0. -/
+/-- The module and set presentations and the geometric restriction. -/
 structure RestrictionPresentation extends Site J s R a where
   /-- The translation is an autoequivalence, not an arbitrary endofunctor. -/
   translation : Modules R ≌ Modules R
@@ -224,8 +223,7 @@ structure ModulePresentation extends RestrictionPresentation J s R a where
   exact_colimits : PreservesFiniteColimits (forgetPairs (sigma J s R a))
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- The exact orbit-sum induction on the displayed action site.
-Source: the agent-formulated twisted version of Stacks 00W0. -/
+/-- The exact orbit-sum induction on the displayed action site. -/
 structure OrbitPresentation extends ModulePresentation J s R a where
   /-- The orbit-sum LEFT adjoint. -/
   induction : Modules R ⥤ Pairs (sigma J s R a)
@@ -261,8 +259,7 @@ structure OrbitPresentation extends ModulePresentation J s R a where
   induction_colimits : PreservesFiniteColimits induction
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- The full presentation, including canonical tensor and internal Hom comparisons.
-Source: the agent-formulated twisted version of Stacks 00W0. -/
+/-- The full presentation, including canonical tensor and internal Hom comparisons. -/
 structure Presentation extends OrbitPresentation J s R a where
   /-- The restriction of the sheaf tensor is the ordinary sheaf tensor. -/
   tensor (M N : Modules coefficient) :

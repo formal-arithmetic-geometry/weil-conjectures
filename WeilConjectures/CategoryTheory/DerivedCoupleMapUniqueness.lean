@@ -10,15 +10,8 @@ public import WeilConjectures.CategoryTheory.ExactCouple
 universe u v
 open CategoryTheory.Limits
 namespace CategoryTheory.BigradedExactCouple
-/-- 
-The three induced maps are uniquely determined by their descent equations.
-This is the universal-property portion of Stacks Tag 011R.
-
-Choose the existing derived maps. For alpha, cancel the monic image inclusion
-in its descent equation. For f, cancel the epimorphic cokernel projection and
-then the monic image inclusion. For g, cancel the epimorphic factorization
-through the image of alpha. In each case the defining equation of the chosen
-map supplies the same composite. -/
+/-- The three induced maps are uniquely determined by their descent equations.
+This is the universal-property portion of Stacks Tag 011R. -/
 theorem derived_couple_map_uniqueness {C : Type u} [Category.{v} C] [Abelian C]
     {s : ℕ} (X : BigradedExactCouple C s) :
     ∃ M : DerivedMaps X,

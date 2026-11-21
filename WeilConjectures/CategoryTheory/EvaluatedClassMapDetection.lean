@@ -36,13 +36,7 @@ namespace CategoryTheory
     congrArg (fun z ↦ z⟦(2 : ℤ)⟧') hn
 
 /-- Exact evaluation, an isomorphic pair of coordinates and class detection recover
-ordinary maps from equality of the evaluated shifted composites.
-
-Proof: naturality of the shift and exact-single comparisons moves evaluation of
-single(a) and single(b) to single(V(a)) and single(V(b)). Postcompose both by the
-coordinate isomorphism v. Conjugate V(a) and V(b) by t and v. The normalized class
-equation and injectivity of postcomposition by c identify these conjugates, since
-s is an isomorphism. Cancel t inverse and v to recover V(a) = V(b). -/
+ordinary maps from equality of the evaluated shifted composites. -/
 theorem Functor.detect_evaluated_single_maps
     {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
     [HasDerivedCategory.{u + 1} A] [HasDerivedCategory.{u + 1} B]

@@ -25,11 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.InjectiveResolution
 
-/-! The final defect-correction calculation is independent of the construction of the
-intermediate map.  We record it separately so that the horseshoe argument can use it.
-
-Source: the final calculation in Weibel, Theorem 2.4.6 (and Stacks Project, Tag 015I). -/
-/--  -/
+/-- The corrected middle map satisfies the compatibilities with the outer maps and with the
+augmentations. -/
 theorem corrected_middle_map
     {C : Type u} [Category.{v} C] [Abelian C]
     {X Y Z X' Y' Z' : CochainComplex C ℕ} {U U' : C}
@@ -109,30 +106,11 @@ Natural-number indexing encodes vanishing in negative degrees. The zero-composit
 and the degreewise short-exactness hypotheses express the two short exact rows of complexes;
 the four augmentation equations, stated as equations of chain maps out of `single₀` as in
 `exists_horseshoe_prescribed_resolutions` and Mathlib's `desc_commutes` (equivalent to the
-degree-zero equations of the node, `single₀` being concentrated in degree zero), express
+degree-zero equations, `single₀` being concentrated in degree zero), express
 their compatibility with the augmentations.
 
 Source: Weibel, Theorem 2.4.6, classical horseshoe naturality calculation, using Stacks
-Project, Tags 0136, 013R, 013P and 013T.
-
-Proof, Step 1: split both rows degreewise, since
- their first terms are injective. With retraction r of alpha and section sigma' of beta',
-set chi = alpha' phiA r + sigma' phiC beta, in ordinary composition order. Then
-chi alpha = alpha' phiA and beta' chi = phiC beta.
-Step 2: the differential defect D = d' chi - chi d annihilates alpha and
-is annihilated by beta'. Row exactness factors it uniquely as D = alpha' E beta.
-Cancelling the monic alpha' and epic beta gives d' E + E d = 0. The augmentation defect
-chi^0 sB - sB' b similarly factors uniquely as alpha'^0 e g, and E^0 sC = d' e.
-Step 3: augment IC by C in degree -1.
-This augmented complex is acyclic. The maps u^{-1} = e and u^n = (-1)^n E^n define a map
-into the bounded-below injective complex with degree m term JA^{m+1}. Tag 013R makes
-it null-homotopic. With h^{-1} = 0 and k^n = (-1)^n h^n, the homotopy identities give
-e = k^0 sC and E^n = d' k^n - k^{n+1} d.
-Step 4: set phiB = chi - alpha' k beta. The last identities kill its differential and
-augmentation defects. The zero composites beta' alpha' and beta alpha preserve both outer
-squares, so phiB has all three required properties. Existence of the prescribed outer
-lifts is supplied separately by lem-weil-pbc-injective-resolution-lift-exists, namely
-Mathlib's desc and desc_commutes_zero; this theorem allows any such outer lifts. -/
+Project, Tags 0136, 013R, 013P and 013T. -/
 theorem exists_horseshoe_morphism_lift
     {C : Type u} [Category.{v} C] [Abelian C]
     (S T : ShortComplex C) (hS : S.ShortExact) (hT : T.ShortExact) (F : S ⟶ T)

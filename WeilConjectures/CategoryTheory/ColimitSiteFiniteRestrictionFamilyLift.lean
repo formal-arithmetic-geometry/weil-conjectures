@@ -56,19 +56,7 @@ private theorem lift_same_stage_arrow
     (V.w c)).trans hg
 
 /-- Source: Stacks Project, Sites, Tags 0A35 and 09YL, finite diagram lifting
-in the section presentation.
-
-Proof: Lift each restriction arrow and align its endpoints with the prescribed
-stage objects by eventual equality in the object colimit. Equalize the two
-arrows out of t.right, then put the finitely many resulting refinements at one
-common object of Under i using wideSpan. These give arrows g with a single
-transition b. The images of the proposed triangles and identity equation agree
-in the arrow colimit. Eventual arrow equality, synchronized by wideSpan for the
-finite set of edges together with the base identity, makes all of them hold
-at one further refinement. Compose b with that refinement and transport along
-functoriality of F. Empty edge families are allowed; the base object ensures
-that the identity equation is included.
--/
+in the section presentation. -/
 theorem colimit_site_finite_restriction_family_lift
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V))

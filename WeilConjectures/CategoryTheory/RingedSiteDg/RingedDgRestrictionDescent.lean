@@ -9,12 +9,9 @@ public import WeilConjectures.CategoryTheory.RingedSiteDg.RingedSiteDgModules
 
 /-! Derived restriction descends from the literal dg restriction and is exact.
 
-Source: the restriction part of Stacks sdga, Tags 0FT4 and 0FT5.
+## References
 
-Proof in words: restriction keeps the underlying complex, hence preserves
-quasi-isomorphisms, shifts and mapping-cone triangles.  The localization
-universal property supplies the functor and its factorization isomorphism;
-the cone characterization then supplies exactness.
+* Stacks Project, `sdga.tex`, Tags 0FT4 and 0FT5.
 -/
 
 @[expose] public noncomputable section
@@ -66,15 +63,7 @@ def derivedRestrictionIso
       (restriction_preserves_quasiisomorphisms φ f hf)) (Q B)
 
 /-- The descended literal restriction respects standard shifts and cone triangles.
-Source: Stacks sdga, 0FT5 and derived, 05R6.
-
-Proof: restriction leaves the underlying complexes and the cone matrices
-unchanged and changes actions only by precomposition with the algebra map.
-It therefore carries a specified shift or cone comparison to the corresponding
-comparison over A.  Use the shift naturality fields to descend these comparisons
-and the localized-cone characterization of distinguished triangles to prove
-exactness of the constructed localization lift.
--/
+Source: Stacks sdga, 0FT5 and derived, 05R6. -/
 theorem restriction_localization_exact
     {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B)
     [DerivedStructure A] [DerivedStructure B] :

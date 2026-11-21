@@ -31,35 +31,7 @@ representable objects. The hypothesis is stronger than vanishing only for coveri
 it permits use of presheaf fibre products even when the site has no pullbacks.
 Source: Stacks Project, Cohomology on Sites, Tag 03F9, with Čech complexes
 formed in presheaves; Tag 079Z supplies their cohomological descent spectral
-sequence, and Hypercoverings, Tag 01GC supplies the augmented free nerve resolution.
-
-Proof: write `Z[P]` for the sheafification of the free abelian presheaf on a
-small-valued presheaf of sets `P`. Prove by induction on `q > 0`, simultaneously
-for all `P`, that `Ext^q(Z[P], F)` is zero. Represent a class by a finite Yoneda
-extension, whose final epimorphism is `G -> Z[P]`. Pull back the underlying
-presheaf map of this epimorphism along the generator map `P -> Z[P]` to obtain
-`E -> P`. Both presheaves are small-valued; the map is locally surjective because
-`G -> Z[P]` is an epimorphism of sheaves. The class pulls back to zero on `Z[E]`,
-since the tautological lift `E -> G` extends to `Z[E] -> G` and splits the last
-step of the pulled-back Yoneda extension.
-Apply the presheaf Čech-to-cohomology spectral sequence of Stacks Tag 079Z to
-`E -> P`: its first page has terms `Ext^b(Z[E_a], F)`, where `E_a` is the
-`(a+1)`-fold presheaf fibre product over `P`, and it converges to
-`Ext^(a+b)(Z[P], F)`. The augmented sheafified free-abelian nerve is exact by
-the fibrewise contraction and exact sheafification (Tag 01GC). Filtering its
-derived Hom complex gives this first-quadrant spectral sequence; the finite
-range relevant to degree `q` can equally be formed using Yoneda Ext, so no
-additional chosen injective resolution or enough-injectives instance is part
-of the hypothesis. By induction all rows `0 < b < q` vanish. The zero row is
-precisely `presheafCechComplex (Arrow.mk (E -> P)) F.obj`, so its positive
-cohomology vanishes by `hcech`. Consequently the edge map from
-`Ext^q(Z[P], F)` to `Ext^q(Z[E], F)` is injective: the other filtration pieces
-in total degree `q` are zero. The class already has zero image under this edge
-map, and is therefore zero. This proves the induction, including degree one,
-where there are no intermediate rows. Finally take `P = yoneda.obj U`;
-Mathlib's definition of `H'` is exactly `Ext^q(Z[P], F)`.
-The maps on free-abelian sheaves used here are defined by adjunction, not by
-choosing arbitrary objects from existence theorems. -/
+sequence, and Hypercoverings, Tag 01GC supplies the augmented free nerve resolution. -/
 theorem isZero_H'_of_presheafCech_vanishing
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}]

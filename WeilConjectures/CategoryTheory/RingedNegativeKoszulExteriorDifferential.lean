@@ -189,21 +189,8 @@ private theorem scalar_sum_comp
 contraction coefficients. This fixes every basis map in advance and concerns one
 boundary of one negative tensor; there is no choice of coordinates or duality.
 
-Source: Stacks Project, more-algebra.tex, Tags 0622 and 0664, contraction on ordered
-wedges and the tensor Leibniz rule; algebraization.tex, Tag 0A0E, the finite free Koszul calculation.
-
-Proof: use ringedNegativeKoszulBasis_signed_d for the canonical negative
-basis, giving the signed sum over erased indices. Expand exterior contraction
-on the increasing wedge using koszul_differential. Omitting its ith ordered
-vector gives the increasing wedge on the erased subset, and its position equals
-the number of earlier selected indices. The exterior coordinate projection takes
-that wedge to one exactly for the erased subset and to zero otherwise. Hence
-exteriorKoszulCoefficient is precisely the same signed finite sum. The ring
-homomorphism preserves its sums, and composition distributes over them. Exchange
-the two finite sums and sum the Kronecker coefficient over supported target
-subsets. The result is the signed erased-index sum already proved for the
-negative basis. No division or nonzero hypothesis is used; empty lists, zero
-rings, empty sites, and zero or unit sections are included. -/
+Source: Stacks Project, more-algebra.tex, Tags 0622 and 0664;
+algebraization.tex, Tag 0A0E. -/
 theorem ringedNegativeKoszulBasis_exterior_d
     {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}
     (O : Sheaf T CommRingCat.{w}) {A : Type w} [CommRing A]

@@ -13,10 +13,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreti
 
 # The comparison space of the two-open compactification theorem
 
-This file builds the comparison layer of the two-open compactification theorem,
-following the blueprint chapter "Nagata compactification", section "The two-open
-compactification theorem" (`def:nagata-two-open-comparison-space` through
-`lemma-nagata-one-valuation-avoids-boundary`):
+This file builds the comparison layer of the two-open compactification theorem.
 
 Given two sides `σ₁ : TwoOpenSide u O₁` and `σ₂ : TwoOpenSide u O₂`,
 
@@ -34,12 +31,8 @@ Given two sides `σ₁ : TwoOpenSide u O₁` and `σ₂ : TwoOpenSide u O₂`,
 - `AlgebraicGeometry.TwoOpenPreparation`: the bundled output of the comparison layer,
   consumed by the final assembly of the two-open theorem;
 - `AlgebraicGeometry.nonempty_twoOpenPreparation`: existence. The construction of a
-  key-disjoint prepared pair (`exists_prepared_keyDisjoint_twoOpenSide`) is the
-  improved-comparison chain of the blueprint
-  (`lemma:nagata-comparison-restrict-proper-open`,
-  `def:nagata-two-open-improved-comparison` via Stacks Project Tag 0F3W,
-  `lemma:nagata-comparison-boundary-density`,
-  `lemma:nagata-key-boundary-disjointness`); it consumes the modification input
+  key-disjoint prepared pair (`exists_prepared_keyDisjoint_twoOpenSide`) via an improved
+  comparison (Stacks Project Tag 0F3W) consumes the modification input
   `exists_admissibleBlowup_isIso_strictTransformMap_near_closure` and therefore,
   through it, Stacks Tag 081S — see the module docstrings of
   `WeilConjectures.Compactification.IsomorphismNearClosure` and
@@ -66,17 +59,12 @@ the geometric core of the file. Its ingredients, all proved here, are:
   the improved first projection is injective wherever the strict-transform projection
   is an isomorphism. This is the point at which Stacks Project Tag 0F3W enters;
 - `TwoOpenSide.comparisonBoundary_subset_preimage_selfBoundary` is the density
-  criterion `lemma:nagata-comparison-boundary-density`: controlling the second
+  criterion: controlling the second
   projection on a subset whose closure swallows the comparison boundary suffices,
   because the self boundary is itself a closure;
-- `TwoOpenSide.keyDisjoint_of_comparisonBoundary_subset` is
-  `lemma:nagata-key-boundary-disjointness`: a comparison boundary landing in the self
+- `TwoOpenSide.keyDisjoint_of_comparisonBoundary_subset`: a comparison boundary landing in the self
   boundary `Z̄₂,₂` of a *prepared* second side cannot meet its forbidden boundary
   `Z̄₂,₁`.
-
-The closed immersion of the improved comparison space into the strict transform is
-built directly from the universal property of the scheme-theoretic image, so Stacks
-Project Tag 0F3Y (`Scheme.Hom.ker_lift_admissibleBlowup`) is not used here.
 -/
 
 @[expose] public section
@@ -275,9 +263,9 @@ instance quasiCompact_comparisonMap : QuasiCompact (comparisonMap σ₁ σ₂) :
   have : QuasiSeparated (pullback.fst σ₁.s σ₂.s) := inferInstance
   exact QuasiCompact.of_comp _ (pullback.fst σ₁.s σ₂.s)
 
-/-- **Restriction of the comparison image over the proper-extension open**: the part of the comparison space lying
-over `V₁` is exactly the image of `V₁ ×_U V₂`, which is an open subscheme of the
-comparison space because the comparison morphism is a quasi-compact immersion. -/
+/-- **Restriction of the comparison image over the proper-extension open**: the part of the
+comparison space lying over `V₁` is exactly the image of `V₁ ×_U V₂`, which is an open subscheme of
+the comparison space because the comparison morphism is a quasi-compact immersion. -/
 theorem range_toImage_comparisonMap :
     Set.range ⇑(comparisonMap σ₁ σ₂).toImage =
       ⇑(comparisonFst σ₁ σ₂) ⁻¹' (σ₁.V : Set σ₁.X) := by
@@ -478,7 +466,7 @@ theorem comparisonBoundary_subset_preimage_selfBoundary {D : Set (comparisonSpac
 variable {σ₁ σ₂} in
 /-- **Key boundary disjointness by density**:
 the combination of the two previous lemmas, which is the shape the improved-comparison
-chain of the blueprint produces. -/
+chain produces. -/
 theorem keyDisjoint_of_dense_comparisonBoundary (h₂ : σ₂.Prepared O₁)
     {D : Set (comparisonSpace σ₁ σ₂)} (hD : comparisonBoundary σ₁ σ₂ ⊆ closure D)
     (hmem : ∀ z ∈ D, comparisonSnd σ₁ σ₂ z ∈ σ₂.selfBoundary O₁) :
@@ -496,11 +484,11 @@ variable {A K : Type u} [CommRing A] [IsDomain A] [ValuationRing A] [Field K]
   (g₁ : Spec (CommRingCat.of A) ⟶ σ₁.X) (g₂ : Spec (CommRingCat.of A) ⟶ σ₂.X)
 
 omit [ValuationRing A] in
-/-- **The pair of valuation extensions factors through the comparison space**: if `gᵢ : Spec A ⟶ Xᵢ` extend a generic
-point `Spec K ⟶ O₁ ∩ O₂` over a common morphism to `S`, then `(g₁, g₂)` factors through
-the closed subscheme `X₁₂ ⊆ X₁ ×_S X₂`. Generically the pair lands in `V₁ ×_U V₂`, and a
-morphism from the spectrum of a domain factoring generically through a closed subscheme
-factors through it (`IsClosedImmersion.exists_lift_of_isFractionRing`). -/
+/-- **The pair of valuation extensions factors through the comparison space**: if `gᵢ : Spec A ⟶ Xᵢ`
+extend a generic point `Spec K ⟶ O₁ ∩ O₂` over a common morphism to `S`, then `(g₁, g₂)` factors
+through the closed subscheme `X₁₂ ⊆ X₁ ×_S X₂`. Generically the pair lands in `V₁ ×_U V₂`, and a
+morphism from the spectrum of a domain factoring generically through a closed subscheme factors
+through it (`IsClosedImmersion.exists_lift_of_isFractionRing`). -/
 theorem exists_comparisonFst_comparisonSnd
     (hg₁ : Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ g₁ =
       η ≫ U.homOfLE inf_le_left ≫ σ₁.embX)
@@ -543,10 +531,10 @@ theorem exists_comparisonFst_comparisonSnd
   · rw [comparisonFst, ← Category.assoc, hl, hĝ₁]
   · rw [comparisonSnd, ← Category.assoc, hl, hĝ₂]
 
-/-- **One valuation extension avoids its forbidden boundary**: the closed points of `g₁` and `g₂` cannot
-both lie in the forbidden boundaries, since the pair factors through the comparison space
-(`exists_comparisonFst_comparisonSnd`) on which the key disjointness holds; and an open of
-`Spec A` containing the closed point is everything. -/
+/-- **One valuation extension avoids its forbidden boundary**: the closed points of `g₁` and `g₂`
+cannot both lie in the forbidden boundaries, since the pair factors through the comparison space
+(`exists_comparisonFst_comparisonSnd`) on which the key disjointness holds; and an open of `Spec A`
+containing the closed point is everything. -/
 theorem KeyDisjoint.avoids (hkey : KeyDisjoint σ₁ σ₂)
     (hg₁ : Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ g₁ =
       η ≫ U.homOfLE inf_le_left ≫ σ₁.embX)
@@ -818,28 +806,10 @@ end TwoOpenSide
 open TwoOpenSide in
 /-- **The improved comparison** (Stacks Project Tag 0F3W).
 
-This is the geometric core of the comparison layer. The forbidden boundary locus
-`Z₁,₂ = ψ₁⁻¹(U ∖ O₁)` is closed in `V₁` and lies in the open `TwoOpenSide.isoOpen`
-over which the proper first comparison projection is an isomorphism, because
-`U ∖ O₁ ⊆ O₂` and `ψ₂` is an isomorphism over `O₂`. So the isomorphism-near-closure
-blow-up (Tag 0F3W) applies and produces a `V₁`-admissible blow-up `π : X₁' ⟶ X₁` and
-an open `N'` of `X₁'` containing the closure of `π⁻¹(Z₁,₂)` over which the strict
-transform of the first projection is an isomorphism.
-
-The improved comparison space is a closed subscheme of that strict transform
-(`injOn_comparisonFst_admissibleBlowup`), so its first projection `p₁` is injective
-over `N'`; it is also proper, hence closed, and surjective over `π⁻¹(Z₁,₂)`. An
-injective closed map is a homeomorphism onto its image, so `p₁⁻¹` of the closure of
-`π⁻¹(Z₁,₂)` — which is the comparison boundary of the improved pair — is contained in
-the closure of `p₁⁻¹(π⁻¹(Z₁,₂))`. On the latter the second projection lands in the
-self boundary of the second side, because there the comparison space is the fibre
-product `V₁' ×_U V₂` and both projections have the same image in `U`; the density
-criterion `comparisonBoundary_subset_preimage_selfBoundary` then concludes.
-
-The blow-up shape of the conclusion is the one the surrounding API was built for:
-`TwoOpenSide.admissibleBlowup` is the Lean form of
-`def:nagata-two-open-improved-comparison`, and preparedness of the improved first side is
-supplied by `TwoOpenSide.Prepared.admissibleBlowup`. No preparedness of the two sides is assumed. -/
+This is the geometric core of the comparison layer: the isomorphism-near-closure blow-up
+(Tag 0F3W) of the first comparison projection at the forbidden boundary locus yields a
+`V₁`-admissible blow-up `π : X₁' ⟶ X₁` whose improved comparison boundary lies in the self
+boundary of the second side. No preparedness of the two sides is assumed. -/
 theorem exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary [IsNoetherian S]
     {u : U ⟶ S} [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]
     {O₁ O₂ : U.Opens} (σ₁ : TwoOpenSide u O₁) (σ₂ : TwoOpenSide u O₂)
@@ -946,12 +916,7 @@ open TwoOpenSide in
 /-- **Existence of a prepared, key-disjoint pair of sides**.
 
 The first side is improved by the isomorphism-near-closure blow-up (Stacks Project
-Tag 0F3W) of the first comparison projection at the forbidden boundary locus.
-
-The proof consumes the modification layer only through
-`exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary`, and therefore
-through Stacks Project Tag 081S, which is unconditional here; see the module
-docstring. -/
+Tag 0F3W) of the first comparison projection at the forbidden boundary locus. -/
 theorem exists_prepared_keyDisjoint_twoOpenSide [IsNoetherian S] (u : U ⟶ S)
     [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] (O₁ O₂ : U.Opens)
     (hcov : O₁ ⊔ O₂ = ⊤) [HasCompactification (O₁.ι ≫ u)]

@@ -58,10 +58,7 @@ private theorem pro_iso
     simp only [Category.assoc, ← e.hom.naturality_assoc a,
       Iso.hom_inv_id_app_assoc]
 
-/-- Pull a cone back along an equivalence. Use the inverse image of the retraction
-stage, and compose its retraction with the counit. For each common earlier stage,
-apply the inverse functor to its two maps, using the inverse unit to reach the given
-stage. Counit naturality and the triangle identity give the factorization equation.
+/-- Pull a cone back along an equivalence.
 Source: Stacks Project, Categories, Definition 05PU(2). -/
 private theorem pro_reindex
     {J K : Type*} {A : Type*} [Category J] [Category K] [Category A]
@@ -150,19 +147,7 @@ private theorem shiftOver_equivalence
 
 /-- In Situation 05S8, left-derived definedness is invariant under shifts, and shifted
 values are canonically isomorphic, compatibly with any supplied value cones.
-The cone legs specify the values as pro-objects, rather than only their underlying
-objects. Their limit property follows from the retraction and common-stage
-factorization in `IsEssentiallyConstantProDiagram`. The leg equation uniquely
-characterizes the shift comparison; MS5 guarantees the shifted denominator belongs
-to `S`, so its proof argument does not restrict the denominators being tested.
-Source: Stacks Project, Derived Categories, Lemma 05SU(2).
-The proof shifts the denominator category by the equivalence induced by `[n]`, using
-MS5 and its inverse. Exactness transports the essentially constant pro-diagram and
-its value through the shift isomorphisms, preserving the cone, retraction, and
-factorization conditions. The inverse shift gives the reverse implication. Finally,
-the supplied limit cones are shifted, reindexed, and postcomposed with the commutation
-isomorphism. Mathlib limit uniqueness gives the comparison isomorphism, and the
-limit hom-extensionality lemma proves its uniqueness from the specified leg equation. -/
+Source: Stacks Project, Derived Categories, Lemma 05SU(2). -/
 theorem isTriangulatedLeftDerivedDefinedAt_shift_iff
     {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]

@@ -48,14 +48,7 @@ noncomputable def pointSectionImage {C : Type u} [Category.{v} C] (J : Precovera
 
 /-- Section separation by a family of geometric-morphism points implies joint reflection of
 isomorphisms. Source: Stacks, Tags 00YK and 00YM, with stalk identifications from Tags 00Y6
-and 00Y8.
-
-Proof: composition with a sheaf morphism carries the morphism represented by a section to
-that represented by its image, by Yoneda naturality and the universal property of
-sheafification. If two sheaf morphisms agree after every inverse image, section separation
-therefore makes their values on every section equal. Thus the inverse-image functors are
-jointly faithful. Mathlib's criterion for jointly faithful functors from a balanced category
-then gives joint reflection of isomorphisms, since sheaves of sets form a balanced category. -/
+and 00Y8. -/
 lemma point_family_conservative
     {C : Type u} [Category.{v} C]
     (J : Precoverage C)

@@ -94,13 +94,9 @@ attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
   AlgebraicGeometry.ProEtale.CondensedRing.upperStar
 
 /-- The conclusions of the Brown-hypotheses lemma, for a specified coefficient ring.
-The localizing closure and constructible finite-Tor property are the recorded definitions.
-All size assertions and coproducts use the fixed indexing universe `u + 1`. The existential
-triangulation witness installs the canonical shift inherited from the ambient derived
-category; no independently chosen shift is allowed. The coproduct witness also precedes
-compactness and generation, so these clauses cannot be vacuous for lack of coproducts.
-This is only a bundle of the lemma's conclusions, not an assertion for arbitrary rings.
--/
+All size assertions and coproducts use the fixed indexing universe `u + 1`, and the
+triangulation witness uses the canonical shift of the ambient derived category. This is only
+a bundle of the lemma's conclusions, not an assertion for arbitrary rings. -/
 def BrownHypothesesFor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) : Prop :=

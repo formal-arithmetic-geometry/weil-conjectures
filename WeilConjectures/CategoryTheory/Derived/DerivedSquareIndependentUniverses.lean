@@ -9,7 +9,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-! # Localization of a square with independent derived-category universes
 
-Source: Stacks Project, Tags 05R7 and 05RU.
+## References
+
+* Stacks Project, Tags 05R7 and 05RU.
 -/
 
 @[expose] public noncomputable section
@@ -21,12 +23,7 @@ namespace CategoryTheory
 /-- Lift an ordinary square to specified derived realizations, retaining the given
 factorization isomorphisms. The four localizations may have different Hom universes.
 
-Source: Stacks Project, Tags 05R7 and 05RU.
-
-Proof: paste the four factorization maps with the ordinary square on complexes.
-Fully faithful precomposition with the source localization lifts this isomorphism
-uniquely. Evaluate the lifting equation at a complex and cancel the two target
-factorization maps. This is the required representative equation. -/
+Source: Stacks Project, Tags 05R7 and 05RU. -/
 theorem exists_derivedSquare_independentUniverses
     {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{da} A]
     {B : Type b} [Category.{bv} B] [Abelian B] [HasDerivedCategory.{db} B]

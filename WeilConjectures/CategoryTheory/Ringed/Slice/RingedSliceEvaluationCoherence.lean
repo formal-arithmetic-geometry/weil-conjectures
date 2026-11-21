@@ -158,23 +158,7 @@ private theorem evaluation_of_iso
       · simp
 
 /-- Exact slice restriction preserves the representative-normalized evaluation counit.
-Source: Stacks Project, Tags 08J9 and 08JB, and equation-internal-hom.
-
-Proof: resolve L by a flat-term K-flat complex P and M by a K-injective complex I.
-Resolve Hom(P,I) by a flat-term K-flat complex Q. Exact restriction preserves the
-resolving quasi-isomorphisms, and the kflat field gives the corresponding tensor models
-on the slice. The Hom normalization identifies the local components of Hom(P,I) with
-those of Hom(rP,rI), through the augmentations to the fixed K-injective replacements.
-Apply the uncurry_model fields of T and TU to the maps from Q into those fixed Hom
-complexes. Both evaluation chain maps, after the tensor and Hom comparisons, send
-a pure tensor x tensor p to q(x)(p). The Hom normalization makes this equality hold
-over every further slice object as well. The sheafification universal property and
-the coproduct universal property show the two chain maps agree on the entire total
-complex. Localize the equality, substitute the representative squares ht and hh,
-and cancel the tensor, Hom, and resolving isomorphisms. This proves the displayed
-counit identity for the chosen representatives. Naturality of the tensor comparisons,
-Hom comparisons, and adjunction counits transports it to the original L and M.
-No evaluation map is cancelled, and no boundedness or perfectness is used. -/
+Source: Stacks Project, Tags 08J9 and 08JB, and equation-internal-hom. -/
 theorem ringedSlice_evaluation_coherence
     (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂
       CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]

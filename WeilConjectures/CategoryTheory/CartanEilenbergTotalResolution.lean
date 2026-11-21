@@ -27,22 +27,7 @@ namespace CategoryTheory.Functor
 set_option backward.isDefEq.respectTransparency false in
 /-- The total of bounded-below injective rows is a K-injective resolution, with the
 augmentation specified on its degree-zero summands.
-Source: Stacks Tags 0133 and 015J.
-
-Proof.
-1. Extend each nonnegative resolution by zero and flip. The maps from K into
-resolution degree zero commute with the total differential: their resolution differential
-is zero, and their complex differential commutes with the augmentation a. They therefore
-assemble into the displayed augmentation.
-2. Fix a lower bound b for I. In degree n only resolution degrees 0 through n-b
-contribute. Thus the total is zero below b and its terms are finite sums of injectives.
-A finite sum of injectives is injective, and a bounded-below complex of injectives is
-K-injective by lem-sp-kinjective-computes.
-3. After adjusting the cone signs, the cone of the augmentation is the total of
-the rows augmented by K^s in resolution degree -1. Each augmented row is acyclic
-by hrows. Its filtration by complex degree is finite in every cochain degree;
-the associated first page vanishes. Bounded convergence makes the cone
-acyclic. Hence the augmentation is a quasi-isomorphism. -/
+Source: Stacks Tags 0133 and 015J. -/
 theorem cartanEilenberg_total_resolution
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex.Plus A)

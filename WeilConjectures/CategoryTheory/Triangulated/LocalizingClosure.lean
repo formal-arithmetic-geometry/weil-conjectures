@@ -18,9 +18,8 @@ subcategory, closed under isomorphisms and under all coproducts indexed by types
 which exist in `C`.
 
 The *localizing closure* `P.localizingClosure` of an arbitrary `P` is the smallest localizing
-property containing `P`, the intersection of all localizing properties containing `P`. In the
-blueprint it is written `Loc(P)`; it is used with `P = Dctf(X, Λ)` in blueprint
-`definition-localizing-subcategory`.
+property containing `P`, the intersection of all localizing properties containing `P`. It is
+written `Loc(P)`.
 
 The full subcategory of a localizing property is pretriangulated (by the instances of
 `Mathlib.CategoryTheory.Triangulated.Subcategory`), and has all coproducts indexed by `Type v`

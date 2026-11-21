@@ -59,23 +59,7 @@ private noncomputable def coefficientIso {R T : Type}
 /-- The structural image of the base field and its unit ball give the usual rational and
 integral condensed coefficients, compatibly with inclusion. The bottom intermediate field
 has its inherited subspace norm; `PadicAlgCl.integers` is the unit ball for precisely this
-norm. Ring objects here use the tensor product of condensed abelian groups.
-
-Proof: (1) Restrict the structural embedding to its image, the bottom intermediate field.
-Its inverse sends an image element to its unique preimage; this is
-`IntermediateField.botEquiv`. Both maps preserve the ring operations by injectivity.
-(2) The ambient norm extends the p-adic norm, so this ring equivalence preserves norms and
-distances. Substituting inverse images proves that its inverse is also an isometry.
-(3) Norm preservation identifies the two unit balls. Restrict the equivalence and its
-inverse to obtain an isometric ring equivalence of the integer rings, using
-`def-weil-l-adic-coefficient-extension` and the explicitly prescribed subspace norm.
-(4) Apply the continuous-map construction of `sk-def-sfb-condensed-ring` to these four
-continuous ring maps. Their components are postcomposition, preserve the pointwise ring
-operations, and are inverse pointwise; hence they give isomorphisms of ring objects.
-(5) Precomposition with a profinite map commutes with each of the four postcomposition
-maps, giving naturality for both isomorphisms and both inverses. The integral equivalence
-is the restriction of the rational equivalence, so composing with inclusion gives the
-same scalar map. Postcomposition on sections proves the compatibility square below. -/
+norm. Ring objects here use the tensor product of condensed abelian groups. -/
 theorem base_coefficient_condensed_identification (l : ℕ) [Fact l.Prime] :
     ∃ (e : ℚ_[l] ≃+* (⊥ : IntermediateField ℚ_[l] (PadicAlgCl l)))
       (eInt : ℤ_[l] ≃+*

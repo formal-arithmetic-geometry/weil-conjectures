@@ -34,9 +34,7 @@ def WithSection.IsIsomorphic {C : Type u} [Category.{v} C] {J : GrothendieckTopo
   ∃ e : Torsor.Iso P.1 Q.1, e.iso.hom.hom.app (op U) P.2 = Q.2
 
 /-- Isomorphism of pairs is an equivalence relation.
-Source: Stacks Project, Tag 03AJ, relative refinement.
-Proof: the identity carries each section to itself; inverse and composite torsor
-isomorphisms respectively reverse and compose the equality of specified sections. -/
+Source: Stacks Project, Tag 03AJ, relative refinement. -/
 theorem WithSection.isIsomorphic_equivalence {C : Type u} [Category.{v} C]
     {J : GrothendieckTopology C} (G : Sheaf J AddCommGrpCat.{w}) (U : C) :
     _root_.Equivalence (@WithSection.IsIsomorphic C _ J G U) := by

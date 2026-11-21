@@ -65,8 +65,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Localization and geometric inverse image
 
-Source: Stacks Project, Modules on Sites, Tags 03EL, 03CZ and 03D2.
-
 ## Main statements
 
 - `existsUnique_localizationInverseImage`: the unit-normalized module natural isomorphism.
@@ -75,35 +73,9 @@ Source: Stacks Project, Modules on Sites, Tags 03EL, 03CZ and 03D2.
 - `localizationInverseImage_comp`, `_id`, `_coefficient`: module coherence equations.
 - `localizationComparisonDerived`: canonical descent to ordinary unbounded derived categories.
 
-## Proof dependencies
+## References
 
-1. Identify the tensor localization with sheafified fractions using
-   `lem-pc-sites-module-sheafification-tensor`, `lem-weil-pbc-localization-tensor`,
-   `lem-pc-sites-sheafification-underlying-sets` and
-   `def-weil-presheaf-modules-sheafification`. The identification takes units to units.
-2. The ring mapping property follows objectwise from
-   `lem-weil-pbc-localization-away-universal-property`, then from sheafification.
-3. Extend a module map by sending m/t^n to the inverse t-action applied n times to its
-   image, using `def-weil-pbc-module-localization`; sheafify and use uniqueness.
-4. `lem-weil-pbc-adjunction-lifts-group-ring-objects` and
-   `situation-conventions` transport the ring initial property.
-5. `lem-weil-pbc-geometric-module-transport` transports the module initial property.
-6. The same unit characterization proves naturality and the generalized fraction formula.
-7. Kernels of inverse image are finite limits, and its adjunction preserves cokernels;
-   use `situation-conventions` and
-   `situation-conventions`.
-8. For scalar localization combine `lem-weil-pbc-localization-module-exact`,
-   `lem-weil-pbc-ringed-site-module-sheafification-exact` and
-   `lem-weil-pbc-ringed-topoi-module-adjunction` to obtain kernels and cokernels.
-9. `def-weil-pbc-composite-adjunction` and `situation-conventions`
-   identify the composite inverse image. Both comparison routes extend the same unit,
-   so uniqueness proves the composition and identity equations.
-10. Extend a specified ring isomorphism using the localization mapping property; its
-    module reinterpretation preserves units, so the same uniqueness proves the square.
-11. `situation-conventions`,
-    `lem-weil-pbc-exact-functor-derived-functor` and
-    `lem-weil-pbc-localization-universal-property` descend the termwise comparison,
-    units and equations on every unbounded complex.
+* Stacks Project, Modules on Sites, Tags 03EL, 03CZ and 03D2.
 -/
 
 @[expose] public noncomputable section
@@ -141,11 +113,7 @@ abbrev scalarLocalization
   SheafOfModules.siteSheafTensorRight (A := R) (ringedSectionLocalizationOfUniverses R t)
 
 /-- The localization unit is uniquely specified by `m ↦ m ⊗ 1` on every section.
-Source: Stacks, Tags 03EK and 00DK.
-Proof: the pure-tensor map is linear and compatible with restriction because the
-localization restrictions preserve one. Compose with the module sheafification unit.
-Naturality follows on pure tensors. Every section of the source has the specified image,
-so componentwise extensionality proves uniqueness. -/
+Source: Stacks, Tags 03EK and 00DK. -/
 theorem existsUnique_scalarLocalizationUnit
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]

@@ -99,31 +99,7 @@ with derived morphisms, without identifying the site object and morphism univers
 The sheafification instances are the canonical abelian-category infrastructure in a
 universe containing the site; no flatness, boundedness or product-exactness is assumed.
 
-Source: Stacks Project, Lemma 21.35.1, Tag 08JA, global statement.
-
-Proof:
-1. Use the recorded independent-universe K-flat and K-injective resolutions on C.
-   For a K-flat representative L and K-injective representative I of M, the sheaf Hom
-   complex Hom(L,I) computes derivedInternalHomOfUniverses and is K-injective
-   (Tags 0A95 and 0A96). Thus ringedSiteZerothHypercohomologyOfUniverses computes
-   its zeroth cohomology by applying Hom_R(R,-) termwise.
-2. Sections of degree n of this Hom complex are the families of linear maps
-   L^p to I^(p+n), with differential d_I f - (-1)^n f d_L. Its degree-zero cycles
-   are chain maps and its boundaries are null-homotopic maps. Consequently H0 is
-   the additive group of homotopy classes. For arbitrary source representatives,
-   a K-flat resolution and invariance in the first variable transport this comparison;
-   common refinements of surjective resolutions show independence and naturality.
-3. K-injectivity identifies these homotopy classes with derived morphisms via
-   DerivedCategory.Qh.mapAddHom. Compose with quotientCompQhIso and the inverse
-   of the localized resolution map. Naturality of that resolution and of the
-   quotient comparison gives precomposition by f.1.unop and postcomposition by f.2.
-4. Descend this natural additive comparison along Q.op.prod Q using the fully
-   faithful whiskering functor for the product localization. ULift places the
-   hypercohomology and derived-Hom groups in a common universe; remove those lifts
-   from each component to obtain e and the displayed naturality equation.
-All products and resolutions are taken in max c v r, which contains the site and
-coefficient universes. This changes no section, differential or localization map.
-Zero objects and the empty site require no additional hypotheses. -/
+Source: Stacks Project, Lemma 21.35.1, Tag 08JA, global statement. -/
 theorem rhom_global_sectionsOfUniverses
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]

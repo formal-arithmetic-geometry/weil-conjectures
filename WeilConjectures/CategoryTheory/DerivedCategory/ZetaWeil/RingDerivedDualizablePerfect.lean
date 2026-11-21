@@ -27,8 +27,8 @@ set_option linter.privateModule false
 Source: Stacks Project, More on Algebra, Tag 0FNS.
 
 The tensor is the existing K-flat derived monoidal tensor, obtained by deriving the
-signed direct-sum total tensor `CochainComplex.mapBifunctor` of
-`def-pc-tensor-complex-sheaves`. Its unit is canonically the degree-zero complex `A[0]`.
+signed direct-sum total tensor `CochainComplex.mapBifunctor`. Its unit is canonically the
+degree-zero complex `A[0]`.
 The localization universe is independent of the module universe.
 -/
 
@@ -90,6 +90,6 @@ private theorem perfect_retract {A : Type u} [CommRing A]
 
 /- The degree-zero rank-one complex is a bounded finite-projective model. -/
 /- Perfectness is closed under triangles, shifts and retracts. -/
-/- Stacks, Derived Categories, proposition-generator-versus-classical-generator (converse). -/
+/- Stacks Project, Derived Categories, generators versus classical generators (converse). -/
 /- Shrink Hom universes before applying the compact-generator thick-closure argument. -/
 end DerivedCategory

@@ -28,20 +28,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
 /-- Source: Stacks Project, Sites, Tag 0A35,
-section construction and adjunction paragraphs.
-
-Proof: Cocone naturality gives V_t(F(t.hom)(U)) = V_i(U). Compose E_t,
-beta_t, the raw presheaf colimit coprojection and this object transport to
-obtain kappa_t. The equations hm and hbeta_map, followed by naturality of the
-coprojections, prove D(b) followed by kappa_t' equals kappa_t. Equality in the
-arrow category handles the varying endpoints, and proof irrelevance removes
-the final equality transports. These maps define a cocone T on D.
-
-The stage-generator theorem supplies a representative for every element of
-T.pt. The stage-relation theorem says that equal representatives become equal
-at a common refinement. Mathlib's filtered-set colimit recognition therefore
-makes T a colimit cocone. The unique isomorphism from the supplied colimit R
-to T has exactly the required coprojection formula. -/
+section construction and adjunction paragraphs. -/
 theorem raw_section_presentation_compatibility
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

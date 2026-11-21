@@ -534,14 +534,7 @@ def rightExactTensorModelNormalization
 
 /-- A strong monoidal left adjoint preserving flat objects has a uniquely normalized
 binary comparison on its total left derived functor, and on any isomorphic functor.
-Source: Stacks 06YY and 07A4.
-Proof: derive the ordinary oplax tensorator on pairs of K-flat models whose images
-are K-flat. Flat resolutions supply those models. Both derived counits are invertible
-there, so the comparison is an isomorphism. Transport it along the given functor
-isomorphism. The cochain counit equation follows from the homotopy counit equation.
-Every object has a flat K-flat representative with K-flat image, and on two such
-representatives the normalization determines the inverse comparison by cancellation.
-Naturality transports this equality to every pair of derived objects. -/
+Source: Stacks 06YY and 07A4. -/
 theorem rightExact_tensorComparison_existsUnique
     (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso]
     [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]

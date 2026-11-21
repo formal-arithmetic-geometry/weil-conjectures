@@ -20,7 +20,7 @@ This sharpens `DerivedCategory.isPerfect_of_finiteTorAmplitude`, which only prod
 bounded complex of finitely generated projective modules: the induction on the length of the
 Tor amplitude is the same, but keeps track of the degrees.
 
-## Main statements
+## Main results
 
 - `DerivedCategory.exists_iso_Q_obj_projective_of_torAmplitudeIn`
   : the model by finite projective modules in degrees

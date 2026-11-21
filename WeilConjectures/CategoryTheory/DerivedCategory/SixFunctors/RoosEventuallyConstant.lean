@@ -127,13 +127,7 @@ private theorem roos_zero_leg
   exact ⟨⟨b, hfb, hbf⟩⟩
 
 /-- Eventual constancy in two adjacent degrees makes every sufficiently late cone leg
-invertible on cohomology.
-
-Proof: discard the finite initial segment by homotopy-limit tail invariance. Apply
-cohomology to its Milnor triangle. The degree q-1 difference map has a section, obtained
-recursively by x_0=0 and x_(i+1)=t_i^(-1)(x_i-y_i). Thus the degree q first arrow is monic
-and is a kernel of its difference map. The compatible inverse transition isomorphisms
-from the zeroth term give an inverse to the zeroth cone leg through that kernel. -/
+invertible on cohomology. -/
 theorem DerivedCategory.isIso_homology_map_cone_leg_of_eventually_isIso
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     [HasCountableProducts (DerivedCategory C)]

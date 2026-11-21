@@ -13,8 +13,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 /-!
 # Scalar extension of the trace on perfect complexes
 
-This file proves item (3) (scalar extension) of blueprint `proposition-properties-trace`
-(subsection `proposition-properties-trace`) for the categorical trace in the derived category, with
+This file proves the scalar extension law for the categorical trace in the derived category, with
 the Koszul braiding `DerivedCategory.braidedCategory'` of the derived tensor product: for a ring
 homomorphism `φ : R →+* B`, `φ (tr_R (v ∣ P)) = tr_B (v ⊗ B ∣ P ⊗^L B)`.
 
@@ -22,8 +21,8 @@ homomorphism `φ : R →+* B`, `φ (tr_R (v ∣ P)) = tr_B (v ⊗ B ∣ P ⊗^L 
 
 - `ModuleCat.trace_extendScalars_map`: the trace of the base change `B ⊗[R] g` of an
   endomorphism `g` of a finite free `R`-module is `φ (Tr g)`.
-- `DerivedCategory.exists_trace_eq_algebraMap_and_trace_extendScalars_eq_algebraMap`, item (3) of
-  `proposition-properties-trace`.
+- `DerivedCategory.exists_trace_eq_algebraMap_and_trace_extendScalars_eq_algebraMap`:
+  the scalar extension law for the trace.
 
 ## Implementation notes
 
@@ -74,7 +73,7 @@ variable {R B : Type u} [CommRing R] [CommRing B] (φ : R →+* B)
   [HasDerivedCategory.{u} (ModuleCat.{u} B)]
   [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} B)]
 
-/-- item (3) (scalar extension): let `φ : R →+* B` be a
+/-- Scalar extension of the trace: let `φ : R →+* B` be a
 homomorphism of commutative rings, `P` a bounded complex of finitely generated free `R`-modules
 and `v` a chain endomorphism of `P`. Since `P` is degreewise free, `P ⊗^L_R B` is represented by
 the termwise scalar extension `P_B = B ⊗[R] P`, with endomorphism `v_B = B ⊗[R] v`. Then the

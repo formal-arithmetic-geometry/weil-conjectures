@@ -62,10 +62,7 @@ private theorem conjugateIso_associator
   ext : 1
   exact conjugateEquiv_associator_hom a₁ a₂ a₃
 
-/-- Pasting two invertible right-adjoint squares gives the pasted left-adjoint square.
-Proof: conjugate both paths by the composite adjunctions. Conjugation reverses
-composition and exchanges left and right whiskering. The assumed right-square
-identity then identifies the paths; its adjacent comparison inverses cancel. -/
+/-- Pasting two invertible right-adjoint squares gives the pasted left-adjoint square. -/
 theorem adjunctionSquareComposition
     {A B C D E F : Type*}
     [Category* A] [Category* B] [Category* C]

@@ -47,8 +47,7 @@ def derivedSingleUnit (adj : f ⊣ g) (X : C) (Y : D) (c : f.obj X ⟶ Y) :
       (DerivedCategory.singleFunctor D 0).map c)
 
 /-- Expand the cached single-object unit to its original full derived composite.
-Source: Stacks 0A45.
-Proof: unfold the named cache; both sides are the same morphism. -/
+Source: Stacks 0A45. -/
 theorem derivedSingleUnit_eq (adj : f ⊣ g) (X : C) (Y : D) (c : f.obj X ⟶ Y) :
     derivedSingleUnit adj X Y c =
       adj.derivedAdjunction.unit.app ((DerivedCategory.singleFunctor C 0).obj X) ≫

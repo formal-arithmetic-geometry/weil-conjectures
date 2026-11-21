@@ -28,11 +28,7 @@ variable {A : Type u₁} [Category.{v₁} A] {B : Type u₂} [Category.{v₂} B]
 
 include hμ in
 /-- The five-Hom comparison for a composite tensor functor is the composite comparison.
-Source: Stacks 07A6 and 0D6D.
-Proof: test with the source identity and expand the five bijections. The hom equivalence
-of a composite adjunction is the composite hom equivalence. Naturality moves the first
-scalar counit through the second tensor comparison; the two middle closed transposes
-cancel. The tensor-composition hypothesis identifies the remaining middle map. -/
+Source: Stacks 07A6 and 0D6D. -/
 theorem composition (K : A) (N : C) :
     (iso S V (adj.comp adj') μ₀).hom.app (op K, N) =
       U.map ((iso T V adj' ν).hom.app (op (F.obj K), N)) ≫

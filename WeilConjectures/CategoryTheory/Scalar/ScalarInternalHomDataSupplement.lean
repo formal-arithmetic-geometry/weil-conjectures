@@ -128,13 +128,15 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.Algebra.Homology.ScalarInternalHomData
 /-! # Internal Hom and arbitrary changes of ring-sheaf coefficients
 
-Source: Bhatt--Scholze, Remark 6.8.15 (ambient derived operations); Stacks Project, sites-cohomology.tex, Tags 07A6, 07A4, 08J9, 08JA and 0D6D,
-and derived.tex, Tag 05RT.
-This is the auxiliary scalar-adjunction comparison extracted from the final
-paragraph of proposition-six-operations-dctf--15 in the current blueprint.
 Every comparison is normalized on actual K-flat tensors. In particular these
 are ordinary unbounded module derived categories, with no flatness or
 perfectness assumption on a coefficient map or a derived input.
+
+## References
+
+* Bhatt--Scholze, Remark 6.8.15 (ambient derived operations).
+* Stacks Project, `sites-cohomology.tex`, Tags 07A6, 07A4, 08J9, 08JA and 0D6D, and
+  `derived.tex`, Tag 05RT.
 -/
 
 @[expose] public section
@@ -267,7 +269,7 @@ noncomputable def scalarHomTarget (a : R ⟶ S) :
   ((𝟭 _).prod (scalarDerivedRestriction a)) ⋙
     derivedInternalHomOfUniverses.{c, v, r, w} J R
 
-/-- The five canonical representing Hom bijections, in the order of the node's proof.
+/-- The five canonical representing Hom bijections.
 Source: Stacks 07A6, 07A4 and 08J9. -/
 noncomputable def scalarHomBijection (a : R ⟶ S) (μ : ScalarHomTensorComparison M a)
     (A K : DerivedCategory (scalarModules J R)) (N : DerivedCategory (scalarModules J S)) :

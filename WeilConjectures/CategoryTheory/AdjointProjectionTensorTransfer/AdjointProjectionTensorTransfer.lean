@@ -60,26 +60,7 @@ end AdjointProjectionTensorTransfer
 open AdjointProjectionTensorTransfer
 
 /-- Conjugating `d⁻¹` transports the projection/counit transpose to tensoring with
-`η`, naturally in `K`.
-
-Proof: (1) Apply `def-weil-pbc-adjunction-conjugate` to `d⁻¹`; its counit equation
-and injectivity of the inverse `S ⊣ T` Hom bijection give the characterization and
-uniqueness. (2) Expand the Hom transposes using the units; `unit_conjugateEquiv` and
-naturality of the conjugate give the Hom-transpose identity.
-(3) Naturality of `d` at the symmetry and the inverted projection square identify
-`q_K ∘ d_N⁻¹` in mathematical order with `transferredQ` (Lean reverses that order).
-(4) The counit characterization at the unit identifies the transferred counit with
-`S(ρ_1)` followed by evaluation. Naturality of `p` in `M` moves `ρ_1` through its
-inverse; the assumed evaluation equation at `T(1)` reduces the expression to
-`S(a_K ∘ (ρ_1 ⊗ 1) ∘ σ)` followed by evaluation.
-(5) Naturality of symmetry at `(1,η)` and `σ_TK,1 ≫ λ_TK = r_TK` identify this
-inside map with `h_K`. These tensor manipulations use `def-sfb-monoidal-category`.
-(6) Apply the Hom bijection of `def-weil-pbc-adjunction-mate` and the identity
-from (2), yielding `τ_K ≫ ρ_K = h_K` in Lean's composition order.
-(7) Naturality of symmetry, inverse projection and unitors proves naturality of
-`q` and `h`; naturality of the Hom bijection gives that of `τ`. Naturality of
-`d⁻¹` then gives that of the transferred expression. Thus all component equations
-are equations of the natural transformations they define. -/
+`η`, naturally in `K`. -/
 theorem adjointProjectionTensorTransfer
     {C : Type uC} [Category.{vC} C] [MonoidalCategory C] [SymmetricCategory C]
     {D : Type uD} [Category.{vD} D] [MonoidalCategory D] [SymmetricCategory D]

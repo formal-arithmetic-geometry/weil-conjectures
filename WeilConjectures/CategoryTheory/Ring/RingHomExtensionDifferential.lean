@@ -9,7 +9,8 @@ public import WeilConjectures.CategoryTheory.Ring.RingHomExtensionDefsSupplement
 
 /-! # Differential compatibility for normalized Hom degree maps
 
-Source: Stacks Project, more-algebra.tex, equation-base-change-RHom; sites-cohomology.tex, section-hom-complexes (Tag 0A8X).
+Source: Stacks Project, more-algebra.tex, equation-base-change-RHom; sites-cohomology.tex,
+section-hom-complexes (Tag 0A8X).
 -/
 
 -- After pruning, this module only keeps private declarations.

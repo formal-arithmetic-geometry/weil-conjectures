@@ -26,10 +26,7 @@ private def coefficientAssociator (X D : C) :
     intro T T' f
     exact associator_naturality_middle X f D)
 
-/-- The same coefficient exchange for any specified right adjoint of left tensor.
-Proof: conjugate the associator between the two composites of left adjoints.
-The counit characterization of conjugation identifies its component with the
-specified transpose. Thus no choice of closed adjunction affects invertibility. -/
+/-- The same coefficient exchange for any specified right adjoint of left tensor. -/
 private theorem isIso_coefficientTranspose {H : C ⥤ C} (X : C)
     (ad : tensorLeft X ⊣ H) (Z D N : C) [ExactPairing D N] :
     IsIso (ad.homEquiv (H.obj Z ⊗ N) (Z ⊗ N)
@@ -63,10 +60,7 @@ private theorem isIso_coefficientTranspose {H : C ⥤ C} (X : C)
   rw [← he]
   exact hc
 
-/-- A normalized coefficient model transports invertibility to any tensor presentation.
-Proof: transport the specified adjunction along e. The coefficient normalization
-and naturality of r identify its evaluation transpose with coefficient exchange,
-conjugated by r. The preceding duality argument makes exchange invertible. -/
+/-- A normalized coefficient model transports invertibility to any tensor presentation. -/
 private theorem isIso_transpose_of_coefficient_model
     {A H B : C ⥤ C} (X : C) (ad : A ⊣ H) (e : A ≅ tensorLeft X)
     (Z D N : C) [ExactPairing D N] (r : B ≅ tensorRight N)
@@ -147,11 +141,7 @@ private theorem strengthCoefficientIso_associativity (X V : C) :
   rw [hu]
 
 include hn ha in
-/-- An invertible associative tensor strength is tensor by its value on the unit.
-Proof: evaluate the strength at the unit, then apply the right unitor. Naturality
-makes these maps a natural isomorphism. Associativity at (X,V,unit), followed by
-the right-unit coherence, identifies the strength with tensor reassociation.
-Conjugate the coefficient transpose by this isomorphism and use duality. -/
+/-- An invertible associative tensor strength is tensor by its value on the unit. -/
 theorem isIso_transpose_of_strength
     {H : C ⥤ C} (X : C) (ad : tensorLeft X ⊣ H) (Z D : C)
     [ExactPairing D (B.obj (𝟙_ C))] :

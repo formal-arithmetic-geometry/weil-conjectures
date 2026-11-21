@@ -49,9 +49,9 @@ No finiteness or quasi-compactness hypotheses are needed.
   closed immersion `j`, the blow-up of the pulled-back centre is a closed subscheme of the
   blow-up.
 
-## Blueprint
+## References
 
-`thm:nagata-strict-transform-is-blowup` (Stacks Project Tag 080E).
+Stacks Project, Tag 080E.
 -/
 
 @[expose] public section
@@ -72,9 +72,7 @@ variable {X Y : Scheme.{u}}
 `f : Y ⟶ X`, an ideal sheaf `I` on `X` and a lift `ρ` of `(I.comap f).blowupMap ≫ f`
 along `I.blowupMap`, the kernel of the induced morphism
 `Bl_{I·O_Y}(Y) ⟶ Y ×_X Bl_I(X)` equals the kernel of the inclusion of the open locus
-of `Y ×_X Bl_I(X)` over the complement of the support of `I`. The open locus factors
-through the comparison morphism as the schematically dense preimage of the complement
-of the support of `I.comap f`, so the two kernels agree. -/
+of `Y ×_X Bl_I(X)` over the complement of the support of `I`. -/
 theorem ker_pullbackLift_blowup_comap (I : X.IdealSheafData) (f : Y ⟶ X)
     {ρ : (I.comap f).blowup ⟶ I.blowup}
     (hρ : (I.comap f).blowupMap ≫ f = ρ ≫ I.blowupMap) :

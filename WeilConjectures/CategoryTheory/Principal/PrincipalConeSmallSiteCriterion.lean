@@ -181,13 +181,7 @@ attribute [local irreducible] CochainComplex.PrincipalCone.completion
 attribute [local irreducible] principalKoszulRoosUnit roosF koszulTowerComplex koszulTensorTower
 
 /-- Singleton Koszul completion is the normalized principal cone completion.
-Source: Stacks 0999, 099B, 0A0E and 0941.
-Proof: the image ideal of scalar multiplication has precisely the locally divisible
-sections. Apply the singleton Koszul completion reflector to this image ideal, whose
-one-element generating list follows from the image factorization. The comparison with
-the strict tensor Koszul Roos complex and then the principal cone Roos complex preserves
-the degree-zero unit. Transport output completeness across these comparisons. Their
-unit equality identifies the reflector's invertibility criterion with the stated one. -/
+Source: Stacks 0999, 099B, 0A0E and 0941. -/
 theorem principalConeSmallSiteCriterion
     (a : (R.obj ⋙ forget CommRingCat).sections) (P : CochainComplex A ℤ) (μ : End P)
     (hμ : ∀ (q : ℤ) (U : Cᵒᵖ) (x : (P.X q).val.obj U),

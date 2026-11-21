@@ -98,7 +98,7 @@ structure TensorCoherence (mB : MonoidalCategory B) (mA : MonoidalCategory A)
       μ.hom.app (X, Y) ≫ (βA.toBraidedCategory.braiding (F.obj X) (F.obj Y)).hom
 
 /-- The actual double-dual arrow, defined by the fixed adjunction and symmetry.
-Source: Stacks 08J9, 0FPT and the blueprint transposition paragraph. -/
+Source: Stacks 08J9, 0FPT. -/
 def delta {H : Bᵒᵖ × B ⥤ B} (S : CoefficientClosedStructure H)
     (β : @SymmetricCategory B _ S.monoidal) (W K : B) :
     K ⟶ H.obj (op (H.obj (op K, W)), W) :=
@@ -106,7 +106,7 @@ def delta {H : Bᵒᵖ × B ⥤ B} (S : CoefficientClosedStructure H)
     ((β.toBraidedCategory.braiding K (H.obj (op K, W))).hom ≫ S.evaluation K W)
 
 /-- The normalized uncurrying, evaluation and double-dual equations for fixed comparisons.
-Source: Stacks 08J9 and the blueprint transposition paragraph. -/
+Source: Stacks 08J9. -/
 structure TranspositionLaws
     (HB : Bᵒᵖ × B ⥤ B) (HA : Aᵒᵖ × A ⥤ A)
     (SB : CoefficientClosedStructure HB) (SA : CoefficientClosedStructure HA)
@@ -281,7 +281,7 @@ def RepresentativeModel
           ((U.mapHomologicalComplex (.up ℤ)).obj Q) hUP hUQ).hom
 
 /-- The total-tensor comparison and its unique, coherent derived extension, for the fixed χ.
-Source: Stacks 06YU, 0G7D, 08J9 and blueprint transposition paragraph. -/
+Source: Stacks 06YU, 0G7D, 08J9. -/
 structure Comparison where
   /-- The sum of the specified underived comparisons, on actual total tensor complexes. -/
   chain : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅
@@ -294,7 +294,7 @@ structure Comparison where
       u.tensor.hom.app (P.X p, Q.X q) ≫
         tensorSummand.{d, vd, s} J' R' ((U.mapHomologicalComplex (.up ℤ)).obj P)
           ((U.mapHomologicalComplex (.up ℤ)).obj Q) p q n hpq
-  /-- The natural derived isomorphism μ, in the orientation of the node. -/
+  /-- The natural derived isomorphism μ. -/
   derived : SB.tensor ⋙ U.mapDerivedCategory ≅
     (U.mapDerivedCategory.prod U.mapDerivedCategory) ⋙ SA.tensor
   /-- The extension agrees with the total comparison on all flat-term K-flat models. -/

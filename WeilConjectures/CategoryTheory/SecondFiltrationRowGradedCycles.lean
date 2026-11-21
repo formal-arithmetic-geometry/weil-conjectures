@@ -122,26 +122,7 @@ private theorem inclusion_lift
   rw [Category.assoc, Subobject.ofLEMk_comp, imageSubobject_arrow_comp]
 
 /-- The diagonal inclusions give graded term isomorphisms commuting with the row differential.
-Source: Stacks Project, Tag 0130, clause 2.
-
-Proof. Set J = flip(mappedFunctor F(I)). In degree n = s+r the filtration step
-is the finite sum of images of the inclusions with second coordinate in [s,n].
-Project the total coproduct onto the (r,s) summand and compose with the extension
-isomorphism. This projection kills every summand with second coordinate greater
-than s, hence kills the next step. Lift the (r,s) inclusion through the step.
-The induced map into the quotient and the descended projection are inverse:
-on the s summand their composite is identity, while all other summands belong
-to the next step and vanish in the quotient. Evaluation preserves cokernels,
-so this is the quotient of the subcomplexes used by L. Its normalization is
-fixed uniquely by the monic step inclusion. On a diagonal inclusion the total
-differential is the resolution differential plus the signed differential
-raising s. The latter factors through step s+1 and is killed by its cokernel
-projection. Extension by zero intertwines the resolution differentials with
-their extensions. Cancel the monic step inclusion and then project to the
-quotient to obtain the asserted square. The interval [s,s+r] contains s even
-when s<0 or r=0. For a zero row the same projections and lifts give the
-unique zero-object isomorphisms; no nonzero-object hypothesis is needed.
--/
+Source: Stacks Project, Tag 0130, clause 2. -/
 private theorem secondFiltration_row_graded_terms
     {A : Type uA} [Category.{vA} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]
@@ -255,28 +236,7 @@ private theorem secondFiltration_row_graded_terms
 
 /-- The normalized diagonal map induces an isomorphism on cycles, before taking
 any quotient by boundaries.
-Source: Stacks Project, Tag 0130, clause 2; Tag 012K, first-page cycle formula.
-
-Proof. Write J = flip(mappedFunctor F(I)) and n = s+r. In degree n the second
-step is the finite sum of the images of the diagonal inclusions with second
-coordinate in [s,n]. Project the total coproduct onto its (r,s) summand, then
-apply the extension isomorphism to recover the mapped row term. This projection
-kills every summand of the next step, whose second coordinate is at least s+1.
-It therefore descends to the graded quotient. Conversely lift the (r,s) summand
-through the step and project to the quotient. On all generating inclusions these
-two morphisms are inverse: the summand s gives identity, and all other summands
-are killed in the quotient. This proves the degreewise graded comparison.
-The total differential of the diagonal inclusion is the resolution differential
-plus the signed differential raising s. The latter factors through the next
-step and disappears in the quotient. Thus the comparison intertwines the row
-differential with the graded differential. Apply the universal property of the
-kernels of these outgoing differentials to obtain a mutually inverse pair of
-cycle maps. The first-page cycle formula identifies the graded kernel with
-L.complexCycles s n 1. Monicity of the filtration inclusion forces the given t
-to equal the restriction of the term lift, so the asserted normalization follows.
-This uses [s,n], never s>=0. At r=0 the interval contains just s; no incoming
-term or boundary calculation is used. Zero rows give the unique zero-object iso.
--/
+Source: Stacks Project, Tag 0130, clause 2; Tag 012K, first-page cycle formula. -/
 theorem secondFiltration_row_graded_cycles
     {A : Type uA} [Category.{vA} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]

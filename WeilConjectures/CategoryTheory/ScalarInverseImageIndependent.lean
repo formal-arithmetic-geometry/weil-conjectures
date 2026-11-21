@@ -519,13 +519,7 @@ private theorem directData
 set_option backward.isDefEq.respectTransparency true
 -- The unit equation compares two adjunctions and two restriction functors.
 /-- Scalar extension commutes with inverse image, with the unit fixed.
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-
-Proof: transport the direct-image additive group and action along the set adjunction.
-The operation mate equations identify linear maps on its two sides. Composing with
-the scalar-extension adjunctions gives two left adjoints to the same right adjoint.
-Their unique adjunction comparison is the required isomorphism. Its defining equation
-is the stated unit normalization. The two sites may have independent universes. -/
+Source: Stacks Project, Modules on Sites, Tag 03EL. -/
 theorem exists_scalarInverseImageIndependent
 {SY : Type uC} {SX : Type uD} [Category.{vC} SY] [Category.{vD} SX]
   [EssentiallySmall.{u} SY] [EssentiallySmall.{u} SX]

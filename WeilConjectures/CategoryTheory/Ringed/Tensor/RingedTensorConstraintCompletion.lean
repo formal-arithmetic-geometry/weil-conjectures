@@ -415,15 +415,7 @@ private theorem model_leftUnitor
 
 /-- The constraints on simultaneous K-flat representatives determine full representative
 coherence, with the same prescribed coefficient-unit identification.
-Source: Stacks Tags 06YT and 0FPT.
-
-Proof: extend the tensor comparison by functorial flat resolution. The actual braiding,
-associator and right unit maps of complexes have precisely the stipulated formulas.
-Two maps with these formulas agree: use sheafification, total-coproduct inclusions,
-and tensor-Hom currying to detect nested tensors. Consequently the stipulated maps
-are those actual isomorphisms. Agreement of the extended comparison on K-flat pairs
-transports their three constraint equations. The left unitor follows from symmetry
-and the right unitor; its interchange sign is trivial in degree zero. -/
+Source: Stacks Tags 06YT and 0FPT. -/
 theorem ringedTensorConstraint_completion
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
     (T : CoefficientTensorModels.{r, c, v, w} J R S)

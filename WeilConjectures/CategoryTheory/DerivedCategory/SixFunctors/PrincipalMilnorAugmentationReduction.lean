@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Reduction
 
 /-! # Reduction of a specified morphism of principal Milnor triangles
 
-Source: Stacks Project, algebraization.tex, principal derived-completion argument; proetale.tex, Tag 099M.
+## References
+
+* Stacks Project, Tag 099M
 -/
 
 @[expose] public section
@@ -123,17 +125,7 @@ private theorem isIso_map_of_milnor
 becomes invertible after reduction by the principal generator, provided both squares
 for the map are specified, including the shifted boundary square.
 
-Source: Stacks Project, algebraization.tex, principal derived-completion Koszul proof; proetale.tex, Tag 099M.
-Proof: tensor both limiting product fans by the first quotient, using the source
-principal product comparison. Product extensionality identifies both shifted tower
-endomorphisms and the product map with their images under this tensor functor. Its
-triangulated structure therefore gives the two reduced Milnor triangles. The source
-successor lifts for the twice-reduced principal tower satisfy both pro-isomorphism
-identities. Apply the source Milnor pro-isomorphism criterion to the specified map;
-functoriality gives its first square, and naturality of the tensor shift comparison
-gives its last square. Finally the coefficient isomorphism R/I^1 = R/I gives an
-isomorphism between this tensor functor and reductionModIdeal. Naturality transports
-invertibility to exactly the reduced original map. -/
+Source: Stacks Project, Tag 099M. -/
 theorem isIso_reductionModIdeal_of_principalMilnorMorphism
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) {R : Type (u + 1)} [CommRing R]

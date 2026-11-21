@@ -40,22 +40,7 @@ private theorem cycleObjectRow_shortExact
 /-- Extend a specified augmented cycle map through the object column.
 No incoming boundary map or homology comparison is involved.
 
-Source: Stacks Project, Tags 015I, 015K and 013P(2)
-
-Proof: Use q-1=p to form the short exact sequence cycles → object → outgoing boundary
-of resolution complexes, and the analogous sequence for J. Evaluation is exact and F
-preserves short exact sequences. Identify the corresponding single-bicomplex columns
-with the single complexes on Z^p(K), K^p and B^q(K), naturally with respect to u.
-The assumed equation for y, after cancelling the monomorphic target cycle inclusion,
-is precisely the augmented cycle square. Lift the outgoing boundary augmentation into
-the termwise injective outgoing boundary column of J along the source boundary
-augmentation by Tag 013P(2); nonnegative indexing and its quasi-isomorphism imply that
-this augmentation is monomorphic. Call the resulting outgoing map c. Its augmentation agrees with
-the boundary map induced by u.
-Apply the exact-source horseshoe morphism
-theorem to the cycles/object/outgoing-boundary sequence, with prescribed endpoints
-y and c. Its middle map x gives the object augmentation and the displayed cycle square.
-Thus only this second short exact sequence is used; the cycle map is an input. -/
+Source: Stacks Project, Tags 015I, 015K and 013P(2) -/
 theorem exists_cartanEilenberg_comparison_object_stage
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]
     [Abelian A] [Abelian B] (F : A ⥤ B) [F.Additive]

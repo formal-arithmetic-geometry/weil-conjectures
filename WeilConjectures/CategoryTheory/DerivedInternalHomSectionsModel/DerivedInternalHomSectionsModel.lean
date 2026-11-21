@@ -456,24 +456,7 @@ and all of its hypercohomology groups. The third comparison identifies the ordin
 sections complex with the usual global Hom complex, including its differential and
 its degree-n product of morphism groups.
 
-Source: Stacks, Section 08J7, Lemmas 08JA, 08J9, 0A95 and 0A96.
-
-Proof: First compare the canonical functorial K-injective replacement of I with I
-itself. Its resolution map is a quasi-isomorphism between K-injectives. Applying
-Hom(A,-) and Q inverts it by 0A95. The resulting comparison with the localized
-internal Hom is natural in every source chain map and every map between K-injectives.
-Next replace A by a K-flat P. Hom(P,I) is K-injective by 0A96, hence RΓ is computed
-by ordinary sections on it. A quasi-isomorphism P to A induces quasi-isomorphisms
-on both sheaf Hom complexes and global Hom complexes, since I is K-injective.
-This transports the full-complex comparison back to A. Functorial resolutions and
-naturality of pre- and postcomposition give the displayed natural isomorphism.
-In each degree, sections commute with products and sections of sheaf Hom are global
-module maps. These identifications give the third chain isomorphism: its differential
-is d_I f - (-1)^n f d_A. The same component formula gives the naturality equation below.
-Finally the cohomology of the global Hom complex is homotopy classes A to I[n].
-K-injectivity identifies these with derived morphisms. Transport along representatives
-of K and M gives the last assertion for every integer n, including negative n.
-Zero complexes and the empty site are included; no boundedness or flatness of A is used. -/
+Source: Stacks, Section 08J7, Lemmas 08JA, 08J9, 0A95 and 0A96. -/
 theorem derived_internalHom_sections_model :
     Nonempty (representedInternalHom.{c, v, r, w} R ≅
       representativeHom.{c, v, r} R ⋙ DerivedCategory.Q) ∧

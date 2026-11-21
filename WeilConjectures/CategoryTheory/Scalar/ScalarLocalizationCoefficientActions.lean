@@ -36,9 +36,7 @@ namespace CategoryTheory
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
 /-- Image of a compatible coefficient family is again compatible.
-Source: Bhatt–Scholze, Proposition 6.8.14(2).
-Proof: commute each restriction with the ring-sheaf morphism, and then use the
-restriction compatibility of the original family. -/
+Source: Bhatt–Scholze, Proposition 6.8.14(2). -/
 theorem scalarLocalizationSectionsMap_mem {R S : Sheaf J CommRingCat.{u}}
     (f : R ⟶ S) (a : RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) :
     (fun U ↦ f.hom.app U (a.val U)) ∈
@@ -78,10 +76,7 @@ def scalarLocalizationCoefficientLinear (A : Type v) [CommRing A]
     comp_smul := fun M N P f r g ↦ Linear.comp_smul M N P f (a r) g }
 
 /-- The localized coefficient is a unit in the ring of sections of R[1/t].
-Source: Bhatt–Scholze, Proposition 6.8.14(2).
-Proof: the sectionwise image of t is a unit by localization. Its inverses commute
-with restriction by uniqueness of inverses. Apply sheafification to this section
-and its inverse; their products remain one, also for the zero ring and empty site. -/
+Source: Bhatt–Scholze, Proposition 6.8.14(2). -/
 theorem scalarLocalizationSections_isUnit (A : Type v) [CommRing A]
     (R : Sheaf J CommRingCat.{u})
     (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A) :

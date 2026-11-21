@@ -21,14 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- A zero-preserving functor kills the other summands if the total object is zero
-or one summand inclusion becomes an isomorphism.
-
-Proof: use the coproduct property to project onto the selected summand, with
-identity on that summand and zero on all others. If the total object becomes
-zero, this projection becomes zero. If another inclusion becomes invertible,
-its zero composite with the projection again forces the latter to become zero.
-The image of the selected summand's identity is the composite of its inclusion
-and this zero projection, so the selected summand has zero identity. -/
+or one summand inclusion becomes an isomorphism. -/
 theorem isZero_coproduct_summand_of_total_or_other_iso
     {C : Type u₁} [Category.{v₁} C] [HasZeroMorphisms C]
     {D : Type u₂} [Category.{v₂} D] [HasZeroMorphisms D]

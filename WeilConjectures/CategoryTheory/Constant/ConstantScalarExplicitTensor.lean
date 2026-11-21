@@ -26,17 +26,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
 /-- Restriction identifies constant scalars and the explicit sheafified site tensor
 with the fixed-coefficient unit and tensor, preserving their local generators.
 Source: Stacks 03CY and 03EK.
-
-Proof: take the inverse unit comparison of `ordinary J B` and identify its source
-with the constant module sheaf. Its scalar equation is `Ordinary.unit_hom`, followed
-by the inverse identity. For the tensor, compose the tensorator of `ordinary J B`
-with restriction of the inverse monoidal presentation of the explicit site tensor.
-The presheaf comparison between the two tensor presentations is the identity on
-pure tensors. Naturality of the module sheafification unit therefore sends each
-fixed pure tensor to the displayed site pure tensor. `Ordinary.tensor_inv` supplies
-the first equation; the two sheafification adjunction triangles supply the second.
-The inverse maps are the inverse tensorator and inverse presentation. These formulas
-also hold for the zero ring and the empty site, with no flatness assumption. -/
+-/
 theorem explicit_tensor_comparisons :
     ∃ e0 : (constantSheaf J (ModuleCat.{max u v} B)).obj (ModuleCat.of B B) ≅
       (restriction J B).obj (SheafOfModules.unit _),

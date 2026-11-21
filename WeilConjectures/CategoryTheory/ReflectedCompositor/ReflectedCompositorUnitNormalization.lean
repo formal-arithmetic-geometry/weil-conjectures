@@ -50,7 +50,7 @@ def adjunction (P : ObjectProperty A₀) (Q : ObjectProperty A₁)
     (Functor.FullyFaithful.id _) (Iso.refl _) (Iso.refl _)
 
 /-- The completion-unit comparison `L M ⟶ C (L M)`, natural for objects in the source
-full subcategory. Source: the reflector in Stacks Tag 099N(2). -/
+full subcategory. Stacks Project, Tag 099N(2). -/
 def unitComparison (P : ObjectProperty A₀) (Q : ObjectProperty A₁) (L : A₀ ⥤ A₁)
     {C : A₁ ⥤ Q.FullSubcategory} (r : C ⊣ Q.ι) :
     P.ι ⋙ L ⟶ (P.ι ⋙ L ⋙ C) ⋙ Q.ι :=
@@ -108,7 +108,7 @@ def compositor :
 
 /-- The two successive completion units, as a natural transformation. Its component is
 `L₁₂(k₀₁,M) ≫ k₁₂,P₀₁M`; no completion unit is inverted.
-Source: the explicit two-transpose calculation for Stacks Tag 099N(2). -/
+Stacks Project, Tag 099N(2). -/
 def successiveUnits :
     P₀.ι ⋙ L₀₁ ⋙ L₁₂ ⟶ ((P₀.ι ⋙ L₀₁ ⋙ C₁) ⋙ (P₁.ι ⋙ L₁₂ ⋙ C₂)) ⋙ P₂.ι :=
   whiskerRight (unitComparison P₀ P₁ L₀₁ r₁) L₁₂ ≫
@@ -117,22 +117,7 @@ def successiveUnits :
 /-- Compatibility of the specified ambient and reflected conjugates with all three reflector
 units, and the equivalent ordinary composite-adjunction inverse-transpose formula.
 The first equality is an equality of natural transformations, including naturality in `M`.
-Source: Stacks Tag 099N(2), with the explicit calculation using Tags 0037, 0DV0 and 0B65.
-
-Proof plan:
-1. Expand the reflected Hom bijection as the reflector precomposition followed by the ambient
-   Hom bijection. Its unit is the ambient unit followed by `R(k)`.
-2. Apply situation-conventions to the reflected composite adjunction. The double reflected transpose of the compositor is
-   the reflected unit followed by the restricted right compositor.
-3. Naturality of the ambient `12` unit at `k₀₁,M` shows that the ordinary double transpose
-   after the two completion units is the same double reflected transpose.
-4. The ambient conjugacy unit equation and naturality of `d` at `k₀₂,M` give the same
-   transpose for the ambient conjugate followed by `k₀₂,M`. Injectivity of the composite
-   Hom bijection proves the equation and the inverse-transpose formula.
-5. Naturality of the two successive units follows by applying reflector-unit naturality
-   first to the `12` unit and then to the `01` unit. Composing with the natural reflected
-   conjugate gives the left side; unit naturality and ambient conjugate naturality give
-   the right side. Hence the component equations form the stated natural equation. -/
+Source: Stacks Tag 099N(2), with the explicit calculation using Tags 0037, 0DV0 and 0B65. -/
 theorem unit_normalization
     {C₀ : A₀ ⥤ P₀.FullSubcategory} (_r₀ : C₀ ⊣ P₀.ι) :
     successiveUnits P₀ P₁ P₂ r₁ r₂ ≫

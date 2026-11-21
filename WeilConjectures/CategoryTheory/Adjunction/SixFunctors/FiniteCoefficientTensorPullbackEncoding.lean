@@ -332,26 +332,8 @@ private instance internalTensorFour (T : Scheme.{u})
 set_option cleanup.letToHave false in
 set_option backward.isDefEq.respectTransparency true in
 /-- The normalized encoding identifies derived tensors compatibly with geometric pullback.
-
-Source: Stacks 03D3,
-08BJ and 08FZ.
-
-Proof: restriction along the inverse coefficient isomorphism identifies balanced tensors:
-the two balancing relations coincide after applying the ring isomorphism. Compose with the
-section-action comparison and restriction to constant scalar sections. The normalization of
-Encoding sends each constant scalar to that same scalar; therefore all three comparisons
-send a pure tensor to the same pure tensor. They are natural isomorphisms, compatible with
-associators and unitors. On sections over a fibre product the direct-image encoding is the
-identity. Conjugate its adjunction to obtain the pullback comparison. Before deriving, the
-two composites expressing compatibility with the pullback tensorator agree on pure tensors,
-hence agree by the balanced tensor universal property. Apply the comparisons termwise to
-flat-term K-flat resolutions and use signed direct-sum totalization. Exact monoidal
-equivalences and their inverses preserve flatness and K-flatness. The universal property of
-the left derived bifunctor extends the tensor isomorphisms to all derived objects, and the
-universal property of derived pullback extends the pullback isomorphism. The underived
-pure-tensor equality gives ComparisonCompatible for the published derived comparisons.
 This uses no properness, boundedness or constructibility. For an empty scheme or the zero
-coefficient ring the same tensor universal properties apply, including the zero tensor. -/
+coefficient ring the statement holds as well. Stacks Project, Tags 03D3, 08BJ and 08FZ. -/
 theorem finiteCoefficientTensorPullbackEncoding
     (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (E : ∀ T : Scheme.{u}, Encoding A T)

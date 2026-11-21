@@ -112,43 +112,7 @@ def finiteFilteredConvolutionStep
 Every bounded-above fixed-interval filtered complex admits a split-flat model,
 the corresponding localized filtered homotopy categories are equivalent, and
 ordinary total tensor with the model preserves graded quasi-isomorphisms for any
-uniformly finite filtration on the right.
-
-Proof:
-1. Induct downwards from `b+1` to `a`. Resolve the bounded-above cone of the
-   already constructed `P_(p+1) → F^p M` by a flat complex `G_p`, using
-   lem-pc-sites-modules-functorial-flat-cover,
-   lem-pc-functorial-cycle-pullback-construction, and
-   lem-pc-kflat-bounded-flat-replacement. The map from this cone to `gr^p M`
-   is a quasi-isomorphism since the previously constructed filtered map is a
-   quasi-isomorphism on its finitely many grades. Decompose the replacement
-   map into `g_p : G_p → F^p M` in degree zero and
-   `h_p : G_p → P_(p+1)[1]`. With cone differential `(d,u;0,-d)`, they satisfy
-   `d h_p + h_p d = 0` and `d g_p - g_p d = -u h_p`.
-   The negatives of the components of `h_p` give the twisting maps. Their
-   Maurer--Cartan identities make `G_p ⊕ P_(p+1)` a complex with a split
-   filtration; `(g_p,f_(p+1))` is
-   its augmentation. Its grade `p` is the replacement of the cone followed
-   by the quasi-isomorphism to `gr^p M`, and the higher graded maps are the
-   old ones. Finite direct sums keep the common upper cochain bound.
-   The total complex, its steps and grades have flat terms and are K-flat
-   by lem-pc-bounded-above-flat-kflat-site and lem-pc-kflat-closure.
-2. In the actual filtered homotopy category use the right calculus from
-   lem-trf-uniform-filtered-homotopy-calculus. Step 1 supplies a denominator
-   from the full split-flat subcategory into every object. Apply
-   lem-trf-right-fraction-dense-subcategory to the canonical inclusion and
-   the two localizations. Its right-roof argument gives the equivalence
-   of the canonical localization lift used here, including faithfulness.
-3. The convolution graded quotient is naturally the finite sum of
-   `gr^p P ⊗ gr^q Q` for `p+q=r`. Each grade of `P` is
-   K-flat. The cone of each graded map on `Q` is acyclic, and tensoring it
-   with `gr^p P` remains acyclic. Tensor commutes with cones, so each
-   summand map is a quasi-isomorphism; finite sums preserve this property.
-4. The two filtration intervals make the convolution finite even when
-   `Q` is unbounded in cochain degree. Inclusions induce the ordinary
-   total-tensor map, and the quotient identification respects the signed
-   total differential. Filtration weights introduce no additional signs.
--/
+uniformly finite filtration on the right. -/
 theorem finiteFilteredFlatModel
     (a b : ℤ) (hab : a ≤ b)
     (M : UniformFilteredComplexes (finiteFilteredModules J R) (some (a, b))

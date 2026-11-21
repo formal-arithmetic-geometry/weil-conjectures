@@ -48,9 +48,6 @@ import WeilConjectures.CategoryTheory.Scalar.ScalarLocalizationSheafExact
 
 Source: Bhatt–Scholze, Proposition 6.8.14(2); Stacks Tags 015F, 010N and 05R6.
 
-The independent-universe section and coefficient-action helpers are owned by this
-item. The landed coefficient-action module and its DAG record are retained intact.
-
 The assertion below spells out both the universal derived comparison and its raw
 fraction descent. All coefficient actions are the specified global-section actions.
 The raw coefficient ring is `Localization.Away t`; its canonical algebra isomorphism
@@ -77,8 +74,7 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
 set_option linter.unusedSectionVars false in
 /-- Image of a compatible coefficient family is again compatible.
 Source: Bhatt–Scholze, Proposition 6.8.14(2).
-Proof: commute each restriction with the ring-sheaf morphism, and then use the
-restriction compatibility of the original family. -/
+-/
 theorem scalarLocalizationSectionsMap_memOfUniverses {R S : Sheaf J CommRingCat.{u}}
     (f : R ⟶ S) (a : RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) :
     (fun U ↦ f.hom.app U (a.val U)) ∈
@@ -92,7 +88,8 @@ theorem scalarLocalizationSectionsMap_memOfUniverses {R S : Sheaf J CommRingCat.
   exact congrArg (f.hom.app V) (a.property g)
 
 /-- The map of global coefficient rings induced by a ring-sheaf morphism.
-Source: Bhatt–Scholze, Proposition 6.8.14(2). -/
+Source: Bhatt–Scholze, Proposition 6.8.14(2).
+-/
 def scalarLocalizationSectionsMapOfUniverses {R S : Sheaf J CommRingCat.{u}} (f : R ⟶ S) :
     RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat) →+*
       RingCat.sectionsSubring (S.obj ⋙ forget₂ CommRingCat RingCat) :=
@@ -103,7 +100,8 @@ def scalarLocalizationSectionsMapOfUniverses {R S : Sheaf J CommRingCat.{u}} (f 
     (scalarLocalizationSectionsMap_memOfUniverses f)
 
 /-- The usual coefficient action on module-sheaf Homs, by restriction from global sections.
-Source: Bhatt–Scholze, Proposition 6.8.14(2). -/
+Source: Bhatt–Scholze, Proposition 6.8.14(2).
+-/
 @[instance_reducible]
 def scalarLocalizationCoefficientLinearOfUniverses (A : Type v) [CommRing A]
     (R : Sheaf J CommRingCat.{u})
@@ -118,7 +116,8 @@ def scalarLocalizationCoefficientLinearOfUniverses (A : Type v) [CommRing A]
     comp_smul := fun M N P f r g ↦ Linear.comp_smul M N P f (a r) g }
 
 /-- The induced coefficient action on the ordinary derived category.
-Source: Bhatt–Scholze, Proposition 6.8.14(2). -/
+Source: Bhatt–Scholze, Proposition 6.8.14(2).
+-/
 @[instance_reducible]
 def scalarLocalizationDerivedLinearOfUniverses (A : Type v) [CommRing A]
     (R : Sheaf J CommRingCat.{u})
@@ -132,9 +131,7 @@ def scalarLocalizationDerivedLinearOfUniverses (A : Type v) [CommRing A]
 
 /-- The localized coefficient is a unit in the ring of sections of R[1/t].
 Source: Bhatt–Scholze, Proposition 6.8.14(2).
-Proof: the sectionwise image of t is a unit by localization. Its inverses commute
-with restriction by uniqueness of inverses. Apply sheafification to this section
-and its inverse; their products remain one, also for the zero ring and empty site. -/
+-/
 theorem scalarLocalizationSections_isUnitOfUniverses (A : Type v) [CommRing A]
     (R : Sheaf J CommRingCat.{u})
     (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A) :
@@ -167,7 +164,8 @@ theorem scalarLocalizationSections_isUnitOfUniverses (A : Type v) [CommRing A]
   exact IsUnit.of_mul_eq_one d (by ext U; exact hc U)
 
 /-- The canonical A[1/t]-algebra structure of the localized ring sheaf.
-Source: Bhatt–Scholze, Proposition 6.8.14(2). -/
+Source: Bhatt–Scholze, Proposition 6.8.14(2).
+-/
 def scalarLocalizationCoefficientMapOfUniverses (A : Type v) [CommRing A]
     (R : Sheaf J CommRingCat.{u})
     (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A) :
@@ -189,7 +187,8 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
 
 /-- Restrict a linear category along the canonical inverse coefficient-ring isomorphism.
 This is used solely to write the raw localization as an E-linear category.
-Source: Bhatt–Scholze 6.8.14(2). -/
+Source: Bhatt–Scholze 6.8.14(2).
+-/
 @[instance_reducible]
 def continuousCoefficientRestrictLinear
     {B : Type v} [CommRing B] {L : Type v} [CommRing L]
@@ -707,7 +706,8 @@ private theorem continuousFractionTriangulated
 /-- The complete assertion of exact continuous scalar localization, including the
 canonical derived comparison, all cohomology degrees, and raw fraction descent.
 Source: Bhatt–Scholze 6.8.14(2), Stacks 015F, 010N and 05R6
-The instance bindings in this definition install only the specified section actions. -/
+The instance bindings in this definition install only the specified section actions.
+-/
 def ContinuousScalarLocalizationAssertions
     (A : Type v) [CommRing A] (t : A) (B : Type v) [CommRing B]
     (eB : Localization.Away t ≃+* B) (R : Sheaf J CommRingCat.{u})

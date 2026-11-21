@@ -16,14 +16,7 @@ namespace CategoryTheory.Functor
 
 /-- A stable antitone family of degreewise subobjects assembles into a filtration.
 Source: Stacks Project, Tag 0121 (definition of filtration).
-Proof: factor each differential through the target monomorphism. Cancellation
-of that monomorphism proves square-zero and the chain-map equations. The
-component inclusions define a monic map of complexes. Degreewise containment
-induces a chain map between these complexes, again by monic cancellation,
-so their subobjects are antitone. The representative of each subobject differs
-from this inclusion by an isomorphism. Evaluation preserves that isomorphism,
-and composing with an isomorphism leaves the image subobject unchanged.
-Thus the filtration has exactly the specified degreewise subobjects. -/
+-/
 theorem filtration_of_degreewise
     {C : Type uA} [Category.{vA} C] [Abelian C]
     (K : CochainComplex C ℤ) (S : ℤ → ∀ n : ℤ, Subobject (K.X n))

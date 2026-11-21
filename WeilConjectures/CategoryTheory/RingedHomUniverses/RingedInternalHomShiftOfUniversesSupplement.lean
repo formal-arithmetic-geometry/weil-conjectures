@@ -2019,14 +2019,7 @@ private theorem rightNormalizedShift_exists :
   exact hS M L F eM s
 
 /-- Existence and uniqueness of the ordinary normalized right shift structure.
-Source: Stacks 08JA, 08JC.
-Proof: product projections define the unsigned reindexing chain isomorphism.
-The shifted Hom differential and Hom into the shifted target agree. Its naturality
-commutes with the fixed K-injective augmentation. Localize this identity; on
-K-injective targets the augmentation comparison is invertible. Essential
-surjectivity and the localization universal property give a unique natural shift
-structure on every derived object. The degreewise reindexings compose and are the
-identity at zero, so they satisfy the CommShift coherence identities. -/
+Source: Stacks 08JA, 08JC. -/
 theorem rightShift_existsUnique :
     ∃! S : ∀ M : D.{c, v, r, w} J R, (hom.{c, v, r, w} J R M).CommShift ℤ,
       RightNormalization.{c, v, r, w} J R S := by
@@ -2127,13 +2120,7 @@ private theorem leftNormalization_unique
   exact h F.obj
 
 /-- The uniquely specified signed source shift.
-Source: Stacks 0A8X, 08JA.
-Proof: in degree k reindex p to p+s and multiply by (-1)^(s*k).
-The ratio between consecutive degrees is (-1)^s, exactly compensating for
-the shifted source differential. The inverse reindexes backwards with the same
-sign. Projectionwise equality gives naturality and uniqueness. Localize the
-chain isomorphism through the fixed K-injective augmentation; K-injective targets
-and essential surjectivity determine the unique derived natural isomorphism. -/
+Source: Stacks 0A8X, 08JA. -/
 theorem leftShift_existsUnique :
     ∃! S : ∀ (M : D.{c, v, r, w} J R) (s : ℤ),
       hom.{c, v, r, w} J R M ⋙ shiftFunctor _ (-s) ≅ hom.{c, v, r, w} J R (M⟦s⟧),
@@ -2148,14 +2135,7 @@ def sourceShift (M : D.{c, v, r, w} J R) (s : ℤ) :
   (leftShift_existsUnique.{c, v, r, w} J R).exists.choose M s
 
 /-- Exactness for the normalized target shift at independent site universes.
-Source: Stacks 08JC.
-Proof: represent a target triangle by a cone of a map of K-injective complexes.
-The cone is K-injective, since Hom from an acyclic test complex takes it to a
-cone of acyclic complexes. Hom(L,Cone(f)) is the cone of Hom(L,f), with its
-inclusion, projection and connecting arrow. The right-shift normalization above
-fixes the connecting-arrow sign. Localize and use the ordinary representative
-comparison. Independence of K-injective representatives and TR3 transfer the
-result to every distinguished triangle. No boundedness assumption is used. -/
+Source: Stacks 08JC. -/
 theorem hom_isTriangulated (M : D.{c, v, r, w} J R) : (hom.{c, v, r, w} J R M).IsTriangulated := by
   obtain ⟨S, hS, hT⟩ := rightNormalizedShift_exists.{c, v, r, w} J R
   have hEq : S = (rightShift_existsUnique.{c, v, r, w} J R).exists.choose :=

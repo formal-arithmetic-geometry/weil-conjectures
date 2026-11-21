@@ -53,11 +53,7 @@ noncomputable def fullSubcategoryInclusion : ScalarLocalization R P.FullSubcateg
         simp only [map_add, hx, hy]
     | add x y hx hy =>
       simp only [map_add, LinearMap.add_apply, hx, hy]
-/-- Tensoring the inherited Hom equivalence proves full faithfulness.
-Proof: tensor the identity equivalence on localized coefficients with the underlying
-Hom equivalence. Its inverse is the preimage map; the inverse laws are those of the
-tensor-product linear equivalence. Composition follows on pure tensors from the
-inherited composition, and tensor induction extends this to arbitrary morphisms. -/
+/-- Tensoring the inherited Hom equivalence proves full faithfulness. -/
 noncomputable def fullyFaithfulFullSubcategoryInclusion :
     (fullSubcategoryInclusion R C P p).FullyFaithful where
   preimage {K M} f :=

@@ -29,22 +29,7 @@ namespace CategoryTheory.Functor
 universal left derived functor is exact (Stacks Project, Tags 05S9 and 05SE).
 
 The hypothesis `hLF` records that `LF` is characterized by the universal
-(right Kan extension) property along the localization functor `Q`; the
-conclusion supplies a compatible shift structure and exactness. The triangulation
-on the localization is the induced one, expressed by exactness of `Q`.
-The localization hypothesis uses Mathlib's universe-polymorphic localization interface.
-
-Proof:
-1. The right Kan universal property transports along shift equivalences, giving coherent
-integer shifts on LF and making alpha commute with shifts.
-2. Everywhere-defined denominator values give pointwise Kan limits. Lemma 05SC
-supplies a distinguished triangle of values
-for every distinguished source triangle. Canonical limit comparisons, fraction squares,
-and split-mono cancellation identify it with the image under Q followed by LF.
-3. Proposition 05R6 represents every localized
-distinguished triangle by a source triangle. Map the representing isomorphism by LF,
-compose with the triangle-composition comparison, and use closure under isomorphisms
-in D' to obtain exactness. -/
+(right Kan extension) property along the localization functor `Q`. -/
 theorem leftDerived_exact_when_defined
     (D : Type u) [Category.{v} D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
     [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]

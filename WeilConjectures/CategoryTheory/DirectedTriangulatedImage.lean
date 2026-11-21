@@ -24,16 +24,7 @@ variable {I : Type w} [Preorder I] [Nonempty I]
   (c : CategoryCocone C D) [∀ i, (c.Φ i).CommShift ℤ] [∀ i, (c.Φ i).IsTriangulated]
 
 /-- If all morphisms between images descend, the union of the essential images is
-triangulated.
-
-Proof: zero is the image of zero at any stage. Shift a model and use the functor's shift
-comparison. Isomorphism closure follows by composing the witnessing isomorphisms.
-For a triangle whose first two objects have models, conjugate its first arrow by their
-model isomorphisms and descend the resulting arrow to a common stage. Complete it to a
-distinguished triangle there. Its image and the original triangle have isomorphic first
-arrows, so their third objects are isomorphic. This proves closure under cones. Together
-with shifts it proves closure under extensions, by inverse rotation. The index need only
-be nonempty: the morphism-descent hypothesis itself provides every required common stage. -/
+triangulated. -/
 theorem isTriangulated_exists_essImage (hc : c.HomSurj) :
     ObjectProperty.IsTriangulated (fun Y ↦ ∃ i, (c.Φ i).essImage Y) := by
   let P : ObjectProperty D := fun Y ↦ ∃ i, (c.Φ i).essImage Y

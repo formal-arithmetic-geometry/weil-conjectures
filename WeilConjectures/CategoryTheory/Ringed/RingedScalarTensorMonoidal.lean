@@ -515,27 +515,7 @@ variable {C : Type c} [Category.{v} C]
 -- The normalization identifies tensorators through several monoidal functor constructions.
 /-- The canonical normalized scalar tensor comparison is strong monoidal.
 Source: Stacks Project, sites-cohomology.tex, Tag 07A4,
-and Tag 0FPT.
-
-Proof: use the supplied canonical scalar total-tensor comparison and its
-normalization. The generator formula uniquely fixes the chain comparison;
-the K-flat counit square uniquely fixes its derived comparison. The coefficient unit
-is K-flat in degree zero; scalar multiplication identifies its scalar extension with
-the target unit.
-Localize this map using D's invertible K-flat counit and the recorded unit
-identifications to obtain an invertible derived unit comparison. On three
-K-flat representatives, the associativity diagram sends every generator
-s tensor ((x tensor y) tensor z) to
-(s tensor x) tensor ((1 tensor y) tensor (1 tensor z)) on both routes.
-The two unit diagrams are the scalar action laws. Sheafification and the
-total coproduct summands detect these equalities. The normalization squares, recorded associator
-and unitors, and coefficient unit
-identifications descend them to derived objects. K-flat resolutions and
-naturality give the equations for arbitrary objects. Package the inverse
-unit map and inverse tensor comparison with CoreMonoidal.mk'. This gives m
-with precisely the displayed tensorator. Neither flatness of the coefficient map
-nor boundedness of complexes is required.
--/
+and Tag 0FPT. -/
 theorem ringedScalarTensorMonoidal
     [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R))]

@@ -107,15 +107,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- For any right adjoint G of slice restriction, internal Hom out of a slice
 extension is G of the internal Hom into the restricted argument.
-Source: Stacks Project, Tags 0E8I and 06YN.
-
-Proof: the derived projection formula identifies tensor with the extension of P
-with restriction, tensor with P, and extension in succession. Each of these three
-functors has its specified right adjoint. Their composite right adjoint is
-restriction followed by internal Hom from P followed by G. Uniqueness of right
-adjoints identifies this with internal Hom from the extension of P. Naturality
-in the variable argument is part of the uniqueness isomorphism. No boundedness
-or compactness condition is used. -/
+Source: Stacks Project, Tags 0E8I and 06YN. -/
 theorem ringedOpenDerived_homAdjunction :
     let F : RingedDerivedNative.Modules.{c, v, r} J R ⥤
         RingedDerivedNative.Modules.{max c v, v, r} (J.over U) (R.over U) :=

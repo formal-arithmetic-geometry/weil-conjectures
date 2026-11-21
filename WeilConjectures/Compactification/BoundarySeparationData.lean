@@ -11,9 +11,9 @@ public import WeilConjectures.Compactification.IdealSheafPower
 /-!
 # Separation data for boundary pieces
 
-This file records, as standalone declarations, the auxiliary nodes of the blueprint
-subsection "Separating boundary closures" whose content is
-used inline in `AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures`.
+This file records, as standalone declarations, the auxiliary constructions and statements
+for separating boundary closures that are used in
+`AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures`.
 
 ## Main definitions
 
@@ -55,11 +55,8 @@ namespace Scheme.IdealSheafData
 
 variable {X : Scheme.{u}}
 
-/-- **A finite type nil ideal sheaf is uniformly nilpotent**: on a quasi-compact scheme, a finite-type
-quasi-coherent ideal sheaf with `V(I) = X` has a nonzero power equal to `0`. This is the case
-`A = 0` of `Scheme.IdealSheafData.exists_pow_le`, whose proof is the chart-wise argument of the
-blueprint (finitely generated ideals inside the nilradical are nilpotent, and a finite affine
-cover bounds the exponents). -/
+/-- **A finite type nil ideal sheaf is nilpotent**: on a quasi-compact scheme, a finite-type
+quasi-coherent ideal sheaf with `V(I) = X` has a nonzero power equal to `0`. -/
 theorem exists_pow_eq_bot_of_support_eq_top [CompactSpace X] {I : X.IdealSheafData}
     (hI : I.ofFiniteType) (h : I.support = ⊤) : ∃ n : ℕ, 0 < n ∧ I ^ n = ⊥ := by
   obtain ⟨n, hn⟩ := exists_pow_le (A := ⊥) hI (by rw [h, support_bot])
@@ -150,9 +147,9 @@ section SeparationPreparation
 variable {X : Scheme.{u}} {U : X.Opens}
 
 open Scheme.IdealSheafData in
-/-- **The boundary of `Z = V(I₁ I₂)` over `U` splits into two pieces**: if `V(I₁) ∩ V(I₂) ∩ U = ∅`, the open
-`U_Z = Z ×_X U` of `Z` is the disjoint union of the traces `Pᵢ = Zᵢ ×_X U` of the closed
-subschemes `Zᵢ = V(Iᵢ) ↪ Z`. Both traces are closed in `U_Z`, hence open and closed. -/
+/-- **The boundary of `Z = V(I₁ I₂)` over `U` splits into two pieces**: if
+`V(I₁) ∩ V(I₂) ∩ U = ∅`, the open `U_Z = Z ×_X U` of `Z` is the disjoint union of the traces
+`Pᵢ = Zᵢ ×_X U` of the closed subschemes `Zᵢ = V(Iᵢ) ↪ Z`. -/
 theorem disjoint_range_inclusion_inter_preimage_and_subset
     (I₁ I₂ : X.IdealSheafData)
     (hdisj : Disjoint (U : Set X) ((I₁.support : Set X) ∩ (I₂.support : Set X))) :
@@ -178,18 +175,7 @@ finite-presentation closed immersions) with `Z₁ ∩ Z₂ ∩ U = ∅`; put `Z 
 closed immersions `Zᵢ ↪ Z`. Then there is a finite-presentation closed center `C ↪ Z`, disjoint
 from `U_Z = Z ×_X U`, such that the strict transforms of `Z₁` and `Z₂` in `Bl_C(Z)` are
 disjoint. The center is recorded by a finite-type ideal `K ⊇ I₁ I₂` on `X` with
-`V(K) ∩ U = ∅`: `C = V(K 𝒪_Z)` (finite presentation over `Z` by
-`Scheme.IdealSheafData.ofFiniteType.comap`), and the composite `C ↪ Z ↪ X` is `V(K)`. The
-blow-up of `Z` along `C` is `U_Z`-admissible
-(`Scheme.IdealSheafData.separationPreparationBlowupSubscheme`), and the decomposition
-`U_Z = P₁ ∐ P₂` is `disjoint_range_inclusion_inter_preimage_and_subset`.
-
-The quasi-compactness of `U` assumed in the blueprint is not needed. Instead of the
-nilpotence argument of the blueprint, the proof takes `K = I₁ + I₂` and applies the chart
-argument of Stacks Tag 0F3V (`disjoint_range_strictTransformMap_sup`) to the restrictions of
-`I₁`, `I₂` to `Z`; this is the route described in `separating-boundary-pieces--remark-1`.
-The strict transforms of `Zᵢ ↪ Z` and of `V(Iᵢ 𝒪_Z) ↪ Z` agree since both closed immersions
-have the same image (`range_strictTransformMap_eq_closure`). -/
+`V(K) ∩ U = ∅`: `C = V(K 𝒪_Z)`, and the composite `C ↪ Z ↪ X` is `V(K)`. -/
 theorem exists_separationPreparation [CompactSpace X] [QuasiSeparatedSpace X]
     (I₁ I₂ : X.IdealSheafData) (h₁ : I₁.ofFiniteType) (h₂ : I₂.ofFiniteType)
     (hdisj : Disjoint (U : Set X) ((I₁.support : Set X) ∩ (I₂.support : Set X))) :
@@ -276,8 +262,8 @@ def Scheme.IdealSheafData.separationPreparationBlowupSubscheme [CompactSpace X]
     rw [coe_support_comap]
     exact (separationPreparationCenter_spec I₁ I₂ h₁ h₂ hdisj).2.2.1.preimage _
 
-/-- **The Tag 080P separation blow-up**: for `X` qcqs and finite-presentation closed subschemes `Zᵢ = V(Iᵢ)` with
-`Z₁ ∩ Z₂ ∩ U = ∅`, the `U`-admissible blow-up of `X` along the composite center
+/-- **The Tag 080P separation blow-up**: for `X` qcqs and finite-presentation closed subschemes
+`Zᵢ = V(Iᵢ)` with `Z₁ ∩ Z₂ ∩ U = ∅`, the `U`-admissible blow-up of `X` along the composite center
 `C ↪ Z ↪ X`, where `C ↪ Z = V(I₁ I₂)` is the center of the Tag 080P preparation
 (`Scheme.IdealSheafData.separationPreparationCenter`); the composite center is `V(K)` for the
 chosen ideal `K ⊇ I₁ I₂`, which is of finite type and disjoint from `U`. -/
@@ -346,9 +332,9 @@ lemma Scheme.IdealSheafData.disjoint_support_constructibleClosedExtension [Compa
   exact Set.disjoint_left.mp hdisj (hpre₁ ▸ Set.mem_preimage.mpr hx1)
     (hpre₂ ▸ Set.mem_preimage.mpr hx2)
 
-/-- **The constructible-boundary separation blow-up** `CSepBl_U(T₁, T₂)`: the closed-boundary separation blow-up
-`SepBl_U(Z₁, Z₂)` (`separationBlowup`) of the closed subschemes `Zᵢ = V(𝓘ᵢ)` cut out by the
-extended ideals `𝓘ᵢ = Ext_{X,U}(J_U(Tᵢ))`
+/-- **The constructible-boundary separation blow-up** `CSepBl_U(T₁, T₂)`: the closed-boundary
+separation blow-up `SepBl_U(Z₁, Z₂)` (`separationBlowup`) of the closed subschemes `Zᵢ = V(𝓘ᵢ)` cut
+out by the extended ideals `𝓘ᵢ = Ext_{X,U}(J_U(Tᵢ))`
 (`Scheme.IdealSheafData.constructibleClosedExtension`). -/
 def constructibleSeparationBlowup [CompactSpace X] [QuasiSeparatedSpace X]
     (hU : IsCompact (U : Set X)) {T₁ T₂ : Set U.toScheme} (hT₁ : IsClosed T₁)

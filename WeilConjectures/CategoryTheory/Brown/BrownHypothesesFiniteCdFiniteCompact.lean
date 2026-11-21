@@ -204,14 +204,7 @@ private theorem finiteCoefficientLiftIso (A : Type) [CommRing A] [TopologicalSpa
   exact ⟨Mon.mkIso ea⟩
 
 /-- For a finite discrete admissible coefficient, finite ℓ-cohomological dimension of the
-base field gives the objectwise compactness clause in the Noetherian Brown criterion.
-
-Proof: transport a bounded constructible
-finite-Tor complex to the finite-coefficient étale model, apply the finite-coefficient compactness
-argument using the finite torsion cohomological-dimension bound supplied by
-`cohomologicalDimension_lt_top_of_finiteType`, and transport compactness back through the
-finite discrete coefficient equivalence. The construction is uniform in the finite ring,
-the scheme, and the object; the empty scheme and zero ring are included. -/
+base field gives the objectwise compactness clause in the Noetherian Brown criterion. -/
 theorem brownHypotheses_compact_of_finite_cd_finite
     (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (hpl : p ≠ ℓ)

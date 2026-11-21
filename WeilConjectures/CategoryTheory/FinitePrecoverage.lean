@@ -46,14 +46,12 @@ class IsStableUnderFiniteComposition (J : Precoverage C) : Prop where
     (hg : ∀ i, Presieve.ofArrows (Y i) (g i) ∈ J (X i)) :
     Presieve.ofArrows (fun p : Σ i, σ i ↦ Y _ p.2) (fun _ ↦ g _ _ ≫ f _) ∈ J S
 
-/-- The unrestricted base-change axiom implies its finite-index restriction.
-Proof: apply the unrestricted axiom to the given finite family. -/
+/-- The unrestricted base-change axiom implies its finite-index restriction. -/
 instance finiteBaseChange_of_baseChange (J : Precoverage C) [J.IsStableUnderBaseChange] :
     J.IsStableUnderFiniteBaseChange where
   mem_coverings_of_isPullback := Precoverage.mem_coverings_of_isPullback
 
-/-- The unrestricted composition axiom implies its finite-index restriction.
-Proof: apply the unrestricted axiom to the given finite families. -/
+/-- The unrestricted composition axiom implies its finite-index restriction. -/
 instance finiteComposition_of_composition (J : Precoverage C) [J.IsStableUnderComposition] :
     J.IsStableUnderFiniteComposition where
   comp_mem_coverings := by

@@ -10,7 +10,9 @@ public import Mathlib.CategoryTheory.Abelian.Exact
 /-!
 # Cokernel presentation of an extension from a lifted presentation
 
-Source: Stacks Project, Modules on Sites, Tag 093U (3).
+## References
+
+* Stacks Project, Modules on Sites, Tag 093U (3).
 -/
 
 @[expose] public section
@@ -20,15 +22,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Preadditive
 namespace CategoryTheory
 
 /-- A lift of a presentation of the quotient presents the middle term as a cokernel.
-Source: Stacks Project, Modules on Sites, Tag 093U (3).
 
-Proof: Exactness factors the composite from the relation object through the subobject.
-The map from the biproduct to the middle term is epi: a map killing it kills the subobject,
-hence factors through the quotient, and then is zero since the presentation is epi.
-The map from the relation object to the biproduct is its kernel: the second projection of
-a map killed by the biproduct map factors uniquely through the relation object; monicity
-of the subobject map forces the first projection. In an abelian category an epi is the
-cokernel of its kernel, giving the asserted isomorphism. -/
+Stacks Project, Tag 093U. -/
 theorem exists_cokernel_presentation_of_lift {D : Type u} [Category.{v} D] [Abelian D]
     {M E N K P : D} (i : M ⟶ E) (p : E ⟶ N) (k : K ⟶ P) (q : P ⟶ N)
     (hip : i ≫ p = 0) (hkq : k ≫ q = 0)

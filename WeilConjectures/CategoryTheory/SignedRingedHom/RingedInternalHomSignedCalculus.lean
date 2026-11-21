@@ -97,8 +97,10 @@ import WeilConjectures.Algebra.Homology.KInjectiveHomComplexOfUniverses
 
 /-! # Canonical closed calculus for the recorded ringed-site internal Hom
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YS, 08J9, 08JB and 08JC.
-The original tensor, restriction and exactness statements are retained by public import.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YS, 08J9, 08JB and 08JC.
+  The original tensor, restriction and exactness statements are retained by public import.
 -/
 
 @[expose] public section
@@ -134,15 +136,12 @@ noncomputable instance moduleClosed : MonoidalClosed (Modules J R) :=
   SheafOfModules.monoidalClosed (R := R)
 
 /-- The module category is Grothendieck abelian.
-Source: Stacks 07A5.
-Proof: sheafification is exact and module sheaves have the local free generators. -/
+Source: Stacks 07A5. -/
 instance moduleGrothendieck : IsGrothendieckAbelian.{u} (Modules J R) :=
   SheafOfModules.isGrothendieckAbelian _
 
 /-- Additivity of tensoring module sheaves in either variable.
-Source: Stacks 06YL.
-Proof: tensor is the sheafification of the sectionwise module tensor, whose
-maps are additive in each factor; sheafification is additive. -/
+Source: Stacks 06YL. -/
 theorem moduleMonoidalPreadditive : MonoidalPreadditive (Modules J R) := by
   have (M : Modules J R) : (tensorLeft M).Additive := by
     have : PreservesColimitsOfSize.{0, 0} (tensorLeft M) := inferInstance
@@ -160,12 +159,7 @@ theorem moduleMonoidalPreadditive : MonoidalPreadditive (Modules J R) := by
 attribute [instance] moduleMonoidalPreadditive
 
 /-- Functorial flat covers used to construct the ordinary K-flat derived tensor.
-Source: Stacks 06YL and 06YS, local free covers and their functorial direct sums.
-Proof: take the sum of the free modules extended by zero from site objects, indexed
-by all local sections of the module. The evaluation is an epimorphism, each free
-summand is flat, and sums of flat modules are flat. A module map sends the summand
-indexed by a section to the summand indexed by its image. This gives a functorial
-flat cover, and hence the flat resolutions used in the tensor--Hom construction. -/
+Source: Stacks 06YL and 06YS, local free covers and their functorial direct sums. -/
 theorem moduleFlatResolution : Abelian.HasFunctorialFlatResolution (Modules J R) := by
   exact SheafOfModules.hasFunctorialFlatResolution_kfi R
 
@@ -204,18 +198,14 @@ private theorem nativeMonoidalEquality (A : Type (u + 1)) [Category.{u} A] [Abel
   rfl
 
 /-- The native derived tensor and its explicit localization implementation agree.
-Source: Stacks 06YS, 08J9.
-Proof: both are the localization monoidal structure induced by the same K-flat
-left derivability structure and the same ordinary total tensor. Unfold the
-native instance and identify the localization structure fields. -/
+Source: Stacks 06YS, 08J9. -/
 theorem derivedMonoidal_eq_localization :
     derivedMonoidal J R =
       DerivedMonoidal.instMonoidalCategory DerivedCategory.Qh
         (HomotopyCategory.quasiIso (Modules J R) (ComplexShape.up ℤ)) := by
   exact nativeMonoidalEquality (Modules J R)
 
-/-- The recorded derived internal Hom, with independent-universe implementation
-specialized to this small site.
+/-- The derived internal Hom on the derived category of module sheaves.
 Source: Stacks 08J7. -/
 noncomputable def homFunctor : (D J R)ᵒᵖ × D J R ⥤ D J R :=
   derivedInternalHomOfUniverses.{u, u, u, u} J R
@@ -237,9 +227,7 @@ set_option backward.isDefEq.respectTransparency false
 
 set_option linter.unusedSectionVars false in
 /-- The total tensor used in the representative model is the native complex tensor.
-Source: Stacks 06YL.
-Proof: both are the totalization of the curried sheaf tensor, with the same
-summands, differential and Koszul sign. Unfold the two totalizations. -/
+Source: Stacks 06YL. -/
 theorem totalTensor_eq_native (P L : CochainComplex (Modules J R) ℤ) :
     (WeilConjectures.coefficientTotalTensor.{u, u, u} J R).obj (P, L) = P ⊗ L := by
   rfl
@@ -463,16 +451,7 @@ private theorem normalizedAdjunction_unique
 
 /-- The tensor--Hom adjunction is uniquely fixed by ordinary evaluation on
 K-flat representatives, for the actual derived monoidal structure.
-Source: Stacks 08J9.
-Proof: compute the tensor by a K-flat source and Hom by a K-injective target.
-Componentwise evaluation identifies the two Hom sets by ordinary currying.
-The Hom differential and total-tensor Koszul differential agree under this
-identification. Quasi-isomorphism invariance descends the equivalence through
-the two localizations. It is natural also in the source, giving a closed
-structure S. The total-tensor localization comparison is its representative
-model. Conversely that model fixes uncurrying on every K-flat representative;
-these representatives present the derived category, so it fixes the Hom
-bijections everywhere. An adjunction is determined by its Hom bijections. -/
+Source: Stacks 08J9. -/
 theorem normalizedAdjunction_existsUnique :
     ∃! S : WeilConjectures.CoefficientClosedStructure (homFunctor J R),
       ∃ (h : S.monoidal = derivedMonoidal J R)
@@ -504,10 +483,7 @@ noncomputable def tensorParameterShiftIso (K : D J R) (s : ℤ) (X : D J R) :
     ((((curriedTensor (D J R)).flip.obj K).commShiftIso s).app X).symm
 
 /-- Naturality of the ordinary tensor shift comparison.
-Source: Stacks 08JC.
-Proof: the second-input total-tensor shift is natural in the first input by the
-bifunctor shift structure. The inverse first-input shift is natural by its
-functor commutation with shifts. Compose these two naturality equations. -/
+Source: Stacks 08JC. -/
 theorem tensorParameterShift_naturality (K : D J R) (s : ℤ)
     (X Y : D J R) (f : X ⟶ Y) :
     (tensorRight (K⟦s⟧)).map f ≫ (tensorParameterShiftIso J R K s Y).hom =

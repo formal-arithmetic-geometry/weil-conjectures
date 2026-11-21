@@ -80,20 +80,7 @@ end Fibre
 
 /-- Set inverse image identifies the underlying fibre sheaves, compatibly with their
 inclusions into the abelian middle objects on sections from the adjunction unit.
-Source: Stacks Project, Tag 03AJ (the sheaf of lifts) and Tag 00X6 (finite limits).
-
-Proof: The subtype sheaf of lifts is the equalizer of the underlying quotient map
-and the map sending every section to the restriction of s. Express this as a limiting
-fork, with the subtype inclusion as its arrow. Apply the finite-limit-preserving set
-inverse image. The underlying abelian inverse-image comparison identifies its middle
-and quotient objects with the corresponding abelian inverse images, naturally in the
-quotient map. Its unit equation and the terminal comparison in the global-section
-pullback identify the image of the constant-section map with the restriction of s'.
-The resulting fork is the defining equalizer fork of the target subtype sheaf. The
-unique isomorphism of the two limiting forks gives e. Its equation with the fork
-arrows, evaluated on the set adjunction unit, together with the abelian comparison's
-unit equation, is the displayed equality. No action or torsor-isomorphism transport
-is asserted here. -/
+Source: Stacks Project, Tag 03AJ (the sheaf of lifts) and Tag 00X6 (finite limits). -/
 theorem etale_inverse_image_lifts_fibre
     (X Y : Scheme.{u}) (f : Y ⟶ X)
     (S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

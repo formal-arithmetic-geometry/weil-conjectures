@@ -29,7 +29,8 @@ noncomputable abbrev constantCoefficientRing (B : Type u) [CommRing B] :
     ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of B))
 
 /-- The coefficient unit, with the commutative-ring structure forgotten. Source: Stacks,
-Tag 094I. -/
+Tag 094I.
+-/
 noncomputable def constantCoefficientUnit (B : Type u) [CommRing B] :
     (Functor.const Cᵒᵖ).obj (RingCat.of B) ⟶ (constantCoefficientRing J B).obj :=
   Functor.whiskerRight
@@ -38,8 +39,7 @@ noncomputable def constantCoefficientUnit (B : Type u) [CommRing B] :
 
 /-- Forgetting commutativity preserves local injectivity of the sheafification unit.
 Source: Stacks, Tag 03DA.
-Proof: the underlying functions and equalizer sieves are unchanged by forgetting
-commutativity; the sheafification unit is locally injective. -/
+-/
 theorem constantCoefficientUnit_isLocallyInjective (B : Type u) [CommRing B] :
     Presheaf.IsLocallyInjective J (constantCoefficientUnit J B) := by
   constructor
@@ -49,8 +49,7 @@ theorem constantCoefficientUnit_isLocallyInjective (B : Type u) [CommRing B] :
 
 /-- Forgetting commutativity preserves local surjectivity of the sheafification unit.
 Source: Stacks, Tag 03DA.
-Proof: the underlying functions and image sieves are unchanged by forgetting
-commutativity; the sheafification unit is locally surjective. -/
+-/
 theorem constantCoefficientUnit_isLocallySurjective (B : Type u) [CommRing B] :
     Presheaf.IsLocallySurjective J (constantCoefficientUnit J B) := by
   constructor
@@ -62,7 +61,8 @@ attribute [instance] constantCoefficientUnit_isLocallyInjective
   constantCoefficientUnit_isLocallySurjective
 
 /-- The existing constant-module presheaf, sheafified over the constant commutative
-coefficient ring. Source: Stacks, Tag 094I. -/
+coefficient ring. Source: Stacks, Tag 094I.
+-/
 noncomputable def constantCoefficientModule (B : Type u) [CommRing B] :
     ModuleCat.{u} B ⥤ SheafOfModules.{u} (constantCoefficientRing J B) :=
   strictPerfectConstantPresheaf (C := C) B ⋙
@@ -70,7 +70,8 @@ noncomputable def constantCoefficientModule (B : Type u) [CommRing B] :
 
 /-- Derived scalar extension, selected from the universal left-derived functor in
 `derivedChangeOfRings`; its universal property determines it up to natural isomorphism.
-Source: Stacks, Tag 06YY. -/
+Source: Stacks, Tag 06YY.
+-/
 noncomputable def constantCoefficientScalarExtension
     {B D : Type u} [CommRing B] [CommRing D] (f : B →+* D)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (constantCoefficientRing J B))]

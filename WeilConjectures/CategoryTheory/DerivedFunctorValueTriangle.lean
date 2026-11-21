@@ -18,28 +18,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace CategoryTheory.Functor
 
 /-- Supplied value cones and the first two induced maps extend to a distinguished triangle.
-Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause.
-
-Proof: complete the supplied lf to a distinguished triangle (LX,LY,C,lf,b,c).
-Use MS2 and the common-stage clauses of huX and huY to choose a denominator
-square for mor₁ with compatible retractions alpha and beta. TR1 and MS6 complete
-this square to a denominator triangle, and TR3 extends alpha,beta to gamma into
-(LX,LY,C). Over the cofiltered triangle-morphism category of 05R9, apply Hom(-,W)
-and exact filtered colimits. The cone Hom-colimit comparisons at LX and LY and
-the five lemma give Hom(C,W) -> colim Hom(F(Z'),W) bijective for every W; the
-shifted terms use W[-1]. The pro criterion 05PY constructs a value cone at C,
-and initiality (0A1S) transports it to S/T.obj₃. Its Hom-colimit bijections and
-those of the supplied cone uZ yield the unique isomorphism C -> LZ matching
-all cone legs. The triangle square for b and uniqueness of the induced map in
-05SA identify b followed by this isomorphism with the supplied lg, since hg
-is exactly its defining denominator-square equation. Define lh by the inverse
-isomorphism followed by c. The same cone comparison on the third square,
-with the shift comparison 05SU, gives the displayed equation for every h'.
-Explicitly its target leg is shift.map(uX.app s') followed by commShiftIso.inv;
-MS5 makes the shifted denominator admissible. Transport the distinguished
-triangle along identities at LX,LY and the isomorphism C -> LZ. This proves
-both the universal shifted equation and distinguishedness for the supplied
-objects and maps, without assuming either conclusion. -/
+Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause. -/
 theorem leftDerived_value_triangle_extension
     {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]

@@ -21,15 +21,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory MonObj
 
 namespace CategoryTheory.Mod
 
-/-- A module action descends through a ring quotient when the kernel acts by zero.
-
-Proof: tensor the coefficient cokernel with the underlying module. Right exactness
-makes this a cokernel again, so the action factors uniquely through the quotient.
-The unit equation follows by precomposing with the original ring unit. For the
-associativity equation, precompose with the epimorphism induced by two quotient
-maps and use associativity of the original action. The resulting module has the
-same underlying object and restricts to the original module by the identity.
--/
+/-- A module action descends through a ring quotient when the kernel acts by zero. -/
 theorem exists_quotient_module
     {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
     [MonoidalPreadditive C] [MonoidalClosed C] [SymmetricCategory C]

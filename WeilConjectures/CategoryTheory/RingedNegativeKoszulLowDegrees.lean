@@ -59,19 +59,7 @@ This is a statement about two terms of one finite complex, with no quotient, tow
 coefficient-ring presentation, or augmentation.
 
 Source: Stacks Project, algebraization.tex (0A0E),
-the negative finite free Koszul complex.
-
-Proof: expand the ordered tensor by its standard subset basis. In degree zero the
-only subset is empty, so its inclusion ringedNegativeKoszulBasis is an isomorphism
-from the rank-one module. In degree -1 precisely the singleton subsets survive,
-so their pure-tensor inclusions give an isomorphism from the direct sum of r copies
-of the rank-one module. The differential on the singleton {i} changes the ith
-factor from degree -1 to degree zero and is multiplication by b_i^(m+1).
-All earlier factors have degree zero, so the total-tensor sign is +1. Thus its
-row in these coordinates is exactly the displayed power of ringedKoszulScalar.
-For r=0 the degree -1 term and the empty biproduct are zero; the degree-zero
-identification is the single-complex identification. The same basis calculation
-works on empty sites, over the zero ring, and for zero or unit sections. -/
+the negative finite free Koszul complex. -/
 theorem ringedNegativeKoszulLowDegrees
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) (r : ℕ)

@@ -135,24 +135,7 @@ private theorem kan_value_shift_leg
   simp
 
 /-- Compatible denominator values identify a Kan-extension image triangle.
-Source: Stacks Project, Derived Categories, Tags 05SA, 05SU, 05SC; the value-identification step in Proposition Tag 05SE.
-
-Proof: Each supplied retraction and common-stage factorization makes its denominator
-cone a limit. The pointwise Kan bridge extends it to a structured-arrow limit cone at
-Q(T.obj_i), with the same legs at inverse denominators. Pointwise existence everywhere
-identifies the supplied universal right Kan extension with the pointwise one. Compare
-its three limit cones with the supplied cones, obtaining canonical value isomorphisms.
-For the first two maps, choose a target denominator at which the cone leg has a
-retraction. A right-fraction square supplies a source denominator over the source map.
-The fraction identity and naturality of alpha give the corresponding cone-leg equation;
-the supplied equation then identifies the maps by cancellation of the split-mono leg.
-For the third map, shift the first chosen denominator, which remains in S. Shift
-naturality and the shift-compatibility of alpha identify the shifted Kan cone leg with
-the inverse-denominator leg. The same fraction identity and naturality argument now
-uses the supplied equation for lh. Cancel the shifted split-mono cone leg followed by
-the inverse shift comparison of F. The three isomorphisms and commutative squares
-form the desired triangle isomorphism. This requires no distinguishedness of T or of
-the supplied triangle, and makes no assertion that either triangle is distinguished. -/
+Source: Stacks Project, Derived Categories, Tags 05SA, 05SU, 05SC and 05SE. -/
 theorem leftDerived_kan_triangle_value_comparison
     (D : Type u) [Category.{v} D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
     [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]

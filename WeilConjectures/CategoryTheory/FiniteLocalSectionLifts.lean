@@ -22,12 +22,7 @@ namespace CategoryTheory.Presheaf
 In particular, finitely many entries in a sheafified constant ring are simultaneously
 constant after refinement, by applying this to its sheafification unit.
 
-Source: Stacks, Sites, Tag 00Z5.
-
-Proof: each section has a covering image sieve. Intersect these sieves over the finite
-index set; the empty intersection is maximal, and binary intersections preserve covering.
-Every member of this common sieve admits a preimage of each section. Choose these
-preimages separately, giving the asserted finite tuple. -/
+Source: Stacks, Sites, Tag 00Z5. -/
 theorem finite_local_section_lifts
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     {D : Type w} [Category.{z} D] {FD : D → D → Type*} {CD : D → Type t}

@@ -91,12 +91,7 @@ def finitePowerComplexMap (d : ℕ) (P : CochainComplex A ℤ) :
 
 /-- Mapping a complex by the finite power functor is the finite power of the complex.
 
-Source: Stacks Project, Tag 03DB interchange.
-
-Proof: the coordinate projections define a chain map. In every degree its composite
-with the product comparison for evaluation is the identity, by product extensionality.
-Evaluation preserves products, hence that comparison and the chain map in every degree
-are isomorphisms. A chain map whose components are isomorphisms is an isomorphism. -/
+Source: Stacks Project, Tag 03DB interchange. -/
 def finitePowerComplexIso (d : ℕ) (P : CochainComplex A ℤ) :
     ((finitePowerFunctor d).mapHomologicalComplex (.up ℤ)).obj P ≅
       ∏ᶜ fun _ : Fin d ↦ P := by

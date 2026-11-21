@@ -19,8 +19,8 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 Source: Stacks Project, Cohomology on Sites, Lemma 0D6K, first assertion.
 
-The helper declarations supply the K-injective structure from the recorded existence
-node and define the section functor and its unbounded right derived functor.
+The helper declarations supply the K-injective structure and define the section functor and its
+unbounded right derived functor.
 -/
 
 @[expose] public section

@@ -80,7 +80,7 @@ abbrev v : ModuleCat.{u} Λ ⥤ AddCommGrpCat.{u} :=
   forget₂ (ModuleCat.{u} Λ) AddCommGrpCat.{u}
 
 /-- The literal identity between the two underlying abelian evaluation functors.
-Source: Stacks, 03FD, first proof paragraph. -/
+Source: Stacks, 03FD. -/
 def evaluationIdentity (W : C) : G J Λ W ⋙ v Λ ≅ V J Λ ⋙ G₀ J W :=
   Iso.refl _
 

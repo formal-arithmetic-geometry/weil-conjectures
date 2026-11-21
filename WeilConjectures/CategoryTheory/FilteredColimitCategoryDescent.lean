@@ -24,33 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph and its remark, with Categories, Section Tag 04AX.
-
-Proof: The object and arrow cocones are colimits of sets. Represent any finite
-lists by stage elements and take a common stage using filteredness. For each
-source, target, composition and identity relation holding in the colimit, the
-equality criterion for filtered colimits of sets supplies a further stage where
-it holds. There are only finitely many indices and relations, so another common
-refinement makes all relations hold simultaneously. The same argument applied to
-two finite lists proves eventual equality of the lists of representatives.
-
-For a functor from a finite category, enumerate all objects and all arrows. Apply
-the finite lifting assertion with their endpoint relations and all identity and
-composition relations. The lifted lists define a functor, since these are exactly
-its functor laws. Equality with the original functor follows from its object and
-arrow images, including the endpoint transports.
-
-For an arrow between the images of X,Y at j, choose an arrow representative.
-Take a common stage receiving j and its representative stage. The endpoint
-identities in the object colimit become literal at a further stage; transport the
-representative along these endpoint equalities. This gives the required Hom
-representative. If two Hom representatives have the same image, equality in the
-arrow colimit gives a common refinement where their entire arrows agree. Equalize
-the resulting parallel maps out of j at one further stage by filteredness. This
-proves the forward equality criterion with commuting maps out of j. Conversely,
-commuting refinements and equality of stage arrows give equal images by functor
-compatibility. The argument also applies to empty lists and to the empty finite
-category: filteredness supplies a stage even when no representatives are needed. -/
+/-- Stacks Project, Tags 09YL and 04AX. -/
 theorem filteredColimit_category_descent
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

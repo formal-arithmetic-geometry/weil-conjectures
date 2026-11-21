@@ -122,11 +122,7 @@ private theorem roos_normalization
 /-- The Milnor cone of a total derived strict inverse limit retains the ordinary
 limit projections under its specified derived comparison.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0940 and 0941.
-Proof: use the natural short-exact Roos triangle on a functorial injective resolution.
-The formula for its first arrow cancels the evaluated resolution and the product
-comparison, giving the ordinary projections. Uniqueness of total derived functors
-transports the triangle and the normalization to the supplied comparison. -/
+Source: Stacks Project, Tags 0940 and 0941. -/
 theorem normalizedStrictLimitBase
     {A : Type a} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{g} A]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]

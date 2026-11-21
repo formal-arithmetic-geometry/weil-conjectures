@@ -50,21 +50,7 @@ private theorem scalar_leg_desc
   rw [← Preadditive.comp_nsmul, hinv, Category.comp_id]
 
 /-- A module telescope with ring zeroth leg is the ring localization at its scalar.
-No commutativity of the test ring is required, since natural-number scalars are central.
-
-Proof: Given a:R→B, restrict the regular B-module along a. The maps from the regular
-R-module to B given by a followed by inverse multiplication by l to the nth power
-are a cocone. The given module colimit gives a unique module map b:S→B extending it.
-Its zeroth-leg equation gives preservation of the unit. To check multiplication,
-tensor preserves colimits separately: compare on each pair of telescope legs.
-The nth and mth legs are fractions with denominators l^n and l^m, and their product
-is the (n+m)th leg applied to the product of the numerators. This identity follows
-by cancelling invertible multiplication by l^(n+m) in S. The same identity holds
-in B, proving multiplicativity of b. Finally any ring map extending a commutes with
-multiplication by l and its inverse; it therefore agrees on all telescope legs.
-The colimit property proves uniqueness. This also treats l=0: invertibility of
-zero forces the relevant objects to be zero, and the argument is unchanged.
--/
+No commutativity of the test ring is required, since natural-number scalars are central. -/
 theorem scalar_telescope_ring_universal
     {C : Type u} [Category.{v} C] [MonoidalCategory C] [Preadditive C]
     [MonoidalPreadditive C] [HasColimitsOfShape ℕ C]

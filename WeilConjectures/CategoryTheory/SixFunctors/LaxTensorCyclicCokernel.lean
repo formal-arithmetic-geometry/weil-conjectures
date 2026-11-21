@@ -24,20 +24,7 @@ namespace CategoryTheory
 /-- A lax additive functor's tensor comparison is invertible on a cyclic quotient
 when both coefficient units present that quotient by the same scalar on every image.
 
-Source: Stacks 03EK and 099N(5).
-
-Proof: tensor the source cokernel presentation by M. Since tensor preserves finite
-colimits, after identifying M tensor the unit with M this is the cokernel of its
-scalar dC. Apply F, which preserves finite colimits, and identify F(M tensor the
-unit) with F(M) using the image of the source unitor. On the other hand, tensor
-the target cokernel presentation by F(M), and use its unitor. This gives the
-cokernel of dD acting on F(M). The displayed scalar identity identifies these
-two endomorphisms. Lax monoidal naturality for r, followed by the right unit axiom,
-says that mu F M N intertwines their cokernel projections. The unique map between
-two cokernels of the same endomorphism with this projection equation is an
-isomorphism; its inverse is the comparison in the other direction. This argument
-only uses cokernel universal properties and the specified functor and tensor
-comparisons, and includes the zero quotient and zero source object. -/
+Source: Stacks 03EK and 099N(5). -/
 theorem laxTensorCyclicCokernel
     {C : Type a} [Category.{b} C] [Abelian C] [MonoidalCategory C]
     [MonoidalPreadditive C]

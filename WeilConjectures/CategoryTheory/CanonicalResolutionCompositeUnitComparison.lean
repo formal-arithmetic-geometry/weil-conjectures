@@ -171,23 +171,7 @@ private lemma canonicalResolutionDerivedIso_comp
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Homology of the canonical resolution comparison transports the composite derived unit.
-Source: Stacks Project, Tags 015M and 015N, composition unit and abutment identification.
-
-Proof: Expand grothendieckSpectralObjectHBotTopIso as the inverse composition comparison
-followed by the single-object homology comparison. Apply the ordinary canonical
-resolution homology identity to F composed with G and cancel its resolution comparison.
-The resulting map is homology of the composition comparison followed by RG applied to
-the canonical F comparison. Before applying homology, the defining unit equation for
-the composition comparison and its naturality along the resolution augmentation give
-resolutionDerivedIso_comp above: invert the GF unit and cancel the F unit on the complex
-of injectives. Naturality of the G unit along the F map/extension comparison moves that
-comparison to its source. The map/extension comparison for GF equals the composite of
-G applied to the F comparison and the G comparison; this equality holds degreewise
-from the definitions, including the zero terms in negative degrees. Apply homology and
-naturality of homologyFunctorObjQIso, then cancel the extension homology comparisons.
-The remaining factors are exactly the inverse G map/extension comparison and the G unit
-shown on the right. No positive-degree condition is used.
--/
+Stacks Project, Tags 015M and 015N. -/
 theorem resolution_composite_unit_transport
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [IsGrothendieckAbelian.{vA} A] {B : Type uB} [Category.{vB} B]

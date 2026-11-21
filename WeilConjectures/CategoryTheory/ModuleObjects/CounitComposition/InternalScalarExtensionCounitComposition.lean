@@ -130,17 +130,7 @@ private theorem computationCounit_app_eq {R' S' : C} [MonObj R'] [MonObj S']
     Category.comp_id]
 
 /-- The canonical derived association intertwines the three computation counits.
-Source: Stacks Tags 06YY and 0FND.
-
-Proof: apply the composite derived adjunction's Hom bijection. Adjoint uniqueness
-identifies the transpose of its association with the direct unit and the inverse
-restriction compositor. Transpose the other side successively for the two scalar
-extensions. The normalized derived transpose on complexes replaces each computation
-counit by the ordinary adjunction transpose and the exact restriction factorization.
-The ordinary association is itself defined by adjoint uniqueness, so its double
-transpose is the direct ordinary unit and the inverse ordinary restriction compositor.
-The localization composition equation for exact restrictions identifies the two
-answers. The Hom bijection is injective. No flatness is needed for this identity. -/
+Source: Stacks Tags 06YY and 0FND. -/
 theorem derivedExtendScalars_comp_counit
     (P : CochainComplex (Mod C R) ℤ) :
     let α := (((Mod.derivedExtendMapDerivedCategoryAdjunction φ).comp

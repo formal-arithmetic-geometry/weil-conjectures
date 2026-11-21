@@ -16,9 +16,7 @@ import WeilConjectures.CategoryTheory.SmoothPurity.HomComplexGlobalHomotopyOfUni
 
 Source: Stacks Project, Tags 0A8Z and 08JA.
 
-This is the independent-universe comparison used by the global-sections theorem.  Its
-proof applies zeroth homology to the recorded full derived-sections comparison and
-composes with the ordinary global Hom-complex calculation.
+This is the independent-universe comparison used by the global-sections theorem.
 -/
 
 @[expose] public section
@@ -33,16 +31,7 @@ namespace CategoryTheory
 
 -- The comparison expands several derived-functor and full-subcategory composites.
 set_option backward.isDefEq.respectTransparency false in
-/-- Zeroth hypercohomology of the Hom complex is the homotopy-category Hom bifunctor.
-
-Proof: lift the target functor I to the full subcategory of K-injective complexes.
-The first two comparisons of derived_internalHom_sections_model identify derived
-sections of the sheaf Hom complex with its ordinary sections complex after localization.
-Apply zeroth derived homology and homologyFunctorFactors, then compose with the ordinary
-global Hom-complex calculation. Whiskering retains naturality in both variables.
-No K-flatness of the source is required; zero complexes and the empty site are included.
-
-Source: Stacks Project, Equation 0A8Z and Lemma 08JA. -/
+/-- Zeroth hypercohomology of the Hom complex is the homotopy-category Hom bifunctor. -/
 theorem rhom_hypercohomology_bridgeOfUniverses
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{max c v r})

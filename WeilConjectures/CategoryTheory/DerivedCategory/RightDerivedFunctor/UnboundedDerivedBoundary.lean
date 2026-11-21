@@ -25,14 +25,7 @@ namespace CategoryTheory.ShortComplex
 
 /-- A short complex of additive functors exact on injectives has a unique natural
 boundary on the unbounded derived category normalized by short exact complexes.
-Source: Stacks Project, Tags 079P and 0152.
-
-Proof: Model each derived object by a termwise injective K-injective complex. Conjugate
-the canonical boundary of the resulting short exact complex by the computation
-isomorphisms. The K-injective Hom bijection lifts every derived morphism to a chain map,
-so naturality of short exact complex boundaries proves naturality and independence
-of the model. Comparison with the identity model proves the normalization. Naturality
-along the model isomorphism and normalization prove uniqueness. -/
+Source: Stacks Project, Tags 079P and 0152. -/
 theorem exists_unique_unboundedDerivedBoundary
     {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D] [IsGrothendieckAbelian.{v} C]

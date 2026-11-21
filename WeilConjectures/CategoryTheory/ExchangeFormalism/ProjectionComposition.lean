@@ -272,7 +272,8 @@ lemma exchange_whiskerRight_comp_projectionMorphism_triangle
   simpa only [Category.assoc, Functor.map_comp] using
     F.inv_projectionComparison_triangle hδ i₁ p₁ i₂ p₂ q r i p f g hf hg hi hp w hfg K B
 
-/-- **The composition isomorphism intertwines the exceptional projection morphisms** (SGA 4): for a triangle of factorizations `T` of
+/-- **The composition isomorphism intertwines the exceptional projection morphisms** (SGA 4): for a
+triangle of factorizations `T` of
 `f : X ⟶ Y` and `g : Y ⟶ S`, through the composition isomorphism
 `(i₁, p₁)_! ⋙ (i₂, p₂)_! ≅ (i, p)_!` and `(f ≫ g)^* ≅ g^* ⋙ f^*`, the exceptional projection
 morphism of the composite factorization `(i, p)` of `f ≫ g` is that of `(i₂, p₂)` followed by

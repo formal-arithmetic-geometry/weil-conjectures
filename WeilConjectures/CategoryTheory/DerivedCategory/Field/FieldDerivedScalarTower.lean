@@ -42,11 +42,7 @@ noncomputable def fieldScalarTowerComponent (f : K →+* L) (g : L →+* M)
         (ComplexShape.up ℤ)).app C) ≪≫
     ((ModuleCat.extendScalars (g.comp f)).mapDerivedCategoryFactors.app C).symm
 
-/-- Localization gives the unique tower comparison with these prescribed components.
-Proof: the termwise tensor tower isomorphism is natural and inverts quasi-isomorphisms.
-Lift it through Q using localization. Every derived object is represented by a complex,
-and precomposition with Q is fully faithful on the resulting functors, so the
-prescribed components determine the lift uniquely. -/
+/-- Localization gives the unique tower comparison with these prescribed components. -/
 theorem existsUnique_fieldScalarTower (f : K →+* L) (g : L →+* M) :
     ∃! e : fieldDerivedScalarExtension f ⋙ fieldDerivedScalarExtension g ≅
         fieldDerivedScalarExtension (g.comp f),

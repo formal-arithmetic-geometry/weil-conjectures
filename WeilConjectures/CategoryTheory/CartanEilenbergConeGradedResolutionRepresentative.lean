@@ -27,20 +27,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The graded differential of a lifted resolution summand is its resolution differential.
 Source: Stacks Project, Homology, Tag 012X (second filtration), with the cone
-inclusion from Tag 0133.
-
-Proof: the quotient projection is a chain map. Cancel the monic inclusion of
-step p to compute the differential of l in the ambient cone. The cone right
-inclusion is a chain map. Expand the differential of the flipped total on its
-(r,p) diagonal summand: it is the resolution differential, with coefficient one,
-plus the signed complex-index differential to (r,p+1). By hl' the first term
-is the inclusion of the resolution differential followed by l'. If p>=b,
-the horizontal term factors through step p+1 by hF: its index p+1 belongs to
-[max b (p+1),m']. The inclusions of successive steps commute with their ambient
-inclusions, so monicity identifies the difference of the two lifts with this
-factorization. The quotient kills it by the cokernel relation. If p<b the
-source is zero by hIbelow, evaluated at r, and both sides are zero. The empty
-interval case is thus covered as well. -/
+inclusion from Tag 0133. -/
 theorem cartanEilenberg_cone_graded_resolution_representative
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

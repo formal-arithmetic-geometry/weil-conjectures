@@ -721,24 +721,7 @@ private theorem uniform_bound_coefficientIso
   simpa only [comp_zero, zero_comp, Category.assoc] using hf
 
 /-- Uniform constructible Ext bounds for rational and finite-subextension-valued
-algebraic-closure coefficients over a field of finite ℓ-cohomological dimension.
-
-Proof: X is compact and locally Noetherian, hence topologically Noetherian. For a finite
-coefficient field E, every constructible E-sheaf M is the rationalization of a
-constructible integral sheaf A, glued from integral models on the strata. Fix A and its
-uniform integral cutoff from the finite-cd integral bound. For a constructible target B
-choose an integral model B0. Exact rationalization identifies the rationalized
-single-degree complexes of A and B0 with those of M and B; denominator clearing writes
-ell^s times any map between them as the rationalization of an integral map, which
-vanishes below the cutoff. Multiplication by ell is invertible rationally, so the map
-vanishes. The base rational ring is isomorphic to the bottom finite field ring, and
-restriction along that isomorphism is an equivalence preserving constructibility, which
-transports the bound. For the finite-subextension-valued algebraic closure, descend a
-fixed constructible source to a constructible A over one finite field E; Ext continuity
-over E gives a cutoff for A against every ind-constructible E-target. The restriction to
-E of every constructible algebraic-closure target is ind-constructible, and the derived
-scalar adjunction transports the vanishing. The cutoff depends only on the source; the
-zero module and the empty scheme need no separate argument. -/
+algebraic-closure coefficients over a field of finite ℓ-cohomological dimension. -/
 theorem brownHypotheses_rational_uniformExtBound_of_finite_cd
     (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]

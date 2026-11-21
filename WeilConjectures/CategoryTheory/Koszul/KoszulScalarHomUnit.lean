@@ -258,16 +258,7 @@ private theorem homDiagramComparison_unit (φ : R ⟶ B) (r : ℕ)
     hc ht (homUnitScalar φ N)
 
 /-- Coaugmentation of the scalar Koszul comparison.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Canonical evaluation carries the tensor coaugmentation to the inverse Hom-unit
-evaluation followed by precomposition with the Koszul projection. This is the existing normalized
-evaluation-unit identity.
-Proof step 2: Check the scalar theta unit identity using its normalized local evaluation formula:
-on sections the scalar-extension unit generator is exactly multiplication. Invert this identity
-to obtain compatibility of inverse Hom-unit evaluations.
-Proof step 3: Naturality of theta with the Koszul projection and the assumed projection
-compatibility give the Hom diagram unit identity. Cancel the R Koszul evaluation isomorphism and
-substitute steps 1 and 2 to get the tensor diagram coaugmentation identity. -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 private theorem tensorDiagramComparison_unit (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections)
     (e : ringedKoszulDiagram R r a ⋙

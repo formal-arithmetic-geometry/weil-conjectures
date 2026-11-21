@@ -15,7 +15,9 @@ import Mathlib.Algebra.Homology.QuasiIso
 
 /-! # The cohomology image filtration
 
-Source: Stacks Project, Tags 012P and 012W.
+## References
+
+* Stacks Project, Tags 012P and 012W.
 -/
 
 @[expose] public section
@@ -39,13 +41,8 @@ private theorem complexStep_antitone (n : ℤ) : Antitone (fun p ↦ L.complexSt
   simpa only [complexStep, ← HomologicalComplex.comp_f, Subobject.ofLE_arrow] using h
 
 /-- Degreewise finite filtrations induce a finite cohomology image filtration.
-Source: Stacks Project, Tag 012W, using the image filtration in Tag 012P.
 
-Proof. Take the minimum of the lower bounds in degrees n-1, n and n+1.
-Antitonicity makes all three steps at this minimum top. The inclusion of this
-subcomplex is an isomorphism in those three degrees; hence its map on H^n is
-an isomorphism and its image is top. At the upper bound in degree n the
-subcomplex has zero term, so its H^n is zero and the image is bottom. -/
+Stacks Project, Tags 012W and 012P. -/
 theorem cohomologyImage_isFinite
     (hfinite : ∀ n : ℤ, ∃ lo hi : ℤ,
       L.complexStep lo n = ⊤ ∧ L.complexStep hi n = ⊥)

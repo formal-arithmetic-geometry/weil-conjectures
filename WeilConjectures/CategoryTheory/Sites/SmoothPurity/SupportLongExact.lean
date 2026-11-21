@@ -34,7 +34,8 @@ import WeilConjectures.CategoryTheory.InjectiveSheafMonoRestriction
 /-!
 # The long exact sequence of cohomology with support
 
-Source: Milne, Lectures on Etale Cohomology, Section 9, Theorem 9.4; Stacks Project, Tags 093X, 03F3, 0117, 070I.
+Source: Milne, Lectures on Etale Cohomology, Section 9, Theorem 9.4; Stacks Project, Tags 093X,
+03F3, 0117, 070I.
 -/
 
 @[expose] public section

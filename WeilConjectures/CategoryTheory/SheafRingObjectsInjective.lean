@@ -85,12 +85,9 @@ private theorem presheaf_eq {D : Type u} [Category.{v} D]
   simpa only [eqToHom_app, CategoryTheory.Functor.comp_map, Category.assoc,
     eqToHom_trans, eqToHom_refl, Category.comp_id] using hm'
 
-/-- Injectivity component of internal ring-object reconstruction.
-Proof in words: Given equal internal objects, the underlying sheaves agree by `hF`.
-The five transported sectionwise operations agree by `hops`, so addition, zero,
-negation, multiplication, and one agree on every section. Ring structures,
-restriction maps, and sheaf witnesses are then equal by extensionality and
-proof irrelevance, yielding equality of the original sheaves of rings. -/
+/-- A functor from sheaves of commutative rings to internal commutative ring objects in sheaves
+of sets, compatible with the forgetful functors and the sectionwise operations, is injective
+on objects. -/
 theorem sheafRingObjects_injective
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (F : Sheaf J CommRingCat.{max u v w} ⥤

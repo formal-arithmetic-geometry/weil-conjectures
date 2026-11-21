@@ -41,7 +41,7 @@ Finally each target object has an actual covering by image objects; its index ty
 `Type (max uc vd)` holds every family of pairs `(U, F.obj U ⟶ V)`. Empty coverings
 are allowed throughout. The categories are not required to be small, so that large
 sites such as the small etale site `X.Etale` are covered (as in
-`siteContinuous_pushforward_isSheaf`). As in the node, the equivalence-of-topoi
+`siteContinuous_pushforward_isSheaf`). The equivalence-of-topoi
 conclusion of 03A0 is not included as an additional condition. -/
 def IsSpecialCocontinuousForCoverings
     {C : Type uc} [Category.{vc} C] {D : Type ud} [Category.{vd} D]

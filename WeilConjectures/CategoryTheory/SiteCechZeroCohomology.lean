@@ -14,7 +14,9 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 /-!
 # Degree-zero Čech cohomology of an abelian sheaf
 
-Source: Stacks Project, Cohomology on Sites, Tag 03AN.
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 03AN.
 -/
 
 @[expose] public section
@@ -121,16 +123,7 @@ private theorem cech_zero_glue
   exact he
 
 /-- Degree-zero Čech cohomology of an abelian sheaf is its sections on the covered object.
-Source: Stacks Project, Cohomology on Sites, Tag 03AN.
-
-Proof: the alternating degree-zero differential says precisely that the transported
-sections on the covering objects agree on every pairwise fibre product. The universal
-property of those products makes this the compatibility condition for arbitrary arrows
-with equal composites. The sheaf condition therefore gives a unique global section.
-Restriction is additive and identifies global sections bijectively with the kernel of
-the degree-zero differential. The incoming differential is zero, so abstract homology
-is isomorphic to the cycles, which are this concrete kernel. Compose these isomorphisms
-with the inverse of restriction. No injectivity or nonempty-cover hypothesis is used. -/
+Source: Stacks Project, Cohomology on Sites, Tag 03AN. -/
 theorem site_cech_zero_cohomology
     {C : Type u} [Category.{v} C]
     {J : Precoverage C} [J.HasIsos] [J.IsStableUnderComposition]

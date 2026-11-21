@@ -102,9 +102,7 @@ private theorem square_monoidal [G.Monoidal] [IsIso (ε L)]
     exact (hδ X Y).symm
 
 /-- Braided localization together with the monoidal factorization it constructs.
-Source: Stacks Project, Tags 06YS and 06YT. The proof is the localization-square
-construction, retaining its monoidal factorization conclusion.
-Source: Tags 06YS and 06YT. -/
+Source: Stacks Project, Tags 06YS and 06YT. -/
 theorem normalizedBraidedLocalization (W : MorphismProperty A)
     [W.ContainsIdentities] [W.RespectsIso] [Q.IsLocalization W]
     [W.localizerMorphismKFlat.IsLeftDerivabilityStructure]

@@ -9,9 +9,11 @@ public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 
 /-! # The signed coface identity without degeneracies
 
-Source: Stacks Project, Tag 0194. Only the coface relations are needed for the
-alternating differential to square to zero. The proof pairs two ways of deleting
-two positions, exactly as in Mathlib's alternating face-map complex.
+Only the coface relations are needed for the alternating differential to square to zero.
+
+## References
+
+* Stacks Project, Tag 0194.
 -/
 
 @[expose] public section
@@ -24,11 +26,8 @@ namespace CategoryTheory
 
 variable {C : Type*} [Category C] [Preadditive C]
 
-/-- Double-deletion cancellation for a system of cofaces, without degeneracies.
-Source: Stacks Project, Tag 0194. Partition pairs `(i,j)` according to `j ≤ i`.
-The bijection `(i,j) ↦ (j,i+1)` pairs every term in the first part with a term
-in the complement. The coface identity identifies their composites and the
-incremented index reverses the sign, so the two sums cancel. -/
+/-- Double-deletion cancellation for a system of cofaces, without degeneracies: the
+alternating sum of cofaces composes to zero. Stacks Project, Tag 0194. -/
 theorem alternatingCofaceSquare (A : ℕ → C)
     (δ : ∀ n : ℕ, Fin (n + 2) → (A n ⟶ A (n + 1)))
     (hδ : ∀ (n : ℕ) (i : Fin (n + 2)) (j : Fin (n + 3)) (h : j.val ≤ i.val),

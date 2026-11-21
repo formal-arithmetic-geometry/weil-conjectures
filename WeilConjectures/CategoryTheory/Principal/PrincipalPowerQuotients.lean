@@ -31,9 +31,7 @@ def sectionPowerIdeal (n : ℕ) (U : Cᵒᵖ) : Ideal (B.obj.obj U) :=
   Ideal.span {(@id (B.obj.obj U) (t.val U)) ^ n}
 
 /-- Restriction carries the power ideal into the power ideal.
-Source: Stacks 00YR.
-Proof: restriction sends the generator t_U^n to t_V^n by naturality of t and
-preservation of powers by ring homomorphisms; it therefore preserves its ideal. -/
+Source: Stacks 00YR. -/
 theorem sectionPowerIdeal_restrict (n : ℕ) {U V : Cᵒᵖ} (f : U ⟶ V) :
     sectionPowerIdeal B t n U ≤
       Ideal.comap (B.obj.map f).hom (sectionPowerIdeal B t n V) := by
@@ -51,8 +49,7 @@ def sectionPowerQuotientMap (n : ℕ) {U V : Cᵒᵖ} (f : U ⟶ V) :
     (B.obj.map f).hom (sectionPowerIdeal_restrict B t n f))
 
 /-- Identity restrictions on the quotient rings.
-Source: Stacks 00YR.
-Proof: every quotient class lifts to a section; both sides send its class to itself. -/
+Source: Stacks 00YR. -/
 theorem sectionPowerQuotientMap_id (n : ℕ) (U : Cᵒᵖ) :
     sectionPowerQuotientMap B t n (𝟙 U) = 𝟙 _ := by
   apply CommRingCat.hom_ext
@@ -64,8 +61,7 @@ theorem sectionPowerQuotientMap_id (n : ℕ) (U : Cᵒᵖ) :
   rfl
 
 /-- Composition of restrictions on the quotient rings.
-Source: Stacks 00YR.
-Proof: lift a quotient class to a section and apply the composition law of B. -/
+Source: Stacks 00YR. -/
 theorem sectionPowerQuotientMap_comp (n : ℕ) {U V W : Cᵒᵖ}
     (f : U ⟶ V) (g : V ⟶ W) :
     sectionPowerQuotientMap B t n (f ≫ g) =
@@ -88,8 +84,7 @@ def sectionPowerQuotientPresheaf (n : ℕ) : Cᵒᵖ ⥤ CommRingCat.{r} where
   map_comp := sectionPowerQuotientMap_comp B t n
 
 /-- Naturality of taking a section's quotient class.
-Source: Stacks 00YR.
-Proof: both composites send b to the class of its restriction. -/
+Source: Stacks 00YR. -/
 theorem sectionPowerQuotientProjection_naturality (n : ℕ) {U V : Cᵒᵖ} (f : U ⟶ V) :
     B.obj.map f ≫ CommRingCat.ofHom (Ideal.Quotient.mk (sectionPowerIdeal B t n V)) =
       CommRingCat.ofHom (Ideal.Quotient.mk (sectionPowerIdeal B t n U)) ≫

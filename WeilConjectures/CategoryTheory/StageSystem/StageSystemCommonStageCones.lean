@@ -10,8 +10,8 @@ public import Mathlib.CategoryTheory.Triangulated.Functor
 
 /-! # Common-stage cone triangles
 
-The construction is stated for the directed exact stage system supplied by that node.
-Its application has finite coefficient fields as indices and the raw rational stages.
+The construction is stated for a directed exact stage system. Its application has finite
+coefficient fields as indices and the raw rational stages.
 -/
 
 @[expose] public section

@@ -20,14 +20,9 @@ variable {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{wC} C]
   {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] [HasExt.{wE} B]
   (U : C ⥤ B) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
 
-/-- For exact additive U and η:F→UH with DerivedUnit [def-sp-exact-functor-derived-unit], the
-degree-zero class mk0(η) has DerivedExtUnit [def-sp-derived-scalar-ext-unit].
-Source: Stacks 0152,
-06YY and 0GLZ.
-Proof: The zero-shift functor is canonically isomorphic to the identity. Transfer the domain Hom set
-through that isomorphism and use the given unit bijection. The zero-shift coherence for exact
-derived functors and the formula for mk0 identify the transferred function with the displayed
-degree-zero Ext unit. -/
+/-- For exact additive `U` and `η : F ⟶ U H` with `DerivedUnit`, the degree-zero class
+`mk₀ η` has `DerivedExtUnit`.
+Source: Stacks Tags 0152, 06YY and 0GLZ. -/
 theorem DerivedUnit.extUnit_zero {F : B} {H : C} {η : F ⟶ U.obj H}
     (h : U.DerivedUnit F H η) : U.DerivedExtUnit F H 0 (Ext.mk₀.{wE} η) := by
   unfold DerivedExtUnit DerivedUnit at *

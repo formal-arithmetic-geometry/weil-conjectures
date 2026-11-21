@@ -27,20 +27,7 @@ namespace CategoryTheory
 
 /-- Gabriel-Popescu localization followed by Brown representability on the module
 category supplies a representation of the pullback of H.  Source: Stacks Project,
-Tag 0F5X, `injectives-, first paragraph, and Tag 0F5V.
-
-Proof in words: choose a Gabriel-Popescu presentation by modules over the endomorphism
-ring of a generator. Its exact localization induces L on derived categories, with
-fully faithful derived right adjoint R and invertible counit. L is exact and preserves
-coproducts, so H composed with L is cohomological and sends coproducts to products.
-The free rank-one module is a compact generator of the module derived category.
-Apply compact-generator Brown representability to obtain E and its natural Hom
-bijections. Lift both sets to max(w,vH), obtaining the displayed isomorphism.
-Use module complexes in the universe max(w,vH), so their Hom types and the
-lifted H values share a universe. Lift the object universe, if necessary, to
-max(uA,vA,max(w,vH)+1). The explicit larger coproduct hypothesis covers the
-universe used in Brown's construction. No splitting of the unit
-or retract in the target category is included in this assertion. -/
+Tag 0F5X, `injectives-, first paragraph, and Tag 0F5V. -/
 theorem grothendieckDerived_localization_brown_data
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]

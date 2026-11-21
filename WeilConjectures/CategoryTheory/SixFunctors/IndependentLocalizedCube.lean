@@ -61,13 +61,7 @@ variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory.{q} C]
   (φm : DerivedCategory.Q ⋙ mD ≅ m.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
 
 /-- Localization preserves a cube with all six faces fixed on complex representatives.
-Source: Stacks 05S7 and 014F.
-
-Proof: precompose with Q, a fully faithful operation on functor categories. Cancel
-three terminal factorization isomorphisms. Substitute the six representative
-identities, using naturality to move the factors to the beginning of each path.
-Both paths are the same initial factors followed by Q of the ordinary cube.
-Equality holds degree by degree by the ordinary cube equation. -/
+Source: Stacks 05S7 and 014F. -/
 theorem localized_exactCube
     (q1 : a ⋙ b ≅ d ⋙ e)
     (q2 : e ⋙ c ≅ f ⋙ g)

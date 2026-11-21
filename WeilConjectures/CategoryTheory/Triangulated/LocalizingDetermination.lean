@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 
 Let `C` be a pretriangulated category and `P : ObjectProperty C`, with localizing closure
 `Loc(P) = P.localizingClosure` (`WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure`).
-The arguments of the blueprint which extend a statement from `P` to `Loc(P)` ("the objects
+The arguments which extend a statement from `P` to `Loc(P)` ("the objects
 satisfying it form a localizing subcategory containing `P`") are collected here. They only need
 the functors involved to be triangulated and to preserve the coproducts of objects of `Loc(P)`
 (`CategoryTheory.Functor.PreservesCoproductsOn`), not all coproducts: for instance the proper

@@ -40,17 +40,7 @@ namespace CategoryTheory
 tower, including towers whose terms are not injective.
 
 Source: Stacks 0941, and 070I, comparison of
-K-injective resolutions.
-
-Proof: Resolve the supplied tower by a K-injective tower with injective terms. Since
-both towers are K-injective, the resolution map is a homotopy equivalence. The additive
-ordinary-limit functor preserves this equivalence; identify its complex-valued model
-with the ordinary limit of evaluated complexes by the limit universal property.
-The strict Roos homotopy functor preserves the same equivalence. The augmentation
-on the injective-term target is a quasi-isomorphism by the split-transition/kernel
-argument of Stacks 0941. Naturality gives the square with these two equivalences.
-Two-out-of-three then proves the assertion for the supplied tower. This uses no
-exactness assumption on products and applies to the zero tower as well. -/
+K-injective resolutions. -/
 theorem kInjectiveRoosAugmentation
     {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory.{w} A]

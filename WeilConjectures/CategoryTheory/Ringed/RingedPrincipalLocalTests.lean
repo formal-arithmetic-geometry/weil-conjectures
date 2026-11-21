@@ -94,8 +94,7 @@ def principalSliceSection {C : Type c} [Category.{v} C]
     rw [← ConcreteCategory.comp_apply, ← R.obj.map_comp, ← op_comp, Over.w]
 
 /-- A section on a slice is determined by its value on the terminal object.
-Source: Stacks 0999.
-Proof: naturality for the unique arrow from an object to the identity arrow. -/
+Source: Stacks 0999. -/
 theorem principalSliceSection_eta {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{max c v r})
     (U : C) (s : ((R.over U).obj ⋙ forget CommRingCat).sections) :
@@ -156,10 +155,7 @@ def principalLocallyComplete (a : (R.obj ⋙ forget CommRingCat).sections)
     IsZero (principalLocalTest.{c, v, r, w} R N U s)
 
 /-- Principal local completeness is invariant under isomorphism of derived objects.
-Source: Stacks 0999.
-Proof: exact derived restriction and internal Hom carry an isomorphism in the
-second argument to an isomorphism of each localization test; zero objects are
-invariant under this isomorphism. Apply the construction in both directions. -/
+Source: Stacks 0999. -/
 theorem principalLocallyComplete_iso
     (a : (R.obj ⋙ forget CommRingCat).sections)
     {N M : DerivedCategory (SheafOfModules.{max c v r} Rg)} (e : N ≅ M) :

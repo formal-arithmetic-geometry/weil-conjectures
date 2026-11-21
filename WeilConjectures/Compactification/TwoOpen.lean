@@ -339,8 +339,8 @@ end Graph
 
 section Structure
 
-/-- **Separatedness of the intermediate scheme** (Stacks Project Tag 0F3U): the two charts of `Wᵢ ⟶ S` are separated and
-their overlap is a closed immersion. -/
+/-- **Separatedness of the intermediate scheme** (Stacks Project Tag 0F3U): the two charts of `Wᵢ ⟶
+S` are separated and their overlap is a closed immersion. -/
 theorem isSeparated_intermediateHom [IsSeparated u] : IsSeparated σ.intermediateHom := by
   have := σ.isProper_s
   have : IsSeparated (σ.interior.ι ≫ σ.s) := inferInstance
@@ -408,10 +408,10 @@ namespace TwoOpenPreparation
 
 variable {O₁ O₂ : U.Opens} {u : U ⟶ S} (P : TwoOpenPreparation u O₁ O₂)
 
-/-- The **final common modification** of the two-open construction: a common modification (Stacks Project
-Tag 0F3X) of the two intermediate schemes `W₁`, `W₂` along their common open `U`. It
-consists of `U`-admissible blow-ups `Wᵢ' ⟶ Wᵢ` glued to a scheme `W` over `S`; the
-induced open immersion `U ⟶ W` is `CommonModification.j`. -/
+/-- The **final common modification** of the two-open construction: a common modification (Stacks
+Project Tag 0F3X) of the two intermediate schemes `W₁`, `W₂` along their common open `U`. It
+consists of `U`-admissible blow-ups `Wᵢ' ⟶ Wᵢ` glued to a scheme `W` over `S`; the induced open
+immersion `U ⟶ W` is `CommonModification.j`. -/
 abbrev FinalModification : Type (u + 1) :=
   CommonModification P.side₁.intermediateHom P.side₂.intermediateHom
     P.side₁.intermediateU P.side₂.intermediateU
@@ -474,10 +474,10 @@ theorem spec :
   ⟨cm.u₁_blowupMap, cm.u₂_blowupMap, inferInstance, inferInstance, cm.cover, cm.u_glue,
     inferInstance, inferInstance, inferInstance, inferInstance, cm.j_comp_w⟩
 
-/-- **Density after the final common modification**: the map `O₁ ∩ O₂ ⟶ W` is dominant. The copies of
-`U` are dense in the intermediate schemes, density is transported through the common
-modification, and `O₁ ∩ O₂` is dense in `U`. Its
-quasi-compactness is automatic, as `O₁ ∩ O₂` is Noetherian. -/
+/-- **Density after the final common modification**: the map `O₁ ∩ O₂ ⟶ W` is dominant. The copies
+of `U` are dense in the intermediate schemes, density is transported through the common
+modification, and `O₁ ∩ O₂` is dense in `U`. Its quasi-compactness is automatic, as `O₁ ∩ O₂` is
+Noetherian. -/
 theorem isDominant [IsNoetherian S] [LocallyOfFiniteType u] [QuasiCompact u]
     (hdense : Dense ((O₁ ⊓ O₂ : U.Opens) : Set U)) :
     IsDominant ((O₁ ⊓ O₂ : U.Opens).ι ≫ cm.j) := by

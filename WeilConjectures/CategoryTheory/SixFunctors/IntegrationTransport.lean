@@ -21,14 +21,7 @@ namespace CategoryTheory
 /-- A natural direct-image comparison carries an integration identity through
 its source, class and trace squares. Only the unit comparison needs to be
 invertible for this implication; no general preservation of inverse limits or
-base-change theorem is used.
-
-Proof: precompose the desired identity by the unit isomorphism. Use the
-supported-source square, the class square, naturality of the direct-image
-comparison, and the trace square, in that order. The result is the image of
-the original integration composite, hence the identity. Cancel the unit
-isomorphism. This also works for zero objects and for noninvertible comparison
-components away from the coefficient unit. -/
+base-change theorem is used. -/
 theorem integration_transport
     {C : Type u₁} {D : Type u₂} {C' : Type u₃} {D' : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} C'] [Category.{v₄} D']

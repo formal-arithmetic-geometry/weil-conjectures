@@ -21,14 +21,7 @@ open CategoryTheory.Limits
 open scoped TensorProduct
 
 /-- A tensor-Hom equivalence gives common prime-power denominators and detects
-exactly prime-power torsion in the kernel on integral arrows.
-Proof: identify each target Hom group with the corresponding raw tensor module
-using the equivalence and its specified comparison on integral objects. Module
-localization clears a denominator of an arbitrary tensor and detects equality
-of tensors with coefficient one. Since the denominator is a power of a natural
-number, its action is repeated addition; the additive Hom identification
-preserves that action. Naturality identifies coefficient-one tensors with the
-original functor's arrows. -/
+exactly prime-power torsion in the kernel on integral arrows. -/
 theorem scalarTensor_denominators
     (R : Type*) [CommRing R] {C D : Type*} [Category* C] [Category* D]
     [Preadditive C] [Linear R C] [Preadditive D] [HasBinaryProducts D]

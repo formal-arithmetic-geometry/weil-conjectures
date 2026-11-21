@@ -37,9 +37,7 @@ noncomputable def presheafFreeNerveComplex
   (AlgebraicTopology.alternatingFaceMapComplex _).obj
     (f.cechNerve ⋙ PresheafOfModules.free R)
 
-/-- Objectwise exactness of a complex of presheaf modules implies exactness.
-Proof: kernels and cokernels in presheaf module categories are computed objectwise,
-so the family of evaluation functors jointly reflects the zero homology condition. -/
+/-- Objectwise exactness of a complex of presheaf modules implies exactness. -/
 theorem exactAt_of_presheaf_evaluations
     {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v})
     (K : ChainComplex (PresheafOfModules.{v} R) ℕ) (a : ℕ)
@@ -218,7 +216,7 @@ theorem presheafFreeNerveComplex_exactAt_eval
     (by simpa only [LinearMap.exact_iff, eq_comm] using
       setNerve_positive_exact (R.obj X) (f.hom.app X) n)
 
-/--  -/
+/-- The free module Čech nerve complex of a map of presheaves is exact in positive degrees. -/
 theorem presheafFreeNerveComplex_exactAt
     {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v})
     (f : Arrow (Cᵒᵖ ⥤ Type v)) (n : ℕ) :

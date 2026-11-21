@@ -44,14 +44,7 @@ private theorem cochainMate_unit
 
 /-- An ordinary right comparison between equivalences determines an inverse
 comparison whose cochain localization is prescribed by the normalized derived mate.
-Source: Stacks 0FND and 09T5.
-Proof: the inverse mate of the ordinary right comparison is invertible because
-both vertical functors are equivalences. Let e be its inverse. Prolong its unit
-identity degreewise to cochain complexes. Apply the abstract invertible mate
-comparison with the four localization functors, the supplied Hom normalizations,
-the right-unit square, and the prescribed derived mate. The resulting inverse
-comparison is the displayed equation for every complex. The calculation uses
-no invertibility of the right-derived units and no boundedness condition. -/
+Source: Stacks 0FND and 09T5. -/
 theorem cochainInverseMate_comparison
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]

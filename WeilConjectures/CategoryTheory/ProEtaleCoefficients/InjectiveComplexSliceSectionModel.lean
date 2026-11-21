@@ -49,7 +49,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 /-!
 # Compatible slice section models from one injective complex
 
-Source: Stacks Project, `sites-cohomology.tex`, Tag 03F3 and restriction-mapping equation; `derived.tex`, Tags 05TI, 05TH, 05SA.
+Source: Stacks Project, `sites-cohomology.tex`, Tag 03F3 and restriction-mapping equation;
+`derived.tex`, Tags 05TI, 05TH, 05SA.
 -/
 
 @[expose] public noncomputable section

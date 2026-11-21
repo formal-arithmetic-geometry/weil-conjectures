@@ -16,8 +16,7 @@ Let `C` be an abelian category and `s` an object of its derived category. We say
 `Hom(s, -[n])` *commutes with filtered colimits* of objects of `C`
 (`DerivedCategory.HomCommutesWithFilteredColimits`) if for every filtered colimit
 `B = colim Bᵢ` in `C` and every `n`, the canonical map `colim Hom(s, Bᵢ[n]) ⟶ Hom(s, B[n])` is
-bijective. This is blueprint `lemma-continuity-ext-out-constructible-complex--1` for targets in
-degree `0`.
+bijective.
 
 * The class of such `s` contains zero, is closed under isomorphisms, shifts and extensions.
 * For `s` bounded above, the comparison is then bijective for every filtered diagram `Yᵢ` in
@@ -383,7 +382,7 @@ lemma isColimit_homologyFunctor_mapCocone_truncGE
 
 end Truncation
 
-/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1` for targets in degree `0`: for
+/-- For targets in degree `0`: for
 every filtered colimit `B = colim Bᵢ` of objects of `C` (indexed by a category in `Type w`) and
 every `n`, the map `colim Hom(s, Bᵢ[n]) ⟶ Hom(s, B[n])` is surjective (every morphism factors
 through some `Bᵢ[n]`) and injective (a morphism to `Bᵢ[n]` which vanishes in `B[n]` vanishes in some

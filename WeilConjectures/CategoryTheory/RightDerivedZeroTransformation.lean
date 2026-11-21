@@ -25,14 +25,7 @@ namespace CategoryTheory
 variable {C D : Type*} [Category* C] [Category* D]
   [Abelian C] [HasInjectiveResolutions C] [Abelian D]
 
-/-- Source: Stacks Project, Tag 0156, construction of the zeroth right derived functor.
-
-Proof: On a chosen resolution P of M, the augmentation is the map into the
-zeroth cycles followed by cycles-to-homology and the derived comparison.
-The induced map on homology commutes with cycles-to-homology. The induced
-map on cycles commutes with the augmentations: cancel their monomorphic
-inclusions into the degree-zero terms and use naturality of α at P.ι⁰.
-Cancel the target derived comparison and combine these equalities. -/
+/-- Source: Stacks Project, Tag 0156, construction of the zeroth right derived functor. -/
 theorem rightDerived_zero_transformation
     {A B : C ⥤ D} [A.Additive] [B.Additive] (α : A ⟶ B) (M : C) :
     A.toRightDerivedZero.app M ≫ (α.rightDerived 0).app M =

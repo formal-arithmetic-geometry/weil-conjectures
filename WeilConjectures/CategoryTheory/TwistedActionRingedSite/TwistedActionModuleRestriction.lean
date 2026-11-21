@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionModul
 
 /-! # Modules on a fixed twisted action site
 
-Source: the agent-formulated twisted variant of Stacks Tag 00W0, original steps 3 and 4.
+## References
+
+* Stacks Project, Tag 00W0 (motivation for the twisted construction).
 -/
 
 @[expose] public section
@@ -296,25 +298,7 @@ private theorem restriction_essSurj [HasPullbacks C] :
   exact ⟨N, ⟨(ObjectProperty.isoMk _ (Endofunctor.Algebra.isoMk b.symm h)).symm⟩⟩
 
 /-- Module restriction for a specified underlying twisted action site.
-
-Source: original steps 3 and 4 of the agent-formulated twisted variant of Stacks 00W0,
-`sites.tex`, together with Stacks 03CV.
-
-Proof: restrict a coefficient module to degree-zero arrows and transport its scalars
-through coefficientRestriction. Apply its restriction along the minus-one generator,
-then the inverse, to obtain the structure isomorphism for sigma. The coefficient
-normalization says precisely that this is linear over a inverse. The category laws
-give the intertwining equation for every module morphism. Conversely, iterate a
-fixed pair's structure isomorphism for positive and negative powers to define the
-restriction along every labelled arrow. Naturality, invertibility, and the power
-comparisons give identity and composition. The generating-cover criterion in the
-site construction identifies the sheaf conditions on C and on the action site, so
-these extensions are sheaves of modules. These constructions are inverse, with
-coefficient transport supplying the displayed natural restriction isomorphism.
-On the minus-one generator they give exactly the displayed equation. Since every
-map is the same family of sectionwise linear maps, restriction preserves sums.
-The construction also holds for zero modules and the zero ring. No set-sheaf
-presentation, geometric adjunction, or translation equivalence is asserted here. -/
+Source: Stacks 03CV. -/
 theorem moduleRestriction [HasPullbacks C] (S : Site J s R a) :
     letI := S.category
     letI := S.inclusion_continuous

@@ -27,13 +27,7 @@ private theorem tensor_second_comp {C : Type*} [Category C] (B : C × C ⥤ C)
   simp
 
 /-- A normalized scalar evaluation square commutes with the specified dual shifts,
-provided the tensor cancellation maps commute with scalar extension.
-Proof: cancel the target dual shift and test both maps by evaluation. Naturality
-of tensor cancellation moves beta through that evaluation. The normalized beta
-square, followed by the scalar tensor cancellation square and naturality of the
-binary comparison, gives the source normalization square. Cancel the scalar
-source-shift isomorphism to obtain the claimed equality. The proof uses only
-injectivity of evaluation and naturality of tensor cancellation. -/
+provided the tensor cancellation maps commute with scalar extension. -/
 theorem evaluation_shift_transport
     {C : Type u} [Category C] {D : Type v} [Category D]
     [HasShift C ℤ] [HasShift D ℤ]

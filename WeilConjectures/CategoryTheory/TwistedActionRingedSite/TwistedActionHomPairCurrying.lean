@@ -194,19 +194,7 @@ private theorem curry_equivariant (P : RestrictionPresentation J s R a)
 
 omit [s.functor.IsContinuous J J] in
 /-- The canonical conjugate Hom action is invertible, and currying preserves equivariance.
-Source: Stacks, sites-modules.tex.
-
-Proof: translation is an equivalence. Its natural tensor comparison and the
-ordinary tensor-Hom adjunction identify postcomposition with the transpose of
-translated evaluation with a bijection on Hom sets. Essential surjectivity and
-Yoneda therefore make this transpose invertible. Composing it with Hom of the
-inverse source action and the target action gives the displayed invertible
-conjugate action. Naturality of the tensor comparison rewrites its evaluation
-as translated evaluation followed by the target action. A map commutes with
-the conjugate action exactly when its untranspose commutes with the diagonal
-tensor action: apply evaluation, cancel the invertible source action and tensor
-comparison, and use injectivity of the tensor-Hom adjunction. This includes
-zero modules, the zero ring, and empty sites without additional hypotheses. -/
+Source: Stacks Project, sites-modules.tex. -/
 theorem homPair_currying (P : RestrictionPresentation J s R a)
     (T : TensorComparisons J s R a P) (M N : Pairs (sigma J s R a)) :
     let h :=

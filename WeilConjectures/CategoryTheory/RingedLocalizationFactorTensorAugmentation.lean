@@ -279,17 +279,7 @@ private theorem quasiIso_projection
 
 /-- The self-tensor projection for the two-term complex of one localization.
 
-Source: Stacks Project, algebraization.tex, Tag 099B, the contraction after localizing at a generator.
-
-Proof: write L = [O -> S] with S = O[1/s] in degrees zero and one.
-The map id_L tensor epsilon has target L tensor O[0]. Its kernel is L tensor
-S[-1]. The differential O tensor S -> S tensor S is an isomorphism: the
-localization unit becomes invertible after tensoring with S, as follows
-sectionwise from the uniqueness of localization and then by sheafification.
-Its inverse contracts that kernel. The degreewise split kernel sequence
-therefore makes the specified projection a quasi-isomorphism. This includes
-s = 0 (S is zero), invertible s (L is contractible), and the zero ring.
--/
+Source: Stacks Project, algebraization.tex, Tag 099B. -/
 theorem ringed_localization_factor_tensor_augmentation_quasiIso
     (O : Sheaf J CommRingCat.{u})
     (s : (O.obj ⋙ forget CommRingCat).sections) :

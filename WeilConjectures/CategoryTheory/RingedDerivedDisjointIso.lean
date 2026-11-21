@@ -203,18 +203,8 @@ private theorem homotopyEquivOfDerivedIso
     exact (DerivedCategory.Qh.map_id (q.obj L)).symm
 
 /-- Derived module objects which are isomorphic on a finite disjoint cover are isomorphic.
-Source: Stacks Project, Modules on Sites, Tag 03EM; Derived Categories, Tag 070I; Injectives, Tag 079P; Cohomology on Sites, Tag 08FI.
-
-Proof: Replace both objects on the slice by K-injective complexes. Exact restriction
-preserves K-injectives. Represent the component isomorphisms by chain maps. Since the
-covering arrows are monomorphisms and their distinct intersections have empty covering,
-module morphisms on the pieces glue uniquely; glue each degree of the chain maps.
-Separatedness verifies the differential equations. Lift the inverse maps too, and
-represent the inverse identities by homotopies using full faithfulness of localization
-on K-injectives. Glue their degreewise components; separatedness verifies the homotopy
-equations. The two glued chain maps are homotopy inverse and induce the required derived
-isomorphism. Transport through the exact restriction/localization comparisons. The same
-argument treats the empty cover, where separatedness forces all morphisms to agree. -/
+Source: Stacks Project, Modules on Sites, Tag 03EM; Derived Categories, Tag 070I;
+Injectives, Tag 079P; Cohomology on Sites, Tag 08FI. -/
 theorem ringedDerived_disjoint_iso
     {C : Type w} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{w}) (U : C)

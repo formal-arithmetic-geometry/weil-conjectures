@@ -29,10 +29,7 @@ def transportedCompositeIso (a : F₀ ≅ F₁) (b : F₂ ≅ F₃) (h : F₁ = 
       intro K L f
       simp)
 
-/-- Componentwise transport is the usual composite with equality transport of functors.
-Proof. Substitute the equality of the middle functors. The inserted transports are
-identities; the components of both composites coincide by the category identity laws.
--/
+/-- Componentwise transport is the usual composite with equality transport of functors. -/
 theorem transportedCompositeIso_eq (a : F₀ ≅ F₁) (b : F₂ ≅ F₃) (h : F₁ = F₂) :
     transportedCompositeIso a b h = a ≪≫ eqToIso h ≪≫ b := by
   cases h

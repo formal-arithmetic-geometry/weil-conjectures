@@ -45,14 +45,7 @@ namespace Pretriangulated
 variable {C : Type*} [Category* C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
 
-/-- Truncations and homotopy colimits
-(the homotopy colimit part; the stupid and canonical truncations are
-`HomologicalComplex.stupidTrunc`, `CochainComplex.truncLE`, `CochainComplex.truncGE` and the
-truncation functors `TStructure.truncLE`, `TStructure.truncGE` of the canonical t-structure
-`DerivedCategory.TStructure.t`, with the truncation triangle
-`TStructure.triangleLEGE_distinguished`).
-
-A cocone `c` over a sequence `F : ℕ ⥤ C` in a pretriangulated category is a *homotopy colimit*
+/-- A cocone `c` over a sequence `F : ℕ ⥤ C` in a pretriangulated category is a *homotopy colimit*
 cocone if, for a coproduct `∐ₙ Fₙ`, the triangle
 
 ```

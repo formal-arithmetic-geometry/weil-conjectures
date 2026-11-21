@@ -48,9 +48,7 @@ theorem homEquiv_naturality {X X' : C} (f : X' ⟶ X) (g : F.obj X ⟶ Y) :
   simp only [Equiv.symm_apply_apply, homEquiv_symm_apply, F.map_comp, Category.assoc,
     map_homEquiv_counit]
 
-/-- Representing pairs are uniquely isomorphic by the equation on their counits.
-Proof: transpose each counit by the other representing bijection. Injectivity proves
-both inverse identities and uniqueness of the counit-preserving isomorphism. -/
+/-- Representing pairs are uniquely isomorphic by the equation on their counits. -/
 theorem unique_iso (Q : RepresentingCounit F Y) :
     ∃! e : P.object ≅ Q.object, F.map e.hom ≫ Q.counit = P.counit := by
   obtain ⟨a, ha⟩ := (Q.bijective P.object).2 P.counit
@@ -75,11 +73,7 @@ def representingCounitRightAdjoint : D ⥤ C :=
   Adjunction.rightAdjointOfEquiv (fun X Y ↦ (P Y).homEquiv X)
     (fun _ _ Y f g ↦ (P Y).homEquiv_naturality f g)
 
-/-- The representing bijections give the adjunction and its actual chosen counit.
-Proof: the inverse representing bijection sends a map `a` to `F(a)` followed by
-its specified counit. Functoriality follows from naturality in the test object.
-Mathlib's right-adjoint constructor supplies both triangle identities. Its counit
-is the inverse bijection applied to the identity, hence the specified counit. -/
+/-- The representing bijections give the adjunction and its actual chosen counit. -/
 theorem representingCounits_adjunction :
     ∃ adj : F ⊣ representingCounitRightAdjoint P,
       ∀ Y : D, adj.counit.app Y = (P Y).counit := by

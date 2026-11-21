@@ -81,11 +81,7 @@ private lemma tensorAdjunctionMate_naturality
 
 set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency false in
-/-- For finite free coefficients the ordinary mate is the finite-product comparison.
-Proof: the unit equation reduces the mate in rank one to the identity by the
-adjunction triangle identity. Naturality and additivity identify rank N with the
-N-fold finite-sum map. Finite sums are products and the right adjoint preserves
-products, including the empty product. Thus the comparison is invertible. -/
+/-- For finite free coefficients the ordinary mate is the finite-product comparison. -/
 theorem tensorAdjunctionMate_free_isIso
     (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
       L.map (f ⊗ₘ g) ≫ (e X' Y').hom = (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
@@ -299,13 +295,7 @@ private lemma tensorAdjunctionTotal_summand
 
 attribute [local irreducible] tensorAdjunctionTotal
 
-/-- Bounded split-free coefficients make the total mate an isomorphism of complexes.
-Proof: in bidegree (a,r) the splitting formula is inverse to t. The two identities
-follow by naturality of t at i_r,p_r, their splitting relation, and the inverse
-identities of q. Multiplying naturality by these inverses proves compatibility
-with each differential; their indices agree and so do the signs (-1)^a.
-There are finitely many nonzero summands in each degree. The right adjoint preserves
-these finite sums, so the degree maps of the total mate are invertible. -/
+/-- Bounded split-free coefficients make the total mate an isomorphism of complexes. -/
 theorem tensorAdjunctionTotal_isIso
     (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
       L.map (f ⊗ₘ g) ≫ (e X' Y').hom = (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
@@ -389,13 +379,7 @@ noncomputable def tensorAdjunctionTotalInverse
 attribute [local irreducible] tensorAdjunctionTotalInverse
 
 set_option linter.unusedSectionVars false in
-/-- The target tensor total is K-injective for the specified bounded split-free package.
-Proof: additivity transports the bounded support and each splitting through L.
-The unit isomorphism j and finite-sum preservation identify L of a finite free
-object with a finite free object. Hence L(F) is bounded split-free. Dualize its
-finite free retracts termwise: evaluation identifies tensoring with L(F) with
-Hom from its bounded dual, with the usual signed differential. That dual is
-K-flat. Hom from a K-flat complex into K is K-injective, yielding the claim. -/
+/-- The target tensor total is K-injective for the specified bounded split-free package. -/
 theorem tensorAdjunctionTotal_target_isKInjective
     (j : L.obj (𝟙_ A) ≅ 𝟙_ B)
     (K : CochainComplex B ℤ) (hK : K.IsKInjective) (F : CochainComplex A ℤ)

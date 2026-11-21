@@ -34,24 +34,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- Scalar extension preserves K-flatness and has the normalized strong tensor
 comparison, coherent along coefficient towers and at identity maps.
-Source: Stacks 07A4, 07A6 and 0D6D.
-Proof: scalar extension is the identity-topos pullback. The sectionwise tensor
-map sends s tensor (x tensor y) to (s tensor x) tensor (1 tensor y), with inverse
-(s tensor x) tensor (t tensor y) mapped to st tensor (x tensor y). Extend through
-sheafification and the direct sums defining total complexes; all scalars have
-degree zero, so the formulas commute with the signed differential. For an
-acyclic S-complex Z, restriction identifies Z tensor_S (S tensor_R P) with
-UZ tensor_R P. Restriction is exact and conservative, so a K-flat P has K-flat
-extension. The universal left-derived comparison and two-variable K-flat
-descent give the unique derived tensor comparison with the displayed
-representative normalization. For a tower, the chain comparison sends
-t tensor (s tensor x) to t b(s) tensor x. Its inverse inserts 1, and its
-unit normalization identifies it with scalarHomExtensionComp. The two tensor
-routes agree on pure-tensor generators; descent makes them equal in the
-derived category. Composing the five Hom bijections then gives the stated
-tower equation, since the scalar transposes compose with the normalized
-unit. The same calculation with the identity ring map gives the identity
-equation. These arguments include zero rings and arbitrary nonflat maps. -/
+Source: Stacks 07A4, 07A6 and 0D6D. -/
 theorem scalarTensorTowerComparison_exists :
     ∃ μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S),
       ScalarHomTensorComparison M a,

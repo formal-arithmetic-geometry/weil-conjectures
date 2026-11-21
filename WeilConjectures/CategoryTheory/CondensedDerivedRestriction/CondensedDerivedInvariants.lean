@@ -25,8 +25,8 @@ import WeilConjectures.CategoryTheory.SmoothPurity.CanonicalRightDerivedAdjuncti
 
 /-! # Derived restriction calculus for internal condensed actions
 
-The source records this auxiliary infrastructure as agent-formulated, with a reference wanted.
-No assertion that underived continuous cochains compute derived invariants is made.
+This is auxiliary infrastructure. No assertion that underived continuous cochains compute
+derived invariants is made.
 -/
 
 @[expose] public noncomputable section
@@ -41,10 +41,7 @@ namespace CategoryTheory.CondensedDerivedRestriction
 variable (A : CondensedBar.Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
   [IsTopologicalGroup G]
 
-/-- The given additive category of internal actions is abelian, for arbitrary topological G.
-Proof: use the action-site presentation and the internal/sectionwise module equivalence.
-Kernels and sheafified cokernels carry the induced action; normality and finite products
-are computed on underlying internal modules. -/
+/-- The given additive category of internal actions is abelian, for arbitrary topological G. -/
 theorem actionAbelianData : Nonempty (ActionAbelian A G) := by
   exact ActionSite.actionAbelian_nonempty A G
 
@@ -52,15 +49,11 @@ theorem actionAbelianData : Nonempty (ActionAbelian A G) := by
 propositions, so this selects no unspecified mathematical object. -/
 instance actionAbelian : ActionAbelian A G := Classical.choice (actionAbelianData A G)
 
-/-- The action-site presentation transports the generator, colimits and AB5.
-Proof: the action-site module equivalence preserves all limits and colimits; apply the
-Grothendieck abelian theorem for modules on a small ringed site. -/
+/-- The action-site presentation transports the generator, colimits and AB5. -/
 @[instance] theorem actionGrothendieck : IsGrothendieckAbelian.{u + 1} (Equivariant A G) := by
   exact ActionSite.isGrothendieckAbelian A G
 
-/-- Forgetting the action creates kernels and cokernels and detects exactness.
-Proof: the equivariance equation restricts to kernels and descends to sheafified cokernels.
-The forgetful functor is faithful and detects zero; exactness is therefore detected. -/
+/-- Forgetting the action creates kernels and cokernels and detects exactness. -/
 theorem forgetExact :
     PreservesFiniteLimits (CondensedBar.forgetAction (A := A) (G := G)) ∧
     PreservesFiniteColimits (CondensedBar.forgetAction (A := A) (G := G)) ∧
@@ -94,18 +87,15 @@ private theorem forgetReflects (A : CondensedBar.Ring.{u}) (G : Type u) [Group G
 /-- Existence of the normalized invariant-submodule adjunction already specified by the
 recorded action-module definition. Its universal property determines it up to the unique
 isomorphism commuting with its inclusion.
-Proof: fully fixed sections form submodules stable under restriction and gluing. Restrict
-codomains of maps from trivial actions; composition with the inclusion is the inverse. -/
+-/
 theorem invariantsExist : Nonempty (Invariants A G) :=
   Profinite.CondensedAction.nonempty_invariants
 
-/-- Trivial action is additive and exact on the underlying modules.
-Proof: it leaves objects and maps unchanged and preserves the induced kernels and cokernels. -/
+/-- Trivial action is additive and exact on the underlying modules. -/
 @[instance] theorem trivialAdditive : (trivial (R := A.toMon) (P := G)).Additive := by
   exact ⟨by intros; rfl⟩
 
-/-- Exactness of trivial action, on kernels.
-Proof: the underlying kernel with trivial action is the equivariant kernel. -/
+/-- Exactness of trivial action, on kernels. -/
 @[instance] theorem trivialLimits :
     PreservesFiniteLimits (trivial (R := A.toMon) (P := G)) := by
   let U := CondensedBar.forgetAction (A := A) (G := G)
@@ -115,8 +105,7 @@ Proof: the underlying kernel with trivial action is the equivariant kernel. -/
     show PreservesFiniteLimits (𝟭 (Modules A)) from inferInstance
   exact preservesFiniteLimits_of_reflects_of_preserves _ U
 
-/-- Exactness of trivial action, on cokernels.
-Proof: the underlying sheafified cokernel retains trivial action. -/
+/-- Exactness of trivial action, on cokernels. -/
 @[instance] theorem trivialColimits :
     PreservesFiniteColimits (trivial (R := A.toMon) (P := G)) := by
   let U := CondensedBar.forgetAction (A := A) (G := G)
@@ -128,14 +117,12 @@ Proof: the underlying sheafified cokernel retains trivial action. -/
 
 variable {A G} {H : Type u} [Group H] [TopologicalSpace H] [IsTopologicalGroup H]
 
-/-- Restriction of actions along a continuous group map is additive.
-Proof: precomposition changes no underlying map, hence preserves sums. -/
+/-- Restriction of actions along a continuous group map is additive. -/
 @[instance] theorem restrictionAdditive (v : H →ₜ* G) :
     (inflate (R := A.toMon) v).Additive := by
   exact ⟨by intros; rfl⟩
 
-/-- Restriction is left exact, with the induced action on the same kernel.
-Proof: precomposition of the action commutes with the kernel construction. -/
+/-- Restriction is left exact, with the induced action on the same kernel. -/
 @[instance] theorem restrictionLimits (v : H →ₜ* G) :
     PreservesFiniteLimits (inflate (R := A.toMon) v) := by
   let U := CondensedBar.forgetAction (A := A) (G := H)
@@ -146,8 +133,7 @@ Proof: precomposition of the action commutes with the kernel construction. -/
       (forgetExact A G).1
   exact preservesFiniteLimits_of_reflects_of_preserves _ U
 
-/-- Restriction is right exact, with the induced action on the same cokernel.
-Proof: precomposition of the action commutes with sheafified cokernels. -/
+/-- Restriction is right exact, with the induced action on the same cokernel. -/
 @[instance] theorem restrictionColimits (v : H →ₜ* G) :
     PreservesFiniteColimits (inflate (R := A.toMon) v) := by
   let U := CondensedBar.forgetAction (A := A) (G := H)
@@ -164,9 +150,7 @@ variable [HasDerivedCategory.{u + 1} (Modules A)]
   [HasDerivedCategory.{u + 1} (Equivariant A H)]
 
 set_option linter.unusedSectionVars false in
-/-- The invariant inclusion uniquely determines the underived restriction map.
-Proof: a fully G-fixed section is H-fixed after precomposition. Restrict the codomain
-using the normalized invariant inclusion, which is a monomorphism on every section. -/
+/-- The invariant inclusion uniquely determines the underived restriction map. -/
 theorem invariantRestrictionExist (V : Invariants A G) (W : Invariants A H) (v : H →ₜ* G) :
     ∃! b : V.functor ⟶ inflate (R := A.toMon) v ⋙ W.functor,
       ∀ N, b.app N ≫ W.inclusion.app ((inflate v).obj N) = V.inclusion.app N := by
@@ -237,8 +221,7 @@ instance derivedShift : (derived A G).CommShift ℤ :=
 
 /-- Degree zero is the actual invariant functor, with the comparison induced by the
 right-derived unit, not an arbitrarily chosen cohomology isomorphism.
-Proof: in an injective resolution, H⁰ of invariants is the kernel of the first invariant
-differential, which is invariants of the original module by left exactness. -/
+-/
 theorem degreeZero : ∃ e :
     (DerivedCategory.singleFunctor (Equivariant A G) 0 ⋙ derived A G) ⋙
       DerivedCategory.homologyFunctor (Modules A) 0 ≅ (invariants A G).functor,
@@ -264,18 +247,14 @@ def degreeZeroIso :
 
 variable {A' : CondensedBar.Ring.{u}}
 
-/-- The existing normalized scalar-action specification has a canonical realization.
-Proof: use the same underlying abelian sheaf and action, and restrict its scalar action
-along the given ring map. The displayed underlying comparison is identity on sections. -/
+/-- The existing normalized scalar-action specification has a canonical realization. -/
 theorem scalarActionExist (a : A ⟶ A') : Nonempty (ScalarAction a G) :=
   nonempty_scalarAction a G
 
 /-- Scalar restriction on actions, fixed by its underlying module and section action. -/
 def scalarAction (a : A ⟶ A') : ScalarAction a G := Classical.choice (scalarActionExist a)
 
-/-- Scalar restriction of actions is exact, without flatness of the ring map.
-Proof: kernels and sheafified cokernels have the same underlying abelian sheaves before
-and after restricting scalars; their induced group actions are unchanged. -/
+/-- Scalar restriction of actions is exact, without flatness of the ring map. -/
 theorem scalarExact (a : A ⟶ A') :
     PreservesFiniteLimits (scalarAction (G := G) a).functor ∧
     PreservesFiniteColimits (scalarAction (G := G) a).functor := by
@@ -314,8 +293,7 @@ def scalarBase (a : A ⟶ A') : DerivedCategory.{u + 1} (Modules A') ⥤
 
 /-- Scalar restriction and taking the fully fixed subsheaf commute canonically. The
 normalization fixes this isomorphism on the actual invariant inclusions.
-Proof: both sides consist of the same sections fixed after every profinite base change;
-their inclusions identify the same submodule of the restricted underlying sheaf. -/
+-/
 theorem scalarInvariantsExist (a : A ⟶ A') :
     ∃! e : (scalarAction (G := G) a).functor ⋙ (invariants A G).functor ≅
         (invariants A' G).functor ⋙ Mod.comap a.hom.hom,
@@ -332,11 +310,7 @@ def scalarInvariants (a : A ⟶ A') :
 
 /-- The scalar comparison is the unique derived transformation whose computation units
 are the underived fixed-section identification, and is invertible for any ring map.
-Proof: view scalar restriction and invariants as direct images of the identity ringed
-topos and the action projection. Their two composites are the same ringed direct image.
-The canonical derived-composition comparisons give this isomorphism, compatibly with
-computation units; uniqueness follows from the right-derived universal property. No
-preservation of injectives by scalar restriction and no flatness is used. -/
+-/
 theorem scalarComparisonExist (a : A ⟶ A') :
     ∃! d : scalarDerived a G ⋙ derived A G ≅ derived A' G ⋙ scalarBase a,
       ∀ K : CochainComplex (Equivariant A' G) ℤ,

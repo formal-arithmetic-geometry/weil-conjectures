@@ -32,16 +32,7 @@ namespace CategoryTheory.Sheaf
 constant integer sheaf, and that fibre has the connecting class of one. Conversely,
 the fibre of every such extension is a torsor with this class.
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma 02FQ.
-Proof: (1) Construct the extension as the coproduct of contracted powers of the torsor,
-with degree zero equal to `G` and negative powers formed from the inverse torsor. Concatenation defines addition; the exponent map is
-surjective with kernel `G`, and its fibre over one is the given torsor.
-(2) The long exact sequence supplies the
-boundary map. The boundary characterization
-identifies the class of the fibre under the canonical bijection
-with the boundary of one. The fibre is isomorphic to
-the original torsor by (1). (3) For every short exact sequence, the same boundary characterization
-constructs its fibre as a `G`-torsor and identifies its class with the boundary of one. -/
+Source: Stacks Project, Cohomology of Sheaves, Lemma 02FQ. -/
 theorem torsor_h1_boundary_representative (X : Scheme.{u})
     (G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (T : G.Torsor) :
     (∃ (E : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})

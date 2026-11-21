@@ -26,9 +26,7 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C] [BraidedCategory C]
   [IsCommMonObj R] [IsCommMonObj S]
   (φ : R ⟶ S) (ψ : S ⟶ T) [IsMonHom φ] [IsMonHom ψ]
 
-/-- The scalar extension composition comparison intertwines the two adjunction units.
-Proof: apply the unit normalization for leftAdjointUniq to the composed adjunction.
-Restriction of scalars and its composition comparison have identity underlying maps. -/
+/-- The scalar extension composition comparison intertwines the two adjunction units. -/
 theorem extendScalarsComp_unit (M : Mod C R) :
     extendUnitHom (φ ≫ ψ) M ≫ ((extendScalarsComp φ ψ).hom.app M).hom =
       extendUnitHom φ M ≫ extendUnitHom ψ ((extendScalars φ).obj M) := by
@@ -44,11 +42,7 @@ theorem extendScalarsComp_unit (M : Mod C R) :
   erw [Category.comp_id] at h'
   exact h'
 
-/-- The normalized regular-module comparison respects composition of scalar extensions.
-Proof: use injectivity of the extension--restriction adjunction. Naturality of the
-second unit moves the first regular comparison through it. Both regular comparisons
-then reduce to their coefficient maps, while the composition comparison reduces to
-the composite unit. Thus both sides are the same coefficient map φ followed by ψ. -/
+/-- The normalized regular-module comparison respects composition of scalar extensions. -/
 theorem regularExtensionIso_comp :
     (extendScalarsComp φ ψ).hom.app (regular R) ≫
       (extendScalars ψ).map (regularExtensionIso φ).hom ≫ (regularExtensionIso ψ).hom =
@@ -80,12 +74,7 @@ theorem regularExtensionIso_comp :
   erw [Category.assoc ((regularExtensionIso φ).hom.hom), hψ,
     ← Category.assoc (extendUnitHom φ (regular R)), hφ, hφψ]
 
-/-- The normalized free-basis comparison respects successive scalar extensions.
-Proof: naturality moves the initial basis map through extendScalarsComp. Move the
-first sum of regular comparisons through the second biproduct comparison, and
-combine the two functor biproduct comparisons. Naturality in the composition
-comparison moves it to the entries. Each entry is regularExtensionIso_comp, so
-biproduct extensionality identifies the resulting sums. -/
+/-- The normalized free-basis comparison respects successive scalar extensions. -/
 theorem regularFreeComparison_comp
     [Preadditive (Mod C R)] [Preadditive (Mod C S)] [Preadditive (Mod C T)]
     [HasFiniteBiproducts (Mod C R)] [HasFiniteBiproducts (Mod C S)]
@@ -127,9 +116,7 @@ theorem regularFreeComparison_comp
   funext i
   exact regularExtensionIso_comp φ ψ
 
-/-- Transport of a normalized free comparison along equality of coefficient maps.
-Proof: substitute the equality of coefficient maps. Both functors and both normalized
-comparisons then coincide, and transport is the identity by proof irrelevance. -/
+/-- Transport of a normalized free comparison along equality of coefficient maps. -/
 theorem regularFreeComparison_eq
     {χ χ' : R ⟶ T} [IsMonHom χ] [IsMonHom χ']
     (hχ : χ = χ') (hF : extendScalars χ = extendScalars χ')
@@ -147,9 +134,7 @@ theorem regularFreeComparison_eq
   subst χ'
   simp only [eqToIso_refl, Iso.refl_hom, NatTrans.id_app, Category.id_comp]
 
-/-- Successive normalized finite free comparisons respect the transported balancing map.
-Proof: precompose with extendScalarsComp. Its inverse cancels the balancing map.
-The composition identity and transport identity identify the remaining comparisons. -/
+/-- Successive normalized finite free comparisons respect the transported balancing map. -/
 theorem regularFreeComparison_balancing
     {χ : R ⟶ T} [IsMonHom χ]
     (hχ : φ ≫ ψ = χ) (hF : extendScalars (φ ≫ ψ) = extendScalars χ)
@@ -190,8 +175,7 @@ def regularFreeExtensionIso
     (extendScalars φ).mapBiproduct (fun _ : I ↦ regular R) ≪≫
       biproduct.mapIso (fun _ : I ↦ regularExtensionIso φ)
 
-/-- The named finite basis comparison respects transported ordinary balancing.
-Proof: expand the two named comparisons and apply regularFreeComparison_balancing. -/
+/-- The named finite basis comparison respects transported ordinary balancing. -/
 theorem regularFreeExtensionIso_balancing
     {χ : R ⟶ T} [IsMonHom χ]
     (hχ : φ ≫ ψ = χ) (hF : extendScalars (φ ≫ ψ) = extendScalars χ)

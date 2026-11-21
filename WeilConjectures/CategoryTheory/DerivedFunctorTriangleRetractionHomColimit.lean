@@ -52,31 +52,8 @@ private theorem retraction_homColimit_bijective
     exact ⟨q x, hq.1 (hcomp (q x))⟩
 
 /-- A triangle retraction on the first two vertices induces a third Hom-colimit bijection.
-Source: Stacks Project, Derived Categories, Lemma 05SC, the five-term Hom diagram,
-dualized to LF; Categories, Tag 05PZ and the initial colimit comparison Tag 0A1T.
-
-Proof: Take I to be the cofiltered category of incoming distinguished denominator
-triangles over T from Tag 05R9. Its three vertex projections p1, p2, p3 are initial.
-The supplied sigma defines an object i0 of I with source U. Restrict uX and uY
-along p1 and p2; initial_iff_essentiallyConstantProDiagram gives both essential
-constancy and the common-stage certificates for these very cones. Tag 05PZ gives
-a bijection from each restricted Hom-colimit to Hom(LX,W) or Hom(LY,W), with its
-representative formula. At i0, precomposition with rho.hom1 or rho.hom2 is its
-inverse: composing with the canonical bijection gives the identity by hretract1
-or hretract2. Hence both first-vertex and second-vertex comparisons are bijective
-for every W. The functor G sends each source triangle to its F-image; exactness of
-F makes every G(i) distinguished. Apply triangulated_hom_colimit_comparison to G,
-the fixed distinguished triangle, i0 and rho to obtain the third comparison.
-Finally p3.op is final, so Mathlib's bijective_colimitTypePrecomp transports this
-bijection to the full third denominator Hom-colimit. Its representative equation
-sends i0 to sigma.hom3 and leaves rho.hom3 followed by phi unchanged. Working over
-T directly avoids denominator postcomposition with sigma and its initiality proof.
-No third derived value or completion theorem is used.
-
-Edge cases: when rho is the identity comparison and S contains only isomorphisms,
-the function is the ordinary canonical Hom-colimit bijection. Contractible and split
-triangles satisfy the same exact-sequence argument. The retraction equations are
-essential: merely supplying arbitrary maps at the first two vertices would be false. -/
+Source: Stacks Project, Derived Categories, Lemma 05SC, dualized to LF; Categories, Tags 05PZ
+and 0A1T. -/
 theorem leftDerived_triangle_retraction_homColimit
     {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]

@@ -70,15 +70,7 @@ private theorem character_matrix_factorization
   ring
 
 /-- A normalized character matrix on a finite product has rank-one image;
-evaluation at the zero index is the specified isomorphism.
-
-Proof: form the column a mapped to multiplication by χ(a), and the weighted row
-sum_b π_b times n⁻¹χ(-b). Their composite on the coefficient object is the identity:
-each summand is n⁻¹ because χ(b)χ(-b)=1, and there are n summands. The reverse
-composite is the specified character matrix, since χ(a-b)=χ(a)χ(-b).
-This is a split epi-mono factorization, so its middle object is the categorical
-image. The column has identity zero component, which identifies the inverse
-image comparison with evaluation at zero. -/
+evaluation at the zero index is the specified isomorphism. -/
 theorem characterMatrix_image_evaluation_isIso
     {C : Type*} [Category C] [Abelian C]
     {S : Type*} [CommRing S] {R M : C} (r : S →+* End R)

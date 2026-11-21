@@ -143,14 +143,7 @@ private theorem iso_middle_of_homological
     (inferInstanceAs (Epi (α.app (T.obj₃⟦(-1 : ℤ)⟧)))) h₁ h₃
     (inferInstanceAs (Mono (α.app (T.obj₁⟦(1 : ℤ)⟧))))
 
-/-- Filtered Hom continuity is closed under distinguished extensions.
-
-Proof: for a distinguished triangle A → B → C → A[1], take its contravariant
-long exact additive Hom sequence into each Dᵢ[n] and into c.pt[n]. Filtered colimits
-of abelian groups are exact. The cocone legs induce a morphism of the two exact
-five-term windows with terms Hom(A,-[n-1]), Hom(C,-[n]), Hom(B,-[n]), Hom(A,-[n]),
-and Hom(C,-[n+1]). The four outer vertical maps are invertible by the hypotheses
-on A and C. The five lemma makes the middle map invertible, for every integer n. -/
+/-- Filtered Hom continuity is closed under distinguished extensions. -/
 theorem homColimitProperty_extensions (D : I ⥤ C) (c : Cocone D)
     (T : Pretriangulated.Triangle C) (hT : T ∈ distTriang C)
     (h₁ : homColimitProperty D c T.obj₁) (h₃ : homColimitProperty D c T.obj₃) :

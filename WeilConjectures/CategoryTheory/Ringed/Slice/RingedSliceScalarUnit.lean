@@ -415,15 +415,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Scalar action is preserved by the normalized slice tensor comparison, using the
 coefficient identification furnished by termwise restriction and localization.
-Source: Stacks Tags 03DJ, 07A4 and 0FPT.
-
-Proof: restriction of the coefficient complex is the coefficient complex on the slice.
-Use this identification and the localization comparison for the coefficient isomorphism.
-On a flat-term K-flat representative, compare scalar multiplication with the tensor
-restriction square. Both chain maps send a pure tensor x tensor a to a times x.
-The normalized unit constraints therefore give the desired square after localization.
-Naturality of tensor comparison and of the unit constraints transports it along a
-flat-term K-flat resolution to every derived object. -/
+Source: Stacks Tags 03DJ, 07A4 and 0FPT. -/
 theorem ringedSlice_scalar_unit :
     let r := ringedSliceDerivedRestriction.{c, v, r, w, w'} J R U
     let O := DerivedCategory.Q.obj (ringedTensorUnitComplex.{c, v, r} J R)

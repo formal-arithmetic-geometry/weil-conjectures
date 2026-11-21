@@ -15,17 +15,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
 
 /-- Intermediate construction of the lifted commutative-group adjunction.
-Source: Stacks Project, Proposition 00YV, proof of the abelian-group part.
-
-Proof: use `Adjunction.mapCommGrp` with the canonical braided structures induced by
-Cartesian monoidal categories.  Its transported operations are expressed by the
-product and terminal comparison isomorphisms.  Naturality of those comparisons
-proves that the transported operations satisfy the group axioms and that maps of
-objects remain morphisms.  The hom-equivalence of the original adjunction restricts
-to group morphisms because the unit and counit preserve all three operations;
-its inverse is given by composing with the counit.  The displayed comparison,
-unit, counit, and adjunct equations are exactly these naturality identities.
--/
+Source: Stacks Project, Proposition 00YV, proof of the abelian-group part. -/
 theorem liftedCommGrpBranch
     {A : Type uA} [Category.{vA} A] [CartesianMonoidalCategory A]
     {B : Type uB} [Category.{vB} B] [CartesianMonoidalCategory B]

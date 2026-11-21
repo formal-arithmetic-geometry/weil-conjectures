@@ -11,8 +11,9 @@ import WeilConjectures.CategoryTheory.Endofunctor.CyclicDerivedFreeBoundaryCompa
 
 /-! # The raw cyclic five-term Hom sequence
 
-Source: Stacks Tag 0149, applied to the free triangle, and the identification of its
-boundary with strict off-diagonal presentations in Tag 0152.
+## References
+
+* Stacks Tag 0149, applied to the free triangle.
 -/
 
 @[expose] public noncomputable section
@@ -52,26 +53,7 @@ private theorem coordinate_kernel {A : Type*} [AddCommGroup A]
 its middle arrow, before passing to an invariant subgroup or a coinvariant quotient.
 The middle arrow is the uniquely specified off-diagonal extension class.
 
-Proof: apply contravariant representable exactness to the natural free-resolution
-triangle and its rotations and shifts. Under the exact free/forgetful adjunction its
-Hom groups are V^r. The counit induces precisely cyclicDerivedForget, including the
-canonical zero-shift isomorphism. The cyclic differential, evaluated at summand zero,
-is 1-(T^r)⁻¹: the adjunct of u has summand n equal to θ_N,n P^n(u), and summand -1
-is P⁻¹(θ_N⁻¹ u). The action T^r is invertible. Since
-1-T⁻¹ = -T⁻¹(1-T), and T preserves the image of 1-T, these two defects have identical
-kernels and images. Thus the three consecutive exact pairs are the ones stated here.
-
-The middle map is u ↦ δ_M ≫ adjunct(u)[1], followed by shift cancellation; both
-adjunction and shift are additive, proving its additivity. The free-to-off-diagonal
-extension comparison in the presentation theorem identifies it with the boundary
-used here, with the same sign. Naturality of δ in M and of adjunction in both variables
-proves the precomposition/postcomposition identity. These arguments use no boundedness:
-the free resolution and its derived triangle are unbounded. Independently chosen
-localizations are compared by their canonical localization equivalences; the standard
-factorization isomorphisms transport the displayed formulas unchanged.
-
-Source: Stacks Tags 0149
-and 0152, and the explicitly normalized free-resolution triangle. -/
+Stacks Project, Tags 0149 and 0152. -/
 theorem cyclicDerivedOffDiagonal_calculus [IsGrothendieckAbelian.{v} C] :
     (∀ (M N : DerivedCategory (IsoAlgebra F)) (u v : CyclicDerivedHom F M N (-1)),
       cyclicDerivedOffDiagonalBoundary F (u + v) =
@@ -204,7 +186,8 @@ theorem cyclicDerivedOffDiagonal_calculus [IsGrothendieckAbelian.{v} C] :
       AddEquiv.apply_symm_apply, AddEquiv.apply_symm_apply]
 
 /-- The raw connecting map as an additive homomorphism.
-Source: the additive free-adjunction boundary of Stacks Tags 0149 and 0152. -/
+
+Stacks Project, Tags 0149 and 0152. -/
 def cyclicDerivedOffDiagonalBoundaryHom [IsGrothendieckAbelian.{v} C]
     (M N : DerivedCategory (IsoAlgebra F)) : CyclicDerivedHom F M N (-1) →+ (M ⟶ N) :=
   AddMonoidHom.mk' (cyclicDerivedOffDiagonalBoundary F)

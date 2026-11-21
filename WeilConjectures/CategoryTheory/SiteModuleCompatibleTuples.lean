@@ -8,11 +8,14 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-! Compatible families of local module sections, with restrictions indexed by all test objects.
-Source: Stacks Project, Sites, Tag 04TR.
 
 Instead of choosing fibre products, use all test spans `W → V`, `W → U i`. The equations
 for restrictions identify this family with the usual product over the fibre products.
 This presentation makes evaluation along a graph literal, even for nonmonomorphic covers.
+
+## References
+
+* Stacks Project, Sites, Tag 04TR.
 -/
 
 @[expose] public section
@@ -519,11 +522,7 @@ theorem types_isSheaf : Presieve.IsSheaf K G.types := by
 
 /-- The compatible-tuples module presheaf is a sheaf.
 
-Source: Stacks Project, Sites, Tag 04TR. Glue each test-coordinate along the pulled-back
-covering sieve in the corresponding local sheaf. Local separatedness proves that these
-sections respect restrictions and transition maps. The glued tuple is an amalgamation by
-matching-family compatibility, and uniqueness is checked in every local sheaf.
--/
+Stacks Project, Sites, Tag 04TR. -/
 theorem presheaf_isSheaf : Presheaf.IsSheaf K G.presheaf.presheaf := by
   apply Presheaf.isSheaf_of_isSheaf_comp K G.presheaf.presheaf
     (CategoryTheory.forget AddCommGrpCat.{max uD vD w v})

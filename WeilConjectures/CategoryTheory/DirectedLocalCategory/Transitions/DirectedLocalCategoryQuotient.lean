@@ -137,11 +137,8 @@ private theorem step_eventual {a b : O} {r s : Rep birth a b}
   obtain ⟨h, e⟩ := h
   exact ⟨s.1.val, h, le_rfl, e.trans (T.map_refl s.2).symm⟩
 
-/-- Eventual equality is an equivalence relation and is exactly the equivalence closure of `Step`.
-Proof: take the original stage for reflexivity and reverse the equality for symmetry.
-For transitivity take an upper bound of the two witnesses, then use `map_trans`.
-A forward step is eventual equality at its target. Conversely two eventually equal
-representatives are connected by two forward steps to their common transported representative. -/
+/-- Eventual equality is an equivalence relation and is exactly the equivalence closure of
+`Step`. -/
 theorem eventual_equivalence (a b : O) :
     _root_.Equivalence (T.Eventual (a := a) (b := b)) ∧
       ∀ r s : Rep birth a b, T.Eventual r s ↔ Relation.EqvGen T.Step r s := by
@@ -163,9 +160,7 @@ theorem eventual_equivalence (a b : O) :
     | symm r s h ih => exact T.eventual_symm ih
     | trans r s t h h' ih ih' => exact T.eventual_trans ih ih'
 
-/-- Every Hom class is represented, and equality is exactly the common-stage condition.
-Proof: quotient induction supplies representatives. Equality in `Quot` is the equivalence
-closure of its relation, which equals that relation by `eventual_equivalence`. -/
+/-- Every Hom class is represented, and equality is exactly the common-stage condition. -/
 theorem classOf_properties (a b : O) :
     Function.Surjective (T.classOf (a := a) (b := b)) ∧
       ∀ r s : Rep birth a b, T.classOf r = T.classOf s ↔ T.Eventual r s := by
@@ -176,10 +171,7 @@ theorem classOf_properties (a b : O) :
   induction x using Quot.inductionOn with
   | h r => exact ⟨r, rfl⟩
 
-/-- The common-stage preorder is filtered, including nonemptiness.
-Proof: an upper bound of the two birth indices belongs to `J_ab`; upper bounds of stages
-remain in `J_ab`. Parallel arrows in a preorder coincide and are equalized by the identity.
-This is `IsFiltered` from [def-weil-pbc-category-colimit]. -/
+/-- The common-stage preorder is filtered, including nonemptiness. -/
 theorem index_isFiltered (a b : O) : IsFiltered (Index birth a b) := by
   have _ := E
   have _ := hI
@@ -197,8 +189,7 @@ def liftedMap {a b : O} {k n : Index birth a b} (h : k ≤ n) :
       ULift.{w} (StageHom birth n.val a b n.property.1 n.property.2) :=
   fun g ↦ ⟨T.map h g.down⟩
 
-/-- Identity law for the lifted Hom diagram.
-Proof: evaluate on `ULift` elements and apply the assumed `map_refl`. -/
+/-- Identity law for the lifted Hom diagram. -/
 theorem diagram_map_id (a b : O) (k : Index birth a b) :
     T.liftedMap (le_refl k) = id := by
   have _ := hI
@@ -206,8 +197,7 @@ theorem diagram_map_id (a b : O) (k : Index birth a b) :
   funext g
   exact congrArg ULift.up (T.map_refl g.down)
 
-/-- Composition law for the lifted Hom diagram.
-Proof: evaluate the functions and apply `map_trans` to their underlying stage morphisms. -/
+/-- Composition law for the lifted Hom diagram. -/
 theorem diagram_map_comp (a b : O) (k n p : Index birth a b) (h : k ≤ n) (h' : n ≤ p) :
     T.liftedMap (h.trans h') = T.liftedMap h' ∘ T.liftedMap h := by
   have _ := hI
@@ -223,9 +213,7 @@ def diagram (a b : O) : Index birth a b ⥤ Type (max w v) where
   map_comp h h' := congrArg TypeCat.ofHom (T.diagram_map_comp a b _ _ _
     (leOfHom h) (leOfHom h'))
 
-/-- The class maps form a compatible cocone.
-Proof: a representative and its forward transport are eventually equal at the target stage;
-apply `classOf_properties`. -/
+/-- The class maps form a compatible cocone. -/
 theorem classOf_naturality (a b : O) (k n : Index birth a b) (h : k ≤ n) :
     (fun g : ULift.{w} (StageHom birth k.val a b k.property.1 k.property.2) ↦
       T.classOf ⟨n, T.map h g.down⟩) = (fun g ↦ T.classOf ⟨k, g.down⟩) := by
@@ -243,11 +231,7 @@ def cocone (a b : O) : Cocone (T.diagram a b) where
       naturality := fun {k n} h ↦ congrArg TypeCat.ofHom
         (T.classOf_naturality a b k n (leOfHom h)) }
 
-/-- The quotient is a colimit in the precise categorical sense.
-Proof: by `classOf_properties` all elements are represented, and equal classes agree at a
-common stage. A compatible cocone therefore defines a unique function on classes.
-This is [def-weil-pbc-category-colimit], equivalently the recognition criterion in
-[lem-weil-pbc-filtered-colimit-sets-elementwise]. -/
+/-- The quotient is a colimit in the precise categorical sense. -/
 theorem cocone_isColimit (a b : O) : Nonempty (IsColimit (T.cocone a b)) := by
   have _ := hI
   have _ := hdir
@@ -272,9 +256,7 @@ theorem cocone_isColimit (a b : O) : Nonempty (IsColimit (T.cocone a b)) := by
     induction x using Quot.inductionOn with
     | h r => exact ConcreteCategory.congr_hom (hm r.1) ⟨r.2⟩
 
-/-- The explicit universal property, also allowing target sets in any universe.
-Proof: send a represented class to the assigned value. Eventual equality and compatibility
-make this independent of representatives. Representation of every class gives uniqueness. -/
+/-- The explicit universal property, also allowing target sets in any universe. -/
 theorem existsUnique_desc (a b : O) (S : Type z)
     (f : ∀ k : Index birth a b, StageHom birth k.val a b k.property.1 k.property.2 → S)
     (hf : ∀ (k n : Index birth a b) (h : k ≤ n)
@@ -309,10 +291,7 @@ noncomputable def compositeClass {a b c : O} (r : Rep birth a b) (s : Rep birth 
   T.classOf (T.compAt r s (upper r.1.val s.1.val).val
     (upper r.1.val s.1.val).property.1 (upper r.1.val s.1.val).property.2)
 
-/-- The formula is independent of both the representatives and the common stage.
-Proof: move the witnesses for eventual equality and both choices of common stage to a
-further upper bound. Apply `map_trans` and `map_comp`, then compare the resulting equal
-stage composites. No injectivity or antisymmetry is used. -/
+/-- The formula is independent of both the representatives and the common stage. -/
 theorem compositeClass_independent {a b c : O}
     (r r' : Rep birth a b) (s s' : Rep birth b c)
     (hr : T.Eventual r r') (hs : T.Eventual s s')
@@ -338,18 +317,14 @@ theorem compositeClass_independent {a b c : O}
   simp only [T.map_trans] at er' es'
   rw [er', es']
 
-/-- Well-definedness in the second input, needed by `Quot.lift₂`.
-Proof: use `compositeClass_independent` with the first representative unchanged and the
-chosen upper bounds. Reflexivity of eventual equality supplies the unchanged input. -/
+/-- Well-definedness in the second input, needed by `Quot.lift₂`. -/
 theorem compositeClass_right {a b c : O} (r : Rep birth a b) (s s' : Rep birth b c)
     (h : T.Eventual s s') : T.compositeClass r s = T.compositeClass r s' := by
   have _ := hI
   have _ := hdir
   exact T.compositeClass_independent r r s s' (T.eventual_refl r) h _ _ _ _ _ _
 
-/-- Well-definedness in the first input, needed by `Quot.lift₂`.
-Proof: use `compositeClass_independent` with the second representative unchanged and the
-chosen upper bounds. Reflexivity supplies the unchanged input. -/
+/-- Well-definedness in the first input, needed by `Quot.lift₂`. -/
 theorem compositeClass_left {a b c : O} (r r' : Rep birth a b) (s : Rep birth b c)
     (h : T.Eventual r r') : T.compositeClass r s = T.compositeClass r' s := by
   have _ := hI
@@ -368,9 +343,7 @@ def identityRep (a : O) : Rep birth a a :=
 /-- The identity class is exactly the class of the birth-stage identity. -/
 def identity (a : O) : T.Hom a a := T.classOf (identityRep birth a)
 
-/-- The displayed common-stage formula holds for every choice of upper bound.
-Proof: unfold the two quotient lifts on classes and compare the chosen common stage with
-`m` using `compositeClass_independent` and reflexivity. -/
+/-- The displayed common-stage formula holds for every choice of upper bound. -/
 theorem comp_classOf {a b c : O} (r : Rep birth a b) (s : Rep birth b c)
     (m : I) (hr : r.1.val ≤ m) (hs : s.1.val ≤ m) :
     T.comp (T.classOf r) (T.classOf s) = T.classOf (T.compAt r s m hr hs) := by
@@ -379,9 +352,7 @@ theorem comp_classOf {a b c : O} (r : Rep birth a b) (s : Rep birth b c)
   exact T.compositeClass_independent r r s s (T.eventual_refl r) (T.eventual_refl s)
     _ m _ _ hr hs
 
-/-- The formula descends separately even through the single generating relation `Step`.
-Proof: a generating step is eventual equality at its target stage. Apply
-`compositeClass_left` or `compositeClass_right` respectively. -/
+/-- The formula descends separately even through the single generating relation `Step`. -/
 theorem compositeClass_step {a b c : O} :
     (∀ (r r' : Rep birth a b) (s : Rep birth b c), T.Step r r' →
       T.compositeClass r s = T.compositeClass r' s) ∧
@@ -392,8 +363,7 @@ theorem compositeClass_step {a b c : O} :
   exact ⟨fun r r' s h ↦ T.compositeClass_left r r' s (T.step_eventual h),
     fun r s s' h ↦ T.compositeClass_right r s s' (T.step_eventual h)⟩
 
-/-- Forward transport relates equal eventual classes.
-Proof: take the target of the forward step as common stage and use `map_refl`. -/
+/-- Forward transport relates equal eventual classes. -/
 theorem classOf_step {a b : O} (r s : Rep birth a b) (h : T.Step r s) :
     T.classOf r = T.classOf s := by
   have _ := hI
@@ -404,9 +374,7 @@ theorem classOf_step {a b : O} (r s : Rep birth a b) (h : T.Step r s) :
 def generatedToHom (a b : O) : T.GeneratedHom a b → T.Hom a b :=
   Quot.lift T.classOf T.classOf_step
 
-/-- The identity-on-representatives comparison is bijective.
-Proof: both quotients have the same equivalence relation by `eventual_equivalence`.
-Representation gives surjectivity, and the equality characterization gives injectivity. -/
+/-- The identity-on-representatives comparison is bijective. -/
 theorem generatedToHom_bijective (a b : O) : Function.Bijective (T.generatedToHom a b) := by
   have _ := hI
   have _ := hdir
@@ -435,11 +403,7 @@ noncomputable def generatedComp {a b c : O}
     (f : T.GeneratedHom a b) (g : T.GeneratedHom b c) : T.GeneratedHom a c :=
   (T.generatedEquiv a c).symm (T.comp (T.generatedEquiv a b f) (T.generatedEquiv b c g))
 
-/-- The generated quotient has the same formula, and the comparison preserves it and identities.
-Proof: apply the injective canonical comparison and compute on representatives using
-`comp_classOf`. Its values on representatives are definitionally the same classes;
-this also proves preservation of the birth identity. Preservation of arbitrary composites
-follows from the inverse identities of the bijections. -/
+/-- The generated quotient has the same formula, and the comparison preserves it and identities. -/
 theorem generated_formulas :
     (∀ a : O, T.generatedEquiv a a (T.generatedIdentity a) = T.identity a) ∧
     (∀ {a b c : O} (f : T.GeneratedHom a b) (g : T.GeneratedHom b c),
@@ -476,10 +440,7 @@ private theorem comp_same_stage {a b c : O} (m : I)
   rw [T.comp_classOf _ _ m le_rfl le_rfl]
   simp only [compAt, T.map_refl]
 
-/-- The quotient operations satisfy both unit laws and associativity.
-Proof: represent the morphisms and move them all to one common stage. Use `map_id`
-for birth-stage identities, `map_comp` and `map_trans` for repeated compositions, then
-apply the two identity laws and associativity in that ordinary stage category. -/
+/-- The quotient operations satisfy both unit laws and associativity. -/
 theorem category_laws :
     (∀ {a b : O} (f : T.Hom a b), T.comp (T.identity a) f = f) ∧
     (∀ {a b : O} (f : T.Hom a b), T.comp f (T.identity b) = f) ∧

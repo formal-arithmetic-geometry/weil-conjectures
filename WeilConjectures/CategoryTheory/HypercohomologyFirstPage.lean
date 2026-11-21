@@ -18,13 +18,15 @@ import WeilConjectures.Algebra.Homology.KInjectiveResolution
 
 /-! # The first hypercohomology spectral sequence
 
-Source: Stacks Project, Tags 0130 and 015H.
-
 The bicomplex uses the Stacks order (complex degree, resolution degree); flipping after
-extension by zero gives the order (resolution degree, complex degree) of the blueprint.
+extension by zero gives the order (resolution degree, complex degree).
 The spectral sequence uses Mathlib's order (filtration degree, complementary degree).
-Thus the blueprint term E₁^{r,s} is `(E.page 1).X (s,r)` here. Signed identifications
+Thus the term E₁^{r,s} is `(E.page 1).X (s,r)` here. Signed identifications
 with the derived functors absorb the second-filtration sign in Tag 0130.
+
+## References
+
+* Stacks Project, Tags 0130 and 015H.
 -/
 
 @[expose] public section
@@ -38,32 +40,7 @@ namespace CategoryTheory.Functor
 set_option linter.unusedVariables false in
 /-- The second-degree filtration of a Cartan--Eilenberg total complex gives the first
 hypercohomology spectral sequence, with its induced differential and derived abutment.
-Source: Stacks Project, Tags 0130 and 015H.
-
-Proof:
-1. Each column in the Stacks indexing is an injective resolution of K^s. Its F-image computes R^r F(K^s). Extend the resolution index by zero and flip.
-   The second filtration is preserved by the total differential. In total degree n its steps are the whole object
-   below the lower bound and zero above n, so it is finite degreewise.
-2. Apply thm-sp-spectral-object-yields to this filtration. The page-zero and
-   cycle/boundary identifications below specify the associated spectral sequence.
-   Its first page is the row cohomology. Under the unmodified row identifications
-   the differential is (-1)^r R^r F(d_K), by Tag 0130; multiplying the identification
-   in bidegree (s,r) by (-1)^(rs) gives the displayed unsigned differential.
-   The bounded filtration gives convergence to total cohomology.
-3. The total complex before applying F is bounded below and degreewise a finite sum
-   of injectives, hence K-injective. The augmented rows
-   are exact; filtering their total by complex degree gives zero first page, so the
-   augmentation K -> Tot(I) is a quasi-isomorphism.
-4. It is therefore a K-injective resolution. Additivity
-   of F commutes with the finite diagonal sums, identifying its image with the
-   total used below. The canonical cohomology comparison to any chosen K-injective
-   resolution identifies the abutment with H^n(RFK): `aug` is the augmentation into the
-   summands of resolution degree zero, `u` a comparison map over K to the chosen
-   resolution, `w` its F-image on the diagonal sums, and `c` the map `w` induces.
-   Comparison maps are unique up to homotopy, so their
-   induced cohomology maps are independent of the map and the Cartan--Eilenberg
-   resolution.
--/
+Source: Stacks Project, Tags 0130 and 015H. -/
 theorem exists_hypercohomology_firstPage
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]

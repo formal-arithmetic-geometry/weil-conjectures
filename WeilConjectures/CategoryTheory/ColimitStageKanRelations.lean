@@ -37,34 +37,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 This is only the relation calculation; it does not assert existence of representatives
 or a colimit universal property.
 
-Source: Stacks Project, Sites, Tag 0A35,
-arbitrary-object section formula and its independence of choices.
-
-Proof: Write S = Under.map(a). This functor is final: for any t in Under i,
-choose a common successor of t.right and k, then equalize the two maps from i.
-This gives an arrow t -> S(r). Parallel arrows into S(r) are equalized by a
-further stage refinement of r. Mathlib's filtered finality criterion applies.
-Thus the outer colimit B can also be evaluated over Under k via S.
-
-At U, put Y = V_j(U) and X_r = F(b followed by r.hom)(U). Normalize the stage
-map e_r followed by beta_(S(r)) to Y with the equality transport from V.w.
-The formula hbeta_map, hD, and naturality along equality transports show that
-these normalized maps intertwine D transitions with B(S(c)). Naturality of the
-outer colimit coprojections and hnu identify the cocone maps with the normalized
-maps followed by those coprojections. Evaluation preserves colimits. Its
-filtered-set equality criterion now moves x and x' to a common r in Under k
-where their normalized beta-unit images agree. Cancel the invertible endpoint
-transport to obtain equality under beta_(S(r)) at X_r.
-
-Apply raw_section_kan_unit_relations with base k, stage r, presheaves A_(S(q))
-and transition maps theta_(S(r),S(q),S(d)). That existing lemma lifts a finite
-zigzag of Kan relations to a later q and gives equality of the two theta images.
-The formula hD transports this equality to equality under e_q of the two
-D-transitions. Its component is an isomorphism, so cancellation gives equality
-of D sections. Functoriality of D combines each original transition with d.
-No generator-existence theorem or comparison universal property is used.
-The identity and composition hypotheses remain in the interface but are not
-needed by this reduction.
+Stacks Project, Sites, Tag 0A35.
 -/
 theorem stage_kan_cocone_relations
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})

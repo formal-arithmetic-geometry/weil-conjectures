@@ -431,37 +431,7 @@ private theorem ringedDerived_closed_symmetric_monoidal_native :
 /-- The unbounded derived category of modules on a small ringed site is closed symmetric
 monoidal, with its total-tensor constraints, Koszul symmetry and evaluation adjunction.
 
-Source: Stacks 0FPT and 08J9.
-
-Proof plan (the node's eleven steps):
-1. Sheaf tensor is additive, closed and symmetric;
-   module sheaves have all colimits. Apply
-   `lem-sfb-total-tensor-homotopy` to totalize and descend through homotopies.
-2. On bidegree (p,q), the signed swap has coefficient (-1)^(pq). Its differential commutes,
-   its square is one and it is natural on chain maps and their homotopy classes.
-3. K-flat complexes with flat terms contain the unit and are closed under total tensor:
-   associate an acyclic test tensor and apply K-flatness twice; flat terms and their
-   countable sums stay flat.
-4. Descend constraints and their inverses through the K-flat localization equivalence
-   and unique extension of natural transformations.
-5. Check pentagon, triangle and involutivity on representatives. Both hexagon paths have
-   sign (-1)^(p(q+r)) = (-1)^(pq+pr), so the signed symmetry is symmetric monoidal.
-6. Tensor commutes with cones; the cone criterion, K-flat
-   closure and `lem-pur-acyclic-kflat-tensor-arbitrary` give the one-K-flat comparison.
-7. Choose K-flat sources and a K-injective target. Their Hom is K-injective; use `lem-weil-pbc-kinjective-hom-derived`.
-8. Apply `lem-sc-derived-hom-tensor-total`, then global sections and ordinary H^0;
-   `lem-pur-hom-complex-global-homotopy` identifies the tensor-Hom bijection.
-9. Its inverse sends a curried map to x tensor y ↦ φ(x)(y), with no additional sign.
-   The Hom differential gives exactly the chain-map and homotopy equations.
-10. This formula is natural in all three complex variables; the localization and
-    K-injective comparisons extend naturality to all derived morphisms.
-11. Inverse transpose of the identity is resolved evaluation. Naturality in K gives
-    uncurry(u) = (u tensor 1) followed by evaluation, the adjunction counit formula.
-
-`CoefficientClosedStructure` retains all-variable naturality and the counit; its adjunction
-Hom equivalence is the displayed bijection. `CoefficientTensorModels.uncurry_model` fixes
-its evaluation normalization. `SymmetricCategory` retains naturality, involution and both
-hexagons, and `MonoidalCategory` retains pentagon and triangle. No boundedness is assumed. -/
+Source: Stacks 0FPT and 08J9. -/
 theorem ringedDerived_closed_symmetric_monoidal :
     ∃ S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R),
       ∃ T : CoefficientTensorModels.{u, c, v, w} J R S,

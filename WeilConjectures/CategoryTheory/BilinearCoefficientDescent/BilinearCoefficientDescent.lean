@@ -294,11 +294,7 @@ private theorem rawFunctor_linear (p : R) (U : C × C ⥤ D)
       intro X X' f a
       exact rawHom_smul_left p U hU _ _ _ _ a f (𝟙 Y)
 
-/-- Unique raw bilinear extension, including torsion Hom modules.
-Proof, steps 1--2: factor U(f,g) as U(f,1) followed by U(1,g). Separate linearity and
-bilinear composition make this bilinear on the two Hom modules. Apply module base change. On pure tensors identity and composition are the integral
-functor laws times the product of scalars. Tensor induction gives the laws and uniqueness;
-no injectivity into the tensor product is used. -/
+/-- Unique raw bilinear extension, including torsion Hom modules. -/
 theorem raw_extension_existsUnique (p : R) (U : C × C ⥤ D)
     (hU : IsSeparatelyLinear R U) :
     ∃! F : ScalarLocalization R C p × ScalarLocalization R C p ⥤
@@ -568,7 +564,7 @@ def output (U : Family S S₂ T) (join : I → I → I)
   ⟨join X.1.stage X.2.stage,
     (U.U _).obj (X.1.toStage (left _ _), X.2.toStage (right _ _))⟩
 
-/-- The endpoint identification d from the node's proof, using both input associators. -/
+/-- The endpoint identification `d`, using both input associators. -/
 def endpoint (U : Family S S₂ T) (join : I → I → I)
     (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
     (X : S.PairCategory × S₂.PairCategory) {L : I}
@@ -846,13 +842,7 @@ private theorem explicitDescent_spec (U : Family S S₂ T) (join : I → I → I
   rfl
 
 /-- Existence and uniqueness of the descended bifunctor with its explicit representatives.
-Proof, steps 5--9: choose a common upper stage for two arrow representatives and the output
-fields. Conjugate U_L(f,g) by the endpoint identifications. The comparison tower equation,
-the two input associator cocycles and comparison naturality show that this commutes with
-transport. Equality of representatives is equality after a further common stage, so the
-formula factors through the actual quotient Hom. Identity and composition follow by
-cancelling adjacent endpoint isomorphisms. Every arrow has a representative, giving uniqueness.
-This is the pair-category model of def-weil-algebraically-closed-coefficients, used without
+This is the pair-category model of algebraically closed coefficients, used without
 any geometric, additive-object or triangulated hypotheses. -/
 theorem descent_existsUnique (U : Family S S₂ T) (join : I → I → I)
     (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j) :
@@ -1078,9 +1068,7 @@ theorem uniformizer_mem (E : Padic.FiniteCoefficientFields l Ω) :
 set_option linter.unusedSectionVars false in
 attribute [local irreducible] Padic.finiteCoefficientCompositum uniformizer
 
-/-- The chosen output field is exactly the compositum, including the base-field case.
-Proof, step 5: finiteCoefficientFields_properties supplies both upper-bound proofs;
-finiteCoefficientCompositum is the supremum of intermediate fields, hence is finite. -/
+/-- The chosen output field is exactly the compositum, including the base-field case. -/
 theorem compositum_upper :
     (∀ E F : Padic.FiniteCoefficientFields l Ω,
       E ≤ Padic.finiteCoefficientCompositum l Ω E F) ∧

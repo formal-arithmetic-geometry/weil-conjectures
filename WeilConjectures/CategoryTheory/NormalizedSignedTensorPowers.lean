@@ -164,10 +164,7 @@ lemma signedFamily_positive_one
     tensorHom_id, id_whiskerRight, Category.id_comp]
 
 /-- Pairing a positive power with its normalized negative power is evaluation.
-Source: Stacks Project, Modules on Sites, Tags 03EK and 04TT.
-Proof: precompose by the two signedPowerIso maps. Transported multiplication then
-reduces to the integer-power pairing. The negative map is its transpose, so the
-uncurry-curry identity gives evaluation, and the two positive comparison maps cancel. -/
+Source: Stacks Project, Modules on Sites, Tags 03EK and 04TT. -/
 lemma signedFamily_evaluation
     (P : ℕ → C) (h0 : P 0 = 𝟙_ C)
     (hs : ∀ n, P (n + 2) = P (n + 1) ⊗ P 1) (e : TensorInverse (P 1)) (n : ℕ) :

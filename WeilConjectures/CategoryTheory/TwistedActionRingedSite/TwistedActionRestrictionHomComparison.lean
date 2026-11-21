@@ -128,26 +128,7 @@ private theorem restriction_uncurry (P : RestrictionPresentation J s R a)
 
 include hs in
 /-- The canonical restriction comparison is invertible.
-Source: Stacks, sites-modules.tex, section-internal-hom and.
-
-Proof: translation is an equivalence with natural tensor comparisons. The
-transpose of translated evaluation is consequently invertible: maps into it are
-bijective by full faithfulness, the tensor comparison and the tensor-Hom
-adjunction, and essential surjectivity extends this to every test object.
-Give Hom(M,N) the composite of this comparison with Hom(theta_M inverse, theta_N).
-It is an invertible action. Naturality of the translation tensor comparison and
-of the tensor-Hom adjunction shows that a map into this fixed pair is equivariant
-if and only if its untranspose is equivariant for the diagonal tensor action.
-The tensor-action equation in T therefore makes restrictionHomComparison a
-morphism of fixed pairs. Composition with it induces bijections on maps out of
-every object in the image of P.modules: the inverse untransposes an equivariant
-map, lifts the resulting tensor map by full faithfulness, and transposes it on
-the action site. The restriction tensor comparison and its naturality verify
-these inverse identities. Essential surjectivity and Yoneda prove that this
-fixed-pair morphism is invertible; forgetting its action proves the assertion.
-This uses no slice normalization, pure-tensor computation, induction, or choice
-of an internal Hom comparison. Zero modules, zero rings and empty sites obey
-the same adjunction and equivalence argument. -/
+Source: Stacks Project, sites-modules.tex. -/
 theorem restrictionHomComparison_isIso [HasPullbacks C]
     (P : RestrictionPresentation J s R a) (T : TensorComparisons J s R a P) :
     letI := P.category

@@ -1167,31 +1167,7 @@ attribute [local irreducible] restrictionDerived restrictionDerivedFactors
   CoefficientSectionsGeometry SheafOfModules.instCategory
 
 /-- The unit-normalized scalar comparisons, their resolution formula, and their cocycle.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E.
-
-Proof plan:
-1. Restriction preserves underlying abelian sheaves, hence kernels, cokernels and
-   quasi-isomorphisms. Descend it through Q; its localization factors determine its
-   composition and identity comparisons uniquely.
-2. The constant-sheaf/global-sections adjunction gives the geometric morphism to Set.
-   The map from the constant integer sheaf sends n to n times 1. The singleton-site
-   module equivalence identifies its module direct image with coefficientSections.
-3. Realize coefficient restriction as a ringed-topos direct image using
-   lem-weil-pbc-restriction-ringed-topos-module-direct-image. Apply
-   lem-weil-pbc-ringed-topoi-derived-pushforward-composition followed by the morphism
-   in step 2. Its representative formula gives the quasi-isomorphism Gamma(j).
-4. K-injective resolutions exist by prop-pur-kinjective-resolutions-exist. The
-   universal property of def-sfb-right-derived-functor constructs a unique sigma
-   carrying the S-derived unit to the R-derived unit, after the localization factors.
-5. At a K-injective L, naturality at j identifies sigma with Gamma(j), conjugated by
-   the derived units and localization factors. Every factor is invertible by step 3.
-   Resolving an arbitrary complex and naturality prove invertibility everywhere.
-6. The same formula is precisely the canonical 0D6E composition comparison under
-   the singleton-site equivalence; uniqueness makes it independent of all resolutions.
-7. Precompose the composite of two sigmas with the T-unit. The unit equation twice
-   gives the unit equation for the composite ring map; universal uniqueness gives
-   the cocycle. Applying the same argument to the identity gives its normalization.
-No flatness or preservation of injectives by restriction is used. -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E. -/
 theorem derivedSectionsScalarCoherence
     [∀ R : Sheaf J CommRingCat.{u}, HasDerivedCategory.{w} (coefficientModules R)]
     [HasDerivedCategory.{w} AddCommGrpCat.{u}] :

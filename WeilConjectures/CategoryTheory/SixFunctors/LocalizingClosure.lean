@@ -266,10 +266,8 @@ pro-etale scheme.
 
 The coefficient ring is the condensed ring `Λ`; `condensedRingObj Λ X` is its
 pullback `Λ_X`, and `ConstantModelConstructibleFiniteTor Λ X` is `Dctf(X, Λ)`.
-The localizing closure is the intersection defining the smallest full replete
-triangulated subcategory closed under all ambient coproducts; no completeness
-condition is imposed.
--/
+The localizing closure is the smallest full replete triangulated subcategory closed under all
+ambient coproducts. -/
 noncomputable def localizingClosureProEtale
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :=

@@ -60,18 +60,18 @@ public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # Pullback and scalar extension on entire algebra diagrams
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E,
-with the scalar/unit refinement on diagram sites in proof steps 1--6.
-
 The presentation records below specify the existing functors and their normalized
 comparison maps. They impose no flatness condition on the coefficient algebra.
-The interface is recorded by def-pur-algebra-diagram-pullback-data.
 
-## Main declarations
+## Main definitions
 
 * `ScalarDerivedPresentation` fixes scalar extension and its representative unit.
 * `Coherence` records the two normalized comparisons and their coherence equations.
 * `algebraDiagramPullbackExtensionCoherence` supplies these for entire diagram sites.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -109,20 +109,20 @@ variable {C : Type u} [SmallCategory C] {K : GrothendieckTopology C}
   {R B : Sheaf K CommRingCat.{u}}
 
 /-- The regular algebra as a module over its base, with the actual restriction maps.
-Source: Stacks 03CY, proof step 3. -/
+Source: Stacks 03CY. -/
 abbrev coefficient (a : R ⟶ B) : Modules.{u, u, u} R :=
   (restrictionFunctor.{u, u, u, u} a).obj
     (SheafOfModules.unit ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B))
 
 /-- The coefficient module placed in degree zero.
-Source: Stacks 07A4, proof step 3. -/
+Source: Stacks 07A4. -/
 abbrev coefficientComplex (a : R ⟶ B) : Complex.{u, u, u} R :=
   (HomologicalComplex.single (Modules.{u, u, u} R) (.up ℤ) 0).obj (coefficient a)
 
 /-- Presentation of the ordinary tensor/scalar identification, normalized on the
 sheafification images of local tensors. Its naturality includes horizontal arrows
 when K is a diagram-site topology.
-Source: Stacks 03EK, 03CY, proof steps 2--3. -/
+Source: Stacks 03EK, 03CY. -/
 structure ScalarTensorPresentation (a : R ⟶ B) where
   iso : (curriedTensor (Modules.{u, u, u} R)).flip.obj (coefficient a) ≅
     extensionFunctor.{u, u, u} a ⋙ restrictionFunctor.{u, u, u, u} a
@@ -136,7 +136,7 @@ structure ScalarTensorPresentation (a : R ⟶ B) where
 
 /-- The corresponding actual chain isomorphism, using the single-factor total
 identification and the termwise lift of the specified ordinary tensor comparison.
-Source: Stacks 07A4, proof steps 2--3. -/
+Source: Stacks 07A4. -/
 def ScalarTensorPresentation.total {a : R ⟶ B} (t : ScalarTensorPresentation a)
     (P : Complex.{u, u, u} R) : P ⊗ coefficientComplex a ≅
       (restrictComplex.{u, u, u, u} a).obj ((extend.{u, u, u} a).obj P) :=
@@ -145,7 +145,7 @@ def ScalarTensorPresentation.total {a : R ⟶ B} (t : ScalarTensorPresentation a
 
 /-- Exactness facts needed to write the termwise-localized restriction functor.
 They are conclusions of the main theorem, rather than extra algebra hypotheses.
-Source: Stacks 03CY, proof step 1. -/
+Source: Stacks 03CY. -/
 class ExactRestriction (a : R ⟶ B) where
   [limits : PreservesFiniteLimits (restrictionFunctor.{u, u, u, u} a)]
   [colimits : PreservesFiniteColimits (restrictionFunctor.{u, u, u, u} a)]
@@ -156,14 +156,14 @@ variable [HasDerivedCategory.{w} (Modules.{u, u, u} R)]
   [HasDerivedCategory.{w} (Modules.{u, u, u} B)]
 
 /-- Tensoring by the actual underlying coefficient complex in the published derived tensor.
-Source: Stacks 06YY and 07A4, proof step 3. -/
+Source: Stacks 06YY and 07A4. -/
 def scalarTensorFunctor (a : R ⟶ B) :
     DerivedCategory (Modules.{u, u, u} R) ⥤ DerivedCategory (Modules.{u, u, u} R) :=
   (canonicalDerivedTensor.{u, u, u, w} R).flip.obj
     (DerivedCategory.Q.{w}.obj (coefficientComplex a))
 
 /-- The identity identification of the fixed-coefficient tensor with its bifunctor value.
-Source: Stacks 06YY and 07A4, proof step 3. -/
+Source: Stacks 06YY and 07A4. -/
 def scalarTensorComparison (a : R ⟶ B) : scalarTensorFunctor.{u, w} a ≅
     (canonicalDerivedTensor.{u, u, u, w} R).flip.obj
       (DerivedCategory.Q.{w}.obj (coefficientComplex a)) := Iso.refl _
@@ -172,7 +172,7 @@ attribute [local irreducible] scalarTensorFunctor scalarTensorComparison
 
 /-- The ordinary scalar-extension unit lifted to actual complexes, with the canonical
 identity and composition identifications made explicit.
-Source: Stacks 03CY and 06YY, proof step 5. -/
+Source: Stacks 03CY and 06YY. -/
 def scalarCochainUnit (a : R ⟶ B) : 𝟭 (Complex.{u, u, u} R) ⟶
     extend.{u, u, u} a ⋙ restrictComplex.{u, u, u, u} a :=
   (Functor.mapHomologicalComplexIdIso (Modules.{u, u, u} R) (.up ℤ)).inv ≫
@@ -183,7 +183,7 @@ def scalarCochainUnit (a : R ⟶ B) : 𝟭 (Complex.{u, u, u} R) ⟶
 attribute [local irreducible] scalarCochainUnit
 
 /-- Representative normalization of the derived scalar-extension unit.
-Source: Stacks 03CY and 06YY, proof step 5. -/
+Source: Stacks 03CY and 06YY. -/
 def IsNormalizedScalarUnit
     (a : R ⟶ B) [e : ExactRestriction a]
     (model : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, u, u, w, w} a)
@@ -202,7 +202,7 @@ def IsNormalizedScalarUnit
       ((scalarCochainUnit a).app P)
 
 /-- Two-resolving-factor normalization of underlying derived scalar extension.
-Source: Stacks 06YY and 07A4, proof step 3. -/
+Source: Stacks 06YY and 07A4. -/
 def IsNormalizedScalarTensor
     (a : R ⟶ B) [e : ExactRestriction a]
     (model : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, u, u, w, w} a)
@@ -233,7 +233,7 @@ attribute [local irreducible] IsNormalizedScalarUnit IsNormalizedScalarTensor
 /-- A normalized presentation of scalar extension, its unit and its underlying
 derived tensor. All ordinary and derived categories here are the dependencies'
 existing categories; the counit fixes the derived extension on K-flat models.
-Source: Stacks 06YY and 07A4, proof steps 2--3 and 5. -/
+Source: Stacks 06YY and 07A4. -/
 structure ScalarDerivedPresentation (a : R ⟶ B) [e : ExactRestriction a] where
   model : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, u, u, w, w} a
   ordinary : model.E ≅ extensionFunctor.{u, u, u} a
@@ -250,7 +250,7 @@ variable {D : Type u} [SmallCategory D] {L : GrothendieckTopology D}
 
 /-- Exactness of an inverse image whose structural coefficient map is invertible.
 This is output data, not a flatness assumption on the algebra extension.
-Source: Stacks 03D2 and 0G7E, proof step 1. -/
+Source: Stacks 03D2 and 0G7E. -/
 class ExactPullback (f : RingedPullback.{u, u, u, u, u} R S) where
   [limits : PreservesFiniteLimits f.L]
   [colimits : PreservesFiniteColimits f.L]
@@ -268,7 +268,7 @@ variable (f : RingedPullback.{u, u, u, u, u} R S)
 
 /-- The degree-zero coefficient identification after exact derived pullback.
 It uses the existing exact factorization and single-complex functoriality.
-Source: Stacks 07A4, proof step 3. -/
+Source: Stacks 07A4. -/
 def derivedCoefficientIso
     (beta : f.L.obj (coefficient d.sourceMap) ≅ coefficient d.targetMap) :
     f.L.mapDerivedCategory.{w, w}.obj (DerivedCategory.Q.{w}.obj (coefficientComplex d.sourceMap)) ≅
@@ -280,7 +280,7 @@ def derivedCoefficientIso
         (HomologicalComplex.single (Modules.{u, u, u} S) (.up ℤ) 0).mapIso beta)
 
 /-- The exact source and target of the scalar-association comparison on derived objects.
-Source: Stacks 03EL and 07A4, proof step 2. -/
+Source: Stacks 03EL and 07A4. -/
 def ExtensionComparison
     (source : ScalarDerivedPresentation.{u, w} d.sourceMap)
     (target : ScalarDerivedPresentation.{u, w} d.targetMap) : Type (max (u + 1) w) :=
@@ -290,7 +290,7 @@ def ExtensionComparison
     DerivedCategory (Modules.{u, u, u} R) ⥤ DerivedCategory (Modules.{u, u, u} d.S'))
 
 /-- Localization of the specified balanced cochain association on resolving representatives.
-Source: Stacks 03EL and 07A4, proof step 2. -/
+Source: Stacks 03EL and 07A4. -/
 def IsNormalizedExtension
     (source : ScalarDerivedPresentation.{u, w} d.sourceMap)
     (target : ScalarDerivedPresentation.{u, w} d.targetMap)
@@ -316,7 +316,7 @@ attribute [local irreducible] IsNormalizedExtension
 on all generalized inverse-image generators; c is specified by the existing kappa
 on every flat-term K-flat representative. The tensor comparison is independently
 normalized on two resolving factors, before specializing its coefficient argument.
-Source: Stacks 03EL, 07A4, 0G7E, proof steps 1--6. -/
+Source: Stacks 03EL, 07A4, 0G7E. -/
 structure Coherence where
   source : ScalarDerivedPresentation.{u, w} d.sourceMap
   target : ScalarDerivedPresentation.{u, w} d.targetMap
@@ -382,7 +382,7 @@ structure Coherence where
 /-- The actual scalar-extension map induced by a map of coefficient modules,
 transported through the normalized underlying tensor presentations. Thus its data
 comes from the existing derived tensor functor, not from an arbitrary chosen map.
-Source: Stacks 07A4, proof step 6. -/
+Source: Stacks 07A4. -/
 def scalarUnderlyingMap {B' : Sheaf K CommRingCat.{u}} {a : R ⟶ B} {a' : R ⟶ B'}
     [HasDerivedCategory.{w} (Modules.{u, u, u} B')]
     [e : ExactRestriction a] [e' : ExactRestriction a']
@@ -400,7 +400,7 @@ def scalarUnderlyingMap {B' : Sheaf K CommRingCat.{u}} {a : R ⟶ B} {a' : R ⟶
 module maps hY and hX are fixed sectionwise to the ring maps, so quantify over
 presentations of those canonical maps only. Both equations live in the derived
 category of the whole diagram site.
-Source: Stacks 03EL and 07A4, proof step 6. -/
+Source: Stacks 03EL and 07A4. -/
 def Coherence.CoefficientNaturality (q : Coherence f k d k') : Prop :=
   ∀ (d' : CoefficientSquare.{u, u, u, u, u} f)
     (k'' : Comparison.{u, u, u, u, u} (changed f d'))
@@ -450,7 +450,7 @@ variable {C D : Type u} [SmallCategory C] [SmallCategory D]
 
 /-- All conclusions, including exactness, so no exactness assumption is imposed
 on input scalar extension or its coefficient algebra.
-Source: Stacks 03D2, 03CY, 07A4 and 0G7E, proof steps 1--6. -/
+Source: Stacks 03D2, 03CY, 07A4 and 0G7E. -/
 structure Result where
   [base_exact : ExactPullback f]
   [algebra_exact : ExactPullback (changed f d)]

@@ -47,18 +47,7 @@ private theorem gradedPiece_isZero_of_complexStep_eq_bot
 /-- Row cohomology, including the differential, for the second-degree filtration.
 The differential retains the totalization sign. No injectivity or augmentation
 is assumed, and no convergence is claimed.
-Source: Stacks Project, Tag 0130.
-
-Proof.
-Build the spectral sequence of the filtration by the differential-object self-map
-construction, retaining the page-zero and cycle/boundary identifications. The graded
-complex at s is the row F(I.X s), extended by zero and placed in degrees s+r: the
-component raising s disappears on taking the quotient. Thus page one is its cohomology.
-To compute d₁, lift a row cocycle to L^s/L^(s+2). Its total differential has only
-the component raising complex degree, with coefficient (-1)^r. The connecting map
-is consequently (-1)^r times the map of row cohomology induced by I.d s (s+1).
-The extended row is zero in negative resolution degrees, so its cohomology there
-vanishes. This proves the negative-degree page-one clause. -/
+Source: Stacks Project, Tag 0130. -/
 theorem secondFiltration_row_cohomology
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]

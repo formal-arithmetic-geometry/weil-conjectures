@@ -74,15 +74,8 @@ private theorem signed_primitive
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Correct the differential and augmentation defects of a prescribed degreewise map.
-Factor the defects as in `horseshoe_defect_factorization`, obtaining E and e. Extend e
-across the monic augmentation of IC into the injective degree-zero term of JA, giving k₀.
-The relation ιC E₀ = e dA' makes k₀ dA' - E₀ descend along dC₀, giving k₁.
-Inductively, if dCₙ kₙ₊₁ = kₙ dA'ₙ - Eₙ, the signed cocycle identity and d² = 0
-show that kₙ₊₁ dA'ₙ₊₁ - Eₙ₊₁ vanishes on dCₙ. Exactness of IC and injectivity of
-JA let it descend along dCₙ₊₁, defining kₙ₊₂. This is the inductive null-homotopy
-argument of Tag 013R specialized to the augmented resolution, with its signs undone.
-The resulting identities cancel both defects of t - βkα'.
-Source: Stacks Project, derived.tex, Tag 013R, proof by successive injective extensions. -/
+The defects are those of `horseshoe_defect_factorization`; the correction is obtained by
+successive injective extensions as in Stacks Project, Tag 013R. -/
 theorem horseshoe_homotopy_correction
     {C : Type u} [Category.{v} C] [Abelian C]
     (S T : ShortComplex C) (hS : S.ShortExact) (hT : T.ShortExact) (F : S ⟶ T)

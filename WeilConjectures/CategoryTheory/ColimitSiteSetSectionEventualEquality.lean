@@ -162,29 +162,6 @@ private theorem raw_colimit_comparison_iso
 /-- Source: Stacks Project, Sites, Tag 0A35.
 
 Equal stage-section images become equal after one refinement.
-
-Proof: Construct the sheaf on the limit site from filtered colimits of stage
-inverse-image sections over presentations of each object, as in Tag 0A35.
-Finite presentations admit common refinements, and parallel refinements are
-equalized by filteredness and eventual object and arrow equality. Lifting
-restriction arrows defines the presheaf; lifting finite covers and preserving
-covering pullbacks identifies its sheaf equalizers with filtered colimits of
-stage equalizers. Commutation with finite limits, including empty products,
-makes it a sheaf. Stage adjunctions identify maps from it to H with maps from
-G to restriction of H along V i: transpose at every presentation in one
-direction, and use the identity presentation and unit in the other. Uniqueness
-of adjuncts proves these are inverse, giving the unit-compatible isomorphism
-with the limit inverse image. Presentations coming from U are final over
-V i U by common-stage lifting and eventual equality, so the evaluated set
-colimit is indexed by Under i. If K.ι.app t x = K.ι.app t y, apply e.hom and hι.
-The resulting stage sections E t x and E t y have equal images in this set
-colimit, because hα identifies α with its coprojections. The same-stage equality
-criterion for filtered colimits gives one b : t to t' at which they agree.
-Uniqueness under hθ identifies this refinement map with θ. The transition
-identity hm translates that equality into equality after applying E t' to
-D.map b x and D.map b y. Cancel the isomorphism E t' to get the desired equality.
-This claims only eventual equality for two given representatives; it neither
-constructs a diagram nor asserts that every section has a representative.
 -/
 theorem colimit_site_set_section_eventual_equality
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})

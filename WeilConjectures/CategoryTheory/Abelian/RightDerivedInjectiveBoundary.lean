@@ -100,23 +100,7 @@ set_option backward.isDefEq.respectTransparency false in
 that of its termwise image. This is a resolution-level assertion: it does not
 involve augmentations, single objects or comparisons with chosen resolutions.
 
-Source: Stacks Project, Derived Categories, Tags 014Q, 0159 and 015B.
-
-Proof: Split each degree row using injectivity of its first object. The proved
-DerivedCategory.triangleOfSESδ_eq_degreewiseSplit identifies the source boundary
-with localization of CochainComplex.homOfDegreewiseSplit. Apply the additive
-functor to the splittings. Its image connecting chain map agrees with the image
-of the source connecting chain map followed by the termwise shift comparison:
-in each degree both maps are section, image differential, retraction. The same
-proved boundary comparison identifies the image SES boundary with this map.
-Lift the source connecting map to the bounded below complexes, whose shift is
-again bounded below. Naturality of the derived unit at this map, followed by its
-shift compatibility, gives the boundary square for the units. The endpoint
-units are isomorphisms because the endpoint complexes have injective terms;
-invert them. Finally use quotient-factorization naturality and shift
-compatibility to obtain exactly the equation with the displayed definitions.
-This argument works for zero rows and any common lower bound.
--/
+Source: Stacks Project, Derived Categories, Tags 014Q, 0159 and 015B. -/
 theorem rightDerived_injectiveComplex_boundary
     (v : A ⥤ B) [v.Additive] (H : ShortComplex (CochainComplex.Plus A))
     [∀ n : ℤ, Injective (H.X₁.obj.X n)]

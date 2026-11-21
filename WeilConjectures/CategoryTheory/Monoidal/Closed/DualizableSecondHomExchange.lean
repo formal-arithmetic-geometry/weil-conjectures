@@ -18,12 +18,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 namespace CategoryTheory.MonoidalClosed
 
 /-- The evaluation-defined exchange is invertible for a dualizable last factor.
-Source: Stacks 08JD, 08JJ, 08JC.
-Proof: choose a dual D of Q. Tensoring by D is left adjoint to tensoring by Q.
-Compose this adjunction with the tensor-K/closed-Hom adjunction in the two orders.
-The associator identifies their left adjoints, so uniqueness identifies their right
-adjoints. Their counits show that this isomorphism is precisely the transpose of
-reassociation followed by evaluation tensored with Q. -/
+Source: Stacks 08JD, 08JJ, 08JC. -/
 theorem isIso_ihomTensorToIhom_of_isDualizable
     {C : Type*} [Category* C] [MonoidalCategory C] [SymmetricCategory C]
     [MonoidalClosed C] (K L Q : C) (hQ : IsDualizable Q) :

@@ -21,15 +21,7 @@ namespace CategoryTheory.Adjunction
 
 /-- Assembly of the lifted ring adjunction from single-functor transport and the
 restricted natural hom-bijection.
-Source: Stacks Project, Proposition 00YV, paragraph on rings as sextuples.
-
-Proof: apply finiteProductRingFunctor separately to L and R. Their operation
-formulas permit ringHomEquivCore to restrict the original natural hom-bijection.
-Apply Mathlib's mkOfHomEquiv to that core; its hom-equivalence is the supplied one.
-The unit and counit are its values on identities and inverse values on identities,
-respectively. The final existence criterion follows by applying this equivalence
-in one direction and its inverse in the other, using injectivity of the original
-adjunction hom-equivalence for the backward equation. -/
+Source: Stacks Project, Proposition 00YV, paragraph on rings as sextuples. -/
 theorem liftedCommRingBranch
     {A : Type uA} [Category.{vA} A] [CartesianMonoidalCategory A]
     {B : Type uB} [Category.{vB} B] [CartesianMonoidalCategory B]

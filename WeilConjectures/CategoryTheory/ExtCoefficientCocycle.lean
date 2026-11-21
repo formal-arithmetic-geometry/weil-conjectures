@@ -11,7 +11,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Exact functors and coefficient maps on individual Ext cocycles
 
-Source: Stacks Project, Tag 06XR; Tag 01F8, equations 01F9 and 01FA.
+## References
+
+* Stacks Project, Tag 06XR; Tag 01F8, equations 01F9 and 01FA.
 -/
 
 @[expose] public section
@@ -23,18 +25,8 @@ namespace CategoryTheory.InjectiveResolution
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An exact functor and a coefficient map send a single Ext cocycle to its image.
-Source: Stacks Project, Tag 06XR; Tag 01F8, equations 01F9 and 01FA; Tag 013P.
 
-Proof. Express the class of a as the derived-category roof with denominator the
-augmentation of R. Exactness of L preserves this invertible denominator. The supplied
-homotopy identifies L of the augmentation followed by φ with the single-complex
-comparison followed by v and the augmentation of R'. Precompose the roof with α and
-postcompose with v. Cancel the invertible target augmentation. The numerator is now
-α;L(a);φ, which is the roof representing the displayed target cocycle. Injectivity of
-Ext.hom gives equality of Ext classes. The assumptions ha and ha' ensure both roofs
-represent cocycles. This is only the calculation on one cocycle, before descent to
-homology or evaluation on sections. In degree zero the same roof calculation applies;
-zero cocycles, zero coefficients and zero objects give zero on both sides. -/
+Stacks Project, Tags 06XR, 01F8, 01F9, 01FA and 013P. -/
 theorem ext_mapExactFunctor_coefficient_cocycle
     {C : Type w} {D : Type w'} [Category.{v} C] [Category.{v} D]
     [Abelian C] [Abelian D] [HasExt.{v} C] [HasExt.{v} D]

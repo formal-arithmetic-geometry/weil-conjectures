@@ -26,23 +26,7 @@ namespace CategoryTheory
 
 /-- An exact coproduct-preserving functor out of the unbounded derived category of a
 Grothendieck abelian category has a right adjoint.
-Source: Stacks Project, Tag 0F5Y, `injectives-.
-
-Proof in words: for each target object Y, the additive functor
-H(W) = Hom(F(W), Y) is cohomological by exactness and takes coproducts to products.
-The Grothendieck Brown argument represents H as follows. Present the abelian
-category by the Gabriel-Popescu exact localization L from modules over a ring R.
-Its derived right adjoint RG is fully faithful and L RG is the identity. The
-functor H L is represented by a module complex E, by Brown representability for
-the compact generator R. In the triangle M → E → RG(L(E)) → M[1], L(M) = 0,
-so Hom(M, E) = H(L(M)) = 0. Thus E → RG(L(E)) is a split monomorphism.
-Via the localization adjunction, H is consequently a natural direct summand of
-Hom(-, L(E)). The derived category is idempotent complete, so this summand is
-represented. Finally Yoneda assembles the representing objects for all Y into a
-functor and the natural representing bijections give the right adjunction.
-This is the argument of Tags 0F5X and 0F5Y; no compact-generation assertion for
-D(A) is used.
--/
+Source: Stacks Project, Tag 0F5Y, `injectives-. -/
 theorem grothendieckDerived_hasRightAdjoint
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]

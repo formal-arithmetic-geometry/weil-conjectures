@@ -14,8 +14,10 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 /-!
 # An obstruction to strictifying systems of finite precoverages
 
-Source: the indexed base-change axiom in Mathlib's `Precoverage.IsStableUnderBaseChange`,
-applied to the construction of Stacks Project, Categories, Tag 004A.
+## References
+
+* the indexed base-change axiom in Mathlib's `Precoverage.IsStableUnderBaseChange`,
+  applied to the construction of Stacks Project, Categories, Tag 004A.
 -/
 
 @[expose] public section
@@ -53,19 +55,11 @@ private theorem finite_of_injective_iso_family
   let f : A → R.uncurry := fun a ↦ ⟨⟨Y a, (s a).hom⟩, Presieve.ofArrows.mk a⟩
   exact Finite.of_injective f (fun a b h ↦ hY (congrArg (fun z ↦ z.val.1) h))
 
-/-- Source: Mathlib `Precoverage.IsStableUnderBaseChange`, together with the strict
-coefficient equalities in Stacks Project, Categories, Tag 004A, applied fibrewise.
+/-- Obstruction to strictifying a system of sites with finite coverings over an infinite
+directed set with a top element: the strict coefficient equalities, together with the
+equivalences at each index, would produce an infinite covering at the largest index.
 
-Proof: put every transition image of the one source object in the category at the
-largest index. Its image under the coefficient functor is its original index, by
-both strict equalities. Thus these objects form an injective family indexed by I.
-Essential surjectivity of the equivalence at the largest index makes every one
-of them isomorphic to the image of the unique source object. The singleton identity
-covering may be indexed by I, repeating its one arrow. Pull it back along the
-identity using these isomorphisms as both legs of the pullback squares. The indexed
-base-change axiom makes the resulting family covering. Its uncurry contains an
-injective image of I, contradicting the assumed finiteness of every covering.
-No preservation or continuity assumptions are needed for this obstruction. -/
+Mathlib `Precoverage.IsStableUnderBaseChange`; Stacks Project, Categories, Tag 004A. -/
 theorem site_system_strictification_obstruction
     (I : Type u) [Preorder I] [OrderTop I] [Infinite I]
     (C : Type u) [SmallCategory C] [Subsingleton C] (c : C)

@@ -121,13 +121,9 @@ private theorem reconstructedRingObjects_eq
         | exact (hrU.2.2.2.2 x).trans (hsU.2.2.2.2 x).symm
 
 
-/-- Surjectivity component of internal ring-object reconstruction.
-Proof in words: Evaluate the internal operations on each section set. The
-internal ring diagrams give commutative ring structures, and naturality gives
-ring-homomorphic restrictions. The underlying set sheaf therefore carries a
-sheaf of commutative rings whose transported operations agree with the given
-object by `hops`; extensionality and proof irrelevance identify the resulting
-object with the original one, giving a preimage under `F.obj`. -/
+/-- A functor from sheaves of commutative rings to internal commutative ring objects in sheaves
+of sets, compatible with the forgetful functors and the sectionwise operations, is surjective
+on objects. -/
 theorem sheafRingObjects_surjective
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (F : Sheaf J CommRingCat.{max u v w} ⥤

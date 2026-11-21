@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.FiniteProducts
 /-!
 # Finite modules with continuous linear group actions
 
-Source: Stacks Project, Tag 0DV5, proof of (3).
+Source: Stacks Project, Tag 0DV5.
 -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ open scoped FintypeCatDiscrete
 namespace CategoryTheory
 
 /-- Finite linear representations with continuous action on the discrete carrier.
-Source: Stacks Tag 0DV5, proof of (3).
+Source: Stacks Tag 0DV5.
 `Rep.DiscreteContinuousRep R G` has equivariant linear maps as morphisms. For a group, its
 endomorphisms are automatically automorphisms. Open stabilizers are equivalent to joint
 continuity since the module has the discrete topology. -/

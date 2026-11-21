@@ -41,10 +41,7 @@ noncomputable def tailSequence {V U : A} {n : ℕ}
     (cokernel.desc (E.sequence.map' 0 1) (E.sequence.map' 1 2)
       (E.exact.toIsComplex.zero 0))
 
-/-- Exactness of the cokernel tail. Source: Stacks Project, Tag 06XU.
-Proof: its first arrow is monic by exactness of the first two original arrows.
-At the next term, precomposing with the epic cokernel projection identifies the
-new pair with the old exact pair; all later pairs are unchanged. -/
+/-- Exactness of the cokernel tail. Stacks Project, Tag 06XU. -/
 theorem tailSequence_exact {V U : A} {n : ℕ} (E : YonedaExtension A V U (n + 2)) :
     E.tailSequence.Exact := by
   apply ComposableArrows.exact_of_δ₀

@@ -78,20 +78,7 @@ private theorem cokernel_exact {C : Type*} [Category C] [Abelian C]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Factor the connecting map of a Roos triangle through the first derived limit.
-Source: Stacks Project, More on Algebra, Tag 07KY; Tag 07KW.
-
-Proof: preserve countable products under cohomology using Tag 07KC and identify
-cohomology of the transition endomorphism componentwise with the Roos map.
-The long exact cohomology sequence in degrees i-1 and i has a connecting map
-from the product in degree i-1 to H^i(L). Its kernel is the image of the Roos map.
-Descend through the cokernel and compose with the natural Roos isomorphism
-R^1 lim H^{i-1}(K) to this cokernel (Tag 07KW). The descended arrow is mono
-by exactness at the connecting map's source. Exactness at H^i(L) identifies
-its image with the kernel of H^i(p). Both factorizations are unique since the
-cokernel projection is epi. Naturality of the connecting map and of the Roos
-isomorphism therefore gives the displayed naturality square. Choose zero maps
-for triples which are not distinguished; for distinguished triples use these
-unique factorizations. This chooses all maps simultaneously. -/
+Source: Stacks Project, More on Algebra, Tag 07KY; Tag 07KW. -/
 theorem milnor_boundary_factorization [HasDerivedCategory.{v} AddCommGrpCat.{u}]
     (i : ℤ) :
     ∃ (a : ∀ (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u})

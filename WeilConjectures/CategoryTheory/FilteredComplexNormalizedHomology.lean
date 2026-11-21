@@ -61,15 +61,7 @@ theorem filteredComplex_cycles_successor_le
   rw [Category.assoc, imageSubobject_arrow_comp, hfac]
 
 /-- There is exactly one successor homology isomorphism with this normalization.
-Source: Stacks Project, Tag 012K, Lemma 12.24.2.
-
-Proof. The successor-cycle cover f is epic. The successor-boundary image formula
-identifies the kernel of f followed by the homology projection with the image of
-the successor boundary inclusion. Thus this composite is a cokernel of that
-inclusion, as is the successor page projection. The unique comparison of these
-two cokernels is the desired isomorphism. Its equation is independent of the
-chosen cycle cover because the page cycle inclusion is monic. Cancelling the
-epic composite f followed by the homology projection proves uniqueness. -/
+Source: Stacks Project, Tag 012K, Lemma 12.24.2. -/
 theorem filteredComplex_normalized_homology
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)
     (D : FilteredComplexPageDifferential K F r) (pq : ℤ × ℤ) :

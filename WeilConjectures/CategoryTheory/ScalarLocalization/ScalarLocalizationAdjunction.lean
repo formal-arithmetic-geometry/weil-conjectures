@@ -39,11 +39,7 @@ variable (R : Type r) [CommRing R] (p : R)
 
 /-- A linear adjunction `F ⊣ G` induces an adjunction between the scalar localizations
 `transport R p F ⊣ transport R p G`. The Hom bijections are the base changes of the
-original ones, so `a ⊗ f` corresponds to `a ⊗ adj.homEquiv f`.
-
-Proof: tensor each linear adjunction bijection with the localized coefficient ring.
-Naturality in both variables is checked on two pure tensors, where it is the original
-adjunction naturality, and then on sums by bilinearity. -/
+original ones, so `a ⊗ f` corresponds to `a ⊗ adj.homEquiv f`. -/
 def transportAdjunction {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
     [F.Additive] [F.Linear R] [G.Additive] [G.Linear R] :
     transport R p F ⊣ transport R p G :=
@@ -90,10 +86,7 @@ def transportAdjunction {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
           | add h i hh hi => simp only [map_add, LinearMap.add_apply, hh, hi]
         | add g i hg hi => simp only [map_add, hg, hi] }
 
-/-- A linear left adjoint remains a left adjoint after scalar localization.
-
-Proof: the right adjoint is additive and linear, so `transportAdjunction` applies. This does
-not assert any geometric comparison or existence of an integral adjoint. -/
+/-- A linear left adjoint remains a left adjoint after scalar localization. -/
 theorem isLeftAdjoint_transport (F : C ⥤ D) [F.Additive] [F.Linear R]
     [F.IsLeftAdjoint] : (transport R p F).IsLeftAdjoint := by
   let adj : F ⊣ F.rightAdjoint := Adjunction.ofIsLeftAdjoint F

@@ -19,13 +19,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory.TwistedActionRingedSite
 
 /-- A sheaf whose internal-Hom functor is the identity is the tensor unit.
-Source: Stacks 03EO and the sheaf tensor-Hom adjunction.
-
-Proof: curry the given uncurried Hom comparison. Tensoring on the left by M
-is left adjoint to this Hom functor, hence to the identity. Uniqueness of
-left adjoints identifies tensoring by M with the identity. Evaluate that
-isomorphism at the unit and precompose with the inverse right unitor. This
-argument works in the zero category as well. -/
+Source: Stacks 03EO and the sheaf tensor-Hom adjunction. -/
 theorem unit_iso_of_identity_hom
     {C : Type v} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{v}) (M : TwistedActionRingedSite.Modules R)

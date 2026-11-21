@@ -54,17 +54,7 @@ private theorem unit_basis_tensor
 /-- The left unitor takes a canonical supported negative tensor to its specified
 pure-tensor summand for the coefficient complex O[0].
 
-Source: Stacks Project, More on Algebra, Tag 0664, tensoring finite Koszul factors; Algebraization, Tag 0A0E, pure tensor normalization.
-
-Proof: in a monoidal category apply leftUnitor'_inv to a map beta from the unit.
-Naturality of the right unitor, the interchange law, and naturality of the left
-unitor move beta through the two unit maps. The inverse left and right unitors
-of the unit agree. This proves the displayed pure-tensor identity in coefficient
-degree zero. For a supported subset, q=-card I and q+card I=0. Substitute this
-relation and apply that identity to the specified negative basis vector. The
-right-hand side is exactly the definition of ringedNegativeKoszulSummand with
-coefficient complex O[0], including its equality transport. The calculation uses
-no scalar property and includes the empty subset and empty tensor. -/
+Source: Stacks Project, More on Algebra, Tag 0664; Algebraization, Tag 0A0E. -/
 theorem ringedNegativeKoszulBasis_leftUnitor
     {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}
     (O : Sheaf T CommRingCat.{w}) {A : Type w} [CommRing A]

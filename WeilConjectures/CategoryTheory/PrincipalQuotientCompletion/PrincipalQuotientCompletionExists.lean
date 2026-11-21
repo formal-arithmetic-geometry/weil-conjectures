@@ -182,24 +182,7 @@ variable [HasDerivedCategory.{w}
 /-- Principal quotient completion exists on the unbounded derived category, with
 its universal counit and its prescribed quotient augmentation.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 06YT and 0941.
-
-Proof: The quotient maps form a strict natural augmentation. Its product is killed
-by 1 minus the transition shift, so the canonical Roos lift defines an augmentation
-with zero shifted-product component and quotient-product second component. Tensor
-homotopies with each quotient, take products, and take the induced signed cone
-homotopy; thus quotientRoos followed by localization factors through the homotopy
-category. A quasi-isomorphism between K-flat complexes remains a quasi-isomorphism
-after tensoring with each quotient, by the K-flat tensor comparison. Exact countable
-products preserve these quasi-isomorphisms, and the cone triangle shows the same
-for quotientRoos. Every complex admits a K-flat resolution with flat terms (06YS).
-The resolving-class construction therefore gives its universal left derived functor,
-whose counit is invertible on all K-flat complexes, regardless of termwise flatness.
-Transport its counit from the homotopy category to cochains. The localized strict
-augmentation is a natural map Q → quotientRoos ⋙ Q. Lift it through the universal
-counit to obtain the completion unit. The factorization identity is unit_computes;
-the explicit Roos lift gives coordinates. No regularity of the section is needed:
-the definition derives tensor with the ordinary cokernel quotient itself. -/
+Source: Stacks Project, Tags 06YS, 06YT and 0941. -/
 theorem nonempty_model
     (t : (SheafOfModules.unit
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections)

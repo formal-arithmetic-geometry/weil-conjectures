@@ -33,35 +33,7 @@ single-object triangle to the derived triangle of the termwise image resolution.
 Its endpoint homology maps are the canonical right-derived identifications.
 No delta-functor or chosen connecting maps are involved in this statement.
 
-Source: Stacks Project, Derived Categories, Tags 014Q, 05TE and 015B.
-
-Proof:
-1. Extend the three resolutions and the two maps by zero to integer-indexed
-complexes. Each row splits because its first term is injective. With retractions
-pi and sections s the third map of the resulting distinguished triangle is
-s d pi (in Lean's composition order). The cone triangle has third map minus
-projection; its comparison with this split triangle fixes the sign.
-2. The three augmentations are compatible quasi-isomorphisms. Transport the
-triangle through them to a distinguished triangle on the single objects. Its
-third map is the canonical single-triangle boundary: uniqueness follows from
-Hom_D(A[0][1], C[0])=0. Compute this Hom into the bounded below injective
-resolution of C in the homotopy category; every chain map vanishes by degree
-bounds. Apply uniqueness of the third map of a distinguished triangle.
-3. Apply the right derived functor. Its unit is an isomorphism on the bounded
-below injective complexes. Naturality identifies the first two maps with the
-termwise images. The shift comparison identifies the third map with the
-termwise image of s d pi, since the shifted differential is -d and the functor
-is additive. This is exactly the third map of the image sequence's triangle.
-Together these three maps give the required triangle morphism (in fact an
-isomorphism).
-4. Apply homology to the endpoint maps. Compare each of the given resolutions
-with the chosen resolution by a lift of the identity. Naturality of the unit,
-localization's homology identification, and `extendHomologyIso` shows that its
-homology map, followed by `natComplexDerivedHomologyIso`, is precisely
-`homologyRightDerivedFunctorPlusObjSingleFunctorIso.hom` followed by
-`isoRightDerivedObj.hom`. Comparison lifts are homotopic, so this formula is
-independent of the lift. This proves both endpoint identities for every degree.
--/
+Source: Stacks Project, Derived Categories, Tags 014Q, 05TE and 015B. -/
 theorem horseshoe_derived_triangle_comparison
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
     [EnoughInjectives A] [Category.{v₂} B] [Abelian B]

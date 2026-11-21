@@ -98,7 +98,7 @@ universe c0 d0 r0 c1 d1 r1 c2 d2 r2 c3 d3 r3
 
 /-- One corner's total derived limit and its fixed, K-injective-normalized Roos model.
 `factors` identifies the localized Roos functor with the actual shifted cone.
-Source: Stacks 0941 and the final blueprint comparison paragraph. -/
+Source: Stacks 0941. -/
 structure Corner {A : Type u} [Category.{v} A] [Abelian A]
     [HasCountableProducts A] [HasLimitsOfShape ℕᵒᵖ A]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]

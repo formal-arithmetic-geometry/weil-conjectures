@@ -31,29 +31,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- Source: Stacks Project, Sites, Tag 0A35,
-section construction, independence of the presentation and restriction arrows.
-
-Proof: Compute K at V_t(U) by the pointwise abelian left Kan colimit over
-costructured arrows. Its presentation is the direct sum of the stage groups,
-quotiented by differences of generators along restriction arrows. Equality of
-the two unit images means that their difference is a finite sum of these
-relations, with additive coefficients absorbed into the sections. Include the
-two unit generators and all objects and arrows used by this finite expression.
-Lift them to a common later stage using the object and arrow set-colimit
-hypotheses. Refine to align the endpoints with their prescribed forward images,
-then refine to enforce the finitely many triangles by eventual arrow equality.
-Equalize the finitely many competing maps out of i and t.right, giving a single
-b : t → r in Under i. The two endpoint arrows are identities after refinement.
-For every generator (W, f, s) in the finite expression, restrict theta_b(s)
-along its lifted arrow from F(b.right)(U) to F(b.right)(W). This assignment is
-additive. Each defining relation vanishes: naturality of theta_b exchanges
-restriction along a stage arrow with theta_b, and the lifted triangle identifies
-the two restrictions to the image of U. Summing these equalities makes the
-two endpoint images equal. Their lifted identity arrows identify them with
-theta_b(U)(x) and theta_b(U)(x'). The proof uses only the finitely many relations
-in this expression, not a common refinement of the entire Kan indexing category,
-and assumes no compatibility between different theta maps.
--/
+section construction, independence of the presentation and restriction arrows. -/
 theorem raw_abelian_section_kan_unit_relations
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (V : Cocone F)

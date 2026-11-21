@@ -53,11 +53,7 @@ noncomputable abbrev fieldDerivedScalarExtension (f : K →+* L) :
     DerivedCategory (ModuleCat.{u} K) ⥤ DerivedCategory (ModuleCat.{u} L) :=
   (ModuleCat.extendScalars f).mapDerivedCategory
 
-/-- Restriction is possible because exact scalar extension commutes with cohomology.
-Proof: compute on a representing complex. Flatness preserves its kernels and images,
-so its cohomology is the scalar extension of the original cohomology. Tensoring a
-finite-dimensional space preserves finite dimensionality, and tensoring zero gives zero;
-the same finite support works. -/
+/-- Restriction is possible because exact scalar extension commutes with cohomology. -/
 theorem fieldDerivedScalarExtension_preserves (f : K →+* L)
     (C : DerivedCategory (ModuleCat.{u} K)) (hC : pointFiniteDimensional K C) :
     pointFiniteDimensional L ((fieldDerivedScalarExtension f).obj C) := by

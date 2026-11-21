@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.InducedCategory
 
 /-! # Extension of invertible translations to twisted presheaves
 
-Source: original twisted-site step 3, motivated by Stacks Tag 00W0.
+## References
+
+* Stacks Project, Tag 00W0 (motivation for the twisted construction).
 -/
 
 @[expose] public section
@@ -332,25 +334,7 @@ private theorem labelMap_generator (S : Site J s R a) (F : Cᵒᵖ ⥤ Type u)
   rw [Equiv.apply_symm_apply]
   simp [presheafIterate_neg_one]
 
-/-- An invertible presheaf translation extends to the integer-labelled category.
-
-Source: the presheaf-extension part of original step 3 of the agent twisted variant
-of Stacks Tag 00W0, `sites.tex`.
-
-Proof: assign F(X) to the copied object X. Give a minus-one generator the restriction
-map τ.inv at X. For an arrow labelled n, first restrict along its base arrow and
-then along n generators. For negative n use successive τ.inv components; for
-positive n use τ and the unit and counit of s to change the base objects. Insert
-the displayed power comparisons when reassociating iterates. Apply the arrow
-bijection to associativity of three pure power arrows to obtain the pentagon for
-these comparisons, and to the identity laws to obtain their unit relations.
-Naturality of τ moves each base restriction past a generator. Cancelling adjacent
-opposite generators uses τ.hom_inv_id and τ.inv_hom_id. Induction in both integer
-directions therefore gives the presheaf identity and composition laws. On degree
-zero the resulting presheaf is F, up to the object-copy identification, so these
-identifications give c. Its minus-one formula is the initial assignment of τ.inv.
-No topology or gluing assertion is used. The construction applies to an empty C,
-an empty value F(X), and the identity autoequivalence. -/
+/-- An invertible presheaf translation extends to the integer-labelled category. -/
 theorem twistedPresheafExtension (S : Site J s R a) (F : Cᵒᵖ ⥤ Type u)
     (τ : s.inverse.op ⋙ F ≅ F) :
     letI := S.category

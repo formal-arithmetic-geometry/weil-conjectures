@@ -119,26 +119,7 @@ private theorem strictComparisonFromPositive_unit (φ : R ⟶ B) (r : ℕ)
 /-- The finite ordered Koszul comparison is independent of flatness and of derived
 categories.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E (finite Koszul calculation); more-algebra.tex, Tag 0913 (Koszul complexes).
-
-Proof: Let E be ordinary scalar extension along φ, left adjoint to restriction. Its
-binary tensor and unit isomorphisms, transported from the localization tensor to the
-site tensor, satisfy the right-unit coherence; since E preserves coproducts they extend
-to total tensor complexes. Each positive Koszul factor is the two-term complex given by
-multiplication by a power of a section, and E carries it to the factor over B of the
-image section; induction on the ordered list gives a natural isomorphism E(K_R) ≅ K_B
-of strict inverse diagrams preserving every positiveBasis and the projection to the
-unit complex. Every finite Koszul stage is dualizable, so the canonical evaluation
-identifies N ⊗ Hom(K, unit) with Hom(K, N). Composing the B evaluation, precomposition
-with E(K_R) ≅ K_B, the normalized scalar-restriction Hom isomorphism θ and the inverse
-R evaluation gives an isomorphism natural in N and in the stage, hence of complexes of
-strict towers. On the summand N^p ⊗ Hom(K,unit)^q evaluation followed by a Hom
-coordinate carries the signs (-1)^(dn), (-1)^(pq), (-1)^(dq) (d the basis degree); it
-vanishes unless d + q = 0, where the total exponent is 2dq, and it equals dualCoordinate
-followed by the right unitor; so coordinates are preserved. Canonical evaluation carries
-the coaugmentation to precomposition with the Koszul projection after the inverse
-Hom-unit evaluation, and naturality of θ with its unit formula gives the coaugmentation
-identity. The case r = 0 is the base of the induction; no flatness is used. -/
+Source: Stacks Project, Tags 0A0E and 0913. -/
 theorem strictScalarKoszulComparison (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections) :
     ∃ h : ringedKoszulTensorTowerFunctor B r (imageSections φ a) ⋙

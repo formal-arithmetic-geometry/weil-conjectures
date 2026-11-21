@@ -75,7 +75,7 @@ def nonemptySieve (F : Cᵒᵖ ⥤ Type w) (U : C) : Sieve U where
 that `T` has sections locally, i.e. every object is covered by objects over which `T` has a
 section. Equivalently, `T` is locally isomorphic to `G` with its translation action.
 For `G` the constant sheaf of a finite abelian group on a small étale site these are the finite
-torsors of blueprint `def-weil-pbc-finite-torsors`. -/
+torsors. -/
 structure Torsor (G : Sheaf J AddCommGrpCat.{w}) where
   /-- The underlying sheaf of sets. -/
   sheaf : Sheaf J (Type w)
@@ -747,10 +747,7 @@ object `T`, the canonical bijection between the isomorphism classes of `G`-torso
 It is characterised by `CategoryTheory.Sheaf.Torsor.classH1_lifts`: for every short exact
 sequence `0 → G → E → Q → 0` and every global section `s` of `Q`, the torsor of local lifts of
 `s` to `E` has class `δ(s)`, the image of `s` under the connecting homomorphism
-`Γ(Q) → H¹(G)`. In particular it does not depend on the injective resolution
-`0 → G → I → Q → 0` (`CategoryTheory.Sheaf.Torsor.injectiveSequence`) through which it is
-constructed: there, every torsor is a lifting torsor (`exists_equiv_lifts`) and `H¹(G)` is the
-cokernel of `Γ(I) → Γ(Q)`. -/
+`Γ(Q) → H¹(G)`. -/
 noncomputable def classH1 : _root_.Quotient (Torsor.setoid (G := G)) ≃ H G 1 :=
   (Equiv.ofBijective _ (bijective_quotientToTorsor (G := G) hT)).symm.trans
     (H.quotientRangeAddEquiv (injectiveSequence_shortExact G) hT).toEquiv
@@ -815,11 +812,7 @@ theorem exists_quotientEquiv_H_one :
 /-- **`classH1` is additive.** Let `μ : P × P' → P''` be a natural map from the sections of two
 `G`-torsors to those of a third, which is equivariant in each argument:
 `μ(a • x, x') = a • μ(x, x') = μ(x, a • x')`. Then `[P''] = [P] + [P']` in `H¹(G)`. This is the
-case of the contracted product `P'' = P ∧ P'`, whose class is the sum of the classes.
-
-Writing `P ≅ P_s`, `P' ≅ P_{s'}` and `P'' ≅ P_{s''}` as lifting torsors for an injective
-resolution `0 → G → I → Q → 0`, the differences `b''(μ(x, x')) - b(x) - b'(x')` of the lifts are
-invariant, hence glue to a global section `c` of `I` with `d c = s'' - s - s'`. -/
+case of the contracted product `P'' = P ∧ P'`, whose class is the sum of the classes. -/
 theorem classH1_eq_add_of_equivariant (P P' P'' : Torsor G)
     (μ : ∀ U, P.sheaf.obj.obj U → P'.sheaf.obj.obj U → P''.sheaf.obj.obj U)
     (hμ : ∀ ⦃U V : Cᵒᵖ⦄ (f : U ⟶ V) (x : P.sheaf.obj.obj U) (x' : P'.sheaf.obj.obj U),
@@ -1046,11 +1039,7 @@ variable [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrp
 /-- **Extensions and torsors.** For a sheaf `G` of abelian groups on a site with a terminal
 object, the group `Ext¹(ℤ, G)` of extensions `0 → G → E → ℤ → 0` is in bijection with the set
 of isomorphism classes of `G`-torsors. The canonical bijection sends an extension `E` with
-projection `π : E → ℤ` to the torsor `π⁻¹(1)`; its inverse sends `T` to `⊔_{n ∈ ℤ} T^{⊗ n}`.
-
-Only the existence of a bijection is recorded. It is obtained from an injective resolution
-`0 → G → I → Q → 0`: both sides are identified with the cokernel of `Γ(I) → Γ(Q)`
-(`CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one`). -/
+projection `π : E → ℤ` to the torsor `π⁻¹(1)`; its inverse sends `T` to `⊔_{n ∈ ℤ} T^{⊗ n}`. -/
 theorem nonempty_equiv_ext_torsor {T : C} (hT : IsTerminal T) (G : Sheaf J AddCommGrpCat.{w}) :
     Nonempty (Abelian.Ext ((constantSheaf J AddCommGrpCat.{w}).obj
       (AddCommGrpCat.of (ULift ℤ))) G 1 ≃ _root_.Quotient (Torsor.setoid (G := G))) :=

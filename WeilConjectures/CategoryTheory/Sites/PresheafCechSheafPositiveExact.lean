@@ -166,19 +166,7 @@ private theorem presheaf_nerve_positive_exact
   exact h'
 
 /-- The sheafified free Čech chain complex is exact in every positive degree.
-Source: Stacks Project, Tag 01GC, positive-degree part.
-
-Proof: replacing a set map's target by its image leaves its nerve unchanged;
-`nerveMonoIso` constructs the isomorphism by the wide-pullback universal property.
-The map onto the image has a section by choice, so Mathlib's extra degeneracy,
-linearization, and homotopy equivalence identify its free nerve with the free
-abelian group on the image in degree zero. Therefore positive homology vanishes.
-The finite-limit comparison `nerveMapIso` identifies evaluation of the presheaf
-nerve with the nerve of the evaluated map. Evaluation commutes with free abelian
-groups and alternating faces, and the jointly faithful evaluation functors detect
-exactness. Finally exact, additive sheafification preserves this exactness and
-commutes with the alternating-face construction. Empty sources give zero terms.
--/
+Source: Stacks Project, Tag 01GC, positive-degree part. -/
 theorem presheafCechSheaf_positive_exact
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{v}] (f : Arrow (Cᵒᵖ ⥤ Type v)) :

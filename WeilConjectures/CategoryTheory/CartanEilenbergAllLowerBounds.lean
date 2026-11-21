@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 
 /-! # Cartan--Eilenberg resolutions preserving all lower support bounds
 
-Source: Stacks Project, Derived Categories, Tags 015H and 015I.
+## References
+
+* Stacks Project, Derived Categories, Tags 015H and 015I.
 -/
 
 @[expose] public section
@@ -231,21 +233,7 @@ private theorem supported_rows
 
 
 /-- Resolve a bounded-below complex without introducing rows below its support.
-Source: Stacks Project, Tag 015I, with the shift refinement in step 1 of.
-
-Proof. For each degree p choose an injective resolution of B^p and H^p,
-using the single-degree-zero resolution when the respective object is zero.
-Apply the prescribed-end horseshoe to B^p -> Z^p -> H^p, obtaining a resolution
-of Z^p. Apply it again to Z^p -> K^p -> B^(p+1), retaining the same boundary and
-cycle resolutions. Assemble the horizontal differential through B^(p+1) and
-Z^(p+1). The exact row squares give its square zero and the augmentation.
-The canonical row identifications supply the horizontal cycles, boundaries and
-homology assertions. If K is zero below b, B^p and H^p are zero below b, so both
-end resolutions of the first horseshoe row are zero there. Its middle resolution
-is consequently zero. Below b, the second horseshoe row also has zero ends,
-so its middle resolution is zero. These choices are intrinsic to the objects,
-independent of b, and hence preserve every lower support bound simultaneously.
-This includes the all-zero complex, without selecting a least nonzero degree. -/
+Stacks Project, Tag 015I. -/
 theorem exists_cartanEilenberg_resolution_all_lower_bounds
     (B : Type u) [Category.{v} B] [Abelian B] [EnoughInjectives B]
     (K : CochainComplex.Plus B) :

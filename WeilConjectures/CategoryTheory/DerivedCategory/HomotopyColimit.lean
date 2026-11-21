@@ -193,8 +193,7 @@ sheaves of modules), the canonical morphism `hocolim_N τ^{≤ N} E ⟶ E` is an
 cocone `τ^{≤ N} E ⟶ E` is a homotopy colimit cocone. Writing `E = Q(K)`, the complex `K` is the
 termwise colimit of its truncations `τ^{≤ N} K` (in each degree they are eventually constant),
 so `Q(K)` is the homotopy colimit of the `Q(τ^{≤ N} K) = τ^{≤ N} E`
-(`DerivedCategory.isHomotopyColimitCocone_mapCocone_Q`,
-`proposition-open-direct-image-preserves-finite`). -/
+(`DerivedCategory.isHomotopyColimitCocone_mapCocone_Q`). -/
 theorem isHomotopyColimitCocone_truncLECocone [Abelian.HasKInjectiveResolutions C]
     [HasColimitsOfShape ℕ C] [HasExactColimitsOfShape ℕ C] [HasCoproductsOfShape ℕ C]
     (E : DerivedCategory C) : IsHomotopyColimitCocone (truncLECocone E) := by

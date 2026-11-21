@@ -120,17 +120,7 @@ private theorem commonStage_image_completion {i j : I}
     exact hh
 
 /-- A commuting square between the first arrows of common-stage distinguished
-triangles extends to a triangle morphism.
-Proof: replace both triangles by isomorphic stage images. Represent the two
-vertical maps at a common stage and extend again until the first square commutes,
-using `mkHom_eq_mkHom_iff`. Apply the triangle morphism axiom to the images of the
-stage triangles under the exact transitions. Map the third component into the
-pair category and conjugate by the stage identifications. The second square
-follows from functoriality. For the last square use that the identifications
-`transIso` commute with shifts, so their induced maps of triangles commute with
-the third arrows. Conjugate back along the initial triangle isomorphisms.
-This uses coherence only for the identifications in the pair category and does
-not require the associators to commute with shifts before applying the inclusions. -/
+triangles extends to a triangle morphism. -/
 private theorem commonStage_complete_triangle_morphism
     (T₁ T₂ : Triangle S.PairCategory)
     (h₁ : S.CommonStageDistinguished T₁) (h₂ : S.CommonStageDistinguished T₂)
@@ -215,19 +205,7 @@ end
 
 set_option linter.unusedVariables false in
 /-- Common-stage triangles satisfy TR1--TR4; stage inclusions and transition
-identifications are exact. The distinguished set uniquely fixes the pretriangulation.
-Proof: move every finite collection of objects and arrows to a common stage using
-StageSystem.PairCategory.exists_common_stage. Equalities hold after one further
-extension by mkHom_eq_mkHom_iff. At that stage choose cone and identity triangles;
-apply signed rotation and the completion of a commutative square. Exact transitions
-and the coherent shift comparisons preserve these operations. Isomorphism closure
-is in the definition. This proves TR1--TR3. Move the composable arrows and their
-three cone triangles to one stage, enlarge to descend all commuting equations,
-and apply its octahedral axiom. Its image gives TR4. The image of every stage
-triangle is distinguished by definition; transIso commutes with shifts by the
-specified stage coherence, so these are exact natural isomorphisms. Finally a
-Pretriangulated structure has only its distinguished set as non-propositional data,
-so the displayed criterion proves uniqueness. -/
+identifications are exact. The distinguished set uniquely fixes the pretriangulation. -/
 theorem commonStage_verdier_existsUnique :
     ∃! t : Pretriangulated S.PairCategory,
       (fun [triInst : Pretriangulated S.PairCategory] ↦

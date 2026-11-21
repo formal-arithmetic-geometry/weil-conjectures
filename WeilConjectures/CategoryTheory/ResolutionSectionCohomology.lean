@@ -78,18 +78,7 @@ private noncomputable def sectionComplexIso
         simp only [Cochain.δ_fromSingleMk, zero_add, Cochain.fromSingleEquiv_fromSingleMk]
         exact congrArg ULift.up (sectionEquiv_naturality J X (K.d i j) a).symm)
 
-/-- The section complex of any specified injective resolution computes object cohomology.
-
-Proof: Sheafification adjunction identifies morphisms from the free abelian sheaf on X
-with morphisms from the free abelian representable presheaf. The free-forgetful
-adjunction and Yoneda identify these naturally and additively with sections at X.
-In every degree of the integer extension of I, this gives an isomorphism from the
-Hom complex out of the single free sheaf to the lifted section complex. Naturality
-in the resolution differential proves compatibility with the differentials.
-Mathlib identifies Ext with cohomology classes of this Hom complex. Its homology
-is those cohomology classes. Transport along the complex isomorphism and use
-preservation of homology by the universe-lift functor, then unlift the groups.
-This applies also in degree zero and requires no terminal-object hypothesis. -/
+/-- The section complex of any specified injective resolution computes object cohomology. -/
 theorem resolution_section_cohomology
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}] [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]

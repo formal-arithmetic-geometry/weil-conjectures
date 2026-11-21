@@ -15,7 +15,7 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 /-!
 # Finite-prefix towers
 
-The explicit towers and maps in Stacks Project, Tag 07KW, proof of Lemma 15.88.1.
+The explicit towers and maps used in Stacks Project, Tag 07KW (Lemma 15.88.1).
 -/
 
 @[expose] public section
@@ -51,8 +51,7 @@ def roosPrefixFunctor (s : ℕ) :
   map_id _ := rfl
   map_comp _ _ := rfl
 
-/-- The augmentation sending a tower element to all its earlier images. 
--/
+/-- The augmentation sending a tower element to all its earlier images. -/
 def roosPrefixInclusion :
     𝟭 (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⟶ roosPrefixFunctor 1 where
   app A :=
@@ -159,12 +158,7 @@ private theorem prefixExact (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (n : ℕ) :
 
 /-- The finite-prefix augmentation and difference form a short exact sequence.
 
-Source: Stacks Project, Tag 07KW, proof of Lemma 15.88.1.
-
-The augmentation is injective in its last coordinate. Downward induction identifies
-its image with the kernel of the difference. Starting with last coordinate zero and
-recursively setting `xᵢ = yᵢ + fᵢ(xᵢ₊₁)` proves surjectivity. Evaluation computes
-homology in the functor category, so these levelwise statements give short exactness. -/
+Stacks Project, Tag 07KW (Lemma 15.88.1). -/
 theorem roosPrefix_shortExact (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
     (ShortComplex.mk (roosPrefixInclusion.app A) (roosPrefixProjection.app A)
       (roosPrefixInclusion_projection A)).ShortExact := by
@@ -187,9 +181,7 @@ theorem roosPrefix_shortExact (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
 
 /-- Restriction of a finite prefix is surjective, including the empty prefix.
 
-Source: Stacks Project, Tag 07KW, proof of Lemma 15.88.1.
-
-Extend the tuple by zero in every new coordinate. Restriction recovers the tuple. -/
+Stacks Project, Tag 07KW (Lemma 15.88.1). -/
 theorem roosPrefix_transition_surjective (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
     (n : ℕ) : Function.Surjective
       ((roosPrefixTower s A).map (homOfLE (Nat.le_succ n)).op) := by

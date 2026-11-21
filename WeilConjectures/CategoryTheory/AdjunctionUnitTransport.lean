@@ -22,8 +22,7 @@ theorem unitComponent_eq {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) (G : D ⥤ C) (η : 𝟭 C ⟶ F ⋙ G) (M : C) :
     unitComponent F G η M = η.app M := rfl
 
-/-- A componentwise counit equation transports the first triangle.
-Proof: substitute the component equation in the composite and apply the assumed triangle. -/
+/-- A componentwise counit equation transports the first triangle. -/
 theorem first_triangle_of_evaluation_eq
     {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) (G : D ⥤ C) (η : 𝟭 C ⟶ F ⋙ G) (ε : G ⋙ F ⟶ 𝟭 D)

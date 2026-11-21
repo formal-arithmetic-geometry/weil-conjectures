@@ -25,29 +25,7 @@ namespace CategoryTheory
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The raw bottom edge, with its source identified, is homology of the derived unit.
-Source: Stacks Project, Derived Categories, Tags 015N and 015J, bottom interval.
-
-Proof: Put R = RF(X). It has no negative homology. The left exactness of F implies
-that the degree-zero homology of the unit F(X)[0] to R is invertible. Specifically,
-under singleFunctorCompHomologyFunctorIso and the single-object derived homology
-comparison, this map is toRightDerivedZero, by
-rightDerivedPlusSingleUnitHomology_comp_comparison. Its inverse is exactly the
-rightDerivedZeroIsoSelf factor in grothendieckBottomEdgeSourceIso.
-Since F(X)[0] has no positive homology, the unit factors uniquely through truncation
-below 1 of R. Since R has no negative homology, this truncation lies in degree zero,
-and its further truncation at degrees at least zero is isomorphic to itself.
-The canonical eTruncLTCompETruncGEIso identifies this bottom interval with H^0(R)[0].
-The degree-zero homology equality just established therefore identifies the inverse
-source isomorphism followed by the interval inclusion with the derived unit.
-Expand grothendieckSpectralObjectHIso at q = 0: the zero shifts of the single functor,
-RG, and homology cancel by their shift-zero coherence identities. Naturality of the
-single-object derived homology comparison for G moves the inverse H^0 identification
-through R^nG. Thus applying RG and H^n to the interval inclusion gives the displayed
-map, with the inverse single-object comparison for G as its only source factor.
-This uses neither an injective resolution comparison nor composite acyclicity.
-For n = 0 the same interval inclusion applies; for zero objects or zero functors both
-sides are zero. No assumption that G is left exact is used.
--/
+Source: Stacks Project, Derived Categories, Tags 015N and 015J, bottom interval. -/
 theorem grothendieckBottomEdge_singleUnit
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]

@@ -127,12 +127,7 @@ private def termIso (K I : CochainComplex B ℤ) (n : ℤ) :
 
 include limitB limitA dB dA mB mA in
 /-- The projection-normalized natural comparison of product-total Hom complexes.
-Source: Stacks Project, Section 0A8X.
-Proof: apply U to each product cone and transport the factors through h. Product-cone
-uniqueness gives term isomorphisms with the required projection equation. On every projection,
-the two differential formulas agree by naturality of h, additivity, and preservation of the
-integer signs. The map-projection formulas give the naturality square in the same way.
-Assemble the term isomorphisms into chain isomorphisms and then a natural isomorphism. -/
+Source: Stacks Project, Section 0A8X. -/
 theorem ringedHomComplexComparison :
     ∃ chain : FB ⋙ U.mapHomologicalComplex (.up ℤ) ≅
       ((U.mapHomologicalComplex (.up ℤ)).op.prod (U.mapHomologicalComplex (.up ℤ))) ⋙ FA,

@@ -13,7 +13,7 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Descent of compatible functors from a filtered colimit
 
-Source: Stacks Project, Sites, proof of Tag 09YL.
+Source: Stacks Project, Sites, Tag 09YL.
 
 The colimits of the object and arrow sets suffice for descent into categories
 with arbitrary object and morphism universes.
@@ -56,23 +56,9 @@ private theorem exists_set_descent
   obtain ⟨g, hg⟩ := ((Types.isColimit_iff_coconeTypesIsColimit L).mp hL).exists_desc c
   exact ⟨g, fun j x ↦ congrFun (hg j) x⟩
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, the construction of the
-filtered colimit category.
-
-Proof: send an object represented at stage j to its image under v j, and an arrow
-represented at stage j to its image under v j. Compatibility makes these maps
-well-defined: equal representatives agree at a common later stage by the equality
-criterion for filtered colimits of sets. Object and arrow representatives exist
-by the two set-colimit hypotheses. Source and target of the resulting arrow are
-the chosen images of its endpoints, since the stage functors respect endpoints.
-To verify identities represent the object at one stage. For composition represent
-the two arrows at a common stage. Their middle endpoints have equal images in the
-object colimit; after passing to a further stage those endpoints are equal, so
-composition is represented by their composite there. Functoriality of v at that
-stage proves preservation of composition. The defining representative formulas
-give (L.ι.app j).toFunctor ⋙ V = v j, including equality on objects and arrows.
-The construction uses only the small source categories; D may have larger object
-and hom universes. -/
+/-- A compatible family of functors out of the stage categories descends along the canonical
+functors to a functor out of the filtered colimit category.
+Source: Stacks Project, Sites, Tag 09YL. -/
 theorem exists_filteredColimit_functor_descent
     (J : Type u) [SmallCategory J] [IsFiltered J]
     (F : J ⥤ Cat.{u, u}) (L : Cocone F)

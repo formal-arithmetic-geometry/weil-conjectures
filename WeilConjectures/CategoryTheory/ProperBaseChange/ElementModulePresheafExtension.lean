@@ -31,7 +31,7 @@ open Classical in
 /-- Restriction of the direct-sum presheaf: the summand indexed by `s` goes to the summand
 indexed by `A(v)(s)` through the restriction of `L`.
 
-Source: Stacks Project, sites-modules.tex, Tags 04IE and 03CY. -/
+Source: Stacks Project, Tags 04IE and 03CY. -/
 private noncomputable abbrev rawElementDirectSumMap {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u))
     (L : PresheafOfModules.{u} (elementRing R A).obj) {U V : Cᵒᵖ} (f : U ⟶ V) :
@@ -72,12 +72,7 @@ private theorem rawElementDirectSumMap_lof {C : Type u} [SmallCategory C]
 
 /-- The direct-sum restriction preserves identities.
 
-Source: Stacks Project, sites-modules.tex, Tag 04IE.
-Proof: check on each summand indexed by s. The element-map for the identity fixes
-(U,s), the restriction of L is the identity after the restriction-of-scalars identity
-comparison, and the target summand is again s because A preserves identities.
-Thus the two maps agree on every direct-sum inclusion; the direct-sum universal
-property gives equality. -/
+Source: Stacks Project, Tag 04IE. -/
 private theorem rawElementDirectSumMap_id {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u))
     (L : PresheafOfModules.{u} (elementRing R A).obj) (U : Cᵒᵖ) :
@@ -111,12 +106,7 @@ private theorem rawElementDirectSumMap_id {C : Type u} [SmallCategory C]
 
 /-- The direct-sum restriction is compatible with composition.
 
-Source: Stacks Project, sites-modules.tex, Tag 04IE.
-Proof: check on the summand indexed by s. The two successive restrictions send it to
-A(g)(A(f)(s)), which equals A(f followed by g)(s) by functoriality of A. The element
-arrows compose accordingly; functoriality of L identifies their linear maps after
-restrictScalarsComp. Both direct-sum maps therefore have the same composite with
-every summand inclusion. The direct-sum universal property gives the equality. -/
+Source: Stacks Project, Tag 04IE. -/
 private theorem rawElementDirectSumMap_comp {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u))
     (L : PresheafOfModules.{u} (elementRing R A).obj) {U V W : Cᵒᵖ} (f : U ⟶ V) (g : V ⟶ W) :
@@ -164,7 +154,7 @@ private theorem rawElementDirectSumMap_comp {C : Type u} [SmallCategory C]
 /-- The presheaf of `R`-modules `U ↦ ⨁_{s ∈ A(U)} L(U,s)` whose module sheafification is the
 extension by zero of `L`.
 
-Source: Stacks Project, sites-modules.tex, Tags 04IE and 03CY; sites.tex, Tag 0791. -/
+Source: Stacks Project, Tags 04IE, 03CY and 0791. -/
 private noncomputable abbrev rawElementDirectSumPresheaf {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u))
     (L : PresheafOfModules.{u} (elementRing R A).obj) : PresheafOfModules.{u} R.obj where
@@ -332,10 +322,7 @@ open Classical in
       rfl)
 
 /-- The direct-sum presheaf is the presheaf left adjoint evaluated on a module sheaf.
-Source: Stacks Project, Modules on Sites, Tags 04IE and 03CY.
-Proof: a linear map from a sum is precisely a family of linear maps from its summands.
-Naturality on the lifted element arrows is exactly naturality of this family, giving
-an isomorphism by uniqueness of the representing object. -/
+Source: Stacks Project, Modules on Sites, Tags 04IE and 03CY. -/
 theorem element_module_presheaf_extension_formula
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u))
@@ -360,20 +347,8 @@ theorem element_module_presheaf_extension_formula
 /-- Before sheafification, extension along the element projection is a direct sum
 of fibres and preserves finite limits.
 
-Source: Stacks Project, sites-modules.tex, Tags 04IE, 03CY and 03DJ, with the
-comma-category calculation of sites.tex, Tag 0791.
-Proof: At U, compute the presheaf left adjoint as the colimit over triples
-(V,t,φ : U → V). Every triple receives a unique map from (U,A(φ)t,id).
-Consequently the opposite of the discrete subcategory of these identity triples
-is final in the colimit index, and the colimit is the direct sum over s in A(U).
-The map on a restriction sends the s inclusion through L of the lifted arrow
-to the A(v)s inclusion; these are exactly elementDirectSumMap. This proves the
-formula including all restrictions. The same computation applies to arbitrary
-presheaves of modules. Their kernels and finite products are computed on sections.
-Direct sums preserve finite products and kernels: a finitely supported tuple is
-in a kernel precisely when each coordinate is; finite unions of supports give
-the inverse for finite products. The zero object is preserved even for an empty
-fibre. Thus presheaf extension preserves finite limits. -/
+Source: Stacks Project, Tags 04IE, 03CY and 03DJ, with the
+comma-category calculation of Tag 0791. -/
 theorem element_module_presheaf_extension
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) :

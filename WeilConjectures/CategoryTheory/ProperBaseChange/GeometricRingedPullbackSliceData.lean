@@ -266,27 +266,7 @@ private noncomputable def pullbackSliceRingData {C D : Type u} [SmallCategory C]
 
 /-- Construct the sliced ringed morphism with its prescribed comparison.
 
-Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tag 04IF.
-
-Proof: Apply `Over.postAdjunctionLeft` to `f.adj` at A, then compose its adjunction
-with the two fibre equivalences to obtain an adjunction whose left adjoint is
-`L = y.fibreEquivalence.functor ⋙ Over.post f.inverse ⋙ x.fibreEquivalence.inverse`.
-Equivalences preserve finite limits, and `Over.post f.inverse` preserves them
-because `f.inverse` does. Define the structural map to be `q.hom.app RY` followed
-by the restriction of `f.ringMap`. Naturality of q at the zero, one, addition and
-multiplication maps proves preservation of the corresponding ring operations.
-For binary operations, use the universal product of the operand sheaves as the
-test object. The projections identify the two components of the product comparison;
-for constants, uniqueness of the map to the terminal object identifies its comparison.
-Thus these equations hold for arbitrary generalized sections, including all section
-objects of the element site, and give `RingedToposMorphism.RingData`.
-Lift this geometric ring data to modules by transporting addition, zero and scalar
-multiplication through inverse image and its finite-product comparisons. The resulting
-module direct image is right adjoint by the ringed geometric module construction.
-This supplies every module field of `RingedToposMorphism`, without making a choice of
-an unconstrained underlying sheaf. Its inverse is L, so take `slice = Iso.refl L`
-and `a = q`; the first conclusion is the unit law for whiskering and composition,
-and the structural-map equation follows directly from its definition. -/
+Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tag 04IF. -/
 theorem geometric_ringed_pullback_slice_data
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

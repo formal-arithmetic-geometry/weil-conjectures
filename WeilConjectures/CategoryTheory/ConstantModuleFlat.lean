@@ -22,12 +22,7 @@ namespace CategoryTheory
 set_option backward.isDefEq.respectTransparency false in
 /-- Constant realization takes flat modules to flat module sheaves.
 Source: Stacks Project, Tags 03ET and 08FC.
-Proof: lift the finitely many scalars and module sections in a relation on a common
-cover. Local injectivity of the module sheafification unit refines that cover so
-the lifted relation holds in the original module. Flatness factors this relation
-through finitely many elements with vanishing coefficient relations. Apply the
-ring and module sheafification units to this factorization. The local equational
-criterion gives flatness, without points or a terminal object of the site. -/
+-/
 theorem isFlatOnSite_constantModule
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (R : Type (max u v)) [CommRing R] (M : ModuleCat.{max u v} R)

@@ -48,9 +48,7 @@ def standardModulesEquivalence :
       exact S.obj.map_id _))).symm
 
 /-- Direct restriction is an equivalence, by comparison with the structural
-pushforward equivalence. Source: Stacks 03A0, 03CH, 03DA, 03DG.
-Proof: the two functors differ only by identity restriction of scalars, whose
-canonical natural isomorphism transports the equivalence. -/
+pushforward equivalence. Source: Stacks 03A0, 03CH, 03DA, 03DG. -/
 theorem restrictModules_isEquivalence :
     (restrictModules.{d, c, vd, vc, r}
       (K := K) e.inverse R).IsEquivalence := by

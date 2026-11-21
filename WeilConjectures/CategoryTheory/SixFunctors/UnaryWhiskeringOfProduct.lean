@@ -21,12 +21,7 @@ open CategoryTheory
 namespace CategoryTheory.Functor
 
 /-- Full faithfulness of product precomposition implies unary full faithfulness.
-Source: Stacks Categories 001C, applied to projection and diagonal functors.
-Proof: extend a transformation of unary restrictions to the product by the first
-projection, lift it using ff, and restrict the lift to the diagonal. The
-map-preimage equation follows by evaluating ff.map_preimage on diagonal objects.
-Faithfulness follows by first extending an equality using the first projection,
-applying ff.map_injective, then evaluating again on the diagonal. -/
+Source: Stacks Categories 001C, applied to projection and diagonal functors. -/
 noncomputable def unaryWhiskeringOfProduct
     {C : Type a} [Category.{b} C] {D : Type c} [Category.{d} D]
     (E : Type e) [Category.{f} E] (L : C ⥤ D)

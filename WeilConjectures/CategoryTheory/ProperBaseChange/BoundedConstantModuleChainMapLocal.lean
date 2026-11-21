@@ -102,16 +102,7 @@ private theorem over_isZero (V : C) (hV : (⊥ : Sieve V) ∈ J V)
 /-- A chain map between constant complexes with bounded finite source is locally
 algebraic, with equality after slice restriction.
 
-Source: Stacks Project, Tag 09BE descent of chain maps.
-
-Proof: Lift the components in the finite support of the source through the constant
-module morphism theorem, and intersect the resulting covering sieves. Away from the
-support both maps are zero. On a member not covered by the empty sieve, the constant
-section unit is injective and therefore reflects each chain equation of the lifted
-components. These components define an algebraic chain map. Naturality of the canonical
-constant-to-slice isomorphisms identifies its constant realization with the original
-restricted chain map. On a member covered by the empty sieve all sheaves are zero,
-so the zero chain map has the required realization. -/
+Source: Stacks Project, Tag 09BE descent of chain maps. -/
 theorem exists_bounded_constant_module_chain_map_local
     (F G : CochainComplex (ModuleCat.{w} R) ℤ)
     (hF : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → IsZero (F.X q))

@@ -8,7 +8,10 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # The left unit law for exact restriction on derived categories
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -31,11 +34,8 @@ private theorem invertNormalizedSquare {C D E : Type*}
   exact hh.symm
 
 /-- An ordinary left unit comparison induces the corresponding derived left unit comparison.
-Source: Stacks 0D6E.
 
-Proof: the componentwise hypothesis identifies the comparison with the whiskering of
-`e` followed by the left unitor. Functoriality on natural isomorphisms, compatibility
-with whiskering, and the exact-derived left unit law identify the two maps. -/
+Stacks Project, Tag 0D6E. -/
 theorem exactRestrictionDerivedIdentityUnit {C D : Type*} [Category C] [Category D]
     [Abelian C] [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D]
     (F : C ⥤ D) (U : C ⥤ C) [F.Additive] [U.Additive]

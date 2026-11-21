@@ -104,10 +104,7 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I] [Nonempty I]
     [transitionExact : ∀ {i j : I} (h : i ≤ j), (S.T h).IsTriangulated]
 
 set_option linter.unusedSectionVars false in
-/-- Finite-stage inclusions preserve the already recorded common-stage addition.
-Proof: both included sums are represented by the transition image of the same
-sum at the original stage. Additivity of the transitions makes this the sum of
-the two included representatives; pairPreadditiveNormalized identifies the classes. -/
+/-- Finite-stage inclusions preserve the already recorded common-stage addition. -/
 @[instance] theorem qbarStageInclusionAdditive (i : I) : (S.ι i).Additive := by
   constructor
   intro X Y f g
@@ -117,11 +114,7 @@ the two included representatives; pairPreadditiveNormalized identifies the class
   exact ((pairPreadditive_exists S).exists.choose_spec _ _ _ _ _ _ _).1
 
 set_option linter.unusedSectionVars false in
-/-- The actual transition identification commutes with the induced pair shift.
-Proof: the components of transIso are finite-stage identity maps with the
-specified associators. Expand the induced pair shift on those representatives.
-The associator CommShift equation identifies the two resulting arrows at the
-same common stage, so their classes agree. This is precisely NatTrans.CommShift. -/
+/-- The actual transition identification commutes with the induced pair shift. -/
 @[instance] theorem qbarTransIsoCommShift {i j : I} (h : i ≤ j) :
     NatTrans.CommShift (S.transIso h).hom ℤ := by
   constructor
@@ -163,11 +156,7 @@ variable (l : ℕ) [Fact l.Prime] (Qbar : Type w)
     [hDim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ (n : WithBot ℕ∞))]
     [hInv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
 
-/-- The finite stage is triangulated for exactly its integral-image triangles.
-Proof: apply raw scalar-localization triangulation to the inherited integral
-triangulation. Its normalized shift agrees with the published rational shift;
-its image-triangle characterization is qbarStagePretriangulated_exists, which
-specifies the same distinguished set. Transport TR4 along these identifications. -/
+/-- The finite stage is triangulated for exactly its integral-image triangles. -/
 @[instance] theorem qbarStageTriangulated (E : Padic.FiniteCoefficientFields l Qbar) :
     IsTriangulated (pbcStageCategory l Qbar T E) := by
   let C := pbcIntegralStage l Qbar T E
@@ -200,12 +189,7 @@ specifies the same distinguished set. Transport TR4 along these identifications.
   rw [heq] at ht4
   exact ht4
 
-/-- The prescribed coefficient tensor preserves the integral-image triangles.
-Proof: on K-flat complexes integral tensor takes cone triangles to cone triangles.
-It preserves the defining integral subcategories. The normalized localization
-square therefore takes every integral image triangle to a target integral image
-triangle, with the actual tensor shift comparison. Isomorphism closure gives
-exactness on every distinguished rational triangle, including identity fields. -/
+/-- The prescribed coefficient tensor preserves the integral-image triangles. -/
 @[instance] theorem qbarScalarExtensionExact {E F : Padic.FiniteCoefficientFields l Qbar}
     (h : E ≤ F) : (pbcScalarExtension l Qbar T hDim.out hInv.out h).IsTriangulated := by
   let A := pbcAmbientScalarExtension l Qbar T h
@@ -246,15 +230,7 @@ exactness on every distinguished rational triangle, including identity fields. -
   exact isomorphic_distinguished _ hBD _
     ((G.mapTriangle.mapIso e) ≪≫ c)
 
-/-- The actual common-stage triangulation satisfies all four Verdier axioms.
-Proof: apply commonStage_verdier_existsUnique to the actual completed integral
-rational stages and their exact scalar transitions. Its proof moves finitely
-many representatives and equations to one common stage: finite-stage TR1 gives
-cones and identity triangles, TR2 gives signed rotation, and TR3 completes
-commutative squares. Cone independence and finite-stage TR4 give the octahedron.
-Its distinguished set is exactly CommonStageDistinguished by construction.
-The same theorem gives exactness of the stage inclusions, and the specified
-shift comparisons give qbarTransIsoCommShift for every transition identification. -/
+/-- The actual common-stage triangulation satisfies all four Verdier axioms. -/
 theorem pbcVerdierAxioms :
     CategoryTheory.IsTriangulated (PbcFiniteStagePairCategory l Qbar T hDim.out hInv.out) ∧
     (∀ E : Padic.FiniteCoefficientFields l Qbar,

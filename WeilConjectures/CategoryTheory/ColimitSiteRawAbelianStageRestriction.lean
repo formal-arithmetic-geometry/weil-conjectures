@@ -44,37 +44,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The restriction of the raw presheaf to any stage is a filtered presheaf colimit
 of stage sheaves. This comparison uses no finiteness assumption on covering presieves.
 Source: Stacks Project, Sites, Tag 0A35,
-section construction and adjunction paragraphs.
-
-Proof: Choose a common stage k receiving i and j by filteredness, with arrows a and b.
-First use htheta and injectivity of the adjunction hom-equivalence to prove the
-identity and composition laws for the supplied theta, including endpoint transports.
-For t in Under k, pull G to t.right along a followed by t.hom, and push this sheaf
-back to stage j along b followed by t.hom. These are the objects D(t). Along a
-morphism of Under k, whisker theta along b followed by t.hom and transport its
-target using the functor composition equality. The established theta laws prove
-the identity and composition laws for D.
-
-At an object U of stage j, the Kan unit beta followed by the outer coprojection
-maps a section of D(t) to the raw colimit at V(j)(U), using the cocone equality to
-identify V(t.right)(F(b followed by t.hom)(U)) with V(j)(U). Naturality of beta,
-hbeta_map, and the coprojection equations make these maps a cocone and natural in U.
-Every abelian Kan generator at V(j)(U) is a stage section paired with an arrow from V(j)(U)
-to a stage image. Represent that arrow and its endpoints in the object and arrow
-set colimits, move to a stage receiving k and the generator's stage, and equalize
-the arrows from k. Restriction along the lifted arrow gives a D representative.
-Finite sums lift to a common stage and add there. Thus the comparison is surjective. Any equality
-of generators is a finite
-additive combination of Kan, linearity and outer-colimit relations. Lift all arrows and equations
-in this
-chain to one later stage, using the filtered-set eventual-equality criterion.
-Naturality and hbeta_map identify each relation with a section restriction or the
-transition of D. Therefore the two D representatives agree at a further stage,
-Linearity is preserved by all maps being additive, proving injectivity. These inverse bijections
-are natural in U, and define the
-presheaf isomorphism q. The specified object isomorphisms are identities for this
-construction. No finite cover, amalgamation, or separatedness is used here.
--/
+section construction and adjunction paragraphs. -/
 theorem colimit_site_raw_abelian_stage_restriction
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

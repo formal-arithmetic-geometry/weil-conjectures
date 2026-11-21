@@ -32,10 +32,7 @@ def reductionSystemCounit : C ⋙ P ⟶ redB :=
     whiskerRight adj.counit redB ≫ redB.leftUnitor.hom
 
 /-- The conjugated counit satisfies the system-level equation, before any finite
-level is evaluated.
-Proof: expand the constructed natural transformation; the image of the reduction
-isomorphism cancels its inverse, and the pushforward comparison cancels its
-inverse. The remaining morphism is the reduction of the integral counit. -/
+level is evaluated. -/
 theorem reductionSystemCounit_eq (K : B) :
     q.hom.app (G.obj K) ≫ P.map (e.hom.app K) ≫
         (reductionSystemCounit adj redA redB P C e q).app K =

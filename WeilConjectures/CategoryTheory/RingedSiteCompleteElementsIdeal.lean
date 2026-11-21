@@ -82,23 +82,7 @@ criterion. Ideals encode zero, addition, and multiplication by arbitrary section
 next clauses express restriction and descent for every covering sieve. The final clause
 is the locally finite-generated ideal consequence, using local finite-span membership.
 
-Source: Stacks Project, algebraization.tex, Tags 0998 and 0997.
-
-Proof: Localization at zero is the colimit of zero transition maps, hence zero.
-Contravariant derived internal Hom preserves zero, proving zero membership.
-The multiplication lemma identifies localization at af with the tensor of the
-localizations at a and f, proves these modules flat, and applies Hom-complex
-currying into a K-injective representative. The addition lemma uses the binary
-localization short exact sequence for h=f+g and exactness of contravariant
-RHom. The locality lemma compares slice restriction of the defining localization
-and of RHom, and proves descent by applying sheaf separatedness to cohomology
-sheaves on a pulled-back covering sieve. These three closure properties define
-an actual Ideal with carrier the complete elements. Its restriction and local
-membership properties are precisely the two parts of locality. Finally, all
-locally supplied generators belong to this ideal; Ideal.span_le puts every
-section of their span in it, and locality descends the resulting membership.
-The zero ideal, zero ring and empty covering sieves are included.
--/
+Source: Stacks Project, algebraization.tex, Tags 0998 and 0997. -/
 theorem ringedSite_complete_elements_ideal
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})

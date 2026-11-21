@@ -11,9 +11,10 @@ import WeilConjectures.CategoryTheory.CartanEilenbergConeGradedAugmentationRepre
 import WeilConjectures.CategoryTheory.CartanEilenbergConeGradedResolutionRepresentative
 /-! # Differential compatibility for the normalized column comparison
 
-Source: Stacks Project, Homology, Tag 0133, canonical augmentation, and Tag 012X,
-column filtration of a total complex. This is the augmented-cone refinement used
-in the parent node's second proof step.
+## References
+
+* Stacks Project, Homology, Tag 0133 (canonical augmentation) and Tag 012X
+  (column filtration of a total complex).
 -/
 
 @[expose] public section
@@ -27,23 +28,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Normalized retained-column maps commute with one adjacent differential.
-Source: Stacks Project, Tags 012X and 0133.
-
-Proof: precompose the asserted equality with the two inclusions of the column
-cone. In negative resolution degrees both sources are zero, except for K in
-cone degree -1. For an I term use the normalization lift in degree m. The
-filtration arrow is monic and commutes with the cone differential, so its lift
-has the same differential as its ambient diagonal inclusion. The horizontal
-differential raises the complex index to p+1 and factors through step p+1;
-its graded image is zero. The resolution differential preserves index p and
-has coefficient one in the flipped total, and its lift in degree m+1 is the
-one in the I normalization equation. On K in degree p-1, the -d_K term
-raises index and vanishes in the quotient. The augmentation term is, by haug,
-the resolution-zero column inclusion of (a.f p).f 0; normalization in degree p
-identifies it with the off-diagonal column-cone differential. Extension by zero
-kills all other components. Equality on the cone's jointly epic biproduct
-inclusions proves the equality. This uses the specified lifts, never arbitrary
-object isomorphisms. -/
+Source: Stacks Project, Tags 012X and 0133. -/
 theorem cartanEilenberg_cone_graded_normalized_differential
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

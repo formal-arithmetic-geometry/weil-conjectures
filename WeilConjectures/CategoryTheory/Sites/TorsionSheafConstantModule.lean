@@ -38,8 +38,8 @@ essential image the sheaves killed by `N` (Stacks 03CY).
 - `CategoryTheory.Sheaf.full_toSheaf_constantZMod`: morphisms of abelian sheaves are linear.
 - `CategoryTheory.Sheaf.exists_constantZModModule_iff`: the essential image of the forgetful
   functor is the sheaves killed by `N`.
-- `CategoryTheory.Sheaf.torsionSheaf_constantModule`: blueprint
-  `definition-tate-twists`.
+- `CategoryTheory.Sheaf.torsionSheaf_constantModule`: sheaves killed by `N` are the
+  sheaves of `(ℤ/N)_C`-modules, with the same morphisms.
 
 ## Implementation notes
 
@@ -192,13 +192,7 @@ Let `J` be a site, `N ≥ 1` and `F` an abelian sheaf killed by `N`. Then:
    structures `(M, e)`, `(M', e')` are isomorphic by an isomorphism of sheaves of
    `(ℤ/N)_C`-modules whose underlying morphism is `e ≫ e'⁻¹`;
 2. every morphism of abelian sheaves between sheaves of `(ℤ/N)_C`-modules is
-   `(ℤ/N)_C`-linear.
-
-The action `η(a) • x = a.val • x` holds in every sheaf of `(ℤ/N)_C`-modules
-(`CategoryTheory.Sheaf.constantZModUnit_smul`), so the uniqueness of (1) is uniqueness of the
-module structure. Together with `CategoryTheory.Sheaf.exists_constantZModModule_iff`, (2) says
-that the sheaves of `(ℤ/N)_C`-modules are exactly the abelian sheaves killed by `N`, with the
-same morphisms. -/
+   `(ℤ/N)_C`-linear. -/
 theorem torsionSheaf_constantModule [NeZero N] (F : Sheaf J AddCommGrpCat.{w})
     (hF : ∀ (U : Cᵒᵖ) (x : F.obj.obj U), N • x = 0) :
     (∃ (M : SheafOfModules.{w} (constantZModSheaf J N))

@@ -9,8 +9,11 @@ public import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActi
 
 /-! # The specified internal-Hom comparison is natural
 
-Source: Stacks Project, Tag 03EO, and the internal-Hom naturality field of a
-specified twisted action-site presentation.
+The internal-Hom identifications of a specified twisted action-site presentation are natural.
+
+## References
+
+Stacks Project, Tag 03EO.
 -/
 
 @[expose] public noncomputable section
@@ -65,14 +68,7 @@ private theorem homComparison_hom_app (P : Presentation J s R a) :
 
 omit [s.functor.IsContinuous J J] in
 /-- The presentation's internal-Hom identifications assemble into a natural isomorphism.
-
-Source: Stacks Project, Tag 03EO.
-
-Proof: the uncurried Hom functor maps a pair of arrows by first precomposing and then
-postcomposing. The internal-Hom composition formula identifies this with homObjMap of
-the pair. Thus P.hom_naturality is exactly the required naturality square. Apply
-NatIso.ofComponents to the specified P.hom isomorphisms; the forward components are
-those specified maps by construction. -/
+Stacks Project, Tag 03EO. -/
 theorem hom_comparison (P : Presentation J s R a) :
     letI := P.category
     let U := P.modules.functor ⋙ forgetPairs (sigma J s R a)

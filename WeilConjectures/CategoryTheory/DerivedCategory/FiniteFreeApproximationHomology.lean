@@ -16,8 +16,9 @@ import Mathlib.LinearAlgebra.Dimension.Free
 
 /-! # Finite free approximation in one homology degree
 
-Source: Stacks Project, Tag 0944, and the current blueprint
-clause (2), bpq #46.
+## References
+
+* Stacks Project, Tag 0944.
 -/
 
 @[expose] public noncomputable section
@@ -28,10 +29,7 @@ namespace CochainComplex
 
 set_option backward.defeqAttrib.useBackward true in
 /-- Bounded complexes are finite iterated extensions of their terms placed in their
-actual degrees. Source: Stacks 066H.
-Proof: induct on the length of the support, using the degreewise split stupid
-truncation triangle. A single supported degree is the single complex, and an empty
-support is zero. This reuses the source-library bounded-term induction. -/
+actual degrees. Source: Stacks 066H. -/
 theorem bounded_mem_of_single_terms
     {D : Type*} [Category D] [Preadditive D] [HasBinaryBiproducts D] [HasZeroObject D]
     (S : ObjectProperty (HomotopyCategory D (.up ℤ)))
@@ -94,10 +92,7 @@ end CochainComplex
 namespace DerivedCategory
 
 /-- Finite free terms map into a triangulated class once the rank-one term does.
-Source: Stacks 0944.
-Proof: a finite free module is a finite power of R, including the zero-ring case.
-An additive functor preserves finite products. The image of a single in degree i
-is the shift by -i of its image in degree zero. -/
+Source: Stacks 0944. -/
 theorem triangulatedImage_single_free
     (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)]
     {A : Type v} [Category.{x} A] [Abelian A] [HasDerivedCategory.{y} A]
@@ -129,12 +124,7 @@ theorem triangulatedImage_single_free
 
 /-- A triangulated functor with a uniform upper bound admits finite-free comparisons
 in every homology degree at every finitely presented module over a Noetherian ring.
-Source: Stacks 0944.
-Proof: choose a bounded finite-free approximation to M[0] whose error cone is at most
-r-d-2. Its image cone is at most r-2. The long exact homology sequence makes the
-comparison invertible in degree r. The approximation image lies in P by the bounded-term
-induction, since each finite-free single term lies there. This is the finite iterated
-cone and stupid truncation argument; no stratification or Noetherian scheme is used. -/
+Source: Stacks 0944. -/
 theorem finiteModuleImage_homology_approximation
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     [HasDerivedCategory.{w} (ModuleCat.{u} R)]

@@ -29,36 +29,12 @@ universe u v
 
 namespace CategoryTheory.Pretriangulated
 
-/--
+/-- Let `T` and `T'` be distinguished triangles and `g : T.obj₂ ⟶ T'.obj₂`. Then the vanishing
+of `T.mor₁ ≫ g ≫ T'.mor₂` is equivalent to the existence of a morphism completing the first
+square, of a morphism completing the second square, and of a morphism of triangles with middle
+component `g`; the completions are unique when the relevant Hom group is a subsingleton.
 Source: Beilinson–Bernstein–Deligne, *Faisceaux pervers*, Proposition 1.1.9
-and Corollaire 1.1.10 (ii), pp. 23–24.
-
-Proof:
-1. If `T.mor₁ ≫ g ≫ T'.mor₂ = 0`, exactness of Hom into `T'` gives `f`
-   completing the first square (`lem-weil-pbc-hom-into-triangle-exact`, ii).
-2. TR3 completes `(f,g)` to a triangle morphism.
-3. A triangle morphism supplies both squares.
-   Conversely, the first square implies the vanishing composite because the first
-   two arrows of `T'` compose to zero (`lem-weil-pbc-hom-into-triangle-exact`, i).
-4. Exactness of Hom out of `T` supplies `h` completing the second square
-   (`lem-weil-pbc-hom-out-of-triangle-exact`, i).
-5. The second square implies the vanishing composite since the first two arrows
-   of `T` compose to zero (`lem-weil-pbc-hom-into-triangle-exact`, i). Together
-   with steps 1–2, this also yields an extension of the middle component.
-6. For two first-square solutions, subtract them and shift. Exactness of Hom into
-   `T'` factors their shifted difference through a map `T.obj₁[1] → T'.obj₃`
-   (`lem-weil-pbc-hom-into-triangle-exact`, iii). Hom vanishing kills that map;
-   faithfulness of the shift kills the original difference.
-7. For two second-square solutions, exactness of Hom out of `T` factors their
-   difference through `T.mor₃` and a map `T.obj₁[1] → T'.obj₃`
-   (`lem-weil-pbc-hom-out-of-triangle-exact`, ii). Hom vanishing kills it.
-8. Complete any first-square solution by TR3; uniqueness from step 7 identifies
-   its last component with any prescribed second-square solution. The resulting
-   triangle morphism has the required third square.
-9. Apply step 8 to `T` and the triangle with the same first two arrows and third
-   arrow `x`, using identity first and middle and last components. The third
-   square gives `x = T.mor₃`; `T.mor₃` itself supplies existence.
--/
+and Corollaire 1.1.10 (ii), pp. 23–24. -/
 theorem triangle_morphism_extension
     {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C]
     [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]

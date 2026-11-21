@@ -36,12 +36,12 @@ import Mathlib.CategoryTheory.Localization.Predicate
 /-!
 # Exact tower functors and augmented counit evaluations
 
-Source: Stacks Derived Categories, Tags 015F,
-04VG and 09T5, and Cohomology on Sites, Tag 0941.
-
-The four auxiliary maps are the displayed composites a, b, q and p of the node.
-All comparisons and transitions reuse the existing exact-localization constructions.
 The natural index n denotes positive level n + 1. Composition below is left to right.
+
+## References
+
+* Stacks Project, Derived Categories, Tags 015F, 04VG and 09T5, and Cohomology on Sites,
+  Tag 0941.
 -/
 
 @[expose] public noncomputable section
@@ -75,7 +75,8 @@ variable {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
   (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
 /-- The transported augmentation a = H̃(i) j⁻¹, with the specified canonical j.
-Source: Stacks 015F. -/
+
+Stacks Project, Tag 015F. -/
 def augmentation {K : DerivedCategory A} {M : DerivedCategory (ℕᵒᵖ ⥤ A)}
     (i : (Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategory.obj K ⟶ M) :
     (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory.obj (F.mapDerivedCategory.obj K) ⟶
@@ -84,7 +85,8 @@ def augmentation {K : DerivedCategory A} {M : DerivedCategory (ℕᵒᵖ ⥤ A)}
     ((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapDerivedCategory.map i
 
 /-- The actual adjunction transpose b = L'(a) v', without assuming b invertible.
-Source: Stacks 09T5. -/
+
+Stacks Project, Tag 09T5. -/
 def transpose
     {L : DerivedCategory (ℕᵒᵖ ⥤ B) ⥤ DerivedCategory B}
     (adj : (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory ⊣ L)
@@ -95,7 +97,8 @@ def transpose
   adj.unit.app (F.mapDerivedCategory.obj K) ≫ L.map (augmentation F i)
 
 /-- The level map qₙ = eₙ(i) sₙ⁻¹ for an arbitrary derived augmentation.
-Source: Stacks 015F. -/
+
+Stacks Project, Tag 015F. -/
 def level {K : DerivedCategory A} {M : DerivedCategory (ℕᵒᵖ ⥤ A)}
     (i : (Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategory.obj K ⟶ M) (n : ℕ) :
     K ⟶ ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory.obj M :=
@@ -103,7 +106,8 @@ def level {K : DerivedCategory A} {M : DerivedCategory (ℕᵒᵖ ⥤ A)}
     ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory.map i
 
 /-- The normalized target projection pₙ = tₙ π'ₙ for the exact tower functor.
-Source: Stacks 09T5 and 0941. -/
+
+Stacks Project, Tags 09T5 and 0941. -/
 def projection
     {L : DerivedCategory (ℕᵒᵖ ⥤ B) ⥤ DerivedCategory B}
     (π : ∀ n : ℕ, L ⟶ ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory)

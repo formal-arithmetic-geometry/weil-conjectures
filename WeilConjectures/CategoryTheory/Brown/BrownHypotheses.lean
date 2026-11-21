@@ -178,9 +178,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstruc
 /-!
 # Hypotheses of Brown representability
 
-The main theorem assumes finite ℓ-cohomological dimension of the base field, as the blueprint's
-compactness input does (proposition-compactness-finite-coefficients: "finite type over the base
-field, so all cd_ℓ are finite"); the former arbitrary-field statement was false. The bundle lives
+The main theorem assumes finite ℓ-cohomological dimension of the base field; the
+arbitrary-field statement is false. The bundle lives
 in `BrownHypothesesDefinitions`; proved criteria and conditional obstructions live in
 `BrownHypothesesCriteria`. The integral and rational specializations below retain the
 finite or separably closed base-field hypothesis of the upstream Ext bounds.
@@ -287,29 +286,7 @@ open scoped CategoryTheory.Obj in
 /-- Brown representability hypotheses for a separated finite-type scheme in positive
 characteristic different from the coefficient prime, for exactly the admissible rings.
 `IsLocalizingAdmissibleCoefficient` specifies the six concrete coefficient objects up to
-ring-object isomorphism, including the discrete finite rings killed by a power of `ℓ`.
-
-Proof: First unpack lemma-hypotheses-brown-representability--1: the datum is a prime ℓ, a field of
-characteristic p > 0 distinct from ℓ with cd_ℓ(k) < ∞, and a
-separated finite-type k-scheme X; by Stacks 0F10 all cd_ℓ in the setting are then finite.
-Unpack definition-localizing-subcategory: Λ is one of the six specified condensed rings;
-the ambient category is the unbounded derived category of modules over Λ_X;
-S is the bounded constructible finite-Tor property and L is its replete localizing
-intersection, with coproducts in the fixed universe and no completeness restriction.
-Second apply lemma-hypotheses-brown-representability to this datum to obtain local smallness,
-triangulation, arbitrary sums and split idempotents of L. Apply
- lemma-hypotheses-brown-representability--5 to obtain thickness and essential smallness of S.
-Choosing one representative per isomorphism class gives a small skeleton.
-Third let G be any such skeleton and apply lemma-hypotheses-brown-representability:
-each representative is compact in L, and vanishing of Hom(C[n], K) for all
-representatives C and all integers n forces K to be zero. Compactness is exactly
-lemma-hypotheses-brown-representability--1. To identify the second conclusion with
-lemma-hypotheses-brown-representability--1, use Hom(coproduct C, K[-n]) = product Hom(C[n], K). If
-every morphism from the coproduct into every shift of K is zero, the component Hom groups vanish,
-so K is zero; contrapositively every nonzero K receives a nonzero map from the
-coproduct into some shift. This is IsTriangulatedGeneratingFamily. All these
-arguments apply to every small skeleton, with the inherited shift and any chosen
-coproduct universal properties. -/
+ring-object isomorphism, including the discrete finite rings killed by a power of `ℓ`. -/
 theorem brownHypotheses
     (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ)

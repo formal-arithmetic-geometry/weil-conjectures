@@ -83,9 +83,7 @@ noncomputable def pointFdQbarStageComp
       (fieldScalarTower (IntermediateField.inclusion h).toRingHom F.val.subtype))
 
 omit [IsAlgClosure (Padic l) Ω] in
-/-- Finite-dimensional bounded cohomology is stable under every integer shift.
-Proof: H^i(C[n]) is canonically H^(i+n)(C); translate the finite support by -n
-and retain the same finite-dimensionality proofs. -/
+/-- Finite-dimensional bounded cohomology is stable under every integer shift. -/
 theorem pointFd_shift_mem {F : Type u} [Field F]
     (C : DerivedCategory (ModuleCat.{u} F)) (hC : pointFiniteDimensional F C) (n : ℤ) :
     pointFiniteDimensional F (C⟦n⟧) := by

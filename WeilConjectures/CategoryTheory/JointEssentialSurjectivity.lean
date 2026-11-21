@@ -47,14 +47,7 @@ private theorem essImage_of_retract_of_fullyFaithful
         rw [Category.assoc, ← Category.assoc (F.map b), hmap]
       _ = 𝟙 X := by simp
 
-/-- A jointly fully faithful finite family with individual object lifts lifts every tuple.
-
-Proof: lift the ith prescribed object through L_i, and form the finite biproduct
-of those lifts. In each target category the prescribed object is a retract of
-its image, using the ith inclusion and projection. These coordinate retracts
-form a retract of the whole tuple. Full faithfulness lifts its idempotent to
-the source category, and splitting it supplies the desired global preimage.
-This includes the empty family: its tuple is a retract of the image of zero. -/
+/-- A jointly fully faithful finite family with individual object lifts lifts every tuple. -/
 theorem joint_essSurj_of_finite_biproducts
     {C : Type uC} [Category.{vC} C] [Preadditive C]
     [HasFiniteBiproducts C] [IsIdempotentComplete C]

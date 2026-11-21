@@ -30,20 +30,7 @@ namespace CategoryTheory.Functor
 /-- Stacks Project, Tag 06XN (dual part) and Tag 05SE (left derived functor part).
 An exact functor on the homotopy category has an everywhere defined exact left derived
 functor if every object has a resolution in `P` and quasi-isomorphisms between objects
-of `P` are sent to isomorphisms. Objects of `P` compute the left derived functor.
-
-Proof:
-1. By the resolution hypothesis, the arrows from objects of `P` to each `X` form a
-cofinal subcategory of the category of quasi-isomorphisms into `X`. The second hypothesis
-makes the corresponding pro-object essentially constant. For `X` in `P`, use the identity
-resolution (Stacks Tag 06XN).
-2. The Stacks-to-Kan bridge identifies this essential constancy with a pointwise right
-Kan extension and its comparison map.
-3. Assemble these pointwise extensions into a right Kan extension along `Qh`, giving the
-universal pair.
-4. Quasi-isomorphisms are saturated and compatible with the triangulation. The everywhere-defined left derived functor
-is exact by Tag 05SE. The identity resolution
-and the comparison clause of the bridge show that the counit is an isomorphism on `P`. -/
+of `P` are sent to isomorphisms. Objects of `P` compute the left derived functor. -/
 theorem leftDerived_from_resolvingClass
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     (D' : Type u') [Category.{v'} D'] [Preadditive D'] [HasZeroObject D']

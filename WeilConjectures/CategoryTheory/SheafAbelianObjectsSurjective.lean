@@ -14,7 +14,9 @@ public import Mathlib.Algebra.Category.Grp.Limits
 /-!
 # Sectionwise abelian sheaves and commutative group objects
 
-Source: Stacks Project, Section 00YR and Proposition 00YV.
+## References
+
+* Stacks Project, Section 00YR and Proposition 00YV.
 -/
 
 @[expose] public section
@@ -96,19 +98,10 @@ private theorem commGrp_eq_of_mul
   cases hg
   rfl
 
-/-- Source: Stacks Project Section 00YR, quadruples and Proposition 00YV.
-Proof: for an internal commutative group object, evaluate multiplication, unit, and
-inverse on every section. These operations give an additive commutative group by
-evaluating the internal group identities, using that products and the terminal sheaf
-are sectionwise. Naturality makes every restriction additive. The underlying sets
-already form a sheaf, so `Presheaf.isSheaf_iff_isSheaf_comp` makes the algebraic
-presheaf a sheaf as well. The construction keeps the underlying types and restriction
-maps, giving a definitional equality after forgetting the additive structure.
-Apply F to this explicitly constructed sheaf. The equality hF identifies its underlying
-sheaf with the original one. Multiplication compatibility identifies the multiplications
-after transporting along that equality. `MonObj.ext` identifies the monoid structures,
-`GrpObj.ext` identifies the group structures, and proof irrelevance identifies the
-commutativity witnesses. Thus the internal commutative group objects are equal. -/
+/-- A functor from abelian sheaves to internal commutative group objects in sheaves of sets,
+compatible with the forgetful functors and the sectionwise operations, is surjective on objects.
+
+Stacks Project, Section 00YR (quadruples) and Proposition 00YV. -/
 theorem sheafAbelianObjects_surjective
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (F : Sheaf J AddCommGrpCat.{max u v w} ⥤ CommGrp (Sheaf J (Type (max u v w))))

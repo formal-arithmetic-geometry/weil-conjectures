@@ -85,7 +85,7 @@ attribute [local irreducible] quotientTower roosF SheafOfModules.monoidalCategor
 
 /-- The two coordinates of scalar extension of the actual Roos cone, formed from
 its product comparison. This uses only the given functor and canonical cone projections.
-Source: Stacks 0941, additive cone comparison in DAG proof step 4. -/
+Source: Stacks 0941. -/
 noncomputable def scalarRoosCoordinates
     {A : Type a} [Category.{va} A] [Abelian A] [HasCountableProducts A]
     {B : Type b} [Category.{vb} B] [Abelian B] [HasCountableProducts B]
@@ -190,7 +190,7 @@ noncomputable abbrev targetTower (F : SheafOfModules.DerivedChangeOfRingsCochain
 
 /-- The actual Roos comparison data for scalar extension and arithmetic restriction.
 Product projections and the two signed cone coordinates specify all maps without a basis.
-Source: Stacks 0941 and 0H9K, DAG proof steps 3--6. -/
+Source: Stacks 0941 and 0H9K. -/
 structure RepresentativeRoosComparison
     {A : Type a} [Category.{va} A] [Abelian A] [HasCountableProducts A]
     {B : Type b} [Category.{vb} B] [Abelian B] [HasCountableProducts B]
@@ -227,7 +227,7 @@ structure RepresentativeRoosComparison
 The quotient maps are degreewise epimorphisms, so their equation pins the balanced
 finite-stage formula. The final equation specifies inverse arithmetic restriction
 following the canonical tensor/product comparison, using the fixed cochain counits.
-Source: Stacks 06YT, 0941 and 0H9K, DAG proof steps 3--6. -/
+Source: Stacks 06YT, 0941 and 0H9K. -/
 def RepresentativeComparison
     (F : SheafOfModules.DerivedChangeOfRingsCochainModel φ)
     (t : (SheafOfModules.unit

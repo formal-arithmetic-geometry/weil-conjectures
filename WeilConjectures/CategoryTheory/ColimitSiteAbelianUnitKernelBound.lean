@@ -40,29 +40,7 @@ private theorem arrow_zero_iff {A B C : AddCommGrpCat.{u}} (f : A ⟶ B) (g : A 
 
 /-- Source: Stacks Project, Sites, Tag 0A35,
 section formula and its presentation, sheaf and adjunction paragraphs; abelian
-interpretation in Modules on Sites, Tag 03CO.
-
-Proof: Transpose the canonical limit unit and each later-stage unit through the
-source-stage adjunction. The transposes satisfy the unit equations by the
-adjunction bijection. The existing section-diagram construction evaluates these
-maps at X, producing a coherent abelian diagram D, its section identifications
-E, and a cocone K identified with the limit inverse-image section group.
-
-Send x through the unit for the identity transition and then through E inverse.
-The limit-unit equation and the cocone equation show this element has zero K
-image. Apply the finite section eventual-zero theorem, whose independent raw
-Kan-extension route uses only the object and arrow colimits, finite covers and
-covering pullbacks. It gives a later diagram transition killing this element.
-The diagram transition equation and the stage-unit equation identify its zero
-image with the later source-unit image of x. Thus x lies in one later kernel,
-and hence in their supremum. Arrow equality transports zero across the endpoint
-identifications. This proof does not choose an arbitrary group from existence:
-the section-diagram theorem is proved and its data have the stated isomorphisms.
-
-Edge cases: zero sections belong to every kernel; the constant identity diagram
-has zero kernels; an empty source category has no X. No nonempty-cover assumption
-or preservation of all limits by a transition is needed.
--/
+interpretation in Modules on Sites, Tag 03CO. -/
 theorem colimit_site_abelian_unit_kernel_bound
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

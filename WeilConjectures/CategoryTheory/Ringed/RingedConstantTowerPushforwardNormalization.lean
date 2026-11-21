@@ -49,8 +49,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Constant strict towers and ringed direct image
 
-Source: Stacks Project, Cohomology on Sites, Tag 0A07,
-diagram-topos proof, specialized to constant towers.
+Source: Stacks Project, Cohomology on Sites, Tag 0A07.
 
 The natural number n denotes positive tower level n+1. The comparisons supplied as
 parameters below are characterized by their ordinary localization equations; they are

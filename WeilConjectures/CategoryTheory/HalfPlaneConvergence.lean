@@ -207,34 +207,7 @@ private theorem finite_inverse_limit {T : C} (F : PBCDecreasingFiltration T)
 /-- Half-plane exact couples stabilize and converge to the finite image filtration.
 Here `pageCouple r` is the actual page `r + 2`, so the stabilization bound below
 is `(r : ℤ) + 2 > max (q - a + 1) p`.
-
-Proof, Step 1: The half-plane region implies `a ≤ q ≤ n` on total degree `n`.
-The incoming differential has source first index `p - R < 0` for `R > p`,
-and the outgoing differential has target second index `q - R + 1 < a` for
-`R > q - a + 1`. Page cohomology therefore gives the canonical stabilization
-isomorphism, and the recursive cycles and boundaries become constant, yielding
-regularity and limiting subobjects.
-The incoming image of `alpha^R` is zero for `R > q - a`, yielding completeness.
-Exactness makes alpha an isomorphism to the left of first index zero, since both
-adjacent initial E terms vanish there. Thus the diagonal colimit is `D 0 n`,
-with its map from first index zero the identity. Its image filtration is zero
-for `q < a` and the whole object for `q ≥ n`.
-
-Step 2: For `p ≥ 0`, choose a stabilized page `R` with `u = p - R + 2 ≤ 0`
-and `v = q + R - 2`. By lem-sp-derived-couple-exact, the iterated D image
-at `(u,v)` identifies with `G_q`, and its incoming alpha image with `G_(q-1)`.
-The next D term is zero because its incoming source has second index below a.
-Exactness gives `E_R = G_q / G_(q-1)`, hence the graded piece of `F` in
-sense of def-sp-filtration. Iterating the defining equation for derived g shows
-that the two canonical maps from `D p q` are onto with equal kernels; thus
-this is the canonical comparison of def-sp-convergence. For `p < 0`, both
-sides are zero. The finite filtration is exhaustive, separated and complete
-in the inverse-limit sense, proving convergence.
-
-Step 3: Compare the cycle/boundary formulas in Stacks Tag 011T and the
-infinite-page and associated-graded discussion in Tag 012F.
-Source: Stacks Project,
-Tags 011T and 012F. -/
+Source: Stacks Project, Tags 011T and 012F. -/
 theorem halfPlaneConvergence
     (X : BigradedExactCouple C 0) (a : ℤ)
     (hD : ∀ (p q : ℤ), q < a → IsZero (X.D p q))

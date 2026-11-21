@@ -249,14 +249,7 @@ private theorem localizationSheafMap_zero
 
 /-- The localization of the regular module is its multiplication colimit, with
 zeroth leg the localization unit.
-Source: Stacks Project, Algebra, Tag 00CM, and Modules on Sites, Tag 03CY.
-
-Proof: the nth fraction map sends r to r/t^n. The module-localization colimit
-comparison proves the universal property sectionwise. Evaluation jointly reflects
-presheaf-module colimits, so the fraction cocone is a presheaf colimit. For a sheaf
-target, the sheafification adjunction extends its descent map uniquely; the unit
-naturality and the presheaf colimit equations prove factorization and uniqueness.
-The zeroth fraction map sends r to r/1, hence is the stated localization unit. -/
+Source: Stacks Project, Algebra, Tag 00CM, and Modules on Sites, Tag 03CY. -/
 theorem scalarLocalization_regularColimit
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     ∃ c : Cocone (Functor.ofSequence (X := fun _ : ℕ ↦

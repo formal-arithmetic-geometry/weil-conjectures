@@ -39,13 +39,7 @@ private theorem map_heq {C : Type*} [Category* C] {D : Type*} [Category* D]
 
 /-- A specified integral biduality localizes to a natural biduality with exactly
 its localized components, even when the localized dual's objects are only propositionally
-identified with integral duals.
-Proof: the double localized dual has the integral double-dual object by applying the
-object equation twice. Its map on a pure tensor is the same scalar times the integral
-double-dual map, by applying the contravariant pure-tensor formula twice. The existing
-normalized localization theorem for natural isomorphisms applies to the integral
-biduality and these two functors. Naturality extends from pure tensors to every arrow
-by additivity. Components are prescribed by the integral biduality, including its inverse. -/
+identified with integral duals. -/
 theorem biduality
     {R : Type r} [CommRing R] {C : Type u} [Category.{v} C]
     [Preadditive C] [Linear R C] (t : R) (U : Cᵒᵖ ⥤ C)

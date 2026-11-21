@@ -28,7 +28,7 @@ open CategoryTheory CategoryTheory.Limits HomologicalComplex
 namespace AlgebraicGeometry
 
 /-- An exact scalar presentation gives its normalized two-term finite-free resolution.
-Source: Stacks Tags 0115 and 0657, the cohomology calculation in proof steps 3--4. -/
+Source: Stacks Tags 0115 and 0657. -/
 private theorem twoTermResolution {R : Type u} [CommRing R]
     (a : R) (M : ModuleCat.{u} R)
     (q : ModuleCat.of R R ⟶ M)

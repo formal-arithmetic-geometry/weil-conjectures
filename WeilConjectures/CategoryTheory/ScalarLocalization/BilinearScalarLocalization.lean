@@ -97,18 +97,7 @@ private def tensorLocalizedFunctor :
 
 /-- A bilinear arrow action extends uniquely to the raw scalar-localized category,
 keeping the original output on objects and multiplying the two scalar factors.
-Source: module base change, Stacks 00CV and 00CX.
-
-Proof: lift the integral bilinear action to the tensor product, base change the
-resulting linear map, distribute base change across both inputs and curry. The
-pure-tensor formula follows from these constructions. Four tensor inductions
-reduce preservation of composition to the original functor law and the equality
-(x*x')*(y*y')=(x'*y')*(x*y). Linearity handles zero and sum cases. The identity
-formula uses the original identity law. Assemble this action into a functor.
-For uniqueness, functor extensionality supplies the prescribed object transports;
-two tensor inductions reduce its arrow equation to the given HEq generator
-formula. Bilinearity of the competing action and of composition handles zeros
-and sums. This proof also covers zero rings and localization at zero. -/
+Source: module base change, Stacks 00CV and 00CX. -/
 theorem bilinearFunctor_existsUnique :
     ∃! F : ScalarLocalization A D p × ScalarLocalization A D p ⥤ ScalarLocalization A D p,
       (∀ MN, F.obj MN = ⟨B.obj (MN.1.obj, MN.2.obj)⟩) ∧

@@ -498,20 +498,14 @@ abbrev Morphism.modulePull {V U : Site.{u}} (f : Morphism V U)
   ConstantCompletion.pull f.algebra (ConstantCompletion.constantMap f.algebra A)
 
 /-- Additivity of the constant-coefficient inverse image, as a named instance.
-Source: Stacks 099N, 03D2.
-Proof: unfold the specified inverse image. Scalar extension and ringed inverse image
-are additive, so the existing additive-functor instance applies. -/
+Source: Stacks 099N, 03D2. -/
 instance Morphism.modulePull_additive {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] : (f.modulePull A).Additive := by
   dsimp only [Morphism.modulePull]
   infer_instance
 
 /-- Exactness and existence of the right adjoint of the specified module inverse image.
-Source: Stacks 099N, 03D7.
-Proof: the algebraic lift preserves finite limits and colimits on underlying additive
-sheaves. The constant-ring map is an isomorphism, so extension of scalars along it is
-an equivalence and exact. Transport the original topos adjunction through the algebraic
-operations; the tensor-unit insertion gives the module hom-set bijection. -/
+Source: Stacks 099N, 03D7. -/
 theorem Morphism.modulePull_properties {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] :
     PreservesFiniteLimits (f.modulePull A) ∧ PreservesFiniteColimits (f.modulePull A) ∧
@@ -573,9 +567,7 @@ instance Site.towersHasDerived (T : Site.{u}) (A : Type u) [CommRing A] :
     HasDerivedCategory (T.towers A) := HasDerivedCategory.standard _
 
 /-- K-injective resolutions on the small ringed site.
-Source: Stacks 079P, 099N.
-Proof: module sheaves on a small site form a Grothendieck category, hence have
-functorial K-injective resolutions. -/
+Source: Stacks 079P, 099N. -/
 @[instance]
 theorem Site.hasKInjectives (T : Site.{u}) (A : Type u) [CommRing A] :
     Abelian.HasKInjectiveResolutions (T.modules A) := by
@@ -584,9 +576,7 @@ theorem Site.hasKInjectives (T : Site.{u}) (A : Type u) [CommRing A] :
   infer_instance
 
 /-- K-injective resolutions in strict towers, by their small diagram-site realization.
-Source: Stacks 079P, 0941.
-Proof: smallModuleDiagrams_isGrothendieckAbelian supplies the Grothendieck property;
-apply the K-injective resolution theorem to this abelian category. -/
+Source: Stacks 079P, 0941. -/
 @[instance]
 theorem Site.towersHasKInjectives (T : Site.{u}) (A : Type u) [CommRing A] :
     Abelian.HasKInjectiveResolutions (T.towers A) := by
@@ -615,11 +605,7 @@ def Morphism.adj {V U : Site.{u}} (f : Morphism V U) (A : Type u) [CommRing A] :
   (f.moduleAdjunction A).mapDerivedCategoryRightDerivedAdjunction
 
 /-- Completion has complete output and its quotient unit has the reflection property.
-Source: Stacks 099M.
-Proof: choose finite generators of I by Noetherianity. Apply
-ConstantCompletion.koszul_quotient_reflector to this list. Its unit-preserving
-Koszul/quotient comparison gives output completeness and the hom-set bijection;
-its last clause identifies the complete inputs. This includes the empty list. -/
+Source: Stacks 099M. -/
 theorem Site.completion_properties (T : Site.{u}) (A : Type u) [CommRing A]
     [IsNoetherianRing A] (I : Ideal A) :
     (∀ M : T.derived A, T.IsComplete A I ((T.completion A I).obj M)) ∧
@@ -651,10 +637,7 @@ def Site.reflectorAdjunction_normalized (T : Site.{u}) (A : Type u)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The completion adjunction is uniquely fixed by precomposition with its quotient unit.
-Source: Stacks 099M.
-Proof: the preceding bijection is natural in both arguments by naturality of the
-quotient unit. It supplies the adjunction hom equivalence. Surjectivity constructs
-its inverse; injectivity proves its inverse identities and uniqueness. -/
+Source: Stacks 099M. -/
 theorem Site.reflectorAdjunction_existsUnique (T : Site.{u}) (A : Type u)
     [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
     ∃! adj : T.reflector A I ⊣ ObjectProperty.ι (T.IsComplete A I),
@@ -681,14 +664,7 @@ def Site.reflectorAdjunction (T : Site.{u}) (A : Type u) [CommRing A]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived direct image preserves local derived completeness.
-Source: Stacks 099N(1).
-Proof: apply ConstantCompletion.completedPullbackAdjunction to the given geometric
-adjunction. The generalized-section operation identities identify its algebraic lift
-with f.algebra. The module hom-set normalization and universal derived comparison
-identify its direct image with f.push A; transport its completeness-preservation
-clause across that canonical isomorphism. Equivalently, on each slice, adjunction
-and localization identify internal Hom from A[1/a] into Rf_*L with direct image
-of the corresponding internal Hom into L, which vanishes for complete L. -/
+Source: Stacks 099N(1). -/
 theorem Morphism.push_complete {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (L : U.derived A) (hL : U.IsComplete A I L) :
@@ -744,11 +720,7 @@ def Morphism.completeAdjunction_normalized {V U : Site.{u}} (f : Morphism V U)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Completed adjunction, with exactly the composite ordinary and completion hom bijections.
-Source: Stacks 099N(2).
-Proof: transpose a map from C_U f^*M to L first under the completion adjunction,
-then under f^* ⊣ Rf_*. Completeness of Rf_*L lets the result be regarded as a
-map in the full complete subcategory. The two inverse identities and naturality
-follow from those of the two hom bijections. This also proves uniqueness. -/
+Source: Stacks 099N(2). -/
 theorem Morphism.completeAdjunction_existsUnique {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
     ∃! adj : f.completePull A I ⊣ f.completePush A I,
@@ -790,10 +762,7 @@ abbrev Morphism.towerModulePush {V U : Site.{u}} (f : Morphism V U)
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (f.modulePush A)
 
 /-- Termwise inverse image is exact, because kernels and cokernels are levelwise.
-Source: Stacks 0941.
-Proof: evaluate a finite limiting or colimiting cone at each index. Exactness of
-modulePull makes the image cone limiting or colimiting at every index, hence in
-the functor category. -/
+Source: Stacks 0941. -/
 theorem Morphism.towerModulePull_exact {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] :
     PreservesFiniteLimits (f.towerModulePull A) ∧
@@ -855,12 +824,7 @@ def moduleSquare_normalized
         (ConstantCompletion.constantMap h.algebra A) ((f.modulePull A).obj M)
 
 /-- The canonical module square is uniquely fixed on scalar insertions.
-Source: Stacks 03D2, 0E48.
-Proof: apply the given set-sheaf square to inverse-image modules. Naturality on
-generalized sections makes it additive and compatible with the constant A-action.
-Extension of scalars sends a generator to its image tensored with 1. These generators
-locally generate, so the insertion formula gives uniqueness. Apply the inverse square
-to get the inverse map. -/
+Source: Stacks 03D2, 0E48. -/
 theorem moduleSquare_existsUnique
     {f : Morphism Y X} {g : Morphism Y Y'} {h : Morphism X X'} {k : Morphism Y' X'}
     (sq : Square f g h k) (A : Type u) [CommRing A] :
@@ -1037,11 +1001,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The constant/derived-limit adjunction has the unit computed by the actual
 ordinary limit unit and the specified right-derived comparison on every complex.
-Source: Stacks 0941.
-Proof: derive the exact constant-tower/limit adjunction. The universal right-derived
-property identifies its right adjoint with ConstantCompletion.rlim. Transport the
-adjunction through that unique comparison. The displayed unit equation is the
-derived-adjunction fraction formula and fixes its hom equivalence uniquely. -/
+Source: Stacks 0941. -/
 theorem Site.deltaAdjunction_existsUnique (T : Site.{u}) (A : Type u) [CommRing A] :
     ∃! adj : T.delta A ⊣ T.rlim A,
       Site.deltaAdjunction_normalized T A adj := by
@@ -1227,10 +1187,7 @@ private theorem restrictionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V
 
 /-- Ordinary inverse image commutes with finite scalar restriction, fixing its map
 on every inverse-image generator, not merely its objects.
-Source: Stacks 03D2, 0E48.
-Proof: both sides have the same underlying inverse-image additive sheaf and the
-same restricted constant A-action. The map is identity on its generalized sections.
-Its inverse is the same identity. The displayed insertion formula fixes it uniquely. -/
+Source: Stacks 03D2, 0E48. -/
 theorem Morphism.finiteModuleRestrictionPullIso_existsUnique {V U : Site.{u}}
     (f : Morphism V U) (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
     ∃! e : ConstantCompletion.res (ConstantCompletion.quotient V.topology A I n) ⋙
@@ -1375,14 +1332,7 @@ private theorem reductionUnit_step (T : Site.{u}) (A : Type u) [CommRing A]
 
 /-- The ordinary strict reduction/pullback comparison is fixed on quotient-unit
 insertions at every level. Its source and target are actual strict diagrams.
-Source: Stacks 07A4, 099N(5).
-Proof: at level n, whisker the normalized finite inverse-image/scalar-restriction
-comparison by scalar extension along the quotient and compose with scalar restriction
-of the inverse ordinary finite pullback comparison; their two insertion equations give
-the levelwise normalization. The quotient scalar-extension unit is epic, the quotient
-ring sheaf map being sectionwise surjective. Cancelling its inverse image shows that the
-levels commute with the quotient transitions and that any normalized isomorphism agrees
-with this one; levelwise invertibility makes the assembled tower map an isomorphism. -/
+Source: Stacks 07A4, 099N(5). -/
 theorem Morphism.moduleReductionPullIso_existsUnique {V U : Site.{u}}
     (f : Morphism V U) (A : Type u) [CommRing A] (I : Ideal A) :
     ∃! e : ConstantCompletion.reductionTower V.topology A I false ⋙ f.towerModulePull A ≅
@@ -1687,12 +1637,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The strict derived comparison is uniquely characterized on a single flat-term
 K-flat representative, with the entire strict ordinary comparison applied termwise.
-Source: Stacks 07A4, 099N(5).
-Proof: exact inverse image preserves flat K-flat representatives. The diagonal of
-one such representative is K-flat on the diagram site, so it computes reduction
-against the whole quotient diagram. Apply moduleReductionPullIso termwise, insert
-the universal reduction comparisons and the exact-pullback factorizations, then
-descend along localization. Every object has such a representative, proving uniqueness. -/
+Source: Stacks 07A4, 099N(5). -/
 theorem Morphism.reductionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] (I : Ideal A) :
     ∃! e : V.reduction A I ⋙ f.towerPull A ≅ f.pull A ⋙ U.reduction A I,
@@ -1883,11 +1828,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Evaluation/direct-image comparison with its universal-unit normalization on all
 strict tower complexes, and therefore its prescribed K-injective computation.
-Source: Stacks 0941.
-Proof: evaluation has an exact left adjoint, so preserves K-injectives. A K-injective
-tower thus computes both direct images after evaluation. The ordinary composites
-are identical. Their universal derived units give the displayed square; localization
-and K-injective representatives make the resulting natural isomorphism unique. -/
+Source: Stacks 0941. -/
 theorem Morphism.evaluatePushIso_existsUnique {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] (n : ℕ) :
     ∃! e : f.towerPush A ⋙ V.evaluate A n ≅ U.evaluate A n ⋙ f.push A,
@@ -1985,11 +1926,7 @@ def Site.finiteModuleAdjunction_normalized (T : Site.{u}) (A : Type u)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The normalized ordinary scalar-extension adjunction, fixed by insertion of 1.
-Source: Stacks 03CU.
-Proof: the tensor/sheafification universal property sends a linear map out of a
-scalar extension to its restriction along m mapped to 1 tensor m. The inverse sends
-s tensor m to s times the image of m. The balanced relations and sheafification
-prove the inverse identities. This determines the hom bijection uniquely. -/
+Source: Stacks 03CU. -/
 theorem Site.finiteModuleAdjunction_existsUnique (T : Site.{u}) (A : Type u)
     [CommRing A] (I : Ideal A) (n : ℕ) :
     ∃! adj : ConstantCompletion.change (ConstantCompletion.quotient T.topology A I n) ⊣
@@ -2085,11 +2022,7 @@ private theorem resolving_left_universal
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived extension/restriction adjunction with its unit fixed on K-flat representatives.
-Source: Stacks 06YY.
-Proof: derive the tensor-unit normalized ordinary adjunction. Exact restriction and
-K-flat scalar-extension computation give the displayed equation for its unit. Every
-object has a K-flat representative, so this equation determines the unit and hence
-the adjunction uniquely. -/
+Source: Stacks 06YY. -/
 theorem Site.finiteAdjunction_existsUnique (T : Site.{u}) (A : Type u)
     [CommRing A] (I : Ideal A) (n : ℕ) :
     ∃! adj : T.finiteReduction A I n ⊣ T.finiteRestriction A I n,
@@ -2173,10 +2106,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The evaluated strict quotient object is the restricted finite scalar extension,
 with its comparison fixed by the two universal reduction counits.
-Source: Stacks 0941, 099M.
-Proof: on a single K-flat complex, evaluation of its strict quotient diagram is
-its finite quotient tensor complex. Compose the universal comparison maps and the
-exact restriction factorization. Descend; K-flat resolutions prove uniqueness. -/
+Source: Stacks 0941, 099M. -/
 theorem Site.finiteEvaluationIso_existsUnique (T : Site.{u}) (A : Type u)
     [CommRing A] (I : Ideal A) (n : ℕ) :
     ∃! e : T.reduction A I ⋙ T.evaluate A n ≅
@@ -2237,11 +2167,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The finite coefficient tensor/pullback comparison, fixed by ordinary tensor
 reassociation on flat-term K-flat representatives.
-Source: Stacks 07A4, 099N.
-Proof: apply ConstantCompletion.ordinaryFinitePull on a K-flat representative.
-Exact pullback and scalar extension preserve these representatives. Insert the
-universal counits on each side, then descend by localization. The representative
-formula determines the natural isomorphism uniquely. -/
+Source: Stacks 07A4, 099N. -/
 theorem Morphism.finitePullIso_existsUnique {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
     ∃! e : f.pull A ⋙ U.finiteReduction A I n ≅
@@ -2373,10 +2299,7 @@ def finiteProjectionComparison {f : Morphism Y X} {g : Morphism Y Y'}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Naturality needed to form s as an actual natural transformation.
-Source: Stacks 0B56, 099M.
-Proof: reductionPullIso is natural, the derived counit is natural, and transposition
-is natural in both arguments. Hence towerProjection and H are natural in K. Apply
-the limit functor and restrict to the complete full subcategory. -/
+Source: Stacks 0B56, 099M. -/
 theorem comparisonS_naturality {f : Morphism Y X} {g : Morphism Y Y'}
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (K L : X.Complete A I) (a : K ⟶ L) :
@@ -2425,9 +2348,7 @@ def comparisonTComponent {h : Morphism X X'} {k : Morphism Y' X'}
     (Y'.rlim A).mapIso ((k.towerPush A).mapIso ((h.reductionPullIso A I).symm.app K.obj))
 
 /-- Naturality of the specified t components.
-Source: Stacks 0941, 0A07.
-Proof: directLimitIso and reductionPullIso are natural isomorphisms. Their
-whiskerings and composite remain natural; restrict this equality to complete inputs. -/
+Source: Stacks 0941, 0A07. -/
 theorem comparisonT_naturality {h : Morphism X X'} {k : Morphism Y' X'}
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (K L : X.Complete A I) (a : K ⟶ L) :
@@ -2454,47 +2375,7 @@ def comparisonT {h : Morphism X X'} {k : Morphism Y' X'}
 /-- The whole-diagram mate comparison, including invertibility and the two finite
 coefficient normalization clauses.
 
-Source: ingredient sources Stacks 099M, 099N, 0E48, 0941, 0B56, 0944.
-
-Proof, following the ten steps of the DAG node:
-1. Realize the strict sequence category on the diagram site. Use one flat-term
-K-flat model for K and tensor it with the whole strict quotient diagram; its diagonal
-is K-flat by levelwise acyclicity. This identifies the reduction/pullback comparisons.
-2. The constant-tower functor preserves K-injectives, since evaluation at its terminal
-index is exact and left adjoint to it. Its derived units and counits are the ordinary
-ones termwise. The derived quotient augmentation therefore gives exactly the fixed
-completion unit.
-3. Evaluation of the strict projection adjunct gives finiteProjection. Each quotient
-is perfect, hence has a bounded finite-projective model. Constant sheafification and
-inverse image preserve its finite-free retracts. The finite total projection formula
-makes every evaluated projection invertible; levelwise cohomology detects its cone.
-Thus H is invertible and has the stated finite evaluation.
-4. The identity-component constant/pullback square gives directLimitIso by adjunction
-conjugation. On a K-injective strict tower it is the ordinary direct-image/limit map;
-its projections are the direct images of the tower projections. This is t.
-5. Apply ringedExchangeTensorCoherence on the diagram sites with the diagonal of K
-and the whole quotient diagram. The diagram exchange on the diagonal is the diagonal
-of the ordinary mate. The resulting equality holds before any evaluation or limit.
-6. Naturality of the projection adjunct in the coefficient, and its tensor-unit
-normalization, identify its composition with the quotient augmentation with direct
-image of that augmentation. Apply total derived limit to obtain the corresponding
-completion-unit equation.
-7. The strict expression t inverse followed by limit(v) followed by s extends the
-ordinary mate followed by the completed target unit. Completeness of that target
-and direct-image preservation give uniqueness of this extension.
-8. For each pair of edges, transpose under the ordinary and completion adjunctions.
-The comparison C(v^* unit) is invertible by reflection and preservation of complete
-objects under direct image. This calculation identifies the completed pullback square
-with the conjugate of the prescribed right-adjoint square, including units and counits.
-9. Transpose the completed mate and precompose with the completion unit. The triangle
-identities give the same extension as in step 7. Uniqueness proves the displayed
-natural-transformation equality, not merely equality of evaluated tower maps.
-10. Evaluate the strict derived adjunction on a K-injective tower and use its exact
-left adjoint. Finite scalar restriction commutes with direct image by adjunction
-conjugation and with inverse image on generalized sections. These comparisons turn
-the evaluated tower mate into ordinaryExchange over the original quotient ring.
-No properness, smoothness, constructibility, boundedness or etale-origin condition
-is used. Empty sites, the zero ideal and the unit ideal are included. -/
+Source: ingredient sources Stacks 099M, 099N, 0E48, 0941, 0B56, 0944. -/
 theorem completionMateComparison
     {f : Morphism Y X} {g : Morphism Y Y'} {h : Morphism X X'} {k : Morphism Y' X'}
     (sq : Square f g h k) (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)

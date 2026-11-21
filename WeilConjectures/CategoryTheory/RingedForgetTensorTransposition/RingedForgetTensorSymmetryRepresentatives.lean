@@ -152,18 +152,7 @@ include cB cA
 There are no unit or associativity assertions, and the arguments are fixed
 complexes rather than arbitrary derived objects.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0FPT and 06YU.
-
-Proof: take the chain swaps supplied by cB.symmetry_model and cA.symmetry_model.
-Use the representative equations for (P,Q) and (Q,P), naturality of the
-localization factor, and the two symmetry-model equations to cancel the tensor
-model isomorphisms. The remaining chain equality is checked after the inverse
-comparison, on the target coproduct summands. On bidegree (p,q), the summand
-law identifies it with the underived symmetry equation times (-1)^(p*q).
-The additive functor preserves this integer scalar. Equality on local pure
-tensors identifies the stated chain swaps by the universal property of the
-sheafified tensor; equality on coproduct summands then gives equality of chain
-maps. Localize and cancel to obtain the displayed square. -/
+Source: Stacks Project, sites-cohomology.tex, Tags 0FPT and 06YU. -/
 theorem ringed_forget_tensor_symmetry_representatives
     (hU : ∀ P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ,
       P.IsKFlatIndependentCoefficients →

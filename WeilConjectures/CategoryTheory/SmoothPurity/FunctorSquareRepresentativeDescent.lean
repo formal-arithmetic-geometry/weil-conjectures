@@ -48,12 +48,7 @@ private theorem isoDescent
 
 /-- A comparison square on representatives determines a unique comparison after
 fully faithful restriction of functors.
-Source: Stacks, categories.tex, localization universal property, Tag 04VK.
-Proof: on representatives compose the source operation comparison, the source
-coefficient comparison, the given chain square, and the inverses of the target
-operation and coefficient comparisons. Fully faithful restriction lifts this
-natural isomorphism. Its map-preimage equation proves the prescribed square;
-cancel the two target isomorphisms and use faithfulness to prove uniqueness. -/
+Source: Stacks, categories.tex, localization universal property, Tag 04VK. -/
 theorem functorSquareRepresentativeDescent
     {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]
     {E : Type uE} [Category.{vE} E] {H : Type uH} [Category.{vH} H]

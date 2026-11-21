@@ -20,7 +20,9 @@ import Mathlib.AlgebraicTopology.SimplexCategory.Basic
 /-!
 # The induction invariant for finite-basis hypercovers
 
-Source: Stacks Project, Hypercoverings, Tag 0DAV, the split-skeleton construction.
+## References
+
+* Stacks Project, Hypercoverings, Tag 0DAV, the split-skeleton construction.
 -/
 
 @[expose] public section
@@ -407,27 +409,7 @@ private theorem covers_attached {C : Type u} [Category.{v} C]
   simpa [newInclusion] using h
 
 /-- Extend a finite split basis hypercover truncation by one degree.
-Source: Stacks Project, Hypercoverings, Tag 0DAV, construction of the extension and
-the paragraph proving that the new matching map covers; Tag 01G2, finite limits in SR.
-
-Proof: Work in C/T, which has terminal object id_T and pullbacks. Finite families have
-finite boundary limits: the boundary category of all operators from retained degrees
-is finite. The index-set functor preserves terminal objects and pullbacks, hence finite
-limits, so the limit M of this diagram has finite index set. Its cone supplies IsMatching.
-The proper-face inclusion into this boundary category is final: for any operator, its
-injective image factor is an initial object among its factorizations through proper
-faces. Restricting the boundary limit along the opposite inclusion therefore gives
-the required proper-face matching limit.
-For each component of M choose the finite B-cover supplied by hcover; their finite disjoint
-union V maps componentwise to M. Apply exists_split_truncated_extension to K, M and V.
-The new term is V together with the finitely many old normalized degeneracy copies, so
-every component belongs to B and its index set is finite. The supplied boundary map has
-the required projections. Its fibre over each matching component consists of the chosen
-cover together with finitely many old arrows; apply hadjoin successively to those arrows.
-This proves the new matching cover, including empty covers and empty matching families.
-The old-degree matching cones and covers transport along the restriction equality, so
-all earlier conditions, including the prescribed degree-zero point, are preserved.
--/
+Stacks Project, Hypercoverings, Tag 0DAV and Tag 01G2. -/
 theorem exists_finite_basis_truncation_extension
     {C : Type u} [Category.{v} C] [HasPullbacks C]
     (J : Precoverage C)

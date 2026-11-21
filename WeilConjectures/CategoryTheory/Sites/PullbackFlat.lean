@@ -29,9 +29,8 @@ finitely many sections over `U` come from one stage `F(V)` where they already ho
 (`CategoryTheory.Sheaf.hasLocallyTrivialRelations_of_flat`), and pulling the covering back to
 `U` along `G` makes them trivial locally on `U`.
 
-This is the argument of blueprint `corollary-finite-tor-amplitude-under-comparison` (the relation
-criterion for flatness transported by an exact inverse image), at the level of an arbitrary flat
-cover-preserving functor.
+This is the relation criterion for flatness transported by an exact inverse image, at the level
+of an arbitrary flat cover-preserving functor.
 
 ## Main results
 

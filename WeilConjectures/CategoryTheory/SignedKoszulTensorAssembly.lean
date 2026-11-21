@@ -27,13 +27,7 @@ basis, then the total tensor with an arbitrary coefficient complex has the corre
 subset cofan.  This is only the assembly step: it does not prove the recursive basis
 presentation.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E.
-Proof: apply the coproduct universal property of the total tensor degreewise, then apply
-tensor preservation to each basis cofan and reindex pairs `(p,n)` with `p+n=q` by the
-subset cardinality.  The inverse right unitor identifies each resulting leg with
-`ringedNegativeKoszulSummand`; the uniqueness part of the iterated coproducts gives the
-cofan universal property.  No differential or boundedness assertion is involved.
--/
+Stacks Project, algebraization.tex, Tag 0A0E. -/
 theorem isColimit_ringedNegativeKoszulTensor_of_basis
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A]

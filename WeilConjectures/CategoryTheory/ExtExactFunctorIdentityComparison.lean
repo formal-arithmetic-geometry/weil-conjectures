@@ -11,11 +11,13 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 /-!
 # Ext identity comparison
 
-Source: Stacks Project, derived.tex, Tag 015F.
-
 The comparison is obtained directly from Mathlib's
 `LocalizerMorphism.equiv_smallShiftedHomMap`, specializing the localized functor to
 the identity. No injective resolutions or separate Ext composition comparison are needed.
+
+## References
+
+* Stacks Project, derived.tex, Tag 015F.
 -/
 
 @[expose] public section
@@ -48,15 +50,8 @@ private theorem commShift_of_localization
     Category.assoc, ← τ.naturality_assoc] using h
 
 /-- An exact functor isomorphic to the identity acts on Ext by that comparison.
-Source: Stacks Project, derived.tex, Tag 015F, and Mathlib Ext.Map.
 
-Proof: represent x by a shifted morphism between single complexes in the derived
-category. The identity functor on complexes induces the identity after localization.
-The components of e induce the corresponding isomorphism from the functor induced by F
-to the identity. Naturality for the shifted morphism is exactly the displayed square.
-After cancelling the canonical comparisons with single complexes and shifts, its
-components are Ext.mk₀ (e.hom.app X) and Ext.mk₀ (e.hom.app Y).
--/
+Stacks Project, Tag 015F. -/
 theorem exactFunctorIdentityComparison
     {C : Type*} [Category C] [Abelian C] [HasExt.{w} C]
     (F : C ⥤ C) [F.Additive]

@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-!
 # Right-fraction localization of a dense full subcategory
 
-Source: Stacks Project, `derived.tex`, Tag 0GSL.
+Source: Stacks Project, Tag 0GSL.
 -/
 
 @[expose] public section
@@ -39,35 +39,7 @@ localizations of `C` at `W` and of the full subcategory at the restricted class,
 then the restricted class has a right calculus of fractions and the inclusion
 induces an equivalence of the two localized categories.
 
-Source: Stacks Project, Tag 0GSL, categorical right-fraction refinement argument.
-Proof plan:
-1. Identities and composition restrict to the full subcategory. For an Ore square
-   in `C`, choose a denominator from the subcategory into its auxiliary source.
-   Precomposing both legs gives the restricted Ore square by fullness; only the
-   original denominator, not the other original leg, must belong to `W`.
-2. Apply ambient cancellation and precompose the resulting equalizer with a
-   denominator from the subcategory. This proves restricted cancellation and
-   hence the first conclusion.
-3. The localization universal property
-   gives `F` and a natural
-   isomorphism `QB ⋙ F ≅ P.ι ⋙ Q`. Naturality identifies its conjugated Hom map
-   on roofs with the corresponding ambient roof map.
-4. Represent an ambient localized arrow by a right fraction. Refine its source by a denominator
-   from the subcategory; the numerator and denominator then lie in the full
-   subcategory and represent the same arrow. This proves Hom surjectivity.
-5. Represent two restricted arrows by roofs. If their ambient images agree,
-   `lem-pc-right-fraction-common-refinement` supplies a common refinement.
-   Refine its source again into the subcategory and use the restricted
-   common-refinement criterion to obtain equality. Only the common composite
-   denominator must belong to `W`; the two refinement legs need not do so.
-6. Essential surjectivity of `QB`
-   transports these Hom
-   bijections by conjugation to every pair of objects of `E`. Thus `F` is full
-   and faithful.
-7. Essential surjectivity of `Q` and a denominator from the subcategory show
-   that every object of `D` is isomorphic to an image under `F`. The criterion
-   `lem-trf-fully-faithful-ess-surj-equivalence` now gives `F.IsEquivalence`.
--/
+Source: Stacks Project, Tag 0GSL. -/
 theorem rightFractionDenseSubcategory
     {C : Type u₁} [Category.{v₁} C]
     (W : MorphismProperty C)

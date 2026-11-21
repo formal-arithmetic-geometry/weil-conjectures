@@ -10,8 +10,6 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # Normalized adjunction comparisons across equivalences
 
-Source: Stacks Project, Tags 0B65 and 0DV0.
-
 The three statements give the unique normalized comparison, its compatibility with
 adjoint compositors, and the comparison of actual inverse mates. Diagram equalities
 are stated at every object, equivalently as equalities of natural transformations.
@@ -21,6 +19,10 @@ are stated at every object, equivalently as equalities of natural transformation
 - `exists_equivalenceAdjunctionComparison`: existence, uniqueness, Hom, unit and counit.
 - `equivalenceAdjunctionComparison_compositor`: preservation of adjoint compositors.
 - `equivalenceAdjunctionComparison_inverseMate`: inverse-mate equality and invertibility.
+
+## References
+
+* Stacks Project, Tags 0B65 and 0DV0.
 -/
 
 @[expose] public section
@@ -42,14 +44,7 @@ one left-adjoint comparison, normalized by its inverse mate, and identifies all 
 transposes, the units, and the counits. Applying this statement to C, D, Cb, Db gives
 exactly the primed assertion of clause (1).
 
-Source: Stacks Project, Tag 0B65.
-
-Proof: (1) Apply `isIso_inverseMate_of_equivalences` to the inverse mate alpha of u.
-Set j = alpha inverse. Injectivity of `mateEquiv` gives uniqueness from normalization.
-(2) Apply `adjunctionMate_transpose` to u and any f to obtain the full Hom equation.
-Take f to be the identity of J X for the unit equation. Take X = U Y and f the counit
-at Y for the counit equation, using the triangle identity for its transpose.
-Repeat the same argument for the primed adjunctions. These are Steps 1–2 of the node. -/
+Stacks Project, Tag 0B65. -/
 theorem exists_equivalenceAdjunctionComparison
     (EA : A ≌ Ab) (EB : B ≌ Bb)
     {J : A ⥤ B} {U : B ⥤ A} {Jb : Ab ⥤ Bb} {Ub : Bb ⥤ Ab}
@@ -101,17 +96,7 @@ variable {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
 /-- Clause (2): normalized left comparisons preserve the specified adjoint compositors.
 All equivalences, comparisons, and composite/direct adjunctions remain specified data.
 
-Source: Stacks Project, Tags 0B65 and 0DV0.
-
-Proof: (3) Put alpha_ij = c_ij inverse. By `mateEquiv_hcomp`, their pasted left square
-has mate the pasted right square, under `Adjunction.comp` on both sides. Apply
-`conjugateEquiv_mateEquiv_vcomp` to the unbarred compositor and
-`mateEquiv_conjugateEquiv_vcomp` to the barred compositor. Their prescribed conjugates
-are delta inverse and deltab inverse. Thus the two left routes have mates given by
-the corresponding right routes with these inverse compositors inserted.
-(4) Cancel delta and deltab in hdelta to identify those mates. Injectivity of
-`mateEquiv` identifies the left routes. Cancel the invertible alpha comparisons to
-obtain the displayed equation. These are Steps 3–4 of the node. -/
+Stacks Project, Tags 0B65 and 0DV0. -/
 theorem equivalenceAdjunctionComparison_compositor
     (E0 : A ≌ Ab) (E1 : B ≌ Bb) (E2 : C ≌ Cb)
     {L01 : A ⥤ B} {R10 : B ⥤ A} {L12 : B ⥤ C} {R21 : C ⥤ B}
@@ -195,25 +180,7 @@ variable {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
 /-- Clause (3): a compatible square of right-adjoint transformations transports the
 actual inverse mates, and invertibility is equivalent on the two sides.
 
-Source: Stacks Project, Tag 0B65.
-
-Proof: (5) Write alpha = j inverse and alpha' = j' inverse. The inverse-mate transpose
-formula at the identity of J X says the transpose of beta_X is P(eta_X) followed by
-b at J X; the barred formula is identical. Cancel the invertible comparisons to
-rewrite the desired equality with alpha and alpha' on the opposite sides.
-(6) Transpose its first route under adjb'. Naturality and the primed Hom comparison
-rewrite it using u', b, and P(eta). Use hb at J X, naturality of p at eta_X, and the
-unit comparison from clause (1). This gives the route through bb, barred P of barred
-U(alpha_X), barred P of the barred unit, and p_X.
-(7) Naturality of bb at alpha_X and its inverse-mate transpose formula turn that
-expression into the transpose of the second route. Naturality of the barred unit
-moves p_X past it. Injectivity of the Hom bijection proves the equation at each X,
-hence equality of the natural transformations.
-(8) All comparisons are isomorphisms. The equation identifies component invertibility
-at EA X; ED is an equivalence, so full faithfulness reflects invertibility and
-essential surjectivity of EA, together with naturality, reaches every barred object.
-No invertibility of b or bb or adjoints for P, Q, Pb, Qb are required.
-These are Steps 5–8 of the node. -/
+Stacks Project, Tag 0B65. -/
 theorem equivalenceAdjunctionComparison_inverseMate
     (EA : A ≌ Ab) (EB : B ≌ Bb) (EC : C ≌ Cb) (ED : D ≌ Db)
     {J : A ⥤ B} {U : B ⥤ A} {J' : C ⥤ D} {U' : D ⥤ C}

@@ -187,18 +187,7 @@ private theorem extensionTensorIso_unit (φ : R ⟶ B) (M : Modules R) :
     (SheafOfModules.forward_right_unit φ M) (extensionIso_natural φ (ρ_ M).hom)
 
 /-- Ordinary scalar extension and its normalized total tensor comparison.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Define the functor using changeOfRingsOfUniverses and changeOfRingsHomOfUniverses,
-with the existing identity and composition proofs. Check additivity on scalar-extension
-generators. Check the multiplication square on generators b tensor x using multiplicativity of
-the ring map.
-Proof step 2: Conjugate the existing scalar-extension binary isomorphism by tensorIsoSite. On
-scalar-extension generators the old and new extension functors are naturally isomorphic.
-Transport binary naturality and right-unit coherence across this isomorphism, cancelling its
-invertible components.
-Proof step 3: Use the ordinary extension/restriction adjunction and the generic total tensor
-comparison construction. Supply its unit condition by inverting the proved module right-unit
-coherence. -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 private def scalarTensorComparison (φ : R ⟶ B) :
     ScalarKoszulTransport.TensorPullbackComparison
       ((extension φ).mapHomologicalComplex (.up ℤ))

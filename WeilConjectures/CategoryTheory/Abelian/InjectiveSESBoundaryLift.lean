@@ -29,19 +29,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A degreewise split SES boundary has a homotopy representative that also
 represents the canonical boundary after any additive functor.
 
-Source: Stacks Project, Derived Categories, Tags 014Q and 0152.
-
-Proof: Split the degree rows by injectivity of the first term, and form the
-connecting chain map whose degree n component is section, differential,
-retraction. Lift its homotopy class to the bounded below homotopy category,
-using the inclusion's shift comparison. The split-SES boundary comparison
-identifies its localization with the canonical source boundary. Map the row
-splittings by v. The image connecting map equals the mapped source map followed
-by the shift comparison: in each degree both are the image of section,
-differential, retraction. The same split-SES boundary comparison in B identifies
-its localization with the image SES boundary. Naturality and shift compatibility
-of quotientCompQhIso give the two displayed endpoint equations. The construction
-works also for zero complexes and arbitrary common lower bounds. -/
+Source: Stacks Project, Derived Categories, Tags 014Q and 0152. -/
 theorem injective_ses_homotopy_boundary_lift
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
     [Category.{v₂} B] [Abelian B]

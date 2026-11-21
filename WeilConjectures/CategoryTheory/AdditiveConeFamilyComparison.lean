@@ -139,12 +139,7 @@ private theorem coneIso_natural
 /-- Natural comparisons of the sources of epimorphic augmentations force the
 quotient comparisons and induce natural comparisons of the strict cone families.
 
-Source: Stacks Project, derived.tex and.
-Proof: cancel each epimorphic augmentation in its strict transition square to
-obtain naturality on targets. Apply the additive cone comparison, the cone map
-of the source/target isomorphisms, and evaluation of the tower cone. Cone-map
-composition proves naturality. This is a generic finite categorical calculation;
-no Koszul or coefficient hypotheses enter. -/
+Source: Stacks Project, derived.tex and. -/
 theorem additiveConeFamilyComparison
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     (E : C ⥤ D) [E.Additive]

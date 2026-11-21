@@ -142,13 +142,7 @@ private theorem inverted_indDiagram
 /-- An ordinary adjunction and a universal cochain left derived pair computed on resolutions
 induce a derived adjunction, with the original unit and the specified cochain counit.
 
-Source: Stacks Project, Derived Categories, Tags 0FND and 09T5.
-
-Proof: Transfer the universal counit along the full homotopy quotient and its localization
-comparison. The resolving class makes incoming denominator diagrams essentially constant;
-exactness of restriction makes outgoing ones constant. Apply derived-adjunction compatibility
-on homotopy categories. Its representative formula applied to the identity is the unit
-formula. Conjugating by the quotient/localization comparisons gives the cochain formula. -/
+Source: Stacks Project, Derived Categories, Tags 0FND and 09T5. -/
 theorem exists_cochainDerivedAdjunction
     {A : Type u} [Category.{v} A] [Abelian A]
     {B : Type u'} [Category.{v'} B] [Abelian B]

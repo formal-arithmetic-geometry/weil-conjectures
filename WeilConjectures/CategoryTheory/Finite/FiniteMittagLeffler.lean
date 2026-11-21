@@ -42,14 +42,7 @@ abbrev firstDerivedLimitAb (B : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) : AddCommGrpCat
   ((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived 1).obj B
 
 /-- Finite abelian groups form an ML tower and its first derived inverse limit vanishes.
-Source: Stacks Tags 02N0, 0597 and 07KW.
-Proof: for a fixed level the descending images are subgroups of a finite group.
-Choose an image of minimum cardinality; all later images equal it. For any tuple y,
-the finite nonempty sets of prefix solutions x_j-f_j(x_(j+1))=y_j form an ML tower:
-choose the last x to be zero and solve backwards; descending finite images stabilize.
-By Mathlib's finite cofiltered-system theorem there is a compatible family of prefixes,
-hence a full solution. Thus roosMap is surjective. The cokernel description in
-lem-pc-derived-limit-roos-abelian-groups identifies R¹ lim with zero. -/
+Source: Stacks Tags 02N0, 0597 and 07KW. -/
 theorem finiteTower_mittagLeffler_vanishing (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
     (hA : ∀ n : ℕᵒᵖ, Finite (A.obj n)) :
     (A ⋙ forget AddCommGrpCat).IsMittagLeffler ∧

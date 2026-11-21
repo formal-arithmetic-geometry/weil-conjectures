@@ -68,7 +68,8 @@ section-homotopy. -/
 abbrev homotopyQuotient (A : Algebra O) : Module A ⥤ HomotopyCategory A :=
   CategoryTheory.Quotient.functor (homotopyRel A)
 
-/-- Signed shifts and the specified mapping-cone triangles on `K(A)`. Source: Stacks `sdga.tex`, Tags 0FRY, 0FS5 and 0FS7.
+/-- Signed shifts and the specified mapping-cone triangles on `K(A)`.
+Source: Stacks `sdga.tex`, Tags 0FRY, 0FS5 and 0FS7.
 -/
 class HomotopyStructure (A : Algebra O) where
   [preadditive : Preadditive (HomotopyCategory A)]
@@ -105,10 +106,9 @@ attribute [instance] HomotopyStructure.preadditive HomotopyStructure.zero
   HomotopyStructure.shift HomotopyStructure.shiftAdditive HomotopyStructure.pretriangulated
   HomotopyStructure.triangulated
 
-/-- The complete sheaf dg homotopy/localization package. Its fields render the
-cohomology, cone criterion, saturated triangulated calculus, and two-out-of-three
-clauses of the node statement. Source: Stacks `sdga.tex`, Tags 0FS7, 0FT2 and
-0FT4. -/
+/-- The complete sheaf dg homotopy/localization package: cohomology, cone criterion,
+saturated triangulated calculus, and two-out-of-three clauses.
+Source: Stacks `sdga.tex`, Tags 0FS7, 0FT2 and 0FT4. -/
 class HomotopySystem (A : Algebra O) extends HomotopyStructure A where
   cohomology (n : ℤ) : HomotopyCategory A ⥤ Coeff O
   cohomology_factors (n : ℤ) :

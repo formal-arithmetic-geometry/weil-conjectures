@@ -21,13 +21,7 @@ open scoped CategoryTheory.Obj
 namespace CategoryTheory.Functor
 
 /-- A monoidal left adjoint intertwines extensions along a ring map and its image.
-Source: Stacks Project, Modules on Sites, Tag 03EK.
-
-Proof: lift the monoidal adjunction to module objects for each ring. Both composites
-are left adjoint to the same restriction functor: the comparison for the right
-adjoints is `mapModComapIso`, followed by the unit naturality square. Uniqueness of
-left adjoints gives the claimed natural isomorphism. This argument includes zero
-rings and identity scalar maps. -/
+Source: Stacks Project, Modules on Sites, Tag 03EK. -/
 def mapModExtendScalarsIso
     {C : Type u} [Category.{v} C] [MonoidalCategory C] [SymmetricCategory C]
     [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]

@@ -65,11 +65,7 @@ def localCoefficientLocalization {C : Type u} [SmallCategory C]
     (fun _ ↦ localSectionMultiplication R U f _))
 
 /-- Restriction of module sheaves to the slice is additive and exact.
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ.
-Proof: restrictions are sectionwise, so preserve addition and kernels. A locally surjective
-map remains locally surjective on the induced slice topology, so restriction preserves
-cokernels as well. Additivity and preservation of kernels and cokernels imply preservation
-of finite limits and finite colimits. -/
+Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ. -/
 theorem localCoefficientRestriction_exact {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) (U : C) :
     (SheafOfModules.overFunctor.{u} (localCoefficientRings R) U).Additive ∧
@@ -118,9 +114,7 @@ def localCoefficientDerivedRestriction {C : Type u} [SmallCategory C]
   (SheafOfModules.overFunctor.{u} (localCoefficientRings R) U).mapDerivedCategory
 
 /-- Naturality of multiplication by a section on localized module sheaves.
-Source: Stacks Project, Tag 0997.
-Proof: on each object of the slice both composites take `x` to `f` times its image;
-linearity of the component map gives the equality. -/
+Source: Stacks Project, Tag 0997. -/
 theorem localSectionMultiplication_naturality {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) (U : C)
     (f : R.obj.obj (op U))

@@ -93,28 +93,7 @@ private theorem cover_above
     (V.ι.app j).toFunctor (congrArg Cat.Hom.toFunctor (V.w b)) S
 
 /-- Finite covering families of generated sections have individual stage lifts.
-Source: Stacks Project, Sites, Tag 0A35, the general-object presentation and paragraph; Modules on Sites, Tag 03CO, for abelian coefficients.
-
-Proof: Write the Q-cover R as the transported image of a stage cover using hQ.
-Its stage presieve is finite by hfinite. Move that stage above i by filteredness,
-transporting the cover by hcover. For each of its finitely many arrows, expand
-membership of the corresponding section in the generated subgroup as a finite
-additive expression in restrictions of stage images. Lift each restriction arrow
-using the arrow colimit and align its endpoints using eventual equality in the
-object colimit. Move the finitely many stages and endpoint equations to a common
-stage above the cover. The transition of each inverse image is the transpose of
-the direct unit under the preceding stage adjunction. Uniqueness of adjuncts and
-h-alpha show that alpha after this transition equals the old alpha. Naturality
-therefore gives a representative of every generating restriction. Add and negate
-these representatives to lift the finite additive expressions. Further transitions
-retain these image formulas by the same unit argument. Take the transported stage
-cover. If different original arrows become equal, choose one lift for each actual
-arrow of the transported presieve; their target sections are identical, since
-both are the value of x on the same image arrow. Thus the choices still satisfy
-the stated image equation. This gives a family of individual lifts, with no
-compatibility conclusion. For an empty cover take its empty transported family;
-there are no section choices or equations. No sheaf amalgamation is used.
--/
+Stacks Project, Sites, Tag 0A35; Modules on Sites, Tag 03CO. -/
 theorem colimit_site_abelian_cover_section_lift
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

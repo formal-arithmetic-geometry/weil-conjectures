@@ -23,9 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Functor
 
 /-- Lifts from a resolution into an injective resolution that agree on the augmentation
-are homotopic. The coinductive proof extends the construction of Mathlib's
-`InjectiveResolution.descHomotopyZero` to a source with arbitrary terms: exactness of the
-source and injectivity of the target suffice. -/
+are homotopic. -/
 private theorem homotopy_of_resolution
     {B : Type u₂} [Category.{v₂} B] [Abelian B] {X : B}
     {K : CochainComplex B ℕ} (ι : (CochainComplex.single₀ B).obj X ⟶ K)
@@ -65,17 +63,7 @@ The isomorphism is canonical: for any injective resolutions `I` of `M` and `J` o
 its forward map is the cohomology map of any lift `φ : T(I) ⟶ J` of the identity, transported
 through the injective-resolution identifications and the complex-composition isomorphism.
 
-Source: Stacks Project, Tag 015M, proof (using Tag 015E).
-
-Proof: choose an injective resolution `M ⟶ I`. Exactness of
-`T` makes `T(M) ⟶ T(I)` a resolution, although its terms need not be injective. The hypothesis
-makes every term `T(Iⁿ)` acyclic. Apply the acyclic-resolution comparison of
-lemma-weil-pbc-leray-acyclicity, item 2: any lift to an injective resolution `J` identifies
-`RⁱU(T(M))` with `Hⁱ(U(T(I)))`. The composite `T ⋙ U` is left exact and its right derived
-functor, computed with `I`, is the same cohomology object.
-Transporting the comparison gives the claimed isomorphism, with the displayed formula for
-all choices of resolutions and lifts; homotopy uniqueness makes the formula independent
-of those choices. -/
+Source: Stacks Project, Tag 015M. -/
 theorem exists_rightDerived_exact_comp_iso
     {A : Type u₁} {B : Type u₂} {C : Type u₃}
     [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} C]

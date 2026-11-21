@@ -24,9 +24,7 @@ variable {C : Type u} {D : Type v} {E : Type w}
   [HasFiniteBiproducts C] [HasFiniteBiproducts D] [HasFiniteBiproducts E]
 
 omit [HasFiniteBiproducts D] [HasFiniteBiproducts E] in
-/-- The biproduct comparison for a composite is the composite of the comparisons.
-Proof: postcompose both morphisms with each biproduct projection. Both become the
-composite functor applied to that projection. -/
+/-- The biproduct comparison for a composite is the composite of the comparisons. -/
 theorem mapBiproduct_composite (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
     {I : Type} [Finite I] (f : I → C) :
     (F ⋙ G).mapBiproduct f =
@@ -39,9 +37,7 @@ theorem mapBiproduct_composite (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Addit
   erw [biproduct.lift_π, biproduct.lift_π, ← G.map_comp, biproduct.lift_π]
 
 omit [HasFiniteBiproducts D] in
-/-- Biproduct comparisons are natural in each member of the finite family.
-Proof: postcompose with a projection, use the defining comparison formula and
-naturality of biproduct.map, and combine the functor's two maps. -/
+/-- Biproduct comparisons are natural in each member of the finite family. -/
 theorem mapBiproduct_map (F : C ⥤ D) [F.Additive]
     {I : Type} [Finite I] {f g : I → C} (a : ∀ i, f i ⟶ g i) :
     F.map (biproduct.map a) ≫ (F.mapBiproduct g).hom =
@@ -53,9 +49,7 @@ theorem mapBiproduct_map (F : C ⥤ D) [F.Additive]
     ← F.map_comp, biproduct.map_π]
   exact F.map_comp _ _
 
-/-- An additive functor maps a finite matrix entry by entry in its biproduct coordinates.
-Proof: precompose by the inverse source comparison, then test every inclusion and
-projection. The comparison formulas reduce both sides to F applied to one entry. -/
+/-- An additive functor maps a finite matrix entry by entry in its biproduct coordinates. -/
 theorem mapBiproduct_matrix (F : C ⥤ D) [F.Additive]
     {I J : Type} [Finite I] [Finite J] {f : I → C} {g : J → C}
     (a : ∀ i j, f i ⟶ g j) :
@@ -79,9 +73,7 @@ theorem mapBiproduct_matrix (F : C ⥤ D) [F.Additive]
     biproduct.lift_π]
 
 omit [HasFiniteBiproducts D] in
-/-- Biproduct comparison is natural in an additive functor transformation.
-Proof: after each target projection the identity is exactly naturality at the
-corresponding source projection. -/
+/-- Biproduct comparison is natural in an additive functor transformation. -/
 theorem mapBiproduct_natTrans (F G : C ⥤ D) [F.Additive] [G.Additive]
     (η : F ⟶ G) {I : Type} [Finite I] (f : I → C) :
     η.app (⨁ f) ≫ (G.mapBiproduct f).hom =
@@ -92,9 +84,7 @@ theorem mapBiproduct_natTrans (F G : C ⥤ D) [F.Additive] [G.Additive]
   erw [biproduct.lift_π, biproduct.map_π, ← Category.assoc, biproduct.lift_π]
   exact (η.naturality (biproduct.π f i)).symm
 
-/-- Finite diagonal maps respect composition.
-Proof: after each target projection both sides are that projection followed by
-the two corresponding component maps. -/
+/-- Finite diagonal maps respect composition. -/
 theorem biproduct_map_comp {I : Type} [Finite I] {f g h : I → C}
     (a : ∀ i, f i ⟶ g i) (b : ∀ i, g i ⟶ h i) :
     biproduct.map (fun i ↦ a i ≫ b i) = biproduct.map a ≫ biproduct.map b := by

@@ -30,12 +30,7 @@ thick envelope of that family.
 
 Source: , compact objects paragraph, Stacks Tags
 09SN, 094A and 09SP.
-
-Proof: write the object as the telescope of extensions of coproducts of shifted generators.
-Compact Hom commutes with this telescope, so its identity comes from a map into one stage.
-Factor that map through an object in the thick envelope of a finite generator sum. Composing
-the second factor with the telescope stage map supplies the retraction. This includes the
-empty finite support and zero object cases. -/
+-/
 theorem compact_mem_finite_thick_of_generators
     {C : Type u} [Category.{w} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]

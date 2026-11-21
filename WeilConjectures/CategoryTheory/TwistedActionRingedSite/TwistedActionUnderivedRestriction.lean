@@ -13,7 +13,12 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionEvalu
 
 /-! # Coherent underived restriction on a specified action site
 
-Source: Stacks 03EK, 03EL and 03EO. No native or derived category occurs.
+The specified tensor and Hom comparisons of an action-site presentation satisfy the underived
+coherence and evaluation equations.
+
+## References
+
+Stacks Project, Tags 03EK, 03EL and 03EO.
 -/
 
 @[expose] public noncomputable section
@@ -32,28 +37,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {a : (s.inverse.sheafPushforwardContinuous CommRingCat.{u} J J).obj R ≅ R}
 
 /-- The specified action-site tensor and Hom maps satisfy all underived coherence
-and evaluation equations.
-
-Source: Stacks 03EK,
-03EL and 03EO.
-
-Proof: assemble P.tensor and P.hom into natural isomorphisms by
-NatIso.ofComponents, using P.tensor_naturality and P.hom_naturality, and take
-P.unit. To prove associativity,
-precompose by the two inverse tensor comparisons. Maps from a triple sheaf
-tensor are determined by local pure triples, by the sheafification adjunction
-and sectionwise tensor induction. Apply P.tensor_pure twice and the ordinary
-pure-triple associator formula: both composites send (x tensor y) tensor z to
-x tensor (y tensor z). For the left and right unit laws use the same local
-pure-tensor criterion, P.unit_sections and the coefficient restriction ring
-isomorphism. Both paths multiply the module section by that coefficient.
-Symmetry is P.symmetry. The canonical right evaluation is the braiding followed
-by the left evaluationMap. Its pure-tensor formula characterizes it uniquely by
-the same sheafification adjunction. Substitute P.evaluation and P.symmetry;
-tensor naturality moves the Hom comparison through the braiding and gives the
-required right evaluation square. These calculations include zero modules,
-empty sites and zero coefficient rings. The construction uses a specified P
-and asserts no existence of a site or any native Frobenius realization. -/
+and evaluation equations. Stacks Project, Tags 03EK, 03EL and 03EO. -/
 theorem underived_restriction (P : Presentation J s R a) :
     letI := P.category
     let U := P.modules.functor ⋙ forgetPairs (sigma J s R a)

@@ -15,16 +15,7 @@ namespace CategoryTheory
 open Limits DirectSum
 
 open Classical in
-/-- Injectivity of the rank-one comparison map.
-
-Proof in words: for each index i, the coproduct universal property gives a projection p_i
-which is the identity on summand i and zero on every other summand. Composing the comparison
-of a finitely supported family with p_i recovers its i-th coordinate, as direct-sum induction
-shows. Equal comparison images therefore have equal coordinates and are equal. This argument
-works for any source in a preadditive category, including the empty family and the zero ring.
-Source: Stacks Project, Tag 0F5X, first paragraph, for the
-rank-one compactness application.
--/
+/-- Injectivity of the rank-one comparison map. -/
 theorem derivedModule_rankOne_comparison_injective
     {S : Type w} [Ring S]
     [HasDerivedCategory.{max w vH} (ModuleCat.{max w vH} S)]

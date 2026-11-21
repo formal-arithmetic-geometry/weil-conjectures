@@ -157,24 +157,7 @@ end Factorization
 
 /-- A small triangulated hull of a perfect class gives perfect generators of its
 localizing hull, provided maps from that class into coproducts of hull objects
-factor through a hull object.
-
-Proof: let R consist of objects X such that every map U to X with U in S factors
-through an object of B. This class is replete and shift closed. To check extensions,
-factor a map U to the third vertex through Z in B. Complete U to Z to a triangle;
-its cone is in S. Factor the resulting map from that cone to the shifted first
-vertex through X in B. Take the fiber V in B of Z to X, and complete the square
-to a morphism of triangles. The original map lifts through V up to a map through
-the first vertex; factor that error through another B object and use their biproduct.
-For coproducts, evaluate all maps from small representatives of B into each summand.
-Perfectness of S lifts a map into the coproduct through the coproduct of these
-covers. Flatten it with sigmaSigmaIso and use the assumed small factorization.
-Thus R is localizing and contains P, so minimality gives Q contained in R.
-Componentwise surjectivity on B now implies it on S for maps in Q, by factoring
-through B. Perfectness of S gives surjectivity after coproducts, in particular on B.
-Transport this through the fully faithful inclusion and its coproduct comparison,
-and choose small representatives of B for the required indexed family.
--/
+factor through a hull object. -/
 theorem perfectFamily_of_small_hull
     {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C]
     [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]

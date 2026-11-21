@@ -96,24 +96,7 @@ private theorem transpose_of_evaluation
 
 /-- Slice restriction preserves evaluation, its adjunction transpose, and Koszul symmetry
 for arbitrary unbounded objects, with the canonical representative normalizations above.
-Source: Stacks 07A4, 08J9, 08JB and the blueprint delta-restriction proof.
-
-Proof:
-1. Resolve L by a flat-term K-flat P and M by a K-injective I; resolve Hom(P,I) by
-   a flat-term K-flat Q.
-   Restriction preserves these properties, and exactness preserves the resolving quasi-isos.
-2. Relocalization identifies local Hom families with the same maps and differential
-   d(h)=d_I h-(-1)^n h d_P. Tensor restriction is identity on local pure tensors. It commutes with sheafification and sums, hence totalization. The descent theorem
-   lem-weil-pbc-site-derived-tensor-descent gives the natural derived comparisons.
-3. By def-coef-ringed-tensor-hom-model evaluation on Q tensor P is x tensor p ↦ q(x)(p).
-   Restricting gives the same formula, proving the evaluation equation on representatives
-   and therefore in the derived category. No evaluation map is inverted.
-4. Write f as evaluation after transpose(f) tensor identity. Naturality of rho and the
-   preceding evaluation equation show that its restricted transpose is eta after the
-   restriction of transpose(f). Apply the tensor-Hom bijection; this covers all derived f.
-5. In degrees a,b both symmetry composites send x tensor y to (-1)^(ab) y tensor x.
-   Equality on generators gives equality on total complexes and then after localization.
-   These arguments use no boundedness, perfectness or invertibility of evaluation. -/
+Source: Stacks 07A4, 08J9, 08JB. -/
 theorem ringedSlice_evaluation_transpose
     (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂
       CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]

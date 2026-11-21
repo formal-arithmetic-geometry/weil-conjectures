@@ -1146,26 +1146,7 @@ variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)]
 /-- The ordinary unsigned evaluation exists uniquely and represents derived evaluation
 through precisely the two fixed augmentation comparisons.
 
-Source: Stacks Tags 08JD/08JE, 0A98, 08J9 and Section 0A8X.
-
-Proof:
-1. Curry ordinary reassociation, tensor with evaluation into the coefficient unit, and
-   the right unitor using the proved unsigned chain-level tensor-Hom equivalence.
-   Its generator formula gives the stated formula; the unit complex vanishes off zero.
-   Generator detection proves uniqueness and identifies the coherence representatives.
-2. Naturality of the fixed Hom comparison gives its precomposition identity for every
-   s:L→E. Each assumed augmentation quasi-isomorphism makes its own comparison invertible.
-3. Choose a K-flat resolution s:L→E. Put D=Hom(E,O), P=Tot(F tensor D), and let v be
-   the uncurrying of Hom(s,O). P is K-flat. The two fixed curry normalizations identify
-   inverse transposes with the localized maps v and c, where c uncurries a followed
-   by Hom(s,F). Ordinary naturality expresses c by reassociation, F tensor v and the unit.
-4. Closed-adjunction naturality computes the other inverse transpose using the derived
-   associator, tensor with the normalized inverse transpose for O, and the unit constraint.
-   The supplied associator, tensor-comparison naturality and right-unitor models identify
-   this composite with Q(c), after precomposition with the tensor comparison.
-5. Injectivity of inverse transposition and cancellation of the isomorphism H(Qs,1)
-   give the square. Only F and D are assumed K-flat, and only the two Hom augmentation
-   maps are assumed quasi-isomorphisms; E need not be K-flat or F K-injective. -/
+Source: Stacks Tags 08JD/08JE, 0A98, 08J9 and Section 0A8X. -/
 theorem ringedOrdinaryEvaluation_localization
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (T : CoefficientTensorModels.{u, c, v, w} J R S)

@@ -37,15 +37,7 @@ variable {C : Type u₁} [Category.{v₁} C] [Abelian C]
 /-- The composite of the shift comparison for `RF` and cohomology of a shift is an
 isomorphism natural in the bounded below complex `K`.
 Source: Stacks Tag 05SU and Homology,
-Definitions 011G and 011H.
-
-Proof: (1) Put `X = H^q(K)`. The complex `X[0][-q]` is `X` in degree `q`, with zero
-elsewhere and zero differential, and is bounded below. (2) By
-lem-weil-pbc-derived-direct-image-triangulated the resolution comparison gives the natural
-shift isomorphism `sigma`; iterate its degree-one form, using inverses for negative shifts.
-(3) By lem-sp-derived-cohomology-shift, `H^(p+q)(M[-q])` identifies naturally with `H^p(M)`.
-(4) Apply cohomology to `sigma` and compose with this identification. Functors preserve
-isomorphisms, and both factors are natural in `X`; precompose with `K ↦ H^q(K)`. -/
+Definitions 011G and 011H. -/
 theorem exists_rightDerived_shift_identification [PreservesFiniteLimits F] (p q : ℤ) :
     let Hq := CochainComplex.Plus.ι C ⋙
       HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) q
@@ -74,13 +66,7 @@ theorem exists_rightDerived_shift_identification [PreservesFiniteLimits F] (p q 
 /-- In nonnegative degree, the same composite followed by the canonical comparison with
 ordinary right derived functors is an isomorphism natural in `K`.
 Source: Stacks Definition 015A,
-Lemmas 05TH, 05TI and Proposition 05TA.
-
-Proof: carry out steps (1)--(4) of part 1 with `p = n`. (5) By
-lem-sp-derived-functor-single-identification, an injective resolution of `X` is also a
-K-injective resolution of `X[0]`. Thus `H^n(RF(X[0])) ≅ R^n F(X)`, naturally in `X`, by
-computing both sides on that resolution using def-sp-left-exact-additive. Compose this
-canonical isomorphism with the composite in part 1 and precompose with `K ↦ H^q(K)`. -/
+Lemmas 05TH, 05TI and Proposition 05TA. -/
 theorem exists_rightDerived_shift_identification_nonneg [PreservesFiniteLimits F]
     (n : ℕ) (q : ℤ) :
     let Hq := CochainComplex.Plus.ι C ⋙
@@ -110,15 +96,8 @@ theorem exists_rightDerived_shift_identification_nonneg [PreservesFiniteLimits F
 
 /-- All three objects in the shift identification vanish when `p < 0`. The last term
 spells out the convention `R^p F = 0` for negative `p`, since `Functor.rightDerived` takes
-a natural-number index. A zero object is expressed by `IsZero`, rather than equality of
-chosen objects.
-Source: Stacks Tag 05TC (1).
-
-Proof: (6) The single complex `X[0]`, where `X = H^q(K)`, has no negative cohomology.
-By lem-weil-pbc-derived-functor-negative-vanishing with lower bound zero, `H^p(RF(X[0]))`
-is zero. Part 1 transports this to `H^(p+q)(RF(X[0][-q]))`; alternatively use lower bound
-`q` on `X[0][-q]` and `p+q < q`. The middle term is the same cohomology object of `RF(X[0])`.
-The ordinary derived functor in negative degree is zero by the stated convention. -/
+a natural-number index.
+Source: Stacks Tag 05TC (1). -/
 theorem isZero_rightDerived_shift_identification [PreservesFiniteLimits F]
     (K : CochainComplex.Plus C)
     (p q : ℤ) (hp : p < 0) :

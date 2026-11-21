@@ -34,25 +34,7 @@ private theorem map_image {C : Type*} [Category C] [Abelian C]
 
 /-- Under the normalized cycle comparison the first-page boundary subobject is
 exactly the image of the incoming row differential into row cycles.
-Source: Stacks Project, Tag 0130, clauses 2 and 4; Tag 012K, boundary formula.
-
-Proof. The diagonal projection and lift identify the graded row term in each
-resolution degree with the corresponding mapped row term. The total differential
-has a resolution component and a component raising s; the latter lands in the
-next filtration step. Therefore the incoming graded differential corresponds to
-the incoming row differential. For r>0 its source is the mapped row term r-1,
-and the extension isomorphism identifies its image in the kernel of the outgoing
-differential with image(toCycles). The first-page boundary formula says that the
-filtered boundary subobject in the graded term is this image of the incoming
-graded differential. Factoring it through the cycle mono gives the inclusion
-used below. The two normalization equations fix c by monicity, so pulling this
-boundary subobject back along c.hom recovers the row boundary image.
-For r=0 the incoming extended row term has resolution degree -1 and is zero;
-the row differential from prev 0 = 0 to 0 is also zero, so both images are bottom.
-The interval argument is [s,s+r] and includes negative s. If a row is zero the
-cycle objects and both boundary subobjects are zero. No quotient or homology
-isomorphism is asserted or used in this comparison.
--/
+Source: Stacks Project, Tag 0130, clauses 2 and 4; Tag 012K, boundary formula. -/
 theorem secondFiltration_row_boundary_subobject
     {A : Type uA} [Category.{vA} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]

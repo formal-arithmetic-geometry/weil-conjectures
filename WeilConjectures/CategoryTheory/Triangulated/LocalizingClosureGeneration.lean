@@ -154,10 +154,8 @@ instance isLocalizing_localizingClosureInverseImage
     exact ⟨hX, P₂.localizingClosure.prop_of_isColimit
       (isColimitOfPreserves (P₁.localizingClosure.ι ⋙ Φ) hc) fun j ↦ (h.prop_diag_obj j).2⟩⟩
 
-/-- The argument of blueprint `proposition-proper-direct-image-extension-zero` (its detailed node
-`proposition-proper-direct-image-extension-zero`): let `Φ : C₁ ⥤ C₂` be a
-triangulated functor mapping `P₁` into `Loc(P₂)`, whose restriction to `Loc(P₁)` preserves
-coproducts. Then `Φ` maps `Loc(P₁)` into `Loc(P₂)`. -/
+/-- Let `Φ : C₁ ⥤ C₂` be a triangulated functor mapping `P₁` into `Loc(P₂)`, whose restriction to
+`Loc(P₁)` preserves coproducts. Then `Φ` maps `Loc(P₁)` into `Loc(P₂)`. -/
 theorem localizingClosure_obj_of_le
     [∀ J : Type v, PreservesColimitsOfShape (Discrete J) (P₁.localizingClosure.ι ⋙ Φ)]
     (hΦ : ∀ X, P₁ X → P₂.localizingClosure (Φ.obj X)) (X : C₁)

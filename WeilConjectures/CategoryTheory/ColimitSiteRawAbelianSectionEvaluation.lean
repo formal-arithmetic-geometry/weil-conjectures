@@ -37,39 +37,7 @@ namespace CategoryTheory
 
 /-- Source: Stacks Project, Sites, Tag 0A35,
 presentation construction and adjunction paragraphs; abelian colimits
-as in Modules on Sites, Tag 03CO.
-
-Proof: Construct R as the chosen abelian colimit cocone of D. Put Y = V_i(U).
-For each t the cocone equation gives e_t : V_t(F(t.hom)(U)) = Y. Compose E_t,
-the component of β_t, the coprojection into colimit B and the transport along
-e_t. The equations hm and hβmap and naturality of the coprojections prove that
-these maps are a cocone. Hence they induce μ : R.pt → (colimit B)(Y).
-
-Construct an inverse by the pointwise Kan formula. An abelian Kan generator is
-(W, x, f : Y → V_t(W)). Lift f and both endpoints to a stage receiving i and
-t.right using the object and arrow set-colimit hypotheses. Refine further to
-align the endpoints with the prescribed images, and equalize the arrows out
-of i so the refinement is an arrow b : t → t' in Under i. Apply θ_b to x,
-restrict along the lifted f, apply E_t' inverse, and take the coprojection of D.
-Extend this map additively to finite sums of generators. Two choices of stage,
-endpoint or arrow lifts agree at a further common refinement by eventual
-object and arrow equality; naturality of θ and hm then give the same D class.
-Linearity relations are respected by additivity. For a Kan restriction relation
-lift its defining triangle to one stage and use presheaf naturality. Transition
-relations are respected by hβmap and hm. Every relation in the abelian colimit
-is a finite sum of these relations, so filteredness supplies one common stage.
-The additive assignment therefore descends to an inverse ψ of μ.
-
-On a D generator choose its own stage and the identity restriction: ψμ is the
-identity by the defining section maps. On a Kan generator the lifted restriction
-is a Kan relation, so naturality of β and hβmap prove μψ is the identity. Thus
-q is the isomorphism with hom μ; no arbitrary witness is used for R or q.
-Compose the coprojection formula for q with colimit.desc B γ. Naturality moves
-the endpoint transport to T, colimit.ι_desc_app replaces the coprojection by γ_t,
-and ha replaces β_t followed by γ_t by a_t. Arrow equality removes the endpoint
-transport and yields the stated formula. No finiteness of covers, sheaf condition
-on T or colimit B, or equality in the canonical inverse image is assumed.
--/
+as in Modules on Sites, Tag 03CO. -/
 theorem colimit_site_raw_abelian_section_evaluation
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

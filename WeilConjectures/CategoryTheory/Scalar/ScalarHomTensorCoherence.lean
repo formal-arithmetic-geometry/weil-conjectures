@@ -909,18 +909,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- The normalized derived scalar tensor comparisons respect the unit-normalized
 left-adjoint composition and identity comparisons.
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0D6D.
-
-Proof: the normalized derived transpose gives the unit square on K-flat complexes
-with flat terms. Naturality along a K-flat resolution extends that square to all
-complexes. Applying the adjunction Hom bijections then identifies the derived
-leftAdjointUniq composition and identity comparisons with their chain analogues.
-On total pure generators the chain composition square follows from the three
-generator equations and the unit equation for leftAdjointUniq. The identity square
-follows from the same generator equation. Paste these squares with the specified
-derived tensor normalization squares. Cancel the representative isomorphisms and
-use naturality along K-flat representative isomorphisms to obtain both equations.
-No flatness of a coefficient map or of an intermediate complex is required. -/
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0D6D. -/
 theorem scalarHomTensorCoherence
     (μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S),
       ScalarHomTensorComparison M a) :

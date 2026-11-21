@@ -16,17 +16,7 @@ universe z
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph and its remark.
-
-Proof: Encode an invertible arrow as the image of the unique arrow from false to
-true in the finite groupoid on two objects with one arrow between any ordered
-pair. The functor is defined from the given isomorphism by choosing an isomorphism
-from each of its endpoints to the source. Lift this finite functor to a stage.
-The lifted arrow is invertible because its inverse in the two-object groupoid is
-preserved by the stage functor. Equality of the composite functor with the given
-one yields equality of its image as an Arrow, including both endpoints. Conversely,
-a stage isomorphism maps to an isomorphism under any functor. No compatibility or
-colimit hypothesis is required for this consequence of finite-functor lifting. -/
+/-- Stacks Project, Tag 09YL. -/
 theorem filteredColimit_category_iso_clause
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

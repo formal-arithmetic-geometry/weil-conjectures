@@ -32,17 +32,7 @@ variable {X : Type u} [TopologicalSpace X]
 
 /-- The underlying sheaf of sets of a directed colimit of sheaves of modules is the
 colimit of the underlying sheaves of sets. Source: Stacks Project, Modules 01AH(2),
-Sheaves 007O(7), 0087(1), and Section 009E(3).
-
-First form the sectionwise presheaf module colimit. Its sheafification is the module
-colimit by `situation-conventions`, hence canonically isomorphic
-as a cocone to the given colimit. For every open, the filtered module colimit has underlying
-set the colimit of underlying sets,
-compatibly with restrictions. Second, module sheafification has underlying sheaf of sets
-the sheafification of the underlying presheaf; transport this identification to
-the given cocone, preserving its structure maps. Third, sheafifying the objectwise
-presheaf colimit gives a colimit of sheaves of sets. This proves the asserted universal property
-for the underlying cocone. -/
+Sheaves 007O(7), 0087(1), and Section 009E(3). -/
 theorem underlying_directed_colimit_isColimit
     (O : Sheaf (Opens.grothendieckTopology X) RingCat.{r})
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

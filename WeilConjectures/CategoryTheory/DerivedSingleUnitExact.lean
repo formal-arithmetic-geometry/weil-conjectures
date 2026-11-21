@@ -177,14 +177,7 @@ private theorem exact_unit_single_map (adj : f ⊣ g) (X : C) (Y : D)
   rw [Adjunction.homEquiv_apply, Functor.map_comp]
 /-- For an exact adjoint pair, the derived unit on a single object becomes the
 single of the underived adjunct under the canonical single comparisons.
-Source: Stacks 0A45, derived support-Hom normalization.
-
-Proof: compute the homotopy adjunction unit on a single complex degreewise.
-The quotient factorization identifies it with the termwise underived unit.
-Cancel the left and right exact-derived comparison isomorphisms to identify
-that derived unit. Naturality of the right single comparison then allows an
-arbitrary morphism c after the left single comparison. This argument takes
-place in the unbounded derived categories and assumes no flatness of objects. -/
+Source: Stacks 0A45, derived support-Hom normalization. -/
 theorem derivedSingleUnit_comp_comparison (adj : f ⊣ g) (X : C) (Y : D)
     (c : f.obj X ⟶ Y) :
     derivedSingleUnit adj X Y c ≫

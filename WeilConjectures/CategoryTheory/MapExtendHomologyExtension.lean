@@ -24,15 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 
 /-- Applying an additive functor to extension by zero does not change homology
-in a nonnegative degree.
-
-Proof: Use the existing `HomologicalComplex.mapExtendIso` to identify E applied
-to the integer extension with the integer extension of E applied to K. Additivity
-supplies its required preservation of zero morphisms. Map this complex isomorphism
-by degree-q homology and compose with `extendHomologyIso`.
-At q=0 the incoming term of the integer complex is zero, while the natural-indexed
-complex has zero incoming differential by its shape; this is exactly the boundary
-case covered by `extendHomologyIso`. No exactness of E is used. -/
+in a nonnegative degree. -/
 theorem mapExtendHomology_nonempty_iso
     {D : Type u} [Category.{v} D] [Abelian D]
     {B : Type u'} [Category.{v'} B] [Abelian B]

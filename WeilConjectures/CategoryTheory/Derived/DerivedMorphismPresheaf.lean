@@ -221,7 +221,8 @@ variable (J : GrothendieckTopology C) (B : Type (u + 1)) [CommRing B]
 /-- Restriction of module sheaves to the localized site is additive, section by section.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 instance derivedSliceRestriction_additive (U : C) :
     (J.overPullback (ModuleCat.{u + 1} B) U).Additive where
   map_add := by intros; rfl
@@ -229,7 +230,8 @@ instance derivedSliceRestriction_additive (U : C) :
 /-- Relocalization along a map of site objects is additive, section by section.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 instance derivedSliceMap_additive {U V : C} (f : V ⟶ U) :
     (J.overMapPullback (ModuleCat.{u + 1} B) f).Additive where
   map_add := by intros; rfl
@@ -237,7 +239,8 @@ instance derivedSliceMap_additive {U V : C} (f : V ⟶ U) :
 /-- Exact restriction to a localized site, applied to the actual derived category.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable abbrev derivedSliceRestriction (U : C) :=
   (J.overPullback (ModuleCat.{u + 1} B) U).mapDerivedCategory
 
@@ -246,11 +249,7 @@ omit [EssentiallySmall.{u + 1} C] in
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
 09BE; Pro-etale Cohomology, Tag 0F63.
-
-Proof: Relocalization is inverse image for localization of topoi. Its restriction description is
-left exact. It is also a left adjoint (the localized-site restriction adjunction), hence
-preserves colimits. Apply this to constant-coefficient module sheaves; finite colimits are among
-these colimits. -/
+-/
 theorem derivedSliceMap_preservesFiniteColimits {U V : C} (f : V ⟶ U) :
     PreservesFiniteColimits (J.overMapPullback (ModuleCat.{u + 1} B) f) := by
   have : PreservesColimitsOfSize.{0, 0}
@@ -264,14 +263,16 @@ attribute [instance] derivedSliceMap_preservesFiniteColimits
 /-- Exact relocalization of derived module sheaves along a map of site objects.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable abbrev derivedSliceMap {U V : C} (f : V ⟶ U) :=
   (J.overMapPullback (ModuleCat.{u + 1} B) f).mapDerivedCategory
 
 /-- The canonical restriction/relocalization isomorphism on module sheaves.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable def sliceRestrictionMapIso {U V : C} (f : V ⟶ U) :
     J.overPullback (ModuleCat.{u + 1} B) U ⋙
       J.overMapPullback (ModuleCat.{u + 1} B) f ≅
@@ -282,7 +283,8 @@ noncomputable def sliceRestrictionMapIso {U V : C} (f : V ⟶ U) :
 /-- The restriction/relocalization isomorphism induced on derived categories.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable def derivedSliceMapIso {U V : C} (f : V ⟶ U) :
     derivedSliceRestriction J B U ⋙ derivedSliceMap J B f ≅
       derivedSliceRestriction J B V :=
@@ -294,7 +296,8 @@ variable (A D : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B)))
 /-- Restriction of an actual derived morphism, conjugated by the canonical slice isomorphisms.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable def derivedLocalHomRestriction {U V : C} (f : V ⟶ U)
     (a : (derivedSliceRestriction J B U).obj A ⟶
       (derivedSliceRestriction J B U).obj D) :
@@ -306,7 +309,8 @@ noncomputable def derivedLocalHomRestriction {U V : C} (f : V ⟶ U)
 /-- Restriction of an actual derived isomorphism, with the same canonical identifications.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable def derivedLocalIsoRestriction {U V : C} (f : V ⟶ U)
     (a : (derivedSliceRestriction J B U).obj A ≅
       (derivedSliceRestriction J B U).obj D) :
@@ -377,12 +381,7 @@ private theorem sliceMapDerived_assoc {U V W : C} (f : V ⟶ U) (g : W ⟶ V)
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
 09BE; Pro-etale Cohomology, Tag 0F63.
-
-Proof: On module sheaves the slice restriction identifications are identity maps on sections.
-Their identity and cocycle laws therefore hold before deriving. Derive these identities using
-the composition comparison for exact functors. Expand the three conjugations in the displayed
-formulas, cancel consecutive comparison isomorphisms, and use preservation of identity and
-composition by the localized functor. -/
+-/
 theorem derivedLocalHomRestriction_laws :
     (∀ (U : C) (a : (derivedSliceRestriction J B U).obj A ⟶
       (derivedSliceRestriction J B U).obj D),
@@ -413,10 +412,7 @@ theorem derivedLocalHomRestriction_laws :
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
 09BE; Pro-etale Cohomology, Tag 0F63.
-
-Proof: Apply the identity and cocycle calculation for derived Hom restriction to the hom
-components. Apply it to the inverse components as well. Isomorphisms are determined by their hom
-component, giving both equalities. -/
+-/
 theorem derivedLocalIsoRestriction_laws :
     (∀ (U : C) (a : (derivedSliceRestriction J B U).obj A ≅
       (derivedSliceRestriction J B U).obj D),
@@ -437,7 +433,8 @@ theorem derivedLocalIsoRestriction_laws :
 /-- The presheaf of actual derived morphisms on localized sites, not underived module Hom.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable def derivedLocalHomPresheaf : Cᵒᵖ ⥤ Type (u + 1) where
   obj U := (derivedSliceRestriction J B U.unop).obj A ⟶
     (derivedSliceRestriction J B U.unop).obj D
@@ -454,7 +451,8 @@ noncomputable def derivedLocalHomPresheaf : Cᵒᵖ ⥤ Type (u + 1) where
 /-- The presheaf of actual derived isomorphisms on localized sites, retaining the inverse data.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable def derivedLocalIsoPresheaf : Cᵒᵖ ⥤ Type (u + 1) where
   obj U := (derivedSliceRestriction J B U.unop).obj A ≅
     (derivedSliceRestriction J B U.unop).obj D
@@ -471,14 +469,16 @@ noncomputable def derivedLocalIsoPresheaf : Cᵒᵖ ⥤ Type (u + 1) where
 /-- Sheafification of the presheaf of actual derived morphisms.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable abbrev derivedLocalHomSheaf [HasWeakSheafify J (Type (u + 1))] :=
   (presheafToSheaf J (Type (u + 1))).obj (derivedLocalHomPresheaf J B A D)
 
 /-- Sheafification of the presheaf of actual derived isomorphisms.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable abbrev derivedLocalIsoSheaf [HasWeakSheafify J (Type (u + 1))] :=
   (presheafToSheaf J (Type (u + 1))).obj (derivedLocalIsoPresheaf J B A D)
 
@@ -546,11 +546,7 @@ variable {J B} {A D}
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
 09BE; Pro-etale Cohomology, Tag 0F63.
-
-Proof: Use naturality of the derived slice-restriction comparison on f and g. Expand the
-conjugations defining local restriction, use preservation of composition by the local functor,
-and cancel the adjacent comparison isomorphisms. The resulting composites on both sides are
-identical. -/
+-/
 theorem derivedLocalHomPresheafMap_natural
     {A' D' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
     (f : A' ⟶ A) (g : D ⟶ D') (U V : C) (h : V ⟶ U)
@@ -572,7 +568,8 @@ theorem derivedLocalHomPresheafMap_natural
 /-- The map on local derived Hom presheaves induced by precomposition and postcomposition.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable def derivedLocalHomPresheafMap
     {A' D' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
     (f : A' ⟶ A) (g : D ⟶ D') :
@@ -588,7 +585,8 @@ noncomputable def derivedLocalHomPresheafMap
 /-- Sheafification of the natural map on derived Hom presheaves.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable abbrev derivedLocalHomSheafMap [HasWeakSheafify J (Type (u + 1))]
     {A' D' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
     (f : A' ⟶ A) (g : D ⟶ D') :=
@@ -597,7 +595,8 @@ noncomputable abbrev derivedLocalHomSheafMap [HasWeakSheafify J (Type (u + 1))]
 /-- The natural inclusion of local derived isomorphisms into local derived morphisms.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable def derivedLocalIsoToHomPresheaf :
     derivedLocalIsoPresheaf J B A D ⟶ derivedLocalHomPresheaf J B A D where
   app U := ↾fun f ↦ f.hom
@@ -606,7 +605,8 @@ noncomputable def derivedLocalIsoToHomPresheaf :
 /-- The map from derived Isom to derived Hom after sheafification.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable abbrev derivedLocalIsoToHomSheaf [HasWeakSheafify J (Type (u + 1))] :=
   (presheafToSheaf J (Type (u + 1))).map (derivedLocalIsoToHomPresheaf (A := A) (D := D))
 
@@ -617,7 +617,8 @@ comparisons. The two naturality fields express precisely that the conjugated loc
 presheaf maps; no arbitrary map replaces a derived morphism.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 structure DerivedLocalFunctor (B' : Type (u + 1)) [CommRing B'] where
   globalFunctor : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B)) ⥤
     DerivedCategory (Sheaf J (ModuleCat.{u + 1} B'))
@@ -657,7 +658,8 @@ variable {B' : Type (u + 1)} [CommRing B']
 /-- The canonical commutation of restriction of scalars with localization, given by identity maps.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable def sliceRestrictScalarsSheafIso (φ : B →+* B') (U : C) :
     J.overPullback (ModuleCat.{u + 1} B') U ⋙ Sheaf.restrictScalars (J.over U) φ ≅
       Sheaf.restrictScalars J φ ⋙ J.overPullback (ModuleCat.{u + 1} B) U :=
@@ -666,7 +668,8 @@ noncomputable def sliceRestrictScalarsSheafIso (φ : B →+* B') (U : C) :
 /-- The same canonical scalar/restriction commutation on actual derived categories.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. -/
+09BE; Pro-etale Cohomology, Tag 0F63.
+-/
 noncomputable def sliceRestrictScalarsIso (φ : B →+* B') (U : C) :
     derivedSliceRestriction J B' U ⋙ Sheaf.derivedRestrictScalars (J.over U) φ ≅
       Sheaf.derivedRestrictScalars J φ ⋙ derivedSliceRestriction J B U :=

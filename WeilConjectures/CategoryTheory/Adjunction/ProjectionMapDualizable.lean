@@ -20,7 +20,7 @@ as soon as `L` is dualizable. This is formal: if `Z` is a left dual of `L`, both
 adjoints of `T ↦ F (T ⊗ Z) ≅ F T ⊗ F Z`, and the projection map is the conjugate of the monoidal
 structure `μ` of `F`.
 
-## Main statements
+## Main results
 
 - `CategoryTheory.Adjunction.rightAdjointProjectionMap_app_app_eq_conjugateEquiv`: if `L` has a
   left dual `Z`, the projection map at `L` is the conjugate of `μ (-) Z`.

@@ -33,20 +33,12 @@ dehomogenisation, and show that it is an open immersion over `S`.
   chart is an open immersion, and it is a morphism over `S` by
   `AlgebraicGeometry.AffineSpace.toRelativeProjectiveSpace_over`.
 
-## Implementation notes
+## Implementation details
 
 Mathlib does not make the total-degree grading of `MvPolynomial σ R` a global instance; it is
 enabled here as a local instance. The integral model
 `Proj.projectiveSpaceOverAffine (Option n) (ULift ℤ)` is a plain definition rather than an
 abbreviation, so that the grading instance does not leak into the statements below.
-
-## Blueprint
-
-This file implements `lemma:nagata-relative-affine-space-open-immersion` of the Nagata
-compactification blueprint; `def:nagata-relative-projective-space` and
-`lemma:nagata-projective-is-proper` are `AlgebraicGeometry.ProjectiveSpace` and
-`AlgebraicGeometry.ProjectiveSpace.instIsProper`.
-
 -/
 
 @[expose] public section

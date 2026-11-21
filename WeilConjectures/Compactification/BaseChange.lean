@@ -67,12 +67,6 @@ morphism of the lower shriek.
 Flatness of the base change morphism is a genuine hypothesis in the density statements: for
 an arbitrary base change the pulled back open need not be dense in the pulled back
 compactification, and the remedy is to replace it by its schematic closure.
-
-## Blueprint
-
-This file implements `def:nagata-compactification-base-change` and
-`lemma:nagata-compactification-base-change` of the Nagata compactification blueprint.
-
 -/
 
 @[expose] public section

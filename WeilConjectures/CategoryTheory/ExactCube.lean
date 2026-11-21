@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
-/-! Preservation of commutative cubes under exact localization.
-The generic proof is retained from TensorPullbackSquare for its existing consumers. -/
+/-! Preservation of commutative cubes under exact localization. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -114,12 +113,7 @@ variable {C₀ C₁ C₂ C₃ D₀ D₁ D₂ D₃ : Type*}
   [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
   [PreservesFiniteLimits I'] [PreservesFiniteColimits I']
 
-/-- An exact functorial cube remains commutative on unbounded derived categories.
-Proof: form the two ordinary triple pastings. Their components agree by hc, hence
-natural-isomorphism extensionality identifies them. The left and right triple-comparison
-whiskering identities express the two derived pastings as the images of these ordinary
-pastings with the same triple comparators. Cancel the common comparator and evaluate.
-This proof is the generic derivedCube argument formerly in TensorPullbackSquare. -/
+/--  An exact functorial cube remains commutative on unbounded derived categories. -/
 theorem exactDerivedCube
     (qJ : R₀ ⋙ J ≅ J' ⋙ R₁) (qH : R₁ ⋙ H ≅ H' ⋙ R₃)
     (qG : R₀ ⋙ G ≅ G' ⋙ R₂) (qI : R₂ ⋙ I ≅ I' ⋙ R₃)

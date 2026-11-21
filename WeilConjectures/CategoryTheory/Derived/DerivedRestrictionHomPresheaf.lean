@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 
 /-! # Restriction of coefficients on local derived Hom presheaves
 
-Source: Stacks Project, Tags 03DA and 098K, restriction and localization of coefficients.
+## References
+
+* Stacks Project, Tags 03DA and 098K, restriction and localization of coefficients.
 -/
 
 @[expose] public noncomputable section
@@ -58,10 +60,7 @@ private theorem restriction_scalars_paste {U V : C} (f : V ⟶ U)
     CategoryTheory.Functor.map_comp, Category.assoc] using h
 
 /-- Coefficient restriction commutes with restriction along a map of site objects.
-Source: Stacks Tags 03DA and 098K.
-Proof: paste the identity coefficient squares with the localization comparisons and
-apply the derived-square pasting theorem. Naturality of the resulting square, followed
-by cancellation of the localization isomorphisms, gives the equality. -/
+Source: Stacks Tags 03DA and 098K. -/
 theorem derivedRestrictionHomPresheaf_natural
     (A D : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B')))
     {U V : C} (f : V ⟶ U)

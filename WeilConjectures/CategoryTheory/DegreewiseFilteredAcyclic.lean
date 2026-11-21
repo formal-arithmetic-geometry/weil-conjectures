@@ -71,21 +71,8 @@ private theorem page_zero_of_first
 
 /-- A cochain complex with a degreewise finite subcomplex filtration and acyclic
 associated graded complexes is acyclic.
-Source: Stacks Project, Homology, Tag 012W, Lemma,
-parts (2)--(4), applied to the zero Serre subcategory.
-
-Proof.
-1. Construct the filtered-complex spectral sequence. The differential-compatible
-page-zero identifications identify its short complexes with those of the graded
-complexes. Their acyclicity makes page one zero. The successor-page homology
-isomorphisms make every positive page zero by induction.
-2. Degreewise finite convergence identifies a sufficiently late cycle/boundary
-quotient at (p,n-p) with the p-th graded piece of the finite image filtration on
-H^n(K). Its page comparison therefore makes that graded piece zero.
-3. Zero successive cokernels make successive filtration inclusions epimorphisms;
-they are already monomorphisms, hence isomorphisms. The corresponding subobjects
-are equal. A finite induction between the top and bottom bounds gives top = bottom,
-so H^n(K) is zero. This works in every degree, proving acyclicity. -/
+Source: Stacks Project, Homology, Tag 012W.
+-/
 theorem degreewiseFiltered_acyclic
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K)

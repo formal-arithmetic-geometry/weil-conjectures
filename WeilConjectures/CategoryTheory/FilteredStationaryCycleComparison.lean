@@ -194,35 +194,7 @@ private theorem quotient_kernel
     ← Subobject.pullback_comp]
 
 /-- The page projection and graded homology projection kill the same actual cycles.
-Source: Stacks Project, Homology, Tag 012K, Equation 12.24.5.2; Tag 012Q, final subquotient calculation; Tag 012W, stationary bounds calculation.
-
-Proof. Write n=q+p, A=F^q K^n, A'=F^(q+1) K^n, Z=ker(d^n),
-and B=im(d^(n-1)). The inclusion of the cycles of F^q K identifies their
-image in K^n with S=A intersect Z. The upper bound makes the graded
-r-cycles the image of S under the graded projection. The lower bound makes
-the graded r-boundaries the image of A intersect B under that projection.
-Consequently a cycle maps to zero in the page precisely when its image in
-K^n belongs to (A intersect B)+A'. Intersecting this sum with S gives
-D=(A intersect B)+(A' intersect Z), since B is contained in Z and A' is
-contained in A. This is the modular identity for subobjects in an abelian
-category. Thus the first kernel is the inverse image of D along the
-actual-cycle inclusion into K^n.
-
-For the other kernel, compose ha with the epic homology projection and use
-homology naturality. This identifies the map from actual q-step cycles to
-Y with the ambient homology projection, transported by c. Since a_i and
-the cycle-to-homology projection are epic, H.step i is exactly the image
-of actual i-step cycles in Y. The kernel of the ambient homology projection
-on S is A intersect B; the image of the next-step cycles is the image of
-A' intersect Z. The inverse image of that image under the restricted
-homology projection is therefore (A intersect B)+(A' intersect Z), by the
-cokernel inverse-image formula. As the next-step inclusion is monic, it
-is the kernel of its cokernel; pulling this kernel back along homologyπ
-followed by a_q yields the second kernel. Both kernels are the inverse
-image of D along the same actual-cycle inclusion, so they are equal.
-These are image, pullback and cokernel calculations, valid also for zero
-complexes, zero graded pieces and r=1, without lifts of arbitrary elements
-through an epimorphism. -/
+Source: Stacks Project, Homology, Tag 012K, Equation 12.24.5.2; Tags 012Q, 012W. -/
 private theorem stationary_projection_kernel
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K)
@@ -455,23 +427,7 @@ private theorem epi_iso_of_kernel_eq
 
 /-- At stationary outer bounds, actual cycles cover the graded cycles, and their
 homology classes determine the stationary comparison.
-Source: Stacks Project, Homology, Tags 012K, 012Q and 012W.
-
-Proof. Write n=q+p. The upper bound makes the r-cycle condition d(x)=0.
-Thus projecting the cycles of F^q K to gr^q K has image exactly the graded
-r-cycles; adding F^(q+1) before taking the graded projection does not change
-its image. Factor this projection through its image to obtain the epimorphism z.
-The lower bound makes r-boundaries the graded images of total boundaries
-lying in F^q K. The map from cycles of F^q K to H^n(K), transported by c,
-has image H.step q, by the epic factorization a q and its inclusion equation.
-Its kernel is the total boundaries lying in F^q K. Quotienting this image by
-H.step (q+1) therefore kills precisely those boundaries and the cycles of
-F^(q+1) K. The two cokernel presentations have the same kernel on the actual
-cycles, so their universal properties give mutually inverse comparison maps.
-The resulting isomorphism satisfies the displayed equation. The inclusion
-of graded cycles is monic, so the representative equation uniquely fixes z;
-since z and the page projection are epic, the last equation uniquely fixes
-the comparison. This also covers zero complexes and zero graded pieces. -/
+Source: Stacks Project, Homology, Tags 012K, 012Q and 012W. -/
 theorem filteredStationary_cycle_comparison
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K)

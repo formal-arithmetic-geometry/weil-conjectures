@@ -15,8 +15,9 @@ public import WeilConjectures.CategoryTheory.PBCFiltration
 /-!
 # The two filtrations of a first-quadrant total complex
 
-Source: Stacks Project, Homological Algebra, Section 12.18, Tag 012Z, and the
-blueprint's two filtrations and graded pieces.
+## References
+
+* Stacks Project, Homological Algebra, Section 12.18, Tag 012Z
 
 The bicomplex and total complex are Mathlib's `HomologicalComplex₂` and `total`.
 First-quadrant vanishing is a hypothesis, not extra structure. Only the two finite
@@ -35,10 +36,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 variable (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))
 
 /-- First-quadrant vanishing implies existence of the diagonal coproducts.
-Source: Stacks 12.18, following Tag 012Z.
-Proof: in degree n only indices 0 ≤ p ≤ n can be nonzero. Take their finite
-coproduct, extending its cocone by the unique maps from the zero objects outside
-that interval. The finite coproduct universal property gives the full diagonal colimit. -/
+Source: Stacks 12.18, following Tag 012Z. -/
 theorem hasTotal_of_firstQuadrant
     (hK : ∀ p q : ℤ, p < 0 ∨ q < 0 → IsZero ((K.X p).X q)) :
     K.HasTotal (ComplexShape.up ℤ) := by
@@ -97,10 +95,7 @@ private theorem eq_top_of_total_inclusions (n : ℤ)
   have : IsIso S.arrow := isIso_of_mono_of_isSplitEpi S.arrow
   exact Subobject.eq_top_of_isIso_arrow S
 
-/-- The finite supremum defining the first filtration decreases with its index.
-Proof: if p ≤ q, the interval [q,n] is contained in [p,n]. Every image in the
-smaller supremum lies in the larger one; the finite supremum universal property
-proves the inequality, including when either interval is empty. -/
+/-- The finite supremum defining the first filtration decreases with its index. -/
 theorem firstFiltration_antitone (n : ℤ) :
     Antitone (fun p : ℤ ↦ (Finset.Icc p n).sup
       (fun i ↦ imageSubobject (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n))) := by
@@ -119,10 +114,7 @@ noncomputable def firstFiltration (n : ℤ) :
     (fun i ↦ imageSubobject (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n))
   antitone_step := K.firstFiltration_antitone n
 
-/-- The finite supremum defining the second filtration decreases with its index.
-Proof: if p ≤ q, the interval [q,n] is contained in [p,n]. Every image in the
-smaller supremum lies in the larger one; the finite supremum universal property
-proves the inequality, including when either interval is empty. -/
+/-- The finite supremum defining the second filtration decreases with its index. -/
 theorem secondFiltration_antitone (n : ℤ) :
     Antitone (fun p : ℤ ↦ (Finset.Icc p n).sup
       (fun i ↦ imageSubobject (K.ιTotalOrZero (ComplexShape.up ℤ) (n - i) i n))) := by
@@ -402,9 +394,7 @@ variable (hK : ∀ p q : ℤ, p < 0 ∨ q < 0 → IsZero ((K.X p).X q))
 include hK
 
 /-- The negative degrees of the total complex vanish.
-Source: Stacks 12.18, finite diagonals.
-Proof: p+q=n<0 forces p<0 or q<0, so every summand is zero. The coproduct
-universal property makes the total object a zero object. -/
+Source: Stacks 12.18, finite diagonals. -/
 theorem total_isZero_of_neg (n : ℤ) (hn : n < 0) :
     IsZero ((K.total (ComplexShape.up ℤ)).X n) := by
   apply (IsZero.iff_id_eq_zero _).2
@@ -413,10 +403,7 @@ theorem total_isZero_of_neg (n : ℤ) (hn : n < 0) :
   have hsum : i + j = n := hij
   exact (hK i j (by omega)).eq_of_src _ _
 
-/-- The first filtration is preserved by the total differential.
-Proof: on each summand the total differential is the horizontal map plus the
-signed vertical map. Each preserves or raises the filtered index. Each image
-therefore factors through the target step, and the finite sum does too. -/
+/-- The first filtration is preserved by the total differential. -/
 theorem firstFiltration_subcomplex (p n : ℤ) :
     ∃ f : ((K.firstFiltration n).step p : C) ⟶
       ((K.firstFiltration (n + 1)).step p : C),
@@ -464,10 +451,7 @@ theorem firstFiltration_subcomplex (p n : ℤ) :
         (Finset.mem_Icc.mpr ⟨by omega, by omega⟩)
   exact ⟨Q.factorThru _ hQ, Subobject.factorThru_arrow _ _ _⟩
 
-/-- The first filtration starts at the whole total object.
-Proof: first-quadrant vanishing leaves only the summands indexed by [0,n].
-Their inclusions jointly generate the diagonal coproduct, so their image sum
-is top. For n<0 both the diagonal and the empty image sum are zero. -/
+/-- The first filtration starts at the whole total object. -/
 theorem firstFiltration_zero (n : ℤ) : (K.firstFiltration n).step 0 = ⊤ := by
   apply K.eq_top_of_total_inclusions n
   intro i j hij
@@ -487,22 +471,13 @@ theorem firstFiltration_zero (n : ℤ) : (K.firstFiltration n).step 0 = ⊤ := b
       (K.ιTotal (ComplexShape.up ℤ) i j n hij)]
     simp
 
-/-- The first filtration vanishes past the diagonal.
-Proof: [n+1,n] is empty, so its finite supremum is bottom. -/
+/-- The first filtration vanishes past the diagonal. -/
 theorem firstFiltration_finite (n : ℤ) :
     (K.firstFiltration n).step (n + 1) = ⊥ := by
   have _ := hK
   simp [firstFiltration]
 
-/-- The canonical summand maps identify the first graded pieces and their differential.
-Proof: lift the diagonal inclusion uniquely through the step's monomorphism.
-The next step is the sum of the other summands, so projecting this lift to
-its cokernel is an isomorphism. Restrict the total differential to the step;
-it preserves the next step as well, hence descends uniquely to the cokernel.
-In the quotient the differential raising the filtered index disappears; the
-remaining differential is the signed vertical map. Its square is zero because the total
-differential squares to zero and the quotient maps are epimorphisms.
-The equations explicitly fix the isomorphisms by the original total inclusions. -/
+/-- The canonical summand maps identify the first graded pieces and their differential. -/
 theorem firstFiltration_graded (p : ℤ) :
     (let F := fun n : ℤ ↦ K.firstFiltration n
     let π := fun n : ℤ ↦ cokernel.π (Subobject.ofLE ((F n).step (p + 1))
@@ -565,10 +540,7 @@ theorem firstFiltration_graded (p : ℤ) :
     zero_add]
   rfl
 
-/-- The second filtration is preserved by the total differential.
-Proof: on each summand the total differential is the horizontal map plus the
-signed vertical map. Each preserves or raises the filtered index. Each image
-therefore factors through the target step, and the finite sum does too. -/
+/-- The second filtration is preserved by the total differential. -/
 theorem secondFiltration_subcomplex (p n : ℤ) :
     ∃ f : ((K.secondFiltration n).step p : C) ⟶
       ((K.secondFiltration (n + 1)).step p : C),
@@ -616,10 +588,7 @@ theorem secondFiltration_subcomplex (p n : ℤ) :
         (Finset.mem_Icc.mpr ⟨by omega, by omega⟩)
   exact ⟨Q.factorThru _ hQ, Subobject.factorThru_arrow _ _ _⟩
 
-/-- The second filtration starts at the whole total object.
-Proof: first-quadrant vanishing leaves only the summands indexed by [0,n].
-Their inclusions jointly generate the diagonal coproduct, so their image sum
-is top. For n<0 both the diagonal and the empty image sum are zero. -/
+/-- The second filtration starts at the whole total object. -/
 theorem secondFiltration_zero (n : ℤ) : (K.secondFiltration n).step 0 = ⊤ := by
   apply K.eq_top_of_total_inclusions n
   intro i j hij
@@ -639,22 +608,13 @@ theorem secondFiltration_zero (n : ℤ) : (K.secondFiltration n).step 0 = ⊤ :=
       (K.ιTotal (ComplexShape.up ℤ) i j n hij)]
     simp
 
-/-- The second filtration vanishes past the diagonal.
-Proof: [n+1,n] is empty, so its finite supremum is bottom. -/
+/-- The second filtration vanishes past the diagonal. -/
 theorem secondFiltration_finite (n : ℤ) :
     (K.secondFiltration n).step (n + 1) = ⊥ := by
   have _ := hK
   simp [secondFiltration]
 
-/-- The canonical summand maps identify the second graded pieces and their differential.
-Proof: lift the diagonal inclusion uniquely through the step's monomorphism.
-The next step is the sum of the other summands, so projecting this lift to
-its cokernel is an isomorphism. Restrict the total differential to the step;
-it preserves the next step as well, hence descends uniquely to the cokernel.
-In the quotient the differential raising the filtered index disappears; the
-remaining differential is the horizontal map. Its square is zero because the total
-differential squares to zero and the quotient maps are epimorphisms.
-The equations explicitly fix the isomorphisms by the original total inclusions. -/
+/-- The canonical summand maps identify the second graded pieces and their differential. -/
 theorem secondFiltration_graded (p : ℤ) :
     (let F := fun n : ℤ ↦ K.secondFiltration n
     let π := fun n : ℤ ↦ cokernel.π (Subobject.ofLE ((F n).step (p + 1))

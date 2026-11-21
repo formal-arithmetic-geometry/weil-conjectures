@@ -26,31 +26,7 @@ namespace CategoryTheory.Mod
 
 /-- The adjoint-uniqueness comparison for extension along an invertible scalar morphism
 is the unique factor of the inverse scalar action through the defining coequalizer.
-Its inverse inserts the unit, both maps are linear and inverse, and both are natural.
-
-Proof: (1) Restriction along the inverse and along the original scalar morphism have
-an adjunction whose Hom bijection is the identity on underlying morphisms: the two
-linearity equations are equivalent after precomposition with the scalar isomorphism
-or its inverse.
-(2) Its unit and counit have identity underlying maps, by the Hom-bijection construction
-of lem-weil-pbc-adjunction-of-natural-bijection. (3) Extension is left adjoint to
-restriction with unit given by unit insertion.
-The unit equation of situation-conventions identifies its comparison
-with inverse restriction and gives p after unit insertion equal to the identity.
-This is the specified comparison: the inverse-equivalence adjunction used in
- def-sfb-modobj-extension-along-iso has the same identity unit, by
- def-sfb-modobj-restriction-equivalence and lem-weil-pbc-quasi-inverse-adjoint; therefore
-its Hom bijections agree with those in (1). (4) The induced extension action after
-tensoring unit insertion is the quotient map, by associator naturality, the right
-unit law and the monoidal triangle identity. (5) Linearity of p now gives q followed by p equal to
-the inverse scalar action. Thus that action coequalizes the defining pair, and
-uniqueness follows from the coequalizer property.
-(6) Unit insertion is the inverse of p by (3); hence it is S-linear and both inverse
-identities hold. (7) The quotient formula
-for extension on morphisms and linearity of an R-module morphism give naturality
-of p after precomposition with q, which is epic. Naturality of tensoring and the
-left unitor gives naturality of unit insertion directly.
--/
+Its inverse inserts the unit, both maps are linear and inverse, and both are natural. -/
 theorem extensionIso_quotient_formula
     {C : Type u} [Category.{v} C] [MonoidalCategory C] [SymmetricCategory C]
     [MonoidalClosed C] [HasEqualizers C] [HasCoequalizers C]

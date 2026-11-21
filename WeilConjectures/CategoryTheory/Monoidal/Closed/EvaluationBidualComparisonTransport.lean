@@ -81,31 +81,7 @@ private lemma comparison_bidual [SymmetricCategory C] [SymmetricCategory C']
   rw [← Category.assoc, h, Category.assoc, ← NatTrans.comp_app, ← pre_map,
     Iso.inv_hom_id, pre_id, NatTrans.id_app, Category.comp_id]
 
-/-- Transport duality on replete full subcategories using the canonical evaluation comparison.
-
-Proof plan:
-1. Use naturality of the tensor-Hom adjunction to commute untransposition with
-   precomposition and internal-Hom maps; untransposition is injective.
-2. Untranspose `ihomComparison` and postcompose with `w`. This gives the evaluation
-   equation, with the tensorator explicitly restored.
-3. For a map `L → K`, untranspose the two naturality composites. Evaluation naturality
-   and tensorator naturality identify them, giving the natural comparison below.
-4. For `P` in the target subcategory, use essential surjectivity to choose `FK ≅ P`.
-   Apply the target dual functor and the comparison at `K`; repleteness and preservation
-   of the source subcategory show that the target dual is again in the target subcategory.
-5. Untranspose `F(δ_K)` followed by the comparison at `DK`. The evaluation equation,
-   naturality of the tensorator and preservation of symmetry identify its untranspose
-   with evaluation at `FK` after the symmetry and `c_K ⊗ 1`.
-6. Untransposing `δ'_{FK}` followed by precomposition with `c_K` gives the same map.
-   Injectivity and the inverse of `c_K` give the displayed double-dual equation.
-7. Untranspose the two composites expressing naturality of the specified `δ'` for
-   any ambient map. Evaluation and symmetry naturality identify them.
-8. If the source `δ_K` are invertible, the double-dual equation makes `δ'_{FK}`
-   invertible. Essential surjectivity and step 7 give invertibility at every target object.
-9. Restrict the target dual. Its right opposite is a quasi-inverse, with the natural
-   double-dual isomorphisms as unit and counit. This proves anti-equivalence under
-   the stated source anti-equivalence and invertible-biduality hypotheses.
--/
+/-- Transport duality on replete full subcategories using the canonical evaluation comparison. -/
 theorem evaluationBidualComparisonTransport
     [SymmetricCategory C] [SymmetricCategory C']
     (F : C ⥤ C') [F.Braided] {W : C} {W' : C'} (w : F.obj W ≅ W')

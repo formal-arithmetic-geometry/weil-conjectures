@@ -225,15 +225,7 @@ private theorem rawAction_restriction (e : ∀ U : Cᵒᵖ,
 
 /-- A sectionwise scalar pushout acts uniquely on the balanced tensor sheaf.
 
-Source: Stacks Project, Tag 03EK.
-
-Proof: the two scalar actions define a ring map from the scalar tensor to the
-endomorphism ring of the balanced module tensor. Transport along the given
-scalar comparison and sheafify this module presheaf. The pure tensor formula
-proves restriction compatibility. To prove uniqueness, lift a module section
-locally before sheafification, expand both tensors into finite sums of pure
-tensors, and use the two normalization formulas and the module laws.
--/
+Source: Stacks Project, Tag 03EK. -/
 theorem tensorPushoutAction_existsUnique (e : ∀ U : Cᵒᵖ,
     letI := (b.hom.app U).hom.toAlgebra
     letI := (a.hom.app U).hom.toAlgebra

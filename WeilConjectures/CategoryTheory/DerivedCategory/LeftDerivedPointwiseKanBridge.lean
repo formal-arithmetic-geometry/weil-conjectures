@@ -68,25 +68,7 @@ private theorem fraction_leg_eq
 
 /-- An essentially constant denominator pro-diagram yields a pointwise right Kan limit,
 with the supplied cone legs at inverse denominators and at the identity denominator.
-Source: Stacks Project, Tags 05S9, 05SA and 05PU(2).
-
-The essential-constancy predicate records existence of a witnessing cone. The separately
-quantified `u` and its retraction/factorization criterion specify any supplied witness,
-so the conclusion preserves that witness rather than a privately chosen cone.
-
-Proof:
-1. Essential constancy makes the denominator cone
-   a limit: for another cone `v` define its factorization by `v.app j₀ ≫ r`. Common-stage
-   factorization gives every leg equation, and `u.app j₀ ≫ r = 𝟙 Y` gives uniqueness.
-2. Represent each structured arrow by a right fraction
-   and define its leg as the denominator leg followed by the image of the numerator.
-   Common refinement and naturality of `u`
-   show independence of the representative and naturality of these legs.
-3. Restrict any structured-arrow cone along the inverse-denominator functor and use the
-   denominator limit of Step 1 for its lift. Every structured arrow receives a morphism
-   from its representing inverse denominator, so naturality gives every leg equation.
-   Restriction gives uniqueness. The identity numerator recovers each supplied `u_s`;
-   the identity denominator gives the canonical comparison map of Definition 05S9. -/
+Source: Stacks Project, Tags 05S9, 05SA and 05PU(2). -/
 theorem leftDerived_defined_pointwiseKan_bridge
     {C : Type u} [Category.{v} C] {L : Type uL} [Category.{vL} L]
     {H : Type uH} [Category.{vH} H]

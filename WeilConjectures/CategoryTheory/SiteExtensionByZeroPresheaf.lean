@@ -15,7 +15,9 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-!
 # Extension by zero of abelian presheaves on a slice category
 
-Source: Stacks Project, Modules on Sites, Lemma 03DI and Remark 03EJ.
+## References
+
+* Stacks Project, Modules on Sites, Lemma 03DI and Remark 03EJ.
 -/
 
 @[expose] public section
@@ -184,8 +186,7 @@ noncomputable def siteExtensionByZeroPresheaf :
 
 /-- Forgetting scalars in the module construction gives the same direct sums and
 restrictions. In particular this applies to the constant integer ring sheaf, where modules
-are abelian groups. Proof: compare the section types and maps; their formulas agree on every
-injection, and functor extensionality concludes. Stacks Project, 03DI and 03EJ. -/
+are abelian groups. Stacks Project, Tags 03DI and 03EJ. -/
 theorem siteExtensionByZeroPresheaf_modules {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) (G : SheafOfModules.{w} (R.over W)) :
     (siteExtensionByZeroPresheaf W).obj G.val.presheaf =
@@ -196,11 +197,10 @@ theorem siteExtensionByZeroPresheaf_modules {J : GrothendieckTopology C}
 
 end
 
-/-- Sheaf extension by zero `j_{W!}`: on the site `(C, J)` (the precoverage form of
-`def-weil-pbc-sites-and-cohomology`), give `C/W` the localized topology
+/-- Sheaf extension by zero `j_{W!}`: on the site `(C, J)`, give `C/W` the localized topology
 `J.toGrothendieck.over W` (a sieve over `W` covers when its underlying sieve covers in `C`),
 apply the presheaf construction to the underlying presheaf of a sheaf, and sheafify for
-`J.toGrothendieck`. Stacks Project, 03DI and 03EJ. -/
+`J.toGrothendieck`. Stacks Project, Tags 03DI and 03EJ. -/
 noncomputable def siteExtensionByZeroSheaf {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
     [J.IsStableUnderBaseChange] [J.HasPullbacks] (W : C) :

@@ -79,16 +79,7 @@ private theorem ideal_unit_endomorphism
     ((δ.asHom.val.app W).hom.map_smul (j.val.app W x) (1 : R.obj.obj W)).symm
 
 /-- The least structural-image ideal is an epic quotient of any specified module pullback.
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 04IE; Algebraization, Tag 0A0G.
-
-Proof: present the inverse image algebraically and use tensor adjunction. A factorization
-of the underlying structural map through a monic ideal is linear by cancellation of that
-monomorphism; its adjoint factors the tensor pullback map. Thus its image and IX have
-the same least-ideal property, and the induced map onto IX is epic. The tensor unit
-comparison identifies this map with the pullback of the inclusion. Uniqueness of left
-adjoints transports it to G. Changing the rank-one comparison to u multiplies by a
-unit global section of RX; multiplication by that unit acts invertibly on every ideal.
-Composing with this automorphism gives the required quotient and commuting square. -/
+Source: Stacks Project, Modules on Sites, Tags 03D7 and 04IE; Algebraization, Tag 0A0G. -/
 theorem exists_ringed_image_ideal_quotient
     {C X : Type u} [SmallCategory C] [SmallCategory X]
     {J : GrothendieckTopology C} {K : GrothendieckTopology X}

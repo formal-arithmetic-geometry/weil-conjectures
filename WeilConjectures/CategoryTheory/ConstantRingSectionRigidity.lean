@@ -55,15 +55,7 @@ private theorem eq_of_distinct_constants_eq {C : Type u} [SmallCategory C]
 
 /-- A ring-homomorphic choice of sections of constant rings, natural in every
 coefficient ring, is the usual constant-section map.
-
-Proof: use the lifted integer ring Z and its polynomial ring P=Z[X]. The component
-at Z is unique by initiality. Locally the image of X is a polynomial p. Evaluation
-at each integer n and naturality show that the constant sections p(n) and n agree.
-If p is not X, polynomial extensionality supplies an n with p(n) not n. Local
-injectivity of the integer sheafification unit then gives an empty covering sieve,
-on which any two sections of any sheaf agree. Thus the image of X equals the
-constant X locally, hence globally by separatedness. Naturality under P to A,
-X to a, now determines the component at every element of every ring A. -/
+-/
 theorem constantRingSectionRigidity {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (U : Cᵒᵖ)
     (α : ∀ A : CommRingCat.{u},

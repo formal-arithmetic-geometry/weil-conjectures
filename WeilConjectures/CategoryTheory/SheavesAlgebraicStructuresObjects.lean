@@ -18,8 +18,10 @@ import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRing
 /-!
 # Algebraic sheaves as internal algebraic objects
 
-Source: Stacks Project, Section 00YR, quadruples before Proposition 00YV and its
-sextuple description of rings.
+## References
+
+* Stacks Project, Section 00YR, quadruples before Proposition 00YV and its
+  sextuple description of rings.
 -/
 
 @[expose] public section
@@ -30,7 +32,10 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Section 00YR (quadruples and sextuples), Lemmas 006J and 00W2.
+/-- Sheaves of abelian groups and of commutative rings are the internal commutative group
+and commutative ring objects in sheaves of sets, via strict inverse functors over the
+underlying sheaf functor. Products of sheaves of sets are sectionwise and the terminal sheaf
+has a unique section over each object.
 
 `CommGrp` uses multiplicative names for addition, zero and negation. The equations
 of functors are strict inverse identities, not merely an equivalence. The `eqToIso`
@@ -41,27 +46,7 @@ zero; the extra inverse equation explicitly includes negation. `IsRingHom` inclu
 addition, zero, multiplication and one; the extra negation equation includes the
 remaining structure map. Sheaf morphisms are natural transformations throughout.
 
-Proof:
-1. Products are sectionwise: glue each component of a compatible family uniquely
-   (00W2; situation-conventions). The empty product is the
-   singleton sheaf. The universal property is def-weil-category-product. Equality
-   of natural transformations and compositions are checked on sections.
-2. For an abelian sheaf use sectionwise addition, zero and negation. Restriction
-   homomorphisms make these natural; sectionwise axioms give the group-object laws.
-   The underlying sets form a sheaf by
-   situation-conventions. Homomorphisms preserve the maps.
-3. Conversely evaluate the internal operations on sections: the internal equations
-   give an abelian group at every object; naturality makes restrictions homomorphisms.
-   Apply situation-conventions again. A structure-preserving
-   natural transformation becomes a family of homomorphisms.
-4. The constructions recover the exact same sections, restrictions and operations
-   on objects, and the exact same maps on morphisms. They are strict inverse functors
-   commuting with forgetting. This also proves the stated morphism criterion.
-5. For rings repeat steps 2--4 with multiplication and one. Naturality makes
-   restrictions ring homomorphisms; associativity, commutativity, unit and
-   distributivity hold sectionwise if and only if they hold as sheaf-map equations.
-   Ring homomorphisms preserve zero and negation as well as addition, multiplication
-   and one (00YR, proof of 00YV, rings as sextuples). -/
+Stacks Project, Section 00YR (quadruples and sextuples), Lemmas 006J and 00W2. -/
 theorem sheaves_algebraicStructures_objects
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) :
     (∀ (F G : Sheaf J (Type (max u v w))) (U : Cᵒᵖ),

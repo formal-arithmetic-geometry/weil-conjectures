@@ -101,9 +101,7 @@ noncomputable def principalAugmentation
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The augmentations commute with the specified strict transitions.
-Source: Stacks Tag 0A0E.
-Proof: the two composites vanish on the degree `-1` summand of the cone, and on its
-other summand both are the quotient map to `O/t^(m+1)`. Cone extensionality gives equality. -/
+Source: Stacks Tag 0A0E. -/
 theorem principalAugmentation_naturality
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     principalKoszulTransition R t m ≫ principalAugmentation R t m =
@@ -126,7 +124,7 @@ theorem principalAugmentation_naturality
 
 
 
-/-- The strict quotient comparison; its naturality is the first proof step of the node.
+/-- The strict quotient comparison.
 Source: Stacks Tags 0A0E and 0941. -/
 noncomputable def principalTowerComparison (t : (SheafOfModules.unit 𝓞).sections) :
     principalKoszulTower R t ⟶ principalReductionTower R t :=
@@ -202,10 +200,7 @@ noncomputable def koszulTensorTowerComparison (P : CochainComplex 𝒜 ℤ)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The augmentation followed by the quotient comparison is the prescribed quotient map.
-Source: Stacks Tags 0A0E and 0941.
-Proof: the cone inclusion followed by its cokernel augmentation equals the degree-zero
-quotient projection (`mappingCone.inr_descShortComplex`). Applying the tensor functor and
-precomposing with its unit inclusion gives the asserted equation. -/
+Source: Stacks Tags 0A0E and 0941. -/
 theorem koszulRepresentativeAugmentation_quotient (P : CochainComplex 𝒜 ℤ)
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     koszulRepresentativeAugmentation R P t m ≫

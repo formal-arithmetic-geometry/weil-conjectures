@@ -43,7 +43,6 @@ compactification `AlgebraicGeometry.constructedCompactification` of `f`.
   compactification;
 - `AlgebraicGeometry.NagataCompactification`: the compactification of a separated,
   quasi-compact morphism locally of finite type over a quasi-compact quasi-separated base.
-
 -/
 
 @[expose] public section
@@ -73,8 +72,8 @@ lemma exists_fpEnvelope :
   exact f.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentation
 
 /-- **The finite-presentation envelope** of a separated, quasi-compact morphism `f : X ⟶ Y`
-locally of finite type over a quasi-compact quasi-separated base: a chosen scheme `X'` together with a closed
-immersion `f.toFpEnvelope : X ⟶ X'` and a separated, quasi-compact morphism
+locally of finite type over a quasi-compact quasi-separated base: a chosen scheme `X'` together with
+a closed immersion `f.toFpEnvelope : X ⟶ X'` and a separated, quasi-compact morphism
 `f.fpEnvelopeHom : X' ⟶ Y` of finite presentation through which `f` factors (Stacks Tag 01ZJ). -/
 noncomputable def fpEnvelope : Scheme.{u} :=
   (exists_fpEnvelope f).choose
@@ -89,9 +88,9 @@ noncomputable def toFpEnvelope : X ⟶ f.fpEnvelope :=
 noncomputable def fpEnvelopeHom : f.fpEnvelope ⟶ Y :=
   (exists_fpEnvelope f).choose_spec.choose_spec.choose
 
-/-- **Properties of the finite-presentation envelope**: `X ⟶ f.fpEnvelope` is a closed immersion over `Y`,
-and `f.fpEnvelope ⟶ Y` is separated, quasi-compact and locally of finite presentation. These are
-the properties of the envelope of Stacks Tag 01ZJ. -/
+/-- **Properties of the finite-presentation envelope**: `X ⟶ f.fpEnvelope` is a closed immersion
+over `Y`, and `f.fpEnvelope ⟶ Y` is separated, quasi-compact and locally of finite presentation.
+These are the properties of the envelope of Stacks Tag 01ZJ. -/
 theorem fpEnvelope_spec :
     IsClosedImmersion f.toFpEnvelope ∧ LocallyOfFinitePresentation f.fpEnvelopeHom ∧
       QuasiCompact f.fpEnvelopeHom ∧ IsSeparated f.fpEnvelopeHom ∧
@@ -132,8 +131,8 @@ noncomputable def constructedCompactification : Compactification f :=
   (Compactification.ofIsClosedImmersion f.toFpEnvelope (fpEnvelopeCompactification f)).copy
     (f.toFpEnvelope_fpEnvelopeHom).symm
 
-/-- **Components of the constructed compactification**: the ambient scheme is the scheme-theoretic image
-of `X ⟶ f.fpEnvelope ⟶ Z`, where `Z` is the ambient scheme of the compactification of the
+/-- **Components of the constructed compactification**: the ambient scheme is the scheme-theoretic
+image of `X ⟶ f.fpEnvelope ⟶ Z`, where `Z` is the ambient scheme of the compactification of the
 envelope; the open immersion is the canonical image factor and the structure morphism is the
 restriction of the ambient structure morphism `Z ⟶ Y`. -/
 theorem constructedCompactification_spec :
@@ -146,9 +145,9 @@ theorem constructedCompactification_spec :
           (fpEnvelopeCompactification f).g :=
   ⟨rfl, rfl, rfl⟩
 
-/-- **The ambient morphism of the constructed compactification is proper**: it is the composite of the closed immersion of a
-scheme-theoretic image with the proper structure morphism of the compactification of the
-finite-presentation envelope. -/
+/-- **The ambient morphism of the constructed compactification is proper**: it is the composite of
+the closed immersion of a scheme-theoretic image with the proper structure morphism of the
+compactification of the finite-presentation envelope. -/
 theorem isProper_constructedCompactification_g : IsProper (constructedCompactification f).g := by
   rw [(constructedCompactification_spec f).2.2]
   infer_instance
@@ -164,9 +163,9 @@ theorem isOpenImmersion_constructedCompactification_i :
   rw [(constructedCompactification_spec f).2.1]
   exact ⟨inferInstance, inferInstance⟩
 
-/-- **Factorization equality for the constructed compactification**: `X ⟶ f.fpEnvelope ⟶ Z` followed by the image
-inclusion is the original composite, and the structure morphism of the envelope composed with
-`X ⟶ f.fpEnvelope` is `f`. -/
+/-- **Factorization equality for the constructed compactification**: `X ⟶ f.fpEnvelope ⟶ Z` followed
+by the image inclusion is the original composite, and the structure morphism of the envelope
+composed with `X ⟶ f.fpEnvelope` is `f`. -/
 theorem constructedCompactification_i_g :
     (constructedCompactification f).i ≫ (constructedCompactification f).g = f := by
   rw [(constructedCompactification_spec f).2.1, (constructedCompactification_spec f).2.2,
@@ -176,11 +175,7 @@ theorem constructedCompactification_i_g :
 /-- **Nagata compactification**.
 
 A chosen compactification of a separated, quasi-compact morphism `f` locally of finite type over
-a quasi-compact quasi-separated base. It exists since `f` has the constructed compactification
-`AlgebraicGeometry.constructedCompactification`: its source map is an open immersion
-(`AlgebraicGeometry.isOpenImmersion_constructedCompactification_i`), its ambient morphism is
-proper (`AlgebraicGeometry.isProper_constructedCompactification_g`) and their composite is `f`
-(`AlgebraicGeometry.constructedCompactification_i_g`). -/
+a quasi-compact quasi-separated base. -/
 noncomputable def NagataCompactification : Compactification f :=
   have : HasCompactification f :=
     have := (isOpenImmersion_constructedCompactification_i f).1

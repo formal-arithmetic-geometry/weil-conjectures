@@ -195,7 +195,6 @@ universe q0 qU qV qW v0 vU vV vW
 
 /-- The natural comparison isomorphisms and their canonical mate equations.
 Source: Stacks 08DG and 03CE.
-This auxiliary record lists exactly the comparison and overlap assertions of the node.
 The six final laws are the two unit identities, two cross identities and two W identities. -/
 structure Comparisons
     {D0 : Type q0} [Category.{v0} D0] {DU : Type qU} [Category.{vU} DU]

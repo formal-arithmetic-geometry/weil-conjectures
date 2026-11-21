@@ -424,22 +424,7 @@ theorem tensor_naturality
   (tensorNatIso H).hom.naturality (f ×ₘ g)
 
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Lift the binary comparison to total complexes using the existing coproduct-
-preserving tensor pullback map and its invertibility. Check inverse right-unit coherence after
-every total-tensor inclusion: only the zero-degree unit summand survives, where the asserted
-formula reduces to module right-unit coherence. Convert forward naturality to inverse naturality
-by cancelling isomorphisms. Package these maps in TensorPullbackComparison.
-Proof step 2: Intertwining endomorphisms also intertwine their powers, by induction. Compare each
-degree of the two-term complex using singleMapHomologicalComplex and the specified unit
-isomorphism; commutation with its differential is the intertwining identity. Its two transition
-components are an identity and the scalar power, so the same calculations prove factor
-naturality. The projection comparison is checked in the two nonzero degrees.
-Proof step 3: Induct on the length of the ordered tensor list. The empty list is the unit
-comparison. For a successor, compose the binary tensor comparison with the factor and tail
-isomorphisms. Naturality follows by tensor bifunctoriality and the induction hypothesis. For
-projection compatibility, use right-naturality, the factor projection identity, the tail
-projection identity and right-unit coherence. -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 def tensorDiagramIso
     (H : TensorPullbackComparison.{u₁, u₂, w₁, w₂} P T T' R S ρ ρ') {X Y : ℕ ⥤ E} {X' Y' : ℕ ⥤ E'}
     (e : X ⋙ P ≅ X') (d : Y ⋙ P ≅ Y') :

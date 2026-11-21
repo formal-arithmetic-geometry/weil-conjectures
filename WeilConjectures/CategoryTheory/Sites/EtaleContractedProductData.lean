@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.Sites.SheafifySimplyTransitive
 
 /-! # The explicit orbit presheaf for coefficient change of torsors
 
-Source: Stacks Project, Tags 03AH and 03AJ.
+## References
+
+* Stacks Project, Tags 03AH and 03AJ.
 -/
 
 @[expose] public section
@@ -82,7 +84,7 @@ noncomputable def contractedOrbitQuotient (U : S.Etaleᵒᵖ)
   (toSheafify S.smallEtaleTopology (contractedOrbitPresheaf S φ T)).app U
     (Quot.mk _ (t, h))
 
-/--  -/
+/-- The canonical map from pairs to the sheafified orbit presheaf is natural in `U`. -/
 lemma contractedOrbitQuotient_natural {U V : S.Etaleᵒᵖ} (f : U ⟶ V)
     (t : T.sheaf.obj.obj U) (h : G'.obj.obj U) :
     (contractedOrbitSheaf S φ T).obj.map f (contractedOrbitQuotient S φ T U t h) =
@@ -90,7 +92,8 @@ lemma contractedOrbitQuotient_natural {U V : S.Etaleᵒᵖ} (f : U ⟶ V)
   exact (ConcreteCategory.congr_hom ((toSheafify S.smallEtaleTopology
     (contractedOrbitPresheaf S φ T)).naturality f) (Quot.mk _ (t, h))).symm
 
-/--  -/
+/-- The canonical map from pairs to the sheafified orbit presheaf is invariant under the
+antidiagonal action. -/
 lemma contractedOrbitQuotient_invariant (U : S.Etaleᵒᵖ) (g : G.obj.obj U)
     (t : T.sheaf.obj.obj U) (h : G'.obj.obj U) :
     contractedOrbitQuotient S φ T U (T.vadd U g t) (h - φ.hom.app U g) =
@@ -148,22 +151,7 @@ noncomputable def contractedOrbitEquiv (U : S.Etaleᵒᵖ) (t₀ : T.sheaf.obj.o
     rw [hzero, map_zero, add_zero]
 
 /-- Translation on the sheafified orbit quotient makes it a torsor.
-Source: Stacks Project, Tags 03AH and 03AJ.
-
-Proof: On the orbit presheaf, addition of h in the second coordinate commutes with every
-antidiagonal generator. It therefore defines an action morphism. Sheafification preserves
-finite products; extend that morphism to the sheafification, identifying the sheafification
-of the underlying group presheaf with G'. The action laws and restriction compatibility
-follow from their presheaf versions by the sheafification universal property. On any object
-where T has a section t0, simple transitivity identifies each orbit uniquely with (t0,h).
-The same identification after sheafification is a local isomorphism with G'. These local
-isomorphisms imply simple transitivity on arbitrary sections by sheaf gluing, and local
-nonemptiness follows from the covering sieve of sections of T. Translation of the canonical
-quotient map is the original second-coordinate translation. All arguments remain valid
-for the zero group, zero coefficient morphism and empty scheme. For uniqueness, the quotient
-translation equation determines the action on every local image q(t,h). Every section of Q
-locally has such a representative, since the sheafification unit is locally surjective.
-Naturality and sheaf separatedness therefore determine the action on every section. -/
+Source: Stacks Project, Tags 03AH and 03AJ. -/
 theorem exists_contracted_product_action :
     ∃! vadd : ∀ U : S.Etaleᵒᵖ, G'.obj.obj U →
         (contractedOrbitSheaf S φ T).obj.obj U → (contractedOrbitSheaf S φ T).obj.obj U,

@@ -17,10 +17,6 @@ Source: Stacks Project, sites-cohomology.tex, Tag 07A4.
 
 The factor comparison of an exact left-derived functor is its canonical counit on
 the quotient of a cochain complex.
-
-Proof. Apply the defining comparison equation at the homotopy quotient of the
-complex. Unfold the quotient comparison and the homotopy-category factor maps;
-the identity maps cancel, leaving exactly the displayed counit.
 -/
 
 @[expose] public section
@@ -33,11 +29,7 @@ open scoped CategoryTheory.Functor
 
 namespace CategoryTheory.Functor
 
-/-- On a quotient complex the canonical exact-derived factors compose to the counit.
-
-Proof. Evaluate the published homotopy factorization at the quotient complex, expand
-the cochain-to-homotopy comparison factors, and cancel their identity components.
-Source: Stacks Project, Tag 07A4. -/
+/-- On a quotient complex the canonical exact-derived factors compose to the counit. -/
 theorem leftDerivedFactors_eq_counit
     {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
     [Abelian C] [Abelian D]

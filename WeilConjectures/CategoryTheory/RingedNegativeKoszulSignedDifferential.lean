@@ -181,23 +181,8 @@ private theorem negative_basis_d_signed
 
 /-- The canonical negative pure tensor has the signed erased-index boundary.
 
-Source: Stacks Project, More on Algebra, Tags 0622 and 0664, contraction on ordered
-Koszul generators and the graded tensor Leibniz rule; Algebraization, Tag 0A0E, the finite free calculation.
-
-Proof: evaluate endomorphisms of the regular module sheaf at one to construct a
-ring homomorphism into the ring of global sections. A module endomorphism sends
-x to x times its value at one, so scalar action by this section is precomposition
-by the original endomorphism. The supplied compatibility identifies the sections
-of all generators with s. Tensor O[0] with the negative Koszul complex. Its first
-total differential is zero. Apply ringedNegativeKoszulSummand_D₂_succ to its second
-one: the coefficient degree q+card I is zero, so that sign is positive, and the
-remaining sign counts selected indices before i. The coefficient is a_i^(n+1).
-The left unitor identifies the specified summand, preceded by the inverse
-single-complex identification, with the canonical basis vector. Naturality of
-scalar action and equality transports therefore converts the summand formula
-into the displayed boundary. For no factors the complex is O[0] with zero
-differential and the selected subset is empty. No scalar is inverted, so zero
-rings, empty sites, and zero or unit sections are included. -/
+Source: Stacks Project, More on Algebra, Tags 0622 and 0664;
+Algebraization, Tag 0A0E. -/
 theorem ringedNegativeKoszulBasis_signed_d
     {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}
     (O : Sheaf T CommRingCat.{w}) {A : Type w} [CommRing A]

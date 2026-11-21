@@ -7,7 +7,10 @@ module
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-! # Testing maps on inverse-image units
-Source: Stacks Project, Tags 00YV, 03D2 and 03D3.
+
+## References
+
+* Stacks Project, Tags 00YV, 03D2 and 03D3.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -54,10 +57,7 @@ theorem hom_ext (p : SheafPullbackUnitPresentation (F := F) S T)
   exact (congrArg (fun y ↦ a.hom.app (F.op.obj U) y) (hi x)).trans
     ((h U x).trans (congrArg (fun y ↦ b.hom.app (F.op.obj U) y) (hi x).symm))
 /-- Product presentations use the inverse binary-product comparison.
-Source: Stacks Project, Tags 00YV and 03D2.
-Proof: finite-limit preservation makes the product comparison an isomorphism.
-The two projections of its unit equation are exactly naturality of the unit at
-both source projections, followed by the two given unit equations. -/
+Source: Stacks Project, Tags 00YV and 03D2. -/
 noncomputable def tensor [PreservesFiniteLimits (sheafPullback F (Type (max u v w)) J K)]
     (p : SheafPullbackUnitPresentation (F := F) S T)
     (q : SheafPullbackUnitPresentation (F := F) S' T') :
@@ -134,11 +134,7 @@ noncomputable def canonical (T : Sheaf J (Type (max u v w))) :
   equation _ _ := rfl
 
 /-- Unit-compatible binary operations are preserved on every generalized graph.
-Source: Stacks Project, Tag 03D2.
-Proof: test the two maps from the inverse image of the test sheaf on its unit.
-Naturality of that unit and the presentation equations identify all three operands
-with their source-unit images. The assumed compatibility reduces the equality to
-the source graph equation. The inverse-image adjunction then detects equality. -/
+Source: Stacks Project, Tag 03D2. -/
 theorem binary_graph
     (p : SheafPullbackUnitPresentation (F := F) S T)
     (q : SheafPullbackUnitPresentation (F := F) S' T')
@@ -165,9 +161,7 @@ theorem binary_graph
   rw [c.map_unit r z, c.map_unit p x, c.map_unit q y, hu, hz]
 
 /-- Unit-compatible constants are preserved on every generalized graph.
-Source: Stacks Project, Tag 03D2.
-Proof: use the same unit test as for binary operations; the target constant
-has the prescribed value on all source-unit sections. -/
+Source: Stacks Project, Tag 03D2. -/
 theorem constant_graph
     (p : SheafPullbackUnitPresentation (F := F) S T)
     (o : ∀ V, S.obj.obj V) (b : 𝟙_ (Sheaf K (Type (max u v w))) ⟶ T)

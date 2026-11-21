@@ -49,13 +49,7 @@ namespace CategoryTheory
 
 /-- Forgetting commutativity preserves the sheaf condition, independently of the
 size of the site. This supplies the underlying ring sheaf used in Mod(O).
-Source: Stacks, Modules on Sites 03D7, and Sites 00VR.
-Proof: a compatible family of ring maps has the same underlying functions as a
-compatible family of commutative-ring maps when its test ring is commutative. For
-an arbitrary test ring, glue the images of its elements in the commutative sheaf;
-uniqueness and restriction test the ring laws locally. Thus the glued function
-is a ring map. Equivalently, the fully faithful inclusion of commutative rings
-preserves every existing limit, including the limits of covering diagrams. -/
+Source: Stacks, Modules on Sites 03D7, and Sites 00VR. -/
 @[instance] theorem hasSheafCompose_commRingToRing {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) :
     J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) := by
@@ -158,19 +152,7 @@ private noncomputable def liftedExtensionDesc
 
 /-- Grothendieck abelianness, the specified free-sheaf generator, and functorial
 K-injective resolutions with injective terms, without equating site universes.
-Source: Stacks Project, Section 07A5 and Theorem 079P.
-Proof:
-1. Form the free module on the lifted representable at each site object. Its
-sections are finite linear combinations of arrows into that object, exactly the
-extension-by-zero presheaf of the localized unit. Sheafification makes these a
-separating family, by the free-Yoneda/sheafification adjunction. Their coproduct
-is a separator. Kernels and filtered colimits are computed on underlying abelian
-sheaves, where filtered colimits are exact. All index sets fit max c v r.
-2. Apply the small-object construction of the source library to this Grothendieck
-abelian category: factor each map M→0 functorially by the monomorphic
-quasi-isomorphisms. The resulting target is K-injective, and its terms are
-injective by the degreewise lifting criterion. The first factor supplies the
-natural quasi-isomorphism; the construction is functorial on chain maps. -/
+Source: Stacks Project, Section 07A5 and Theorem 079P. -/
 theorem grothendieckAbelian_and_functorial_kInjective_resolutionsMixedUniverses
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]

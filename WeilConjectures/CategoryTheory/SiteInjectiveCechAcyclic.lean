@@ -15,8 +15,10 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-!
 # Čech acyclicity of injective sheaves on a site
 
-Source: Stacks Project, Cohomology on Sites, Tags 03AW, 03F6, 03AS, 03AT, 03AU,
-03AN.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 03AW, 03F6, 03AS, 03AT, 03AU,
+  03AN.
 -/
 
 @[expose] public section
@@ -30,14 +32,7 @@ namespace CategoryTheory
 /-- An injective abelian sheaf has vanishing positive Čech cohomology on every covering,
 and degree-zero Čech cohomology is its sections on the covered object.
 The coefficients are sized to contain the cofree presheaf indexed by all objects and homs.
-Source: Stacks 03AW, 03F6, 03AT and 03AN.
-
-Proof: exact sheafification transfers injectivity to the underlying presheaf. Its natural
-monomorphism into the cofree presheaf splits by injectivity. The chosen Čech functor maps
-this to a split embedding of complexes. Positive cocycles map to cocycles of the cofree
-complex; the insertion contraction supplies primitives there. Mapping these primitives
-back by the splitting gives primitives of the original cocycles. Hence the positive
-homology is zero. The sheaf gluing theorem identifies degree-zero homology with sections. -/
+Source: Stacks 03AW, 03F6, 03AT and 03AN. -/
 theorem site_injective_cech_acyclic
     {C : Type u} [Category.{v} C]
     {J : Precoverage C} [J.HasIsos] [J.IsStableUnderComposition]

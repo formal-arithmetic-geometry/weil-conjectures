@@ -19,9 +19,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace CategoryTheory
 
 /-- Core algebra-colimit construction for a sectionwise colimit cocone.
-The proof constructs the sectionwise filtered ring colimit, sheafifies it, and verifies the
-algebra cocone universal property from the sheafification adjunction.
-Source: Stacks Project, Sheaves, Sections 009D and 009E. -/
+
+Stacks Project, Sheaves, Sections 009D and 009E. -/
 theorem sheafAlgebras_directed_colimit_algebra_core
     (X : Type u) [TopologicalSpace X]
     (O : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})

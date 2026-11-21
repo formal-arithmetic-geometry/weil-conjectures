@@ -234,15 +234,7 @@ private def cochainRepresentative : DerivedCategory.Q ⋙ E ⟶
 
 open AlgebraicGeometry.Etale in
 /-- The tensor of exact-single adjunction transposes is the transpose of the ordinary
-lax tensor product, for any derived tensor comparison normalized on representatives.
-
-Proof: factor each transpose through the localized ordinary adjunction unit.
-Apply the representative tensor square to the two single complexes. Naturality
-of localization's lax tensorator reduces the result to the ordinary tensor of
-the two adjuncts. On the unique degree-zero summand the complex comparison is
-the ordinary oplax tensorator. The monoidal adjunction identity identifies its
-composite with the adjunct of the lax tensor of the original maps. Naturality
-of the representative finishes the comparison. -/
+lax tensor product, for any derived tensor comparison normalized on representatives. -/
 theorem normalizedTensor_adjointInsertion
     (rep : ∀ P : CochainComplex C ℤ,
       E.obj (DerivedCategory.Q.obj P) ⟶

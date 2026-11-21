@@ -79,29 +79,7 @@ private theorem g_epi_of_next_zero {s : ℕ} (Y : BigradedExactCouple C s)
   simpa only [comp_zero] using hz
 
 /-- The canonical finite cycle projection is epic when the following D term is zero,
-and its kernel is the inverse image of the next incoming alpha image.
-
-Proof: Identify the prescribed incoming powers in pageCouple_image with
-incomingAlphaIter by their recurrences. At the endpoint of alphaIter r, this
-incoming r-fold iterate has the same image as alphaIter r, since their source
-transport is an isomorphism. The image formula for the monic iterated inclusion I
-therefore identifies its image with that of alphaIter r. Subobject.isoOfMkEqMk
-identifies the image domains; compose its hom with the actual image epimorphism
-of alphaIter r to construct an epic e satisfying e followed by I = alphaIter r.
-Apply finiteCycle_derived_comparison to identify e followed by transported g_r
-with factorThru(initialG) followed by the canonical finite cycle projection.
-Exact_g identifies the kernel of g_r with the incoming page-alpha image.
-Push this subobject forward along I. Its image is that of I_(r+1), by the
-successor recurrence and the epic image factorization of page-alpha, hence is the
-incoming (r+1)-fold original alpha image by pageCouple_image. The kernel of a
-composite is the pullback of the second kernel along the first map; prove this
-using Mathlib pullback_equalizer. Pullback composition and pullback_map_self
-for monic I now give the displayed pullback along e followed by I = alphaIter r.
-Finally hnext makes the following f zero, so exact_f makes image(g_r) top.
-Cancel the top arrow in its composite with the cokernel projection to show this
-projection is zero. Thus g_r is epic, and so is its composite with e and the
-endpoint isomorphism. No half-plane or colimit assumption is used.
-Source: Stacks Tags 011R and 0AMJ. -/
+and its kernel is the inverse image of the next incoming alpha image. -/
 theorem finiteCycle_kernel_presentation (X : BigradedExactCouple C 0)
     (r : ℕ) (p q : ℤ)
     (hnext : IsZero ((X.pageCouple r).D (p + 2) (q - 1)))

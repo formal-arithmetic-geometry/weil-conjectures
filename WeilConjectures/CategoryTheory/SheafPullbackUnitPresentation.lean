@@ -7,7 +7,10 @@ module
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 public import Mathlib.CategoryTheory.Sites.Pullback
 /-! # Testing maps on inverse-image units
-Source: Stacks Project, Tags 00YV, 03D2 and 03D3.
+
+## References
+
+* Stacks Project, Tags 00YV, 03D2 and 03D3.
 -/
 @[expose] public section
 universe u
@@ -50,10 +53,8 @@ theorem hom_ext (p : SheafPullbackUnitPresentation (F := F) S T)
   exact (congrArg (fun y ↦ a.hom.app (F.op.obj U) y) (hi x)).trans
     ((h U x).trans (congrArg (fun y ↦ b.hom.app (F.op.obj U) y) (hi x).symm))
 /-- Product presentations use the inverse binary-product comparison.
-Source: Stacks Project, Tags 00YV and 03D2.
-Proof: finite-limit preservation makes the product comparison an isomorphism.
-The two projections of its unit equation are exactly naturality of the unit at
-both source projections, followed by the two given unit equations. -/
+
+Stacks Project, Tags 00YV and 03D2. -/
 noncomputable def tensor [PreservesFiniteLimits (sheafPullback F (Type u) J K)]
     (p : SheafPullbackUnitPresentation (F := F) S T)
     (q : SheafPullbackUnitPresentation (F := F) S' T') :

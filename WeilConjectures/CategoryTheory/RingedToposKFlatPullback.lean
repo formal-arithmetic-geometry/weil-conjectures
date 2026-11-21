@@ -693,21 +693,7 @@ namespace CategoryTheory
 K-flat complexes with flat terms, and preserves quasi-isomorphisms between them.
 
 Source: Stacks Project, Modules on Sites, Tag 03D7, and Cohomology on Sites,
-Tags 0G7E and 06YY.
-
-Proof: Transport the commutative ring and its modules through the finite-limit-preserving
-inverse image of sheaves of sets. The structural map of the ringed-topos morphism gives a
-ring map from this inverse-image ring to the source ring. Compose inverse image of modules
-with extension of scalars along this ring map. The tensor adjunction and the underlying
-sheaf adjunction restrict to linear maps. The generalized scalar-action equation in
-`RingedToposMorphism.module_linear` identifies their right adjoint with the supplied
-`modules` functor, naturally, so transport the adjunction across that identification.
-The pullback preservation theorem 0G7E gives K-flatness and flat terms for its image.
-For a quasi-isomorphism between such complexes, the derived-pullback comparison of 06YY
-is invertible at both endpoints. Its naturality square identifies the localized termwise
-pullback map with the image of an isomorphism, so this map is a quasi-isomorphism.
-No flatness of the structural ring map is used; the identity and zero-ring cases are
-included by the same tensor adjunction and localization argument. -/
+Tags 0G7E and 06YY. -/
 theorem RingedToposMorphism.exists_kFlatPullback
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

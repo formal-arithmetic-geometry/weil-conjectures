@@ -109,19 +109,7 @@ def basisTensorCoordinate (O : Sheaf J CommRingCat.{u})
 
 -- Compare the total tensor inclusions and cancel the signed evaluation factors.
 /-- Canonical signed tensor-Hom evaluation preserves every homogeneous basis coordinate.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Define the Hom coordinate by homComplex projection, precomposition with b and Hom-
-unit evaluation. Define the dual coordinate to be zero outside degree -d; in that degree use the
-single-unit component and Hom-unit evaluation. Define the tensor coordinate by the total-tensor
-coproduct descent with this dual coordinate.
-Proof step 2: It suffices to compare composites with each tensor inclusion N[p] tensor
-Hom(P,unit)[q], p+q=n. The signed curry component formula and curryBasis contribute (-1)^(dn).
-The explicit uncurried evaluation component contributes (-1)^(pq+dq).
-Proof step 3: When p=n+d, one has d+q=0. The three signs multiply to one because dn+pq+dq=2dq.
-Apply the unit tensor inclusion and module basis contraction identities; naturality of Hom and
-unit evaluation identify the remaining map with the dual coordinate followed by the right unitor.
-Otherwise d+q is nonzero; the corresponding single-unit component is zero, so evaluation and the
-defined tensor coordinate both vanish. Tensor coproduct extensionality finishes. -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem evaluation_coordinates (O : Sheaf J CommRingCat.{u})
     (P N : ringedSiteComplex O) (d : ℤ) (b : one O ⟶ P.X d) (n : ℤ) :
     (ringedComplexTensorEvaluation O P N).f n ≫ basisHomCoordinate O P N d b n =

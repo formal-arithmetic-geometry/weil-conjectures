@@ -55,7 +55,6 @@ at `M` (`Rationalization.linear`), compatibly with its `R`-linear structure
 - `CategoryTheory.Rationalization.W_smul_id` : `m • 𝟙 X` lies in `W M C` for `m ∈ M`.
 - `CategoryTheory.Rationalization.isIso_smul_id` : `m • 𝟙 Y` is an isomorphism of the
   rationalization for `m ∈ M`.
-
 -/
 
 @[expose] public section

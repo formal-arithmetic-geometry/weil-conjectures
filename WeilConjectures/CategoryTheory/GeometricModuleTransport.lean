@@ -551,25 +551,7 @@ end Helpers
 -- The statement records every operation and its underlying comparison.
 
 /-- Transport module structures and restrict the given set adjunction to linear maps.
-Source: Stacks Project, Tags 03D1--03D3, and Tag 03D7.
-
-Proof: L preserves finite products by hypothesis, and V does so because it is a
-right adjoint. Transport the addition, zero, inverse and scalar-action diagrams
-of M through L and its product comparisons; the ring compatibility hRing supplies
-the coefficient identification. Evaluating these diagrams gives I(M) and their
-naturality gives I on maps and eI. Transport H through V in the same way and
-restrict scalars along the adjunct of c to get P(H), its maps, and eP. The inverse
-product comparison for V applied to the pair consisting of the adjunct of c and
-the underlying comparison for H gives k. Its projections and scalar formula are
-the comparison equations. For an A-linear alpha from I(M) to H restricted along c,
-transpose eI.inv followed by its underlying map under adj and use eP to identify
-the codomain. Naturality of the adjunction unit on the source addition and scalar
-actions, and its product projections, shows that this transpose is R-linear.
-Conversely the same equations, using injectivity of adj.homEquiv, imply that the
-inverse transpose of an R-linear map is A-linear. The two inverse identities are
-those of adj.homEquiv. The induced bijection B is natural because eI, eP, and the
-original adjunction are natural; forgetting linearity gives the last equation.
-This argument uses no tensor product or scalar-extension adjunction. -/
+Source: Stacks Project, Tags 03D1--03D3, and Tag 03D7. -/
 theorem geometric_module_transport
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

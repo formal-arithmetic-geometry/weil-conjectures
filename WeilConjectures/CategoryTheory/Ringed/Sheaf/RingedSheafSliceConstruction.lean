@@ -151,12 +151,7 @@ private theorem elementDirectSumMap_lof {C : Type u} [SmallCategory C]
 
 /-- The direct-sum restriction preserves identities.
 
-Source: Stacks Project, sites-modules.tex, Tag 04IE.
-Proof: check on each summand indexed by s. The element-map for the identity fixes
-(U,s), the restriction of L is the identity after the restriction-of-scalars identity
-comparison, and the target summand is again s because A preserves identities.
-Thus the two maps agree on every direct-sum inclusion; the direct-sum universal
-property gives equality. -/
+Source: Stacks Project, sites-modules.tex, Tag 04IE. -/
 theorem elementDirectSumMap_id {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u))
     (L : ringedSiteModules (elementRing R A)) (U : Cᵒᵖ) :
@@ -190,12 +185,7 @@ theorem elementDirectSumMap_id {C : Type u} [SmallCategory C]
 
 /-- The direct-sum restriction is compatible with composition.
 
-Source: Stacks Project, sites-modules.tex, Tag 04IE.
-Proof: check on the summand indexed by s. The two successive restrictions send it to
-A(g)(A(f)(s)), which equals A(f followed by g)(s) by functoriality of A. The element
-arrows compose accordingly; functoriality of L identifies their linear maps after
-restrictScalarsComp. Both direct-sum maps therefore have the same composite with
-every summand inclusion. The direct-sum universal property gives the equality. -/
+Source: Stacks Project, sites-modules.tex, Tag 04IE. -/
 theorem elementDirectSumMap_comp {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u))
     (L : ringedSiteModules (elementRing R A)) {U V W : Cᵒᵖ} (f : U ⟶ V) (g : V ⟶ W) :
@@ -300,10 +290,7 @@ noncomputable def elementModuleExtension
 
 /-- The canonical module extension is left adjoint to restriction.
 
-Source: Stacks Project, Modules on Sites, Tag 04IE.
-Proof: apply Mathlib's continuous-site module pullback/pushforward adjunction to the
-identity map of the restricted ring. Both sites and the module fibres have universe u,
-so the presheaf adjoint existence and sheafification instances apply. -/
+Source: Stacks Project, Modules on Sites, Tag 04IE. -/
 theorem elementModuleExtension_adjunction
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) :

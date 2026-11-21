@@ -89,30 +89,7 @@ end CategoryTheory
 namespace AlgebraicGeometry.ProEtale
 
 /-- Hom continuity is closed under shifts, isomorphisms, extensions, and any finite
-construction from a supplied collection.
-
-Proof:
-1. Associativity and cocone compatibility make the postcomposition maps an additive
-cocone, giving theta by def-weil-pbc-category-colimit. The shift equivalence identifies
-theta for C[n] in degree q with theta for C in degree q-n. Precomposition with an
-isomorphism and its inverse proves isomorphism invariance. Hom out of zero is zero.
-2. For a distinguished triangle C' -> C -> C'' -> C'[1], apply Hom(-,W) to obtain
-Hom(C'[1],W) -> Hom(C'',W) -> Hom(C,W) -> Hom(C',W) -> Hom(C''[-1],W).
-Exactness at the three middle terms follows from lem-weil-pbc-hom-out-of-triangle-exact
-and its application to the inverse rotation. TR2 makes that inverse rotation distinguished;
-lem-weil-pbc-hom-into-triangle-exact gives the zero composites.
-3. Set W=K_i[q] and W=K[q]. Precomposition commutes with postcomposition, including the
-negative inverse-rotation arrow. Thus theta gives a commutative ladder. The first row stays
-exact under the filtered abelian-group colimit by
-lem-weil-pbc-filtered-colimit-abelian-groups-exact; the target row is exact directly.
-4. Shift closure and the endpoint assumptions make the four outer vertical maps
-isomorphisms. Apply lem-weil-pbc-five-lemma to obtain bijectivity of the middle map in
-every degree.
-5. Induct on the finite extension construction from G. The shift closure includes
-isomorphic shifted generators, and extensionProductIter expresses finite iterated
-extensions. Arbitrarily placed shifts and isomorphisms can be moved through distinguished
-triangles, so this expresses all finite constructions in the statement. Cone closure also
-follows by rotating a triangle and using shift and extension closure. -/
+construction from a supplied collection. -/
 theorem constructibleHomContinuity_devissage
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     (X : Scheme.{u})

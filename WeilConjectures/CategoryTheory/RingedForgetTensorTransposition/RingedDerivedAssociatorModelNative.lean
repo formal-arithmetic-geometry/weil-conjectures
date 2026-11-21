@@ -55,11 +55,7 @@ variable {C : Type c} [SmallCategory C] (J : GrothendieckTopology C)
 
 -- Comparing the two concrete tensor presentations requires additional elaboration steps.
 /-- The concrete cochain associator gives the derived associator on K-flat models.
-Source: Stacks 0FPQ, 0FPT.
-
-Proof: apply the supplied derived associator model and identify its chain
-isomorphism with the canonical associator by its local pure-triple formula.
-Use tensorIso_both to change the two inner one-K-flat choices. -/
+Source: Stacks 0FPQ, 0FPT. -/
 theorem coefficientAssociator_model_native
     (P Q N : CochainComplex (RingedTensorModules.{c, c, c} J R) ℤ)
     (hP : P.IsKFlatIndependentCoefficients) (hQ : Q.IsKFlatIndependentCoefficients)

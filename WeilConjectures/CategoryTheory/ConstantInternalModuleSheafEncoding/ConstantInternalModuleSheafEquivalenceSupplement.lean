@@ -98,26 +98,7 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 compatibly with the underlying abelian sheaves.
 
 Source: Bhatt--Scholze, Section 5.3, and Stacks Project, Tag 093I.
-
-Proof in words. Over the constant ring presheaf, evaluate an internal action at each
-object. Naturality says its restriction maps are linear. Conversely a presheaf of
-internal modules has an internal action with those components. The unit, associativity
-and linearity diagrams are checked objectwise, giving a fully faithful and essentially
-surjective presheaf encoding. Compose this with internalModuleAb_equivalence, whose
-forgetful functor is exactly the original additive presheaf.
-Sheafification is strong monoidal and its right adjoint is lax monoidal. Lift their
-adjunction to modules along the sheafification unit of the constant ring presheaf.
-The lifted counit forgets to the sheafification counit, hence is invertible. This makes
-the lifted right adjoint fully faithful. A module over the sheafified ring therefore
-gives a module-valued presheaf with an additive sheaf underneath, so descent for modules
-follows from descent for abelian groups. For essential surjectivity, take the presheaf
-encoding preimage of a module-valued sheaf. Its underlying additive presheaf is a sheaf,
-so the lifted sheafification unit is invertible. Sheafify this internal module and
-transport that unit isomorphism through the presheaf encoding. Fullness and faithfulness
-follow from the two fully faithful presheaf functors and the fully faithful inclusion
-of sheaves into presheaves. Finally lift the underlying-presheaf identification through
-this inclusion to obtain the stated isomorphism of forgetful functors. The construction
-includes empty sites and the zero ring and assumes no finiteness or commutativity. -/
+-/
 theorem constantInternalModuleSheaf_equivalence :
     ∃ F : CategoryTheory.Mod (Sheaf J Ab.{w}) (Sheaf.sheafifyRingPresheaf J
           ((Functor.const Cᵒᵖ).obj (RingCat.of R))) ⥤ Sheaf J (ModuleCat.{w} R),

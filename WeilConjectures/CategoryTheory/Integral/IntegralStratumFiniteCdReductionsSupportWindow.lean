@@ -93,21 +93,7 @@ private theorem reductionArrow_eq (l : ℕ) [Fact l.Prime] (E : Type u) [Field E
 /-- The open restriction of supported sections of a finite reduction has cohomology
 in `[-1,c+1]`, and its underlying cohomology sheaves are classical local torsion.
 
-Source: Stacks Tags 0A45, 09B1 and 09AA.
-
-Proof: use the length-one uniformizer resolution to identify the scalar restriction
-of the positive quotient reduction with the cone of the uniformizer power on N[0].
-Its cohomology is the kernel in degree -1 and the cokernel in degree 0. Positive
-reduction constructibility and finite-coefficient comparison show these sheaves
-are classical, even when N has torsion. Identify the continuous integral and quotient
-coefficient presentations with those of the supported-window theorem, transporting
-the reduction map and restriction functor as well. The unit assumption on ell gives
-invertibility in every residue field. Apply finite_quotient_supported_classical_window
-with a=-1, b=0 and exponent n+1. It gives the claimed bound and classical local torsion
-before restriction to S. Exact open inverse image commutes with homology; the
-etale/pro-etale inverse-image comparison preserves classicality, and inverse image
-preserves the filtered union of prime-power kernels. This gives both conclusions
-on S. Zero N and empty strata give zero complexes, so require no extra hypotheses. -/
+Source: Stacks Tags 0A45, 09B1 and 09AA. -/
 theorem integralStratumFiniteCdReductions_support_window
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

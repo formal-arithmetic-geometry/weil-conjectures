@@ -65,24 +65,7 @@ module variables. The domain of both functors is the product of the slice module
 and the original module category, in that order. Extension is the direct-sum presheaf
 extension followed by module sheafification; each tensor is also sheafified sectionwise.
 
-Source: Stacks Project, Modules on Sites, Tag 0E8I.
-
-Proof:
-1. Relocalization identifies internal Hom of restricted modules with restricted internal
-   Hom, sectionwise by the same linear maps. Restrictions and scalar multiplication agree;
-   precomposition and postcomposition commute with this identification
-   (`def-pur-sheaf-hom`, `def-pur-localized-ringed-site`, Stacks 0E8H).
-2. For a test module H, extension adjunction and tensor-Hom adjunction give
-   Hom(j_!(G tensor F|U), H) = Hom(G, Hom(F|U,H|U)), naturally in all variables.
-3. Apply step 1, then the inverse extension adjunction and inverse tensor-Hom adjunction,
-   obtaining Hom(j_!G tensor F,H), still naturally in G,F,H.
-4. If E is this Hom equivalence from A to B, set u = E(id_A) : B -> A and
-   v = E.symm(id_B) : A -> B. Test-object naturality gives E(q) = u followed by q
-   and E.symm(r) = v followed by r. The inverse equivalence identities give that u,v
-   are inverse, hence the required isomorphism.
-5. For simultaneous parameter maps a : A -> A' and b : B -> B', parameter naturality
-   gives a after u = u' after b. Composing with the inverses gives v' after a = b after v.
-   These component isomorphisms therefore form the displayed natural isomorphism. -/
+Source: Stacks Project, Modules on Sites, Tag 0E8I. -/
 theorem ringedSlice_extension_tensor
     {C : Type uC} [Category.{v} C] (J : GrothendieckTopology C)
     [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})]

@@ -26,11 +26,7 @@ private theorem uniqueness_transpose
   exact h
 
 /-- Canonical scalar and geometric adjunction comparisons commute.
-Source: the mates correspondence, Stacks Tag 06YY.
-Proof: apply the composite Hom equivalence. The right square defining the first
-comparison moves through naturality, the scalar unit transfers by left-adjoint
-uniqueness, and the geometric unit transfers through the right comparison.
-Both transposes are the same composite scalar and geometric unit. -/
+Source: the mates correspondence, Stacks Tag 06YY. -/
 theorem adjunctionSquareTransport
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {F : A ⥤ B} {R : B ⥤ A} {S S' : B ⥤ D} {RX : D ⥤ B}

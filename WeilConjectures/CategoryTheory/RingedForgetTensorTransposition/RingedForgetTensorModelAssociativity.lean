@@ -24,14 +24,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory.RingedForgetTensorTransposition
 
 /-- Native associator identifications give the associativity square for chain models.
-Source: Stacks Project, Tags 0FPT and 06YU.
-
-Proof: replace the supplied model associators by the native associators using
-their two identifications. The summand-normalized chain associativity theorem
-then gives the required equation. Normalize the uncurried functor object
-projections to identify its endpoints. Keeping this calculation abstract avoids
-unfolding concrete sheaf tensor constructions. There is no derived localization
-or flatness assertion. -/
+Source: Stacks Project, Tags 0FPT and 06YU. -/
 theorem tensorComparison_model_chain_associativity
     {B : Type b} [Category.{vb} B] [Preadditive B] [HasZeroObject B]
     [MonoidalCategory B] [MonoidalPreadditive B]

@@ -13,8 +13,10 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Constant-coefficient module sheaves on an arbitrary small site
 
-Source: Stacks Project, Modules on Sites, Tag 093I, and Cohomology on Sites,
-Tag 03FD; encoding construction used by Tag 094G.
+## References
+
+* Stacks Project, Modules on Sites, Tag 093I, and Cohomology on Sites,
+  Tag 03FD; encoding construction used by Tag 094G.
 -/
 
 @[expose] public section
@@ -261,12 +263,7 @@ private noncomputable def moduleRestrictionConstantIso
 /-- Restriction of scalars along a locally bijective constant-ring unit is an equivalence,
 compatible with constants and slice restriction.
 
-Source: Stacks Project, Modules on Sites, Tag 093I; Cohomology on Sites, Tag 03FD.
-
-Proof: retain the section modules and restrict their scalar actions along the ring unit.
-The module-sheafification counit makes this functor inverse to extension of scalars.
-The constant-presheaf unit gives the comparison on constants. Restricting a scalar action
-and restricting to a slice commute sectionwise, including on morphisms. -/
+Source: Stacks Project, Modules on Sites, Tag 093I; Cohomology on Sites, Tag 03FD. -/
 theorem site_moduleSheaf_restriction_equivalence
     (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
     (R : Sheaf J RingCat.{u})

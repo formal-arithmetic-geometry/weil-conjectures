@@ -176,10 +176,7 @@ private theorem liftedResolutions [Abelian.HasKInjectiveResolutions A]
 
 variable [HasDerivedCategory.{max b v} (ModuleCat.{max b v} (ULift.{v} B))]
 
-/-- The lifted native Hom map depends only on the two homotopy classes.
-Proof: transport homotopy invariance of the global resolution roof through the
-explicit cochain isomorphism for the lifted Hom universe.
-Source: Stacks 09L9, 070I and 070Y. -/
+/-- The lifted native Hom map depends only on the two homotopy classes. -/
 theorem native_homotopy_invariance [Abelian.HasKInjectiveResolutions A]
     {X X' Y Y' : CochainComplex A ℤ} (f f' : X' ⟶ X) (g g' : Y ⟶ Y')
     (hf : Nonempty (Homotopy f f')) (hg : Nonempty (Homotopy g g')) :
@@ -242,9 +239,7 @@ def homotopyFunctor [Abelian.HasKInjectiveResolutions A] :
       (f.1.unop.out.op, f.2.out) (g.1.unop.out.op, g.2.out)
 
 /-- The descended Hom bifunctor agrees with ordinary Hom on quotient arrows.
-Source: Stacks 070I.
-Proof: each chosen representative of a quotient arrow is homotopic to the original
-chain map, so homotopy invariance gives the equality. -/
+Source: Stacks 070I. -/
 theorem homotopyFunctor_map_quotient [Abelian.HasKInjectiveResolutions A]
     {X X' Y Y' : CochainComplex A ℤ} (f : X' ⟶ X) (g : Y ⟶ Y') :
     (homotopyFunctor B A).map
@@ -331,11 +326,7 @@ private theorem nativeUnit_apply [HasDerivedCategory.{w} (ULiftHom.{b} A)]
   rfl
 
 /-- Ordinary composition and scalar identities have their actual cochain formulas.
-Source: Stacks 09L9 and 070I.
-Proof: apply the global Hom roof theorem to the category with lifted Hom universes.
-Transport its composition and unit through the explicit degreewise cochain isomorphism.
-Naturality of the tensor summand inclusions proves the composition formula; evaluation
-of the unit gives the scalar identity. The formulas determine these maps uniquely. -/
+Source: Stacks 09L9 and 070I. -/
 theorem ordinaryOperations_exists [Abelian.HasKInjectiveResolutions A] :
     ∃ (comp : ∀ X Y Z : CochainComplex A ℤ,
         DerivedMappingOrdinaryHom.complex B Y Z ⊗ DerivedMappingOrdinaryHom.complex B X Y ⟶
@@ -377,8 +368,7 @@ def ordinaryIdentity [Abelian.HasKInjectiveResolutions A] (X : CochainComplex A 
   (ordinaryOperations_exists B A).choose_spec.choose X
 
 /-- The recorded ordinary composition has the literal cochain composition formula.
-Source: Stacks 09L9.
-Proof: use the pure-tensor characterization of the constructed operations. -/
+Source: Stacks 09L9. -/
 theorem ordinaryComposition_apply [Abelian.HasKInjectiveResolutions A]
     (X Y Z : CochainComplex A ℤ) (a d n : ℤ) (h : a + d = n)
     (g : (DerivedMappingOrdinaryHom.complex B Y Z).X a)
@@ -390,18 +380,14 @@ theorem ordinaryComposition_apply [Abelian.HasKInjectiveResolutions A]
   (ordinaryOperations_exists B A).choose_spec.choose_spec.1 X Y Z a d n h g f
 
 /-- The recorded ordinary identity sends a scalar to the scalar identity cochain.
-Source: Stacks 09L9.
-Proof: use the degree-zero characterization of the constructed operations. -/
+Source: Stacks 09L9. -/
 theorem ordinaryIdentity_apply [Abelian.HasKInjectiveResolutions A]
     (X : CochainComplex A ℤ) (a : ULift.{v} B) :
     ((ordinaryIdentity B A X).f 0 a).down = a.down • Cochain.ofHom (𝟙 X) :=
   (ordinaryOperations_exists B A).choose_spec.choose_spec.2 X a
 
 /-- The homogeneous pure-tensor formula determines ordinary composition uniquely.
-Source: Stacks 09L9.
-Proof: in every degree, the graded tensor inclusions determine a map out of the total
-tensor complex. Pure tensors determine each such module map. The given formula and
-the recorded composition formula agree on all of them. -/
+Source: Stacks 09L9. -/
 theorem ordinaryComposition_unique [Abelian.HasKInjectiveResolutions A]
     (X Y Z : CochainComplex A ℤ)
     (c : DerivedMappingOrdinaryHom.complex B Y Z ⊗
@@ -430,9 +416,7 @@ theorem ordinaryComposition_unique [Abelian.HasKInjectiveResolutions A]
   exact (hc a d n h g f).trans (ordinaryComposition_apply B A X Y Z a d n h g f).symm
 
 /-- The degree-zero scalar formula determines the ordinary identity uniquely.
-Source: Stacks 09L9.
-Proof: maps out of a complex concentrated in degree zero are determined in that degree.
-The stated scalar formula agrees pointwise with the recorded identity. -/
+Source: Stacks 09L9. -/
 theorem ordinaryIdentity_unique [Abelian.HasKInjectiveResolutions A]
     (X : CochainComplex A ℤ)
     (c : (CochainComplex.singleFunctor (ModuleCat.{max b v} (ULift.{v} B)) (0 : ℤ)).obj
@@ -450,9 +434,7 @@ theorem ordinaryIdentity_unique [Abelian.HasKInjectiveResolutions A]
 
 /-- Source-resolution precomposition is a quasi-isomorphism into a K-injective target,
 with both source and target Hom groups in the original independent universes.
-Source: Stacks 070I.
-Proof: lift the category's Hom universe, apply the precomposition assertion of the
-global Hom roof to the lifted resolution, and conjugate by the cochain isomorphisms. -/
+Source: Stacks 070I. -/
 theorem precomp_quasiIso [Abelian.HasKInjectiveResolutions A]
     {X I J : CochainComplex A ℤ} (s : X ⟶ I)
     [QuasiIso s] [I.IsKInjective] [J.IsKInjective] :
@@ -516,9 +498,7 @@ def representativeMap [Abelian.HasKInjectiveResolutions A]
   Quot.out ((HomotopyCategory.KInjectives.equivalence A).inverse.map f).hom
 
 /-- Representative maps intertwine their fixed comparison isomorphisms.
-Source: Stacks 070I.
-Proof: apply naturality of the quotient comparison, then naturality of the counit of
-the K-injective equivalence. -/
+Source: Stacks 070I. -/
 theorem representativeMap_naturality [Abelian.HasKInjectiveResolutions A]
     {P Q : DerivedCategory A} (f : P ⟶ Q) :
     DerivedCategory.Q.map (representativeMap A f) ≫ (representativeIso A Q).hom =
@@ -549,8 +529,7 @@ theorem representativeMap_naturality [Abelian.HasKInjectiveResolutions A]
   rw [hc, Category.assoc]
 
 /-- On arrows the constructed bifunctor applies ordinary Hom to the recorded maps.
-Source: Stacks 070I.
-Proof: unfold the composite functor and the chosen representatives of quotient arrows. -/
+Source: Stacks 070I. -/
 theorem derivedHom_map [Abelian.HasKInjectiveResolutions A]
     {P P' Q Q' : DerivedCategory A} (f : P' ⟶ P) (g : Q ⟶ Q') :
     (derivedHom B A).map (X := (Opposite.op P, Q)) (Y := (Opposite.op P', Q')) (f.op, g) =
@@ -559,8 +538,7 @@ theorem derivedHom_map [Abelian.HasKInjectiveResolutions A]
 
 /-- The fixed representative admits an augmentation whose derived arrow is the
 inverse of the recorded comparison isomorphism.
-Source: Stacks 070I.
-Proof: maps into a K-injective are represented by actual chain maps. -/
+Source: Stacks 070I. -/
 theorem augmentation_exists [Abelian.HasKInjectiveResolutions A]
     (X : CochainComplex A ℤ) :
     ∃ s : X ⟶ representative A (DerivedCategory.Q.obj X),
@@ -576,26 +554,21 @@ def augmentation [Abelian.HasKInjectiveResolutions A] (X : CochainComplex A ℤ)
   (augmentation_exists A X).choose
 
 /-- The chosen chain map has exactly the specified image in the derived category.
-Source: Stacks 070I.
-Proof: use the specification of the choice. -/
+Source: Stacks 070I. -/
 theorem augmentation_eq [Abelian.HasKInjectiveResolutions A] (X : CochainComplex A ℤ) :
     DerivedCategory.Q.map (augmentation A X) =
       (representativeIso A (DerivedCategory.Q.obj X)).inv :=
   (augmentation_exists A X).choose_spec
 
 /-- These augmentations are quasi-isomorphisms.
-Source: Stacks 070I.
-Proof: their localized images are the inverse comparison isomorphisms. -/
+Source: Stacks 070I. -/
 theorem augmentation_quasiIso [Abelian.HasKInjectiveResolutions A]
     (X : CochainComplex A ℤ) : QuasiIso (augmentation A X) := by
   rw [← DerivedCategory.isIso_Q_map_iff_quasiIso, augmentation_eq]
   infer_instance
 
 /-- Equality after localization into a K-injective target gives an actual homotopy.
-Source: Stacks 070I.
-Proof: conjugate the equality through the quotient comparison. The map from homotopy
-classes into a K-injective is injective, and equality in the homotopy quotient means
-there is a chain homotopy. -/
+Source: Stacks 070I. -/
 theorem homotopy_of_Q_eq {X I : CochainComplex A ℤ} [I.IsKInjective]
     (f g : X ⟶ I) (h : DerivedCategory.Q.map f = DerivedCategory.Q.map g) :
     Nonempty (Homotopy f g) := by
@@ -610,9 +583,7 @@ theorem homotopy_of_Q_eq {X I : CochainComplex A ℤ} [I.IsKInjective]
     (fun t ↦ (DerivedCategory.quotientCompQhIso A).hom.app X ≫ t) h).trans hg.symm)
 
 /-- Augmentations commute with representative maps up to an actual chain homotopy.
-Source: Stacks 070I.
-Proof: localize the two composites, use the prescribed augmentation images and
-naturality of the representative isomorphism, and use injectivity into the target model. -/
+Source: Stacks 070I. -/
 theorem augmentation_naturality [Abelian.HasKInjectiveResolutions A]
     {X Y : CochainComplex A ℤ} (f : X ⟶ Y) :
     Nonempty (Homotopy (augmentation A X ≫ representativeMap A (DerivedCategory.Q.map f))
@@ -640,9 +611,7 @@ def comparisonApp [Abelian.HasKInjectiveResolutions A] (X Y : CochainComplex A �
       (𝟙 (representative A (DerivedCategory.Q.obj Y)))))
 
 /-- The explicit comparison satisfies its defining two-sided roof equation.
-Source: Stacks 070I.
-Proof: source precomposition is invertible into the target representative; cancel its
-inverse in the definition of the comparison. -/
+Source: Stacks 070I. -/
 theorem comparisonApp_roof [Abelian.HasKInjectiveResolutions A]
     (X Y : CochainComplex A ℤ) :
     comparisonApp B A X Y ≫
@@ -657,11 +626,7 @@ theorem comparisonApp_roof [Abelian.HasKInjectiveResolutions A]
   simp [comparisonApp, Category.assoc]
 
 /-- The explicit two-sided roof is natural in both complexes.
-Source: Stacks 070I.
-Proof: postcompose with the invertible source-resolution map at the output pair.
-Use the roof equations. The two augmentation squares commute up to the actual
-homotopies already constructed; homotopy invariance of ordinary Hom identifies their
-localized images. Functoriality of ordinary Hom then gives the desired square. -/
+Source: Stacks 070I. -/
 theorem comparisonApp_naturality [Abelian.HasKInjectiveResolutions A]
     {X X' Y Y' : CochainComplex A ℤ} (f : X' ⟶ X) (g : Y ⟶ Y') :
     DerivedCategory.Q.map (DerivedMappingOrdinaryHom.map B f g) ≫
@@ -740,10 +705,7 @@ def comparison [Abelian.HasKInjectiveResolutions A] :
   naturality {_ _} f := comparisonApp_naturality B A f.1.unop f.2
 
 /-- Into a K-injective target, the explicit ordinary-to-derived comparison is invertible.
-Source: Stacks 070I.
-Proof: the target augmentation is a quasi-isomorphism between K-injectives, hence a
-homotopy equivalence. The descended Hom functor therefore sends it to an isomorphism.
-The denominator of the comparison roof is invertible by source precomposition. -/
+Source: Stacks 070I. -/
 theorem comparison_resolved [Abelian.HasKInjectiveResolutions A]
     (X Y : CochainComplex A ℤ) [Y.IsKInjective] :
     IsIso ((comparison B A).app (Opposite.op X, Y)) := by
@@ -776,8 +738,7 @@ theorem comparison_resolved [Abelian.HasKInjectiveResolutions A]
   infer_instance
 
 /-- This bifunctor is computed by the ordinary linear Hom of the recorded representatives.
-Source: Stacks 070I and 09L9.
-Proof: unfold the composite bifunctor and the K-injective inverse equivalence. -/
+Source: Stacks 070I and 09L9. -/
 theorem derivedHom_obj [Abelian.HasKInjectiveResolutions A] (P Q : DerivedCategory A) :
     (derivedHom B A).obj (Opposite.op P, Q) =
       DerivedCategory.Q.obj

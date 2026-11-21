@@ -56,8 +56,7 @@ def targetShift (X Y : CochainComplex A ℤ) (a : ℤ) :
       simp only [smul_smul, Int.units_mul_self, one_smul])
 
 /-- On families of morphisms, the shift is precisely Mathlib's `rightUnshift`.
-Source: Stacks 09L9.
-Proof: evaluate the component isomorphism; the degree-reindexing isomorphism is the identity. -/
+Source: Stacks 09L9. -/
 theorem targetShift_apply (X Y : CochainComplex A ℤ) (a n : ℤ)
     (x : (complex B X (Y⟦a⟧)).X n) :
     (((complex B X Y).shiftFunctorObjXIso a n (n + a) rfl).hom

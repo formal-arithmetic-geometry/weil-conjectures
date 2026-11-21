@@ -45,15 +45,7 @@ variable (u : Underived.{c, v, r, d, vd, s} J R J' R' U)
 omit [PreservesFiniteLimits U] [PreservesFiniteColimits U]
 -- Component checking traverses the totalization and sheaf tensor instances.
 /-- The total-tensor comparison commutes with the signed chain swaps.
-Source: Stacks 0FPT and 06YU.
-
-Proof: precompose with the inverse comparison, then test every target coproduct
-summand. The summand law expresses its inverse as the inverse underived tensor
-comparison followed by the image of the source inclusion. Rewrite the source
-signed swap, preserve its integer scalar by additivity, and apply the underived
-symmetry square. Cancel the inverse tensor comparison. The target signed swap
-has precisely the resulting summand restriction. This proves equality of the
-component maps and hence of chain maps, without assuming coproduct preservation. -/
+Source: Stacks 0FPT and 06YU. -/
 theorem ringed_forget_tensor_chain_symmetry
     (chain : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅
       ((U.mapHomologicalComplex (.up ℤ)).prod (U.mapHomologicalComplex (.up ℤ))) ⋙

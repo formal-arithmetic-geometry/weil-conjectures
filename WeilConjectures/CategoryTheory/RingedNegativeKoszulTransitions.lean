@@ -44,9 +44,7 @@ def ringedNegativeKoszulFactorTransitionF
   else 0
 
 /-- The only nonzero chain square is b times b^(m+1) = b^(m+2).
-Source: Stacks, Tag 0A0E.
-Proof: in degree -1 use the power identity; outside that degree both differentials
-vanish by the two-term support. No scalar is inverted. -/
+Source: Stacks, Tag 0A0E. -/
 theorem ringedNegativeKoszulFactorTransitionF_comm
     (b : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) (n k : ℤ)
     (h : (ComplexShape.up ℤ).Rel n k) :
@@ -87,10 +85,7 @@ def ringedNegativeKoszulTransition : (r : ℕ) →
       ((ringedKoszulTensor O).obj _).map (ih (fun i ↦ b i.succ) m)) r
 
 /-- The empty negative tensor is the dual of the empty positive tensor.
-Source: Stacks, Tag 0A0E, the empty finite free complex.
-Proof: inverse Hom-unit evaluation identifies O[0] with Hom(O[0],O[0]).
-Both transitions are identities. The positive projection is identity, so its
-dual unit is this same inverse evaluation; the empty basis is the single unit. -/
+Source: Stacks, Tag 0A0E, the empty finite free complex. -/
 theorem ringedNegativeKoszulZeroDuality
     (b : Fin 0 → (O.obj ⋙ forget CommRingCat).sections) :
     ∃ e : ∀ m : ℕ, ringedNegativeKoszul O 0 b m ≅

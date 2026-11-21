@@ -17,7 +17,9 @@ import WeilConjectures.CategoryTheory.Abelian.ExtRightDerivedHom
 /-!
 # Object cohomology as derived sections
 
-Source: Stacks Project, Cohomology on Sites, Section 01FT.
+## References
+
+* Stacks Project, Cohomology on Sites, Section 01FT.
 -/
 
 @[expose] public section
@@ -72,18 +74,7 @@ private noncomputable def sectionsIso
     exact sectionsEquiv_naturality J U f a)
 
 /-- Ext cohomology over an object agrees naturally with the right derived sections functor.
-Source: Stacks Project, Cohomology on Sites, Section 01FT.
-
-Proof: the free abelian sheaf on the representable of `U` represents sections over `U`.
-Indeed, sheafification adjunction, the free-abelian/forgetful adjunction, and Yoneda
-identify morphisms from this sheaf to `F` with `F(U)`, naturally and additively in `F`.
-Apply these identifications degreewise to an injective resolution of `F`. Ext from the
-representing sheaf is the cohomology of its Hom complex, which is consequently the
-complex of sections of the resolution. This computes the right derived sections.
-Comparison maps lifting morphisms of sheaves commute with the degreewise identification;
-homotopic comparison maps induce equal maps on cohomology. The resulting isomorphisms
-are therefore natural in `F`, giving the displayed natural isomorphism in every degree.
-No compactness or nonemptiness of `U` is required. -/
+Source: Stacks Project, Cohomology on Sites, Section 01FT. -/
 theorem nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}]

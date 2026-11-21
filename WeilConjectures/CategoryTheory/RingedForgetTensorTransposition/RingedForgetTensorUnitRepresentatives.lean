@@ -76,20 +76,7 @@ def ringedForgetTensorUnitIso :
 constructed degree-zero unit comparison. No assertion is made on other objects,
 or about associators or symmetry.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0FPT and 06YU.
-
-Proof: the coefficient ring placed in degree zero is flat-term K-flat. Apply the
-representative square to it and P. Substitute the displayed composite defining
-ringedForgetTensorUnitIso, and use the left-unitor-model equations of cB and cA.
-Naturality of the tensor model for the degree-zero unit isomorphism and the
-exact-functor localization factor reduces the equation to the localized chain
-unit square. In degree n, restrict to the (0,n) summand; all other summands
-vanish since the single complex is zero away from zero. The summand equation
-and the single-complex comparison reduce the square to u.coherence.left_unit.
-The sheafification universal property and local pure tensors detect the
-structural maps, without requiring global generation. The right-unit proof is
-the same calculation on (n,0), using cB.rightUnitor_model, cA.rightUnitor_model
-and u.coherence.right_unit. -/
+Source: Stacks Project, sites-cohomology.tex, Tags 0FPT and 06YU. -/
 theorem ringed_forget_tensor_unit_representatives
     (hU : ∀ P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ,
       P.IsKFlatIndependentCoefficients →

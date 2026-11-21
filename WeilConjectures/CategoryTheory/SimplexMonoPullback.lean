@@ -12,8 +12,9 @@ import Mathlib.Tactic
 /-!
 # Nonempty intersections of simplex faces
 
-Source: Stacks, Tag 0164, the category of finite nonempty ordered sets. The range
-and intersection arguments below are agent-written consequences of this definition.
+## References
+
+* Stacks Project, Tag 0164, the category of finite nonempty ordered sets.
 -/
 
 @[expose] public section

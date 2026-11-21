@@ -84,18 +84,7 @@ private def constantRestrictionIso {X Y : D} (f : X ⟶ Y) (M : ModuleCat.{w} R)
 
 /-- A finite module local system stays such under inverse image along a continuous
 finite-limit-preserving functor of small sites.
-Source: Stacks Project, Sites, Tags 00YV and 00XZ.
-
-Proof: Apply the local-system hypothesis to the terminal object. Send its trivializing
-sieve along the site functor; continuity makes the generated sieve covering. Pull it back
-along the unique arrow from an arbitrary target object to the image terminal object.
-Every arrow of this cover factors through the image of a trivializing object. Restriction
-of inverse image to that image object is inverse image on the localized sites: take mates
-of the product-preservation square to obtain this comparison. The localized functor
-preserves the terminal object and therefore sends the constant sheaf of M to the constant
-sheaf of the same M. Restrict along the factorization arrow; localization commutes with
-constant sheafification. The finite generation of M is unchanged. This also works for
-empty covering sieves, since no covering member is then asserted to exist. -/
+Source: Stacks Project, Sites, Tags 00YV and 00XZ. -/
 theorem coefficient_finite_local_systems_pullback
     (F : Sheaf J (ModuleCat.{w} R))
     (hF : IsCoefficientModelLocallyConstantFinite J R F) :

@@ -22,10 +22,7 @@ namespace CategoryTheory.ShortComplex
 
 variable {C : Type*} [Category C] [HasZeroMorphisms C]
 
-/-- If the middle term is simple, a short exact sequence has a zero endpoint.
-Proof: its first map is either zero or an isomorphism by simplicity. A zero mono
-has zero source. If it is an isomorphism, cancellation makes the second map zero,
-and a zero epi has zero target. -/
+/-- If the middle term is simple, a short exact sequence has a zero endpoint. -/
 theorem ShortExact.isZero_left_or_right {S : ShortComplex C} (hS : S.ShortExact)
     [Simple S.X₂] : IsZero S.X₁ ∨ IsZero S.X₃ := by
   have : Mono S.f := hS.mono_f

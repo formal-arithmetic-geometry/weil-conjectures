@@ -215,21 +215,7 @@ end
 including every transition map. This involves ordinary complexes and arbitrary
 coefficients, and does not assert a quasi-isomorphism or a limit comparison.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A; more-algebra.tex, Tag 0913.
-
-Proof: the positive one-generator complex has two rank-one terms. Evaluation
-identifies the Hom from either term with the corresponding coefficient term.
-For an ordered tensor of r such complexes, expand the finite sums indexed by
-subsets of Fin r and evaluate on each rank-one term. In coefficient degree q
-and source degree p, include the total-complex sign so that the two differential
-terms agree with d(f)=d_I f-(-1)^degree(f) f d_P. Finite sums are also products,
-so these component identifications assemble into an invertible chain map from
-Hom(P_m,I) to I tensor Hom(P_m,O[0]). Evaluation is natural in the source complex:
-precomposition by P_m -> P_(m+1) agrees with tensoring its dual transition map.
-Consequently the chain isomorphisms form a natural isomorphism of inverse towers.
-The empty list uses evaluation for O[0] and the ordinary tensor unitor. Zero or
-invertible generators require no separate argument because evaluation uses no
-inversion of a generator. -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0A0A; more-algebra.tex, Tag 0913. -/
 theorem exists_ringedKoszul_finiteHomTower_iso
     (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (I : ringedSiteComplex O) :

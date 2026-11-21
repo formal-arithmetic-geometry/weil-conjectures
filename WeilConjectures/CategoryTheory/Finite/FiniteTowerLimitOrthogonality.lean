@@ -259,20 +259,7 @@ attribute [local irreducible] DerivedCategory.singleFunctors
 /-- Finite-torsion tower limits are orthogonal to objects on which the scalar is invertible,
 both before and after exact, product-preserving, conservative scalar restriction.
 
-Source: the completeness step of the diagonal tower limit proof, paragraphs (1) and (3),
-and the countable-product telescope argument of Stacks 099L/099M.
-
-Proof: on a countable power use the difference operator 1 minus l times the shift.
-For an object killed by a power of l this operator has a finite geometric inverse.
-Countable powers preserve limits, so the operator is invertible on each displayed
-tower limit. Product preservation and conservativity reflect this property to P and Q.
-Exact countable products and K-injective resolutions make the single-complex functor
-preserve products. Any map from an l-invertible object can then be divided successively
-by l, producing an element of the kernel of this invertible difference operator;
-its zeroth component is the original map, hence is zero. Shift equivalences preserve
-this orthogonality. The canonical single-complex and shift comparisons give the two
-assertions after derived scalar restriction. No epimorphic-transition assumption is needed.
--/
+Source: Stacks 099L, 099M. -/
 theorem finite_tower_limit_orthogonality
     {A : Type a} [Category.{v} A] [Abelian A] [HasCountableProducts A]
     [HasExactLimitsOfShape (Discrete ℕ) A] [HasDerivedCategory.{w} A]

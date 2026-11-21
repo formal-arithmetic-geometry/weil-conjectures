@@ -19,24 +19,7 @@ Noetherian ring: a dualizable object of `D(R)` is perfect
 (`DerivedCategory.isPerfect_of_isDualizable`). Together, perfectness and dualizability agree
 (`DerivedCategory.isPerfect_iff_isDualizable`).
 
-## Strategy
-
-Let `C` be dualizable, with right dual `D`, and represent `C` by a complex `L`.
-
-1. Maps `C ⟶ Z` correspond to maps `𝟙 ⟶ Z ⊗ D`. Represent `D` by a K-flat complex `F` of flat
-   modules. A map `𝟙 ⟶ Q(L) ⊗ D = Q(L ⊗ F)` is given by a cocycle `x` of degree `0` of the
-   complex `L ⊗ F`, as `𝟙 = R[0]` is K-projective. The element `x` comes from a subcomplex
-   `L' ⊗ F` with `L'` a subcomplex of `L` with finitely generated terms, vanishing outside a
-   finite interval, and it is a cocycle there since `L' ⊗ F ⟶ L ⊗ F` is injective. Applied to
-   the identity of `C`, this shows that `C` is a retract of `Q(L')`
-   (`DerivedCategory.exists_retract_of_exactPairing`).
-2. Over a Noetherian ring, `C` is then bounded with finitely generated cohomology. So is its dual
-   `D`, which is again dualizable. If `C` vanishes above `b` and `D` vanishes above `b'`, then
-   `C` has Tor amplitude in `[-b', b]`: maps `Y ⟶ C ⊗ᴸ M` correspond to maps `D ⊗ᴸ Y ⟶ M`.
-3. A bounded complex with finitely generated cohomology and finite Tor amplitude is perfect
-   (`DerivedCategory.isPerfect_of_finiteTorAmplitude`).
-
-## Main statements
+## Main results
 
 - `DerivedCategory.exists_retract_of_exactPairing`: a dualizable object of `D(R)` is a retract
   of a bounded complex with finitely generated terms.
@@ -102,13 +85,7 @@ noncomputable def unitIsoQObjUnitComplex :
 /-- **A dualizable object is a retract of a finite complex.** Let `C` be an object of `D(R)`
 with a right dual `D`, represented by a complex `L`. Then the isomorphism `C ≅ Q(L)` factors
 through `Q(L')` for a subcomplex `L'` of `L` with finitely generated terms, vanishing outside a
-finite interval.
-
-The coevaluation `𝟙 ⟶ C ⊗ D ≅ Q(L ⊗ F)`, where `F` is a K-flat complex of flat modules
-representing `D`, is given by a cocycle of `L ⊗ F` of degree `0`, as `𝟙 = R[0]` is
-K-projective. This cocycle comes from `L' ⊗ F` for a finite subcomplex `L'` of `L`, so the
-coevaluation factors through `Q(L') ⊗ D`, and the zigzag identity factors `C ≅ Q(L)` through
-`Q(L')`. -/
+finite interval. -/
 theorem exists_retract_of_exactPairing (C D : DerivedCategory (ModuleCat.{u} R))
     [ExactPairing C D] (L : CochainComplex (ModuleCat.{u} R) ℤ) (e : C ≅ Q.obj L) :
     ∃ (N : L.SubcomplexFamily) (_ : N.IsFinite) (w : C ⟶ Q.obj (CochainComplex.subcomplex N)),
@@ -204,15 +181,10 @@ theorem exists_homologyConcentratedIn_and_finite_of_exactPairing [IsNoetherianRi
     exact Module.Finite.of_surjective ((H i).map r).hom
       ((ModuleCat.epi_iff_surjective _).1 inferInstance)
 
-/-- a dualizable point complex is perfect.
+/-- A dualizable point complex is perfect.
 
 Over a Noetherian ring `R`, an object `C` of `D(R)` which is dualizable for the derived tensor
-product is quasi-isomorphic to a bounded complex of finitely generated projective modules. `C`
-and its dual are retracts of bounded complexes of finitely generated modules
-(`DerivedCategory.exists_retract_of_exactPairing`), so they are bounded with finitely generated
-cohomology, and `C` has finite Tor amplitude
-(`DerivedCategory.torAmplitudeIn_of_exactPairing_of_isLE`); such a complex is perfect
-(`DerivedCategory.isPerfect_of_finiteTorAmplitude`). -/
+product is quasi-isomorphic to a bounded complex of finitely generated projective modules. -/
 theorem isPerfect_of_isDualizable [IsNoetherianRing R] {C : DerivedCategory (ModuleCat.{u} R)}
     (hC : IsDualizable C) : C.IsPerfect := by
   obtain ⟨_⟩ := hC

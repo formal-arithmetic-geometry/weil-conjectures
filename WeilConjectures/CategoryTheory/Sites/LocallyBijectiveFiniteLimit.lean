@@ -66,21 +66,7 @@ private theorem section_exists
 /-- Finite limits of componentwise locally bijective morphisms of abelian
 presheaves are locally bijective.
 
-Source: Stacks Project, Tag 00WJ refinement argument, and Tag 03CN.
-
-Proof: limits are computed sectionwise. For local injectivity, project two
-sections to every component and intersect the finitely many covering equality
-sieves supplied by local injectivity. The limit projections jointly detect
-equality on this covering. For local surjectivity, intersect the image sieves
-of all components of a target section. On any arrow of this covering choose
-component lifts. For each diagram arrow, naturality and compatibility of the
-target section show that the corresponding two source components have equal
-images. Local injectivity gives a covering equality sieve for this equation.
-Intersect these sieves for the finitely many diagram arrows. On this refinement
-the lifts are compatible and hence give a section of the source limit. Its image
-is the restricted target section by joint injectivity of limit projections.
-Transitivity of coverings gives local surjectivity on the original object.
-For an empty diagram both limits are terminal and the comparison is invertible. -/
+Source: Stacks Project, Tag 00WJ refinement argument, and Tag 03CN. -/
 theorem locallyBijective_limMap
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     {K : Type} [SmallCategory K] [FinCategory K]

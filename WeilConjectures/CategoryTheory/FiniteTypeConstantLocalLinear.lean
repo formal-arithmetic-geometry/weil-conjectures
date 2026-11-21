@@ -25,14 +25,7 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 
 /-- A morphism between restricted constant module sheaves, with finite source, is locally
 induced by a linear map over the original coefficient ring.
-Source: Stacks Project, Modules on Sites, Tags 093T and 093U (3).
-
-Proof: Over a Noetherian ring the finite source module is finitely presented. The two
-constant-module sheafification constructions agree definitionally. Apply local
-surjectivity of the constant local-Hom comparison to the given map on the slice.
-Its image sieve covers the base object. On a member of this sieve, the resulting
-linear map induces the restriction of the original map, by the local-Hom equivalence.
-This also handles empty-cover members without a nondegeneracy assumption. -/
+Source: Stacks Project, Modules on Sites, Tags 093T and 093U (3). -/
 theorem exists_cover_constant_linearMap (M N : ModuleCat.{u} B) [Module.Finite B M] (U : C)
     (a : ((strictPerfectConstantSheaf J B).obj M).over U ⟶
       ((strictPerfectConstantSheaf J B).obj N).over U) :

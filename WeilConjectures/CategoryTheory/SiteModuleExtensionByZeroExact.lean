@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Exact module extension by zero with an independent ring universe
 
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DI and 03DJ.
 -/
 
 @[expose] public noncomputable section
@@ -222,19 +224,7 @@ private noncomputable def extensionSheafAdjunction
 
 /-- Extension by zero is exact and left adjoint to restriction, with no identification
 of the ring universe and the site universes.
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ.
-
-Proof: A map from the direct-sum presheaf is uniquely a compatible map from every
-summand. Evaluating the corresponding restriction map on a slice object, and inserting
-its structure-map summand, gives inverse Hom correspondences. Sheafification extends
-this correspondence to module sheaves, producing the adjunction. Restriction is additive
-sectionwise, so its left adjoint is additive. It preserves finite colimits by adjunction.
-Evaluation of a sheaf monomorphism is injective; the direct sum of these injections is
-injective. Hence presheaf extension preserves monomorphisms. Left exact sheafification
-preserves them as well. An additive right exact functor preserving monomorphisms is
-exact, which gives finite-limit preservation. This argument works for any object U;
-subterminality and a cover are not required, including empty sites and zero rings.
--/
+Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ. -/
 theorem siteModuleExtensionByZero_exact
     [HasSheafify (J.over U) AddCommGrpCat.{max c v r}]
     [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}] :

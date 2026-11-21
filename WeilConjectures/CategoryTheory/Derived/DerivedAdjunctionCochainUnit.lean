@@ -25,11 +25,7 @@ namespace CategoryTheory
 /-- For an exact additive left adjoint, the canonical derived unit agrees with the
 ordinary cochain unit followed by the universal right-derived comparison.
 Source: Stacks Project, derived.tex, Tags 0DVC and 09T5.
-Proof: apply the normalized derived-unit equation on the homotopy category to the
-quotient of E. The exact-functor factorization there is the cochain factorization
-conjugated by quotientCompQhIso. Naturality of the derived unit transports its
-source along that isomorphism; the inverse-hom identities cancel the intermediate
-comparison. The remaining composite is precisely rightDerivedFunctorUnitQ. -/
+-/
 theorem derived_unit_cochain
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]

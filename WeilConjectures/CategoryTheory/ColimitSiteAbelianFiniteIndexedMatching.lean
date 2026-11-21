@@ -119,31 +119,7 @@ private theorem finite_refinement
 
 /-- A finite indexed family becomes matching under the prescribed stage comparison.
 Source: Stacks Project, Sites, Tag 0A35 matching equalizer paragraph
-and the unit-compatible adjunction paragraph; Modules on Sites, Tag 03CO.
-
-Proof: For each ordered pair of arrows in the finite set T.uncurry take its
-covering pullback at t.right. Apply the named pairwise eventual matching theorem
-to its two projections to obtain a transition equating those two restrictions.
-This is the sole open step; its module documents the independent section-colimit
-route and avoids the cyclic stage-image-sheaf construction.
-
-There are finitely many ordered pairs. Uniqueness of adjuncts using h-theta
-proves the composition law of theta, including endpoint equality transports.
-Hence every equality persists under further transition. Induct on the finite
-set of pairs: for a new pair use IsFiltered.span in Under i to combine its
-witnessing arrow out of t with the common arrow for the previous pairs. The
-commuting span and persistence preserve all equations. The empty finite set
-uses the identity arrow. This gives one transition b killing all differences.
-Naturality of theta identifies these images with restrictions of
-the indexed transitioned sections along the mapped pullback projections.
-By hpullback the mapped square is a pullback. Any pair of arrows to the mapped
-cover with equal composites factors through that square, so restricting its
-established equality proves Arrows.Compatible for the indexed family. No choice
-of a family on the image presieve, cover-membership conclusion, cocone endpoint
-equality, or alpha formula for refined arrows is part of this lemma. An empty
-T has a vacuously matching indexed family and b can be the identity; duplicates
-are allowed and are included among the finitely many pairs.
--/
+and the unit-compatible adjunction paragraph; Modules on Sites, Tag 03CO. -/
 theorem colimit_site_abelian_finite_indexed_matching
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

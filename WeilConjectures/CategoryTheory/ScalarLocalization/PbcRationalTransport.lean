@@ -58,11 +58,7 @@ def transportHom (K L : C) :
       (Localization.Away p ⊗[R] (F.obj K ⟶ F.obj L)) :=
   (F.mapLinearMap R).baseChange (Localization.Away p)
 
-/-- The tensor Hom maps preserve identities and composition.
-Proof: the pure-tensor formula for baseChange sends a tensor a ⊗ f to a ⊗ F(f).
-The composition formula reduces preservation of composition on pure tensors to that
-of F and multiplication of scalars. Bilinearity extends it to finite sums. Identities
-are tensors of the integral identities with one. -/
+/-- The tensor Hom maps preserve identities and composition. -/
 theorem transport_laws :
     (∀ K : C, transportHom R p F K K ((1 : Localization.Away p) ⊗ₜ[R] 𝟙 K) =
       (1 : Localization.Away p) ⊗ₜ[R] 𝟙 (F.obj K)) ∧
@@ -97,10 +93,7 @@ instance transportAdditive : (transport R p F).Additive where
 instance transportLinear : (transport R p F).Linear (Localization.Away p) where
   map_smul {K L} f a := (transportHom R p F K.obj L.obj).map_smul a f
 
-/-- Uniqueness among linear functors agreeing on integral objects and morphisms.
-Proof: a pure tensor is a times the integral tensor with one. Linearity forces its
-image; additivity forces the image of every finite sum. The object equalities and
-these Hom equalities give equality of functors by functor extensionality. -/
+/-- Uniqueness among linear functors agreeing on integral objects and morphisms. -/
 theorem transport_unique (H : ScalarLocalization R C p ⥤ ScalarLocalization R D p)
     [H.Additive] [H.Linear (Localization.Away p)]
     (hobj : ∀ K : C, H.obj ⟨K⟩ = ⟨F.obj K⟩)
@@ -142,9 +135,7 @@ theorem transport_unique (H : ScalarLocalization R C p ⥤ ScalarLocalization R 
 
 variable {F} {G : C ⥤ D} [G.Additive] [G.Linear R]
 
-/-- Naturality after scalar extension, for the prescribed components.
-Proof: on a pure tensor, both sides are the integral naturality equation tensored
-with its scalar. Additivity proves the equation for a sum of pure tensors. -/
+/-- Naturality after scalar extension, for the prescribed components. -/
 theorem transportNat_naturality (η : F ⟶ G) (K L : ScalarLocalization R C p)
     (f : K ⟶ L) :
     (transport R p F).map f ≫ ((1 : Localization.Away p) ⊗ₜ[R] η.app L.obj) =

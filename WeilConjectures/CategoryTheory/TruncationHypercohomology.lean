@@ -49,40 +49,7 @@ private noncomputable def singleComparison
 /-- The six assertions of the truncation hypercohomology theorem, including the
 canonical maps to the abutment, the natural second-page comparison, and the map
 on graded pieces induced by the iterated couple.
-Source: Stacks Tags 015J, 05TC,
-011Q, 011R, 011T, 0BDU, 0BDV, 012U.
-
-Proof, following the seven steps of the node:
-1. `lem-sp-truncation-couple-exact` gives exactness of the three structure maps
-   of `def-sp-truncation-couple`. `lem-sp-derived-couple-exact` gives exactness
-   after every derivation, with differential of bidegree (r,1-r).
-2. `lem-sp-shift-identification` identifies the shifted single cohomology
-   complex with its degree-zero version and then with the ordinary right derived
-   functor. Both comparisons are natural; their composite is the comparison below.
-3. `lem-weil-pbc-truncation-cohomology` makes the truncation acyclic for q<a.
-   `lem-weil-pbc-derived-functor-negative-vanishing` then kills every such D-term,
-   and kills E when q<a or p<0. Every later page is a subquotient, so the same
-   quadrant bound holds. A total-degree diagonal consequently has finite support.
-4. The outgoing differential has zero target for r>q-a+1; the incoming one has
-   zero source for r>p. The cycles and boundaries are constant from the stated
-   bound, giving their intersection/union and the stable quotient. This is
-   `thm-sp-half-plane-convergence` and the conventions of `def-sp-convergence`.
-5. Incoming alpha images vanish for r>q-a, proving completeness. Their images
-   in D^{0,n} give a decreasing filtration, full at p<=0 and zero at p>=n-a+1.
-   Exactness and vanishing at negative first indices make the alpha iterates
-   from D^{0,n} to D^{u,n-u} isomorphisms for u<=0.
-6. At r=max(p+3,q-a+2), write u=p-r+2 and v=q+r-2. The alpha iterate lambda
-   identifies F^p with D_r^{u,v} and F^{p+1} with the image of alpha_r there.
-   The outgoing f_r is zero by the lower bound, so exactness identifies the
-   quotient with E_r. Its commuting equation below specifies the map psi.
-7. Functoriality identifies
-   the alpha composites with the truncation inclusions. By
-   `lem-weil-pbc-derived-functor-truncation-iso`, c_n is an isomorphism. Its
-   image filtration is exactly the displayed
-   filtration on H^n. It is finite, exhaustive, separated, and its quotient
-   tower is eventually constant, hence has H^n as inverse limit. Transporting
-   psi by the induced graded isomorphism gives Theta and unconditional convergence.
--/
+Source: Stacks Tags 015J, 05TC, 011Q, 011R, 011T, 0BDU, 0BDV, 012U. -/
 theorem exists_truncationHypercohomology
     {A : Type u₁} [Category.{v₁} A] [Abelian A]
     [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A]

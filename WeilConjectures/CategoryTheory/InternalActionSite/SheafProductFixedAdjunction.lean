@@ -16,8 +16,7 @@ import Mathlib.CategoryTheory.Sites.Subsheaf
 Source: Stacks Tags 03CV, 00VH, 00VM, 0037, 0DV0.
 
 The action categories and their sectionwise additive structures are the existing
-`InternalActionSite.EquivariantSheaf` categories, recorded by the definition node
-`def-sfb-equivariant-module-sheaves`. The specifications below identify
+`InternalActionSite.EquivariantSheaf` categories. The specifications below identify
 invariants by their injective inclusions and exact fixed-section images. No invariant
 object or comparison is chosen from an unspecified existence assertion.
 -/
@@ -34,10 +33,7 @@ namespace CategoryTheory.InternalActionSite
 
 variable {C : Type u} [SmallCategory C]
 
-/-- The pair-valued group restriction maps obey the functor laws.
-Proof: evaluate each equation on a pair. In each coordinate the identity equation
-is the corresponding group presheaf's map-identity law, and the composition equation
-is its map-composition law. Extensionality of group homomorphisms concludes. -/
+/-- The pair-valued group restriction maps obey the functor laws. -/
 theorem productGroup_laws (K L : Cᵒᵖ ⥤ GrpCat.{u}) :
     (∀ X : Cᵒᵖ, GrpCat.ofHom ((K.map (𝟙 X)).hom.prodMap (L.map (𝟙 X)).hom) =
       𝟙 (GrpCat.of (K.obj X × L.obj X))) ∧

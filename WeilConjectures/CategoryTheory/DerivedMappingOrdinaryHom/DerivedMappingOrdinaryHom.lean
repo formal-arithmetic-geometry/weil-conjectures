@@ -113,8 +113,7 @@ def functor : (CochainComplex A ℤ)ᵒᵖ × CochainComplex A ℤ ⥤
     simp
 
 /-- The bifunctor acts by the actual componentwise pre/postcomposition formula.
-Source: Stacks 09L9.
-Proof: evaluate the two zero-degree cochains and use the definition of composition. -/
+Source: Stacks 09L9. -/
 theorem map_apply (X X' Y Y' : CochainComplex A ℤ) (f : X' ⟶ X) (g : Y ⟶ Y')
     (n p q : ℤ) (hpq : p + n = q) (x : ((functor B).obj (op X, Y)).X n) :
     ((((functor B).map (X := (op X, Y)) (Y := (op X', Y')) (f.op, g)).f n x).down).v p q hpq =

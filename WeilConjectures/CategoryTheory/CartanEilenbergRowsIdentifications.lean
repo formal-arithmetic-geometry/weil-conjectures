@@ -10,7 +10,9 @@ public import WeilConjectures.CategoryTheory.CartanEilenbergRows
 
 /-! # Homology of the complex assembled from alternating exact rows
 
-Source: Stacks Project, Derived Categories, Lemma 015I, proof conclusion.
+## References
+
+* Stacks Project, Derived Categories, Lemma 015I.
 -/
 
 @[expose] public section
@@ -85,27 +87,7 @@ private noncomputable def rowHomologyData
 /-- The row objects identify the cycles, boundaries and homology of the assembled
 complex, compatibly with its augmentation. No injectivity or resolution hypothesis
 is used: this is a statement about short exact diagrams in any abelian category.
-
-Source: Stacks Project, Derived Categories, Lemma 015I, proof conclusion.
-
-Proof:
-1. The composite D^(p+1) -> Z^(p+1) -> A^(p+1) is monic. Since
-   Z^p -> A^p -> D^(p+1) is short exact, Z^p is a kernel of the horizontal
-   differential. Kernel uniqueness gives an isomorphism from the cycles to Z^p,
-   whose composite with u^p is the canonical cycle inclusion.
-2. A^(p-1) -> D^p is epic. Its composite with the monomorphism
-   D^p -> Z^p -> A^p is the horizontal differential. The epi-mono image
-   factorization gives an isomorphism from its image to D^p, whose composite
-   with w^p u^p is the image inclusion.
-3. Transport the boundary-to-cycle map along the preceding isomorphisms.
-   It becomes w^p. The second short exact row makes H^p its cokernel, so
-   cokernel uniqueness gives the homology isomorphism, intertwining the
-   canonical homology projection with x^p.
-4. Naturality of cycle and image inclusions, together with commZ and commD,
-   shows that their induced augmentations followed by these isomorphisms equal
-   jZ and jD (cancel the monic inclusions). Naturality of the homology projection
-   and commH gives the last equality (cancel its epimorphic source projection).
-   These arguments also apply to zero columns and to degree zero. -/
+Stacks Project, Derived Categories, Lemma 015I. -/
 theorem cartanEilenberg_rows_identifications
     {C : Type u} [Category.{v} C] [Abelian C]
     {S : CochainComplex C ℤ} (R : CartanEilenbergRows S) :

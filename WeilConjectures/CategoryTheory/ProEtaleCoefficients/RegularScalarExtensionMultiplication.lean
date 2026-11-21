@@ -42,9 +42,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C)
 
 /-- Abelian sheafification on the essentially small site.
-Source: Stacks 00WH and the sheafification in.
-Proof: replace the site by its small model in the coefficient universe, apply
-`GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian`, and transport back. -/
+Source: Stacks 00WH. -/
 instance sfbRegularAb_hasSheafify : HasSheafify J AddCommGrpCat.{w} := by
   have : HasSheafify ((equivSmallModel.{w} C).inverse.inducedTopology J)
       AddCommGrpCat.{w} :=
@@ -184,37 +182,7 @@ private theorem right_section (F G : Sheaf J Ab.{w})
     exact congrArg (fun f ↦ f.app U a) h
 
 /-- Normalization of extension on regular modules, including multiplication by every
-compatible global section.
-
-Proof, following the node:
-1. Abelian sheaf coequalizers are sheafifications of the objectwise cokernels of the
-parallel difference. Their projections are epimorphisms; so are their tensors, since
-both tensor functors preserve colimits.
-2. The right R-action on S is S tensor phi followed by multiplication. Its unit,
-associativity and compatibility with the left S-action follow from the ring-object
-axioms. The balancing pair is exactly that of `def-sfb-modobj-extension` on regular R.
-3. Apply `lem-sfb-mixed-bimodule-right-unitor` to this S-R-bimodule. Its forward map
-composed with the balancing projection is the right action. Its inverse inserts the
-unit of R. Uniqueness of the coequalizer factorization identifies this with the specified
-extension object and its first-factor S-action, even if coequalizer choices differ.
-4. Precompose with the presheaf tensor generators of
-`lem-sfb-braided-sheaf-tensor-generators`. The forward formula becomes b phi(a).
-The right-unitor comparison of `lem-sfb-sheaf-tensor-unit-comparison`, with
-`det-def-sfb-sheaf-tensor-structure`, identifies the inverse with b tensor 1.
-These tests assert equalities of sheaf maps, not pure-tensor generation of sections.
-5. The left-unitor comparison identifies `extendUnitHom` with a mapped to 1 tensor a.
-The left unit law of S and the multiplication compatibility of phi give q iota = phi.
-6. Maps from the sheafified constant integers are compatible families, by the unit Hom
-bijection in `lem-sfb-braided-sheaf-tensor-generators`. Multiplication by such a map t
-is left-unitor inverse, followed by t tensor R and multiplication. Its section formula
-is multiplication by t_U. Associativity and commutativity of R give R-linearity;
-the same argument for S gives S-linearity for t followed by phi.
-7. The induced map under extension is characterized after the balancing projection by
-S tensor m_t. Precomposing the desired conjugation with that projection reduces it to
-r(S tensor m_t) = m_phi(t) r. This follows from phi preserving multiplication and the
-S-linearity in step 6. Cancel the epimorphic projection. No flatness, invertibility,
-or final object of the site is used.
--/
+compatible global section. -/
 theorem sfbRegularScalarExtensionMultiplication
     (R S : Sheaf J Ab.{w}) [MonObj R] [MonObj S]
     [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ] :

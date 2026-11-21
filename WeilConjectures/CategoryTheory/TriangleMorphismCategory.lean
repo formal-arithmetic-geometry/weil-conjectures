@@ -14,7 +14,16 @@ import WeilConjectures.CategoryTheory.Triangulated.DenominatorTriangleCompletion
 
 /-! # Incoming morphisms of distinguished triangles
 
-Source: Stacks Project, Derived Categories, Tag 05R9, dual cofiltered form.
+## Implementation details
+
+The category is built directly from Mathlib's restricted over-category and full subcategory.
+`W` requires all three components to lie in `S`, both for objects and for arrows. The full
+subcategory `P` requires the source triangle to be distinguished. The targets `S.Over ⊤ _`
+allow every commuting triangle as a morphism, as in Stacks Tag 05Q4.
+
+## References
+
+* Stacks Project, Derived Categories, Tag 05R9 (dual cofiltered form).
 -/
 
 @[expose] public section
@@ -26,24 +35,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace CategoryTheory
 
 /-- Incoming morphisms of distinguished triangles with all components in `S` form a
-cofiltered category, and each vertex projection to the denominator category is initial.
-Source: Stacks Project, Derived Categories, Tag 05R9, dual cofiltered form.
-
-Proof:
-1. Complete any prescribed denominator at a vertex to a morphism of distinguished triangles
-   using `lem-pur-triangle-completion-ms6-05r9`. This supplies the existence part of initiality.
-2. The identity triangle morphism gives an object by MS1. Common refinements and equalizers
-   from `lem-pur-triangle-common-refinement-ms3-05r9` give cofilteredness.
-3. For two objects over the same denominator, take a common refinement. MS3 equalizes the
-   two induced vertex maps after a further denominator. Complete that denominator to a
-   triangle morphism using `lem-pur-triangle-completion-ms6-05r9` and compose by MS1. This
-   supplies a connecting span in the costructured arrow category, hence initiality at the
-   first vertex. Rotate triangles by TR2 and use MS5 to obtain the other two vertices.
-
-The category is built directly from Mathlib's restricted over-category and full subcategory.
-`W` requires all three components to lie in `S`, both for objects and for arrows. The full
-subcategory `P` requires the source triangle to be distinguished. The targets `S.Over ⊤ _`
-allow every commuting triangle as a morphism, as in Stacks Tag 05Q4. -/
+cofiltered category, and each vertex projection to the denominator category is initial. -/
 theorem triangle_morphism_category_cofiltered_initial
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]

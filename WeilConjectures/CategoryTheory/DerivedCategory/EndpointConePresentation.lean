@@ -23,30 +23,7 @@ admit strict mapping-cone models with those first and third components. The midd
 component is not prescribed.
 
 Source: Stacks Project, Derived Categories, Tags 014D and 05QK (cone and rotation),
-and Tag 05RR (localization of the homotopy category at quasi-isomorphisms).
-
-Proof: Rotate both triangles twice, so their connecting arrows are the first arrows.
-Represent their third vertices and shifted first vertices by complexes. The
-calculus of fractions for quasi-isomorphisms in the homotopy category expresses
-the two endpoint maps and connecting arrows by roofs. Successive common
-refinements of these finitely many roofs give representatives for all four maps,
-and a further refinement witnesses the equality of the two composites in the
-homotopy category. Choose chain maps representing them and a homotopy for that
-equality. Replace the first arrow with the cylinder factorization of Tag 014D (Lemma 13.9.6);
-it is a degreewise split injection and the projection is a homotopy equivalence.
-Tag 014D (Lemma 13.9.5) changes the second vertical map by a homotopy so the square commutes
-strictly. These replacements preserve the four localized vertices and maps.
-Take the functorial mapping cones of this strict square. The
-resulting third component completes the prescribed endpoint square. Rotate back
-twice. The canonical double-cone deformation retractions, with the rotation signs,
-identify this rotated diagram with a strict cone diagram of the original first
-arrows. Transport to the two original distinguished triangles using their cone
-isomorphisms. The isomorphisms agree at the prescribed first and third vertices;
-the middle isomorphisms are supplied by the cone comparison. The four first-arrow
-and cone-inclusion identities follow from these triangle isomorphisms. The first
-and cone components are the specified maps because they came from the initial
-strictification. No requirement is made on the middle component, which is essential.
-This applies to zero objects and split triangles without any extra assumption. -/
+and Tag 05RR (localization of the homotopy category at quasi-isomorphisms). -/
 theorem derived_endpoint_cone_presentation
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (T T' : Triangle (DerivedCategory C))

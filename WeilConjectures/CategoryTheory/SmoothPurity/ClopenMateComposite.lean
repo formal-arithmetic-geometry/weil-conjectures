@@ -10,7 +10,7 @@ public import Mathlib.Tactic.IrreducibleDef
 
 /-! # A component API for the clopen comparison composite
 
-Source: the functorial composite in Stacks Tag 0F7B, first proof paragraph.
+Source: Stacks Tag 0F7B.
 -/
 
 @[expose] public section

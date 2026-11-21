@@ -206,18 +206,7 @@ attribute [local irreducible] complexProjection RingedDerivedNative.comparison
   coefficientTotalTensor in
 /-- Extension from a slice satisfies the unbounded derived tensor projection formula,
 naturally in the slice object and the ambient object.
-Source: Stacks Project, Tags 0E8I and 06YN.
-
-Proof: on complexes, extension of P tensor the restriction of Q is naturally
-isomorphic to the tensor of the extension of P with Q. This is the sheafified
-summand projection formula, totalized with the same cochain signs. Restriction
-and extension both preserve K-flat complexes. On their K-flat presentations the
-specified derived tensor comparisons, the exact-functor localization comparisons,
-and the complex projection formula therefore give a natural isomorphism between
-the two displayed derived functors. The product of the two K-flat localization
-functors is a localization. Precomposition with it is fully faithful, so the
-natural isomorphism descends uniquely. This treats unbounded complexes, empty
-slices, and zero objects without finiteness hypotheses. -/
+Source: Stacks Project, Tags 0E8I and 06YN. -/
 theorem ringedOpenDerived_tensorProjection :
     let F : RingedDerivedNative.Modules.{c, v, r} J R ⥤
         RingedDerivedNative.Modules.{max c v, v, r} (J.over U) (R.over U) :=

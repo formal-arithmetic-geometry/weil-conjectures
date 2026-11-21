@@ -15,8 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Quasi-isomorphism of the augmented total
 
-Source: Stacks Project, Homology, Tag 0133 (Lemma 12.25.4), and Derived
-Categories, Tag 015J, proof remark (3).
+## References
+
+* Stacks Project, Homology, Tag 0133 (Lemma 12.25.4), and Derived Categories, Tag 015J.
 -/
 
 @[expose] public section
@@ -29,31 +30,7 @@ namespace CategoryTheory.Functor
 
 /-- Exact augmented columns give a quasi-isomorphism to their bounded-diagonal total.
 No injectivity hypothesis is needed, and the augmentation is supplied as a chain map.
-Source: Stacks Project, Homology, Tag 0133 (Lemma 12.25.4); Derived Categories,
-Tag 015J, proof remark (3).
-
-Proof.
-1. Choose b with I zero in complex degrees below b. Extend resolution degree by zero.
-The diagonal in total degree n has only the finitely many terms with 0 <= r <= n-b.
-For the cone, choose also a lower bound for K: hrows identifies K^s with the
-zeroth cohomology of I^{s,bullet}, so K^s is zero for s < b.
-2. Augment each resolution column by K^s in resolution degree -1 with differential
-(a.f s).f 0. These columns are acyclic: hrows says their unaugmented columns have
-only degree-zero cohomology, identified with K^s by a.f s. Horizontal differentials
-commute with the augmentation because a is a bicomplex map.
-3. Totalize the augmented bicomplex after exchanging the indices. In total degree n,
-its objects are Tot(I)^n plus K^{n+1}. Multiply the K summands by the usual cone
-signs to identify its differential with that of mappingCone aug. The equation haug
-identifies the off-diagonal part with this particular aug, not merely an arbitrary
-map inducing abstract cohomology isomorphisms.
-4. Filter the augmented total by complex degree s. This filtration is finite in each
-cochain degree, and its graded complexes are shifts of the acyclic augmented columns.
-The associated spectral sequence has zero first page. For a fixed cohomology degree n,
-choose a page beyond all filtration bounds in degrees n-1, n and n+1. The cycle and
-boundary subquotients have then stabilized to the graded pieces of cohomology.
-They are zero, so the finite exhaustive separated filtration of H^n is zero.
-5. The cone is acyclic in every degree. The acyclic-cone criterion gives QuasiIso aug.
-This argument also covers empty diagonals and the zero bicomplex. -/
+Stacks Project, Homology, Tag 0133 (Lemma 12.25.4); Derived Categories, Tag 015J. -/
 theorem cartanEilenberg_augmentation_quasiIso
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

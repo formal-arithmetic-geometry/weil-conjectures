@@ -14,11 +14,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory
 
 /-- Normalized tensor and unit representative squares imply left unitality.
-Source: Stacks 07A4.
-Proof: tensor the unit normalization with the representative at X. Tensorator
-naturality and its normalization turn one side into the image of the ordinary
-left-unit law. The other side is the proposed left-unit composite followed by
-the representative. Cancel that monomorphism. -/
+Source: Stacks 07A4. -/
 theorem leftUnit_on_representative
     {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
     [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E] [MonoidalCategory H]

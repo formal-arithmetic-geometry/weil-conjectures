@@ -48,11 +48,9 @@ open CategoryTheory.MonObj
 namespace CategoryTheory.Mod
 
 /-- The finite-free coordinate assertion, including existence of the coequalizers and
-preservation properties needed to form scalar extension. The quantification over their
-instances merely allows the statement to use these consequences; it is independent of
-proof choices. The finite-power functor is the constant-diagram functor followed by limit.
-The chosen free module and its basis inclusions use `Mod.finiteFree` and `biproduct.ι`.
--/
+preservation properties needed to form scalar extension.
+The finite-power functor is the constant-diagram functor followed by limit.
+The chosen free module and its basis inclusions use `Mod.finiteFree` and `biproduct.ι`. -/
 def FiniteFreeScalarCoordinates
     {H : Type u} [Category.{v} H] [MonoidalCategory H] [BraidedCategory H]
     [Abelian H] : Prop :=

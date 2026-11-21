@@ -33,22 +33,7 @@ attribute [local instance] derived_hasCoproducts
 
 Source: Neeman, On the derived category of sheaves on a manifold, Theorem 0.2
 and Section 2; Krause, On Neeman's Well Generated Triangulated Categories (2001),
-page 125, Corollary of Theorem A.
-
-Proof in words: take a small perfect generating class G at rank kappa, and a
-regular beta above which the canonical alpha-compact classes are extension closed.
-Let S consist of objects compact at some regular rank. It contains zero and is
-replete and closed under shifts by the alpha-compact API. For a distinguished
-triangle, choose one regular alpha above beta and the ranks of its outer vertices;
-monotonicity and canonical extension closure put its middle vertex in S.
-For a v-small family in S, choose ranks for all members and a common regular alpha
-above beta, the cardinality of the index, and these ranks. Its coproduct is then
-alpha-compact by bounded coproduct closure. Thus S is a localizing class.
-Each member of G is kappa-compact using G itself as the (G3)--(G4) witness.
-Generation by G forces S to contain every object. In particular U has a regular
-alpha-compact rank. This proves the union assertion without assuming it in a
-new theorem or using ordinary presentability.
--/
+page 125, Corollary of Theorem A. -/
 theorem derived_exists_alphaCompact_rank
     {A : Type u} [Category.{v} A] [Abelian A]
     [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A]

@@ -33,11 +33,7 @@ def BifunctorProjectionCoherent
     (e.hom.app K).app J ≫ a K = b K ∧
     (e.inv.app K).app J ≫ b K = a K
 
-/-- Coherence of a natural isomorphism and its inverse from the forward equations.
-
-Proof. Take the isomorphism of the given invertible transformation. Its inverse
-commutes with shifts by inversion of the shift square. Substitute the forward unit
-equation into the inverse one and cancel the inverse followed by the forward map. -/
+/-- Coherence of a natural isomorphism and its inverse from the forward equations. -/
 theorem bifunctorIsoCoherence
     {D E F : Type*} [Category D] [Category E] [Category F]
     [HasShift E ℤ] [HasShift F ℤ]

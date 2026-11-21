@@ -47,28 +47,7 @@ private theorem arrow_precomp {X Y Z Z' : Type u}
   simpa using congrArg (fun k ↦ Arrow.mk (f ≫ k)) hg
 
 /-- Source: Stacks Project, Sites, Tag 0A35,
-section construction, independence of the presentation and restriction arrows.
-
-Proof: Normalize each stage map to the fixed object Y = V_i(U), using the
-object equality supplied by hkappa. The equations hbeta_map and hm, together
-with naturality along these object equalities, make the normalized maps
-compatible with D and B. Naturality of the colimit coprojections identifies
-kappa with the normalized maps followed by those coprojections.
-
-Evaluation at Y preserves the presheaf colimit. Its filtered-set equality
-criterion moves the two given representatives to a common stage k. The
-compatibility just proved gives equality of their normalized images at k.
-Cancel the equality transport to obtain equality of their beta_k unit images.
-
-Apply raw_section_kan_unit_relations to the underlying stage presheaves and
-the natural transformations theta_(k,r). It lifts the finite chain of Kan
-relations to one later stage r and identifies the two theta images there.
-The equation hm, followed by injectivity of the equality transport and of
-E_r, identifies the corresponding D images. Functoriality of D yields the
-required equality along the composite arrows to r. The reduction uses no
-coherence between different theta maps, representative-existence theorem,
-or comparison isomorphism; htheta remains in the unchanged signature.
--/
+section construction, independence of the presentation and restriction arrows. -/
 theorem raw_section_relations
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

@@ -123,18 +123,7 @@ private theorem lift_pair
     exact (ConcreteCategory.congr_hom ((Cat.arrows.mapCocone V).w t) B₀).trans hB₀
 
 /-- Joint monicity of the image of the two stable stage pullback projections.
-Source: Stacks Project, Sites, Tag 09YL, pullback paragraph and Hom calculation.
-
-Proof: Lift the two proposed arrows to stage arrows using joint surjectivity
-of the arrow colimit. Move their stages and j to a common upper stage. Eventual
-equality in the object colimit aligns their sources with each other and their
-targets with the transitioned pullback object. After these identifications,
-their composites with the transitioned projections have equal colimit images.
-Use eventual equality in the arrow colimit twice to enforce these two equalities
-at a later stage. The pullback remains preserved by the composite transition
-out of j, so its two projections are jointly monic there. The two stage arrows
-are equal, and applying the cocone functor proves equality of the original
-arrows. This uses no existence of a factorization for an arbitrary cone. -/
+Source: Stacks Project, Sites, Tag 09YL, pullback paragraph and Hom calculation. -/
 theorem filteredColimit_pullback_hom_ext
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (V : Cocone F)

@@ -16,9 +16,12 @@ public import WeilConjectures.Algebra.Homology.SignedDoubleHomCone
 /-!
 # Signed double internal Hom and mapping cones
 
-Source: Stacks Project, sites-cohomology.tex, Sections 0A8X and 08JC.
 The component equations below are equations of module sheaves, hence include every
 local section and all restriction maps. Mathlib orders the cone summands as A[1], B.
+
+## References
+
+* Stacks Project, sites-cohomology.tex, Sections 0A8X and 08JC.
 -/
 
 @[expose] public section
@@ -1228,26 +1231,8 @@ private lemma map_zero_left {A A' B B' : Modules.{u, v, w, r} R} (g : B ⟶ B') 
   SheafOfModules.hom_ext (PresheafOfModules.homObjMap_zero_left g.val)
 
 /-- Signed shift and cone comparisons for double internal Hom into an arbitrary I.
-Source: Stacks 014E and 0A8X.
 
-Proof: (1) Write eps(t)=(-1)^t. Reindexing a degree q map from K[m] gives degree
-q-m from K. Multiplication by eps(mq) intertwines the two differentials: both
-sides are eps(mq+m)d_I f - eps(mq+q)f d_K. The same sign gives the inverse;
-precomposition proves naturality. (2) Define chi as minus s at (T(K),-1)
-after T(s at (K,1)) inverse. On y of degree t its sign is
--eps(p)eps(t+1)=eps(p+t). (3) Restricting maps from the binary cone summands
-gives T(E)^q=X^q plus Y^(q-1); its differential is
-(d_X x, d_Y y + eps(q+1)T(u)x). (4) Applying Hom again gives
-alpha'_q=d_I alpha_q-eps(p)alpha_(q+1)d_X+eps(p+q)beta_q T(u),
-and beta'_t=d_I beta_t-eps(p)beta_(t+1)d_Y. (5) Set gamma_t=eps(p+t)beta_t.
-Then the differential is (d alpha+T²(u)gamma,-d gamma), the cone differential.
-The same sign constructs the inverse. (6) For a square, cone maps act diagonally
-on X and Y, and these actions commute with eps(p+t), proving naturality.
-(7) T²(i) sends alpha to (alpha,0). T²(-pi) evaluates to -beta, and chi
-turns this into -gamma, which is -pi after theta. These are equations of
-restricted module maps, so they hold as sheaf maps. Only binary sums, products,
-reindexing and signs are used; there is no boundedness, flatness or K-injectivity.
--/
+Stacks Project, Tags 014E and 0A8X. -/
 theorem comparison (I : Complex.{u, v, w, r} R) :
     ∃ s : ∀ (K : Complex.{u, v, w, r} R) (m : ℤ),
       homComplex (K⟦m⟧) I ≅ (homComplex K I)⟦-m⟧,

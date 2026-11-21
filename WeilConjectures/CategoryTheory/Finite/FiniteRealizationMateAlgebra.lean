@@ -45,10 +45,7 @@ private theorem scalar_conjugate :
   rw [← k.hom.naturality_assoc]
   simp only [Iso.hom_inv_id_app, Category.comp_id]
 
-/-- The left-adjoint uniqueness comparison preserves the coefficient units.
-Proof: the conjugate of the uniqueness map is k.inv by its unit equation.
-Taking mates back identifies the scalar mate with the inverse forward square.
-The unit_mateEquiv equation followed by the forward square gives the result. -/
+/-- The left-adjoint uniqueness comparison preserves the coefficient units. -/
 theorem realizationScalar_unit (X : A) :
     a.unit.app (EA.functor.obj X) ≫
         U.map ((((EA.toAdjunction.comp a).ofNatIsoRight k).leftAdjointUniq
@@ -91,12 +88,7 @@ end CategoryTheory
 
 namespace CategoryTheory
 
-/-- Transporting a scalar transpose through a commuting restriction cube.
-Proof: apply the scalar Hom-equivalence at Y and postcompose with cY. Replace
-its transpose followed by the unit by its defining map. Naturality of h moves
-rZ past it, so the restriction cube applies. The unit equation nZ and naturality
-of dA move the fixed unit to Y. Naturality of cY, nY, and the defining transpose
-equation at Y identify the other path. Cancel the isomorphism cY. -/
+/-- Transporting a scalar transpose through a commuting restriction cube. -/
 theorem scalarTranspose_realization_cube
     {FZA FZB FYA FYB IZA IZB IYA IYB : Type*}
     [Category FZA] [Category FZB] [Category FYA] [Category FYB]
@@ -162,10 +154,7 @@ end CategoryTheory
 namespace CategoryTheory
 
 /-- The scalar transpose of the inverse restriction mate is the geometric mate
-of the inverse scalar mate.
-Proof: iterated mates send e.hom to t.inv. Conjugate isomorphisms preserve
-inverses, so iterated mates send e.inv to t.hom. The unit_mateEquiv equation
-then gives the scalar Hom-equivalence equation defining the transpose. -/
+of the inverse scalar mate. -/
 theorem scalarTranspose_inverse_mate
     {YA YB ZA ZB : Type*}
     [Category YA] [Category YB] [Category ZA] [Category ZB]

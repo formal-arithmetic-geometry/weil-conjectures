@@ -45,14 +45,9 @@ variable {A : Type uA} {B : Type uB} {C : Type uC} {D : Type uD}
   [PreservesFiniteLimits V] [PreservesFiniteColimits V]
 
 /-- Let E:C≃A and T:B≃D be exact equivalences, U:A→B and V:C→D exact additive, and ρ:E⋙U⋙T≅V. If
-a∈Ext^n(X,U(EH)) is a DerivedExtUnit [def-sp-derived-scalar-ext-unit], a source isomorphism c:TX≅F
-and a class b∈Ext^n(F,VH) satisfy T(a)ρ_H=c b, then b is a V-derived Ext unit.
-Source: Stacks 0152,
-06YY and 0GLZ.
-Proof: Transport the universal Hom bijections along the two derived equivalences and the derived
-square isomorphism. Exact-functor single and shift coherence identifies the transported unit. The
-assumed Ext equation identifies this unit with b, including its positive shift and the prescribed
-source isomorphism. -/
+a∈Ext^n(X,U(EH)) is a `DerivedExtUnit`, c:TX≅F is a source isomorphism, and b∈Ext^n(F,VH)
+satisfies T(a)ρ_H=c b, then b is a V-derived Ext unit.
+Stacks Project, Tags 0152, 06YY and 0GLZ. -/
 theorem derivedExtUnit_transport (ρ₀ : E ⋙ U ⋙ T ≅ V)
     (X : B) (H : C) (F : D) (c : T.obj X ≅ F) (n : ℕ)
     (a : Ext.{wEB} X (U.obj (E.obj H)) n) (b : Ext.{wED} F (V.obj H) n)

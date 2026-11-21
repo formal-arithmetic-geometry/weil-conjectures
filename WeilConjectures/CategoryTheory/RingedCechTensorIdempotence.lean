@@ -238,21 +238,7 @@ private theorem cech_tensor_quasiIso (O : Sheaf J CommRingCat.{u}) (r : ℕ)
 
 /-- The extended Cech complex annihilates the cone of its augmentation under total tensor.
 
-Source: Stacks Project, algebraization.tex, Tag 099B.
-
-Proof: write K as the ordered tensor of [O -> O[1/b_i]]. Its terms are finite sums
-of flat localizations S_I. For nonempty I choose j in I. In K tensor S_I the
-j-th localization differential is invertible. Its inverse, with sign (-1) to the
-sum of preceding factor degrees, contracts this tensor: cross differential terms
-cancel in d h + h d, and the j-th term is the identity. In cone(K -> O), cancel
-the identity pair consisting of K^0 = O and the target O in degree zero. The
-remaining finite positive Cech complex has a finite filtration whose graded pieces
-are shifted finite sums of S_I with nonempty I. Tensoring with K makes each graded
-piece contractible by the preceding formula. Induction on this finite filtration
-therefore proves acyclicity of the total tensor. The cancelled identity pair is
-contractible after tensoring as well. For the empty list cone(id_O) is contractible.
-Zero and invertible generators, the zero ring and empty sites obey these formulas;
-no exactness of infinite products is used. -/
+Source: Stacks Project, algebraization.tex, Tag 099B. -/
 theorem ringed_cech_tensor_augmentation_cone_acyclic (O : Sheaf J CommRingCat.{u})
     (r : ℕ) (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) :
     letI : IsGrothendieckAbelian.{u} (SheafOfModules.{u}

@@ -9,7 +9,11 @@ public import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActi
 
 /-! # Naturality of the transpose of a tensor comparison
 
-Source: Stacks, sites-modules.tex.
+Untransposing along a tensor comparison is compatible with the canonical Hom comparison.
+
+## References
+
+Stacks Project, `sites-modules.tex`.
 -/
 
 @[expose] public section
@@ -34,14 +38,7 @@ private theorem untranspose_evaluation
 
 /-- A functor with a tensor comparison sends untransposes to the corresponding
 untransposes composed with its canonical Hom comparison.
-Source: Stacks, sites-modules.tex.
-
-Proof: express an untranspose as tensoring the given map with the identity and
-then evaluating. Move the tensor comparison past that map by its naturality.
-The inverse tensor comparison followed by mapped evaluation is the untranspose
-of the canonical Hom comparison, by the inverse laws of the tensor-Hom
-adjunction. Tensor functoriality combines the two Hom maps, giving the formula.
-No faithfulness, essential surjectivity, or action structure is used. -/
+Source: Stacks, sites-modules.tex. -/
 theorem tensorHomComparison_precomp
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

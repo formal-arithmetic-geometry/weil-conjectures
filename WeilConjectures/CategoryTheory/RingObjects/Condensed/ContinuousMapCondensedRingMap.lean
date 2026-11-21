@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 Postcomposition on the recorded universe-polymorphic continuous-map sheaves.
 The coefficient rings lie in an arbitrary common universe, independent of the
 universe of the profinite sets. The underlying ring objects and their tensor are
-exactly those of `proposition-pro-etale-site-separably-closed--3`.
+exactly those of the continuous-map condensed ring objects.
 -/
 
 @[expose] public section
@@ -49,15 +49,7 @@ noncomputable def continuousMapRingObjMapOfUniverse :
     (forget₂ RingCat.{max u v + 1} AddCommGrpCat.{max u v + 1})).map
       (continuousMapRingSheafMapOfUniverse φ hφ)
 
-/-- Postcomposition is a morphism for the recorded canonical ring-object structures.
-
-Proof: sectionwise postcomposition preserves all ring operations. Its naturality
-is φ ∘ (a ∘ u) = (φ ∘ a) ∘ u. Both presheaves are the sheaves supplied by
-`proposition-pro-etale-site-separably-closed--3`, so this gives a morphism of sheaves of rings.
-Part 3 of `sk-def-sfb-ring-object`, specifically `Sheaf.isMonHom_sheafCompose_map`,
-then makes its underlying abelian-sheaf map compatible with multiplication and unit.
-The structures used here are the dependency's counit transports for its sheafified
-tensor over the integers; no alternative ring-object structure is chosen. -/
+/-- Postcomposition is a morphism for the recorded canonical ring-object structures. -/
 theorem isMonHom_continuousMapRingObjMapOfUniverse :
     letI := (sfbSheafTensorStructure (A := AddCommGrpCat.{max u v + 1})
       (coherentTopology Profinite.{u})).monoidal

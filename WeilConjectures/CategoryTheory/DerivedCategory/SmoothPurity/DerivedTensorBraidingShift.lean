@@ -91,12 +91,7 @@ private theorem derived_braiding_kflat (P : CochainComplex.KFlat C) :
     ((HomotopyCategory.quotient C _).obj P.obj) ((HomotopyCategory.quotient C _).obj M)
 
 /-- The canonical signed symmetry intertwines the two canonical tensor shifts.
-Source: Stacks Project, More on Algebra, Tag 0BYI (signed tensor symmetry).
-
-Proof. On each cochain summand, the shift sign times the shifted Koszul sign is
-its unshifted Koszul sign. The identity descends through the tensor comparison
-for a K-flat first factor. Every derived object is isomorphic to such an image;
-naturality transports the identity to that object. -/
+Source: Stacks Project, More on Algebra, Tag 0BYI. -/
 theorem canonicalTensorSymmetry_commShift (K : DerivedCategory C) :
     NatTrans.CommShift ((canonicalTensorSymmetry C).hom.app K) ℤ := by
   have := Localization.essSurj (TensorCommShift₂.LKFlat C)

@@ -16,13 +16,7 @@ set_option autoImplicit false
 open CategoryTheory
 namespace CategoryTheory
 
-/-- Counit mates commute with compatible changes of left adjoints.
-
-Proof: right-adjoint uniqueness identifies the composite counits. Invert the square
-of left-adjoint coefficient isomorphisms. Transpose the desired equality under the
-closed B adjunction, use naturality to move both right-adjoint identifications and
-substitute the two mate counit equations. The inverted square then equates the
-transposes. Injectivity of the adjunction Hom equivalence finishes the proof. -/
+/-- Counit mates commute with compatible changes of left adjoints. -/
 theorem counitMates_transport
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     {LO LC : C ⥤ D} {RO RC : D ⥤ C}

@@ -113,18 +113,9 @@ The first two arrows are the canonical maps of complexes: the inclusion i_q
 degree-q component is the quotient Ker d^q -> H^q(K). The connecting arrow k_q
 exists and is unique; the triangle is functorial for every morphism of D(A), the
 three truncation functors acting on D(A) through their descent along Q (the
-localization lift; theorem-pbc-injective-acyclicity); and the three terms are
-bounded below when K is (strictly, or in cohomology).
-Source: Stacks Project, Remark 08J5.
-
-Proof:
-1. The short exact sequence 0 -> tau_{<=q-1}K -> tau_{<=q}K -> M_q(K) -> 0, with
-   j_q factoring through a quasi-isomorphism M_q(K) -> H^q(K)[-q].
-2. Its distinguished triangle in D(A).
-3. Transport along the quasi-isomorphism gives k_q (TR1).
-4. Hom((tau_{<=q-1}K)[1], H^q(L)[-q]) = 0 (standard t-structure).
-5. Uniqueness of k_q and 6. functoriality by lem-weil-pbc-triangle-morphism-extension.
-7. Bounded below: cohomology of the canonical truncations. -/
+localization lift); and the three terms are bounded below when K is (strictly,
+or in cohomology).
+Source: Stacks Project, Remark 08J5. -/
 theorem truncation_triangle (A : Type u) [Category.{v} A] [Abelian A]
     [HasDerivedCategory.{w} A] (q : ℤ) :
     (∀ K : CochainComplex A ℤ,

@@ -26,29 +26,8 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 equalizer argument.
-
-Proof: The cover R is finite by hfinite. Choose stage presentations of its finitely
-many section values using the definition of colimitSiteStageImage. Lift their
-presenting objects and arrows, together with the cover, to one stage above i and j
-using the object and arrow colimit hypotheses and filteredness. Stage adjunctions
-identify the maps α with the canonical comparison maps: their composites with the
-units agree by hα, and adjunction makes those composites determine the maps.
-Equality in the limit inverse-image sheaf is locally equality of presheaf
-representatives. The exact description hQ of covers, finite composition, and
-hfinite let these local equalities be witnessed by finite stage covers. Lift
-those witnesses to a common stage as well. Stage sheaf separatedness then makes
-the finitely many matching equations hold on the pairwise covering pullbacks.
-These pullbacks are preserved by hpullback and
-hVpullback. Equivalently, use that filtered colimits commute with the finite
-matching-family equalizer, as in Tag 0A35. The transported cover remains covering
-by hcover. The sheaf at that stage therefore glues the family to a section z.
-Its image under α, restricted along the presentation of the cover's target,
-belongs to colimitSiteStageImage by construction and restricts to each value of x.
-For the empty cover the equalizer is the terminal set; the stage sheaf supplies
-its unique section by the same argument. Only existence on a mapped stage cover
-is asserted here; uniqueness and passage to the generated topology are separate.
--/
+/-- Over a covering presieve coming from a stage, every compatible family of elements of the
+stage-image presheaf has an amalgamation. Stacks Project, Sites, Tag 0A35. -/
 theorem colimit_site_stage_image_cover_exists_amalgamation
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

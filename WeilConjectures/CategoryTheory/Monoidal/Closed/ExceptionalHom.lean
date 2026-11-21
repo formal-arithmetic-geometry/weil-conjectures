@@ -36,7 +36,6 @@ the role of the exceptional projection morphism `PF^!`, for a morphism `c : C �
   isomorphism if the projection morphisms `pf` at `(T, M)` are, by the Yoneda lemma.
 * `CategoryTheory.Verdier.curry'_comp_exceptionalHomMap`: the exchange morphism sends the mate
   of `u : F M ⟶ S N` to the exceptional adjoint of its class.
-
 -/
 
 @[expose] public section
@@ -129,14 +128,8 @@ lemma exceptionalHomMap_comp_eq {T : C} (M N : D) (u : T ⟶ (ihom (F.obj M)).ob
     exceptionalHomPairing, leftProjection_naturality_assoc, Adjunction.homEquiv_counit,
     uncurry_eq, Functor.map_comp, Category.assoc]
 
-/-- **The exceptional internal hom exchange is an isomorphism** as soon as the projection morphisms
-`(pf.app T).app M` are, for every `T`: by the Yoneda lemma, composing with it is the chain of
-bijections
-```
-Hom(T, RHom(F M, S N)) ≃ Hom(F M ⊗ T, S N) ≃ Hom(P (F M ⊗ T), N) ≃ Hom(M ⊗ P T, N)
-  ≃ Hom(P T, RHom(M, N)) ≃ Hom(T, S RHom(M, N)),
-```
-the third one being precomposition with the isomorphism `leftProjection`. -/
+/-- **The exceptional internal hom exchange is an isomorphism**
+as soon as the projection morphisms `(pf.app T).app M` are, for every `T`. -/
 theorem isIso_exceptionalHomMap_of_isIso (M N : D) [∀ T, IsIso ((pf.app T).app M)] :
     IsIso (exceptionalHomMap adj' pf M N) := by
   rw [isIso_iff_yoneda_map_bijective]
@@ -221,8 +214,8 @@ lemma correspondenceClassEquiv_naturality_right (M : D) {N N' : D}
   simp only [Category.assoc]
 
 omit [MonoidalClosed C] in
-/-- The class bijection is natural in the source `M`: precomposing a class with `RHom(a, N)` corresponds to
-precomposing with `F a`. -/
+/-- The class bijection is natural in the source `M`: precomposing a class with `RHom(a, N)`
+corresponds to precomposing with `F a`. -/
 lemma correspondenceClassEquiv_naturality_left {M M' : D} (N : D)
     [IsIso ((pf.app (𝟙_ C)).app M)] [IsIso ((pf.app (𝟙_ C)).app M')] (a : M' ⟶ M)
     (g : P.obj (𝟙_ C) ⟶ (ihom M).obj N) :

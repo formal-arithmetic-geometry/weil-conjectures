@@ -171,32 +171,7 @@ private theorem comparisonLift_g (X : BigradedExactCouple C 0)
     rfl
 
 /-- The lift of the alpha iterate into the recursively included derived D term,
-followed by derived g, is original g followed by the canonical cycle projection.
-
-Proof: First construct canonical image epimorphisms e_n recursively, starting with
-identity and endpoint transport. At n+1 compose e_n with the image epimorphism of
-incoming alpha on page n, with source (p-n,q+n) and target (p-n-1,q+n+1).
-Induction on hIs, using DerivedMaps.alpha_comm, gives I_n compatibility with original
-alpha. Therefore e_n followed by I_n is the n-fold outgoing alpha iterate. The
-appended-alpha recurrence equals alphaIter's prepended-alpha recurrence by induction
-and associativity. Monicity of I_n shows any e satisfying he equals this e_n.
-Induct on n to compare g. The base is hI0, projection_zero and factorThru_arrow.
-At a successor, Z_decreasing gives the factorization of initialG through Z_n from
-its factorization through Z_(n+1). The latter lift followed by ofLE equals the former
-lift: compose with the monic arrow of Z_n and use ofLE_arrow and factorThru_arrow.
-DerivedMaps.g_comm expresses e_(n+1) followed by g_(n+1) as e_n followed by the
-transported gToCycles and derivedEProjection. The induction hypothesis identifies
-e_n followed by g_n with the former cycle lift followed by projection n.
-The latter cycle lift followed by cycleLift has the same composite with kernel.ι:
-use cycleLift_comm and the equality of the two lifts just proved. Cancel this monic
-kernel inclusion to identify it with e_n followed by gToCycles. Finish by composing
-with derivedEProjection and using projection_succ. Endpoint transports are eqToHom
-maps; associativity and eqToHom composition identify the resulting target with (p,q).
-Finally cancel I_n to replace the recursive image epimorphism by the supplied e.
-No vanishing, positivity or colimit hypothesis is needed. At n=0 this is the initial
-projection identity; the zero category satisfies the same equations.
-Source: Stacks Tags 011R and 0AMJ. The induction is
-an explicit expansion of these sources' induced-g construction. -/
+followed by derived g, is original g followed by the canonical cycle projection. -/
 theorem finiteCycle_derived_comparison (X : BigradedExactCouple C 0)
     (I : ∀ (n : ℕ) (p q : ℤ), (X.pageCouple n).D p q ⟶ X.D p q)
     (hI0 : ∀ p q : ℤ, I 0 p q = 𝟙 _)

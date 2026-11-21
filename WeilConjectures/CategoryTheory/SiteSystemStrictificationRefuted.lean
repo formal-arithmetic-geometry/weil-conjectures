@@ -23,8 +23,10 @@ public import Mathlib.CategoryTheory.Sites.Continuous
 /-!
 # Refutation of the finite-precoverage strictification interface
 
-Source: Mathlib's indexed `Precoverage.IsStableUnderBaseChange` axiom and the
-strictification interface sourced from Stacks Project, Categories, Tag 004A.
+## References
+
+* Mathlib's indexed `Precoverage.IsStableUnderBaseChange` axiom and the
+  strictification interface sourced from Stacks Project, Categories, Tag 004A.
 -/
 
 @[expose] public section
@@ -80,22 +82,12 @@ private theorem strictification_preserves_pullback
 
 set_option linter.style.haveILetI false in
 set_option linter.unusedVariables false in
-/-- Source: Mathlib `Precoverage.IsStableUnderBaseChange`, applied to
-strictification interface sourced from Stacks Project, Categories, Tag 004A.
+/-- A strictification of the system of sites with finite coverings indexed by a directed set
+(strict coefficient equalities with a codiscrete labelling) cannot exist, for the system
+indexed by `WithTop ℕ`; the displayed negated proposition is the strictification signature
+at universe zero.
 
-Proof: specialize the interface to I = WithTop Nat and the constant one-object
-category, with the top precoverage. Every presieve there has at most one arrow,
-so all its coverings are finite; all site axioms and pullback hypotheses hold.
-Take every U to be the identity, with equality comparisons. Identity sheaf
-pullbacks preserve finite limits and colimits. Let D be the codiscrete category
-on I and let v_i be constant at i. The unique natural isomorphisms into a
-codiscrete category give delta and satisfy its normalization and cocycle.
-The asserted conclusion supplies F, Q, e and v' with the two strict coefficient
-equalities. Apply site_system_strictification_obstruction: all transition images
-at the largest index have distinct coefficient labels but are isomorphic, so
-indexed base change makes an infinite covering. This contradicts finiteness.
-The displayed negated proposition is the strictification signature at universe zero;
-no assumptions of that signature are dropped in constructing the example. -/
+Mathlib `Precoverage.IsStableUnderBaseChange`; Stacks Project, Categories, Tag 004A. -/
 theorem site_system_strictification_data_refuted : ¬ (∀
     (I : Type 0) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (C : I → Cat.{0, 0}) (P : ∀ i : I, Precoverage (C i))

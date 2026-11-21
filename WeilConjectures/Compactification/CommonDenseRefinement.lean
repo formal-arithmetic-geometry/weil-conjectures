@@ -33,50 +33,8 @@ private lemma infSnd_preimage {X S : Scheme.{u}} {f : X ⟶ S} [QuasiCompact f]
   exact (range_snd_of_isPullback (isPullback_infSnd c d).flip).symm
 
 /-- For two compactifications of a separated finite-type morphism over a qcqs scheme,
-the scheme-theoretic image of the diagonal graph is a dense compactification refining both;
-every finite nonempty family admits such a common dense refinement. Source: blueprint, with Stacks Project Tags 01W3,
-01W4, 01W5, 01JY, 01QR, 01RG and 01R7.
-
-Proof (the seven DAG steps):
-1. Put `P = c₁.Z ×_S c₂.Z`. Its first projection is the base change of the proper
-   structure map `c₂.g`, so it is proper (Stacks 01W4). Its composite with `c₁.g` is
-   proper (01W3), hence separated.
-2. Over the inverse image `P_k°` of either distinguished open, the graph identifies with
-   `(id_X,j_ℓ) : X → X ×_S c_ℓ.Z`. This is the base change of the diagonal of the proper
-   map `c_ℓ.g`: on test schemes a triple `(a,b,c)` satisfies `j_ℓ a = c = b`, so is
-   uniquely determined by `a`. The diagonal is closed and closed immersions are stable
-   under base change (01QR). Thus each restricted graph is closed, and the whole graph
-   is an immersion, factoring as one such closed graph followed by an open immersion.
-3. Each input open is quasi-compact: its composite with the proper structure map is
-   the finite-type, hence quasi-compact map `f`, and the proper structure map is
-   quasi-separated. Indeed its diagonal is closed, with affine inverse images of the
-   form `Spec(A/I)`, hence quasi-compact. The map `P₁° → P` is a base change of `j₁`,
-   hence quasi-compact. Over an affine open `V` of `P`, its inverse image in `P₁°` is
-   quasi-compact, and the inverse image under the closed graph is a closed subspace
-   thereof, hence quasi-compact. Therefore the graph is a quasi-compact immersion.
-4. Apply the quasi-compact immersion factorization through its scheme-theoretic image
-   (01RG). It gives the quasi-compact scheme-theoretically dense open `j : X → Z` and
-   the closed immersion `i : Z → P` (01R7). Since `P → S` is proper, so is `Z → S`
-   (01W5). Projection gives `j ≫ q_k = j_k` and the structure-map factorization, so
-   these maps form a dense compactification.
-5. On `Z_k° = q_k⁻¹(j_k(X))`, the closed graph from Step 2 factors through `Z_k°` and
-   is still closed: locally the factorization gives ideals `I ⊆ J` and the quotient
-   surjection `A/I → A/J`. But this copy of `X` is also the restriction of the dense
-   open `j`. Restricting the injection `O_Z → j_* O_X` to `Z_k°` makes its kernel,
-   the ideal of the closed copy of `X`, zero. The closed immersion is therefore an
-   isomorphism. Hence `q_k⁻¹(j_k(X)) = j(X)` as open subschemes, including their sheaves.
-6. The projections are over `S`; Step 4 gives both open triangles, and Step 5 gives
-   the boundary equalities. The input opens are quasi-compact by the argument of
-   Step 3, and the new open is quasi-compact by Step 4. Thus both projections satisfy
-   exactly the landed three-condition refinement definition, even for non-dense inputs.
-7. Induct on the positive number of compactifications. For a singleton apply Steps 1--6
-   to `(c₁,c₁)`, obtaining a dense refinement without assuming the input dense. At the
-   induction step take a dense common refinement `d` of the preceding members, and
-   apply Steps 1--6 to `(d,c_n)`, obtaining a dense `e`. Compose the refinements to
-   each preceding member: the triangles compose and the inverse-image identity is
-   `(r_k a)⁻¹(j_k(X)) = a⁻¹(j_d(X)) = j_e(X)`. Enumerate any finite nonempty index
-   type to obtain the conclusion; no empty-family existence assertion is used.
--/
+the scheme-theoretic image of the diagonal graph is a dense compactification refining both.
+Stacks Project, Tags 01W3, 01W4, 01W5, 01JY, 01QR, 01RG and 01R7. -/
 theorem exists_common_dense_refinement {X S : Scheme.{u}} (f : X ⟶ S)
     [CompactSpace S] [QuasiSeparatedSpace S] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] (c₁ c₂ : Compactification f) :

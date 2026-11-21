@@ -19,7 +19,8 @@ public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 /-!
 # The termwise product functor on strict tower complexes
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0941, the termwise product of evaluated tower complexes.
+Source: Stacks Project, sites-cohomology.tex, Tag 0941, the termwise product of evaluated tower
+complexes.
 
 This packages the existing `roosP` and `roosPmap` as a functor, using their
 existing identity and composition laws. No shift comparison is part of this definition.

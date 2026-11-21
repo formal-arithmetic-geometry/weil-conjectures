@@ -68,25 +68,7 @@ private theorem spectral_left_edge_isIso
 /-- The left edge is induced by applying `G` to the cocycle quotient, and is an
 isomorphism when the positive columns vanish. The equation is written after precomposition
 with `G` of the cycles, identified with the cycles of the mapped complex by left exactness.
-Source: Stacks Project, Derived Categories, Tags 015N and 015J.
-
-Proof:
-1. The image under G of the cycle inclusion is killed by the next differential,
-   by functoriality and iCycles_d. Lift it to the cycles of GF(I) by liftCycles.
-   Its inclusion equation is liftCycles_i. Apply grothendieck_cocycle_comparison
-   to this lift for the quotient equation; this is the remaining CE comparison.
-2. Define the filtration directly by transporting the spectral object's image
-   filtration through grothendieckSpectralObjectHBotTopIso. Monotonicity of the
-   image filtration makes it decreasing. The first-quadrant bounds give top at
-   zero and bottom at n+1. These imply finiteness, exhaustiveness and separation.
-3. Identify H^{p+q}(q,q+1) with R^p G(R^q F(X)). Under the vanishing hypothesis,
-   H^m(q,q+1) is zero for q<n and m=n or n+1. Induction on the upper endpoint,
-   using exact₂ and H^m(bot,0)=0, gives H^n(bot,n)=H^{n+1}(bot,n)=0.
-   Thus H^n(bot,top) -> H^n(n,top) is an isomorphism by the spectral object's
-   exact sequence. H^n(n,n+1) -> H^n(n,top) is already an isomorphism by the
-   first-quadrant bound. Their composite is leftEdge. Transporting it through
-   the canonical abutment and target isomorphisms proves the collapse clause.
--/
+Source: Stacks Project, Derived Categories, Tags 015N and 015J. -/
 theorem grothendieck_left_edge_cocycle
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]

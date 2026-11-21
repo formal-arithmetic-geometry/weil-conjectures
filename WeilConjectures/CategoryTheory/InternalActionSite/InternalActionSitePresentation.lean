@@ -189,34 +189,7 @@ private theorem forgetPresheaf_reflects {R : Cᵒᵖ ⥤ RingCat.{u}} :
     by apply Subtype.ext; exact IsIso.inv_hom_id f.val⟩⟩
 
 /-- Internal actions are modules on the displayed twisted-arrow ringed site,
-compatibly with sheafification, kernels, cokernels and detection of zero.
-
-Proof: construct the category with labels b g*a; associativity is functoriality
-of the group sheaf. The pullback of (f,a),(g,b) has legs (p,1) and
-(q,p*a (q*b)^-1); the cone equation determines its unique factor. These pullbacks
-give covering pullbacks by the base covering-pullback axiom. Projection also
-gives isomorphism covers. A sieve contains (f,a) exactly when it contains (f,1),
-by invertibility of (1,a); its label-1 arrows form a base sieve. The generated
-topology is precisely the sieves whose label-1 sieve is J-covering, by transporting
-the Grothendieck axioms and comparing normalized generators in both directions.
-The image precoverage need not be closed under bind. Normalize covers using (1,a_i), whose
-inverses have labels a_i^-1. Extend a module by restrictions a f*m; naturality
-of its action gives contravariant composition. Recover the ordinary restrictions
-from (f,1) and the action from (1,a); these constructions are inverse on objects
-and maps and preserve addition. On normalized covers the matching diagrams are
-the original matching diagrams, so this equivalence restricts to sheaves and
-makes the coefficient presheaf a sheaf. For sheafification, sheafify K times P
-to P on underlying sets. Finite-product preservation (Stacks 00WJ) and the
-underlying-set comparison (00YR) produce the action on P-sharp. Sheafifying
-the action-law and linearity diagrams proves its laws. Maps from P extend
-uniquely and equivariantly since maps from K times P-sharp are determined by
-their composites with the sheafification unit. The resulting reflection is
-therefore module sheafification on the twisted site (03CY), giving the two
-unit-compatible natural comparisons. Kernels are sectionwise stable under the
-action, and the sectionwise cokernel inherits an action whose sheafification
-has the equivariant cokernel universal property (03DA). Thus forgetting creates
-both. Finally all section modules are unchanged, so zero is detected on C.
-The construction covers trivial groups, zero rings, and empty covers. -/
+compatibly with sheafification, kernels, cokernels and detection of zero. -/
 theorem presentation [HasFiniteLimits C] (J : Precoverage C)
     (hJ : J.IsSiteForCoverings)
     (hK : Presheaf.IsSheaf J.toGrothendieck (K ⋙ forget GrpCat.{u}))

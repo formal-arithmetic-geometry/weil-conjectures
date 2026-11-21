@@ -11,7 +11,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Exact-functor transport of a resolution cocycle
 
-Source: Stacks Project, Derived Categories, Tag 013P; Cohomology, Tag 01FB.
+## References
+
+* Stacks Project, Derived Categories, Tag 013P; Cohomology, Tag 01FB.
 -/
 
 @[expose] public section
@@ -66,10 +68,7 @@ private lemma comparisonExtension_f
 set_option backward.isDefEq.respectTransparency false in
 /-- The derived-category morphism equality underlying exact-functor cocycle transport.
 
-Source: Stacks Project, Derived Categories, Tag 013P; Cohomology, Tag 01FB.
-The proof extends the supplied comparison to integer complexes, applies the
-exact-functor formula for `Ext.mapExactFunctor_hom`, and simplifies the
-single-complex and shift isomorphisms. -/
+Stacks Project, Tags 013P and 01FB. -/
 theorem exactFunctor_resolution_cocycle_hom
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [Abelian C] [Abelian D] [HasExt.{w₁} C] [HasExt.{w₂} D]
@@ -197,18 +196,7 @@ theorem exactFunctor_resolution_cocycle_hom
 /-- An augmented chain comparison computes exact-functor transport of Ext,
 followed by the coefficient morphism lifted by that comparison.
 
-Source: Stacks Project, Derived Categories, Tag 013P; Cohomology, Tag 01FB.
-
-Proof: Extend the natural-number resolutions by zero to integer cochain complexes.
-The augmentation of R is a quasi-isomorphism; exactness of L preserves it.
-The commutation at degree zero of e with the augmentations gives a commuting square
-from the single complex on L(A) into the extended complexes. In the derived category
-invert the augmentations. The resulting equality identifies the map induced by e
-with the coefficient morphism f. The closed map a represents R.extMk a under the
-Hom-complex computation of Ext. Applying L to that representative and then e gives
-L(a) followed by e in degree q. Thus exact-functor transport followed by Ext.mk₀ f
-is precisely its class in I. Extension by zero also gives this argument in degree
-zero; no negative boundary is introduced, and zero objects cause no exception. -/
+Stacks Project, Tags 013P and 01FB. -/
 theorem exactFunctor_resolution_cocycle
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [Abelian C] [Abelian D] [HasExt.{w₁} C] [HasExt.{w₂} D]

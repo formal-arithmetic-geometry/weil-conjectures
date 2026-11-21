@@ -107,18 +107,7 @@ private lemma free_generator_vadd (X : Scheme.{u})
 /-- A Zariski torsor is the fibre over one of an extension by the integer sheaf.
 
 Source: Stacks Project, Cohomology of Sheaves, Lemma 02FQ, first construction
-(https://stacks.math.columbia.edu/tag/02FQ).
-Proof: Use `Torsor.FreeExtension`, the sheaf pushout imposing
-`[y] - [x] = T.sub x y` on the free abelian sheaf of torsor sections.
-Its degree projection and coefficient inclusion form a short exact sequence by
-`Torsor.FreeExtension.shortExact`. Sheafification naturality makes the generator
-map `t ↦ [t]` natural. The augmentation sends `[t]` to one, so the map takes values
-in the lifting torsor of the global section one. Applying the pushout relation to
-`(t, g +ᵥ t)` gives `[g +ᵥ t] = [t] + ι(g)`, proving equivariance. The proved theorem
-`Torsor.Iso.ofHom` turns any equivariant map between torsors into an isomorphism:
-simple transitivity gives injectivity, and local nonemptiness gives local
-surjectivity; the sheaf property then gives the isomorphism. All constructions
-have coefficient universe `u`, with no choice of an unproved existence witness. -/
+(https://stacks.math.columbia.edu/tag/02FQ). -/
 theorem zariski_torsor_representative_exists (X : Scheme.{u})
     (G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (T : G.Torsor) :
     ∃ (E : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})

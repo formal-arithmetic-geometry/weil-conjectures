@@ -29,8 +29,6 @@ For `F` killed by `ϖ`, represent `K` by a K-flat complex `P`: then `K ⊗ᴸ F`
 complex `P ⊗ κ` of objects killed by `ϖ`
 (`ShortComplex.Exact.map_tensorRight_of_smul_eq_zero`). A general `F` has the finite
 filtration by the `ϖ^s F`, whose graded pieces are killed by `ϖ`.
-
-This is the categorical core of blueprint `lemma-bounds-finite-reductions--2`.
 -/
 
 @[expose] public section
@@ -68,11 +66,7 @@ lemma smul_id_image_eq_zero (r : R) {X Y : C} (g : X ⟶ Y) (hY : r • 𝟙 Y =
 omit [MonoidalLinear R C] in
 /-- **Exactness of `- ⊗ F` on objects killed by `r`.** Let `F` be killed by `r`, and assume that
 `- ⊗ F` preserves monomorphisms between objects killed by `r`. Then `- ⊗ F` preserves the
-exactness of a short complex `S` of objects killed by `r`.
-
-Factor `S.g` through its image `I`, which is killed by `r`. The short complex
-`S.X₁ ⟶ S.X₂ ⟶ I` is right exact, and `- ⊗ F` is right exact; and `I ⊗ F ⟶ S.X₃ ⊗ F` is a
-monomorphism. -/
+exactness of a short complex `S` of objects killed by `r`. -/
 lemma ShortComplex.Exact.map_tensorRight_of_smul_eq_zero (r : R) {F : C}
     (hmono : ∀ {X Y : C} (f : X ⟶ Y) [Mono f], r • 𝟙 X = 0 → r • 𝟙 Y = 0 →
       Mono (f ▷ F))
@@ -142,12 +136,7 @@ variable [IsGrothendieckAbelian.{v} C] [HasDerivedCategory.{v} C]
 
 /-- **The residue test for objects killed by `r`.** Let `κ` and `F` be killed by `r`, with
 `κ ⊗ F ≅ F`, and assume that tensoring with `F` preserves monomorphisms between objects killed
-by `r`. If `K ⊗ᴸ κ` has homology concentrated in `[a, b]`, so has `K ⊗ᴸ F`.
-
-Represent `K` by a K-flat complex `P` of flat objects. Then `K ⊗ᴸ F` is `P ⊗ F ≅ (P ⊗ κ) ⊗ F`,
-and `P ⊗ κ`, which computes `K ⊗ᴸ κ`, is a complex of objects killed by `r`, exact outside
-`[a, b]`; tensoring with `F` preserves this exactness
-(`CategoryTheory.HomologicalComplex.ExactAt.map_tensorRight_of_smul_eq_zero`). -/
+by `r`. If `K ⊗ᴸ κ` has homology concentrated in `[a, b]`, so has `K ⊗ᴸ F`. -/
 lemma homologyConcentratedIn_tensor_singleFunctor_of_smul_eq_zero (r : R) {κ F : C}
     (hκ : r • 𝟙 κ = 0) (e : κ ⊗ F ≅ F)
     (hmono : ∀ {X Y : C} (f : X ⟶ Y) [Mono f], r • 𝟙 X = 0 → r • 𝟙 Y = 0 →
@@ -204,22 +193,11 @@ lemma exists_shortExact_of_smul_pow_succ_eq_zero (r : R) {m : ℕ} {F : C}
       ← Linear.smul_comp]
     exact h
 
-/-- The residue test on the pro-étale site (the
-categorical statement).
-
-Let `r ∈ R` be nilpotent and `κ ≅ 𝟙 / r` the cokernel of `r` on the unit, and assume that
-tensoring with an object killed by `r` preserves monomorphisms between objects killed by `r`
-(for sheaves of `R`-modules with `R / r` a field: every module over the field `R / r` is flat).
-Then `K ∈ D(C)` has Tor amplitude in `[a, b]` if and only if `K ⊗ᴸ κ` has homology concentrated
-in `[a, b]`.
-
-One direction is the definition of Tor amplitude. Conversely, for `F` killed by `r` this is
-`DerivedCategory.homologyConcentratedIn_tensor_singleFunctor_of_smul_eq_zero`, since
-`κ ⊗ F ≅ F` (`CategoryTheory.tensorIsoOfSmulEqZero`); a general `F` is killed by some power
-`r ^ m`, and the short exact sequences `0 ⟶ r F ⟶ F ⟶ F / r F ⟶ 0`
-(`DerivedCategory.exists_shortExact_of_smul_pow_succ_eq_zero`) give distinguished triangles
-`K ⊗ᴸ r F ⟶ K ⊗ᴸ F ⟶ K ⊗ᴸ F / r F ⟶` whose outer terms have homology in `[a, b]` by
-induction on `m`. -/
+/-- **The residue test.** Let `r ∈ R` be nilpotent and `κ ≅ 𝟙 / r` the cokernel of `r` on the
+unit, and assume that tensoring with an object killed by `r` preserves monomorphisms between
+objects killed by `r` (for sheaves of `R`-modules with `R / r` a field: every module over the
+field `R / r` is flat). Then `K ∈ D(C)` has Tor amplitude in `[a, b]` if and only if `K ⊗ᴸ κ`
+has homology concentrated in `[a, b]`. -/
 theorem torAmplitudeIn_iff_homologyConcentratedIn_tensor_singleFunctor (r : R)
     (hr : IsNilpotent r) {κ : C} (eκ : κ ≅ cokernel (r • 𝟙 (𝟙_ C)))
     (hmono : ∀ F : C, r • 𝟙 F = 0 → ∀ {X Y : C} (f : X ⟶ Y) [Mono f], r • 𝟙 X = 0 →

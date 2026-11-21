@@ -168,12 +168,7 @@ theorem component_rep (X K : A) (N : B)
 
 /-- A tensor-preserving left adjoint carries the closed-Hom adjunction to its
 restriction-of-scalars comparison, naturally in both inputs.
-Source: Stacks 07A6 and 08J9.
-Proof: compose the two scalar transposes, the two closed transposes, and the
-strong tensor comparison. Naturality in a testing object identifies this
-bijection with postcomposition by its value at the identity. Apply the inverse
-bijection to the target identity to obtain the inverse map. Naturality in the
-two remaining objects gives naturality of these component isomorphisms. -/
+Source: Stacks 07A6 and 08J9. -/
 def iso : ((F.op.prod (𝟭 B)) ⋙ I ⋙ U) ≅ ((𝟭 Aᵒᵖ).prod U ⋙ H) :=
   NatIso.ofComponents (fun p ↦ component S T adj μ p.1.unop p.2) (by
     rintro ⟨K, N⟩ ⟨K', N'⟩ ⟨f, n⟩
@@ -219,10 +214,7 @@ private theorem restrictionTensor_unit (P : B) (K : A) :
   simp
 
 /-- Evaluation uniquely normalizes the comparison, using the scalar triangle identity.
-Source: Stacks 07A6 and 08J9.
-Proof: unroll the five Hom bijections at the source identity. Naturality of the
-scalar unit and of the strong tensor map moves the extra scalar unit to the
-second factor, where the scalar counit cancels it by the triangle identity. -/
+Source: Stacks 07A6 and 08J9. -/
 theorem evaluation (K : A) (N : B) :
     (S.transpose _ K (U.obj N)).symm ((iso S T adj μ).hom.app (op K, N)) =
       restrictedEvaluation S T adj μ K N := by
@@ -240,9 +232,7 @@ theorem evaluation (K : A) (N : B) :
   rfl
 
 /-- Equality of restricted evaluations determines the natural isomorphism uniquely.
-Source: Stacks 08J9.
-Proof: the closed transpose is bijective, so its prescribed value determines
-each component. Natural transformations and natural isomorphisms are extensional. -/
+Source: Stacks 08J9. -/
 theorem unique (β : ((F.op.prod (𝟭 B)) ⋙ I ⋙ U) ≅ ((𝟭 Aᵒᵖ).prod U ⋙ H))
     (hβ : ∀ (K : A) (N : B), (S.transpose _ K (U.obj N)).symm
       (β.hom.app (op K, N)) = restrictedEvaluation S T adj μ K N) :

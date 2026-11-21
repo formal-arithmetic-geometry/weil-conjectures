@@ -29,7 +29,9 @@ public import WeilConjectures.CategoryTheory.SiteConstantModuleHom
 
 /-! # Internal Hom of constant module sheaves
 
-Source: Stacks Project, Modules on Sites, Tag 093T (1), and Tag 0E8H.
+## References
+
+* Stacks Project, Modules on Sites, Tag 093T (1), and Tag 0E8H.
 -/
 
 @[expose] public noncomputable section
@@ -405,28 +407,7 @@ private lemma homComparison_isIso (M N : ModuleCat.{max u v} Λ)
 /-- The canonical Hom comparison for constant module sheaves, together with its naturality
 and the same-map rule on each localized site.
 
-Source: Stacks Project, Modules on Sites, Tag 093T (1), and Tag 0E8H.
-
-Proof plan:
-1. The local module Hom presheaf is a sheaf by lem-sf-local-module-hom-sheaf.
-Send a constant linear map to its constant module sheaf map on each slice. The
-sheafification unit formula proves additivity and compatibility with constant scalars.
-2. A finite presentation implies finite generation, also in rank zero. Apply
-lem-sf-constant-module-hom-locally-injective and
-lem-sf-constant-module-hom-locally-surjective to the same constant-map comparison.
-3. Apply lem-weil-pbc-site-sheafification-iso-locally-bijective and the universal
-property of def-weil-pbc-sheafification. Since the local Hom is already a sheaf,
-this gives the canonical additive comparison and its isomorphism assertion.
-4. Use lem-sf-constant-module-unit-locally-bijective for local constant Hom sections,
-lem-pc-sites-sheafification-underlying-sets and
-lem-weil-pbc-site-sheafification-sections-local for local constant ring sections.
-Refine both coverings, compute scalar compatibility on constants and use separatedness.
-The inverse is linear by injectivity. Empty covering sieves give unique sections.
-5. On constants the naturality square is functoriality applied to v f u. Local
-constant representatives and separatedness extend it to all sections. For localization,
-lem-weil-pbc-site-constant-restriction preserves the units and constant maps. The
-recorded internal Hom and relocalization have the same slice morphisms and restrictions,
-so both comparisons send a constant f to the same restricted sheaf map. -/
+Stacks Project, Modules on Sites, Tag 093T (1), and Tag 0E8H. -/
 theorem siteConstantModule_hom
     (P Q : ModuleCat.{max u v} Λ) [Module.FinitePresentation Λ P] :
     ∃ comparison : ∀ M N : ModuleCat.{max u v} Λ,

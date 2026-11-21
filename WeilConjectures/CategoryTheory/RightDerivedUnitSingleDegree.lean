@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.RightDerivedCanonicalSingleUnit
 
 /-! # Normalization of the derived unit on a single-degree complex
 
-Source: Stacks Project, derived.tex, Tag 015J, computation by an injective resolution.
+Source: Stacks Project, Tag 015J, computation by an injective resolution.
 -/
 
 @[expose] public section
@@ -30,27 +30,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
 /-- The derived unit, under a normalized identification with a single-degree object,
 is the ordinary coefficient comparison on cycles. This statement involves no spectral
 object, truncation functor, or spectral edge.
-Source: Stacks Project, derived.tex, Tag 015J, proof, remark (1).
-
-Proof: The support hypothesis gives the componentwise isomorphism from L to the
-single complex on L.X n, with the degree-n component the identity and the other components
-the unique isomorphisms of zero objects. Its differential compatibility follows because
-all differentials have a zero source or target. Transport the equation along this
-isomorphism by unit naturality and homologyFunctorObjQIso naturality. Homology is fully
-faithful between pure degree-n derived objects, so the displayed normalization determines
-f as the canonical identification with the single complex on H^n(Q L).
-
-Shift this single complex by n to degree zero. Naturality of the unit with respect to
-shifts (NatTrans.CommShift), the single-functor shift isomorphism, and homology shift
-comparison turn the resulting composite into rightDerivedPlusSingleUnitHomology followed
-by singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0. The proved theorem
-rightDerivedPlusSingleUnitHomology_comp_comparison identifies that composite with
-G.toRightDerivedZero.app of the sole coefficient. Since G preserves finite limits,
-rightDerivedZeroIsoSelf.inv is toRightDerivedZero; its composite with the hom comparison
-is the identity. Transport back through the shift and quotient homology comparisons.
-Finally the given equation for a determines a uniquely by the mono cycle inclusion,
-so it agrees with the cycle representative in this computation. This proves the desired
-equality, also for n=0 and for a zero coefficient. -/
+Source: Stacks Project, Tag 015J. -/
 theorem rightDerivedFunctorPlusUnit_single_degree
     (L : CochainComplex.Plus B) (n : ℕ)
     (hL : ∀ i : ℤ, i ≠ (n : ℤ) → IsZero (L.obj.X i)) :

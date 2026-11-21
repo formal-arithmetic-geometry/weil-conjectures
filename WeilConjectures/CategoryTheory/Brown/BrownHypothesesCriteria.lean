@@ -74,7 +74,7 @@ noncomputable abbrev brownCriteriaDerivedMonoidal
 attribute [local instance 30000] brownCriteriaDerivedMonoidal
 
 /-- Exact countable products follow directly from repleteness and the exact forgetful
-functor on module objects. Keep this proof local to avoid importing proper direct images. -/
+functor on module objects. -/
 private theorem brownHypotheses_countableAB4Star
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
@@ -114,16 +114,7 @@ private theorem isZero_of_shifted_orthogonal
 
 /-- Any family representing every object of `S` up to isomorphism generates the
 localizing closure of `S`. The property `S` need not be thick or shift-stable, and
-the representatives need not be compact or pairwise nonisomorphic.
-
-Proof: suppose all morphisms from the coproduct into every shift of `K` vanish.
-Every map from one representative to a shift of `K` extends to the coproduct by
-zero on the other summands. Thus every map from an object of `S` into a shift
-of `K` vanishes. The left orthogonal of all shifts of `K` is replete,
-triangulated, and closed under coproducts, since maps out of a coproduct are
-determined by their components. It contains `S`, hence its localizing closure.
-In particular it contains `K`, so the identity of `K` vanishes and `K` is zero.
-Contraposition gives the stated nonzero-map generation criterion. -/
+the representatives need not be compact or pairwise nonisomorphic. -/
 theorem localizingClosure_generatingFamily
     {C : Type*} [Category* C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
@@ -157,17 +148,7 @@ private theorem compact_of_iso
 
 /-- Brown's hypotheses reduce to thickness, essential smallness, and compactness of the
 constructible finite-Tor objects. The ambient structures and generation follow formally
-from the definition of the localizing closure, for every commutative condensed coefficient.
-
-Proof: the forward direction uses essential smallness to choose a small equivalent
-category of the constructible finite-Tor subcategory. Its representatives belong to the
-localizing closure by minimality. The bundle makes them compact. Every constructible
-finite-Tor object is isomorphic to a representative, so compactness transports to it.
-For the reverse direction use the coefficient-independent structural theorem for local
-smallness and split idempotents. The localizing intersection inherits its triangulation.
-For any small presentation, compactness holds by the supplied objectwise assumption,
-and the orthogonal/minimality argument proves generation. No assumption on a base field,
-no skeletal condition, and no coefficient classification is used. -/
+from the definition of the localizing closure, for every commutative condensed coefficient. -/
 theorem brownHypothesesFor_iff
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
@@ -311,13 +292,7 @@ private theorem brownHypotheses_admissible_small
       (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h))))) X
 
 /-- For a Noetherian scheme, admissibility leaves only compactness to check.
-No field, characteristic, or separatedness hypothesis is required for this equivalence.
-
-Proof: apply brownHypotheses_admissible_small to the actual admissibility predicate.
-This supplies thickness and essential smallness
-on any compact locally Noetherian scheme. The formal Brown criterion then extracts
-compactness in one direction and assembles the bundle in the other direction.
-The structural and generation clauses need no additional geometric hypothesis. -/
+No field, characteristic, or separatedness hypothesis is required for this equivalence. -/
 theorem brownHypothesesFor_iff_compact_of_noetherian
     (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     [CompactSpace X] [IsLocallyNoetherian X]

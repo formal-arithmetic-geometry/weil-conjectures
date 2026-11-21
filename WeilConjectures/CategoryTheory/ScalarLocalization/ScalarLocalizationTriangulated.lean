@@ -11,8 +11,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHo
 
 /-! # Triangulation of scalar localization
 
-Source: Stacks Project, Derived Categories, Tags 05R2 and 05R6, applied to the scalar
-localization in the blueprint/.
+## References
+
+* Stacks Project, Derived Categories, Tags 05R2 and 05R6.
 -/
 
 @[expose] public section
@@ -77,37 +78,7 @@ private noncomputable def rationalComparison
 
 set_option linter.unusedVariables false in
 /-- Scalar localization with its induced shift and image triangles is triangulated, and
-localization is exact. Source: Stacks Project, Tags 05R2 and 05R6.
-
-Proof plan:
-1. Use `lem-weil-linear-scalar-localization-category` for composition, Q, and the induced
-shift. The zero object and biproduct diagrams survive. By
-`lem-weil-pbc-localization-module-tensor` and `def-weil-pbc-module-localization-away`,
-morphisms are fractions f/p^n, with equality after multiplying by a further power of p.
-2. Let S consist of arrows inverted by Q. An inverse fraction can be cleared to give
-h s = p^N id and s h = p^N id in C. Identity/composition closure, saturation, and shift
-invariance follow, giving MS1, MS4, MS5 of `def-pur-saturated-triangulated-localization`.
-3. The cleared inverse gives both Ore squares: use p^N id as the new denominator.
-For cancellation, Q(f) = Q(g) means p^k(f-g) = 0, giving both equalizing denominators.
-This proves MS2 and MS3.
-4. Apply `lem-weil-pbc-hom-into-triangle-exact` to triangles and their rotations. Localize
-the resulting five-term R-linear exact Hom rows. If b(y)/p^n = 0, then b(p^k y) = 0
-for some k; lift p^k y along the preceding map to prove exactness after localization.
-5. Complete a square of distinguished triangles by TR3. Four vertical Hom maps are
-invertible, so `lem-weil-pbc-five-lemma` in the abelian category of additive groups
-makes the middle Hom map invertible. Testing all sources proves the
-third triangle map is inverted by Q, establishing MS6.
-6. Verify Q's localization universal property for arbitrary functors F inverting S:
-send f/p^n to F(f) F(p id)^(-n). Scalar naturality gives well-definedness and composition;
-the same identity extends natural transformations uniquely. No additivity of F is needed.
-7. Apply `lem-pur-localization-triangles-05r6`. Its shift agrees with the tensor-induced
-shift, its distinguished triangles are exactly the isomorphic Q-images, and it supplies
-TR4 and exactness of Q. There is no idempotent completion.
-
-The existential instances supply structures on the fixed raw scalar category. The equality
-of shift functors specifies the induced shift on objects and tensor morphisms. The HEq
-normalization specifies the canonical identity comparison with Q, rather than a twisted
-shift comparison. Only the shift by one is assumed R-linear. -/
+localization is exact. Source: Stacks Project, Tags 05R2 and 05R6. -/
 theorem exists_triangulated_scalarLocalization
     (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
     [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ]

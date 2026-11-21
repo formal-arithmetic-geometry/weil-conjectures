@@ -24,7 +24,7 @@ universe u v
 
 /-- Two alternating short exact rows, with their compatible augmentations.
 These are genuine diagram data, with no injectivity or quasi-isomorphism assumptions.
-Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4. -/
+Stacks Project, Derived Categories, Lemma 015I. -/
 structure CartanEilenbergRows {C : Type u} [Category.{v} C] [Abelian C]
     (S : CochainComplex C ℤ) where
   A : ℤ → C

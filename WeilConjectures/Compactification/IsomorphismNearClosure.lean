@@ -25,15 +25,22 @@ This file proves the **isomorphism near a boundary closure** (Stacks Project Tag
   proper morphism which is an isomorphism over a neighbourhood of a closed piece `T` of
   `U` acquires, after a `U`-admissible blow-up, a strict transform which is an
   isomorphism over a neighbourhood of the closure of `T`.
-- `AlgebraicGeometry.isoNearClosureBlowup`: the blow-up `IsoBl_{U,T}(q)` of blueprint
-  `lemma-extending-isomorphism-over-closure-closed--1`, assembled from its named steps
-  (constructible separation, separation blow-up, elimination over the separated region, extension of
-  the centre, composition), and
+- `AlgebraicGeometry.isoNearClosureBlowup`: the blow-up `IsoBl_{U,T}(q)`, assembled from its
+  named steps (constructible separation, separation blow-up, elimination over the separated
+  region, extension of the centre, composition), and
   `AlgebraicGeometry.exists_isIso_strictTransformMap_isoNearClosureBlowup`: it does the job.
 
 It is used for the improved comparison projection of the two-open compactification
 theorem, and rests on elimination of indeterminacy
 (`WeilConjectures.Compactification.EliminationOfIndeterminacy`, Tag 081S).
+
+## Implementation details
+
+The elimination of indeterminacy is performed over the quasi-compact open of `X₁` above
+`V₂ = U \ E_c`, and the centre is extended from a quasi-compact open `A ⊆ X₁ \ closure(E_c)`
+produced by a second constructible separation, since the extension of admissible blow-ups
+(Tag 080M) needs a quasi-compact open. `A` still contains the closure of the inverse image of `T`,
+which is all that is used.
 -/
 
 @[expose] public section
@@ -47,11 +54,10 @@ namespace AlgebraicGeometry
 
 /-! ### The isomorphism-near-closure construction
 
-The named steps of blueprint `lemma-extending-isomorphism-over-closure-closed--1`, in the form used
-by the formal proof. Throughout, `q : Z ⟶ X` is proper, `U` is a quasi-compact open of the qcqs
-scheme `X`, `T ⊆ U` is closed in `U`, and `q` is an isomorphism over an open neighbourhood `N`
-of `T`; `M = q.maximalIsomorphismOpen` is the maximal open over which `q` is an isomorphism, so `E = U \ M` is the blueprint's
-exceptional set. -/
+The named steps of the construction. Throughout, `q : Z ⟶ X` is proper, `U` is a quasi-compact
+open of the qcqs scheme `X`, `T ⊆ U` is closed in `U`, and `q` is an isomorphism over an open
+neighbourhood `N` of `T`; `M = q.maximalIsomorphismOpen` is the maximal open over which `q` is an
+isomorphism, and `E = U \ M` is the exceptional set. -/
 
 section IsoNearClosureConstruction
 
@@ -82,8 +88,8 @@ variable {X Z : Scheme.{u}} {U : X.Opens} (hU : IsCompact (U : Set X)) (q : Z �
   (hN : IsIso (q ∣_ N))
 
 /-- **Step 1 of the isomorphism-near-closure construction: constructible separation data**
-`(T_c, E_c)` in `U` of the closed subsets `T` and `E = U \ M`. The two pieces are closed in `U`, have
-quasi-compact complements, contain `T` resp. `E`, and are disjoint. -/
+`(T_c, E_c)` in `U` of the closed subsets `T` and `E = U \ M`. The two pieces are closed in `U`,
+have quasi-compact complements, contain `T` resp. `E`, and are disjoint. -/
 noncomputable def isoNearClosureSeparation : Set U.toScheme × Set U.toScheme :=
   haveI : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
   PrespectralSpace.constructibleSeparation hT
@@ -200,8 +206,7 @@ noncomputable def isoNearClosureNbhdSeparation :
 
 /-- The quasi-compact open `A ⊆ X₁`, the complement of the second piece of
 `isoNearClosureNbhdSeparation`: it contains the closure of the inverse image of `T_c` and
-misses the closure of the inverse image of `E_c`. It replaces the blueprint's open
-`X₀ = X₁ \ closure(E_c)`, which need not be quasi-compact. -/
+misses the closure of the inverse image of `E_c`. -/
 noncomputable def isoNearClosureNbhd :
     (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup.Opens :=
   ⟨(isoNearClosureNbhdSeparation hU q hT hTN hN).2ᶜ, by
@@ -310,8 +315,8 @@ lemma isIso_isoNearClosureLift_restrict :
   infer_instance
 
 /-- **Step 5 of the isomorphism-near-closure construction: elimination over the separated
-region**: the elimination-of-indeterminacy blow-up of the canonical lift `lam₁` over the quasi-compact
-open of `X₁` above `V₂`, over which `lam₁` is an isomorphism. -/
+region**: the elimination-of-indeterminacy blow-up of the canonical lift `lam₁` over the
+quasi-compact open of `X₁` above `V₂`, over which `lam₁` is an isomorphism. -/
 noncomputable def isoNearClosureElimination :
     IsAdmissible (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup
       ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap ⁻¹ᵁ
@@ -458,14 +463,7 @@ from the named steps:
    (`isoNearClosureElimination`);
 6. its restriction to `A`, extended to a `U`-admissible centre `D` on `X₁`
    (`isoNearClosureExtendedCentre`);
-7. the composite centre `K` of `X₁ ⟶ X` and `Bl_D(X₁) ⟶ X₁` (`isoNearClosureCentre`).
-
-Difference from the blueprint: the blueprint eliminates over `X₀ = X₁ \ closure(E_c)` and
-extends from `X₀`. The formalization performs the elimination over the quasi-compact open of
-`X₁` above `V₂` and extends from the quasi-compact open `A ⊆ X₀` produced by a second
-constructible separation (step 3), since the extension of admissible blow-ups (Tag 080M) needs a
-quasi-compact open; `A` still contains the closure of the inverse image of `T`, which is all
-that is used. -/
+7. the composite centre `K` of `X₁ ⟶ X` and `Bl_D(X₁) ⟶ X₁` (`isoNearClosureCentre`). -/
 noncomputable def isoNearClosureBlowup : IsAdmissible X U where
   I := isoNearClosureCentre hU q hT hTN hN
   finiteType := (isoNearClosureCentre_spec hU q hT hTN hN).1
@@ -694,10 +692,9 @@ theorem exists_isIso_strictTransformMap_of_isoNearClosureData {X Z : Scheme.{u}}
       obtain ⟨w, hw⟩ := hmrange.ge this
       exact ⟨w, by rw [hmdef] at hw ⊢; rw [Scheme.Hom.comp_apply, hw]⟩
 
-/-- **The isomorphism-near-closure blow-up does its job** (Stacks Project Tag 0F3W): after the blow-up `IsoBl_{U,T}(q)`
-(`isoNearClosureBlowup`), the strict transform of `q` is an isomorphism over an open
-neighbourhood of the closure of the inverse image of `T`. The proof feeds the named steps of
-the construction into `exists_isIso_strictTransformMap_of_isoNearClosureData`. -/
+/-- **The isomorphism-near-closure blow-up does its job** (Stacks Project Tag 0F3W): after the
+blow-up `IsoBl_{U,T}(q)` (`isoNearClosureBlowup`), the strict transform of `q` is an isomorphism
+over an open neighbourhood of the closure of the inverse image of `T`. -/
 theorem exists_isIso_strictTransformMap_isoNearClosureBlowup {X Z : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] {U : X.Opens} (hU : IsCompact (U : Set X)) (q : Z ⟶ X) [IsProper q]
     {T : Set X} (hTU : T ⊆ (U : Set X)) (hT : IsClosed (U.ι ⁻¹' T))
@@ -717,10 +714,10 @@ theorem exists_isIso_strictTransformMap_isoNearClosureBlowup {X Z : Scheme.{u}} 
     (isOpenImmersion_strictTransformMap_isoNearClosureElimination hU q hT hTN hN) _ hDA hDdisj
     _ hKft hKsupp al hal be hbe
 
-/-- **Isomorphism near the closure of a boundary piece** (Stacks Project Tag 0F3W): a proper morphism which is an isomorphism over a
-neighbourhood of a closed piece `T` of `U` acquires, after a `U`-admissible blow-up, a strict
-transform which is an isomorphism over a neighbourhood of the closure of `T`. A witness is the
-constructed blow-up `isoNearClosureBlowup`
+/-- **Isomorphism near the closure of a boundary piece** (Stacks Project Tag 0F3W): a proper
+morphism which is an isomorphism over a neighbourhood of a closed piece `T` of `U` acquires, after a
+`U`-admissible blow-up, a strict transform which is an isomorphism over a neighbourhood of the
+closure of `T`. A witness is the constructed blow-up `isoNearClosureBlowup`
 (`exists_isIso_strictTransformMap_isoNearClosureBlowup`). -/
 theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
     {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
@@ -733,10 +730,10 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
   ⟨isoNearClosureBlowup hU q hT hTN hN,
     exists_isIso_strictTransformMap_isoNearClosureBlowup hU q hTU hT hTN hN⟩
 
-/-- **A proper open immersion with dense image is an isomorphism**: if `q : Z ⟶ X` is proper and an open immersion, and its
-image contains a scheme-theoretically dense quasi-compact open `D` of `X`, then `q` is an
-isomorphism. The image of `q` is open, and closed because `q` is universally closed; it contains
-the dense set `D`, hence is everything. -/
+/-- **A proper open immersion with dense image is an isomorphism**: if `q : Z ⟶ X` is proper and an
+open immersion, and its image contains a scheme-theoretically dense quasi-compact open `D` of `X`,
+then `q` is an isomorphism. The image of `q` is open, and closed because `q` is universally closed;
+it contains the dense set `D`, hence is everything. -/
 theorem isIso_of_isProper_of_isOpenImmersion {X Z : Scheme.{u}} (q : Z ⟶ X) [IsProper q]
     [IsOpenImmersion q] (D : X.Opens) [QuasiCompact D.ι] [IsSchemeTheoreticallyDominant D.ι]
     (hD : D ≤ q.opensRange) : IsIso q := by

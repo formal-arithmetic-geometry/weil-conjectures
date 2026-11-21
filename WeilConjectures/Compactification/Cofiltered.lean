@@ -36,7 +36,6 @@ dense:
   compactifications of a quasi-compact morphism is cofiltered or empty;
 - `AlgebraicGeometry.Compactification.isCofiltered`: it is cofiltered as soon as a
   compactification exists.
-
 -/
 
 @[expose] public section

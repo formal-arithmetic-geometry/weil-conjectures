@@ -13,8 +13,10 @@ import WeilConjectures.CategoryTheory.SiteFiniteBasisHypercoverStep
 /-!
 # Hypercovers finite in each degree from a finite covering basis
 
-Source: Stacks Project, Hypercoverings, Tag 094K, using the
-split-skeleton construction of Tag 0DAV and the hypercover definition of Tag 01G5.
+## References
+
+* Stacks Project, Hypercoverings, Tag 094K, using the
+  split-skeleton construction of Tag 0DAV and the hypercover definition of Tag 01G5.
 -/
 
 @[expose] public section
@@ -200,28 +202,7 @@ private theorem exists_zero_truncation
     simpa [μ, Z, F, FormalCoproduct.incl, Over.homMk] using he.symm ▸ hf
 
 /-- A finite covering basis gives a hypercover finite in every degree.
-Source: Stacks Project, Hypercoverings, Tags 094K, 0DAV and 01G5.
-
-Proof: Work in the slice over `T`, whose terminal object is `id_T`, whose pullbacks
-are those of `C`, and whose covers are the underlying covers. Choose a finite basis
-cover in degree zero. Terminal objects and pullbacks give finite limits
-[lem-weil-pbc-finite-limits-from-terminal-pullbacks]. The terminal formal family is
-`{id_T}` and pullbacks of formal families have components the componentwise pullbacks,
-indexed by pairs with equal target index [def-weil-pbc-formal-coproduct]. Finite-index
-families are closed under these operations, so finite boundary limits have finite
-index sets, with the same universal property against arbitrary formal families.
-Inductively cover each component of the next boundary limit by a finite basis cover.
-Attach those as the new nondegenerate simplices to the split truncation, retaining
-the prescribed degenerate copies [lem-weil-pbc-site-hypercover-finite-extension].
-Its terms remain finite basis families: only finitely many surjections between finite
-ordered sets occur. The attachment theorem gives all operators and composition laws.
-For each matching component, repeatedly adjoin the finitely many prescribed degenerate
-arrows to the chosen cover; the adjoining hypothesis shows the resulting family covers.
-This includes empty covers and empty matching families. Recursively choose extensions.
-Each degree and each operator stabilizes; taking their permanent values gives a functor,
-since each functor identity can be checked at a finite stage containing its degrees
-[def-weil-pbc-simplicial-object]. The slice gives the augmentation and degree-zero
-matching object. Every fixed degree retains its finite basis family and matching cover. -/
+Stacks Project, Hypercoverings, Tags 094K, 0DAV and 01G5. -/
 theorem exists_site_finite_basis_hypercover
     {C : Type u} [Category.{v} C] [HasPullbacks C]
     (J : Precoverage C)

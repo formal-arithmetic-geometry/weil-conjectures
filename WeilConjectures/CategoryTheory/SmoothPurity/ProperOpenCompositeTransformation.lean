@@ -31,10 +31,7 @@ Source: Stacks Project, Tag 0F7B, intrinsic ordinary construction. -/
     (associator (Q ⋙ L) J H).hom ≫
     whiskerLeft (Q ⋙ L) t ≫ whiskerRight c K
 
-/-- Evaluate the comparison word at an object.
-Proof: evaluate each natural transformation in the defining composite. Both
-associator components are identities, and functors preserve identities. Remove
-these identities and reassociate the four remaining morphisms. -/
+/-- Evaluate the comparison word at an object. -/
 theorem properOpenCompositeTransformation_app
     (A C D E T : Type*) [Category A] [Category C] [Category D]
     [Category E] [Category T]

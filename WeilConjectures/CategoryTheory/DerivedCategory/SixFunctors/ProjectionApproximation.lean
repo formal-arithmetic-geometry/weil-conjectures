@@ -21,12 +21,7 @@ namespace DerivedCategory
 
 /-- A natural transformation between triangulated functors with a common upper amplitude
 bound is invertible at an object admitting arbitrarily accurate approximations where it is
-invertible. Source: Stacks Project, Tag 0944, degreewise comparison in the proof.
-
-Proof: in degree r choose an approximation with cone bound r-d-2. After either functor,
-the cone vanishes in degrees r-1 and r. The long exact sequences make both approximation
-maps invertible in degree r. Naturality and the isomorphism at the approximation make
-the desired map invertible in degree r. Cohomological detection finishes the proof. -/
+invertible. Source: Stacks Project, Tag 0944. -/
 theorem isIso_app_of_approximations
     {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)]
     {B : Type v} [Category B] [Abelian B] [HasDerivedCategory B]

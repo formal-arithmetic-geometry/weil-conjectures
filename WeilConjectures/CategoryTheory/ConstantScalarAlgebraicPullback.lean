@@ -561,17 +561,7 @@ private theorem pullbackComparison (A : Type w) [CommRing A] :
 constant coefficient rings, after the normalized constant-scalar equivalences.
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 03D2; Sites, Tag 00YV.
-
-Proof: construct the coefficient homomorphism through the commutative-ring
-sheafification adjunction and normalize the constant-object comparison on constant
-scalars. This gives a ring unit presentation. The existing normalized module
-inverse-image adjunction identifies Mathlib's module pullback with underlying set
-inverse image. Check all seven operation graphs on the adjunction units, using the
-coefficient homomorphism and the linear module unit. Transport this presentation
-through the canonical equal-universe ULift isomorphisms. Finally, scalar-restricted
-module pushforward agrees with fixed-scalar pushforward by the identity on sections;
-the coefficient homomorphism equation on constants proves its linearity. Uniqueness
-of left adjoints gives the required pullback comparison. No flatness property is used. -/
+-/
 theorem exists_constantScalarAlgebraicPullback
     {C D : Type w} [SmallCategory C] [SmallCategory D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

@@ -21,22 +21,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
 /-- Existence of the transition transformations and their adjunct equations.
-Source: Stacks Project, Sites, Tag 0A35, adjunction paragraph.
-
-Proof: Write S_t for inverse image, R_t for restriction, and R_b for restriction
-along F(b.right). The under-category equation and F.map_comp give the equality
-f_t followed by F(b.right) = f_t'. Precomposition therefore identifies R_b
-followed by R_t with R_t'; use the isomorphism induced by this equality.
-Compose the unit at t' with the inverse of this restriction isomorphism,
-whiskered by S_t'. This is a natural transformation from the identity to
-S_t' followed by R_b and R_t. Transpose it through S_t adjoint to R_t in the
-functor category, obtaining theta_b : S_t to S_t' followed by R_b. The hom-set
-bijection proves its unit equation, and working in the functor category gives
-naturality in G automatically. Evaluate at X. The restriction isomorphism is
-an equality transport; its evaluation is the corresponding transport in sets.
-Composing a map with an equality transport preserves its Arrow object, by
-eliminating the equality. This yields exactly the displayed Arrow equation.
--/
+Source: Stacks Project, Sites, Tag 0A35, adjunction paragraph. -/
 theorem stage_section_transition_existence
     (J : Type u) [SmallCategory J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

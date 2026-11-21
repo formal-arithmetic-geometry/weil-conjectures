@@ -25,12 +25,11 @@ A ──u₁──▶ T₁ ──f──▶ 𝔻 T₂ ──𝔻(u₂)──▶ 
 of `f` to the two invariant summands is an isomorphism, with inverse `𝔻(r₂) ≫ f⁻¹ ≫ r₁`
 (`CategoryTheory.isIso_comp_comp_map_op_of_averaging`).
 
-This is the last step of the proof of blueprint `lemma-nearby-duality-slice--1`: the restriction of
-the duality map of nearby cycles to the special fibre of a generic slice is the restriction of the
-duality map of the slice to the summands of invariants under the pro-`p` kernel `P`, and the
-latter is an isomorphism. By the stabilization of
-the `P`-action at a finite level, the summands are the images of averaging idempotents of finite
-`p`-group quotients of `P` (`CategoryTheory.nsmul_normalizedTrace_comp_eq_sum`), as here.
+For instance, the restriction of the duality map of nearby cycles to the special fibre of a
+generic slice is the restriction of the duality map of the slice to the summands of invariants
+under the pro-`p` kernel `P`. By the stabilization of the `P`-action at a finite level, the
+summands are the images of averaging idempotents of finite `p`-group quotients of `P`
+(`CategoryTheory.nsmul_normalizedTrace_comp_eq_sum`), as here.
 -/
 
 @[expose] public section

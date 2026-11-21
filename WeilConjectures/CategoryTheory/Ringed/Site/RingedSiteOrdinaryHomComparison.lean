@@ -131,9 +131,7 @@ def ringedSiteOrdinaryHomComparison (E F : CochainComplex (SheafOfModules.{max c
       (WeilConjectures.coefficientHomResolutionIso.{r, c, v, w} J R E F).inv
 
 /-- The ordinary comparison is invertible precisely when its augmentation Hom map is.
-Source: Stacks 0A95.
-Proof: the factorization comparison is an isomorphism. Q inverts the displayed
-quasi-isomorphism, so their composite is an isomorphism. -/
+Source: Stacks 0A95. -/
 theorem ringedSiteOrdinaryHomComparison_isIso (E F : CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)
     (h : QuasiIso (ringedSiteHomComplexMap.{c, v, r} J R (𝟙 E)

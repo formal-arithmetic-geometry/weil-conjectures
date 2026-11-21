@@ -45,9 +45,7 @@ noncomputable def pairUnit (X : scalarModules J R) (V : Cᵒᵖ) (x : X.val.obj 
   (s.ordinaryAdjunction.unit.app X).val.app V x
 
 /-- The prescribed unit equals the sheafified tensor-insertion section.
-Source: Stacks 03CZ.
-Proof: apply the inverse object transport to the scalar pair's ordinary-unit
-formula. Its composite with the forward transport is the identity. -/
+Source: Stacks 03CZ. -/
 theorem pairUnit_eq_tensorSection (X : scalarModules J R) (V : Cᵒᵖ)
     (x : X.val.obj V) :
     pairUnit.{c, v, r, w} a s X V x =
@@ -156,11 +154,7 @@ private theorem withScalarPair_scalar (M : ScalarHomModels.{c, v, r, w} J)
 
 /-- A normalized tensor comparison for any prescribed scalar-derived pair, using
 simultaneous closed tensor models.
-Source: Stacks 07A4, 07A6 and 0D6D.
-Proof: update the simultaneous scalar family at the given coefficient map, retaining
-all closed structures and tensor models. Apply the existing scalar tensor comparison
-to this family. At the updated map the scalar pair is the prescribed pair, so all
-normalizations specialize literally to its functors, adjunction and universal counit. -/
+Source: Stacks 07A4, 07A6 and 0D6D. -/
 theorem pairTensorComparison_from_models
     (M : ScalarHomModels.{c, v, r, w} J) :
     Nonempty (PairTensorComparison.{c, v, r, w} a s
@@ -180,10 +174,7 @@ theorem pairTensorComparison_from_models
     exact t.normalization
 
 /-- Unit generators uniquely determine the scalar tensor comparison on complexes.
-Source: Stacks 03EK and 07A4.
-Proof: transpose a component through the ordinary scalar adjunction. The resulting
-maps out of the total tensor agree on every summand's pure tensors, hence agree.
-The existing normalized comparison supplies existence. -/
+Source: Stacks 03EK and 07A4. -/
 theorem pairTensorIso_existsUnique
     (M : ScalarHomModels.{c, v, r, w} J)
     (P Q : CochainComplex (scalarModules J R) ℤ) :
@@ -221,9 +212,7 @@ theorem pairTensorIso_existsUnique
   exact (he p q k h V x y).trans ((tc.generators P Q p q k h V x y).symm)
 
 /-- Ordinary tensor evaluation depends on the prescribed ordinary functor and adjunction.
-Source: Stacks 03CZ and 07A4.
-Proof: identify the extension functors and their ordinary adjunctions, then apply
-pairTensorIso_existsUnique. The derived presentation does not enter the generator formula. -/
+Source: Stacks 03CZ and 07A4. -/
 theorem pairTensorIso_existsUnique_with_ordinary
     (M : ScalarHomModels.{c, v, r, w} J)
     (E : scalarModules J R ⥤ scalarModules J S) [E.Additive]
@@ -251,8 +240,7 @@ theorem pairTensorIso_existsUnique_with_ordinary
   exact pairTensorIso_existsUnique.{c, v, r, w} a s M P Q
 
 /-- K-flat preservation is unchanged when the scalar extension is given explicitly.
-Source: Stacks 07A4.
-Proof: identify the ordinary extension functors and apply scalarExtension_preservesKFlat. -/
+Source: Stacks 07A4. -/
 theorem pair_preservesKFlat_with_extension
     (E : scalarModules J R ⥤ scalarModules J S) [E.Additive]
     (he : s.extension = E) (P : CochainComplex (scalarModules J R) ℤ)

@@ -55,13 +55,7 @@ def homCoordinate (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (SheafOfModules.homObjUnitIso (R := O) (N.X (n + degree r e))).hom
 
 /-- Coordinates of the scalar Koszul Hom comparison.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Expand the Hom coordinate and comparison into theta and precomposition by the
-positive comparison. Apply the normalized theta local-evaluation formula to identify the
-coordinate after theta.
-Proof step 2: The assumed positive basis identity replaces the image of the R basis by the B
-basis after the unit isomorphism. Naturality of the module Hom maps and unit evaluation cancels
-this unit isomorphism. Reassociate the composites to obtain restricted B Hom coordinate. -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 private theorem homDiagramComparison_coordinates (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections)
     (e : ringedKoszulDiagram R r a ⋙

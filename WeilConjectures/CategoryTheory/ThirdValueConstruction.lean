@@ -53,32 +53,7 @@ private theorem bijective_retraction_hom_colimit
 /-- The third denominator diagram has a stage whose map to a candidate value induces
 Hom-colimit bijections.
 
-Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause, dualized; Categories, initial-functor colimit comparison in Tag 0A1T.
-
-Proof: Extract the cones for the supplied values A and B and use 05SA to obtain
-lf : A -> B. Choose a retraction rY at sY. MS2 completes the first triangle arrow
-against sY to a denominator square at s₁. Apply the common-stage clause of the A
-cone to s₁, obtaining p : s -> sX and q : s -> s₁ with
-F(q) = F(p) followed by rX followed by uX(s₁). Set alpha = F(p) followed by rX
-and f = q followed by the square's first arrow. Naturality makes alpha a retraction
-of uX(s). The factorization equation, the defining equation for lf, and the
-retraction identity at sY give F(f) followed by rY = alpha followed by lf.
-No extra equalization or denominator condition on p or q is needed.
-
-Complete f and lf to distinguished triangles T' and U. MS6 completes the denominator
-square to d : T' -> T with all three components in S. Exactness of F and TR3 extend
-alpha and rY to m : F(T') -> U. These are actual triangle constructions.
-
-The incoming denominator-triangle category of 05R9 is cofiltered and its vertex
-projections p₁, p₂, p₃ are initial. At the chosen stage j₀ corresponding to d, the
-first two Hom comparisons are bijective: their composites with the canonical final
-colimit comparisons are the inverses of the cone Hom-colimit bijections of 05PZ.
-The proved private helper checks these inverses using the retraction identities.
-Apply triangulated_hom_colimit_comparison to H, the diagram of F-image triangles,
-and m. This is the remaining general five-term Hom comparison step, stated in a
-separate module. Finally compose its third comparison with the bijective colimit
-map induced by p₃ opposite. The representative is exactly gamma at p₃(j₀).
-Return U.obj₃, this denominator, and gamma. -/
+Source: Stacks Project, Tags 05SC and 0A1T. -/
 theorem thirdValue_core
     {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]

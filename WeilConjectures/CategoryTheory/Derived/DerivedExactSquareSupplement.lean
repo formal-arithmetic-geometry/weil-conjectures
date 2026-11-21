@@ -31,12 +31,7 @@ variable {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
   [PreservesFiniteLimits L] [PreservesFiniteColimits L]
   [PreservesFiniteLimits S] [PreservesFiniteColimits S]
 
-/-- The constructed square is characterized by its ordinary localization square.
-
-Proof: Postcompose the constructed square with the localization factors for L and S.
-The composition factorization cancels the last comparison, and the natural-isomorphism
-factorization replaces the middle comparison by the localized ordinary map. The first
-inverse-composition comparison cancels using its own factorization equation. -/
+/-- The constructed square is characterized by its ordinary localization square. -/
 theorem mapDerivedCategoryPlusSquareIso_fac (e : R ⋙ G ≅ L ⋙ S)
     (K : HomotopyCategory.Plus C) :
     (mapDerivedCategoryPlusSquareIso R G L S e).hom.app (DerivedCategory.Plus.Qh.obj K) ≫
@@ -93,20 +88,7 @@ variable {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
 
 /-- Exact derived square comparisons respect a specified composition identity.
 Source: the localization universal property, Stacks Project, Tags 05S7 and 014F.
-
-Proof: Form the two natural transformations in the displayed equation and use
-localization extensionality for Qh on bounded-below homotopy objects. Postcompose
-both sides with the three invertible localization factors for F₀₁, F₁₂ and U₂.
-The factorization of the composite comparison cF and naturality of U₂'s factor
-transform the left side into the localization of the left ordinary composite,
-preceded by the common localization factors for U₀ and G₀₂. On the right, use
-naturality of the square comparison for F₁₂ at the F₀₁ factor, then the square
-factorization for F₁₂ and F₀₁, then naturality of the G₁₂ factor and the composite
-comparison cG. This gives the same common factors followed by the localization
-of the right ordinary composite. The assumed equation hq holds degreewise on
-complexes, so the localized composites agree. Cancel the three isomorphisms,
-apply localization extensionality and evaluate at K. No unit, nonzero-object,
-resolution, or preservation-of-injectives assumption is used. -/
+-/
 theorem mapDerivedCategoryPlusSquareIso_comp
     (q₀₁ : U₀ ⋙ G₀₁ ≅ F₀₁ ⋙ U₁)
     (q₁₂ : U₁ ⋙ G₁₂ ≅ F₁₂ ⋙ U₂)

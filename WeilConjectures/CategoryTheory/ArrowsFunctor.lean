@@ -11,16 +11,18 @@ public import Mathlib.CategoryTheory.Comma.Arrow
 
 /-! # The set of arrows as a functor on categories
 
-Source: Stacks Project, Sites, proof of Tag 09YL.
-
 ## Main definitions
 
 * `CategoryTheory.Cat.arrows`: the set-valued functor of all arrows.
 
-## Main statements
+## Main results
 
 * `CategoryTheory.Cat.arrows_map_id`: identity preserves every arrow.
 * `CategoryTheory.Cat.arrows_map_comp`: composition acts by successive arrow maps.
+
+## References
+
+* Stacks Project, Sites, proof of Tag 09YL.
 -/
 
 @[expose] public section
@@ -29,16 +31,13 @@ universe v u
 
 namespace CategoryTheory.Cat
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL. The identity functor acts identically on arrows.
-Proof: write an arrow as its source, target and morphism; the identity preserves all three. -/
+/-- The identity functor acts identically on arrows. -/
 theorem arrows_map_id (C : Cat.{v, u}) :
     (fun a : Arrow C ↦ Arrow.mk ((𝟭 C).map a.hom)) = id := by
   funext a
   simp
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL. Composition acts by successive arrow maps.
-Proof: the two expressions have the same source and target and the same morphism,
-by the definition of functor composition. -/
+/-- Composition acts by successive arrow maps. -/
 theorem arrows_map_comp {C D E : Cat.{v, u}} (f : C ⟶ D) (g : D ⟶ E) :
     (fun a : Arrow C ↦ Arrow.mk ((f ≫ g).toFunctor.map a.hom)) =
       (fun a : Arrow D ↦ Arrow.mk (g.toFunctor.map a.hom)) ∘
@@ -46,7 +45,7 @@ theorem arrows_map_comp {C D E : Cat.{v, u}} (f : C ⟶ D) (g : D ⟶ E) :
   funext a
   rfl
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL. A category is sent to the set of all its arrows,
+/-- A category is sent to the set of all its arrows,
 and a functor sends an arrow to its image, including its source and target. -/
 def arrows : Cat.{v, u} ⥤ Type (max u v) where
   obj C := Arrow C

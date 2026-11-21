@@ -23,7 +23,12 @@ import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 
 /-! # Compatible sectionwise bases of constant coefficient extensions
 
-Source: Stacks 03EK and calculation in step 6 of.
+A finite basis of a coefficient extension induces sectionwise bases of the constant ring
+sheaves, compatible with restriction.
+
+## References
+
+* Stacks Project, Tag 03EK.
 -/
 
 @[expose] public section
@@ -240,26 +245,8 @@ end BasisConstruction
 /-- A finite basis of a coefficient extension induces a basis on every object of
 its constant ring sheaves, with coordinates commuting with restriction.
 
-Source: Stacks 03EK, associated module sheaves, and argument of
-step 6 of.
-
-Proof: Choose a finite A-basis of B. Its coordinate maps give an A-linear
-isomorphism B with A to a finite power. Regard these as maps of constant
-abelian presheaves equipped with the constant A-action. Sheafify the maps and
-their inverse identities. Associated sheafification preserves finite products,
-and the forgetful functors from commutative rings commute with sheafification.
-The resulting maps identify the underlying A-module sheaf of the constant B
-with the corresponding finite power of the constant A. The action agrees with
-the one induced by the constant algebra map: the scalar-linearity identity
-holds on constant presheaves, and descends through sheafification by its
-universal property (equivalently, check it on locally constant generators).
-Taking sections therefore gives a linear equivalence on every object, which
-transports the standard finite basis to b U. The coordinate maps are sheaf
-morphisms, so they commute with restriction and satisfy the displayed equality.
-This argument uses no assertion that all sections of a constant sheaf are
-constant. On an empty covering object both section rings are zero, and the
-same linear equivalence still holds. If A is the zero ring then B is zero;
-use the empty basis and n=0. Rank zero and the empty site are covered as well. -/
+Stacks Project, Tag 03EK.
+-/
 theorem constantFiniteFree_sectionBasis
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [HasSheafify J CommRingCat.{max uC vC r}]

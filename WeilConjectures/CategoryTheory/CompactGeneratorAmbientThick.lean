@@ -173,26 +173,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- A compact object presented by a generator telescope lies in its ambient thick envelope.
 Source: Stacks Project, Tags 09SP and 094A, applied to the tower of 09SN.
-
-Proof: Lift the supplied tower to A.FullSubcategory. Each attaching coproduct belongs to A by
-the triangle and the two adjacent tower terms; the final sum belongs to A by closure under
-universe-w coproducts after reindexing its countable family. Their ambient colimit universal
-properties restrict to the full subcategory. The inclusion respects shifts and distinguished
-triangles. Reindex the countable coproduct by ULift ℕ in universe w. By 094A, compact Hom
-commutes with the sequential homotopy colimit, so the identity of P factors through a finite
-stage. If this stage is zero, the identity of P factors through zero, hence P is zero.
-Otherwise use the tail starting at X 1. Its initial term is isomorphic to B 0 because X 0 is
-zero. For each later transition, inverse rotation gives the attaching term B n[-1]; shifting
-a colimiting cofan by the shift equivalence gives a coproduct of the corresponding shifts
-of G. These are the initial-term and transition hypotheses of 09SP. Apply 09SP to the
-map from P into the selected stage. It factors through an object in the thick envelope of a
-finite sum of copies of G. Finite sums of G lie in its singleton envelope, and the composite
-back to P is its identity. Thus P is a retract of an object in that envelope. The inclusion
-preserves shifts, finite sums, triangles and retract equations, so this internal construction
-lies in the ambient singleton envelope. Retract closure gives the claim. No coproduct larger
-than universe w is used and no infinite coproduct is required to be preserved by the inclusion
-beyond those explicitly supplied. The zero initial stage or an empty attaching sum gives a zero
-factorization; the zero object lies in the envelope of G even when G is zero. -/
+-/
 theorem compact_generator_ambient_thick
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]

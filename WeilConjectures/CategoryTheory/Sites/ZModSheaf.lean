@@ -27,10 +27,9 @@ the same holds for sheaves on any site: the functor from sheaves of `ℤ/n`-modu
 sheaves is fully faithful, and its essential image consists of the abelian sheaves `F` with
 `n • 𝟙 F = 0`.
 
-In the blueprint a sheaf of `ℤ/n`-modules is
-a module over the constant sheaf of rings `(ℤ/n)_T`, and the comparison with sectionwise
-`ℤ/n`-modules goes through the sheafification of the constant presheaf of rings
-(`lem-weil-pbc-ring-sheafification-underlying-sets`, which is Mathlib's
+Mathematically a sheaf of `ℤ/n`-modules is a module over the constant sheaf of rings
+`(ℤ/n)_T`, and the comparison with sectionwise `ℤ/n`-modules goes through the
+sheafification of the constant presheaf of rings (Mathlib's
 `CategoryTheory.sheafifyComposeIso`). Here sheaves of `ℤ/n`-modules are sheaves with values in
 `ModuleCat (ZMod n)`, so that this comparison is built in.
 
@@ -54,8 +53,7 @@ namespace ModuleCat
 variable (n : ℕ)
 
 /-- Additive maps between `ℤ/n`-modules are `ℤ/n`-linear: the forgetful functor from
-`ℤ/n`-modules to abelian groups is fully faithful (blueprint
-`lem-weil-pbc-zmod-module-structure-killed-by-n`, (4)). -/
+`ℤ/n`-modules to abelian groups is fully faithful. -/
 def fullyFaithfulForget₂ZMod : (forget₂ (ModuleCat.{w} (ZMod n)) AddCommGrpCat.{w}).FullyFaithful
     where
   preimage {M N} f := ModuleCat.ofHom (AddMonoidHom.toZModLinearMap n (M := M) (M₁ := N) f.hom)
@@ -71,7 +69,7 @@ lemma nsmul_id_forget₂_zmod_eq_zero (M : ModuleCat.{w} (ZMod n)) :
   rw [← Nat.cast_smul_eq_nsmul (ZMod n), ZMod.natCast_self, zero_smul]
 
 /-- An abelian group is the underlying group of a `ℤ/n`-module if and only if it is killed by
-`n` (blueprint `lem-weil-pbc-zmod-module-structure-killed-by-n`, (1)). -/
+`n`. -/
 lemma mem_essImage_forget₂_zmod_iff (A : AddCommGrpCat.{w}) :
     (forget₂ (ModuleCat.{w} (ZMod n)) AddCommGrpCat.{w}).essImage A ↔ n • 𝟙 A = 0 := by
   refine ⟨fun ⟨M, ⟨e⟩⟩ ↦ ?_, fun h ↦ ?_⟩
@@ -89,8 +87,7 @@ namespace CategoryTheory.Sheaf
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) (n : ℕ)
   [J.HasSheafCompose (forget₂ (ModuleCat.{w} (ZMod n)) AddCommGrpCat.{w})]
 
-/-- The underlying abelian sheaf of a sheaf of `ℤ/n`-modules is killed by `n` (blueprint
-`lem-weil-pbc-sheaves-killed-by-n-zmod-modules`, (1)). -/
+/-- The underlying abelian sheaf of a sheaf of `ℤ/n`-modules is killed by `n`. -/
 lemma nsmul_id_sheafCompose_forget₂_zmod_eq_zero (G : Sheaf J (ModuleCat.{w} (ZMod n))) :
     n • 𝟙 ((sheafCompose J (forget₂ (ModuleCat.{w} (ZMod n)) AddCommGrpCat.{w})).obj G) = 0 :=
   (sheafToPresheaf J _).map_injective (by
@@ -99,9 +96,8 @@ lemma nsmul_id_sheafCompose_forget₂_zmod_eq_zero (G : Sheaf J (ModuleCat.{w} (
     exact ModuleCat.nsmul_id_forget₂_zmod_eq_zero n _)
 
 /-- An abelian sheaf is the underlying abelian sheaf of a sheaf of `ℤ/n`-modules if and only if
-it is killed by `n` (blueprint `lem-weil-pbc-sheaves-killed-by-n-zmod-modules`, (2)): the
-sections of a sheaf killed by `n` are `ℤ/n`-modules, compatibly with restriction, and the sheaf
-condition is checked on underlying abelian groups. -/
+it is killed by `n` (the sections of a
+sheaf killed by `n` are `ℤ/n`-modules, compatibly with restriction). -/
 lemma mem_essImage_sheafCompose_forget₂_zmod_iff (F : Sheaf J AddCommGrpCat.{w}) :
     (sheafCompose J (forget₂ (ModuleCat.{w} (ZMod n)) AddCommGrpCat.{w})).essImage F ↔
       n • 𝟙 F = 0 := by

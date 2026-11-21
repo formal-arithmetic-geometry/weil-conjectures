@@ -35,7 +35,8 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
   {D : Type d} [Category D] [Abelian D] [HasDerivedCategory D]
 
 /-- Derived transport with the derived identity comparison removed.
-Source: Stacks Tag 05TD. -/
+Source: Stacks Tag 05TD.
+-/
 def coordinateSectionTransport
     (L : C ⥤ C') [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     (E : C ⥤ D) (E' : C' ⥤ D) [E.Additive] [E'.Additive] (τ : E ⟶ L ⋙ E') :
@@ -67,9 +68,7 @@ private theorem coordinate_id_shift :
 
 /-- Normalized section transport respects shifts.
 Source: Stacks Tag 05TD.
-Proof: the identity comparison respects shifts after the faithful bounded-below
-inclusion, where it is the proved unbounded identity comparison. Its inverse,
-whiskering and composition with the base-change transformation preserve this property. -/
+-/
 theorem coordinateSectionTransport_shift
     (L : C ⥤ C') [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     (E : C ⥤ D) (E' : C' ⥤ D) [E.Additive] [E'.Additive] (τ : E ⟶ L ⋙ E') :
@@ -116,10 +115,7 @@ private theorem coordinate_id_single (Y : D) :
 
 /-- The normalized transport carries the derived augmentation to the target augmentation.
 Source: Stacks Tag 05TD.
-Proof: the unnormalized single-complex equation is `rightDerivedBaseChange_single_unit`.
-Move the inverse identity comparison across the source augmentation by naturality.
-Its value on a single object is the exact identity single comparison, so these
-comparisons cancel. This proves the equation before taking any homology. -/
+-/
 theorem coordinateSectionTransport_single_unit
     (L : C ⥤ C') [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     (E : C ⥤ D) (E' : C' ⥤ D) [E.Additive] [E'.Additive] (τ : E ⟶ L ⋙ E')
@@ -144,9 +140,7 @@ theorem coordinateSectionTransport_single_unit
 
 /-- Degree-zero homology of normalized section transport respects the augmentations.
 Source: Stacks Tag 05TD.
-Proof: take H0 of the preceding single-complex equation. The single/H0 isomorphism
-is natural in the underived map. The proved single-unit homology comparison
-identifies both augmentations with their classical degree-zero versions. -/
+-/
 theorem coordinateSectionTransport_zero_unit
     (L : C ⥤ C') [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     (E : C ⥤ D) (E' : C' ⥤ D) [E.Additive] [E'.Additive] (τ : E ⟶ L ⋙ E')
@@ -190,9 +184,7 @@ omit [EnoughInjectives C'] in
 /-- For an exact functor the single-complex derived augmentation is the inverse
 of its exact single comparison, after the canonical exact-derived identification.
 Source: Stacks Tag 05TD.
-Proof: expand the single-complex augmentation and apply the unit equation defining
-the exact-derived comparison. The homotopy-single comparison is precisely the
-exact single comparison by `single_exact_transport`. -/
+-/
 theorem coordinateExact_single_unit
     (L : C ⥤ C') [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     (X : C) :
@@ -222,8 +214,7 @@ theorem coordinateExact_single_unit
 omit [EnoughInjectives C'] in
 /-- The exact single-complex augmentation is natural in its coefficient object.
 Source: Stacks Tag 05TD.
-Proof: postcompose by the exact-derived comparison, use its naturality and the
-preceding single-unit formula, then apply naturality of the exact single comparison. -/
+-/
 theorem coordinateExact_single_unit_naturality
     (L : C ⥤ C') [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     {X Y : C} (b : X ⟶ Y) :
@@ -240,11 +231,8 @@ theorem coordinateExact_single_unit_naturality
   exact (L.mapDerivedCategoryPlusSingleFunctor 0).inv.naturality b
 
 /-- Normalized section transport is compatible with composition of right-derived functors.
-Source: Stacks Tag 05TD, uniqueness of right-derived transformations.
-Proof: use the proved composition equation for raw derived base change. Precompose
-it with the inverse comparison for the derived identity. Naturality moves this
-inverse through the source composition comparison; the remaining factors are
-exactly the two normalized section transports. -/
+Source: Stacks Tag 05TD.
+-/
 theorem coordinateSectionTransport_comp
     {B M B' M' : Type*} [Category* B] [Category* M] [Category* B'] [Category* M']
     [Abelian B] [Abelian M] [Abelian B'] [Abelian M']
@@ -292,10 +280,7 @@ theorem coordinateSectionTransport_comp
 /-- On single complexes, the composition transport square is expressed using
 only the canonical single augmentations.
 Source: Stacks Tag 05TD.
-Proof: conjugate the composition equation by its two comparison isomorphisms.
-Naturality moves the source single augmentation through section transport and the
-target exact-single comparison through the composition isomorphism. The derived
-base-change single-unit equation identifies the remaining three factors. -/
+-/
 theorem coordinateSectionTransport_comp_single
     {B M B' M' : Type*} [Category* B] [Category* M] [Category* B'] [Category* M']
     [Abelian B] [Abelian M] [Abelian B'] [Abelian M']
@@ -360,12 +345,8 @@ theorem coordinateSectionTransport_comp_single
 
 /-- The single-complex composition square remains natural after inverting the two
 open coefficient comparisons and inserting the ambient coefficient map.
-Source: Stacks Tag 05TD, and functoriality of localization.
-Proof: precompose the single composition equation by the inverse source coefficient
-map and postcompose by the target coefficient map. Naturality of normalized transport,
-the exact single comparison and the target single augmentation move these maps to
-the underived coefficient square. Cancel the two coefficient isomorphisms in that
-square and apply the single functor. Functoriality finishes the calculation. -/
+Source: Stacks Tag 05TD.
+-/
 theorem coordinateSectionTransport_comp_coefficients
     {B M B' M' : Type*} [Category* B] [Category* M] [Category* B'] [Category* M']
     [Abelian B] [Abelian M] [Abelian B'] [Abelian M']

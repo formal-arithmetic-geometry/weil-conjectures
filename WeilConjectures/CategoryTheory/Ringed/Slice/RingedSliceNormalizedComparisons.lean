@@ -183,24 +183,7 @@ variable [HasDerivedCategory.{w} (SheafOfModules.{max c v u} ((sheafCompose J (f
   CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
 
 /-- The normalized tensor, Hom and Koszul comparisons for exact slice restriction exist.
-Source: Stacks Project, Tags 07A4, 08JB, 03EL and the total-complex Koszul exchange.
-
-Proof: restriction preserves K-flat complexes by 0E8K. Flatness restricts by the
-local equational criterion. On a pair of such complexes, restrict each tensor summand using 03EL,
-which sends x tensor y to x tensor y. Restriction commutes with sheafification and
-coproducts, so these summand maps form a natural chain isomorphism of total complexes.
-The K-flat presentation of the derived category descends it to rho and gives its
-specified representative square. For Hom, use a K-injective representative I of the
-target. Relocalization identifies the local families L^p to I^(p+n) on both sides;
-the differentials d_I h - (-1)^n h d_L coincide. Restriction preserves K-injectivity,
-so localization gives eta with its two-variable naturality. The augmentation to the
-fixed K-injective replacement determines the isomorphisms kappa and kappa_U uniquely,
-and naturality of augmentation gives the required Hom square. Finally exchange the
-summands of total tensor with the sign (-1)^(pq). Its chain-map identity follows from
-the total differential, and its inverse is the reverse signed exchange. Localizing
-on K-flat representatives gives the two natural symmetry families, on the original
-and the slice sites. Their model squares hold by construction. These four constructions
-give all fields of the comparison datum and all four normalization predicates. -/
+Source: Stacks Project, Tags 07A4, 08JB, 03EL and the total-complex Koszul exchange. -/
 theorem ringedSlice_normalizedComparisons
     (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂
       CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]

@@ -37,9 +37,7 @@ abbrev ringedSiteDerived
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
 
 /-- Slice restriction is additive.
-Source: Stacks Project, Modules on Sites, Tag 03DJ.
-Proof: addition of maps is sectionwise, and slice restriction only precomposes their
-components with the forgetful functor from the slice category. -/
+Source: Stacks Project, Modules on Sites, Tag 03DJ. -/
 theorem ringedOverFunctor_additive (U : C) :
     (SheafOfModules.overFunctor.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).Additive := by
@@ -49,9 +47,7 @@ theorem ringedOverFunctor_additive (U : C) :
   rfl
 
 /-- Slice restriction preserves finite limits.
-Source: Stacks Project, Modules on Sites, Tag 03DJ.
-Proof: finite limits of module sheaves are computed sectionwise, so precomposition
-with the forgetful functor from the slice commutes with them. -/
+Source: Stacks Project, Modules on Sites, Tag 03DJ. -/
 theorem ringedOverFunctor_preservesFiniteLimits (U : C) :
     PreservesFiniteLimits (SheafOfModules.overFunctor.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U) := by
@@ -65,10 +61,7 @@ theorem ringedOverFunctor_preservesFiniteLimits (U : C) :
     (SheafOfModules.toSheaf (R.over U))
 
 /-- Slice restriction preserves finite colimits.
-Source: Stacks Project, Modules on Sites, Tag 03DJ.
-Proof: finite colimits are the sheafifications of sectionwise colimits. Covering sieves
-on a slice are exactly those induced from the original site, so sheafification commutes
-with slice restriction. Sectionwise colimits commute with precomposition. -/
+Source: Stacks Project, Modules on Sites, Tag 03DJ. -/
 theorem ringedOverFunctor_preservesFiniteColimits (U : C) :
     PreservesFiniteColimits (SheafOfModules.overFunctor.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U) := by

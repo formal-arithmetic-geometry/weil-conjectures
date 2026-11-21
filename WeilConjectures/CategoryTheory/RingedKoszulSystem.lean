@@ -60,9 +60,7 @@ def ringedKoszulFactorStepF (s : (O.obj ⋙ forget CommRingCat).sections)
       eqToHom (congrArg (ringedKoszulFactor O s (m + 1)).X h.symm)
   else 0
 
-/-- The components (1,s) commute with the differential.
-Proof: the sole nonzero square is s^(m+1) s = s^(m+2); elsewhere both sides vanish.
-Source: Stacks Project, Tags 0913 and 0A0A. -/
+/-- The components (1,s) commute with the differential. -/
 theorem ringedKoszulFactorStepF_comm
     (s : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) (n k : ℤ)
     (h : (ComplexShape.up ℤ).Rel n k) :
@@ -138,10 +136,7 @@ def ringedKoszulFactorProjectionF (s : (O.obj ⋙ forget CommRingCat).sections)
       eqToHom (congrArg (ringedSiteRingComplex O).X h.symm)
   else 0
 
-/-- The degree-zero projection commutes with the differential.
-Proof: the target differential is zero and the source differential lands in degree one,
-where the projection vanishes. All other squares have a zero component.
-Source: Stacks Project, Tags 0913 and 0A0A. -/
+/-- The degree-zero projection commutes with the differential. -/
 theorem ringedKoszulFactorProjectionF_comm
     (s : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) (n k : ℤ)
     (h : (ComplexShape.up ℤ).Rel n k) :
@@ -189,10 +184,7 @@ def ringedKoszulProjection : (r : ℕ) →
         ((ringedKoszulTensor O).obj _).map (ih (fun i ↦ b i.succ) m) ≫
         (ringedKoszulUnitTensorIso O).hom) r
 
-/-- The Koszul projections are compatible with the forward transitions.
-Proof: in one factor, the forward map is identity in degree zero. Tensor this identity
-and induct on the number of factors; composition gives the identity for every transition.
-Source: Stacks Project, Tags 0913 and 0A0A. -/
+/-- The Koszul projections are compatible with the forward transitions. -/
 theorem ringedKoszulProjection_naturality (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     (m n : ℕ) (f : m ⟶ n) :
@@ -258,9 +250,7 @@ def ringedKoszulTensorTower (r : ℕ)
     (Functor.whiskeringLeft ℕᵒᵖ (ringedSiteComplex O) (ringedSiteComplex O)).obj
       (ringedKoszulDualTower O r b)
 
-/-- The strict-tower differentials square to zero.
-Proof: evaluate at every tower index and use the square-zero identity of its complex.
-Source: Stacks Project, Tags 0913 and 0A0A. -/
+/-- The strict-tower differentials square to zero. -/
 theorem ringedKoszulTensorTower_d_comp (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (N : ringedSiteComplex O)
     (n : ℤ) :
@@ -295,9 +285,7 @@ def ringedKoszulTensorTowerComplexMapF (r : ℕ)
   Functor.whiskerRight ((ringedKoszulTensorTower O r b).map f)
     (HomologicalComplex.eval _ (ComplexShape.up ℤ) n)
 
-/-- Tensor-tower maps commute with the differentials.
-Proof: evaluate at each tower index and use the chain-map identity of the tensor map.
-Source: Stacks Project, Tags 0913 and 0A0A. -/
+/-- Tensor-tower maps commute with the differentials. -/
 theorem ringedKoszulTensorTowerComplexMapF_comm (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     {N M : ringedSiteComplex O} (f : N ⟶ M) (n k : ℤ)
@@ -322,9 +310,7 @@ def ringedKoszulTensorTowerComplexMap (r : ℕ)
   f := ringedKoszulTensorTowerComplexMapF O r b f
   comm' := ringedKoszulTensorTowerComplexMapF_comm O r b f
 
-/-- The strict tensor-tower construction preserves identity maps.
-Proof: evaluate in each tower index and degree and use the identity law of the tensor functor.
-Source: Stacks Project, Tags 0913 and 0A0A. -/
+/-- The strict tensor-tower construction preserves identity maps. -/
 theorem ringedKoszulTensorTowerComplexMap_id (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (N : ringedSiteComplex O) :
     ringedKoszulTensorTowerComplexMap O r b (𝟙 N) = 𝟙 _ := by
@@ -336,9 +322,7 @@ theorem ringedKoszulTensorTowerComplexMap_id (r : ℕ)
   rw [Functor.map_id]
   rfl
 
-/-- The strict tensor-tower construction preserves composition.
-Proof: evaluate in each tower index and degree and use functoriality of total tensor.
-Source: Stacks Project, Tags 0913 and 0A0A. -/
+/-- The strict tensor-tower construction preserves composition. -/
 theorem ringedKoszulTensorTowerComplexMap_comp (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     {N M L : ringedSiteComplex O} (f : N ⟶ M) (g : M ⟶ L) :
@@ -395,10 +379,7 @@ def ringedKoszulTensorUnitComponent (r : ℕ)
   (ringedKoszulRightUnitIso O N).inv ≫
     ((ringedKoszulTensor O).obj N).map (ringedKoszulDualUnit O r b m.unop)
 
-/-- The degree-zero units form a cone over the strict tensor tower.
-Proof: dualize compatibility of the Koszul projections with transitions, then tensor by N.
-Taking the component in degree n gives the asserted equality.
-Source: Stacks Project, Tags 0913 and 0A0A. -/
+/-- The degree-zero units form a cone over the strict tensor tower. -/
 theorem ringedKoszulTensorUnitComponent_naturality (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     (N : ringedSiteComplex O) (n : ℤ) {m k : ℕᵒᵖ} (f : m ⟶ k) :
@@ -441,10 +422,7 @@ def ringedKoszulLimitUnitF (r : ℕ)
   @id (N.X n ⟶ limit ((ringedKoszulTensorTowerComplex O r b N).X n))
     (limit.lift _ (ringedKoszulTensorUnitCone O r b N n))
 
-/-- The map to the ordinary inverse limit is a chain map.
-Proof: compose with each limit projection and use the chain-map identity of the degree-zero
-unit into each tensor complex. Joint monicity of limit projections gives the equality.
-Source: Stacks Project, Tags 0913 and 0A0A. -/
+/-- The map to the ordinary inverse limit is a chain map. -/
 theorem ringedKoszulLimitUnitF_comm (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     (N : ringedSiteComplex O) (n k : ℤ) (h : (ComplexShape.up ℤ).Rel n k) :

@@ -71,10 +71,7 @@ def Equivariant (M N : ActionModule R P) (f : M.module ⟶ N.module) : Prop :=
       N.act S g ((f.hom.hom.app (op S)).hom m)
 
 /-- Equivariant linear maps contain identities and zero and are closed under composition,
-addition and negation.
-Proof: evaluate on a test object. The identity and composite commute with the action by
-substitution. Zero, sums and negatives commute because each action endomorphism is linear.
--/
+addition and negation. -/
 theorem equivariant_closure (M N L : ActionModule R P) :
     Equivariant M M (𝟙 M.module) ∧
     (∀ (f : M.module ⟶ N.module) (g : N.module ⟶ L.module),

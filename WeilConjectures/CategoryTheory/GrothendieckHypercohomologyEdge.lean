@@ -82,21 +82,7 @@ private lemma grothendieckLeftEdgeTargetIso_hom_app
 
 /-- For F applied to an injective resolution, the Grothendieck edge is the
 hypercohomology edge transported through the canonical resolution comparisons.
-Source: Stacks Project, Tags 015N and 015J.
-
-Proof:
-The prescribed resolution comparison identifies RF(X[0]) with Q of the zero
-extension of F(I), and intertwines the composite-derived homology comparison
-with the G-derived unit. Transport the truncation spectral object through this
-isomorphism. Naturality of its left edge identifies the transported edge map.
-The canonical target comparison factors into the complex target comparison and
-G of H^n(RF(X[0])) -> R^nF(X); this follows by expanding the truncation/shift
-factors and using naturality of rightDerivedZeroIsoSelf. The ordinary resolution
-comparison replaces the latter factor by G of H^n(F(I)). Substitute these source
-and target equations, and associate the composites. The resulting expression
-is the definition of cochainHypercohomologyLeftEdge, in every degree including
-zero. No double-complex presentation or filtration model is required.
--/
+Source: Stacks Project, Tags 015N and 015J. -/
 theorem grothendieckLeftEdgeMap_eq_hypercohomology
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]

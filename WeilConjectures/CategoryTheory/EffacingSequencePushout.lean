@@ -11,7 +11,9 @@ public import WeilConjectures.CategoryTheory.DeltaFunctor
 /-!
 # Pushout to an effacing short exact sequence
 
-Source: Stacks Project, Homology, Lemma 010T and the parent node's comparison arguments.
+## References
+
+* Stacks Project, Tag 010T.
 -/
 
 @[expose] public section
@@ -24,12 +26,7 @@ open Category Limits
 
 /-- Every short exact sequence maps to an effacing one fixing its left object.
 
-Source: Stacks Project, Homology, Lemma 010T, compatibility verification. Push out S.f along an
-effacing monomorphism u. The pushout inclusion of S.X₂ is monic, so its
-composite w with S.f is monic. The pushout equation factors w through u,
-hence F(w) = 0. Since S.g is a cokernel of S.f, the map from S.X₂ to the
-cokernel of w descends through S.g. Together with the identity on S.X₁
-and the pushout inclusion it gives the required morphism. -/
+Stacks Project, Tag 010T. -/
 theorem effacingSequence_pushout
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
     [Category.{v₂} B] [Abelian B] (F : CohomologicalDeltaFunctor A B) (n : ℕ)

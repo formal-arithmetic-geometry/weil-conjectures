@@ -15,9 +15,9 @@ Source: Stacks Project, Homology, Tag 05QH,
 parts (1)--(5), with the finite filtrations of Tag 0121.
 
 The filtered objects, filtration-preserving maps, filtration steps, graded pieces and the
-canonical step and graded maps are the recorded ones of `def-sp-filtration`
-(`CategoryTheory.FilteredObject` over `CategoryTheory.DecreasingFiltration`, with
-`WeilFilteredObject.restrictionSteps` and `WeilFilteredObject.gradedMapSteps`).
+canonical step and graded maps are those of `CategoryTheory.FilteredObject` over
+`CategoryTheory.DecreasingFiltration`, with `WeilFilteredObject.restrictionSteps` and
+`WeilFilteredObject.gradedMapSteps`.
 
 ## Main definitions
 

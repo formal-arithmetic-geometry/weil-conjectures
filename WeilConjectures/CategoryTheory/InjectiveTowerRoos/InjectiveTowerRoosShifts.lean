@@ -26,8 +26,7 @@ import WeilConjectures.CategoryTheory.SignedCoconeShift.SignedMappingCoconeShift
 # Injective tower Roos comparisons and signed integer shifts
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0941; derived.tex, Tags 014E,
-070I, 08BJ and 0BK6; homology.tex, Tag 011G. Blueprint main-20261015,
-sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md, coefficient comparisons.
+070I, 08BJ and 0BK6; homology.tex, Tag 011G.
 
 The cone, its coordinates and its kernel inclusion are the existing `roosF`, `roosχ`
 and `roosι`. Natural-number level n denotes positive level n+1. Products below are

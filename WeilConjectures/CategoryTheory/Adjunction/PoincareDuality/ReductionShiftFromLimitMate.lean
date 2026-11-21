@@ -19,12 +19,7 @@ namespace CategoryTheory.Adjunction
 
 /-- An invertible left comparison normalized by the unit square is the mate of
 the right comparison, so it commutes with shifts whenever the latter does.
-Source: Stacks 0A8D and 0037, adjoint shifts and the adjunct formulas.
-Proof: cancel the right adjoint applied to the invertible left comparison in the
-unit square. This identifies the adjunct of the inverse left comparison with the
-unit followed by the right comparison. The inverse hom equivalence identifies
-that inverse comparison with the mate. The generic shifted-mate identity proves
-shift compatibility of the inverse; compatibility passes to the isomorphism. -/
+Stacks Project, Tags 0A8D and 0037. -/
 theorem iso_commShift_of_unit_square
     {C : Type u₁} {D : Type u₂} {C' : Type u₃} {D' : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} C'] [Category.{v₄} D']

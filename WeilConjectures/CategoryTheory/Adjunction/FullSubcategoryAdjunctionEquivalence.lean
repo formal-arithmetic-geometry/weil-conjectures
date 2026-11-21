@@ -22,14 +22,7 @@ open CategoryTheory
 namespace CategoryTheory.Adjunction
 
 /-- An adjunction whose functors preserve full subcategories and whose unit and counit
-are invertible there restricts to an equivalence with the very same unit and counit.
-
-Proof: lift the two functors to the full subcategories. Restrict the Hom equivalence
-along their fully faithful inclusions. Its unit and counit map to the ambient maps,
-since the commuting squares are identity isomorphisms. Fully faithful inclusions
-reflect their invertibility. Apply Adjunction.toEquivalence; its unit and counit are
-the restricted adjunction maps. This also proves both functor equalities and the
-asserted component equalities. -/
+are invertible there restricts to an equivalence with the very same unit and counit. -/
 theorem fullSubcategoryEquivalence
     {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
     {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)

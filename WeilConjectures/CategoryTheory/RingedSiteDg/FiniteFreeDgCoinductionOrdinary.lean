@@ -457,24 +457,7 @@ private theorem coinductionCoreOfClosed (A : Algebra O) [HasLeftDual (mop A.X)]
 
 /-- Ordinary finite-free coinduction with its representing evaluation and tensor-dual map.
 
-Source: Stacks 0FRS.
-
-Proof: Finite coproducts of the tensor unit are dualizable, by induction using
-biproducts (including the empty coproduct). The bounded-complex duality theorem
-then makes A dualizable. Reverse the tensor order to turn its right dual into a
-left dual; this supplies the closed structure needed for this single object A,
-without requiring every unbounded complex to be closed. The cofree construction
-above transposes multiplication into the right action on the representing Hom.
-Currying and uncurrying prove the universal property for every unbounded L and M,
-and their naturality proves the functor and evaluation laws.
-
-Tensor the cofree tensor unit with M, with action on its dual factor. The map to
-coinduction is the transpose of evaluation at the unit. Its uncurried formula is
-exactly tensor-dual evaluation. Uniqueness of right adjoints to tensoring by A
-identifies the underlying comparison with the two tensor-dual isomorphisms, hence
-it is invertible. Forgetting reflects isomorphisms, so the comparison is a module
-isomorphism. Its naturality and evaluation equation are proved above.
--/
+Source: Stacks 0FRS. -/
 theorem finite_free_dg_coinduction_core (A : Algebra O)
     (bounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (A.X.X n))
     (finiteFree : ∀ n : ℤ, ∃ r : ℕ,

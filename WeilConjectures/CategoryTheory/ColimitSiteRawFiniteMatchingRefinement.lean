@@ -41,25 +41,7 @@ private theorem raw_arrow_transport {C : Type u} [Category.{u} C]
 
 set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Sites, Tag 0A35,
-the finite overlap-equation calculation before stage gluing.
-
-Proof: Take the pairwise covering pullbacks at the given stage. Naturality of beta
-and the coprojections identifies the raw images of the two restricted sections.
-The assumed raw compatibility makes them equal. The pointwise Kan presentation,
-with object and arrow set colimits, detects equality of stage sections after a
-transition: lift the finite chain of Kan and outer colimit relations to one stage,
-where naturality and h-beta-map turn them into restriction and theta transport.
-The unit condition h-theta makes theta the unique adjunction transpose and hence
-makes these transports compose. There are finitely many pairs of covering arrows;
-filteredness and equalization give one transition where every equality holds.
-Transition preservation of covering pullbacks identifies the transported equations
-with equations on pairwise pullbacks at the new stage. The pullback universal
-property proves indexed compatibility on arbitrary common test objects. Transport
-the original sections by theta to obtain s'. Naturality and h-beta-map give the
-stated equality of raw images; e is the cocone equality. Repeated arrows therefore
-have equal sections, including after transport. For an empty family use the identity
-transition and the empty family. No new raw representatives or amalgamation are needed.
--/
+the finite overlap-equation calculation before stage gluing. -/
 theorem colimit_site_raw_finite_matching_refinement
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

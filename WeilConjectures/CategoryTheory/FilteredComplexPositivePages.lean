@@ -27,21 +27,7 @@ namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- The positive-page sequence, without its initial graded complex.
-Source: Stacks Project, Homology, Tag 012K, and.
-
-Proof. For every positive integer r, form the actual cokernel of the boundary
-inclusion into the cycles, using filteredComplex_boundaries_le_cycles. The latter
-containment is proved directly from d squared = 0 using the image/pullback
-adjunction. The uniquely specified representative differential supplied by
-filteredComplex_page_differential_exists_unique makes these concrete objects
-into an r-page complex. Its differential sends the class of z to the class of dz
-in bidegree (p+r,q+1-r). The calculation filteredComplex_page_homology identifies
-its homology at (p,q) with the corresponding concrete quotient at r+1. Assemble
-these page complexes and homology isomorphisms into Mathlib's SpectralSequence
-structure. The required page comparisons are identity isomorphisms, since the
-page objects were constructed as precisely the stated cokernels. No infinite
-coproducts, arbitrary page objects, or finite-filtration hypothesis are used.
--/
+Source: Stacks Project, Homology, Tag 012K, and. -/
 theorem filteredComplex_positive_spectralSequence
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) :
     ∃ E : CohomologicalSpectralSequence C 1,

@@ -26,10 +26,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory C]
 
 /-- A commuting square of quasi-isomorphisms induces a quasi-isomorphism on cones.
 Source: Stacks Project, Tag 014A (five lemma for distinguished triangles).
-
-Proof. Localize the morphism of mapping-cone triangles. Its first two components
-are isomorphisms, hence so is its third component. Localization reflects
-quasi-isomorphisms. -/
+-/
 theorem quasiIso_map_of_quasiIso
     {K L I J : CochainComplex C ℤ} (f : K ⟶ L) (g : I ⟶ J)
     (a : K ⟶ I) (b : L ⟶ J) (h : f ≫ b = a ≫ g)

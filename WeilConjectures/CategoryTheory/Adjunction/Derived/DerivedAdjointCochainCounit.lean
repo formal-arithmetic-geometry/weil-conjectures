@@ -154,13 +154,7 @@ private theorem derived_unit_cochain (adj : E ⊣ U) (X : CochainComplex C ℤ) 
 
 /-- Transporting the left-derived counit to a chosen adjunction gives the transpose
 of the ordinary cochain unit, including both quotient comparison isomorphisms.
-Source: Stacks Project, Tag 06YY, derived scalar adjunction.
-Proof: the derived-unit identity on the homotopy category identifies the composite
-of the derived unit with the left-derived counit and the right-derived unit.
-Exactness of the right adjoint identifies its right-derived functor with the
-levelwise functor. Naturality of the quotient comparison passes the identity to
-cochain representatives. The unit identity for uniqueness of left adjoints then
-identifies its transpose with the chosen-adjunction counit displayed here. -/
+Source: Stacks Project, Tag 06YY, derived scalar adjunction. -/
 theorem Adjunction.leftDerivedCochainCounit {L : DerivedCategory C ⥤ DerivedCategory D}
     (adj : E ⊣ U) (ad : L ⊣ U.mapDerivedCategory) (X : CochainComplex C ℤ) :
     let b := adj.derivedAdjunction.ofNatIsoRight U.rightDerivedFunctorIsoMapDerivedCategory
