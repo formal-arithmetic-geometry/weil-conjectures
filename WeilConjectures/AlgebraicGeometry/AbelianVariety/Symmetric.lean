@@ -33,15 +33,12 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- Blueprint `definition-abelian-variety--2`: multiplication by an integer.
+/-- Multiplication by an integer.
 
 For a group scheme `G` over `K` (for instance an abelian variety) and an integer `n`,
-multiplication by `n` is the morphism `[n] : G ⟶ G` given by the `n`-th power `𝟙 G ^ n` of the
-identity in the group `G ⟶ G` of `CategoryTheory.GrpObj.Hom.group`; on `T`-valued points it is
-`a ↦ a ^ n`, that is `a ↦ n • a` written additively (`AlgebraicGeometry.comp_multiplicationBy`).
-For `n` a natural number this is the morphism `𝟙 G ^ n` used throughout
-(`AlgebraicGeometry.multiplicationBy_natCast`), and `[-1]` is the inverse `ι[G]`
-(`AlgebraicGeometry.multiplicationBy_neg_one`). -/
+multiplication by `n` is the morphism `[n] : G ⟶ G`, the `n`-th power `𝟙 G ^ n` of the
+identity in the group `G ⟶ G`. On `T`-valued points it is `a ↦ a ^ n`
+(`AlgebraicGeometry.comp_multiplicationBy`). -/
 noncomputable def multiplicationBy (G : Over (Spec (.of K))) [GrpObj G] (n : ℤ) : G ⟶ G :=
   𝟙 G ^ n
 
@@ -60,7 +57,7 @@ theorem multiplicationBy_natCast (n : ℕ) : multiplicationBy G n = 𝟙 G ^ n :
 theorem multiplicationBy_neg_one : multiplicationBy G (-1) = ι[G] := by
   rw [multiplicationBy, zpow_neg_one, GrpObj.inv_eq_inv]
 
-/-- Blueprint `definition-abelian-variety--4`: symmetric invertible sheaves.
+/-- Symmetric invertible sheaves.
 
 An `𝒪_A`-module `L` on a group scheme `A` over `K` (typically an invertible sheaf on an abelian
 variety) is *symmetric* if `[-1]^* L ≅ L`, where `[-1] = AlgebraicGeometry.multiplicationBy A (-1)`

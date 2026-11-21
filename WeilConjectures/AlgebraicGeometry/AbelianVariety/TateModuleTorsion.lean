@@ -27,12 +27,24 @@ induces an isomorphism of Tate modules.
 
 ## Main statements
 
-- `IsAbelianVariety.geometricPointsAddEquiv_zsmul_and_toTorsionBy_galoisRepresentation`:
-  the Galois action commutes with the transition maps and with the projections from `T_ℓ A`.
+- `IsAbelianVariety.geometricPointsAddEquiv_zsmul`: the Galois action commutes with the
+  transition maps.
+- `IsAbelianVariety.toTorsionBy_galoisRepresentation`: the Galois action commutes with the
+  projections from `T_ℓ A`.
 - `AlgebraicGeometry.IsAbelianVariety.bijOn_geometricPointsToPoints_torsionBy`:
   `A[ℓ ^ n](K̄) → A[ℓ ^ n](Ω)` is bijective.
 - `AlgebraicGeometry.IsAbelianVariety.bijective_tateModuleMap_geometricPointsToPoints`:
   `T_ℓ A` does not change when `K̄` is replaced by `Ω`.
+
+## Implementation details
+
+- The isomorphism `T_ℓ A / ℓ ^ n T_ℓ A ≃ A[ℓ ^ n](K̄)` is
+  `AddCommGroup.tateModule.quotientAddEquivTorsionBy`, which applies since `A(K̄)` is
+  `ℓ`-divisible (`AlgebraicGeometry.IsAbelianVariety.exists_zsmul_eq_geometricPoints`).
+- `A(K̄) → A(Ω)` is injective since `Spec Ω ⟶ Spec K̄` is faithfully flat, hence an epimorphism
+  of schemes. On `ℓ ^ n`-torsion it is then bijective since both sides are `(ℤ / ℓ ^ n) ^ (2 g)`
+  (`AlgebraicGeometry.IsAbelianVariety.nonempty_addEquiv_torsionBy_points`); the map of Tate
+  modules acts coordinatewise, hence is bijective too.
 -/
 
 @[expose] public section
@@ -48,13 +60,11 @@ namespace AlgebraicGeometry.IsAbelianVariety
 variable {K : Type u} [Field K] (ℓ : ℕ) [Fact ℓ.Prime] (A : Over (Spec (.of K))) [GrpObj A]
   [IsAbelianVariety A]
 
-/-- Blueprint `proposition-integral-tate-module--3`: the Tate module modulo `ℓ ^ n`.
+/-- The Tate module modulo `ℓ ^ n`.
 
 Let `A` be an abelian variety over `K` and `ℓ` a prime. The canonical projection
-`T_ℓ A → A[ℓ ^ n](K̄)` to the `n`-th coordinate
-(`AddCommGroup.tateModule.toTorsionBy`) induces an isomorphism
-`T_ℓ A / ℓ ^ n T_ℓ A ≃ A[ℓ ^ n](K̄)` (`tateModuleQuotientAddEquivTorsionBy_mk`), since `A(K̄)` is
-`ℓ`-divisible (`AlgebraicGeometry.IsAbelianVariety.exists_zsmul_eq_geometricPoints`). -/
+`T_ℓ A → A[ℓ ^ n](K̄)` to the `n`-th coordinate induces an isomorphism
+`T_ℓ A / ℓ ^ n T_ℓ A ≃ A[ℓ ^ n](K̄)` (`tateModuleQuotientAddEquivTorsionBy_mk`). -/
 noncomputable def tateModuleQuotientAddEquivTorsionBy (n : ℕ) :
     tateModule ℓ A ⧸ ((ℓ : ℤ_[ℓ]) ^ n • (⊤ : Submodule ℤ_[ℓ] (tateModule ℓ A))) ≃+
       AddSubgroup.torsionBy (Additive (Scheme.specAlgebraicClosure K ⟶ A)) ((ℓ : ℤ) ^ n) :=
@@ -69,23 +79,22 @@ theorem tateModuleQuotientAddEquivTorsionBy_mk (n : ℕ) (t : tateModule ℓ A) 
       AddCommGroup.tateModule.toTorsionBy ℓ _ n t :=
   rfl
 
-/-- Blueprint `proposition-integral-tate-module--4` (Galois equivariance): the Galois action on
-the torsion points of an abelian variety.
+omit [Fact ℓ.Prime] in
+/-- The Galois action on `A(K̄)` commutes with multiplication by `ℓ`, the transition maps between
+the groups `A[ℓ ^ n](K̄)`. -/
+theorem geometricPointsAddEquiv_zsmul (σ : Gal(AlgebraicClosure K/K))
+    (x : Additive (Scheme.specAlgebraicClosure K ⟶ A)) :
+    geometricPointsAddEquiv σ ((ℓ : ℤ) • x) = (ℓ : ℤ) • geometricPointsAddEquiv σ x :=
+  map_zsmul _ _ x
 
-For `σ ∈ Gal(K̄ / K)`, acting on `A(K̄)` by coordinates
-(`AlgebraicGeometry.IsAbelianVariety.geometricPointsAddEquiv`) and hence on each `A[ℓ ^ n](K̄)`
-(`AddSubgroup.torsionByCongr`): the action commutes with the transition maps, multiplication by
-`ℓ`, and with the projections `T_ℓ A → A[ℓ ^ n](K̄)`, `T_ℓ A` carrying the Galois representation
-`AlgebraicGeometry.IsAbelianVariety.galoisRepresentation`. -/
-theorem geometricPointsAddEquiv_zsmul_and_toTorsionBy_galoisRepresentation
-    (σ : Gal(AlgebraicClosure K/K)) (n : ℕ) :
-    (∀ x, geometricPointsAddEquiv (A := A) σ ((ℓ : ℤ) • x) =
-      (ℓ : ℤ) • geometricPointsAddEquiv σ x) ∧
-      ∀ t : tateModule ℓ A,
-        AddCommGroup.tateModule.toTorsionBy ℓ _ n (galoisRepresentation ℓ A σ t) =
-          AddSubgroup.torsionByCongr (geometricPointsAddEquiv σ) _
-            (AddCommGroup.tateModule.toTorsionBy ℓ _ n t) :=
-  ⟨fun x ↦ map_zsmul _ _ x, fun _ ↦ rfl⟩
+/-- The projection `T_ℓ A → A[ℓ ^ n](K̄)` is Galois equivariant, for the Galois representation on
+`T_ℓ A` and the action of `Gal(K̄ / K)` on `A[ℓ ^ n](K̄)` by coordinates. -/
+theorem toTorsionBy_galoisRepresentation (σ : Gal(AlgebraicClosure K/K)) (n : ℕ)
+    (t : tateModule ℓ A) :
+    AddCommGroup.tateModule.toTorsionBy ℓ _ n (galoisRepresentation ℓ A σ t) =
+      AddSubgroup.torsionByCongr (geometricPointsAddEquiv σ) _
+        (AddCommGroup.tateModule.toTorsionBy ℓ _ n t) :=
+  rfl
 
 section BaseChange
 
@@ -110,8 +119,7 @@ noncomputable def geometricPointsToPoints :
     congrArg Additive.ofMul (MonObj.comp_mul _ P.toMul Q.toMul)
 
 omit [IsAbelianVariety A] in
-/-- The map `A(K̄) → A(Ω)` is injective, since `Spec Ω ⟶ Spec K̄` is faithfully flat, hence an
-epimorphism of schemes. -/
+/-- The map `A(K̄) → A(Ω)` is injective. -/
 theorem injective_geometricPointsToPoints :
     Function.Injective (geometricPointsToPoints A Ω) := by
   have h : (algebraMap (AlgebraicClosure K) Ω).FaithfullyFlat :=
@@ -125,15 +133,11 @@ theorem injective_geometricPointsToPoints :
   exact (cancel_epi (Spec.map (CommRingCat.ofHom (algebraMap (AlgebraicClosure K) Ω)))).mp
     (congrArg (fun R ↦ (Additive.toMul R).left) hPQ)
 
-/-- Blueprint `proposition-integral-tate-module--4` (independence of the algebraically closed
-field): the torsion points do not change under extension of the algebraically closed field.
+/-- The torsion points do not change under extension of the algebraically closed field.
 
 Let `A` be an abelian variety over `K`, `ℓ` a prime invertible in `K` and `Ω` an algebraically
 closed field extension of `K̄`. Then `A(K̄) → A(Ω)` maps `A[ℓ ^ n](K̄)` bijectively onto
-`A[ℓ ^ n](Ω)`: it is injective (`injective_geometricPointsToPoints`) and both groups are
-`(ℤ / ℓ ^ n) ^ (2 g)`
-(`AlgebraicGeometry.IsAbelianVariety.nonempty_addEquiv_torsionBy_points`). Being additive, the
-map commutes with the transition maps. -/
+`A[ℓ ^ n](Ω)`. -/
 theorem bijOn_geometricPointsToPoints_torsionBy [IsAlgClosed Ω] (hℓ : (ℓ : K) ≠ 0) (n : ℕ) :
     Set.BijOn (geometricPointsToPoints A Ω)
       (AddSubgroup.torsionBy (Additive (Scheme.specAlgebraicClosure K ⟶ A)) ((ℓ : ℤ) ^ n))
@@ -162,14 +166,11 @@ theorem bijOn_geometricPointsToPoints_torsionBy [IsAlgClosed Ω] (hℓ : (ℓ : 
   obtain ⟨x, hx⟩ := hbij.2 ⟨y, hy⟩
   exact ⟨x, x.2, congrArg Subtype.val hx⟩
 
-/-- Blueprint `proposition-integral-tate-module--4` (independence of the algebraically closed
-field): the Tate module does not change under extension of the algebraically closed field.
+/-- The Tate module does not change under extension of the algebraically closed field.
 
 Let `A` be an abelian variety over `K`, `ℓ` a prime invertible in `K` and `Ω` an algebraically
 closed field extension of `K̄`. Then the map `T_ℓ A → T_ℓ (A(Ω))` induced by `A(K̄) → A(Ω)` is
-bijective. As it acts coordinatewise, it commutes with the projections to the torsion points,
-which are identified by
-`AlgebraicGeometry.IsAbelianVariety.bijOn_geometricPointsToPoints_torsionBy`. -/
+bijective. -/
 theorem bijective_tateModuleMap_geometricPointsToPoints [IsAlgClosed Ω] (hℓ : (ℓ : K) ≠ 0) :
     Function.Bijective
       (AddCommGroup.tateModule.map (ℓ := ℓ) (geometricPointsToPoints A Ω)) := by

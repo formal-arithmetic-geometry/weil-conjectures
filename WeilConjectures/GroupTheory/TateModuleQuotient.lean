@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Algebra.Pi
 public import Mathlib.Algebra.Module.Submodule.Pointwise
-public import WeilConjectures.GroupTheory.TateModule
+public import WeilConjectures.GroupTheory.TateModuleDual
 
 /-!
 # The Tate module modulo `ℓ ^ n`
@@ -26,6 +26,13 @@ so that it induces an isomorphism `T_ℓ M / ℓ ^ n T_ℓ M ≃ M[ℓ ^ n]`.
 - `AddCommGroup.tateModule.ker_toTorsionBy`: the kernel of the projection is `ℓ ^ n T_ℓ M`.
 - `AddCommGroup.tateModule.surjective_toTorsionBy`: the projection is surjective if `M` is
   `ℓ`-divisible.
+
+## Implementation details
+
+- If `t n = 0`, then `t = ℓ ^ n • s` for the shifted element `s k = t (k + n)` of the Tate module.
+- If `ℓ` is surjective on `M` and `x ∈ M[ℓ ^ n]`, choose `y k` with `y 0 = x` and
+  `ℓ • y (k + 1) = y k`; then `(ℓ ^ n • y k)_k` lies in the Tate module and has `n`-th
+  coordinate `x`.
 -/
 
 @[expose] public section
@@ -39,11 +46,17 @@ namespace AddCommGroup.tateModule
 variable {ℓ : ℕ} [Fact ℓ.Prime] {M : Type u} [AddCommGroup M]
 
 variable (ℓ M) in
-/-- The projection `T_ℓ M → M[ℓ ^ n]` of the Tate module to its `n`-th coordinate. -/
+/-- The projection `T_ℓ M → M[ℓ ^ n]` of the Tate module to its `n`-th coordinate, the bundled
+form of `AddCommGroup.tateModule.coordTorsion`. -/
 def toTorsionBy (n : ℕ) : tateModule ℓ M →+ AddSubgroup.torsionBy M ((ℓ : ℤ) ^ n) where
-  toFun t := ⟨(t : ∀ _ : ℕ, M) n, pow_zsmul_coe t n⟩
+  toFun t := coordTorsion t n
   map_zero' := rfl
-  map_add' _ _ := rfl
+  map_add' t t' := coordTorsion_add t t' n
+
+omit [Fact ℓ.Prime] in
+@[simp]
+theorem toTorsionBy_apply (n : ℕ) (t : tateModule ℓ M) : toTorsionBy ℓ M n t = coordTorsion t n :=
+  rfl
 
 omit [Fact ℓ.Prime] in
 @[simp]
@@ -60,8 +73,7 @@ theorem coe_pow_smul_apply (n : ℕ) (t : tateModule ℓ M) (k : ℕ) :
   rw [h, Int.cast_smul_eq_zsmul]
   rfl
 
-/-- The kernel of the projection `T_ℓ M → M[ℓ ^ n]` is `ℓ ^ n T_ℓ M`: if `t n = 0`, then
-`t = ℓ ^ n • s` for the shifted element `s k = t (k + n)` of the Tate module. -/
+/-- The kernel of the projection `T_ℓ M → M[ℓ ^ n]` is `ℓ ^ n T_ℓ M`. -/
 theorem ker_toTorsionBy (n : ℕ) :
     (toTorsionBy ℓ M n).ker =
       ((ℓ : ℤ_[ℓ]) ^ n • (⊤ : Submodule ℤ_[ℓ] (tateModule ℓ M))).toAddSubgroup := by
@@ -83,8 +95,7 @@ theorem ker_toTorsionBy (n : ℕ) :
 
 omit [Fact ℓ.Prime] in
 /-- If multiplication by `ℓ` is surjective on `M`, the projection `T_ℓ M → M[ℓ ^ n]` is
-surjective: for `x ∈ M[ℓ ^ n]` choose `y k` with `y 0 = x` and `ℓ • y (k + 1) = y k`; then
-`(ℓ ^ n • y k)_k` lies in the Tate module and has `n`-th coordinate `x`. -/
+surjective. -/
 theorem surjective_toTorsionBy (hdiv : ∀ x : M, ∃ y : M, (ℓ : ℤ) • y = x) (n : ℕ) :
     Function.Surjective (toTorsionBy ℓ M n) := by
   choose d hd using hdiv

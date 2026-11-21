@@ -29,6 +29,15 @@ so there are only finitely many of them. Hence `F ^ m` fixes no nonzero vector o
   `F ^ m - 1` is an automorphism of `V_ℓ A`.
 - `IsAbelianVariety.bijective_baseChange_rationalTateModuleGaloisMap_geometricFrobenius_pow_sub_id`:
   `F ^ m - 1` is an automorphism of `E ⊗ V_ℓ A` for every field extension `E` of `ℚ_ℓ`.
+
+## Implementation details
+
+- A geometric point fixed by `F ^ m` factors through `Spec L` for the finite field `L ⊆ K̄` fixed
+  by `F ^ m`, and `A` has only finitely many `L`-points.
+- Since the fixed points of `F ^ m` on `A(K̄)` form a finite group, `(T_ℓ A) ^ {F ^ m} = 0` is
+  `AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed`.
+- `F ^ m - 1` is injective on the finite-dimensional space `V_ℓ A` as `F ^ m` has no nonzero
+  fixed vector, hence bijective; on `E ⊗ V_ℓ A` it is the base change of this automorphism.
 -/
 
 @[expose] public section
@@ -43,8 +52,7 @@ variable {K : Type u} [Field K] [Fintype K] (ℓ : ℕ) [Fact ℓ.Prime] (A : Ov
   [GrpObj A] [IsAbelianVariety A]
 
 /-- Over a finite field `K`, the geometric points of an abelian variety fixed by a positive power
-`F ^ m` of the geometric Frobenius form a finite set: such a point factors through `Spec L` for
-the finite field `L ⊆ K̄` fixed by `F ^ m`, and `A` has only finitely many `L`-points. -/
+`F ^ m` of the geometric Frobenius form a finite set. -/
 theorem finite_setOf_geometricFrobenius_pow_fixed {m : ℕ} (hm : m ≠ 0) :
     {P | geometricPointsAddEquiv (A := A)
       (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ m) P =
@@ -86,14 +94,10 @@ theorem finite_setOf_geometricFrobenius_pow_fixed {m : ℕ} (hm : m ≠ 0) :
   rw [← hg P₁, ← hg P₂]
   exact congrArg (_ ≫ ·) (congrArg Subtype.val h)
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector--1`: no vector of the Tate module is fixed
-by a power of Frobenius.
+/-- No vector of the Tate module is fixed by a power of Frobenius.
 
 Let `A` be an abelian variety over a finite field `K` and `F` the geometric Frobenius, acting on
-`T_ℓ A` through the Galois representation. For every `m > 0`, `(T_ℓ A) ^ {F ^ m} = 0`: the points
-of `A(K̄)` fixed by `F ^ m` form a finite group
-(`AlgebraicGeometry.IsAbelianVariety.finite_setOf_geometricFrobenius_pow_fixed`), so this is
-`AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed`. -/
+`T_ℓ A` through the Galois representation. For every `m > 0`, `(T_ℓ A) ^ {F ^ m} = 0`. -/
 theorem eq_zero_of_galoisRepresentation_geometricFrobenius_pow_eq_self {m : ℕ} (hm : 0 < m)
     {t : tateModule ℓ A}
     (ht : galoisRepresentation ℓ A
@@ -103,7 +107,7 @@ theorem eq_zero_of_galoisRepresentation_geometricFrobenius_pow_eq_self {m : ℕ}
     (finite_setOf_geometricFrobenius_pow_fixed A hm.ne') t.2
     fun n ↦ congrFun (congrArg Subtype.val ht) n
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector--2`: no vector of the rational Tate module
+/-- No vector of the rational Tate module
 is fixed by a power of Frobenius.
 
 Let `A` be an abelian variety over a finite field `K` and `F` the geometric Frobenius, acting on
@@ -116,14 +120,10 @@ theorem eq_zero_of_rationalTateModuleGaloisMap_geometricFrobenius_pow_eq_self {m
   AddCommGroup.rationalTateModule.eq_zero_of_map_eq_self _
     (finite_setOf_geometricFrobenius_pow_fixed A hm.ne') hv
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector--3`: a power of Frobenius minus one is an
-automorphism of the rational Tate module.
+/-- A power of Frobenius minus one is an automorphism of the rational Tate module.
 
 Let `A` be an abelian variety over a finite field `K`, `ℓ` a prime invertible in `K` and `F` the
-geometric Frobenius. For every `m > 0`, `F ^ m - 1` is bijective on the finite-dimensional
-`ℚ_ℓ`-vector space `V_ℓ A`: it is injective since `F ^ m` has no nonzero fixed vector
-(`eq_zero_of_rationalTateModuleGaloisMap_geometricFrobenius_pow_eq_self`).
--/
+geometric Frobenius. For every `m > 0`, `F ^ m - 1` is bijective on `V_ℓ A`. -/
 theorem bijective_rationalTateModuleGaloisMap_geometricFrobenius_pow_sub_id (hℓ : (ℓ : K) ≠ 0)
     {m : ℕ} (hm : 0 < m) :
     Function.Bijective (rationalTateModuleGaloisMap ℓ A
@@ -139,15 +139,12 @@ theorem bijective_rationalTateModuleGaloisMap_geometricFrobenius_pow_sub_id (h�
     exact eq_zero_of_rationalTateModuleGaloisMap_geometricFrobenius_pow_eq_self ℓ A hm hv
   exact ⟨hinj, LinearMap.injective_iff_surjective.1 hinj⟩
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector--4`: a power of Frobenius minus one is an
-automorphism of every scalar extension of the rational Tate module.
+/-- A power of Frobenius minus one is an automorphism of every scalar extension of the rational
+Tate module.
 
 Let `A` be an abelian variety over a finite field `K`, `ℓ` a prime invertible in `K`, `F` the
 geometric Frobenius and `E` a field extension of `ℚ_ℓ`. For every `m > 0`, the `E`-linear
-extension of `F ^ m - 1` to `E ⊗_{ℚ_ℓ} V_ℓ A` is bijective, being the base change of the linear
-automorphism of
-`bijective_rationalTateModuleGaloisMap_geometricFrobenius_pow_sub_id`.
--/
+extension of `F ^ m - 1` to `E ⊗_{ℚ_ℓ} V_ℓ A` is bijective. -/
 theorem bijective_baseChange_rationalTateModuleGaloisMap_geometricFrobenius_pow_sub_id
     (hℓ : (ℓ : K) ≠ 0) {m : ℕ} (hm : 0 < m) (E : Type v) [Field E] [Algebra ℚ_[ℓ] E] :
     Function.Bijective ((rationalTateModuleGaloisMap ℓ A
