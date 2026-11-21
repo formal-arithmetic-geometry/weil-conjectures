@@ -14048,6 +14048,7 @@ public import WeilConjectures.Blowup.QuasiDominationExtension
 public import WeilConjectures.CategoryTheory.Abelian.AdicImageTower
 public import WeilConjectures.CategoryTheory.Abelian.AdicTowerStructure
 public import WeilConjectures.CategoryTheory.Abelian.AnnihilatorDevissage
+public import WeilConjectures.CategoryTheory.Abelian.CokernelEndPowTower
 public import WeilConjectures.CategoryTheory.Abelian.CokernelNSMul
 public import WeilConjectures.CategoryTheory.Abelian.CokernelPowTower
 public import WeilConjectures.CategoryTheory.Abelian.DerivedBottomComparison
@@ -16991,7 +16992,12 @@ public import WeilConjectures.DeligneLaumon.Reduction.FiniteMap
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
 public import WeilConjectures.DeligneLaumon.Reduction.MixedDescent
+public import WeilConjectures.DeligneLaumon.Reduction.MixedDual
+public import WeilConjectures.DeligneLaumon.Reduction.MixedLisseOpen
+public import WeilConjectures.DeligneLaumon.Reduction.MixedOperations
 public import WeilConjectures.DeligneLaumon.Reduction.MixedStalk
+public import WeilConjectures.DeligneLaumon.Reduction.MixedTensor
+public import WeilConjectures.DeligneLaumon.Reduction.MixedWeightsIn
 public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixedFieldCoefficient
@@ -23820,6 +23826,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLattice
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeBasis
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeCocycle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeDescent
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeEmbedding
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeNormalScheme
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeTransition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeValues
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyConstantPullback
@@ -23903,6 +23911,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.StalkZeroLocus
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TorsionFreeResolution
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TorsionFreeResolutionMod
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TorsionFreeResolutionProEtale
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UniformizerReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobeniusNaturality
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
@@ -26234,6 +26243,7 @@ public import WeilConjectures.WeilSheaf.LFunction
 public import WeilConjectures.WeilSheaf.LSeries
 public import WeilConjectures.WeilSheaf.LSeriesWeilComplex
 public import WeilConjectures.WeilSheaf.LisseAbelian
+public import WeilConjectures.WeilSheaf.LisseDualExact
 public import WeilConjectures.WeilSheaf.LisseDuality
 public import WeilConjectures.WeilSheaf.LisseExtension
 public import WeilConjectures.WeilSheaf.LisseFiltration
