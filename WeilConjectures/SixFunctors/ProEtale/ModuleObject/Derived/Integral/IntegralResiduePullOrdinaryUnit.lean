@@ -190,7 +190,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 /-- The scalar adjunction unit intertwines the ordinary pull isomorphism and restriction.
 
 Source: Bhatt--Scholze, Remark 6.8.15; the extension/restriction adjunction and its
-compatibility with inverse image. (blueprint: new-integral-residue-pull-ordinary-unit)
+compatibility with inverse image.
 
 Proof. Forget module structure. Pullback along the coefficient pullback isomorphism
 is identified with inverse image of the underlying sheaf. Under this identification,

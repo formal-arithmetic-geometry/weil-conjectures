@@ -25,8 +25,7 @@ Source: blueprint `theorem-poincare-duality-frobenius`, elimination of the twist
 point-section transport argument.
 Proof: endomorphisms of the tensor unit commute, by the naturality of the unit
 endomorphism action. The two conjugates differ by conjugation with an automorphism
-of that unit, which therefore acts trivially.
-(blueprint: lem-pod-point-line-coordinates) -/
+of that unit, which therefore acts trivially. -/
 theorem point_line_conjugation_independent
     {A : Type*} [Category* A] [MonoidalCategory A]
     {L : A} (f : L ⟶ L) (h h' : L ≅ 𝟙_ A) :

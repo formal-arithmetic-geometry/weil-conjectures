@@ -14,7 +14,6 @@ Source: blueprint `lemma-lattices-after-finite-stratification`, extended as dire
 Wei Yang, Zulip #1412, answer 17 (2026-11-01), for clause (4) of
 `proposition-lattices-representations-normal-scheme`. This keeps the original finite-type theorem
 and supplies the normal-Noetherian instance required by its dense-open argument.
-(blueprint: lemma-lattices-after-finite-stratification).
 -/
 
 @[expose] public noncomputable section
@@ -48,7 +47,6 @@ with the spectral norm and its valuation subring. No cover degree is inverted.
 Normality is retained here for the expert-requested specialization, although
 the construction itself only needs a Noetherian underlying space. Empty schemes,
 zero rank, varying ranks, and residue characteristic `l` are included.
-(blueprint: lemma-lattices-after-finite-stratification).
 -/
 theorem exists_stratified_lisse_integral_lattice_of_normal
     (l : ℕ) [Fact l.Prime] (E : Type) [Field E]

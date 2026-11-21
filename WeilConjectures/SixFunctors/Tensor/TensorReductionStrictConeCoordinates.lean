@@ -50,8 +50,7 @@ attribute [local irreducible] coefficientSequenceRestriction
   pullbackTensorOrdinaryAdjunction
 
 /-- The quotient augmentation followed by the normalized strict tensor comparison.
-Source: Stacks 03EK and 07A4
-(blueprint: lem-coef-tensor-reduction-strict-cone-coordinates). -/
+Source: Stacks 03EK and 07A4. -/
 def tensorReductionStrictConeMap (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     (Functor.const ℕᵒᵖ).obj
@@ -64,8 +63,7 @@ def tensorReductionStrictConeMap (W : Scheme.{u})
 attribute [local irreducible] tensorReductionStrictConeMap
 
 /-- A strict cone with vertex the integral total tensor.
-Source: Stacks 03EK and 07A4
-(blueprint: lem-coef-tensor-reduction-strict-cone-coordinates). -/
+Source: Stacks 03EK and 07A4. -/
 def tensorReductionStrictCone (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     Cone ((integralOperationsTensorTowerFunctor l E W).obj (P, Q)) where
@@ -88,8 +86,7 @@ private theorem scalar_unit_section (W : Scheme.{u}) (n : ℕ)
 Source: Stacks 03EK and 07A4. On homogeneous pure tensors both maps insert the
 quotient unit in each factor. The quotient augmentation and tensor comparison
 have these prescribed formulas; tensor generators and total-summand injections
-determine the map in every degree. No flatness or boundedness is needed.
-(blueprint: lem-coef-tensor-reduction-strict-cone-coordinates). -/
+determine the map in every degree. No flatness or boundedness is needed. -/
 theorem tensorReductionStrictCone_finiteTranspose (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

@@ -178,8 +178,7 @@ the Roos comparison and this chain lift transports the equality back to the
 original tower. The Roos image of the resolution is invertible because the
 published Roos model is an isomorphism of functors and derived localization
 inverts the resolution. Finally insert the complex-composition comparison for
-restriction followed by ordinary limit.
-(blueprint: lem-coef-limit-unit-roos-normalization). -/
+restriction followed by ordinary limit. -/
 theorem pullbackTensorLimitUnit_roos (W : Scheme.{u})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :
     pullbackTensorLimitUnit l E W C ≫ (pullbackTensorLimitRoos l E W C).hom =

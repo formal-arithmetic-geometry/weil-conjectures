@@ -277,7 +277,6 @@ private theorem identity_tensor_unit {X : Scheme.{u}}
 /-- Identity scalar balancing preserves the multiplication unit.
 Source: current blueprint proposition-six-operations-change-coefficients, final paragraph;
 the flat-representative normalization of scalarTensor.
-(blueprint: lem-sf-integral-scalar-tensor-identity)
 
 Proof: take flat-term K-flat representatives P and Q. The identity scalar
 restriction is the identity on sections, so its conjugate tensorIdentity is

@@ -19,8 +19,7 @@ import Mathlib.Algebra.CharP.CharAndCard
 /-!
 # Completed coefficient transport and Weil categories
 
-Source: Weil conjectures blueprint, finite coefficient and Weil-category definitions
-(blueprint: def-wf-weil-category).
+Source: Weil conjectures blueprint, finite coefficient and Weil-category definitions.
 
 The finite coefficient stages use `pbcStageDatum` and `pbcStageUniformizer`:
 these are the valuation-ring data transported along `Shrink.algEquiv`, with the
@@ -56,14 +55,14 @@ universe v z
 variable {C : Type z} [Category.{v} C] [Preadditive C] (F : C ⥤ C) [F.Additive]
 
 /-- The group laws on commuting Weil morphisms are inherited from the coefficient category.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
+Source: blueprint order 2106. -/
 def PreadditiveNormalized (P : Preadditive (IsoAlgebra F)) : Prop := by
   letI := P
   exact ∀ (K L : IsoAlgebra F) (f g : K ⟶ L),
     (f + g).hom.f = f.hom.f + g.hom.f ∧ (0 : K ⟶ L).hom.f = 0
 
 /-- Commuting morphisms have the unique inherited preadditive structure.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category).
+Source: blueprint order 2106.
 Proof: the commuting equation is closed under sums, negatives and zero because
 F is additive. These operations make each commuting Hom set an additive
 subgroup of the ambient Hom group. Bilinearity follows from ambient bilinearity.
@@ -86,7 +85,7 @@ theorem preadditive_exists :
     exact (hQ K L f g).1
 
 /-- The group structure with its specified faithful underlying morphisms.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
+Source: blueprint order 2106. -/
 instance preadditive : Preadditive (IsoAlgebra F) := (preadditive_exists F).exists.choose
 
 section Cocycle
@@ -174,7 +173,7 @@ variable (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
 include hsep hft hqc
 
 /-- The inherited base hypotheses needed by the PBC coefficient stages.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category).
+Source: blueprint order 2106.
 Proof: finite type over a field is noetherian and finite-dimensional, also after
 extension to the algebraic closure. The residue characteristic is D.p, and the
 coefficient prime differs from it, so that prime is a unit in every local ring. -/
@@ -214,7 +213,7 @@ theorem weilGeometricFiber_coefficientHypotheses :
         X.presheaf.germ (⊤ : X.Opens) t (by trivial)).hom)
 
 /-- The noetherian instance is a property of the specified geometric fiber.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category).
+Source: blueprint order 2106.
 Proof: base change preserves finite type over the field; a finite-type scheme
 over a noetherian field is noetherian. -/
 @[instance] theorem weilGeometricFiber_isNoetherian :
@@ -230,7 +229,7 @@ over a noetherian field is noetherian. -/
   exact {}
 
 /-- The geometric-Frobenius pullback on the exact PBC rational coefficient category.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
+Source: blueprint order 2106. -/
 def weilFrobeniusPullback (E : Padic.FiniteCoefficientFields c.l c.Qbar) :
     PbcRationalCategory (D.geometricFiber X₀).left
         (pbcStageDatum.{u} c.l c.Qbar E) (pbcStageUniformizer.{u} c.l c.Qbar E) ⥤
@@ -243,12 +242,12 @@ def weilFrobeniusPullback (E : Padic.FiniteCoefficientFields c.l c.Qbar) :
 The existing IsoAlgebra category has exactly the pairs (K, phi:P(K)≅K) and all
 maps u with phi_K ≫ u = P(u) ≫ phi_L. Its identities and composites are those
 of the coefficient category; the strict version has these same objects and maps.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
+Source: blueprint order 2106. -/
 abbrev WeilD (E : Padic.FiniteCoefficientFields c.l c.Qbar) :=
   CategoryTheory.Endofunctor.IsoAlgebra (weilFrobeniusPullback D c X₀ E)
 
 /-- The underlying coefficient extension, using the geometric fiber's inherited hypotheses.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
+Source: blueprint order 2106. -/
 def weilCoefficientExtension {E F : Padic.FiniteCoefficientFields c.l c.Qbar}
     (h : E ≤ F) :
     PbcRationalCategory (D.geometricFiber X₀).left
@@ -260,7 +259,7 @@ def weilCoefficientExtension {E F : Padic.FiniteCoefficientFields c.l c.Qbar}
     (weilGeometricFiber_coefficientHypotheses D c X₀).2.2 h
 
 /-- The canonical Frobenius/scalar comparison on the raw coefficient stages.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
+Source: blueprint order 2106. -/
 def weilFrobeniusScalarComparison {E F : Padic.FiniteCoefficientFields c.l c.Qbar}
     (h : E ≤ F) :
     weilCoefficientExtension D c X₀ h ⋙ weilFrobeniusPullback D c X₀ F ≅
@@ -271,7 +270,7 @@ def weilFrobeniusScalarComparison {E F : Padic.FiniteCoefficientFields c.l c.Qba
 
 /-- Extension sends (K,phi) to (T K,c_K followed by T(phi)), with the same action
 T on the underlying commuting morphisms.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
+Source: blueprint order 2106. -/
 def weilScalarExtension {E F : Padic.FiniteCoefficientFields c.l c.Qbar}
     (h : E ≤ F) : WeilD D c X₀ E ⥤ WeilD D c X₀ F :=
   CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso
@@ -280,7 +279,7 @@ def weilScalarExtension {E F : Padic.FiniteCoefficientFields c.l c.Qbar}
 
 /-- The tensor associator is Frobenius-equivariant and thus lifts uniquely to
 Weil pairs. Its underlying map is specified, so it is not an arbitrary isomorphism.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category).
+Source: blueprint order 2106.
 Proof: the scalar and Frobenius comparisons are mates of the sectionwise
 identity restrictions. Composing these right-adjoint identities in either order
 gives the same map. The corresponding left mates commute with tensor
@@ -310,7 +309,7 @@ theorem weilScalarAssociator_exists {E F G : Padic.FiniteCoefficientFields c.l c
       (weilGeometricFiber_coefficientHypotheses D c X₀).2.2 h k)
 
 /-- Tensor balancing induces the associator on the fixed-pair categories.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
+Source: blueprint order 2106. -/
 def weilScalarAssociator {E F G : Padic.FiniteCoefficientFields c.l c.Qbar}
     (h : E ≤ F) (k : F ≤ G) :
     weilScalarExtension D c X₀ h ⋙ weilScalarExtension D c X₀ k ≅
@@ -321,7 +320,7 @@ attribute [local irreducible] weilScalarAssociator
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The induced associators satisfy the same cocycle equality as tensor balancing.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category).
+Source: blueprint order 2106.
 Proof: forget to the coefficient category and use the defining component
 equations and the tensor associator pentagon. The forgetful functor is
 faithful, giving the equality of commuting morphisms of pairs. -/
@@ -344,7 +343,7 @@ theorem weilScalarAssociator_cocycle
       exact (weilScalarAssociator_exists D c X₀ a b).exists.choose_spec L) h k j K
 
 /-- The concrete system of Weil categories with its induced tensor associators.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
+Source: blueprint order 2106. -/
 def weilScalarSystem :
     StageSystem (fun E : Padic.FiniteCoefficientFields c.l c.Qbar ↦ WeilD D c X₀ E) where
   T h := weilScalarExtension D c X₀ h
@@ -356,7 +355,7 @@ of the finite Weil stages. Objects are (E,W). Morphisms are representatives
 (M,u), modulo equality at a common larger coefficient field, transported by the
 specified tensor associators. Composition is at a common stage. In particular
 this is the filtered colimit of the Weil categories themselves.
-Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
+Source: blueprint order 2106. -/
 abbrev WeilDQbar := (weilScalarSystem D c X₀).PairCategory
 
 end WeilConjectures

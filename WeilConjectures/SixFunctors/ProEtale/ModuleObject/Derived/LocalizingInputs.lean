@@ -21,9 +21,7 @@ import WeilConjectures.Tactic.ExactModProofs
 # Inputs from other subsections for the projection formula on `Loc(Dbc)`
 
 The projection formula and proper base change on the localizing categories `Loc(Dbc(-, Λ))`
-for the `ℓ`-adic coefficient rings `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` (blueprint
-`lemma-projection-formula-integral-coefficients`,
-`proposition-projection-formula-rational-coefficients`) rest on the following statements of other
+for the `ℓ`-adic coefficient rings `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` rest on the following statements of other
 subsections of the blueprint, stated here for the module objects over `Λ_X` of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject`. Each theorem carries the blueprint id of the
 node it formalises and states that node for one coefficient ring; the docstring lists the clauses of
@@ -55,7 +53,7 @@ immersion preserves
 As for the bounded constructible six functors
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), all schemes
 are separated and of finite type over a field `k` of characteristic `p > 0` with `p ≠ ℓ`
-(blueprint `sk-def-sfb-dc-setting`), and the functors are those of the underlying morphisms of
+, and the functors are those of the underlying morphisms of
 schemes. The coefficient rings are the condensed rings `𝒪̲_E = Profinite.padicIntegersRingObj ℓ E`
 (for a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`), `E̲ = Profinite.continuousMapRingObj E` (for a finite
 subextension `E` of `ℚ̄_ℓ / ℚ_ℓ`, `E : PadicAlgCl.FiniteIntermediateField ℓ`) and
@@ -308,8 +306,7 @@ zero; the case `Λ = E̲` (for which `Dctf = Dbc`). If `p : X ⟶ Y` is proper, 
 open immersion, `j_!` maps `Dbc(U, Λ)` into `Dbc(X, Λ)`, preserves direct sums, and maps
 `Loc(Dbc(U, Λ))` into `Loc(Dbc(X, Λ))`. Both functors are exact, being triangulated functors
 of the ambient derived categories. The statement on `j_!` is
-`localizingClosure_boundedConstructible_openImmersionLowerShriek` of this namespace (blueprint
-`proposition-proper-direct-image-extension-zero`). -/
+`localizingClosure_boundedConstructible_openImmersionLowerShriek` of this namespace. -/
 theorem localizingBoundedConstructible_lowerStar_lowerShriek_continuousMapRingObj :
     (∀ (p : X ⟶ Y) [IsProper p.left],
       (∀ M, localizingBoundedConstructible 𝐄 X.left M →
@@ -432,8 +429,7 @@ zero; the case `Λ = ℚ̲̄_ℓ` (for which `Dctf = Dbc`). If `p : X ⟶ Y` is 
 open immersion, `j_!` maps `Dbc(U, Λ)` into `Dbc(X, Λ)`, preserves direct sums, and maps
 `Loc(Dbc(U, Λ))` into `Loc(Dbc(X, Λ))`. Both functors are exact, being triangulated functors
 of the ambient derived categories. The statement on `j_!` is
-`localizingClosure_boundedConstructible_openImmersionLowerShriek` of this namespace (blueprint
-`proposition-proper-direct-image-extension-zero`). -/
+`localizingClosure_boundedConstructible_openImmersionLowerShriek` of this namespace. -/
 theorem localizingBoundedConstructible_lowerStar_lowerShriek_padicAlgClRingObj :
     (∀ (p : X ⟶ Y) [IsProper p.left],
       (∀ M, localizingBoundedConstructible 𝐐 X.left M →

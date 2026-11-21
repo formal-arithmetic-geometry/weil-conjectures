@@ -604,7 +604,6 @@ end AssociatorProof
 scalar/tensor comparisons. No internal Hom, completion, or dualizing objects occur.
 Source: current blueprint, sec-smooth-purity/sk-lem-sp-tower,
 lem-coef-integral-finite-extension.proof.md, final paragraph.
-(blueprint: lem-sf-scalar-tensor-associator)
 
 Proof: choose flat-term K-flat representatives P and Q for K and M. Scalar extension
 preserves these representatives. The scalarTensor normalization identifies its

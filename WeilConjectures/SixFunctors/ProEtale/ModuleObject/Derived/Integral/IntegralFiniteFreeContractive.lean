@@ -81,7 +81,6 @@ import Mathlib.LinearAlgebra.Matrix.Ideal
 /-! # Contractive matrices over integral coefficient sheaves
 
 Source: Bhatt--Scholze, Section 6.8, integral Nakayama argument.
-(blueprint: lem-weil-pbc-integral-finite-free-contractive)
 -/
 
 @[expose] public section
@@ -190,7 +189,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- One minus ℓ times an endomorphism of a finite free integral module is invertible.
 Source: Bhatt--Scholze, Section 6.8, integral Nakayama argument.
-(blueprint: lem-weil-pbc-integral-finite-free-contractive)
 
 Proof: the rank-one assertion says that ℓ belongs to the Jacobson radical of
 End(R). Matrix Jacobson radicals are computed entrywise, so the matrix ℓT belongs

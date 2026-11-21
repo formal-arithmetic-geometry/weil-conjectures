@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 
 The counit characterization of the existing total left derived tensor comparison
 provides its signed-total-complex representative.
-(blueprint: lem-sfb-coefficient-scalar-tensor-internal-complex)
 -/
 
 @[expose] public noncomputable section
@@ -61,8 +60,7 @@ homotopy quotient is strict monoidal and its comparison with complex localizatio
 has identity components. The fixed complex scalar comparison is the derived-functor
 counit, by its factorization property. Substitute these two identifications into the
 characterizing counit equation of the total left derived tensor comparison. This
-identifies the map of the signed ordinary total tensor with the derived tensor map.
-(blueprint: lem-sfb-coefficient-scalar-tensor-internal-complex). -/
+identifies the map of the signed ordinary total tensor with the derived tensor map. -/
 theorem coefficientScalarTensor_internalComplex (Z : Scheme.{u})
     (P Q : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
     let := internalScalarMonoidal a Z

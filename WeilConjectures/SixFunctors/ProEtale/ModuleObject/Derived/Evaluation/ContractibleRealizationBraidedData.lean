@@ -72,7 +72,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 /-! Braided structure of the terminal scalar realization.
 
 Source: Hemo--Richarz--Scholbach, Lemma 4.1(1), equations (3.1)--(3.2), Remark 3.2.
-(blueprint: new-lem-zl-contractible-realization-braided-data).
 -/
 
 @[expose] public noncomputable section
@@ -308,7 +307,6 @@ private theorem sectionBraided
 /-- The terminal scalar realization `L` admits a strong braided monoidal structure.
 
 Source: Hemo--Richarz--Scholbach, Lemma 4.1(1), equations (3.1)--(3.2), Remark 3.2.
-(blueprint: new-lem-zl-contractible-realization-braided-data).
 
 Proof: write `A = O_sec(U)` and `E` for the internal/section module equivalence. By
 definition `L` is the composite of the constant-module functor `M ↦ M_J` over the constant

@@ -22,8 +22,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBa
 # Condensed finite-to-algebraic-closure coefficient change and exchange
 
 Source: upstream `ModuleObject/Colimit/TwoColimit.lean`, final transport paragraph;
-`ModuleObject/ChangeOfCoefficients.lean`, Derived section
-(blueprint: prop-weil-pbc-qbar-condensed-basechange-compatibility).
+`ModuleObject/ChangeOfCoefficients.lean`, Derived section.
 
 The coefficient ring is the finite-subextension-valued continuous-function ring
 `Profinite.padicAlgClRingObj`, not the full continuous-function ring. All categories below
@@ -78,8 +77,7 @@ private theorem constructibleToQbarPushHom_isIso_of_isProper [IsProper f]
       ℓ f E K.obj N)
 
 /-- Proper finite-to-Qbar coefficient change preserves the specified exchange arrow.
-Source: TwoColimit.lean, final transport paragraph; ChangeOfCoefficients.lean, Derived section
-(blueprint: prop-weil-pbc-qbar-condensed-basechange-compatibility).
+Source: TwoColimit.lean, final transport paragraph; ChangeOfCoefficients.lean, Derived section.
 
 Proof: the chosen pullback makes f' proper. Extract a cohomological lower bound from
 each bounded constructible input and apply

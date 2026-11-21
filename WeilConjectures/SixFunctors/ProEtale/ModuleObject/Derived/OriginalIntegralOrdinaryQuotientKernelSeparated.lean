@@ -41,7 +41,6 @@ open AlgebraicGeometry Scheme
 
 Source: Hemo--Richarz--Scholbach, Propositions 5.1 and 7.6 and Theorem 7.7;
 Bhatt--Scholze, Section 6.1.
-(blueprint: lem-sp-original-integral-ordinary-quotient-kernel-separated).
 
 The finite presentation argument on w-contractible affine tests shows that an
 integral section whose image vanishes in every positive ordinary quotient is

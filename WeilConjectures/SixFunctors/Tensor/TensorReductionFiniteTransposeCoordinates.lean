@@ -53,8 +53,7 @@ generator formula of `coefficientScalarTensorIso` sends the unit of `x tensor y`
 to the tensor of the units of `x` and `y`. These are exactly the specified product
 coordinates of `StrictTensorAugmentation.map`. Apply tensor-generator extensionality
 and then complex hom extensionality. This argument also covers zero complexes and
-the first finite coefficient level, since it uses the same universal formulas.
-(blueprint: lem-coef-tensor-reduction-finite-transpose-coordinates). -/
+the first finite coefficient level, since it uses the same universal formulas. -/
 theorem tensorReduction_finiteTransposeCoordinates (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

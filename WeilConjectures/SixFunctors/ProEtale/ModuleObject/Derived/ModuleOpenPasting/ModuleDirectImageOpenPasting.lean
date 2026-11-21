@@ -20,8 +20,7 @@ import WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
 
 Source: blueprint `proposition-composition-base-change-rf-shriek--1`, Composition isomorphism and
 Canonicity and associativity; Stacks Project, proetale.tex, Tag 09A5, section-morphism;
-sites.tex, Tag 00XZ, section-localize; sites-modules.tex, Tags 03D3, 03D6, 03DH
-(blueprint: lem-sfb-module-direct-image-open-pasting).
+sites.tex, Tag 00XZ, section-localize; sites-modules.tex, Tags 03D3, 03D6, 03DH.
 
 The helpers spell out the clauses of this single statement. Cartesian squares may use
 any representative of the fibre product, so the two pasting laws have literally matching
@@ -44,7 +43,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Families of module open-slice comparisons, on cartesian squares with their actual maps.
-Source: Stacks 09A5 and 00XZ (blueprint: lem-sfb-module-direct-image-open-pasting). -/
+Source: Stacks 09A5 and 00XZ. -/
 def Comparisons :=
   ∀ {X Y U P : Scheme.{u}} (f : X ⟶ Y) (j : U ⟶ Y) [IsOpenImmersion j]
     (fU : P ⟶ U) (i : P ⟶ X) [IsOpenImmersion i]
@@ -54,7 +53,7 @@ def Comparisons :=
 /-- The specified module inverse image is sheaf inverse image with its action transported
 along alpha inverse. This is the existing scalar-extension/comap-inverse isomorphism,
 whiskered by the existing internal sheaf inverse image; no coefficient map is chosen.
-Source: Stacks 03D3 and 03DH (blueprint: lem-sfb-module-direct-image-open-pasting). -/
+Source: Stacks 03D3 and 03DH. -/
 noncomputable def inverseImageActionIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     upperStar Λ f ≅
       (ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y) ⋙
@@ -66,8 +65,7 @@ noncomputable def inverseImageActionIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
 /-- The distinguished section coprojection for open pullback. It first uses the module
 adjunction unit (hence the scalar-extension unit), then restriction along the graph of the
 site object. Thus it includes the specified coefficient action, rather than a freely
-chosen identification. Source: Stacks 03D3 and 00XZ
-(blueprint: lem-sfb-module-direct-image-open-pasting). -/
+chosen identification. Source: Stacks 03D3 and 00XZ. -/
 noncomputable def coprojection {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
     (E : X.ProEt)
@@ -80,7 +78,7 @@ noncomputable def coprojection {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion
 
 /-- The projection-preserving fibre-product arrow for an open cartesian square. Its
 restriction on sections is the comparison required in clause (a).
-Source: Stacks 09A5 and 00XZ (blueprint: lem-sfb-module-direct-image-open-pasting). -/
+Source: Stacks 09A5 and 00XZ. -/
 noncomputable def sectionArrow {X Y U P : Scheme.{u}} (f : X ⟶ Y) (j : U ⟶ Y)
     [IsOpenImmersion j] (fU : P ⟶ U) (i : P ⟶ X) [IsOpenImmersion i]
     (sq : IsPullback i fU f j) (E : U.ProEt) :
@@ -96,7 +94,7 @@ noncomputable def sectionArrow {X Y U P : Scheme.{u}} (f : X ⟶ Y) (j : U ⟶ Y
 /-- Clause (a), with the canonical open-slice coordinates explicitly normalized. All maps
 are module maps for the existing scalar-extension functors. Bijectivity identifies the
 open pullback with sheaf inverse image carrying the action transported by alpha inverse.
-Source: Stacks 03D3, 03D6, 03DH (blueprint: lem-sfb-module-direct-image-open-pasting). -/
+Source: Stacks 03D3, 03D6, 03DH. -/
 def Sectionwise (β : Comparisons Λ) : Prop :=
   (∀ {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
@@ -117,7 +115,7 @@ attribute [local irreducible] lowerStarComp
 
 /-- The underlying composition map and clause (b), with the associator and geometric
 transport written out. The direction is c = lowerStarComp inverse.
-Source: Stacks 09A5 (blueprint: lem-sfb-module-direct-image-open-pasting). -/
+Source: Stacks 09A5. -/
 def Composition : Prop :=
   (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
@@ -133,7 +131,7 @@ def Composition : Prop :=
         Functor.whiskerRight (lowerStarComp Λ f g).inv (lowerStar Λ h)
 
 /-- Clause (c): successive open restrictions, with both specified pullback compositors.
-Source: Stacks 00XZ and 03DH (blueprint: lem-sfb-module-direct-image-open-pasting). -/
+Source: Stacks 00XZ and 03DH. -/
 def SuccessiveOpens (β : Comparisons Λ) : Prop :=
   ∀ {S T U SU W SW : Scheme.{u}} (f : S ⟶ T) (j : U ⟶ T) [IsOpenImmersion j]
     (fU : SU ⟶ U) (i : SU ⟶ S) [IsOpenImmersion i] (sq : IsPullback i fU f j)
@@ -150,7 +148,7 @@ def SuccessiveOpens (β : Comparisons Λ) : Prop :=
 
 /-- Clause (d): mixed composition/open pasting, with its source and target compositors.
 Cartesian-square representatives keep all fibre-product identifications explicit.
-Source: Stacks 09A5 and 00XZ (blueprint: lem-sfb-module-direct-image-open-pasting). -/
+Source: Stacks 09A5 and 00XZ. -/
 def MixedPasting (β : Comparisons Λ) : Prop :=
   ∀ {X Y T U YU XU : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ T)
     (j : U ⟶ T) [IsOpenImmersion j] (gU : YU ⟶ U) (jY : YU ⟶ Y)
@@ -167,7 +165,7 @@ def MixedPasting (β : Comparisons Λ) : Prop :=
         Functor.whiskerLeft (upperStar Λ jX) (lowerStarComp Λ fU gU).inv
 
 /-- Identity-open, identity-morphism, and composition unit normalizations.
-Source: Stacks 09A5 and 00XZ (blueprint: lem-sfb-module-direct-image-open-pasting). -/
+Source: Stacks 09A5 and 00XZ. -/
 def Units (β : Comparisons Λ) : Prop :=
   (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (sq : IsPullback (𝟙 X) f f (𝟙 Y)),
     (β f (𝟙 Y) f (𝟙 X) sq).hom ≫
@@ -195,8 +193,7 @@ def Units (β : Comparisons Λ) : Prop :=
 
 /-- The comparisons commute with every differential of every cochain complex. Since the
 preceding equations quantify over every module, they also hold in every degree.
-Source: blueprint Canonicity and associativity
-(blueprint: lem-sfb-module-direct-image-open-pasting). -/
+Source: blueprint Canonicity and associativity. -/
 def Degreewise (β : Comparisons Λ) : Prop :=
   (∀ {X Y U P : Scheme.{u}} (f : X ⟶ Y) (j : U ⟶ Y) [IsOpenImmersion j]
     (fU : P ⟶ U) (i : P ⟶ X) [IsOpenImmersion i] (sq : IsPullback i fU f j)
@@ -862,8 +859,7 @@ private theorem degreewise_laws (β : Comparisons Λ) : Degreewise Λ β := by
     exact (lowerStarComp Λ f g).inv.naturality (K.d n m)
 
 /-- The sectionwise pasting comparisons are the specified pullback-square mates.
-Source: Stacks 09A5 and the conjugacy of the module compositors
-(blueprint: lem-sfb-module-direct-image-open-pasting).
+Source: Stacks 09A5 and the conjugacy of the module compositors.
 
 The construction in `moduleDirectImageOpenPasting` uses `betaMap`. Its iterated mate
 is the conjugate of the inverse pullback compositor, by `betaMap_formalism`.

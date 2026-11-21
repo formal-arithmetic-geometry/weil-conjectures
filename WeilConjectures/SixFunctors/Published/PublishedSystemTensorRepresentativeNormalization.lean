@@ -63,7 +63,6 @@ import all WeilConjectures.SixFunctors.System.SystemPullbackCompositorIdentifica
 
 /-! Representative normalization for the transported ambient tensor comparison.
 Source: Stacks 03D3, 03EL, 07A4 and 07A7.
-(blueprint: lem-sf-published-system-tensor-identification-representative).
 -/
 
 @[expose] public noncomputable section
@@ -204,7 +203,6 @@ attribute [local irreducible] AmbientPullbackTensor.tensorData AmbientPullbackTe
 /-- The ambient representative rectangle on flat-term K-flat complexes. This is the
 flat representative part of the descent argument for arbitrary K-flat complexes.
 Source: Stacks 03D3, 03EL, 07A4 and 07A7.
-(blueprint: lem-sf-published-system-tensor-identification-representative-flat).
 
 Proof: the constant-section coefficient formulas identify the two direct images,
 so their chosen left adjoints and the adjunction units agree after transport.
@@ -478,7 +476,6 @@ K-flat tensor descent. The conclusion is an equality of tensor comparison isomor
 which is then used to extend the flat representative equation to all independent
 K-flat complexes.
 Source: Stacks 06YU and 07A4.
-(blueprint: lem-sf-published-system-tensor-identification-representative-descent).
 
 Proof: restriction to pairs of flat-term K-flat representatives is faithful by
 cochain tensor model rigidity. For each such pair, the assumed forward rectangle
@@ -534,7 +531,6 @@ Source: Stacks 03D3, 03EL, 07A4 and 07A7, representative normalization of the
 pullback tensor comparison. The proof identifies the ordinary pure-tensor map,
 its signed total complex map, and the exact-localization model maps on every
 summand; the `sequence_inverse_eq` transport removes the ambient presentation.
-(blueprint: lem-sf-published-system-tensor-identification-representative).
 -/
 theorem publishedSystemTransportedTensor_normalized {X Y : Scheme.{u}}
     (f : X ⟶ Y)

@@ -194,8 +194,7 @@ isomorphisms because both scalar functors are equivalences. The scalar/geometric
 exchange rectangle identifies the image of the exchange map with a composite of
 these comparisons and the exchange map over the second coefficient ring. This
 composite is an isomorphism by the hypothesis. Finally the scalar equivalence
-reflects isomorphisms.
-(blueprint: lem-sfb-condensed-coefficient-iso-exchange) -/
+reflects isomorphisms. -/
 theorem condensedAmbientExchange_coefficientIso
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]

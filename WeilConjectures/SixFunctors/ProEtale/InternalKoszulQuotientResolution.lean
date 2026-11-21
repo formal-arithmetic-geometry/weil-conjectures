@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.ProEtale.InternalKoszulFiniteAugmentation
 /-! # The finite Koszul resolution of the transported actual quotients
 
 Source: integral-models proof (1), Stacks Tags 099L, 099M and 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -35,7 +34,6 @@ local instance finiteResolutionTowerDerived :
  towers only; it does not involve derived inverse limit or a completion presentation.
 
 Source: integral-models proof (1); Stacks Tags 099L, 099M, 0913 and 0A0E.
-(auxiliary; not a blueprint node).
 
 Proof: extract a specified generating section from the kernel ideal on each slice;
 its image is a, so a has zero residue. Use koszul_finite_augmentation to construct

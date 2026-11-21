@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.Integr
 /-! # The scalar-adjunction normalization of the derived residue pull square
 
 Source: Bhatt--Scholze, Remark 6.8.15, and associativity of derived scalar extension.
-(blueprint: new-integral-residue-derived-pull-square)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 /-- The constructed scalar pull comparison is invertible and compatible with composition.
 
 Source: Bhatt--Scholze, Remark 6.8.15, derived extension of coefficients.
-(blueprint: new-integral-residue-derived-pull-square)
 
 Proof. Write the pullback of integral modules as inverse image followed by extension
 along the coefficient-pullback isomorphism. Inverse image preserves the balanced

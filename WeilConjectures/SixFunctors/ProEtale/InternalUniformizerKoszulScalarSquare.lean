@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.ProEtale.InternalUniformizerScalarRealization
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
 finite free calculation; integral-models proof (1).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -77,7 +76,6 @@ Koszul dual, augmentation, or assertion about a total-tensor summand.
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
 finite free calculation; integral-models proof (1).
-(auxiliary; not a blueprint node).
 
 Proof in words: the constant uniformizer pi is a non-zero-divisor on the constant
 integer sheaf, since its multiplication is monic on the coefficient DVR and exact

@@ -52,8 +52,7 @@ import Mathlib.Data.Fintype.Order
 /-! # Residue bases on a common clopen partition
 
 Source: Stacks Project, proetale.tex, Tag 09C3, the clopen trivialization in
-`lemma-local-structure-constructible-complex`
-(blueprint: lem-sf-residue-lisse-clopen-bases).
+`lemma-local-structure-constructible-complex`.
 -/
 
 @[expose] public section
@@ -173,7 +172,7 @@ private theorem residueBasisCompleteIso (X : Scheme.{u})
 This asserts only restriction and cohomology data, with no integral complex model.
 
 Source: Stacks Project, proetale.tex, Tags 09C3 and 098F; sites-cohomology.tex,
-Tags 0946 and 08FZ (blueprint: lem-sf-residue-lisse-clopen-bases).
+Tags 0946 and 08FZ.
 
 Proof: choose an ordered interval for the finite residue Tor amplitude. Testing with
 its coefficient unit puts all nonzero residue cohomology in this interval. The residue

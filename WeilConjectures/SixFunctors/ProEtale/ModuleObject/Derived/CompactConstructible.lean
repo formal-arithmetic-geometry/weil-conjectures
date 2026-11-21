@@ -18,7 +18,7 @@ Let `R` be a commutative ring object of sheaves on `X_proét`. Write `IndCons(X,
 filtered colimits of constructible sheaves of `R`-modules (blueprint
 `proposition-ind-constructible-sheaves`, `CategoryTheory.ObjectProperty.ind` of
 `IsConstructibleModuleObject R`), and `Dic(X, R)` for the complexes with cohomology sheaves in
-`IndCons(X, R)` (blueprint `corollary-ambient-ind-derived`).
+`IndCons(X, R)`.
 
 We isolate the inputs of blueprints `theorem-compactness-rational-coefficients` and
 `proposition-compactness-proper-direct-image--1` on the coefficient ring:
@@ -27,10 +27,10 @@ We isolate the inputs of blueprints `theorem-compactness-rational-coefficients` 
 `proposition-ind-constructible-sheaves` (2),
   `proposition-compactness-proper-direct-image--1` (1)): `IndCons(X, R)` is closed in the category
   of `R`-modules under kernels, cokernels, extensions and direct sums;
-* `AlgebraicGeometry.ProEtale.HasIndConstructibleExtBound R` (blueprint `corollary-ind-heart-b`):
+* `AlgebraicGeometry.ProEtale.HasIndConstructibleExtBound R`:
   for a constructible sheaf `C` there is `d` with `Ext^q(C, B) = 0` for `q > d` and all `B` in
   `IndCons(X, R)`, and `Ext^q(C, -)` commutes with direct sums of objects of `IndCons(X, R)`;
-* exactness of countable products of `R`-modules (blueprint `proposition-exact-products`), which
+* exactness of countable products of `R`-modules, which
 makes
   `D(X_proét, R)` left complete.
 

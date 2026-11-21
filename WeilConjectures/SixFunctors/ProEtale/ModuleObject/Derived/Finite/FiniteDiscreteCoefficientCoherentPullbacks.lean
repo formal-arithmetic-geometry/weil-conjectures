@@ -37,8 +37,7 @@ variable
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
 
 /-- The common coefficient realization has coherent derived inverse-image comparisons.
-Source: Bhatt--Scholze, Proposition 5.3.2; Stacks Project, Tag 09AK
-(blueprint: lem-weil-pbc-finite-discrete-coherent-pullbacks).
+Source: Bhatt--Scholze, Proposition 5.3.2; Stacks Project, Tag 09AK.
 
 Proof in words. On module-valued sheaves take the conjugate of the canonical
 restriction identity for the etale/pro-etale site inclusion. Encode internal modules

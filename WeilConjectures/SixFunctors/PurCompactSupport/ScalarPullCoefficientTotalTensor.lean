@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.PurCompactSupport.ScalarPullCoefficientModule
 /-! # Ordinary total tensor and the coefficient square
 
 Source: Stacks Project, Tags 03EL and 07A4.
-(blueprint: lem-sf-scalar-pull-coefficient-total-tensor).
 -/
 
 @[expose] public noncomputable section
@@ -115,8 +114,7 @@ private theorem total_map_ι {W : Scheme.{u}}
 /-- The ordinary coefficient square respects signed total tensor.
 There are no derived tensor models, localizations or derived adjunctions in this statement.
 
-Source: Stacks 03EL and 07A4, the pure-tensor calculation before passage to derived categories
-(blueprint: lem-sf-scalar-pull-coefficient-total-tensor).
+Source: Stacks 03EL and 07A4, the pure-tensor calculation before passage to derived categories.
 
 Proof: first compare the ordinary module maps. The transpose of scalarPullModule
 under the composite adjunction is identity on the underlying direct-image sections.

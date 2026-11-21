@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.Integr
 /-! # Tensor coherence of the residue pull square
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3) and Remark 6.8.15.
-(blueprint: new-integral-residue-derived-tensor-square)
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ attribute [local instance 2000] residueExchangeIntegralDerivedMonoidal
 /-- The canonical residue tensor square, with a constructed derived monoidal structure.
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3) and Remark 6.8.15.
-(blueprint: new-integral-residue-derived-tensor-square)
 
 Proof. Take the ordinary monoidal pullback structure and preservation of flat
 modules from integralResidue_tensorGeometry. Apply the proved generic derivation

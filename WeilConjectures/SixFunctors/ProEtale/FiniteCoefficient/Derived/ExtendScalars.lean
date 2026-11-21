@@ -31,7 +31,7 @@ whose pullback by `g` is K-flat (`AlgebraicGeometry.ProEtale.kFlatUpperStar`).
 ## Main definitions
 
 - `AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsAdjunction`: the adjunction between
-  derived scalar extension `- ⊗ᴸ_R S` (blueprint `prose-03-02`) and restriction of
+  derived scalar extension `- ⊗ᴸ_R S` and restriction of
   scalars.
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso`: the isomorphism
   `(Lg^* K) ⊗ᴸ_R S ≅ Lg^*(K ⊗ᴸ_R S)` (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`).
@@ -98,8 +98,7 @@ instance preservesKFlatQuasiIso_sheafExtendScalars :
       (sheafCompose J (ModuleCat.restrictScalars.{u + 1} (algebraMap R S)))]
     exact h₃
 
-/-- Derived scalar extension `- ⊗ᴸ_R S : D(X_proét, R) ⥤ D(X_proét, S)` (blueprint
-`prose-03-02`) is left adjoint to restriction of scalars. -/
+/-- Derived scalar extension `- ⊗ᴸ_R S : D(X_proét, R) ⥤ D(X_proét, S)` is left adjoint to restriction of scalars. -/
 noncomputable def leftDerivedSheafExtendScalarsAdjunction :
     L(sheafExtendScalars (algebraMap R S) X) ⊣
       D(sheafCompose (ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))) :=

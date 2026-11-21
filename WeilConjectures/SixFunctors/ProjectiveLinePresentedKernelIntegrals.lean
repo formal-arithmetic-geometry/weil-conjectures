@@ -31,7 +31,6 @@ private theorem conjugate_identity
 
 /-- The explicit transported supported datum has both compact-support integrals equal to one.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the two diagonal integrals.
-(auxiliary; not a blueprint node)
 
 Proof: extract the supported class and the two ordinary integral identities from the
 finite diagonal property. The proved comparison for the constructed datum identifies

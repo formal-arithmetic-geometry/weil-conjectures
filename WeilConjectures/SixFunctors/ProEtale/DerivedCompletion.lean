@@ -22,7 +22,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-!
 # Derived completion for pulled-back continuous integral coefficients
 
-md` (blueprint: definition-derived-adic-completeness).
+md`.
 
 The coefficient objects are the continuous condensed rings of DerivedNakayama,
 pulled back by the published strong monoidal inverse image from the point.
@@ -51,21 +51,21 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The continuous integral coefficient ring pulled back from the point.
-Source: blueprint, coefficient sheaves (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, coefficient sheaves. -/
 abbrev ring (X : Scheme.{u}) := condensedRingObj (DerivedNakayama.integerRing l E) X
 
 /-- Internal modules over the completed continuous coefficient ring.
-Source: blueprint, ambient category (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, ambient category. -/
 abbrev Modules (X : Scheme.{u}) := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
   (ring l E X)
 
 /-- The continuous finite quotient ring at the positive level n+1.
-Source: blueprint, finite coefficient sheaves (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, finite coefficient sheaves. -/
 abbrev finiteRing (X : Scheme.{u}) (n : ℕ) :=
   condensedRingObj (DerivedNakayama.quotientRing l E (n + 1)) X
 
 /-- Commutativity of the continuous finite quotient ring, before pullback.
-Source: blueprint, coefficient sheaves (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, coefficient sheaves. -/
 instance quotientRing_isCommMonObj (n : ℕ) :
     IsCommMonObj (DerivedNakayama.quotientRing l E n) :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
@@ -107,19 +107,18 @@ local instance complexNatLimit (X : Scheme.{u})
   HasLimitsOfShape.has_limit F
 
 /-- The actual quotient morphism pulled back from the point.
-Source: blueprint, reduction cone (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, reduction cone. -/
 abbrev quotient (X : Scheme.{u}) (n : ℕ) : ring l E X ⟶ finiteRing l E X n :=
   (upperStarFromPoint X).map (DerivedNakayama.reductionRing l E (n + 1))
 
 /-- The quotient topology induced by the spectral topology on the finite extension.
-Source: blueprint, continuous coefficient rings (blueprint:
-definition-derived-adic-completeness). -/
+Source: blueprint, continuous coefficient rings. -/
 abbrev finiteTopology (n : ℕ) : TopologicalSpace (Padic.coefficientExtensionRing l E n) :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   inferInstance
 
 /-- The quotient transition is continuous for the quotient topologies.
-Source: blueprint, reduction identities (blueprint: definition-derived-adic-completeness).
+Source: blueprint, reduction identities.
 Proof: the quotient map O_E to O_E/pi^(n+2) is a quotient map. Its composite
 with the displayed factor is the continuous quotient map to O_E/pi^(n+1),
 so the quotient universal property proves continuity. -/
@@ -130,7 +129,7 @@ theorem continuous_transition (n : ℕ) :
   exact continuous_quot_lift _ continuous_quot_mk
 
 /-- Continuous postcomposition with the specified quotient transition.
-Source: blueprint, canonical transitions (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, canonical transitions. -/
 def transitionRingSheaf (n : ℕ) :
     DerivedNakayama.quotientRingSheaf l E (n + 2) ⟶
       DerivedNakayama.quotientRingSheaf l E (n + 1) :=
@@ -142,7 +141,7 @@ def transitionRingSheaf (n : ℕ) :
     naturality := fun _ _ _ ↦ rfl }⟩
 
 /-- The same quotient transition as a morphism of internal condensed rings.
-Source: blueprint, canonical transitions (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, canonical transitions. -/
 abbrev transitionRing (n : ℕ) :
     DerivedNakayama.quotientRing l E (n + 2) ⟶
       DerivedNakayama.quotientRing l E (n + 1) :=
@@ -150,12 +149,12 @@ abbrev transitionRing (n : ℕ) :
     (transitionRingSheaf l E n)
 
 /-- The transition between the pulled-back finite ring objects.
-Source: blueprint, canonical transitions (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, canonical transitions. -/
 abbrev transition (X : Scheme.{u}) (n : ℕ) : finiteRing l E X (n + 1) ⟶
     finiteRing l E X n := (upperStarFromPoint X).map (transitionRing l E n)
 
 /-- The finite quotient transition is a morphism of the pulled-back ring objects.
-Source: functoriality of monoid objects (blueprint: definition-derived-adic-completeness). -/
+Source: functoriality of monoid objects. -/
 instance transition_isMonHom (X : Scheme.{u}) (n : ℕ) :
     IsMonHom (transition l E X n) := by
   exact Functor.map.instIsMonHom (F := upperStarFromPoint X) _ _ (transitionRing l E n)
@@ -168,8 +167,7 @@ private theorem restricted_linear {C : Type*} [Category C] [MonoidalCategory C]
   rw [← whisker_exchange_assoc, ← comp_whiskerRight_assoc, h]
 
 /-- Quotient and transition maps preserve the scalar action on the regular module.
-Source: blueprint, construction of the reduction cone
-(blueprint: definition-derived-adic-completeness).
+Source: blueprint, construction of the reduction cone.
 Proof: a ring homomorphism sends ab to its image product. In the transition equation,
 the composite O_E to the smaller quotient equals the direct quotient. Apply these
 identities to continuous functions pointwise; naturality and inverse image preserve them. -/
@@ -196,38 +194,37 @@ theorem coefficient_linearity :
       (DerivedNakayama.reductionRing l E (n + 1)) (transitionRing l E n) (by rfl)
 
 /-- The actual unit quotient map as an integral-module morphism on the point.
-Source: blueprint, unit of the reduction cone (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, unit of the reduction cone. -/
 def quotientUnit (n : ℕ) : Mod.regular (DerivedNakayama.integerRing l E) ⟶
     DerivedNakayama.quotientModule l E (n + 1) :=
   Mod.homMk (DerivedNakayama.reductionRing l E (n + 1))
     ((coefficient_linearity l E).1 n)
 
 /-- The actual transition as an integral-module morphism on the point.
-Source: blueprint, canonical transitions (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, canonical transitions. -/
 def quotientStep (n : ℕ) : DerivedNakayama.quotientModule l E (n + 2) ⟶
     DerivedNakayama.quotientModule l E (n + 1) :=
   Mod.homMk (transitionRing l E n) ((coefficient_linearity l E).2 n)
 
 /-- The pulled-back finite coefficient module with its integral scalar action.
-Source: blueprint, finite coefficient sheaves (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, finite coefficient sheaves. -/
 abbrev finiteModule (X : Scheme.{u}) (n : ℕ) : Modules l E X :=
   (DerivedNakayama.pullback l E X).obj (DerivedNakayama.quotientModule l E (n + 1))
 
 /-- The coefficient quotient map from the monoidal unit, with the canonical action transport.
-Source: blueprint, tensor units (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, tensor units. -/
 def finiteUnit (X : Scheme.{u}) (n : ℕ) : 𝟙_ (Modules l E X) ⟶ finiteModule l E X n :=
   (DerivedNakayama.regularPullbackIso l E X).inv ≫
     (DerivedNakayama.pullback l E X).map (quotientUnit l E n)
 
 /-- Ordinary tensor reduction of a complex, used only on K-flat representatives.
-Source: blueprint, K-flat construction of reductions
-(blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, K-flat construction of reductions. -/
 abbrev level (X : Scheme.{u}) (n : ℕ) :
     CochainComplex (Modules l E X) ℤ ⥤ CochainComplex (Modules l E X) ℤ :=
   (tensorRight (finiteModule l E X n)).mapHomologicalComplex (.up ℤ)
 
 /-- The strict transition P tensor B_(n+2) to P tensor B_(n+1).
-Source: blueprint, canonical transitions (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, canonical transitions. -/
 def levelStep (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) (n : ℕ) :
     (level l E X (n + 1)).obj P ⟶ (level l E X n).obj P :=
   (NatTrans.mapHomologicalComplex
@@ -235,7 +232,7 @@ def levelStep (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) (n : ℕ
       ((DerivedNakayama.pullback l E X).map (quotientStep l E n))) (.up ℤ)).app P
 
 /-- The chain map p to p tensor 1 at each positive level.
-Source: blueprint, canonical reduction cone (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, canonical reduction cone. -/
 def levelUnit (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) (n : ℕ) :
     P ⟶ (level l E X n).obj P :=
   (NatTrans.mapHomologicalComplex
@@ -243,23 +240,23 @@ def levelUnit (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) (n : ℕ
       (tensoringRight (Modules l E X)).map (finiteUnit l E X n)) (.up ℤ)).app P
 
 /-- The termwise product of the strict reduction tower of P.
-Source: blueprint, Roos model (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, Roos model. -/
 abbrev product (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) :=
   ∏ᶜ fun n : ℕ ↦ (level l E X n).obj P
 
 /-- The specified 1 minus shift on the strict reduction product.
-Source: Stacks 08TC, blueprint Roos model (blueprint: definition-derived-adic-completeness). -/
+Source: Stacks 08TC, blueprint Roos model. -/
 def oneSubShift (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) :
     product l E X P ⟶ product l E X P :=
   towerTransitionEndomorphism (levelStep l E X P)
 
 /-- The two coordinates (x,y) of the reduction Roos complex in degree i.
-Source: blueprint, Roos model (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, Roos model. -/
 def roosX (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) (i : ℤ) :=
   (product l E X P).X i ⊞ (product l E X P).X (i - 1)
 
 /-- The differential (dx,(1-s)x-dy) of the reduction Roos complex.
-Source: blueprint, Roos model (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, Roos model. -/
 def roosD (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) (i : ℤ) :
     roosX l E X P i ⟶ roosX l E X P (i + 1) :=
   biprod.lift (biprod.fst ≫ (product l E X P).d i (i + 1))
@@ -299,7 +296,7 @@ private def genericRoos {C : Type v} [Category.{w} C] [Abelian C]
   CochainComplex.of (genericRoosX V) (genericRoosD V t) (genericRoosD_sq V t)
 
 /-- The specified Roos differential squares to zero.
-Source: blueprint, Roos construction (blueprint: definition-derived-adic-completeness).
+Source: blueprint, Roos construction.
 Proof: the first coordinate is d squared. In the second coordinate the two mixed
 terms cancel because 1-s is a chain map; the remaining d squared term is zero. -/
 theorem roosD_sq (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) (i : ℤ) :
@@ -307,14 +304,13 @@ theorem roosD_sq (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) (i : 
   exact genericRoosD_sq (product l E X P) (oneSubShift l E X P) i
 
 /-- The explicit homotopy inverse limit of the strict derived reductions of a K-flat P.
-Source: Stacks 08TC, blueprint Roos model (blueprint: definition-derived-adic-completeness). -/
+Source: Stacks 08TC, blueprint Roos model. -/
 def roos (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) :
     CochainComplex (Modules l E X) ℤ :=
   CochainComplex.of (roosX l E X P) (roosD l E X P) (roosD_sq l E X P)
 
 /-- The product of the specified tensor-unit maps.
-Source: blueprint, strict reduction augmentation (blueprint:
-definition-derived-adic-completeness). -/
+Source: blueprint, strict reduction augmentation. -/
 def unitProduct (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) :
     P ⟶ product l E X P := Pi.lift (levelUnit l E X P)
 
@@ -347,7 +343,7 @@ private theorem unitProduct_oneSubShift (X : Scheme.{u})
     levelUnit_step]
 
 /-- The map with coordinates (unit,0) is a chain map.
-Source: blueprint, canonical reduction comparison (blueprint: definition-derived-adic-completeness).
+Source: blueprint, canonical reduction comparison.
 Proof: the tensor units commute with d. Quotient transitions preserve 1 and commute
 with the quotient maps, so (1-s) unit = 0. These are exactly the two chain-map equations. -/
 theorem augmentation_comm (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ)
@@ -363,8 +359,7 @@ theorem augmentation_comm (X : Scheme.{u}) (P : CochainComplex (Modules l E X) �
   · simpa using hz (i + 1 - 1)
 
 /-- The canonical completion comparison, with the specified zero shifted-product component.
-Source: blueprint, canonical reduction comparison (blueprint:
-definition-derived-adic-completeness). -/
+Source: blueprint, canonical reduction comparison. -/
 def augmentation (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) :
     P ⟶ roos l E X P :=
   CochainComplex.ofHom (fun i ↦ biprod.lift ((unitProduct l E X P).f i) 0)
@@ -387,8 +382,7 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 /-- Derived completeness in the unbounded internal-module category of the continuous
 pulled-back integral coefficients. A K-flat representative computes the derived reductions;
 the specified augmentation, with zero nullhomotopy, must be invertible after localization.
-Source: blueprint definition and its Roos construction
-(blueprint: definition-derived-adic-completeness). -/
+Source: blueprint definition and its Roos construction. -/
 def IsDerivedComplete (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
     (K : DerivedCategory (AdicCompletion.Modules l E X)) : Prop :=
@@ -412,7 +406,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
 /-- The quotient maps factor through each consecutive quotient, as ring-object morphisms.
-Source: blueprint, canonical coefficient tower (blueprint: definition-derived-adic-completeness).
+Source: blueprint, canonical coefficient tower.
 Proof: quotient factor after quotient is the smaller quotient homomorphism.
 This identity holds pointwise on continuous functions, and inverse image preserves composition. -/
 theorem quotient_transition (n : ℕ) :
@@ -421,32 +415,32 @@ theorem quotient_transition (n : ℕ) :
   congr 1
 
 /-- The derived category over the positive finite coefficient level n+1.
-Source: blueprint, normalized complexes (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, normalized complexes. -/
 abbrev FiniteDerived (n : ℕ) := DerivedCategory
   (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (finiteRing l E X n))
 
 /-- Canonical derived extension from the integral coefficients to positive level n+1.
-Source: blueprint, K_n (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, K_n. -/
 abbrev derivedReduction (n : ℕ) : DerivedCategory (Modules l E X) ⥤ FiniteDerived l E X n :=
   (Mod.extendScalars (quotient l E X n)).leftDerivedFunctor
 
 /-- Exact derived restriction from level n+1 back to the integral ring.
-Source: blueprint, reduction tower (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, reduction tower. -/
 abbrev restrict (n : ℕ) : FiniteDerived l E X n ⥤ DerivedCategory (Modules l E X) :=
   (Mod.comap (quotient l E X n)).mapDerivedCategory
 
 /-- Consecutive derived base change over B_(n+2), rather than over the integral ring.
-Source: blueprint, reduction identities (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, reduction identities. -/
 abbrev finiteExtend (n : ℕ) : FiniteDerived l E X (n + 1) ⥤ FiniteDerived l E X n :=
   (Mod.extendScalars (transition l E X n)).leftDerivedFunctor
 
 /-- Exact restriction along B_(n+2) to B_(n+1).
-Source: blueprint, normalization (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, normalization. -/
 abbrev finiteRestrict (n : ℕ) : FiniteDerived l E X n ⥤ FiniteDerived l E X (n + 1) :=
   (Mod.comap (transition l E X n)).mapDerivedCategory
 
 /-- Canonical composition of exact restriction, including the quotient-factor identity.
-Source: blueprint, coherent reductions (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, coherent reductions. -/
 def restrictComp (n : ℕ) :
     finiteRestrict l E X n ⋙ restrict l E X (n + 1) ≅ restrict l E X n :=
   Functor.mapDerivedCategoryCompIso
@@ -456,7 +450,7 @@ def restrictComp (n : ℕ) :
         Mod.comapCongr (quotient_transition l E X n))
 
 /-- Composition of left adjoints when the composite right adjoint has been identified.
-Source: uniqueness of left adjoints (blueprint: definition-derived-adic-completeness). -/
+Source: uniqueness of left adjoints. -/
 def adjunctionAssociation
     {C D A : Type*} [Category C] [Category D] [Category A]
     {F : C ⥤ D} {G : D ⥤ C} {H : D ⥤ A} {I : A ⥤ D}
@@ -466,7 +460,7 @@ def adjunctionAssociation
 
 /-- The derived reduction identity determined by the canonical adjunction units and counits.
 This is the canonical association (P tensor B_(n+2)) tensor B_(n+1) = P tensor B_(n+1).
-Source: blueprint, normalization (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, normalization. -/
 def reductionComp (n : ℕ) :
     derivedReduction l E X (n + 1) ⋙ finiteExtend l E X n ≅ derivedReduction l E X n :=
   let a : derivedReduction l E X (n + 1) ⊣ restrict l E X (n + 1) :=
@@ -478,7 +472,7 @@ def reductionComp (n : ℕ) :
   adjunctionAssociation a b c (restrictComp l E X n)
 
 /-- Transition between the derived reductions, given by the consecutive unit and association.
-Source: blueprint, canonical transition maps (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, canonical transition maps. -/
 def derivedStep (K : DerivedCategory (Modules l E X)) (n : ℕ) :
     (derivedReduction l E X (n + 1)).obj K ⟶
       (finiteRestrict l E X n).obj ((derivedReduction l E X n).obj K) :=
@@ -487,7 +481,7 @@ def derivedStep (K : DerivedCategory (Modules l E X)) (n : ℕ) :
     (finiteRestrict l E X n).map ((reductionComp l E X n).hom.app K)
 
 /-- The canonical comparison on any specified K-flat representative of K.
-Source: blueprint, canonical completion map (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, canonical completion map. -/
 def completionMap (K : DerivedCategory (Modules l E X))
     (P : CochainComplex (Modules l E X) ℤ) (e : DerivedCategory.Q.obj P ≅ K) :
     K ⟶ DerivedCategory.Q.obj (roos l E X P) :=
@@ -753,7 +747,7 @@ private theorem augmentation_isIso_iff
 
 /-- Completeness can be checked on any K-flat representative, retaining the actual
 augmentation rather than merely an isomorphism between the two objects.
-Source: blueprint, representative independence (blueprint: definition-derived-adic-completeness).
+Source: blueprint, representative independence.
 Proof: refine a derived isomorphism to a common roof and replace its vertex by a
 native K-flat resolution. Tensoring a quasi-isomorphism between K-flat complexes
 with any coefficient object preserves quasi-isomorphisms: its mapping cone is
@@ -795,12 +789,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
 /-- The derived reduction at level n+1, regarded as an integral-coefficient complex.
-Source: blueprint, inverse system (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, inverse system. -/
 abbrev integralLevel (K : DerivedCategory (Modules l E X)) (n : ℕ) :=
   (restrict l E X n).obj ((derivedReduction l E X n).obj K)
 
 /-- The canonical transition after exact restriction to the common integral category.
-Source: blueprint, compatible reduction tower (blueprint: definition-derived-adic-completeness). -/
+Source: blueprint, compatible reduction tower. -/
 def integralStep (K : DerivedCategory (Modules l E X)) (n : ℕ) :
     integralLevel l E X K (n + 1) ⟶ integralLevel l E X K n :=
   (restrict l E X (n + 1)).map (derivedStep l E X K n) ≫
@@ -887,7 +881,7 @@ private theorem composed_unit_compatible
   simpa only [Functor.map_comp, Functor.comp_map, Category.assoc] using h
 
 /-- The coherent tensor-unit maps to the derived reductions.
-Source: blueprint, reduction cone (blueprint: definition-derived-adic-completeness).
+Source: blueprint, reduction cone.
 Proof: reductionComp is formed by left-adjoint uniqueness, which identifies the
 composite unit with the direct unit. Composing this identity with restrictComp
 is exactly the displayed compatibility of the positive consecutive units. -/
@@ -978,8 +972,7 @@ private theorem generic_roosLimit
 reductions; its evaluations compose with the explicit completionMap to the tensor units.
 The extra product instance is the usual categorical choice of product, not a hypothesis
 on K, and no choice of a triangulated lift is used to define the comparison.
-Source: blueprint, Roos interpretation, Stacks 08TC
-(blueprint: definition-derived-adic-completeness).
+Source: blueprint, Roos interpretation, Stacks 08TC.
 Proof: on a K-flat P, ordinary tensor with B_n computes relative derived extension.
 The scalar-extension counit gives the level identifications, compatibly with quotient
 transitions and tensor units. Exact countable products of module sheaves identify the

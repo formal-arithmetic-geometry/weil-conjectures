@@ -135,7 +135,7 @@ private theorem refinement_of_split (T : Scheme.{t}) (W : T.ProEt) [IsAffine W.l
 /-- A covering sieve on an affine categorical weakly contractible object admits a
 finite clopen partition refining it.
 
-Source: Stacks Project, Tag 098F (blueprint: lem-sf-clopen-cover-geometry).
+Source: Stacks Project, Tag 098F.
 Proof: refine the sieve to finitely many affine opens in covering members. Their
 finite coproduct is affine, weakly etale and surjective over the target. The represented
 covering morphism is epic, so evaluation lifts the identity to a section. Pull the
@@ -264,8 +264,7 @@ private theorem split_clopen_cover (T : Scheme.{t}) [IsAffine T]
 /-- A clopen of an affine categorically weakly contractible scheme is weakly
 contractible in every coefficient universe.
 
-Source: Stacks Project, Tags 098F and 090M
-(blueprint: lem-sf-clopen-weak-contractibility).
+Source: Stacks Project, Tags 098F and 090M.
 Proof: an affine surjective weakly etale cover of the clopen is augmented by its
 clopen complement to an affine cover of the whole scheme. Lift the identity through
 its represented epimorphism, then restrict the section to the original component.
@@ -291,8 +290,7 @@ private theorem sf_clopen_weak_contractibility (T : Scheme.{t}) [IsAffine T]
 /-- Categorical weak contractibility gives finite clopen refinements and is inherited
 by every clopen component, in any coefficient universe.
 
-Source: Stacks Project, Tags 098F and 090M
-(blueprint: lem-sf-clopen-cover-geometry).
+Source: Stacks Project, Tags 098F and 090M.
 Proof: refine a covering sieve of the affine target to finitely many affine members.
 Their represented coproduct covering is epic, so evaluation lifts the identity to a
 section. Its inverse images of the coproduct summands form a finite clopen partition

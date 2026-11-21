@@ -9,8 +9,7 @@ public import WeilConjectures.SixFunctors.Integral.IntegralModelsGenerators
 
 /-! Constructibility of a single integral locally closed extension in the topological
 Noetherian setting. Source: Bhatt--Scholze, Lemma 6.8.13, and step 1 of the plan of
-lem-sfb-topological-integral-generators
-(blueprint: lem-sfb-topological-integral-extension-constructibility).
+lem-sfb-topological-integral-generators.
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ namespace WeilConjectures.SixFunctors
 constant-model constructible on a topologically Noetherian scheme.
 
 Source: step 1 of the plan of lem-sfb-topological-integral-generators; definition
-definition-constructible-sheaves (blueprint:
-lem-sfb-topological-integral-extension-constructibility).
+definition-constructible-sheaves.
 
 Proof:
 1. `X` is topologically Noetherian, so it is quasi-compact and quasi-separated and every

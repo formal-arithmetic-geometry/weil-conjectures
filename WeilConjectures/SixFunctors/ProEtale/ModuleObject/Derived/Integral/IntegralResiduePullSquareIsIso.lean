@@ -41,7 +41,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- The inverse mate is invertible, by computation on flat K-flat resolutions.
 Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: new-integral-residue-derived-pull-square-isIso)
 
 Proof. Choose a flat K-flat representative for the input complex. The flat-model
 identity expresses the canonical pull mate, followed by two invertible counits,

@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 /-! # The localized scalar total tensor path
 
 This normalizes the scalar path using the ordinary signed total tensor square.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-total-path)
 -/
 
 @[expose] public noncomputable section
@@ -92,8 +91,7 @@ Naturality of the scalar counit moves the total comparison past the counit.
 Use the scalar comparison on the single complex P tensor Q, and then the signed
 ordinary scalar tensor square. Naturality of the localization comparison gives
 the displayed path through the internal scalar extension of the total tensor.
-No derived scalar tensor comparison, nor factor scalar equation, is used here.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-total-path). -/
+No derived scalar tensor comparison, nor factor scalar equation, is used here. -/
 theorem coefficientScalarTensorRepresentative_totalPath
     (Z : Scheme.{u}) (d : CoefficientScalarTensorRepresentativeBasicData a Z)
     (h : CoefficientScalarTensorRepresentativeHypotheses a Z d)

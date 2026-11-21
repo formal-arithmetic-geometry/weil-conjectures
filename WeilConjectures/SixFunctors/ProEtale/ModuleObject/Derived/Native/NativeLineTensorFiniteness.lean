@@ -18,8 +18,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 
 /-! # Finiteness under tensor with a native locally free module
 
-Source: current blueprint definition-tate-twists--10, cohomology and Tor arguments
-(blueprint: lem-twist-native-line-tensor-finiteness).
+Source: current blueprint definition-tate-twists--10, cohomology and Tor arguments.
 The coefficient ring is pulled back from the condensed point. All derived tensors
 are ordinary, uncompleted derived tensors; no Noetherian hypothesis is used.
 -/

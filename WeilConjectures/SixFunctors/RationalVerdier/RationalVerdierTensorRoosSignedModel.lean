@@ -10,8 +10,7 @@ import Mathlib.CategoryTheory.CommSq
 
 /-! # Coherent signed braiding in the strict Roos tensor model
 
-Source: Stacks 06YL, 08TC and 0941.
-(blueprint: lem-coef-rational-verdier-tensor-roos-signed-model). -/
+Source: Stacks 06YL, 08TC and 0941. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -43,7 +42,6 @@ are already completed tensor models.
 
 Source: Stacks 06YL, 08TC, 0941; full tensor-model normalization and the signed
 representative clause of the coherent braiding.
-(blueprint: lem-coef-rational-verdier-tensor-roos-signed-model).
 
 Proof: expand the reference tensor model into reduction, the coherent K-flat
 comparison, the Roos limit model and the strict tensor-tower comparison. Coherent

@@ -21,8 +21,7 @@ import Mathlib.CategoryTheory.Yoneda
 # Closed exceptional inverse image and sections with support
 
 Source: blueprint main-20261015, chap-Construction-of-f,
-sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.md
-(blueprint: theorem-f-shriek-ell-adic-coefficients).
+sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.md.
 
 The comparison lives in the full localizing category, and its counit equation is written
 in the ambient derived category using the specified closed-immersion normalization.
@@ -143,7 +142,7 @@ have exactly the ambient objects and maps. The isomorphism `closed` is the stipu
 normalization Ri_! = i_*, and `support` specifies the normalized support adjunction.
 
 Source: blueprint main-20261015, sk-prop-closed-adjoint-constructible-yoneda, statement
-and proof (blueprint: theorem-f-shriek-ell-adic-coefficients).
+and proof.
 
 Proof:
 1. The equality Dctf = Dbc from det-def-localizing-closure-ctf-equals-bc and the intersection

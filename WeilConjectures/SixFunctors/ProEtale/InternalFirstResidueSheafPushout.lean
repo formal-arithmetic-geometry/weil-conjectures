@@ -204,7 +204,6 @@ private theorem scalar_pushout (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The normalized first-residue square is a pushout of commutative ring sheaves.
 
 Source: blueprint integral-models proof (1)--(2), Stacks Tags 093M and 099L.
-(auxiliary; not a blueprint node).
 
 Proof: identify the scalar and residue maps with the canonical maps of the
 constant ring into its completion and first quotient. The kernel of the

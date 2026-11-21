@@ -31,8 +31,7 @@ The proof is formal: the compact-support exchange maps are those of the exchange
 `ProEtale.CondensedRing.boundedConstructibleExchangeFormalism`, which are compatible with the
 comparisons along refinements
 (`CategoryTheory.ExchangeFormalism.shriekBaseChange_refinementComparison`),
-and the comparisons of compactifications are computed along common refinements (blueprint
-`proposition-construction-independence-rf-shriek`).
+and the comparisons of compactifications are computed along common refinements.
 
 -/
 

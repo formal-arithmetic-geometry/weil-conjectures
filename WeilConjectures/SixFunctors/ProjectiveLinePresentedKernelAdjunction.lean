@@ -56,7 +56,6 @@ private theorem diagonalAdjunction
 
 /-- The constructed projective-line diagonal datum yields its kernel adjunction.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, both triangle calculations.
-(auxiliary; not a blueprint node)
 
 Proof: the finite diagonal property and the integral comparison give a supported class
 whose constructed compact-support datum has both integrals one. Invertibility of N on

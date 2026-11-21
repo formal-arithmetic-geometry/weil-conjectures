@@ -31,7 +31,7 @@ import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 
 /-! # Finite reduction of the integral proper exchange
 
-Source: Bhatt--Scholze, Sections 6.7--6.8 (blueprint: lem-weil-pbc-integral-exchange-reduction).
+Source: Bhatt--Scholze, Sections 6.7--6.8.
 -/
 
 @[expose] public section
@@ -65,7 +65,7 @@ variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
 
 /-- The proper exchange on integral constructible complexes becomes invertible modulo ℓ.
 Source: Bhatt--Scholze, Section 6.7 and the integral finite-quotient comparison of Section 6.8;
-Stacks proper base change (blueprint: lem-weil-pbc-integral-exchange-reduction).
+Stacks proper base change.
 
 Proof in words. The quotient O_E/ℓ is finite, since O_E is finite over ℤ_ℓ. Its quotient
  topology is discrete and its condensed coefficient sheaf on the pro-etale site is the

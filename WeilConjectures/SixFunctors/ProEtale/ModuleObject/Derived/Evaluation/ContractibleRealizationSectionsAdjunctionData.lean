@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Evaluati
 /-! The terminal sections adjunction of the terminal scalar realization.
 
 Source: Hemo--Richarz--Scholbach, Lemma 4.1(1), equations (3.1)--(3.2), Remark 3.2.
-(blueprint: new-lem-zl-contractible-realization-sections-adjunction-data).
 -/
 
 @[expose] public noncomputable section
@@ -255,7 +254,6 @@ end ScalarExtension
 /-- The terminal scalar realization is left adjoint to the terminal sections functor.
 
 Source: Hemo--Richarz--Scholbach, Lemma 4.1(1), equations (3.1)--(3.2), Remark 3.2.
-(blueprint: new-lem-zl-contractible-realization-sections-adjunction-data).
 
 Proof: write `A = O_sec(U)`, `A_J` for its constant ring sheaf, `c_J` for the constant
 module realization, `s : A_J → O_sec` for `scalarMap` and `E` for the internal/section

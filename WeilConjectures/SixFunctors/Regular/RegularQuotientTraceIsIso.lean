@@ -11,8 +11,7 @@ import WeilConjectures.Algebra.Homology.RegularQuotientCone.RegularQuotientConeA
 
 /-! # Invertibility of the normalized regular quotient coinduction trace
 
-Source: Tags 06YY, 07A6, 0A70, 0BZE, 0BZH and 08FZ; Zheng Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-regular-quotient-trace-is-iso). -/
+Source: Tags 06YY, 07A6, 0A70, 0BZE, 0BZH and 08FZ; Zheng Lemma 5.22 and Proposition 5.26. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,7 +23,6 @@ namespace WeilConjectures
 /-- The actual quotient-linear cone trace is an isomorphism on unbounded derived categories.
 Source: Stacks Project, Tags 06YY, 07A6, 0A70 and 0A71; the normalized principal quotient
 resolution and evaluation-at-one coinduction counit.
-(blueprint: lem-sf-regular-quotient-trace-is-iso).
 
 Proof: resolve the input by a K-injective complex of injective completed-coefficient
 modules. The already constructed ordinary coinduction counit is the kernel of the

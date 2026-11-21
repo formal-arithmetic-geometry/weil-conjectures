@@ -28,8 +28,7 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] in
 /-- Finite truncation induction in both variables reduces Hom closure to single sheaves, for any
 coefficient ring whose bounded constructible category is triangulated.
-Source: Bhatt--Scholze, Remark 6.8.15, and Stacks Tag 08JC.
-(blueprint: lem-sfb-dc-hom-devissage) -/
+Source: Bhatt--Scholze, Remark 6.8.15, and Stacks Tag 08JC. -/
 private theorem boundedConstructible_hom_closure_of
     (htri : (boundedConstructible (condensedRingObj Λ X.left)).IsTriangulated)
     (hsingle : ∀ (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
@@ -90,8 +89,7 @@ variable (X)
 
 /-- Finite truncation induction in both variables reduces Hom closure to single sheaves,
 `ℚ̄_ℓ` coefficients.
-Source: Bhatt--Scholze, Remark 6.8.15, and Stacks Tag 08JC.
-(blueprint: lem-sfb-dc-hom-devissage) -/
+Source: Bhatt--Scholze, Remark 6.8.15, and Stacks Tag 08JC. -/
 theorem boundedConstructible_hom_closure
     (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)]
     (hsingle : ∀ (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
@@ -111,8 +109,7 @@ theorem boundedConstructible_hom_closure
 namespace ContinuousMapRingObj
 
 /-- Finite truncation induction in both variables reduces Hom closure to single sheaves,
-`E̲` coefficients for `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`.
-(blueprint: lem-sfb-dc-hom-devissage) -/
+`E̲` coefficients for `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`. -/
 theorem boundedConstructible_hom_closure
     (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (hsingle : ∀ (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
@@ -134,8 +131,7 @@ end ContinuousMapRingObj
 namespace PadicIntegersRingObj
 
 /-- Finite truncation induction in both variables reduces Hom closure to single sheaves,
-`𝒪̲_E` coefficients for `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`.
-(blueprint: lem-sfb-dc-hom-devissage) -/
+`𝒪̲_E` coefficients for `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`. -/
 theorem boundedConstructible_hom_closure
     (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)] (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
@@ -159,8 +155,7 @@ end PadicIntegersRingObj
 namespace UnitBallRingObj
 
 /-- Finite truncation induction in both variables reduces Hom closure to single sheaves,
-`O̲` coefficients for `O` the closed unit ball of a finite normed extension `E` of `ℚ_ℓ`.
-(blueprint: lem-sfb-dc-hom-devissage) -/
+`O̲` coefficients for `O` the closed unit ball of a finite normed extension `E` of `ℚ_ℓ`. -/
 theorem boundedConstructible_hom_closure
     (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)] {E : Type} [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

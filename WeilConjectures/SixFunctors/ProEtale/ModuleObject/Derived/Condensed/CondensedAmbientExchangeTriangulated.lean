@@ -19,7 +19,7 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 The ambient exchange is a mate of the shift-compatible inverse-image compositor.
 Compatible shifts on its right adjoints make its isomorphism locus triangulated.
 Source: the localizing-extension step of the finite-coefficient proper base-change
-proof (blueprint: lem-sfb-condensed-ambient-exchange-triangulated).
+proof.
 -/
 
 @[expose] public noncomputable section
@@ -134,7 +134,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- The isomorphism locus of the specified ambient exchange is triangulated.
 No properness or finiteness hypothesis is required for this exactness assertion.
 Source: blueprint main-20261015, proposition-proper-base-change-localizing-categories--1,
-steps 2--4 (blueprint: lem-sfb-condensed-ambient-exchange-triangulated).
+steps 2--4.
 
 Proof: transport the termwise coherent shifts to each total inverse image through
 `leftDerivedUpperStarIsoMapDerivedCategory`. Transport its exactness through the same
@@ -211,8 +211,7 @@ end CachedProofs
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The specified ambient exchange has a triangulated isomorphism locus.
-Source: the localizing extension of finite proper base change
-(blueprint: lem-sfb-condensed-ambient-exchange-triangulated).
+Source: the localizing extension of finite proper base change.
 
 Proof: the cached argument proves shift compatibility of the pullback comparison,
 then of its adjunction mate. Both composite functors are triangulated, and the

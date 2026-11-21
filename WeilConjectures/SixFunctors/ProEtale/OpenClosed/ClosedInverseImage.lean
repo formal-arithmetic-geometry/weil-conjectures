@@ -34,8 +34,7 @@ namespace ProEtale
 
 variable {A : CommRingCat.{u}} (I : Ideal A)
 
-/-- The henselian lift `v(V) = Spec H_A(C̄)` of `V = Spec C̄`, for an `A ⧸ I`-algebra `C̄`
-(blueprint `proposition-extension-zero-restriction-closed-subscheme`). -/
+/-- The henselian lift `v(V) = Spec H_A(C̄)` of `V = Spec C̄`, for an `A ⧸ I`-algebra `C̄`. -/
 noncomputable abbrev closedLiftSpec' (C : Type u) [CommRing C] [Algebra (A ⧸ I) C] :
     (Spec A).ProEt :=
   @closedLiftSpec A C _ (Algebra.compHom C (algebraMap A (A ⧸ I)))
@@ -43,8 +42,7 @@ noncomputable abbrev closedLiftSpec' (C : Type u) [CommRing C] [Algebra (A ⧸ I
 variable {I}
 
 /-- The lift `v(φ) : v(V') ⟶ v(V)` of the morphism `V' = Spec C̄' ⟶ V = Spec C̄` given by an
-`A ⧸ I`-algebra map `φ : C̄ ⟶ C̄'` (blueprint
-`proposition-extension-zero-restriction-closed-subscheme`). -/
+`A ⧸ I`-algebra map `φ : C̄ ⟶ C̄'`. -/
 noncomputable def closedLiftSpecMap {C C' : Type u} [CommRing C] [Algebra (A ⧸ I) C] [CommRing C']
     [Algebra (A ⧸ I) C'] (φ : C →ₐ[A ⧸ I] C') : closedLiftSpec' I C' ⟶ closedLiftSpec' I C :=
   let : Algebra A C := Algebra.compHom C (algebraMap A (A ⧸ I))

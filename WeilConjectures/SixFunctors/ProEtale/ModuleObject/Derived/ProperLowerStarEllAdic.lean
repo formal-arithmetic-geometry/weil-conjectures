@@ -23,11 +23,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdic
 Let `ℓ` be a prime, `k` a field in which `ℓ` is invertible, and `p : Z ⟶ Y` a proper morphism to
 a noetherian `k`-scheme. For the `ℓ`-adic condensed coefficient rings `Λ = E, 𝒪_E, ℚ̄_ℓ`, the
 properties of the derived direct image `Rp_*` on module objects over `Λ` used for the
-compact-support direct image on `Loc(Dᵇc)` (blueprint
-`proposition-construction-independence-rf-shriek`) are:
+compact-support direct image on `Loc(Dᵇc)` are:
 
-* `Rp_*` maps `Dᵇc(Z)⟦Λ⟧` into `Dᵇc(Y)⟦Λ⟧` (blueprint
-`proposition-proper-direct-image-constructible-complexes`):
+* `Rp_*` maps `Dᵇc(Z)⟦Λ⟧` into `Dᵇc(Y)⟦Λ⟧`:
   `boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj`,
   `boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj`,
   `boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj`;

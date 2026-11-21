@@ -379,7 +379,6 @@ private def nativeTowerIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 finite-image tower, including its actual adjacent arrows. This comparison contains
 no inverse-limit object, product, projection or distinguished-triangle assertion.
 Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Tags 0D6E and 06YY.
-(blueprint: stage3-weil-system-direct-image-restricted-tower-comparison).
 
 Proof: choose a flat-term K-flat complex P representing K. The reductionModel field
 of S supplies a strict quotient complex C and its simultaneous finite comparisons;

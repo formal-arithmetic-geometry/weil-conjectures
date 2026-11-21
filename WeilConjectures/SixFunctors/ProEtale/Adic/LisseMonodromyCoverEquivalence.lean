@@ -200,8 +200,7 @@ lemma monoIso_evaluationPairing_general {y z : Spec (.of (AlgebraicClosure Ω)) 
 
 include hU in
 omit [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] in
-/-- **The stalk functor is full onto equivariant maps** (blueprint:
-`proposition-lattices-representations-normal-scheme`). An equivariant map `φ : G_t → H_t` is an
+/-- **The stalk functor is full onto equivariant maps**. An equivariant map `φ : G_t → H_t` is an
 invariant element of the stalk `𝓗om(G, H)_t = Hom(G_t, H_t)`, hence the restriction of a global
 section of the lisse sheaf `𝓗om(G, H)`
 (`AlgebraicGeometry.Scheme.UniversalCovers.exists_globalSection_of_invariant`),

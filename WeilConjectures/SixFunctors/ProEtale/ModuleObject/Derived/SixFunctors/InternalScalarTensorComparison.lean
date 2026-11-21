@@ -16,8 +16,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.SixFunctors.ScalarExtensionM
 # The canonical scalar tensor comparison for internal modules
 
 Source: blueprint main-20261015, proper-base-change-rational.proof.md (3), compatibility
-of tensor with scalar extension; Stacks 07A4, tensor comparison for change of rings
-(blueprint: def-sfb-internal-scalar-tensor-comparison).
+of tensor with scalar extension; Stacks 07A4, tensor comparison for change of rings.
 
 The ordinary tensor comparison is specified by its universal property on scalar-unit
 pairings. This property determines the entire strong monoidal structure uniquely. The
@@ -57,8 +56,7 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 /-- The universal scalar-unit normalization: the comonoidal map takes the unit of a
 balanced tensor to the balanced tensor of the two scalar units.
-Source: Stacks 07A4 and blueprint proper-base-change-rational.proof.md (3)
-(blueprint: def-sfb-internal-scalar-tensor-comparison). -/
+Source: Stacks 07A4 and blueprint proper-base-change-rational.proof.md (3). -/
 def InternalScalarMonoidalNormalized
     (m : (Mod.extendScalars (coefficientMap a X)).Monoidal) : Prop :=
   ∀ M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj R X),
@@ -110,8 +108,7 @@ private lemma normalized_unique
     exact hδ M N
 
 /-- The scalar-unit universal property specifies one strong monoidal structure.
-Source: Stacks 07A4, change of rings and total tensor; blueprint rational proof (3)
-(blueprint: def-sfb-internal-scalar-tensor-comparison).
+Source: Stacks 07A4, change of rings and total tensor; blueprint rational proof (3).
 Proof: the balanced tensor universal property constructs
 s tensor (m tensor n) ↦ (s tensor m) tensor (1 tensor n). The inverse multiplies the
 scalar factors. Check both composites after the coequalizer coprojections; balancing
@@ -128,15 +125,13 @@ theorem internalScalarMonoidalNormalized_existsUnique :
   exact normalized_unique a X n m hn hm
 
 /-- The strong monoidal structure selected by the unique scalar-unit universal property.
-Source: Stacks 07A4; blueprint rational proof (3)
-(blueprint: def-sfb-internal-scalar-tensor-comparison). -/
+Source: Stacks 07A4; blueprint rational proof (3). -/
 @[instance_reducible] def internalScalarMonoidal :
     (Mod.extendScalars (coefficientMap a X)).Monoidal :=
   (internalScalarMonoidalNormalized_existsUnique a X).exists.choose
 
 /-- Extension of scalars preserves flat internal modules.
-Source: Stacks 07A4, scalar tensor cancellation; blueprint rational proof (3)
-(blueprint: def-sfb-internal-scalar-tensor-comparison).
+Source: Stacks 07A4, scalar tensor cancellation; blueprint rational proof (3).
 Proof: tensoring an S-module with S tensor_R M, after restriction to R, is tensoring
 that restricted module with M. The balanced tensor cancellation maps are inverse on
 pure tensors. Restriction is exact and reflects exactness, so flatness of M gives
@@ -155,8 +150,7 @@ variable [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coeffici
 -- The general derived API carries graded tensor colimit instances.
 /-- The total left derived extension of scalars, with its structural arguments shared
 once for consumers. Its body is the existing generic total left derived functor.
-Source: blueprint rational proof (3), coefficient change; Stacks 07A4
-(blueprint: def-sfb-internal-scalar-tensor-comparison). -/
+Source: blueprint rational proof (3), coefficient change; Stacks 07A4. -/
 def internalScalarExtension :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj R X)) ⥤
@@ -166,8 +160,7 @@ def internalScalarExtension :
 
 /-- The canonical scalar tensor comparison is an isomorphism, with the
 bifunctor-derived normalization of the scalar-unit normalized ordinary tensorator.
-Source: Stacks 07A4; blueprint rational proof (3)
-(blueprint: def-sfb-internal-scalar-tensor-comparison). -/
+Source: Stacks 07A4; blueprint rational proof (3). -/
 def internalScalarTensorIso :
     (Functor.postcompose₂.obj (internalScalarExtension a X)).obj (derivedTensor R X) ≅
       (((Functor.whiskeringLeft₂ _).obj (internalScalarExtension a X)).obj
@@ -177,8 +170,7 @@ def internalScalarTensorIso :
 
 /-- The canonical map T(A tensor_R B) → T(A) tensor_S T(B), constructed by the
 bifunctor-derived lift of the scalar-unit normalized ordinary tensor comparison.
-Source: Stacks 07A4 and blueprint proper-base-change-rational.proof.md (3)
-(blueprint: def-sfb-internal-scalar-tensor-comparison). -/
+Source: Stacks 07A4 and blueprint proper-base-change-rational.proof.md (3). -/
 def internalScalarTensorComparison :
     (Functor.postcompose₂.obj (internalScalarExtension a X)).obj (derivedTensor R X) ⟶
       (((Functor.whiskeringLeft₂ _).obj (internalScalarExtension a X)).obj

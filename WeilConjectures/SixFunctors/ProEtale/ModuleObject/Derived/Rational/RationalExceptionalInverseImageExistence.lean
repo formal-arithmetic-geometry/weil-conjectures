@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureC
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-existence/_section.md,
 clause (4) for the coefficients `E` and `Q̄_ℓ`, which the blueprint proves by
-theorem-f-shriek-ell-adic-coefficients (blueprint: theorem-f-shriek-ell-adic-coefficients).
+theorem-f-shriek-ell-adic-coefficients.
 
 For a finite extension `E` of `ℚ_ℓ` inside `Q̄_ℓ`, and for `Q̄_ℓ` itself, the exceptional
 inverse image is the Brown right adjoint of the compactly supported direct image on the
@@ -56,7 +56,7 @@ supported direct image of the chosen compactification preserves the localizing c
 agrees with that of every compactification, and has a right adjoint preserving `D_ctf`.
 
 Source: blueprint main-20261015, theorem-exceptional-inverse-image, clauses (2)--(4) for `E` and
-`Q̄_ℓ` (blueprint: theorem-f-shriek-ell-adic-coefficients).
+`Q̄_ℓ`.
 
 Proof:
 1. The coefficient is localizing-admissible. Brown representability

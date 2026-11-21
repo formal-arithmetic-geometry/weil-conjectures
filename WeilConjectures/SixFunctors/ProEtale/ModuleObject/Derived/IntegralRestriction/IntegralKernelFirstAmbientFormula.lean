@@ -30,7 +30,6 @@ trace/base-change equation through the integral coefficient reference, applies t
 projection/section normalization, and identifies the resulting paste with the
 literal support, diagonal-class, and trace composite.
 Source: `sk-thm-int-restriction-line.proof.md`, paragraph (1), first contraction.
-(blueprint: lem-integral-kernel-first-ambient-formula).
 -/
 theorem integralKernel_first_ambient_formula
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

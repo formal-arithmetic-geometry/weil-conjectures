@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.SixFunctors.Monoidal
 
 Source: Stacks Project, Tag 07A4; derived composition step of
 `lem-sfb-coefficient-scalar-tensor-realization`.
-(blueprint: lem-sfb-coefficient-scalar-derived-tensor-square).
 -/
 
 @[expose] public noncomputable section
@@ -115,7 +114,6 @@ set_option linter.unusedSectionVars false in
 Source: Stacks Project, Cohomology on Sites, Tag 07A4, compatibility of composite
 pullbacks and tensor products; step 4--5 of
 `lem-sfb-coefficient-scalar-tensor-realization`.
-(blueprint: lem-sfb-coefficient-scalar-derived-tensor-square).
 
 Proof: apply Functor.map_leftDerivedTensorComparison_comp_eq_of_iso to
 F1 = upperStar R f, F2 = extendScalars a_X, G1 = extendScalars a_Y,

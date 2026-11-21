@@ -18,8 +18,7 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerTransiti
 
 /-! # Signed interchange in the strict finite tensor tower
 
-Source: Stacks 03EL, 06YL, 07A4 and 0941.
-(blueprint: lem-coef-rational-verdier-tensor-tower-signed-coordinate). -/
+Source: Stacks 03EL, 06YL, 07A4 and 0941. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -38,8 +37,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Restrict the coherent chain braiding to its actual strict quotient tower and
 transport through the fixed finite tensor comparisons. It is defined before
 completion and does not use any ordinary-to-completed augmentation.
-Source: Stacks 06YL, 07A4, 0941.
-(blueprint: lem-coef-rational-verdier-tensor-tower-signed-coordinate). -/
+Source: Stacks 06YL, 07A4, 0941. -/
 def strictTensorSignedSwap
     (P Q : CochainComplex (integralTowerModules l E X) ℤ) :
     (integralOperationsTensorTowerFunctor l E X).obj (P, Q) ⟶
@@ -189,7 +187,6 @@ interchange of the two quotient tensor factors. This assertion concerns only
 finite quotient complexes, without a mapping fibre or derived localization.
 
 Source: Stacks 03EL, 06YL and 07A4; blueprint signed transposition paragraph.
-(blueprint: lem-coef-rational-verdier-tensor-tower-signed-coordinate).
 
 Proof: the normalized balanced-tensor comparison sends the quotient generator
 of a homogeneous tensor x tensor y with coefficient a to (a tensor x) tensor

@@ -15,7 +15,6 @@ import all WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
 /-! # The augmented actual Roos complex after exact coefficient transport
 
 Source: Stacks Tags 0941 and 099M; integral-models proof (1).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -389,7 +388,6 @@ normalized total right derived limit of the strict transported quotient tower.
 This does not mention a generator, a Koszul complex or a completion presentation.
 
 Source: integral-models proof (1); Stacks Tags 0941, 099L and 099M.
-(auxiliary; not a blueprint node).
 
 Proof: the three ordinary functors making up modules preserve countable products:
 limits of scalar-restricted modules are computed on underlying sheaves, and the

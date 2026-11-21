@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 /-! # A normalized internal principal-cone augmentation at one quotient level
 
 Source: Stacks Project, Tags 0A0E and 06YY.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -145,7 +144,6 @@ private theorem complexAction_pow {A : Type*} [Category* A] [Abelian A]
 
 Source: Stacks Project, Tag 0A0E, regular singleton Koszul-to-quotient comparison,
 and Tag 06YY, K-flat tensor computation.
-(auxiliary; not a blueprint node).
 
 Proof: the pointwise formula determines d as multiplication by the uniformizer.
 Pull back the exact coefficient sequence R --pi^(n+1)--> R --> B_n.

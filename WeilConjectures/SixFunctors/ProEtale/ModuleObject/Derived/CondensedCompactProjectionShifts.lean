@@ -14,8 +14,7 @@ public import WeilConjectures.PoincareDuality.ProjectionFormulaShift
 # Native condensed compact-support projection and shifts
 
 Source: literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/
-fix-lem-tensor-adjunction.proof.md, Step 1 and the final shift assertion
-(blueprint: lem-sf-condensed-compact-projection-shifts).
+fix-lem-tensor-adjunction.proof.md, Step 1 and the final shift assertion.
 
 The projection is the published counit-defined proper projection followed by the inverse
 open projection comparison and the pullback compositor. Tensor and shift structures are
@@ -48,7 +47,7 @@ unit/counit-compatible derived-adjoint comparisons. The two equalities are the s
 `τ_[r] ≫ s_G = s_F ≫ τ[r]`, in Lean's left-to-right composition convention.
 
 Source: latest blueprint, fix-lem-tensor-adjunction.proof.md, Step 1 (inverse projection)
-and final shift assertion (blueprint: lem-sf-condensed-compact-projection-shifts).
+and final shift assertion.
 
 Proof:
 1. First variable, for fixed `L`. Put `I = Di_!`, `G = Rp_*`, `V = Li^*` for `c = (i, p)`,

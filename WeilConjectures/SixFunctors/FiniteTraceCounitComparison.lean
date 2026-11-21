@@ -616,7 +616,6 @@ attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Proper coincidence and tensor symmetry identify the kernel counit with the
 specified inverse ordered-projection counit.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, G7 and proper coincidence.
-(auxiliary; not a blueprint node)
 
 Proof: proper coincidence commutes with the canonical projection map. Cancel the two
 projection isomorphisms to compare their inverses. Naturality of the source braiding

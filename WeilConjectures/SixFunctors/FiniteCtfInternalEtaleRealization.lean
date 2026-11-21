@@ -18,8 +18,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 /-! # Finite internal-etale realization with fixed Tor intervals
 
 proof.md, paragraph (3); Stacks 09AL, 09C2, 09A6;
-Bhatt--Scholze, Lemma 5.4.3
-(auxiliary; not a blueprint node).
+Bhatt--Scholze, Lemma 5.4.3.
 
 The fixed-scalar presentation of the normalized section-action encoding is used here.
 It is the same intrinsic constant-ring comparison, followed by its fixed-scalar
@@ -40,8 +39,7 @@ namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 /-- The specified realization `E_T⁻¹ ν_T^*`, in the fixed-scalar presentation of the
 normalized section-action equivalence. The additional fixed-scalar equivalence cancels
 between `ν_T^*` and `E_T⁻¹`.
-Source: blueprint direct-image proof, paragraph (3), finite coefficient comparison
-(auxiliary; not a blueprint node). -/
+Source: blueprint direct-image proof, paragraph (3), finite coefficient comparison. -/
 def internalEtaleRealization (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] (T : Scheme.{u}) (e : Encoding A T) :
     Etale.DerivedCategoryModule (ULift.{u + 1} A) T ⥤
@@ -119,8 +117,7 @@ on all bounded-below etale inputs. The encodings are normalized section-action
 encodings; thus the assertion applies to each choice of the equivalence in the node.
 
 proof.md,
-paragraph (3); Stacks 09AL, 09C2, 09A6; Bhatt--Scholze, Lemma 5.4.3
-(auxiliary; not a blueprint node).
+paragraph (3); Stacks 09AL, 09C2, 09A6; Bhatt--Scholze, Lemma 5.4.3.
 
 Proof:
 1. The standing geometric hypotheses make T qcqs. Match the ordinary fixed-scalar

@@ -53,7 +53,6 @@ set_option linter.privateModule false
 Source: blueprint main-20261015, proposition-extension-zero-restriction-closed-subscheme, proof (4),
 and sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp; exact localization uses
 Stacks Project, Tag 04VG, lemma-properties-left-localization.
-(blueprint: lem-sfb-condensed-open-square-scalar-comparison)
 
 The pullback square comparison and its complex-level map are real constructions from
 existing module pullbacks, their specified compositors, and termwise application.

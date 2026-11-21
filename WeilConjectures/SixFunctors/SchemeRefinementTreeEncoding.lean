@@ -11,7 +11,6 @@ import Mathlib.Data.Fintype.Sort
 # Numbering the vertices of a finite scheme refinement tree
 
 Source: the finite binary tree underlying Stacks Project, Topology, Tag 09Y4.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -369,7 +368,6 @@ private theorem transport_mem {ι : Type} (V : ι → Scheme.{u})
 /-- A recursive finite splitting tree can be numbered in parent-before-child order.
 
 Source: Stacks Project, Topology, Tag 09Y4, finite refinement tree bookkeeping.
-(auxiliary; not a blueprint node).
 
 Proof: Recursively count one vertex for a tip and one plus the two child counts for a node.
 Use preorder numbering: the root is zero, left subtree labels follow it, and right subtree

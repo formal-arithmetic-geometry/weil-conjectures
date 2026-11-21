@@ -46,7 +46,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 /-- Pointwise proper base change for the condensed finite coefficient.
 
 Source: the finite-coefficient realization and the proper exchange theorem in the proof of
-`nt-target-proetale-e` (blueprint: new-proper-continuous-basechange-app).
+`nt-target-proetale-e`.
 For every bounded constructible object, the finite-coefficient proper base-change component is
 invertible; the inverse is transported through the realization comparisons. This is strictly the
 componentwise part of the natural-transformation theorem; assembly is handled separately.
@@ -78,8 +78,7 @@ theorem isIso_boundedConstructibleBaseChange_continuousMap_app [IsProper f]
 /-- Pointwise proper base change for the condensed algebraic-closure coefficient.
 
 Source: the finite-coefficient realization, filtered two-colimit, and proper exchange
-compatibility in the proof of `nt-target-proetale-qbar`
-(blueprint: new-proper-qbar-basechange-app).
+compatibility in the proof of `nt-target-proetale-qbar`.
 For every bounded constructible object, descend to a finite coefficient stage, apply finite-stage
 proper base change, and transport the inverse through coefficient-change comparisons and the
 two-colimit presentation. This is strictly the componentwise part; assembly is separate.

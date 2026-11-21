@@ -136,7 +136,6 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 /-! # Derived completeness under clopen restriction
 
 Source: Stacks Project, Tags 08TC and 06YY.
-(blueprint: lem-sf-clopen-preserves-completeness).
 -/
 
 @[expose] public noncomputable section
@@ -517,8 +516,7 @@ private instance clopen_additive
 /-- Derived completeness under clopen restriction.
 
 Source: Stacks Project, Tags 08TC and 06YY; the Roos paragraph of
-lem-sf-clopen-derived-compatibility
-(blueprint: lem-sf-clopen-preserves-completeness).
+lem-sf-clopen-derived-compatibility.
 
 Proof: Choose the K-flat resolution and the specified augmented Roos triangle in the
 global completeness witness. Ordinary module restriction is a right adjoint and

@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.StageSystem.PbcQbarCategory
 
 /-! # Scalar action on the intrinsic finite-stage pair category
 
-Source: blueprint def-weil-pbc-qbar-category, scalar-action and pair-category paragraphs
-(blueprint: def-weil-pbc-qbar-category).
+Source: blueprint def-weil-pbc-qbar-category, scalar-action and pair-category paragraphs.
 
 Retain the published legacy interface. On the current intrinsic rational stages, use
 exactly the same finite-compositum scalar construction. Objects, Hom classes, shifts and
@@ -32,8 +31,7 @@ variable (l : ℕ) [Fact l.Prime]
   (Y : AlgebraicGeometry.Scheme.{u})
 
 /-- The coefficient identification is normalized on integral fractions, followed
-by the fixed small-model equivalence. Source: blueprint scalar-action paragraph
-(blueprint: def-weil-pbc-qbar-category). -/
+by the fixed small-model equivalence. Source: blueprint scalar-action paragraph. -/
 def intrinsicQbarStageFieldEquiv (E : AlgebraicallyClosedCoefficients.Index l Ω) :
     Localization.Away (Padic.coefficientExtensionUniformizer l
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)) ≃+* E.val :=
@@ -42,8 +40,7 @@ def intrinsicQbarStageFieldEquiv (E : AlgebraicallyClosedCoefficients.Index l Ω
     (Shrink.algEquiv ℚ_[l] E.val).toRingEquiv
 
 /-- Cache the existing localized-ring linear structure on the named rational stage.
-Source: blueprint finite-stage scalar convention
-(blueprint: def-weil-pbc-qbar-category). -/
+Source: blueprint finite-stage scalar convention. -/
 instance intrinsicQbarStageLocalizedLinear (E : AlgebraicallyClosedCoefficients.Index l Ω) :
     Linear (Localization.Away (Padic.coefficientExtensionUniformizer l
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)))
@@ -53,8 +50,7 @@ instance intrinsicQbarStageLocalizedLinear (E : AlgebraicallyClosedCoefficients.
     (sfRationalConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) Y))
 
 /-- Transport finite-field scalar action through the normalized coefficient equivalence.
-Source: blueprint finite-stage scalar convention
-(blueprint: def-weil-pbc-qbar-category). -/
+Source: blueprint finite-stage scalar convention. -/
 instance intrinsicQbarStageLinear (E : AlgebraicallyClosedCoefficients.Index l Ω) :
     Linear E.val (GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E) where
   homModule K L := Module.compHom (K ⟶ L) (intrinsicQbarStageFieldEquiv.{u} l Ω E).symm.toRingHom
@@ -101,8 +97,7 @@ private theorem rationalScalar_map_smul
     simp only [smul_add, F.map_add, hf, hg]
 
 /-- The literal intrinsic tensor transitions respect the actual coefficient inclusions.
-Source: blueprint scalar-action paragraph
-(blueprint: def-weil-pbc-qbar-category).
+Source: blueprint scalar-action paragraph.
 Proof: on integral tensors, extension carries multiplication by a constant to
 multiplication by its coefficient-inclusion image. Inverting the uniformizer
 preserves the equality. The integral-normalized coefficient equivalence and
@@ -129,8 +124,7 @@ theorem intrinsicQbarScalarCompatible :
 
 /-- Multiply the representative after adjoining its scalar to the finite stage.
 This is the existing quotient construction, applied to the intrinsic stage system.
-Source: blueprint formula alpha [M,u] = [N,alpha u_N]
-(blueprint: def-weil-pbc-qbar-category). -/
+Source: blueprint formula alpha [M,u] = [N,alpha u_N]. -/
 def intrinsicQbarScalarAction (α : Ω)
     {K L : generalAlgebraicallyClosedConstructibleCategory l Ω Y} (f : K ⟶ L) : K ⟶ L :=
   StageSystem.qbarScalarHom l Ω (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y)
@@ -138,8 +132,7 @@ def intrinsicQbarScalarAction (α : Ω)
 
 set_option linter.unusedVariables false in
 /-- The specified scalar formula determines the linear structure uniquely, on the
-existing colimit abelian-group structures. Source: blueprint scalar-action laws
-(blueprint: def-weil-pbc-qbar-category).
+existing colimit abelian-group structures. Source: blueprint scalar-action laws.
 Proof: represent each finite list of arrows and scalars at one common finite field.
 The displayed action is multiplication there. Its one, product, zero and additive
 laws are the finite-stage module laws. Bilinearity of composition is the finite-stage
@@ -192,7 +185,7 @@ theorem intrinsicQbarLinear_existsUnique :
 
 /-- The scalar action is fixed on every morphism class, not chosen from mere existence.
 The inherited category and triangulation remain literally the recorded pair construction.
-Source: blueprint Qbar-linear category (blueprint: def-weil-pbc-qbar-category). -/
+Source: blueprint Qbar-linear category. -/
 instance intrinsicQbarLinear : Linear Ω (generalAlgebraicallyClosedConstructibleCategory l Ω Y) :=
   (intrinsicQbarLinear_existsUnique l Ω Y).exists.choose
 

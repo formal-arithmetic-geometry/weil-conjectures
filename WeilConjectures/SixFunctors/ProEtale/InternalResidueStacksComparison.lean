@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 /-! # Actual residue reduction under constant scalar restriction
 
 Source: integral-models proof (2), Stacks Tags 099L, 09C1 and 08FZ.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -46,7 +45,6 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify in
 /-- Constant scalar restriction identifies the first-residue constructible Tor condition.
 Source: integral-models proof (1)--(2), Stacks Tags 099L, 09C1 and 08FZ.
-(auxiliary; not a blueprint node).
 
 Proof: the constant-to-continuous integral scalar map is flat and induces the canonical
 isomorphism on the first quotient. Its derived common-quotient comparison, normalized
@@ -146,8 +144,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- A bounded constructible complex over the first residue ring `𝒪_E/ϖ_E` has finite Tor
 amplitude. Hence the finite Tor clause in (2) of `proposition-integral-constructibility-criterion`
 holds automatically, `𝒪_E/ϖ_E` being a field.
-Source: Bhatt--Scholze, Remark 6.3.2; Stacks Tags 0651 and 08FC
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Remark 6.3.2; Stacks Tags 0651 and 08FC.
 
 Proof: transport along the coefficient isomorphism of
 `internal_first_residue_reduction_comparison` to the pulled-back discrete residue field, where

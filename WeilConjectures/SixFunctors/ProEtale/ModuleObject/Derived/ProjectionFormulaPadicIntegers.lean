@@ -132,8 +132,7 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- **The projection formula for `𝒪_E`** (blueprint
-`proposition-proper-direct-image-constructible-complexes` (3)): for a proper `p : X ⟶ Y` and bounded
+/-- **The projection formula for `𝒪_E`**: for a proper `p : X ⟶ Y` and bounded
 constructible `𝒪_E`-complexes `K` on `X` and `M` on `Y`, the projection map
 `Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism. -/
 theorem isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible (p : X ⟶ Y)

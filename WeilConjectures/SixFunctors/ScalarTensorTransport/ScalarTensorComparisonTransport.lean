@@ -111,7 +111,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The scalar unit on a fixed degree of a complex, with its extension carrier exposed.
-Source: Stacks 06YY (blueprint: lem-sf-scalar-tensor-comparison-transport). -/
+Source: Stacks 06YY. -/
 noncomputable def fixedScalarComplexUnitSection
     (E : scalarModules J R ⥤ scalarModules J S) (hadd : E.Additive)
     (eta : 𝟭 (scalarModules J R) ⟶ E ⋙ scalarRestriction.{c, v, max c v u} a)
@@ -123,8 +123,7 @@ noncomputable def fixedScalarComplexUnitSection
 attribute [local irreducible] fixedScalarComplexUnitSection
 
 /-- Scalar tensor data for a prescribed ordinary and universal derived pair.
-Source: Stacks 06YY and 0D6D
-(blueprint: lem-sf-scalar-tensor-comparison-transport). -/
+Source: Stacks 06YY and 0D6D. -/
 structure FixedScalarTensorComparison
     (M : ScalarHomModels.{c, v, u, w} J)
     (E : scalarModules J R ⥤ scalarModules J S) (hadd : E.Additive)
@@ -187,8 +186,7 @@ structure FixedScalarTensorComparison
             _ _ (preservesKFlat P hp) (preservesKFlat Q hq)).hom
 
 /-- Normalized scalar tensor data transport to any presentation of the same derived pair.
-Source: Stacks 06YY and 0D6D
-(blueprint: lem-sf-scalar-tensor-comparison-transport).
+Source: Stacks 06YY and 0D6D.
 
 Proof: the equality of ordinary extensions identifies their chain tensors and
 ordinary units. The left-derived universal property gives the unique natural

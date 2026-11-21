@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.InverseImageModuleFlat
 
 /-! Flatness preservation for the integral residue pullback.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(blueprint: new-integral-residue-pullback-preserves-flat)
 
 The proof is the local flatness argument for inverse image of module sheaves,
 transported across the coefficient pullback isomorphism. -/
@@ -36,7 +35,6 @@ relation criterion for flatness, invariance under extension along the
 coefficient pullback isomorphism, and preservation of colimits by inverse
 image.
 Source: Stacks Project, Tag 05VD, lemma-pullback-flat.
-(blueprint: new-integral-residue-pullback-preserves-flat)
 
 Proof. Restriction along the inverse coefficient isomorphism is naturally
 isomorphic to extension along the coefficient isomorphism. Whisker this

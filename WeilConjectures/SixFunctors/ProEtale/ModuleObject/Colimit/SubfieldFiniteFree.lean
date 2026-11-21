@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Subfield
 
 For finite subextensions `E ≤ F` of `ℚ̄_ℓ / ℚ_ℓ` and a scheme `X`, the coefficient ring `F_X`,
 regarded as an `E_X`-module through the inclusion `E_X ⟶ F_X`, is finite free
-(blueprint `lemma-inverse-image-coefficient-sheaves` (2)), of rank `[F : E]`: an `E`-basis `eᵢ` of
+, of rank `[F : E]`: an `E`-basis `eᵢ` of
 `F` gives an isomorphism `E_X^{⊕ [F : E]} ⟶ F_X`, `(aᵢ) ↦ ∑ aᵢ eᵢ`
 (`AlgebraicGeometry.ProEtale.isIso_biproductDesc_padicSubfieldBasisSection`), which is
 `E_X`-linear (`CategoryTheory.Mod.isIso_biproductDesc_basisHom`).

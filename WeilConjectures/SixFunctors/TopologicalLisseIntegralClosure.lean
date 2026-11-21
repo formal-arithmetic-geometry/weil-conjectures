@@ -9,8 +9,7 @@ public import WeilConjectures.SixFunctors.Integral.IntegralModelsGenerators
 
 /-! Lattice filtration step for topological Noetherian integral generators.
 Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2), together with the
-ordered lattice filtration in the topological Noetherian integral-model argument
-(blueprint: lem-sfb-topological-lisse-integral-closure).
+ordered lattice filtration in the topological Noetherian integral-model argument.
 
 The missing argument constructs a finite stratified integral lattice filtration of a
 lisse finite-coefficient module and identifies each quotient with an integral generator.
@@ -27,8 +26,7 @@ namespace WeilConjectures.SixFunctors
 isomorphism-closed closure of the integral locally free generators.
 
 Source: Bhatt--Scholze, Lemma 6.8.13 (first paragraph) and Proposition 6.8.14(2);
-steps 1 and 3 of the plan of lem-sfb-topological-integral-generators
-(blueprint: lem-sfb-topological-lisse-integral-closure).
+steps 1 and 3 of the plan of lem-sfb-topological-integral-generators.
 
 Proof:
 1. `T` is topologically Noetherian, as a subspace of `X`. By

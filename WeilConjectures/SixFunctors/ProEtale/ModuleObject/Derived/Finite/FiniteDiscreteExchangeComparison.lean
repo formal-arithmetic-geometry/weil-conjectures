@@ -21,8 +21,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Finite discrete internal coefficients and etale exchange
 
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3
-(blueprint: lem-weil-pbc-finite-discrete-exchange-comparison).
+Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3.
 -/
 
 @[expose] public section
@@ -110,8 +109,7 @@ variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
 
 /-- Finite discrete internal coefficients compare to the actual etale exchange.
 Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3;
-Stacks Project, Tag 09AL
-(blueprint: lem-weil-pbc-finite-discrete-exchange-comparison).
+Stacks Project, Tag 09AL.
 
 Proof in words. A continuous map to the discrete ring B is locally constant, so the
 condensed continuous-function ring is the constant ring, and its inverse image on

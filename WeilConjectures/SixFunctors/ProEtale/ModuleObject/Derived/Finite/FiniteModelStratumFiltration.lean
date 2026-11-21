@@ -23,8 +23,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 
 Source: Stacks Project, Topology, Tag 09Y5
 (`lemma-noetherian-partition-refined-by-stratification`), and Pro-etale Cohomology,
-Tag 09AH (`lemma-ses-associated-to-open`)
-(blueprint: lem-sfb-finite-model-stratum-filtration).
+Tag 09AH (`lemma-ses-associated-to-open`).
 Re-recorded by group NS on 2026-10-18; the statement and constructions are unchanged.
 
 The auxiliary functors name the actual extension-by-zero pieces and closed-stratum

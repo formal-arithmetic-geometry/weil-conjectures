@@ -22,8 +22,7 @@ Source: Stacks Tags 04VK, 06YS and 06YU; the two-variable localization step in
 Proof: choose a complex representing each derived object and resolve each by a complex
 satisfying P. The augmentation quasi-isomorphisms become isomorphisms after localization.
 Their product gives an isomorphism from a pair where the components agree to the chosen
-derived pair. Apply naturality of both transformations and cancel its image under U.
-(blueprint: new-sf-bifunctor-kflat-localization-extensionality). -/
+derived pair. Apply naturality of both transformations and cancel its image under U. -/
 theorem bifunctor_kflat_localization_extensionality
     {C : Type u} [Category.{v, u} C] [Abelian C] [HasDerivedCategory C]
     (P : ObjectProperty (CochainComplex C ℤ))

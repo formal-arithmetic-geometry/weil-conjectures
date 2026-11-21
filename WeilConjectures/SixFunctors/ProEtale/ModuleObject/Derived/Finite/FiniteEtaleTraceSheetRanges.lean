@@ -59,7 +59,6 @@ import Mathlib.Algebra.Category.Grp.Ulift
 /-! # Section ranges of a trace image on a specified splitting
 
 Source: blueprint, stratified lattice trace proof, Local computation, paragraph 1.
-(blueprint: lem-sfb-finite-etale-trace-sheet-ranges)
 -/
 
 @[expose] public noncomputable section
@@ -690,7 +689,6 @@ coordinates, the pulled-back categorical trace image has the sum of the sheet
 ranges. Local freeness and existence of any chart are not hypotheses or conclusions.
 
 Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1–2.
-(blueprint: lem-sfb-finite-etale-trace-sheet-ranges)
 
 Proof. The coefficient-restriction mate identity compares the actual counits,
 and composition coherence compares their restrictions to each sheet. Naturality

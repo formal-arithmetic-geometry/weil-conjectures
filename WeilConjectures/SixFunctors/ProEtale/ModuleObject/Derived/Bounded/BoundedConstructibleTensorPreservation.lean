@@ -53,8 +53,7 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
 
 /-- The coefficient object is bounded constructible and is the tensor unit. This is the unit
 clause needed to form the monoidal bounded-constructible subcategory.
-Source: the unit clause of `proposition-six-operations-dctf--14` in the blueprint.
-(blueprint: lem-sfb-dc-tensor-unit) -/
+Source: the unit clause of `proposition-six-operations-dctf--14` in the blueprint. -/
 theorem boundedConstructible_tensor_unit :
     boundedConstructible (condensedRingObj Λ X.left)
       (𝟙_ (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})

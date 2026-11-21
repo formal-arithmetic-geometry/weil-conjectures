@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDe
 /-!
 # Unrestricted derived completeness
 
-Source: Bhatt--Scholze, Definition 3.5.2 (blueprint: def-weil-derived-complete).
+Source: Bhatt--Scholze, Definition 3.5.2.
 -/
 
 @[expose] public section
@@ -35,8 +35,7 @@ finite-field condition. The finite-field datum is an auxiliary presentation only
 all the completed rings, reductions and augmentation maps in IsDerivedComplete
 ignore it. Such a datum with characteristic different from l always exists (use
 F_2 if l differs from 2 and F_3 otherwise), so this existential changes no condition
-on K. Source: Bhatt--Scholze, Definition 3.5.2, p. 24
-(blueprint: def-weil-derived-complete). -/
+on K. Source: Bhatt--Scholze, Definition 3.5.2, p. 24. -/
 noncomputable def IsDerivedCompleteUnrestricted
     (K : DerivedCategory (integralTowerModules.{t, u} l E Y)) : Prop :=
   ∃ (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p), IsDerivedComplete l E Y D hl K

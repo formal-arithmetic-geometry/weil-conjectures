@@ -22,7 +22,6 @@ v             v              v
 X  --c.i-->  c.Z  --c.g-->  Y
 ```
 commutes, the left square being cartesian. The *compact-support exchange map*
-(blueprint `def-exchange-projection`, `prose-05-31`)
 
 `Ex_! : Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*`
 

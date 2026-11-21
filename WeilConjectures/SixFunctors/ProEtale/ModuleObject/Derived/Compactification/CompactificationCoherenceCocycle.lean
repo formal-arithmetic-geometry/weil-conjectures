@@ -158,8 +158,7 @@ import WeilConjectures.AlgebraicGeometry.Compactification.DenseRefinementMorphis
 # Independence of compactification and the cocycle condition
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-comp-coherence,
-proposition-construction-independence-rf-shriek (blueprint:
-proposition-construction-independence-rf-shriek).
+proposition-construction-independence-rf-shriek.
 
 The domain is the recorded ambient localizing closure. The target remains the ordinary
 unbounded derived category of module objects. Comparisons are normalized by the existing
@@ -273,8 +272,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The already defined compactification candidate, with source restricted to Loc(Dctf).
 No target preservation is assumed. Source: blueprint
-proposition-construction-independence-rf-shriek, opening formula and proof step 1 (blueprint:
-proposition-construction-independence-rf-shriek). -/
+proposition-construction-independence-rf-shriek, opening formula and proof step 1. -/
 abbrev compactificationLocalizingCandidate {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification.BoundaryCompactification f) :
     (localizingClosureProEtale Λ X).FullSubcategory ⥤
@@ -287,8 +285,7 @@ abbrev compactificationLocalizingCandidate {X Y : Scheme.{u}} {f : X ⟶ Y}
 It is Rp_* of the canonical open-adjunction map, followed by the inverse derived
 compositor and the structural triangle equality. This definition does not require either
 compactification to be dense and makes no arbitrary choice of a comparison.
-Source: blueprint proposition-construction-independence-rf-shriek, proof step 4
-(blueprint: proposition-construction-independence-rf-shriek). -/
+Source: blueprint proposition-construction-independence-rf-shriek, proof step 4. -/
 def compactificationRefinementComponent {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification.BoundaryCompactification f} (h : d ⟶ c)
     (K : DerivedCategory
@@ -634,8 +631,7 @@ The first clause records that the refinement components used in the formula real
 isomorphisms; the next clause is φ_{c₂,c₁} ρ_{h₂} = ρ_{h₁}, equivalently
 φ_{c₂,c₁} = ρ_{h₁} ρ_{h₂}⁻¹, for every common dense refinement and both its projections.
 The last two clauses are equalities of natural isomorphisms, not just objectwise existence.
-Source: blueprint main-20261015, proposition-construction-independence-rf-shriek
-(blueprint: proposition-construction-independence-rf-shriek).
+Source: blueprint main-20261015, proposition-construction-independence-rf-shriek.
 
 Proof, following the seven DAG steps:
 1. Work with F_c = Rp_* D(j_!) on ordinary unbounded module-object derived categories,

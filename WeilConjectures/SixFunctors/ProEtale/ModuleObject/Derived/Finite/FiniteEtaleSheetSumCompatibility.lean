@@ -58,8 +58,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local irreducible] upperStar lowerStar upperStarComp upperStarLowerStarAdjunction
 
 /-- The sum of the actual counit projections, conjugated by composition comparisons.
-Source: blueprint, stratified lattice trace proof, local computation.
-(blueprint: lem-sfb-finite-etale-sheet-sum-compatible) -/
+Source: blueprint, stratified lattice trace proof, local computation. -/
 abbrev finiteEtaleSheetSum
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)
@@ -540,7 +539,6 @@ private theorem compatible_congr
 /-- Sheet sums agree on overlaps, independently of the enumeration of the sheets.
 Source: blueprint, stratified lattice trace proof, local computation;
 Stacks Project, Tag 03SH.
-(blueprint: lem-sfb-finite-etale-sheet-sum-compatible)
 
 Proof in words. Refine the two splitting charts to a common weakly etale scheme Z.
 Each splitting gives a finite family of disjoint open-and-closed sections of

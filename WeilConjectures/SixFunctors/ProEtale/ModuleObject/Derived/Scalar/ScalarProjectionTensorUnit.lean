@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.S
 public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! The tensor-unit component of the scalar-first native projection map.
-(blueprint: lem-sfb-scalar-projection-tensor-unit)
 -/
 
 @[expose] public noncomputable section
@@ -89,7 +88,6 @@ Transpose the projection under the derived adjunction. Counit naturality and ten
 interchange identify its composite with the image of the pullback-unit comparison
 and the left unitor with the left unitor of the pushforward. Oplax left unitality
 proves this identity; both subsequent maps are invertible, hence so is the projection.
-(blueprint: lem-sfb-scalar-projection-tensor-unit)
 -/
 theorem scalarProjection_tensorUnit_isIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]

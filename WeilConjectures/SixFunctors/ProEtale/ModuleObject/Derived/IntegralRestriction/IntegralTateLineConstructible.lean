@@ -515,7 +515,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructib
 
 Source: current blueprint, sk-thm-int-restriction-line.proof.md, paragraph (3),
 and definition-tate-twists, local-generator and signed-power paragraphs.
-(blueprint: lem-sfb-integral-tate-line-constructible).
 -/
 
 @[expose] public noncomputable section
@@ -797,7 +796,6 @@ constructible in degree zero.
 
 Source: definition-tate-twists, local-generator and signed-power paragraphs;
 sk-thm-int-restriction-line.proof.md, paragraph (3).
-(blueprint: lem-sfb-integral-tate-line-constructible).
 
 Proof: trivialize the degree-one integral line on the compatible-root pro-etale
 cover. The section-module equivalence retains the underlying abelian sheaf and

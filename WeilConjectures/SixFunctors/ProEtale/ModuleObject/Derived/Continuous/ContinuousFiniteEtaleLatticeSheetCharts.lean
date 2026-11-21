@@ -21,7 +21,6 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 /-! # Simultaneous continuous charts for embedded sheet lattices
 
 Source: blueprint, stratified lattice trace proof, Local computation, paragraph 2.
-(blueprint: lem-sfb-continuous-finite-etale-lattice-sheet-charts)
 -/
 
 @[expose] public noncomputable section
@@ -311,7 +310,6 @@ involves no trace morphism and no image of a sum.
 
 Source: blueprint, stratified lattice trace proof, Local computation, paragraph 2;
 Bhatt--Scholze, Section 6.8.
-(blueprint: lem-sfb-continuous-finite-etale-lattice-sheet-charts)
 
 Proof. Use continuousFiniteEtaleLattice_sheet_matrices to obtain a common
 rational frame and continuous invertible matrices for the sheet embeddings.

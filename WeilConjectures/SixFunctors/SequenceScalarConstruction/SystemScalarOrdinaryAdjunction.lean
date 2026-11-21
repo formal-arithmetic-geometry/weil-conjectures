@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.SequenceScalarConstruction.SystemScalarPackag
 /-! # Generic normalized scalar comparison
 
 Source: Stacks 03D7, 03EK and 06YY.
-(blueprint: lem-sf-system-scalar-ordinary-adjunction).
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +28,7 @@ variable {C : Type sa} [Category.{sb} C] {J : GrothendieckTopology C}
   [EssentiallySmall.{sw} C]
 
 /-- The actual ordinary scalar adjunction for a fixed cochain model, with its unit formula.
-Source: Stacks 03D7, 03EK and 06YY
-(blueprint: lem-sf-system-scalar-ordinary-adjunction).
+Source: Stacks 03D7, 03EK and 06YY.
 Proof: construct the normalized scalar package with this fixed model. Transport
 its ordinary adjunction through the model equality. Its normalized unit is one
 tensor the section; unfold the generic tensor generator and simplify one_smul.

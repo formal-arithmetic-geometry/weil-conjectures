@@ -111,7 +111,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 /-! # Evaluation of inverse image on a ringed sequence site
 
 Source: Zheng, Construction 4.1; the sectionwise coextension argument.
-(blueprint: lem-sf-sequence-module-pullback-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -499,8 +498,7 @@ private theorem inverseMate_isIso_of_iterated
 
 /-- Inverse image commutes with finite evaluation for any direct-image comparison
 isomorphism. The sites and coefficient universes are independent.
-Source: Zheng, Construction 4.1
-(blueprint: lem-sf-sequence-module-pullback-evaluation).
+Source: Zheng, Construction 4.1.
 
 Proof: evaluation at n has a right adjoint. At (m,U) its sections are M(U) if
 n ≤ m and zero otherwise, with scalars restricted by the horizontal ring map.

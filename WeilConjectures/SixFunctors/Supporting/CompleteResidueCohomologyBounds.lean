@@ -100,8 +100,7 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 /-! # Cohomological bounds from complete residue Tor amplitude
 
 Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1) and (2);
-sites-cohomology.tex, Tags 0942 and 0947; algebraization.tex, Tag 099I
-(blueprint: lem-sf-complete-residue-cohomology-bounds).
+sites-cohomology.tex, Tags 0942 and 0947; algebraization.tex, Tag 099I.
 
 The completion is the inverse limit of constant quotient ring sheaves, not the
 constant sheaf of the valuation ring. Level zero of the reduction API means the
@@ -175,8 +174,7 @@ attribute [-instance] WeilConjectures.integralCoefficientAbLocallyBijective
 of its residue reduction, tested after restriction to every small-site object.
 
 Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1),(2);
-sites-cohomology.tex, Tags 0942 and 0947; algebraization.tex, Tag 099I
-(blueprint: lem-sf-complete-residue-cohomology-bounds).
+sites-cohomology.tex, Tags 0942 and 0947; algebraization.tex, Tag 099I.
 
 Proof:
 1. Test residue Tor amplitude with the coefficient sheaf itself on X. The tensor

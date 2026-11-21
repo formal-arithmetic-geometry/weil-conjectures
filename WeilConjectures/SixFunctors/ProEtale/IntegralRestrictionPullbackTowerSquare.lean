@@ -196,7 +196,6 @@ attribute [-instance] scalarMapMon CondensedRing.scalarSixRing_comm
 
 /-- Pullback respects the compositor for two consecutive quotient restrictions.
 Source: blueprint integral open direct image, Completeness paragraph; Stacks 06YY.
-(auxiliary; not a blueprint node).
 
 Proof: pull the two quotient ring maps from the point to U and X. Their composite is
 exactly the smaller quotient map. On ordinary internal modules, the restriction

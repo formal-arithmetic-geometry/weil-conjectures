@@ -64,8 +64,7 @@ attribute [local irreducible] upperStar lowerStar upperStarComp upperStarLowerSt
 
 /-- Agreement after every pair of weakly etale refinements over the same base map.
 The comparisons use the specified inverse-image composition isomorphisms.
-Source: Stacks Project, Tags 03EM and 04TQ.
-(blueprint: lem-sfb-finite-etale-split-hom-descent) -/
+Source: Stacks Project, Tags 03EM and 04TQ. -/
 @[irreducible]
 def FiniteEtaleModuleChart.Compatible
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -779,8 +778,7 @@ private theorem split_chart_compatible
   exact h''
 
 /-- Existence half of finite-etale compatible Hom descent.
-Source: Stacks Project, Tags 03EM, 04TQ and 04HN.
-(blueprint: lem-sfb-finite-etale-split-hom-descent-existence) -/
+Source: Stacks Project, Tags 03EM, 04TQ and 04HN. -/
 theorem finiteEtaleSplitHom_exists
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)
@@ -810,8 +808,7 @@ theorem finiteEtaleSplitHom_exists
   exact (cancel_mono ((moduleLocalization Λ c.map).hom.app P)).mp hn
 
 /-- Local surjectivity criterion for the epi half.
-Source: Stacks Project, Tags 03EM, 04TQ and 04HN.
-(blueprint: lem-sfb-finite-etale-split-hom-descent-local-surjective) -/
+Source: Stacks Project, Tags 03EM, 04TQ and 04HN. -/
 theorem finiteEtaleSplitHom_local_surjective
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)
@@ -843,8 +840,7 @@ theorem finiteEtaleSplitHom_local_surjective
   exact (Sheaf.isLocallySurjective_iff_epi' Ab.{u + 1} f.hom).mpr inferInstance
 
 /-- Epi half of finite-etale compatible Hom descent.
-Source: Stacks Project, Tags 03EM, 04TQ and 04HN.
-(blueprint: lem-sfb-finite-etale-split-hom-descent-epi) -/
+Source: Stacks Project, Tags 03EM, 04TQ and 04HN. -/
 theorem finiteEtaleSplitHom_epi
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)

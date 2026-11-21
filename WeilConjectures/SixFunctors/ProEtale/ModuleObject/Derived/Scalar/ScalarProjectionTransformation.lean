@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.SixFunctors.Monoidal
 public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! The scalar-first native derived projection as one fixed natural transformation.
-(blueprint: def-sfb-scalar-first-projection-transformation)
 -/
 
 @[expose] public noncomputable section
@@ -30,7 +29,6 @@ sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, projection formula
 Flip both tensor bifunctors in the standard right-adjoint projection construction,
 using the canonical derived tensor comparison. This fixes its functors and tensor
 structures once for the unit, shift, and cone calculations.
-(blueprint: def-sfb-scalar-first-projection-transformation)
 -/
 def scalarFirstProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]

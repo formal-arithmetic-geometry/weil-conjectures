@@ -272,7 +272,6 @@ end SelfEncoding
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/
 det-prop-scalar-six-direct-image.proof.md, paragraph "Finite rings A to B";
 Stacks 0F12 and the relative torsion projection theorem.
-(blueprint: lem-s3-finite-discrete-scalar-projection-case).
 
 Proof: give A and B their discrete topologies and choose normalized coefficient
 encodings. The constant-sheaf counits at these finite discrete coefficient rings are

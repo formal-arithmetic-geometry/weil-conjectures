@@ -66,8 +66,7 @@ public import WeilConjectures.SixFunctors.ProEtale.IntegralPresentationEncoding
 /-! # Data for relabelling an integral coefficient presentation
 
 Source: blueprint main-20261015, integral-criterion-reductions, final sentence;
-Stacks Project, Tag 06YY, isomorphism-of-coefficients specialization
-(blueprint: def-pe-integral-presentation-encoding).
+Stacks Project, Tag 06YY, isomorphism-of-coefficients specialization.
 
 This packages specified data, without choosing an isomorphism or an equivalence.
 The forward functor is fixed to section-action followed by restriction along the
@@ -94,8 +93,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [instance] Encoding.additive Encoding.inverseAdditive
 
 /-- Termwise localization of the specified additive coefficient equivalence.
-Source: Stacks 05RU and 06YY
-(blueprint: def-pe-integral-presentation-encoding). -/
+Source: Stacks 05RU and 06YY. -/
 def Encoding.derived (A : Encoding l E X) :
     DerivedCategory.{u + 1} (AdicCompletion.Modules l E X) ≌
       DerivedCategory.{u + 2} (WeilConjectures.scalarReductionSource.{u, u} l E X) :=

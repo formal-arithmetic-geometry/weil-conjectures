@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 Source: blueprint proper-base-change rational proof, paragraph (3), canonical exchange;
 literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/
 def-tw-frobenius-action.md, ordinary transport along the geometric Frobenius.
-(blueprint: def-sf-condensed-module-derived-exchange).
 
 The definitions are moved without changing their terms from DerivedExchangeExactNormalization.
 They use arbitrary commutative squares and ordinary unbounded derived categories.
@@ -39,8 +38,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The ambient pullback-square comparison, using the inverse compositor for `(p', g)`,
 the square equality, and the compositor for `(g', p)`.
-Source: blueprint rational proof (3), canonical exchange
-(blueprint: def-sf-condensed-module-derived-exchange). -/
+Source: blueprint rational proof (3), canonical exchange. -/
 def moduleObjectDerivedPullbackSquareComparison {X Y X' Y' : Scheme.{u}}
     {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
     (sq : CommSq g' p' p g) :
@@ -52,8 +50,7 @@ def moduleObjectDerivedPullbackSquareComparison {X Y X' Y' : Scheme.{u}}
 
 /-- The ambient unit--square--counit exchange map. `mateEquiv` inserts the unit for `p'`,
 applies its right adjoint to the square comparison, and contracts the counit for `p`.
-Source: blueprint rational proof (3), canonical exchange
-(blueprint: def-sf-condensed-module-derived-exchange). -/
+Source: blueprint rational proof (3), canonical exchange. -/
 def moduleObjectDerivedExchange {X Y X' Y' : Scheme.{u}}
     {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
     (sq : CommSq g' p' p g) :

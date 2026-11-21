@@ -16,7 +16,6 @@ import Mathlib.Algebra.Category.ModuleCat.Biproducts
 /-! # Global scalar-compatible frames with independent ranks
 
 Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2.
-(blueprint: lem-sfb-continuous-free-sheet-global-coordinates)
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +28,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor Matrix
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Include integral continuous vector coordinates in rational continuous coordinates.
-Source: the coefficient inclusion in the blueprint local computation.
-(blueprint: lem-sfb-continuous-free-sheet-global-coordinates) -/
+Source: the coefficient inclusion in the blueprint local computation. -/
 def continuousIntegralVector {E : Type} [NormedField E] (A : Subring E)
     {Z : Type u} [TopologicalSpace Z] {r : ℕ} (x : C(Z, Fin r → A)) :
     C(Z, Fin r → E) :=
@@ -651,7 +649,6 @@ attribute [local semireducible] continuousRingModuleEquivalence continuousRingRe
 This assertion concerns the base Y itself, with no restriction to open subschemes.
 Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2;
 Bhatt--Scholze, Section 6.8.
-(blueprint: lem-sfb-continuous-free-sheet-global-coordinates)
 
 Proof. Choose a finite free rational frame and integral frames for the finitely
 many pulled-back modules. Extend each integral frame to E and compare it with the

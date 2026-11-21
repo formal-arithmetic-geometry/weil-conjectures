@@ -10,7 +10,6 @@ public import WeilConjectures.Algebra.Homology.System.SystemScalarModel
 import all WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenOrdinaryScalarComparison
 /-! # Restriction of the actual scalar tensor construction
 Source: Stacks Project, sites-cohomology.tex, Tag 06YY.
-(blueprint: lem-sf-clopen-scalar-raw-restriction-comparison).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -220,7 +219,6 @@ attribute [local irreducible] sfClopenScalarRawBack
 /-- Restriction of a sheafified scalar tensor, transported through the recorded model.
 
 Source: Stacks Project, sites-modules.tex, Tags 03EL and 03CY.
-(blueprint: lem-sf-clopen-scalar-raw-restriction-comparison).
 
 Proof: cocontinuity identifies the restriction of the tensor-presheaf sheafification
 with the sheafification of the restricted tensor presheaf. Transport the comparison

@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 
 The ordinary scalar tensor square extends to unbounded signed direct-sum total
 complexes by checking every coproduct summand.
-(blueprint: lem-sfb-coefficient-scalar-tensor-total)
 -/
 
 @[expose] public noncomputable section
@@ -49,8 +48,7 @@ The internal and section total tensor maps restrict to their ordinary tensorator
 The equivalence comparison restricts to its ordinary comparison and the termwise
 scalar comparison restricts to its component in degrees p and q. Thus the square
 on each summand is exactly the ordinary scalar tensor square. Coproduct
-universality gives equality in every degree, hence equality of chain maps.
-(blueprint: lem-sfb-coefficient-scalar-tensor-total). -/
+universality gives equality in every degree, hence equality of chain maps. -/
 theorem coefficientScalarTensor_total (Z : Scheme.{u})
     (d : CoefficientScalarTensorRepresentativeBasicData a Z)
     (h : CoefficientScalarTensorRepresentativeHypotheses a Z d)

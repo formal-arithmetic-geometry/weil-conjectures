@@ -22,8 +22,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 # Coefficient compatibility of the actual projection mate
 
 Source: blueprint main-20261015, sk-thm-sfb-proper-base-change-rational.proof.md,
-paragraph (3), projection on integral-model pairs before invertibility
-(blueprint: lem-sfb-coefficient-projection-square).
+paragraph (3), projection on integral-model pairs before invertibility.
 -/
 
 @[expose] public noncomputable section
@@ -357,8 +356,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- The categorical square specializes large derived adjunctions.
 /-- The specified scalar push mate and pull comparison commute with the actual projection
 morphism, on ordinary unbounded derived module-object categories.
-Source: blueprint main-20261015, proper-base-change-rational.proof.md (3)
-(blueprint: lem-sfb-coefficient-projection-square).
+Source: blueprint main-20261015, proper-base-change-rational.proof.md (3).
 
 Proof:
 1. Transport the module tensors and geometric derived adjunctions to section-ring modules

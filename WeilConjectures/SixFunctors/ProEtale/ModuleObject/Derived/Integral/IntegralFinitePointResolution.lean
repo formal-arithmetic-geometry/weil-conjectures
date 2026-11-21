@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/
 det-prop-scalar-six-direct-image.proof.md, paragraph "Finite free and finitely presented
 coefficient extensions", the displayed sequence for O_E to A.
-(blueprint: lem-s3-integral-finite-point-resolution).
 
 Proof: take the continuous ring homomorphism phi specified by ha. Regard A as an O_E-module
 via phi. It is finite, hence finitely generated. Choose a surjection O_E^r onto A, for

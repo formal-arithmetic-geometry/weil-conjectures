@@ -39,8 +39,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 # Existence of the exceptional inverse image
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-existence/_section.md,
-and det-existence-localizing.proof.md and det-existence-restriction.proof.md
-(blueprint: theorem-exceptional-inverse-image).
+and det-existence-localizing.proof.md and det-existence-restriction.proof.md.
 
 The lower shriek is the existing restriction of the actual compactification composite.
 All categories are full subcategories of the ordinary unbounded module-object derived

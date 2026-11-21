@@ -51,8 +51,7 @@ private def constant_model_iso (T : Scheme.{t}) (Λ : Type u) [CommRing Λ]
 /-- Finitely many locally constant finite-dimensional module sheaves on an affine
 categorically weakly contractible scheme have a common finite clopen free partition.
 
-Source: Stacks Project, Tags 098F and 09C3
-(blueprint: lem-sf-clopen-lisse-partition).
+Source: Stacks Project, Tags 098F and 09C3.
 Proof: for each sheaf form the sieve of arrows on which it is constant with a finite
 model. Constant-model restriction makes it downward closed, and the given trivializing
 cover makes it covering. Intersect these finitely many sieves, using the top sieve for

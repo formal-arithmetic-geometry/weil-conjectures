@@ -62,8 +62,7 @@ public import Mathlib.CategoryTheory.Sites.LocalSite
 /-! # Evaluation and connected components of lisse condensed sheaves
 
 Source: Hemo--Richarz--Scholbach, Section 3, (3.1)--(3.2), Remark 3.2,
-Lemma 4.1 and Proposition 4.3(3)
-(blueprint: def-zl-condensed-lisse-evaluation-model).
+Lemma 4.1 and Proposition 4.3(3).
 -/
 
 @[expose] public noncomputable section
@@ -82,44 +81,42 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (O : Sheaf J Ab.{u + 1}) [MonObj O] [IsCommMonObj O]
 
 /-- The actual commutative section-ring sheaf, reconstructed from the coefficient object.
-Source: HRS Section 3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS Section 3. -/
 abbrev ringSheaf : Sheaf J CommRingCat.{u + 1} :=
   InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} J O
 
 /-- The ordinary unbounded derived category, with ordinary relative derived tensor.
-Source: HRS Section 3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS Section 3. -/
 abbrev D := DerivedCategory (Mod (Sheaf J Ab.{u + 1}) O)
 
 /-- The section ring at the terminal site object, rather than an auxiliary ring parameter.
-Source: HRS Lemma 4.1 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS Lemma 4.1. -/
 abbrev A (U : C) : CommRingCat.{u + 1} := (ringSheaf J O).obj.obj (op U)
 
 /-- The constant-section homomorphism is the actual constant-sheaf adjunction counit.
-Source: HRS (3.2) (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS (3.2). -/
 def scalarMap (U : C) (hU : IsTerminal U) : realizationRing J (A J O U) ⟶ ringSheaf J O :=
   (constantSheafAdj J CommRingCat.{u + 1} hU).counit.app (ringSheaf J O)
 
 /-- The standard localization size for modules over the constant coefficient sheaf.
-Source: Stacks 05RU (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: Stacks 05RU. -/
 instance constantHasDerived (U : C) :
     HasDerivedCategory.{u + 2} (realizationModules J (A J O U)) :=
   HasDerivedCategory.standard _
 
 /-- The standard localization size for sectionwise coefficient modules.
-Source: Stacks 05RU (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: Stacks 05RU. -/
 instance sectionHasDerived : HasDerivedCategory.{u + 2}
     (SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
       (ringSheaf J O))) := HasDerivedCategory.standard _
 
 /-- The universal derived coefficient extension, with its fixed K-flat counit.
-Source: HRS (3.2), Stacks 06YY
-(blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS (3.2), Stacks 06YY. -/
 def extensionModel (U : C) (hU : IsTerminal U) :=
   SheafOfModules.canonicalDerivedChangeOfRingsModel (scalarMap J O U hU)
 
 /-- The canonical functor Q ↦ O tensor over constant A with constant Q.
-Source: HRS (3.2) and Remark 3.2
-(blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS (3.2) and Remark 3.2. -/
 def F (U : C) (hU : IsTerminal U) :
     DerivedCategory (ModuleCat.{u + 1} (A J O U)) ⥤ D J O :=
   let e := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} J O
@@ -128,13 +125,13 @@ def F (U : C) (hU : IsTerminal U) :
     (extensionModel J O U hU).T ⋙ e.inverse.mapDerivedCategory
 
 /-- Actual module evaluation after the sectionwise/internal equivalence.
-Source: HRS Lemma 4.1 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS Lemma 4.1. -/
 def sections (U : C) : Mod (Sheaf J Ab.{u + 1}) O ⥤ ModuleCat.{u + 1} (A J O U) :=
   (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} J O).functor ⋙
     SheafOfModules.evaluation _ (op U)
 
 /-- Module evaluation is additive because it preserves sums of maps on every section.
-Source: HRS Section 3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS Section 3. -/
 instance sectionsAdditive (U : C) : (sections J O U).Additive :=
   letI := Functor.additive_of_preserves_binary_products
     (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} J O).functor
@@ -147,21 +144,21 @@ instance sectionsAdditive (U : C) : (sections J O U).Additive :=
     J O).functor ⋙ SheafOfModules.evaluation _ (op U)).Additive
 
 /-- Derived global sections are the right derived functor of actual module evaluation.
-Source: HRS Lemma 4.1 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS Lemma 4.1. -/
 def G (U : C) : D J O ⥤ DerivedCategory (ModuleCat.{u + 1} (A J O U)) :=
   (sections J O U).rightDerivedFunctor
 
 /-- The full subcategory of dualizable objects, using both triangle identities.
-Source: HRS Definition 3.3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS Definition 3.3. -/
 def lisse : ObjectProperty (D J O) := fun K ↦ IsDualizable K
 
 /-- The full subcategory defined by bounded finite projective representatives.
-Source: HRS Lemma 4.1 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS Lemma 4.1. -/
 def perfect (U : C) : ObjectProperty (DerivedCategory (ModuleCat.{u + 1} (A J O U))) :=
   fun Q ↦ DerivedCategory.IsPerfectRingComplex Q
 
 /-- Preservation of the ordinary Koszul braiding by the strong monoidal realization.
-Source: HRS (3.1) (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS (3.1). -/
 def strongSymmetric (U : C) (hU : IsTerminal U) : Prop :=
   letI := DerivedCategory.braidedCategory' (ModuleCat.{u + 1} (A J O U))
   letI := DerivedCategory.braidedCategory' (Mod (Sheaf J Ab.{u + 1}) O)
@@ -170,8 +167,7 @@ def strongSymmetric (U : C) (hU : IsTerminal U) : Prop :=
 /-- The complete evaluation claim on the fixed canonical functors. Exact means
 triangulated; it imposes no t-exactness. Both natural identifications specify the
 restriction of F and its inverse G on the two actual full subcategories.
-Source: HRS Lemma 4.1(1)--(2)
-(blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS Lemma 4.1(1)--(2). -/
 def Statement (U : C) (hU : IsTerminal U) : Prop :=
   Nonempty (F J O U hU).FullyFaithful ∧
   (∃ (_ : (F J O U hU).CommShift ℤ), (F J O U hU).IsTriangulated) ∧
@@ -189,8 +185,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- Pull a point scalar to the affine terminal object using the monoidal inverse image.
 This is a construction on the underlying abelian sheaves, not a chosen ring homomorphism.
-Source: HRS (3.1)--(3.2), Remark 3.2
-(blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS (3.1)--(3.2), Remark 3.2. -/
 def affineScalarSection (T : Scheme.{u}) (r : condensedScalarRing Λ) :
     Evaluation.A (Scheme.ProEt.topology T) (condensedRingObj Λ T)
       (Scheme.ProEt.mk (𝟙 T)) :=
@@ -209,30 +204,30 @@ def affineScalarSection (T : Scheme.{u}) (r : condensedScalarRing Λ) :
         (op (Scheme.ProEt.mk (𝟙 T))) (ULift.up 1))
 
 /-- Restriction to the genuine profinite slice site, with finite jointly surjective covers.
-Source: HRS Section 3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS Section 3. -/
 abbrev profiniteCoefficient (S : Profinite.{u}) :=
   ((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} S).obj Λ
 
 /-- The restricted coefficient multiplication and unit are induced by restriction.
-Source: HRS Section 3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS Section 3. -/
 instance profiniteCoefficientMon (S : Profinite.{u}) : MonObj (profiniteCoefficient Λ S) :=
   ((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} S).monObjObj Λ
 
 /-- Restriction preserves commutativity of the condensed ring.
-Source: HRS Section 3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS Section 3. -/
 instance profiniteCoefficientComm (S : Profinite.{u}) :
     IsCommMonObj (profiniteCoefficient Λ S) :=
   Functor.isCommMonObj_obj
 
 /-- The relative test functor characterized by the recorded component universal property.
 Its value and all projections are unique up to their unique compatible isomorphism.
-Source: HRS (4.1) (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS (4.1). -/
 def componentTests (T : Scheme.{u}) [IsAffine T] :
     Over (affineComponentSpace T) ⥤ T.ProEt :=
   Classical.choose (component_relative_profinite_site T)
 
 /-- The actual inverse image: left Kan extension along the relative tests and sheafification.
-Source: HRS (4.1) (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+Source: HRS (4.1). -/
 def componentInverse (T : Scheme.{u}) [IsAffine T]
     [(componentTests T).IsContinuous
       ((coherentTopology Profinite.{u}).over (affineComponentSpace T))

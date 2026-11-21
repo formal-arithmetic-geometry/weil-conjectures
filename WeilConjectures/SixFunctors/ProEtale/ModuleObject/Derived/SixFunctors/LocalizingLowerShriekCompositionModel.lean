@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProEtale
 /-!
 # A single composition model on the localizing closure
 
-Source: blueprint proposition-composition-base-change-rf-shriek--1, The composition isomorphism
-(blueprint: lem-sfb-localizing-lower-shriek-composition-model).
+Source: blueprint proposition-composition-base-change-rf-shriek--1, The composition isomorphism.
 -/
 
 @[expose] public section
@@ -145,8 +144,7 @@ private theorem exists_interchangeNatTrans
 unbounded derived category, with the source restricted to the localizing closure.
 No refinement compatibility or preservation witness is part of this assertion.
 
-Source: blueprint proposition-composition-base-change-rf-shriek--1, The composition isomorphism
-(blueprint: lem-sfb-localizing-lower-shriek-composition-model).
+Source: blueprint proposition-composition-base-change-rf-shriek--1, The composition isomorphism.
 
 Proof: take dense compactifications f = jp and g = iq by Nagata. Compactify pi as
 ur with u dense. The proper maps r and q compose and the quasi-compact open maps

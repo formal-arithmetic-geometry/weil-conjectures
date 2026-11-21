@@ -1093,8 +1093,7 @@ private def scalarSquare (n : ℕ) (A : Encoding l E X) :
 
 /-- The integral-limit comparison admits identity-on-sections finite restriction squares.
 Source: blueprint integral-criterion-reductions, coefficient comparison; Stacks 06YY;
-Bhatt--Scholze, the integral-limit coefficient identification
-(blueprint: lem-pe-integral-normalized-restriction-squares).
+Bhatt--Scholze, the integral-limit coefficient identification.
 
 Proof: reconstruct commutative section rings from the monoidal integral-limit comparison.
 Its nth projection is the pulled-back quotient map. Use the normalized finite-discrete

@@ -14,7 +14,6 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient
 
 This is the categorical step after the three scalar complex comparison equations
 have been established. No K-flatness or termwise flatness is needed in this step.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-pasting)
 -/
 
 @[expose] public noncomputable section
@@ -60,8 +59,7 @@ the internal derived tensor counit square. Naturality of the tensor comparison
 and of qTensor moves the two factor comparisons past tensor and localization.
 The assumed derived tensor square then closes the diagram. Cancel the composite
 of the derived scalar, tensor and localization comparison isomorphisms.
-This step requires the three scalar equations, without any flatness assumptions.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-pasting). -/
+This step requires the three scalar equations, without any flatness assumptions. -/
 theorem coefficientScalarTensorRepresentative_paste
     (Z : Scheme.{u}) (d : CoefficientScalarTensorRepresentativeBasicData a Z)
     (h : CoefficientScalarTensorRepresentativeHypotheses a Z d)

@@ -10,7 +10,6 @@ import WeilConjectures.SixFunctors.Sf.SfClopenScalarModuleComparison
 /-! # Chain quotient comparison on a clopen component
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 03EL.
-(blueprint: lem-sf-clopen-scalar-chain-comparison).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -70,7 +69,6 @@ private def sfClopenScalarRestrictionSquare
 
 Source: Stacks Project, sites-modules.tex, Tags 03EL and 03CY;
 sites-cohomology.tex, Tag 06YY.
-(blueprint: lem-sf-clopen-scalar-chain-comparison).
 
 Proof: `d.projection` identifies the two completed scalar actions on a finite module.
 Identity maps on sections therefore define a natural scalar-restriction square. Apply

@@ -587,7 +587,7 @@ For the bounded constructible coefficient class at a finite stage `Λ`, both hal
 of exceptional-adjoint admissibility hold relative to the class: the vanishing half is the
 class-restricted datum `FullCD_cls(p, Λ; 2d)` (blueprint
 `lemma-uniform-bounds-pro-etale-affines--2`) and the existence half is the exceptional adjoint
-relative to the class (blueprint `thm-sf-ambient-adjoint-class`), which restricts to an adjunction
+relative to the class, which restricts to an adjunction
 `Rf_! ⊣ Rf^!` on the bounded constructible complexes of finite Tor amplitude
 (`AlgebraicGeometry.ProEtale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`). The
 unrestricted ambient datum `AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint` is not

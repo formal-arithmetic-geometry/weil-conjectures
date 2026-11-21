@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.FreeParameterScalarMaps
 /-! # Unit normalization of integral reduction and geometric pullback
 
 Source: Stacks 06YY and 07A6; blueprint integral open direct image, Reduction paragraph.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +31,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {U X : Scheme.{u}} (j : U ⟶ X)
 
 /-- The specified inverse scalar mate at exponent n+1.
-Source: Stacks 06YY and 07A6
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YY and 07A6. -/
 abbrev integralReductionPullbackMap (n : ℕ) :
     (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory ⋙
         AdicCompletion.derivedReduction l E U n ⟶
@@ -48,8 +46,7 @@ abbrev integralReductionPullbackMap (n : ℕ) :
           (DerivedNakayama.reductionRing l E (n + 1)) j).inv))
 
 /-- A finite derived scalar/pullback comparison with the prescribed scalar-unit equation.
-Source: Stacks 06YY, 07A6; blueprint integral open direct image, Reduction paragraph
-(auxiliary; not a blueprint node).
+Source: Stacks 06YY, 07A6; blueprint integral open direct image, Reduction paragraph.
 
 Proof: the underived inverse image is exact and strong monoidal, and its coefficient
 identification is an isomorphism. Relative tensor balancing gives the comparison sending

@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.Defs
 
 Let `X` be quasi-compact and quasi-separated, `j : U ⟶ X` a quasi-compact open immersion with
 closed complement `i : Z ⟶ X`, and `B` a sheaf of `R`-algebras on `X_proét`. On `B`-module
-sheaves (blueprint `proposition-extension-zero-restriction-closed-subscheme`):
+sheaves:
 
 * `i^*` preserves all small limits and colimits
   (`ProEtale.RingSheaf.preservesLimitsOfSize_upperStar_of_isCompl`);

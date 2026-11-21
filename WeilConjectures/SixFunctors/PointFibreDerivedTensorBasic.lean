@@ -27,8 +27,7 @@ import Mathlib.Algebra.CharP.CharAndCard
 
 /-! # Derived tensor and the geometric-point fibre
 
-Source: Stacks Project, Tag 07A4, `lemma-pullback-tensor-product`;
-(blueprint: def-sf-point-fibre-tensor-system).
+Source: Stacks Project, Tag 07A4, `lemma-pullback-tensor-product`.
 
 The definitions record genuine strong symmetric monoidal data for all four
 coefficient stages, with prescribed tensor bifunctors and coefficient objects.
@@ -61,8 +60,7 @@ The source tensor and coefficient unit are fixed by `tensor_eq` and `unit_eq`.
 `strong` includes the actual associator and both unitor diagrams, and `symmetry`
 is the braiding square. Canonical representative normalizations are imposed below;
 this structure alone does not claim canonicity.
-Source: Stacks 07A4 and the tensor constraints in the node's final sentence
-(blueprint: def-sf-point-fibre-tensor-system). -/
+Source: Stacks 07A4 and the tensor constraints in the node's final sentence. -/
 structure PointFibreDerivedTensorComparisonData
     {C : Type c} {A : Type e} {B : Type d}
     [Category.{hc} C] [Category.{he} A] [Category.{hd} B]
@@ -86,7 +84,7 @@ structure PointFibreDerivedTensorComparisonData
         (@Functor.LaxMonoidal.μ C _ monoidal B _ _ (I ⋙ F) strong.toLaxMonoidal Y X)
 
 /-- The tensor comparison extracted from the strong structure, in the node's direction.
-Source: Stacks 07A4 (blueprint: def-sf-point-fibre-tensor-system). -/
+Source: Stacks 07A4. -/
 def PointFibreDerivedTensorComparisonData.tensorIso
     {C : Type c} {A : Type e} {B : Type d}
     [Category.{hc} C] [Category.{he} A] [Category.{hd} B]

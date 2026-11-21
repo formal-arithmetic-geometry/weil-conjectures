@@ -12,8 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShr
 # Compact supports with integral, rational, and algebraically closed condensed coefficients
 
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors/sec-n-change/
-sk-prop-qlbar-two-colimit/det-def-sf-operations.md, clause (iv)
-(blueprint: def-sf-condensed-compact-support-values).
+sk-prop-qlbar-two-colimit/det-def-sf-operations.md, clause (iv).
 
 Each value is the native compactification composite `Di_! ⋙ Rp_*` in the ordinary
 uncompleted derived category of modules over the pulled-back condensed coefficient ring.
@@ -38,8 +37,7 @@ variable (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- The integral compact-support value is `Rp_* j_!` on modules over the condensed
 valuation ring of the finite extension E. The compactification is supplied explicitly.
-Source: blueprint theorem-f-shriek-ell-adic-coefficients--4, clause (iv), at Λ = O_E
-(blueprint: def-sf-condensed-compact-support-values). -/
+Source: blueprint theorem-f-shriek-ell-adic-coefficients--4, clause (iv), at Λ = O_E. -/
 def sfIntegralCompactSupportValueCondensed (E : PadicAlgCl.FiniteIntermediateField l)
     (c : Compactification f)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -49,8 +47,7 @@ def sfIntegralCompactSupportValueCondensed (E : PadicAlgCl.FiniteIntermediateFie
   (rightDerivedLowerShriekOfCompactification (Profinite.padicIntegersRingObj l E) c).obj K
 
 /-- The rational compact-support value is `Rp_* j_!` directly on condensed E-modules.
-Source: blueprint theorem-f-shriek-ell-adic-coefficients--4, clause (iv), at Λ = E
-(blueprint: def-sf-condensed-compact-support-values). -/
+Source: blueprint theorem-f-shriek-ell-adic-coefficients--4, clause (iv), at Λ = E. -/
 def sfRationalCompactSupportValueCondensed (E : PadicAlgCl.FiniteIntermediateField l)
     (c : Compactification f)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -61,8 +58,7 @@ def sfRationalCompactSupportValueCondensed (E : PadicAlgCl.FiniteIntermediateFie
 
 /-- The algebraically closed compact-support value is `Rp_* j_!` on condensed Qbar_l-modules.
 The coefficient ring is the native finite-subextension-valued condensed ring.
-Source: blueprint theorem-f-shriek-ell-adic-coefficients--4, clause (iv), at Λ = Qbar_l
-(blueprint: def-sf-condensed-compact-support-values). -/
+Source: blueprint theorem-f-shriek-ell-adic-coefficients--4, clause (iv), at Λ = Qbar_l. -/
 def sfQbarCompactSupportValueCondensed (c : Compactification f)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj l) X))) :

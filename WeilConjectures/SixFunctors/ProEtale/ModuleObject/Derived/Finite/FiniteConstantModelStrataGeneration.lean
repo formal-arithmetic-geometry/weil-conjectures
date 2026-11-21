@@ -32,7 +32,6 @@ attribute [local irreducible] upperStar lowerStar upperStarComp lowerStarComp
 /-- Localization on the successive closed tails places a module in the finite
 extension closure of its restrictions to a fixed stratification.
 Source: Stacks Tags 09AH and 09Y5; blueprint lemma-sections-support-closed-subscheme--3, step 6.
-(blueprint: lem-finite-constant-model-fixed-strata-generation).
 
 Proof: the closed tails have images complementary to the open prefixes. Reducedness
 factors each next tail through the preceding one, and this factor is a closed

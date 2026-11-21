@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 /-! # The coefficient square on complexes
 
 Source: Stacks Project, Tags 07A6 and 0D6D.
-(blueprint: lem-sf-scalar-pull-coefficient-complex-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -36,7 +35,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
   proEtaleRingRestrictionDerivedDirectImage
 
 /-- The ordinary coefficient comparison, conjugate to identity on direct-image sections.
-Source: Stacks 07A6 (blueprint: lem-sf-scalar-pull-coefficient-complex-normalization). -/
+Source: Stacks 07A6. -/
 def scalarPullModule {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V) :
     pbcExtend (a.map V) ⋙ proEtaleRingModulePullback g (S.ring V) (S.ring U) (S.pull g) ≅
@@ -53,7 +52,7 @@ def scalarPullModule {R S : Coefficients.{u}} (a : Change R S)
 attribute [local irreducible] scalarPullModule
 
 /-- The termwise coefficient comparison with the canonical composition identifications.
-Source: Stacks 07A6 (blueprint: lem-sf-scalar-pull-coefficient-complex-normalization). -/
+Source: Stacks 07A6. -/
 def scalarPullComplex {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V) :
     (pbcExtend (a.map V)).mapHomologicalComplex (.up ℤ) ⋙
@@ -134,8 +133,7 @@ private theorem geometric_complexTranspose
 /-- The derived coefficient comparison has the ordinary complex normalization.
 This is a single-variable comparison and contains no tensor product.
 
-Source: Stacks 07A6 and 0D6D, comparison of the derived adjunctions
-(blueprint: lem-sf-scalar-pull-coefficient-complex-normalization).
+Source: Stacks 07A6 and 0D6D, comparison of the derived adjunctions.
 
 Proof: transpose through the two composite scalar/geometric adjunctions.
 The ordinary comparison was defined by the restriction/direct-image isomorphism

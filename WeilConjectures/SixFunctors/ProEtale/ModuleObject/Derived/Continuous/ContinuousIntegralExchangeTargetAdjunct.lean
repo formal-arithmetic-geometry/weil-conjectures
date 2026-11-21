@@ -873,7 +873,6 @@ private lemma integral_target_start
 /-- Normal form for the target side after the bounded f′ adjunction.
 Source: Bhatt--Scholze, Remark 6.8.15; ChangeOfCoefficients.lean derived comparisons
 and the specified unit-square-counit exchange construction.
-(blueprint: lem-weil-pbc-continuous-integral-exchange-target-adjunct).
 
 Proof. Apply the bounded f′ adjunction to the target composite. Counit naturality moves the g′
 pull comparison past the f′ counit. The mate/counit identity replaces the f′ push comparison.

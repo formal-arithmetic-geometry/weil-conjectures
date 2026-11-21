@@ -25,26 +25,26 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The native site size, without an unconstrained maximum universe.
-Source: Stacks 0941 (blueprint: lem-coef-tensor-reduction-evaluation-identification). -/
+Source: Stacks 0941. -/
 instance (priority := 3000) tensorReductionSiteSmall (W : Scheme.{u}) :
     EssentiallySmall.{u + 1} W.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
 
 /-- The locally bijective criterion in the native coefficient universe.
-Source: Stacks 0941 (blueprint: lem-coef-tensor-reduction-evaluation-identification). -/
+Source: Stacks 0941. -/
 instance (priority := 3000) tensorReductionAbLocallyBijective (W : Scheme.{u}) :
     (Scheme.ProEt.topology W).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} W
 
 /-- Literal evaluation with its coefficient and module universes fixed.
-Source: Stacks 0941 (blueprint: lem-coef-tensor-reduction-evaluation-identification). -/
+Source: Stacks 0941. -/
 abbrev tensorReductionLiteralEvaluation (W : Scheme.{u}) (n : ℕ) :
     coefficientSequenceModules.{u, u} l E W ⥤ normalizedDVRModules.{u, u} l E W n :=
   SheafOfModules.systemSequenceEvaluation.{u + 1, u, u + 1}
     (coefficientSequenceCommRingSystem.{u, u} l E W) n
 
 /-- The canonical and generic vertical evaluations agree on sections and scalars.
-Source: Stacks 0941 (blueprint: lem-coef-tensor-reduction-evaluation-identification). -/
+Source: Stacks 0941. -/
 theorem tensorReduction_evaluation_eq (W : Scheme.{u}) (n : ℕ) :
     coefficientSequenceEvaluation.{u, u} l E W n =
       tensorReductionLiteralEvaluation l E W n := by
@@ -63,7 +63,7 @@ theorem tensorReduction_evaluation_eq (W : Scheme.{u}) (n : ℕ) :
       coefficientSequenceModules.{u, u} l E W ⥤ normalizedDVRModules.{u, u} l E W n)) h
 
 /-- Literal vertical evaluation preserves zero morphisms componentwise.
-Source: Stacks 0941 (blueprint: lem-coef-tensor-reduction-evaluation-identification). -/
+Source: Stacks 0941. -/
 instance tensorReductionSystemEvaluation_zero (W : Scheme.{u}) (n : ℕ) :
     (SheafOfModules.systemSequenceEvaluation.{u + 1, u, u + 1}
       (coefficientSequenceCommRingSystem.{u, u} l E W) n).PreservesZeroMorphisms where
@@ -72,7 +72,7 @@ instance tensorReductionSystemEvaluation_zero (W : Scheme.{u}) (n : ℕ) :
     rfl
 
 /-- The evaluation identification, mapped once to complexes.
-Source: Stacks 0941 (blueprint: lem-coef-tensor-reduction-evaluation-identification). -/
+Source: Stacks 0941. -/
 @[irreducible] def tensorReductionEvaluationComplexIso (W : Scheme.{u}) (n : ℕ) :=
   let e₀ := eqToIso (tensorReduction_evaluation_eq l E W n)
   letI := Functor.preservesZeroMorphisms_of_iso e₀

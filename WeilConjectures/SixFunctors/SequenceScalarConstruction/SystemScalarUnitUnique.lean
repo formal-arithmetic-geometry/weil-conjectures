@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarGenerators
 /-! # Generic normalized scalar comparison
 
 Source: Stacks 03D7, 03EK and 06YY.
-(blueprint: lem-sf-system-scalar-unit-unique).
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +29,7 @@ variable {C : Type sa} [Category.{sb} C] {J : GrothendieckTopology C}
   [EssentiallySmall.{sw} C]
 
 /-- Generic scalar comparison extracted from IntegralComparisonSequenceSystems.
-Source: Stacks 03D7, 03EK and 06YY
-(blueprint: lem-sf-system-scalar-unit-unique).
+Source: Stacks 03D7, 03EK and 06YY.
 Proof: Use the existing scalar unit comparison and its tensor equation. The local unit tensor
 generators detect equality of any two candidate maps; evaluate the asserted formulas at scalar
 one to prove uniqueness. -/

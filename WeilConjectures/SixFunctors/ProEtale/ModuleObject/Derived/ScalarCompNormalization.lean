@@ -51,8 +51,7 @@ factorization equations. Apply the derived scalar adjunction to the desired equa
 use the unit identity for the conjugate transitivity map, and move the restriction
 comparison through the counits by naturality. The formulas for the derived scalar units
 then reduce the result to the underived unit identity. No flatness is required.
-The calculation also applies to zero rings and zero complexes.
-(blueprint: lem-sp-scalar-comp-normalization) -/
+The calculation also applies to zero rings and zero complexes. -/
 theorem scalarCompNormalization
     {U : Scheme.{u}} {R S T : Sheaf (ProEt.topology U) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]

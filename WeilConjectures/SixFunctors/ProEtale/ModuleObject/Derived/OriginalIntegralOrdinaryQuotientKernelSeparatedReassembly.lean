@@ -31,7 +31,6 @@ set_option linter.unusedVariables false in
 
 Source: Hemo--Richarz--Scholbach, Propositions 5.1 and 7.6 and Theorem 7.7;
 Bhatt--Scholze, Section 6.1.
-(blueprint: lem-sp-original-integral-ordinary-quotient-kernel-separated-reassembly).
 
 Proof. Constructibility gives a finite stratification and, on each stratum, a
 pro-étale cover on whose charts the pullback of the module is finitely

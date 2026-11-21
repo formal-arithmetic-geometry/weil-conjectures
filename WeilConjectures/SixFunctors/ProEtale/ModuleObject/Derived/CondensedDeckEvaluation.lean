@@ -53,7 +53,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- Pullback of regular sections by an endomorphism over the base.
 Source: adjunction construction of deck pullback, latest blueprint
-`prop-kernel-lisse.proof.md` (blueprint: lem-kernel-condensed-deck-evaluation). -/
+`prop-kernel-lisse.proof.md`. -/
 def regularDeckEnd {X Y : Scheme.{u}} (f : X ⟶ Y) (g : X ⟶ X) (hg : g ≫ f = f) :
     End ((lowerStar Λ f).obj (Mod.regular (condensedRingObj Λ X))) :=
   End.of <| (lowerStar Λ f).map ((upperStarLowerStarAdjunction Λ g).homEquiv _ _
@@ -86,7 +86,7 @@ private theorem deck_counit {X Y : Scheme.{u}} (f : X ⟶ Y) (g : X ⟶ X)
 on the translated sheet.
 
 Source: latest blueprint `prop-kernel-lisse.proof.md`, translation of factors in the
-splitting chart (blueprint: lem-kernel-condensed-deck-evaluation).
+splitting chart.
 
 Proof. The conjugacy of the pullback and pushforward composition comparisons identifies
 the adjoint of the deck pullback with evaluation on the corresponding sheet. Naturality

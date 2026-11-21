@@ -45,7 +45,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additi
 # Localization of coefficients and bounded-below direct image
 
 Source: Hemo--Richarz--Scholbach, Lemmas 5.3(1) and 5.6; Bhatt--Scholze,
-Remark 6.8.15 (blueprint: lem-sfb-localized-direct-image-comparison).
+Remark 6.8.15.
 
 The map is the published coefficient-change mate on the ambient module categories.
 Its flatness argument is supplied by the existing localization theorem, rather than
@@ -70,8 +70,7 @@ from the point. The published `derivedPushHom` is the mate of the canonical rest
 comparison; equivalently it is adjoint to scalar extension of the geometric counit,
 after the canonical pullback/tensor identification. Its required scalar exactness is
 the last assertion of `padicIntegers_invertEll`, not an additional hypothesis.
-Source: HRS Lemma 5.3(1), natural comparison (5.4), and Stacks 07A6, 07A4
-(blueprint: lem-sfb-localized-direct-image-comparison). -/
+Source: HRS Lemma 5.3(1), natural comparison (5.4), and Stacks 07A6, 07A4. -/
 def localizedDirectImageComparison (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -269,8 +268,7 @@ set_option maxHeartbeats 120000 in
 /-- Localization of coefficients commutes with ordinary ambient derived direct image
 for every bounded-below complex; completeness, constructibility and finite Tor
 amplitude are not required.
-Source: HRS Lemmas 5.3(1), 5.6; Bhatt--Scholze Remark 6.8.15
-(blueprint: lem-sfb-localized-direct-image-comparison).
+Source: HRS Lemmas 5.3(1), 5.6; Bhatt--Scholze Remark 6.8.15.
 
 Proof:
 1. Equip E with the norm induced from the fixed algebraic closure. The continuous

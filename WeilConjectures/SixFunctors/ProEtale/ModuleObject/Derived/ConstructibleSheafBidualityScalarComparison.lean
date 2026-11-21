@@ -153,8 +153,7 @@ displayed isomorphism of double duals.  Uncurry each comparison: it is scalar
 extension of evaluation, with the scalar tensorator.  Naturality and symmetry
 therefore give the stated equation for the canonical evaluation transpose.  These
 comparisons can be checked after algebraic closure and descended conservatively;
-no claim of invertibility of either biduality arrow is part of this statement.
-(blueprint: lem-pd-constructible-sheaf-biduality-scalar-comparison) -/
+no claim of invertibility of either biduality arrow is part of this statement. -/
 theorem integral_qbar_biduality_comparison
     [IsIso S.hom] (a : X ⟶ S)
     (E : PadicAlgCl.FiniteIntermediateField ℓ)

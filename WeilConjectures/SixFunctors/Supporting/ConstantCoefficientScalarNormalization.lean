@@ -14,7 +14,7 @@ import WeilConjectures.SmoothPurity.ConstantScalarUnitQuasiIsomorphism.ConstantS
 /-! # Normalized scalar extension of constant coefficient objects
 
 Source: blueprint, ordinary compact cohomology, order 1869, coefficient-object paragraph;
-Bhatt--Scholze, Lemma 6.8.2 (blueprint: lem-weil-constant-coefficient-objects-constructible).
+Bhatt--Scholze, Lemma 6.8.2.
 This supplements the existing constructibility module with the canonical coefficient-unit
 comparison, including its strict-cone normalization, in the intrinsic rational category.
 -/
@@ -51,8 +51,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- The coefficient-unit inverse is fixed by its quotient coordinates and zero shifted
 component, on the regular module itself.
-Source: blueprint order 1869; Bhatt--Scholze, Lemma 6.8.2
-(blueprint: lem-weil-constant-coefficient-objects-constructible).
+Source: blueprint order 1869; Bhatt--Scholze, Lemma 6.8.2.
 Proof: multiplication identifies each finite scalar extension of the regular module
 with the finite target coefficient module. Send s to 1 tensor pi_n(s) in each factor.
 These maps commute with reductions, hence their product is killed by 1-shift. The strict
@@ -91,14 +90,13 @@ theorem constantCoefficientScalarUnit_existsUnique :
   exact huniq η' ⟨(hunit η').mpr hη'.1, hη'.2⟩
 
 /-- The strict scalar unit, with both cone components determined uniquely.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-coefficient-objects-constructible).
+Source: blueprint order 1869.
 -/
 def constantCoefficientScalarUnit :=
   (constantCoefficientScalarUnit_existsUnique l E L ι Y).exists.choose
 
 /-- The normalized coefficient-unit map is a quasi-isomorphism.
-Source: blueprint order 1869; Bhatt--Scholze, Lemma 6.8.2
-(blueprint: lem-weil-constant-coefficient-objects-constructible).
+Source: blueprint order 1869; Bhatt--Scholze, Lemma 6.8.2.
 Proof: the finite scalar tower of the regular module is the target quotient tower.
 Its transitions are surjective, locally by lifting coefficients, and its ordinary limit
 is the completed target ring. The surjective-tower derived-limit theorem identifies the
@@ -121,7 +119,7 @@ theorem constantCoefficientScalarUnit_isIso :
 
 /-- The integral beta is the inverse strict unit after the normalized representative
 comparison. Its inverse sends s to the compatible pi_n(s) and zero shifted coordinate.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-coefficient-objects-constructible).
+Source: blueprint order 1869.
 -/
 def constantCoefficientIntegralScalarIso :
     (integralScalarExtensionOfUniverses l E L ι Y).obj
@@ -134,7 +132,7 @@ def constantCoefficientIntegralScalarIso :
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 
 /-- Lift the normalized beta to the full intrinsic integral category.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-coefficient-objects-constructible).
+Source: blueprint order 1869.
 -/
 def constantCoefficientConstructibleScalarIso :
     (sfConstructibleIntegralScalarExtension 0 l
@@ -149,8 +147,7 @@ private theorem iso_existsUnique_of_source_eq {C : Type*} [Category C]
   exact ⟨e, HEq.rfl, fun e' he' ↦ Iso.ext (eq_of_heq he')⟩
 
 /-- The rational alpha is uniquely the image of the normalized integral beta.
-Source: blueprint order 1869; Bhatt--Scholze, Lemma 6.8.2
-(blueprint: lem-weil-constant-coefficient-objects-constructible).
+Source: blueprint order 1869; Bhatt--Scholze, Lemma 6.8.2.
 Proof: the prescribed rational scalar functor has the integral scalar object formula.
 Use this equality to identify the source, and apply raw rationalization to beta.
 Its inverse is the rationalization of beta inverse. The displayed hom formula determines
@@ -169,7 +166,7 @@ theorem constantCoefficientRationalScalarIso_existsUnique :
       (constantCoefficientConstructibleScalarIso l E L ι Y D hl))
 
 /-- The canonical scalar isomorphism alpha, normalized before rationalization.
-Source: blueprint order 1869 (blueprint: lem-weil-constant-coefficient-objects-constructible).
+Source: blueprint order 1869.
 -/
 def constantCoefficientRationalScalarIso :=
   (constantCoefficientRationalScalarIso_existsUnique l E L ι Y D hl).exists.choose

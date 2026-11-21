@@ -19,7 +19,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ProperBaseChange.Grot
 /-! # Internal Hom and weakly etale coefficient pullback
 
 Source: the localization calculation for internal Hom, blueprint stratum Hom step 3.
-(blueprint: lem-proetale-pullback-internal-hom)
 -/
 
 @[expose] public section
@@ -152,8 +151,7 @@ private lemma pullbackConcreteIhomIso_embedding
     Functor.comp_map, Functor.mapMod, Mod.comap, Mod.homMk] using hc'
 
 /-- Coefficient inverse image is strong monoidal for the relative module tensor.
-Source: blueprint stratum Hom lemma, proof step 3, restriction of evaluation.
-(blueprint: lem-proetale-pullback-internal-hom). -/
+Source: blueprint stratum Hom lemma, proof step 3, restriction of evaluation. -/
 noncomputable instance supportPullback_monoidal
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) : (supportPullback Λ f).Monoidal := by
@@ -178,7 +176,6 @@ private lemma supportPullback_tensorπ_μ
 
 /-- Weakly etale restriction preserves the canonical internal-Hom comparison.
 Source: blueprint stratum Hom lemma, step 3, restriction of sheaf Hom to the local site.
-(blueprint: lem-proetale-pullback-internal-hom)
 
 Proof: identify inverse image along f with restriction to the localized pro-etale site.
 For each further weakly etale Y-scheme V, the over-category of V in that localized site

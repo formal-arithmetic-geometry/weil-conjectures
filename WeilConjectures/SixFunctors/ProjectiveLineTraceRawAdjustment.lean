@@ -64,7 +64,6 @@ attribute [local irreducible] rightDerivedLowerShriekOfCompactification
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The coefficient adjustment for the explicit projective-line trace composites.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, transport through a presentation.
-(auxiliary; not a blueprint node)
 
 Proof: in the module-valued trace-adjustment formula take B to be the shifted Tate
 line on X and L to be the shifted Tate line on the projective line. Both coefficient

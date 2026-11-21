@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Wei
 # Scalar extension of Weil data and of local Frobenii
 
 Let `R → S` be a homomorphism of commutative rings and `Ψ = - ⊗ᴸ_R S` derived scalar extension
-of pro-étale sheaves (blueprint `prose-03-02`). A Weil datum `φ : Lg^* K ⟶ K` over
+of pro-étale sheaves. A Weil datum `φ : Lg^* K ⟶ K` over
 `R` induces the Weil datum
 ```
 φ_S : Lg^* Ψ K ≅ Ψ Lg^* K --Ψ φ--> Ψ K

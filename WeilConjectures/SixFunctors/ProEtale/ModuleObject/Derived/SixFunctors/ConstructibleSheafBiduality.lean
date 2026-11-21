@@ -41,7 +41,6 @@ relative base. The sheaf need not be lisse or locally free on the whole scheme.
 
 Source: Bhatt--Scholze, Lemmas 6.7.13, 6.7.18--6.7.20 and Proposition 6.8.14;
 blueprint sk-prop-sf-biduality-general, coefficient-duality paragraph.
-(blueprint: lem-pd-constructible-sheaf-biduality)
 
 Proof: a scheme of finite type over a field is excellent. Use the dimension
 function normalized by the structure morphism. Bhatt--Scholze 6.7.18 identifies

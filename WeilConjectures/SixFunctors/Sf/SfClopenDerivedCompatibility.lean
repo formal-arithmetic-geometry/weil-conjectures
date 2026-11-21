@@ -58,8 +58,7 @@ private theorem sf_clopen_transition_tensor
 /-- Exact ordinary restriction to a clopen preserves the actual normalized quotient
 complexes, their augmented towers, derived completeness and objectwise residue Tor bounds.
 
-Source: Stacks Project, Tags 06YY, 08TC and 08FZ
-(blueprint: lem-sf-clopen-derived-compatibility).
+Source: Stacks Project, Tags 06YY, 08TC and 08FZ.
 Proof: use the two-component partition into U and its open complement. The finite-clopen
 module equivalence and derived tensor calculus make ordinary restriction exact and
 identify its unbounded derived functor with the corresponding coordinate projection.

@@ -18,7 +18,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBa
 Source: the defining unit-square-counit formula for boundedConstructibleBaseChange.
 Stated for each coefficient ring with bounded constructible pushforwards: `ℚ̄_ℓ`, a finite
 discrete ring `T` (`FiniteDiscreteRingObj`) and a unit ball `O` (`UnitBallRingObj`).
-(blueprint: lem-weil-pbc-bounded-exchange-ambient)
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -252,7 +251,6 @@ attribute [local irreducible] Profinite.padicAlgClCondensedRing
 (ℚ̄_ℓ-coefficient).
 
 Source: the defining three-step formula in MorphismDefs and Mathlib adjunction restriction.
-(blueprint: lem-weil-pbc-bounded-exchange-ambient)
 
 Proof. Apply injectivity of the ambient f-prime inverse hom equivalence. The existing
 bounded exchange adjunct equation gives the restricted square followed by the pulled
@@ -286,7 +284,6 @@ variable (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
 (`T`-coefficient).
 
 Source: the defining three-step formula in MorphismDefs and Mathlib adjunction restriction.
-(blueprint: lem-weil-pbc-bounded-exchange-ambient)
 
 Proof. Apply injectivity of the ambient f-prime inverse hom equivalence. The existing
 bounded exchange adjunct equation gives the restricted square followed by the pulled
@@ -321,7 +318,6 @@ variable {E : Type} [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimension
 (`O`-coefficient).
 
 Source: the defining three-step formula in MorphismDefs and Mathlib adjunction restriction.
-(blueprint: lem-weil-pbc-bounded-exchange-ambient)
 
 Proof. Apply injectivity of the ambient f-prime inverse hom equivalence. The existing
 bounded exchange adjunct equation gives the restricted square followed by the pulled

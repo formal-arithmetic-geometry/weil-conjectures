@@ -21,8 +21,7 @@ import WeilConjectures.SixFunctors.Supporting.ResidueLisseProjectiveModels
 /-!
 # Common projective charts on an affine weakly contractible scheme
 
-Source: Stacks Project, proetale.tex, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8
-(blueprint: lem-fix-affine-common-projective-charts).
+Source: Stacks Project, proetale.tex, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8.
 
 All restrictions below are ordinary uncompleted derived ringed pullbacks. Coefficient
 index zero is exponent one. Finite products of the unit module are finite direct sums.
@@ -86,8 +85,7 @@ private theorem residueConstructible (V : Scheme.{u})
 simultaneous bounded projective sheaf models on a finite clopen cover of an
 already affine weakly contractible scheme.
 
-Source: Stacks Project, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8
-(blueprint: lem-fix-affine-common-projective-charts).
+Source: Stacks Project, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8.
 
 Proof: the residue quotient is a field. The existing bounded-field Tor lemma
 applies to the given residue cohomology bound and supplies a finite Tor bound

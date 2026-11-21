@@ -78,7 +78,7 @@ private theorem finite_torsion_pid_resolution
 /-- A finite integral algebra admits an equal-rank ordinary free resolution.
 
 Source: the finite free and finitely presented coefficient extension paragraph of the
-scalar-six direct-image proof (blueprint: lem-s3-integral-finite-point-resolution-algebraic).
+scalar-six direct-image proof.
 
 The proof chooses a finite free presentation over the DVR, proves that its kernel is finite
 free, and uses the nonzero ell-power annihilator of the target to compare the two ranks. -/

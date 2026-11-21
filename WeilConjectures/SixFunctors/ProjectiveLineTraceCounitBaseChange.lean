@@ -306,7 +306,6 @@ private theorem counit_of_trace_exchange_transport
 Source: blueprint sec-six-functors-basics/sk-prop-sf-cbc/
 prop-asd-smooth-base-change.proof.md, second paragraph, trace and projection squares;
 sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md, counit square.
-(auxiliary; not a blueprint node)
 
 Proof: first take the standard projective-space square. The supplied splitting
 base-change property gives the trace square by its second clause. The ordered proper

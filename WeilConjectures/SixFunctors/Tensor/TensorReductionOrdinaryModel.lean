@@ -64,8 +64,7 @@ The normalized derived tensor comparison therefore computes the same balanced
 rule, as a map of whole coherent systems. This gives the displayed
 whole coherent-system square, before finite evaluation or taking a limit.
 The second clause records the chain-level finite-component normalization; it is
-stronger than a statement merely about finite derived evaluations.
-(blueprint: lem-coef-tensor-reduction-ordinary-model). -/
+stronger than a statement merely about finite derived evaluations. -/
 theorem tensorReduction_ordinaryModel (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)
     (hT : integralOperationsGoodComplex l E W

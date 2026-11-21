@@ -16,7 +16,6 @@ This is the projection and finite-evaluation part of the direct-image Roos
 comparison.  The object and its comparison isomorphism are parameters; the
 statement supplies the simultaneously normalized finite evaluation
 isomorphisms and their actual projection equations.
-(blueprint: stage3-weil-system-direct-image-roos-evaluation)
 -/
 
 @[expose] public noncomputable section

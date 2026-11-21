@@ -23,7 +23,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.Spe
 
 Source: Weil conjectures blueprint, main-20261015, six-functors basics,
 `lemma-lattices-after-finite-stratification`, statement and proof; Bhatt--Scholze, Section 6.8,
-Proposition 6.8.4(6) and Lemma 6.8.13 (blueprint: lemma-lattices-after-finite-stratification).
+Proposition 6.8.4(6) and Lemma 6.8.13.
 
 The coefficients are the pulled condensed topological rings, and modules are internal
 module objects. The lattice inclusion is monic, and its scalar-extension adjoint is an
@@ -161,7 +161,7 @@ is allowed. The nodal-curve example in the source explains why stratification is
 
 Source: blueprint main-20261015, `lemma-lattices-after-finite-stratification`, and its proof
 paragraphs "Sheaf of lattices", stratification, and "Pushing down by the trace";
-Bhatt--Scholze, Section 6.8 (blueprint: lemma-lattices-after-finite-stratification).
+Bhatt--Scholze, Section 6.8.
 
 Proof. The structure map makes X Noetherian. Apply the etale-local lattice theorem,
 then stratify its qcqs etale cover so that its restrictions are finite etale.

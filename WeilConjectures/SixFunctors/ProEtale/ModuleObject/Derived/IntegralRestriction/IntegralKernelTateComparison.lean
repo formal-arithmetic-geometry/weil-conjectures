@@ -23,16 +23,14 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction
 open DiagonalCoefficients
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 /-- The section-module positive twist is the internal integral root line.
-Source: paragraph (1), positive integral Tate convention.
-(blueprint: def-integral-kernel-tate-comparisons). -/
+Source: paragraph (1), positive integral Tate convention. -/
 def positiveTateLineIso (X : Scheme.{u}) :
     tateLine ℓ E X 1 ≅ spIntegralTwist X ℓ E :=
   (InternalAbelianSheafModule.sectionModuleEquivalence
     (Scheme.ProEt.topology X)
     (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X)).unitIso.symm.app _
 /-- The Cartesian integral root line, through the exact module equivalence.
-Source: paragraph (1), Cartesian Tate coefficients.
-(blueprint: def-integral-kernel-tate-comparisons). -/
+Source: paragraph (1), Cartesian Tate coefficients. -/
 def integralLinePullIso {X S : Scheme.{u}} (f : X ⟶ S)
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     [∀ x : S, Invertible (ℓ : S.residueField x)] :
@@ -41,8 +39,7 @@ def integralLinePullIso {X S : Scheme.{u}} (f : X ⟶ S)
   RationalP1.linePullIso _ f _ _ (spIntegralComparison f ℓ E)
     ((RationalP1.adicComparison ℓ f).integral_rational_cartesian E).1
 /-- Pullback of the positive integral Tate line in degree minus two.
-Source: paragraph (1), shifted Cartesian Tate comparison.
-(blueprint: def-integral-kernel-tate-comparisons). -/
+Source: paragraph (1), shifted Cartesian Tate comparison. -/
 def integralShiftedLinePullIso {X S : Scheme.{u}} (f : X ⟶ S)
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     [∀ x : S, Invertible (ℓ : S.residueField x)] :

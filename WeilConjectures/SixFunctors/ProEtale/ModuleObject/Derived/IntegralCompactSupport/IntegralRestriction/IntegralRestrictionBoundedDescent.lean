@@ -67,7 +67,6 @@ private theorem zero_of_open_restrictions
 /-- Boundedness descends along a finite open cover.
 Source: theorem-f-shriek-ell-adic-coefficients, proof steps 1--2; blueprint
 sk-thm-int-restriction-glue.proof.md, paragraph (1).
-(blueprint: lem-int-restriction-bounded-descent).
 
 Proof: Open inverse image is exact, so its derived functor is termwise restriction
 and commutes with every cohomology functor. For each member choose lower and upper

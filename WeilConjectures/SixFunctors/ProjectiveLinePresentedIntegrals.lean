@@ -114,7 +114,6 @@ projective-line integrals, for every supported Ext representative.
 
 Source: blueprint latest, `thm-amb-p1-adjunction.proof.md`, transport of the two projection
 traces; `lem-amb-p1-diagonal-integrals.proof.md`, the section and exact-image comparisons.
-(auxiliary; not a blueprint node)
 
 Proof: write the supported class as the diagonal lift, inverse image of the Ext map, and
 coefficient comparison. The section comparison moves its first two factors across the

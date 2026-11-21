@@ -90,7 +90,6 @@ calculation on the distinguished open component.
 Proof: the component map is the composite of the normalized pullback comparison with
 the derived proper counit.  Both factors commute with the canonical integer
 cochain shifts, and their composite gives the displayed equation.
-(blueprint: lem-sf-refinement-restriction-component-shift).
 -/
 theorem refinementRestriction_component_shift
     (n : ℤ) (M : DerivedCategory (pbcModules X (R.ring X))) :

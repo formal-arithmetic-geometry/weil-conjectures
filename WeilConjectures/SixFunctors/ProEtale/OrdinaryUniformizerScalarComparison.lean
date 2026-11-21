@@ -16,7 +16,6 @@ import all WeilConjectures.SixFunctors.ProEtale.InternalFirstResidueRingIso
 
 Source: integral-models proof (1), constant coefficient comparison; Stacks Project,
 algebraization.tex, Lemma derived-completion-koszul (0A0E), rank-one scalar action.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -589,7 +588,6 @@ Koszul complexes or totalization.
 
 Source: integral-models proof (1), constant coefficient comparison; Stacks Project,
 algebraization.tex, Lemma derived-completion-koszul (0A0E), rank-one scalar action.
-(auxiliary; not a blueprint node).
 
 Proof: use the monoidal constant-sheaf/inverse-image comparison on the integer ring
 and its first quotient. Reconstruct section rings and restrict along AsSmall.down.

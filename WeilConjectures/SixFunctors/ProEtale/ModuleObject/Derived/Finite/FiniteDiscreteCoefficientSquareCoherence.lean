@@ -494,8 +494,7 @@ private theorem pullback_comp {S T U : Scheme.{u}} (f : S ⟶ T) (g : T ⟶ U)
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The canonical derived coefficient pullback comparison commutes with square transport.
-Source: Bhatt--Scholze, Lemma 5.4.1; Proposition 5.3.2
-(blueprint: lem-weil-pbc-finite-discrete-coefficient-square-coherence).
+Source: Bhatt--Scholze, Lemma 5.4.1; Proposition 5.3.2.
 
 Proof in words. Use finiteDiscreteCoefficientRestrictionIso_comp from
 the module `FiniteDiscreteCoefficientRestrictionCoherence` for the specified restriction

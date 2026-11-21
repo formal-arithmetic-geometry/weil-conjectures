@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 The categorical derived unit law and the existing normalized open refinement identity
 identify the actual compactification refinement component with the identity.
-Source: blueprint main-20261015, proposition-construction-independence-rf-shriek, proof step 4
-(blueprint: lem-sfb-compactification-refinement-component-id).
+Source: blueprint main-20261015, proposition-construction-independence-rf-shriek, proof step 4.
 -/
 
 @[expose] public section
@@ -230,8 +229,7 @@ private theorem identityOfNormalized {X Y : Scheme.{u}} {f : X ⟶ Y}
 /-- The canonical refinement component of a dense identity compactification is the identity.
 
 Source: blueprint main-20261015, proposition-construction-independence-rf-shriek, proof step 4,
-and proposition-construction-independence-rf-shriek--7, clause (3)
-(blueprint: lem-sfb-compactification-refinement-component-id).
+and proposition-construction-independence-rf-shriek--7, clause (3).
 
 Proof: The identity clause of localizingRefinement_coherence identifies the normalized
 open refinement arrow with the inverse canonical derived identity comparison. The derived

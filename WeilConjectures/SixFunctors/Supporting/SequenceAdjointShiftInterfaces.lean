@@ -12,8 +12,7 @@ public import WeilConjectures.SixFunctors.Supporting.PurSequenceAdjointResolutio
 
 Source: blueprint main-20261015, `sec-six-functors/sk-thm-sf-package/`
 `fix-prop-coherence.proof.md`, coefficient-comparison sentence; Stacks 0940,
-0941, 03D7, 06YY, 07A6 and 0D6E
-(blueprint: def-sf-sequence-adjoint-shift-interfaces).
+0941, 03D7, 06YY, 07A6 and 0D6E.
 
 The constructions of this node are the published declarations of
 `WeilConjectures.SixFunctors.Supporting.PurSequenceAdjointResolutionShifts`, reexported here

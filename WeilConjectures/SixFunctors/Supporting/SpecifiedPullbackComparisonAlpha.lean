@@ -20,8 +20,7 @@ import WeilConjectures.SixFunctors.Integral.IntegralOperationsPreserveConstructi
 # The specified quotient-cone pullback comparison
 
 Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), and Lemma 6.8.2(1);
-the explicit quotient-cone model for the scalar comparison is agent-formulated
-(blueprint: lem-weil-specified-pullback-comparison-alpha).
+the explicit quotient-cone model for the scalar comparison is agent-formulated.
 
 The level maps, their strict tower, both coordinates of the Roos map, and the
 zero-shifted-coordinate completion map are the existing normalized constructions.
@@ -49,8 +48,7 @@ quotient projections in its other coordinate. The isomorphism e identifies an
 arbitrary good representative P with K; it is not an extra restriction on K.
 
 Source: Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1, Lemmas 6.5.9(4)
-and 6.8.2(1); the explicit scalar-extension model is agent-formulated
-(blueprint: lem-weil-specified-pullback-comparison-alpha).
+and 6.8.2(1); the explicit scalar-extension model is agent-formulated.
 
 Proof:
 1. The finite-free completed scalar comparison makes S_W finite free over R_W.

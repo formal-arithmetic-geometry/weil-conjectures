@@ -134,8 +134,7 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Chain transposition with one K-flat tensor factor
 
-Source: Stacks Project, Cohomology on Sites, Tags 08J9, 06YP, 06YT, 06YU and 0A90
-(blueprint: lem-sfb-hom-kflat-chain-transpose).
+Source: Stacks Project, Cohomology on Sites, Tags 08J9, 06YP, 06YT, 06YU and 0A90.
 The comparison extends the fixed two-K-flat normalization. The first complex is
 arbitrary and unbounded. Hom uses the recorded product projections, and the pure
 sections are the actual sheafification-unit and direct-sum generators.
@@ -161,8 +160,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (T : CoefficientTensorModels.{u, c, v, w} J R S)
 
 /-- The arbitrary-first-factor tensor comparison.
-Source: Stacks 08J9, 06YU and 0A90
-(blueprint: lem-sfb-hom-kflat-chain-transpose). -/
+Source: Stacks 08J9, 06YU and 0A90. -/
 def OneKFlatChainComparison :=
   ∀ (A P : CochainComplex (SheafOfModules.{max c v u}
   ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R)) ℤ),
@@ -172,8 +170,7 @@ def OneKFlatChainComparison :=
     S.tensor.obj (DerivedCategory.Q.obj A, DerivedCategory.Q.obj P))
 
 /-- Agreement with the fixed normalization on two K-flat representatives.
-Source: Stacks 08J9, 06YU and 0A90
-(blueprint: lem-sfb-hom-kflat-chain-transpose). -/
+Source: Stacks 08J9, 06YU and 0A90. -/
 def OneKFlatChainComparisonNormalization
     (comparison : OneKFlatChainComparison.{c, v, u, w} J R S) : Prop :=
   ∀ (A P : CochainComplex (SheafOfModules.{max c v u}
@@ -185,8 +182,7 @@ def OneKFlatChainComparisonNormalization
   comparison A P hP hflat = T.iso J R S A P hA hP
 
 /-- Naturality in the arbitrary first factor and the allowed second factor.
-Source: Stacks 08J9, 06YU and 0A90
-(blueprint: lem-sfb-hom-kflat-chain-transpose). -/
+Source: Stacks 08J9, 06YU and 0A90. -/
 def OneKFlatChainComparisonNaturality
     (comparison : OneKFlatChainComparison.{c, v, u, w} J R S) : Prop :=
   ∀ (A A' P P' : CochainComplex (SheafOfModules.{max c v u}
@@ -204,8 +200,7 @@ def OneKFlatChainComparisonNaturality
       S.tensor.map (Prod.mkHom (DerivedCategory.Q.map a) (DerivedCategory.Q.map b))
 
 /-- Ordinary chain uncurrying into a K-injective target.
-Source: Stacks 08J9, 06YU and 0A90
-(blueprint: lem-sfb-hom-kflat-chain-transpose). -/
+Source: Stacks 08J9, 06YU and 0A90. -/
 def OneKFlatChainUncurry :=
   ∀ (A P : CochainComplex (SheafOfModules.{max c v u}
   ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R)) ℤ),
@@ -218,8 +213,7 @@ def OneKFlatChainUncurry :=
   ((coefficientTotalTensor.{u, c, v} J R).obj (A, P) ⟶ E)
 
 /-- No sign is introduced in the ordered tensor A,P.
-Source: Stacks 08J9, 06YU and 0A90
-(blueprint: lem-sfb-hom-kflat-chain-transpose). -/
+Source: Stacks 08J9, 06YU and 0A90. -/
 def OneKFlatChainUncurryPure
     (uncurry : OneKFlatChainUncurry.{c, v, u} J R) : Prop :=
   ∀ (A P E : CochainComplex (SheafOfModules.{max c v u}
@@ -236,8 +230,7 @@ def OneKFlatChainUncurryPure
       ((f.f n).val.app U x)).app (op (Over.mk (𝟙 U.unop)))).hom y
 
 /-- The fixed derived transpose is represented by this chain map.
-Source: Stacks 08J9, 06YU and 0A90
-(blueprint: lem-sfb-hom-kflat-chain-transpose). -/
+Source: Stacks 08J9, 06YU and 0A90. -/
 def OneKFlatChainTransposeEquation
     (comparison : OneKFlatChainComparison.{c, v, u, w} J R S)
     (uncurry : OneKFlatChainUncurry.{c, v, u} J R) : Prop :=
@@ -258,8 +251,7 @@ def OneKFlatChainTransposeEquation
     DerivedCategory.Q.map (uncurry A P hP hflat E hE f)
 
 /-- Simultaneous chain naturality, with the Hom source contravariant.
-Source: Stacks 08J9, 06YU and 0A90
-(blueprint: lem-sfb-hom-kflat-chain-transpose). -/
+Source: Stacks 08J9, 06YU and 0A90. -/
 def OneKFlatChainUncurryNaturality
     (uncurry : OneKFlatChainUncurry.{c, v, u} J R) : Prop :=
   ∀ (A' A P' P E E' : CochainComplex (SheafOfModules.{max c v u}
@@ -280,8 +272,7 @@ def OneKFlatChainUncurryNaturality
       uncurry A P hP hflat E hE f ≫ e
 
 /-- All tensor representative quasi-isomorphisms become invertible, even in P.
-Source: Stacks 08J9, 06YU and 0A90
-(blueprint: lem-sfb-hom-kflat-chain-transpose). -/
+Source: Stacks 08J9, 06YU and 0A90. -/
 def OneKFlatChainTensorInverts : Prop :=
   ∀ (A A' P P' : CochainComplex (SheafOfModules.{max c v u}
   ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R)) ℤ)
@@ -295,8 +286,7 @@ def OneKFlatChainTensorInverts : Prop :=
     ((coefficientTotalTensor.{u, c, v} J R).map (Prod.mkHom a b)))
 
 /-- Hom representative quasi-isomorphisms become invertible.
-Source: Stacks 08J9, 06YU and 0A90
-(blueprint: lem-sfb-hom-kflat-chain-transpose). -/
+Source: Stacks 08J9, 06YU and 0A90. -/
 def OneKFlatChainHomInverts : Prop :=
   ∀ (P P' E E' : CochainComplex (SheafOfModules.{max c v u}
   ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R)) ℤ)
@@ -311,8 +301,7 @@ def OneKFlatChainHomInverts : Prop :=
       ((homComplexFunctor.{c, v, max c v u, max c v u} (R := R)).obj (op P')).map e))
 
 /-- The Hom identification used in transpose_eq is itself an isomorphism.
-Source: Stacks 08J9, 06YU and 0A90
-(blueprint: lem-sfb-hom-kflat-chain-transpose). -/
+Source: Stacks 08J9, 06YU and 0A90. -/
 def OneKFlatChainHomComparisonIsIso : Prop :=
   ∀ (P E : CochainComplex (SheafOfModules.{max c v u}
   ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R)) ℤ),
@@ -325,7 +314,7 @@ def OneKFlatChainHomComparisonIsIso : Prop :=
 /-- The simultaneous one-K-flat comparison and its chain representatives, with their
 normalization and all representative compatibility equations. This structure only
 packages the conclusion; it supplies no additional hypothesis on a complex.
-Source: Stacks 08J9, 06YU and 0A90 (blueprint: lem-sfb-hom-kflat-chain-transpose). -/
+Source: Stacks 08J9, 06YU and 0A90. -/
 structure OneKFlatChainTransposeData where
   /-- The arbitrary-first-factor tensor comparison. -/
   comparison : OneKFlatChainComparison.{c, v, u, w} J R S

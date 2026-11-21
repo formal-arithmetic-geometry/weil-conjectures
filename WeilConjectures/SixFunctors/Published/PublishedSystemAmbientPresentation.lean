@@ -20,8 +20,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 /-- The ambient functors and comparisons with their published sequence-category types.
-Source: Stacks 03D3, 03EL, 07A4 and 07A7
-(blueprint: def-sf-published-system-ambient-presentation). -/
+Source: Stacks 03D3, 03EL, 07A4 and 07A7. -/
 structure PublishedSystemAmbientData where
   pull : ∀ {X Y : Scheme.{u}} (_f : X ⟶ Y),
     coefficientSequenceDerived l E Y ⥤ coefficientSequenceDerived l E X
@@ -31,8 +30,7 @@ structure PublishedSystemAmbientData where
   comp : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),
     pull g ⋙ pull f ≅ pull (f ≫ g)
 /-- Record the existing ambient constructions; no additional choices are made.
-Source: AmbientPullbackTensor.derivedPull, tensorData and derivedComp, Stacks 07A4
-(blueprint: def-sf-published-system-ambient-presentation). -/
+Source: AmbientPullbackTensor.derivedPull, tensorData and derivedComp, Stacks 07A4. -/
 def publishedSystemAmbientData : PublishedSystemAmbientData l E where
   pull f := AmbientPullbackTensor.derivedPull l E f none
   tensor {X Y} f :=
@@ -61,15 +59,13 @@ def publishedSystemAmbientData : PublishedSystemAmbientData l E where
   comp f g := AmbientPullbackTensor.derivedComp l E f g none
 
 /-- The published inverse image is the pullback recorded by the ambient package.
-Source: Stacks 015F and sequence_derived_eq
-(blueprint: def-sf-published-system-ambient-presentation).
+Source: Stacks 015F and sequence_derived_eq.
 Proof: the package pull field is derivedPull itself. Apply sequence_derived_eq. -/
 theorem publishedSystemAmbientPull_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pullbackTensorSequenceDerived l E f = (publishedSystemAmbientData l E).pull f := by
   exact sequence_derived_eq l E f
 /-- The specified functor identification, recorded with its sequence-category type.
-Source: Stacks 015F and publishedSystemAmbientPull_eq
-(blueprint: def-sf-published-system-ambient-presentation). -/
+Source: Stacks 015F and publishedSystemAmbientPull_eq. -/
 @[irreducible] def publishedSystemAmbientPullIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pullbackTensorSequenceDerived l E f ≅ (publishedSystemAmbientData l E).pull f :=
   eqToIso (publishedSystemAmbientPull_eq l E f)

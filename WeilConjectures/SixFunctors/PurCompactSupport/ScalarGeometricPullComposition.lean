@@ -11,7 +11,6 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! Scalar extension and the geometric pullback compositor.
-(blueprint: lem-sf-scalar-geometric-pull-composition).
 -/
 
 @[expose] public noncomputable section
@@ -190,7 +189,6 @@ private theorem actionIso_derived {R S : Coefficients.{u}} (a : Change R S)
 /-- Scalar/pullback balancing respects composition of two geometric pullbacks.
 
 Source: Stacks Project, Tags 0D6D and 07A6.
-(blueprint: lem-sf-scalar-geometric-pull-composition).
 Proof: first take geometric mates of the ordinary inverse-image/restriction
 squares. Restriction of scalars does not change sections, so its normalized
 comparison with direct image is identity on sections. Both direct-image

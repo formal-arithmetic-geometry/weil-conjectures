@@ -278,7 +278,6 @@ private theorem derived_invertible
 /-- Canonical derived open restriction and its representative normalization.
 Source: blueprint composition isomorphism; Canonicity and associativity;
 Stacks Tags 08BJ, 070I, 070Y and 0D6E.
-(blueprint: lem-sfb-derived-open-restriction-normalization).
 
 Proof: The module open-pasting construction betaMap is the mate of the canonical pullback
 square: betaMap_formalism and formalism_sqIso identify it with directImageOpenRestriction.

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 /-! # Integral diagonal-kernel adjunction for a projective line
 
 Source: current blueprint, sk-thm-int-restriction-line.proof.md, paragraph (1).
-(blueprint: lem-sfb-integral-projective-line-adjunction).
 -/
 
 @[expose] public noncomputable section
@@ -66,7 +65,6 @@ private theorem diagonalIntegral {C : Type*} [Category C] [MonoidalCategory C]
 adjunction between the two specified restricted functors.
 
 Source: sk-thm-int-restriction-line.proof.md, paragraph (1).
-(blueprint: lem-sfb-integral-projective-line-adjunction).
 
 Proof: write P = P1_Y and W = P times_Y P. Properness of both projections
 and exactness of closed direct image identify the diagonal support with

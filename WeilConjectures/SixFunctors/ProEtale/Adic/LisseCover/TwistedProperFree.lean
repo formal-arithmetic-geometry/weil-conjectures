@@ -12,7 +12,7 @@ public import Mathlib.LinearAlgebra.Finsupp.Defs
 # Free modules on twisted sheaves of sets
 
 This file contains the linear-algebra input of proper base change in degree zero for twisted
-sheaves of sets (blueprint `proposition-proper-base-change-degree-zero`).
+sheaves of sets.
 
 Let `f : V ⟶ Y` be a morphism of schemes and `c` a descent cocycle on the constant sheaf `S_V`
 (`AlgebraicGeometry.IsDescentCocycle`). For a semiring `Λ`, the bijections `c z` induce
@@ -77,8 +77,7 @@ namespace IsDescentCocycle
 
 /-- **The free cocycle.** The `Λ`-linear automorphism `Finsupp.mapDomain (c z)` of the free
 module `S →₀ Λ` induced by the bijection `c z`; these form the descent cocycle of the sheaf of
-free `Λ`-modules on the twisted sheaf of sets defined by `c`
-(blueprint `proposition-proper-base-change-degree-zero`). -/
+free `Λ`-modules on the twisted sheaf of sets defined by `c`. -/
 noncomputable def freeCocycle (hc : IsDescentCocycle f c) (Λ : Type*) [Semiring Λ]
     (z : ↥(pullback f f)) : (S →₀ Λ) ≃ₗ[Λ] (S →₀ Λ) :=
   Finsupp.domLCongr (Equiv.ofBijective (c z) (hc.bijective z))
@@ -88,8 +87,7 @@ lemma coe_freeCocycle (hc : IsDescentCocycle f c) (Λ : Type*) [Semiring Λ]
   funext m
   simp [freeCocycle, Finsupp.equivMapDomain_eq_mapDomain]
 
-/-- **The free cocycle is a descent cocycle** (blueprint
-`proposition-proper-base-change-degree-zero`). -/
+/-- **The free cocycle is a descent cocycle**. -/
 lemma free (hc : IsDescentCocycle f c) (Λ : Type*) [Semiring Λ] :
     IsDescentCocycle f (fun z ↦ ⇑(hc.freeCocycle Λ z)) where
   isLocallyConstant m := by
@@ -108,8 +106,7 @@ lemma free (hc : IsDescentCocycle f c) (Λ : Type*) [Semiring Λ] :
 end IsDescentCocycle
 
 /-- A twisted section `σ` of the sheaf of sets defined by `c` gives the twisted section
-`x ↦ [σ x]` of the sheaf of free `Λ`-modules defined by the free cocycle
-(blueprint `proposition-proper-base-change-degree-zero`). -/
+`x ↦ [σ x]` of the sheaf of free `Λ`-modules defined by the free cocycle. -/
 lemma IsTwistedSection.single_one (hc : IsDescentCocycle f c) (Λ : Type*) [Semiring Λ]
     {T : Scheme.{u}} {π : T ⟶ Y} {σ : ↥(pullback f π) → S} (hσ : IsTwistedSection f c π σ) :
     IsTwistedSection f (fun z ↦ ⇑(hc.freeCocycle Λ z)) π (fun x ↦ Finsupp.single (σ x) 1) :=
@@ -118,8 +115,7 @@ lemma IsTwistedSection.single_one (hc : IsDescentCocycle f c) (Λ : Type*) [Semi
     rw [IsDescentCocycle.coe_freeCocycle, Finsupp.mapDomain_single, ← hσ.2 w]⟩
 
 /-- A twisted section of the sheaf of free `Λ`-modules defined by the free cocycle all of whose
-values are basis vectors `[s]` comes from a twisted section of the sheaf of sets defined by `c`
-(blueprint `proposition-proper-base-change-degree-zero`). -/
+values are basis vectors `[s]` comes from a twisted section of the sheaf of sets defined by `c`. -/
 lemma IsTwistedSection.exists_of_free (hc : IsDescentCocycle f c) {Λ : Type*} [Semiring Λ]
     [Nontrivial Λ] {T : Scheme.{u}} {π : T ⟶ Y} {τ : ↥(pullback f π) → S →₀ Λ}
     (hτ : IsTwistedSection f (fun z ↦ ⇑(hc.freeCocycle Λ z)) π τ)
@@ -145,7 +141,7 @@ lemma IsTwistedSection.exists_of_free (hc : IsDescentCocycle f c) {Λ : Type*} [
 quasi-compact and `π : T ⟶ Y`. For a locally constant function `τ` on `V ×_Y T` which takes the
 same value at the two components of every point of `(V ×_Y T) ×_T (V ×_Y T)`, the image in `T`
 of every level set of `τ` is open and closed, open subsets descending along the pro-étale cover
-`V ×_Y T ⟶ T` (blueprint `proposition-proper-base-change-degree-zero`). -/
+`V ×_Y T ⟶ T`. -/
 lemma isClopen_image_fiber_of_isLocallyConstant [WeaklyEtale f] [Surjective f]
     [QuasiCompact f] {T : Scheme.{u}} (π : T ⟶ Y) {A : Type*}
     (τ : ↥(pullback f π) → A) (hτ : IsLocallyConstant τ)

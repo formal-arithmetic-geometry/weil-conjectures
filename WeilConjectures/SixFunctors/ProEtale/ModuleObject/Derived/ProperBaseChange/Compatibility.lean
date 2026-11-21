@@ -143,7 +143,6 @@ private theorem coefficientDerivedCoproducts (Λ : Sheaf
 -- The explicit mate and coproduct comparison are elaborated in several large derived categories.
 /-- **(Push)** for `E ⊆ ℚ̄_ℓ` is invertible at every bounded-below complex when `f` is proper.
 Source: the finite-support coefficient model and bounded-below coproduct continuity.
-(blueprint: lem-weil-pbc-condensed-qbar-bounded-push)
 
 Proof: choose the compatible scalar-basis decompositions of both extension units. The mate
 of the canonical push comparison is the inverse restriction/pushforward isomorphism.

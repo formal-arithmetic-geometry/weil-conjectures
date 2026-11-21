@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.InternalDiscreteQuotientComparison
 /-! # A global generator of the constant residue kernel
 
 Source: integral-models proof (1), Stacks Tags 099I, 099L and 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -48,7 +47,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 Source: integral-models proof (1); Stacks Tags 099I and 099L; the coefficient
 integers are a discrete valuation ring.
-(auxiliary; not a blueprint node).
 
 Proof: compare the actual discrete quotient with the standard constant quotient
 using discrete_quotient_comparison. The first coefficient ideal lifts to the ideal

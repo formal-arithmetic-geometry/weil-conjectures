@@ -315,7 +315,6 @@ private theorem local_limit
 
 /-- Convergence of individual sections of a finitely presented integral module.
 Source: Hemo--Richarz--Scholbach, Proposition 5.1; Bhatt--Scholze, Section 6.1.
-(blueprint: lem-sp-original-integral-ordinary-quotient-compatible-limit-finite-presentation).
 Proof: cover the test U by w-contractible affine pro-etale tests. Weakly etale
 pullback is restriction and preserves the finite presentation. The regular
 coefficient module on each such test is projective, and its endomorphism ring is

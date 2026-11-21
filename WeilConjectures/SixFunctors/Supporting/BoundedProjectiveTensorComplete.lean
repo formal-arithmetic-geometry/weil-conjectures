@@ -118,8 +118,7 @@ import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorMo
 /-! # Canonical completeness of bounded projective sheaf tensors
 
 Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Definition 3.4.10 and Proposition 3.5.1;
-Stacks Project, Tags 099M and 0941
-(blueprint: lem-fix-bounded-projective-tensor-complete).
+Stacks Project, Tags 099M and 0941.
 
 The completion and its quotient augmentation are the existing global-site specialization
 of `IntegralOnSlice`. Finite products of the coefficient unit are finite sums in this
@@ -324,8 +323,7 @@ end FlatRetracts
 
 /-- The canonical derived quotient completion fixes bounded complexes of finite-free
 sheaf retracts and their ordinary total tensor, including its derived representative.
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Stacks, Tags 099M, 0941 and 06YQ
-(blueprint: lem-fix-bounded-projective-tensor-complete).
+Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Stacks, Tags 099M, 0941 and 06YQ.
 
 Proof:
 1. Tensor the specified inclusions and retractions with any module sheaf. The resulting

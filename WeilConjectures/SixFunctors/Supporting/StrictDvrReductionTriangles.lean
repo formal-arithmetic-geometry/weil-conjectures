@@ -90,7 +90,6 @@ import WeilConjectures.SixFunctors.Supporting.StrictDvrFlatTensorSequence
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0942, lemma-bounded, proof (1),
 specialized to the constant DVR coefficient quotients.
-(blueprint: lem-sf-strict-dvr-reduction-triangles)
 
 The index `n : ℕ` always means exponent `n + 1`. In particular index zero is the
 residue coefficient. The completed ring, finite scalar extension, scalar restriction,
@@ -136,16 +135,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
 
 /-- The quotient coefficient itself, as a module over the completion via its projection.
-Source: Stacks 0942, proof (1), coefficient terms
-(blueprint: lem-sf-strict-dvr-reduction-triangles). -/
+Source: Stacks 0942, proof (1), coefficient terms. -/
 abbrev strictDvrCoefficientModule (n : ℕ) : scalarReductionSource l E X :=
   (scalarReductionRestriction l E X n).obj
     (SheafOfModules.unit (integralCoefficientSheaf l E X n))
 
 /-- A constant coefficient section represented by an integer of the coefficient field.
 This is the unit of the recorded constant-sheaf sheafification applied to its quotient.
-Source: Stacks 0942, proof (1), DVR kernel identification
-(blueprint: lem-sf-strict-dvr-reduction-triangles). -/
+Source: Stacks 0942, proof (1), DVR kernel identification. -/
 def strictDvrConstantSection (n : ℕ) (U : X.ProEtᵒᵖ)
     (r : Padic.coefficientExtensionIntegers l E) :
     (strictDvrCoefficientModule l E X n).val.obj U :=
@@ -156,8 +153,7 @@ def strictDvrConstantSection (n : ℕ) (U : X.ProEtᵒᵖ)
 
 /-- The object `Res_{π_n}(K ⊗ᴸ_B C_n)`, using the existing universal derived extension
 and exact derived restriction, at exponent `n + 1`.
-Source: Stacks 06YY and 0942, proof (1)
-(blueprint: lem-sf-strict-dvr-reduction-triangles). -/
+Source: Stacks 06YY and 0942, proof (1). -/
 abbrev strictDvrDerivedReduction
     (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :=
   (scalarReductionDerivedRestriction l E X n).obj
@@ -165,8 +161,7 @@ abbrev strictDvrDerivedReduction
 
 /-- Simultaneous comparison normalized by the universal scalar-extension counit on
 the same K-flat complex and the same isomorphism to `K` at every level.
-Source: Stacks 06YT, 06YY and 0942, proof (1)
-(blueprint: lem-sf-strict-dvr-reduction-triangles).
+Source: Stacks 06YT, 06YY and 0942, proof (1).
 The identity resolution of `P` supplies its K-flat computation; the final map is
 the functorial image of `e`, so no level-dependent resolution is chosen. -/
 def strictDvrReductionComparison
@@ -186,8 +181,7 @@ def strictDvrReductionComparison
 /-- The canonical derived quotient transition, expressed in the fixed simultaneous
 K-flat computation. The chain map is the published `id ⊗ q_n`, characterized on
 sheafified pure tensors; both changes of coordinates are the universal comparisons.
-Source: Stacks 06YT, 06YY and 0942, proof (1)
-(blueprint: lem-sf-strict-dvr-reduction-triangles).
+Source: Stacks 06YT, 06YY and 0942, proof (1).
 Resolution independence is the quotient-transition clause of
 `unrestrictedReductionTowerWellDefined`. -/
 def strictDvrDerivedQuotientTransition
@@ -204,8 +198,7 @@ def strictDvrDerivedQuotientTransition
 
 /-- A single flat-term K-flat representative computes every positive coefficient
 reduction with the actual residue-kernel chain maps and canonical quotient transitions.
-Source: Stacks 0942, lemma-bounded, proof (1), DVR specialization
-(blueprint: lem-sf-strict-dvr-reduction-triangles).
+Source: Stacks 0942, lemma-bounded, proof (1), DVR specialization.
 
 Proof:
 1. Represent K by G and resolve G once by a flat-term K-flat P (lem-pc-kflat-resolution).

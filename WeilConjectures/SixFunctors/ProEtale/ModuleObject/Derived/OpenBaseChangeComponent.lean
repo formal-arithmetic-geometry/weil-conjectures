@@ -17,7 +17,6 @@ sec-brown-construction/sec-construction-of-rf/sk-thm-sf-comp-composition/
 det-sf-comp-composition-base-change.md,
 Clause (1); proof (1), first sentence: the common right adjoint
 `u_* j'^* ≅ j^* a_*` and its section normalization.
-(blueprint: stage3-sfb-open-base-change-component-mono)
 -/
 set_option autoImplicit false
 @[expose] public section
@@ -29,7 +28,7 @@ open AlgebraicGeometry Scheme
 
 /-- The canonical mate comparison for open base change of condensed module objects.
 Source: blueprint proof (1), first sentence: the common right adjoint and its
-section normalization (blueprint: stage3-sfb-open-base-change-component-mono).
+section normalization.
 
 The mate is formed from the specified upper-star compositors and the pullback
 square; it is the actual natural isomorphism used by the normalized section formula. -/
@@ -49,7 +48,7 @@ noncomputable def openBaseChangeCanonical
 
 /-- The open base-change mate has the canonical section normalization.
 Source: blueprint proof (1), first sentence: the common right adjoint and its
-section normalization (blueprint: stage3-sfb-open-base-change-component-mono).
+section normalization.
 The coprojections and section arrow are the specified module constructions, so
 the displayed equation fixes the mate rather than allowing arbitrary section isos.
 

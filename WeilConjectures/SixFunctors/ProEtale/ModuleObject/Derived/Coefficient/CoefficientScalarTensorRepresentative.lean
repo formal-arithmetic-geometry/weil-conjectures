@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 
 Source: Stacks Project, Tags 03EK, 03EL, 06YY, 07A4 and 07A6;
 steps 1--3 of `lem-sfb-coefficient-scalar-tensor-realization`.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative).
 -/
 
 @[expose] public noncomputable section
@@ -46,7 +45,6 @@ Only the representative equation is asserted; no scalar pair or comparison is co
 
 Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL; Cohomology on Sites,
 Tags 07A4 and 07A6; step 3 of coefficient scalar section realization.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative).
 
 Proof: first take two internal complexes whose reconstructed terms are flat and whose
 reconstructions are K-flat. Precompose the two ordinary scalar tensor comparisons with

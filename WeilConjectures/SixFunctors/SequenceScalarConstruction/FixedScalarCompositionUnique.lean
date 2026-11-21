@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.SequenceScalarConstruction.SystemScalarPackag
 /-! # Generic normalized scalar comparison
 
 Source: Stacks 03D7, 03EK and 06YY.
-(blueprint: lem-sf-fixed-scalar-composition-unique).
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +29,7 @@ variable {C : Type sa} [Category.{sb} C] {J : GrothendieckTopology C}
   [EssentiallySmall.{sw} C]
 
 /-- Normalized scalar comparison for fixed cochain models.
-Source: Stacks 03D7, 03EK and 06YY
-(blueprint: lem-sf-fixed-scalar-composition-unique).
+Source: Stacks 03D7, 03EK and 06YY.
 Proof: construct the normalized scalar packages with exactly these cochain models.
 Apply the package-level normalized comparison and its uniqueness. Transport its
 conclusion along the recorded model equalities. This proves the statement before

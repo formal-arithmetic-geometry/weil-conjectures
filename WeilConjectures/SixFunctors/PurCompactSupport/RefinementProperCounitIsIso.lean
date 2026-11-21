@@ -174,7 +174,6 @@ The proper counit becomes invertible after pulling back along the distinguished
 open immersion because the refinement fibre product decomposes into that clopen
 section and its complement; extension by zero has zero restriction to the
 complement and the counit is invertible on the section.
-(blueprint: lem-sf-refinement-open-restriction-proper-counit-is-iso).
 -/
 theorem refinementProperCounit_isIso
     (M : DerivedCategory (pbcModules X (R.ring X))) :
@@ -241,7 +240,6 @@ construction, with the pullback compositor of Tags 03D8 and 0D6D.
 The specified component is exactly the compositor followed by the pulled-back
 proper counit; this is the formal factorization used to reduce the component
 isomorphism to the geometric counit calculation.
-(blueprint: lem-sf-refinement-open-restriction-factorization).
 -/
 theorem refinementRestriction_factorization
     (M : DerivedCategory (pbcModules X (R.ring X))) :

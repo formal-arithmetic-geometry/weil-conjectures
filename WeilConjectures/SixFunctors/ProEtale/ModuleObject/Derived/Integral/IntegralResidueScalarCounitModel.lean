@@ -224,7 +224,6 @@ computes the ordinary pullback model map. No derived tensor comparison occurs.
 Source: Bhatt--Scholze, Remark 6.8.15 and the tensor-pullback identity in the
 proof of Lemma 6.5.9(5), p. 51. The counit normalization below is the explicit
 formal comparison argument, rather than a separately stated lemma of the paper.
-(blueprint: new-integral-residue-scalar-counit-model)
 
 Proof. Write F for integral pullback, G for residue pullback, S for restriction,
 and T for extension of scalars; append subscripts X and Y for the sites. Write

@@ -15,8 +15,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsMat
 
 /-! # Compact-support base change for isomorphic condensed coefficients
 
-Source: latest blueprint, lem-fd-base-change.proof.md, compact-support paragraph
-(blueprint: lem-fd-condensed-compact-support-base-change).
+Source: latest blueprint, lem-fd-base-change.proof.md, compact-support paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -112,8 +111,7 @@ private theorem transport_compactSupport_baseChange
 of the chosen compactifications and of an isomorphic presentation of E or Qlbar.
 
 Source: latest blueprint, sec-fourier-transform/sk-thm-inversion/
-lem-fd-base-change.proof.md, compact-support pushforward paragraph
-(blueprint: lem-fd-condensed-compact-support-base-change).
+lem-fd-base-change.proof.md, compact-support pushforward paragraph.
 
 Proof: For the canonical coefficient rings the compact-support base-change map
 is an isomorphism on the bounded constructible category. Evaluate it on the given

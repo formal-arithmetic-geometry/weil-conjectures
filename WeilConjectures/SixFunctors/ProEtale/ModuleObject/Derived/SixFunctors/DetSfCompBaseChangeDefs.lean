@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShr
 
 Source: blueprint proposition-composition-base-change-rf-shriek--4, definitions used in clauses
 (1)--(3). These are the existing constructions, separated so refinement pasting can use their exact
-maps. (blueprint: def-sfb-compact-support-base-change-maps).
+maps.
 -/
 
 @[expose] public section
@@ -31,8 +31,7 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace CategoryTheory.Functor
 
 /-- The two-factor exchange with its component API.
-Source: blueprint beta is the proper exchange followed by the image of the open comparison.
-(blueprint: def-sfb-compact-support-base-change-maps). -/
+Source: blueprint beta is the proper exchange followed by the image of the open comparison. -/
 structure CompactSupportExchangeData
     {A B C D E F : Type*} [Category A] [Category B] [Category C]
     [Category D] [Category E] [Category F]
@@ -44,8 +43,7 @@ structure CompactSupportExchangeData
   isIso (K : A) : IsIso (b.app (J.obj K)) → IsIso (map.app K)
 
 /-- Construct the two-factor exchange and prove its component properties.
-Source: the displayed proper/open composite defining beta.
-(blueprint: def-sfb-compact-support-base-change-maps). -/
+Source: the displayed proper/open composite defining beta. -/
 def compactSupportExchangeData
     {A B C D E F : Type*} [Category A] [Category B] [Category C]
     [Category D] [Category E] [Category F]
@@ -88,8 +86,7 @@ noncomputable abbrev detSfCompactSupport
   rightDerivedLowerShriekOfCompactification Λ d
 
 /-- The specified Cartesian realization of the literal proper pullback square.
-Source: blueprint proposition-composition-base-change-rf-shriek--4, proper exchange.
-(blueprint: def-sfb-compact-support-base-change-maps). -/
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proper exchange. -/
 def detSfProperBaseChangeSquare
     {Z Y Y' : Scheme.{u}} (p : Z ⟶ Y) (v : Y' ⟶ Y) :
     ChosenCartesianSquare (pullback.fst p v) (pullback.snd p v) p v :=
@@ -195,8 +192,7 @@ attribute [local irreducible] derivedOpenImmersionLowerShriekUpperStarAdjunction
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Package the specified map with its component properties.
-Source: blueprint proposition-composition-base-change-rf-shriek--4, displayed beta.
-(blueprint: def-sfb-compact-support-base-change-maps). -/
+Source: blueprint proposition-composition-base-change-rf-shriek--4, displayed beta. -/
 noncomputable def detSfCompactSupportExchangeData
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

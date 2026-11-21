@@ -176,8 +176,7 @@ import all Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-! # Normalized open-extension Roos comparison
 
 Source: Stacks Project, proetale.tex, Tag 09BP (lemma-j-shriek-limits), and the
-normalized open-factor argument of the six-functors blueprint
-(blueprint: lem-sf-open-roos-extension-comparison).
+normalized open-factor argument of the six-functors blueprint.
 
 The open site is presented as the slice at U in X.ProEt, exactly as in
 ProEt.weaklyEtale_localization. Its coefficient sheaf is the restriction of B_X;
@@ -204,14 +203,14 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace WeilConjectures.SfOpenRoos
 
 /-- Canonical sheafification on the open slice in the fixed module universe.
-Source: Stacks 00XZ (blueprint: lem-sf-open-roos-extension-comparison). -/
+Source: Stacks 00XZ. -/
 instance sliceAbSheafify (X : Scheme.{t}) (U : X.ProEt) :
     HasSheafify ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{max u (t + 1)} :=
   letI : EssentiallySmall.{max u (t + 1)} (Over U) := essentiallySmallSelf _
   hasSheafifyEssentiallySmallSite _ _
 
 /-- The canonical local-bijection description of sheafification on the open slice.
-Source: Stacks 00XZ (blueprint: lem-sf-open-roos-extension-comparison). -/
+Source: Stacks 00XZ. -/
 instance sliceAbLocallyBijective (X : Scheme.{t}) (U : X.ProEt) :
     ((Scheme.ProEt.topology X).over U).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} :=
@@ -222,41 +221,41 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{t}) (U : X.ProEt)
 
 /-- The ambient modules over the actual completed ring sheaf.
-Source: Stacks 09BP (blueprint: lem-sf-open-roos-extension-comparison). -/
+Source: Stacks 09BP. -/
 abbrev modulesX :=
   ringedSiteModules.{max u (t + 1)} (completedIntegralCoefficientSheafUnrestricted l E X)
 
 /-- The open module category in its ringed-slice presentation. The coefficient
 comparison preserves every finite quotient projection.
-Source: Stacks 09BP, 00XZ (blueprint: lem-sf-open-roos-extension-comparison). -/
+Source: Stacks 09BP, 00XZ. -/
 abbrev modulesU :=
   ringedSiteModules.{max u (t + 1)}
     ((completedIntegralCoefficientSheafUnrestricted l E X).over U)
 
 /-- The actual exact ringed extension by zero, with direct-sum presheaf and
 module sheafification as in the recorded localized adjunction.
-Source: Stacks 03DI--03DJ (blueprint: lem-sf-open-roos-extension-comparison). -/
+Source: Stacks 03DI--03DJ. -/
 def extension : modulesU l E X U ⥤ modulesX l E X :=
   SheafOfModules.localizedSystemExtension.{t + 1, t, u}
     (completedIntegralCommRingSheafUnrestricted l E X) U
 
 /-- Additivity of the recorded extension, reused without changing its data.
-Source: Stacks 03DJ (blueprint: lem-sf-open-roos-extension-comparison). -/
+Source: Stacks 03DJ. -/
 instance extensionAdditive : (extension l E X U).Additive :=
   SheafOfModules.localizedSystemExtensionAdditive.{t + 1, t, u} _ U
 
 /-- Left exactness of the recorded extension.
-Source: Stacks 03DJ (blueprint: lem-sf-open-roos-extension-comparison). -/
+Source: Stacks 03DJ. -/
 instance extensionLimits : PreservesFiniteLimits (extension l E X U) :=
   SheafOfModules.localizedSystemExtensionLimits.{t + 1, t, u} _ U
 
 /-- Right exactness of the recorded extension.
-Source: Stacks 03DJ (blueprint: lem-sf-open-roos-extension-comparison). -/
+Source: Stacks 03DJ. -/
 instance extensionColimits : PreservesFiniteColimits (extension l E X U) :=
   SheafOfModules.localizedSystemExtensionColimits.{t + 1, t, u} _ U
 
 /-- The actual exact restriction, right adjoint to extension.
-Source: Stacks 03DI--03DJ (blueprint: lem-sf-open-roos-extension-comparison). -/
+Source: Stacks 03DI--03DJ. -/
 abbrev restriction : modulesX l E X ⥤ modulesU l E X U :=
   SheafOfModules.localizedSystemRestriction.{t + 1, t, u}
     (completedIntegralCommRingSheafUnrestricted l E X) U
@@ -341,8 +340,7 @@ private theorem slice_products (X : Scheme.{t}) (U : X.ProEt)
 end SliceProducts
 
 /-- The geometric and product assertions in the open Roos comparison.
-Source: Stacks 01T6, 01OY, 09BP and 0947
-(blueprint: lem-sf-open-roos-extension-comparison).
+Source: Stacks 01T6, 01OY, 09BP and 0947.
 Proof: finite type over Spec k gives Noetherian schemes; locally Noetherian
 schemes are quasi-separated. Every affine-open preimage under the open immersion
 is a Noetherian open subscheme, hence quasi-compact. The distinct prime l is a
@@ -427,8 +425,7 @@ canonical product maps, localization square, all resolution formulas, and strict
 augmentation laws. Abstract category parameters keep repeated concrete sheaf-category
 instance terms out of the statement's elaboration.
 Source: Stacks 09BP; the signed normalization of
-lem-cbc-exact-product-functor-strict-limit
-(blueprint: lem-sf-open-roos-extension-comparison). -/
+lem-cbc-exact-product-functor-strict-limit. -/
 def ComparisonAssertions (F : A ⥤ B) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (LA : DerivedCategory.{wA} (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory.{wA} A)
@@ -894,8 +891,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 actual strict augmentation maps.
 
 Source: Stacks 09BP; blueprint open-factor argument, normalized by
-lem-cbc-exact-product-functor-strict-limit and lem-weil-strict-roos-comparison
-(blueprint: lem-sf-open-roos-extension-comparison).
+lem-cbc-exact-product-functor-strict-limit and lem-weil-strict-roos-comparison.
 
 Proof: first apply geometry_products (node proof steps 1--3). The recorded slice
 adjunction is exact and additive. Apply exactProductFunctorStrictLimit to this

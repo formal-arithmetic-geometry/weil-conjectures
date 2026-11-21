@@ -257,7 +257,6 @@ private lemma internalComparisonConstructible
 /-- Constructible internal modules over a finite discrete coefficient ring are closed
 under kernels. Source: Bhatt--Scholze, Section 5.1 and Lemma 5.4.1,
 and the constructible Serre theorem in ConstructibleSheaf/KernelCokernel.lean.
-(blueprint: lem-sfb-finite-discrete-internal-constructible-kernels)
 
 Proof: encode internal modules as ordinary module-valued sheaves. Their local finite
 presentations become finite locally constant sheaves, so the constructible objects descend

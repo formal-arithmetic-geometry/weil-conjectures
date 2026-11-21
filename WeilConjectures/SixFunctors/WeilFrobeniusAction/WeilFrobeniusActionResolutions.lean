@@ -157,7 +157,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 Source: latest blueprint, prose-10-20, internal-Hom/evaluation
 paragraph; native action-site refinement, steps 1--7; Stacks 015F, 06YS, 079P, 0G7E,
-and 08BJ (blueprint: lem-sf-weil-frobenius-action-resolutions).
+and 08BJ.
 
 The small site is the existing bounded pro-etale category with lifted hom types.
 It retains every bounded object, and hence all integer translates. Coefficients
@@ -173,33 +173,28 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace WeilConjectures.WeilFrobeniusAction
 
 /-- Postcomposition on the actual bounded weakly etale site.
-Source: native action-site proof, step 1
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 1. -/
 def postcompose {T : Scheme.{u}} (g : T ≅ T) : T.ProEt ≌ T.ProEt :=
   MorphismProperty.Comma.mapRightIso (P := @WeaklyEtale) (Q := ⊤) (W := ⊤)
     (𝟭 Scheme.{u}) ((Functor.const _).mapIso g)
 
 /-- A small model containing every bounded object and every integer translate.
-Source: native action-site proof, step 1; the size convention
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 1; the size convention. -/
 abbrev Site (T : Scheme.{u}) := AsSmall.{u + 1} T.ProEt
 
 /-- The topology transported from the recorded small pro-etale site.
-Source: native action-site proof, steps 1--2
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, steps 1--2. -/
 abbrev topology (T : Scheme.{u}) : GrothendieckTopology (Site T) :=
   AsSmall.down.inducedTopology (Scheme.ProEt.topology T)
 
 /-- Inverse Frobenius translation, so inverse reindexing is geometric Frobenius pullback.
-Source: native action-site proof, step 1
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 1. -/
 def translation {T : Scheme.{u}} (g : T ≅ T) : Site T ≌ Site T :=
   AsSmall.equiv.symm.trans ((postcompose g.symm).trans AsSmall.equiv)
 
 /-- The finite-subextension coefficient ring, reconstructed from its existing
 sheafification and restricted to the small model.
-Source: native action-site proof, step 2; Bhatt--Scholze 6.8
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 2; Bhatt--Scholze 6.8. -/
 def coefficient (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] :
     Sheaf (topology T) CommRingCat.{u + 1} :=
   (AsSmall.down.sheafPushforwardContinuous CommRingCat.{u + 1}
@@ -208,8 +203,7 @@ def coefficient (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] :
         (Scheme.ProEt.topology T) (ProEtale.padicAlgClSheaf T l))
 
 /-- The generating finite-field-valued continuous sections of the sheafified ring.
-Source: native action-site proof, step 2
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 2. -/
 def generator (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (U : Site T)
     (f : PadicAlgCl.finiteIntermediateFieldValued l (AsSmall.down.obj U).left) :
     (coefficient T l).obj.obj (op U) :=
@@ -218,14 +212,12 @@ def generator (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (U : Site T)
       (op (AsSmall.down.obj U)) (ULift.up f)
 
 /-- The existing module-sheaf category over this coefficient ring.
-Source: native action-site proof, step 3
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 3. -/
 abbrev Modules (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] :=
   TwistedActionRingedSite.Modules (coefficient T l)
 
 /-- Return to the original site, with its unchanged ring and module sections.
-Source: native action-site proof, step 2
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 2. -/
 def ambientModules (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] :
     Modules T l ⥤ Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (ProEtale.padicAlgClSheaf T l) := by
@@ -250,8 +242,7 @@ def ambientModules (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] :
 expressed on the original site by the recorded scheme-cover predicate
 `AlgebraicGeometry.ProEtale.CondensedRing.LocallyFree`, owned by
 `def-sf-proetale-locally-finite-free-module`.
-Source: native action-site proof, step 5; Bhatt--Scholze 6.8
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 5; Bhatt--Scholze 6.8. -/
 def Constructible (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (M : Modules T l) : Prop :=
   ∃ S : Scheme.FiniteLocallyClosedStratification T, ∀ i : Fin S.n,
     ProEtale.CondensedRing.LocallyFree
@@ -260,8 +251,7 @@ def Constructible (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (M : Modules T l) : 
         (ProEtale.padicAlgClSheaf T l)).obj ((ambientModules T l).obj M))
 
 /-- The normalized ordinary Frobenius action-site realization.
-Source: native action-site proof, steps 1--3
-(blueprint: lem-sf-weil-frobenius-action-resolutions).
+Source: native action-site proof, steps 1--3.
 No realization is selected from a mere existence statement. Its presentation is
 exactly the recorded twisted ringed-site presentation, including tensor, Hom,
 symmetry, evaluation, created limits/colimits, and normalized orbit induction. -/
@@ -298,8 +288,7 @@ structure Realization (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (g : T ≅ T) wh
     (topology T) (translation g) (coefficient T l) a
 
 /-- The normalized pullback, with its topology witnesses fixed by the realization.
-Source: native action-site proof, step 3
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 3. -/
 abbrev pullback {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
     (D : Realization T l g) : Modules T l ⥤ Modules T l :=
   letI := D.continuous
@@ -307,34 +296,29 @@ abbrev pullback {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
   TwistedActionRingedSite.sigma (topology T) (translation g) (coefficient T l) D.a
 
 /-- Pullback is additive on ordinary module maps.
-Source: native action-site proof, step 3
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 3. -/
 instance pullbackAdditive {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
     (D : Realization T l g) : (pullback D).Additive := D.sigmaAdditive
 
 /-- Pullback is the autoequivalence asserted in the realization.
-Source: native action-site proof, step 3
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 3. -/
 instance pullbackEquivalence {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
     (D : Realization T l g) : (pullback D).IsEquivalence := D.sigmaEquivalence
 
 /-- The recorded fixed-pair category for the explicit module pullback.
-Source: native action-site proof, step 3
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 3. -/
 abbrev Pairs {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
     (D : Realization T l g) :=
   Endofunctor.IsoAlgebra (pullback D)
 
 /-- Forget only the invertible Frobenius structure.
-Source: native action-site proof, steps 3--4
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, steps 3--4. -/
 abbrev forget {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
     (D : Realization T l g) : Pairs D ⥤ Modules T l :=
   Endofunctor.IsoAlgebra.forget (pullback D)
 
 /-- The actual inverse action-site equivalence applied termwise to complexes.
-Source: native action-site proof, step 6
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 6. -/
 abbrev onActionSite {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
     (D : Realization T l g) :=
   letI := D.continuous
@@ -342,8 +326,7 @@ abbrev onActionSite {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
   D.presentation.modules.inverse.mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- K-flatness in fixed pairs, transported by the specified additive tensor equivalence.
-Source: native action-site proof, step 6; Stacks 06YN
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 6; Stacks 06YN. -/
 def KFlat {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
     (D : Realization T l g) (K : CochainComplex (Pairs D) ℤ) : Prop :=
   letI := D.continuous
@@ -353,8 +336,7 @@ def KFlat {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
     (J := D.presentation.topology) (R := D.presentation.coefficient) ((onActionSite D).obj K)
 
 /-- Flat terms in fixed pairs, under the same normalized tensor equivalence.
-Source: native action-site proof, step 6; Stacks 03ER
-(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+Source: native action-site proof, step 6; Stacks 03ER. -/
 def FlatTerms {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
     (D : Realization T l g) (K : CochainComplex (Pairs D) ℤ) : Prop :=
   letI := D.continuous

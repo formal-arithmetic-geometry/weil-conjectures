@@ -10,7 +10,6 @@ public import WeilConjectures.Algebra.Homology.System.SystemScalarModel
 /-! # Generic normalized scalar comparison
 
 Source: Stacks 03D7, 03EK and 06YY.
-(blueprint: lem-sf-system-scalar-tensor-section).
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +27,7 @@ variable {C : Type sa} [Category.{sb} C] {J : GrothendieckTopology C}
   [EssentiallySmall.{sw} C]
 
 /-- Generic scalar comparison extracted from IntegralComparisonSequenceSystems.
-Source: Stacks 03D7, 03EK and 06YY
-(blueprint: lem-sf-system-scalar-tensor-section).
+Source: Stacks 03D7, 03EK and 06YY.
 Proof: Write the sheafification unit explicitly. Both the unit and the transport by the object
 equality are linear. Move the scalar through these two linear maps; multiplication by scalar s
 sends one tensor x to s tensor x in the balanced tensor product. -/

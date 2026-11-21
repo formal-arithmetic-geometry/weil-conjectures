@@ -93,7 +93,6 @@ arbitrary base is invertible, for finite coefficients of invertible exponent.
 
 Source: blueprint `lemma-affine-space-etale-localization`, proof (1), and
 `proposition-exceptional-inverse-image-smooth-morphism--6`, projective-line computation.
-(auxiliary; not a blueprint node)
 
 Proof: use the projective-line adjunction whose right adjoint is pullback followed by
 the Tate twist and shift (1)[2]. Its counit is the projection-formula map followed by

@@ -24,7 +24,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- The inverse mates satisfy the composition coherence equation.
 Source: scalar associativity and mate pasting, Bhatt--Scholze, Remark 6.8.15.
-(blueprint: new-integral-residue-derived-pull-square-comp)
 Proof. Apply the generic inverse-mate pasting identity to the three restriction/pullback
 comparison squares. The associativity isomorphisms are `residueExchangeUpperStarComp`;
 naturality and the counit identities reduce both paths to the same composite. -/

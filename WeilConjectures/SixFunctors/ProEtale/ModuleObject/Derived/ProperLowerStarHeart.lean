@@ -19,8 +19,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.W
 
 Let `Λ` be a commutative condensed ring, flat over `ℤ`, and `f : X ⟶ Y` a quasi-compact
 quasi-separated morphism of schemes. We show that the derived direct image `Rf_*` of module
-objects over `Λ` commutes with direct sums of module objects placed in degree `0` (blueprint
-`corollary-continuity-cohomology`), and that a bound `Rf_*(N[0]) ∈ D^{≤ d}` for the objects `N` of a
+objects over `Λ` commutes with direct sums of module objects placed in degree `0`, and that a bound `Rf_*(N[0]) ∈ D^{≤ d}` for the objects `N` of a
 class `P` extends to filtered colimits of objects of `P`. Both follow from the continuity of the
 higher direct images of abelian sheaves
 (`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_rightDerived_lowerStar`), the higher direct
@@ -136,7 +135,7 @@ lemma preservesColimitsOfShape_discrete_rightDerived_lowerStar_ab (B : Type (u +
 
 omit [IsCommMonObj Λ] in
 /-- For a quasi-compact quasi-separated morphism `f`, `Rf_*` commutes with direct sums of module
-objects placed in degree `0` (blueprint `corollary-continuity-cohomology`). -/
+objects placed in degree `0`. -/
 theorem isIso_sigmaComparison_rightDerivedLowerStar_singleFunctor (J : Type (u + 1))
     (N : J → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
     IsIso (sigmaComparison R((f)_*⟦Λ⟧) fun j ↦ (DerivedCategory.singleFunctor _ 0).obj (N j)) :=

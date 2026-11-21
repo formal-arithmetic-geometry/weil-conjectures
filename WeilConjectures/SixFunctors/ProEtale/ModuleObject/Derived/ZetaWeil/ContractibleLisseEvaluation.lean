@@ -20,8 +20,7 @@ set_option linter.privateModule false
 /-! # Perfect complexes and dualizable objects under contractible evaluation
 
 Source: Hemo--Richarz--Scholbach, Section 3, (3.1)--(3.2), Remark 3.2,
-Lemma 4.1 and Proposition 4.3(3)
-(blueprint: lem-zl-contractible-lisse-evaluation).
+Lemma 4.1 and Proposition 4.3(3).
 -/
 
 @[expose] public noncomputable section

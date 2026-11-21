@@ -27,8 +27,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralOpenDirectImage.IntegralOpenDir
 /-!
 # Integral open direct image and proper formulas
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-pf-adic/_section.md
-(blueprint: lemma-projection-formula-integral-coefficients).
+Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-pf-adic/_section.md.
 
 The three statements use internal modules over the pulled-back condensed ring of integers.
 The base change and projection conclusions include membership of both endpoints in the
@@ -68,8 +67,7 @@ variable {U X : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))]
   [IsSeparated (X ↘ Spec (.of k))]
 
 /-- Quasi-compact open direct image preserves bounded constructible finite-Tor objects.
-Source: blueprint main-20261015, lemma-projection-formula-integral-coefficients, first assertion
-(blueprint: lemma-projection-formula-integral-coefficients).
+Source: blueprint main-20261015, lemma-projection-formula-integral-coefficients, first assertion.
 
 Proof: the standing finite-type separated hypotheses give qcqs by
 lem-weil-pbc-qcqs-over-affine. Apply clause (2) of

@@ -16,7 +16,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.Integr
 Source: Bhatt--Scholze, Remark 6.8.15 and the tensor-pullback identity in the
 proof of Lemma 6.5.9(5), p. 50; the balanced tensor and counit calculation below
 is the explicit formal comparison argument.
-(blueprint: new-integral-residue-scalar-geometry-component)
 
 Only the calculation on resolving representatives is left open here. The
 scalar-route module proves the passage to arbitrary derived objects by
@@ -45,7 +44,6 @@ set_option linter.unusedVariables false in
 
 Source: Bhatt--Scholze, Remark 6.8.15 and the proof of Lemma 6.5.9(5), p. 50;
 explicit balanced tensor calculation for the fixed derived comparisons.
-(blueprint: new-integral-residue-scalar-geometry-component)
 
 Proof. Write B for the residue regular module restricted to integral scalars.
 Since P is K-flat, B tensor P computes restricted derived scalar extension.

@@ -18,8 +18,7 @@ set_option linter.privateModule false
 /-! # The actual ordinary quotient kernel and injective divisibility
 
 Source: Stacks Tags 03D7, 06YP and 079P; the normalized right-exact tensor sequence and evaluation
-of the ordinary coinduction adjunction.
-(blueprint: lem-sf-regular-quotient-injective-kernel). -/
+of the ordinary coinduction adjunction. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -45,8 +44,7 @@ omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
   [HasSheafify J AddCommGrpCat.{r}] [HasDerivedCategory.{wR} (Modules R)]
   [HasDerivedCategory.{wS} (Modules S)] in
 /-- The coinduction counit is killed by the regular scalar.
-Source: Stacks Tags 03D7 and 06YP; the scalar acts by zero on restricted modules
-(blueprint: lem-sf-regular-quotient-injective-kernel). -/
+Source: Stacks Tags 03D7 and 06YP; the scalar acts by zero on restricted modules. -/
 theorem counit_scalar_zero
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
       ringMap φ = 0)
@@ -61,8 +59,7 @@ theorem counit_scalar_zero
 module the scalar is moreover surjective: `0 → coind(M) → M → M → 0` is short exact after
 restriction.
 Source: Stacks Tags 03D7, 06YP and 079P; the normalized right-exact tensor sequence and
-evaluation of the ordinary coinduction adjunction
-(blueprint: lem-sf-regular-quotient-injective-kernel).
+evaluation of the ordinary coinduction adjunction.
 
 Proof: for a flat module `X` the sequence `X → X → X ⊗ S` is short exact, and every map from
 `X` to a restricted module factors through its last map. Hence maps `X ⟶ coind(M)` correspond,
@@ -155,8 +152,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
 /-- For an injective completed-coefficient module `M`, the ordinary coinduction counit and the
 positive uniformizer scalar form a short exact sequence `0 → coind(M) → M → M → 0`.
 Source: Stacks Tags 03D7, 06YP and 079P; the normalized right-exact tensor sequence and
-evaluation of the ordinary coinduction adjunction
-(blueprint: lem-sf-regular-quotient-injective-kernel). -/
+evaluation of the ordinary coinduction adjunction. -/
 theorem scalarReductionCoinduction_counit_shortExact
     (M : scalarReductionSource.{u, u} l E T) [Injective M] :
     (ShortComplex.mk ((scalarReductionCoinductionAdjunction.{u} l E T n).counit.app M)

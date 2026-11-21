@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Functor.Currying
 
 /-! # The ordinary tensor pullback square
 
-Source: Stacks Tag 07A4 (blueprint: def-sf-representative-tensor-ordinary-pullback-law).
+Source: Stacks Tag 07A4.
 -/
 
 @[expose] public section
@@ -18,7 +18,7 @@ open CategoryTheory
 namespace WeilConjectures
 
 /-- The chain tensor square, independently of localization or chosen tensor models.
-Source: Stacks Tag 07A4 (blueprint: def-sf-representative-tensor-ordinary-pullback-law).
+Source: Stacks Tag 07A4.
 The left composite first pulls back the fixed tensor and then realizes coefficients;
 the right composite first realizes coefficients and then pulls back. This definition
 only names their equality and constructs no objects from existence proofs. -/

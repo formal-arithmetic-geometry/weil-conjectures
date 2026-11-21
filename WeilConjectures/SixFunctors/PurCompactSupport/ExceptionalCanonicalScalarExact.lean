@@ -24,7 +24,6 @@ attribute [local irreducible] HasDerivedCategory.standard reductionDerivedChange
 
 /-- Derived scalar extension is exact for the shift normalized by its universal counit.
 Source: Stacks Tags 06XN and 05SE.
-(blueprint: lem-sf-canonical-scalar-exact).
 
 Proof: take the resolving class of homotopy objects where the scalar counit is
 invertible. K-flat resolutions show that this class resolves every object. Naturality

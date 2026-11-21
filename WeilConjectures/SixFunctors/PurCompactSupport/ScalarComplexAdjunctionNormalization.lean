@@ -13,7 +13,6 @@ import all WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictio
 /-! # Scalar complex adjunction normalization
 
 Source: Stacks Project, Tag 07A6.
-(blueprint: lem-sf-scalar-complex-adjunction-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -99,7 +98,7 @@ private theorem scalar_complexUnit {W : Scheme.{u}}
   simpa only [pbcDerivedRestrict, pbcComplexCounit] using hn P
 
 /-- Scalar derived transposition agrees with ordinary transposition on every complex.
-Source: Stacks Tag 07A6 (blueprint: lem-sf-scalar-complex-adjunction-normalization).
+Source: Stacks Tag 07A6.
 Proof: the resolving-class construction supplies the scalar unit equation for all
 complexes. Uniqueness identifies its adjunction with the canonical one. Cancel the
 exact restriction comparison and use naturality to obtain the Hom equation. -/

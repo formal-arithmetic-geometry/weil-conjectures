@@ -36,7 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The balanced finite scalar tensor map, transported to ordinary reductions.
-Source: Stacks 07A4 (blueprint: lem-coef-tensor-reduction-finite-components). -/
+Source: Stacks 07A4. -/
 def tensorReductionFiniteComponent (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)
@@ -59,7 +59,7 @@ def tensorReductionFiniteComponent (W : Scheme.{u})
     (coefficientEvaluationTensorIso l E W n (G.obj P) (G.obj Q)).inv
 
 /-- The same component using literal vertical evaluation of the sequence ring.
-Source: Stacks 0941 (blueprint: lem-coef-tensor-reduction-finite-components). -/
+Source: Stacks 0941. -/
 def tensorReductionSystemFiniteComponent (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)
@@ -155,8 +155,7 @@ b into the first factor. Scalar balancing gives equality for all b. The ordinary
 scalar and evaluation tensor comparisons have exactly these generator formulas.
 Sheafification and the total-summand universal properties give equality in each
 degree. The formula uses the actual quotient maps, hence works also for m = n;
-zero complexes and the empty site give the same equality of zero maps.
-(blueprint: lem-coef-tensor-reduction-finite-components). -/
+zero complexes and the empty site give the same equality of zero maps. -/
 theorem tensorReductionFiniteComponents_compatible (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

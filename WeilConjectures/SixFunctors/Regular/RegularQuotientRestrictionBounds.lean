@@ -16,8 +16,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Uniform constructibility and Tor bounds for finite quotient restriction
 
-Source: Tags 06YY, 07A6, 0A70, 0BZE, 0BZH and 08FZ; Zheng Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-regular-quotient-restriction-bounds). -/
+Source: Tags 06YY, 07A6, 0A70, 0BZE, 0BZH and 08FZ; Zheng Lemma 5.22 and Proposition 5.26. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,8 +32,7 @@ open CategoryTheory.Limits
 `K` are controlled by those of `K`: the `i`-th one vanishes if the `i`-th and `(i+1)`-st
 cohomology sheaves of `K` vanish, and it is constructible if all cohomology sheaves of `K`
 are constructible.
-Source: Stacks Project, Tags 06YY, 093U and 0A70
-(blueprint: lem-sf-regular-quotient-restriction-bounds).
+Source: Stacks Project, Tags 06YY, 093U and 0A70.
 
 Proof: let `M` be the restriction of `K` to the completed coefficient ring. The derived
 reduction triangle `M --ϖ^(m+1)--> M --> res_m(red_m M)` gives the exact sequence
@@ -116,7 +114,6 @@ theorem scalarReductionDerivedRestriction_reduction_homology
 /-- Restriction of a finite-Tor constructible quotient complex has constructible finite
 reductions with one cohomological and Tor interval, independent of the reduction level.
 Source: Zheng, Lemma 5.22 and Proposition 5.26; Stacks Project, Tags 06YY, 07A6 and 08FZ.
-(blueprint: lem-sf-regular-quotient-restriction-bounds).
 
 Proof: choose a bounded flat representative in a Tor interval [a,b] for K. Each flat
 module over the fixed quotient B=A/(pi^(n+1)) has flat dimension at most one over A:

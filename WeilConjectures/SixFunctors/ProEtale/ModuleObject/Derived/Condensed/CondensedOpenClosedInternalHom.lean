@@ -208,7 +208,7 @@ private theorem closedProjection_naturality_left {Z X : Scheme.{u}} (i : Z ⟶ X
 /-- The two internal sheaf-valued derived-Hom formulas, normalized by evaluation and all
 adjunction transposes, natural contravariantly in L,P and covariantly in N.
 Source: Bhatt--Scholze Lemma 6.7.13, formal internal-adjunction calculation, and Stacks
-Tag 08JB (blueprint: lem-sfb-open-closed-internal-hom-formulas).
+Tag 08JB.
 
 Proof plan (the eleven steps of the node):
 1. Identify module objects with sectionwise modules over B_T=p_T^*Lambda. The relative

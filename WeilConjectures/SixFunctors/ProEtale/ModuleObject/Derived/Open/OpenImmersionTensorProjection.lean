@@ -16,8 +16,7 @@ import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 Source: the open and closed immersion paragraphs and the derived version of
 `literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/`
-`det-lem-int-tensor-projection.proof.md`
-(blueprint: lem-sfb-open-immersion-derived-tensor-projection).
+`det-lem-int-tensor-projection.proof.md`.
 -/
 
 @[expose] public section
@@ -124,8 +123,7 @@ private noncomputable def projectionOfInternalHom
       d.homEquiv_symm_naturality_two]
 
 /-- The open immersion case of the relative derived projection formula.
-Source: `det-lem-int-tensor-projection.proof.md`, open immersions and Derived version
-(blueprint: lem-sfb-open-immersion-derived-tensor-projection).
+Source: `det-lem-int-tensor-projection.proof.md`, open immersions and Derived version.
 
 Proof: choose the reduced closed complement of the open image using its vanishing
 ideal. The ambient scheme X is Noetherian, since it is quasi-compact and locally of finite type

@@ -21,7 +21,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 # Proper direct-image hypotheses for the recorded admissible coefficients
 
 Source: blueprint main-20261015, proposition-construction-independence-rf-shriek, proper-image
-paragraph. (blueprint: det-sf-comp-proper-admissible-hypotheses).
+paragraph.
 
 Proof plan: split the admissible coefficient predicate into its six cases. In each
 case transport the proper-image hypotheses across the displayed coefficient-ring
@@ -173,7 +173,6 @@ every isomorphism class of recorded admissible coefficient.
 
 Source: blueprint proposition-construction-independence-rf-shriek, second proof paragraph, with the
 coefficient convention of definition-localizing-subcategory.
-(blueprint: det-sf-comp-proper-admissible-hypotheses).
 
 Proof: restriction along a coefficient isomorphism is an exact monoidal equivalence.
 It preserves finite presentations, finite constant local models, Tor intervals and

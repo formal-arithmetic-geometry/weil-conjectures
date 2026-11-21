@@ -40,8 +40,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Glo
 # Sections with support in a closed subscheme
 
 Source: blueprint `sec-six-functors-basics/sk-lem-formal-closed-support`,
-using the derived closed-support and stratum-Hom interfaces
-(blueprint: lemma-sections-support-closed-subscheme).
+using the derived closed-support and stratum-Hom interfaces.
 
 The support functors are the canonical kernel and coefficient-compatible inverse-image
 constructions from `FormalClosedSupportAdjunction`. The stratum formula uses the actual
@@ -68,15 +67,14 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- Global sections of a coefficient module, with its underlying abelian group.
 Source: blueprint `lemma-sections-support-closed-subscheme`, clause (2), the functor Γ(S,-)
-(blueprint: lemma-sections-support-closed-subscheme). The right derived functor of this composite is
+. The right derived functor of this composite is
 RΓ(S,-); the scalar action is retained by the input module before taking sections. -/
 noncomputable def formalClosedSupportSections (X : Scheme.{u}) :
     FormalSupportModules Λ X ⥤ Ab.{u + 1} :=
   Mod.forget (condensedRingObj Λ X) ⋙ Sheaf.Γ (Scheme.ProEt.topology X) Ab.{u + 1}
 
 /-- Sections are additive, since both forgetful and global-sections functors preserve
-finite products. Source: blueprint `lemma-sections-support-closed-subscheme`, clause (2)
-(blueprint: lemma-sections-support-closed-subscheme). -/
+finite products. Source: blueprint `lemma-sections-support-closed-subscheme`, clause (2). -/
 noncomputable instance formalClosedSupportSections_additive (X : Scheme.{u}) :
     (formalClosedSupportSections Λ X).Additive :=
   Functor.additive_of_preserves_binary_products
@@ -201,8 +199,7 @@ private theorem coverRetract_dualizable
     (tensorLeft D).leftDerivedFunctorIsoMapDerivedCategory.symm ≪≫ derivedTensorSingleIso D
 
 /-- The closed-support adjunction, fiber triangle and stratum formula.
-Source: blueprint `sec-six-functors-basics/sk-lem-formal-closed-support`, clauses (1)--(2)
-(blueprint: lemma-sections-support-closed-subscheme).
+Source: blueprint `sec-six-functors-basics/sk-lem-formal-closed-support`, clauses (1)--(2).
 
 The ordinary adjunction is normalized by the existing support-kernel inclusion;
 `rightAdjoint_eq` specifies its derived adjunction, rather than an arbitrary rescaling.
@@ -275,8 +272,7 @@ structure FormalClosedSupportAssertions {Z U X : Scheme.{u}}
 
 /-- Sections with support in a closed subscheme: derived adjunction, fiber formula, and the
 extension-by-zero stratum Hom formula.
-Source: blueprint `sec-six-functors-basics/sk-lem-formal-closed-support`, clauses (1)--(2)
-(blueprint: lemma-sections-support-closed-subscheme).
+Source: blueprint `sec-six-functors-basics/sk-lem-formal-closed-support`, clauses (1)--(2).
 
 Proof:
 1. Apply lemma-sections-support-closed-subscheme in the standing-scheme setting. Its derived

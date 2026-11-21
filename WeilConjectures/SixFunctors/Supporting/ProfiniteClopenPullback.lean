@@ -15,7 +15,6 @@ import Mathlib.Topology.Separation.Regular
 Source: agent consequence of Stacks Project, `topology.tex`, Tag 08ZZ
 (lemma-profinite-refine-open-covering), using its pointwise clopen-basis consequence.
 The criterion below is not the finite-refinement assertion of that tag.
-(blueprint: lem-sfb-profinite-clopen-pullback-bijective-open).
 -/
 
 @[expose] public section
@@ -29,7 +28,7 @@ are permitted.
 
 Source: agent separation and finite-subcover consequence of Stacks Project,
 `topology.tex`, Tag 08ZZ (lemma-profinite-refine-open-covering), using its pointwise
-clopen-basis consequence (blueprint: lem-sfb-profinite-clopen-pullback-bijective-open).
+clopen-basis consequence.
 
 Proof for stage 3:
 1. For distinct points of P, Hausdorffness and `lem-weil-pbc-profinite-clopen-basis`

@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 
 This is the first half of the representative diagram, before using the two factor
 scalar equations and the assumed derived tensor square.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-left-path)
 -/
 
 @[expose] public noncomputable section
@@ -73,8 +72,7 @@ reconstructed pairs and apply naturality of the scalar counit. The totalized
 ordinary square changes scalar extension before tensor into the tensor of the
 factor scalar comparisons. The internal derived counit square and naturality of
 tensorComparison and qTensor identify the resulting localized path. This proves
-the displayed path identity, without the factor scalar equations or htensor.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-left-path). -/
+the displayed path identity, without the factor scalar equations or htensor. -/
 theorem coefficientScalarTensorRepresentative_leftPath
     (Z : Scheme.{u}) (d : CoefficientScalarTensorRepresentativeBasicData a Z)
     (h : CoefficientScalarTensorRepresentativeHypotheses a Z d)

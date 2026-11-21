@@ -216,7 +216,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Det
 # Operations on bounded constructible integral coefficient complexes
 
 Source: blueprint main-20261015, chap-Construction-of-f, lemma-integral-models,
-sk-lem-integral-models-operations.md (blueprint: lemma-integral-models).
+sk-lem-integral-models-operations.md.
 
 Constructibility uses finite constant scalar models, as in the recorded
 definition-constructible-sheaves. The tensors and the projection formula are ambient and
@@ -398,8 +398,7 @@ This theorem records clauses (1)--(3). Clause (4), the projection formula for ar
 unbounded complexes, is the natural isomorphism `immersionLowerShriekProjectionIso` (applied
 with coefficient `Profinite.padicIntegersRingObj ℓ E.val`).
 
-Source: blueprint main-20261015, sk-lem-integral-models-operations, clauses (1)--(4)
-(blueprint: lemma-integral-models).
+Source: blueprint main-20261015, sk-lem-integral-models-operations, clauses (1)--(4).
 
 Proof plan (the reviewed DAG proof, retaining the finite constant scalar convention):
 

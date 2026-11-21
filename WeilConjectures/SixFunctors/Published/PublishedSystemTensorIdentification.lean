@@ -27,8 +27,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The published tensor comparison agrees with the ambient comparison under the
 specified equality of inverse-image functors, for a single scheme morphism.
-Source: Stacks 03D3 and 03EL, and 07A4
-(blueprint: lem-sf-published-system-tensor-identification).
+Source: Stacks 03D3 and 03EL, and 07A4.
 Proof: identify the ordinary inverse images by sequence_inverse_eq. The normalized
 ordinary tensor map sends the adjunction unit of a pure tensor to the tensor of
 its two units. On each summand of the total tensor complex this is exactly the

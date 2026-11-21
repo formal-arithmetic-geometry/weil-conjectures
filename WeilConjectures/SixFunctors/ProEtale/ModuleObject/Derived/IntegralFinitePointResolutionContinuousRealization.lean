@@ -241,8 +241,7 @@ set_option linter.unusedVariables false in
 /-- Realize a sectionwise exact lifted resolution as a short exact point-module complex.
 
 Source: the sectionwise short-exact criterion, finite-coordinate biproduct comparison, and
-pointwise normalization of the scalar map
-(blueprint: lem-s3-integral-finite-point-resolution-continuous).
+pointwise normalization of the scalar map.
 -/
 theorem integralFinitePointResolution_continuous_realization
     (ell : ℕ) [Fact ell.Prime] (E : PadicAlgCl.FiniteIntermediateField ell)

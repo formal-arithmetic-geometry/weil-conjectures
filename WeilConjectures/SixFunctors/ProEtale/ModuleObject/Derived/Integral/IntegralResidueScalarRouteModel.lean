@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.Integr
 
 /-! Computation of the scalar-route in the residue tensor square.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(blueprint: new-integral-residue-scalar-route-model)
 
 The target is the explicit ordinary homotopy tensor model. -/
 
@@ -57,7 +56,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- Compute the scalar-route against the ordinary homotopy tensor model.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(blueprint: new-integral-residue-scalar-route-model)
 
 Proof. Expand the canonical restriction/pullback square using the exact
 pullback identifications. The scalar comparison is the inverse mate of this

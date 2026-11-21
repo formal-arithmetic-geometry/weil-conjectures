@@ -66,8 +66,7 @@ private theorem transportComposition
 
 Source: blueprint proposition-composition-base-change-rf-shriek--1, clause (1), the
 composition-isomorphism and canonicity paragraphs, specialized in
-proposition-construction-independence-rf-shriek step 6. (blueprint:
-lem-sfb-total-derived-compatible-composition).
+proposition-construction-independence-rf-shriek step 6.
 
 Proof: specialize localizingClosure_ctf_equals_bc to O_E using the identity
 coefficient isomorphism. Write he for the equality Loc(Dctf) = Loc(Dbc). Use the

@@ -13,7 +13,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
 the finite free dual calculation; blueprint proposition-direct-image-along-open-immersion--1,
-Reduction paragraph. (auxiliary; not a blueprint node).
+Reduction paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -275,7 +275,7 @@ Koszul degree -1, with its coefficient change and totalization sign absorbed int
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
 finite free dual calculation; blueprint proposition-direct-image-along-open-immersion--1, Reduction
-paragraph. (auxiliary; not a blueprint node).
+paragraph.
 
 Proof in words: multiplication by the constant uniformizer pi is monic on the
 constant integer sheaf, since inverse image is exact. The locally principal kernel

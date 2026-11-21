@@ -225,8 +225,7 @@ private theorem restrictionForget_hom {S T : Scheme.{u}} (h : S ⟶ T)
 end ProofHelpers
 
 /-- The normalized additive restriction comparison is linear over the coefficient ring.
-Source: Bhatt--Scholze, Proposition 5.3.2, sectionwise module encoding
-(blueprint: lem-weil-pbc-finite-discrete-restriction-linearity).
+Source: Bhatt--Scholze, Proposition 5.3.2, sectionwise module encoding.
 
 Proof in words. Under the sectionwise encoding, the action of the sheafified constant
 ring is the original module action; the equality hG identifies every underlying additive

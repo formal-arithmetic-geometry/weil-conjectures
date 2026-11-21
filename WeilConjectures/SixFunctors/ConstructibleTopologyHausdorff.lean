@@ -11,8 +11,7 @@ public import Mathlib.Topology.Spectral.Basic
 /-!
 # The constructible topology of a spectral space is Hausdorff
 
-Source: Stacks Project, Topology, Lemma 5.23.2 (Tag 0901), Hausdorff part
-(blueprint: lem-weil-pbc-spectral-constructible-topology-hausdorff).
+Source: Stacks Project, Topology, Lemma 5.23.2 (Tag 0901), Hausdorff part.
 -/
 
 @[expose] public section
@@ -20,8 +19,7 @@ Source: Stacks Project, Topology, Lemma 5.23.2 (Tag 0901), Hausdorff part
 universe u
 
 /-- The constructible topology of a spectral space is Hausdorff.
-Source: Stacks Project, Topology, Lemma 5.23.2 (Tag 0901), first paragraph of the proof
-(blueprint: lem-weil-pbc-spectral-constructible-topology-hausdorff).
+Source: Stacks Project, Topology, Lemma 5.23.2 (Tag 0901), first paragraph of the proof.
 
 Proof outline:
 1. For distinct points `x` and `y`, the `T₀` property supplies an open set containing exactly one

@@ -31,8 +31,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
 
 /-- The published signed Tate line, transported back to internal modules by the existing
 sectionwise module equivalence. No new coefficient line or scalar action is chosen.
-Source: blueprint sk-thm-int-restriction-line, Tate twist convention
-(blueprint: def-sfb-integral-restriction-functors). -/
+Source: blueprint sk-thm-int-restriction-line, Tate twist convention. -/
 def tateLine (X : Scheme.{u}) (d : ℤ) :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X) :=
@@ -43,8 +42,7 @@ def tateLine (X : Scheme.{u}) (d : ℤ) :
 
 /-- The actual functor f^*(-)(d)[2d]: derived pullback, right tensor with the published
 Tate line in degree zero, and shift by 2d.
-Source: blueprint sk-thm-int-restriction-line, displayed right adjoints
-(blueprint: def-sfb-integral-restriction-functors). -/
+Source: blueprint sk-thm-int-restriction-line, displayed right adjoints. -/
 def pullTwistShift {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) :
     IntegralCompactSupport.Ambient (Profinite.padicIntegersRingObj ℓ E.val) Y ⥤
       IntegralCompactSupport.Ambient (Profinite.padicIntegersRingObj ℓ E.val) X :=
@@ -55,8 +53,7 @@ def pullTwistShift {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) :
 
 /-- Restriction of f^*(-)(d)[2d] to the recorded Loc(Dbc) categories. The membership
 witness only restricts its codomain and does not replace any functor or morphism.
-Source: blueprint sk-thm-int-restriction-line, localizing-category convention
-(blueprint: def-sfb-integral-restriction-functors). -/
+Source: blueprint sk-thm-int-restriction-line, localizing-category convention. -/
 def restrictedPull {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ)
     (h : ∀ K, IntegralCompactSupport.localizing
         (Profinite.padicIntegersRingObj ℓ E.val) Y K →
@@ -71,8 +68,7 @@ def restrictedPull {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ)
       pullTwistShift ℓ E f d) (fun K ↦ h K.obj K.property)
 
 /-- Restriction of the actual Rf_* to Loc(Dbc), once its preservation is supplied.
-Source: blueprint sk-thm-int-restriction-line, projective-line left adjoint
-(blueprint: def-sfb-integral-restriction-functors). -/
+Source: blueprint sk-thm-int-restriction-line, projective-line left adjoint. -/
 def restrictedPush {X Y : Scheme.{u}} (f : X ⟶ Y)
     (h : ∀ K, IntegralCompactSupport.localizing
         (Profinite.padicIntegersRingObj ℓ E.val) X K →
@@ -90,8 +86,7 @@ def restrictedPush {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- Comparison with any Brown right adjoint for the chosen boundary compactification.
 Brown's theorem does not choose an adjoint, so its isomorphism class is stated using
 its defining adjunction. Quantification over compactifications includes the fixed one.
-Source: blueprint sk-thm-int-restriction-line, the two f^! comparisons
-(blueprint: def-sfb-integral-restriction-functors). -/
+Source: blueprint sk-thm-int-restriction-line, the two f^! comparisons. -/
 def brownComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (G : (IntegralCompactSupport.localizing
         (Profinite.padicIntegersRingObj ℓ E.val) Y).FullSubcategory ⥤

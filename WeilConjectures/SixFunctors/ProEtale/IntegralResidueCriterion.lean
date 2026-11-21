@@ -18,7 +18,6 @@ import WeilConjectures.SixFunctors.ProEtale.InternalResidueStacksComparison
 /-! # Integral constructibility detected by the actual residue reduction
 
 Source: Stacks Project, Tags 099L and 09C1; blueprint integral models, clause (2).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -48,7 +47,6 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify in
 /-- The residue criterion in the internal continuous coefficient presentation.
 Source: blueprint `lemma-integral-models`, clauses (1)--(2); Stacks 099L, 09C1.
-(auxiliary; not a blueprint node).
 
 Proof: the integral coefficient limit identifies the continuous integer sheaf with
 its positive finite-quotient limit. Pass to sectionwise modules and the equivalent

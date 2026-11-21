@@ -102,7 +102,6 @@ exactly the original restricted composite after applying the pushforward.  This 
 the formal transport part of the first contraction and is strictly smaller than the
 geometric ambient trace/base-change calculation.
 Source: `sk-thm-int-restriction-line.proof.md`, paragraph (1), normalization transport.
-(blueprint: lem-integral-kernel-first-transport).
 -/
 theorem integralKernel_first_transport
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

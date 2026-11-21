@@ -190,8 +190,7 @@ private theorem cancel_equivalence_monoidal {A B : Type*} [Category A] [Category
 /-- The canonical trivialization of point pullback preserves tensor products.
 Source: the canonical point equivalence and coefficient comparison
 `upperStarFromPointModComp`; latest blueprint,
-realified-kernel proof Steps 1--2
-(blueprint: lem-fd-point-pullback-trivialization-monoidal).
+realified-kernel proof Steps 1--2.
 
 Proof: write P for pullback from condensed modules and Q for pullback along σ.
 The coefficient sheaf comparison P ⋙ Q ≅ P is strong monoidal: its underlying

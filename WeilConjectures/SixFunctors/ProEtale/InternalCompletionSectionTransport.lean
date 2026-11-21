@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 /-! # Exact conservative transport of integral complexes to the constant small site
 
 Source: integral-models proof (1), Stacks Tags 00YV and 099I.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +25,7 @@ open IntegralModelsStacks
 
 /-- Section-action transport and small-site restriction form an equivalence.
 Source: Stacks Tag 00YV. Proof: compose the section-module equivalence with
-pushforward along the inverse of AsSmall.equiv.
-(auxiliary; not a blueprint node). -/
+pushforward along the inverse of AsSmall.equiv. -/
 theorem smallModules_equivalence (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
     (smallModules X R).IsEquivalence := by
@@ -83,25 +81,21 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
 /-- The constant coefficient on the large pro-etale site.
-Source: integral-models proof (1)
-(auxiliary; not a blueprint node). -/
+Source: integral-models proof (1). -/
 abbrev constantRing := condensedRingObj
   (discreteObj (Padic.coefficientExtensionIntegers l E)) X
 
 /-- The constant section ring on the equivalent small site.
-Source: integral-models proof (1)
-(auxiliary; not a blueprint node). -/
+Source: integral-models proof (1). -/
 abbrev ring := smallRing X (constantRing l E X)
 
 /-- First residue map on the small site.
-Source: integral-models proof (1)
-(auxiliary; not a blueprint node). -/
+Source: integral-models proof (1). -/
 abbrev residue := smallMap X (residueMap l E X)
 
 /-- Derived restriction to constant coefficients, followed by the exact section equivalence.
 Every functor is the prescribed restriction, rather than a chosen equivalence.
-Source: integral-models proof (1)
-(auxiliary; not a blueprint node). -/
+Source: integral-models proof (1). -/
 def functor : DerivedCategory (AdicCompletion.Modules l E X) ⥤
     ConstantCompletion.D (ring l E X) :=
   let := HasDerivedCategory.standard (ConstantCompletion.Mod (ring l E X))
@@ -112,8 +106,7 @@ def functor : DerivedCategory (AdicCompletion.Modules l E X) ⥤
 /-- This transport detects isomorphisms. Proof: ordinary restriction of scalars is
 conservative since its composite with the underlying-object functor is unchanged;
 exactness and the homology comparison give conservativity after deriving. The final
-section functor is an equivalence. Source: Stacks Tags 00YV and 099I
-(auxiliary; not a blueprint node). -/
+section functor is an equivalence. Source: Stacks Tags 00YV and 099I. -/
 instance functor_reflects : (functor l E X).ReflectsIsomorphisms := by
   let := HasDerivedCategory.standard (ConstantCompletion.Mod (ring l E X))
   have hr {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
@@ -134,8 +127,7 @@ instance functor_reflects : (functor l E X).ReflectsIsomorphisms := by
 
 /-- Comparison with the representative-based smallDerivedObject in the target.
 Proof: the exact functor localization comparison evaluated at objPreimage, followed
-by its image of objObjPreimageIso. Source: Stacks Tag 05RU
-(auxiliary; not a blueprint node). -/
+by its image of objObjPreimageIso. Source: Stacks Tag 05RU. -/
 def objectIso (K : DerivedCategory (AdicCompletion.Modules l E X)) :
     (functor l E X).obj K ≅ smallDerivedObject X _
       ((restriction l E X).obj
@@ -151,8 +143,7 @@ def objectIso (K : DerivedCategory (AdicCompletion.Modules l E X)) :
 
 /-- Completeness is invariant under isomorphism.
 Source: Stacks Tag 0999. Proof: derived restriction and derived internal Hom
-carry an isomorphism to an isomorphism, preserving zero objects on every slice.
-(auxiliary; not a blueprint node). -/
+carry an isomorphism to an isomorphism, preserving zero objects on every slice. -/
 theorem complete_iso {K L : ConstantCompletion.D (ring l E X)} (e : K ≅ L) :
     ConstantCompletion.IsComplete (residue l E X) K ↔
       ConstantCompletion.IsComplete (residue l E X) L := by

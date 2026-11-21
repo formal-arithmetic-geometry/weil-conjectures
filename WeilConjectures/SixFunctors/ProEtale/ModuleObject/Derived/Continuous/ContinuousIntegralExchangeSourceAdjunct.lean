@@ -233,7 +233,6 @@ private lemma continuous_baseChange_eq_squareExchange (sq : CommSq g' f' f g) :
 /-- Normal form for the source side after the bounded f′ adjunction.
 Source: Bhatt--Scholze, Remark 6.8.15; ChangeOfCoefficients.lean derived comparisons
 and the specified unit-square-counit exchange construction.
-(blueprint: lem-weil-pbc-continuous-integral-exchange-source-adjunct).
 
 Proof. Apply the bounded f′ adjunction to the source composite. Expand functoriality, then
 replace the exchange adjunct by square transport followed by the f counit. Naturality of the

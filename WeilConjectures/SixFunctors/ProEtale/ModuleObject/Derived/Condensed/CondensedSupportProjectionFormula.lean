@@ -32,8 +32,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The unit-induced open and closed tensor projections are isomorphisms.
 Source: Stacks Tags 03EL, 09AA, 09BN, 09AH, 06YS, 0G7D; steps 1--7 of
-lem-sfb-open-closed-internal-hom-formulas
-(blueprint: lem-sfb-condensed-support-projection-formula).
+lem-sfb-open-closed-internal-hom-formulas.
 
 Proof: use derived open/closed localization and the existing normalized pullback tensor
 comparison. Open restriction kills the tensor of a closed image with any object, so the

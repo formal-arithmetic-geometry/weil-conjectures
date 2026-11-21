@@ -14,8 +14,7 @@ public import Mathlib.CategoryTheory.Localization.Predicate
 /-! # The normalized trace for the actual completed coefficient projection
 
 Source: Stacks Tags 06YP, 06YY, 07A6 and 093M; the actual principal Koszul short exact sequence
-and the universal derived adjunction.
-(blueprint: def-sf-regular-quotient-trace-data). -/
+and the universal derived adjunction. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -47,7 +46,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ)
 
 /-- The derived-category structure recorded by the cone augmentation on the finite
-reduction target (auxiliary; not a blueprint node). -/
+reduction target. -/
 abbrev regularQuotientTraceTargetDerived :
     HasDerivedCategory (scalarReductionTarget.{u, u} l E T n) :=
   Scheme.reductionModulesHasDerivedCategory T (integralCoefficientCommRingSheaf l E T n)
@@ -56,8 +55,7 @@ attribute [local instance high] regularQuotientTraceTargetDerived
 
 /-- The positive uniformizer power, as a section of the actual completed unit module.
 Source: Stacks Tags 06YP, 06YY, 07A6 and 093M; the actual principal Koszul short exact sequence
-and the universal derived adjunction.
-(blueprint: def-sf-regular-quotient-trace-data). -/
+and the universal derived adjunction. -/
 def reductionScalarSection :
     (unit (completedIntegralCoefficientSheafUnrestricted l E T)).sections :=
   (unit (completedIntegralCoefficientSheafUnrestricted l E T)).unitHomEquiv
@@ -82,8 +80,7 @@ private theorem reductionScalar_ringMap :
 
 /-- The actual positive uniformizer scalar followed by the quotient map is zero.
 Source: Stacks Tags 06YP, 06YY, 07A6 and 093M; the actual principal Koszul short exact sequence
-and the universal derived adjunction.
-(blueprint: def-sf-regular-quotient-trace-data). -/
+and the universal derived adjunction. -/
 theorem reductionScalar_zero :
     (scalar (completedIntegralCommRingSheafUnrestricted l E T)
       (reductionScalarSection l E T n)).app
@@ -94,8 +91,7 @@ theorem reductionScalar_zero :
 
 /-- The normalized regular sequence, in the cone augmentation's coefficient convention.
 Source: Stacks Tags 06YP, 06YY, 07A6 and 093M; the actual principal Koszul short exact sequence
-and the universal derived adjunction.
-(blueprint: def-sf-regular-quotient-trace-data). -/
+and the universal derived adjunction. -/
 theorem reductionScalar_shortExact :
     (ShortComplex.mk
       ((scalar (completedIntegralCommRingSheafUnrestricted l E T)
@@ -108,8 +104,7 @@ theorem reductionScalar_shortExact :
 
 /-- A universal cochain realization of finite reduction, with its canonical counit.
 Source: Stacks Tags 06YP, 06YY, 07A6 and 093M; the actual principal Koszul short exact sequence
-and the universal derived adjunction.
-(blueprint: def-sf-regular-quotient-trace-data). -/
+and the universal derived adjunction. -/
 def reductionCochainModel :
     DerivedChangeOfRingsCochainModel.{u+1, u, u+1, u+2, u+2}
       (completedIntegralCommRingProjectionUnrestricted l E T n) :=
@@ -118,8 +113,7 @@ def reductionCochainModel :
 
 /-- The normalized principal-cone augmentation for the actual finite reduction.
 Source: Stacks Tags 06YP, 06YY, 07A6 and 093M; the actual principal Koszul short exact sequence
-and the universal derived adjunction.
-(blueprint: def-sf-regular-quotient-trace-data). -/
+and the universal derived adjunction. -/
 def reductionAugmentation :
     Augmentation.{u+1,u,u+1,u+2,u+2} (completedIntegralCommRingProjectionUnrestricted l E T n)
       (reductionScalarSection l E T n) (reductionCochainModel l E T n) :=
@@ -128,8 +122,7 @@ def reductionAugmentation :
 
 /-- Its restriction realization is canonically exact derived restriction.
 Source: Stacks Tags 06YP, 06YY, 07A6 and 093M; the actual principal Koszul short exact sequence
-and the universal derived adjunction.
-(blueprint: def-sf-regular-quotient-trace-data). -/
+and the universal derived adjunction. -/
 def reductionAugmentationRestrictionIso :
     (reductionAugmentation l E T n).V ≅ scalarReductionDerivedRestriction.{u,u} l E T n :=
   Localization.liftNatIso DerivedCategory.Q
@@ -142,8 +135,7 @@ def reductionAugmentationRestrictionIso :
 
 /-- Coinduction adjunction, expressed using the augmentation's canonical restriction.
 Source: Stacks Tags 06YP, 06YY, 07A6 and 093M; the actual principal Koszul short exact sequence
-and the universal derived adjunction.
-(blueprint: def-sf-regular-quotient-trace-data). -/
+and the universal derived adjunction. -/
 def reductionAugmentationCoinductionAdjunction :
     (reductionAugmentation l E T n).V ⊣ scalarReductionDerivedCoinduction l E T n :=
   (scalarReductionDerivedCoinductionAdjunction l E T n).ofNatIsoLeft
@@ -151,8 +143,7 @@ def reductionAugmentationCoinductionAdjunction :
 
 /-- The quotient-linear trace is the adjoint transpose of the shifted cone boundary.
 Source: Stacks Tags 06YP, 06YY, 07A6 and 093M; the actual principal Koszul short exact sequence
-and the universal derived adjunction.
-(blueprint: def-sf-regular-quotient-trace-data). -/
+and the universal derived adjunction. -/
 def reductionCoinductionTrace :
     shiftFunctor (DerivedCategory (scalarReductionSource.{u,u} l E T)) (-1 : ℤ) ⋙
         (reductionCochainModel l E T n).T ⟶
@@ -162,8 +153,7 @@ def reductionCoinductionTrace :
 
 /-- The universal extension model agrees with the project's fixed derived reduction.
 Source: Stacks Tags 06YP, 06YY, 07A6 and 093M; the actual principal Koszul short exact sequence
-and the universal derived adjunction.
-(blueprint: def-sf-regular-quotient-trace-data). -/
+and the universal derived adjunction. -/
 def reductionCochainModelIso :
     (reductionCochainModel l E T n).T ≅ scalarReductionDerivedExtension.{u,u} l E T n :=
   Adjunction.leftAdjointUniq

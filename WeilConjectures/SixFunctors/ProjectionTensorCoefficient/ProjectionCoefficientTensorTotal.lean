@@ -87,8 +87,7 @@ import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 /-! # The representative-normalized tensor comparison for projection
 
-Source: main-20261015, projection-formula proof step 13
-(blueprint: def-sf-projection-coefficient-tensor-total).
+Source: main-20261015, projection-formula proof step 13.
 The ordinary comparison is fixed on homogeneous local pure tensors. Derived
 descent and the specified quotient-completion unit then fix its integral and
 rational constructible restrictions.
@@ -111,12 +110,12 @@ variable (l : ℕ) [Fact l.Prime]
   (X : Scheme.{u})
 
 /-- Termwise scalar restriction along the quotient-normalized ring isomorphism.
-Source: step 13 (blueprint: def-sf-projection-coefficient-tensor-total). -/
+Source: step 13. -/
 def complexTransport :=
   (fdCoefficientTransport l E X).mapHomologicalComplex (.up ℤ)
 
 /-- Signed total tensor after coefficient restriction.
-Source: step 13 (blueprint: def-sf-projection-coefficient-tensor-total). -/
+Source: step 13. -/
 def totalTarget :=
   ((complexTransport l E X).prod (complexTransport l E X)) ⋙
     Functor.uncurry.obj
@@ -167,7 +166,7 @@ private def coefficientIso :
   exact c
 
 /-- The coefficient tensor comparison is fixed on local pure tensors.
-Source: step 13 (blueprint: def-sf-projection-coefficient-tensor-total).
+Source: step 13.
 Proof: send x tensor y to the same tensor of the two restricted sections.
 Restriction along the inverse ring isomorphism gives the inverse. Balancedness
 and restriction compatibility descend through sheafification. Pure tensors
@@ -237,7 +236,7 @@ theorem module_existsUnique :
     exact hnu.2 M N U x y
 
 /-- The uniquely pure-tensor-normalized module comparison.
-Source: step 13 (blueprint: def-sf-projection-coefficient-tensor-total). -/
+Source: step 13. -/
 def moduleComparison (M N : integralTowerModules l E X) :
     (fdCoefficientTransport l E X).obj
         (((constructibleTensorOrdinary l E X).obj M).obj N) ≅
@@ -247,7 +246,7 @@ def moduleComparison (M N : integralTowerModules l E X) :
   (module_existsUnique l E X).exists.choose M N
 
 /-- Naturality of the specified ordinary coefficient tensor comparison.
-Source: step 13 (blueprint: def-sf-projection-coefficient-tensor-total).
+Source: step 13.
 Proof: the first clause of the unique pure-tensor characterization gives this
 identity; both sides send the generator x tensor y to f(x) tensor g(y). -/
 theorem module_naturality
@@ -266,7 +265,7 @@ theorem module_naturality
   exact (module_existsUnique l E X).exists.choose_spec.1 M M' N N' f g
 
 /-- Naturality in the tensorHom coordinates used by the signed-total constructor.
-Source: step 13 (blueprint: def-sf-projection-coefficient-tensor-total).
+Source: step 13.
 Proof: tensorHom is the first-variable tensor map followed by the
 second-variable map. Thus this is precisely module_naturality, with the
 same specified monoidal structures on both module categories. -/
@@ -287,7 +286,7 @@ theorem module_tensorHom_naturality
   exact module_naturality l E X f g
 
 /-- The inverse module comparison summed over all bidegrees with the usual signs.
-Source: step 13 (blueprint: def-sf-projection-coefficient-tensor-total). -/
+Source: step 13. -/
 def total (P Q : CochainComplex (integralTowerModules l E X) ℤ) :
     (totalTarget l E X).obj (P, Q) ⟶
       (complexTransport l E X).obj ((constructibleTensorTotal l E X).obj (P, Q)) :=
@@ -311,7 +310,7 @@ def total (P Q : CochainComplex (integralTowerModules l E X) ℤ) :
     (module_tensorHom_naturality l E X) P Q
 
 /-- The signed total comparison is invertible.
-Source: step 13 (blueprint: def-sf-projection-coefficient-tensor-total).
+Source: step 13.
 Proof: exact coefficient restriction along an isomorphism preserves direct sums;
 each summand comparison is invertible. The same direct-sum formula with the
 inverse summand maps is the two-sided inverse chain map. -/
@@ -338,7 +337,7 @@ theorem total_isIso (P Q : CochainComplex (integralTowerModules l E X) ℤ) :
     F.asEquivalence.inverse F.asEquivalence.toAdjunction P Q
 
 /-- The signed total isomorphism with the derived-square orientation.
-Source: step 13 (blueprint: def-sf-projection-coefficient-tensor-total). -/
+Source: step 13. -/
 def totalIso (P Q : CochainComplex (integralTowerModules l E X) ℤ) :
     (complexTransport l E X).obj ((constructibleTensorTotal l E X).obj (P, Q)) ≅
       (totalTarget l E X).obj (P, Q) :=

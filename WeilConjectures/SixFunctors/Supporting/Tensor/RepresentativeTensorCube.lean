@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.Finite.Scalar.Tensor.FiniteScalarTensorComple
 /-! # Cancellation of normalized tensor representative cubes
 
 Source: Stacks Tags 04VK and 07A4.
-(blueprint: lem-sf-representative-tensor-cube).
 -/
 
 @[expose] public section
@@ -349,8 +348,7 @@ private theorem scalarCurriedTensorSquare
 
 /-- The two tensor presentations and their specified realization equation.
 All data are supplied explicitly; the last field is their compatibility proof.
-Source: Stacks Tags 04VK and 07A4.
-(blueprint: lem-sf-representative-tensor-cube). -/
+Source: Stacks Tags 04VK and 07A4. -/
 structure ScalarTensorRepresentativeData
     (K H D D' : Type*) [Category K] [Category H] [Category D] [Category D']
     extends TensorFixedRepresentativeData K D where
@@ -376,7 +374,6 @@ structure ScalarTensorRepresentativeData
 
 /-- Two normalized representative realizations turn an ordinary chain square into
 exactly the curried derived tensor square. Source: Stacks Tags 04VK and 07A4.
-(blueprint: lem-sf-representative-tensor-cube).
 
 Proof: uncurry the realization maps. Precompose with the source tensor
 representative and postcompose with the target tensor of the exact pullback

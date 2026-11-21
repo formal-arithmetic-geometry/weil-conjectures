@@ -18,8 +18,7 @@ set_option linter.privateModule false
 /-!
 # Geometric inverse image preserves constant module sheaves
 
-Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV
-(auxiliary; not a blueprint node).
+Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV.
 
 The constant module sheaf is represented by `siteConstantModuleFunctorGeneral`. The
 recorded geometric-morphism lift supplies the module inverse image and its underlying

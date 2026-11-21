@@ -17,8 +17,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 /-!
 # Natural successive open-extension quotients
 
-Source: Stacks Project, Tags 09AH, 03DI and 03DJ
-(blueprint: lem-sfb-open-filtration-successor).
+Source: Stacks Project, Tags 09AH, 03DI and 03DJ.
 -/
 
 @[expose] public section
@@ -113,8 +112,7 @@ private theorem successor_of_adjunctions
       isoWhiskerRight (isoWhiskerLeft R eQ) L⟩
 
 /-- The quotient for two nested opens is the extension of the closed complement.
-Source: Stacks Project, proetale.tex Tag 09AH and sites-modules.tex Tags 03DI--03DJ
-(blueprint: lem-sfb-open-filtration-successor).
+Source: Stacks Project, proetale.tex Tag 09AH and sites-modules.tex Tags 03DI--03DJ.
 
 Proof in words. Put a : W → V. For the cokernel Q of the open counit on V,
 restriction to W vanishes by the triangle identity and the fully faithful open

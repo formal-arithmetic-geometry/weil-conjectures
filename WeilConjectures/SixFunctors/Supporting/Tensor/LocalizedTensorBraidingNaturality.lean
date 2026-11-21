@@ -9,8 +9,7 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorIso
 
 /-! # Naturality of the localized tensor braiding
 
-Source: Stacks 06YS and 0941; derived pullback tensor isomorphism, step 11
-(blueprint: lem-coef-localized-tensor-braiding-naturality).
+Source: Stacks 06YS and 0941; derived pullback tensor isomorphism, step 11.
 -/
 
 @[expose] public section
@@ -92,8 +91,7 @@ and localized composition make both sides a*b times integral naturality.
 Tensor-product induction in both arrows proves the equality for arbitrary
 sums. The object equalities in rationalDerivedTensor_existsUnique identify
 all endpoints; transporting along them preserves the equality. Coefficients
-have degree zero, so this preserves the specified Koszul sign.
-(blueprint: lem-coef-localized-tensor-braiding-naturality). -/
+have degree zero, so this preserves the specified Koszul sign. -/
 theorem localizedTensorBraiding_naturality
     (hn : ∀ M M' N N' : sfIntegralConstructibleCategory l E W,
       ∀ (f : M ⟶ M') (g : N ⟶ N'),

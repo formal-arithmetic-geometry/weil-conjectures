@@ -15,7 +15,6 @@ import WeilConjectures.SixFunctors.ProEtale.OrdinaryUniformizerScalarComparison
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
 and the constant coefficient identification in integral-models proof (1).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -213,7 +212,6 @@ involves no other generator and no variable change of basis.
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
 and integral-models proof (1), constant coefficient comparison.
-(auxiliary; not a blueprint node).
 
 Proof: use the canonical constant-sheaf/inverse-image comparison on the integer ring
 and its first quotient, followed by reconstruction of section rings and restriction

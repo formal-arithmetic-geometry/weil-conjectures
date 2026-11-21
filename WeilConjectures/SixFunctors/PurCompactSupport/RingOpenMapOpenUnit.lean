@@ -26,7 +26,6 @@ attribute [-instance] WeilConjectures.integralOperationsSiteSmall
 
 Source: Stacks Tags 03DI and 08BS; the slice-presentation and subterminality
 argument used in `openProjectionInverse_isIso`.
-(blueprint: lem-sf-ring-open-map-open-unit).
 
 Proof: identify `openExtension` with a localized module extension on the
 pro-etale slice. The localized module extension has invertible unit by

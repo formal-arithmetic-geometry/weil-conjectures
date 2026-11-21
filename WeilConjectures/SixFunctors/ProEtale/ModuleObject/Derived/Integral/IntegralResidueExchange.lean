@@ -33,8 +33,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.Bounded
 
 /-! # Reduction of integral exchange to residue-coefficient exchange
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3) and Proposition 6.8.11(3)
-(blueprint: lem-weil-pbc-integral-residue-exchange).
+Source: Bhatt--Scholze, Lemma 6.5.9(3) and Proposition 6.8.11(3).
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -110,8 +109,7 @@ instance fact_isNilpotent_natCast_integralResidue :
 
 /-- Derived coefficient reduction compares integral exchange to residue exchange.
 Source: Bhatt--Scholze, Lemma 6.5.9(3) and Proposition 6.8.11(3), using the
-two-term finite free resolution of O_E/ℓ over O_E
-(blueprint: lem-weil-pbc-integral-residue-exchange).
+two-term finite free resolution of O_E/ℓ over O_E.
 
 Proof in words. Multiplication by ℓ is injective on O_E and its cokernel is A = O_E/ℓ.
 The proved integral module reduction sequence, pulled back by the exact monoidal

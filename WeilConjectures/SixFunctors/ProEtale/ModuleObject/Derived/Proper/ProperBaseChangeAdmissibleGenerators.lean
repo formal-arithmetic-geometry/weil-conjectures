@@ -566,7 +566,6 @@ The square may use any chosen Cartesian realization of the pullback.
 
 Source: blueprint proposition-proper-direct-image-constructible-complexes, finite (2), integral (3),
 rational (3), and proposition-composition-base-change-rf-shriek--4, proof step 2.
-(blueprint: lem-sfb-proper-base-change-admissible-generators).
 
 Proof: restrict the scalar extension of a coefficient isomorphism to its exact
 inverse-scalar-restriction model. This preserves finite constant models and Tor

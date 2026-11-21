@@ -14,8 +14,7 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientEvaluationTensorN
 
 /-! # Signed braiding and the coherent strict tensor tower
 
-Source: Stacks 07A4 and 0941.
-(blueprint: lem-coef-tensor-tower-signed-square). -/
+Source: Stacks 07A4 and 0941. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -212,8 +211,7 @@ private theorem tensorTowerLevel_def
 
 -- Assemble the three finite comparison squares without unfolding their choices.
 /-- Coherent signed total interchange commutes with the prescribed strict tower comparison.
-Source: Stacks 07A4 and 0941
-(blueprint: lem-coef-tensor-tower-signed-square).
+Source: Stacks 07A4 and 0941.
 Proof: the evaluation comparison sends each homogeneous pure tensor to the tensor
 of its evaluated sections. Its square with the signed swap follows from this
 formula and the Koszul formula, since evaluation preserves integer multiplication.

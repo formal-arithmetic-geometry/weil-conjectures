@@ -444,7 +444,6 @@ private theorem projection_surjective (W : Scheme.{t}) (n : ℕ) (U : W.ProEtᵒ
 Source: Stacks Project, Tags 03EK (section-tensor-product) and 03EL
 (lemma-tensor-product-pullback), the balanced-tensor calculation in step 2 of
 lem-weil-ramified-finite-module-comparison.
-(blueprint: lem-weil-ramified-coefficient-module-base-change).
 
 Proof: Write R,S for the two completed coefficient sheaves, B,T for the two
 finite ones, and c:R→S, π:R→B, q:S→T, j:B→T for the square. The supplied

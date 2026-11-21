@@ -129,7 +129,6 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 /-! # Total tensor evaluation on the ringed sequence site
 
 Source: Stacks Project, Tags 03EK, 07A4 and 0941.
-(blueprint: lem-coef-semilinear-total-tensor-evaluation)
 -/
 
 @[expose] public noncomputable section
@@ -261,8 +260,7 @@ private theorem evaluationTotalIso_inv_generator (n : ℕ)
 attribute [local irreducible] coefficientTensorGenerator coefficientTotalTensor
 
 /-- Evaluation commutes with the unbounded total tensor, uniquely on its pure generators.
-Source: Stacks 03EK, 07A4 and 0941
-(blueprint: lem-coef-semilinear-total-tensor-evaluation).
+Source: Stacks 03EK, 07A4 and 0941.
 Proof: use the identity-on-pure-sections ordinary evaluation tensor comparison.
 Evaluation is a left adjoint, so it preserves the coproducts defining each total degree.
 The inverse ordinary comparisons therefore give an invertible total chain comparison;

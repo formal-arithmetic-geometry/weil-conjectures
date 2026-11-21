@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.InternalPrincipalConeLevelAugmentati
 /-! # The internal quotient and principal cone comparison
 
 Source: Stacks Project, Tags 099B, 0A0E and 0941.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -141,7 +140,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The strict quotient Roos complex agrees with the principal cone completion,
 including its specified augmentation.
 Source: Stacks 0A0E, the regular principal Koszul-to-quotient comparison, and 0941.
-(auxiliary; not a blueprint node).
 
 Proof: use the coefficient resolution 0 -> R --pi^(n+1)--> R -> B_n -> 0.
 Its cone augmentation to B_n[0] is a quasi-isomorphism. Tensor with a K-flat P;

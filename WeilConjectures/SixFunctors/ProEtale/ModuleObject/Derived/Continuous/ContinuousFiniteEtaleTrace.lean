@@ -182,7 +182,6 @@ private theorem finiteEtaleTrace_of_compatible
 rational module, without any local-freeness or integral-lattice hypothesis.
 Source: blueprint, stratified lattice proof, "Pushing down by the trace";
 Bhatt--Scholze, Section 6.8.
-(blueprint: lem-sfb-continuous-finite-etale-trace)
 
 Proof. On every weakly etale finite splitting chart of p take the sum of the
 canonical sheet projections, each the pullback of the actual counit at p^*P

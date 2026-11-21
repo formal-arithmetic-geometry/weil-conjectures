@@ -18,7 +18,6 @@ import all WeilConjectures.CategoryTheory.UnitPowerCompleteness
 /-! # Reflection into internal principal cone outputs
 
 Source: Stacks Project, Tags 099B, 0A0E and 0941.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -253,7 +252,6 @@ attribute [local irreducible] CochainComplex.PrincipalCone.completion
 /-- Maps into a principal cone completion extend uniquely across the principal cone unit.
 Source: Stacks 099B (derived completion is a reflection), 0A0E (Koszul computation),
 and 0941 (Roos computation of the strict derived limit).
-(auxiliary; not a blueprint node).
 
 Proof: reconstruct section modules by the exact tensor equivalence. The scalar d is
 multiplication by the constant uniformizer, as follows by the displayed test on every

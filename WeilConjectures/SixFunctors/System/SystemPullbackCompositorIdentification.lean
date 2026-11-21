@@ -44,7 +44,7 @@ private theorem sequence_ring_eq (f : X ⟶ Y) :
     rfl
 
 /-- Both presentations of direct image use precisely the same ringed sequence-site map.
-Source: Stacks 03D3 (blueprint: lem-sf-system-pullback-compositor-identification).
+Source: Stacks 03D3.
 Proof: the unique coefficient map is the map on constant sections at every (n,U).
 The displayed direct images are the same pushforward after replacing that map. -/
 theorem sequence_direct_eq (f : X ⟶ Y) :
@@ -54,7 +54,7 @@ theorem sequence_direct_eq (f : X ⟶ Y) :
   rfl
 
 /-- The inverse-image presentations agree because leftAdjoint is applied to equal functors.
-Source: Stacks 03D3 (blueprint: lem-sf-system-pullback-compositor-identification).
+Source: Stacks 03D3.
 Proof: apply congruence to the established equality of the right adjoints. -/
 theorem sequence_inverse_eq (f : X ⟶ Y) :
     pullbackTensorSequenceInverse l E f = AmbientPullbackTensor.pull l E f none := by
@@ -64,7 +64,7 @@ theorem sequence_inverse_eq (f : X ⟶ Y) :
   exact chosen_left_eq _ _ (sequence_direct_eq l E f)
 
 /-- Exact localization preserves the equality of these inverse-image presentations.
-Source: Stacks 015F (blueprint: lem-sf-system-pullback-compositor-identification).
+Source: Stacks 015F.
 Proof: apply congruence to mapDerivedCategory. -/
 theorem sequence_derived_eq (f : X ⟶ Y) :
     pullbackTensorSequenceDerived l E f = AmbientPullbackTensor.derivedPull l E f none := by

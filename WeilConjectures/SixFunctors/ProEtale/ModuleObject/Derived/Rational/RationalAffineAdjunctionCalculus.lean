@@ -15,8 +15,7 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Restricting and composing rational compact-support adjunctions
 
-Source: blueprint affine-space induction, the identity and composition arguments
-(blueprint: lem-sfb-rational-affine-adjunction-calculus).
+Source: blueprint affine-space induction, the identity and composition arguments.
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +28,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- A specified ambient functor is the right adjoint of the specified compactification
-image on the literal rational localizing categories. Source: blueprint induction, Step 5
-(blueprint: lem-sfb-rational-affine-adjunction-calculus). -/
+image on the literal rational localizing categories. Source: blueprint induction, Step 5. -/
 def RationalCompactSupportAdjunction
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} {f : X ⟶ Y}
@@ -65,8 +63,7 @@ private theorem rationalAdmissible
   | some E => exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩)))
 
 /-- Replacing the displayed ambient right adjoint by an isomorphic functor does not
-change its restricted adjunction. Source: blueprint induction, functor comparisons
-(blueprint: lem-sfb-rational-affine-adjunction-calculus). -/
+change its restricted adjunction. Source: blueprint induction, functor comparisons. -/
 theorem RationalCompactSupportAdjunction.ofIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} {f : X ⟶ Y}
@@ -81,8 +78,7 @@ theorem RationalCompactSupportAdjunction.ofIso
   exact ⟨F, P, hF, ⟨hP ≪≫ Functor.isoWhiskerLeft _ e⟩, adj⟩
 
 /-- Open restriction, for any chosen compactification, is the exceptional inverse image
-on Loc(Dbc). Source: blueprint induction, Steps 4 and 6
-(blueprint: lem-sfb-rational-affine-adjunction-calculus).
+on Loc(Dbc). Source: blueprint induction, Steps 4 and 6.
 Proof: replace Loc(Dbc) by Loc(Dctf) using their equality for rational coefficients.
 Restrict the exact open adjunction. The trivial compactification computes extension
 by zero; compactification coherence compares it with the given one. -/
@@ -128,8 +124,7 @@ theorem rationalOpenCompactSupportAdjunction
 
 -- Keep compactification and full-subcategory transports folded.
 /-- Compact-support adjunctions compose with the ambient right adjoints in reverse order.
-Source: blueprint induction, Step 5
-(blueprint: lem-sfb-rational-affine-adjunction-calculus).
+Source: blueprint induction, Step 5.
 Proof: convert rational closures to the finite-Tor closures, apply the existing
 compactification compositor, and compose the two adjunctions. Full faithfulness of the
 inclusions identifies the supplied restrictions with those used by the compositor. -/

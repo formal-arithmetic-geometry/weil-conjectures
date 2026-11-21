@@ -88,7 +88,6 @@ private theorem preservation_of_equal_generators
     exact (h.2.2.2 K hctf).1
 
 /-- Source: blueprint proposition-construction-independence-rf-shriek steps 2, 3 and 6.
-(blueprint: lem-sfb-total-derived-preservation).
 
 Proof: Each standing scheme is quasi-compact and quasi-separated, since its structure
 map to Spec k is quasi-compact and separated. Specialize localizingClosure_ctf_equals_bc

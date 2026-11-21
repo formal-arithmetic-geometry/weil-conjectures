@@ -17,7 +17,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Constructibility of the cohomology of the localizing exceptional object
-(blueprint: lem-sfb-adic-localizing-exceptional-cohomology)
 -/
 
 @[expose] public section
@@ -54,7 +53,6 @@ Part (2). Proof: compare local finite-presentation charts with the field, algebr
 integral adic models using the cited local triviality and resolution theorems.  The smooth
 and closed local restriction calculations preserve constructibility; finite affine descent
 and uniqueness of right adjoints identify the result with the supplied `G`.
-(blueprint: lem-sfb-adic-localizing-exceptional-cohomology)
 -/
 private theorem homology_constructible_of_key (hkey : ExceptionalKey Λ g)
     (G : (boundedConstructibleLocalizingClosure Λ Y.left).FullSubcategory ⥤
@@ -131,8 +129,7 @@ private theorem homology_constructible_of_key (hkey : ExceptionalKey Λ g)
 
 /-- `ellAdic_localizing_rightAdjoint_obj_homology_constructible` for the coefficients `E` and
 `Q̄_ℓ`: the exceptional inverse image comes from Brown representability and the rational
-restriction theorem alone (blueprint: theorem-f-shriek-ell-adic-coefficients).
-(blueprint: lem-sfb-adic-localizing-exceptional-cohomology)
+restriction theorem alone.
 -/
 theorem ellAdic_localizing_rightAdjoint_obj_homology_constructible_rational
     (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ℓ k)

@@ -415,7 +415,6 @@ private def HasCoefficientLattice
 
 /-- Rationalization of the image of a surjective trace is the rational module.
 Source: blueprint main-20261015, stratified lattice proof, final paragraph.
-(blueprint: lem-sfb-spectral-finite-etale-trace-lattice).
 Proof. Exact scalar extension preserves the monic image inclusion. It sends the pushed
 lattice map to an isomorphism; the rational counit is invertible. Composing with the
 surjective trace makes the scalar extension of the image inclusion epi too, hence iso. -/
@@ -467,7 +466,6 @@ private theorem continuousTraceImage_rationalization_isIso
 
 /-- Rationalization of the image of a surjective trace is the rational module.
 Source: blueprint main-20261015, stratified lattice proof, final paragraph.
-(blueprint: lem-sfb-spectral-finite-etale-trace-lattice).
 Proof. Exact scalar extension preserves the monic image inclusion. It sends the pushed
 lattice map to an isomorphism; the rational counit is invertible. Composing with the
 surjective trace makes the scalar extension of the image inclusion epi too, hence iso. -/
@@ -673,7 +671,6 @@ private theorem normedDiagram_finiteLattice
 /-- Finite etale trace descent gives an integral lattice over spectral coefficients.
 Source: blueprint main-20261015, lemma-lattices-after-finite-stratification, "Pushing down by the
 trace"; Bhatt--Scholze, Section 6.8.
-(blueprint: lem-sfb-spectral-finite-etale-trace-lattice).
 
 Proof. Split the finite etale surjection etale locally. Sum the sheet counits to define
 p_*p*P → P; invariance under permutations glues these maps. On a nonempty chart there

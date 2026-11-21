@@ -167,8 +167,7 @@ import Mathlib.CategoryTheory.Generator.Basic
 
 Source: blueprint main-20261015, `sec-six-functors/sk-thm-sf-package/`
 `fix-prop-coherence.proof.md`, coefficient-comparison sentence; Stacks 0940,
-0941, 03D7, 06YY, 07A6 and 0D6E
-(blueprint: lem-pur-sequence-adjoint-resolution-shifts).
+0941, 03D7, 06YY, 07A6 and 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -198,8 +197,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 /-- Shift the actual simultaneous replacement, including the canonical termwise
-restriction comparison. Source: Stacks 0941, 070H
-(blueprint: lem-pur-sequence-adjoint-resolution-shifts). -/
+restriction comparison. Source: Stacks 0941, 070H. -/
 def purSequenceShiftedReplacement
     (N : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)
@@ -216,8 +214,7 @@ attribute [local irreducible] purSequenceShiftedReplacement
 `CommShift` includes naturality and the zero/addition coherence equations. The
 representative squares use the ordinary termwise shift, hence identity on the
 reindexed scalar-tensor terms and differential multiplied by `r.negOnePow`.
-Source: Stacks 06YY, 0941, 0D6E; cochain shifts in derived.tex
-(blueprint: lem-pur-sequence-adjoint-resolution-shifts). -/
+Source: Stacks 06YY, 0941, 0D6E; cochain shifts in derived.tex. -/
 structure PurSequenceLeftShiftModels
     (S : CoefficientDerivedSystemCalculus l E W)
     (O : PurSequenceOrdinaryAdjoints l E W)
@@ -267,8 +264,7 @@ structure PurSequenceLeftShiftModels
 
 /-- The right comparison square for the actual shifted simultaneous replacement.
 This names the same equation separately to keep repeated structure type checking small.
-Source: Stacks 0941 and 0D6E
-(blueprint: lem-pur-sequence-adjoint-resolution-shifts). -/
+Source: Stacks 0941 and 0D6E. -/
 def purSequenceRightResolutionCompatibility
     (S : CoefficientDerivedSystemCalculus l E W)
     (O : PurSequenceOrdinaryAdjoints l E W)
@@ -293,8 +289,7 @@ def purSequenceRightResolutionCompatibility
           |>.mapHomologicalComplex (.up ℤ)).obj J)
 
 /-- The degree component of the limit of the actual shifted replacement.
-Source: Stacks 0941 and the cochain shift convention
-(blueprint: lem-pur-sequence-adjoint-resolution-shifts). -/
+Source: Stacks 0941 and the cochain shift convention. -/
 def purSequenceShiftedDegreeCompatibility : Prop :=
   ∀ (N : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)
@@ -307,8 +302,7 @@ def purSequenceShiftedDegreeCompatibility : Prop :=
         (j.f (i + r)))
 
 /-- The total-limit shifts on every supplied simultaneous replacement.
-Source: Stacks 0941 and 0D6E
-(blueprint: lem-pur-sequence-adjoint-resolution-shifts). -/
+Source: Stacks 0941 and 0D6E. -/
 structure PurSequenceRightShiftModels
     (S : CoefficientDerivedSystemCalculus l E W)
     (O : PurSequenceOrdinaryAdjoints l E W)
@@ -327,8 +321,7 @@ structure PurSequenceRightShiftModels
   shifted_degree : purSequenceShiftedDegreeCompatibility l E W
 
 /-- The prescribed shifts with their actual adjunction compatibility.
-Source: Stacks 06YY, 0941 and 0D6E
-(blueprint: lem-pur-sequence-adjoint-resolution-shifts). -/
+Source: Stacks 06YY, 0941 and 0D6E. -/
 structure PurSequenceAdjointShifts
     (S : CoefficientDerivedSystemCalculus l E W)
     (O : PurSequenceOrdinaryAdjoints l E W)
@@ -342,8 +335,7 @@ structure PurSequenceAdjointShifts
 
 /-- Resolution-normalized identification of the sequence-site derived adjoints.
 Source: blueprint main-20261015, `fix-prop-coherence.proof.md`, coefficient-comparison
-sentence; Stacks 0940, 0941, 03D7, 06YS, 06YY, 07A6 and 0D6E
-(blueprint: lem-pur-sequence-adjoint-resolution-shifts).
+sentence; Stacks 0940, 0941, 03D7, 06YS, 06YY, 07A6 and 0D6E.
 
 Proof, following the node:
 1. The constant-tower functor preserves finite limits and is left adjoint to limit,

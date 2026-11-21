@@ -27,8 +27,7 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace CategoryTheory
 
 /-- The inverse-transpose word for a specified invertible restriction.
-Source: adjunction unit and counit identities
-(blueprint: lem-sf-refinement-open-restriction). -/
+Source: adjunction unit and counit identities. -/
 @[irreducible] def normalizedOpenAdjunct
     {A B : Type*} [Category A] [Category B]
     {J : A ⥤ B} {U : B ⥤ A} (a : J ⊣ U) (H : A ⥤ B) (V : A ⥤ A)
@@ -76,7 +75,6 @@ variable (R : Coefficients.{u})
 
 /-- The canonical restriction is a shift-compatible isomorphism.
 Source: Stacks 0F7B and 0F7I, restriction to the distinguished clopen section.
-(blueprint: lem-sf-refinement-open-restriction).
 
 Proof: form V = c.Z ×[d.Z] X. The section induced by c.i is open because c.i is
 open, and closed because r is separated. Open restriction commutes with derived
@@ -102,8 +100,7 @@ theorem exists_refinementRestriction :
     refinementRestriction_data_shift R r hi θ hθ⟩
 
 /-- Naturality of the specified restriction components.
-Source: the normalized restriction calculation, Stacks 0F7B
-(blueprint: lem-sf-refinement-open-restriction). -/
+Source: the normalized restriction calculation, Stacks 0F7B. -/
 theorem refinementRestriction_naturality
     {M N : DerivedCategory (pbcModules X (R.ring X))} (a : M ⟶ N) :
     (((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i).map a ≫
@@ -115,8 +112,7 @@ theorem refinementRestriction_naturality
   exact θ.naturality a
 
 /-- The restriction transformation with its literal, specified components.
-Source: Stacks 0F7B, the proper counit restriction
-(blueprint: lem-sf-refinement-open-restriction). -/
+Source: Stacks 0F7B, the proper counit restriction. -/
 @[irreducible] def refinementRestrictionNat :
     ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i ⟶
       (openExtension R c.i).mapDerivedCategory ⋙ pull R c.i where
@@ -129,8 +125,7 @@ private theorem refinementRestrictionNat_app
   rw [refinementRestrictionNat]
 
 /-- The restriction transformation is invertible.
-Source: the normalized restriction calculation, Stacks 0F7B
-(blueprint: lem-sf-refinement-open-restriction). -/
+Source: the normalized restriction calculation, Stacks 0F7B. -/
 theorem refinementRestrictionNat_isIso : IsIso (refinementRestrictionNat R r hi) := by
   obtain ⟨θ, happ, hiso, _⟩ := exists_refinementRestriction R r hi
   have he : refinementRestrictionNat R r hi = θ := by
@@ -142,8 +137,7 @@ theorem refinementRestrictionNat_isIso : IsIso (refinementRestrictionNat R r hi)
 attribute [local instance] refinementRestrictionNat_isIso
 
 /-- The restriction transformation has its canonical cochain shifts.
-Source: exact pullback composition and the derived counit, Stacks 0F7B
-(blueprint: lem-sf-refinement-open-restriction). -/
+Source: exact pullback composition and the derived counit, Stacks 0F7B. -/
 theorem refinementRestrictionNat_shift :
     (refinementRestrictionNat R r hi).CommShift ℤ := by
   obtain ⟨θ, happ, _, hshift⟩ := exists_refinementRestriction R r hi
@@ -155,8 +149,7 @@ theorem refinementRestrictionNat_shift :
 
 /-- The adjunct of the inverse restriction applied to the open unit. Its construction
 is on the ambient derived category; invertibility will require the finite-Tor domain.
-Source: Stacks 0F7B and 0F7I
-(blueprint: lem-sf-refinement-open-restriction). -/
+Source: Stacks 0F7B and 0F7I. -/
 @[irreducible] def refinementOpenMap :
     (openExtension R d.i).mapDerivedCategory ⟶
       (openExtension R c.i).mapDerivedCategory ⋙ push R r.hom :=
@@ -166,8 +159,7 @@ Source: Stacks 0F7B and 0F7I
     (openDerivedAdjunction R c.i).unit (refinementRestrictionNat R r hi)
 
 /-- The constructed open map has exactly the specified transpose.
-Source: adjunction triangle identities, Stacks 0F7I
-(blueprint: lem-sf-refinement-open-restriction). -/
+Source: adjunction triangle identities, Stacks 0F7I. -/
 theorem refinementOpenMap_normalization (M : DerivedCategory (pbcModules X (R.ring X))) :
     (openDerivedAdjunction R d.i).homEquiv _ _ ((refinementOpenMap R r hi).app M) ≫
         refinementRestriction R r hi M = (openDerivedAdjunction R c.i).unit.app M := by
@@ -193,8 +185,7 @@ private theorem pullAdjunction_shift {U V : Scheme.{u}} (g : U ⟶ V) :
     (proEtaleRingModuleAdjunction g (R.ring V) (R.ring U) (R.pull g))
 
 /-- The normalized pullback compositor has its usual cochain shift structure.
-Source: exact-functor localization, Stacks 0D6D
-(blueprint: lem-sf-refinement-open-restriction). -/
+Source: exact-functor localization, Stacks 0D6D. -/
 theorem geometricPullComposition_shift {U V W : Scheme.{u}}
     (h : U ⟶ V) (k : V ⟶ W)
     (hc : R.pull (h ≫ k) = proEtaleRingCompositeCoefficients h k
@@ -204,8 +195,7 @@ theorem geometricPullComposition_shift {U V W : Scheme.{u}}
   infer_instance
 
 /-- Proper composition has the conjugate cochain shifts.
-Source: mates of shift-compatible transformations, Stacks 0D6D
-(blueprint: lem-sf-refinement-open-restriction). -/
+Source: mates of shift-compatible transformations, Stacks 0D6D. -/
 theorem geometricPushComposition_shift {U V W : Scheme.{u}}
     (h : U ⟶ V) (k : V ⟶ W)
     (hc : R.pull (h ≫ k) = proEtaleRingCompositeCoefficients h k
@@ -219,8 +209,7 @@ theorem geometricPushComposition_shift {U V W : Scheme.{u}}
   infer_instance
 
 /-- The inverse-transpose construction respects ordinary integer shifts.
-Source: exact open units and counits and the proper counit, Stacks 0F7B
-(blueprint: lem-sf-refinement-open-restriction). -/
+Source: exact open units and counits and the proper counit, Stacks 0F7B. -/
 theorem refinementOpenMap_shift : (refinementOpenMap R r hi).CommShift ℤ := by
   let := openAdjunction_shift R c.i
   let := openAdjunction_shift R d.i

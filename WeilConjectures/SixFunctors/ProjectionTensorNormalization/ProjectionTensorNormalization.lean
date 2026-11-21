@@ -190,8 +190,7 @@ private theorem representativeSquare_iff {C : Type*} [Category* C]
   simpa only [Category.assoc] using (r.comp_inv_eq (f := f ≫ g ≫ h) (g := k ≫ m))
 
 /-- Unique tensor descent with the inverse representative normalization.
-Source: Stacks Tags 04VK and 07A4; the coefficient comparison in projection-formula step 13
-(blueprint: lem-sf-projection-tensor-normalization-descent).
+Source: Stacks Tags 04VK and 07A4; the coefficient comparison in projection-formula step 13.
 Proof: use tensorComparisonDescent on the natural isomorphism of representative total tensors.
 Its equation is the desired equation postcomposed with the target representative isomorphism.
 Postcompose with the inverse to obtain the stated normalization. Conversely cancel that inverse

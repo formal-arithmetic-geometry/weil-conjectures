@@ -21,7 +21,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- The standard-chart coordinates give the same projective line as the finite trace model.
 Source: blueprint lemma-affine-space-etale-localization, proof (1), coordinate identification.
-(auxiliary; not a blueprint node)
 Proof: reindex the homogeneous sections by the explicit bijection from two lifted indices
  to an optional lifted singleton. The existing coordinate reindexing theorem makes the
 resulting morphism invertible, and its construction gives the equation over the base. -/
@@ -46,7 +45,6 @@ theorem exists_projectiveLinePresentation (S : Scheme.{u}) :
 
 /-- A pullback of a presented projective line is again presented by the standard model.
 Source: blueprint lemma-affine-space-etale-localization, proof (1), pullback universal property.
-(auxiliary; not a blueprint node)
 Proof: transport the pullback square along the given isomorphism on its upper right.
 Its universal-property isomorphism to the standard projective-line square preserves
 both projections, in particular the projection to the new base. -/

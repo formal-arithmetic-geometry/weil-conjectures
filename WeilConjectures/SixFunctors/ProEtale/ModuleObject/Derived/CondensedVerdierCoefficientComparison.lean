@@ -30,7 +30,6 @@ used by the ordinary etale comparison, independently of the uniformizer generato
 
 Source: latest blueprint, det-pd-biduality-coefficients.proof.md, paragraph (i),
 and the coefficient normalization of lem-integral-coefficient-ext-comparison.
-(blueprint: lem-sf-condensed-verdier-coefficient-comparison).
 
 Proof: the spectral norm on the lifted finite extension is its embedded norm,
 so integerLiftEquiv explicitly identifies the two integer rings. A local ring

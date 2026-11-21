@@ -505,7 +505,6 @@ set_option linter.unusedVariables false in
 
 Source: blueprint proposition-composition-base-change-rf-shriek--4, proof steps 1--8,
 and proposition-construction-independence-rf-shriek step 7.
-(blueprint: lem-sfb-total-derived-cartesian-compact-support).
 
 Proof: the proper leg of the base-changed compactification is already the literal
 proper pullback. Transport the invertible derived open unit and the Cartesian derived

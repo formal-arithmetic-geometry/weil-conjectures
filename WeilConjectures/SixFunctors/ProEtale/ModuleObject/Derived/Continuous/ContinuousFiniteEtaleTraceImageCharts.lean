@@ -113,7 +113,6 @@ private theorem presentation_of_range
 of full algebraic lattices. This is a chart computation, without a freeness assertion.
 Source: blueprint, stratified lattice proof, "Pushing down by the trace";
 Bhatt--Scholze, Section 6.8.
-(blueprint: lem-sfb-continuous-finite-etale-trace-image-charts)
 
 Proof. Split p over etale neighbourhoods and trivialize P further pro-etale locally.
 Use the continuous module encoding, its restriction comparison and its scalar

@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.Integral.IntegralResidueTensorModel
 
 /-! Canonical tensor-route normalization, directly from the tensor/counit square.
 Source: Bhatt--Scholze, Lemma 6.5.9(5), Remark 6.8.15.
-(blueprint: new-integral-residue-tensor-route-model)
 
 STATEMENT-DISPUTED: the removed arbitrary-monoidal transport assertion used a fixed
 canonical model map on the right. Twisting the ordinary monoidal structure by -1
@@ -37,7 +36,6 @@ set_option linter.style.haveILetI false in
 set_option cleanup.letToHave false in
 /-- Compute the tensor-route against the ordinary homotopy tensor model.
 Source: Bhatt--Scholze, Lemma 6.5.9(5), Remark 6.8.15.
-(blueprint: new-integral-residue-tensor-route-model)
 
 Proof. Use the counit normalization of the fixed derived tensor presentation.
 Move the coefficient single-functor comparison through the tensor comparison by

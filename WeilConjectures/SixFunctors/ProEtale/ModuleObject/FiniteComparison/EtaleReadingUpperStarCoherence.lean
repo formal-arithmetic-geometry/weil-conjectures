@@ -30,8 +30,7 @@ comparison (`ProEtale.CondensedRing.finiteEtaleReadingUpperStarIso`).
   (`Etale.derivedSquareUpperStarIso`). This is the hypothesis of the cube law of mates
   `CategoryTheory.mateEquiv_app_cube`.
 
-This is the `ρ`-part of the compatibility of reduction modulo `ℓⁿ` with proper base change
-(blueprint `proposition-compatibility-purity-base-change`).
+This is the `ρ`-part of the compatibility of reduction modulo `ℓⁿ` with proper base change.
 -/
 
 @[expose] public section

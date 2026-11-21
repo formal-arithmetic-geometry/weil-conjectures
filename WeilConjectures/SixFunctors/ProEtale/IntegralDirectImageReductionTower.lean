@@ -14,7 +14,6 @@ import all WeilConjectures.SixFunctors.ScalarSixDerivedPullbackNormalization
 /-! # Quotient transitions and units under integral direct image
 
 Source: Stacks 099N, 0944; blueprint integral open direct image, Completeness paragraph.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -491,8 +490,7 @@ attribute [-instance] pointReductionMon pointTransitionMon integralComm finiteCo
   CondensedRing.scalarSixMap_isMonHom
 
 /-- The existing integral coefficient commutativity for the symmetric sheaf braiding.
-Source: coefficient scalar adjunctions
-(auxiliary; not a blueprint node). -/
+Source: coefficient scalar adjunctions. -/
 local instance integralSymmetricComm (Z : Scheme.{u}) :
     @IsCommMonObj (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) _ _
       (ProEtale.sheafSymmetricCategory Z).toBraidedCategory
@@ -500,8 +498,7 @@ local instance integralSymmetricComm (Z : Scheme.{u}) :
   exact AdicCompletion.ringCommutative l E Z
 
 /-- The existing finite coefficient commutativity for the symmetric sheaf braiding.
-Source: coefficient scalar adjunctions
-(auxiliary; not a blueprint node). -/
+Source: coefficient scalar adjunctions. -/
 local instance finiteSymmetricComm (Z : Scheme.{u}) (n : ℕ) :
     @IsCommMonObj (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) _ _
       (ProEtale.sheafSymmetricCategory Z).toBraidedCategory
@@ -512,8 +509,7 @@ local instance finiteSymmetricComm (Z : Scheme.{u}) (n : ℕ) :
 including its transitions and augmentation, before taking any derived limit.
 Assume the specified scalar mates and their finite geometric projections are invertible;
 this statement supplies the remaining transition and unit compatibility.
-Source: Stacks 099N, 0944; blueprint integral open direct image, Completeness paragraph
-(auxiliary; not a blueprint node).
+Source: Stacks 099N, 0944; blueprint integral open direct image, Completeness paragraph.
 
 Proof: use the lifted ring of integers with its principal uniformizer ideal. The
 sfb_integral_coefficient_limit identifies its completed coefficient sheaf. Apply the

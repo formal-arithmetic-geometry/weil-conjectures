@@ -42,7 +42,6 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 /-! # Tensor coherence for a geometric coefficient square
 
 Source: Stacks Project, Tags 07A4, 07A6 and 0E48.
-(blueprint: lem-sf-scalar-pull-tensor-coefficient-coherence).
 -/
 
 @[expose] public noncomputable section
@@ -309,8 +308,7 @@ private theorem scalarPull_tensor_representative
 This concerns only left adjoints and contains no projection or direct-image mate.
 
 Source: Stacks Project, Tags 07A4, 07A6 and 0E48, the tensor calculation before
-transposing the coefficient square
-(blueprint: lem-sf-scalar-pull-tensor-coefficient-coherence).
+transposing the coefficient square.
 
 Proof: choose flat-term K-flat resolutions of P and Q. Geometric pullback and
 scalar extension preserve these representatives. The two composite left adjoints

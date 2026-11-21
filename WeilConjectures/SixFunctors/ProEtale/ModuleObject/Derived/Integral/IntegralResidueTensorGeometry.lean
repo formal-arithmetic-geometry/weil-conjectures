@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.Integr
 /-! # Ordinary pullback data and the derived residue tensor square
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3) and Remark 6.8.15.
-(blueprint: new-integral-residue-tensor-geometry)
 -/
 
 @[expose] public section
@@ -45,7 +44,6 @@ and its derived tensor comparison agrees with the canonical scalar pull square.
 The monoidal structure and both tensor presentations have already been constructed.
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15, balanced tensor associativity.
-(blueprint: new-integral-residue-tensor-geometry)
 
 Proof. On ordinary module objects, apply inverse image to the two balanced action
 maps defining relative tensor. Inverse image preserves their coequalizer and its

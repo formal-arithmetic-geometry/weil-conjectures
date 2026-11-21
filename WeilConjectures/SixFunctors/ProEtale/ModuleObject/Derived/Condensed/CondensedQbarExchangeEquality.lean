@@ -45,8 +45,7 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
 /-- Coefficient extension respects the specified unit-square-counit exchange arrow.
 Source: `ModuleObject/Colimit/TwoColimit.lean`, final transport paragraph;
 `ModuleObject/ChangeOfCoefficients.lean`, Derived section; mate pasting in
-`Mathlib/CategoryTheory/Adjunction/Mates.lean`
-(blueprint: lem-weil-pbc-qbar-condensed-exchange-equality).
+`Mathlib/CategoryTheory/Adjunction/Mates.lean`.
 
 Proof in words. Write T for scalar extension, l_h for derived pullback, r_h for derived
 pushforward, α_h: T l_h,E ≅ l_h,Ω T for the pull comparison, and δ_h: T r_h,E → r_h,Ω T

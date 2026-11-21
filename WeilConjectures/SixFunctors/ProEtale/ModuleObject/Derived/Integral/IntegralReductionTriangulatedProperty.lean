@@ -27,7 +27,6 @@ import Mathlib.CategoryTheory.Abelian.ShortExact
 /-! # Reduction preserves triangulated properties after restriction
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), the two-term free resolution of O_E/ℓ.
-(blueprint: lem-weil-pbc-integral-reduction-triangulated-property)
 -/
 
 @[expose] public section
@@ -114,7 +113,6 @@ private theorem reduction_mem_aux
 regarded as an integral complex by restriction of scalars.
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), using the two-term free coefficient resolution.
-(blueprint: lem-weil-pbc-integral-reduction-triangulated-property)
 
 Proof. Pull the short exact integral coefficient sequence to X; exact monoidal inverse
 image identifies it with the short exact sequence from multiplication by ℓ on the regular

@@ -424,7 +424,6 @@ from the exact open adjunction to the total-derived open adjunction.
 
 Source: blueprint proposition-construction-independence-rf-shriek--7, clauses (1)--(3), and
 lem-sfb-total-derived-normalized-comparisons, inverse-component step.
-(blueprint: lem-sfb-boundary-refinement-total-normalization).
 
 Proof: use the supplied Loc(Dctf) membership of K (the caller obtains it from
 Loc(Dbc) by the equality of localizing closures). Dominate the source compactification

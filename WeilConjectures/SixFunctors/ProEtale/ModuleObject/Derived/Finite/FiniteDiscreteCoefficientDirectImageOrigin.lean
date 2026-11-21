@@ -38,8 +38,7 @@ variable
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
 
 /-- A qcqs derived direct image of a realized complex still has etale origin.
-Source: Bhatt--Scholze, Lemmas 5.4.1 and 5.4.3; Stacks Project, Tag 099R
-(blueprint: lem-weil-pbc-finite-discrete-direct-image-origin).
+Source: Bhatt--Scholze, Lemmas 5.4.1 and 5.4.3; Stacks Project, Tag 099R.
 
 Proof in words. Undo the exact coefficient equivalence on the source and target.
 Sectionwise restriction commutes with its common G, and the point-derived constant

@@ -54,8 +54,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructi
 # Finite-coefficient exceptional inverse image on the localizing closure
 
 Source: blueprint main-20261015, chap-Construction-of-f,
-theorem-f-shriek-finite-coefficients, statement and proof
-(blueprint: theorem-f-shriek-finite-coefficients).
+theorem-f-shriek-finite-coefficients, statement and proof.
 
 The small categories are the inverse images of the recorded Dctf object property under
 inclusion of the localizing closures. The smooth formula is stated after trivializing the

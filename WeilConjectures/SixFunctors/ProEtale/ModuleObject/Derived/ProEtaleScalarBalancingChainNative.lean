@@ -15,8 +15,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PullIsoMonoidal
 
 /-! # Condensed scalar balancing and its unbounded chain normalization
 
-Source: lemma-sp-reduction--1, proof Step 1, ordinary pullback/tensor comparison
-(blueprint: lem-sp-proetale-scalar-balancing-chain).
+Source: lemma-sp-reduction--1, proof Step 1, ordinary pullback/tensor comparison.
 
 The scalar-last tensor is the recorded relative tensor with the restricted regular coefficient
 module. Its scalar-first presentation uses the existing projection formula and symmetry.
@@ -39,20 +38,17 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (a : Λ ⟶ Λ') [IsMonHom a]
 
 /-- The coefficient `r_Z S_Z`, with its canonical restricted regular action.
-Source: lemma-sp-reduction--1, Step 1
-(blueprint: lem-sp-proetale-scalar-balancing-chain). -/
+Source: lemma-sp-reduction--1, Step 1. -/
 abbrev balancingCoefficient (Z : Scheme.{u}) :
     Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z) :=
   (Mod.comap (coefficientMap a Z)).obj (Mod.regular (condensedRingObj Λ' Z))
 
 /-- The ordinary scalar-last tensor, using the existing relative tensor functor.
-Source: lemma-sp-reduction--1, Step 1
-(blueprint: lem-sp-proetale-scalar-balancing-chain). -/
+Source: lemma-sp-reduction--1, Step 1. -/
 abbrev balancingTensor (Z : Scheme.{u}) := tensorRight (balancingCoefficient a Z)
 
 /-- The scalar-last to scalar-first presentation, with the scalar action on the scalar factor.
-Source: lemma-sp-reduction--1, Step 1
-(blueprint: lem-sp-proetale-scalar-balancing-chain). -/
+Source: lemma-sp-reduction--1, Step 1. -/
 def balancingExtensionIso (Z : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
     M ⊗ balancingCoefficient a Z ≅
@@ -68,8 +64,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The full pairing equation for the inverse-image unit-section formula. Applying the sheaf
 inverse-image adjunction and then evaluating pure local tensors gives exactly
 `f⁻¹(x ⊗ s) ↦ f⁻¹x ⊗ α_S(f⁻¹s)`; this equation also covers tensors which are only locally pure.
-Source: lemma-sp-reduction--1, Step 1
-(blueprint: lem-sp-proetale-scalar-balancing-chain). -/
+Source: lemma-sp-reduction--1, Step 1. -/
 def IsCondensedScalarBalancing
     (t : balancingTensor a Y ⋙ upperStar Λ f ≅ upperStar Λ f ⋙ balancingTensor a X) : Prop :=
   ∀ M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y),
@@ -354,8 +349,7 @@ private lemma balancingChain_normalization
 
 -- The proof compares several presentations of the degree-zero coefficient total.
 /-- Ordinary condensed scalar balancing, its transported scalar action and chain normalization.
-Source: lemma-sp-reduction--1, proof Step 1
-(blueprint: lem-sp-proetale-scalar-balancing-chain).
+Source: lemma-sp-reduction--1, proof Step 1.
 
 Proof:
 1. Naturality of the coefficient comparison gives the coefficient square. Transport extension

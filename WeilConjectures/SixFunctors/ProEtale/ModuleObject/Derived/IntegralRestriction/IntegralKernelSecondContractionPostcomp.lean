@@ -21,8 +21,7 @@ open DiagonalCoefficients
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 /-- The second contraction equation after transport along the canonical ambient twist
 comparison. This is the transport substep of the integral kernel calculation.
-Source: sk-thm-int-restriction-line.proof.md, paragraph (1).
-(blueprint: lem-integral-kernel-second-contraction-postcomp). -/
+Source: sk-thm-int-restriction-line.proof.md, paragraph (1). -/
 theorem integralKernel_second_contraction_postcomp
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

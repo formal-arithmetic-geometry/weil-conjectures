@@ -31,8 +31,7 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 /-!
 # Projective models from lisse residue cohomology
 
-Source: Stacks Project, proetale.tex, Tag 09C3 (blueprint:
-lem-fix-residue-lisse-projective-models).
+Source: Stacks Project, proetale.tex, Tag 09C3.
 
 The conclusion records a finite disjoint open cover and, on every member, a bounded
 complex whose terms split off finite sums of the completed coefficient sheaf.  The
@@ -246,8 +245,7 @@ and finite residue Tor amplitude has bounded finite-projective sheaf models on a
 clopen partition. Differentials are arbitrary maps over the completed ring sheaf.
 
 Source: Stacks Project, proetale.tex, Tag 09C3, with Lambda = O_E and I = (varpi);
-algebraization.tex, Tag 099I identifies the complete coefficient categories
-(blueprint: lem-fix-residue-lisse-projective-models).
+algebraization.tex, Tag 099I identifies the complete coefficient categories.
 
 Proof, following the six steps of the node:
 1. lem-sf-residue-lisse-clopen-bases gives a finite disjoint open cover. On each member X

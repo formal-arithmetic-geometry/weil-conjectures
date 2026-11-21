@@ -77,8 +77,7 @@ All schemes are separated and of finite type over a field `k` of characteristic 
   change for extension by zero. The morphism is the exchange morphism
   `boundedConstructibleOpenImmersionLowerShriekBaseChange'` of
   `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange`, which is
-  an isomorphism by `isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'` (blueprint
-  `sk-def-sfb-open-base-change`).
+  an isomorphism by `isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'`.
 
 -/
 

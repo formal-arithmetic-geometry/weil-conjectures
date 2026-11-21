@@ -29,7 +29,6 @@ The proper restriction map on each derived object is invertible because the
 refinement fibre product decomposes into the clopen distinguished section and
 its complement; extension by zero is exact on that section and the proper
 counit restricts to the identity there.
-(blueprint: lem-sf-refinement-open-restriction-is-iso-components).
 -/
 theorem refinementRestriction_component_isIso
     (M : DerivedCategory (pbcModules X (R.ring X))) :

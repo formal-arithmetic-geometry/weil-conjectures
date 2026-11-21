@@ -34,8 +34,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDi
 
 /-! # Comparison of integral reduction with finite etale exchange
 
-Source: Bhatt--Scholze, Sections 6.7--6.8
-(blueprint: lem-weil-pbc-integral-finite-exchange-comparison).
+Source: Bhatt--Scholze, Sections 6.7--6.8.
 -/
 
 @[expose] public section
@@ -69,8 +68,7 @@ variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
 
 /-- Reduction identifies the specified integral exchange with finite etale exchange.
 Source: Bhatt--Scholze, Lemmas 6.5.4 and 6.5.11; Proposition 6.8.11(3);
-comparison of the actual adjunction mates in `lem-weil-pbc-condensed-e-realization`
-(blueprint: lem-weil-pbc-integral-finite-exchange-comparison).
+comparison of the actual adjunction mates in `lem-weil-pbc-condensed-e-realization`.
 
 Proof in words. O_E is finite free over ℤ_ℓ. Thus A = O_E/ℓ has discrete quotient
  topology. The ring object pulled from its condensed continuous functions

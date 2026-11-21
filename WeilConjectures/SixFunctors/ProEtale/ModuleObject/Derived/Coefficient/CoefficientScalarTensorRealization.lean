@@ -44,8 +44,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 /-! # Scalar adjunction and tensor realization in the coefficient square
 
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 07A6; blueprint
-main-20261015, proper-base-change-rational.proof.md (3)
-(blueprint: lem-sfb-coefficient-scalar-tensor-realization).
+main-20261015, proper-base-change-rational.proof.md (3).
 
 The section realization retains the ordinary balanced generators, the derived Hom
 bijection, and the signed total representative equation. The pullback path comparison
@@ -252,8 +251,7 @@ variable [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coeffici
 
 /-- Scalar adjunction and tensor realization, and the tensor equation for the canonical
 coefficient ringed-square pullback comparison, on all unbounded objects.
-Source: Stacks 07A4, 07A6 and 0D6D; blueprint rational proper base change, proof (3)
-(blueprint: lem-sfb-coefficient-scalar-tensor-realization).
+Source: Stacks 07A4, 07A6 and 0D6D; blueprint rational proper base change, proof (3).
 
 Proof: the canonical scalar oplax structure is normalized on balanced generators, so
 its adjoint restriction lax structure is the prescribed one. Check the ordinary

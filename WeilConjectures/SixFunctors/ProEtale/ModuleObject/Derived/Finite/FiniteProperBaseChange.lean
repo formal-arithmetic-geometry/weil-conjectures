@@ -44,8 +44,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShrie
 # Proper direct image with finite coefficients
 
 Source: blueprint main-20261015, chap-Construction-of-f,
-sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.md
-(blueprint: proposition-proper-direct-image-constructible-complexes).
+sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.md.
 
 All three clauses use the recorded internal-module Dctf and ordinary uncompleted
 unbounded derived operations. The exchange is the mate of the composition comparison;
@@ -168,8 +167,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 This bundles the existing `Sheaf.sheafifyRingPresheaf` construction, so the finite ring
 may have the same arbitrary universe as the schemes, with no topology parameters.
 Source: blueprint sk-thm-sfb-proper-base-change-finite, finite discrete coefficients,
-and Bhatt--Scholze Section 5.3 (blueprint:
-proposition-proper-direct-image-constructible-complexes). -/
+and Bhatt--Scholze Section 5.3. -/
 noncomputable def finiteProperCoefficientRing (A : Type u) [CommRing A] :
     CommMon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) := by
   letI : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
@@ -192,8 +190,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 -- Elaborating the two composed derived pullbacks unfolds their module scalar transports.
 /-- The canonical ambient exchange for internal condensed-coefficient modules.
 Source: blueprint sk-thm-sfb-proper-base-change-finite, clause (2), and the
-unit/square/counit construction in sk-def-sfb-base-change-morphism
-(blueprint: proposition-proper-direct-image-constructible-complexes). -/
+unit/square/counit construction in sk-def-sfb-base-change-morphism. -/
 noncomputable abbrev finiteProperAmbientExchange := @finiteProperExchange.{u}
 
 attribute [local irreducible] AlgebraicGeometry.ProEtale.CondensedRing.lowerStar
@@ -573,7 +570,7 @@ set_option maxHeartbeats 20000 in
 /-- Proper direct image preserves Dctf, and its canonical exchange and projection arrows
 are invertible, in the ordinary unbounded derived category of internal modules.
 Source: blueprint main-20261015, proposition-proper-direct-image-constructible-complexes, clauses
-(1)--(3) (blueprint: proposition-proper-direct-image-constructible-complexes).
+(1)--(3).
 
 Proof:
 1. The sheafified constant coefficient ring is isomorphic, as a ring object, to the

@@ -84,7 +84,6 @@ private theorem adjacent {X Y : Scheme.{t}} (g : X ⟶ Y)
 
 /-- Every composite finite pullback transition reduces both finite coefficients.
 Source: Stacks 03D2, 03EK, 03EL; the transition construction of the integral operations.
-(blueprint: lem-weil-finite-pullback-transition-generators).
 
 Proof: For an adjacent transition its unit equation is the defining equation of
 integralOperationsPullbackTransition. Apply the finite reduction transition formula

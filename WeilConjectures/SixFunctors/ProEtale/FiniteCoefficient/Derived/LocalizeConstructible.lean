@@ -107,8 +107,7 @@ include hN hΛ s
 for an open immersion `j : U ⟶ X` into a scheme of finite type over `k` and a finite ring `Λ` killed
 by an integer invertible in `k`, `Rj_*` carries `Dᵇc_proét(U, Λ)` into `Dᵇc_proét(X, Λ)`. This is
 the case of an open immersion of
-`AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar`
-(blueprint `proposition-open-direct-image-preserves-finite`). -/
+`AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar`. -/
 theorem boundedConstructible_rightDerivedFunctor_lowerStar_of_isOpenImmersion
     {G : _root_.DerivedCategory (Sheaf (ProEt.topology U) (ModuleCat.{u + 1} Λ))}
     (hG : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) U G) :

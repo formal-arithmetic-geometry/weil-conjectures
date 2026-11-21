@@ -146,7 +146,6 @@ private theorem ramified_projection_square {X : Scheme.{t}}
 
 /-- Normalized finite pullback base change, with its adjacent tower square.
 Source: Stacks 03EL and 03EK; Bhatt--Scholze 6.8.2(1).
-(blueprint: lem-weil-ramified-finite-pullback-comparison).
 
 Proof: The inverse-image tensor comparison identifies the finite pullback with
 inverse image of P tensored over the inverse-image completed ring with the finite

@@ -156,7 +156,6 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- The constant-to-continuous integral map is flat and its ordinary first-residue
 extension is the continuous first-residue extension, followed by residue restriction.
 Source: integral-models proof (1)--(2), Stacks Tags 099L and 08FZ.
-(auxiliary; not a blueprint node).
 
 Proof: write A = O_E and k = A/(pi). The constant-function map to continuous
 k-valued sections is locally bijective, using the finite clopen cover by fibres.

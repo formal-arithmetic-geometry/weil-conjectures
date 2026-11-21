@@ -90,7 +90,6 @@ private theorem compOfEq_inv_eq
 by an automorphism of that coefficient.
 
 Source: blueprint latest, `thm-amb-p1-adjunction.proof.md`, transport through a presentation.
-(auxiliary; not a blueprint node)
 
 Proof: direct image along f is an equivalence, so lift the discrepancy b⁻¹ s⁻¹ uniquely
 back to an automorphism of B. Naturality of composition and of the comparison r moves

@@ -11,7 +11,6 @@ public import WeilConjectures.FromJoel.Algebra.Homology.HomologicalComplexFuncto
 /-! # The transported strict positive quotient tower
 
 Source: integral-models proof (1), Stacks Tags 099L, 099M and 0941.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +30,7 @@ local instance towerModelDerived : HasDerivedCategory (ConstantCompletion.Mod (r
 attribute [local irreducible] IntegralConstantModel.pointComparison upperStarFromPoint
 
 /-- Exact scalar restriction and the section equivalence before localization.
-Source: integral-models proof (1), Stacks 00YV and 099L.
-(auxiliary; not a blueprint node). -/
+Source: integral-models proof (1), Stacks 00YV and 099L. -/
 @[irreducible] def modules : AdicCompletion.Modules l E X ⥤ ConstantCompletion.Mod (ring l E X) :=
   Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (coefficientMap (IntegralConstantModel.pointComparison l E).inv.hom X) ⋙
@@ -54,15 +52,13 @@ instance modules_preservesFiniteColimits : PreservesFiniteColimits (modules l E 
 attribute [local semireducible] modules
 
 /-- Termwise application of the prescribed transport.
-Source: integral-models proof (1), Stacks 00YV and 099L.
-(auxiliary; not a blueprint node). -/
+Source: integral-models proof (1), Stacks 00YV and 099L. -/
 abbrev complex (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :=
   ((modules l E X).mapHomologicalComplex (.up ℤ)).obj P
 
 /-- Localization of the ordinary transport is the previously specified derived transport.
 Source: Stacks 05RU. Proof: compose the two canonical exact-functor composition
-isomorphisms and then the localization factorization of their composite.
-(auxiliary; not a blueprint node). -/
+isomorphisms and then the localization factorization of their composite. -/
 def complexIso (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
     (functor l E X).obj (DerivedCategory.Q.obj P) ≅
       DerivedCategory.Q.obj (complex l E X P) :=
@@ -76,7 +72,7 @@ def complexIso (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
       (DerivedCategory.Q.obj P) ≪≫ (modules l E X).mapDerivedCategoryFactors.app P
 
 /-- The actual reductions, with every quotient transition retained.
-Source: Stacks 099M and 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks 099M and 0941. -/
 def quotients (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
     ℕᵒᵖ ⥤ CochainComplex (ConstantCompletion.Mod (ring l E X)) ℤ :=
   Functor.ofOpSequence (X := fun n ↦ (AdicCompletion.level l E X n).obj P)
@@ -84,15 +80,14 @@ def quotients (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
     (modules l E X).mapHomologicalComplex (.up ℤ)
 
 /-- The actual positive quotient units commute with the successor transition.
-Source: Stacks 099M. Proof: apply the coefficient quotient identity termwise.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 099M. Proof: apply the coefficient quotient identity termwise. -/
 theorem quotient_levelUnit_step (P : CochainComplex (AdicCompletion.Modules l E X) ℤ)
     (n : ℕ) : AdicCompletion.levelUnit l E X P (n + 1) ≫
       AdicCompletion.levelStep l E X P n = AdicCompletion.levelUnit l E X P n := by
   exact AdicCompletion.levelUnit_step l E X P n
 
 /-- The strict quotient unit, transported before localization.
-Source: Stacks 099M (auxiliary; not a blueprint node). -/
+Source: Stacks 099M. -/
 def quotientUnits (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
     (Functor.const ℕᵒᵖ).obj (complex l E X P) ⟶ quotients l E X P :=
   NatTrans.ofOpSequence
@@ -108,14 +103,13 @@ def quotientUnits (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
           quotient_levelUnit_step])
 
 /-- The transposed actual quotient tower.
-Source: Stacks 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks 0941. -/
 def quotientComplex (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
     CochainComplex (ℕᵒᵖ ⥤ ConstantCompletion.Mod (ring l E X)) ℤ :=
   (HomologicalComplex.functorEquivalence _ (.up ℤ) ℕᵒᵖ).inverse.obj (quotients l E X P)
 
 /-- The cone obtained by evaluating a compatible family of chain maps.
-Source: the universal property of limits; Stacks 0941.
-(auxiliary; not a blueprint node). -/
+Source: the universal property of limits; Stacks 0941. -/
 def strictTowerUnitCone {C : Type*} [Category C] [HasZeroMorphisms C]
     (T : ℕᵒᵖ ⥤ CochainComplex C ℤ) (P : CochainComplex C ℤ)
     (v : (Functor.const ℕᵒᵖ).obj P ⟶ T) (i : ℤ) :
@@ -124,8 +118,7 @@ def strictTowerUnitCone {C : Type*} [Category C] [HasZeroMorphisms C]
   π := Functor.whiskerRight v (HomologicalComplex.eval C (.up ℤ) i)
 
 /-- A compatible family of chain maps induces a chain map to the termwise limit.
-Source: the universal property of limits; Stacks 0941.
-(auxiliary; not a blueprint node). -/
+Source: the universal property of limits; Stacks 0941. -/
 def strictTowerLimitUnit {C : Type*} [Category C] [HasZeroMorphisms C]
     [HasLimitsOfShape ℕᵒᵖ C] (T : ℕᵒᵖ ⥤ CochainComplex C ℤ)
     (P : CochainComplex C ℤ) (v : (Functor.const ℕᵒᵖ).obj P ⟶ T) :
@@ -146,7 +139,7 @@ def strictTowerLimitUnit {C : Type*} [Category C] [HasZeroMorphisms C]
     exact (v.app n).comm i j
 
 /-- Compatible quotient units induce the ordinary inverse-limit unit.
-Source: Stacks 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks 0941. -/
 def quotientLimitUnit (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
     complex l E X P ⟶
       ((lim : (ℕᵒᵖ ⥤ ConstantCompletion.Mod (ring l E X)) ⥤ _).mapHomologicalComplex

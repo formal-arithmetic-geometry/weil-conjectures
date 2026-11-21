@@ -23,8 +23,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 # Transport and fixed shifts of the K-flat module derived adjunction
 
 Source: Stacks Project, derived.tex, Tags 0DVC and 0FND; blueprint main-20261015,
-proper base change rational proof, paragraph (3)
-(blueprint: lem-sfb-kflat-derived-adjunction-transport-shifts).
+proper base change rational proof, paragraph (3).
 
 The two adjunctions below are the specified constructions from the same ordinary module
 adjunction. Both use `rightDerivedFunctorUnit` as their right derived comparison. The
@@ -50,8 +49,7 @@ variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 /-- The specified K-flat/K-injective adjunction is the transport of the canonical
 exact-left/K-injective-right adjunction, and its unit and counit commute with all fixed
 integer shifts. Source: Stacks Project, derived.tex, Tags 0DVC and 0FND, canonical derived
-adjunction; blueprint proper base change rational proof, paragraph (3)
-(blueprint: lem-sfb-kflat-derived-adjunction-transport-shifts).
+adjunction; blueprint proper base change rational proof, paragraph (3).
 
 Proof: (1) Apply `lem-sfb-abstract-derived-unit-factorization` to the two derived-unit
 lifts, using the termwise adjunction of `lem-weil-pbc-termwise-adjunction-homotopy` and

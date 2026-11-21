@@ -26,8 +26,7 @@ Source: the cycle-map naturality in Step 9 of point-section transport, refining
 the twist-removal step of blueprint `theorem-poincare-duality-frobenius`.
 Proof: conjugate the arrow by the two trivializations and lift it through the
 fully faithful functor. Naturality of the retraction isomorphism at that lift,
-followed by cancellation of the trivializations, is the asserted square.
-(blueprint: lem-pod-point-single-realization-natural) -/
+followed by cancellation of the trivializations, is the asserted square. -/
 theorem single_realization_naturality
     {A B : Type*} [Category* A] [Category* B]
     (S : A ⥤ B) [S.Full] [S.Faithful] (H : B ⥤ A)

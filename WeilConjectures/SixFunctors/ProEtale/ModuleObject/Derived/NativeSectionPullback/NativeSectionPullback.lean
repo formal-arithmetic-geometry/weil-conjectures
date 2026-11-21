@@ -26,8 +26,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- A pullback compositor with its composite named explicitly.
-Source: the pullback identities in the family-constancy proof
-(blueprint: lem-pur-native-section-pullback). -/
+Source: the pullback identities in the family-constancy proof. -/
 @[irreducible] def compAlong {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (k : X ⟶ Z) (h : f ≫ g = k) :
     (upperStar Λ k).leftDerivedFunctor ≅
@@ -37,8 +36,7 @@ by
   exact leftDerivedUpperStarComp Λ f g
 
 /-- Objectwise form of the compositor's equality transport.
-Source: named-composite pullback coherence
-(blueprint: lem-pur-native-section-pullback). -/
+Source: named-composite pullback coherence. -/
 theorem compAlong_hom_app {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (k : X ⟶ Z) (h : f ≫ g = k)
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -51,8 +49,7 @@ theorem compAlong_hom_app {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
   simp only [compAlong, eqToHom_refl, Category.id_comp]
 
 /-- The inverse objectwise equality transport for a named compositor.
-Source: named-composite pullback coherence
-(blueprint: lem-pur-native-section-pullback). -/
+Source: named-composite pullback coherence. -/
 theorem compAlong_inv_app {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (k : X ⟶ Z) (h : f ≫ g = k)
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -65,8 +62,7 @@ theorem compAlong_inv_app {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
   simp only [compAlong, eqToHom_refl, Category.comp_id]
 
 /-- The compositor associativity law with named composites.
-Source: pullback coherence used in family constancy
-(blueprint: lem-pur-native-section-pullback). -/
+Source: pullback coherence used in family constancy. -/
 theorem compAlong_assoc {W X Y Z : Scheme.{u}}
     (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z)
     (fg : W ⟶ Y) (gh : X ⟶ Z) (fgh : W ⟶ Z)
@@ -89,8 +85,7 @@ theorem compAlong_assoc {W X Y Z : Scheme.{u}}
     using leftDerivedUpperStarComp_assoc_app Λ f g h C
 
 /-- Pullback along a section evaluates a constant family.
-Source: family constancy and its normalization
-(blueprint: lem-pur-native-section-pullback). -/
+Source: family constancy and its normalization. -/
 def sectionIso {B P : Scheme.{u}} (i : B ⟶ P) (a : P ⟶ B) (h : i ≫ a = 𝟙 B) :
     (upperStar Λ a).leftDerivedFunctor ⋙ (upperStar Λ i).leftDerivedFunctor ≅ 𝟭 _ :=
   (compAlong Λ i a (𝟙 B) h).symm ≪≫ leftDerivedUpperStarId Λ B
@@ -132,8 +127,7 @@ private theorem section_pasting {K : Type*} [Category K]
 
 -- Native derived pullback types need the allowance used by their coherence laws.
 /-- The two evaluations of a pulled-back constant family agree by associativity and units.
-Source: base-change compatibility of normalized family constancy
-(blueprint: lem-pur-native-section-pullback). -/
+Source: base-change compatibility of normalized family constancy. -/
 theorem section_commute {B B' P P' : Scheme.{u}} (b : B' ⟶ B)
     (a : P ⟶ B) (a' : P' ⟶ B') (f : P' ⟶ P) (i : B ⟶ P) (i' : B' ⟶ P')
     (hf : f ≫ a = a' ≫ b) (hi : i' ≫ f = b ≫ i)
@@ -189,8 +183,7 @@ variable {B B' P P' : Scheme.{u}} (b : B' ⟶ B) {a : P ⟶ B} {a' : P' ⟶ B'}
     (condensedRingObj Λ B'))}
 
 /-- Read a constant presentation at a section using only pullback coherence.
-Source: restriction of the normalized family comparison
-(blueprint: lem-pur-native-section-pullback). -/
+Source: restriction of the normalized family comparison. -/
 def readingIso (θ : ((upperStar Λ i).leftDerivedFunctor).obj F ≅ C)
     (e : ((upperStar Λ f).leftDerivedFunctor).obj F ≅
       ((upperStar Λ a').leftDerivedFunctor).obj C₀) :
@@ -201,8 +194,7 @@ def readingIso (θ : ((upperStar Λ i).leftDerivedFunctor).obj F ≅ C)
     ((upperStar Λ i').leftDerivedFunctor).mapIso e ≪≫ (sectionIso Λ i' a' h').app C₀
 
 /-- Changing the chosen fibre identification changes its reading contravariantly.
-Source: the formal restriction calculation
-(blueprint: lem-pur-native-section-pullback). -/
+Source: the formal restriction calculation. -/
 theorem readingIso_trans_left
     {C' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology B) Ab.{u + 1})
       (condensedRingObj Λ B))}
@@ -216,8 +208,7 @@ theorem readingIso_trans_left
   simp [readingIso]
 
 /-- Changing constant coordinates changes the reading by the same isomorphism.
-Source: naturality of evaluation at a section
-(blueprint: lem-pur-native-section-pullback). -/
+Source: naturality of evaluation at a section. -/
 theorem readingIso_trans_right
     {C₁ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology B') Ab.{u + 1})
       (condensedRingObj Λ B'))}
@@ -245,8 +236,7 @@ private theorem reading_restrict_pasting {K : Type*} [Category K]
     Iso.inv_hom_id_assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id]
 
 /-- A family comparison, restricted and then read at the same section, gives the identity.
-Source: restriction of family constancy, using the compositor associativity and unit laws
-(blueprint: lem-pur-native-section-pullback). -/
+Source: restriction of family constancy, using the compositor associativity and unit laws. -/
 theorem readingIso_restrict (hf : f ≫ a = a' ≫ b) (h : i ≫ a = 𝟙 B)
     (κ : F ≅ ((upperStar Λ a).leftDerivedFunctor).obj C) :
     readingIso Λ b f hi h'

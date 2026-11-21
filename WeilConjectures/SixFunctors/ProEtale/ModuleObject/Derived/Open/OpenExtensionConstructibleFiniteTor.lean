@@ -120,8 +120,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Open extension preserves constructibility and specified Tor bounds
 
 Source: blueprint main-20261015, chap-Construction-of-f,
-sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md, proof (3)
-(blueprint: lem-sfb-open-extension-zero-constructible-finite-tor).
+sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md, proof (3).
 
 The categories are the ordinary unbounded derived categories of internal modules.
 Constant scalar-model constructibility and general ring-object constructibility are
@@ -183,8 +182,7 @@ No admissibility or completeness hypothesis is imposed on the condensed coeffici
 
 Source: blueprint main-20261015, det-sf-comp-composition-interchange.proof.md, proof (3);
 lem-sfb-dc-open-lower-shriek-preserves.proof.md; det-lem-int-tensor-projection.proof.md,
-open immersions and derived version
-(blueprint: lem-sfb-open-extension-zero-constructible-finite-tor).
+open immersions and derived version.
 
 Proof: finite type over the field and quasi-compactness make U and X Noetherian.
 For every cohomology module use the proved module-level extension theorem, which

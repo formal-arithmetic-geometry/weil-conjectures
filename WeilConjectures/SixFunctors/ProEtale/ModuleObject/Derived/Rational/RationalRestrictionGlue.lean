@@ -30,7 +30,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 # Gluing rational constructibility and restricting the exceptional adjunction
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-restriction/
-sk-thm-restriction-glue.md and its proof (blueprint: theorem-f-shriek-ell-adic-coefficients).
+sk-thm-restriction-glue.md and its proof.
 
 The two restriction functors below retain the objects and maps of the supplied
 compactification functor and its right adjoint. The theorem identifies their Hom
@@ -54,8 +54,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- Restrict the actual compactification composite to bounded constructible objects.
 The membership proof changes neither its objects nor its maps.
-Source: blueprint sk-thm-restriction-glue, paragraph (2)
-(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
+Source: blueprint sk-thm-restriction-glue, paragraph (2). -/
 noncomputable def restrictionGlueLowerShriek (c : Compactification f)
     (hF : ∀ A, constantModelBoundedConstructible Λ X A →
       constantModelBoundedConstructible Λ Y
@@ -68,8 +67,7 @@ noncomputable def restrictionGlueLowerShriek (c : Compactification f)
 
 /-- Restrict the supplied right adjoint, using the full inclusion of Dbc into Loc(Dctf).
 No new exceptional inverse image is chosen.
-Source: blueprint sk-thm-restriction-glue, paragraph (2)
-(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
+Source: blueprint sk-thm-restriction-glue, paragraph (2). -/
 noncomputable def restrictionGlueUpperShriek
     (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤
       (localizingClosureProEtale Λ X).FullSubcategory)
@@ -251,8 +249,7 @@ exactly the original one, after forgetting the full-subcategory membership proof
 The arguments `h`, `G`, and `adj` name the functor and adjunction supplied by
 theorem-existence-exceptional-inverse-image; no preservation of Dbc or inclusion in the localizing
 closure is assumed. The coefficient identification is an isomorphism of condensed ring objects.
-Source: blueprint sk-thm-restriction-glue, clauses (1)--(2)
-(blueprint: theorem-f-shriek-ell-adic-coefficients).
+Source: blueprint sk-thm-restriction-glue, clauses (1)--(2).
 
 Proof plan, following the six steps of the DAG:
 1. The standing finite-type schemes are Noetherian (pqf-lem-locnoeth-lft,

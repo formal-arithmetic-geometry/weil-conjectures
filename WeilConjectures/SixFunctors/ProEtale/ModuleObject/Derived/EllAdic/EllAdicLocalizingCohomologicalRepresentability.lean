@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.SixFunctors.SetGeneratedDerivedSolutionSet
 /-! # Cohomological Brown representability on the constructible localizing hull
 
 Source: blueprint `theorem-exceptional-inverse-image` (3), in its well-generated form.
-(blueprint: lem-sfb-adic-localizing-cohomological-representability)
 -/
 
 @[expose] public section
@@ -47,7 +46,6 @@ set_option linter.unusedSectionVars false in
 Source: blueprint `theorem-exceptional-inverse-image` (3), `det-existence-localizing.proof.md` (3);
 Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2;
 Krause, *Localization theory for triangulated categories*, Theorems 7.2.1 and 5.1.1.
-(blueprint: lem-sfb-adic-localizing-cohomological-representability)
 
 Proof: the ambient category of module objects is Grothendieck abelian, so its unbounded derived
 category is well generated. Bounded constructible complexes form an essentially small category.

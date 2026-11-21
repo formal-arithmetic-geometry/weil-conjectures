@@ -20,8 +20,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 /-!
 # The proper square of an open subscheme and its closed complement
 
-Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, proof (3)
-(blueprint: lem-sfb-proper-open-complement-square).
+Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, proof (3).
 
 The closed complement is arbitrary with the prescribed point set; no reducedness is assumed.
 Vanishing takes place in the ordinary unbounded derived category of internal modules.
@@ -42,8 +41,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 complementary pair on the source, with separated finite-type schemes and vanishing mixed
 restriction of open extension by zero on every unbounded coefficient-module complex.
 
-Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, proof (3)
-(blueprint: lem-sfb-proper-open-complement-square).
+Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, proof (3).
 
 Proof: (1) Base change the quasi-compact open immersion and the closed immersion to W;
 base change r to Y and Z. Open and closed immersions, quasi-compactness and properness

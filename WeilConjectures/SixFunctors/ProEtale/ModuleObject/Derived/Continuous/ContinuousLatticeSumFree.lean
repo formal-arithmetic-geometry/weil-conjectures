@@ -24,8 +24,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- A presentation of an internal module by continuous functions, including its
 actual scalar action and restriction maps.
-Source: Bhatt--Scholze, Section 6.8, and the continuous coefficient encoding.
-(blueprint: def-sfb-continuous-function-module-presentation) -/
+Source: Bhatt--Scholze, Section 6.8, and the continuous coefficient encoding. -/
 structure ContinuousFunctionPresentation (X : Scheme.{u}) (A : Type)
     [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] [TotallyDisconnectedSpace A]
     (N : Type v) [AddCommGroup N] [Module A N] [TopologicalSpace N]
@@ -145,7 +144,6 @@ private theorem continuousFunctions_isFree
 
 /-- A module presented by continuous functions into a finite sum of full lattices is free.
 Source: the continuous lattice sum theorem and the continuous coefficient encoding.
-(blueprint: lem-sfb-continuous-lattice-sum-internal-free)
 
 Proof. The continuous lattice sum theorem gives natural integral coordinates on
 all pro-etale objects. Compose these coordinates with the supplied section

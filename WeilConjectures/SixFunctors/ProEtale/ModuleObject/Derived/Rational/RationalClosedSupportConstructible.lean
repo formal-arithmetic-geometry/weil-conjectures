@@ -22,7 +22,7 @@ import WeilConjectures.AlgebraicGeometry.Rational.RationalOpenDirectImageConstru
 
 Source: blueprint main-20261015, chap-Construction-of-f,
 `sk-prop-closed-adjoint-constructible-support.md`, final assertion, interpreted with
-`definition-constructible-sheaves` (blueprint: lem-sfb-rational-closed-support-constructible).
+`definition-constructible-sheaves`.
 -/
 
 @[expose] public section
@@ -119,8 +119,7 @@ The auxiliary open immersion j presents the complement of the given closed immer
 `formalClosedSupport` is the existing functor i* ker(id -> j*j*).
 
 Source: blueprint main-20261015, chap-Construction-of-f,
-`sk-prop-closed-adjoint-constructible-support.md`, final assertion and its proof
-(blueprint: lem-sfb-rational-closed-support-constructible).
+`sk-prop-closed-adjoint-constructible-support.md`, final assertion and its proof.
 
 Proof:
 1. The field is Noetherian. Finite type makes X and Z Noetherian by

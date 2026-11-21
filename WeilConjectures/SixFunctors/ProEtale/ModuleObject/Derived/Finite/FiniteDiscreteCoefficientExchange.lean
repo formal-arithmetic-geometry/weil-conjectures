@@ -55,8 +55,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 set_option linter.unusedVariables false in
 /-- Finite discrete realization on constructible sheaves and on the three exchange steps.
 Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3;
-Stacks Project, Tag 09AK
-(blueprint: lem-weil-pbc-finite-discrete-coefficient-realization).
+Stacks Project, Tag 09AK.
 
 Proof in words. Use the supplied monoidal constant-ring identification on every
 scheme. Choose the canonical family induced from the point in the application.

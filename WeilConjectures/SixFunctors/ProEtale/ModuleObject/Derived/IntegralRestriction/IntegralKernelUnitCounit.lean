@@ -34,8 +34,7 @@ attribute [local instance 20000] CategoryTheory.Mod.derivedMonoidalCategory
 attribute [local instance 30000] instCategoryDerivedCategory CategoryTheory.Mod.instCategory
 attribute [local instance 1] ProjectionMorphismData.category
 /-- The prescribed twist-shift is the twist in the ambient diagonal formulas.
-Source: the positive integral Tate-line convention in paragraph (1).
-(blueprint: def-integral-kernel-unit-counit). -/
+Source: the positive integral Tate-line convention in paragraph (1). -/
 def integralAmbientTwistIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pullTwistShift ℓ E f 1 ≅
       moduleObjectDerivedPullback (Profinite.padicIntegersRingObj ℓ E.val) f ⋙
@@ -48,8 +47,7 @@ def integralAmbientTwistIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Functor.isoWhiskerRight ((curriedTensor _).flip.mapIso e) (shiftFunctor _ (2 : ℤ)))
 
 /-- A pair of transformations on the two specified restricted functors.
-Source: paragraph (1), displayed unit and counit.
-(blueprint: def-integral-kernel-unit-counit). -/
+Source: paragraph (1), displayed unit and counit. -/
 def IntegralUnitCounitType
     (Y : Scheme.{u})
     (hq : ∀ K, IntegralCompactSupport.localizing
@@ -69,8 +67,7 @@ def IntegralUnitCounitType
 
 /-- Componentwise normalization by the four-arrow diagonal insertion and inverse
 projection followed by the trace. Every map is fixed; only invertibility proofs are
-existential. Source: paragraph (1), formulas v, B and e.
-(blueprint: def-integral-kernel-unit-counit). -/
+existential. Source: paragraph (1), formulas v, B and e. -/
 def IntegralUnitCounitNormalized
     (Y : Scheme.{u})
     [∀ x : ProjectiveLine Y, Invertible (ℓ : (ProjectiveLine Y).residueField x)]
@@ -810,7 +807,6 @@ private theorem integral_inversion_conditions
 -- Specializing the ambient formulas requires extended typeclass and reduction search.
 /-- The fixed diagonal and trace formulas form a unique natural pair.
 Source: paragraph (1), construction of eta and epsilon.
-(blueprint: lem-integral-unit-counit-construction).
 Proof: proper base change inverts the self-square exchange on the localizing closure.
 The proper projection formula inverts the q projection and the p2 twisted projection;
 the shifted integral line belongs to the closure. The Cartesian Tate comparison fixes

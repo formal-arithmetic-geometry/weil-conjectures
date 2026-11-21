@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.Sf.SfClopenScalarChainComparison
 /-! # Scalar extension and actual quotient complexes on a clopen
 
 Source: Stacks Project, Tag 06YY.
-(blueprint: lem-sf-clopen-scalar-quotient-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +34,7 @@ naturality of a derived tower, preservation of completeness, or a Tor bound.
 Source: Stacks Project, sites-cohomology.tex, Lemma derived-base-change (Tag 06YY),
 Lemma pullback-K-flat, and Lemma pullback-tensor-product; sites.tex, restriction to
 an object. Extracted from the scalar-extension and tensor-formula paragraphs of
-lem-sf-clopen-derived-compatibility
-(blueprint: lem-sf-clopen-scalar-quotient-comparison).
+lem-sf-clopen-derived-compatibility.
 
 Proof: write T as the disjoint union of U and its open complement, including an
 empty component. The finite-clopen module equivalence identifies restriction with

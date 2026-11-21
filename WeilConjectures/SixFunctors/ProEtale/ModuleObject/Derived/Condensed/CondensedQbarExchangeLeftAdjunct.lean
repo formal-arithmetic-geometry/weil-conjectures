@@ -165,8 +165,7 @@ set_option backward.isDefEq.respectTransparency true in
 /-- Normalization of the left side of coefficient exchange under the pullback adjunction.
 Source: ModuleObject/Colimit/TwoColimit.lean, final transport paragraph;
 ChangeOfCoefficients.lean, derivedPullIso and derivedPushHom;
-Mathlib/CategoryTheory/Adjunction/Mates.lean
-(blueprint: lem-weil-pbc-qbar-condensed-exchange-left-adjunct).
+Mathlib/CategoryTheory/Adjunction/Mates.lean.
 
 Proof in words. Expand the left adjunct using functoriality. The adjunct of the Omega base-change
 map is its square comparison followed by pullback of the counit: this follows by expanding

@@ -36,8 +36,7 @@ namespace WeilConjectures
 /-- Exact evaluation at the terminal object makes every finite free module sheaf
 projective, with an independent coefficient universe.
 
-Source: Stacks Project, Tag 0946
-(blueprint: lem-sf-weakly-contractible-projective).
+Source: Stacks Project, Tag 0946.
 Proof: forgetting the module structure sends an epimorphism to a locally surjective
 map of abelian sheaves, then to an epimorphism of set sheaves. The evaluation hypothesis
 makes its map on terminal sections surjective. Evaluation preserves kernels sectionwise,

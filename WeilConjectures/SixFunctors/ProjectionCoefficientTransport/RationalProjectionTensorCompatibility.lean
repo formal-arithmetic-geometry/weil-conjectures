@@ -12,7 +12,6 @@ import Mathlib.Algebra.CharP.CharAndCard
 /-! # Shared tensor comparison for rational projection mates
 
 Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-rational-projection-tensor-compatibility).
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +39,7 @@ variable {D : FiniteFieldDatum.{u}}
     (V X).prod (V X) ⋙ Functor.uncurry.obj (T' X))
 
 /-- Tensor comparison followed by the pullback comparison in the second slot.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-rational-projection-tensor-compatibility). -/
+Source: thm-sf-pf-field.proof.md, Compatibility. -/
 def inner {X Y : SixFunctorSpace D} (f : X ⟶ Y) (K : B X) (L : B Y) :
     (V X).obj (((T X).obj K).obj ((S.pull f).obj L)) ≅
       ((T' X).obj ((V X).obj K)).obj ((S'.pull f).obj ((V Y).obj L)) :=
@@ -50,8 +48,7 @@ def inner {X Y : SixFunctorSpace D} (f : X ⟶ Y) (K : B X) (L : B Y) :
       (Iso.prod (Iso.refl _) ((C.directAdjunction f).left.app L))
 
 /-- The source endpoint of the localized compact-support projection.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-rational-projection-tensor-compatibility). -/
+Source: thm-sf-pf-field.proof.md, Compatibility. -/
 def source {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (c : Compactification f.hom.left) (K : B X) (L : B Y) :
     (V Y).obj (((T Y).obj ((S.support f c).obj K)).obj L) ≅
@@ -61,8 +58,7 @@ def source {X Y : SixFunctorSpace D} (f : X ⟶ Y)
       (Iso.prod ((C.supportAdjunction f c).left.app K) (Iso.refl _))
 
 /-- The target endpoint of the localized compact-support projection.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-rational-projection-tensor-compatibility). -/
+Source: thm-sf-pf-field.proof.md, Compatibility. -/
 def target {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (c : Compactification f.hom.left) (K : B X) (L : B Y) :
     (V Y).obj ((S.support f c).obj (((T X).obj K).obj ((S.pull f).obj L))) ≅
@@ -71,8 +67,7 @@ def target {X Y : SixFunctorSpace D} (f : X ⟶ Y)
   (C.supportAdjunction f c).left.app _ ≪≫ (S'.support f c).mapIso (inner C t f K L)
 
 /-- The proper source endpoint uses the direct-image comparison.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-rational-projection-tensor-compatibility). -/
+Source: thm-sf-pf-field.proof.md, Compatibility. -/
 def properSource {X Y : SixFunctorSpace D} (f : X ⟶ Y) (K : B X) (L : B Y) :
     (V Y).obj (((T Y).obj ((S.direct f).obj K)).obj L) ≅
       ((T' Y).obj ((S'.direct f).obj ((V X).obj K))).obj ((V Y).obj L) :=
@@ -81,8 +76,7 @@ def properSource {X Y : SixFunctorSpace D} (f : X ⟶ Y) (K : B X) (L : B Y) :
       (Iso.prod ((C.directAdjunction f).right.app K) (Iso.refl _))
 
 /-- The proper target endpoint uses the same tensor/pullback comparison.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-rational-projection-tensor-compatibility). -/
+Source: thm-sf-pf-field.proof.md, Compatibility. -/
 def properTarget {X Y : SixFunctorSpace D} (f : X ⟶ Y) (K : B X) (L : B Y) :
     (V Y).obj ((S.direct f).obj (((T X).obj K).obj ((S.pull f).obj L))) ≅
       (S'.direct f).obj
@@ -973,9 +967,7 @@ attribute [local irreducible] rationalProjectionTensorComparison
   coordinateTensor coordinateOpen coordinateSupport
 
 /-- The compact-support component square for the canonical tensor comparison.
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-rational-projection-tensor-compatibility-compact).
-(blueprint: lem-sf-rational-projection-tensor-compatibility).
+Source: thm-sf-pf-field.proof.md, Compatibility...
 
 Proof: expand the compactification projection as the counit mate followed by the
 open projection. Use the unit and counit equations of the coefficient comparison,
@@ -1033,9 +1025,7 @@ theorem rationalProjectionTensorCompatibility_compactSupport
   exact hc
 
 /-- The proper counit component square for the canonical tensor comparison.
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-rational-projection-tensor-compatibility-proper).
-(blueprint: lem-sf-rational-projection-tensor-compatibility).
+Source: thm-sf-pf-field.proof.md, Compatibility...
 
 Proof: expand the proper projection as the right-adjoint projection mate. The
 counit equation for the coefficient comparison and the normalized tensor
@@ -1085,7 +1075,6 @@ or asserting any compactification, composition, or pentagon law.
 
 Source: thm-sf-pf-field.proof.md, Compatibility, and the final coherence sentence
 of fix-prop-projection-formula.proof.md.
-(blueprint: lem-sf-rational-projection-tensor-compatibility).
 
 Proof: use the unchanged integral object formula and pure-tensor morphism formula
 of rationalDerivedTensor_existsUnique. They give a natural tensor comparison with

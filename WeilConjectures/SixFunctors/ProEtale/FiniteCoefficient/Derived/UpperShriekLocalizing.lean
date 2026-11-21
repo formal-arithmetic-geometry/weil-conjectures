@@ -19,7 +19,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tor
 
 Let `Λ` be a finite commutative ring and `k` a field which is finite or separably closed, so
 that `cd_ℓ(k)` is finite (the standing base field of the blueprint). For a scheme `X` the
-localizing closure `Loc(Dctf(X, Λ))` (blueprint `definition-localizing-subcategory`) is the smallest
+localizing closure `Loc(Dctf(X, Λ))` is the smallest
 triangulated subcategory of `D(X_proét, Λ)` containing `Dctf(X, Λ)` and closed under direct sums
 (`AlgebraicGeometry.ProEtale.DerivedCategory.localizingConstructibleFiniteTor`). It is
 pretriangulated and has direct sums, computed in `D(X_proét, Λ)`.
@@ -44,13 +44,13 @@ and `Hom(Λ, ∏ₙ Λ[n]) = ∏ₙ Hⁿ(ℝ, 𝔽₂)` is not a direct sum, so 
 ## Inputs
 
 - `ProEtale.DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor`
-  (blueprint `lemma-hypotheses-brown-representability`): `Loc(Dctf(X, Λ))` has split idempotents,
+: `Loc(Dctf(X, Λ))` has split idempotents,
   and `Dctf(X, Λ)` is essentially small and compactly generates `Loc(Dctf(X, Λ))`. Essential
   smallness is `AlgebraicGeometry.ProEtale.DerivedCategory.exists_skeleton_constructibleFiniteTor`,
   compactness is
   `AlgebraicGeometry.ProEtale.DerivedCategory.isCompactObj_of_constructibleFiniteTor`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.localizingConstructibleFiniteTor_lowerShriek`
-  (blueprint `proposition-construction-independence-rf-shriek`): `Rf_!(c)` maps `Loc(Dctf(X, Λ))`
+: `Rf_!(c)` maps `Loc(Dctf(X, Λ))`
   into `Loc(Dctf(Y, Λ))` and `Dctf(X, Λ)` into `Dctf(Y, Λ)`, and preserves direct sums of objects of
   `Loc(Dctf(X, Λ))`; see
   `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizingLowerShriek`.
@@ -164,7 +164,7 @@ variable {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [
 
 /-- The compact-support direct image `Rf_! = Rp_* ∘ j_! : Loc(Dctf(X, Λ)) ⥤ Loc(Dctf(Y, Λ))` on
 the localizing closures, attached to a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`: the
-restriction of `Rf_!(c)` (blueprint `proposition-construction-independence-rf-shriek`). -/
+restriction of `Rf_!(c)`. -/
 noncomputable abbrev rightDerivedLowerShriekLocalizing :
     DerivedCategoryLocalizingFiniteTor Λ X ⥤ DerivedCategoryLocalizingFiniteTor Λ Y :=
   ObjectProperty.localizingClosureLift _ _
@@ -181,8 +181,7 @@ noncomputable def rightDerivedLowerShriekLocalizingCompιIso :
         rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c :=
   ObjectProperty.localizingClosureLiftCompιIso _ _ _ _
 
-/-- `Rf_!` on the localizing closures preserves direct sums (blueprint
-`proposition-construction-independence-rf-shriek`). -/
+/-- `Rf_!` on the localizing closures preserves direct sums. -/
 instance (J : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete J) (rightDerivedLowerShriekLocalizing Λ aY c) :=
   have := (DerivedCategory.localizingConstructibleFiniteTor_lowerShriek_of_finiteType

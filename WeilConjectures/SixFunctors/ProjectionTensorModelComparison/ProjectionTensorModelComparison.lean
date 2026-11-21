@@ -95,8 +95,7 @@ private theorem ratio_of_squares {C : Type*} [Category* C] {U A B V W : C}
   simpa only [Category.assoc] using h'
 
 /-- The normalized ratio of two tensor models intertwines their actual completion arrows.
-Source: Bhatt--Scholze 3.4.10 and 6.5.5; Stacks 06YS--06YT
-(blueprint: lem-sf-projection-tensor-model-comparison).
+Source: Bhatt--Scholze 3.4.10 and 6.5.5; Stacks 06YS--06YT.
 Proof: restrict the derived localization to flat-term K-flat complexes and take its product.
 Fully faithful restriction lifts the ratio of the two representative isomorphisms to an
 isomorphism of the ordinary tensor functors. Its defining equation is the first clause.

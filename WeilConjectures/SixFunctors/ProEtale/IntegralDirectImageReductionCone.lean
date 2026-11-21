@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortEx
 /-! # The finite direct-image projection as a map of scalar cone triangles
 
 Source: blueprint integral open direct image, Reduction paragraph; Stacks 014A, 06YY.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +44,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {U X : Scheme.{u}} (j : U ⟶ X)
 
 /-- The geometric mate of the inverse scalar pullback comparison, at exponent n+1.
-Source: blueprint integral open direct image, Reduction paragraph; Stacks 06YY
-(auxiliary; not a blueprint node). -/
+Source: blueprint integral open direct image, Reduction paragraph; Stacks 06YY. -/
 def integralFiniteProjection (n : ℕ) [IsIso (integralReductionPullbackMap l E j n)]
     (K : DerivedCategory (AdicCompletion.Modules l E U)) :=
   ((CondensedRing.derivedUpperStarLowerStarAdjunction
@@ -300,8 +298,7 @@ private theorem integralLevel_triangle (Y : Scheme.{u}) (n : ℕ)
 
 /-- After scalar restriction, the specified projection completes the identity square
 on uniformizer multiplication to a morphism of distinguished triangles.
-Source: blueprint integral open direct image, Reduction paragraph; Stacks 014A, 06YY
-(auxiliary; not a blueprint node).
+Source: blueprint integral open direct image, Reduction paragraph; Stacks 014A, 06YY.
 
 Proof: the positive-power uniformizer short exact sequence supplied by
 `derived_nakayama_resolution` presents the restricted finite coefficient as a cone

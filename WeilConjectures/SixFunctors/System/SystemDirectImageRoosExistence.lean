@@ -19,7 +19,6 @@ This is the object-existence part of the projection-compatible direct-image
 comparison.  The construction uses one K-injective system resolution and the
 derived tower limit theorem; the finite evaluation comparisons are supplied by
 the companion interface theorem.
-(blueprint: stage3-weil-system-direct-image-roos-existence)
 -/
 
 @[expose] public noncomputable section

@@ -155,7 +155,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 /-- The finite etale trace is epic and its integral image is locally free.
 Source: Bhatt--Scholze, Section 6.8; blueprint main-20261015,
 stratified lattice proof, Pushing down by the trace.
-(blueprint: lem-sfb-continuous-finite-etale-trace-lattice).
 
 Proof. Split the finite etale surjection etale locally. On a split chart define trace
 by summing the sheet counits. Permutation invariance and sheaf descent glue this map.

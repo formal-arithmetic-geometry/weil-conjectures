@@ -153,7 +153,6 @@ import all WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 
 The reusable local-freeness API formerly private to the stratified lattice proof.
 Source: Bhatt--Scholze, Section 6.8; Stacks Project, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
 -/
 
 @[expose] public section
@@ -167,7 +166,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- An internal module is locally finite free when a pro-etale scheme cover makes it finite free.
 Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
 
 This is exactly the scheme-cover predicate used by the lattice statements. -/
 abbrev LocallyFree {X : Scheme.{u}}
@@ -179,7 +177,6 @@ abbrev LocallyFree {X : Scheme.{u}}
 
 /-- Local finite freeness is invariant under an isomorphism of internal modules.
 Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
 
 Use the same cover and apply the existing free_of_iso to its pulled-back
 module isomorphisms. -/
@@ -193,7 +190,6 @@ lemma locallyFree_of_iso {X : Scheme.{u}}
 
 /-- Restriction along an invertible coefficient map preserves local finite freeness.
 Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
 
 Use the same cover. On each member apply the existing free_comap and
 free_of_iso to the mapModComapIso comparison. -/
@@ -210,7 +206,6 @@ lemma locallyFree_comap {X : Scheme.{u}}
 
 /-- Inverse image preserves finite free internal modules.
 Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
 
 Map the chosen finite biproduct presentation. Additivity preserves this
 biproduct, and strong monoidality identifies the image of the regular module. -/
@@ -226,7 +221,6 @@ lemma free_map {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 /-- Inverse image preserves local finite freeness over its pulled-back coefficient ring.
 Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
 
 Base change the trivializing cover. Freeness is preserved by inverse image;
 the pullback-square equation and mapMod composition isomorphism identify the
@@ -245,7 +239,6 @@ lemma locallyFree_map {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 /-- Canonical condensed-coefficient inverse image preserves local finite freeness.
 Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(blueprint: lem-weil-pbc-continuous-locally-free-pullback)
 
 First pull back over the inverse-image coefficient ring. Restriction along
 the inverse condensed coefficient comparison preserves freeness, and the

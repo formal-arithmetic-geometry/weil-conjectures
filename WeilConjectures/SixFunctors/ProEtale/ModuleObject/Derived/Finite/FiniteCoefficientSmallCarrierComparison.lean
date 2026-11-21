@@ -14,7 +14,6 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
 sk-prop-scalar-six/_section.md, coefficient list (1)--(3), and the encoding bridge
 in proof steps 1--6 of the DAG node.
-(blueprint: lem-sfb-finite-coefficient-small-carrier-comparison).
 
 The two endpoints are the actual `cartesianFinitePointRing` and
 `Profinite.continuousMapRingObj`. The comparison postcomposes by a ring equivalence;
@@ -32,8 +31,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Bundle the actual finite-coefficient sheaf, with its fixed bottom topology and
 canonical commutative ring-object structure. This introduces no new coefficient model.
-Source: CartesianCoefficients.lean, `cartesianFinitePointRing`, and node statement D_u(A).
-(blueprint: lem-sfb-finite-coefficient-small-carrier-comparison). -/
+Source: CartesianCoefficients.lean, `cartesianFinitePointRing`, and node statement D_u(A). -/
 abbrev finiteCoefficientComparisonSource (A : Type u) [CommRing A] :
     CommMon (Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) := by
   letI : TopologicalSpace A := ⊥
@@ -41,8 +39,7 @@ abbrev finiteCoefficientComparisonSource (A : Type u) [CommRing A] :
   exact CommMon.mk (cartesianFinitePointRing A)
 
 /-- Bundle the recorded continuous-function sheaf and its canonical commutative structure.
-Source: ContinuousMapCondensedRing.lean and node statement C_u(T).
-(blueprint: lem-sfb-finite-coefficient-small-carrier-comparison). -/
+Source: ContinuousMapCondensedRing.lean and node statement C_u(T). -/
 abbrev finiteCoefficientComparisonTarget (T : Type) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] :
     CommMon (Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) :=
@@ -52,8 +49,7 @@ abbrev finiteCoefficientComparisonTarget (T : Type) [CommRing T] [TopologicalSpa
 The existing universe-polymorphic postcomposition first lands in `ULift T`; lowering
 that auxiliary carrier gives sections in the actual small-carrier endpoint. The
 forgetful `sheafCompose` and its `IsMonHom` instance retain multiplication and unit.
-Source: node proof step 3, using def-sfb-continuous-map-condensed-ring-map.
-(blueprint: lem-sfb-finite-coefficient-small-carrier-comparison). -/
+Source: node proof step 3, using def-sfb-continuous-map-condensed-ring-map. -/
 def finiteCoefficientComparisonHom (A : Type u) [CommRing A]
     (T : Type) [CommRing T] [TopologicalSpace T] [DiscreteTopology T] (r : A ≃+* T) :
     finiteCoefficientComparisonSource A ⟶ finiteCoefficientComparisonTarget T := by
@@ -78,8 +74,7 @@ def finiteCoefficientComparisonHom (A : Type u) [CommRing A]
 /-- Postcompose small-carrier sections by the inverse carrier ring equivalence.
 Lift the auxiliary coefficient carrier before applying the recorded postcomposition
 map, then forget to abelian sheaves with its canonical `IsMonHom` compatibility.
-Source: node proof step 3, using def-sfb-continuous-map-condensed-ring-map.
-(blueprint: lem-sfb-finite-coefficient-small-carrier-comparison). -/
+Source: node proof step 3, using def-sfb-continuous-map-condensed-ring-map. -/
 def finiteCoefficientComparisonInv (A : Type u) [CommRing A]
     (T : Type) [CommRing T] [TopologicalSpace T] [DiscreteTopology T] (r : A ≃+* T) :
     finiteCoefficientComparisonTarget T ⟶ finiteCoefficientComparisonSource A := by
@@ -106,8 +101,7 @@ def finiteCoefficientComparisonInv (A : Type u) [CommRing A]
 /-- The forward and inverse postcomposition maps compose to the identity on D_u(A).
 Source: node proof step 4. On a section s, the composite has value
 r.symm (r (s x)) = s x. Extensionality of functions, continuous maps, lifted sections,
-sheaf maps and bundled ring-object maps proves the identity, including empty S.
-(blueprint: lem-sfb-finite-coefficient-small-carrier-comparison). -/
+sheaf maps and bundled ring-object maps proves the identity, including empty S. -/
 theorem finiteCoefficientComparison_hom_inv_id (A : Type u) [CommRing A]
     (A₀ : Type) [CommRing A₀] [TopologicalSpace A₀] [DiscreteTopology A₀]
     (r : A ≃+* A₀) :
@@ -124,8 +118,7 @@ theorem finiteCoefficientComparison_hom_inv_id (A : Type u) [CommRing A]
 /-- The inverse and forward postcomposition maps compose to the identity on C_u(A₀).
 Source: node proof step 4. On a section t, the composite has value
 r (r.symm (t x)) = t x. The same sectionwise and bundled-map extensionality proves
-this identity. No nonzero-ring hypothesis is used.
-(blueprint: lem-sfb-finite-coefficient-small-carrier-comparison). -/
+this identity. No nonzero-ring hypothesis is used. -/
 theorem finiteCoefficientComparison_inv_hom_id (A : Type u) [CommRing A]
     (A₀ : Type) [CommRing A₀] [TopologicalSpace A₀] [DiscreteTopology A₀]
     (r : A ≃+* A₀) :

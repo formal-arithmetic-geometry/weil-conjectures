@@ -20,8 +20,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactificatio
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-comp-composition,
 clause (1), rational cases, and its proof, paragraphs "The composition isomorphism" and
-"Canonicity and associativity"
-(blueprint: lem-sfb-localizing-lower-shriek-composition).
+"Canonicity and associativity".
 
 The statement is recorded here as the canonical project interface for this composition.
 

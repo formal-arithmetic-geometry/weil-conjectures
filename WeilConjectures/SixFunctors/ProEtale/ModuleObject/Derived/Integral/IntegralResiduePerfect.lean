@@ -26,7 +26,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortEx
 /-! # Dualizability of the residue coefficient as an integral complex
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), and the two-term free resolution of
-O_E/ℓ (blueprint: lem-weil-pbc-integral-residue-perfect).
+O_E/ℓ.
 -/
 
 @[expose] public section
@@ -45,8 +45,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- The residue coefficient module, restricted to integral coefficients and placed
 in degree zero, is dualizable.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), applied to the two-term free resolution
-(blueprint: lem-weil-pbc-integral-residue-perfect).
+Source: Bhatt--Scholze, Lemma 6.5.9(3), applied to the two-term free resolution.
 
 Proof in words. Pull the proved short exact integral module reduction sequence from
 the profinite point to T. Inverse image is exact and strong monoidal, so its two

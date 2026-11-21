@@ -308,7 +308,6 @@ private theorem ramified_projection (e : ℕ) (he : 1 ≤ e)
 
 /-- Extension of a completed coefficient quotient is the quotient by the extended ideal.
 Source: Stacks 093M and 03EK; the coefficient part of Bhatt--Scholze 6.8.2(1).
-(blueprint: lem-weil-ramified-coefficient-quotient-comparison).
 
 Proof: Define the completed map by the compatible same-index quotient inclusions.
 Its ramified projection factors through the source quotient: the image of its

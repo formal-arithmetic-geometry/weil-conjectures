@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 
 # Coefficients and geometric categories
 
-This file formalises the coefficient setup of the trace formula (blueprint `sk-d-setup`): the
+This file formalises the coefficient setup of the trace formula: the
 subcategories `Dᵇctf(X, A) ⊂ D(X_proét, A)` of bounded constructible complexes of finite Tor
 amplitude are triangulated, closed under isomorphisms, stable under `Lf^*` for every morphism
 `f` and under `Rf_!` for compactifiable quasi-compact morphisms to schemes of finite type over

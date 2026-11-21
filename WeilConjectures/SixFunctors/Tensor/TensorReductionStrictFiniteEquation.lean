@@ -41,7 +41,7 @@ private theorem cancel_tensor_comparisons
   rw [← F.map_comp, h, F.map_id, Category.comp_id]
 
 /-- The strict map satisfies the scalar tensor equation before localization.
-Source: Stacks 07A4 (blueprint: lem-coef-tensor-reduction-strict-finite-equation). -/
+Source: Stacks 07A4. -/
 theorem tensorReductionStrictMap_finite (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

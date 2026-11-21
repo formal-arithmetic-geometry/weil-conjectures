@@ -46,7 +46,7 @@ on the "ind-constructible heart" and has finite amplitude there.
 The heart is replaced here by the smallest class of module objects containing the constructible
 ones and closed under isomorphisms, kernels, cokernels, extensions and direct sums
 (`AlgebraicGeometry.ProEtale.CondensedRing.constructibleCoproductClosure`). It is contained in
-the class `IndCons(Z, Λ)` of the blueprint (blueprint `proposition-ind-constructible-sheaves`), so
+the class `IndCons(Z, Λ)` of the blueprint, so
 the hypotheses below are implied by blueprint `proposition-compactness-proper-direct-image--2` (1).
 The complexes with cohomology in this class form a localizing subcategory containing `Dᵇc(Z)⟦Λ⟧`,
 hence `Loc(Dᵇc(Z)⟦Λ⟧)`.

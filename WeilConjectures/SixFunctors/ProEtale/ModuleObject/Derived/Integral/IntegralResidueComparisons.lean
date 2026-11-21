@@ -31,7 +31,6 @@ are invertible on the unbounded ambient derived categories.
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), with the two-term perfect coefficient resolution;
 Remark 6.8.15 for the pull-composition constraints.
-(blueprint: lem-weil-pbc-integral-residue-comparisons)
 
 Proof. Derive the underived scalar-pull comparison on K-flat resolutions. It identifies
 A_X tensor f* K with f* (A_Y tensor K) by associativity of relative tensor and the

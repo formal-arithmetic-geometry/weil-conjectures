@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-! K-flat quasi-isomorphism preservation of the terminal scalar realization.
 
 Source: Hemo--Richarz--Scholbach, Lemma 4.1(1), Remark 3.2.
-(blueprint: new-lem-zl-contractible-realization-kflat-data).
 -/
 
 @[expose] public noncomputable section
@@ -245,7 +244,6 @@ end Presentation
 K-flat complexes.
 
 Source: Hemo--Richarz--Scholbach, Lemma 4.1(1), Remark 3.2.
-(blueprint: new-lem-zl-contractible-realization-kflat-data).
 
 Proof: write `A = O_sec(U)` and `E` for the internal/section module equivalence. As in
 the braided-data node, `E L(M)` is naturally the sheafification of

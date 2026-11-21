@@ -12,7 +12,6 @@ public import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 Source: Stacks Project, Tag 03EK. These are proved tensor-section helpers for
 ramified finite pullback, separated to keep individual module compile times small.
-(blueprint: lem-weil-ramified-finite-tensor-sections).
 -/
 
 @[expose] public noncomputable section
@@ -42,7 +41,7 @@ variable
     (f : N ⟶ N'), F.map f = eqToHom (h N) ≫
     SheafOfModules.changeOfRingsHom φ N f ≫ eqToHom (h N').symm)
 /-- Section tensor in a functor identified with sheafified scalar extension.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-finite-tensor-sections). -/
+Source: Stacks 03EK. -/
 noncomputable def tensorSection
     (N : SheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
@@ -51,7 +50,7 @@ noncomputable def tensorSection
     ((toSheafify J (SheafOfModules.changeOfRingsPresheaf φ N).presheaf).app U
       (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))
 /-- Unit tensor sections detect equality of maps out of scalar extension.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-finite-tensor-sections). -/
+Source: Stacks 03EK. -/
 theorem tensorSection_ext
     (N : SheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
@@ -71,7 +70,7 @@ theorem tensorSection_ext
 
 include hm in
 /-- Naturality of section tensors for a specified scalar-extension functor.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-finite-tensor-sections). -/
+Source: Stacks 03EK. -/
 theorem tensorSection_map
     {N N' : SheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)}
@@ -102,7 +101,7 @@ theorem tensorSection_map
 
 include hm in
 /-- The specified tensor functor is naturally isomorphic to the standard extension functor.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-finite-tensor-sections). -/
+Source: Stacks 03EK. -/
 noncomputable def tensorPresentation [EssentiallySmall.{r} C] :
     F ≅ CategoryTheory.CochainPullback.extensionFunctor φ :=
   NatIso.ofComponents (fun N ↦ eqToIso (h N)) (by
@@ -111,7 +110,7 @@ noncomputable def tensorPresentation [EssentiallySmall.{r} C] :
     simp [CategoryTheory.CochainPullback.extensionFunctor])
 
 /-- The adjunction transported along a tensor presentation has the normalized unit.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-finite-tensor-sections). -/
+Source: Stacks 03EK. -/
 theorem tensorAdjunction_unit [EssentiallySmall.{r} C]
     (N : SheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -140,7 +139,7 @@ end TensorProof
 attribute [local irreducible] HasDerivedCategory.standard scalarWitness
 
 /-- Scalar tensor sections are natural in the module.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-finite-tensor-sections). -/
+Source: Stacks 03EK. -/
 theorem scalar_map_tensor {W : Scheme.{t}}
     {R S : Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}} (c : R ⟶ S)
     {M N : Mod R} (f : M ⟶ N) (U : W.ProEtᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
@@ -153,7 +152,7 @@ theorem scalar_map_tensor {W : Scheme.{t}}
         (scalarWitness.{t, u} c).choose_spec.choose_spec.choose a) f U s x
 
 /-- The scalar adjunction transported through its actual sheafified tensor presentation.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-finite-tensor-sections). -/
+Source: Stacks 03EK. -/
 @[irreducible] noncomputable def scalarAdjunction {W : Scheme.{t}}
     {R S : Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}} (c : R ⟶ S) :
     scalar.{t, u} c ⊣ SheafOfModules.restrictScalars
@@ -165,7 +164,7 @@ Source: Stacks 03EK (blueprint: lem-weil-ramified-finite-tensor-sections). -/
         (scalarWitness.{t, u} c).choose_spec.choose_spec.choose f)).symm
 
 /-- The scalar adjunction unit is the section tensor with coefficient one.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-finite-tensor-sections).
+Source: Stacks 03EK.
 
 Proof: transport the extension-of-scalars adjunction along the object and map
 identifications of the specified scalar functor with sheafified balanced tensor.

@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 # Restricted pushforward under its preservation hypothesis
 
 Source: the blueprint, `chap-Construction-of-f`, restriction paragraph of
-`sk-def-sfb-dc-restricted-functors` (blueprint: sk-def-sfb-dc-restricted-functors).
+`sk-def-sfb-dc-restricted-functors`.
 
 The imported module supplies all the restricted operations and their structural maps for
 its named coefficient classes. Here the same restriction and restricted adjunction are
@@ -34,8 +34,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 /-- Preservation by every derived pushforward between separated finite-type `k`-schemes.
 This is precisely the conditional hypothesis in the blueprint restriction paragraph,
 not a restriction to one of its example coefficient rings.
-Source: blueprint `sk-def-sfb-dc-restricted-functors`
-(blueprint: sk-def-sfb-dc-restricted-functors). -/
+Source: blueprint `sk-def-sfb-dc-restricted-functors`. -/
 def PreservesBoundedConstructiblePushforwards (k : Type u) [Field k] : Prop :=
   ∀ {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -51,8 +50,7 @@ variable {k : Type u} [Field k]
 
 /-- Restrict the ambient derived pushforward, using the stated preservation hypothesis.
 Its object and morphism data are those of the ambient functor, with only the object property
-supplied by `H`. Source: blueprint restriction paragraph
-(blueprint: sk-def-sfb-dc-restricted-functors). -/
+supplied by `H`. Source: blueprint restriction paragraph. -/
 noncomputable def boundedConstructibleLowerStarOfPreserves :
     ProEtale.BoundedConstructible (condensedRingObj Λ X.left) ⥤
       ProEtale.BoundedConstructible (condensedRingObj Λ Y.left) :=
@@ -60,7 +58,7 @@ noncomputable def boundedConstructibleLowerStarOfPreserves :
     (fun K ↦ H f K)
 
 /-- The conditional restriction commutes with the fully faithful inclusions.
-Source: blueprint restriction paragraph (blueprint: sk-def-sfb-dc-restricted-functors). -/
+Source: blueprint restriction paragraph. -/
 noncomputable def boundedConstructibleLowerStarOfPreservesCompatibility :
     boundedConstructibleLowerStarOfPreserves Λ H f ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ R((f.left)_*⟦Λ⟧) :=
@@ -70,7 +68,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar 
 
 /-- Restrict the actual ambient derived pullback--pushforward adjunction along the fully
 faithful inclusions; thus its unit and counit are the restricted ambient unit and counit.
-Source: blueprint adjunction paragraph (blueprint: sk-def-sfb-dc-restricted-functors). -/
+Source: blueprint adjunction paragraph. -/
 noncomputable def boundedConstructibleUpperStarLowerStarAdjunctionOfPreserves :
     boundedConstructibleUpperStar Λ ℓ f ⊣ boundedConstructibleLowerStarOfPreserves Λ H f :=
   Adjunction.restrictFullyFaithful (derivedUpperStarLowerStarAdjunction Λ f.left)

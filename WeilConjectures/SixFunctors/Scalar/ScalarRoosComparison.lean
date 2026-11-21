@@ -12,7 +12,6 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 /-! # The coordinate-normalized additive Roos comparison
 
 Source: Stacks 08TC and 0941.
-(blueprint: def-sf-additive-roos-map).
 
 This file retains the original additive Roos construction and its unique
 coordinate characterization, together with proved naturality and strict tower
@@ -28,7 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures
 
 /-- The boundary of the actual Roos cocone, for use in both coordinate formulas.
-Source: Stacks 08TC (blueprint: def-sf-additive-roos-map). -/
+Source: Stacks 08TC. -/
 abbrev scalarRoosBoundary {A : Type a} [Category.{b} A] [Abelian A]
     [HasCountableProducts A] (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) :=
   towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))
@@ -82,8 +81,7 @@ private def scalarCoconeSquareMap
 
 /-- An additive functor maps the Roos cocone to the Roos cocone of its tower.
 Both coordinates, including the shifted coordinate, are prescribed, so no cone
-completion is chosen. Source: Stacks 08TC
-(blueprint: def-sf-additive-roos-map).
+completion is chosen. Source: Stacks 08TC.
 Proof: apply the functor to the two cone coordinates. The universal property of each
 product gives the specified maps to the target products. Additivity preserves 1-s and
 the signed cocone differential, so these coordinates define a chain map. The cocone's
@@ -194,7 +192,7 @@ theorem scalarRoosMap_existsUnique
 end ScalarRoos
 
 /-- The Roos map with its two prescribed coordinates.
-Source: Stacks 08TC (blueprint: def-sf-additive-roos-map). -/
+Source: Stacks 08TC. -/
 def scalarRoosMap
     {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     {B : Type a'} [Category.{b'} B] [Abelian B] [HasCountableProducts B]
@@ -356,7 +354,7 @@ private theorem scalarRoosCoordinates (F : A ⥤ B) [F.Additive]
   exact ⟨hf, hs⟩
 
 /-- Naturality of the diagonal Roos comparison on arbitrary strict towers.
-Source: Stacks 0941 (blueprint: def-sf-additive-roos-map).
+Source: Stacks 0941.
 
 Proof: naturality of the product comparison follows after every product projection.
 Compose both proposed maps with the first and second cocone coordinates. The defining

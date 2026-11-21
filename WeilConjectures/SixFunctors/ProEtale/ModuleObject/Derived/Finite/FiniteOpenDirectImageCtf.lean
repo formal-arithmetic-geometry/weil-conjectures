@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.Etale.FiniteEtaleOpenUniformTorI
 # Finite-coefficient open direct image with a uniform Tor interval
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-ctf-stability,
-sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), finite-coefficient open case
-(blueprint: lem-sfb-finite-open-direct-image-ctf).
+sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), finite-coefficient open case.
 
 The coefficients are the continuous-map condensed ring of a finite discrete ring, pulled
 back from the point. Both categories are the ordinary unbounded derived categories of
@@ -50,8 +49,7 @@ Tor amplitude tests all degree-zero internal module objects. Zero coefficients a
 zero complex are allowed, and the field need not be separably closed.
 
 Source: blueprint main-20261015, sk-thm-sf-ctf-stability-direct-images.proof.md,
-paragraph (3), finite-coefficient open case
-(blueprint: lem-sfb-finite-open-direct-image-ctf).
+paragraph (3), finite-coefficient open case.
 
 Proof:
 Choose the normalized finite-discrete encoding and use the internal-etale realization

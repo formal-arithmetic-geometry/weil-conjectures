@@ -41,7 +41,6 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.ConstantFieldTensorCohomolo
 Source: current blueprint `proposition-ctf-equals-bc`, field case of clause (2).
 This specializes the local-model and truncation argument to the two field coefficient
 families, in the ordinary derived category over the pulled-back condensed ring.
-(blueprint: lem-weil-field-tor-amplitude).
 -/
 
 @[expose] public section
@@ -67,7 +66,6 @@ cohomological interval. This existing helper is retained for the residue-field c
 
 Source: Stacks Project, Tags 08FZ and 010N; constant-field tensor cohomology
 `lem-exc-constant-field-sheaf-tensor-cohomology`.
-(blueprint: lem-weil-field-tor-amplitude).
 
 Proof: a quasi-isomorphic representative has the same cohomology as `K`. Exact tensor
 over the constant field commutes with cohomology. The sheafification counit and tensorator

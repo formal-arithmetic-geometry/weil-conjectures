@@ -354,7 +354,6 @@ private theorem finiteStrat_finite_index
 /-- Finite constant-model constructibility of all cohomology modules descends.
 Source: theorem-f-shriek-ell-adic-coefficients, proof steps 1 and 3; blueprint
 sk-thm-int-restriction-glue.proof.md, paragraph (1).
-(blueprint: lem-int-restriction-cohomology-descent).
 
 Proof: Exact restriction identifies the cohomology of each restricted complex
 with the restriction of its global cohomology. Reindex the finite cover by Fin n.

@@ -25,7 +25,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 /-- Ordinary scalar restriction commutes with pullback composition.
 Source: coefficient-map composition and the ordinary inverse-image identities, as in
 Bhatt--Scholze, Remark 6.8.15.
-(blueprint: new-integral-residue-ordinary-restrict-pull-comp)
 
 Proof. Rewrite extension along the coefficient pullback isomorphism as restriction
 along its inverse. After these identifications, all three pullbacks are inverse image

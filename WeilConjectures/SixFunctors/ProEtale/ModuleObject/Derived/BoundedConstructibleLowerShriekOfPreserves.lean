@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Compactification.Compactificatio
 
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
 sk-prop-open-coefficients/det-def-sfb-dc-lower-shriek-definition.md, defining composite
-and chosen-compactification paragraph
-(blueprint: proposition-construction-independence-rf-shriek).
+and chosen-compactification paragraph.
 
 ## Main definitions
 
@@ -51,8 +50,7 @@ The coefficient hypothesis is preservation by every derived pushforward in the s
 with no restriction to the three example coefficient families.
 
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-open-coefficients/det-def-sfb-dc-lower-shriek-definition.md, first displayed composite
-(blueprint: proposition-construction-independence-rf-shriek). -/
+sk-prop-open-coefficients/det-def-sfb-dc-lower-shriek-definition.md, first displayed composite. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactificationOfPreserves
     {f : X ⟶ Y} (c : Compactification.BoundaryCompactification f.left) :
     ProEtale.BoundedConstructible (condensedRingObj Λ X.left) ⥤
@@ -66,8 +64,7 @@ values in the bounded constructible full subcategories, so this construction nee
 preservation assertion.
 
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-open-coefficients/det-def-sfb-dc-lower-shriek-definition.md, final paragraph
-(blueprint: proposition-construction-independence-rf-shriek). -/
+sk-prop-open-coefficients/det-def-sfb-dc-lower-shriek-definition.md, final paragraph. -/
 noncomputable def boundedConstructibleLowerShriekOfPreserves (f : X ⟶ Y) :
     ProEtale.BoundedConstructible (condensedRingObj Λ X.left) ⥤
       ProEtale.BoundedConstructible (condensedRingObj Λ Y.left) :=

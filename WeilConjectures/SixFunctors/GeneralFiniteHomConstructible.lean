@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.HomDevissage
 
 Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
 `sec-sp-grp-ladic-summary/sec-towers-and-integral-coefficients/sk-lem-sp-tower/`
-`thm-coef-finite-hom.proof.md`, Paragraph 1 (blueprint: lem-coef-general-finite-hom-constructible).
+`thm-coef-finite-hom.proof.md`, Paragraph 1.
 -/
 
 @[expose] public section
@@ -31,7 +31,7 @@ an ell-power, internal derived Hom preserves bounded constructibility and finite
 
 Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
 `sec-sp-grp-ladic-summary/sec-towers-and-integral-coefficients/sk-lem-sp-tower/`
-`thm-coef-finite-hom.proof.md`, Paragraph 1 (blueprint: lem-coef-general-finite-hom-constructible).
+`thm-coef-finite-hom.proof.md`, Paragraph 1.
 
 The source library proves the stronger result for every field with an invertible coefficient
 exponent.  The hypotheses here provide such an exponent directly: if `ell ^ n` annihilates `A`,

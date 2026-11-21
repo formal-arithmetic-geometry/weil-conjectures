@@ -18,7 +18,6 @@ import all WeilConjectures.Algebra.Homology.ProEtaleCoefficients.SuccessiveQuoti
 
 Source: Stacks Project, Tag 0942, proof of lemma-bounded (1), elementary DVR sequence
 and constant realization, together with Modules on Sites Tags 093J and 03CY.
-(blueprint: lem-sf-strict-dvr-coefficient-sequence)
 -/
 
 @[expose] public noncomputable section
@@ -381,13 +380,13 @@ private instance strictDvrAbLocallyBijective :
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} X
 
 /-- The finite coefficient as a module over the completion.
-Source: Stacks 0942 (blueprint: def-sf-strict-dvr-coefficient-sequence-data). -/
+Source: Stacks 0942. -/
 abbrev strictDvrFiniteCoefficient (n : ℕ) : scalarReductionSource l E X :=
   (scalarReductionRestriction l E X n).obj
     (SheafOfModules.unit (integralCoefficientSheaf l E X n))
 
 /-- The canonical quotient map with its completed-ring action.
-Source: Stacks 0942 (blueprint: def-sf-strict-dvr-coefficient-sequence-data). -/
+Source: Stacks 0942. -/
 def strictDvrCoefficientQuotient (n : ℕ) :
     strictDvrFiniteCoefficient l E X (n + 1) ⟶ strictDvrFiniteCoefficient l E X n where
   val :=
@@ -505,7 +504,6 @@ private theorem finiteQuotient_projection (N k : ℕ) (h : k ≤ N) :
 
 Source: Stacks Project, Tag 0942, proof of lemma-bounded (1), and Modules on Sites
 Tags 093J, 03CY, 03DA and 03DB.
-(blueprint: lem-sf-strict-dvr-coefficient-sequence)
 
 Proof: In the valuation ring R, put A_m = R/(π^m). Multiplication by π^(n+1)
 induces A_1 → A_(n+2): changing a representative by πs changes its image by

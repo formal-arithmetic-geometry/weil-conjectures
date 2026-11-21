@@ -328,7 +328,6 @@ Tor amplitude. The original integral complexes need not be complete or bounded.
 Source: blueprint latest, chap-Construction-of-f,
 `sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md`, paragraph (3),
 the reduction-to-finite-coefficients step; Stacks Project, Tags 07A7, 0E47 and 0E48.
-(blueprint: lem-sfb-integral-residue-proper-formulas).
 
 Proof:
 1. Put A = O_E/pi_E. The DVR and finite-quotient results make A a finite field killed

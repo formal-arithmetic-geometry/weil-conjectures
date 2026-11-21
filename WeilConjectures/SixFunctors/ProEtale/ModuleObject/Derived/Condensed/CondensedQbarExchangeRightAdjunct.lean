@@ -76,8 +76,7 @@ private theorem lifted_inv_naturality (α : l ⋙ tD ≅ tC ⋙ l')
 
 /-- The mate counit identity after restriction to four full subcategories.
 Source: Mathlib/CategoryTheory/Adjunction/Mates.lean, mateEquiv_counit and
-iterated_mateEquiv_conjugateEquiv_symm; Adjunction.restrictFullyFaithful
-(blueprint: lem-weil-pbc-qbar-condensed-push-counit).
+iterated_mateEquiv_conjugateEquiv_symm; Adjunction.restrictFullyFaithful.
 
 Proof in words. Iterated mate cancellation identifies the coefficient push map with
 the mate of the inverse coefficient pull isomorphism. The mate counit equation gives
@@ -181,7 +180,7 @@ attribute [local irreducible] derivedUpperStarLowerStarAdjunction
 /-- Scalar extension's push comparison satisfies the mate counit identity.
 Source: ChangeOfCoefficients.lean, derivedPullIso and derivedPushHom;
 Mathlib/CategoryTheory/Adjunction/Mates.lean, iterated_mateEquiv_conjugateEquiv_symm
-and mateEquiv_counit (blueprint: lem-weil-pbc-qbar-condensed-push-counit).
+and mateEquiv_counit.
 
 Proof in words. The two coefficient extension/restriction adjunctions and the two
 geometric pullback/pushforward adjunctions form a square. Iterated mate cancellation
@@ -238,8 +237,7 @@ set_option backward.isDefEq.respectTransparency true in
 /-- Normalization of the right side of coefficient exchange under the pullback adjunction.
 Source: ModuleObject/Colimit/TwoColimit.lean, final transport paragraph;
 ChangeOfCoefficients.lean, derivedPullIso and derivedPushHom;
-Mathlib/CategoryTheory/Adjunction/Mates.lean
-(blueprint: lem-weil-pbc-qbar-condensed-exchange-right-adjunct).
+Mathlib/CategoryTheory/Adjunction/Mates.lean.
 
 Proof in words. Expand the target comparison and functoriality of pullback. Naturality of the
 Omega pullback/pushforward counit moves alpha_g' to the right of that counit. The adjunct

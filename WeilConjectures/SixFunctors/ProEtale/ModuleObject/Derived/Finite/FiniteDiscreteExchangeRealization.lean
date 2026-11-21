@@ -50,8 +50,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- Deriving the coefficient equivalence realizes constructible single complexes
 and the exchange steps.
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3
-(blueprint: lem-weil-pbc-finite-discrete-exchange-step-realization).
+Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3.
 
 Proof. Identify the condensed coefficient ring by the finite clopen fibre cover.
 Use the coefficient realization and apply its sheaf origin isomorphisms to single

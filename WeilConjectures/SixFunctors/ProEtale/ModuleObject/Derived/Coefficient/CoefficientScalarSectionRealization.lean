@@ -13,7 +13,6 @@ import all Mathlib.Algebra.Homology.Localization
 
 Source: Stacks Project, Tags 03EK, 03EL, 06YY, 07A4 and 07A6;
 steps 1--3 of `lem-sfb-coefficient-scalar-tensor-realization`.
-(blueprint: lem-sfb-coefficient-scalar-section-realization).
 -/
 
 @[expose] public noncomputable section
@@ -470,7 +469,6 @@ operations, including the signed flat-term K-flat representative square.
 Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL; Cohomology on Sites,
 Tags 06YY, 07A4 and 07A6; steps 1--3 of
 `lem-sfb-coefficient-scalar-tensor-realization`.
-(blueprint: lem-sfb-coefficient-scalar-section-realization).
 
 Proof: apply internal_section_scalar_adjunction to the actual coefficient map.
 Its ordinary generator and Hom formulas give the recorded extension and restriction

@@ -11,7 +11,7 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 /-! # Finite reductions detect integral constructible isomorphisms
 
 Source: Bhatt--Scholze, Definition 3.5.2 and Sections 6.5--6.7; the adic
-projection proof, conservativity step (blueprint: lem-sf-intrinsic-reduction-conservative).
+projection proof, conservativity step.
 -/
 
 @[expose] public section
@@ -23,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace WeilConjectures
 
 /-- Finite reductions detect isomorphisms on the actual integral constructible domain.
-Source: Bhatt--Scholze, Definition 3.5.2; blueprint adic projection proof, Step 3
-(blueprint: lem-sf-intrinsic-reduction-conservative).
+Source: Bhatt--Scholze, Definition 3.5.2; blueprint adic projection proof, Step 3.
 
 Proof: take a distinguished cone. Integral constructibles are triangulated, so its
 cone is complete. Exact reduction sends its triangle to a triangle whose first map

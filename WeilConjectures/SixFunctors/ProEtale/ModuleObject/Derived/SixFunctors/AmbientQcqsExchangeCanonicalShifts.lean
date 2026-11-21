@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 # Canonical shifts of the ambient condensed-module exchange
 
 Source: Stacks Project, derived.tex, Tags 015F, 05SU and 0DVC; blueprint
-compactification coherence, refinement (2)
-(blueprint: lem-sfb-ambient-qcqs-exchange-canonical-shifts).
+compactification coherence, refinement (2).
 
 All categories are ordinary unbounded derived categories. The pullback shifts are
 transported from exact termwise inverse image by `modulePullbackExactComparison`;

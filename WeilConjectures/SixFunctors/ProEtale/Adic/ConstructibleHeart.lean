@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 
 Let `X` be a scheme. The bounded constructible derived category `D^b_c(X, ℚ̄_ℓ)`
 (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedAdicConstructible`) inherits the standard
-`t`-structure (blueprint `prop-constructible-truncations`). Its heart
+`t`-structure. Its heart
 `D^{≤ 0}_c ∩ D^{≥ 0}_c` (`AlgebraicGeometry.ProEtale.DerivedCategory.adicConstructibleHeart`)
 consists of the complexes isomorphic to a constructible `ℓ`-adic sheaf placed in degree `0`
 (`AlgebraicGeometry.ProEtale.DerivedCategory.adicConstructibleHeart_iff`), and placing sheaves

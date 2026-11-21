@@ -45,7 +45,7 @@ variable {A : CommRingCat.{u}} (I : Ideal A) (C : Type u) [CommRing C] [Algebra 
   [Algebra A C] [IsScalarTower A (A ⧸ I) C]
 
 /-- The henselian lift `W = Spec H_A(C̄)` of `Algebra.ClosedLift`, as an object of the small
-pro-étale site of `Spec A` (blueprint `proposition-extension-zero-restriction-closed-subscheme`). -/
+pro-étale site of `Spec A`. -/
 noncomputable def closedLiftSpec (A : CommRingCat.{u}) (C : Type u) [CommRing C] [Algebra A C] :
     (Spec A).ProEt :=
   Scheme.ProEt.mk (Spec.map (CommRingCat.ofHom (algebraMap A (Algebra.ClosedLift A C))))

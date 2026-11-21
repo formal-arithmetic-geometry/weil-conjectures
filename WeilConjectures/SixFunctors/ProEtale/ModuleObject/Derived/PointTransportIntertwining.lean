@@ -25,8 +25,7 @@ intertwining tensor map to an intertwining scalar map.
 Source: blueprint `theorem-poincare-duality-frobenius`, naturality of the cup, and Step 6 of the
 point-section transport argument.
 Proof: move the transport past the realized arrow by naturality, use the
-intertwining equation, use tensor compatibility, then the naturality of the cup.
-(blueprint: lem-pod-point-transport-intertwining) -/
+intertwining equation, use tensor compatibility, then the naturality of the cup. -/
 theorem realized_tensor_intertwining
     {A B : Type*} [Category* A] [Category* B]
     [MonoidalCategory A] [MonoidalCategory B]

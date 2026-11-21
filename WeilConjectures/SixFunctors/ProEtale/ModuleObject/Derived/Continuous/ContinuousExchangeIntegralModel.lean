@@ -541,8 +541,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Integral realization of a continuous E exchange arrow
 
-Source: Bhatt--Scholze, Sections 6.7--6.8
-(blueprint: lem-weil-pbc-continuous-exchange-integral-model).
+Source: Bhatt--Scholze, Sections 6.7--6.8.
 -/
 
 @[expose] public section
@@ -600,8 +599,7 @@ abbrev continuousExchangeIntegralModelStatement
 -- Elaborating both bundled coefficient exchange arrows needs the extra budget.
 /-- A continuous E exchange arrow is realized by scalar extension of an integral one.
 Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2), with the exchange
-compatibility of `lem-weil-pbc-condensed-e-realization`
-(blueprint: lem-weil-pbc-continuous-exchange-integral-model).
+compatibility of `lem-weil-pbc-condensed-e-realization`.
 
 Proof in words. Lemma 6.8.13 gives a constructible O_E lattice for each lisse
  E-cohomology sheaf; it need not be a global lisse integral lattice. Refine the finite

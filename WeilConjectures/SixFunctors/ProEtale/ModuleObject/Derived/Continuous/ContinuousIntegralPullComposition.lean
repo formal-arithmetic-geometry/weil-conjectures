@@ -476,7 +476,6 @@ private lemma bounded_comp_hom
 Source: Bhatt--Scholze, Remark 6.8.15, and the canonical constructions
 `comapLowerStarIso`, `derivedComapLowerStarIso`, `derivedPullIso`, and
 `leftDerivedUpperStarComp` in ChangeOfCoefficients.lean and Derived/UpperLowerStar.lean.
-(blueprint: lem-weil-pbc-continuous-integral-pull-composition).
 
 Proof. Write T for integral scalar extension and α for its pull comparison. Before deriving,
 the restriction-of-scalars/pushforward comparison has identity underlying sheaf components.

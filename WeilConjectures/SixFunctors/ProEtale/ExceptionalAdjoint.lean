@@ -88,7 +88,7 @@ definition `ν_X^* ∘ f^× ∘ Rν_{Y,*}` (`AlgebraicGeometry.ProEtale.rightDer
   `Rf_!` is a left adjoint.
 - `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar`, in
   `WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension`: the bound on the
-  étale-origin class (blueprint `sk-prop-sf-fullcd-etale-origin`).
+  étale-origin class.
 -/
 
 @[expose] public section

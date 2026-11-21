@@ -166,8 +166,7 @@ private theorem restriction_exact {T : Scheme.{t}} (U : T.Opens)
 /-- Canonical finite and completed coefficient comparisons, with exact module
 restriction, require no invertibility of the coefficient prime on the scheme.
 
-Source: Stacks Project, Tags 00Y0, 03CO and 03DH
-(blueprint: lem-sf-clopen-coefficient-comparison).
+Source: Stacks Project, Tags 00Y0, 03CO and 03DH.
 Proof: composition into an open subscheme is continuous and cocontinuous, so its
 precomposition commutes with sheafification. Apply that comparison to each constant
 finite quotient ring; the sheafification units give the constant-section normalization.

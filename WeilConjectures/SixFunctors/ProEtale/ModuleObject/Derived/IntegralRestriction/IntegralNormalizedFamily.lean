@@ -120,8 +120,7 @@ private theorem selectPresentation
   exact conclude z ⟨a, b, c, d, e, hp, hq, hr, f, g, h, i, ⟨hs, ht, hv⟩, hz⟩
 
 /-- The coefficient family comes from one completed whole-system diagonal class and
-its three normalized traces. Source: diagonal tower coefficients, clauses (1)--(3).
-(blueprint: lem-integral-normalized-family). -/
+its three normalized traces. Source: diagonal tower coefficients, clauses (1)--(3). -/
 def IntegralFamilyReference (Y : Scheme.{u}) (family : Family ℓ Y) : Prop :=
   ∃ (_hY : IsUnit (ℓ : Γ(Y, ⊤)))
     (aY : DiagonalTraceLocalizations ℓ Y)
@@ -135,7 +134,6 @@ def IntegralFamilyReference (Y : Scheme.{u}) (family : Family ℓ Y) : Prop :=
 
 /-- Existence of a referenced integral coefficient family over a separated finite-type
 base. Source: diagonal tower limit and coefficient extension, paragraph (1).
-(blueprint: lem-integral-normalized-family).
 Proof: finite type over the field makes Y, its projective line and its self-square
 Noetherian. The characteristic assumption makes ell a unit on Y. Choose the localization
 sizes furnished by Grothendieck abelianity of the sheaf categories and their strict

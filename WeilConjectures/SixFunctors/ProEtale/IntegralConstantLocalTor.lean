@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.PadicConstantLocalModelTor
 /-! # The two-term Tor bound for integral finite constant local models
 
 Source: integral-models opening equality; Stacks Tags 0651 and 06YY.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -251,7 +250,6 @@ private theorem integralCounitExtension_leftExact
 /-- Finite constant integral local models have the common Tor interval [-1,0].
 Source: integral-models opening equality and the localizing-closure proof, Local models
 and Locality paragraphs; Stacks Tags 0651 and 06YY.
-(auxiliary; not a blueprint node).
 
 Proof: the scalar ring of integers is a DVR. A finite presentation of a scalar module
 has a finite free kernel, since a finitely generated submodule of a finite free module

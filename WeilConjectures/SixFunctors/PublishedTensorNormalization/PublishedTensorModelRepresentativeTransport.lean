@@ -11,7 +11,6 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! Tensor-model representative rectangles and transport.
 Source: Stacks 03D3, 03EL and 07A4.
-(blueprint: lem-sf-tensor-model-representative-transport).
 -/
 
 @[expose] public noncomputable section
@@ -161,7 +160,6 @@ end
 
 /-- Transport the forward tensor-model rectangle along equal ring maps and exact inverse images.
 Source: Stacks 03D3, 03EL and 07A4.
-(blueprint: lem-sf-tensor-model-representative-transport).
 
 Proof: invert the ordinary model summand square. Adjunction-unit naturality and
 ordinary pure-tensor normalization identify the inverse chain comparison with the
@@ -253,7 +251,6 @@ private theorem model_transport {C D : Type c} [Category.{v} C] [Category.{v} D]
 
 /-- The representative rectangle expressed through named presentation wrappers.
 Source: Stacks 03D3, 03EL and 07A4.
-(blueprint: lem-sf-tensor-model-representative-transport).
 
 Proof: substitute the equal total complexes and derived functor. Each heterogeneous
 model, comparison, localization-factor and cochain-map equality becomes an ordinary

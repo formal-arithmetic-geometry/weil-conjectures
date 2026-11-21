@@ -20,8 +20,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 /-! # Normalized clause data for immersion local behavior
 
 Source: main-20261015, sec-deligne-laumon-general/sk-l-dl-general-excision,
-lem-zl-morphism-open-closed-reduction.proof.md, Restriction and Part 2
-(blueprint: def-zl-immersion-weil-local-data).
+lem-zl-morphism-open-closed-reduction.proof.md, Restriction and Part 2.
 
 The auxiliary structures package the clauses of this statement. No operation is chosen
 from their existence. All stalks are the recorded point fibres, and normalization on every
@@ -61,8 +60,7 @@ variable (Y₀ : Over (Spec (.of D.k₀)))
   [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
 
 /-- The recorded Frobenius endofunctor, with the fixed coefficient datum.
-Source: Restriction, induced Weil structures
-(blueprint: def-zl-immersion-weil-local-data). -/
+Source: Restriction, induced Weil structures. -/
 abbrev zlFrobenius := sfCommonStageWeilFrobeniusPullback D c.l c.different Y₀ c.Qbar
 
 variable {Y₀}

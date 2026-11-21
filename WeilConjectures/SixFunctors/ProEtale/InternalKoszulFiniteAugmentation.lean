@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.ProEtale.InternalQuotientScalarAnnihilation
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
 and proetale.tex, Lemma naive-completion (099M).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -32,7 +31,6 @@ or quasi-isomorphism assertion. Its components off Koszul degree zero vanish.
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
 and proetale.tex, Lemma naive-completion (099M); the augmentation in the singleton case.
-(auxiliary; not a blueprint node).
 
 Proof: let O be the constant small-site ring. For each n the dual singleton Koszul
 complex is the negative two-term complex with differential a^(n+1). The hypothesis

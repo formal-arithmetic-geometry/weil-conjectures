@@ -57,7 +57,6 @@ This asserts only the universal finite quotient transition property. It does not
 choose a limit, a finite evaluation comparison, or a map of Roos triangles.
 Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 0941 and 099N;
 Bhatt--Scholze, Lemma 6.5.11(3).
-(blueprint: lem-weil-system-direct-image-reduction-normalized).
 
 Proof: put F = sfCompletedDerivedDirectImage(f). Choose one K-injective
 resolution of S.reduction(K) on the sequence site. The sectionwise ordinary

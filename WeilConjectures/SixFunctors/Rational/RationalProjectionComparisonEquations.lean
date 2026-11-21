@@ -14,7 +14,6 @@ import Mathlib.Algebra.CharP.CharAndCard
 
 Source: the coherence paragraph of the projection-formula proof in
 literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done.
-(blueprint: lem-sf-rational-projection-comparison-equations).
 -/
 
 @[expose] public noncomputable section
@@ -647,7 +646,6 @@ normalized compact-support projection. This only transports equalities; it does
 not assert invertibility or naturality of the rational component.
 Source: thm-sf-pf-field.proof.md, Compatibility, and the final coherence sentence
 of fix-prop-projection-formula.proof.md, in literature/blueprint/latest/blueprint.
-(blueprint: lem-sf-rational-projection-comparison-equations).
 Proof: give each rational input its literal integral model; the raw scalar
 localization has unchanged objects. The residue Tor criterion identifies the
 integral constructible predicate with the uniform finite-Tor predicate, so the

@@ -24,8 +24,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Rational.Ration
 # Rational purity for relative affine space in every dimension
 
 Source: blueprint main-20261015, chap-Construction-of-f,
-`sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.md` and its proof
-(blueprint: theorem-f-shriek-ell-adic-coefficients).
+`sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.md` and its proof.
 
 The functors act on the literal localizing closures of the bounded constructible
 module-object categories. Their comparisons with the ambient functors specify both
@@ -48,8 +47,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 /-- Derived tensor with the degree-d Tate line, in the internal-module encoding.
 The signed line is the recorded tensor power; the existing sectionwise/internal module
 equivalence changes only its presentation, not its coefficient ring or underlying sheaf.
-Source: blueprint definition-tate-twists, positive powers and derived twist formula
-(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
+Source: blueprint definition-tate-twists, positive powers and derived twist formula. -/
 def rationalDegreeTwistFunctor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
@@ -63,8 +61,7 @@ def rationalDegreeTwistFunctor
 /-- The Nagata compactification chosen in the chapter setting, for the projection
 of relative affine d-space. The displayed over-objects and their instances are the
 same canonical structure morphisms as those of the affine projection.
-Source: blueprint sk-def-sfb-dc-setting, chosen compactification convention
-(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
+Source: blueprint sk-def-sfb-dc-setting, chosen compactification convention. -/
 def affineSpaceChosenCompactification
     (k : Type u) [Field k] (V : Scheme.{u}) [V.Over (Spec (.of k))]
     [LocallyOfFiniteType (V ↘ Spec (.of k))]
@@ -84,8 +81,7 @@ def affineSpaceChosenCompactification
     (Over.homMk (𝔸(ULift.{u} (Fin d); V) ↘ V) rfl)
 
 /-- The ambient functor p_d^*(d)[2d], with the specified degree-d Tate tensor functor.
-Source: blueprint sk-cor-affine-space-rational-induction, both conclusions
-(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
+Source: blueprint sk-cor-affine-space-rational-induction, both conclusions. -/
 def affineSpaceRationalPullTwistShift
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (V : Scheme.{u}) (d : ℕ)
@@ -103,8 +99,7 @@ are restrictions of the specified compactification lower shriek and twisted shif
 pullback, as witnessed by natural isomorphisms after the full inclusions. The adjunction
 ensures existence of the exceptional right adjoint; every such adjoint G is isomorphic to P.
 The final conjunct is preservation of Dbc by the ambient twisted shifted pullback itself.
-Source: blueprint sk-cor-affine-space-rational-induction, entire statement
-(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
+Source: blueprint sk-cor-affine-space-rational-induction, entire statement. -/
 def affineSpaceRationalAssertion
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (V : Scheme.{u}) (d : ℕ)
@@ -248,8 +243,7 @@ private theorem rationalAffineInductionAux
 /-- Rational affine-space exceptional purity in every natural dimension, together
 with preservation of bounded constructibility by p_d^*(d)[2d]. This includes d = 0,
 all finite coefficient subextensions, and the finite-subextension-valued algebraic closure.
-Source: blueprint sk-cor-affine-space-rational-induction, statement and proof
-(blueprint: theorem-f-shriek-ell-adic-coefficients).
+Source: blueprint sk-cor-affine-space-rational-induction, statement and proof.
 
 Proof, following the seven DAG steps:
 1. Put T_X = Loc(Dbc(X)). By det-def-localizing-closure-ctf-equals-bc the rational

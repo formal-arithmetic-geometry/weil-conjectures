@@ -91,8 +91,7 @@ exact composition factors. Naturality moves scalar transitivity to the complex i
 Factor the underived comparison into scalar transitivity and pullIso, apply
 `scalarCompNormalization`, and cancel transitivity with its inverse. The last factor is
 the counit equation for `leftDerivedUpperStarIso`. This one-arrow calculation has no
-properness, constructibility, or nonzero-ring hypothesis.
-(blueprint: lem-sp-derived-upper-star-extend-scalars-mate-normalization) -/
+properness, constructibility, or nonzero-ring hypothesis. -/
 theorem derivedUpperStarExtendScalarsMateNormalization {U V : Scheme.{u}} (h : U ⟶ V) :
     mateEquiv (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a V))
       (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a U))

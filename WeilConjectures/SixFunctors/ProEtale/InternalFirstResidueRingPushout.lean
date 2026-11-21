@@ -25,7 +25,6 @@ attribute [local irreducible] upperStarFromPoint
 
 Source: blueprint integral-models proof (1)--(2), Stacks Tags 093M and 099L;
 finite constant coefficient comparison, Stacks Tag 09C1.
-(auxiliary; not a blueprint node).
 
 Proof: put A = O_E and k = A/(pi). The quotient topology on k is discrete since
 (pi) is open. Constant k-valued functions give a locally bijective map from the

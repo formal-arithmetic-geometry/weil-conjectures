@@ -338,7 +338,6 @@ private theorem reductionSquareIso_tensor (W : Scheme.{t}) (e : ℕ)
 
 /-- Finite scalar extension commutes with reduction followed by geometric pullback.
 Source: Stacks Project, Tags 03CZ and 03EL.
-(blueprint: lem-weil-ramified-finite-scalar-composition).
 
 Proof: the scalar-restriction square on the source site commutes by
 source.ramified_projection. Compose the two scalar adjunctions along either

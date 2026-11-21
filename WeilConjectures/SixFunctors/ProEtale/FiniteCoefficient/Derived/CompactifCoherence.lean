@@ -36,8 +36,7 @@ isomorphism `Rf̄₂_* Ru_* ≅ Rf̄₁_*`.
 - `ProEtale.rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_eq`:
   blueprint `proposition-construction-independence-rf-shriek`, on the complexes of étale origin.
 - `rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_trans_symm_eq`:
-  independence of the common refinement (blueprint
-  `proposition-construction-independence-rf-shriek`).
+  independence of the common refinement.
 -/
 
 @[expose] public section

@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.InternalQuotientRoosLimit
 /-! # Normalized quotient to Koszul augmentation comparison
 
 Source: integral-models proof (1), Stacks Tags 099I, 099L and 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -38,7 +37,6 @@ Koszul completion, after the specified exact constant-coefficient transport.
 
 Source: integral-models proof (1); normalized integral coefficient limit;
 constant-coefficient criterion (1),(3); Stacks Tags 099I, 099L, 099M and 0A0E.
-(auxiliary; not a blueprint node).
 
 Proof: the point coefficient isomorphism identifies actual integral coefficients with
 the normalized inverse limit of the constant positive quotients. Flatness and the

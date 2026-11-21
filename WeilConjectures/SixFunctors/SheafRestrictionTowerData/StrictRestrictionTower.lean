@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.Normalized.NormalizedDVRTower
 /-! # Strict composites in a system of restriction functors
 
 Source: Stacks Tag 03DA; blueprint DVR effectivity, composition of strict finite models.
-(blueprint: lem-coef-strict-restriction-tower-composites).
 -/
 
 @[expose] public noncomputable section
@@ -271,7 +270,6 @@ def tower : ℕᵒᵖ ⥤ CochainComplex (SheafOfModules.{w} completed) ℤ :=
 
 /-- Finite semilinear composites restrict to the actual strict tower maps.
 Source: Stacks Tag 03DA; blueprint strict finite-model construction.
-(blueprint: lem-coef-strict-restriction-tower-composites).
 
 Proof: the finite composite starts with the given successor map. Naturality of the
 restriction comparison and associativity of its identity maps on sections show

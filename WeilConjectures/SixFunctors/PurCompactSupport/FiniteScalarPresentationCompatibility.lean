@@ -644,8 +644,7 @@ comparisons agree by the uniqueness part of right derivation. Paste these two sq
 the middle presentation maps cancel. The scalar mate bijection is injective and
 preserves whiskering, giving the displayed conjugation formula. The equality of the
 coefficient maps transports the endpoints; the heterogeneous equality expresses only
-that transport, not any change of coefficients or exponent.
-(blueprint: lem-sf-finite-scalar-presentation-compatibility). -/
+that transport, not any change of coefficients or exponent. -/
 theorem finiteScalarPresentationCompatibility
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L]

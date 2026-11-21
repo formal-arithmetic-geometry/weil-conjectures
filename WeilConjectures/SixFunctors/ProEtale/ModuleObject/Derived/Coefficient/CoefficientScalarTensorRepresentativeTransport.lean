@@ -31,7 +31,6 @@ import all Mathlib.Algebra.Homology.Localization
 
 The second strict substep transports the internal-image equation across the exact
 section equivalence. It is independent of the bidegree generator calculation.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-transport)
 -/
 
 @[expose] public noncomputable section
@@ -116,8 +115,7 @@ counit isomorphisms of the termwise section equivalence and naturality of all ma
 
 Source: Stacks Project, Cohomology on Sites, Tag 07A4, transport along the section
 equivalence. This is strictly the transport step and leaves the internal equation
-as its hypothesis.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-transport). -/
+as its hypothesis. -/
 theorem coefficientScalarTensorRepresentative_transport
     (Z : Scheme.{u})
     (d : CoefficientScalarTensorRepresentativeBasicData a Z)

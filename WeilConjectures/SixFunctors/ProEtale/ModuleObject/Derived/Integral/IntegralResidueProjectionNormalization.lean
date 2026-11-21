@@ -153,7 +153,6 @@ attribute [local instance 2000] residueExchangeIntegralDerivedMonoidal
 /-- Coherent pull comparisons identify the restricted push mate with the projection map.
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15, and associativity of derived tensor.
-(blueprint: new-integral-residue-projection-normalization)
 
 Proof. The inverse image on sheaves preserves the coequalizers of balanced tensor pairs.
 Its strong monoidal comparison therefore induces the relative tensor comparison on

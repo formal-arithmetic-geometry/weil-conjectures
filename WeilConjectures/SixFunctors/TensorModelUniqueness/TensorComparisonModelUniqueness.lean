@@ -157,7 +157,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 
 /-! # Uniqueness from ordinary tensor comparison
 
-Source: Stacks 06YN and 07A4 (blueprint: lem-sf-tensor-comparison-model-uniqueness).
+Source: Stacks 06YN and 07A4.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -234,7 +234,7 @@ private theorem derived_eq (ho : M.ordinary = N.ordinary) : mu = nu := by
     Iso.hom_inv_id, Category.comp_id] using hi
 
 /-- The ordinary map determines its total and derived comparison.
-Source: Stacks 06YN and 07A4 (blueprint: lem-sf-tensor-comparison-model-uniqueness).
+Source: Stacks 06YN and 07A4.
 Proof: the summand formula and the universal property of the total direct sum
 identify the chain maps. Substitute in the two representative equations and
 cancel all four invertible comparison factors. Cochain tensor rigidity extends

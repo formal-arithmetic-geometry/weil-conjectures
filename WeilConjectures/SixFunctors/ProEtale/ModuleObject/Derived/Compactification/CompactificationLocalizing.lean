@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureE
 # Compact support along a single compactification on the localizing category
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-comp-coherence,
-proposition-construction-independence-rf-shriek and its three-paragraph proof
-(blueprint: proposition-construction-independence-rf-shriek).
+proposition-construction-independence-rf-shriek and its three-paragraph proof.
 
 Restriction to the full localizing subcategories is expressed using their object predicates.
 Exactness means preservation of their ambient distinguished triangles, with the canonical
@@ -100,8 +99,7 @@ The four conjuncts express restriction, exactness, sums, and preservation of Dct
 All categories are the ordinary unbounded derived categories of internal module objects.
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-comp-coherence,
-proposition-construction-independence-rf-shriek, statement and proof
-(blueprint: proposition-construction-independence-rf-shriek).
+proposition-construction-independence-rf-shriek, statement and proof.
 
 Proof plan:
 1. Apply proposition-proper-direct-image-extension-zero to the quasi-compact open immersion c.i.

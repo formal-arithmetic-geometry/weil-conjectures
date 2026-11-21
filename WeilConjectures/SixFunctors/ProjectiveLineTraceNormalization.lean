@@ -155,7 +155,6 @@ attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- A coefficient automorphism identifies the transported kernel trace with the
 prescribed presentation trace.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, transport through a presentation.
-(auxiliary; not a blueprint node)
 
 Proof: direct image along e is an equivalence. Lift the discrepancy between the
 adjunction-unit coefficient identification and the geometric inverse-image comparison

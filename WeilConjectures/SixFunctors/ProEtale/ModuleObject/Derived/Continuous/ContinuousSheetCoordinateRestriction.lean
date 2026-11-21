@@ -16,7 +16,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMono
 /-! # Restricting the forward coordinate equation to an open subscheme
 
 Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2.
-(blueprint: lem-sfb-continuous-sheet-coordinate-restriction)
 -/
 
 @[expose] public noncomputable section
@@ -564,7 +563,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 The matrices are arbitrary; freeness and invertibility are not assumed.
 Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2;
 Bhatt--Scholze, Section 6.8, restriction of continuous coefficients.
-(blueprint: lem-sfb-continuous-sheet-coordinate-restriction)
 
 Proof. Restrict the two given continuous-function presentations along W → Y.
 The continuous module encoding identifies inverse image along this open immersion

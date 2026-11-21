@@ -91,7 +91,6 @@ import all WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 Source: Stacks Project, sites-cohomology.tex, Tag 06YY, Lemma pullback-K-flat;
 derived.tex, Tag 06XN.
-(blueprint: lem-sf-clopen-scalar-comparison-descent).
 -/
 
 @[expose] public noncomputable section
@@ -215,7 +214,6 @@ with its universal counit square on every complex.
 
 Source: Stacks Project, sites-cohomology.tex, Lemma derived-base-change (Tag 06YY),
 Lemma pullback-K-flat; derived.tex, Tag 06XN.
-(blueprint: lem-sf-clopen-scalar-comparison-descent).
 
 Proof: restriction to the clopen component is projection under the finite-clopen
 module equivalence. Its termwise application preserves K-flat complexes with flat

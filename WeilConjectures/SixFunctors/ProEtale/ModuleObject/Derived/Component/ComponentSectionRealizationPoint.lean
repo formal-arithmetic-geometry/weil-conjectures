@@ -9,8 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condense
 import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 
 /-! # Point realization comparison for component pullback
-Source: Hemo--Richarz--Scholbach, Remark 3.2 and Proposition 4.3(3)
-(blueprint: lem-zl-component-section-realization-point).
+Source: Hemo--Richarz--Scholbach, Remark 3.2 and Proposition 4.3(3).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

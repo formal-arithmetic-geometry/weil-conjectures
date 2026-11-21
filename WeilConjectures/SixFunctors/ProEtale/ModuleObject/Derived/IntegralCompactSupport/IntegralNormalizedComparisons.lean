@@ -208,7 +208,6 @@ private theorem comparisonsForCoefficient
 
 Source: blueprint proposition-construction-independence-rf-shriek, common dense refinement
 construction, and proposition-construction-independence-rf-shriek, comparison paragraph.
-(blueprint: lem-sfb-total-derived-normalized-comparisons).
 
 Proof: specialize localizingClosure_ctf_equals_bc to O_E using the identity
 coefficient isomorphism. Write he for the equality Loc(Dctf) = Loc(Dbc). Take the

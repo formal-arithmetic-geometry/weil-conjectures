@@ -17,7 +17,7 @@ commutes with the closed direct image, `w^* i_* ≅ i_W* w_Z^*`
 of inverse images agree, `i_W^* w^* ≅ w_Z^* i^*`
 (`AlgebraicGeometry.ProEtale.upperStarSquareIso`). The first isomorphism is the mate of the
 square of direct images, hence compatible with the units and counits of `i^* ⊣ i_*` and
-`i_W^* ⊣ i_W*` (blueprint `proposition-extension-zero-restriction-closed-subscheme`).
+`i_W^* ⊣ i_W*`.
 -/
 
 @[expose] public section

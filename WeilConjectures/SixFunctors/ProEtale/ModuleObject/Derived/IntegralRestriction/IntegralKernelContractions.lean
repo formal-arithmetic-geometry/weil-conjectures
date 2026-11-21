@@ -30,7 +30,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
 /-- Before integration, the two normalized unit-counit composites are tensor
 contractions with the two diagonal integrals. No adjunction is assumed.
 Source: paragraph (1), both trace/base-change rearrangements and section normalization.
-(blueprint: lem-integral-kernel-contractions).
 Proof: transport the completed trace base-change equations through the retained
 coefficient reference. In the first composite use the first trace/base-change
 rearrangement to move the counit across proper exchange. Projection naturality moves

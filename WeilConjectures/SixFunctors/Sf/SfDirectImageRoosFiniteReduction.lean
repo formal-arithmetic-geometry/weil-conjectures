@@ -60,7 +60,6 @@ private theorem imageTransition_naturality
 the finite projection adjunct of every chosen Roos limit is invertible, even when
 the input is not complete.
 Source: Stacks 0941, 099N; Bhatt--Scholze, Lemmas 3.5.4--3.5.7 and 6.5.11.
-(blueprint: lem-weil-sf-direct-image-roos-finite-reduction).
 
 Proof: complete K using the total limit of its reduction system. Normalized
 reconstruction makes that limit complete and inverts the counit at the reduction

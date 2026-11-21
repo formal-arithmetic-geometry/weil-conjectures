@@ -780,7 +780,6 @@ private theorem transport_trace
 /-- The transported coefficient trace commutes with compact-support exchange.
 Source: blueprint prop-asd-smooth-base-change.proof.md, second paragraph, trace square;
 thm-amb-p1-adjunction.proof.md, transport between projective-line presentations.
-(auxiliary; not a blueprint node)
 
 Proof: take the second clause of hbc g hY hY' for the standard projective lines.
 It is the trace square for ordinaryFiniteP1Exchange followed by the normalized

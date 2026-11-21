@@ -67,7 +67,7 @@ open Scheme PadicAlgCl
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
 
 /-- **The first derived reduction commutes with the derived pushforward** on bounded below
-complexes (blueprint `proposition-proper-direct-image-constructible-complexes` (1)): for every
+complexes: for every
 morphism of schemes `f : X ⟶ Y` and every bounded below `K ∈ D(𝒪_{E,X})`,
 `(Rf_* K) ⊗ᴸ 𝔽_E ≅ Rf_*(K ⊗ᴸ 𝔽_E)`. -/
 theorem nonempty_derivedReduction_rightDerivedLowerStar_iso {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -14,8 +14,7 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! Termwise-injective computation of the regular quotient trace.
 
-Source: Stacks Tags 06YY, 07A6, 0A70, 0BZE, 0BZH and 08FZ;
-(blueprint: lem-sf-regular-quotient-trace-on-injective-terms).
+Source: Stacks Tags 06YY, 07A6, 0A70, 0BZE, 0BZH and 08FZ.
 -/
 
 @[expose] public noncomputable section
@@ -37,7 +36,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- On a K-injective complex, the counit of the derived adjunction `L ⊣ R(R)` is the localized
 termwise counit, once `R(R)` is computed termwise.
 Source: Stacks Tags 05TG and 0A70; the derived counit is the localization of the ordinary counit
-on K-injective representatives (auxiliary; not a blueprint node). -/
+on K-injective representatives. -/
 theorem CategoryTheory.Adjunction.mapDerivedCategory_map_rightDerivedFunctorObjQIso_inv_counit
     (adj : L ⊣ R) (J : CochainComplex D ℤ) [J.IsKInjective] :
     L.mapDerivedCategory.map (R.rightDerivedFunctorObjQIso J).inv ≫
@@ -98,8 +97,7 @@ open SheafOfModules SheafOfModules.RegularQuotientCone in
 /-- The normalized regular quotient trace is invertible on a K-injective complex with injective
 terms.
 Source: Stacks Tags 06YY, 07A6, 0A70 and 08FZ; the principal short exact sequence of complexes
-and its cone-boundary/coinduction comparison
-(blueprint: lem-sf-regular-quotient-trace-on-injective-terms).
+and its cone-boundary/coinduction comparison.
 
 Proof: derived coinduction at `Q X` is ordinary coinduction applied termwise, with counit the
 localized termwise counit. On injective terms the coinduction counit and the positive
@@ -162,7 +160,6 @@ theorem reductionCoinductionTrace_isIso_of_isKInjective_of_injective
 /-- The normalized regular quotient trace is invertible on a complex with injective terms.
 Source: Stacks Tags 06YY, 07A6, 0A70, 0BZE, 0BZH and 08FZ; the principal short exact
 sequence of complexes and its cone-boundary/coinduction comparison.
-(blueprint: lem-sf-regular-quotient-trace-on-injective-terms).
 
 Proof: a termwise-injective unbounded complex need not be K-injective, so first replace `I`
 by its functorial K-injective resolution `I ⟶ R(I)` with injective terms (Stacks 079P); its

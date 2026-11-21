@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.S
 public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! Shift compatibility of the scalar-first derived projection map.
-(blueprint: lem-sfb-scalar-projection-shift)
 -/
 
 @[expose] public noncomputable section
@@ -72,7 +71,6 @@ Identify the generic derived tensor comparison with the native comparison. Its
 first-variable shift compatibility and the shift compatibility of the native derived
 adjunction imply that the right-adjoint projection for the flipped tensor bifunctors
 commutes with shifts. The tensor action of the counit also commutes with shifts.
-(blueprint: lem-sfb-scalar-projection-shift)
 -/
 theorem scalarProjection_commShift
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]

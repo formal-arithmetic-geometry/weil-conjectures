@@ -58,7 +58,7 @@ variable [QuasiCompact j] [PreservesFiniteColimits ((i)_*[ModuleCat.{u + 1} R])]
 /-- **The open–closed triangle** on the pro-étale site: for a closed immersion `i` with
 quasi-compact open complement `j`, every `M ∈ D(X_proét)` sits in a distinguished triangle
 `j_! j^* M ⟶ M ⟶ i_* i^* M ⟶ (j_! j^* M)[1]`, formed by the counit of `j_! ⊣ j^*` and the unit of
-`i^* ⊣ i_*` (blueprint `proposition-extension-zero-restriction-closed-subscheme`). The exactness of
+`i^* ⊣ i_*`. The exactness of
 `i_*` is `AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isCompl`. -/
 theorem exists_distTriang_openClosed (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (M : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))) :

@@ -11,7 +11,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 The data of a finite open/closed splitting tree, before assigning numerical vertex labels.
 Source: the binary refinement construction in Stacks Project, Topology, Tag 09Y4.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A finite splitting tree with prescribed admissible branches. The scheme at every vertex
 is qcqs and immersed in the ambient scheme; each split is complementary and quasi-compact.
-Source: Stacks Project, Topology, Tag 09Y4.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Topology, Tag 09Y4. -/
 inductive SchemeRefinementTree (W : Scheme.{u})
     (allowed : ∀ (T : Scheme.{u}), (T ⟶ W) → ∀ (L R : Scheme.{u}),
       (L ⟶ T) → (R ⟶ T) → Prop) :

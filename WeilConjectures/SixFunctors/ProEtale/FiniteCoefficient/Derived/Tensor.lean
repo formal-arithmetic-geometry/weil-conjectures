@@ -86,7 +86,7 @@ structure on `D(X_proét)` obtained from the K-flat left derivability structure.
 `A = ModuleCat R` it is `K₁ ⊗ᴸ_R K₂ = P ⊗_R K₂` for a K-flat resolution `P → K₁`
 (`AlgebraicGeometry.ProEtale.isLeftDerivedFunctor₂_derivedTensor`).
 
-(blueprint: `prose-03-02`) -/
+ -/
 @[implicit_reducible]
 noncomputable def derivedTensor :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤

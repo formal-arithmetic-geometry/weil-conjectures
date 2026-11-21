@@ -21,7 +21,6 @@ import WeilConjectures.CategoryTheory.SmoothPurity.CountableCoproductsIdempotent
 
 Source: blueprint `definition-localizing-subcategory`, using the bounded constructible
 generators needed for the ell-adic cases of `theorem-exceptional-inverse-image`.
-(blueprint: def-sfb-bounded-constructible-localizing-closure)
 -/
 
 @[expose] public section
@@ -42,8 +41,7 @@ constructible complexes and closed under coproducts in the ambient derived categ
 Coproducts are indexed in the coefficient/sheaf morphism universe `u + 1`.
 
 Source: blueprint `definition-localizing-subcategory` and the ell-adic specialization in
-`theorem-exceptional-inverse-image`. No completeness condition is added to the hull.
-(blueprint: def-sfb-bounded-constructible-localizing-closure) -/
+`theorem-exceptional-inverse-image`. No completeness condition is added to the hull. -/
 def boundedConstructibleLocalizingClosure :
     ObjectProperty (DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=

@@ -93,7 +93,6 @@ abbrev continuousIntegralExchangeSquareStatement
 /-- Source and target comparisons identify the specified integral and E exchange maps.
 Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15; scalar localization and
 unit-square-counit compatibility in the condensed realization argument.
-(blueprint: lem-weil-pbc-continuous-integral-exchange-square).
 
 Proof in words. On compact profinite tests, continuousIntegralFunctions_isLocalization
 identifies the coefficient map with inversion of ℓ. Exact inverse image from the point

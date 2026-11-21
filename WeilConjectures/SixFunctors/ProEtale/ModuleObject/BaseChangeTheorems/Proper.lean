@@ -99,8 +99,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- **The proper base change theorem** (blueprint
-`proposition-proper-direct-image-constructible-complexes`) for bounded constructible `𝒪_E`-sheaves,
+/-- **The proper base change theorem** for bounded constructible `𝒪_E`-sheaves,
 `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
 
 ```
@@ -133,8 +132,7 @@ theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers
     (isIso_derivedBaseChangeMap_app_of_isProper _ hsq _
       (boundedConstructible_derivedReduction_obj X.left ℓ E _ K₀.property).plusEtaleOrigin)
 
-/-- **The proper base change theorem** (blueprint
-`proposition-proper-direct-image-constructible-complexes`) for bounded constructible `E`-sheaves,
+/-- **The proper base change theorem** for bounded constructible `E`-sheaves,
 `E` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
 
 ```
@@ -162,8 +160,7 @@ theorem isIso_boundedConstructibleBaseChange_of_isProper (E : PadicAlgCl.FiniteI
     simp only [MorphismProperty.isomorphisms.iff]
     infer_instance)
 
-/-- **The proper base change theorem** (blueprint
-`proposition-proper-direct-image-constructible-complexes`) for bounded constructible `ℚ̄_ℓ`-sheaves:
+/-- **The proper base change theorem** for bounded constructible `ℚ̄_ℓ`-sheaves:
 for a cartesian square of schemes `sq : IsPullback g' f' f g` with `f` proper, the base-change
 morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an isomorphism of functors
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`, for the condensed ring

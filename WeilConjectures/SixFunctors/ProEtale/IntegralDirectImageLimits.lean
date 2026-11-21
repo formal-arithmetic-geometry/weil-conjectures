@@ -16,7 +16,6 @@ import WeilConjectures.SixFunctors.ProEtale.InternalRoosCompleteness
 /-! # Integral direct image and the canonical finite reduction
 
 Source: Stacks 099N and blueprint direct-image-limits, finite-projection and completion clauses.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -182,7 +181,6 @@ private theorem map_roos_complete
 is invertible, without a finiteness or properness hypothesis on the scheme morphism.
 Source: Stacks 099N; blueprint proposition-proper-base-change-complete-integral--1, finite-reduction
 and completion-unit clauses.
-(auxiliary; not a blueprint node).
 
 Proof: pass from internal modules to sectionwise modules by the exact section-action
  equivalence. The integral coefficient limit identifies the ring with the completed adic

@@ -20,8 +20,7 @@ set_option linter.privateModule false
 /-!
 # Naturality of Frobenius point transport
 
-Source: Deligne, *La conjecture de Weil II*, (1.1.7), pp. 150--151
-(blueprint: lem-weil-frobenius-point-transport-natural).
+Source: Deligne, *La conjecture de Weil II*, (1.1.7), pp. 150--151.
 
 The two sigma maps are linear and natural on the finite and completed integral
 complex models used by `frobeniusPointFiniteSigma` and

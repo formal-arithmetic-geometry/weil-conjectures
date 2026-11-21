@@ -13,7 +13,6 @@ import all WeilConjectures.SixFunctors.ProEtale.IntegralNormalizedRestrictionSqu
 /-! # Quotient projections of the normalized integral section comparison
 
 Source: blueprint integral-criterion-reductions, final coefficient interpretation.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -56,8 +55,7 @@ private theorem source_transport (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The fixed normalized integral ring comparison commutes with every finite quotient.
 Source: blueprint integral-criterion-reductions, final coefficient interpretation;
-Stacks 00YV and 03EK
-(auxiliary; not a blueprint node).
+Stacks 00YV and 03EK.
 
 Proof: forget to abelian sheaves. Under the point inverse-image adjunction, the
 mate of the left side is postcomposition of continuous maps with the quotient.

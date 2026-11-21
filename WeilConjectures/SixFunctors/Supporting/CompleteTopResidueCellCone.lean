@@ -119,7 +119,7 @@ import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 /-! # A lifted top residue cell and its complete cone
 
 Source: Stacks Project, proetale.tex, Tags 09C2 and 09C3, final induction paragraph;
-derived.tex, Tag 014E (blueprint: lem-sf-complete-top-residue-cell-cone).
+derived.tex, Tag 014E.
 -/
 
 @[expose] public noncomputable section
@@ -143,20 +143,19 @@ attribute [-instance] integralCoefficientAbLocallyBijective integralCoefficientA
   sfResidueSliceAbSheafify sfResidueSliceAbLocallyBijective sfResidueSliceSmall
 
 /-- The published locally bijective equivalences at the site's module universe.
-Source: Stacks 00W1 (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 00W1. -/
 instance topCellAbLocallyBijective (Y : Scheme.{u}) :
     (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} Y
 
 /-- The literal finite zero-differential sum of the indicated single-term complexes.
-Source: Stacks 09C3, split residue model
-(blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 09C3, split residue model. -/
 def topCellSplitComplex (C : Type v) [Category.{w} C] [Abelian C]
     (F : ℕ → C) (a b : ℤ) (r : ℤ → ℕ) : CochainComplex C ℤ :=
   ∐ fun q : Set.Icc a b ↦ (HomologicalComplex.single C (.up ℤ) q.val).obj (F (r q.val))
 
 /-- Inclusion in the literal finite split complex, using its finite coproduct.
-Source: Stacks 09C3 (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 09C3. -/
 def topCellSplitInclusion (C : Type v) [Category.{w} C] [Abelian C]
     (F : ℕ → C) (a b : ℤ) (r : ℤ → ℕ) (q : Set.Icc a b) :
     (HomologicalComplex.single C (.up ℤ) q.val).obj (F (r q.val)) ⟶
@@ -168,7 +167,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
 /-- Mathlib's abelian category at the explicit completed-coefficient sizes.
-Source: Stacks 03DA (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 03DA. -/
 instance (priority := 3000) topCellSourceAbelian :
     Abelian (scalarReductionSource.{u, u} l E X) :=
   @SheafOfModules.instAbelian X.ProEt inferInstance (ProEt.topology X)
@@ -177,7 +176,7 @@ instance (priority := 3000) topCellSourceAbelian :
     (integralCoefficientAbLocallyBijective.{u, u} X)
 
 /-- Mathlib's abelian category at the explicit residue-coefficient sizes.
-Source: Stacks 03DA (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 03DA. -/
 instance (priority := 3000) topCellTargetAbelian :
     Abelian (scalarReductionTarget.{u, u} l E X 0) :=
   @SheafOfModules.instAbelian X.ProEt inferInstance (ProEt.topology X)
@@ -186,31 +185,31 @@ instance (priority := 3000) topCellTargetAbelian :
     (integralCoefficientAbLocallyBijective.{u, u} X)
 
 /-- Standard localization at the explicit completed-coefficient sizes.
-Source: Stacks 05RU (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 05RU. -/
 instance (priority := 2000) topCellSourceDerived :
     HasDerivedCategory (scalarReductionSource.{u, u} l E X) :=
   scalarReductionSourceDerived.{u, u} l E X
 
 /-- Standard localization at the explicit residue-coefficient sizes.
-Source: Stacks 05RU (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 05RU. -/
 instance (priority := 2000) topCellTargetDerived :
     HasDerivedCategory (scalarReductionTarget.{u, u} l E X 0) :=
   scalarReductionTargetDerived.{u, u} l E X 0
 
 /-- Exact restriction, at the specified coefficient sizes.
-Source: Stacks 03CZ (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 03CZ. -/
 instance (priority := 3000) topCellRestrictionLimits :
     PreservesFiniteLimits (scalarReductionRestriction.{u, u} l E X 0) :=
   scalarReductionRestrictionLimits.{u, u} l E X 0
 
 /-- Exact restriction, at the specified coefficient sizes.
-Source: Stacks 03CZ (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 03CZ. -/
 instance (priority := 3000) topCellRestrictionColimits :
     PreservesFiniteColimits (scalarReductionRestriction.{u, u} l E X 0) :=
   scalarReductionRestrictionColimits.{u, u} l E X 0
 
 /-- The actual finite free module over the completed coefficient sheaf.
-Source: Stacks 09C3 (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 09C3. -/
 abbrev topCellIntegralFree (r : ℕ) : scalarReductionSource.{u, u} l E X :=
   @SheafOfModules.free X.ProEt inferInstance (ProEt.topology X)
     (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)
@@ -219,7 +218,7 @@ abbrev topCellIntegralFree (r : ℕ) : scalarReductionSource.{u, u} l E X :=
     (ULift.{u + 1} (Fin r))
 
 /-- The actual finite free module over the constant residue ring sheaf.
-Source: Stacks 09C3 (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 09C3. -/
 abbrev topCellResidueFree (r : ℕ) : scalarReductionTarget.{u, u} l E X 0 :=
   @SheafOfModules.free X.ProEt inferInstance (ProEt.topology X)
     (integralCoefficientSheaf.{u, u} l E X 0)
@@ -229,8 +228,7 @@ abbrev topCellResidueFree (r : ℕ) : scalarReductionTarget.{u, u} l E X 0 :=
 
 /-- Coefficient reduction on finite free modules, fixed on every standard generator.
 The restricted residue module has the same underlying global sections.
-Source: Stacks 09C3, quotient of the completed coefficient sheaf
-(blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 09C3, quotient of the completed coefficient sheaf. -/
 def topCellFreeQuotient (r : ℕ) : topCellIntegralFree.{u} l E X r ⟶
     (scalarReductionRestriction.{u, u} l E X 0).obj (topCellResidueFree.{u} l E X r) :=
   (@SheafOfModules.freeHomEquiv X.ProEt inferInstance (ProEt.topology X)
@@ -253,7 +251,7 @@ def topCellFreeQuotient (r : ℕ) : topCellIntegralFree.{u} l E X r ⟶
 /-- The canonical comparison from the derived reduction of a shifted finite free
 module to its residue free module. It is the adjoint of coefficient reduction,
 using the normalized scalar-extension adjunction and the exact-restriction comparison.
-Source: Stacks 06YY, 09C3 (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 06YY, 09C3. -/
 def topCellReductionComparison (r : ℕ) (b : ℤ) :
     (scalarReductionDerivedExtension.{u, u} l E X 0).obj
       ((DerivedCategory.singleFunctor (scalarReductionSource.{u, u} l E X) b).obj
@@ -272,15 +270,14 @@ def topCellReductionComparison (r : ℕ) (b : ℤ) :
           (topCellResidueFree.{u} l E X r)))
 
 /-- The split residue model over an integer interval, using the existing single-term
-and coproduct constructions. Source: Stacks 09C3
-(blueprint: lem-sf-complete-top-residue-cell-cone). -/
+and coproduct constructions. Source: Stacks 09C3. -/
 abbrev topCellResidueSplit (a b : ℤ) (r : ℤ → ℕ) :=
   @topCellSplitComplex (scalarReductionTarget.{u, u} l E X 0) inferInstance
     (topCellTargetAbelian.{u} l E X)
     (topCellResidueFree.{u} l E X) a b r
 
 /-- Inclusion of one summand of the literal split residue complex.
-Source: Stacks 09C3 (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 09C3. -/
 def topCellResidueInclusion (a b : ℤ) (r : ℤ → ℕ) (q : Set.Icc a b) :
     (HomologicalComplex.single (scalarReductionTarget.{u, u} l E X 0)
       (.up ℤ) q.val).obj (topCellResidueFree.{u} l E X (r q.val)) ⟶
@@ -289,7 +286,7 @@ def topCellResidueInclusion (a b : ℤ) (r : ℤ → ℕ) (q : Set.Icc a b) :
     (topCellTargetAbelian.{u} l E X) (topCellResidueFree.{u} l E X) a b r q
 
 /-- The reduced cell map after the specified free-generator comparison.
-Source: Stacks 09C3 (blueprint: lem-sf-complete-top-residue-cell-cone). -/
+Source: Stacks 09C3. -/
 def topCellReducedMap (r : ℕ) (b : ℤ)
     (M : DerivedCategory (scalarReductionSource.{u, u} l E X))
     (e : (scalarReductionDerivedExtension.{u, u} l E X 0).obj
@@ -622,8 +619,7 @@ A single-term complex in degree b is the conventional P[-b]. The identity mappin
 cone on that complex is the identity pair in degrees b-1 and b.
 
 Source: Stacks Project, proetale.tex, Tags 09C2 and 09C3, final induction paragraph;
-derived.tex, Tags 014E, 014A and 05QR
-(blueprint: lem-sf-complete-top-residue-cell-cone).
+derived.tex, Tags 014E, 014A and 05QR.
 
 Proof:
 1. Normalize the ordinary quotient on each free generator. Extension preserves the

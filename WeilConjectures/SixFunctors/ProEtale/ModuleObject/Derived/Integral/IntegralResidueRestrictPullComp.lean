@@ -32,7 +32,6 @@ set_option maxHeartbeats 800000 in
 /-- Restriction of scalars respects the canonical derived pullback composition.
 Source: the coefficient-map composition identity and exact inverse image, as used in
 Bhatt--Scholze, Remark 6.8.15.
-(blueprint: new-integral-residue-restrict-pull-comp)
 
 Proof. Apply the proved exact-derived square-pasting theorem to the ordinary
 restriction-composition identity. Expand the exact-pullback identifications in the

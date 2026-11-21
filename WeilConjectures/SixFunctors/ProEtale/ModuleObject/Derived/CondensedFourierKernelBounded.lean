@@ -20,7 +20,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstruc
 /-! Bounded constructibility of the condensed Fourier kernels.
 
 Source: Fourier specialization paragraph of `proposition-fourier-inversion`
-(blueprint: proposition-fourier-inversion), using `lemma-artin-schreier-character-sheaf`.
+, using `lemma-artin-schreier-character-sheaf`.
 -/
 
 @[expose] public noncomputable section
@@ -37,7 +37,7 @@ constructible, including the noninvertible-cardinality branch of its definition.
 
 Source: latest blueprint Fourier specialization in `lem-fd-kernel-composition.md`,
 `lemma-artin-schreier-character-sheaf`, and the actual projector definition of
-`lemma-artin-schreier-character-sheaf--1` (blueprint: lem-fd-fourier-kernel-bounded).
+`lemma-artin-schreier-character-sheaf--1`.
 
 Proof: if the finite-field cardinality is invertible in the scalar coefficient ring,
 lemma-artin-schreier-character-sheaf gives a cover on which the kernel is the regular module.

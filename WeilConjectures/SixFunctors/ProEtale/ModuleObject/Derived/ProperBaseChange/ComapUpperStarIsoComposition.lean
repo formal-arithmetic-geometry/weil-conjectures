@@ -67,7 +67,6 @@ private lemma upperStarComp_inv_conjugate
 -- The mate comparison repeats typeclass searches for module-object adjunctions.
 /-- Composition coherence for the ordinary coefficient-restriction comparison.
 Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: new-comap-upper-star-iso-composition)
 
 Proof. Replace extension along each coefficient-pullback isomorphism by restriction
 along its inverse. The coefficient-map composition identity identifies the transported

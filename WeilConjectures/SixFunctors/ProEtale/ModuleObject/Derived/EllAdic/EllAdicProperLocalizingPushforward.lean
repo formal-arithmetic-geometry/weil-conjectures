@@ -17,7 +17,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStar
 
 Source: blueprint `sk-cor-existence-ii-restriction.proof.md`, part (1), and
 `theorem-exceptional-inverse-image`, part (2).
-(blueprint: lem-sfb-adic-proper-localizing-pushforward)
 -/
 
 @[expose] public section

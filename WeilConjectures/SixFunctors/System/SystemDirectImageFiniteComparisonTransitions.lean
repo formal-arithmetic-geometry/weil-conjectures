@@ -40,8 +40,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 system direct image. Its factors are the given reduction evaluations, the
 canonical perfect-quotient projection arrow and the given direct-image evaluation.
 No choices of objects or morphisms are made here.
-Source: Stacks 0944; Zheng Construction 4.1
-(blueprint: lem-weil-system-direct-image-finite-comparison-transitions). -/
+Source: Stacks 0944; Zheng Construction 4.1. -/
 def systemDirectImageFiniteComparison
     (S : CoefficientDerivedSystemCalculus l E X)
     (T : CoefficientDerivedSystemCalculus l E Y)
@@ -66,7 +65,6 @@ transition, in the finite coefficient derived category before completed restrict
 This is solely an equality of the specified arrows; it asserts neither their
 invertibility nor normalization of either system.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941, 0944 and 099N.
-(blueprint: lem-weil-system-direct-image-finite-comparison-transitions).
 
 Proof: first identify the normalized restriction functor with the native scalar
 restriction functor. Their horizontal transformations have the same section

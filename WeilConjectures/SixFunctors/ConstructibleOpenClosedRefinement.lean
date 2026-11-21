@@ -20,8 +20,7 @@ namespace AlgebraicGeometry.Scheme
 /-! # Finite open--closed refinement through constructible strata
 
 Source: Stacks Project, Topology, Tags 005H, 09YH, and 09Y4; Schemes, Tags
-01ZG, 01KO, 01J3, 03GI, 01JR, 01JT, and 01JY
-(auxiliary; not a blueprint node).
+01ZG, 01KO, 01J3, 03GI, 01JR, 01JT, and 01JY.
 
 ## Main statement
 
@@ -96,8 +95,7 @@ private theorem exists_constructible_cut
 /-- Finite open--closed refinement through constructible strata.
 
 Source: Stacks Project, Topology, Tags 005H, 09YH, and 09Y4; Schemes, Tags
-01ZG, 01KO, 01J3, 03GI, 01JR, 01JT, and 01JY
-(auxiliary; not a blueprint node).
+01ZG, 01KO, 01J3, 03GI, 01JR, 01JT, and 01JY.
 
 Proof (all deferred to stage 3):
 1. Write `E = range s`.  Constructible sets are retrocompact (Topology Tag 09YH); on the

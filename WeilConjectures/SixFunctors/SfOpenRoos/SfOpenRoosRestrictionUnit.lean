@@ -68,8 +68,7 @@ import all WeilConjectures.Algebra.Homology.SubterminalLocal.SubterminalModuleLo
 /-! # Restriction of the normalized open Roos comparison through its unit
 
 Source: Stacks Project, proetale.tex, Tag 09BP, lemma-j-shriek-limits;
-sites-modules.tex, Tags 04IX and 03DJ; sites-cohomology.tex, Tag 0941
-(blueprint: lem-sf-open-roos-restriction-unit).
+sites-modules.tex, Tags 04IX and 03DJ; sites-cohomology.tex, Tag 0941.
 
 The open is presented by its pro-etale slice, with the actual completed ring,
 extension, restriction and normalized adjunction from the recorded dependencies.
@@ -92,7 +91,7 @@ namespace WeilConjectures.SfOpenRoos
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 /-- Localization of the actual exact adjunction, allowing independent localization sizes.
-Source: Stacks 015F, 03DI (blueprint: lem-sf-open-roos-restriction-unit). -/
+Source: Stacks 015F, 03DI. -/
 def restrictionUnitDerivedAdjunction
     {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
     [Abelian A] [Abelian B]
@@ -111,7 +110,7 @@ def restrictionUnitDerivedAdjunction
     J.mapDerivedCategory G.mapDerivedCategory
 
 /-- Localize the actual termwise tower adjunction with its pointwise exactness data.
-Source: Stacks 015F, 03DI (blueprint: lem-sf-open-roos-restriction-unit). -/
+Source: Stacks 015F, 03DI. -/
 def restrictionUnitTowerDerivedAdjunction
     {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
     [Abelian A] [Abelian B]
@@ -154,7 +153,7 @@ variable {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
 /-- Expanded normalization and compatibility laws of this node. These are propositions
 about shared comparison data; no arbitrary derived map replaces either comparison.
 The signed coordinates are the canonical shifted-cone coordinates (u,-v).
-Source: Stacks 09BP and 0941 (blueprint: lem-sf-open-roos-restriction-unit). -/
+Source: Stacks 09BP and 0941. -/
 def RestrictionUnitAssertions (J : A ⥤ B) (G : B ⥤ A)
     [J.Additive] [PreservesFiniteLimits J] [PreservesFiniteColimits J]
     [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
@@ -1526,19 +1525,19 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{t}) (U : X.ProEt)
 
 /-- Exact restriction structure reused from the canonical slice functor.
-Source: Stacks 03DJ (blueprint: lem-sf-open-roos-restriction-unit). -/
+Source: Stacks 03DJ. -/
 instance restrictionUnitAdditive : (restriction l E X U).Additive :=
   SheafOfModules.localizedSystemRestrictionAdditive.{t + 1, t, u}
     (completedIntegralCommRingSheafUnrestricted l E X) U
 
 /-- Exact restriction structure reused from the canonical slice functor.
-Source: Stacks 03DJ (blueprint: lem-sf-open-roos-restriction-unit). -/
+Source: Stacks 03DJ. -/
 instance restrictionUnitLimits : PreservesFiniteLimits (restriction l E X U) :=
   SheafOfModules.localizedSystemRestrictionLimits.{t + 1, t, u}
     (completedIntegralCommRingSheafUnrestricted l E X) U
 
 /-- Exact restriction structure reused from the canonical slice functor.
-Source: Stacks 03DJ (blueprint: lem-sf-open-roos-restriction-unit). -/
+Source: Stacks 03DJ. -/
 instance restrictionUnitColimits : PreservesFiniteColimits (restriction l E X U) :=
   SheafOfModules.localizedSystemRestrictionColimits.{t + 1, t, u}
     (completedIntegralCommRingSheafUnrestricted l E X) U
@@ -1546,8 +1545,7 @@ instance restrictionUnitColimits : PreservesFiniteColimits (restriction l E X U)
 /-- Restriction preserves coefficients and products, and its normalized Roos comparison
 composed with the open-extension comparison is precisely the actual open unit.
 
-Source: Stacks 09BP, 04IX, 03DJ and 0941
-(blueprint: lem-sf-open-roos-restriction-unit).
+Source: Stacks 09BP, 04IX, 03DJ and 0941.
 
 Proof:
 1. The actual restriction is a right adjoint, so it preserves countable products.

@@ -220,7 +220,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
 /-- **`Ex_!` for open immersions is the extension-by-zero base change**: through `Rf_! ≅ f_!` and
 `Rf'_! ≅ f'_!`, the compact-support base change of a cartesian square with `f` and `f'` open
 immersions, followed by the extension-by-zero exchange morphism `Lg'^* f'_! ⟶ f_! Lg^*`, is the
-identity of `Lg^* f_!` (blueprint `def-exchange-projection`). -/
+identity of `Lg^* f_!`. -/
 theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_comp_isoOpen
     (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq ≫

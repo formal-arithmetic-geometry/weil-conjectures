@@ -21,7 +21,7 @@ constructibility, and the chosen `Rf_! = Rf_!^{c_f}`, are the landed declaration
 `boundedConstructibleLowerShriekOfCompactificationOfPreserves` and
 `boundedConstructibleLowerShriekOfPreserves` of
 `Sheaf.Paper.BoundedConstructibleLowerShriekOfPreserves`
-(blueprint: proposition-construction-independence-rf-shriek), built on the preservation hypothesis
+, built on the preservation hypothesis
 `PreservesBoundedConstructiblePushforwards`. This file adds the compatibility of these functors
 with the ambient lower shriek `R(p_*) ∘ D(i_!)` for the same compactification.
 

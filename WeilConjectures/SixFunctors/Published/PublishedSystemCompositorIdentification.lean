@@ -238,8 +238,7 @@ attribute [local irreducible] publishedSystemAmbientData
 
 /-- The section-normalized derived compositor is the inverse ambient compositor,
 after the specified equality of the two inverse-image presentations.
-Source: Stacks 03D3 and 07A7, and exact localization (015F)
-(blueprint: lem-sf-published-system-compositor-identification).
+Source: Stacks 03D3 and 07A7, and exact localization (015F).
 Proof: sequence_direct_eq identifies the two ordinary direct images. The sections
 field of c and pushComp_existsUnique give the same restriction along the canonical
 isomorphism of fibre products, with opposite orientation. Module-sheaf morphisms

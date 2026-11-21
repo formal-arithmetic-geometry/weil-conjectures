@@ -58,8 +58,7 @@ private theorem restriction_hom {S T : Scheme.{u}} (h : S ⟶ T)
   rfl
 
 /-- The normalized restriction comparisons commute with restriction composition.
-Source: Bhatt--Scholze, Lemma 5.4.1; naturality of the sectionwise encoding
-(blueprint: lem-weil-pbc-finite-discrete-restriction-composition).
+Source: Bhatt--Scholze, Lemma 5.4.1; naturality of the sectionwise encoding.
 
 Proof. Forget module actions. Expand each normalized comparison as the restriction of
 the encoding forget isomorphism followed by its inverse at the target. The middle

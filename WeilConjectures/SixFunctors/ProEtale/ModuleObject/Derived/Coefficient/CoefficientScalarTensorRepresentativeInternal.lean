@@ -45,7 +45,6 @@ The first strict substep proves the signed representative equation when both
 section complexes are termwise images of internal complexes. The hypotheses in
 `CoefficientScalarTensorRepresentativeBasicData` are exactly the normalized ordinary,
 scalar and derived comparison formulas needed for this restricted case.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-internal)
 -/
 
 @[expose] public noncomputable section
@@ -82,8 +81,7 @@ Use the proved ordinary and total-complex squares and the derived tensor counit
 square. The tensor of the two section models is K-flat with flat terms; transport
 these properties across totalComparison and apply hscalar to the tensor model.
 Normalize both localization tensor maps, paste the naturality, scalar and tensor
-squares, and cancel the composite comparison isomorphism.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-internal). -/
+squares, and cancel the composite comparison isomorphism. -/
 theorem coefficientScalarTensorRepresentative_internal
     (Z : Scheme.{u})
     (d : CoefficientScalarTensorRepresentativeBasicData a Z)

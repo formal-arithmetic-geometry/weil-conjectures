@@ -53,7 +53,6 @@ private theorem boundedConstructible_hom_single_of_isMonoidalClosed
 Source: Bhatt--Scholze, Remark 6.8.15 and Propositions 6.6.11 and 6.8.11(3);
 SGA 4½, Th. finitude 1.6, for finite-coefficient internal Hom on finite-type
 schemes over a field with the coefficient prime invertible.
-(blueprint: lem-sfb-dc-hom-single)
 
 Proof: For integral coefficients, the finite scalar local models identify each input
 with a derived complete complex with constructible residue. Derived Hom into a

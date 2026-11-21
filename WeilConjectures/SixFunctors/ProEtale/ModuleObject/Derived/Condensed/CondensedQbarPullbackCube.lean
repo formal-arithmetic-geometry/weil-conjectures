@@ -71,7 +71,7 @@ set_option maxHeartbeats 150000 in
 -- The canonical module-object comparisons require repeated exactness instance inference.
 /-- Composition coherence of the restricted coefficient pull comparison.
 Source: ChangeOfCoefficients.lean, derivedPullIso; ContinuousIntegralPullComposition.lean,
-derived_pull_comp and bounded_comp_hom (blueprint: lem-weil-pbc-qbar-condensed-pullback-cube).
+derived_pull_comp and bounded_comp_hom.
 
 Proof in words. Apply faithfulness of the bounded-constructible inclusion to the hom
 components. The map of scalar extension is the ambient derived extension map, and the
@@ -186,8 +186,7 @@ attribute [local irreducible] constructibleToPadicAlgCl
 
 /-- Paste composition coherence across the two paths of the commutative square.
 Source: ContinuousIntegralExchangeTargetAdjunct.lean, mapped_iso_rectangle;
-MorphismDefs.lean, boundedConstructiblePullbackSquareComparison_app
-(blueprint: lem-weil-pbc-qbar-condensed-pullback-cube).
+MorphismDefs.lean, boundedConstructiblePullbackSquareComparison_app.
 
 Proof in words. Apply qbarPullIso_comp to (g', f) and (f', g), and qbarPull_eq to the equal
 composites, using sq.w.symm. Expand each pullback-square comparison into the inverse
@@ -252,8 +251,7 @@ attribute [local irreducible] constructibleToPadicAlgCl constructibleToQbarPullI
 /-- Coefficient pullback comparisons commute with the specified geometric square comparison.
 Source: ChangeOfCoefficients.lean, derivedPullIso and derivedComapLowerStarIso;
 UpperLowerStar/Defs.lean, upperStarComp; Derived/UpperLowerStar.lean, leftDerivedUpperStarComp;
-TwoColimit.lean, final transport paragraph
-(blueprint: lem-weil-pbc-qbar-condensed-pullback-cube).
+TwoColimit.lean, final transport paragraph.
 
 Proof in words. Restriction of scalars followed by geometric direct image and geometric
 direct image followed by restriction have the same underlying sheaf functor; the natural

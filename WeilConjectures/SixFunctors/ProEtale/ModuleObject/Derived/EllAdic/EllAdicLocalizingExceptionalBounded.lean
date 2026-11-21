@@ -188,7 +188,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Cohomological boundedness of the localizing exceptional object
-(blueprint: lem-sfb-adic-localizing-exceptional-bounded)
 -/
 
 @[expose] public section
@@ -726,7 +725,7 @@ private def ExceptionalKey : Prop :=
 
 omit [IsProper (Over.Hom.left g)] in
 /-- The data for `E` and `Q̄_ℓ`, from Brown representability and the rational restriction
-theorem alone (blueprint: theorem-f-shriek-ell-adic-coefficients). -/
+theorem alone. -/
 private theorem exceptionalKey_rational
     (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ℓ k)
     (hr : ((∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
@@ -743,7 +742,6 @@ restriction theorems and their coefficient comparison.
 Proof: identify the canonical Brown right adjoint with the geometric exceptional inverse
 image on finite affine charts, apply the rational and integral restriction theorems, and
 take a common bound over the finite affine cover.
-(blueprint: lem-sfb-adic-localizing-exceptional-bounded-canonical)
 -/
 private theorem canonical_isBounded_of_key (hkey : ExceptionalKey Λ g)
     (hF : (ellAdicLocalizingLowerStar Λ ℓ g hΛ).IsLeftAdjoint)
@@ -836,7 +834,6 @@ Part (2). Proof: use the finite affine factorization of the proper map and the b
 the rational restriction theorem, or its compatible integral torsion-level analogue.  A
 finite affine cover gives a common pair of cohomological bounds; uniqueness of right
 adjoints transports these bounds from the geometric construction to the supplied `G`.
-(blueprint: lem-sfb-adic-localizing-exceptional-bounded)
 -/
 private theorem isBounded_of_key (hkey : ExceptionalKey Λ g)
     (G : (boundedConstructibleLocalizingClosure Λ Y.left).FullSubcategory ⥤
@@ -858,8 +855,7 @@ private theorem isBounded_of_key (hkey : ExceptionalKey Λ g)
   exact (hb i hi).of_iso ((DerivedCategory.homologyFunctor _ i).mapIso e'.symm)
 
 /-- The bound of `ellAdic_localizing_rightAdjoint_obj_isBounded` for the coefficients `E`
-and `Q̄_ℓ`, through the rational restriction theorem only.
-(blueprint: lem-sfb-adic-localizing-exceptional-bounded) -/
+and `Q̄_ℓ`, through the rational restriction theorem only. -/
 theorem ellAdic_localizing_rightAdjoint_obj_isBounded_rational
     (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ℓ k)
     (hr : ((∃ E : PadicAlgCl.FiniteIntermediateField ℓ,

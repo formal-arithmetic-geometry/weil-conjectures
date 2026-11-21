@@ -113,8 +113,7 @@ private theorem kernelCounit_map
     D.trace D'.trace ht K
 
 /-- Replace only the trace of the given diagonal datum.
-Source: coefficient normalization in the projective-line diagonal argument.
-(auxiliary; not a blueprint node). -/
+Source: coefficient normalization in the projective-line diagonal argument. -/
 @[irreducible]
 noncomputable def kernelDatumWithTrace
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -127,7 +126,6 @@ noncomputable def kernelDatumWithTrace
 
 /-- Tensoring a coefficient automorphism changes the kernel counit by its action on the trace.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, transport of the kernel counit.
-(auxiliary; not a blueprint node).
 
 Proof: the new datum retains the diagonal class and has the specified trace by construction.
 Naturality of the projection map in its coefficient moves the image of the automorphism

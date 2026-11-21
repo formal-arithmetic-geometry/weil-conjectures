@@ -15,8 +15,7 @@ import all WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionOrdinaryMod
 
 /-! # Completeness of ordinary tensor on a projective chart
 
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Stacks, Tags 07A4 and 0941
-(blueprint: lem-fix-projective-tensor-chart-complete).
+Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Stacks, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -162,8 +161,7 @@ attribute [local irreducible] IntegralOnSlice.duality
 of their ordinary tensor complete. No constructibility or completeness of the inputs
 is assumed.
 
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Stacks, Tags 07A4 and 0941
-(blueprint: lem-fix-projective-tensor-chart-complete).
+Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Stacks, Tags 07A4 and 0941.
 
 Proof:
 1. The two ordinary pullback presentations use the same completed coefficient map:

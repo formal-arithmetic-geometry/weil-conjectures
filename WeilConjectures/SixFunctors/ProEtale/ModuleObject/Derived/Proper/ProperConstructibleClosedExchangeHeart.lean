@@ -21,7 +21,7 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantStrat
 
 Source: blueprint latest, compactification coherence, refinement (2), closed-complement
 calculation. This is the sheaf case of the closed lifted-test argument; no Tor bound
-is imposed on the sheaf (blueprint: lem-sfb-proper-constructible-closed-exchange-heart).
+is imposed on the sheaf.
 -/
 
 @[expose] public noncomputable section

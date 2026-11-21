@@ -36,8 +36,7 @@ variable
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
 
 /-- Conjugate restriction through the adjunctions to compare ordinary pullbacks.
-Source: Bhatt--Scholze, Lemma 5.4.1 and the common sectionwise encoding
-(blueprint: def-weil-pbc-canonical-finite-discrete-pullback).
+Source: Bhatt--Scholze, Lemma 5.4.1 and the common sectionwise encoding.
 
 Construction. Cancel the two encoding equivalences from the right restriction
 comparison, then use conjugateIsoEquiv for the resulting composite adjunctions. -/
@@ -61,7 +60,6 @@ comparison, then use conjugateIsoEquiv for the resulting composite adjunctions. 
       (ModuleCat.{u + 1} (ULift.{u + 1} B)) h).comp ES.toAdjunction)).symm r'
 
 /-- The ordinary etale-to-internal-module pullback comparison before derivation.
-(blueprint: def-weil-pbc-canonical-finite-discrete-pullback).
 Compose the site inverse-image comparison with the internal coefficient comparison. -/
 @[irreducible] noncomputable def finiteDiscreteCoefficientSheafPullbackIso
     {S T : Scheme.{u}} (h : S ⟶ T) :
@@ -79,8 +77,7 @@ Compose the site inverse-image comparison with the internal coefficient comparis
     (Functor.associator _ _ _).symm
 
 /-- Derive the canonical ordinary pullback comparison and restrict its source to D+.
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemma 5.4.1
-(blueprint: def-weil-pbc-canonical-finite-discrete-pullback).
+Source: Bhatt--Scholze, Proposition 5.3.2 and Lemma 5.4.1.
 
 Construction. Combine the two exact realization factors with mapDerivedCategoryCompIso.
 Use mapDerivedCategoryPlusCompatibility to include the etale source in D. Derive the

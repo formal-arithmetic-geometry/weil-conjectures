@@ -11,7 +11,7 @@ public import WeilConjectures.ProperBaseChange.FiniteDiscreteThreeStepComparison
 /-! # Derived functor interfaces for condensed coefficient comparisons
 
 Source: the existing internal-module derived adjunction and pullback composition
-isomorphisms (blueprint: def-weil-pbc-coefficient-derived-functor-api).
+isomorphisms.
 The four functor definitions are moved verbatim from FiniteDiscreteDerivedCoefficientData.
 The partial comparison record keeps only inverse-image data and square coherence.
 -/

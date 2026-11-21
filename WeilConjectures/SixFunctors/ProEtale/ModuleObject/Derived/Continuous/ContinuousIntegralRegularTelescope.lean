@@ -196,7 +196,6 @@ omit [Fact ℓ.Prime] in
 /-- Transport a scalar telescope colimit and its specified zeroth leg through an
 additive functor and coefficient isomorphisms.
 Source: universal properties of colimits and natural isomorphisms.
-(blueprint: lem-weil-pbc-integral-regular-telescope).
 Proof. Reindex the mapped cocone by the natural isomorphism with constant component
 `er.hom`; its inverse changes the zeroth leg by `er.inv`. The given leg equation
 then cancels `er.inv` with `er.hom`. -/
@@ -239,7 +238,6 @@ theorem transportRegularTelescope
 /-- The regular restricted E-module is the scalar telescope of the regular integral
 module; the zeroth leg is the coefficient inclusion.
 Source: Bhatt--Scholze, Lemma 6.8.2, compact-test localization.
-(blueprint: lem-weil-pbc-integral-regular-telescope).
 Proof. On every compact profinite test, divide by ℓⁿ. Compactness supplies one
 common denominator, and injectivity gives the colimit equivalence relation.
 Monoidal sheafification and inverse image from the point preserve the resulting

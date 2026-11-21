@@ -106,8 +106,7 @@ attribute [local implicit_reducible] pullbackTensorReductionEvaluationComplex
 /-- The normalized reduction tensor square admits a representative map before
 selecting the uniquely assembled strict map.
 
-Source: Stacks 07A4 and 07A6; transport of the simultaneous representative normalization.
-(blueprint: lem-coef-tensor-reduction-canonical-square). -/
+Source: Stacks 07A4 and 07A6; transport of the simultaneous representative normalization. -/
 theorem tensorReductionCanonicalSquare_exists (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)
     (hT : integralOperationsGoodComplex l E W

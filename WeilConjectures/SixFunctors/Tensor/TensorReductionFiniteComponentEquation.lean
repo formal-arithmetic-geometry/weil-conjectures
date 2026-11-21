@@ -30,7 +30,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- An explicit equation for the transported finite component.
-Source: Stacks 0941 (blueprint: lem-coef-tensor-reduction-finite-component-equation). -/
+Source: Stacks 0941. -/
 theorem tensorReductionSystemFiniteComponent_eq (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

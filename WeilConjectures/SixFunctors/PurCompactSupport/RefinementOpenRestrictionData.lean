@@ -53,7 +53,6 @@ construction.  The componentwise proper restriction maps are natural in the
 unbounded derived module category.  This is the component-construction part of
 `lem-sf-refinement-open-restriction`; invertibility and shift compatibility are
 recorded separately.
-(blueprint: lem-sf-refinement-open-restriction-data).
 -/
 theorem refinementRestriction_data :
     ∃ θ : ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i ⟶

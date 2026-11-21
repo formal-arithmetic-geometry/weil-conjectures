@@ -654,8 +654,7 @@ Proof (the route of the Lean proof; it refines blueprint steps 1--8):
    classical; the invertible closed counit reflects this from `i_*` to `Z`.  Derived support,
    cohomology and forgetting are additive, so they keep `ℓ ^ n • 𝟙 = 0`: every cohomology
    sheaf is `ℓ`-power torsion, equivalently locally `ℓ`-power torsion.
-No constructibility or finite Tor-amplitude is used.
-(blueprint: lem-sfb-finite-quotient-supported-classical-window). -/
+No constructibility or finite Tor-amplitude is used. -/
 theorem finite_quotient_supported_classical_window
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E]

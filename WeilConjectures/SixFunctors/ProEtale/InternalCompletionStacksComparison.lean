@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.InternalQuotientKoszulUnitComparison
 /-! # Actual Roos completeness and constant-coefficient completeness
 
 Source: integral-models proof (1), Stacks Tags 099I, 099L and 099M.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry.ProEtale
 /-- The canonical scalar restriction identifies the actual Roos completeness predicate.
 Source: integral-models proof (1); constant-coefficient criterion proof (2)--(3),
 Stacks Tags 099I, 099L and 099M.
-(auxiliary; not a blueprint node).
 
 Proof: use pointComparison to transport the absolute-value integer coefficient ring to
 its spectral-norm presentation. The normalized section-ring comparison identifies the

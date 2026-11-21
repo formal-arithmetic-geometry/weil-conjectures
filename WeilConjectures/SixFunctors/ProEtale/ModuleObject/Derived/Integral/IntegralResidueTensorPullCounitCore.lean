@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPullCounitC
 /-! The normalized middle composite for the residue tensor-pull counit.
 
 Source: Bhatt--Scholze, Remark 6.8.15 and the proof of Lemma 6.5.9(5), p. 51.
-(blueprint: new-integral-residue-tensor-pull-counit-core)
 -/
 
 @[expose] public section
@@ -118,8 +117,7 @@ factor; the defining equation for `derivedTensorPresentationIso` then gives the
 presentation counit.  The remaining maps are the displayed homotopy single
 comparison and the homotopy image of the ordinary coefficient isomorphism.
 This is the explicit formal calculation from Remark 6.8.15, with no flatness
-assumption.
-(blueprint: new-integral-residue-tensor-pull-counit-core) -/
+assumption. -/
 theorem integralResidue_tensorPullCounit_core {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :

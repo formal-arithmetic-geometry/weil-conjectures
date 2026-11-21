@@ -46,7 +46,7 @@ variable {l : ℕ} [Fact l.Prime] {E : Type u} [Field E]
 and ordinary restriction preserves their completed coefficient and derived quotient data.
 
 Source: Stacks Project, proetale.tex, Tags 09C3 and 098F; sites-cohomology.tex, Tag 0946;
-derived.tex, Tags 015F and 08TC (blueprint: lem-sf-clopen-lisse-complete-localization).
+derived.tex, Tags 015F and 08TC.
 
 Proof: the coefficient DVR supplies the residue field. Form the common finite
 clopen free partition by sf_clopen_lisse_partition. The cover-geometry theorem

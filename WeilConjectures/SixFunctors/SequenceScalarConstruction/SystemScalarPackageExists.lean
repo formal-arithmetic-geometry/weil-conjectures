@@ -67,7 +67,6 @@ import WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 /-! # Generic normalized scalar comparison
 
 Source: Stacks 03D7, 03EK and 06YY.
-(blueprint: lem-sf-system-scalar-package-exists).
 -/
 
 @[expose] public noncomputable section
@@ -85,8 +84,7 @@ variable {C : Type sa} [Category.{sb} C] {J : GrothendieckTopology C}
   [EssentiallySmall.{sw} C]
 
 /-- Generic scalar comparison extracted from IntegralComparisonSequenceSystems.
-Source: Stacks 03D7, 03EK and 06YY
-(blueprint: lem-sf-system-scalar-package-exists).
+Source: Stacks 03D7, 03EK and 06YY.
 Proof: Choose the normalized derived counit comparison using the cochain universal property. The
 ordinary tensor/restriction adjunction gives its unique unit-normalized adjunction, and the
 derived Hom comparison gives the derived adjunction with the required transpose. The unit sends

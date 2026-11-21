@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.ContinuousIntegralUnderivedPushComparis
 import WeilConjectures.AlgebraicGeometry.ContinuousEtaleLocalLattices
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousFiniteEtaleTraceLattice
 
-/-! Unordered stratified integral lattices
-(blueprint: lem-sfb-topological-stratified-lattice-data). -/
+/-! Unordered stratified integral lattices. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -99,7 +98,6 @@ embedded lattices over the finite locally closed partition.
 
 Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph, p. 61; blueprint
 `lem-sfb-topological-stratified-lattices`, steps 1--3.
-(blueprint: lem-sfb-topological-stratified-lattice-data).
 -/
 theorem exists_topologicalStratifiedLatticeData
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]

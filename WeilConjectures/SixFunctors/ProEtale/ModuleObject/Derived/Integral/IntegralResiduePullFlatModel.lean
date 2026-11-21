@@ -28,7 +28,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 /-- On a flat-resolution complex the derived pull mate is the ordinary scalar comparison.
 
 Source: Bhatt--Scholze, Remark 6.8.15, derived scalar extension on flat resolutions.
-(blueprint: new-integral-residue-pull-flat-model)
 
 Proof. Inverse image of sheaves is exact and preserves colimits. Pullback of the
 coefficient ring is identified with the coefficient ring on the source. Thus pullback

@@ -75,8 +75,7 @@ import all WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartLisseRe
 
 /-! # Tensor calculus for rational affine-space induction
 
-Source: blueprint `sk-cor-affine-space-rational-induction.proof.md`, both paragraphs
-(blueprint: lem-sfb-rational-affine-tensor-calculus).
+Source: blueprint `sk-cor-affine-space-rational-induction.proof.md`, both paragraphs.
 -/
 
 @[expose] public noncomputable section
@@ -108,8 +107,7 @@ attribute [-instance] RationalP1.internalTensorCommShift RationalP1.internalMono
 section
 
 /-- The recorded positive tensor power, transported back to internal modules.
-Source: blueprint `definition-tate-twists`, signed powers
-(blueprint: lem-sfb-rational-affine-tensor-calculus). -/
+Source: blueprint `definition-tate-twists`, signed powers. -/
 def rationalTatePowerFunctor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
@@ -125,8 +123,7 @@ def rationalTatePowerFunctor
         (spSignedTwist X (condensedRingObj Λ X) L (d : ℤ)))
 
 /-- Pullback followed by the specified degree-d tensor power and the shift [2d].
-Source: blueprint affine-space induction, twist/shift comparison
-(blueprint: lem-sfb-rational-affine-tensor-calculus). -/
+Source: blueprint affine-space induction, twist/shift comparison. -/
 def rationalTatePull
     (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ))
     {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) :
@@ -137,8 +134,7 @@ def rationalTatePull
       shiftFunctor (DerivedCategory
         (DiagonalCoefficients.Modules (RationalP1.coefficient ℓ c).X X)) (2 * (d : ℤ))
 
-/-- Degree one is the original internal Tate line. Source: blueprint signed powers
-(blueprint: lem-sfb-rational-affine-tensor-calculus).
+/-- Degree one is the original internal Tate line. Source: blueprint signed powers.
 Proof: apply the unit isomorphism of the internal/sectionwise equivalence, then single
 and tensor functoriality. -/
 theorem rationalTatePowerOneIso
@@ -158,8 +154,7 @@ theorem rationalTatePowerOneIso
       (Scheme.ProEt.topology X) R).functor.obj (Mod.regular R) ≅ 𝟙_ _ :=
   InternalAbelianSheafModule.comparison_unitIso (Scheme.ProEt.topology X) R
 
-/-- The zeroth power and zero shift are the identity. Source: blueprint signed powers
-(blueprint: lem-sfb-rational-affine-tensor-calculus).
+/-- The zeroth power and zero shift are the identity. Source: blueprint signed powers.
 Proof: the sectionwise unit comparison identifies the transported power with the internal
 unit. Its single complex is the derived tensor unit; apply the right tensor unitor and
 zero-shift isomorphism. -/
@@ -581,7 +576,7 @@ private theorem rationalTatePull_constructible
 inverse image.
 These are assertions about ambient tensor functors, with no exceptional inverse image.
 Source: blueprint `sk-cor-affine-space-rational-induction.proof.md`, both paragraphs;
-expanded node steps 1--3 and 7 (blueprint: lem-sfb-rational-affine-tensor-calculus).
+expanded node steps 1--3 and 7.
 
 Proof: the common compatible-root cover trivializes the rational and closure lines.
 The sectionwise/internal tensor comparison identifies their nonnegative powers with

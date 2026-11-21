@@ -48,7 +48,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Objectwise residue Tor bounds under clopen restriction
 
 Source: Stacks Project, Tags 08FZ, 06YY and 00Y0.
-(blueprint: lem-sf-clopen-preserves-residue-tor).
 -/
 
 @[expose] public noncomputable section
@@ -334,8 +333,7 @@ private theorem clopenFinite_preservesTor
 /-- Objectwise residue Tor bounds under clopen restriction.
 
 Source: Stacks Project, Tags 08FZ, 06YY and 00Y0; the relocalization paragraph of
-lem-sf-clopen-derived-compatibility
-(blueprint: lem-sf-clopen-preserves-residue-tor).
+lem-sf-clopen-derived-compatibility.
 
 Proof: Use the exponent-one derived scalar comparison to identify the local reduction
 of the restricted object with restriction of its global reduction. For any local

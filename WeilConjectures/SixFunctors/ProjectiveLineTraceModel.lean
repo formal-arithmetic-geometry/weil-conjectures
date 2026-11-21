@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The proper ordered projection is invertible for finite coefficients on all complexes.
 Source: the proper torsion projection formula, blueprint
-proposition-proper-direct-image-constructible-complexes--9. (auxiliary; not a blueprint node)
+proposition-proper-direct-image-constructible-complexes--9.
 Proof: the ordered map is the proper projection map conjugated by tensor symmetries.
 Each component is invertible; hence so is the natural transformation. -/
 theorem isIso_finiteP1Projection
@@ -46,7 +46,7 @@ theorem isIso_finiteP1Projection
 /-- The normalized splitting trace on a projective-line presentation, transported using
 inverse image along its isomorphism, the adjunction unit, and direct-image composition.
 Source: lemma-cohomology-projective-line-trace and the presentation transport in
-proposition-adjunction-projective-line--1. (auxiliary; not a blueprint node) -/
+proposition-adjunction-projective-line--1. -/
 @[irreducible]
 def presentedFiniteP1Trace
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
@@ -69,8 +69,7 @@ def presentedFiniteP1Trace
 
 /-- The candidate counit for a proper map and a specified finite trace. This is inverse
 ordered projection followed by tensor trace, after the canonical proper coincidence.
-Source: lemma-cohomology-projective-line-trace, its displayed formula for epsilon.
-(auxiliary; not a blueprint node) -/
+Source: lemma-cohomology-projective-line-trace, its displayed formula for epsilon. -/
 @[irreducible]
 def finiteP1TraceCounit
     (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}}
@@ -84,8 +83,7 @@ def finiteP1TraceCounit
     inv (ordinaryFiniteProjectionNatTrans A q L) ≫ ordinaryFiniteTensorTrace A Y τ
 
 /-- The inverse-projection counit belonging to the splitting on a presentation.
-Source: proposition-adjunction-projective-line--1, canonical counit.
-(auxiliary; not a blueprint node) -/
+Source: proposition-adjunction-projective-line--1, canonical counit. -/
 def presentedFiniteP1Counit
     (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)
@@ -99,7 +97,7 @@ def presentedFiniteP1Counit
 
 /-- The explicit comparison of the two finite twisted inverse images in a square.
 Source: blueprint proposition-exceptional-inverse-image-smooth-morphism--6, projective-line
-computation. (auxiliary; not a blueprint node) -/
+computation. -/
 def finiteP1TwistedPullbackComparison
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

@@ -114,8 +114,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 /-!
 # Canonical ambient exchange and its restriction
 
-Source: blueprint main-20261015, proper-base-change rational proof, paragraph (3)
-(blueprint: lem-sfb-derived-exchange-exact-normalization).
+Source: blueprint main-20261015, proper-base-change rational proof, paragraph (3).
 
 The pullback comparison uses the published derived compositors. The exchange is their
 mate under the published derived adjunctions, with no cartesianness requirement. Pullback
@@ -156,15 +155,13 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 /-- The canonical integer shifts on the actual K-flat pullback, transported along its
 canonical comparison with the exact termwise pullback. This fixes the shift structure,
 rather than selecting an unspecified one.
-Source: blueprint rational proof (3), exact derived factorization
-(blueprint: lem-sfb-derived-exchange-exact-normalization). -/
+Source: blueprint rational proof (3), exact derived factorization. -/
 instance moduleObjectDerivedPullbackCommShift {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (moduleObjectDerivedPullback Λ f).CommShift ℤ :=
   Functor.CommShift.ofIso (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm ℤ
 
 /-- The canonical K-injective integer shifts on the total derived module pushforward.
-Source: Stacks Tag 015F, blueprint rational proof (3)
-(blueprint: lem-sfb-derived-exchange-exact-normalization). -/
+Source: Stacks Tag 015F, blueprint rational proof (3). -/
 instance moduleObjectDerivedPushforwardCommShift {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (moduleObjectDerivedPushforward Λ f).CommShift ℤ :=
   Functor.instCommShiftDerivedCategoryRightDerivedFunctorInt (lowerStar Λ f)
@@ -345,8 +342,7 @@ private theorem exchange_triangle
 /-- The ambient exchange has the prescribed counit normalization, both ambient functors
 are exact with their fixed canonical shifts, and the exchange commutes with every integer
 shift. No cartesian hypothesis is imposed.
-Source: blueprint rational proof paragraph (3)
-(blueprint: lem-sfb-derived-exchange-exact-normalization).
+Source: blueprint rational proof paragraph (3).
 
 Proof:
 1. The source exactness instances give the canonical comparison between the K-flat
@@ -596,8 +592,7 @@ private theorem baseChange_of_counit_equations
 /-- The bounded-constructible instance of the restriction statement, expressed with the
 recorded base-change declaration. Triangulatedness and preservation are hypotheses;
 the comparison restriction hypothesis is the equality of the actual components.
-Source: blueprint rational proof (3), bounded-constructible specialization
-(blueprint: lem-sfb-derived-exchange-exact-normalization).
+Source: blueprint rational proof (3), bounded-constructible specialization.
 
 Proof: identify the three-step restricted base-change map with `Adjunction.squareExchange`.
 Its counit equation follows from `Adjunction.squareExchange_map_counit`. The fully faithful

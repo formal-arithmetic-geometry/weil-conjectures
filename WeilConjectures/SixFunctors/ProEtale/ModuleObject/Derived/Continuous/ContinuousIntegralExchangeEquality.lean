@@ -58,7 +58,6 @@ abbrev integralConstructibleExchangeEqualityStatement
 
 /-- Integral coefficient extension respects the specified exchange arrow.
 Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: lem-weil-pbc-continuous-integral-exchange-equality).
 Proof. Apply injectivity of the inverse bounded f′ adjunction hom-equivalence. The source
 and target adjunct calculations identify both sides with the same explicit composite. -/
 theorem integralConstructible_exchange_equality

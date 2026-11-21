@@ -27,7 +27,7 @@ reduces this to the étale statement
 This is the uniform bound `FullCD(p, Λ; 2d)` of blueprint `sk-def-sf-admissible` *restricted to
 the sheaves of étale origin*, the essential image `AlgebraicGeometry.ProEtale.etaleOrigin` of the
 comparison pullback `ν^*` (blueprint `definition-classical-pro-etale-sheaves--1`); the unrestricted
-bound fails (blueprint `sk-rem-sf-fullcd-scope`).
+bound fails.
 
 ## Main definitions
 

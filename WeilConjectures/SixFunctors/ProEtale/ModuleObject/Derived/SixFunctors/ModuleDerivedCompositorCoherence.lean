@@ -18,7 +18,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-comp-coherence,
 det-sf-comp-coherence-cocycle.proof.md, "Refinement isomorphisms"; Stacks Project,
-Tag 0D6E (blueprint: lem-sfb-module-derived-compositor-coherence).
+Tag 0D6E.
 
 The comparisons below specialize the existing total-right-derived universal construction
 to the actual module-object pushforwards. Their K-injective normalization identifies them
@@ -86,7 +86,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
 The existing exact inverse-image adjunction supplies K-injective preservation; the
 comparison is the universal derived comparison of the existing ordinary compositor.
 Source: Stacks 0D6E and blueprint proposition-construction-independence-rf-shriek, Refinement
-isomorphisms (blueprint: lem-sfb-module-derived-compositor-coherence). -/
+isomorphisms. -/
 noncomputable def moduleDerivedCompositor {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     (lowerStar Λ (f ≫ g)).rightDerivedFunctor ≅
@@ -98,7 +98,7 @@ noncomputable def moduleDerivedCompositor {X Y Z : Scheme.{u}}
 /-- Associativity of the normalized module-object derived compositor, including
 functor associators and transport along associativity of scheme-map composition.
 Source: Stacks 0D6E and blueprint proposition-construction-independence-rf-shriek, Refinement
-isomorphisms (blueprint: lem-sfb-module-derived-compositor-coherence).
+isomorphisms.
 
 Proof plan: (1)-(3) identify the ordinary and derived sectionwise pushforwards and
 normalize on K-injectives as in module_derived_compositor_normalization. (4) Apply

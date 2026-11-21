@@ -46,8 +46,7 @@ namespace AlgebraicGeometry
 variable {X V : Scheme.{u}} {f : V ⟶ X} {S : Type} {c : ↥(pullback f f) → S → S}
 
 /-- The closed geometric point `Spec κ̄ ⟶ Spec A` of a local ring `A`, for `κ̄` an algebraic
-closure of the residue field, maps to the closed point (blueprint
-`proposition-proper-base-change-degree-zero`). -/
+closure of the residue field, maps to the closed point. -/
 lemma spec_algebraMap_algebraicClosure_closedPoint (A : Type u) [CommRing A] [IsLocalRing A] :
     (Spec.map (CommRingCat.ofHom (algebraMap A
       (AlgebraicClosure (IsLocalRing.ResidueField A))))).base
@@ -73,7 +72,7 @@ over `Z` (`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_geometricFib
 be the extension of `[σ_Z]`. The locus where `τ` is a basis vector descends to an open and
 closed subset of `P` (`AlgebraicGeometry.isClopen_image_fiber_of_isLocallyConstant`) containing
 `Z`; its complement is closed, with closed image in `Spec A` avoiding the closed point, hence
-empty. (blueprint `proposition-proper-base-change-degree-zero`) -/
+empty. -/
 theorem exists_isTwistedSection_of_geometricFibre [WeaklyEtale f] [Surjective f]
     [QuasiCompact f] [QuasiSeparated f] (hc : IsDescentCocycle f c) (A : Type u) [CommRing A]
     [HenselianLocalRing A] [IsSepClosed (IsLocalRing.ResidueField A)] {P : Scheme.{u}}
@@ -122,7 +121,7 @@ theorem exists_isTwistedSection_of_geometricFibre [WeaklyEtale f] [Surjective f]
   exact ⟨σ, hσ⟩
 
 /-- The base change `A ×_Y X ⟶ B ×_Y X` of a morphism of `Y`-schemes `φ : A ⟶ B` which is affine
-is affine (blueprint `proposition-proper-base-change-degree-zero`). -/
+is affine. -/
 lemma isAffineHom_overPullback_map_left {X Y : Scheme.{u}} (p : X ⟶ Y)
     {A B : CategoryTheory.Over Y} (φ : A ⟶ B) [IsAffineHom φ.left] :
     IsAffineHom ((CategoryTheory.Over.pullback p).map φ).left := by
@@ -143,8 +142,7 @@ the twisted sheaf of sets defined by `c` over `X ×_Y Spec 𝒪^{sh}_{Y,s}` come
 localization is the limit of the `X ×_Y U`
 (`AlgebraicGeometry.Scheme.isLimitStrictLocalizationConePullback`), and twisted sections over a
 limit come from a finite stage
-(`AlgebraicGeometry.IsTwistedSection.exists_of_isLimit`). (blueprint
-`proposition-proper-base-change-degree-zero`) -/
+(`AlgebraicGeometry.IsTwistedSection.exists_of_isLimit`). -/
 theorem exists_etale_isTwistedSection_of_strictLocalization [QuasiCompact f] [QuasiSeparated f]
     (hc : IsDescentCocycle f c) {Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p] {Ω : Type u}
     [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
@@ -201,8 +199,7 @@ the strict localization. The closed geometric fibre `Z` of the proper `X ×_Y D 
 over a field, hence regular, Noetherian and quasi-compact, so `F_c` has a section over `Z`; it
 extends to `X ×_Y D` (`AlgebraicGeometry.exists_isTwistedSection_of_geometricFibre`), and comes
 from some `X ×_Y U` (`AlgebraicGeometry.exists_etale_isTwistedSection_of_strictLocalization`).
-Smoothness of `p` is only used to make `Z` regular. (blueprint
-`proposition-proper-base-change-degree-zero`) -/
+Smoothness of `p` is only used to make `Z` regular. -/
 theorem exists_etale_isTwistedSection_of_isProper {X Y V : Scheme.{u}} (p : X ⟶ Y) [IsProper p]
     [Smooth p] (f : V ⟶ X) [WeaklyEtale f] [Surjective f] [QuasiCompact f] [QuasiSeparated f]
     {S : Type} {c : ↥(pullback f f) → S → S} (hc : IsDescentCocycle f c)

@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarGenerators
 /-! # Generic normalized scalar comparison
 
 Source: Stacks 03D7, 03EK and 06YY.
-(blueprint: lem-sf-system-scalar-composition-unique).
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +29,7 @@ variable {C : Type sa} [Category.{sb} C] {J : GrothendieckTopology C}
   [EssentiallySmall.{sw} C]
 
 /-- Generic scalar comparison extracted from IntegralComparisonSequenceSystems.
-Source: Stacks 03D7, 03EK and 06YY
-(blueprint: lem-sf-system-scalar-composition-unique).
+Source: Stacks 03D7, 03EK and 06YY.
 Proof: Use the existing scalar composition isomorphism and its pure tensor equation for
 existence. For uniqueness transpose under the second ordinary adjunction, then use local unit
 tensor generators for the first model. Both transposes agree on these generators by the two

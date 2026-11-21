@@ -85,7 +85,6 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 /-! # Integral affine-space purity from the projective-line adjunction
 
 Source: current blueprint, sk-thm-int-restriction-line.proof.md, paragraph (2).
-(blueprint: lem-sfb-integral-affine-purity-induction).
 -/
 
 @[expose] public noncomputable section
@@ -849,7 +848,6 @@ private theorem tower_purity (k : Type u) [Field k]
 purity into the compact-support adjunction for every affine dimension.
 
 Source: sk-thm-int-restriction-line.proof.md, paragraph (2).
-(blueprint: lem-sfb-integral-affine-purity-induction).
 
 Proof: for A1_T -> T use its standard open immersion into P1_T. This open
 immersion is quasi-compact because its source is quasi-compact and its target

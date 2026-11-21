@@ -228,8 +228,7 @@ private theorem derivedMixedClosed {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶
       |>.symm.app P))
 
 /-- Open/closed localization for the exact functors on ordinary unbounded derived modules.
-Source: Stacks Tags 09AA, 09AH, 09BN; original internal-Hom argument steps 1, 2 and 8
-(blueprint: lem-sfb-condensed-support-derived-localization).
+Source: Stacks Tags 09AA, 09AH, 09BN; original internal-Hom argument steps 1, 2 and 8.
 
 Proof: the forgetful functor from internal modules to abelian sheaves is faithful, exact
 and conservative. Its composite with support inverse image is the abelian inverse image;

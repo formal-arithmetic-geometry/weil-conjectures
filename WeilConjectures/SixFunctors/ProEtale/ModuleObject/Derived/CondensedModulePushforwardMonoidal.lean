@@ -25,8 +25,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The lax monoidal structure on module direct image induced by its strong monoidal
-left adjoint. Source: monoidal adjunction, latest blueprint `prop-kernel-lisse.proof.md`
-(blueprint: lem-kernel-condensed-pushforward-monoidal). -/
+left adjoint. Source: monoidal adjunction, latest blueprint `prop-kernel-lisse.proof.md`. -/
 @[instance_reducible]
 def moduleLowerStarMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (lowerStar Λ f).LaxMonoidal :=
@@ -35,8 +34,7 @@ def moduleLowerStarMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
 attribute [local instance] moduleLowerStarMonoidal
 
 /-- The canonical module inverse/direct image adjunction is monoidal.
-Source: monoidal-adjunction construction
-(blueprint: lem-kernel-condensed-pushforward-monoidal). -/
+Source: monoidal-adjunction construction. -/
 instance moduleAdjunctionIsMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (upperStarLowerStarAdjunction Λ f).IsMonoidal := by
   change @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
@@ -48,7 +46,7 @@ instance moduleAdjunctionIsMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
 lax monoidal structures.
 
 Source: latest blueprint `prop-kernel-lisse.proof.md`, multiplication on the pushforward
-algebra (blueprint: lem-kernel-condensed-pushforward-monoidal).
+algebra.
 
 Proof. The tensor comparison identity for inverse-image composition makes that natural
 isomorphism monoidal, using the comonoidal criterion for a strong monoidal isomorphism.
@@ -69,7 +67,7 @@ theorem moduleLowerStarCompIsMonoidal {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y 
   exact h
 
 /-- Congruence transport of module direct images is monoidal.
-Source: equality transport (blueprint: lem-kernel-condensed-pushforward-monoidal). -/
+Source: equality transport. -/
 theorem moduleLowerStarCongrIsMonoidal {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
     NatTrans.IsMonoidal (lowerStarCongr Λ h).hom := by
   subst h

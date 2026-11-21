@@ -35,14 +35,14 @@ variable {D : FiniteFieldDatum.{u}}
   {Q : SixFunctorCompactifiedSquare D}
 
 /-- The intermediate object after the proper counit mate, before open projection.
-Source: def-exchange-projection (blueprint: def-sf-projection-mate-factors). -/
+Source: def-exchange-projection. -/
 def middleObject (S : SixFunctorPushStage D B) (T : ∀ X, B X ⥤ B X ⥤ B X)
     (Q : SixFunctorCompactifiedSquare D) (K : B Q.X) (N : B Q.Y) : B Q.Y :=
   (S.direct Q.p).obj
     (((T Q.Z).obj ((S.openExtension Q.i Q.open_i).obj K)).obj ((S.pull Q.p).obj N))
 
 /-- Identify the intermediate object with the supplied stage coordinates.
-Source: def-exchange-projection (blueprint: def-sf-projection-mate-factors).
+Source: def-exchange-projection.
 Proof: substitute the four recorded functor equalities. -/
 theorem middle_eq (A : SixFunctorExchangeData S T Q) (K : B Q.X) (N : B Q.Y) :
     middleObject S T Q K N = A.stage.properPush.obj
@@ -52,7 +52,7 @@ theorem middle_eq (A : SixFunctorExchangeData S T Q) (K : B Q.X) (N : B Q.Y) :
   rfl
 
 /-- Support identification followed by the proper counit projection mate.
-Source: def-exchange-projection (blueprint: def-sf-projection-mate-factors). -/
+Source: def-exchange-projection. -/
 def properFactor (A : SixFunctorExchangeData S T Q) (K : B Q.X) (N : B Q.Y) :
     ((T Q.Y).obj ((S.support Q.f Q.compactification).obj K)).obj N ⟶
       middleObject S T Q K N :=
@@ -63,7 +63,7 @@ def properFactor (A : SixFunctorExchangeData S T Q) (K : B Q.X) (N : B Q.Y) :
     eqToHom (middle_eq A K N).symm
 
 /-- Proper image of open projection, followed by inverse support identification.
-Source: def-exchange-projection (blueprint: def-sf-projection-mate-factors). -/
+Source: def-exchange-projection. -/
 def openFactor (A : SixFunctorExchangeData S T Q) (K : B Q.X) (N : B Q.Y) :
     middleObject S T Q K N ⟶
       (S.support Q.f Q.compactification).obj
@@ -75,7 +75,7 @@ def openFactor (A : SixFunctorExchangeData S T Q) (K : B Q.X) (N : B Q.Y) :
     eqToHom (by rw [A.tensorX, A.pull, A.compactSupport])
 
 /-- The specified projection is exactly the composite of these two factors.
-Source: def-exchange-projection (blueprint: def-sf-projection-mate-factors).
+Source: def-exchange-projection.
 Proof: evaluate the supplied bifunctor composite. The two transports at the
 intermediate object cancel. All other factors retain their original order. -/
 theorem projection_factorization (A : SixFunctorExchangeData S T Q)
@@ -90,8 +90,7 @@ variable {V : ∀ X, B X ⥤ B' X} (C : SixFunctorCoefficientComparison S S' V)
     (V X).prod (V X) ⋙ Functor.uncurry.obj (T' X))
 
 /-- The coefficient comparison at the intermediate proper-image object.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: def-sf-projection-mate-factors). -/
+Source: thm-sf-pf-field.proof.md, Compatibility. -/
 def middle (Q : SixFunctorCompactifiedSquare D) (K : B Q.X) (N : B Q.Y) :
     (V Q.Y).obj (middleObject S T Q K N) ≅
       middleObject S' T' Q ((V Q.X).obj K) ((V Q.Y).obj N) :=
@@ -103,8 +102,7 @@ def middle (Q : SixFunctorCompactifiedSquare D) (K : B Q.X) (N : B Q.Y) :
             ((C.directAdjunction Q.p).left.app N)))
 
 /-- Paste the two factor squares to preserve the specified projection component.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: def-sf-projection-mate-factors).
+Source: thm-sf-pf-field.proof.md, Compatibility.
 Proof: expand the proved factorization, apply functoriality, substitute first the
 open and then the proper factor square, and recombine the two target factors. -/
 theorem projection_preserved_of_factors

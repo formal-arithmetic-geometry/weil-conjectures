@@ -212,7 +212,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 /-! # Bounded constructibility of integral reduction
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), and the finite free residue resolution.
-(blueprint: lem-weil-pbc-integral-reduction-constructible)
 -/
 
 @[expose] public section
@@ -328,7 +327,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 /-- Derived reduction modulo ℓ preserves bounded constructible integral complexes.
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), the two-term finite free residue resolution.
-(blueprint: lem-weil-pbc-integral-reduction-constructible)
 
 Proof. Constructible integral modules form a weak Serre class, so bounded constructible
 integral complexes form a triangulated subcategory. Restricted derived reduction belongs

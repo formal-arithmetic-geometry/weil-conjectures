@@ -29,8 +29,7 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemBlockDerivedComparison
 /-! # Proper integral-to-rational coefficient comparison
 
 Source: blueprint main-20261015, proposition-construction-independence-rf-shriek--7 (2),
-finite-field coefficient calculation; Hemo--Richarz--Scholbach Lemmas 5.3(1), 5.6
-(blueprint: lem-sfb-qcqs-proper-integral-rational-scalar-comparison).
+finite-field coefficient calculation; Hemo--Richarz--Scholbach Lemmas 5.3(1), 5.6.
 
 The comparison is defined by the geometric adjunction and its specified counit.
 The pullback/scalar isomorphism is the canonical conjugate, with the balanced-tensor
@@ -390,16 +389,14 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The actual inclusion O_F → E on condensed rings, factored through F. All topologies
 are induced from the fixed norm-topological algebraic closure.
-Source: blueprint proposition-construction-independence-rf-shriek--7 (2), finite coefficient case
-(blueprint: lem-sfb-qcqs-proper-integral-rational-scalar-comparison). -/
+Source: blueprint proposition-construction-independence-rf-shriek--7 (2), finite coefficient case. -/
 abbrev integralRationalCoefficientMap (ℓ : ℕ) [Fact ℓ.Prime]
     {F E : PadicAlgCl.FiniteIntermediateField ℓ} (i : F ≤ E) :=
   padicIntegersRingObjToContinuousMapRingObj.{u} ℓ F ≫
     Profinite.padicSubfieldRingObjMap ℓ i
 
 /-- The existing total derived scalar extension along O_F → E on the indicated scheme.
-Source: blueprint proposition-construction-independence-rf-shriek--7 (2), definition of T_W
-(blueprint: lem-sfb-qcqs-proper-integral-rational-scalar-comparison). -/
+Source: blueprint proposition-construction-independence-rf-shriek--7 (2), definition of T_W. -/
 abbrev integralRationalScalarExtension (ℓ : ℕ) [Fact ℓ.Prime]
     {F E : PadicAlgCl.FiniteIntermediateField ℓ} (i : F ≤ E) (X : Scheme.{u}) :=
   (Mod.extendScalars
@@ -411,8 +408,7 @@ Its inverse is the balanced comparison of kflat_scalar_comparison_normalization,
 transported by internal_module_operations_transport and the section adjunction
 normalizations. Exactness needed by this published interface is obtained from
 localization O_F → F and finite free extension F → E, without an extra hypothesis.
-Source: blueprint proposition-construction-independence-rf-shriek--7 (2); Stacks 03EL, 07A6
-(blueprint: lem-sfb-qcqs-proper-integral-rational-scalar-comparison). -/
+Source: blueprint proposition-construction-independence-rf-shriek--7 (2); Stacks 03EL, 07A6. -/
 def integralRationalScalarPullIso (ℓ : ℕ) [Fact ℓ.Prime]
     {F E : PadicAlgCl.FiniteIntermediateField ℓ} (i : F ≤ E)
     {U V : Scheme.{u}} (h : U ⟶ V) :
@@ -441,7 +437,7 @@ def integralRationalScalarPullIso (ℓ : ℕ) [Fact ℓ.Prime]
 /-- The coefficient projection arrow, defined as the transpose of the inverse
 scalar/pullback comparison followed by scalar extension of the A-counit.
 Source: blueprint proposition-construction-independence-rf-shriek--7 (2), displayed definition of
-rho (blueprint: lem-sfb-qcqs-proper-integral-rational-scalar-comparison). -/
+rho. -/
 def properIntegralRationalScalarComparison (ℓ : ℕ) [Fact ℓ.Prime]
     {F E : PadicAlgCl.FiniteIntermediateField ℓ} (i : F ≤ E)
     {U V : Scheme.{u}} (h : U ⟶ V)

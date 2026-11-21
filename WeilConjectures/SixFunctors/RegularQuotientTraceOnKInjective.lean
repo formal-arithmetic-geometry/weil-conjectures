@@ -22,8 +22,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 
 /-! K-injective computation of the regular quotient trace.
 
-Source: Stacks Tags 079P and 05RT;
-(blueprint: lem-sf-regular-quotient-trace-on-k-injective).
+Source: Stacks Tags 079P and 05RT.
 -/
 
 @[expose] public noncomputable section
@@ -56,7 +55,6 @@ attribute [local instance] scalarReductionRestrictionLimits scalarReductionRestr
 given its invertibility on complexes with injective terms.
 Source: Stacks Tags 079P and 05RT; functorial K-injective resolutions with injective terms
 on a ringed site, and naturality of the trace.
-(blueprint: lem-sf-regular-quotient-trace-on-k-injective).
 
 Proof: the functorial K-injective resolution `η_I : I ⟶ R(I)` on the ringed site is a
 quasi-isomorphism into a complex with injective terms, so `Q(η_I)` is an

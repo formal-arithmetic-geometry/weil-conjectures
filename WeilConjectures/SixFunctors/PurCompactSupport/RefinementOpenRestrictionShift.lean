@@ -33,7 +33,6 @@ transformation, so the shift square obtained from the clopen calculation is
 independent of the chosen presentation.
 Proof: the exact pullback compositor and derived adjunction counit commute with
 shifts, and the component formula is their composite.
-(blueprint: lem-sf-refinement-open-restriction-shift).
 -/
 theorem refinementRestriction_data_shift
     (θ : ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i ⟶

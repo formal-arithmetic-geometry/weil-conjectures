@@ -131,7 +131,6 @@ private theorem canonical_presentedFiniteP1TraceAdjunction
 /-- The normalized finite projective-line trace is the counit of twisted pullback duality.
 Source: blueprint sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, (G6), (G7), both triangle calculations.
-(auxiliary; not a blueprint node)
 
 Proof: take the explicit transported trace-diagonal datum associated to the supported
 class in the diagonal property. The two integral comparisons conjugate the given

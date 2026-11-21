@@ -26,8 +26,7 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 # Exceptional inverse image on the localizing constructible closure
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-existence,
-statement and proof; Stacks Tags 0A8F, 0A8G, 0A8D (blueprint:
-theorem-existence-exceptional-inverse-image).
+statement and proof; Stacks Tags 0A8F, 0A8G, 0A8D.
 
 The lower shriek is the actual restriction of the recorded compactification composite.
 The closure uses constant-model constructibility and the ordinary unbounded derived category.
@@ -150,8 +149,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 /-- Restrict the existing `Rp_* D(j_!)` to the recorded localizing closures, once its
 preservation of these object properties is established. The proof argument supplies only
 membership; objects and maps are exactly those of the ambient compactification functor.
-Source: blueprint theorem-existence-exceptional-inverse-image, definition of `Rf_!`
-(blueprint: theorem-existence-exceptional-inverse-image). -/
+Source: blueprint theorem-existence-exceptional-inverse-image, definition of `Rf_!`. -/
 noncomputable def localizingLowerShriek (c : Compactification f)
     (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y
       ((rightDerivedLowerShriekOfCompactification Λ c).obj K)) :
@@ -164,7 +162,7 @@ noncomputable def localizingLowerShriek (c : Compactification f)
 /-- The restricted compactification functor has the shift comparison induced from its
 ambient derived functor, via the fully faithful inclusions of the localizing closures.
 Source: blueprint theorem-existence-exceptional-inverse-image, exactness of the restricted lower
-shriek (blueprint: theorem-existence-exceptional-inverse-image). -/
+shriek. -/
 noncomputable instance localizingLowerShriekCommShift (c : Compactification f)
     (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y
       ((rightDerivedLowerShriekOfCompactification Λ c).obj K))
@@ -181,7 +179,7 @@ unique up to the unique counit-compatible isomorphism, and that adjoint preserve
 coproducts. The existential triangulated structures are proofs that the recorded object
 properties are triangulated; the full subcategories inherit their ambient triangles.
 Source: blueprint main-20261015, theorem-existence-exceptional-inverse-image, entire statement
-(blueprint: theorem-existence-exceptional-inverse-image). The base field has finite ℓ-cohomological
+. The base field has finite ℓ-cohomological
 dimension `hcd` (definition-cohomological-dimension), the standing hypothesis of the compactness
 input of lemma-hypotheses-brown-representability (statement corrected 2026-10-29,
 coord/changes/M-hcd-propagation.md).

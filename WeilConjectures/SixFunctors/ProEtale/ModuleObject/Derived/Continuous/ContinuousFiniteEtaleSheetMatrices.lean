@@ -181,7 +181,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.Cont
 /-! # Continuous matrices for the sheet embeddings
 
 Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2.
-(blueprint: lem-sfb-continuous-finite-etale-sheet-matrices)
 -/
 
 @[expose] public noncomputable section
@@ -392,7 +391,6 @@ continuous matrices. No matrix coset is asserted to be constant.
 
 Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2;
 Bhatt--Scholze, Section 6.8, the continuous coefficient realization and local bases.
-(blueprint: lem-sfb-continuous-finite-etale-sheet-matrices)
 
 Proof. Split p on an etale covering using finite_etale_etale_local_split.
 Replace each summand by its isomorphism with the base and reindex by Fin d.

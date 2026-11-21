@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
 /-! # Comparison equality for the integral residue pull model
 
 Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: new-integral-residue-pull-flat-model-comparison)
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ restriction/pullback factorization. This is strictly the second conjunct of
 extension/restriction adjunction, uses the exact pullback factorization and
 `residueExchangePull_ordinary_unit`, and then cancels the invertible localization
 factor.
-(blueprint: new-integral-residue-pull-flat-model-comparison)
 -/
 theorem residueExchangePull_flatModel_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)

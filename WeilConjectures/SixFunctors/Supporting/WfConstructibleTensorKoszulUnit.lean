@@ -34,8 +34,7 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformCompleteTriangulated
 
 Source: blueprint sec-six-functors/sk-rem-sf-pf-done,
 fix-prop-projection-formula.proof.md, Weil-equivariance sentence;
-Bhatt--Scholze, Lemma 6.5.5 and Proposition 6.6.11; Stacks Tags 099M and 0A0E
-(blueprint: lem-wf-constructible-tensor-koszul-unit).
+Bhatt--Scholze, Lemma 6.5.5 and Proposition 6.6.11; Stacks Tags 099M and 0A0E.
 
 The statements retain the actual quotient augmentation and intrinsic (u,0) unit.
 The coefficient comparison is the published projection-normalized transport.
@@ -130,8 +129,7 @@ include hsep
 
 /-- Ordinary tensor and its intrinsic completion are bounded constructible; the
 specified intrinsic unit is invertible and natural for arbitrary integral arrows.
-Source: Bhatt--Scholze, Lemma 6.5.5; Stacks Tags 099B and 0A0E
-(blueprint: lem-wf-constructible-tensor-koszul-unit).
+Source: Bhatt--Scholze, Lemma 6.5.5; Stacks Tags 099B and 0A0E.
 Proof (steps 1--5): the category identification in step 1 permits application of
 constructibleTensorCompletion. Its quotient comparison is invertible; strict scalar
 reassociation identifies it with the quotient unit used here (step 2). The natural

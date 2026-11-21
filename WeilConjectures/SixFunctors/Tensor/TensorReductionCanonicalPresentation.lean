@@ -161,8 +161,7 @@ ordinary reduction/limit adjunction. Its finite projections identify its evaluat
 with the inverse evaluation comparisons followed by the representative identifications.
 These evaluations are isomorphisms, so sectionwise detection gives a chain isomorphism.
 Naturality of the derived-limit unit and injectivity of the derived adjunction then
-identify its localization with the prescribed representative isomorphism.
-(blueprint: lem-coef-tensor-reduction-canonical-presentation). -/
+identify its localization with the prescribed representative isomorphism. -/
 theorem tensorReductionCanonicalPresentation (W : Scheme.{u})
     (P : (integralOperationsGoodComplex l E W).FullSubcategory)
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ)

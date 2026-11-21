@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.InternalScalarOrdinaryTensorPullMod
 /-! # Ordinary inverse scalar tensor square
 
 Source: the ordinary balanced tensor pullback square, in the inverse comparison direction.
-(blueprint: new-sfb-finite-free-scalar-ordinary-tensor-pullback)
 -/
 
 @[expose] public noncomputable section
@@ -39,7 +38,6 @@ private lemma inverse_square {A B : Type*} [Category A] [Category B]
 
 Source: Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5), and the blueprint
 scalar-six formal properties.
-(blueprint: new-sfb-finite-free-scalar-ordinary-tensor-pullback)
 
 Proof. The forward balanced tensor square is residueOrdinaryTensorPull_module.
 Its transported pullback tensorator equals the native tensorator by native_pull_oplax.

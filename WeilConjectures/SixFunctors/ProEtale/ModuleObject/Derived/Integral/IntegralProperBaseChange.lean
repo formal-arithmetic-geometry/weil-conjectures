@@ -28,8 +28,7 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullba
 # Proper base change with integral adic coefficients
 
 Source: blueprint main-20261015, chap-Construction-of-f,
-`sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md`
-(blueprint: proposition-proper-direct-image-constructible-complexes).
+`sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md`.
 
 ## Main statements
 
@@ -112,8 +111,7 @@ private theorem integral_pull_complete
 /-- Proper direct image, derived Nakayama, and the two canonical proper formulas
 for bounded constructible integral adic complexes.
 Source: blueprint main-20261015, chap-Construction-of-f,
-`sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md`
-(blueprint: proposition-proper-direct-image-constructible-complexes).
+`sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md`.
 
 Proof:
 1. The internal residue criterion gives completeness and a bounded constructible finite-Tor

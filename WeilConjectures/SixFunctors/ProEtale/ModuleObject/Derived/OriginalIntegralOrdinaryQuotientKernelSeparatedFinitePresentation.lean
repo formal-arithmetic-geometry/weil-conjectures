@@ -303,7 +303,6 @@ private theorem terminal_component_zero
 
 Source: Hemo--Richarz--Scholbach, Propositions 5.1 and 7.6 and Theorem 7.7;
 Bhatt--Scholze, Section 6.1.
-(blueprint: lem-sp-original-integral-ordinary-quotient-kernel-separated-finite-presentation).
 
 Proof. On a w-contractible affine test, the regular module is projective.
 A finite presentation and the quotient-zero hypothesis give continuous matrix

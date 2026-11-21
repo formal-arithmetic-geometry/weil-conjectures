@@ -158,7 +158,7 @@ lemma epi_single_map_f {C : Type*} [Category* C] [Limits.HasZeroMorphisms C] [Ha
   · exact (HomologicalComplex.isZero_single_obj_X _ j B i h).epi _
 
 /-- **The Milnor sequence for `Rf_*` of a tower of pro-étale sheaves with epimorphic
-transitions** (blueprint `proposition-milnor-sequence`): for a tower `G` of sheaves of `Λ`-modules
+transitions**: for a tower `G` of sheaves of `Λ`-modules
 on `X_proét` with epimorphic transitions (e.g. an `ℓ`-adic tower `G_{n+1}/ℓⁿ ≅ Gₙ`), and
 `i + 1 = j`, there is a short exact sequence
 `0 ⟶ R¹lim Rⁱf_* Gₙ ⟶ Rʲf_* (lim Gₙ) ⟶ lim Rʲf_* Gₙ ⟶ 0` of sheaves on `Y_proét`, where

@@ -37,8 +37,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Mate.MateOpenRe
 # Rational affine-line compact-support adjunction
 
 Source: `literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-  sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md`
-(blueprint: theorem-f-shriek-ell-adic-coefficients).
+  sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md`.
 
 ## Main declarations
 
@@ -73,8 +72,7 @@ attribute [local irreducible] upperStar Functor.leftDerivedFunctor Functor.mapDe
 /-- The recorded Nagata choice for the affine projection as a morphism over k.
 The instance arguments are the existing affine-space and composition instances, written
 explicitly because typeclass search does not unfold the Over-object projections here.
-Source: blueprint `sk-def-sfb-dc-setting`, chosen compactification convention
-(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
+Source: blueprint `sk-def-sfb-dc-setting`, chosen compactification convention. -/
 noncomputable def affineLineChosenCompactification
     (k : Type u) [Field k] (V : Scheme.{u}) [V.Over (Spec (.of k))]
     [LocallyOfFiniteType (V ↘ Spec (.of k))]
@@ -96,8 +94,7 @@ noncomputable def affineLineChosenCompactification
 attribute [local irreducible] affineLineChosenCompactification
 
 /-- The complete assertion for one of the two rational coefficient conventions.
-Source: blueprint `sk-cor-affine-space-rational-line`
-(blueprint: theorem-f-shriek-ell-adic-coefficients).
+Source: blueprint `sk-cor-affine-space-rational-line`.
 The comparison isomorphisms to the ambient derived categories make every displayed functor
 be the specified module-object functor, rather than an unrelated functor between subcategories.
 -/
@@ -376,8 +373,7 @@ attribute [local semireducible] RationalP1.coefficient RationalP1.line
 /-- Rational affine-line compact-support adjunction, for every finite coefficient
 subextension and for the finite-subextension-valued algebraic closure.  The three assertions
 are respectively clauses (1), (2), and (3) of the source statement.
-Source: blueprint `sk-cor-affine-space-rational-line`
-(blueprint: theorem-f-shriek-ell-adic-coefficients).
+Source: blueprint `sk-cor-affine-space-rational-line`.
 
 Proof (the ten steps of the DAG node):
 1. The standard-chart theorem gives j and qj = p; finite-coordinate projective-space

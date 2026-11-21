@@ -19,7 +19,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralCompact
 
 Source: blueprint main-20261015, sk-thm-int-restriction, General f paragraph,
 and sk-thm-int-restriction-glue.proof.md, paragraph (2).
-(blueprint: lem-sfb-integral-exceptional-affine-chart).
 -/
 
 @[expose] public section

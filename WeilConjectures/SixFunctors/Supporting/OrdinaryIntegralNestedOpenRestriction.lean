@@ -13,7 +13,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 /-! # Ordinary integral pullback and successive exact open restrictions
 
 Source: Stacks Project, sites-modules.tex, Tag 03D8; derived.tex, Tag 06YY.
-(blueprint: lem-fix-ordinary-integral-nested-open-restriction).
 -/
 
 @[expose] public section
@@ -191,7 +190,6 @@ private noncomputable def openModuleIso
 
 /-- The ordinary derived pullback along an open immersion is normalized exact restriction.
 Source: Stacks Project, sites-modules.tex, Tag 03D8; derived.tex, Tag 06YY.
-(blueprint: lem-fix-ordinary-integral-nested-open-restriction).
 -/
 private theorem ordinaryIntegralOpenRestrictionDerivedIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -219,7 +217,6 @@ private theorem ordinaryIntegralOpenRestrictionDerivedIso
 
 /-- Ordinary derived pullback composes for arbitrary composable scheme morphisms.
 Source: Stacks Project, sites-modules.tex, Tag 03D8; derived.tex, Tag 06YY.
-(blueprint: lem-fix-ordinary-integral-nested-open-restriction).
 -/
 private theorem ordinaryIntegralDerivedPullbackComposition
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -241,7 +238,6 @@ is successive normalized exact restriction. No completeness hypothesis occurs he
 Source: Stacks Project, sites-modules.tex, lemma-push-pull-composition-modules
 (Tag 03D8), and derived.tex, Tag 06YY; step 3 of
 lem-fix-clopen-completed-restriction-comparison.
-(blueprint: lem-fix-ordinary-integral-nested-open-restriction).
 
 Proof: the normalized finite restriction isomorphisms preserve constant sections.
 Naturality and the completed quotient-projection equations identify their adjoint

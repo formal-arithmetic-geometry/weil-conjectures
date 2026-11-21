@@ -18,8 +18,7 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 This is the compact-support base-change, projection-formula, tensor-coherence and
 compact-support-composition calculation on the triple fibre product.
-Source: the ambient comparison paragraph of `proposition-fourier-inversion`
-(blueprint: proposition-fourier-inversion).
+Source: the ambient comparison paragraph of `proposition-fourier-inversion`.
 
 The remaining proof is the full six-functor coherence calculation described by the
 source paragraph; it is split from the bounded restriction and Fourier specialization.
@@ -35,8 +34,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 /-- Comparison of the two kernel functors after restricting their input to bounded
 constructible complexes, with bounded constructible kernels.
 
-Source: latest blueprint `lem-fd-kernel-composition.proof.md`, first two paragraphs
-(blueprint: lem-fd-kernel-composition-ambient).
+Source: latest blueprint `lem-fd-kernel-composition.proof.md`, first two paragraphs.
 
 Proof in words: write T = X12 ×_{V'} X23 and use compact-support base change for
 q1^* Rp2,! to replace it by Rr23,! r12^*. Pull r12^* through tensor using its strong

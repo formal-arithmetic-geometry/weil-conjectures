@@ -139,7 +139,7 @@ lemma boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft
   rfl
 
 
-/-- **Base change for extension by zero** (blueprint `sk-def-sfb-open-base-change`) on bounded
+/-- **Base change for extension by zero** on bounded
 constructible complexes: for a *cartesian* square with `j` and `j'` open immersions, the exchange
 morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is an isomorphism.
 

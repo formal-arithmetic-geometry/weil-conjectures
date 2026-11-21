@@ -55,8 +55,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-/-- **The internal Hom comparison for `𝒪_E ⟶ E` is an isomorphism** (blueprint
-`proposition-six-operations-change-coefficients` (2)): for bounded constructible `𝒪_E`-complexes `A`
+/-- **The internal Hom comparison for `𝒪_E ⟶ E` is an isomorphism**: for bounded constructible `𝒪_E`-complexes `A`
 and `B`, `v_{A,B} : T RHom(A, B) ⟶ RHom(T A, T B)` is an isomorphism, `T` being a rationalization
 and `v` the mate of the tensorator. -/
 theorem isIso_ihomComparison_boundedConstructibleExtendScalars
@@ -82,8 +81,7 @@ theorem isIso_ihomComparison_constructibleToPadicAlgCl
     IsIso (Functor.LaxMonoidal.ihomComparison (constructibleToPadicAlgCl X.left ℓ E) A) :=
   isIso_ihomComparison_constructibleToPadicAlgCl_of_twoColimit ℓ X E A
 
-/-- **The internal Hom comparison for `𝒪_E ⟶ ℚ̄_ℓ` is an isomorphism** (blueprint
-`proposition-six-operations-change-coefficients` (2)): the comparison of the composite extension of
+/-- **The internal Hom comparison for `𝒪_E ⟶ ℚ̄_ℓ` is an isomorphism**: the comparison of the composite extension of
 scalars `𝒪_E ⟶ E ⟶ ℚ̄_ℓ` is the composite of the comparisons. -/
 theorem isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl
     (A : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :

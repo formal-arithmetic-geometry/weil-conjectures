@@ -50,7 +50,6 @@ private theorem properComparison_mate_square {R S : Coefficients.{u}} (a : Chang
 
 /-- The scalar mate commutes with inverse proper composition, including equality transport.
 Source: Stacks 03D8, 0D6D, 07A6; Zheng 5.13--5.15.
-(blueprint: lem-sf-proper-scalar-composition).
 
 Proof: eliminate the geometric composite equality. Invert the component isomorphism
 in scalarPull_geometric_composition. The resulting compatibility square has the

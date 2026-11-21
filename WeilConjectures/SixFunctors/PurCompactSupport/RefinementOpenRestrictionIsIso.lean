@@ -32,7 +32,6 @@ isomorphism.
 Proof: the refinement fibre product has a clopen distinguished section; extension by
 zero is exact there, so the component maps have inverses. Extensionality identifies
 any transformation with those components.
-(blueprint: lem-sf-refinement-open-restriction-is-iso).
 -/
 theorem refinementRestriction_data_isIso
     (θ : ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i ⟶

@@ -376,7 +376,7 @@ private theorem sheaf_pullback_hom {S T : Scheme.{u}} (f : S ⟶ T)
 
 /-- The canonical ordinary coefficient pullback comparisons commute with composition.
 Source: Bhatt--Scholze, Proposition 5.3.2 and Lemma 5.4.1; the normalized restriction
-comparison (blueprint: lem-weil-pbc-finite-discrete-sheaf-pullback-composition).
+comparison.
 
 Proof in words. First apply finiteDiscreteCoefficientRestrictionIso_comp to the
 normalized restriction comparisons. Cancel the encoding equivalences on the two

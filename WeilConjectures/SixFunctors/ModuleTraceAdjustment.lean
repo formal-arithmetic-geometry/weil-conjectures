@@ -26,7 +26,6 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Trace adjustment for module sheaves before specializing the coefficient objects.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, transport through a presentation.
-(auxiliary; not a blueprint node)
 
 Proof: inverse image along the isomorphism is an equivalence, so its adjoint direct
 image is an equivalence. The adjunction unit followed by direct image of bL is an

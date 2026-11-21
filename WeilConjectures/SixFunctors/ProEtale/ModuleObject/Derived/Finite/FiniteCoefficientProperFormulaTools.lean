@@ -455,7 +455,6 @@ end Helpers
 /-- The finite proper exchange and projection formulas for unbundled complexes,
 with a specified finite continuous coefficient presentation.
 Source: the finite proper theorem, blueprint proper-base-change proof, paragraph (3).
-(blueprint: lem-sfb-finite-coefficient-proper-formulas).
 
 Proof: bundle the two schemes and their morphism over Spec k, use the normalized
 finite encoding, and apply the finite coefficient-isomorphism theorem. Bundle each

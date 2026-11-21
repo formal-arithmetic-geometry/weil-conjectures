@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.InternalRoosOutputComplete
 /-! # Canonical completeness detected by the internal reduction Roos triangle
 
 Source: Stacks 099B, 0A0E and 0941; blueprint integral-criterion-reductions, final sentence.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +25,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.AdicCompletion
 
 /-- A Roos triangle on the actual reductions implies canonical-map completeness.
-Source: Stacks 099B, 0A0E, 0941; blueprint integral-criterion-reductions, final sentence
-(auxiliary; not a blueprint node).
+Source: Stacks 099B, 0A0E, 0941; blueprint integral-criterion-reductions, final sentence.
 
 Proof: choose a K-flat representative P of K. Its strict Roos complex gives a
 second distinguished triangle for the same reduction tower. Rotate both triangles:

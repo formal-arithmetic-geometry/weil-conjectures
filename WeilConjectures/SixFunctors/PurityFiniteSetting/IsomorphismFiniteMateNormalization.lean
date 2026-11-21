@@ -163,8 +163,7 @@ import all WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
 /-! # Finite isomorphism exchange and the specified mates
 
 Source: current Weil blueprint, prop-pur-weil-equivariance-compatibilities.proof.md,
-constituent-compatibility assembly; Stacks Tags 09A5, 07A7, 0D6D and 03DI
-(blueprint: lem-pur-isomorphism-finite-mate-normalization).
+constituent-compatibility assembly; Stacks Tags 09A5, 07A7, 0D6D and 03DI.
 
 The proper reindexing map is the published sectionwise fibre-product comparison
 `sfProperOpenDerivedRestriction`. The open reindexing map is constructed from the
@@ -189,8 +188,7 @@ namespace WeilConjectures.PurityFiniteSetting
 attribute [local irreducible] sfIntrinsicModuleEquivalence sfIntrinsicDirectImageComparison
 
 /-- Forget only the chosen Cartesian identification, retaining its projection equations.
-Source: Stacks Tag 09A5, Cartesian reindexing
-(blueprint: lem-pur-isomorphism-finite-mate-normalization). -/
+Source: Stacks Tag 09A5, Cartesian reindexing. -/
 abbrev finiteMateCartesian {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : ChosenCartesianSquare g' f' f g) : IsPullback g' f' f g :=
@@ -200,8 +198,7 @@ abbrev finiteMateCartesian {X' X Y' Y : Scheme.{u}}
 canonical identification of sections on the two fibre products, not a chosen map.
 When the horizontal maps are isomorphisms this is reindexing the zero-extension
 presheaf: it keeps a section over the open and the zero section off the open.
-Source: Stacks Tags 09A5 and 03DI, constituent-compatibility assembly
-(blueprint: lem-pur-isomorphism-finite-mate-normalization). -/
+Source: Stacks Tags 09A5 and 03DI, constituent-compatibility assembly. -/
 def finiteMateOpenReindexing (A : Type u) [CommRing A] [Finite A]
     {U' U V' V : Scheme.{u}} (h : U' ⟶ U) (j' : U' ⟶ V')
     (j : U ⟶ V) (b : V' ⟶ V) [IsOpenImmersion j] [IsOpenImmersion j']
@@ -214,8 +211,7 @@ def finiteMateOpenReindexing (A : Type u) [CommRing A] [Finite A]
 
 /-- Apply the section-normalized open reindexing isomorphism termwise to unbounded
 complexes and localize. All functors here are the published exact functors.
-Source: Stacks Tags 03DJ and 05RU, constituent-compatibility assembly
-(blueprint: lem-pur-isomorphism-finite-mate-normalization). -/
+Source: Stacks Tags 03DJ and 05RU, constituent-compatibility assembly. -/
 def finiteMateDerivedOpenReindexing (A : Type u) [CommRing A] [Finite A]
     {U' U V' V : Scheme.{u}} (h : U' ⟶ U) (j' : U' ⟶ V')
     (j : U ⟶ V) (b : V' ⟶ V) [IsOpenImmersion j] [IsOpenImmersion j']

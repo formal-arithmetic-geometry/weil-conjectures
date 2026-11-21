@@ -12,7 +12,6 @@ import all Mathlib.Algebra.Homology.Localization
 
 The general derived tensor counit equation is written on complex representatives,
 with the quotient and prolonged-functor objects in their native presentations.
-(blueprint: lem-sfb-coefficient-scalar-tensor-homotopy-complex)
 -/
 
 @[expose] public noncomputable section
@@ -49,8 +48,7 @@ homotopy quotient objects. The quotient tensorator is an identity, so its tensor
 object is the quotient of the complex tensor. Prolongation to the homotopy
 category sends a quotient complex to the quotient of its prolongation. The
 homotopy oplax tensor map is the quotient of the complex oplax tensor map.
-These identifications give exactly the displayed complex formula.
-(blueprint: lem-sfb-coefficient-scalar-tensor-homotopy-complex). -/
+These identifications give exactly the displayed complex formula. -/
 private theorem coefficientScalarTensor_homotopyComplex_private (Z : Scheme.{u})
     (P Q : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
     let := internalScalarMonoidal a Z

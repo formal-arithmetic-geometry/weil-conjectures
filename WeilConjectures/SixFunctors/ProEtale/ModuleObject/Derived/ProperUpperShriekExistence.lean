@@ -32,7 +32,7 @@ The trivial compactification `Z ⟶[𝟙] Z ⟶[p] Y` of `p` (`Compactification.
 `exists_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj` and its analogues) its
 restriction to the localizing closures `Loc(Dᵇc(Z)⟦Λ⟧) ⥤ Loc(Dᵇc(Y)⟦Λ⟧)` has a right adjoint `p^!`;
 this is where `k` finite or separably closed is used, for the compact generation. By the restriction
-theorems (blueprints `theorem-f-shriek-ell-adic-coefficients` and `sk-thm-int-restriction`), `p^!`
+theorems, `p^!`
 maps `Dᵇc(Y)⟦Λ⟧` into `Dᵇc(Z)⟦Λ⟧`. The adjunction `Rp_* ⊣ p^!` then restricts to the full
 subcategories `Dᵇc ⊆ Loc(Dᵇc)` (`CategoryTheory.Adjunction.isLeftAdjoint_of_essImage`,
 `isLeftAdjoint_lift_rightDerivedLowerStar_of_localizing`).
@@ -137,7 +137,7 @@ include aX in
 /-- Blueprint `theorem-f-shriek-ell-adic-coefficients` (for `Λ = E`): for the coefficient ring `E̲`
 of a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, a separated finite-type `k`-morphism `f : X ⟶ Y` and a
 compactification `c` of `f`, every right adjoint `f^!` of the compact-support direct image
-`Rf_! : Loc(Dᵇc(X)⟦E⟧) ⥤ Loc(Dᵇc(Y)⟦E⟧)` (blueprint `theorem-existence-exceptional-inverse-image`)
+`Rf_! : Loc(Dᵇc(X)⟦E⟧) ⥤ Loc(Dᵇc(Y)⟦E⟧)`
 maps `Dᵇc(Y)⟦E⟧` into `Dᵇc(X)⟦E⟧`.
 
 The restriction of `Rf_!` to `Dᵇc` is `i_! ⋙ Rp_*` for `c = (X ⟶[i] X̄ ⟶[p] Y)`, a left adjoint
@@ -215,8 +215,7 @@ include aX in
 /-- Blueprint `theorem-f-shriek-ell-adic-coefficients` (for `Λ = ℚ̄_ℓ`): for the coefficient ring
 `ℚ̄_ℓ`, a separated finite-type `k`-morphism `f : X ⟶ Y` and a compactification `c` of `f`, every
 right adjoint `f^!` of the compact-support direct image
-`Rf_! : Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧) ⥤ Loc(Dᵇc(Y)⟦ℚ̄_ℓ⟧)` (blueprint
-`theorem-existence-exceptional-inverse-image`) maps `Dᵇc(Y)⟦ℚ̄_ℓ⟧` into `Dᵇc(X)⟦ℚ̄_ℓ⟧`.
+`Rf_! : Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧) ⥤ Loc(Dᵇc(Y)⟦ℚ̄_ℓ⟧)` maps `Dᵇc(Y)⟦ℚ̄_ℓ⟧` into `Dᵇc(X)⟦ℚ̄_ℓ⟧`.
 
 The restriction of `Rf_!` to `Dᵇc` is `i_! ⋙ Rp_*` for `c = (X ⟶[i] X̄ ⟶[p] Y)`, a left adjoint
 since `Rp_*` is one on `Dᵇc` for the proper `p`

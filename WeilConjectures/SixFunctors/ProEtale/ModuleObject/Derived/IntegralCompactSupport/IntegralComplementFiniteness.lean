@@ -23,7 +23,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 # Integral finiteness for the open term of localization
 
 Source: blueprint main-20261015, sk-thm-int-restriction-closed.proof.md,
-localization paragraph (blueprint: lem-sfb-int-closed-complement-finiteness).
+localization paragraph.
 -/
 
 @[expose] public section
@@ -100,8 +100,7 @@ localization belongs to it. This assertion concerns inverse image and open direc
 it involves neither sections with closed support nor a Brown adjoint.
 
 Source: blueprint main-20261015, sk-thm-int-restriction-closed.proof.md,
-"Its third term lies in Dbc", and DAG steps 1, 4, 5, 6
-(blueprint: lem-sfb-int-closed-complement-finiteness).
+"Its third term lies in Dbc", and DAG steps 1, 4, 5, 6.
 
 Proof: X is Noetherian because its structure morphism to Spec k is of finite type.
 The existing integral constant-model heart closure theorem supplies ambient kernels,

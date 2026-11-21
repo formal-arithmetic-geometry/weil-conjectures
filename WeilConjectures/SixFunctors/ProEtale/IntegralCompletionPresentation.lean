@@ -59,8 +59,7 @@ import WeilConjectures.SixFunctors.ProEtale.IntegralNormalizedRestrictionSquares
 
 /-! # Canonical completeness in the completed integral presentation
 
-Stacks Project, Tags 06YY, 0941, 08TC and 0145
-(auxiliary; not a blueprint node).
+Stacks Project, Tags 06YY, 0941, 08TC and 0145.
 
 The coefficient identification is normalized by every finite restriction square.
 Finite comparisons retain their finite coefficient action.
@@ -88,8 +87,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) (A : Encoding l E X)
 
 /-- The existing finite continuous-to-constant encoding, at exponent n+1.
-Source: blueprint integral-limit and finite-coefficient conventions; Stacks 00YV
-(auxiliary; not a blueprint node). -/
+Source: blueprint integral-limit and finite-coefficient conventions; Stacks 00YV. -/
 abbrev FiniteEncoding (n : ℕ) :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   FiniteDiscreteOrdinary.Encoding (Padic.coefficientExtensionRing l E (n + 1)) X

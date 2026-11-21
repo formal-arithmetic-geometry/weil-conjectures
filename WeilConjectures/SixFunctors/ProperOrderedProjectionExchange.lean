@@ -203,7 +203,6 @@ private theorem compactProjection_coefficient_naturality
 /-- The forward ordered projection square with an arbitrary source coefficient.
 Source: blueprint prop-asd-smooth-base-change.proof.md, second paragraph, projection square;
 Stacks, Tag 0E48, compatibility with a diagram.
-(auxiliary; not a blueprint node)
 Proof: the compact-support projection square is
 projectionMap_rightDerivedLowerShriekBaseChangeMap. Conjugate its source and target
 by tensor symmetry to put the base coefficient first. Naturality of the symmetry

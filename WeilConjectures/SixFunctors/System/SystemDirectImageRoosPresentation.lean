@@ -31,8 +31,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 presentation, with its actual limit projections. This is a comparison of models;
 it asserts neither normalization nor invertibility of any reconstruction counit.
 Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Project, Tag 0941;
-steps 1--2 of lem-weil-system-direct-image-effectivity
-(blueprint: lem-weil-system-direct-image-roos-presentation).
+steps 1--2 of lem-weil-system-direct-image-effectivity.
 
 Proof: resolve the reduction of K once in the category of modules on the ringed
 sequence site. Section-normalized direct-image evaluation identifies its nth derived

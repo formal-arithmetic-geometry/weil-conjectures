@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStar
 
 Source: blueprint `lemma-proper-direct-image-unbounded-complexes` and
 `proposition-compactness-proper-direct-image--2` (1)-(2).
-(blueprint: lem-sfb-adic-proper-truncation-bound)
 -/
 
 @[expose] public section
@@ -45,7 +44,6 @@ degree `q` or above, uniformly on the bounded constructible localizing hull.
 
 Source: blueprint `lemma-proper-direct-image-unbounded-complexes` (arbitrary-complex clause)
 and `proposition-compactness-proper-direct-image--2` (1)-(2).
-(blueprint: lem-sfb-adic-proper-truncation-bound)
 
 Proof: the schemes and their locally closed strata are Noetherian. The class
 of complexes with ind-constructible cohomology is replete, triangulated and

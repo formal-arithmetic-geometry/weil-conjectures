@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 
 For every bounded constructible condensed `𝒪_E ⧸ ℓⁿ`-complex `M` on `X`, the pro-étale complex
 `Φ(M)` is of étale origin (`ProEtale.CondensedRing.etaleOriginReading`): this is
-`ProEtale.isEtaleOrigin_of_isConstructible` (blueprint `theorem-comparison-constructible-sheaves`)
+`ProEtale.isEtaleOrigin_of_isConstructible`
 at the finite coefficient ring `𝒪_E ⧸ ℓⁿ`.
 -/
 

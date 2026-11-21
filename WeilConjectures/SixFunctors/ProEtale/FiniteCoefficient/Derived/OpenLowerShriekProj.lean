@@ -39,7 +39,7 @@ direction: its open part is the inverse `(derivedOpenImmersionLowerShriekProject
 - `AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekProjectionIso j`: the resulting
   isomorphism of bifunctors.
 - `AlgebraicGeometry.ProEtale.derivedTensorOpenImmersionLowerShriekIso j K L`: the projection
-  formula `j_!K ⊗ᴸ L ≅ j_!(K ⊗ᴸ Lj^*L)` (blueprint `lemma-change-coefficients-compact-support`).
+  formula `j_!K ⊗ᴸ L ≅ j_!(K ⊗ᴸ Lj^*L)`.
 
 ## The argument
 

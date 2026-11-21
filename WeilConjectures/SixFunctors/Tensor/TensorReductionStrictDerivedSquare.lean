@@ -50,8 +50,7 @@ whole system category, using reductionTensor_normalization for the recorded
 comparison. No inference from equality of finite derived evaluations is used.
 The good-total-tensor hypothesis supplies the third ordinary reduction model;
 no flatness of the finite quotient ring is required. Zero complexes and an empty
-site are covered by the same universal comparison square.
-(blueprint: lem-coef-tensor-reduction-strict-derived-square). -/
+site are covered by the same universal comparison square. -/
 theorem tensorReductionStrictMap_derived_square (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)
     (hT : integralOperationsGoodComplex l E W

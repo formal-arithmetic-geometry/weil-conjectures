@@ -20,8 +20,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison
 Blueprint `rem-sf-fullcd-counterexample`: the comparison morphism `ν_U : U_proét ⟶ U_ét` can
 have higher direct images `R^q ν_{U,*} F ≠ 0` in arbitrarily large degrees `q`, for sheaves `F`
 that are not of étale origin. Hence the form `(G)` of the comparison bound, asked for *all*
-pro-étale sheaves and uniformly over the pro-étale base changes, is false
-(blueprints `rem-sf-fullcd-general-form` (2), `rem-ptr-weil-ambient-exceptional-adjoint-13`).
+pro-étale sheaves and uniformly over the pro-étale base changes, is false.
 
 Let `K` be an algebraically closed field, `I` a discrete set of cardinality `ℵ_ω` and
 `S = βI × βI`. Then `U = Spec C_lc(S, K)` is an affine pro-étale object of `(Spec K)_proét`

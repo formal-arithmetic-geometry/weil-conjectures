@@ -15,7 +15,6 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors
 
 The canonical complex scalar comparison agrees with the total left derived
 functor counit at the homotopy quotient of that complex.
-(blueprint: lem-sfb-coefficient-scalar-complex-counit)
 -/
 
 @[expose] public noncomputable section
@@ -49,8 +48,7 @@ Source: Stacks Project, Cohomology on Sites, Tag 07A4, scalar localization compa
 Expand the fixed complex comparison and use the factorization equation for the
 isomorphism between the exact derived functor and the total left derived functor.
 The comparison between complex and homotopy localizations has identity components.
-Its images under the two functors are identities, so cancellation leaves the counit.
-(blueprint: lem-sfb-coefficient-scalar-complex-counit). -/
+Its images under the two functors are identities, so cancellation leaves the counit. -/
 private theorem coefficientScalarTensor_complexCounit_private (Z : Scheme.{u})
     (K : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
     coefficientInternalScalarComplex a Z K =

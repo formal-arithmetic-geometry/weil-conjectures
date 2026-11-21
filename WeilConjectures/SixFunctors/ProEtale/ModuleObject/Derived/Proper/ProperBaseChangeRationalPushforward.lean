@@ -53,8 +53,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChang
 # Proper direct image with rational condensed coefficients: coefficient comparisons
 
 Source: current blueprint, chap-Construction-of-f,
-sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.md, clauses 1--2
-(blueprint: proposition-proper-direct-image-constructible-complexes).
+sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.md, clauses 1--2.
 
 The first part of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational`,
@@ -85,8 +84,7 @@ attribute [local irreducible] upperStarFromPoint
 
 /-- The canonical push comparison for the coefficient inclusion O_E -> E. Its definition
 only supplies the flatness proof to the recorded `derivedPushHom`; it does not choose a map.
-Source: blueprint rational proper direct image, clause 1, and its proof steps 1--2
-(blueprint: proposition-proper-direct-image-constructible-complexes). -/
+Source: blueprint rational proper direct image, clause 1, and its proof steps 1--2. -/
 def rationalizationPushHom (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (p : X ⟶ Y) :
     (lowerStar (Profinite.padicIntegersRingObj ℓ E.1) p).rightDerivedFunctor ⋙
@@ -101,8 +99,7 @@ def rationalizationPushHom (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The existing finiteness preservation proof for `ℚ̄_ℓ`, named to avoid repeated expansion
 in the canonical restricted base-change map. This supplies a proof, never extra map data.
-Source: blueprint rational proper direct image, clauses 2--3
-(blueprint: proposition-proper-direct-image-constructible-complexes). -/
+Source: blueprint rational proper direct image, clauses 2--3. -/
 abbrev rationalFinitenessPushforwardPreservation (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :
     PreservesBoundedConstructiblePushforwards (Profinite.padicAlgClRingObj ℓ) k :=
@@ -110,8 +107,7 @@ abbrev rationalFinitenessPushforwardPreservation (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The existing finiteness preservation proof for a finite subextension `E`, named to avoid
 repeated expansion in the canonical restricted base-change map.
-Source: blueprint rational proper direct image, clauses 2--3
-(blueprint: proposition-proper-direct-image-constructible-complexes). -/
+Source: blueprint rational proper direct image, clauses 2--3. -/
 abbrev ContinuousMapRingObj.rationalFinitenessPushforwardPreservation (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :
@@ -128,8 +124,7 @@ attribute [local irreducible] rationalizationPushHom
 
 /-- The named preservation proof for precisely the two rational coefficient cases.
 The bundled ring equality fixes multiplication as well as the underlying coefficient sheaf.
-Source: blueprint rational proper direct image, clauses 2--3
-(blueprint: proposition-proper-direct-image-constructible-complexes). -/
+Source: blueprint rational proper direct image, clauses 2--3. -/
 abbrev rationalCoefficientPushforwardPreservation
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
@@ -188,8 +183,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 include k in
 /-- Proper pushforward commutes with inverting ell on every bounded-below integral complex.
-Source: blueprint rational proper direct image, clause 1
-(blueprint: proposition-proper-direct-image-constructible-complexes).
+Source: blueprint rational proper direct image, clause 1.
 
 Proof: properness supplies the qcqs hypotheses of `lem-sfb-localized-direct-image-comparison`,
 `localizedDirectImageComparison_isIso`, which applies to every bounded-below integral complex.
@@ -211,8 +205,7 @@ theorem isIso_rationalizationPushHom_boundedBelow
 include k in
 include k in
 /-- Proper pushforward commutes with extension to finite-subextension-valued condensed Qlbar.
-Source: blueprint rational proper direct image, clause 1
-(blueprint: proposition-proper-direct-image-constructible-complexes).
+Source: blueprint rational proper direct image, clause 1.
 
 Proof: extract an integer lower bound and install the corresponding `K.IsGE` instance.
 The existing bounded-below Qlbar push comparison

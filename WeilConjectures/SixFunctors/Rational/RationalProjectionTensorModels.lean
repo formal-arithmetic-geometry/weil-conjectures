@@ -14,7 +14,6 @@ The canonical scalar localization carries the integral tensor and pullback maps
 into the rational ones. This is the common normalization calculation for the
 proper and open projection mates.
 Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-rational-pullback-tensor-localization-square).
 -/
 
 @[expose] public noncomputable section
@@ -73,8 +72,7 @@ end ProjectionTransport
 
 /-- Localization of the prescribed integral tensor is the prescribed rational
 bifunctor on integral inputs, including its morphism action.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-rational-pullback-tensor-localization-square). -/
+Source: thm-sf-pf-field.proof.md, Compatibility. -/
 theorem rationalProjectionTensorFunctorEq
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
@@ -132,8 +130,7 @@ theorem rationalProjectionTensorFunctorEq
   exact he
 
 /-- The shared tensor endpoint comparison, constructed from the proved functor equality.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-rational-pullback-tensor-localization-square). -/
+Source: thm-sf-pf-field.proof.md, Compatibility. -/
 def rationalProjectionTensorComparison
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
@@ -177,7 +174,6 @@ private theorem rationalProjectionPullComparison
 /-- The canonical tensor comparison commutes with pullback for any pair of supplied
 integral and rational tensor-pullback isomorphisms normalized to the canonical maps.
 Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-rational-pullback-tensor-localization-square).
 
 Proof: identify the integral source and target objects using the prescribed
 pullback and tensor normalizations. Map the integral normalization through scalar

@@ -30,7 +30,6 @@ Only the X presentation occurs; there is no scalar pull mate in this identity.
 Source: Bhatt--Scholze, Remark 6.8.15 and the tensor-pullback identity in the
 proof of Lemma 6.5.9(5), p. 51. The following normalization of the fixed
 comparisons is an explicit formal argument, not a separate statement of the paper.
-(blueprint: new-integral-residue-tensor-pull-counit-model)
 
 Proof. For an ordinary coefficient C, write C0 for tensorModelCoefficient C and
 jC for tensorModelCoefficientIso C. Put gamma = F.leftDerivedFunctorCounit and

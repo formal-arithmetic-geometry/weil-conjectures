@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.InternalKoszulConeCoordinates
 
 Source: Stacks Project, More on Algebra, Tag 062F; algebraization.tex,
 Lemma derived-completion-koszul (0A0E); proetale.tex, Section 099L.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -55,7 +54,6 @@ inverse limits occur in this assertion.
 
 Source: Stacks Project, More on Algebra, Tag 062F; algebraization.tex,
 Lemma derived-completion-koszul (0A0E); proetale.tex, Section 099L.
-(auxiliary; not a blueprint node).
 
 Proof: the constant uniformizer pi is regular, and exact inverse image preserves its
 injective multiplication map. Since a and pi generate the same ideal sheaf, locally

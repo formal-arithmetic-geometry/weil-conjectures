@@ -27,7 +27,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The module functor whose termwise extension is the finite pullback level.
-Source: Stacks 03EL (blueprint: lem-weil-ramified-finite-module-comparison). -/
+Source: Stacks 03EL. -/
 abbrev finitePullbackModule {X Y : Scheme.{t}} (g : X ⟶ Y) (n : ℕ) :=
   unrestrictedIntegralReductionFunctor l E Y n ⋙
     integralOperationsLevelPullback l E g n ⋙
@@ -37,7 +37,7 @@ abbrev finitePullbackModule {X Y : Scheme.{t}} (g : X ⟶ Y) (n : ℕ) :=
             (completedIntegralCommRingProjectionUnrestricted l E X n))
 
 /-- The two finite coefficients in a module pullback generator.
-Source: Stacks 03EL (blueprint: lem-weil-ramified-finite-module-comparison). -/
+Source: Stacks 03EL. -/
 abbrev finitePullbackModuleTensor {X Y : Scheme.{t}} (g : X ⟶ Y) (n : ℕ)
     (M : integralTowerModules l E Y) (V : Y.ProEt)
     (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj (op V))
@@ -57,7 +57,6 @@ variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L
 /-- Objectwise normalized comparison at one finite level, before naturality,
 complexes, or transition maps.
 Source: Stacks 03EL (lemma-tensor-product-pullback) and 03EK (section-tensor-product).
-(blueprint: lem-weil-ramified-finite-module-comparison).
 
 Proof: Write R and S for the completed E and L coefficient sheaves. Express the
 finite E pullback as g-inverse(M) tensor over g-inverse(R_Y) with the finite E

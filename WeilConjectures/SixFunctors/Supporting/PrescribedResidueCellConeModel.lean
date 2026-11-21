@@ -124,7 +124,7 @@ import Mathlib.Algebra.Homology.HomologicalComplexBiprod
 /-! # Cone of a prescribed top residue cell
 
 Source: Stacks Project, proetale.tex, Tag 09C3, final induction paragraph;
-derived.tex, definition-cone (blueprint: lem-sf-prescribed-residue-cell-cone-model).
+derived.tex, definition-cone.
 -/
 
 @[expose] public noncomputable section
@@ -143,71 +143,71 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 namespace WeilConjectures
 
 /-- Relative smallness in the coefficient universe, supplied by the standard size transport.
-Source: Stacks 00W1 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 00W1. -/
 instance sfResidueSiteSmall (T : Scheme.{u}) :
     EssentiallySmall.{max (u + 1) v} T.ProEt := essentiallySmallSelf _
 
 /-- Relative smallness of the slice, in the same coefficient universe.
-Source: Stacks 00W1 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 00W1. -/
 instance sfResidueSliceSmall (T : Scheme.{u}) (U : T.ProEt) :
     EssentiallySmall.{max (u + 1) v} (Over U) := essentiallySmallSelf _
 
 /-- Coefficient-sized additive sheafification, avoiding smaller-universe instance inference.
-Source: Stacks 00W1 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 00W1. -/
 instance (priority := 4000) sfResidueAbSheafify (T : Scheme.{u}) :
     HasSheafify (Scheme.ProEt.topology T) AddCommGrpCat.{max (u + 1) v} :=
   SheafOfModules.hasSheafify_coefficientUniverse
 
 /-- The coefficient-sized locally bijective criterion.
-Source: Stacks 00W1 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 00W1. -/
 instance (priority := 4000) sfResidueAbLocallyBijective (T : Scheme.{u}) :
     (Scheme.ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{max (u + 1) v} :=
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 
 /-- Additive sheafification on the actual slice, at the coefficient universe.
-Source: Stacks 00W1 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 00W1. -/
 instance (priority := 4000) sfResidueSliceAbSheafify (T : Scheme.{u}) (U : T.ProEt) :
     HasSheafify ((Scheme.ProEt.topology T).over U) AddCommGrpCat.{max (u + 1) v} :=
   SheafOfModules.hasSheafify_coefficientUniverse
 
 /-- The locally bijective criterion on that slice.
-Source: Stacks 00W1 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 00W1. -/
 instance (priority := 4000) sfResidueSliceAbLocallyBijective (T : Scheme.{u}) (U : T.ProEt) :
     ((Scheme.ProEt.topology T).over U).WEqualsLocallyBijective
       AddCommGrpCat.{max (u + 1) v} :=
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 
 /-- The constant field sheaf, with coefficient size containing the small pro-etale site.
-Source: Stacks 09C3 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 09C3. -/
 abbrev sfResidueCoefficients (T : Scheme.{u}) (k : Type v) [Field k] :=
   (constantSheaf (Scheme.ProEt.topology T) CommRingCat.{max (u + 1) v}).obj
     (CommRingCat.of (ULift.{max (u + 1) v} k))
 
 /-- The recorded module category over the constant field sheaf.
-Source: Stacks 03DA, 09C3 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 03DA, 09C3. -/
 abbrev sfResidueModules (T : Scheme.{u}) (k : Type v) [Field k] :=
   ringedSiteModules.{max (u + 1) v} (sfSplitRings (sfResidueCoefficients T k))
 
 /-- Standard localization for these module sheaves; no additional existence hypothesis.
-Source: Stacks 05RU (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 05RU. -/
 instance sfResidueDerived (T : Scheme.{u}) (k : Type v) [Field k] :
     HasDerivedCategory (sfResidueModules T k) := HasDerivedCategory.standard _
 
 /-- Standard localization on the actual slice site.
-Source: Stacks 05RU (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 05RU. -/
 instance sfResidueSliceDerived (T : Scheme.{u}) (k : Type v) [Field k] (U : T.ProEt) :
     HasDerivedCategory (SheafOfModules.{max (u + 1) v}
       ((sfSplitRings (sfResidueCoefficients T k)).over U)) := HasDerivedCategory.standard _
 
 /-- Standard localization for any coefficient ring sheaf on the actual slice.
-Source: Stacks 05RU (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 05RU. -/
 instance sfResidueAnySliceDerived (T : Scheme.{u}) (U : T.ProEt)
     (R : Sheaf ((Scheme.ProEt.topology T).over U) RingCat.{max (u + 1) v}) :
     HasDerivedCategory (SheafOfModules.{max (u + 1) v} R) :=
   HasDerivedCategory.standard _
 
 /-- The finite free sheaf of the specified rank, using the recorded free construction.
-Source: Stacks 09C3 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 09C3. -/
 abbrev sfResidueFree (T : Scheme.{u}) (k : Type v) [Field k] (n : ℕ) :
     sfResidueModules T k :=
   @SheafOfModules.free T.ProEt inferInstance (Scheme.ProEt.topology T)
@@ -217,12 +217,12 @@ abbrev sfResidueFree (T : Scheme.{u}) (k : Type v) [Field k] (n : ℕ) :
     (ULift.{max (u + 1) v} (Fin n))
 
 /-- A free cell in degree b, conventionally written k_T^n[-b].
-Source: Stacks 09C3 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 09C3. -/
 abbrev sfResidueCell (T : Scheme.{u}) (k : Type v) [Field k] (b : ℤ) (n : ℕ) :=
   (CochainComplex.singleFunctor (sfResidueModules T k) b).obj (sfResidueFree T k n)
 
 /-- Termwise restriction using the existing module restriction and its zero compatibility.
-Source: Stacks 03DH (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 03DH. -/
 def sfResidueComplexRestriction (T : Scheme.{u}) (k : Type v) [Field k] (U : T.ProEt) :=
   letI := module_overFunctor_preservesZero (sfSplitRings (sfResidueCoefficients T k)) U
   (SheafOfModules.overFunctor.{max (u + 1) v}
@@ -230,26 +230,25 @@ def sfResidueComplexRestriction (T : Scheme.{u}) (k : Type v) [Field k] (U : T.P
 
 /-- The finite zero-differential sum of copies of an arbitrary module sheaf.
 This is the literal right side of the restricted tensor formula.
-Source: Stacks 09C3 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 09C3. -/
 def sfResidueTensorModel {B : Type c} [Category.{h} B] [Abelian B]
     (F : B) (a b : ℤ) (rank : ℤ → ℕ) : CochainComplex B ℤ :=
   ∐ fun q : Set.Icc a b ↦
     (CochainComplex.singleFunctor B q.val).obj (∐ fun _ : Fin (rank q.val) ↦ F)
 
 /-- The existing prescribed split model, specialized to the constant field.
-Source: Stacks 09C3 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 09C3. -/
 abbrev sfResidueSplit (T : Scheme.{u}) (k : Type v) [Field k]
     (a b : ℤ) (rank : ℤ → ℕ) := sfSplitComplex (sfResidueCoefficients T k) a b rank
 
 /-- The actual top-summand inclusion of the existing split model.
-Source: Stacks 09C3 (blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks 09C3. -/
 abbrev sfResidueInclusion (T : Scheme.{u}) (k : Type v) [Field k]
     (a b : ℤ) (hab : a ≤ b) (rank : ℤ → ℕ) :=
   sfSplitCell (sfResidueCoefficients T k) a b rank b ⟨hab, le_rfl⟩
 
 /-- The identity pair, represented by the literal identity mapping cone.
-Source: Stacks derived.tex, definition-cone
-(blueprint: lem-sf-prescribed-residue-cell-cone-model). -/
+Source: Stacks derived.tex, definition-cone. -/
 abbrev sfResidueIdentityPair (T : Scheme.{u}) (k : Type v) [Field k] (b : ℤ) (n : ℕ) :=
   CochainComplex.mappingCone (𝟙 (sfResidueCell T k b n))
 
@@ -693,8 +692,7 @@ private theorem sfRestrictedTensorFormula (T : Scheme.{u}) (k : Type v) [Field k
     (DerivedCategory.homologyFunctorFactors _ q).app L)
 
 /-- Prescribed top cells have the explicit cone, contraction and all restricted tensor models.
-Source: Stacks 09C3, final induction paragraph, with derived.tex definition-cone
-(blueprint: lem-sf-prescribed-residue-cell-cone-model).
+Source: Stacks 09C3, final induction paragraph, with derived.tex definition-cone.
 
 Proof:
 1. Apply lem-sf-projective-cohomology-split-model to a representative of N. Localize its

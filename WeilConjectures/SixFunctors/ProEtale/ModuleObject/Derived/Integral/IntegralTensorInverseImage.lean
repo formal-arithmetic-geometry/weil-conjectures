@@ -159,7 +159,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 # Integral inverse image and uncompleted tensor
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-int-tensor/_section.md;
-Stacks Project, Tags 09BP, 09BM and 09AA (blueprint: lemma-inverse-image-tensor-product).
+Stacks Project, Tags 09BP, 09BM and 09AA.
 
 The completed inverse-image comparison uses the existing intrinsic completeness
 predicate from IntegralModelsEmbedded, applied to the ordinary inverse image.
@@ -195,7 +195,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
 /-- A concrete model of the uncompleted derived reduction of a complex P.
 The two-term flat resolution [O_E --ell^(n+1)--> O_E] of O_E/ell^(n+1)
 shows that this cone represents P tensor^L O_E/ell^(n+1), without any flatness
-assumption on P. Source: Stacks 099M and 099N (blueprint: lemma-inverse-image-tensor-product). -/
+assumption on P. Source: Stacks 099M and 099N. -/
 abbrev integralFiniteComplex (X : Scheme.{u})
     (P : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X)) ℤ) (n : ℕ) :=
@@ -213,8 +213,7 @@ Koszul completion criterion identifies intrinsic completeness with invertibility
 that quotient unit; its Roos triangle has the prescribed cone-inclusion product leg.
 Exact restriction of scalars preserves products and triangles and detects isomorphisms,
 so this is also the completed inverse image after restriction to constant O_E.
-Source: Stacks 099M, 099N(5), 0999 and 0A0E; integral models, clause (2)
-(blueprint: lemma-inverse-image-tensor-product). -/
+Source: Stacks 099M, 099N(5), 0999 and 0A0E; integral models, clause (2). -/
 def IntegralPullbackIsCompleted {X Y : Scheme.{u}} (g : X ⟶ Y)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y))) : Prop :=
@@ -226,8 +225,7 @@ def IntegralPullbackIsCompleted {X Y : Scheme.{u}} (g : X ⟶ Y)
 /-- Integral inverse image, its completed comparison, uncompleted tensor, extension by
 zero for a quasi-compact open immersion, and closed direct image preserve Dbc.
 
-Source: blueprint main-20261015, lemma-inverse-image-tensor-product; Stacks 09BP, 09BM and 09AA
-(blueprint: lemma-inverse-image-tensor-product).
+Source: blueprint main-20261015, lemma-inverse-image-tensor-product; Stacks 09BP, 09BM and 09AA.
 
 Proof:
 1. The existing exact derived inverse-image preservation theorem gives bounded

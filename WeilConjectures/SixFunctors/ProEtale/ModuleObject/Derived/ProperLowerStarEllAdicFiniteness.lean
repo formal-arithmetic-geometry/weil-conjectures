@@ -16,9 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLo
 
 Let `p : Z ⟶ Y` be a proper morphism to a noetherian scheme. For the `ℓ`-adic coefficient rings
 `Λ = 𝒪_E, E, ℚ̄_ℓ`, the derived direct image `Rp_*` maps `Dᵇc(Z)⟦Λ⟧` into `Dᵇc(Y)⟦Λ⟧` as soon as it
-does so with the residue field coefficients `𝔽_{E'}` of the finite subextensions `E' ⊆ ℚ̄_ℓ`
-(blueprint `proposition-proper-direct-image-constructible-complexes` (1),
-`proposition-proper-direct-image-constructible-complexes` (1)):
+does so with the residue field coefficients `𝔽_{E'}` of the finite subextensions `E' ⊆ ℚ̄_ℓ`:
 
 * `boundedConstructible_rightDerivedLowerStar_padicIntegersRingObj_of_residueField`: for `𝒪_E`,
   the integral case `boundedConstructible_rightDerivedLowerStar_padicIntegers_of_residueField`

@@ -391,7 +391,6 @@ private theorem quotient_obstruction_zero_of_constructible
 /-- Reassembly of individual section limits over a constructible module.
 Source: Hemo--Richarz--Scholbach, Proposition 5.1, proof for constructible sheaves;
 Bhatt--Scholze, Corollary 6.1.5.
-(blueprint: lem-sp-original-integral-ordinary-quotient-compatible-limit-reassembly).
 Proof: first use finite-presentation separatedness to make the section limits
 supplied by hlocal unique, hence linear and natural. They give limits for all
 compatible sequences of morphisms into a finitely presented module. For a

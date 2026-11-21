@@ -211,7 +211,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 
 /-! # Conservativity of integral reduction
 
-Source: Bhatt--Scholze, Sections 6.7--6.8 (blueprint: lem-weil-pbc-integral-reduction-conservative).
+Source: Bhatt--Scholze, Sections 6.7--6.8.
 -/
 
 @[expose] public section
@@ -229,8 +229,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
   [FiniteDimensional ℚ_[ℓ] E]
 
 /-- Derived reduction modulo ℓ detects isomorphisms between bounded constructible
-integral complexes. Source: Bhatt--Scholze, Proposition 6.8.11(3) and derived Nakayama
-(blueprint: lem-weil-pbc-integral-reduction-conservative).
+integral complexes. Source: Bhatt--Scholze, Proposition 6.8.11(3) and derived Nakayama.
 
 Proof in words. The valuation ring of a finite normed extension is a complete discrete
 valuation ring, and ℓ is a positive power of a uniformizer times a unit. On a finite

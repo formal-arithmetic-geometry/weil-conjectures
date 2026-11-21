@@ -51,8 +51,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 /-- **Higher cohomology of pulled-back injectives on affine schemes.** Let `W` be affine and `I`
 an injective étale sheaf on `W`. Then `H^q(W_proét, ν^* I) = 0` for `q > 0`: on the affine
 pro-étale site, the Čech complexes of `ν^* I` for surjections are exact in positive degrees
-(`exactAt_overCechComplex_comparisonUpperStar`), so the Čech criterion applies.
-(blueprint: `lemma-acyclicity-pulled-back-injectives`) -/
+(`exactAt_overCechComplex_comparisonUpperStar`), so the Čech criterion applies. -/
 theorem isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar {W : Scheme.{u}}
     [IsAffine W] (I : Sheaf W.smallEtaleTopology A) [Injective I] (q : ℕ) :
     IsZero (((globalSectionsFunctor A W).rightDerived (q + 1)).obj

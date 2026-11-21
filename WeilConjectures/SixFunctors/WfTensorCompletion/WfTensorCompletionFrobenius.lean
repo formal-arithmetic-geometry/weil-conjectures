@@ -14,8 +14,7 @@ import all WeilConjectures.AlgebraicGeometry.Weil.WeilTensorProduct
 # Frobenius compatibility of ordinary and completed tensor
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors/
-sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md, step 13
-(blueprint: lem-wf-tensor-completion-frobenius).
+sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md, step 13.
 
 ## Main statements
 
@@ -51,37 +50,37 @@ variable (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
   [hqc : QuasiCompact X₀.hom] (E : Padic.FiniteCoefficientFields c.l c.Qbar)
 
 /-- The specified completed-coefficient integral category on the geometric fibre.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 abbrev Integral := PbcBoundedConstructibleComplete (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E)
 
 /-- The uniformizer is the single Koszul generator; this is the existing completion functor.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 abbrev completion := wfCompletion (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E) 1
   (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E) (wfUniformizer_generates D c E)
 
 /-- The existing completion unit, retaining its actual mapping-fibre normalization.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 abbrev unit := wfCompletionUnit (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E) 1
   (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E) (wfUniformizer_generates D c E)
 
 /-- The ordinary ambient derived tensor on the constructible inputs, with no completion.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 abbrev ordinaryAmbient : Integral D c X₀ E × Integral D c X₀ E ⥤
     PbcCompletedDerived (D.geometricFiber X₀).left (pbcStageDatum.{u} c.l c.Qbar E) :=
   ((ObjectProperty.ι _).prod (ObjectProperty.ι _)) ⋙
     wfOrdinaryDerivedTensor (D.geometricFiber X₀).left (pbcStageDatum.{u} c.l c.Qbar E)
 
 /-- The completed ambient tensor is ordinary tensor followed by the published reflector.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 abbrev completedAmbient := ordinaryAmbient D c X₀ E ⋙ completion D c X₀ E ⋙
   ObjectProperty.ι _
 
 include hsep hft hqc in
 /-- The canonical quotient/Koszul comparison is invertible and natural on integral inputs.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius).
+Source: blueprint step 13.
 Proof: use integral-stratified-perfect-characterization to identify both integral
 conventions inside the same completed-coefficient derived category. Finite type over
 k makes the fibre noetherian and finite-dimensional; separation gives qcqs and l≠p
@@ -111,30 +110,30 @@ theorem integral :
     exact (wfConstructibleTensorKoszulUnit D c X₀ E).2 MN.1 PQ.1 MN.2 PQ.2 f.1 f.2
 
 /-- Restriction of ordinary tensor to the full integral constructible category.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 def ordinary : Integral D c X₀ E × Integral D c X₀ E ⥤ Integral D c X₀ E :=
   ObjectProperty.lift _ (ordinaryAmbient D c X₀ E)
     (fun MN ↦ (integral D c X₀ E).1 MN |>.1)
 
 /-- Restriction of completed tensor to the same full integral constructible category.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 def completed : Integral D c X₀ E × Integral D c X₀ E ⥤ Integral D c X₀ E :=
   ObjectProperty.lift _ (completedAmbient D c X₀ E)
     (fun MN ↦ (integral D c X₀ E).1 MN |>.2.1)
 
 /-- The actual completion unit lifted through the full constructible inclusion.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 def chi : ordinary D c X₀ E ⟶ completed D c X₀ E where
   app MN := ObjectProperty.homMk (unit D c X₀ E ((ordinaryAmbient D c X₀ E).obj MN))
   naturality MN PQ f := ObjectProperty.hom_ext _ ((integral D c X₀ E).2 MN PQ f)
 
 /-- The integral Frobenius is the existing exact coefficient transport.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 abbrev pullback := pbcIsoIntegralPullback (D.geometricFrobenius X₀).asIso.hom
   (pbcStageDatum.{u} c.l c.Qbar E)
 
 /-- The ordinary pullback/tensor comparison restricted through the full inclusion.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 def ordinaryMu (M N : Integral D c X₀ E) :
     (pullback D c X₀ E).obj ((ordinary D c X₀ E).obj (M, N)) ≅
       (ordinary D c X₀ E).obj ((pullback D c X₀ E).obj M, (pullback D c X₀ E).obj N) :=
@@ -147,7 +146,7 @@ def ordinaryMu (M N : Integral D c X₀ E) :
       (wfTensorModel _ (pbcStageDatum.{u} c.l c.Qbar E))).app (M.obj, N.obj))
 
 /-- The existing completed comparison on the same inputs, restricted to constructibles.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 def completedMu (M N : Integral D c X₀ E) :
     (pullback D c X₀ E).obj ((completed D c X₀ E).obj (M, N)) ≅
       (completed D c X₀ E).obj ((pullback D c X₀ E).obj M, (pullback D c X₀ E).obj N) :=
@@ -165,18 +164,18 @@ def completedMu (M N : Integral D c X₀ E) :
           (wfUniformizer_generates D c E)).obj N)))
 
 /-- The actual rational constructible coefficient stage; its objects remain integral objects.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 abbrev Rational := PbcRationalCategory (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E) (pbcStageUniformizer.{u} c.l c.Qbar E)
 
 /-- The actual integral-to-rational localization, tensoring each arrow with one.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 abbrev localization := pbcRationalization (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E) (pbcStageUniformizer.{u} c.l c.Qbar E)
 
 /-- A comparison package whose normalization below fixes all its maps and objects.
 The tensor functors land in constructibles, so its fixed pairs are actual Weil objects.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 structure RationalComparison where
   ordinary : Rational D c X₀ E × Rational D c X₀ E ⥤ Rational D c X₀ E
   completed : Rational D c X₀ E × Rational D c X₀ E ⥤ Rational D c X₀ E
@@ -190,7 +189,7 @@ structure RationalComparison where
 `HEq` retains the exact object equalities while prescribing the arrows, and does not
 replace the maps by arbitrary isomorphisms. The localization equalities also fix all
 denominators by functoriality.
-Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
+Source: blueprint step 13. -/
 def RationalComparison.Normalized (R : RationalComparison D c X₀ E) : Prop :=
   ((localization D c X₀ E).prod (localization D c X₀ E)) ⋙ R.ordinary =
       WfTensorCompletion.ordinary D c X₀ E ⋙ localization D c X₀ E ∧

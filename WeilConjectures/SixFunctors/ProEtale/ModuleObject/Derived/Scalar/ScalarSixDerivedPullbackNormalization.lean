@@ -514,7 +514,6 @@ private theorem scalarSixPullHomComp
 
 Source: blueprint det-prop-scalar-six-pullback.proof.md, (1) and (3);
 Stacks, Cohomology on Sites, Tags 0G7E and 0D6D.
-(blueprint: lem-sfb-scalar-six-derived-pullback-normalization).
 
 Proof: the generic inverse-mate unit formula identifies each component of the specified
 scalarSixPullHom with the existing free-parameter scalar pullback comparison. Its

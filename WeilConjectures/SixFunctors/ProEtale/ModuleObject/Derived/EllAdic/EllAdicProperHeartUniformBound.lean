@@ -36,7 +36,6 @@ import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
 
 The finite-amplitude part of the proper heart theorem, independently of coproduct
 continuity. Source: Bhatt--Scholze, Section 6.8, and blueprint proper heart bound.
-(blueprint: lem-sfb-noetherian-proper-heart-uniform-bound)
 -/
 
 @[expose] public section
@@ -472,7 +471,7 @@ and a Noetherian base scheme (the other ℓ-adic coefficient rings follow below)
 Source: Bhatt--Scholze, Theorem 6.7.1, Lemma 6.7.2 and Remark 6.8.15;
 blueprint lemma-uniform-bound-proper-direct-image and
 proposition-proper-direct-image-constructible-complexes, integral compactness/direct-sums clause
-(1). (blueprint: lem-sfb-noetherian-proper-heart-uniform-bound)
+(1).
 
 Proof: a proper morphism is of finite type and the base is quasi-compact. A finite
 collection of affine charts bounds the dimensions of all its geometric fibres by one
@@ -506,8 +505,7 @@ theorem properLowerStar_uniformBound_continuousMapRingObj
 
 set_option linter.unusedVariables false in
 /-- The uniform proper heart bound of `properLowerStar_uniformBound_continuousMapRingObj`, for the
-coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`.
-(blueprint: lem-sfb-noetherian-proper-heart-uniform-bound) -/
+coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. -/
 theorem properLowerStar_uniformBound_padicIntegersRingObj
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
@@ -522,8 +520,7 @@ theorem properLowerStar_uniformBound_padicIntegersRingObj
 
 set_option linter.unusedVariables false in
 /-- The uniform proper heart bound of `properLowerStar_uniformBound_continuousMapRingObj`, for the
-coefficient ring `ℚ̄_ℓ`.
-(blueprint: lem-sfb-noetherian-proper-heart-uniform-bound) -/
+coefficient ring `ℚ̄_ℓ`. -/
 theorem properLowerStar_uniformBound_padicAlgClRingObj
     (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]

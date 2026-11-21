@@ -208,8 +208,7 @@ is the restricted evaluation tensor comparison followed by the two inverse
 reduction/evaluation maps. Naturality moves these comparisons inside the finite
 transpose. The assumed normalization then cancels the reduction/evaluation
 isomorphism and leaves the scalar tensor comparison. All calculations are chain
-maps, obtained degreewise from the ordinary module adjunction.
-(blueprint: lem-coef-tensor-reduction-finite-projection). -/
+maps, obtained degreewise from the ordinary module adjunction. -/
 theorem tensorReduction_finiteProjection (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

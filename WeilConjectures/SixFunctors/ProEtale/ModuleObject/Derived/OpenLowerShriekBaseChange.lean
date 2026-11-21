@@ -56,8 +56,7 @@ and `..._eq_exchangeRight` for the exchange morphism).
 
 ## Base change for extension by zero
 
-`ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'` (blueprint
-`sk-def-sfb-open-base-change`): the restrictions to `X'` and to its closed complement jointly
+`ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'`: the restrictions to `X'` and to its closed complement jointly
 reflect isomorphisms. Over `X'` the exchange morphism is an isomorphism because both extensions
 by zero are fully faithful (`CategoryTheory.Adjunction.isIso_map_exchangeLeft_app`). Over the
 closed complement both sides vanish: the square being cartesian, the complement of `X'` maps into
@@ -183,7 +182,7 @@ lemma boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft
     boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitStep' Adjunction.exchangeLeft
   rfl
 
-/-- **Base change for extension by zero** (blueprint `sk-def-sfb-open-base-change`) on bounded
+/-- **Base change for extension by zero** on bounded
 constructible complexes: for a *cartesian* square with `j` and `j'` open immersions, the exchange
 morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is an isomorphism.
 

@@ -13,8 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condense
 # Open and closed formulas for internal derived Hom
 
 Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.7.13, internal
-adjunction calculation; Stacks Project Tag 08JB
-(blueprint: def-sfb-open-closed-internal-hom-comparisons).
+adjunction calculation; Stacks Project Tag 08JB.
 
 All categories are ordinary unbounded derived categories of modules over the pulled-back
 commutative condensed coefficient ring. Support inverse image is canonically identified
@@ -40,7 +39,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The open extension/restriction adjunction, using the canonical alpha transport.
-Source: Stacks Tag 09BN (blueprint: def-sfb-open-closed-internal-hom-comparisons). -/
+Source: Stacks Tag 09BN. -/
 noncomputable def openSupportDerivedAdjunction {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     (openImmersionLowerShriek Λ j).mapDerivedCategory ⊣
@@ -52,7 +51,7 @@ noncomputable def openSupportDerivedAdjunction {U X : Scheme.{u}} (j : U ⟶ X)
 /-- Closed inverse/direct-image adjunction, both functors exact and applied termwise.
 The direct-image exactness instance is supplied by `closedSupport_lowerStarExact` for a
 complementary quasi-compact open immersion.
-Source: Stacks Tag 09AA (blueprint: def-sfb-open-closed-internal-hom-comparisons). -/
+Source: Stacks Tag 09AA. -/
 noncomputable def closedPullbackDerivedAdjunction {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [PreservesFiniteColimits (lowerStar Λ i)] :
     (supportPullback Λ i).mapDerivedCategory ⊣ (lowerStar Λ i).mapDerivedCategory :=
@@ -60,7 +59,7 @@ noncomputable def closedPullbackDerivedAdjunction {Z X : Scheme.{u}} (i : Z ⟶ 
     (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory
 
 /-- Open projection map: the adjunct of unit tensor identity followed by inverse tensor
-comparison. Source: proof step 3 (blueprint: def-sfb-open-closed-internal-hom-comparisons). -/
+comparison. Source: proof step 3. -/
 noncomputable def openSupportProjection {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (L : DerivedCategory (supportModules Λ U))
     (T : DerivedCategory (supportModules Λ X)) :
@@ -78,7 +77,7 @@ noncomputable def openSupportProjection {U X : Scheme.{u}} (j : U ⟶ X)
         ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L) T).inv)
 
 /-- Closed projection map: closed unit followed by pullback tensor comparison and closed
-counit. Source: proof step 3 (blueprint: def-sfb-open-closed-internal-hom-comparisons).
+counit. Source: proof step 3.
 Its direction uses the unit of i^* adjoint to i_*, never a nonexistent counit i_*i^* -> id. -/
 noncomputable def closedSupportProjection {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [PreservesFiniteColimits (lowerStar Λ i)]
@@ -96,7 +95,7 @@ noncomputable def closedSupportProjection {Z X : Scheme.{u}} (i : Z ⟶ X)
           ((supportPullback Λ i).mapDerivedCategory.obj T))
 
 /-- Open internal-Hom comparison determined by projection and evaluation transposes.
-Source: proof steps 9 and 11 (blueprint: def-sfb-open-closed-internal-hom-comparisons). -/
+Source: proof steps 9 and 11. -/
 noncomputable def openSupportHomMap {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (L : DerivedCategory (supportModules Λ U))
     (N : DerivedCategory (supportModules Λ X)) :
@@ -118,7 +117,7 @@ noncomputable def openSupportHomMap {U X : Scheme.{u}} (j : U ⟶ X)
             ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L)).counit.app N)))
 
 /-- Closed internal-Hom comparison using an inverse of the canonical closed projection.
-Source: proof steps 10 and 11 (blueprint: def-sfb-open-closed-internal-hom-comparisons).
+Source: proof steps 10 and 11.
 The caller supplies the inverse-direction projection map. Direct-image exactness is
 provided by the complementary quasi-compact open immersion. -/
 noncomputable def closedSupportHomMap {Z U X : Scheme.{u}}

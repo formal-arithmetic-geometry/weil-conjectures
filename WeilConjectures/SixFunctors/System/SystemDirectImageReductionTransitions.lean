@@ -106,8 +106,7 @@ private theorem quotient_transition_comparison (W : Scheme.{u}) {m n : ℕ} (h :
   exact NatTrans.congr_app (ordinary_transition_comparison l E W h) (P.X i)
 
 /-- The scalar-adjunction quotient transformation in the normalized finite presentation.
-Source: Zheng Construction 4.1 and Proposition 4.21.
-(blueprint: lem-weil-system-reduction-quotient-transitions). -/
+Source: Zheng Construction 4.1 and Proposition 4.21. -/
 def systemReductionQuotient (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :=
   coefficientQuotientNatTrans (coefficientFiniteAdjunction l E W m)
     (coefficientFiniteAdjunction l E W n) (normalizedDVRRes l E W h)
@@ -161,7 +160,6 @@ private theorem restriction_comp_change (W : Scheme.{u}) {m n : ℕ} (h : n ≤ 
 
 /-- Reduction evaluations carry actual system transitions to scalar-adjunction quotient maps.
 Source: Zheng Construction 4.1 and Proposition 4.21; Stacks 0941.
-(blueprint: lem-weil-system-reduction-quotient-transitions).
 
 Proof: compare the native and normalized ordinary transition maps on sections and
 localize that equality. The reduction unit and total-limit projection equations

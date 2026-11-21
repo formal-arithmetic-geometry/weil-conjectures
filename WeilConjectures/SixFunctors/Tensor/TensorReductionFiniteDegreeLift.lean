@@ -186,8 +186,7 @@ sequence-module map. Source: Stacks 07A4 and 0941. Transport the strict tensor c
 by the fixed tensor-tower comparison, take its degreewise limit, and transpose
 through ordinary coherent reduction. The normalized finite adjunction equations
 and cone coordinate formula identify the evaluated map. Cancel the comparison
-isomorphisms to obtain the displayed formula. This uses no flatness or boundedness.
-(blueprint: lem-coef-tensor-reduction-finite-degree-lift). -/
+isomorphisms to obtain the displayed formula. This uses no flatness or boundedness. -/
 theorem tensorReductionFiniteDegreeLift (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (i : ℤ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

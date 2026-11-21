@@ -16,8 +16,7 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 
 Source: the open and closed immersion paragraphs and the derived version of
 `literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/`
-`det-lem-int-tensor-projection.proof.md`
-(blueprint: lem-sfb-closed-immersion-derived-tensor-projection).
+`det-lem-int-tensor-projection.proof.md`.
 -/
 
 @[expose] public section
@@ -72,8 +71,7 @@ private noncomputable def supportTensorNatIso
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The closed immersion case of the relative derived projection formula.
-Source: `det-lem-int-tensor-projection.proof.md`, closed immersions and Derived version
-(blueprint: lem-sfb-closed-immersion-derived-tensor-projection).
+Source: `det-lem-int-tensor-projection.proof.md`, closed immersions and Derived version.
 
 Proof: the standing hypotheses make X Noetherian, hence its open complement of the
 closed image is quasi-compact. Apply openClosedSupportProjectionFormula to f and this

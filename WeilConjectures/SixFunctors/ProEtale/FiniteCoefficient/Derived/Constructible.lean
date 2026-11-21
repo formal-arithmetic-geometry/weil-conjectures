@@ -171,8 +171,7 @@ noncomputable def DerivedCategoryBoundedConstructible.toBounded :
 /-- Blueprint `def-weil-constructible-intervals`: Constructible cohomological intervals.
 
 Membership in `D_c^[a, b](X, A)` as an object property of `D(X_proét)`: bounded
-constructible with homology concentrated in `[a, b]` (blueprint
-`def-weil-constructible-intervals`). -/
+constructible with homology concentrated in `[a, b]`. -/
 noncomputable def DerivedCategory.constructibleIn (a b : ℤ) :
     ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
   DerivedCategory.boundedConstructible A X ⊓ _root_.DerivedCategory.homologyConcentratedIn a b

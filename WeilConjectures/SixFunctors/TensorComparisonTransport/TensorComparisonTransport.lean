@@ -21,8 +21,7 @@ private theorem mkHom_comp {C D : Type*} [Category C] [Category D]
 
 /-- Tensor-composition coherence is invariant under compatible isomorphisms of the
 three pullback functors and their tensor comparisons.
-Source: naturality and categorical cancellation, Stacks 07A4 and 07A7
-(blueprint: lem-sf-tensor-comparison-transport).
+Source: naturality and categorical cancellation, Stacks 07A4 and 07A7.
 Proof: whisker the first two functor isomorphisms to obtain D : F⋙G ≅ F'⋙G'.
 Naturality of the second tensor comparison, the two individual comparison squares,
 and naturality of the second functor isomorphism give the composite comparison square.

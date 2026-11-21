@@ -84,7 +84,6 @@ set_option linter.unusedVariables false in
 /-- Gluing of compatible lifts through the ordinary quotient tower.
 
 Source: Hemo--Richarz--Scholbach, Theorem 7.7; Bhatt--Scholze, Section 6.1.
-(blueprint: lem-sp-original-integral-ordinary-quotient-compatible-limit).
 
 The hypothesis supplies agreement of all later integral maps with a_n modulo
 ell^(n+1). The caller derives this by telescoping consecutive differences.

@@ -11,7 +11,6 @@ import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryT
 /-! # The ordinary module tensor square for a coefficient change
 
 Source: Stacks Project, Tags 03EL and 07A4.
-(blueprint: lem-sf-scalar-pull-coefficient-module-tensor).
 -/
 
 @[expose] public noncomputable section
@@ -160,7 +159,6 @@ private theorem geometric_tensor_unit {U V : Scheme.{u}} (g : U ⟶ V)
 /-- Scalar extension and geometric pullback respect the normalized ordinary tensor maps.
 
 Source: Stacks 03EL, the tensor universal property under the module adjunctions.
-(blueprint: lem-sf-scalar-pull-coefficient-module-tensor).
 
 Proof: the unit identity for uniqueness of left adjoints shows that the comparison
 carries the successive scalar and geometric units to the units in the other order.

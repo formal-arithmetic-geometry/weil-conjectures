@@ -24,7 +24,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Cons
 # The exceptional inverse image on `Loc(Dᵇc)`, `ℓ`-adic coefficients
 
 Let `Λ` be a commutative condensed ring. For a scheme `X` the localizing closure
-`Loc(Dᵇc(X)⟦Λ⟧)` (blueprint `definition-localizing-subcategory`) is the smallest triangulated
+`Loc(Dᵇc(X)⟦Λ⟧)` is the smallest triangulated
 subcategory of `D(X_proét, Λ_X)` (module objects over `Λ_X = p_X^* Λ`) containing the bounded
 constructible complexes `Dᵇc(X)⟦Λ⟧` and closed under direct sums
 (`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`). For the `ℓ`-adic
@@ -35,7 +35,7 @@ For a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f : X ⟶ Y` such that 
 `Loc(Dᵇc(X)⟦Λ⟧)` into `Loc(Dᵇc(Y)⟦Λ⟧)`, its restriction is the functor
 `Rf_! : Loc(Dᵇc(X)⟦Λ⟧) ⥤ Loc(Dᵇc(Y)⟦Λ⟧)`
 (`AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriekLocalizing`). Under the
-hypotheses of Brown representability (blueprint `lemma-hypotheses-brown-representability`) and the
+hypotheses of Brown representability and the
 properties of `Rf_!(c)` of blueprint `proposition-construction-independence-rf-shriek`, it has an
 exact right adjoint `f^!`, which preserves direct sums and is unique up to unique isomorphism
 (`AlgebraicGeometry.ProEtale.CondensedRing.exists_rightAdjoint_rightDerivedLowerShriekLocalizing`,
@@ -146,8 +146,7 @@ noncomputable abbrev rightDerivedLowerShriekLocalizing :
     LocalizingBoundedConstructible Λ X ⥤ LocalizingBoundedConstructible Λ Y :=
   ObjectProperty.localizingClosureLift _ _ (rightDerivedLowerShriekOfCompactification Λ c) hc.1
 
-/-- `Rf_!` on the localizing closures preserves direct sums (blueprint
-`proposition-construction-independence-rf-shriek`). -/
+/-- `Rf_!` on the localizing closures preserves direct sums. -/
 instance (J : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete J) (rightDerivedLowerShriekLocalizing hc) :=
   have := hc.2.2 J
@@ -155,8 +154,7 @@ instance (J : Type (u + 1)) :
 
 omit [IsCommMonObj Λ] in
 /-- Blueprint `theorem-existence-exceptional-inverse-image`, uniformly in the coefficient ring `Λ`:
-if `Dᵇc(X)⟦Λ⟧` and `Dᵇc(Y)⟦Λ⟧` compactly generate their localizing closures (blueprint
-`lemma-hypotheses-brown-representability`) and `Rf_!(c)⟦Λ⟧` has the properties of blueprint
+if `Dᵇc(X)⟦Λ⟧` and `Dᵇc(Y)⟦Λ⟧` compactly generate their localizing closures and `Rf_!(c)⟦Λ⟧` has the properties of blueprint
 `proposition-construction-independence-rf-shriek`, then the coproduct-preserving functor
 `Rf_! : Loc(Dᵇc(X)⟦Λ⟧) ⥤ Loc(Dᵇc(Y)⟦Λ⟧)` has a right adjoint `f^!`, which commutes with shifts
 compatibly with the adjunction, is exact (triangulated), preserves direct sums and is unique up
@@ -297,9 +295,8 @@ theorem boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj {U 
 
 /-- The properties of the derived direct image `Rp_*` along a proper morphism `p` used in
 blueprint `proposition-construction-independence-rf-shriek`: it maps `Dᵇc(Z)⟦Λ⟧` into `Dᵇc(Y)⟦Λ⟧`
-(blueprint `proposition-proper-direct-image-constructible-complexes`) and its restriction to
-`Loc(Dᵇc(Z)⟦Λ⟧)` preserves direct sums (blueprint
-`proposition-proper-direct-image-extension-zero`). -/
+ and its restriction to
+`Loc(Dᵇc(Z)⟦Λ⟧)` preserves direct sums. -/
 def ProperLowerStarHypotheses {Z Y : Scheme.{u}} (p : Z ⟶ Y) : Prop :=
   (∀ K, boundedConstructible (condensedRingObj Λ Z) K →
     boundedConstructible (condensedRingObj Λ Y) ((R((p)_*⟦Λ⟧)).obj K)) ∧

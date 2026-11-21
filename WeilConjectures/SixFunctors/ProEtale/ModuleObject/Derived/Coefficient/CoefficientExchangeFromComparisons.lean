@@ -184,8 +184,7 @@ private theorem comparison_exchange
 
 attribute [local semireducible] residueExchangeUpperStar residueExchangeLowerStar in
 /-- Coherent coefficient comparisons identify the three specified exchange factors.
-Source: Mathlib adjunction restriction and mates; the specified exchange definitions
-(blueprint: lem-weil-pbc-coefficient-exchange-from-comparisons).
+Source: Mathlib adjunction restriction and mates; the specified exchange definitions.
 
 Proof in words. The continuous-function condensed ring of B is killed by ell.
 The finite-type separated hypotheses imply that f and f-prime are qcqs.

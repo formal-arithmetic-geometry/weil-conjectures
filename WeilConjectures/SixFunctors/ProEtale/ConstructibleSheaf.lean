@@ -122,7 +122,7 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 # Constructible sheaves on the small pro-étale site
 
 This file defines the intrinsic notion of constructibility of sheaves of `Λ`-modules on the
-small pro-étale site of a scheme `X` (blueprint `definition-constructible-sheaves`): a
+small pro-étale site of a scheme `X`: a
 sheaf is constructible if, on the strata of a stratification of `X`, it is locally constant with
 finitely generated stalks. Locally constant with finitely generated stalks means that the
 pullbacks along the members of a pro-étale covering family are constant sheaves of finitely

@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 
 Source: Stacks Project, Tag 0942, proof of lemma-bounded (1); Modules on Sites,
 Tags 03EK and 03ER.
-(blueprint: lem-sf-strict-dvr-flat-tensor-sequence)
 -/
 
 @[expose] public noncomputable section
@@ -281,7 +280,6 @@ unrestricted reduction complexes and their prescribed quotient chain transitions
 
 Source: Stacks Project, Tag 0942, proof of lemma-bounded (1); Modules on Sites,
 Tags 03EK, 03ER and 03EO.
-(blueprint: lem-sf-strict-dvr-flat-tensor-sequence)
 
 Proof: Write C_m for strictDvrFiniteCoefficient m and let T_m be the functor
 C_m tensor -. Its value on P^j is canonically isomorphic to the restriction of

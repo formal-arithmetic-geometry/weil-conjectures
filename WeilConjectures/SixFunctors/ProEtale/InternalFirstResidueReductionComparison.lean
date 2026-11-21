@@ -167,7 +167,6 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- The two first derived residue functors are naturally isomorphic after a residue
 coefficient isomorphism. There is no finiteness condition on the scheme or on the input complex.
 Source: integral-models proof (1)--(2), Stacks Tags 099L and 08FZ.
-(auxiliary; not a blueprint node).
 
 Proof: put A = O_E and k = A/(pi). The constant-to-continuous map on k is an
 isomorphism: a continuous function to the finite discrete ring k is constant on the

@@ -29,7 +29,6 @@ complexes (`AlgebraicGeometry.ProEtale.nativeOrdinaryKFlat_adicUpperStar`).
 The proof transports the question along the monoidal equivalence between `ℓ`-adic sheaves and
 module objects over a ring object in abelian pro-étale sheaves, where pullback preserves
 K-flatness (`preservesKFlatComplexes_mapMod_proEtale`).
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section

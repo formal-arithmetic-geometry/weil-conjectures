@@ -124,7 +124,6 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 /-! # Normalizing the scalar-extension adjunction for a supplied direct image
 
 Source: Stacks Project, Modules on Sites, Tag 03D7.
-(blueprint: lem-sfb-supplied-tensor-adjunction-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -220,7 +219,6 @@ private theorem suppliedTensor_mate_linear_iff
 /-- Scalar extension is adjoint to the supplied module direct image, with the underlying
 Hom bijection fixed by the canonical insertion.
 Source: Stacks Project, Modules on Sites, Tag 03D7.
-(blueprint: lem-sfb-supplied-tensor-adjunction-normalization).
 
 Proof: the geometric sheaf Hom bijection identifies additive and scalar-linear maps
 on both sides, using the structural ring-map equality and the supplied direct-image
@@ -328,7 +326,6 @@ private theorem privateSuppliedTensorAdjunction_normalized
 /-- The scalar-extension normalization is unchanged by a specified presentation of
 its objects and maps.
 Source: Stacks Project, Modules on Sites, Tag 03D7.
-(blueprint: lem-sfb-supplied-tensor-adjunction-normalization).
 
 Proof: identify the supplied pullback with the literal scalar-extension functor
 using its object and map equations. Transport the normalized adjunction through

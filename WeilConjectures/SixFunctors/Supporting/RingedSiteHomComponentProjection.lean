@@ -74,7 +74,7 @@ public import WeilConjectures.Algebra.Homology.HomTensorDegreewiseEquation
 
 /-! # Compatibility of the coefficient Hom projection presentations
 
-Source: Stacks Project, Tag 0A8X (blueprint: lem-sfb-ringed-site-duality-maps).
+Source: Stacks Project, Tag 0A8X.
 The compatibility is checked separately so clients can use the projection API
 without unfolding the Hom-complex existence specification at each use.
 -/
@@ -86,7 +86,7 @@ open CategoryTheory
 namespace WeilConjectures
 
 /-- The coefficient component is the named product projection of the same Hom complex.
-Source: Stacks 0A8X (blueprint: lem-sfb-ringed-site-duality-maps).
+Source: Stacks 0A8X.
 Proof: unfold the projection definitions. The existence specifications select the same
 projection family by proof irrelevance. -/
 theorem coefficientHomComponent_eq_homComplexπ

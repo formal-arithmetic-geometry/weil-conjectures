@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingO
 /-! # Cohomology of ordinary pullback and finite integral reduction
 
 Source: Stacks Project, Tags 06YY and 0735; Bhatt--Scholze, Lemma 6.5.8.
-(blueprint: lem-fix-ordinary-integral-reduction-homology).
 -/
 
 @[expose] public section
@@ -134,7 +133,6 @@ of the original finite reduction. No derived completion occurs.
 Source: Stacks Project, Tags 06YY (derived tensor pullback) and 0735 (exact pullback
 and cohomology); Bhatt--Scholze, Lemma 6.5.8. This is the finite-reduction part of
 step 3 of lem-fix-constructible-residue-tree.
-(blueprint: lem-fix-ordinary-integral-reduction-homology).
 
 Proof: choose a flat-term K-flat representative P of K. The projection equations
 for ordinaryIntegralDirectRingMap give the commutative square of completed and

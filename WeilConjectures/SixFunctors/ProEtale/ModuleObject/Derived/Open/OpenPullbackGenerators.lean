@@ -15,7 +15,6 @@ public import WeilConjectures.CategoryTheory.SixFunctors.Monoidal
 
 Source: blueprint main-20261015, proposition-composition-open-restriction-compactifications-f, proof
 step 3; sk-prop-proper-base-change-unbounded-pullback, proof steps 1--5.
-(blueprint: lem-sfb-open-pullback-generators)
 -/
 
 @[expose] public section
@@ -159,7 +158,6 @@ generators for every admissible condensed coefficient, including coefficients gi
 ring-object isomorphism.
 Source: blueprint proposition-composition-open-restriction-compactifications-f, proof step 3; the
 inverse-image localizing argument of sk-prop-proper-base-change-unbounded-pullback.
-(blueprint: lem-sfb-open-pullback-generators).
 
 Proof: Give U its structure morphism j followed by the structure morphism of X. These
 schemes are qcqs: X is separated of finite type over a field, and j is quasi-compact open.

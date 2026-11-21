@@ -43,8 +43,7 @@ preserving functor on Loc(Dbc), carries Dbc into Dbc, and has normalized compact
 composition and base-change isomorphisms, restricting to those same constructible objects.
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-int-brown,
-sk-prop-int-brown-construction.md and its proof
-(blueprint: proposition-construction-independence-rf-shriek).
+sk-prop-int-brown-construction.md and its proof.
 
 Proof plan:
 1. Standing schemes are qcqs, since they are separated and finite type over k.

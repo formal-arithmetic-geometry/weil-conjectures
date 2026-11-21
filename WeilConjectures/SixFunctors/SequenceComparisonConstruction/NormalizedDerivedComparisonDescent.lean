@@ -14,7 +14,6 @@ public import Mathlib.CategoryTheory.Whiskering
 
 Source: Stacks 06YY and 0D6D; the complete generic proof from
 IntegralComparisonSequenceSystems.
-(blueprint: lem-sf-normalized-derived-comparison-descent).
 -/
 
 @[expose] public noncomputable section
@@ -68,8 +67,7 @@ private theorem isIso_on_resolution
 universe g h wA wB wC wD
 
 /-- Unique derived comparison from a normalized comparison on resolving representatives.
-Source: Stacks 06YY and 0D6D
-(blueprint: lem-sf-normalized-derived-comparison-descent).
+Source: Stacks 06YY and 0D6D.
 Proof: form alpha and beta into the same cochain target using the exact functor
 factorizations and the ordinary comparison. The first counit makes beta invertible
 on the resolving class. The second makes alpha invertible on the good subclass.

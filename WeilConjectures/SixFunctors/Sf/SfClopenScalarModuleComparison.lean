@@ -9,7 +9,6 @@ import all WeilConjectures.SixFunctors.Sf.SfClopenScalarRawRestrictionComparison
 import all WeilConjectures.Algebra.Homology.QuotientIsoTransport.RingIsoQuotientSystemTransport
 /-! # Ordinary scalar extension comparison on a clopen component
 Source: Stacks Project, sites-cohomology.tex, Tag 06YY.
-(blueprint: lem-sf-clopen-scalar-module-comparison).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -126,7 +125,6 @@ attribute [local irreducible] sfScalarModelIso ordinaryScalarSquare
 
 Source: Stacks Project, sites-modules.tex, Tags 03EL and 03CY;
 sites-cohomology.tex, Tag 06YY.
-(blueprint: lem-sf-clopen-scalar-module-comparison).
 
 Proof: first use cocontinuity of the open-site inclusion to compare the sheafifications
 of the restricted tensor presheaf. Transport this comparison through the object and map

@@ -31,8 +31,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 /-! # Finite free cohomology and projective split models
 
 Source: Stacks Project, proetale.tex, Tag 09C3, generator lifting in the proof of
-lemma-local-structure-constructible-complex; derived.tex, Tag 064B
-(blueprint: lem-sf-projective-cohomology-split-model).
+lemma-local-structure-constructible-complex; derived.tex, Tag 064B.
 
 The zero-differential model and its summand inclusions are explicit constructions.
 The cohomology map and its generator-section map use the canonical single-complex
@@ -54,15 +53,13 @@ variable {U : Scheme.{u}}
     (C : Sheaf (Scheme.ProEt.topology U) CommRingCat.{max (u + 1) v})
 
 /-- The coefficient ring sheaf, forgetting only commutativity.
-Source: Stacks 09C3, module sheaves over the coefficient sheaf
-(blueprint: lem-sf-projective-cohomology-split-model). -/
+Source: Stacks 09C3, module sheaves over the coefficient sheaf. -/
 def sfSplitRings : Sheaf (Scheme.ProEt.topology U) RingCat.{max (u + 1) v} :=
   (sheafCompose (Scheme.ProEt.topology U)
     (forget₂ CommRingCat.{max (u + 1) v} RingCat.{max (u + 1) v})).obj C
 
 /-- The prescribed zero-differential complex: finite free terms in `[a,b]`, zero elsewhere.
-Source: Stacks 09C3, simultaneous generator lifting in the proof
-(blueprint: lem-sf-projective-cohomology-split-model). -/
+Source: Stacks 09C3, simultaneous generator lifting in the proof. -/
 def sfSplitComplex (a b : ℤ) (r : ℤ → ℕ) :
     CochainComplex (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C)) ℤ where
   X q := if a ≤ q ∧ q ≤ b then
@@ -70,8 +67,7 @@ def sfSplitComplex (a b : ℤ) (r : ℤ → ℕ) :
   d _ _ := 0
 
 /-- The actual inclusion of the degree-`q` summand in the zero-differential model.
-Source: Stacks 09C3, identification of the lifted top cell
-(blueprint: lem-sf-projective-cohomology-split-model). -/
+Source: Stacks 09C3, identification of the lifted top cell. -/
 def sfSplitCell (a b : ℤ) (r : ℤ → ℕ) (q : ℤ) (hq : a ≤ q ∧ q ≤ b) :
     (CochainComplex.singleFunctor
       (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C)) q).obj
@@ -85,8 +81,7 @@ variable [HasDerivedCategory.{w} (ringedSiteModules.{max (u + 1) v} (sfSplitRing
 
 /-- The cohomology map of an arrow from a finite free sheaf placed in degree `q`.
 The single complex in degree `q` is the model for `C^r[-q]`.
-Source: Stacks 064B and the generator calculation in Stacks 09C3
-(blueprint: lem-sf-projective-cohomology-split-model). -/
+Source: Stacks 064B and the generator calculation in Stacks 09C3. -/
 def sfFreeCohomologyMap (q : ℤ) (r : ℕ)
     {A : DerivedCategory (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C))}
     (f : DerivedCategory.Q.obj
@@ -101,8 +96,7 @@ def sfFreeCohomologyMap (q : ℤ) (r : ℕ)
     (DerivedCategory.homologyFunctor _ q).map f
 
 /-- Send a derived arrow to the images of the standard generators in `H^q(A)(U)`.
-Source: Stacks 09C3, lifting the sections `rho(e_s)`, and Stacks 064B
-(blueprint: lem-sf-projective-cohomology-split-model). -/
+Source: Stacks 09C3, lifting the sections `rho(e_s)`, and Stacks 064B. -/
 def sfShiftedFreeGeneratorMap (q : ℤ) (r : ℕ)
     (A : DerivedCategory (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C)))
     (f : DerivedCategory.Q.obj
@@ -304,8 +298,7 @@ private def sfFreeSectionsEquiv
 
 /-- Bounded-above projective module complexes represent all derived maps, with equality
 exactly chain homotopy (`f-g = dh+hd` in Mathlib's Homotopy convention).
-Source: Stacks 064B, lemma-morphisms-from-projective-complex
-(blueprint: lem-sf-projective-cohomology-split-model).
+Source: Stacks 064B, lemma-morphisms-from-projective-complex.
 
 Proof: Apply lem-sc-bounded-above-projective-kprojective to P and its bound d.
 Then lem-coef-kprojective-derived-hom-bijection identifies homotopy-category maps
@@ -441,8 +434,7 @@ attribute [local irreducible] sfAssembledMap
 
 /-- Prescribed finite free cohomology gives a chain quasi-isomorphism from its split model;
 any derived arrow inducing the top prescribed isomorphism is its top-cell inclusion.
-Source: Stacks 09C3, generator lifting, expanded degreewise; Stacks 064B
-(blueprint: lem-sf-projective-cohomology-split-model).
+Source: Stacks 09C3, generator lifting, expanded degreewise; Stacks 064B.
 
 Proof:
 1. The exact forgetful functor to abelian sheaves preserves epimorphisms
@@ -559,8 +551,7 @@ theorem sf_projective_cohomology_split_model
       (hf.trans (hθ b ⟨hab, le_rfl⟩).symm)
 
 /-- The specified generator-section map is bijective, naturally in the derived target.
-Source: Stacks 064B; Stacks 09C3, lifting `rho(e_s)`
-(blueprint: lem-sf-projective-cohomology-split-model).
+Source: Stacks 064B; Stacks 09C3, lifting `rho(e_s)`.
 
 Proof: Steps 1--2 of sf_projective_cohomology_split_model make each finite free term
 projective. Its derived maps are computed by cohomology using the canonical truncation

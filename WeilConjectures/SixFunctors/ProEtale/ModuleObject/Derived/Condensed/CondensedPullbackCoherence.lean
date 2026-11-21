@@ -14,8 +14,7 @@ public import WeilConjectures.Topology.ProfiniteCondensedRing
 /-! # Coherence of native condensed derived pullback comparisons
 
 Source: literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/
-lem-fix-weil-operations.proof.md, paragraphs 2–3
-(blueprint: lem-fix-condensed-pullback-coherence).
+lem-fix-weil-operations.proof.md, paragraphs 2–3.
 
 The native compositor, its associativity and unit laws, and its tensor and coefficient-unit
 compatibilities already exist upstream. This module proves the remaining explicit square
@@ -70,8 +69,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 -- Instantiating the native coherence equations unifies large derived pullback objects.
 /-- Horizontal pasting of scheme squares gives the pasted native pullback comparison.
 
-Source: the cited blueprint proof, paragraphs 2–3
-(blueprint: lem-fix-condensed-pullback-coherence).
+Source: the cited blueprint proof, paragraphs 2–3.
 Proof: expand all three square comparisons as inverse compositor, equality transport,
 and compositor. The associativity equation `leftDerivedUpperStarComp_assoc_app` identifies
 the two three-edge expansions. Naturality moves equality transport past a compositor.

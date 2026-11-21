@@ -300,7 +300,6 @@ private theorem restrictionAll_open_isIso (R : Coefficients.{u})
 
 /-- The inner canonical refinement map commutes with the open and proper scalar mates.
 Source: Stacks 03DI, 0F7B, 0F7I, 07A6; Zheng 5.13--5.15.
-(blueprint: lem-sf-refinement-open-scalar-square).
 
 Proof: transpose the asserted equation under the S-open adjunction for d.i.
 The transpose of refinementOpenMap is the c.i-open unit followed by the inverse

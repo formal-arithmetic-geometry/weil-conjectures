@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.Adjunction.ProperBaseChange.CoefficientExc
 /-! # Adjunction algebra for reduction of the exchange arrow
 
 Source: Bhatt--Scholze, Remark 6.8.15, and the calculus of adjunction mates.
-(blueprint: lem-weil-pbc-integral-residue-exchange-algebra)
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -106,7 +105,6 @@ private theorem pull_square (sq : CommSq g' f' f g)
 /-- Coherent reduction pull comparisons transport the actual ambient exchange arrow.
 
 Source: Bhatt--Scholze, Remark 6.8.15, and Mathlib's adjunction mates.
-(blueprint: lem-weil-pbc-integral-residue-exchange-algebra)
 
 Proof. The composition equations for the two paths around the scheme square imply
 its coefficient pull cube, after cancellation of the first composition isomorphism.

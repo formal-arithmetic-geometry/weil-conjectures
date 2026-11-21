@@ -23,7 +23,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 /-- Canonical derived direct-image associativity.
 Source: blueprint composition isomorphism; Canonicity and associativity;
 Stacks Tags 08BJ, 070I, 070Y and 0D6E.
-(blueprint: lem-sfb-derived-direct-image-associativity).
 
 Proof: Choose a K-injective resolution I of the input. Exact inverse image is left adjoint to
 each direct image, so each intermediate direct image of I is K-injective. The universal

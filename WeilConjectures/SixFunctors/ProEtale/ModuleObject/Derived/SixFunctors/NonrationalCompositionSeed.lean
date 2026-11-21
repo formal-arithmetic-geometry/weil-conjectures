@@ -18,7 +18,7 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 # One compactification model for nonrational lower-shriek composition
 
 Source: blueprint main-20261015, sk-thm-sf-comp-composition.proof.md,
-"The composition isomorphism" (blueprint: lem-sfb-nonrational-composition-seed).
+"The composition isomorphism".
 -/
 
 @[expose] public section
@@ -128,7 +128,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 with other triples is asserted here. The preservation arguments only type the restrictions.
 
 Source: blueprint main-20261015, sk-thm-sf-comp-composition.proof.md,
-"The composition isomorphism" (blueprint: lem-sfb-nonrational-composition-seed).
+"The composition isomorphism".
 
 Proof: Choose dense compactifications f = pj and g = qi by Nagata, then compactify ip as ru.
 The pair (u ∘ j, q ∘ r) compactifies g ∘ f: open immersions and proper maps compose,

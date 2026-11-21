@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 /-! # Comparing discrete quotient coefficients after internal realization
 
 Source: integral-models proof (1), Stacks Tags 00YV and 099I.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -243,7 +242,6 @@ private theorem smallIso_naturality (X : Scheme.{u})
 /-- Discrete quotient coefficients commute with the actual internal realization.
 
 Source: integral-models proof (1); Stacks Tags 00YV and 099I.
-(auxiliary; not a blueprint node).
 
 Proof: the monoidal constant-sheaf/inverse-image comparison identifies the pullback
 of the underlying abelian ring of the discrete constant sheaf of A with the

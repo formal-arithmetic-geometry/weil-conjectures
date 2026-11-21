@@ -31,12 +31,11 @@ public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 /-! # Ramified identification of finite pullback towers
 
 Source: Stacks Project, Tags 093M, 03EK and 03EL; Bhatt--Scholze, Lemma 6.8.2(1).
-(blueprint: lem-weil-ramified-pullback-tower-identification).
 
 Level n means positive exponent n+1. All scalar extensions below are the existing
 sheafified balanced tensor, applied termwise, without a flatness hypothesis.
 
-(blueprint: def-weil-ramified-pullback-tower-data).
+.
 -/
 
 @[expose] public noncomputable section
@@ -53,20 +52,20 @@ open scoped ChangeOfRings
 namespace WeilConjectures.RamifiedPullback
 
 /-- The existing ring-sheaf forgetful operation at the actual site sizes.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 03EK. -/
 abbrev ring {W : Scheme.{t}} (R : Sheaf (Scheme.ProEt.topology W)
     CommRingCat.{max u (t + 1)}) :=
   (sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R
 
 /-- Module sheaves in the common coefficient universe; the site is unchanged.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 03EK. -/
 abbrev Mod {W : Scheme.{t}} (R : Sheaf (Scheme.ProEt.topology W)
     CommRingCat.{max u (t + 1)}) := SheafOfModules.{max u (t + 1)} (ring.{t, u} R)
 
 set_option linter.defProp false in
 /-- The existing canonical tensor witness, with standard derived localizations.
 Only its ordinary functor is used here.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 03EK. -/
 def scalarWitness {W : Scheme.{t}}
     {R S : Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}} (c : R ⟶ S) :=
   letI := HasDerivedCategory.standard (Mod.{t, u} R)
@@ -74,26 +73,26 @@ def scalarWitness {W : Scheme.{t}}
   SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{_, max u (t + 1), t + 1, t} c
 
 /-- Ordinary scalar extension, with exactly the existing tensor objects and maps.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 03EK. -/
 def scalar {W : Scheme.{t}}
     {R S : Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}} (c : R ⟶ S) :
     Mod.{t, u} R ⥤ Mod.{t, u} S := (scalarWitness.{t, u} c).choose
 
 /-- Additivity from the existing tensor witness.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 03EK. -/
 instance scalar_additive {W : Scheme.{t}}
     {R S : Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}} (c : R ⟶ S) :
     (scalar.{t, u} c).Additive :=
   (scalarWitness.{t, u} c).choose_spec.choose_spec.choose_spec.choose
 
 /-- Termwise ordinary scalar extension on all cochain complexes.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 03EK. -/
 abbrev scalarCx {W : Scheme.{t}}
     {R S : Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}} (c : R ⟶ S) :=
   (scalar.{t, u} c).mapHomologicalComplex (.up ℤ)
 
 /-- The local tensor s⊗x, with the target scalar written first as in Mathlib.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 03EK. -/
 def tensor {W : Scheme.{t}}
     {R S : Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}} (c : R ⟶ S)
     (M : Mod.{t, u} R) (U : W.ProEtᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
@@ -104,7 +103,7 @@ def tensor {W : Scheme.{t}}
         (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x))
 
 /-- Constant sheafification of a quotient coefficient homomorphism.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 03EK. -/
 def constantMap (W : Scheme.{t}) {A B : Type u} [CommRing A] [CommRing B]
     (f : A →+* B) :
     (constantSheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}).obj
@@ -116,14 +115,14 @@ def constantMap (W : Scheme.{t}) {A B : Type u} [CommRing A] [CommRing B]
       (f.comp (ULift.ringEquiv : ULift.{t + 1} A ≃+* A).toRingHom)))
 
 /-- The zero-based index of the e-subsequence.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 03EK. -/
 def index (e n : ℕ) : ℕ := e * (n + 1) - 1
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- A finite coefficient sheaf as a module over its actual completed ring.
-Source: Stacks 093M (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 093M. -/
 abbrev coefficientModule (W : Scheme.{t}) (n : ℕ) :
     integralTowerModules l E W :=
   (SheafOfModules.restrictScalars
@@ -132,7 +131,7 @@ abbrev coefficientModule (W : Scheme.{t}) (n : ℕ) :
         (SheafOfModules.unit (ring (integralCoefficientCommRingSheaf l E W n)))
 
 /-- Composite transition in the specified pullback tower, including equal indices.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 03EK. -/
 def transition {X Y : Scheme.{t}} (g : X ⟶ Y) (a b : ℕ) (h : a ≤ b)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     (integralOperationsPullbackLevel l E g b).obj P ⟶
@@ -140,7 +139,7 @@ def transition {X Y : Scheme.{t}} (g : X ⟶ Y) (a b : ℕ) (h : a ≤ b)
   ((integralOperationsPullbackTowerFunctor l E g).obj P).map (homOfLE h).op
 
 /-- The local section ((g⁻¹(p⊗a))⊗b), using the actual pullback adjunction unit.
-Source: Stacks 03EL (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 03EL. -/
 def pullTensor {X Y : Scheme.{t}} (g : X ⟶ Y) (n : ℕ)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ) (V : Y.ProEt)
     (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj (op V))
@@ -159,7 +158,7 @@ variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L
   (ι : E →ₐ[ℚ_[l]] L)
 
 /-- The ramified quotient map on the already recorded coefficient sheaves.
-Source: Stacks 03EK (blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 03EK. -/
 def ramifiedMap (W : Scheme.{t}) (e n : ℕ)
     (j : Padic.coefficientExtensionRing l E (n + 1) →+*
       Padic.coefficientExtensionRing l L (index e n + 1)) :
@@ -168,8 +167,7 @@ def ramifiedMap (W : Scheme.{t}) (e n : ℕ)
 
 /-- Normalized coefficient identification on one of the two small pro-etale sites.
 The maps are fixed by inclusion, the actual completed projections, and pure tensors.
-Source: Stacks 093M and 03EK
-(blueprint: lem-weil-ramified-pullback-tower-identification). -/
+Source: Stacks 093M and 03EK. -/
 structure Coefficients (e : ℕ)
     (j : ∀ n : ℕ, Padic.coefficientExtensionRing l E (n + 1) →+*
       Padic.coefficientExtensionRing l L (index e n + 1)) (W : Scheme.{t}) where

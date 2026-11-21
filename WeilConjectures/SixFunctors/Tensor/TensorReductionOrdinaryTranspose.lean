@@ -113,8 +113,7 @@ StrictTensorAugmentation.coordinates on pure generators. Tensor sheafification
 and total-summand injections give equality of each product projection; product
 extensionality gives the first coordinate, and both shifted coordinates vanish.
 The two-coordinate mapping-cocone extensionality theorem proves the equality.
-The zero complex, empty site and positive exponent one use these same equations.
-(blueprint: lem-coef-tensor-reduction-ordinary-transpose). -/
+The zero complex, empty site and positive exponent one use these same equations. -/
 theorem tensorReduction_ordinaryTranspose (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

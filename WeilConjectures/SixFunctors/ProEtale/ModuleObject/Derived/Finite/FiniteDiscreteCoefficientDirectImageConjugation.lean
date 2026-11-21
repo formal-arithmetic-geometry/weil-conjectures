@@ -39,8 +39,7 @@ variable (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
 
 /-- The explicit finite coefficient equivalences conjugate bounded-below direct image.
-Source: Bhatt--Scholze, Lemmas 5.4.1 and 5.4.3; Stacks Project, Tag 099R
-(blueprint: lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation).
+Source: Bhatt--Scholze, Lemmas 5.4.1 and 5.4.3; Stacks Project, Tag 099R.
 
 Proof in words. Expand the common coefficient equivalence into the sectionwise module
 encoding and the inverse of the constant-ring restriction equivalence. Sectionwise

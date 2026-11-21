@@ -57,8 +57,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 # Formal closed support for arbitrary condensed rings
 
 Source: Weil blueprint, sec-smooth-purity/sk-prop-sf-localization,
-sk-lem-formal-closed-support-adjunction, clauses (1)--(4)
-(blueprint: lemma-sections-support-closed-subscheme).
+sk-lem-formal-closed-support-adjunction, clauses (1)--(4).
 
 The inverse coefficient comparison is used to transport the module action. In particular
 no commutativity, constructibility or boundedness hypothesis is imposed.
@@ -78,54 +77,51 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
 
 /-- Modules over the actual pulled-back coefficient ring, including noncommutative rings.
-Source: blueprint opening paragraph (blueprint: lemma-sections-support-closed-subscheme). -/
+Source: blueprint opening paragraph. -/
 abbrev FormalSupportModules (X : Scheme.{u}) :=
   Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
 
 /-- The module category is Grothendieck abelian without a commutativity hypothesis.
-Source: blueprint proof Step 6 (blueprint: lemma-sections-support-closed-subscheme). -/
+Source: blueprint proof Step 6. -/
 instance formalSupportModules_grothendieck (X : Scheme.{u}) :
     IsGrothendieckAbelian.{u + 1} (FormalSupportModules Λ X) :=
   Mod.isGrothendieckAbelian.{u + 1} (condensedRingObj Λ X)
 
 /-- Inverse image followed by transport of the action along the canonical coefficient iso.
-Source: blueprint opening paragraph and proof Steps 1--2
-(blueprint: lemma-sections-support-closed-subscheme). -/
+Source: blueprint opening paragraph and proof Steps 1--2. -/
 def formalSupportPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     FormalSupportModules Λ Y ⥤ FormalSupportModules Λ X :=
   (ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y) ⋙
     (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ f)).inverse
 
 /-- The canonical module adjunction, obtained by lifting the sheaf adjunction and
-transporting scalars. Source: blueprint proof Step 2
-(blueprint: lemma-sections-support-closed-subscheme). -/
+transporting scalars. Source: blueprint proof Step 2. -/
 abbrev formalSupportPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     formalSupportPullback Λ f ⊣ lowerStar Λ f :=
   supportPullbackAdjunction Λ f
 
 /-- The transported inverse image is additive.
-Source: blueprint proof Step 2 (blueprint: lemma-sections-support-closed-subscheme). -/
+Source: blueprint proof Step 2. -/
 instance formalSupportPullback_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (formalSupportPullback Λ f).Additive :=
   inferInstanceAs ((_ ⋙ Mod.comap (asIso (condensedPullbackHom Λ f)).inv).Additive)
 
 /-- Exactness of inverse image on the underlying abelian sheaves and scalar transport.
-Source: blueprint proof Step 2 (blueprint: lemma-sections-support-closed-subscheme). -/
+Source: blueprint proof Step 2. -/
 instance formalSupportPullback_preservesFiniteLimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (formalSupportPullback Λ f) :=
   inferInstanceAs (PreservesFiniteLimits (_ ⋙
     (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ f)).inverse))
 
 /-- Cokernels commute with inverse image and scalar transport.
-Source: blueprint proof Step 2 (blueprint: lemma-sections-support-closed-subscheme). -/
+Source: blueprint proof Step 2. -/
 instance formalSupportPullback_preservesFiniteColimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (formalSupportPullback Λ f) :=
   inferInstanceAs (PreservesFiniteColimits (_ ⋙
     (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ f)).inverse))
 
 /-- The kernel of the open adjunction unit, on objects and morphisms.
-Source: blueprint clause (1), generalizing definition-local-cohomology--1
-(blueprint: lemma-sections-support-closed-subscheme). -/
+Source: blueprint clause (1), generalizing definition-local-cohomology--1. -/
 def formalSupportKernel {V X : Scheme.{u}} (j : V ⟶ X) :
     FormalSupportModules Λ X ⥤ FormalSupportModules Λ X where
   obj M := kernel ((formalSupportPullbackAdjunction Λ j).unit.app M)
@@ -136,32 +132,32 @@ def formalSupportKernel {V X : Scheme.{u}} (j : V ⟶ X) :
   map_comp f g := equalizer.hom_ext (by simp)
 
 /-- The support kernel respects addition, by the universal property of the kernel.
-Source: blueprint proof Step 5 (blueprint: lemma-sections-support-closed-subscheme). -/
+Source: blueprint proof Step 5. -/
 instance formalSupportKernel_additive {V X : Scheme.{u}} (j : V ⟶ X) :
     (formalSupportKernel Λ j).Additive where
   map_add := equalizer.hom_ext (by simp [formalSupportKernel])
 
 /-- The closed support functor is exactly i* ker(id → j*j*).
-Source: blueprint opening formula (blueprint: lemma-sections-support-closed-subscheme). -/
+Source: blueprint opening formula. -/
 def formalClosedSupport {Z V X : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) :
     FormalSupportModules Λ X ⥤ FormalSupportModules Λ Z :=
   formalSupportKernel Λ j ⋙ formalSupportPullback Λ i
 
 /-- Additivity of the displayed support formula.
-Source: blueprint proof Step 5 (blueprint: lemma-sections-support-closed-subscheme). -/
+Source: blueprint proof Step 5. -/
 instance formalClosedSupport_additive {Z V X : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) :
     (formalClosedSupport Λ i j).Additive :=
   inferInstanceAs ((formalSupportKernel Λ j ⋙ formalSupportPullback Λ i).Additive)
 
 /-- The canonical support-kernel inclusion.
-Source: blueprint clause (1) (blueprint: lemma-sections-support-closed-subscheme). -/
+Source: blueprint clause (1). -/
 def formalSupportKernelInclusion {V X : Scheme.{u}} (j : V ⟶ X) :
     formalSupportKernel Λ j ⟶ 𝟭 (FormalSupportModules Λ X) where
   app M := kernel.ι ((formalSupportPullbackAdjunction Λ j).unit.app M)
   naturality _ _ f := by simp [formalSupportKernel]
 
 /-- The canonical closed unit on the support kernel; clause (1) says it is invertible.
-Source: blueprint proof Step 5 (blueprint: lemma-sections-support-closed-subscheme). -/
+Source: blueprint proof Step 5. -/
 def formalSupportKernelComparison {Z V X : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) :
     formalSupportKernel Λ j ⟶ formalClosedSupport Λ i j ⋙ lowerStar Λ i :=
   Functor.whiskerLeft (formalSupportKernel Λ j)
@@ -364,8 +360,7 @@ The last clause describes the fibre without selecting a cone in a triangulated c
 it holds for every distinguished fibre triangle of the specified open adjunction unit.
 
 Source: Weil blueprint, sec-smooth-purity/sk-prop-sf-localization,
-lemma-sections-support-closed-subscheme (1)--(4)
-(blueprint: lemma-sections-support-closed-subscheme).
+lemma-sections-support-closed-subscheme (1)--(4).
 
 Proof:
 1. Identify inverse-image coefficient rings by lemma-inverse-image-coefficient-sheaves--1. Lift

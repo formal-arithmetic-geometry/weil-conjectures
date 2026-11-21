@@ -576,7 +576,6 @@ import WeilConjectures.AlgebraicGeometry.IntegralLfpHomContinuity
 
 This is the constructibility assertion of proper finiteness, separated from the
 uniform cohomological-dimension estimate.
-(blueprint: lem-sfb-noetherian-proper-constructible-cohomology)
 -/
 
 @[expose] public section
@@ -1216,7 +1215,6 @@ ell-adic complex is constructible, over a Noetherian base.
 Source: Bhatt--Scholze, Theorem 6.7.1, Lemma 6.7.2 and Remark 6.8.15;
 blueprint proposition-proper-direct-image-constructible-complexes,
 integral and rational proper finiteness, constructibility clauses.
-(blueprint: lem-sfb-noetherian-proper-constructible-cohomology)
 
 Proof: first place a constructible module in degree zero. For integral coefficients,
 its derived reductions modulo powers of a uniformizer are constructible torsion
@@ -1258,8 +1256,7 @@ theorem properLowerStar_constructible_cohomology_ellAdic_continuousMapRingObj
   exact proper_continuous_of_integral ℓ E p (proper_integralCoeff ℓ E p hl) K hK
 
 /-- The integral case `𝒪_E` of
-`properLowerStar_constructible_cohomology_ellAdic_continuousMapRingObj`.
-(blueprint: lem-sfb-noetherian-proper-constructible-cohomology) -/
+`properLowerStar_constructible_cohomology_ellAdic_continuousMapRingObj`. -/
 theorem properLowerStar_constructible_cohomology_ellAdic_padicIntegersRingObj
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
@@ -1285,8 +1282,7 @@ theorem properLowerStar_constructible_cohomology_ellAdic_padicIntegersRingObj
     (e.symm ≪≫ integerLatticeIso ℓ (ULift.{u} E)) p hl K hK
 
 /-- The case `ℚ̄_ℓ` of
-`properLowerStar_constructible_cohomology_ellAdic_continuousMapRingObj`.
-(blueprint: lem-sfb-noetherian-proper-constructible-cohomology) -/
+`properLowerStar_constructible_cohomology_ellAdic_continuousMapRingObj`. -/
 theorem properLowerStar_constructible_cohomology_ellAdic_padicAlgClRingObj
     (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]

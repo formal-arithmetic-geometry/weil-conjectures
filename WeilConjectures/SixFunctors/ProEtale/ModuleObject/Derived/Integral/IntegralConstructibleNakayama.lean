@@ -183,7 +183,6 @@ import all WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 /-! # Nakayama for integral constructible module objects
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), and Nakayama's lemma.
-(blueprint: lem-weil-pbc-integral-constructible-nakayama)
 -/
 
 @[expose] public section
@@ -313,7 +312,6 @@ private lemma finitelyPresented_nakayama (X : Scheme.{u})
 
 /-- An integral constructible module on which multiplication by ℓ is invertible is zero.
 Source: Bhatt--Scholze, Proposition 6.8.11(3), and Nakayama's lemma.
-(blueprint: lem-weil-pbc-integral-constructible-nakayama)
 
 Proof: choose a finite stratification and finite presentations on pro-etale covers.
 For a presented module M, let π : R^n → M be the presentation epimorphism. Pull π back

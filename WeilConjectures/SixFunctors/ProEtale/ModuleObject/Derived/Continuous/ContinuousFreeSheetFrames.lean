@@ -15,7 +15,6 @@ import Mathlib.LinearAlgebra.Dimension.Constructions
 /-! # Coordinates of already free sheet modules
 
 Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2.
-(blueprint: lem-sfb-continuous-free-sheet-frames)
 -/
 
 @[expose] public noncomputable section
@@ -191,7 +190,6 @@ There is no covering or splitting assertion here, and no assertion about ranges.
 
 Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2;
 Bhatt--Scholze, Section 6.8, continuous coefficients and changes of free bases.
-(blueprint: lem-sfb-continuous-free-sheet-frames)
 
 Proof. Choose a finite free rational frame on Y and a finite free integral frame
 for each pulled-back module t_j*M. Scalar extension carries a finite biproduct

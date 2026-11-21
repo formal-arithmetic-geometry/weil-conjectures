@@ -131,7 +131,7 @@ instance : (residueFieldModuleSheaf X ℓ E).ReflectsIsomorphisms :=
       (residueFieldSectionRingHom X ℓ E c))).ReflectsIsomorphisms
 
 /-- The **first derived reduction** `K ↦ K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` of complexes of
-`𝒪_{E,X}`-module objects (blueprint `definition-derived-adic-completeness`), regarded in the derived
+`𝒪_{E,X}`-module objects, regarded in the derived
 category of pro-étale sheaves of `𝔽_E`-modules: the derived extension of scalars along the
 residue map `𝒪_{E,X} ⟶ 𝔽_{E,X}`, followed by the exact functor
 `ProEtale.residueFieldModuleSheaf`. -/

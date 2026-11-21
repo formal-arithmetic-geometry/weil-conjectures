@@ -113,7 +113,6 @@ Source: the second identity in blueprint
 sec-six-functors-basics/sk-prop-p1-adjunction-rational/
 sk-prop-p1-adjunction-rational-triangle.proof.md; the component equations are
 `leftDerivedUpperStarComp_hom_app_unit` and `leftDerivedUpperStarId_hom_app_unit`.
-(blueprint: lem-sfb-canonical-derived-pullback-section-unit).
 
 Proof: equality induction transports the unit comparison along the section equation.
 Compose this equation with the identity unit equation. Cancel the pullback compositor
