@@ -36,7 +36,6 @@ with inverse image along scheme morphisms.
 Proof source: Bhatt--Scholze, Lemma 6.8.2 and Section 6.8. Compose both sides with
 every finite quotient projection. The finite constant and residue equations identify
 both composites pointwise, and the inverse-limit projections are jointly monic.
-(blueprint: lem-sf-native-completed-coefficient-change-square)
 -/
 theorem native_completed_coefficient_change_square_of_presentation
     [G : NativeGeometry.{u} l]

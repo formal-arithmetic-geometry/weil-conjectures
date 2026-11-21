@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalI
 /-! # The opposite compact-support mate for a regular quotient
 
 Source: Zheng, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-regular-quotient-opposite-compact-support-mate)
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +43,7 @@ restriction comparison. Each factor is invertible. Faithfulness of the finite-To
 full inclusions reflects this invertibility on the restricted categories. Transport
 by left-adjoint uniqueness then proves it for the specified ax and ay. Positivity
 of n+1 ensures the regular resolution also covers n=0; zero objects and empty
-schemes obey the same unit, trace and pasting identities.
-(blueprint: lem-sf-regular-quotient-opposite-compact-support-mate). -/
+schemes obey the same unit, trace and pasting identities. -/
 theorem regularQuotientOppositeCompactSupportMate
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

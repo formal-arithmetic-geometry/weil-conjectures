@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Canonical
 Let `F` be a `AlgebraicGeometry.CompactSupportFormalism`. For a commutative square of schemes
 ```
 U' --t--> U
-|l        |r
+|l |r
 Z' --b--> Z
 ```
 the *base change map of the pushforwards* `b^* r_* ⟶ l_* t^*` is the mate of the square
@@ -26,21 +26,20 @@ map is an isomorphism for every cartesian square with `r` proper.
 For a cartesian square
 ```
 X' --g'--> X
-|f'        |f
+|f' |f
 Y' --g---> Y
 ```
 a compactification `c = (X ⟶[c.i] c.Z ⟶[c.g] Y)` of `f` and a compactification `c'` of `f'`
 lying over it along a morphism `h : c'.Z ⟶ c.Z` with cartesian squares
 ```
 X' --g'--> X
-|c'.i      |c.i
+|c'.i |c.i
 c'.Z --h--> c.Z
-|c'.g      |c.g
+|c'.g |c.g
 Y' --g---> Y
 ```
 (for instance the base change `c.ofIsPullback sq` of `c`, blueprint
-`remark-base-change-compactification--1`), the *compact-support exchange map* (blueprint
-`prose-05-31`)
+`remark-base-change-compactification--1`), the *compact-support exchange map*
 
 `Ex_! : g^* Rf_!(c) ⟶ Rf'_!(c') g'^*`
 
@@ -101,16 +100,16 @@ section ShriekBaseChange
 variable [F.HasBaseChange] {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y}
   {g' : X' ⟶ X}
 
-/-- Blueprint `prose-05-31`: Compact-support exchange map.
+/-- Compact-support exchange map.
 
 **The compact-support exchange map** `Ex_! : g^* Rf_!(c) ⟶ Rf'_!(c') g'^*`, i.e. the natural
 transformation `F.shriek c ⋙ g^* ⟶ g'^* ⋙ F.shriek c'`, for a compactification `c` of `f`, a
 compactification `c'` of `f'` and a morphism `h : c'.Z ⟶ c.Z` making both squares
 ```
 X' --g'--> X
-|c'.i      |c.i
+|c'.i |c.i
 c'.Z --h--> c.Z
-|c'.g      |c.g
+|c'.g |c.g
 Y' --g---> Y
 ```
 cartesian. It is the horizontal composite of the inverse of the base change isomorphism
@@ -123,7 +122,7 @@ noncomputable def shriekBaseChange (c : Compactification f) (c' : Compactificati
   haveI := HasBaseChange.isIso_baseChange (F := F) hi
   ExchangeFormalism.shriekBaseChange F c.i c.g c'.i c'.g g' h g hi.w hp.w
 
-/-- Blueprint `proposition-composition-base-change-rf-shriek`: Compact-support base change at finite
+/-- Compact-support base change at finite
 coefficients, in an abstract compact support formalism.
 
 **The compact-support exchange map is an isomorphism** when the formalism satisfies base change
@@ -137,8 +136,7 @@ instance isIso_shriekBaseChange [F.HasProperBaseChange] (c : Compactification f)
   infer_instance
 
 /-- **The identity law** of the compact-support exchange map: for the identity square, `Ex_!` is
-the identity, after inserting the identifications `(𝟙 Y)^* ≅ 𝟭` and `(𝟙 X)^* ≅ 𝟭`.
-(blueprint: `proposition-composition-base-change-rf-shriek`) -/
+the identity, after inserting the identifications `(𝟙 Y)^* ≅ 𝟭` and `(𝟙 X)^* ≅ 𝟭`. -/
 lemma shriekBaseChange_id (c : Compactification f) (hi : IsPullback (𝟙 X) c.i c.i (𝟙 c.Z))
     (hp : IsPullback (𝟙 c.Z) c.g c.g (𝟙 Y)) :
     (F.shriekBaseChange c c (𝟙 c.Z) hi hp) =
@@ -161,13 +159,13 @@ lemma shriekBaseChange_id (c : Compactification f) (hi : IsPullback (𝟙 X) c.i
 side by side
 ```
 X'' --a'--> X' --b'--> X
-|f''        |f'        |f
+|f'' |f' |f
 Y'' --a---> Y' --b---> Y
 ```
 with compactifications `c''`, `c'`, `c` lying over each other along `h₁ : c''.Z ⟶ c'.Z` and
 `h₂ : c'.Z ⟶ c.Z`, the exchange map of the outer rectangle along `h₁ ≫ h₂` is the vertical
 composite of the two exchange maps, after inserting the composition isomorphisms of the
-pullbacks. (blueprint: `proposition-composition-base-change-rf-shriek`) -/
+pullbacks. -/
 lemma shriekBaseChange_paste_horiz {X'' Y'' : Scheme.{u}} {f'' : X'' ⟶ Y''} {a' : X'' ⟶ X'}
     {a : Y'' ⟶ Y'} {b' : X' ⟶ X} {b : Y' ⟶ Y} (c : Compactification f)
     (c' : Compactification f') (c'' : Compactification f'') (h₁ : c''.Z ⟶ c'.Z)
@@ -186,9 +184,7 @@ lemma shriekBaseChange_paste_horiz {X'' Y'' : Scheme.{u}} {f'' : X'' ⟶ Y''} {a
 /-- **Compatibility with refinements**: the compact-support exchange maps attached to two
 compactifications `c`, `d` of `f` (and `c'`, `d'` of `f'`) are intertwined by the comparisons
 `Rf_!(d) ⟶ Rf_!(c)` and `Rf'_!(d') ⟶ Rf'_!(c')` along refinements `r : c ⟶ d` and
-`r' : c' ⟶ d'` compatible with the maps `c'.Z ⟶ c.Z` and `d'.Z ⟶ d.Z`.
-(blueprint: `proposition-composition-base-change-rf-shriek`, independence of the
-compactification) -/
+`r' : c' ⟶ d'` compatible with the maps `c'.Z ⟶ c.Z` and `d'.Z ⟶ d.Z`. -/
 lemma shriekBaseChange_refinementComparison {c d : Compactification f}
     {c' d' : Compactification f'} (r : c.Refinement d) (hr : IsPullback c.i (𝟙 X) r.hom d.i)
     (r' : c'.Refinement d') (hr' : IsPullback c'.i (𝟙 X') r'.hom d'.i) (hc : c'.Z ⟶ c.Z)
@@ -218,8 +214,7 @@ triangle of compactifications of `(f, g)` and `T'` a triangle of compactificatio
 `(f', g')` lying over it along `a : T'.cf.Z ⟶ T.cf.Z`, `c : T'.cg.Z ⟶ T.cg.Z` and
 `b : T'.cfg.Z ⟶ T.cfg.Z`, with all the relevant squares cartesian. Then the exchange map of the
 composite is the horizontal composite of the exchange maps, through the composition
-isomorphisms `F.compIso T` and `F.compIso T'`. (blueprint:
-`proposition-composition-base-change-rf-shriek`, `proposition-composition-base-change-rf-shriek`) -/
+isomorphisms `F.compIso T` and `F.compIso T'`. -/
 theorem compIso_shriekBaseChange {X Y S X' Y' S' : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ S}
     {f' : X' ⟶ Y'} {g' : Y' ⟶ S'} {gX : X' ⟶ X} {gY : Y' ⟶ Y} {gS : S' ⟶ S}
     (T : Compactification.Triangle f g) (T' : Compactification.Triangle f' g')
@@ -252,7 +247,7 @@ variable [F.HasProperExchange] {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' �
   {g : Y' ⟶ Y} {g' : X' ⟶ X}
 
 /-- The compact-support exchange map `Ex_!` along a compactification `c` of `f` and its base
-change `c.ofIsPullback sq` (blueprint `remark-base-change-compactification--1`). -/
+change `c.ofIsPullback sq`. -/
 noncomputable abbrev shriekBaseChangeOfIsPullback (sq : IsPullback g' f' f g)
     (c : Compactification f) :
     TwoSquare (F.shriek c) (F.pb g') (F.pb g) (F.shriek (c.ofIsPullback sq)) :=
@@ -261,8 +256,7 @@ noncomputable abbrev shriekBaseChangeOfIsPullback (sq : IsPullback g' f' f g)
 
 /-- **The compact-support exchange map of the canonical compactly supported direct images**
 `Ex_! : g^* Rf_! ⟶ Rf'_! g'^*`: the exchange map along the chosen compactification of `f` and its
-base change, followed by the comparison isomorphism with the chosen compactification of `f'`.
-(blueprint: `prose-05-31`) -/
+base change, followed by the comparison isomorphism with the chosen compactification of `f'`. -/
 noncomputable def lowerShriekBaseChange [HasCompactification f] [HasCompactification f']
     [QuasiCompact f'] (sq : IsPullback g' f' f g) :
     TwoSquare (F.lowerShriek f) (F.pb g') (F.pb g) (F.lowerShriek f') :=
@@ -277,9 +271,7 @@ instance isIso_lowerShriekBaseChange [F.HasProperBaseChange] [HasCompactificatio
 
 /-- **Compatibility with the comparison isomorphisms**: the compact-support exchange maps along
 two compactifications `c` and `d` of `f` and their base changes are intertwined by the comparison
-isomorphisms `F.shriekIso c d` and `F.shriekIso (c.ofIsPullback sq) (d.ofIsPullback sq)`.
-(blueprint: `proposition-composition-base-change-rf-shriek`, independence of the
-compactification) -/
+isomorphisms `F.shriekIso c d` and `F.shriekIso (c.ofIsPullback sq) (d.ofIsPullback sq)`. -/
 lemma shriekBaseChangeOfIsPullback_shriekIso [QuasiCompact f] [QuasiCompact f']
     (sq : IsPullback g' f' f g) (c d : Compactification f) :
     Functor.whiskerRight (F.shriekIso c d).hom (F.pb g) ≫
@@ -316,8 +308,7 @@ lemma shriekBaseChangeOfIsPullback_shriekIso [QuasiCompact f] [QuasiCompact f']
 
 /-- **Independence of the compactification**: the exchange map of the canonical compactly
 supported direct images is computed by any compactification `c` of `f` and its base change, up
-to the comparison isomorphisms `F.shriekIso`. (blueprint:
-`proposition-composition-base-change-rf-shriek`, `proposition-composition-base-change-rf-shriek`) -/
+to the comparison isomorphisms `F.shriekIso`. -/
 theorem lowerShriekBaseChange_eq [HasCompactification f] [HasCompactification f']
     [QuasiCompact f] [QuasiCompact f'] (sq : IsPullback g' f' f g) (c : Compactification f) :
     F.lowerShriekBaseChange sq =
@@ -341,14 +332,13 @@ theorem lowerShriekBaseChange_eq [HasCompactification f] [HasCompactification f'
 above the other
 ```
 X' --gX--> X
-|f₁'       |f₁
+|f₁' |f₁
 Y' --gY--> Y
-|f₂'       |f₂
+|f₂' |f₂
 S' --gS--> S
 ```
 the exchange map of the outer rectangle is the horizontal composite of the two exchange maps,
-after inserting the composition isomorphisms `Rf₁_! ⋙ Rf₂_! ≅ R(f₁ ≫ f₂)_!`.
-(blueprint: `proposition-composition-base-change-rf-shriek`) -/
+after inserting the composition isomorphisms `Rf₁_! ⋙ Rf₂_! ≅ R(f₁ ≫ f₂)_!`. -/
 theorem lowerShriekBaseChange_paste_vert {S S' : Scheme.{u}} {f₁ : X ⟶ Y} {f₂ : Y ⟶ S}
     {f₁' : X' ⟶ Y'} {f₂' : Y' ⟶ S'} {gX : X' ⟶ X} {gY : Y' ⟶ Y} {gS : S' ⟶ S}
     [HasCompactification f₁] [HasCompactification f₂] [HasCompactification (f₁ ≫ f₂)]

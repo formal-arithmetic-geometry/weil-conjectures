@@ -25,9 +25,9 @@ Consider a cartesian square of schemes
 
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 
@@ -70,7 +70,6 @@ base-change transformation itself is an isomorphism of functors.
 - Stacks Project, Lemma 59.91.12, the derived statement,
   <https://stacks.math.columbia.edu/tag/0DDE>
 - [SGA 4, Exp. XII, Théorème 5.1]
-
 -/
 
 @[expose] public section
@@ -102,9 +101,9 @@ cartesian square of schemes
 
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 
@@ -126,9 +125,9 @@ schemes
 
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 

@@ -15,17 +15,16 @@ public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 /-!
 # Étale locality and composition of the base-change map
 
-Two formal properties of the base-change map of the smooth base change theorem (blueprint
-subsection `prose-08-06`), and their consequences for the base-change property `BC(p, Λ, q)` of
+Two formal properties of the base-change map of the smooth base change theorem, and their consequences for the base-change property `BC(p, Λ, q)` of
 `AlgebraicGeometry.Etale.BaseChangeProperty`, used to reduce the smooth base change theorem to
 smooth morphisms of relative dimension one:
 
-- composition (blueprint `lemma-identity-pasting--2`, Stacks 0EZS): the base-change map of
+- composition: the base-change map of
   a composite square is the composite of the base-change maps of the two squares, so it is an
   isomorphism when they are, both for the derived base-change map and degreewise; in particular
   the derived base-change map of a square whose horizontal sides are isomorphisms is an
   isomorphism, as pasting it with the inverse square gives an identity square;
-- étale locality (blueprint `prose-08-06`, Stacks 0EZR): if `X` is covered by étale
+- étale locality: if `X` is covered by étale
   `U_i ⟶ X` such that `U_i ⟶ S` factors as `f_i : U_i ⟶ V_i` followed by an étale
   `V_i ⟶ S`, the base-change map of a square on `X ⟶ S` is an isomorphism as soon as those of
   the induced squares on the `f_i` are, for the base-change map of sheaves, for the derived

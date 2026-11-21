@@ -30,8 +30,7 @@ form for morphisms (the cone of a morphism) is
 `NearbyCyclesModel.isIso_of_isIso_leftDerivedUpperStar_finsetComplOpens_map`.
 
 The bounded constructible `ℚ̄_ℓ` case is
-`ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens` (blueprint
-`lemma-finite-support-global-sections--1`).
+`ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`.
 
 ## Proof
 

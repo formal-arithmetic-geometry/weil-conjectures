@@ -171,7 +171,6 @@ private def chartPullIso
 /-- Ordinary module restriction to a pro-etale covering family detects isomorphisms.
 Source: Stacks, Sites and Sheaves, Tag 04TQ; localized sites, Tag 00XZ;
 Pro-etale Cohomology, Definition 09AE.
-(blueprint: lem-fix-ordinary-completed-cover-detection).
 Proof: a weakly etale chart identifies its pro-etale topos with the localized topos
 at that chart. Finite constant-sheaf restriction is the identity on constant
 sections. Slice restriction preserves limits; taking the finite-coefficient limit

@@ -73,7 +73,6 @@ private theorem lower_sectionAct {U V : Scheme.{u}} (g : U ⟶ V)
 
 /-- The native and ringed direct images have the same sections and scalar action.
 Source: Stacks, Tag 03D6, and Bhatt--Scholze, Section 6.8.
-(blueprint: lem-sf-native-direct-image-sections).
 
 Proof: evaluate the two functors at an adic module M and a test object W over V.
 Both underlying groups are M evaluated at W times_V U, with the same restriction maps.

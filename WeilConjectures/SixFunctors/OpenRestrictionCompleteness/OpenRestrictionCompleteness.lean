@@ -264,7 +264,6 @@ private theorem scalar_restriction (Q : IntegralOnSlice.Cx l E X none) :
 completion unit is invertible on every such restriction.
 Source: the open case of lem-sf-immersion-completed-pullback-comparison, Stacks
 sites-cohomology.tex Tags 08TC, 0941, 07A4 and 0G7E.
-(blueprint: lem-sf-open-restriction-completeness).
 
 Proof: regard the open immersion as an immersion with identity closed factor.
 Use the fixed coefficient maps and their quotient-projection equations to identify

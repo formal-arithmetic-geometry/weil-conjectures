@@ -33,8 +33,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
 attribute [local instance] coefficientFiniteExtensionAdditive
 
 /-- The ordinary finite scalar presentation, fixed by its restriction adjunction.
-Source: Stacks Tag 06YY
-(blueprint: lem-sf-finite-scalar-ordinary-reduction-iso). -/
+Source: Stacks Tag 06YY. -/
 def finiteScalarOrdinaryReductionIso (W : Scheme.{u}) (n : ℕ) :
     pbcExtend (PurCompactSupport.projection l E (n + 1) (Nat.le_add_left 1 n) W) ≅
       scalarReductionExtension.{u, u} l E W n :=
@@ -43,8 +42,7 @@ def finiteScalarOrdinaryReductionIso (W : Scheme.{u}) (n : ℕ) :
       (scalarReductionExtension_adjunction.{u, u} l E W n).choose
 
 /-- Fold the scalar adjunction alias without unfolding its chosen left adjoint.
-Source: Stacks Tag 06YY
-(blueprint: lem-sf-finite-scalar-ordinary-reduction-iso). -/
+Source: Stacks Tag 06YY. -/
 theorem finiteScalarOrdinaryReductionIso_eq (W : Scheme.{u}) (n : ℕ) :
     (pbcScalarAdjunction
       (PurCompactSupport.projection l E (n + 1) (Nat.le_add_left 1 n) W)).leftAdjointUniq
@@ -54,8 +52,7 @@ theorem finiteScalarOrdinaryReductionIso_eq (W : Scheme.{u}) (n : ℕ) :
   rfl
 
 /-- The ordinary scalar presentation carries the scalar adjunction unit to its
-finite scalar unit degreewise. Source: Stacks Tag 06YY
-(blueprint: lem-sf-finite-scalar-ordinary-reduction-iso). -/
+finite scalar unit degreewise. Source: Stacks Tag 06YY. -/
 theorem finiteScalarOrdinaryReductionIso_unitComplex (W : Scheme.{u}) (n : ℕ)
     (P : CochainComplex (integralTowerModules l E W) ℤ) :
     let := sfExtensionAdditive l E W n

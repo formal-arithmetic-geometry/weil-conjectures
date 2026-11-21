@@ -11,9 +11,6 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 
 /-! # Ordinary coefficient projection square
 
-Source: blueprint fix-prop-coherence, the projection component of the normalized
-mate argument for `lem-sf-integral-ordinary-exchange-projection-squares`.
-
 The ordinary tensor/pullback comparison supplies the compatibility hypothesis
 of the generic right-adjoint projection mate theorem. Naturality then inserts
 the two expression coefficient maps. -/
@@ -58,13 +55,6 @@ private theorem inverseComparisonSquare {C : Type*} [Category C]
   simp
 
 /-- The coefficient comparison required by the generic mate lemma.
-
-Source: `canonicalReductionTensorPull`, the normalized tensor/pullback square
-in blueprint fix-prop-coherence. Invert the tensor of the pullback coefficient
-isomorphisms and the pullback coefficient isomorphism of the tensor object.
-Currying the resulting identity gives exactly the generic mate hypothesis.
-
-(blueprint: lem-sf-integral-ordinary-projection-square)
 -/
 private theorem projectionMateCompatibility
     (o : Operations l E) (a : AmbientModels l E o)
@@ -153,7 +143,6 @@ private theorem projectionNaturality
 
 /-- Projection component of the ordinary coefficient mate square.
 Source: Stacks Tags 07A7 and 0E48; blueprint fix-prop-coherence.
-(blueprint: lem-sf-integral-ordinary-projection-square).
 
 Proof: invert `canonicalReductionTensorPull` to obtain the compatibility
 hypothesis of `Adjunction.rightAdjointProjectionMap_mate`. The counit mate

@@ -123,8 +123,7 @@ private theorem realization_of_ordinary (o : Operations l E) (a : OrdinaryLimitM
   exact ⟨⟨a, @r, @hr⟩⟩
 
 /-- The ordinary sectionwise limit comparison descends to coherent derived reduction.
-Source: Stacks 03D7, 07A6, 07A7 and 0941; primitive realization Step 3
-(blueprint: lem-sf-integral-reduction-pullback-model).
+Source: Stacks 03D7, 07A6, 07A7 and 0941; primitive realization Step 3.
 
 Proof: commute geometric direct image with the ordinary limit of restricted modules.
 The comparison is identity on the compatible families of sections, and its projections

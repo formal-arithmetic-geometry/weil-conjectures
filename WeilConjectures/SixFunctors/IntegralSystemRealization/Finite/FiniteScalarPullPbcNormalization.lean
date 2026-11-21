@@ -63,8 +63,7 @@ private theorem scalar_pasting
   rw [reassoc_of% h, h']
 
 /-- The pbc scalar comparison is compatible with the ordinary finite presentations.
-Source: Stacks Tags 07A6, 06YY and 0D6E
-(blueprint: lem-sf-finite-scalar-pull-pbc-normalization).
+Source: Stacks Tags 07A6, 06YY and 0D6E.
 Proof: reverse scalarPull_complex_normalization by cancelling its source and target
 isomorphisms. Compose that equation with the geometric pullback of the ordinary
 scalar presentation and the ordinary geometric presentation. The image under Q of

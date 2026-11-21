@@ -18,8 +18,8 @@ For `f : X ⟶ Y` with a compactification `c`, the projection map
 of the derived tensor products: for `K` on `X` and `L, N` on `Y` the square
 ```
 (Rf_!K ⊗ᴸ L) ⊗ᴸ N --PF ▷ N--> Rf_!(K ⊗ᴸ Lf^*L) ⊗ᴸ N --PF--> Rf_!((K ⊗ᴸ Lf^*L) ⊗ᴸ Lf^*N)
-        | α                                                            | Rf_! α
-        v                                                              v
+        | α | Rf_! α
+        v v
 Rf_!K ⊗ᴸ (L ⊗ᴸ N) ----PF----> Rf_!(K ⊗ᴸ Lf^*(L ⊗ᴸ N)) --Rf_!(K ◁ δ)--> Rf_!(K ⊗ᴸ (Lf^*L ⊗ᴸ Lf^*N))
 ```
 commutes, where `δ` is the tensor comparison of `Lf^*`
@@ -72,8 +72,8 @@ lemma projectionMapOfCompactification_app_app_eq_compProjectionMap
 `AlgebraicGeometry.Etale.projectionMapOfCompactification` makes the square
 ```
 (Rf_!K ⊗ᴸ L) ⊗ᴸ N --PF ▷ N--> Rf_!(K ⊗ᴸ Lf^*L) ⊗ᴸ N --PF--> Rf_!((K ⊗ᴸ Lf^*L) ⊗ᴸ Lf^*N)
-        | α                                                            | Rf_! α
-        v                                                              v
+        | α | Rf_! α
+        v v
 Rf_!K ⊗ᴸ (L ⊗ᴸ N) ----PF----> Rf_!(K ⊗ᴸ Lf^*(L ⊗ᴸ N)) --Rf_!(K ◁ δ)--> Rf_!(K ⊗ᴸ (Lf^*L ⊗ᴸ Lf^*N))
 ```
 commute, `δ` being the tensor comparison of `Lf^*`. -/

@@ -9,8 +9,7 @@ public import WeilConjectures.SixFunctors.ConstructibleTensorModel.Constructible
 
 /-! # Normalized ordinary-to-completed tensor comparison
 
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50
-(blueprint: lem-fix-constructible-tensor-completion-comparison).
+Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50.
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +35,7 @@ attribute [local irreducible] IntegralOnSlice.duality IntegralOnSlice.roosUnit
 
 /-- Descend the canonical chain augmentation to ordinary derived tensor. The comparison
 is invertible whenever the canonical completion unit is invertible.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion-comparison).
+Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5.
 
 Proof: compose the canonical completion unit with the existing normalized isomorphism
 from completion of ordinary tensor to completed tensor. Its representative equation

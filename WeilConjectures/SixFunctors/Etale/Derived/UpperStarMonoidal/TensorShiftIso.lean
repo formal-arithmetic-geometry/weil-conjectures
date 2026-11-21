@@ -79,9 +79,9 @@ lemma derivedTensorShiftIso_hom_naturality_right
 /-- `K⟦a⟧ ⊗ᴸ M⟦b⟧ ≅ (K ⊗ᴸ M)⟦a + b⟧` is natural in both factors:
 ```
   K⟦a⟧ ⊗ᴸ M⟦b⟧ -------> (K ⊗ᴸ M)⟦a + b⟧
-       |                       |
-  f⟦a⟧ ⊗ g⟦b⟧             (f ⊗ g)⟦a + b⟧
-       v                       v
+       | |
+  f⟦a⟧ ⊗ g⟦b⟧ (f ⊗ g)⟦a + b⟧
+       v v
   K'⟦a⟧ ⊗ᴸ M'⟦b⟧ -----> (K' ⊗ᴸ M')⟦a + b⟧
 ```
 -/

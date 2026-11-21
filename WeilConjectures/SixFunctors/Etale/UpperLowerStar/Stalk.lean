@@ -43,7 +43,6 @@ is defined along `MorphismProperty.Over.pullback @Etale ⊤ f`, whereas the poin
 applied to the definitionally equal `AlgebraicGeometry.Scheme.Hom.Etale f`, whose stated
 type `Y.Etale ⥤ X.Etale` is the one the geometric points of `X` and `Y` come with. Both
 names appear below, each where its instances are available.
-
 -/
 
 @[expose] public section
@@ -81,8 +80,7 @@ The three steps are the comparison
 the abstract sheaf pullback along base change, the isomorphism
 `CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso` of the sheaf pullback with
 the fibre functor of the point obtained from `s` by `Point.comap`, and the identification
-`AlgebraicGeometry.Scheme.pointSmallEtaleComapIso` of that point with `s ≫ f`.
-(blueprint: `lemma-openclosed-stalk-upperstar`) -/
+`AlgebraicGeometry.Scheme.pointSmallEtaleComapIso` of that point with `s ≫ f`. -/
 noncomputable def Etale.upperStarCompSheafFiberIso :
     (f)^*[A] ⋙ (pointSmallEtale s).sheafFiber ≅ (pointSmallEtale (s ≫ f)).sheafFiber :=
   Functor.isoWhiskerRight
@@ -96,8 +94,7 @@ noncomputable def Etale.upperStarCompSheafFiberIso :
 stalk of `f^* F` at the geometric point `s`, taken at the universe of the coefficients, is
 the stalk of `F` at `s ≫ f`. This is the form in which the comparison is used, since the
 coefficient categories of the six functor formalism are concrete over `Type (u + 1)` and the
-fibre functor of `pointSmallEtale s` takes values in `Type u`.
-(blueprint: `lemma-openclosed-stalk-upperstar`) -/
+fibre functor of `pointSmallEtale s` takes values in `Type u`. -/
 noncomputable def Etale.upperStarCompUliftSheafFiberIso :
     (f)^*[A] ⋙ ((pointSmallEtale s).ulift.{u + 1}).sheafFiber ≅
       ((pointSmallEtale (s ≫ f)).ulift.{u + 1}).sheafFiber :=

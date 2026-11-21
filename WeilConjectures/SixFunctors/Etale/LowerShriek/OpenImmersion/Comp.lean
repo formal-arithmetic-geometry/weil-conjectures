@@ -22,7 +22,6 @@ is the composite of the extensions by zero, `(j' ≫ j)_! ≅ j'_! ⋙ j_!`. For
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekComp`: `(j' ≫ j)_! ≅ j'_! ⋙ j_!`.
 - `AlgebraicGeometry.Etale.upperStarIsoOpenImmersionLowerShriekInv`: `e^* ≅ (e⁻¹)_!` for an
   isomorphism `e`.
-
 -/
 
 @[expose] public section
@@ -42,9 +41,9 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 `j : U ⟶ X`:
 ```
 Sh(V) --j'_!--> Sh(U)
-     \            |
- (j' ≫ j)_!       | j_!
-       \          v
+     \ |
+ (j' ≫ j)_! | j_!
+       \ v
         -----> Sh(X)
 ```
 -/

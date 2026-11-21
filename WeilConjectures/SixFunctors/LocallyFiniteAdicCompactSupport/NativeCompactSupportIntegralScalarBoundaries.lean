@@ -120,8 +120,7 @@ boundary, compose compact support of the inverse source integral realization wit
 inverse operationTransport. Evaluate on each integral finite-Tor object. The stage
 comparison gives the recorded rational arrow; the localization comparison has
 identity components. Functoriality of identities gives the first three arrows and
-the last two arrows, respectively. This construction contains no scalar mate.
-(blueprint: lem-sf-native-integral-scalar-boundaries). -/
+the last two arrows, respectively. This construction contains no scalar mate. -/
 theorem native_integral_scalar_boundaries [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c) (E : Index l (PadicAlgCl l)) :

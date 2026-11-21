@@ -75,8 +75,7 @@ private theorem extensionTransitions
 
 -- Reconcile the concrete coefficient categories without unfolding chosen scalar functors.
 /-- Assemble the normalized finite extension tensor comparisons as a strict-system iso.
-Source: Stacks 03DJ, 0E8I and 0941
-(blueprint: lem-sf-ordinary-open-tensor-system-assembly).
+Source: Stacks 03DJ, 0E8I and 0941.
 
 Proof: use the existing openScalarTransitionCompatibility. Its hypothesis on
 restriction evaluation is precisely o.openSystems.restrictionSections. Thus the

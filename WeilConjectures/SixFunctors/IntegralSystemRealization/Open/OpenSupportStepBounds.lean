@@ -266,8 +266,7 @@ private theorem open_normalized {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersio
 
 /-- One quasi-compact open letter preserves the system domain and integral
 constructibility, with the same finite cohomology and Tor intervals.
-Source: Stacks 0GL1, 0E8I, 0941; parent proof step 8
-(blueprint: lem-sf-open-support-step-bounds).
+Source: Stacks 0GL1, 0E8I, 0941; parent proof step 8.
 
 Proof: the finite open CTF theorem preserves constructible cohomology and the
 same cohomological and Tor intervals at every level; transport these conclusions

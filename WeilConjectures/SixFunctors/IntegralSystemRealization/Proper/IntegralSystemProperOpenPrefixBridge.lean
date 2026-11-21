@@ -81,8 +81,7 @@ obtain the cartesian square. Transport the restriction factor by uniqueness of
 open extension, its inverse open unit, and the normalized open compositor.
 Map this square by the second-projection direct functor and paste with the
 cartesian square. Naturality orders the source-coordinate bridge as displayed.
-This argument uses no clopen comparison or final direct compositor.
-(blueprint: lem-sf-integral-system-proper-open-prefix-bridge). -/
+This argument uses no clopen comparison or final direct compositor. -/
 theorem properOpenPrefix_bridge (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)

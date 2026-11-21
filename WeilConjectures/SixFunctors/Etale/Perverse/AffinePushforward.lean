@@ -190,7 +190,7 @@ at most `d`, and a bounded constructible `K` with `K[n]` satisfying the support 
 `(Rf_! K)[n + d]` satisfies the support condition. Affineness of `f` is not needed. A point `y`
 with nonzero stalk of `Hᵐ(Rf_! K)` has, by dévissage, a nonzero stalk of `Rᵐ⁻ᵇf_! Hᵇ K` for some
 `b`; then `dim {y}⁻ + e ≤ dim supp Hᵇ K ≤ n - b` for some `e ≤ d` with `m - b ≤ 2e`, whence
-`dim {y}⁻ ≤ n + d - m`. (blueprint: `lem-per-artin-gabber-affine-curve`) -/
+`dim {y}⁻ ≤ n + d - m`. -/
 theorem DerivedCategory.supportCondition_shift_rightDerivedLowerShriek {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] (d : ℕ)
@@ -251,7 +251,7 @@ between schemes of finite type over a field, reduced by dévissage to its pointw
 constructible sheaf `G` (Stacks `0F0X`): if every geometric point `s` over `y ∈ Y` with
 `s^* Rᵠf_* G ≠ 0` has `q ≤ N` and `dim {y}⁻ ≤ N - q` whenever `dim supp G ≤ N`, then for a
 bounded constructible `K` with `K[n]` satisfying the support condition, `(Rf_* K)[n + d]`
-satisfies it, for every `d ≥ 0`. (blueprint: `lem-per-artin-gabber-affine-curve`, Step 3) -/
+satisfies it, for every `d ≥ 0`. -/
 theorem DerivedCategory.supportCondition_shift_rightDerivedLowerStar_of_stalk {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f]

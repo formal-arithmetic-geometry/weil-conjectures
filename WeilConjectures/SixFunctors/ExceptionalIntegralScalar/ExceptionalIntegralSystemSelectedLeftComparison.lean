@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalI
 
 /-! # Normalized selected scalar comparison
 Source: Zheng, Construction 4.1, Lemma 5.22, and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-system-selected-left-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -102,8 +101,7 @@ over L, the lifted square, and the reduction comparison over E. Precomposition b
 reconstruction equivalence is fully faithful, so this composite descends to a selected
 comparison of functors (preimageIso). On reconstructed integral objects the inverse
 factors cancel and the lifted-square equation gives the displayed balanced equation.
-No faithfulness of finite evaluation is used.
-(blueprint: lem-sf-exceptional-integral-system-selected-left-comparison). -/
+No faithfulness of finite evaluation is used. -/
 theorem exceptionalIntegralSystemSelected
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

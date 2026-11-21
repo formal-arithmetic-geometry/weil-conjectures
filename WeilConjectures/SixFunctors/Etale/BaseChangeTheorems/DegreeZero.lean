@@ -197,8 +197,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 /-- **The strictly henselian setup for the projective line.** For a local ring `A` with
 residue field `κ` — in the application `A` is strictly henselian — let `X = ℙ¹_A`, let
 `X₀ = ℙ¹_κ` be its closed fibre, and for an étale sheaf `F` on `X` let `F₀` be its inverse
-image on `X₀`. This is the restriction map `res_F : Γ(X, F) ⟶ Γ(X₀, F₀)`.
-(blueprint: `proposition-cohomology-p-1-over-henselian--1`) -/
+image on `X₀`. This is the restriction map `res_F : Γ(X, F) ⟶ Γ(X₀, F₀)`. -/
 noncomputable def Etale.projectiveLineClosedFibreRestriction (A : Type u) [CommRing A]
     [IsLocalRing A]
     (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -219,8 +218,7 @@ closed fibre on the finite covers of `Y`, from the connectedness of the closed f
 (`AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`) and the spectral
 shrinking `SpectralSpace.exists_shrink_of_isConnected_inter`, and the passage to étale sheaves
 by finite refinement (`AlgebraicGeometry.Scheme.exists_finite_surjective_refinement_of_etale`)
-and descent (`AlgebraicGeometry.Etale.exists_pullSection_eq_of_isFinite_of_surjective`).
-(blueprint: `theorem-comparison-over-henselian-pair-degree--1`) -/
+and descent (`AlgebraicGeometry.Etale.exists_pullSection_eq_of_isFinite_of_surjective`). -/
 @[stacks 0A0C]
 theorem Etale.isIso_globalSectionsUpperStarMap_of_henselianRing {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] {Y Y₀ : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p]
@@ -252,8 +250,7 @@ geometric fibre `Z_s = Z ×_A κ̄` is an isomorphism.
 
 As `κ` is separably closed, `κ̄/κ` is purely inseparable, so `Z_s ⟶ Z₀ = Z ×_A κ` is a universal
 homeomorphism and induces an isomorphism on sections; the comparison for `Z₀` is
-`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_henselianRing`.
-(blueprint: `lemma-sections-geometric-fibre`) -/
+`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_henselianRing`. -/
 theorem Etale.isIso_globalSectionsUpperStarMap_geometricFibre (A : Type u) [CommRing A]
     [HenselianLocalRing A] [IsSepClosed (IsLocalRing.ResidueField A)] {Z : Scheme.{u}}
     (p : Z ⟶ Spec (.of A)) [IsProper p] (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

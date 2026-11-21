@@ -16,7 +16,7 @@ For a finite coefficient ring `Λ` and a compactification `c = (X ⟶[i] Z ⟶[g
 `f : X ⟶ Y`, the derived lower shriek `Rf_!(c) = D(i_!) ⋙ Rg_*` on the unbounded derived
 categories of étale sheaves of `Λ`-modules is triangulated, commutes with coproducts and, for
 `Y` of finite type over a field on which the exponent of `Λ` is invertible, carries `Dctf(X, Λ)`
-into `Dctf(Y, Λ)` (blueprint `proposition-construction-independence-rf-shriek`).
+into `Dctf(Y, Λ)`.
 
 ## Main results
 
@@ -42,7 +42,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- Blueprint `proposition-construction-independence-rf-shriek`: compact support along one
+/-- Compact support along one
 compactification.
 
 Let `c = (X ⟶[i] Z ⟶[g] Y)` be a compactification of `f`, with `i` an open immersion and `g`

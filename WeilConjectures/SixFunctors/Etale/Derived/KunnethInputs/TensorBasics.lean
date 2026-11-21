@@ -12,17 +12,16 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 /-!
 # Basic properties of the derived tensor product of étale complexes
 
-Inputs of the ordinary Künneth formula (blueprint subsection
-`proposition-ordinary-external-kunneth--1`) about the derived tensor product `- ⊗ᴸ -` on `D(X_ét)`,
+Inputs of the ordinary Künneth formula about the derived tensor product `- ⊗ᴸ -` on `D(X_ét)`,
 for a monoidal Grothendieck abelian coefficient category `A` with functorial flat resolutions (for
 instance `A = ModuleCat Λ`).
 
 ## Main results
 
-- `AlgebraicGeometry.Etale.nonempty_derivedTensor_symmetry` (`lem-kun-tensor-sym`).
-- `AlgebraicGeometry.Etale.isIso_derivedTensor_unit_constraints` (`lem-kun-tensor-unit`).
+- `AlgebraicGeometry.Etale.nonempty_derivedTensor_symmetry`.
+- `AlgebraicGeometry.Etale.isIso_derivedTensor_unit_constraints`.
 - `AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_tensor_comparison`
-  (`lem-kun-inverse-image-monoidal`).
+.
 -/
 
 @[expose] public section
@@ -43,7 +42,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
-/-- Blueprint `lem-kun-tensor-sym`: the derived tensor product on `D(X_ét)` is symmetric: there
+/-- The derived tensor product on `D(X_ét)` is symmetric: there
 is an isomorphism `K ⊗ᴸ M ≅ M ⊗ᴸ K`, natural in both `K` and `M`, i.e. an isomorphism between the
 bifunctor `- ⊗ᴸ -` and its flip. It is the braiding of the symmetric monoidal structure on
 `D(X_ét)` (`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`), obtained by deriving the
@@ -60,7 +59,7 @@ noncomputable def singleFunctorObjTensorUnitIso (X : Scheme.{u}) :
       𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
   DerivedCategory.singleFunctorObjUnitIso _
 
-/-- Blueprint `lem-kun-tensor-unit`: for `E ∈ D(X_ét)`, the two canonical unit constraints
+/-- For `E ∈ D(X_ét)`, the two canonical unit constraints
 `E ⊗ᴸ Λ_X ⟶ E` and `Λ_X ⊗ᴸ E ⟶ E` are isomorphisms, where `Λ_X` is the constant sheaf (the
 monoidal unit of étale sheaves) placed in degree `0`. The constraints are the unitors of the
 monoidal structure of `D(X_ét)` composed with the identification of `Λ_X[0]` with its unit
@@ -75,7 +74,7 @@ theorem isIso_derivedTensor_unit_constraints {X : Scheme.{u}}
 
 variable [Etale.UpperStarPreservesFlat A]
 
-/-- Blueprint `lem-kun-inverse-image-monoidal`: for a morphism of schemes `g : Z ⟶ Y`, the
+/-- For a morphism of schemes `g : Z ⟶ Y`, the
 derived pullback is monoidal for the derived tensor product: the canonical comparison
 `Lg^*(K ⊗ᴸ L) ⟶ Lg^*K ⊗ᴸ Lg^*L` (`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison`,
 natural in `K` and `L`) is an isomorphism. The blueprint's comparison

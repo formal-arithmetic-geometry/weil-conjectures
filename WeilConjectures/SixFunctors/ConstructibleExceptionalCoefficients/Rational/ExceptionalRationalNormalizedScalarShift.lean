@@ -193,8 +193,7 @@ private theorem integral_normalized_comparison_shift
 /-- The rational scalar comparison commutes with canonically normalized shifts.
 This concerns only one finite coefficient enlargement. It asserts no shift structure,
 exactness, or adjunction on the common-field pair categories.
-Source: Zheng, Constructions 6.2 and 6.6; common-field exactness proof, step 2
-(blueprint: lem-sf-rational-normalized-scalar-shift).
+Source: Zheng, Constructions 6.2 and 6.6; common-field exactness proof, step 2.
 
 Proof: fix an enlargement i ≤ j and use the integral scalar functors supplied by A.
 Their realizations identify them with the completed scalar extensions, including their

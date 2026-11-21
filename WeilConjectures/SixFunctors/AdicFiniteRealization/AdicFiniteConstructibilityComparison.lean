@@ -14,7 +14,6 @@ import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 /-! # Constructibility in finite adic module presentations
 
 Source: BS Definitions 6.8.1 and 6.8.8; HRS Theorem 7.7 and Lemma 7.9.
-(blueprint: lem-sf-adic-finite-constructibility-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -205,8 +204,7 @@ private def finite_closure_data (C : Core l T) (B : ScalarData l T C) :
   exact ConcreteCategory.congr_hom h₁ s
 
 /-- Actual finite coefficient legs and the four constructibility comparisons.
-Source: finite realization node, step 3; BS Definition 6.8.8; HRS 7.7 and 7.9
-(blueprint: lem-sf-adic-finite-constructibility-comparison).
+Source: finite realization node, step 3; BS Definition 6.8.8; HRS 7.7 and 7.9.
 
 Proof:
 1. The point-adjunction comparison identifies the section ring of the pulled-back

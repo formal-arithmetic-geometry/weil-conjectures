@@ -22,7 +22,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The vertical, horizontal, and base-change equations for a supplied transport gamma.
 Source: Stacks 0F7C, 0F7D and 0F7F; Zheng Lemma 4.10.
-(blueprint: lem-sf-integral-system-proper-open-transport-pasting).
 Proof: transport each intrinsic mate-pasting equation through the canonical bridge;
 naturality and inverse cancellation identify the three resulting composites. -/
 structure ProperOpenTransportPasting (o : Operations l E) (c : Compositors l E o)

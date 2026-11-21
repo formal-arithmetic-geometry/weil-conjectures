@@ -31,7 +31,6 @@ with finite coefficients
 `Rj_{M*} Lε_M^* K`, which is again of étale origin
 (`ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj`,
 `ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_rightDerivedLowerStar_obj`).
-
 -/
 
 @[expose] public section

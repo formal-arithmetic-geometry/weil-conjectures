@@ -293,8 +293,7 @@ Source: Stacks 07A7 and 0F7B; blueprint fix-prop-coherence.
 Proof: compare the two pull-composition paths using pull_bridge_composition and
 naturality of equality transport. The mate-whiskering identities carry that square
 through the pull comparisons and the conjugate push comparisons. The adjunction
-triangle identities identify both cartesian conjugates with those mates.
-(blueprint: lem-sf-integral-system-cartesian-bridge-transport). -/
+triangle identities identify both cartesian conjugates with those mates. -/
 theorem cartesianBridge_transport (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {V W Z : Scheme.{u}} (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion i]

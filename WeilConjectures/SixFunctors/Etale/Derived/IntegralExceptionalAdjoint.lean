@@ -29,7 +29,7 @@ expected reduction Tor interval.
 * The dual formula is the Yoneda argument of `CategoryTheory.Verdier.nonempty_iso_obj_of_adjunction`
   (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedHom`): biduality
   `L ≅ 𝔻_Y 𝔻_Y L` (`theorem-verdier-biduality--2`), the projection formula modulo `ϖ`
-  (`proposition-six-operations-change-coefficients`), which suffices for morphisms into the derived
+, which suffices for morphisms into the derived
   complete dualizing complex, and the identification `Rf^! ω_Y ≅ ω_X` of the dualizing complexes
   (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_dualizing`).
 * Constructibility and the Tor interval then follow, as in the blueprint, from integral
@@ -643,7 +643,7 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
   {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 include hϖ hI in
-/-- Blueprint `proposition-six-operations-dctf`: Preservation results and their actual hypotheses,
+/-- Preservation results and their actual hypotheses,
 the integral entries (item 5).
 
 At the integral stage (`Λ` a Noetherian domain complete for `I = (ϖ)`, `Λ ⧸ I` finite of

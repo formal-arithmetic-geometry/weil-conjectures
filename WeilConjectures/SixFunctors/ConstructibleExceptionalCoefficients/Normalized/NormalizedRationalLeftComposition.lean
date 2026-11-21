@@ -115,8 +115,7 @@ private def normalizedAssociator {s t r : RingStage.{max u v} l}
 /--
 The normalized rational left comparison satisfies scalar composition.
 Source: exceptional inverse-image coefficient construction, rationalization paragraph;
-the rational-arrow localization argument, Steps 1--4
-(blueprint: lem-sf-normalized-rational-left-laws).
+the rational-arrow localization argument, Steps 1--4.
 
 The proof first transports the integral compact-support scalar cocycle through the
 specified localization. Every rational object is represented by an integral object with

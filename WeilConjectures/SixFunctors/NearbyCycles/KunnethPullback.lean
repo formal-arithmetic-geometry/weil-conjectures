@@ -18,7 +18,7 @@ pullback exchanges `α`: for morphisms of models `ρ_M : M' ⟶ M`, `ρ_N : N' �
 compatible with `φ₁ : P ⟶ M`, `φ₂ : P ⟶ N` and `φ₁' : P' ⟶ M'`, `φ₂' : P' ⟶ N'`, the square
 ```
 Lρ_P'^* (Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B) --Lρ'^* Π--> Lρ_P'^* Ψ_P (A ⊠ B)
-        | (α_{ρ_M} ⊗ α_{ρ_N}) ∘ m                     | m ∘ α_{ρ_P}
+        | (α_{ρ_M} ⊗ α_{ρ_N}) ∘ m | m ∘ α_{ρ_P}
 Le₁'^* Ψ_{M'} Lρ_M^* A ⊗ Le₂'^* Ψ_{N'} Lρ_N^* B --Π--> Ψ_{P'} (Lρ_M^* A ⊠ Lρ_N^* B)
 ```
 commutes up to the tensor and pullback comparisons `m`
@@ -29,7 +29,6 @@ exchanges `α_ρ` are invertible (e.g. for open immersions,
 `WeilConjectures.SixFunctors.NearbyCycles.OpenExchange`), `Lρ_P'^* Π_{A,B}` is invertible if and
 only if `Π_{Lρ_M^* A, Lρ_N^* B}` is
 (`NearbyCyclesModel.isIso_map_kunnethMap_iff_of_isKunnethRestriction`).
-
 -/
 
 @[expose] public section

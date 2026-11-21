@@ -11,8 +11,6 @@ import all WeilConjectures.SixFunctors.GeneratorReduction.GeneratorKind.TensorAd
 import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffectivity
 
 /-! # Categorical calculus for ordinary proper/open coefficient squares
-
-Source: blueprint fix-prop-coherence, the coefficient comparisons of individual maps.
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +33,6 @@ attribute [local irreducible] pullbackTensorCalculus
   ringedOpenComp Compositors.openComp openCongr ringedOpenCongr ordinaryPushReduction
 
 /-- Conjugation by adjunction preserves a commuting coefficient square.
-Source: blueprint fix-prop-coherence, coherence of adjunction units and counits.
-(blueprint: lem-sf-integral-ordinary-proper-open-conjugate-square).
 
 Proof: apply the mate equivalence to the equality of the two whiskered squares.
 The two vertical-composition identities for conjugate equivalences identify its

@@ -99,7 +99,7 @@ private def finiteProjection (W : Scheme.{u}) (n : ℕ) :
     (eqToIso (coefficientSequenceRestriction_evaluation l E W n)).hom
 
 /-- Finite evaluation of the ordinary reduction and pullback mate.
-Source: Stacks Tags 06YY and 0D6E (blueprint: lem-sf-integral-reduction-pull-ordinary-square). -/
+Source: Stacks Tags 06YY and 0D6E. -/
 theorem integralReductionPullOrdinarySquare (a : OrdinaryLimitModel l E)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (M : integralTowerModules l E Y) :
     (pullbackTensorReductionEvaluation l E X n).hom.app ((integralOrdinaryPull l E f).obj M) ≫
@@ -157,7 +157,7 @@ theorem integralReductionPullOrdinarySquare (a : OrdinaryLimitModel l E)
       ((coefficientSequenceEvaluation l E X n).obj Z) V.unop _).symm
 
 /-- Finite evaluation of the ordinary reduction and pullback mate.
-Source: Stacks Tags 06YY and 0D6E (blueprint: lem-sf-integral-reduction-pull-ordinary-square). -/
+Source: Stacks Tags 06YY and 0D6E. -/
 theorem integralReductionPullOrdinaryComplex (a : OrdinaryLimitModel l E)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :

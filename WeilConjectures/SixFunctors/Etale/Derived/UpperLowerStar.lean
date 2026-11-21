@@ -79,7 +79,6 @@ the type of the functor is spelled out.
 - `AlgebraicGeometry.Etale.linear_rightDerivedLowerStar` and
   `AlgebraicGeometry.Etale.linear_leftDerivedUpperStar` : for a `Λ`-linear `A`, the derived
   functors `Rg_*` and `Lg^*` are `Λ`-linear.
-
 -/
 
 @[expose] public section
@@ -166,9 +165,9 @@ It is the conjugate, under the adjunctions `D(g^*) ⊣ Rg_*` of
 isomorphism `D((g₁ ≫ g₂)^*) ≅ D(g₂^*) ⋙ D(g₁^*)` of the functors induced by the exact
 pullbacks:
 ```
-   D((g₁ ≫ g₂)^*)  ≅  D(g₂^*) ⋙ D(g₁^*)
-         ⊣                    ⊣
-   R(g₁ ≫ g₂)_*    ≅  Rg₁_* ⋙ Rg₂_*
+   D((g₁ ≫ g₂)^*) ≅ D(g₂^*) ⋙ D(g₁^*)
+         ⊣ ⊣
+   R(g₁ ≫ g₂)_* ≅ Rg₁_* ⋙ Rg₂_*
 ```
 `conjugateIsoEquiv` turns an isomorphism of left adjoints into an isomorphism of right
 adjoints in the opposite direction, so the isomorphism of left adjoints is inverted before
@@ -271,7 +270,7 @@ the functor induced by the exact functor `g^*` on the derived categories.
 ```
                         Lg^*
                  -------------------->
-        D(Y_ét)            ≅             D(Z_ét)
+        D(Y_ét) ≅ D(Z_ét)
                  -------------------->
                      D((g)^*[A])
 ```
@@ -300,10 +299,10 @@ compatibility of left derivation with `mapDerivedCategory` for exact functors. A
 ```
                  L(g₁ ≫ g₂)^*
 D(R_ét) -------------------------------> D(T_ét)
-      |                                    ^
-      |                                    |
+      | ^
+      | |
       +---------> D(S_ét) -----------------+
-        Lg₂^*              Lg₁^*
+        Lg₂^* Lg₁^*
 ```
 -/
 noncomputable def leftDerivedUpperStarComp {T S R : Scheme.{u}}
@@ -320,10 +319,10 @@ derived category computes the `n`-th homology sheaf of the derived pullback.
 ```
                 H^n
 D(Y_ét) -----------------> Sh(Y_ét)
-   |                           |
- Lg^*                        g^*
-   |                           |
-   v                           v
+   | |
+ Lg^* g^*
+   | |
+   v v
 D(Z_ét) -----------------> Sh(Z_ét)
                 H^n
 ```
@@ -341,10 +340,10 @@ the pullback of the sheaf placed in degree `0`, `Lg^*(F[0]) ≅ (g^* F)[0]`.
 ```
                 (-)[0]
 Sh(Y_ét) -----------------> D(Y_ét)
-    |                           |
-    g^*                       Lg^*
-    |                           |
-    v                           v
+    | |
+    g^* Lg^*
+    | |
+    v v
 Sh(Z_ét) -----------------> D(Z_ét)
                 (-)[0]
 ```
@@ -407,8 +406,7 @@ pullback `g^*` on étale sheaves is exact, its derived functor on the bounded be
 derived categories is the restriction `D+((g)^*[A])` of the functor induced by `g^*`,
 and it is left adjoint to the right derived functor `R+((g)_*[A])` of the pushforward on
 the bounded below derived categories. The right adjoint is derived via injective
-resolutions, which exist since the étale sheaf category is Grothendieck abelian.
-(blueprint: `prose-04-06`) -/
+resolutions, which exist since the étale sheaf category is Grothendieck abelian. -/
 noncomputable def derivedUpperStarLowerStarAdjunctionPlus :
     D+((g)^*[A]) ⊣ R+((g)_*[A]) :=
   (Etale.upperStarLowerStarAdjunction A g).derivedAdjunctionPlus

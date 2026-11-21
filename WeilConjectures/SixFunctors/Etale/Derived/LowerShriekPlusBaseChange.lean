@@ -16,11 +16,11 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
 For a finite coefficient ring `Λ`, a cartesian square
 ```
 X' --g'--> X
-|f'        |f
+|f' |f
 Y' --g---> Y
 ```
 with `g` arbitrary and a compactification `c = (X ⟶[c.i] c.Z ⟶[c.g] Y)` of `f`, the
-compact-support exchange map (blueprint `prose-05-31`)
+compact-support exchange map
 
 `Ex_!(c) : g^* Rf_!(c) ⟶ Rf'_!(c ×_Y Y') g'^*`
 
@@ -29,12 +29,10 @@ support formalism `AlgebraicGeometry.Etale.derivedPlusFormalism` of the bounded 
 derived categories: the derived base change map `Ex_*` of the proper `c.g`
 (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`, blueprint
 `definition-derived-base-change-map`), applied to `(c.i)_! K`, composed with the base change
-isomorphism of the extension by zero (blueprint
-`proposition-extension-zero-restriction-closed-subscheme--11`). It is an isomorphism: the first
+isomorphism of the extension by zero. It is an isomorphism: the first
 factor by the bounded below proper base change theorem
 (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`, blueprint
-`theorem-proper-base-change-classical-pro`), the second by base change for the extension by zero
-(blueprint `proposition-composition-base-change-rf-shriek`).
+`theorem-proper-base-change-classical-pro`), the second by base change for the extension by zero.
 
 ## Main definitions
 
@@ -49,7 +47,7 @@ factor by the bounded below proper base change theorem
   formalism is `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`.
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap`
   and `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekPlusBaseChangeMap`: compact-support
-  base change on `D⁺` (blueprint `proposition-composition-base-change-rf-shriek`). Naturality in `K`
+  base change on `D⁺`. Naturality in `K`
   holds since the exchange maps are natural transformations; the identity and pasting laws and the
   independence of the compactification are `CompactSupportFormalism.shriekBaseChange_id`,
   `CompactSupportFormalism.shriekBaseChange_paste_horiz`,
@@ -115,8 +113,7 @@ lemma derivedPlusFormalism_pfBaseChange_eq_mateEquiv (t : U' ⟶ U) (l : U' ⟶ 
   rfl
 
 /-- **The base change map of pushforwards of the compact support formalism of `D⁺`** is the
-derived base change map `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus` (blueprint
-`definition-derived-base-change-map`). -/
+derived base change map `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`. -/
 lemma derivedPlusFormalism_pfBaseChange (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
     (w : t ≫ r = l ≫ b) :
     ((derivedPlusFormalism A).pfBaseChange t l r b w) =
@@ -148,7 +145,7 @@ extension-by-zero base change.
 For a cartesian square
 ```
 U' --t--> U
-|l        |r
+|l |r
 Z' --b--> Z
 ```
 with `l` and `r` open immersions and `Λ` finite, the base change map `t^* ⋙ l_! ⟶ r_! ⋙ b^*`,
@@ -167,13 +164,13 @@ theorem isIso_derivedPlusFormalism_baseChange [Finite Λ] {U' U Z' Z : Scheme.{u
     IsIso ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange t l r b h.w) :=
   CompactSupportFormalism.HasBaseChange.isIso_baseChange h
 
-/-- Blueprint `prose-05-31`: Compact-support exchange map.
+/-- Compact-support exchange map.
 
 **The compact-support exchange map on `D⁺` along a compactification** `Ex_!(c)`: for a
 cartesian square `g' ≫ f = f' ≫ g`, a compactification `c` of `f` and `Λ` finite, the natural
 transformation `g^* Rf_!(c) ⟶ Rf'_!(c ×_Y Y') g'^*` of functors
 `D⁺(X_ét, Λ) ⥤ D⁺(Y'_ét, Λ)`, where `c ×_Y Y' = c.ofIsPullback sq` is the base changed
-compactification of `f'` (blueprint `remark-base-change-compactification--1`). It is the derived
+compactification of `f'`. It is the derived
 base change map `derivedBaseChangeMapPlus` of the proper map `c.g`
 (`AlgebraicGeometry.Etale.derivedPlusFormalism_pfBaseChange`), applied after `(c.i)_!`,
 followed by the inverse of the base change isomorphism of the extension by zero. -/
@@ -183,13 +180,13 @@ noncomputable def rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap [Fi
       D+((g')^*[ModuleCat.{u + 1} Λ]) ⋙ Rf_!(c.ofIsPullback sq)[ModuleCat.{u + 1} Λ]+ :=
   ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekBaseChangeOfIsPullback sq c)
 
-/-- Blueprint `proposition-composition-base-change-rf-shriek`: Compact-support base change at finite
+/-- Compact-support base change at finite
 coefficients.
 
 **Compact-support base change on `D⁺`**: for a cartesian square
 ```
 X' --g'--> X
-|f'        |f
+|f' |f
 Y' --g---> Y
 ```
 with `g` arbitrary, a compactification `c` of `f` and a finite coefficient ring `Λ`, the
@@ -214,14 +211,14 @@ instance isIso_rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap [Finit
 /-- **The compact-support exchange map** `Ex_! : g^* R(f)_! ⟶ R(f')_! g'^*` of the canonical
 compactly supported direct images on `D⁺(-_ét, Λ)`, for `Λ` finite: the exchange map along the
 chosen compactification of `f`, followed by the comparison isomorphism with the chosen
-compactification of `f'`. (blueprint: `prose-05-31`) -/
+compactification of `f'`. -/
 noncomputable def rightDerivedLowerShriekPlusBaseChangeMap [Finite Λ] [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
     R(f)_![ModuleCat.{u + 1} Λ]+ ⋙ D+((g)^*[ModuleCat.{u + 1} Λ]) ⟶
       D+((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ]+ :=
   ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekBaseChange sq)
 
-/-- Blueprint `sk-prop-sf-cbc`: Compact-support base change, clause (a) on the small étale site.
+/-- Compact-support base change, clause (a) on the small étale site.
 
 **Compact-support base change on `D⁺(X_ét, Λ)`**: for `f` admitting a compactification, `g`
 arbitrary, a cartesian square with `f'` quasi-compact and admitting a compactification, and `Λ`

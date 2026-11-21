@@ -53,7 +53,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `theorem-results-from-etale-theory`: The classical direct-image finiteness input.
+/-- The classical direct-image finiteness input.
 
 Let `k` be a field and `Λ` a coefficient ring. The *direct-image finiteness input over `k`* holds
 if
@@ -139,8 +139,7 @@ variable [Finite Λ]
 
 /-- The higher direct images of a constructible sheaf along a morphism of finite-type schemes
 over a field are constructible, if the exponent of `Λ` is invertible on the field. This is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType`
-(blueprint `proposition-six-operations-dctf--2`) for the sheaf placed in degree `0`. -/
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType` for the sheaf placed in degree `0`. -/
 theorem isConstructibleSheaf_higherDirectImage {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {S T : Scheme.{u}} (aS : S ⟶ Spec (.of k))
     (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] [LocallyOfFiniteType aT]
@@ -151,7 +150,7 @@ theorem isConstructibleSheaf_higherDirectImage {k : Type u} [Field k]
     (DerivedCategory.boundedConstructible_singleFunctor_obj F 0)).2 q
   IsConstructibleSheaf.of_iso (homologyRightDerivedLowerStarSingleIsoHigherDirectImage Λ u F q)
 
-/-- Blueprint `theorem-results-from-etale-theory`: The direct-image finiteness input holds.
+/-- The direct-image finiteness input holds.
 
 Let `k` be a separably closed field and `Λ` a finite ring whose exponent is invertible in `k`.
 Then both clauses of the direct-image finiteness input

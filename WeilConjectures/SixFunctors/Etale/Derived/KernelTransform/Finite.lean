@@ -34,7 +34,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Composit
   kernel supported on the diagonal is a tensor product.
 
 See `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform` for the implementation notes.
-
 -/
 
 @[expose] public section
@@ -111,9 +110,9 @@ The composite is read on the triple product, in the cartesian square
 
 ```
     V ×ₛ V' ×ₛ V'' ──r₁₂──▶ V ×ₛ V'
-          │                    │
-       r₂₃│                    │p₂
-          ▼                    ▼
+          │ │
+       r₂₃│ │p₂
+          ▼ ▼
       V' ×ₛ V'' ─────q₁─────▶ V'
 ```
 
@@ -159,9 +158,9 @@ naturally in `K`, where `Δ` is the diagonal of the separated morphism `π`:
 ```
              Δ
         V ──────▶ V ×ₛ V ──p₂──▶ V
-         ╲          │
-          ╲ 𝟙       │p₁
-           ╲        ▼
+         ╲ │
+          ╲ 𝟙 │p₁
+           ╲ ▼
             ──────▶ V
 ```
 

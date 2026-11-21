@@ -62,7 +62,6 @@ variable (l : ℕ) [Fact l.Prime]
 set_option linter.unusedVariables false in
 /-- Ambient equality underlying integral normalized scalar transport.
 Source: Definition 3.4.10 and Lemma 3.4.12, pp. 22-23; Proposition 3.5.1, p. 24.
-(blueprint: lem-sf-normalized-scalar-associator-localization-transport-integral-core).
 Proof: after applying the faithful finite-Tor integral inclusion, expand the normalized
 associator equation using the three realization equalities and inverse-realization
 normalizations; identify the resulting ordinary balanced tensor map with the unique

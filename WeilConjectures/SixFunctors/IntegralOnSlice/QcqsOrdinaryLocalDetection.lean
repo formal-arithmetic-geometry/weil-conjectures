@@ -109,8 +109,7 @@ private theorem ordinaryExactJoint
 jointly conservative for an open--closed pair, and conservative on a covering family.
 These are tests for arbitrary derived morphisms.
 
-Source: Stacks Tags 09AH, 09BM, 04TQ and 05RT
-(blueprint: lem-fix-qcqs-ordinary-local-detection).
+Source: Stacks Tags 09AH, 09BM, 04TQ and 05RT.
 Proof: ordinary module pullbacks respect identity and composition by uniqueness
 of their ringed adjunctions. The stated ordinary restriction model theorem gives
 exactness for immersions, weakly etale charts, and their composites. Exactness

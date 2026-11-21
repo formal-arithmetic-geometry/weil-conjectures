@@ -12,8 +12,7 @@ public import Mathlib.Algebra.Homology.Additive
 # Tor amplitude for etale sheaves
 
 Source: literature/blueprint/master/blueprint/sec-smooth-purity/
-`sk-prop-sf-kunneth-ordinary/def-kun-tor-amplitude.md`
-(blueprint: def-kun-tor-amplitude); Stacks Project, Tags 08FZ and 0F1M.
+`sk-prop-sf-kunneth-ordinary/def-kun-tor-amplitude.md`; Stacks Project, Tags 08FZ and 0F1M.
 
 The bounded interval predicate is the existing
 `AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn` in
@@ -36,8 +35,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Tor amplitude in `[a, ∞)`: for every etale sheaf of `Λ`-modules placed in degree zero,
 all cohomology sheaves of its derived tensor with `E` vanish below `a`.
-Source: blueprint `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-tor-amplitude.md`
-(blueprint: def-kun-tor-amplitude), and Stacks Project, Tag 0F1M, first paragraph of proof.
+Source: blueprint `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-tor-amplitude.md`, and Stacks Project, Tag 0F1M, first paragraph of proof.
 The bounded variant is the existing `DerivedCategory.hasTorAmplitudeIn`. -/
 def DerivedCategory.hasTorAmplitudeGE (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u})
     (a : ℤ) : ObjectProperty (DerivedCategoryModule Λ T) :=

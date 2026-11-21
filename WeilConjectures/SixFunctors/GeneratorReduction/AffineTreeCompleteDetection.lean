@@ -369,7 +369,6 @@ not be constructible, bounded, or a tensor product.
 
 Source: Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10;
 Stacks Tags 099M, 09BL and 09BM, canonical quotient-completion locality.
-(blueprint: lem-sf-affine-tree-complete-detection).
 
 Proof: use invertibility of the canonical quotient-completion unit to test
 completeness. Affine open restriction preserves products, finite quotient tensors,

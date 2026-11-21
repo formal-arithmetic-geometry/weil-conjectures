@@ -88,9 +88,9 @@ theorem isIso_dualComparison_rightDerivedLowerStar
 ```
             Rf_* δ_K
   Rf_* K ─────────────▶ Rf_* 𝔻_X 𝔻_X K
-     │                        │
-     │ δ_{Rf_* K}             │ c_{𝔻_X K}
-     ▼                        ▼
+     │ │
+     │ δ_{Rf_* K} │ c_{𝔻_X K}
+     ▼ ▼
   𝔻_Y 𝔻_Y Rf_* K ──────▶ 𝔻_Y Rf_* 𝔻_X K
              𝔻_Y c_K
 ```

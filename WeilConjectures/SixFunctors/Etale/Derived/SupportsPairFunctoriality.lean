@@ -53,7 +53,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable {X X' Z Z' U U' : Scheme.{u}}
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
+/-- Long exact sequence for cohomology with support
 (functoriality in the pair, for arbitrary morphisms of pairs).
 
 Let `e : X' ⟶ X` be a morphism mapping the open complement `U'` of the closed immersion

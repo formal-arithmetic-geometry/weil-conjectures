@@ -16,10 +16,10 @@ Consider a cartesian square of schemes
 
 ```
 U' --j'--> Z'
-|          |
-g'         g''
-v          v
-U  --j-->  Z
+| |
+g' g''
+v v
+U --j--> Z
 ```
 
 with `j` (hence `j'`) an open immersion. The extension by zero `j_!` is exact
@@ -73,10 +73,10 @@ lemma Etale.isIso_openImmersionLowerShriekBaseChangeMap_mapHomologicalComplex
 
 ```
 U' --j'--> Z'
-|          |
-g'         g''
-v          v
-U  --j-->  Z
+| |
+g' g''
+v v
+U --j--> Z
 ```
 
 the extension by zero is exact

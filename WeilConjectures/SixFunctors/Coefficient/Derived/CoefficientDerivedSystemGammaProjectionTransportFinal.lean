@@ -11,7 +11,7 @@ import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemG
 /-! # Finite coefficient gamma transport calculation
 
 This is the final finite fiber/base-change calculation used by the transported gamma
-projection theorem (blueprint: lem-coef-derived-system-gamma-projection-transport-final).
+projection theorem.
 -/
 
 @[expose] public section
@@ -28,13 +28,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 /-- The finite fiber/base-change composition remaining after the section projection
-reduction.  It is the concrete specialization of the finite uncurrying and evaluation
+reduction. It is the concrete specialization of the finite uncurrying and evaluation
 identities in the enriched sequence projection formula.
 Source: Stacks 07A6, 08JA, 0D6E and 0941.
 Proof: apply the finite enriched uncurrying identity, the evaluation-defined fiber
 comparison, and functoriality of derived sections and internal Hom; the coefficient
 reduction evaluation is natural in the first variable.
-(blueprint: lem-coef-derived-system-gamma-projection-transport-final)
 -/
 theorem coefficientDerivedSystemGammaProjectionTransport_final
     (S : CoefficientDerivedSystemCalculus l E W)

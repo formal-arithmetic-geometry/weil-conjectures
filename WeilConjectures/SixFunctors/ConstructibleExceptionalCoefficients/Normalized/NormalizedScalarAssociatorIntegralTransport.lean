@@ -25,7 +25,6 @@ transported along the object equalities induced by its three realization equalit
 the transported map is then the intrinsic normalized integral associator. This is
 strictly the integral part of the localization statement.
 Source: Definition 3.4.10 and Lemma 3.4.12, pp. 22-23; Proposition 3.5.1, p. 24.
-(blueprint: lem-sf-normalized-scalar-associator-localization-transport-integral).
 Proof: apply the three realization equalities and the inverse-realization normalizations
 to the normalized scalar-composition equation. The resulting equality is the
 unique normalized completed integral associator, by its defining uniqueness.

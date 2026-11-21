@@ -16,7 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenScalarRes
 /-! # Identity and composition of the normalized quotient reduction arrows
 
 Source: blueprint coefficient quotient proof, Step 4; Stacks Tag 03EK.
-(blueprint: lem-coef-compact-support-quotient-input-laws).
 -/
 
 @[expose] public noncomputable section
@@ -289,7 +288,6 @@ any geometric functor.
 
 Source: blueprint `lem-coef-integral-compact-support.proof.md`, paragraph 2, and
 Step 4 of `lem-coef-compact-support-quotient-cocycle`; Stacks Tag 03EK.
-(blueprint: lem-coef-compact-support-quotient-input-laws).
 
 Proof: the definition of rho is the unique transpose of the level-n unit under the
 integral-to-level-m adjunction. On a common flat-term K-flat representative P, its

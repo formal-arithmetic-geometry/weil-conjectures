@@ -140,8 +140,7 @@ private theorem ordinaryMate_isIso {U X : Scheme.{u}} (j : U ⟶ X)
 
 /-- The evaluation mate for exact extension by zero is invertible on the full
 sequence-site derived category.
-Source: Zheng Construction 4.1; Stacks 03DI, 03DJ, 0941
-(blueprint: lem-sf-integral-system-open-evaluation).
+Source: Zheng Construction 4.1; Stacks 03DI, 03DJ, 0941.
 
 Proof: present an open immersion as localization of the ringed sequence site.
 Ordinary extension by zero is the sheafification of the direct sum over lifts to

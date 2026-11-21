@@ -270,8 +270,8 @@ lemma derivedOpenImmersionLowerShriekProjectionIso_inv_naturality_right
 an open immersion `j`, with `μ : Lj^*(N ⊗ᴸ N') ⟶ Lj^*N ⊗ᴸ Lj^*N'` the tensor comparison:
 ```
 (j_!K ⊗ᴸ N) ⊗ᴸ N' --pf ▷ N'--> j_!(K ⊗ᴸ Lj^*N) ⊗ᴸ N' --pf--> j_!((K ⊗ᴸ Lj^*N) ⊗ᴸ Lj^*N')
-        | α                                                          ^ j_!(α⁻¹)
-        v                                                          |
+        | α ^ j_!(α⁻¹)
+        v |
 j_!K ⊗ᴸ (N ⊗ᴸ N') --pf--> j_!(K ⊗ᴸ Lj^*(N ⊗ᴸ N')) --j_!(K ◁ μ)--> j_!(K ⊗ᴸ (Lj^*N ⊗ᴸ Lj^*N'))
 ```
 -/

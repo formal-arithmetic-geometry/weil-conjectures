@@ -126,8 +126,7 @@ private theorem native_nsmul_isIso
 
 /-- Native tensor extension inverts the constant integral uniformizer.
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)
-(blueprint: lem-sf-native-integral-tensor-uniformizer).
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
 
 Proof: the uniformizer generates the maximal ideal of the coefficient DVR, and
 ℓ belongs to that ideal since its spectral norm is less than one. Hence the

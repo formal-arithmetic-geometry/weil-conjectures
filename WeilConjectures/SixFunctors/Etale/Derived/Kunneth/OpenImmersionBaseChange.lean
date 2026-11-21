@@ -21,9 +21,9 @@ scheme of finite type over `K`. For the cartesian square
 
 ```
   Y ×_K U --h--> Y ×_K X
-     |              |
-     p              q
-     v              v
+     | |
+     p q
+     v v
      U ------j----> X
 ```
 

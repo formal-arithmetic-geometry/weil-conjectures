@@ -132,8 +132,7 @@ attribute [local irreducible] integralScalarExtensionOfUniverses
 /-- The scalar localization comparison commutes with every integer shift.
 The comparison is the identity transport on integral representatives; the square
 retains the canonical endpoint rationalization shifts.
-Source: Zheng, Construction 6.2, shift compatibility in coefficient localization
-(blueprint: lem-sf-integral-scalar-mate-localization). -/
+Source: Zheng, Construction 6.2, shift compatibility in coefficient localization. -/
 @[irreducible]
 def scalarShiftLocalization
     (E L : FieldStage.{max u v} l) (i : E.carrier →ₐ[Padic l] L.carrier)
@@ -153,8 +152,7 @@ def scalarShiftLocalization
     c.hom.CommShift ℤ
 
 /-- Localize a single supplied counit square on the explicit raw tensor functors.
-Source: Zheng, Construction 6.2, scalar-extension paragraph
-(blueprint: lem-sf-integral-scalar-mate-localization).
+Source: Zheng, Construction 6.2, scalar-extension paragraph.
 
 Proof: identify the two scalar localization squares using the published object and
 pure-tensor formulas and the supplied ambient functor equalities. Rationalization

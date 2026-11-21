@@ -353,7 +353,6 @@ private theorem chosen_canonical (o : Operations l E)
 /-- Vertical proper/open transport pasting for the canonically normalized gamma.
 The bridge equation identifies each supplied component with the intrinsic mate.
 Source: Stacks 0F7C, 0F7D and 0F7F; Zheng Lemma 4.10.
-(blueprint: lem-sf-integral-system-proper-open-transport-pasting-vertical).
 Proof: the section-normalized bridge intertwines both direct-image compositors.
 Apply the three canonical component equations. Naturality moves the bridge maps
 through the functors, and cancellation of the endpoint isomorphism reduces the claim

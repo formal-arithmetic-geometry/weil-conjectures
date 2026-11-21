@@ -15,7 +15,6 @@ import WeilConjectures.ProperBaseChange.IntegralCoefficientPresentation.Integral
 /-! # The completed integral coefficient square
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-condensed-integral-coefficient-square)
 -/
 
 @[expose] public noncomputable section
@@ -160,7 +159,6 @@ set_option backward.isDefEq.respectTransparency false in
 module categories. This is a statement only about coefficient ring sheaves.
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-condensed-integral-coefficient-square).
 
 Proof in words: first compare the finite quotient identifications. Both the raw
 integral identity and the continuous realization fix every constant section, so their

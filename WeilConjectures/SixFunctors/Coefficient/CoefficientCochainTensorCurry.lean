@@ -109,15 +109,14 @@ local notation "Mod" => SheafOfModules.{max c v u}
 omit [HasSheafify J AddCommGrpCat.{max c v u}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}] in
 /-- Evaluate a local internal-Hom section on the identity object of its slice.
-Source: Stacks 03EO (blueprint: lem-sf-coefficient-cochain-tensor-curry). -/
+Source: Stacks 03EO. -/
 noncomputable def coefficientHomSectionApply (L M : Mod) (U : Cᵒᵖ)
     (φ : (SheafOfModules.homObj (R := R) L M).val.obj U) (y : L.val.obj U) :
     M.val.obj U :=
   (φ.app (op (Over.mk (𝟙 U.unop)))) y
 
 /-- Literal evaluation of the curried chain map, before sheafification of each
-summand. Source: Stacks 03EO, 0A90
-(blueprint: lem-sf-coefficient-cochain-tensor-curry). -/
+summand. Source: Stacks 03EO, 0A90. -/
 def IsCoefficientTensorCurry (P Q I : CochainComplex Mod ℤ)
     (f : (coefficientTotalTensor.{u, c, v} J R).obj (P, Q) ⟶ I)
     (g : P ⟶ homComplex (R := R) Q I) : Prop :=
@@ -294,8 +293,7 @@ private theorem sheafHom_ext (A B N : Mod)
 
 /-- Currying on complexes, with literal componentwise evaluation.
 Source: Stacks Project, Modules on Sites, Tag 03EO, and Cohomology on Sites,
-Tags 0A8X and 0A90
-(blueprint: lem-sf-coefficient-cochain-tensor-curry).
+Tags 0A8X and 0A90.
 
 Proof: the normalized degreewise tensor-Hom maps are isomorphisms and commute
 with the signed differentials. They assemble into a chain isomorphism from

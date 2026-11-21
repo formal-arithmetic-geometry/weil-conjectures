@@ -131,7 +131,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 /-! # The augmented quotient tower under the canonical DVR coefficient comparison
 
 Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
-(blueprint: lem-sf-open-dvr-limit-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -146,8 +145,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Canonical projection-normalized ordinary and derived limit transport.
-Source: Stacks Tags 05RR and 0941
-(blueprint: lem-sf-open-dvr-limit-comparison). -/
+Source: Stacks Tags 05RR and 0941. -/
 structure OpenDvrLimitComparison
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) where
@@ -303,8 +301,7 @@ private theorem dvrRlimModel_exists
       Iso.app_inv, Iso.app_hom, Category.assoc] using h'
 
 /-- Scalar restriction along the canonical coefficient isomorphism transports limits.
-Source: Stacks Tags 05RR and 0941
-(blueprint: lem-sf-open-dvr-limit-comparison).
+Source: Stacks Tags 05RR and 0941.
 
 Proof: scalar restriction is an exact equivalence. Its ordinary limit comparison is
 preservesLimitNatIso, hence is fixed by all projections. Apply rightDerivedSquare to

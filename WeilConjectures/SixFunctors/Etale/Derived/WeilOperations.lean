@@ -246,7 +246,7 @@ variable {X Y : Scheme.{u}} {g : X ⟶ X} {h : Y ⟶ Y} {a : X ⟶ Y}
 
 /-- The Weil datum on `La^* M` of a Weil datum `ψ : Lh^* M ⟶ M`, for `g ≫ a = a ≫ h`:
 ```
-                ≅                     La^* ψ
+                ≅ La^* ψ
   Lg^* La^* M ───▶ La^* Lh^* M ──────────▶ La^* M
 ```
 the first map being `AlgebraicGeometry.Etale.derivedSquareUpperStarIso`. It is the structure
@@ -284,7 +284,7 @@ variable [Finite Λ] [HasCompactification a] [QuasiCompact a]
 /-- The Weil datum on `Ra^! M` of a Weil datum `ψ : Lh^* M ⟶ M`, for a cartesian square
 `g ≫ a = a ≫ h`:
 ```
-                Ex^!                     Ra^! ψ
+                Ex^! Ra^! ψ
   Lg^* Ra^! M ───────▶ Ra^! Lh^* M ──────────▶ Ra^! M
 ```
 with the exceptional-inverse-image exchange

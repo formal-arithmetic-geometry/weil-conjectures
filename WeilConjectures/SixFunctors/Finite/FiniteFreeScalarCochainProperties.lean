@@ -74,7 +74,6 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 and computes its derived functor on every complex.
 Source: Stacks, sites-modules.tex, Tag 03EK and sites-cohomology.tex, Tag 06YY;
 Steps 4, 6 and 7 of strict scalar pullback cone naturality.
-(blueprint: lem-sf-finite-free-scalar-cochain-properties).
 
 Proof: use the recorded finite free completed coefficient module S = R^d.
 Restriction of ordinary scalar extension is naturally the finite direct sum

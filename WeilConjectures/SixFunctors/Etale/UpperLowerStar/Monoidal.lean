@@ -43,7 +43,6 @@ which is representably flat by `CategoryTheory.MorphismProperty.Over.representab
   isomorphism.
 - `AlgebraicGeometry.Etale.monoidal_upperStar`: under the same hypothesis, the pullback `g^*`
   is strong monoidal.
-
 -/
 
 @[expose] public section
@@ -109,9 +108,9 @@ is the pullback of `F ⊗ G ⟶ g_*g^*F ⊗ g_*g^*G ⟶ g_*(g^*F ⊗ g^*G)` foll
 lax structure of `g_*`:
 ```
   g^*(F ⊗ G) ──g^*(η_F ⊗ η_G)──▶ g^*(g_*g^*F ⊗ g_*g^*G)
-      │                                   │
-    δ │                                   │ g^*(μ)
-      ▼                                   ▼
+      │ │
+    δ │ │ g^*(μ)
+      ▼ ▼
   g^*F ⊗ g^*G ◀────────ε────────── g^*g_*(g^*F ⊗ g^*G)
 ```
 -/
@@ -127,9 +126,9 @@ of the unit `ε : 𝟙 ⟶ g_*𝟙` of the lax monoidal pushforward followed by 
 `g^* ⊣ g_*`, i.e. the following diagram commutes:
 ```
   g^*𝟙 ──g^*(ε)──▶ g^*g_*𝟙
-     ╲                │
-    η ╲               │ counit
-       ▼              ▼
+     ╲ │
+    η ╲ │ counit
+       ▼ ▼
               𝟙
 ```
 -/

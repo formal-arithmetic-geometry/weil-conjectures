@@ -10,9 +10,6 @@ public import Mathlib.CategoryTheory.Functor.Currying
 import Mathlib.Tactic.CategoryTheory.Reassoc
 
 /-! # Naturality of a tensor-induced internal Hom comparison
-
-Source: blueprint latest, lem-coef-finite-free-extension.proof.md,
-the evaluation-transpose construction of the Hom comparison.
 -/
 
 @[expose] public section
@@ -141,10 +138,6 @@ end StageHomProof
 
 /-- The internal Hom map transposed from an invertible tensor comparison is natural
 in both variables.
-
-Source: blueprint latest, lem-coef-finite-free-extension.proof.md, Hom comparison
-by transposition of the extended evaluation.
-(blueprint: lem-sf-normalized-stage-hom-naturality).
 
 Proof: apply the injective inverse tensor-Hom adjunction at the source of the
 contravariant map. The transpose of each Hom comparison is its defining extended

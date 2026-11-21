@@ -63,8 +63,7 @@ import WeilConjectures.PoincareDuality.Integral.IntegralPullbackComparisonRealiz
 /-!
 # Coefficient compatibility: the ordinary and derived scalar models
 
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), pp. 50--51
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension).
+Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), pp. 50--51.
 The ordinary tensor is expressed in its exact finite-free model. Its completion
 comparison is identified with the specified universal derived-tensor comparison.
 Split from `WeilConjectures.SixFunctors.Isomorphism.IsomorphismComparisonScalarExtension`
@@ -213,8 +212,7 @@ private theorem tensorModel_iso (W : AlgebraicGeometry.Scheme.{u})
   exact (he' M U a x).trans (he M U a x).symm
 
 /-- The two ordinary tensor models have the same pure tensors, with their canonical
-coefficient actions. Source: the quotient-cone calculation at Bhatt--Scholze 6.5.9(4)
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension).
+coefficient actions. Source: the quotient-cone calculation at Bhatt--Scholze 6.5.9(4).
 Proof: the two coefficient maps agree after every quotient projection, so are equal.
 The sheafified balanced tensor constructions therefore have identical generators
 and relations. Send each displayed generator to the other displayed generator.
@@ -239,8 +237,7 @@ theorem isomorphismScalarSheafModel_existsUnique (W : AlgebraicGeometry.Scheme.{
     ((completedScalarChangeData l E L ι W).choose_spec.choose_spec.choose)
 
 /-- The actual identity on pure tensors between the two recorded ordinary models.
-Source: Bhatt--Scholze 6.5.9(4)
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension). -/
+Source: Bhatt--Scholze 6.5.9(4). -/
 def isomorphismScalarSheafModel (W : AlgebraicGeometry.Scheme.{u}) :=
   (isomorphismScalarSheafModel_existsUnique l E L ι W).exists.choose
 
@@ -351,8 +348,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 attribute [-instance] SheafOfModules.instPreadditive in
 /-- Identify the exact finite-free tensor model with the universal derived tensor
 model, retaining its counit and the SPECIFIED completion comparison χ.
-Source: the quotient-cone calculation accompanying Bhatt--Scholze 6.5.9(4)
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension).
+Source: the quotient-cone calculation accompanying Bhatt--Scholze 6.5.9(4).
 Proof: both completed coefficient maps have the same finite residue projections,
 so they coincide. Their ordinary functors are canonically identified on sheafified
 pure tensors. Finite freeness makes ordinary extension exact on every complex.

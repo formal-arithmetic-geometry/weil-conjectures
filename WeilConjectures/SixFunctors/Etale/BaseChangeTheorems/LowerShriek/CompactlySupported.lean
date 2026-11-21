@@ -16,9 +16,9 @@ Fix a commutative ring `Λ` and a cartesian square of schemes
 
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 
@@ -50,7 +50,6 @@ stalkwise statement recorded separately
 - `AlgebraicGeometry.Etale.isIso_lowerShriekBaseChange_of_isAddTorsion_ring`: for a
   torsion coefficient ring, the compact-support base-change transformation is an
   isomorphism of functors.
-
 -/
 
 @[expose] public section

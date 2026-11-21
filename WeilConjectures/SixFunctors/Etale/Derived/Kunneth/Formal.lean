@@ -21,8 +21,7 @@ equivalence with the commutation of Verdier duality with external products are
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_externalProduct_of_isDualizable`
-  (`sk-rem-sf-kv-formal`): `𝔻_{X×Y}(M ⊠ N) ≅ 𝔻_X M ⊠ 𝔻_Y N` for dualizable `M`, `N`.
-
+: `𝔻_{X×Y}(M ⊠ N) ≅ 𝔻_X M ⊠ 𝔻_Y N` for dualizable `M`, `N`.
 -/
 
 @[expose] public section
@@ -43,7 +42,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `sk-rem-sf-kv-formal`: the formal case of duality of external products.
+/-- The formal case of duality of external products.
 
 If the dualizing complexes satisfy `ω_{X×Y} ≅ ω_X ⊠ ω_Y` (the constant-coefficient exceptional
 Künneth isomorphism), then for **dualizable** `M` and `N` (for instance perfect complexes on

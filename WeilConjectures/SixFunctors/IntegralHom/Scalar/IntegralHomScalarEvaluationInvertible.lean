@@ -11,9 +11,6 @@ import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralReductionDualiz
 import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralReductionTensorAssociativity
 
 /-! # Invertibility of the scalar transpose of reduced evaluation
-
-Source: the finite-free argument and extension-restriction adjunction of
-`lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2.
 -/
 
 @[expose] public section
@@ -37,7 +34,6 @@ This is a scalar assertion with no chosen representatives and no signed chain ma
 
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2;
 Stacks Tags 07A4, 07A6, 08J7 and 08J9.
-(blueprint: lem-sf-integral-hom-scalar-evaluation-invertible).
 
 Proof: the two-term resolution of the restricted quotient unit has dualizable
 terms, so its localization is dualizable. The coefficient-resolution comparison

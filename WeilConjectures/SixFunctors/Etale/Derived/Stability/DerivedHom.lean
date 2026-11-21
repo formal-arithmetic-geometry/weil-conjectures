@@ -91,7 +91,7 @@ variable {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [Qu
   {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
 
 include aX in
-/-- Blueprint `sk-thm-sf-hom-ctf`: Internal Hom with finite Tor amplitude.
+/-- Internal Hom with finite Tor amplitude.
 
 For `X` of finite type over `k`, a finite `Λ` whose exponent is invertible on `X` and bounded
 constructible `K` and `M` on `X_ét` of finite Tor amplitude, the internal hom `RHom(K, M)` is
@@ -131,7 +131,7 @@ theorem boundedConstructible_derivedHom
       (constructibleFiniteTor_mapDerivedCategory_upperStar Λ _ ⟨hM, c, d, hMt⟩)).1
 
 include aX hm in
-/-- Blueprint `sk-thm-sf-hom-ctf`: Internal Hom with finite Tor amplitude.
+/-- Internal Hom with finite Tor amplitude.
 
 If `K` and `M` have Tor amplitude in `[a, b]` and `[c, d]` and `dim X ≤ m`, then `RHom(K, M)`
 has Tor amplitude in `[c - b - 2m, d - a + 2m]`. The blueprint derives this from
@@ -186,7 +186,7 @@ theorem torAmplitudeIn_derivedHom
 -- `aX` and the coefficient hypotheses are part of the blueprint setting, unused by the proof
 set_option linter.unusedSectionVars false in
 include aX in
-/-- Blueprint `sk-thm-sf-hom-ctf`: Internal Hom with finite Tor amplitude.
+/-- Internal Hom with finite Tor amplitude.
 
 If moreover `K` is dualizable, the sharper interval `[c - b, d - a]` holds, from the local
 identification `RHom(K, M) ≅ K^∨ ⊗ᴸ M`. It genuinely fails in general: for the origin

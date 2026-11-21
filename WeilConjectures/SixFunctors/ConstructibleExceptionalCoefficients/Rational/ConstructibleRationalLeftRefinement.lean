@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 
 /-! # Raw rational descent of a compatible integral refinement
 
-Source: Zheng Section 5 and Stacks 0F7B, 0F7I; normalized exceptional construction
-(blueprint: lem-sf-constructible-rational-left-refinement). -/
+Source: Zheng Section 5 and Stacks 0F7B, 0F7I; normalized exceptional construction. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -136,8 +135,7 @@ variable (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
   (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))
 
 /-- Localize a scalar-compatible integral refinement on the fixed rational functors.
-Source: Zheng Section 5 and raw coefficient localization, exceptional step 6
-(blueprint: lem-sf-constructible-rational-left-refinement).
+Source: Zheng Section 5 and raw coefficient localization, exceptional step 6.
 
 Proof: the residue-Tor criterion identifies the integral finite-Tor domain with
 the intrinsic constructible integral category. Whisker the given integral

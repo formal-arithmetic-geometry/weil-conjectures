@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Completed pullback versus normalized clopen restriction
 
 Source: Stacks Project, proetale.tex, Tag 09C3; derived.tex, Tag 08TC.
-(blueprint: lem-sf-clopen-complete-pullback-comparison).
 -/
 
 @[expose] public section
@@ -44,7 +43,6 @@ private instance (priority := 10000) residueBasesAbLocallyBijective (X : Scheme.
 Source: Stacks Project, proetale.tex, Tag 09C3, restriction to the disjoint affine
 opens; derived.tex, Tag 08TC. This is the comparison needed in step 3 of
 lem-sf-residue-lisse-clopen-bases.
-(blueprint: lem-sf-clopen-complete-pullback-comparison).
 
 Proof: the finite coefficient identifications in d are fixed by their values on
 constant sections. Sheafification uniqueness identifies them with the normalized

@@ -45,7 +45,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
 
 open Functor.LaxMonoidal in
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Derived tensor product of étale
+/-- Derived tensor product of étale
 sheaves.
 
 The derived tensor product of `K₁, K₂ ∈ D(X_ét)` is `AlgebraicGeometry.Etale.derivedTensor`, the
@@ -62,7 +62,7 @@ noncomputable def derivedTensorQhIsoOfKFlat
   have := isIso_μNatTrans_Qh_app_app_of_kFlat_left P K₂ hP
   asIso (((μNatTrans (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A))).app P).app K₂)
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Independence of the K-flat model.
+/-- Independence of the K-flat model.
 
 For complexes of `A`-valued sheaves on the small étale site of `X`, a quasi-isomorphism
 `α : P ⟶ Q` between K-flat complexes induces a quasi-isomorphism `F ⊗ P ⟶ F ⊗ Q` for every
@@ -86,7 +86,7 @@ theorem quasiIso_whiskerLeft_of_kFlat
       (NatIso.ofComponents (fun Z ↦ β_ Y Z) (by intros; simp [curriedTensor]))
   exact MorphismProperty.whiskerLeft_of_kFlat _ α hα hP hQ F
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: The derived tensor product is
+/-- The derived tensor product is
 triangulated in each variable.
 
 For every `K ∈ D(X_ét)`, both `M ↦ K ⊗ᴸ M` and `M ↦ M ⊗ᴸ K` are triangulated functors

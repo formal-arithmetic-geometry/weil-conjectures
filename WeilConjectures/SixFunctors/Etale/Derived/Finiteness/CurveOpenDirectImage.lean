@@ -107,7 +107,7 @@ theorem isZero_higherDirectImage_comp_of_isSepClosed (hΛ : IsAddTorsion Λ) {k 
     ((pullback.snd (V'.ι ≫ W.hom) (p₁ ≫ j)).topologicalKrullDim_le_of_etale.trans hPd)
   simpa using this
 
-/-- Blueprint `thm-exc-curve-open-dimension-general`: Open direct-image dimension on arbitrary
+/-- Open direct-image dimension on arbitrary
 curves.
 
 Let `T` be a scheme of finite type and of dimension at most one over a field `k`, let
@@ -170,7 +170,7 @@ whose exponent is invertible in `k`, `(U, T)` satisfies the open-complement cond
 `theorem-f-shriek-finite-coefficients--1` with `c = 1`. This is the case `d = 1` of
 `theorem-f-shriek-finite-coefficients--1` with the sharper constant of
 `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isOpenImmersion`
-(`thm-exc-curve-open-dimension-general`) and
+ and
 `AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage_of_isOpenImmersion`
 (`corollary-open-direct-image-over-field--1`). -/
 theorem openComplementCondition_one {k : Type u} [Field k]

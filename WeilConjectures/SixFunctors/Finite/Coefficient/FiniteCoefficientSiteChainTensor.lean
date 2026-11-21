@@ -9,12 +9,6 @@ public import WeilConjectures.SixFunctors.Finite.Coefficient.FiniteCoefficientSi
 public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientIntrinsicChainTensor
 
 /-! # Finite coefficient change for internal Hom
-
-Source: blueprint sec-six-functors/sk-prop-sf-biduality-general,
-node lemma-change-coefficients-internal-hom--1 (blueprint:
-def-sf-finite-coefficient-site-chain-tensor). Indices n and m below denote exponents n + 1 and m +
-1; thus every positive exponent, including the identity quotient, occurs. All comparison maps are
-closed transposes of reduced evaluation, never choices of arbitrary arrows.
 -/
 
 @[expose] public noncomputable section
@@ -37,7 +31,7 @@ attribute [local irreducible] finiteHomEtaleData
   SheafOfModules.monoidalCategory
 
 /-- The termwise inverse image, retaining the original small site's sizes.
-Source: blueprint site formula (blueprint: def-sf-finite-coefficient-site-chain-tensor). -/
+ -/
 def finiteHomNuComplex (n : ℕ) :
     CochainComplex (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u}
@@ -46,7 +40,7 @@ def finiteHomNuComplex (n : ℕ) :
   (finiteHomNuOrdinary l E X n).mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- The exact comparison's localization isomorphism, with both derived sizes fixed.
-Source: blueprint nu_X^* site formula (blueprint: def-sf-finite-coefficient-site-chain-tensor). -/
+ -/
 def finiteHomNuFactors (n : ℕ) :
     finiteHomEtaleQ l E X n ⋙ finiteHomNu l E X n ≅
       finiteHomNuComplex l E X n ⋙ finiteHomIntrinsicQ l E X n :=
@@ -59,8 +53,7 @@ def finiteHomNuFactors (n : ℕ) :
   (finiteHomNuOrdinary l E X n).mapDerivedCategoryFactors
 
 /-- The chain tensor comparison is fixed on every local pure tensor.
-Source: Stacks 00YV, 06YN, 07A4
-(blueprint: def-sf-finite-coefficient-site-chain-tensor). -/
+Source: Stacks 00YV, 06YN, 07A4. -/
 def FiniteHomNuChainTensorNormalization (n : ℕ) :=
   letI : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
     Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
@@ -68,8 +61,7 @@ def FiniteHomNuChainTensorNormalization (n : ℕ) :=
     (Padic.coefficientExtensionRing l E (n + 1))
 
 /-- The canonical chain tensor comparison, determined by its generator normalization.
-Source: Stacks 00YV, 06YN, 07A4
-(blueprint: def-sf-finite-coefficient-site-chain-tensor). -/
+Source: Stacks 00YV, 06YN, 07A4. -/
 def finiteHomNuChainTensor (n : ℕ)
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) ℤ) :=

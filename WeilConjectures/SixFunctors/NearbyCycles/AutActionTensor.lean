@@ -18,7 +18,6 @@ For a morphism of models `σ : M ⟶ M` over the identities, the action
 from the monoidality of the pullback exchange
 (`NearbyCyclesModel.Hom.map_tensorMap_comp_pullbackExchange_app`) and of the identity
 isomorphisms `L(𝟙)^* ≅ 𝟭` (`ProEtale.CondensedRing.δ_leftDerivedUpperStarId`).
-
 -/
 
 @[expose] public section

@@ -10,8 +10,7 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.C
 /-! # Object transport for rational scalar identity
 
 Source: exceptional coefficient construction, integral-to-rational identity paragraph;
-scalar extension composition, identity clause
-(blueprint: lem-sf-rational-scalar-object-transport).
+scalar extension composition, identity clause.
 -/
 
 @[expose] public noncomputable section
@@ -29,7 +28,6 @@ Source: rationalization object formula and scalar object comparison in the coeff
 construction; proof uses `sfRationalScalarExtension_obj` and the supplied functor
 object equality hS. The statement is strictly an object-level part of the rational
 identity argument and has no morphism or normalization conclusion.
-(blueprint: lem-sf-rational-scalar-object-transport).
 -/
 theorem rational_scalar_object_transport
     (E : FieldStage.{max u v} l) (T : Scheme.{max u v})

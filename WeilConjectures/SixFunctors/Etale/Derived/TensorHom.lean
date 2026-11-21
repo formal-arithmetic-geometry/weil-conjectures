@@ -69,14 +69,13 @@ discharges it over a Noetherian base whenever the unit `Λ_S` lies in `Dctf(S, A
   (`lemma-internal-adjunction-two-exchange-formulas--1`): it is compatible with changes of
   coefficients, such as finite reduction and scalar extension.
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedLowerShriek`
-  (`lemma-internal-adjunction-two-exchange-formulas`): `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`.
+: `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_dualizingComplex`
   (`corollary-verdier-exchange-formulas--1`): `Rf^! ω_Y ≅ ω_X`.
 - `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerShriek`
   (`corollary-verdier-exchange-formulas--1`): `𝔻_Y (Rf_! M) ≅ Rf_* 𝔻_X M`.
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_dualizingComplex`: `ω_Y` lies in `Dctf`
   when `Λ_S` does and `S` is Noetherian.
-
 -/
 
 @[expose] public section
@@ -279,9 +278,9 @@ the change of coefficients: the square
 
 ```
 T_Y Rf_* RHom(M, G N) -------- T_Y(iso) --------> T_Y RHom(Rf_! M, N)
-          |                                                  |
-          | comparison                                       | comparison
-          v                                                  v
+          | |
+          | comparison | comparison
+          v v
 Rf_* RHom(M', G' T_Y N) ---------- iso ----------> RHom(Rf_! M', T_Y N)
 ```
 
@@ -336,7 +335,7 @@ section TensorHom
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
   [HasCompactification f]
 
-/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas`: Tensor–Hom form of the exchange.
+/-- Tensor–Hom form of the exchange.
 
 For a morphism `f : X ⟶ Y` admitting a compactification and torsion coefficients `Λ`, the direct
 image of the internal hom from `M` into `Rf^! N` agrees with the internal hom on `Y` from
@@ -369,7 +368,7 @@ theorem nonempty_iso_derivedHom_rightDerivedLowerShriek
   have := isIso_projectionMap_of_finite Λ f
   exact ⟨((derivedHomRightDerivedLowerShriekIso _ f).app (op M)).app N⟩
 
-/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas`: Tensor–Hom form of the exchange,
+/-- Tensor–Hom form of the exchange,
 natural in `M` and `N` and compatible with shifts.
 
 For a morphism `f : X ⟶ Y` admitting a compactification and torsion coefficients `Λ`, there is

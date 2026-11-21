@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemH
 /-! # Actual finite projections of coefficient gamma
 
 Source: Stacks Project, sites-cohomology.tex, Tags 07A6, 08JA, 0D6E and 0941;
-the evaluated enriched projection formula and its normalized degree-zero calculation
-(blueprint: lem-coef-derived-system-projection-formulas).
+the evaluated enriched projection formula and its normalized degree-zero calculation.
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ rather than a new choice
 of a mapping equivalence or a construction of the calculus itself.
 Source: Stacks 07A6, 08JA, 0D6E, 0941; the proved
 SheafOfModules.EnrichedSequenceProjection.enrichedSequenceProjectionFormula;
-node lem-coef-derived-system-evaluation-calculus, step 5, final projection calculation
-(blueprint: lem-coef-derived-system-projection-formulas).
+node lem-coef-derived-system-evaluation-calculus, step 5, final projection calculation.
 
 Proof:
 1. Use the actual quotient ring sequence, completed coefficient sheaf and the strict

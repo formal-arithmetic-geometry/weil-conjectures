@@ -16,7 +16,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom
 
 /-!
 # Dual and Tate Weil data
-
 -/
 
 @[expose] public section
@@ -242,7 +241,7 @@ variable [UpperStarPreservesFlat A] {X : Scheme.{u}} (g : X ⟶ X)
 The *contragredient datum* `φ_{K^∨} : Lg^* K^∨ ⟶ K^∨` on the coefficient dual
 `K^∨ = RHom(K, Λ_X)` of a complex `K` with a Weil datum `φ_K : Lg^* K ≅ K`, the typed composite
 ```
-                      ≅                                 RHom(id, φ_Λ)
+                      ≅ RHom(id, φ_Λ)
   Lg^* RHom(K, Λ_X) ────▶ RHom(Lg^* K, Lg^* Λ_X) ───────────────▶ RHom(Lg^* K, Λ_X)
                                      RHom(φ_K⁻¹, id)
                                    ───────────────▶ RHom(K, Λ_X)
@@ -261,7 +260,7 @@ noncomputable def contragredientWeilDatum (φ : L((g)^*[A]).obj K ≅ K) :
 
 /-- The contragredient datum is characterised by the evaluation: `ev_K ∘ (K ⊗ᴸ φ_{K^∨})` is
 ```
-                φ_K⁻¹ ⊗ᴸ id                        ≅                       Lg^* ev_K
+                φ_K⁻¹ ⊗ᴸ id ≅ Lg^* ev_K
   K ⊗ᴸ Lg^* K^∨ ──────────▶ Lg^* K ⊗ᴸ Lg^* K^∨ ────▶ Lg^*(K ⊗ᴸ K^∨) ──────────▶ Lg^* Λ_X
                    φ_Λ
                 ──────▶ Λ_X.
@@ -339,7 +338,7 @@ internal hom).
 The datum `Lg^* RHom(K, M) ⟶ RHom(K, M)` on the internal hom of a complex `K` with a Weil datum
 `φ_K : Lg^* K ≅ K` into a complex `M` with a datum `χ : Lg^* M ⟶ M`, the typed composite
 ```
-                     ≅                             RHom(id, χ)                RHom(φ_K⁻¹, id)
+                     ≅ RHom(id, χ) RHom(φ_K⁻¹, id)
   Lg^* RHom(K, M) ────▶ RHom(Lg^* K, Lg^* M) ───────────▶ RHom(Lg^* K, M) ───────────────▶
   RHom(K, M).
 ```

@@ -56,7 +56,6 @@ import all WeilConjectures.CategoryTheory.ProperBaseChange.LocalizationInverseIm
 
 /-! # Section presentation and module inverse image
 Source: Stacks Project, Tags 00YV and 03D2.
-(blueprint: lem-sf-adic-section-inverse-image-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -71,8 +70,7 @@ namespace WeilConjectures.AdicFiniteRealization
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Sectionwise module encoding commutes with inverse image, up to its coefficient
 isomorphism and restriction of scalars.
-Source: Stacks Project, Tags 00YV and 03D2
-(blueprint: lem-sf-adic-section-inverse-image-comparison).
+Source: Stacks Project, Tags 00YV and 03D2.
 Proof: the internal inverse image followed by section encoding and the specified
 ordinary module inverse image both transport the underlying set sheaves and all
 operation graphs under the same left exact set inverse image. Compare their

@@ -15,8 +15,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 /-!
 # Common refinements of completed projective charts
 
-Source: Stacks Project, proetale.tex, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8
-(blueprint: lem-fix-clopen-projective-chart-common-refinement).
+Source: Stacks Project, proetale.tex, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8.
 
 All restrictions below are ordinary uncompleted derived ringed pullbacks. Coefficient
 index zero is exponent one. Finite products of the unit module are finite direct sums.
@@ -89,8 +88,7 @@ private theorem chart_map_retract
 clopen refinement, with models for the composite ordinary pullbacks.
 
 Source: Stacks Project, Tag 09C3, common refinement of the local models; Tags 03D8,
-06YY and 08TC for ordinary restriction and completion
-(blueprint: lem-fix-clopen-projective-chart-common-refinement).
+06YY and 08TC for ordinary restriction and completion.
 
 Proof: each finite disjoint open cover is clopen, because the complement of one
 member is the finite union of the others. Intersect the two covers and enumerate

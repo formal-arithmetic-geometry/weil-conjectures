@@ -13,10 +13,6 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.ExpressionRecursion
 
 /-! # Recursion for integral expression comparisons
 
-Source: blueprint main-20261015, fix-prop-coherence.proof.md, coefficient-comparison
-sentence; the expression-tree refinement in the DAG
-(blueprint: lem-sf-integral-expression-recursion).
-
 The comparison data below are the given primitive comparisons, restricted to the
 published intermediate domains. All coefficient equalities live in the derived
 category of strict systems. No structural-generator coherence is included.

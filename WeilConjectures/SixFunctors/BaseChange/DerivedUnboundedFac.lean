@@ -149,9 +149,9 @@ change map `g^* f_* M ⟶ f'_* g'^* M` followed by the unit `f'_* g'^* M ⟶ Rf'
 the counit `Lg^* (f_* M) ⟶ g^* f_* M`:
 ```
 Lg^* (f_* M) ──Lg^* (unit)──▶ Lg^* Rf_* M ──(base change)──▶ Rf'_* Lg'^* M
-     │                                                            │
-  counit                                                   Rf'_* (counit)
-     ▼                                                            ▼
+     │ │
+  counit Rf'_* (counit)
+     ▼ ▼
 g^* f_* M ──(base change)──▶ f'_* g'^* M ──────unit──────▶ Rf'_* (g'^* M)
 ```
 -/

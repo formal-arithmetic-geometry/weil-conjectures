@@ -51,7 +51,6 @@ since that is what the conservativity of the geometric points asks for. This hol
   along a finite morphism is exact.
 - `AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory`: its total
   right derived functor is itself, applied levelwise to complexes.
-
 -/
 
 @[expose] public section
@@ -76,9 +75,9 @@ omit [HasSmallSiteSheafify A] in
 points with algebraically closed residue field.** By the stalk formula the square
 ```
      ((f)_*[A] G)_y ------------(f_* φ)_y-----------> ((f)_*[A] G')_y
-            |                                                |
-   lowerStarSheafFiberIsoPi ≅                     lowerStarSheafFiberIsoPi ≅
-            ↓                                                ↓
+            | |
+   lowerStarSheafFiberIsoPi ≅ lowerStarSheafFiberIsoPi ≅
+            ↓ ↓
       ∏ᶜ (fun t ↦ G_t) --------∏ᶜ (fun t ↦ φ_t)-------> ∏ᶜ (fun t ↦ G'_t)
 ```
 commutes, the products being over the finite geometric fibre of `f` over `y`; the bottom map
@@ -121,8 +120,7 @@ instance Etale.preservesHomology_lowerStar_of_isFinite : (f)_*[A].PreservesHomol
   Functor.preservesHomology_of_preservesEpis_and_kernels _
 
 include hJ in
-/-- **The direct image along a finite morphism is exact** (blueprint
-`lemma-finite-direct-images--2`): it preserves finite colimits, and it preserves
+/-- **The direct image along a finite morphism is exact**: it preserves finite colimits, and it preserves
 finite limits by `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`. -/
 instance Etale.preservesFiniteColimits_lowerStar_of_isFinite :
     PreservesFiniteColimits (f)_*[A] :=
@@ -141,8 +139,7 @@ include hJ in
 This is definitionally `CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory` for
 `f_*`; the content is that the exactness instance
 `AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite` discharges its
-hypothesis, so that the general isomorphism is available for a finite `f`
-(blueprint `lemma-finite-direct-images--2`). -/
+hypothesis, so that the general isomorphism is available for a finite `f`. -/
 def Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory :
     (f)_*[A].rightDerivedFunctor ≅ (f)_*[A].mapDerivedCategory :=
   (f)_*[A].rightDerivedFunctorIsoMapDerivedCategory

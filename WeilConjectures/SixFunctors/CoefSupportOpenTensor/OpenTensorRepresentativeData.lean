@@ -110,8 +110,7 @@ public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetric
 /-! # Normalized one-K-flat open tensor representative data
 
 Source: Stacks 0E8I, 0GL1, 07A4 and 06YT; blueprint main-20261015,
-prop-coef-integral-dualizing.proof.md paragraph 2, support-open-tensor subargument
-(blueprint: def-sf-open-tensor-representative-data).
+prop-coef-integral-dualizing.proof.md paragraph 2, support-open-tensor subargument.
 
 This is data for the representative clauses, with no existence assertion. The ordinary
 and derived tensors, one-K-flat comparisons and their normalizations are reused.
@@ -154,8 +153,7 @@ The restriction comparison is fixed on actual sheafified pure tensors, the inver
 open comparison by the open unit, and the chain map on every signed total summand.
 All maps are morphisms on the entire ringed site; for a sequence site this includes
 commutation with every horizontal quotient-semilinear transition.
-Source: Stacks 0E8I, 0GL1, 07A4; support-open-tensor proof steps 5--6
-(blueprint: def-sf-open-tensor-representative-data). -/
+Source: Stacks 0E8I, 0GL1, 07A4; support-open-tensor proof steps 5--6. -/
 structure OpenTensorModel where
   restriction : A.tensor ⋙ G.mapDerivedCategory ≅
     (G.mapDerivedCategory.prod G.mapDerivedCategory) ⋙ A'.tensor

@@ -47,8 +47,7 @@ variable (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
 /-- Shift and exactness structures on the explicitly constructed pair functors.
 There are no functors, adjunctions, comparison maps or transition equations to choose here.
 Endpoint inclusion shifts are chosen once for the whole compactification family.
-Source: Zheng, Construction 6.6, common-field descent step 4
-(blueprint: lem-sf-rational-common-exact-shifts). -/
+Source: Zheng, Construction 6.6, common-field descent step 4. -/
 structure RationalCommonShiftData where
   inclusionX (i : AlgebraicallyClosedCoefficients.Index l Ω) :
     (commonInclusion.{u, v} l Ω X i).CommShift ℤ
@@ -92,8 +91,7 @@ structure RationalCommonShiftData where
 /-- Normalize the shifts of the fixed quotient adjunction, retaining the supplied
 rational operation structures and using endpoint inclusion shifts independent of c.
 This theorem asserts only shift structures and their exactness and compatibility.
-Source: Zheng, Construction 6.6, common-field descent step 4
-(blueprint: lem-sf-rational-common-exact-shifts).
+Source: Zheng, Construction 6.6, common-field descent step 4.
 
 Proof: localize each integral left shift through the actual localization comparison,
 using canonical integral rationalization shifts. Its inverse comparison commutes

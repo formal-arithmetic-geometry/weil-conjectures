@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalI
 /-! # Canonical finite evaluation of an integral scalar functor
 
 Source: Zheng, Construction 4.1 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-reduction-evaluation)
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +23,7 @@ variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- Lift the canonical ambient reduction comparison through the full finite inclusion.
-Source: Zheng, Construction 4.1 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-reduction-evaluation). -/
+Source: Zheng, Construction 4.1 and Proposition 5.26. -/
 def integralReductionEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c : Compactification f}
     {operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l)}
@@ -50,8 +48,7 @@ def integralReductionEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y}
 Source: Zheng, Construction 4.1 and Proposition 5.26.
 Proof: the inclusion maps its preimage to the given ambient map. Expanding the inverse
 of the three-factor comparison gives reconstruction evaluation, the inverse canonical
-comparison of derived quotient tensors, and the inverse scalar equality realization.
-(blueprint: lem-sf-exceptional-integral-reduction-evaluation). -/
+comparison of derived quotient tensors, and the inverse scalar equality realization. -/
 theorem integralReductionEvaluation_normalized {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c : Compactification f}
     {operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l)}

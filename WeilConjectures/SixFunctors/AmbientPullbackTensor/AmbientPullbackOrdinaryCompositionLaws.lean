@@ -11,12 +11,11 @@ import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPushforwardCompo
 /-! Ordinary pullback associativity and unit laws.
 
 Source: Stacks 03CB, 03D3 and 04VG.
-(blueprint: new-lem-sf-ambient-pullback-ordinary-composition-laws).
 
-This is the ordinary part of the ambient pullback coherence argument.  The
+This is the ordinary part of the ambient pullback coherence argument. The
 section-normalized direct-image comparison is pasted over the canonical
 fibre-product comparisons; adjunction mates then give the three displayed
-identities.  The proof is split from the derived localization step so that the
+identities. The proof is split from the derived localization step so that the
 ordinary and derived calculations can be completed independently.
 -/
 
@@ -320,7 +319,6 @@ private theorem directImage_leftUnit
 
 /-- Right-unit part of ordinary ambient pullback coherence.
 Source: Stacks 03D3 and 04VG.
-(blueprint: new-lem-sf-ambient-pullback-ordinary-right-unit).
 The section-normalized identity comparison and the adjunction right-unit law give
 this clause. -/
 theorem ordinary_pullback_rightUnit (K : Scheme.{t}) (s : Option ℕ) :
@@ -349,7 +347,6 @@ theorem ordinary_pullback_rightUnit (K : Scheme.{t}) (s : Option ℕ) :
 
 /-- Left-unit part of ordinary ambient pullback coherence.
 Source: Stacks 03D3 and 04VG.
-(blueprint: new-lem-sf-ambient-pullback-ordinary-left-unit).
 The section-normalized identity comparison and the adjunction left-unit law give
 this clause. -/
 theorem ordinary_pullback_leftUnit (K : Scheme.{t}) (s : Option ℕ) :
@@ -378,10 +375,9 @@ theorem ordinary_pullback_leftUnit (K : Scheme.{t}) (s : Option ℕ) :
 
 /-- Ordinary associativity and unit laws for the ambient pullback comparisons.
 Source: Stacks 03CB, 03D3 and 04VG.
-(blueprint: new-lem-sf-ambient-pullback-ordinary-composition-laws).
 Proof: paste the section-normalized direct-image comparisons over the canonical
 fibre-product associativity and identity comparisons, then take their specified
-adjunction mates.  The three component equations are exactly the associativity,
+adjunction mates. The three component equations are exactly the associativity,
 right-unit and left-unit clauses below. -/
 theorem ordinary_pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :
     (∀ {W X Y Z : Scheme.{t}} (w : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z)

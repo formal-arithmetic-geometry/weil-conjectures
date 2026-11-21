@@ -37,7 +37,6 @@ Proof source: Bhatt--Scholze, Lemma 6.8.2 and Section 6.8. Construct the maps by
 finite quotient realization of the completed coefficient sheaf, and use the finite
 constant and residue normalizations of the presentations to identify each component.
 The pullback compatibility is deliberately left to the separate square theorem.
-(blueprint: lem-sf-native-completed-coefficient-change-presentation)
 -/
 theorem exists_native_completed_coefficient_presentation
     [G : NativeGeometry.{u} l]

@@ -82,8 +82,7 @@ of the integral action, the target integral realization, the inverse compact-sup
 realization, the supplied scalar map, and the inverse source and operation realizations.
 Full faithfulness of the derived section equivalence lifts this natural composite.
 Evaluating its components and applying associativity gives the displayed factors and
-six prescribed arrows. No invertibility of the supplied scalar map is assumed.
-(blueprint: lem-sf-native-integral-scalar-morphism-normalization). -/
+six prescribed arrows. No invertibility of the supplied scalar map is assumed. -/
 theorem native_integral_scalar_morphism_normalization [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c) (E : Index l (PadicAlgCl l))

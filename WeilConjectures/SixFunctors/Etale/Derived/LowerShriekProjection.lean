@@ -19,9 +19,9 @@ PF_c : Rf_!(c)K ⊗ᴸ L ⟶ Rf_!(c)(K ⊗ᴸ Lf^*L)
 ```
 natural in `K` in `D(X_ét)` and `L` in `D(Y_ét)`, as the composite
 ```
-Rg_*(i_!K) ⊗ᴸ L ⟶ Rg_*(i_!K ⊗ᴸ Lg^*L)          (projection map of `Rg_*`)
-                ≅ Rg_*(i_!(K ⊗ᴸ Li^*Lg^*L))     (projection formula for `i_!`)
-                ≅ Rg_*(i_!(K ⊗ᴸ Lf^*L))         (`Lg^* ⋙ Li^* ≅ L(i ≫ g)^*` and `f = i ≫ g`)
+Rg_*(i_!K) ⊗ᴸ L ⟶ Rg_*(i_!K ⊗ᴸ Lg^*L) (projection map of `Rg_*`)
+                ≅ Rg_*(i_!(K ⊗ᴸ Li^*Lg^*L)) (projection formula for `i_!`)
+                ≅ Rg_*(i_!(K ⊗ᴸ Lf^*L)) (`Lg^* ⋙ Li^* ≅ L(i ≫ g)^*` and `f = i ≫ g`)
 ```
 of `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`, of the inverse of
 `AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso` and of
@@ -146,7 +146,7 @@ lemma projectionMapOfCompactification_app_app
           ((leftDerivedUpperStarCompactificationIso A c).hom.app L))) :=
   rfl
 
-/-- Blueprint `sk-def-sf-exchanges`: Exchange and projection transformations, typed (the
+/-- Exchange and projection transformations, typed (the
 projection transformation `PF_{f,K,L}`; also the projection transformation of `def-sf-pf`).
 
 The **projection map** `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)` for a morphism

@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 
 Let `K` be a separably closed field, `X` a quasi-compact scheme locally of finite type over `K`
 and `F` an étale sheaf of `Λ`-modules on `X` whose stalks vanish at the non-closed points. Then
-`H^q(X_ét, F) = 0` for `q ≠ 0` (blueprint `lemma-sheaves-finite-support-finite-morphisms--1`): `F`
+`H^q(X_ét, F) = 0` for `q ≠ 0`: `F`
 is the filtered colimit of its subsheaves `F_S` supported on finite sets of closed points
 (`lemma-sheaves-finite-support-finite-morphisms--1`), these are acyclic, and étale cohomology of the
 quasi-compact quasi-separated scheme `X` commutes with filtered colimits.

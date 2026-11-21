@@ -22,9 +22,9 @@ and
 
 ```
 X_t --h--> X
- |         |
-π_t        π
- v         v
+ | |
+π_t π
+ v v
 Spec Ω -t-> Spec R
 ```
 

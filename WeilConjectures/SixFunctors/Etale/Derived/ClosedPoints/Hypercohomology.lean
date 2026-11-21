@@ -208,7 +208,7 @@ namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `lem-kun-0bkz`: **cohomology of complexes with acyclic cohomology sheaves**
+/-- **Cohomology of complexes with acyclic cohomology sheaves**
 (bounded below case, for the global sections over `X` itself). Let `X` be a scheme and
 `K ∈ D^{≥ m}(X_ét, Λ)` such that `H^p(X_ét, ℋ^q(K)) = 0` for all `p > 0` and all `q`. Then
 `H^q(X_ét, K) ≅ H^0(X_ét, ℋ^q(K))` for all `q`. Applied to the restrictions of `K` to the

@@ -45,8 +45,7 @@ private theorem whisker_equality_sections
   exact he N V x
 
 /-- The finite scalar/direct-image comparison is identity on underlying sections.
-Source: Stacks Tag 0D6E
-(blueprint: lem-sf-finite-scalar-restriction-direct-sections).
+Source: Stacks Tag 0D6E.
 Proof: the ringed restriction/direct-image factor is identity on sections by its
 normalization. The finite direct-image equality contributes only an equality
 transport, which is heterogeneously identity by equality induction. -/

@@ -98,7 +98,7 @@ variable {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
   [QuasiCompact aX] [HasCompactification aX] {h : Spec (.of k) ⟶ Spec (.of k)} [IsIso h]
   (sq : IsPullback g.hom aX aX h)
 
-/-- Blueprint `prose-10-20`: the dualizing complex `ω_X = Ra_X^! Λ` with
+/-- The dualizing complex `ω_X = Ra_X^! Λ` with
 the dualizing Weil datum (`AlgebraicGeometry.Etale.dualizingComplexWeilDatum`), invertible for
 automorphisms, is a strict Weil complex. -/
 noncomputable def dualizing : WeilComplex (ModuleCat.{u + 1} Λ) g where
@@ -123,7 +123,7 @@ instance isIso_verdierDualWeilDatumOfIsPullback (K : WeilComplex (ModuleCat.{u +
   let := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) g.hom
   exact MonoidalClosed.isIso_dualWeilDatum _ _ _
 
-/-- Blueprint `prose-10-20`: **Verdier duality preserves strict Weil
+/-- **Verdier duality preserves strict Weil
 complexes.** The Verdier dual `𝔻_X K = RHom(K, ω_X)` of a strict Weil complex `(K, φ)`, with the
 dual Weil datum `AlgebraicGeometry.Etale.verdierDualWeilDatumOfIsPullback` of `φ` and of the
 dualizing Weil datum, invertible for the automorphism `g`, is a strict Weil complex. -/
@@ -146,7 +146,7 @@ lemma verdierDual_frobenius_hom_hom (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
         ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) :=
   rfl
 
-/-- Blueprint `prose-10-20`: the double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K`
+/-- The double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K`
 is a morphism of strict Weil complexes: biduality is Weil equivariant
 (`AlgebraicGeometry.Etale.isWeilEquivariant_verdierDualDoubleDual`). -/
 noncomputable def verdierDualDoubleDual (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
@@ -161,7 +161,7 @@ noncomputable def verdierDualDoubleDual (K : WeilComplex (ModuleCat.{u + 1} Λ) 
     exact (isWeilEquivariant_verdierDualDoubleDual Λ aX
       ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) (dualizingComplexWeilDatum sq)).symm
 
-/-- Blueprint `prose-10-20`: **Verdier biduality for strict Weil
+/-- **Verdier biduality for strict Weil
 complexes.** The double-dual map `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism of strict Weil complexes, by
 finite-stage biduality (`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`). -/
 instance isIso_verdierDualDoubleDual (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :

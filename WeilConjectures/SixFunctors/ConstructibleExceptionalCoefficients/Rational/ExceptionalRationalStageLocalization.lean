@@ -39,8 +39,7 @@ variable (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
 
 /-- Rational operations and scalar mates obtained before common-field descent.
 There are no closed operations or common-field comparisons in this record.
-Source: Zheng, Construction 6.2, and the raw-localization part of coefficient step 5
-(blueprint: lem-sf-rational-stage-localization). -/
+Source: Zheng, Construction 6.2, and the raw-localization part of coefficient step 5. -/
 structure RationalStageAssembly (A : RingStageAssembly.{u, v} l Ω D hl (f := f)) where
   operation (c : Compactification f) (E : FieldStage.{max u v} l) :
     Operation.{u, v} l Ω X Y (.rational E)
@@ -89,8 +88,7 @@ structure RationalStageAssembly (A : RingStageAssembly.{u, v} l Ω D hl (f := f)
 
 /-- Insert rational data into the completed ring record, for any later closed operations.
 This only rearranges existing fields and makes no choice of functors or morphisms.
-Source: coefficient construction step 5
-(blueprint: lem-sf-rational-stage-localization). -/
+Source: coefficient construction step 5. -/
 def RationalStageAssembly.fields
     {A : RingStageAssembly.{u, v} l Ω D hl (f := f)}
     (P : RationalStageAssembly.{u, v} l Ω D hl A)
@@ -167,8 +165,7 @@ private theorem rawLeftRealization_normalized
 /-- Localize the supplied linear integral adjunctions, with their actual raw object and
 arrow action. This statement has no common-field or algebraically closed output.
 Source: Zheng, Construction 6.2; coefficient construction step 5, localization part;
-`lem-sf-field-stage-completion`, steps 1--3
-(blueprint: lem-sf-rational-stage-localization).
+`lem-sf-field-stage-completion`, steps 1--3.
 
 Proof: map the prime unit from the finite base field to each residue field and apply
 integral_residue_tor. For each supplied integral operation construct the rational left

@@ -20,7 +20,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The canonical bridge compatibility for an adjunct-normalized gamma.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0F7B and 07A7.
-(blueprint: lem-sf-integral-system-proper-open-transport-core-canonical).
 Proof: substitute the transported gamma and cancel adjacent bridge isomorphisms;
 naturality of the bridge and the intrinsic canonical gamma equation leave the
 stated canonical clause. -/

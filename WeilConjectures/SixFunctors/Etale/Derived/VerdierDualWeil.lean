@@ -18,8 +18,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 Let `g : X ≅ X` be an automorphism of a scheme (in the `ℓ`-adic formalism, the geometric
 Frobenius of `X = X₀ ×_{k₀} k̄`), lying over `h : S ⟶ S` along `a : X ⟶ S` (cartesian square
 `g ≫ a = a ≫ h`). This file transports Weil data through the exceptional inverse image and the
-Verdier dual, and proves that the structure maps are equivariant
-(blueprint `prose-10-20`).
+Verdier dual, and proves that the structure maps are equivariant.
 
 * The *exceptional base change* `Lg'^* Rf^! ⟶ Rf'^! Lg^*` of a cartesian square is the mate of
   the inverse of the compact-support base change isomorphism `Ex_! : Lg^* Rf_! ≅ Rf'_! Lg'^*`
@@ -46,7 +45,7 @@ Verdier dual, and proves that the structure maps are equivariant
   `AlgebraicGeometry.Etale.dualizingComplexWeilDatum`,
   `AlgebraicGeometry.Etale.verdierDualWeilDatum`,
   `AlgebraicGeometry.Etale.verdierDualWeilDatumOfIsPullback`
-  (`prose-10-20`).
+.
 
 ## Main statements
 
@@ -54,7 +53,7 @@ Verdier dual, and proves that the structure maps are equivariant
   `AlgebraicGeometry.Etale.isWeilMorphism_unit_upperShriekMateWeilDatum`,
   `AlgebraicGeometry.Etale.isWeilEquivariant_verdierDual_evaluation`,
   `AlgebraicGeometry.Etale.isWeilEquivariant_verdierDual_curry`
-  (`prose-10-20`).
+.
 
 ## Implementation notes
 
@@ -111,9 +110,9 @@ variable [Finite Λ] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {
 /-- The *exceptional base change* `Lg'^* Rf^! ⟶ Rf'^! Lg^*` of a cartesian square
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  v          v
+  | |
+  f' f
+  v v
   Y' --g---> Y
 ```
 the mate, along `Rf_! ⊣ Rf^!` and `Rf'_! ⊣ Rf'^!`, of the inverse of the compact-support base
@@ -134,7 +133,7 @@ variable [Finite Λ] {X Y : Scheme.{u}} {f : X ⟶ Y} [HasCompactification f] [Q
   {gX : X ⟶ X} {gY : Y ⟶ Y}
 
 variable {Λ} in
-/-- Blueprint `prose-10-20`: the Weil datum on `Rf^! K` transported from a
+/-- The Weil datum on `Rf^! K` transported from a
 datum `φ : Lg_Y^* K ⟶ K` through the exceptional base change of the cartesian square
 `g_X ≫ f = f ≫ g_Y`,
 ```
@@ -147,7 +146,7 @@ noncomputable def upperShriekMateWeilDatum (sq : IsPullback gX f f gY)
       (R(f)^![Λ]).obj K :=
   (upperShriekBaseChangeMap Λ sq).app K ≫ (R(f)^![Λ]).map φ
 
-/-- Blueprint `prose-10-20`: **the exceptional counit is Weil
+/-- **The exceptional counit is Weil
 equivariant**. For a Weil datum `φ` on `K`, the counit `Rf_! Rf^! K ⟶ K` is a morphism of Weil
 objects from the compact-support transport of the exceptional datum on `Rf^! K`
 (`AlgebraicGeometry.Etale.upperShriekMateWeilDatum`) to `φ`. -/
@@ -159,7 +158,7 @@ theorem isWeilMorphism_counit_upperShriekMateWeilDatum (sq : IsPullback gX f f g
   Adjunction.isWeilEquivariant_counit (rightDerivedUpperShriekAdjunction _ f)
     (asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)) φ
 
-/-- Blueprint `prose-10-20`: **the exceptional unit is Weil
+/-- **The exceptional unit is Weil
 equivariant**. For a Weil datum `φ` on `M`, the unit `M ⟶ Rf^! Rf_! M` is a morphism of Weil
 objects from `φ` to the exceptional datum of the compact-support transport of `φ`. -/
 theorem isWeilMorphism_unit_upperShriekMateWeilDatum (sq : IsPullback gX f f gY)
@@ -178,7 +177,7 @@ variable [Finite Λ] {X S : Scheme.{u}} {a : X ⟶ S} [HasCompactification a] [Q
   {h : S ⟶ S}
 
 variable {Λ} in
-/-- Blueprint `prose-10-20`: the *dualizing Weil datum*
+/-- The *dualizing Weil datum*
 `Lg^* ω_X ⟶ ω_X` on the dualizing complex `ω_X = Ra^! Λ_S`, the exceptional transport
 (`AlgebraicGeometry.Etale.upperShriekMateWeilDatum`) of the canonical datum
 `Lh^* Λ_S ≅ Λ_S`. -/
@@ -200,7 +199,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 attribute [local instance] leftDerivedUpperStarMonoidal
 
-/-- Blueprint `prose-10-20`: the *dual Weil datum* on the Verdier dual
+/-- The *dual Weil datum* on the Verdier dual
 `𝔻_X K = RHom(K, ω_X)` of a strict Weil datum `φ : Lg^* K ≅ K` and a Weil datum
 `φ_ω : Lg^* ω_X ⟶ ω_X` on the dualizing complex (in the application, the dualizing Weil datum
 `AlgebraicGeometry.Etale.dualizingComplexWeilDatum`; see
@@ -222,7 +221,7 @@ noncomputable def verdierDualWeilDatum {K : _root_.DerivedCategory (Sheaf X.smal
         K) :=
   MonoidalClosed.dualWeilDatum L((g)^*[ModuleCat.{u + 1} Λ]) φ φω
 
-/-- Blueprint `prose-10-20`: **evaluation is Weil equivariant**. For a
+/-- **Evaluation is Weil equivariant**. For a
 strict Weil datum `φ` on `K` and a Weil datum `φ_ω` on `ω_X`, the evaluation
 `K ⊗ᴸ 𝔻_X K ⟶ ω_X` is equivariant for the tensor product of `φ` with the dual datum
 (`AlgebraicGeometry.Etale.verdierDualWeilDatum`) and `φ_ω`. -/
@@ -235,7 +234,7 @@ theorem isWeilEquivariant_verdierDual_evaluation
       ((ihom.ev K).app (dualizingComplex Λ a)) :=
   MonoidalClosed.isWeilEquivariant_ev _ φ φω
 
-/-- Blueprint `prose-10-20`: **the transpose of an equivariant pairing is
+/-- **The transpose of an equivariant pairing is
 equivariant**. For a strict Weil datum `φ` on `K`, a Weil datum `ψ` on `M`, a Weil datum `φ_ω` on
 `ω_X` and a pairing `b : K ⊗ᴸ M ⟶ ω_X` equivariant for `φ ⊗ ψ` and `φ_ω`, the tensor–hom
 transpose `M ⟶ 𝔻_X K` is a morphism of Weil objects to the dual datum. -/
@@ -252,7 +251,7 @@ theorem isWeilEquivariant_verdierDual_curry
   MonoidalClosed.isWeilEquivariant_curry _ φ ψ φω hb
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory' in
-/-- Blueprint `prose-10-20`: **biduality is Weil equivariant**. For a
+/-- **Biduality is Weil equivariant**. For a
 strict Weil datum `φ` on `K` and a Weil datum `φ_ω` on `ω_X` such that the dual Weil datum on
 `𝔻_X K` (`AlgebraicGeometry.Etale.verdierDualWeilDatum`) is invertible (for instance an
 automorphism `g` and an invertible `φ_ω`), the double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K` is a
@@ -278,7 +277,7 @@ variable [Finite Λ] {X S : Scheme.{u}} {a : X ⟶ S} [HasCompactification a] [Q
   {h : S ⟶ S}
 
 variable {Λ} in
-/-- Blueprint `prose-10-20`: the dual Weil datum on the Verdier dual
+/-- The dual Weil datum on the Verdier dual
 `𝔻_X K` of a strict Weil datum `φ : Lg^* K ≅ K` for the dualizing Weil datum
 (`AlgebraicGeometry.Etale.dualizingComplexWeilDatum`) of a cartesian square
 `g ≫ a = a ≫ h`: `AlgebraicGeometry.Etale.verdierDualWeilDatum` at `φ_ω` the dualizing datum. -/

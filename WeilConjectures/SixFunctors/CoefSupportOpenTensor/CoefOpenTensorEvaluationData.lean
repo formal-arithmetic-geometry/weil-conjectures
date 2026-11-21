@@ -12,8 +12,7 @@ public import WeilConjectures.SmoothPurity.Supporting.CoefDerivedSystemEvaluatio
 /-! # Native quotient-system open tensor evaluation data
 
 Source: blueprint main-20261015, prop-coef-integral-dualizing.proof.md paragraph 2,
-compact-support/open-model subargument, steps 5--6; Stacks 0GL1, 07A4
-(blueprint: def-coef-native-open-tensor-evaluation-data).
+compact-support/open-model subargument, steps 5--6; Stacks 0GL1, 07A4.
 
 These are actual site specializations and a finite-evaluation predicate, with no
 existence assertion. Every functor and comparison is the recorded native one.
@@ -41,15 +40,13 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Specialized additive instance for the actual finite open functor.
-Source: Stacks 03DI; strict-tower moduleJ_exact
-(blueprint: def-coef-native-open-tensor-evaluation-data). -/
+Source: Stacks 03DI; strict-tower moduleJ_exact. -/
 instance finiteOpenAdditive {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (n : ℕ) :
     (ProEtale.StrictTower.moduleJ (compactSupportSystemLevel l E n) j).Additive :=
   ProEtale.StrictTower.moduleJ_additive (compactSupportSystemLevel l E n) j
 
 /-- Actual inverse-image section, given by the unit of the recorded module adjunction.
-Source: Stacks 07A4; node proof step 5
-(blueprint: def-coef-native-open-tensor-evaluation-data). -/
+Source: Stacks 07A4; node proof step 5. -/
 def pullSection {X Z : Scheme.{u}} (j : X ⟶ Z)
     (N : coefficientSequenceModules.{u, u} l E Z) (V : (ℕ × Z.ProEt)ᵒᵖ)
     (x : N.val.obj V) :
@@ -60,8 +57,7 @@ def pullSection {X Z : Scheme.{u}} (j : X ⟶ Z)
     (compactSupportSystemQuotient l E) j).unit.app N).val.app V x
 
 /-- Specialize the normalized open tensor model to the actual quotient sequence site.
-Source: Stacks 0E8I, 0GL1; node proof steps 5--6
-(blueprint: def-coef-native-open-tensor-evaluation-data). -/
+Source: Stacks 0E8I, 0GL1; node proof steps 5--6. -/
 abbrev SystemOpenModel {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemTensors.{u, u} l E X)
     (SZ : CoefficientDerivedSystemTensors.{u, u} l E Z) :=
@@ -94,8 +90,7 @@ abbrev SystemOpenModel {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (ProEtale.VaryingRing.baseChange j) (pullSection l E j)
 
 /-- The system gamma with its exact native functor instances made explicit.
-Source: Stacks 0GL1; node proof steps 5--6
-(blueprint: def-coef-native-open-tensor-evaluation-data). -/
+Source: Stacks 0GL1; node proof steps 5--6. -/
 abbrev systemGamma {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemTensors.{u, u} l E X)
     (SZ : CoefficientDerivedSystemTensors.{u, u} l E Z)
@@ -129,8 +124,7 @@ abbrev systemGamma {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (ProEtale.VaryingRing.baseChange j) (pullSection l E j) O
 
 /-- Inverse-image sections at one finite coefficient ring, with the actual scalar unit.
-Source: Stacks 07A4; node proof step 6
-(blueprint: def-coef-native-open-tensor-evaluation-data). -/
+Source: Stacks 07A4; node proof step 6. -/
 def finitePullSection {X Z : Scheme.{u}} (j : X ⟶ Z) (n : ℕ)
     (N : normalizedDVRModules.{u, u} l E Z n) (V : Z.ProEtᵒᵖ)
     (x : N.val.obj V) :
@@ -145,8 +139,7 @@ def finitePullSection {X Z : Scheme.{u}} (j : X ⟶ Z) (n : ℕ)
 /-- The identical normalized comparison over the constant finite ring A_(n+1).
 Its ordinary and derived inverse-unit equations characterize the canonical finite
 open tensor comparison of lem-sf-open-tensor-normalization.
-Source: Stacks 0E8I, 0GL1; node proof step 6
-(blueprint: def-coef-native-open-tensor-evaluation-data). -/
+Source: Stacks 0E8I, 0GL1; node proof step 6. -/
 abbrev FiniteOpenModel {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemTensors.{u, u} l E X)
     (SZ : CoefficientDerivedSystemTensors.{u, u} l E Z) (n : ℕ) :=
@@ -179,8 +172,7 @@ abbrev FiniteOpenModel {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (proEtaleBaseChange j) (finitePullSection l E j n)
 
 /-- The finite gamma with its exact native functor instances made explicit.
-Source: Stacks 0GL1; node proof step 6
-(blueprint: def-coef-native-open-tensor-evaluation-data). -/
+Source: Stacks 0GL1; node proof step 6. -/
 abbrev finiteGamma {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemTensors.{u, u} l E X)
     (SZ : CoefficientDerivedSystemTensors.{u, u} l E Z) (n : ℕ)
@@ -216,8 +208,7 @@ abbrev finiteGamma {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
 /-- Exact finite evaluation of gamma under the actual open, restriction and tensor
 comparisons. This is equality of the evaluated transformation with the canonical
 finite transformation, on every pair of derived objects.
-Source: Stacks 0GL1, 07A4; node proof step 6
-(blueprint: def-coef-native-open-tensor-evaluation-data). -/
+Source: Stacks 0GL1, 07A4; node proof step 6. -/
 def GammaEvaluation {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemCalculus.{u, u} l E X)
     (SZ : CoefficientDerivedSystemCalculus.{u, u} l E Z)

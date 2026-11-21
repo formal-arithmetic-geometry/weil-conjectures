@@ -10,7 +10,6 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerDirectImageC
 import all WeilConjectures.CategoryTheory.AdjunctionSquareComposition
 /-! Identity normalization data for the system pullback compositor.
 Source: Stacks 07A7, 0F7C; blueprint fix-prop-coherence.
-(blueprint: lem-sf-system-push-identity-pair-pull-unit).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -121,7 +120,6 @@ private theorem ordinary_pull_left_unit {o : Operations l E}
 /-- The normalized pullback identity and its bridge mate. This is the inverse-image
 part of the identity-pair calculation; direct-image components are not asserted.
 Source: Stacks 07A7, 0F7C; blueprint fix-prop-coherence.
-(blueprint: lem-sf-system-push-identity-pair-pull-unit).
 
 Proof: sectionwise identity normalization determines the ordinary direct-image identity;
 localization and adjoint conjugation produce the displayed pullback unit and bridge mate.

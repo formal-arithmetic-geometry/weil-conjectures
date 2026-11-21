@@ -203,8 +203,7 @@ conjugation and the prescribed cochain models lift the agreement to the derived
 compositors. Equality induction handles the lift-composite equality. Map the
 clopen square through the second projection, append this compositor square,
 and use naturality of the direct bridge on the two component morphisms.
-No cartesian or restriction factor is used.
-(blueprint: lem-sf-integral-system-clopen-tail-bridge). -/
+No cartesian or restriction factor is used. -/
 theorem clopenTail_bridge (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)

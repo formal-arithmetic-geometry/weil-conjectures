@@ -188,7 +188,6 @@ private theorem derivedCounit_calculation
 This asserts one equality and does not assert existence or invertibility of a comparison.
 Source: Stacks sites-modules.tex, Tags 03DJ and 0E8I; sites-cohomology.tex,
 Tags 06YY, 0GL1 and 0941; the counit calculation in transport steps 2--4.
-(blueprint: lem-sf-open-restriction-counit-on-good-complexes).
 
 Proof: fix Q and take the augmented presentations supplied by hs and hr. Their
 restricted complexes have the same integral source but may have different strict

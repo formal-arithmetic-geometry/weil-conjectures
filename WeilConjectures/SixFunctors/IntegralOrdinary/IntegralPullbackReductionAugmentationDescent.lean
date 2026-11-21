@@ -29,7 +29,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 object of the derived category.
 Source: Stacks 07A6 and 0941; the localization argument in
 `fix-prop-projection-formula.proof.md`.
-(blueprint: lem-sf-pullback-reduction-augmentation-descent).
 
 Proof: the good-complex localization presents the derived category. Naturality
 of the pullback comparison, the Roos realization, and the candidate natural

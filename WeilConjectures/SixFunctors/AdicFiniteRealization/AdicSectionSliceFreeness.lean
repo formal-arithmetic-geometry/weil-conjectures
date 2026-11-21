@@ -22,7 +22,6 @@ import all WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! # Finite free modules on sectionwise pro-etale slices
 Source: Stacks Project, Tags 00YV, 03DM and 03DO.
-(blueprint: lem-sf-adic-section-slice-freeness).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -75,8 +74,7 @@ private theorem free_comap_iso {X : Scheme.{u}}
     exact ⟨n, ⟨E.functor.mapIso en ≪≫ ef n⟩⟩
 
 /-- Sectionwise free presentations on a pro-etale slice correspond to free internal
-inverse images on its scheme. Source: Stacks Project, Tags 00YV, 03DM and 03DO
-(blueprint: lem-sf-adic-section-slice-freeness).
+inverse images on its scheme. Source: Stacks Project, Tags 00YV, 03DM and 03DO.
 Proof: identify the slice site with the small pro-etale site of the chart. The
 monoidal restriction comparison identifies the internal pullback with restriction
 up to an invertible coefficient map. Reconstructing rings gives the identity on

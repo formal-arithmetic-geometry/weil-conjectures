@@ -112,8 +112,7 @@ public import WeilConjectures.SixFunctors.SfOpenRoos.SfOpenRoosExtensionComparis
 /-! # The open tensor augmentation limit square
 
 Source: Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8(2),(3), pp.49--50;
-Stacks 0940, normalized augmented strict Roos calculation
-(blueprint: lem-sf-open-tensor-augmentation-limit-square).
+Stacks 0940, normalized augmented strict Roos calculation.
 
 The index n denotes the positive exponent n+1. All maps are localized maps of
 unbounded complexes. The supplied lambda is pinned on both signed Roos coordinates.

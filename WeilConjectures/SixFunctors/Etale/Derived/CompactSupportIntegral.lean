@@ -103,8 +103,7 @@ The compact-support direct image `Rf_! : D_comp(X_ét, 𝒪_E) ⥤ D_comp(Y_ét,
 reductions modulo `𝔪_Eⁿ` are the étale `Rf_!` of the reductions `K_n`
 (`nonempty_iso_reductionModIdeal_rightDerivedLowerShriekDerivedCompleteIntegral`),
 and, being derived complete, it is the homotopy limit of its reductions; so it is the
-blueprint's `R lim_n Res_n Rf_{!,n} K_n`, computed for the chosen compactification of `f`
-(blueprint `proposition-construction-independence-rf-shriek`). -/
+blueprint's `R lim_n Res_n Rf_{!,n} K_n`, computed for the chosen compactification of `f`. -/
 noncomputable def rightDerivedLowerShriekDerivedCompleteIntegral :
     DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E ⥤
       DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E :=

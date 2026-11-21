@@ -11,8 +11,6 @@ import all WeilConjectures.SixFunctors.GeneratorReduction.GeneratorKind.TensorAd
 import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffectivity
 
 /-! # Ordinary coefficient squares for canonical isomorphisms
-
-Source: blueprint fix-prop-coherence, the coefficient comparisons of individual maps.
 -/
 
 @[expose] public noncomputable section
@@ -889,8 +887,6 @@ private theorem openProjection_square
   exact hi
 
 /-- Forward squares for the listed ordinary structural isomorphisms.
-Source: blueprint fix-prop-coherence, tensor reassociation and geometric/open compositors.
-(blueprint: lem-sf-integral-ordinary-canonical-iso-square).
 
 Proof: substitute the independently constructed child coefficient maps into the
 primitive coefficient diagrams. Tensor reassociation uses reduction_compatible

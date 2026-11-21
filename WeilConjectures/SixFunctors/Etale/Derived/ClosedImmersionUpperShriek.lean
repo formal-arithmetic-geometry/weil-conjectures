@@ -20,7 +20,7 @@ sections of `N` with support in `Z` form the kernel `Γ_Z N = ker(N ⟶ j_* j^* 
 `j^* ⊣ j_*`, and `i^! N = i^* Γ_Z N`. This file shows that `i^!` is right adjoint to `i_*` on
 sheaves, for arbitrary coefficients, and that the right derived functor of `i^!` is right
 adjoint to the direct image `Ri_* = i_*` on the unbounded derived categories of étale sheaves
-of modules (blueprint `lemma-local-cohomology-right-adjoint--1`). No constructibility is involved.
+of modules. No constructibility is involved.
 
 The sheaf-level adjunction is the composite of three bijections
 ```
@@ -37,7 +37,7 @@ of the kernel (`j^* i_* M = 0`).
 - `AlgebraicGeometry.Etale.closedUpperShriek`: `i^! = i^* ∘ Γ_Z`.
 - `AlgebraicGeometry.Etale.lowerStarClosedUpperShriekAdjunction`: `i_* ⊣ i^!` on sheaves.
 - `AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`: `Ri_* ⊣ Ri^!` on the
-  unbounded derived categories (blueprint `lemma-local-cohomology-right-adjoint--1`).
+  unbounded derived categories.
 -/
 
 @[expose] public section

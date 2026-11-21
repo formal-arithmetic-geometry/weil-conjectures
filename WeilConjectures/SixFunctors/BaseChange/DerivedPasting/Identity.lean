@@ -85,9 +85,7 @@ lemma Etale.baseChangeMap_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)) :
 /-- Blueprint `lemma-identity-pasting--1` (identity part): **the derived
 exchange morphism of the identity square is the identity**, modulo the identity isomorphisms
 `D(𝟙 _)^*⁺ ≅ 𝟭` of the derived pullbacks. The composition part of that blueprint lemma is the
-horizontal pasting law `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz`.
-(blueprint: `lemma-identity-pasting`,
-`lemma-identity-pasting`) -/
+horizontal pasting law `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz`. -/
 lemma Etale.derivedBaseChangeMapPlus_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)) :
     Etale.derivedBaseChangeMapPlus A sq =
       Functor.whiskerLeft (f)_*[A].rightDerivedFunctorPlus (Etale.upperStarIdDerivedPlus A Y).hom ≫

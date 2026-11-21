@@ -19,7 +19,7 @@ Let `φ : M ⟶ N` be a morphism of models
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom`) over `f : X ⟶ Y` and
 `f' : X' ⟶ Y'`, with morphisms `t` of total spaces and `g` of geometric generic fibres. This file
 constructs the exchange maps of the nearby cycles `Ψ = Li^* Rj_* Lε^*` on the
-unbounded derived categories of module objects (blueprint `prose-E-03`):
+unbounded derived categories of module objects:
 
 * the *pullback exchange* `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*`
   (`NearbyCyclesModel.Hom.pullbackExchange`), assembled from the pullback comparisons of the
@@ -36,7 +36,7 @@ unbounded derived categories of module objects (blueprint `prose-E-03`):
   `α_f(Λ) ∘ Lf'^* σ_N = Ψ_M(ε_f) ∘ σ_M ∘ ε_{f'}⁻¹` (blueprint
   `sec-Base-change-for-nearby-cycles` (2)).
 - `NearbyCyclesModel.Hom.unit_comp_map_comp_pushforwardExchange_app`: the unit identity
-  `χ_f ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}` (blueprint `proposition-specialization-trace-class`),
+  `χ_f ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}`,
   and `NearbyCyclesModel.Hom.homEquiv_symm_unit_comp_pushforwardExchange_app`: specialization
   commutes with the adjunction `Lf^* ⊣ Rf_*`.
 - `NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isIso`: a morphism of models whose morphisms
@@ -51,7 +51,6 @@ trigger expensive unfoldings of the derived functors, and the kernel must not be
 different proofs of equalities of derived pullbacks (hence
 `ProEtale.CondensedRing.pullbackSquareComparison_eq_trans`). The unit comparisons used are
 `ProEtale.CondensedRing.leftDerivedUpperStarUnitIso`.
-
 -/
 
 @[expose] public section
@@ -375,7 +374,7 @@ morphism of the square of geometric generic fibres is invertible by weakly étal
 The morphism of models is the commutative diagram
 ```
 X ←─ε── M.generic ──j─→ M.total ←──i── X'
-│f      │φ.generic      │φ.total       │f'
+│f │φ.generic │φ.total │f'
 Y ←─ε── N.generic ──j─→ N.total ←──i── Y'
 ```
 -/
@@ -460,8 +459,7 @@ lemma homEquiv_symm_unit_comp_pushforwardExchange_app
     (N.unit Λ) (M.unit Λ) (leftDerivedUpperStarUnitIso Λ f') (leftDerivedUpperStarUnitIso Λ f)
     (φ.map_unit_comp_pullbackExchange_app Λ) h
 
-/-- **Unit identity of the pushforward exchange** (blueprint
-`proposition-specialization-trace-class`): `χ_f(Λ_X) ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}`, up to
+/-- **Unit identity of the pushforward exchange**: `χ_f(Λ_X) ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}`, up to
 the unit comparisons `ε_f : Λ_X ≅ Lf^* Λ_Y` and `ε_{f'} : Λ_{X'} ≅ Lf'^* Λ_{Y'}`. -/
 lemma unit_comp_map_comp_pushforwardExchange_app :
     N.unit Λ ≫ (N.nearbyCycles Λ).map ((derivedUpperStarLowerStarAdjunction Λ f).unit.app (𝟙_ _) ≫

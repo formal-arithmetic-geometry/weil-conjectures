@@ -74,7 +74,6 @@ import them, and records only the isomorphism with which the adjoint of `β_K` i
 The further assertion that the inverse of the adjoint *is* the global
 duality isomorphism followed by `𝔻_X K ≅ K^∨(d)[2d]` is not stated: those isomorphisms are only
 known to exist here (`Nonempty`), they are not constructed as specific maps.
-
 -/
 
 @[expose] public section

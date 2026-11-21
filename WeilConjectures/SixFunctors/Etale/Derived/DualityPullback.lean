@@ -59,7 +59,6 @@ is. This avoids biduality, so the isomorphism holds on all of `D(Y_ét, Λ)` and
 The symmetry of `⊗ᴸ` is only available as `Nonempty`
 (`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`), so the isomorphisms are asserted
 as `Nonempty (_ ≅ _)`, as for the other comparison isomorphisms of this directory.
-
 -/
 
 @[expose] public section

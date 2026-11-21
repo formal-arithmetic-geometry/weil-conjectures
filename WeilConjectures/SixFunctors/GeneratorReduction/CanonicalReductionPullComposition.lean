@@ -13,8 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 /-! # Canonical reduction and pullback composition
 
 The comparison is specified on K-flat complexes and by ordinary limit projections.
-Source: blueprint latest, fix-prop-coherence.proof.md, maps-used sentence
-(blueprint: lem-sf-canonical-reduction-pull-composition).
 -/
 
 @[expose] public section
@@ -254,7 +252,6 @@ private theorem on_good
 /-- Canonical quotient/pullback comparison preserves the specified geometric compositor.
 Source: blueprint latest, sec-six-functors/sk-thm-sf-compatibility/
 fix-prop-coherence.proof.md, maps-used sentence; Stacks 03D7, 07A6, 0D6D and 0941.
-(blueprint: lem-sf-canonical-reduction-pull-composition).
 
 Proof: first compare ordinary direct images followed by the ordinary limit functor.
 Postcompose with every limit projection and evaluate on a section of a pro-etale object.

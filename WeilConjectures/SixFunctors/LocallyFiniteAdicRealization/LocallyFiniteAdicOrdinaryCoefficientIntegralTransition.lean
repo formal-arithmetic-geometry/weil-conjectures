@@ -13,7 +13,6 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFi
 /-! # Integral normalization of the ordinary finite closure comparison
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-finite-ordinary-coefficient-integral-transition)
 -/
 
 @[expose] public noncomputable section
@@ -50,8 +49,7 @@ variable [IsNoetherian X]
 
 /-- Integral coefficient transport after the continuous realization, with the
 ordinary coefficient extensions still separate on its source.
-Source: BS 6.8.2 and 6.8.14(2), the prescribed integral coefficient square.
-(blueprint: lem-sf-finite-ordinary-coefficient-integral-transition). -/
+Source: BS 6.8.2 and 6.8.14(2), the prescribed integral coefficient square. -/
 @[irreducible] def finiteOrdinaryCoefficientIntegralModel (A : FiniteCondensedData l X)
     (C : CoefficientSystem l X) (E : Index l (PadicAlgCl l)) :
     letI := C.commutative
@@ -93,7 +91,6 @@ Source: BS 6.8.2 and 6.8.14(2), the prescribed integral coefficient square.
 /-- The completion comparison is preserved by the prescribed coefficient tensor
 transport, independently of raw-stage rationalization or section reconstruction.
 Source: BS 6.8.2, 6.8.14(2), and the quotient-normalized completion comparison.
-(blueprint: lem-sf-finite-ordinary-coefficient-integral-transition).
 
 Proof in words: retain the specified ambient completed comparison of A.raw.integral.
 Package the given raw stage and scalar data as the finite coefficient comparison.

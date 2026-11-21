@@ -215,7 +215,6 @@ private theorem direct_coherence (o : Operations l E) (a : OrdinaryLimitModel l 
 /-- Ordinary coefficient reduction preserves the geometric pullback compositor.
 Source: blueprint latest, sec-six-functors/sk-thm-sf-compatibility/
 fix-prop-coherence.proof.md, maps-used sentence; Stacks 03D7, 03D8 and 0941.
-(blueprint: lem-sf-ordinary-reduction-pull-composition).
 
 Proof: take the ordinary right-adjoint conjugates. The ringed direct-image compositor
 is fixed by restriction along pullbackComp, as is c.ordinaryDirect by c.sections.

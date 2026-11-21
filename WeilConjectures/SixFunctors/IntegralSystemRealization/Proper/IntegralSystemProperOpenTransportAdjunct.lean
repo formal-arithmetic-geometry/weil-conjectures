@@ -57,7 +57,6 @@ Adjunct normalization for the bridge-transported intrinsic gamma.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0F7B and 07A7.
 The proof transports the intrinsic `gamma_adjunct` equation across the bridge
 isomorphisms and identifies the resulting mate with `properOpenLambda`.
-(blueprint: lem-sf-integral-system-proper-open-transport-adjunct-normalization)
 -/
 theorem transportedGamma_adjunct (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o) :
@@ -79,7 +78,6 @@ theorem transportedGamma_adjunct (o : Operations l E) (c : Compositors l E o)
 
 /-- Existence of the adjunct-normalized transported gamma.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0F7B and 07A7.
-(blueprint: lem-sf-integral-system-proper-open-transport-core-adjunct).
 -/
 theorem integralSystemProperOpenTransportAdjunct (o : Operations l E)
     (c : Compositors l E o) (a : OpenComparisons l E o c) (b : CanonicalBridge l E o) :

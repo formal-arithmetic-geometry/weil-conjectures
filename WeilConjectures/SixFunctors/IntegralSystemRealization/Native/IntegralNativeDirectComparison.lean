@@ -27,8 +27,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Identity on sections identifies the two ordinary sequence direct images.
-Source: Stacks 03D2, 0941
-(blueprint: lem-sf-integral-native-direct-comparison). -/
+Source: Stacks 03D2, 0941. -/
 def integralNativeOrdinaryDirectIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pullbackTensorSequenceDirect l E f ≅
       ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
@@ -41,8 +40,7 @@ def integralNativeOrdinaryDirectIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
   rfl
 
 /-- Localize ordinary inverse-image uniqueness to the whole native system category.
-Source: Stacks 03D2, 0941
-(blueprint: lem-sf-integral-native-direct-comparison). -/
+Source: Stacks 03D2, 0941. -/
 def integralNativePullIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pull l E f ≅ ProEtale.VaryingRing.G (compactSupportSystemLevel l E)
       (compactSupportSystemQuotient l E) f :=
@@ -59,8 +57,7 @@ def integralNativePullIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
           (compactSupportSystemQuotient l E) f))
 
 /-- The derived direct-image comparison is the conjugate of the exact inverse-image one.
-Source: Stacks 03D2, 0941; Zheng 4.10
-(blueprint: lem-sf-integral-native-direct-comparison). -/
+Source: Stacks 03D2, 0941; Zheng 4.10. -/
 def integralNativeDirectIso {X Y : Scheme.{u}} (f : X ⟶ Y) (d : Direct l E f) :
     d.direct ≅ ProEtale.VaryingRing.P (compactSupportSystemLevel l E)
       (compactSupportSystemQuotient l E) f :=
@@ -82,8 +79,7 @@ private theorem ordinary_direct_square {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ
 
 /-- Compare total derived direct images on whole systems, with their finite evaluations.
 Source: Stacks 03D2, 0941, 0D6E; Zheng 4.1 and 4.10; blueprint
-fix-prop-coherence, coefficient comparisons of adjunction units and counits
-(blueprint: lem-sf-integral-native-direct-comparison).
+fix-prop-coherence, coefficient comparisons of adjunction units and counits.
 
 Proof: identify the two ordinary sequence-site direct images by identity on sections.
 Their scalar maps agree by the specified constant-section ring-map normalizations.

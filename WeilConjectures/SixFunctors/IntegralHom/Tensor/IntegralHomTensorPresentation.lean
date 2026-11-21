@@ -15,8 +15,7 @@ This is the tensor and evaluation part of
 `lem-sf-integral-hom-models-exist`.
 
 Source: Stacks Tags 06YS, 06YU, 08J9, 08JA, 07A4 and 07A6;
-blueprint order 2478, proof step 2
-(blueprint: lem-sf-integral-hom-models-exist-tensor).
+blueprint order 2478, proof step 2.
 -/
 
 @[expose] public section
@@ -39,7 +38,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- A normalized tensor presentation exists.
 
 Source: Stacks Tags 06YS, 06YU, 08J9 and 0A8X; blueprint order 2478,
-proof step 2 (blueprint: lem-sf-integral-hom-models-exist-tensor).
+proof step 2.
 
 Proof: choose flat-term K-flat resolutions in both variables and a K-injective
 resolution in the target. Sectionwise currying gives the signed evaluation

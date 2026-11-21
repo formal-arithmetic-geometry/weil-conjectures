@@ -207,8 +207,7 @@ import all WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Unit-normalized ordinary restriction tensor data
 
-Source: Stacks 03EL and 0G7E
-(blueprint: lem-coef-native-open-tensor-restriction).
+Source: Stacks 03EL and 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -234,7 +233,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory Functor.leftAdjoin
 /-- Construct the restriction tensorator normalized by the given module-adjunction unit,
 and preserve flat-term K-flat complexes along the same functor.
 Source: Stacks, sites-modules.tex Tag 03EL; sites-cohomology.tex Tag 0G7E.
-(blueprint: lem-coef-native-open-tensor-restriction).
 
 Proof: compose the given algebraic inverse image with scalar extension along c.
 Its normalized adjunction identifies it with F by uniqueness of left adjoints.

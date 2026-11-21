@@ -33,7 +33,6 @@ functoriality of the construction in automorphisms of `η̄` over `η`.
 - `NearbyCyclesModel.pullbackExchange_galoisLayerHom_app_comp_galoisLayerAction`: the pullback
   exchange `L(𝟙)^* Ψ_N ⟶ Ψ_{N_Ω} L(𝟙)^*` of the projection `N_Ω ⟶ N` lands in the invariants of
   the action.
-
 -/
 
 @[expose] public section

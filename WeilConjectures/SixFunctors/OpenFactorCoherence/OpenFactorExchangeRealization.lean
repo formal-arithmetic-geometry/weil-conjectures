@@ -31,7 +31,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Transport the strict completed exchange and its restricted unit square.
 Source: Stacks 099N(2),(5), 09BN and 0D6D; blueprint open-factor steps 10--11.
-(blueprint: lem-sf-open-factor-exchange-realization).
 
 Proof: the projection-normalized coefficient transport identifies the fixed strict
 pullback towers with the published completed-exchange presentation. Descend the

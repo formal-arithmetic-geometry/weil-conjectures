@@ -11,8 +11,6 @@ public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 import Mathlib.CategoryTheory.HomCongr
 
 /-! # Tensor transposition and contravariant dual adjunction
-
-Source: the tensor-Hom arrows in the current blueprint's closed-costalk-duality proof.
 -/
 
 @[expose] public noncomputable section

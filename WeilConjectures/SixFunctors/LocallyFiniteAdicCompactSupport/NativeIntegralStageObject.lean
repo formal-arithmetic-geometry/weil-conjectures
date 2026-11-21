@@ -35,8 +35,7 @@ variable (l : ℕ) [Fact l.Prime]
 Source: the canonical stage-system and rational scalar-extension object equations.
 Proof: evaluate the specified transition-functor equality at raw localization of K,
 then apply sfRationalScalarExtension_obj to identify its value with raw localization
-of the prescribed integral transition. The initial value is the toStage object.
-(blueprint: lem-sf-native-integral-stage-object). -/
+of the prescribed integral transition. The initial value is the toStage object. -/
 theorem integralStageObject
     (T : Scheme.{u}) (i E : Index l (PadicAlgCl l)) (h : i ≤ E)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) i) T) :

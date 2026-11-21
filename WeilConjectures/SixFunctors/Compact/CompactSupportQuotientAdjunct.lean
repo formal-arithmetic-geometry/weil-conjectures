@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.CompactSupportQuotient.CompactSupportQuoti
 /-! # Invertibility of the normalized quotient adjunct
 
 Source: the current blueprint, lem-coef-integral-compact-support.proof.md,
-finite-level coefficient comparison; Stacks Tag 03DA
-(blueprint: lem-coef-compact-support-quotient-adjunct).
+finite-level coefficient comparison; Stacks Tag 03DA.
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +35,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The quotient adjunct is invertible and transposes back to the prescribed arrow.
-Source: quotient unit characterization, Stacks Tag 07A6
-(blueprint: lem-coef-compact-support-quotient-adjunct).
+Source: quotient unit characterization, Stacks Tag 07A6.
 Proof: the twice-transposed integral unit is the left-adjoint composition isomorphism.
 The inverse Hom equivalence gives the unit equation. No geometric hypothesis is used. -/
 theorem compactSupportQuotient_adjunct

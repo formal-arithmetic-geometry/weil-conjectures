@@ -11,7 +11,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Etale origins of bounded constructible coefficient systems
 Source: Zheng Construction 4.1 and Lemma 4.10.
-(blueprint: lem-sf-exceptional-integral-coordinate-origin).
 -/
 
 @[expose] public noncomputable section
@@ -63,7 +62,6 @@ private theorem lowerBoundOfEvaluations (W : Scheme.{u})
 
 /-- Common finite constructible bounds imply origin in the recorded site comparison.
 Source: Zheng Construction 4.1 and Lemma 4.10; finite-ring constructible origin.
-(blueprint: lem-sf-exceptional-integral-coordinate-origin).
 
 Proof: choose finite bounded constructible etale antecedents using finite-ring
 comparison. Lift them through the exact quotient-ring realization equivalence.

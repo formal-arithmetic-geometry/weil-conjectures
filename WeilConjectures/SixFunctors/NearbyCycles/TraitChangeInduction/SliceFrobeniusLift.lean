@@ -30,7 +30,6 @@ since it lies in the unramified radical extension `B` of `Frac R'`
 (`AlgebraicGeometry.SliceTrait.exists_unramified_subfields`), its residue field is separable over
 `k(x̄)` for the same reason, and finite over `k(x̄)` by the Gauss valuation on `K₀(x)`
 (`ValuationSubring.residue_mem_adjoin_of_mem_adjoin`), since `R'` is algebraic over `R[x]`.
-
 -/
 
 @[expose] public section

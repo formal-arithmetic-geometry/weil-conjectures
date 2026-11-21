@@ -24,11 +24,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Kunneth
 The four finiteness inputs the purity chapter takes from the six-functor formalism:
 
 * `Rf_*` and `Rf_!` preserve bounded constructibility, with a cohomological-dimension bound
-  in terms of the fibre dimension (`sk-prop-sf-finiteness`);
+  in terms of the fibre dimension;
 * compactly supported cohomology is a perfect complex of `Λ`-modules
-  (`lemma-perfect-complexes-geometric-point`);
+;
 * finite Tor amplitude in `[a, b]` is the same as admitting a bounded flat model concentrated
-  in `[a, b]` (`lemma-flat-models-generators`);
+  in `[a, b]`;
 * the Künneth formula and the projection formula in ordinary étale cohomology
   (`proposition-ordinary-external-kunneth--1`).
 

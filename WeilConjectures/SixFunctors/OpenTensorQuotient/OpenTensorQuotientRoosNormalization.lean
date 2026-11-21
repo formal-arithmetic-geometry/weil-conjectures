@@ -11,7 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonica
 /-! # Roos normalization of scalar-unit tensor augmentations
 
 Source: Bhatt--Scholze 3.4.10; Stacks 03EK and 06YN.
-(blueprint: lem-sf-open-quotient-roos-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -34,7 +33,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 Roos tensor-completion chain map.
 
 Source: Bhatt--Scholze 3.4.10; Stacks 03EK and 06YN.
-(blueprint: lem-sf-open-quotient-roos-normalization).
 
 Proof: two maps out of the signed direct-sum total tensor agree when they agree
 on each homogeneous summand. Tensor and sheafification extensionality reduce this

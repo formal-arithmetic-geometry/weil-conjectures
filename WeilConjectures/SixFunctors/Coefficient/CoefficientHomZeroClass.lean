@@ -197,8 +197,7 @@ import Mathlib.Algebra.Homology.Functor
 
 /-! # Canonical zero-cycle class in derived global Hom
 
-Source: Stacks Project, Tags 08JA and 079P
-(blueprint: def-coef-hom-zero-cycle-class).
+Source: Stacks Project, Tags 08JA and 079P.
 
 ## Main definitions
 
@@ -221,7 +220,7 @@ namespace WeilConjectures
 attribute [local irreducible] homComplexFunctor
 
 /-- Total derived global sections on the original site and coefficient ring.
-Source: Stacks 08JA (blueprint: def-coef-hom-zero-cycle-class).
+Source: Stacks 08JA.
 This is the derived functor underlying the recorded zeroth hypercohomology. -/
 noncomputable def coefficientGlobalSections
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
@@ -243,7 +242,7 @@ noncomputable def coefficientGlobalSections
   F.rightDerivedFunctor
 
 /-- The ordinary global-sections functor, written using Mathlib's module unit.
-Source: Stacks 08JA (blueprint: def-coef-hom-zero-cycle-class). -/
+Source: Stacks 08JA. -/
 noncomputable abbrev coefficientOrdinarySections
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}]
@@ -254,7 +253,7 @@ noncomputable abbrev coefficientOrdinarySections
 
 /-- The universal right-derived comparison on complexes, before inverting it on
 K-injectives. It is used to fix global-section comparisons on simultaneous resolutions.
-Source: Stacks 079P (blueprint: def-coef-hom-zero-cycle-class). -/
+Source: Stacks 079P. -/
 noncomputable def coefficientRightDerivedComparison
     {A : Type a} {B : Type b} [Category.{v} A] [Abelian A] [Category.{w} B] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B] [Abelian.HasKInjectiveResolutions A]
@@ -267,7 +266,7 @@ noncomputable def coefficientRightDerivedComparison
 
 /-- The canonical site-global-sections comparison, with the Grothendieck instance
 at the correct coefficient universe.
-Source: Stacks 079P, 08JA (blueprint: def-coef-hom-zero-cycle-class). -/
+Source: Stacks 079P, 08JA. -/
 noncomputable def coefficientSiteSectionsComparison
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}]
@@ -633,7 +632,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
 
 /-- Ordinary sections of the fixed representative Hom complex.
-Source: Stacks 08JA (blueprint: def-coef-hom-zero-cycle-class). -/
+Source: Stacks 08JA. -/
 noncomputable def coefficientHomSectionComplex
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ) :=
@@ -642,7 +641,7 @@ noncomputable def coefficientHomSectionComplex
       (op L, (coefficientHomResolution.{u, c, v} J A).obj M))
 
 /-- A zero cycle's actual class in the global derived Hom, via the universal derived unit.
-Source: Stacks 08JA (blueprint: def-coef-hom-zero-cycle-class). -/
+Source: Stacks 08JA. -/
 noncomputable def coefficientHomZeroClass
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -659,7 +658,7 @@ noncomputable def coefficientHomZeroClass
       (((coefficientHomSectionComplex.{u, c, v} J A L M).homologyπ 0) z))
 
 /-- Evaluate a zero cycle on a local section using the actual product projection.
-Source: Stacks 08JA, 0A8X (blueprint: def-coef-hom-zero-cycle-class). -/
+Source: Stacks 08JA, 0A8X. -/
 noncomputable def coefficientHomZeroEvaluation
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -1083,7 +1082,7 @@ attribute [local irreducible] coefficientHomZeroEvaluation derivedInternalHomOfU
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The H⁰ RHom identification is uniquely fixed by taking a cycle to its chain map.
-Source: Stacks 08JA (blueprint: def-coef-hom-zero-cycle-class).
+Source: Stacks 08JA.
 Proof: on a K-flat L and the fixed K-injective replacement I(M), sections of Hom(L,I(M))
 have zero cycles the chain maps and boundaries the null-homotopic maps. The universal
 sections comparison and the actual Hom localization factorization give the displayed
@@ -1293,7 +1292,7 @@ theorem coefficientHomZeroEquiv_exists :
     · exact hbase
 
 /-- The uniquely normalized version of the recorded H⁰ RHom equivalence.
-Source: Stacks 08JA (blueprint: def-coef-hom-zero-cycle-class). -/
+Source: Stacks 08JA. -/
 noncomputable def coefficientHomZeroEquiv :=
   (coefficientHomZeroEquiv_exists.{u, c, v, w} J A).choose
 

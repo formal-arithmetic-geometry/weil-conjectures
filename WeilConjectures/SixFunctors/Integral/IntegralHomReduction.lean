@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.IntegralHom.IntegralHomRoosTransport
 
 /-! # Integral internal Hom and reduction
 
-Source: blueprint order 2134; Stacks Tags 08J9, 07A6, 07A4 and 08TC
-(blueprint: proposition-six-operations-change-coefficients--7).
+Source: blueprint order 2134; Stacks Tags 08J9, 07A6, 07A4 and 08TC.
 -/
 
 @[expose] public section
@@ -40,13 +39,9 @@ fix the constructions on local sections. The comparison itself is a defined
 transpose; the following clauses assert its invertibility, its evaluation equation,
 and compatibility with every transpose.
 
-Source: blueprint, chap-The-six-operations-on-Dbctf, sk-prop-sf-biduality-general,
-proposition-six-operations-change-coefficients--7, order 2134
-(blueprint: proposition-six-operations-change-coefficients--7).
-
 Proof:
 1. The valuation ring is a DVR and hence Noetherian
-   (lem-weil-l-adic-extension-integers-dvr). The standard perfect quotient
+. The standard perfect quotient
    resolution and completed-constant-sheaf reduction identify the restricted
    quotient with Q_n=[B --t^(n+1)--> B]. It is K-flat by the bounded-flat lemma.
    The maps Q_m to Q_n are (t^(m-n),1) and preserve the degree-zero unit.

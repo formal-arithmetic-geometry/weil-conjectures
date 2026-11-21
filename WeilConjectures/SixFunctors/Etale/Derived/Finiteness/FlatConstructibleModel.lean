@@ -12,8 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 # Flat constructible models of objects of `D^b_{ctf}`
 
 Every object of `D^b_{ctf}(X, Λ)` (bounded, constructible cohomology, finite Tor amplitude), for
-`X` Noetherian and `Λ` finite, is represented by a bounded complex of flat constructible sheaves
-(blueprint `lemma-flat-models-generators`).
+`X` Noetherian and `Λ` finite, is represented by a bounded complex of flat constructible sheaves.
 
 ## Main statements (in `AlgebraicGeometry.Etale.DerivedCategory`)
 
@@ -43,7 +42,7 @@ lemma exists_le_hasTorAmplitudeIn_of_finiteTorAmplitude {X : Scheme.{u}}
   exact ⟨min a b, b, min_le_right a b, hasTorAmplitudeIn_iff_torAmplitudeIn.2
     (torAmplitudeIn.mono (min_le_left a b) le_rfl h)⟩
 
-/-- **Flat constructible models** (blueprint `lemma-flat-models-generators`): on a Noetherian
+/-- **Flat constructible models**: on a Noetherian
 scheme, with finite coefficients, an object of `D^b_{ctf}(X, Λ)` is represented by a bounded complex
 of flat constructible sheaves. -/
 theorem exists_flatConstructibleModel_of_boundedConstructibleFiniteTor {X : Scheme.{u}}

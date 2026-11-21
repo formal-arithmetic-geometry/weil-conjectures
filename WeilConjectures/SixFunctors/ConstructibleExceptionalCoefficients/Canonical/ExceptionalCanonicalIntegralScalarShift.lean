@@ -169,8 +169,7 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- The finite-Tor inclusion carries the shift lifted from its full realization.
-Source: inherited shifts on full coefficient subcategories
-(blueprint: lem-sf-canonical-integral-scalar-square). -/
+Source: inherited shifts on full coefficient subcategories. -/
 @[irreducible]
 def finiteTorIntegralShift (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :
     letI : HasShift (C.{u, v} l Ω T (.integral E)) ℤ := shift l Ω T (.integral E)
@@ -183,8 +182,7 @@ def finiteTorIntegralShift (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :
         RingStage.inclusion.{u, v} l Ω T (.integral E) from Iso.refl _) ℤ
 
 /-- The finite-Tor inclusion shift preserves its ambient realization.
-Source: full-subcategory shift lifting
-(blueprint: lem-sf-canonical-integral-scalar-square). -/
+Source: full-subcategory shift lifting. -/
 theorem finiteTorIntegralShift_compatibility
     (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :
     letI : HasShift (C.{u, v} l Ω T (.integral E)) ℤ := shift l Ω T (.integral E)
@@ -205,7 +203,7 @@ theorem finiteTorIntegralShift_compatibility
 /-- The shift on an integral scalar functor induced by its specified ordinary realization.
 This is an actual fully faithful lift of the ambient scalar shift, independent of any
 shift stored in the scalar record. Source: Zheng, Construction 6.2, and the canonical
-completed scalar comparison (blueprint: lem-sf-canonical-integral-scalar-square). -/
+completed scalar comparison. -/
 @[irreducible]
 def canonicalIntegralScalarShift
     {E L : FieldStage.{max u v} l} {i : E.carrier →ₐ[Padic l] L.carrier}
@@ -226,7 +224,7 @@ by
   exact Functor.CommShift.ofComp S.realization ℤ
 
 /-- The ordinary realization preserves its induced shift.
-Source: full-faithful shift lifting (blueprint: lem-sf-canonical-integral-scalar-square). -/
+Source: full-faithful shift lifting. -/
 theorem canonicalIntegralScalarShift_compatibility
     {E L : FieldStage.{max u v} l} {i : E.carrier →ₐ[Padic l] L.carrier}
     {T : Scheme.{max u v}}
@@ -250,8 +248,7 @@ theorem canonicalIntegralScalarShift_compatibility
   exact hc
 
 /-- The normalized finite-Tor scalar functor embeds with the canonical intrinsic scalar shift.
-Source: Zheng, Construction 6.2, and the ordinary completed scalar comparison
-(blueprint: lem-sf-canonical-integral-scalar-square).
+Source: Zheng, Construction 6.2, and the ordinary completed scalar comparison.
 
 Proof: paste the shift-compatible ordinary-model comparison, intrinsic completion comparison,
 and supplied scalar realization, then lift through the fully faithful intrinsic inclusion.

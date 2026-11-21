@@ -16,9 +16,9 @@ the base change map of the exceptional inverse image respects the tensor isomorp
 
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
+  | |
+  f' f
+  ↓ ↓
   Y' --g---> Y
 ```
 

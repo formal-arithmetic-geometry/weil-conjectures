@@ -27,7 +27,6 @@ representative, use the uncurrying models to identify evaluation with the scalar
 extension transpose, and then use the ordinary scalar-section formula. The
 normalized zero-cycle equivalences turn the resulting chain-map equality into the
 displayed derived-category equality.
-(blueprint: lem-coef-derived-sections-normalization-scalar-hom-zero-cycle-representative)
 -/
 theorem coefficientDerivedSectionsScalarHomZero_cycle_representative
     (R : CoefficientDerivedSystemReduction l E W)

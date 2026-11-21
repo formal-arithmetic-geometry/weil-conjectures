@@ -19,7 +19,7 @@ Let `Λ` be a finite ring and `X` a noetherian scheme. Every object `K` of `Dctf
 restriction `K|_W` is dualizable in `D(W_ét, Λ)`, with a dual again in `Dctf(W, Λ)`. This is the
 first step of the proof of blueprint `lemma-verdier-duality-preserves-constructibility--1`: on a
 stratum on which the cohomology of `K` is finite locally constant, the finite-Tor restriction is
-site-perfect (blueprint `lemma-perfect-complexes-geometric-point`).
+site-perfect.
 
 `K` is represented by a bounded complex `P` of flat constructible sheaves
 (`AlgebraicGeometry.Etale.hasTorAmplitudeIn_iff_exists_flatConstructibleModel`). Its finitely
@@ -72,8 +72,7 @@ lemma constructibleFiniteTor_Q_obj_of_flat {X : Scheme.{u}}
 noetherian scheme `X`, there is a dense open `V ⊆ X` such that on every open `W ⊆ V` the
 restriction `K|_W` has a left dual `D` in `D(W_ét, Λ)` lying in `Dctf(W, Λ)`. This is the
 site-perfectness of the finite-Tor restriction of `K` to a stratum on which its cohomology is
-lisse (blueprint `lemma-perfect-complexes-geometric-point`, as used in
-`lemma-verdier-duality-preserves-constructibility--1`). -/
+lisse. -/
 theorem exists_dense_open_exactPairing {X : Scheme.{u}} [IsNoetherian X]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :

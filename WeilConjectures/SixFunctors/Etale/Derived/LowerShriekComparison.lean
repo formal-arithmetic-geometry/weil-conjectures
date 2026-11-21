@@ -29,9 +29,9 @@ hypothesis that the square
 
 ```
 X --c.i--> c.Z
-|          |
-𝟙          q
-|          |
+| |
+𝟙 q
+| |
 X --d.i--> d.Z
 ```
 
@@ -48,9 +48,9 @@ The composite is, with `q = r.hom`:
 
 ```
 D(d.i)_! ⋙ R(d.g)_*
-  ⟶ D(d.i)_! ⋙ Dq^* ⋙ Rq_* ⋙ R(d.g)_*   (unit of `Dq^* ⊣ Rq_*`)
-  ⟶ D(c.i)_! ⋙ Rq_* ⋙ R(d.g)_*          (inverse of base change for `j_!`)
-  ⟶ D(c.i)_! ⋙ R(c.g)_*                 (composition of derived pushforwards)
+  ⟶ D(d.i)_! ⋙ Dq^* ⋙ Rq_* ⋙ R(d.g)_* (unit of `Dq^* ⊣ Rq_*`)
+  ⟶ D(c.i)_! ⋙ Rq_* ⋙ R(d.g)_* (inverse of base change for `j_!`)
+  ⟶ D(c.i)_! ⋙ R(c.g)_* (composition of derived pushforwards)
 ```
 
 ## Main definitions
@@ -59,7 +59,7 @@ D(d.i)_! ⋙ R(d.g)_*
   `(r.hom)_* ⋙ (d.g)_* ≅ (c.g)_*` of pushforwards attached to a refinement.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison`: the
-  comparison `Rf_!(d)[A]+ ⟶ Rf_!(c)[A]+` above. (blueprint: `BA43-RHO`)
+  comparison `Rf_!(d)[A]+ ⟶ Rf_!(c)[A]+` above.
 
 ## Main results
 
@@ -107,5 +107,4 @@ This module imports its parts: the definitions are in
 `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.Defs`, the identity law in
 `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.IdentityLaw` and the composition
 law in `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw`.
-
 -/

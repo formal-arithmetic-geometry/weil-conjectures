@@ -15,9 +15,9 @@ Consider a square
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 X --p--> S
 ```
 
@@ -25,11 +25,11 @@ with exchange morphism `BC_sq : p^* Rg_* ⟶ Rh_* e^*` (`AlgebraicGeometry.Etale
 a morphism `u : S' ⟶ S`. Pulling all four corners back along `u` gives a cube
 
 ```
-Y' --e'--> T'            Y' --uY--> Y            T' --uT--> T
-|          |             |          |            |          |
-h'   sq'   g'            h'   bX    h            g'   bT    g
-v          v             v          v            v          v
-X' --p'--> S'            X' --uX--> X            S' --u---> S
+Y' --e'--> T' Y' --uY--> Y T' --uT--> T
+| | | | | |
+h' sq' g' h' bX h g' bT g
+v v v v v v
+X' --p'--> S' X' --uX--> X S' --u---> S
 ```
 
 whose top face `sq'` is the pulled-back square. Pasting the faces `bT` and `sq'`, and the faces

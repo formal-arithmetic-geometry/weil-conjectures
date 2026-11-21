@@ -48,7 +48,7 @@ limits of the levelwise traces.
 
 The levels are complexes on the small étale site, where the six functors, the compact-support
 exchange maps and the perfectness of compact cohomology are available
-(`proposition-six-operations-dctf`, `lemma-perfect-complexes-geometric-point`); their realization
+; their realization
 `R lim_n ν^* L_n` is formed on the pro-étale site, where the cohomological range of the levels is
 preserved (`AlgebraicGeometry.Etale.AdicSystem.realization`). Bounded constructible complexes of
 finite Tor amplitude on the pro-étale site are exactly the `ν^* L` with `L ∈ Dᵇctf(X_ét, A_n)`.
@@ -102,10 +102,10 @@ the statement that the coefficient comparison `(Φ K) ⊗ᴸ_Λ Λ' ⟶ Φ' (K �
 isomorphism. In a diagram, `α` fills the square
 ```
   D(X_ét, Λ') ──Φ'──▶ D(Λ')
-        │                │
-       Res      ⇓ α     Res
-        ▼                ▼
-  D(X_ét, Λ)  ──Φ──▶  D(Λ)
+        │ │
+       Res ⇓ α Res
+        ▼ ▼
+  D(X_ét, Λ) ──Φ──▶ D(Λ)
 ```
 and the condition is that the composite `Φ K ──Φ η──▶ Φ (Res K') ──α──▶ Res (Φ' K')` is again a
 base-change map whenever `η : K ⟶ Res K'` is one. -/
@@ -253,8 +253,8 @@ compact-support base change* along a pair `(g, h)` of automorphisms
 (`AlgebraicGeometry.Etale.compactPullback`): the square
 ```
   RΓ_c(X, Res K') ────── g_c^* ──────▶ RΓ_c(X, Lg^* Res K') ≅ RΓ_c(X, Res Lg^* K')
-        │ α                                                        │ α
-        ▼                                                          ▼
+        │ α │ α
+        ▼ ▼
   Res RΓ_c(X, K') ──── Res g_c^* ────▶ Res RΓ_c(X, Lg^* K')
 ```
 commutes, the identification `Lg^* Res ≅ Res Lg^*` being

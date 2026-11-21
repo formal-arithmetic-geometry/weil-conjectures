@@ -17,8 +17,7 @@ Let `a : X ⟶ Y` be a morphism admitting a compactification. The *mixed-support
 ```
 ⌣_c : Ra_! K ⊗ᴸ Ra_* L ⟶ Ra_!(K ⊗ᴸ L)
 ```
-is the projection map of `Ra_!` followed by the counit of `La^* ⊣ Ra_*`. We prove its coherence
-(blueprint `theorem-poincare-duality--7`): it is natural in `K` and `L`, associative with
+is the projection map of `Ra_!` followed by the counit of `La^* ⊣ Ra_*`. We prove its coherence: it is natural in `K` and `L`, associative with
 respect to the cup product `∪ : Ra_* L ⊗ᴸ Ra_* M ⟶ Ra_*(L ⊗ᴸ M)`
 (`AlgebraicGeometry.Etale.rightDerivedLowerStarCupProduct`), unital for the unit section
 `1 : Λ_Y ⟶ Ra_* Λ_X` (`AlgebraicGeometry.Etale.rightDerivedLowerStarUnit`), and compatible with
@@ -290,8 +289,8 @@ theorem mixedSupportCupProduct_naturality {K K' L L' : 𝐃(X, A)} (x : K ⟶ K'
 `M` is cupping with the cup product `L ∪ M`:
 ```
 (Ra_! K ⊗ᴸ Ra_* L) ⊗ᴸ Ra_* M --⌣_c ⊗ 1--> Ra_!(K ⊗ᴸ L) ⊗ᴸ Ra_* M --⌣_c--> Ra_!((K ⊗ᴸ L) ⊗ᴸ M)
-          | α                                                                 | Ra_!(α)
-          v                                                                   v
+          | α | Ra_!(α)
+          v v
 Ra_! K ⊗ᴸ (Ra_* L ⊗ᴸ Ra_* M) --1 ⊗ ∪--> Ra_! K ⊗ᴸ Ra_*(L ⊗ᴸ M) --⌣_c--> Ra_!(K ⊗ᴸ (L ⊗ᴸ M))
 ```
 -/

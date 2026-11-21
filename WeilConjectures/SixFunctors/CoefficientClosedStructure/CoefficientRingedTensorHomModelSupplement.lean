@@ -110,8 +110,7 @@ import Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.AlgebraicGeometry.CoefficientRingedTensorHomModel
 /-! # Canonical closed tensor-Hom models on a ringed site
 
-Source: Stacks Project, Tags 06YN, 07A4, 08J9 and 0A98
-(blueprint: def-coef-ringed-tensor-hom-model).
+Source: Stacks Project, Tags 06YN, 07A4, 08J9 and 0A98.
 
 ## Main definitions
 
@@ -136,7 +135,7 @@ variable {D : Type a} [Category.{b} D] {H : Dᵒᵖ × D ⥤ D}
   (S : CoefficientClosedStructure H)
 
 /-- Internal composition is the transpose of the composite of the two evaluations.
-Source: Stacks 08J9, 0A98 (blueprint: def-coef-ringed-tensor-hom-model). -/
+Source: Stacks 08J9, 0A98. -/
 def composition (P Q V : D) :
     S.tensor.obj (H.obj (op Q, V), H.obj (op P, Q)) ⟶ H.obj (op P, V) :=
   S.transpose _ P V
@@ -156,7 +155,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (A : Sheaf J CommRingCat.{max c v u})
 
 /-- Tensor of K-flat complexes is K-flat on the same ringed site.
-Source: Stacks 06YN, 06YU (blueprint: def-coef-ringed-tensor-hom-model).
+Source: Stacks 06YN, 06YU.
 Proof: for an acyclic test F, associate F tensor (P tensor Q) with
 (F tensor P) tensor Q. The total associator respects the signed differential.
 K-flatness of P and then Q makes this acyclic; the associator transfers acyclicity. -/

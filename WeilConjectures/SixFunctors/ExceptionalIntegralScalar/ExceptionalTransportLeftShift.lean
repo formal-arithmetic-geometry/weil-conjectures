@@ -41,7 +41,6 @@ STATEMENT-DISPUTED (former statement): the universal assertion for arbitrary,
 independently shifted operations
 and arbitrary realization isomorphisms is not asserted: compatibility requires
 this normalization of the shift structures.
-(blueprint: new-lem-sf-exceptional-ring-transport-left-shifts)
 -/
 theorem exists_exceptional_transport_left_shifts
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]

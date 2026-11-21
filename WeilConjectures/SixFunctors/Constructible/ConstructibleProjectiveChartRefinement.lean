@@ -48,8 +48,7 @@ import WeilConjectures.SixFunctors.Supporting.AffineCommonProjectiveCharts
 /-!
 # Common projective sheaf charts for two integral constructible complexes
 
-Source: Stacks Project, proetale.tex, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8
-(blueprint: lem-fix-constructible-projective-chart-refinement).
+Source: Stacks Project, proetale.tex, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8.
 
 All restrictions below are ordinary uncompleted derived ringed pullbacks. Coefficient
 index zero is exponent one. Finite products of the unit module are finite direct sums.
@@ -69,8 +68,7 @@ namespace WeilConjectures
 /-- Two integral constructible complexes have simultaneous bounded projective sheaf
 models after a finite open--closed refinement and weakly contractible affine covers.
 
-Source: Stacks Project, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8
-(blueprint: lem-fix-constructible-projective-chart-refinement).
+Source: Stacks Project, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8.
 
 Proof:
 1. Apply `constructible_residue_tree`. It retains all given stratum factorizations

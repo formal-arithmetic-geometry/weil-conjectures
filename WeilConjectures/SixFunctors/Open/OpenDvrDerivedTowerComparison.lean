@@ -90,7 +90,6 @@ import all WeilConjectures.CategoryTheory.Constant.ConstantTowerNormalization
 /-! # The natural derived DVR tower comparison on resolutions
 
 Source: Stacks Tag 06XN, comparison using a resolving class.
-(blueprint: lem-sf-open-dvr-derived-tower-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -154,8 +153,7 @@ private theorem coefficientKFlatTransport
   simpa only [OpenDvrCoefficientModel.complexes, C.modules_functor] using h
 
 /-- Ordinary tensor transport and a flat-resolution comparison give a natural derived tower iso.
-Source: Stacks Tag 06XN (comparison on resolutions)
-(blueprint: lem-sf-open-dvr-derived-tower-comparison).
+Source: Stacks Tag 06XN (comparison on resolutions).
 
 Proof: compare the completed-adic reduction counit with epsilon after exact scalar
 restriction and coefficient transport, followed by the inverse ordinary tensor

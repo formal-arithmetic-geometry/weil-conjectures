@@ -27,8 +27,7 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- The individual invertible coefficient mate with its defining counit equation.
-Source: coefficient transpose construction
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: coefficient transpose construction. -/
 structure CounitComparison {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     (A : Operation.{u, v} l Ω X Y s) (B : Operation.{u, v} l Ω X Y t)
     (TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t) (TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t)
@@ -44,8 +43,7 @@ structure CounitComparison {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 /-- The counit transpose respects the units, by naturality and the triangles.
-Source: coefficient transpose calculation
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: coefficient transpose calculation. -/
 theorem comparison_unit_of_counit
     {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     (A : Operation.{u, v} l Ω X Y s) (B : Operation.{u, v} l Ω X Y t)
@@ -87,8 +85,7 @@ theorem comparison_unit_of_counit
     _ = _ := (B.adjunction.left_triangle_components (TX.obj K)).symm
 
 /-- Complete a counit-normalized invertible mate using the triangle identities.
-Source: the coefficient comparison construction, inverse-transpose argument
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: the coefficient comparison construction, inverse-transpose argument. -/
 def CounitComparison.complete {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y s} {B : Operation.{u, v} l Ω X Y t}
     {TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t} {TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t}
@@ -102,8 +99,7 @@ def CounitComparison.complete {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
   bShift := d.bShift
 
 /-- The right coefficient cocycle follows from the left cocycle by taking transposes.
-Source: mate pasting, blueprint coefficient adjunction Step 6
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+ -/
 theorem comparison_right_cocycle_of_left
     {X Y : Scheme.{max u v}} {s t r : Stage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y s}
@@ -153,8 +149,7 @@ theorem comparison_right_cocycle_of_left
     _ = _ := by rw [← reassoc_of% (hleft (A.G.obj L))]
 
 /-- A counit-normalized field comparison retaining the endpoint shift structures.
-Source: field coefficient comparisons
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: field coefficient comparisons. -/
 structure CounitFieldComparison {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     (A : Operation.{u, v} l Ω X Y s) (B : Operation.{u, v} l Ω X Y t)
     (TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t) (TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t) where
@@ -163,8 +158,6 @@ structure CounitFieldComparison {X Y : Scheme.{max u v}} {s t : Stage.{max u v} 
   comparison : CounitComparison.{u, v} l Ω A B TX TY
 
 /-- Left comparison with the output shift structures retained in its type.
-Source: blueprint coefficient q (blueprint:
-lem-sf-constructible-exceptional-coefficient-construction).
 -/
 def CounitFieldComparison.q {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y s} {B : Operation.{u, v} l Ω X Y t}
@@ -175,8 +168,6 @@ def CounitFieldComparison.q {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
   d.comparison.q
 
 /-- Right comparison with the output shift structures retained in its type.
-Source: blueprint coefficient b (blueprint:
-lem-sf-constructible-exceptional-coefficient-construction).
 -/
 def CounitFieldComparison.b {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y s} {B : Operation.{u, v} l Ω X Y t}
@@ -187,8 +178,7 @@ def CounitFieldComparison.b {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
   d.comparison.b
 
 /-- Complete the field-stage mate while keeping its chosen shift structures.
-Source: the same inverse-transpose argument
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: the same inverse-transpose argument. -/
 def CounitFieldComparison.complete {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y s} {B : Operation.{u, v} l Ω X Y t}
     {TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t} {TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t}
@@ -200,8 +190,7 @@ def CounitFieldComparison.complete {X Y : Scheme.{max u v}} {s t : Stage.{max u 
     comparison := d.comparison.complete l Ω }
 
 /-- Canonical q normalization before completing its unit equation.
-Source: proper/open scalar mate
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: proper/open scalar mate. -/
 def CounitQNormalized {X Y : Scheme.{max u v}} {f : X ⟶ Y} (c : Compactification f)
     {s t : RingStage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y (s.stage l)} {B : Operation.{u, v} l Ω X Y (t.stage l)}
@@ -218,8 +207,7 @@ def CounitQNormalized {X Y : Scheme.{max u v}} {f : X ⟶ Y} (c : Compactificati
         (PurCompactSupport.comparison a c).app ((RingStage.inclusion.{u, v} l Ω X s).obj K)
 
 /-- Projection of the constructed scalar mate.
-Source: coefficient comparison
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: coefficient comparison. -/
 def Scalar.counitQ {X Y : Scheme.{max u v}} {s t : RingStage.{max u v} l}
     {a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l)}
     {A : Operation.{u, v} l Ω X Y (s.stage l)} {B : Operation.{u, v} l Ω X Y (t.stage l)}
@@ -229,8 +217,7 @@ def Scalar.counitQ {X Y : Scheme.{max u v}} {s t : RingStage.{max u v} l}
   d.q
 
 /-- The normalized construction before the separate coherence identities.
-Source: coefficient construction in the exceptional inverse image paragraph
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: coefficient construction in the exceptional inverse image paragraph. -/
 structure CoefficientConstructionRing (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -320,8 +307,7 @@ structure CoefficientConstructionRing (D : FiniteFieldDatum.{max u v}) (hl : l �
     ScalarIdentity.{u, v} l Ω h (endpoint X Y side) (scalar a ha side)
 
 /-- The action of a localized functor on the unchanged objects and integral arrows.
-Source: raw coefficient localization
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: raw coefficient localization. -/
 def localizedAction {A B C D : Type*}
     [Category A] [Category B] [Category C] [Category D]
     (Fi : A ⥤ B) (Fr : C ⥤ D) (LX : A ⥤ C) (LY : B ⥤ D) : Prop :=
@@ -329,8 +315,7 @@ def localizedAction {A B C D : Type*}
   (∀ (K L : A) (h : K ⟶ L), HEq (Fr.map (LX.map h)) (LY.map (Fi.map h)))
 
 /-- The normalized construction before the separate coherence identities.
-Source: coefficient construction in the exceptional inverse image paragraph
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: coefficient construction in the exceptional inverse image paragraph. -/
 structure CoefficientConstructionFields (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -372,8 +357,7 @@ structure CoefficientConstructionFields (D : FiniteFieldDatum.{max u v}) (hl : l
       (rationalization.{u, v} l Ω E X) (rationalization.{u, v} l Ω E Y)
 
 /-- Coefficient squares determine the action on common representatives.
-Source: common-stage construction on the colimit Hom groups
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: common-stage construction on the colimit Hom groups. -/
 def representativeAction
     {A B C D E H : Type*}
     [Category A] [Category B] [Category C] [Category D] [Category E] [Category H]
@@ -389,8 +373,7 @@ def representativeAction
         IYj.map (Fj.map a) ≫ qj.hom.app L
 
 /-- The normalized construction before the separate coherence identities.
-Source: coefficient construction in the exceptional inverse image paragraph
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: coefficient construction in the exceptional inverse image paragraph. -/
 structure CoefficientConstructionCommon (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -427,8 +410,7 @@ structure CoefficientConstructionCommon (D : FiniteFieldDatum.{max u v}) (hl : l
       (commonTransition l Ω X i j h) (commonTransition l Ω Y i j h)
 
 /-- The normalized construction before the separate coherence identities.
-Source: coefficient construction in the exceptional inverse image paragraph
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: coefficient construction in the exceptional inverse image paragraph. -/
 structure CoefficientConstructionRefinements (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -458,8 +440,7 @@ structure CoefficientConstructionRefinements (D : FiniteFieldDatum.{max u v}) (h
         ((commonInclusion.{u, v} l Ω X i).obj K)
 
 /-- The normalized construction before the separate coherence identities.
-Source: coefficient construction in the exceptional inverse image paragraph
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction). -/
+Source: coefficient construction in the exceptional inverse image paragraph. -/
 structure CoefficientConstruction (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -473,8 +454,7 @@ structure CoefficientConstruction (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D
   refinements : CoefficientConstructionRefinements.{u, v} l Ω D hl ring fields common
   /-- Retain the identity comparison of raw localization used in the construction.
   This prevents independent rescaling of rationalLeft at each coefficient field.
-  Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15; raw localization
-  (blueprint: def-sf-constructible-exceptional-coefficient-construction-data). -/
+  Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15; raw localization. -/
   localizationIdentity (c : Compactification f) (E : FieldStage.{max u v} l)
       (K : C.{u, v} l Ω X (.integral E)) :
     HEq ((fields.rationalizationComparison c E).q.hom.app K)

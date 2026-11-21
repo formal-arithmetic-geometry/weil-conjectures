@@ -29,8 +29,7 @@ the right-hand side computed along the compactification `X ×_k Y ⟶ X̄ ×_k �
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_kunneth_compactSupport_of_isSepClosed`
-  (`cor-kun-compact-kunneth`).
-
+.
 -/
 
 @[expose] public section
@@ -151,7 +150,7 @@ theorem nonempty_iso_derivedTensor_leftDerivedUpperStar_openImmersionLowerShriek
             (leftDerivedUpperStarCompObjIso Λ J' r p₁ hJ'r E)).app _)) ≪≫
     mapDerivedCategoryOpenImmersionLowerShriekCompObjIso Λ J' J₁ J hJ _⟩
 
-/-- Blueprint `cor-kun-compact-kunneth`: the Künneth formula for compactly supported
+/-- The Künneth formula for compactly supported
 cohomology.
 
 Let `k` be separably closed and `Λ` a finite ring whose exponent is invertible in `k`. Let

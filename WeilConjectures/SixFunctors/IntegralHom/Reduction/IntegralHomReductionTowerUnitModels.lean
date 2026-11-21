@@ -156,8 +156,7 @@ This asserts no isomorphism between Hom tensor Q_n and Hom into tensor Q_n.
 The only comparison normalization is at the coefficient unit B=R[0].
 
 Source: current blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1,
-finite-free construction; Stacks Tags 06YY, 08J7, 07A6 and 08TC
-(blueprint: lem-sf-integral-hom-tower-unit-models).
+finite-free construction; Stacks Tags 06YY, 08J7, 07A6 and 08TC.
 
 Proof: use Q_n=[R --pi^(n+1)--> R] in degrees -1,0, with transitions (pi,id).
 The degree-zero inclusions B=R[0] -> Q_n form a cone. Their composites with

@@ -78,9 +78,9 @@ a geometric generic point `Spec K ⟶ S₀` and an integer `d` invertible on `S�
 
 ```
 Y₀ ---e---> Spec K
-|              |
-h              |
-v              v
+| |
+h |
+v v
 X₀ ---f₀----> S₀
 ```
 
@@ -126,8 +126,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S)
 `K` over it: the spectrum `S''` of the integral closure of `Γ(S', ⊤)` in `K`. It is affine,
 integral and normal, its function field is algebraically closed
 (`IsFractionRing.isAlgClosed_integralClosure`), the morphism `S'' ⟶ S'` is integral, and the
-given point `Spec K ⟶ S'` lifts to a geometric generic point of `S''`. 
-(blueprint: lem-sbc-normalization-algclosed-field)
+given point `Spec K ⟶ S'` lifts to a geometric generic point of `S''`.
 -/
 theorem Etale.exists_normalization_of_isAlgClosed {S' : Scheme.{u}} [IsAffine S'] {K : Type u}
     [Field K] [IsAlgClosed K] (g : Spec (.of K) ⟶ S') :
@@ -294,7 +293,7 @@ theorem Etale.exists_isPullback_not_isZero_higherDirectImage (n : ℕ)
   exact ⟨S'', _, π ≫ F.a, _, _, hpb, inferInstance, inferInstance, hnorm, inferInstance, K,
     inferInstance, inferInstance, i, _, _, _, sq'', d, hd, hne⟩
 
-/-- Blueprint `lemma-reduction-curve-over-normal-base`: Universal curve-test datum for a failure.
+/-- Universal curve-test datum for a failure.
 
 Let `p : X ⟶ S` be an affine smooth relative curve with `X` affine, and let `n` be invertible
 on `S` and annihilate `Λ`. If `BC(p, Λ, q')` holds universally for all `q' < q` but

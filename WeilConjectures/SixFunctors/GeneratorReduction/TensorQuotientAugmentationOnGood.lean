@@ -13,9 +13,6 @@ import WeilConjectures.SixFunctors.Supporting.LimitUnitRoosNormalization
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 
 /-! # Tensor transpose on good representatives
-
-Source: current blueprint fix-prop-coherence, primitive comparisons
-(blueprint: lem-sf-tensor-quotient-augmentation-on-good).
 -/
 
 @[expose] public noncomputable section
@@ -198,8 +195,7 @@ Localize this equality and compose with the published reduction and system-tenso
 representative comparisons. Their product is precisely
 pullbackTensorReferenceTensorModel, yielding the displayed equation. This lemma
 only computes a transpose on good complexes; the consumer separately uses
-Tensor.canonical.2 and the global tensor model, then descends to all objects.
-(blueprint: lem-sf-tensor-quotient-augmentation-on-good). -/
+Tensor.canonical.2 and the global tensor model, then descends to all objects. -/
 theorem tensorQuotientTranspose_onGood
     (ringed : IntegralSystemRealization.RingedModels l E) (X : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E X).FullSubcategory) :

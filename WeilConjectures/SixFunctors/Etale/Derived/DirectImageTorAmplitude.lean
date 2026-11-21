@@ -34,8 +34,7 @@ blueprint:
 * for `κ = Λ ⧸ J`, `J` the Jacobson radical, `Rf_* K ⊗ᴸ κ_Y ≅ Rf_*(K ⊗ᴸ κ_X)` has homology in
   `[a, b + 2d]`, `K ⊗ᴸ κ_X` having homology in `[a, b]`;
 * the residue test
-  `AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeIn_iff_tensorSingleConcentratedIn`
-  (blueprint `theorem-f-shriek-finite-coefficients--1`) turns this into Tor amplitude in
+  `AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeIn_iff_tensorSingleConcentratedIn` turns this into Tor amplitude in
   `[a, b + 2d]`.
 
 Neither separatedness of `f`, nor constructibility of `K`, nor the invertibility of the exponent

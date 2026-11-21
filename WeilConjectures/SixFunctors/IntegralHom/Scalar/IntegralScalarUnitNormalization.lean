@@ -36,8 +36,7 @@ attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
 /-- The slice augmentation at the empty slice datum is the recorded scalar unit.
 
 Source: the quotient unit in paragraph 1 of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tag 03EK
-(blueprint: lem-sf-integral-scalar-unit-normalization).
+`lem-coef-integral-hom-reduction.proof.md`; Stacks Tag 03EK.
 
 Proof: compare chain maps degreewise and compare their sheaf morphisms on every
 local section. The defining unique-existence property of the slice augmentation

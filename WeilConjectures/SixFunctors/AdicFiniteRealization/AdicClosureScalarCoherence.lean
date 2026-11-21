@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 /-! # Scalar coherence after extension to the native closure ring
 
 Source: BS Proposition 6.8.14(2); balanced tensor associativity.
-(blueprint: lem-sf-adic-closure-scalar-coherence).
 -/
 
 @[expose] public noncomputable section

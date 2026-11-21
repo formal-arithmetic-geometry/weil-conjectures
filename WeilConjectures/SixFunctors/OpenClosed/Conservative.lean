@@ -31,7 +31,7 @@ by assumption; likewise for `i`.
 - `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar`: the pair `(j^*, i^*)`
   jointly reflects isomorphisms, as a `CategoryTheory.JointlyReflectIsomorphisms` for the
   two-element family `CategoryTheory.pairFunctor` indexed by `Bool`, with `j^*` at `true`
-  and `i^*` at `false` (blueprint: `prop:openclosed-conservative`).
+  and `i^*` at `false`.
 - `AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map`: the same statement in the
   two-hypothesis form, for a human caller.
 - `AlgebraicGeometry.Etale.isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map`: the step
@@ -50,7 +50,6 @@ to be concrete over `Type (u + 1)` in a way compatible with filtered colimits an
 sheafification, since that is what
 `AlgebraicGeometry.Scheme.isIso_of_isIso_sheafFiber_map` asks for. This is not a defect: it
 holds for `A = ModuleCat.{u + 1} Λ`, the case the ℓ-adic formalism needs.
-
 -/
 
 @[expose] public section
@@ -118,8 +117,7 @@ The pair `(j^*, i^*)` is spelled as the two-element family
 and `i^*` at `false`; the two restrictions land in different categories, so the family has to
 be dependent. In this bundled form the criteria of
 `Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean` apply, in particular
-`CategoryTheory.JointlyReflectIsomorphisms.shortExact_iff`.
-(blueprint: `prop:openclosed-conservative`) -/
+`CategoryTheory.JointlyReflectIsomorphisms.shortExact_iff`. -/
 theorem Etale.jointlyReflectIsomorphisms_upperStar :
     JointlyReflectIsomorphisms (pairFunctor ((j)^*[A]) ((i)^*[A])) := by
   refine jointlyReflectIsomorphisms_pairFunctor _ _ ?_
@@ -132,8 +130,7 @@ omit [HasSmallSiteSheafify A] in
 /-- A morphism of `A`-valued sheaves on the small étale site of `X` which is invertible after
 restricting along the open immersion `j` and after restricting along the complementary closed
 immersion `i` is invertible. This is the two-hypothesis form of
-`AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar`.
-(blueprint: `prop:openclosed-conservative`) -/
+`AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar`. -/
 theorem Etale.isIso_of_isIso_upperStar_map {F G : Sheaf X.smallEtaleTopology A} (φ : F ⟶ G)
     (hj : IsIso ((j)^*[A].map φ)) (hi : IsIso ((i)^*[A].map φ)) : IsIso φ :=
   (Etale.jointlyReflectIsomorphisms_upperStar A j i hij).isIso_of_pairFunctor φ hj hi
@@ -168,8 +165,7 @@ surjective family of morphisms, for instance an étale covering. A morphism `φ`
 sheaves on the small étale site of `X` is an isomorphism if and only if all its restrictions
 `a_i^* φ` are: restriction is a functor, and conversely
 `AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective` checks `φ` on the
-geometric stalks, each of which is a geometric stalk of some `a_i^* φ`.
-(blueprint: `lem-weil-pbc-etale-cover-detects-iso`) -/
+geometric stalks, each of which is a geometric stalk of some `a_i^* φ`. -/
 theorem Etale.isIso_iff_forall_isIso_upperStar_map_of_jointlySurjective
     {ι : Type u} {U : ι → Scheme.{u}} (a : ∀ i, U i ⟶ X)
     (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x)

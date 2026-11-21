@@ -12,9 +12,6 @@ import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperation
 import WeilConjectures.SixFunctors.GeneratorReduction.PullQuotientOrdinaryProjection
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 /-! # Pullback transpose on good representatives
-
-Source: current blueprint fix-prop-coherence, primitive comparisons
-(blueprint: lem-sf-pull-quotient-augmentation-on-good).
 -/
 
 @[expose] public noncomputable section
@@ -275,8 +272,7 @@ checked after every product projection by pullQuotientOrdinaryProjection.
 The zero second coordinates and the first-coordinate formula for the shifted
 mapping-cone map identify the whole Roos lifts. Localize this cochain identity
 and compose with the exact ordinary-pullback localization factor. No property
-of completionUnit, descent, or Pull.model is used.
-(blueprint: lem-sf-pull-quotient-augmentation-on-good). -/
+of completionUnit, descent, or Pull.model is used. -/
 theorem pullQuotientTranspose_onGood
     (system : IntegralSystemRealization.Operations l E)
     (realization : IntegralSystemRealization.RealizationModel l E system)

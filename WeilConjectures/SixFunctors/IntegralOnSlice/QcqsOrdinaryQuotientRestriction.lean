@@ -229,7 +229,6 @@ end Assembly
 /-- Pullback commutes with the strict finite quotient tower and its augmentation.
 
 Source: Stacks Tags 06YY and 07A4; Bhatt--Scholze Lemma 6.5.8(1).
-(blueprint: lem-fix-qcqs-ordinary-quotient-restriction).
 Proof: identify the pullback of each finite constant coefficient sheaf with the
 same coefficient sheaf on S by its constant-section map. The completed coefficient
 map commutes with the projections to these sheaves by adjunction and the defining

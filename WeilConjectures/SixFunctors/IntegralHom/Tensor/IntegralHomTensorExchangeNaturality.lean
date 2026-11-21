@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.IntegralHom.Evaluation.IntegralHomEvaluationN
 /-! # First-variable naturality of the normalized tensor exchange
 
 Source: Stacks 06YU and 08J7, signed tensor symmetry and normalized evaluation.
-(blueprint: lem-sfb-integral-hom-tensor-exchange-naturality)
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace WeilConjectures.IntegralHom
 
 Source: Stacks Tags 06YU and 08J7, tensor symmetry and evaluation on representatives;
 the representative-comparison part of the integral Hom normalization proof.
-(blueprint: lem-sfb-integral-hom-tensor-exchange-naturality).
 
 Proof: write inverse transposition as tensoring the supplied map followed by the
 counit. The public evaluation naturality theorem moves a morphism in K across

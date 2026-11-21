@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionPre
 /-! # Existence of normalized integral tensor-Hom models
 
 Source: Stacks Tags 06YS, 06YU, 08J9, 08JA, 07A4 and 07A6;
-blueprint order 2478, proof steps 2-3
-(blueprint: lem-sf-integral-hom-models-exist).
+blueprint order 2478, proof steps 2-3.
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ normalizations specified by the existing presentation records. This statement do
 not assert either internal-Hom reduction or preservation of completeness.
 
 Source: Stacks Tags 06YS, 06YU, 08J9, 08JA, 07A4 and 07A6;
-blueprint order 2478, steps 2-3
-(blueprint: lem-sf-integral-hom-models-exist).
+blueprint order 2478, steps 2-3.
 
 Proof: Resolve both factors by flat-term K-flat complexes, using the independent
 coefficient-universe resolution theorem. Localize their signed total tensor in

@@ -163,7 +163,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 /-! # The normalized DVR quotient completion and integral Roos completion
 
 Source: Stacks Tags 093M and 0941.
-(blueprint: lem-sf-open-dvr-roos-completion-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -313,7 +312,6 @@ attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBiject
 attribute [local instance 3000] integralTowerHasDerivedCategory in
 /-- The quotient completion, including its unit, is transported to integral Roos completion.
 Source: Stacks Tags 093M (coefficient reduction) and 0941 (total inverse limit).
-(blueprint: lem-sf-open-dvr-roos-completion-comparison).
 
 Proof: choose a flat-term K-flat representative Q. The finite comparisons of C,
 normalized on constant sections, identify each quotient tensor module with the

@@ -140,7 +140,7 @@ uniquely through the counit `ε : Ri_! Ri^! L ⟶ L`.
 
 ```
                     K
-              ψ  ↙  │ φ
+              ψ ↙ │ φ
 Ri_! Ri^! L ──ε──→ L ──→ Rj_* Lj^* L ──→ (Ri_! Ri^! L)[1]
 ```
 Apply `Hom(K, -)` to the supported localization triangle in the bottom row: by adjunction
@@ -238,8 +238,8 @@ variable {U Z₁ Z₂ Z : Scheme.{u}}
 
 ```
            K
-       ψ ╱   ╲ φ
-        ▼     ▼
+       ψ ╱ ╲ φ
+        ▼ ▼
 Ri_! Ri^! L ──ε──▶ L
 ```
 
@@ -274,9 +274,9 @@ through the counit `ε` of `Ri_! ⊣ Ri^!`:
 
 ```
 Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ───ψ───▶ Ri_! Ri^! (M ⊗ N)
-                 ╲                          │
-           ε₁ ⊗ ε₂ ╲                        │ ε
-                     ▼                      ▼
+                 ╲ │
+           ε₁ ⊗ ε₂ ╲ │ ε
+                     ▼ ▼
                              M ⊗ N
 ```
 
@@ -341,7 +341,7 @@ noncomputable def supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : 
           U).obj M).obj N)) :=
   (existsUnique_supportedProduct Λ i₁ i₂ i h M N).exists.choose
 
-/-- Blueprint `proposition-purity-vector-bundles`: Cup product with closed supports
+/-- Cup product with closed supports
 
 The *cup product with supports* of classes `α : K ⟶ Ri₁_! Ri₁^! M` supported on `Z₁` and
 `β : K ⟶ Ri₂_! Ri₂^! N` supported on `Z₂`, a class supported on `Z = Z₁ ∩ Z₂`:
@@ -399,9 +399,9 @@ and `i' : Z' ⟶ U` its base change along `e`. For `L ∈ D(X_ét)`, `L' ∈ D(U
 
 ```
 Le^* (Ri_! Ri^! L) ───ψ───▶ Ri'_! Ri'^! L'
-         │                        │
-  Le^* ε │                        │ ε'
-         ▼                        ▼
+         │ │
+  Le^* ε │ │ ε'
+         ▼ ▼
       Le^* L ─────────τ─────────▶ L'
 ```
 

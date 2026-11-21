@@ -27,7 +27,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
   kernel transform.
 
 See `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform` for the implementation notes.
-
 -/
 
 @[expose] public section
@@ -52,13 +51,13 @@ variable {S V V' V'' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S) (π'' : V'' �
 
 ```
               V ×ₛ V'
-             ╱       ╲
-          p₁╱         ╲p₂
-           ▼           ▼
-           V            V'
-            ╲          ╱
-            π╲        ╱π'
-              ▼      ▼
+             ╱ ╲
+          p₁╱ ╲p₂
+           ▼ ▼
+           V V'
+            ╲ ╱
+            π╲ ╱π'
+              ▼ ▼
                  S
 ```
 
@@ -126,9 +125,9 @@ two projections are `r₁₂` and `r₂₃`; `r₁₃` is
                        𝒦
     V ×ₛ V' ×ₛ V'' ──r₁₂──▶ V ×ₛ V'
            │ ╲
-           │   ╲ r₁₃
-        r₂₃│     ╲
-           ▼       ▶ V ×ₛ V''
+           │ ╲ r₁₃
+        r₂₃│ ╲
+           ▼ ▶ V ×ₛ V''
       V' ×ₛ V''
            𝒦'
 ```

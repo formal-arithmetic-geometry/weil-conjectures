@@ -40,7 +40,6 @@ morphisms of models, and the square law of the pushforward exchanges
   (`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_finiteCoefficient`);
 * the invariance of the nearby cycles of the trait itself
   (`NearbyCyclesModel.isIso_pullbackExchange_ofTraitHom_app`).
-
 -/
 
 @[expose] public section

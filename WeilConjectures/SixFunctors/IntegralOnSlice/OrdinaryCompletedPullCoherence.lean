@@ -162,7 +162,6 @@ private def ordinaryPushId (X : Scheme.{t}) :
 
 /-- Identity and composition comparisons for the actual ordinary module pullbacks.
 Source: Stacks, Modules on Sites, Tags 03D2 and 03D7.
-(blueprint: lem-fix-ordinary-completed-pull-coherence).
 Proof: base change on pro-etale sites has the identity and associativity comparisons
 of fiber products. For each finite constant coefficient sheaf the direct ring maps
 respect these comparisons: both maps send a constant section to that same section.

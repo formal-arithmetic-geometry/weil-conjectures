@@ -21,7 +21,7 @@ twisting objects `Λ_X(d) = tateObject Λ X d`. For a smooth separated morphism 
 finite type and of pure relative dimension `d`, *smooth purity* provides a canonical isomorphism
 `Lf^* Λ_Y (d)[2d] ≅ Rf^! Λ_Y`, that is `Λ_X(d)[2d] ≅ Rf^! Λ_Y`. It is
 `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`
-(`proposition-smooth-purity-finite-coefficients`), which gives orientations through
+, which gives orientations through
 `AlgebraicGeometry.Etale.Orientation.nonempty`. What is recorded in this file is the interface it
 produces, packaged as a structure `AlgebraicGeometry.Etale.Orientation`, together with the two
 consequences the six-functor formalism uses: for the structure morphism `a : X ⟶ S` an orientation
@@ -35,7 +35,7 @@ a perfect complex into its coefficient dual, twisted and shifted.
   Tate twist `Λ_X(d)`.
 - `AlgebraicGeometry.Etale.Orientation.ofDualizingComplexIso`: the orientation given by an
   isomorphism `Λ_X(d)[2d] ≅ ω_X` for a smooth `a` of relative dimension `d`.
-- `AlgebraicGeometry.Etale.Orientation.twistShiftIso` (`rem-ptr-sf-orientation-2`): the purity
+- `AlgebraicGeometry.Etale.Orientation.twistShiftIso`: the purity
   isomorphism in the twist conventions of `definition-tate-twists`,
   `(twistShift Λ X d).obj Λ_X ≅ Rf^! Λ_Y`.
 - `AlgebraicGeometry.Etale.Orientation.verdierDualIso` (`theorem-poincare-duality--2`): the natural
@@ -50,11 +50,11 @@ a perfect complex into its coefficient dual, twisted and shifted.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.Orientation.nonempty` (`rem-sf-orientation-pointer`): orientations
+- `AlgebraicGeometry.Etale.Orientation.nonempty`: orientations
   are not assumed; smooth purity constructs one for every smooth separated `f` of pure relative
   dimension `d` over a separated scheme locally of finite type over a field.
 - `AlgebraicGeometry.Etale.Orientation.nonempty_iso_dualizingComplex`
-  (`theorem-smooth-purity-all-admissible-coefficients`): for the structure morphism the orientation
+: for the structure morphism the orientation
   reads `ω_X ≅ Λ_X(d)[2d]`.
 - `AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_coefficientDual`
   (`theorem-poincare-duality--2`): `𝔻_X K ≅ K^∨(d)[2d]` for a perfect `K`.
@@ -92,7 +92,6 @@ The general biduality of the Verdier dual on `Dctf(X, Λ)` is
 `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual` of
 `WeilConjectures.SixFunctors.Etale.Derived.Dualizing`; for perfect objects and an oriented
 morphism it is proved here, without the constructibility hypotheses.
-
 -/
 
 @[expose] public section
@@ -151,9 +150,9 @@ Under `θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T` the evaluation `K ⊗ᴸ 𝔻_X K ⟶
 `K ⊗ᴸ K^∨ ⟶ Λ_X` tensored with `T`: the square
 ```
   K ⊗ᴸ 𝔻_X K ────── K ◁ θ_K ──────→ K ⊗ᴸ (K^∨ ⊗ᴸ T)
-       │                                   │
-       ev                         α⁻¹, ev_K ▷ T, λ
-       ↓                                   ↓
+       │ │
+       ev α⁻¹, ev_K ▷ T, λ
+       ↓ ↓
       ω_X ─────────────── γ⁻¹ ────────────→ T
 ```
 commutes. -/
@@ -313,7 +312,7 @@ end InvertibleDualizingComplex
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
 
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation: an interface record.
+/-- Orientation: an interface record.
 
 An *orientation* of relative dimension `d` for a separated morphism `f : X ⟶ Y` of finite type
 consists of the smoothness of `f`, of pure relative dimension `d`, together with an isomorphism
@@ -323,12 +322,12 @@ blueprint's `Lf^* Λ_Y (d)[2d] ≅ Rf^! Λ_Y`.
 
 In the blueprint an orientation is **not** an assumption: it is the smooth purity theorem
 `proposition-smooth-purity-finite-coefficients`, which lives in a different blueprint block; see
-`AlgebraicGeometry.Etale.Orientation.nonempty` (`rem-sf-orientation-pointer`).
+`AlgebraicGeometry.Etale.Orientation.nonempty`.
 This structure therefore records only the interface that purity produces and that the six
 operations consume. The blueprint's naturality in `Y` and its compatibilities with composition,
 étale base change, finite reduction, scalar extension and the pro-étale realization concern the
 whole family of orientations; they are the conditions of
-`AlgebraicGeometry.Etale.OrientationDatum` (`theorem-smooth-purity-all-admissible-coefficients`).
+`AlgebraicGeometry.Etale.OrientationDatum`.
 
 For the structure morphism `f = a_X` the isomorphism reads `ω_X ≅ Λ_X(d)[2d]`; see
 `AlgebraicGeometry.Etale.Orientation.nonempty_iso_dualizingComplex`. -/
@@ -346,7 +345,7 @@ noncomputable abbrev Orientation.twist {f : X ⟶ Y} {d : ℕ} [HasCompactificat
     (_o : Orientation Λ f d) : DerivedCategoryModule Λ X :=
   tateObject Λ X d
 
-/-- Blueprint `rem-ptr-sf-orientation-2`: Pointer to the properties of
+/-- Pointer to the properties of
 [theorem-smooth-purity-all-admissible-coefficients].
 
 The purity isomorphism of an orientation, read in the Tate twist conventions of
@@ -359,7 +358,7 @@ noncomputable def Orientation.twistShiftIso {f : X ⟶ Y} {d : ℕ} [HasCompacti
     (twistShift Λ X d).obj (constantComplex Λ X) ≅ dualizingComplex Λ f :=
   twistShiftConstantComplexIso Λ X d ≪≫ o.purity
 
-/-- Blueprint `rem-sf-orientation-pointer`: Where the orientation is constructed.
+/-- Where the orientation is constructed.
 
 The orientation datum is not an assumption: for `f : X ⟶ Y` smooth separated of pure relative
 dimension `d`, with `Y` separated and locally of finite type over a field `k` and the exponent
@@ -387,7 +386,7 @@ def Orientation.ofDualizingComplexIso [SmoothOfRelativeDimension d a]
   smoothOfRelativeDimension := inferInstance
   purity := γ
 
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation: an interface record.
+/-- Orientation: an interface record.
 
 The special case of the orientation at the structure morphism `a : X ⟶ S`: `Ra^! Λ_S` is by
 definition the dualizing complex, so the purity isomorphism reads

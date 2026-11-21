@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.OpenExtensionG
 /-! # Good representatives under completed-ring open extension
 
 Source: Stacks Tags 03DI, 03DJ, 0E8I and 0G7E.
-(blueprint: lem-sf-open-extension-good-complex).
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +28,7 @@ local instance goodOpen_additive {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersi
   (PurCompactSupport.openAdjunction (PurCompactSupport.completed l E) j).left_adjoint_additive
 
 /-- Completed-ring open extension and its restriction preserve good representatives.
-Source: Stacks 03DI, 03DJ, 0E8I and 0G7E; the first step of the localization proof
-(blueprint: lem-sf-open-extension-good-complex).
+Source: Stacks 03DI, 03DJ, 0E8I and 0G7E; the first step of the localization proof.
 
 Proof: present the actual open extension as ringed slice extension, after the
 coefficient and site equivalences of proEtaleOpen_slicePresentation. These are the

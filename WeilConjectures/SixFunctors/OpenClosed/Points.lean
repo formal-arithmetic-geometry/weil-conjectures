@@ -22,8 +22,7 @@ conservativity is proved by evaluating at such points, each of which lives on `U
 ## Main results
 
 - `AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl` — a morphism from the spectrum
-  of a field to `X` factors uniquely through `j` or uniquely through `i`
-  (blueprint: `lemma:openclosed-point-factors`).
+  of a field to `X` factors uniquely through `j` or uniquely through `i`.
 - `AlgebraicGeometry.disjoint_range_of_range_eq_compl` — the two ranges of a complementary
   pair are disjoint. This is the half of the complementarity condition that the formal part
   of the argument uses.
@@ -48,9 +47,7 @@ a monomorphism; the closed half is
 is `AlgebraicGeometry.Scheme.IdealSheafData.le_ker_iff_range_subset_support`, whose hypothesis
 on the source is `IsReduced (Spec K)`; the field hypothesis is used beyond that only for
 `Subsingleton (Spec K)`, which upgrades "the closed point of `Spec K` lands in the range of
-`i`" to "the whole range of `s` lands in the range of `i`".
-(blueprint: `lemma:openclosed-point-factors`)
-(blueprint: `lem-weil-pbc-geometric-point-open-or-closed`) -/
+`i`" to "the whole range of `s` lands in the range of `i`". -/
 theorem existsUnique_fac_or_fac_of_range_eq_compl {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X)
     [IsOpenImmersion j] [IsClosedImmersion i]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)

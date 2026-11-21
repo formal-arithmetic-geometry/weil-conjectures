@@ -217,7 +217,7 @@ instance : (pointFiberRational I M K k).EssSurj where
 
 instance : (pointFiberRational I M K k).IsEquivalence where
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
+/-- Finite coefficient categories over a point
 (rational stage `E`).
 
 Let `Λ` be a complete discrete valuation ring with finite residue field and maximal ideal
@@ -264,7 +264,7 @@ local instance fact_maximalIdealShrink :
       PadicAlgCl.maximalIdealShrink l E = Ideal.span {ϖ}) :=
   ⟨PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E⟩
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
+/-- Finite coefficient categories over a point
 (rational stage `E`).
 
 For a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` and a separably closed field `k`, evaluation at

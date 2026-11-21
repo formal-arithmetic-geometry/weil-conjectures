@@ -40,8 +40,7 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor
   unrestrictedIntegralComplexFunctor scalarReductionExistence unrestrictedIntegralReductionExistence
 
 /-- The completed open tensor isomorphism and its actual augmentation square.
-Source: Bhatt--Scholze 6.5.5 and 6.5.8; Stacks 0940
-(blueprint: lem-sf-open-projection-completed-square).
+Source: Bhatt--Scholze 6.5.5 and 6.5.8; Stacks 0940.
 
 Proof: on flat-term K-flat representatives use q.squares to form the strict finite
 quotient square. Apply the Roos functor to its tower isomorphism and compose with

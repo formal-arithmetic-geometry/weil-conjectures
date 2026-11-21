@@ -17,7 +17,6 @@ The pullback exchanges `α_φ : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` of morphisms of models
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom.pullbackExchange`) are
 compatible with commutative squares of morphisms of models (blueprint
 `sec-Base-change-for-nearby-cycles` (2), `α_{gf} = α_f(g^*) f_s^* α_g`).
-
 -/
 
 @[expose] public section
@@ -384,8 +383,7 @@ namespace NearbyCyclesModel.Hom
 variable {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {f : X ⟶ Y} {f' : X' ⟶ Y'} (φ : M.Hom N f f')
 
-/-- **The pullback exchange is monoidal** (blueprint `sec-Base-change-for-nearby-cycles`, "`α_f`
-is monoidal"): `α_φ(A ⊗ B) ∘ Lf'^* μ_N = Ψ_M(m⁻¹) ∘ μ_M ∘ (α_φ A ⊗ α_φ B) ∘ m`, where `μ` are
+/-- **The pullback exchange is monoidal**: `α_φ(A ⊗ B) ∘ Lf'^* μ_N = Ψ_M(m⁻¹) ∘ μ_M ∘ (α_φ A ⊗ α_φ B) ∘ m`, where `μ` are
 the lax tensor maps of nearby cycles and `m` the tensor comparisons of the derived pullbacks. -/
 lemma map_tensorMap_comp_pullbackExchange_app
     (A B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})

@@ -36,18 +36,17 @@ morphism. Together they bound the perverse amplitude of the Fourier–Deligne tr
 ## Main statements
 
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_verdierDual_tensor`: the Verdier dual
-  of a tensor product with a dualizable complex, `𝔻(K ⊗ᴸ L) ≅ L^∨ ⊗ᴸ 𝔻K`
-  (blueprint `lem-per-dual-lisse-tensor`).
+  of a tensor product with a dualizable complex, `𝔻(K ⊗ᴸ L) ≅ L^∨ ⊗ᴸ 𝔻K`.
 - `AlgebraicGeometry.Etale.DerivedCategory.isPerverseLE_tensor`,
   `AlgebraicGeometry.Etale.DerivedCategory.isPerverseGE_tensor`: permanence of the perverse
-  classes under a lisse tensor (blueprint `lem-per-lisse-tensor-permanence`).
+  classes under a lisse tensor.
 - `AlgebraicGeometry.Etale.DerivedCategory.isPerverseLE_upperStar`,
   `AlgebraicGeometry.Etale.DerivedCategory.isPerverseGE_upperStar`: smooth pullback is
   perverse up to the shift by the relative dimension.
 - `AlgebraicGeometry.Etale.DerivedCategory.isPerverseLE_lowerShriek`,
   `AlgebraicGeometry.Etale.DerivedCategory.isPerverseGE_lowerShriek`: Artin–Gabber, the
   compactly supported pushforward along an affine morphism with fibres of dimension at most `d`
-  has perverse amplitude `d` (blueprint `lem-per-artin-gabber-affine-curve`).
+  has perverse amplitude `d`.
 
 ## Implementation notes
 
@@ -90,8 +89,7 @@ variable (a : X ⟶ S) [HasCompactification a]
 /-- **Dual of a lisse tensor.** For a dualizable complex `L`, with coefficient dual `L^∨`,
 the Verdier dual of `K ⊗ᴸ L` is `L^∨ ⊗ᴸ 𝔻K`: the tensor–hom adjunction gives
 `RHom(K ⊗ᴸ L, ω) ≅ RHom(L, RHom(K, ω))`, and the internal hom out of the dualizable `L` is the
-tensor product with `L^∨`. The blueprint writes the factors in the other order.
-(blueprint: `lem-per-dual-lisse-tensor`) -/
+tensor product with `L^∨`. The blueprint writes the factors in the other order. -/
 theorem nonempty_iso_verdierDual_tensor
     (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hL : IsDualizable L) :
@@ -124,8 +122,7 @@ lemma isZero_upperStar_homologyFunctor_tensor
 
 /-- The support estimate behind `lem-per-lisse-tensor-permanence`: tensoring, on either side,
 with a complex of Tor amplitude in `[0, 0]` (for instance a lisse complex) preserves the support
-condition, the cohomology sheaves of `K ⊗ᴸ L` being supported in those of `K`.
-(blueprint: `lem-per-lisse-tensor-permanence`) -/
+condition, the cohomology sheaves of `K ⊗ᴸ L` being supported in those of `K`. -/
 theorem SupportCondition.tensor
     {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : SupportCondition K) (hL : torAmplitudeIn A X 0 0 L) :
@@ -173,7 +170,7 @@ def IsLisse (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
 
 omit [HasSmallSiteSheafify A] in
 /-- **Permanence under a lisse tensor**, support side: `K ∈ ᵖD^{≤n}` implies
-`K ⊗ᴸ L ∈ ᵖD^{≤n}` for a lisse `L`. (blueprint: `lem-per-lisse-tensor-permanence`) -/
+`K ⊗ᴸ L ∈ ᵖD^{≤n}` for a lisse `L`. -/
 theorem isPerverseLE_tensor {n : ℤ}
     {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : IsPerverseLE n K) (hL : IsLisse L) : IsPerverseLE n (K ⊗ L) :=
@@ -181,8 +178,7 @@ theorem isPerverseLE_tensor {n : ℤ}
 
 /-- **Permanence under a lisse tensor**, cosupport side: `K ∈ ᵖD^{≥n}` implies
 `K ⊗ᴸ L ∈ ᵖD^{≥n}` for a lisse `L`: by `lem-per-dual-lisse-tensor` the Verdier dual of
-`K[n] ⊗ᴸ L` is `L^∨ ⊗ᴸ 𝔻(K[n])`, and `L^∨` again has Tor amplitude in `[0, 0]`.
-(blueprint: `lem-per-lisse-tensor-permanence`) -/
+`K[n] ⊗ᴸ L` is `L^∨ ⊗ᴸ 𝔻(K[n])`, and `L^∨` again has Tor amplitude in `[0, 0]`. -/
 theorem isPerverseGE_tensor {n : ℤ}
     {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsPerverseGE a n K) (hL : IsLisse L) : IsPerverseGE a n (K ⊗ L) :=
@@ -296,8 +292,7 @@ include aY in
 omit [IsSeparated aY] [HasCompactification aY] in
 /-- **Artin–Gabber**, support side: for an affine morphism `f : X ⟶ Y` of finite type between
 separated schemes of finite type over `k`, whose fibres have dimension at most `d`, the
-compactly supported pushforward carries `ᵖD^{≤n}(X) ∩ Dctf(X)` into `ᵖD^{≤n+d}(Y)`.
-(blueprint: `lem-per-artin-gabber-affine-curve`) -/
+compactly supported pushforward carries `ᵖD^{≤n}(X) ∩ Dctf(X)` into `ᵖD^{≤n+d}(Y)`. -/
 theorem isPerverseLE_lowerShriek (d : ℕ) (f : X ⟶ Y) [IsAffineHom f] [LocallyOfFiniteType f]
     [HasCompactification f] [QuasiCompact f]
     (hf : ∀ y : Y, topologicalKrullDim (f.fiber y) ≤ (d : ℕ∞)) {n : ℤ}
@@ -311,8 +306,7 @@ theorem isPerverseLE_lowerShriek (d : ℕ) (f : X ⟶ Y) [IsAffineHom f] [Locall
 image: if `Rf_*` carries bounded constructible complexes `M` with `M[m]` satisfying the support
 condition to complexes with `(Rf_* M)[m + d]` satisfying it, then `Rf_!` carries
 `ᵖD^{≥n}(X) ∩ Dctf(X)` into `ᵖD^{≥n-d}(Y)`: by Verdier exchange `𝔻_Y Rf_! K ≅ Rf_* 𝔻_X K`, and
-`𝔻_X K` is bounded constructible with `(𝔻_X K)[-n]` satisfying the support condition.
-(blueprint: `lem-per-artin-gabber-affine-curve`, Step 3) -/
+`𝔻_X K` is bounded constructible with `(𝔻_X K)[-n]` satisfying the support condition. -/
 theorem isPerverseGE_lowerShriek_of_supportCondition_rightDerivedLowerStar (d : ℕ) (f : X ⟶ Y)
     [PerfectField k]
     [LocallyOfFiniteType f] [IsSeparated f] [HasCompactification f] [QuasiCompact f]
@@ -336,8 +330,7 @@ theorem isPerverseGE_lowerShriek_of_supportCondition_rightDerivedLowerStar (d : 
 compactly supported pushforward carries `ᵖD^{≥n}(X) ∩ Dctf(X)` into `ᵖD^{≥n-d}(Y)`, by Verdier
 exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` and the support estimate for `Rf_*` along the affine `f`
 (`AlgebraicGeometry.Etale.DerivedCategory.supportCondition_shift_rightDerivedLowerStar`), which
-does not use the bound on the fibre dimension.
-(blueprint: `lem-per-artin-gabber-affine-curve`) -/
+does not use the bound on the fibre dimension. -/
 theorem isPerverseGE_lowerShriek (d : ℕ) (f : X ⟶ Y) [IsAffineHom f] [LocallyOfFiniteType f]
     [PerfectField k]
     [HasCompactification f] [QuasiCompact f] [HasCompactification (f ≫ aY)]

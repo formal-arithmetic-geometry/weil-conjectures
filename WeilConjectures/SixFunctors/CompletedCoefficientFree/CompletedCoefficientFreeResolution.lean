@@ -109,8 +109,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 /-!+# Free resolutions over completed integral coefficient sheaves
 
 Source: Stacks Project, proetale.tex, Tag 09C3, and algebraization.tex, Tag 099I;
-sites-modules.tex, Tags 093J and 093M; sites-cohomology.tex, Tags 06YQ and 06YM
-(blueprint: lem-sf-completed-coefficient-free-resolution).
+sites-modules.tex, Tags 093J and 093M; sites-cohomology.tex, Tags 06YQ and 06YM.
 
 The index `n` denotes the positive exponent `n + 1`. All coefficients and maps are
 the published constant quotient sheaves, their inverse limit and their projections.
@@ -140,34 +139,31 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : AlgebraicGeometry.Scheme.{t})
 
 /-- The free rank-one complex in degree zero over the existing completion.
-Source: Stacks Tag 09C3 (blueprint: lem-sf-completed-coefficient-free-resolution). -/
+Source: Stacks Tag 09C3. -/
 abbrev freeUnitComplex : CochainComplex (scalarReductionSource l E T) ℤ :=
   (CochainComplex.singleFunctor _ 0).obj
     (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E T))
 
 /-- Multiplication by the positive uniformizer power on the degree-zero free complex.
-Source: Stacks Tags 093M and 06YM
-(blueprint: lem-sf-completed-coefficient-free-resolution). -/
+Source: Stacks Tags 093M and 06YM. -/
 def uniformizerPower (n : ℕ) : freeUnitComplex l E T ⟶ freeUnitComplex l E T :=
   (integralScalarChainAction l E T
     (Padic.coefficientExtensionUniformizer l E ^ (n + 1))).app (freeUnitComplex l E T)
 
 /-- The actual two-term free complex `[B --varpi^(n+1)--> B]` in degrees `-1,0`.
-Source: Stacks Tags 093M and 06YM
-(blueprint: lem-sf-completed-coefficient-free-resolution). -/
+Source: Stacks Tags 093M and 06YM. -/
 def quotientResolution (n : ℕ) : CochainComplex (scalarReductionSource l E T) ℤ :=
   CochainComplex.mappingCone (uniformizerPower l E T n)
 
 /-- The finite coefficient ring as a module over the completion via its projection.
-Source: Stacks Tags 093M and 03CZ
-(blueprint: lem-sf-completed-coefficient-free-resolution). -/
+Source: Stacks Tags 093M and 03CZ. -/
 abbrev residueModule (n : ℕ) : scalarReductionSource l E T :=
   (scalarReductionRestriction l E T n).obj
     (SheafOfModules.unit (integralCoefficientSheaf l E T n))
 
 /-- The actual quotient projection `B -> R_(n+1)`, as the unit-module map taking
 `1` to `1`; the action on the target is restricted along the limit projection.
-Source: Stacks Tag 093M (blueprint: lem-sf-completed-coefficient-free-resolution). -/
+Source: Stacks Tag 093M. -/
 def quotientProjection (n : ℕ) :
     SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E T) ⟶
       residueModule l E T n :=
@@ -176,7 +172,7 @@ def quotientProjection (n : ℕ) :
 
 /-- A finite free cell, with rank zero allowed, in an arbitrary integer degree.
 Finite products here are the canonical finite direct sums in the abelian module category.
-Source: Stacks Tag 09C3 (blueprint: lem-sf-completed-coefficient-free-resolution). -/
+Source: Stacks Tag 09C3. -/
 def freeCell (r : ℕ) (d : ℤ) : CochainComplex (scalarReductionSource l E T) ℤ :=
   (CochainComplex.singleFunctor _ d).obj
     (∏ᶜ fun _ : Fin r ↦
@@ -185,7 +181,7 @@ def freeCell (r : ℕ) (d : ℤ) : CochainComplex (scalarReductionSource l E T) 
 /-- The canonical reduction of every unbounded derived object. The normalized derived
 adjunction fixes this unit on K-flat representatives by `x -> 1 tensor x`; thus the
 choice of witness does not introduce an arbitrary arrow.
-Source: Stacks Tag 06YY (blueprint: lem-sf-completed-coefficient-free-resolution). -/
+Source: Stacks Tag 06YY. -/
 def reductionMap (n : ℕ) (M : DerivedCategory (scalarReductionSource l E T)) :
     M ⟶ (scalarReductionDerivedRestriction l E T n).obj
       ((scalarReductionDerivedExtension l E T n).obj M) :=
@@ -1303,8 +1299,7 @@ of its uniformizer power.
 
 Source: Stacks Project, proetale.tex Tag 09C3, algebraization.tex Tag 099I,
 sites-modules.tex Tags 093J/093M, sites-cohomology.tex Tags 06YQ/06YM;
-Bhatt--Scholze, Propositions 3.1.9--3.1.10
-(blueprint: lem-sf-completed-coefficient-free-resolution).
+Bhatt--Scholze, Propositions 3.1.9--3.1.10.
 
 Proof:
 1. Sectionwise regularity of the completed scalar and divisibility of the kernel of

@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 Source: the canonical restriction comparisons in def-coef-normalized-dvr-tower,
 and Stacks, Derived Categories, lemma-right-derived-exact-functor;
 Categories, lemma-properties-left-localization.
-(blueprint: lem-coef-normalized-dvr-completed-restriction-coherence).
 -/
 
 @[expose] public section
@@ -125,7 +124,6 @@ existence of some coherent comparison isomorphisms.
 Source: def-coef-normalized-dvr-tower and the strict representative step in
 lem-coef-integral-dualizing-roos-model; Stacks, Derived Categories,
 lemma-right-derived-exact-functor; Categories, lemma-properties-left-localization.
-(blueprint: lem-coef-normalized-dvr-completed-restriction-coherence).
 
 Proof: for ordinary module sheaves every restriction comparison has the identity
 as its underlying map on every section. The unit and the threefold composition

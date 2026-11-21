@@ -135,7 +135,7 @@ end ProperFibre
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Cohomological dimension over an
+/-- Cohomological dimension over an
 algebraically closed field.
 
 Let `k'` be an algebraically closed field, `X` a `k'`-scheme of finite type of dimension at most

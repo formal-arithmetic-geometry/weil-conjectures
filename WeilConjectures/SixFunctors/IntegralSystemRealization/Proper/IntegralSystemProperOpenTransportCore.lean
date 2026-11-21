@@ -20,7 +20,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The gamma, adjunct, and canonical parts of the proper/open transport.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0F7B and 07A7.
-(blueprint: lem-sf-integral-system-proper-open-transport-core).
 Proof: conjugate the intrinsic semilinear gamma through the canonical bridge;
 identify its adjunct by the normalized lambda transpose and cancel the bridge
 isomorphisms in the canonical equation. -/

@@ -17,8 +17,7 @@ import WeilConjectures.SixFunctors.Compact.CompactSupportQuotientRawOutputCompos
 /-! # Unit and cocycle for compact-support coefficient quotients
 
 Source: the current blueprint, lem-coef-integral-compact-support.proof.md,
-finite-level coefficient comparison; Stacks Tags 03EK, 06YS, 06YY and 07A6
-(blueprint: lem-coef-compact-support-quotient-cocycle).
+finite-level coefficient comparison; Stacks Tags 03EK, 06YS, 06YY and 07A6.
 
 Index n denotes exponent n+1, so every positive coefficient exponent is included.
 All reduction maps are the published normalized adjuncts of the actual quotient maps.
@@ -40,8 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The specified quotient arrows and their compact-support images satisfy unit and
 composition on arbitrary unbounded objects. No constructibility or Tor bound is assumed.
-Source: blueprint proof paragraph 2; Stacks Tags 03EK, 06YY and 07A6
-(blueprint: lem-coef-compact-support-quotient-cocycle).
+Source: blueprint proof paragraph 2; Stacks Tags 03EK, 06YY and 07A6.
 Proof: the twice-transposed final unit is the component of the canonical
 left-adjoint composition isomorphism, so the quotient adjunct is invertible. The
 inverse Hom-equivalence identity gives its displayed unit equation. Apply the input

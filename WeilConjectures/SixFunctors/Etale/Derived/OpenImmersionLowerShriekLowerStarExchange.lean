@@ -18,10 +18,10 @@ For a cartesian square of schemes
 
 ```
   U' --j'--> Z'
-  |          |
-  g'         g''
-  ↓          ↓
-  U  --j---> Z
+  | |
+  g' g''
+  ↓ ↓
+  U --j---> Z
 ```
 
 with `j` and `j'` open immersions, there is a natural exchange map
@@ -85,15 +85,14 @@ transformation `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*`. It is the mate, along the 
 
 ```
   D(U') --Dj'_!--> D(Z')
-   |                 |
-  Rg'_*     ⇗      Rg''_*
-   ↓                 ↓
+   | |
+  Rg'_* ⇗ Rg''_*
+   ↓ ↓
   D(U) ---Dj_!---> D(Z)
 ```
 
 The 2-cell goes from the path `Rg'_*` then `Dj_!` (left, then bottom) to the path `Dj'_!` then
-`Rg''_*` (top, then right). (blueprint: the map of `thm:open-proper-interchange`, on unbounded
-derived categories) -/
+`Rg''_*` (top, then right). -/
 noncomputable def openImmersionLowerShriekLowerStarExchange (hsq : IsPullback g' j' j g'') :
     R((g')_*[A]) ⋙ D((j)_!open[A]) ⟶ D((j')_!open[A]) ⋙ R((g'')_*[A]) :=
   (mateEquiv (mapDerivedUpperStarLowerStarAdjunction A g')
@@ -144,8 +143,7 @@ after `D(i^*)` (open–closed conservativity).
   base change for `g''` along `i`, which is
   `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`, since
   the pullback of `j'_!` to the closed complement of `j'` vanishes.
-
-(blueprint: unbounded analogue of `thm:open-proper-interchange`) -/
+ -/
 theorem isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring
     (hΛ : IsAddTorsion Λ) [IsProper g''] (hsq : IsPullback g' j' j g'') :
     IsIso (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq) := by

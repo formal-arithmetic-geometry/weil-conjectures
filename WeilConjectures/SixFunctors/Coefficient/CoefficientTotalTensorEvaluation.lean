@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.Supporting.SemilinearTotalTensorEvaluation
 /-! # Ordinary total-tensor evaluation for the actual coefficient sequence
 
 Source: Stacks 03EK, 07A4 and 0941.
-(blueprint: lem-coef-actual-total-tensor-evaluation)
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Evaluation of the actual coefficient sequence commutes with ordinary total tensor,
 uniquely on all pure generators and with the specified underlying-section transport.
-Source: Stacks 03EK, 07A4 and 0941
-(blueprint: lem-coef-actual-total-tensor-evaluation).
+Source: Stacks 03EK, 07A4 and 0941.
 Proof: the actual coefficient ring sequence has the same ringed sequence sheaf and
 vertical evaluation as the generic semilinear construction, by their definitions.
 Supply this functor equality and its actual zero-morphism preservation instance to
@@ -96,8 +94,7 @@ private theorem transport_heq {A B : AddCommGrpCat.{w}}
   rfl
 
 /-- The actual coefficient section transport fixes total-tensor evaluation uniquely.
-Source: Stacks 03EK, 07A4 and 0941
-(blueprint: lem-coef-actual-total-tensor-evaluation).
+Source: Stacks 03EK, 07A4 and 0941.
 Proof: specialize the ordinary total-tensor evaluation comparison to the canonical
 eqToHom transport between the recorded abelian section objects. Equality elimination
 shows that this transport is heterogeneously the identity. The general comparison

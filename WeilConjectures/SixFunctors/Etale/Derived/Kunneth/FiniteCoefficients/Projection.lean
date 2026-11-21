@@ -19,10 +19,10 @@ The étale projection morphisms of the blueprint subsection
 - `AlgebraicGeometry.Etale.lowerStarProjectionMapModule` (`definition-projection-formula-map--1`):
   `Rf_* K ⊗ᴸ M ⟶ Rf_*(K ⊗ᴸ Lf^* M)`.
 - `AlgebraicGeometry.Etale.unboundedLowerShriekCandidate`
-  (`proposition-construction-independence-rf-shriek`): `Rf^un_! = Rp_* ∘ D(j_!)`.
-- `AlgebraicGeometry.Etale.openProjectionMapModule` (`proposition-purity-vector-bundles`):
+: `Rf^un_! = Rp_* ∘ D(j_!)`.
+- `AlgebraicGeometry.Etale.openProjectionMapModule`:
   `σ_{j,K,N} : j_!(K ⊗ᴸ Lj^* N) ⟶ j_! K ⊗ᴸ N`.
-- `AlgebraicGeometry.Etale.compactProjectionMapModule` (`proposition-purity-vector-bundles`):
+- `AlgebraicGeometry.Etale.compactProjectionMapModule`:
   `PF_{f,K,L} : Rf^un_! K ⊗ᴸ L ⟶ Rf^un_!(K ⊗ᴸ Lf^* L)`.
 -/
 
@@ -57,7 +57,7 @@ noncomputable abbrev lowerStarProjectionMapModule {X Y : Scheme.{u}} (f : X ⟶ 
         (L((f)^*[ModuleCat.{u + 1} Λ]).obj M)) :=
   ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app K).app M
 
-/-- Blueprint `proposition-construction-independence-rf-shriek`: the unbounded étale
+/-- The unbounded étale
 compactification candidate.
 
 For a compactification `c = (j, p)` of `f : X ⟶ Y` (`f = j ≫ p`, `j` an open immersion, `p`
@@ -77,7 +77,7 @@ lemma unboundedLowerShriekCandidate_eq {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Com
       D((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙ rightDerivedLowerStarModule Λ c.g :=
   rfl
 
-/-- Blueprint `proposition-purity-vector-bundles`: the étale open-extension projection map.
+/-- The étale open-extension projection map.
 
 For an open immersion `j : U ⟶ X`, `K ∈ D(U_ét, Λ)` and `N ∈ D(X_ét, Λ)`,
 `σ_{j,K,N} : j_!(K ⊗ᴸ Lj^* N) ⟶ j_! K ⊗ᴸ N`, the adjoint under `j_! ⊣ j^*` of the unit at `K`
@@ -91,7 +91,7 @@ noncomputable abbrev openProjectionMapModule {U X : Scheme.{u}} (j : U ⟶ X) [I
       ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj (D((j)_!open[ModuleCat.{u + 1} Λ]).obj K)).obj N :=
   ((derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} Λ) j).app K).app N
 
-/-- Blueprint `proposition-purity-vector-bundles`: the étale compact-support projection map.
+/-- The étale compact-support projection map.
 
 For a compactification `c = (j, p)` of `f`, `K ∈ D(X_ét, Λ)` and `L ∈ D(Y_ét, Λ)`,
 `PF_{f,K,L} : Rf^un_! K ⊗ᴸ L ⟶ Rf^un_!(K ⊗ᴸ Lf^* L)` is the composite of the projection map

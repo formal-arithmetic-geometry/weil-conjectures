@@ -22,7 +22,6 @@ total spaces of `φ` is cartesian over `Spec ι`, so is that of `sliceTraitChang
 (`NearbyCyclesModel.isPullback_sliceTraitChangeHom_total`). This is the change of trait to which
 the induction hypothesis of Deligne's proof of SGA 4½, [Th. finitude], Prop. 3.7, applies
 (`NearbyCyclesModel.isIso_pullbackExchange_sliceTraitChangeHom`).
-
 -/
 
 @[expose] public section

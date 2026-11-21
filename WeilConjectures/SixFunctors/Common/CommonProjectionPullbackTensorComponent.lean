@@ -84,8 +84,6 @@ private theorem identityFunctorObject_heq
 
 /-- The finite-stage representative formula is the remaining input to the
 normalization argument for `ComparisonCompatible`.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-common-projection-pullback-tensor-compatibility-representative-bridge).
 
 Proof: expand the two normalized tensorators and pullback comparisons, evaluate
 at the chosen finite coefficient stage, and cancel the scalar-unit and transition
@@ -138,14 +136,12 @@ attribute [local irreducible] projectionTransportTensorComparison
   canonicalRationalPullbackTensor canonicalCommonStagePullbackTensor
 
 /-- The normalization and finite-stage cancellation for one input pair.
-Source: thm-sf-pf-field.proof.md, Compatibility.
 
 The proof expands both curried tensorators at the common stage E, replaces the
 supplied pullback comparisons by their canonical maps, and cancels the scalar
 unit and transition isomorphisms against the finite-stage representative
-formula.  This is one pointwise component of the comparison-compatible square;
-it is strictly smaller than the universally quantified bridge theorem.
-(blueprint: lem-sf-common-projection-pullback-tensor-compatibility-component). -/
+formula. This is one pointwise component of the comparison-compatible square;
+it is strictly smaller than the universally quantified bridge theorem. -/
 theorem projectionTensorComparisonCompatible_component_of_representative_formula
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)

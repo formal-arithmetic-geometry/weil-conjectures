@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProperNoether
 # Finiteness of direct images
 
 `Rf_*` and `Rf_!` preserve bounded constructibility, with a cohomological-dimension bound in
-terms of the fibre dimension (`sk-prop-sf-finiteness`). Here `Λ` is a finite coefficient ring
+terms of the fibre dimension. Here `Λ` is a finite coefficient ring
 whose exponent is invertible on the schemes in question
 (`AlgebraicGeometry.HasInvertibleExponent`) and the schemes are of finite type over a field:
 without the invertibility the Artin–Schreier sequence already defeats constructibility of
@@ -34,7 +34,7 @@ the vanishing of `Rᵠf_!` above twice the fibre dimension is read off the sheaf
 `AlgebraicGeometry.Etale.boundedConstructible_obj_of_forall_singleFunctor`. The vanishing clause
 of `theorem-results-from-etale-theory` is `theorem-results-from-etale-theory--5`.
 
-The sources of these inputs (blueprint `theorem-results-from-etale-theory`): the finiteness
+The sources of these inputs: the finiteness
 clause is the classical finiteness theorem (SGA 4, XIV, 1.1; Stacks, Tag 0GL0), proved here by
 Deligne's finite-boundary induction, with the proper case the comparison `obl-fin-comparison`;
 the cohomological-dimension clause is the bound for finite-type schemes over a separably closed
@@ -256,15 +256,14 @@ theorem boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType
   · obtain ⟨U, hU, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ x))
     exact ⟨U, Finset.mem_image_of_mem _ hU, hx⟩
 
-/-- Blueprint `theorem-results-from-etale-theory`: Finiteness of higher direct images of
+/-- Finiteness of higher direct images of
 finite-type morphisms, the vanishing clause.
 
 Let `f : X ⟶ Y` be a separated finite-type morphism (here: one admitting a compactification)
 between finite-type schemes over a field `k`, let `Λ` be a finite ring whose exponent is
 invertible on `Y` and let `𝓕` be a sheaf of `Λ`-modules on `X_ét`. If the geometric fibres of
 `f` have dimension at most `e`, then `Rᵠf_! 𝓕 = 0` for `q > 2e`. Constructibility of `𝓕` is
-not needed: the bound only uses the dimensions of the original fibres (blueprint
-`theorem-results-from-etale-theory--5`).
+not needed: the bound only uses the dimensions of the original fibres.
 
 This is a node of the blueprint subsection `theorem-results-from-etale-theory`, where it is proved.
 Its other clauses, the bounded constructibility of `Rf_* 𝓕` and of `Rf_! 𝓕`, are the sheaf cases of
@@ -458,7 +457,7 @@ theorem isZero_upperStar_homology_rightDerivedLowerStar_singleFunctor (j : X ⟶
 
 /-! ### Finiteness of `Rf_*` and `Rf_!` -/
 
-/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
+/-- Finiteness and constructibility
 
 **Finiteness of direct images.** Let `Λ` be a finite ring whose exponent is invertible on `X`
 and let `f : X ⟶ Y` be a quasi-compact morphism between `k`-schemes locally of finite type, with
@@ -473,7 +472,7 @@ Some finiteness hypothesis on `Y` is needed: for `f : ⊔ₙ ℙⁿ_k ⟶ ⊔ₙ
 
 The cohomological-dimension bound of the blueprint statement is
 `AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_add_lt`
-(`lemma-uniform-bounds-pro-etale-affines`), and its special case for the spectrum of a separably
+, and its special case for the spectrum of a separably
 closed field is `AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`
 (`lemma-cohomological-dimension-base-field--1`). -/
 theorem boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent (f : X ⟶ Y)
@@ -492,7 +491,7 @@ theorem boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent (f :
     have : QuasiCompact aX := hf ▸ inferInstance
     exact boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType Λ f aX aY hf K hK
 
-/-- Blueprint `theorem-results-from-etale-theory`: Finiteness and constructibility
+/-- Finiteness and constructibility
 
 **Finiteness of compactly supported direct images.** For `f : X ⟶ Y` admitting a
 compactification, between `k`-schemes locally of finite type with `Y` quasi-compact, `Rf_!`
@@ -527,7 +526,7 @@ theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactif
     exact boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian aY c.g
       (boundedConstructible_mapDerivedCategory_openImmersionLowerShriek Λ c.i hK)
 
-/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
+/-- Finiteness and constructibility
 
 **The fibre-dimension bound.** If `e` bounds the dimensions of the *geometric* fibres of a
 separated finite-type `f : X ⟶ Y`, then `R^q f_! K = 0` for `q > 2e` and every bounded

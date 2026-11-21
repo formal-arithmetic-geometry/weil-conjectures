@@ -66,7 +66,6 @@ is proved in `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Reduction`.
 - Stacks Project, Theorem 59.91.11, whose proof is the projective-line computation,
   <https://stacks.math.columbia.edu/tag/095T>
 - [SGA 4, Exp. XII, Théorème 5.1]
-
 -/
 
 @[expose] public section
@@ -132,16 +131,15 @@ cartesian square
 
 ```
 ℙ¹_T --g'--> ℙ¹_S
-  |            |
-  p'           p
-  v            v
+  | |
+  p' p
+  v v
   T ---g-----> S
 ```
 
 the derived base change map is an isomorphism on every bounded below complex with torsion
 cohomology. This is the geometric half of the proof of proper base change; see the module
-docstring, and Stacks Project, Tag 095T, whose proof it is.
-(blueprint: `proposition-proper-base-change-projective-line`) -/
+docstring, and Stacks Project, Tag 095T, whose proof it is. -/
 theorem Etale.hasTorsionBaseChange_projectiveLine (S : Scheme.{u}) :
     Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S) := fun _ _ _ _ _ sq K hK ↦ by
   have := Etale.isIso_baseChange_app_projectiveLine Λ sq K hK
@@ -164,8 +162,7 @@ For a coefficient ring which is torsion as an additive group this is the direct 
 which are torsion and hence `f'_*`-acyclic after base change. Over an arbitrary `Λ` a torsion sheaf
 need not embed into a torsion injective sheaf, so that argument does not apply. The conclusion is
 instead the proper base change theorem
-`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper`, which needs no acyclicity hypothesis.
-(blueprint: `theorem-pbc-injective-acyclicity`) -/
+`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper`, which needs no acyclicity hypothesis. -/
 @[stacks 0A4B]
 theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isProper {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f] (_hf : Etale.HasInjectiveAcyclicity Λ f) :

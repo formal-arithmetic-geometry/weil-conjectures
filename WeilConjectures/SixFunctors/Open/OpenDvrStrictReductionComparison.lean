@@ -14,7 +14,6 @@ import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitCanonicalMo
 /-! # Strict quotient reduction under canonical DVR coefficients
 
 Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
-(blueprint: lem-sf-open-dvr-strict-reduction-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] HasDerivedCategory.standard Functor.rightDerivedFunctor
 
 /-- The strict tensor comparisons before total derived coefficient-limit transport.
-Source: Stacks Tags 07A6 and 0941
-(blueprint: lem-sf-open-dvr-strict-reduction-comparison). -/
+Source: Stacks Tags 07A6 and 0941. -/
 structure OpenDvrStrictReductionComparison
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) (S : CoefficientDerivedSystemCalculus.{u, u} l E T)
@@ -85,8 +83,7 @@ local instance (priority := 10000) sequenceSiteSmall (T : Scheme.{u}) :
   coefficientSequenceEssentiallySmall.{u, 0} T
 
 /-- Strict quotient tensor transport and its scalar adjunction normalization.
-Source: Stacks Tags 07A6, 0D6E and 0941
-(blueprint: lem-sf-open-dvr-strict-reduction-comparison).
+Source: Stacks Tags 07A6, 0D6E and 0941.
 
 Proof: choose the existing ordinary quotient model M for S, and its universally
 normalized left-derived comparison epsilon. The ordinary coefficient tensor

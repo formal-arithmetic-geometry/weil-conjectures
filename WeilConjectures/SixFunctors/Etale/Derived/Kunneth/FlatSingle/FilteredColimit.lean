@@ -15,8 +15,7 @@ For a quasi-compact and quasi-separated morphism `h : Y ⟶ X`, the functor
 `𝓖 ↦ Hᵠ(Rh_* 𝓖[0])` on sheaves of `Λ`-modules on `Y_ét`, computed with the unbounded derived
 category, commutes with filtered colimits indexed by small categories in `Type (u + 1)`
 (`AlgebraicGeometry.Etale.preservesColimitsOfShape_singleFunctor_rightDerivedLowerStar`). This is
-`AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage_large` (blueprint
-`lem-sbc-higher-direct-image-large-filtered-colimit`), transported from the bounded below derived
+`AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage_large`, transported from the bounded below derived
 category.
 -/
 

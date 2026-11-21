@@ -21,8 +21,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 Let `k` be a perfect field, `Λ` a finite ring whose exponent is invertible on `k`, and `X` a
 separated scheme of finite type over `k` with `dim X ≤ d`. The Verdier dual
 `𝔻_X = RHom(-, ω_X)`, `ω_X = Ra_X^! Λ`, carries `Dctf(X, Λ)` into itself, sending the Tor
-interval `[a, b]` into `[-b - 2d, -a]` (blueprint
-`lemma-verdier-duality-preserves-constructibility--1`).
+interval `[a, b]` into `[-b - 2d, -a]`.
 
 The proof follows the blueprint. By Noetherian induction on the support, `K` is built by
 open–closed triangles from objects `Rs_! P`, where `s : S ⟶ X` is a locally closed immersion of
@@ -33,7 +32,7 @@ an irreducible smooth stratum on which `P = s^* K` is site-perfect
 
 (`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerShriek`, blueprint
 `lemma-internal-adjunction-two-exchange-formulas--1`), and smooth duality
-(`proposition-exceptional-inverse-image-smooth-morphism`) gives `ω_S ≅ L[2r]` for a lisse invertible
+ gives `ω_S ≅ L[2r]` for a lisse invertible
 `L`, so that `𝔻_S P ≅ P^∨ ⊗ᴸ L[2r]` has Tor amplitude `[-b - 2r, -a - 2r]`; the direct image theorem
 (`proposition-six-operations-dctf--2`) makes `Rs_* 𝔻_S P` bounded constructible of Tor amplitude
 `[-b - 2r, -a]`. The exactness of `RHom` in its first variable
@@ -103,7 +102,7 @@ variable {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
 over `k` and `dim S ≤ r`, and let `P ∈ Dctf(S, Λ)` have Tor amplitude in `[a, b]` and a left dual in
 `Dctf(S, Λ)` (`P` is site-perfect). Then `𝔻_X (Rs_! P) ≅ Rs_* 𝔻_S P`
 (`lemma-internal-adjunction-two-exchange-formulas--1`) is bounded constructible of Tor amplitude in
-`[-b - 2r, -a]`: by smooth duality (`proposition-exceptional-inverse-image-smooth-morphism`)
+`[-b - 2r, -a]`: by smooth duality
 `ω_S ≅ L[2r]` with `L` lisse invertible, so that `𝔻_S P ≅ P^∨ ⊗ᴸ L[2r]` has Tor amplitude in
 `[-b - 2r, -a - 2r]`, and `Rs_*` widens the upper end by `2r`
 (`proposition-six-operations-dctf--2`). -/

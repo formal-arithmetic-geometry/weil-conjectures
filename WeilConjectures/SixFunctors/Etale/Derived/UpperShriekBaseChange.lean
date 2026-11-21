@@ -16,9 +16,9 @@ public import WeilConjectures.SixFunctors.OpenClosed.Derived
 For a cartesian square of schemes
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  v          v
+  | |
+  f' f
+  v v
   Y' --g---> Y
 ```
 with `f`, `f'` admitting compactifications, and torsion coefficients `Λ`, the compact-support
@@ -118,9 +118,6 @@ instance isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_uni
 
 /-- Blueprint `proposition-composition-open-restriction-compactifications-f--5`: Base change for a
 proper morphism, against an open immersion.
-
-Blueprint `proposition-composition-open-restriction-compactifications-f--5`: Base change for an
-arbitrary morphism, against an open immersion.
 
 For a cartesian square `g' ≫ f = f' ≫ g` with `g` an open immersion, `f`, `f'` admitting
 compactifications and torsion coefficients `Λ`, the base-change comparison
@@ -274,7 +271,7 @@ lemma twoSquare_inv_rightDerivedLowerShriekBaseChangeMap
     NatTrans.id_app]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-/-- Blueprint `cor-exc-base-change-reduces-to-proper`: Base change for a general morphism
+/-- Base change for a general morphism
 reduces to the proper part.
 
 Let `X ⟶[j] X̄ ⟶[p] Y` be the chosen compactification of `f`, and let `X' ⟶[j'] X̄' ⟶[p'] Y'`

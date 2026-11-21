@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-! # Left scalar comparisons before taking exceptional right mates
 
 Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: def-sf-exceptional-integral-left-scalar-data)
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +29,7 @@ variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l)
 
 /-- Restricted scalar extensions and normalized left proper/open comparisons.
 This record contains no right comparison or exceptional-adjunction equation.
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: def-sf-exceptional-integral-left-scalar-data). -/
+Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26. -/
 structure LeftMates {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))
     (left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s)) where
@@ -133,8 +131,7 @@ structure LeftMates {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
 /-- The prescribed right mate, constructed using the two fixed adjunctions.
 Source: Zheng, Lemma 5.22; the inverse of the normalized left comparison is
-transposed, so its counit equation is fixed rather than additional data.
-(blueprint: def-sf-exceptional-integral-left-scalar-data). -/
+transposed, so its counit equation is fixed rather than additional data. -/
 def LeftMates.mate {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l)}
     {left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s)}

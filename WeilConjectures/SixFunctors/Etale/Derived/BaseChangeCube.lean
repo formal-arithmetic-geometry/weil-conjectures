@@ -14,11 +14,11 @@ Consider a commutative cube of schemes, whose top face is a square `W' ⟶ W`, `
 bottom face `X' ⟶ X`, `Y' ⟶ Y`:
 
 ```
-  W' --h--> W          Z' --gb--> Z
-  |         |          |         |
-  b'        b          p'        p
-  ↓         ↓          ↓         ↓
-  X' --g'-> X          Y' --g--> Y
+  W' --h--> W Z' --gb--> Z
+  | | | |
+  b' b p' p
+  ↓ ↓ ↓ ↓
+  X' --g'-> X Y' --g--> Y
 ```
 
 with `a : W ⟶ Z`, `a' : W' ⟶ Z'`, `e : X ⟶ Y`, `e' : X' ⟶ Y'`. The derived base change maps

@@ -249,7 +249,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 /-! # Interfaces and representative calculations for coefficient-system evaluation
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS, 0A95 and 0941;
-Injectives, Tag 079P (blueprint: def-coef-derived-system-calculus-data).
+Injectives, Tag 079P.
 
 This file contains the existing calculus interfaces and their representative lemmas.
 The existence theorem is assembled in `CoefDerivedSystemEvaluationCalculus` from
@@ -304,7 +304,7 @@ attribute [local irreducible] coefficientActualScalarDerivedPair
 attribute [local irreducible] coefficientUniqueComparisonChoice
 
 /-- Evaluation on sections, including the canonical coefficient-ring transport.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 0941. -/
 noncomputable def coefficientEvaluationSection
     (M : coefficientSequenceModules l E W) (n : ℕ) (U : W.ProEtᵒᵖ)
     (x : M.val.obj (op (n, U.unop))) :
@@ -313,7 +313,7 @@ noncomputable def coefficientEvaluationSection
 
 set_option backward.defeqAttrib.useBackward false in
 /-- Ordinary tensor evaluation is uniquely fixed on the actual sectionwise tensor generators.
-Source: Stacks 03EK, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
+Source: Stacks 03EK, 0941.
 Proof: restrict the tensor presheaf to the vertical slice and send x tensor y to
 x tensor y. Vertical sheafification is the original site's sheafification, so this
 gives an isomorphism of sheaf tensors. Evaluation preserves coproducts and is exact;
@@ -379,7 +379,7 @@ theorem coefficientEvaluationTensorIso_exists (n : ℕ)
     Lean.Elab.Tactic.replaceMainGoal []
 
 /-- The unique ordinary evaluation tensor comparison, fixed before deriving.
-Source: Stacks 03EK, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 03EK, 0941. -/
 noncomputable def coefficientEvaluationTensorIso (n : ℕ)
     (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ) :=
   coefficientUniqueComparisonChoice (coefficientEvaluationTensorIso_exists l E W n P Q)
@@ -388,8 +388,7 @@ attribute [local irreducible] coefficientScalarTensorIso coefficientEvaluationTe
 
 attribute [local semireducible] coefficientTotalTensor in
 /-- Evaluation and finite scalar extension preserve the K-flat models in use.
-Source: Stacks 06YN, 07A4, 0941
-(blueprint: lem-coef-derived-system-evaluation-calculus).
+Source: Stacks 06YN, 07A4, 0941.
 Proof: scalar extension carries a flat-term K-flat complex to a flat-term K-flat
 complex by the tensor/restriction adjunction and associativity. For evaluation,
 test acyclicity using induction from a level on the ringed sequence site; the
@@ -484,8 +483,7 @@ set_option genCtorIdx false
 /-- Full data and identities of the coherent coefficient evaluation calculus.
 The fields spell out each conclusion of the node. The normalized-system hypotheses
 occur only where the node uses them; reduction and beta allow arbitrary ambient inputs.
-Source: Stacks 06YS, 0A95, 0941, 079P and the agent-formulated enriched adjunction
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 06YS, 0A95, 0941, 079P and the agent-formulated enriched adjunction. -/
 structure CoefficientDerivedSystemTensors where
   /-- Closed derived tensor-Hom on completed coefficients. -/
   integralClosed : CoefficientClosedStructure (coefficientIntegralInternalHom l E W)
@@ -507,7 +505,7 @@ structure CoefficientDerivedSystemTensors where
 section ModelInterfaceCache
 
 /-- Integral K-flat tensor comparison in the displayed coefficient category.
-Source: Stacks 06YU (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 06YU. -/
 noncomputable def coefficientIntegralTensorModelIso
     (S : CoefficientDerivedSystemTensors l E W)
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ)
@@ -523,7 +521,7 @@ noncomputable def coefficientIntegralTensorModelIso
     S.integralTensorModel P Q hP hQ
 
 /-- System K-flat tensor comparison in the displayed coefficient category.
-Source: Stacks 06YU (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 06YU. -/
 noncomputable def coefficientSystemTensorModelIso
     (S : CoefficientDerivedSystemTensors l E W)
     (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)
@@ -541,7 +539,7 @@ noncomputable def coefficientSystemTensorModelIso
 
 attribute [local instance 2000] HasDerivedCategory.standard in
 /-- Finite K-flat tensor comparison in the displayed coefficient category.
-Source: Stacks 06YU (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 06YU. -/
 noncomputable def coefficientFiniteTensorModelIso
     (S : CoefficientDerivedSystemTensors l E W) (n : ℕ)
     (P Q : CochainComplex (normalizedDVRModules l E W n) ℤ)
@@ -567,8 +565,7 @@ attribute [local irreducible] coefficientFiniteQuotientExistence
 /-- Finite-quotient adjunction and tensor data, with both normalizations on representatives.
 The ordinary unit is the actual sheafified 1 tensor x. The derived unit uses the
 universal counit, and the tensor comparison preserves the same local pure tensors.
-Source: Stacks 03CZ, 06YY, 07A4, 07A6, node proof step 10
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 03CZ, 06YY, 07A4, 07A6, node proof step 10. -/
 structure CoefficientFiniteQuotientData (S : CoefficientDerivedSystemTensors l E W) where
   /-- Ordinary quotient extension is adjoint to the recorded exact scalar restriction. -/
   ordinaryAdjunction : ∀ {m n : ℕ} (h : n ≤ m),
@@ -594,7 +591,7 @@ attribute [local semireducible] CommRingCat.hasForgetToRingCat sheafCompose
   CommRingCat.instConcreteCategoryRingHomCarrier RingCat.instConcreteCategoryRingHomCarrier in
 /-- The ordinary scalar-unit section is sheafification of the module element 1 tensor x.
 This general formula keeps coefficient constructions out of the sectionwise calculation.
-Source: Stacks 03CZ, 03EK (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 03CZ, 03EK. -/
 noncomputable def coefficientChangeOfRingsUnitSection
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}] [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
@@ -608,8 +605,7 @@ noncomputable def coefficientChangeOfRingsUnitSection
 
 attribute [local semireducible] SheafOfModules.instCategory in
 /-- The actual finite-quotient tensor unit on a local section, with its scalar action displayed.
-Source: Stacks 03CZ, node proof step 10
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 03CZ, node proof step 10. -/
 noncomputable def coefficientFiniteQuotientUnitSection {m n : ℕ} (h : n ≤ m)
     (M : normalizedDVRModules l E W m) (V : W.ProEtᵒᵖ) (x : M.val.obj V) :
     ((coefficientFiniteQuotientExtension l E W h).obj M).val.obj V :=
@@ -620,8 +616,7 @@ noncomputable def coefficientFiniteQuotientUnitSection {m n : ℕ} (h : n ≤ m)
 
 attribute [local semireducible] SheafOfModules.instCategory in
 /-- The ordinary finite-quotient unit is actual sheafification of 1 tensor x.
-Source: Stacks 03CZ, node proof step 10
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 03CZ, node proof step 10. -/
 def CoefficientFiniteQuotientOrdinaryUnit (S : CoefficientDerivedSystemTensors l E W)
     (D : CoefficientFiniteQuotientData l E W S) : Prop :=
   ∀ {m n : ℕ} (h : n ≤ m) (M : normalizedDVRModules l E W m)
@@ -632,8 +627,7 @@ def CoefficientFiniteQuotientOrdinaryUnit (S : CoefficientDerivedSystemTensors l
         coefficientFiniteQuotientUnitSection l E W h M V x
 
 /-- The derived finite-quotient unit is the localized ordinary unit through its counit.
-Source: Stacks 06YY, 07A6, node proof step 10
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 06YY, 07A6, node proof step 10. -/
 def CoefficientFiniteQuotientDerivedUnit (S : CoefficientDerivedSystemTensors l E W)
     (D : CoefficientFiniteQuotientData l E W S) : Prop :=
   ∀ {m n : ℕ} (h : n ≤ m)
@@ -649,7 +643,7 @@ def CoefficientFiniteQuotientDerivedUnit (S : CoefficientDerivedSystemTensors l 
       (ComplexShape.up ℤ)).unit.app P)
 
 /-- The representative tensor comparison square, for arbitrary coefficient categories.
-Source: Stacks 07A4 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A4. -/
 def CoefficientTensorComparisonSquare
     {A : Type a} {B : Type b} {K : Type c}
     [Category.{v} A] [Category.{w} B] [Category.{r} K]
@@ -664,8 +658,7 @@ def CoefficientTensorComparisonSquare
 attribute [local irreducible] CoefficientTensorComparisonSquare
 
 /-- The exact K-flat quotient tensor normalization, packaged once as a proposition.
-Source: Stacks 06YY, 07A4, node proof step 10
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 06YY, 07A4, node proof step 10. -/
 def CoefficientFiniteQuotientTensorNormalization (S : CoefficientDerivedSystemTensors l E W)
     (D : CoefficientFiniteQuotientData l E W S) : Prop :=
   ∀ {m n : ℕ} (h : n ≤ m)
@@ -705,8 +698,7 @@ attribute [local irreducible] CoefficientFiniteQuotientOrdinaryUnit
   CoefficientFiniteQuotientDerivedUnit CoefficientFiniteQuotientTensorNormalization
 
 /-- Finite-quotient data together with its actual pure-tensor K-flat normalization.
-Source: Stacks 06YY, 07A4, node proof step 10
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 06YY, 07A4, node proof step 10. -/
 structure CoefficientFiniteQuotientCalculus (S : CoefficientDerivedSystemTensors l E W)
     extends CoefficientFiniteQuotientData l E W S where
   /-- The ordinary unit is the actual image of 1 tensor x under sheafification. -/
@@ -718,8 +710,7 @@ structure CoefficientFiniteQuotientCalculus (S : CoefficientDerivedSystemTensors
     toCoefficientFiniteQuotientData
 
 /-- The actual transition-adjoint under the normalized finite-quotient adjunction.
-Source: Stacks 07A6, 0941, node proof step 10
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6, 0941, node proof step 10. -/
 noncomputable def coefficientSequenceTransitionAdjoint (_S : CoefficientDerivedSystemTensors l E W)
     (D : CoefficientFiniteQuotientCalculus l E W _S) {m n : ℕ} (h : n ≤ m)
     (N : coefficientSequenceDerived l E W) :
@@ -729,8 +720,7 @@ noncomputable def coefficientSequenceTransitionAdjoint (_S : CoefficientDerivedS
   ((D.adjunction h).homEquiv _ _).symm ((coefficientSequenceDerivedTransition l E W h).app N)
 
 /-- The normalization criterion makes precisely this transition-adjoint invertible.
-Source: Stacks 07A6, 0941, node proof steps 5 and 10
-(blueprint: lem-coef-derived-system-evaluation-calculus).
+Source: Stacks 07A6, 0941, node proof steps 5 and 10.
 Proof: under the finite-quotient adjunction, precomposition by this adjunct is the
 map f ↦ tau ≫ Res(f). The recorded normalization makes that map bijective for every
 target. Yoneda therefore makes the adjunct an isomorphism, including m = n. -/
@@ -747,7 +737,7 @@ theorem coefficientSequenceTransitionAdjoint_isIso (S : CoefficientDerivedSystem
   · exact ((D.adjunction h).homEquiv _ P).injective
 
 /-- The normalization isomorphism alpha is the actual transition-adjoint.
-Source: Stacks 07A6, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6, 0941. -/
 noncomputable def coefficientSequenceNormalizationIso (S : CoefficientDerivedSystemTensors l E W)
     (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (h : n ≤ m)
     (N : coefficientSequenceDerived l E W) (hN : IsNormalizedCoefficientSequence l E W N) :
@@ -761,8 +751,7 @@ attribute [local irreducible] coefficientSequenceNormalizationIso
 
 /-- The comparison c_(m,n) is reduced finite evaluation followed by tensor-Hom transpose.
 Its tensor comparison is pinned to ordinary pure tensors by D.tensor_model.
-Source: Stacks 08J9, 06YY, node proof step 10
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 08J9, 06YY, node proof step 10. -/
 noncomputable def coefficientFiniteQuotientHomComparison (S : CoefficientDerivedSystemTensors l E W)
     (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (h : n ≤ m)
     (P Q : normalizedDVRDerived l E W m) :
@@ -777,7 +766,7 @@ noncomputable def coefficientFiniteQuotientHomComparison (S : CoefficientDerived
 attribute [local irreducible] coefficientFiniteQuotientHomComparison
 
 /-- Reduction and its normalized adjunction on the actual derived coefficient categories.
-Source: Stacks 06YY, 07A6, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 06YY, 07A6, 0941. -/
 structure CoefficientDerivedSystemReductionModel extends CoefficientDerivedSystemTensors l E W where
   /-- The reduction is a functor on the ordinary unbounded derived category. -/
   reduction : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W
@@ -792,7 +781,7 @@ structure CoefficientDerivedSystemReductionModel extends CoefficientDerivedSyste
   /-- Every ambient complex reduces to a normalized system. -/
   reduction_normalized : ∀ P, IsNormalizedCoefficientSequence l E W (reduction.obj P)
 /-- The actual unit/counit projections and monoidal comparisons of reduction.
-Source: Stacks 07A6, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6, 0941. -/
 structure CoefficientDerivedSystemReduction
     extends CoefficientDerivedSystemReductionModel l E W where
   /-- The reconstruction unit projects to the actual derived reduction map. -/
@@ -821,7 +810,7 @@ structure CoefficientDerivedSystemReduction
         (coefficientSequenceDerivedEvaluation l E W n) ⋙ (finiteClosed n).tensor
 /-- Finite scalar tensor comparison is the localization of the uniquely normalized
 ordinary comparison. The square includes all representative identifications.
-Source: Stacks 07A4, 06YU (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A4, 06YU. -/
 def CoefficientFiniteTensorNormalization (S : CoefficientDerivedSystemReduction l E W) : Prop :=
   ∀ (n : ℕ) (P Q : CochainComplex (scalarReductionSource l E W) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients
@@ -846,7 +835,7 @@ def CoefficientFiniteTensorNormalization (S : CoefficientDerivedSystemReduction 
 
 /-- Evaluation tensor comparison is induced on simultaneous K-flat representatives
 by the uniquely characterized ordinary evaluation comparison.
-Source: Stacks 07A4, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A4, 0941. -/
 def CoefficientEvaluationTensorNormalization (S : CoefficientDerivedSystemReduction l E W) :
     Prop :=
   ∀ (n : ℕ) (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)
@@ -872,7 +861,7 @@ def CoefficientEvaluationTensorNormalization (S : CoefficientDerivedSystemReduct
 
 /-- Reduction tensor comparison evaluates to the same normalized scalar-extension
 comparison, with the actual reduction and tensor-evaluation identifications.
-Source: Stacks 07A4, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A4, 0941. -/
 def CoefficientReductionTensorEvaluation (S : CoefficientDerivedSystemReduction l E W) : Prop :=
   ∀ (P Q : DerivedCategory (scalarReductionSource l E W)) (n : ℕ),
     CoefficientComparisonEquation
@@ -890,8 +879,7 @@ attribute [local semireducible] CategoryTheory.Functor.mapHomologicalComplex
 /-- A single strict reduction presentation with all finite and horizontal identifications.
 This is the presentation already required in CoefficientReductionModels, exposed so
 that the tensor comparison can be specified on the very same presentations.
-Source: Stacks 06YS, 06YY, 0941
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 06YS, 06YY, 0941. -/
 def CoefficientReductionPresentation
     (S : CoefficientDerivedSystemReduction l E W)
     (P : CochainComplex (scalarReductionSource l E W) ℤ)
@@ -923,8 +911,7 @@ def CoefficientReductionPresentation
         (coefficientOrdinaryQuotient l E W h) P))
 
 /-- Tensor representatives retain finite, horizontal and strict adjunction equations.
-Source: Stacks 06YS, 06YY, 07A6, 0941
-(blueprint: def-coef-derived-system-calculus-data). -/
+Source: Stacks 06YS, 06YY, 07A6, 0941. -/
 abbrev CoefficientReductionTensorPresentation
     (S : CoefficientDerivedSystemReduction l E W) :=
   CoefficientStrictReductionTensorPresentation l E W S.reduction S.adjunction
@@ -933,7 +920,7 @@ abbrev CoefficientReductionTensorPresentation
 /-- The reduction tensor map is induced by one strict chain map whose finite components
 are the ordinary normalized scalar tensor maps. Its square is an equality in the
 system derived category, before evaluation or taking a limit.
-Source: Stacks 07A4, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A4, 0941. -/
 def CoefficientReductionTensorNormalization (S : CoefficientDerivedSystemReduction l E W) :
     Prop :=
   ∀ (P Q : CochainComplex (scalarReductionSource l E W) ℤ)
@@ -999,8 +986,7 @@ def CoefficientReductionTensorNormalization (S : CoefficientDerivedSystemReducti
 /-- The actual internal-Hom transition under its fiber identifications.
 This is the transition-adjoint formula for normalized inputs, using the finite quotient
 comparison obtained by transposing reduced evaluation with its K-flat tensor normalization.
-Source: Stacks 06YY, 07A6, 0941, node proof step 10
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 06YY, 07A6, 0941, node proof step 10. -/
 def CoefficientFiberTransition (S : CoefficientDerivedSystemTensors l E W)
     (D : CoefficientFiniteQuotientCalculus l E W S)
     (fiberHom : ∀ (M N : coefficientSequenceDerived l E W),
@@ -1033,8 +1019,7 @@ attribute [local irreducible] CoefficientReductionTensorNormalization
   CoefficientFiberTransition
 
 /-- Coherent fibers and evaluation on the canonical reduction data.
-Source: Stacks 0A95, 0941 and node proof steps 6--11
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 0A95, 0941 and node proof steps 6--11. -/
 structure CoefficientDerivedSystemFibers extends CoefficientDerivedSystemReduction l E W where
   /-- Retain the finite constraint witnesses used to construct the tensor models. -/
   finite_tensor_coherence : ∀ n : ℕ,
@@ -1126,8 +1111,7 @@ structure CoefficientDerivedSystemFibers extends CoefficientDerivedSystemReducti
           (op ((coefficientSequenceDerivedEvaluation l E W n).obj M),
             (coefficientSequenceDerivedEvaluation l E W n).obj N)
 /-- The full calculus additionally carries its enriched and global-limit comparisons.
-Source: Stacks 08J9, 07A6, 0941 and node proof steps 12--15
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 08J9, 07A6, 0941 and node proof steps 12--15. -/
 structure CoefficientDerivedSystemCalculus extends CoefficientDerivedSystemFibers l E W where
   /-- Enriched adjunction is invertible, without asserting completeness of P or N. -/
   enriched_isIso : ∀ (P : DerivedCategory (scalarReductionSource l E W))
@@ -1144,8 +1128,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The global comparison gamma is the global sections of the specified enriched adjunct,
 followed by the specified total-limit comparison. Thus its data are real composites.
-Source: Stacks 08J9, 07A6, 0941 and node proof steps 12--14
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 08J9, 07A6, 0941 and node proof steps 12--14. -/
 noncomputable def CoefficientDerivedSystemCalculus.gamma
     (S : CoefficientDerivedSystemCalculus l E W)
     (P : DerivedCategory (scalarReductionSource l E W))
@@ -1162,8 +1145,7 @@ noncomputable def CoefficientDerivedSystemCalculus.gamma
       ((coefficientSequenceInternalHom l E W).obj (op (S.reduction.obj P), N))
 
 /-- The lax tensor comparison of the right adjoint, defined by the counit mate.
-Source: Stacks 07A6 and node proof step 15
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6 and node proof step 15. -/
 noncomputable def CoefficientDerivedSystemCalculus.tensorLimitMap
     (S : CoefficientDerivedSystemCalculus l E W)
     (T : DerivedCategory (scalarReductionSource l E W)) (N : coefficientSequenceDerived l E W) :
@@ -1197,8 +1179,7 @@ private theorem preservedLimitComparison_existsUnique
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Ordinary global sections commute with inverse limit by the actual projections.
-Source: Stacks 0941 and node proof step 12
-(blueprint: lem-coef-derived-system-evaluation-calculus).
+Source: Stacks 0941 and node proof step 12.
 Proof: Hom from the module unit preserves limits. The ordinary comparison sends a
 section of the limit to its compatible family of sections. The inverse uses the limit
 universal property. These maps commute with all projections and determine each other
@@ -1221,12 +1202,12 @@ theorem coefficientSectionsLimitIso_exists :
   exact preservedLimitComparison_existsUnique G
 
 /-- The unique ordinary sections/limit comparison used by the derived normalization.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 0941. -/
 noncomputable def coefficientSectionsLimitIso :=
   (coefficientSectionsLimitIso_exists l E W).choose
 
 /-- The left composite universal comparison, from ordinary sections of the ordinary limit.
-Source: Stacks 079P, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 079P, 0941. -/
 noncomputable def coefficientGlobalLimitLeftComparison
     (K : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :=
   coefficientSiteSectionsComparison.{u, t+1, t} (Scheme.ProEt.topology W)
@@ -1240,7 +1221,7 @@ noncomputable def coefficientGlobalLimitLeftComparison
 
 attribute [local semireducible] CategoryTheory.Functor.mapHomologicalComplex in
 /-- The right composite universal comparison, after ordinary sections/limit commutation.
-Source: Stacks 079P, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 079P, 0941. -/
 noncomputable def coefficientGlobalLimitRightComparison
     (K : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :=
   DerivedCategory.Q.map
@@ -1253,21 +1234,20 @@ noncomputable def coefficientGlobalLimitRightComparison
       (coefficientRightDerivedComparison (coefficientTowerSections l E W) K)
 
 /-- Scalar restriction preserves finite limits with the exact recorded functor.
-Source: Stacks 03DA, 03CZ (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 03DA, 03CZ. -/
 noncomputable instance coefficientFiniteRestrictionLimits (n : ℕ) :
     PreservesFiniteLimits (scalarReductionRestriction l E W n) :=
   (scalarReductionRestriction_exact l E W n).1
 
 /-- Scalar restriction preserves finite colimits with the exact recorded functor.
-Source: Stacks 03DA, 03CZ (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 03DA, 03CZ. -/
 noncomputable instance coefficientFiniteRestrictionColimits (n : ℕ) :
     PreservesFiniteColimits (scalarReductionRestriction l E W n) :=
   (scalarReductionRestriction_exact l E W n).2
 
 /-- Projection, resolution, naturality and composition normalizations for the calculus.
 These equations specify gamma and its actual total-limit projections simultaneously.
-Source: node proof steps 12--15, Stacks 08J9, 07A6, 0941
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: node proof steps 12--15, Stacks 08J9, 07A6, 0941. -/
 structure CoefficientDerivedSystemScalarData where
   /-- Global sections after scalar restriction have the canonical finite meaning. -/
   scalarSections : ∀ n : ℕ,
@@ -1287,7 +1267,7 @@ attribute [local semireducible] CommRingCat.hasForgetToRingCat sheafCompose
   SheafOfModules.instCategory in
 attribute [local semireducible] preadditiveCoyoneda SheafOfModules.unit in
 /-- The ordinary section transport is characterized on all section maps.
-Source: Stacks 03CZ, 08JA (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 03CZ, 08JA. -/
 def CoefficientOrdinaryScalarSectionsFormula
     (D : CoefficientDerivedSystemScalarData l E W) : Prop :=
   ∀ (n : ℕ) (M : scalarReductionTarget l E W n)
@@ -1303,7 +1283,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 attribute [local semireducible] CategoryTheory.Functor.mapHomologicalComplex
   SheafOfModules.instCategory in
 /-- Compatibility of scalar-section transport with the universal derived comparisons.
-Source: Stacks 079P, 08JA (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 079P, 08JA. -/
 def CoefficientScalarSectionsModel
     (D : CoefficientDerivedSystemScalarData l E W) : Prop :=
   ∀ (n : ℕ) (I : CochainComplex (scalarReductionTarget l E W n) ℤ),
@@ -1334,7 +1314,7 @@ attribute [local irreducible] CoefficientOrdinaryScalarSectionsFormula
   CoefficientScalarSectionsModel
 
 /-- The canonical scalar-section comparisons and their resolution normalization.
-Source: Stacks 03CZ, 079P, 08JA (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 03CZ, 079P, 08JA. -/
 structure CoefficientDerivedSystemScalarCoherence
     extends CoefficientDerivedSystemScalarData l E W where
   /-- The ordinary transport acts by the actual sectionwise adjunct. -/
@@ -1348,8 +1328,7 @@ attribute [local semireducible] CategoryTheory.Functor.mapHomologicalComplex in
 /-- The simultaneous-resolution equation for the actual global-limit comparison.
 This is the original model equation, packaged once to avoid duplicating its large
 localization terms in every generated structure declaration.
-Source: Stacks 079P, 0941, node proof steps 12--14
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 079P, 0941, node proof steps 12--14. -/
 def CoefficientGlobalLimitModel (S : CoefficientDerivedSystemCalculus l E W) : Prop :=
   ∀ (K : CochainComplex (coefficientSequenceModules l E W) ℤ),
     CoefficientComparisonEquation
@@ -1370,7 +1349,7 @@ def CoefficientGlobalLimitModel (S : CoefficientDerivedSystemCalculus l E W) : P
 attribute [local irreducible] CoefficientGlobalLimitModel
 
 /-- The resolution normalization of the global mapping-system comparisons.
-Source: Stacks 079P, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 079P, 0941. -/
 structure CoefficientDerivedSystemResolutionCoherence
     (S : CoefficientDerivedSystemCalculus l E W)
     extends CoefficientDerivedSystemScalarCoherence l E W where
@@ -1398,8 +1377,7 @@ structure CoefficientDerivedSystemResolutionCoherence
   /-- The global-limit comparison is the simultaneous derived ordinary comparison. -/
   globalLimit_model : CoefficientGlobalLimitModel l E W S
 /-- The finite enriched isIso equation of the coefficient calculus.
-Source: Stacks 07A6, 0941 and node proof steps 14--15
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6, 0941 and node proof steps 14--15. -/
 def CoefficientFiniteEnrichedIsIso (S : CoefficientDerivedSystemCalculus l E W) : Prop :=
   ∀ (n : ℕ) (P : DerivedCategory (scalarReductionSource l E W))
     (M : normalizedDVRDerived l E W n),
@@ -1408,8 +1386,7 @@ def CoefficientFiniteEnrichedIsIso (S : CoefficientDerivedSystemCalculus l E W) 
           (S.finiteTensor n) P M)
 
 /-- The gamma projection equation of the coefficient calculus.
-Source: Stacks 07A6, 0941 and node proof steps 14--15
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6, 0941 and node proof steps 14--15. -/
 def CoefficientGammaProjection (S : CoefficientDerivedSystemCalculus l E W)
     (D : CoefficientDerivedSystemResolutionCoherence l E W S) : Prop :=
   ∀ (P : DerivedCategory (scalarReductionSource l E W))
@@ -1434,8 +1411,7 @@ def CoefficientGammaProjection (S : CoefficientDerivedSystemCalculus l E W)
           (𝟙 ((coefficientSequenceDerivedEvaluation l E W n).obj N)))
 
 /-- The gamma naturality equation of the coefficient calculus.
-Source: Stacks 07A6, 0941 and node proof steps 14--15
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6, 0941 and node proof steps 14--15. -/
 def CoefficientGammaNaturality (S : CoefficientDerivedSystemCalculus l E W) : Prop :=
   ∀ (P P' : DerivedCategory (scalarReductionSource l E W))
     (N N' : coefficientSequenceDerived l E W)
@@ -1449,7 +1425,7 @@ def CoefficientGammaNaturality (S : CoefficientDerivedSystemCalculus l E W) : Pr
         (Prod.mkHom ((S.reduction.map a).op) (b)))
 
 /-- The recorded additive identification of integral H⁰ RHom with derived morphisms.
-Source: Stacks 08JA (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 08JA. -/
 noncomputable def coefficientIntegralHomEquiv
     (P Q : DerivedCategory (scalarReductionSource l E W)) :
     ((DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t+1)} 0).obj
@@ -1458,7 +1434,7 @@ noncomputable def coefficientIntegralHomEquiv
     (completedIntegralCommRingSheafUnrestricted l E W)) P Q
 
 /-- The recorded additive identification of finite H⁰ RHom with derived morphisms.
-Source: Stacks 08JA (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 08JA. -/
 noncomputable def coefficientFiniteHomEquiv (n : ℕ)
     (P Q : normalizedDVRDerived l E W n) :
     ((DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t+1)} 0).obj
@@ -1467,7 +1443,7 @@ noncomputable def coefficientFiniteHomEquiv (n : ℕ)
     (integralCoefficientCommRingSheaf l E W n)) P Q
 
 /-- The actual H⁰ map of gamma itself, before taking any mapping-limit projection.
-Source: Stacks 07A6, 08JA, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6, 08JA, 0941. -/
 noncomputable def coefficientGammaZero
     (S : CoefficientDerivedSystemCalculus l E W)
     (P : DerivedCategory (scalarReductionSource l E W))
@@ -1485,7 +1461,7 @@ noncomputable def coefficientGammaZero
 /-- The actual H⁰ map of gamma followed by its nth mapping-limit projection and
 finite global-Hom identification. This is the map used in the degree-zero formula,
 so the formula cannot be satisfied by an unrelated additive equivalence.
-Source: Stacks 07A6, 08JA, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6, 08JA, 0941. -/
 noncomputable def coefficientGammaZeroMap
     (S : CoefficientDerivedSystemCalculus l E W)
     (P : DerivedCategory (scalarReductionSource l E W))
@@ -1508,8 +1484,7 @@ noncomputable def coefficientGammaZeroMap
 /-- The actual degree-zero map of gamma, followed by its actual nth projection,
 under the recorded H⁰ RHom identifications, sends h to reduction of h followed
 by the evaluated counit. Normalization of N is precisely gamma's domain condition.
-Source: Stacks 07A6, 08JA, 0941 and node proof step 14
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6, 08JA, 0941 and node proof step 14. -/
 def CoefficientHomProjection (S : CoefficientDerivedSystemCalculus l E W) : Prop :=
   ∀ (P : DerivedCategory (scalarReductionSource l E W))
     (N : coefficientSequenceDerived l E W) (hN : IsNormalizedCoefficientSequence l E W N)
@@ -1523,8 +1498,7 @@ def CoefficientHomProjection (S : CoefficientDerivedSystemCalculus l E W) : Prop
         (coefficientSequenceDerivedEvaluation l E W n).map (S.adjunction.counit.app N)
 
 /-- The composition equation of the coefficient calculus.
-Source: Stacks 07A6, 0941 and node proof steps 14--15
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6, 0941 and node proof steps 14--15. -/
 def CoefficientMappingComposition (S : CoefficientDerivedSystemCalculus l E W) : Prop :=
   ∀ (T U P : DerivedCategory (scalarReductionSource l E W))
     (N N' : coefficientSequenceDerived l E W)
@@ -1542,8 +1516,7 @@ attribute [local irreducible] CoefficientFiniteEnrichedIsIso CoefficientGammaPro
   CoefficientGammaNaturality CoefficientHomProjection CoefficientMappingComposition
 
 /-- The specified finite projections, naturality and composition of gamma.
-Source: Stacks 07A6, 0941 and node proof steps 14--15
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6, 0941 and node proof steps 14--15. -/
 structure CoefficientDerivedSystemCoherence (S : CoefficientDerivedSystemCalculus l E W)
     extends CoefficientDerivedSystemResolutionCoherence l E W S where
   /-- finite enriched isIso. -/
@@ -1562,8 +1535,7 @@ structure CoefficientDerivedSystemCoherence (S : CoefficientDerivedSystemCalculu
 The first is a sections/limit statement for an arbitrary system, before internal Hom.
 The second is the finite scalar adjunction's action on H-zero, before any system limit.
 Neither equation is a gamma projection assertion.
-Source: Stacks 07A6, 08JA, 0941, 0D6E and the normalized derived comparison units
-(blueprint: def-coef-derived-system-projection-models). -/
+Source: Stacks 07A6, 08JA, 0941, 0D6E and the normalized derived comparison units. -/
 structure CoefficientDerivedSystemProjectionModels
     (S : CoefficientDerivedSystemCalculus l E W)
     (D : CoefficientDerivedSystemResolutionCoherence l E W S) : Prop where
@@ -1646,16 +1618,14 @@ private theorem coefficientClosedEnriched_eq (P : A) (N : B) :
 
 /-- The actual enriched adjunct is invertible for every tensor-preserving left adjoint.
 Source: Stacks 07A6, 08J9; the five Hom bijections of
-`CategoryTheory.ClosedScalarHom.iso`
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+`CategoryTheory.ClosedScalarHom.iso`. -/
 theorem coefficientClosedEnriched_isIso (P : A) (N : B) :
     IsIso (coefficientEnrichedAdjunctionMap SA SB F adj μ P N) := by
   rw [coefficientClosedEnriched_eq]
   infer_instance
 
 /-- Naturality of the evaluation-defined enriched adjunct in both derived inputs.
-Source: Stacks 07A6, 08J9; naturality of the same five Hom bijections
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+Source: Stacks 07A6, 08J9; naturality of the same five Hom bijections. -/
 theorem coefficientClosedEnriched_naturality (P P' : A) (N N' : B) (a : P' ⟶ P) (b : N ⟶ N') :
     HA.map (Prod.mkHom a.op (G.map b)) ≫
         coefficientEnrichedAdjunctionMap SA SB F adj μ P' N' =

@@ -284,7 +284,7 @@ private theorem quotientTowerComparison_unique
 
 /-- The augmented extension tower, before derived localization.
 Source: Stacks 0E8I, 099N, 09BP; blueprint proposition-composition-base-change-rf-shriek--1, open
-factor. (blueprint: lem-sf-open-factor-quotient-realization).
+factor.
 
 Proof: identify the completed slice coefficients by the constant-section and quotient
 projection equations of o. The scalar compatibility q.scalar and q.strictScalar

@@ -14,7 +14,6 @@ import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryT
 /-! # Normalized open tensor transport over abstract coefficient sheaves
 
 Source: Stacks 03DI, 03EK and 0E8I.
-(blueprint: lem-sf-open-ringed-coefficient-tensor-transport).
 -/
 
 @[expose] public noncomputable section
@@ -189,8 +188,7 @@ end
 
 -- The composed two-variable isomorphism and its section equation have large dependent types.
 /-- Transport of the normalized slice tensor formula through a coefficient equivalence.
-Source: Stacks 03DI, 03EK and 0E8I
-(blueprint: lem-sf-open-ringed-coefficient-tensor-transport).
+Source: Stacks 03DI, 03EK and 0E8I.
 
 Proof: the coefficient tensorator is induced by the identity on presheaf pure
 sections and sheafification. Insert the inverse module-equivalence counit in the

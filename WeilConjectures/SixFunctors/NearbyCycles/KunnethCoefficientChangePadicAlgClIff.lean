@@ -19,7 +19,6 @@ if the Künneth map `Π_{A,B}` with `ℚ̄_ℓ`-coefficients at `A = ℚ̄_ℓ �
 `B = ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} B₀` is (`NearbyCyclesModel.isIso_map_map_kunnethMap_iff_padicAlgCl`); in
 particular `Π_{A,B}` is invertible as soon as `Π_{A₀,B₀}` is. The same holds after restriction
 along any `h : W ⟶ Z'` (`NearbyCyclesModel.isIso_map_map_map_kunnethMap_iff_padicAlgCl`).
-
 -/
 
 @[expose] public section

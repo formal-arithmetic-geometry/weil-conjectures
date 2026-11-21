@@ -64,8 +64,7 @@ private theorem ordinaryScalarEvaluationComparison_components
           ((AU.evaluation n).hom.app M)) using 1 <;> rfl
 
 /-- The ordinary slice projection and scalar comparisons, retaining strict quotient maps.
-Source: Stacks 0E8I, 03DI, 03DJ, 03EK and 0941
-(blueprint: lem-sf-open-semilinear-ordinary-comparison).
+Source: Stacks 0E8I, 03DI, 03DJ, 03EK and 0941.
 
 Proof: use the normalized coefficient transport for the supplied localization.
 Retain the ordinary reductions and all quotient equations from the existing sequence

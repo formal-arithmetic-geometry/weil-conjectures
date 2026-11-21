@@ -22,8 +22,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 The finite-origin constructions and refinement normalization are retained verbatim
 from coefficient exchange, with the same public names and formulas.
-Source: blueprint def:weil-compact-support-object and prop-compactification-coherence
-(blueprint: def-weil-frobenius-witnessed-compactification).
 -/
 
 @[expose] public noncomputable section
@@ -223,21 +221,20 @@ section FiniteGeometry
 variable (A : Type u) [CommRing A] [Finite A]
 
 /-- The published comparison inverse image followed by its canonical realization.
-Source: Stacks 099R; blueprint compact-support etale-origin paragraph
-(blueprint: def-weil-frobenius-witnessed-compactification). -/
+Source: Stacks 099R; blueprint compact-support etale-origin paragraph. -/
 def originUnderlying (X : Scheme.{u}) :=
   ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X ⋙
     (sfIntrinsicModuleEquivalence X A).functor
 
 /-- Additivity of the specified comparison and realization composite.
-Source: Stacks 099R (blueprint: def-weil-frobenius-witnessed-compactification). -/
+Source: Stacks 099R. -/
 instance originUnderlyingAdditive (X : Scheme.{u}) : (originUnderlying A X).Additive :=
   inferInstanceAs ((ProEtale.comparisonUpperStar
     (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X ⋙
       (sfIntrinsicModuleEquivalence X A).functor).Additive)
 
 /-- Exact comparison preserves finite limits.
-Source: Stacks 099R (blueprint: def-weil-frobenius-witnessed-compactification). -/
+Source: Stacks 099R. -/
 instance originUnderlyingLimits (X : Scheme.{u}) :
     PreservesFiniteLimits (originUnderlying A X) :=
   inferInstanceAs (PreservesFiniteLimits (ProEtale.comparisonUpperStar
@@ -245,7 +242,7 @@ instance originUnderlyingLimits (X : Scheme.{u}) :
       (sfIntrinsicModuleEquivalence X A).functor))
 
 /-- Exact comparison preserves finite colimits.
-Source: Stacks 099R (blueprint: def-weil-frobenius-witnessed-compactification). -/
+Source: Stacks 099R. -/
 instance originUnderlyingColimits (X : Scheme.{u}) :
     PreservesFiniteColimits (originUnderlying A X) :=
   inferInstanceAs (PreservesFiniteColimits (ProEtale.comparisonUpperStar
@@ -253,12 +250,12 @@ instance originUnderlyingColimits (X : Scheme.{u}) :
       (sfIntrinsicModuleEquivalence X A).functor))
 
 /-- The inverse image from the etale site, in the actual intrinsic derived category.
-Source: Stacks 099R (blueprint: def-weil-frobenius-witnessed-compactification). -/
+Source: Stacks 099R. -/
 def origin (X : Scheme.{u}) := (originUnderlying A X).mapDerivedCategory
 
 /-- An actual retained etale-origin triple, in the intrinsic constant-ring category.
 Its morphisms below will be all ambient morphisms between its underlying objects.
-Source: blueprint order 1472 (blueprint: def-weil-frobenius-witnessed-compactification). -/
+ -/
 structure CompactOrigin (X : Scheme.{u}) where
   /-- The original pro-etale object. -/
   K : proEtaleDerivedCategory X A
@@ -269,18 +266,18 @@ structure CompactOrigin (X : Scheme.{u}) where
   alpha : (origin A X).obj L.obj ≅ K
 
 /-- The induced category retains every ambient map, without requiring a map of witnesses.
-Source: blueprint order 1472 (blueprint: def-weil-frobenius-witnessed-compactification). -/
+ -/
 abbrev CompactOriginCategory (X : Scheme.{u}) :=
   InducedCategory (proEtaleDerivedCategory X A) (fun O : CompactOrigin A X ↦ O.K)
 
 /-- Forget only the retained witness, and preserve its actual underlying object and map.
-Source: blueprint order 1472 (blueprint: def-weil-frobenius-witnessed-compactification). -/
+ -/
 def compactOriginForget (X : Scheme.{u}) :
     CompactOriginCategory A X ⥤ proEtaleDerivedCategory X A :=
   inducedFunctor (fun O : CompactOrigin A X ↦ O.K)
 
 /-- Cancel the realization unit in ordinary open extension, before exact descent.
-Source: Stacks 00YV, 03DI (blueprint: def-weil-frobenius-witnessed-compactification). -/
+Source: Stacks 00YV, 03DI. -/
 def fixedOpenModel {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
     (sfIntrinsicModuleEquivalence X A).functor ⋙ sfIntrinsicExtensionByZero j A ≅
       ProEtale.openImmersionLowerShriek
@@ -291,7 +288,7 @@ def fixedOpenModel {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
       Functor.leftUnitor _
 
 /-- The exact-derived open model is fixed by the same ordinary realization unit.
-Source: Stacks 00YV, 03DI (blueprint: def-weil-frobenius-witnessed-compactification). -/
+Source: Stacks 00YV, 03DI. -/
 def fixedDerivedOpenModel {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
     (sfIntrinsicDerivedEquivalence X A).functor ⋙ sfIntrinsicDerivedOpen A j ≅
       (ProEtale.openImmersionLowerShriek
@@ -302,7 +299,7 @@ def fixedDerivedOpenModel {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The fixed-scalar candidate, using precisely exact open extension then proper image.
-Source: blueprint order 1485 (blueprint: def-weil-frobenius-witnessed-compactification). -/
+ -/
 def fixedCompact {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=
   (ProEtale.openImmersionLowerShriek
     (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i).mapDerivedCategory ⋙
@@ -310,7 +307,7 @@ def fixedCompact {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=
 
 /-- The explicit coordinate change is open-unit cancellation followed by the recorded
 section-normalized direct-image comparison. It contains no freely chosen isomorphism.
-Source: blueprint order 1485 (blueprint: def-weil-frobenius-witnessed-compactification). -/
+ -/
 def fixedCompactModel {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (sfIntrinsicDerivedEquivalence X A).functor ⋙ sfIntrinsicCompactSupport c A ≅
       fixedCompact A c ⋙ (sfIntrinsicDerivedEquivalence Y A).functor :=
@@ -322,7 +319,7 @@ def fixedCompactModel {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) 
 
 /-- The fixed antecedent comparison retains the given alpha and the exact-derived
 composition map, with the canonical realization unit.
-Source: blueprint order 1485 (blueprint: def-weil-frobenius-witnessed-compactification). -/
+ -/
 def fixedOriginWitness (X : Scheme.{u}) (O : CompactOrigin A X) :
     (ProEtale.comparisonUpperStar
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj O.L.obj ≅
@@ -335,8 +332,7 @@ def fixedOriginWitness (X : Scheme.{u}) (O : CompactOrigin A X) :
         (sfIntrinsicModuleEquivalence X A).functor).app O.L.obj) ≪≫ O.alpha)
 
 /-- The proper-open comparison conjugated by this very retained witness.
-Source: blueprint order 1485 part (a); proposition-construction-independence-rf-shriek--7
-(blueprint: def-weil-frobenius-witnessed-compactification). -/
+ -/
 def fixedRefinementOpen {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c ⟶ d) (O : CompactOrigin A X) :
     (ProEtale.openImmersionLowerShriek
@@ -358,8 +354,7 @@ def fixedRefinementOpen {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- The actual refinement isomorphism: proper compositor followed by proper
 pushforward of the inverse proper-open map, transported to intrinsic coordinates.
-Source: blueprint order 1485 part (b)
-(blueprint: def-weil-frobenius-witnessed-compactification). -/
+ -/
 def intrinsicRefinement {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c ⟶ d) (O : CompactOrigin A X) :
     (sfIntrinsicCompactSupport c A).obj O.K ≅ (sfIntrinsicCompactSupport d A).obj O.K :=
@@ -381,7 +376,7 @@ def intrinsicRefinement {X Y : Scheme.{u}} {f : X ⟶ Y}
     (sfIntrinsicCompactSupport d A).mapIso (e.counitIso.app O.K)
 
 /-- The candidate restricted to witnessed objects, with all ambient morphisms.
-Source: blueprint order 1485 (blueprint: def-weil-frobenius-witnessed-compactification). -/
+ -/
 def intrinsicOriginCandidate {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=
   compactOriginForget A X ⋙ sfIntrinsicCompactSupport c A
 
@@ -604,18 +599,7 @@ variable (K₀ : Type u) [Field K₀]
 include hl xo yo xft xqc yft yqc fo fs fft fqc
 /-- The canonical refinement maps are natural, unital and transitive; finite
 families have common refinements and comparisons are independent of all choices.
-Source: blueprint prop-compactification-coherence, proof paragraphs 1--4
-(blueprint: def-weil-frobenius-witnessed-compactification).
-Proof: proper-open comparison is natural for maps of etale antecedents. Full
-faithfulness of etale comparison transports this naturality to every ambient
-map between witnessed objects and proves witness independence. Its identity
-and composition laws, together with the proper compositor, give the refinement
-laws. Over a field the compactification category is cofiltered. Take a common
-refinement and form theta(d,c1) inverse followed by theta(d,c2). To compare
-two choices, refine both and equalize their arrows; transitivity cancels the
-extra factors. A common refinement for three compactifications proves the
-cocycle. Nonemptiness handles the empty finite family. Transport through the
-explicit fixedCompactModel preserves every equality. -/
+ -/
 theorem intrinsicCompactificationCoherence :
     let A := Padic.coefficientExtensionRing l E n
     letI := Padic.finite_coefficientExtensionRing l E n hn
@@ -661,14 +645,12 @@ section Geometry
 variable (D : FiniteFieldDatum.{u})
 
 /-- The base change of the given model morphism, with the dependency's chosen fibers.
-Source: blueprint `def:weil-direct-image-object`
-(blueprint: def-weil-frobenius-witnessed-compactification). -/
+ -/
 abbrev fiberMap {X₀ Y₀ : Over (Spec (.of D.k₀))} (f₀ : X₀ ⟶ Y₀) :=
   zlFiberMap D f₀
 
 /-- The coefficient action of geometric field Frobenius, including non-finite-type models.
-Source: Deligne, Weil II (1.1.14)
-(blueprint: def-weil-frobenius-witnessed-compactification). -/
+Source: Deligne, Weil II (1.1.14). -/
 abbrev galois (X₀ : Over (Spec (.of D.k₀))) :=
   D.galoisMap X₀.hom (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
     (Fintype.ofFinite D.k₀) _ _ _)

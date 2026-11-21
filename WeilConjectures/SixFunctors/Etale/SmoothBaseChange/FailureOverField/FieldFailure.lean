@@ -49,14 +49,14 @@ fibre square is not an isomorphism. The two squares are stacked:
 
 ```
 Y' -----e-----> Spec K
-|                 |
-h                 g
-v                 v
+| |
+h g
+v v
 X' -----p'-----> S'
-|                 |
-b                 a
-v                 v
-X ------p------>  S
+| |
+b a
+v v
+X ------p------> S
 ```
 
 When `S` is separated the base change `a : S' ⟶ S` is affine, see

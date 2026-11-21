@@ -59,9 +59,9 @@ proper, `i : Y ⟶ W` an open immersion and `e = (X ⟶[e.i] e.Z ⟶[e.g] W)` a 
 `p ≫ i` in which `X` is dense. Then `e.g⁻¹(Y) = X` and `e.g` restricts to `p` over `Y`: the square
 ```
   X --e.i--> e.Z
-  |           |
-  p          e.g
-  ↓           ↓
+  | |
+  p e.g
+  ↓ ↓
   Y ---i----> W
 ```
 is cartesian. The induced open immersion `X ⟶ e.Z ×_W Y` is proper over `Y`, hence has closed

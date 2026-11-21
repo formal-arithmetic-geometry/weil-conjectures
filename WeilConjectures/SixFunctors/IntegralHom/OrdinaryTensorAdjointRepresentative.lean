@@ -79,8 +79,7 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 /-! # Signed representatives of the normalized left-adjoint comparison
 
 Source: Stacks 07A4 and 08J9; the tensor-Hom normalization in the coefficient
-Verdier argument
-(blueprint: lem-sf-ordinary-tensor-adjoint-representative).
+Verdier argument.
 -/
 
 @[expose] public noncomputable section
@@ -290,8 +289,7 @@ complex into a K-injective complex is K-injective. The signed evaluation of the
 left presentation and the unsigned evaluation of the right presentation then
 agree after the Koszul exchange, on every homogeneous pure tensor. Pure tensors
 generate the total tensor, so the chain maps agree. Uniqueness of the left-adjoint
-comparison preserves uncurrying. Cancel the resolution isomorphism.
-(blueprint: lem-sf-ordinary-tensor-adjoint-representative). -/
+comparison preserves uncurrying. Cancel the resolution isomorphism. -/
 theorem tensorAdjointComparison_representative
     (a : TensorPresentation.{t, u} Y R)
     (S : CoefficientClosedStructure

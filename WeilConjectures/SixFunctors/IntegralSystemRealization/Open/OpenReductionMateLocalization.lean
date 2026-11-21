@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.OpenExtensionG
 /-! # Localization formula for the fixed open reduction mate
 
 Source: Stacks Tags 03DI, 06YS, 06YY, 0GL1 and 0941; fix-prop-coherence.
-(blueprint: lem-sf-open-reduction-mate-localization).
 -/
 
 @[expose] public noncomputable section
@@ -161,8 +160,7 @@ private theorem openReduction_localization_of_good (system : Operations l E)
   rfl
 
 /-- Localizing the ordinary open mate gives the specified derived mate.
-Source: Stacks 03DI, 06YS, 06YY and 0GL1; fix-prop-coherence, open-factor sentence
-(blueprint: lem-sf-open-reduction-mate-localization).
+Source: Stacks 03DI, 06YS, 06YY and 0GL1; fix-prop-coherence, open-factor sentence.
 
 Proof: open extension is exact and preserves flat modules: tensor with an
 extended module is the extension of tensor after restriction, and both open

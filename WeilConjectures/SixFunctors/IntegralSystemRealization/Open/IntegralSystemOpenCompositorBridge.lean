@@ -77,7 +77,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The section-normalized bridge respects one binary open compositor.
 Source: Stacks 03D8, 07A7 and 0F7D; Zheng Lemma 4.10.
-(blueprint: lem-sf-integral-system-open-compositor-bridge).
 Proof: compare the ordinary direct-image compositor with the intrinsic one on
 sections at every pair (n,V). Both restrict the input section along the same
 canonical pullback-composition isomorphism; the bridge acts identically on these

@@ -19,15 +19,14 @@ import Mathlib.Condensed.Discrete.Characterization
 # Cohomological dimension of étale sheaves of `Λ`-modules
 
 The (torsion étale) cohomological dimension of a scheme and of a morphism, for sheaves of
-`Λ`-modules (blueprint `definition-cohomological-dimension`), and its finiteness for schemes and
-morphisms of finite type over a field (blueprint `theorem-results-from-etale-theory--6`, Stacks
-0F10).
+`Λ`-modules, and its finiteness for schemes and
+morphisms of finite type over a field.
 
 ## Main definitions and statements
 
 - `AlgebraicGeometry.Etale.HasFiniteCohomologicalDimension`,
   `AlgebraicGeometry.Etale.HasFiniteCohomologicalDimensionMorphism`
-  (`definition-cohomological-dimension`).
+.
 - `AlgebraicGeometry.Etale.hasFiniteCohomologicalDimensionMorphism` and
   `AlgebraicGeometry.Etale.hasFiniteCohomologicalDimension_of_isSepClosed`
   (`theorem-results-from-etale-theory--6`).

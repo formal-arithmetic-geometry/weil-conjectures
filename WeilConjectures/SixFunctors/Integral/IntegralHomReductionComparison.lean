@@ -84,7 +84,7 @@ import WeilConjectures.SixFunctors.Coefficient.Tensor.CoefficientTensorCurryNorm
 
 Source: Weil blueprint, `sec-six-functors/sk-prop-sf-biduality-general`,
 `proposition-six-operations-change-coefficients--7`, order 2134; Stacks Project, Tags 08J7, 06YY and
-0A90 (blueprint: def-sf-integral-hom-reduction-comparison).
+0A90.
 
 Tensor models below are normalized on K-flat representatives. Their Hom adjunctions
 are normalized by the actual Hom-complex evaluation. Thus the mate is the canonical
@@ -116,7 +116,7 @@ namespace WeilConjectures
 open SheafOfModules
 
 /-- Locally bijective maps describe this same sheafification.
-Source: Stacks 03DA (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 03DA. -/
 noncomputable instance (priority := 2000) homReductionLocallyBijective
     (X : AlgebraicGeometry.Scheme.{u}) :
     (AlgebraicGeometry.Scheme.ProEt.topology X).WEqualsLocallyBijective
@@ -124,33 +124,33 @@ noncomputable instance (priority := 2000) homReductionLocallyBijective
   integralCoefficientAbLocallyBijective.{u, u} X
 
 /-- The site is essentially small at this coefficient size.
-Source: Stacks 098K (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 098K. -/
 noncomputable instance (priority := 2000) homReductionSmall
     (X : AlgebraicGeometry.Scheme.{u}) :
     EssentiallySmall.{u + 1} (AlgebraicGeometry.Scheme.ProEt X) :=
   essentiallySmallSelf.{0, u, u + 1} _
 
 /-- Module sheaves for a commutative coefficient sheaf on the small pro-etale site.
-Source: Stacks 03DA (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 03DA. -/
 noncomputable abbrev homReductionModules {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1}) :=
   SheafOfModules.{u + 1} ((sheafCompose _
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
 
 /-- The standard localization of these module complexes.
-Source: Stacks 05RU (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 05RU. -/
 noncomputable instance homReductionDerived {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1}) :
     HasDerivedCategory (homReductionModules R) := HasDerivedCategory.standard _
 
 /-- The recorded K-injective internal Hom, with the actual two site universes.
-Source: Stacks 08J7 (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 08J7. -/
 noncomputable abbrev homReductionHom {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1}) :=
   derivedInternalHomOfUniverses.{u + 1, u, u, u + 2} (AlgebraicGeometry.Scheme.ProEt.topology X) R
 
 /-- The signed direct-sum total tensor on complexes; the tensor is the existing sheaf tensor.
-Source: Stacks 0A90 (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 0A90. -/
 noncomputable def homReductionTotal {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (P Q : CochainComplex (homReductionModules R) ℤ) :
@@ -163,7 +163,7 @@ noncomputable def homReductionTotal {X : AlgebraicGeometry.Scheme.{u}}
 
 /-- The canonical map from the Hom complex to its derived internal Hom.
 It is the Hom of the K-injective augmentation followed by the localization factorization.
-Source: Stacks 08J7 (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 08J7. -/
 noncomputable def homReductionHomUnit {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (P I : CochainComplex (homReductionModules R) ℤ) :
@@ -192,7 +192,7 @@ noncomputable def homReductionHomUnit {X : AlgebraicGeometry.Scheme.{u}}
             _ M⟩)) Qpair).inv.app (op P, I)
 
 /-- Inclusion of a pure tensor into the signed total tensor complex.
-Source: Stacks 0A90 (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 0A90. -/
 noncomputable def homReductionTensorElement {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (P Q : CochainComplex (homReductionModules R) ℤ) (a b : ℤ)
@@ -209,7 +209,7 @@ noncomputable def homReductionTensorElement {X : AlgebraicGeometry.Scheme.{u}}
         ((P.X a).val ⊗ (Q.X b).val).presheaf).app U (x ⊗ₜ[R.obj.obj U] y)))
 
 /-- The recorded projection family, selected before specializing the site.
-Source: Stacks 0A8X (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 0A8X. -/
 noncomputable def homReductionHomProjection
     {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
@@ -217,7 +217,7 @@ noncomputable def homReductionHomProjection
   (CategoryTheory.homComplex_projections_exists.{c, v, w, r} (R := R)).choose
 
 /-- The product projection of the recorded Hom complex.
-Source: Stacks 0A8X (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 0A8X. -/
 noncomputable def homReductionProjection {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (P I : CochainComplex (homReductionModules R) ℤ) (a b c : ℤ) (h : b + a = c) :
@@ -225,7 +225,7 @@ noncomputable def homReductionProjection {X : AlgebraicGeometry.Scheme.{u}}
   homReductionHomProjection R P I a b c h
 
 /-- Currying means the literal evaluation equation on every localized section and summand.
-Source: Stacks 0A90 (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 0A90. -/
 def IsHomReductionCurry {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (P Q I : CochainComplex (homReductionModules R) ℤ)
@@ -239,8 +239,7 @@ def IsHomReductionCurry {X : AlgebraicGeometry.Scheme.{u}}
 /-- A model of derived tensor and its *normalized* adjunction to the recorded internal Hom.
 The representative comparisons and the sectionwise currying equation determine all data
 up to the unique compatible isomorphism; no arbitrary tensor or adjunction is admitted.
-Source: Stacks 06YS, 0A90 and 08J7
-(blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 06YS, 0A90 and 08J7. -/
 structure HomReductionTensorModel {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1}) where
   tensor : DerivedCategory (homReductionModules R) ×
@@ -376,19 +375,19 @@ variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (X : AlgebraicGeometry.Scheme.{u}) (n : ℕ)
 
 /-- Additivity at the fixed common coefficient size.
-Source: Stacks 06YY (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 06YY. -/
 noncomputable instance (priority := 2000) homReductionExtensionAdditive :
     (integralReductionChangeOfRings l E X D hl n).Additive :=
   integralReductionChangeOfRingsAdditive.{d, u, u} l E X D hl n
 
 /-- The same scalar extension preserves zero morphisms.
-Source: Stacks 06YY (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 06YY. -/
 noncomputable instance (priority := 2000) homReductionExtensionZero :
     (integralReductionChangeOfRings l E X D hl n).PreservesZeroMorphisms :=
   inferInstance
 
 /-- The left-derived counit transported from homotopy complexes to the complex localization.
-Source: Stacks 06YY (blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 06YY. -/
 noncomputable def homReductionComplexComparison
     (P : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ) :
     (integralDerivedReduction l E X D hl n).obj (DerivedCategory.Q.obj P) ⟶
@@ -408,8 +407,7 @@ noncomputable def homReductionComplexComparison
 The unit is `m ↦ 1 ⊗ m`. The total comparison is specified on these generating sections.
 Its derived comparison is specified on all pairs of K-flat representatives by the counit
 square. The source and target currying are specified by literal Hom-complex evaluation.
-Source: Stacks 03EK, 06YY, 0A90, 08J7; blueprint order 2134
-(blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: Stacks 03EK, 06YY, 0A90, 08J7; blueprint order 2134. -/
 structure IntegralHomReductionTensorData where
   source : HomReductionTensorModel (completedIntegralCommRingSheaf l E X D hl)
   target : HomReductionTensorModel (integralCoefficientCommRingSheaf l E X n)
@@ -491,8 +489,7 @@ This does not assert invertibility of the Hom comparison. The tensor, its repres
 comparisons, currying, scalar unit, total comparison and derived tensor comparison are
 fixed up to their unique compatible isomorphisms by the displayed universal properties
 and normalization equations, so selecting this witness does not select an arbitrary map.
-Source: Stacks 06YS, 06YY, 0A90, 08J7; blueprint order 2134
-(blueprint: def-sf-integral-hom-reduction-comparison).
+Source: Stacks 06YS, 06YY, 0A90, 08J7; blueprint order 2134.
 Proof:
 1. Resolve both tensor factors by K-flat complexes. Tensoring quasi-isomorphisms between
 K-flat complexes preserves quasi-isomorphisms, by applying K-flatness to their acyclic
@@ -553,8 +550,7 @@ theorem integralHomReductionTensorData_exists :
 /-- The canonical comparison is the transpose of reduced evaluation, using the inverse
 canonical tensor comparison. The defining model is fixed by its universal properties
 and its sectionwise and K-flat normalizations, not by an unconstrained isomorphism.
-Source: blueprint order 2134; Stacks 08J7 and 06YY
-(blueprint: def-sf-integral-hom-reduction-comparison). -/
+Source: blueprint order 2134; Stacks 08J7 and 06YY. -/
 noncomputable def integralHomReductionComparison
     (K L : completedIntegralDerivedCategory l E X D hl) :
     (integralDerivedReduction l E X D hl n).obj

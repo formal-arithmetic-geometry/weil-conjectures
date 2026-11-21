@@ -95,8 +95,7 @@ The completed-to-native scalar-mate square then moves the ordinary finite scalar
 map past the native scalar component. The final boundary square moves it past
 the last boundary. Transport the E component and final boundary along the given
 underlying-object equality, using endpoint-recorded equality, and compose the three
-squares by associativity. This statement has no alpha family or rational component morphisms.
-(blueprint: lem-sf-native-integral-boundary-transition-pasting). -/
+squares by associativity. This statement has no alpha family or rational component morphisms. -/
 theorem integralBoundaryTransitionPasting [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c)

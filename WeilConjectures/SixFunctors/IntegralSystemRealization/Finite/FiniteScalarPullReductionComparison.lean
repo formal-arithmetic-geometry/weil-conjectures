@@ -52,8 +52,7 @@ private theorem derived_iso_model
     Functor.mapDerivedCategoryNatIso_fac]
 
 /-- Normalize the target scalar presentation and geometric presentation on a good complex.
-Source: Stacks Tags 07A6, 06YY and 0D6E
-(blueprint: lem-sf-finite-scalar-pull-reduction-comparison).
+Source: Stacks Tags 07A6, 06YY and 0D6E.
 Proof: naturality of the derived finite geometric presentation carries the finite
 scalar computation map to its ordinary complex. Its localization factor identifies
 the resulting map with the degreewise geometric presentation. The scalar counit

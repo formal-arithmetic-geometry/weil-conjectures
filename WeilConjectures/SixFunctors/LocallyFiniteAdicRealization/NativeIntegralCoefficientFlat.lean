@@ -52,7 +52,6 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 /-! # Flatness of the normalized integral-to-native coefficient map
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-native-integral-coefficient-flat).
 -/
 
 @[expose] public noncomputable section
@@ -279,7 +278,6 @@ private theorem rational_exact (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 /-- Ordinary extension along the normalized integral coefficient map preserves finite limits.
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-native-integral-coefficient-flat).
 
 Proof in words: extension along C.integral.inv is an equivalence. The normalization
 of C.integralInclusion identifies its section maps with the continuous integral-to-field

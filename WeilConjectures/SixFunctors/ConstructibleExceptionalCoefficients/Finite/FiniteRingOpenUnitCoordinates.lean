@@ -57,8 +57,7 @@ private theorem fixed_open_exact_adjunction
   rfl
 
 /-- The finite open-extension comparison preserves the specified derived open unit.
-Source: compactification-coherence proof, first paragraph; Stacks 03DI and 015F
-(blueprint: lem-sf-finite-ring-open-unit-coordinates).
+Source: compactification-coherence proof, first paragraph; Stacks 03DI and 015F.
 
 Proof: finiteOpenIso is the left-adjoint uniqueness comparison for the ring open
 adjunction transported by finitePullbackIso. The ordinary open_unit_coordinates

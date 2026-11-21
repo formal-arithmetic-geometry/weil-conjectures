@@ -103,7 +103,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 Source: Weil blueprint, main-20261015, sec-six-functors/sk-thm-sf-package,
 lem-pod-point-dualizing-complex.proof.md, second sentence; Stacks Tags 0A8X,
-08J7, 0G7E and 08BJ (blueprint: def-pod-point-derived-hom-models).
+08J7, 0G7E and 08BJ.
 
 All tensors here are ordinary tensors. The site retains object universe t+1 and
 morphism universe t; the coefficient universe is max u (t+1).
@@ -127,19 +127,19 @@ namespace WeilConjectures.PointDerivedHom
 variable (k : Type t) [Field k]
 
 /-- Existing sheafification at the coefficient size, transported through a small model.
-Source: Stacks 03DA (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03DA. -/
 instance abSheafify : HasSheafify (Scheme.ProEt.topology (Spec (.of k)))
     AddCommGrpCat.{max u (t + 1)} :=
   integralCoefficientAbSheafify.{t, u} (Spec (.of k))
 
 /-- Existing local bijectivity criterion in the coefficient universe.
-Source: Stacks 03DA (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03DA. -/
 instance abLocallyBijective : (Scheme.ProEt.topology (Spec (.of k))).WEqualsLocallyBijective
     AddCommGrpCat.{max u (t + 1)} :=
   integralCoefficientAbLocallyBijective.{t, u} (Spec (.of k))
 
 /-- The same small-model transport for commutative ring sheafification.
-Source: Stacks 03CY (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CY. -/
 instance ringLocallyBijective : (Scheme.ProEt.topology (Spec (.of k))).WEqualsLocallyBijective
     CommRingCat.{max u (t + 1)} :=
   letI : EssentiallySmall.{max u (t + 1)} (Scheme.ProEt (Spec (.of k))) :=
@@ -147,29 +147,29 @@ instance ringLocallyBijective : (Scheme.ProEt.topology (Spec (.of k))).WEqualsLo
   GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall _
 
 /-- The actual final object of the small pro-etale site.
-Source: Stacks 098H (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 098H. -/
 abbrev finalObject := Scheme.ProEt.mk (𝟙 (Spec (.of k)))
 
 variable (R : CommRingCat.{max u (t + 1)})
 
 /-- The recorded constant ring sheaf, at the joint coefficient universe.
-Source: Stacks 03CY (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CY. -/
 abbrev constantRing := (constantSheaf (Scheme.ProEt.topology (Spec (.of k)))
   CommRingCat.{max u (t + 1)}).obj R
 
 /-- Forget commutativity of a coefficient sheaf without changing its sections.
-Source: Stacks 03D1 (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03D1. -/
 abbrev ring (B : Sheaf (Scheme.ProEt.topology (Spec (.of k)))
     CommRingCat.{max u (t + 1)}) :=
   (sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj B
 
 /-- The existing category of modules on the unchanged small site.
-Source: Stacks 03D1 (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03D1. -/
 abbrev Modules (B : Sheaf (Scheme.ProEt.topology (Spec (.of k)))
     CommRingCat.{max u (t + 1)}) := SheafOfModules.{max u (t + 1)} (ring.{t, u} k B)
 
 /-- Constant-ring sheafification's actual unit.
-Source: Stacks 03CY (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CY. -/
 def constantUnit : (Functor.const (Scheme.ProEt (Spec (.of k)))ᵒᵖ).obj
     ((forget₂ CommRingCat RingCat).obj R) ⟶ (ring.{t, u} k (constantRing.{t, u} k R)).obj :=
   Functor.whiskerRight (toSheafify (Scheme.ProEt.topology (Spec (.of k)))
@@ -177,7 +177,7 @@ def constantUnit : (Functor.const (Scheme.ProEt (Spec (.of k)))ᵒᵖ).obj
       (forget₂ CommRingCat RingCat)
 
 /-- The existing local injectivity of ring sheafification, with commutativity forgotten.
-Source: Stacks 03CY (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CY. -/
 instance constantUnit_injective : Presheaf.IsLocallyInjective
     (Scheme.ProEt.topology (Spec (.of k))) (constantUnit.{t, u} k R) :=
   letI := ringLocallyBijective.{t, u} k
@@ -188,7 +188,7 @@ instance constantUnit_injective : Presheaf.IsLocallyInjective
         (forget CommRingCat.{max u (t + 1)}))))
 
 /-- The existing local surjectivity of ring sheafification.
-Source: Stacks 03CY (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CY. -/
 instance constantUnit_surjective : Presheaf.IsLocallySurjective
     (Scheme.ProEt.topology (Spec (.of k))) (constantUnit.{t, u} k R) :=
   letI := ringLocallyBijective.{t, u} k
@@ -199,7 +199,7 @@ instance constantUnit_surjective : Presheaf.IsLocallySurjective
         (forget CommRingCat.{max u (t + 1)}))))
 
 /-- Pull back the existing one-object constant-module presheaf to this site.
-Source: Stacks 03CY (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CY. -/
 def constantPresheaf : ModuleCat.{max u (t + 1)} R ⥤
     PresheafOfModules.{max u (t + 1)}
       ((Functor.const (Scheme.ProEt (Spec (.of k)))ᵒᵖ).obj (RingCat.of R)) :=
@@ -209,7 +209,7 @@ def constantPresheaf : ModuleCat.{max u (t + 1)} R ⥤
       ((Functor.const (Discrete (ULift.{max u (t + 1)} Unit))ᵒᵖ).obj (RingCat.of R))
 
 /-- The genuine constant module sheaf, formed by associated-module sheafification.
-Source: Stacks 03CY (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CY. -/
 def constantModules : ModuleCat.{max u (t + 1)} R ⥤ Modules.{t, u} k (constantRing.{t, u} k R) :=
   letI := abSheafify.{t, u} k
   letI := abLocallyBijective.{t, u} k
@@ -218,7 +218,7 @@ def constantModules : ModuleCat.{max u (t + 1)} R ⥤ Modules.{t, u} k (constant
       (constantUnit.{t, u} k R)
 
 /-- Image of an actual module element under constant-module sheafification.
-Source: Stacks 03CY (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CY. -/
 def constantElement (M : ModuleCat.{max u (t + 1)} R)
     (U : (Scheme.ProEt (Spec (.of k)))ᵒᵖ) (x : M) :
     ((constantModules.{t, u} k R).obj M).val.obj U :=
@@ -231,20 +231,20 @@ variable {R} (B : Sheaf (Scheme.ProEt.topology (Spec (.of k)))
   CommRingCat.{max u (t + 1)}) (α : constantRing.{t, u} k R ⟶ B)
 
 /-- The canonical constant-value scalar map at each site object.
-Source: Stacks 03CY (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CY. -/
 def scalar (U : (Scheme.ProEt (Spec (.of k)))ᵒᵖ) : R →+* B.obj.obj U :=
   (α.hom.app U).hom.comp ((toSheafify (Scheme.ProEt.topology (Spec (.of k)))
     ((Functor.const (Scheme.ProEt (Spec (.of k)))ᵒᵖ).obj R)).app U).hom
 
 /-- Sections with scalars restricted along the canonical constant-value map.
-Source: Stacks 03CW (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CW. -/
 def sections : Modules.{t, u} k B ⥤ ModuleCat.{max u (t + 1)} R :=
   SheafOfModules.forget (ring.{t, u} k B) ⋙
     PresheafOfModules.evaluation (ring.{t, u} k B).obj (op (finalObject k)) ⋙
     ModuleCat.restrictScalars (scalar.{t, u} k B α (op (finalObject k)))
 
 /-- Evaluation and scalar restriction are the existing additive functors.
-Source: Stacks 03CW (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CW. -/
 instance sections_additive : (sections.{t, u} k B α).Additive :=
   inferInstanceAs ((SheafOfModules.forget (ring.{t, u} k B) ⋙
     PresheafOfModules.evaluation (ring.{t, u} k B).obj
@@ -252,7 +252,7 @@ instance sections_additive : (sections.{t, u} k B α).Additive :=
       (scalar.{t, u} k B α (op (finalObject k)))).Additive)
 
 /-- The actual local tensor generator of B tensor the constant module.
-Source: Stacks 03EK (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03EK. -/
 def extensionElement (M : ModuleCat.{max u (t + 1)} R)
     (U : (Scheme.ProEt (Spec (.of k)))ᵒᵖ) (b : B.obj.obj U) (x : M) :
     (SheafOfModules.changeOfRings.{t, t + 1, max u (t + 1)} α
@@ -265,20 +265,20 @@ def extensionElement (M : ModuleCat.{max u (t + 1)} R)
         constantElement.{t, u} k R M U x)
 
 /-- Termwise application of the specified additive extension or sections functor.
-Source: Stacks 0A8X (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 0A8X. -/
 abbrev sectionComplex := (sections.{t, u} k B α).mapHomologicalComplex (.up ℤ)
 
 /-- The recorded internal Hom complex, with all module and site universes explicit.
-Source: Stacks 0A8X (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 0A8X. -/
 abbrev sheafHom (P I : CochainComplex (Modules.{t, u} k B) ℤ) :=
   homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := B) P I
 
 /-- The recorded product projection evaluated on the identity slice.
-Source: Stacks 0A8X (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 0A8X. -/
 abbrev homValue := IntegralHom.evaluate.{t, u} (Spec (.of k)) B
 
 /-- The recorded ordinary direct-sum total tensor on the same small site.
-Source: Stacks 06YL (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 06YL. -/
 abbrev total (P Q : CochainComplex (Modules.{t, u} k B) ℤ) :=
   ((IntegralHom.totalTensor.{t, u} (Spec (.of k)) B).obj P).obj Q
 
@@ -286,19 +286,19 @@ section
 variable {A : Type r} [CommRing A]
 
 /-- The ordinary module total tensor, using the same totalization convention.
-Source: Stacks 06YL (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 06YL. -/
 abbrev moduleTotal (P Q : CochainComplex (ModuleCat.{r} A) ℤ) :=
   CochainComplex.mapBifunctor P Q (curriedTensor _)
 
 end
 
 /-- Restriction from the final object to an arbitrary object of the small site.
-Source: Stacks 03CW (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CW. -/
 def toFinal (U : Scheme.ProEt (Spec (.of k))) : U ⟶ finalObject k :=
   MorphismProperty.Over.homMk U.hom
 
 /-- The actual extension object, with the coefficient-size sheafification fixed.
-Source: Stacks 03EK (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03EK. -/
 def extensionObject (M : ModuleCat.{max u (t + 1)} R) : Modules.{t, u} k B :=
   letI := abSheafify.{t, u} k
   letI := abLocallyBijective.{t, u} k
@@ -306,7 +306,7 @@ def extensionObject (M : ModuleCat.{max u (t + 1)} R) : Modules.{t, u} k B :=
     ((constantModules.{t, u} k R).obj M)
 
 /-- Tensor scalar extension of the actual constant-module morphism.
-Source: Stacks 03EK (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03EK. -/
 def extensionMorphism {M N : ModuleCat.{max u (t + 1)} R} (f : M ⟶ N) :
     extensionObject.{t, u} k B α M ⟶ extensionObject.{t, u} k B α N :=
   letI := abSheafify.{t, u} k
@@ -320,7 +320,7 @@ variable (L : ModuleCat.{max u (t + 1)} R ⥤ Modules.{t, u} k B)
   (adj : L ⊣ sections.{t, u} k B α)
 
 /-- The specified extension applied termwise; additivity follows from the assumed adjunction.
-Source: Stacks 0A8X (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 0A8X. -/
 def extensionComplex : CochainComplex (ModuleCat.{max u (t + 1)} R) ℤ ⥤
     CochainComplex (Modules.{t, u} k B) ℤ :=
   letI := adj.left_adjoint_additive
@@ -328,14 +328,14 @@ def extensionComplex : CochainComplex (ModuleCat.{max u (t + 1)} R) ℤ ⥤
 
 /-- The local tensor generator in the strictly specified extension functor.
 The equality hobj identifies the actual tensor construction, not an arbitrary isomorphic object.
-Source: Stacks 03EK (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03EK. -/
 def generator (M : ModuleCat.{max u (t + 1)} R)
     (U : (Scheme.ProEt (Spec (.of k)))ᵒᵖ) (b : B.obj.obj U) (x : M) :
     (L.obj M).val.obj U :=
   (eqToHom (hobj M).symm).val.app U (extensionElement.{t, u} k B α M U b x)
 
 /-- The stated explicit adjunction, in both directions and on every local tensor generator.
-Source: Stacks 03CY and 03EK (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 03CY and 03EK. -/
 def ExplicitAdjunction : Prop :=
   (∀ (M : ModuleCat.{max u (t + 1)} R) (V : Modules.{t, u} k B) (h : L.obj M ⟶ V) (x : M),
     (adj.homEquiv M V h).hom x =
@@ -350,7 +350,7 @@ variable (c : CochainComplex (ModuleCat.{max u (t + 1)} R) ℤ)
   (I : CochainComplex (Modules.{t, u} k B) ℤ)
 
 /-- The normalization that uniquely specifies q on every homogeneous component.
-Source: Stacks 0A8X (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 0A8X. -/
 def IsComparison
     (q : (sectionComplex.{t, u} k B α).obj
       (sheafHom.{t, u} k B ((extensionComplex.{t, u} k B α L adj).obj c) I) ≅
@@ -363,7 +363,7 @@ def IsComparison
         (generator.{t, u} k B α L hobj (c.X p) (op (finalObject k)) 1 x)
 
 /-- Naturality of the normalized comparison under arbitrary maps of both complexes.
-Source: Stacks 0A8X (blueprint: def-pod-point-derived-hom-models). -/
+Source: Stacks 0A8X. -/
 def ComparisonNatural
     (q : (sectionComplex.{t, u} k B α).obj
       (sheafHom.{t, u} k B ((extensionComplex.{t, u} k B α L adj).obj c) I) ≅
@@ -397,21 +397,20 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- false denotes finite coefficients at exponent n, true denotes integral coefficients.
 The ULift changes only size, and imposes no relation between field and coefficient universes.
-Source: blueprint point comparison (blueprint: def-pod-point-derived-hom-models). -/
+ -/
 def coefficientRing (n : ℕ) : Bool → CommRingCat.{max u (t + 1)}
   | false => .of (ULift.{t + 1} (Padic.coefficientExtensionRing l E n))
   | true => .of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))
 
 /-- The two actual coefficient sheaves of the node: discrete constant or completed integral.
-Source: blueprint point comparison (blueprint: def-pod-point-derived-hom-models). -/
+ -/
 def coefficientSheaf (n : ℕ) : Bool →
     Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{max u (t + 1)}
   | false => constantRing.{t, u} k (coefficientRing.{t, u} l E n false)
   | true => completedIntegralCommRingSheafUnrestricted l E (Spec (.of k))
 
 /-- The constant-to-coefficient map: identity at finite level and the canonical limit lift
-at integral level. Source: blueprint point comparison, Stacks 03CO
-(blueprint: def-pod-point-derived-hom-models). -/
+at integral level. Source: blueprint point comparison, Stacks 03CO. -/
 def coefficientMap (n : ℕ) (integral : Bool) :
     constantRing.{t, u} k (coefficientRing.{t, u} l E n integral) ⟶
       coefficientSheaf.{t, u} k l E n integral :=

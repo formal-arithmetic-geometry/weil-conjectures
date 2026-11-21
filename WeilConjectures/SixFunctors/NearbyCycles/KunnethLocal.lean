@@ -30,7 +30,6 @@ Künneth map with pullbacks (`NearbyCyclesModel.map_kunnethMap_comp_pullbackExch
 `Π_{A,B}|_W` with `Π_{Lρ_M^* A, Lρ_N^* B}` up to isomorphisms; and a morphism of the derived
 category of a noetherian scheme is invertible if it is so on the members of an open cover
 (`ProEtale.CondensedRing.isIso_of_forall_exists_isIso_upperStar_map`).
-
 -/
 
 @[expose] public section

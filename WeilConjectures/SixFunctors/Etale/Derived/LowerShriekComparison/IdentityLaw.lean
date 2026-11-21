@@ -23,7 +23,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.De
 
 See `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison` for the implementation
 notes.
-
 -/
 
 @[expose] public section
@@ -125,7 +124,7 @@ lemma refinementLowerShriekBaseChangeDerivedPlusIso_inv_id
 
 /-- **The identity law for the comparison of derived lower shrieks**: the comparison
 `Rf_!(c)[A]+ ⟶ Rf_!(c)[A]+` attached to the identity refinement of a compactification `c`
-is the identity. (blueprint: `BA43-RHO`) -/
+is the identity. -/
 theorem rightDerivedLowerShriekOfCompactificationPlusComparison_id
     (hcart : IsPullback c.i (𝟙 X) (Compactification.Refinement.id c).hom c.i) :
     rightDerivedLowerShriekOfCompactificationPlusComparison A

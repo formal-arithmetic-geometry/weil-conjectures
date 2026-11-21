@@ -20,13 +20,13 @@ of `f : X ⟶ Y` gives the compactly supported direct image `F.shriek c = i_! �
 `F.refinementComparison r : F.shriek d ⟶ F.shriek c`, built from the exchange map of the square
 ```
 X --𝟙--> X
-|c.i     |d.i
+|c.i |d.i
 c.Z -r-> d.Z
 ```
 It satisfies the identity and composition laws, and it is an isomorphism when `F` satisfies
 proper base change. Comparing two compactifications through their common refinement gives
 `F.shriekIso c d : F.shriek c ≅ F.shriek d`, which does not depend on the common refinement and
-satisfies the cocycle condition (blueprint `proposition-construction-independence-rf-shriek`).
+satisfies the cocycle condition.
 -/
 
 @[expose] public section

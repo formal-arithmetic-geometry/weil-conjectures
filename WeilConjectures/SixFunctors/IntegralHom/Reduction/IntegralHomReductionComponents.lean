@@ -13,9 +13,7 @@ import WeilConjectures.SixFunctors.IntegralHom.IntegralHomParameterAdjunction
 /-! # Target and comparison components of an integral reduction presentation
 
 This isolates the target tensor presentation and its derived comparison from the
-normalization field of `ReductionPresentation`.
-(blueprint: lem-sf-integral-hom-reduction-target).
-(blueprint: lem-sf-integral-hom-models-exist-reduction-components).
+normalization field of `ReductionPresentation`..
 -/
 
 @[expose] public section

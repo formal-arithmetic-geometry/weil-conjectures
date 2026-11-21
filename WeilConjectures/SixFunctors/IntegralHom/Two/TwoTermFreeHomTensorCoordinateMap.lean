@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.IntegralHom.TotalTensorHomEvaluationExt
 
 /-! Finite-coordinate existence and uniqueness for the two-term Hom--tensor map.
 Source: Stacks Tags 0A8X and 08J7; blueprint lem-sf-two-term-free-hom-tensor-components.
-(blueprint: lem-sf-two-term-free-hom-tensor-coordinate-existence).
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -43,8 +42,7 @@ private theorem generator_transport
 
 /-- The actual signed evaluation formula for tensoring an internal Hom complex.
 The degree transport only reassociates integer addition.
-Source: Stacks Tags 0A8X and 08J7, homogeneous tensor--Hom evaluation.
-(blueprint: lem-sf-two-term-free-hom-tensor-coordinate-existence). -/
+Source: Stacks Tags 0A8X and 08J7, homogeneous tensor--Hom evaluation. -/
 def IsSignedHomTensor
     (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ)
     (f : ((totalTensor Y R).obj
@@ -68,8 +66,7 @@ def IsSignedHomTensor
 
 /-- The finite-free coordinate construction produces an isomorphism in each total degree.
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 0A8X and 08J7
-(blueprint: lem-sf-two-term-free-hom-tensor-coordinate-existence).
+Stacks Tags 0A8X and 08J7.
 
 Proof: in degree j, the support hypothesis leaves the two source summands
 Hom(P,I)^(j+1) tensor Q^(-1) and Hom(P,I)^j tensor Q^0. Use eNeg and eZero and the
@@ -152,8 +149,7 @@ theorem twoTermFreeHomTensor_coordinate_exists
   exact hf a b p U v z x
 
 /-- The product projections make the signed coordinate construction unique.
-Source: Stacks Tags 0A8X/08J7, uniqueness of the homogeneous tensor--Hom formula
-(blueprint: lem-sf-two-term-free-hom-tensor-coordinate-uniqueness).
+Source: Stacks Tags 0A8X/08J7, uniqueness of the homogeneous tensor--Hom formula.
 
 Proof: the total tensor coproduct inclusions and Hom product projections reduce
 maps to their internal Hom components on individual tensor summands. Precompose

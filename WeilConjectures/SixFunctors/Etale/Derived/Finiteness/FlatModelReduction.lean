@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 If `P` is a bounded flat model in degrees `[a, b]` of `K ∈ D(X_ét, Λ)`, its termwise reduction
 `P / I P` is a bounded flat model in degrees `[a, b]` of the reduction `K_m = K ⊗ᴸ (Λ ⧸ I)`,
-over `Λ ⧸ I` (`lem-sf-reduction-flat-model`).
+over `Λ ⧸ I`.
 
 ## Main statements
 
@@ -58,7 +58,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ] {X : Scheme.{u}
 
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small étale site take
 -- long to synthesize
-/-- Blueprint `lem-sf-reduction-flat-model`: Reduction of the flat model.
+/-- Reduction of the flat model.
 
 Let `Λ` be Noetherian (for instance `Λ = A_{E,n}`), `I` an ideal (for instance `ϖ^m`, so that
 `Λ ⧸ I = A_{E,m}`), `K ∈ D^b_c(X_ét, Λ)` and `P ≅ K` a bounded flat model of `K` in degrees

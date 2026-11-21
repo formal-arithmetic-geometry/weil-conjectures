@@ -41,8 +41,7 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor
 
 /-- Restricting the completed representative gives the strict finite restriction
 comparison of the same quotient towers.
-Source: Stacks 09BP and 0941; the open-factor blueprint argument
-(blueprint: lem-sf-open-projection-restriction-normalization).
+Source: Stacks 09BP and 0941; the open-factor blueprint argument.
 
 Proof: define delta by restricting z.gamma and composing with the inverse module
 unit termwise. Naturality of that unit gives a strict tower isomorphism and the

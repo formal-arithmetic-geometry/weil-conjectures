@@ -52,8 +52,7 @@ import WeilConjectures.SixFunctors.Supporting.IntrinsicQbarCategory
 The derived-category universe parameters below are inferred where possible.
 
 Source: Stacks Project, Tag 09C2; Bhatt--Scholze, Proposition 6.8.14(1),(2);
-blueprint lem-weil-field-tor-amplitude, proof, first two sentences
-(blueprint: lem-sf-field-stage-ordinary-realization).
+blueprint lem-weil-field-tor-amplitude, proof, first two sentences.
 
 The targets use discrete constant ring sheaves, not completed or continuous field sheaves.
 The closure and the scheme have independent universes; Shrink transports coefficients.
@@ -75,21 +74,18 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.OrdinaryFieldRealization
 
 /-- Discrete constant coefficients on the actual small pro-etale site.
-Source: blueprint first realization formula
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 abbrev constantRing (Y : Scheme.{u}) (A : Type u) [CommRing A] :=
   (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).obj
     (CommRingCat.of (ULift.{u + 1} A))
 
 /-- The ordinary ambient derived category, with no constructibility restriction.
-Source: blueprint first realization formula
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 abbrev Ambient (Y : Scheme.{u}) (A : Type u) [CommRing A] :=
   proEtaleDerivedCategory Y A
 
 /-- Constant sheafification of the actual lifted coefficient homomorphism.
-Source: blueprint ordinary scalar extension
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def coefficientMap (Y : Scheme.{u}) {A B : Type u} [CommRing A] [CommRing B]
     (f : A →+* B) : constantRing Y A ⟶ constantRing Y B :=
   (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map
@@ -98,8 +94,7 @@ def coefficientMap (Y : Scheme.{u}) {A B : Type u} [CommRing A] [CommRing B]
 
 /-- Ordinary derived tensor with the target constant coefficient ring, retaining its
 new scalar action. The universal K-flat derived-change-of-rings construction is reused.
-Source: Stacks Tag 06YY; blueprint scalar extension
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+Source: Stacks Tag 06YY; blueprint scalar extension. -/
 def extend (Y : Scheme.{u}) {A B : Type u} [CommRing A] [CommRing B]
     (f : A →+* B) : Ambient Y A ⥤ Ambient Y B :=
   reductionDerivedChange Y (coefficientMap Y f)
@@ -109,17 +104,13 @@ variable (l : ℕ) [Fact l.Prime]
   (Y : Scheme.{u})
 
 /-- Restriction along the recorded constant-quotient limit lift u_E.
-Source: blueprint realization formula, first proof step
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 abbrev integralRestriction : scalarReductionSource l E Y ⥤
     reductionModules Y (constantRing Y (Padic.coefficientExtensionIntegers l E)) :=
   SheafOfModules.restrictScalars (integralConstantToCompletionOfUniverses l E Y)
 
 /-- Restriction along u_E preserves kernels and cokernels.
-Source: blueprint realization formula, first proof step
-(blueprint: lem-sf-field-stage-ordinary-realization).
-Proof: underlying abelian sheaves are unchanged; kernels are sectionwise, and cokernels
-are sheafified sectionwise cokernels, with only the scalar action precomposed by u_E. -/
+ -/
 theorem integralRestriction_exact :
     PreservesFiniteLimits (integralRestriction l E Y) ∧
       PreservesFiniteColimits (integralRestriction l E Y) := by
@@ -134,27 +125,23 @@ theorem integralRestriction_exact :
     preservesFiniteColimits_of_reflects_of_preserves U (SheafOfModules.toSheaf A)⟩
 
 /-- Exactness supplies the required derived-restriction instance.
-Source: blueprint realization formula
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 instance integralRestriction_limits : PreservesFiniteLimits (integralRestriction l E Y) :=
   (integralRestriction_exact l E Y).1
 
 /-- Exactness supplies the required derived-restriction instance.
-Source: blueprint realization formula
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 instance integralRestriction_colimits : PreservesFiniteColimits (integralRestriction l E Y) :=
   (integralRestriction_exact l E Y).2
 
 /-- U_E is termwise restriction descended through quasi-isomorphisms.
-Source: blueprint realization formula
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def integralDerivedRestriction : DerivedCategory (scalarReductionSource l E Y) ⥤
     Ambient Y (Padic.coefficientExtensionIntegers l E) :=
   (integralRestriction l E Y).mapDerivedCategory
 
 /-- The prescribed integral value U_E(C) tensor^L E_Y.
-Source: blueprint realization formula
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def integralRealization : sfIntegralConstructibleCategory l E Y ⥤ Ambient Y E :=
   (sfIntegralConstructible l E Y).ι ⋙ integralDerivedRestriction l E Y ⋙
     extend Y (algebraMap (Padic.coefficientExtensionIntegers l E) E)
@@ -221,10 +208,7 @@ private theorem constantLinear_ext
 
 set_option linter.unusedVariables false in
 /-- The standard constant-section linear structure, uniquely fixed sectionwise.
-Source: blueprint E-linearity clause (blueprint: lem-sf-field-stage-ordinary-realization).
-Proof: multiply each component by the image of a in the constant sheaf. Naturality
-of the sheafification unit and commutativity give module maps and bilinear composition.
-The displayed formula fixes every scalar action, hence every field of Linear. -/
+ -/
 theorem constantLinear_existsUnique (Y : Scheme.{u}) (A : Type u) [CommRing A] :
     ∃! s : Linear A (reductionModules Y (constantRing Y A)),
       (fun [lin : Linear A (reductionModules Y (constantRing Y A))] ↦
@@ -257,19 +241,18 @@ theorem constantLinear_existsUnique (Y : Scheme.{u}) (A : Type u) [CommRing A] :
   exact constantLinear_ext t s h
 
 /-- Constant scalars act on module sheaves by the specified constant sections.
-Source: blueprint E-linearity clause (blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 instance constantLinear (Y : Scheme.{u}) (A : Type u) [CommRing A] :
     Linear A (reductionModules Y (constantRing Y A)) :=
   (constantLinear_existsUnique Y A).exists.choose
 
 /-- Derived localization inherits the same constant scalar action.
-Source: blueprint E-linearity clause (blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 instance ambientLinear (Y : Scheme.{u}) (A : Type u) [CommRing A] : Linear A (Ambient Y A) :=
   inferInstanceAs (Linear A (DerivedCategory (reductionModules Y (constantRing Y A))))
 
 /-- Transport the actual localized scalar action along the recorded coefficient equivalence.
-Source: blueprint raw scalar localization
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 instance rationalLinear : Linear E (sfRationalConstructibleCategory l E Y) :=
   Linear.ofRingMorphism
     ((Linear.toCatCenter (R := Localization.Away (Padic.coefficientExtensionUniformizer l E))
@@ -280,30 +263,26 @@ set_option linter.defProp false in
 /-- An algebraic closure of the small field Q_l has a model in every scheme universe.
 This uses an existing closure equivalence only to prove size; Shrink supplies the actual
 coefficient identification, so no choice of closure automorphism enters the realization.
-Source: blueprint size convention
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 @[instance_reducible] def closureSmall (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] : Small.{u} Ω :=
   small_map (IsAlgClosure.equiv (Padic l) Ω (AlgebraicClosure (Padic l))).toEquiv
 
 /-- The chosen closure in the site universe, identified with Ω by Shrink.algEquiv.
-Source: blueprint size convention
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 abbrev Closure (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] : Type u :=
   @Shrink.{u} Ω (closureSmall l Ω)
 
 /-- Transport the coefficient algebra structure along the same size equivalence.
-Source: blueprint size convention
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 instance closureAlgebra (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] : Algebra (Padic l) (Closure.{u} l Ω) :=
   letI := closureSmall.{u} l Ω
   inferInstanceAs (Algebra (Padic l) (Shrink.{u} Ω))
 
 /-- The actual coefficient identification; the closure itself is not replaced.
-Source: blueprint size convention
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def closureEquiv (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] :
     Closure.{u} l Ω ≃ₐ[Padic l] Ω :=
@@ -315,16 +294,13 @@ variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l)
 open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
 
 /-- The actual inclusion of a finite coefficient model into the chosen closure model.
-Source: blueprint final scalar-extension formula
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def closureInclusion (E : Index l Ω) : Coefficient.{u} l Ω E →ₐ[Padic l] Closure.{u} l Ω :=
   (closureEquiv l Ω).symm.toAlgHom.comp
     (E.val.val.comp (Shrink.algEquiv (Padic l) E.val).toAlgHom)
 
 /-- Constant sheafification preserves the composition of coefficient homomorphisms.
-Source: blueprint coefficient tower coherence
-(blueprint: lem-sf-field-stage-ordinary-realization).
-Proof: lifted homomorphisms compose on each element; apply constantSheaf.map_comp. -/
+ -/
 theorem coefficientMap_comp (Y : Scheme.{u}) {A B C : Type u}
     [CommRing A] [CommRing B] [CommRing C] (f : A →+* B) (g : B →+* C) :
     coefficientMap Y f ≫ coefficientMap Y g = coefficientMap Y (g.comp f) := by
@@ -333,9 +309,7 @@ theorem coefficientMap_comp (Y : Scheme.{u}) {A B C : Type u}
   congr 1
 
 /-- Constant sheafification sends the identity coefficient homomorphism to the identity.
-Source: blueprint identity-inclusion coherence
-(blueprint: lem-sf-field-stage-ordinary-realization).
-Proof: the lifted identity homomorphism is the identity; apply constantSheaf.map_id. -/
+ -/
 theorem coefficientMap_id (Y : Scheme.{u}) (A : Type u) [CommRing A] :
     coefficientMap Y (RingHom.id A) = 𝟙 (constantRing Y A) := by
   unfold coefficientMap
@@ -343,8 +317,7 @@ theorem coefficientMap_id (Y : Scheme.{u}) (A : Type u) [CommRing A] :
   congr 1
 
 /-- The ordinary derived scalar associator is uniquely fixed by balancing on K-flat models.
-Source: Stacks Tag 06YY; blueprint coefficient tower coherence
-(blueprint: lem-sf-field-stage-ordinary-realization).
+Source: Stacks Tag 06YY; blueprint coefficient tower coherence.
 Proof: extension preserves K-flat complexes. The two counits compute successive tensor
 products, and reductionBalance sends c tensor (b tensor x) to c*g(b) tensor x.
 These maps are natural and invertible. Descend through the K-flat localization.
@@ -369,16 +342,14 @@ theorem extendComp_existsUnique (Y : Scheme.{u}) {A B C : Type u}
     (coefficientMap Y (g.comp f)) (coefficientMap_comp Y f g)
 
 /-- The counit-normalized ordinary derived tensor associator.
-Source: blueprint coefficient tower coherence
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def extendComp (Y : Scheme.{u}) {A B C : Type u}
     [CommRing A] [CommRing B] [CommRing C] (f : A →+* B) (g : B →+* C) :
     extend Y f ⋙ extend Y g ≅ extend Y (g.comp f) :=
   (extendComp_existsUnique Y f g).exists.choose
 
 /-- Identity scalar extension is multiplication, uniquely fixed on K-flat computations.
-Source: Stacks Tag 06YY; blueprint identity-inclusion coherence
-(blueprint: lem-sf-field-stage-ordinary-realization).
+Source: Stacks Tag 06YY; blueprint identity-inclusion coherence.
 Proof: ordinary identity extension has the multiplication map a tensor x to a*x,
 with inverse x to 1 tensor x. Local tensor generators prove the inverse equations
 and naturality. Its localization composed with the universal K-flat counit is
@@ -402,17 +373,13 @@ theorem extendUnit_existsUnique (Y : Scheme.{u}) (A : Type u) [CommRing A] :
     (coefficientMap_id Y A)
 
 /-- The multiplication-normalized identity comparison.
-Source: blueprint identity-inclusion coherence
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def extendUnit (Y : Scheme.{u}) (A : Type u) [CommRing A] :
     extend Y (RingHom.id A) ≅ 𝟭 (Ambient Y A) :=
   (extendUnit_existsUnique Y A).exists.choose
 
 /-- The displayed coefficient inclusions compose before any scalar tensor.
-Source: blueprint common-stage formula
-(blueprint: lem-sf-field-stage-ordinary-realization).
-Proof: substitute the Shrink algebra equivalences; inverse equivalences cancel and
-subfield inclusions compose literally. This includes equal coefficient fields. -/
+ -/
 theorem closureInclusion_comp (E L : Index l Ω) (h : E ≤ L) :
     (closureInclusion.{u} l Ω L).comp (coefficientInclusion l Ω E L h) =
       closureInclusion l Ω E := by
@@ -420,8 +387,7 @@ theorem closureInclusion_comp (E L : Index l Ω) (h : E ≤ L) :
   simp [closureInclusion, coefficientInclusion]
 
 /-- The recorded transition of the stage system is the specified rational scalar tensor.
-Source: blueprint common-stage construction
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def stageIdentification (E L : Index l Ω) (h : E ≤ L) :
     GeneralAlgebraicallyClosedCoefficients.stageTransition l Ω Y E L h ≅
       GeneralAlgebraicallyClosedCoefficients.transition l Ω Y E L h :=
@@ -430,8 +396,7 @@ def stageIdentification (E L : Index l Ω) (h : E ≤ L) :
       E L h)
 
 /-- The normalized identity transition, retaining the actual stage-system interface.
-Source: blueprint identity-inclusion coherence
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def stageUnit (E : Index l Ω) :
     GeneralAlgebraicallyClosedCoefficients.stageTransition l Ω Y E E le_rfl ≅
       𝟭 (GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E) :=
@@ -439,15 +404,13 @@ def stageUnit (E : Index l Ω) :
     GeneralAlgebraicallyClosedCoefficients.unitor l Ω Y E
 
 /-- The finite stage uses exactly the field action transported from its raw localization.
-Source: blueprint E-linearity clause
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 instance stageLinear (E : Index l Ω) : Linear (Coefficient.{u} l Ω E)
     (GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E) :=
   rationalLinear l (Coefficient.{u} l Ω E) Y
 
 /-- The representative Hom inherits the same finite field action, with no new choice.
-Source: blueprint common-stage linearity clause
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 instance stageHomModule (A B : GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y)
     (L : GeneralAlgebraicallyClosedCoefficients.Common A B) :
     Module (Coefficient.{u} l Ω L.val)
@@ -459,8 +422,7 @@ instance stageHomModule (A B : GeneralAlgebraicallyClosedCoefficients.Pair l Ω 
         L.property.2).obj B.obj))
 
 /-- Scalar multiplication on a common-stage representative uses its finite-stage action.
-Source: blueprint common-stage linearity clause
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def stageSmul (A B : GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y)
     (L : GeneralAlgebraicallyClosedCoefficients.Common A B)
     (a : Coefficient.{u} l Ω L.val)
@@ -473,8 +435,7 @@ set_option linter.unusedVariables false in
 /-- E-linearity in the common-stage category is the scalar action on a common finite
 representative. Every scalar of Ω occurs in such a finite stage. The equality displayed
 here uniquely fixes the entire linear structure; it is not an arbitrary action.
-Source: Bhatt--Scholze Proposition 6.8.14(2), common-stage coefficients
-(blueprint: lem-sf-field-stage-ordinary-realization).
+Source: Bhatt--Scholze Proposition 6.8.14(2), common-stage coefficients.
 Proof: enlarge the representative field to contain the scalar. Multiply the finite
 representative using its rational Hom scalar action and pass to its colimit class.
 Coefficient inclusions preserve multiplication, so eventual equality makes this independent
@@ -566,15 +527,13 @@ theorem pairLinear_existsUnique :
   exact (ht A B N _ _ _ a).trans (hform A B N _ _ _ a).symm
 
 /-- The unique common-stage scalar action determined by finite representatives.
-Source: blueprint Qbar-linearity clause
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 instance pairLinear : Linear (Closure.{u} l Ω)
     (GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y) :=
   (pairLinear_existsUnique l Y Ω).exists.choose
 
 /-- A pure tensor in the recorded finite-stage Hom coordinates.
-Source: blueprint scalar-localized morphism formula
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def stagePureHom (E : Index l Ω)
     (C D : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E)
     (f : C.obj ⟶ D.obj) (a : Coefficient.{u} l Ω E) : C ⟶ D :=
@@ -582,8 +541,7 @@ def stagePureHom (E : Index l Ω)
     (f ⊗ₜ[Padic.coefficientExtensionIntegers l (Coefficient.{u} l Ω E)] a)
 
 /-- The required image of a pure tensor, with its ordinary target scalar action.
-Source: blueprint scalar-localized morphism formula
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def integralScalarMap (E : Index l Ω)
     (C D : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E)
     (f : C.obj ⟶ D.obj) (a : Coefficient.{u} l Ω E) :
@@ -595,8 +553,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The ordinary coefficient-composition comparison for the specified finite inclusions.
-Source: blueprint composition coherence
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def fieldComp (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
     extend Y (coefficientInclusion l Ω E L h).toRingHom ⋙
         extend Y (coefficientInclusion l Ω L M k).toRingHom ≅
@@ -608,8 +565,7 @@ def fieldComp (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
         ((AlgebraicallyClosedCoefficients.coefficientInclusion_laws l Ω).2 E L M h k)))
 
 /-- The ordinary identity comparison for the specified finite-field inclusion.
-Source: blueprint identity coherence
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def fieldUnit (E : Index l Ω) :
     extend Y (coefficientInclusion l Ω E E le_rfl).toRingHom ≅
       𝟭 (Ambient Y (Coefficient.{u} l Ω E)) :=
@@ -619,8 +575,7 @@ def fieldUnit (E : Index l Ω) :
     extendUnit Y (Coefficient.{u} l Ω E)
 
 /-- Associating extension through L with direct extension to the closure.
-Source: blueprint final common-stage formula
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def closureComp (E L : Index l Ω) (h : E ≤ L) :
     extend Y (coefficientInclusion l Ω E L h).toRingHom ⋙
         extend Y (closureInclusion.{u} l Ω L).toRingHom ≅
@@ -632,8 +587,7 @@ def closureComp (E L : Index l Ω) (h : E ≤ L) :
 
 /-- Canonical identification of a realized pair with its realization at a larger stage.
 It uses precisely the finite-stage comparison followed by ordinary tensor associativity.
-Source: blueprint morphism formula over a common finite field
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def toCommon
     (J : ∀ E : Index l Ω, GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E ⥤
       Ambient Y (Coefficient.{u} l Ω E))
@@ -650,8 +604,7 @@ def toCommon
     (extend Y (closureInclusion l Ω L).toRingHom).mapIso ((β E L h).app C).symm
 
 /-- The two specified paths through a coefficient tower agree.
-Source: blueprint coefficient-composition coherence
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def HasComparisonComposition
     (J : ∀ E : Index l Ω, GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E ⥤
       Ambient Y (Coefficient.{u} l Ω E))
@@ -670,8 +623,7 @@ def HasComparisonComposition
         (fieldComp l Y Ω E L M h k).hom.app ((J E).obj C)
 
 /-- The identity-inclusion comparison is the normalized tensor unit.
-Source: blueprint identity-inclusion coherence
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def HasComparisonIdentity
     (J : ∀ E : Index l Ω, GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E ⥤
       Ambient Y (Coefficient.{u} l Ω E))
@@ -683,8 +635,7 @@ def HasComparisonIdentity
       (J E).map ((stageUnit l Y Ω E).hom.app C)
 
 /-- Each common-stage representative has the specified scalar-extended image.
-Source: blueprint common-stage morphism formula
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+ -/
 def HasCommonMorphismFormula
     (J : ∀ E : Index l Ω, GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E ⥤
       Ambient Y (Coefficient.{u} l Ω E))
@@ -707,8 +658,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The functors and precisely the formulas and coherence asserted by the node.
 The targets are ordinary derived categories over discrete constant coefficient sheaves;
 there is deliberately no constructibility predicate on their objects.
-Source: Stacks Tag 09C2 and Bhatt--Scholze Proposition 6.8.14(1),(2)
-(blueprint: lem-sf-field-stage-ordinary-realization). -/
+Source: Stacks Tag 09C2 and Bhatt--Scholze Proposition 6.8.14(1),(2). -/
 structure System where
   finite : ∀ E : Index l Ω, GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E ⥤
     Ambient Y (Coefficient.{u} l Ω E)

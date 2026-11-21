@@ -40,9 +40,7 @@ here as an instance.
 ## Main results
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationPlusComparison`:
-  the comparison along a refinement with cartesian square over `X` is an isomorphism
-  (blueprint: `BA43-RHO`). Not proved yet.
-
+  the comparison along a refinement with cartesian square over `X` is an isomorphism. Not proved yet.
 -/
 
 @[expose] public section

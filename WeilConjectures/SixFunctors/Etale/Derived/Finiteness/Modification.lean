@@ -19,11 +19,11 @@ Let `π : Y ⟶ X` be proper and an isomorphism over an open `j : U ⟶ X`, with
 `i : Z ⟶ X`. This file proves:
 
 - `AlgebraicGeometry.Etale.nonempty_rightDerivedLowerStar_openImmersionLowerShriek_iso`
-  (`proposition-proper-direct-image-finite-coefficients`): `Rπ_*(j'_! G') ≅ j_! G` for a sheaf `G`
+: `Rπ_*(j'_! G') ≅ j_! G` for a sheaf `G`
   on `U` with pullback `G'` to `U' = π⁻¹(U)`; that is, `π_* j'_! G' = j_! G` and
   `Rᵠπ_* j'_! G' = 0` for `q > 0`. This uses proper base change along `i`.
 - `AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_modification`
-  (`proposition-proper-direct-image-finite-coefficients`): `𝒞(π ≫ f)` and `𝒞(i ≫ f)` imply `𝒞(f)`,
+: `𝒞(π ≫ f)` and `𝒞(i ≫ f)` imply `𝒞(f)`,
   by the open–closed short exact sequence `0 ⟶ j_! j^* F ⟶ F ⟶ i_* i^* F ⟶ 0`.
 -/
 
@@ -72,7 +72,7 @@ noncomputable def upperStarRightDerivedLowerStarSingleIso {X Y X' Y' : Scheme.{u
 
 variable [Finite Λ]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Extension by zero under a
+/-- Extension by zero under a
 proper modification.
 
 Let `π : Y ⟶ X` be proper and `j : U ⟶ X` an open immersion such that `π⁻¹(U) ⟶ U` is an
@@ -134,7 +134,7 @@ theorem nonempty_rightDerivedLowerStar_openImmersionLowerShriek_iso {X Y U U' : 
   exact ⟨(asIso ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app M)).symm ≪≫
     D((j)_!open[A]).mapIso e₁ ≪≫ (((j)_!open[A]).mapDerivedCategorySingleFunctor 0).app G⟩
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Proper modification transfer
+/-- Proper modification transfer
 without an amplitude claim.
 
 Let `f : X ⟶ S` be a morphism and `π : Y ⟶ X` proper, an isomorphism over the open

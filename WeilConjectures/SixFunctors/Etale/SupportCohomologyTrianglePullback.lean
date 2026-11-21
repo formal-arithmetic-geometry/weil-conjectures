@@ -23,8 +23,8 @@ right derived functors (`CategoryTheory.Functor.rightDerivedPullback`) form a mo
 triangles
 
 ```
-RΓ_Z(X, K)      ⟶ RΓ(X, K)      ⟶ RΓ(U, K)       ⟶ RΓ_Z(X, K)[1]
-    ↓                 ↓                ↓                   ↓
+RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]
+    ↓ ↓ ↓ ↓
 RΓ_Z'(X', e^*K) ⟶ RΓ(X', e^*K) ⟶ RΓ(U', e^*K) ⟶ RΓ_Z'(X', e^*K)[1]
 ```
 
@@ -329,7 +329,7 @@ lemma sectionsWithSupportPullback_comp :
   ext F
   exact sectionsWithSupportPullbackApp_comp A e i i' h F
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
+/-- Long exact sequence for cohomology with support
 (functoriality in the pair, for arbitrary morphisms of pairs).
 
 For a morphism of schemes `e : X' ⟶ X` and closed immersions `i : Z ⟶ X`, `i' : Z' ⟶ X'` whose
@@ -348,7 +348,7 @@ noncomputable def sectionsWithSupportTrianglePullback :
     (openComplementSectionsPullback A e i i' h) (sectionsWithSupportPullback_comp A e i i' h).symm
     (ΓPullback_comp_natTransΓRes A e i i' h).symm
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
+/-- Long exact sequence for cohomology with support
 (functoriality of the long exact sequence in the pair).
 
 The pullback maps along a morphism of pairs `e : (X', X' ∖ Z') ⟶ (X, X ∖ Z)` commute with all
@@ -436,7 +436,7 @@ lemma sectionsWithSupportPullback_comp_comp :
 
 attribute [local instance] Limits.comp_preservesFiniteLimits Limits.comp_preservesFiniteColimits
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
+/-- Long exact sequence for cohomology with support
 (compatibility of the functoriality in the pair with composition).
 
 For morphisms of pairs `e : (X', Z') ⟶ (X, Z)` and `e' : (X'', Z'') ⟶ (X', Z')`, the morphism of

@@ -498,7 +498,6 @@ set_option linter.unusedVariables false in
 /-- The canonical quotient chain map is the restriction of the adjoint reduction
 transition, expressed through the universal K-flat comparison.
 Source: Stacks Tags 03EK, 06YY, 06YL; Bhatt--Scholze, Definition 3.5.2.
-(blueprint: lem-coef-normalized-dvr-kflat-transition).
 
 Proof: first take M=Q(P) and e the identity. The ordinary tensor map sends b tensor x
 to rho(b) tensor x. It is linear over the larger finite quotient, because the

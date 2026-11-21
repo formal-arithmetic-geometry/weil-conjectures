@@ -19,7 +19,6 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingRoosCompariso
 /-! # Descent of the normalized open Roos comparison
 
 Source: Stacks Project, proetale.tex, Tag 099N (2),(5), and Tag 0941.
-(blueprint: lem-sf-open-roos-restriction-descent).
 -/
 
 @[expose] public noncomputable section
@@ -97,7 +96,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (o : IntegralOpenReduction.Operations l E e)
 
 /-- Exactness inherited from the actual ordinary right adjunction.
-Source: Stacks 03DJ (blueprint: lem-sf-open-roos-restriction-descent). -/
+Source: Stacks 03DJ. -/
 local instance descentRestrictionLimits :
     PreservesFiniteLimits (IntegralOpenReduction.restriction l E e o) := by
   let : PreservesLimitsOfSize.{0, 0} (IntegralOpenReduction.restriction l E e o) :=
@@ -105,7 +104,7 @@ local instance descentRestrictionLimits :
   infer_instance
 
 /-- Exactness inherited from slice restriction and the coefficient equivalence.
-Source: Stacks 03DJ (blueprint: lem-sf-open-roos-restriction-descent). -/
+Source: Stacks 03DJ. -/
 local instance descentRestrictionColimits :
     PreservesFiniteColimits (IntegralOpenReduction.restriction l E e o) := by
   let hL : PreservesFiniteColimits (SheafOfModules.localizedSystemRestriction.{t+1, t,
@@ -130,7 +129,7 @@ private theorem completionUnit_normalization (X : Scheme.{t})
 actual quotient-augmentation unit, for any normalized presentation of open operations.
 
 Source: Stacks Project, Tag 099N (2),(5), Tag 0941; the strict tensor comparison of
-Tags 0G7E and 07A4 (blueprint: lem-sf-open-roos-restriction-descent).
+Tags 0G7E and 07A4.
 
 Proof: the finite and completed coefficient maps are the canonical slice
 isomorphisms by their normalization equalities, and naturality of systemMap gives

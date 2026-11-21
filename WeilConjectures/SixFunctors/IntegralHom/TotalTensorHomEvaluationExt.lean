@@ -25,8 +25,7 @@ variable (Y : AlgebraicGeometry.Scheme.{t})
   (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Hom projections and total tensor inclusions jointly detect maps by local evaluation.
-Source: Stacks 03EK, 03EO and 0A8X
-(blueprint: lem-sf-total-tensor-hom-evaluation-ext).
+Source: Stacks 03EK, 03EO and 0A8X.
 Proof: use the coproduct universal property for the total tensor term. Then use
 the product projections of the Hom term. Tensor-to-Hom evaluation extensionality
 reduces each component to pure tensors and evaluation on a section of P^p.

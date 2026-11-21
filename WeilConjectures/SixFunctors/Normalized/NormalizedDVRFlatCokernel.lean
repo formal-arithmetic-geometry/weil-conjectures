@@ -28,7 +28,7 @@ import WeilConjectures.SixFunctors.SheafRestrictionTowerData.StrictRestrictionTo
 /-! # Scalar cokernels of strict finite flat DVR models
 
 Source: Stacks Tags 06YS, 06YY, 03EK and 05RT; blueprint DVR effectivity,
-proof paragraphs 1--3. (blueprint: lem-coef-normalized-dvr-flat-cokernel).
+proof paragraphs 1--3.
 -/
 
 @[expose] public noncomputable section
@@ -477,7 +477,6 @@ private theorem zero_cokernel_quasiIso
 /-- Normalization identifies each scalar cokernel with the smaller strict level.
 Source: Stacks Tags 03EK, 06YS, 06YY and 05RT; blueprint
 lemma-sp-tower-adjunction-foundation--2, strict-model step.
-(blueprint: lem-coef-normalized-dvr-flat-cokernel).
 
 Proof: compose the semilinear successor maps to obtain a chain map from P_m to
 Res(P_n). The equations hrep transport the successor normalization bijections through

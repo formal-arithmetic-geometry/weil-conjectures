@@ -80,7 +80,6 @@ restricts to a right adjoint of the bounded below `Rf_! : D⁺(X_ét, Λ) ⥤ D�
 * The composition `R(f ≫ g)^! ≅ R(g)^! ⋙ R(f)^!`, from the corresponding compatibility
   of `Rf_!`.
 * For `f` étale, `Rf^! = f^*`; for `f` proper, `Rf^!` is right adjoint to `Rf_*`.
-
 -/
 
 @[expose] public section

@@ -32,7 +32,6 @@ All exchange maps and lax tensor maps factor through the *reduced* versions `ᾱ
 do not involve `ε`; the comparison is proved for abstract functors
 (`NearbyCyclesModel.kunnethMap_eq_aux`, `NearbyCyclesModel.isIso_reducedKunneth_iff_aux`) and
 then instantiated.
-
 -/
 
 @[expose] public section

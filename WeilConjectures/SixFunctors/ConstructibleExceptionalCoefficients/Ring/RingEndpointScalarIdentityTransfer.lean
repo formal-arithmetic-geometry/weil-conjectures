@@ -33,8 +33,7 @@ private noncomputable def scalarFunctorAtClosureIso
 /-- Transfers the multiplication-normalized identity certificate from an equal-universe
 closure to the original coefficient universes. This is the normalization substep of
 endpoint scalar restriction assembly.
-Source: Zheng, Lemma 5.22 and Proposition 5.26
-(blueprint: lem-sf-ring-endpoint-scalar-identity-transfer).
+Source: Zheng, Lemma 5.22 and Proposition 5.26.
 -/
 theorem scalarIdentityAtClosure
     (Ψ : Type (max u v)) [Field Ψ] [Algebra (Padic l) Ψ] [IsAlgClosure (Padic l) Ψ]

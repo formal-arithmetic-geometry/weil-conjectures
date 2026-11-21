@@ -31,7 +31,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-! # Scalar tensor comparison for independently prescribed tensor models
 
 Source: Stacks 07A4 and 06YY.
-(blueprint: lem-coef-prescribed-pair-tensor-models).
 -/
 
 @[expose] public section
@@ -60,8 +59,7 @@ Source: Stacks 07A4, using the existing scalar tensor descent argument.
 Proof: form the ordinary normalized scalar tensor comparison and totalize it.
 Scalar extension preserves K-flat complexes. Descend its natural chain comparison
 through the fully faithful restriction to K-flat pairs and cancel the representative
-isomorphisms. The two tensor models can be prescribed independently throughout.
-(blueprint: lem-coef-prescribed-pair-tensor-models). -/
+isomorphisms. The two tensor models can be prescribed independently throughout. -/
 theorem coefficientPrescribedPairTensorComparison
     {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     [EssentiallySmall.{max c v r} C]

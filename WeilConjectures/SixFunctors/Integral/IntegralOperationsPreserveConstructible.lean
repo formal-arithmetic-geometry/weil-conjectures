@@ -37,8 +37,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteLocalCons
 # Integral pullback and completed tensor preserve constructibility
 
 Source: Bhatt--Scholze, Lemmas 6.5.3--6.5.5 and 6.5.9(5); Stacks Project,
-Tags 099M, 099N, 09BQ and 054I
-(blueprint: lem-pur-integral-operations-preserve-constructible).
+Tags 099M, 099N, 09BQ and 054I.
 
 Finite reductions use index `n` for the positive exponent `n + 1`. The reduction
 comparisons below are the adjoints of the actual Roos projections, transported
@@ -70,8 +69,7 @@ attribute [local irreducible] integralDerivedPullback integralCompletedTensor
 /-- The canonical reduction comparison for integral pullback. Its adjoint is the
 Roos projection, after the defining representative comparison and exact-restriction
 factorization. Thus this map is fixed, rather than an arbitrary isomorphism.
-Source: Stacks Tag 099N(5); Bhatt--Scholze, Lemma 6.5.9(5)
-(blueprint: lem-pur-integral-operations-preserve-constructible). -/
+Source: Stacks Tag 099N(5); Bhatt--Scholze, Lemma 6.5.9(5). -/
 def integralPullbackFiniteComparison {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (K : DerivedCategory (integralTowerModules l E Y))
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
@@ -89,8 +87,7 @@ def integralPullbackFiniteComparison {X Y : AlgebraicGeometry.Scheme.{u}}
 /-- The canonical reduction comparison for the completed integral tensor.
 Its adjoint is the actual projection to `Res_n(P_n tensor Q_n)` of the defining Roos
 complex. The finite tensor is computed on reduced K-flat representatives.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5; Stacks Tags 099M and 09BQ
-(blueprint: lem-pur-integral-operations-preserve-constructible). -/
+Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5; Stacks Tags 099M and 09BQ. -/
 def integralTensorFiniteComparison (W : AlgebraicGeometry.Scheme.{u})
     (M N : DerivedCategory (integralTowerModules l E W))
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)
@@ -510,7 +507,7 @@ private theorem tensor_constructible (W : AlgebraicGeometry.Scheme.{u})
  derived-complete category, and their canonical finite-reduction maps are isomorphisms.
 
 Source: Bhatt--Scholze, Lemmas 6.5.3--6.5.5 and 6.5.9(5); Stacks Tags 099M, 099N,
-09BQ and 054I (blueprint: lem-pur-integral-operations-preserve-constructible).
+09BQ and 054I.
 
 Proof:
 1. Choose good representatives by the independent-coefficient K-flat resolution theorem,

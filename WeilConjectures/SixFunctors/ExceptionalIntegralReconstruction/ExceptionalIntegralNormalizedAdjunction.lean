@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralReconstruction.Exceptional
 
 /-! # Normalized exceptional system adjunction
 Source: Zheng, Section 5; integral reconstruction, step 2.
-(blueprint: lem-sf-exceptional-integral-normalized-adjunction).
 -/
 
 @[expose] public noncomputable section
@@ -33,7 +32,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Restrict the specified system adjunction to the normalized finite-Tor systems.
 Source: Zheng, Lemma 5.22 and Proposition 5.24; integral reconstruction, step 2.
-(blueprint: lem-sf-exceptional-integral-normalized-adjunction).
 
 Proof: the proper factor of c is finite type and quasi-compact, so its middle
 scheme is finite type over the base field. Noetherianity makes the open factor

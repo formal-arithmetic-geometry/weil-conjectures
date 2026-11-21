@@ -33,7 +33,6 @@ structure through `Rf_!` when the Frobenius does not act on the chosen compactif
   `R(e_*) ⋙ D(e^*) ≅ 𝟭`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationTransportIso`:
   `Rf'_!(c.transport) ⋙ D(eY^*) ≅ D(eX^*) ⋙ Rf_!(c)`.
-
 -/
 
 @[expose] public section
@@ -74,9 +73,9 @@ noncomputable def mapDerivedLowerStarEquivalenceOfIso :
 pullback along `e` is the identity:
 ```
 D(Y) --R(e_*)--> D(Y')
-    \              |
-     \             | D(e^*)
-      \            v
+    \ |
+     \ | D(e^*)
+      \ v
        ---𝟭-----> D(Y)
 ```
 -/
@@ -106,10 +105,10 @@ variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} (eX : X ≅ X')
 `f'` is intertwined with the one attached to `c` by the pullbacks along `eX` and `eY`:
 ```
 D(X') --Rf'_!(c.transport)--> D(Y')
-  |                             |
-D(eX^*)                       D(eY^*)
-  v                             v
-D(X)  ---------Rf_!(c)------> D(Y)
+  | |
+D(eX^*) D(eY^*)
+  v v
+D(X) ---------Rf_!(c)------> D(Y)
 ```
 -/
 noncomputable def rightDerivedLowerShriekOfCompactificationTransportIso :

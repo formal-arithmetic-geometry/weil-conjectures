@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.Right.RightDerivedMateIndependence
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
 /-! # Normalized right-derived evaluation of strict integral systems
-
-(blueprint: lem-weil-integral-system-evaluation-normalization).
+.
 -/
 
 @[expose] public noncomputable section
@@ -178,8 +177,7 @@ private theorem varyingEvaluationMate_isIso (R : ℕ → CommRingCat.{u + 1})
 
 /-- An ordinary invertible evaluation mate for strict integral systems has an
 invertible canonical right-derived mate for the actual integral pullback models.
-Source: Zheng 4.10; Stacks Tags 070I, 070K and 07A7
-(blueprint: lem-weil-integral-system-evaluation-normalization).
+Source: Zheng 4.10; Stacks Tags 070I, 070K and 07A7.
 
 Identify the finite direct-image functor with the varying-ring direct image by the
 ring-sheaf adjunction inverse equation. The varying-ring ordinary and derived

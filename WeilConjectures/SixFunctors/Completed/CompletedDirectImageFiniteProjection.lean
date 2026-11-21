@@ -29,8 +29,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The canonical projection-formula map, obtained by transposing direct image of
  the actual scalar unit through the normalized restriction comparison.
-Source: Stacks 07A6 and 0944
-(blueprint: lem-weil-completed-direct-image-finite-projection). -/
+Source: Stacks 07A6 and 0944. -/
 def completedDirectImageFiniteProjection {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (K : DerivedCategory (scalarReductionSource l E X)) :
     (scalarReductionDerivedExtension l E Y n).obj
@@ -44,7 +43,6 @@ def completedDirectImageFiniteProjection {X Y : Scheme.{u}} (f : X ⟶ Y) (n : �
 canonical finite projection formula is invertible on every unbounded complex.
 Source: Zheng, Proposition 4.21; Stacks 0944 and 099N;
 Bhatt--Scholze, Lemma 6.5.11(3).
-(blueprint: lem-weil-completed-direct-image-finite-projection).
 
 Proof: use the two-term free uniformizer resolution of the quotient. The existing
 completed direct-image proof transports the perfect projection formula across the

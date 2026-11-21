@@ -17,11 +17,10 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseCh
 - `AlgebraicGeometry.Etale.refinementLowerStarComp`: the composition isomorphism
   `(r.hom)_* ⋙ (d.g)_* ≅ (c.g)_*` of pushforwards attached to a refinement.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison`: the
-  comparison `Rf_!(d)[A]+ ⟶ Rf_!(c)[A]+`. (blueprint: `BA43-RHO`)
+  comparison `Rf_!(d)[A]+ ⟶ Rf_!(c)[A]+`.
 
 See `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison` for the construction and
 the implementation notes.
-
 -/
 
 @[expose] public section
@@ -66,7 +65,7 @@ It is the composite of the unit of the derived adjunction
 `D(r.hom)^* ⊣ R(r.hom)_*`, the inverse of the base change isomorphism
 `D(c.i)_! ≅ D(d.i)_! ⋙ D(r.hom)^*`, and the composition isomorphism
 `R(r.hom)_* ⋙ R(d.g)_* ≅ R(c.g)_*`. Note that it goes from the coarser compactification `d`
-to the finer one `c`. (blueprint: `BA43-RHO`) -/
+to the finer one `c`. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationPlusComparison
     (hcart : IsPullback c.i (𝟙 X) r.hom d.i) : Rf_!(d)[A]+ ⟶ Rf_!(c)[A]+ :=
   haveI : ((r.hom)_*[A]).PreservesInjectiveObjects :=

@@ -15,7 +15,6 @@ import Mathlib.Algebra.Category.Grp.Limits
 /-! # The ordinary quotient-tower limit of a finite free cell
 
 Source: Stacks Project, Tag 099I; Bhatt--Scholze, Propositions 3.1.9--3.1.10.
-(blueprint: lem-sf-completed-free-cell-ordinary-limit)
 -/
 
 @[expose] public noncomputable section
@@ -35,7 +34,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
 /-- The actual chain-level quotient units commute with the successor transitions.
-Source: Stacks Tag 06YL (blueprint: lem-sf-completed-free-cell-ordinary-limit).
+Source: Stacks Tag 06YL.
 Proof: the transition sends 1 tensor x to 1 tensor x, because its coefficient map
 preserves one; the specified tensor-generator formulas therefore give equality. -/
 theorem completedFreeCellCone_compatibility
@@ -58,7 +57,7 @@ theorem completedFreeCellCone_compatibility
   simpa only [map_one] using (hstep n i U 1 x).symm
 
 /-- The explicit cone of the specified quotient-unit chain maps.
-Source: Stacks Tag 06YL (blueprint: lem-sf-completed-free-cell-ordinary-limit). -/
+Source: Stacks Tag 06YL. -/
 def completedFreeCellCone
     (P : CochainComplex (completedIntegralModuleSheaves l E T D hl) ℤ) :
     Cone (Functor.ofOpSequence (X := fun n ↦ integralTowerComplex l E T D hl n P)
@@ -411,7 +410,7 @@ private theorem freeCell_normalized (r : ℕ) (d : ℤ) (n : ℕ) :
 cone and epimorphic transitions in every degree.
 
 Source: Stacks Project, algebraization.tex, Tag 099I; Bhatt--Scholze, Propositions
-3.1.9--3.1.10 (blueprint: lem-sf-completed-free-cell-ordinary-limit).
+3.1.9--3.1.10.
 
 Proof: ordinary scalar extension of the unit is the unit of the quotient coefficient
 ring, by the balanced multiplication isomorphism. Its inverse sends a to a tensor 1.

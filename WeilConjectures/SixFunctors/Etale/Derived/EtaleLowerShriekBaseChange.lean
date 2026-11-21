@@ -17,10 +17,10 @@ For a commutative square of schemes
 
 ```
   U' --j'--> Z'
-  |          |
-  g'         g''
-  ↓          ↓
-  U  --j---> Z
+  | |
+  g' g''
+  ↓ ↓
+  U --j---> Z
 ```
 
 with `j` and `j'` étale, the base change map `j'_! g'^* ⟶ g''^* j_!` of the extensions by zero

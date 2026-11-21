@@ -26,8 +26,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 Source: Weil blueprint, `sk-def-sf-operations`, proof of
 `lem-weil-compact-support-representative-independence`, first sentence;
-Stacks Project, Tags 0940, 0941 and 06YY; Bhatt--Scholze, Definition 6.7.6
-(blueprint: lem-weil-compact-support-reduction-tower-functor).
+Stacks Project, Tags 0940, 0941 and 06YY; Bhatt--Scholze, Definition 6.7.6.
 
 The target is the derived category of strict towers of modules over the completed
 coefficient sheaf. Evaluation comparisons are natural isomorphisms of functors.
@@ -471,8 +470,7 @@ set_option linter.unusedVariables false in
 Its natural evaluation comparisons identify every transition with the canonical
 quotient/direct-image comparison, including adjacent and equal levels.
 Source: blueprint `lem-weil-compact-support-representative-independence`, first
-proof sentence; Stacks Tags 0940, 0941 and 06YY; Bhatt--Scholze, Definition 6.7.6
-(blueprint: lem-weil-compact-support-reduction-tower-functor).
+proof sentence; Stacks Tags 0940, 0941 and 06YY; Bhatt--Scholze, Definition 6.7.6.
 Proof:
 1. Form the ringed sequence site with quotient restriction maps. Its module sheaves
 are semilinear coefficient systems, and it admits simultaneous K-injective resolutions
@@ -480,7 +478,7 @@ by lem-coef-semilinear-derived-sections, lem-weil-pbc-diagram-site-realization a
 prop-pur-kinjective-resolutions-exist.
 2. Derived pullback along the completed-to-system coefficient morphism gives exact
 simultaneous reduction, computed by P tensor A_n on a flat-term K-flat resolution
-(lem-weil-pbc-ringed-topoi-derived-pullback and lem-pc-kflat-resolution).
+.
 The strict chain maps id tensor q compose for all pairs of coefficient levels.
 3. Apply exact open extension at every level, then the separately right-derived
 proper direct image of the entire system. The geometric clauses of
@@ -496,7 +494,7 @@ apply compact support to the quotient-induced map and then its canonical scalar
 comparison. The proper comparison is normalized on K-injective replacements by
 lem-weil-proetale-direct-image-restriction-of-scalars, without assuming that
 restriction preserves K-injectives; the open comparison is identity on underlying
-abelian sheaves (lem-sf-compact-support-restriction-of-scalars).
+abelian sheaves.
 7. Quotient composition holds on K-flat complexes before localization; the
 coefficient comparison cocycle carries it to every pair m>=n and is natural in K.
 8. Compatible constant sections define the two normalized linear structures.

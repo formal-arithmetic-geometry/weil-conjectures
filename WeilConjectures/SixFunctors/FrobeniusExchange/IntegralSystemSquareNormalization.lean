@@ -13,8 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOpenBaseChan
 import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.Normalization.SemilinearProperOpenNormalization
 
 /-! # Exact localization of the integral system pullback square
-
-(blueprint: lem-weil-integral-system-square-normalization).
+.
 -/
 
 @[expose] public noncomputable section
@@ -126,8 +125,7 @@ private theorem varyingInverseOpenMate_isIso
 
 /-- The specified integral system pullback square is the localization of the ordinary
 varying-ring square at the actual lifted quotient rings.
-Source: Stacks 0D6D and 03S6; Zheng 4.10
-(blueprint: lem-weil-integral-system-square-normalization).
+Source: Stacks 0D6D and 03S6; Zheng 4.10.
 Proof: exact localization preserves the compositor word and the equality transport
 forming the varying-ring square. The proved compositor normalization identifies each
 derived compositor with the integral one. The equality transports agree definitionally. -/

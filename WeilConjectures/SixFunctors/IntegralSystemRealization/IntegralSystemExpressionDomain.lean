@@ -20,8 +20,7 @@ public import Mathlib.CategoryTheory.Pi.Basic
 /-! # IntegralSystemExpressionDomain
 
 Source: Stacks 0941, 03DI, 07A7 and blueprint fix-prop-coherence,
-strict-system operations and bounded finite expressions
-(blueprint: def-sf-integral-system-expression-domain).
+strict-system operations and bounded finite expressions.
 -/
 
 @[expose] public noncomputable section
@@ -42,7 +41,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Equality of the two definitions of the adjacent quotient restriction. The
 sequence functor maps a successor arrow to its specified transition; scalar
 restriction then applies to that same ring-sheaf map.
-Source: Stacks 0941 (blueprint: def-sf-integral-system-expression-domain). -/
+Source: Stacks 0941. -/
 abbrev originRestrictionEquality (W : Scheme.{u}) (n : ℕ) :
     proEtaleCoefficientRestrictScalars W (Padic.coefficientExtensionTransition l E (n + 1)) =
       normalizedDVRModuleRes l E W (Nat.le_succ n) :=
@@ -109,8 +108,7 @@ structure Origins (W : Scheme.{u}) (M : System l E W) where
         (normalizedDVRRes l E W (Nat.le_succ n)).map (evaluation n).inv)
 
 /-- One common finite cohomological interval and one common finite Tor interval for
-all positive levels. Source: blueprint finite-Tor and constructible definitions
-(blueprint: def-sf-integral-system-expression-domain). -/
+all positive levels. Source: blueprint finite-Tor and constructible definitions. -/
 def LevelBounds (W : Scheme.{u}) (M : System l E W) : Prop :=
   ∃ a b c d : ℤ, a ≤ b ∧ c ≤ d ∧ ∀ n : ℕ,
     intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) W
@@ -124,16 +122,14 @@ def LevelBounds (W : Scheme.{u}) (M : System l E W) : Prop :=
 level has constructible cohomology in one common interval and finite Tor amplitude
 in one common interval. Retained
 compatible origins are additional data, rather than an unspecified finite-arrow lift.
-Source: Stacks 0941; blueprint derived-complete and finite-Tor definitions
-(blueprint: def-sf-integral-system-expression-domain). -/
+Source: Stacks 0941; blueprint derived-complete and finite-Tor definitions. -/
 def Good (W : Scheme.{u}) : ObjectProperty (System l E W) := fun M ↦
   IsNormalizedCoefficientSequence l E W M ∧
     LevelBounds l E W M ∧ Nonempty (Origins l E W M)
 
 /-- Operation symbols interpreted in specified categories; this helper stores functors
 only. The two interpretations below use actual sequence-site and integral functors.
-Source: blueprint fix-prop-coherence, finite expressions
-(blueprint: def-sf-integral-system-expression-domain). -/
+ -/
 structure Interpretation (C : Scheme.{u} → Type v) [∀ X, Category.{w} (C X)] where
   pull : ∀ {X Y : Scheme.{u}} (_f : X ⟶ Y), C Y ⥤ C X
   push : ∀ {X Y : Scheme.{u}} (_f : X ⟶ Y), C X ⥤ C Y
@@ -145,7 +141,7 @@ structure Interpretation (C : Scheme.{u} → Type v) [∀ X, Category.{w} (C X)]
 
 /-- The sequence-site interpretation uses exact pullback, total right-derived image,
 exact termwise open extension and the recorded K-flat derived tensor.
-Source: Stacks 0941 (blueprint: def-sf-integral-system-expression-domain). -/
+Source: Stacks 0941. -/
 def systemInterpretation (o : Operations l E) : Interpretation (System l E) where
   pull := pull l E
   push := Operations.push l E o
@@ -155,8 +151,7 @@ def systemInterpretation (o : Operations l E) : Interpretation (System l E) wher
 
 /-- The integral interpretation uses precisely completed pullback and completed tensor,
 ordinary integral proper direct image and localized completed-ring open extension.
-Source: Bhatt--Scholze 6.7.6; Stacks 0941
-(blueprint: def-sf-integral-system-expression-domain). -/
+Source: Bhatt--Scholze 6.7.6; Stacks 0941. -/
 def integralInterpretation : Interpretation (Integral l E) where
   pull := integralDerivedPullback l E
   push := PurCompactSupport.push (PurCompactSupport.completed l E)
@@ -170,8 +165,7 @@ schemes. Push symbols are proper; open symbols are quasi-compact. The scheme ind
 are objects over the fixed base, so every arrow is a morphism over that base. Tensor
 has two inputs at the same scheme. No compact-support symbol changes the prescribed
 meaning of the subexpression `S_p J_j`.
-Source: blueprint fix-prop-coherence, compactification expressions
-(blueprint: def-sf-integral-system-expression-domain). -/
+ -/
 inductive Expression (B : Scheme.{u}) (I : Type u) (X : I → Over B) : Over B →
     Type (u + 1) where
   | var (i : I) : Expression B I X (X i)
@@ -185,8 +179,7 @@ inductive Expression (B : Scheme.{u}) (I : Type u) (X : I → Over B) : Over B �
   | tensor {W : Over B} (e f : Expression B I X W) : Expression B I X W
 
 /-- Recursive interpretation as a functor of all inputs, retaining all input morphisms.
-Source: blueprint fix-prop-coherence, expression induction
-(blueprint: def-sf-integral-system-expression-domain). -/
+ -/
 def Expression.evaluate {B : Scheme.{u}} {I : Type u} {X : I → Over B}
     {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)] (d : Interpretation C) :
     {W : Over B} → Expression B I X W → (∀ i, C (X i).left) ⥤ C W.left
@@ -202,8 +195,7 @@ def Expression.evaluate {B : Scheme.{u}} {I : Type u} {X : I → Over B}
 /-- All intermediate schemes are finite type over k and every inverse-image arrow is
 separated and finite type. Proper and quasi-compact open constructors already impose
 the corresponding arrow properties. These conditions are imposed throughout the tree.
-Source: blueprint fix-prop-coherence, geometric domain
-(blueprint: def-sf-integral-system-expression-domain). -/
+ -/
 def Expression.geometric {B : Scheme.{u}} {I : Type u} {X : I → Over B}
     {W : Over B} (e : Expression B I X W) : Prop :=
   LocallyOfFiniteType W.hom ∧ QuasiCompact W.hom ∧
@@ -218,14 +210,13 @@ def Expression.geometric {B : Scheme.{u}} {I : Type u} {X : I → Over B}
     | .tensor e f => e.geometric ∧ f.geometric
 
 /-- Apply the actual reduction functor separately to every integral input.
-Source: Stacks 0941 (blueprint: def-sf-integral-system-expression-domain). -/
+Source: Stacks 0941. -/
 def inputReduction {B : Scheme.{u}} {I : Type u} (X : I → Over B) :
     (∀ i, Integral l E (X i).left) ⥤ ∀ i, System l E (X i).left :=
   Functor.pi (fun i ↦ (calculus l E (X i).left).reduction)
 
 /-- Every intermediate system in the expression tree belongs to the stated domain.
-Source: blueprint fix-prop-coherence, common-bounds proviso
-(blueprint: def-sf-integral-system-expression-domain). -/
+ -/
 def Expression.admissible (o : Operations l E) {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} {W : Over B} (e : Expression B I X W)
     (M : ∀ i, System l E (X i).left) : Prop :=
@@ -242,8 +233,7 @@ def Expression.admissible (o : Operations l E) {B : Scheme.{u}} {I : Type u}
 
 /-- Extract the root bound from the recursive intermediate-object domain. The case
 split only exposes the defining conjunction; no additional boundedness is assumed.
-Source: blueprint fix-prop-coherence, common-bounds proviso
-(blueprint: def-sf-integral-system-expression-domain). -/
+ -/
 abbrev Expression.admissibleGood (o : Operations l E) {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} {W : Over B} (e : Expression B I X W)
     (M : ∀ i, System l E (X i).left) (h : e.admissible l E o M) :
@@ -258,8 +248,7 @@ abbrev Expression.admissibleGood (o : Operations l E) {B : Scheme.{u}} {I : Type
 
 /-- The full domain of integral input families for a particular expression. All input
 and intermediate system bounds, and every retained origin witness, are present.
-Source: blueprint fix-prop-coherence, realization domain
-(blueprint: def-sf-integral-system-expression-domain). -/
+ -/
 def Expression.domain (o : Operations l E) {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} {W : Over B} (e : Expression B I X W) :
     ObjectProperty (∀ i, Integral l E (X i).left) := fun K ↦
@@ -268,16 +257,14 @@ def Expression.domain (o : Operations l E) {B : Scheme.{u}} {I : Type u}
     e.admissible l E o ((inputReduction l E X).obj K)
 
 /-- The actual total limit of a system expression on reduced integral inputs.
-Source: Stacks 0941; blueprint fix-prop-coherence
-(blueprint: def-sf-integral-system-expression-domain). -/
+Source: Stacks 0941; blueprint fix-prop-coherence. -/
 def Expression.realizationSource (o : Operations l E) {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} {W : Over B} (e : Expression B I X W) :=
   (e.domain l E o).ι ⋙ inputReduction l E X ⋙
     e.evaluate (systemInterpretation l E o) ⋙ coefficientSequenceLimit l E W.left
 
 /-- The integral interpretation on exactly the same full input domain.
-Source: blueprint fix-prop-coherence
-(blueprint: def-sf-integral-system-expression-domain). -/
+ -/
 def Expression.realizationTarget (o : Operations l E) {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} {W : Over B} (e : Expression B I X W) :=
   (e.domain l E o).ι ⋙ e.evaluate (integralInterpretation l E)

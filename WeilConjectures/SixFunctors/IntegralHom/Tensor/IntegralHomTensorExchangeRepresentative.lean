@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.CoefficientClosedStructure.Coefficient
 /-! # Adjunction exchange on signed tensor representatives
 
 Source: Stacks Tags 08J9 and 06YU.
-(blueprint: lem-sfb-integral-hom-tensor-exchange-representative)
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -72,8 +71,7 @@ and a K-injective resolution of the target tensor. The normalized model curries
 that augmentation to a Hom-complex map. The presentation evaluation is its signed
 uncurrying. The assumed interchange formula makes these chain maps equal on all
 pure generators. Tensor and totalization generation give equality, and cancellation
-of the localized augmentation and representative isomorphisms proves the claim.
-(blueprint: lem-sfb-integral-hom-tensor-exchange-representative) -/
+of the localized augmentation and representative isomorphisms proves the claim. -/
 theorem tensorAdjunctionExchange_representative
     {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})

@@ -27,7 +27,6 @@ This is the stabilization input of
 (`NearbyCyclesModel.exists_forall_mem_finset_homology_galoisLayerAction_eq_id`), and then the
 nearby cycles of `N_{L'}` are all of `Ψ_{N_Ω} C`
 (`NearbyCyclesModel.isIso_pullbackExchange_galoisLayerRestrict_of_homology`).
-
 -/
 
 @[expose] public section

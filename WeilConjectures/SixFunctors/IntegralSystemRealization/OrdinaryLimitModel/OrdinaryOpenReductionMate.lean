@@ -14,7 +14,6 @@ import all WeilConjectures.Algebra.Homology.ProperBaseChange.OpenImmersionTensor
 /-! # Ordinary open quotient comparison
 
 Source: Stacks Tags 03DI, 03EK, 0E8I and 0941; fix-prop-coherence, open factor.
-(blueprint: lem-sf-ordinary-open-reduction-mate).
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +39,7 @@ local instance actualOpen_additive {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmer
   (PurCompactSupport.openAdjunction (PurCompactSupport.completed l E) j).left_adjoint_additive
 
 /-- The ordinary quotient/open comparison, with its specified adjunction transpose.
-Source: Stacks 03DI and 0941
-(blueprint: lem-sf-ordinary-open-reduction-mate). -/
+Source: Stacks 03DI and 0941. -/
 def OrdinaryLimitModel.openReduction (a : OrdinaryLimitModel l E)
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (o : Open l E j) :
     pullbackTensorOrdinaryReduction l E X ⋙ o.ordinary ⟶
@@ -51,8 +49,7 @@ def OrdinaryLimitModel.openReduction (a : OrdinaryLimitModel l E)
     o.adjunction).symm (a.reductionPull l E j).hom
 
 /-- Degreewise ordinary mate, using the two separate complex functors.
-Source: Stacks 03DI and 0941
-(blueprint: lem-sf-ordinary-open-reduction-mate). -/
+Source: Stacks 03DI and 0941. -/
 def OrdinaryLimitModel.openReductionComplex (a : OrdinaryLimitModel l E)
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (o : Open l E j)
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
@@ -109,8 +106,7 @@ private theorem sequence_isIso_of_evaluation (W : Scheme.{u})
   exact isIso_of_reflects_iso f T
 
 /-- The ordinary scalar/open mate is invertible before localization.
-Source: Stacks 03DI, 03EK, 0E8I and 0941; fix-prop-coherence, open-factor sentence
-(blueprint: lem-sf-ordinary-open-reduction-mate).
+Source: Stacks 03DI, 03EK, 0E8I and 0941; fix-prop-coherence, open-factor sentence.
 
 Proof: finite evaluation of ordinary coherent reduction is quotient tensor, with
 unit x mapped to 1 tensor x. The equations a.projections determine its pullback

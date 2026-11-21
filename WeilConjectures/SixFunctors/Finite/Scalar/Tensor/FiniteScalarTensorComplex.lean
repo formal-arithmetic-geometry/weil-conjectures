@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 /-! # Tensor realization constructed from signed total comparisons
 
 Source: Stacks Project, Tags 0GMW, 06YN, 07A4 and 04VK.
-(blueprint: lem-sf-finite-scalar-tensor-complex).
 -/
 
 @[expose] public noncomputable section
@@ -48,7 +47,7 @@ attribute [local instance 30000] SheafOfModules.instPreadditive
 namespace WeilConjectures
 
 /-- Countable colimits for the signed total, with the actual index universe cached.
-Source: Stacks 06YN (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 06YN. -/
 theorem finiteScalarCountableColimits
     (T : Scheme.{u}) (R : Type u) [CommRing R] :
     HasColimitsOfSize.{0, 0}
@@ -64,7 +63,7 @@ theorem finiteScalarCountableColimits
 attribute [local instance] finiteScalarCountableColimits
 
 /-- Resolve the total-bifunctor colimit instance from the cached countable colimits.
-Source: Stacks 06YN (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 06YN. -/
 theorem finiteScalarTensorTotal
     (T : Scheme.{u}) (R : Type u) [CommRing R]
     (V W : CochainComplex
@@ -77,23 +76,23 @@ theorem finiteScalarTensorTotal
 attribute [local instance] finiteScalarTensorTotal
 
 /-- Cache the intrinsic countable-colimit proof used by the total comparison.
-Source: Stacks 06YN (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 06YN. -/
 theorem finiteScalarIntrinsicCountableColimits (T : Scheme.{u}) (R : Type u) [CommRing R] :
     HasColimitsOfSize.{0, 0} (proEtaleRingModules T (proEtaleConstantRing T R)) :=
   inferInstance
 
 /-- Cache the realization's additive instance before specializing the total comparison.
-Source: Stacks 0GMW (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 0GMW. -/
 theorem finiteScalarFunctorAdditive (T : Scheme.{u}) (R : Type u) [CommRing R] [Finite R] :
     (sfIntrinsicModuleEquivalence T R).functor.Additive := inferInstance
 
 /-- Cache the realization's equivalence instance.
-Source: Stacks 00YV (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 00YV. -/
 theorem finiteScalarFunctorEquivalence (T : Scheme.{u}) (R : Type u) [CommRing R] [Finite R] :
     (sfIntrinsicModuleEquivalence T R).functor.IsEquivalence := inferInstance
 
 /-- Cache the fixed-scalar tensor's additivity proof.
-Source: Stacks 06YN (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 06YN. -/
 theorem finiteScalarFixedTensorPreadditive (T : Scheme.{u}) (R : Type u) [CommRing R] :
     MonoidalPreadditive
       (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} R))) := inferInstance
@@ -101,8 +100,7 @@ theorem finiteScalarFixedTensorPreadditive (T : Scheme.{u}) (R : Type u) [CommRi
 attribute [local instance 10000] finiteScalarIntrinsicCountableColimits
   finiteScalarFunctorAdditive finiteScalarFunctorEquivalence finiteScalarFixedTensorPreadditive
 
-/-- Flat-term K-flat fixed-scalar complexes. Source: Stacks 06YS.
-(blueprint: lem-sf-finite-scalar-tensor-complex). -/
+/-- Flat-term K-flat fixed-scalar complexes. Source: Stacks 06YS. -/
 def finiteScalarFlatRepresentatives (T : Scheme.{u}) (R : Type u) [CommRing R] :
     ObjectProperty (CochainComplex
       (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) :=
@@ -110,7 +108,7 @@ def finiteScalarFlatRepresentatives (T : Scheme.{u}) (R : Type u) [CommRing R] :
     ∀ n : ℤ, ObjectProperty.flat (P.X n)
 
 /-- The realization's module sheafification inverts the fixed-scalar sheafification unit.
-Source: Stacks 00YV (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 00YV. -/
 theorem finiteScalarModuleSheafificationUnit_isIso
     (T : Scheme.{u}) (R : Type u) [CommRing R] [Finite R]
     (P : T.ProEtᵒᵖ ⥤ ModuleCat.{u + 1} (ULift.{u + 1} R)) :
@@ -135,7 +133,7 @@ theorem finiteScalarModuleSheafificationUnit_isIso
     ((ProEt.topology T).W_toSheafify P)
 
 /-- The sectionwise constant-module monoidal structure.
-Source: Stacks 00CV (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 00CV. -/
 @[instance_reducible] def finiteScalarPresheafMonoidal (T : Scheme.{u}) (R : Type u)
     [CommRing R] :
     MonoidalCategory (PresheafOfModules.{u + 1}
@@ -147,7 +145,7 @@ Source: Stacks 00CV (blueprint: lem-sf-finite-scalar-tensor-complex). -/
 attribute [local instance] finiteScalarPresheafMonoidal
 
 /-- Curry an ordinary tensor isomorphism, retaining its actual components.
-Source: Stacks 06YN (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 06YN. -/
 def finiteScalarCurryTensorIso {C : Type u₁} {D : Type u₂}
     [Category.{v₁} C] [Category.{v₂} D]
     [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D)
@@ -165,7 +163,7 @@ def finiteScalarCurryTensorIso {C : Type u₁} {D : Type u₂}
       simpa using e.hom.naturality (X := (M, N)) (Y := (M', N)) (f, 𝟙 N))
 
 /-- Postcomposition commutes with uncurrying by the functor composition equation.
-Source: Stacks 06YN (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 06YN. -/
 def finiteScalarUncurryPostcomposeIso {C : Type u₁} {D : Type u₂} {E : Type u₃} {H : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Category.{v₄} H]
     (F : C ⥤ D ⥤ E) (G : E ⥤ H) :
@@ -175,7 +173,7 @@ def finiteScalarUncurryPostcomposeIso {C : Type u₁} {D : Type u₂} {E : Type 
     simp [Functor.comp_map, Functor.uncurry, Functor.postcompose₂])
 
 /-- The uncurrying conversion has identity components.
-Source: Stacks 06YN (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 06YN. -/
 @[simp] theorem finiteScalarUncurryPostcomposeIso_hom_app
     {C : Type u₁} {D : Type u₂} {E : Type u₃} {H : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Category.{v₄} H]
@@ -183,7 +181,7 @@ Source: Stacks 06YN (blueprint: lem-sf-finite-scalar-tensor-complex). -/
     (finiteScalarUncurryPostcomposeIso F G).hom.app Z = 𝟙 _ := rfl
 
 /-- The uncurried lax tensorator, without unfolding the monoidal structures.
-Source: Stacks 07A4 (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 07A4. -/
 def finiteScalarLaxTensorNatTrans {C : Type u₁} {D : Type u₂}
     [Category.{v₁} C] [Category.{v₂} D]
     [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D) [F.LaxMonoidal] :
@@ -198,7 +196,7 @@ def finiteScalarLaxTensorNatTrans {C : Type u₁} {D : Type u₂}
 
 /-- The actual sheafification tensor comparison used by realization.
 Its inverse is determined on pure tensors by the sheafification units.
-Source: Stacks 0GMW (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 0GMW. -/
 @[irreducible] def finiteScalarOrdinaryTensorIso
     (T : Scheme.{u}) (R : Type u) [CommRing R] [Finite R] :
     tensor _ ⋙ (sfIntrinsicModuleEquivalence T R).functor ≅
@@ -237,7 +235,7 @@ Source: Stacks 0GMW (blueprint: lem-sf-finite-scalar-tensor-complex). -/
     isoWhiskerLeft ((U ⋙ E).prod (U ⋙ E)) eS.symm
 
 /-- The total tensor comparison built in abstract categories, to keep specialization small.
-Source: Stacks 06YN (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 06YN. -/
 @[irreducible] def finiteScalarTotalTensorIsoOfOrdinary
     {C : Type u₁} {D : Type u₂}
     [Category.{v₁} C] [Category.{v₂} D] [Preadditive C] [Preadditive D]
@@ -260,7 +258,7 @@ Source: Stacks 06YN (blueprint: lem-sf-finite-scalar-tensor-complex). -/
         (c₁ := .up ℤ) (c₂ := .up ℤ) τ.hom (.up ℤ)))
 
 /-- The signed total of the specified ordinary tensor map, as a natural isomorphism.
-Source: Stacks 06YN (blueprint: lem-sf-finite-scalar-tensor-complex). -/
+Source: Stacks 06YN. -/
 @[irreducible] def finiteScalarTotalTensorIso
     (T : Scheme.{u}) (R : Type u) [CommRing R] [Finite R] :=
   let := SheafOfModules.monoidalCategory (proEtaleConstantRing T R)

@@ -19,15 +19,14 @@ thickening `r₂` followed by the weakly étale cartesian part of the slice
 (`NearbyCyclesModel.isIso_pullbackExchange_sliceTraitGaloisModelHom`). The square
 ```
 N₂ ──τ──→ N₁
- │ψ_M      │ψ_N
- M ──φ──→  N
+ │ψ_M │ψ_N
+ M ──φ──→ N
 ```
 then shows that the pullback of the exchange of `φ` to the special fibre of the slice of `M` is
 invertible as soon as the exchange of `τ` is
 (`NearbyCyclesModel.isIso_map_pullbackExchange_of_sliceTraitGaloisChangeHom`): this is the step
 of Deligne's proof of SGA 4½, [Th. finitude], 3.7, which identifies the change of trait on the
 generic slice with the change of trait on the invariant summands.
-
 -/
 
 @[expose] public section

@@ -261,9 +261,9 @@ lemma isIso_comp_rightDerivedFunctorPlusUnit_forget₂_iff (sq : CommSq g' f' f 
 /-- **The derived base change map and underlying abelian sheaves.** For a commutative square
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 and `K ∈ D⁺(X_ét, ULift ℤ)`, the derived base change map for abelian sheaves is an isomorphism

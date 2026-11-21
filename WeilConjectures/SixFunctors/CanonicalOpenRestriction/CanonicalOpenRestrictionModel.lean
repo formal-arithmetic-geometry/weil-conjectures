@@ -125,7 +125,6 @@ end
 has one simultaneous augmented restriction model.
 Source: Stacks sites-modules.tex, Tags 03DJ and 0E8I; sites-cohomology.tex,
 Tags 0GL1, 0G7E and 0941; steps 2--4 of the adjunction transport argument.
-(blueprint: lem-sf-canonical-open-restriction-model).
 
 Proof: restrict one flat-term K-flat representative and each of its quotient tensors
 on the localized site. Restriction commutes with tensor by the identity on the

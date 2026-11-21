@@ -21,8 +21,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 It is the image under degree-zero homology of the integral sections of the enriched
 adjunction map, followed by the chosen scalar-sections comparison: the concrete
 composite displayed in the representative transpose theorem.
-Source: Stacks 03CZ, 079P and 08JA.
-(blueprint: def-coef-derived-sections-scalar-hom-zero-map) -/
+Source: Stacks 03CZ, 079P and 08JA. -/
 noncomputable def coefficientDerivedSectionsScalarHomZeroMap
     (R : CoefficientDerivedSystemReduction l E W)
     (D : CoefficientDerivedSystemScalarCoherence l E W)

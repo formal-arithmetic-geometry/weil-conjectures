@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 /-! # Transport of normalized integral Hom counits
 
 Source: Stacks Project, sites-cohomology.tex, Lemma 08J9.
-(blueprint: lem-sf-integral-hom-evaluation-transport).
 
 The supplied tensor presentation retains the parameter coherence of tensor-Hom
 currying. Uniqueness of left adjoints therefore compares it with the native closed
@@ -67,8 +66,7 @@ the source Hom equivalence to the first-variable naturality equation reduces it 
 the parameter unit law for the native adjunction. Thus the pointwise comparisons
 form a natural isomorphism of curried bifunctors. Lift it through fully faithful
 currying. The uniqueness-of-left-adjoints counit identity gives the required
-transport equality. No representative choices or boundedness hypotheses are used.
-(blueprint: lem-sf-integral-hom-evaluation-transport). -/
+transport equality. No representative choices or boundedness hypotheses are used. -/
 theorem tensorPresentation_counit_transport (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (a : TensorPresentation.{u, u} X R) :
@@ -120,11 +118,10 @@ theorem tensorPresentation_counit_transport (X : Scheme.{u})
 
 /-- The transported native counits are natural in the first tensor variable.
 
-Source: Stacks Project, sites-cohomology.tex, Lemma 08J9.  Proof: expand
+Source: Stacks Project, sites-cohomology.tex, Lemma 08J9. Proof: expand
 `transportedCounit`; naturality of `e` changes the supplied tensor map into the
 swapped native tensor map, and `CoefficientClosedStructure.evaluation_naturality`
-then gives the equality.  This is a purely formal categorical calculation.
-(blueprint: lem-sf-integral-hom-evaluation-transport-naturality). -/
+then gives the equality. This is a purely formal categorical calculation. -/
 theorem transportedCounit_naturality (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (a : TensorPresentation.{u, u} X R)

@@ -29,11 +29,8 @@ Indeed `Ψ_M A ⟶ Ψ_{M_Ω} A` and `Ψ_P (A ⊠ B) ⟶ Ψ_{P_Ω} (A ⊠ B)` are
 `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin`), `Π_Ω` is
 equivariant (`NearbyCyclesModel.kunnethMap_autAction`) with the Galois group acting trivially on
 the second factor, and invariants commute with the tensor product with a complex with trivial
-action (blueprint `prose-E-10`,
-`NearbyCyclesModel.isIso_map_kunnethMap_of_coinvariant`). This is the projection formula (3) of
-the generic-slicing step of Gabber's Künneth formula (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`), for torsion coefficients.
-
+action. This is the projection formula (3) of
+the generic-slicing step of Gabber's Künneth formula, for torsion coefficients.
 -/
 
 @[expose] public section

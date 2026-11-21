@@ -128,8 +128,7 @@ theorem Etale.survivesBaseChange_id (q : ℤ) (sq : IsPullback e h g p)
     LinearMap.id_apply]
 
 /-- Step (1) of blueprint `lemma-reduction-field--1`: the survival of `ξ` is invariant under
-thickenings. A thickening does not change the étale site (blueprint
-`lemma-reduction-field`, `AlgebraicGeometry.Etale.isEquivalence_upperStar_of_thickening`),
+thickenings. A thickening does not change the étale site,
 so the transition maps along it are isomorphisms compatible with the base-change maps. -/
 theorem Etale.survivesBaseChange_comp_iff_of_surjective (q : ℤ) (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)
@@ -166,9 +165,7 @@ theorem Etale.survivesBaseChange_comp_iff_of_surjective (q : ℤ) (sq : IsPullba
 
 -- the transition maps are compared through large terms of the derived categories
 /-- Step (2) of blueprint `lemma-reduction-field--1`: the survival of `ξ` passes to cofiltered
-limits along affine transition morphisms. By the limit theorem for higher direct images
-(blueprint `lemma-reduction-field`,
-`AlgebraicGeometry.Etale.higherDirectImage_limit`) the stalks over the limit are the colimits
+limits along affine transition morphisms. By the limit theorem for higher direct images the stalks over the limit are the colimits
 of the stalks over the stages, on both sides of the base-change map. -/
 theorem Etale.survivesBaseChange_of_isLimit [IsAffine S] (q : ℤ) (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)

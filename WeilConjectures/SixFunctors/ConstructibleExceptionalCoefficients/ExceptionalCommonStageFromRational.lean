@@ -121,8 +121,7 @@ variable (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
 
 /-- Closed operations descending the supplied rational family, with its transition law.
 No rational operation or scalar comparison is chosen again by this record.
-Source: Zheng, Construction 6.6; coefficient construction step 5, common-field part
-(blueprint: lem-sf-common-stage-descent-fixed-rational). -/
+Source: Zheng, Construction 6.6; coefficient construction step 5, common-field part. -/
 structure CommonStageAssembly
     (A : RingStageAssembly.{u, v} l Ω D hl (f := f))
     (P : RationalStageAssembly.{u, v} l Ω D hl A) where
@@ -158,8 +157,7 @@ attribute [local implicit_reducible] GeneralAlgebraicallyClosedCoefficients.Stag
 /-- Descend a fixed normalized rational family to the literal common-field pair category.
 Only closed operations and inclusion comparisons are constructed here. In particular,
 this does not assert the rational-localization existence theorem.
-Source: Zheng, Construction 6.6; `lem-sf-field-stage-completion`, step 4
-(blueprint: lem-sf-common-stage-descent-fixed-rational).
+Source: Zheng, Construction 6.6; `lem-sf-field-stage-completion`, step 4.
 
 Proof: use `P.action`, `P.scalar_normalized`, and the residue-Tor equality to identify
 all rational scalar comparisons with localizations of the supplied integral comparisons.

@@ -36,8 +36,7 @@ attribute [local irreducible] DerivedCategory instCategoryDerivedCategory
   originCompositionModel towerCandidateComparison
 
 /-- Naturality of the four-factor comparison.
-Source: naturality of the four factors and functoriality
-(blueprint: lem-sf-finite-support-candidate-composition).
+Source: naturality of the four factors and functoriality.
 
 Proof: move the input map through the four factors, in order, using the naturality
 of α, β, ω and δ⁻¹. Functoriality of Q moves it through the first factor. -/
@@ -66,8 +65,7 @@ theorem finiteSupportCandidateCompositionCore_naturality
   rw [reassoc_of% hg, reassoc_of% hc, hh]
 
 /-- Compose four comparison factors, keeping the naturality calculation abstract.
-Source: functoriality and naturality
-(blueprint: lem-sf-finite-support-candidate-composition). -/
+Source: functoriality and naturality. -/
 @[irreducible] def finiteSupportCandidateCompositionCore
     {C₀ C₁ D₀ D₁ D₂ : Type*}
     [Category C₀] [Category C₁] [Category D₀] [Category D₁] [Category D₂]
@@ -83,8 +81,7 @@ Source: functoriality and naturality
     I J F P Q Q₀ R R₀ α β ω δ K L h
 
 /-- Component formula for the abstract four-factor construction.
-Source: its definition
-(blueprint: lem-sf-finite-support-candidate-composition). -/
+Source: its definition. -/
 theorem finiteSupportCandidateCompositionCore_app
     {C₀ C₁ D₀ D₁ D₂ : Type*}
     [Category C₀] [Category C₁] [Category D₀] [Category D₁] [Category D₂]
@@ -98,8 +95,7 @@ theorem finiteSupportCandidateCompositionCore_app
   rfl
 
 /-- Conjugate the canonical origin compositor to the three specified candidates.
-Source: proposition-composition-base-change-rf-shriek--1, compactification independence
-(blueprint: lem-sf-finite-support-candidate-composition). -/
+ -/
 @[irreducible] def finiteSupportCandidateComposition (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [QuasiCompact f] [QuasiCompact g]
@@ -139,8 +135,7 @@ private theorem ambient_composition_app (A : Type (u + 1)) [CommRing A] [Finite 
   exact h
 
 /-- The four specified component maps of the candidate compositor.
-Source: its componentwise construction
-(blueprint: lem-sf-finite-support-candidate-composition). -/
+Source: its componentwise construction. -/
 theorem finiteSupportCandidateComposition_app (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [QuasiCompact f] [QuasiCompact g]
@@ -172,8 +167,7 @@ private theorem naturality_conjugate {B T : Type*} [Category B] [Category T]
   rw [η.naturality_assoc, ← G.map_comp, e.hom_inv_id, G.map_id, Category.comp_id]
 
 /-- Transport a comparison on a full subcategory across an ambient isomorphism.
-Source: naturality and inverse cancellation
-(blueprint: lem-sf-finite-support-candidate-composition). -/
+Source: naturality and inverse cancellation. -/
 theorem finiteSupportCandidateTransport
     {A B : Type*} [Category A] [Category B] (S : ObjectProperty A)
     (P Q : A ⥤ B) (η : S.ι ⋙ P ⟶ S.ι ⋙ Q)
@@ -183,7 +177,7 @@ theorem finiteSupportCandidateTransport
   exact naturality_conjugate η e.symm
 
 /-- The same transport, with the two source operations evaluated explicitly.
-Source: functor composition (blueprint: lem-sf-finite-support-candidate-composition). -/
+Source: functor composition. -/
 theorem finiteSupportCandidateTransport₂
     {A B T : Type*} [Category A] [Category B] [Category T] (S : ObjectProperty A)
     (P : A ⥤ B) (Q : B ⥤ T) (R : A ⥤ T)
@@ -193,7 +187,7 @@ theorem finiteSupportCandidateTransport₂
   finiteSupportCandidateTransport S (P ⋙ Q) R η K L a
 
 /-- Naturality on a full subcategory, evaluated on an ambient morphism.
-Source: naturality (blueprint: lem-sf-finite-support-candidate-composition). -/
+Source: naturality. -/
 theorem finiteSupportCandidateNaturality₂
     {A B T : Type*} [Category A] [Category B] [Category T] (S : ObjectProperty A)
     (P : A ⥤ B) (Q : B ⥤ T) (R : A ⥤ T)
@@ -646,8 +640,7 @@ private theorem coherence_pro_grouped (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The candidate compositor evaluates to the recorded pro-etale compositor on an
 etale input. Source: compactSupportSiteCoherence, comparison/composition calculation,
-and proposition-composition-base-change-rf-shriek--1
-(blueprint: lem-sf-finite-support-candidate-composition).
+and proposition-composition-base-change-rf-shriek--1.
 
 Proof: precompose each towerCandidateComparison with the etale-origin equivalence.
 Its defining fully faithful preimage is the site comparison, the etale change of

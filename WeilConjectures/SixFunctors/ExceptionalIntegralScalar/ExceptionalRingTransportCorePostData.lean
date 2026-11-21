@@ -23,7 +23,6 @@ Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 
 The proof transports the strict-system adjunction through the two reconstruction
  equivalences, identifies its finite evaluations, and uses the proper/open integral
 realization to define the final integral-left comparison.
-(blueprint: new-lem-sf-exceptional-ring-transport-post-data)
 -/
 structure TransportCorePostData
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
@@ -79,7 +78,6 @@ structure TransportCorePostData
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26.
 The strict-system transport supplies the adjunction, its finite evaluations, and the
 reduction comparisons; the integral compactification realization supplies `integralLeft`.
-(blueprint: new-lem-sf-exceptional-ring-transport-post-data)
 -/
 theorem exists_exceptional_transport_post_data
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]

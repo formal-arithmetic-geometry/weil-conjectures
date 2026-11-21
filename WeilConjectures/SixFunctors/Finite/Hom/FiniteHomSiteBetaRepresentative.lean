@@ -171,8 +171,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
 /-- Ordinary scalar/site comparison: the actual left mate of scalar restriction.
-Source: Stacks 03CZ, 07A4; blueprint lemma-change-coefficients-internal-hom--1.
-(blueprint: lem-coef-finite-hom-site-beta-representative). -/
+Source: Stacks 03CZ, 07A4; blueprint lemma-change-coefficients-internal-hom--1. -/
 def finiteHomSiteOrdinaryBeta {n m : ℕ} (h : m ≤ n) :
     finiteHomNuOrdinary l E X n ⋙ coefficientFiniteQuotientExtension l E X h ⟶
       ProEtale.etaleSheafExtendScalars (finiteHomQuotient l E h) X ⋙

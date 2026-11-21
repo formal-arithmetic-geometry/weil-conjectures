@@ -79,9 +79,6 @@ private def normalizedInverse (R : Type u) [CommRing R] [Finite R] (Y : Scheme.{
 attribute [-instance] HasDerivedCategory.ofIsGrothendieckAbelian in
 attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory in
 /-- Normalize the two intrinsic scalar inputs of the realized finite projection.
-Source: `finiteReductionIso` and the defining equation of the tensor-coordinate
-component of the compactification projection in `def-exchange-projection`.
-(blueprint: lem-sf-ordinary-projection-reduced-input-normalization-m4).
 
 Proof: set A to the positive finite coefficient quotient. Evaluate finiteReductionIso
 at K and at L and apply the inverse intrinsic realization functors to obtain

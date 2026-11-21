@@ -68,9 +68,9 @@ noncomputable def rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
 `e : X ≅ Y`: `RΓ(X, e^* K) ≅ RΓ(Y, K)`. It is the composite
 
 ```
-            D(e^*)                RΓ_X
+            D(e^*) RΓ_X
   D(Y) ──────────────▶ D(X) ──────────────▶ D(A)
-    │      ≅ R(e^*) ≅ R((e⁻¹)_*)               ▲
+    │ ≅ R(e^*) ≅ R((e⁻¹)_*) ▲
     └──────────── R((e⁻¹)_*) ⋙ RΓ_X ≅ RΓ_Y ────┘
 ```
 

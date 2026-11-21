@@ -8,7 +8,6 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalI
 import WeilConjectures.SmoothPurity.Completed.CompletedScalarChainShift
 /-! # Chain shift normalization for exceptional scalar mates
 Source: Stacks Tags 011G, 014E and 08TC.
-(blueprint: lem-sf-exceptional-integral-completed-shift)
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -25,8 +24,7 @@ Source: Stacks Tags 011G, 014E and 08TC; the Roos-cone realization of completed 
 Proof: use completedScalarChainShift for the product and level comparisons. Unfold
 the two predicates and their named comparison maps: both express the same first
 coordinate product shift and the second coordinate shift multiplied by the sign.
-The comparison equation is exactly the second conclusion of completedScalarChainShift.
-(blueprint: lem-sf-exceptional-integral-completed-shift). -/
+The comparison equation is exactly the second conclusion of completedScalarChainShift. -/
 theorem exceptionalIntegralCompletedScalarShift
     (E L : FieldStage.{u} l) (i : E.carrier →ₐ[Padic l] L.carrier)
     (side : Bool) :

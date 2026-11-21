@@ -11,8 +11,7 @@ import WeilConjectures.SixFunctors.CoefSupportOpenTensor.CoefNativeOpenTensorMod
 
 /-! # Native normalized open tensor models and evaluation
 
-Source: Stacks 0E8I, 0GL1 and 07A4
-(blueprint: lem-coef-native-open-tensor-models-existence).
+Source: Stacks 0E8I, 0GL1 and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -39,7 +38,6 @@ prescribed finite evaluation comparisons identify their gamma transformations.
 Source: Stacks, sites-modules.tex, lemma-j-shriek-and-tensor (Tag 0E8I);
 sites-cohomology.tex, lemma-j-shriek-and-tensor (Tag 0GL1) and
 lemma-pullback-tensor-product (Tag 07A4); support-open-tensor steps 5--6.
-(blueprint: lem-coef-native-open-tensor-models-existence).
 
 Proof: construct the restriction tensor comparison on ordinary module sheaves
 by the pure-tensor map x tensor y to their restrictions. The inverse open

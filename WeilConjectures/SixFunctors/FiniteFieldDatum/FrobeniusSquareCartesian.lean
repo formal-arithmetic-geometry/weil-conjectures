@@ -16,8 +16,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 # The Cartesian Frobenius square
 
 Source: Deligne, Weil II, (1.1.10)(i), (1.1.11), pp. 151--152, and (1.1.14), p. 153;
-Weil conjectures blueprint, `def:weil-direct-image-object`, Cartesian Frobenius square
-(blueprint: lem-weil-frobenius-square-cartesian).
+Weil conjectures blueprint, `def:weil-direct-image-object`, Cartesian Frobenius square.
 
 The scalar extensions and their morphism use the chosen categorical pullback. The two
 horizontal maps use the dependency's unrestricted `galoisMap`, since the models need
@@ -39,8 +38,7 @@ identify the scalar extension of the base with `Spec k` by its second projection
 state the Cartesian structure square over `Spec k`.
 
 Source: Deligne, Weil II, (1.1.10)(i), (1.1.11), pp. 151--152, and (1.1.14), p. 153;
-blueprint `def:weil-direct-image-object`
-(blueprint: lem-weil-frobenius-square-cartesian).
+blueprint `def:weil-direct-image-object`.
 
 Proof:
 1. The geometric field Frobenius and its inverse fix the base field. Contravariant

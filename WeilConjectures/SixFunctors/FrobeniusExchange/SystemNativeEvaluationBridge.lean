@@ -19,8 +19,7 @@ specified by adjunction mates of the section-normalized pullback evaluation. Thi
 file identifies them with the native varying-ring evaluations `evalP` and `evalJ`,
 followed by the fixed finite coordinate changes.
 
-Source: Zheng 4.1 and 4.10; Stacks 03DI, 03D2
-(blueprint: def-weil-system-operation-exchange-realization).
+Source: Zheng 4.1 and 4.10; Stacks 03DI, 03D2.
 -/
 
 @[expose] public noncomputable section
@@ -396,7 +395,7 @@ private theorem eqToIso_sections {X Y : Scheme.{u}} (n : ℕ)
 
 /-- Every equality between ordinary direct-image evaluation and finite direct image induces
 the native ordinary direct-image evaluation, since both are the identity on sections.
-Source: Zheng 4.1 (blueprint: def-weil-system-operation-exchange-realization). -/
+Source: Zheng 4.1. -/
 theorem eqToIso_directEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (h : ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) f ⋙ coefficientSequenceEvaluation l E Y n =
@@ -417,7 +416,7 @@ end Sections
 
 /-- Transpose a map into a total limit, given by its projections, under a finite
 reduction adjunction. The evaluated counit is assumed to be the adjunct of the projection.
-Source: Stacks 07A6 (blueprint: def-weil-system-operation-exchange-realization). -/
+Source: Stacks 07A6. -/
 theorem map_comp_counit_eq_of_projection {C D T : Type*} [Category C] [Category D]
     [Category T] {F : C ⥤ D} {R : D ⥤ C} (a : F ⊣ R) {S : C ⥤ T} {L : T ⥤ C}
     (b : S ⊣ L) {ev : T ⥤ D} (π : L ⟶ ev ⋙ R) (e : S ⋙ ev ≅ F)

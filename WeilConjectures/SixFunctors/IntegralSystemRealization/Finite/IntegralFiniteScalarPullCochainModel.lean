@@ -43,8 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Scalar/pullback comparison fixed by the actual restriction/direct-image square.
 This is a construction from adjunctions, with no chosen existence witness.
-Source: Stacks 0D6D, 0D6E and 06YY
-(blueprint: lem-sf-integral-finite-scalar-pull-cochain-model). -/
+Source: Stacks 0D6D, 0D6E and 06YY. -/
 @[irreducible] def integralFiniteScalarPull {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ringedPull l E f ⋙ scalarReductionDerivedExtension l E X n ≅
       scalarReductionDerivedExtension l E Y n ⋙ finiteDerivedPullback l E n f :=
@@ -60,8 +59,7 @@ Source: Stacks 0D6D, 0D6E and 06YY
 
 /-- On a flat-term K-flat complex the adjunction-normalized derived scalar square
 is computed by the ordinary scalar square.
-Source: Stacks 07A6, 06YY and 0D6E
-(blueprint: lem-sf-integral-finite-scalar-pull-cochain-model).
+Source: Stacks 07A6, 06YY and 0D6E.
 
 Proof: use scalarPull_complex_normalization for the pbc scalar and geometric
 presentations. Normalize the two scalar counits by

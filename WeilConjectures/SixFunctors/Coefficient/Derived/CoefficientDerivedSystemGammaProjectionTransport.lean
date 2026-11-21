@@ -11,8 +11,7 @@ import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemG
 /-! # Enriched coefficient gamma projection transport
 
 Source: Stacks Project, sites-cohomology.tex, Tags 07A6, 08JA, 0D6E and 0941;
-the specialization of `enrichedSequenceProjectionFormula` to the coefficient calculus
-(blueprint: lem-coef-derived-system-gamma-projection-transport).
+the specialization of `enrichedSequenceProjectionFormula` to the coefficient calculus.
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ comparison; use `D.globalLimit_model`, `D.globalEvaluation_model`, and
 Finally use `H.sections_projection` at the internal-Hom system. The resulting
 composition is exactly the displayed `CoefficientGammaProjection` equation,
 including the prescribed first-variable reduction comparison.
-(blueprint: lem-coef-derived-system-gamma-projection-transport)
 -/
 theorem coefficientDerivedSystemGammaProjectionTransport
     (S : CoefficientDerivedSystemCalculus l E W)

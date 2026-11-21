@@ -32,8 +32,7 @@ at a closed point.
 
 The proof works with the `AddCommGrpCat`-valued cohomology `H^q(-, ℤ/e)` of the fibres
 `Y₀ ×_{X₀} U` for `U` affine étale over `X₀` and `e ∣ d`: by
-`AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists` (blueprint
-`proposition-base-change-larger-algebraically-closed`) it suffices that every such class dies on an
+`AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists` it suffices that every such class dies on an
 étale cover of `U`. In degrees `q ≥ 2` the classes vanish outright, `Y₀ ×_{X₀} U` being a smooth
 affine curve over `K`. In degree one the class is killed by a torsor spread out from the generic
 fibre, after reducing to a base with a section by slicing. Only the *vanishing* of pulled-back
@@ -72,8 +71,7 @@ of `c` over the geometric generic point `Spec K ⟶ W`. Let `e` be invertible on
 class `ξ ∈ H¹(Y, ℤ/e)` is killed by a `ℤ/e`-torsor `T` over `C`: it dies after pullback to any
 scheme `Z` over `Y` whose map to `C` lifts to `T`.
 
-By `AlgebraicGeometry.bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension`
-(blueprint `theorem-cohomology-curves--6`) the class comes from the generic fibre
+By `AlgebraicGeometry.bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension` the class comes from the generic fibre
 `C_L`, where it is represented by a torsor `t`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_forall_cohomologyMap_eq_zero_iff`). The torsor
 has an `L`-point above the generic point of the section, since `H¹(Spec L, ℤ/e) = 0`, so it
@@ -194,8 +192,7 @@ theorem Etale.CurveTestDatum.isIntegrallyClosed_and_isAlgClosed_and_exists_of_is
 curve-test datum, every class `ξ ∈ H¹(Y₀ ×_{X₀} U, ℤ/e)`, for `e ∣ d` and `U` affine étale over
 `X₀`, dies on an étale cover of `U`.
 
-By the slicing lemma `AlgebraicGeometry.Smooth.exists_etaleCover_factorization` (blueprint
-`theorem-smooth-base-change-classical-torsion`) `U` is covered by étale `U'` with `U' ⟶ S₀`
+By the slicing lemma `AlgebraicGeometry.Smooth.exists_etaleCover_factorization` `U` is covered by étale `U'` with `U' ⟶ S₀`
 factoring as an affine morphism `U' ⟶ V` with geometrically connected fibres and a section, followed
 by an étale `V ⟶ S₀`. As `S₀` is normal with algebraically closed function field, `V ⟶ S₀` is a
 local isomorphism (`AlgebraicGeometry.Etale.isLocalIso_of_isSepClosed_functionField`, blueprint
@@ -321,9 +318,9 @@ integral normal base with algebraically closed function field, together with the
 
 ```
 Y₀ ---e---> Spec K
-|              |
-h              |
-v              v
+| |
+h |
+v v
 X₀ ---f₀----> S₀
 ```
 

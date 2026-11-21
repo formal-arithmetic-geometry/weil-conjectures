@@ -13,8 +13,7 @@ import WeilConjectures.SixFunctors.CoefSupportOpenTensor.CoefNativeOpenTensorFin
 
 /-! # Ordinary native open tensor representatives
 
-Source: Stacks 0E8I, 0G7E and Homology 012Z
-(blueprint: lem-coef-native-open-tensor-cochains).
+Source: Stacks 0E8I, 0G7E and Homology 012Z.
 -/
 
 @[expose] public noncomputable section
@@ -39,12 +38,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Sequence-site specialization of ordinary open tensor data.
-Source: Stacks 0E8I (blueprint: lem-coef-native-open-tensor-cochains). -/
+Source: Stacks 0E8I. -/
 abbrev SystemOpenCochains {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :=
   WeilConjectures.CoefSupportOpenTensor.NativeOpenTensorPrimitives.SystemOpenCochainsData l E j
 
 /-- Finite-coefficient specialization of ordinary open tensor data.
-Source: Stacks 0E8I (blueprint: lem-coef-native-open-tensor-cochains). -/
+Source: Stacks 0E8I. -/
 abbrev FiniteOpenCochains {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (n : ℕ) :=
   WeilConjectures.CoefSupportOpenTensor.NativeOpenTensorPrimitives.FiniteOpenCochainsData l E j n
@@ -52,8 +51,7 @@ abbrev FiniteOpenCochains {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
 set_option linter.unusedVariables false in
 /-- Native restriction and projection data before derived localization.
 Source: Stacks sites-modules.tex, lemma-j-shriek-and-tensor (0E8I),
-sites-cohomology.tex, lemma-pullback-K-flat (0G7E), and Homology 012Z
-(blueprint: lem-coef-native-open-tensor-cochains).
+sites-cohomology.tex, lemma-pullback-K-flat (0G7E), and Homology 012Z.
 
 Proof: identify the open pro-etale site with localization of the ambient site,
 and make the same identification after product with the coefficient index.

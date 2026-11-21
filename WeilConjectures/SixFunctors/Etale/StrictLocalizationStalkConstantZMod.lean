@@ -18,8 +18,7 @@ pullback of a sheaf `F` of `Λ`-modules to `U ×_Z S` is the stalk at `s` of `R^
 constant sheaf `ℤ/ℓ`:
 
 `H^q(U ×_Z S, ℤ/ℓ) ≅ (R^q f_* ℤ/ℓ)_s`
-
-(blueprint `lemma-punctured-surface-punctured-curve--1`).
+.
 
 ## Main statements
 
@@ -63,8 +62,7 @@ theorem nonempty_iso_forget₂_sheafFiber_higherDirectImage {Λ : Type (u + 1)} 
       ((DerivedCategory.singleFunctor _ 0).mapIso
         (asIso (upperStarForget₂Comparison Λ p F))) ≪≫ (e₂.app _).symm⟩
 
-/-- **The stalk formula for the constant sheaf `ℤ/ℓ`** (blueprint
-`lemma-punctured-surface-punctured-curve--1`, Stacks 03Q9): for `f : U ⟶ Z` quasi-compact and
+/-- **The stalk formula for the constant sheaf `ℤ/ℓ`**: for `f : U ⟶ Z` quasi-compact and
 quasi-separated and a geometric point `s` of `Z`,
 
 `H^q(U ×_Z Z_(s), ℤ/ℓ) ≅ (R^q f_* ℤ/ℓ)_s`. -/

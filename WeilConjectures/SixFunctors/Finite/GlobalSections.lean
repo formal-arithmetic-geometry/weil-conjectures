@@ -40,8 +40,7 @@ global sections of `π_* K` are those of `K`: `RΓ(Y, π_* K) ≅ RΓ(X, K)`, so
 pushforward `π_*` is exact, so the Grothendieck spectral sequence of `Γ_Y ∘ π_*` degenerates:
 this is the Leray isomorphism
 `AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso` with
-`Rπ_* = π_*` (`AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory`).
-(blueprint: `lemma-finite-morphisms-cohomology--2`) -/
+`Rπ_* = π_*` (`AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory`). -/
 noncomputable def mapDerivedCategoryLowerStarCompRightDerivedGlobalSectionsIso :
     ((π)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategory ⋙
         rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y ≅

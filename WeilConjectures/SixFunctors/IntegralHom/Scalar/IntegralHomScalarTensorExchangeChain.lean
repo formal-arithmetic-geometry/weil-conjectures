@@ -7,7 +7,6 @@ module
 public import WeilConjectures.SixFunctors.IntegralHom.Tensor.IntegralHomTensorSwap
 /-! # Scalar compatibility of the signed chain interchange
 Source: Stacks Tags 06YY and 0FPQ.
-(blueprint: lem-sfb-integral-hom-scalar-tensor-exchange-chain)
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -63,8 +62,7 @@ private theorem unit_eq (b : IntegralHomReductionTensorData D l hl E X n)
 Source: Stacks 06YY and 0FPQ. Proof: cancel the invertible ordinary comparison
 and transpose each component through ordinary scalar extension. Pure total-tensor
 generators suffice by sheafification and totalization. Naturality of the scalar
-unit and the two normalized formulas give the same Koszul-signed generator.
-(blueprint: lem-sfb-integral-hom-scalar-tensor-exchange-chain) -/
+unit and the two normalized formulas give the same Koszul-signed generator. -/
 theorem scalarTensorExchange_chain
     (b : IntegralHomReductionTensorData D l hl E X n)
     (P Q : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ)

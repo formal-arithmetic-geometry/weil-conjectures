@@ -97,8 +97,7 @@ attribute [local instance 2000] abSheafify abLocallyBijective
 /-- The chain tensor--Hom equivalence evaluates pure tensors without a sign when
 its tensor factors are ordered as parameter first and Hom input second.
 Source: Stacks Tag 08J9 and blueprint `lem-coef-integral-hom-reduction.proof.md`,
-paragraphs 1--2
-(blueprint: lem-sf-hom-complex-tensor-pure-equivalence).
+paragraphs 1--2.
 
 Proof: use the constructed chain tensor--Hom equivalence. Its inverse sends a
 map into the Hom complex to evaluation on each homogeneous tensor generator.

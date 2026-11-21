@@ -8,9 +8,6 @@ module
 public import WeilConjectures.SixFunctors.Compact.CompactSupportQuotientNative
 
 /-! # Original presentation of the input quotient laws
-
-Source: the current blueprint finite-level coefficient comparison
-(blueprint: lem-coef-compact-support-quotient-raw-input).
 -/
 
 @[expose] public noncomputable section
@@ -210,8 +207,7 @@ private theorem nativeRestriction_map_eq (X : Scheme.{u})
       (nativeRestriction_eq l E X r m hrm))
 
 /-- The input laws in the original scalar-reduction presentation.
-Source: the specified quotient unit and coefficient comparisons
-(blueprint: lem-coef-compact-support-quotient-raw-input).
+Source: the specified quotient unit and coefficient comparisons.
 Proof: the native wrappers have exactly the original functors and arrows as values. -/
 theorem compactSupportQuotient_raw_input
     (X : Scheme.{u}) (K : DerivedCategory (scalarReductionSource.{u, u} l E X))

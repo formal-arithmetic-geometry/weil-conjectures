@@ -51,8 +51,7 @@ attribute [local irreducible] ordinaryPull ordinaryDerivedPull ordinaryComplexCo
 set_option linter.unusedVariables false in
 /-- Detection of the specified completion unit along a finite open--closed tree.
 
-Source: Stacks Tags 09AH, 09BM, 04TQ and Bhatt--Scholze Remark 6.5.10
-(blueprint: lem-fix-qcqs-completion-unit-tree).
+Source: Stacks Tags 09AH, 09BM, 04TQ and Bhatt--Scholze Remark 6.5.10.
 Proof: fix the original unit morphism. Induct on the number of vertex indices
 strictly greater than the given vertex. A nonempty leaf uses cover conservativity;
 an empty leaf uses the zero category. At an internal vertex both children have

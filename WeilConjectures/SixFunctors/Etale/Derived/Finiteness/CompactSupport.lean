@@ -21,7 +21,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 
 Compactly supported cohomology of a bounded constructible complex of finite Tor amplitude over
 a separably closed field is a perfect complex of `Λ`-modules, and so are the derived geometric
-stalks of such a complex (`lemma-perfect-complexes-geometric-point`).
+stalks of such a complex.
 
 ## Implementation notes
 
@@ -125,7 +125,7 @@ variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
   [HasInvertibleExponent Λ X]
 
 omit [IsSeparated aX] in
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
+/-- Perfectness of compact cohomology and of
 geometric stalks
 
 **Boundedness of compactly supported cohomology.** Let `Λ` be a finite coefficient ring, `k`
@@ -147,7 +147,7 @@ theorem isZero_compactlySupportedCohomology_of_lt
   · exact (_root_.DerivedCategory.isLE_iff _ b).1 hb q hq
 
 omit [IsSeparated aX] in
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
+/-- Perfectness of compact cohomology and of
 geometric stalks
 
 **Finiteness of compactly supported cohomology.** In the situation of
@@ -169,7 +169,7 @@ theorem finite_compactlySupportedCohomology
     ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)).symm.toLinearEquiv
 
 omit [IsSeparated aX] in
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
+/-- Perfectness of compact cohomology and of
 geometric stalks
 
 **Finite Tor amplitude of compactly supported cohomology.** In the situation of
@@ -223,7 +223,7 @@ section Stalk
 
 variable [Finite Λ] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Compact-support perfectness (geometric
+/-- Compact-support perfectness (geometric
 stalks).
 
 Also blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of

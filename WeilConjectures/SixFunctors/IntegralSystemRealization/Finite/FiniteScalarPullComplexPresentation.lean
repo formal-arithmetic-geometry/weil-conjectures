@@ -31,8 +31,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The ordinary finite scalar presentation square holds degreewise on any complex.
-Source: Stacks Tags 07A6, 06YY and 0D6E
-(blueprint: lem-sf-finite-scalar-pull-complex-presentation).
+Source: Stacks Tags 07A6, 06YY and 0D6E.
 Proof: in degree j the complex composition isomorphisms are identities, and the
 scalar presentation and pullback presentation are their ordinary components.
 The desired component equation is finiteScalarPullPresentation at P.X j.

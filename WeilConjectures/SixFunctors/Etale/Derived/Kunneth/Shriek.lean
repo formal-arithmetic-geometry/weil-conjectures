@@ -28,7 +28,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct`
   (`lemma-external-duality-trace-morphism` (i)): the `!`-Künneth isomorphism
   `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for a finite coefficient ring.
-
 -/
 
 @[expose] public section

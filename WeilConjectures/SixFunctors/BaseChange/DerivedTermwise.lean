@@ -14,9 +14,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjectiv
 Consider a cartesian square of schemes
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
+  | |
+  f' f
+  ↓ ↓
   Y' --g---> Y
 ```
 an object `K ∈ D⁺(X_ét)` represented by a K-injective complex `I` (via `s : K ≅ Qh I`), and a
@@ -37,8 +37,6 @@ comparison maps are unique in the homotopy category and are homotopy equivalence
   maps `I ⟶ P` and `J ⟶ P'` exist and are unique.
 - `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_eq_termwise`: the comparison maps are
   isomorphisms, and the derived base change map on `K` agrees with the termwise one.
-
-(blueprint: `prose-04-06`)
 -/
 
 @[expose] public section
@@ -61,7 +59,7 @@ complex `I` via `s : K ≅ Qh I`, and let `j : g'^* I ⟶ J` be a K-injective re
 `DerivedCategory.Plus.injectiveObjectEquivalence`, with the isomorphisms `ρ : K ≅ Qh P` and
 `ρ' : g'^* K ≅ Qh P'`. Then there are unique maps `h₁ : I ⟶ P` and `h₂ : J ⟶ P'` in the
 homotopy category compatible with `s`, `ρ` and with `t : g'^* K ≅ Qh J` (induced by `s` and
-`j`), `ρ'` respectively. (blueprint: `prose-04-06`) -/
+`j`), `ρ'` respectively. -/
 lemma Etale.existsUnique_derivedBaseChangeMapPlus_comparison
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A))
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [I.IsKInjective]
@@ -111,12 +109,12 @@ identifications `χ : f_* I ≅ Rf_* K`, `χ' : f'_* J ≅ Rf'_* (g'^* K)` and
 `e : g^* f_* I ⟶ f'_* g'^* I ⟶ f'_* J`, i.e. the square
 ```
   g^* f_* I ---------e---------> f'_* J
-      |                            |
-      σ                            χ'
-      ↓                            ↓
+      | |
+      σ χ'
+      ↓ ↓
   g^* Rf_* K --(base change)--> Rf'_* g'^* K
 ```
-commutes. (blueprint: `prose-04-06`) -/
+commutes. -/
 lemma Etale.derivedBaseChangeMapPlus_eq_termwise (sq : CommSq g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A))
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [I.IsKInjective]

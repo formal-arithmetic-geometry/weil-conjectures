@@ -174,7 +174,7 @@ section FieldTorAmplitude
 
 variable (F : Type (u + 1)) [Field F] (X : Scheme.{u})
 
-/-- Blueprint `proposition-ctf-equals-bc`: Finite Tor amplitude at field coefficients.
+/-- Finite Tor amplitude at field coefficients.
 
 For a coefficient field `F`, every bounded constructible complex `K` of étale sheaves of
 `F`-modules has finite Tor amplitude: there are `a ≤ b` with `𝓗ʳ(K ⊗ᴸ_F M) = 0` for `r ∉ [a, b]`
@@ -197,13 +197,12 @@ theorem Etale.DerivedCategory.finiteTorAmplitude_of_boundedConstructible_of_fiel
   exact (Etale.flat_iff_forall_flat_sheafFiber_obj G).2 fun _ ↦
     (ModuleCat.flat_iff_flat _).2 inferInstance
 
-/-- Blueprint `proposition-ctf-equals-bc`: Pointer to the properties of finite Tor
+/-- Pointer to the properties of finite Tor
 amplitude.
 
 At a field coefficient `F` the finite-Tor category is the bounded constructible one,
 `Dᵇctf(X, F) = Dᵇc(X, F)`, consistently with the amplitude condition: every bounded constructible
-complex at a field coefficient has finite Tor amplitude (blueprint
-`proposition-ctf-equals-bc`). -/
+complex at a field coefficient has finite Tor amplitude. -/
 theorem Etale.DerivedCategory.constructibleFiniteTor_eq_boundedConstructible_of_field :
     Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} F) X =
       Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} F) X := by

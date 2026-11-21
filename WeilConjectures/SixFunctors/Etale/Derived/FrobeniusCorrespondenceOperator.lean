@@ -27,8 +27,7 @@ For the base change `Φ_X` of the scheme Frobenius of a model `X₀` of `X` and 
 correspondence `ψ : LΦ_X^* K ⟶ K`, the operator of the iterate `ψ_m`
 (`AlgebraicGeometry.Etale.weilDatumIterate`) for the graph `c_m` of `Φ_X^m` is
 `T_{c_m}(ψ_m) = RΓ_c(X, ψ_m) ∘ (Φ_X^m)^♯`, and the stalk of `ψ_m` at a fixed point `x̄` of
-`Φ_X^m` is the endomorphism `ψ_{m,x̄}` of `K_x̄` (blueprint
-`definition-frobenius-correspondences-their-operators`, for finite coefficients `A`).
+`Φ_X^m` is the endomorphism `ψ_{m,x̄}` of `K_x̄`.
 
 ## Main definitions
 
@@ -36,7 +35,6 @@ correspondence `ψ : LΦ_X^* K ⟶ K`, the operator of the iterate `ψ_m`
 - `AlgebraicGeometry.Etale.correspondenceOperator`: the operator `T(ψ)` on `RΓ_c(X, K)`.
 - `AlgebraicGeometry.Etale.frobeniusCompactOperator`: the operator `T_{c_m}(ψ_m)`.
 - `AlgebraicGeometry.Etale.frobeniusStalkMap`: the stalk `ψ_{m,x̄}` at a fixed point.
-
 -/
 
 @[expose] public section
@@ -84,8 +82,7 @@ endomorphism `h` over `s` (`h ≫ a = a`), for finite coefficients: the composit
 Ra_! K ⟶ Ra_! Rh_* Lh^* K ≅ Ra_! Rh_! Lh^* K ≅ R(h ≫ a)_! Lh^* K = Ra_! Lh^* K
 ```
 of the unit of `Lh^* ⊣ Rh_*`, the identification `Rh_! ≅ Rh_*` of the proper morphism `h` and the
-composition isomorphism of the lower shriek (blueprint
-`definition-frobenius-correspondences-their-operators`). -/
+composition isomorphism of the lower shriek. -/
 noncomputable def lowerShriekPullback (h : X ⟶ X) [IsProper h] (ha : h ≫ a = a) :
     R(a)_![ModuleCat.{u + 1} Λ] ⟶
       L((h)^*[ModuleCat.{u + 1} Λ]) ⋙ R(a)_![ModuleCat.{u + 1} Λ] :=
@@ -99,8 +96,7 @@ noncomputable def lowerShriekPullback (h : X ⟶ X) [IsProper h] (ha : h ≫ a =
         (rightDerivedLowerShriekCompIso Λ h a).inv ≫ (rightDerivedLowerShriekCongrIso Λ ha).hom)
 
 /-- The *operator* `T(ψ) = RΓ_c(X, ψ) ∘ h^♯` on `RΓ_c(X, K)` of a cohomological correspondence
-`ψ : Lh^* K ⟶ K` along a proper endomorphism `h` over `s`, for finite coefficients (blueprint
-`definition-frobenius-correspondences-their-operators`). The correspondence `ψ` need not be
+`ψ : Lh^* K ⟶ K` along a proper endomorphism `h` over `s`, for finite coefficients. The correspondence `ψ` need not be
 invertible. -/
 noncomputable def correspondenceOperator (h : X ⟶ X) [IsProper h] (ha : h ≫ a = a)
     {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

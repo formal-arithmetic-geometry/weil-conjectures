@@ -11,7 +11,7 @@ import all WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemB
 /-! # Canonical bridge comparison for a single proper exchange
 
 Source: Stacks 07A7; blueprint fix-prop-coherence, coefficient comparisons of
-adjunction units and counits (blueprint: lem-sf-integral-system-bridge-exchange).
+adjunction units and counits.
 -/
 
 @[expose] public noncomputable section
@@ -192,7 +192,7 @@ attribute [local irreducible] CanonicalBridge.pull CanonicalBridge.push
 -- the two definitionally equal presentations in a large diagram proof.
 /-- The canonical bridge intertwines the proper-adjunction exchange for one square.
 Source: Stacks 07A7; blueprint fix-prop-coherence, transport of adjunction units and
-counits (blueprint: lem-sf-integral-system-bridge-exchange).
+counits.
 
 Proof: the section identities for the ordinary bridge and the ordinary compositor
 identify their two composites on every section. Transpose through the ordinary

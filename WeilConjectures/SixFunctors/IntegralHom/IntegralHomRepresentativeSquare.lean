@@ -92,8 +92,6 @@ import WeilConjectures.Algebra.Homology.Monoidal.Dual
 import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal
 
 /-! # Normalization of Hom reduction on fixed chain representatives
-
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2.
 -/
 
 @[expose] public section
@@ -367,8 +365,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 resolutions and a fixed augmented two-term coefficient resolution.
 
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2;
-Stacks Tags 07A6, 08J7 and 08J9
-(blueprint: lem-sf-integral-hom-representative-square).
+Stacks Tags 07A6, 08J7 and 08J9.
 
 Proof: the augmentation identifies Q with the finite coefficient unit after
 restriction of scalars. Its two free terms make Q K-flat, and make I tensor Q

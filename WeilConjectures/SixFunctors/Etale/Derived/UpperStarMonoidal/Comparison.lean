@@ -68,9 +68,9 @@ of type `D(Y_ét) ⥤ D(Y_ét) ⥤ D(Z_ét)`, obtained by deriving the oplax mon
 of `g^*`. It is the unique natural transformation such that, for `K, M` in `K(Y_ét)`, the square
 ```
   Lg^*(Qh K ⊗ᴸ Qh M) ──comparison──▶ Lg^*(Qh K) ⊗ᴸ Lg^*(Qh M)
-          │                                    │
-          │ Lg^*(μ Qh) ≫ counit                │ derivedTensorLeftDerivedUpperStarCounit
-          ▼                                    ▼
+          │ │
+          │ Lg^*(μ Qh) ≫ counit │ derivedTensorLeftDerivedUpperStarCounit
+          ▼ ▼
    Qh(g^*(K ⊗ M)) ─────────Qh(δ g^*)──────▶ Qh(g^*K ⊗ g^*M)
 ```
 commutes, the left vertical arrow being `leftDerivedUpperStarDerivedTensorCounit`. -/

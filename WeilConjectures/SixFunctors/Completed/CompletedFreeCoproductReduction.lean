@@ -56,7 +56,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 attribute [-instance] integralCoefficientAbLocallyBijective integralCoefficientAbSheafify
   GrothendieckTopology.hasSheafify_of_essentiallySmall
 /-- The published category structure at the explicit coefficient sizes.
-Source: Stacks 03DA (blueprint: lem-sf-completed-free-coproduct-reduction). -/
+Source: Stacks 03DA. -/
 abbrev completedCoproductLocallyBijective (X : Scheme.{u}) :
     (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} X
@@ -68,14 +68,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
 /-- The published category structure at the explicit coefficient sizes.
-Source: Stacks 03DA (blueprint: lem-sf-completed-free-coproduct-reduction). -/
+Source: Stacks 03DA. -/
 abbrev completedCoproductSiteSmall : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
 
 attribute [local instance 6000] completedCoproductSiteSmall
 
 /-- The published category structure at the explicit coefficient sizes.
-Source: Stacks 03DA (blueprint: lem-sf-completed-free-coproduct-reduction). -/
+Source: Stacks 03DA. -/
 abbrev completedCoproductSourceAbelian :
     Abelian (scalarReductionSource.{u, u} l E X) :=
   @SheafOfModules.instAbelian X.ProEt inferInstance (ProEt.topology X)
@@ -86,7 +86,7 @@ abbrev completedCoproductSourceAbelian :
 attribute [local instance 3000] completedCoproductSourceAbelian
 
 /-- The published category structure at the explicit coefficient sizes.
-Source: Stacks 03DA (blueprint: lem-sf-completed-free-coproduct-reduction). -/
+Source: Stacks 03DA. -/
 abbrev completedCoproductTargetAbelian :
     Abelian (scalarReductionTarget.{u, u} l E X 0) :=
   @SheafOfModules.instAbelian X.ProEt inferInstance (ProEt.topology X)
@@ -97,7 +97,7 @@ abbrev completedCoproductTargetAbelian :
 attribute [local instance 3000] completedCoproductTargetAbelian
 
 /-- The published category structure at the explicit coefficient sizes.
-Source: Stacks 05RU (blueprint: lem-sf-completed-free-coproduct-reduction). -/
+Source: Stacks 05RU. -/
 abbrev completedCoproductSourceDerived :
     HasDerivedCategory (scalarReductionSource.{u, u} l E X) :=
   scalarReductionSourceDerived.{u, u} l E X
@@ -105,7 +105,7 @@ abbrev completedCoproductSourceDerived :
 attribute [local instance 2000] completedCoproductSourceDerived
 
 /-- The published category structure at the explicit coefficient sizes.
-Source: Stacks 05RU (blueprint: lem-sf-completed-free-coproduct-reduction). -/
+Source: Stacks 05RU. -/
 abbrev completedCoproductTargetDerived :
     HasDerivedCategory (scalarReductionTarget.{u, u} l E X 0) :=
   scalarReductionTargetDerived.{u, u} l E X 0
@@ -113,7 +113,7 @@ abbrev completedCoproductTargetDerived :
 attribute [local instance 2000] completedCoproductTargetDerived
 
 /-- The published category structure at the explicit coefficient sizes.
-Source: Stacks 03DA (blueprint: lem-sf-completed-free-coproduct-reduction). -/
+Source: Stacks 03DA. -/
 abbrev completedCoproductRestrictionLimits :
     PreservesFiniteLimits (scalarReductionRestriction.{u, u} l E X 0) :=
   scalarReductionRestrictionLimits.{u, u} l E X 0
@@ -121,7 +121,7 @@ abbrev completedCoproductRestrictionLimits :
 attribute [local instance 3000] completedCoproductRestrictionLimits
 
 /-- The published category structure at the explicit coefficient sizes.
-Source: Stacks 03DA (blueprint: lem-sf-completed-free-coproduct-reduction). -/
+Source: Stacks 03DA. -/
 abbrev completedCoproductRestrictionColimits :
     PreservesFiniteColimits (scalarReductionRestriction.{u, u} l E X 0) :=
   scalarReductionRestrictionColimits.{u, u} l E X 0
@@ -131,7 +131,7 @@ attribute [local instance 3000] completedCoproductRestrictionColimits
 attribute [local instance] scalarReductionExtensionAdditive
 
 /-- The actual finite coproduct of completed coefficient units.
-Source: Stacks 09C3 (blueprint: lem-sf-completed-free-coproduct-reduction). -/
+Source: Stacks 09C3. -/
 abbrev completedCoproductIntegralFree (r : ℕ) : scalarReductionSource.{u, u} l E X :=
   @SheafOfModules.free X.ProEt inferInstance (ProEt.topology X)
     (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)
@@ -140,7 +140,7 @@ abbrev completedCoproductIntegralFree (r : ℕ) : scalarReductionSource.{u, u} l
     (ULift.{u + 1} (Fin r))
 
 /-- The actual finite coproduct of residue coefficient units.
-Source: Stacks 09C3 (blueprint: lem-sf-completed-free-coproduct-reduction). -/
+Source: Stacks 09C3. -/
 abbrev completedCoproductResidueFree (r : ℕ) : scalarReductionTarget.{u, u} l E X 0 :=
   @SheafOfModules.free X.ProEt inferInstance (ProEt.topology X)
     (integralCoefficientSheaf.{u, u} l E X 0)
@@ -299,8 +299,7 @@ coefficient projection. The projection is epic, and restriction preserves these
 coproducts. Finite free modules are flat, so their single complexes are K-flat.
 The derived counit is consequently invertible. Uniqueness under the derived
 adjunction identifies this isomorphism with the stipulated comparison.
-This includes rank zero and requires no projectivity or completeness hypothesis.
-(blueprint: lem-sf-completed-free-coproduct-reduction). -/
+This includes rank zero and requires no projectivity or completeness hypothesis. -/
 theorem completed_free_coproduct_reduction (r : ℕ)
     (q : (completedCoproductIntegralFree l E X r) ⟶
       (scalarReductionRestriction.{u, u} l E X 0).obj

@@ -14,7 +14,7 @@ import WeilConjectures.SixFunctors.Normalized.NormalizedDVRStrictCoefficientAdjo
 /-! # Coefficient augmentation of the canonical strict DVR Roos object
 
 Source: Stacks Tags 06YS, 06YY, 03EK and 05RT; blueprint DVR effectivity,
-proof paragraphs 3--4. (blueprint: lem-coef-normalized-dvr-roos-augmentation).
+proof paragraphs 3--4.
 -/
 
 @[expose] public noncomputable section
@@ -160,7 +160,7 @@ object, with its specified augmentation. This statement supplies no assertion
 about preservation of homotopy limits by the scalar cone functor.
 
 Source: blueprint DVR effectivity proof, paragraphs 1 and 4; Stacks 06YY, 07A6 and
-0941. (blueprint: lem-coef-normalized-dvr-roos-augmentation).
+0941.
 
 Proof: apply the strict finite-coefficient adjoint calculation to the normalized
 reduction from the zeroth tail term followed by iN. Its cone map has zero shifted

@@ -24,7 +24,6 @@ five maps are invertible at the relevant objects
 (`NearbyCyclesModel.Hom.isIso_map_pullbackExchange_app_of_square`), and the pullback exchange
 itself is invertible if moreover `Rk'_*` reflects isomorphisms
 (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_square`).
-
 -/
 
 @[expose] public section

@@ -70,9 +70,9 @@ def ExchangeCompatible (sq : IsPullback g a a h) : Prop :=
 for a Weil datum `φ : Lg^* K ⟶ K`, the square
 ```
   Lh^* Ra_! K ──Lh^* (Ra_! ≅ Ra_*)──▶ Lh^* Ra_* K
-       │                                  │
-  lowerShriekWeilDatum φ          lowerStarWeilDatum φ
-       ▼                                  ▼
+       │ │
+  lowerShriekWeilDatum φ lowerStarWeilDatum φ
+       ▼ ▼
     Ra_! K ─────────(Ra_! ≅ Ra_*)───────▶ Ra_* K
 ```
 commutes. -/
@@ -120,9 +120,9 @@ theorem exchangeCompatible (sq : IsPullback g a a h) : ExchangeCompatible (Λ :=
 `a` proper and a Weil datum `φ : Lg^* K ⟶ K`, the square
 ```
   Lh^* Ra_! K ──Lh^* (Ra_! ≅ Ra_*)──▶ Lh^* Ra_* K
-       │                                  │
-  lowerShriekWeilDatum φ          lowerStarWeilDatum φ
-       ▼                                  ▼
+       │ │
+  lowerShriekWeilDatum φ lowerStarWeilDatum φ
+       ▼ ▼
     Ra_! K ─────────(Ra_! ≅ Ra_*)───────▶ Ra_* K
 ```
 commutes. -/

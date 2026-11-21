@@ -193,8 +193,7 @@ private lemma ordinaryCounitIso_hom_app
 attribute [local irreducible] ordinaryCounitIso
 
 /-- Exact ordinary restriction descends a chain Roos comparison uniquely to completion.
-Source: Stacks 06YY and 0941
-(blueprint: lem-fix-qcqs-completion-comparison-unit).
+Source: Stacks 06YY and 0941.
 Proof: the ordinary derived counit is an isomorphism on every complex. On good
 representatives conjugate the chain comparison by this counit and the two
 completion comparisons. Fully faithful restriction along the good localization
@@ -321,8 +320,7 @@ include τ haug hfst hsnd in
 /-- A comparison normalized on good representatives and both Roos coordinates
 preserves the specified completion unit.
 
-Source: Stacks Tags 06YY and 0941
-(blueprint: lem-fix-qcqs-completion-comparison-unit).
+Source: Stacks Tags 06YY and 0941.
 Proof: the two chain coordinates identify the image of the (quotient, zero) lift
 with that same lift on the pulled representative. Compose the representative
 comparison equation with the source unit. Naturality of the derived counit moves

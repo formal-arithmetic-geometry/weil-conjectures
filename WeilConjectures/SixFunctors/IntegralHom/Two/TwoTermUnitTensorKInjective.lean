@@ -44,7 +44,6 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- Tensoring a K-injective complex with a two-term complex of units preserves K-injectivity.
 Source: the finite-free argument in paragraph 1 of
 `lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 08J7 and 08J9.
-(blueprint: lem-sf-two-term-unit-tensor-kinjective).
 
 Proof: the coefficient terms are dualizable, including the zero terms. Its bounded
 termwise right dual D has flat terms and is K-flat by the bounded-above flat criterion.

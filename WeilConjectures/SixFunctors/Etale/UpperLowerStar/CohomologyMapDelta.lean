@@ -36,9 +36,9 @@ abelian sheaves on `Y_ét` and `g : X ⟶ Y`, the square
 
 ```
   Hⁿ(Y, S.X₃) ──δ──▶ Hⁿ⁺¹(Y, S.X₁)
-      │                    │
-  cohomologyMap g     cohomologyMap g
-      ▼                    ▼
+      │ │
+  cohomologyMap g cohomologyMap g
+      ▼ ▼
   Hⁿ(X, g^* S.X₃) ─δ─▶ Hⁿ⁺¹(X, g^* S.X₁)
 ```
 

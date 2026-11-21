@@ -17,7 +17,6 @@ import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionUnitCriterion
 
 Source: Stacks Project, Tags 03D8, 06YY and 08TC; proetale.tex,
 lemma-local-structure-constructible-complex (Tag 09C3).
-(blueprint: lem-fix-clopen-completed-restriction-comparison).
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ constructibility or affineness hypothesis.
 
 Source: Stacks Project, Tags 03D8, 06YY and 08TC; the restriction step in
 proetale.tex, lemma-local-structure-constructible-complex (Tag 09C3).
-(blueprint: lem-fix-clopen-completed-restriction-comparison).
 
 Proof: let j be the inclusion A into U. Restrict sheaves by precomposition with
 composition of pro-etale objects along j. Identify the completed coefficient rings

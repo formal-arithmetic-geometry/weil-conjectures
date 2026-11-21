@@ -20,7 +20,6 @@ import Mathlib.Tactic.DefEqTransformations
 
 Source: Bhatt--Scholze, Lemma 6.8.2; the formal-properties paragraph of the
 current blueprint scalar direct-image proof.
-(blueprint: lem-sf-native-proper-scalar-mate-presentation).
 -/
 
 @[expose] public noncomputable section
@@ -260,7 +259,6 @@ Neither properness nor boundedness, nor invertibility of either mate, is assumed
 Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15; the formal-properties
 paragraph of the current blueprint scalar direct-image proof; the presentation/pasting step of
 lem-sf-native-proper-scalar-mate-bounded-below-restricted.
-(blueprint: lem-sf-native-proper-scalar-mate-presentation).
 
 Proof in words:
 1. Use the normalized continuous integral coefficient realization and the inverse

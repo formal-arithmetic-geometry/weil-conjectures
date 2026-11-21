@@ -87,7 +87,7 @@ lemma _root_.CategoryTheory.Abelian.LeftResolution.isStrictlyLE_minusResolutionF
   inferInstanceAs (CochainComplex.IsStrictlyLE
     ((Λ.bicomplexFunctor.obj K.obj).total (ComplexShape.up ℤ)) N)
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Functorial bounded-above flat
+/-- Functorial bounded-above flat
 replacement.
 
 There is a functor `Φ` on bounded above complexes of étale sheaves on `X` together with a

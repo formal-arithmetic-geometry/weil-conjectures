@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralComp
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.ExpressionRecursion.IntegralExpressionRecursion
 
 /-! # Intermediate assembly data for integral realization
-Source: blueprint fix-prop-coherence.
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +26,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Canonical simultaneous models before expression realization. This records only
 ambient operations, their normalized mates and open reconstruction.
-Source: Stacks 0941, 07A7, 03DI; blueprint fix-prop-coherence, steps 1--2
-(blueprint: def-sf-integral-system-realization-data). -/
+Source: Stacks 0941, 07A7, 03DI; blueprint fix-prop-coherence, steps 1--2. -/
 structure AmbientModels (o : Operations l E) where
   /-- The proper/open mate, scalar restriction, and normalized pasting package. -/
   compositors : Compositors l E o
@@ -83,8 +81,7 @@ structure AmbientModels (o : Operations l E) where
 
 /-- The explicit recursion equations for a given comparison family. These equations
 contain neither coefficient normalization nor compatibility with canonical generator maps.
-Source: blueprint fix-prop-coherence, expression-tree construction
-(blueprint: def-sf-integral-system-realization-data). -/
+ -/
 structure RecursionLaws (D : FiniteFieldDatum.{u}) (o : Operations l E)
     (a : AmbientModels l E o)
     (comparison : ExpressionRecursion.Comparisons l E D o) : Prop where

@@ -18,9 +18,9 @@ The open-immersion case of the elementary cases in the proof of blueprint
 
 ```
   U' --g'--> U
-  |          |
-  j'         j
-  ↓          ↓
+  | |
+  j' j
+  ↓ ↓
   X' --g---> X
 ```
 

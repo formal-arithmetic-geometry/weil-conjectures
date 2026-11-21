@@ -13,8 +13,6 @@ public import WeilConjectures.SmoothPurity.Finite.FiniteTorAmplitudeSites
 
 Unchanged data interface extracted from FixProjectionCompactificationComparison so that
 single-refinement steps can be stated independently of their common-refinement assembly.
-Source: prop-sf-pf-coherence.proof.md, compactification-independence sentence
-(blueprint: lem-fix-projection-compactification-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +30,7 @@ namespace WeilConjectures.FixProjectionCompactification
 
 /-- Package a given compactification with the identity base-change square. This selects
 its projection from the recorded exchange/projection family without choosing any new map.
-Source: prop-sf-pf-coherence.proof.md, chosen compactification
-(blueprint: lem-fix-projection-compactification-comparison). -/
+ -/
 def identitySquare {D : FiniteFieldDatum.{u}} {X Y : SixFunctorSpace D}
     (f : X ⟶ Y) (c : Compactification f.hom.left) : SixFunctorCompactifiedSquare D := by
   letI : LocallyOfFiniteType Y.obj.hom := Y.property.1
@@ -67,8 +64,7 @@ def identitySquare {D : FiniteFieldDatum.{u}} {X Y : SixFunctorSpace D}
 /-- The displayed compactification comparison equation at a higher coefficient stage.
 The tensor, projection and rho are all taken from the supplied normalized operation datum;
 P is instantiated below with exactly the recorded finite-Tor domain at that stage.
-Source: prop-sf-pf-coherence.proof.md, compactification-independence sentence
-(blueprint: lem-fix-projection-compactification-comparison). -/
+ -/
 def higherLaw {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) (T : ∀ X, B X ⥤ B X ⥤ B X)
@@ -85,8 +81,7 @@ def higherLaw {D : FiniteFieldDatum.{u}}
 
 /-- The local comparison square for one proper refinement. Common refinements are
 assembled from two such squares using the recorded comparison cocycle.
-Source: prop-sf-pf-coherence.proof.md, compactification-independence calculation, step 5
-(blueprint: def-sf-projection-single-refinement-law). -/
+ -/
 def refinementLaw {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) (T : ∀ X, B X ⥤ B X ⥤ B X)
@@ -106,8 +101,7 @@ comparison is theta(d,c1) inverse followed by theta(d,c2), exactly as prescribed
 compactification_coherence. The retained target witness is transported by e; quantifying
 over e keeps every presentation of the tensor object, rather than choosing an antecedent.
 K is bounded constructible, and only L is required to have finite Tor amplitude.
-Source: prop-sf-pf-coherence.proof.md, compactification-independence sentence
-(blueprint: lem-fix-projection-compactification-comparison). -/
+ -/
 def finiteLaw (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)

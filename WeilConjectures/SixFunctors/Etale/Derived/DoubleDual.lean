@@ -18,12 +18,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 Let `a : X ⟶ S` admit a compactification, `ω_X = Ra^! Λ_S` and `𝔻_X = RHom(-, ω_X)`. This file
 records the formal properties of the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`
 (`AlgebraicGeometry.Etale.verdierDualDoubleDual`) used in the dévissage proof of Verdier
-biduality (blueprint subsection `sk-prop-sf-biduality-general`).
+biduality.
 
 ## Main statements
-
-Blueprint `definition-verdier-dual-evaluation--4` (`δ` commutes with shifts and is a morphism of
-distinguished triangles), for a general coefficient category `A`:
 
 - `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_shift_iff`: `δ_{K⟦n⟧}` is an
   isomorphism if and only if `δ_K` is;
@@ -31,9 +28,6 @@ distinguished triangles), for a general coefficient category `A`:
   `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁⟦1⟧`, if `δ_{K₁}` and `δ_{K₃}` are isomorphisms, so is `δ_{K₂}`;
 - `AlgebraicGeometry.Etale.verdierBidualityLocus_isTriangulated`: the complexes `K` with `δ_K`
   an isomorphism form a triangulated subcategory of `D(X_ét)`.
-
-Blueprints `corollary-verdier-exchange-formulas--5` and
-`lemma-internal-adjunction-two-exchange-formulas--4`, formal core:
 
 - `CategoryTheory.MonoidalClosed.map_toIhomIhom_comp_dualComparison`: for a lax braided functor
   `G` and `e : G W ⟶ W'`, the comparison `G [X, W] ⟶ [G X, W']` carries `G δ_X` to `δ_{G X}`;
@@ -208,9 +202,9 @@ noncomputable def dualComparison (X : C) : G.obj ((ihom X).obj W) ⟶ (ihom (G.o
 compatible with lax braided functors: for `G` lax braided and `e : G W ⟶ W'`, the square
 ```
        G X ─────────── G δ_X ──────────→ G [[X, W], W]
-        │                                     │
-   δ_{G X}                          dualComparison [X, W]
-        ↓                                     ↓
+        │ │
+   δ_{G X} dualComparison [X, W]
+        ↓ ↓
   [[G X, W'], W'] ─[dualComparison X, W']─→ [G [X, W], W']
 ```
 commutes. -/

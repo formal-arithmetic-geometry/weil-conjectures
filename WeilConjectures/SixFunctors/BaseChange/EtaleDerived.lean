@@ -61,9 +61,9 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
 
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 

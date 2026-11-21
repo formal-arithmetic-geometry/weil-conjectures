@@ -50,7 +50,7 @@ comparison. The coefficient cocycle, finite-free tensor comparison and pasted-ma
 normalizations identify the two composites; cancellation of the realization
 isomorphisms gives the displayed transition equation. The calculation is on one
 integral numerator, before the formal representative reduction to arbitrary stage
-objects. (blueprint: lem-sf-native-compact-support-finite-scalar-coherence-generator) -/
+objects. -/
  theorem native_compact_support_finite_scalar_coherence_generator [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c)

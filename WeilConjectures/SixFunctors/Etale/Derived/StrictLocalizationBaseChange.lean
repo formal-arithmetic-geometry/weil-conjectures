@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 # Base change along a strict localization, without torsion hypotheses
 
 Étale base change holds for arbitrary coefficients (no torsion hypothesis), so the limit form of
-base change (blueprint `corollary-open-direct-image-over-field--2`, Stacks 0EZT) gives base change
+base change gives base change
 along a cofiltered limit of étale morphisms with affine transition maps, for arbitrary sheaves of
 `Λ`-modules. In particular, for a geometric point `s` of `S`, a morphism `f : W ⟶ S` from a
 quasi-compact quasi-separated scheme and the base change `W' = W ×_S S_(s) ⟶ W` of the strict
@@ -181,8 +181,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_etale_of_qcqs [IsCofiltered
 
 end Limit
 
-/-- **Base change along a limit of étale schemes** (blueprint
-`corollary-open-direct-image-over-field--2`), for a quasi-compact quasi-separated base `S` and a
+/-- **Base change along a limit of étale schemes**, for a quasi-compact quasi-separated base `S` and a
 system given as a diagram `D` in `Over S` of étale quasi-compact quasi-separated `S`-schemes with
 affine transition maps: for `g : T ⟶ S` quasi-compact quasi-separated, the base-change maps of the
 Cartesian square `Y = T ×_S lim D` are isomorphisms in every degree and for every sheaf of

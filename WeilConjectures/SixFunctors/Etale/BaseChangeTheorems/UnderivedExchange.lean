@@ -22,9 +22,9 @@ For a cartesian square of schemes
 
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 
@@ -127,9 +127,9 @@ lemma Etale.bijective_sheafFiber_map_baseChangeMap_of_isProper {X' X Y' Y : Sche
 
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 
@@ -138,8 +138,7 @@ with `f` proper, the base change map `g^* f_* F ⟶ f'_* g'^* F` is an isomorphi
 sections of `F` over the closed geometric fibre `X_ȳ = X'_ȳ'`, by the stalk formula over the
 strict henselisation and the degree-zero comparison
 `AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_geometricFibre`, and the induced
-map of stalks is the identity; geometric stalks are conservative.
-(blueprint: `proposition-proper-base-change-degree-zero`) -/
+map of stalks is the identity; geometric stalks are conservative. -/
 @[stacks 0A3T]
 theorem Etale.isIso_baseChangeMap_of_isProper {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X}
     {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) [IsProper f] :

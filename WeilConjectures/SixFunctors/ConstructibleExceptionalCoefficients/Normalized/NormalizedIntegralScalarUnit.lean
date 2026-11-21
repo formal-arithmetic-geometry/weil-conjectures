@@ -36,8 +36,7 @@ private theorem faithful_heq {A B : Type*} [Category A] [Category B]
 
 /-- A multiplication-normalized restricted unit localizes to the specified rational unit.
 Source: exceptional coefficient construction, integral-to-rational identity paragraph;
-scalar extension composition, identity clause
-(blueprint: lem-sf-normalized-integral-scalar-unit).
+scalar extension composition, identity clause.
 
 Proof: the integral normalization theorem identifies the underlying unit arrows.
 The functor equality hS identifies their source objects. Full-subcategory faithfulness

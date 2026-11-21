@@ -30,7 +30,7 @@ attribute [local implicit_reducible] Equivalence.mapDerivedCategory
 set_option backward.defeqAttrib.useBackward true
 
 /-- The ordinary finite inverse-image comparison in fixed-scalar realization coordinates.
-Source: Stacks 03D6 (blueprint: lem-sf-finite-ring-ordinary-pull-coordinates).
+Source: Stacks 03D6.
 It is finitePullbackIso followed by the realization equivalence cancellation. -/
 def finitePullCoordinates
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
@@ -52,7 +52,7 @@ def finitePullCoordinates
 attribute [local irreducible] finiteOrdinaryPullComp
 
 /-- Ordinary finite realization coordinates commute with pullback composition.
-Source: Stacks 03D6 and 03DI (blueprint: lem-sf-finite-ring-ordinary-pull-coordinates).
+Source: Stacks 03D6 and 03DI.
 Proof: apply the realization coordinate composition identity to the ordinary
 finitePullbackIso compositor equality. Its proof inverts the realization unit
 composition square and uses naturality of the middle pull comparison. All

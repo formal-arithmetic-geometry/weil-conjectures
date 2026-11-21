@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.RegularQuotientOppo
 /-! # Reverse scalar adjunction for a regular finite quotient
 
 Source: Zheng, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-regular-quotient-reverse-adjunction)
 -/
 
 @[expose] public noncomputable section
@@ -49,8 +48,7 @@ Thus its transpose is precisely the shifted proper/open restriction square.
 This square is invertible. The normalized scalar realizations and faithful full
 inclusions transport this equation to the specified left comparisons. No choice
 of system evaluation or faithfulness of evaluation is needed. The zero object,
-empty schemes and n = 0 use the same resolution and the same equations.
-(blueprint: lem-sf-exceptional-regular-quotient-reverse-adjunction). -/
+empty schemes and n = 0 use the same resolution and the same equations. -/
 theorem exceptionalRegularQuotientReverseAdjunction
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

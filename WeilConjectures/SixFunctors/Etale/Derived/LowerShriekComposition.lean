@@ -20,8 +20,7 @@ constructs, for torsion coefficients, the composition isomorphism
 
 `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
 
-of the compactly supported direct images on the unbounded derived categories of étale sheaves
-(blueprint `proposition-composition-base-change-rf-shriek--1`).
+of the compactly supported direct images on the unbounded derived categories of étale sheaves.
 
 Following the blueprint, compactify `g` as `Y ⟶[v] Ȳ ⟶[ḡ] S` and `f ≫ v` as
 `X ⟶[a] X̄ ⟶[p] Ȳ`. Then `V = X̄ ×_Ȳ Y` with its open immersion `b : V ⟶ X̄` and proper
@@ -31,7 +30,7 @@ compactification of `f ≫ g` (`AlgebraicGeometry.Compactification.comp`). On th
 
 ```
 Rf_! ⋙ Rg_! = Dc_! ⋙ Rp_Y* ⋙ Dv_! ⋙ Rḡ_*
-           ≅ Dc_! ⋙ Db_! ⋙ Rp_* ⋙ Rḡ_*        (v_! Rp_Y* ≅ Rp_* b_!)
+           ≅ Dc_! ⋙ Db_! ⋙ Rp_* ⋙ Rḡ_* (v_! Rp_Y* ≅ Rp_* b_!)
            ≅ Da_! ⋙ R(p ≫ ḡ)_* = R(f ≫ g)_!
 ```
 
@@ -266,14 +265,13 @@ compactification of `g : Y ⟶ S` and `e = (a, p)` a compactification of `f ≫ 
 
 ```
 Rf_!(e.restrict) ⋙ Rg_!(d) = Dc_! ⋙ Rp_Y* ⋙ Dv_! ⋙ Rḡ_*
-    ≅ Dc_! ⋙ Db_! ⋙ Rp_* ⋙ Rḡ_*  ≅  Da_! ⋙ R(p ≫ ḡ)_* = R(f ≫ g)_!(d.comp e)
+    ≅ Dc_! ⋙ Db_! ⋙ Rp_* ⋙ Rḡ_* ≅ Da_! ⋙ R(p ≫ ḡ)_* = R(f ≫ g)_!(d.comp e)
 ```
 
 built from the exchange isomorphism `v_! Rp_Y* ≅ Rp_* b_!` of the cartesian square
 `AlgebraicGeometry.Compactification.isPullback_restrict` (an isomorphism by proper base
 change), the composition of extensions by zero along `a = c ≫ b`, and the composition of
-derived pushforwards. (blueprint: the construction in
-`proposition-composition-base-change-rf-shriek--1`) -/
+derived pushforwards. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationCompIso (d : Compactification g)
     (e : Compactification (f ≫ d.i)) :
     Rf_!(e.restrict)[ModuleCat.{u + 1} Λ] ⋙ Rf_!(d)[ModuleCat.{u + 1} Λ] ≅

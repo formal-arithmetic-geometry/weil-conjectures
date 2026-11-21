@@ -12,9 +12,6 @@ import WeilConjectures.SixFunctors.IntegralHom.Scalar.IntegralHomScalarEvaluatio
 import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralReductionTwoTermResolution
 
 /-! # Completed-ring representatives of reduced evaluation
-
-Source: the finite-free calculation and evaluation sentence of
-`lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2.
 -/
 
 @[expose] public section
@@ -56,8 +53,7 @@ assumption on it. It contains no finite-coefficient internal Hom or comparison m
 
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2,
 finite-free construction and compatibility with actual evaluation; Stacks 06YY,
-07A4, 07A6, 08J7, 08J9 and 0A8X
-(blueprint: lem-sf-integral-hom-reduced-evaluation-representative).
+07A4, 07A6, 08J7, 08J9 and 0A8X.
 
 Proof: use the scalar tensor-resolution comparison and eI to obtain r.
 Choose the proved two-term free resolution of the restricted quotient. Its

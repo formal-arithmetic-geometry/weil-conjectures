@@ -24,12 +24,7 @@ private theorem natIso_component_heq
   rfl
 
 /-- A tensor/pullback component square is preserved under the recorded functor equalities.
-Source: thm-sf-pf-field.proof.md, Compatibility, normalization of the supplied operations.
-(blueprint: lem-sf-common-projection-tensor-component-normalization).
-Proof: substitute the six functor equalities. Equality of the pullback comparison
-components identifies the natural isomorphisms. The uncurrying identities identify
-the two tensorator components. Substitute the two comparison components and combine
-the two tensor-factor maps by functoriality. -/
+ -/
 theorem commonProjectionTensorComponent_of_normalization
     {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Category* B']
     (I : A ⥤ A') (J : B ⥤ B')

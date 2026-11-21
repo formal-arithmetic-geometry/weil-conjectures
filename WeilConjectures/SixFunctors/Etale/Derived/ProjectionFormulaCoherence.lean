@@ -77,9 +77,9 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 /-- Blueprint `proposition-composition-base-change-rf-shriek--1`: Coherence of the projection
 formula; naturality in `K` and `L`. For morphisms `x : K ⟶ K'` and `y : L ⟶ L'`, the square
 ```
-Rf_!K ⊗ᴸ L  ──PF──▶ Rf_!(K ⊗ᴸ Lf^*L)
-    │ Rf_!x ⊗ y          │ Rf_!(x ⊗ Lf^*y)
-    ▼                    ▼
+Rf_!K ⊗ᴸ L ──PF──▶ Rf_!(K ⊗ᴸ Lf^*L)
+    │ Rf_!x ⊗ y │ Rf_!(x ⊗ Lf^*y)
+    ▼ ▼
 Rf_!K' ⊗ᴸ L' ──PF──▶ Rf_!(K' ⊗ᴸ Lf^*L')
 ```
 commutes, for `Rf_!` computed with any compactification `c` of `f`. -/
@@ -106,8 +106,8 @@ projection map `PF` of `Rf_!` with the projection map `Rf_*K ⊗ᴸ L ⟶ Rf_*(K
 image:
 ```
 Rf_!K ⊗ᴸ L ──PF──▶ Rf_!(K ⊗ᴸ Lf^*L)
-    │ ≅                  │ ≅
-    ▼                    ▼
+    │ ≅ │ ≅
+    ▼ ▼
 Rf_*K ⊗ᴸ L ──PF_*──▶ Rf_*(K ⊗ᴸ Lf^*L)
 ``` -/
 theorem projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar (f : X ⟶ Y)
@@ -187,9 +187,9 @@ a compactification `c` and with the chosen one
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`) intertwines the projection maps:
 ```
 Rf_!(c)K ⊗ᴸ L ──PF_c──▶ Rf_!(c)(K ⊗ᴸ Lf^*L)
-     │ ≅                      │ ≅
-     ▼                        ▼
- Rf_!K ⊗ᴸ L   ──PF──▶   Rf_!(K ⊗ᴸ Lf^*L)
+     │ ≅ │ ≅
+     ▼ ▼
+ Rf_!K ⊗ᴸ L ──PF──▶ Rf_!(K ⊗ᴸ Lf^*L)
 ``` -/
 theorem projectionMapOfCompactification_rightDerivedLowerShriekIso [QuasiCompact f]
     [HasCompactification f] (c : Compactification f)

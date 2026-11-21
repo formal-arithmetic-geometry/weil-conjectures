@@ -70,9 +70,9 @@ Let `q ≥ 1` and assume `BC(p, Λ, q - 1)`. Then for every Cartesian square
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 X --p--> S
 ```
 
@@ -176,7 +176,7 @@ theorem Etale.mono_cokernelMap (q : ℤ) (hq : 1 ≤ q)
   rw [← hfac] at this
   exact mono_of_mono _ (cokernel.desc _ _ (hzero (Injective.ι G)))
 
-/-- Blueprint `lemma-injectivity-base-change-map-degree`: Injectivity of the critical map and its
+/-- Injectivity of the critical map and its
 cokernel.
 
 Assume that `BC(p, Λ, q - 1)` holds universally for some `q ≥ 1`, and let `p' : X' ⟶ S'` be
@@ -184,9 +184,9 @@ the base change of `p` along `a : S' ⟶ S`. Then for every Cartesian square
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 X' -p'-> S'
 ```
 

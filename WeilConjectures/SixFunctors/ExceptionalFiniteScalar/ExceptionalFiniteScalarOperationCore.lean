@@ -11,8 +11,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-! # Exceptional finite scalar operation core
 
-Source: Zheng, Propositions 2.23 and 2.29; Stacks 09AL and 07A4
-(blueprint: lem-sf-exceptional-finite-scalar-operation).
+Source: Zheng, Propositions 2.23 and 2.29; Stacks 09AL and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -65,8 +64,7 @@ private theorem transportRightRealization_hom
 
 /-- The normalized finite operation package. The former core omitted the relation
 between its right realization and its adjunction, so could not support normalization.
-Source: Zheng, Proposition 2.23; Stacks 09AL
-(blueprint: lem-sf-exceptional-finite-scalar-operation-core). -/
+Source: Zheng, Proposition 2.23; Stacks 09AL. -/
 abbrev OperationCore
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)
@@ -76,8 +74,7 @@ abbrev OperationCore
 set_option maxRecDepth 4096 in
 /-- Construction of the core from the existing finite exceptional operations theorem.
 Retain its normalized Hom formula while transporting the right realization back
-through the canonical coefficient equivalence and its counit.
-(blueprint: lem-sf-exceptional-finite-scalar-operation-core) -/
+through the canonical coefficient equivalence and its counit. -/
 theorem operationCore_exists
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -149,8 +146,7 @@ theorem operationCore_exists
   simp only [Functor.map_comp, Category.assoc] at hh ⊢
   exact hh
 
-/-- The normalized Hom formula for the core operation.
-(blueprint: lem-sf-exceptional-finite-scalar-operation-normalization) -/
+/-- The normalized Hom formula for the core operation. -/
 theorem operationCore_normalized
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

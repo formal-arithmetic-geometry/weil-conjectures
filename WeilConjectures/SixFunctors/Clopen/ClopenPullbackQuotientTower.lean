@@ -98,7 +98,6 @@ attribute [local irreducible] ordinarySfIso
 
 Source: Stacks Project, sites-modules.tex, Tags 03D2 and 03D8; step 1 of
 lem-fix-clopen-integral-completion-restriction.
-(blueprint: lem-sf-clopen-pullback-quotient-tower).
 
 Proof: composition with the open immersion is left adjoint to base change on the
 pro-etale sites. Transpose the inverse normalized coefficient isomorphism under

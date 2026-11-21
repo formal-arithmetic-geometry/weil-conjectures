@@ -223,8 +223,7 @@ private theorem closed_left_iso_shift
     infer_instance
 
 /-- Construct the left proper/open refinements on normalized coefficient stages.
-Source: Stacks 0F7B and 0F7I, Zheng 5.13--5.15; exceptional construction step 6
-(blueprint: lem-sf-constructible-exceptional-left-refinements).
+Source: Stacks 0F7B and 0F7I, Zheng 5.13--5.15; exceptional construction step 6.
 
 Proof: for a proper refinement r use the open unit to obtain the canonical map from
 j_d! to Rr_* j_c!. Proper base change identifies its restriction to the open with

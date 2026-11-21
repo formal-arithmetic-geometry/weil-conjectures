@@ -90,8 +90,7 @@ private theorem scalarAtClosure_finiteNormalized
 
 /-- Endpoint restrictions of allowed derived coefficient extensions, independently of
 compactifications and exceptional adjunctions.
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26; scalar-mates plan steps 1 and 5
-(blueprint: lem-sf-ring-endpoint-scalar-restrictions).
+Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26; scalar-mates plan steps 1 and 5.
 
 Proof: use the identity morphism of W and its canonical proper compactification.
 The existing coherent ring-transport-family theorem supplies operations and normalized

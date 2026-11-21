@@ -292,8 +292,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The finite scalar open comparison preserves the actual open unit.
 This involves only the scalar and geometric adjunctions, with no system model.
 Source: Stacks 03DI, 0E8I, 0D6D and 07A7; fix-prop-coherence, preservation of
-adjunction units by coefficient comparisons
-(blueprint: lem-sf-integral-open-scalar-unit-square).
+adjunction units by coefficient comparisons.
 
 Proof: first work with the completed and finite ring sheaves before the
 constant-ring presentation isomorphisms. The restriction/pullback square is

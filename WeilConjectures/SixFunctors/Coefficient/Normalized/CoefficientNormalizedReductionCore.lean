@@ -11,8 +11,7 @@ import WeilConjectures.SixFunctors.Coefficient.Finite.CoefficientFiniteQuotientC
 
 /-! # Core normalized coefficient reduction witness
 
-Source: Stacks 06YS, 06YY, 07A4, 07A6 and 0941
-(blueprint: lem-coef-normalized-reduction-models-core).
+Source: Stacks 06YS, 06YY, 07A4, 07A6 and 0941.
 -/
 
 @[expose] public section
@@ -26,7 +25,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /--
 The sequence projection and scalar-extension constructions produce the core reduction
-record with its prescribed tensor subrecord and finite quotient calculus.  This is the
+record with its prescribed tensor subrecord and finite quotient calculus. This is the
 construction part of the normalized reduction argument; the four representative
 normalization identities are recorded separately.
 Source: Stacks 06YS, 06YY, 07A6 and 0941; the first and third proof steps of
@@ -35,11 +34,10 @@ Source: Stacks 06YS, 06YY, 07A6 and 0941; the first and third proof steps of
 Proof plan: apply the sequence projection derived adjunction to the completed
 coefficient ring and its quotient tower, transport it across the strict-system
 sequence equivalence, and use the actual derived scalar-extension pairs at each
-finite level.  The transported unit and counit give the projection equations and
-one-flat-term K-flat models.  Apply the same change-of-rings construction to every
+finite level. The transported unit and counit give the projection equations and
+one-flat-term K-flat models. Apply the same change-of-rings construction to every
 finite quotient and retain its ordinary unit, derived counit and tensor comparison;
 these data form the finite quotient calculus.
-(blueprint: lem-coef-normalized-reduction-models-core)
 -/
 theorem coefficientNormalizedReductionCore (T : CoefficientDerivedSystemTensors l E W) :
     ∃ R : CoefficientDerivedSystemReduction l E W,

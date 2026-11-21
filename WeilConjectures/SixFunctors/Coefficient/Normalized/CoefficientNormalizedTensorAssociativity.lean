@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedT
 /-! # Associativity of normalized tensor comparisons
 
 Source: Stacks 07A4, 08J9 and 0941; Zheng Construction 4.1.
-(blueprint: lem-coef-normalized-tensor-associativity).
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace WeilConjectures
 
 /-- The associativity equation for the inverse tensor comparison.
-Source: Stacks 07A4; the associativity axiom for a strong monoidal functor.
-(blueprint: lem-coef-normalized-tensor-associativity). -/
+Source: Stacks 07A4; the associativity axiom for a strong monoidal functor. -/
 def CoefficientTensorAssociativity
     {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
     {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
@@ -90,9 +88,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 /-- The normalized reduction and finite tensor comparisons preserve associators.
-Source: Stacks 07A4 (lemma-pullback-tensor-product); the signed total-tensor
+Source: Stacks 07A4; the signed total-tensor
 associator models, and step 3 of lem-coef-normalized-internal-hom-fibers.
-(blueprint: lem-coef-normalized-tensor-associativity).
 
 Proof: choose flat-term K-flat representatives of the three inputs. The model
 squares hR and hF identify each binary comparison with ordinary scalar tensor

@@ -18,7 +18,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 /-! # Finite-projective charts for ordinary pullback
 
 Source: Bhatt--Scholze, Lemmas 6.5.5--6.5.8; Stacks Tag 09C3.
-(blueprint: lem-sf-finite-tor-pullback-affine-projective-charts)
 -/
 
 @[expose] public noncomputable section
@@ -146,7 +145,6 @@ models and splittings; it makes no assertion about completion of those models.
 
 Source: Bhatt--Scholze, proof of Lemma 6.5.5, Lemmas 6.5.6--6.5.8;
 Stacks proetale.tex, Tag 09C3, lemma-local-structure-constructible-complex.
-(blueprint: lem-sf-finite-tor-pullback-affine-projective-charts).
 
 Proof: apply affineOpenClosedChartFactorization to the property that the ordinary
 restriction of K has a bounded finite-free-retract cochain model. Its finite qcqs

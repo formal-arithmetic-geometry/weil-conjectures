@@ -112,7 +112,6 @@ private theorem pullIso_factor {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The ordinary and ringed cochain pullbacks agree, preserving inverse unit sections
 and the derived computation map.
 Source: Stacks 03D2 and 06YY.
-(blueprint: lem-sf-integral-pullback-complex-identification).
 
 Proof: the direct-image ring maps agree, and the resulting pushforward isomorphism
 is identity on sections. Uniqueness of left adjoints therefore identifies module

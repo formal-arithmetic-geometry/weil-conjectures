@@ -30,7 +30,7 @@ open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
 /-- The integral scalar associator with the literal field-inclusion transport.
-Source: blueprint order 1462 (blueprint: lem-sf-native-integral-tensor-coherence). -/
+ -/
 @[irreducible] def integralTensorAssociator
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     {E L M : Index l Ω} (h : E ≤ L) (k : L ≤ M) :=
@@ -46,8 +46,7 @@ Source: blueprint order 1462 (blueprint: lem-sf-native-integral-tensor-coherence
         E L M h k))
 
 /-- The defining equation is exposed separately so component proofs do not normalize
-large scalar-extension functors. Source: blueprint order 1462
-(blueprint: lem-sf-native-integral-tensor-coherence). -/
+large scalar-extension functors. Source: blueprint order 1462. -/
 theorem integralTensorAssociator_eq
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     {E L M : Index l Ω} (h : E ≤ L) (k : L ≤ M) :
@@ -71,7 +70,7 @@ variable [IsCommMonObj (abRing l X)] [(sections l X).Additive]
 /-- The explicit inverse-balancing and completion maps respect shifts and field towers.
 
 Source: Bhatt--Scholze, Propositions 3.5.1 and 6.8.14(2), Remark 6.8.15;
-Stacks Tag 06YY (blueprint: lem-sf-native-integral-tensor-coherence).
+Stacks Tag 06YY.
 
 Proof: the ordinary tensor comparison commutes with the degreewise shift, as does
 its quotient-completion chain map. The universal derived counits uniquely lift

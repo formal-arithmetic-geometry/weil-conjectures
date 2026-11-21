@@ -151,8 +151,8 @@ theorem projectionMapOfCompactification_rightDerivedLowerShriekBaseChangeMap'
 `g' ≫ f = f' ≫ g`, the square
 ```
 Lg^*(Rf_!K ⊗ᴸ L) ──Lg^* PF──▶ Lg^*Rf_!(K ⊗ᴸ Lf^*L) ──Ex_!──▶ Rf'_!Lg'^*(K ⊗ᴸ Lf^*L)
-       │                                                          │
-       ▼                                                          ▼
+       │ │
+       ▼ ▼
 Lg^*Rf_!K ⊗ᴸ Lg^*L ──Ex_! ⊗ 1──▶ Rf'_!Lg'^*K ⊗ᴸ Lg^*L ──PF──▶ Rf'_!(Lg'^*K ⊗ᴸ Lf'^*Lg^*L)
 ```
 commutes, where the vertical arrows are the tensor comparisons of the derived pullbacks, the

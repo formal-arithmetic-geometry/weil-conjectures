@@ -41,7 +41,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- The direct image along a closed immersion into a locally noetherian scheme preserves bounded
 constructibility: it is exact, so it commutes with the homology sheaves, and it preserves
-constructible sheaves (`proposition-proper-direct-image-finite-coefficients`). -/
+constructible sheaves. -/
 lemma boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion {Z Y : Scheme.{u}}
     [IsLocallyNoetherian Y] (i : Z ⟶ Y) [IsClosedImmersion i]
     {K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

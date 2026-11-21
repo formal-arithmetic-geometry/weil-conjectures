@@ -38,7 +38,6 @@ import Mathlib.CategoryTheory.Localization.Triangulated
 
 Source: Stacks Project, Tags 06XN and 05SE; the signed Roos cone calculus,
 Stacks Tags 014A, 014E and 08TC.
-(blueprint: lem-sf-integral-quotient-completion-exact)
 -/
 
 @[expose] public section
@@ -93,8 +92,7 @@ private theorem kanUnit_commShift
 augmentation commutes with the same exact functor's integer shifts.
 
 Source: Stacks Project, Tags 06XN and 05SE; signed Roos cone and augmentation
-calculus, Tags 014A, 014E and 08TC
-(blueprint: lem-sf-integral-quotient-completion-exact).
+calculus, Tags 014A, 014E and 08TC.
 
 Proof: assemble ordinary reduction followed by restriction of scalars into the
 additive module-valued tower functor. Its degreewise extension to complexes

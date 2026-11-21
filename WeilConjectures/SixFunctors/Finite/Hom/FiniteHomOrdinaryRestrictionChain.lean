@@ -9,8 +9,6 @@ public import WeilConjectures.SixFunctors.SheafRestrictionTowerData.StrictRestri
 import all WeilConjectures.SixFunctors.Finite.Coefficient.FiniteCoefficientSiteScalarArrow
 
 /-! # Composition of the normalized ordinary coefficient restriction comparisons
-
-Source: blueprint finite Hom proof, successive quotient comparison.
 -/
 
 @[expose] public noncomputable section
@@ -202,13 +200,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E]
 
 /-- The normalized ordinary restriction comparison respects successive coefficient quotients.
-Source: blueprint finite Hom proof, successive quotient paragraph
-(blueprint: lem-coef-finite-hom-ordinary-restriction-chain).
-Proof: form the composite using the two restriction comparisons and the identity-on-sections
-restriction associators. Naturality of the comparison unit and module-sheafification unit
-shows that the composite fixes each local generator. Uniqueness of the normalized comparison
-identifies it with the comparison of the composite quotient. Invert that equality and cancel
-the intrinsic restriction associator. The calculation permits identity and repeated levels. -/
+ -/
 theorem finiteHomOrdinaryRestriction_chain {n m r : ℕ} (h : m ≤ n) (k : r ≤ m)
     (M : Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (r + 1))))) :

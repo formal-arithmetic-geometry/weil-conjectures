@@ -255,7 +255,7 @@ variable {S} {g : X ⟶ X} (F : S.FrobeniusSystem g)
 
 /-- A compatible system of Frobenius coefficient morphisms is a *compatible tower of Weil pairs* if
 every `ψ_n` is invertible: a strict Weil structure `Lg^* L_n ≅ L_n` at every level
-(`definition-weil-structure`), compatible with the transitions. -/
+, compatible with the transitions. -/
 def IsWeil : Prop :=
   ∀ n, IsIso (F.coeff n)
 
@@ -509,7 +509,7 @@ uses the canonical comparisons; this is harmless, since the canonical comparison
 choices give isomorphic towers, unit twists lifting level by level.
 
 At the integral stage, compact cohomology and stalks are defined levelwise on the normalized
-systems (blueprint `sk-d-setup`), so that `RΓ_c(X, K_R) = R lim_n RΓ_c(X, L_n)` and
+systems, so that `RΓ_c(X, K_R) = R lim_n RΓ_c(X, L_n)` and
 `(K_R)_x̄ = R lim_n (L_n)_x̄`. The traces of the lifts are computed by
 `AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.exists_trace_eq_globalOperatorFamily` and
 `AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.exists_trace_eq_localOperatorFamily`.

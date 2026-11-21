@@ -29,8 +29,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Transport the intrinsic proper/open map to any section-normalized operation
 models. This assertion has no tensor comparison conclusion.
 Source: Stacks 0F7B--0F7F and 07A7; fix-prop-coherence,
-strict-system realization step 3
-(blueprint: lem-sf-integral-system-proper-open-transport).
+strict-system realization step 3.
 
 Proof: conjugate the intrinsic semilinear gamma by the direct and open isomorphisms
 of the bridge. This defines a natural transformation on whole systems and makes

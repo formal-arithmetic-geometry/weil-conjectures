@@ -49,7 +49,7 @@ private theorem representativeAction_transition
 
 /-- Construct the coefficient stages before choosing any refinement maps.
 Source: Zheng, Lemma 5.22, Proposition 5.24 and the exceptional coefficient construction,
-steps 1--5 (blueprint: lem-sf-constructible-exceptional-coefficient-stages).
+steps 1--5.
 
 Proof: restrict the finite etale compact-support adjunction to bounded constructible
 finite-Tor objects and transport by the canonical site comparison. Use the adjoint

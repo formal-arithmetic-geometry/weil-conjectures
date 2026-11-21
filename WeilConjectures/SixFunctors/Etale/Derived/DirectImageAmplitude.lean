@@ -38,8 +38,7 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- **Vanishing of the higher direct images above twice the dimension, over an arbitrary
-field** (blueprint `theorem-results-from-etale-theory--4` without the separably closed
-hypothesis).
+field**.
 
 Let `k` be a field, `f : X ⟶ Y` a morphism of `k`-schemes of finite type with `dim X ≤ d`, and
 `Λ` a torsion ring. Then `R^q f_* F = 0` for every étale sheaf `F` of `Λ`-modules on `X` and every

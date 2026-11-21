@@ -56,8 +56,7 @@ small étale site of `Z` and on that of `X` respectively. This is not a defect: 
 - `AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_closed`: the
   `i^*`-image of the open–closed short complex is short exact.
 - `AlgebraicGeometry.Etale.shortExact_openClosedShortComplex`: **the open–closed short complex
-  is short exact** (blueprint: `thm:openclosed-exact`).
-
+  is short exact**.
 -/
 
 @[expose] public section
@@ -137,8 +136,7 @@ closed immersion `i : Z ⟶ X` whose range is the complement of the range of `j`
 is exact. Both restrictions `j^*` and `i^*` are exact and they jointly reflect isomorphisms, so
 this follows from
 `AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_open` and
-`AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_closed`.
-(blueprint: `thm:openclosed-exact`) -/
+`AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_closed`. -/
 theorem Etale.shortExact_openClosedShortComplex
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     (Etale.openClosedShortComplex A j i

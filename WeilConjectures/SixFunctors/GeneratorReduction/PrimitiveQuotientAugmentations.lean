@@ -11,9 +11,6 @@ import WeilConjectures.SixFunctors.GeneratorReduction.PullQuotientAugmentationOn
 import WeilConjectures.SixFunctors.GeneratorReduction.FiniteReductionCompletionUnit
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 /-! # Quotient augmentations of primitive operations
-
-Source: current blueprint fix-prop-coherence, primitive comparisons
-(blueprint: lem-sf-primitive-quotient-augmentations).
 -/
 
 @[expose] public noncomputable section
@@ -148,8 +145,7 @@ private theorem pull_augmentation_onGood
 
 /-- The normalized ordinary tensor augmentation realizes the reduction-tensor map.
 Source: current blueprint, fix-prop-coherence.proof.md, maps-used sentence;
-Stacks Tags 07A4, 07A6 and 0941
-(blueprint: lem-sf-primitive-quotient-augmentations).
+Stacks Tags 07A4, 07A6 and 0941.
 
 Proof: first work on good flat-term K-flat complexes. The strict tensor
 transpose calculation identifies the reconstruction composite in the full reference

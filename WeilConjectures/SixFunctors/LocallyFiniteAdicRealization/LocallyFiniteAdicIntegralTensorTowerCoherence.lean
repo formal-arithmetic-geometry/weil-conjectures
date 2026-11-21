@@ -39,19 +39,18 @@ which imports this module, with
 the equation would be false.
 
 Source: Bhatt--Scholze, Propositions 3.5.1 and 6.8.14(2), Remark 6.8.15; the tower
-clause of `lem-sf-native-integral-tensor-coherence`
-(blueprint: new-lem-sf-native-integral-tensor-tower-coherence).
+clause of `lem-sf-native-integral-tensor-coherence`.
 
 Proof: rewrite `assoc` by `hassoc`. By the canonical completed scalar associator formula
-(`lem-sf-completed-scalar-associator-ambient-formula`) the integral associator
+ the integral associator
 `sfIntegralScalarComp` is the ordinary derived balancing associator conjugated by the
 three completion comparisons. Naturality moves the completion comparisons across the
 outer tensor functor `integralTensor l X C M`, and consecutive inverse comparisons cancel.
 What remains is associativity of the balanced derived tensor with the native ring of `C`:
 on a pure triple tensor `c ⊗ b ⊗ x` both maps give `c b ⊗ x`. Check this on ordinary
 tensor units and on K-flat complexes, then descend by the universal derived counit
-(`lem-sf-native-integral-tensor`). The scalar equations of the coefficient system
-(`lem-sf-locally-finite-adic-coefficient-system`) identify the direct ring map `E → M`,
+. The scalar equations of the coefficient system
+ identify the direct ring map `E → M`,
 and the equality transport along `coefficientInclusion_laws` gives exactly the displayed
 associator, including repeated fields. -/
 theorem integralTensorComparison_tower (C : CoefficientSystem l X)

@@ -27,8 +27,7 @@ private theorem models_eq
   simpa only [Category.assoc] using hf.trans (h.trans hg.symm)
 
 /-- Whiskering the intrinsic tensor comparison and then the two beta components.
-Source: the categorical composition in the final site-comparison paragraph
-(blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
+Source: the categorical composition in the final site-comparison paragraph. -/
 def finiteHomTensorBetaLeftOfComparisons
     {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂] [Category D₁] [Category D₂]
     (A : C₁ × C₁ ⥤ C₁) (B : D₁ × D₁ ⥤ D₁) (D : D₂ × D₂ ⥤ D₂)
@@ -39,8 +38,7 @@ def finiteHomTensorBetaLeftOfComparisons
     Functor.whiskerRight (NatTrans.prod β β) D
 
 /-- Whiskering beta on the tensor before the etale tensor comparisons.
-Source: the categorical composition in the final site-comparison paragraph
-(blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
+Source: the categorical composition in the final site-comparison paragraph. -/
 def finiteHomTensorBetaRightOfComparisons
     {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂] [Category D₁] [Category D₂]
     (A : C₁ × C₁ ⥤ C₁) (C : C₂ × C₂ ⥤ C₂) (D : D₂ × D₂ ⥤ D₂)
@@ -52,8 +50,7 @@ def finiteHomTensorBetaRightOfComparisons
 
 -- Comparing the chosen intrinsic closed structures requires a larger kernel budget.
 /-- The route through the intrinsic scalar tensorator, in the direction of beta.
-Source: blueprint lemma-change-coefficients-internal-hom--1, final site-comparison paragraph
-(blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
+ -/
 noncomputable def finiteHomSiteTensorBetaLeft
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -73,8 +70,7 @@ noncomputable def finiteHomSiteTensorBetaLeft
 
 -- Comparing the chosen etale closed structures requires a larger kernel budget.
 /-- The route through the etale scalar tensorator, in the direction of beta.
-Source: blueprint lemma-change-coefficients-internal-hom--1, final site-comparison paragraph
-(blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
+ -/
 noncomputable def finiteHomSiteTensorBetaRight
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -113,12 +109,7 @@ private theorem beta_routes_on_representatives
 
 -- Fully faithful descent compares the recorded derived-category presentations.
 /-- The beta oriented tensor transformations agree after K-flat localization.
-Source: blueprint lemma-change-coefficients-internal-hom--1, final scalar/site comparison paragraph
-(blueprint: lem-coef-finite-hom-site-tensor-natural-equality).
-Proof: restrict the two natural transformations to pairs of K-flat representatives.
-The route normalization theorem supplies comparison isomorphisms for each route;
-the ordinary chain equation identifies their chain maps. Fully faithful restriction,
-followed by cancellation of those comparison isomorphisms, yields equality. -/
+ -/
 theorem finiteHomSiteTensorNaturalEquality
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

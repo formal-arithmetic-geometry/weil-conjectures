@@ -73,8 +73,7 @@ private theorem reflect_factored_square {C D : Type*} [Category C] [Category D]
 /-- The integral finite-Tor numerator calculation underlying the generator transition.
 Source: Proposition 6.8.14 and Remark 6.8.15, the integral numerator calculation.
 The statement fixes the common-stage object to the rationalization of one finite-Tor
-integral object, which is strictly smaller than the arbitrary-stage generator theorem.
-(blueprint: lem-sf-native-compact-support-finite-scalar-coherence-generator-integral) -/
+integral object, which is strictly smaller than the arbitrary-stage generator theorem. -/
 theorem native_compact_support_finite_scalar_coherence_generator_integral
     [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)

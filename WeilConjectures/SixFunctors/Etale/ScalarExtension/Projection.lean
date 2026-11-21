@@ -201,9 +201,9 @@ instance isIso_upperStarSheafRestrictScalarsUnitMap :
 `X`, the square
 ```
 g^* (P ⊗ S_X) ──g^* π──▶ g^* res (S ⊗_R P) ──▶ res g^* (S ⊗_R P) ──▶ res (S ⊗_R g^* P)
-      │                                                                     ‖
-      δ                                                                     ‖
-      ▼                                                                     ‖
+      │ ‖
+      δ ‖
+      ▼ ‖
 g^* P ⊗ g^* S_X ──────▶ g^* P ⊗ S_Y ──────────────π──────────────▶ res (S ⊗_R g^* P)
 ```
 commutes. -/

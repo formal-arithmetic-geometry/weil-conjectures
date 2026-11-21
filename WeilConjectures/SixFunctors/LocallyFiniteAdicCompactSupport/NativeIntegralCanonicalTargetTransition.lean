@@ -81,8 +81,7 @@ realization isomorphisms and the native scalar map. The stage-object formula ide
 its target with raw localization of the integral transition. Naturality of inverse
 operationTransport moves this realized transition past the final transport. Precompose
 by the inverse initial integral realization and cancel its composite with the forward
-realization. Functoriality and associativity give the two canonical target boundaries.
-(blueprint: lem-sf-native-integral-canonical-target-transition). -/
+realization. Functoriality and associativity give the two canonical target boundaries. -/
 theorem canonicalIntegralTargetTransition [G : NativeGeometry.{u} l]
     (source : Realization l X) (i E : Index l (PadicAlgCl l)) (h : i ≤ E)
     (Ki : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) i) X) :

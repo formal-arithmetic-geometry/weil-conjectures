@@ -26,7 +26,6 @@ variable (l : ℕ) [Fact l.Prime]
 
 Source: the normalized strict reduction construction in Zheng Section 5, Lemma 5.13
 and Constructions 5.14--5.15 (Stacks Tags 0F7B and 0F7I).
-(blueprint: lem-sf-ring-open-map-normalized-refinement-integral).
 
 Proof: construct compatible finite-level comparisons on the normalized strict
 reduction system, take the normalized total-limit comparison, and identify its

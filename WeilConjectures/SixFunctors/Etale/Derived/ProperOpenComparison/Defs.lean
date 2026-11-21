@@ -19,8 +19,7 @@ constructs the comparison map
 
 `α_{u,K} : j₂! K ⟶ Ru_* j₁! K`
 
-on the bounded below derived categories of étale sheaves of `Λ`-modules
-(blueprint `proposition-construction-independence-rf-shriek--7`).
+on the bounded below derived categories of étale sheaves of `Λ`-modules.
 
 ## The construction
 
@@ -28,7 +27,7 @@ For an open immersion `j` write `ι_j : j_! ⟶ Rj_*` for the canonical map of t
 `j_! ⊣ j^* ⊣ Rj_*` (`AlgebraicGeometry.Etale.openImmersionLowerShriekToLowerStarPlus`). The map
 `α_u` is characterised by
 
-`Ru_* (ι_{j₁}) ∘ α_u = ι_{j₂}`   (modulo `Ru_* Rj₁_* ≅ Rj₂_*`)
+`Ru_* (ι_{j₁}) ∘ α_u = ι_{j₂}` (modulo `Ru_* Rj₁_* ≅ Rj₂_*`)
 
 (`AlgebraicGeometry.ProperOpenDatum.comparison_toLowerStar`). Such a map exists and is unique
 because `j₂^* Ru_* (ι_{j₁})` is an isomorphism

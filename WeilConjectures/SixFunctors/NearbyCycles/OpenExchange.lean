@@ -18,9 +18,9 @@ Let `φ : M ⟶ N` be a morphism of models (`NearbyCyclesModel.Hom`) whose morph
 generic fibres
 ```
 𝒳_{M,η̄} --g--> 𝒳_{N,η̄}
-   |j_M            |j_N
-   v               v
-  𝒳_M  ----t---->  𝒳_N
+   |j_M |j_N
+   v v
+  𝒳_M ----t----> 𝒳_N
 ```
 is cartesian. Then the pullback exchange `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*`
 (`NearbyCyclesModel.Hom.pullbackExchange`) is an isomorphism
@@ -37,7 +37,6 @@ The pullback exchange restricts to bounded constructible complexes
 `WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity`), where it is again an
 isomorphism in the weakly étale case
 (`NearbyCyclesModel.Hom.isIso_boundedConstructiblePullbackExchange_of_weaklyEtale`).
-
 -/
 
 @[expose] public section

@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 set_option linter.privateModule false
 
 /-! Compatibility of finite pullback compositors with fixed coefficient realization.
-Source: the first paragraph of the proof of prop-sf-pf-coherence.
 -/
 
 @[expose] public noncomputable section

@@ -16,8 +16,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 Let `Λ` be an Artinian local ring with residue field `κ`, for instance the finite coefficient
 ring `A_{E,n} = 𝒪_E/ϖⁿ` with `κ = A_{E,1}`, and let `K ∈ D(X_ét, Λ)`. Then `K` has Tor amplitude
-in `[a, b]` if and only if `K ⊗ᴸ κ_X` has cohomology in `[a, b]` (blueprint
-`theorem-f-shriek-finite-coefficients--1`).
+in `[a, b]` if and only if `K ⊗ᴸ κ_X` has cohomology in `[a, b]`.
 
 ## Proof
 

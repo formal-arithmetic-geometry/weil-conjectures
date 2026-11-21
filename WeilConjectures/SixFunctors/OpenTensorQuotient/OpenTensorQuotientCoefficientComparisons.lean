@@ -13,7 +13,6 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 /-! # The coefficient portion of the strict open tensor square
 
 Source: Stacks Project, Tags 0E8I, 0GL1 and 0941.
-(blueprint: lem-sf-open-quotient-coefficient-comparisons).
 -/
 
 @[expose] public noncomputable section
@@ -140,7 +139,6 @@ square of augmented maps.
 
 Source: Stacks Project, Modules on Sites, Tag 0E8I; Cohomology on Sites, Tag 0GL1;
 cochain coefficient coherence, Tag 03EK; strict systems, Tag 0941.
-(blueprint: lem-sf-open-quotient-coefficient-comparisons).
 
 Proof: define gamma by conjugation: inverse balancing on X, reduction of the
 fixed integral total comparison, r, and extension of balancing on U. Cancelling

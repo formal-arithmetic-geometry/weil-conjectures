@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.IntegralHom.Tensor.IntegralHomTensorExchangeN
 /-! # Scalar tensor exchange on K-flat representatives
 
 Source: Stacks Tags 06YY and 08J7, scalar tensor comparison and evaluation.
-(blueprint: lem-sfb-integral-hom-scalar-tensor-exchange-representatives)
 -/
 
 @[expose] public section
@@ -50,7 +49,6 @@ Hom input or evaluation morphism occurs in this square.
 
 Source: Stacks Tags 06YY and 08J7, the K-flat scalar tensor and evaluation
 normalizations in the integral Hom reduction construction.
-(blueprint: lem-sfb-integral-hom-scalar-tensor-exchange-representatives).
 
 Proof: use the representative comparisons to identify the source tensors with the
 signed total tensors of P,Q and Q,P. Identify the reduced inputs with the ordinary

@@ -39,8 +39,7 @@ private theorem cancellation
     F.map_id, Category.id_comp, d.inv_hom_id, Category.comp_id]
 
 /-- Descent of an ordinary strict open scalar comparison through augmented computations.
-Source: Stacks 06YS, 06YY, 0941 and 0GL1
-(blueprint: lem-sf-open-semilinear-reduction-descent).
+Source: Stacks 06YS, 06YY, 0941 and 0GL1.
 
 Proof: Compute ordinary quotient tensor simultaneously on flat-term K-flat complexes.
 The scalar-unit maps give a strict augmentation whose transpose under the fixed reduction

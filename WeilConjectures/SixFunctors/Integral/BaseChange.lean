@@ -19,9 +19,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 For a cartesian square
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 with `f` integral, the base change map `g^* f_* ⟶ f'_* g'^*` on étale sheaves of `Λ`-modules is
@@ -186,8 +186,7 @@ The Lean proof reduces to the geometric-point exchange, applies it to the base-c
 integral morphism and to the outer square, and cancels the two comparison isomorphisms
 in the horizontal pasting identity. The inverse-image stalk isomorphism then makes
 every geometric stalk of the original exchange invertible.
-Source: Stacks Project, Tag 0EYP.
-(blueprint: lem-sbc-integral-underived-exchange). -/
+Source: Stacks Project, Tag 0EYP. -/
 theorem Etale.isIso_baseChangeMap_of_isIntegralHom (sq : IsPullback g' f' f g) :
     IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
   have hf' : IsIntegralHom f' := MorphismProperty.of_isPullback sq inferInstance

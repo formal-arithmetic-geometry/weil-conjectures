@@ -52,7 +52,6 @@ is fully faithful", and none is needed here.
   comparison `j_! ⟶ j_*` consumes; see
   `AlgebraicGeometry.Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar` in
   `WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison`.
-
 -/
 
 @[expose] public section

@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-! # LocallyFiniteAdicConstructibleSmall
 
-Source: Bhatt--Scholze, Section 6.8; native realization proof
-(blueprint: lem-sf-locally-finite-adic-constructible-small).
+Source: Bhatt--Scholze, Section 6.8; native realization proof.
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +36,7 @@ namespace WeilConjectures.LocallyFiniteAdicRealization
 /-- Essential smallness of the native target, independently of a realization functor.
 
 Source: the essential-smallness addendum in step 8 of the native realization node,
-using BBD 1.3.3--1.3.6 and constructible-module presentation counting
-(blueprint: lem-sf-locally-finite-adic-constructible-small).
+using BBD 1.3.3--1.3.6 and constructible-module presentation counting.
 
 Proof in words: the native internal-module convention is equivalent to the abelian
 sheaf-module convention by restriction of the constant scalar action and its inverse

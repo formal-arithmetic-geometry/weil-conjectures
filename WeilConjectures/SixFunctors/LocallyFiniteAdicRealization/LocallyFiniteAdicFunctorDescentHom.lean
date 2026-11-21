@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.SplitCoefficientDerive
 
 Source: Bhatt--Scholze, Proposition 6.8.14(1),(2), using the existing condensed
 filtered two-colimit; native realization proof steps 3 and 6.
-(blueprint: lem-sf-locally-finite-adic-functor-descent-hom)
 -/
 
 @[expose] public noncomputable section
@@ -63,7 +62,6 @@ condensed two-colimit puts it at a common finite field. Conjugate by the scalar
 comparisons and lift it through the full finite realization. The representative formula
 identifies its native image with the original arrow. This applies to every source pair,
 including shifted objects, without asserting an essential-image or smallness result.
-(blueprint: lem-sf-locally-finite-adic-functor-descent-hom)
 -/
 theorem normalizedFunctor_descent_hom
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]

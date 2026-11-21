@@ -120,7 +120,6 @@ attribute [local implicit_reducible] coefficientSequenceCommRingSheaf
 
 /-- The ordinary bridge preserves the section-normalized direct-image compositor.
 Source: Stacks 03D8, 07A7; strict-system realization of blueprint fix-prop-coherence.
-(blueprint: lem-sf-integral-system-ordinary-bridge-composition).
 Proof: evaluate on each section at (n,U). Both ordinary bridge components are
 identity on sections. The supplied compositor and the intrinsic compositor are
 restriction along the same canonical map of iterated fibre products. Thus their

@@ -28,7 +28,6 @@ element of every finite quotient `Gal(L'/L₁)`; it holds when `L₁` is relativ
 - `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin`: if the
   change of Galois layers `α_{τ'}` is invertible, so is the change of trait `α_τ`, for complexes of
   étale origin with torsion coefficients.
-
 -/
 
 @[expose] public section

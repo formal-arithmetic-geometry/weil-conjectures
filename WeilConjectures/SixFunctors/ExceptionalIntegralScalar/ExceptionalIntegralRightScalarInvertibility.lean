@@ -13,7 +13,6 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralFiniteFree
 /-! # Invertibility of the prescribed exceptional right scalar mate
 
 Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: lem-sf-exceptional-integral-right-scalar-invertibility)
 -/
 
 @[expose] public noncomputable section
@@ -743,8 +742,7 @@ prescribed right mate because its counit transpose is the normalized left map.
 For identities use the scalar multiplication unitor. For composites use naturality
 and the two counit equations to identify the composite right comparison with the
 mate of the left composite; balanced scalar associators identify it with the
-prescribed mate. Invertibility is preserved by each transport and composition.
-(blueprint: lem-sf-exceptional-integral-right-scalar-invertibility). -/
+prescribed mate. Invertibility is preserved by each transport and composition. -/
 theorem exceptionalIntegralRightScalarInvertibility
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

@@ -166,7 +166,6 @@ precomposition, conjugated by the supplied presentations. Apply the sheaf adjunc
 and cancel the integral presentation isomorphism. The integral and rational inclusion
 normalizations and the native pullback normalization then identify both maps pointwise.
 Taking their components gives the displayed equality of ring homomorphisms.
-(blueprint: lem-sf-native-completed-coefficient-integral-map-square-component)
 -/
 theorem coefficient_presentation_integralMap_pull_square_component
     [G : NativeGeometry.{u} l]

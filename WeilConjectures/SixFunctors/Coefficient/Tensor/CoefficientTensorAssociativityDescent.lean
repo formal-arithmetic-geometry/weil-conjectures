@@ -256,8 +256,7 @@ include cB cA hε hU hκ hμ
 
 /-- A natural comparison invertible on resolving complexes descends ordinary tensor
 associativity. The proof pastes four binary squares, cancels model isomorphisms, and
-transports along flat-term K-flat resolutions. Source: Stacks 07A4 and 0FPT.
-(blueprint: lem-coef-tensor-associativity-descent). -/
+transports along flat-term K-flat resolutions. Source: Stacks 07A4 and 0FPT. -/
 theorem coefficientTensorAssociativityDescent (X Y Z : DerivedCategory
     (RingedTensorModules.{c, v, r} J R)) :
     F.map (SB.monoidal.associator X Y Z).hom ≫

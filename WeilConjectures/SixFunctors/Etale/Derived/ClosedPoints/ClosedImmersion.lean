@@ -17,8 +17,7 @@ public import WeilConjectures.ConstructibleSheaf.AdicImageTower
 
 For a closed immersion `i : Z ⟶ X`, the pushforward `i_*` of étale sheaves of `Λ`-modules is
 fully faithful with left inverse `i^*`, and its essential image consists of the sheaves whose
-geometric stalks vanish at the points outside `Z` (blueprint
-`proposition-extension-zero-restriction-closed-subscheme--5`).
+geometric stalks vanish at the points outside `Z`.
 
 ## Main statements
 

@@ -116,5 +116,4 @@ This module only imports its parts: the definitions are in
 `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Tensor`, the composition law in
 `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Composition` and the statements at
 finite coefficients in `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Finite`.
-
 -/

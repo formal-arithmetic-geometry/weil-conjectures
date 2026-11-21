@@ -85,7 +85,7 @@ variable (l : ℕ) [Fact l.Prime]
 -- The counit equation compares two explicit presentations of the derived scalar functor.
 /-- The canonical ordinary and completed derived scalar models have a shift-compatible
 comparison preserving completion. Source: the universal derived scalar counits and the
-ordinary-model comparison (blueprint: lem-sf-ordinary-completed-scalar-shift).
+ordinary-model comparison.
 
 Proof: additive natural transformations commute with homotopy shifts degreewise. The
 ordinary-model comparison intertwines the universal derived counits on cochain complexes,
@@ -146,8 +146,7 @@ theorem ordinary_completed_scalar_shift :
       DerivedCategory.Qh) ε η tH e.hom h
 
 /-- The intrinsic ordinary comparison is completion restricted to constructible objects.
-Source: the normalized ordinary scalar comparison
-(blueprint: lem-sf-ordinary-completed-scalar-shift). -/
+Source: the normalized ordinary scalar comparison. -/
 theorem ordinary_scalar_comparison_hom (K : sfIntegralConstructibleCategory l E T) :
     (sfIntegralOrdinaryComparison l E L i T).hom.app K =
       (scalarCompletion l E L i T).app K.obj := by
@@ -165,8 +164,7 @@ theorem ordinary_scalar_comparison_hom (K : sfIntegralConstructibleCategory l E 
   exact (congrArg (fun a ↦ a.hom.app K) he).symm
 
 /-- Completion in the raw ambient model, restricted to intrinsic integral objects.
-Source: the canonical completed scalar comparison
-(blueprint: lem-sf-ordinary-completed-scalar-shift). -/
+Source: the canonical completed scalar comparison. -/
 def intrinsicScalarCompletion :
     (sfIntegralConstructible l E T).ι ⋙
         AlgebraicGeometry.Scheme.pbcDerivedExtend (completedCoefficientMap.{u, u} l E L i T) ⟶
@@ -176,15 +174,13 @@ def intrinsicScalarCompletion :
     (completedScalarComparison.{u, u} l E L i T)
 
 /-- The restricted comparison has the canonical completion components.
-Source: the defining restriction
-(blueprint: lem-sf-ordinary-completed-scalar-shift). -/
+Source: the defining restriction. -/
 theorem intrinsicScalarCompletion_app_heq (K : sfIntegralConstructibleCategory l E T) :
     HEq ((intrinsicScalarCompletion l E L i T).app K)
       ((completedScalarComparison.{u, u} l E L i T).app K.obj) := by rfl
 
 /-- The ordinary-to-completed comparison pastes to intrinsic completion.
-Source: the completion identity of the ordinary model comparison
-(blueprint: lem-sf-ordinary-completed-scalar-shift). -/
+Source: the completion identity of the ordinary model comparison. -/
 theorem intrinsicScalarCompletion_paste
     (e : integralOrdinaryDerivedScalar l E L i T ≅
       AlgebraicGeometry.Scheme.pbcDerivedExtend (completedCoefficientMap.{u, u} l E L i T))

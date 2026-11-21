@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-! Derived pullback associativity and unit laws.
 
 Source: Stacks 015F and 04VG.
-(blueprint: new-lem-sf-ambient-pullback-derived-composition-laws).
 
 This is the exact-localization part of the ambient pullback coherence argument.
 The ordinary equations are preserved by the exact termwise functors and their
@@ -126,10 +125,9 @@ variable (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E]
 
 /-- Derived associativity and unit laws for the ambient pullback comparisons.
 Source: Stacks 015F and 04VG.
-(blueprint: new-lem-sf-ambient-pullback-derived-composition-laws).
 Proof: apply the exact termwise pullback functors to the ordinary equations,
 then use the localization universal property and the specified factorization
-isomorphisms.  This preserves composition, identities and all endpoint
+isomorphisms. This preserves composition, identities and all endpoint
 transports, giving the three displayed derived clauses. -/
 theorem derived_pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :
     (∀ {W X Y Z : Scheme.{t}} (w : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z)

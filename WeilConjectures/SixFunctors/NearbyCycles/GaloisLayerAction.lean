@@ -48,7 +48,6 @@ The diagram chases are carried out in abstract categories (`CategoryTheory.unitT
 `CategoryTheory.pullbackExchange_endo_aux`) and then instantiated. The identification of the
 unit transports `u_σ` with the derived Galois actions (defined through the restriction to the
 base changes `V ×_X Y`) is not proved here and enters the last theorem as a hypothesis.
-
 -/
 
 @[expose] public section

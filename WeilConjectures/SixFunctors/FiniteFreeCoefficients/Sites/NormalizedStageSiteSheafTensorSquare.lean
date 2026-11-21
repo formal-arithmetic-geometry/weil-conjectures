@@ -14,7 +14,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 Source: Stacks Project, Modules on Sites, Tag 03EL, lemma-tensor-product-pullback;
 scalar/site specialization and pure-tensor reassociation in the latest blueprint
 lemma-change-coefficients-exceptional-inverse-image--3, paragraph 3.
-(blueprint: lem-sf-normalized-stage-site-sheaf-tensor-square)
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +35,7 @@ attribute [local instance] Sheaf.monoidalCategory
 attribute [-instance] instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints
 
 /-- The existing sheafified scalar balancing tensorator, specialized to the etale site.
-Source: Stacks 03EK; `composeAndSheafifyOplaxMonoidal`.
-(blueprint: lem-sf-normalized-stage-site-sheaf-tensor-square). -/
+Source: Stacks 03EK; `composeAndSheafifyOplaxMonoidal`. -/
 -- This is definitionally the project's ordinary scalar tensorator; the local instance
 -- avoids importing derived exceptional-coefficient constructions for an underived square.
 local instance etaleScalarOplax {A B : Type (u + 1)} [CommRing A] [CommRing B]
@@ -56,7 +54,6 @@ local instance etaleScalarOplax {A B : Type (u + 1)} [CommRing A] [CommRing B]
 Source: Stacks Project, Modules on Sites, Tag 03EL, lemma-tensor-product-pullback;
 scalar/site specialization and pure-tensor reassociation in the latest blueprint
 lemma-change-coefficients-exceptional-inverse-image--3, paragraph 3.
-(blueprint: lem-sf-normalized-stage-site-sheaf-tensor-square)
 
 Proof:
 1. Unpack the ordinary comparison data: `ν^*` on `A`- and `B`-module sheaves, the two

@@ -50,7 +50,6 @@ private theorem native_commutative (T : Scheme.{u}) : IsCommMonObj (abRing l T) 
 
 /-- The native section presentation respects pullback, direct image and open extension.
 Source: Bhatt--Scholze, Section 6.8, and Stacks Tags 03D6, 03D7, 03DI.
-(blueprint: lem-sf-native-compact-support-geometry).
 
 Proof: forget the constant algebraic-closure vector-space action on a native internal
 module. Restriction along constant functions recovers this action, so this is an exact

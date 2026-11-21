@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.In
 /-! # Normalized completed direct image
 
 Source: Stacks Project, Tags 03D7 and 0941.
-(blueprint: lem-sf-integral-completed-direct-image-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -72,7 +71,6 @@ private theorem functor_eq_sections
 
 /-- The two completed direct-image presentations have a unique identity-section comparison.
 Source: Stacks Project, Tags 03D1 and 0941; primitive realization Step 3.
-(blueprint: lem-sf-integral-completed-direct-image-comparison).
 
 Proof: the coefficient map for the specified completed-ring pullback is the
 adjoint transpose of sfCompletedCoefficientMap. Applying the direct-image

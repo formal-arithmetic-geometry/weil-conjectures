@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 /-! # Tensor closure of native finite open support
 
 Source: Stacks, Modules on Sites, Tag 0E8I.
-(blueprint: lem-coef-native-finite-tensor-support).
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +32,7 @@ open WeilConjectures.SemilinearSections
 namespace WeilConjectures.CoefSupportOpenTensor
 
 /-- Tensoring a native finite extension by an ambient module stays in its essential image.
-Source: Stacks, Modules on Sites, Tag 0E8I (lemma-j-shriek-and-tensor).
-(blueprint: lem-coef-native-finite-tensor-support).
+Source: Stacks, Modules on Sites, Tag 0E8I.
 
 Proof: the native extension is an equivalence from open modules to slice modules,
 followed by localized extension. On the slice the extension/tensor isomorphism

@@ -206,8 +206,7 @@ private theorem constant_coordinates {U V W : Scheme.{w}} (h : U ⟶ V) (k : V �
 /-- Realization preserves the inverse proper compositor in finite ring-sheaf coordinates.
 This concerns three direct-image functors only; there are no open immersions,
 compactifications, etale antecedents, or compact-support objects in the assertion.
-Source: compactification-coherence proof, second paragraph; Stacks 03D6 and 0D6E
-(blueprint: lem-sf-finite-ring-fixed-push-composition).
+Source: compactification-coherence proof, second paragraph; Stacks 03D6 and 0D6E.
 
 Proof: first eliminate the equality h ≫ k = g by substitution. Before deriving,
 modulePushComposition_existsUnique fixes the ring-sheaf direct-image compositor

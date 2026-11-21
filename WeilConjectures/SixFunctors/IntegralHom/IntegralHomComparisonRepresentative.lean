@@ -39,7 +39,6 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2;
 Stacks Tags 093M, 06YQ, 08J7 and 07A6.
-(blueprint: lem-sf-integral-hom-comparison-representative).
 -/
 
 @[expose] public section
@@ -65,7 +64,6 @@ invertibility assertion about the representative map or its components.
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2,
 finite-free quotient resolution and the evaluation-normalized scalar adjunction;
 Stacks Tags 093M, 06YQ, 08J7 and 07A6.
-(blueprint: lem-sf-integral-hom-comparison-representative).
 
 Proof: the valuation ring of E is a DVR and is Noetherian. Its standard
 resolution of the quotient at exponent n+1 is the free rank-one complex in

@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Native constructibility of a finite integral tensor model
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3) and Proposition 6.8.14(2).
-(blueprint: lem-sf-native-integral-tensor-constructible).
 The assertion concerns the explicit derived tensor functor, independently of
 any normalized functor on the common-stage category.
 -/
@@ -58,7 +57,6 @@ private theorem stratifiedFinitelyPresented_of_iso
 has bounded constructible cohomology, read through the section-module equivalence.
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), Proposition 6.8.14(2) and Lemma 6.8.2.
-(blueprint: lem-sf-native-integral-tensor-constructible).
 
 Proof in words: use the integral stratified-perfect characterization and its detailed
 coefficient transport to obtain a bounded complex whose cohomology sheaves have

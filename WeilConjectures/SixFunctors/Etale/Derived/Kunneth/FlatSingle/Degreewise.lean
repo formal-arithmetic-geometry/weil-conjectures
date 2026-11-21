@@ -36,8 +36,7 @@ isomorphisms at every sheaf `𝓖`
 (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeHomologyMap_app_of_cokernel_lowerStar`):
 
 1. both sides only depend on `𝓖 / J 𝓖`, since they are right exact in `𝓖` and kill `J`;
-2. `𝓖 / J 𝓖` is a filtered colimit of constructible sheaves killed by `J` (blueprint
-   `lemma-finiteness-small-etale-topoi--1`), and both sides commute with filtered colimits;
+2. `𝓖 / J 𝓖` is a filtered colimit of constructible sheaves killed by `J`, and both sides commute with filtered colimits;
 3. a constructible sheaf killed by `J` embeds into a finite sum of sheaves `π_* M` with `M`
    killed by `J`, retracts of sums of copies of `π_* Λ / J π_* Λ`, with constructible cokernel
    killed by `J`; on short exact sequences of sheaves killed by `J`, the sources are exact (the

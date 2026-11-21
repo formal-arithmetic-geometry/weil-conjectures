@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerDirectImageC
 /-! # Identity normalization of the system direct-image compositor
 
 Source: Stacks 07A7, 0F7C; blueprint fix-prop-coherence, composition clause.
-(blueprint: lem-sf-system-push-identity-pair).
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +25,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The two-identity proper-image compositor is the image of the canonical identity
 comparison. This concerns direct image only, before compactification or interchange.
-Source: Stacks 07A7, 0F7C; blueprint fix-prop-coherence, composition clause
-(blueprint: lem-sf-system-push-identity-pair).
+Source: Stacks 07A7, 0F7C; blueprint fix-prop-coherence, composition clause.
 
 Proof: the sections normalization identifies the ordinary two-identity compositor
 with direct image of the ordinary identity comparison. The latter comparison is

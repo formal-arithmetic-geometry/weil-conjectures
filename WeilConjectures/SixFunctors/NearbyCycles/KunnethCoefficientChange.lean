@@ -45,7 +45,6 @@ coefficients; it is invertible when `ρ_j` is invertible at `Lε^* A`. We show:
 The analogue for a flat `a`, with `ProEtale.CondensedRing.derivedPullIso` and
 `ProEtale.CondensedRing.derivedPushHom`, is
 `WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChangeFlat`.
-
 -/
 
 @[expose] public section
@@ -156,7 +155,7 @@ variable {Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel
 `φ : M ⟶ N` and `T = L(Ext_a)`, the square
 ```
 T Lf'^* Ψ_N A ──T α_φ──▶ T Ψ_M Lf^* A ──Φ──▶ Ψ_M T Lf^* A ──P──▶ Ψ_M Lf^* T A
-      │P                                                              ‖
+      │P ‖
 Lf'^* T Ψ_N A ──Lf'^* Φ──▶ Lf'^* Ψ_N T A ─────────α_φ──────────▶ Ψ_M Lf^* T A
 ```
 commutes, where `Φ` is `NearbyCyclesModel.extendScalarsComparison`. -/
@@ -254,7 +253,7 @@ square: with `T = L(Ext_a)`, its tensor comparison `m`, the (Pull) isomorphisms 
 comparisons `Φ = NearbyCyclesModel.extendScalarsComparison`, the square
 ```
 T (Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B) ──T Π──▶ T Ψ_P (Lf₁^* A ⊗ Lf₂^* B)
-        │ m ≫ (P ≫ Lf₁'^* Φ) ⊗ (P ≫ Lf₂'^* Φ)        │ Φ ≫ Ψ_P (m ≫ P ⊗ P)
+        │ m ≫ (P ≫ Lf₁'^* Φ) ⊗ (P ≫ Lf₂'^* Φ) │ Φ ≫ Ψ_P (m ≫ P ⊗ P)
 Lf₁'^* Ψ_M T A ⊗ Lf₂'^* Ψ_N T B ──Π──▶ Ψ_P (Lf₁^* T A ⊗ Lf₂^* T B)
 ```
 commutes. -/

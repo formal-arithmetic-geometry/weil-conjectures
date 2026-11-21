@@ -19,7 +19,6 @@ of `M''` (the inclusion of the invariants of a finite group), then so is the pul
 `χ` (`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp`). This is the formal part of
 the generic-slicing identification of nearby cycles with invariants (blueprint
 `proposition-external-kunneth-formula-nearby-cycles`, "Facts about traits", identification (2)).
-
 -/
 
 @[expose] public section

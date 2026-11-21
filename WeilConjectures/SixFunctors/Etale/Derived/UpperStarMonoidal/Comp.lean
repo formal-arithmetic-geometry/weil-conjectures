@@ -53,8 +53,8 @@ variable {T S R : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ R) (g₁₂ : T ⟶
 underived pullbacks, through the counits of the derived pullbacks:
 ```
   L(g₁ ≫ g₂)^*(Qh X) ──────────────▶ Lg₁^* Lg₂^* (Qh X)
-          │ counit                        │ Lg₁^* counit ≫ counit
-          ▼                               ▼
+          │ counit │ Lg₁^* counit ≫ counit
+          ▼ ▼
   Qh((g₁ ≫ g₂)^* X) ───────────────▶ Qh(g₁^* g₂^* X)
 ```
 -/
@@ -248,8 +248,8 @@ lemma leftDerivedUpperStarTensorComparison_eq_comp :
 the tensor comparisons,
 ```
   L(g₁ ≫ g₂)^*(K ⊗ᴸ M) ──────────────────▶ L(g₁ ≫ g₂)^*K ⊗ᴸ L(g₁ ≫ g₂)^*M
-          │                                           │
-          ▼                                           ▼
+          │ │
+          ▼ ▼
   Lg₁^*Lg₂^*(K ⊗ᴸ M) ──▶ Lg₁^*(Lg₂^*K ⊗ᴸ Lg₂^*M) ──▶ Lg₁^*Lg₂^*K ⊗ᴸ Lg₁^*Lg₂^*M
 ```
 -/

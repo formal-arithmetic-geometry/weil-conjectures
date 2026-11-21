@@ -9,8 +9,6 @@ public import WeilConjectures.SixFunctors.Common.CommonStageInclusionTensorModel
 public import WeilConjectures.SixFunctors.Supporting.TensoratorFromModelNaturality
 
 /-! # Naturality of the finite-stage tensor model
-
-Source: thm-sf-pf-field.proof.md, Compatibility and the common coefficient field.
 -/
 
 @[expose] public noncomputable section
@@ -61,12 +59,7 @@ private theorem model_square
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The finite-stage tensor model identification is natural in both inputs.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-common-stage-inclusion-tensor-model-naturality).
-Proof: apply the representative formula for commonStageDerivedTensor at E to the
-images of the two arrows under the repeated-stage transition. Express that
-representative using isoToStage. The common-stage comparison and its inverse
-cancel, leaving exactly the tensor of the two extended arrows. -/
+ -/
 theorem commonInclusionTensorModel_naturality
     {K K' L L' : Stage l Ω W E} (a : K ⟶ K') (b : L ⟶ L') :
     (commonStageDerivedTensor l Ω W).map
@@ -116,8 +109,7 @@ open AlgebraicallyClosedCoefficients (Index Coefficient)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The finite-stage inclusion tensorator, natural in both arguments.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-common-stage-inclusion-tensor-model-naturality). -/
+ -/
 @[irreducible] def commonInclusionTensorComparison
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (W : Scheme.{u})

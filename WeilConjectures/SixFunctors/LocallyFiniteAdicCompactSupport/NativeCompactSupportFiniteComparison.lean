@@ -53,8 +53,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (c : Compactification f)
 
 /-- Realizations at the three schemes with one compatible family of coefficient maps.
-Source: Bhatt--Scholze, Proposition 6.8.14, and normalized completion inclusions.
-(blueprint: lem-sf-native-compact-support-finite-comparison). -/
+Source: Bhatt--Scholze, Proposition 6.8.14, and normalized completion inclusions. -/
 structure CoefficientFamily [G : NativeGeometry.{u} l] where
   source : Realization l X
   target : Realization l Y
@@ -70,8 +69,7 @@ structure CoefficientFamily [G : NativeGeometry.{u} l] where
     (change E).map c.Z = (middle.coefficient E).integralMap l c.Z
 
 /-- Finite-stage comparisons, natural on rational arrows and compatible with stage changes.
-Source: Bhatt--Scholze, Remark 6.8.15, and the proper/open scalar counit mate.
-(blueprint: lem-sf-native-compact-support-finite-comparison). -/
+Source: Bhatt--Scholze, Remark 6.8.15, and the proper/open scalar counit mate. -/
 structure FiniteComparison [G : NativeGeometry.{u} l]
     (stage : StageAction l D hl P c) (F : CoefficientFamily l c) where
   alpha : ∀ E : Index l (PadicAlgCl l),
@@ -127,7 +125,6 @@ private theorem integralNormalization_of_components [G : NativeGeometry.{u} l]
 /-- The proper/open scalar mate is invertible on finite rational constructible inputs.
 Source: Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15;
 steps 1--10 of the native compact-support realization plan.
-(blueprint: lem-sf-native-compact-support-finite-comparison).
 
 Proof: choose normalized realizations of X, Y and Z as in the constructible realization
 lemma. At every scheme the completed-integral coefficient map sends an integral function

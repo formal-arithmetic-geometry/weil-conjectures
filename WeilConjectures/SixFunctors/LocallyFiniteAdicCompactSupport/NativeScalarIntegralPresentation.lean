@@ -73,7 +73,6 @@ import Mathlib.Data.Matrix.Basic
 /-! # The normalized integral chart of completed coefficients
 
 Source: Bhatt--Scholze, Lemma 6.8.2.
-(blueprint: lem-sf-native-scalar-integral-presentation).
 -/
 
 @[expose] public noncomputable section
@@ -362,7 +361,6 @@ private theorem integralPresentation_natural (l : ℕ) [Fact l.Prime] [N : Nativ
 
 Source: Bhatt--Scholze, Lemma 6.8.2, the integral comparison and its finite quotient
 normalizations; the integral component of lem-sf-native-scalar-ring-model, steps 1 and 3.
-(blueprint: lem-sf-native-scalar-integral-presentation).
 
 Proof in words: take the integral isomorphism of a normalized CoefficientPresentation.
 Transport its continuous functions along Shrink.algEquiv. Uniqueness of the extension

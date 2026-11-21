@@ -17,30 +17,30 @@ accompany `proposition-six-operations-dctf`
 is a theorem bundling the statements it points to:
 
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_leftDerivedUpperStar_of_derivedComplete`
-  (`rem-sf-tor-toolbox-stages`): the integral form of clause (i);
+: the integral form of clause (i);
 - `AlgebraicGeometry.Etale.reductionModIdeal_constantComplex_and_exists_normalizedTower`: the
   constant coefficient tower;
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar_proofStatus`
-  (`rem-sf-direct-image-proof-status`): the two sites of clause (iii);
+: the two sites of clause (iii);
 - `AlgebraicGeometry.Etale.coefficientTransport_status`: the proved coefficient transport and its
   domains;
 - `AlgebraicGeometry.Etale.NormalizedTower.reconstruction_and_integral_comparisons`: the
   normalized DVR reconstruction and the integral comparisons;
 - `AlgebraicGeometry.Etale.exceptionalInverseImage_coefficientStages`
-  (`theorem-exceptional-inverse-image`),
+,
   `AlgebraicGeometry.Etale.exceptionalAdjoint_admissibility_constructible`
-  (`lemma-change-coefficients-exceptional-inverse-image`),
+,
   `AlgebraicGeometry.Etale.exceptionalAdjoint_traceAdmissibility_coefficients`
-  (`proposition-six-operations-change-coefficients`);
+;
 - `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.ctfDescent`
-  (`rem-sf-ctf-descent`): the verified domains entering the six-functor datum;
+: the verified domains entering the six-functor datum;
 - `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom_scope` (`open-sf-preservation-gaps`): the
   sharp internal-Hom bound holds for a site-perfect first variable and fails in general.
 
 The tower shapes that occur are described by
 `AlgebraicGeometry.Etale.exists_normalizedTower_and_boundedConstructibleIntegral_iff`.
 
-## Where this feeds (`sk-rem-sf-feeds`)
+## Where this feeds
 
 The package `prop-functor-package` is consumed as follows. The smooth-purity chapter needs
 clause (7), the relative product theorem, as the relative input for its affine-line orientation
@@ -88,7 +88,7 @@ lemma isPrincipal_pow_of_eq_span {ϖ : Λ} (hI : I = Ideal.span {ϖ}) (n : ℕ) 
   rw [hI, Ideal.span_singleton_pow]
   exact ⟨⟨_, rfl⟩⟩
 
-/-- Blueprint `rem-sf-tor-toolbox-stages`: The four coefficient stages.
+/-- The four coefficient stages.
 
 The integral form of clause (i) of `proposition-six-operations-dctf`: pullback commutes with the
 reductions `K ↦ K ⊗ᴸ Λ ⧸ Iⁿ⁺¹`
@@ -251,7 +251,7 @@ theorem NormalizedTower.reconstruction_and_integral_comparisons :
   exact ⟨heff, hhom, fun L hL c hc ↦ ⟨(hexc L hL c hc).1, (hexc L hL c hc).2.1⟩⟩
 
 include hϖ hI hf in
-/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image`: Admissibility on the proved
+/-- Admissibility on the proved
 constructible domains.
 
 On the integral constructible categories the exceptional adjoint is transported along the
@@ -278,7 +278,7 @@ theorem exceptionalAdjoint_admissibility_constructible :
   exact ⟨hexc, heff⟩
 
 include hϖ hI hf in
-/-- Blueprint `proposition-six-operations-change-coefficients`: Coefficient clauses in trace
+/-- Coefficient clauses in trace
 admissibility.
 
 The coefficient comparisons used by the trace admissibility hypothesis on the integral
@@ -316,7 +316,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   (f : X ⟶ Y) (hf : f ≫ aY = aX)
 
 include hf in
-/-- Blueprint `rem-sf-direct-image-proof-status`: Status of the recorded argument for clause
+/-- Status of the recorded argument for clause
 (iii).
 
 For `k` algebraically closed, a finite `Λ` whose exponent is invertible on `k` and a separated
@@ -354,7 +354,7 @@ theorem constructibleFiniteTor_rightDerivedLowerStar_proofStatus [IsAlgClosed k]
   exact ⟨h₁, h₂, (torAmplitudeIn_preservation Λ aX aY f hf).2.2.1⟩
 
 include hf in
-/-- Blueprint `theorem-exceptional-inverse-image`: Constructible exceptional inverse
+/-- Constructible exceptional inverse
 images at all coefficient stages, the finite stage.
 
 For `k` algebraically closed, a finite `Λ` whose exponent is invertible on `k` and a separated
@@ -382,7 +382,7 @@ theorem exceptionalInverseImage_coefficientStages [IsAlgClosed k] [IsSeparated a
     ⟨DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f⟩⟩
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
-/-- Blueprint `rem-sf-ctf-descent`: How the verified domains enter the formal framework.
+/-- How the verified domains enter the formal framework.
 
 The clauses of `proposition-six-operations-dctf` enter the six-functor datum `def-sf-datum` only on
 their displayed domains: for a finite `Λ` whose exponent is invertible on `Y` and a separated

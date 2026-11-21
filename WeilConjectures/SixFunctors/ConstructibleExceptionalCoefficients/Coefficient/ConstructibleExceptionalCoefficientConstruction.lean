@@ -33,8 +33,7 @@ variable (l : ℕ) [Fact l.Prime]
 /-- Construct the normalized adjunctions and individual invertible coefficient mates.
 No identity or composition law for these comparisons is asserted here.
 Source: current blueprint exceptional inverse image paragraph, and Zheng, Lemma 5.22;
-steps 1--5 and 7--13 of the constructible coefficient adjunction argument
-(blueprint: lem-sf-constructible-exceptional-coefficient-construction).
+steps 1--5 and 7--13 of the constructible coefficient adjunction argument.
 
 Proof: At finite coefficients, open extension preserves the original Tor interval and
 proper pushforward enlarges its upper endpoint by twice a dimension bound of the fixed

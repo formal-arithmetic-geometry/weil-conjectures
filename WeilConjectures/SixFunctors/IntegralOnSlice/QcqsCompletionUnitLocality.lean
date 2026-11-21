@@ -13,7 +13,7 @@ import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionUnitTree
 /-! # Canonical completion units and finite open--closed locality on qcqs schemes
 
 Source: Stacks Project, Tags 099M, 09BL and 09BM; Bhatt--Scholze Lemma 6.5.8
-and Remark 6.5.10 (blueprint: lem-fix-qcqs-completion-unit-locality).
+and Remark 6.5.10.
 -/
 
 @[expose] public noncomputable section
@@ -30,7 +30,7 @@ set_option linter.unusedVariables false in
 /-- Canonical-unit completeness, ordinary restriction, and finite open--closed detection.
 
 Source: Stacks Project, proetale.tex, Tags 099M, 09BL and 09BM; Bhatt--Scholze,
-Lemma 6.5.8 and Remark 6.5.10 (blueprint: lem-fix-qcqs-completion-unit-locality).
+Lemma 6.5.8 and Remark 6.5.10.
 
 Proof plan:
 1. Apply lem-sf-open-quotient-koszul-completeness to the valuation ring, which is

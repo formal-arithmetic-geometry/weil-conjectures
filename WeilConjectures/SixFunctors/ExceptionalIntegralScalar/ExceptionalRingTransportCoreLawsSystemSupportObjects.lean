@@ -10,7 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteCtfTriangulated
 
 /-! Object part of the exceptional transport support identity.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-transport-core-system-support-law-objects).
+5.26.
 -/
 
 @[expose] public noncomputable section
@@ -82,7 +82,7 @@ The strict-system support comparison on objects at one fixed field stage.
 It is the object component used with the corresponding map component to
 assemble the support functor equality.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-transport-core-system-support-law-objects).
+5.26.
 -/
 theorem exceptional_transport_core_system_support_obj
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]

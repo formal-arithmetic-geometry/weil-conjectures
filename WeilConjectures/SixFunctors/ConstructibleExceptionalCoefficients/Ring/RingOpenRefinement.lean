@@ -27,8 +27,7 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- The proper/open word, with explicit components and generic naturality.
-Source: composition and naturality of functor isomorphisms
-(blueprint: lem-sf-ring-open-refinement). -/
+Source: composition and naturality of functor isomorphisms. -/
 def properOpenRefinementWord
     {A B C D Z : Type*}
     [Category A] [Category B] [Category C] [Category D] [Category Z]
@@ -51,8 +50,7 @@ def properOpenRefinementWord
 /-- Push the inverse open-unit isomorphism through the outer proper map, after the
 inverse proper compositor. This is an explicit word, independent of any chosen
 exceptional operation or scalar comparison.
-Source: Stacks 0F7B, 0F7I
-(blueprint: lem-sf-ring-open-refinement). -/
+Source: Stacks 0F7B, 0F7I. -/
 def ringRefinementWord {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d) (s : RingStage.{max u v} l)
     (hg : (s.coefficients l).pull (r.hom ≫ d.g) =
@@ -121,8 +119,7 @@ private theorem properOpenRefinementWord_shift
 
 /-- The open-unit comparison is an isomorphism on the full finite-Tor ring-stage domain;
 its proper pushforward word preserves the inherited shifts.
-Source: Stacks 0F7B, 0F7I; Zheng 5.13--5.15; the exceptional construction, step 6
-(blueprint: lem-sf-ring-open-refinement).
+Source: Stacks 0F7B, 0F7I; Zheng 5.13--5.15; the exceptional construction, step 6.
 
 Proof: for a finite coefficient ring, restrict the proper image of extension by zero
 to the open X. Open restriction and the clopen section in the inverse image of X

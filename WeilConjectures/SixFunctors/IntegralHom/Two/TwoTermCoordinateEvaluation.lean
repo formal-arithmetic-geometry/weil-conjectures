@@ -86,7 +86,6 @@ variable (Q : CochainComplex (Modules.{t, u} Y R) ℤ)
 
 /-- A homogeneous signed evaluation map has the two invertible finite coordinates.
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1; Stacks 0A8X.
-(blueprint: lem-sf-two-term-coordinate-evaluation).
 Proof: compose with the signed target coordinates and compare with the source
 coordinates. The total coproduct reduces this to coefficient degrees -1 and 0;
 all other source summands vanish. Project to each Hom factor and test on local

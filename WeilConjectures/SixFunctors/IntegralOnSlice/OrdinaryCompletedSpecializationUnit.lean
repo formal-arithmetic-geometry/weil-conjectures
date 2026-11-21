@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Module.ProEtaleModuleUnitFromA
 /-! # Completed module units on closed specialization neighbourhoods
 
 Source: Stacks Project, Pro-etale Cohomology, Tag 09AC; Modules on Sites, Tags 03D2 and 03D3.
-(blueprint: lem-fix-ordinary-completed-specialization-unit).
 -/
 
 @[expose] public noncomputable section
@@ -52,9 +51,8 @@ private theorem abelianPush_isRightAdjoint {X Y : Scheme.{t}} (f : X ⟶ Y) :
 /-- On a weakly contractible affine whose points specialize to the closed fibre,
 the actual ordinary completed-module adjunction unit is bijective on sections.
 
-Source: Stacks Project, Pro-etale Cohomology, Tag 09AC (lemma-compute-i-star),
+Source: Stacks Project, Pro-etale Cohomology, Tag 09AC,
 Modules on Sites, Tags 03D2 and 03D3.
-(blueprint: lem-fix-ordinary-completed-specialization-unit).
 
 Proof: restrict to the affine scheme V.left using the equivalence of its pro-etale
 site with the site localized at V. The affine closed-site functors v and u satisfy

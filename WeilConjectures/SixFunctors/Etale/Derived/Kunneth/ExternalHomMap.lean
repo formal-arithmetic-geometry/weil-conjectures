@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 # The external Hom map
 
 For two complexes `E₁, L₁` on `Z₁` and `E₂, L₂` on `Z₂` over a base `B`, the *external Hom map*
-of `lemma-external-duality-trace-morphism` (iii) (`lemma-external-duality-trace-morphism`)
+of `lemma-external-duality-trace-morphism` (iii)
 
 `β : RHom(E₁, L₁) ⊠ RHom(E₂, L₂) ⟶ RHom(E₁ ⊠ E₂, L₁ ⊠ L₂)`
 
@@ -29,7 +29,6 @@ braiding of the derived category) and its signs:
 
 - `AlgebraicGeometry.Etale.externalHomMap` (`lemma-external-duality-trace-morphism` (iii)): the map
 `β`.
-
 -/
 
 @[expose] public section

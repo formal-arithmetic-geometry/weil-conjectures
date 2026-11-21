@@ -50,7 +50,6 @@ direct images. Both factors are tensor base change maps
 (`AlgebraicGeometry.Etale.tensorBaseChangeMap`), invertible by
 `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`. The theorem holds without the hypotheses
 that the schemes are separated and that `Mᵢ` is bounded constructible of finite Tor-dimension.
-
 -/
 
 @[expose] public section
@@ -76,9 +75,9 @@ variable {S X Y Z : Scheme.{u}}
 /-- The square
 ```
   Z ×_S X --𝟙 × f--> Z ×_S Y
-     |                  |
-    pr                 pr
-     v                  v
+     | |
+    pr pr
+     v v
      X -------f-------> Y
 ```
 is cartesian. -/

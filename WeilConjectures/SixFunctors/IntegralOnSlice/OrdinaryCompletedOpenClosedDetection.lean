@@ -185,7 +185,6 @@ private theorem ordinaryOpenSliceComparison
 
 /-- Complementary open and closed restrictions jointly detect module isomorphisms.
 Source: Stacks, Pro-etale Cohomology, Tags 09AH, 09AG and 09BM.
-(blueprint: lem-fix-ordinary-completed-open-closed-detection).
 Proof: the finite-projection identifications of the completed coefficient rings
 identify ordinaryPull along j and i with ringed inverse image with restricted
 coefficients. Present the open inverse image as restriction to the localized site.

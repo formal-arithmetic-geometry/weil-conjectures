@@ -22,7 +22,6 @@ origin. It is `NearbyCyclesModel.traitChangeInvariance` after replacing the spec
 by its fibre over the residue field of the target trait, which does not change the base change
 morphism of `Rj_*` on the special fibre of `M`
 `NearbyCyclesModel.Hom.isIso_map_exchangeRight_app_of_isIso_pullbackExchange_toGenericWithSpecial`.
-
 -/
 
 @[expose] public section

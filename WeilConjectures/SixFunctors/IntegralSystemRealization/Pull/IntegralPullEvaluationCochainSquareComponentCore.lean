@@ -147,7 +147,6 @@ attribute [local irreducible] proEtaleCoefficientDirectImageComparison
 The residual degreewise module-map identity obtained by expanding the mapped
 homological-complex component of the ordinary pullback evaluation square.
 Source: Zheng Construction 4.1 and the paragraph preceding Lemma 4.10.
-(blueprint: lem-sf-integral-pull-evaluation-cochain-square-component-core).
 The proof is the sectionwise quotient-transition calculation: the inverse-image
 comparison is the inverse mate of direct-image evaluation, the intrinsic finite
 comparison preserves the adjunction unit, and the normalized scalar comparison

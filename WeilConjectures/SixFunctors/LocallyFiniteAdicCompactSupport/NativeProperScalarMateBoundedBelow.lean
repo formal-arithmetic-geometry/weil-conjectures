@@ -28,7 +28,6 @@ open AlgebraicallyClosedCoefficients (Index Coefficient)
 /-- The completed-to-native proper scalar mate is invertible on bounded-below inputs.
 Source: Bhatt--Scholze, Remark 6.8.15; Hemo--Richarz--Scholbach, Lemma 5.3(1);
 the proper factor in steps 3--4 of the native compact-support scalar-mate plan.
-(blueprint: lem-sf-native-proper-scalar-mate-bounded-below).
 
 Proof: identify the completed integral coefficient ring with the continuous integral
 ring using its normalized finite quotient projections. Its map to native coefficients

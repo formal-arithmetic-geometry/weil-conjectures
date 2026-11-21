@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackS
 /-! # Inverse sections of the selected ambient pushforward comparison
 
 Source: Stacks 03D3, 0941 and fibre-product pasting.
-(blueprint: lem-sf-ambient-pushforward-composition-inverse-sections).
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +31,7 @@ private theorem moduleRestriction_inverse
   rfl
 
 /-- Inverse comparison restricts by the forward fibre-product comparison.
-Source: Stacks 03D3 and 0941
-(blueprint: lem-sf-ambient-pushforward-composition-inverse-sections).
+Source: Stacks 03D3 and 0941.
 Proof: evaluate the specified forward section formula on the inverse image of
 x. The isomorphism inverse law identifies the left side with x. Restrict both
 sides by the forward fibre-product comparison; the presheaf restriction laws and

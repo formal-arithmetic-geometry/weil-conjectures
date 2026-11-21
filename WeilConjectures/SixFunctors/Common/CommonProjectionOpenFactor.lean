@@ -11,8 +11,6 @@ public import WeilConjectures.SixFunctors.Common.CommonProjectionTensorCompariso
 import WeilConjectures.SixFunctors.Common.CommonProjectionOpenPullbackTensor
 
 /-! # Common-stage preservation of a projection factor
-
-Source: thm-sf-pf-field.proof.md, Compatibility.
 -/
 
 @[expose] public noncomputable section
@@ -428,10 +426,6 @@ end CoefficientCalculus
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite-stage inclusion preserves the open projection factor and the final
 support identification, through the same canonical tensorator.
-
-Source: thm-sf-pf-field.proof.md, Compatibility, and steps 2--4 of
-lem-sf-common-projection-tensor-compatibility.
-(blueprint: lem-sf-common-projection-open-factor).
 
 Proof: first compare the inverse open projection. By openProjectionNormalization
 it is open extension applied to the pullback compositor followed by the transpose

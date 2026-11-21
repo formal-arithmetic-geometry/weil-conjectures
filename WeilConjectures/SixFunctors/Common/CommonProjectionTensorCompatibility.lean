@@ -10,8 +10,6 @@ import WeilConjectures.SixFunctors.Common.CommonProjectionProperFactor
 import WeilConjectures.SixFunctors.Common.CommonProjectionOpenFactor
 
 /-! # A shared tensor comparison for common-stage projection mates
-
-Source: thm-sf-pf-field.proof.md, Compatibility and the common coefficient-field paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -34,10 +32,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Inclusion preserves each compact-support projection through one tensor comparison,
 independent of the compactification. This is an individual mate calculation: no
 compactification comparison law, composition law or invertibility of projection is assumed.
-
-Source: current blueprint, sec-six-functors-basics/sk-thm-sf-pf-field/
-thm-sf-pf-field.proof.md, Compatibility and the common finite coefficient-field paragraph.
-(blueprint: lem-sf-common-projection-tensor-compatibility).
 
 Proof: the coefficient prime is invertible on every SixFunctorSpace, since it is
 invertible in the base field. On two objects included from E, use the literal

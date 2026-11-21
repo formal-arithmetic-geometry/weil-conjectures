@@ -21,8 +21,7 @@ attribute [local instance] constructionInclusionShift
 
 /-- The scalar extension record obtained by reusing the finite and integral
 constructions at the original coefficient universes.
-Source: Zheng, Lemma 5.22 and Proposition 5.26
-(blueprint: def-sf-ring-endpoint-scalar-at-closure).
+Source: Zheng, Lemma 5.22 and Proposition 5.26.
 -/
 def scalarAtClosure
     (Ψ : Type (max u v)) [Field Ψ] [Algebra (Padic l) Ψ] [IsAlgClosure (Padic l) Ψ]

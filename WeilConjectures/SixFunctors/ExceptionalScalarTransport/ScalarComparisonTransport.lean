@@ -9,7 +9,6 @@ public import Mathlib.CategoryTheory.Equivalence
 import Mathlib.CategoryTheory.Whiskering
 /-! # Transport of counit-normalized scalar comparisons
 Source: adjunction conjugation in Zheng, Lemma 5.22.
-(blueprint: lem-sf-scalar-comparison-transport)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -169,8 +168,7 @@ which is fully faithful because the source functor is an equivalence. Cancel inv
 factors to prove the reduction equations. Cancel the invertible left reduction factors
 in the desired counit equation and use naturality and the three given counit identities.
 This proves it on the source equivalence image; naturality and its counit isomorphism
-extend the equation to every target object.
-(blueprint: lem-sf-scalar-comparison-transport). -/
+extend the equation to every target object. -/
 theorem transportComparisons :
     ∃ (q : F' ⋙ TY ≅ TX ⋙ H') (b : G' ⋙ TX ≅ TY ⋙ I'),
       (∀ N, q.hom.app (G'.obj N) ≫ H'.map (b.hom.app N) ≫

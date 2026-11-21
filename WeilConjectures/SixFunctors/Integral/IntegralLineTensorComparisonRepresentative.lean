@@ -72,8 +72,7 @@ private theorem tensorGenerator_smul
 set_option linter.unusedVariables false in
 /-- A line has a K-flat single complex, its tensor with a good complex is good,
 and scalar extension commutes with that total tensor with the specified generators.
-Source: Stacks 06YQ, 06YY and 07A4
-(blueprint: lem-sf-integral-line-tensor-comparison-representative).
+Source: Stacks 06YQ, 06YY and 07A4.
 
 Proof: a rank-one trivialization makes tensor by T the identity on module sheaves.
 Exactness is local, so T is flat. Its degree-zero single complex is bounded above

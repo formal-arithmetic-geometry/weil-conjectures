@@ -134,7 +134,6 @@ private theorem pull_bridge_composition (o : Operations l E) (c : Compositors l 
 
 /-- The bridge preserves the section-normalized direct-image compositor.
 Source: Stacks 03D8, 07A7; blueprint fix-prop-coherence, strict-system realization.
-(blueprint: lem-sf-integral-system-bridge-push-composition).
 Proof: the ordinary direct-image comparisons commute with composition since their
 components are identity on sections and the two compositors restrict along the same
 canonical map of iterated fibre products. Conjugate this ordinary equality through

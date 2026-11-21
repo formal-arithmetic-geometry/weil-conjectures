@@ -58,8 +58,7 @@ private theorem level_intrinsic_uniqueness {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
       (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1))) M)
 
 /-- The two ordinary scalar/pullback presentations have the same adjunction mate.
-Source: Stacks Tags 06YY and 0D6E
-(blueprint: lem-sf-finite-scalar-pull-presentation).
+Source: Stacks Tags 06YY and 0D6E.
 
 Proof: transpose both sides through the composite scalar and geometric adjunctions.
 The scalar presentation isomorphisms transfer the transpose by left-adjoint

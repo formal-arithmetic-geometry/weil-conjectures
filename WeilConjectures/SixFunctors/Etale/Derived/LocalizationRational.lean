@@ -73,7 +73,7 @@ variable {U X Y : Scheme.{u}} [IsNoetherianRing Λ]
 variable (I) in
 /-- The pullback `j^* : Dᵇc(X, E) ⥤ Dᵇc(U, E)` along an open immersion, induced by the integral
 pullback `AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperStar`.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (rational stage `E`). -/
+ -/
 noncomputable abbrev boundedConstructibleRationalUpperStar (j : U ⟶ X) [IsOpenImmersion j] :
     𝐃ᵇc(X) ⥤ 𝐃ᵇc(U) :=
   Rationalization.map M (boundedConstructibleIntegralUpperStar I j)
@@ -93,7 +93,7 @@ noncomputable abbrev boundedConstructibleRationalRightDerivedLowerStar (aX : X �
 
 /-- The adjunction `j^* ⊣ Rj_*` on `Dᵇc(-, E)` for a quasi-compact open immersion `j`, induced by
 `AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperStarLowerStarAdjunction`.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (rational stage `E`). -/
+ -/
 noncomputable def boundedConstructibleRationalUpperStarLowerStarAdjunction
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (j : U ⟶ X)
     [IsOpenImmersion j] [QuasiCompact j] :
@@ -103,7 +103,7 @@ noncomputable def boundedConstructibleRationalUpperStarLowerStarAdjunction
 
 /-- For a quasi-compact open immersion `j`, the counit `j^* Rj_* ⟶ 𝟭` on `Dᵇc(-, E)` is an
 isomorphism, as it is on `Dᵇc(-, 𝒪_E)`.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (rational stage `E`). -/
+ -/
 instance isIso_boundedConstructibleRationalUpperStarLowerStarAdjunction_counit
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (j : U ⟶ X)
     [IsOpenImmersion j] [QuasiCompact j] :
@@ -125,7 +125,7 @@ variable {U Z X : Scheme.{u}} [IsNoetherianRing Λ]
 `i_* : Dᵇc(Z, E) ⥤ Dᵇc(X, E)` along a closed immersion is fully faithful, being induced by a fully
 faithful `Λ`-linear triangulated functor (`CategoryTheory.Rationalization.full_map`,
 `CategoryTheory.Rationalization.faithful_map`).
-Blueprint `lemma-local-cohomology-right-adjoint--2` (rational stage `E`). -/
+ -/
 noncomputable def fullyFaithfulBoundedConstructibleRationalRightDerivedLowerStar :
     (boundedConstructibleRationalRightDerivedLowerStar M I aX i).FullyFaithful :=
   .ofFullyFaithful _
@@ -134,7 +134,7 @@ omit [QuasiCompact j] in
 include hij in
 /-- `j^* i_* = 0` on `Dᵇc(-, E)`, as on `Dᵇc(-, 𝒪_E)`
 (`CategoryTheory.Rationalization.isZero_map_obj_map_obj`).
-Blueprint `lemma-local-cohomology-right-adjoint--2` (rational stage `E`). -/
+ -/
 lemma isZero_boundedConstructibleRationalUpperStar_obj_rightDerivedLowerStar_obj (Q : 𝐃ᵇc(Z)) :
     IsZero ((boundedConstructibleRationalUpperStar M I j).obj
       ((boundedConstructibleRationalRightDerivedLowerStar M I aX i).obj Q)) :=
@@ -144,7 +144,7 @@ lemma isZero_boundedConstructibleRationalUpperStar_obj_rightDerivedLowerStar_obj
 include hij in
 /-- An object of `Dᵇc(X, E)` killed by `j^*` lies in the essential image of `i_*`
 (`CategoryTheory.Rationalization.essImage_map_of_isZero`).
-Blueprint `lemma-local-cohomology-right-adjoint--2` (rational stage `E`). -/
+ -/
 lemma boundedConstructibleRationalRightDerivedLowerStar_essImage_of_isZero (K : 𝐃ᵇc(X))
     (hK : IsZero ((boundedConstructibleRationalUpperStar M I j).obj K)) :
     (boundedConstructibleRationalRightDerivedLowerStar M I aX i).essImage K :=
@@ -166,7 +166,7 @@ lemma subsingleton_hom_shift_boundedConstructibleRational (Q : 𝐃ᵇc(Z)) (G :
 include j hij in
 /-- The direct image `i_* : Dᵇc(Z, E) ⥤ Dᵇc(X, E)` along a closed immersion is a left adjoint
 (`CategoryTheory.Rationalization.isLeftAdjoint_map`).
-Blueprint `lemma-local-cohomology-right-adjoint--2` (rational stage `E`). -/
+ -/
 lemma isLeftAdjoint_boundedConstructibleRationalRightDerivedLowerStar :
     (boundedConstructibleRationalRightDerivedLowerStar M I aX i).IsLeftAdjoint :=
   Rationalization.isLeftAdjoint_map (boundedConstructibleIntegralUpperStarLowerStarAdjunction aX j)
@@ -195,7 +195,7 @@ noncomputable def boundedConstructibleRationalClosedUpperShriekAdjunction :
 
 /-- The closed-support triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1]` on
 `Dᵇc(X, E)`, with third arrow `w`.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (rational stage `E`). -/
+ -/
 noncomputable abbrev boundedConstructibleRationalClosedSupportTriangle (K : 𝐃ᵇc(X))
     (w : (boundedConstructibleRationalRightDerivedLowerStar M I aX j).obj
         ((boundedConstructibleRationalUpperStar M I j).obj K) ⟶
@@ -259,8 +259,7 @@ theorem isZero_boundedConstructibleRationalClosedUpperShriek_obj (G : 𝐃ᵇc(U
     (isZero_boundedConstructibleRationalUpperStar_obj_rightDerivedLowerStar_obj M aX i j hij) G
 
 /-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (4) at the rational stage `E`: the
-unit `Q ⟶ Ri^! i_* Q` is an isomorphism, `i_*` being fully faithful on `Dᵇc(-, E)` (blueprint
-`lemma-local-cohomology-right-adjoint--1`). -/
+unit `Q ⟶ Ri^! i_* Q` is an isomorphism, `i_*` being fully faithful on `Dᵇc(-, E)`. -/
 instance isIso_boundedConstructibleRationalClosedUpperShriekAdjunction_unit :
     IsIso (boundedConstructibleRationalClosedUpperShriekAdjunction M (I := I) aX i j hij).unit :=
   Adjunction.unit_isIso_of_L_fully_faithful _

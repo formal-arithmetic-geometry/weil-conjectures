@@ -9,9 +9,6 @@ import all WeilConjectures.SixFunctors.PurCompactSupport.IntegralScalarTensorIde
 import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 import all WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoefficientDatumSupplement
 /-! # Tensor and K-flat models for the scalar identity unit
-
-Source: the identity normalization in theorem-verdier-biduality--3.
-(blueprint: lem-coef-verdier-scalar-unit-model)
 -/
 
 @[expose] public noncomputable section
@@ -45,7 +42,7 @@ attribute [local instance 100000] PurCompactSupport.coefficientSiteSmall
 attribute [local irreducible] PurCompactSupport.ordinaryUnit
 
 /-- The scalar identity unit constructed by the identity restriction adjunction.
-Source: Stacks 03DA (blueprint: lem-coef-verdier-scalar-unit-model). -/
+Source: Stacks 03DA. -/
 def identityScalarUnit {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (φ : R ⟶ R) (h : φ = 𝟙 R) :
     pbcExtend φ ≅ 𝟭 _ :=
@@ -137,7 +134,6 @@ private theorem derivedUnit_model {X : Scheme.{u}}
 
 /-- The ordinary identity scalar unit has the sectionwise multiplication formula.
 Source: Stacks 03DA; identity extension of scalars.
-(blueprint: lem-coef-verdier-scalar-unit-model).
 -/
 private theorem scalar_identity_unit_tensor {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (φ : R ⟶ R) (h : φ = 𝟙 R)
@@ -148,7 +144,6 @@ private theorem scalar_identity_unit_tensor {X : Scheme.{u}}
 
 /-- The derived identity scalar unit is the counit followed by the chain unit.
 Source: Stacks 06YY; the K-flat derived identity extension formula.
-(blueprint: lem-coef-verdier-scalar-unit-model).
 -/
 private theorem scalar_identity_unit_derived {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (φ : R ⟶ R) (h : φ = 𝟙 R) :
@@ -164,7 +159,6 @@ private theorem scalar_identity_unit_derived {X : Scheme.{u}}
 
 /-- Tensor and K-flat formulas for the constructed scalar identity units.
 Source: Stacks 03DA and 06YY; the identity clause of theorem-verdier-biduality--3.
-(blueprint: lem-coef-verdier-scalar-unit-model).
 
 Proof: the inverse ordinary adjoint mate multiplies pure tensors, since the
 forward mate inserts 1 and is linear. On flat-term K-flat complexes, cancel

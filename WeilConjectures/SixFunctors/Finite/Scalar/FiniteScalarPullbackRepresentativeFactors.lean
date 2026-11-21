@@ -13,7 +13,6 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # Representative factors of the scalar inverse mate
 
 Source: Stacks Tags 00YV and 07A6.
-(blueprint: lem-sf-finite-scalar-pullback-representative-factors).
 -/
 
 @[expose] public noncomputable section
@@ -48,8 +47,7 @@ attribute [local instance 30000] SheafOfModules.instPreadditive
 namespace WeilConjectures
 
 /-- The exact fixed-scalar inverse image computes its total left derived functor.
-Source: Stacks Tag 04JC, localization of exact inverse image.
-(blueprint: lem-sf-finite-scalar-pullback-representative-factors). -/
+Source: Stacks Tag 04JC, localization of exact inverse image. -/
 @[irreducible] def finiteScalarFixedPullbackFactors
     (R : Type u) [CommRing R] {X Y : Scheme.{u}} (p : X ⟶ Y) :
     DerivedCategory.Q ⋙
@@ -65,7 +63,6 @@ Source: Stacks Tag 04JC, localization of exact inverse image.
 This is a unary statement: it involves no tensor product and no tensor model.
 
 Source: Stacks Tags 07A6 and 0D6E, comparison of derived adjunction Hom bijections.
-(blueprint: lem-sf-finite-scalar-pullback-representative-factors).
 
 Proof: write the ordinary comparison as the inverse mate of the section-normalized
 ordinary direct-image isomorphism. Apply the exact-derived mate formula to its
@@ -112,7 +109,6 @@ private theorem fixedFactors_eq_counit_local
 
 /-- The expanded mate-normalization equation before the paper-level wrappers are folded.
 Source: Stacks Tags 07A6 and 0D6E.
-(blueprint: lem-sf-finite-scalar-pullback-representative-factors-core).
 
 This is the concrete derived-category square obtained from the normalized inverse mate;
 it is the single mate calculation used by the wrapper theorem below. -/

@@ -36,7 +36,7 @@ they identify `Rh^!(N ⊠ M)` with `Rg^! N ⊠ M`, the exceptional Künneth form
 
 Following the blueprint proof, the property (`AlgebraicGeometry.Etale.IsExceptionalKunneth`)
 holds for smooth morphisms, by smooth duality
-(`proposition-exceptional-inverse-image-smooth-morphism`) and its base change
+ and its base change
 (`proposition-exceptional-inverse-image-smooth-morphism--6`), and for closed immersions, by
 localization (`WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.ClosedImmersion`); it
 is stable under composition, by the composition laws of the canonical maps, and local on the source
@@ -191,7 +191,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
 
 include d in
 /-- For a smooth `f` of relative dimension `d`, the canonical map `θ_f` is an isomorphism at every
-object (`proposition-exceptional-inverse-image-smooth-morphism`). -/
+object. -/
 lemma isIso_dualizingComplexTensorMapOfIsIso_of_smoothOfRelativeDimension
     (P : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (dualizingComplexTensorMap Λ f P) := by
@@ -200,7 +200,7 @@ lemma isIso_dualizingComplexTensorMapOfIsIso_of_smoothOfRelativeDimension
 
 include d in
 /-- For a smooth `f` of relative dimension `d`, the dualizing complex `ω_f` is invertible
-(`proposition-exceptional-inverse-image-smooth-morphism`). -/
+. -/
 lemma isInvertible_dualizingComplex_of_smoothOfRelativeDimension :
     DerivedCategory.isInvertible Λ X (dualizingComplex Λ f) := by
   obtain ⟨L, hL₁, hL, ⟨e⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
@@ -239,7 +239,7 @@ variable (Λ k) [HasInvertibleExponent Λ (Spec (.of k))]
 /-- **Smooth morphisms** satisfy the exceptional Künneth formula: the base change map is invertible
 by `proposition-exceptional-inverse-image-smooth-morphism--6`, and the tensor maps of the smooth
 base change `h` are invertible since `θ_h` is
-(`proposition-exceptional-inverse-image-smooth-morphism`). The base `S` is quasi-separated, as in
+. The base `S` is quasi-separated, as in
 `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`
 (it is of finite type over `k` in the blueprint). -/
 theorem isExceptionalKunneth_of_smoothOfRelativeDimension {T S : Scheme.{u}}

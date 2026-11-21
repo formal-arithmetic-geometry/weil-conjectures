@@ -11,7 +11,6 @@ import all WeilConjectures.SmoothPurity.Integral.Open.IntegralOpenScalarRestrict
 /-! # Existence of normalized scalar compatibility data for an open quotient
 
 Source: Stacks Project, Tags 03DI, 03DA, 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-compatibility-data).
 -/
 
 @[expose] public noncomputable section
@@ -115,8 +114,7 @@ cancel its generator equation with its inverse to obtain the normalized finite m
 These are the two fields used to construct the strict quotient-tower comparison and
 prove its scalar-unit equation. Strictness is retained by `ScalarComparison.iso`,
 without an independent comparison on arbitrary coefficient systems.
-Source: Stacks Tags 03DI, 03DA and 0E8I.
-(blueprint: lem-sf-open-quotient-scalar-compatibility-data). -/
+Source: Stacks Tags 03DI, 03DA and 0E8I. -/
 theorem openQuotientScalarCompatibilityData
     (o : IntegralOpenReduction.Operations l E j) :
     Nonempty (ScalarCompatibility l E j o) := by

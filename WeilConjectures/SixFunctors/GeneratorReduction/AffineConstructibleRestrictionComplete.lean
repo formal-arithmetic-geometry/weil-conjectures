@@ -147,7 +147,6 @@ constructible immersed affine stratum remains complete. The ambient scheme can b
 arbitrary. This asserts completeness only, with no constructibility or projective model.
 
 Source: Bhatt--Scholze, Lemma 6.5.8; Stacks Tags 09BL, 09BM, and 099M.
-(blueprint: lem-sf-affine-constructible-restriction-complete).
 
 Proof: induction on the path shows that its structural morphism, followed by the
 open immersion, is an immersion. Inverse image along an immersion preserves limits;

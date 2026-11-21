@@ -229,8 +229,7 @@ private theorem derivedFiniteOpen_unit {U X : Scheme.{u}} (j : U ⟶ X)
   exact h
 
 /-- The native open comparison is fixed by uniqueness of the left adjoint to pull.
-Source: Stacks 03DI, 0941
-(blueprint: lem-sf-integral-native-open-comparison). -/
+Source: Stacks 03DI, 0941. -/
 def integralNativeOpenIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (a : Open l E j) :
     a.derived ≅ ProEtale.VaryingRing.J (compactSupportSystemLevel l E)
@@ -241,8 +240,7 @@ def integralNativeOpenIso {U X : Scheme.{u}} (j : U ⟶ X)
 
 /-- Compare exact open extension on whole systems, with its prescribed finite evaluations.
 Source: Stacks 03DI, 0941; blueprint fix-prop-coherence, coefficient comparisons
-of adjunction units and counits
-(blueprint: lem-sf-integral-native-open-comparison).
+of adjunction units and counits.
 
 Proof: the ordinary sequence direct image and VaryingRing.push have identical sections
 and scalar maps, by the constant-section normalization of their ring maps. The identity

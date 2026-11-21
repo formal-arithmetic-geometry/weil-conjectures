@@ -549,8 +549,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteTwistShiftedFactorComparisons
 For a smooth morphism `f : X ⟶ Y` of relative dimension `d` admitting a compactification, over a
 quasi-separated base `Y`, with the exponent of `Λ` invertible on `X`, the canonical base change
 map `Lg'^* Rf^! ⟶ Rf'^! Lg^*` of a cartesian square with quasi-compact `f'` admitting a
-compactification is an isomorphism (blueprint
-`proposition-exceptional-inverse-image-smooth-morphism--6`).
+compactification is an isomorphism.
 
 The proof reduces, through the étale-local normal form of a smooth morphism
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_affineLine`), to the
@@ -563,7 +562,7 @@ and gives the base change compatibility of the affine-space adjunction
 ## Main statements
 
 - `AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange`
-(`lemma-affine-space-etale-localization`)
+
 - `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`,
   `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar`
   (`proposition-exceptional-inverse-image-smooth-morphism--6`).
@@ -643,7 +642,7 @@ private theorem affineSpaceBaseChangeModel (d : ℕ) (S : Scheme.{u})
         isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq'')
       (fun _ _ _ _ _ sq'' _ _ ↦ affineLineBaseChangeModel Λ _ sq'')
 
-/-- Blueprint `lemma-affine-space-etale-localization`: Affine space and étale localization, clause
+/-- Affine space and étale localization, clause
 1.
 
 "For the projection `a : 𝔸^d_S ⟶ S`, the right adjoint `a^!` of
@@ -690,9 +689,9 @@ exponent of `Λ` invertible on `X`, and let `g : Y' ⟶ Y` be arbitrary, with ba
 
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
+  | |
+  f' f
+  ↓ ↓
   Y' --g---> Y
 ```
 
@@ -718,9 +717,9 @@ over a quasi-separated base `Y` and with `f'` quasi-compact:
 
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
+  | |
+  f' f
+  ↓ ↓
   Y' --g---> Y
 ```
 

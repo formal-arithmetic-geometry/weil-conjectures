@@ -54,8 +54,7 @@ Proof: totalize the inverse ordinary scalar tensor comparison. The left adjuncti
 makes scalar extension preserve coproducts, so the totalized map is invertible.
 Its naturality follows on each summand. Unit naturality and the ordinary pure-tensor
 formula identify its inverse on homogeneous generators. Apply the inverse once more
-to obtain the stated formula.
-(blueprint: lem-sf-normalized-scalar-chain-comparison). -/
+to obtain the stated formula. -/
 theorem normalizedScalarChainComparison
     {C : Type c₁} [Category.{v₁} C] {J : GrothendieckTopology C}
     [EssentiallySmall.{max c₁ v₁ r} C]

@@ -163,7 +163,6 @@ import all WeilConjectures.ConstructibleSheaf.Refinement
 /-! # Internal finite-free constructibility criteria
 
 Source: BS Definition 6.8.8; HRS Theorem 7.7 and Lemma 7.9.
-(blueprint: lem-sf-adic-internal-finite-free-criterion).
 -/
 
 @[expose] public noncomputable section
@@ -214,8 +213,7 @@ private theorem internal_criterion
 
 /-- Finite condensed coefficients have constructible cohomology exactly when it is
 locally finite free on finite strata.
-Source: BS Definition 6.8.8; HRS Theorem 7.7 and Lemma 7.9
-(blueprint: lem-sf-adic-internal-finite-free-criterion).
+Source: BS Definition 6.8.8; HRS Theorem 7.7 and Lemma 7.9.
 Proof: on each noetherian stratum apply finite-field local triviality to the finite
 presentations. Conversely finite free modules have finite presentations with no relations.
 The lower boundedness witness may be replaced by the minimum of both bounds, ordering them.
@@ -232,8 +230,7 @@ theorem finite_internal_constructibility (l : ℕ) [Fact l.Prime]
 
 /-- The native finite-subextension-valued algebraic closure has the same internal
 constructibility criterion.
-Source: BS Definition 6.8.8; HRS Theorem 7.7 and Lemma 7.9
-(blueprint: lem-sf-adic-internal-finite-free-criterion).
+Source: BS Definition 6.8.8; HRS Theorem 7.7 and Lemma 7.9.
 Proof: apply the finite-subextension-valued local triviality theorem on each noetherian
 stratum. Finite free modules have finite presentations with no relations. Order the
 cohomological bounds by replacing the lower one by their minimum. No completion of the

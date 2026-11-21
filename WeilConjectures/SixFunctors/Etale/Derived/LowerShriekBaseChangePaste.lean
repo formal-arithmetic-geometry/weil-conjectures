@@ -15,14 +15,14 @@ For torsion coefficients `Λ`, the compactly supported base change map
 is compatible with pasting cartesian squares, in both directions:
 
 ```
-X'' --w'--> X' --v'--> X                X' --vX--> X
- |          |          |                |          |
-f''   sq₂   f'   sq₁   f                f'   sqf   f
- ↓          ↓          ↓                ↓          ↓
-Y'' --w---> Y' --v---> Y                Y' --vY--> Y
-                                        |          |
-                                        g'   sqg   g
-                                        ↓          ↓
+X'' --w'--> X' --v'--> X X' --vX--> X
+ | | | | |
+f'' sq₂ f' sq₁ f f' sqf f
+ ↓ ↓ ↓ ↓ ↓
+Y'' --w---> Y' --v---> Y Y' --vY--> Y
+                                        | |
+                                        g' sqg g
+                                        ↓ ↓
                                         Z' --vZ--> Z
 ```
 
@@ -108,8 +108,7 @@ isomorphisms of the derived pullbacks:
 ```
 L(v₀)^* Rf_! ≅ Lw^* Lv^* Rf_! ⟶ Lw^* Rf'_! Lv'^* ⟶ Rf''_! Lw'^* Lv'^* ≅ Rf''_! L(v₀')^*
 ```
-
-(blueprint: `sk-def-sf-exchanges`) -/
+ -/
 theorem rightDerivedLowerShriekBaseChangeMap_paste_horiz
     {X X' X'' Y Y' Y'' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {f'' : X'' ⟶ Y''}
     {v : Y' ⟶ Y} {w : Y'' ⟶ Y'} {v₀ : Y'' ⟶ Y} {v' : X' ⟶ X} {w' : X'' ⟶ X'}
@@ -176,11 +175,10 @@ cartesian squares `sqf : vX ≫ f = f' ≫ vY` and `sqg : vY ≫ g = g' ≫ vZ`,
 
 ```
 LvZ^* Rg_! Rf_! ⟶ Rg'_! LvY^* Rf_! ⟶ Rg'_! Rf'_! LvX^*
-      ≅                                  ≅
+      ≅ ≅
 LvZ^* R(f ≫ g)_! ----------------> R(f' ≫ g')_! LvX^*
 ```
-
-(blueprint: `sk-def-sf-exchanges`) -/
+ -/
 theorem rightDerivedLowerShriekBaseChangeMap_paste_vert
     {X X' Y Y' Z Z' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y ⟶ Z} {g' : Y' ⟶ Z'}
     {vX : X' ⟶ X} {vY : Y' ⟶ Y} {vZ : Z' ⟶ Z}

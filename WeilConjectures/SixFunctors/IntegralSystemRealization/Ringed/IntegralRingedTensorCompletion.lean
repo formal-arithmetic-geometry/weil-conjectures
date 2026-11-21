@@ -68,8 +68,7 @@ attribute [-instance] IntegralAmbient.ambientCxCategory IntegralAmbient.ambientD
   IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective in
 /-- The quotient completion comparison for the fixed calculus tensor, including its
 representative augmentation equation. This concerns tensor alone, on one scheme.
-Source: Stacks 07A4, 0941, 099N; fix-prop-coherence, tensor-model step
-(blueprint: lem-sf-integral-ringed-tensor-completion).
+Source: Stacks 07A4, 0941, 099N; fix-prop-coherence, tensor-model step.
 
 Proof: restrict the calculus's K-flat tensor presentation to flat-term K-flat pairs.
 The quotient Roos augmentation of their ordinary total tensor has first coordinate

@@ -44,7 +44,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 # Ordinary tensor and completed tensor of constructible integral complexes
 
 Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50, Definition 3.4.10 and
-Lemma 3.4.12(4), pp. 22--23 (blueprint: lem-fix-constructible-tensor-completion).
+Lemma 3.4.12(4), pp. 22--23.
 The existential tensor presentation retains its natural K-flat comparison, and the
 completion comparison retains both coordinates of the actual product mapping fiber.
 The index n denotes the positive exponent n+1.
@@ -63,38 +63,37 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : AlgebraicGeometry.Scheme.{u})
 
 /-- The existing small-model size at exactly the completed-coefficient universe.
-Source: Stacks 098K (blueprint: lem-fix-constructible-tensor-completion). -/
+Source: Stacks 098K. -/
 instance (priority := 3100) constructibleTensorSiteSmall :
     EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0, u, u + 1} _
 
 /-- The existing sheaf tensor on completed coefficients, with no completion applied.
-Source: Stacks 03EK; Bhatt--Scholze Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion). -/
+Source: Stacks 03EK; Bhatt--Scholze Lemma 6.5.5. -/
 abbrev constructibleTensorOrdinary :=
   @MonoidalCategory.curriedTensor (integralTowerModules l E W) _
     (SheafOfModules.monoidalCategory (completedIntegralCommRingSheafUnrestricted l E W))
 
 /-- Zero preservation of the existing tensor in its first argument.
-Source: Stacks 03EK (blueprint: lem-fix-constructible-tensor-completion). -/
+Source: Stacks 03EK. -/
 instance constructibleTensorZero :
     (constructibleTensorOrdinary l E W).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients.{u + 1, u, u + 1}
     (completedIntegralCommRingSheafUnrestricted l E W)
 
 /-- Zero preservation of the existing tensor in its second argument.
-Source: Stacks 03EK (blueprint: lem-fix-constructible-tensor-completion). -/
+Source: Stacks 03EK. -/
 instance constructibleTensorObjZero (M : integralTowerModules l E W) :
     ((constructibleTensorOrdinary l E W).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients.{u + 1, u, u + 1}
     (completedIntegralCommRingSheafUnrestricted l E W) M
 
 /-- Mathlib's signed direct-sum total tensor, specialized to the completed ring sheaf.
-Source: Stacks 06YL (blueprint: lem-fix-constructible-tensor-completion). -/
+Source: Stacks 06YL. -/
 abbrev constructibleTensorTotal :=
   Functor.uncurry.obj ((constructibleTensorOrdinary l E W).map₂CochainComplex)
 
 /-- A homogeneous pure tensor in a direct-sum totalization summand.
-Source: Stacks 03EK and 06YL (blueprint: lem-fix-constructible-tensor-completion). -/
+Source: Stacks 03EK and 06YL. -/
 def constructibleTensorTotalSection
     (P Q : CochainComplex (integralTowerModules l E W) ℤ)
     (p q : ℤ) (U : W.ProEtᵒᵖ) (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U) :
@@ -113,8 +112,7 @@ def constructibleTensorTotalSection
             (x ⊗ₜ[(completedIntegralCommRingSheafUnrestricted l E W).obj.obj U] y)))
 
 /-- The boundary 1-s for the specified strict finite-tensor quotient tower.
-Source: Bhatt--Scholze Definition 3.4.10
-(blueprint: lem-fix-constructible-tensor-completion). -/
+Source: Bhatt--Scholze Definition 3.4.10. -/
 abbrev constructibleTensorBoundary
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :=
   towerTransitionEndomorphism
@@ -145,8 +143,7 @@ map chi has the coefficient quotient maps as its first product coordinates and z
 shifted coordinate, so it is the specified mapping-fiber map, not an arbitrary lift.
 The natural transformation tau descends precisely chi using those comparisons.
 
-Source: Bhatt--Scholze Lemma 6.5.5, pp. 49--50; Definition 3.4.10 and Lemma 3.4.12(4)
-(blueprint: lem-fix-constructible-tensor-completion).
+Source: Bhatt--Scholze Lemma 6.5.5, pp. 49--50; Definition 3.4.10 and Lemma 3.4.12(4).
 
 Proof:
 1. Use the recorded ordinary tensor in IntegralOnSlice.duality. Restrict its natural

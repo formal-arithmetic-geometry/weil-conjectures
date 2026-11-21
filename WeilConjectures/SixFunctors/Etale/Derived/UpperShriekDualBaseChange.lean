@@ -13,9 +13,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 For a cartesian square of schemes
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  v          v
+  | |
+  f' f
+  v v
   Y' --g---> Y
 ```
 with `f`, `f'` admitting compactifications and torsion coefficients `Λ`, the compact-support
@@ -61,7 +61,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
   [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
 
-/-- Blueprint `prop-exc-ambient-dual-base-change`: Dual base change for the ambient right
+/-- Dual base change for the ambient right
 adjoint is formal.
 
 For a cartesian square `g' ≫ f = f' ≫ g` with `f`, `f'` admitting compactifications (and `f'`

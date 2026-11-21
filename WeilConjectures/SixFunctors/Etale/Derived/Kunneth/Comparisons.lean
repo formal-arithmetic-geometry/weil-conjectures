@@ -30,15 +30,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.HasKunnethComparisons` (`lemma-external-duality-trace-morphism`): the
+- `AlgebraicGeometry.Etale.HasKunnethComparisons`: the
   four product comparison assertions `Ku_!`, `α`, `β`, `κ`, one per field.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.hasKunnethComparisons` (`lemma-external-duality-trace-morphism`): the
+- `AlgebraicGeometry.Etale.hasKunnethComparisons`: the
 four
   comparison maps are isomorphisms.
-
 -/
 
 @[expose] public section
@@ -66,7 +65,7 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [HasSmallSiteSheafify A]
 
-/-- Blueprint `lemma-external-duality-trace-morphism`: The product comparison maps.
+/-- The product comparison maps.
 
 The four product comparison maps of the six-functor formalism over a base scheme `S`, each
 recorded as the assertion that it is an isomorphism. All external products are taken over

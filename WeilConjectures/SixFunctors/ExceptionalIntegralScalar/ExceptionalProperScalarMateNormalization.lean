@@ -23,7 +23,6 @@ attribute [local irreducible] HasDerivedCategory.standard
 /-- The scalar-adjunction definition of the proper comparison is the geometric
 adjunction mate of the canonical tensor/pullback comparison.
 Source: Stacks Tags 0E46 and 0B56.
-(blueprint: lem-sf-proper-scalar-mate-normalization).
 
 Proof: the restriction/direct-image comparison is the geometric mate of the
 restriction/pullback comparison, by its normalized adjunction equation evaluated

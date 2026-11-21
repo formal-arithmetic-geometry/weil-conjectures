@@ -74,7 +74,7 @@ the derived counterpart of the comparison `j_! ⟶ j_*` of sheaves. Componentwis
 composite
 
 ```
-          η_{D(j_!) K}                         Rj_* (η'_K)⁻¹
+          η_{D(j_!) K} Rj_* (η'_K)⁻¹
 D(j_!) K ─────────────▶ Rj_* D(j^*) D(j_!) K ───────────────▶ Rj_* K
 ```
 
@@ -142,8 +142,8 @@ instance isClosedImmersion_compactification_i [IsProper f] :
 /-- For a proper morphism `f`, the forget-supports map `Rf_! ⟶ Ri_* ⋙ Rg_*` of the chosen
 compactification `(i, g)` is an isomorphism:
 ```
-      i          g
-  X ─────▶ X̄ ─────▶ Y        f = i ≫ g,  i open immersion,  g proper
+      i g
+  X ─────▶ X̄ ─────▶ Y f = i ≫ g, i open immersion, g proper
   └──────────────────▶
            f
 
@@ -165,7 +165,7 @@ instance isIso_rightDerivedLowerShriekToLowerStarComp_of_isProper [IsProper f] :
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekToLowerStarComp_of_isProper`, followed
 by `Ri_* ⋙ Rg_* ≅ R(i ≫ g)_* = Rf_*`:
 ```
-          forget supports                rightDerivedLowerStarComp
+          forget supports rightDerivedLowerStarComp
    Rf_! ─────────────────▶ Ri_* ⋙ Rg_* ─────────────────────────▶ R(i ≫ g)_* ═══ Rf_*
 ```
 -/

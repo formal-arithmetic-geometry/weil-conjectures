@@ -23,9 +23,9 @@ Frobenii. The square
 ```
           Fr_X
      X ────────▶ X
-     │           │
-   φ̄ │           │ φ̄
-     ▼           ▼
+     │ │
+   φ̄ │ │ φ̄
+     ▼ ▼
      Y ────────▶ Y
           Fr_Y
 ```
@@ -82,9 +82,9 @@ commutes with the pullbacks along the geometric Galois Frobenii: the square
 ```
               φ̄_*
    Sh(X) ─────────────▶ Sh(Y)
-     │                    │
- Fr_X^*                Fr_Y^*
-     ▼                    ▼
+     │ │
+ Fr_X^* Fr_Y^*
+     ▼ ▼
    Sh(X) ─────────────▶ Sh(Y)
               φ̄_*
 ```
@@ -110,9 +110,9 @@ the square
 ```
                  Rφ̄_*
    D(X_ét) ─────────────▶ D(Y_ét)
-     │                      │
- D(Fr_X^*)              D(Fr_Y^*)
-     ▼                      ▼
+     │ │
+ D(Fr_X^*) D(Fr_Y^*)
+     ▼ ▼
    D(X_ét) ─────────────▶ D(Y_ét)
                  Rφ̄_*
 ```
@@ -142,9 +142,9 @@ commutes with the pullbacks along the geometric Galois Frobenii: the square
 ```
               φ̄_!
    Sh(X) ─────────────▶ Sh(Y)
-     │                    │
- Fr_X^*                Fr_Y^*
-     ▼                    ▼
+     │ │
+ Fr_X^* Fr_Y^*
+     ▼ ▼
    Sh(X) ─────────────▶ Sh(Y)
               φ̄_!
 ```
@@ -176,9 +176,9 @@ lemma Etale.openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso_inv :
 ```
                   Fr_Y^* (can)
   Fr_Y^* ∘ φ̄_! ────────────────▶ Fr_Y^* ∘ φ̄_*
-       │                              │
-   e_! │                              │ e_*
-       ▼                              ▼
+       │ │
+   e_! │ │ e_*
+       ▼ ▼
   φ̄_! ∘ Fr_X^* ────────────────▶ φ̄_* ∘ Fr_X^*
                   can Fr_X^*
 ```

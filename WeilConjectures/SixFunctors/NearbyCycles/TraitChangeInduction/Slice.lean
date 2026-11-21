@@ -17,7 +17,6 @@ public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Slic
 Step (A) of SGA 4½, [Th. finitude], proof of 3.7: on the generic slice of a coordinate, the
 change of trait is the change of trait of the slices, in smaller chart dimension, up to the
 inclusion of invariants under the pro-`p` wild inertia groups.
-
 -/
 
 @[expose] public section

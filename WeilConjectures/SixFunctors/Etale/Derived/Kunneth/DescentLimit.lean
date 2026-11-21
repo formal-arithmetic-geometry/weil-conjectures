@@ -75,9 +75,7 @@ theorem isIso_colimitDesc_descentCocone :
   rw [e]
   infer_instance
 
-/-- The counits `pᵢ^* pᵢ_* F ⟶ F` exhibit `F` as the colimit of the sheaves `pᵢ^* pᵢ_* F`
-(blueprint `corollary-open-direct-image-over-field--2`, see
-`AlgebraicGeometry.Etale.isIso_colimitDesc_descentCocone`). -/
+/-- The counits `pᵢ^* pᵢ_* F ⟶ F` exhibit `F` as the colimit of the sheaves `pᵢ^* pᵢ_* F`. -/
 noncomputable def isColimitDescentCocone :
     IsColimit (descentCocone (ModuleCat.{u + 1} Λ) c F) :=
   have : IsIso ((colimit.isColimit (descentDiagram _ c F)).desc (descentCocone _ c F)) :=

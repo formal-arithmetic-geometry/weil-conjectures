@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalOriginAdjunction
 
 /-! # Exceptional system transport in the fixed integral coordinates
 Source: Zheng, Construction 5.25, Lemma 5.22 and Proposition 5.24.
-(blueprint: lem-sf-exceptional-integral-system-existence).
 -/
 
 @[expose] public noncomputable section
@@ -36,7 +35,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 for the lifted valuation ring used by integral reconstruction.
 Source: Zheng, Construction 5.25 and Lemma 5.22; the generic transport argument
 of lem-sf-exceptional-system-transport, with the fixed lifted coefficient ring.
-(blueprint: lem-sf-exceptional-integral-system-existence).
 
 Proof: the lifted valuation ring is complete, its uniformizer is regular, and its
 positive quotients are finite prime-power-torsion rings. Apply the ordinary Brown

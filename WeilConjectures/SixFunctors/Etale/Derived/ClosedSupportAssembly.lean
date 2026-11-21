@@ -56,7 +56,7 @@ depend on `Λ` (the first half of `rem-pur-assembly-status`, see
 
 This is `AlgebraicGeometry.Etale.openComplementCondition_two_mul`
 (`theorem-f-shriek-finite-coefficients--1`), derived from the two clauses of the direct-image
-finiteness input (`theorem-results-from-etale-theory`): the finite-type constructibility theorem
+finiteness input: the finite-type constructibility theorem
 `proposition-six-operations-dctf--2` and the cohomological dimension bound
 `lemma-uniform-bounds-pro-etale-affines`. -/
 theorem openComplementCondition_two_mul_of_finite {k : Type u} [Field k] {V T : Scheme.{u}}
@@ -113,7 +113,7 @@ theorem isLeftAdjoint_and_constructibleIn_and_torAmplitudeIn_of_isClosedImmersio
   exact ⟨inferInstance, fun a b K hK ↦ constructibleIn_rightDerivedUpperShriek i j hij h hK,
     fun a b K hK hta ↦ boundedConstructible_torAmplitudeIn_rightDerivedUpperShriek i j hij h hK hta⟩
 
-/-- Blueprint `rem-pur-ambient-only`: The ambient datum of this chapter is a theorem on its
+/-- The ambient datum of this chapter is a theorem on its
 coefficients.
 
 Let `k` be a field and `Λ` a finite ring whose exponent is invertible in `k`. The ambient
@@ -123,7 +123,7 @@ exceptional right adjoint datum is not a hypothesis, and the two preservation cl
 1. (the ambient datum) for every compactifiable `f`, `Rf_!` is a left adjoint on the unbounded
    derived categories, so that `Rf^!` exists (`theorem-existence-exceptional-inverse-image--1`);
    and, when `k` is separably closed, the vanishing half of the ambient datum holds on the
-   coefficients of étale origin (`theorem-comparison-constructible-sheaves`): for `p : X ⟶ Y` proper
+   coefficients of étale origin: for `p : X ⟶ Y` proper
    between finite-type `k`-schemes with `dim X ≤ d`, the class-restricted full
    cohomological-dimension condition holds with the bound `2d`
    (`lemma-uniform-bounds-pro-etale-affines--2`,
@@ -215,7 +215,7 @@ theorem ambient_and_preservationClauses {k : Type u} [Field k] (Λ : Type (u + 1
   · have : HasInvertibleExponent Λ _ := .of_hom aY
     exact smooth_preservationClauses Λ f d
 
-/-- Blueprint `rem-pur-assembly-status`: Status of the assembly.
+/-- Status of the assembly.
 
 Let `k` be a field, `Λ` a finite ring whose exponent is invertible in `k`, and `f : X ⟶ Y`
 separated of finite type (compactifiable and quasi-compact) over a finite-type `k`-scheme `Y`

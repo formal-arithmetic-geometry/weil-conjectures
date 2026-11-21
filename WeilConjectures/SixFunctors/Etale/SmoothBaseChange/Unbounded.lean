@@ -17,9 +17,9 @@ Consider a cartesian square of schemes
 
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 
@@ -199,9 +199,9 @@ field, `Y` a scheme locally of finite type over `k`, and `Λ` a coefficient ring
 invertible on `Y`. For a cartesian square
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 with `g` smooth and `f` quasi-compact, quasi-separated and locally of finite type, the derived
@@ -209,8 +209,7 @@ base change map `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` on the unbounded deri
 `D(-_ét, Λ)` is an isomorphism.
 
 This is the unbounded upgrade of the smooth base change theorem
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth` (blueprint
-`theorem-smooth-base-change-classical-torsion--1`), by the argument of
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth`, by the argument of
 `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`: the
 underived base change map is an isomorphism (`isIso_baseChangeMap_of_smooth`), `g'^*` of an
 injective sheaf is `f'_*`-acyclic (`rightAcyclic_upperStar_of_smooth`), and `f'_*` has pointwise

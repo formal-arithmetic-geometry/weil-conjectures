@@ -23,7 +23,6 @@ and let `p` be the residual characteristic.
   residue field of `R`.
 * `SliceTrait.exists_pow_eq_one_add`: in characteristic zero, if `x ∈ L` is negligible, i.e.
   `v(x) ^ (p - 1) ≤ v(p) ^ p`, then `1 + x` is a `p`-th power in `L`.
-
 -/
 
 @[expose] public section

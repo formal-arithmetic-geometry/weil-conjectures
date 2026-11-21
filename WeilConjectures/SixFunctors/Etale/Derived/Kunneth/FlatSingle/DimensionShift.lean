@@ -32,9 +32,9 @@ variable {D : Type*} [Category D] [Abelian D]
 
 ```
 S'P --a--> S'Q
- |τP'       |τQ'
+ |τP' |τQ'
 T'P --b--> T'Q --δ--> T X --ti--> T P --tπ--> T Q
-                       ^τX         ^τP          ^τQ
+                       ^τX ^τP ^τQ
                       S X --si--> S P --sπ--> S Q
 ```
 

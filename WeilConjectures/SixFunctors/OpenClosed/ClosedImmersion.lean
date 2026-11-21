@@ -48,16 +48,6 @@ initiality of base change on pointed étale neighbourhoods enters.
   `Faithful` instances: the pushforward along a closed immersion is fully faithful.
 
 ## Why not the dense-subsite route
-
-Blueprint `rmk-openclosed-no-dense-subsite`: it is tempting to deduce full faithfulness from
-the base-change functor `X_ét ⥤ Z_ét` exhibiting `Z_ét` as a dense subsite. That functor is
-cover-dense (blueprint `lemma-openclosed-etale-lifts-locally`,
-`AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`), but it is neither locally
-full nor locally faithful: two morphisms `V ⟶ V'` of étale `X`-schemes agreeing after base
-change to `Z` need only agree on an open subscheme of `V` containing the preimage of `Z`, which
-is not a covering of `V` in general. The stalk computation above replaces the formal argument,
-since there this open subscheme may shrink, a stalk being a colimit over neighbourhoods.
-
 -/
 
 @[expose] public section
@@ -100,10 +90,10 @@ canonical maps from the sections: a section of `H` over `V ×_X Z`, that is a se
 triangle of germ maps
 ```
                         (i_* H)(V) = H(V ×_X Z)
-                       /                        \
-     toPresheafFiber at (V, x)          toPresheafFiber at (V ×_X Z, x)
-                     /                            \
-                    ↓                              ↓
+                       / \
+     toPresheafFiber at (V, x) toPresheafFiber at (V ×_X Z, x)
+                     / \
+                    ↓ ↓
   ((i_* H) at Φ.comap i.Etale) --- lowerStarCompComapSheafFiberIso ---> (H at s)
 ```
 commutes, where `Φ = pointSmallEtale s`. -/

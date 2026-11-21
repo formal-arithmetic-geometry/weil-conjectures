@@ -17,8 +17,7 @@ field. For a constructible sheaf `G` on `X` whose support has dimension at most 
 of `Rᵠf_* G` vanish at every point `y` with `q + dim {y}⁻ > N` (Stacks `0F0X`). Combined with the
 dévissage of
 `AlgebraicGeometry.Etale.DerivedCategory.supportCondition_shift_rightDerivedLowerStar_of_stalk`
-this is the support estimate for `Rf_*` entering the cosupport side of Artin–Gabber
-(blueprint `lem-per-artin-gabber-affine-curve`, Step 3).
+this is the support estimate for `Rf_*` entering the cosupport side of Artin–Gabber.
 
 ## Main statements
 
@@ -57,7 +56,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 `f : X ⟶ Y` be an affine morphism of finite type to a separated scheme of finite type over a
 field, `G` a constructible sheaf on `X` and `s : Spec Ω ⟶ Y` a geometric point over `y ∈ Y`. If
 `s^* Rᵠf_* G ≠ 0`, then the support of `G` is nonempty and, whenever it has dimension at most
-`N`, `q ≤ N` and `dim {y}⁻ ≤ N - q`. (blueprint: `lem-per-artin-gabber-affine-curve`) -/
+`N`, `q ≤ N` and `dim {y}⁻ ≤ N - q`. -/
 theorem supportEstimate_upperStar_homology_rightDerivedLowerStar {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [IsSeparated aY] [QuasiCompact aY]
     (f : X ⟶ Y) [IsAffineHom f] [LocallyOfFiniteType f]
@@ -152,8 +151,7 @@ theorem supportEstimate_upperStar_homology_rightDerivedLowerStar {X Y : Scheme.{
 /-- **Support estimate for an affine direct image.** Let `f : X ⟶ Y` be an affine morphism of
 finite type to a separated scheme of finite type over a field. For a bounded constructible `K`
 with `K[n]` satisfying the support condition, `(Rf_* K)[n + d]` satisfies the support condition
-for every `d ≥ 0`. This is the input of the cosupport side of Artin–Gabber.
-(blueprint: `lem-per-artin-gabber-affine-curve`, Step 3) -/
+for every `d ≥ 0`. This is the input of the cosupport side of Artin–Gabber. -/
 theorem DerivedCategory.supportCondition_shift_rightDerivedLowerStar {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [IsSeparated aY] [QuasiCompact aY]
     (f : X ⟶ Y) [IsAffineHom f] [LocallyOfFiniteType f] (d : ℕ) {n : ℤ}

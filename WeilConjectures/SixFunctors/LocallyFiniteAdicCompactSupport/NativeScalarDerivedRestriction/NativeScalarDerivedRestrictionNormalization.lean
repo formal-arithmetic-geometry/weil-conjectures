@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.Right.RightDerivedExactRestrictionNormaliz
 /-! # Full-unit normalizations of the presentation comparisons
 
 Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-native-scalar-derived-restriction-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -40,7 +39,6 @@ attribute [local instance] nativeScalarModuleClosed nativeScalarModuleSymmetric
 
 /-- The inverse integral comparison has the full cochain-unit normalization.
 Source: Stacks, Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-native-scalar-derived-restriction-normalization).
 Proof: unfold the named comparison and apply the canonical exact-equivalence
 normalization. This keeps the concrete comparison folded for the cube calculation. -/
 theorem integral_normalized (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
@@ -66,7 +64,6 @@ theorem integral_normalized (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l)
 
 /-- The inverse closure comparison has the full cochain-unit normalization.
 Source: Stacks, Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-native-scalar-derived-restriction-normalization).
 Proof: unfold the named comparison and apply the canonical exact-equivalence
 normalization. This keeps the concrete comparison folded for the cube calculation. -/
 theorem closure_normalized (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
@@ -92,7 +89,6 @@ theorem closure_normalized (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
 
 /-- The canonical condensed comparison has its full right-derived unit normalization.
 Source: Stacks, Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-native-scalar-derived-restriction-normalization).
 Proof: unfold the specified derived comparison and use exact-restriction normalization. -/
 theorem condensed_normalized
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}

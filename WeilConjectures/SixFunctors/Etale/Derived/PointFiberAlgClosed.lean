@@ -408,7 +408,7 @@ noncomputable def pointFiberCocone :
   (fdCocone l).transport (fun h ↦ rationalStageTransition k h)
     (fun E ↦ (pointFiberStageEquivalence l k E).functor) (fun h ↦ pointFiberStageTransitionIso k h)
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
+/-- Finite coefficient categories over a point
 (stage `ℚ̄_ℓ`).
 
 At the algebraically closed coefficient `ℚ̄_ℓ`, `Dᵇc(s, ℚ̄_ℓ)` is the filtered 2-colimit

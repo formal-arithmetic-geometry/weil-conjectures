@@ -11,8 +11,7 @@ import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSection
 
 /-! # Normalized coefficient sections and inverse limits
 
-Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941
-(blueprint: lem-coef-derived-sections-normalization).
+Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The resolution-unit equation for sections of the prescribed inverse limit.
 This is CoefficientGlobalLimitModel with its sole comparison supplied as a parameter.
-Source: Stacks 0D6E, 0941
-(blueprint: lem-coef-derived-sections-normalization). -/
+Source: Stacks 0D6E, 0941. -/
 def CoefficientSectionsLimitResolutionEquation
     (κ : coefficientSequenceLimit l E W ⋙ coefficientIntegralSections l E W ≅
       coefficientSequenceDerivedRestriction l E W ⋙
@@ -55,8 +53,7 @@ def CoefficientSectionsLimitResolutionEquation
 attribute [local irreducible] CoefficientSectionsLimitResolutionEquation
 
 /-- Sections comparisons before inserting an internal-Hom fiber.
-Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941
-(blueprint: lem-coef-derived-sections-normalization). -/
+Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941. -/
 structure CoefficientDerivedSectionsNormalization
     (R : CoefficientDerivedSystemReduction l E W)
     extends CoefficientDerivedSystemScalarCoherence l E W where
@@ -104,8 +101,7 @@ structure CoefficientDerivedSectionsNormalization
 
 /-- Sections and total-limit comparisons with their ordinary and H-zero normalizations.
 Source: Stacks, sites-cohomology.tex, Tags 03CZ, 079P, 08JA, 0D6E and 0941;
-resolution-model construction, steps 4--6
-(blueprint: lem-coef-derived-sections-normalization).
+resolution-model construction, steps 4--6.
 
 Proof:
 Apply coefficientSequenceGlobalSectionsEvaluation to the completed coefficient ring,

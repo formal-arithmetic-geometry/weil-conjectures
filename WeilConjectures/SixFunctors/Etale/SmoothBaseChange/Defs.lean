@@ -19,9 +19,9 @@ theorem — a coefficient ring `Λ` and a degree `q`. For a Cartesian square
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 X --p--> S
 ```
 
@@ -34,7 +34,7 @@ at `F` of the natural transformation
 `AlgebraicGeometry.Etale.baseChangeHomologyNatTrans`. The property `BC(p, Λ, q)` of the
 blueprint is that this map is an isomorphism for every such square and every `F`.
 
-The base-change square of the blueprint (`definition-derived-base-change-map`) is a Cartesian square
+The base-change square of the blueprint is a Cartesian square
 recorded as `CategoryTheory.IsPullback e h g p`; the coefficient conventions
 (`sbc-def-coefficient-conventions`) are a commutative ring `Λ` and sheaves of `Λ`-modules on the
 small étale site, `Sheaf T.smallEtaleTopology (ModuleCat Λ)`, with the derived categories of
@@ -139,9 +139,9 @@ square
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 X --p--> S
 ```
 
@@ -184,16 +184,16 @@ end BaseChangeMap
 
 variable {X S : Scheme.{u}}
 
-/-- Blueprint `prose-08-06`: The recorded base-change property.
+/-- The recorded base-change property.
 
 `BC(p, Λ, q)` holds when, for every quasi-compact quasi-separated `g : T ⟶ S`, every sheaf
 `F` of `Λ`-modules on `T_ét` and every Cartesian square
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 X --p--> S
 ```
 

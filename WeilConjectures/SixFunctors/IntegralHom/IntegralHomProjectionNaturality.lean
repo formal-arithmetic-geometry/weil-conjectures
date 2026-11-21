@@ -32,8 +32,7 @@ private theorem projection_eq_π
 
 /-- Postcomposition on the Hom complex commutes with its recorded projections.
 
-Source: Stacks 0A8X and the product-projection naturality in HomComplexComponents
-(blueprint: lem-sf-integral-hom-projection-naturality).
+Source: Stacks 0A8X and the product-projection naturality in HomComplexComponents.
 
 Proof: the projection in IntegralHomReductionModels and homComplexπ choose the
 same projection family from homComplex_projections_exists. Identify them and

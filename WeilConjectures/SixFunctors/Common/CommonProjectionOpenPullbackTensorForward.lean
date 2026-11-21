@@ -8,9 +8,6 @@ module
 public import Mathlib.CategoryTheory.Functor.Currying
 
 /-! # Forward open pullback/tensor square for common-stage inclusion
-
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-common-projection-open-pullback-tensor-forward).
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +34,6 @@ Bool)`, all four functors and comparison isomorphisms to be identities, and take
 `TB'`). Then the displayed equation reduces to `mu = mu'`; choosing the two distinct
 endomorphisms `false` and `true` gives a counterexample. A valid forward transport lemma
 needs the canonical compatibility equation (or hypotheses that imply it).
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-common-projection-open-pullback-tensor-forward).
 
 The compatibility equation is now an explicit hypothesis. This is the strictly
 smaller representative equation from which the inverse square follows by cancelling

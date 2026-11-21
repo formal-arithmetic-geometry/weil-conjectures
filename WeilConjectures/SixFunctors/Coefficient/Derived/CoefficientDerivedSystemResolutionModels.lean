@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 /-! # Normalized resolution models for coefficient systems
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 06YY, 07A4, 07A6,
-08J9, 0A95, 0D6E and 0941; the existing sequence-site and semilinear constructions
-(blueprint: lem-coef-derived-system-resolution-models).
+08J9, 0A95, 0D6E and 0941; the existing sequence-site and semilinear constructions.
 -/
 
 @[expose] public section
@@ -256,8 +255,7 @@ this assertion does not include gamma's projection, naturality, Hom-zero or comp
 identities. It also records ordinary sections projections and the finite scalar
 H-zero normalization, which are separate from the enriched gamma equations.
 Source: Stacks 06YS, 06YY, 07A4, 07A6, 08J9, 0A95, 0D6E, 0941;
-node lem-coef-derived-system-evaluation-calculus, construction steps 1--5
-(blueprint: lem-coef-derived-system-resolution-models).
+node lem-coef-derived-system-evaluation-calculus, construction steps 1--5.
 
 Proof:
 1. Apply SequenceProjection.derivedAdjunction and pushforwardLimitProjections to

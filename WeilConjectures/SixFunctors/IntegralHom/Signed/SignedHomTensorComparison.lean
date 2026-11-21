@@ -240,8 +240,7 @@ assertion is part of this statement.
 
 Source: the first paragraph of the current blueprint
 `lem-coef-integral-hom-reduction.proof.md`, finite-free construction;
-Stacks Tags 08J9 and 0A8X
-(blueprint: lem-sf-signed-hom-tensor-comparison).
+Stacks Tags 08J9 and 0A8X.
 
 Proof: let H=Hom(P,I), and take evaluation H tensor P to I to be the inverse
 transpose of its identity under the existing normalized chain tensor--Hom

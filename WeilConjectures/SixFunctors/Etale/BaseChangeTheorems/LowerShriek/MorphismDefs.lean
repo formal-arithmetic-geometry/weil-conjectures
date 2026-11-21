@@ -20,9 +20,9 @@ Fix a Cartesian square of schemes
 
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 
@@ -69,7 +69,6 @@ statements are relative to an explicit compactification `c`.
   is the inverse isomorphism `i_! ⋙ Lḡ^* ≅ Lg'^* ⋙ i'_!`.
 - `AlgebraicGeometry.Etale.lowerShriekBaseChange`: the compact-support base-change
   morphism `Ex_!^c`.
-
 -/
 
 @[expose] public section
@@ -218,9 +217,9 @@ variable {j g j' g'}
 derived categories for a commutative square
 ```
 X' --g'--> X
-|          |
-j'         j
-v          v
+| |
+j' j
+v v
 Z' --g---> Z
 ```
 of schemes with `j` and `j'` open immersions, assembled as the composite of the unit

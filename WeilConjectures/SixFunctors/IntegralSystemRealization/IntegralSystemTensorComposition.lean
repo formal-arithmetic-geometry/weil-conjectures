@@ -238,8 +238,7 @@ private theorem composition_on_representatives (o : Operations l E) (c : Composi
 tensor comparison for two composable morphisms. No commutative square, right
 adjoint, open extension or proper/open map occurs here.
 Source: Stacks 03EL, 03D8, 07A4, 07A7 and 0941; fix-prop-coherence,
-strict-system realization step 4
-(blueprint: lem-sf-integral-system-tensor-composition).
+strict-system realization step 4.
 
 Proof: choose flat-term K-flat representatives for A and B on the sequence site.
 On each total tensor summand, the two inverse-image tensor comparisons send a

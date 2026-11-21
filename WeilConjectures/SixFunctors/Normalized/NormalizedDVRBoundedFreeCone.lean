@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Exists
 /-! # Bounded-free comparison for a strict DVR model
 
 Source: Stacks Tags 06YS, 06YY, 03EK and 05RT; blueprint DVR effectivity,
-proof paragraphs 3--4. (blueprint: lem-coef-normalized-dvr-bounded-free-cone).
+proof paragraphs 3--4.
 -/
 
 @[expose] public noncomputable section
@@ -108,7 +108,6 @@ private theorem isoLeg {C : Type*} [Category C] {X Y Z W : C}
 homotopy limit of multiplication cones, preserving the augmented projection.
 Source: Bhatt--Scholze, Lemmas 3.5.4--3.5.5; Stacks Tags 0941, 07KC and 06YS;
 blueprint DVR effectivity, bounded-free tensor calculation.
-(blueprint: lem-coef-normalized-dvr-bounded-free-cone).
 
 Proof: form the universal localization G of the explicit scalar cone. The generic
 bounded-free lemma gives its commutative shift, exactness and preservation of

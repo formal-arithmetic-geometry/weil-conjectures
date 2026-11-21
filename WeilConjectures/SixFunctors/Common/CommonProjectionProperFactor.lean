@@ -11,8 +11,6 @@ public import WeilConjectures.SixFunctors.Common.CommonProjectionTensorCompariso
 import WeilConjectures.SixFunctors.Common.CommonProjectionPullbackTensorCompatibility
 
 /-! # Common-stage preservation of a projection factor
-
-Source: thm-sf-pf-field.proof.md, Compatibility.
 -/
 
 @[expose] public noncomputable section
@@ -308,10 +306,6 @@ private theorem properFactor_preserved_of_tensor
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite-stage inclusion preserves the proper counit factor, including the
 initial support identification, through the canonical tensorator.
-
-Source: thm-sf-pf-field.proof.md, Compatibility, and steps 2--3 of
-lem-sf-common-projection-tensor-compatibility.
-(blueprint: lem-sf-common-projection-proper-factor).
 
 Proof: identify the support functor with open extension followed by proper direct
 image. The comparison for this identification is the composite of the open and

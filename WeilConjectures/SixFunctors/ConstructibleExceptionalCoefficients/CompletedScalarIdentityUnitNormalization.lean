@@ -27,8 +27,7 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.ConstructibleExceptionalCoefficients
 
 /-- Fix the native small-site universe for the completed scalar identity calculation.
-Source: Mathlib `essentiallySmallSelf`.
-(blueprint: lem-sf-completed-scalar-identity-unit-normalization). -/
+Source: Mathlib `essentiallySmallSelf`. -/
 local instance (priority := 10000) completedScalarIdentitySiteSmall (T : Scheme.{w}) :
     EssentiallySmall.{w + 1} T.ProEt := essentiallySmallSelf.{0, w, w + 1} _
 
@@ -290,7 +289,6 @@ private theorem scalar_unit_candidate_model (l : ℕ) [Fact l.Prime]
 
 /-- The two ordinary derived scalar-extension presentations use the same universal data.
 Source: Stacks Project Tag 06YY.
-(blueprint: lem-sf-completed-scalar-identity-unit-normalization)
 
 Proof: unfold both scalar-change presentations. They select the same derived extension
 from the same universal change-of-rings witness. -/
@@ -304,7 +302,6 @@ theorem completed_scalar_identity_extension_eq (l : ℕ) [Fact l.Prime]
 
 /-- The adjunction-normalized scalar identity is the ordinary completed-coefficient unitor.
 Source: Stacks Project Tags 03DA and 06YY.
-(blueprint: lem-sf-completed-scalar-identity-unit-normalization)
 
 Proof: the sectionwise multiplication sends 1 tensor x to x. Apply the derived complex
 representative formula. The two scalar-extension presentations select the same universal
@@ -322,8 +319,7 @@ theorem completed_scalar_identity_unit_normalization (l : ℕ) [Fact l.Prime]
   exact hh'
 
 /-- The arrow specified by identity scalar normalization, with the cast kept bundled.
-Source: identity coefficient normalization, Stacks Project Tag 06YY.
-(blueprint: lem-sf-completed-scalar-identity-unit-normalization). -/
+Source: identity coefficient normalization, Stacks Project Tag 06YY. -/
 def normalizedScalarIdentityArrow {D : Type*} [Category D] {F G : D ⥤ D}
     (h : F = G) (v : G ≅ 𝟭 D) (K : D) : F.obj K ⟶ K :=
   (eqToIso h).hom.app K ≫ v.hom.app K
@@ -344,7 +340,6 @@ private theorem normalized_arrow_heq {D : Type*} [Category D] {F F' G : D ⥤ D}
 
 /-- The bundled native identity arrow is the completed ordinary unitor component.
 Source: Stacks Project Tag 06YY.
-(blueprint: lem-sf-completed-scalar-identity-unit-normalization)
 
 Proof: evaluate the equality of normalized unitors at the same derived object, retaining
 its source transport as heterogeneous equality. -/

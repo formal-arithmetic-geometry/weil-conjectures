@@ -35,7 +35,7 @@ local notation "Mod" => SheafOfModules.{max c v u}
   ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R)
 
 /-- The augmentation into the K-injective replacement used by the recorded Hom.
-Source: Stacks 0A95 (blueprint: lem-sf-coefficient-tensor-curry-normalization). -/
+Source: Stacks 0A95. -/
 noncomputable def coefficientHomAugmentation :
     𝟭 (CochainComplex Mod ℤ) ⟶ coefficientHomResolution.{u, c, v} J R :=
   letI :=
@@ -110,8 +110,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The representative uncurrying normalization also applies before replacing its target.
-Source: Stacks Project, Tags 0A90, 0A95 and 08J7
-(blueprint: lem-sf-coefficient-tensor-curry-normalization).
+Source: Stacks Project, Tags 0A90, 0A95 and 08J7.
 
 Proof: write eta for the fixed K-injective augmentation I to I(I). Postcompose
 f with eta and c with Hom(Q,eta). Functoriality of the Hom projections shows that

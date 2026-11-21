@@ -173,8 +173,7 @@ private theorem origins_of_bounds (W : Scheme.{u}) (M : System l E W)
 
 /-- Reduction of an integral constructible object has the common bounds and compatible
 origins required at an input leaf. No finite-type hypothesis on the unused inputs is needed.
-Source: Stacks 0941; Bhatt--Scholze 6.5.11 and 6.7.2; parent proof step 7
-(blueprint: lem-sf-constructible-reduction-good).
+Source: Stacks 0941; Bhatt--Scholze 6.5.11 and 6.7.2; parent proof step 7.
 
 Proof: the K-flat quotient model of the recorded reduction functor gives normalization.
 Use its evaluation comparison to identify the nth level with derived tensor by A_(n+1).

@@ -8,8 +8,6 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.CanonicalTensorPullProof.CanonicalReductionTensorPullModels
 
 /-! # Normalizing one side of the reduction tensor square
-
-Source: lem-sf-canonical-reduction-tensor-pull, resolution and normalization steps.
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +26,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 -- The representative equations compare independently specified derived models.
 /-- The left derived path is the localization of its ordinary cochain path.
-Source: the representative normalizations in lem-sf-canonical-reduction-tensor-pull.
-(blueprint: lem-sf-canonical-reduction-tensor-pull-left).
 
 Proof: apply naturality to the tensor representative and the reduction model.
 Use the defining representative square for the system tensor on the left, and

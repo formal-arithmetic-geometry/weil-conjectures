@@ -56,7 +56,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 -- search differ from the ones in these definitions, and unifying them is very expensive.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
-/-- Blueprint `lem-pur-co-smooth-composition`: Composition.
+/-- Composition.
 
 For `f : X ⟶ Y` and `g : Y ⟶ Z` admitting compactifications, if `ω_g` is invertible, `θ_g` is an
 isomorphism at `K ∈ D^b_{ctf}(Z, Λ)` and `θ_f` is an isomorphism on `D^b_{ctf}(Y, Λ)`, then
@@ -89,7 +89,7 @@ theorem isIso_of_isIso_rightDerivedUpperShriek_map {U X : Scheme.{u}} (u : U ⟶
       (rightDerivedUpperShriekAdjunction Λ u) hu
       ((isInvertible_iff_exists_derivedTensor _).2 hω) φ h)
 
-/-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality (step 3).
+/-- Source-étale locality (step 3).
 
 For a surjective étale `u : U ⟶ X` with `θ_u` an isomorphism at every object and `ω_u`
 invertible, and `f : X ⟶ Y`: if `θ_{u ≫ f, K}` is an isomorphism, then so is `θ_{f, K}`. -/
@@ -122,7 +122,7 @@ theorem DerivedCategory.isInvertible.of_derivedTensor_left {X : Scheme.{u}}
     ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).mapIso e₂).app P ≪≫ derivedTensorLeftUnitor _ X P
 
 omit [Finite Λ] in
-/-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality (step 2).
+/-- Source-étale locality (step 2).
 
 Invertibility descends along a surjective étale `u : U ⟶ X`: if `Lu^* L` is invertible, then so
 is `L`. The evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ` pulls back to the evaluation of the invertible
@@ -145,7 +145,7 @@ theorem isInvertible_of_isInvertible_leftDerivedUpperStar_of_etale {U X : Scheme
       (fun φ hφ ↦ isIso_of_isIso_leftDerivedUpperStar_map_of_surjective Λ u φ hφ)
       ((isInvertible_iff_exists_derivedTensor _).2 h))
 
-/-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality (step 2).
+/-- Source-étale locality (step 2).
 
 For a surjective étale `u : U ⟶ X` with `θ_u` an isomorphism at every object and `ω_u`
 invertible, and `f : X ⟶ Y`: if `ω_{u ≫ f}` is invertible, then so is `ω_f`. Indeed
@@ -175,8 +175,7 @@ variable {X Y Z X' Y' Z' : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} {h : X ⟶ Z}
 
 include sqf sqg sqh w w' in
 /-- **Base change maps of a composite.** For stacked cartesian squares, the base change map of
-`R(f ≫ g)^!` is, up to the composition isomorphisms, the composite of those of `Rf^!` and `Rg^!`
-(the blueprint's "exceptional composition identifies the base-change comparisons"). In
+`R(f ≫ g)^!` is, up to the composition isomorphisms, the composite of those of `Rf^!` and `Rg^!`. In
 particular, `β_h` is an isomorphism at `K` as soon as `β_f` is one at `Rg^! K` and `β_g` at `K`,
 and `Rf'^! β_g` is one at `K` as soon as `β_h` is one at `K` and `β_f` at `Rg^! K`. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff

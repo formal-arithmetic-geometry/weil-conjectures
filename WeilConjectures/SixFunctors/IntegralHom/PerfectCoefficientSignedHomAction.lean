@@ -256,7 +256,6 @@ into derived Hom is essential: the target Hom complex need not compute it by its
 
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
 Stacks Tags 08J7, 08J9 and 0A8X.
-(blueprint: lem-sf-perfect-coefficient-signed-hom-action).
 
 Proof: first take the coefficient complex to be the two-term unit complex Q0.
 Its signed exchange is invertible in every degree by the finite-coordinate

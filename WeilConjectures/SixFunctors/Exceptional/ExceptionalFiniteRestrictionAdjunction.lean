@@ -23,8 +23,7 @@ import WeilConjectures.AlgebraicGeometry.SixFunctors.SpecifiedExceptionalRealiza
 # Realizations and normalized restricted finite-coefficient adjunctions
 
 Source: Zheng, Propositions 2.23, 2.29, 3.16, Lemma 5.22 and Proposition 5.24;
-blueprint exceptional inverse-image construction
-(blueprint: def-sf-finite-operation-realizations).
+blueprint exceptional inverse-image construction.
 
 The categories are the published full intrinsic constant-coefficient categories.
 The normalization is expressed in their canonical fixed-module coordinates, using
@@ -42,8 +41,7 @@ open scoped CategoryTheory.Functor
 namespace WeilConjectures
 
 /-- Finiteness at a positive level, with the existing coefficient quotient unchanged.
-Source: Zheng, finite coefficient convention
-(blueprint: lem-sf-exceptional-finite-operations). -/
+Source: Zheng, finite coefficient convention. -/
 instance sfFiniteOperationsCoefficientFinite (l : ℕ) [Fact l.Prime]
     (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+) :
     Finite (Padic.coefficientExtensionRing l E.carrier n) :=
@@ -51,7 +49,7 @@ instance sfFiniteOperationsCoefficientFinite (l : ℕ) [Fact l.Prime]
 
 /-- The ordinary etale adjoint at this specified compactification is supplied by the
 published Brown theorem, rather than by an assumed ambient pro-etale adjunction.
-Source: Zheng, Proposition 2.23 (blueprint: lem-sf-exceptional-finite-operations). -/
+Source: Zheng, Proposition 2.23. -/
 instance sfFiniteOperationsEtaleLeftAdjoint (l : ℕ) [Fact l.Prime]
     (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -62,8 +60,7 @@ instance sfFiniteOperationsEtaleLeftAdjoint (l : ℕ) [Fact l.Prime]
 
 /-- The full inclusion followed by the canonical coefficient realization inverse.
 This changes coefficient coordinates only, retaining all ambient derived morphisms.
-Source: blueprint full finite-Tor categories and site comparison
-(blueprint: lem-sf-exceptional-finite-operations). -/
+ -/
 abbrev sfFiniteOperationsRealization (l : ℕ) [Fact l.Prime]
     (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+) (T : Scheme.{u}) :=
   (finiteTorConstructible l E.carrier n n.pos T).ι ⋙
@@ -71,8 +68,7 @@ abbrev sfFiniteOperationsRealization (l : ℕ) [Fact l.Prime]
 
 /-- The realization uses the termwise exact coefficient equivalence and the full
 triangulated inclusion, hence their canonical derived shifts.
-Source: blueprint ambient integer-shift realization
-(blueprint: lem-sf-exceptional-finite-operations). -/
+ -/
 instance sfFiniteOperationsRealizationShift (l : ℕ) [Fact l.Prime]
     (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+) (T : Scheme.{u}) :
     (sfFiniteOperationsRealization l E n T).CommShift ℤ :=
@@ -81,8 +77,7 @@ instance sfFiniteOperationsRealizationShift (l : ℕ) [Fact l.Prime]
       (Padic.coefficientExtensionRing l E.carrier n)).inverse.mapDerivedCategory).CommShift ℤ)
 
 /-- The specified etale right adjoint has the adjoint shift structure.
-Source: Zheng, Proposition 2.23
-(blueprint: lem-sf-exceptional-finite-operations). -/
+Source: Zheng, Proposition 2.23. -/
 instance sfFiniteOperationsEtaleRightShift (l : ℕ) [Fact l.Prime]
     (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -95,8 +90,7 @@ instance sfFiniteOperationsEtaleRightShift (l : ℕ) [Fact l.Prime]
         (Padic.coefficientExtensionRing l E.carrier n))) c)).rightAdjointCommShift ℤ
 
 /-- The fixed-coordinate exceptional composite uses the derived comparison shifts.
-Source: blueprint exceptional inverse image
-(blueprint: lem-sf-exceptional-finite-operations). -/
+ -/
 instance sfFiniteOperationsExceptionalShift (l : ℕ) [Fact l.Prime]
     (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -114,8 +108,7 @@ instance sfFiniteOperationsExceptionalShift (l : ℕ) [Fact l.Prime]
 
 /-- The intrinsic conjugate of the specified-c exceptional functor. Parentheses retain
 its canonical coefficient cancellation, with no freely chosen realization.
-Source: blueprint exceptional inverse image
-(blueprint: lem-sf-exceptional-finite-operations). -/
+ -/
 def sfFiniteOperationsIntrinsicRight (l : ℕ) [Fact l.Prime]
     (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=
@@ -126,8 +119,7 @@ def sfFiniteOperationsIntrinsicRight (l : ℕ) [Fact l.Prime]
 
 /-- The inverse-coordinate compact-support comparison, obtained only by cancellation
 of the unit and counit in the published normalized comparison.
-Source: blueprint proper/open comparison
-(blueprint: lem-sf-exceptional-finite-operations). -/
+ -/
 def sfFiniteOperationsSupportComparison (l : ℕ) [Fact l.Prime]
     (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -144,8 +136,7 @@ def sfFiniteOperationsSupportComparison (l : ℕ) [Fact l.Prime]
 
 /-- The realization of a literal restriction of the recorded intrinsic support functor.
 The equality fixes objects and morphisms; its proof cannot absorb an automorphism.
-Source: blueprint full finite-Tor restriction
-(blueprint: lem-sf-exceptional-finite-operations). -/
+ -/
 def sfFiniteOperationsLeftRealization (l : ℕ) [Fact l.Prime]
     (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -167,8 +158,7 @@ def sfFiniteOperationsLeftRealization (l : ℕ) [Fact l.Prime]
 
 /-- The exceptional realization cancels only the coefficient-equivalence unit.
 Its equality hypothesis fixes the restriction on both objects and morphisms.
-Source: blueprint full finite-Tor restriction
-(blueprint: lem-sf-exceptional-finite-operations). -/
+ -/
 def sfFiniteOperationsRightRealization (l : ℕ) [Fact l.Prime]
     (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -190,8 +180,7 @@ def sfFiniteOperationsRightRealization (l : ℕ) [Fact l.Prime]
 case without requiring separated structure maps. Its factors are the proper/open
 comparison, the comparison adjunction, the specified ordinary etale adjunction,
 comparison full faithfulness, and the retained etale-origin isomorphism.
-Source: Zheng, Proposition 2.23, and blueprint class adjunction, clause (2)
-(blueprint: lem-sf-exceptional-finite-operations). -/
+Source: Zheng, Proposition 2.23, and blueprint class adjunction, clause (2). -/
 def sfFiniteOperationsHomEquiv (l : ℕ) [Fact l.Prime]
     (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+)
     (k : Type u) [Field k] {X Y : Scheme.{u}} (sY : Y ⟶ Spec (.of k)) [QuasiCompact sY]
@@ -435,8 +424,7 @@ private instance sfRestrictionRealizationIsTriangulated (l : ℕ) [Fact l.Prime]
 No preservation or uniform-bound assertion is part of this lemma: both literal
 restrictions are inputs. The output fixes the left exact structure and the right
 adjoint shifts, including the canonical realization maps.
-Source: Zheng, Proposition 2.23; blueprint exceptional construction, steps 4--5
-(blueprint: lem-sf-finite-restriction-normalized-adjunction).
+Source: Zheng, Proposition 2.23; blueprint exceptional construction, steps 4--5.
 
 Proof: Constructible origin provides a bounded-below etale complex for each input.
 Use the proper/open comparison followed by the comparison adjunction, the ordinary

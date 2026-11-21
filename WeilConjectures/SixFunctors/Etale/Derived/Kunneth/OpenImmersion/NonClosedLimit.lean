@@ -25,13 +25,11 @@ data with `dim X + dim Y < N`.
   cofiltered limit of affine `L`-schemes of finite type with `dim Xᵢ + dim Y < N` and
   `U' ⊆ X'` is a quasi-compact open, then the base change maps of the square
   `U' ×_{X'} (X' ×_L Y) ⟶ X' ×_L Y` are isomorphisms. The open `U'` descends to an open
-  `Uᵢ ⊆ Xᵢ` (blueprint `corollary-open-direct-image-over-field--2`).
+  `Uᵢ ⊆ Xᵢ`.
 
 Both follow from the limit theorem
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall`
-(blueprint `corollary-open-direct-image-over-field--2`) applied to the systems of fibre products,
-which are limits by the commutation of fibre products with limits (blueprint
-`lem-kun-fibre-product-limits`).
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall` applied to the systems of fibre products,
+which are limits by the commutation of fibre products with limits.
 -/
 
 @[expose] public section
@@ -49,7 +47,7 @@ variable {J : Type u₁} [Category.{v₁} J] {C : Type u₂} [Category.{v₂} C]
 /-- Converse of `CategoryTheory.IsPullback.isPullback_map_of_isLimit`: given a system of
 cartesian squares `Pⱼ → Xⱼ, Pⱼ → Yⱼ, Xⱼ → Sⱼ, Yⱼ → Sⱼ`, limit cones of the diagrams `X`, `Y`,
 `S`, and a cone `cP` over `P` whose induced square of cone points is cartesian, the cone `cP`
-is a limit cone (blueprint `lem-kun-fibre-product-limits`). -/
+is a limit cone. -/
 noncomputable def IsPullback.isLimitOfIsPullbackLimMap {P X Y S : J ⥤ C} {fst : P ⟶ X}
     {snd : P ⟶ Y} {f : X ⟶ S} {g : Y ⟶ S}
     (h : ∀ j, IsPullback (fst.app j) (snd.app j) (f.app j) (g.app j))
@@ -257,7 +255,7 @@ finite type over a field `L`, `j : U' ⟶ X'` a quasi-compact open immersion and
 finite type over `L`. If the statement of `corollary-open-direct-image-over-field--2` holds for all
 data with `dim X + dim Y < N` and `dim Xᵢ + dim Y < N` for all `i`, then the base change maps of the
 square `V = U' ×_{X'} W ⟶ W = X' ×_L Y` are isomorphisms. The open `U'` descends to an open `U₀` of
-some `X_{i₀}` (blueprint `corollary-open-direct-image-over-field--2`), and the square is the limit
+some `X_{i₀}`, and the square is the limit
 of the squares `U₀ ×_{X_{i₀}} Xᵢ ⟶ Xᵢ` base changed to `Xᵢ ×_L Y`, for `i ⟶ i₀`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_fst {L : Type u} [Field L]
     {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of L)) [LocallyOfFiniteType aY] [QuasiCompact aY]

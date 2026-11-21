@@ -326,7 +326,6 @@ end Assembly
 quotient presentations with their actual horizontal transition equations.
 Source: Stacks Project, Tags 03CZ and 0941; ordinary assembly in step 3 of
 `lem-sf-open-restriction-counit-on-good-complexes`.
-(blueprint: lem-sf-strict-reduction-presentation-map).
 
 Proof: at each degree and coefficient level take kappaC, followed by scalar
 extension of h, followed by kappaD inverse. Naturality of the quotient

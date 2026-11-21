@@ -63,7 +63,7 @@ instance preservesColimitsOfShape_constantFunctor (X : Scheme.{u}) (J : Type*) :
     (isTerminalEtaleTerminal X)).mapDerivedCategoryRightDerivedAdjunction
       ).leftAdjoint_preservesColimits.preservesColimitsOfShape
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Constant coefficient tensor
+/-- Constant coefficient tensor
 comparison.
 
 Let `Λ` be a noetherian ring (in the blueprint: a finite ring) and `j : U ⟶ T` a morphism of

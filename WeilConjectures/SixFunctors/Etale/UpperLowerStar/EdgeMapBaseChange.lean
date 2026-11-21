@@ -15,9 +15,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
 For a commutative square of schemes
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 and an abelian étale sheaf `G` on `X`, the edge maps `E_f : Hⁿ(Y, f_* G) ⟶ Hⁿ(X, G)` and

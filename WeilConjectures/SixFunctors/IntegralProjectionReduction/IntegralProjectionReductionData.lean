@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.Integral.IntegralResidueTor
 /-! # Finite-Tor coordinates for reduction of integral operations
 
 Source: the residue-Tor and normalized reduction steps of the integral projection formula.
-(blueprint: def-sf-integral-projection-reduction-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -28,19 +27,16 @@ variable {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
   (d : SixFunctorOperationDatum D C E n hn) (m : ℕ)
 
 /-- The finite stage already recorded in the integral normalization.
-Source: def-fix-six-functor-datum
-(blueprint: def-sf-integral-projection-reduction-coordinates). -/
+ -/
 abbrev stage := d.integralNormalization.finiteLevels m
 
 /-- The specified reduction to the full bounded constructible finite category.
-Source: def-fix-six-functor-datum
-(blueprint: def-sf-integral-projection-reduction-coordinates). -/
+ -/
 abbrev reduction (_d : SixFunctorOperationDatum D C E n hn) (m : ℕ)
     (X : SixFunctorSpace D) := sixFunctorIntegralReduction D C E m X
 
 /-- Each integral input reduces to a finite-Tor object, by integral residue Tor.
-Source: lemma-bounds-finite-reductions--2
-(blueprint: def-sf-integral-projection-reduction-coordinates). -/
+ -/
 theorem reduction_finiteTor (X : SixFunctorSpace D)
     (K : sfIntegralConstructibleCategory C.l E X.obj.left) :
     finiteTorConstructible C.l E (m + 1) (Nat.le_add_left 1 m) X.obj.left
@@ -56,8 +52,7 @@ theorem reduction_finiteTor (X : SixFunctorSpace D)
   exact ⟨((reduction d m X).obj K).property, a, b, ht m⟩
 
 /-- Reduction with its proved finite-Tor membership. No object or arrow is changed.
-Source: the integral residue-Tor criterion
-(blueprint: def-sf-integral-projection-reduction-coordinates). -/
+Source: the integral residue-Tor criterion. -/
 def torReduction (X : SixFunctorSpace D) :
     sfIntegralConstructibleCategory C.l E X.obj.left ⥤
       finiteTorConstructibleCategory C.l E (m + 1) (Nat.le_add_left 1 m) X.obj.left :=
@@ -68,8 +63,7 @@ def torReduction (X : SixFunctorSpace D) :
     (reduction_finiteTor d m X)
 
 /-- Pullback reduction, lifted through the full finite-Tor inclusion.
-Source: the direct-adjunction comparison in integral normalization
-(blueprint: def-sf-integral-projection-reduction-coordinates). -/
+Source: the direct-adjunction comparison in integral normalization. -/
 def pullIso {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (L : sfIntegralConstructibleCategory C.l E Y.obj.left) :
     (torReduction d m X).obj ((d.higher.integral.pull f).obj L) ≅
@@ -82,8 +76,7 @@ def pullIso {X Y : SixFunctorSpace D} (f : X ⟶ Y)
 
 /-- A tensor comparison at every pair of integral inputs. Its finite target uses the
 proved finite-Tor reduction of the second input.
-Source: coefficient tensor associativity
-(blueprint: def-sf-integral-projection-reduction-coordinates). -/
+Source: coefficient tensor associativity. -/
 abbrev TensorCoordinates :=
   ∀ (X : SixFunctorSpace D) (K L : sfIntegralConstructibleCategory C.l E X.obj.left),
     (reduction d m X).obj (((d.higher.integralTensor X).obj K).obj L) ≅
@@ -91,8 +84,7 @@ abbrev TensorCoordinates :=
         ((reduction d m X).obj K)).obj ((torReduction d m X).obj L)
 
 /-- Tensor followed by the recorded pullback comparison.
-Source: coefficient tensor and inverse-image comparison
-(blueprint: def-sf-integral-projection-reduction-coordinates). -/
+Source: coefficient tensor and inverse-image comparison. -/
 def tensorPullIso (t : TensorCoordinates d m) {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (K : sfIntegralConstructibleCategory C.l E X.obj.left)
     (L : sfIntegralConstructibleCategory C.l E Y.obj.left) :=
@@ -101,8 +93,7 @@ def tensorPullIso (t : TensorCoordinates d m) {X Y : SixFunctorSpace D} (f : X �
       ((reduction d m X).obj K)).mapIso (pullIso d m f L)
 
 /-- Comparison of the source of one projection, using the specified support comparison.
-Source: normalized coefficient comparison
-(blueprint: def-sf-integral-projection-reduction-coordinates). -/
+Source: normalized coefficient comparison. -/
 def sourceIso (t : TensorCoordinates d m) {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (c : Compactification f.hom.left)
     (K : sfIntegralConstructibleCategory C.l E X.obj.left)
@@ -113,8 +104,7 @@ def sourceIso (t : TensorCoordinates d m) {X Y : SixFunctorSpace D} (f : X ⟶ Y
         ((torReduction d m Y).obj L)
 
 /-- Comparison of the target of one projection, using those same tensor coordinates.
-Source: normalized coefficient comparison
-(blueprint: def-sf-integral-projection-reduction-coordinates). -/
+Source: normalized coefficient comparison. -/
 def targetIso (t : TensorCoordinates d m) {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (c : Compactification f.hom.left)
     (K : sfIntegralConstructibleCategory C.l E X.obj.left)
@@ -124,8 +114,7 @@ def targetIso (t : TensorCoordinates d m) {X Y : SixFunctorSpace D} (f : X ⟶ Y
     ((stage d m).finite.support f c).mapIso (tensorPullIso d m t f K L)
 
 /-- The corresponding proper-projection source comparison, with the prescribed direct mate.
-Source: normalized proper adjunction
-(blueprint: def-sf-integral-projection-reduction-coordinates). -/
+Source: normalized proper adjunction. -/
 def properSourceIso (t : TensorCoordinates d m) {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (K : sfIntegralConstructibleCategory C.l E X.obj.left)
     (L : sfIntegralConstructibleCategory C.l E Y.obj.left) :=
@@ -135,8 +124,7 @@ def properSourceIso (t : TensorCoordinates d m) {X Y : SixFunctorSpace D} (f : X
         ((torReduction d m Y).obj L)
 
 /-- The proper-projection target comparison, retaining tensor and pullback coordinates.
-Source: normalized proper adjunction
-(blueprint: def-sf-integral-projection-reduction-coordinates). -/
+Source: normalized proper adjunction. -/
 def properTargetIso (t : TensorCoordinates d m) {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (K : sfIntegralConstructibleCategory C.l E X.obj.left)
     (L : sfIntegralConstructibleCategory C.l E Y.obj.left) :=

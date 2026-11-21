@@ -106,7 +106,7 @@ variable (I)
 /-- The isomorphism `j^* ⋙ RτU_* ≅ RτX_* ⋙ j^*` on `Dᵇc(-, E)`, whose inverse is the mate of
 `Rj_* ⋙ RτX_* ≅ RτU_* ⋙ Rj_*` along `j^* ⊣ Rj_*`
 (`CategoryTheory.Pretriangulated.Recollement.leftAdjointIso`).
-Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause, stage `E`). -/
+ -/
 noncomputable def boundedConstructibleRationalUpperStarCommIso :
     boundedConstructibleRationalUpperStar M I j ⋙
         boundedConstructibleRationalRightDerivedLowerStar M I aU τU ≅

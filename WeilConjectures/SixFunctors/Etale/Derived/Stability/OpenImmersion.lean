@@ -68,7 +68,7 @@ theorem isConstructibleSheaf_homology_tensor_singleFunctor {X : Scheme.{u}}
         ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) :=
   isConstructibleSheaf_torSheaf Λ F G r
 
-/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
+/-- Stability of the constructible finite-Tor
 subcategories.
 
 Clause (ii), constructibility: for a finite ring `Λ`, the derived tensor product of two
@@ -94,7 +94,7 @@ theorem boundedConstructible_tensor (X : Scheme.{u})
       exact (Etale.constructibleSheaf_iff _ _ _).mpr
         (isConstructibleSheaf_homology_tensor_singleFunctor Λ F G n)) hK hM⟩
 
-/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
+/-- Stability of the constructible finite-Tor
 subcategories.
 
 Clause (ii): `- ⊗ᴸ - : Dctf(X, Λ) × Dctf(X, Λ) ⥤ Dctf(X, Λ)` is defined, for a finite ring
@@ -241,7 +241,7 @@ noncomputable def rightDerivedUpperShriekIsoOfIsOpenImmersion :
     ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).ofNatIsoLeft
       (rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).symm)
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for the exceptional inverse
+/-- Preservation for the exceptional inverse
 image.
 
 Clause (i), open-immersion case: for a quasi-compact open immersion `f` and a finite ring `Λ`,

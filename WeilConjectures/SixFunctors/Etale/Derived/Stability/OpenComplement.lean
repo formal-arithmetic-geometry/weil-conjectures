@@ -19,7 +19,7 @@ constructible sheaves to constructible sheaves in every degree.
 
 This file proves that over a separably closed field `k`, for `T` of finite type over `k` of
 dimension at most `d`, the condition holds with `c = 2d`, uniformly in the finite coefficient ring
-`Λ` whose exponent is invertible in `k` (`proposition-open-direct-image-preserves-finite`).
+`Λ` whose exponent is invertible in `k`.
 
 ## Main definitions
 
@@ -28,7 +28,7 @@ dimension at most `d`, the condition holds with `c = 2d`, uniformly in the finit
 ## Main statements
 
 - `AlgebraicGeometry.Etale.openComplementBound_two_mul`
-  (`proposition-open-direct-image-preserves-finite`): the condition with constant `2 dim T`.
+: the condition with constant `2 dim T`.
 - `AlgebraicGeometry.Etale.higherDirectImageIsoHomologyRightDerivedLowerStar`: `Rᵠj_* F` is the
   `q`-th homology sheaf of the unbounded `Rj_*(F[0])`.
 -/
@@ -78,7 +78,7 @@ lemma OpenComplementBound.mono {V T : Scheme.{u}} {j : V ⟶ T} {c c' : ℕ} (hc
     (h : OpenComplementBound Λ j c) : OpenComplementBound Λ j c' :=
   ⟨fun M q hq ↦ h.1 M q (by omega), h.2⟩
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: The open-complement condition is
+/-- The open-complement condition is
 unconditional and uniform in the coefficient ring.
 
 Let `k` be a separably closed field, `Λ` a finite ring whose exponent is invertible in `k` (for

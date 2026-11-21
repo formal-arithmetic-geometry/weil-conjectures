@@ -14,9 +14,9 @@ Fix a Cartesian square of schemes
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 X --p--> S
 ```
 
@@ -60,7 +60,7 @@ Compare `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology
 the proper base change
 theorem, in which the roles of the two legs of the square are exchanged.
 
-The seams of the argument (blueprint `sk-rem-seams`, `rem-seams`): a first failure in degree `q`
+The seams of the argument: a first failure in degree `q`
 produces a universal curve-test datum with `R^q h_* (ℤ/dℤ) ≠ 0`
 (`AlgebraicGeometry.Etale.exists_curveTestDatum`), while the curve-test lane makes this sheaf
 vanish (`AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf`), using
@@ -183,9 +183,9 @@ theorem Etale.baseChangeProperty_of_smooth (n : ℕ) (hΛ : (n : Λ) = 0)
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 X --p--> S
 ```
 

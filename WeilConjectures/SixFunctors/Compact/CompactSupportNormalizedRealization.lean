@@ -111,8 +111,7 @@ import all WeilConjectures.SixFunctors.Compact.CompactSupportReductionTower
 /-! # Normalized realization of the specified compact-support quotient tower
 
 Source: blueprint main-20261015, lemma-change-coefficients-compact-support, proof paragraph 2;
-Stacks Tags 06YS, 0D6D, 07A6 and 05RT
-(blueprint: lem-coef-compact-support-normalized-realization).
+Stacks Tags 06YS, 0D6D, 07A6 and 05RT.
 
 Natural index n always denotes the positive coefficient exponent n+1.
 -/
@@ -128,8 +127,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The sequence-system quotient is the direct quotient homomorphism on constant sheaves.
-Source: Stacks Tag 03EK; blueprint input quotient maps
-(blueprint: lem-coef-compact-support-normalized-realization).
+Source: Stacks Tag 03EK; blueprint input quotient maps.
 Proof: induct on m-n. At equal levels both maps are identities; at consecutive levels
 they are the coefficient transition. Quotient factors compose on every residue class,
 and constant sheafification and forgetting commutativity preserve their compositions. -/
@@ -140,8 +138,7 @@ theorem coefCompactSupportQuotient_eq (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m)
   exact compactSupportQuotient_eq l E W h
 
 /-- Canonical identity transport from the sequence quotient to the direct quotient.
-Source: blueprint quotient maps; Stacks Tag 03DA
-(blueprint: lem-coef-compact-support-normalized-realization). -/
+Source: blueprint quotient maps; Stacks Tag 03DA. -/
 def coefCompactSupportRestrictionIso (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     normalizedDVRRes l E W h ≅
       (proEtaleCoefficientRestrictScalars W
@@ -157,8 +154,7 @@ def coefCompactSupportRestrictionIso (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) 
       (coefCompactSupportQuotient_eq l E W h)))
 
 /-- The actual input quotient transition in the sequence quotient coordinates.
-Source: blueprint input reductions; Stacks Tag 03EK
-(blueprint: lem-coef-compact-support-normalized-realization). -/
+Source: blueprint input reductions; Stacks Tag 03EK. -/
 def coefCompactSupportInputTau (W : Scheme.{u})
     (K : DerivedCategory (scalarReductionSource l E W)) {m n : ℕ} (h : n ≤ m) :
     (scalarReductionDerivedExtension l E W m).obj K ⟶
@@ -174,8 +170,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCateg
   scalarReductionDerivedExistence Functor.objPreimage Functor.objObjPreimageIso
 
 /-- The finite-level output transition, before restriction to completed coefficients.
-Source: blueprint proof paragraph 2, specified coefficient maps
-(blueprint: lem-coef-compact-support-normalized-realization). -/
+ -/
 def coefCompactSupportTau {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (K : DerivedCategory (scalarReductionSource l E X)) {m n : ℕ} (h : n ≤ m) :=
   (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (m + 1))).map
@@ -184,8 +179,7 @@ def coefCompactSupportTau {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification
       ((scalarReductionDerivedExtension l E X n).obj K)
 
 /-- The output object at a positive coefficient level, in the recorded tower category.
-Source: blueprint proof paragraph 2
-(blueprint: lem-coef-compact-support-normalized-realization). -/
+ -/
 def coefCompactSupportLevel {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :
     normalizedDVRDerived l E Y n :=
@@ -193,8 +187,7 @@ def coefCompactSupportLevel {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactificati
     ((scalarReductionDerivedExtension l E X n).obj K)
 
 /-- The specified output transition in the sequence quotient coordinates.
-Source: blueprint proof paragraph 2
-(blueprint: lem-coef-compact-support-normalized-realization). -/
+ -/
 def coefCompactSupportNormalizedTau {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (K : DerivedCategory (scalarReductionSource l E X))
     {m n : ℕ} (h : n ≤ m) :

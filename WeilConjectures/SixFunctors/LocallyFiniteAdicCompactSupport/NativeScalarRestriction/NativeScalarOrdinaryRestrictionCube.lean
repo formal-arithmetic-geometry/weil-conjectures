@@ -12,7 +12,6 @@ import all WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeSca
 
 Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites,
 Tag 0D6E; blueprint scalar direct-image proof, Formal properties.
-(blueprint: lem-sf-native-scalar-ordinary-restriction-cube).
 -/
 
 @[expose] public noncomputable section
@@ -108,7 +107,6 @@ private theorem inverseOrdinaryCube (l : ℕ) [Fact l.Prime]
 /-- Ordinary ring presentations transport restriction and direct image in a commuting cube.
 Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; the ordinary steps 1--2 of
 lem-sf-native-scalar-restriction-cube.
-(blueprint: lem-sf-native-scalar-ordinary-restriction-cube).
 
 Proof: compose the two restrictions using comapComp and the section-module equivalence.
 Transport the section rings through P.integral and P.closure. Their scalar square makes

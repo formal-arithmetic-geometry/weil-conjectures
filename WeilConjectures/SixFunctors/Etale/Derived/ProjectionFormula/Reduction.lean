@@ -42,13 +42,12 @@ implementation notes of `WeilConjectures.SixFunctors.Etale.Derived.TensorStructu
 
 When `Λ/ϖⁿ` is perfect, that is for `J = (ϖⁿ)` with `ϖ` a nonzerodivisor (for `Λ = 𝒪_E`, the
 reduction `𝒪_E ⟶ A_{E,n}`), the constant complex `(Λ/ϖⁿ)_X` is dualizable, and the comparisons
-of `ρ` with `Rf_!` and `Rf_*` are isomorphisms for every `Λ` (blueprint
-`proposition-six-operations-change-coefficients`).
+of `ρ` with `Rf_!` and `Rf_*` are isomorphisms for every `Λ`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.projectionMapOfCompactification_constantSingle`
-  (`sk-prop-sf-pf-reduction`, `prop-sf-pf-reduction`): the square comparing `ρ(PF_{f, K, L})`
+: the square comparing `ρ(PF_{f, K, L})`
   and `PF_{f, K, ρL}` through the three compatibilities commutes.
 - `AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMapOfCompactification_iff`,
   `AlgebraicGeometry.Etale.hasProjectionFormula_iff_reductionModIdeal`: hence, for `Λ` finite,
@@ -56,7 +55,7 @@ of `ρ` with `Rf_!` and `Rf_*` are isomorphisms for every `Λ` (blueprint
   formula holds at `(K, L)` if and only if it holds at `(K, ρL)`.
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekReductionModIdealMap_span_pow`,
   `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarReductionModIdealMap_span_pow`
-  (`proposition-six-operations-change-coefficients`): reduction modulo `ϖⁿ` commutes with `Rf_!` and
+: reduction modulo `ϖⁿ` commutes with `Rf_!` and
   `Rf_*`.
 -/
 
@@ -163,11 +162,11 @@ lemma rightDerivedLowerShriekDerivedTensorRightMap_app
 `a : Lf^*N_Y ≅ N_X`, `K` on `X` and `L` on `Y`, the square
 ```
 (Rf_!K ⊗ᴸ L) ⊗ᴸ N_Y ---PF_{K, L} ⊗ᴸ N_Y---> Rf_!(K ⊗ᴸ Lf^*L) ⊗ᴸ N_Y
-        | ≅ (associator)                               | comparison of Rf_! and - ⊗ᴸ N
-        v                                              v
-Rf_!K ⊗ᴸ (L ⊗ᴸ N_Y)                           Rf_!((K ⊗ᴸ Lf^*L) ⊗ᴸ N_X)
-        | PF_{K, L ⊗ᴸ N_Y}                             ^ ≅ Rf_!(associator⁻¹)
-        v                                              |
+        | ≅ (associator) | comparison of Rf_! and - ⊗ᴸ N
+        v v
+Rf_!K ⊗ᴸ (L ⊗ᴸ N_Y) Rf_!((K ⊗ᴸ Lf^*L) ⊗ᴸ N_X)
+        | PF_{K, L ⊗ᴸ N_Y} ^ ≅ Rf_!(associator⁻¹)
+        v |
 Rf_!(K ⊗ᴸ Lf^*(L ⊗ᴸ N_Y)) ---Rf_!(K ⊗ᴸ (δ ≫ 1 ⊗ᴸ a))--> Rf_!(K ⊗ᴸ (Lf^*L ⊗ᴸ N_X))
 ```
 commutes, where the comparisons are `AlgebraicGeometry.Etale.derivedTensorRightTensorIso`,
@@ -330,8 +329,8 @@ reduction of the coefficients along `Λ ⟶ Λ/J`, kept in `D(-, Λ)`
 `Y` the square
 ```
 ρ(Rf_!K ⊗ᴸ L) ------------ρ(PF_{K, L})-------------> ρ(Rf_!(K ⊗ᴸ Lf^*L))
-     | ≅ (associator)                                          | comparison of Rf_! and ρ
-     v                                                         v
+     | ≅ (associator) | comparison of Rf_! and ρ
+     v v
 Rf_!K ⊗ᴸ ρL ---PF_{K, ρL}---> Rf_!(K ⊗ᴸ Lf^*ρL) ---≅---> Rf_!(ρ(K ⊗ᴸ Lf^*L))
 ```
 commutes. Here the comparison of `Rf_!` with `ρ` is the projection map at `(-, M_Y)` followed by
@@ -371,7 +370,7 @@ lemma reductionModIdeal_eq_derivedTensorRight (X : Scheme.{u}) :
       (constantSingle (ModuleCat.{u + 1} Λ) X (ModuleCat.of Λ (Λ ⧸ J))) :=
   rfl
 
-/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
+/-- Basic operations and coefficient
 reduction; the pullback.
 
 **`Lf^*` commutes with the reduction of the coefficients**: the isomorphism
@@ -420,7 +419,7 @@ theorem isDualizable_constantSingle_quotient_bot (X : Scheme.{u}) :
       (Submodule.quotEquivOfEqBot (⊥ : Ideal Λ) rfl).toModuleIso)
 
 variable {Λ} in
-/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
+/-- Basic operations and coefficient
 reduction; the ordinary direct image at the integral stage.
 
 For a nonzerodivisor `ϖ` of `Λ` (for `Λ = 𝒪_E`, a uniformizer), the reduction modulo `ϖⁿ`
@@ -455,7 +454,7 @@ noncomputable def rightDerivedLowerShriekReductionModIdealMap :
   rightDerivedLowerShriekDerivedTensorRightMap _ c
     (leftDerivedUpperStarSingleConstantSheafIso _ f (ModuleCat.of Λ (Λ ⧸ J))).hom
 
-/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
+/-- Basic operations and coefficient
 reduction; the compact-support direct image between finite levels.
 
 For a finite coefficient ring `Λ`, the comparison `ρ(Rf_!K) ⟶ Rf_!(ρK)` of `Rf_!` with the
@@ -472,7 +471,7 @@ instance isIso_rightDerivedLowerShriekReductionModIdealMap [Finite Λ] :
   infer_instance
 
 variable {Λ} in
-/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
+/-- Basic operations and coefficient
 reduction; the compact-support direct image at the integral stage.
 
 For a nonzerodivisor `ϖ` of `Λ` (for `Λ = 𝒪_E`, a uniformizer), the reduction modulo `ϖⁿ`

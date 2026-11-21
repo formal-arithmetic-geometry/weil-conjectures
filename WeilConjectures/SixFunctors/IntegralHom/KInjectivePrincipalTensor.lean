@@ -47,8 +47,7 @@ namespace WeilConjectures.IntegralHom
 K-injectivity.
 
 Source: Stacks Project, Tags 08J7 and 070G; the finite-free construction in paragraph 1
-of `lem-coef-integral-hom-reduction.proof.md`
-(blueprint: lem-sf-kinjective-principal-tensor).
+of `lem-coef-integral-hom-reduction.proof.md`.
 
 Proof: total tensor with the cone [R --a^(n+1)--> R] is canonically the cone of
 multiplication by a^(n+1) on I. To check K-injectivity, apply the complex of abelian

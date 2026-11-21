@@ -11,7 +11,6 @@ import all WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportC
 /-! # The canonical finite quotient left comparison
 
 Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: lem-sf-finite-quotient-left-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +37,7 @@ Proof: specialize the finite coefficient comparison theorem to the quotient fact
 map. The literal finiteQuotientChange sheaf maps are its constant sheaf maps, by
 finiteQuotient_eq_map. The comparison theorem supplies precisely the actual proper/open
 mate, so no flatness of the quotient map is asserted. This includes exponent one,
-equal exponents, and empty schemes, with no absolute separatedness assumption.
-(blueprint: lem-sf-finite-quotient-left-comparison). -/
+equal exponents, and empty schemes, with no absolute separatedness assumption. -/
 theorem finiteQuotientLeftComparison_isIso
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

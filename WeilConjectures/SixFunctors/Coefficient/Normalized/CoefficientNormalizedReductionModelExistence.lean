@@ -16,8 +16,7 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWh
 
 /-! # Existence of the normalized coefficient reduction model
 
-Source: Stacks 06YS, 06YY, 07A4 and 0941
-(blueprint: lem-coef-normalized-reduction-model-existence).
+Source: Stacks 06YS, 06YY, 07A4 and 0941.
 -/
 
 @[expose] public section
@@ -127,11 +126,10 @@ private theorem evaluationTensor_exists (T : CoefficientDerivedSystemTensors l E
 
 /--
 The sequence projection and scalar-extension construction yields a reduction record
-whose tensor presentation is the prescribed one.  The construction uses the normalized
+whose tensor presentation is the prescribed one. The construction uses the normalized
 sequence projection adjunction, its finite scalar evaluations, and the actual K-flat
 change-of-rings models; the tensor fields are retained definitionally from `T`.
 Source: Stacks 06YS, 06YY, 07A4 and 0941.
-(blueprint: lem-coef-normalized-reduction-model-existence)
 -/
 theorem coefficientNormalizedReductionModel_exists
     (T : CoefficientDerivedSystemTensors l E W) :

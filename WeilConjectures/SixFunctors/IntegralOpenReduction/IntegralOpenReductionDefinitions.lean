@@ -33,7 +33,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 # Strict reduction and normalized realization of integral open extension
 
 Source: Stacks Project, Tags 0GL1 and 0E8I; blueprint `fix-prop-coherence`,
-open-factor sentence (blueprint: lem-sf-integral-open-reduction-comparison).
+open-factor sentence.
 The natural index n denotes exponent n+1. Site and coefficient sizes are independent.
 
 ## Main definitions
@@ -69,40 +69,34 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
 
 /-- Sheafification in the universe containing both sites and coefficients.
-Source: Stacks 03DA (blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 03DA. -/
 instance openAbSheafify : HasSheafify (ProEt.topology X) AddCommGrpCat.{max u (t+1)} :=
   SemilinearSections.abelianSheafify.{t+1, t, max u (t+1)} (ProEt.topology X)
 
-/-- The corresponding local sheafification criterion. Source: Stacks 03DA
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- The corresponding local sheafification criterion. Source: Stacks 03DA. -/
 instance openAbLocallyBijective :
     (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{max u (t+1)} :=
   SemilinearSections.locallyBijective.{t+1, t, max u (t+1)} (ProEt.topology X)
 
-/-- The actual open object, including the empty open. Source: Stacks 098K
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- The actual open object, including the empty open. Source: Stacks 098K. -/
 abbrev openObject := cbcOpenObject j inferInstance
 
-/-- The literal slice-to-open site functor. Source: Stacks 098K
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- The literal slice-to-open site functor. Source: Stacks 098K. -/
 abbrev sliceSite := cbcSliceFunctor X (openObject j)
 
-/-- Continuity of the literal slice presentation. Source: Stacks 098K
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Continuity of the literal slice presentation. Source: Stacks 098K. -/
 instance sliceContinuous : (sliceSite j).IsContinuous
     ((ProEt.topology X).over (openObject j)) (ProEt.topology U) :=
   cbcSliceFunctor_continuous X (openObject j)
 
 /-- The finite coefficient sheaves, with their recorded quotient transitions.
-Source: Stacks 0941 (blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 0941. -/
 abbrev rings (T : Scheme.{t}) := integralCoefficientCommRingSheaf l E T
 
-/-- The actual strict quotient maps. Source: Stacks 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- The actual strict quotient maps. Source: Stacks 0941. -/
 abbrev transitions (T : Scheme.{t}) := coefficientSequenceCommRingTransition l E T
 
-/-- The actual localized semilinear system category. Source: Stacks 03DJ, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- The actual localized semilinear system category. Source: Stacks 03DJ, 0941. -/
 abbrev SliceSystems := SemilinearSections.Systems.{t+1, t, max u (t+1)}
   ((ProEt.topology X).over (openObject j))
   (fun n ↦ (rings l E X n).over (openObject j))
@@ -110,7 +104,7 @@ abbrev SliceSystems := SemilinearSections.Systems.{t+1, t, max u (t+1)}
     (openObject j)).map (transitions l E X n))
 
 /-- The actual slice coefficient system, not independent finite coefficient choices.
-Source: Stacks 0941 (blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 0941. -/
 abbrev sliceRing := SemilinearSections.systemRing.{t+1, t, max u (t+1)}
   ((ProEt.topology X).over (openObject j))
   (fun n ↦ (rings l E X n).over (openObject j))
@@ -120,8 +114,7 @@ abbrev sliceRing := SemilinearSections.systemRing.{t+1, t, max u (t+1)}
 /-- Transport of completed and finite coefficients to the open's actual slice.
 All finite maps are fixed by constant sections, the completed map by its quotient
 projections, and each module equivalence by the concrete continuous pushforward.
-Source: Stacks 098K, 03DI, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 098K, 03DI, 0941. -/
 structure Coefficients where
   finiteMap : ∀ n : ℕ, (rings l E X n).over (openObject j) ⟶
     ((sliceSite j).sheafPushforwardContinuous CommRingCat.{max u (t+1)}
@@ -176,8 +169,7 @@ structure Coefficients where
 
 /-- All coefficient transports are additive, and the strict open extension is the
 section-normalized localized adjunction supplied by semilinear derived sections.
-Source: Stacks 03DI--03DJ, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 03DI--03DJ, 0941. -/
 structure Operations extends Coefficients l E j where
   [integralAdditive : integral.functor.Additive]
   [finiteAdditive : ∀ n : ℕ, (finite n).functor.Additive]
@@ -209,141 +201,120 @@ attribute [instance] SemilinearSections.OpenSystems.extensionAdditive
   SemilinearSections.OpenSystems.extensionLimits SemilinearSections.OpenSystems.extensionColimits
 
 /-- Ordinary completed-coefficient extension: concrete slice transport followed
-by direct-sum extension and sheafification. Source: Stacks 03DI
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+by direct-sum extension and sheafification. Source: Stacks 03DI. -/
 abbrev extension := o.integral.functor ⋙
   SheafOfModules.localizedSystemExtension.{t+1, t, max u (t+1)}
     (completedIntegralCommRingSheafUnrestricted l E X) (openObject j)
 
-/-- The corresponding completed-coefficient restriction. Source: Stacks 03DJ
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- The corresponding completed-coefficient restriction. Source: Stacks 03DJ. -/
 abbrev restriction := SheafOfModules.localizedSystemRestriction.{t+1, t, max u (t+1)}
   (completedIntegralCommRingSheafUnrestricted l E X) (openObject j) ⋙ o.integral.inverse
 
-/-- Ordinary extension at the positive finite level. Source: Stacks 03DI
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Ordinary extension at the positive finite level. Source: Stacks 03DI. -/
 abbrev finiteExtension (n : ℕ) := (o.finite n).functor ⋙
   SheafOfModules.localizedSystemExtension.{t+1, t, max u (t+1)}
     (rings l E X n) (openObject j)
 
-/-- Ordinary finite restriction. Source: Stacks 03DJ
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Ordinary finite restriction. Source: Stacks 03DJ. -/
 abbrev finiteRestriction (n : ℕ) :=
   SheafOfModules.localizedSystemRestriction.{t+1, t, max u (t+1)}
     (rings l E X n) (openObject j) ⋙ (o.finite n).inverse
 
 /-- Exact termwise system extension, before taking the derived category.
-Source: Stacks 03DI, 0941 (blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 03DI, 0941. -/
 abbrev systemExtension := o.systems.functor ⋙ o.openSystems.extension
 
-/-- Exact termwise system restriction. Source: Stacks 03DJ, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Exact termwise system restriction. Source: Stacks 03DJ, 0941. -/
 abbrev systemRestriction :=
   SemilinearSections.openRestriction.{t+1, t, max u (t+1)}
     (ProEt.topology X) (rings l E X) (transitions l E X) (openObject j) ⋙ o.systems.inverse
 
-/-- Additivity of the constructed open functors. Source: Stacks 03DI
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Additivity of the constructed open functors. Source: Stacks 03DI. -/
 instance extensionAdditive : (extension l E j o).Additive :=
   letI := o.integralAdditive
   letI := SheafOfModules.localizedSystemExtensionAdditive.{t+1, t, max u (t+1)}
     (completedIntegralCommRingSheafUnrestricted l E X) (openObject j)
   inferInstance
 
-/-- Additivity of restriction. Source: Stacks 03DJ
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Additivity of restriction. Source: Stacks 03DJ. -/
 instance restrictionAdditive : (restriction l E j o).Additive :=
   letI := o.integralAdditive
   inferInstance
 
-/-- Additivity of finite extension. Source: Stacks 03DI
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Additivity of finite extension. Source: Stacks 03DI. -/
 instance finiteExtensionAdditive (n : ℕ) : (finiteExtension l E j o n).Additive :=
   letI := o.finiteAdditive n
   letI := SheafOfModules.localizedSystemExtensionAdditive.{t+1, t, max u (t+1)}
     (rings l E X n) (openObject j)
   inferInstance
 
-/-- Additivity of strict extension. Source: Stacks 03DI, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Additivity of strict extension. Source: Stacks 03DI, 0941. -/
 instance systemExtensionAdditive : (systemExtension l E j o).Additive :=
   letI := o.systemsAdditive
   letI := o.openSystems.extensionAdditive
   inferInstance
 
-/-- Additivity of strict restriction. Source: Stacks 03DJ, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Additivity of strict restriction. Source: Stacks 03DJ, 0941. -/
 instance systemRestrictionAdditive : (systemRestriction l E j o).Additive :=
   letI := o.systemsAdditive
   inferInstance
 
-/-- Left exactness of extension. Source: Stacks 03DJ
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Left exactness of extension. Source: Stacks 03DJ. -/
 instance extensionLimits : PreservesFiniteLimits (extension l E j o) :=
   letI := SheafOfModules.localizedSystemExtensionLimits.{t+1, t, max u (t+1)}
     (completedIntegralCommRingSheafUnrestricted l E X) (openObject j)
   inferInstance
 
-/-- Right exactness of extension. Source: Stacks 03DI
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Right exactness of extension. Source: Stacks 03DI. -/
 instance extensionColimits : PreservesFiniteColimits (extension l E j o) :=
   letI := SheafOfModules.localizedSystemExtensionColimits.{t+1, t, max u (t+1)}
     (completedIntegralCommRingSheafUnrestricted l E X) (openObject j)
   inferInstance
 
-/-- Left exactness of termwise system extension. Source: Stacks 03DJ, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Left exactness of termwise system extension. Source: Stacks 03DJ, 0941. -/
 instance systemExtensionLimits : PreservesFiniteLimits (systemExtension l E j o) :=
   letI := o.openSystems.extensionLimits
   inferInstance
 
-/-- Right exactness of termwise system extension. Source: Stacks 03DI, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Right exactness of termwise system extension. Source: Stacks 03DI, 0941. -/
 instance systemExtensionColimits : PreservesFiniteColimits (systemExtension l E j o) :=
   letI := o.openSystems.extensionColimits
   inferInstance
 
 /-- The localized ringed open adjunction, retaining the actual summand unit.
-Source: Stacks 03DI (blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 03DI. -/
 def ordinaryAdjunction : extension l E j o ⊣ restriction l E j o :=
   o.integral.toAdjunction.comp
     (SheafOfModules.localizedSystemAdjunction.{t+1, t, max u (t+1)}
       (completedIntegralCommRingSheafUnrestricted l E X) (openObject j))
 
-/-- The ordinary strict-system adjunction. Source: Stacks 03DI, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- The ordinary strict-system adjunction. Source: Stacks 03DI, 0941. -/
 def ordinarySystemAdjunction : systemExtension l E j o ⊣ systemRestriction l E j o :=
   o.systems.toAdjunction.comp o.openSystems.ordinaryAdjunction
 
-/-- Localized completed extension on unbounded derived categories. Source: Stacks 0GL1
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Localized completed extension on unbounded derived categories. Source: Stacks 0GL1. -/
 abbrev shriek := (extension l E j o).mapDerivedCategory
 
-/-- Localized completed restriction. Source: Stacks 0GL1
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Localized completed restriction. Source: Stacks 0GL1. -/
 abbrev star := (restriction l E j o).mapDerivedCategory
 
-/-- Localized strict-system extension. Source: Stacks 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Localized strict-system extension. Source: Stacks 0941. -/
 abbrev J := (systemExtension l E j o).mapDerivedCategory
 
-/-- Localized strict-system restriction. Source: Stacks 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- Localized strict-system restriction. Source: Stacks 0941. -/
 abbrev P := (systemRestriction l E j o).mapDerivedCategory
 
-/-- The actual localized open adjunction. Source: Stacks 015F, 03DI
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- The actual localized open adjunction. Source: Stacks 015F, 03DI. -/
 def openAdjunction : shriek l E j o ⊣ star l E j o :=
   SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction (ordinaryAdjunction l E j o)
 
-/-- The actual localized system adjunction. Source: Stacks 015F, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+/-- The actual localized system adjunction. Source: Stacks 015F, 0941. -/
 def systemAdjunction : J l E j o ⊣ P l E j o :=
   SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
     (ordinarySystemAdjunction l E j o)
 
 /-- Termwise extension evaluation with the identity on transported sections.
-Source: Stacks 03DI, 0941 (blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 03DI, 0941. -/
 def extensionEvaluation (n : ℕ) :
     systemExtension l E j o ⋙ coefficientSequenceEvaluation l E X n ≅
       coefficientSequenceEvaluation l E U n ⋙ finiteExtension l E j o n :=
@@ -357,7 +328,7 @@ def extensionEvaluation (n : ℕ) :
 
 open Classical in
 /-- The actual extension generator, including the prescribed slice transport.
-Source: Stacks 03DI (blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 03DI. -/
 def extensionSection (M : scalarReductionSource l E U) (V : X.ProEt)
     (a : V ⟶ openObject j) (x : M.val.obj (op ((sliceSite j).obj (Over.mk a)))) :
     ((extension l E j o).obj M).val.obj (op V) :=
@@ -371,7 +342,7 @@ def extensionSection (M : scalarReductionSource l E U) (V : X.ProEt)
 
 open Classical in
 /-- The same direct-sum generator at a finite quotient coefficient.
-Source: Stacks 03DI (blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 03DI. -/
 def finiteExtensionSection (n : ℕ) (M : normalizedDVRModules l E U n) (V : X.ProEt)
     (a : V ⟶ openObject j) (x : M.val.obj (op ((sliceSite j).obj (Over.mk a)))) :
     ((finiteExtension l E j o n).obj M).val.obj (op V) :=
@@ -385,7 +356,7 @@ def finiteExtensionSection (n : ℕ) (M : normalizedDVRModules l E U n) (V : X.P
 
 /-- The canonical open-tensor comparison, fixed on every scalar-extension unit
 of every extension summand. Linearity then fixes all coefficient multiples.
-Source: Stacks 0E8I (blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 0E8I. -/
 structure TensorComparison where
   ordinary : ∀ n : ℕ,
     extension l E j o ⋙ scalarReductionExtension l E X n ≅
@@ -400,7 +371,7 @@ structure TensorComparison where
         (op ((sliceSite j).obj (Over.mk a))) x)
 
 /-- The recorded quotient-tower completeness predicate, without a boundedness assumption.
-Source: Bhatt--Scholze 3.5.2 (blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Bhatt--Scholze 3.5.2. -/
 abbrev complete (T : Scheme.{t}) : ObjectProperty (DerivedCategory (scalarReductionSource l E T)) :=
   IntegralOnSlice.IsComplete l E T none
 
@@ -415,8 +386,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 /-- A presentation is normalized by the scalar-adjunction units as one strict
 chain augmentation, and by its transpose for the actual reduction/limit adjunction.
 This fixes the system arrow itself, rather than a lift of its finite evaluations.
-Source: Stacks 06YY, 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 06YY, 0941. -/
 def AugmentedPresentation (T : Scheme.{t}) (S : CoefficientDerivedSystemCalculus l E T)
     (Q : CochainComplex (scalarReductionSource l E T) ℤ)
     (C : CochainComplex (coefficientSequenceModules l E T) ℤ)
@@ -441,8 +411,7 @@ def AugmentedPresentation (T : Scheme.{t}) (S : CoefficientDerivedSystemCalculus
 /-- Representative normalization of one strict system map, including all its
 finite tensor components. Naming this predicate avoids expanding the full
 simultaneous representative construction in every projection of Comparison.
-Source: Stacks 0GL1 and 0941
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 0GL1 and 0941. -/
 def StrictModel (SX : CoefficientDerivedSystemCalculus l E X)
     (SU : CoefficientDerivedSystemCalculus l E U) (tensor : TensorComparison l E j o)
     (r : (complete l E U).ι ⋙ shriek l E j o ⋙ SX.reduction ≅
@@ -490,8 +459,7 @@ def StrictModel (SX : CoefficientDerivedSystemCalculus l E X)
 The representative square is imposed before evaluation; its finite components
 are the generator-normalized open-tensor map. The last equations are the realized
 open unit and counit, as words in the specified adjunction transformations.
-Source: Stacks 0GL1, 0E8I and 0941; node proof Steps 1--10
-(blueprint: lem-sf-integral-open-reduction-comparison). -/
+Source: Stacks 0GL1, 0E8I and 0941; node proof Steps 1--10. -/
 structure Comparison (SX : CoefficientDerivedSystemCalculus l E X)
     (SU : CoefficientDerivedSystemCalculus l E U) (tensor : TensorComparison l E j o) where
   r : (complete l E U).ι ⋙ shriek l E j o ⋙ SX.reduction ≅

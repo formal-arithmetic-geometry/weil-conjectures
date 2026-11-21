@@ -19,8 +19,7 @@ restricts to an isomorphism, and on the second both sides vanish.
 Consequently, if moreover `s` is a section of a morphism `p : V ⟶ X`, then
 
 `Rp_* s_! K ≅ Rp_* Rs_* K ≅ R(s ≫ p)_* K = R(𝟙)_* K ≅ K`
-
-(blueprint `proposition-construction-independence-rf-shriek--7`).
+.
 
 ## Main statements
 

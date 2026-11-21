@@ -11,8 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonFaith
 import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicSiteHomTransport
 
 /-! # A component of finite Hom site descent
-
-Source: blueprint `lem-coef-finite-hom-site-descent`, final site comparison argument.
 -/
 
 @[expose] public section
@@ -96,8 +94,6 @@ attribute [local irreducible] coefficientBaseChangeHom finiteHomEtaleClosed
 
 /-- The specified evaluation comparison into the intrinsic category is invertible
 on a finite-Tor constructible first input and bounded constructible second input.
-Source: blueprint `lem-coef-finite-hom-site-descent`, proof step 5; finite-duality
-site comparison (blueprint: lem-coef-finite-hom-site-hom-invertible).
 
 Proof: ordinary finite duality and intrinsicSiteHom_transport give an object
 isomorphism from inverse image of the etale Hom to the intrinsic Hom of the two

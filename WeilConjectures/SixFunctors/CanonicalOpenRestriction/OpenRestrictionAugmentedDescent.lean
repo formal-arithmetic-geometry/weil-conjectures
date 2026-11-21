@@ -123,7 +123,6 @@ private theorem cancelComparison
 /-- Descent of the strict restriction/tensor isomorphism, before identification with a mate.
 Source: Stacks sites-modules.tex, Tags 03DJ and 0E8I; sites-cohomology.tex,
 Tags 0G7E, 06YY, 0GL1 and 0941; first step of the canonical restriction construction.
-(blueprint: lem-sf-open-restriction-augmented-descent).
 
 Proof: use the ordinary quotient-tensor functor on the ringed sequence site. Its
 augmentation consists of all scalar-adjunction units and its horizontal maps of the

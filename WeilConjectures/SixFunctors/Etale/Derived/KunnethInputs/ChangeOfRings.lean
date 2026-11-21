@@ -98,7 +98,7 @@ namespace DerivedCategory
 variable {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S)
   [HasDerivedCategory.{u} (ModuleCat.{u} R)] [HasDerivedCategory.{u} (ModuleCat.{u} S)]
 
-/-- Blueprint `lem-kun-change-of-rings-tensor`: change of rings for the derived tensor
+/-- Change of rings for the derived tensor
 product. Let `f : R →+* S` be a homomorphism of commutative rings, `M` a flat `R`-module and `N`
 a complex of `S`-modules, viewed as a complex of `R`-modules by restriction of scalars. Then
 `M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` canonically in `D(R)`: both derived tensor products are computed

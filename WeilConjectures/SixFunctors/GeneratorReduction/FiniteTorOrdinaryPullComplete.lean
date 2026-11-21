@@ -33,7 +33,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Ordinary completed-coefficient pullback of a primitive integral input is complete.
 Source: Bhatt--Scholze, Lemmas 6.5.5 and 6.5.9(5); Stacks Tag 099N(5);
 primitive pullback step of lem-sf-primitive-completion-effectivity.
-(blueprint: lem-sf-finite-tor-ordinary-pull-complete).
 
 Proof: for a finite-Tor constructible input, use affine open covers and a finite
 constructible stratification of the residue complex. On weakly contractible affine

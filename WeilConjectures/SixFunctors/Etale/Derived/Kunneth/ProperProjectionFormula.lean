@@ -17,8 +17,7 @@ group, the projection map
 `Rf_* E ⊗ᴸ K ⟶ Rf_*(E ⊗ᴸ Lf^* K)`
 
 (`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`) is an isomorphism for all
-`E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)`, unbounded (blueprint
-`proposition-proper-direct-image-constructible-complexes--9`, Stacks 0F0G).
+`E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)`, unbounded.
 
 The proof checks the claim at the geometric points `x : Spec Ω ⟶ Y`, `Ω` an algebraic closure
 of a residue field of `Y`, which jointly detect isomorphisms of `D(Y_ét, Λ)`
@@ -98,7 +97,6 @@ theorem isIso_leftDerivedUpperStar_map_rightDerivedLowerStarProjectionMap_of_isP
   have : IsLocallyNoetherian (pullback f x : Scheme.{u}) :=
     LocallyOfFiniteType.isLocallyNoetherian (pullback.snd f x)
   -- over the separably closed field `Ω`, the projection map is an isomorphism
-  -- (`proposition-open-direct-image-preserves-finite`)
   have : IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ)
       (pullback.snd f x)).app ((L((pullback.fst f x)^*[ModuleCat.{u + 1} Λ])).obj E)).app
         ((L((x)^*[ModuleCat.{u + 1} Λ])).obj L)) :=

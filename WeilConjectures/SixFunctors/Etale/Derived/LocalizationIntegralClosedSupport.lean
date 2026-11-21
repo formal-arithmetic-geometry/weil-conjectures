@@ -78,7 +78,7 @@ variable {U X Y : Scheme.{u}} [hϖI : Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = I
 variable (I) in
 /-- The pullback `j^* : Dᵇc(X, Λ) ⥤ Dᵇc(U, Λ)` along an open immersion, the restriction of
 `Lj^*` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_leftDerivedUpperStar`).
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 noncomputable abbrev boundedConstructibleIntegralUpperStar (j : U ⟶ X) [IsOpenImmersion j] :
     (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory ⥤
       (DerivedCategory.boundedConstructibleIntegral I U).FullSubcategory :=
@@ -93,7 +93,7 @@ variable (I) in
 /-- The direct image `Rf_* : Dᵇc(Y, Λ) ⥤ Dᵇc(X, Λ)`, the restriction of `Rf_*`
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerStar_obj`), for `f`
 separated, quasi-compact and locally of finite type, `X` being of finite type over `k`.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 noncomputable abbrev boundedConstructibleIntegralRightDerivedLowerStar (aX : X ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] (f : Y ⟶ X) [IsSeparated f] [QuasiCompact f]
     [LocallyOfFiniteType f] :
@@ -105,7 +105,7 @@ noncomputable abbrev boundedConstructibleIntegralRightDerivedLowerStar (aX : X �
 
 /-- The adjunction `j^* ⊣ Rj_*` on `Dᵇc(-, Λ)` for a quasi-compact open immersion `j`, the
 restriction of `AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunction`.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 noncomputable def boundedConstructibleIntegralUpperStarLowerStarAdjunction
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (j : U ⟶ X)
     [IsOpenImmersion j] [QuasiCompact j] :
@@ -116,7 +116,7 @@ noncomputable def boundedConstructibleIntegralUpperStarLowerStarAdjunction
 
 /-- For a quasi-compact open immersion `j`, the counit `j^* Rj_* ⟶ 𝟭` on `Dᵇc(-, Λ)` is an
 isomorphism: `Rj_*` is fully faithful.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 instance isIso_boundedConstructibleIntegralUpperStarLowerStarAdjunction_counit
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (j : U ⟶ X)
     [IsOpenImmersion j] [QuasiCompact j] :
@@ -151,7 +151,7 @@ omit [QuasiCompact j] in
 include hij in
 /-- `j^* i_* = 0` on `Dᵇc(-, Λ)`
 (`AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj`).
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 lemma isZero_boundedConstructibleIntegralUpperStar_obj_rightDerivedLowerStar_obj
     (M : (DerivedCategory.boundedConstructibleIntegral I Z).FullSubcategory) :
     IsZero ((boundedConstructibleIntegralUpperStar I j).obj
@@ -167,7 +167,7 @@ include hij in
 (`AlgebraicGeometry.Etale.isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_of_isZero`), and
 `i^* K` lies in `Dᵇc(Z, Λ)` since `Ri_* i^* K ≅ K` lies in `Dᵇc(X, Λ)`
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_of_rightDerivedLowerStar_obj`).
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 lemma boundedConstructibleIntegralRightDerivedLowerStar_essImage_of_isZero
     (K : (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory)
     (hK : IsZero ((boundedConstructibleIntegralUpperStar I j).obj K)) :
@@ -196,7 +196,7 @@ lemma subsingleton_hom_shift_boundedConstructibleIntegral
 include j hij in
 /-- The direct image `i_* : Dᵇc(Z, Λ) ⥤ Dᵇc(X, Λ)` along a closed immersion is a left adjoint
 (`CategoryTheory.Pretriangulated.Recollement.isLeftAdjoint`).
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 lemma isLeftAdjoint_boundedConstructibleIntegralRightDerivedLowerStar :
     (boundedConstructibleIntegralRightDerivedLowerStar I aX i).IsLeftAdjoint :=
   Recollement.isLeftAdjoint (boundedConstructibleIntegralUpperStarLowerStarAdjunction aX j)
@@ -230,7 +230,7 @@ noncomputable def boundedConstructibleIntegralClosedUpperShriekAdjunction :
 
 /-- The closed-support triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1]` on
 `Dᵇc(X, Λ)`, with third arrow `w`.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 noncomputable abbrev boundedConstructibleIntegralClosedSupportTriangle
     (K : (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory)
     (w : (boundedConstructibleIntegralRightDerivedLowerStar I aX j).obj
@@ -296,8 +296,7 @@ theorem isZero_boundedConstructibleIntegralClosedUpperShriek_obj
     (isZero_boundedConstructibleIntegralUpperStar_obj_rightDerivedLowerStar_obj aX i j hij) G
 
 /-- Blueprint `lemma-local-cohomology-right-adjoint--2`, clause (4) at the integral stage `𝒪_E`: the
-unit `Q ⟶ Ri^! i_* Q` is an isomorphism, `i_*` being fully faithful on `Dᵇc(-, Λ)` (blueprint
-`lemma-local-cohomology-right-adjoint--1`). -/
+unit `Q ⟶ Ri^! i_* Q` is an isomorphism, `i_*` being fully faithful on `Dᵇc(-, Λ)`. -/
 instance isIso_boundedConstructibleIntegralClosedUpperShriekAdjunction_unit :
     IsIso (boundedConstructibleIntegralClosedUpperShriekAdjunction (I := I) aX i j hij).unit :=
   Adjunction.unit_isIso_of_L_fully_faithful _
@@ -348,7 +347,7 @@ inverse image `Ri^!` (the derived limit `R lim_n Res_n Ri_n^! K_n` of blueprint
 providing the exceptional adjunction on `D(X_ét, Λ)`. Without them, the right adjoint of `i_*`
 is `AlgebraicGeometry.Etale.boundedConstructibleIntegralClosedUpperShriek`, and the two agree
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegralClosedUpperShriekIso`).
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 noncomputable def boundedConstructibleIntegralRightDerivedLowerStarUpperShriekAdjunction :
     boundedConstructibleIntegralRightDerivedLowerStar I aX i ⊣
       boundedConstructibleIntegralRightDerivedUpperShriek I hϖ hI aX aZ i hi :=

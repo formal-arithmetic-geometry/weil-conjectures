@@ -11,8 +11,6 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.IntegralOpenRe
 import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCalculus
 
 /-! # Realization squares for canonical expression pairs
-
-Source: blueprint fix-prop-coherence, strict-system expression realization.
 -/
 
 @[expose] public noncomputable section
@@ -200,10 +198,6 @@ private theorem canonical_square (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 /-- The independently fixed canonical arrows intertwine the recursive realizations.
 This asserts the realization equation only; neither finite scalar projections nor
 invertibility of the ordinary-to-completed expression map is asserted here.
-
-Source: blueprint fix-prop-coherence, coefficient-comparison and inherited-equations
-sentences; generator/context step of lem-sf-integral-expression-coefficient-squares.
-(blueprint: lem-sf-integral-canonical-realization-square).
 
 Proof: first use the primitive transpose formulas to identify the recursive coefficient
 maps with reduction of inverse realization followed by the actual counit. For a basic

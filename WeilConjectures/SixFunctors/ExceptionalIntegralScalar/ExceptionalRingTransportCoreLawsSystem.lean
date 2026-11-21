@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTran
 
 /-! The system-level compatibility laws for exceptional integral transport.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-transport-core-system-laws).
+5.26.
 -/
 
 @[expose] public noncomputable section
@@ -64,7 +64,6 @@ structure TransportCoreSystemLaws
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.24.
 Proof: transport the strict-system support and reconstruction comparisons through
 both equivalences and retain their displayed equations.
-(blueprint: lem-sf-exceptional-ring-transport-core-system-laws)
 -/
 theorem exists_exceptional_transport_core_system_laws
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]

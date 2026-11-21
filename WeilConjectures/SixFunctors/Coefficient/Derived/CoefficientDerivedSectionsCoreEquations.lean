@@ -11,7 +11,6 @@ import Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
 
 /-! Equations for the normalized coefficient-sections core data.
 Source: Stacks 079P, 0941, 0D6E and 03CZ.
-(blueprint: lem-coef-derived-sections-core-equations)
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ and its actual finite projections.
 Proof: apply the normalized sections/limit comparison to the transported pairs,
 then identify each derived projection with the prescribed coefficient projection by
 uniqueness of the corresponding right-derived comparison. The universal-unit
-identity gives the first clause, and the finite projection identity gives the second.
-(blueprint: lem-coef-derived-sections-core-equations) -/
+identity gives the first clause, and the finite projection identity gives the second. -/
 def CoefficientDerivedSectionsCoreResolutionEquation
     (R : CoefficientDerivedSystemReduction l E W)
     (D : CoefficientDerivedSectionsCoreData l E W R) : Prop :=
@@ -79,8 +77,7 @@ and scalar maps, gives the required actual finite projections.
 
 The former assertion for every independent choice of D was missing normalization:
 changing the sign of just one comparison preserves its type but not its unit equation.
-The conclusion therefore constructs normalized choices, as needed by the parent.
-(blueprint: lem-coef-derived-sections-core-equations) -/
+The conclusion therefore constructs normalized choices, as needed by the parent. -/
 theorem coefficientDerivedSectionsCoreEquations
     (R : CoefficientDerivedSystemReduction l E W)
     (_hF : CoefficientFiniteTensorNormalization l E W R)

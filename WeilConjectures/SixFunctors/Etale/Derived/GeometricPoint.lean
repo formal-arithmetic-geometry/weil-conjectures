@@ -20,8 +20,8 @@ two morphisms of étale sheaves whose pullbacks along all geometric points agree
 The same holds in the derived category `D(X_ét, Λ)` for morphisms between sheaves placed in a
 single degree: the single-degree functor is fully faithful and commutes with the exact pullback
 along a geometric point. This is the *stalk criterion for the equality of sheaf sections*
-(`def-weil-derived-cohomology-sheaves`) in the form used by the uniqueness of the orientation
-of the zero section (`prop-pur-affine-line-orientation-uniqueness`).
+ in the form used by the uniqueness of the orientation
+of the zero section.
 
 ## Main statements
 

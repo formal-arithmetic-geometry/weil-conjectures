@@ -16,7 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemOrdinaryTensorReductio
 /-! # Evaluation of the normalized restriction tensor comparison
 
 Source: Stacks 07A4 and 0941; support-open-tensor steps 5--6.
-(blueprint: lem-coef-native-restriction-tensor-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -305,7 +304,6 @@ This concerns only restriction and tensor, before taking an open-extension mate.
 Source: Stacks 07A4, sites-cohomology-lemma-pullback-tensor-product;
 Stacks 03EK, sites-modules-section-tensor-product;
 support-open-tensor steps 5--6 and the recorded evaluation tensor normalization.
-(blueprint: lem-coef-native-restriction-tensor-evaluation).
 
 Proof: choose flat-term K-flat representatives of M and N. On ordinary module
 sheaves, precompose the two maps with inverse image of the pure-tensor section

@@ -64,7 +64,7 @@ coefficients `ModuleCat Λ`, where the projection formula is available.
 - `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_hasProjectionFormula`
   (`theorem-poincare-duality--7`): the same with all objects as test objects.
 - `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`
-(`corollary-degreewise-duality-over-fields`): at
+: at
   finite coefficients, the derived Poincaré pairing of an orientation is perfect for `K`
   dualizable.
 - `AlgebraicGeometry.Etale.isPerfectPairing_properPoincarePairing`
@@ -73,7 +73,7 @@ coefficients `ModuleCat Λ`, where the projection formula is available.
 - `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isSepClosed`
   (`theorem-poincare-duality--7`): over a separably closed field, `β_K` is perfect in the point
   category as soon as the projection formula holds at the shifts `Λ_s[r]`, which detect
-  isomorphisms there (`theorem-poincare-duality`).
+  isomorphisms there.
 
 ## Implementation notes
 
@@ -144,7 +144,7 @@ that is `RΓ_c(X, K) ⊗ᴸ RΓ(X, L) ⟶ RΓ_c(X, K ⊗ᴸ L)` read in `D(Y_ét
 `Ra_!` followed by `Ra_!` of `K ⊗ᴸ ε_L`, for the counit `ε_L : La^* Ra_* L ⟶ L` of
 `La^* ⊣ Ra_*`,
 ```
-                       projection map                              Ra_!(K ⊗ᴸ ε_L)
+                       projection map Ra_!(K ⊗ᴸ ε_L)
 Ra_! K ⊗ᴸ Ra_* L ───────────────────────▶ Ra_!(K ⊗ᴸ La^* Ra_* L) ─────────────────▶ Ra_!(K ⊗ᴸ L)
 ```
 -/
@@ -164,7 +164,7 @@ The *smooth trace* of the pairing data, `Tr_γ : Ra_!(T[2d]) ⟶ Λ_Y` for a rig
 orientation `o`, `γ = o.dualizingComplexIso e` with `T = Λ_X(d)`): the counit of
 `Ra_! ⊣ G` at `Λ_Y`, read through `γ`,
 ```
-               Ra_!(γ)                  counit
+               Ra_!(γ) counit
 Ra_!(T[2d]) ─────────▶ Ra_! G Λ_Y ──────────▶ Λ_Y
 ```
 It is the normalized trace of the blueprint when `γ` comes from the normalized orientation. -/
@@ -174,7 +174,7 @@ noncomputable def smoothTrace {T : 𝐃(X, A)} (γ : T⟦(2 * d : ℤ)⟧ ≅ G.
 
 /-- The *twisted evaluation* `K ⊗ᴸ (K^∨ ⊗ᴸ T) ⟶ T` for an object `T` of `D(X_ét)`,
 ```
-                     α⁻¹                         ev_K ⊗ᴸ T                  λ
+                     α⁻¹ ev_K ⊗ᴸ T λ
 K ⊗ᴸ (K^∨ ⊗ᴸ T) ─────────▶ (K ⊗ᴸ K^∨) ⊗ᴸ T ───────────────▶ Λ_X ⊗ᴸ T ─────▶ T
 ```
 For `T = Λ_X(d)` it is `K ⊗ᴸ K^∨(d) ⟶ Λ_X(d)`. -/
@@ -190,7 +190,7 @@ variable (a)
 
 /-- The unshifted core of the derived Poincaré pairing,
 ```
-                          ⌣_c                                Ra_!(twisted evaluation)
+                          ⌣_c Ra_!(twisted evaluation)
 Ra_! K ⊗ᴸ Ra_*(K^∨ ⊗ᴸ T) ─────▶ Ra_!(K ⊗ᴸ (K^∨ ⊗ᴸ T)) ────────────────────────────▶ Ra_! T
 ```
 -/
@@ -202,7 +202,7 @@ noncomputable def poincarePairingEvaluation (T K : 𝐃(X, A)) :
   mixedSupportCupProduct A a _ _ ≫ (R(a)_![A]).map (twistedEvaluation T K)
 
 variable {a} in
-/-- Blueprint `definition-perfect-pairing`: The derived pairing, and perfectness of a pairing. This
+/-- The derived pairing, and perfectness of a pairing. This
 is also blueprint `theorem-poincare-duality--6` and `theorem-poincare-duality--6` (Derived Poincaré
 pairing); perfectness of a pairing is `AlgebraicGeometry.Etale.IsPerfectPairing`.
 
@@ -215,9 +215,9 @@ that is `RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ` read in `D(Y_ét)`: the
 come the mixed-support cup product, `Ra_!` of the twisted evaluation, the shift compatibility
 of `Ra_!` and the smooth trace,
 ```
-                              shift out                                    (⌣_c)[2d]
+                              shift out (⌣_c)[2d]
 Ra_! K ⊗ᴸ (Ra_*(K^∨ ⊗ᴸ T))[2d] ─────────▶ (Ra_! K ⊗ᴸ Ra_*(K^∨ ⊗ᴸ T))[2d] ──────────▶
-                                   (Ra_!(ev))[2d]                ≅                      Tr_o
+                                   (Ra_!(ev))[2d] ≅ Tr_o
   (Ra_!(K ⊗ᴸ (K^∨ ⊗ᴸ T)))[2d] ─────────────────▶ (Ra_! T)[2d] ─────▶ Ra_!(T[2d]) ──────▶ Λ_Y
 ```
 The blueprint asks `K` to be perfect over `Λ_X`; the composite makes sense for every `K`. -/
@@ -268,9 +268,9 @@ end Proper
 the shift is moved out, then come the mixed-support cup product, `Ra_!` of the evaluation
 `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X` and `t`,
 ```
-                          shift out                             (⌣_c)[n]
+                          shift out (⌣_c)[n]
 Ra_! K ⊗ᴸ (Ra_* K^∨)[n] ─────────▶ (Ra_! K ⊗ᴸ Ra_* K^∨)[n] ─────────▶
-                                (Ra_!(ev_K))[n]                t
+                                (Ra_!(ev_K))[n] t
   (Ra_!(K ⊗ᴸ K^∨))[n] ─────────────────▶ (Ra_! Λ_X)[n] ──────▶ T
 ```
 For the untwisted smooth trace `(Ra_! Λ_X)[2d] ⟶ Λ_Y(-d)` of a Tate orientation this is the

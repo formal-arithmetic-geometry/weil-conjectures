@@ -94,9 +94,9 @@ variable {X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g 
 
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
+  | |
+  f' f
+  ↓ ↓
   Y' --g---> Y
 ```
 
@@ -124,9 +124,9 @@ arbitrary, a cartesian square
 
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
+  | |
+  f' f
+  ↓ ↓
   Y' --g---> Y
 ```
 
@@ -158,9 +158,7 @@ section Projection
 
 variable (f : X ⟶ Y) [HasCompactification f]
 
-/-- Blueprint `sk-thm-sf-pf-finite`: Projection formula, finite coefficients
-
-Blueprint `thm-sf-pf-finite`: Finite coefficients on the étale site
+/-- Projection formula, finite coefficients
 
 This is also blueprint `thm-sf-pf-finite` (Finite coefficients on the étale site), the same
 statement in the setting of the six-functor datum `def-sf-datum`.
@@ -185,11 +183,10 @@ theorem hasProjectionFormula_of_boundedConstructible [Finite Λ]
     HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
   hasProjectionFormula_of_finite Λ f K L
 
-/-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
+/-- Projection formula: compatibility with finite
 reduction
 
-**`Rf_!` commutes with finite reduction.** For a finite coefficient ring `Λ` (the blueprint's
-`A_{E,n}`) and an ideal `J` of `Λ`,
+**`Rf_!` commutes with finite reduction.** For a finite coefficient ring `Λ` and an ideal `J` of `Λ`,
 
 `Rf_!(K ⊗^L (Λ/J)_X) ≅ (Rf_! K) ⊗^L (Λ/J)_Y`.
 
@@ -208,7 +205,7 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_finite [Finite
     (HasCompactification.compactification f))⟩
 
 omit [HasCompactification f] in
-/-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
+/-- Projection formula: compatibility with finite
 reduction
 
 **`Lf^*` commutes with finite reduction.** For an ideal `J` of `Λ`,
@@ -228,7 +225,7 @@ end Projection
 
 section LowerStar
 
-/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
+/-- Basic operations and coefficient
 reduction; the ordinary direct image. Used in blueprint `lemma-perfect-complexes-geometric-point`.
 
 **`Rf_*` commutes with reduction modulo a principal ideal.** For `f : X ⟶ Y` arbitrary and a
@@ -236,9 +233,9 @@ principal ideal `J` of a domain `Λ`, the square
 
 ```
   D(X_ét, Λ) ---Rf_*---> D(Y_ét, Λ)
-      |                      |
-  – ⊗ᴸ (Λ/J)_X           – ⊗ᴸ (Λ/J)_Y
-      ↓                      ↓
+      | |
+  – ⊗ᴸ (Λ/J)_X – ⊗ᴸ (Λ/J)_Y
+      ↓ ↓
   D(X_ét, Λ) ---Rf_*---> D(Y_ét, Λ)
 ```
 

@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.IntegralHom.IntegralHomRepresentativeUncurry
 import all Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.SixFunctors.IntegralHom.IntegralHomParameterAdjunction
 /-! Coherent evaluation for the integral tensor presentation.
-Source: the representative evaluation step in the blueprint proof.
-(blueprint: lem-sf-integral-hom-parameter-evaluation) -/
+ -/
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -196,8 +195,7 @@ Source: Stacks Tags 08J9 and 06YU; the normalized Koszul exchange construction.
 Proof: transport the native adjunction through the natural Koszul exchange. Its
 counits are coherent by exchange naturality and the native evaluation law.
 Uncurry the representative map and precompose with the signed chain exchange.
-Its pure-section formula and localization square give the stated normalization.
-(blueprint: lem-sf-integral-hom-parameter-evaluation) -/
+Its pure-section formula and localization square give the stated normalization. -/
 theorem tensor_presentation_parameter_evaluation
     (S : CoefficientClosedStructure
       (derivedInternalHomOfUniverses (AlgebraicGeometry.Scheme.ProEt.topology Y)

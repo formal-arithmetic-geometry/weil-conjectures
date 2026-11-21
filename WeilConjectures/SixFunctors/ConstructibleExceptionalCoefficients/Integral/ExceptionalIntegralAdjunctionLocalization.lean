@@ -286,8 +286,7 @@ private theorem exists_normalized_raw_core
 
 set_option linter.unusedVariables false in
 /-- The localized adjunction admits the identity normalized coefficient comparison.
-Source: Zheng, Construction 6.2, normalization after scalar localization
-(blueprint: lem-sf-integral-adjunction-raw-localization-identity).
+Source: Zheng, Construction 6.2, normalization after scalar localization.
 The adjunction's counit and left shift comparison are normalized explicitly; an arbitrary
 adjunction structure on the raw functors does not satisfy this assertion. -/
 theorem exists_raw_localized_identity_comparison
@@ -343,8 +342,7 @@ theorem exists_raw_localized_identity_comparison
 
 /-- A single integral linear adjunction localizes on its literal tensor Hom maps.
 There is no compactification, compact-support realization, or change of coefficient field.
-Source: Zheng, Construction 6.2, and scalar localization of adjunctions
-(blueprint: lem-sf-integral-adjunction-raw-localization).
+Source: Zheng, Construction 6.2, and scalar localization of adjunctions.
 -/
 theorem exists_integral_adjunction_raw_localization
     (A : Operation.{u, v} l Ω X Y (.integral E))

@@ -37,7 +37,7 @@ attribute [local irreducible] ScalarLocalization.category
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
 /-- The comparison on integral representatives, before transporting the stage system.
-Source: blueprint order 1828 (blueprint: lem-sf-native-integral-rational-scalar-comparison). -/
+ -/
 def integralRationalScalarComparison
     (E L : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
@@ -90,8 +90,7 @@ private theorem integralAssociator_image
     l Ω X E L M h k K
 
 /-- The raw integral-image object formula, typed in the named stage categories.
-Source: blueprint order 1828
-(blueprint: lem-sf-native-integral-rational-scalar-comparison). -/
+ -/
 theorem rationalIntegralTransitionRaw_obj {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
     (GeneralAlgebraicallyClosedCoefficients.transition l (PadicAlgCl l) X E L h).obj
@@ -104,7 +103,7 @@ theorem rationalIntegralTransitionRaw_obj {E L : Index l (PadicAlgCl l)} (h : E 
     (coefficientInclusion l (PadicAlgCl l) E L h) _
 
 /-- The comparison on integral representatives, before transporting the stage system.
-Source: blueprint order 1828 (blueprint: lem-sf-native-integral-rational-scalar-comparison). -/
+ -/
 def rationalIntegralTransitionRaw {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     stageLocalization l X E ⋙
         GeneralAlgebraicallyClosedCoefficients.transition l (PadicAlgCl l) X E L h ≅
@@ -177,7 +176,7 @@ private theorem eqIso_commShift
   infer_instance
 
 /-- The stage system uses the stated scalar functor with its transported shift.
-Source: blueprint order 1462 (blueprint: lem-sf-native-integral-rational-scalar-comparison). -/
+ -/
 def rationalStageTransport {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X).T h ≅
       GeneralAlgebraicallyClosedCoefficients.transition l (PadicAlgCl l) X E L h :=
@@ -190,7 +189,7 @@ instance rationalStageTransport_shift {E L : Index l (PadicAlgCl l)} (h : E ≤ 
     l (PadicAlgCl l) X E L h)
 
 /-- Integral scalar extension followed by rationalization agrees with stage extension.
-Source: blueprint order 1828 (blueprint: lem-sf-native-integral-rational-scalar-comparison). -/
+ -/
 def rationalIntegralTransition {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     stageLocalization l X E ⋙
         (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X).T h ≅
@@ -205,7 +204,7 @@ instance rationalIntegralTransition_shift {E L : Index l (PadicAlgCl l)} (h : E 
   infer_instance
 
 /-- Equality of objects underlying the integral-image comparison.
-Source: blueprint order 1828 (blueprint: lem-sf-native-integral-rational-scalar-comparison). -/
+ -/
 theorem rationalIntegralTransition_obj {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
     ((GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X).T h).obj
@@ -228,7 +227,7 @@ private theorem eqToHom_app_comp
   simp only [eqToIso_refl, Iso.refl_hom, NatTrans.id_app, eqToHom_refl, Category.id_comp]
 
 /-- The comparison is just the literal object transport, not a fresh automorphism.
-Source: blueprint order 1828 (blueprint: lem-sf-native-integral-rational-scalar-comparison). -/
+ -/
 theorem rationalIntegralTransition_hom {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
     (rationalIntegralTransition l X h).hom.app K =
@@ -242,7 +241,7 @@ theorem rationalIntegralTransition_hom {E L : Index l (PadicAlgCl l)} (h : E ≤
   exact eqToHom_app_comp _ _ _ _
 
 /-- The inverse comparison also carries only the literal object transport.
-Source: blueprint order 1828 (blueprint: lem-sf-native-integral-rational-scalar-comparison). -/
+ -/
 theorem rationalIntegralTransition_inv {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
     (rationalIntegralTransition l X h).inv.app K =
@@ -290,8 +289,7 @@ private theorem normalizedStageAssociator_heq
   exact hcomp.trans hx
 
 /-- The selected stage-system associator is the localized integral tensor associator.
-Source: blueprint orders 1462 and 1828
-(blueprint: lem-sf-native-integral-rational-scalar-comparison). -/
+ -/
 theorem rationalIntegralAssociator_heq {E L M : Index l (PadicAlgCl l)}
     (h : E ≤ L) (k : L ≤ M)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
@@ -305,7 +303,7 @@ theorem rationalIntegralAssociator_heq {E L M : Index l (PadicAlgCl l)}
   exact normalizedStageAssociator_heq l X _ hs.1 hs.2 h k K
 
 /-- Compatibility of the integral-image comparisons with the literal associators.
-Source: blueprint order 1828 (blueprint: lem-sf-native-integral-rational-scalar-comparison). -/
+ -/
 theorem rationalIntegralTransition_tower {E L M : Index l (PadicAlgCl l)}
     (h : E ≤ L) (k : L ≤ M)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :

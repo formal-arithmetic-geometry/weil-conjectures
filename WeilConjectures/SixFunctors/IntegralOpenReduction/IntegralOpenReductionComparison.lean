@@ -17,7 +17,7 @@ import WeilConjectures.SixFunctors.IntegralOpenReduction.IntegralOpenExtensionCo
 # Strict reduction and normalized realization of integral open extension
 
 Source: Stacks Project, Tags 0GL1 and 0E8I; blueprint `fix-prop-coherence`,
-open-factor sentence (blueprint: lem-sf-integral-open-reduction-comparison).
+open-factor sentence.
 The natural index n denotes exponent n+1. Site and coefficient sizes are independent.
 
 ## Main definitions
@@ -253,8 +253,7 @@ private theorem comparisonOfModel
     exact c.components (Q.X i) n
 
 /-- Strict completed open reduction, its inverse-unit realization, and adjunction
-normalization. Source: Stacks 0GL1, 0E8I and 0941; `fix-prop-coherence`, open factor
-(blueprint: lem-sf-integral-open-reduction-comparison).
+normalization. Source: Stacks 0GL1, 0E8I and 0941; `fix-prop-coherence`, open factor.
 Proof: choose the two reduction/total-limit calculi with their coherence packages.
 Normalize the semilinear open localization on sections using the identity-block
 case of block repetition. The simultaneous open tensor-model theorem then supplies

@@ -19,7 +19,7 @@ invertible on the base. For a morphism `f : X ⟶ Y` of finite-type `k`-schemes,
 bounded constructible complex of étale sheaves of `Λ`-modules killed by `J` to a bounded
 constructible complex
 (`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero`).
-This is the form of the finiteness theorem (blueprint `sk-prop-sf-finiteness`) used at the
+This is the form of the finiteness theorem used at the
 integral coefficient stage `Λ = 𝒪_E`, for the reductions `K ⊗ᴸ Λ ⧸ Iⁿ⁺¹`.
 
 The proof reduces to the finite ring `Λ ⧸ J`:
@@ -227,7 +227,7 @@ lemma boundedConstructible_rightDerivedLowerStar_of_isGE_of_isLE [IsNoetherianRi
     · have : T.obj₁.IsLE (b - 1) := TStructure.t.isLE_truncLT_obj _ _ _ (by lia)
       exact fun r _ ↦ (isZero_of_isLE _ (b - 1) _ (by lia)).eq_of_src _ _
 
-/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility, for coefficients killed
+/-- Finiteness and constructibility, for coefficients killed
 by an ideal of finite index.
 
 Let `Λ` be a noetherian ring and `J` an ideal of `Λ` with `Λ ⧸ J` finite, whose exponent is

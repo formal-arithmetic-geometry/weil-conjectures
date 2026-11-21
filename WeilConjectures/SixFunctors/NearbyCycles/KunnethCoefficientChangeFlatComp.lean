@@ -19,7 +19,6 @@ is bounded below, `T₂ T₁ Π_{A₀,B₀}` and `Π_{T₂ T₁ A₀, T₂ T₁ 
 (`NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_of_flat_of_flat`): this is
 `NearbyCyclesModel.nonempty_arrowIso_map_kunnethMap_of_flat` applied twice, the flat extensions of
 scalars preserving bounded below objects and commuting with the derived tensor products.
-
 -/
 
 @[expose] public section

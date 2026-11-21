@@ -537,8 +537,7 @@ precompose with every total summand and both sheafification units. Both routes
 send x tensor (s tensor y) to q(s) tensor (x tensor y), by the defining pure-tensor
 formula of sfReductionTransition. Tensor induction, sheafification adjunction,
 and coproduct extensionality give equality. No flatness or derived category
-occurs, and exponent one, zero complexes, and the empty site cause no exception.
-(blueprint: lem-sf-integral-ordinary-tensor-quotient-contraction). -/
+occurs, and exponent one, zero complexes, and the empty site cause no exception. -/
 theorem ordinaryTensorQuotient_contractions :
     let R := completedIntegralCommRingSheafUnrestricted l E X
     let F := fun n : ℕ ↦ (sfReductionRestricted l E X n).mapHomologicalComplex (.up ℤ)

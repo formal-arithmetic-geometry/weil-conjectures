@@ -24,13 +24,13 @@ This file proves the formal properties of `𝒞` that need no geometry:
   holds, then `Rf_*` sends every bounded complex with constructible homology sheaves to a
   complex with constructible homology sheaves (dévissage along the truncation triangles);
 - `AlgebraicGeometry.Etale.HasConstructibleDirectImages.comp`: `𝒞(f)` and `𝒞(g)` imply
-  `𝒞(f ≫ g)` (`proposition-proper-direct-image-finite-coefficients`).
+  `𝒞(f ≫ g)`.
 
 The blueprint proves the composition lemma with the Grothendieck spectral sequence; we use
 instead that `Hⁿ(Rg_* K)` only depends on the truncation `τ^{≤ n} K` of a complex `K` with
 `K ∈ D^{≥ 0}` (`Rg_*` is left t-exact, `CategoryTheory.Functor.isGE_rightDerivedFunctor_obj`),
 and the dévissage above. Both arguments only use that constructible sheaves form a weak Serre
-class (`thm-constructible-serre`), which holds for a finite coefficient ring.
+class, which holds for a finite coefficient ring.
 -/
 
 @[expose] public section
@@ -51,7 +51,7 @@ open _root_.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Constructibility under direct
+/-- Constructibility under direct
 image.
 
 For a morphism `f : X ⟶ S`, the assertion `𝒞(f)`: for every constructible sheaf `F` of
@@ -205,7 +205,7 @@ lemma HasConstructibleDirectImages.constructibleHomology_obj_of_isGE {Y S : Sche
   exact IsConstructibleSheaf.of_iso (asIso ((homologyFunctor _ n).map
     ((R((g)_*[ModuleCat.{u + 1} Λ])).map ((TStructure.t.triangleLEGT n).obj K).mor₁)))
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Composition for
+/-- Composition for
 constructibility alone.
 
 If `𝒞(f)` and `𝒞(g)` hold for composable morphisms `f : X ⟶ Y` and `g : Y ⟶ S`, then `𝒞(f ≫ g)`

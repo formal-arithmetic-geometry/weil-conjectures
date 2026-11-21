@@ -32,7 +32,6 @@ restricts to an equivalence between `Dᵇc(Spec k, Λ)` and the full subcategory
   coefficient stage): `Fib_s` is an equivalence. The integral stage `𝒪_E` is
   `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`
   (`WeilConjectures.SixFunctors.Etale.Derived.PointFiberIntegral`).
-
 -/
 
 @[expose] public section
@@ -167,7 +166,7 @@ noncomputable def pointFiberCompιIso :
         rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k)) :=
   Functor.isoWhiskerLeft _ (rightDerivedGlobalSectionsIsoOfIsSepClosed Λ (k := k)).symm
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
+/-- Finite coefficient categories over a point
 (finite coefficient stage `A_{E,n}`).
 
 For a commutative ring `Λ` (in the blueprint the finite ring `A_{E,n} = 𝒪_E / ϖ_Eⁿ`) and a

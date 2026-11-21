@@ -386,7 +386,6 @@ private theorem completionMate_good_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The normalized pullback/reduction adjunct equation on good representatives.
 Source: Stacks 03D2, 07A6, 08TC and 0941; the representative calculation in
 `fix-prop-projection-formula.proof.md`.
-(blueprint: lem-sf-pullback-reduction-augmentation-good).
 
 Proof: form the natural adjoint mate of the ordinary completion comparison
 followed by the strict Roos realization. On good representatives its finite

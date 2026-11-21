@@ -187,14 +187,13 @@ private theorem integralTensorComparison_eq (C : CoefficientSystem l X)
 /-- The explicit inverse-balancing/completion comparison commutes with every integer shift.
 
 Source: Bhatt--Scholze, Propositions 3.5.1 and 6.8.14(2); the shift clause of
-`lem-sf-native-integral-tensor-coherence`
-(blueprint: new-lem-sf-native-integral-tensor-shift-coherence).
+`lem-sf-native-integral-tensor-coherence`.
 
 Proof: the ordinary tensor comparison commutes with the degreewise shift of complexes,
 and so does its quotient-completion chain map, since both are defined degreewise.
 The derived scalar-extension counit is compatible with shifts
-(`lem-sbc-derived-scalar-extension-counit-shift`), and a shift structure on a scalar
-counit is unique (`lem-pur-scalar-counit-shift-unique`); hence the universal derived
+, and a shift structure on a scalar
+counit is unique; hence the universal derived
 counits lift the two degreewise squares uniquely. The integral transition's shift
 structure is defined by the same ordinary tensor normalization, so the composite
 inverse-balancing/completion map commutes with the shift by one; compatibility with

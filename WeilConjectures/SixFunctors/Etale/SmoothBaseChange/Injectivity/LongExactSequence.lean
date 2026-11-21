@@ -93,17 +93,16 @@ exact, and such that the square
 
 ```
 p⁻¹ R^{n₀} g_* F₃ --δS--> p⁻¹ R^{n₁} g_* F₁
-        |                         |
-  bc_{n₀} F₃                bc_{n₁} F₁
-        v                         v
+        | |
+  bc_{n₀} F₃ bc_{n₁} F₁
+        v v
 R^{n₀} h_* e⁻¹ F₃ --δT--> R^{n₁} h_* e⁻¹ F₁
 ```
 
 of base-change maps commutes.
 
 This is the long exact sequence input of the blueprint lemma
-`lemma-injectivity-base-change-map-degree` (the blueprint lemma
-`theorem-proper-base-change-classical-pro` of the proper base change chapter). It comes from the
+`lemma-injectivity-base-change-map-degree`. It comes from the
 distinguished triangle of the short exact sequence: its images under the triangulated functors
 `p^* ∘ Rg_*` and `Rh_* ∘ e^*` are distinguished, and the derived base-change morphism
 `AlgebraicGeometry.Etale.baseChange` is a morphism between them since it commutes with the shifts

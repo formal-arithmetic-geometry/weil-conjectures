@@ -51,7 +51,6 @@ private theorem compare_localized_models
 
 /-- Ordinary tensor and the supplied ringed tensor have the same signed total model.
 Source: Stacks 07A4 and 06YS; the product localization universal property.
-(blueprint: lem-sf-ordinary-tensor-ringed-model-comparison).
 
 Proof: restrict the ringed tensor representative to the good complexes. Its source
 is the same signed total tensor as tensorRepresentativeIso. Their composite gives

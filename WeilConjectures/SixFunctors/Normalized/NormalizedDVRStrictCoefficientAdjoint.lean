@@ -15,7 +15,7 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 /-! # Normalized adjoints of strict DVR coefficient maps
 
 Source: Stacks Tags 06YS, 06YY, 03EK and 05RT; blueprint DVR effectivity,
-proof paragraphs 3--4. (blueprint: lem-coef-normalized-dvr-strict-coefficient-adjoint).
+proof paragraphs 3--4.
 -/
 
 @[expose] public noncomputable section
@@ -210,7 +210,7 @@ private def cone_iso (n : ℕ) :
 zero and unshifted component f, for one natural comparison of derived functors.
 
 Source: Stacks 06YY and 07A6 and the blueprint DVR effectivity regular quotient
-calculation. (blueprint: lem-coef-normalized-dvr-strict-coefficient-adjoint).
+calculation.
 
 Proof: apply the normalized regular quotient augmentation to the completed
 uniformizer power and its actual finite quotient. The strict adjoint formula
@@ -376,7 +376,6 @@ local instance normalizedFiniteDerived (n : ℕ) :
 presentation used by normalized DVR towers.
 
 Source: Stacks 06YY and 07A6, the regular quotient calculation in DVR effectivity.
-(blueprint: lem-coef-normalized-dvr-strict-coefficient-adjoint).
 
 Proof: the core calculation uses the identical scalar-reduction source and target
 categories. Its natural comparison is obtained from the normalized regular

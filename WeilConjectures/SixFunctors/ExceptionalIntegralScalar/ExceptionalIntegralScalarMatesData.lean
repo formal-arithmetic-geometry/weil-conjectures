@@ -23,7 +23,6 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralComp
 /-! # Data for integral scalar mates of the exceptional adjunction
 
 Source: Zheng, Constructions 4.1 and 5.15, Lemma 5.22 and Propositions 5.24, 5.26.
-(blueprint: def-sf-exceptional-integral-scalar-transport-data)
 
 The original normalized systems, reconstruction, scalar mates, and transport records
 are retained under their original names. Finite evaluation explicitly uses the canonical
@@ -52,8 +51,7 @@ attribute [instance] ConstructibleExceptionalCoefficients.Scalar.commShift
   ConstructibleExceptionalCoefficients.Operation.rightShift
 
 /-- The inherited shift on the actual finite or integral full inclusion.
-Source: blueprint full finite-Tor categories
-(blueprint: lem-sf-exceptional-integral-scalar-mates). -/
+ -/
 instance inclusionShift (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     (T : Scheme.{u}) (s : RingStage.{u} l) :
@@ -65,21 +63,18 @@ instance inclusionShift (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω]
 variable (l : ℕ) [Fact l.Prime]
 
 /-- The actual selected coefficient sheaves. Natural index n means exponent n+1.
-Source: Zheng, Construction 4.1
-(blueprint: lem-sf-exceptional-integral-scalar-mates). -/
+Source: Zheng, Construction 4.1. -/
 abbrev rings (E : FieldStage.{u} l) (T : Scheme.{u}) (r : ℕ ↪o ℕ) :=
   selectedSystemRings.{u + 1, u, u + 1} (coefficientSequenceCommRingSystem l E.carrier T) r
 
 /-- Evaluation on the actual selected strict-system localization.
-Source: Zheng, Construction 4.1
-(blueprint: lem-sf-exceptional-integral-scalar-mates). -/
+Source: Zheng, Construction 4.1. -/
 abbrev evaluation (E : FieldStage.{u} l) (T : Scheme.{u}) (r : ℕ ↪o ℕ) (n : ℕ) :=
   derivedSystemEvaluation.{u + 1, u, u + 1} (rings l E T r) n
 
 /-- Normalized sequence-site modules, with one cohomological and one Tor interval.
 This is the sequence-site presentation of the strict-system predicate above.
-Source: Zheng, Construction 4.1 and Proposition 5.24
-(blueprint: lem-sf-exceptional-integral-scalar-mates). -/
+Source: Zheng, Construction 4.1 and Proposition 5.24. -/
 def sequenceProperty (E : FieldStage.{u} l) (T : Scheme.{u}) :
     ObjectProperty (coefficientSequenceDerived l E.carrier T) :=
   fun N ↦ IsNormalizedCoefficientSequence l E.carrier T N ∧
@@ -94,8 +89,7 @@ def sequenceProperty (E : FieldStage.{u} l) (T : Scheme.{u}) :
 /-- The specified reduction/limit equivalence with its actual unit and counit.
 These equations specify the transport named in the hypothesis; they assume no
 coefficient comparison or mate to be constructed by this lemma.
-Source: Zheng, Construction 5.25 and Proposition 5.26
-(blueprint: lem-sf-exceptional-integral-scalar-mates). -/
+Source: Zheng, Construction 5.25 and Proposition 5.26. -/
 structure Reconstruction (E : FieldStage.{u} l) (T : Scheme.{u}) where
   calculus : CoefficientDerivedSystemCalculus l E.carrier T
   equivalence : finiteTorConstructibleIntegralCategory l E.carrier T ≌
@@ -116,8 +110,7 @@ structure Reconstruction (E : FieldStage.{u} l) (T : Scheme.{u}) where
     (sequenceProperty l E T).ι ⋙ coefficientSequenceDerivedEvaluation l E.carrier T n
 
 /-- Ambient finite evaluation of the specified reconstruction.
-Source: Zheng, Construction 4.1 and Proposition 5.26.
-(blueprint: def-sf-exceptional-integral-scalar-transport-data). -/
+Source: Zheng, Construction 4.1 and Proposition 5.26. -/
 def Reconstruction.evaluationRealization (E : FieldStage.{u} l) (T : Scheme.{u})
     (R : Reconstruction l E T) (n : ℕ) :
     (R.equivalence.functor ⋙ R.evaluation n) ⋙
@@ -134,8 +127,7 @@ variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l)
 
 /-- Scalar comparisons for the fixed proper/open adjunctions. All scalars are
 conclusions, with the exact published finite and completed realizations.
-Source: Zheng, Lemma 5.22 and Proposition 5.26
-(blueprint: lem-sf-exceptional-integral-scalar-mates). -/
+Source: Zheng, Lemma 5.22 and Proposition 5.26. -/
 structure Mates {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))
     (left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s)) where
@@ -249,8 +241,7 @@ structure Mates {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
               (endpoint X Y side)) (self := eC) m).hom.app P
 
 /-- The q arrow with the scalar shift witnesses supplied from its owning record.
-Source: Zheng, Lemma 5.22
-(blueprint: lem-sf-exceptional-integral-scalar-mates). -/
+Source: Zheng, Lemma 5.22. -/
 def Mates.q {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l)}
     {left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s)}
@@ -261,8 +252,7 @@ def Mates.q {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
   (d.comparison a ha).q
 
 /-- The b arrow with the same explicitly supplied scalar shift witnesses.
-Source: Zheng, Lemma 5.22
-(blueprint: lem-sf-exceptional-integral-scalar-mates). -/
+Source: Zheng, Lemma 5.22. -/
 def Mates.b {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l)}
     {left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s)}
@@ -275,8 +265,7 @@ def Mates.b {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
 /-- The fixed system adjunction and its actual reconstruction, not scalar mates.
 The evaluations include both adjunction equations; the proper/open word and the
 prescribed integral compact support are fixed by their named realization maps.
-Source: Zheng, Lemma 5.22, Construction 5.25 and Proposition 5.26
-(blueprint: lem-sf-exceptional-integral-scalar-mates). -/
+Source: Zheng, Lemma 5.22, Construction 5.25 and Proposition 5.26. -/
 structure Transported (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -406,8 +395,7 @@ structure Transported (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 /-- One actual ramified finite map, allowing any zero-based target index m
 whose positive exponent is e(n+1). The heterogeneous equality is only the
 transport across this explicit exponent equality, never an identification en=n.
-Source: Zheng, Construction 4.1
-(blueprint: lem-sf-exceptional-integral-scalar-mates). -/
+Source: Zheng, Construction 4.1. -/
 structure RamifiedMap (E L : FieldStage.{u} l) (i : E.carrier →ₐ[Padic l] L.carrier)
     (e : ℕ+) (he : PurCompactSupport.Ramification l E.carrier L.carrier i e) where
   n : ℕ
@@ -423,8 +411,7 @@ structure RamifiedMap (E L : FieldStage.{u} l) (i : E.carrier →ₐ[Padic l] L.
 
 /-- Evaluation is the integral reduction comparison, including the given system
 adjunction's unit and counit, with the actual reduction/limit projection counit.
-Source: Zheng, Lemma 5.22 and Proposition 5.26
-(blueprint: lem-sf-exceptional-integral-scalar-mates). -/
+Source: Zheng, Lemma 5.22 and Proposition 5.26. -/
 structure ReductionMates (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -475,8 +462,7 @@ structure ReductionMates (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 /-- The whole-system completed coefficient comparisons, before any total limit.
 The scalar realization is the existing representative-normalized coherent counit,
 so these are comparisons for the published strict-tower functor, not arbitrary maps.
-Source: Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26
-(blueprint: lem-sf-exceptional-integral-scalar-mates). -/
+Source: Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26. -/
 structure SystemMates (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

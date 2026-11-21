@@ -30,8 +30,7 @@ attribute [local implicit_reducible] Equivalence.mapDerivedCategory
 set_option backward.defeqAttrib.useBackward true
 
 /-- The ordinary finite open-extension coordinates preserve the specified unit.
-Source: compactification-coherence proof, first paragraph; Stacks 03DI
-(blueprint: lem-sf-finite-ring-ordinary-open-unit-coordinates).
+Source: compactification-coherence proof, first paragraph; Stacks 03DI.
 Proof: finiteOpenIso is the left-adjoint uniqueness comparison for the finite
 open adjunction transported by finitePullbackIso. Apply the general
 open_unit_coordinates identity to the two realization equivalences and the

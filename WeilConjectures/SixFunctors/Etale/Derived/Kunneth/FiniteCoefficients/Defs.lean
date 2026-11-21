@@ -30,8 +30,8 @@ the coefficient category `ModuleCat Λ`, respectively `ModuleCat F`.
 - `AlgebraicGeometry.Etale.constantComplexFunctor` (`pur7710-def-constant-complex`) and
   `AlgebraicGeometry.Etale.constantComplexFunctorFiniteField`
   (`pur7710-def-constant-complex-field`).
-- `AlgebraicGeometry.Etale.exteriorProduct` (`prose-08-18`) and
-  `AlgebraicGeometry.Etale.exteriorProductFiniteField` (`prose-08-18`).
+- `AlgebraicGeometry.Etale.exteriorProduct` and
+  `AlgebraicGeometry.Etale.exteriorProductFiniteField`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarModule` (`pur7710-def-unbounded-etale-push`).
 - `AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_iff`
 (`definition-cohomological-dimension--1`).
@@ -147,7 +147,7 @@ noncomputable abbrev rightDerivedLowerStarModule {X Y : Scheme.{u}} (f : X ⟶ Y
       DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   R((f)_*[ModuleCat.{u + 1} Λ])
 
-/-- Blueprint `prose-08-18`: the derived exterior product at finite level.
+/-- The derived exterior product at finite level.
 
 For schemes `X`, `Y` over a base `S` (in the blueprint `S = Spec k`), with `Z = X ×_S Y` and
 projections `p_X`, `p_Y`, and for `K ∈ D(X_ét, Λ)`, `L ∈ D(Y_ét, Λ)`,
@@ -214,7 +214,7 @@ noncomputable abbrev constantComplexFunctorFiniteField (W : Scheme.{u}) :
     DerivedCategory (ModuleCat.{u + 1} F) ⥤ DerivedCategoryFiniteField F W :=
   constantComplexFunctor F W
 
-/-- Blueprint `prose-08-18`: the derived exterior product with
+/-- The derived exterior product with
 finite-field coefficients.
 
 For `X`, `Y` over `S`, `Z = X ×_S Y`, `K ∈ D(X_ét, F)` and `L ∈ D(Y_ét, F)`,

@@ -39,8 +39,7 @@ No stalks enter, which is why the coefficient category is arbitrary.
 - `AlgebraicGeometry.Etale.mem_essImage_lowerStar_of_isZero_upperStar`: a sheaf `K` with
   `j^* K = 0` is in the essential image of `i_*`.
 - `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar'`: `j^*` and `i^*` jointly
-  reflect isomorphisms, for arbitrary Grothendieck abelian coefficients
-  (blueprint: `prop:openclosed-conservative`).
+  reflect isomorphisms, for arbitrary Grothendieck abelian coefficients.
 -/
 
 @[expose] public section
@@ -191,8 +190,7 @@ restrictions to `U` and to `Z`, and vanish by
 `AlgebraicGeometry.Etale.isZero_of_isZero_upperStar`.
 
 This is `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar` without the
-concreteness assumptions on `A` that its proof through stalks needs.
-(blueprint: `prop:openclosed-conservative`) -/
+concreteness assumptions on `A` that its proof through stalks needs. -/
 theorem jointlyReflectIsomorphisms_upperStar' (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     JointlyReflectIsomorphisms (pairFunctor ((j)^*[A]) ((i)^*[A])) := by
   refine jointlyReflectIsomorphisms_pairFunctor _ _ fun {F G} φ hj hi ↦ ?_

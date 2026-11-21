@@ -77,8 +77,7 @@ private theorem cancel_endpoint_coordinates
 
 /-- The explicit finite open witness has the specified intrinsic endpoint word.
 This is only the endpoint equation, without existence or open-adjunction normalization.
-Source: compactification-coherence proof, second paragraph; Stacks 03D6 and 0F7B
-(blueprint: lem-sf-finite-ring-endpoint-cancellation).
+Source: compactification-coherence proof, second paragraph; Stacks 03D6 and 0F7B.
 
 Proof: start with finiteFixedPushIso_composition for r.hom and d.g. Insert the
 explicit definition of finiteFixedRefinementOpenIso. Naturality cancels its two

@@ -26,8 +26,7 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenExtensionFiniteTor
 # Exact finite-coefficient exceptional adjunctions
 
 Source: Zheng, Propositions 2.23, 2.29, 3.16, Lemma 5.22 and Proposition 5.24;
-blueprint exceptional inverse-image construction
-(blueprint: lem-sf-exceptional-finite-operations).
+blueprint exceptional inverse-image construction.
 
 The categories are the published full intrinsic constant-coefficient categories.
 The normalization is expressed in their canonical fixed-module coordinates, using
@@ -48,8 +47,7 @@ namespace WeilConjectures
 with the specified ambient functors, transported Hom normalization and uniform bounds.
 The right shift is precisely the adjoint of the chosen left shift.
 Source: Zheng, Propositions 2.23, 2.29, 3.16; Section 5, Lemma 5.22 and Proposition 5.24;
-blueprint exceptional inverse-image construction
-(blueprint: lem-sf-exceptional-finite-operations).
+blueprint exceptional inverse-image construction.
 
 Proof:
 1. Properness makes c.g finite type. By finite-type composition c.Z is finite type over k.

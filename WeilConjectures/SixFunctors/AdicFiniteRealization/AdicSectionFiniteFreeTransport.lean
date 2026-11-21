@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.Topology.Constructible
 
 /-! # Finite-free targets under section encoding
 Source: Stacks Project, Tags 00YV, 03DM and 03DO.
-(blueprint: lem-sf-adic-section-finite-free-transport).
 -/
 
 @[expose] public noncomputable section
@@ -47,8 +46,7 @@ private theorem stratum_sections (T : Scheme.{u})
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Section encoding preserves and reflects the stratified finite-free target.
-Source: Stacks Project, Tags 00YV, 03DM, 03DO and 03D2
-(blueprint: lem-sf-adic-section-finite-free-transport).
+Source: Stacks Project, Tags 00YV, 03DM, 03DO and 03D2.
 Proof: the exact section equivalence preserves and reflects both standard degree bounds
 and identifies each homology module with the section encoding of internal homology.
 On each stratum, section inverse-image comparison and local finite-freeness detection

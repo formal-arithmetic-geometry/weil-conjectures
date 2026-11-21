@@ -26,9 +26,9 @@ square
 
 ```
 X --j--> C
-|        |
-𝟙        q
-|        |
+| |
+𝟙 q
+| |
 X --k--> D
 ```
 
@@ -102,7 +102,6 @@ the comparison of the two derived lower shrieks attached to `c` and to `d`.
 - `AlgebraicGeometry.Compactification.Refinement.openImmersionLowerShriekBaseChange_id` and
   `AlgebraicGeometry.Compactification.Refinement.openImmersionLowerShriekBaseChange_comp`:
   the two laws for the identity refinement and for a composite of refinements.
-
 -/
 
 @[expose] public section
@@ -252,9 +251,9 @@ omit [IsOpenImmersion j] [IsOpenImmersion k] in
 
 ```
 Sh(X) --j_*--> Sh(C)
-  |              |
-  𝟭      ⇙      q_*
-  v              v
+  | |
+  𝟭 ⇙ q_*
+  v v
 Sh(X) --k_*--> Sh(D)
 ```
 -/
@@ -528,8 +527,7 @@ noncomputable def Compactification.Refinement.openImmersionLowerShriekBaseChange
   Etale.openImmersionLowerShriekBaseChange A c.i r.hom d.i r.i_hom
 
 /-- If the square of a refinement `r` over `S` is cartesian, i.e. `r.hom ⁻¹ (S) = S`, then
-the base change comparison `(c.i)_! ⟶ (d.i)_! ⋙ (r.hom)^*` is an isomorphism.
-(blueprint: `BA43-DENSE-DATA`) -/
+the base change comparison `(c.i)_! ⟶ (d.i)_! ⋙ (r.hom)^*` is an isomorphism. -/
 lemma Compactification.Refinement.isIso_openImmersionLowerShriekBaseChange
     (hcart : IsPullback c.i (𝟙 S) r.hom d.i) :
     IsIso (r.openImmersionLowerShriekBaseChange A) :=

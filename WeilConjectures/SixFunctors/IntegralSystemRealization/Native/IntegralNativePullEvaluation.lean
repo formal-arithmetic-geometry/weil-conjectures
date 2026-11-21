@@ -107,7 +107,6 @@ private theorem localizePullSquare
 
 /-- The specified native inverse-image comparison preserves derived finite evaluation.
 Source: Stacks 03D2 and 0941; blueprint fix-prop-coherence, coefficient comparisons.
-(blueprint: lem-sf-integral-native-pull-evaluation).
 
 Proof: localize the ordinary normalized pullback evaluation square. Localization of
 whiskered natural isomorphisms and the standard exact-functor composition isomorphisms

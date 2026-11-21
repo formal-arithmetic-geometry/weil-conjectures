@@ -33,7 +33,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Defs
   over the base, given the projection formula for the second projection.
 
 See `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform` for the implementation notes.
-
 -/
 
 @[expose] public section

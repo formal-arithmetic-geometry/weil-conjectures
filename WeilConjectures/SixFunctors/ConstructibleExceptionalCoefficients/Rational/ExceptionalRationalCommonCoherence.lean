@@ -50,8 +50,7 @@ variable {I : Type w} [Preorder I]
 include hb
 
 /-- Constructive counit-transpose calculus for a coherent stage family.
-Source: Zheng, Construction 6.6, common-field adjunction step 3
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: Zheng, Construction 6.6, common-field adjunction step 3. -/
 theorem unitEquation {i j : I} (h : i ≤ j) (K : C i) :
     (S.T h).map ((a i).unit.app K) ≫ (b h).hom.app ((L.Φ i).obj K) =
       (a j).unit.app ((S.T h).obj K) ≫ (R j).map ((L.β h).inv.app K) := by
@@ -69,8 +68,7 @@ theorem unitEquation {i j : I} (h : i ≤ j) (K : C i) :
   exact (Category.id_comp _).symm
 
 /-- Constructive counit-transpose calculus for a coherent stage family.
-Source: Zheng, Construction 6.6, common-field adjunction step 3
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: Zheng, Construction 6.6, common-field adjunction step 3. -/
 theorem tower {i j k : I} (h : i ≤ j) (h' : j ≤ k) (K : D i) :
     (S.T h').map ((b h).hom.app K) ≫ (b h').hom.app ((T.T h).obj K) ≫
       (R k).map ((T.assoc h h').hom.app K) =
@@ -102,16 +100,14 @@ theorem tower {i j k : I} (h : i ≤ j) (h' : j ≤ k) (K : D i) :
   rw [reassoc_of% hc', hb]
 
 /-- Constructive counit-transpose calculus for a coherent stage family.
-Source: Zheng, Construction 6.6, common-field adjunction step 3
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: Zheng, Construction 6.6, common-field adjunction step 3. -/
 def rightSystem : T.Morphism S where
   Φ := R
   β := b
   coh := tower L R a b hb
 
 /-- Constructive counit-transpose calculus for a coherent stage family.
-Source: Zheng, Construction 6.6, common-field adjunction step 3
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: Zheng, Construction 6.6, common-field adjunction step 3. -/
 def unitFamily : StageSystem.Morphism.Hom (StageSystem.Morphism.id S)
     (L.comp (rightSystem L R a b hb)) where
   τ i := (a i).unit
@@ -129,8 +125,7 @@ def unitFamily : StageSystem.Morphism.Hom (StageSystem.Morphism.id S)
     exact Category.comp_id _
 
 /-- Constructive counit-transpose calculus for a coherent stage family.
-Source: Zheng, Construction 6.6, common-field adjunction step 3
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: Zheng, Construction 6.6, common-field adjunction step 3. -/
 def counitFamily : StageSystem.Morphism.Hom
     ((rightSystem L R a b hb).comp L) (StageSystem.Morphism.id T) where
   τ i := (a i).counit
@@ -155,8 +150,7 @@ variable (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
   [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
 /-- Equality of the existing stage transition with the published rational scalar functor.
-Source: the common-field coefficient construction
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: the common-field coefficient construction. -/
 theorem commonStageTransition_eq (T : Scheme.{max u v})
     {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j) :
     (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T).T h =
@@ -166,8 +160,7 @@ theorem commonStageTransition_eq (T : Scheme.{max u v})
     i j h
 
 /-- Transport a scalar comparison across equal endpoint functors.
-Source: coefficient-stage identifications
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: coefficient-stage identifications. -/
 def commonComparisonCast
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     {F : C ⥤ D} {F' : C' ⥤ D'} {TX TX' : C ⥤ C'} {TY TY' : D ⥤ D'}
@@ -177,8 +170,7 @@ def commonComparisonCast
   exact q
 
 /-- Transporting both comparisons preserves their counit equation.
-Source: coefficient-stage identifications
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: coefficient-stage identifications. -/
 theorem commonComparisonCast_counit
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     {F : C ⥤ D} {G : D ⥤ C} {F' : C' ⥤ D'} {G' : D' ⥤ C'}
@@ -227,8 +219,7 @@ variable (A : RingStageAssembly.{u, v} l Ω D hl (f := f))
   (P : RationalStageAssembly.{u, v} l Ω D hl A)
 
 /-- The supplied left functor, typed with the published stage categories.
-Source: coefficient-stage identification
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: coefficient-stage identification. -/
 def rationalCommonF (c : Compactification f) (i : AlgebraicallyClosedCoefficients.Index l Ω) :
     GeneralAlgebraicallyClosedCoefficients.Stage l Ω X i ⥤
       GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y i := by
@@ -238,8 +229,7 @@ def rationalCommonF (c : Compactification f) (i : AlgebraicallyClosedCoefficient
   exact F
 
 /-- The supplied right functor, typed with the published stage categories.
-Source: coefficient-stage identification
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: coefficient-stage identification. -/
 def rationalCommonG (c : Compactification f) (i : AlgebraicallyClosedCoefficients.Index l Ω) :
     GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y i ⥤
       GeneralAlgebraicallyClosedCoefficients.Stage l Ω X i := by
@@ -249,8 +239,7 @@ def rationalCommonG (c : Compactification f) (i : AlgebraicallyClosedCoefficient
   exact G
 
 /-- The unchanged finite adjunction with the stage-category endpoint types.
-Source: coefficient-stage identification
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: coefficient-stage identification. -/
 def rationalCommonFiniteAdjunction (c : Compactification f)
     (i : AlgebraicallyClosedCoefficients.Index l Ω) :
     rationalCommonF A P c i ⊣ rationalCommonG A P c i := by
@@ -263,8 +252,7 @@ def rationalCommonFiniteAdjunction (c : Compactification f)
 attribute [local irreducible] rationalCommonF rationalCommonG rationalCommonFiniteAdjunction
 
 /-- The supplied rational scalar q, with stage-category endpoint types.
-Source: coefficient-stage identification
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: coefficient-stage identification. -/
 def rationalCommonRawQ (c : Compactification f)
     {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j) :
     rationalCommonF A P c i ⋙
@@ -281,8 +269,7 @@ def rationalCommonRawQ (c : Compactification f)
   exact q
 
 /-- The supplied rational scalar b, with stage-category endpoint types.
-Source: coefficient-stage identification
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: coefficient-stage identification. -/
 def rationalCommonRawB (c : Compactification f)
     {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j) :
     rationalCommonG A P c i ⋙
@@ -301,8 +288,7 @@ def rationalCommonRawB (c : Compactification f)
 attribute [local irreducible] rationalCommonRawQ rationalCommonRawB
 
 /-- The supplied left scalar map, on the actual stage-system transitions.
-Source: Zheng, Construction 6.6, scalar comparison
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: Zheng, Construction 6.6, scalar comparison. -/
 def rationalCommonQ (c : Compactification f)
     {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j) :
     (rationalCommonF A P c i) ⋙
@@ -330,8 +316,7 @@ def rationalCommonQ (c : Compactification f)
     (rationalCommonRawQ A P c h)
 
 /-- The supplied right scalar map, on the actual stage-system transitions.
-Source: Zheng, Construction 6.6, scalar comparison
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: Zheng, Construction 6.6, scalar comparison. -/
 def rationalCommonB (c : Compactification f)
     {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j) :
     (rationalCommonG A P c i) ⋙
@@ -474,8 +459,7 @@ private theorem rationalCommon_stage_counit (c : Compactification f)
 attribute [local irreducible] rationalCommonQ rationalCommonB
 
 /-- The normalized rational scalar maps obey the balanced tower equation.
-Source: Zheng, Construction 6.6; common-field descent step 1
-(blueprint: lem-sf-rational-common-scalar-coherence).
+Source: Zheng, Construction 6.6; common-field descent step 1.
 
 Proof: residue Tor identifies the finite-Tor integral subcategory with all integral
 constructibles. Every rational object is therefore the raw localization of an integral
@@ -530,8 +514,7 @@ theorem rational_common_scalar_coherence (c : Compactification f) :
     Functor.whiskerRight_app, Functor.whiskerLeft_app] using hn
 
 /-- The left functor family with exactly the supplied rational scalar maps.
-Source: Zheng, Construction 6.6, common-field descent step 2
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: Zheng, Construction 6.6, common-field descent step 2. -/
 def rationalCommonLeft (c : Compactification f) :
     (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).Morphism
       (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y) where
@@ -540,8 +523,7 @@ def rationalCommonLeft (c : Compactification f) :
   coh := rational_common_scalar_coherence A P c
 
 /-- The scalar counit equation survives the endpoint identifications.
-Source: Zheng, Construction 6.6, common-field descent step 3
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: Zheng, Construction 6.6, common-field descent step 3. -/
 theorem rationalCommon_counit (c : Compactification f)
     {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j)
     (M : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y i) :
@@ -577,8 +559,7 @@ theorem rationalCommon_counit (c : Compactification f)
     (rationalCommon_stage_counit A P c h) M
 
 /-- The inverse-q form of the rational scalar counit equation.
-Source: common-field adjunction step 3
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: common-field adjunction step 3. -/
 theorem rationalCommon_transpose (c : Compactification f)
     {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j)
     (M : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y i) :
@@ -594,8 +575,7 @@ theorem rationalCommon_transpose (c : Compactification f)
     Iso.inv_hom_id_app, Category.id_comp]
 
 /-- The right family obtained by the supplied invertible scalar counit transposes.
-Source: common-field adjunction step 3
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: common-field adjunction step 3. -/
 def rationalCommonRight (c : Compactification f) :
     (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).Morphism
       (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X) :=
@@ -605,8 +585,7 @@ def rationalCommonRight (c : Compactification f) :
     (rationalCommonB A P c) (rationalCommon_transpose A P c)
 
 /-- The compatible family of actual rational units.
-Source: common-field adjunction step 3
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: common-field adjunction step 3. -/
 def rationalCommonUnit (c : Compactification f) :
     StageSystem.Morphism.Hom
       (StageSystem.Morphism.id (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X))
@@ -616,8 +595,7 @@ def rationalCommonUnit (c : Compactification f) :
     (rationalCommonB A P c) (rationalCommon_transpose A P c)
 
 /-- The compatible family of actual rational counits.
-Source: common-field adjunction step 3
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: common-field adjunction step 3. -/
 def rationalCommonCounit (c : Compactification f) :
     StageSystem.Morphism.Hom
       ((rationalCommonRight A P c).comp (rationalCommonLeft A P c))
@@ -627,8 +605,7 @@ def rationalCommonCounit (c : Compactification f) :
     (rationalCommonB A P c) (rationalCommon_transpose A P c)
 
 /-- The adjunction on the literal pair categories, constructed from the finite triangles.
-Source: common-field adjunction step 3
-(blueprint: lem-sf-rational-common-scalar-coherence). -/
+Source: common-field adjunction step 3. -/
 def rationalCommonAdjunction (c : Compactification f) :
     (rationalCommonLeft A P c).functor ⊣ (rationalCommonRight A P c).functor :=
   StageSystem.Morphism.adjunction (rationalCommonLeft A P c) (rationalCommonRight A P c)

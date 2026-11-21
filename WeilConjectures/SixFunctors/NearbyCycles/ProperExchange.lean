@@ -20,16 +20,15 @@ the mate of the pullback exchange, which is the pasting of the squares of identi
 geometric generic fibres and of special fibres. Its component at `K` is therefore the composite
 (`NearbyCyclesModel.Hom.pushforwardExchange_app`)
 ```
-Li_N^* Rj_{N*} Lε_N^* Rf_* K ⟶ Li_N^* Rj_{N*} Rg_* Lε_M^* K      (base change of the ε-square)
-  ⟶ Li_N^* Rt_* Rj_{M*} Lε_M^* K                                (composition of direct images)
-  ⟶ Rf'_* Li_M^* Rj_{M*} Lε_M^* K                               (base change of the special fibres)
+Li_N^* Rj_{N*} Lε_N^* Rf_* K ⟶ Li_N^* Rj_{N*} Rg_* Lε_M^* K (base change of the ε-square)
+  ⟶ Li_N^* Rt_* Rj_{M*} Lε_M^* K (composition of direct images)
+  ⟶ Rf'_* Li_M^* Rj_{M*} Lε_M^* K (base change of the special fibres)
 ```
 as in the proof of blueprint `prose-E-03` (2). The middle arrow
 (`NearbyCyclesModel.Hom.lowerStarExchange`) is the iterated mate of the pullback comparison of the
 square of geometric generic fibres, hence invertible. So `χ_f` is invertible at `K` as soon as the
 two base change morphisms are
 (`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isIso_baseChangeMap`).
-
 -/
 
 @[expose] public section

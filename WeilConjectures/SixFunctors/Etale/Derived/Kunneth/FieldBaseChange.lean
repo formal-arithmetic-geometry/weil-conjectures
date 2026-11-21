@@ -68,9 +68,7 @@ base-change property universally, for every coefficient ring.
 
 After the base change to the perfect closure of `K` and the passage to the reduction, both
 universal homeomorphisms which do not change the étale sites, the morphism is flat, locally of
-finite presentation and has geometrically reduced fibres (blueprint
-`lemma-kunneth-finite-direct-image--1`), so that the degree-zero base change theorem (blueprint
-`lemma-kunneth-finite-direct-image--1`, `AlgebraicGeometry.Etale.universalBaseChangeProperty_zero`)
+finite presentation and has geometrically reduced fibres, so that the degree-zero base change theorem
 applies. -/
 theorem Etale.universalBaseChangeProperty_zero_of_field {K : Type u} [Field K]
     {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] :
@@ -101,8 +99,7 @@ cartesian square `Y = X' ×_{S'} T` is an isomorphism.
 The proof is an induction on `q`: degree zero is
 `AlgebraicGeometry.Etale.universalBaseChangeProperty_zero_of_field`, and a first failure in
 degree `q ≥ 1` would produce, by
-`AlgebraicGeometry.Etale.exists_isPullback_not_isZero_higherDirectImage` (blueprint
-`lemma-kunneth-finite-direct-image--1`), a nonzero higher direct image which vanishes by
+`AlgebraicGeometry.Etale.exists_isPullback_not_isZero_higherDirectImage`, a nonzero higher direct image which vanishes by
 `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_isAlgClosed`. -/
 @[stacks 0F1I]
 theorem Etale.universalBaseChangeProperty_of_field {K : Type u} [Field K] {X : Scheme.{u}}

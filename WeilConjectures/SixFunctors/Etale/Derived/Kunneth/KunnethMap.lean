@@ -30,9 +30,9 @@ schemes
 
 ```
   W --q--> Y
-  |        |
-  p        g
-  v        v
+  | |
+  p g
+  v v
   X --f--> S
 ```
 
@@ -47,12 +47,12 @@ This file also introduces the constant complex functor `D(Λ) ⥤ D(X_ét, Λ)` 
 inputs of the Künneth formula which do not depend on the base change theorems of
 `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary` (Stacks, Section 0F0Y and
 following): global generation and cohomology over a separably closed point, and the tensor
-product with a constant complex (`proposition-open-direct-image-preserves-finite`).
+product with a constant complex.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.kunnethMap` (`definition-kunneth-map--1`): the Künneth map.
-- `AlgebraicGeometry.Etale.constantFunctor` (`proposition-open-direct-image-preserves-finite`):
+- `AlgebraicGeometry.Etale.constantFunctor`:
 `K ↦ K_X`.
 -/
 
@@ -195,7 +195,7 @@ lemma kunnethMap_eq (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c :
   rw [reassoc_of% hn]
   simp only [Functor.map_comp, Functor.id_obj]
 
-/-- Blueprint `lem-kun-kunneth-map-natural`: the Künneth map is natural in both variables. -/
+/-- The Künneth map is natural in both variables. -/
 @[reassoc]
 lemma kunnethMap_naturality (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c : W ⟶ S)
     (hp : p ≫ f = c) (hq : q ≫ g = c)
@@ -255,7 +255,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: the derived tensor product `K ⊗ᴸ -`
+/-- The derived tensor product `K ⊗ᴸ -`
 with a fixed complex commutes with direct sums, being left adjoint to `RHom(K, -)`
 (`AlgebraicGeometry.Etale.derivedTensorHomAdjunction`). -/
 instance preservesColimitsOfShape_derivedTensor_obj
@@ -290,7 +290,7 @@ section Constant
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: constant sheaves and constant
+/-- Constant sheaves and constant
 complexes.
 
 The constant complex functor `D(Λ) ⥤ D(X_ét, Λ)`, `K ↦ K_X`: the functor induced on derived
@@ -363,7 +363,7 @@ def IsGloballyGenerated (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology (Module
     Prop :=
   Epi (globalSectionsEvaluation Λ X F)
 
-/-- Blueprint `lem-kun-pullback-constant`: the inverse image of a constant complex is the
+/-- The inverse image of a constant complex is the
 constant complex, `Lf^*(C_Y) ≅ C_X`. -/
 noncomputable def constantFunctorCompLeftDerivedUpperStarIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     constantFunctor Λ Y ⋙ L((f)^*[ModuleCat.{u + 1} Λ]) ≅ constantFunctor Λ X :=
@@ -592,7 +592,7 @@ theorem hasFiniteCohomologicalDimensionMorphism_of_isSepClosed {X : Scheme.{u}}
     rw [Γ.map_id, Γ.map_zero]
     exact hz.eq_of_src _ _))
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: tensor product with a constant
+/-- Tensor product with a constant
 complex.
 
 Let `k` be a separably closed field, `Λ` a torsion ring, and `a : X ⟶ Spec k` a morphism from a
@@ -680,7 +680,7 @@ instance isIso_rightDerivedLowerStarProjectionMap_app_app
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
 /-- `RΓ(X, E) ⊗ᴸ RΓ(Spec k, C) ≅ RΓ(X, E ⊗ᴸ La_X^* C)` for a finite-type scheme `X` over a
 separably closed field `k`: the tensor product with a constant complex
-(`proposition-open-direct-image-preserves-finite`), read in `D(Λ)` through `RΓ(Spec k, -)`. -/
+, read in `D(Λ)` through `RΓ(Spec k, -)`. -/
 theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_leftDerivedUpperStar
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

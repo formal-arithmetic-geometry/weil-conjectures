@@ -17,7 +17,6 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # Fixed-scalar tensor pullback on complexes
 
 Source: Stacks Tags 00YV and 07A6.
-(blueprint: lem-sf-finite-scalar-fixed-tensor-pullback-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -157,7 +156,6 @@ private theorem representative_normalization
 
 /-- The native fixed-coefficient pullback comparison satisfies the representative equation.
 Source: Stacks Tag 07A4, the defining left-derived tensor square.
-(blueprint: lem-sf-finite-scalar-fixed-tensor-pullback-normalization).
 
 Proof: use the generic complex tensor comparison square and the inverse localization
 tensorators. The assumed factor-counit equation identifies its unary factors.
@@ -215,8 +213,7 @@ theorem finiteScalarTensorPullback_normalizationForCoefficients
   exact representative_normalization S hS T hT (ProEtale.upperStar B p) f hf₀ P Q hp hq hp' hq'
 
 /-- The exact fixed-scalar pullback factors are the left-derived counit on complexes.
-Source: the exact-functor left-derived counit formula, Stacks Tag 07A4.
-(blueprint: lem-sf-finite-scalar-fixed-tensor-pullback-normalization). -/
+Source: the exact-functor left-derived counit formula, Stacks Tag 07A4. -/
 theorem finiteScalarFixedPullbackFactors_eq_counit
     (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)
     (Z : CochainComplex

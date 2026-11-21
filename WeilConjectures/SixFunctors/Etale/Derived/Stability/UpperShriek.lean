@@ -55,7 +55,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
 /-! #### The exceptional inverse image -/
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for the exceptional inverse
+/-- Preservation for the exceptional inverse
 image.
 
 Clause (ii): for a closed immersion `i : Z ⟶ T` into a finite-type `k`-scheme of dimension
@@ -120,7 +120,7 @@ lemma isConstructibleSheaf_and_flat_of_sheafFiber_iso {X : Scheme.{u}}
   exact ObjectProperty.prop_of_iso _ ((GrothendieckTopology.Point.uliftSheafFiberIso _ _).app L ≪≫
     (hL Ω s).some).symm (ObjectProperty.prop_unit (ObjectProperty.flat (A := ModuleCat.{u + 1} Λ)))
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for the exceptional inverse
+/-- Preservation for the exceptional inverse
 image.
 
 Clause (iii): for `f` smooth of pure relative dimension `d` and a finite `Λ` whose exponent is
@@ -228,7 +228,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_chart {U V Y : Schem
   rw [hb] at h₄
   exact h₄
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for the exceptional inverse
+/-- Preservation for the exceptional inverse
 image.
 
 Clause (iv), with its constants: let `f : X ⟶ Y` be a separated finite-type morphism admitting
@@ -319,7 +319,7 @@ theorem exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologica
   exact ⟨⟨hbc, _root_.DerivedCategory.TStructure.t.isGE_of_ge _ _ (a - 2 * n x) (by omega),
     hc₂⟩, hta.mono (by omega) le_rfl⟩
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for the exceptional inverse
+/-- Preservation for the exceptional inverse
 image.
 
 Clause (iv), dimension-free form with the shift forgotten: every separated finite-type `f`
@@ -342,7 +342,7 @@ theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek {X Y : 
   obtain ⟨⟨hbc, hconc⟩, hta⟩ := hD d hd a b K hK
   exact ⟨⟨hbc, hconc.mono (by omega) (by omega)⟩, hta.mono (by omega) (by omega)⟩
 
-/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
+/-- Stability of the constructible finite-Tor
 subcategories.
 
 Clause (v): `Rf^! : Dctf(Y, Λ) ⥤ Dctf(X, Λ)` is defined for every separated finite-type `f`

@@ -178,8 +178,7 @@ private def compositors (o : Operations l E) : Compositors l E o where
 /-- Existence of the ordinary/derived operation models, without proper/open
 pasting or a tensor composition assertion.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI, 03D8, 0941;
-strict-system realization steps 1 and 2 of fix-prop-coherence
-(blueprint: lem-sf-integral-system-operation-models).
+strict-system realization steps 1 and 2 of fix-prop-coherence.
 
 Proof: on the ringed sequence site, derive the ordinary direct image by K-injective
 resolutions. Its exact left adjoint descends with the standard complex factorization;

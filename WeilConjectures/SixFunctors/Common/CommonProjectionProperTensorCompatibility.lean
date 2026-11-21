@@ -11,8 +11,6 @@ import WeilConjectures.SixFunctors.Common.CommonProjectionOpenFactor
 import WeilConjectures.SixFunctors.Common.CommonProjectionPullbackTensorCompatibility
 
 /-! # Coefficient comparison of individual common-stage projection maps
-
-Source: thm-sf-pf-field.proof.md, Compatibility and the common coefficient-field paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -139,10 +137,6 @@ set_option backward.isDefEq.respectTransparency false in
 projection through inclusion of a finite coefficient field. The compact-support square
 holds for every f, and the proper square holds for proper f. This compares maps;
 it assumes no compactification, composition, pentagon or proper projection equation.
-
-Source: latest blueprint, sec-six-functors-basics/sk-thm-sf-pf-field,
-thm-sf-pf-field.proof.md, Compatibility and the common coefficient-field paragraph.
-(blueprint: lem-sf-common-projection-proper-tensor-compatibility).
 
 Proof: normalize the rational and common tensor functors using their recorded tensor
 normalizations. For two included objects use the inverse of the included

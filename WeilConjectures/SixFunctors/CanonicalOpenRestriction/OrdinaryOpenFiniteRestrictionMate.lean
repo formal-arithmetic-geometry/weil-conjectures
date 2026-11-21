@@ -225,13 +225,13 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] (o : Operations l E j)
 
 /-- The finite open adjunction, retaining both coefficient-equivalence transformations.
-Source: Stacks 03DJ (blueprint: lem-sf-ordinary-open-finite-restriction-mate-invertible). -/
+Source: Stacks 03DJ. -/
 abbrev finiteOpenAdjunction (n : ℕ) := (o.finite n).toAdjunction.comp
   (SheafOfModules.localizedSystemAdjunction.{t+1, t, max u (t+1)}
     (rings l E X n) (openObject j))
 
 /-- The actual mate of inverse extension tensor comparison.
-Source: Stacks 0E8I (blueprint: lem-sf-ordinary-open-finite-restriction-mate-invertible). -/
+Source: Stacks 0E8I. -/
 def finiteRestrictionMate (tensor : TensorComparison l E j o) (n : ℕ) :
     restriction l E j o ⋙ scalarReductionExtension l E U n ⟶
       scalarReductionExtension l E X n ⋙ finiteRestriction l E j o n :=
@@ -239,7 +239,7 @@ def finiteRestrictionMate (tensor : TensorComparison l E j o) (n : ℕ) :
     (TwoSquare.mk _ _ _ _ (tensor.ordinary n).inv))
 
 /-- The mate has the prescribed unit, inverse-tensor, counit word.
-Source: Stacks 0E8I (blueprint: lem-sf-ordinary-open-finite-restriction-mate-invertible). -/
+Source: Stacks 0E8I. -/
 theorem finiteRestrictionMate_app (tensor : TensorComparison l E j o) (n : ℕ)
     (N : scalarReductionSource l E X) :
     (finiteRestrictionMate l E j o tensor n).app N =
@@ -255,7 +255,6 @@ theorem finiteRestrictionMate_app (tensor : TensorComparison l E j o) (n : ℕ)
 /-- The generator-normalized finite restriction mate is invertible.
 Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I,
 lemma-j-shriek-and-tensor; finite part of the ordinary quotient argument.
-(blueprint: lem-sf-ordinary-open-finite-restriction-mate-invertible).
 
 Proof: the open object is subterminal because j is a monomorphism. On its
 slice the extension presheaf has precisely one summand at each object, naturally

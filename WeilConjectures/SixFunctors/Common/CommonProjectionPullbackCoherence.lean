@@ -25,10 +25,7 @@ variable (l : ℕ) [Fact l.Prime]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
 /-- Coherence of the prescribed normalized pullback transitions.
-Source: common-stage pullback normalization in the blueprint.
-(blueprint: lem-sf-common-projection-pullback-stage-coherence).
-Proof: take the coherence proof from normalized pullback descent. This chooses only
-proof data, and leaves the prescribed pullback functors and transition maps fixed. -/
+ -/
 theorem commonProjectionPullbackCoherence :
     StageSystem.pairFunctorCoherent (stageSystem l Ω Y) (stageSystem l Ω X)
       (fun L ↦ rationalDerivedPullback l

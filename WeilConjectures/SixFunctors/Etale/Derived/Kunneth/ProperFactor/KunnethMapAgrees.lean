@@ -19,7 +19,7 @@ symmetry of `⊗ᴸ` and of the projection map of `q`
 (`AlgebraicGeometry.Etale.tensorBaseChangeMap_eq_projectionMap`). Hence the Künneth map
 `κ_{E,K}` (`AlgebraicGeometry.Etale.kunnethMap`) is the composite of the canonical maps of the
 blueprint: the tensor product with a constant complex
-(`proposition-open-direct-image-preserves-finite`), proper base change
+, proper base change
 (`theorem-results-from-etale-theory--1`) and the projection formula for the proper projection
 (`proposition-proper-direct-image-constructible-complexes--9`)
 (`AlgebraicGeometry.Etale.kunnethMap_eq_of_isPullback`, blueprint
@@ -118,7 +118,7 @@ lemma leftDerivedUpperStarTensorComparison_comp_derivedTensor {T S R : Scheme.{u
   exact this
 
 omit [Etale.UpperStarPreservesFlat A] in
-/-- The composite `L(a ≫ b)^* ≅ ... ≅ L(a' ≫ b')^*` of two composition isomorphisms through a
+/-- The composite `L(a ≫ b)^* ≅ .. ≅ L(a' ≫ b')^*` of two composition isomorphisms through a
 common composite `c = a ≫ b = a' ≫ b'` does not depend on the choice of the morphism `c`. -/
 @[reassoc]
 lemma leftDerivedUpperStarComp_inv_app_comp_hom_app_congr {T S S' R : Scheme.{u}} (a : T ⟶ S)

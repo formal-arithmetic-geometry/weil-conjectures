@@ -86,8 +86,7 @@ Only field operations and field comparisons are outputs; the supplied finite/int
 adjunctions and ring scalar maps are not reconstructed or replaced.
 Source: Zheng, Constructions 6.2 and 6.6, after Lemma 5.22 and Proposition 5.24;
 coefficient construction step 5 and
-its raw-localization and representative-arrow normalizations
-(blueprint: lem-sf-field-stage-completion).
+its raw-localization and representative-arrow normalizations.
 
 Proof: fix a compactification. The integralLeft identification transports the given left
 functor and adjunction to the prescribed integral compact support. That functor is linear

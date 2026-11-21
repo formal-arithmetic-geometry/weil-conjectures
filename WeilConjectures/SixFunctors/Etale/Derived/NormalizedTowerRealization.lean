@@ -103,8 +103,8 @@ reduction at every level `n` is `e_n`: it commutes with the projections `π^M_n`
 
 ```
 R lim_n Res M_n ──── φ ────▶ R lim_n Res N_n
-      │ π^M_n                      │ π^N_n
-      ▼                            ▼
+      │ π^M_n │ π^N_n
+      ▼ ▼
    Res M_n ─────── Res e_n ─────▶ Res N_n
 ```
 -/

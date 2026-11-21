@@ -45,7 +45,6 @@ underlying complexes commuting with the two `φ`s. These form the category
 derived pullback to the small category `Dctf(X, Λ)`, which is available by
 `proposition-six-operations-dctf` (i); see
 `WeilConjectures.SixFunctors.Etale.Derived.Stability`.
-
 -/
 
 @[expose] public section
@@ -72,7 +71,7 @@ namespace Etale
 
 variable [UpperStarPreservesFlat A] {X : Scheme.{u}} (g : X ≅ X)
 
-/-- Blueprint `definition-weil-structure`: Strict Weil complexes.
+/-- Strict Weil complexes.
 
 A *strict Weil complex* at `Λ` on `X` is a pair `(K, φ)` consisting of an object `K` of
 `Dctf(X, Λ)` — a bounded constructible complex of finite Tor amplitude — together with an
@@ -93,17 +92,17 @@ structure WeilComplex where
 
 namespace WeilComplex
 
-/-- Blueprint `definition-weil-structure`: Strict Weil complexes.
+/-- Strict Weil complexes.
 
 A morphism of strict Weil complexes `(K, φ_K) ⟶ (L, φ_L)` is a morphism `u : K ⟶ L` of the
 underlying objects of `Dctf(X, Λ)` making the square
 
 ```
   Lg^* K --Lg^* u--> Lg^* L
-     |                  |
-    φ_K                φ_L
-     v                  v
-     K -------u------>  L
+     | |
+    φ_K φ_L
+     v v
+     K -------u------> L
 ```
 
 commute. -/
@@ -115,7 +114,7 @@ structure Hom (K L : WeilComplex A g) where
   comm : K.frobenius.hom ≫ hom =
     (DerivedCategoryFiniteTor.leftDerivedUpperStar A g.hom).map hom ≫ L.frobenius.hom
 
-/-- Blueprint `definition-weil-structure`: Strict Weil complexes.
+/-- Strict Weil complexes.
 
 The category `D^b_{ctf,W}(X, Λ)` of strict Weil complexes: identities and composition are
 computed on the underlying objects of `Dctf(X, Λ)`, and both are readily checked to be
@@ -136,7 +135,7 @@ lemma id_hom (K : WeilComplex A g) : (𝟙 K : K ⟶ K).hom = 𝟙 K.obj := rfl
 lemma comp_hom {K L M : WeilComplex A g} (f : K ⟶ L) (h : L ⟶ M) :
     (f ≫ h).hom = f.hom ≫ h.hom := rfl
 
-/-- Blueprint `definition-weil-structure`: Strict Weil complexes.
+/-- Strict Weil complexes.
 
 The forgetful functor `D^b_{ctf,W}(X, Λ) ⥤ Dctf(X, Λ)` sending a strict Weil complex
 `(K, φ)` to the underlying object `K` and forgetting the Weil structure. -/
@@ -150,7 +149,7 @@ section HomGroups
 
 variable {K : Type u} [Field K] [IsAlgClosed K] {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `definition-weil-structure`: Strict Weil complexes.
+/-- Strict Weil complexes.
 
 The Hom-groups of strict Weil complexes are not Ext groups of Weil sheaves. On a point
 `Y ≅ Spec K`, `K` algebraically closed, a strict Weil complex `M` with underlying complex `Λ`
@@ -168,7 +167,7 @@ lemma WeilComplex.map_hom_eq_zero_of_iso_unit {Y : Scheme.{u}} (e : Y ≅ Spec (
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀]
 
-/-- Blueprint `definition-weil-structure`: Strict Weil complexes.
+/-- Strict Weil complexes.
 
 The Hom-groups of `D^b_{ctf,W}(X, Λ)` are not Ext groups of Weil sheaves: on the geometric
 fiber `X = Spec k̄` of the point `Spec k₀`, with its geometric-Frobenius automorphism `g_γ`,

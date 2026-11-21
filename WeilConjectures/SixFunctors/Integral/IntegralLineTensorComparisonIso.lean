@@ -51,8 +51,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (X : AlgebraicGeometry.Scheme.{t})
 
 /-- The completion comparison is invertible on a derived-complete object.
-Source: Bhatt--Scholze, Proposition 3.5.1
-(blueprint: lem-sf-integral-line-tensor-comparison-iso).
+Source: Bhatt--Scholze, Proposition 3.5.1.
 
 Proof: take a flat-term K-flat representative P of C. The identity-extension
 specialization of finiteFreeCompletedScalarComparison makes the prescribed quotient

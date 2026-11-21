@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
+/-- Perfectness of compact cohomology and of
 geometric stalks.
 
 **Compactly supported cohomology of a torsion complex is perfect.** Let `Λ` be a Noetherian ring,

@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdi
 /-! # Section reconstruction of the finite closure transition
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-finite-condensed-closure-section-transition)
 -/
 
 @[expose] public noncomputable section
@@ -156,7 +155,6 @@ of the ordinary closure comparison, before restriction to integral objects.
 
 Source: BS 6.8.2 and 6.8.14(2), the section-reconstruction part of the finite
 coefficient comparison.
-(blueprint: lem-sf-finite-condensed-closure-section-transition).
 
 Proof in words: expand finiteCondensedClosureTransition and its finite scalar
 comparison. The fully faithful encoding cancellation gives the specified scalar

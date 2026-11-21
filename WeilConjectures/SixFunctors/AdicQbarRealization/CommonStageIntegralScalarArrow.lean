@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.Common.CommonStagePullbackNormalizedDescent
 /-! # Common-stage coefficient arrows under pullback
 
 Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: lem-sf-common-stage-integral-scalar-arrow)
 -/
 
 @[expose] public noncomputable section
@@ -109,7 +108,6 @@ private theorem stageScalarArrow_heq
 /-- Pullback of a literal coefficient arrow is the localized integral scalar map,
 with the prescribed endpoint transports.
 Source: BS Remark 6.8.15; normalized common-stage pullback and rational scalar descent.
-(blueprint: lem-sf-common-stage-integral-scalar-arrow).
 
 Proof: use normalized stage-system descent. A stage morphism maps isoToStage to
 the target isoToStage followed by its transition comparison. That comparison

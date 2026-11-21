@@ -17,7 +17,6 @@ import Mathlib.Data.Nat.Prime.Infinite
 /-! # Geometric preservation for compatible open reduction models
 
 Source: Bhatt--Scholze, Lemma 6.5.8(2),(3); Stacks Tags 03DI and 09AH.
-(blueprint: lem-sf-open-quotient-model-geometry).
 -/
 
 @[expose] public noncomputable section
@@ -109,7 +108,6 @@ operations. This concerns the geometric part of open reduction, independently of
 augmentations and normalized tensor chain maps.
 
 Source: Bhatt--Scholze, Lemma 6.5.8(2),(3), and Stacks Tags 03DI, 09AH.
-(blueprint: lem-sf-open-quotient-model-geometry).
 
 Proof: at each positive coefficient level identify the ringed-slice open extension
 with intrinsic extension by zero through the constant-coefficient ring comparison.

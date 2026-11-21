@@ -71,8 +71,7 @@ public import WeilConjectures.SmoothPurity.PrimitiveCounit.PrimitiveCounitEvalua
 /-! # Quotient-limit realization and primitive coherent-counit comparisons
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0941, lemma-derived-limit-is-ok,
-with the strict Roos normalization and the coherent coefficient-system adjunction
-(blueprint: lem-pur-completed-primitive-counit-comparison).
+with the strict Roos normalization and the coherent coefficient-system adjunction.
 
 Natural number n means positive coefficient exponent n+1. All systems are derived
 before evaluation, and the site has independent object and morphism universes t+1 and t.
@@ -108,12 +107,12 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] Functor.leftAdjoint inverseEvaluation inverse direct
 
 /-- Termwise scalar restriction of a whole complex of systems.
-Source: Stacks 0941 (blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 0941. -/
 abbrev restrictComplex (W : Scheme.{t}) :=
   (coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)
 
 /-- Restriction evaluation on complexes through the recorded functor equality.
-Source: Stacks 0941 (blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 0941. -/
 def restrictEvaluation (W : Scheme.{t})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) (n : ℕ) :
     ((restrictComplex l E W).obj C).asFunctor.obj (op n) ≅
@@ -123,7 +122,7 @@ def restrictEvaluation (W : Scheme.{t})
     (eqToIso (coefficientSequenceRestriction_evaluation l E W n)) (.up ℤ)).app C
 
 /-- The actual termwise-limit identification for a complex of strict towers.
-Source: Stacks 0941 (blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 0941. -/
 def limitComplexIso (W : Scheme.{t})
     (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :
     limit I.asFunctor ≅
@@ -134,7 +133,7 @@ def limitComplexIso (W : Scheme.{t})
     HomologicalComplex.isLimitConeOfHasLimitEval I.asFunctor⟩
 
 /-- The two existing Roos presentations are the same shifted product cone.
-Source: Stacks 0941 (blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 0941. -/
 def roosBridge (W : Scheme.{t})
     (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :
     integralOperationsRoosFunctor.obj Z.asFunctor ≅ roosF.obj Z := Iso.refl _
@@ -159,13 +158,13 @@ attribute [local irreducible] coefficientConstantTowerProjection
   unrestrictedIntegralReductionExistence
 
 /-- The natural Roos comparison type, kept folded in the realization record.
-Source: Stacks 0941 (blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 0941. -/
 def RoosComparison (W : Scheme.{t}) :=
   (roosF (A := scalarReductionSource l E W)) ⋙ DerivedCategory.Q ≅
     DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E W
 
 /-- The precise K-injective normalization of a proposed Roos comparison.
-Source: Stacks 0941 (blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 0941. -/
 def RoosResolution (W : Scheme.{t})
     (comparison : RoosComparison l E W) : Prop :=
   ∀ (Z I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)
@@ -180,7 +179,7 @@ def RoosResolution (W : Scheme.{t})
             (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W) I).inv
 
 /-- Compatibility with every actual finite limit projection.
-Source: Stacks 0941 (blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 0941. -/
 def RoosProjection (W : Scheme.{t}) (comparison : RoosComparison l E W) : Prop :=
   ∀ (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) (n : ℕ),
     comparison.hom.app Z ≫
@@ -199,8 +198,7 @@ structure NormalizedComparison (T : Type v) (P Q : T → Prop) where
 
 /-- One natural projection-compatible Roos realization, normalized on every resolution.
 The actual inclusion roosι has zero shifted coordinate, as defined in StrictRoosModel.
-Source: Stacks 0941 and lem-weil-strict-roos-comparison
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 0941 and lem-weil-strict-roos-comparison. -/
 abbrev RoosRealization (W : Scheme.{t}) : Type _ :=
   NormalizedComparison (RoosComparison l E W)
     (RoosProjection l E W) (RoosResolution l E W)
@@ -222,8 +220,7 @@ end RoosRealization
 attribute [local semireducible] RoosComparison coefficientConstantTowerLimit
 
 /-- The tensor primitive arrow is realization followed by the image of both counits.
-Source: the beta_T formula of the node; Stacks 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: the beta_T formula of the node; Stacks 0941. -/
 def tensorBeta (W : Scheme.{t}) (S : CoefficientDerivedSystemReduction l E W)
     (r : integralCompletedTensor l E W ≅
       S.reduction.prod S.reduction ⋙ S.systemClosed.tensor ⋙ coefficientSequenceLimit l E W)
@@ -235,8 +232,7 @@ def tensorBeta (W : Scheme.{t}) (S : CoefficientDerivedSystemReduction l E W)
           (S.adjunction.counit.app N)))
 
 /-- The geometric primitive arrow is realization followed by the image of the counit.
-Source: the beta_F formula of the node; Stacks 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: the beta_F formula of the node; Stacks 0941. -/
 def pullBeta {X Y : Scheme.{t}} (f : X ⟶ Y)
     (S : CoefficientDerivedSystemReduction l E Y)
     (r : integralDerivedPullback l E f ≅
@@ -247,8 +243,7 @@ def pullBeta {X Y : Scheme.{t}} (f : X ⟶ Y)
       ((pull l E f).map (S.adjunction.counit.app A))
 
 /-- The tensor representative comparison in the derived category of restricted towers.
-Source: Stacks 07A4, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 07A4, 0941. -/
 def tensorRestrictionIso (W : Scheme.{t}) (S : CoefficientDerivedSystemReduction l E W)
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ)
     (C D : CochainComplex (coefficientSequenceModules l E W) ℤ)
@@ -274,8 +269,7 @@ def tensorRestrictionIso (W : Scheme.{t}) (S : CoefficientDerivedSystemReduction
     (coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.app _
 
 /-- The geometric representative comparison in the derived category of restricted towers.
-Source: Stacks 03D2, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 03D2, 0941. -/
 def pullRestrictionIso {X Y : Scheme.{t}} (f : X ⟶ Y)
     (S : CoefficientDerivedSystemReduction l E Y)
     (P : CochainComplex (scalarReductionSource l E Y) ℤ)
@@ -291,8 +285,7 @@ def pullRestrictionIso {X Y : Scheme.{t}} (f : X ⟶ Y)
 
 /-- The finite tensor presentation is the actual scalar restriction of the total tensor.
 The map is the identity, retaining the recorded scalar extension and its quotient maps.
-Source: Stacks 06YY, 07A4, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 06YY, 07A4, 0941. -/
 def finiteTensorBridge (W : Scheme.{t}) (n : ℕ)
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :
     ((scalarReductionRestriction l E W n).mapHomologicalComplex (.up ℤ)).obj
@@ -330,8 +323,7 @@ attribute [local irreducible] integralOperationsTensorLevel coefficientTotalTens
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The complex inverse-image evaluation induced by the unit-normalized ordinary one.
-Source: Stacks 03D3, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 03D3, 0941. -/
 def inverseComplexEvaluation {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
     (inverse l E f).mapHomologicalComplex (.up ℤ) ⋙
       (coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ) ≅
@@ -356,8 +348,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- Tensor realization on every good pair uses the prescribed strict quotient tower.
 The component formula for z pins its pure tensors through the existing ordinary
 coefficient evaluation comparison and the canonical finite tensor presentation.
-Source: Stacks 0941, proof steps 1--3 of the node
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 0941, proof steps 1--3 of the node. -/
 def TensorModel (W : Scheme.{t}) (S : CoefficientDerivedSystemReduction l E W)
     (ρ : RoosRealization l E W)
     (r : integralCompletedTensor l E W ≅
@@ -406,8 +397,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Geometric realization on good representatives uses the actual pullback transitions.
 Its strict tower comparison is fixed by the ordinary unit-normalized component maps.
-Source: Stacks 0941, proof steps 1--3 of the node
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+Source: Stacks 0941, proof steps 1--3 of the node. -/
 def PullModel {X Y : Scheme.{t}} (f : X ⟶ Y)
     (S : CoefficientDerivedSystemReduction l E Y) (ρ : RoosRealization l E X)
     (r : integralDerivedPullback l E f ≅

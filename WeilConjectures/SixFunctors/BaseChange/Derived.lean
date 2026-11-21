@@ -41,9 +41,6 @@ Finally, `AlgebraicGeometry.Etale.IsBaseChangeIso A f` is the property that the 
 change map is an isomorphism for every cartesian square on `f`, and
 `AlgebraicGeometry.Etale.IsBaseChangeIsoSheaf A f` the corresponding property of the underived
 map.
-(blueprint: `definition-derived-base-change-map`, `prose-04-06`,
-`def:weil-pbc-property`)
-
 -/
 
 @[expose] public section
@@ -129,8 +126,7 @@ lemma Etale.baseChangeMapHomotopyPlus_app (sq : CommSq g' f' f g)
 /-- **The derived base change map** `g^* R f_* ⟶ R f'_* g'^*` on the bounded below derived
 categories, as a natural transformation `R f_*⁺ ⋙ D g^*⁺ ⟶ D g'^*⁺ ⋙ R f'_*⁺`: the natural
 transformation out of the right derived functor `R f_*⁺ ⋙ D g^*⁺` of `f_* ⋙ Qh ⋙ D g^*⁺`
-induced by `AlgebraicGeometry.Etale.baseChangeMapHomotopyPlus`.
-(blueprint: `definition-derived-base-change-map`) -/
+induced by `AlgebraicGeometry.Etale.baseChangeMapHomotopyPlus`. -/
 noncomputable def Etale.derivedBaseChangeMapPlus (sq : CommSq g' f' f g) :
     (f)_*[A].rightDerivedFunctorPlus ⋙ ((g)^*[A]).mapDerivedCategoryPlus ⟶
       ((g')^*[A]).mapDerivedCategoryPlus ⋙ (f')_*[A].rightDerivedFunctorPlus :=
@@ -143,8 +139,7 @@ bounded below complex `K` of sheaves on `X`, the composite of `D g^*⁺` of the 
 `f_* K ⟶ R f_*⁺ K` with the derived base change map is the levelwise underived base change
 map followed by the unit `f'_* g'^* K ⟶ R f'_*⁺ (g'^* K)`, modulo the isomorphisms
 `Functor.mapDerivedCategoryPlusFactorsh`. In particular, if `K` is a bounded below complex of
-injectives, this computes the derived base change map on `K`.
-(blueprint: `prose-04-06`) -/
+injectives, this computes the derived base change map on `K`. -/
 @[reassoc]
 lemma Etale.derivedBaseChangeMapPlus_fac_app (sq : CommSq g' f' f g)
     (K : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology A)) :
@@ -166,8 +161,7 @@ omit [HasSmallSiteSheafify A] in
 /-- **Uniqueness of the derived base change map**: a natural transformation
 `R f_*⁺ ⋙ D g^*⁺ ⟶ D g'^*⁺ ⋙ R f'_*⁺` satisfying the formula
 `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app` on every bounded below complex is
-the derived base change map. (blueprint: `lemma-identity-pasting`)
-(blueprint: `prose-04-06`) -/
+the derived base change map. -/
 lemma Etale.derivedBaseChangeMapPlus_ext (sq : CommSq g' f' f g)
     (δ : (f)_*[A].rightDerivedFunctorPlus ⋙ ((g)^*[A]).mapDerivedCategoryPlus ⟶
       ((g')^*[A]).mapDerivedCategoryPlus ⋙ (f')_*[A].rightDerivedFunctorPlus)
@@ -296,13 +290,12 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- **The proper base change property** for the coefficients `A`: for every cartesian square
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
+  | |
+  f' f
+  ↓ ↓
   Y' --g---> Y
 ```
-the derived base change map `g^* Rf_* ⟶ Rf'_* g'^*` on `D⁺` is an isomorphism.
-(blueprint: `def:weil-pbc-property`) -/
+the derived base change map `g^* Rf_* ⟶ Rf'_* g'^*` on `D⁺` is an isomorphism. -/
 class Etale.IsBaseChangeIso : Prop where
   isIso : ∀ {X' Y' : Scheme.{u}} (g' : X' ⟶ X) (f' : X' ⟶ Y') (g : Y' ⟶ Y)
     (sq : IsPullback g' f' f g), IsIso (Etale.derivedBaseChangeMapPlus A sq.toCommSq)

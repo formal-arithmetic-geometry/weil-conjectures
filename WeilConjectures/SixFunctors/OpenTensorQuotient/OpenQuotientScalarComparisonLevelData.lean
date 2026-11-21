@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.OpenTensorQuotient.OpenQuotientScalarComparis
 /-! # Finite-level data for the strict open scalar comparison
 
 Source: Stacks Project, Tags 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-comparison-level-data).
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +26,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- A family of finite-level scalar comparison isomorphisms, with their
 component formula and compatibility with every quotient transition.
-Source: Stacks Tags 0E8I and 0941; degreewise comparison and transition coherence.
-(blueprint: lem-sf-open-quotient-scalar-comparison-level-data). -/
+Source: Stacks Tags 0E8I and 0941; degreewise comparison and transition coherence. -/
 structure ScalarComparisonLevelData
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o)
@@ -55,8 +53,7 @@ structure ScalarComparisonLevelData
 /-- The finite-level comparison data can be constructed from the normalized finite
 comparison and scalar compatibility maps. The proof is the degreewise generator
 calculation followed by transition naturality.
-Source: Stacks Tags 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-comparison-level-data). -/
+Source: Stacks Tags 0E8I and 0941. -/
 theorem openQuotientScalarComparisonLevelData
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o)

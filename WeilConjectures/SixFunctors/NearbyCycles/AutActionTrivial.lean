@@ -21,7 +21,6 @@ trivially on `Ψ_{M'} (Lf^* C)` whenever the pullback exchange `α_ρ(C)` is inv
 - `ProEtale.CondensedRing.leftDerivedUpperStarCompOfEq_hom_app_comp_leftDerivedUpperStarId`:
   the left unit law for the transported composition isomorphisms.
 - `NearbyCyclesModel.Hom.autAction_eq_id_of_isIso`: the triviality of the action.
-
 -/
 
 @[expose] public section

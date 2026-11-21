@@ -28,8 +28,7 @@ namespace WeilConjectures.IntegralOnSlice
 /-- The specified quotient/Roos completion unit is invertible precisely on derived
 complete objects, without a finiteness hypothesis on the scheme.
 
-Source: Stacks Tag 099M and Bhatt--Scholze Definition 3.5.2
-(blueprint: lem-fix-qcqs-completion-unit-criterion).
+Source: Stacks Tag 099M and Bhatt--Scholze Definition 3.5.2.
 Proof: the principal Koszul replacement theorem supplies an adic datum with ideal
 spanned by the chosen uniformizer. Choose a good representative using essential
 surjectivity of the good-complex localization. Apply the intrinsic Roos/Koszul

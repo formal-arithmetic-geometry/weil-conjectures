@@ -30,11 +30,10 @@ variable (l : ℕ) [Fact l.Prime]
 
 /--
 Any two normalized coefficient presentations induce the same integral map into the
-native coefficient sheaf.  This is the finite-quotient uniqueness step in
+native coefficient sheaf. This is the finite-quotient uniqueness step in
 Bhatt--Scholze, Lemma 6.8.2.
-(blueprint: lem-sf-native-completed-coefficient-change)
 
-Proof source: compose both maps with every finite quotient projection.  The finite
+Proof source: compose both maps with every finite quotient projection. The finite
 constant and residue equations force equality on each projection, and the completed
 coefficient sheaf is the inverse limit of these quotients, so joint monicity gives
 the equality of the original maps.

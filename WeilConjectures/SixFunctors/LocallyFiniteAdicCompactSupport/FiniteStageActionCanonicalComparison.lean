@@ -34,8 +34,7 @@ private def iso_cast
   h.symm ▸ e
 
 /-- The canonical comparison of a stage action with a specified finite action.
-Source: Bhatt--Scholze, Proposition 6.8.14; stage inclusion and equality transport
-(blueprint: def-sf-finite-stage-action-canonical-comparison). -/
+Source: Bhatt--Scholze, Proposition 6.8.14; stage inclusion and equality transport. -/
 def finiteStageActionComparison
     (l : ℕ) [Fact l.Prime] (Ω : Type) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (X Y : Scheme.{u})
@@ -65,8 +64,7 @@ private theorem map_iso_cast_heq
   exact ArrowHEq.refl _
 
 /-- The canonical stage comparison has the prescribed endpoint-recorded component.
-Source: stage inclusion and equality transport
-(blueprint: def-sf-finite-stage-action-canonical-comparison). -/
+Source: stage inclusion and equality transport. -/
 theorem finiteStageActionComparison_map
     (l : ℕ) [Fact l.Prime] (Ω : Type) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (X Y : Scheme.{u})
@@ -93,8 +91,7 @@ theorem finiteStageActionComparison_map
     (GeneralAlgebraicallyClosedCoefficients.inclusion (Y := Y) E ⋙ J) A
 
 /-- Canonical stage comparison with operation-category aliases kept abstract.
-Source: Bhatt--Scholze, Proposition 6.8.14; equality transport of the finite action
-(blueprint: def-sf-finite-stage-action-canonical-comparison). -/
+Source: Bhatt--Scholze, Proposition 6.8.14; equality transport of the finite action. -/
 def finiteStageActionComparisonOfOperations
     (l : ℕ) [Fact l.Prime] (Ω : Type) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] [IsAlgClosure (Padic l) (ULift.{u} Ω)]
@@ -116,8 +113,7 @@ def finiteStageActionComparisonOfOperations
   exact finiteStageActionComparison l Ω X Y S E (O E).F (H E) hh ee
 
 /-- Endpoint-recorded component formula for the operation-level canonical stage map.
-Source: equality transport and stage inclusion
-(blueprint: def-sf-finite-stage-action-canonical-comparison). -/
+Source: equality transport and stage inclusion. -/
 theorem finiteStageActionComparisonOfOperations_map
     (l : ℕ) [Fact l.Prime] (Ω : Type) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] [IsAlgClosure (Padic l) (ULift.{u} Ω)]

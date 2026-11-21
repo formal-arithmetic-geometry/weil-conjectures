@@ -32,7 +32,6 @@ variable (l : ℕ) [Fact l.Prime]
 /-- The normalized finite integral inclusion is compatible with every scheme pullback.
 Source: Bhatt--Scholze, Lemma 6.8.2 and Section 6.8; step 2 of the native
 compact-support finite comparison plan.
-(blueprint: lem-sf-native-completed-coefficient-change).
 
 Proof: identify the completed coefficient ring with continuous integer-valued functions
 by its finite quotient projections. Compose with the continuous embedding of the

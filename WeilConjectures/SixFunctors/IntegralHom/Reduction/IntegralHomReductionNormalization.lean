@@ -11,9 +11,7 @@ import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionNor
 /-! # Normalization component of an integral reduction presentation
 
 This is the sectionwise and derived counit square required by
-`ReductionPresentation.normalization`.
-(blueprint: lem-sf-integral-hom-reduction-normalization).
-(blueprint: lem-sf-integral-hom-models-exist-reduction-normalization).
+`ReductionPresentation.normalization`..
 -/
 
 @[expose] public section

@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Condensed.CondensedFlatCoefficientCalcu
 /-! # An integral tensor presentation of a finite condensed model
 
 Source: Bhatt--Scholze, Proposition 6.8.14(2), with Lemma 6.8.2.
-(blueprint: lem-sf-condensed-finite-integral-tensor-model).
 Only one finite condensed coefficient model is considered here; no object descent
 from the algebraic closure or normalized functor is part of this assertion.
 -/
@@ -397,7 +396,6 @@ set_option synthInstance.maxSize 4096
 model whose tensor extension is its native section-module presentation.
 
 Source: Bhatt--Scholze, Proposition 6.8.14(2), Lemma 6.8.13 and Lemma 6.8.2.
-(blueprint: lem-sf-condensed-finite-integral-tensor-model).
 
 Proof in words: use the canonical size transport on the given finite subextension E of
 PadicAlgCl; this is the same index E, with coefficient type Shrink E. Internal-module and

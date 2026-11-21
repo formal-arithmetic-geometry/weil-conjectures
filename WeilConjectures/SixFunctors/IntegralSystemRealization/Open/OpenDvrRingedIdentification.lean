@@ -12,7 +12,6 @@ import all WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenOperatio
 /-! # Identification of DVR and ringed open extension
 
 Source: Stacks Tags 03DI, 03DJ and 0941; fixed completed coefficient projections.
-(blueprint: lem-sf-open-dvr-ringed-identification).
 -/
 
 @[expose] public noncomputable section
@@ -147,8 +146,7 @@ private def ordinaryRestrictionComparison {X Y : Scheme.{u}} (j : X ⟶ Y)
       ((PurCompactSupport.completed l E).pull j)).leftAdjointUniq (a.ofNatIsoRight e)
 
 /-- The projection-normalized DVR open model computes actual ringed extension.
-Source: Stacks 03DI, 03DJ and 0941; fix-prop-coherence, open-factor sentence
-(blueprint: lem-sf-open-dvr-ringed-identification).
+Source: Stacks 03DI, 03DJ and 0941; fix-prop-coherence, open-factor sentence.
 
 Proof: the finite_constants equations identify O.finite with restriction of the
 constant coefficient sheaf, by the sheafification universal property. The limit

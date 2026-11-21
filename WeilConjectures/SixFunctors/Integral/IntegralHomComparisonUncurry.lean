@@ -39,7 +39,6 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 The equality of uncurried maps is the representative-level normalization step in the
 independence proof for integral Hom comparison maps.
-(blueprint: lem-sfb-integral-hom-comparison-uncurry)
 -/
 
 @[expose] public section
@@ -156,11 +155,11 @@ private theorem scalar_exchange
     simpa only [Category.assoc] using htail
 
 /-- The canonical comparison has the normalized uncurried map prescribed by any
-`ReductionPresentation`.  This is the representative normalization part of the
+`ReductionPresentation`. This is the representative normalization part of the
 comparison-independence argument; it is proved by comparing the two tensor models on
 K-flat representatives, using the signed total tensor and the normalized evaluation.
 Source: Stacks Tags 06YY and 08J7; the normalization paragraphs of the integral Hom
-reduction construction (blueprint: lem-sfb-integral-hom-comparison-uncurry).
+reduction construction.
 -/
 theorem integralHomComparison_uncurry_eq
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)

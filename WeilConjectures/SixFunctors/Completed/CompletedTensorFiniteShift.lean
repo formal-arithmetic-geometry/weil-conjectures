@@ -33,7 +33,6 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 /-! # The finite tensor tower and right shifts
 
 Source: Stacks Project, Tags 011G, 012Z and 03EK.
-(blueprint: lem-sf-completed-tensor-finite-shift).
 -/
 
 @[expose] public section
@@ -456,8 +455,7 @@ private noncomputable abbrev towerShiftNatIso (W : AlgebraicGeometry.Scheme.{t})
 
 /-- The signed right shift isomorphism of the strict finite tensor towers.
 Source: Stacks Project, Tags 011G, 012Z and 03EK; steps 1 and 3 of
-`lem-sf-completed-tensor-shift-right`
-(blueprint: lem-sf-completed-tensor-finite-shift).
+`lem-sf-completed-tensor-shift-right`.
 
 Proof: ordinary reduction and scalar restriction act termwise, so their shift
 comparisons are the identities on the reindexed terms. Between them use the

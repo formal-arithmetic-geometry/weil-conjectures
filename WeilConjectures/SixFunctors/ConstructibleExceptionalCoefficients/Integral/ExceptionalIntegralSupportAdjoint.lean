@@ -22,8 +22,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- Preservation and right-adjoint existence for one integral compact-support functor.
 Source: Zheng, Construction 5.25 and Propositions 5.24 and 5.26;
-coefficient construction step 3
-(blueprint: lem-sf-integral-support-restricted-right-adjoint).
+coefficient construction step 3.
 
 Proof: extend by zero along c.i and take the proper direct image along c.g on
 normalized finite coefficient systems. Extension by zero preserves the finite Tor

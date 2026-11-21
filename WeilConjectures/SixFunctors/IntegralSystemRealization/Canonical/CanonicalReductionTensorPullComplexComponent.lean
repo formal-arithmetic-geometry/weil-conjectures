@@ -29,7 +29,6 @@ attribute [local irreducible] pullbackTensorCalculus
 
 /-- The missing ordinary tensor identity, after taking one cochain degree.
 Source: Stacks 07A4, 07A6 and 0941; proposition-six-operations-change-coefficients, first paragraph.
-(blueprint: lem-sf-canonical-reduction-tensor-pull-complex-component).
 
 Proof: expand the three strict-system maps in degree `n` and use the finite
 component formula for `tensorReductionStrictMap`, the unit formula for

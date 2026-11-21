@@ -205,7 +205,7 @@ bounded below complex of injective sheaves gives the support-localization triang
 `s_* s^! I ⟶ I ⟶ j_* j^* I ⟶ (s_* s^! I)[1]`, which is distinguished
 (`AlgebraicGeometry.Etale.supportLocalizationTriangle_distinguished`) and is isomorphic to the
 supported localization triangle `s_* Rs^! K ⟶ K ⟶ Rj_* j^* K ⟶ (s_* Rs^! K)[1]`, compatibly with
-the identification `I ≅ K`. As throughout the purity chapter (`def-pur-conventions`) this is
+the identification `I ≅ K`. As throughout the purity chapter this is
 the étale form; on the pro-étale site the triangle is
 `AlgebraicGeometry.ProEtale.exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit`,
 with the sequence of supported sections
@@ -304,7 +304,7 @@ noncomputable def supportedLocalizationTriangleBaseChange (e : U ⟶ X) (i : Z �
     ((assoc _ _ _).trans ((supportedLocalizationBoundary_baseChange Λ e i j i' j' g e₁ hij hij' hg
       sq L L' τ).trans (assoc _ _ _).symm))
 
-/-- Blueprint `def-pur-triangle-meaning`: Canonicality, functoriality and etale base change of the
+/-- Canonicality, functoriality and etale base change of the
 triangle
 
 **Étale base change of the supported localization triangle.** For an étale morphism

@@ -24,7 +24,6 @@ product with a constant complex on `Y` (Stacks, Lemma 0F14).
 
 - `AlgebraicGeometry.Etale.nonempty_iso_kunneth_of_isProper`
 (`proposition-ordinary-external-kunneth--1`).
-
 -/
 
 @[expose] public section
@@ -51,9 +50,9 @@ proper `k`-scheme and `Y` a `k`-scheme of finite type. For a cartesian square
 
 ```
   W --p₂--> Y
-  |         |
-  p₁        a_Y
-  v         v
+  | |
+  p₁ a_Y
+  v v
   X --a_X-> Spec k
 ```
 
@@ -65,7 +64,7 @@ Following the blueprint: by the Leray isomorphism for `p₂`, the projection for
 proper morphism `p₂` (`proposition-proper-direct-image-constructible-complexes--9`) and proper base
 change `La_Y^* Ra_{X*} E ≅ Rp₂_* Lp₁^* E` (`theorem-results-from-etale-theory--1`), the right-hand
 side is `RΓ(Y, La_Y^* Ra_{X*} E ⊗ᴸ K)`; the tensor product with a constant complex
-(`proposition-open-direct-image-preserves-finite`) and the symmetry of `⊗ᴸ` identify it with the
+ and the symmetry of `⊗ᴸ` identify it with the
 left-hand side. -/
 theorem nonempty_iso_kunneth_of_isProper {X Y W : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [IsProper aX] [LocallyOfFiniteType aY] [QuasiCompact aY]

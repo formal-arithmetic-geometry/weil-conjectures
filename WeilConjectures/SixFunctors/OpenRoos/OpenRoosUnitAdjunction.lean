@@ -223,8 +223,7 @@ import all WeilConjectures.Algebra.Homology.SubterminalLocal.SubterminalModuleLo
 /-! # Actual open completion units and the complete open adjunction
 
 Source: Stacks Project, Tags 099M, 099N (2),(5), and 09BN; Bhatt--Scholze,
-Proposition 3.5.1 and Definition 3.5.2, p.24
-(blueprint: lem-sf-open-roos-unit-adjunction).
+Proposition 3.5.1 and Definition 3.5.2, p.24.
 
 The quotient completion and its unit are the published strict augmented Roos
 construction. The comparison is characterized uniquely by compatibility with this
@@ -251,13 +250,13 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The published intrinsic Koszul-unit condition, specialized to the actual uniformizer.
 Quantification over representatives avoids adding a choice to complete objects.
 Source: Stacks 099B, 0A0E; the integral specialization of intrinsic completion in
-RoosIntrinsicCompletenessEquivalence (blueprint: lem-sf-open-roos-unit-adjunction). -/
+RoosIntrinsicCompletenessEquivalence. -/
 abbrev Intrinsic (T : Scheme.{t}) (K : IntegralOnSlice.D l E T none) : Prop :=
   ∀ (C : IntegralOnSlice.Cx l E T none) (e : DerivedCategory.Q.obj C ≅ K),
     IsIso (integralKoszulIntrinsicUnit l E T K C e)
 
 /-- The four reflector assertions, all for the actual quotient-augmentation unit.
-Source: Stacks 099M and 099B (blueprint: lem-sf-open-roos-unit-adjunction). -/
+Source: Stacks 099M and 099B. -/
 def ReflectorAssertions (T : Scheme.{t}) : Prop :=
   (∀ H : IntegralOnSlice.D l E T none,
     Intrinsic l E T ((IntegralOnSlice.completion l E T none).obj H)) ∧
@@ -271,8 +270,7 @@ def ReflectorAssertions (T : Scheme.{t}) : Prop :=
     IsIso ((IntegralOnSlice.completionUnit l E T none).app H) ↔ Intrinsic l E T H)
 
 /-- The full complete category, using the recorded Roos-triangle predicate verbatim.
-Source: Bhatt--Scholze Definition 3.5.2
-(blueprint: lem-sf-open-roos-unit-adjunction). -/
+Source: Bhatt--Scholze Definition 3.5.2. -/
 abbrev Complete (T : Scheme.{t}) :=
   ObjectProperty.FullSubcategory (IntegralOnSlice.IsComplete l E T none)
 
@@ -280,7 +278,7 @@ variable {V W : Scheme.{t}} (e : V ⟶ W) [IsOpenImmersion e]
   (o : IntegralOpenReduction.Operations l E e)
 
 /-- Literal restriction of the ordinary derived extension to complete objects.
-Source: Stacks 09BN (blueprint: lem-sf-open-roos-unit-adjunction). -/
+Source: Stacks 09BN. -/
 def completeExtension
     (h : ∀ M, IntegralOnSlice.IsComplete l E V none M →
       IntegralOnSlice.IsComplete l E W none ((IntegralOpenReduction.shriek l E e o).obj M)) :
@@ -291,7 +289,7 @@ def completeExtension
     (fun M ↦ h M.obj M.property)
 
 /-- Literal restriction of ordinary derived open restriction to complete objects.
-Source: Stacks 099N (2),(5) (blueprint: lem-sf-open-roos-unit-adjunction). -/
+Source: Stacks 099N (2),(5). -/
 def completeRestriction
     (h : ∀ H, IntegralOnSlice.IsComplete l E W none H →
       IntegralOnSlice.IsComplete l E V none ((IntegralOpenReduction.star l E e o).obj H)) :
@@ -303,7 +301,7 @@ def completeRestriction
 
 /-- The actual pulled quotient tower's Roos derived-limit model on good representatives.
 The restriction is applied to the entire strict tower, retaining its transitions.
-Source: Stacks 099N (5), 0941 (blueprint: lem-sf-open-roos-unit-adjunction). -/
+Source: Stacks 099N (5), 0941. -/
 def pulledRoos : (IntegralOnSlice.Good l E W none).FullSubcategory ⥤
     IntegralOnSlice.D l E V none :=
   (IntegralOnSlice.Good l E W none).ι ⋙ IntegralOnSlice.tower l E W none ⋙
@@ -313,7 +311,7 @@ def pulledRoos : (IntegralOnSlice.Good l E W none).FullSubcategory ⥤
 
 /-- The actual pulled augmentation: apply restriction to (gamma,0), then the map
 which is the canonical product comparison in BOTH Roos coordinates.
-Source: Stacks 099N (5), 0941 (blueprint: lem-sf-open-roos-unit-adjunction). -/
+Source: Stacks 099N (5), 0941. -/
 def pulledUnit (P : IntegralOnSlice.Cx l E W none) :=
   ((IntegralOpenReduction.restriction l E e o).mapHomologicalComplex (.up ℤ)).map
       (IntegralOnSlice.roosUnit l E W none P) ≫
@@ -823,8 +821,7 @@ attribute [local irreducible] IntegralOnSlice.completion IntegralOnSlice.complet
 
 /-- Roos completeness, reflection by the actual unit, and the complete open adjunction.
 
-Source: Stacks 099M, 099N (2),(5), 09BN; Bhatt--Scholze 3.5.1--3.5.2, p.24
-(blueprint: lem-sf-open-roos-unit-adjunction).
+Source: Stacks 099M, 099N (2),(5), 09BN; Bhatt--Scholze 3.5.1--3.5.2, p.24.
 
 Proof:
 1. The extension-integers DVR theorem gives a Noetherian PID R and a nonzero

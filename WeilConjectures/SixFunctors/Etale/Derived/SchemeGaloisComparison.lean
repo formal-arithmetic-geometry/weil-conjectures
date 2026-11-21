@@ -65,7 +65,7 @@ lemma iterateFrobenius_geometricFiber_comp_geometricGaloisFrobenius_hom :
   rw [Scheme.Hom.iterateFrobenius_geometricFiber_eq, Category.assoc, Iso.inv_hom_id,
     Category.comp_id]
 
-/-- Blueprint `sec-Weil-complexes`: Scheme and geometric Frobenius of the purity
+/-- Scheme and geometric Frobenius of the purity
 datum (the comparison isomorphism `κ_X`, blueprint `lemma-scheme-frobenius-geometric-frobenius--1`).
 
 The comparison `κ_X : LΦ_X^* ≅ Lg_X^*` between the derived pullbacks along the scheme Frobenius
@@ -84,15 +84,15 @@ noncomputable def leftDerivedUpperStarGeometricFiberFrobeniusIso :
 
 variable {Y₀ : Scheme.{u}} {g : Y₀ ⟶ Spec (.of k)} (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f)
 
-/-- Blueprint `sec-Weil-complexes`: Scheme and geometric Frobenius of the purity
+/-- Scheme and geometric Frobenius of the purity
 datum (compatibility `Lf^* κ_Y = κ_X Lf^*`).
 
 The comparison isomorphisms `κ` are compatible with pullback along the base change
 `φ̄ = φ × 𝟙 : X ⟶ Y` of a morphism `φ : X₀ ⟶ Y₀` over `k`: the square
 ```
 Lφ̄^* LΦ_Y^* K ──Lφ̄^* κ_Y──▶ Lφ̄^* Lg_Y^* K
-      │ ≅                         │ ≅
-      ▼                           ▼
+      │ ≅ │ ≅
+      ▼ ▼
 LΦ_X^* Lφ̄^* K ─────κ_X─────▶ Lg_X^* Lφ̄^* K
 ```
 commutes, the vertical arrows being the identifications of the derived pullbacks along

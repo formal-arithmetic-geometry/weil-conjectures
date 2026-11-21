@@ -25,8 +25,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (n : ℕ)
 
 /-- Transport an ordinary compositor through equal scalar maps.
-Source: Stacks 03D1 and 03D6
-(blueprint: lem-sf-finite-ring-ordinary-compositor-normalization). -/
+Source: Stacks 03D1 and 03D6. -/
 def finiteScalarTransportCompositor {U V W : Scheme.{w}}
     (h : U ⟶ V) (k : V ⟶ W)
     (R : Sheaf (ProEt.topology U) CommRingCat.{w + 1})
@@ -97,7 +96,7 @@ private theorem scalar_transport_normalizes {U V W : Scheme.{w}}
     (hd M Z x)
 
 /-- The intrinsic ordinary compositor, as the mate of pullback composition.
-Source: Stacks 03D6 (blueprint: lem-sf-finite-ring-ordinary-compositor-normalization). -/
+Source: Stacks 03D6. -/
 def finiteIntrinsicOrdinaryCompositor {U V W : Scheme.{w}} (h : U ⟶ V) (k : V ⟶ W) :
     let A := Padic.coefficientExtensionRing l E (n + 1)
     proEtaleConstantModuleDirectImage h A ⋙ proEtaleConstantModuleDirectImage k A ≅
@@ -108,8 +107,7 @@ def finiteIntrinsicOrdinaryCompositor {U V W : Scheme.{w}} (h : U ⟶ V) (k : V 
     (sfIntrinsicConstantModuleAdjunction (h ≫ k) A) (sfIntrinsicPullbackComp A h k)
 
 /-- Transport the constant-section compositor along the finite scalar-map equalities.
-Source: Stacks 03D1 and 03D6
-(blueprint: lem-sf-finite-ring-ordinary-compositor-normalization). -/
+Source: Stacks 03D1 and 03D6. -/
 def finiteTransportedOrdinaryCompositor {U V W : Scheme.{w}} (h : U ⟶ V) (k : V ⟶ W) :=
   let R := PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)
   let A := Padic.coefficientExtensionRing l E (n + 1)
@@ -128,8 +126,7 @@ attribute [local implicit_reducible] finiteScalarDirectImage
   proEtaleRingModuleDirectImage proEtaleConstantModuleDirectImage SheafOfModules.pushforward
 
 /-- The transported ordinary compositor has the specified action on sections.
-Source: Stacks 03D1 and 03D6
-(blueprint: lem-sf-finite-ring-ordinary-compositor-normalization).
+Source: Stacks 03D1 and 03D6.
 
 Proof: equality elimination in the three scalar-map equalities removes every
 transport from the section map. The remaining intrinsic mate acts by restriction

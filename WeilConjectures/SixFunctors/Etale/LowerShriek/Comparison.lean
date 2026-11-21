@@ -57,7 +57,6 @@ vanishing of both sides off the range of `i`, which is where closedness of that 
   determined by such transposes.
 - `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar_of_isIso`: the formal reduction of
   the comparison for `f` to the comparison for the open immersion of its compactification.
-
 -/
 
 @[expose] public section

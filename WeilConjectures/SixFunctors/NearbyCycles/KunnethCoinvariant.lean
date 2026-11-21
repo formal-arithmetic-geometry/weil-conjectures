@@ -34,7 +34,6 @@ is used.
 - `CategoryTheory.isIso_of_tensor_coinvariant`: the abstract statement, in a monoidal preadditive
   category with a jointly conservative family of functors.
 - `NearbyCyclesModel.isIso_map_kunnethMap_of_coinvariant`: the statement for nearby cycles.
-
 -/
 
 @[expose] public section
@@ -53,9 +52,9 @@ omit [Preadditive C] [MonoidalPreadditive C] in
 /-- **Matching invariant summands across a tensor product.** Consider a square
 ```
   U --δ--> S₁ ⊗ S₂ --u₁ ⊗ u₂--> T₁ ⊗ T₂
-  |                                |
-  x                                π
-  v                                v
+  | |
+  x π
+  v v
   V --a₀--> V₀ --------m---------> V'
 ```
 with `δ`, `u₂`, `π`, `m` invertible, a retraction `r₁` of `u₁` and a retraction `ρ₀` of `a₀`.
@@ -105,9 +104,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the two products are large terms
-/-- **Invariants under a pro-`p` group commute with the Künneth map**, coinvariant form (blueprint
-`prose-E-10`, in the form used in the generic-slicing step of
-`proposition-external-kunneth-formula-nearby-cycles`). In the square of the Künneth maps and
+/-- **Invariants under a pro-`p` group commute with the Künneth map**, coinvariant form. In the square of the Künneth maps and
 pullbacks (`NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`) for morphisms of models
 `ρ_M : M' ⟶ M`, `ρ_N : N' ⟶ N`, `ρ_P : P' ⟶ P`, let families of automorphisms `σM i`, `σN i`,
 `σP i` of the pullback models act on nearby cycles, with the Künneth map `Π'` of the pullback

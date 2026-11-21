@@ -32,7 +32,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 /-! # Scalar tensor realization on resolving representatives
 
 Source: Stacks Tags 06YS, 07A4 and 04VK.
-(blueprint: lem-sf-finite-scalar-tensor-resolution).
  -/
 
 @[expose] public noncomputable section
@@ -101,8 +100,7 @@ private theorem scalarAcyclicMapIff
 
 /-- An exact equivalence with the specified ordinary tensor comparison preserves
 acyclic-tensor K-flatness and termwise tensor exactness.
-Source: Stacks 06YS and 07A4
-(blueprint: lem-sf-finite-scalar-tensor-resolution). -/
+Source: Stacks 06YS and 07A4. -/
 theorem finiteScalarRealizationPreservesFlatKFlat
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [Abelian C] [Abelian D]
@@ -162,8 +160,7 @@ theorem finiteScalarRealizationPreservesFlatKFlat
     exact hD
 
 /-- The exact tensor realization preserves flat-term K-flat representatives.
-Source: Stacks 06YS and 07A4
-(blueprint: lem-sf-finite-scalar-tensor-resolution). -/
+Source: Stacks 06YS and 07A4. -/
 theorem finiteScalarPreservesRepresentatives (T : Scheme.{u}) (R : Type u)
     [CommRing R] [Finite R] (P : CochainComplex
       (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ)
@@ -182,7 +179,7 @@ theorem finiteScalarPreservesRepresentatives (T : Scheme.{u}) (R : Type u)
       (proEtaleConstantRing T R) _).symm (h.2 n)
 
 /-- Extract K-flatness without unfolding the resolving predicate at specialization.
-Source: Stacks 06YS (blueprint: lem-sf-finite-scalar-tensor-resolution). -/
+Source: Stacks 06YS. -/
 theorem finiteScalarFlatRepresentatives_kFlat (T : Scheme.{u}) (R : Type u)
     [CommRing R] (P : CochainComplex
       (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ)
@@ -190,7 +187,7 @@ theorem finiteScalarFlatRepresentatives_kFlat (T : Scheme.{u}) (R : Type u)
     (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P := hP.1
 
 /-- Resolving restriction is fully faithful on derived bifunctors.
-Source: Stacks 04VK (blueprint: lem-sf-finite-scalar-tensor-resolution). -/
+Source: Stacks 04VK. -/
 theorem finiteScalarRepresentativesFullyFaithful (T : Scheme.{u}) (R : Type u)
     [CommRing R] [Finite R]
     :
@@ -223,7 +220,7 @@ theorem finiteScalarRepresentativesFullyFaithful (T : Scheme.{u}) (R : Type u)
       (isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso C))))⟩
 
 /-- The localization tensorator is invertible on a K-flat right input.
-Source: Stacks 07A4 (blueprint: lem-sf-finite-scalar-tensor-resolution). -/
+Source: Stacks 07A4. -/
 theorem finiteScalarLocalizationTensor_isIso
     {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
     [HasDerivedCategory.{w} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -243,7 +240,7 @@ theorem finiteScalarLocalizationTensor_isIso
   infer_instance
 
 /-- Invert the localization tensorator on any specified class of K-flat complexes.
-Source: Stacks 07A4 (blueprint: lem-sf-finite-scalar-tensor-resolution). -/
+Source: Stacks 07A4. -/
 @[irreducible] def finiteScalarFixedTensorRepresentativeOfKFlat
     {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
     [HasDerivedCategory.{w} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -274,7 +271,7 @@ Source: Stacks 07A4 (blueprint: lem-sf-finite-scalar-tensor-resolution). -/
   exact (asIso v).symm
 
 /-- Specialize the localization tensorator with exactly the published coefficient API.
-Source: Stacks 07A4 (blueprint: lem-sf-finite-scalar-tensor-resolution). -/
+Source: Stacks 07A4. -/
 @[irreducible] def finiteScalarFixedTensorRepresentativeForCoefficients
     (B : Type u₁) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]

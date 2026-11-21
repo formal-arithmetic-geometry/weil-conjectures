@@ -54,7 +54,6 @@ private def push_iso_aux {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The actual module direct images agree by equality of their direct ring maps.
 Source: Stacks 03D1 and 03D2.
-(blueprint: def-sf-integral-pullback-pushforward-identification).
 
 Construct the isomorphism with pushforwardCongr after identifying the direct map
 adjoint to the completed coefficient map with the recorded ordinary direct ring map. -/
@@ -92,7 +91,6 @@ private theorem pullbackPushforwardIso_section {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The module pullback isomorphism determined by the completed-ring adjunctions.
 Source: Stacks 03D2.
-(blueprint: def-sf-integral-pullback-module-identification).
 
 Transport the actual ringed module adjunction through pullbackPushforwardIso and
 apply uniqueness of left adjoints to the specified ordinary module adjunction. -/
@@ -129,7 +127,6 @@ private theorem pullbackModuleIso_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The inverse module comparison preserves adjunction-unit sections.
 Source: Stacks 03D2.
-(blueprint: lem-sf-integral-pullback-module-unit).
 
 Proof: uniqueness of left adjoints preserves the units. The pushforward comparison
 is identity on underlying sections, so evaluate the unit identity on a section.

@@ -20,10 +20,10 @@ compatible with the counits `η : Lh^* Λ ⟶ Λ` of the oplax monoidal derived 
 
 ```
 L(fg)^* Λ_Z ──────────▶ Lf^* Lg^* Λ_Z
-     │                       │ Lf^* η_g
-     │ η_{fg}                ▼
-     │                  Lf^* Λ_Y
-     ▼                       │ η_f
+     │ │ Lf^* η_g
+     │ η_{fg} ▼
+     │ Lf^* Λ_Y
+     ▼ │ η_f
     Λ_X ◀────────────────────┘
 ```
 

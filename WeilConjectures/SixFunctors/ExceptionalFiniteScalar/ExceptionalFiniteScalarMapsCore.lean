@@ -868,12 +868,11 @@ private theorem map_map_id_iso_cancel
     Category.assoc, Iso.hom_inv_id]
 
 /-- The finite scalar maps apart from the ambient etale mate package.
-Source: Zheng, Construction 2.26 and Proposition 2.29; Stacks 0GL6, 09AL and 07A4
-(blueprint: lem-sf-exceptional-finite-scalar-maps-core).
+Source: Zheng, Construction 2.26 and Proposition 2.29; Stacks 0GL6, 09AL and 07A4.
 
-This is the finite-subcategory part of the scalar-mate construction.  It records the
+This is the finite-subcategory part of the scalar-mate construction. It records the
 left and right comparison isomorphisms, their normalization and counit equation, and
-their shift compatibilities.  The ambient etale mate package is supplied separately.
+their shift compatibilities. The ambient etale mate package is supplied separately.
 -/
 structure FiniteScalarMapsCore
     (l : ℕ) [Fact l.Prime]
@@ -904,8 +903,7 @@ attribute [local irreducible] originIso leftScalarMap leftOriginIso scalarOrigin
 attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian
   WeilConjectures.SemilinearSections.hasDerived in
 /-- The finite-subcategory scalar-mate core exists.
-Source: Zheng, Construction 2.26 and Proposition 2.29; Stacks 0GL6, 09AL and 07A4
-(blueprint: lem-sf-exceptional-finite-scalar-maps-core).
+Source: Zheng, Construction 2.26 and Proposition 2.29; Stacks 0GL6, 09AL and 07A4.
 
 Transport the proper/open scalar comparison through the finite-Tor full inclusions
 using bounded-below etale origins. This constructs the left comparison and proves its

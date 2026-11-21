@@ -38,8 +38,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 Source: Stacks 07A4 and 07A6; the integral Hom reduction proof, paragraph 2.
 The existing actual pair supplies all data. Replace its ordinary and derived functor
 fields by their definitionally equal integral reduction interfaces; every property is
-retained. No new existence choice is made.
-(blueprint: def-sf-integral-reduction-scalar-pair). -/
+retained. No new existence choice is made. -/
 noncomputable def integralReductionScalarPair (n : ℕ) :
     ScalarDerivedPair.{t + 1, t, max u (t + 1), max (t + 2) (u + 1)}
       (J := AlgebraicGeometry.Scheme.ProEt.topology Y)

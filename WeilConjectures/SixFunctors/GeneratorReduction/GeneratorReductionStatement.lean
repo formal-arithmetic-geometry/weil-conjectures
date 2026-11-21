@@ -15,9 +15,6 @@ import WeilConjectures.SixFunctors.OpenInterchangeReduction.OpenInterchangeReduc
 import WeilConjectures.SixFunctors.OpenInterchangeReduction.OpenBaseChangeReductionSquare
 import WeilConjectures.SixFunctors.OpenInterchangeReduction.OpenTensorReductionSquare
 /-! # Canonical coefficient squares for the basic six-functor generators
-
-Source: blueprint fix-prop-coherence, basic structural maps
-(blueprint: lem-sf-generator-reduction-coherence).
 -/
 
 @[expose] public noncomputable section

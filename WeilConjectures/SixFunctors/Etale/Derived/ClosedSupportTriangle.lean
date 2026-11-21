@@ -16,8 +16,7 @@ right adjoint of the direct image `Ri_*` on the unbounded derived categories of 
 modules (`AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`, blueprint
 `lemma-local-cohomology-right-adjoint--1`). This file records:
 
-* the closed-support triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1]` for every `K`
-  (blueprint `lemma-local-cohomology-right-adjoint--2`), deduced from the supported localization
+* the closed-support triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1]` for every `K`, deduced from the supported localization
   triangle `AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization` along
   `Ri_! ≅ Ri_*` and the uniqueness of right adjoints.
 

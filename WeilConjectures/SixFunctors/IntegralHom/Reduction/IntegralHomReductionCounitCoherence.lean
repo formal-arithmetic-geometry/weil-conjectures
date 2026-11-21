@@ -8,7 +8,6 @@ public import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReduc
 public import WeilConjectures.SixFunctors.Integral.IntegralHomReductionComparison
 /-! # Coherence of the complex reduction counit
 Source: Stacks Tag 06YY.
-(blueprint: lem-sfb-integral-hom-reduction-counit-coherence)
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -34,16 +33,14 @@ private noncomputable def complexCounit :
       (DerivedCategory.quotientCompQhIso _).hom
 
 /-- Both presentations use the same transported derived counit.
-Source: Stacks 06YY. Proof: the displayed composites are identical.
-(blueprint: lem-sfb-integral-hom-reduction-counit-coherence) -/
+Source: Stacks 06YY. Proof: the displayed composites are identical. -/
 theorem reductionCounit_eq_complexComparison
     (P : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ) :
     reductionCounit l E X D hl n P = homReductionComplexComparison D l hl E X n P := by
   rfl
 
 /-- Naturality of the transported counit on complexes.
-Source: Stacks 06YY. Proof: compose the natural quotient comparisons and derived counit.
-(blueprint: lem-sfb-integral-hom-reduction-counit-coherence) -/
+Source: Stacks 06YY. Proof: compose the natural quotient comparisons and derived counit. -/
 theorem reductionCounit_naturality
     {P Q : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ} (f : P ⟶ Q) :
     (integralDerivedReduction l E X D hl n).map (DerivedCategory.Q.map f) ≫
@@ -54,8 +51,7 @@ theorem reductionCounit_naturality
 
 /-- The transported counit is invertible at K-flat representatives.
 Source: Stacks 06YY. Proof: its four factors are quotient comparisons, the K-flat
-counit isomorphism, and the functor image of a quotient comparison.
-(blueprint: lem-sfb-integral-hom-reduction-counit-coherence) -/
+counit isomorphism, and the functor image of a quotient comparison. -/
 theorem reductionCounit_isIso
     (P : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ)
     (hP : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) P) :

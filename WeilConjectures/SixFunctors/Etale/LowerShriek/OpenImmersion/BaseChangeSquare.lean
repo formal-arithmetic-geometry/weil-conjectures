@@ -17,10 +17,10 @@ Consider a commutative square of schemes
 
 ```
 U' --j'--> Z'
-|          |
-g'         g''
-v          v
-U  --j-->  Z
+| |
+g' g''
+v v
+U --j--> Z
 ```
 
 with `j` and `j'` open immersions, i.e. `g' ≫ j = j' ≫ g''`. This file constructs the
@@ -56,7 +56,6 @@ For `g' = 𝟙` this recovers `AlgebraicGeometry.Etale.openImmersionLowerShriekB
   comparison `j_! ⟶ j_*` intertwines this base change map with the base change map
   `g''^* j_* ⟶ j'_* g'^*` of the pushforward. Both sides are compared through their
   transposes under `j'_! ⊣ j'^*` and `j'^* ⊣ j'_*`.
-
 -/
 
 @[expose] public section
@@ -80,10 +79,10 @@ variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z}
 
 ```
 U' --j'--> Z'
-|          |
-g'         g''
-v          v
-U  --j-->  Z
+| |
+g' g''
+v v
+U --j--> Z
 ```
 
 the canonical natural transformation `g'^* ⋙ j'_! ⟶ j_! ⋙ g''^*`, i.e.
@@ -91,9 +90,9 @@ the canonical natural transformation `g'^* ⋙ j'_! ⟶ j_! ⋙ g''^*`, i.e.
 
 ```
 Sh(U) --g'^*--> Sh(U')
-  |                |
- j_!      ⇙      j'_!
-  v                v
+  | |
+ j_! ⇙ j'_!
+  v v
 Sh(Z) --g''^*--> Sh(Z')
 ```
 
@@ -102,7 +101,7 @@ It is the conjugate of the base change map
 `j_! ⋙ g''^* ⊣ g''_* ⋙ j^*` and `g'^* ⋙ j'_! ⊣ j'^* ⋙ g'_*`.
 
 This map exists for every commutative square, and it runs *against* the direction of the
-exchange map `Ex_!` of the blueprint (`sk-def-sf-exchanges`), which is its inverse for a
+exchange map `Ex_!` of the blueprint, which is its inverse for a
 cartesian square (`AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChangeMap`). -/
 noncomputable def Etale.openImmersionLowerShriekBaseChangeMap (sq : CommSq g' j' j g'') :
     (g')^*[A] ⋙ (j')_!open[A] ⟶ (j)_!open[A] ⋙ (g'')^*[A] :=
@@ -183,9 +182,9 @@ variable {X C D : Scheme.{u}} (j : X ⟶ C) (q : C ⟶ D) (k : X ⟶ D) (hk : j 
 
 ```
 X --j--> C
-|        |
-𝟙        q
-v        v
+| |
+𝟙 q
+v v
 X --k--> D
 ```
 
@@ -223,9 +222,9 @@ variable [IsOpenImmersion j] [IsOpenImmersion k]
 
 ```
 X --j--> C
-|        |
-𝟙        q
-v        v
+| |
+𝟙 q
+v v
 X --k--> D
 ```
 

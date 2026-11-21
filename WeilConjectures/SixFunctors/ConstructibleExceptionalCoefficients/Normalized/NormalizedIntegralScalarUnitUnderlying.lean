@@ -22,8 +22,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- Multiplication normalization gives the specified integral scalar-unit arrow.
 Source: exceptional coefficient construction, integral identity clause; Stacks Project,
-Tags 03DA, 06YY and 07A6
-(blueprint: lem-sf-normalized-integral-scalar-unit-underlying).
+Tags 03DA, 06YY and 07A6.
 
 Proof: apply the intermediate completed-unit comparison supplied by
 `normalized_integral_scalar_unit_underlying_bridge`. The identity clause of

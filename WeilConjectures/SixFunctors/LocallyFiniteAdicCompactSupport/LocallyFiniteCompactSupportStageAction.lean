@@ -194,9 +194,6 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (c : Compactification f)
 
 /-- Rational compact support with its prescribed scalar comparisons is a stage morphism.
-Source: the coefficient construction and its rational cocycle; blueprint common-field
-comparisons, step 10 of the native compact-support realization.
-(blueprint: lem-sf-locally-finite-compact-support-stage-action).
 
 Proof: at E take the rational operation of P at finiteField E, and for E ≤ L take
 P.fields.rationalComparison along coefficientInclusion. Identify the transition

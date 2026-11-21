@@ -27,8 +27,7 @@ attribute [local implicit_reducible]
   coefficientSequenceEvaluation pullbackTensorSequenceInverse
 
 /-- The ordinary cochain comparison used by the degreewise square.
-Source: Zheng Construction 4.1 and Lemma 4.10.
-(blueprint: lem-sf-integral-pull-evaluation-cochain-square-component). -/
+Source: Zheng Construction 4.1 and Lemma 4.10. -/
 def ordinaryPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   (pullbackTensorInverseEvaluationComplex l E f n).symm ≪≫
     Functor.isoWhiskerLeft
@@ -37,7 +36,6 @@ def ordinaryPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
 
 /-- The degreewise component of the ordinary cochain pullback evaluation transition square.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks Tags 03D2 and 0941.
-(blueprint: lem-sf-integral-pull-evaluation-cochain-square-component).
 
 Proof: this is the fixed ordinary sectionwise calculation at one cochain degree.
 The inverse-image/evaluation comparison is the inverse mate of the identity

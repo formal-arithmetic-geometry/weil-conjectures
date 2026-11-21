@@ -10,8 +10,7 @@ import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.Rin
 
 /-! # Ring proper/open refinement with its integral scalar square
 
-Source: Zheng Section 5 and Stacks 0F7B, 0F7I; normalized exceptional construction
-(blueprint: lem-sf-constructible-ring-left-refinement). -/
+Source: Zheng Section 5 and Stacks 0F7B, 0F7I; normalized exceptional construction. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -53,8 +52,7 @@ variable (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
   (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))
 
 /-- The ring part of proper/open refinement, including its integral scalar square.
-Source: Stacks 0F7B and 0F7I; Zheng 5.13--5.15; exceptional construction step 6
-(blueprint: lem-sf-constructible-ring-left-refinement).
+Source: Stacks 0F7B and 0F7I; Zheng 5.13--5.15; exceptional construction step 6.
 
 Proof: at finite levels form the open-unit comparison from extension by zero for d
 into proper pushforward of extension by zero for c. Proper base change on the open

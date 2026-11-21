@@ -14,8 +14,6 @@ import WeilConjectures.SixFunctors.OpenFactorCoherence.TensorOperationUnitNormal
 import all WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportCoefficientData
 
 /-! # Canonical integral model construction steps
-
-Source: blueprint fix-prop-coherence, strict-system realization.
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +31,7 @@ attribute [-instance] IntegralAmbient.ambientCxCategory IntegralAmbient.ambientD
 /-- Completed tensor/pull models and their ordinary open comparisons. The proper/open
 transformation and its adjunct equation are deliberately not part of this assertion.
 Source: Stacks 07A4, 099N, 03DI, 09AE and 0E8I; blueprint fix-prop-coherence,
-last model-construction step of strict-system realization
-(blueprint: lem-sf-integral-ringed-model-existence).
+last model-construction step of strict-system realization.
 
 Proof: choose the canonical flat-term K-flat tensor localization, using the same
 integralTensorModel representatives as calculus. The identity on pure tensors

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Native.NativeScalarForgetting
 
 Source: Bhatt--Scholze, Proposition 6.8.14(1),(2), using the existing condensed
 filtered two-colimit; native realization proof steps 3 and 7.
-(blueprint: lem-sf-locally-finite-adic-functor-descent-image)
 -/
 
 @[expose] public noncomputable section
@@ -49,7 +48,6 @@ Essential surjectivity of the finite-field realization lifts that model to a sou
 and tensor transitivity identifies its normalized image with the original object. In the
 other direction, finite realization and scalar extension preserve bounded constructibility.
 The argument includes the zero object and empty strata.
-(blueprint: lem-sf-locally-finite-adic-functor-descent-image)
 -/
 theorem normalizedFunctor_descent_image
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]

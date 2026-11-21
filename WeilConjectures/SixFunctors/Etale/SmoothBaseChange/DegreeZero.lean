@@ -50,7 +50,7 @@ the degree-zero homology of the derived base-change map of
   [Stacks 0A3H].
 - `AlgebraicGeometry.Etale.isIso_baseChangeMap_app_of_flat`: the underived base-change map
   is an isomorphism for `p` flat, locally of finite presentation with geometrically reduced
-  fibres (blueprint `lemma-degree-zero-calculation--1`).
+  fibres.
 - `AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_zero`: in degree zero the
   derived base-change map is the underived one.
 - `AlgebraicGeometry.Etale.baseChangeProperty_zero`: degree-zero base change for a flat,
@@ -302,8 +302,7 @@ Writing `j : W ⟶ X` and `r : V ⟶ S` for the structure morphisms, `j ≫ p = 
 connected fibres the global sections of an inverse image agree with the global sections
 downstairs [Stacks 0A3H]: a section of `q^* G'` is constant on the connected geometric fibres,
 hence descends along the fpqc covering `q`. This is Step 2 of the blueprint proof of
-`lemma-degree-zero-calculation--1`. 
-(blueprint: lem-sbc-module-chart-sections-flat-connected)
+`lemma-degree-zero-calculation--1`.
 -/
 @[stacks 0A3H]
 theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -323,9 +322,9 @@ For a Cartesian square
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 X --p--> S
 ```
 
@@ -399,8 +398,7 @@ derived base-change morphism is, up to isomorphism of arrows, the underived base
 `AlgebraicGeometry.Etale.baseChangeMap`: the degree-zero homology of
 `p^*(R g_* F[0])` is `p^* g_* F` and that of `R h_*(e^*(F[0]))` is `h_* e^* F`, the pullbacks
 being exact and `g_*`, `h_*` left exact, and under these identifications the units and counits
-of the derived adjunctions restrict in degree zero to those of the underived adjunctions. 
-(blueprint: lem-sbc-base-change-homology-zero-underived)
+of the derived adjunctions restrict in degree zero to those of the underived adjunctions.
 -/
 theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_zero (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -503,9 +501,9 @@ For a Cartesian square
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 X --p--> S
 ```
 

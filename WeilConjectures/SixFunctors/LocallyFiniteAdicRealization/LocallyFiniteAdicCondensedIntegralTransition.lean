@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdi
 /-! # Integral tensor transition for the finite condensed realization
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-finite-condensed-integral-tensor-transition)
 -/
 
 @[expose] public noncomputable section
@@ -102,7 +101,6 @@ private theorem integralTensorModel_factor
 This is a tensor-coherence equation without a native common-stage functor.
 
 Source: BS 6.8.14(2) and Remark 6.8.15.
-(blueprint: lem-sf-finite-condensed-integral-tensor-transition).
 
 Proof in words: unfold the constructed tensor models and the closure transition.
 Cancel the section reconstruction counits and use the unit equation defining the

@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.ExceptionalScalarTransport.ScalarComparisonTr
 
 /-! # Whole-system scalar transport before selected finite-level compatibility
 Source: Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-system-scalar-core)
 -/
 
 @[expose] public noncomputable section
@@ -371,8 +370,7 @@ Conjugate the integral q and b with reductionF/G and the scalar reduction compar
 descend along the fully faithful reconstruction functor. Inverse-factor cancellation gives
 the two reduction equations. The integral counit equation and both reconstruction counit
 identities imply the new counit on the equivalence image; naturality and its counit iso
-extend it to every sequence. The image reduction map is the specified model up to eqToHom.
-(blueprint: lem-sf-exceptional-integral-system-scalar-core). -/
+extend it to every sequence. The image reduction map is the specified model up to eqToHom. -/
 theorem exceptionalIntegralSystemScalarCore
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

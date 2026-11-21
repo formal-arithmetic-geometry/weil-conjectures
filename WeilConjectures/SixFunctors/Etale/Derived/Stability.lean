@@ -38,7 +38,7 @@ imports; downstream files may import this module or just the pieces they need.
 
 - `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.leftDerivedUpperStar`,
   `…rightDerivedLowerStar`, `…rightDerivedLowerShriek`, `…rightDerivedUpperShriek`,
-  `…verdierDual` (`proposition-six-operations-dctf`): the descended functors between the small
+  `…verdierDual`: the descended functors between the small
   categories `Dctf`.
 
 ## Main statements
@@ -47,10 +47,10 @@ imports; downstream files may import this module or just the pieces they need.
   (`proposition-proper-direct-image-extension-zero--8`).
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`,
   `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`
-  (`sk-thm-sf-direct-image-tor-amplitude`).
+.
 - `AlgebraicGeometry.Etale.boundedConstructible_derivedHom`,
   `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`,
-  `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom_of_isDualizable` (`sk-thm-sf-hom-ctf`),
+  `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom_of_isDualizable`,
   `AlgebraicGeometry.Etale.boundedConstructible_derivedHom_of_isDualizable`
   (`proposition-six-operations-dctf--15`).
 - `AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isOpenImmersion`,
@@ -94,10 +94,10 @@ imports; downstream files may import this module or just the pieces they need.
   `f : ⊔ₙ ℙⁿ_ℂ ⟶ ⊔ₙ Spec ℂ`, `Rf_! Λ` has `H²ⁿ ≠ 0` on the `n`-th point and is not bounded.
 * The smooth case of `theorem-f-shriek-finite-coefficients` is derived from
   `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`
-  (`proposition-exceptional-inverse-image-smooth-morphism`) instead of smooth purity: only the shape
+ instead of smooth purity: only the shape
   of `ω_f`, a locally constant free rank-one sheaf in degree `-2d`, matters, and this needs neither
   a base field nor a Tate twist.
-* The whole of `proposition-six-operations-dctf` (`proposition-six-operations-dctf`), clauses
+* The whole of `proposition-six-operations-dctf`, clauses
 (i)–(vii), is bundled
   in `AlgebraicGeometry.Etale.constructibleFiniteTor_stability` and
   `AlgebraicGeometry.Etale.boundedConstructibleIntegral_stability` of
@@ -138,7 +138,7 @@ imports; downstream files may import this module or just the pieces they need.
 * The counterexample of `sk-thm-sf-hom-ctf` (the origin in `𝔸¹`, showing that the sharper
   interval fails without dualizability) is
   `AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom`
-  (`example-internal-hom-affine-line`); it uses the normalisation of the Tate twist, so it assumes a
+; it uses the normalisation of the Tate twist, so it assumes a
   normalized Tate twist datum.
 * A dimension bound `dim X ≤ d` is `topologicalKrullDim X ≤ (d : WithBot ℕ∞)`. What Lean needs
   to form `Rf_!` and `Rf^!` is that `f` admits a compactification, `HasCompactification f`,
@@ -204,5 +204,4 @@ operation
   `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence` is proved for étale sheaves,
   i.e. on the étale-origin complexes `ν^* D⁺(X_ét)` of the pro-étale site; nothing is claimed
   for arbitrary pro-étale objects, whose geometric stalks are not conservative.
-
 -/

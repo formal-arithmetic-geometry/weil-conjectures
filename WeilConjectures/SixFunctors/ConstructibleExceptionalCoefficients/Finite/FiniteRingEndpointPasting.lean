@@ -51,8 +51,7 @@ private theorem endpoint_coordinates
     P₁.map_comp, Category.assoc, reassoc_of% hp, ← reassoc_of% ha]
 
 /-- The open/direct-image coordinates at one finite compactification endpoint.
-Source: compactification-coherence proof, second paragraph; Stacks 00YV and 03D6
-(blueprint: lem-sf-finite-ring-endpoint-pasting).
+Source: compactification-coherence proof, second paragraph; Stacks 00YV and 03D6.
 
 Proof: apply naturality to the finite open comparison and then to the separately
 derived finite direct-image comparison. The fixed realization comparisons paste

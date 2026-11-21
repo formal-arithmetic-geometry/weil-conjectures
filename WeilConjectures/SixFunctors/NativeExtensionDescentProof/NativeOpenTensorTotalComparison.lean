@@ -13,7 +13,6 @@ import all WeilConjectures.Algebra.Homology.Ringed.RingedOpenTotalTensorKFlat
 /-! # Totalizing a normalized open tensor comparison
 
 Source: Stacks 012Z and 0GL1.
-(blueprint: lem-sf-native-open-tensor-total-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -26,7 +25,6 @@ namespace NativeExtensionDescentProof
 /-- A natural sheaf projection comparison totalizes with its prescribed summand formula.
 
 Source: Stacks 012Z and 0GL1; comparisonPrecomposeIso and its insertion equation.
-(blueprint: lem-sf-native-open-tensor-total-comparison)
 
 Proof: curry the inverse of the given natural isomorphism and apply the existing
 comparisonPrecomposeIso construction. Its naturality in both complexes assembles

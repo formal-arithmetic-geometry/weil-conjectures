@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedE
 /-! # Projection for normalized coefficient evaluation
 
 Source: Stacks 07A4, 08J9 and 0941; Zheng Construction 4.1.
-(blueprint: lem-coef-normalized-evaluation-projection).
 -/
 
 @[expose] public section
@@ -46,7 +45,6 @@ private theorem coefficientSequence_isIso_iff_evaluations
 This is a tensor assertion, before internal Hom or any transition formula for Hom.
 Source: Zheng Construction 4.1 and Proposition 4.17(a); Stacks 07A4, 08J9;
 step 1 of lem-coef-normalized-internal-hom-fibers.
-(blueprint: lem-coef-normalized-evaluation-projection).
 
 Proof: identify L with the derived finite-prefix extension by the unique
 unit-compatible isomorphism of left adjoints. Choose flat-term K-flat

@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-! # Finite-stage geometric Verdier biduality on the etale site
 
-Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-order 2128 (blueprint: theorem-verdier-biduality--1).
-
 The coefficient ring is the actual positive-level quotient A_(E,n), canonically
 lifted to the coefficient universe of the small etale site. The conclusion uses
 exactly the recorded constructibility and Tor-amplitude predicates, and the
@@ -40,7 +37,7 @@ namespace WeilConjectures
 /-- The four categorical clauses of geometric biduality, with the functor and its
 canonical double-dual transformation kept as parameters. This is a presentation of
 invertibility, preservation, the restricted anti-equivalence, and exactness.
-Source: blueprint order 2128 (blueprint: theorem-verdier-biduality--1). -/
+ -/
 def GeometricBidualityConclusion
     {C : Type*} [Category C] [HasShift C ℤ] [HasZeroObject C] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -62,7 +59,7 @@ identifies the restricted functor on both objects and morphisms. Exactness uses 
 ambient distinguished triangles whose vertices lie in the full subcategory; the
 opposite category has the reversed integer shift. The local finite-ring instance
 is the named finiteness theorem applied to the positive-level quotient.
-Source: blueprint order 2128 (blueprint: theorem-verdier-biduality--1). -/
+ -/
 noncomputable def FiniteEtaleGeometricBiduality
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)
@@ -268,8 +265,6 @@ private theorem finite_geometric_biduality_core
 invertible, and Verdier duality is an exact contravariant anti-equivalence of
 Dᵇ_ctf on the ordinary etale site of every separated finite-type scheme over the
 global algebraically closed field. No pro-etale or integral category is substituted.
-Source: blueprint sec-six-functors/sk-prop-sf-biduality-general, order 2128
-(blueprint: theorem-verdier-biduality--1).
 
 Proof:
 1. Identify the finite-stage bounded-constructible and Tor-amplitude predicates

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemIsoAssembly
 /-! # Strict scalar comparison transported from the open slice
 
 Source: Stacks Project, Tags 03DI, 03EK, 0941 and 0E8I.
-(blueprint: lem-sf-open-strict-scalar-transport).
 -/
 
 @[expose] public noncomputable section
@@ -59,7 +58,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The finite comparison obtained by evaluating one ordinary strict-system
 comparison and conjugating by the recorded evaluations. This is a construction,
 with no choice of a finite comparison.
-Source: Stacks 0941 (blueprint: lem-sf-open-strict-scalar-transport). -/
+Source: Stacks 0941. -/
 def ordinaryScalarEvaluationComparison
     (a : IntegralOpenReduction.extension l E j o ⋙ AX.functor ≅
       AU.functor ⋙ IntegralOpenReduction.systemExtension l E j o) (n : ℕ) :
@@ -85,8 +84,7 @@ private theorem systemHom_ext {A B : coefficientSequenceModules l E X} {f g : A 
 /-- There is a strict-system comparison whose evaluated finite maps preserve the
 actual scalar units on every extension summand. Only the scalar part is asserted:
 the open operations and both quotient-compatible ordinary reductions are inputs.
-Source: Stacks 03DI, 03EK, 0941 and 0E8I
-(blueprint: lem-sf-open-strict-scalar-transport).
+Source: Stacks 03DI, 03EK, 0941 and 0E8I.
 
 Proof: form the completed projection cone on the actual quotient tower of X and
 apply `exists_semilinearSliceScalarGenerators`. Its two scalar tower functors

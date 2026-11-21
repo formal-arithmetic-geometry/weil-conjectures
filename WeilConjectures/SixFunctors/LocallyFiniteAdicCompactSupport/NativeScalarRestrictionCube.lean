@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeScalarD
 
 Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites,
 Tag 0D6E; blueprint scalar direct-image proof, Formal properties.
-(blueprint: lem-sf-native-scalar-restriction-cube).
 -/
 
 @[expose] public noncomputable section
@@ -55,8 +54,7 @@ attribute [local instance] nativeScalarModuleClosed nativeScalarModuleSymmetric
   nativeScalarIntegralExact
 
 /-- The exact derived restriction along the two condensed coefficient inclusions, in order.
-Source: the two extension/restriction adjunctions of the scalar direct-image proof.
-(blueprint: lem-sf-native-scalar-restriction-cube). -/
+Source: the two extension/restriction adjunctions of the scalar direct-image proof. -/
 def nativeScalarCompositeRestriction (l : ℕ) [Fact l.Prime]
     (E : Index l (PadicAlgCl l)) (T : Scheme.{u}) :
     DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
@@ -69,8 +67,7 @@ def nativeScalarCompositeRestriction (l : ℕ) [Fact l.Prime]
 
 /-- The pasted inverse restriction/direct-image square. Its construction uses only
 restriction and right derived direct image, not either scalar-extension mate.
-Source: blueprint scalar direct-image proof, Formal properties.
-(blueprint: lem-sf-native-scalar-restriction-cube). -/
+ -/
 def nativeScalarCompositeRestrictionSquare (l : ℕ) [Fact l.Prime]
     (E : Index l (PadicAlgCl l)) {U V : Scheme.{u}} (g : U ⟶ V) :
     TwoSquare (nativeScalarCompositeRestriction l E U)
@@ -85,8 +82,7 @@ def nativeScalarCompositeRestrictionSquare (l : ℕ) [Fact l.Prime]
         (padicIntegersRingObjToContinuousMapRingObj l E) g).inv
 
 /-- The inverse of the specified native restriction/direct-image comparison.
-Source: Stacks, Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-native-scalar-restriction-cube). -/
+Source: Stacks, Cohomology on Sites, Tag 0D6E. -/
 def nativeRingRestrictionSquare {R S : PurCompactSupport.Coefficients.{u}}
     (a : PurCompactSupport.Change R S) {U V : Scheme.{u}} (g : U ⟶ V) :
     TwoSquare (proEtaleRingRestrictScalars (a.map U)).mapDerivedCategory
@@ -106,7 +102,6 @@ No scalar-extension functor or scalar mate occurs in the conclusion.
 
 Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites, Tag 0D6E;
 steps 3--4 of lem-sf-native-proper-scalar-mate-presentation.
-(blueprint: lem-sf-native-scalar-restriction-cube).
 
 Proof in words:
 1. Restriction of scalars along the two inclusions is restriction along their composite:

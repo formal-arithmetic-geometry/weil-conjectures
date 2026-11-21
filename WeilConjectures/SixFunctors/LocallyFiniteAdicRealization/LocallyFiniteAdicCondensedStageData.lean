@@ -94,8 +94,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Finite tensor comparison with condensed coefficients
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison)
-(blueprint: def-sf-locally-finite-adic-condensed-stage-comparison-data)
 -/
 
 @[expose] public noncomputable section
@@ -117,8 +115,7 @@ open scoped Obj
 namespace WeilConjectures.LocallyFiniteAdicRealization
 
 /-- The actual coefficient comparison: bounded finite-field functions are locally finite
-functions. Source: Bhatt--Scholze, Lemma 6.8.2, via the two published ring comparisons
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison). -/
+functions. Source: Bhatt--Scholze, Lemma 6.8.2, via the two published ring comparisons. -/
 def condensedNativeMap (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     ProEtale.padicAlgClRingObj X l ⟶ abRing l X :=
   (ProEtale.CondensedQbarCoefficientRealization.globalCoefficientIso l X).hom.hom ≫
@@ -135,8 +132,7 @@ instance condensedNativeMap_isIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
   infer_instance
 
 /-- Transport native modules to the condensed coefficient, retaining their abelian sheaves.
-Source: Bhatt--Scholze, Lemma 6.8.2; restriction along the specified ring isomorphism
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison). -/
+Source: Bhatt--Scholze, Lemma 6.8.2; restriction along the specified ring isomorphism. -/
 def nativeCondensedModules (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :=
   ProEtale.AdicSheaf.forgetAb l X ⋙ Mod.comap (condensedNativeMap l X)
 
@@ -153,8 +149,7 @@ instance nativeCondensedModules_additive (l : ℕ) [Fact l.Prime] (X : Scheme.{u
   Functor.additive_of_preserves_binary_products _
 
 /-- The exact derived transport along the same coefficient isomorphism.
-Source: Bhatt--Scholze, Lemma 6.8.2
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison). -/
+Source: Bhatt--Scholze, Lemma 6.8.2. -/
 def nativeCondensedDerived (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :=
   (nativeCondensedModules l X).mapDerivedCategory
 
@@ -167,8 +162,7 @@ open AlgebraicallyClosedCoefficients (Index)
 
 /-- Only finite-stage data: full faithful functors on raw rational stages, scalar comparisons,
 and their action on a representative. No statement about a Hom colimit is included.
-Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison). -/
+Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15. -/
 structure CondensedStageComparison (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (D : NormalizedFunctor l X) where
   finite : ∀ E : Index l (PadicAlgCl l),

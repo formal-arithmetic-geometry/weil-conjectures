@@ -31,7 +31,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Realize the completed projection and restriction on the fixed tensor models.
 Source: Stacks 099N, 09BP and 0GL1; Bhatt--Scholze 6.5.5 and 6.5.8.
-(blueprint: lem-sf-open-factor-projection-realization).
 
 Proof: use the constant-section and quotient-projection normalization to transport
 the open slice operations in q to the fixed operations. The representative equation

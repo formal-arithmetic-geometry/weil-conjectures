@@ -18,7 +18,7 @@ This file contains the "minimal counterexample" step of the proof of blueprint
 change maps are isomorphisms on the geometric stalks at non-closed points, then they are
 isomorphisms. To check the stalk at a closed point `z`, restrict to affine open neighbourhoods `X₀`
 and `Y₀` of the images of `z` (étale base change), compactify `Y₀` into a projective `K`-scheme of
-the same dimension (blueprint `corollary-open-direct-image-over-field--2`), and apply the projective
+the same dimension, and apply the projective
 case.
 
 In the formalisation, the restriction to the affine open neighbourhoods is done by étale
@@ -45,7 +45,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 affine second factor: if the base change maps are isomorphisms on the geometric stalks at non-closed
 points for all data with `dim X + dim Y ≤ N`, then `corollary-open-direct-image-over-field--2` holds
 for data with `dim X + dim Y ≤ N` and `Y` affine. Compactify `Y` into a projective `K`-scheme `Ȳ` of
-the same dimension (blueprint `corollary-open-direct-image-over-field--2`), apply the projective
+the same dimension, apply the projective
 case to `X ×_K Ȳ`, and restrict to the open subscheme `X ×_K Y`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_atNonClosed_of_isAffine {N : WithBot ℕ∞}
     (H : Etale.OpenImmersionBaseChangeAtNonClosed Λ N) {K : Type u} [Field K]

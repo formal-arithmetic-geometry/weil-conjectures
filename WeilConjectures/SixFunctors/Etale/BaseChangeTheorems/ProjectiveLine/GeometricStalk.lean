@@ -22,9 +22,9 @@ Let `p : ℙ¹_S ⟶ S` be the projective line and
 
 ```
 X' --g'--> ℙ¹_S
-|            |
-f'           p
-v            v
+| |
+f' p
+v v
 T ----g----> S
 ```
 
@@ -93,9 +93,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 ```
 X' --g'--> ℙ¹_S
-|            |
-f'           p
-v            v
+| |
+f' p
+v v
 T ----g----> S
 ```
 
@@ -117,7 +117,6 @@ field-extension pullback.
 **Form of the statement.** The statement asserts the existence of additive
 isomorphisms of the two stalks with closed-fibre cohomology that make the
 exchange square commute.
-(blueprint: proposition-proper-base-change-projective-line--1)
 -/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
@@ -155,9 +154,9 @@ cartesian square
 
 ```
 X' --g'--> ℙ¹_S
-|            |
-f'           p
-v            v
+| |
+f' p
+v v
 T ----g----> S
 ```
 
@@ -210,8 +209,7 @@ theorem Etale.isIso_baseChangeHomologyMap_projectiveLine
 torsion sheaf `I` the higher direct images `Rᵠp_* I` vanish, and after any base change the
 exchange morphism `g⁻¹ Rᵠp_* I ⟶ Rᵠf'_* g'⁻¹ I` is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine`), so the target
-vanishes too.
-(blueprint: `proposition-proper-base-change-projective-line`) -/
+vanishes too. -/
 theorem Etale.hasInjectiveAcyclicity_projectiveLine (S : Scheme.{u}) :
     Etale.HasInjectiveAcyclicity Λ (ProjectiveLine S ↘ S) := by
   intro T X' g f' g' sq I hI _ q hq

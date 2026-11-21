@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 /-! # Goodness after completed open extension and pullback
 
 Source: Stacks Tags 03DI, 03DJ, 0E8I and 0G7E.
-(blueprint: lem-sf-open-extension-good-complex-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -26,7 +25,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Completed coefficient inverse image preserves goodness after open extension.
 Source: Stacks Tag 0G7E, applied to the completed-ring geometric inverse image.
-(blueprint: lem-sf-open-extension-good-complex-pullback).
 
 Proof: apply the ringed-topos K-flat pullback theorem to the completed coefficient
 inverse image and the already extended complex. Its two conclusions are precisely

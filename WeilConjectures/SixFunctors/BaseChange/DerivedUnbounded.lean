@@ -15,9 +15,9 @@ For a commutative square of schemes
 
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
+  | |
+  f' f
+  ↓ ↓
   Y' --g---> Y
 ```
 
@@ -38,9 +38,9 @@ since `Rf_!` lives there.
 
 ```
   D(X) --Lg'^*--> D(X')
-   |               |
-  Rf_*   ⇓ Ex_*   Rf'_*
-   ↓               ↓
+   | |
+  Rf_* ⇓ Ex_* Rf'_*
+   ↓ ↓
   D(Y) --Lg^*---> D(Y')
 ```
 
@@ -49,8 +49,6 @@ square isomorphism followed by `Lg'^*` of the counit of `Lf^* ⊣ Rf_*`
 (`AlgebraicGeometry.Etale.derivedUpperStar_map_derivedBaseChangeMap_app_counit`), and its
 composite with the unit of `Lf^* ⊣ Rf_*` is the unit of `Lf'^* ⊣ Rf'_*` followed by `Rf'_*` of
 the derived square isomorphism (`AlgebraicGeometry.Etale.map_unit_derivedBaseChangeMap_app`).
-
-(blueprint: `def:weil-pbc-derived-exchange-unbounded`)
 
 ## TODO
 
@@ -86,9 +84,9 @@ left, the forward map on the right).
 
 ```
   D(Y) --Lf^*--> D(X)
-   |              |
-  Lg^*    ≅     Lg'^*
-   ↓              ↓
+   | |
+  Lg^* ≅ Lg'^*
+   ↓ ↓
   D(Y') --Lf'^*-> D(X')
 ```
 -/
@@ -113,13 +111,12 @@ on the unbounded derived categories of étale sheaves, as a natural transformati
 
 ```
   D(X) --Lg'^*--> D(X')
-   |               |
-  Rf_*   ⇓ Ex_*   Rf'_*
-   ↓               ↓
+   | |
+  Rf_* ⇓ Ex_* Rf'_*
+   ↓ ↓
   D(Y) --Lg^*---> D(Y')
 ```
-
-(blueprint: `def:weil-pbc-derived-exchange-unbounded`) -/
+ -/
 noncomputable def derivedBaseChangeMap (sq : CommSq g' f' f g) :
     R((f)_*[A]) ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ R((f')_*[A]) :=
   (derivedBaseChangeSquare A sq)
@@ -130,13 +127,12 @@ by the counit: for `K` in `D(X_ét)` the following square commutes.
 
 ```
   Lf'^* Lg^* Rf_* K --Lf'^*(Ex_* K)--> Lf'^* Rf'_* Lg'^* K
-          |                                   |
-  derivedSquareUpperStarIso                 ε_{f'}
-          ↓                                   ↓
+          | |
+  derivedSquareUpperStarIso ε_{f'}
+          ↓ ↓
   Lg'^* Lf^* Rf_* K ---Lg'^*(ε_f K)-------> Lg'^* K
 ```
-
-(blueprint: `def:weil-pbc-derived-exchange-unbounded`) -/
+ -/
 @[reassoc]
 lemma derivedUpperStar_map_derivedBaseChangeMap_app_counit (sq : CommSq g' f' f g)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
@@ -152,9 +148,9 @@ square commutes.
 
 ```
   Lg^* M -----------η_{f'}-----------> Rf'_* Lf'^* Lg^* M
-    |                                         |
-  Lg^*(η_f M)             Rf'_*(derivedSquareUpperStarIso M)
-    ↓                                         ↓
+    | |
+  Lg^*(η_f M) Rf'_*(derivedSquareUpperStarIso M)
+    ↓ ↓
   Lg^* Rf_* Lf^* M -------Ex_*-------> Rf'_* Lg'^* Lf^* M
 ```
 -/

@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleModuleObject
 
 /-! # LocallyFiniteAdicConstructibleSheafSmall
 
-Source: Bhatt--Scholze, Section 6.8; native realization proof
-(blueprint: lem-sf-locally-finite-adic-constructible-sheaf-small).
+Source: Bhatt--Scholze, Section 6.8; native realization proof.
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +38,7 @@ namespace WeilConjectures.LocallyFiniteAdicRealization
 /-- A small family of native constructible sheaves, before passage to complexes.
 
 Source: native realization proof step 8, constructible-module presentation counting;
-Bhatt--Scholze, Definitions 6.8.3, 6.8.6 and 6.8.8
-(blueprint: lem-sf-locally-finite-adic-constructible-sheaf-small).
+Bhatt--Scholze, Definitions 6.8.3, 6.8.6 and 6.8.8.
 
 Proof in words: forget the constant coefficient action from a native internal module
 to obtain a module in abelian sheaves over abRing. Conversely, restrict its action

@@ -105,7 +105,6 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 Source: Bhatt--Scholze, Propositions 3.1.9--3.1.10 and Lemma 6.5.5;
 Stacks Project, Tags 099I and 0941.
-(blueprint: lem-sf-completed-coefficient-unit-complete)
 -/
 
 @[expose] public section
@@ -294,8 +293,7 @@ end
 is an isomorphism after passing to the derived category.
 
 Source: Bhatt--Scholze, Propositions 3.1.9--3.1.10, pp. 17--18, and
-Lemma 6.5.5, pp. 49--50; Stacks Project, Tags 099I and 0941
-(blueprint: lem-sf-completed-coefficient-unit-complete).
+Lemma 6.5.5, pp. 49--50; Stacks Project, Tags 099I and 0941.
 
 Proof: the coefficient sheaf B is the inverse limit of the finite quotient
 coefficient sheaves. Tensoring B with each quotient and then restricting scalars

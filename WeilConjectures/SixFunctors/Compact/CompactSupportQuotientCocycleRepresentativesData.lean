@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.Compact.CompactSupportQuotientChainFormulas
 /-! # Chain-level quotient and balancing maps
 
 Source: blueprint coefficient quotient proof, Steps 2 and 3; Stacks Tags 03EK and 06YY.
-(blueprint: lem-coef-compact-support-quotient-model-maps).
 -/
 
 @[expose] public noncomputable section

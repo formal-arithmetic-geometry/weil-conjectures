@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.Ringed.Tensor.RingedTensorComparisonExtens
 /-! # Existence of native open tensor representative data
 
 Source: Stacks 0E8I, 0GL1 and 07A4; support-open-tensor steps 5--6.
-(blueprint: lem-coef-native-open-tensor-models-data-existence).
 -/
 
 @[expose] public noncomputable section
@@ -106,7 +105,6 @@ set_option linter.unusedVariables false in
 finite open tensor representative data. The construction uses the normalized open
 adjunction, its restriction/tensor comparison, and total K-flat representatives.
 Source: Stacks 0E8I, 0GL1 and 07A4; support-open-tensor proof steps 5--6.
-(blueprint: lem-coef-native-open-tensor-models-data-existence).
 -/
 theorem nativeOpenTensorModels_data_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j]

@@ -103,7 +103,7 @@ noncomputable def tensorWeilDatum {A B : DerivedCategoryModule Λ Y}
 
 The *Frobenius operator* of a Weil datum `ψ : Lh^* M ⟶ M` on `H⁰(Y, M) = Hom(Λ_Y, M)`,
 ```
-         ε⁻¹                Lh^* x               ψ
+         ε⁻¹ Lh^* x ψ
   Λ_Y ─────────▶ Lh^* Λ_Y ──────────▶ Lh^* M ─────────▶ M
 ```
 for the canonical `ε : Lh^* Λ_Y ≅ Λ_Y` (`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`).
@@ -247,7 +247,7 @@ lemma IsWeilPairing.shift_right {A B : DerivedCategoryModule Λ Y}
 /-- The *degreewise pairing* of a pairing `Q : A ⊗ᴸ B ⟶ C`,
 `Hom(Λ_Y, A[i]) × Hom(Λ_Y, B[j]) ⟶ Hom(Λ_Y, C[i + j])`,
 ```
-         λ⁻¹                  x ⊗ y                        ≅                     Q[i + j]
+         λ⁻¹ x ⊗ y ≅ Q[i + j]
   Λ_Y ───────▶ Λ_Y ⊗ᴸ Λ_Y ─────────▶ A[i] ⊗ᴸ B[j] ─────▶ (A ⊗ᴸ B)[i + j] ──────────▶ C[i + j]
 ```
 where the middle isomorphism moves the shifts out of the tensor product
@@ -306,7 +306,7 @@ variable [Finite Λ] {a : X ⟶ Y} [HasCompactification a] {g : X ⟶ X} {h : Y 
 
 /-- The Weil datum on `Ra_! K` of a Weil datum `φ : Lg^* K ⟶ K`, for `g ≫ a = a ≫ h`:
 ```
-                Ex_!                     Ra_! φ
+                Ex_! Ra_! φ
   Lh^* Ra_! K ───────▶ Ra_! Lg^* K ──────────▶ Ra_! K
 ```
 with the compactly supported exchange map
@@ -320,7 +320,7 @@ noncomputable def lowerShriekWeilDatum [QuasiCompact a] (sq : IsPullback g a a h
 
 /-- The Weil datum on `Ra_* M` of a Weil datum `ψ : Lg^* M ⟶ M`, for `g ≫ a = a ≫ h`:
 ```
-                Ex_*                     Ra_* ψ
+                Ex_* Ra_* ψ
   Lh^* Ra_* M ───────▶ Ra_* Lg^* M ──────────▶ Ra_* M
 ```
 with the derived base change map (`AlgebraicGeometry.Etale.derivedBaseChangeMap`). Over

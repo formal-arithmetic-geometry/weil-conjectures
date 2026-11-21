@@ -88,11 +88,6 @@ theorem projectionTensorComparisonCompatible_of_representative_formula
 This is a square for pullback and tensor alone; no support functor, direct image,
 projection mate, or adjunction counit occurs in the square.
 
-Source: thm-sf-pf-field.proof.md, Compatibility, and the common finite coefficient
-field paragraph; canonicalCommonStagePullbackTensor_existsUnique and its
-pullbackTensorAtCommonStage representative formula.
-(blueprint: lem-sf-common-projection-pullback-tensor-compatibility).
-
 Proof: use the rational and common tensor and pullback normalization equalities
 and the two tensorPullbackNormalization equations. The left comparison of the
 coefficient adjunction is the identity on the prescribed finite-stage object

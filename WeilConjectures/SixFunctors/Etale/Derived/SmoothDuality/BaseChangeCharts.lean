@@ -23,8 +23,7 @@ isomorphism *provided* it is one for
 * the affine-line projections `𝔸¹_S ⟶ S` over bases on which the exponent of `Λ` is
   invertible (`AlgebraicGeometry.Etale.AffineLineBaseChange`): the elementary case (a), from the
   explicit projective-line adjunction `proposition-adjunction-projective-line--1` and its
-  compatibility with base change (`lemma-cycle-class-cartier-divisor`,
-  `lemma-cohomology-projective-line-trace`).
+  compatibility with base change.
 
 The open-immersion case (b) is proved
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right`).
@@ -165,9 +164,7 @@ def AffineLineBaseChange : Prop :=
     (sq : IsPullback g' p' (𝔸(ULift.{u} (Fin 1); S) ↘ S) g) [HasCompactification p']
     [QuasiCompact p'], IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)
 
-/-- **Base change for affine-space projections from the affine line** (blueprint
-`proposition-exceptional-inverse-image-smooth-morphism--6`, "for affine space by composing those
-adjunctions"): if the affine-line projections satisfy base change, then so do the projections
+/-- **Base change for affine-space projections from the affine line**: if the affine-line projections satisfy base change, then so do the projections
 `p_d : 𝔸^d_S ⟶ S` over bases on which the exponent of `Λ` is invertible. For `d = 0` the
 projection is an isomorphism; for `d + 1` it is, through `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`, the composite
 of the affine-line projection over `𝔸^d_S` and of `p_d`. -/

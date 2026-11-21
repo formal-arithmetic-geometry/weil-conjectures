@@ -16,8 +16,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasP
 
 Let `Λ` be a finite coefficient ring, `f : X ⟶ B`, `g : Y ⟶ B` morphisms admitting
 compactifications and `p`, `q` the projections of `X ×_B Y`. This file defines the canonical
-isomorphism of the relative product theorem (blueprint `lemma-kunneth-formula-compact-supports`,
-`lemma-kunneth-formula-compact-supports--1`)
+isomorphism of the relative product theorem
 
 `κ^rel_{K,L} : R(f ×_B g)_! (K ⊠ L) ≅ Rf_! K ⊗ᴸ Rg_! L`
 
@@ -39,7 +38,6 @@ and specialised to the chosen fibre product (`AlgebraicGeometry.Etale.relativeKu
   `AlgebraicGeometry.Etale.relativeKunnethIso`: the relative Künneth isomorphism.
 - `AlgebraicGeometry.Etale.relativeKunnethNatIso`: the relative Künneth isomorphism as a
   natural isomorphism of bifunctors `D(X_ét) ⥤ D(Y_ét) ⥤ D(B_ét)`.
-
 -/
 
 @[expose] public section
@@ -270,9 +268,9 @@ variable {p : P ⟶ X} {q : P ⟶ Y} {f : X ⟶ B} {g : Y ⟶ B} (sq : IsPullbac
 `p ≫ f = q ≫ g`:
 
 ```
-Rq_!(Lp^*K ⊗ᴸ Lq^*L) ≅ Rq_! Lp^*K ⊗ᴸ L       (PF_{q, Lp^*K, L}⁻¹)
-                     ≅ Lg^* Rf_! K ⊗ᴸ L      (Ex_!⁻¹ ⊗ 1)
-                     ≅ L ⊗ᴸ Lg^* Rf_! K      (σ)
+Rq_!(Lp^*K ⊗ᴸ Lq^*L) ≅ Rq_! Lp^*K ⊗ᴸ L (PF_{q, Lp^*K, L}⁻¹)
+                     ≅ Lg^* Rf_! K ⊗ᴸ L (Ex_!⁻¹ ⊗ 1)
+                     ≅ L ⊗ᴸ Lg^* Rf_! K (σ)
 ``` -/
 noncomputable def relativeKunnethInnerIso
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -323,21 +321,21 @@ end Inner
 
 ```
   P --q--> Y
-  |        |
-  p        g
-  v        v
+  | |
+  p g
+  v v
   X --f--> B
 ```
 
 and a morphism `h = q ≫ g`: for `K` on `X` and `L` on `Y`, the composite
 
 ```
-Rh_!(Lp^*K ⊗ᴸ Lq^*L) ≅ Rg_! Rq_!(Lp^*K ⊗ᴸ Lq^*L)      (α_{g,q}⁻¹)
-                     ≅ Rg_!(Rq_! Lp^*K ⊗ᴸ L)           (Rg_! PF_{q, Lp^*K, L}⁻¹)
-                     ≅ Rg_!(Lg^* Rf_! K ⊗ᴸ L)          (Rg_!(Ex_!⁻¹ ⊗ 1))
-                     ≅ Rg_!(L ⊗ᴸ Lg^* Rf_! K)          (Rg_! σ)
-                     ≅ Rg_! L ⊗ᴸ Rf_! K                (PF_{g, L, Rf_! K}⁻¹)
-                     ≅ Rf_! K ⊗ᴸ Rg_! L                (σ)
+Rh_!(Lp^*K ⊗ᴸ Lq^*L) ≅ Rg_! Rq_!(Lp^*K ⊗ᴸ Lq^*L) (α_{g,q}⁻¹)
+                     ≅ Rg_!(Rq_! Lp^*K ⊗ᴸ L) (Rg_! PF_{q, Lp^*K, L}⁻¹)
+                     ≅ Rg_!(Lg^* Rf_! K ⊗ᴸ L) (Rg_!(Ex_!⁻¹ ⊗ 1))
+                     ≅ Rg_!(L ⊗ᴸ Lg^* Rf_! K) (Rg_! σ)
+                     ≅ Rg_! L ⊗ᴸ Rf_! K (PF_{g, L, Rf_! K}⁻¹)
+                     ≅ Rf_! K ⊗ᴸ Rg_! L (σ)
 ```
 
 of blueprint `lemma-kunneth-formula-compact-supports`. Every arrow is an isomorphism for a finite
@@ -380,7 +378,7 @@ lemma rightDerivedLowerShriek_map_relativeKunnethInnerIso_hom_naturality_left
   rw [Functor.mapIso_hom, Functor.mapIso_hom, ← Functor.map_comp, ← Functor.map_comp,
     relativeKunnethInnerIso_hom_naturality_left]
 
-/-- Blueprint `lemma-kunneth-formula-compact-supports`: the relative Künneth isomorphism is natural
+/-- The relative Künneth isomorphism is natural
 in the first variable. -/
 @[reassoc]
 theorem relativeKunnethIsoOfIsPullback_hom_naturality_left
@@ -398,7 +396,7 @@ theorem relativeKunnethIsoOfIsPullback_hom_naturality_left
     (projectionIsoApp_inv_naturality_right Λ g L ((R(f)_![ModuleCat.{u + 1} Λ]).map φ))
     (derivedTensorBraidingIso_hom_naturality_right _ _)
 
-/-- Blueprint `lemma-kunneth-formula-compact-supports`: the relative Künneth isomorphism is natural
+/-- The relative Künneth isomorphism is natural
 in the second variable. -/
 @[reassoc]
 theorem relativeKunnethIsoOfIsPullback_hom_naturality_right
@@ -417,7 +415,7 @@ theorem relativeKunnethIsoOfIsPullback_hom_naturality_right
     (projectionIsoApp_inv_naturality_left Λ g ψ _)
     (derivedTensorBraidingIso_hom_naturality_left _ _)
 
-/-- Blueprint `lemma-kunneth-formula-compact-supports`: the relative Künneth isomorphism
+/-- The relative Künneth isomorphism
 `Rh_!(Lp^*K ⊗ᴸ Lq^*L) ≅ Rf_! K ⊗ᴸ Rg_! L` as a natural isomorphism of bifunctors
 `D(X_ét) ⥤ D(Y_ét) ⥤ D(B_ét)`, with components
 `AlgebraicGeometry.Etale.relativeKunnethIsoOfIsPullback`. -/
@@ -487,7 +485,7 @@ noncomputable def relativeKunnethIso
   relativeKunnethIsoOfIsPullback Λ (IsPullback.of_hasPullback f g) _
     (pullback.snd_comp_eq_toBase f g) K L
 
-/-- Blueprint `lemma-kunneth-formula-compact-supports`: the relative Künneth isomorphism
+/-- The relative Künneth isomorphism
 `R(f ×_B g)_! (K ⊠ L) ≅ Rf_! K ⊗ᴸ Rg_! L` as a natural isomorphism of bifunctors
 `D(X_ét) ⥤ D(Y_ét) ⥤ D(B_ét)`, with components `AlgebraicGeometry.Etale.relativeKunnethIso`. -/
 noncomputable def relativeKunnethNatIso :

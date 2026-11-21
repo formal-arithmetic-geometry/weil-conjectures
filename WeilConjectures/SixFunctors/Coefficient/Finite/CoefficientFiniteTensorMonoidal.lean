@@ -50,7 +50,6 @@ import all Mathlib.CategoryTheory.Limits.Final
 /-! # Monoidality of the fixed finite coefficient tensor comparison
 
 Source: Stacks 06YY and 07A4.
-(blueprint: lem-coef-finite-tensor-monoidal).
 -/
 
 @[expose] public section
@@ -175,7 +174,6 @@ private theorem finiteCochainModel_counit (n : ℕ)
 -- Compare the fixed tensorator through its recorded localization model.
 /-- The fixed finite tensorator is the inverse tensorator of a monoidal functor.
 Source: Stacks 07A4 and 06YY.
-(blueprint: lem-coef-finite-tensor-monoidal).
 
 Proof: precompose the recorded homotopy universal counit with the full, essentially
 surjective cochain quotient and transport across its localization comparison. This

@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 # Künneth–Verdier comparisons from duality of external products
 
 Over a field `k`, for a finite coefficient ring `Λ` of invertible exponent, and with Verdier
-biduality (`sk-prop-sf-biduality-general`), the three non-formal product comparisons of
+biduality, the three non-formal product comparisons of
 `lemma-external-duality-trace-morphism` — the exceptional Künneth map `α`, the external Hom map `β`
 and the Künneth–Verdier map `κ` — reduce formally to the single statement that Verdier duality
 commutes with external products,
@@ -25,7 +25,7 @@ commutes with external products,
 `𝔻_{X ×_k Y} (P ⊠ Q) ≅ 𝔻_X P ⊠ 𝔻_Y Q`
 
 for `P ∈ Dctf(X, Λ)`, `Q ∈ Dctf(Y, Λ)` on separated finite-type `k`-schemes
-(`sk-rem-sf-kv-formal`, `rem-sf-kv-formal`). This file carries out that reduction at the level
+. This file carries out that reduction at the level
 of the existence of isomorphisms.
 
 ## Main definitions
@@ -50,7 +50,6 @@ of the existence of isomorphisms.
   `AlgebraicGeometry.Etale.VerdierDualExternalProduct.nonempty_iso_exceptional`: the maps
   `κ`, `β`, `α` of `lemma-external-duality-trace-morphism` are invertible if duality commutes with
   external products.
-
 -/
 
 @[expose] public section
@@ -178,8 +177,7 @@ theorem constructibleFiniteTor_externalProduct {B X Y : Scheme.{u}} (f : X ⟶ B
   constructibleFiniteTor_tensor Λ _ (constructibleFiniteTor_leftDerivedUpperStar _ _ hK)
     (constructibleFiniteTor_leftDerivedUpperStar _ _ hM)
 
-/-- Verdier duality commutes with external products over a field `k` (`sk-rem-sf-kv-formal`,
-`rem-sf-kv-formal`): for separated finite-type `k`-schemes `X`, `Y` and `P ∈ Dctf(X, Λ)`,
+/-- Verdier duality commutes with external products over a field `k`: for separated finite-type `k`-schemes `X`, `Y` and `P ∈ Dctf(X, Λ)`,
 `Q ∈ Dctf(Y, Λ)`,
 
 `𝔻_{X ×_k Y} (P ⊠ Q) ≅ 𝔻_X P ⊠ 𝔻_Y Q`.
@@ -201,12 +199,12 @@ structure VerdierDualExternalProduct (k : Type u) [Field k] : Prop where
       externalProduct (ModuleCat.{u + 1} Λ) a b ((verdierDual Λ a).obj (op P))
         ((verdierDual Λ b).obj (op Q)))
 
-/-- Blueprint `sk-rem-sf-kv-formal`, `rem-sf-kv-formal`: the formal rewriting of the target of
+/-- The formal rewriting of the target of
 `κ`. For separated finite-type `k`-schemes `X`, `Y`, `M ∈ Dctf(X, Λ)` and any `N` on `Y`,
 
 `RHom(p_Y^* N, Rp_X^! M) ≅ 𝔻_{X ×_k Y}(𝔻_X M ⊠ N)`.
 
-By biduality (`sk-prop-sf-biduality-general`) and duality against pullback
+By biduality and duality against pullback
 (`lemma-internal-adjunction-two-exchange-formulas--3`),
 `Rp_X^! M ≅ Rp_X^! 𝔻_X 𝔻_X M ≅ 𝔻(p_X^* 𝔻_X M)`, and the internal adjunction
 `RHom(A, 𝔻 C) ≅ 𝔻(C ⊗ᴸ A)` (`AlgebraicGeometry.Etale.derivedHomVerdierDualIso`) with `A = p_Y^* N`,
@@ -391,7 +389,7 @@ For `P ∈ Dctf(X, Λ)` and `Q ∈ Dctf(Y, Λ)`, the internal adjunction and dua
 pullback (`lemma-internal-adjunction-two-exchange-formulas--3`) give
 `𝔻(P ⊠ Q) ≅ RHom(p_Y^* Q, 𝔻(p_X^* P)) ≅ RHom(p_Y^* Q, Rp_X^! 𝔻P)`, and `κ` for the pair
 `(𝔻P, Q)` identifies the latter with `𝔻P ⊠ 𝔻Q`. Biduality is not needed in this direction,
-only that `𝔻_X` preserves `Dctf` (`sk-prop-sf-biduality-general`). -/
+only that `𝔻_X` preserves `Dctf`. -/
 theorem KunnethVerdier.verdierDualExternalProduct [PerfectField k]
     [HasInvertibleExponent Λ (Spec (.of k))]
     (h : KunnethVerdier Λ k) : VerdierDualExternalProduct Λ k := by
@@ -402,7 +400,7 @@ theorem KunnethVerdier.verdierDualExternalProduct [PerfectField k]
   exact ⟨(derivedHomVerdierDualIso _ (pullback.fst a b ≫ a) _ _).symm ≪≫
     ((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).obj _).mapIso e₁ ≪≫ e₂.symm⟩
 
-/-- Blueprint `sk-rem-sf-kv-formal`, `rem-sf-kv-formal`: Künneth–Verdier is formally duality of
+/-- Künneth–Verdier is formally duality of
 external products.
 
 Over a field `k`, for a finite coefficient ring `Λ` of invertible exponent, the Künneth–Verdier
@@ -411,7 +409,7 @@ for all `M ∈ Dctf(X, Λ)`, `N ∈ Dctf(Y, Λ)` if and only if Verdier duality 
 products, `𝔻_{X ×_k Y} (P ⊠ Q) ≅ 𝔻_X P ⊠ 𝔻_Y Q`. The forward implication is
 `AlgebraicGeometry.Etale.KunnethVerdier.verdierDualExternalProduct`; the backward one,
 `AlgebraicGeometry.Etale.VerdierDualExternalProduct.nonempty_iso_kunnethVerdier`, uses
-biduality (`sk-prop-sf-biduality-general`) to write `Rp_X^! M ≅ 𝔻(p_X^* 𝔻M)`. -/
+biduality to write `Rp_X^! M ≅ 𝔻(p_X^* 𝔻M)`. -/
 theorem verdierDualExternalProduct_iff_kunnethVerdier [IsAlgClosed k]
     [HasInvertibleExponent Λ (Spec (.of k))] :
     VerdierDualExternalProduct Λ k ↔ KunnethVerdier Λ k :=

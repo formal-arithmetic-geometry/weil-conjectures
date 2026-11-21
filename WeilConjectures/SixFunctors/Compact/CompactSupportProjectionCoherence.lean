@@ -8,10 +8,6 @@ module
 public import WeilConjectures.SixFunctors.CompactSupportFiniteProjection.ConstructibleProjectionMates
 
 /-! # Compact-support projection comparison equations
-
-Source: the coherence paragraph of the projection-formula proof in
-literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done.
-(blueprint: def-sf-projection-comparison-equations).
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +29,7 @@ namespace WeilConjectures
 /-- The four comparison equations for the specified projection, without an
 invertibility or naturality assertion. These are precisely the corresponding
 fields of `CompactSupportProjectionLaws`, with the same second-input predicate.
-Source: fix-prop-projection-formula.proof.md, final coherence sentence.
-(blueprint: def-sf-projection-comparison-equations). -/
+ -/
 structure CompactSupportProjectionCoherence {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) (T : ∀ X, B X ⥤ B X ⥤ B X)

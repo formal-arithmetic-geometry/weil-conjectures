@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 Source: Stacks Project, Tags 03EL, 06YY and 0941, and the coefficient-line
 pullback convention of the orientation datum.
-(blueprint: lem-sf-integral-pullback-augmentation-ambient)
 -/
 
 @[expose] public noncomputable section
@@ -65,7 +64,6 @@ or flatness assumption on the complex is involved.
 
 Source: Stacks Project, Tags 03EL, 06YY and 0941; the normalization conventions of
 `theorem-smooth-purity-all-admissible-coefficients`, arbitrary scheme pullback.
-(blueprint: lem-sf-integral-pullback-augmentation-ambient)
 
 Proof: The projection characterizations of `sfCompletedCoefficientMap` and
 `IntegralAmbient.coefficientMap` identify the structural ring maps of the two

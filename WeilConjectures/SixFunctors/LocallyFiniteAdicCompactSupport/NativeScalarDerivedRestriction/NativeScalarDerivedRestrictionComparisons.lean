@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.EquivalenceCubeTransport.Equivalenc
 /-! # Canonical derived comparisons for a scalar presentation
 
 Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites, Tag 0D6E.
-(blueprint: def-sf-native-scalar-derived-restriction-comparisons).
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +37,7 @@ attribute [local instance] nativeScalarModuleClosed nativeScalarModuleSymmetric
   nativeScalarIntegralExact
 
 /-- The two localized restrictions, in the specified order.
-Source: the scalar direct-image proof, exact coefficient restrictions.
-(blueprint: def-sf-native-scalar-derived-restriction-comparisons). -/
+Source: the scalar direct-image proof, exact coefficient restrictions. -/
 abbrev compositeRestriction (l : ℕ) [Fact l.Prime]
     (E : Index l (PadicAlgCl l)) (T : Scheme.{u}) :
     DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
@@ -51,8 +49,7 @@ abbrev compositeRestriction (l : ℕ) [Fact l.Prime]
     (Mod.comap (padicIntegersToPadicSubfield T l E)).mapDerivedCategory
 
 /-- The positive paste of the two specified condensed comparison isomorphisms.
-Source: Stacks, Cohomology on Sites, Tag 0D6E.
-(blueprint: def-sf-native-scalar-derived-restriction-comparisons). -/
+Source: Stacks, Cohomology on Sites, Tag 0D6E. -/
 def positiveSquare (l : ℕ) [Fact l.Prime]
     (E : Index l (PadicAlgCl l)) {U V : Scheme.{u}} (g : U ⟶ V) :
     CondensedRing.moduleObjectDerivedPushforward (Profinite.padicAlgClRingObj l) g ⋙
@@ -76,8 +73,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
       (P.closureEquivalence T).inverse ⋙ proEtaleRingRestrictScalars (a.map T))
 
 /-- Localize the ordinary inverse restriction comparison with explicit composition factors.
-Source: exact localization and composition of the two coefficient restrictions.
-(blueprint: def-sf-native-scalar-derived-restriction-comparisons). -/
+Source: exact localization and composition of the two coefficient restrictions. -/
 def inverseRestriction (T : Scheme.{u}) :
     compositeRestriction l E T ⋙ (P.integralEquivalence T).inverse.mapDerivedCategory ≅
       (P.closureEquivalence T).inverse.mapDerivedCategory ⋙
@@ -96,8 +92,7 @@ def inverseRestriction (T : Scheme.{u}) :
         (J := proEtaleRingRestrictScalars (a.map T)) (k T)
 
 /-- The corresponding forward restriction comparison.
-Source: transport through the derived presentation equivalences and their units.
-(blueprint: def-sf-native-scalar-derived-restriction-comparisons). -/
+Source: transport through the derived presentation equivalences and their units. -/
 def forwardRestriction (T : Scheme.{u}) :
     (proEtaleRingRestrictScalars (a.map T)).mapDerivedCategory ⋙
         (P.integralEquivalence T).functor.mapDerivedCategory ≅
@@ -110,8 +105,7 @@ def forwardRestriction (T : Scheme.{u}) :
 variable {U V : Scheme.{u}} (g : U ⟶ V)
 
 /-- The derived inverse integral direct-image comparison.
-Source: canonical right derivation of the ordinary comparison through equivalences.
-(blueprint: def-sf-native-scalar-derived-restriction-comparisons). -/
+Source: canonical right derivation of the ordinary comparison through equivalences. -/
 def inverseIntegralPush
     (x : CondensedRing.lowerStar (Profinite.padicIntegersRingObj l E.1) g ⋙
         (P.integralEquivalence V).inverse ≅
@@ -126,8 +120,7 @@ def inverseIntegralPush
     (P.integralEquivalence U) (P.integralEquivalence V) x
 
 /-- The derived inverse closure direct-image comparison.
-Source: canonical right derivation of the ordinary comparison through equivalences.
-(blueprint: def-sf-native-scalar-derived-restriction-comparisons). -/
+Source: canonical right derivation of the ordinary comparison through equivalences. -/
 def inverseClosurePush
     (y : CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) g ⋙
         (P.closureEquivalence V).inverse ≅
@@ -142,8 +135,7 @@ def inverseClosurePush
     (P.closureEquivalence U) (P.closureEquivalence V) y
 
 /-- The forward integral direct-image comparison.
-Source: equivalence units applied to inverseIntegralPush.
-(blueprint: def-sf-native-scalar-derived-restriction-comparisons). -/
+Source: equivalence units applied to inverseIntegralPush. -/
 def forwardIntegralPush
     (x : CondensedRing.lowerStar (Profinite.padicIntegersRingObj l E.1) g ⋙
         (P.integralEquivalence V).inverse ≅
@@ -160,8 +152,7 @@ def forwardIntegralPush
     (inverseIntegralPush l E a P g x)
 
 /-- The forward closure direct-image comparison.
-Source: equivalence units applied to inverseClosurePush.
-(blueprint: def-sf-native-scalar-derived-restriction-comparisons). -/
+Source: equivalence units applied to inverseClosurePush. -/
 def forwardClosurePush
     (y : CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) g ⋙
         (P.closureEquivalence V).inverse ≅

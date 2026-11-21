@@ -11,7 +11,6 @@ import Mathlib.CategoryTheory.Localization.Prod
 /-! # Descending an open tensor comparison with its representative square
 
 Source: Stacks 06YN and 0GL1; the universal property of localization.
-(blueprint: lem-sf-native-open-tensor-derived-representative)
 -/
 
 @[expose] public noncomputable section
@@ -29,7 +28,6 @@ attribute [local instance] OpenTensorDescentInput.e_add OpenTensorDescentInput.r
 /-- Descent along the full K-flat localizations retains every representative square.
 
 Source: Stacks 06YN and 0GL1; Mathlib's fully faithful localization precomposition.
-(blueprint: lem-sf-native-open-tensor-derived-representative)
 
 Proof: restrict the two complexes to their full K-flat subcategories. Naturality
 of the fixed tensor models assembles their components into natural isomorphisms.

@@ -24,8 +24,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The canonical open mate is invertible on complete constructible inputs, and its
 output has invertible reconstruction unit.
-Source: Stacks 0GL1, 0E8I and 07A7; primitive realization Step 4
-(blueprint: lem-sf-integral-open-mate-normalization).
+Source: Stacks 0GL1, 0E8I and 07A7; primitive realization Step 4.
 
 Proof: use integralOpenReductionComparison on the actual slice presentation of j.
 Uniqueness of the left adjoints to the fixed reconstruction limit identifies its

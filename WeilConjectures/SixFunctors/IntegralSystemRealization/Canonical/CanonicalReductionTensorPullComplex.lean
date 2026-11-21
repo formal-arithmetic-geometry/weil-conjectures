@@ -29,7 +29,6 @@ attribute [local irreducible] pullbackTensorCalculus
 
 /-- The ordinary reduction/pullback mate preserves the signed total tensor map.
 Source: Stacks 07A4, 07A6 and 0941; proposition-six-operations-change-coefficients, first paragraph.
-(blueprint: lem-sf-canonical-reduction-tensor-pull-complex).
 
 Proof: the limit comparison is identity on the projected sections by
 OrdinaryLimitModel.projections. Transpose this identity through the ordinary

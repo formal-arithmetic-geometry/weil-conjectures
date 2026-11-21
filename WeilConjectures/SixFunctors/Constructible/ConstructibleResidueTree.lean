@@ -42,8 +42,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Module.ProEtaleModulePullbackC
 /-!
 # Residue-lisse refinement on qcqs pro-etale objects
 
-Source: Stacks Project, proetale.tex, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8
-(blueprint: lem-fix-constructible-residue-tree).
+Source: Stacks Project, proetale.tex, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8.
 
 All restrictions below are ordinary uncompleted derived ringed pullbacks. Coefficient
 index zero is exponent one. Finite products of the unit module are finite direct sums.
@@ -260,7 +259,7 @@ integral constructible complexes finite lisse. The assertion is stable on qcqs
 weakly etale objects of each leaf, with ordinary uncompleted pullback throughout.
 
 Source: Stacks Project, Tags 09Y4 and 09C3; Bhatt--Scholze, Lemma 6.5.8
-and Remark 6.5.10 (blueprint: lem-fix-constructible-residue-tree).
+and Remark 6.5.10.
 
 Proof: each integral constructible complex has one finite interval containing its
 residue support. For each degree in these two finite intervals choose the finite

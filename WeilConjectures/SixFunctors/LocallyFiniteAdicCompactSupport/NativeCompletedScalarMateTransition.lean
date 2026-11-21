@@ -256,8 +256,7 @@ mate moves the ordinary-to-completed comparison through it. Functoriality combin
 this map with the finite completed scalar mate, giving the left side. The direct
 scalar mate and compact support of the same completion map give the right side.
 This is an equality in the ambient ordinary derived category for every M; no stage
-functor, rational comparison, or integral realization boundary occurs.
-(blueprint: lem-sf-native-completed-scalar-mate-transition). -/
+functor, rational comparison, or integral realization boundary occurs. -/
 theorem nativeScalarComponent_transition [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (change : ∀ j : Index l (PadicAlgCl l),

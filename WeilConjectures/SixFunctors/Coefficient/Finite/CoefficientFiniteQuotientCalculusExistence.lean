@@ -14,8 +14,7 @@ import all WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictio
 
 /-! # Existence of the finite quotient calculus
 
-Source: Stacks 06YY, 07A4 and 0941
-(blueprint: lem-coef-finite-quotient-calculus-existence).
+Source: Stacks 06YY, 07A4 and 0941.
 -/
 
 @[expose] public section
@@ -519,9 +518,8 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /--
 For any tensor presentation, every finite quotient map of the normalized coefficient
 rings has its ordinary and derived scalar adjunctions, K-flat preservation, and the
-pure-tensor comparison.  These data assemble into the finite quotient calculus.
+pure-tensor comparison. These data assemble into the finite quotient calculus.
 Source: Stacks 06YY, 07A4 and 0941.
-(blueprint: lem-coef-finite-quotient-calculus-existence)
 -/
 theorem coefficientFiniteQuotientCalculus_exists
     (T : CoefficientDerivedSystemTensors l E W) :

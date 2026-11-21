@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
 Let `f : X ⟶ S` be proper, and let `ν : Y ⟶ X` be finite, surjective, and an isomorphism over
 the complement `U` of a closed subscheme `i : Z ⟶ X` on which `f` is finite. For a finite
 `Λ`-module `M`, the higher direct images of the constant sheaf `M` along `f` and along `ν ≫ f`
-are compared (`proposition-proper-direct-image-finite-coefficients`): the cokernel of the unit
+are compared: the cokernel of the unit
 `M_X ⟶ ν_* ν^* M_X` is supported on `Z`, whose direct images along `f` are concentrated in
 degree `0`.
 
@@ -150,7 +150,7 @@ noncomputable def rightDerivedLowerStarUnitComparison {X Y S : Scheme.{u}} (f : 
       ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) ν).unit.app F)) ≫
     (rightDerivedLowerStarSingleLowerStarIso ν f _).hom
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Constant coefficients under a
+/-- Constant coefficients under a
 finite normalization comparison.
 
 Let `f : X ⟶ S` be proper with `S` of finite type over a field `k`, and let `ν : Y ⟶ X` be finite

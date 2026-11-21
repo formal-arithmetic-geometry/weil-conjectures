@@ -141,7 +141,7 @@ private theorem homDiagram_representatives
 /-- Tensor diagrams preserving K-injectivity admit natural derived Hom models.
 
 Source: paragraph 1 of the current blueprint `lem-coef-integral-hom-reduction.proof.md`;
-Stacks Tags 08J7 and 0A95 (blueprint: lem-sf-integral-hom-kinjective-tensor-diagram).
+Stacks Tags 08J7 and 0A95.
 
 Proof: represent K by A and resolve G by the canonical K-injective complex I,
 with the inverse of the localized resolution map as eI. The hypothesis makes

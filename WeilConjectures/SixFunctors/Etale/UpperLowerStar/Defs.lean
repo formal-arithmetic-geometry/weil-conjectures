@@ -87,7 +87,6 @@ Its left adjoint `g^*` is the left Kan extension on presheaves followed by sheaf
   use essential smallness of the site. The Kan extensions are proved and use no smallness
   of the site at all, only of the indexing comma categories, see
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`.
-
 -/
 
 @[expose] public section
@@ -106,8 +105,7 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- Base change along an arbitrary morphism `g : Z ⟶ Y` is continuous for the small étale
 topologies. This is the `P = Q = @Etale` case of
-`AlgebraicGeometry.Scheme.isContinuous_overPullback`.
-(blueprint: `situation-conventions`) -/
+`AlgebraicGeometry.Scheme.isContinuous_overPullback`. -/
 instance Etale.isContinuous_overPullback :
     (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
       (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale) :=
@@ -159,8 +157,7 @@ namespace Etale
 
 /-- The pushforward `g_*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
 étale sites, given objectwise by `(g_* G)(V → Y) = G(V ×_Y Z → Z)`. The continuity of the
-base change functor is `Etale.isContinuous_overPullback`
-(blueprint: `def-weil-pbc-direct-image`, `situation-conventions`) -/
+base change functor is `Etale.isContinuous_overPullback` -/
 noncomputable def lowerStar :
     Sheaf Z.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A :=
   (MorphismProperty.Over.pullback @Etale ⊤ g).sheafPushforwardContinuous A
@@ -248,9 +245,7 @@ scoped notation "(" g ")^*[" A "]" =>
 
 end Etale
 
-/-- The adjunction `g^* ⊣ g_*` on sheaves for the small étale sites
-(blueprint: `def-weil-pbc-inverse-image`, `situation-conventions`,
-`situation-conventions`) -/
+/-- The adjunction `g^* ⊣ g_*` on sheaves for the small étale sites -/
 noncomputable def Etale.upperStarLowerStarAdjunction : (g)^*[A] ⊣ (g)_*[A] :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (MorphismProperty.Over.pullback @Etale ⊤ g) A
@@ -291,7 +286,7 @@ instance Etale.linear_upperStar (Λ : Type*) [Semiring Λ] [Linear Λ A] : (g)^*
 
 /-- The pullback `g^*` on étale sheaves preserves homology, being exact: it preserves
 finite limits by `Etale.preservesFiniteLimits_upperStar` and all colimits of size `0`,
-being a left adjoint. (blueprint: `situation-conventions`) -/
+being a left adjoint. -/
 instance Etale.preservesHomology_upperStar : (g)^*[A].PreservesHomology := by
   have : PreservesColimitsOfSize.{0, 0} (g)^*[A] :=
     (Etale.upperStarLowerStarAdjunction A g).leftAdjoint_preservesColimits
@@ -313,7 +308,7 @@ open Etale
 /-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards on étale
 sheaves: both sides send a sheaf `G` to the sheaf `(V → R) ↦ G(V ×_R T → T)`, up to the
 pullback pasting isomorphism `(V ×_R S) ×_S T ≅ V ×_R T` of
-`MorphismProperty.Over.pullbackComp`. (blueprint: `lem-weil-pbc-inverse-image-composition`) -/
+`MorphismProperty.Over.pullbackComp`. -/
 noncomputable def Etale.lowerStarComp (h₁₂ : T ⟶ R := h₁ ≫ h₂)
     (hh₁₂ : h₁₂ = h₁ ≫ h₂ := by cat_disch) : (h₁)_*[A] ⋙ (h₂)_*[A] ≅ (h₁₂)_*[A] :=
   Functor.sheafPushforwardContinuousComp'
@@ -345,7 +340,7 @@ section UpperStar
 
 /-- The composition isomorphism `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*` of pullbacks on étale
 sheaves, obtained from `Etale.lowerStarComp` by uniqueness of left adjoints: both sides are
-left adjoint to `(h₁)_* ⋙ (h₂)_*`. (blueprint: `lem-weil-pbc-inverse-image-composition`) -/
+left adjoint to `(h₁)_* ⋙ (h₂)_*`. -/
 noncomputable def Etale.upperStarComp (h₁₂ : T ⟶ R := h₁ ≫ h₂)
     (hh₁₂ : h₁₂ = h₁ ≫ h₂ := by cat_disch) : (h₁₂)^*[A] ≅ (h₂)^*[A] ⋙ (h₁)^*[A] :=
   ((conjugateIsoEquiv (Etale.upperStarLowerStarAdjunction A h₁₂)

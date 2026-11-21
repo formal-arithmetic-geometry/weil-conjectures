@@ -56,13 +56,7 @@ namespace WeilConjectures.IntegralHom
 universe c v r w
 
 /-- Every derived object in an independent-coefficient module category has a K-flat representative.
-
-Source: `lem-sf-reduction-tensor-strength-invertible`, proof step 3.
-Proof: choose a preimage of the object under the derived localization, apply the
-independent-coefficient K-flat resolution theorem, and map its quasi-isomorphism
-through `DerivedCategory.Q`. The resulting localization isomorphism identifies the
-resolution with the original object.
-(blueprint: lem-sf-reduction-tensor-strength-kflat-cover) -/
+ -/
 theorem exists_reduction_kflat_representative
     {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     {J : GrothendieckTopology C}

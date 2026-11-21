@@ -73,7 +73,7 @@ realization. These need comparison isomorphisms for `Rf_!` (composition, change 
 compactification) that are not constructed yet, and are not stated.
 
 The projection formula at the integral stage `𝒪_E`
-(`lemma-projection-formula-integral-coefficients`) is in
+ is in
 `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral`. The projection formula at
 the rational stage `E` and at the finite stages `E'` of `ℚ̄_ℓ`, for rationalizations of integral
 objects (`AlgebraicGeometry.Etale.hasProjectionFormula_field`,
@@ -86,7 +86,6 @@ fibre `X_y` and `K = F_X`, the projection map is the restriction `RΓ(X, F) ⟶ 
 characteristic zero, `H¹(X, F) = 0` since `X` is normal, while `H¹(X_y, F) = F`. For a dualizable
 `L`, however, the projection formula is formal and holds for any coefficients
 (`AlgebraicGeometry.Etale.hasProjectionFormula_of_isDualizable`).
-
 -/
 
 @[expose] public section
@@ -237,7 +236,7 @@ section Finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
 
-/-- Blueprint `lemma-cohomology-projective-line-trace`: The proper projection formula on the
+/-- The proper projection formula on the
 ambient category.
 
 **The projection formula for a proper direct image at finite coefficients, unbounded.**

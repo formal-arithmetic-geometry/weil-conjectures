@@ -26,7 +26,6 @@ variable (l : ℕ) [Fact l.Prime]
 /-- The canonical inverse-transpose open map is invertible on each finite-Tor input.
 Source: Stacks 0F7B and 0F7I; Zheng Section 5, Lemma 5.13 and Constructions 5.14--5.15;
 the finite and integral cases of lem-sf-ring-open-refinement, steps 1 and 2.
-(blueprint: lem-sf-ring-open-map-invertibility).
 
 Proof: refinementOpenMap is defined using the inverse of restriction to the clopen
 section and the open adjunction. Its restriction to X is an isomorphism by the

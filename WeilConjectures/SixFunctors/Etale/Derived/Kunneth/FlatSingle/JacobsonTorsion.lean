@@ -24,8 +24,7 @@ Let `Λ` be a finite ring with Jacobson radical `J`. For a sheaf `F` of `Λ`-mod
   sum of copies of `π_* Λ / J π_* Λ`.
 
 These are the finite-pushforward steps of the proof of blueprint
-`lemma-kunneth-field-coefficients--1`, for sheaves killed by `J` (blueprint
-`lemma-finiteness-small-etale-topoi--3`).
+`lemma-kunneth-field-coefficients--1`, for sheaves killed by `J`.
 -/
 
 @[expose] public section
@@ -160,8 +159,7 @@ lemma ModuleCat.exists_retract_biproduct_cokernel_smulDesc (M : ModuleCat.{u + 1
 
 /-- A constructible sheaf killed by the Jacobson radical `J` of `Λ`, on a scheme of finite type
 over a field, embeds into a finite sum of direct images along finite morphisms of constant sheaves
-with finite values killed by `J` (blueprint `lemma-finiteness-small-etale-topoi--3`
-for sheaves killed by `J`, used in the proof of blueprint `lemma-kunneth-field-coefficients--1`). -/
+with finite values killed by `J`. -/
 theorem exists_mono_biproduct_lowerStar_of_smul_eq_zero {k : Type u} [Field k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F]

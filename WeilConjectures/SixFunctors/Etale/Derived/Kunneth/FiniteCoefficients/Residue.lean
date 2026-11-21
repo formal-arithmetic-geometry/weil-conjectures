@@ -21,7 +21,7 @@ exact; its total left derived functors, computed on K-flat resolutions, are
   `D(W_ét, Λ) ⥤ D(W_ét, Λ ⧸ I)`, deriving `M ↦ (Λ ⧸ I)_W ⊗_{Λ_W} M`
   (`CategoryTheory.Sheaf.quotSMulTop`);
 - `AlgebraicGeometry.Etale.residueScalarExtensionModule`
-  (`lemma-kunneth-one-identity-factor`): `D(Mod_Λ) ⥤ D(Mod_{Λ ⧸ I})`, deriving
+: `D(Mod_Λ) ⥤ D(Mod_{Λ ⧸ I})`, deriving
   `M ↦ M / I M` (`ModuleCat.quotSMulTop`).
 
 The only input is that these functors send quasi-isomorphisms between K-flat complexes to
@@ -84,7 +84,7 @@ instance preservesKFlatQuasiIso_moduleCatQuotSMulTop :
         K).symm
   exact (ShortComplex.exact_map_iff_of_faithful _ ι).1 (h n)
 
-/-- Blueprint `lemma-kunneth-one-identity-factor`: residue scalar extension of module
+/-- Residue scalar extension of module
 complexes.
 
 The functor `- ⊗ᴸ_Λ Λ ⧸ I : D(Mod_Λ) ⥤ D(Mod_{Λ ⧸ I})` (in the blueprint for

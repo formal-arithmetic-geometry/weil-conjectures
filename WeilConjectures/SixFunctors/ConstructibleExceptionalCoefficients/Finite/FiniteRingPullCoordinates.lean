@@ -32,7 +32,7 @@ set_option backward.defeqAttrib.useBackward true
 attribute [local instance] sfIntrinsicModuleEquivalence_functor_additive
 
 /-- The exact derived square of the ordinary finite inverse-image coordinates.
-Source: Stacks 015F and 03D6 (blueprint: lem-sf-finite-ring-pull-coordinates). -/
+Source: Stacks 015F and 03D6. -/
 def finiteDerivedPullCoordinates
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)
@@ -99,8 +99,7 @@ private theorem finite_pull_coordinate_comp_derived
     (finite_pull_coordinate_comp_ordinary l E n h k hc) K
 
 /-- Finite inverse-image coordinates commute with the compositor of a triangle.
-Source: compactification-coherence proof, first two paragraphs; Stacks 03D6 and 0D6D
-(blueprint: lem-sf-finite-ring-pull-coordinates).
+Source: compactification-coherence proof, first two paragraphs; Stacks 03D6 and 0D6D.
 
 Proof: the ordinary finite direct-image compositor is the transported intrinsic
 compositor by finiteOrdinaryPushComposition. Conjugate this equality by the

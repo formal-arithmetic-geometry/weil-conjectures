@@ -49,7 +49,7 @@ namespace AlgebraicGeometry
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {X S : Scheme.{u}} {p : X ⟶ S}
 
-/-- Blueprint `theorem-smooth-base-change-classical-torsion`: The induction step in relative
+/-- The induction step in relative
 dimension one.
 
 Let `p : X ⟶ S` be affine smooth of relative dimension one with `X` affine, and let `n` be
@@ -85,7 +85,7 @@ theorem Etale.UniversalBaseChangeProperty.of_forall_lt [IsAffine X] [IsAffineHom
   exact hne (Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf Λ
     ⟨S', hnorm, X', p', K, i, Y, e, h, sq, d, hd'⟩ q hq)
 
-/-- Blueprint `theorem-smooth-base-change-classical-torsion`: The induction step in relative
+/-- The induction step in relative
 dimension one, cumulative form.
 
 Let `p : X ⟶ S` be affine smooth of relative dimension one with `X` affine, and let `n` be

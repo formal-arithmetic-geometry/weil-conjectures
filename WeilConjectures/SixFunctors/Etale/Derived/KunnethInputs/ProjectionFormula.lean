@@ -11,15 +11,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseC
 /-!
 # The projection formula morphism
 
-Inputs of the ordinary Künneth formula (blueprint subsection
-`proposition-ordinary-external-kunneth--1`) about the projection formula morphism
+Inputs of the ordinary Künneth formula about the projection formula morphism
 `Rf_* E ⊗ᴸ K ⟶ Rf_*(E ⊗ᴸ Lf^* K)`.
 
 ## Main definitions and results
 
 - `AlgebraicGeometry.Etale.projectionFormulaMap` (`definition-projection-formula-map--1`).
 - `AlgebraicGeometry.Etale.projectionFormulaMap_derivedBaseChangeMap`
-  (`lem-kun-proj-formula-natural`).
+.
 - `AlgebraicGeometry.Etale.isIso_projectionFormulaMap_of_isProper`
 (`corollary-open-direct-image-over-field--2`).
 -/
@@ -73,13 +72,13 @@ lemma homEquiv_symm_projectionFormulaMap {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- Blueprint `lem-kun-proj-formula-natural`: the projection formula commutes with base change.
+/-- The projection formula commutes with base change.
 For a commutative (for instance cartesian) square `g' ≫ f = f' ≫ g`, `E ∈ D(X_ét)` and
 `K ∈ D(Y_ét)`, the square
 ```
 Lg^*(Rf_*E ⊗ᴸ K) ──Lg^* PF_f──▶ Lg^*Rf_*(E ⊗ᴸ Lf^*K) ──Ex──▶ Rf'_*Lg'^*(E ⊗ᴸ Lf^*K)
-       │                                                          │
-       ▼                                                          ▼
+       │ │
+       ▼ ▼
 Lg^*Rf_*E ⊗ᴸ Lg^*K ──Ex ⊗ 1──▶ Rf'_*Lg'^*E ⊗ᴸ Lg^*K ──PF_f'──▶ Rf'_*(Lg'^*E ⊗ᴸ Lf'^*Lg^*K)
 ```
 commutes, where the vertical arrows are the monoidality isomorphisms of the derived pullbacks,

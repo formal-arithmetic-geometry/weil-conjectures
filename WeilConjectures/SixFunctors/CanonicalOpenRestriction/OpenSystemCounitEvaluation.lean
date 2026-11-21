@@ -103,8 +103,7 @@ private theorem transported_counit_comparison
     Category.comp_id, Category.assoc] using h
 
 /-- The actual restriction evaluation, including the coefficient equivalence units
-and counits. Source: Stacks 03DJ, 0941
-(blueprint: lem-sf-open-system-counit-evaluation). -/
+and counits. Source: Stacks 03DJ, 0941. -/
 abbrev counitRestrictionEvaluation (n : ℕ) (N : coefficientSequenceModules l E X) :
     (coefficientSequenceEvaluation l E U n).obj ((systemRestriction l E j o).obj N) ≅
       (finiteRestriction l E j o n).obj ((coefficientSequenceEvaluation l E X n).obj N) :=
@@ -123,7 +122,6 @@ abbrev counitRestrictionEvaluation (n : ℕ) (N : coefficientSequenceModules l E
 /-- The transported ordinary open-system counit evaluates to the finite counit.
 Source: Stacks Project, Tags 03DJ and 0941; the ordinary evaluation calculation
 in step 2 of `lem-sf-open-restriction-counit-on-good-complexes`.
-(blueprint: lem-sf-open-system-counit-evaluation).
 
 Proof: expand the counit of the composite adjunction into the equivalence counit
 and the localized open counit. Use naturality of extension evaluation to move the

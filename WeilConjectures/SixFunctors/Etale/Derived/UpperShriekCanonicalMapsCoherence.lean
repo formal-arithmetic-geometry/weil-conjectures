@@ -22,7 +22,7 @@ projection map followed by the counit; at `M = Λ_Y` it is the canonical map
 (`AlgebraicGeometry.Etale.lowerShriekRightAdjointUnitTensorMap`).
 This file derives, for any coefficient category, the formal properties of `τ` and its behaviour
 under composition used for cohomologically smooth morphisms
-(`lem-pur-co-smooth-composition`, `lem-pur-co-smooth-etale-locality`), from two coherence
+, from two coherence
 properties of the projection map: its compatibility with the associativity of `⊗ᴸ`
 (`AlgebraicGeometry.Etale.ProjectionMapAssociativity`) and with a composition isomorphism
 `Rh_! ≅ Rf_! ⋙ Rg_!` (`CategoryTheory.Adjunction.ProjectionCompCompatible`). Both hold for
@@ -252,7 +252,7 @@ compatible with the projection maps and an associative projection map of `f`: if
 is invertible and `θ_{g, K}` and `θ_{f, Lg^* K}` are isomorphisms, then so is `θ_{h, K}`. The
 tensor map of `h` at `(Λ, K)` factors through `τ_f(ω_g, Lg^* K)` and `Gf θ_{g, K}`; the first
 is an isomorphism since `ω_g` is invertible and `θ_f` is invertible at
-`Lg^* K ⊗ᴸ ω_g ≅ ω_g ⊗ᴸ Lg^* K` (`lem-pur-co-smooth-composition`). -/
+`Lg^* K ⊗ᴸ ω_g ≅ ω_g ⊗ᴸ Lg^* K`. -/
 theorem isIso_lowerShriekRightAdjointUnitTensorMap_comp (hassoc : ProjectionMapAssociativity A f)
     (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
     (hf : IsIso (lowerShriekRightAdjointUnitTensorMap adjf ((L((g)^*[A])).obj K)))

@@ -20,7 +20,6 @@ public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.Sites.Normalize
 Source: Stacks Project, Cohomology on Sites, Tags 06YS, 07A4 and 0G7E;
 finite coefficient scalar/site transport in the blueprint
 lemma-change-coefficients-exceptional-inverse-image--3, Paragraphs 1--3.
-(blueprint: lem-sf-normalized-stage-site-cochain-tensor-square)
 -/
 
 @[expose] public noncomputable section
@@ -49,8 +48,7 @@ local instance etaleScalarIsLeftAdjoint {A B : Type (u + 1)} [CommRing A] [CommR
   (ProEtale.etaleSheafExtendScalarsAdjunction φ X).isLeftAdjoint
 
 /-- The termwise canonical scalar/site mate on ordinary cochain complexes.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+Source: Stacks 03EL and 07A4. -/
 abbrev scalarSiteCochain
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (X : Scheme.{u})
@@ -60,16 +58,14 @@ abbrev scalarSiteCochain
 
 /-- Signed total tensor comparison for the etale-to-pro-etale inverse image.
 Its homogeneous summands are the ordinary site tensor maps.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+Source: Stacks 03EL and 07A4. -/
 abbrev siteTensorCochain (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :=
   ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X)).app P).app Q
 
 /-- Signed total tensor comparison for ordinary etale scalar extension.
-Source: Stacks 07A4, normalized scalar tensor maps
-(blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+Source: Stacks 07A4, normalized scalar tensor maps. -/
 abbrev etaleScalarTensorCochain
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (X : Scheme.{u})
@@ -78,8 +74,7 @@ abbrev etaleScalarTensorCochain
     (ProEtale.etaleSheafExtendScalars φ X)).app P).app Q
 
 /-- Signed total tensor comparison for ordinary pro-etale scalar extension.
-Source: Stacks 07A4, normalized scalar tensor maps
-(blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+Source: Stacks 07A4, normalized scalar tensor maps. -/
 abbrev proEtaleScalarTensorCochain
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (X : Scheme.{u})
@@ -108,7 +103,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive 
 
 /-- On a summand of the signed total tensor, the cochain tensor comparison of an additive
 oplax monoidal functor is its ordinary comparison `δ`.
-Source: Stacks 0FPT (blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+Source: Stacks 0FPT. -/
 @[reassoc]
 theorem map_ιMapBifunctor_mapHomologicalComplexδ (G : C ⥤ D) [G.Additive] [G.OplaxMonoidal]
     [∀ j, PreservesColimitsOfShape
@@ -126,7 +121,7 @@ theorem map_ιMapBifunctor_mapHomologicalComplexδ (G : C ⥤ D) [G.Additive] [G
 omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
 /-- On a summand of the signed total tensor, a tensor product of cochain maps is the
 tensor product of its components.
-Source: Stacks 0FPT (blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+Source: Stacks 0FPT. -/
 @[reassoc]
 theorem ιMapBifunctor_tensorHom_f {K K' L L' : CochainComplex C ℤ} (f : K ⟶ K')
     (g : L ⟶ L') (p q n : ℤ) (h : ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) (p, q) = n) :
@@ -172,7 +167,7 @@ variable {C C' D D' : Type*} [Category* C] [Category* C'] [Category* D] [Categor
 
 /-- A square of additive oplax monoidal functors whose ordinary tensor comparisons commute
 induces the same square on signed total tensors of cochain complexes.
-Source: Stacks 0FPT (blueprint: lem-sf-normalized-stage-site-cochain-tensor-square). -/
+Source: Stacks 0FPT. -/
 theorem mapHomologicalComplexδ_square (ν : C ⥤ C') (F : C' ⥤ D') (F' : C ⥤ D) (ν' : D ⥤ D')
     [ν.Additive] [F.Additive] [F'.Additive] [ν'.Additive]
     [ν.OplaxMonoidal] [F.OplaxMonoidal] [F'.OplaxMonoidal] [ν'.OplaxMonoidal]
@@ -226,7 +221,6 @@ end SquareOfSummands
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS, 07A4 and 0G7E;
 latest blueprint lemma-change-coefficients-exceptional-inverse-image--3, Paragraphs 1--3.
-(blueprint: lem-sf-normalized-stage-site-cochain-tensor-square)
 
 Proof:
 1. In degree n, form the direct sum over p + q = n of the ordinary scalar/site tensor

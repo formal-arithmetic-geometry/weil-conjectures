@@ -30,7 +30,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 exactly the recorded forward pullback augmentation in the normalized limit model.
 
 Source: Stacks 03D2, 07A6, 08TC and 0941.
-(blueprint: lem-sf-pullback-reduction-augmentation).
 
 Proof: on modules, the two composite scalar-extension/inverse-image left adjoints
 have the same right adjoint. Its equality follows from directRing_eq and the
@@ -60,8 +59,7 @@ theorem pullbackReductionAugmentation_exists {X Y : Scheme.{u}} (f : X ⟶ Y) :
   exact ⟨a, pullbackReductionAugmentation_of_good l E f a ha⟩
 
 /-- An adjunction determines the coherent inverse-image comparison from its adjunct.
-Source: Stacks 07A6; the reduction/limit adjunction
-(blueprint: lem-sf-pullback-reduction-augmentation). -/
+Source: Stacks 07A6; the reduction/limit adjunction. -/
 theorem pullbackReductionAugmentation_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! a : PurCompactSupport.pull (PurCompactSupport.completed l E) f ⋙
         (pullbackTensorCalculus l E X).reduction ≅
@@ -82,7 +80,7 @@ theorem pullbackReductionAugmentation_existsUnique {X Y : Scheme.{u}} (f : X ⟶
   simpa only [Adjunction.homEquiv_unit] using (hb K).symm.trans (ha K)
 
 /-- The unique unit-preserving coherent reduction/pullback comparison.
-Source: Stacks 03D2 and 0941 (blueprint: lem-sf-pullback-reduction-augmentation). -/
+Source: Stacks 03D2 and 0941. -/
 def pullbackReductionComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (pullbackReductionAugmentation_existsUnique l E f).exists.choose
 

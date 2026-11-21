@@ -28,7 +28,6 @@ variable (l : ℕ) [Fact l.Prime]
 
 Source: the finite coefficient construction in Zheng Section 5, Lemma 5.13 and
 Constructions 5.14--5.15 (Stacks Tags 0F7B and 0F7I).
-(blueprint: lem-sf-ring-open-map-normalized-refinement-finite).
 
 Proof: construct the comparison from the finite coefficient proper/open refinement
 word. Its transpose is the open adjunction unit after the canonical restriction;

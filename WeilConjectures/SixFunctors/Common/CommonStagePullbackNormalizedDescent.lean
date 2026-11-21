@@ -42,8 +42,7 @@ variable (l : ℕ) [Fact l.Prime]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
 /-- Rational scalar comparison conjugated by the recorded stage-transition identifications.
-Source: current blueprint common-stage pullback paragraph
-(blueprint: lem-pod-common-stage-pullback-normalized-descent). -/
+ -/
 def commonStagePullbackTransition {E L : Index l Ω} (h : E ≤ L) :
     rationalDerivedPullback l (Coefficient.{u} l Ω E) g ⋙
         (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T h ≅
@@ -55,9 +54,6 @@ def commonStagePullbackTransition {E L : Index l Ω} (h : E ≤ L) :
     Functor.isoWhiskerRight (operationStageTransitionIso l Ω Y E L h).symm _
 
 /-- The specified quotient pullback is the functor of its normalized coherent stage morphism.
-Source: current blueprint sec-six-functors/sk-rem-sf-pf-done/
-lem-fix-weil-operations.proof.md, common-stage pullback paragraph.
-(blueprint: lem-pod-common-stage-pullback-normalized-descent).
 
 Proof: the existing comparison-data theorem gives coherent transition comparisons.
 Their prescribed components identify them with the scalar comparisons conjugated

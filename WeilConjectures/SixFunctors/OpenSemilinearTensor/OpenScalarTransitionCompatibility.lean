@@ -12,7 +12,6 @@ import all WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenSystemUnitSectio
 /-! # Quotient compatibility of the finite open scalar comparisons
 
 Source: Stacks Project, Modules on Sites, Tags 03DI, 03EK, 0941 and 0E8I.
-(blueprint: lem-sf-open-scalar-transition-compatibility).
 -/
 
 @[expose] public noncomputable section
@@ -102,7 +101,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Conjugate a finite comparison to the evaluations of the two strict functors.
 This definition does not assume that the resulting maps commute with transitions.
-Source: Stacks 0941 (blueprint: lem-sf-open-scalar-transition-compatibility). -/
+Source: Stacks 0941. -/
 def scalarLevelComparison (tc : IntegralOpenReduction.TensorComparison l E j o) (n : ℕ) :
     (IntegralOpenReduction.extension l E j o ⋙ AX.functor) ⋙
         coefficientSequenceEvaluation l E X n ≅
@@ -338,8 +337,7 @@ private theorem scalarLevelComparison_generator
 
 /-- The finite normalized maps commute with every horizontal restriction of the actual
 sequence-site presheaves. No lift to a morphism of systems is asserted here.
-Source: Stacks 03DI, 03EK, 0941 and 0E8I; transition-square step of strict scalar transport
-(blueprint: lem-sf-open-scalar-transition-compatibility).
+Source: Stacks 03DI, 03EK, 0941 and 0E8I; transition-square step of strict scalar transport.
 
 Proof: conjugate the square by AX.evaluation and AU.evaluation. Their quotient fields
 replace the two source transitions by the actual scalar quotient maps. By the

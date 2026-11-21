@@ -36,8 +36,7 @@ variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l)
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
 /-- The scalar-only part of the left comparison construction. It contains neither
 an exceptional operation nor a proper/open comparison.
-Source: Zheng, Construction 4.1 and Proposition 5.24.
-(blueprint: def-sf-integral-scalar-restrictions). -/
+Source: Zheng, Construction 4.1 and Proposition 5.24. -/
 structure ScalarRestrictions (T : Scheme.{u}) where
   scalar {s t : RingStage.{u} l}
       (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))
@@ -610,8 +609,7 @@ Tor interval. Choose the inherited exact shift via the full inclusion so that th
 realization commutes with shifts. The construction uses actual coefficient maps, hence
 is independent of the Allowed proof and has the prescribed canonical realization for
 every completed generator. Positive levels include the residue level; the empty scheme
-is handled by the same full-subcategory restriction.
-(blueprint: lem-sf-integral-scalar-restrictions). -/
+is handled by the same full-subcategory restriction. -/
 theorem scalarRestrictions_exists (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (T : Scheme.{u}) [T.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (T ↘ Spec (.of D.k))]

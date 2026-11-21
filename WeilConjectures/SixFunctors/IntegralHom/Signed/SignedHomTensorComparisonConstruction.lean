@@ -156,9 +156,6 @@ attribute [local instance 5000] signedComplexBraided
 omit Y R
 
 /-- The uncurry expression for tensor--Hom exchange is natural in its coefficient object.
-Source: associator and braiding naturality in Mathlib, used in the finite-free
-construction of the blueprint's first paragraph
-(blueprint: lem-sf-braided-hom-tensor-exchange-naturality).
 
 Proof: move the coefficient map through the first associator, through the middle
 braiding, and through the inverse associator; interchange it with evaluation

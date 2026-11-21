@@ -1098,8 +1098,7 @@ universal property, sheafification, and total-summand extensionality. Localize
 this identity. The restriction comparison is the exact-restriction factor of
 the scalar counit, giving precisely the displayed equation. The construction
 of e is independent of the coefficient level; the calculation applies separately
-to every n and every normalized m, so it assumes no compatibility between them.
-(blueprint: lem-sf-integral-tensor-restriction-mate-model). -/
+to every n and every normalized m, so it assumes no compatibility between them. -/
 theorem restrictionTensor_mate_model
     (a : TensorPresentation.{u, u} X (completedIntegralCommRingSheaf l E X D hl))
     (P : CochainComplex (scalarReductionSource l E X) ℤ)

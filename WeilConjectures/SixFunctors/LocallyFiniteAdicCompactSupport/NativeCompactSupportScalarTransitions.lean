@@ -38,8 +38,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (c : Compactification f)
 
 /-- The common-field scalar arrow before the final integral realization.
-Source: Bhatt--Scholze, Proposition 6.8.14; the `commonField` normalization.
-(blueprint: def-sf-native-compact-support-scalar-transition-maps). -/
+Source: Bhatt--Scholze, Proposition 6.8.14; the `commonField` normalization. -/
 def nativeScalarTransition [_G : NativeGeometry.{u} l]
     (T : Scheme.{u}) (R : Realization l T)
     (i E : Index l (PadicAlgCl l)) (h : i ≤ E)
@@ -61,8 +60,7 @@ def nativeScalarTransition [_G : NativeGeometry.{u} l]
         (coefficientInclusion l (PadicAlgCl l) i E h)).app M)
 
 /-- Compact support of the finite coefficient change, followed by completed scalar change.
-Source: Bhatt--Scholze, Remark 6.8.15; the normalized proper/open scalar comparison.
-(blueprint: def-sf-native-compact-support-scalar-transition-maps). -/
+Source: Bhatt--Scholze, Remark 6.8.15; the normalized proper/open scalar comparison. -/
 def supportScalarTransition [_G : NativeGeometry.{u} l]
     (target : Realization l Y) (i E : Index l (PadicAlgCl l)) (h : i ≤ E)
     (M : DerivedCategory (scalarReductionSource l (Coefficient.{u} l (PadicAlgCl l) i) X)) :
@@ -95,8 +93,7 @@ def supportScalarTransition [_G : NativeGeometry.{u} l]
             (coefficientInclusion l (PadicAlgCl l) i E h)).app M))
 
 /-- The specified native scalar mate, transported along the given coefficient equalities.
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: def-sf-native-compact-support-scalar-transition-maps). -/
+Source: Bhatt--Scholze, Remark 6.8.15. -/
 def nativeScalarComponent [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (E : Index l (PadicAlgCl l))

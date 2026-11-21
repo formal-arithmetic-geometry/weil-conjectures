@@ -29,8 +29,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Descent of an ordinary open tensor projection
 
-Source: Stacks 0GL1, 07A4, 06YS and 06YT
-(blueprint: lem-sf-open-tensor-projection-descent).
+Source: Stacks 0GL1, 07A4, 06YS and 06YT.
 -/
 
 @[expose] public noncomputable section
@@ -216,8 +215,7 @@ end Comparisons
 /-- Descend the ordinary projection comparison, with its specified inverse transpose,
 through the supplied tensor models. This constructs only the derived projection and
 its representative equation; the restriction comparison and all ordinary data are inputs.
-Source: Stacks 0GL1, proof of lemma-j-shriek-and-tensor; 07A4 and 06YS--06YT
-(blueprint: lem-sf-open-tensor-projection-descent).
+Source: Stacks 0GL1, proof of lemma-j-shriek-and-tensor; 07A4 and 06YS--06YT.
 
 Proof: first observe that F preserves flat terms and K-flat complexes. For a flat
 module M, tensor(F M,-) is identified by D.ordinary with the composite of exact

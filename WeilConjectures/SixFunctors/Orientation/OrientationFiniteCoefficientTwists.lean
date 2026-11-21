@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Orientation.OrientationFiniteReduction
 public import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateSiteDescent
 
 /-! Canonical finite quotient and realization of the completed root lines.
-Source: definition-tate-twists (blueprint: def-sf-orientation-finite-line-comparisons). -/
+ -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
@@ -132,7 +132,7 @@ private theorem fixedRoot_existsUnique
 /-- The fixed-scalar inverse realization of a finite root power is its explicit
 constant-scalar restriction. The equation fixes it on every local section through
 the published scalar-unit section and equivalence counit.
-Source: finite coefficient conventions (blueprint: def-sf-orientation-finite-line-comparisons).
+Source: finite coefficient conventions.
 Proof: restrict the intrinsic module action along constant scalars. The scalar-unit
 map into the canonical intrinsic realization gives a morphism from its realization
 to the original intrinsic line. Constant sections locally generate the constant

@@ -17,12 +17,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral
 This file contains the "projective case" of the proof of blueprint
 `corollary-open-direct-image-over-field--2`: if `Y` is proper (e.g. projective) over `K` and the
 base change map is an isomorphism on the geometric stalks at all non-closed points of `X ×_K Y`,
-then it is an isomorphism. After the reduction to a separably closed ground field (blueprint
-`corollary-open-direct-image-over-field--2`), the cone `Q` of the derived base change map is
-supported on closed points, so it vanishes as soon as its cohomology does (blueprint
-`corollary-open-direct-image-over-field--2`), and the base change map induces an isomorphism on
-cohomology by the Künneth formula with one proper factor (blueprint
-`lemma-kunneth-finite-direct-image--1`).
+then it is an isomorphism. After the reduction to a separably closed ground field, the cone `Q` of the derived base change map is
+supported on closed points, so it vanishes as soon as its cohomology does, and the base change map induces an isomorphism on
+cohomology by the Künneth formula with one proper factor.
 
 The hypothesis on the stalks at non-closed points passes to the base change to `K^sep`
 (`AlgebraicGeometry.Etale.isIso_sheafFiber_baseChangeHomologyMap_cube_iff`), since the

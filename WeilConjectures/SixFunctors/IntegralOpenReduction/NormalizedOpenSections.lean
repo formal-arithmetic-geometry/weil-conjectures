@@ -28,7 +28,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The semilinear calculus can use the literal section identification at the given open.
 Source: Stacks sites-modules.tex, Tags 03DI--03DJ, and sites-cohomology.tex Tag 0941;
 the section-normalized localization in lem-coef-semilinear-derived-sections.
-(blueprint: lem-sf-normalized-open-section-existence).
 
 Proof: choose semilinearDerivedSections. Apply blockRepeat_extensionByZero to
 SystemBlockMap.id and the systemBlockRepetition package at that map. Its first

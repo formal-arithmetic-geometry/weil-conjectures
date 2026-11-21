@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Localization.Prod
 /-! # Descent of integral coefficient tensor comparisons
 
 Source: the coefficient comparison in projection-formula proof step 13.
-(blueprint: lem-sf-projection-rational-tensor-descent).
 An integral natural isomorphism descends through the recorded coefficient and tensor
 localizations. Fully faithful precomposition fixes its action on every rational morphism.
 -/
@@ -65,8 +64,7 @@ variable (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
   (S : FdRationalStageComparison C.l C.Qbar (D.geometricFiber T₀).left E₀)
 
 /-- Any integral coefficient tensor natural isomorphism has a unique rational descent.
-Source: projection-formula proof step 13, integral-to-rational coefficient comparison
-(blueprint: lem-sf-projection-rational-tensor-descent).
+Source: projection-formula proof step 13, integral-to-rational coefficient comparison.
 Proof: the object and pure-tensor equations of S identify its restriction along source
 localization with its integral functor followed by target localization. The bilinear
 specification of rationalDerivedTensor gives the corresponding equality for tensor;

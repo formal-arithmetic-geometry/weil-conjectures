@@ -16,9 +16,9 @@ For a commutative square of schemes
 
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 
@@ -166,8 +166,7 @@ omit [HasSmallSiteSheafify A] in
 /-- **The two derived base-change morphisms agree.** The derived base-change morphism
 `AlgebraicGeometry.Etale.baseChange`, built from the units and counits of the derived
 adjunctions, is the derived base change map `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`,
-characterised by being computed by the underived base change map on complexes.
-(blueprint: `definition-derived-base-change-map`) -/
+characterised by being computed by the underived base change map on complexes. -/
 theorem Etale.baseChange_eq_derivedBaseChangeMapPlus (sq : CommSq g' f' f g) :
     Etale.baseChange A sq = Etale.derivedBaseChangeMapPlus A sq := by
   refine Etale.derivedBaseChangeMapPlus_ext A sq _ fun K => ?_

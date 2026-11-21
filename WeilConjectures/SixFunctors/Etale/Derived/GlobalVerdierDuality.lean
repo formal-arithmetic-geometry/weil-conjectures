@@ -152,9 +152,9 @@ If the change of coefficients is compatible with the projection map, then the in
 global Verdier-duality isomorphism is compatible with it: the square
 ```
 T_S Ra_{X*} 𝔻_X K ------ T_S(iso⁻¹) -----> T_S (Ra_{X!} K)^∨
-       |                                         |
-       | comparison                              | comparison
-       v                                         v
+       | |
+       | comparison | comparison
+       v v
 Ra_{X*} RHom(K', G' T_S Λ) ---- iso⁻¹ ----> RHom(Ra_{X!} K', T_S Λ)
 ```
 commutes. Composing with a comparison `T_S Λ_S ⟶ Λ'_S` of the units (and the compatibility of

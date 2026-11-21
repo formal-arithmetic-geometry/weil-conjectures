@@ -31,13 +31,12 @@ variable (l : ℕ) [Fact l.Prime]
 /--
 The explicit family of normalized integral presentation maps is pullback compatible.
 This is the finite-quotient comparison step used by the completed-to-native change
-square.  It is strictly smaller than the wrapper theorem because it has no arbitrary
+square. It is strictly smaller than the wrapper theorem because it has no arbitrary
 family of maps and no representation hypothesis.
 
 Proof source: Bhatt--Scholze, Lemma 6.8.2 and Section 6.8. Compose both sides with
 all finite quotient projections; the finite constant and residue equations identify
 the composites pointwise, and the completed projections are jointly monic.
-(blueprint: lem-sf-native-completed-coefficient-integral-map-square)
 -/
 theorem coefficient_presentation_integralMap_pull_square
     [G : NativeGeometry.{u} l]

@@ -23,7 +23,6 @@ generic point of `𝔸¹_κ`, so that every point of `X'` over the generic point
 the special fibre of the slice (`NearbyCyclesModel.mem_range_sliceTraitSpecial_of_isGenericPoint`):
 this is how the slice step of Deligne's induction (SGA 4½, [Th. finitude], proof of 3.7) reaches
 the points of `X'` over the generic point of a coordinate.
-
 -/
 
 @[expose] public section

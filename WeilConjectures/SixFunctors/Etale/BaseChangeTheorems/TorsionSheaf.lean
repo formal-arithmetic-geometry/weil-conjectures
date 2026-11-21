@@ -65,7 +65,6 @@ points of the small étale site nevertheless have fibers in `ModuleCat.{u + 1} �
 `u`-indexed filtered colimits computing them being obtained by shrinking from the
 `u + 1`-indexed ones, see
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize`.
-
 -/
 
 @[expose] public section
@@ -169,7 +168,7 @@ instance isTorsionModuleSheaf_upperStar {Λ : Type (u + 1)} [CommRing Λ] {X Y :
 /-- A sheaf `F` of `Λ`-modules on the small étale site of `T` is *torsion of orders
 invertible on `S`*, for a second scheme `S`, if every element of every geometric stalk of
 `F` is killed by a positive integer which is invertible on `S`, i.e. which is a unit of
-`Γ(S, ⊤)` (blueprint `sk-def-smooth`, "allowed torsion"). No common annihilator is required,
+`Γ(S, ⊤)`. No common annihilator is required,
 and invertibility is read globally on `S`, not only near the support of `F`.
 
 This strengthening of `AlgebraicGeometry.Scheme.IsTorsionModuleSheaf` is the coefficient
@@ -508,12 +507,11 @@ lemma Etale.DerivedCategory.Plus.torsionHomologyOfPrimes_le_moduleTorsionHomolog
       Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X :=
   fun _ hK n ↦ have := hK n; .of_isTorsionSheafOfPrimes P _
 
-/-- Blueprint `definition-constructible-sheaves`: Ambient categories and small subcategories.
+/-- Ambient categories and small subcategories.
 
 The ambient category `D⁺_P-tor(X, Λ)` of bounded below complexes of étale sheaves of
 `Λ`-modules whose cohomology sheaves have `P`-torsion geometric stalks, for a set `P` of primes,
-as a full subcategory of `D⁺(X_ét, Λ)` (blueprint
-`theorem-smooth-base-change-classical-torsion-2`). -/
+as a full subcategory of `D⁺(X_ét, Λ)`. -/
 noncomputable def Etale.DerivedCategoryPlusTorsionOfPrimes (P : Set ℕ) : Type _ :=
   (Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ X P).FullSubcategory
 

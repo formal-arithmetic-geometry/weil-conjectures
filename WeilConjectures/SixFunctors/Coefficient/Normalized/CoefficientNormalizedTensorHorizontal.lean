@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedT
 /-! # Horizontal compatibility of normalized tensor comparisons
 
 Source: Stacks 07A4, 08J9 and 0941; Zheng Construction 4.1.
-(blueprint: lem-coef-normalized-tensor-horizontal).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 There is no cartesianness or internal-Hom hypothesis here.
 Source: Zheng Construction 4.1; Stacks 03EK, 06YY, 07A4 and 0941;
 step 2 of lem-coef-normalized-internal-hom-fibers.
-(blueprint: lem-coef-normalized-tensor-horizontal).
 
 Proof: resolve both systems on the sequence site by flat-term K-flat complexes.
 Their evaluated components are simultaneously K-flat and flat termwise. The

@@ -45,8 +45,7 @@ private theorem generator_transport
 
 /-- The signed exchange exists for arbitrary, possibly unbounded, complexes.
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 0A8X and 08J7
-(blueprint: lem-sf-signed-hom-tensor-map).
+Stacks Tags 0A8X and 08J7.
 
 Proof: transpose the composite which reassociates (Hom(P,I) tensor Q) tensor P,
 interchanges Q and P using the Koszul braiding, reassociates back, and applies

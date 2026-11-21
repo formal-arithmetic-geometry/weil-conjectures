@@ -247,7 +247,7 @@ open Scheme
 
 variable {X S : Scheme.{u}}
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Betti cardinalities in a smooth
+/-- Betti cardinalities in a smooth
 projective curve family.
 
 Let `S` be Noetherian, `f : X ⟶ S` smooth of relative dimension one and projective

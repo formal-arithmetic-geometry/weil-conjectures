@@ -25,8 +25,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 For a commutative ring `Λ` and sheaves `F`, `G` of `Λ`-modules on `X_ét`, the *Tor sheaves*
 are the homology sheaves `Hʳ(F ⊗ᴸ G)` of the derived tensor product of `F` and `G` placed in
 degree `0` (`AlgebraicGeometry.Etale.torSheaf`). This file shows that for a noetherian ring `Λ`
-the Tor sheaves of two constructible sheaves are constructible
-(blueprint: `proposition-six-operations-dctf--14`), following the blueprint proof.
+the Tor sheaves of two constructible sheaves are constructible, following the blueprint proof.
 
 * On the strata of a common refinement of stratifications witnessing the constructibility of `F`
   and `G`, both pullbacks are finite locally constant; the pullback along any morphism commutes
@@ -111,8 +110,7 @@ sheaves are constant. Let `π : P ⟶ M[0]` be a quasi-isomorphism from a comple
 concentrated in degrees `≤ 0` whose terms have flat constant sheaves (for instance a
 projective resolution by finitely generated modules). Then `P_Y` is K-flat and resolves
 `M_Y`, so `M_Y ⊗ᴸ N_Y` is computed by the complex `P_Y ⊗ N_Y = (P ⊗ N)_Y`, and
-`Hʳ(M_Y ⊗ᴸ N_Y)` is the constant sheaf at `Hʳ(P ⊗ N) = Tor_{-r}(M, N)`.
-(blueprint: `proposition-six-operations-dctf--14`) -/
+`Hʳ(M_Y ⊗ᴸ N_Y)` is the constant sheaf at `Hʳ(P ⊗ N) = Tor_{-r}(M, N)`. -/
 noncomputable def homologyDerivedTensorConstantSheafIso {Y : Scheme.{u}}
     (P : CochainComplex A ℤ) [P.IsStrictlyLE 0]
     (hP : ∀ n, ObjectProperty.flat ((constantSheaf Y.smallEtaleTopology A).obj (P.X n)))
@@ -222,8 +220,7 @@ variable (Λ) [IsNoetherianRing Λ]
 locally constant. With a projective resolution `P` of `M` by finitely generated modules,
 `Hʳ(M_Y ⊗ᴸ N_Y)` is the constant sheaf at `Hʳ(P ⊗ N) = Tor_{-r}(M, N)`
 (`AlgebraicGeometry.Etale.homologyDerivedTensorConstantSheafIso`), a subquotient of the
-finitely generated module `P^r ⊗ N`, hence finitely generated, `Λ` being noetherian.
-(blueprint: `proposition-six-operations-dctf--14`) -/
+finitely generated module `P^r ⊗ N`, hence finitely generated, `Λ` being noetherian. -/
 theorem isFiniteLocallyConstantSheaf_torSheaf_constantSheaf {Y : Scheme.{u}}
     (M N : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] [Module.Finite Λ N] (r : ℤ) :
     IsFiniteLocallyConstantSheaf (torSheaf Λ r
@@ -264,7 +261,7 @@ and `N`; the pullback to a member of the cover commutes with Tor sheaves
 (`AlgebraicGeometry.Etale.upperStarTorSheafIso`), and the Tor sheaves of `M` and `N` are
 finite locally constant
 (`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_torSheaf_constantSheaf`). Finite local
-constancy is étale local. (blueprint: `proposition-six-operations-dctf--14`) -/
+constancy is étale local. -/
 theorem isFiniteLocallyConstantSheaf_torSheaf {Z : Scheme.{u}}
     (F G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F]
     [IsFiniteLocallyConstantSheaf G] (r : ℤ) :
@@ -302,8 +299,7 @@ sheaf `Hʳ(F ⊗ᴸ G)` is constructible. On the strata of a common refinement o
 stratifications both pullbacks are finite locally constant, the pullback commutes with Tor
 sheaves (`AlgebraicGeometry.Etale.upperStarTorSheafIso`), and the Tor sheaves of finite
 locally constant sheaves are finite locally constant
-(`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_torSheaf`).
-(blueprint: `proposition-six-operations-dctf--14`) -/
+(`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_torSheaf`). -/
 theorem isConstructibleSheaf_torSheaf {X : Scheme.{u}}
     (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F]
     [IsConstructibleSheaf G] (r : ℤ) :

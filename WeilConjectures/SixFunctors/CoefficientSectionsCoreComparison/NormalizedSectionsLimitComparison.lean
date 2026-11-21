@@ -14,7 +14,6 @@ import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSequenceGloba
 
 Source: Stacks 0941 and 0D6E. The ordinary sections functor may be any additive
 limit-preserving functor to abelian groups.
-(blueprint: lem-coef-normalized-constant-sections-limit-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +29,7 @@ variable {A : Type a} [Category.{av} A] [Abelian A]
   [Abelian.HasKInjectiveResolutions A]
 
 /-- The existing total right-derived functor with its actual cochain unit.
-Source: Stacks 079P; the universal comparison is invertible on K-injectives.
-(blueprint: lem-coef-normalized-constant-sections-limit-comparison) -/
+Source: Stacks 079P; the universal comparison is invertible on K-injectives. -/
 @[reducible] def standardPair {B : Type*} [Category* B] [Abelian B] [HasDerivedCategory B]
     (F : A ⥤ B) [F.Additive] : SequenceSectionsDerivedPair F where
   functor := F.rightDerivedFunctor
@@ -78,8 +76,7 @@ variable [HasDerivedCategory.{dt} (ℕᵒᵖ ⥤ A)]
 Source: Stacks 0941 and 0D6E. Limit preserves K-injectives by the exact constant-tower
 left adjoint. In the other order the sections of a K-injective tower are limit-acyclic
 by the existing split-transition Roos calculation. The two composite universal derived
-pairs are thus isomorphic, with the displayed unit equation, by right-derived uniqueness.
-(blueprint: lem-coef-normalized-constant-sections-limit-comparison) -/
+pairs are thus isomorphic, with the displayed unit equation, by right-derived uniqueness. -/
 theorem comparison_exists :
     ∃ κ : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor ⋙ G.rightDerivedFunctor ≅
       ((Functor.whiskeringRight ℕᵒᵖ A AddCommGrpCat.{w}).obj G).rightDerivedFunctor ⋙
@@ -131,8 +128,7 @@ omit [Abelian.HasKInjectiveResolutions A]
 Source: Stacks 079P and 0941. Derive the ordinary projection by the universal property.
 Its unit equation holds on all complexes. On K-injectives, cancellation of the invertible
 unit identifies it with the prescribed projection. Naturality extends equality to all
-objects, since every derived object has a K-injective representative.
-(blueprint: lem-coef-normalized-constant-sections-limit-comparison) -/
+objects, since every derived object has a K-injective representative. -/
 theorem projection_unit (n : ℕ)
     (p : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor ⟶
       ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory)
@@ -170,8 +166,7 @@ omit [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ AddCommGrpCat.{w})]
 /-- Derived termwise sections and exact evaluation have normalized comparisons.
 Source: Stacks 0941. Apply the existing normalized tower comparison to the actual
 right-derived pairs. Evaluation preserves K-injectives by its exact left adjoint, and
-uniqueness of the derived comparison gives precisely the displayed normalization.
-(blueprint: lem-coef-normalized-constant-sections-limit-comparison) -/
+uniqueness of the derived comparison gives precisely the displayed normalization. -/
 theorem evaluation_exists :
     ∃ β : ∀ n : ℕ,
       ((Functor.whiskeringRight ℕᵒᵖ A AddCommGrpCat.{w}).obj G).rightDerivedFunctor ⋙
@@ -201,8 +196,7 @@ omit [IsGrothendieckAbelian.{sep} A] in
 Source: Stacks 079P and 0941. Compose the unit equation with the image of the
 morphism on the right and use naturality of the comparison to move that image
 across the comparison. Keeping this calculation abstract avoids repeatedly
-unfolding the coefficient site's derived functors.
-(blueprint: lem-coef-normalized-constant-sections-limit-comparison) -/
+unfolding the coefficient site's derived functors. -/
 theorem comparison_morphism
     (κ : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor ⋙ G.rightDerivedFunctor ≅
       ((Functor.whiskeringRight ℕᵒᵖ A AddCommGrpCat.{w}).obj G).rightDerivedFunctor ⋙
@@ -250,8 +244,7 @@ Source: Stacks 0941 and 0D6E. On a K-injective tower, precompose with the invert
 composite unit and postcompose with the exact evaluation factorization. Naturality of
 the derived projection, the evaluation-unit equation, the ordinary limit projection
 equation and the two projection-unit equations reduce both sides to the same map.
-Naturality against K-injective representatives then proves the result on every object.
-(blueprint: lem-coef-normalized-constant-sections-limit-comparison) -/
+Naturality against K-injective representatives then proves the result on every object. -/
 theorem comparison_projection
     (pA : ∀ n : ℕ, (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor ⟶
       ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory)

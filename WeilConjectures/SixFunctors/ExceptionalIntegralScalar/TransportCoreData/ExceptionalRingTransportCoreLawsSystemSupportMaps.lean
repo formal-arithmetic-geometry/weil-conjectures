@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.SixFunctors.FunctorObjectConjugatio
 
 /-! Map part of the exceptional transport support identity.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-transport-core-system-support-law-maps).
+5.26.
 -/
 
 @[expose] public noncomputable section
@@ -49,7 +49,7 @@ The object comparison alone cannot supply this missing normalization. -/
 The strict-system support comparison on morphisms at one fixed field stage.
 Together with the object component, this is the map premise of `Functor.ext`.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-transport-core-system-support-law-maps).
+5.26.
 -/
 theorem exceptional_transport_core_system_support_map
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]

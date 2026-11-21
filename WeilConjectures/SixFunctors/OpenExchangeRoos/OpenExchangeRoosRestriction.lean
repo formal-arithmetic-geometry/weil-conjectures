@@ -137,8 +137,7 @@ import Mathlib.CategoryTheory.Sites.Abelian
 
 Source: Stacks Project, proetale.tex, Tags 099N (2),(5) and 09BN;
 sites-cohomology.tex, Tag 0D6D; blueprint main-20261015,
-proposition-composition-base-change-rf-shriek--1, base-change paragraph (blueprint:
-lem-sf-open-exchange-roos-restriction).
+proposition-composition-base-change-rf-shriek--1, base-change paragraph.
 
 The integral datum is the existing uniformizer datum. Its completed-ring presentation
 is transported to integral coefficients by the projection-normalized `transport`.
@@ -163,12 +162,11 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The singleton generating tuple for the existing uniformizer ideal.
-Source: Stacks 099N (blueprint: lem-sf-open-exchange-roos-restriction). -/
+Source: Stacks 099N. -/
 def generators : Fin 1 → PbcIntegralRing l E := fun _ ↦ pbcUniformizer l E
 
 /-- The tuple generates precisely the recorded ideal; no alternative ideal is used.
-Source: the coefficient DVR in Stacks 099N
-(blueprint: lem-sf-open-exchange-roos-restriction).
+Source: the coefficient DVR in Stacks 099N.
 Proof: Fin 1 is nonempty, so the range of the constant tuple is the singleton
 uniformizer. The ideal field of pbcIntegralDatum is the span of that singleton. -/
 theorem generators_span : Ideal.span (Set.range (generators l E)) =
@@ -179,22 +177,20 @@ theorem generators_span : Ideal.span (Set.range (generators l E)) =
 
 /-- Roos completeness in the coefficient presentation of the completed-open comparison.
 This is only the recorded predicate composed with the recorded coefficient transport.
-Source: Stacks 099N and Bhatt--Scholze 3.5.2
-(blueprint: lem-sf-open-exchange-roos-restriction). -/
+Source: Stacks 099N and Bhatt--Scholze 3.5.2. -/
 abbrev complete (W : Scheme.{u}) : ObjectProperty ((pbcIntegralDatum l E).derived W) :=
   fun K ↦ IntegralOnSlice.IsComplete l E W none
     ((ImmersionCompletedPullback.transport l E W).obj K)
 
 /-- The section-normalized open unit, on the ordinary derived category.
-Source: Stacks 09BN (blueprint: lem-sf-open-exchange-roos-restriction). -/
+Source: Stacks 09BN. -/
 def openUnit {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   @asIso _ _ _ _ (cbcDerivedOpenAdjunction (pbcIntegralDatum l E) j).unit
     (cbcOpenUnit_isIso (pbcIntegralDatum l E) j)
 
 /-- The completed square has the ordinary square's normalization on the actual units.
 The source is the full subcategory of Roos-complete objects, with no boundedness or
-constructibility condition. Source: Stacks 099N and 0D6D
-(blueprint: lem-sf-open-exchange-roos-restriction). -/
+constructibility condition. Source: Stacks 099N and 0D6D. -/
 abbrev Square {U' U X' X : Scheme.{u}} (a : U' ⟶ U) (j' : U' ⟶ X')
     (j : U ⟶ X) (h : X' ⟶ X) :=
   (complete l E X).ι ⋙ (pbcIntegralDatum l E).completedPull h ⋙
@@ -203,8 +199,7 @@ abbrev Square {U' U X' X : Scheme.{u}} (a : U' ⟶ U) (j' : U' ⟶ X')
       (pbcIntegralDatum l E).completedPull a
 
 /-- Its unit equation uses the ordinary compositor and the recorded quotient unit.
-Source: Stacks 099N(2),(5), 0D6D
-(blueprint: lem-sf-open-exchange-roos-restriction). -/
+Source: Stacks 099N(2),(5), 0D6D. -/
 def SquareUnit {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {h : X' ⟶ X} (sq : OpenImmersionSquare a j' j h)
     (c : Square l E a j' j h) : Prop :=
@@ -217,7 +212,7 @@ def SquareUnit {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
 
 /-- The ordinary derived open adjunction used by the constant-coefficient limit model.
 It is the existing module adjunction descended termwise, with its canonical right-derived
-comparison. Source: Stacks 09BN (blueprint: lem-sf-open-exchange-roos-restriction). -/
+comparison. Source: Stacks 09BN. -/
 def constantOpenAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   Adjunction.ofNatIsoRight
     (Adjunction.mapDerivedCategoryRightDerivedAdjunction
@@ -227,8 +222,7 @@ def constantOpenAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] 
 
 /-- Quasi-compactness of an open into a finite-type scheme over the fixed field.
 It is supplied as a consequence, rather than imposed on the theorem's inputs.
-Source: Stacks 01T1 and 01K5; proof Step 1
-(blueprint: lem-sf-open-exchange-roos-restriction).
+Source: Stacks 01T1 and 01K5; proof Step 1.
 Proof: a field is Noetherian, and a scheme of finite type over its spectrum is
 Noetherian. Every open subset of a Noetherian space is quasi-compact, hence the
 open immersion is quasi-compact. The empty open is included. -/
@@ -245,8 +239,7 @@ theorem finiteOpenQC (F : FiniteFieldDatum.{u})
 /-- Clause-by-clause assertion on the fixed completed coefficient presentation.
 The square is uniquely determined by its actual unit equation. Its exchange is the
 specified one, transported to the fixed strict endpoints rather than chosen anew.
-Source: Stacks 099N, 09BN and 0D6D
-(blueprint: lem-sf-open-exchange-roos-restriction). -/
+Source: Stacks 099N, 09BN and 0D6D. -/
 def Assertion {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (h : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] [qc : QuasiCompact j]
@@ -293,8 +286,7 @@ def Assertion {U' U X' X : Scheme.{u}}
 open exchanges. Its restriction is the finite-composition comparison, and that
 comparison preserves the actual ordinary-to-completed pullback units.
 Source: Stacks 099N (2),(5), 09BN and 0D6D; blueprint main-20261015,
-proposition-composition-base-change-rf-shriek--1, open-factor proof Steps 10--11
-(blueprint: lem-sf-open-exchange-roos-restriction).
+proposition-composition-base-change-rf-shriek--1, open-factor proof Steps 10--11.
 
 Proof, following the nine steps of the DAG node:
 1. Finite type over the algebraic closure of the finite field gives Noetherian and

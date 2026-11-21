@@ -27,7 +27,6 @@ pullbacks
 with its consequences for vanishing).
 This is the form in which nearby cycles of extensions by zero, restricted along the special fibre,
 are compared for the coefficients `𝒪_E`, `E`, `ℚ̄_ℓ` and `𝔽_E`.
-
 -/
 
 @[expose] public section

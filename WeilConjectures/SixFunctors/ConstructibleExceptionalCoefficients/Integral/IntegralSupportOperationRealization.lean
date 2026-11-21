@@ -18,7 +18,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 
 /-- An integral exceptional operation with its compact-support realization exists.
 Source: Zheng, Construction 5.25 and Propositions 5.24 and 5.26; coefficient
-construction step 3 (blueprint: lem-sf-integral-support-operation-realization).
+construction step 3.
 
 Proof: construct the normalized reduction/total-limit operation on the complete
 finite-Tor categories, transport its system adjunction through the recorded

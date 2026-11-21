@@ -16,7 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemOrdinaryTensorReductio
 
 Source: Stacks 03EK, 07A4 and 0941. This constructs the representative model
 for the tensor evaluation already specified by a coefficient calculus.
-(blueprint: lem-coef-evaluation-tensor-comparison-model).
 -/
 
 @[expose] public noncomputable section
@@ -210,7 +209,6 @@ private def evaluationModel (W : Scheme.{u})
 
 /-- The specified tensor evaluation has the ordinary comparison fixed on pure tensors.
 Source: Stacks 03EK, 07A4 and 0941.
-(blueprint: lem-coef-evaluation-tensor-comparison-model).
 
 Proof: use the ordinary evaluation tensor isomorphism and the inverse normalized
 isomorphism on total complexes. Its total-summand equation gives the chain field.

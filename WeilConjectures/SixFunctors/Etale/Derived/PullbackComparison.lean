@@ -14,7 +14,7 @@ Let `Φ, γ, F : X ⟶ X` be endomorphisms of a scheme with `F ≫ γ = Φ`, and
 pullback along `F` is identified with the derived pullback along the identity,
 `ε : LF^* ≅ L(𝟙 X)^*`. Then the derived pullbacks along `Φ` and `γ` are identified:
 ```
-          ≅                           ε                          ≅
+          ≅ ε ≅
   LΦ^* ──────▶ Lγ^* ⋙ LF^* ──────────────▶ Lγ^* ⋙ L(𝟙 X)^* ──────▶ Lγ^*
 ```
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfFactor`). This is how the scheme Frobenius
@@ -83,14 +83,14 @@ intertwine endomorphisms `ΦX = FX ≫ γX` of `X` with endomorphisms `ΦY = FY 
 suppose that the identifications `εX : LFX^* ≅ L(𝟙 X)^*` and `εY : LFY^* ≅ L(𝟙 Y)^*` are
 compatible with `f`: the two identifications `L(FX ≫ f)^* ≅ Lf^*`,
 ```
-L(FX ≫ f)^* ≅ LFY^* ⋙ Lf^* ≅ L(𝟙 Y)^* ⋙ Lf^* ≅ Lf^*   (through `εY`),
-L(FX ≫ f)^* ≅ Lf^* ⋙ LFX^* ≅ Lf^* ⋙ L(𝟙 X)^* ≅ Lf^*   (through `εX`),
+L(FX ≫ f)^* ≅ LFY^* ⋙ Lf^* ≅ L(𝟙 Y)^* ⋙ Lf^* ≅ Lf^* (through `εY`),
+L(FX ≫ f)^* ≅ Lf^* ⋙ LFX^* ≅ Lf^* ⋙ L(𝟙 X)^* ≅ Lf^* (through `εX`),
 ```
 agree. Then the square
 ```
 Lf^* LΦY^* K ──Lf^* κY──▶ Lf^* LγY^* K
-     │ ≅                       │ ≅
-     ▼                         ▼
+     │ ≅ │ ≅
+     ▼ ▼
 LΦX^* Lf^* K ────κX─────▶ LγX^* Lf^* K
 ```
 commutes, `κ` being `AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfFactor` and the vertical

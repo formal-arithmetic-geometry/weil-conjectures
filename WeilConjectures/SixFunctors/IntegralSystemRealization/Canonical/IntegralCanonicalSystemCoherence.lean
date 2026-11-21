@@ -11,8 +11,6 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSyst
 import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemTensorComposition
 
 /-! # Canonical integral model construction steps
-
-Source: blueprint fix-prop-coherence, strict-system realization.
 -/
 
 @[expose] public noncomputable section
@@ -150,8 +148,7 @@ private theorem systemTensorSquare (o : Operations l E) (c : Compositors l E o) 
 /-- Canonical system operations and their left-adjoint tensor square. This statement
 contains no reduction/limit realization or completed ringed models.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI, 0941, 07A7, 0F7B--0F7F;
-blueprint fix-prop-coherence, strict-system realization steps 1--2
-(blueprint: lem-sf-integral-canonical-system-coherence).
+blueprint fix-prop-coherence, strict-system realization steps 1--2.
 
 Proof: derive the ordinary sequence-site direct image by K-injective resolution,
 retaining its universal derived comparison and the adjunction transpose on complexes.

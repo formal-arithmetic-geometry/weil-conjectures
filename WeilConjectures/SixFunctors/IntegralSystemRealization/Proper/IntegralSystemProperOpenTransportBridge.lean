@@ -159,7 +159,6 @@ end
 set_option linter.unusedVariables false in
 /-- The transported mate satisfies the bridge component equation.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 07A7.
-(blueprint: lem-sf-integral-system-proper-open-transport-core-bridge-mate).
 Proof: apply naturality of the four bridge isomorphisms to the mate transport
 formula, then cancel the adjacent bridge factors. -/
 theorem properOpenTransportMate_bridge

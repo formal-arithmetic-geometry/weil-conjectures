@@ -159,7 +159,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 /-! # Normalized tensor comparison for varying-ring inverse image
 
 Source: Stacks Project, Tags 06YS, 06YU and 07A4.
-(blueprint: lem-sf-exact-tensor-model-construction-independent).
 -/
 
 @[expose] public noncomputable section
@@ -211,8 +210,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- Totalize a natural ordinary tensor isomorphism and descend it uniquely along
-flat-term K-flat representatives. Source: Stacks 06YS, 06YU and 07A4
-(blueprint: lem-sf-exact-tensor-model-construction-independent).
+flat-term K-flat representatives. Source: Stacks 06YS, 06YU and 07A4.
 Proof: totalize the inverse ordinary comparison on every direct-sum summand.
 Naturality verifies the signed differential, and the adjunction preserves the
 coproducts, so the chain map is invertible. Restriction to flat-term K-flat

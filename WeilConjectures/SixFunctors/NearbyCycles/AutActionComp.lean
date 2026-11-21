@@ -18,7 +18,6 @@ of `σ` and `τ` is the composite of the actions, `τ` first
 (`NearbyCyclesModel.Hom.autAction_comp_of_eq`), and a morphism of models with identity components
 acts trivially (`NearbyCyclesModel.Hom.autAction_of_eq_id`). Both follow from the composition law
 of the pullback exchanges (`NearbyCyclesModel.Hom.pullbackExchange_comp_app_of_eq`).
-
 -/
 
 @[expose] public section

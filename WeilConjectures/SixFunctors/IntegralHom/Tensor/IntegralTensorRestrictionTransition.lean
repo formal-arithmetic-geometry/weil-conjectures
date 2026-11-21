@@ -112,8 +112,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The canonical map from tensor with a restricted reduction to reduction of tensor.
 It is constructed by the scalar adjunction, the normalized tensor comparison and its
 inverse; no Hom object or dualizing complex occurs.
-Source: Stacks 03CZ, 06YY and 07A4
-(blueprint: lem-sf-integral-tensor-restriction-transition). -/
+Source: Stacks 03CZ, 06YY and 07A4. -/
 def restrictionTensor
     {a : TensorPresentation.{u, u} X (completedIntegralCommRingSheaf l E X D hl)}
     {n : ℕ} (m : ReductionPresentation l E X D hl a n)
@@ -144,8 +143,7 @@ each degree, so these formulas give equality of chain maps. The representative
 normalization of sfDerivedReductionTransition identifies these maps with the stated
 transitions. Localize the equality and cancel the K-flat resolution and comparison
 isomorphisms. This works in every degree and at n = 0 without boundedness or
-constructibility assumptions.
-(blueprint: lem-sf-integral-tensor-restriction-transition). -/
+constructibility assumptions. -/
 theorem restrictionTensor_transition
     (a : TensorPresentation.{u, u} X (completedIntegralCommRingSheaf l E X D hl))
     (m : ∀ n : ℕ, ReductionPresentation l E X D hl a n)

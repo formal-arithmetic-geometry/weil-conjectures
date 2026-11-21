@@ -39,7 +39,7 @@ for `Rf_!`, the four product comparison maps, and the Künneth–Verdier isomorp
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.externalProduct`: `K ⊠ M = Lp^* K ⊗ᴸ Lq^* M`.
-- `AlgebraicGeometry.Etale.HasKunnethComparisons` (`lemma-external-duality-trace-morphism`): the
+- `AlgebraicGeometry.Etale.HasKunnethComparisons`: the
   four product comparison assertions `Ku_!`, `α`, `β`, `κ`, one per field.
 
 ## Main statements
@@ -48,7 +48,7 @@ for `Rf_!`, the four product comparison maps, and the Künneth–Verdier isomorp
   (`lemma-kunneth-one-identity-factor--1`): `Rf_* M ⊠ Q ≅ R(f × id_Z)_* (M ⊠ Q)`
   over a field, for a finite coefficient ring of invertible exponent.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct`
-  (`lemma-kunneth-formula-compact-supports`): `R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`.
+: `R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct`
   (`lemma-external-duality-trace-morphism` (i)): the `!`-Künneth isomorphism
   `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for a finite coefficient ring.
@@ -57,11 +57,11 @@ for `Rf_!`, the four product comparison maps, and the Künneth–Verdier isomorp
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`:
   `(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L` for closed immersions `i`, `j`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion`
-  (`lemma-kunneth-formula-compact-supports`): the relative product theorem for complexes supported
+: the relative product theorem for complexes supported
   on closed subschemes.
 - `AlgebraicGeometry.Etale.nonempty_iso_compactlySupported_externalProduct_closedImmersion`
-  (`lemma-kunneth-formula-compact-supports`): the Künneth formula for `RΓ_c(Z × W, -)` over a field.
-- `AlgebraicGeometry.Etale.hasKunnethComparisons` (`lemma-external-duality-trace-morphism`): the
+: the Künneth formula for `RΓ_c(Z × W, -)` over a field.
+- `AlgebraicGeometry.Etale.hasKunnethComparisons`: the
 four
   comparison maps are isomorphisms.
 
@@ -91,5 +91,4 @@ This module only imports its parts: `externalProduct` is defined in
 `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative`, the `!`-Künneth isomorphism in
 `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek` and the comparison maps in
 `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons`.
-
 -/

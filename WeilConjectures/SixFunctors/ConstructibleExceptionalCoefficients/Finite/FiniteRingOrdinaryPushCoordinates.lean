@@ -24,8 +24,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (n : ℕ)
 
 /-- The ordinary finite compositor is the transported constant-section compositor.
-Source: Stacks 03D1 and 03D6; compactification-coherence proof, second paragraph
-(blueprint: lem-sf-finite-ring-ordinary-push-coordinates).
+Source: Stacks 03D1 and 03D6; compactification-coherence proof, second paragraph.
 
 Proof: the coefficient map adjoint to the specified inverse-image identification
 is the constant-section map, by the adjunction inverse equations. Substitute these

@@ -28,8 +28,8 @@ along the map of inertia groups `I₂ ⟶ I₁` (SGA 4½, [Th. finitude], proof 
 The pullback exchanges of the square of models
 ```
 N₂_{Ω₂} ──τ'──→ N₁_{Ω₁}
-   │σ₂             │σ₁
-   ↓               ↓
+   │σ₂ │σ₁
+   ↓ ↓
    N₂ ─────τ─────→ N₁
 ```
 satisfy `α_{τ'} ∘ τ'^* α_{σ₁} = α_{σ₂} ∘ σ₂^* α_τ` up to the composition isomorphisms
@@ -43,7 +43,6 @@ projections.
   the pullback exchange of `τ` intertwines the actions of `σ₁` and `σ₂`.
 - `NearbyCyclesModel.pullbackExchange_galoisLayerMap_app_comp_galoisLayerAction`: the equivariance
   of the exchange of a change of trait for the Galois actions.
-
 -/
 
 @[expose] public section
@@ -143,8 +142,8 @@ pullback exchange `α_τ : Lf'^* Ψ_{M₁} C ⟶ Ψ_{M₂} (Lf^* C)` satisfies
 `α_τ ≫ σ₂ = Lf'^* σ₁ ≫ α_τ` for the actions `NearbyCyclesModel.Hom.autAction`:
 ```
 Lf'^* Ψ_{M₁} C ──α_τ──→ Ψ_{M₂} (Lf^* C)
-      │Lf'^* σ₁               │σ₂
-      ↓                       ↓
+      │Lf'^* σ₁ │σ₂
+      ↓ ↓
 Lf'^* Ψ_{M₁} C ──α_τ──→ Ψ_{M₂} (Lf^* C)
 ```
 -/

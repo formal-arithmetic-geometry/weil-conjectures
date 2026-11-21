@@ -45,7 +45,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {U T : Scheme.{u}} (u : U ⟶ T) [Eta
   {L : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
 
 omit [Etale u] in
-/-- Blueprint `lem-pur-concentrated-complex-shift`: Complexes with cohomology in a single degree
+/-- Complexes with cohomology in a single degree
 
 *Vanishing detected on an étale cover.* Let `u : U ⟶ T` be surjective (for instance a surjective
 étale cover). If
@@ -67,7 +67,7 @@ theorem isZero_homology_of_leftDerivedUpperStar_iso
   rw [IsZero.iff_id_eq_zero]
   exact ((u)^*[ModuleCat.{u + 1} Λ]).map_injective (by simpa using hu.eq_of_src _ _)
 
-/-- Blueprint `lem-pur-concentrated-complex-shift`: Complexes with cohomology in a single degree
+/-- Complexes with cohomology in a single degree
 
 *Local constancy detected on an étale cover.* Let `u : U ⟶ T` be surjective and étale. If
 `Lu^* K ≅ L[-r]` for a finite locally constant sheaf `L` on `U`, then `H^r(K)` is finite

@@ -628,7 +628,6 @@ private meta partial def transportCongruence (x y : Lean.Expr) : Lean.MetaM Lean
 
 /-- Base-change pasting for a gamma satisfying the canonical bridge equation.
 Source: Stacks 0F7C, 0F7D and 0F7F; Zheng Lemma 4.10.
-(blueprint: lem-sf-integral-system-proper-open-transport-pasting-basechange).
 
 Proof: the supplied canonical equation identifies the top and bottom gamma maps
 under the bridge. The one-square exchange and open-beta comparisons identify the

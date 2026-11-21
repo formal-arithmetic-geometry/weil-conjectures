@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalIntegral
 /-! # Existence of normalized left integral scalar comparisons
 
 Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: lem-sf-exceptional-integral-left-scalar-mates)
 -/
 
 @[expose] public noncomputable section
@@ -353,8 +352,7 @@ shift compatibility. Lift tensor associators and unitors in the same way. Apply 
 faithful inclusion to the two sides of each coherence equation, cancel the final
 realization isomorphisms, and use naturality with the ambient comparison composition
 and identity laws. This proves leftCocycle and identityLeft and assembles LeftMates.
-No right scalar mate or cofinal system transport is used.
-(blueprint: lem-sf-exceptional-integral-left-scalar-mates). -/
+No right scalar mate or cofinal system transport is used. -/
 theorem exceptionalIntegralLeftScalarMates
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

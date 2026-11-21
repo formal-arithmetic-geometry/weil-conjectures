@@ -64,7 +64,6 @@ That `D(X_ét)` is monoidal at all comes from
 the hypotheses below are exactly the ones that instance asks of the category of étale
 sheaves: monoidal closed (so that tensoring preserves colimits) and admitting functorial
 flat resolutions.
-
 -/
 
 @[expose] public section

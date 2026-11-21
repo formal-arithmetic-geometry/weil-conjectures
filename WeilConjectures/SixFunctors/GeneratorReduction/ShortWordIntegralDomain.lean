@@ -15,8 +15,6 @@ import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffe
 set_option linter.privateModule false
 
 /-! # Integral intermediate domains
-
-Source: current blueprint fix-prop-coherence, primitive realization step.
 -/
 
 @[expose] public noncomputable section

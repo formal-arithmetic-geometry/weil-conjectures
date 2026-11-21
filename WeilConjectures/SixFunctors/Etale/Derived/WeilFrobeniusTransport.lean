@@ -90,7 +90,7 @@ variable {Λ Λ' Λ'' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] [CommRing Λ'
 `F : D(Y_ét, Λ) ⥤ D(Y'_ét, Λ')` with a (not necessarily invertible) exchange
 `e : Lh'^* ∘ F ⟶ F ∘ Lh^*`:
 ```
-                 e_M                     F ψ
+                 e_M F ψ
   Lh'^* F M ──────────▶ F Lh^* M ──────────▶ F M
 ```
 For `F = Ra_!` and `e = Ex_!` this is the compact-support transport

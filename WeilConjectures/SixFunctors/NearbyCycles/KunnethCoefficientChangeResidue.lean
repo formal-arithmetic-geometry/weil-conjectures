@@ -26,7 +26,6 @@ The (Push) comparisons are needed at `Lε_M^* A₀`, `Lε_N^* B₀` and `Lε_P^*
 The first two are bounded below with `A₀` and `B₀`, but the derived tensor product of bounded below
 `𝒪_E`-complexes is not known to be bounded below (this would follow from a finite Tor dimension
 of the condensed ring `𝒪_E`), so the bounded belowness of `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is a hypothesis.
-
 -/
 
 @[expose] public section

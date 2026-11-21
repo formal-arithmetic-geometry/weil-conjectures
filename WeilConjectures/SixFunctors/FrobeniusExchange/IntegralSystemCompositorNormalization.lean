@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperation
 
 The two constructions use the same strict coefficient systems and are identified by
 their actual section-normalized direct-image compositors, before exact localization.
-(blueprint: lem-weil-integral-system-compositor-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -67,8 +66,7 @@ private theorem sequenceComposition_eq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y
 
 /-- The actual integral system compositor equals the section-normalized varying-ring
 compositor at the lifted quotient coefficient rings.
-Source: Stacks 0D6D and 03D3; Zheng 4.10
-(blueprint: lem-weil-integral-system-compositor-normalization).
+Source: Stacks 0D6D and 03D3; Zheng 4.10.
 Proof: the varying-ring ordinary direct-image compositor satisfies the same section
 formula as the integral compositor. Its conjugate is the varying-ring pullback
 compositor by the left-adjoint composition identity. Uniqueness identifies the ordinary

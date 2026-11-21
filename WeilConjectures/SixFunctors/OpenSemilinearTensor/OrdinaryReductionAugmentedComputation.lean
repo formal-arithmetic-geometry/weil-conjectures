@@ -302,8 +302,7 @@ private theorem ordinaryAugmentedPresentation (W : Scheme.{t})
     rfl
 
 /-- Natural augmented computation of a single ordinary quotient reduction on good models.
-Source: Stacks 06YS, 06YY, 0941 and 09T5
-(blueprint: lem-sf-ordinary-reduction-augmented-computation).
+Source: Stacks 06YS, 06YY, 0941 and 09T5.
 
 Proof: The evaluation isomorphisms and their quotient equations identify A with the
 ordinary simultaneous quotient-tensor functor. Transport the actual scalar units through

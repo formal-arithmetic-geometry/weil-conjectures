@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWh
 
 This isolates the representative normalization field required by
 `ReductionPresentation`.
-(blueprint: lem-sf-integral-hom-reduction-normalization).
 -/
 
 @[expose] public section
@@ -153,7 +152,6 @@ Proof: on K-flat representatives use the scalar-extension unit
 its pure-tensor formula. The left-derived universal property transports this
 map to the displayed counit square. Choose the derived comparison by descent
 of this normalized chain comparison, rather than accepting an arbitrary comparison.
-(blueprint: lem-sf-integral-hom-reduction-normalization-data).
 -/
 theorem reduction_normalization_data_exists
     (a : TensorPresentation.{t, u} Y

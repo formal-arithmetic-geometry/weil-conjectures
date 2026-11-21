@@ -17,7 +17,7 @@ Let `j : U ⟶ X` be a morphism of `S`-schemes, `Y` an `S`-scheme, `W = X ×_S Y
 Künneth maps (`AlgebraicGeometry.Etale.kunnethMap`) of `(X, Y)` at `Rj_* F` and of `(U, Y)` at
 `F` are compatible with the exchange map `β : Lq^* Rj_* F ⟶ Rh_* Lp^* F`
 (`AlgebraicGeometry.Etale.derivedBaseChangeMap`) and the composition isomorphism
-`Ra_{X*} Rj_* ≅ Ra_{U*}` (blueprint `lemma-kunneth-finite-direct-image--1`).
+`Ra_{X*} Rj_* ≅ Ra_{U*}`.
 
 As a consequence, for `S = Spec k` with `k` separably closed and `Λ` a finite ring whose exponent
 is invertible in `k`, `RΓ(W, β)` is an isomorphism: this is the projective case of the proof of
@@ -138,9 +138,9 @@ exchange map of the square
 
 ```
   V --h--> W --r--> Y
-  |        |        |
-  p        q        a_Y
-  v        v        v
+  | | |
+  p q a_Y
+  v v v
   U --j--> X --a_X-> S
 ```
 

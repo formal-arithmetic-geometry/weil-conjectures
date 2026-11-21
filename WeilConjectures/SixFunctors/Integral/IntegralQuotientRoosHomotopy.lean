@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.Strict.StrictRoosHomotopyFunctor
 /-! # The augmented quotient Roos functor before deriving
 
 Source: Stacks Project, Tags 014E, 011G and 08TC.
-(blueprint: lem-sf-integral-quotient-roos-homotopy)
 -/
 
 @[expose] public section
@@ -500,7 +499,6 @@ end
 homotopy category, with its zero-second-coordinate augmentation.
 
 Source: Stacks Project, Tags 014E, 011G and 08TC; signed Roos cone calculus.
-(blueprint: lem-sf-integral-quotient-roos-homotopy).
 
 Proof: Assemble ordinary quotient extension and scalar restriction into an
 additive module-valued tower functor. Its degreewise extension preserves

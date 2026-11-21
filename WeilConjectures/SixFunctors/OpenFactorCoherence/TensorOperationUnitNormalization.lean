@@ -27,8 +27,7 @@ attribute [local implicit_reducible] PurCompactSupport.completed
 attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective in
 /-- Every natural chain with the recorded tensor-operation augmentation has its two
 prescribed quotient coordinates.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5; Stacks 03EL, 07A4, 0941
-(blueprint: lem-sf-tensor-operation-unit-normalization).
+Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5; Stacks 03EL, 07A4, 0941.
 Proof: the operation-unit coordinate theorem identifies the first coordinate with the
 product augmentation followed by the strict tensor-tower comparison, and makes the
 shifted coordinate zero. Project the first identity to level n and evaluate on a

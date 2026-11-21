@@ -118,7 +118,7 @@ private theorem derivedOpen_pull_counit_isIso {U' U X' X : Scheme.{u}}
   exact (NatTrans.isIso_app_iff_of_iso (ringedOpenAdj l E j').counit e).mp (hQ _)
 
 /-- The reverse open exchange, constructed from the actual open unit.
-Source: Stacks 09AE (blueprint: lem-sf-integral-ringed-open-base-change). -/
+Source: Stacks 09AE. -/
 def integralRingedOpenMate {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g) :
@@ -144,8 +144,7 @@ def integralRingedOpenMate {U' U X' X : Scheme.{u}}
       (ringedSquare l E a j' j g h).inv.naturality ((ringedOpen l E j).map f)
 
 /-- For a cartesian open square the specified reverse mate is invertible.
-Source: Stacks 03DI, 09AE; fix-prop-coherence, open base-change step
-(blueprint: lem-sf-integral-ringed-open-base-change).
+Source: Stacks 03DI, 09AE; fix-prop-coherence, open base-change step.
 
 Proof: the open objects are subterminal, so their slice-extension units are
 invertible. The open-slice presentations give full faithfulness, and hence

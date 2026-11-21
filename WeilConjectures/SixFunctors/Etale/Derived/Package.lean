@@ -31,12 +31,12 @@ product, and stability of the small categories.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.SixOperationsPackage` (`sk-thm-sf-package`): the eight clauses,
+- `AlgebraicGeometry.Etale.SixOperationsPackage`: the eight clauses,
   one named field each.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.sixOperationsPackage` (`sk-thm-sf-package`): the eight clauses
+- `AlgebraicGeometry.Etale.sixOperationsPackage`: the eight clauses
   hold.
 
 ## Implementation notes
@@ -87,11 +87,10 @@ statements and carry no mathematical content beyond the results they cite:
   finite-stage biduality is `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`, its
   Weil-equivariant form is `AlgebraicGeometry.Etale.WeilComplex.isIso_verdierDualDoubleDual`, and
   the `ℚ̄_ℓ` stage is `AlgebraicGeometry.ProEtale.CondensedRing.isIso_verdierBiduality`
-  (`theorem-verdier-biduality`).
+.
 
 The reconstruction of normalized towers, an ingredient of the finite-level comparison, is
 `AlgebraicGeometry.Etale.NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit`.
-
 -/
 
 @[expose] public section
@@ -114,7 +113,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) (aY : Y ⟶ Spec (.of k)) [HasCompacti
   [QuasiCompact f] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
   [HasCompactification aY] [HasCompactification (f ≫ aY)]
 
-/-- Blueprint `sk-thm-sf-package`: The six-operations package.
+/-- The six-operations package.
 
 Let `k` be a field, `Λ` a finite ring with a Tate twist datum, `Y` separated of finite type over
 `k` with structure morphism `a_Y`, and `f : X ⟶ Y` separated of finite type, with
@@ -126,9 +125,9 @@ The eight clauses of the blueprint, one group of fields each:
 2. **Base change.** For a Cartesian square
    ```
      X' --g'--> X
-     |          |
-     f'         f
-     v          v
+     | |
+     f' f
+     v v
      Y' --g---> Y
    ```
    one has `Lg^* Rf_! ≅ Rf'_! Lg'^*`; and `Lg^* Rf_* ≅ Rf'_* Lg'^*` for proper `f`, and for
@@ -145,15 +144,11 @@ The eight clauses of the blueprint, one group of fields each:
    `Dctf`.
 See the module docstring for the clauses that are deliberately not carried here.
 
-Blueprint `def-sf-datum`: Six-functor datum, axiomatized
-
 The axioms (A1)–(A4) and (A6) of a six-functor datum, at a finite coefficient stage
 `Λ = A_{E,n}` on the étale sites: the fields of this structure are the adjunctions (A1), the base
 change isomorphisms (A2), the projection formula (A3), the composition law and proper
 coincidence (A4) and Verdier biduality (A6); the compatibilities (A5) with change of coefficients
 are not carried (see the module docstring).
-
-Blueprint `rem-sf-summary`: What a six-functor formalism is
 
 The six-functor formalism summarised by the remark is the conjunction of the clauses of this
 structure: the two adjoint pairs, base change, the projection formula, and proper coincidence
@@ -240,7 +235,7 @@ structure SixOperationsPackage : Prop where
       DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
         ((verdierDual Λ (f ≫ aY)).obj (op K))
 
-/-- Blueprint `sk-thm-sf-package`: The six-operations package.
+/-- The six-operations package.
 
 The eight clauses of `AlgebraicGeometry.Etale.SixOperationsPackage` hold for a finite `Λ` whose
 exponent is invertible on `k`, for `k` algebraically closed as in the blueprint (Verdier
@@ -338,7 +333,7 @@ theorem exists_distTriang_rightDerivedLowerShriek_openClosed {U Z X Y : Scheme.{
       (R(i)_![ModuleCat.{u + 1} Λ]).mapIso
         ((leftDerivedUpperStarIsoMapDerivedCategory _ i).app K).symm) ≪≫ (ci.app _).symm
 
-/-- Blueprint `prop-functor-package`: **the coefficient and functor package on the proved
+/-- **The coefficient and functor package on the proved
 domains**, at the finite stages `Λ = A_{E,n}`.
 
 For `k` algebraically closed, a finite ring `Λ` with a normalized Tate twist datum whose exponent is

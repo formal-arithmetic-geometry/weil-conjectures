@@ -14,9 +14,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 For a Cartesian square of schemes
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  v          v
+  | |
+  f' f
+  v v
   Y' --g---> Y
 ```
 and a finite coefficient ring `Λ`, the right adjoint (the conjugate) of the compact-support base
@@ -57,9 +57,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 For a Cartesian square
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  v          v
+  | |
+  f' f
+  v v
   Y' --g---> Y
 ```
 and a finite coefficient ring `Λ`, the canonical isomorphism `Rf^! Rg_* ≅ Rg'_* Rf'^!`, the

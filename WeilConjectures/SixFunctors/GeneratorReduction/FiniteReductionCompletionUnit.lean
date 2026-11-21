@@ -10,9 +10,6 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationRoosEffectivit
 import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperationsOnSlices
 import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitFiniteMateComparison
 /-! # Finite reduction of the actual completion unit
-
-Source: current blueprint fix-prop-coherence, primitive comparisons
-(blueprint: lem-sf-finite-reduction-completion-unit).
 -/
 
 @[expose] public noncomputable section
@@ -147,8 +144,7 @@ identity. Since the projection adjoint is invertible, the nth scalar extension
 of the augmentation is invertible. The characterizing equation of completionUnit
 identifies this augmentation after Q, and naturality transports the assertion
 along the representative isomorphism to K. There is no completeness assumption
-on K; the zero object and every positive quotient exponent are included.
-(blueprint: lem-sf-finite-reduction-completion-unit). -/
+on K; the zero object and every positive quotient exponent are included. -/
 theorem finiteReduction_completionUnit (X : Scheme.{u})
     (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :
     IsIso ((coefficientFiniteDerivedExtension l E X n).map

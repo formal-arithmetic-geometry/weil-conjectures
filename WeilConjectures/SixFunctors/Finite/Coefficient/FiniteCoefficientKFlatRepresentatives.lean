@@ -29,7 +29,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Resolving representatives for finite coefficient inverse image
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YN and 07A4.
-(blueprint: lem-sf-finite-coefficient-kflat-representatives).
 -/
 
 @[expose] public noncomputable section
@@ -175,8 +174,7 @@ private theorem comparison_has_kflat_resolutions
 
 /-- Restriction to complexes with intrinsically K-flat inverse image is fully faithful
 on functor categories, also for pairs of representatives.
-Source: Stacks Project, Cohomology on Sites, Tags 06YN and 07A4
-(blueprint: lem-sf-finite-coefficient-kflat-representatives).
+Source: Stacks Project, Cohomology on Sites, Tags 06YN and 07A4.
 Proof: choose the functorial flat resolution on the etale category. Ordinary inverse
 image preserves flatness, and the intrinsic realization is an exact tensor equivalence.
 Thus every complex admits a quasi-isomorphism from a complex in the specified class.

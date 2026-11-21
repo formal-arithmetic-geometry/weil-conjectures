@@ -197,7 +197,6 @@ attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
   WeilConjectures.CompletedCoefficientPushforward.hasDerived in
 /-- Transport the normalized slice open operations to the fixed completed coefficients.
 Source: Stacks 099N(2),(5), 09BN and 0E8I; Bhatt--Scholze 6.5.8.
-(blueprint: lem-sf-open-factor-open-realization).
 
 Proof: the finite maps of o preserve constant sections and every quotient projection.
 The completed projections are jointly monic, so o.completedMap is the fixed coefficient

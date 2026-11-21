@@ -49,7 +49,6 @@ The blueprint's second small category `D_c^[a, b](X, A)` is
 it — those of `WeilConjectures.SixFunctors.Etale.Derived.Stability` — always pair it with a Tor
 amplitude bound, and use the object property
 `AlgebraicGeometry.Etale.DerivedCategory.constructibleTorAmplitudeIn`.
-
 -/
 
 @[expose] public section
@@ -150,7 +149,7 @@ lemma DerivedCategory.exists_constructibleTorAmplitudeIn_iff_constructibleFinite
 
 variable (A X)
 
-/-- Blueprint `definition-constructible-sheaves`: Ambient categories and small subcategories.
+/-- Ambient categories and small subcategories.
 
 The small category `Dctf(X, A)` of bounded constructible complexes of finite Tor amplitude, as
 a full subcategory of `D(X_ét)`. It is the category on which the six operations of the

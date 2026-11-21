@@ -18,8 +18,7 @@ For proper maps `u : T₁ ⟶ T₂`, `v : T₂ ⟶ T₃` and open immersions `j�
 
 `α_{u ≫ v, K} = Rv_* (α_{u,K}) ∘ α_{v,K}`
 
-modulo `R(u ≫ v)_* ≅ Rv_* Ru_*`, and the comparison map of the identity is the identity
-(blueprint `proposition-construction-independence-rf-shriek--7`).
+modulo `R(u ≫ v)_* ≅ Rv_* Ru_*`, and the comparison map of the identity is the identity.
 
 Both statements follow from the characterisation `Ru_* (ι_{j₁}) ∘ α_u = ι_{j₂}` of `α_u`
 (`AlgebraicGeometry.ProperOpenDatum.eq_comparison`), together with the associativity and the

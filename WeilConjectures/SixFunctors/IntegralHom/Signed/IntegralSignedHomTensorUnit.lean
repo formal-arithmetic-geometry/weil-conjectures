@@ -161,8 +161,7 @@ private theorem signed_unit
 /-- A signed Hom-tensor map at the coefficient unit is the map fixed by the unitors.
 
 Source: the degree-zero coefficient unit in paragraph 1 of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks 0A8X
-(blueprint: lem-sf-integral-signed-hom-tensor-unit).
+`lem-coef-integral-hom-reduction.proof.md`; Stacks 0A8X.
 
 Proof: cancel the inverse right unitor on the source and test equality on all
 Hom product projections and identity-slice sections. Naturality of Hom projections

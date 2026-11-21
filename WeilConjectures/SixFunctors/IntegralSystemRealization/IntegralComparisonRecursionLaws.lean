@@ -10,7 +10,6 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCalculus
 
 /-! # Natural comparison recursion for integral realization
-Source: blueprint fix-prop-coherence.
 -/
 
 @[expose] public noncomputable section
@@ -237,9 +236,6 @@ private def comparison (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 /-- Natural comparison recursion for the specified canonical ambient models.
 Only the variable, unary, tensor and chosen compactification formulas are asserted;
 there is no statement about structural-generator maps or finite projections.
-Source: blueprint fix-prop-coherence, expression-tree construction, and
-lem-sf-integral-basic-realization / lem-sf-integral-expression-recursion
-(blueprint: lem-sf-integral-comparison-recursion-laws).
 
 Proof: reconstruct the actual unit on complete inputs and the actual counit on
 normalized systems. At a leaf invert that unit. For pullback insert the inverse

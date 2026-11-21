@@ -90,8 +90,7 @@ variable (Y : AlgebraicGeometry.Scheme.{t})
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- K-flat representatives localize to the existing derived category.
-Source: Stacks 06YY; the functorial K-flat resolution localization argument.
-(blueprint: lem-sf-integral-tensor-native-comparison). -/
+Source: Stacks 06YY; the functorial K-flat resolution localization argument. -/
 theorem tensorPresentationKFlatLocalization :
     (coefficientKFlatInclusion.{u, t + 1, t}
       (AlgebraicGeometry.Scheme.ProEt.topology Y) R ⋙ DerivedCategory.Q).IsLocalization
@@ -111,8 +110,7 @@ product derived category.
 Source: Stacks 06YY and 07A4, uniqueness of localization.
 Proof: the two representative comparisons identify the tensors after restriction
 to the product of K-flat localization functors. Whiskering by this localization
-is fully faithful. Its inverse on isomorphisms therefore gives the comparison.
-(blueprint: lem-sf-integral-tensor-native-comparison). -/
+is fully faithful. Its inverse on isomorphisms therefore gives the comparison. -/
 noncomputable def tensorPresentationNativeIso (a : TensorPresentation.{t, u} Y R) :
     letI := RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1}
       (AlgebraicGeometry.Scheme.ProEt.topology Y) R

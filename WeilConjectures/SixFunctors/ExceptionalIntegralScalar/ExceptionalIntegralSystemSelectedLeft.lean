@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalIntegral
 
 /-! # Whole-system scalar transport before selected finite-level compatibility
 Source: Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-system-selected-left)
 -/
 
 @[expose] public noncomputable section
@@ -60,8 +59,7 @@ selected_balanced. For q_selected, substitute the proper coefficient projection
 and open balancing definitions into d.comparison_normalized; the system proper/open
 realization and transport.evaluation_support identify both paths with the same
 projection. No equality is inferred from finite evaluations being faithful. All
-exponents are transported along z.exponent and all ring maps along z.actual.
-(blueprint: lem-sf-exceptional-integral-system-selected-left). -/
+exponents are transported along z.exponent and all ring maps along z.actual. -/
 theorem exceptionalIntegralSystemSelectedLeft
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

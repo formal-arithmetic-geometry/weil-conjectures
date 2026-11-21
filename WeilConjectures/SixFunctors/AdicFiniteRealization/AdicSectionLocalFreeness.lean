@@ -12,7 +12,6 @@ import Mathlib.CategoryTheory.Sites.CoversTop.Basic
 
 /-! # Local finite freeness in the section presentation
 Source: Stacks Project, Tags 00YV, 03DM and 03DO.
-(blueprint: lem-sf-adic-section-local-freeness).
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +26,7 @@ namespace WeilConjectures.AdicFiniteRealization
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- The section equivalence detects finite free trivializations on scheme covers.
-Source: Stacks Project, Tags 00YV, 03DM and 03DO
-(blueprint: lem-sf-adic-section-local-freeness).
+Source: Stacks Project, Tags 00YV, 03DM and 03DO.
 Proof: localize at a weakly etale chart W. The pro-etale site of its source is
 equivalent to the slice site over W, and restriction of the section equivalence
 commutes with this localization. The regular internal module encodes as the unit

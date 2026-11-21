@@ -42,7 +42,6 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 /-- Normalized scalar-mate components commute with finite coefficient-stage transitions.
 Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15; step 9 of the
 native compact-support finite comparison plan.
-(blueprint: lem-sf-native-compact-support-finite-scalar-coherence).
 
 Proof: represent the rational input by an integral constructible object. Residue Tor
 makes it an integral finite-Tor input. Insert the two IntegralComponent formulas and

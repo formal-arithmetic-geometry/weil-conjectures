@@ -26,7 +26,6 @@ the identity isomorphisms `L(𝟙)^* ≅ 𝟭`, which are monoidal
 (`ProEtale.CondensedRing.leftDerivedUpperStarTensor_id`) and compatible with the pullback
 comparisons of the squares with identity sides
 (`ProEtale.CondensedRing.pullbackSquareComparison_hom_app_id_right`).
-
 -/
 
 @[expose] public section

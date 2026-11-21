@@ -175,8 +175,7 @@ import WeilConjectures.AlgebraicGeometry.CompactSupportComparisonUnit
 /-! # Finite scalar mates for the constructible exceptional adjunction
 
 Source: Zheng, Propositions 2.23, 2.29 and 3.16; Construction 2.26;
-Stacks Project, Tags 0GL6, 09AL and 07A4
-(blueprint: lem-sf-exceptional-finite-scalar-mates).
+Stacks Project, Tags 0GL6, 09AL and 07A4.
 
 ## Main definitions
 
@@ -196,8 +195,7 @@ open scoped CategoryTheory.Functor
 namespace WeilConjectures.ExceptionalFiniteScalar
 
 /-- The existing triangulated closure supplies the inherited subcategory shifts.
-Source: blueprint finite-Tor subcategory; Stacks 08G2
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: blueprint finite-Tor subcategory; Stacks 08G2. -/
 instance finiteTriangulated (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (n : ℕ) (T : Scheme.{u}) :
@@ -205,8 +203,7 @@ instance finiteTriangulated (l : ℕ) [Fact l.Prime]
   (finite_ctf_isTriangulated l E (n + 1) (Nat.succ_pos n) T).2.1
 
 /-- The chosen ordinary etale adjunction at the retained compactification.
-Source: Zheng, Proposition 2.23; Stacks 0F5Y
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Zheng, Proposition 2.23; Stacks 0F5Y. -/
 def etaleAdjunction (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=
   letI := Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification A c
@@ -214,16 +211,14 @@ def etaleAdjunction (A : Type (u + 1)) [CommRing A] [Finite A]
     (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c)
 
 /-- Abbreviation for the right adjoint already selected by the ordinary adjunction.
-Source: Zheng, Proposition 2.23
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Zheng, Proposition 2.23. -/
 abbrev etaleExceptional (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=
   letI := Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification A c
   (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).rightAdjoint
 
 /-- Canonical realization of the specified-compactification exceptional functor.
-Source: blueprint exceptional inverse image; Stacks 09AL
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: blueprint exceptional inverse image; Stacks 09AL. -/
 def exceptional (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A :=
@@ -234,8 +229,7 @@ def exceptional (A : Type u) [CommRing A] [Finite A]
     (sfIntrinsicDerivedEquivalence X A).functor
 
 /-- The compact-support realization in inverse fixed-module coordinates.
-Source: Stacks 09AL; the canonical proper/open site realization
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Stacks 09AL; the canonical proper/open site realization. -/
 def leftFixedIso (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (K : proEtaleDerivedCategory X A) :
@@ -251,8 +245,7 @@ def leftFixedIso (A : Type u) [CommRing A] [Finite A]
     ((sfIntrinsicDerivedEquivalence Y A).unitIso.app _).symm
 
 /-- The actual ambient scalar-adjunction mate of the proper/open restriction square.
-Source: Stacks 0GL6, 07A4; Zheng, Construction 2.26
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Stacks 0GL6, 07A4; Zheng, Construction 2.26. -/
 def leftScalarMap {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (a : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     sfIntrinsicCompactSupport c A ⋙ pbcDerivedExtend (proEtaleConstantRingMap (T := Y) a) ⟶
@@ -262,8 +255,7 @@ def leftScalarMap {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
       (TwoSquare.mk _ _ _ _ (sfCompactSupportRestriction c a).hom))
 
 /-- Literal full-subcategory restriction of the ambient scalar extension.
-Source: Stacks 06YY and 09AL; finite scalar construction, step 2
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Stacks 06YY and 09AL; finite scalar construction, step 2. -/
 def restrictScalar
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L]
@@ -281,8 +273,7 @@ def restrictScalar
       pbcDerivedExtend (proEtaleConstantRingMap (T := T) a)) h
 
 /-- Expose the existing composite shift in the intrinsic compact-support coordinates.
-Source: Stacks 03DI and 070K; exact open descent and K-injective proper image
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Stacks 03DI and 070K; exact open descent and K-injective proper image. -/
 instance compactShift (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (sfIntrinsicCompactSupport c A).CommShift ℤ :=
@@ -291,8 +282,7 @@ instance compactShift (A : Type u) [CommRing A] [Finite A]
 
 /-- The finite operation with its actual realizations and transported adjunction.
 The last field specifies the Hom bijection for every retained etale-origin witness.
-Source: Zheng, Proposition 2.23; Stacks 09AL; finite construction, step 6
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Zheng, Proposition 2.23; Stacks 09AL; finite construction, step 6. -/
 structure Operation
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)
@@ -345,8 +335,7 @@ attribute [instance] Operation.leftShift Operation.rightShift
 
 /-- The canonical restriction comparison for exceptional right adjoints: the
 right-adjoint uniqueness isomorphism of the scalar/exceptional Hom chain.
-Source: Zheng, Proposition 2.23; Stacks 0GL6; finite scalar proof, step 4
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Zheng, Proposition 2.23; Stacks 0GL6; finite scalar proof, step 4. -/
 def restrictionIso {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (a : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (q : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙
@@ -361,8 +350,7 @@ def restrictionIso {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Fi
       (Sheaf.derivedRestrictScalars Y.smallEtaleTopology a))).ofNatIsoLeft q)
 
 /-- The scalar shift adjoint to the exact termwise restriction shift.
-Source: Stacks 06YY; adjoint shift normalization
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Stacks 06YY; adjoint shift normalization. -/
 instance etaleScalarShift {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) (T : Scheme.{u}) : (Etale.scalarExtension a T).CommShift ℤ :=
   (Adjunction.ofIsRightAdjoint
@@ -372,8 +360,7 @@ instance etaleScalarShift {A B : Type (u + 1)} [CommRing A] [CommRing B]
 calculation. The projection is the existing ordered projection followed by the
 canonical pullback of the constant coefficient complex. Its inverse therefore gives
 exactly the constant-coefficient exceptional tensor transpose, even for nonflat B.
-Source: Zheng, Construction 2.26 and Proposition 2.29(2); Stacks 0GL6
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Zheng, Construction 2.26 and Proposition 2.29(2); Stacks 0GL6. -/
 structure EtaleMates {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (a : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) where
   q : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙
@@ -414,8 +401,7 @@ structure EtaleMates {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [
 /-- Scalar preservation, its unchanged Tor interval, and the literal restricted
 functor with the equality realization. Shift compatibility is imposed on that
 realization, so the restricted shift is inherited from the ambient derived tensor.
-Source: Stacks 06YY, 09AL and 07A4; finite scalar construction, steps 1--2
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Stacks 06YY, 09AL and 07A4; finite scalar construction, steps 1--2. -/
 structure Scalar
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L]
@@ -438,7 +424,7 @@ structure Scalar
   realizationShift : (eqToIso scalar_eq).hom.CommShift ℤ
 
 /-- The literal restricted functor, with its scalar package visible for instance search.
-Source: Stacks 06YY, 09AL (blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Stacks 06YY, 09AL. -/
 def Scalar.functor
     {l : ℕ} [Fact l.Prime]
     {E L : Type u} [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L]
@@ -450,7 +436,7 @@ def Scalar.functor
   restrictScalar l E L n m T a S.preserves
 
 /-- The shift structure retained by the scalar package.
-Source: Stacks 06YY, 09AL (blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Stacks 06YY, 09AL. -/
 instance Scalar.functorShift
     {l : ℕ} [Fact l.Prime]
     {E L : Type u} [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L]
@@ -462,8 +448,7 @@ instance Scalar.functorShift
 
 /-- All finite scalar conclusions on the actual full subcategories. Every ring map is
 retained, rather than only an inductively generated list of coefficient changes.
-Source: Zheng, Propositions 2.23 and 2.29; Stacks 09AL, 0GL6 and 07A4
-(blueprint: lem-sf-exceptional-finite-scalar-mates). -/
+Source: Zheng, Propositions 2.23 and 2.29; Stacks 09AL, 0GL6 and 07A4. -/
 structure Construction
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L]
@@ -495,11 +480,10 @@ structure Construction
   etale : EtaleMates (RingHom.ulift.{u + 1, u + 1} a) c
 
 /-- The data left after the scalar packages and the two finite operations are chosen.
-Source: Zheng, Construction 2.26 and Proposition 2.29; Stacks 0GL6 and 09AL
-(blueprint: lem-sf-exceptional-finite-scalar-mates).
+Source: Zheng, Construction 2.26 and Proposition 2.29; Stacks 0GL6 and 09AL.
 
 The proof is the ambient proper/open scalar-mate construction, transported through
-the selected finite-Tor full subcategories.  In particular, it includes the
+the selected finite-Tor full subcategories. In particular, it includes the
 normalization equations and both adjoint shift equations required by `Construction`.
 -/
 structure ConstructionMaps

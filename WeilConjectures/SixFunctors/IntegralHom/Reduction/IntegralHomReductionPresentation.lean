@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionNor
 This is the fixed-level coefficient-extension part of
 `lem-sf-integral-hom-models-exist`.
 
-Source: Stacks Tags 07A4 and 07A6; blueprint order 2478, proof step 3
-(blueprint: lem-sf-integral-hom-models-exist-reduction).
+Source: Stacks Tags 07A4 and 07A6; blueprint order 2478, proof step 3.
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- A normalized reduction presentation exists at each fixed quotient level.
 
-Source: Stacks Tags 07A4 and 07A6; blueprint order 2478, proof step 3
-(blueprint: lem-sf-integral-hom-models-exist-reduction).
+Source: Stacks Tags 07A4 and 07A6; blueprint order 2478, proof step 3.
 
 Proof: ordinary scalar extension and restriction have unit `x ↦ 1 ⊗ x`.
 Balanced tensor associativity identifies the comparison with multiplication of

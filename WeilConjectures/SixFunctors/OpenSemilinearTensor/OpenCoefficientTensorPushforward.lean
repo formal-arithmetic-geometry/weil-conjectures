@@ -13,7 +13,6 @@ import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryT
 /-! # Tensor comparison for invertible coefficient pushforward
 
 Source: Stacks Project, Tag 03EK.
-(blueprint: lem-sf-open-coefficient-tensor-pushforward).
 -/
 
 -- After pruning, this module only keeps private declarations.

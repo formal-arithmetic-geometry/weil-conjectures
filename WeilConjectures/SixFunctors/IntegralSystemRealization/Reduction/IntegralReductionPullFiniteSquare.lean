@@ -175,8 +175,7 @@ private theorem on_good (o : Operations l E) (model : RealizationModel l E o)
 
 /-- Finite evaluation of the whole-system pullback model is the canonical scalar square.
 Source: Stacks 07A4, 07A6, 0941 and 0D6D; fix-prop-coherence, coefficient
-comparisons before taking open mates
-(blueprint: lem-sf-integral-reduction-pull-finite-square).
+comparisons before taking open mates.
 
 Proof: choose a flat-term K-flat representative P of H. Geometric inverse image
 preserves flat terms and K-flatness, so model.model applies to P and its inverse

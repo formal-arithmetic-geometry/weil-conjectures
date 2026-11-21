@@ -96,8 +96,7 @@ private theorem comparison_exists [∀ x : X, Invertible (l : X.residueField x)]
     ((ordinaryModel l E X).representative.app (⟨P, hP⟩, ⟨Q, hQ⟩)) _
 
 /-- A normalized quotient-completion tensor presentation exists.
-Source: Bhatt--Scholze 3.4.10, 6.5.5; constructible tensor completion, step 8
-(blueprint: lem-sf-tensor-completion-model-existence).
+Source: Bhatt--Scholze 3.4.10, 6.5.5; constructible tensor completion, step 8.
 Proof: restrict the recorded ordinary tensor representative isomorphism to flat-term
 K-flat complexes, converting their certificates to the integral good class. Construct
 the chain augmentation from the natural quotient Roos unit and tensorTowerIso. The

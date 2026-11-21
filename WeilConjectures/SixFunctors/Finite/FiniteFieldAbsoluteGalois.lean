@@ -18,9 +18,6 @@ import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 /-!
 # The absolute Galois group of a finite field
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/
-sk-lem-base-field-cd-galois-group.md (blueprint: lemma-cohomological-dimension-base-field--2).
-
 ## Main statements
 
 * For a finite field, the unique degree-`n` intermediate field in a separable closure is
@@ -156,10 +153,6 @@ private theorem frobenius_dense
   exact congrArg (fun J : Subgroup (Gal(Ks / K)) ↦ (J : Set (Gal(Ks / K)))) htop
 
 /-- The finite-field absolute Galois group statement, including its finite cyclic quotients.
-
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.md, paragraphs 1--2
-(blueprint: lemma-cohomological-dimension-base-field--2).
 
 Proof:
 1. Use `exists_unique_subfield_of_closure` in the algebraic closure supplied by

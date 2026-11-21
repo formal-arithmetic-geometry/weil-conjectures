@@ -23,14 +23,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The canonical open reduction mate is invertible on every derived object.
 Source: Stacks 03DI, 06YS, 06YY and 0GL1; the localization paragraph of
-`fix-prop-coherence.proof.md` (blueprint: lem-sf-integral-open-reduction-iso).
+`fix-prop-coherence.proof.md`.
 
-Proof: pass to the localization of good K-flat complexes.  The open reduction
+Proof: pass to the localization of good K-flat complexes. The open reduction
 localization formula identifies the derived mate with the ordinary open mate on a
-K-flat representative.  The ordinary mate is an isomorphism degreewise by the
-direct-sum open-extension comparison.  Derived localization preserves this
+K-flat representative. The ordinary mate is an isomorphism degreewise by the
+direct-sum open-extension comparison. Derived localization preserves this
 isomorphism, and essential surjectivity of the localization transports it to every
-derived object.  No completeness, constructibility or geometric characteristic
+derived object. No completeness, constructibility or geometric characteristic
 hypothesis is used.
 -/
 theorem integralOpenReductionIso (o : Operations l E)

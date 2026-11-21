@@ -75,8 +75,7 @@ extension's object formula identify rationalization of KE with the common-stage
 object. Eliminate this equality in a generic categorical helper: the original
 boundaries become witnesses at the common stage, their prescribed-arrow predicates
 are preserved, and the same factorization holds there. The witnesses are explicit
-equality transports of the constructed boundary components.
-(blueprint: lem-sf-native-integral-stage-component). -/
+equality transports of the constructed boundary components. -/
 theorem integralStageComponent [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c)

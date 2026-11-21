@@ -53,7 +53,7 @@ namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `lemma-reduction-field`: Higher direct images and limits of schemes.
+/-- Higher direct images and limits of schemes.
 
 Let `W ⟶ S` be a morphism of schemes, `G` a sheaf of `Λ`-modules on `W_ét`, and
 `T = lim T_i` a cofiltered limit of schemes over `W` with affine transition morphisms, all
@@ -62,8 +62,7 @@ R^q g_* (G|_T)`, where `g_i : T_i ⟶ S` and `g : T ⟶ S` are the structure mor
 statement is recorded on every geometric stalk, in the form of the two defining properties of
 a filtered colimit of modules: every element at the limit comes from some stage, and an element
 of a stage dying at the limit already dies at a later stage. This is the case of the blueprint
-statement for a system of sheaves pulled back from a fixed scheme. 
-(blueprint: sbc-lem-higher-image-pulledback-stalk-continuity)
+statement for a system of sheaves pulled back from a fixed scheme.
 -/
 @[stacks 09Z1]
 theorem Etale.higherDirectImage_limit {W S : Scheme.{u}} (k : W ⟶ S)

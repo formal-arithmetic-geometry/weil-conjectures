@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 /-! # Completing normalized left comparisons by their adjunction mates
 
 Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: lem-sf-exceptional-integral-scalar-mate-completion)
 -/
 
 @[expose] public noncomputable section
@@ -65,8 +64,7 @@ and q inverse identity give the counit equation. Transposing and using the trian
 gives the unit equation. Mates commute with shifts for the given adjoint shifts.
 The right cocycle follows by transposing the left cocycle, using naturality and the
 two counit equations. The right identity follows by the same transpose test on the
-multiplication unitor. All scalar functors and their normalizations are retained.
-(blueprint: lem-sf-exceptional-integral-scalar-mate-completion). -/
+multiplication unitor. All scalar functors and their normalizations are retained. -/
 theorem exceptionalIntegralScalarMateCompletion
     (z : LeftMates l Ω c operation left)
     (hinv : ∀ {s t : RingStage.{u} l}

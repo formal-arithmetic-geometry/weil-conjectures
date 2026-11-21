@@ -120,10 +120,10 @@ pasted adjunction
 torsion coefficients,
 
 ```
-  R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!           (left adjoints,
+  R(f ≫ g)_! ≅ Rf_! ⋙ Rg_! (left adjoints,
   proposition-composition-base-change-rf-shriek--1)
-        ⊣              ⊣
-  R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!           (right adjoints, the mate)
+        ⊣ ⊣
+  R(f ≫ g)^! ≅ Rg^! ⋙ Rf^! (right adjoints, the mate)
 ```
 
 the mate of the composition isomorphism is an isomorphism `R(g ∘ f)^! ≅ Rf^! ∘ Rg^!`: right

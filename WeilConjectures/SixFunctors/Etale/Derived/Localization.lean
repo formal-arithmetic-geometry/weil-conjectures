@@ -208,8 +208,8 @@ and `j^* Ri_! = 0` by base change of `Ri_!` along `j`, since the fibre product o
 
 ```
   Z ×_X U ---> U
-     |         | j
-     v         v
+     | | j
+     v v
      Z ---i--> X
 ```
 
@@ -353,11 +353,11 @@ supported localization triangles of `L` and `L'`, the triple `(Ri_! Ri^! φ, φ,
 is a morphism of triangles:
 
 ```
-  Ri_! Ri^! L  --ε_L-->  L  --η_L-->  Rj_* Lj^* L  --w-->  (Ri_! Ri^! L)[1]
-       |                 |                |                     |
-   Ri_!Ri^!φ             φ           Rj_*Lj^*φ           (Ri_!Ri^!φ)[1]
-       v                 v                v                     v
-  Ri_! Ri^! L' --ε_L'--> L' --η_L'--> Rj_* Lj^* L' --w'-->  (Ri_! Ri^! L')[1]
+  Ri_! Ri^! L --ε_L--> L --η_L--> Rj_* Lj^* L --w--> (Ri_! Ri^! L)[1]
+       | | | |
+   Ri_!Ri^!φ φ Rj_*Lj^*φ (Ri_!Ri^!φ)[1]
+       v v v v
+  Ri_! Ri^! L' --ε_L'--> L' --η_L'--> Rj_* Lj^* L' --w'--> (Ri_! Ri^! L')[1]
 ```
 
 The middle component extends to a morphism of triangles

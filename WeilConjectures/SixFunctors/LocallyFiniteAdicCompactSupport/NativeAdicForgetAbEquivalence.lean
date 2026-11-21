@@ -27,7 +27,6 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- The action of constant coefficient functions recovers the forgotten vector-space action.
 Source: Bhatt--Scholze, Section 6.8, scalar-recovery step of the native geometry argument.
-(blueprint: lem-sf-native-adic-forget-ab-equivalence).
 
 Proof: for an abelian-sheaf module over the native function ring, let a constant scalar
 act on a section by the module action of the corresponding constant function. The

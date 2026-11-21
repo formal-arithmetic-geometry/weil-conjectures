@@ -53,7 +53,7 @@ set_option linter.unusedVariables false in
 left realizations exist for every compactification. This is the operation and
 realization subargument of the coherent transport construction.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-operations-existence).
+5.26.
 
 Proof: at a finite stage use the existing finite exceptional operations and
 identify their literal compact-support realization with the published finite image.

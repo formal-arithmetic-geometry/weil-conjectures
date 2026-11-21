@@ -47,7 +47,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Extend the invertible integral scalar morphism to the actual raw rational stage.
 Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15; localization universal
 property, applied to steps 3--8 of the native finite-comparison plan.
-(blueprint: lem-sf-native-compact-support-integral-localization).
 
 Proof: use the integral natural morphism and its two invertible outer factors.
 The actual middle scalar mate is invertible by its coefficient-change theorem.

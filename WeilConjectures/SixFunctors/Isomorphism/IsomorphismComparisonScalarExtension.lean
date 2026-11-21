@@ -65,7 +65,7 @@ import WeilConjectures.PoincareDuality.Integral.IntegralPullbackComparisonRealiz
 
 Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), pp. 50--51.
 The scalar compatibility formula is the agent calculation from the specified
-quotient-cone maps (blueprint: lem-weil-isomorphism-comparison-scalar-extension).
+quotient-cone maps.
 The ordinary tensor is expressed in its exact finite-free model. Its completion
 comparison is identified with the specified universal derived-tensor comparison.
 The models are in `IsomorphismComparisonScalarExtensionModel`, the tensor isomorphism and
@@ -783,8 +783,7 @@ end ComparisonSquare
 
 /-- The specified integral comparison commutes with finite coefficient extension.
 Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), pp. 50--51; the compatibility
-itself is the agent calculation of the specified quotient-cone maps
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension).
+itself is the agent calculation of the specified quotient-cone maps.
 Proof: the ordinary tensor unit and the finite scalar-pullback generator formula
 prove the square at every finite level. Product extensionality and the two actual
 Roos cocone coordinates give the strict augmentation square, with zero shifted

@@ -26,8 +26,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 /-- Finite and integral adjunctions can be chosen with their actual normalized
 reduction/limit transport, before constructing any coefficient scalar comparison.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24, 5.26;
-ring canonical scalar invertibility, proof step 1
-(blueprint: lem-sf-exceptional-ring-transport-family).
+ring canonical scalar invertibility, proof step 1.
 
 Proof: normalize the shifts on the finite and integral operations along their
 compact-support realizations, with the induced right-adjoint shifts. Then choose

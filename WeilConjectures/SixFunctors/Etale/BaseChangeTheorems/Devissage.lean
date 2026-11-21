@@ -18,9 +18,9 @@ For a cartesian square
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 X --p--> S
 ```
 
@@ -89,8 +89,7 @@ theorem Etale.exact_baseChangeTargetFunctor_map_of_shortExact (e : Y ⟶ T) (h :
 and at `F₂` in every degree, then they are isomorphisms at `F` in every degree. The exchange
 maps form a morphism between the two long exact sequences
 (`AlgebraicGeometry.Etale.exists_connecting_baseChangeHomologyMap`), and in each degree the
-five lemma applies to the five adjacent terms.
-(blueprint: `theorem-proper-base-change-classical-pro`) -/
+five lemma applies to the five adjacent terms. -/
 theorem Etale.isIso_baseChangeHomologyMap_X₂_of_shortExact (sq : IsPullback e h g p)
     {E : ShortComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hE : E.ShortExact)
     (h₁ : ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q E.X₁))
@@ -139,8 +138,7 @@ isomorphisms in every degree at every sheaf killed by a prime, then they are iso
 every degree at every sheaf killed by a positive integer `n`. Induct on the number of prime
 factors of `n` using `0 ⟶ F[ℓ] ⟶ F ⟶ ℓF ⟶ 0` for a prime `ℓ ∣ n`
 (`CategoryTheory.ObjectProperty.prop_of_nsmul_id_eq_zero`) and the five-lemma transfer
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_X₂_of_shortExact`.
-(blueprint: `theorem-proper-base-change-classical-pro`) -/
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_X₂_of_shortExact`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_nsmul_id_eq_zero (sq : IsPullback e h g p)
     (hprime : ∀ r : ℕ, r.Prime → ∀ E : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ),
       r • 𝟙 E = 0 → ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q E))
@@ -159,8 +157,7 @@ a prime, then they are isomorphisms at every torsion sheaf `F`. By the prime-fac
 isomorphisms at the sheaves `F[n]` killed by a positive integer; `F` is their filtered colimit
 (`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf.exists_isColimit`), and the source and the target of
 the exchange map commute with filtered colimits
-(`AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`).
-(blueprint: `theorem-proper-base-change-classical-pro`) -/
+(`AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`). -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf (sq : IsPullback e h g p)
     [QuasiCompact g] [QuasiSeparated g]
     (hprime : ∀ r : ℕ, r.Prime → ∀ E : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ),

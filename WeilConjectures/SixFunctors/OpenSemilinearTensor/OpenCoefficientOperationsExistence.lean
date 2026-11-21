@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Sites.Equivalence
 /-! # Coefficient transport for the ordinary open operations
 
 Source: Stacks Project, Tags 03DI, 03DJ, 0941 and 098K.
-(blueprint: lem-sf-open-coefficient-operations-existence).
 -/
 
 @[expose] public noncomputable section
@@ -521,8 +520,7 @@ private theorem evaluationComparison_sections (n : ℕ)
 /-- Transport the quotient tower and its completed ring to the literal open slice.
 This constructs only the coefficient/module transports; it asserts no tensor or
 scalar projection formula.
-Source: Stacks 03DI, 03DJ, 0941 and 098K
-(blueprint: lem-sf-open-coefficient-operations-existence).
+Source: Stacks 03DI, 03DJ, 0941 and 098K.
 
 Proof: identify `cbcSliceFunctor` with the concrete slice equivalence supplied by
 weakly-etale localization. Continuous precomposition along this equivalence commutes

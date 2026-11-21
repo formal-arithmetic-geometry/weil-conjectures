@@ -35,8 +35,7 @@ attribute [local instance] coefficientFiniteExtensionAdditive
 
 /-- The canonical finite scalar presentation carries the canonical counit on K-flat
 complexes to the scalar reduction computation map.
-Source: Stacks Tags 07A6 and 06YY
-(blueprint: lem-sf-finite-scalar-reduction-counit-normalization).
+Source: Stacks Tags 07A6 and 06YY.
 Proof: transpose through the pbc scalar adjunction. The left-adjoint uniqueness
 map transfers the first transpose to the finite scalar adjunction. Its K-flat unit
 normalization gives the localized ordinary finite scalar unit. ScalarComplexTranspose

@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicTorAmplitudeTranspor
 import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
 
 /-! # Uniform intrinsic bounds for the specified exceptional functor
-
-Source: blueprint theorem-f-shriek-finite-coefficients--1
-(blueprint: lem-sf-finite-intrinsic-exceptional-bounds).
 -/
 
 @[expose] public noncomputable section
@@ -133,8 +130,6 @@ private theorem bounds_tor_iso
   exact h.2 P Q (he.map (fun z ↦ z ≪≫ e.symm)) f hf hQ M i hi
 
 /-- Uniform intrinsic exceptional bounds for the specified ambient right functor.
-Source: blueprint theorem-f-shriek-finite-coefficients--1, exceptional construction step 3
-(blueprint: lem-sf-finite-intrinsic-exceptional-bounds).
 
 Proof: Choose finite affine target charts, affine source charts over them, and their
 closed affine-space presentations once for f. Discard empty source charts. Apply

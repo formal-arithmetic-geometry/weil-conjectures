@@ -13,14 +13,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriekCon
 /-!
 # The adjunctions of the six-functor datum
 
-Blueprint `fix-prop-adjunctions` collects the adjunctions of the six-functor datum
-`def-fix-six-functor-datum`, and blueprint
-`proposition-composition-open-restriction-compactifications-f--1` the mate calculus for the
-exceptional pair on the finite-Tor categories. The datum is the one of the six-operations package
-`AlgebraicGeometry.Etale.SixOperationsPackage`: the coefficients are `ModuleCat Λ` for a finite ring
-`Λ`, the schemes are of finite type over a field `k`, and the exponent of `Λ` is invertible on the
-base.
-
 1. The derived adjunction `Lf^* ⊣ Rf_*` restricts to the bounded constructible categories
    (`AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructible.leftDerivedUpperStarAdjunction`).
 2. The exceptional adjunction `Rf_! ⊣ Rf^!` restricts to the bounded constructible categories
@@ -288,7 +280,7 @@ noncomputable def DerivedCategoryFiniteTor.leftDerivedUpperStarAdjunction
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     (ObjectProperty.liftCompιIso _ _ _).symm (ObjectProperty.liftCompιIso _ _ _).symm
 
-/-- Blueprint `rem-ptr-sf-datum-1`: in the notation of `def-sf-datum`, the properties of
+/-- In the notation of `def-sf-datum`, the properties of
 `def-fix-six-functor-datum` and `fix-prop-adjunctions` hold, i.e. axiom (A1): for separated
 finite-type `X ⟶[f] Y ⟶[g] Z` of finite-type `k`-schemes and a finite `Λ` whose exponent is
 invertible on `Z`, there are adjunctions `Lf^* ⊣ Rf_*` and `Rf_! ⊣ Rf^!` on the finite-Tor
@@ -331,9 +323,9 @@ change): the transpose of the compact-support exchange
 `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of a cartesian square
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  v          v
+  | |
+  f' f
+  v v
   Y' --g---> Y
 ```
 under the composite adjunctions `Lg^* ∘ Rf_! ⊣ Rf^! ∘ Rg_*` and `Rf'_! ∘ Lg'^* ⊣ Rg'_* ∘ Rf'^!`:

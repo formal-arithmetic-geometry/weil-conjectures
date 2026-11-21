@@ -582,7 +582,7 @@ private theorem completed_derived_products :
 /-- A strict normalized adic complex model and the bounded-free cone computation
 of a finite scalar extension of a Roos limit.
 Source: Bhatt--Scholze, Lemmas 3.5.4 and 3.5.5, regular-element case; Stacks 06YS,
-05RT and 0941. (blueprint: lem-coef-normalized-dvr-adic-cone-model).
+05RT and 0941.
 
 Proof: write the ring of integers as a DVR and choose a uniformizer. Its constant
 action on the completed sheaf gives the indicated linear category. Successively use

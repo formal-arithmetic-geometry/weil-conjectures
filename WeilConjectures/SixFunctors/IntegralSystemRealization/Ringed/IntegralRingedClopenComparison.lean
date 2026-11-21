@@ -35,7 +35,7 @@ attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
   SheafOfModules.localizedSystemRestrictionLimits
   SheafOfModules.localizedSystemRestrictionColimits in
 /-- The actual open unit is invertible on every ambient derived object.
-Source: Stacks 03DI (blueprint: lem-sf-integral-ringed-clopen-comparison). -/
+Source: Stacks 03DI. -/
 theorem integralRingedOpenUnit_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : IsIso (ringedOpenAdj l E j).unit := by
   let R := PurCompactSupport.completed l E
@@ -51,7 +51,7 @@ theorem integralRingedOpenUnit_isIso {U X : Scheme.{u}} (j : U ⟶ X)
   exact (ringedOpenAdj l E j).unit_isIso_of_L_fully_faithful
 
 /-- Transpose of the inverse actual open unit under geometric direct image.
-Source: Stacks 03DI (blueprint: lem-sf-integral-ringed-clopen-comparison). -/
+Source: Stacks 03DI. -/
 def integralRingedClopenMap {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     ringedOpen l E j ⟶ ringedPush l E j := by
   letI := integralRingedOpenUnit_isIso l E j
@@ -156,8 +156,7 @@ attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
   SheafOfModules.localizedSystemRestrictionLimits
   SheafOfModules.localizedSystemRestrictionColimits in
 /-- On a clopen immersion the inverse-unit transpose is invertible.
-Source: Stacks 03DI, 09AE; fix-prop-coherence, clopen step
-(blueprint: lem-sf-integral-ringed-clopen-comparison).
+Source: Stacks 03DI, 09AE; fix-prop-coherence, clopen step.
 
 Proof: a clopen immersion partitions every pro-etale test object into its inverse
 image in the open and its complementary clopen piece. Modules supported on the

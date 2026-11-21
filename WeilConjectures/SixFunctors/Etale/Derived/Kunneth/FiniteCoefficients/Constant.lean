@@ -78,8 +78,7 @@ noncomputable def derivedConstantSheafCompLeftDerivedUpperStarIso {Y Z : Scheme.
     Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (constantSheafCompUpperStarNatIso A g)
 
-/-- The adjunction `c_W ⊣ RΓ_W` between constant complexes and derived sections (blueprint
-`pur7710-lem-constant-adjunction`) for `A`-valued sheaves: the derived adjunction of
+/-- The adjunction `c_W ⊣ RΓ_W` between constant complexes and derived sections for `A`-valued sheaves: the derived adjunction of
 `constantSheaf ⊣ Γ`, the total left derived functor of the exact constant sheaf functor being
 identified with the levelwise functor. -/
 noncomputable def derivedConstantSheafAdjunction (W : Scheme.{u}) :
@@ -122,7 +121,7 @@ noncomputable def leftDerivedConstantSheafTensorHom (M N : DerivedCategory A) :
     (constantSheaf W.smallEtaleTopology A).leftDerivedFunctorIsoMapDerivedCategory.hom.app N
 
 /-- The monoidal comparison `c_W(M ⊗ᴸ N) ⟶ c_W M ⊗ᴸ c_W N` of constant complexes of objects of
-`A` (blueprint `pur7710-lem-constant-monoidal`): the derived comonoidal structure
+`A`: the derived comonoidal structure
 `CategoryTheory.Functor.leftDerivedTensorComparison` of the exact monoidal constant sheaf
 functor, transported along `L((-)_W) ≅ c_W`. -/
 noncomputable def derivedConstantSheafTensorComparison (M N : DerivedCategory A) :
@@ -211,16 +210,14 @@ instance preservesFlat_constantSheaf (W : Scheme.{u}) :
     ObjectProperty.prop_of_iso _
       ((pointSmallEtale s).ulift.{u + 1}.sheafFiberConstantSheafIso M).symm hM
 
-/-- The adjunction `c_W ⊣ RΓ_W` between constant complexes and derived sections (blueprint
-`pur7710-lem-constant-adjunction`): the derived adjunction of `constantSheaf ⊣ Γ`, the total
+/-- The adjunction `c_W ⊣ RΓ_W` between constant complexes and derived sections: the derived adjunction of `constantSheaf ⊣ Γ`, the total
 left derived functor of the exact constant sheaf functor being identified with the levelwise
 functor (`AlgebraicGeometry.Etale.derivedConstantSheafAdjunction` for `A = ModuleCat Λ`). -/
 noncomputable def constantComplexAdjunction (W : Scheme.{u}) :
     constantComplexFunctor Λ W ⊣ rightDerivedGlobalSectionsModule Λ W :=
   derivedConstantSheafAdjunction (ModuleCat.{u + 1} Λ) W
 
-/-- The monoidal comparison `c_W(M ⊗ᴸ N) ⟶ c_W M ⊗ᴸ c_W N` of constant complexes (blueprint
-`pur7710-lem-constant-monoidal`): the derived comonoidal structure
+/-- The monoidal comparison `c_W(M ⊗ᴸ N) ⟶ c_W M ⊗ᴸ c_W N` of constant complexes: the derived comonoidal structure
 `CategoryTheory.Functor.leftDerivedTensorComparison` of the exact monoidal constant sheaf
 functor, transported along `L(constantSheaf) ≅ D(constantSheaf)`. It is an isomorphism. -/
 noncomputable def constantComplexTensorComparison (W : Scheme.{u})

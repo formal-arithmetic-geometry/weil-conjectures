@@ -180,8 +180,7 @@ noncomputable def Etale.localizationRestrictionLowerStarAdjunction :
 
 /-- For an étale `f`, the pullback `f^*` is computed by restriction along the localization
 functor: both are left adjoint to `f_*`. In particular `f^*` needs no sheafification in this
-case, and its sections are given by `Etale.localizationRestriction_obj_val_obj`.
-(blueprint: `lem-weil-pbc-etale-inverse-image-restriction`) -/
+case, and its sections are given by `Etale.localizationRestriction_obj_val_obj`. -/
 noncomputable def Etale.upperStarIsoLocalizationRestriction :
     (f)^*[A] ≅ Etale.localizationRestriction A f h :=
   (Etale.upperStarLowerStarAdjunction A f).leftAdjointUniq
@@ -366,7 +365,7 @@ noncomputable def Etale.upperStarIsoOpenImmersionRestriction :
   Etale.upperStarIsoLocalizationRestriction A j inferInstance
 
 /-- The adjunction `j_! ⊣ j^*` between the lower shriek along an open immersion and the
-pullback `Etale.upperStar`. (blueprint: `lem-weil-pbc-extension-by-zero-adjunction`) -/
+pullback `Etale.upperStar`. -/
 noncomputable def Etale.openImmersionLowerShriekUpperStarAdjunction :
     (j)_!open[A] ⊣ (j)^*[A] :=
   Etale.localizationLowerShriekUpperStarAdjunction A j inferInstance

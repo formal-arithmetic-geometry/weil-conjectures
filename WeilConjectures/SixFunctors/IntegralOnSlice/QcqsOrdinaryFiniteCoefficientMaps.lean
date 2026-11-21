@@ -12,7 +12,6 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 /-! # The actual finite constant-coefficient ring adjunct
 
 Source: Stacks Tags 04B3, 0H7J, 09A5 and 03CY.
-(blueprint: lem-fix-qcqs-ordinary-finite-coefficient-isos).
 -/
 
 @[expose] public noncomputable section
@@ -225,7 +224,6 @@ private theorem constant_ring_adjunct_isIso
 with independent scheme and coefficient universes, for every scheme morphism.
 
 Source: Stacks Tags 04B3, 0H7J, 09A5 and 03CY.
-(blueprint: lem-fix-qcqs-ordinary-finite-coefficient-isos)
 
 Proof: constant sheafification is left adjoint to evaluation at a terminal site
 object. Base change preserves that terminal object. Composing its ring inverse-image

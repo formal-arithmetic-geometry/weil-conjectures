@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 /-! # Composition of section scalar extension to the closure
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-finite-condensed-section-scalar-composition)
 -/
 
 @[expose] public noncomputable section
@@ -1072,8 +1071,7 @@ variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
 
 /-- Section encoding of extension to the condensed algebraic closure, before any
 raw-stage realization or constructibility lift is introduced.
-Source: BS 6.8.2, the section scalar adjunction and the finite coefficient cocone.
-(blueprint: lem-sf-finite-condensed-section-scalar-composition). -/
+Source: BS 6.8.2, the section scalar adjunction and the finite coefficient cocone. -/
 @[irreducible] def finiteCondensedClosureEncoding (A : FiniteCondensedData l X)
     (E : Index l (PadicAlgCl l)) :
     ProEtale.derivedExtendScalarsToPadicAlgCl X l E ⋙ integralSections l X ≅
@@ -1096,7 +1094,6 @@ Source: BS 6.8.2, the section scalar adjunction and the finite coefficient cocon
 
 /-- The section scalar mate preserves composition to the closure.
 Source: BS 6.8.2 and tensor transitivity in 6.8.14(2).
-(blueprint: lem-sf-finite-condensed-section-scalar-composition).
 
 Proof in words: express both finite and closure section comparisons as the unique
 inverse mates of the identity-on-sections restriction comparisons. The restriction

@@ -35,7 +35,6 @@ This holds for any coefficients in which `|Gal(L'/L)|` is invertible, in particu
 `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_autAction`) to the pro-`p`
 Galois layer, given the stabilization, which comes from the continuity of the inertia action on
 nearby cycles (SGA 4½, [Th. finitude], 3.4; SGA 7, Exp. XIII, 1.3).
-
 -/
 
 @[expose] public section

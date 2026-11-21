@@ -248,8 +248,7 @@ attribute [local irreducible] coefficientTotalTensor SheafOfModules.monoidalCate
 
 -- Paste the four model squares without unfolding localization constructions.
 /-- Paste four binary representative squares and the ordinary associativity equation.
-Source: Stacks 07A4 and 0FPT.
-(blueprint: lem-coef-tensor-associativity-representatives). -/
+Source: Stacks 07A4 and 0FPT. -/
 theorem coefficientTensorAssociativityOnRepresentatives
     (P Q N : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
     (hP : P.IsKFlatIndependentCoefficients)

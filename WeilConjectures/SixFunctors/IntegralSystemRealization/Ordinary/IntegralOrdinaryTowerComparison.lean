@@ -12,7 +12,6 @@ public import WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceS
 /-! # Direct image on restricted coefficient towers
 
 Source: Stacks Project, Tags 03D7 and 0941.
-(blueprint: lem-sf-integral-ordinary-tower-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -245,7 +244,6 @@ attribute [local irreducible] towerComparison
 
 /-- The normalized finite comparisons form a unique isomorphism of coefficient towers.
 Source: Stacks Project, Tags 03D1 and 0941; primitive realization Step 3.
-(blueprint: lem-sf-integral-ordinary-tower-comparison).
 
 Proof: compose restriction/evaluation, direct-image/evaluation, scalar restriction,
 and the inverse restriction/evaluation comparison at each coefficient level.

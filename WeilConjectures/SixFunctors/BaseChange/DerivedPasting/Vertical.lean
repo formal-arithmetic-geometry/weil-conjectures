@@ -17,8 +17,6 @@ derived base change maps of the two squares, modulo the composition isomorphisms
 pushforwards (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert`). As a consequence
 the proper base change property is stable under composition
 (`AlgebraicGeometry.Etale.IsBaseChangeIso.comp`).
-(blueprint: `lemma-identity-pasting`, vertical pasting;
-`lemma:weil-pbc-composition`, formal part)
 
 The pasting laws are collected in `WeilConjectures.SixFunctors.BaseChange.DerivedPasting`.
 -/
@@ -62,7 +60,7 @@ section Instances
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The pushforward `f_*` preserves injective objects, being right adjoint to the exact
-functor `f^*`. (blueprint: `lemma-composition-cancellation`) -/
+functor `f^*`. -/
 instance Etale.preservesInjectiveObjects_lowerStar : ((f)_*[A]).PreservesInjectiveObjects :=
   Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
     (Etale.upperStarLowerStarAdjunction A f)
@@ -90,9 +88,7 @@ lemma Etale.baseChangeMap_paste_vert' (sq₁ : CommSq g' f' f g) (sq₂ : CommSq
 the derived base change map of the pasted square is the composite
 `k^* R(f ≫ e)_* ≅ k^* Re_* Rf_* ⟶ Re'_* g^* Rf_* ⟶ Re'_* Rf'_* g'^* ≅ R(f' ≫ e')_* g'^*` of
 the derived base change maps of the two squares, modulo the composition isomorphisms of the
-derived pushforwards along the vertical maps.
-(blueprint: `lemma-identity-pasting`,
-`lemma-identity-pasting`) -/
+derived pushforwards along the vertical maps. -/
 lemma Etale.derivedBaseChangeMapPlus_paste_vert (sq₁ : CommSq g' f' f g)
     (sq₂ : CommSq g e' e k) (sq : CommSq g' (f' ≫ e') (f ≫ e) k) :
     Etale.derivedBaseChangeMapPlus A sq =
@@ -214,8 +210,7 @@ variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (e : Y ⟶ Z)
 /-- **The proper base change property is stable under composition**: if `f` and `e` satisfy
 `AlgebraicGeometry.Etale.IsBaseChangeIso`, so does `f ≫ e`. Every cartesian square on `f ≫ e`
 is the vertical pasting of the cartesian square on `e` with the same base change and the
-induced cartesian square on `f`, and the derived base change maps paste accordingly.
-(blueprint: `lemma:weil-pbc-composition`, formal part) -/
+induced cartesian square on `f`, and the derived base change maps paste accordingly. -/
 lemma Etale.IsBaseChangeIso.comp [Etale.IsBaseChangeIso A f] [Etale.IsBaseChangeIso A e] :
     Etale.IsBaseChangeIso A (f ≫ e) where
   isIso {X' Z'} g' f'' k sq := by

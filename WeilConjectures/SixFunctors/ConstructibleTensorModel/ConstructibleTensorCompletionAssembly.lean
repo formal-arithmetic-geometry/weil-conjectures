@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.ConstructibleTensorModel.ConstructibleTensorC
 
 /-! # Constructible tensor completion in the native total-tensor presentation
 
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50
-(blueprint: lem-fix-constructible-tensor-completion-assembly).
+Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50.
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +39,7 @@ attribute [local irreducible] IntegralOnSlice.duality IntegralOnSlice.roosUnit
   IntegralAmbient.tensorTowerIso IntegralAmbient.tensorOperationUnit
 
 /-- The specified 1-s map of the strict finite tensor tower.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: lem-fix-constructible-tensor-completion-assembly). -/
+Source: Bhatt--Scholze, Definition 3.4.10. -/
 abbrev completionBoundary (P Q : CochainComplex (integralTowerModules l E W) ℤ) :=
   towerTransitionEndomorphism
     (K := fun n ↦ (integralOperationsTensorLevel l E W n).obj (P, Q))
@@ -51,8 +49,7 @@ abbrev completionBoundary (P Q : CochainComplex (integralTowerModules l E W) ℤ
 comparison in the native coefficient-total-tensor presentation. The ordinary tensor
 is complete, and its specified comparison is invertible, on constructible pairs.
 
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Definition 3.4.10
-(blueprint: lem-fix-constructible-tensor-completion-assembly).
+Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Definition 3.4.10.
 
 Proof: use the recorded representative model and canonical tower augmentation, with
 both coordinate equations. The normalized ambient comparison identifies completion

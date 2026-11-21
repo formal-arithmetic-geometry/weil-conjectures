@@ -255,8 +255,7 @@ private theorem exchange_pure
 /-- Interchanging the last two tensor factors before applying a chain map has
 exactly the Koszul sign of their degrees.
 Source: Stacks Tags 03EK and 0FPQ; blueprint
-`lem-coef-integral-hom-reduction.proof.md`, paragraph 1
-(blueprint: lem-sf-tensor-evaluation-interchange).
+`lem-coef-integral-hom-reduction.proof.md`, paragraph 1.
 
 Proof: reassociate (H tensor Q) tensor P, apply the braiding from Q tensor P
 to P tensor Q, reassociate back, and apply e tensor the identity of Q. The

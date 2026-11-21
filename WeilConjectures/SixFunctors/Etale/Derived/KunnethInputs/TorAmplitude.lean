@@ -12,20 +12,19 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 /-!
 # Tor amplitude and K-flat models of étale complexes
 
-This file records the homological-algebra inputs of the ordinary Künneth formula
-(blueprint subsection `proposition-ordinary-external-kunneth--1`) about Tor amplitude and K-flat
+This file records the homological-algebra inputs of the ordinary Künneth formula about Tor amplitude and K-flat
 complexes of étale sheaves, for a monoidal Grothendieck abelian coefficient category `A` with
 functorial flat resolutions (for instance `A = ModuleCat Λ`, the `Λ_T`-modules of the blueprint).
 
 ## Main definitions and results
 
-- `AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeGE` (`def-kun-tor-amplitude`).
+- `AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeGE`.
 - `AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeIn_Q_obj_of_flat`
-  (`lem-kun-flat-bounded-tor-amplitude`).
-- `AlgebraicGeometry.Etale.kFlat_criteria` (`lem-kun-kflat-criteria`).
-- `AlgebraicGeometry.Etale.exists_quasiIso_flat_kFlat` (`lem-kun-flat-resolution-existence`).
-- `AlgebraicGeometry.Etale.flat_opcycles_of_exactAt` (`lem-kun-tor-cokernel-flat`).
-- `AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeGE_iff_exists_kFlat` (`lem-kun-0f1m`).
+.
+- `AlgebraicGeometry.Etale.kFlat_criteria`.
+- `AlgebraicGeometry.Etale.exists_quasiIso_flat_kFlat`.
+- `AlgebraicGeometry.Etale.flat_opcycles_of_exactAt`.
+- `AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeGE_iff_exists_kFlat`.
 - `AlgebraicGeometry.Etale.DerivedCategory.isGE_derivedTensor_of_torAmplitudeGE`
   (`lem-kun-derived-tensor-t-est`, corrected).
 -/
@@ -50,7 +49,7 @@ namespace DerivedCategory
 
 variable (X : Scheme.{u})
 
-/-- Blueprint `def-kun-tor-amplitude`: an object `E` of `D(X_ét)` has *Tor amplitude in
+/-- An object `E` of `D(X_ét)` has *Tor amplitude in
 `[a, ∞)`* if for every étale sheaf `𝓜` placed in degree zero, `H^i(E ⊗ᴸ 𝓜) = 0` for `i < a`
 (see `AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeGE_iff_forall_isZero`).
 
@@ -92,7 +91,7 @@ lemma torAmplitudeGE_of_torAmplitudeIn {a b : ℤ}
     (hE : torAmplitudeIn A X a b E) : torAmplitudeGE A X a E :=
   _root_.DerivedCategory.torAmplitudeGE_of_torAmplitudeIn hE
 
-/-- Blueprint `lem-kun-flat-bounded-tor-amplitude`: a complex `𝓔•` of flat étale sheaves
+/-- A complex `𝓔•` of flat étale sheaves
 supported in degrees `[a, b]` has Tor amplitude in `[a, b]` as an object of `D(X_ét)`. It is
 K-flat, so `𝓔• ⊗ᴸ 𝓜` is computed by the tensor product of complexes `𝓔• ⊗ 𝓜`, which lives in
 degrees `[a, b]` (`DerivedCategory.torAmplitudeIn_Q_obj_of_flat`). -/
@@ -106,7 +105,7 @@ end DerivedCategory
 variable {A}
 
 omit [Abelian.HasFunctorialFlatResolution A] in
-/-- Blueprint `lem-kun-kflat-criteria`: K-flat criteria for complexes of étale sheaves.
+/-- K-flat criteria for complexes of étale sheaves.
 
 1. Every bounded above complex of flat sheaves is K-flat.
 2. In a distinguished triangle of the homotopy category `K(X_ét)`, if two of the three terms
@@ -143,7 +142,7 @@ theorem kFlat_criteria (X : Scheme.{u}) :
         (NatIso.ofComponents (fun Z ↦ β_ Y Z) (by intros; simp [curriedTensor]))
     exact CochainComplex.closedUnderColimitsOfShape_kFlat _ J
 
-/-- Blueprint `lem-kun-flat-resolution-existence`: every complex `𝓖•` of étale sheaves on `X`
+/-- Every complex `𝓖•` of étale sheaves on `X`
 admits a quasi-isomorphism `𝓚• ⟶ 𝓖•` from a K-flat complex of flat sheaves. Moreover `𝓚•` can
 be chosen so that all its pullbacks `g^* 𝓚•` are K-flat (for `A` such that `g^*` preserves flat
 sheaves). It is the functorial flat resolution, a colimit of bounded above complexes of flat
@@ -158,7 +157,7 @@ lemma exists_quasiIso_flat_kFlat [Etale.UpperStarPreservesFlat A] {X : Scheme.{u
   exists_quasiIso_flat_kFlat_upperStar A G
 
 omit [Abelian.HasFunctorialFlatResolution A] in
-/-- Blueprint `lem-kun-tor-cokernel-flat`: let `𝓚•` be a complex of flat étale sheaves such that
+/-- Let `𝓚•` be a complex of flat étale sheaves such that
 `H^n(𝓚• ⊗ 𝓜) = 0` for every sheaf `𝓜` and every `n < a`. Then the cokernel
 `𝓝 = coker(𝓚^{a-1} ⟶ 𝓚^a)` (the opcycles of `𝓚•` in degree `a`) is flat. Only the vanishing
 in degree `a - 1` is used (`CategoryTheory.ObjectProperty.flat_opcycles_of_exactAt`). -/
@@ -172,7 +171,7 @@ lemma flat_opcycles_of_exactAt {X : Scheme.{u}}
 
 namespace DerivedCategory
 
-/-- Blueprint `lem-kun-0f1m`: an object `E` of `D(X_ét)` has Tor amplitude in `[a, ∞)` if and
+/-- An object `E` of `D(X_ét)` has Tor amplitude in `[a, ∞)` if and
 only if it is represented by a K-flat complex `𝓔•` of flat sheaves with `𝓔^i = 0` for `i < a`;
 moreover `𝓔•` may be chosen so that every pullback `g^* 𝓔•` is again a K-flat complex of flat
 sheaves (Stacks, Tag 0F1M).

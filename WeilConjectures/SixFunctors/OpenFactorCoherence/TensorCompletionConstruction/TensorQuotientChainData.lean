@@ -26,7 +26,7 @@ open IntegralAmbient
 attribute [local implicit_reducible] PurCompactSupport.completed
 
 /-- Flat-term K-flat representatives are good integral representatives.
-Source: Stacks 06YY (blueprint: def-sf-tensor-quotient-chain-data). -/
+Source: Stacks 06YY. -/
 theorem flat_good (P : Cx l E X)
     (hP : proEtaleFlatRepresentatives X ((PurCompactSupport.completed l E).ring X) P) :
     integralOperationsGoodComplex l E X P :=
@@ -34,7 +34,7 @@ theorem flat_good (P : Cx l E X)
 
 attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective in
 /-- The recorded ordinary tensor restricted to flat-term K-flat representatives.
-Source: Stacks 07A4 (blueprint: def-sf-tensor-quotient-chain-data). -/
+Source: Stacks 07A4. -/
 @[irreducible] def ordinaryModel :
     ProEtaleTensorModel X ((PurCompactSupport.completed l E).ring X) where
   tensor := by with_unfolding_all exact ambientOrdinaryTensor l E X
@@ -51,7 +51,7 @@ Source: Stacks 07A4 (blueprint: def-sf-tensor-quotient-chain-data). -/
 
 attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective in
 /-- Naturality of the quotient Roos augmentation.
-Source: Stacks 0941 (blueprint: def-sf-tensor-quotient-chain-data). -/
+Source: Stacks 0941. -/
 theorem completionChain_naturality {P Q : Cx l E X} (f : P ⟶ Q) :
     f ≫ IntegralOnSlice.roosUnit.{u, u} l E X none Q =
       IntegralOnSlice.roosUnit.{u, u} l E X none P ≫
@@ -60,7 +60,7 @@ theorem completionChain_naturality {P Q : Cx l E X} (f : P ⟶ Q) :
 
 attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective in
 /-- The natural quotient Roos augmentation of a complex.
-Source: Stacks 0941 (blueprint: def-sf-tensor-quotient-chain-data). -/
+Source: Stacks 0941. -/
 @[irreducible] def completionChain :
     𝟭 (Cx l E X) ⟶ IntegralOnSlice.roos.{u, u} l E X none where
   app P := IntegralOnSlice.roosUnit.{u, u} l E X none P
@@ -68,7 +68,7 @@ Source: Stacks 0941 (blueprint: def-sf-tensor-quotient-chain-data). -/
 
 attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective in
 /-- Whisker the quotient augmentation and transport it along a strict tower isomorphism.
-Source: Stacks 0941 (blueprint: def-sf-tensor-quotient-chain-data). -/
+Source: Stacks 0941. -/
 @[irreducible] def augmentTensor
     (T : Cx l E X × Cx l E X ⥤ Cx l E X)
     (S : Cx l E X × Cx l E X ⥤ (ℕᵒᵖ ⥤ Cx l E X))
@@ -79,7 +79,7 @@ Source: Stacks 0941 (blueprint: def-sf-tensor-quotient-chain-data). -/
 
 attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective in
 /-- The tensor augmentation using the specified normalized strict tensor tower.
-Source: Bhatt--Scholze 3.4.10 (blueprint: def-sf-tensor-quotient-chain-data). -/
+Source: Bhatt--Scholze 3.4.10. -/
 @[irreducible] def quotientChain : constructibleTensorTotal l E X ⟶
     integralOperationsTensorComplexFunctor l E X :=
   augmentTensor l E X
@@ -89,7 +89,7 @@ Source: Bhatt--Scholze 3.4.10 (blueprint: def-sf-tensor-quotient-chain-data). -/
 
 attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective in
 /-- Each component is the previously constructed tensor operation unit.
-Source: Stacks 07A4, 0941 (blueprint: def-sf-tensor-quotient-chain-data). -/
+Source: Stacks 07A4, 0941. -/
 theorem quotientChain_app (P Q : Cx l E X) :
     (quotientChain l E X).app (P, Q) = tensorOperationUnit l E X P Q := by
   unfold quotientChain augmentTensor completionChain tensorOperationUnit

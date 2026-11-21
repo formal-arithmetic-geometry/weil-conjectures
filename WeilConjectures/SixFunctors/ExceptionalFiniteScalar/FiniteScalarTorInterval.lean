@@ -16,12 +16,11 @@ open scoped CategoryTheory.Functor
 namespace WeilConjectures.ExceptionalFiniteScalar
 
 /-- Scalar extension preserves every specified Tor interval of a finite-Tor object.
-Source: Stacks 06YY and 09AL; finite scalar construction, step 1
-(blueprint: lem-sf-exceptional-finite-scalar-tor-interval).
+Source: Stacks 06YY and 09AL; finite scalar construction, step 1.
 
-Proof in words.  Choose the bounded flat constructible model in the source Tor interval.
+Proof in words. Choose the bounded flat constructible model in the source Tor interval.
 Termwise tensoring with the target coefficient ring remains flat after restriction of scalars
-and is supported in the same degrees.  The K-flat derived change-of-rings comparison identifies
+and is supported in the same degrees. The K-flat derived change-of-rings comparison identifies
 its derived tensor with scalar extension, and the Tor-amplitude predicate therefore has exactly
 the original interval, including for a nonflat coefficient map.
 -/

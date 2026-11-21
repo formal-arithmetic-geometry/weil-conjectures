@@ -11,7 +11,7 @@ import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportFiniteComparison
 /-! # Functor and comparison fields for exceptional integral transport
 
 This module isolates the transported functors and comparison maps from the
-reconstruction and integral realization choices.  It is the strictly smaller
+reconstruction and integral realization choices. It is the strictly smaller
 assembly package used by `TransportCorePostData`.
 -/
 
@@ -25,7 +25,6 @@ open ConstructibleExceptionalCoefficients
 /-- The transported functors and comparison fields, with the reconstruction and
 integral realization choices supplied as parameters.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: new-lem-sf-exceptional-ring-transport-post-functor-data)
 -/
 structure TransportCorePostFunctorData
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
@@ -141,7 +140,6 @@ Lemma 5.22 and Propositions 5.24 and 5.26: transport the strict adjunction,
 conjugate it through the two reconstruction equivalences, identify finite left
 evaluations, and construct their right comparisons by the mates correspondence.
 The unit and counit identities are part of this explicit construction.
-(blueprint: new-lem-sf-exceptional-ring-transport-post-functor-data)
 -/
 theorem exists_exceptional_transport_post_functor_data
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
@@ -194,10 +192,9 @@ theorem exists_exceptional_transport_post_functor_data
 
 set_option linter.unusedVariables false in
 /-- The coherent integral realization supplies the remaining integral-left
-comparison for each field stage.  This is the one-field remainder of the
+comparison for each field stage. This is the one-field remainder of the
 transport package isolated above.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26.
-(blueprint: new-lem-sf-exceptional-ring-transport-integral-left)
 -/
 theorem exists_exceptional_transport_integral_left
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]

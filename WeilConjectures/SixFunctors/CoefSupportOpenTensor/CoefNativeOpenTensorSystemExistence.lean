@@ -17,7 +17,6 @@ import all WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenOperatio
 
 This is the sequence-site part of the construction in
 [sites-cohomology.tex, Tag 0GL1], separated from the finite coefficient stages.
-(blueprint: lem-coef-native-open-tensor-system-existence).
 -/
 
 @[expose] public noncomputable section
@@ -125,7 +124,6 @@ set_option linter.unusedVariables false in
 /-- The localized sequence sites admit the ordinary native open tensor datum.
 Source: Stacks sites-modules.tex 0E8I, sites-cohomology.tex 0GL1 and 0G7E,
 and Homology 012Z.
-(blueprint: lem-coef-native-open-tensor-system-existence).
 
 Proof: localize the ambient pro-etale site at the open object. An object
 of the open site is sent to its composite with j; its inverse is supplied by

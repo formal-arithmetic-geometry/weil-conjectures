@@ -25,7 +25,6 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
 
 /-- Two signed K-flat tensor presentations have a normalized comparison isomorphism.
 Source: Stacks 07A4, 0G7E and 04VK.
-(blueprint: lem-sf-integral-tensor-model-identification).
 
 Proof: restrict natural transformations along the product of the resolving-class
 localizations. This restriction is fully faithful. Lift the inverse of the first
@@ -54,7 +53,6 @@ theorem tensorModelIso (W : Scheme.{u})
 
 /-- Canonical tensor pullback commutes with normalized changes of tensor model.
 Source: Stacks 07A4, 0G7E and 04VK.
-(blueprint: lem-sf-integral-tensor-model-pullback-transport).
 
 Proof: full faithfulness of product resolving-class restriction reduces the equality
 of natural transformations to flat-term K-flat pairs. Precompose with the source

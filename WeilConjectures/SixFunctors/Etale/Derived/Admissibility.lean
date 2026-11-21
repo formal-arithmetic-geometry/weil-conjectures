@@ -50,7 +50,7 @@ open Scheme _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] {X Y : Scheme.{u}}
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Exceptional-adjoint admissibility datum.
+/-- Exceptional-adjoint admissibility datum.
 
 A separated finite-type morphism `f : X ⟶ Y` over a finite-type `k`-scheme `Y` is
 *exceptionally admissible at `Λ`* if

@@ -32,7 +32,6 @@ The inputs are:
 * the residue `x̄` of the coordinate is not a `p`-th power in the residue field of `L₂`
   (`SliceTrait.valuation_coord_sub_pow_eq_one`);
 * Hensel's lemma for Artin–Schreier equations over `L₁` (`SliceTrait.exists_artinSchreier_root`).
-
 -/
 
 @[expose] public section

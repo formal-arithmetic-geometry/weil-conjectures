@@ -38,9 +38,9 @@ Let `f : X ⟶ S` be a morphism of schemes and `n` an integer invertible on `S`.
 cartesian squares
 ```
 X <-b- X' <-h- Y
-|      |       |
-f      f'      e
-v      v       v
+| | |
+f f' e
+v v v
 S <-a- S' <--- Spec K
 ```
 with `S'` affine, integral and normal with algebraically closed function field, `K` an

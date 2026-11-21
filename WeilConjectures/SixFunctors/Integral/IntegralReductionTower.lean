@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Limits.Cones
 /-! # The integral reduction tower
 
 Source: Bhatt--Scholze, p. 24, Proposition 3.5.1(1) and Definition 3.5.2;
-Stacks Project, Tag 06YL (blueprint: def-weil-integral-reduction-tower).
+Stacks Project, Tag 06YL.
 
 The natural-number index n denotes exponent n+1. We use the chosen complex
 representative K and its chosen K-flat resolution q:P→K. The already recorded
@@ -46,8 +46,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The inverse system of the restricted termwise reductions of P, with transitions
 [id⊗ρ_n]. For a K-flat resolution of K this represents Res_n(K⊗ᴸA_{E,n+1}).
-Source: Bhatt--Scholze, p. 24, Definition 3.5.2; Stacks Tag 06YL
-(blueprint: def-weil-integral-reduction-tower). -/
+Source: Bhatt--Scholze, p. 24, Definition 3.5.2; Stacks Tag 06YL. -/
 noncomputable def integralReductionTower
     (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) :
     ℕᵒᵖ ⥤ completedIntegralDerivedCategory l E Y D hl :=
@@ -57,8 +56,7 @@ noncomputable def integralReductionTower
     DerivedCategory.Q.map (integralTowerTransition l E Y D hl P n))
 
 /-- The map c_n=[q]⁻¹≫[γ_n] to the reduction at exponent n+1, where γ_n(x)=x⊗1.
-Source: Bhatt--Scholze, p. 24, Definition 3.5.2; Stacks Tag 06YL
-(blueprint: def-weil-integral-reduction-tower). -/
+Source: Bhatt--Scholze, p. 24, Definition 3.5.2; Stacks Tag 06YL. -/
 noncomputable def integralReductionTowerMap
     {P K : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ}
     (q : P ⟶ K)
@@ -70,8 +68,7 @@ noncomputable def integralReductionTowerMap
     DerivedCategory.Q.map (integralTowerUnit l E Y D hl P n)
 
 /-- The maps from K are compatible with every arrow in the reduction tower.
-Source: Bhatt--Scholze, p. 24, Definition 3.5.2; Stacks Tag 06YL
-(blueprint: def-weil-integral-reduction-tower).
+Source: Bhatt--Scholze, p. 24, Definition 3.5.2; Stacks Tag 06YL.
 Proof: the defining pure-tensor formulas give τ_n γ_(n+1)=γ_n on sections,
 since the coefficient reduction sends 1 to 1. The universal property of
 sheafification and equality degree by degree give equality of chain maps.
@@ -122,8 +119,7 @@ theorem integralReductionTowerMap_naturality
 /-- The reduction tower together with its compatible maps from K, as a cone.
 The comparison isomorphisms and both independence identities for another resolution
 are integralTowerComparison and integralReductionTowerWellDefined, respectively.
-Source: Bhatt--Scholze, p. 24, Definition 3.5.2; Stacks Tag 06YL
-(blueprint: def-weil-integral-reduction-tower). -/
+Source: Bhatt--Scholze, p. 24, Definition 3.5.2; Stacks Tag 06YL. -/
 noncomputable def integralReductionTowerCone
     {P K : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ}
     (q : P ⟶ K)

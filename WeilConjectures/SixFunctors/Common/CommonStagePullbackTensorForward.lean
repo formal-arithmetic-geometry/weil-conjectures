@@ -11,9 +11,6 @@ import WeilConjectures.SixFunctors.Common.CommonStagePullbackTensorInclusion
 import all Mathlib.Logic.Small.Defs
 
 /-! # Forward transport of the canonical pullback/tensor inclusion square
-
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-common-stage-pullback-tensor-normalized-forward).
 -/
 
 @[expose] public noncomputable section
@@ -153,9 +150,6 @@ private theorem normalized_forward_generic
   simpa only [hei] using h
 
 /-- Normalized pullback and tensor data preserve the canonical forward inclusion square.
-
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-common-stage-pullback-tensor-normalized-forward).
 
 Proof: substitute the given functor equalities and heterogeneous comparison
 normalizations. The pullback comparison has identity components, so its inverse

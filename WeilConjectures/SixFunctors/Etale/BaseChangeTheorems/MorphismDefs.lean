@@ -18,9 +18,9 @@ categories (`DerivedCategory.Plus`). Fix a commutative square of schemes
 
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 
@@ -69,7 +69,6 @@ equation, but its kernel check was observed not to terminate: its left-hand side
 the projection functions `NatTrans.app` and `Iso.hom`, which the kernel reduces by fully
 normalising the underlying structure `squareTransport …` rather than by comparing
 arguments.
-
 -/
 
 @[expose] public section
@@ -198,7 +197,7 @@ the counit contraction.
 
 Proper base change and smooth base change assert that this single morphism is an
 isomorphism under two different sets of geometric hypotheses; no such hypothesis is
-built into the definition. (blueprint: `definition-derived-base-change-map`) -/
+built into the definition. -/
 noncomputable irreducible_def Etale.baseChange (sq : CommSq g' f' f g) :
     R+((f)_*[A]) ⋙ D+((g)^*[A]) ⟶ D+((g')^*[A]) ⋙ R+((f')_*[A]) :=
   (Etale.baseChangeUnitStep A f g f') ≫ (Etale.baseChangeSquareStep A sq).hom ≫

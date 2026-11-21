@@ -41,7 +41,6 @@ Everything here is the `P = Q = @Etale` case of the corresponding statement for 
   `AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarComp`: the identity and composition
   isomorphisms of the pullbacks correspond to those of the pushforwards under conjugation
   along the adjunctions `g^* ⊣ g_*`, with their unit and counit forms.
-
 -/
 
 @[expose] public section

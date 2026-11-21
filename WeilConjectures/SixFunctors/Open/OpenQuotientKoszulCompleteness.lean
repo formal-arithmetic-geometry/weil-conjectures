@@ -563,8 +563,7 @@ private theorem dvrActualUnit_isIso
   exact isIso_of_reflects_iso _ C.derived.functor
 
 /-- DVR quotient augmentation, Koszul completion, and quasi-compact open completeness.
-Source: Stacks Tags 093M, 0A0E, 099B and 09BP; blueprint fix-prop-coherence
-(blueprint: lem-sf-open-quotient-koszul-completeness).
+Source: Stacks Tags 093M, 0A0E, 099B and 09BP; blueprint fix-prop-coherence.
 
 Proof: (1) The extension-integers DVR theorem makes R a domain and a principal ideal
 ring with finite residue field. Thus R is Noetherian, its residue group is torsion,

@@ -36,19 +36,18 @@ and its variants for complexes supported on closed subschemes, for the external 
   (`lemma-kunneth-one-identity-factor--1`): `Rf_* M ⊠ Q ≅ R(f × id_Z)_* (M ⊠ Q)`
   over a field, for a finite coefficient ring of invertible exponent.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct`
-  (`lemma-kunneth-formula-compact-supports`): `R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`.
+: `R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`.
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_externalProduct`:
   `L(i ×_B j)^* (K ⊠ L) ≅ Li^* K ⊠ Lj^* L`.
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`:
   `(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L` for closed immersions `i`, `j`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion`
-  (`lemma-kunneth-formula-compact-supports`): the relative product theorem for complexes supported
+: the relative product theorem for complexes supported
   on closed subschemes.
 - `AlgebraicGeometry.Etale.nonempty_iso_compactlySupported_externalProduct_closedImmersion`
-  (`lemma-kunneth-formula-compact-supports`): the Künneth formula for `RΓ_c(Z × W, -)` over a field.
+: the Künneth formula for `RΓ_c(Z × W, -)` over a field.
 
 See `WeilConjectures.SixFunctors.Etale.Derived.Kunneth` for the implementation notes.
-
 -/
 
 @[expose] public section
@@ -74,9 +73,9 @@ variable {B X Y : Scheme.{u}}
 /-- The square
 ```
   X ×_B Z --f × 𝟙--> Y ×_B Z
-     |                  |
-    pr                 pr
-     v                  v
+     | |
+    pr pr
+     v v
      X -------f-------> Y
 ```
 is cartesian. -/
@@ -146,9 +145,9 @@ through `f ≫ b`. Let `c : Z ⟶ Spec k` be a further separated finite-type `k`
 
 ```
   X ×_k Z --f × 𝟙--> Y ×_k Z --pr--> Y
-     |                  |            |
-     |                  |            f
-     v                  v            v
+     | | |
+     | | f
+     v v v
      Z ------c------> Spec k <--b--- Y
 ```
 
@@ -326,7 +325,7 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_of_finite (Λ : Typ
     ((asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)).app K)
     (hasProjectionFormula_of_finite Λ _ _ _)
 
-/-- Blueprint `lemma-kunneth-formula-compact-supports`: Relative product theorem.
+/-- Relative product theorem.
 
 Let `Λ` be a finite coefficient ring (for instance the finite stage `A_{E,n}`), let
 `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type over a base scheme `B`, and let `K` be
@@ -409,7 +408,7 @@ theorem nonempty_iso_externalProduct_closedImmersion [UpperStarPreservesFlat A]
       externalProduct A f g ((R((i)_*[A])).obj ((L((i)^*[A])).obj K))
         ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) :=
   nonempty_iso_externalProduct_closedImmersion_of_flat A f g i j K L
-/-- Blueprint `lemma-kunneth-formula-compact-supports`: Supported product over a relative base.
+/-- Supported product over a relative base.
 
 Let `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type, `h = f ×_B g`, and let
 `i : Z ⟶ X`, `j : W ⟶ Y` be closed immersions, with product
@@ -451,7 +450,7 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion
   obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct Λ f g hK hL
   exact ⟨k.symm ≪≫ (R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).mapIso e.symm⟩
 
-/-- Blueprint `lemma-kunneth-formula-compact-supports`: Supported product over a relative base.
+/-- Supported product over a relative base.
 
 The Künneth formula with closed supports over a field: for `X`, `Y` separated of finite type
 over a field `k` and closed subschemes `i : Z ⟶ X`, `j : W ⟶ Y`,

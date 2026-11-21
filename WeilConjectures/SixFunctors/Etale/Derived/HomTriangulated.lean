@@ -14,8 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 
 Let `A` be a monoidal closed Grothendieck abelian coefficient category as in
 `WeilConjectures.SixFunctors.Etale.Derived.Hom` and `X` a scheme. This file records that the
-derived internal hom `RHom(-, -)` of `D(X_ét, A)` is exact in each variable (blueprint
-`definition-verdier-dual-evaluation--3`):
+derived internal hom `RHom(-, -)` of `D(X_ét, A)` is exact in each variable:
 
 * for a distinguished triangle `K' ⟶ K ⟶ K'' ⟶ K'[1]` and any `M`, the induced maps
   `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M)` extend to a distinguished triangle

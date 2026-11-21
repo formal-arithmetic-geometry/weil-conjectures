@@ -40,8 +40,7 @@ attribute [local semireducible] DerivedCategory DerivedCategory.Q DerivedCategor
 /-- The whole reduction adjunction is computed by the strict quotient-unit map.
 Finite derived evaluations do not fix this equality of system morphisms. The second
 clause fixes the ordinary unit at every degree and coefficient level.
-Source: Stacks 06YY, 07A6 and 0941, deriving the ordinary quotient/limit adjunction
-(blueprint: def-coef-strict-reduction-unit-presentation). -/
+Source: Stacks 06YY, 07A6 and 0941, deriving the ordinary quotient/limit adjunction. -/
 def CoefficientStrictReductionUnitPresentation
     (reduction : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)
     (adjunction : reduction ⊣ coefficientSequenceLimit l E W)
@@ -83,8 +82,7 @@ attribute [local irreducible] CoefficientStrictReductionUnitPresentation
 
 /-- A tensor representative retains the finite and horizontal laws as its first two
 projections, followed by its strict whole-system adjunction normalization.
-Source: Stacks 06YS, 06YY, 07A6, 0941
-(blueprint: def-coef-strict-reduction-unit-presentation). -/
+Source: Stacks 06YS, 06YY, 07A6, 0941. -/
 structure CoefficientStrictReductionTensorPresentation
     (reduction : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)
     (adjunction : reduction ⊣ coefficientSequenceLimit l E W)

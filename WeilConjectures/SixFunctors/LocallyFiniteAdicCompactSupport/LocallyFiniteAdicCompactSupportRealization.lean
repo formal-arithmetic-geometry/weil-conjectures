@@ -25,7 +25,6 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompact
 
 Source: current blueprint, prose-10-20, common-field
 comparisons; Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
-(blueprint: lem-sf-locally-finite-adic-compact-support-realization).
 
 The auxiliary coefficient closure in the finite-stage construction is lifted only to
 use its published interface. Every finite field below is a subfield of PadicAlgCl,
@@ -69,8 +68,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 /-- The canonical scalar-extension comparison is a natural isomorphism of ordinary
 common-stage and native derived compact-support functors. Neither X nor Y is assumed
 separated over the field. Source: blueprint common-field comparisons;
-Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15
-(blueprint: lem-sf-locally-finite-adic-compact-support-realization).
+Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
 
 Proof:
 1. Obtain the normalized native ring and section geometry from

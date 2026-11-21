@@ -15,10 +15,10 @@ For a cartesian square of schemes
 
 ```
   U' --j'--> Z'
-  |          |
-  g'         g''
-  ↓          ↓
-  U  --j---> Z
+  | |
+  g' g''
+  ↓ ↓
+  U --j---> Z
 ```
 
 with `j` and `j'` open immersions, the base change map
@@ -70,9 +70,9 @@ the base change isomorphism `AlgebraicGeometry.Etale.openImmersionLowerShriekBas
 
 ```
   D(U) --Dg'^*--> D(U')
-   |               |
-  Dj_!     ≅     Dj'_!
-   ↓               ↓
+   | |
+  Dj_! ≅ Dj'_!
+   ↓ ↓
   D(Z) --Dg''^*-> D(Z')
 ```
 -/
@@ -96,9 +96,9 @@ exact pullbacks.
 
 ```
   D(U) --Lg'^*--> D(U')
-   |               |
-  Dj_!     ≅     Dj'_!
-   ↓               ↓
+   | |
+  Dj_! ≅ Dj'_!
+   ↓ ↓
   D(Z) --Lg''^*-> D(Z')
 ```
 -/

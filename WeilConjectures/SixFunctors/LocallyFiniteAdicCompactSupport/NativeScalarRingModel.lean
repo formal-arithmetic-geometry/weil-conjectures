@@ -16,7 +16,6 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeScalarI
 /-! # Ring diagrams for native scalar transport
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15.
-(blueprint: lem-sf-native-scalar-ring-model).
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +35,7 @@ open AlgebraicallyClosedCoefficients (Index Coefficient)
 open AlgebraicGeometry.ProEtale
 
 /-- The section-ring map for the two actual condensed coefficient inclusions.
-Source: Bhatt--Scholze, Lemma 6.8.2.
-(blueprint: lem-sf-native-scalar-ring-model). -/
+Source: Bhatt--Scholze, Lemma 6.8.2. -/
 def nativeScalarSectionMap (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
     (T : Scheme.{u}) :
     InternalModuleOperations.ring (Profinite.padicIntegersRingObj l E.1) T ⟶
@@ -49,8 +47,7 @@ def nativeScalarSectionMap (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
 
 /-- A ring presentation is natural for the actual adjunct of the inverse-image ring map.
 This is a pointwise equality on sections of the base-change site object.
-Source: Bhatt--Scholze, Section 6.8; Stacks, Modules on Sites.
-(blueprint: lem-sf-native-scalar-ring-model). -/
+Source: Bhatt--Scholze, Section 6.8; Stacks, Modules on Sites. -/
 def NativeScalarRingNaturality (R : PurCompactSupport.Coefficients.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -65,8 +62,7 @@ def NativeScalarRingNaturality (R : PurCompactSupport.Coefficients.{u})
 
 /-- An ordinary coefficient-ring diagram. Its fields mention neither complexes nor scalar mates.
 The two ring isomorphisms identify scalar inclusions and precomposition maps.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15.
-(blueprint: lem-sf-native-scalar-ring-model). -/
+Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15. -/
 structure NativeScalarRingModel (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
     {R S : PurCompactSupport.Coefficients.{u}} (a : PurCompactSupport.Change R S) where
   integral : ∀ T : Scheme.{u}, (adicLisseForget T).obj (R.ring T) ≅
@@ -83,8 +79,7 @@ structure NativeScalarRingModel (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgC
 namespace NativeScalarRingModel
 
 /-- The integral module equivalence constructed from the supplied ring isomorphism.
-Source: Stacks, Modules on Sites, Tag 00YV.
-(blueprint: lem-sf-native-scalar-ring-model). -/
+Source: Stacks, Modules on Sites, Tag 00YV. -/
 def integralEquivalence {l : ℕ} [Fact l.Prime] {E : Index l (PadicAlgCl l)}
     {R S : PurCompactSupport.Coefficients.{u}} {a : PurCompactSupport.Change R S}
     (P : NativeScalarRingModel l E a) (T : Scheme.{u}) :
@@ -95,8 +90,7 @@ def integralEquivalence {l : ℕ} [Fact l.Prime] {E : Index l (PadicAlgCl l)}
     (InternalModuleOperations.equivalence (Profinite.padicIntegersRingObj l E.1) T).symm
 
 /-- The native-to-condensed module equivalence constructed from the supplied ring isomorphism.
-Source: Stacks, Modules on Sites, Tag 00YV.
-(blueprint: lem-sf-native-scalar-ring-model). -/
+Source: Stacks, Modules on Sites, Tag 00YV. -/
 def closureEquivalence {l : ℕ} [Fact l.Prime] {E : Index l (PadicAlgCl l)}
     {R S : PurCompactSupport.Coefficients.{u}} {a : PurCompactSupport.Change R S}
     (P : NativeScalarRingModel l E a) (T : Scheme.{u}) :
@@ -107,8 +101,7 @@ def closureEquivalence {l : ℕ} [Fact l.Prime] {E : Index l (PadicAlgCl l)}
     (InternalModuleOperations.equivalence (Profinite.padicAlgClRingObj l) T).symm
 
 /-- An equivalence of these abelian categories preserves binary products and zero maps,
-so it is additive. Source: Mathlib's additive_of_preserves_binary_products.
-(blueprint: lem-sf-native-scalar-ring-model). -/
+so it is additive. Source: Mathlib's additive_of_preserves_binary_products. -/
 instance integralEquivalence_additive {l : ℕ} [Fact l.Prime]
     {E : Index l (PadicAlgCl l)} {R S : PurCompactSupport.Coefficients.{u}}
     {a : PurCompactSupport.Change R S} (P : NativeScalarRingModel l E a) (T : Scheme.{u}) :
@@ -116,8 +109,7 @@ instance integralEquivalence_additive {l : ℕ} [Fact l.Prime]
   Functor.additive_of_preserves_binary_products _
 
 /-- Additivity of the closure module equivalence, by preservation of products and zero maps.
-Source: Mathlib's additive_of_preserves_binary_products.
-(blueprint: lem-sf-native-scalar-ring-model). -/
+Source: Mathlib's additive_of_preserves_binary_products. -/
 instance closureEquivalence_additive {l : ℕ} [Fact l.Prime]
     {E : Index l (PadicAlgCl l)} {R S : PurCompactSupport.Coefficients.{u}}
     {a : PurCompactSupport.Change R S} (P : NativeScalarRingModel l E a) (T : Scheme.{u}) :
@@ -254,7 +246,6 @@ private theorem nativeScalarChartValue (l : ℕ) [Fact l.Prime] [NativeRings.{u}
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15; the coefficient-identification
 steps 1--3 of lem-sf-native-proper-scalar-mate-presentation.
-(blueprint: lem-sf-native-scalar-ring-model).
 
 Proof in words:
 1. The normalized continuous integral comparison identifies the completed coefficient

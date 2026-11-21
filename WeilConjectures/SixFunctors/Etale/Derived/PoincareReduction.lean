@@ -92,9 +92,9 @@ formula for both. Suppose the coefficient comparisons
 (hypothesis `h`). Then the square
 ```
 G(RΓ_c(X, K)^∨) ──G(β_K^♯)⁻¹──▶ G(RΓ(X, K^∨(d))[2d])
-       │                                 │
-       │ dual comparison                 │ c_Y
-       ▼                                 ▼
+       │ │
+       │ dual comparison │ c_Y
+       ▼ ▼
 RΓ_c(X, K')^∨ ─────(β_{K'}^♯)⁻¹───▶ RΓ(X, K'^∨(d))[2d]
 ```
 of the inverses of the tensor–internal-hom adjoints commutes, where the dual comparison is

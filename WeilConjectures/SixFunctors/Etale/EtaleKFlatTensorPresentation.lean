@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.EtaleFiniteCoefficientHomArrow
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 /-! # Étale localization tensor on K-flat representatives
-Source: Stacks 07A4 (blueprint: lem-sf-etale-kflat-tensor-presentation).
+Source: Stacks 07A4.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -25,7 +25,7 @@ attribute [local irreducible] finiteHomEtaleTensorModel
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 /-- Representative presentation for an abstract localization and tensor comparison.
-Source: Stacks 07A4 (blueprint: lem-sf-etale-kflat-tensor-presentation). -/
+Source: Stacks 07A4. -/
 def FiniteHomSourceTensorPresentationAux
     {K : Type a} {D : Type b} [Category.{v} K] [Category.{w} D]
     (q : K ⥤ D) (t : K × K ⥤ K) (T : D × D ⥤ D) (P : ObjectProperty K)
@@ -211,8 +211,7 @@ private theorem closed_tensor_congr
     S.tensor = T.tensor := congrArg (fun M : MonoidalCategory D ↦ @tensor D _ M) h
 
 /-- Localization identifies total tensor with derived tensor on a subcategory of K-flat complexes.
-Source: Stacks, Cohomology on Sites, Tag 07A4
-(blueprint: lem-sf-etale-kflat-tensor-presentation).
+Source: Stacks, Cohomology on Sites, Tag 07A4.
 
 Proof: The canonical lax tensorator of the homotopy localization is invertible when
 its right argument is K-flat: tensoring with that argument preserves acyclic complexes,

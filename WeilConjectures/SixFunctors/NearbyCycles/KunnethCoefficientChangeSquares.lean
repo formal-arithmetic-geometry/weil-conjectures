@@ -32,7 +32,6 @@ tensor comparisons `m : c (a ⊗ b) ⟶ c a ⊗ c b`.
   compatible with `c`, if the three pieces are.
 * `CategoryTheory.map_tensorHom_comp_comp_eq`: the tensor product of two such squares, followed
   by a compatible lax map (the Künneth map).
-
 -/
 
 @[expose] public section

@@ -56,7 +56,6 @@ built from it is discharged by Nagata's compactification theorem (the instance r
 quasi-compact morphism locally of finite type over a quasi-compact quasi-separated base,
 with no compactification supplied by hand. The `example` after
 `rightDerivedLowerShriekPlus_eq` records this.
-
 -/
 
 @[expose] public section
@@ -247,7 +246,7 @@ namespace Etale
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- Blueprint `def-trf-coefficient-conventions`: Trace-formula coefficient conventions.
+/-- Trace-formula coefficient conventions.
 
 The compactly supported derived global sections along a morphism `f : X ⟶ Y`
 admitting a compactification, *defined* as the composite

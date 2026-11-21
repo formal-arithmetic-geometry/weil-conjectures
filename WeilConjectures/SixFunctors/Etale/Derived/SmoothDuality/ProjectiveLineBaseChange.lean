@@ -22,7 +22,7 @@ base change maps compose
 the affine line follows from base change for the projective line: this is the reduction of the
 blueprint to the projective-line adjunction `Rq_* ⊣ q^*(1)[2]`
 (`proposition-adjunction-projective-line--1`) whose unit and counit commute with base change
-(`proposition-adjunction-projective-line`).
+.
 
 ## Main definitions
 
@@ -55,7 +55,7 @@ exponent of `Λ` is invertible and every cartesian square of the projection
 `q : ℙ¹_S ⟶ S` (here `ℙ¹_S = ℙ(Option (Fin 1); S)`, the target of the standard chart of `𝔸¹_S`)
 with quasi-compact base change admitting a compactification, the canonical base change map
 `Lg'^* Rq^! ⟶ Rq'^! Lg^*` is an isomorphism. By the blueprint
-(`proposition-adjunction-projective-line`), `Rq^! = q^*(1)[2]` with counit built from the
+, `Rq^! = q^*(1)[2]` with counit built from the
 projective-line trace, and unit and counit commute with base change. -/
 def ProjectiveLineBaseChange : Prop :=
   ∀ ⦃S : Scheme.{u}⦄ [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
@@ -96,9 +96,9 @@ is invertible and every `g : S' ⟶ S`, with the cartesian square
 
 ```
   ℙ¹_{S'} --g'--> ℙ¹_S
-     |             |
-     q'            q
-     ↓             ↓
+     | |
+     q' q
+     ↓ ↓
      S' ----g----> S
 ```
 

@@ -272,7 +272,6 @@ diagrams when 2 is nonzero. The added equation fixes the canonical normalization
 /-- Horizontal proper/open transport pasting for the canonically normalized gamma.
 The bridge and its componentwise equation are supplied by the existing transport core.
 Source: Stacks 0F7C, 0F7D and 0F7F; Zheng Lemma 4.10.
-(blueprint: lem-sf-integral-system-proper-open-transport-pasting-horizontal).
 Proof: transport the intrinsic equation through the canonical bridge; naturality and
 inverse cancellation identify the resulting composite. -/
 theorem integralSystemProperOpenTransportPastingHorizontal

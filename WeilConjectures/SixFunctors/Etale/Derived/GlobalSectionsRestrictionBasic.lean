@@ -95,8 +95,8 @@ lemma globalSectionsRestriction_comp_map_counit {X Y : Scheme.{u}} (f : Y ⟶ X)
 along `g`, up to the composition isomorphism `(g ≫ f)^* ≅ g^* f^*`:
 ```
 RΓ(X, K) ──────────────────→ RΓ(Z, (g ≫ f)^* K)
-    │                                 │ ≅
-    ↓                                 ↓
+    │ │ ≅
+    ↓ ↓
 RΓ(Y, f^* K) ──────────────→ RΓ(Z, g^* f^* K)
 ```
 -/

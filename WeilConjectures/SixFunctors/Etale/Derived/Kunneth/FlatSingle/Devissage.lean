@@ -30,9 +30,7 @@ flat `𝓔` (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_singleFunctor_of
 This is the dévissage of the proof of blueprint `lemma-kunneth-field-coefficients--1`: reduce `𝓕` to
 sheaves killed by the Jacobson radical `J` of `Λ` (long exact sequences, both sides being
 triangulated in `𝓕`), replace `𝓔` by `𝓔 / J𝓔` (the homology sheaves of both sides only depend on it,
-`𝓔` being flat), write it as a filtered colimit of constructible sheaves (blueprint
-`lemma-finiteness-small-etale-topoi--1`,
-`AlgebraicGeometry.Etale.exists_isColimit_isConstructibleSheaf`), embed a constructible sheaf killed
+`𝓔` being flat), write it as a filtered colimit of constructible sheaves, embed a constructible sheaf killed
 by `J` into a finite sum of pushforwards `π_* M` along finite morphisms
 (`AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_locallyOfFiniteType`) and shift
 dimensions; the modules `M` killed by `J` are direct summands of free `Λ ⧸ J`-modules.
@@ -113,8 +111,7 @@ attribute [local instance 10000] Abelian.toPreadditive SymmetricCategory.toBraid
 change map `Lp^* 𝓔 ⊗ᴸ Lf'^* Rg_* 𝓕 ⟶ Rh_* (Lh^* Lp^* 𝓔 ⊗ᴸ Le^* 𝓕)` is an isomorphism for the
 pushforwards `𝓔 = π_* Λ` along finite morphisms `π`, it is an isomorphism for every flat `𝓔` and
 every sheaf `𝓕` killed by `J`. The homology sheaves of both sides then only depend on `𝓔 / J𝓔`,
-which is a filtered colimit of constructible sheaves killed by `J` (blueprint
-`lemma-finiteness-small-etale-topoi--1`), and these embed into finite sums of pushforwards along
+which is a filtered colimit of constructible sheaves killed by `J`, and these embed into finite sums of pushforwards along
 finite morphisms of constant sheaves killed by `J`, direct summands of sums of `π_* (Λ ⧸ J)`. -/
 theorem isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar_of_smul_eq_zero
     {K : Type u} [Field K]

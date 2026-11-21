@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalI
 
 /-! # Proper/open compatibility of the normalized selected scalar comparison
 Source: Zheng, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-system-selected-left-compat)
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +41,7 @@ open balancing comparisons identify its composite coefficient maps. Cancel the
 common associator and red factors to get the equality on reconstructed objects.
 For an arbitrary N use the reconstruction counit isomorphism; naturality of each
 comparison transports the equality along that isomorphism. This argument uses
-faithfulness only of the full inclusion and equivalence, never of evaluation.
-(blueprint: lem-sf-exceptional-integral-system-selected-left-compat). -/
+faithfulness only of the full inclusion and equivalence, never of evaluation. -/
 theorem exceptionalIntegralSystemSelectedLeftCompat
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

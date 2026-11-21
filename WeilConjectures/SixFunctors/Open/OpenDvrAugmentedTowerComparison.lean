@@ -10,7 +10,6 @@ import WeilConjectures.SixFunctors.Open.OpenDvrAugmentedReductionComparison
 /-! # The augmented quotient tower under the canonical DVR coefficient comparison
 
 Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
-(blueprint: lem-sf-open-dvr-augmented-tower-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +24,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Projection-normalized transport of quotient towers, before passing to total limit.
-Source: Stacks Tags 07A6, 0D6E and 0941
-(blueprint: lem-sf-open-dvr-augmented-tower-comparison).
+Source: Stacks Tags 07A6, 0D6E and 0941.
 The fields retain the single strict augmentation and the universal limit comparison. -/
 structure OpenDvrAugmentedTowerComparison
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
@@ -110,8 +108,7 @@ structure OpenDvrAugmentedTowerComparison
             (S.reduction.obj P)) =
       C.derived.functor.map (S.adjunction.unit.app P)
 /-- Canonical coefficient transport identifies the complete strict augmentation.
-Source: Stacks Tags 07A6, 0D6E and 0941
-(blueprint: lem-sf-open-dvr-augmented-tower-comparison).
+Source: Stacks Tags 07A6, 0D6E and 0941.
 
 Proof: the finite coefficient maps and completed projection equations give an isomorphism
 of ringed quotient diagrams. Scalar restriction transports the ordinary quotient tensor

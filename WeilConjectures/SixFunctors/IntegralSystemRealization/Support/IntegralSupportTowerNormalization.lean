@@ -49,8 +49,7 @@ private theorem scalarProjection_comp
 /-- The fixed compactification composite has the recorded strict tower and the
 projection-normalized integral compact-support comparison.
 Source: Stacks 0941 and 0D6E; primitive realization Step 5 and the normalized
-compact-support realization
-(blueprint: lem-sf-integral-support-tower-normalization).
+compact-support realization.
 
 Proof: identify o.extension and o.direct with the canonical simultaneous open and
 proper functors through their unit-normalized ordinary adjunctions. Compose these

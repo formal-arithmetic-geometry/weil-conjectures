@@ -15,7 +15,6 @@ import WeilConjectures.SmoothPurity.PurCompactSupport.FiniteFreeRestrictionDirec
 /-! # Invertibility of the canonical left scalar comparison
 
 Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: lem-sf-integral-left-comparison-invertible)
 -/
 
 @[expose] public noncomputable section
@@ -98,8 +97,7 @@ Identity changes use the normalized tensor unitor. For a composite, the ambient
 coefficient-comparison composition law conjugates the composite of the two generator
 isomorphisms by tensor associators. The scalar-preservation argument ensures that the
 second comparison is evaluated on its finite-Tor domain. Invertibility is preserved
-under composition and conjugation. No exceptional right mate occurs in this proof.
-(blueprint: lem-sf-integral-left-comparison-invertible). -/
+under composition and conjugation. No exceptional right mate occurs in this proof. -/
 theorem integralLeftComparison_isIso
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

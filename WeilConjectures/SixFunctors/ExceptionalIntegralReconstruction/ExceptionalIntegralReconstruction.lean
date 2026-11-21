@@ -31,8 +31,7 @@ All operations, stability assertions and comparisons are conclusions, and absolu
 separatedness of X and Y is not assumed.
 
 Source: Zheng, Propositions 2.23, 2.29, 3.16, Lemma 5.22 and Proposition 5.24;
-blueprint exceptional inverse-image construction, integral steps 10--12
-(blueprint: lem-sf-exceptional-integral-reconstruction).
+blueprint exceptional inverse-image construction, integral steps 10--12.
 
 Proof:
 1. Restrict the actual reduction/limit adjunction to complete objects and normalized

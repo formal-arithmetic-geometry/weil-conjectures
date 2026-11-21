@@ -20,22 +20,21 @@ Fix a commutative ring `Λ` and a cartesian square of schemes
 
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 
 with `g` **smooth**, recorded as `sq : IsPullback g' f' f g`. This file states the
 general smooth base change theorem in étale cohomology: for every object `K` of the
 bounded below derived category `D⁺(X_ét, Λ)` all of whose cohomology sheaves are torsion
-with order invertible on `Y` , the derived base-change morphism
+with order invertible on `Y`, the derived base-change morphism
 
 `BC_sq(K) : Lg^*(Rf_* K) ⟶ Rf'_*(Lg'^* K)`
 
 of `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs` is an isomorphism
 if `f` is qcqs.
-
 -/
 
 @[expose] public section

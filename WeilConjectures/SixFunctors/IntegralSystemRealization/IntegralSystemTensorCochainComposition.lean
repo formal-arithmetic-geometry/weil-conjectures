@@ -259,8 +259,7 @@ private theorem cochain_pure (o : Operations l E) (c : Compositors l E o)
 /-- The unit-normalized tensor maps on coefficient-system cochains commute with
 composition of inverse images.
 Source: Stacks 03EL and 07A4; the pure-generator step in the strict-system
-realization of fix-prop-coherence
-(blueprint: lem-sf-integral-system-tensor-cochain-composition).
+realization of fix-prop-coherence.
 
 Proof: transpose under the inverse-image adjunction for the composite. The unit
 conjugation equation and the section normalization of the direct compositor

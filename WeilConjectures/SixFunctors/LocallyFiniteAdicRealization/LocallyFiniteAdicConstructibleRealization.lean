@@ -33,8 +33,7 @@ import Mathlib.Algebra.CharP.Basic
 
 /-! # Assembly of ordinary native constructible realization
 
-Source: Bhatt--Scholze, Section 6.8, especially Proposition 6.8.14
-(blueprint: lem-sf-locally-finite-adic-constructible-realization).
+Source: Bhatt--Scholze, Section 6.8, especially Proposition 6.8.14.
 The existing realization definitions are reexported unchanged from the data module.
 -/
 
@@ -63,8 +62,7 @@ attribute [local irreducible] sections CoefficientPresentation.integralMap
 coefficient sheaf, for every finite-type scheme over the chosen algebraic closure.
 No separatedness is required and no individual finite stage is asserted equivalent.
 Source: Bhatt--Scholze, Lemma 6.8.2, Definitions 6.8.3 and 6.8.8, Proposition 6.8.14;
-blueprint common-field passage in cor-coef-verdier-weil-equivariance.proof.md
-(blueprint: lem-sf-locally-finite-adic-constructible-realization).
+blueprint common-field passage in cor-coef-verdier-weil-equivariance.proof.md.
 
 Proof:
 1. The geometric point is Noetherian. Finite type gives Noetherian X and finite

@@ -61,7 +61,6 @@ import WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomDataSupplement
 /-! # Evaluation of the normalized reduction tensor square
 
 Source: Stacks 06YS, 07A4 and 0941.
-(blueprint: lem-coef-reduction-tensor-evaluation-pasting).
 -/
 
 @[expose] public section
@@ -314,8 +313,7 @@ identify its outer maps with reductionEvaluation and the prescribed finite
 reduction models. Apply hF to the resulting scalar tensor square. Cancel the
 integral tensor-model isomorphism and the two finite reduction-model isomorphisms.
 This proves the desired equality on representatives, and faithfulness gives it
-for arbitrary derived inputs. No faithfulness of level evaluation is asserted.
-(blueprint: lem-coef-reduction-tensor-evaluation-pasting). -/
+for arbitrary derived inputs. No faithfulness of level evaluation is asserted. -/
 theorem coefficientReductionTensorEvaluation_of_normalizations
     (R : CoefficientDerivedSystemReduction l E W)
     (hR : CoefficientReductionTensorNormalization l E W R)

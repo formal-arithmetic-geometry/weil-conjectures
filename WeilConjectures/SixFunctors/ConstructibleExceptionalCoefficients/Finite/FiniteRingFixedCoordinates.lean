@@ -29,8 +29,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (n : ℕ)
 
 /-- Direct image of module sheaves through the specified scalar map.
-Source: Stacks 03D1; the sectionwise module direct image
-(blueprint: def-sf-finite-ring-fixed-coordinates). -/
+Source: Stacks 03D1; the sectionwise module direct image. -/
 def finiteScalarDirectImage {X Y : Scheme.{w}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{w + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{w + 1})
@@ -44,8 +43,7 @@ def finiteScalarDirectImage {X Y : Scheme.{w}} (f : X ⟶ Y)
     ⟨Functor.whiskerRight a.hom (forget₂ CommRingCat.{w + 1} RingCat.{w + 1})⟩
 
 /-- The finite ring-sheaf scalar map is the constant-section scalar map.
-Source: Stacks 03D1 and 03D6; finiteDirectImage_eq's adjunction calculation
-(blueprint: lem-sf-finite-ring-scalar-map-equality).
+Source: Stacks 03D1 and 03D6; finiteDirectImage_eq's adjunction calculation.
 
 Proof: finite.pull is the inverse adjoint transpose of the constant-section map.
 Apply the adjunction Hom equivalence again. Its inverse equation gives the
@@ -57,8 +55,7 @@ theorem finiteRingDirectImageMap_eq {U V : Scheme.{w}} (g : U ⟶ V) :
   exact ((proEtaleSheafAdjunction g CommRingCat.{w + 1}).homEquiv _ _).apply_symm_apply _
 
 /-- The finite open comparison followed by the fixed realization comparison.
-Source: Stacks 00YV and 03DI
-(blueprint: def-sf-finite-ring-fixed-coordinates). -/
+Source: Stacks 00YV and 03DI. -/
 def finiteFixedOpenIso {U V : Scheme.{w}} (j : U ⟶ V) [IsOpenImmersion j] :
     let A := Padic.coefficientExtensionRing l E (n + 1)
     let R := PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)
@@ -87,8 +84,7 @@ def finiteFixedOpenIso {U V : Scheme.{w}} (j : U ⟶ V) [IsOpenImmersion j] :
     FrobeniusExchange.fixedDerivedOpenModel (Padic.coefficientExtensionRing l E (n + 1)) j
 
 /-- The separately derived finite direct-image comparison followed by realization.
-Source: Stacks 00YV, 03D6 and 07A5
-(blueprint: def-sf-finite-ring-fixed-coordinates). -/
+Source: Stacks 00YV, 03D6 and 07A5. -/
 def finiteFixedPushIso {U V : Scheme.{w}} (g : U ⟶ V) :
     let A := Padic.coefficientExtensionRing l E (n + 1)
     let R := PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)
@@ -114,8 +110,7 @@ def finiteFixedPushIso {U V : Scheme.{w}} (g : U ⟶ V) :
     sfIntrinsicDerivedDirectImageComparison g (Padic.coefficientExtensionRing l E (n + 1))
 
 /-- Open coordinates of the retained underlying object, including its equivalence counit.
-Source: Stacks 00YV and 03DI
-(blueprint: def-sf-finite-ring-fixed-coordinates). -/
+Source: Stacks 00YV and 03DI. -/
 def finiteFixedOpenAt {X Y : Scheme.{w}} (j : X ⟶ Y) [IsOpenImmersion j]
     (O : FrobeniusExchange.CompactOrigin (Padic.coefficientExtensionRing l E (n + 1)) X) :
     let A := Padic.coefficientExtensionRing l E (n + 1)
@@ -136,8 +131,7 @@ def finiteFixedOpenAt {X Y : Scheme.{w}} (j : X ⟶ Y) [IsOpenImmersion j]
 /-- The concrete proper/open isomorphism in finite ring-sheaf coordinates.
 It is the image of the specified fixed-scalar proper/open map, with the two open
 coordinates and the separately derived direct-image coordinate inserted.
-Source: compactification-coherence proof, first two paragraphs; Stacks 03DI and 0F7B
-(blueprint: def-sf-finite-ring-fixed-coordinates). -/
+Source: compactification-coherence proof, first two paragraphs; Stacks 03DI and 0F7B. -/
 def finiteFixedRefinementOpenIso {X Y : Scheme.{w}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d)
     (O : FrobeniusExchange.CompactOrigin (Padic.coefficientExtensionRing l E (n + 1)) X) :

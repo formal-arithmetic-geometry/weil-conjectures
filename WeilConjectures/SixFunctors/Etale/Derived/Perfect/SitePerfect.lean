@@ -21,8 +21,7 @@ public import WeilConjectures.Algebra.Homology.Monoidal.ProjectionMap
 /-!
 # Perfect complexes on the coefficient site
 
-A complex `K` of étale sheaves of `Λ`-modules on `X` is *perfect on the coefficient site*
-(blueprint `def-weil-site-perfect-complex`) if, on the members `U ⟶ X` of some étale cover,
+A complex `K` of étale sheaves of `Λ`-modules on `X` is *perfect on the coefficient site* if, on the members `U ⟶ X` of some étale cover,
 its restriction `K|_U` is isomorphic to a bounded complex of finite projective `Λ_U`-modules,
 a finite projective module being a direct summand of a finite sum `Λ_U^{⊕m}` of copies of the
 constant sheaf.
@@ -59,7 +58,7 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 
-/-- Blueprint `def-weil-site-perfect-complex`: Perfect complexes on the coefficient site.
+/-- Perfect complexes on the coefficient site.
 
 An object `K` of `D(X_ét, Λ)` is *perfect on the coefficient site* if there is an étale cover
 `{uᵢ : Uᵢ ⟶ X}` such that each restriction `Luᵢ^* K` is isomorphic to (the image in
@@ -557,7 +556,7 @@ theorem DerivedCategory.IsSitePerfect.isDualizable
   exact isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhom_of_trivialization (𝒰.f i) K P a b
     ha hb hP e
 
-/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
+/-- Basic operations and coefficient
 reduction; the internal hom between finite levels.
 
 If the first variable `K` is perfect on the coefficient site, the internal hom commutes with

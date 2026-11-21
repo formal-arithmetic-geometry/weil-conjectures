@@ -39,8 +39,7 @@ spectral sequence `E₂^{p,q} = Rᵖh_* Rᵠf_* F ⟹ Rᵖ⁺ᵠ(f_* ⋙ h_*) F`
 the acyclicity of the Grothendieck spectral sequence theorem because `f_*` preserves injective
 objects (`AlgebraicGeometry.Etale.preservesInjectiveObjects_lowerStar`). Its compatibility with
 inverse image along a cartesian base change is the general
-`CategoryTheory.Functor.exists_grothendieckSpectralObject_baseChange`.
-(blueprint: `lemma-composition-cancellation`) -/
+`CategoryTheory.Functor.exists_grothendieckSpectralObject_baseChange`. -/
 theorem Etale.exists_grothendieckSpectralSequence_lowerStar {X Y Z : Scheme.{u}} (f : X ⟶ Y)
     (h : Y ⟶ Z) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     ∃ E : E₂CohomologicalSpectralSequenceNat (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)),

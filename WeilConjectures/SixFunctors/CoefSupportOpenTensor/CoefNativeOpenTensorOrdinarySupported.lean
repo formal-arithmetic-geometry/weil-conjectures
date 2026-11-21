@@ -110,7 +110,6 @@ import WeilConjectures.SixFunctors.CoefSupportOpenTensor.CoefNativeOpenTensorOrd
 /-! # Ordinary tensor support for native open extension
 
 Source: Stacks, Modules on Sites, Tag 0E8I.
-(blueprint: lem-coef-native-open-tensor-ordinary-supported).
 -/
 
 @[expose] public noncomputable section
@@ -134,7 +133,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Ordinary tensoring with an extended module stays in the image of open extension.
 Source: Stacks, sites-modules.tex, lemma-j-shriek-and-tensor, Tag 0E8I.
-(blueprint: lem-coef-native-open-tensor-ordinary-supported).
 
 Proof: identify the open pro-etale site with the slice of the ambient site at
 its subterminal open object. Take the product of this equivalence with the

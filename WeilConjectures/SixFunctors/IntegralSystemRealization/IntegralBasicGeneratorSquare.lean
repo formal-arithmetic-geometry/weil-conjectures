@@ -15,8 +15,6 @@ import all WeilConjectures.SixFunctors.GeneratorReduction.GeneratorKind.TensorAd
 import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffectivity
 
 /-! # Realization squares for canonical expression pairs
-
-Source: blueprint fix-prop-coherence, strict-system expression realization.
 -/
 
 @[expose] public noncomputable section
@@ -124,8 +122,6 @@ private theorem realize_ordinary_square
       rw [← Category.assoc, hc, IsIso.hom_inv_id_assoc]
 
 /-- The generator case, before closure under expression contexts or composition.
-Source: blueprint fix-prop-coherence, basic-generator coefficient squares.
-(blueprint: lem-sf-integral-basic-generator-square).
 
 Proof: construct the ordinary coefficient recursion independently of the comparison
 family. Expression induction transposes its primitive reduction arrows and identifies

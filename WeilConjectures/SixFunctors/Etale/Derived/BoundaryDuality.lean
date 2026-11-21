@@ -192,7 +192,7 @@ theorem hasBoundaryDuality [IsAlgClosed k] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.o
   · have : IsSeparated s := inferInstance
     exact nonempty_iso_leftDerivedUpperStar_verdierDual Λ (s ≫ aY) i hL
 
-/-- Blueprint `theorem-verdier-biduality`: Verdier biduality on the coefficient class, at the finite
+/-- Verdier biduality on the coefficient class, at the finite
 stages `Λ = A_{E,n}`.
 
 For `X` separated of finite type over an algebraically closed field `k` with `dim X ≤ d` and a

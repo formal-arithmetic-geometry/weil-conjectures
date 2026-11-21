@@ -130,7 +130,6 @@ omit [(integralComparisonSequenceDirectImage l E f).Additive]
   [Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E X)] in
 /-- The canonical perfect-quotient projection arrows commute with scalar quotient maps.
 Source: Zheng Proposition 4.21, equation (4.21.1); Lemma 4.10; Stacks 0944.
-(blueprint: lem-weil-completed-direct-image-finite-projection-transitions).
 
 Proof: the section-normalized finite direct-image restriction square pastes with
 both completed restriction comparisons. Apply the derived triangle identity to

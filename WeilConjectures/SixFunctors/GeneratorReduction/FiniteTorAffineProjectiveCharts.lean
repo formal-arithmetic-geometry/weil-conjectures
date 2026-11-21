@@ -48,7 +48,6 @@ claim about an operation on them.
 
 Source: Bhatt--Scholze, proof of Lemma 6.5.5, Lemmas 6.5.6--6.5.8 and 6.6.4;
 Stacks Tag 09C3, lifting finite-projective residue models.
-(blueprint: lem-sf-finite-tor-affine-projective-charts).
 
 Proof: use the integral constructibility components of both hypotheses. Choose the
 finitely many residue-cohomology partitions, pull them back to the affine open,

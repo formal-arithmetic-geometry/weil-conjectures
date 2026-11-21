@@ -209,7 +209,6 @@ private theorem sheaf_square_identity
 /-- Direct image and evaluation commute with the adjacent coefficient transition.
 Source: Zheng Construction 4.1, the section calculation preceding Lemma 4.10;
 Stacks Tags 03DI and 0941.
-(blueprint: stage3-integral-pull-evaluation-direct-transition-square).
 
 Proof: evaluate both composites at a pro-étale object U and a section x. Each direct
 evaluation comparison is the identity on underlying sections by its normalization.

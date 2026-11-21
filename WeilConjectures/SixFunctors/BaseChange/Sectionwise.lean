@@ -20,7 +20,6 @@ by restricting the image of `s` under the unit `F ⟶ g'_* g'^* F` along the can
 `V ×_{Y'} X' ⟶ (W ×_Y X) ×_X X'` (`AlgebraicGeometry.Etale.baseChangeMap_app_sectionwise`).
 Being a statement about the composite with the restriction maps of the presheaf `g^* f_* F`,
 it is automatically independent of the representative.
-(blueprint: `prose-04-05`)
 -/
 
 @[expose] public section
@@ -48,7 +47,6 @@ an equality of morphisms out of `F(W ×_Y X)`, so it holds for all sections at o
 depend on the chosen representative.
 This is also the content of the pointer remark `prose-04-05`: the
 sectionwise rule is independent of the representative and agrees with the adjoint description.
-(blueprint: `prose-04-05`)
 -/
 lemma Etale.baseChangeMap_app_sectionwise (sq : CommSq g' f' f g)
     (F : Sheaf X.smallEtaleTopology A) (W : Y.Etale) (V : Y'.Etale)

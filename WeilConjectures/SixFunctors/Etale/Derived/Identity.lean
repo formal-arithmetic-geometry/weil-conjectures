@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 
 The derived lower shriek and the exceptional inverse image along the identity of a scheme `S`
 are the identity functors, `R(𝟙_S)_! ≅ 𝟭` and `R(𝟙_S)^! ≅ 𝟭`, and the dualizing complex of the
-identity is the unit (blueprint `theorem-global-verdier-duality`).
+identity is the unit.
 
 ## Main definitions
 
@@ -71,7 +71,7 @@ noncomputable def rightDerivedUpperShriekIdIso : R(𝟙 S)^![Λ] ≅ 𝟭 _ :=
   (rightDerivedUpperShriekAdjunction Λ (𝟙 S)).rightAdjointUniq
     (Adjunction.id.ofNatIsoLeft (rightDerivedLowerShriekIdIso (ModuleCat.{u + 1} Λ) S).symm)
 
-/-- Blueprint `theorem-global-verdier-duality`: for the structure morphism `a_s = 𝟙_s` of the base,
+/-- For the structure morphism `a_s = 𝟙_s` of the base,
 the dualizing complex is the unit, `ω_s = Ra_s^! Λ ≅ Λ_s`. -/
 noncomputable def dualizingComplexIdIso : dualizingComplex Λ (𝟙 S) ≅ 𝟙_ _ :=
   (rightDerivedUpperShriekIdIso Λ S).app _

@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 /-! # Finite evaluation of the ordinary system open counit
 
 Source: Stacks 03DI, 03DJ and 0941; ordinary open-factor argument of fix-prop-coherence.
-(blueprint: lem-sf-ordinary-open-finite-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -212,7 +211,6 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   coefficientProEtaleModuleAdjunction coefficientProEtaleModulePullback in
 /-- Evaluation carries the ordinary open counit to its finite-level counit.
 Source: Stacks 03DI, 03DJ and 0941; fix-prop-coherence, ordinary open-factor argument.
-(blueprint: lem-sf-ordinary-open-finite-evaluation).
 
 Proof: identify the pro-etale site of the open with the ambient slice. On the sequence
 site this identification is its product with the coefficient index. Extension by zero

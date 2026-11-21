@@ -31,7 +31,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Defs
   law of `Rf_!`, compact-support base change and the projection formula.
 
 See `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform` for the implementation notes.
-
 -/
 
 @[expose] public section
@@ -64,9 +63,9 @@ base change (`hbc`) along the cartesian square
 
 ```
     V ×ₛ V' ×ₛ V'' ──r₁₂──▶ V ×ₛ V'
-          │                    │
-       r₂₃│                    │p₂
-          ▼                    ▼
+          │ │
+       r₂₃│ │p₂
+          ▼ ▼
       V' ×ₛ V'' ─────q₁─────▶ V'
 ```
 

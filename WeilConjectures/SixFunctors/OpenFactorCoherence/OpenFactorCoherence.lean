@@ -37,8 +37,7 @@ import WeilConjectures.SixFunctors.OpenFactorCoherence.OpenFactorExchangeRealiza
 /-! # Completion coherence for the open factor
 
 Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, base-change
-paragraph; Bhatt--Scholze, Definition 3.4.10 and Lemmas 6.5.5, 6.5.8; Stacks 099N, 09BN, 0GL1
-(blueprint: lem-sf-pf-open-factor-coherence).
+paragraph; Bhatt--Scholze, Definition 3.4.10 and Lemmas 6.5.5, 6.5.8; Stacks 099N, 09BN, 0GL1.
 
 All operations are the published operations. The records below present their
 normalizations, rather than assuming preservation or choosing new operation functors.
@@ -77,8 +76,7 @@ set_option genSizeOf false in
 set_option genInjectivity false in
 /-- The complete open-factor assertion. Its data are conclusions, and every displayed
 map is fixed by a quotient unit, a strict-tower comparison, or an open-unit transpose.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, base-change paragraph
-(blueprint: lem-sf-pf-open-factor-coherence). -/
+ -/
 structure Assertion {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {h : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j']
     (sq : OpenImmersionSquare a j' j h) where
@@ -217,8 +215,7 @@ private theorem fixedOpen_exists (F : FiniteFieldDatum.{u}) (hl : l ≠ F.p)
 
 /-- Completed open restriction, constructibility, and normalization of the actual open maps.
 Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, base-change
-paragraph; Bhatt--Scholze 3.4.10, 3.5.1--3.5.2, 6.5.5, 6.5.8; Stacks 099M, 099N, 09BN, 09BP, 0GL1
-(blueprint: lem-sf-pf-open-factor-coherence).
+paragraph; Bhatt--Scholze 3.4.10, 3.5.1--3.5.2, 6.5.5, 6.5.8; Stacks 099M, 099N, 09BN, 09BP, 0GL1.
 
 Proof plan (the eleven steps of this DAG node):
 1. Finite type over Spec k implies Noetherian and qcqs. Every open is quasi-compact.

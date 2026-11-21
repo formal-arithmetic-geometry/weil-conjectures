@@ -10,8 +10,6 @@ import WeilConjectures.SixFunctors.FixProjectionCompactification.FiniteSupportId
 import WeilConjectures.SixFunctors.CompactSupportFiniteProjection.FiniteRealizationEtaleOrigin
 
 /-! # Finite realization of the canonical proper/open support identification
-
-Source: def-sf-operation-stages, normalized support composition and proper/open identities.
 -/
 
 @[expose] public noncomputable section
@@ -200,7 +198,6 @@ is present in the equation.
 Source: def-sf-operation-stages, finiteCompositionNormalization,
 finiteOpenNormalization and finiteProperNormalization; prop-sf-pf-coherence.proof.md,
 compatibility of comparisons with counits and j_!.
-(blueprint: lem-sf-finite-support-factor-realization).
 
 Proof: expand sixFunctorFactoredSupportIdentification as composition followed by the
 open identification and proper identification. Use a bounded etale-origin witness for

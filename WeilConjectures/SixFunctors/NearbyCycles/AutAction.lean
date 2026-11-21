@@ -16,7 +16,6 @@ A morphism of models `σ : M ⟶ M` over the identities of `X` and `X'` (for ins
 automorphism of the geometric generic fibre over the generic point of the trait) acts on the
 nearby cycles by its pullback exchange, transported along `L(𝟙)^* ≅ 𝟭`
 (`NearbyCyclesModel.Hom.autAction`).
-
 -/
 
 @[expose] public section

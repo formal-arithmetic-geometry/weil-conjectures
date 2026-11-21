@@ -31,7 +31,6 @@ ring `T` (`NearbyCyclesModel.isIso_pullbackExchange_ofTraitHom_app`). This is th
 SGA 4½, [Th. finitude], Prop. 3.7, and the input to its step (B): both sides compute the
 cohomology of the geometric generic point. It follows from
 `ProEtale.CondensedRing.isIso_map_baseChangeMap_app_of_isStrictlyHenselianLocalRing`.
-
 -/
 
 @[expose] public section

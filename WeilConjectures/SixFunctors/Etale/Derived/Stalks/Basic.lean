@@ -19,16 +19,16 @@ initial, so the stalk at the tautological point is the module of global sections
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.upperStarCompSectionsIsoSheafFiber` (`lem-kun-stalk-as-pullback`).
-- `AlgebraicGeometry.Etale.sheafFiberHomologyIso` (`lem-kun-stalks-of-cohomology`).
+- `AlgebraicGeometry.Etale.upperStarCompSectionsIsoSheafFiber`.
+- `AlgebraicGeometry.Etale.sheafFiberHomologyIso`.
 - `AlgebraicGeometry.Etale.isZero_iff_forall_isZero_homology`
-  (`lem-kun-d-zero-cohomology`).
+.
 - `AlgebraicGeometry.Etale.isIso_iff_forall_isIso_leftDerivedUpperStar_map`
-  (`lem-kun-stalk-faithful-derived`).
+.
 - `AlgebraicGeometry.Etale.exists_comp_eq_sepClosureBaseChange`,
   `AlgebraicGeometry.Etale.isIso_iff_isIso_upperStar_sepClosureBaseChange_map` and
   `AlgebraicGeometry.Etale.isIso_iff_isIso_leftDerivedUpperStar_sepClosureBaseChange_map`
-  (`lem-kun-sep-closure-conservative`).
+.
 -/
 
 @[expose] public section
@@ -108,7 +108,7 @@ section Pullback
 
 variable {Ω : Type u} [Field Ω] [IsSepClosed Ω]
 
-/-- Blueprint `lem-kun-stalk-as-pullback`: **a stalk is the inverse image to a geometric
+/-- **A stalk is the inverse image to a geometric
 point.** For a geometric point `s : Spec Ω ⟶ T` the stalk of an étale sheaf `F` of
 `Λ`-modules at `s` is the module of global sections of the inverse image `s^* F`, naturally
 in `F`: the stalk of `s^* F` at the tautological point of `Spec Ω` is that of `F` at `s`
@@ -124,10 +124,10 @@ noncomputable def upperStarCompSectionsIsoSheafFiber {T : Scheme.{u}}
     upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) s (𝟙 _) ≪≫
     eqToIso (by rw [Category.id_comp])
 
-/-- Blueprint `lem-kun-stalks-of-cohomology`: **stalks of cohomology sheaves.** For
+/-- **Stalks of cohomology sheaves.** For
 `Q ∈ D(T_ét, Λ)` and a geometric point `s : Spec Ω ⟶ T`, the stalk of `ℋ^q(Q)` at `s` is
 the module of global sections of `ℋ^q(Ls^* Q)`, that is, `ℋ^q(Q)_s ≅ ℋ^q(Q_s)`: the stalk is
-the inverse image (`lem-kun-stalk-as-pullback`), and the exact functor `s^*` commutes with
+the inverse image, and the exact functor `s^*` commutes with
 `ℋ^q` (`AlgebraicGeometry.Etale.leftDerivedUpperStarHomologyFunctorIso`). -/
 noncomputable def sheafFiberHomologyIso {T : Scheme.{u}} (s : Spec (.of Ω) ⟶ T)
     (Q : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (q : ℤ) :
@@ -142,14 +142,14 @@ noncomputable def sheafFiberHomologyIso {T : Scheme.{u}} (s : Spec (.of Ω) ⟶ 
 
 end Pullback
 
-/-- Blueprint `lem-kun-d-zero-cohomology`: **objects with vanishing cohomology.** An object
+/-- **Objects with vanishing cohomology.** An object
 `E ∈ D(T_ét, Λ)` is zero if and only if all its cohomology sheaves `ℋ^q(E)` are zero. -/
 theorem isZero_iff_forall_isZero_homology {T : Scheme.{u}}
     (E : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsZero E ↔ ∀ q : ℤ, IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj E) :=
   _root_.DerivedCategory.isZero_iff E
 
-/-- Blueprint `lem-kun-stalk-faithful-derived`: **stalk faithfulness for derived objects.**
+/-- **Stalk faithfulness for derived objects.**
 A morphism `φ` of `D(T_ét, Λ)` is an isomorphism if and only if its derived pullback
 `Ls^* φ` to every geometric point `s : Spec Ω ⟶ T` is an isomorphism. It suffices to test the
 geometric points given by algebraic closures of the residue fields
@@ -190,7 +190,7 @@ theorem exists_comp_eq_sepClosureBaseChange {Ω : Type u} [Field Ω] [IsSepClose
   ext x
   exact (ψ.commutes x).symm
 
-/-- Blueprint `lem-kun-sep-closure-conservative`: **conservativity of base change to a
+/-- **Conservativity of base change to a
 separable closure, for sheaves.** A morphism of étale sheaves of `Λ`-modules on a `K`-scheme
 `X` is an isomorphism if and only if its pullback to `X_{K^sep}` is: `X_{K^sep} ⟶ X` is
 surjective, being a base change of the surjective `Spec K^sep ⟶ Spec K`. -/
@@ -203,7 +203,7 @@ theorem isIso_iff_isIso_upperStar_sepClosureBaseChange_map
   obtain ⟨y, hy⟩ := (sepClosureBaseChange p).surjective x
   exact ⟨⟨⟩, y, hy⟩
 
-/-- Blueprint `lem-kun-sep-closure-conservative`: **conservativity of base change to a
+/-- **Conservativity of base change to a
 separable closure, for derived objects.** A morphism of `D(X_ét, Λ)` is an isomorphism if and
 only if its derived pullback to `X_{K^sep}` is: on cohomology sheaves this is the statement
 for sheaves, the pullback being exact. -/

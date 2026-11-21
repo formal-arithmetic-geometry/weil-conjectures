@@ -53,7 +53,7 @@ variable (C : CoefficientSystem l X)
 attribute [local irreducible] integralTensor rationalTensor
 
 /-- The integral factorization of a rational transition followed by realization.
-Source: Stacks Tag 05R6 (blueprint: lem-sf-native-rational-tensor-cocone). -/
+Source: Stacks Tag 05R6. -/
 def rationalTensorTransitionLift {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     stageLocalization l X E ⋙
         (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X).T h ⋙
@@ -84,7 +84,7 @@ instance rationalTensorTransition_lifting {E L : Index l (PadicAlgCl l)} (h : E 
   ⟨rationalTensorTransitionLift l X C h⟩
 
 /-- The localized comparison is uniquely fixed by the explicit integral tensor map.
-Source: BS 6.8.14(2) (blueprint: lem-sf-native-rational-tensor-cocone). -/
+Source: BS 6.8.14(2). -/
 def rationalTensorTransition {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     rationalTensor l X C E ≅
       (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X).T h ⋙
@@ -94,7 +94,7 @@ def rationalTensorTransition {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     (integralTensorW l X E) _ _ _ _ (asIso (integralTensorComparison l X C h))
 
 /-- The integral components of the localized comparison are the prescribed ones.
-Source: Stacks Tag 05R6 (blueprint: lem-sf-native-rational-tensor-cocone). -/
+Source: Stacks Tag 05R6. -/
 theorem rationalTensorTransition_hom_app {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
     (rationalTensorTransition l X C h).hom.app
@@ -136,8 +136,7 @@ instance rationalTensorTransition_shift {E L : Index l (PadicAlgCl l)} (h : E �
   exact commShift_of_localization Q (integralTensorW l X E) _
 
 /-- The localized comparisons obey the field-tower equation.
-Source: BS 6.8.14(2), Remark 6.8.15
-(blueprint: lem-sf-native-rational-tensor-cocone). -/
+Source: BS 6.8.14(2), Remark 6.8.15. -/
 theorem rationalTensorTransition_tower {E L M : Index l (PadicAlgCl l)}
     (h : E ≤ L) (k : L ≤ M)
     (K : GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X E) :
@@ -193,7 +192,7 @@ theorem rationalTensorTransition_tower {E L M : Index l (PadicAlgCl l)}
     simp only [reassoc_of% ((integralTensorComparison_coherent l X C).2 h k K)]
 
 /-- The inverse comparisons have the contravariant cocone orientation.
-Source: BS 6.8.14(2) (blueprint: lem-sf-native-rational-tensor-cocone). -/
+Source: BS 6.8.14(2). -/
 theorem rationalTensorTransition_inv_tower {E L M : Index l (PadicAlgCl l)}
     (h : E ≤ L) (k : L ≤ M)
     (K : GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X E) :
@@ -233,7 +232,7 @@ private theorem equivalence_counit_transport
 
 /-- The lifted component equation after an arbitrary equivalence, with the literal
 scalar object transport removed heterogeneously.
-Source: BS 6.8.14(2) (blueprint: lem-sf-native-rational-tensor-cocone).
+Source: BS 6.8.14(2).
 Proof: expand the localization component, express its final scalar transport as
 an equality morphism, and use the equivalence counit naturality. Equality induction
 removes that last transport, retaining the integral endpoint on the right. -/

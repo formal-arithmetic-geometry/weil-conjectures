@@ -18,18 +18,17 @@ squares
 
 ```
 Yᵢ --eᵢ--> Tᵢ
-|          |
-hᵢ         gᵢ
-v          v
+| |
+hᵢ gᵢ
+v v
 Xᵢ --pᵢ--> Sᵢ
 ```
 
 with affine transition morphisms and `gᵢ` quasi-compact quasi-separated, with limit square
 `(Y, X, T, S)`. If the degree-`q` base-change map
 `pᵢ⁻¹ R^q gᵢ_* Fᵢ ⟶ R^q hᵢ_* eᵢ⁻¹ Fᵢ` is an isomorphism at every stage, then so is the one of
-the limit square (blueprint `corollary-open-direct-image-over-field--2`, Stacks 0EZT). As an
-application, smooth base change holds along limits of smooth schemes (blueprint
-`corollary-open-direct-image-over-field--2`, Stacks 0F09).
+the limit square. As an
+application, smooth base change holds along limits of smooth schemes.
 
 ## Main statements
 
@@ -150,8 +149,7 @@ In the situation of `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLi
 fixed degree `q` every stage base-change map is an isomorphism for every sheaf of `Λ`-modules
 on `Tᵢ`, then the base-change map of the limit square is an isomorphism for every sheaf `F` of
 `Λ`-modules on `T`: such an `F` is the filtered colimit of the pullbacks of its direct images
-to the stages (blueprint
-`corollary-open-direct-image-over-field--2`). -/
+to the stages. -/
 @[stacks 0EZT]
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall {I : Type u} [Category.{u} I]
     [IsCofiltered I] {S X T Y : I ⥤ Scheme.{u}} (p : X ⟶ S) (g : T ⟶ S) (e : Y ⟶ T)
@@ -373,9 +371,7 @@ lemma Scheme.IsTorsionSheafOfInvertibleOrder.upperStar {S S' T T' : Scheme.{u}} 
     rw [← h2, h1, map_zero]
 
 /-- Smooth base change along a limit of smooth schemes, for a system given as a functor
-`X : I ⥤ Scheme` with a cone of morphisms `p : X ⟶ S` (blueprint
-`corollary-open-direct-image-over-field--2`, see
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth`). The base `S` is arbitrary:
+`X : I ⥤ Scheme` with a cone of morphisms `p : X ⟶ S`. The base `S` is arbitrary:
 the statement is local on `S` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_etale_cover`)
 and holds over affine opens by
 `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth_of_qcqs`. -/
@@ -456,9 +452,9 @@ quasi-separated and form the Cartesian square
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 S' -----> S
 ```
 

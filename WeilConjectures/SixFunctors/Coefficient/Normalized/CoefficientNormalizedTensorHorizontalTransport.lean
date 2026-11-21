@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNorm
 /-! # Transport of normalized tensor horizontality from representatives
 
 Source: Stacks 06YS and 07A4.
-(blueprint: lem-coef-normalized-tensor-horizontal-transport).
 -/
 
 @[expose] public section
@@ -93,7 +92,6 @@ set_option linter.unusedVariables false in
 all objects of the unbounded derived coefficient category.
 Source: Stacks 06YS, 07A4; the resolving-representative transport in the proof of
 Zheng Construction 4.1.
-(blueprint: lem-coef-normalized-tensor-horizontal-transport).
 
 Proof: resolve each derived object by a flat-term K-flat complex, apply the assumed
 representative square, and cancel the epimorphic maps induced by the two resolution

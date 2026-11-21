@@ -47,8 +47,8 @@ restricts to an isomorphism along `j` for formal reasons and along `W` because b
 vanish there.
 
 ```
-        j             W.ι
-   U ──────→ X ←────────── W        range j ⊔ range W.ι = X
+        j W.ι
+   U ──────→ X ←────────── W range j ⊔ range W.ι = X
 ```
 -/
 theorem Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range
@@ -90,10 +90,10 @@ the structure morphism `g` of the compactification is separated, `i` is proper a
 
 ```
        i
-   X ─────→ P            f_! = g_* ∘ i_! ──→ g_* ∘ i_* ≅ f_*
-    ╲       │
-   f ╲      │ g
-      ↘     ↓
+   X ─────→ P f_! = g_* ∘ i_! ──→ g_* ∘ i_* ≅ f_*
+    ╲ │
+   f ╲ │ g
+      ↘ ↓
             Y
 ```
 -/

@@ -102,8 +102,7 @@ attribute [local irreducible] ordinaryPull ordinaryDerivedPull
 /-- A normalized restriction comparison carries the specified unit to the specified
 unit and consequently preserves completeness.
 
-Source: Stacks Tags 09BL, 09BM, 06YY, 0941 and Bhatt--Scholze Lemma 6.5.8
-(blueprint: lem-fix-qcqs-completion-unit-restriction).
+Source: Stacks Tags 09BL, 09BM, 06YY, 0941 and Bhatt--Scholze Lemma 6.5.8.
 Proof: factor a weakly etale map through the identity immersion, and a closed
 immersion after the identity weakly etale map. Apply the normalized restriction
 models. The finite coefficient projection identity follows by the two naturality
@@ -209,8 +208,7 @@ theorem qcqsCompletionUnitRestriction
 
 /-- The actual unit on a composite weakly etale/immersion restriction is invertible
 exactly when the pulled original unit is invertible.
-Source: Bhatt--Scholze Lemma 6.5.8; Stacks 0941
-(blueprint: lem-fix-qcqs-completion-unit-restriction).
+Source: Bhatt--Scholze Lemma 6.5.8; Stacks 0941.
 Proof: use the normalized models for the composite, and the proved unit equation.
 Postcomposition with the component of the completion comparison, which is an
 isomorphism, preserves and reflects invertibility. -/

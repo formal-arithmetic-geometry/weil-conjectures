@@ -26,8 +26,7 @@ namespace WeilConjectures.IntegralHom
 Source: Stacks Tags 0A8X and 03EO; blueprint integral-Hom reduction, paragraph 2.
 Proof: unfold evaluation, its projection, the coefficient Hom component and
 section application. Both use the same chosen Hom-complex product projection
-at total degree i+j and evaluate the resulting section at the identity slice.
-(blueprint: new-sf-integral-hom-evaluation-coefficient) -/
+at total degree i+j and evaluate the resulting section at the identity slice. -/
 theorem evaluate_eq_coefficient (Y : AlgebraicGeometry.Scheme.{t})
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
     (P I : CochainComplex (Modules.{t, u} Y R) ℤ) (j i : ℤ)

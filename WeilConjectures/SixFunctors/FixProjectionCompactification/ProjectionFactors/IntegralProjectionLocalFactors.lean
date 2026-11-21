@@ -8,9 +8,6 @@ module
 public import WeilConjectures.SixFunctors.FixProjectionCompactification.ProjectionFactors.IntegralProjectionFactorData
 
 /-! # The open arrow and support identification before coefficient change
-
-Source: def-exchange-projection and prop-sf-pf-coherence, the open factor.
-(blueprint: def-sf-integral-projection-local-factors).
 -/
 
 @[expose] public noncomputable section
@@ -26,7 +23,7 @@ variable {D : FiniteFieldDatum.{u}} {B : SixFunctorSpace D → Type v}
 
 /-- The integral open arrow, with its input equality transport made explicit.
 The construction works on any supplied coefficient category.
-Source: def-exchange-projection (blueprint: def-sf-integral-projection-local-factors). -/
+ -/
 def openMap (K : B Q.X) (L : B Q.Y) :
     ((A.stage.tensorBar.obj (A.stage.openExtension.obj K)).obj
       (A.stage.properPull.obj L)) ⟶
@@ -37,7 +34,7 @@ def openMap (K : B Q.X) (L : B Q.Y) :
       rw [A.tensorX, A.pull]))
 
 /-- The support identification, after the open factor, on a single input.
-Source: def-exchange-projection (blueprint: def-sf-integral-projection-local-factors). -/
+ -/
 def supportMap (K : B Q.X) :
     A.stage.properPush.obj (A.stage.openExtension.obj K) ⟶
       (S.support Q.f Q.compactification).obj K :=
@@ -45,7 +42,7 @@ def supportMap (K : B Q.X) :
 
 /-- Factor the datum's second projection factor by moving the input equality
 transport through the natural support identification.
-Source: naturality (blueprint: def-sf-integral-projection-local-factors). -/
+Source: naturality. -/
 theorem second_via_openMap (K : B Q.X) (L : B Q.Y) :
     second A K L = A.stage.properPush.map (openMap A K L) ≫
       supportMap A (((T Q.X).obj K).obj ((S.pull Q.f).obj L)) := by

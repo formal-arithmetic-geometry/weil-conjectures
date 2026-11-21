@@ -32,7 +32,6 @@ of zero cycles (an epimorphism) followed by the isomorphism of the universal sec
 comparison with the fixed K-injective replacement of `N`, as in the proof of
 `coefficientHomZeroEquiv_exists`; hence `y` is the class of a zero cycle `z`, and the
 image of that class is `x`. No hypothesis on `P` is needed.
-(blueprint: lem-coef-derived-sections-normalization-scalar-hom-zero-cycle-surjective)
 -/
 theorem coefficientDerivedSectionsScalarHomZero_cycle_surjective
     (P : CochainComplex (scalarReductionSource l E W) ℤ)

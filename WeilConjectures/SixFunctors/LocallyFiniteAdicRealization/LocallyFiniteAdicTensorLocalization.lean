@@ -36,14 +36,14 @@ open AlgebraicallyClosedCoefficients (Index Coefficient)
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
 /-- The integral localization with its codomain explicitly the named stage category.
-Source: Stacks Tag 05R6 (blueprint: lem-sf-native-integral-tensor-localization). -/
+Source: Stacks Tag 05R6. -/
 def stageLocalization (E : Index l (PadicAlgCl l)) :
     sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X ⥤
       GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X E :=
   sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X
 
 /-- The named stage localization is the specified raw localization.
-Source: Stacks Tag 05R6 (blueprint: lem-sf-native-integral-tensor-localization). -/
+Source: Stacks Tag 05R6. -/
 theorem stageLocalization_eq (E : Index l (PadicAlgCl l)) :
     stageLocalization l X E =
       sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X := by
@@ -67,7 +67,7 @@ variable [IsCommMonObj (abRing l X)] [(sections l X).Additive]
 variable (C : CoefficientSystem l X)
 
 /-- The morphisms killed by integral uniformizer torsion.
-Source: Stacks Tag 05R6 (blueprint: lem-sf-native-integral-tensor-localization). -/
+Source: Stacks Tag 05R6. -/
 abbrev integralTensorW (E : Index l (PadicAlgCl l)) :=
   Rationalization.W
     (Submonoid.powers (Padic.coefficientExtensionUniformizer l
@@ -75,7 +75,7 @@ abbrev integralTensorW (E : Index l (PadicAlgCl l)) :=
     (sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X)
 
 /-- The published tensor-Hom rationalization is the Verdier localization at torsion.
-Source: Stacks Tag 05R6 (blueprint: lem-sf-native-integral-tensor-localization). -/
+Source: Stacks Tag 05R6. -/
 @[instance] theorem integralTensor_localization (E : Index l (PadicAlgCl l)) :
     (stageLocalization l X E).IsLocalization (integralTensorW l X E) := by
   exact ScalarLocalization.semilinear_localization_isLocalization
@@ -84,7 +84,7 @@ Source: Stacks Tag 05R6 (blueprint: lem-sf-native-integral-tensor-localization).
     (Padic.coefficientExtensionUniformizer l (Coefficient.{u} l (PadicAlgCl l) E))
 
 /-- Inverting the uniformizer makes every torsion cone vanish.
-Source: Stacks Tag 05R6 (blueprint: lem-sf-native-integral-tensor-localization). -/
+Source: Stacks Tag 05R6. -/
 theorem integralTensor_inverts (E : Index l (PadicAlgCl l)) :
     (integralTensorW l X E).IsInvertedBy (integralTensor l X C E) := by
   let F := integralTensor l X C E
@@ -114,7 +114,7 @@ theorem integralTensor_inverts (E : Index l (PadicAlgCl l)) :
     (F.map_distinguished _ hT)).1 hZ
 
 /-- The rational native tensor functor, defined by the localization universal property.
-Source: BS 6.8.14(2) (blueprint: lem-sf-native-integral-tensor-localization). -/
+Source: BS 6.8.14(2). -/
 def rationalTensor (E : Index l (PadicAlgCl l)) :
     GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X E ⥤
       DerivedCategory (pbcModules X (ringSheaf l X)) :=
@@ -122,7 +122,7 @@ def rationalTensor (E : Index l (PadicAlgCl l)) :
     (stageLocalization l X E)
 
 /-- The universal integral comparison for rational native tensor extension.
-Source: Stacks Tag 05R6 (blueprint: lem-sf-native-integral-tensor-localization). -/
+Source: Stacks Tag 05R6. -/
 def rationalTensorIntegral (E : Index l (PadicAlgCl l)) :
     stageLocalization l X E ⋙
       rationalTensor l X C E ≅ integralTensor l X C E :=

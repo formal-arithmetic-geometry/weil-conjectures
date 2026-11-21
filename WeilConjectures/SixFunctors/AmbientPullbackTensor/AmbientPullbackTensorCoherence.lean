@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientTensorCompositio
 /-! # Components of ambient pullback coherence
 
 Source: Stacks 03CB, 03D3, 03EL, 07A4 and 04VG.
-(blueprint: lem-sf-ambient-pullback-tensor-coherence).
 -/
 
 @[expose] public noncomputable section
@@ -131,8 +130,7 @@ private theorem compositor_generator {X Y Z : Scheme.{t}}
       rfl
 
 /-- Coherence of pullback composition with ordinary, chain and derived tensors.
-Source: Stacks 03D3, 03CB, 03EL, 07A4, 0G7E and 04VG
-(blueprint: lem-sf-ambient-pullback-tensor-coherence).
+Source: Stacks 03D3, 03CB, 03EL, 07A4, 0G7E and 04VG.
 
 Proof:
 The three selected tensor bundles satisfy Normalized by tensorData_existsUnique.

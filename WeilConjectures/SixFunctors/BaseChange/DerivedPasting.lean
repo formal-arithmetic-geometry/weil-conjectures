@@ -18,13 +18,13 @@ For two squares pasted vertically
 
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
+  | |
+  f' f
+  ↓ ↓
   Y' --g---> Y
-  |          |
-  e'         e
-  ↓          ↓
+  | |
+  e' e
+  ↓ ↓
   Z' --k---> Z
 ```
 
@@ -45,8 +45,6 @@ satisfy `AlgebraicGeometry.Etale.IsBaseChangeIso`, so does `f ≫ e`
 (`AlgebraicGeometry.Etale.IsBaseChangeIso.comp`), since every cartesian square on `f ≫ e`
 is the vertical pasting of cartesian squares on `e` and on `f`
 (`CategoryTheory.IsPullback.paste_vert`).
-(blueprint: `lemma-identity-pasting`, vertical pasting;
-`lemma:weil-pbc-composition`, formal part)
 
 For the identity square on `f` the derived base change map is the identity, modulo the identity
 isomorphisms of the derived pullbacks (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id`);

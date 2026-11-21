@@ -16,7 +16,6 @@ import all Mathlib.Algebra.Homology.Localization
 
 Source: Step 5 of the coefficient quotient cocycle proof, and the sectionwise and
 K-injective normalizations of the open/proper restriction comparisons.
-(blueprint: lem-coef-compact-support-restriction-identity).
 -/
 
 @[expose] public noncomputable section
@@ -158,7 +157,6 @@ is the square of the canonical identity restriction comparisons.
 
 Source: Step 5 of `lem-coef-compact-support-quotient-cocycle`, blueprint
 `lem-coef-integral-compact-support.proof.md`, finite-level comparison; Stacks Tags 03DI and 0D6E.
-(blueprint: lem-coef-compact-support-restriction-identity).
 
 Proof: restriction along the identity acts as the identity on the underlying sheaves.
 The ordinary comparison sfOpenCoefficientRestrictionId is the sectionwise identity

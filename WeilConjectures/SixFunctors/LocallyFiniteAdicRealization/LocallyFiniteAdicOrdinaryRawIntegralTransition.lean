@@ -11,7 +11,6 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFi
 /-! # Integral normalization of the ordinary finite closure comparison
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-finite-ordinary-raw-integral-transition)
 -/
 
 @[expose] public noncomputable section
@@ -47,8 +46,7 @@ variable [IsNoetherian X]
   [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
 
 /-- Integral realization before flattening either coefficient extension.
-Source: BS 6.8.14(2), the raw integral formula and continuous integral identity.
-(blueprint: lem-sf-finite-ordinary-raw-integral-transition). -/
+Source: BS 6.8.14(2), the raw integral formula and continuous integral identity. -/
 @[irreducible] def finiteOrdinaryRawIntegralModel (A : FiniteCondensedData l X)
     (E : Index l (PadicAlgCl l)) :
     sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X ⋙
@@ -68,8 +66,7 @@ Source: BS 6.8.14(2), the raw integral formula and continuous integral identity.
   exact b ≪≫ d ≪≫ g
 
 /-- The explicit ordinary arrow retaining the raw completed integral comparison.
-Source: BS 6.8.14(2), the completed-to-rational coefficient square.
-(blueprint: lem-sf-finite-ordinary-raw-integral-transition). -/
+Source: BS 6.8.14(2), the completed-to-rational coefficient square. -/
 @[irreducible] def finiteOrdinaryRawIntegralTransition (A : FiniteCondensedData l X)
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :=
@@ -93,7 +90,6 @@ attribute [local semireducible] sfRationalConstructibleLocalization
 
 /-- Raw scalar change commutes with continuous integral realization.
 Source: BS 6.8.14(2), the raw scalar lift and continuous integral normalization.
-(blueprint: lem-sf-finite-ordinary-raw-integral-transition).
 
 Proof in words: expand the inverse closure comparison as the inverse ordinary
 coefficient compositor followed by extension of scalarComparison inverse.

@@ -33,7 +33,6 @@ public import WeilConjectures.SixFunctors.OpenFactorCoherence.OpenFactorTensorMo
 
 Source: blueprint proposition-composition-base-change-rf-shriek--1, open-factor paragraph;
 Bhatt--Scholze 3.4.10 and 6.5.8; Stacks 099N, 09BN, 0GL1.
-(blueprint: def-sf-open-factor-fixed-data).
 
 These are the existing open-factor definitions, extracted unchanged so that the
 three realization lemmas can use their types before the final assembly theorem.
@@ -60,8 +59,7 @@ set_option genSizeOf false in
 set_option genInjectivity false in
 /-- Canonical completion/open commutation and all of clauses (1) and (2).
 The strict tower comparison is fixed by the actual quotient augmentation.
-Source: Stacks 099N, 09BN, 0E8I
-(blueprint: lem-sf-pf-open-factor-coherence). -/
+Source: Stacks 099N, 09BN, 0E8I. -/
 structure Open {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] where
   tower : jCx l E j ⋙ IntegralOnSlice.tower.{u, u} l E X none ≅
     IntegralOnSlice.tower.{u, u} l E U none ⋙
@@ -115,8 +113,7 @@ structure Open {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] where
 
 /-- Completion of the actual ambient open tensor map, transported to the recorded
 completed tensor. This is the supplied gamma of def-exchange-projection.
-Source: Stacks 0GL1 and Bhatt--Scholze 3.4.10
-(blueprint: lem-sf-pf-open-factor-coherence). -/
+Source: Stacks 0GL1 and Bhatt--Scholze 3.4.10. -/
 def gamma {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersion j]
     (o : Open l E j) (tU : Tensor l E U) (tX : Tensor l E X)
     (K : D l E U) (P : D l E X) :
@@ -129,7 +126,7 @@ def gamma {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersion j]
     (J l E j).map (tU.comparison.hom.app (K, (star l E j).obj P))
 
 /-- The ordinary pullback square, with the published composition normalization.
-Source: Stacks 0D6D (blueprint: lem-sf-pf-open-factor-coherence). -/
+Source: Stacks 0D6D. -/
 def theta {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {h : X' ⟶ X} (sq : OpenImmersionSquare a j' j h) :
     star l E h ⋙ star l E j' ≅ star l E j ⋙ star l E a :=
@@ -140,7 +137,7 @@ def theta {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
 set_option genSizeOf false in
 set_option genInjectivity false in
 /-- The ambient base-change map is fixed by the inverse open-unit transpose.
-Source: Stacks 09BN (blueprint: lem-sf-pf-open-factor-coherence). -/
+Source: Stacks 09BN. -/
 structure OrdinaryExchange {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {h : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j']
     (sq : OpenImmersionSquare a j' j h) where
@@ -152,8 +149,7 @@ structure OrdinaryExchange {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ 
 
 /-- The strict-reduction completed exchange, expressed through the quotient completion
 comparisons. Pull.model retains the strict finite maps; Open.unit_commutes fixes the
-extension/limit comparison. Source: Stacks 099N and 09BN
-(blueprint: lem-sf-pf-open-factor-coherence). -/
+extension/limit comparison. Source: Stacks 099N and 09BN. -/
 def beta {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {h : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j']
     {sq : OpenImmersionSquare a j' j h} (b : OrdinaryExchange l E sq)

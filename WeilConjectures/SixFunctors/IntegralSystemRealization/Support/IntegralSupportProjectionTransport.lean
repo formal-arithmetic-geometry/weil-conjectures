@@ -130,8 +130,7 @@ private theorem support_finite_factorization
 /-- The actual total-limit projection commutes with the normalized proper/open
 comparison, before identifying its integral image with the constructible action.
 Source: Stacks 07A7, 0941 and 0D6E; fix-prop-coherence.proof.md, preservation of
-adjunction units and counits; primitive support realization Step 2
-(blueprint: lem-sf-integral-support-projection-transport).
+adjunction units and counits; primitive support realization Step 2.
 
 Proof: start with the ordinary sectionwise direct-image/limit comparison in
 model.ordinary. Its projections are exactly the direct-image evaluation maps.

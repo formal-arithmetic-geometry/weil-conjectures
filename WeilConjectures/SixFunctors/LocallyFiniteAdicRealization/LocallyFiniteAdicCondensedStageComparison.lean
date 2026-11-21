@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationNatur
 /-! # Finite tensor comparison with condensed coefficients
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -71,8 +70,7 @@ private theorem representative_of_stage_normalization
 /-- Finite coefficient realization agrees with the normalized native tensor formula.
 
 Source: Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.11(3), Proposition 6.8.14(2),
-and Remark 6.8.15; the finite-stage identification in the parent Hom-descent proof
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison).
+and Remark 6.8.15; the finite-stage identification in the parent Hom-descent proof.
 
 Proof in words: first apply the integral identity equivalence between strict-tower and
 completed integral presentations, and rationalize it. Compose with the continuous rational

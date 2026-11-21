@@ -16,7 +16,6 @@ import Mathlib.Algebra.CharP.CharAndCard
 
 Source: Stacks Project, sites-modules.tex Tag 0E8I; sites-cohomology.tex Tag 0GL1;
 Bhatt--Scholze, Lemma 6.5.8(2),(3), p.50.
-(blueprint: lem-sf-open-tensor-quotient-augmentation).
 
 The index n denotes the positive exponent n+1. The square is imposed on strict
 augmented towers of complexes, before applying localization. All total tensors
@@ -90,17 +89,16 @@ condition is imposed; all complexes and total tensors are unbounded.
 
 Source: Stacks Project, sites-modules.tex Tag 0E8I; sites-cohomology.tex Tag 0GL1;
 Bhatt--Scholze, Lemma 6.5.8(2),(3), p.50.
-(blueprint: lem-sf-open-tensor-quotient-augmentation).
 
 Proof:
-1. Choose flat-term K-flat resolutions (lem-pc-kflat-resolution). Apply
+1. Choose flat-term K-flat resolutions. Apply
 lem-sf-open-semilinear-tensor-model and lem-sf-open-tensor-normalization: termwise
 open extension computes j_! and its total tensor map is the inverse-open-unit
 transpose. Restriction and coefficient pullback preserve these representatives
 by lem-weil-pbc-ringed-topoi-derived-tensor-pullback.
 2. The simultaneous scalar map sends [x] tensor a to [x tensor a restricted to U].
 It respects every quotient and scalar unit. Its inverse has the prescribed
-open-unit transpose normalization (def-sf-open-reduction-coefficient-mate).
+open-unit transpose normalization.
 lem-sf-integral-open-reduction-comparison identifies its localization with r_j(K)
 and proves completeness of j_!K.
 3. Scalar restriction retains the same additive sheaves and summand maps before

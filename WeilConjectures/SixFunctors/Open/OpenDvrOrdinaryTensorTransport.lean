@@ -35,7 +35,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 Source: Stacks Tag 03EK; the ordinary tensor transport step of
 `lem-sf-open-dvr-strict-reduction-comparison`.
-(blueprint: lem-sf-open-dvr-ordinary-tensor-transport).
 -/
 
 @[expose] public noncomputable section
@@ -450,8 +449,7 @@ private theorem ordinaryFiniteUnit (T : Scheme.{u}) (n : ℕ)
 
 /-- The ordinary, representative-level tensor comparison under the coefficient isomorphism.
 Source: Stacks Tag 03EK, strict tensor transport in the proof of
-`lem-sf-open-dvr-strict-reduction-comparison`
-(blueprint: lem-sf-open-dvr-ordinary-tensor-transport).
+`lem-sf-open-dvr-strict-reduction-comparison`.
 
 Proof: use C.completed_projection to identify each completed coefficient projection
 with its scalar coefficient projection followed by C.finite. On sheafified tensor

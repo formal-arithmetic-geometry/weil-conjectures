@@ -48,7 +48,6 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorComparisonComposition
 /-! # Components of ambient pullback coherence
 
 Source: Stacks 03CB, 03D3, 03EL, 07A4 and 04VG.
-(blueprint: lem-sf-ambient-normalized-tensor-composition).
 -/
 
 @[expose] public noncomputable section
@@ -188,8 +187,7 @@ private theorem ordinary_composition {X Y Z : Scheme.{t}}
   simp only [scalar, map_one, one_mul]
 
 /-- Ordinary tensor composition and its total and derived representative equations.
-Source: Stacks 03EL, 06YN, 07A4, 0G7E and 0G7D
-(blueprint: lem-sf-ambient-normalized-tensor-composition).
+Source: Stacks 03EL, 06YN, 07A4, 0G7E and 0G7D.
 Proof: transpose the ordinary equality under the composite module adjunction and
 test on sheafified pure tensors. The three normalization equations and hgen send
 both routes to the tensor of the two composite generators, with the product of

@@ -9,9 +9,6 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 
 /-! # Canonical common-stage inclusion tensor comparison
 
-Source: BS Remark 6.8.15; blueprint's raw common-stage tensor convention
-(blueprint: def-sf-common-stage-inclusion-tensor-comparison).
-
 ## Main definitions and statements
 
 - `stageTensor_existsUnique`: normalization by the existing common-stage comparison.
@@ -40,8 +37,7 @@ variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 /-- The inclusion tensorator is uniquely the inverse of the displayed common-stage
 comparison at E, followed by the normalized scalar unit on both inputs. HEq retains
 the literal pair-object transports instead of asking elaboration to expand them.
-Source: BS 6.8.15; common-stage tensor convention
-(blueprint: def-sf-common-stage-inclusion-tensor-comparison).
+Source: BS 6.8.15; common-stage tensor convention.
 Proof: the common-stage tensor has its recorded literal object formula. At E the
 compositum E E is contained in E. Apply isoToStage and commonStageTensorComparison,
 then the rational tensor of operationStageTransitionIso followed by the normalized
@@ -78,8 +74,7 @@ def stageTensorFormula (Ω : Type w) [Field Ω] [Algebra (Padic l) Ω]
 )
 
 /-- The displayed finite-stage normalization has a unique tensorator.
-Source: BS 6.8.15; common-stage tensor convention
-(blueprint: def-sf-common-stage-inclusion-tensor-comparison).
+Source: BS 6.8.15; common-stage tensor convention.
 Proof: use the composite in stageTensorFormula. Its endpoint equality is the literal
 object formula for commonStageDerivedTensor, and HEq to this fixed composite gives
 both existence and uniqueness, including the identity coefficient extension. -/
@@ -102,8 +97,7 @@ theorem stageTensor_existsUnique (Ω : Type w) [Field Ω] [Algebra (Padic l) Ω]
 
 /-- The actual common-stage inclusion tensorator. Its existence theorem fixes the
 entire isomorphism, so its choice introduces no unspecified comparison map.
-Source: BS 6.8.15; common-stage tensor convention
-(blueprint: def-sf-common-stage-inclusion-tensor-comparison). -/
+Source: BS 6.8.15; common-stage tensor convention. -/
 def stageTensor (Ω : Type w) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] [∀ x : X, Invertible (l : X.residueField x)]
     (E : AlgebraicallyClosedCoefficients.Index l Ω)

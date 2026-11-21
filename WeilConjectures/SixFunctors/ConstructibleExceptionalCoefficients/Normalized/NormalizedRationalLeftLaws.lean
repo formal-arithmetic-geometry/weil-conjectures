@@ -24,8 +24,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- Localization transports the normalized integral left coefficient laws.
 Source: exceptional inverse-image coefficient construction, rationalization paragraph;
-the rational-arrow localization argument, Steps 1--4
-(blueprint: lem-sf-normalized-rational-left-laws).
+the rational-arrow localization argument, Steps 1--4.
 
 Proof: identify the restricted completed scalar functors through their full inclusions.
 The normalization of their realizations identifies the supplied scalar associators and

@@ -22,8 +22,7 @@ set_option allowUnsafeReducibility true in
 attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
 
 /-- Assemble the prescribed pullbacks and transition comparisons with their coherence proof.
-Source: current blueprint common-stage pullback paragraph.
-(blueprint: def-sf-common-projection-pullback-stages). -/
+ -/
 def commonProjectionPullbackStages
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

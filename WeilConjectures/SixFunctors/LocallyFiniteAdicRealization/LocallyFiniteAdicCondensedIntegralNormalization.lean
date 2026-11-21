@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdi
 /-! # Integral tensor normalization for the finite condensed realization
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-locally-finite-adic-condensed-integral-normalization)
 -/
 
 @[expose] public noncomputable section
@@ -415,7 +414,6 @@ claim and no formula for a general common-stage morphism.
 
 Source: Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.11(3), Proposition 6.8.14(2)
 and Remark 6.8.15, the integral comparison in the finite realization argument.
-(blueprint: lem-sf-locally-finite-adic-condensed-integral-normalization).
 
 Proof in words: the finite coefficient encoding reconstructs the section ring of the
 condensed finite field. Its finiteIso sends each continuous function to the same function

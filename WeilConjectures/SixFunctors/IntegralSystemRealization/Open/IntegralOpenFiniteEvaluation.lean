@@ -66,8 +66,7 @@ private theorem assemble
     c.unit.naturality (rX.hom.app K)
 
 /-- Open scalar comparison in the published finite constant-ring coordinates.
-Source: Stacks 03DI and 0E8I; open mate of fix-prop-coherence
-(blueprint: lem-sf-integral-open-finite-evaluation). -/
+Source: Stacks 03DI and 0E8I; open mate of fix-prop-coherence. -/
 @[irreducible] def openFiniteReduction {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (n : ℕ) :
     ringedOpen l E j ⋙ scalarReductionDerivedExtension l E Y n ⟶
       scalarReductionDerivedExtension l E X n ⋙
@@ -90,8 +89,7 @@ Source: Stacks 03DI and 0E8I; open mate of fix-prop-coherence
 This assertion involves no proper image, total-limit projection or inverse
 reconstruction unit.
 Source: Stacks 03DI, 07A7 and 0E8I; fix-prop-coherence.proof.md, preservation
-of adjunction units and counits; Step 2 of integral support projection transport
-(blueprint: lem-sf-integral-open-finite-evaluation).
+of adjunction units and counits; Step 2 of integral support projection transport.
 
 Proof: evaluate the whole-system K-flat equation model.model for j. The ordinary
 comparison is the conjugate of ordinary.comparison; its sectionwise projection

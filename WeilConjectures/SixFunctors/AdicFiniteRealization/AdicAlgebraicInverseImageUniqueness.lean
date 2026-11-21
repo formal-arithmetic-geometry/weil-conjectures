@@ -41,7 +41,6 @@ import all WeilConjectures.CategoryTheory.Site.SiteAlgebraicCompositionUnitSuppl
 /-! # Uniqueness of algebraic lifts of inverse image
 
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 00YV.
-(blueprint: lem-sf-adic-algebraic-inverse-image-uniqueness).
 -/
 
 @[expose] public noncomputable section
@@ -56,8 +55,7 @@ namespace WeilConjectures.AdicFiniteRealization
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Two algebraic lifts of the same inverse image differ by the induced coefficient
 isomorphism and its restriction of scalars.
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 00YV
-(blueprint: lem-sf-adic-algebraic-inverse-image-uniqueness).
+Source: Stacks Project, Modules on Sites, Tags 03D2 and 00YV.
 Proof: compare the two underlying ring sheaves through their fixed identifications
 with inverse image of the source ring. Lift each pair of sections to inverse image of
 the product of the source underlying ring with itself. The addition and multiplication

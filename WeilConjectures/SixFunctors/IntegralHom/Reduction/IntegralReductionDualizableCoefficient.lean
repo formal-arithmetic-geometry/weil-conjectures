@@ -106,8 +106,7 @@ nonzero terms are units, hence dualizable, and the other terms are zero, hence
 dualizable. Bounded termwise duality descends through K-flat localization in the
 independent derived universe. The resolution comparison computes restricted
 reduction on all complexes. Compose it with the one-K-flat native tensor
-comparison and descend this natural isomorphism through localization.
-(blueprint: lem-sf-integral-reduction-dualizable-coefficient). -/
+comparison and descend this natural isomorphism through localization. -/
 theorem integralReduction_dualizable_coefficient (n : ℕ) :
     let R := completedIntegralCommRingSheaf l E Y D hl
     letI : MonoidalCategory (completedIntegralDerivedCategory l E Y D hl) :=

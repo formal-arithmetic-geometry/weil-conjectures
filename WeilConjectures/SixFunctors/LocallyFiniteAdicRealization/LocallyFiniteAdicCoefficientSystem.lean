@@ -41,8 +41,7 @@ attribute [local irreducible] sections CoefficientPresentation.integralMap
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
 /-- The coefficient part of the native realization, before any derived functor is built.
-Source: Bhatt--Scholze, Lemma 6.8.2
-(blueprint: lem-sf-locally-finite-adic-coefficient-system). -/
+Source: Bhatt--Scholze, Lemma 6.8.2. -/
 structure CoefficientSystem where
   [commutative : IsCommMonObj (abRing l X)]
   [sectionsAdditive : (sections l X).Additive]
@@ -58,8 +57,7 @@ structure CoefficientSystem where
 
 /-- The normalized coefficient presentations and exact section transport exist.
 
-Source: Bhatt--Scholze, Lemma 6.8.2; native realization proof steps 1--2
-(blueprint: lem-sf-locally-finite-adic-coefficient-system).
+Source: Bhatt--Scholze, Lemma 6.8.2; native realization proof steps 1--2.
 
 Proof in words: multiplication of native functions is pointwise and commutative.
 An internal module has the same abelian sheaf with the action restricted to constants;

@@ -172,7 +172,6 @@ private theorem completedMap_eq :
 
 /-- Open restriction preserves flat-term K-flat complexes in the prescribed transports.
 Source: Stacks, Cohomology on Sites, Tag 0E8K, and Modules on Sites, Tag 03DJ.
-(blueprint: lem-sf-open-restriction-good-complex).
 
 Proof: first restrict to the ringed slice. Restriction is exact and commutes with
 tensor and direct sums. For an acyclic test complex on the slice, its exact extension

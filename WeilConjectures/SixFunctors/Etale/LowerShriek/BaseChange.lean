@@ -37,10 +37,10 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {W' W X Y : Scheme.{u}} {v : W ⟶ X}
 /-- **Base change for extensions by zero along étale morphisms**: for a cartesian square
 ```
 W' --v'--> Y
-|          |
-g'         g
-v          v
-W  --v---> X
+| |
+g' g
+v v
+W --v---> X
 ```
 with `v` étale, `g^* v_! ≅ v'_! g'^*` on étale sheaves of `Λ`-modules. Both are left adjoint to
 the two sides of the degree-zero base change `v^* g_* ≅ g'_* v'^*`, an isomorphism as `v` is

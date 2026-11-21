@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.IntegralC
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Support.IntegralSupportCounitProjection
 
 /-! # Intermediate assembly data for integral realization
-Source: blueprint fix-prop-coherence.
 -/
 
 @[expose] public noncomputable section
@@ -123,8 +122,7 @@ private theorem expression_completion_isIso (D : FiniteFieldDatum.{u})
 /-- Coefficient squares of the recursively fixed comparisons and their finite support
 projections. All equalities are asserted in derived strict systems before evaluation.
 Source: blueprint fix-prop-coherence, generator/context and compactification steps;
-Stacks 0941, 07A7 and 0F7B--0F7F
-(blueprint: lem-sf-integral-expression-coefficient-squares).
+Stacks 0941, 07A7 and 0F7B--0F7F.
 
 Proof: the actual primitive coefficient transpose formulas identify each recursively
 induced coefficient map with R of inverse comparison followed by the actual counit.

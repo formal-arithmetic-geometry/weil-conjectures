@@ -41,8 +41,7 @@ private theorem domainMonoidal_of_core
     β, β', (fun _ _ ↦ HEq.rfl), (fun _ _ ↦ HEq.rfl), hb⟩
 
 /-- The normalized strong monoidal scalar structure in the shared finite-Hom predicate.
-Source: Stacks 07A4 and 0FPT
-(blueprint: lem-coef-finite-hom-scalar-monoidal).
+Source: Stacks 07A4 and 0FPT.
 
 Proof: take the already proved canonical scalar CoreMonoidal structure. Replace
 its unit and tensor equalities by heterogeneous equalities, and choose the actual

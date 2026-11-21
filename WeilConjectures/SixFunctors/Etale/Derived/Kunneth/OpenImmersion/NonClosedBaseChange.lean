@@ -17,12 +17,10 @@ blueprint `corollary-open-direct-image-over-field--2`:
 
 * `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isPullback_strictLocalization`: the
   base change `W' = W ×_S S_(s) ⟶ W` of the strict localization `S_(s) ⟶ S` at a geometric
-  point is a limit of étale `W`-schemes, so smooth base change in the limit form (blueprint
-  `corollary-open-direct-image-over-field--2`) holds along it.
+  point is a limit of étale `W`-schemes, so smooth base change in the limit form holds along it.
 * `AlgebraicGeometry.Etale.isIso_sheafFiber_map_of_isIso_upperStar`: if the pullback of a map
   of sheaves along `u : W' ⟶ W` is an isomorphism and the geometric point of `W` at `z` lifts
-  to `W'`, then the map is an isomorphism on the geometric stalk at `z` (blueprint
-  `lem-kun-stalk-as-pullback`).
+  to `W'`, then the map is an isomorphism on the geometric stalk at `z`.
 -/
 
 @[expose] public section
@@ -39,8 +37,7 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Smooth base change along the base change of a strict localization (blueprint
-`corollary-open-direct-image-over-field--2`): let `s` be a geometric point of a quasi-separated
+/-- Smooth base change along the base change of a strict localization: let `s` be a geometric point of a quasi-separated
 scheme `S`, `f : W ⟶ S` a morphism and `W' = W ×_S S_(s)`. The projection `W' ⟶ W` is the limit of
 the étale `W`-schemes `W ×_S V` for the affine pointed étale neighbourhoods `(V, v)` of `s`, so the
 base change maps along `W' ⟶ W` of a quasi-compact quasi-separated `g : T ⟶ W` are isomorphisms for
@@ -99,7 +96,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isPullback_strictLocalization {S : 
       (isPullback_map_pullback_const f w a).flip (isAffineHom_of_isAffine _)
   exact Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth Λ g D' c' hc' (h := h) sq q F
 
-/-- Stalks are computed by pullback (blueprint `lem-kun-stalk-as-pullback`): if the pullback
+/-- Stalks are computed by pullback: if the pullback
 along `u : W' ⟶ W` of a morphism `φ` of sheaves on `W` is an isomorphism and the geometric point
 of `W` at `z` factors through `u`, then `φ` is an isomorphism on the geometric stalk at `z`. -/
 theorem Etale.isIso_sheafFiber_map_of_isIso_upperStar {W W' : Scheme.{u}} (uX : W' ⟶ W)

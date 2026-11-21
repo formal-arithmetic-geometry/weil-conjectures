@@ -111,7 +111,6 @@ private theorem functor_obj_eq {C D : Type*} [Category C] [Category D]
 /-- The normalized restricted identity agrees with the completed tensor unit.
 Source: exceptional coefficient construction, integral identity clause; Stacks Project,
 Tags 03DA, 06YY and 07A6.
-(blueprint: lem-sf-normalized-integral-scalar-unit-underlying-bridge)
 
 Proof: use the normalization equation for `e`. The scalar-object equality supplied by
 `hS` identifies its source with the completed scalar extension. The inverse realization

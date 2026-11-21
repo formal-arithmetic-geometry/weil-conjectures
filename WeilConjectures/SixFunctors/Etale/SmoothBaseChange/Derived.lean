@@ -17,9 +17,9 @@ Fix a commutative ring `Λ` and a Cartesian square of schemes
 
 ```
 Y --e--> T
-|        |
-h        g
-v        v
+| |
+h g
+v v
 X --p--> S
 ```
 
@@ -37,20 +37,17 @@ whose cohomology sheaves are torsion of orders invertible on `S`.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs`: the classical form of
-  the theorem, `g⁻¹ R^q f_* F ≅ R^q f'_* v⁻¹ F` for `g` smooth and `f` qcqs (blueprint
-  `sk-rem-rest`).
-- `AlgebraicGeometry.Etale.isIso_baseChange_app_of_isGE_of_isLE`: the finite-range comparison
-  (blueprint `theorem-smooth-base-change-classical-torsion-2`).
+  the theorem, `g⁻¹ R^q f_* F ≅ R^q f'_* v⁻¹ F` for `g` smooth and `f` qcqs.
+- `AlgebraicGeometry.Etale.isIso_baseChange_app_of_isGE_of_isLE`: the finite-range comparison.
 - `AlgebraicGeometry.Etale.isIso_homologyFunctor_map_rightDerivedFunctorPlus_map_truncLEι_app`
-  and its companions: the bounded-below truncation criterion (blueprint
-  `theorem-pbc-injective-acyclicity`).
+  and its companions: the bounded-below truncation criterion.
 - `AlgebraicGeometry.Etale.isIso_baseChange_app_of_bounded_of_smooth`: bounded complexes with
-  allowable torsion (blueprint `theorem-smooth-base-change-classical-torsion-2`).
+  allowable torsion.
 - `AlgebraicGeometry.Etale.isIso_baseChange_app_of_smooth`: bounded below complexes with allowable
-  torsion (blueprint `theorem-smooth-base-change-classical-torsion-2--1`).
+  torsion.
 - `AlgebraicGeometry.Etale.isIso_baseChange_app_of_boundedConstructible_of_smooth`: bounded
   constructible complexes of sheaves of modules over a ring killed by an integer invertible on
-  `S` (blueprint `theorem-smooth-base-change-all-admissible--1`).
+  `S`.
 
 ## Implementation notes
 
@@ -117,15 +114,15 @@ instance (S T : Scheme.{u}) :
     have : IsTorsionSheafOfInvertibleOrder S _ := h
     exact IsTorsionSheafOfInvertibleOrder.of_iso Λ φ
 
-/-- Blueprint `sk-rem-rest`: the *classical form* of the smooth base change theorem, in which
+/-- The *classical form* of the smooth base change theorem, in which
 the roles of the two legs of the square are exchanged with respect to `prose-08-06`. For a
 Cartesian square
 
 ```
 X' --v--> X
-|         |
-f'        f
-v         v
+| |
+f' f
+v v
 S' --g--> S
 ```
 
@@ -146,7 +143,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs {X S S' X' : Scheme.
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
   Etale.isIso_baseChangeHomologyMap_of_smooth Λ g f v f' sq q F
 
-/-- Blueprint `sk-rem-rest`: the isomorphism `g⁻¹ R^q f_* F ≅ R^q f'_* v⁻¹ F` of the classical
+/-- The isomorphism `g⁻¹ R^q f_* F ≅ R^q f'_* v⁻¹ F` of the classical
 form of the smooth base change theorem
 (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs`). -/
 noncomputable def Etale.smoothBaseChangeHomologyIso {X S S' X' : Scheme.{u}}
@@ -208,7 +205,7 @@ lemma Etale.isZero_homologyFunctor_baseChangeTarget_obj (e : Y ⟶ T) (h : Y ⟶
       (DerivedCategory.Plus.isZero_homology_of_isGE K n i hi)
   exact Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE _ _ n hq
 
-/-- Blueprint `theorem-pbc-injective-acyclicity`: for `K ∈ D⁺(T_ét)`, only the
+/-- For `K ∈ D⁺(T_ét)`, only the
 cohomology sheaves of `K` in degrees `≤ n` contribute to `Hⁿ(Rg_* K)`: the map
 `Hⁿ(Rg_* τ_{≤ n} K) ⟶ Hⁿ(Rg_* K)` is an isomorphism. -/
 lemma Etale.isIso_homologyFunctor_map_rightDerivedFunctorPlus_map_truncLEι_app (g : T ⟶ S)
@@ -239,7 +236,7 @@ lemma Etale.isIso_homologyFunctor_map_baseChangeTarget_map_truncLEι_app (e : Y 
   DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app _
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeTarget_obj Λ e h K n q hq) K n
 
-/-- Blueprint `theorem-smooth-base-change-classical-torsion-2`: let `K ∈ D⁺(T_ét)` have cohomology
+/-- Let `K ∈ D⁺(T_ét)` have cohomology
 sheaves concentrated in `[a, b]`. If the comparison of the two hypercohomology spectral sequences is
 an isomorphism on every `E₂`-term, i.e. the base-change map
 `p⁻¹ R^i g_* Hʲ(K) ⟶ R^i h_* e⁻¹ Hʲ(K)` is an isomorphism for all `i` and `j`, then the derived
@@ -295,7 +292,7 @@ noncomputable def Etale.DerivedCategory.Plus.boundedTorsionHomologyOfPrimes (X :
   t.bounded ⊓ Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ X P
 
 variable (p) in
-/-- Blueprint `theorem-smooth-base-change-classical-torsion-2`: for a Cartesian square with `p`
+/-- For a Cartesian square with `p`
 smooth and `g` quasi-compact and quasi-separated, and `P` the set of primes invertible on `S`, the
 derived base-change map `BC(K) : p^*(Rg_* K) ⟶ Rh_*(e^* K)` is an isomorphism for every
 `K ∈ D^b_P-tor(T_ét)`. Both sides are then bounded below; the comparison is made in

@@ -59,8 +59,7 @@ Source: Bhatt--Scholze, Remark 6.8.15.
 Proof: evaluate each boundary isomorphism on the inclusion of K. These are exactly
 arrows of the generic factorization theorem. Unfold only the rationalization and
 full-subcategory inclusions to identify their types, then apply that theorem to
-the supplied integral normalization and the two boundary component formulas.
-(blueprint: lem-sf-native-integral-boundary-iso-factorization). -/
+the supplied integral normalization and the two boundary component formulas. -/
 theorem integralComponent_factorization_of_isos [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c) (E : Index l (PadicAlgCl l))

@@ -59,8 +59,8 @@ noncomputable abbrev rightDerivedLowerStarCompHom :
 /-- **The projection map of a composite**: for `g₁₂ = g₁ ≫ g₂`, the square
 ```
 Rg₂_*Rg₁_*M ⊗ᴸ L ──π₂, Rg₂_* π₁──▶ Rg₂_*Rg₁_*(M ⊗ᴸ Lg₁^*Lg₂^*L)
-        │                                       │
-        ▼                                       ▼
+        │ │
+        ▼ ▼
  Rg₁₂_*M ⊗ᴸ L ──π₁₂──▶ Rg₁₂_*(M ⊗ᴸ Lg₁₂^*L) ──▶ Rg₁₂_*(M ⊗ᴸ Lg₁^*Lg₂^*L)
 ```
 commutes, with vertical arrows the composition map `rightDerivedLowerStarCompHom`. -/

@@ -15,9 +15,6 @@ import all WeilConjectures.CategoryTheory.RingedKFlatModel.RingedKFlatNativeMode
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 /-! # Effectivity of the specified open reduction and reconstruction
-
-Source: current blueprint fix-prop-coherence, primitive comparisons
-(blueprint: lem-sf-open-reconstruction-effectivity).
 -/
 
 @[expose] public noncomputable section
@@ -120,8 +117,7 @@ private theorem fixedOpenReduction_isIso (system : IntegralSystemRealization.Ope
 /-- Quasi-compact open extension has invertible canonical reduction mate and
 reconstruction unit on complete constructible inputs and on the coefficient unit.
 Source: current blueprint, fix-prop-coherence.proof.md, open-factor sentence;
-Stacks Tags 03DI, 0GL1 and 0941
-(blueprint: lem-sf-open-reconstruction-effectivity).
+Stacks Tags 03DI, 0GL1 and 0941.
 
 Proof: a finite-Tor constructible input is derived complete; the coefficient
 unit is complete because its surjective quotient tower has completed coefficient

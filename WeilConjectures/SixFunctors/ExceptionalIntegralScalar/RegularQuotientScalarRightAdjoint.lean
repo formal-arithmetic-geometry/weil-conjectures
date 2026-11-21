@@ -18,8 +18,7 @@ Stacks Tags 0A70 and 0A71 (perfect coefficient duality and coinduction), 06YY an
 change of coefficients and its normalized adjunction). The precise ring-level regular-quotient
 duality formula is Stacks Lemma 47.13.10 (0BZH), using perfect-algebra evaluation in Lemma 47.13.9
 (0BZE). Its realization on the specified sheaf categories is part of this argument, not supplied
-by the ring statement alone.
-(blueprint: lem-sf-regular-quotient-scalar-right-adjoint). -/
+by the ring statement alone. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -149,8 +148,7 @@ one. Hence shifted restriction lands in the integral finite-Tor category. Restri
 the ambient adjunction along the two fully faithful inclusions. Finally transport
 its right functor through S.realization; this proves the assertion for the specified
 S, independently of its presentation. The exponent n+1 is positive even for n=0;
-the same resolution and equations apply to zero objects and empty schemes.
-(blueprint: lem-sf-regular-quotient-scalar-right-adjoint). -/
+the same resolution and equations apply to zero objects and empty schemes. -/
 theorem regularQuotientScalarRightAdjoint
     (l : ℕ) [Fact l.Prime]
     (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.AdicSmoothDualizing.EtalePowerRecursionNormal
 
 The existing finite-power data of the smooth-dualizing construction, extracted
 without changing any declaration's name, signature or body.
-Source: the ordered tensor-power construction in the smooth-dualizing corollary
-(blueprint: def-sf-etale-power-presentation).
+Source: the ordered tensor-power construction in the smooth-dualizing corollary.
 -/
 
 @[expose] public noncomputable section
@@ -65,8 +64,7 @@ private theorem etalePowerPresentation_eq (P : PurityFiniteSetting.{u})
 set_option linter.unusedVariables false in
 /-- The canonical finite tensor presentation, with its full normalization stored
 in its type, is uniquely determined.
-Source: the corollary's ordered Tate powers
-(blueprint: corollary-dualizing-complex-smooth-scheme--1).
+Source: the corollary's ordered Tate powers.
 Proof: construct the comparison by induction from the zero-shift unitor using
 exactly the four normalized factors. HEq fixes each factor, so induction proves
 uniqueness of the comparison. The normalization proof is unique by proof irrelevance. -/
@@ -77,8 +75,7 @@ theorem existsUnique_etalePowerPresentation (P : PurityFiniteSetting.{u}) (T : S
   exact ⟨e, trivial, fun other _ ↦ etalePowerPresentation_eq P T hT other e⟩
 
 /-- The canonical ordered-tensor family selected by its uniquely determining recursion.
-Source: the corollary's finite Tate presentation
-(blueprint: corollary-dualizing-complex-smooth-scheme--1). -/
+Source: the corollary's finite Tate presentation. -/
 def etalePowerComparison (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
     (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))) :
     (d : ℕ) → P.diagonalTwistEtale T d ≅ (etaleSingle P T d)⟦2 * (d : ℤ)⟧ :=

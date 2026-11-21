@@ -8,9 +8,6 @@ module
 public import WeilConjectures.ZetaLinearAlgebra.Pairing
 
 /-! # Linear algebra of a perfect Frobenius similitude
-
-Source: current blueprint, `sk-thm-frobenius.proof.md`, final paragraph
-(blueprint: lem-pod-frobenius-linear-consequences).
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +28,7 @@ variable {R : Type u} [Field R] {V : Type v} {W : Type w}
 include hc hsim
 omit [Module.Finite R W] in
 /-- The adjoint given by the pairing conjugates the second operator to the
-scaled transpose of the first inverse. Source: Frobenius proof, final paragraph
-(blueprint: lem-pod-frobenius-linear-consequences).
+scaled transpose of the first inverse. Source: Frobenius proof, final paragraph.
 Proof: the similitude and nonzero scalar imply injectivity; finite dimension
 makes the first operator an equivalence. Substitute its inverse in the
 similitude identity and evaluate the canonical perfect-pairing adjoint. -/
@@ -55,8 +51,7 @@ theorem inverseTranspose :
     simpa only [show A (a.symm x) = x from a.apply_symm_apply x] using h
 
 /-- The inverse-transpose, dimension, determinant and reciprocal-root conclusions
-of a perfect similitude. Source: Frobenius proof, final paragraph
-(blueprint: lem-pod-frobenius-linear-consequences).
+of a perfect similitude. Source: Frobenius proof, final paragraph.
 Proof: use the preceding inverse-transpose calculation. Perfectness gives equal
 ranks; the determinant product and root multiset identities are the existing
 perfect-similitude theorems, including in dimension zero. -/

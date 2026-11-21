@@ -70,7 +70,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 -- search differ from the ones in these definitions, and unifying them is very expensive.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
-/-- Blueprint `lem-pur-etale-iso-descent`: Isomorphisms descend along étale surjections (family
+/-- Isomorphisms descend along étale surjections (family
 version).
 
 Let `a i : U i ⟶ X` be a jointly surjective family of morphisms and `φ : M ⟶ N` a morphism of
@@ -107,7 +107,7 @@ theorem isIso_leftDerivedUpperStar_map_ev_of_etale {U X : Scheme.{u}} (u : U ⟶
   exact isIso_map_ev_of_isIso_ihomComparison L((u)^*[ModuleCat.{u + 1} Λ])
     ((isInvertible_iff_exists_derivedTensor _).2 h)
 
-/-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality (family version).
+/-- Source-étale locality (family version).
 
 Invertibility is local for a jointly surjective family of étale morphisms `a i : U i ⟶ X`: if
 every `La_i^* L` is invertible, then so is `L`. The evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ` pulls back

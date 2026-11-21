@@ -26,8 +26,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The actual comparison of exact cochain functors, before localization.
-Source: Stacks 03D2 and 0941
-(blueprint: lem-sf-integral-pull-evaluation-cochain-square). -/
+Source: Stacks 03D2 and 0941. -/
 def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   (pullbackTensorInverseEvaluationComplex l E f n).symm ≪≫
     Functor.isoWhiskerLeft
@@ -36,8 +35,7 @@ def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
 
 /-- The pullback transition square already commutes as a square of cochain maps.
 Source: Zheng Construction 4.1, p. 21; the sectionwise calculation preceding
-Lemma 4.10, p. 23; Stacks 03D2 and 0941
-(blueprint: lem-sf-integral-pull-evaluation-cochain-square).
+Lemma 4.10, p. 23; Stacks 03D2 and 0941.
 
 Proof: first work in the abelian categories of modules on the sequence sites.
 The inverse-image/evaluation comparison is the inverse mate of the identity

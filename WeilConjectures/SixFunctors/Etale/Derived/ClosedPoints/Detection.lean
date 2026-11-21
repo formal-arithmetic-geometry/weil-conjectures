@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.MinimalCoho
 Let `K` be a separably closed field, `X` a scheme locally of finite type over `K`, and
 `Q ∈ D(X_ét, Λ)` a complex whose cohomology sheaves have vanishing stalks at all non-closed
 points of `X`. If `Q` is bounded below, then `Q = 0` if and only if `H^i(X_ét, Q) = 0` for all
-`i` (blueprint `corollary-open-direct-image-over-field--2`, Stacks 0F1G): if `i` is minimal with
+`i`: if `i` is minimal with
 `ℋ^i(Q) ≠ 0`, then `H^i(X_ét, Q) = Γ(X, ℋ^i(Q))` (`corollary-open-direct-image-over-field--2`), and
 the globally generated sheaf `ℋ^i(Q)` (`corollary-open-direct-image-over-field--2`) has a nonzero
 global section.

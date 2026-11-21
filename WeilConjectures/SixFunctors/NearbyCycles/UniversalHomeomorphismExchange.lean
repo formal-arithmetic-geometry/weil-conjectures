@@ -22,7 +22,6 @@ homeomorphism `g` by topological invariance. The file also records two consequen
 and composition laws of pullback exchanges
 (`NearbyCyclesModel.Hom.isIso_map_pullbackExchange_app_of_square_of_isIso`,
 `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_comp`).
-
 -/
 
 @[expose] public section

@@ -37,7 +37,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 with uniform finite Tor amplitude is derived complete.
 Source: Bhatt--Scholze, Lemma 6.5.5, and the tensor argument of Stacks Tag 099N;
 primitive tensor step of lem-sf-primitive-completion-effectivity.
-(blueprint: lem-sf-finite-tor-ordinary-tensor-complete).
 
 Proof: work on affine open subsets of X and refine the constructible stratifications
 of the two residue complexes simultaneously. On each resulting locally closed

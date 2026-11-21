@@ -38,7 +38,7 @@ set_option backward.defeqAttrib.useBackward true
 an arbitrary open-adjunction transpose and restricting the proper image.
 There is no proper/open comparison or etale-origin witness in this assertion.
 Source: compactification-coherence proof, first two paragraphs; Stacks 00YV,
-03DI, 03D6, 0D6D (blueprint: lem-sf-finite-ring-open-restriction-coordinates).
+03DI, 03D6, 0D6D.
 
 Proof: before deriving, finiteDirectImage_eq identifies the two direct images
 with the same constant-section scalar map. The left-adjoint uniqueness comparison

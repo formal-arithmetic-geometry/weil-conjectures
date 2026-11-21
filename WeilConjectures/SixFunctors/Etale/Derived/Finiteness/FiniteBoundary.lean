@@ -19,7 +19,7 @@ Let `b : Y ⟶ S` be proper, let `a : G ⟶ Y` be an open immersion whose closed
 and its direct image to `S`: the part supported on `Z` is seen faithfully by `Rb_*`, since
 `Rb_* i_* = R(bi)_*` and the finite direct image `(bi)_*` is exact and conservative. These are
 the two boundary steps of Deligne's generic constructibility theorem
-(`theorem-generic-constructibility-base-change-rj`).
+.
 
 ## Main statements
 

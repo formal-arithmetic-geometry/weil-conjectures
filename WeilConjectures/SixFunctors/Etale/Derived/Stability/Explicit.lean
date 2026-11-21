@@ -23,11 +23,11 @@ cases where it is explicit:
   Tor amplitude interval;
 - `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_of_isOpenImmersion` and
   `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_of_isFinite_of_etale`
-  (`theorem-f-shriek-finite-coefficients`): for an open immersion or a finite étale `f`,
+: for an open immersion or a finite étale `f`,
   `Rf^! ≅ f^*` preserves the constructible intervals and the Tor amplitude, and commutes with the
   reduction of coefficients `K ↦ K ⊗ᴸ (Λ/J)`;
 - `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_of_smoothOfRelativeDimension`
-  (`theorem-f-shriek-finite-coefficients`): for `f` smooth of pure relative dimension `d`, `Rf^!`
+: for `f` smooth of pure relative dimension `d`, `Rf^!`
   shifts the constructible interval and the Tor amplitude by `-2d`.
 
 The reduction of coefficients along `Λ → B = Λ/J` is `AlgebraicGeometry.Etale.reductionModIdeal`,
@@ -132,7 +132,7 @@ theorem preservation_of_iso_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y
         ((leftDerivedUpperStarReductionModIdealIso Λ J f).app K).symm ≪≫ (e.app _).symm)
       (hred X (hF K hK))⟩
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation in the open and finite etale
+/-- Preservation in the open and finite etale
 cases.
 
 Open immersion case. Let `f : U ⟶ Y` be a quasi-compact open immersion and `Λ` a finite ring. The
@@ -163,7 +163,7 @@ theorem preservation_rightDerivedUpperShriek_of_isOpenImmersion {U Y : Scheme.{u
     (rightDerivedUpperShriekIsoOfIsOpenImmersion Λ f ≪≫
       (leftDerivedUpperStarIsoMapDerivedCategory _ f).symm) J
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation in the open and finite etale
+/-- Preservation in the open and finite etale
 cases.
 
 Finite étale case. Let `f : V ⟶ X` be finite étale and `Λ` a finite ring. The exceptional
@@ -216,7 +216,7 @@ lemma exists_flat_rightDerivedUpperShriek_iso_tensor_shift {X Y : Scheme.{u}}
   exact ⟨t.symm ≪≫ ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj _).mapIso eω ≪≫
     ((((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj _).commShiftIso (2 * d : ℤ)).app _)⟩
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Smooth morphisms satisfy the preservation
+/-- Smooth morphisms satisfy the preservation
 clauses.
 
 Let `f : X ⟶ Y` be smooth of pure relative dimension `d`, admitting a compactification, and `Λ`

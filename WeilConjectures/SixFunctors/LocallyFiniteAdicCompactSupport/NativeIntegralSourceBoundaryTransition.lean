@@ -60,8 +60,7 @@ Naturality of the balanced scalar associator moves the ordinary left realization
 past it, giving exactly bi followed by `supportScalarTransition`.
 This calculation uses only the initial three arrows; it contains neither the native
 scalar mate nor the final source-realization boundary. Identity field changes use
-the same normalized tensor unit, so the argument includes `i = E`.
-(blueprint: lem-sf-native-integral-source-boundary-transition). -/
+the same normalized tensor unit, so the argument includes `i = E`. -/
 theorem integralSourceBoundary_transition [G : NativeGeometry.{u} l]
     (target : Realization l Y) (stage : StageAction l D hl P c)
     (i E : Index l (PadicAlgCl l)) (h : i ≤ E)

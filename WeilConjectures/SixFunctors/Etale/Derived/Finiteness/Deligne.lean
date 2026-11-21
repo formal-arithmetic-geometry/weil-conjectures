@@ -37,7 +37,7 @@ map along the open immersion `Y_U ⟶ Y`, which is an isomorphism.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.exists_hasConstructibleDirectImageBaseChangeOn`: Deligne's generic
-  constructibility (`theorem-generic-constructibility-base-change-rj`).
+  constructibility.
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field`
   :
   over a field, `Rj_* F` is bounded constructible (`corollary-open-direct-image-over-field--1`).
@@ -327,7 +327,6 @@ private theorem smooth_prime_property
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- A smooth source with finite locally constant coefficients.
-(blueprint: lem-fin-smooth-generic-direct-image-finite-ring)
 
 For a separated smooth morphism of finite type `a : X ⟶ S` to an integral scheme of finite type
 over a field on which the exponent of `Λ` is invertible, and a finite locally constant sheaf `F`
@@ -397,11 +396,11 @@ theorem smoothGenericDirectImage : SmoothGenericDirectImage Λ := by
   change n • x = 0
   rw [← Nat.cast_smul_eq_nsmul Λ, hnΛ, zero_smul]
 
-/-- Blueprint `theorem-generic-constructibility-base-change-rj`: Generic bounded constructibility
+/-- Generic bounded constructibility
 for an open immersion.
 
 Let `S` be integral and of finite type over a field `k`, let `Λ` be a finite ring whose exponent
-is invertible on `S` (the blueprint takes `Λ = 𝔽_ℓ` with `ℓ ≠ char k`), and let `j : X ⟶ Y` be
+is invertible on `S`, and let `j : X ⟶ Y` be
 an open immersion of finite-type `S`-schemes. For a constructible sheaf `F` of `Λ`-modules on
 `X`, there is a nonempty open `U ⊆ S` such that `Rj_{U,*}(F|_{X_U})` is bounded constructible
 and, for every morphism `T ⟶ U` with noetherian `T`, its base change morphism
@@ -438,8 +437,7 @@ theorem HasConstructibleDirectImageBaseChangeOn.of_isFinite_of_surjective
 
 /-- Blueprint `corollary-open-direct-image-over-field--1`: Higher open direct images over a field.
 
-Let `k` be a field, let `Λ` be a finite ring whose exponent is invertible in `k` (the blueprint
-takes `Λ = 𝔽_ℓ` with `ℓ ≠ char k`), let `j : X ⟶ Y` be an open immersion of finite-type
+Let `k` be a field, let `Λ` be a finite ring whose exponent is invertible in `k`, let `j : X ⟶ Y` be an open immersion of finite-type
 `k`-schemes and let `F` be a constructible sheaf of `Λ`-modules on `X`. Then `Rj_* F` is
 bounded constructible. This is `theorem-generic-constructibility-base-change-rj` over `S = Spec k`,
 whose only nonempty open is `S` itself. -/

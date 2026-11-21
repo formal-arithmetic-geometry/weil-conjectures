@@ -18,7 +18,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The intrinsic semilinear gamma is the mate of the intrinsic alpha.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0F7B.
-(blueprint: lem-sf-integral-system-proper-open-transport-core-intrinsic-mate).
 Proof: unfold the intrinsic proper/open gamma and apply the defining mate
 bijection to the intrinsic alpha. -/
 theorem integralSystemIntrinsicMate

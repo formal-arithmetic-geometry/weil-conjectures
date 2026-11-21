@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.Integral.IntegralHomComparisonUncurry
 /-! # Independence of the normalized integral Hom reduction presentation
 
 Source: Stacks Tags 06YY and 08J7; the universal-property and evaluation normalization
-in the integral Hom reduction construction
-(blueprint: lem-sfb-integral-hom-comparison-normalization).
+in the integral Hom reduction construction.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ Their tensor orders differ by the signed exchange, so equality of maps, rather t
 an arbitrary isomorphism between their endpoints, is essential here.
 
 Source: Stacks Tags 06YY and 08J7; the normalization paragraphs of the integral
-Hom reduction construction
-(blueprint: lem-sfb-integral-hom-comparison-normalization).
+Hom reduction construction.
 
 Proof: on K-flat pairs the representative comparisons identify both tensors with the
 ordinary signed total tensor. Exchange the factors using the Koszul symmetry; its

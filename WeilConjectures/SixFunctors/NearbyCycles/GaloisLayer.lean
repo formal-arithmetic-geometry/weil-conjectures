@@ -37,7 +37,6 @@ The proof computes `α` as `Ψ'` of the unit of `Lg^* ⊣ Rg_*` up to canonical 
 (`NearbyCyclesModel.Hom.pullbackExchange_app_of_total_eq_id`) and splits that unit by the
 normalized derived Galois trace (`ProEtale.CondensedRing.derivedUnit_comp_normalizedTrace`); the
 abstract part is `CategoryTheory.exists_retraction_of_eq_comp_map_comp`.
-
 -/
 
 @[expose] public section

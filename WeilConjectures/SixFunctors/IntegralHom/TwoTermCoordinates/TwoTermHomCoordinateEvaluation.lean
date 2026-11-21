@@ -55,8 +55,7 @@ namespace TwoTermCoordinates
 attribute [local irreducible] SheafOfModules.monoidalCategory totalTensor
   twoTermHomIso twoTermHomComponentIso twoTermTensorIso
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-hom-coordinate-evaluation). -/
+/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X. -/
 noncomputable def localEvaluation (M N : Modules.{t, u} Y R)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) :
     (SheafOfModules.homObj (R := R) M N).val.obj U →ₗ[R.obj.obj U]
@@ -71,8 +70,7 @@ noncomputable def localEvaluation (M N : Modules.{t, u} Y R)
       simp }
 
 /-- Evaluation is linear evaluation after the indicated Hom product projection.
-Source: Stacks 03EO and 0A8X
-(blueprint: lem-sf-two-term-hom-coordinate-evaluation). -/
+Source: Stacks 03EO and 0A8X. -/
 theorem localEvaluation_π (P I : CochainComplex (Modules.{t, u} Y R) ℤ)
     (j p : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (w : ((homComplex (R := R) P I).X j).val.obj U) (x : (P.X p).val.obj U) :
@@ -83,8 +81,7 @@ theorem localEvaluation_π (P I : CochainComplex (Modules.{t, u} Y R) ℤ)
 
 attribute [local irreducible] evaluate projection homComplexπ
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-hom-coordinate-evaluation). -/
+/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X. -/
 theorem post_evaluation (M N N' : Modules.{t, u} Y R) (g : N ⟶ N')
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (v : (SheafOfModules.homObj (R := R) M N).val.obj U) (x : M.val.obj U) :
@@ -93,8 +90,7 @@ theorem post_evaluation (M N N' : Modules.{t, u} Y R) (g : N ⟶ N')
       g.val.app U (localEvaluation Y R M N U v x) := by
   rfl
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-hom-coordinate-evaluation). -/
+/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X. -/
 theorem parity_evaluation (M N : Modules.{t, u} Y R) (p : ℤ)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (v : (SheafOfModules.homObj (R := R) M N).val.obj U) (x : M.val.obj U) :
@@ -111,8 +107,7 @@ variable (Q : CochainComplex (Modules.{t, u} Y R) ℤ)
   (eNeg : Q.X (-1) ≅ (𝟙_ (Modules.{t, u} Y R)))
   (eZero : Q.X 0 ≅ (𝟙_ (Modules.{t, u} Y R)))
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-hom-coordinate-evaluation). -/
+/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X. -/
 theorem hom_fst_evaluation
     (P I : CochainComplex (Modules.{t, u} Y R) ℤ) (j p : ℤ)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
@@ -140,8 +135,7 @@ theorem hom_fst_evaluation
   rw [localEvaluation_π]
   rfl
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-hom-coordinate-evaluation). -/
+/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X. -/
 theorem hom_snd_evaluation
     (P I : CochainComplex (Modules.{t, u} Y R) ℤ) (j p : ℤ)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)

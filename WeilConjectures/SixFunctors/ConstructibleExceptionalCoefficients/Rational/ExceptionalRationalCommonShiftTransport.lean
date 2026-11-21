@@ -303,8 +303,7 @@ private theorem normalizedCommonLeftExact (c : Compactification f)
 
 include hl in
 /-- Every rational object has a literal finite-Tor integral representative.
-Source: Zheng, Construction 6.2; residue Tor identifies the two integral predicates
-(blueprint: lem-sf-common-rationalization-object-surjective).
+Source: Zheng, Construction 6.2; residue Tor identifies the two integral predicates.
 
 Proof: apply integralRepresentative to the underlying integral object. Residue Tor
 identifies the constructible and finite-Tor predicates, so this changes only its

@@ -13,7 +13,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.HomologicalComplexFunctorEquiv
 /-! # Clopen restriction of quotient completion before imposing completeness
 
 Source: Stacks Project, derived.tex, Tag 08TC; sites-cohomology.tex, Tag 0941.
-(blueprint: lem-fix-clopen-integral-completion-restriction).
 -/
 
 @[expose] public section
@@ -88,7 +87,6 @@ This is an isomorphism of functors on all complexes, before using a completion u
 
 Source: Stacks Project, derived.tex, Tag 08TC; sites-cohomology.tex, Tag 0941;
 steps 1 and 2 of lem-fix-clopen-completed-restriction-comparison.
-(blueprint: lem-fix-clopen-integral-completion-restriction).
 
 Proof: the strict clopen pullback-tower comparison identifies ordinary restriction
 of the quotient tower with the specified finite pullback tower on all complexes.

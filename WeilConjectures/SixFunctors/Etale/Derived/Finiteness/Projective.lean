@@ -16,16 +16,16 @@ every projective morphism `f` between schemes of finite type over `k` satisfies 
 higher direct images preserve constructibility.
 
 - `AlgebraicGeometry.Etale.hasConstructibleDirectImages_projectiveLine`
-  (`proposition-proper-direct-image-finite-coefficients`): the projective line `ℙ¹_S ⟶ S`, by
+: the projective line `ℙ¹_S ⟶ S`, by
   resolving a constructible sheaf by finite pushforwards of constant sheaves and using the case of
   curves;
 - `AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_projectiveLine`
-  (`proposition-proper-direct-image-finite-coefficients`): from the projective line to all
+: from the projective line to all
   projective morphisms, through `(ℙ¹_S)ⁿ ⟶ ℙⁿ_S` (finite and surjective) and composition;
 - `AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isClosedImmersion`
-  (`proposition-proper-direct-image-finite-coefficients`).
+.
 
-A morphism `f : X ⟶ S` is projective (`def-pc-projective-morphism`) if it is the composite of a
+A morphism `f : X ⟶ S` is projective if it is the composite of a
 closed immersion `X ⟶ ℙ(N; S)`, for a finite type `N` of homogeneous coordinates, with the
 structure morphism; quasi-compactness is automatic here, `S` being Noetherian.
 -/
@@ -106,7 +106,7 @@ theorem hasConstructibleDirectImages_projectiveLine_of_isAffine
   exact isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf Λ aS _ j hj
     (fun Ω _ _ s ↦ topologicalKrullDim_pullback_comp_projectiveLine_le_one (h i) Ω s) (M i) q
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Constructible coefficients on
+/-- Constructible coefficients on
 the projective line.
 
 Let `S` be of finite type over a field `k`, and let `Λ` be a finite ring killed by an integer
@@ -159,7 +159,7 @@ theorem hasConstructibleDirectImages_projectiveLinePowProj
     exact hasConstructibleDirectImages_of_isFinite (𝟙 S)
   | succ n ih => exact (h _ (projectiveLinePowProj n S ≫ aS)).comp ih
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Projective constructibility
+/-- Projective constructibility
 from projective-line constructibility.
 
 Suppose `𝒞(ℙ¹_T ⟶ T)` holds for every scheme `T` of finite type over `k`. Then `𝒞(f)` holds for
@@ -190,7 +190,7 @@ theorem HasConstructibleDirectImages.of_projectiveLine
   subst he
   exact (hasConstructibleDirectImages_of_isFinite e).comp hP
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Projective direct-image
+/-- Projective direct-image
 constructibility.
 
 Let `Λ` be a finite ring killed by an integer invertible in the field `k`. Every projective

@@ -24,7 +24,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.De
 
 See `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison` for the implementation
 notes.
-
 -/
 
 @[expose] public section
@@ -186,7 +185,7 @@ lemma refinementLowerShriekBaseChangeDerivedPlusIso_inv_comp
 /-- **The composition law for the comparison of derived lower shrieks**: the comparison
 attached to a composite `r.comp s` of refinements is the composite of the two comparisons.
 Note that, the comparison running from the coarser to the finer compactification, the order
-of the composite is reversed. (blueprint: `BA43-RHO`) -/
+of the composite is reversed. -/
 theorem rightDerivedLowerShriekOfCompactificationPlusComparison_comp
     {c d e : Compactification f} (r : c.Refinement d) (s : d.Refinement e)
     (hr : IsPullback c.i (𝟙 X) r.hom d.i) (hs : IsPullback d.i (𝟙 X) s.hom e.i) :

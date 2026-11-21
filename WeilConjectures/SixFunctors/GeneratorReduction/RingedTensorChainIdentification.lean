@@ -36,8 +36,7 @@ Source: strict tensor augmentation full-coordinate uniqueness, Stacks 07A4 and 0
 Proof: its first canonical clause gives the pure-tensor coordinate in every product
 projection, and its second gives the zero shifted coordinate. These are exactly
 StrictTensorAugmentation.Normalized. The constructed strict augmentation satisfies
-the same clauses. The proved uniqueness theorem identifies the transformations.
-(blueprint: lem-sf-ringed-tensor-chain-identification). -/
+the same clauses. The proved uniqueness theorem identifies the transformations. -/
 theorem ringedTensorChain_eq_strictAugmentation
     (ringed : IntegralSystemRealization.RingedModels l E) (X : Scheme.{u}) :
     (ringed.tensor X).chain = StrictTensorAugmentation.map l E X := by

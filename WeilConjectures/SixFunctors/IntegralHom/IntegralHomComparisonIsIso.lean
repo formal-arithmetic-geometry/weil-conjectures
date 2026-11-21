@@ -12,8 +12,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Invertibility of the normalized integral Hom comparison
 
 Source: blueprint order 2478, proof steps 1 and 4-7; Stacks Tags 093M,
-06YQ, 08J7, 0A8X and 07A6
-(blueprint: lem-sf-integral-hom-comparison-is-iso).
+06YQ, 08J7, 0A8X and 07A6.
 -/
 
 @[expose] public section
@@ -38,8 +37,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 inputs. The presentation hypotheses only specify the normalized tensor models.
 
 Source: blueprint order 2478, steps 1 and 4-7; Stacks Tags 093M, 06YQ,
-08J7, 0A8X and 07A6
-(blueprint: lem-sf-integral-hom-comparison-is-iso).
+08J7, 0A8X and 07A6.
 
 Proof: The coefficient valuation ring is a DVR, hence Noetherian. Completion
 identifies the restricted quotient with Q_n=[B --t^(n+1)--> B] in degrees -1,0,

@@ -47,7 +47,6 @@ private theorem reduction_map_tensor
 /-- The clopen scalar quotient comparisons form a natural strict tower isomorphism.
 
 Source: Stacks Project, sites-modules.tex, Tags 03D8 and 03EL.
-(blueprint: lem-sf-clopen-scalar-quotient-tower).
 
 Proof: use the existing finite quotient comparison and its pure tensor formula.
 After composing with its inverse, equality of maps can be checked on local pure

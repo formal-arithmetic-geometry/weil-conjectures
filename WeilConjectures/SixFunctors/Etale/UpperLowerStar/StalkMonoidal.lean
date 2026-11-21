@@ -38,7 +38,6 @@ applies to that structure directly. We use the universe-lifted point
 - `AlgebraicGeometry.Etale.sheafFiberTensorIso`: `(F ⊗ G)_s ≅ F_s ⊗ G_s`.
 - `AlgebraicGeometry.Etale.sheafFiberTensorIso_hom_naturality`: its naturality in `F` and `G`.
 - `AlgebraicGeometry.Etale.sheafFiberUnitIso`: `(𝟙_)_s ≅ 𝟙_`.
-
 -/
 
 @[expose] public section
@@ -81,9 +80,9 @@ lemma sheafFiberTensorIso_inv (F G : Sheaf X.smallEtaleTopology A) :
 /-- Naturality of `sheafFiberTensorIso` in both variables:
 ```
   (F ⊗ G)_s ---(f ⊗ g)_s---> (F' ⊗ G')_s
-     |                            |
-   iso.hom                    iso.hom
-     v                            v
+     | |
+   iso.hom iso.hom
+     v v
   F_s ⊗ G_s ---f_s ⊗ g_s---> F'_s ⊗ G'_s
 ```
 -/

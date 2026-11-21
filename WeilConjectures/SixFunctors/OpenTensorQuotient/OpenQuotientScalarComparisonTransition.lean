@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.OpenTensorQuotient.OpenQuotientScalarComparis
 /-! # Transition coherence for the open scalar comparison
 
 Source: Stacks Project, Tags 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-comparison-transition).
 -/
 
 @[expose] public noncomputable section
@@ -32,7 +31,6 @@ sheafified pure tensors that generate each unrestricted reduction; the generator
 formula for tc.ordinary, the section formula for sc.finite, and naturality of
 extension by zero identify both sides with the same coefficient transition.
 Source: Stacks Tags 0E8I and 0941; degreewise comparison and transition coherence.
-(blueprint: lem-sf-open-quotient-scalar-comparison-transition).
 -/
 theorem openQuotientScalarComparisonTransition
     (o : IntegralOpenReduction.Operations l E j)

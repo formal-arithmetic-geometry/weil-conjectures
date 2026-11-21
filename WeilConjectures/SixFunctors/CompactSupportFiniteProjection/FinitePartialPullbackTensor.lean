@@ -8,8 +8,6 @@ module
 public import WeilConjectures.SixFunctors.CompactSupportFiniteProjection.ConstructibleProjectionMates
 
 /-! # Pullback of the finite partial tensor
-
-Source: the proper-factor calculation of prop-sf-pf-coherence.
 -/
 
 @[expose] public noncomputable section

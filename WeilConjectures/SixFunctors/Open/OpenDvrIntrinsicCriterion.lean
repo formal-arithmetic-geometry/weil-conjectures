@@ -30,7 +30,6 @@ import Mathlib.Data.Nat.Prime.Infinite
 /-! # The intrinsic DVR completion criterion under canonical coefficient transport
 
 Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
-(blueprint: lem-sf-open-dvr-intrinsic-criterion).
 -/
 
 @[expose] public noncomputable section
@@ -48,8 +47,7 @@ attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBiject
   IntegralOnSlice.hasDerived integralOperationsAbSheafify integralOperationsAbLocallyBijective
   integralOperationsSiteSmall integralOperationsCommHasDerivedCategory in
 /-- Quotient Roos completeness is invertibility of the specified intrinsic Koszul unit.
-Source: Stacks Tags 093M, 099B and 0A0E
-(blueprint: lem-sf-open-dvr-intrinsic-criterion).
+Source: Stacks Tags 093M, 099B and 0A0E.
 
 Proof: the completed constant-sheaf reduction theorem transports the two-term free
 resolution of the positive DVR quotients to the completed coefficient sheaf. Thus the

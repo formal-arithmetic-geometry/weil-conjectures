@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 /-! # Parameter coherence for tensor-Hom adjunctions
 
 Source: Stacks Project, Tag 08J9, naturality of tensor-Hom currying.
-(blueprint: lem-sf-integral-hom-parameter-adjunction).
 -/
 
 @[expose] public section
@@ -20,8 +19,7 @@ open CategoryTheory Opposite CategoryTheory.MonoidalCategory
 namespace WeilConjectures.IntegralHom
 
 /-- Build a parameter adjunction from the counit compatibility equation.
-Source: the tensor-Hom adjunction and its first-variable naturality (Stacks 08J9).
-(blueprint: lem-sf-integral-hom-parameter-adjunction). -/
+Source: the tensor-Hom adjunction and its first-variable naturality (Stacks 08J9). -/
 def parameterAdjunctionOfCounit {D : Type*} [Category D]
     {F : D ⥤ D ⥤ D} {G : Dᵒᵖ ⥤ D ⥤ D}
     (a : ∀ K, F.obj K ⊣ G.obj (op K))
@@ -37,8 +35,7 @@ def parameterAdjunctionOfCounit {D : Type*} [Category D]
     rw [← Adjunction.homEquiv_counit, Equiv.symm_apply_apply])
 
 /-- The left-tensor adjunction, transported through the given braiding, with its
-parameter coherence retained. Source: Stacks 08J9, natural tensor-Hom currying.
-(blueprint: lem-sf-integral-hom-parameter-adjunction). -/
+parameter coherence retained. Source: Stacks 08J9, natural tensor-Hom currying. -/
 noncomputable def leftTensorParameterAdjunction {D : Type*} [Category D]
     {H : Dᵒᵖ × D ⥤ D} (S : CoefficientClosedStructure H)
     (β : @SymmetricCategory D _ S.monoidal) :

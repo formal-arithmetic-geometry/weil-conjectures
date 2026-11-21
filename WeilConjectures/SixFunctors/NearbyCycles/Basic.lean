@@ -25,7 +25,6 @@ The *nearby cycles* of the model are the functor
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.nearbyCycles`); for the constant
 model `ε = 𝟙` they are the geometric nearby cycles `RΨ = ī^* Rj̄_*` of SGA 7 XIII, precomposed
 with the pullback to the geometric generic fibre.
-
 -/
 
 @[expose] public section

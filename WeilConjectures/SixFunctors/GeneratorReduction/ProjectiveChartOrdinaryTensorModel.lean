@@ -309,7 +309,6 @@ finite totalization assertion; it makes no assertion of derived completeness.
 
 Source: Stacks Tags 07A2 and 07A4, K-flat total tensor and pullback comparison;
 Bhatt--Scholze, proof of Lemma 6.5.5, finite-projective tensor step.
-(blueprint: lem-sf-projective-chart-ordinary-tensor-model).
 
 Proof: the two ordinary pullback presentations have the same completed coefficient
 map, as their finite quotient projections agree. Uniqueness of adjoints and left

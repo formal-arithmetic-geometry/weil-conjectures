@@ -17,9 +17,9 @@ For a cartesian square of schemes
 
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
+  | |
+  f' f
+  ↓ ↓
   Y' --g---> Y
 ```
 
@@ -30,13 +30,13 @@ of `f'` sits in a diagram of two cartesian squares
 
 ```
   X' --g'--> X
-  |          |
-  i'         i
-  ↓          ↓
+  | |
+  i' i
+  ↓ ↓
   Z' --g''-> Z
-  |          |
-  p'         p
-  ↓          ↓
+  | |
+  p' p
+  ↓ ↓
   Y' --g---> Y
 ```
 
@@ -105,17 +105,16 @@ square `AlgebraicGeometry.Compactification.isPullback_i_ofIsPullback`, whiskered
 
 ```
   D(X) --Lg'^*--> D(X')
-   |               |
-  Di_!     ≅     Di'_!
-   ↓               ↓
+   | |
+  Di_! ≅ Di'_!
+   ↓ ↓
   D(Z) --Lg''^*-> D(Z')
-   |               |
-  Rp_*    ⇓ Ex_*  Rp'_*
-   ↓               ↓
+   | |
+  Rp_* ⇓ Ex_* Rp'_*
+   ↓ ↓
   D(Y) --Lg^*---> D(Y')
 ```
-
-(blueprint: `sk-def-sf-exchanges`) -/
+ -/
 noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     Rf_!(c)[A] ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ Rf_!(c.ofIsPullback sq)[A] :=
@@ -156,8 +155,7 @@ cartesian square `g' ≫ f = f' ≫ g`, for torsion coefficients: the map
 chosen compactification of `f`, followed by the comparison isomorphism
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` between the derived lower shriek of `f'`
 computed with its base change and the one computed with the chosen compactification of `f'`.
-That comparison is an isomorphism by proper base change, hence the torsion coefficients.
-(blueprint: `sk-def-sf-exchanges`) -/
+That comparison is an isomorphism by proper base change, hence the torsion coefficients. -/
 noncomputable def rightDerivedLowerShriekBaseChangeMap [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
     R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ⟶

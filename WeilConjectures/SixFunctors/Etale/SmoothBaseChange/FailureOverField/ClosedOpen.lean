@@ -128,9 +128,9 @@ lemma mateApp_eq_mateEquiv_app (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ 
 /-- The mate component `CategoryTheory.Adjunction.mateApp` is natural:
 ```
 S (R N) --mateApp N--> R' (S' N)
-   |                       |
-S (R f)               R' (S' f)
-   v                       v
+   | |
+S (R f) R' (S' f)
+   v v
 S (R N') -mateApp N'-> R' (S' N')
 ```
 -/
@@ -144,9 +144,9 @@ lemma mateApp_naturality (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ 
 by the square:
 ```
 S F ---S (η F)---> S (R (L F))
- |                     |
-η' (S F)          mateApp (L F)
- v                     v
+ | |
+η' (S F) mateApp (L F)
+ v v
 R' (L' (S F)) -R' (s F)-> R' (S' (L F))
 ```
 -/
@@ -159,9 +159,9 @@ lemma map_unit_comp_mateApp (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L �
 `L' (S A) ⟶ S' (L A) ⟶ S' N`:
 ```
 S A ---------S a---------> S (R N)
- |                            |
-η' (S A)                  mateApp N
- v                            v
+ | |
+η' (S A) mateApp N
+ v v
 R' (L' (S A)) --R' (s A ≫ S' (L a ≫ ε N))--> R' (S' N)
 ```
 -/

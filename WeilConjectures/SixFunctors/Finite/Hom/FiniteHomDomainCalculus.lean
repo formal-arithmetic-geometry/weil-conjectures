@@ -130,7 +130,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarUnitComposition
 
 Source: Weil blueprint, sec-six-functors/sk-prop-sf-biduality-general,
 lemma-change-coefficients-internal-hom--1, opening proof paragraph; Stacks 03TT, 0GKB, 06YY, 07A4
-and 08J9 (blueprint: lem-coef-finite-hom-domain-calculus).
+and 08J9.
 
 The index n denotes exponent n + 1, as in the recorded finite-Hom arrow.
 Thus all positive exponents and all identity quotients are included.
@@ -248,15 +248,13 @@ end ClosedCalculus
 end FiniteHomDomainClosedCalculus
 
 /-- The existing coefficient ring, lifted to the ordinary small-etale coefficient universe.
-Source: blueprint finite coefficient convention
-(blueprint: lem-coef-finite-hom-domain-calculus). -/
+ -/
 abbrev finiteHomDomainCoeff (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) :=
   ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))
 
 /-- Positive coefficient levels are finite, by the recorded coefficient-ring theorem.
-Source: blueprint finite coefficient convention
-(blueprint: lem-coef-finite-hom-domain-calculus). -/
+ -/
 instance finiteHomDomainCoeffFinite (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) :
     Finite (finiteHomDomainCoeff l E n) :=
@@ -272,11 +270,10 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
 include D hl hXover hXsep hXft hXqc in
 /-- Noetherianity and the flat constructible model in the original Tor interval, including
 its actual scalar extension with its target coefficient action.
-Source: blueprint opening proof paragraph; Stacks 01T6, 03TT, 0GKB, 06YQ and 06YY
-(blueprint: lem-coef-finite-hom-domain-calculus).
+Source: blueprint opening proof paragraph; Stacks 01T6, 03TT, 0GKB, 06YQ and 06YY.
 
 Proof: the structure morphism is of finite type over the Noetherian field D.k, so X
-is Noetherian (lem-weil-pbc-finite-type-over-noetherian). Apply
+is Noetherian. Apply
 lem-sp-etale-scalar-flat-model to the actual finite-ring quotient. Its model is flat
 constructible and supported in [a,b]. Bounded flatness gives K-flatness, and
 lem-pur-kflat-change-of-rings preserves flat terms and K-flatness. Constructibility
@@ -365,8 +362,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 include D hl hXover hXsep hXft hXqc in
 /-- The canonical tensor and constant-unit comparisons make ambient coefficient change
 strong symmetric monoidal, for the actual signed tensor and Koszul braiding.
-Source: blueprint opening proof paragraph; Stacks 07A4 and 0FPT
-(blueprint: lem-coef-finite-hom-domain-calculus).
+Source: blueprint opening proof paragraph; Stacks 07A4 and 0FPT.
 
 Proof: use scalarExtension_coreMonoidal for the actual quotient ring map. That
 proved generic theorem transports the native derived monoidal structure along

@@ -21,11 +21,11 @@ Let `K` be a field, `n` an integer invertible in `K` and killing the coefficient
 `Spec K` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine`, the general
 form of blueprint `lemma-kunneth-finite-direct-image--1`): writing `Γ(S')` and `Γ(T)` as directed
 unions of finite type `K`-subalgebras, `t` is a cofiltered limit of morphisms of schemes of finite
-type over `K`, and the limit theorem (blueprint `corollary-open-direct-image-over-field--2`) reduces
+type over `K`, and the limit theorem reduces
 the claim to `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field`.
 
 Taking `T = Spec L` for a separably closed field `L`, the direct images along `t` vanish in
-positive degrees (blueprint `lemma-sheaves-finite-support-finite-morphisms--1`), whence blueprint
+positive degrees, whence blueprint
 `lemma-kunneth-finite-direct-image--1`:
 `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_isAlgClosed`.
 
@@ -164,9 +164,7 @@ over a field `K`, for the base changes `Xᵢ = X ×_K Sᵢ` of a scheme `X` of f
 
 Let `t : T ⟶ S'` be the limit of the `gᵢ` (with affine transition maps), `X' = X ×_K S'` and
 `Y = X' ×_{S'} T`. Then the exchange morphism `p'⁻¹ R^q t_* F ⟶ R^q h_* e⁻¹ F` is an
-isomorphism for every sheaf `F` pulled back from `Spec K`: by the limit theorem (blueprint
-`corollary-open-direct-image-over-field--2`,
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit`) this reduces to the stages, where
+isomorphism for every sheaf `F` pulled back from `Spec K`: by the limit theorem this reduces to the stages, where
 it is `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field {K : Type u} [Field K]
     {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]

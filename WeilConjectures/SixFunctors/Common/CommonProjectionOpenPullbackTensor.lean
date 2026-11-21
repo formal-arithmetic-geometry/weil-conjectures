@@ -10,8 +10,6 @@ import WeilConjectures.SixFunctors.Common.CommonProjectionOpenPullbackTensorForw
 import WeilConjectures.SixFunctors.Common.CommonProjectionOpenPullbackTensorCompatibility
 
 /-! # Inclusion preserves the open tensor/pullback comparison
-
-Source: thm-sf-pf-field.proof.md, Compatibility.
 -/
 
 @[expose] public noncomputable section
@@ -76,8 +74,7 @@ attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
 
 /-- The inverse pullback/tensor square for an open factor, on arbitrary inputs.
 It involves only the supplied pullback comparisons and the natural tensorator.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-common-projection-open-pullback-tensor). -/
+ -/
 @[irreducible] def OpenPullbackTensorSquare
     {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
@@ -103,11 +100,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Finite-stage inclusion preserves the inverse tensor/pullback comparison for
 an open immersion. This is a square of tensor and pullback maps only: it uses
 neither an open adjunction nor proper image or support identifications.
-
-Source: thm-sf-pf-field.proof.md, Compatibility, the coefficient comparison for
-pullback and tensor; canonicalCommonStagePullbackTensor_existsUnique, the formula
-at every larger common finite field.
-(blueprint: lem-sf-common-projection-open-pullback-tensor).
 
 Proof: supply invertibility of the coefficient prime on Q.X and Q.Z using the
 base-field structure maps. Transport the rational and common tensor functors and

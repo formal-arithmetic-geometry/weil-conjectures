@@ -275,7 +275,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 Source: Stacks Project, Tags 07A4 and 0941; the normalized coefficient tensor
 constraints of `lem-pur-derived-pullback-tensor-constraints`.
-(blueprint: lem-pur-common-stage-tensor-triangle).
 
 Proof: apply faithful coherent reduction to the integral equation and insert
 the prescribed tensor comparison and the reduction of the reconstructed unit.

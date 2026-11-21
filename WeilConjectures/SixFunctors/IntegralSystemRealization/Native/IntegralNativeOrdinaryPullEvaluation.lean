@@ -203,7 +203,6 @@ private theorem finitePull_unit (A : Type u) [CommRing A] [Finite A]
 
 /-- The ordinary native pullback comparison preserves the normalized finite evaluation.
 Source: Stacks 03D2 and 0941; blueprint fix-prop-coherence, coefficient comparisons.
-(blueprint: lem-sf-integral-native-ordinary-pull-evaluation).
 
 Proof: the ordinary direct-image comparison and native direct evaluation are identity
 on sections. Uniqueness identifies their composite with the prescribed direct evaluation.

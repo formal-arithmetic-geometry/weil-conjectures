@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantOpenS
 
 /-! # Invertibility of canonical system evaluation mate
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 0941
-(blueprint: lem-sf-integral-direct-evaluation-mate-invertible).
+Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -151,8 +150,7 @@ private theorem derivedEvaluation_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) 
   · exact (pullbackTensorDerivedEvaluation_existsUnique l E f n).exists.choose_spec
 
 /-- The canonical right mate of normalized pullback evaluation is invertible.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941 and 07A7
-(blueprint: lem-sf-integral-direct-evaluation-mate-invertible).
+Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941 and 07A7.
 
 Proof: use the normalized derived finite-extension left adjoints to evaluation.
 The ordinary inverse-image square has as right mate the canonical direct-image

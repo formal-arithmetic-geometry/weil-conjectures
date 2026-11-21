@@ -26,7 +26,7 @@ so that `G (U ×_Y X) = ∏_t G (piece_t)`. Finite products commute with the fil
 (`A` satisfies AB5), and the colimit of `G (piece_t)` over the split neighbourhoods is the
 stalk `G_t`, the pieces being cofinal among the pointed étale neighbourhoods of `t`
 (`AlgebraicGeometry.Scheme.Hom.SplitNbhd.initial_pieceFunctor`). The classical argument through the
-strict henselization (blueprint remark `lemma-finite-direct-images--1`) is
+strict henselization is
 not the one formalised here.
 
 ## Main definitions
@@ -46,7 +46,6 @@ not the one formalised here.
   `AlgebraicGeometry.Etale.upperStarCompSheafFiberIso` of the stalk of `f^* f_* G` at a
   geometric point `t` of `X` with the stalk of `f_* G` at its image. Neither statement is
   about finite morphisms.
-
 -/
 
 @[expose] public section
@@ -291,8 +290,7 @@ omit [HasSmallSiteSheafify A] in
 lemma Etale.stalkIsoPi_hom (G : Sheaf X.smallEtaleTopology A) :
     (Etale.stalkIsoPi A f y G).hom = Pi.lift fun t ↦ Etale.stalkRestrict A f y t G := rfl
 
-/-- **The geometric stalk formula for a finite direct image** (blueprint
-`lemma-finite-direct-images--1`). For a finite morphism
+/-- **The geometric stalk formula for a finite direct image**. For a finite morphism
 `f : X ⟶ Y` and a geometric point `y` of `Y` with algebraically closed residue field, the
 stalk of `f_* G` at `y` is the finite product of the stalks of `G` at the geometric points of
 `X` over `y`, naturally in the sheaf `G`. -/

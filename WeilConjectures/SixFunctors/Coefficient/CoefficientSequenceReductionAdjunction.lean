@@ -52,7 +52,6 @@ with the derived associativity isomorphism B_n tensor over B_m (B_m tensor over 
 = B_n tensor over A Q. It is invertible. The finite scalar adjunction converts this
 into the universal Hom-bijection defining IsNormalizedCoefficientSequence. This also
 covers equal levels, the zero complex, and the empty scheme.
-(blueprint: lem-coef-sequence-reduction-adjunction)
 -/
 theorem coefficientSequenceReductionAdjunction_exists :
     ∃ (L : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)

@@ -9,9 +9,6 @@ public import WeilConjectures.SixFunctors.GeneratorReduction.GeneratorReductionD
 import WeilConjectures.SixFunctors.GeneratorReduction.PrimitiveCompletionEffectivity
 import WeilConjectures.SixFunctors.GeneratorReduction.ShortWordIntegralDomain
 /-! # Invertibility of short-word completion transport
-
-Source: blueprint fix-prop-coherence, basic structural maps
-(blueprint: lem-sf-generator-reduction-coherence).
 -/
 
 @[expose] public noncomputable section

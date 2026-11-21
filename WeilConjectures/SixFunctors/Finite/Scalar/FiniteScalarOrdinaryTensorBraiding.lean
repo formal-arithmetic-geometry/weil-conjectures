@@ -14,7 +14,6 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 Source: the pure-tensor calculation in the finite intrinsic tensor symmetry proof;
 Stacks Project, Tags 00YV, 06YL and 0FPT.
-(blueprint: lem-sf-finite-scalar-ordinary-tensor-braiding).
 -/
 
 @[expose] public section
@@ -112,8 +111,7 @@ Finally the module-sheafification tensor comparison commutes with the swap:
 precompose with its adjunction unit and evaluate on a pure tensor. Its stated
 normalization and moduleTmul_braiding send both routes to the tensor of the two
 unit sections in reversed order. The sheafification adjunction and the tensor
-universal property detect equality. Compose these four squares.
-(blueprint: lem-sf-finite-scalar-ordinary-tensor-braiding). -/
+universal property detect equality. Compose these four squares. -/
 theorem finiteScalarOrdinaryTensorIso_braiding
     (X : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]
     (M N : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B))) :

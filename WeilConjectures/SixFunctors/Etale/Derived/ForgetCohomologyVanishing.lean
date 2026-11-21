@@ -16,8 +16,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 The cohomology of a sheaf of `Λ`-modules on `X_ét` is, as an abelian group, that of its
 underlying abelian sheaf (Stacks 03FD). Hence `RΓ(X, G) = 0` in `D(Λ)` if and only if all the
-abelian cohomology groups `H^q(X, G)` vanish (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`, forgetting `Λ`).
+abelian cohomology groups `H^q(X, G)` vanish.
 
 ## Main statements
 

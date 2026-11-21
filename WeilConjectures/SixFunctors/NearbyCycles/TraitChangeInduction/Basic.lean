@@ -41,7 +41,6 @@ which the total space locally embeds.
    (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_compactification`).
 3. **General models**: invertibility of the exchange is local on the total space
    (`NearbyCyclesModel.Hom.isIso_toGeneric_pullbackExchange_app_of_restrictOpens`).
-
 -/
 
 @[expose] public section

@@ -32,7 +32,7 @@ and their Tor intervals, with literal restrictions and the canonical scalar mate
 Quotient, ramified, identity and composite unital maps are all quantified directly.
 
 Source: Zheng, Propositions 2.23, 2.29 and 3.16, Construction 2.26; Stacks 0GL6,
-09AL, 09B1 and 07A4 (blueprint: lem-sf-exceptional-finite-scalar-mates).
+09AL, 09B1 and 07A4.
 
 Proof plan (the eight steps of the DAG node):
 

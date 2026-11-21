@@ -56,7 +56,6 @@ completed coefficient ring. This is the coefficient-presentation comparison,
 proved by normalized finite quotient projections, localization comparison, and
 bounded proper push comparison described in the parent node.
 Source: Bhatt--Scholze, Remark 6.8.15; Hemo--Richarz--Scholbach, Lemma 5.3(1).
-(blueprint: lem-sf-native-proper-scalar-mate-bounded-below-restricted).
 -/
 theorem native_proper_scalar_mate_bounded_below_restricted
     (l : ℕ) [Fact l.Prime] [N : NativeRings.{u} l]

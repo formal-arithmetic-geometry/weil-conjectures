@@ -13,8 +13,7 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionReductio
 
 /-! # Coherent integral realization of compactification expressions
 
-Source: Stacks 0941; blueprint fix-prop-coherence, all seven realization-proof steps
-(blueprint: lem-sf-integral-compactification-system-realization).
+Source: Stacks 0941; blueprint fix-prop-coherence, all seven realization-proof steps.
 -/
 
 @[expose] public noncomputable section
@@ -78,8 +77,7 @@ private theorem coefficient_intertwining
   exact h
 
 /-- Coherent integral realization of compactification expressions and their maps.
-Source: Stacks 0941; blueprint fix-prop-coherence
-(blueprint: lem-sf-integral-compactification-system-realization).
+Source: Stacks 0941; blueprint fix-prop-coherence.
 
 Proof:
 
@@ -95,7 +93,7 @@ scalar-extension adjoint of the total-limit projection. Since derived evaluation
 isomorphisms, $e_N$ itself is an isomorphism of semilinear systems. This uses detection of
 isomorphisms only. The limit $\mathcal L N$ is derived complete, and its reductions have precisely
 the constructibility and common bounds of $N$, by the same counit isomorphisms and
-[def-weil-derived-complete-integral-detailed].  For a derived-complete input $K$,
+[def-weil-derived-complete-integral-detailed]. For a derived-complete input $K$,
 [def-weil-derived-complete] gives an isomorphism $K\cong\mathcal L\mathcal R K$: its Roos triangle
 and the canonical total-limit Roos triangle are triangles of the same reduction tower. This
 existence statement alone does not identify that isomorphism with $u_K$. Instead, the adjunction
@@ -113,7 +111,7 @@ and quasi-compact open hypotheses are exactly those of the square under consider
 scalar-restriction clause, with $B=R$ and the quotient maps $R\to A_n$, identifies this mate with
 the normalized constant-$R$ tower map of [lem-cbc-strict-tower-proper-open-calculus]. The bounded
 constructible etale-origin levels satisfy that node's finite evaluation hypothesis. All quotient
-transitions are retained by these constructions.  The same new lemma gives horizontal, vertical,
+transitions are retained by these constructions. The same new lemma gives horizontal, vertical,
 base-change, identity and refinement pasting as identities inside $D(\mathscr S)$. In particular
 its assertion is stronger than merely observing these equations after scalar restriction. These
 are the proper/open generators and equations required below; the remaining projection and exchange
@@ -133,7 +131,7 @@ evaluated objects. For $S_p$ use the proper direct-image reduction-tower formula
 gives the transition from $m$ to $n$: apply $Rp_{*,m}j_!$ to $K_m\to\operatorname{Res}_{m,n}K_n$,
 then its coefficient-restriction isomorphism. These are exactly the transitions in
 [def-weil-integral-rational-qbar-compact-support]. The simultaneous system construction and its
-total limit therefore give $d_{S_pJ_j}$ to precisely that functor, including its maps.  For
+total limit therefore give $d_{S_pJ_j}$ to precisely that functor, including its maps. For
 standalone open extension apply [lem-sf-integral-open-reduction-comparison]. It supplies the
 actual strict map $r_j$, completeness, and $d_{J_j}=u_{j_!K}^{-1}\mathcal L(r_j)^{-1}$ with the
 localized ringed-site open adjunction. Its quasi-compactness hypothesis holds for these opens. The
@@ -150,7 +148,7 @@ T}=(c_V\widehat\otimes^Lc_T)\circ a_\otimes(M,N)$. These formulas cover every un
 node and decrease tree size at every invocation. Their sources and targets are the stated ones,
 and each factor is natural and invertible. The induction is legitimate because every intermediate
 system is assumed normalized, with compatible etale-origin witnesses and common finite
-cohomological and Tor intervals.  The direct identification $d_{S_pJ_j}$ of step 3 agrees with the
+cohomological and Tor intervals. The direct identification $d_{S_pJ_j}$ of step 3 agrees with the
 recursive composite for $S_p(J_j(-))$. Indeed $r_j$ identifies $\mathcal R(j_!K)$ with
 $J_j\mathcal R K$ on the very same quotient tower, and the recursion inserts $e_{J_j\mathcal R
 K}^{-1}$. In the composite the adjacent $\mathcal R\mathcal L$ insertion cancels by $e_{\mathcal R
@@ -167,13 +165,13 @@ stated origin and common bounds. Substitute these basic maps along a finite expr
 define $r_V$. Induction on tree size using step 4, naturality of $e$ and $e_{\mathcal R K}\mathcal
 R(u_K)=1$ gives $$r_V=e_{V(\mathcal R K_i)}\circ\mathcal R(c_V^{-1}).$$ The base case is
 $r_{K_i}=1$ by that triangle identity; for a unary node naturality moves the inner comparison past
-$e$, and for a tensor node the same substitution applies in both slots.  For every basic generator
+$e$, and for a tensor node the same substitution applies in both slots. For every basic generator
 $\tau:V\to T$, the same lemma supplies the system square $$\tau_{\mathcal R K_i}r_V=r_T\mathcal
 R(\tau_{\rm int}).$$ It covers the normalized open maps and proper/open interchange as well as
 tensor, pullback and adjunction generators, before evaluation. Projection and exchange are the
 composites prescribed by [def-exchange-projection]; paste the squares for their factors. The
 tensor/square identifications in these composites are those of
-[lem-weil-pbc-ringed-exchange-tensor-coherence].  Apply $\mathcal L$ to this square and substitute
+[lem-weil-pbc-ringed-exchange-tensor-coherence]. Apply $\mathcal L$ to this square and substitute
 the displayed expression for $r_V,r_T$. Naturality of $u$ and $\mathcal L(e_N)u_{\mathcal LN}=1$
 cancel the outer unit/counit factors, giving $$c_T\circ\mathcal L(\tau_{\mathcal R K_i})=\tau_{\rm
 int}\circ c_V.$$ This establishes the generator intertwining equation. Extension to arbitrary
@@ -185,7 +183,7 @@ naturality of $a_A$ at $\tau:V\to T$; the middle square is precisely $A_{\mathrm
 equation in step 5. For tensor with a second expression use naturality of $a_\otimes$ in the
 chosen slot; if both slots change, factor the map into the two slot maps and use bifunctoriality.
 Induction on the number of outer nodes proves all the required whiskering equations. Composites of
-generators are covered because the intervening $c_V^{-1}c_V$ cancel.  Apply this result to the
+generators are covered because the intervening $c_V^{-1}c_V$ cancel. Apply this result to the
 proper/open equations proved inside the semilinear category in step 2. The total-limit functor
 preserves each equality of transformations. Conjugating by the $c_V$ of step 4 gives its integral
 identity, with the canonical compositors checked in step 5. In particular the comparison of two

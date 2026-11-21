@@ -326,7 +326,7 @@ private theorem restriction_coordinate_square
 
 /-- Conjugate an arbitrary restriction endomorphism through compatible coordinate squares.
 Source: Stacks Tags 03D6 and 03DI, the unit-square and counit-square calculation in
-compactification coherence (blueprint: lem-sf-finite-coordinate-calculus).
+compactification coherence.
 
 Proof: invert the first unit square by cancelling its isomorphisms. Expand the
 image of the inserted composite. Substitute the second unit square, move the

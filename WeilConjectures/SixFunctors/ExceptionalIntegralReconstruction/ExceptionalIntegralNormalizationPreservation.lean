@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralReconstruction.Exce
 
 /-! # ExceptionalIntegralNormalizationPreservation
 Source: Zheng, Section 5; integral reconstruction, step 2.
-(blueprint: lem-sf-exceptional-integral-normalization-preservation).
 -/
 
 @[expose] public noncomputable section
@@ -29,7 +28,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The actual quotient transitions stay normalized under both exceptional operations.
 Source: Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.24; the normalization
 part of integral reconstruction step 2.
-(blueprint: lem-sf-exceptional-integral-normalization-preservation).
 
 Proof: express each normalized source system, by the reconstruction counit, as
 reduction of its reconstructed integral object. Integral compact support and its

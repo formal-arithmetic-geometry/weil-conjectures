@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 # Bounded flat models
 
 Finite Tor amplitude in `[a, b]` is the same as admitting a bounded flat model concentrated in
-`[a, b]` (`lemma-flat-models-generators`).
+`[a, b]`.
 
 ## Main definitions
 

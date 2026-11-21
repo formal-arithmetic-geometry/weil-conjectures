@@ -111,7 +111,6 @@ import WeilConjectures.SixFunctors.CoefSupportOpenTensor.NativeOpenTensorOrdinar
 /-! # The ordinary counit for native open tensor support
 
 Source: Stacks, Modules on Sites, Tag 0E8I.
-(blueprint: lem-coef-native-open-tensor-ordinary-counit).
 -/
 
 @[expose] public noncomputable section
@@ -157,7 +156,6 @@ open extension. This is the categorical core of the support argument: the
 localized extension/tensor construction gives an inverse on the direct-sum
 generators, and the same inverse descends through coefficient quotients.
 Source: Stacks, sites-modules.tex, Tag 0E8I, lemma-j-shriek-and-tensor.
-(blueprint: lem-coef-native-open-tensor-ordinary-counit).
 -/
 theorem nativeOpenTensor_ordinary_counit_isIso {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j]

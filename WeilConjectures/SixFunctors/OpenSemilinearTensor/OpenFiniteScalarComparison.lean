@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenFiniteScalarUnitTran
 /-! # Generator-normalized scalar comparison at finite levels
 
 Source: Stacks Project, Modules on Sites, Tags 03DI, 03EK and 0E8I.
-(blueprint: lem-sf-open-finite-scalar-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -343,8 +342,7 @@ private theorem level_exists (o : Operations l E j) (n : ℕ) :
 set_option linter.unusedVariables false in
 /-- There is a unique family of finite scalar comparisons preserving every scalar-unit
 extension summand. This asserts no compatibility between different coefficient levels.
-Source: Stacks 03DI, 03EK and 0E8I; finite-level part of the strict scalar transport
-(blueprint: lem-sf-open-finite-scalar-comparison).
+Source: Stacks 03DI, 03EK and 0E8I; finite-level part of the strict scalar transport.
 
 Proof: at level n specialize the ringed-slice scalar generator comparison to the
 completed coefficient sheaf and its projection to the nth quotient. The component is

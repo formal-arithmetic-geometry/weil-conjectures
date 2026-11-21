@@ -90,7 +90,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 Source: blueprint, chap-The-six-operations-on-Dbctf, sk-prop-sf-biduality-general,
 proposition-six-operations-change-coefficients--7, order 2134; Stacks Project, Tags 08J9, 07A6,
-07A4 and 08TC (blueprint: def-sf-integral-hom-reduction-models).
+07A4 and 08TC.
 
 The presentation records below specify ordinary, uncompleted derived tensor on
 K-flat representatives. They normalize evaluation on local homogeneous sections,
@@ -129,44 +129,44 @@ variable (Y : AlgebraicGeometry.Scheme.{t})
   (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
 
 /-- Existing large-coefficient sheafification on the unchanged small site.
-Source: Stacks 03DA (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 03DA. -/
 noncomputable instance abSheafify :
     HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
       AddCommGrpCat.{max u (t + 1)} :=
   integralCoefficientAbSheafify.{t, u} Y
 
 /-- Existing locally bijective sheafification criterion at the coefficient universe.
-Source: Stacks 03DA (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 03DA. -/
 noncomputable instance abLocallyBijective :
     (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} :=
   integralCoefficientAbLocallyBijective.{t, u} Y
 
 /-- The existing module category, retaining both site universes.
-Source: Stacks 03DA (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 03DA. -/
 noncomputable abbrev Modules := SheafOfModules.{max u (t + 1)}
   ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
     (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)
 
 /-- Standard localization instance for the existing module category.
-Source: Stacks 05RU (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 05RU. -/
 noncomputable instance derivedCategory : HasDerivedCategory (Modules.{t, u} Y R) :=
   HasDerivedCategory.standard _
 
 /-- The standard unbounded derived localization.
-Source: Stacks 05RU (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 05RU. -/
 noncomputable abbrev Derived := @DerivedCategory (Modules.{t, u} Y R) _ _
   (HasDerivedCategory.standard _)
 
 /-- The existing ambient derived internal Hom, without a change of coefficients.
-Source: Stacks 08J7 (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 08J7. -/
 noncomputable abbrev hom : (Derived.{t, u} Y R)ᵒᵖ × Derived.{t, u} Y R ⥤ Derived.{t, u} Y R :=
   @derivedInternalHomOfUniverses.{t + 1, t, u}
     _ _ (AlgebraicGeometry.Scheme.ProEt.topology Y) _ _ R
       (HasDerivedCategory.standard _)
 
 /-- The recorded monoidal localization structure for the independent coefficient universe.
-Source: Stacks 03EK (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 03EK. -/
 noncomputable instance tensorLocalization :
     ((AlgebraicGeometry.Scheme.ProEt.topology Y).W.inverseImage
       (PresheafOfModules.toPresheaf.{max u (t + 1)}
@@ -175,23 +175,23 @@ noncomputable instance tensorLocalization :
   SheafOfModules.isMonoidal_W_independentCoefficients R
 
 /-- The existing sectionwise sheaf tensor bifunctor.
-Source: Stacks 03EK (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 03EK. -/
 noncomputable abbrev ordinaryTensor :=
   @MonoidalCategory.curriedTensor (Modules.{t, u} Y R) _ (SheafOfModules.monoidalCategory R)
 
 /-- Zero preservation in the first tensor argument, from the existing tensor interface.
-Source: Stacks 03EK (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 03EK. -/
 noncomputable instance ordinaryTensorZero : (ordinaryTensor.{t, u} Y R).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
 
 /-- Zero preservation in the second tensor argument.
-Source: Stacks 03EK (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 03EK. -/
 noncomputable instance ordinaryTensorObjZero (M : Modules.{t, u} Y R) :
     ((ordinaryTensor.{t, u} Y R).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R M
 
 /-- Countable totalizations use the existing cocompleteness of module sheaves.
-Source: Stacks 03DA (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 03DA. -/
 noncomputable instance countableColimits :
     HasColimitsOfSize.{0, 0} (Modules.{t, u} Y R) :=
   letI := integralCoefficientAbSheafify.{t, u} Y
@@ -203,7 +203,7 @@ noncomputable instance countableColimits :
     max u (t + 1), max u (t + 1) + 1} (Modules.{t, u} Y R)
 
 /-- Signed total tensor of complexes, using Mathlib's existing totalization.
-Source: Stacks 06YL (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 06YL. -/
 noncomputable def totalTensor :
     CochainComplex (Modules.{t, u} Y R) ℤ ⥤ CochainComplex (Modules.{t, u} Y R) ℤ ⥤
       CochainComplex (Modules.{t, u} Y R) ℤ :=
@@ -215,13 +215,13 @@ noncomputable def totalTensor :
   (ordinaryTensor.{t, u} Y R).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ)
 
 /-- The recorded K-flat predicate, with independent coefficient universe.
-Source: Stacks 06YN (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 06YN. -/
 noncomputable abbrev flat : ObjectProperty (CochainComplex (Modules.{t, u} Y R) ℤ) :=
   CochainComplex.IsKFlatIndependentCoefficients
     (J := AlgebraicGeometry.Scheme.ProEt.topology Y) (R := R)
 
 /-- Pure tensors mapped through the ordinary module-sheafification unit.
-Source: Stacks 03EK (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 03EK. -/
 noncomputable def pair (M N : Modules.{t, u} Y R)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) :
@@ -233,7 +233,7 @@ noncomputable def pair (M N : Modules.{t, u} Y R)
           (M.val ⊗ N.val)).app U (x ⊗ₜ[R.obj.obj U] y))
 
 /-- A local homogeneous tensor inserted into the appropriate total summand.
-Source: Stacks 06YL (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 06YL. -/
 noncomputable def totalPair (P Q : CochainComplex (Modules.{t, u} Y R) ℤ)
     (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U) :
@@ -247,14 +247,14 @@ noncomputable def totalPair (P Q : CochainComplex (Modules.{t, u} Y R) ℤ)
     (pair.{t, u} Y R (P.X i) (Q.X j) U x y)
 
 /-- The existing Hom-complex product projection, with its source type kept explicit.
-Source: Stacks 0A8X (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 0A8X. -/
 noncomputable def projection (P I : CochainComplex (Modules.{t, u} Y R) ℤ)
     (j i : ℤ) :=
   homComplexπ.{t + 1, t, max u (t + 1), max u (t + 1)}
     (R := R) P I j i (i + j) rfl
 
 /-- The product projection in the existing Hom complex, evaluated at the identity slice.
-Source: Stacks 0A8X (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 0A8X. -/
 noncomputable def evaluate (P I : CochainComplex (Modules.{t, u} Y R) ℤ)
     (j i : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (f : (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I).X j |>.val.obj U)
@@ -263,7 +263,7 @@ noncomputable def evaluate (P I : CochainComplex (Modules.{t, u} Y R) ℤ)
 
 /-- Canonical localization comparison from a Hom complex to derived internal Hom.
 It is the Hom map to the fixed K-injective replacement, followed by Localization.fac.
-Source: Stacks 08J7 (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 08J7. -/
 noncomputable def homModelMap (P I : CochainComplex (Modules.{t, u} Y R) ℤ) :
     DerivedCategory.Q.obj (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I) ⟶
       (hom.{t, u} Y R).obj (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj I) :=
@@ -283,7 +283,7 @@ attribute [local irreducible] totalTensor totalPair pair projection evaluate hom
 The parameter adjunction retains naturality in the first derived argument.
 The last field fixes evaluation on every K-flat test representative by the actual
 Hom-complex evaluation, including the sign for the order P tensor Hom(P,I).
-Source: Stacks 08J9, 06YU (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 08J9, 06YU. -/
 structure TensorPresentation where
   tensor : Derived.{t, u} Y R × Derived.{t, u} Y R ⥤ Derived.{t, u} Y R
   representative :
@@ -307,7 +307,7 @@ structure TensorPresentation where
           (parameterAdjunction.adj (DerivedCategory.Q.obj P)).counit.app (DerivedCategory.Q.obj I)
 
 /-- The adjunction at a fixed first argument, retaining the existing presentation API.
-Source: Stacks 08J9 (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 08J9. -/
 noncomputable def TensorPresentation.adjunction
     {Y : AlgebraicGeometry.Scheme.{t}}
     {R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)}}
@@ -327,19 +327,19 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 namespace IntegralHom
 
 /-- Additivity of the same ordinary scalar extension, from its recorded adjunction packet.
-Source: Stacks 03CZ (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 03CZ. -/
 noncomputable instance reductionAdditive (n : ℕ) :
     (integralReductionChangeOfRings l E Y D hl n).Additive :=
   scalarReductionExtensionAdditive l E Y n
 
 /-- Zero preservation supplied by additivity of coefficient extension.
-Source: Stacks 03CZ (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 03CZ. -/
 noncomputable instance reductionZero (n : ℕ) :
     (integralReductionChangeOfRings l E Y D hl n).PreservesZeroMorphisms :=
   inferInstance
 
 /-- The canonical derived-reduction counit on complexes, including quotient factors.
-Source: Stacks 06YY (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 06YY. -/
 noncomputable def reductionCounit (n : ℕ)
     (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) :
     (integralDerivedReduction l E Y D hl n).obj (DerivedCategory.Q.obj P) ⟶
@@ -357,7 +357,7 @@ noncomputable def reductionCounit (n : ℕ)
 
 /-- The ordinary extension unit, with its recorded normalization x maps to 1 tensor x.
 Its choice is determined by the adjunction and the sectionwise normalization.
-Source: Stacks 03CZ (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 03CZ. -/
 noncomputable def reductionUnit (n : ℕ)
     (M : completedIntegralModuleSheaves l E Y D hl) :
     M ⟶ (completedIntegralRestrictScalars l E Y D hl n).obj
@@ -371,7 +371,7 @@ attribute [local irreducible] reductionCounit reductionUnit integralDerivedReduc
 pair and the actual ordinary extension units on local sections. The chain comparison
 is required to be invertible; its displayed unit formula uniquely determines it.
 Thus neither the derived comparison nor the ordinary comparison is an arbitrary map.
-Source: Stacks 07A4 and 06YY (blueprint: def-sf-integral-hom-reduction-models). -/
+Source: Stacks 07A4 and 06YY. -/
 structure ReductionPresentation
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)) (n : ℕ) where
   target : TensorPresentation.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)
@@ -416,7 +416,7 @@ structure ReductionPresentation
 /-- The comparison is exactly the transpose of reduced evaluation, using the inverse
 canonical tensor comparison. In particular it is a morphism over the finite quotient.
 Source: blueprint order 2134, displayed comparison and pairing;
-Stacks 07A6 and 08J9 (blueprint: def-sf-integral-hom-reduction-models). -/
+Stacks 07A6 and 08J9. -/
 noncomputable def comparison
     {a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)}
     {n : ℕ} (m : ReductionPresentation l E Y D hl a n)

@@ -28,7 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Both direct coefficient maps are fixed by their finite quotient projections.
-Source: Stacks 0941 (blueprint: lem-sf-integral-ordinary-pullback-comparison). -/
+Source: Stacks 0941. -/
 theorem directRing_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (sfCompletedCoefficientMap l E f) = ordinaryIntegralDirectRingMap l E f := by
@@ -40,8 +40,7 @@ theorem directRing_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
   · exact (ordinaryIntegralDirectRingMap_existsUnique l E f).exists.choose_spec
 
 /-- The canonical ordinary ringed and total-left-derived pullback models agree.
-Source: Stacks 03D2 and 06YY
-(blueprint: lem-sf-integral-ordinary-pullback-comparison). -/
+Source: Stacks 03D2 and 06YY. -/
 @[irreducible] def pullIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PurCompactSupport.pull (PurCompactSupport.completed l E) f ≅
       ordinaryIntegralDerivedPull l E f := by
@@ -74,16 +73,14 @@ Source: Stacks 03D2 and 06YY
   exact Functor.mapDerivedCategoryNatIso b ≪≫ c
 
 /-- The actual ordinary-to-completed pullback map in the ringed coordinates.
-Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 08TC
-(blueprint: lem-sf-integral-ordinary-pullback-comparison). -/
+Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 08TC. -/
 @[irreducible] def pullComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PurCompactSupport.pull (PurCompactSupport.completed l E) f ⟶
       integralDerivedPullback l E f :=
   (pullIso l E f).hom ≫ ordinaryIntegralCompletionComparison l E f
 
 /-- The ringed-coordinate completion map is invertible on constructible inputs.
-Source: Bhatt--Scholze, Lemma 6.5.9 and Proposition 6.6.11
-(blueprint: lem-sf-integral-ordinary-pullback-comparison).
+Source: Bhatt--Scholze, Lemma 6.5.9 and Proposition 6.6.11.
 
 Proof: the canonical adjunction identifies the ringed module pullback with the
 ordinary module pullback. Exact localization is its total left derived functor,

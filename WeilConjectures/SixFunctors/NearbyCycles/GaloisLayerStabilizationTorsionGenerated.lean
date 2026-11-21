@@ -31,7 +31,6 @@ and then the nearby cycles of `N_{L'}` are all of `Ψ_{N_Ω} C`
 noetherianity hypothesis of
 `NearbyCyclesModel.exists_isIso_pullbackExchange_galoisLayerRestrict_of_isNoetherianObject`,
 which does not hold for pro-étale sheaves in general.
-
 -/
 
 @[expose] public section

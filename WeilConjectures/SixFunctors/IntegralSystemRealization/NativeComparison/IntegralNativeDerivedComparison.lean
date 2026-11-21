@@ -191,8 +191,7 @@ private theorem derivedEvaluation_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) 
 
 /-- Exact localization of ordinary whole-system left-adjoint uniqueness.
 The specified ordinary direct isomorphism determines this comparison.
-Source: exact localization of adjoint uniqueness.
-(blueprint: lem-sf-integral-native-exact-comparison). -/
+Source: exact localization of adjoint uniqueness. -/
 def derivedPullIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (r : pullbackTensorSequenceDirect l E f ≅
       ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
@@ -211,8 +210,7 @@ def derivedPullIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- Exact localization of the ordinary native comparison preserves finite evaluation.
 Source: the whole-cochain normalization and exact-square factorization.
 Proof: localize the ordinary square, use natural-transformation extensionality and
-its cochain factor equations, then use the normalized derived evaluation uniqueness.
-(blueprint: lem-sf-integral-native-exact-comparison). -/
+its cochain factor equations, then use the normalized derived evaluation uniqueness. -/
 theorem derived_pull_square {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (r : pullbackTensorSequenceDirect l E f ≅
       ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
@@ -278,8 +276,7 @@ theorem derived_pull_square {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
 Source: derived unit/counit factor equations and ordinary left-adjoint uniqueness.
 Proof: test right-derived transformations on homotopy inputs. The factor equations
 reduce conjugation to its ordinary formula, checked in each complex degree. Apply
-this to the ordinary finite comparison and invert the resulting isomorphism.
-(blueprint: lem-sf-integral-native-finite-derived-conjugate). -/
+this to the ordinary finite comparison and invert the resulting isomorphism. -/
 theorem finite_derived_conjugate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     letI := ProEtale.StrictTower.modulePullback_additive (compactSupportSystemLevel l E n) f
     letI := ProEtale.StrictTower.modulePullback_finiteLimits (compactSupportSystemLevel l E n) f

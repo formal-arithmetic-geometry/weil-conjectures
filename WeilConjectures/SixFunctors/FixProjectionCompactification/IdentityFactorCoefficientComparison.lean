@@ -452,10 +452,6 @@ private theorem fixedIdentity_app (A : Type u) [CommRing A]
 /-- The coefficient comparison commutes with the independent identity-factor unit maps.
 There is no etale-origin condition or geometric composition comparison in this equation.
 
-Source: def-sf-operation-stages, proper/open normalizations; the section and K-injective
-normalizations of sfIntrinsicDerivedDirectImageComparison.
-(blueprint: lem-sf-identity-factor-coefficient-comparison).
-
 Proof: expand the three compact-support comparisons into their open and direct-image
 comparisons. For the proper compactification, the open comparison followed by the
 realization of the fixed-scalar identity open unit is the intrinsic identity open unit;

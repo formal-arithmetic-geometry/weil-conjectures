@@ -15,7 +15,6 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFi
 /-! # The constructed finite condensed integral tensor model
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: def-sf-finite-condensed-integral-tensor-model)
 -/
 
 @[expose] public noncomputable section
@@ -51,8 +50,7 @@ variable [IsNoetherian X]
 
 /-- The raw integral formula, transported through section reconstruction and the
 continuous realization, with the two scalar extensions still separate.
-Source: BS 6.8.2 and 6.8.14(2); raw identity and section encoding counit.
-(blueprint: def-sf-finite-condensed-integral-tensor-model). -/
+Source: BS 6.8.2 and 6.8.14(2); raw identity and section encoding counit. -/
 @[irreducible] def finiteCondensedIntegralRawModel (A : FiniteCondensedData l X)
     (E : Index l (PadicAlgCl l)) :=
   let Q := sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X
@@ -69,8 +67,7 @@ Source: BS 6.8.2 and 6.8.14(2); raw identity and section encoding counit.
 
 /-- The explicit finite realization has its ordinary integral tensor model.
 Source: BS 6.8.2 and 6.8.14(2): compose the integral raw comparison, continuous
-realization formula, section reconstruction and the normalized coefficient square.
-(blueprint: def-sf-finite-condensed-integral-tensor-model). -/
+realization formula, section reconstruction and the normalized coefficient square. -/
 @[irreducible] def finiteCondensedIntegralTensorModel (A : FiniteCondensedData l X)
     (C : CoefficientSystem l X) (E : Index l (PadicAlgCl l)) :
     letI := C.commutative

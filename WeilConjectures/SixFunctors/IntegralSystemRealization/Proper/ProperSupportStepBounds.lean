@@ -486,8 +486,7 @@ private theorem nativePush_normalized
     (fun a b hab ↦ (cancel_mono (ε.hom.app P)).mp hab)
 
 /-- One proper letter preserves the system domain and integral constructibility.
-Source: Stacks 0F10, 0941; parent proof steps 7 and 8
-(blueprint: lem-sf-proper-support-step-bounds).
+Source: Stacks 0F10, 0941; parent proof steps 7 and 8.
 
 Proof: choose a uniform relative fibre-dimension bound for the proper morphism.
 The finite-ring compact-support bound with identity open gives constructibility and

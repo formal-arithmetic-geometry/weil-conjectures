@@ -10,8 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerDirectImageC
 
 /-! # Associativity of the section-normalized system pullback compositors
 
-Source: Stacks 03D8, 07A7; the composition calculation in the blueprint
-(blueprint: lem-sf-integral-system-compositor-associativity).
+Source: Stacks 03D8, 07A7; the composition calculation in the blueprint.
 -/
 
 @[expose] public noncomputable section
@@ -193,8 +192,7 @@ private theorem derived_transport {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g)
   exact Functor.mapDerivedCategoryNatIso_refl
 
 /-- The recorded system pullback compositors satisfy associativity.
-Source: Stacks 03D8 and 07A7
-(blueprint: lem-sf-integral-system-compositor-associativity).
+Source: Stacks 03D8 and 07A7.
 
 Proof: both ordinary direct-image composites restrict sections along the same map
 between the triple fibre products. Conjugation transfers this equality to the ordinary

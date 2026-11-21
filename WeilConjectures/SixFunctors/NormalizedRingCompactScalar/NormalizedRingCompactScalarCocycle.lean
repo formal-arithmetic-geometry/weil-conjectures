@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoeff
 /-! # Normalized compact-support scalar cocycles at ring stages
 
 Source: current Weil blueprint, exceptional inverse image coefficient normalization;
-Stacks Project, Tags 0GL1, 0D6D and 0E47
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle).
+Stacks Project, Tags 0GL1, 0D6D and 0E47.
 
 The input records below package only the realizations stipulated in the statement.
 The categories, full inclusions, scalar associators, multiplication units and proper/open
@@ -38,8 +37,7 @@ variable (l : ℕ) [Fact l.Prime]
   {X Y : Scheme.{max u v}} {f : X ⟶ Y} (c : Compactification f)
 
 /-- A supplied compact-support functor and its specified ambient realization.
-Source: blueprint exceptional coefficient normalization, realization paragraph
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle). -/
+ -/
 structure Support (s : RingStage.{max u v} l) where
   functor : C.{u, v} l Ω X (s.stage l) ⥤ C.{u, v} l Ω Y (s.stage l)
   realization : functor ⋙ RingStage.inclusion.{u, v} l Ω Y s ≅
@@ -47,8 +45,7 @@ structure Support (s : RingStage.{max u v} l) where
 
 /-- A supplied scalar functor with its actual ordinary derived scalar realization.
 No exactness or shift structure is an additional input.
-Source: blueprint exceptional coefficient normalization, sigma paragraph
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle). -/
+ -/
 structure Scalar {s t : RingStage.{max u v} l}
     (a : Change (s.coefficients l) (t.coefficients l)) (T : Scheme.{max u v}) where
   functor : C.{u, v} l Ω T (s.stage l) ⥤ C.{u, v} l Ω T (t.stage l)
@@ -56,8 +53,7 @@ structure Scalar {s t : RingStage.{max u v} l}
     RingStage.inclusion.{u, v} l Ω T s ⋙ pbcDerivedExtend (a.map T)
 
 /-- The written normalization of the supplied restricted comparison, component by component.
-Source: blueprint exceptional coefficient normalization, displayed realization equation
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle). -/
+ -/
 def Normalized {s t : RingStage.{max u v} l}
     (a : Change (s.coefficients l) (t.coefficients l))
     (A : Support.{u, v} l Ω c s) (B : Support.{u, v} l Ω c t)
@@ -72,8 +68,7 @@ def Normalized {s t : RingStage.{max u v} l}
         (comparison a c).app ((RingStage.inclusion.{u, v} l Ω X s).obj K)
 
 /-- A supplied restricted associator whose realization is balanced tensor associativity.
-Source: blueprint exceptional coefficient normalization, alpha paragraph
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle). -/
+ -/
 structure Associator {s t r : RingStage.{max u v} l}
     {a : Change (s.coefficients l) (t.coefficients l)}
     {b : Change (t.coefficients l) (r.coefficients l)}
@@ -91,8 +86,7 @@ structure Associator {s t r : RingStage.{max u v} l}
 
 /-- A supplied restricted unit whose realization is scalar multiplication.
 The equality h retains arbitrary presentations of the identity ring map.
-Source: blueprint exceptional coefficient normalization, unit paragraph
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle). -/
+ -/
 structure Unit {s : RingStage.{max u v} l}
     {a : Change (s.coefficients l) (s.coefficients l)}
     (h : ∀ W : Scheme.{max u v}, a.map W = 𝟙 _) (T : Scheme.{max u v})
@@ -110,8 +104,7 @@ structure Unit {s : RingStage.{max u v} l}
 The last clause expresses independence of an allowedness proof through uniqueness for
 fixed actual maps and realizations; any alternate presentation is compared via those
 realizations. All coefficient changes are compatible maps of the actual ring sheaves.
-Source: blueprint exceptional coefficient normalization, ambient and restricted cocycles
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle). -/
+ -/
 structure Laws : Prop where
   ambient_composition {s t r : RingStage.{max u v} l}
       (a : Change (s.coefficients l) (t.coefficients l))
@@ -336,8 +329,7 @@ private theorem allLaws : Laws.{u, v} l Ω c := by
 
 /-- Normalized compact-support scalar comparisons obey the ambient and restricted cocycles.
 Source: current blueprint, exceptional inverse image coefficient normalization;
-Stacks Project, Tags 0GL1, 0D6D, 0E47
-(blueprint: lem-sf-normalized-ring-compact-scalar-cocycle).
+Stacks Project, Tags 0GL1, 0D6D, 0E47.
 
 Proof:
 1. Write J_s for open extension and P_s for proper direct image. Open tensor

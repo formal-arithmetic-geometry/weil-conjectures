@@ -49,8 +49,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
 
 /-- Transport of the canonical proper/open map preserves the open-adjunction transpose.
 This is only the open triangle: no outer proper map or compact-support coordinate occurs.
-Source: compactification-coherence proof, first paragraph; Stacks 03DI, 03D6 and 0F7B
-(blueprint: lem-sf-finite-ring-fixed-open-normalization).
+Source: compactification-coherence proof, first paragraph; Stacks 03DI, 03D6 and 0F7B.
 
 Proof: first work at the retained etale antecedent O.L. The proper/open map there
 is the transpose of the inverse proper restriction identification. Its restriction

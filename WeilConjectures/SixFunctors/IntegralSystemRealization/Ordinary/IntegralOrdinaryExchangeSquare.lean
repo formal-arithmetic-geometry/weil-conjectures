@@ -10,9 +10,6 @@ import all WeilConjectures.SixFunctors.IntegralSystemRealization.Ordinary.Integr
 
 /-! # Ordinary coefficient exchange square
 
-Source: blueprint fix-prop-coherence, the exchange component of the normalized mate
-argument for `lem-sf-integral-ordinary-exchange-projection-squares`.
-
 The proof is split from the conjunction theorem so that the exchange mate can be
 proved independently by pasting pullback/reduction comparison squares and
 transposing through the proper adjunctions. -/
@@ -36,7 +33,6 @@ attribute [local irreducible] pullbackTensorCalculus
 
 /-- Exchange component of the ordinary coefficient mate square.
 Source: Stacks Tags 07A7 and 0E48; blueprint fix-prop-coherence.
-(blueprint: lem-sf-integral-ordinary-exchange-projection-squares).
 
 Proof: paste the pullback and reduction comparison squares for the four sides of
 the given square, use composition normalization to identify the boundary with

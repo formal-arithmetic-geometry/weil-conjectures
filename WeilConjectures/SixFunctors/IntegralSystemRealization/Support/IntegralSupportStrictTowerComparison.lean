@@ -113,8 +113,7 @@ private theorem nativeSupportIso_evaluation (o : Operations l E)
 /-- The simultaneous open/proper system comparison identifies the prescribed strict
 compact-support tower, retaining its specified finite evaluation maps.
 Source: Stacks 0941 and 0D6E; fix-prop-coherence.proof.md, coefficient comparisons,
-and primitive support realization Step 1
-(blueprint: lem-sf-integral-support-strict-tower-comparison).
+and primitive support realization Step 1.
 
 Proof: present the ordinary sequence-site direct images as the native varying-ring
 ones by the identity on sections. Their left adjoints are identified by the units;

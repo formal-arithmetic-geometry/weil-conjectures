@@ -11,7 +11,6 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.In
 
 Source: Stacks 03D7 and 0941; primitive coefficient comparisons in
 `fix-prop-coherence.proof.md`.
-(blueprint: lem-sf-pull-quotient-ordinary-projection-section)
 -/
 
 @[expose] public noncomputable section

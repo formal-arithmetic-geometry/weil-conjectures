@@ -9,7 +9,7 @@ import all WeilConjectures.SixFunctors.IntegralSystemRealization.Open.OpenSuppor
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.IntegralOpenRealizationNaturality
 /-! Proper/open normalization laws for exceptional integral transport.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26. (blueprint: lem-sf-exceptional-ring-transport-core-normalization-laws) -/
+5.26. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -68,8 +68,7 @@ The levelwise finite-Tor predicate gives intrinsic constructibility, and the com
 `IsGE` and `IsLE` bounds give a common cohomological support interval. Bounded
 constructible descent lifts the actual system transitions to compatible etale origins.
 Source: Zheng, Construction 4.1; Stacks 0941, and `openSupportStep_bounds`'s
-bounded-origin construction.
-(blueprint: lem-sf-exceptional-transport-sequence-good) -/
+bounded-origin construction. -/
 theorem sequenceProperty_good (l : ℕ) [Fact l.Prime] (E : FieldStage.{u} l)
     (T : Scheme.{u}) (N : coefficientSequenceDerived l E.carrier T)
     (hN : sequenceProperty l E T N) : IntegralSystemRealization.Good l E.carrier T N := by
@@ -99,8 +98,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω
 /-- The integral comparison is the fully faithful lift of the given ambient left
 realization followed by the proper/open compact-support realization.
 Source: Zheng, Construction 5.25 and Proposition 5.26; the full-subcategory lift of
-this specified natural isomorphism.
-(blueprint: lem-sf-exceptional-integral-left-normalization-lift) -/
+this specified natural isomorphism. -/
 def normalizedIntegralLeft :
     A.F ⋙ PurCompactSupport.finiteTorIntegralInclusion l E.carrier Y ≅
       PurCompactSupport.finiteTorIntegralInclusion l E.carrier X ⋙
@@ -116,8 +114,7 @@ def normalizedIntegralLeft :
 /-- The fully faithful lift has exactly the prescribed ambient component.
 Proof: the image of a preimage under a fully faithful functor is the original map;
 apply this equality to each component of the ambient composite.
-Source: Zheng, Construction 5.25 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-left-normalization-lift) -/
+Source: Zheng, Construction 5.25 and Proposition 5.26. -/
 theorem normalizedIntegralLeft_hom (K : C.{u} l Ω X (.integral E)) :
     (sfIntegralConstructible l E.carrier Y).ι.map
         ((normalizedIntegralLeft l Ω D hl c E A r).hom.app K) =
@@ -159,8 +156,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω
 of the chosen comparison maps.
 Proof: the equivalence lands in the sequence-property subcategory; apply
 `sequenceProperty_good` to that object's property.
-Source: Zheng, Construction 4.1 and Construction 5.25.
-(blueprint: lem-sf-exceptional-transport-normalization-domains) -/
+Source: Zheng, Construction 4.1 and Construction 5.25. -/
 theorem TransportCoreData.inputGood (E : FieldStage.{u} l)
     (K : C.{u} l Ω X (.integral E)) :
     IntegralSystemRealization.Good l E.carrier X
@@ -174,8 +170,7 @@ Proof: the compactification ambient scheme is finite type over the original base
 because its map to Y is proper. The open compactification arrow is quasi-compact.
 Apply the open support theorem to the reconstructed Good input and the original
 integral constructible object; retain its system conclusion.
-Source: Zheng, Construction 5.25; Stacks 0941, 0GL1 and 0E8I.
-(blueprint: lem-sf-exceptional-transport-normalization-domains) -/
+Source: Zheng, Construction 5.25; Stacks 0941, 0GL1 and 0E8I. -/
 theorem TransportCoreData.openGood (E : FieldStage.{u} l)
     (K : C.{u} l Ω X (.integral E)) :
     IntegralSystemRealization.Good l E.carrier c.Z
@@ -202,8 +197,7 @@ theorem TransportCoreData.openGood (E : FieldStage.{u} l)
 /-- Naturality of the supplied open realization on reconstruction inputs.
 Proof: retain the ambient fields of the realization package and apply the
 normalized open-realization naturality theorem to the reconstructed morphism.
-Source: Zheng, Construction 5.25; normalized open-reconstruction unit and counit.
-(blueprint: lem-sf-exceptional-transport-canonical-system-comparison) -/
+Source: Zheng, Construction 5.25; normalized open-reconstruction unit and counit. -/
 theorem TransportCoreData.openRealization_naturality (E : FieldStage.{u} l)
     {K N : C.{u} l Ω X (.integral E)} (m : K ⟶ N) :
     (coefficientSequenceLimit l E.carrier c.Z).map
@@ -247,8 +241,7 @@ theorem TransportCoreData.openRealization_naturality (E : FieldStage.{u} l)
 
 /-- The prescribed system realization, using the actual support equality and the
 proper/open comparisons. All maps are specified; no existence witness is selected.
-Source: Zheng, Construction 5.25 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-transport-canonical-system-comparison) -/
+Source: Zheng, Construction 5.25 and Proposition 5.26. -/
 def TransportCoreData.canonicalSystemRealization (E : FieldStage.{u} l)
     (hs : d.F E ⋙ (sequenceProperty l E Y).ι =
       (sequenceProperty l E X).ι ⋙
@@ -294,8 +287,7 @@ def TransportCoreData.canonicalSystemRealization (E : FieldStage.{u} l)
 
 /-- Lift the specified system realization through the fully faithful integral
 inclusion, fixing the comparison with the supplied integral operation.
-Source: Zheng, Construction 5.25 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-transport-canonical-system-comparison) -/
+Source: Zheng, Construction 5.25 and Proposition 5.26. -/
 def TransportCoreData.canonicalRealizeF (E : FieldStage.{u} l)
     (hs : d.F E ⋙ (sequenceProperty l E Y).ι =
       (sequenceProperty l E X).ι ⋙
@@ -315,8 +307,7 @@ ambient left realization with its inverse. The source equality contributes only 
 equality-transport map, which disappears under heterogeneous equality. The remaining
 composite is exactly proper realization followed by the normalized open realization
 and the reconstruction unit inverse.
-Source: Zheng, Construction 5.25 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-transport-canonical-system-comparison) -/
+Source: Zheng, Construction 5.25 and Proposition 5.26. -/
 theorem TransportCoreData.canonicalRealizeF_normalized (E : FieldStage.{u} l)
     (hs : d.F E ⋙ (sequenceProperty l E Y).ι =
       (sequenceProperty l E X).ι ⋙
@@ -366,8 +357,7 @@ theorem TransportCoreData.canonicalRealizeF_normalized (E : FieldStage.{u} l)
 /-- Fix both comparison maps by their prescribed proper/open constructions.
 The support identity supplies the source transport for the system comparison;
 all remaining transport fields are retained from the given data.
-Source: Zheng, Construction 5.25 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-transport-canonical-system-comparison) -/
+Source: Zheng, Construction 5.25 and Proposition 5.26. -/
 def TransportCoreData.normalizeComparisons
     (hs : ∀ E : FieldStage.{u} l, d.F E ⋙ (sequenceProperty l E Y).ι =
       (sequenceProperty l E X).ι ⋙
@@ -383,8 +373,7 @@ def TransportCoreData.normalizeComparisons
 Proof: fully faithful lifting proves the integral-left equation, the reconstructed
 sequence and its open extension are Good, and canonicalRealizeF_normalized proves
 the remaining system equation. No assertion about arbitrary comparison maps is used.
-Source: Zheng, Construction 5.25 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-ring-transport-core-normalization-laws) -/
+Source: Zheng, Construction 5.25 and Proposition 5.26. -/
 theorem TransportCoreData.normalizeComparisons_laws
     (hs : ∀ E : FieldStage.{u} l, d.F E ⋙ (sequenceProperty l E Y).ι =
       (sequenceProperty l E X).ι ⋙
@@ -414,7 +403,7 @@ its inverse and canceling the ambient left realization gives the fourth law.
 The reconstructed input and its open extension are Good by the bounded-system and
 open-support theorems.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26. (blueprint: lem-sf-exceptional-ring-transport-core-normalization-laws) -/
+5.26. -/
 theorem exists_exceptional_transport_core_normalization_laws
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

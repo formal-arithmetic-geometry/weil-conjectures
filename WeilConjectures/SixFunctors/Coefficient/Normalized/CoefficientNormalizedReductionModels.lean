@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedR
 
 /-! # Normalized coefficient reduction and quotient tensors
 
-Source: Stacks 06YS, 06YY, 07A4, 07A6 and 0941
-(blueprint: lem-coef-normalized-reduction-models).
+Source: Stacks 06YS, 06YY, 07A4, 07A6 and 0941.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The three tensor models retain the ordinary associator, unit and symmetry formulas.
 These are the coherence witnesses of the existing ringed-site tensor theorem.
-Source: Stacks 0FPT, 07A4 and 08J9
-(blueprint: lem-coef-normalized-reduction-models). -/
+Source: Stacks 0FPT, 07A4 and 08J9. -/
 def CoefficientDerivedSystemTensorCoherence (T : CoefficientDerivedSystemTensors l E W) :
     Prop :=
   (∃ β : @SymmetricCategory (DerivedCategory (scalarReductionSource l E W))
@@ -52,8 +50,7 @@ attribute [local irreducible] CoefficientDerivedSystemTensorCoherence
 
 /-- Reduction with its normalized tensor comparisons, before internal Hom or sections.
 Source: Stacks, sites-cohomology.tex, Tags 06YS, 06YY, 07A4, 07A6 and 0941;
-resolution-model construction, steps 1--2
-(blueprint: lem-coef-normalized-reduction-models).
+resolution-model construction, steps 1--2.
 
 Proof:
 Apply SequenceProjection.pushforwardLimitProjections to the completed coefficient

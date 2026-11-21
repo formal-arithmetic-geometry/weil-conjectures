@@ -20,10 +20,8 @@ map `α_u` is adjoint, with the composite
 
 `j₂^* Ru_* j₁! K ≅ Rp_* b^* j₁! K ≅ Rp_* s_! K ≅ K`
 
-of the restriction of the derived direct image to the open `X ⊆ T₂`
-(blueprint `proposition-construction-independence-rf-shriek--7`), the restriction of the extension
-by zero to `V` and the direct image from the open and closed section `s`
-(blueprint `proposition-construction-independence-rf-shriek--7`).
+of the restriction of the derived direct image to the open `X ⊆ T₂`, the restriction of the extension
+by zero to `V` and the direct image from the open and closed section `s`.
 
 ## Main definitions
 

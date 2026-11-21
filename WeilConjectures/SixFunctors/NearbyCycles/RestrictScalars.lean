@@ -32,7 +32,6 @@ to `α_φ` with coefficients `Λ` up to these commutations (`CategoryTheory.map_
 The cube conditions are `ProEtale.CondensedRing.derivedComapLeftDerivedUpperStarIso_cube` and its
 mate, and the commutation with `Rj_*` is invertible by
 `ProEtale.CondensedRing.rightDerivedLowerStarComapIso_hom_eq_mateEquiv`.
-
 -/
 
 @[expose] public section

@@ -30,8 +30,7 @@ the coefficient-change statements
 ## Remaining inputs
 
 - `isCoefficientChange_compactlySupportedGlobalSectionsRestrictScalarsIso`: the canonical
-  comparison is an isomorphism on derived base changes of `Dᵇctf` complexes (blueprint
-  `lemma-sp-reduction--1`, subsection `sk-def-sfb-coefficient-comparisons`).
+  comparison is an isomorphism on derived base changes of `Dᵇctf` complexes.
   The geometric-stalk analogue is proved in
   `WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk`.
 - `derivedRestrictScalarsCompRightDerivedLowerShriekIso_baseChangeMap`:

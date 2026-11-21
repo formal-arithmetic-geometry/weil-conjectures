@@ -20,7 +20,6 @@ Geometric inputs of the proof of `NearbyCyclesModel.traitChangeInvariance`:
   a cartesian fibre;
 * `AlgebraicGeometry.not_isClosed_singleton_of_isOpenImmersion`: a point of an open of a Jacobson
   scheme which is not closed in the scheme is not closed in the open.
-
 -/
 
 @[expose] public section

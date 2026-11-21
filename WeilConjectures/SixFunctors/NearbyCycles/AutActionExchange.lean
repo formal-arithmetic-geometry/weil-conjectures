@@ -26,7 +26,6 @@ Then the exchanges of `τ` intertwine the actions of `s` and `s'` on nearby cycl
 
 Moreover the action of a self-map fixes the specialization unit
 (`NearbyCyclesModel.Hom.unit_comp_autAction`).
-
 -/
 
 @[expose] public section

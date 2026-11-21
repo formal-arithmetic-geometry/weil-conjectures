@@ -218,8 +218,7 @@ private theorem ringedPullTower_generators {X Y : Scheme.{u}} (f : X ⟶ Y)
 attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective in
 /-- The completion presentation of one geometric pullback. No tensor or open
 comparison is asserted.
-Source: Stacks 099N, 07A4; fix-prop-coherence, pullback-model step
-(blueprint: lem-sf-integral-ringed-pull-completion).
+Source: Stacks 099N, 07A4; fix-prop-coherence, pullback-model step.
 
 Proof: ordinary inverse image and the specified coefficient isomorphism preserve
 flat terms and K-flat complexes, hence the good classes in Pull. Associate the

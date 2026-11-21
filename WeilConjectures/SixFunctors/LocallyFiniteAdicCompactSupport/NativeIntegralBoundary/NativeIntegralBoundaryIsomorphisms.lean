@@ -46,8 +46,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 namespace NativeIntegralBoundary
 
 /-- The first boundary isomorphism before inserting the scalar mate.
-Source: Bhatt--Scholze, Remark 6.8.15; composition of the prescribed realizations.
-(blueprint: def-sf-native-integral-boundary-isomorphisms). -/
+Source: Bhatt--Scholze, Remark 6.8.15; composition of the prescribed realizations. -/
 def sourceIntegral [G : NativeGeometry.{u} l]
     (target : Realization l Y) (stage : StageAction l D hl P c)
     (E : Index l (PadicAlgCl l)) :
@@ -77,8 +76,7 @@ def sourceIntegral [G : NativeGeometry.{u} l]
       (pbcDerivedExtend ((target.coefficient E).integralMap l Y))
 
 /-- The final boundary isomorphism after the scalar mate.
-Source: Bhatt--Scholze, Remark 6.8.15; composition of the prescribed realizations.
-(blueprint: def-sf-native-integral-boundary-isomorphisms). -/
+Source: Bhatt--Scholze, Remark 6.8.15; composition of the prescribed realizations. -/
 def targetIntegral [G : NativeGeometry.{u} l]
     (source : Realization l X) (E : Index l (PadicAlgCl l)) :
     (sfIntegralConstructible l (Coefficient l (PadicAlgCl l) E) X).ι ⋙
@@ -97,8 +95,7 @@ def targetIntegral [G : NativeGeometry.{u} l]
       (operationTransport l c).symm
 
 /-- Component equation of the first boundary, with the localization identity removed.
-Source: Bhatt--Scholze, Remark 6.8.15; evaluation of the natural comparison.
-(blueprint: def-sf-native-integral-boundary-isomorphisms). -/
+Source: Bhatt--Scholze, Remark 6.8.15; evaluation of the natural comparison. -/
 theorem sourceIntegral_hom_app [G : NativeGeometry.{u} l]
     (target : Realization l Y) (stage : StageAction l D hl P c)
     (E : Index l (PadicAlgCl l))
@@ -132,8 +129,7 @@ theorem sourceIntegral_hom_app [G : NativeGeometry.{u} l]
 
 omit [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
 /-- Component equation of the final boundary.
-Source: Bhatt--Scholze, Remark 6.8.15; evaluation of the natural comparison.
-(blueprint: def-sf-native-integral-boundary-isomorphisms). -/
+Source: Bhatt--Scholze, Remark 6.8.15; evaluation of the natural comparison. -/
 theorem targetIntegral_hom_app [G : NativeGeometry.{u} l]
     (source : Realization l X) (E : Index l (PadicAlgCl l))
     (L : sfIntegralConstructibleCategory l (Coefficient l (PadicAlgCl l) E) X) :

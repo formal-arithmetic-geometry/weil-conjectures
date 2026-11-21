@@ -16,9 +16,9 @@ public import WeilConjectures.SixFunctors.Finite.Exact
 
 Let `π : Y ⟶ X` be finite and surjective. This file proves that the constructibility of the
 direct images `Rᵠ(π ≫ f)_*` implies that of the `Rᵠf_*`
-(`proposition-proper-direct-image-finite-coefficients`), and the comparison of the direct images of
+, and the comparison of the direct images of
 a constant sheaf along a finite modification
-(`proposition-proper-direct-image-finite-coefficients`).
+.
 
 The cancellation argument embeds a constructible sheaf `Q` on `X` into `π_* π^* Q` (the unit
 of `π^* ⊣ π_*` is a monomorphism for surjective `π`) and applies the resolution principle
@@ -75,7 +75,7 @@ theorem HasConstructibleDirectImages.of_comp_of_isFinite_of_isConstructibleSheaf
     (Etale.DerivedCategory.constructibleHomology (ModuleCat.{u + 1} Λ) S).prop_of_iso
       (rightDerivedLowerStarSingleLowerStarIso π f _).symm (h _ hG)⟩
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Constructibility descends
+/-- Constructibility descends
 through a finite surjection.
 
 Let `f : X ⟶ S` be a morphism with `X` of finite type over a field `k`, and let `π : Y ⟶ X` be

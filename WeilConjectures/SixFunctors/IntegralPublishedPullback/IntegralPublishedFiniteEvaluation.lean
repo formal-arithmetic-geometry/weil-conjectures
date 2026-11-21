@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-! # Exact finite evaluation factors for the published pullback
 
 Source: Stacks 08TC, 0941, 099N; the fixed quotient and Roos normalizations.
-(blueprint: lem-sf-integral-published-finite-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -104,8 +103,7 @@ private theorem derived_square_factors
 
 /-- Localization factors of exact restriction commute with finite evaluation.
 Source: Stacks 0941. Cancel the derived composition isomorphisms, apply the
-naturality of the localized square, and use the composition-factor equations.
-(blueprint: lem-sf-integral-published-finite-evaluation). -/
+naturality of the localized square, and use the composition-factor equations. -/
 private theorem restricted_level_factors (W : Scheme.{u})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) (n : ℕ) :
     (integralComparisonRestrictedEvaluationFactors l E W C n).hom ≫
@@ -131,8 +129,7 @@ private theorem restricted_level_factors (W : Scheme.{u})
 /-- Normalized finite evaluation transported along a finite representative isomorphism.
 Source: Stacks 0941 and 099N. Apply the prescribed derived evaluation normalization,
 use naturality of the exact pullback factors and the intrinsic comparison, and
-cancel that comparison with its inverse.
-(blueprint: lem-sf-integral-published-finite-evaluation). -/
+cancel that comparison with its inverse. -/
 theorem finite_evaluation_component {X Y : Scheme.{u}} (f : X ⟶ Y)
     (C : CochainComplex (coefficientSequenceModules l E Y) ℤ) (n : ℕ)
     (A : CochainComplex (normalizedDVRModules l E Y n) ℤ)

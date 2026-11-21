@@ -278,8 +278,7 @@ private theorem ring_invertibility_from_comparison
 
 /-- The geometric invertibility tests for the canonical scalar comparison and its mate.
 Source: Zheng, Lemma 5.22, Construction 5.25, Propositions 5.24 and 5.26;
-scalar-mates plan steps 2, 3 and 6
-(blueprint: lem-sf-ring-canonical-scalar-invertibility).
+scalar-mates plan steps 2, 3 and 6.
 
 Proof: for finite generators take the finite transported scalar mates. The ambient
 proper/open scalar map is their left realization. Compare any supplied adjunctions

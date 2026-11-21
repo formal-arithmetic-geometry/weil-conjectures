@@ -228,7 +228,6 @@ private theorem nativeInverseImageMap_isIso
 /-- The inverse image of locally finite coefficient functions, normalized on every section.
 Source: Bhatt--Scholze, Section 6.8, Lemma 6.8.2 and Proposition 6.8.14;
 Stacks, Tag 03D7.
-(blueprint: lem-sf-native-coefficient-inverse-image).
 
 Proof: precomposition with the first pullback projection defines a morphism of
 coefficient ring sheaves to direct image. Its underlying map of sheaves of sets agrees

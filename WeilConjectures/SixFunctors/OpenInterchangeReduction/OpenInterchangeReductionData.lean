@@ -30,10 +30,6 @@ public import WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearP
 
 /-! # Open and proper/open coefficient squares
 
-Source: blueprint main-20261015, fix-prop-coherence.proof.md, the maps-used sentence
-and the open-adjunction/clopen expansion
-(blueprint: lem-sf-open-interchange-reduction-squares).
-
 The existing finite-word interface supplies the actual recursive coefficient maps,
 independently completed ringed-site maps, and four-factor lambda. The predicates here
 select generators in that interface; they introduce no new operations or comparisons.
@@ -57,8 +53,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The structural squares assumed in the assertion, excluding the open comparisons
-whose squares are the conclusion. Source: blueprint fix-prop-coherence, maps-used sentence
-(blueprint: lem-sf-open-interchange-reduction-squares). -/
+whose squares are the conclusion. Source: blueprint fix-prop-coherence, maps-used sentence. -/
 def Structural {S : Type s} {W : S → Scheme.{u}} {I : Type i} {location : I → S}
     {a : S} {B C : Word W location a} (g : GeneratorKind W location B C) : Prop :=
   match g with
@@ -71,8 +66,7 @@ def Structural {S : Type s} {W : S → Scheme.{u}} {I : Type i} {location : I �
 /-- The square for the inverse of a specified isomorphism, using exactly the same
 recursive comparisons at its endpoints. The ambient inverse is only used on the
 admissible domain where the canonical maps are invertible.
-Source: blueprint fix-prop-coherence, proof step 1, inversion of squares
-(blueprint: lem-sf-open-interchange-reduction-squares). -/
+ -/
 def InverseAssertion {S : Type s} (W : S → Scheme.{u}) {I : Type i}
     (location : I → S) (o : Operations l E)
     (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k))))
@@ -86,8 +80,7 @@ def InverseAssertion {S : Type s} (W : S → Scheme.{u}) {I : Type i}
 There is no length-three bound here: in particular it applies to the length-four
 intermediates in the clopen factorization. Each instance is a square of the actual
 whole-system maps, not a choice of a lift of an evaluated square.
-Source: blueprint fix-prop-coherence, structural-square hypothesis
-(blueprint: lem-sf-open-interchange-reduction-squares). -/
+ -/
 def StructuralSquares (D : FiniteFieldDatum.{u}) (o : Operations l E) : Prop :=
   ∀ {S : Type s} (W : S → Scheme.{u}) (_hW : FiniteTypeFamily W D.k)
     {I : Type i} (location : I → S)

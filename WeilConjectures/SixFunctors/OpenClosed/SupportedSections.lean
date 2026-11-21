@@ -84,7 +84,7 @@ lemma isIso_sectionsWithSupportι_app_of_isZero {M : Sheaf X.smallEtaleTopology 
 
 variable [IsClosedImmersion s] [IsOpenImmersion j]
 
-/-- Blueprint `definition-local-cohomology`: Supported sections and flasque objects
+/-- Supported sections and flasque objects
 
 `s_* s^! M ≅ 𝒢_Z M`: the sheaf `𝒢_Z M = ker (M ⟶ j_* j^* M)` of sections of `M` supported on
 the closed complement `Z` of the open immersion `j : U ⟶ X`
@@ -95,7 +95,7 @@ right adjoint to `s_*` (`AlgebraicGeometry.Etale.lowerStarClosedUpperShriekAdjun
 is distinct from the ordinary restriction `s^*`.
 
 The blueprint node is stated on the pro-étale site; it is formalised here on the small étale
-site, the site of the purity chapter (`def-pur-conventions`); the pro-étale forms are
+site, the site of the purity chapter; the pro-étale forms are
 `AlgebraicGeometry.ProEtale.sectionsWithSupport`, `AlgebraicGeometry.ProEtale.closedUpperShriek`
 (with `AlgebraicGeometry.ProEtale.closedUpperShriekCompLowerStarIso`) and
 `AlgebraicGeometry.ProEtale.IsFlasqueFor`. -/
@@ -130,7 +130,7 @@ instance (hjs : Set.range s.base = (Set.range j.base)ᶜ) (M : Sheaf X.smallEtal
   rw [lowerStarClosedUpperShriekAdjunction_counit_app]
   infer_instance
 
-/-- Blueprint `definition-local-cohomology`: Supported sections and flasque objects
+/-- Supported sections and flasque objects
 
 A sheaf `I` on `X` is *flasque for the pair* `(Z, U)` if the restriction `I ⟶ j_* j^* I` to the
 open part is an epimorphism; then `0 ⟶ 𝒢_Z I ⟶ I ⟶ j_* j^* I ⟶ 0` is exact. As for

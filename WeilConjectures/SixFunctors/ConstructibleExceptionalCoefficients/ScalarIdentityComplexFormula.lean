@@ -84,8 +84,7 @@ attribute [local irreducible] pbcDerivedScalarAdjunction pbcComplexCounit
 attribute [local instance 5000] proEtaleRingModules_hasDerivedCategory
 
 /-- Fix the native site universe while computing the scalar identity representative.
-Source: Mathlib `essentiallySmallSelf`.
-(blueprint: lem-sf-scalar-identity-complex-formula). -/
+Source: Mathlib `essentiallySmallSelf`. -/
 local instance (priority := 10000) scalarIdentitySiteSmall (T : Scheme.{w}) :
     EssentiallySmall.{w + 1} T.ProEt := essentiallySmallSelf.{0, w, w + 1} _
 
@@ -200,8 +199,7 @@ private theorem identity_formula {T : Scheme.{w}}
   exact model_formula (old_model R) P (μ.hom.app P) _ ht (old_rightFormula R P)
 
 /-- The representative equation for a derived isomorphism and a fixed complex counit.
-Source: Stacks Project Tag 06YY.
-(blueprint: lem-sf-scalar-identity-complex-formula). -/
+Source: Stacks Project Tag 06YY. -/
 def scalarComplexRepresentativeFormula {A : Type*} [Category A] [Abelian A]
     [HasDerivedCategory A] (L : A ⥤ A) [L.Additive]
     (F : DerivedCategory A ⥤ DerivedCategory A)
@@ -246,7 +244,6 @@ private theorem tensor_identity_formula_of_eq {T : Scheme.{w}}
 
 /-- The derived identity-scalar unitor is represented by the normalized chain multiplication.
 Source: Stacks Project Tags 03DA and 06YY.
-(blueprint: lem-sf-scalar-identity-complex-formula)
 
 Proof: the ordinary adjunction sends multiplication to the inverse restriction identity,
 since its unit sends x to 1 tensor x. The derived transpose theorem and the representative

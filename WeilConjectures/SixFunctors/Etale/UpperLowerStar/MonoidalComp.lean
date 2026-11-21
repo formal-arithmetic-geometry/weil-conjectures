@@ -69,8 +69,8 @@ instance Etale.isMonoidal_lowerStarComp_inv' (h₁₂ : T ⟶ R) (hh : h₁₂ =
 comparison maps `δ` of the oplax monoidal pullbacks:
 ```
   h₁^* h₂^* (X ⊗ Y) ──────────────────▶ (h₁ ≫ h₂)^* (X ⊗ Y)
-        │ h₁^* δ ≫ δ                         │ δ
-        ▼                                    ▼
+        │ h₁^* δ ≫ δ │ δ
+        ▼ ▼
   h₁^* h₂^* X ⊗ h₁^* h₂^* Y ─────▶ (h₁ ≫ h₂)^* X ⊗ (h₁ ≫ h₂)^* Y
 ```
 -/

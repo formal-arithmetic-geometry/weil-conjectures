@@ -26,7 +26,6 @@ origin.
 
 It is proved by induction on `m` in
 `WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Basic`.
-
 -/
 
 @[expose] public section

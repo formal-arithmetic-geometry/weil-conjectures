@@ -46,7 +46,7 @@ instance integralTensor_sourceShiftAdditive (E : Index l (PadicAlgCl l)) :
   fun n ↦ by infer_instance
 
 /-- Integral extension into the ordinary section modules of the native ring.
-Source: BS 6.8.14(2) (blueprint: lem-sf-native-integral-tensor). -/
+Source: BS 6.8.14(2). -/
 def integralTensor (E : Index l (PadicAlgCl l)) :
     sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X ⥤
       DerivedCategory (pbcModules X (ringSheaf l X)) :=
@@ -59,7 +59,7 @@ instance integralTensor_shift (E : Index l (PadicAlgCl l)) :
   infer_instance
 
 /-- Derived extension is exact for its counit-normalized shift.
-Source: Stacks Tag 06YY (blueprint: lem-sf-native-integral-tensor). -/
+Source: Stacks Tag 06YY. -/
 theorem derivedTensor_triangulated
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S) :
     (pbcDerivedExtend φ).IsTriangulated := by
@@ -91,8 +91,7 @@ instance integralTensor_additive (E : Index l (PadicAlgCl l)) :
     (integralTensor l X C E).Additive := by infer_instance
 
 /-- The natural balanced derived tensor comparison, with the recorded adjunction units.
-Source: Stacks Tag 06YY; BS 6.8.14(2)
-(blueprint: lem-sf-native-integral-tensor). -/
+Source: Stacks Tag 06YY; BS 6.8.14(2). -/
 def integralTensorBalancing {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     pbcDerivedExtend (completedCoefficientMap l (Coefficient.{u} l (PadicAlgCl l) E)
         (Coefficient.{u} l (PadicAlgCl l) L)
@@ -104,7 +103,7 @@ def integralTensorBalancing {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     (pbcDerivedRestrictComp _ _ _ (C.coefficient_scalar E L h))
 
 /-- The natural balancing comparison has exactly the prescribed component.
-Source: Stacks Tag 06YY (blueprint: lem-sf-native-integral-tensor). -/
+Source: Stacks Tag 06YY. -/
 theorem integralTensorBalancing_app {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : DerivedCategory (scalarReductionSource l (Coefficient.{u} l (PadicAlgCl l) E) X)) :
     (integralTensorBalancing l X C h).app K =
@@ -121,8 +120,7 @@ theorem integralTensorBalancing_app {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     Functor.map_comp, Category.assoc, asIso_hom]
 
 /-- The explicit integral comparison: inverse balancing followed by completion.
-Source: BS 3.5.1 and 6.8.14(2)
-(blueprint: lem-sf-native-integral-tensor). -/
+Source: BS 3.5.1 and 6.8.14(2). -/
 def integralTensorComparison {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     integralTensor l X C E ⟶
       GeneralAlgebraicallyClosedCoefficients.integralTransition l (PadicAlgCl l) X E L h ⋙
@@ -135,7 +133,7 @@ def integralTensorComparison {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
       (pbcDerivedExtend ((C.coefficient L).integralMap l X)))
 
 /-- Component formula for the integral comparison, avoiding functor-alias unfolding.
-Source: BS 3.5.1 and 6.8.14(2) (blueprint: lem-sf-native-integral-tensor). -/
+Source: BS 3.5.1 and 6.8.14(2). -/
 theorem integralTensorComparison_app {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
     (integralTensorComparison l X C h).app K =

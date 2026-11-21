@@ -50,9 +50,9 @@ with the pullbacks along the geometric Galois Frobenii: the square
 ```
                 φ̄^*
    Sh(Y) ─────────────▶ Sh(X)
-     │                    │
- Fr_Y^*                Fr_X^*
-     ▼                    ▼
+     │ │
+ Fr_Y^* Fr_X^*
+     ▼ ▼
    Sh(Y) ─────────────▶ Sh(X)
                 φ̄^*
 ```
@@ -71,9 +71,9 @@ noncomputable def Etale.upperStarGeometricFiberMapCompFrobeniusIso :
 ```
                  D(φ̄^*)
    D(Y_ét) ─────────────▶ D(X_ét)
-     │                      │
- D(Fr_Y^*)              D(Fr_X^*)
-     ▼                      ▼
+     │ │
+ D(Fr_Y^*) D(Fr_X^*)
+     ▼ ▼
    D(Y_ét) ─────────────▶ D(X_ét)
                  D(φ̄^*)
 ```

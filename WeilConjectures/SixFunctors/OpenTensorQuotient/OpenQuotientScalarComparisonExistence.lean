@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.OpenTensorQuotient.OpenQuotientScalarComparis
 /-! # Existence of the strict scalar comparison for an open quotient
 
 Source: Stacks Project, Tags 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-comparison-existence).
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +32,7 @@ scalar restriction maps. Generator formulas make the components natural and pres
 all quotient transitions, so they assemble into the displayed strict-tower
 isomorphism. This statement supplies only the comparison object; the scalar-adjunction
 unit equation is a separate step.
-Source: Stacks Tags 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-comparison-existence). -/
+Source: Stacks Tags 0E8I and 0941. -/
 theorem openQuotientScalarComparisonExistence
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o)

@@ -16,8 +16,7 @@ public import WeilConjectures.SixFunctors.Integral.IntegralReductionTowerWellDef
 # Independence of the augmented integral reduction tower
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YS/06YT/06YY; derived.tex,
-Tags 05RT/06XN; Bhatt--Scholze, p. 24, Definition 3.5.2
-(blueprint: lem-weil-integral-reduction-tower-well-defined).
+Tags 05RT/06XN; Bhatt--Scholze, p. 24, Definition 3.5.2.
 
 The index n denotes exponent n+1. Pure tensors characterize the chain maps before
 localization; the finite comparison is the composite of the recorded canonical
@@ -51,14 +50,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
 /-- Restriction changes the scalar action and keeps the underlying additive map.
-Source: Stacks Tag 03DA (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+Source: Stacks Tag 03DA. -/
 noncomputable instance integralTowerRestrictionAdditive (n : ℕ) :
     (completedIntegralRestrictScalars l E Y D hl n).Additive :=
   inferInstanceAs (SheafOfModules.restrictScalars
     (completedIntegralCoefficientProjection l E Y D hl n)).Additive
 
 /-- Exactness supplies the limits instance for the recorded restriction functor.
-Source: Stacks Tag 03DA (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+Source: Stacks Tag 03DA. -/
 theorem integralTowerRestrictionLimits (n : ℕ) :
     PreservesFiniteLimits (completedIntegralRestrictScalars l E Y D hl n) :=
   (completedIntegralRestrictScalars_exact l E Y D hl n).1
@@ -66,7 +65,7 @@ theorem integralTowerRestrictionLimits (n : ℕ) :
 attribute [local instance] integralTowerRestrictionLimits
 
 /-- Exactness supplies the colimits instance for the recorded restriction functor.
-Source: Stacks Tag 03DA (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+Source: Stacks Tag 03DA. -/
 theorem integralTowerRestrictionColimits (n : ℕ) :
     PreservesFiniteColimits (completedIntegralRestrictScalars l E Y D hl n) :=
   (completedIntegralRestrictScalars_exact l E Y D hl n).2
@@ -74,14 +73,14 @@ theorem integralTowerRestrictionColimits (n : ℕ) :
 attribute [local instance] integralTowerRestrictionColimits
 
 /-- The same reduction regarded as a complex over the completed coefficient sheaf.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+Source: Stacks Tag 03EK. -/
 noncomputable abbrev integralTowerComplex (n : ℕ)
     (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) :=
   unrestrictedTowerComplex l E Y n P
 
 /-- A pure tensor, followed by sheafification, in the recorded finite reduction.
 Transport uses the object equality in the defining change-of-rings witness.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+Source: Stacks Tag 03EK. -/
 noncomputable def integralTowerTensorSection (n : ℕ)
     (M : completedIntegralModuleSheaves l E Y D hl)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
@@ -95,7 +94,7 @@ noncomputable def integralTowerTensorSection (n : ℕ)
             ((completedIntegralCommRingProjection l E Y D hl n).hom.app U).hom] x))
 
 /-- The unit maps are specified on local sections by x ↦ 1 ⊗ x and sheafification.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+Source: Stacks Tag 03EK. -/
 def integralTowerUnitCondition
     (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
     (γ : ∀ n : ℕ, P ⟶ integralTowerComplex l E Y D hl n P) : Prop :=
@@ -103,7 +102,7 @@ def integralTowerUnitCondition
     ((γ n).f i).val.app U x = integralTowerTensorSection l E Y D hl n (P.X i) U 1 x
 
 /-- The transition maps are specified on sheafified pure tensors by s ⊗ x ↦ ρ(s) ⊗ x.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+Source: Stacks Tag 03EK. -/
 def integralTowerTransitionCondition
     (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
     (τ : ∀ n : ℕ, integralTowerComplex l E Y D hl (n + 1) P ⟶
@@ -151,7 +150,7 @@ private theorem integralTowerUnrestricted_condition
 /-- There is a unique pair of chain-level unit and reduction maps with the stated
 pure-tensor formulas. These formulas specify maps on the sheafifications, not just on
 constant sections.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined).
+Source: Stacks Tag 03EK.
 Proof: in each degree and site object send x to the sheafification of 1⊗x. Tensor
 balancing, naturality of the coefficient projection and of the sheafification unit
 make this a map of presheaves of modules, hence of sheaves. For the transition send
@@ -191,14 +190,14 @@ theorem integralTowerMaps_existUnique
     exact (ha.2 n i U s x).trans (hτ n i U s x).symm
 
 /-- The chain-level unit x ↦ x⊗1, determined uniquely by its sectionwise formula.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+Source: Stacks Tag 03EK. -/
 noncomputable def integralTowerUnit
     (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) (n : ℕ) :
     P ⟶ integralTowerComplex l E Y D hl n P :=
   (integralTowerMaps_existUnique l E Y D hl P).exists.choose.1 n
 
 /-- The chain-level reduction id⊗ρ, determined uniquely on sheafified pure tensors.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+Source: Stacks Tag 03EK. -/
 noncomputable def integralTowerTransition
     (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) (n : ℕ) :
     integralTowerComplex l E Y D hl (n + 1) P ⟶ integralTowerComplex l E Y D hl n P :=
@@ -223,7 +222,7 @@ private theorem integralTowerTransition_eq
   congrArg (fun a ↦ a.2 n) (integralTowerMaps_eq l E Y D hl P)
 
 /-- The image of the resolution augmentation is invertible in the derived category.
-Source: Stacks Tag 06YS (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+Source: Stacks Tag 06YS. -/
 noncomputable def integralTowerAugmentationIso
     {P K : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ}
     (q : P ⟶ K)

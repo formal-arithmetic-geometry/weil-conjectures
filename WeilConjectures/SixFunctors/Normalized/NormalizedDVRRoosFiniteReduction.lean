@@ -58,7 +58,6 @@ private theorem exactDerived_reflects_iso
 /-- Finite reduction of the Roos limit of a normalized DVR tower.
 Source: blueprint lemma-sp-tower-adjunction-foundation--2, proof paragraphs 1--4;
 Bhatt--Scholze, Lemmas 3.5.4--3.5.7.
-(blueprint: lem-coef-normalized-dvr-roos-finite-reduction).
 
 Proof: strictify the finite-coefficient complexes with K-flat resolutions with flat
 terms, representing each successor map by a roof before resolving its source. The

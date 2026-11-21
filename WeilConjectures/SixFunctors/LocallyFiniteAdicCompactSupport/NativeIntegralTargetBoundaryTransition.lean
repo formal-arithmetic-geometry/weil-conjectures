@@ -58,8 +58,7 @@ support of the inverse integral realization followed by inverse operationTranspo
 The common_field equation writes the realized stage transition as the integral
 realization, nativeScalarTransition, and inverse integral realization. Naturality of
 operationTransport moves the realized transition through its inverse. Cancel the
-integral realization and its inverse. The remaining equation is precisely this square.
-(blueprint: lem-sf-native-integral-target-boundary-transition). -/
+integral realization and its inverse. The remaining equation is precisely this square. -/
 theorem integralTargetBoundary_transition [G : NativeGeometry.{u} l]
     (source : Realization l X) (i E : Index l (PadicAlgCl l)) (h : i ≤ E)
     (K : finiteTorConstructibleIntegralCategory l (Coefficient.{u} l (PadicAlgCl l) i) X)

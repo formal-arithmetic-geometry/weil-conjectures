@@ -11,8 +11,7 @@ import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemG
 /-! # Degree-zero coefficient gamma projection transport
 
 Source: Stacks Project, sites-cohomology.tex, Tags 07A6, 08JA, 0D6E and 0941;
-the H⁰ specialization of `enrichedSequenceProjectionFormula`
-(blueprint: lem-coef-derived-system-hom-projection-transport).
+the H⁰ specialization of `enrichedSequenceProjectionFormula`.
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ recorded additive H⁰ Hom equivalences and their naturality, then apply
 `H.scalar_hom_zero` to identify the finite scalar adjunct. Naturality of
 `S.reductionEvaluation` and the counit projection rewrite the result as the
 specified composite in `CoefficientHomProjection`.
-(blueprint: lem-coef-derived-system-hom-projection-transport)
 -/
 theorem coefficientDerivedSystemHomProjectionTransport
     (S : CoefficientDerivedSystemCalculus l E W)

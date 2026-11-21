@@ -43,7 +43,6 @@ As in `WeilConjectures.SixFunctors.Etale.Derived.Tensor`, the monoidal structure
 `Sheaf X.smallEtaleTopology A` is a `local instance` in mathlib and is activated here by
 `attribute [local instance]`. The *type* of `derivedHom` does not mention it, so downstream
 files may use the derived hom without re-activating the local instance.
-
 -/
 
 @[expose] public section

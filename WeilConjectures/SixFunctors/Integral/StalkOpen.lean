@@ -13,9 +13,9 @@ public import WeilConjectures.SixFunctors.Integral.StalkPatch
 Consider a cartesian square
 ```
 X' --g'--> X
-|          |
-f'         f
-v          v
+| |
+f' f
+v v
 Y' --g---> Y
 ```
 with `f` integral, a geometric point `y'` of `Y'` with algebraically closed residue field, and

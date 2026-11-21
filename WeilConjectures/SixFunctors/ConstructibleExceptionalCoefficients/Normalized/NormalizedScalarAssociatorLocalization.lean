@@ -22,8 +22,7 @@ variable (l : ℕ) [Fact l.Prime]
 /-- A finite-Tor scalar associator with the prescribed ordinary realization localizes
 to the intrinsic rational scalar associator.
 Source: exceptional coefficient construction, scalar normalization paragraph; the
-ordinary/completed comparison of Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12
-(blueprint: lem-sf-normalized-scalar-associator-localization).
+ordinary/completed comparison of Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12.
 
 Proof: identify each supplied scalar functor with the restriction of the completed
 scalar extension using faithfulness of the full inclusion and the three functor

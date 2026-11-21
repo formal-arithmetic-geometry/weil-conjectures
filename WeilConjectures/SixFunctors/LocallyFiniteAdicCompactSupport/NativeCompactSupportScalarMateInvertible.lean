@@ -98,7 +98,6 @@ set_option linter.unusedSectionVars false in
 /-- Invertibility of the single completed-to-native compact-support scalar mate.
 Source: Bhatt--Scholze, Remark 6.8.15; Hemo--Richarz--Scholbach, Lemma 5.3(1);
 Stacks Tag 0GL1; steps 3 and 5--7 of the native finite comparison plan.
-(blueprint: lem-sf-native-compact-support-scalar-mate-invertible).
 
 Proof: the intrinsic standard-truncation theorem makes the underlying integral
 constructible object bounded. Exact open extension preserves its lower bound. Apply

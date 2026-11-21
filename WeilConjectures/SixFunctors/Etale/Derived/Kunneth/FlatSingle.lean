@@ -18,9 +18,9 @@ Let `K` be a field, `Λ` a finite ring whose exponent is invertible in `K`, and 
 
 ```
   X <--p-- X' <--h-- Y
-  |        |         |
-  a        f'        e
-  v        v         v
+  | | |
+  a f' e
+  v v v
 Spec K <-b- S' <--g-- T
 ```
 
@@ -39,8 +39,7 @@ to which the general case is reduced in
 Following the blueprint, the coefficients are reduced to residue fields of `Λ`, the sheaf `𝓔`
 is written as a filtered colimit of constructible sheaves, each of which embeds into a finite
 sum of pushforwards of constant sheaves along finite morphisms, and for those the statement is
-the base change theorem towards spectra of fields (blueprint `lemma-kunneth-field-coefficients--1`,
-`AlgebraicGeometry.Etale.universalBaseChangeProperty_of_field`) for a scheme finite over `X`.
+the base change theorem towards spectra of fields for a scheme finite over `X`.
 -/
 
 @[expose] public section
@@ -66,9 +65,9 @@ Let `K` be a field and `Λ` a finite ring whose exponent is invertible in `K`. F
 
 ```
   X <--p-- X' <--h-- Y
-  |        |         |
-  a        f'        e
-  v        v         v
+  | | |
+  a f' e
+  v v v
 Spec K <-b- S' <--g-- T
 ```
 

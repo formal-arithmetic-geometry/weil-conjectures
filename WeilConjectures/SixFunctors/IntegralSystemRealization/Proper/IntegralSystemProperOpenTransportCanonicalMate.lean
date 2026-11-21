@@ -101,7 +101,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The transported mate of the intrinsic semilinear alpha in bridge coordinates.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 07A7.
-(blueprint: lem-sf-integral-system-proper-open-transport-core-canonical-mate).
 Proof: expand the mate under the four canonical bridge isomorphisms and use the
 adjunction-conjugacy formula. -/
 def properOpenTransportMate (o : Operations l E) (b : CanonicalBridge l E o)
@@ -233,7 +232,6 @@ private theorem canonicalMate_eq_transportedGamma
 
 /-- The transported mate has the prescribed proper/open adjunct.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 07A7.
-(blueprint: lem-sf-integral-system-proper-open-transport-core-canonical-mate-adjunct).
 Proof: expand the mate under the canonical bridge, transpose with the open
 adjunction, and cancel the bridge isomorphisms against the defining proper/open
 lambda. The resulting equation is the adjunct characterization of the displayed
@@ -253,7 +251,6 @@ theorem properOpenTransportMate_adjunct (o : Operations l E)
 
 /-- The adjunct-normalized gamma is this transported mate.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 07A7.
-(blueprint: lem-sf-integral-system-proper-open-transport-core-canonical-mate-normalized).
 Proof: transpose the gamma with the chosen open adjunction, identify its prescribed
 proper/open lambda, and apply uniqueness of mates after canonical bridge transport. -/
 theorem properOpenTransportMate_normalized (o : Operations l E)

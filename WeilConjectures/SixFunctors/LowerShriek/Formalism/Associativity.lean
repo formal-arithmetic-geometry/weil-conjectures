@@ -146,8 +146,7 @@ lemma shriekIso_copy_trans_congr {u u' : X ⟶ Y} [HasCompactification u]
   rfl
 
 /-- **Associativity of the composition isomorphism**: for composable `f`, `g`, `h`, the two
-isomorphisms `Rf_! ⋙ Rg_! ⋙ Rh_! ≅ R(f ≫ g ≫ h)_!` agree.
-(blueprint: `proposition-composition-base-change-rf-shriek--1`) -/
+isomorphisms `Rf_! ⋙ Rg_! ⋙ Rh_! ≅ R(f ≫ g ≫ h)_!` agree. -/
 theorem lowerShriekCompIso_assoc (f : X ⟶ Y) (g : Y ⟶ S) (h : S ⟶ T) [HasCompactification f]
     [HasCompactification g] [HasCompactification h] [HasCompactification (f ≫ g)]
     [HasCompactification (g ≫ h)] [HasCompactification ((f ≫ g) ≫ h)]

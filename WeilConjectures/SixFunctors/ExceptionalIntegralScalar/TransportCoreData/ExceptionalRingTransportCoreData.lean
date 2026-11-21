@@ -17,7 +17,7 @@ carries its evaluated unit and counit equations. It is constructed by the mates
 correspondence; its inverse is not used. The remaining compatibility equations
 are supplied separately by `ExceptionalRingTransportCoreLaws`.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-transport-core).
+5.26.
 -/
 
 @[expose] public noncomputable section
@@ -71,8 +71,7 @@ structure TransportCoreData
 /-- The canonical right comparison determined by the two specified adjunctions
 and the left comparison. This is an explicit construction, not a freely chosen
 isomorphism: its inverse is the unique adjunction-compatible comparison.
-Source: Zheng, Construction 5.25, with uniqueness of right adjoints.
-(blueprint: lem-sf-exceptional-ring-transport-core-data) -/
+Source: Zheng, Construction 5.25, with uniqueness of right adjoints. -/
 def TransportCoreData.realizeG
     {l : ℕ} [Fact l.Prime] {Ω : Type u} [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] {D : FiniteFieldDatum.{u}} {hl : l ≠ D.p}
@@ -109,8 +108,7 @@ variable {l : ℕ} [Fact l.Prime] {Ω : Type u} [Field Ω] [Algebra (Padic l) Ω
 
 /-- The reduction comparison is the realization comparison followed by the target
 reconstruction counit. It is constructed from these maps, rather than chosen independently.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-ring-transport-core-data) -/
+Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26. -/
 def TransportCoreData.reductionF (E : FieldStage.{u} l) :
     (operation (.integral E)).F ⋙ (d.reconstruction E false).equivalence.functor ≅
       (d.reconstruction E true).equivalence.functor ⋙ d.F E :=
@@ -120,8 +118,7 @@ def TransportCoreData.reductionF (E : FieldStage.{u} l) :
 
 /-- The right-adjoint reduction comparison uses the realization comparison and the
 source reconstruction counit, with the two endpoints interchanged.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-ring-transport-core-data) -/
+Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26. -/
 def TransportCoreData.reductionG (E : FieldStage.{u} l) :
     (operation (.integral E)).G ⋙ (d.reconstruction E true).equivalence.functor ≅
       (d.reconstruction E false).equivalence.functor ⋙ d.G E :=
@@ -132,11 +129,10 @@ def TransportCoreData.reductionG (E : FieldStage.{u} l) :
 end ReductionComparisons
 
 /-- The data fields have the construction described in the transport proof.
-(blueprint: lem-sf-exceptional-ring-transport-core-data)
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26.  The strict-system transport, reconstruction equivalences, and integral
+5.26. The strict-system transport, reconstruction equivalences, and integral
 proper/open realization are assembled first; all displayed functors and
-isomorphisms are the resulting data. (blueprint: lem-sf-exceptional-ring-transport-core)
+isomorphisms are the resulting data.
 The left realizations are supplied with their integer shift-compatibility witnesses.
 -/
 theorem exists_exceptional_transport_core_data

@@ -11,8 +11,7 @@ import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionTow
 
 /-! # Component comparisons for the integral Hom reduction tower
 
-Source: blueprint order 2478, proof steps 4-8; Stacks Tags 07A6, 08J9 and 08TC
-(blueprint: lem-sf-integral-hom-tower-components).
+Source: blueprint order 2478, proof steps 4-8; Stacks Tags 07A6, 08J9 and 08TC.
 -/
 
 @[expose] public section
@@ -49,8 +48,7 @@ private theorem augmentation_of_unit
 unit on fixed representatives. No product or completeness assertion occurs here, and
 neither the representative nor its K-flat resolution is chosen by this theorem.
 
-Source: blueprint order 2478, steps 4-8; Stacks Tags 07A6, 08J9 and 08TC
-(blueprint: lem-sf-integral-hom-tower-components).
+Source: blueprint order 2478, steps 4-8; Stacks Tags 07A6, 08J9 and 08TC.
 
 Proof: Use separate tensor models preserving the two quotient augmentations and
 the specified apex map e. The signed tensor-Hom comparison is natural in the

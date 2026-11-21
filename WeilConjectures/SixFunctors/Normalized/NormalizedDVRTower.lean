@@ -16,10 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.NormalizedDVRTower
 /-!
 # Normalized DVR towers
 
-Source: Weil conjectures blueprint, `chap-The-six-operations-on-Dbctf`,
-`sk-prop-sf-biduality-general`, node `def-coef-normalized-dvr-tower`, order 2131
-(blueprint: def-coef-normalized-dvr-tower).
-
 ## Main definitions
 
 - `normalizedDVRQuotient`: the actual quotient map of the coefficient system.
@@ -71,7 +67,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 
 /-- Canonical identity restriction; the ordinary identification is the identity on sections.
-Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
+ -/
 noncomputable def normalizedDVRResUnit (n : ℕ) :
     normalizedDVRRes l E X (Nat.le_refl n) ≅ 𝟭 (normalizedDVRDerived l E X n) :=
   letI := HasDerivedCategory.standard (normalizedDVRModules l E X n)
@@ -82,7 +78,7 @@ noncomputable def normalizedDVRResUnit (n : ℕ) :
   Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _
 
 /-- Canonical composition restriction, induced by identity maps on the underlying modules.
-Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
+ -/
 noncomputable def normalizedDVRResComp {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m) :
     normalizedDVRRes l E X hmn ⋙ normalizedDVRRes l E X hrm ≅
       normalizedDVRRes l E X (le_trans hmn hrm) :=
@@ -109,7 +105,7 @@ noncomputable def normalizedDVRResComp {r m n : ℕ} (hrm : m ≤ r) (hmn : n �
 variable (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
 /-- The coherent tower category is derived before evaluation, over the completed sheaf.
-Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
+ -/
 @[reducible]
 noncomputable def normalizedDVRDerivedTowers :=
   @DerivedCategory (ℕᵒᵖ ⥤ completedIntegralModuleSheaves l E X D hl) _ _
@@ -118,7 +114,7 @@ noncomputable def normalizedDVRDerivedTowers :=
 
 
 /-- The actual derived evaluation functor, without equating site and coefficient universes.
-Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
+ -/
 @[reducible]
 noncomputable def normalizedDVRTowerEvaluation (n : ℕ) :
     normalizedDVRDerivedTowers l E X D hl ⥤ completedIntegralDerivedCategory l E X D hl :=
@@ -127,7 +123,7 @@ noncomputable def normalizedDVRTowerEvaluation (n : ℕ) :
   ((evaluation ℕᵒᵖ (completedIntegralModuleSheaves l E X D hl)).obj (op n)).mapDerivedCategory
 
 /-- The canonical transition of the evaluated derived tower, for every pair of levels.
-Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
+ -/
 noncomputable def normalizedDVRTowerTransition {m n : ℕ} (h : n ≤ m) :
     normalizedDVRTowerEvaluation l E X D hl m ⟶ normalizedDVRTowerEvaluation l E X D hl n :=
   letI := HasDerivedCategory.standard (ℕᵒᵖ ⥤ completedIntegralModuleSheaves l E X D hl)
@@ -148,8 +144,7 @@ composition identifications are the canonical constructions above. The condition
 `normalization` is precisely that the adjoint of `tau h` under derived finite-level
 change of rings is an isomorphism: by the adjunction, its precomposition map on every
 Hom set is `f ↦ tau h ≫ Res.map f`; Yoneda detects isomorphisms.
-Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower).
-There is no boundedness, constructibility, stratification, or integral-model condition. -/
+ -/
 structure NormalizedDVRTower (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p) where

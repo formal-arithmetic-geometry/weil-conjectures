@@ -17,7 +17,6 @@ closed has a coordinate `Z ⟶ 𝔸¹_K` sending it to the generic point of the 
 (`AlgebraicGeometry.AffineSpace.exists_isGenericPoint_reindex_of_not_isClosed`): this is how the
 slice step of Deligne's induction (SGA 4½, [Th. finitude], 3.7) reaches every non-closed point of
 the special fibre.
-
 -/
 
 @[expose] public section

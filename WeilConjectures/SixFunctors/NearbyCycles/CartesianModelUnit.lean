@@ -46,7 +46,6 @@ These statements were in `TraceFormula.Specialization.NearbySliceInvariants`,
 `NearbySliceInvariantsUnit` and `NearbySliceFactorisationUnit`; they are collected here, below
 the slice step of Deligne's finiteness theorem, so that the invariance of nearby cycles under
 change of trait can use them.
-
 -/
 
 @[expose] public section

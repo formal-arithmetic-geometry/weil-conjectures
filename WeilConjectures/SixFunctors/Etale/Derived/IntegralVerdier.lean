@@ -304,7 +304,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
   [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
 
 include hϖ hI in
-/-- Blueprint `proposition-sp-integral-adjunction`: The integral dualizing object and its
+/-- The integral dualizing object and its
 adjunction.
 
 For `a_X : X ⟶ Spec k` separated of finite type, `k` algebraically closed, there is a derived
@@ -449,7 +449,7 @@ theorem boundedConstructibleIntegral_derivedHom_dualizing {K : 𝐃(X, Λ)}
   sorry
 
 include hϖ hI hωX in
-/-- Blueprint `theorem-verdier-biduality`: Verdier biduality on the coefficient class, at the
+/-- Verdier biduality on the coefficient class, at the
 integral stage `Λ = 𝒪_E`.
 
 For `X` separated of finite type over an algebraically closed field `k`, the integral Verdier

@@ -218,7 +218,6 @@ private def towerComparison :
 /-- Restriction commutes with the ordinary strict quotient tower and its augmentation.
 Source: Stacks Project, sites-modules.tex, Tag 03EL; sites-cohomology.tex, Tag 07A4;
 proetale.tex, Tag 099N (5).
-(blueprint: lem-sf-open-restriction-quotient-tower).
 
 Proof: the normalized quotient-unit map is a cokernel of multiplication by
 uniformizer^(n+1), by the proved ordinary quotient-module calculation. The completed

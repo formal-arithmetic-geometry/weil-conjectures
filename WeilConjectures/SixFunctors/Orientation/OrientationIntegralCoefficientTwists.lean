@@ -62,11 +62,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 set_option linter.privateModule false
 
 /-! # Canonical positive coefficient-line comparisons
-
-Source: main-20261015, definition-tate-twists, completed tensor and
-scheme pullback conventions (blueprint: def-sf-orientation-integral-line-comparisons).
-The original coefficient lines are reexported. Their normalized inverse-image
-maps are supplied for arbitrary scheme morphisms, as required by orientations.
 -/
 
 @[expose] public noncomputable section

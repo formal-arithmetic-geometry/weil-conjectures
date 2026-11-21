@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenSemilinearTen
 /-! # Section calculus for the ordinary open-system unit
 
 Source: Stacks Project, Tags 03DI--03DJ and evaluation before 0941.
-(blueprint: lem-sf-open-system-unit-sections).
 -/
 
 @[expose] public noncomputable section
@@ -93,7 +92,7 @@ private theorem pushforward_naturality_apply
   presheaf_naturality_apply f.val g x
 
 /-- Transport a section through the recorded literal system pushforward.
-Source: Stacks 03DJ (blueprint: lem-sf-open-system-unit-sections). -/
+Source: Stacks 03DJ. -/
 def transportedSection (N : coefficientSequenceModules l E U) (n : ℕ)
     (W : Over (IntegralOpenReduction.openObject j))
     (x : N.val.obj (op (n, (IntegralOpenReduction.sliceSite j).obj W))) :
@@ -101,7 +100,7 @@ def transportedSection (N : coefficientSequenceModules l E U) (n : ℕ)
   ((eqToHom o.systemsFunctor.symm).app N).val.app (op (n, W)) x
 
 /-- The ordinary open-system adjunction unit applied to a transported section.
-Source: Stacks 03DI--03DJ (blueprint: lem-sf-open-system-unit-sections). -/
+Source: Stacks 03DI--03DJ. -/
 def systemUnit (N : coefficientSequenceModules l E U) (n : ℕ)
     (W : Over (IntegralOpenReduction.openObject j))
     (x : N.val.obj (op (n, (IntegralOpenReduction.sliceSite j).obj W))) :
@@ -202,7 +201,6 @@ private theorem finiteSection_map (n : ℕ) {M N : normalizedDVRModules l E U n}
 /-- Evaluation of the system unit is the original finite extension summand.
 
 Source: Stacks 03DI--03DJ and sequence-site evaluation before 0941.
-(blueprint: lem-sf-open-system-unit-sections).
 
 Proof: apply the given unit-evaluation equation to the transported section.
 Identity on sections removes restrictionEvaluation. The transportSections equation

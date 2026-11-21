@@ -47,11 +47,11 @@ attribute [local instance] Sheaf.monoidalCategory in
 
 ```
 (K⟦a⟧ ⊗ L⟦b⟧) ⊗ M⟦c⟧ ──────────α──────────▶ K⟦a⟧ ⊗ (L⟦b⟧ ⊗ M⟦c⟧)
-        │                                            │
-        ▼                                            ▼
-(K ⊗ L)⟦a + b⟧ ⊗ M⟦c⟧                       K⟦a⟧ ⊗ (L ⊗ M)⟦b + c⟧
-        │                                            │
-        ▼                                            ▼
+        │ │
+        ▼ ▼
+(K ⊗ L)⟦a + b⟧ ⊗ M⟦c⟧ K⟦a⟧ ⊗ (L ⊗ M)⟦b + c⟧
+        │ │
+        ▼ ▼
 ((K ⊗ L) ⊗ M)⟦a + b + c⟧ ──α⟦a + b + c⟧──▶ (K ⊗ (L ⊗ M))⟦a + b + c⟧
 ```
 -/

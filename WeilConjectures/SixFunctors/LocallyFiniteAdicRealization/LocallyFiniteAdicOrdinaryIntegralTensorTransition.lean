@@ -15,7 +15,6 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdi
 /-! # Integral normalization of the ordinary finite closure comparison
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-finite-ordinary-integral-tensor-transition)
 -/
 
 @[expose] public noncomputable section
@@ -53,8 +52,7 @@ variable [IsNoetherian X]
 /-- The ordinary part of the constructed integral model, before section reconstruction.
 The composite consists only of raw integral transport, continuous realization and
 coefficient tensor comparisons; it contains no condensed closure transition.
-Source: BS 6.8.2 and 6.8.14(2).
-(blueprint: lem-sf-finite-ordinary-integral-tensor-transition). -/
+Source: BS 6.8.2 and 6.8.14(2). -/
 @[irreducible] def finiteOrdinaryIntegralTensorModel (A : FiniteCondensedData l X)
     (C : CoefficientSystem l X) (E : Index l (PadicAlgCl l)) :
     letI := C.commutative
@@ -179,7 +177,6 @@ private theorem finiteOrdinaryIntegralTensorModel_factor
 /-- The ordinary finite closure comparison has the prescribed integral tensor map.
 
 Source: BS 6.8.14(2), the raw and continuous integral scalar normalizations.
-(blueprint: lem-sf-finite-ordinary-integral-tensor-transition).
 
 Proof in words: expand closureComparison and scalarComparison, and substitute the
 raw scalar_lift equation on K. Substitute the continuous integral normalization

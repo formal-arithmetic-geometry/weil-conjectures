@@ -41,7 +41,6 @@ The identification `g^* Λ ≅ Λ` is the unit isomorphism of the strong monoida
 - `AlgebraicGeometry.Etale.lowerStarConstantSheafMul_comp_lowerStarConstantSheafEndOfOver`:
   pulling back sections is multiplicative, the composition isomorphisms of pushforwards being
   monoidal.
-
 -/
 
 @[expose] public section
@@ -125,10 +124,10 @@ lemma lowerStarConstantSheafEndOfOver_id {X Y : Scheme.{u}} (f : Y ⟶ X) :
 
 ```
 f_* Λ ---End(g')---> f_* Λ
-     \                 |
-   End(g ≫ g')       End(g)
-         \             |
-          v            v
+     \ |
+   End(g ≫ g') End(g)
+         \ |
+          v v
             f_* Λ
 ```
 
@@ -183,9 +182,9 @@ def lowerStarConstantSheafMul {X Y : Scheme.{u}} (f : Y ⟶ X) :
 
 ```
 f_* Λ ⊗ f_* Λ ---mul---> f_* Λ
-      |                    |
- g^♯ ⊗ g^♯                g^♯
-      v                    v
+      | |
+ g^♯ ⊗ g^♯ g^♯
+      v v
 f_* Λ ⊗ f_* Λ ---mul---> f_* Λ
 ```
 

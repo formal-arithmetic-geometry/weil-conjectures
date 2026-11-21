@@ -29,7 +29,6 @@ as `α_{fromCartesian}` is an isomorphism at `C` (a base change statement for `R
 cartesian square) and `α_{toCartesian}` is a split monomorphism at `L𝟙^* C` (a statement about
 the change of generic fibres only):
 `NearbyCyclesModel.Hom.isSplitMono_pullbackExchange_app_of_cartesian`.
-
 -/
 
 @[expose] public section
@@ -97,8 +96,8 @@ composition law (`NearbyCyclesModel.Hom.pullbackExchange_comp_app_of_eq`), `α_�
 the composition isomorphisms `c` of derived pullbacks, as
 ```
 Lf'^* Ψ_N C ─────────────────────── α_φ(C) ───────────────────────→ Ψ_M (Lf^* C)
-     │ c                                                                  │ Ψ_M c
-     ▼                                                                    ▼
+     │ c │ Ψ_M c
+     ▼ ▼
 L𝟙^* Lf'^* Ψ_N C ──L𝟙^* α_from(C)──→ L𝟙^* Ψ_cart (L𝟙^* C) ──α_to(L𝟙^* C)──→ Ψ_M (Lf^* L𝟙^* C)
 ```
 -/
@@ -122,8 +121,8 @@ lemma isSplitMono_pullbackExchange_app_of_cartesian'
 `α_to` is transported along `L𝟙^* C ≅ C` to the factorisation
 ```
 Lf'^* Ψ_N C ─────────────────────── α_φ(C) ───────────────────────→ Ψ_M (Lf^* C)
-     │ c                                                                  │ Ψ_M c
-     ▼                                                                    ▼
+     │ c │ Ψ_M c
+     ▼ ▼
 L𝟙^* Lf'^* Ψ_N C ──L𝟙^* α_from(C)──→ L𝟙^* Ψ_cart (L𝟙^* C) ──α_to(L𝟙^* C)──→ Ψ_M (Lf^* L𝟙^* C)
 ```
 of `NearbyCyclesModel.Hom.isSplitMono_pullbackExchange_app_of_cartesian'`. -/

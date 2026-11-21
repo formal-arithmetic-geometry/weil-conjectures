@@ -18,7 +18,6 @@ Let `D₁ ⟶ D₂` be a morphism of strict-localization slice traits over a cha
 `p > 0`, a Kummer equation `θ ^ p = α` over `L₁` which has a root in `L₂` has a root in `L₁`
 (`SliceTrait.Hom.exists_pow_root_of_mixedChar`), via the abstract normal form
 `exists_pow_eq_of_kummer_of_approx`.
-
 -/
 
 @[expose] public section

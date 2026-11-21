@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
 For a cartesian square
 ```
 X' --u--> X
-|f'       |f
+|f' |f
 Y' --v--> Y
 ```
 a compactification `c = (X ⟶[j] Z ⟶[p] Y)` of `f` and its base change

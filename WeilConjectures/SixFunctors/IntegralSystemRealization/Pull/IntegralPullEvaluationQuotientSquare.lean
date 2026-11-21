@@ -13,8 +13,7 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemExpre
 
 /-! # The pullback evaluation quotient square
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 0941
-(blueprint: lem-sf-integral-pull-evaluation-quotient-square).
+Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -235,8 +234,7 @@ private theorem ordinary_restriction_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n 
 
 /-- Pullback evaluation respects adjacent quotient transitions, with the scalar
 comparison obtained by transposing the published restricted direct-image map.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941 and 07A7
-(blueprint: lem-sf-integral-pull-evaluation-quotient-square).
+Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941 and 07A7.
 
 Proof: express both transitions on strict cochain representatives by horizontal
 restriction on the sequence site. The ordinary evaluation/pullback map is the

@@ -97,9 +97,9 @@ instance isIso_compactificationForgetSupports [IsProper f] :
 map `s : Rf_!(c) ⟶ Rf_*` intertwines the projection maps,
 ```
 Rf_!(c)K ⊗ᴸ L ──PF_c──▶ Rf_!(c)(K ⊗ᴸ Lf^*L)
-     │ s ⊗ 1                  │ s
-     ▼                        ▼
- Rf_*K ⊗ᴸ L  ──PF_*──▶  Rf_*(K ⊗ᴸ Lf^*L).
+     │ s ⊗ 1 │ s
+     ▼ ▼
+ Rf_*K ⊗ᴸ L ──PF_*──▶ Rf_*(K ⊗ᴸ Lf^*L).
 ``` -/
 theorem projectionMapOfCompactification_comp_compactificationForgetSupports
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))

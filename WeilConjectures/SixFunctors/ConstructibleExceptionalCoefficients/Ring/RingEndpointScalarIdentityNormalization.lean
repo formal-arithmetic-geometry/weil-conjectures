@@ -28,7 +28,6 @@ extensionality, so the equality-isomorphism cast reduces. In each finite or inte
 case the categories ignore the closure field. Replace J by I.iso using hJ and apply
 I.normalized K to the unchanged inclusion, realization, and tensor unitor.
 Source: Zheng, Lemma 5.22 and Proposition 5.26, universe bookkeeping.
-(blueprint: lem-sf-ring-endpoint-scalar-identity-normalization-transport).
 -/
 theorem scalarIdentityNormalizationAtClosure
     (Ψ : Type (max u v)) [Field Ψ] [Algebra (Padic l) Ψ] [IsAlgClosure (Padic l) Ψ]

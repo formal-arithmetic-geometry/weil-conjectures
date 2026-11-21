@@ -41,22 +41,21 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (c : Compactification f)
 
 /-- Source of the finite-stage comparison, before extending morphisms to fractions.
-Source: the finite-stage inclusion (blueprint: lem-sf-native-integral-scalar-morphism). -/
+Source: the finite-stage inclusion. -/
 abbrev finiteSource (target : Realization l Y)
     (stage : StageAction l D hl P c) (E : Index l (PadicAlgCl l)) :=
   GeneralAlgebraicallyClosedCoefficients.inclusion
     (l := l) (Ω := PadicAlgCl l) (Y := X) E ⋙ stage.system.functor ⋙ target.J
 
 /-- Target of the finite-stage comparison.
-Source: the finite-stage inclusion (blueprint: lem-sf-native-integral-scalar-morphism). -/
+Source: the finite-stage inclusion. -/
 abbrev finiteTarget (source : Realization l X)
     (E : Index l (PadicAlgCl l)) :=
   GeneralAlgebraicallyClosedCoefficients.inclusion
     (l := l) (Ω := PadicAlgCl l) (Y := X) E ⋙ source.J ⋙ actual l c
 
 /-- The original six-arrow formula at one integral finite-Tor input.
-Source: Bhatt--Scholze, Remark 6.8.15; the existing IntegralNormalization definition.
-(blueprint: lem-sf-native-integral-scalar-morphism). -/
+Source: Bhatt--Scholze, Remark 6.8.15; the existing IntegralNormalization definition. -/
 def IntegralComponent [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (change : ∀ E : Index l (PadicAlgCl l),
@@ -72,7 +71,6 @@ def IntegralComponent [G : NativeGeometry.{u} l]
 This theorem asserts neither invertibility nor naturality on rationalized arrows.
 Source: Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15;
 steps 4 and 8 of the native compact-support finite comparison plan.
-(blueprint: lem-sf-native-integral-scalar-morphism).
 
 Proof: restrict the StageAction inclusion comparison to integral objects and compose
 with P.ring.rationalLeft. The recorded rational compact-support operation is the raw

@@ -24,8 +24,7 @@ projection. For a sheaf `F` of `Λ`-modules on `U_ét`, the stalk formula
 `(R^q f_* F)_s ≅ H^q(U ×_Z S, p^* F)` (Stacks 03Q9,
 `AlgebraicGeometry.Etale.strictHenselizationStalkFormula`), applied to the underlying abelian
 sheaf, shows: if the abelian cohomology `H^q(U ×_Z S, p^* F)` vanishes in every degree, then the
-geometric stalk `(Rf_* F)_s = Ls^* Rf_* F` vanishes in `D(Λ)`
-(blueprint `lemma-cohomology-near-two-transverse-divisors--1`, stalk formula and forgetting `Λ`).
+geometric stalk `(Rf_* F)_s = Ls^* Rf_* F` vanishes in `D(Λ)`.
 
 ## Main statements
 

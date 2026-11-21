@@ -33,8 +33,7 @@ variable (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} {f : X ⟶ Y}
 /-- The endpoint-recorded last two factors determine the target boundary arrow.
 Source: Bhatt--Scholze, Remark 6.8.15.
 Proof: unpack the two factors and their composite equation, then compose their
-endpoint-recorded comparisons with the canonical prescribed values.
-(blueprint: lem-sf-native-integral-target-boundary-formula). -/
+endpoint-recorded comparisons with the canonical prescribed values. -/
 theorem integralTargetBoundary_formula [G : NativeGeometry.{u} l]
     (source : Realization l X) (E : Index l (PadicAlgCl l))
     (K : finiteTorConstructibleIntegralCategory l (Coefficient.{u} l (PadicAlgCl l) E) X)

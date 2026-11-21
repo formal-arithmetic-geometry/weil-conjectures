@@ -61,8 +61,7 @@ import WeilConjectures.PoincareDuality.Integral.IntegralPullbackComparisonRealiz
 /-!
 # Coefficient compatibility: the tensor isomorphism under inverse image
 
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), pp. 50--51
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension).
+Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), pp. 50--51.
 The actual tensor isomorphism b on sheaves and the maps α and β of the comparison square.
 Split from `WeilConjectures.SixFunctors.Isomorphism.IsomorphismComparisonScalarExtension`
 for compile time.
@@ -624,8 +623,7 @@ attribute [-instance] integralOperationsAbSheafify
 /-- The sectionwise tensor comparison is uniquely fixed on every local pure tensor.
 Here U maps to (U,g∘u), so the underlying section y is literally y₀, and the target
 scalar c_L(g⁻¹a₀) is the displayed completed coefficient map applied to a₀.
-Source: inverse-image tensor comparison and Bhatt--Scholze 6.5.9(4)
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension).
+Source: inverse-image tensor comparison and Bhatt--Scholze 6.5.9(4).
 Proof: inverse-image tensor compatibility sends the transported pure tensor to the
 same tensor on (U,g∘u). The coefficient projection equations make it balanced over
 R_E, and c_L gives its R_L-linearity. The reverse tensor rule is its inverse.
@@ -710,15 +708,13 @@ theorem isomorphismScalarTensor_existsUnique
 end TensorComparison
 
 /-- The actual tensor isomorphism b on sheaves, fixed by its local tensor rule.
-Source: Bhatt--Scholze 6.5.9(4)
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension). -/
+Source: Bhatt--Scholze 6.5.9(4). -/
 def isomorphismScalarTensor {X Y : AlgebraicGeometry.Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] :=
   (isomorphismScalarTensor_existsUnique l E L ι g).exists.choose
 
 /-- Exact inverse image and finite-free extension descend this same tensor isomorphism.
-Source: Bhatt--Scholze 6.5.9(4)
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension). -/
+Source: Bhatt--Scholze 6.5.9(4). -/
 def isomorphismScalarTensorDerived {X Y : AlgebraicGeometry.Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] :
     inverseImageIntegralDerived l E g ⋙ integralOrdinaryDerivedScalar l E L ι X ≅
@@ -731,8 +727,7 @@ def isomorphismScalarTensorDerived {X Y : AlgebraicGeometry.Scheme.{u}}
 
 /-- Both inputs to the X-side completion comparisons lie in the recorded bounded
 constructible, derived-complete category. Source: Bhatt--Scholze 6.5.9(4), and the
-isomorphism-derived-pullback assertion
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension).
+isomorphism-derived-pullback assertion.
 Proof: the sectionwise inverse-image equivalence transports the coefficient actions,
 finite quotient reductions, and their constructible partitions. Exactness transports
 cohomology and its common finite interval. It commutes with the quotient-unit Roos
@@ -774,8 +769,7 @@ theorem isomorphismComparisonInputs_constructible
 /-- α is tensor associativity followed by the strict quotient completion comparisons:
 the recorded `scalarPullbackCompleted` of the scalar-operation lemma, whose completeness
 inputs come from hK and the constructibility theorem above.
-Source: Bhatt--Scholze 6.5.9(4)
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension). -/
+Source: Bhatt--Scholze 6.5.9(4). -/
 def isomorphismComparisonScalarAlpha {X Y : AlgebraicGeometry.Scheme.{u}}
     (g : X ⟶ Y) [IsIso g]
     (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -788,8 +782,7 @@ def isomorphismComparisonScalarAlpha {X Y : AlgebraicGeometry.Scheme.{u}}
     (isomorphismComparisonInputs_constructible l E g hX hY K hK).2.1).hom
 
 /-- β = G_L(χ_Y) ∘ b ∘ χ_X⁻¹, using the specified completion comparison.
-Source: Bhatt--Scholze 6.5.9(4)
-(blueprint: lem-weil-isomorphism-comparison-scalar-extension). -/
+Source: Bhatt--Scholze 6.5.9(4). -/
 def isomorphismComparisonScalarBeta {X Y : AlgebraicGeometry.Scheme.{u}}
     (g : X ⟶ Y) [IsIso g]
     (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))

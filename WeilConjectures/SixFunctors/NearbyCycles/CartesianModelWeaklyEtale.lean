@@ -16,7 +16,6 @@ If the morphism of total spaces of a morphism of models `φ` is weakly étale, t
 of the second factor `fromCartesian` of its cartesian factorization is an isomorphism, by weakly
 étale base change of `Rj_*`
 (`NearbyCyclesModel.Hom.isIso_pullbackExchange_fromCartesian_of_weaklyEtale`).
-
 -/
 
 @[expose] public section

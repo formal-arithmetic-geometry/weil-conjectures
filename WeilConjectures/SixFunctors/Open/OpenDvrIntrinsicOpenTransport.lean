@@ -32,7 +32,6 @@ import Mathlib.Data.Nat.Prime.Infinite
 /-! # Quasi-compact open extension preserves intrinsic DVR completeness
 
 Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
-(blueprint: lem-sf-open-dvr-intrinsic-open-transport).
 -/
 
 @[expose] public noncomputable section
@@ -272,8 +271,7 @@ private theorem dvrOpen_complete
     (integralLocallyComplete_iso.{u, u} l E X _ b hlocal)
 
 /-- Transport the completed open-preservation theorem across canonical coefficients.
-Source: Stacks Tags 03DI, 09BP and 099B
-(blueprint: lem-sf-open-dvr-intrinsic-open-transport).
+Source: Stacks Tags 03DI, 09BP and 099B.
 
 Proof: lift the DVR datum into the coefficient universe and compare its quotient
 rings with the lifted quotients, sending the class of a to the lifted class of a.

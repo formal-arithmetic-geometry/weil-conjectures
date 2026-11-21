@@ -23,9 +23,9 @@ special fibre of the slice of `M` is invertible at every complex bounded below o
 
 This is the step (A) of SGA 4½, [Th. finitude], proof of 3.7: the four squares
 ```
-M'  ──φ'──→  N'          N₂ ──τ──→ N₁
- │ρ_M         │ρ_N         │ψ_M      │ψ_N
-N₂_{L₂^sep} ─τ'→ N₁_{L₁^sep}   M ──φ──→  N
+M' ──φ'──→ N' N₂ ──τ──→ N₁
+ │ρ_M │ρ_N │ψ_M │ψ_N
+N₂_{L₂^sep} ─τ'→ N₁_{L₁^sep} M ──φ──→ N
 ```
 reduce the change of trait on the slice to the change of trait `φ'` of the slices (the induction
 hypothesis, `NearbyCyclesModel.isIso_pullbackExchange_sliceTraitChangeHom`), through the change of
@@ -34,7 +34,6 @@ invariants under the wild inertia groups
 (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin_generic`)
 and the
 Galois-layer models (`NearbyCyclesModel.isIso_map_pullbackExchange_of_sliceTraitGaloisChangeHom`).
-
 -/
 
 @[expose] public section

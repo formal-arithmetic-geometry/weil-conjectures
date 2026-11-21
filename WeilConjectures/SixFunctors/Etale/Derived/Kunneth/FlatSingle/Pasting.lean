@@ -114,9 +114,9 @@ lemma isIso_tensorBaseChangeMap_tensorUnit {X' S' T Y : Scheme.{u}} (h : Y ⟶ X
 
 ```
   Y --e₁--> T₁ --e₂--> T
-  |         |          |
-  h         g₁         g
-  v         v          v
+  | | |
+  h g₁ g
+  v v v
   X' --a--> S₁ --b---> S'
 ```
 

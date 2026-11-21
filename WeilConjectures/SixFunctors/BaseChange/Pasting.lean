@@ -15,9 +15,9 @@ For two commutative squares of schemes pasted horizontally
 
 ```
   X'' --g''--> X' --g'--> X
-  |            |          |
-  f''          f'         f
-  ↓            ↓          ↓
+  | | |
+  f'' f' f
+  ↓ ↓ ↓
   Y'' --h----> Y' --g---> Y
 ```
 
@@ -31,13 +31,13 @@ vertically
 
 ```
   X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
+  | |
+  f' f
+  ↓ ↓
   Y' --g---> Y
-  |          |
-  e'         e
-  ↓          ↓
+  | |
+  e' e
+  ↓ ↓
   Z' --k---> Z
 ```
 
@@ -56,8 +56,6 @@ isomorphisms of the pullbacks. Since the mates correspondence is taken with resp
 vertical adjunctions `f^* ⊣ f_*`, the vertical pasting law also involves the change of
 adjunction `(f ≫ e)^* ⊣ (f ≫ e)_*` versus `f^* ⋙ e^* ⊣ …`, i.e. the conjugation lemma
 `AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarComp`.
-(blueprint: `lemma-identity-pasting`, underived pasting bullets)
-
 -/
 
 @[expose] public section
@@ -151,13 +149,12 @@ variable {X'' X' X Y'' Y' Y : Scheme.{u}} {g'' : X'' ⟶ X'} {g' : X' ⟶ X} {f'
   {f' : X' ⟶ Y'} {f : X ⟶ Y} {h : Y'' ⟶ Y'} {g : Y' ⟶ Y}
 
 open scoped TwoSquare in
-/-- Blueprint `definition-underived-base-change-map`: Cartesian square and chosen pullback
+/-- Cartesian square and chosen pullback
 identification, compatibility with horizontal pasting.
 
 **Horizontal pasting of the square isomorphisms**: the square isomorphism of two squares
 pasted horizontally is the horizontal composite of the two square isomorphisms, modulo the
-composition isomorphisms of the pullbacks along the horizontal maps
-(blueprint `definition-underived-base-change-map`). -/
+composition isomorphisms of the pullbacks along the horizontal maps. -/
 lemma Etale.squareUpperStarIso_paste_horiz_hom (sq₁ : CommSq g' f' f g)
     (sq₂ : CommSq g'' f'' f' h) (sq : CommSq (g'' ≫ g') f'' f (h ≫ g)) :
     (Etale.squareUpperStarIso A sq).hom =
@@ -241,13 +238,12 @@ variable {X' X Y' Y Z' Z : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X �
   {e' : Y' ⟶ Z'} {e : Y ⟶ Z} {k : Z' ⟶ Z}
 
 open scoped TwoSquare in
-/-- Blueprint `definition-underived-base-change-map`: Cartesian square and chosen pullback
+/-- Cartesian square and chosen pullback
 identification, compatibility with vertical pasting.
 
 **Vertical pasting of the square isomorphisms**: the square isomorphism of two squares
 pasted vertically is the vertical composite of the two square isomorphisms, modulo the
-composition isomorphisms of the pullbacks along the vertical maps
-(blueprint `definition-underived-base-change-map`). -/
+composition isomorphisms of the pullbacks along the vertical maps. -/
 lemma Etale.squareUpperStarIso_paste_vert_hom (sq₁ : CommSq g' f' f g) (sq₂ : CommSq g e' e k)
     (sq : CommSq g' (f' ≫ e') (f ≫ e) k) :
     (Etale.squareUpperStarIso A sq).hom =

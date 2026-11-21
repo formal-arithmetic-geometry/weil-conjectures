@@ -47,8 +47,7 @@ variable [IsCommMonObj (abRing l X)] [(sections l X).Additive]
 
 /-- A finite-field realization cocone. Every comparison is specified before descent;
 no functor on the pair category, Hom descent, or essential-image assertion is assumed.
-Source: Bhatt--Scholze, Proposition 6.8.14
-(blueprint: lem-sf-locally-finite-adic-finite-cocone). -/
+Source: Bhatt--Scholze, Proposition 6.8.14. -/
 structure FiniteCoconeData where
   Φ : ∀ E : Index l (PadicAlgCl l),
     GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X E ⥤
@@ -75,8 +74,7 @@ structure FiniteCoconeData where
         pbcDerivedExtend.{u} ((C.coefficient E).integralMap l X)
 
 /-- The finite-stage completion-map equation, before pair-category descent.
-Source: Bhatt--Scholze, Proposition 6.8.14, Remark 6.8.15
-(blueprint: lem-sf-locally-finite-adic-finite-cocone). -/
+Source: Bhatt--Scholze, Proposition 6.8.14, Remark 6.8.15. -/
 @[irreducible] def FiniteCoconeData.normalized (A : FiniteCoconeData l X C) : Prop :=
   ∀ (E L : Index l (PadicAlgCl l)) (h : E ≤ L)
       (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X),
@@ -100,8 +98,7 @@ Source: Bhatt--Scholze, Proposition 6.8.14, Remark 6.8.15
             E L h).obj K))
 
 /-- The finite realization data with its completion-map equation.
-Source: Bhatt--Scholze, Proposition 6.8.14
-(blueprint: lem-sf-locally-finite-adic-finite-cocone). -/
+Source: Bhatt--Scholze, Proposition 6.8.14. -/
 structure FiniteCocone extends FiniteCoconeData l X C where
   normalization : toFiniteCoconeData.normalized l X C
 
@@ -179,8 +176,7 @@ set_option cleanup.letToHave false in
 /-- The finite-field tensor realizations form a normalized coherent cocone.
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), Proposition 6.8.14(2) and Remark 6.8.15;
-native realization proof steps 3--4
-(blueprint: lem-sf-locally-finite-adic-finite-cocone).
+native realization proof steps 3--4.
 
 Proof in words: on the integral full subcategory use derived extension along the
 specified integral coefficient map. Its explicit comparison for E ≤ L is inverse

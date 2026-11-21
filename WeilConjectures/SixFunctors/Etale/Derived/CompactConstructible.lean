@@ -18,12 +18,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LisseDual
 /-!
 # Objects of `Dctf(X, Λ)` are compact in `D(X_ét, Λ)`
 
-Blueprint `proposition-compactness-finite-coefficients`. Let `k` be a field of finite cohomological
-dimension for `Λ`-modules, `X` a finite-type `k`-scheme and `Λ` a finite ring whose exponent is
-invertible on `X`. Every object `C` of `Dctf(X_ét, Λ)` is compact in `D(X_ét, Λ)`, and has *bounded
-morphisms*: `Hom(C, G) = 0` for `G` in sufficiently negative degrees
-(`AlgebraicGeometry.Etale.compactBoundedHom_of_constructibleFiniteTor`).
-
 The proof follows the blueprint. Both properties are stable under shifts, extensions and
 retracts (`DerivedCategory.compactBoundedHom`), and are transported along left adjoints whose
 right adjoints preserve coproducts and have bounded amplitude
@@ -199,7 +193,7 @@ lemma compactBoundedHom_rightDerivedLowerStar_of_isClosedImmersion (hΛ : IsAddT
   exact compactBoundedHom_of_adjunction (derivedLowerStarClosedUpperShriekAdjunction g V.ι hij) c
     (fun N n hN ↦ hc N n hN) hK
 
-/-- Blueprint `proposition-compactness-finite-coefficients`: on a finite-type scheme `X` over a
+/-- On a finite-type scheme `X` over a
 field `k` of finite cohomological dimension, every object of `Dctf(X_ét, Λ)` is compact in
 `D(X_ét, Λ)` and has bounded morphisms, for a finite ring `Λ` whose exponent is invertible on
 `X`. -/

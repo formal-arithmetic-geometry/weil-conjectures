@@ -11,7 +11,6 @@ public import WeilConjectures.SixFunctors.AdicFiniteRealization.LocallyFiniteAdi
 /-! # The integral formula of the raw finite realization
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-finite-condensed-raw-integral-formula)
 -/
 
 @[expose] public noncomputable section
@@ -76,8 +75,7 @@ private theorem integralRestriction
   exact ht
 
 /-- The raw finite comparison restricts to the specified integral identity.
-Source: the raw identity pins and pure-tensor formula, BS 6.8.14(2).
-(blueprint: lem-sf-finite-condensed-raw-integral-formula). -/
+Source: the raw identity pins and pure-tensor formula, BS 6.8.14(2). -/
 theorem finiteRawIntegralFormula (A : FiniteCondensedData l X)
     (E : Index l (PadicAlgCl l)) :
     sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X ⋙

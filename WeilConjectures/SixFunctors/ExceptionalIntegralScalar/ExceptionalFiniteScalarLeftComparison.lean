@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicExt
 /-! # The canonical finite coefficient left comparison
 
 Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: lem-sf-finite-scalar-left-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -55,8 +54,7 @@ model is also bounded below. Apply the proper etale-origin scalar theorem. The
 inverse mate interchange law identifies its geometric mate with the specified
 properComparison. Transport along the canonical open presentation and site
 isomorphisms, then combine with the invertible openComparison using the proper/open
-factorization. No flatness of the quotient map or absolute separatedness is used.
-(blueprint: lem-sf-finite-scalar-left-comparison). -/
+factorization. No flatness of the quotient map or absolute separatedness is used. -/
 theorem finiteScalarLeftComparison_isIso
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

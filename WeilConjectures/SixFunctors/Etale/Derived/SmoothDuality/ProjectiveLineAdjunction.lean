@@ -141,7 +141,7 @@ section Counit
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
   [HasInvertibleExponent Λ S]
 
-/-- Blueprint `lemma-cohomology-projective-line-trace`: the trace of the projective line
+/-- The trace of the projective line
 `q : ℙ¹_S ⟶ S` on the compactly supported direct image, `t_q : Rq_! Λ(1)[2] ⟶ Λ_S`: the trace
 `AlgebraicGeometry.Etale.projectiveLineTrace` of `Rq_*`, the projection onto the summand `Λ_S`
 of the decomposition `Rq_* Λ(1)[2] ≅ Λ_S(1)[2] ⊕ Λ_S`, read through `Rq_! ≅ Rq_*`. -/
@@ -216,8 +216,7 @@ theorem projectiveLineTwistShiftIso_hom_naturality
   (twistShiftOneIsoTensor Λ _).hom.naturality
     ((L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ])).map g)
 
-/-- The candidate counit `ε_K : Rq_!(q^* K(1)[2]) ⟶ K` of the projective-line adjunction
-(blueprint `lemma-cohomology-projective-line-trace`): the identification
+/-- The candidate counit `ε_K : Rq_!(q^* K(1)[2]) ⟶ K` of the projective-line adjunction: the identification
 `q^* K(1)[2] ≅ Λ(1)[2] ⊗ᴸ Lq^* K` (`AlgebraicGeometry.Etale.projectiveLineTwistShiftIso`), the
 inverse of the projection map `Rq_! Λ(1)[2] ⊗ᴸ K ⟶ Rq_!(Λ(1)[2] ⊗ᴸ Lq^* K)`, the trace
 `AlgebraicGeometry.Etale.projectiveLineLowerShriekTrace` tensored with `K`, and the left

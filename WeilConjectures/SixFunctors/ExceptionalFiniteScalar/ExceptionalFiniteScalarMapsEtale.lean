@@ -976,8 +976,7 @@ private theorem torsionScalarMapsEtale_exists
     simp only [projection, pasteProjection_inv_app, Functor.comp_map, Category.assoc]
 
 /-- The ambient etale scalar-mate package exists for a finite coefficient map.
-Source: Zheng, Construction 2.26 and Proposition 2.29; Stacks 0GL6, 09AL and 07A4
-(blueprint: lem-sf-exceptional-finite-scalar-maps-etale).
+Source: Zheng, Construction 2.26 and Proposition 2.29; Stacks 0GL6, 09AL and 07A4.
 
 This statement isolates the ordinary etale part of the construction: the proper/open
 comparison, its adjoint mate, projection normalization, and shift compatibility.

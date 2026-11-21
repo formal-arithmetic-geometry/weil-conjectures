@@ -24,7 +24,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-! # Transport of the generator-normalized ordinary open tensor formula
 
 Source: Stacks Project, Tags 03DI, 03EK and 0E8I.
-(blueprint: lem-sf-open-ordinary-tensor-transport).
 -/
 
 @[expose] public noncomputable section
@@ -53,8 +52,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
 
 /-- The completed-coefficient tensor formula for supplied open transports.
-Source: Stacks 03DI, 03EK and 0E8I
-(blueprint: lem-sf-open-ordinary-tensor-transport).
+Source: Stacks 03DI, 03EK and 0E8I.
 
 Proof: the concrete slice equivalence is cocontinuous. Apply the normalized
 ringed coefficient tensor transport with the actual completed ring sheaves,

@@ -301,7 +301,7 @@ attribute [local irreducible] coefficientTotalTensor
 /-- The canonical adjunction-transpose projection identity on resolving pairs.
 The one-flat comparisons agree with the simultaneous K-flat models; both input
 complexes are flat-term K-flat representatives. Source: Stacks 0GL1, 07A4 and
-06YS--06YT (blueprint: lem-sf-open-tensor-projection-mate-canonical).
+06YS--06YT.
 
 Proof: first show that F carries flat modules to flat modules. The ordinary
 projection isomorphisms, their naturality, and symmetry identify tensoring with

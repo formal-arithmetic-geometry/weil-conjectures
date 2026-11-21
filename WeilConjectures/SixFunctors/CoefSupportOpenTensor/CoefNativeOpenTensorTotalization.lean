@@ -109,8 +109,7 @@ import all WeilConjectures.Algebra.Homology.Ringed.RingedOpenTotalTensorKFlat
 /-! # Totalization of an ordinary open tensor comparison
 
 The direct-sum totalization is natural in both complexes and retains its specified
-summand formula. Source: Stacks 0GL1 and Homology 012Z
-(blueprint: lem-coef-native-open-tensor-totalization).
+summand formula. Source: Stacks 0GL1 and Homology 012Z.
 -/
 
 @[expose] public noncomputable section
@@ -131,7 +130,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 
 /-- Totalize an ordinary natural extension/tensor isomorphism, with its summand equation.
 Source: Stacks, sites-cohomology.tex Tag 0GL1 and Homology Tag 012Z.
-(blueprint: lem-coef-native-open-tensor-totalization).
 
 Proof: use the existing map-bifunctor totalization of the inverse ordinary
 comparison. The left adjoint preserves the coproducts in each total degree;

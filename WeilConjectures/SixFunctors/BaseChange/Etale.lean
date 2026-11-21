@@ -18,10 +18,10 @@ Consider a commutative square of schemes
 
 ```
 U' --j'--> Z'
-|          |
-g'         g''
-v          v
-U  --j-->  Z
+| |
+g' g''
+v v
+U --j--> Z
 ```
 
 with `j` and `j'` étale, i.e. `g' ≫ j = j' ≫ g''`. This file proves **étale base change for
@@ -56,7 +56,6 @@ is an isomorphism when the square is cartesian.
 - `AlgebraicGeometry.Etale.isIso_baseChangeMap_flip_of_isPullback`: **étale base change for
   the pushforward**: for a cartesian square the base change map
   `g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` is an isomorphism.
-
 -/
 
 @[expose] public section
@@ -80,10 +79,10 @@ functors
 
 ```
 Sh(Z') --g''_*--> Sh(Z)
-  |                 |
- j'^*      ⇙       j^*
-  v                 v
-Sh(U') --g'_*-->  Sh(U)
+  | |
+ j'^* ⇙ j^*
+  v v
+Sh(U') --g'_*--> Sh(U)
 ```
 
 All functors involved are composition with functors of small étale sites, and the map is
@@ -114,10 +113,10 @@ pushforwards (`Etale.squareLowerStarIso`)
 
 ```
 Sh(U') --j'_*--> Sh(Z')
-  |                 |
- g'_*      ⇙      g''_*
-  v                 v
-Sh(U)  --j_*-->  Sh(Z)
+  | |
+ g'_* ⇙ g''_*
+  v v
+Sh(U) --j_*--> Sh(Z)
 ```
 -/
 lemma Etale.mateEquiv_localizationRestrictionBaseChangeMap (sq : CommSq g' j' j g'') :
@@ -161,10 +160,10 @@ transported along the identifications `j^* ≅ j_{loc}^*` and `j'^* ≅ j'_{loc}
 
 ```
 Sh(Z') --g''_*--> Sh(Z)
-  |                 |
- j'^*      ⇙       j^*
-  v                 v
-Sh(U') --g'_*-->  Sh(U)
+  | |
+ j'^* ⇙ j^*
+  v v
+Sh(U') --g'_*--> Sh(U)
 ```
 -/
 lemma Etale.baseChangeMap_flip_eq (sq : CommSq g' j' j g'') :

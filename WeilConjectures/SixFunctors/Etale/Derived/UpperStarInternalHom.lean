@@ -39,7 +39,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 -- search differ from the ones in these definitions, and unifying them is very expensive.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
-/-- Blueprint `prose-03-02`: Derived pullback, tensor product, and
+/-- Derived pullback, tensor product, and
 internal Hom.
 
 For an étale morphism `u : U ⟶ X`, the derived pullback commutes with the derived internal hom:

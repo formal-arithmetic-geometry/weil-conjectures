@@ -1163,8 +1163,7 @@ universal property, sheafification, and total-summand extensionality. Localize
 this identity. The restriction comparison is the exact-restriction factor of
 the scalar counit, giving precisely the displayed equation. The construction
 of e is independent of the coefficient level; the calculation applies separately
-to every n and every normalized m, so it assumes no compatibility between them.
-(blueprint: lem-sf-integral-tensor-restriction-mate-model). -/
+to every n and every normalized m, so it assumes no compatibility between them. -/
 private theorem restrictionTensor_mate_model
     (a : TensorPresentation.{t, u} X (completedIntegralCommRingSheaf l E X D hl))
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
@@ -1316,8 +1315,7 @@ K-flat localization. On complexes, tensor cancellation followed by the normalize
 scalar tensor comparison is an isomorphism. Its local formula sends
 x tensor (s tensor y) to s tensor (x tensor y). The scalar adjunction's normalized
 unit identifies its localization with the tensor mate, after the invertible
-representative comparisons. Cancel these isomorphisms.
-(blueprint: lem-sf-reduction-tensor-strength-kflat-representative). -/
+representative comparisons. Cancel these isomorphisms. -/
 theorem scalarTensorStrength_on_kflat_representatives
     (a : TensorPresentation.{t, u} X (completedIntegralCommRingSheaf l E X D hl))
     (n : ℕ) (m : ReductionPresentation l E X D hl a n)

@@ -24,7 +24,7 @@ The proof follows the one for finite coefficients
 * the bound `Rf_* D^{≤ n} ⊆ D^{≤ n + 2d}` is only available for bounded complexes killed by `N`
   (`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj_of_nsmul_id_eq_zero`); the complexes
   `K ⊗ᴸ M_X` met in the way-out argument proving the projection formula for a finitely generated
-  `M` (blueprint `proposition-open-direct-image-preserves-finite--1`) are of this kind, by the Tor
+  `M` are of this kind, by the Tor
   amplitude of `K`;
 * the residue test is replaced by the test on finitely generated constant sheaves
   (`AlgebraicGeometry.Etale.torAmplitudeIn_of_forall_finite_constantSheaf`).
@@ -121,7 +121,7 @@ theorem isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nsmul
       isIso_rightDerivedLowerStarProjectionMapApp_constantSingle_pi Λ f K n⟩
 
 include hf hd in
-/-- Blueprint `sk-thm-sf-direct-image-tor-amplitude`: Direct image with finite Tor amplitude,
+/-- Direct image with finite Tor amplitude,
 for Noetherian coefficients.
 
 Let `f : X ⟶ Y` be a morphism of `k`-schemes of finite type with `dim X ≤ d`, `Λ` a Noetherian

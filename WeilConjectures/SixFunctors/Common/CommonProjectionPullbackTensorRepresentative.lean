@@ -8,9 +8,6 @@ module
 public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorComparison
 
 /-! # Finite-stage representative of the common pullback tensor
-
-Source: thm-sf-pf-field.proof.md, Compatibility; the representative formula
-in `canonicalCommonStagePullbackTensor_existsUnique`.
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +21,6 @@ open GeneralAlgebraicallyClosedCoefficients
 
 /-- The canonical common pullback/tensor comparison is represented at every
 finite coefficient stage by `pullbackTensorAtCommonStage`.
-Source: thm-sf-pf-field.proof.md, Compatibility
-(blueprint: lem-sf-common-projection-pullback-tensor-representative).
 
 Proof: unfold the unique-choice definition of the canonical comparison and apply
 the representative clause of `canonicalCommonStagePullbackTensor_existsUnique`.

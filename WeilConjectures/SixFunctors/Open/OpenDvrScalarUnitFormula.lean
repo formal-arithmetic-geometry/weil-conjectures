@@ -11,8 +11,7 @@ import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitCanonicalMo
 
 /-! # Total-limit normalization of the ordinary scalar augmentation
 
-Source: Stacks Tags 07A6, 0D6E and 0941
-(blueprint: lem-sf-open-dvr-scalar-unit-formula).
+Source: Stacks Tags 07A6, 0D6E and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +30,7 @@ local instance (priority := 10000) scalarUnitSequenceSmall (T : Scheme.{u}) :
   coefficientSequenceEssentiallySmall.{u, 0} T
 
 /-- The ordinary constant/limit adjunct of the quotient-system unit, on complexes.
-Source: Stacks Tag 07A6
-(blueprint: lem-sf-open-dvr-scalar-unit-formula). -/
+Source: Stacks Tag 07A6. -/
 def openScalarComplexAugmentation (T : Scheme.{u}) (M : CompletionUnit.OrdinaryModel l E T)
     (Q : CochainComplex (scalarReductionSource.{u, u} l E T) ℤ) :
     ((Functor.const ℕᵒᵖ : scalarReductionSource.{u, u} l E T ⥤ _).mapHomologicalComplex
@@ -80,8 +78,7 @@ private theorem openDvrCanonicalLimitFormula (T : Scheme.{u})
   exact Category.id_comp _
 
 /-- A normalized derived Hom formula gives the ordinary constant/limit adjunct.
-Source: Stacks Tags 07A6, 0D6E and 0941
-(blueprint: lem-sf-open-dvr-scalar-unit-formula).
+Source: Stacks Tags 07A6, 0D6E and 0941.
 
 Proof: expand the Hom equivalence as the adjunction unit followed by the right
 adjoint on f, then compose with the exact restriction localization comparison.

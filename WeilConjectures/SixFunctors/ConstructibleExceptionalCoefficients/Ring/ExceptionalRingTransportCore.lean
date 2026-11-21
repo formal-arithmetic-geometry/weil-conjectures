@@ -56,7 +56,7 @@ private def normalizedEvaluation
 left realization its finite inclusion is the support evaluation.
 Proof: cancel the full inclusion by `map_preimage`, cancel the finite left
 realization and the finite image comparison, and remove the equality transports.
-Source: Zheng, Proposition 5.26 (blueprint: lem-sf-exceptional-ring-transport-core). -/
+Source: Zheng, Proposition 5.26. -/
 private theorem normalizedEvaluation_support
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
@@ -113,8 +113,7 @@ constructed finite and integral operation family. The construction uses the
 reduction/limit equivalences at each finite coefficient field, the actual
 proper/open system realization, and the evaluation/unit/counit comparison maps.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26; this is the transport-data part of the exceptional ring family proof
-(blueprint: lem-sf-exceptional-ring-transport-core).
+5.26; this is the transport-data part of the exceptional ring family proof.
 
 Proof: for each finite coefficient field, apply the actual strict-system
 transport and normalized reconstruction equivalence. Conjugate its system

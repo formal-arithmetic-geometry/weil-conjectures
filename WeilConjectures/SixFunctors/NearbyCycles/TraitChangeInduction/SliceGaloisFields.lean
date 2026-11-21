@@ -22,7 +22,6 @@ closures `Lᵢ^sep` (`AlgebraicGeometry.SliceTrait.Hom.compositumSepMap`), compa
 The algebra structures of a slice trait are recorded as local instances
 (`AlgebraicGeometry.SliceTrait.algebraR` etc.); the geometric generic point of the base is given
 by an algebra structure `Algebra R₁ Ω₁`.
-
 -/
 
 @[expose] public section

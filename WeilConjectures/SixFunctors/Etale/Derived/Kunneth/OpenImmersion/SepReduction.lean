@@ -17,23 +17,18 @@ Let `K` be a field, `j : U ⟶ X` an open immersion of `K`-schemes, `q₁ : W �
 (for instance a separable closure of `K`), base change along `Spec L ⟶ Spec K` gives a cube
 
 ```
-V_L --e_L--> U_L          V_L ---> V          U_L ---> U
- |            |            |       |           |       |
-h_L          j_L          h_L      h          j_L      j
- v            v            v       v           v       v
-W_L --q_L--> X_L          W_L ---> W          X_L ---> X
+V_L --e_L--> U_L V_L ---> V U_L ---> U
+ | | | | | |
+h_L j_L h_L h j_L j
+ v v v v v v
+W_L --q_L--> X_L W_L ---> W X_L ---> X
 ```
 
-By the base change along field extensions (blueprint `corollary-open-direct-image-over-field--2`,
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_fieldExtension`) the base change maps of
+By the base change along field extensions the base change maps of
 the two side faces are isomorphisms, so by the compatibility of base change maps with further
-base change (blueprint `corollary-open-direct-image-over-field--2`,
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_cube_of_surjective`) and the
-conservativity of the pullback along the surjective morphism `W_L ⟶ W` (blueprint
-`lem-kun-sep-closure-conservative`), the base change map of the original square is an isomorphism
-as soon as the one of the base changed square is (blueprint
-`corollary-open-direct-image-over-field--2`,
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isIso_fieldExtension`).
+base change and the
+conservativity of the pullback along the surjective morphism `W_L ⟶ W`, the base change map of the original square is an isomorphism
+as soon as the one of the base changed square is.
 -/
 
 @[expose] public section

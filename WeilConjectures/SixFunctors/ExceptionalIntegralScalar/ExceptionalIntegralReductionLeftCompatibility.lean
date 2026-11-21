@@ -12,7 +12,6 @@ import all WeilConjectures.SixFunctors.IntegralSystemRealization.ConstructibleRe
 /-! # Left exceptional mate under normalized finite reduction
 
 Source: Zheng, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-reduction-left-compatibility)
 -/
 
 @[expose] public noncomputable section
@@ -392,8 +391,7 @@ the same proper/open mate. The transport.integral_system_normalized square ident
 that recorded identification with the reconstruction realization; transport.reductionF_eq
 and transport.evaluation_support then identify the right path with the same map.
 Cancel the finite left realization and the invertible scalar realizations. This uses
-whole-system naturality before evaluation, never faithfulness of finite evaluations.
-(blueprint: lem-sf-exceptional-integral-reduction-left-compatibility). -/
+whole-system naturality before evaluation, never faithfulness of finite evaluations. -/
 theorem integralReductionLeftCompatibility
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

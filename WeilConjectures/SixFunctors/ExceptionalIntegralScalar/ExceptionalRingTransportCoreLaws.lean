@@ -13,11 +13,10 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCoreData.E
 /-! # Compatibility laws for exceptional integral transport
 
 This interface supplies the equations and normalization predicates attached to the
-object and functor data of `TransportCoreData`.  Together they form the full
+object and functor data of `TransportCoreData`. Together they form the full
 `ExceptionalIntegralScalar.Transported` record.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26
-(blueprint: lem-sf-exceptional-ring-transport-core).
+5.26.
 -/
 
 @[expose] public noncomputable section
@@ -122,8 +121,6 @@ Proof: obtain transport data and their support identity. Replace the integral-le
 and system comparisons by their explicit normalized constructions. Apply the system
 and evaluation law packages to this datum, and use the proved normalization laws.
 Source: Zheng, Constructions 4.1 and 5.25 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-ring-transport-core-laws)
-(blueprint: lem-sf-exceptional-ring-transport-core)
 The left realizations are supplied with their integer shift-compatibility witnesses.
 -/
 theorem exists_exceptional_transport_core_laws

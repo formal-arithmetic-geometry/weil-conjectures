@@ -110,7 +110,6 @@ import all WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceSite
 /-! # Coefficient normalization as semilinear normalization
 
 Source: Zheng Construction 4.1; Stacks 0941.
-(blueprint: lem-coef-normalized-sequence-semilinear).
 -/
 
 @[expose] public section
@@ -273,7 +272,6 @@ attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbe
 /-- The universal Hom-bijection criterion for a coefficient sequence makes every
 normalized scalar-extension adjunct of its actual transition invertible.
 Source: Zheng Construction 4.1; Stacks 0941.
-(blueprint: lem-coef-normalized-sequence-semilinear).
 
 Proof: identify scalar restriction using the coefficient tower's composition law.
 The unique sectionwise restriction formulas identify the ordinary transitions;

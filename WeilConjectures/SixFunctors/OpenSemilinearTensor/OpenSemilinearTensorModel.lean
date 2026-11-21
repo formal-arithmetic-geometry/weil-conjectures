@@ -31,8 +31,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-! # Simultaneous open tensor comparison before scalar restriction
 
 Source: Stacks Project, sites-modules.tex, Tag 0E8I, and sites-cohomology.tex,
-Tag 0GL1; the simultaneous refinement in the node's seven proof steps
-(blueprint: lem-sf-open-semilinear-tensor-model).
+Tag 0GL1; the simultaneous refinement in the node's seven proof steps.
 
 The coefficient index n means exponent n+1. All complexes are unbounded. The existing
 open-operation interfaces are reused; the completeness-restricted comparison theorem
@@ -339,7 +338,6 @@ extension evaluation is the actual summand identification, not one twisted by a 
 automorphism. Neither completeness nor quasi-compactness is assumed.
 
 Source: Stacks sites-modules.tex, Tag 0E8I; sites-cohomology.tex, Tag 0GL1.
-(blueprint: lem-sf-open-semilinear-tensor-model).
 
 Proof:
 1. Identify the open site with the ambient slice. On extension-presheaf generators

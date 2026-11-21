@@ -64,9 +64,9 @@ sections of `g^* G` over `p` are the sections of `G` over `V` and likewise for `
 
 ```
    V.left ───p───→ W
-       ╲           │
-  V.hom ╲          │ g
-         ↘         ↓
+       ╲ │
+  V.hom ╲ │ g
+         ↘ ↓
                    X
 ```
 -/
@@ -95,8 +95,8 @@ the previous lemma applies.
 
 ```
      V ×_X W i ─────→ W i
-         │            │ g i
-         ↓            ↓
+         │ │ g i
+         ↓ ↓
          V ─────────→ X
 ```
 -/

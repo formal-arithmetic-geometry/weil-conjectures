@@ -59,12 +59,11 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /--
 The bridge-transported intrinsic gamma has the prescribed adjunct after converting
-its codomain to canonical semilinear coordinates.  This is the mate-cancellation
+its codomain to canonical semilinear coordinates. This is the mate-cancellation
 step: expand the four bridge factors, apply the intrinsic `gamma_adjunct` equation,
 and identify the resulting composite with `properOpenLambda`; the final item
 cancels the displayed canonical pullback isomorphism.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0F7B and 07A7.
-(blueprint: lem-sf-integral-system-proper-open-transport-adjunct-bridge)
 -/
 theorem transportedGamma_adjunct_bridge (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)

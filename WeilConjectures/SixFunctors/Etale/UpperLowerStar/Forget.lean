@@ -42,9 +42,9 @@ of its pullback. It is the mate of the equality `f_* ∘ forget₂ = forget₂ �
 under `f^* ⊣ f_*` to `forget₂` of the unit `G ⟶ f_* f^* G`, i.e. it is the unique map making
 ```
 forget₂ G ------η------> f_* f^* (forget₂ G)
-     \                          |
-      \                    f_* (comparison)
-       \                        v
+     \ |
+      \ f_* (comparison)
+       \ v
         ----forget₂ η----> f_* (forget₂ (f^* G))
 ```
 commute (`unit_comp_lowerStar_map_upperStarForget₂Comparison`). It is an isomorphism, see
@@ -75,8 +75,7 @@ lemma unit_comp_lowerStar_map_upperStarForget₂Comparison
 sheaf `T` on `X`, precomposition with it is identified with the chain of bijections
 `Hom(forget₂ (f^* G), T) ≃ Hom(f^* G, R T) ≃ Hom(G, f_* R T) = Hom(G, R f_* T)
 ≃ Hom(forget₂ G, f_* T) ≃ Hom(f^* (forget₂ G), T)`, where `R` is the right adjoint of
-`forget₂` (coinduction), see `CategoryTheory.Sheaf.forget₂CoinduceAdj`.
-(blueprint: `lem-weil-pbc-module-abelian-inverse-image-comparison`) -/
+`forget₂` (coinduction), see `CategoryTheory.Sheaf.forget₂CoinduceAdj`. -/
 instance isIso_upperStarForget₂Comparison
     (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsIso (upperStarForget₂Comparison Λ f G) := by

@@ -10,11 +10,6 @@ public import WeilConjectures.SixFunctors.CompactSupportFiniteProjection.Constru
 
 /-! # Selectors for the four constructible coefficient stages
 
-Source: current blueprint coefficient conventions and the finite-Tor domains of
-sec-six-functors/sk-thm-sf-kunneth-relative/_section.md; the domains of
-sec-six-functors-basics/det-thm-sf-ctf-stability-adjunctions
-(blueprint: def-sf-ctf-coefficient-stage-selectors).
-
 These are the existing selectors extracted unchanged from PodCtfAdjunctions.
 They only select the supplied categories, domains and operations. No restricted
 adjunction theorem or choice of a closed presentation is used to define them.
@@ -31,8 +26,7 @@ open CategoryTheory AlgebraicGeometry Opposite
 namespace WeilConjectures
 
 /-- The four admissible coefficient conventions, including completed integral and
-common-stage algebraically closed coefficients. Source: the coefficient conventions
-(blueprint: def-sf-ctf-coefficient-stage-selectors). -/
+common-stage algebraically closed coefficients. Source: the coefficient conventions. -/
 inductive PodCoefficientStage where
   | finite | integral | rational | common
 
@@ -43,8 +37,7 @@ variable {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
   (S : SixFunctorOperationDatum D C E n hn)
 
 /-- The existing bounded constructible category at the selected stage.
-Source: domains of the restricted adjunctions
-(blueprint: def-sf-ctf-coefficient-stage-selectors). -/
+Source: domains of the restricted adjunctions. -/
 abbrev category (_S : SixFunctorOperationDatum D C E n hn)
     (s : PodCoefficientStage) (X : SixFunctorSpace D) : Type (u + 2) :=
   match s with
@@ -54,15 +47,13 @@ abbrev category (_S : SixFunctorOperationDatum D C E n hn)
   | .common => generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar X.obj.left
 
 /-- Category structures inherited from the actual coefficient categories.
-Source: full-subcategory convention
-(blueprint: def-sf-ctf-coefficient-stage-selectors). -/
+Source: full-subcategory convention. -/
 instance categoryInstance (s : PodCoefficientStage) (X : SixFunctorSpace D) :
     Category.{u + 2} (category (_S := S) s X) := by
   cases s <;> dsimp [category] <;> infer_instance
 
 /-- The actual finite-Tor predicate; field stages use the entire constructible category.
-Source: the four finite-Tor domains
-(blueprint: def-sf-ctf-coefficient-stage-selectors). -/
+Source: the four finite-Tor domains. -/
 def domain (s : PodCoefficientStage) (X : SixFunctorSpace D) :
     ObjectProperty (category (_S := S) s X) :=
   match s with
@@ -72,8 +63,7 @@ def domain (s : PodCoefficientStage) (X : SixFunctorSpace D) :
   | .common => ⊤
 
 /-- The specified pullback, direct image, compact support and exceptional functors.
-Source: the three adjunctions in the node
-(blueprint: def-sf-ctf-coefficient-stage-selectors). -/
+Source: the three adjunctions in the node. -/
 def operations (s : PodCoefficientStage) :
     SixFunctorPushStage D (category (_S := S) s) :=
   match s with
@@ -84,8 +74,7 @@ def operations (s : PodCoefficientStage) :
 
 /-- The recorded tensor with its second argument restricted to finite Tor.
 At finite coefficients this is the canonical projection module's partial tensor.
-Source: the tensor-Hom domain and projection formula
-(blueprint: def-sf-ctf-coefficient-stage-selectors). -/
+Source: the tensor-Hom domain and projection formula. -/
 def tensor (s : PodCoefficientStage) (X : SixFunctorSpace D) :
     category (_S := S) s X ⥤ (domain S s X).FullSubcategory ⥤ category (_S := S) s X :=
   match s with

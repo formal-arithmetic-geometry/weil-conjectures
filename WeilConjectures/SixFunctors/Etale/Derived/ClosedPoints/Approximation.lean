@@ -14,8 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Vanishing
 Let `X` be locally of finite type over a field and `F` an étale sheaf of `Λ`-modules on `X`
 whose stalks vanish at the non-closed points. For a finite set `S` of closed points let
 `F_S ⊆ F` be the subsheaf of sections supported on `S`. These subsheaves form a filtered
-diagram indexed by the finite sets of closed points, and `F` is its colimit (blueprint
-`lemma-sheaves-finite-support-finite-morphisms--1`).
+diagram indexed by the finite sets of closed points, and `F` is its colimit.
 
 ## Main definitions
 

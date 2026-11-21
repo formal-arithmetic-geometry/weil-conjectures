@@ -29,8 +29,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- One ordinary quotient, with the completed coefficient action restored.
-Source: Stacks 03EL and 06YY
-(blueprint: lem-fix-ordinary-quotient-module-comparison). -/
+Source: Stacks 03EL and 06YY. -/
 abbrev ordinaryQuotientModule (W : Scheme.{t}) (n : ℕ) :
     Mod l E W none ⥤ Mod l E W none :=
   reduction l E W none n ⋙ SheafOfModules.restrictScalars
@@ -415,7 +414,6 @@ private theorem generator_lift (W : Scheme.{t}) (n : ℕ) (M : Mod l E W none)
 
 Source: Stacks Project, Modules on Sites, lemma-tensor-product-pullback (03EL),
 and Cohomology on Sites, Tags 06YY and 07A4.
-(blueprint: lem-fix-ordinary-quotient-module-comparison).
 Proof: the normalized quotient unit M → Q_n tensor M is the cokernel of
 multiplication by the (n+1)-st uniformizer power. Indeed, the completed projection
 is surjective on sections and its kernel consists of multiples of that power.

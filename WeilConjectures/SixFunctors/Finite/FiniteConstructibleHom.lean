@@ -99,10 +99,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Internal Hom of finite-stage constructible complexes
 
-Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-proposition-six-operations-dctf--15, order 2138
-(blueprint: proposition-six-operations-dctf--15).
-
 ## Main statements
 
 * `WeilConjectures.finite_constructible_derivedHom_etale`
@@ -218,7 +214,6 @@ attribute [local instance 2000] CommRing.toRing
 /-- Etale internal Hom is bounded constructible, with the asserted Tor interval.
 The input intervals already imply finite Tor amplitude. Finiteness of the lifted
 coefficient ring is supplied by the recorded positive-level finiteness theorem.
-Source: blueprint order 2138 (blueprint: proposition-six-operations-dctf--15).
 
 Proof:
 1. General biduality (theorem-verdier-biduality--1) identifies L with D_X D_X L.
@@ -296,7 +291,6 @@ private theorem finiteTor_iso
 /-- Pro-etale internal Hom preserves finite-Tor bounded constructibility and has the
 same interval bound. The internal Hom is the recorded Hom-complex localization on the
 original small site, whose object and morphism universes remain distinct.
-Source: blueprint order 2138 (blueprint: proposition-six-operations-dctf--15).
 
 Proof:
 1. By theorem-comparison-constructible-sheaves choose bounded constructible etale

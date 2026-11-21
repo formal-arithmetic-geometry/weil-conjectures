@@ -32,7 +32,7 @@ Together with the commutation of the derived pullback along an étale morphism w
 internal hom (`AlgebraicGeometry.Etale.isIso_ihomComparison_leftDerivedUpperStar_of_etale`, in
 `WeilConjectures.SixFunctors.Etale.Derived.UpperStarInternalHom`), they are the inputs of the
 composition and étale-locality statements for cohomologically smooth
-morphisms (`lem-pur-co-smooth-composition`, `lem-pur-co-smooth-etale-locality`).
+morphisms.
 -/
 
 @[expose] public section
@@ -190,8 +190,8 @@ compatible with the
    composition law) the projection maps compose: for `M` on `X` and `N` on `Z`,
    ```
    Rh_!M ⊗ᴸ N ──E ▷ N──▶ Rg_!Rf_!M ⊗ᴸ N ──PF_g──▶ Rg_!(Rf_!M ⊗ᴸ Lg^*N)
-          │PF_h                                         │Rg_! PF_f
-          ▼                                                    ▼
+          │PF_h │Rg_! PF_f
+          ▼ ▼
    Rh_!(M ⊗ᴸ Lh^*N) ──E──▶ Rg_!Rf_!(M ⊗ᴸ Lh^*N) ≅ Rg_!Rf_!(M ⊗ᴸ Lf^*Lg^*N)
    ```
    commutes;

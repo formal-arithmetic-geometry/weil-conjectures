@@ -201,7 +201,6 @@ private theorem extension_complete_principal [QuasiCompact j]
 predicate for the fixed section-normalized operations, at independent universes.
 Source: Stacks proetale.tex Tag 09BP, sites-modules.tex Tag 093M,
 and algebraization.tex Tag 0A0E; the open case of completedExtensionZeroComparison.
-(blueprint: lem-sf-integral-open-extension-complete).
 
 Proof: the quotient-tower completeness predicate is equivalent to local principal
 completeness for multiplication by the valuation uniformizer. Choose an arbitrary

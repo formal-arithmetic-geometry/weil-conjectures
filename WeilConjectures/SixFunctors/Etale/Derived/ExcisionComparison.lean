@@ -16,8 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChange
 
 For a cartesian square with `f = 𝟙_Y` and `g = g' : Y' ⟶ Y` an open immersion, the base-change
 comparison `Lg'^* Rf^! ⟶ Rf'^! Lg^*` of the exceptional inverse image is an isomorphism, whereas
-the excision comparison `Rf_!(g'_! ⟶ g'_*)`, which is `g_! ⟶ Rg_*`, need not be one (blueprint
-`ex-exc-excision-is-not-the-comparison`). The counterexample is the punctured affine line
+the excision comparison `Rf_!(g'_! ⟶ g'_*)`, which is `g_! ⟶ Rg_*`, need not be one. The counterexample is the punctured affine line
 `j : 𝔾_{m,k} ⟶ 𝔸¹_k` over a separably closed field `k`: the stalk of `Rj_* Λ` at the origin is
 nonzero, whereas that of `j_! Λ` vanishes.
 
@@ -25,8 +24,7 @@ nonzero, whereas that of `j_! Λ` vanishes.
 
 The blueprint reads off the stalk of `j_* Λ` at the origin from the description of direct
 images. Here it is read off from the closed support triangle
-`s_* Rs^! Λ_T ⟶ Λ_T ⟶ Rj_* Λ_G ⟶` of the zero section `s` (blueprint
-`lemma-local-cohomology-right-adjoint--2`): if `Ls^* Rj_* Λ_G` vanished, then
+`s_* Rs^! Λ_T ⟶ Λ_T ⟶ Rj_* Λ_G ⟶` of the zero section `s`: if `Ls^* Rj_* Λ_G` vanished, then
 `Rs^! Λ_T ≅ Ls^* Λ_T ≅ Λ_k` would have nonzero `𝓗⁰`, whereas `(Rs^! Λ_T)[2] ≅ Λ_k` by purity
 (`Etale.nonempty_iso_shift_rightDerivedUpperShriek_affineLineZero_of_isSepClosed`).
 This route needs a normalized Tate twist datum.
@@ -120,7 +118,7 @@ theorem not_isIso_derivedOpenImmersionLowerShriekToLowerStar_app_affineLine
       ((L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of k)))^*[
         ModuleCat.{u + 1} Λ])).mapIso (@asIso _ _ _ _ _ h).symm))
 
-/-- Blueprint `ex-exc-excision-is-not-the-comparison`: The excision comparison is not the
+/-- The excision comparison is not the
 base-change comparison.
 
 Take `f = 𝟙` on the affine line `T = 𝔸¹_k` over a separably closed field `k`, and let

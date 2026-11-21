@@ -11,8 +11,6 @@ import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffe
 import all WeilConjectures.SixFunctors.GeneratorReduction.GeneratorKind.TensorAdjunctionReductionSquares
 
 /-! # Ordinary coefficient compatibility for compactification exchange
-
-Source: blueprint fix-prop-coherence, the coefficient comparisons of individual maps.
 -/
 
 @[expose] public noncomputable section
@@ -477,8 +475,6 @@ private theorem compactificationCoefficientOnObjects
     Lean.Elab.Tactic.closeMainGoal `exact result
 
 /-- Ordinary coefficient compatibility with the fixed compactification exchange.
-Source: blueprint fix-prop-coherence, the prescribed proper/open exchange composite.
-(blueprint: lem-sf-integral-ordinary-compactification-exchange-square).
 
 Proof: write L for the ringed interpretation of e, M for its system interpretation,
 and q : R(L) ⟶ M for its ordinary coefficient map. The coefficient of the open

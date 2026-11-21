@@ -58,8 +58,7 @@ Proof: compare the rational arrows using their common prescribed value, then map
 that equality through inclusion, realization and derived sections. Compare the other
 five arrows with their prescribed values. Their endpoint equations let these six
 arrow equalities be composed. The given boundary equations regroup the first three
-and last two factors. Coefficient equality transports insert only equality arrows.
-(blueprint: lem-sf-native-integral-scalar-component-factorization). -/
+and last two factors. Coefficient equality transports insert only equality arrows. -/
 theorem integralComponent_factorization [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (E : Index l (PadicAlgCl l))

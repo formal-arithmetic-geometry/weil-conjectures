@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.Coefficient.Tensor.CoefficientTensorAssociati
 /-! # Forward coherence of normalized tensor comparisons
 
 Source: Stacks 07A4 and 08J9; Zheng Construction 4.1.
-(blueprint: lem-coef-normalized-tensor-associativity-hom).
 -/
 
 @[expose] public section
@@ -31,14 +30,13 @@ namespace WeilConjectures
 /-- The forward tensorator associativity equation.
 Source: Stacks 07A4; this is the strong monoidal coherence equation whose inverse
 form is used by `CoefficientTensorAssociativity`.
-(blueprint: lem-coef-normalized-tensor-associativity-hom).
 
 Proof: choose simultaneous flat-term K-flat representatives and use the prescribed
 pairwise normalization squares to identify every tensorator with its ordinary
-pure-tensor chain map.  The signed total-tensor associator sends each triple pure
-tensor to the same reassociated tensor.  Equality on coproduct generators gives the
+pure-tensor chain map. The signed total-tensor associator sends each triple pure
+tensor to the same reassociated tensor. Equality on coproduct generators gives the
 chain-map equality, and localization and naturality transport it to all derived
-objects.  The same construction applies to every finite coefficient level. -/
+objects. The same construction applies to every finite coefficient level. -/
 def CoefficientTensorHomAssociativity
     {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
     {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
@@ -80,8 +78,7 @@ private theorem homAssociativity_of_core
   simpa only [Functor.CoreMonoidal.toOplaxMonoidal_δ, hi,
     Functor.comp_obj, Functor.prod_obj, MonoidalCategory.tensor_obj] using h.symm
 
-/-- Forward coherence for the fixed reduction and finite tensor comparisons.
-(blueprint: lem-coef-normalized-tensor-associativity-hom). -/
+/-- Forward coherence for the fixed reduction and finite tensor comparisons. -/
 theorem coefficientNormalizedTensorAssociativityHom
     (R : CoefficientDerivedSystemReduction l E W)
     (hT : CoefficientDerivedSystemTensorCoherence l E W R.toCoefficientDerivedSystemTensors)

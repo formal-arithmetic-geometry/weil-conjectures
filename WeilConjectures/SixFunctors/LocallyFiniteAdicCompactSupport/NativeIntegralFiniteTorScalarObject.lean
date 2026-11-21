@@ -34,8 +34,7 @@ The integral transition already preserves constructibility. The integral residue
 criterion therefore gives finite Tor amplitude to its underlying integral object.
 Equip that same object with this proof. Its inclusion is the given transition object
 by equality of full-subcategory objects; in particular, this equation determines the
-representative up to equality, rather than selecting arbitrary existence data.
-(blueprint: lem-sf-native-integral-finite-tor-scalar-object). -/
+representative up to equality, rather than selecting arbitrary existence data. -/
 theorem finiteTorScalarObject
     (l : ℕ) [Fact l.Prime] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (X : Scheme.{u}) [X.Over (Spec (.of D.k))]

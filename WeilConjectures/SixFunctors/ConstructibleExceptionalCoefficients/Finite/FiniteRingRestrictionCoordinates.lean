@@ -37,8 +37,7 @@ attribute [local irreducible] ProEtale.upperStar ProEtale.upperStarComp
   proEtaleRingModulePullback sfConstantCoefficientIso
 
 /-- Finite realization preserves the restriction obtained from pull composition and counit.
-Source: compactification-coherence proof, first two paragraphs; Stacks 03D6 and 0D6D
-(blueprint: lem-sf-finite-ring-restriction-coordinates).
+Source: compactification-coherence proof, first two paragraphs; Stacks 03D6 and 0D6D.
 
 Proof: derivedUniq identifies the exact derived left-adjoint uniqueness comparison.
 Its counit equation, composed with the realization mate counit equation from

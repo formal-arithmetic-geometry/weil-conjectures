@@ -21,7 +21,6 @@ import all WeilConjectures.AlgebraicGeometry.CompletedLisse.LisseCompletedPointw
 /-! # Finite-free targets under coefficient isomorphisms
 
 Source: Stacks Project, Modules on Sites, change of rings and Tag 03DM.
-(blueprint: lem-sf-adic-finite-free-scalar-transport).
 -/
 
 @[expose] public noncomputable section
@@ -136,8 +135,7 @@ private theorem target_restrict {T : Scheme.{u}}
     exact ⟨S', fun i ↦ (hq q S' i).mpr (hS i)⟩
 
 /-- A coefficient isomorphism preserves and reflects the ordinary finite-free target.
-Source: Stacks Project, Modules on Sites, change of rings and Tag 03DM
-(blueprint: lem-sf-adic-finite-free-scalar-transport).
+Source: Stacks Project, Modules on Sites, change of rings and Tag 03DM.
 Proof: restriction along the inverse coefficient is an exact equivalence. It commutes
 with module inverse image to every stratum by the scalar-pullback adjunction. On a
 trivializing slice it preserves the regular module and all finite coproducts, hence

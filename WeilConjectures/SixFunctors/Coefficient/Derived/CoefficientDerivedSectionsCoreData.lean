@@ -33,7 +33,6 @@ import WeilConjectures.SixFunctors.CoefficientSectionsCoreComparison.NormalizedS
 
 /-! Transported data for the normalized coefficient-sections core.
 Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941.
-(blueprint: lem-coef-derived-sections-core-data)
 -/
 
 @[expose] public section
@@ -287,8 +286,7 @@ Proof: choose normalized derived sections for the completed coefficient ring and
 quotient tower, transport their scalar and evaluation comparisons through the exact
 sequence-site restriction, and transport the ordinary and derived limit comparisons
 through the same equivalence. The resulting three fields have exactly the displayed
-endpoints.
-(blueprint: lem-coef-derived-sections-core-data) -/
+endpoints. -/
 structure CoefficientDerivedSectionsCoreData
     (R : CoefficientDerivedSystemReduction l E W) where
   scalar : CoefficientDerivedSystemScalarCoherence l E W
@@ -305,8 +303,7 @@ structure CoefficientDerivedSectionsCoreData
 open SheafOfModules in
 /-- The transported scalar/evaluation/limit data exist under finite tensor normalization.
 Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941; extracted construction step of the
-normalized coefficient-sections package.
-(blueprint: lem-coef-derived-sections-core-data) -/
+normalized coefficient-sections package. -/
 theorem coefficientDerivedSectionsCoreData
     (R : CoefficientDerivedSystemReduction l E W)
     (hF : CoefficientFiniteTensorNormalization l E W R) :

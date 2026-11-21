@@ -335,8 +335,7 @@ end PresentationConstruction
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite-field continuous coefficient presentations, compatible with field inclusion.
 
-Source: Bhatt--Scholze, Lemma 6.8.2; native realization proof step 2
-(blueprint: lem-sf-locally-finite-adic-coefficient-presentations).
+Source: Bhatt--Scholze, Lemma 6.8.2; native realization proof step 2.
 
 Proof in words: for each positive residue quotient, the constant-sheaf comparison to
 continuous functions is an isomorphism: locally a discrete-valued function is constant,

@@ -10,7 +10,6 @@ import WeilConjectures.SixFunctors.Finite.Coefficient.FiniteCoefficientKFlatRefl
 public import WeilConjectures.SixFunctors.Etale.EtaleKFlatTensorPresentation
 /-! # Representatives for the finite coefficient site tensor comparison
 Source: Stacks Project, Cohomology on Sites, Tags 06YN and 07A4.
-(blueprint: lem-sf-finite-coefficient-site-tensor-presentation).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -21,8 +20,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 /-- Resolving source and chain tensor comparisons with all functor data shared.
-Source: Stacks 06YN and 07A4
-(blueprint: lem-sf-finite-coefficient-site-tensor-presentation). -/
+Source: Stacks 06YN and 07A4. -/
 def FiniteHomTensorPresentationAux
     {K : Type a} {L : Type b} {A : Type c} (B : Type d)
     [Category.{e} K] [Category.{f} L] [Category.{g} A] [Category.{w} B]
@@ -59,8 +57,7 @@ The assertions concern only restriction to representatives, the source localizat
 map, and the ordinary chain comparison; they supply no derived tensor comparison.
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YN and 07A4, and the final
-site-transport paragraph of blueprint lemma-change-coefficients-internal-hom--1
-(blueprint: lem-sf-finite-coefficient-site-tensor-presentation).
+site-transport paragraph of blueprint lemma-change-coefficients-internal-hom--1.
 
 Proof: Write inverse image as the ordinary etale-to-pro-etale inverse image followed
 by constant-ring module sheafification. This is exact, faithful, and strong monoidal.

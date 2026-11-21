@@ -24,7 +24,7 @@ with explicit bounds:
 * for `f` smooth of pure relative dimension `d`, `[a', b'] = [a - 2d, b - 2d]`
   (`AlgebraicGeometry.Etale.smooth_preservationClauses`, blueprint
   `theorem-f-shriek-finite-coefficients`), by smooth duality `Rf^! K ≅ Lf^* K ⊗ᴸ L[2d]` with `L`
-  locally free of rank one (`proposition-exceptional-inverse-image-smooth-morphism`);
+  locally free of rank one;
 * for `f` separated of finite type, covered by affine charts `U ↪ 𝔸^{d_U}_V` (closed immersions
   over affine opens `V ⊆ Y`) whose open complements `W_U ⊆ 𝔸^{d_U}_V` satisfy the open-complement
   condition with constants `c_U`, `[a', b'] = [a - 2D, b - 2D + c]` for `D ≥ d_U` and
@@ -80,7 +80,7 @@ lemma constructibleIn_rightDerivedUpperShriek_of_isOpenImmersion {U Y : Scheme.{
     homologyConcentratedIn_of_iso _ ((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j).app K).symm
       (((j)^*[ModuleCat.{u + 1} Λ]).homologyConcentratedIn_mapDerivedCategory_obj hK.2)⟩
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Smooth morphisms satisfy the preservation
+/-- Smooth morphisms satisfy the preservation
 clauses.
 
 Let `f : X ⟶ Y` be smooth (and compactifiable, hence separated of finite type) of pure relative
@@ -206,7 +206,7 @@ theorem preservationClauses_closedChart {k : Type u} [Field k] {U V W Y : Scheme
     exact ⟨(DerivedCategory.boundedConstructible _ U).prop_of_iso (e K).symm hb₃,
       (torAmplitudeIn (ModuleCat.{u + 1} Λ) U _ _).prop_of_iso (e K).symm ht₃⟩
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: Preservation for an affine base, modulo the
+/-- Preservation for an affine base, modulo the
 open-complement condition.
 
 Let `f : X ⟶ Y` be separated of finite type (compactifiable and quasi-compact), with `Y` of
@@ -339,7 +339,7 @@ theorem openComplementCondition_affineSpace {k : Type u} [Field k]
 finite-type morphism.
 
 In the situation of `AlgebraicGeometry.Etale.preservationClauses_of_charts`
-(`theorem-f-shriek-finite-coefficients`), with closed affine charts `cᵢ : Uᵢ ⟶ 𝔸^{dᵢ}_{Vᵢ}` of `f`
+, with closed affine charts `cᵢ : Uᵢ ⟶ 𝔸^{dᵢ}_{Vᵢ}` of `f`
 and without assuming the open-complement condition: let `Λ` be a finite ring whose exponent is
 invertible in `k`, `dim Y ≤ d_Y` and `D ≥ dᵢ` for all `i`. The open complement
 `Wᵢ = 𝔸^{dᵢ}_{Vᵢ} ∖ Uᵢ` satisfies the open-complement condition with `cᵢ' = 2(dᵢ + d_Y)`

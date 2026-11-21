@@ -78,9 +78,9 @@ Let `K` be a field and `Λ` a finite ring whose exponent is invertible in `K`. F
 
 ```
   X <--p-- X' <--h-- Y
-  |        |         |
-  a        f'        e
-  v        v         v
+  | | |
+  a f' e
+  v v v
 Spec K <-b- S' <--g-- T
 ```
 
@@ -148,9 +148,9 @@ Let `K` be a field and `Λ` a finite ring whose exponent is invertible in `K`. F
 
 ```
   X <--p-- X' <--h-- Y
-  |        |         |
-  a        f'        e
-  v        v         v
+  | | |
+  a f' e
+  v v v
 Spec K <-b- S' <--g-- T
 ```
 
@@ -216,9 +216,9 @@ Let `k` be a separably closed field, `Λ` a finite ring whose exponent is invert
 
 ```
   W --p₂--> Y
-  |         |
-  p₁        a_Y
-  v         v
+  | |
+  p₁ a_Y
+  v v
   X --a_X-> Spec k
 ```
 

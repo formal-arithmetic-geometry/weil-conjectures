@@ -162,9 +162,7 @@ theorem nonempty_adjunction_twistShift_of_etale {X Y : Scheme.{u}} [HasInvertibl
     ((Functor.rightUnitor _).symm ≪≫ Functor.isoWhiskerLeft _ (twistShiftZeroNatIso Λ X).symm)⟩
 
 /-- **The projective-line adjunction** `Rq_! ⊣ Lq^*(1)[2]` for `q : ℙ¹_S ⟶ S` and a normalized
-Tate twist, over any scheme `S` on which the exponent of `Λ` is invertible
-(blueprint `proposition-adjunction-projective-line--1`; it is part of
-`AlgebraicGeometry.Etale.projectiveLineAdjunctionBaseChange_of_isNormalized`). -/
+Tate twist, over any scheme `S` on which the exponent of `Λ` is invertible. -/
 theorem nonempty_adjunction_projectiveLine [HasTateTwist.IsNormalized Λ] (S : Scheme.{u})
     [HasInvertibleExponent Λ S] :
     haveI : HasInvertibleExponent Λ ℙ(Option (ULift.{u} (Fin 1)); S) := .of_hom (_ ↘ S)

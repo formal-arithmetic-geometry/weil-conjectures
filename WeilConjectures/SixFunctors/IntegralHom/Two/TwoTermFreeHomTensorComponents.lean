@@ -12,7 +12,6 @@ public import WeilConjectures.SixFunctors.IntegralHom.Two.TwoTermFreeHomTensorCo
 
 Source: the finite-free calculation in the first paragraph of blueprint
 `lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 0A8X and 08J7.
-(blueprint: lem-sf-two-term-free-hom-tensor-components).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ Neither Hom input is bounded, and no condition is imposed on the differential of
 
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1,
 finite-free coefficient construction; Stacks Tags 0A8X and 08J7.
-(blueprint: lem-sf-two-term-free-hom-tensor-components).
 
 Proof: fix total degree j. Delete zero summands outside coefficient degrees -1,0.
 The source is the biproduct of Hom(P,I)^(j+1) tensor Q^(-1) and

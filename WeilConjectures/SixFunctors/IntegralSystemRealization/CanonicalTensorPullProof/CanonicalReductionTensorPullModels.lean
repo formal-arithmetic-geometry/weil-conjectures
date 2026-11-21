@@ -82,7 +82,6 @@ theorem pull_good {U V : Scheme.{u}} (f : U ⟶ V)
 
 /-- Reduction tensor on flat K-flat representatives agrees with the strict tensor map.
 Source: tensorRepresentative and tensorReductionStrictMap_derived_square.
-(blueprint: lem-sf-canonical-reduction-tensor-pull-models).
 
 Proof: compose the tensorRepresentative equation with coefficient reduction and
 apply the already normalized strict reduction tensor square. -/

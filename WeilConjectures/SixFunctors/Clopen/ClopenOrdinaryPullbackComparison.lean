@@ -146,7 +146,6 @@ private noncomputable def restrictionAdjunction
 /-- Ordinary normalized open restriction is the ambient integral module pullback.
 
 Source: Stacks Project, sites-modules.tex, Tags 03D2 and 03D7.
-(blueprint: lem-sf-clopen-ordinary-pullback-comparison).
 
 Proof: the composition/base-change adjunction on sites transposes the inverse
 finite coefficient isomorphisms to the specified constant-section maps, by

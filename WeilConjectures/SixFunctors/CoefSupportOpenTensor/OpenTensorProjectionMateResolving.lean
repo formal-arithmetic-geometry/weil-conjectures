@@ -11,8 +11,7 @@ import WeilConjectures.SixFunctors.CoefSupportOpenTensor.OpenTensorProjectionMat
 
 /-! # The projection mate on resolving pairs
 
-Source: Stacks 0GL1, 07A4, 06YS and 06YT
-(blueprint: lem-sf-open-tensor-projection-mate-resolving).
+Source: Stacks 0GL1, 07A4, 06YS and 06YT.
 -/
 
 @[expose] public noncomputable section
@@ -48,8 +47,7 @@ variable {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']
 /-- The unit-defined projection mate has the expected chain formula on pairs of
 flat-term K-flat complexes. No derived projection isomorphism or formula on
 arbitrary complexes is asserted here.
-Source: Stacks 0GL1, proof of lemma-j-shriek-and-tensor; 07A4 and 06YS--06YT
-(blueprint: lem-sf-open-tensor-projection-mate-resolving).
+Source: Stacks 0GL1, proof of lemma-j-shriek-and-tensor; 07A4 and 06YS--06YT.
 
 Proof: the ordinary projection and exactness of F and G show that F preserves
 flat modules and K-flat complexes. For flatness conjugate tensor with F(M) to

@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.Compact.CompactSupportQuotientComparisonLaws
 /-! # Transport of the input quotient cocycle through compact support
 
 Source: the current blueprint, lem-coef-integral-compact-support.proof.md,
-finite-level coefficient comparison; Stacks Tag 03DA
-(blueprint: lem-coef-compact-support-quotient-output-composition).
+finite-level coefficient comparison; Stacks Tag 03DA.
 -/
 
 @[expose] public noncomputable section
@@ -37,11 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Compact-support quotient composition from the input law.
-Source: blueprint finite-level comparison, Steps 5--6
-(blueprint: lem-coef-compact-support-quotient-output-composition).
-Proof: apply the abstract naturality calculation to the given input law and the
-normalized compact-support coefficient-restriction square. For composition map
-the unit ell in the base field into each stalk and use the quotient-factor equality. -/
+ -/
 theorem compactSupportQuotient_output_composition
     (k : Type u) [Field k] (_hl : IsUnit (l : k))
     {X Y : Scheme.{u}} {f : X ⟶ Y}

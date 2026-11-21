@@ -15,8 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 
 Let `E` be a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ` with ring of integers `𝒪_E` and maximal ideal
 `𝔪_E = (ϖ)`. This file proves the projection formula at the integral stage of the `ℓ`-adic
-formalism (blueprint `lemma-projection-formula-integral-coefficients`, with its detailed node
-`thm-sf-pf-adic`): for `f : X ⟶ Y` admitting a compactification, `K ∈ D(X_ét, 𝒪_E)` and
+formalism: for `f : X ⟶ Y` admitting a compactification, `K ∈ D(X_ét, 𝒪_E)` and
 `L ∈ D(Y_ét, 𝒪_E)`, the projection map
 
 ```
@@ -29,13 +28,11 @@ isomorphisms.
 
 ## The statement
 
-The operations of the integral stage are defined levelwise on the finite reductions (blueprint
-`theorem-f-shriek-ell-adic-coefficients--4`, adic stages; `def-exchange-projection`: the coefficient
-categories `𝒪_E`, `E`, `ℚ̄_ℓ` "are obtained by derived completion"): the integral `Rf_! K ⊗ᴸ L` is
+The operations of the integral stage are defined levelwise on the finite reductions: the integral `Rf_! K ⊗ᴸ L` is
 the derived limit `R lim_n (Rf_! K_n ⊗ᴸ L_n)` of its reductions, and `PF_{f, K, L}` over `𝒪_E` is
-the morphism realized by the system `(PF_{f, K_n, L_n})_n` (`thm-sf-pf-adic`). Since reduction
+the morphism realized by the system `(PF_{f, K_n, L_n})_n`. Since reduction
 commutes with the plain operations of `D(X_ét, 𝒪_E)`
-(`proposition-six-operations-change-coefficients`), this derived limit is the derived completion
+, this derived limit is the derived completion
 `(Rf_! K ⊗ᴸ L)^` of the plain operation, and the integral projection map is the derived completion
 of the plain projection map. So the statement proved here,
 `AlgebraicGeometry.Etale.isIso_completion_map_projectionMap`, is the blueprint statement.
@@ -67,7 +64,7 @@ classification of these objects.
 - `AlgebraicGeometry.Etale.isIso_completion_map_projectionMap`: the
   projection formula at the integral stage.
 - `AlgebraicGeometry.Etale.isIso_completion_map_projectionMap_of_derivedCompleteIntegral`
-  (`thm-sf-pf-adic`): the same, together with the compatibility with all finite reductions.
+: the same, together with the compatibility with all finite reductions.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_of_isIso_reductionModIdeal_map`: the plain
   projection formula when both sides are derived complete.
 -/
@@ -154,7 +151,7 @@ If `K` and `L` are bounded constructible, derived complete for `𝔪_E` and of f
 amplitude, then `ρ(PF_{f, K, L})`, the image of the projection map under the reduction
 `- ⊗ᴸ (𝒪_E/𝔪_E)_Y`, is an isomorphism. In the blueprint, `ρ(PF_{f, K, L})` is identified with the
 finite-level projection map `PF_{f, K₁, L₁}` by the reduction square of
-`sk-prop-sf-pf-reduction` (`proposition-six-operations-change-coefficients`), and the latter is an
+`sk-prop-sf-pf-reduction`, and the latter is an
 isomorphism by the finite-level projection formula `sk-thm-sf-pf-finite`
 (`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMap_of_finite`). The hypotheses
 on `K` and `L` are not needed. -/
@@ -184,7 +181,7 @@ the reduction of the projection map modulo `𝔪_Eⁿ` is an isomorphism.
 For all `K` and `L`, `ρ_n(PF_{f, K, L})`, the image of the projection map under the reduction
 `- ⊗ᴸ (𝒪_E/𝔪_Eⁿ)_Y`, is an isomorphism: it is identified with the finite-level projection map
 `PF_{f, K_n, L_n}` over `𝒪_E/𝔪_Eⁿ` by the reduction square of `sk-prop-sf-pf-reduction`
-(`proposition-six-operations-change-coefficients`), an isomorphism by the finite-level projection
+, an isomorphism by the finite-level projection
 formula `sk-thm-sf-pf-finite`
 (`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMap_of_finite`). -/
 theorem isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap (f : X ⟶ Y)
@@ -254,7 +251,7 @@ theorem isIso_completion_map_projectionMap (f : X ⟶ Y) [HasCompactification f]
   have h := isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap l E f K L 1
   rwa [pow_one] at h
 
-/-- Blueprint `thm-sf-pf-adic`: Derived-complete reconstruction over `𝒪_E`.
+/-- Derived-complete reconstruction over `𝒪_E`.
 
 Let `K` and `L` be bounded constructible, derived complete for `𝔪_E` and of finite Tor amplitude.
 The finite-level projection maps `PF_{f, K_n, L_n}`, which are the reductions modulo `𝔪_Eⁿ` of the

@@ -31,7 +31,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-! # Natural prescribed evaluation tensor comparison on complexes
 
 Source: Stacks 03EK, 07A4 and 0941.
-(blueprint: lem-coef-normalized-evaluation-tensor-chain).
 -/
 
 @[expose] public section
@@ -182,8 +181,7 @@ formula and inverse cancellation give the forward generator formula. Every
 section transport heterogeneously equal to the identity equals the canonical
 transport, so this formula holds for coefficientEvaluationSection. The unique
 generator characterization of coefficientEvaluationTensorIso identifies each
-component of the natural total isomorphism with that prescribed map.
-(blueprint: lem-coef-normalized-evaluation-tensor-chain). -/
+component of the natural total isomorphism with that prescribed map. -/
 theorem coefficientNormalizedEvaluationTensorChain (n : ℕ) :
     ∃ b : coefficientTotalTensor.{u, t+1, t}
         (coefficientSequenceTopology (Scheme.ProEt.topology W))

@@ -60,7 +60,6 @@ private theorem on_representatives
 Source: blueprint sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md,
 "tensor reassociation, evaluation, and adjunction units and counits", and
 proposition-six-operations-change-coefficients; Stacks 07A4, 07A6 and 0941.
-(blueprint: lem-sf-canonical-reduction-tensor-pull).
 
 Proof: resolve K and H by flat-term K-flat complexes. Use the total tensor of these
 representatives for their tensor product. The tensorRepresentative field identifies

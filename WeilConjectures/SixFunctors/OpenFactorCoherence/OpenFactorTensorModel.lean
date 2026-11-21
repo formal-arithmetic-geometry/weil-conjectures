@@ -11,8 +11,7 @@ public import WeilConjectures.SixFunctors.Constructible.ConstructibleTensorCompl
 
 /-! # Normalized comparison of tensor and quotient completion
 
-Source: Bhatt--Scholze, Definition 3.4.10, Lemma 6.5.5; Stacks 099N
-(blueprint: def-sf-tensor-completion-comparison).
+Source: Bhatt--Scholze, Definition 3.4.10, Lemma 6.5.5; Stacks 099N.
 The comparison retains the two actual coordinates of the quotient Roos augmentation.
 
 ## Main definitions
@@ -33,8 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The first and shifted coordinates of the actual quotient-unit chain map.
-Source: Bhatt--Scholze 3.4.10, 6.5.5
-(blueprint: def-sf-tensor-completion-comparison). -/
+Source: Bhatt--Scholze 3.4.10, 6.5.5. -/
 def IsTensorChain (W : Scheme.{u})
     (chain : constructibleTensorTotal l E W ⟶
       integralOperationsTensorComplexFunctor.{u, u} l E W) : Prop :=
@@ -52,8 +50,7 @@ def IsTensorChain (W : Scheme.{u})
       (constructibleTensorBoundary l E W P Q)).v i j h = 0)
 
 /-- The comparison is the localization of that same normalized chain map.
-Source: Bhatt--Scholze 3.4.10, 6.5.5
-(blueprint: def-sf-tensor-completion-comparison). -/
+Source: Bhatt--Scholze 3.4.10, 6.5.5. -/
 def IsTensorCompletion (W : Scheme.{u})
     (ordinary : ProEtaleTensorModel W ((completed l E).ring W))
     (good : ∀ P : Cx l E W,
@@ -75,8 +72,7 @@ def IsTensorCompletion (W : Scheme.{u})
 set_option genSizeOf false in
 set_option genInjectivity false in
 /-- The tensor comparison retains both coordinates of the quotient Roos augmentation.
-Source: Bhatt--Scholze 3.4.10 and 6.5.5
-(blueprint: def-sf-tensor-completion-comparison). -/
+Source: Bhatt--Scholze 3.4.10 and 6.5.5. -/
 structure Tensor (W : Scheme.{u}) where
   ordinary : ProEtaleTensorModel W ((completed l E).ring W)
   good : ∀ P : Cx l E W,
@@ -87,8 +83,7 @@ structure Tensor (W : Scheme.{u}) where
   canonical : IsTensorChain l E W chain ∧ IsTensorCompletion l E W ordinary good comparison chain
 
 /-- The actual comparison chi, obtained from the quotient unit and the normalized tensor
-identification. Source: Bhatt--Scholze 6.5.5
-(blueprint: def-sf-tensor-completion-comparison). -/
+identification. Source: Bhatt--Scholze 6.5.5. -/
 def Tensor.chi {W : Scheme.{u}} (t : Tensor l E W) :
     t.ordinary.tensor ⟶ integralCompletedTensor.{u, u} l E W :=
   Functor.whiskerLeft t.ordinary.tensor (eta l E W) ≫ t.comparison.hom

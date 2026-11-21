@@ -149,7 +149,6 @@ Only its limit-acyclicity is asserted, not its K-injectivity.
 Source: Stacks sites-cohomology.tex, lemma-derived-pushforward-composition (0D6E),
 lemma-derived-limit-is-ok (0941), and the restriction-acyclicity part of step 1 of
 lem-trf-completion-unit-derived-adjunction-comparison.
-(blueprint: lem-trf-completion-unit-restriction-acyclicity).
 
 Proof: Identify modules on the coefficient sequence site with strict semilinear
 systems using the vertical-slice equivalence. This exact equivalence preserves
@@ -276,8 +275,7 @@ theorem constantLimitUnit_isRightDerived :
 
 
 /-- The actual composite unit for exact scalar restriction followed by total limit.
-Source: Stacks 0D6E
-(blueprint: lem-trf-completion-unit-derived-adjunction-comparison). -/
+Source: Stacks 0D6E. -/
 def systemLimitUnit (M : OrdinaryModel l E W)
     (η : roosLimitFunctor ⋙ DerivedCategory.Q ⟶
       DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E W) :

@@ -17,7 +17,6 @@ From the isomorphisms of arrows of
 is invertible if and only if `Π_{𝔽_E ⊗ᴸ A₀, 𝔽_E ⊗ᴸ B₀}` is
 (`NearbyCyclesModel.isIso_map_kunnethMap_iff_residueField`), also after restriction along any
 `h : W ⟶ Z'` (`NearbyCyclesModel.isIso_map_map_kunnethMap_iff_residueField`).
-
 -/
 
 @[expose] public section

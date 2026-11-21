@@ -42,8 +42,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (c : Compactification f)
 
 /-- The first three arrows of the normalized integral compact-support comparison.
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: def-sf-native-integral-scalar-boundary-conditions). -/
+Source: Bhatt--Scholze, Remark 6.8.15. -/
 def IntegralSourceBoundary [G : NativeGeometry.{u} l]
     (target : Realization l Y) (E : Index l (PadicAlgCl l))
     (K : finiteTorConstructibleIntegralCategory l (Coefficient.{u} l (PadicAlgCl l) E) X)
@@ -72,8 +71,7 @@ def IntegralSourceBoundary [G : NativeGeometry.{u} l]
       b = a₀ ≫ a₁ ≫ a₂
 
 /-- The final two arrows of the normalized integral compact-support comparison.
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: def-sf-native-integral-scalar-boundary-conditions). -/
+Source: Bhatt--Scholze, Remark 6.8.15. -/
 def IntegralTargetBoundary [G : NativeGeometry.{u} l]
     (source : Realization l X) (E : Index l (PadicAlgCl l))
     (K : finiteTorConstructibleIntegralCategory l (Coefficient.{u} l (PadicAlgCl l) E) X)
@@ -92,8 +90,7 @@ def IntegralTargetBoundary [G : NativeGeometry.{u} l]
       d = a₄ ≫ a₅
 
 /-- The six-arrow formula with an arbitrary, endpoint-recorded scalar arrow.
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: def-sf-native-integral-scalar-boundary-conditions). -/
+Source: Bhatt--Scholze, Remark 6.8.15. -/
 def IntegralScalarFormula [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (E : Index l (PadicAlgCl l))

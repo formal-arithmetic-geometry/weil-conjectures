@@ -33,7 +33,7 @@ by the exceptional Künneth isomorphism `α` (`proposition-exceptional-external-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.verdierDual_obj`, `AlgebraicGeometry.Etale.dualizingComplex_eq`
-  (`definition-verdier-dual-evaluation`): `𝔻_X = RHom(-, ω_X)` and `ω_X = Ra^! Λ_S`.
+: `𝔻_X = RHom(-, ω_X)` and `ω_X = Ra^! Λ_S`.
 - `AlgebraicGeometry.Etale.nonempty_iso_externalHom` (`lemma-external-duality-trace-morphism--1`):
 `β` as an
   isomorphism, from `AlgebraicGeometry.Etale.isIso_externalHomMap`.
@@ -42,8 +42,7 @@ by the exceptional Künneth isomorphism `α` (`proposition-exceptional-external-
 - `AlgebraicGeometry.Etale.nonempty_iso_kunnethVerdier`
 (`lemma-external-duality-trace-morphism--1`): `κ`.
 - `AlgebraicGeometry.Etale.kunnethVerdier`, `AlgebraicGeometry.Etale.verdierDualExternalProduct`
-  (`rem-sf-kv-formal`): `κ` and its formal equivalent `𝔻(P ⊠ Q) ≅ 𝔻P ⊠ 𝔻Q`.
-
+: `κ` and its formal equivalent `𝔻(P ⊠ Q) ≅ 𝔻P ⊠ 𝔻Q`.
 -/
 
 @[expose] public section
@@ -64,7 +63,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `definition-verdier-dual-evaluation`: Dualizing complex and Verdier dual.
+/-- Dualizing complex and Verdier dual.
 
 For `a : X ⟶ S`, the dualizing complex is `ω_X = Ra^! Λ_S`
 (`AlgebraicGeometry.Etale.dualizingComplex`, see
@@ -79,7 +78,7 @@ theorem verdierDual_obj {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a]
       (RHom(X)[ModuleCat.{u + 1} Λ].obj (op M)).obj (dualizingComplex _ a) :=
   rfl
 
-/-- Blueprint `definition-verdier-dual-evaluation`: the dualizing complex of `a : X ⟶ S` is
+/-- The dualizing complex of `a : X ⟶ S` is
 `ω_X = Ra^! Λ_S`. -/
 theorem dualizingComplex_eq {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a] :
     dualizingComplex Λ a = (R(a)^![Λ]).obj (𝟙_ _) :=
@@ -188,7 +187,7 @@ theorem nonempty_iso_kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] {X
 theorem kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] : KunnethVerdier Λ k :=
   ⟨fun _ _ a b _ _ _ _ _ _ _ _ hM hN ↦ nonempty_iso_kunnethVerdier Λ a b hM hN⟩
 
-/-- Verdier duality commutes with external products over `k` (`rem-sf-kv-formal`):
+/-- Verdier duality commutes with external products over `k`:
 `𝔻_{X ×_k Y} (P ⊠ Q) ≅ 𝔻_X P ⊠ 𝔻_Y Q`, from the Künneth–Verdier isomorphism by
 `AlgebraicGeometry.Etale.verdierDualExternalProduct_iff_kunnethVerdier`. -/
 theorem verdierDualExternalProduct [PerfectField k] [HasInvertibleExponent Λ (Spec (.of k))] :
@@ -196,7 +195,7 @@ theorem verdierDualExternalProduct [PerfectField k] [HasInvertibleExponent Λ (S
   (kunnethVerdier Λ).verdierDualExternalProduct
 
 variable (k) in
-/-- Blueprint `lemma-external-duality-trace-morphism`: Künneth–Verdier isomorphism.
+/-- Künneth–Verdier isomorphism.
 
 The four product comparison maps of `AlgebraicGeometry.Etale.HasKunnethComparisons` are
 isomorphisms: besides the `!`-Künneth map `Ku_!`, which is an isomorphism by construction,

@@ -64,7 +64,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 -- Reconcile the concrete coefficient categories without unfolding chosen scalar functors.
 /-- Ordinary strict quotient restriction and its finite adjunction normalization.
 Source: Stacks, Modules on Sites, Tags 03DJ and 0E8I; Cohomology on Sites, Tag 0941.
-(blueprint: lem-sf-open-restriction-ordinary-quotient).
 
 Proof: the normalized extension tensor comparison has compatible finite components
 by openScalarTransitionCompatibility. Assemble them, using the model evaluations,

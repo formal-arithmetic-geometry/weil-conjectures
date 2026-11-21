@@ -236,8 +236,8 @@ cartesian square `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions, `K` in 
 `D(Z_ét)`, the square
 ```
 Dj'_!Lg'^*(K ⊗ᴸ Lj^*M) ──≅──▶ Lg''^*Dj_!(K ⊗ᴸ Lj^*M) ──Lg''^* π──▶ Lg''^*(Dj_!K ⊗ᴸ M)
-          │                                                              │
-          ▼                                                              ▼
+          │ │
+          ▼ ▼
 Dj'_!(Lg'^*K ⊗ᴸ Lj'^*Lg''^*M) ──π──▶ Dj'_!Lg'^*K ⊗ᴸ Lg''^*M ──≅ ⊗ 1──▶ Lg''^*Dj_!K ⊗ᴸ Lg''^*M
 ```
 commutes, where `π` is the projection map, the horizontal isomorphisms are the base change

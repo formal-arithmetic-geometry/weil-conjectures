@@ -53,13 +53,13 @@ image in `U` and all cartesian squares
 
 ```
   X_T --g'--> X
-   |          |
-  j_T         j
-   ↓          ↓
+   | |
+  j_T j
+   ↓ ↓
   Y_T --g---> Y
-   |          |
-  f_T         fY
-   ↓          ↓
+   | |
+  f_T fY
+   ↓ ↓
    T ---t---> S
 ```
 

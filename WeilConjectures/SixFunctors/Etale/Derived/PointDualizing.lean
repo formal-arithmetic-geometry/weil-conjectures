@@ -22,7 +22,7 @@ does not use anything about `S`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.verdierDualIdIso` (`prose-10-04`):
+- `AlgebraicGeometry.Etale.verdierDualIdIso`:
   `𝔻_S ≅ (-)^∨`.
 -/
 
@@ -45,7 +45,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A]
   (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (S : Scheme.{u})
 
-/-- Blueprint `prose-10-04`: Dualizing complex of the point.
+/-- Dualizing complex of the point.
 
 The exceptional inverse image of the identity is the identity, so `ω_S = R(𝟙 S)^! Λ_S ≅ Λ_S`
 (`AlgebraicGeometry.Etale.dualizingComplexIdIso`), and the Verdier dual relative to the identity

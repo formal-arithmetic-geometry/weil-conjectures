@@ -112,7 +112,7 @@ public import WeilConjectures.CategoryTheory.SuppliedExchangeProjection.Exchange
 
 Source: Stacks Project, proetale.tex, Tag 09BP, lemma-j-shriek-limits;
 Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8, pp.49--50; the augmentation-normalized
-construction in the DAG (blueprint: lem-sf-open-projection-roos-completion).
+construction in the DAG.
 
 The coefficient index n denotes the positive exponent n+1. The ambient categories
 are the ordinary unbounded derived categories over the completed coefficient sheaf.
@@ -137,12 +137,12 @@ variable {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
   [Abelian A] [Abelian B] [HasCountableProducts A] [HasCountableProducts B]
 
 /-- The boundary of the recorded strict Roos model, without changing its signs.
-Source: Stacks 0941 (blueprint: lem-sf-open-projection-roos-completion). -/
+Source: Stacks 0941. -/
 abbrev boundary (T : ℕᵒᵖ ⥤ CochainComplex A ℤ) :=
   towerTransitionEndomorphism (K := fun n ↦ T.obj (op n)) (integralOperationsTowerStep T)
 
 /-- Postcomposition of strict towers by the actual termwise functor.
-Source: Stacks 0941 (blueprint: lem-sf-open-projection-roos-completion). -/
+Source: Stacks 0941. -/
 abbrev onTowers (F : A ⥤ B) [F.Additive] :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (F.mapHomologicalComplex (.up ℤ))
 
@@ -150,8 +150,7 @@ abbrev onTowers (F : A ⥤ B) [F.Additive] :=
 identities specify its action on both summands of the signed mapping fiber.
 The augmentation clause supplies the maps with coordinates (a,0) and states their
 actual equality, before localization; it does not infer equality from limit projections.
-Source: Stacks 09BP and lem-cbc-exact-product-functor-strict-limit
-(blueprint: lem-sf-open-projection-roos-completion). -/
+Source: Stacks 09BP and lem-cbc-exact-product-functor-strict-limit. -/
 structure RoosComparison (F : A ⥤ B) [F.Additive] where
   products : ∀ T : ℕᵒᵖ ⥤ CochainComplex A ℤ,
     (F.mapHomologicalComplex (.up ℤ)).obj (∏ᶜ fun n ↦ T.obj (op n)) ≅
@@ -190,7 +189,7 @@ variable [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
 /-- The same lambda in the derived category, through the canonical exact-functor
 comparison. Roos computes the total right derived limit by the recorded strict-Roos
 comparison, including its augmentation. No new derived-limit object is chosen.
-Source: Stacks 0941 (blueprint: lem-sf-open-projection-roos-completion). -/
+Source: Stacks 0941. -/
 def RoosComparison.derived (F : A ⥤ B) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (r : RoosComparison F) (T : ℕᵒᵖ ⥤ CochainComplex A ℤ) :
@@ -206,31 +205,31 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (o : IntegralOpenReduction.Operations l E j)
 
 /-- The source pair insertion for the open projection formula.
-Source: blueprint open factor (blueprint: lem-sf-open-projection-roos-completion). -/
+ -/
 abbrev leftInputs := (IntegralOpenReduction.shriek l E j o).prod
   (𝟭 (DerivedCategory (scalarReductionSource l E X)))
 
 /-- The target pair insertion, with actual exact restriction.
-Source: blueprint open factor (blueprint: lem-sf-open-projection-roos-completion). -/
+ -/
 abbrev rightInputs := (𝟭 (DerivedCategory (scalarReductionSource l E U))).prod
   (IntegralOpenReduction.star l E j o)
 
 /-- Inclusion of precisely the two bounded constructible integral domains.
-Source: Bhatt--Scholze 6.5.8 (blueprint: lem-sf-open-projection-roos-completion). -/
+Source: Bhatt--Scholze 6.5.8. -/
 abbrev pairs := (sfIntegralConstructible l E U).ι.prod (sfIntegralConstructible l E X).ι
 
 /-- The actual completed source functor on the stated constructible domain.
-Source: Bhatt--Scholze 3.4.10 (blueprint: lem-sf-open-projection-roos-completion). -/
+Source: Bhatt--Scholze 3.4.10. -/
 abbrev completedLeft := pairs l E (U := U) (X := X) ⋙ leftInputs l E j o ⋙
   integralCompletedTensor l E X
 
 /-- The actual completed tensor on U, before its extension.
-Source: Bhatt--Scholze 3.4.10 (blueprint: lem-sf-open-projection-roos-completion). -/
+Source: Bhatt--Scholze 3.4.10. -/
 abbrev completedInside := pairs l E (U := U) (X := X) ⋙ rightInputs l E j o ⋙
   integralCompletedTensor l E U
 
 /-- The actual completed target functor on the stated constructible domain.
-Source: Bhatt--Scholze 3.4.10 (blueprint: lem-sf-open-projection-roos-completion). -/
+Source: Bhatt--Scholze 3.4.10. -/
 abbrev completedRight := completedInside l E j o ⋙ IntegralOpenReduction.shriek l E j o
 
 attribute [local irreducible] integralOperationsTensorTowerFunctor
@@ -249,8 +248,7 @@ variable
   (q : OpenTensorQuotient.Comparison l E j o SX SU AX AU st m c)
 
 /-- The exact ordinary representative equation, kept as a shared proposition.
-Source: Stacks 09BP and 0941; the original completion specification
-(blueprint: def-sf-open-projection-roos-completion-data). -/
+Source: Stacks 09BP and 0941; the original completion specification. -/
 def OrdinaryRepresentative
     [restrictionLimits : PreservesFiniteLimits (IntegralOpenReduction.restriction l E j o)]
     [restrictionColimits : PreservesFiniteColimits (IntegralOpenReduction.restriction l E j o)]
@@ -289,8 +287,7 @@ def OrdinaryRepresentative
       (DerivedCategory.Q.map (m.totalComparison.chain Q F).hom)
 
 /-- The exact completed representative equation for every normalized strict square.
-Source: Stacks 09BP and 0941; the original completion specification
-(blueprint: def-sf-open-projection-roos-completion-data). -/
+Source: Stacks 09BP and 0941; the original completion specification. -/
 def CompletedRepresentative
     [restrictionLimits : PreservesFiniteLimits (IntegralOpenReduction.restriction l E j o)]
     [restrictionColimits : PreservesFiniteColimits (IntegralOpenReduction.restriction l E j o)]
@@ -333,8 +330,7 @@ def CompletedRepresentative
       DerivedCategory.Q.map (integralOperationsRoosMap z.gamma.hom)
 
 /-- The strict finite restriction equation, with its prescribed termwise tower map.
-Source: Stacks 09BP and 0941; the original completion specification
-(blueprint: def-sf-open-projection-roos-completion-data). -/
+Source: Stacks 09BP and 0941; the original completion specification. -/
 def RestrictionRepresentative
     [restrictionLimits : PreservesFiniteLimits (IntegralOpenReduction.restriction l E j o)]
     [restrictionColimits : PreservesFiniteColimits (IntegralOpenReduction.restriction l E j o)]
@@ -396,8 +392,7 @@ def RestrictionRepresentative
 /-- The completion of the specified augmented square. Every isomorphism is pinned
 by chain or unit equations, including restriction and every strict finite reduction.
 `ordinary` is gamma^B, `gamma` is Gamma, `extension` is lambda_j.
-Source: Stacks 09BP; Bhatt--Scholze 6.5.5, 6.5.8
-(blueprint: lem-sf-open-projection-roos-completion). -/
+Source: Stacks 09BP; Bhatt--Scholze 6.5.5, 6.5.8. -/
 def CompletionData
     [restrictionLimits : PreservesFiniteLimits (IntegralOpenReduction.restriction l E j o)]
     [restrictionColimits : PreservesFiniteColimits (IntegralOpenReduction.restriction l E j o)] :
@@ -448,7 +443,7 @@ def CompletionData
 
 /-- Exactness together with the specified comparison predicate. The exactness
 witnesses are supplied by the conclusion, not imposed as additional hypotheses.
-Source: Stacks 09BP (blueprint: lem-sf-open-projection-roos-completion). -/
+Source: Stacks 09BP. -/
 def Completion : Prop :=
   ∃ (hL : PreservesFiniteLimits (IntegralOpenReduction.restriction l E j o))
     (hC : PreservesFiniteColimits (IntegralOpenReduction.restriction l E j o)),

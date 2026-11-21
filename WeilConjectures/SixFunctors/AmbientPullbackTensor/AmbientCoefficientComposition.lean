@@ -11,7 +11,6 @@ import all WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackSite
 /-! # Components of ambient pullback coherence
 
 Source: Stacks 03CB, 03D3, 03EL, 07A4 and 04VG.
-(blueprint: lem-sf-ambient-coefficient-composition).
 -/
 
 @[expose] public noncomputable section
@@ -85,7 +84,7 @@ private theorem adjunct_composition
   simpa only [Category.assoc] using h.symm
 
 /-- Composition of the actual coefficient adjuncts, with the specified mate.
-Source: Stacks 03CB and 03D3 (blueprint: lem-sf-ambient-coefficient-composition). -/
+Source: Stacks 03CB and 03D3. -/
 theorem ringMap_composition {X Y Z : Scheme.{t}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ) :
     ringMap ell E (f ≫ g) s =

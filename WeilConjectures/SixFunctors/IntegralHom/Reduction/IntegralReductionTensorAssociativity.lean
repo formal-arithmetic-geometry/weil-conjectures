@@ -444,8 +444,7 @@ restricted scalar extension in its occurrence as a tensor input, cancel the
 quasi-isomorphisms by K-flatness, and descend the equality through the product
 localization. Naturality then extends the equation to arbitrary derived inputs.
 All coefficient and site universes remain independent; zero rings and empty
-sites satisfy the same generator equations.
-(blueprint: lem-sf-reduction-tensor-strength-associativity). -/
+sites satisfy the same generator equations. -/
 theorem reductionTensorStrength_associativity
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))
     (n : ℕ) (m : ReductionPresentation l E Y D hl a n) :

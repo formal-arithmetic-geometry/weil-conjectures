@@ -151,7 +151,7 @@ lemma _root_.DerivedCategory.derivedComplete_shift (hϖ : ϖ ∈ nonZeroDivisors
   (_root_.DerivedCategory.derivedComplete _ I).le_shift m K hK
 
 /-- `Dᵇc(X, Λ)` is stable under the shifts.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 lemma DerivedCategory.isStableUnderShift_boundedConstructibleIntegral
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
     (DerivedCategory.boundedConstructibleIntegral I X).IsStableUnderShift ℤ where
@@ -163,7 +163,7 @@ lemma DerivedCategory.isStableUnderShift_boundedConstructibleIntegral
 
 open ZeroObject in
 /-- `Dᵇc(X, Λ)` contains the zero object.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 lemma DerivedCategory.containsZero_boundedConstructibleIntegral (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (hI : I = Ideal.span {ϖ}) :
     (DerivedCategory.boundedConstructibleIntegral I X).ContainsZero := by
@@ -183,7 +183,7 @@ of a distinguished triangle modulo `Iⁿ⁺¹` is distinguished, its middle vert
 and `Λ ⧸ Iⁿ⁺¹` is finite, so it is bounded constructible
 (`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero`); and the
 Tor amplitude interval is widened.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 lemma DerivedCategory.isTriangulatedClosed₂_boundedConstructibleIntegral
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
     (DerivedCategory.boundedConstructibleIntegral I X).IsTriangulatedClosed₂ := by
@@ -206,7 +206,7 @@ subcategory (`DerivedCategory.isTriangulated_derivedComplete`), the reductions a
 functors whose values are killed by `Iⁿ⁺¹`, bounded constructible complexes are closed under such
 extensions, and Tor amplitude is stable under shifts and, with the interval widened, under
 extensions.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 lemma DerivedCategory.isTriangulated_boundedConstructibleIntegral_of_eq_span
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
     (DerivedCategory.boundedConstructibleIntegral I X).IsTriangulated :=
@@ -319,7 +319,7 @@ theorem boundedConstructibleIntegral_leftDerivedUpperStar (j : X ⟶ Y) [IsOpenI
 /-- For a closed immersion `i : Z ⟶ X`, an object `Q` of `D(Z_ét, Λ)` lies in `Dᵇc(Z, Λ)` as soon
 as `Ri_* Q` lies in `Dᵇc(X, Λ)`: `Ri_*` is faithful and `Λ`-linear, so it reflects derived
 completeness, and `Q ≅ i^* Ri_* Q`, whose reductions are the pullbacks of those of `Ri_* Q`.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (integral stage `𝒪_E`). -/
+ -/
 theorem boundedConstructibleIntegral_of_rightDerivedLowerStar_obj (i : X ⟶ Y)
     [IsClosedImmersion i] {Q : 𝐃(X, Λ)}
     (hQ : DerivedCategory.boundedConstructibleIntegral I Y

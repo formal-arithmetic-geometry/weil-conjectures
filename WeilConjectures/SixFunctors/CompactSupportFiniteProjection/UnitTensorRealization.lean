@@ -20,8 +20,7 @@ namespace WeilConjectures.CompactSupportFiniteProjection
 /-- Cancel a coefficient equivalence unit, then tensor the specified comparison.
 The explicitly stated endpoints let consumers use this construction without
 unfolding a concrete equivalence.
-Source: fix-prop-projection-formula.proof.md, coefficient transport.
-(blueprint: def-sf-unit-tensor-realization). -/
+ -/
 def unitTensorRealization
     {A B : Type*} [Category A] [Category B] (R : A ≌ B)
     (T : A ⥤ A ⥤ A) (k : A) {a c : A} (e : a ≅ c) :

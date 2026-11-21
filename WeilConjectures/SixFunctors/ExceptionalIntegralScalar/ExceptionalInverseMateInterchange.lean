@@ -17,7 +17,6 @@ namespace WeilConjectures.ExceptionalIntegralScalar
 /-- Invert a scalar comparison before geometric transposition, or invert its
 geometric mate before scalar transposition: the two arrows agree.
 Source: Stacks Tag 0E46 and the composition law for mates.
-(blueprint: lem-sf-inverse-mate-interchange).
 
 Proof: the two successive mates of the original scalar comparison are its
 conjugate under the composite adjunctions. Thus the given direct-image comparison

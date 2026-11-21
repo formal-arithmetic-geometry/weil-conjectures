@@ -9,9 +9,6 @@ public import Mathlib.CategoryTheory.Shift.CommShift
 public import Mathlib.Algebra.Group.Int.Defs
 
 /-! # Assembling shifts from an object-covering family of functors
-
-Source: thm-coef-qbar-verdier, proof steps 3--4.
-(blueprint: lem-commshift-object-cover-assembly-K6)
 -/
 
 @[expose] public noncomputable section
@@ -89,8 +86,6 @@ theorem precompShift_add
     Functor.map_id, Category.id_comp, reassoc_of% key]
 
 /-- Assemble a specified natural shift family from coherent restrictions.
-Source: thm-coef-qbar-verdier, shift descent in steps 3--4
-(blueprint: lem-commshift-object-cover-assembly-K6).
 
 Proof: precomposition preserves the zero and addition formulas. At any object,
 choose a literal finite-stage presentation. The corresponding restriction has the

@@ -34,7 +34,7 @@ namespace AlgebraicGeometry
 
 namespace Etale
 
-/-- Blueprint `prop-weil-pbc-kinjective-resolutions-exist`: Existence of K-injective resolutions.
+/-- Existence of K-injective resolutions.
 
 Let `A` be a Grothendieck abelian coefficient category (for instance `ModuleCat R`) and `X` a
 scheme. Then, for complexes of `A`-valued étale sheaves on `X`:

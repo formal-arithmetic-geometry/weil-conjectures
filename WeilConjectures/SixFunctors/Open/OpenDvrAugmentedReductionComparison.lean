@@ -30,7 +30,6 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 /-! # Reduction and augmentation under canonical DVR coefficients
 
 Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
-(blueprint: lem-sf-open-dvr-augmented-reduction-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +44,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The reduction-only part of the augmented comparison, relative to the separately
-constructed normalized limit comparison. Source: Stacks 07A6, 0D6E and 0941
-(blueprint: lem-sf-open-dvr-augmented-reduction-comparison). -/
+constructed normalized limit comparison. Source: Stacks 07A6, 0D6E and 0941. -/
 structure OpenDvrAugmentedReductionComparison
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) (S : CoefficientDerivedSystemCalculus.{u, u} l E T)
@@ -281,8 +279,7 @@ private theorem augmentedUnit_on_flat
     (reconstructionRlimComparison T d (C.towerComplexes.obj B)))
 
 /-- The strict scalar tensor augmentation computes the actual unit after coefficient transport.
-Source: Stacks Tags 07A6, 0D6E and 0941
-(blueprint: lem-sf-open-dvr-augmented-reduction-comparison).
+Source: Stacks Tags 07A6, 0D6E and 0941.
 
 Proof: finite constants and completed projections identify the two ringed quotient
 diagrams. On modules the tensor universal property identifies the quotient functors,

@@ -15,7 +15,7 @@ Let `u : T₁ ⟶ T₂` be proper and `j₁ : X ⟶ T₁`, `j₂ : X ⟶ T₂` o
 `j₁ ≫ u = j₂` (`AlgebraicGeometry.ProperOpenDatum`). For a finite coefficient ring `Λ` the
 comparison map `α_u : j₂! K ⟶ Ru_* j₁! K` of
 `WeilConjectures.SixFunctors.Etale.Derived.ProperOpenComparison.Defs` is an isomorphism on
-`D⁺(X_ét, Λ)` (blueprint `proposition-construction-independence-rf-shriek--7`).
+`D⁺(X_ét, Λ)`.
 
 The proof checks it after restriction to the open `j₂(X)` and to its closed complement
 `i : Z ⟶ T₂`:

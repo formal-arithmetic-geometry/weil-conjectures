@@ -25,8 +25,7 @@ Proof: evaluate the maps on the connected scheme Spec E. Constant completed sect
 identify with the valuation rings. The maps on those constants are exactly the
 restrictions of the two field embeddings. The target constant-section identification
 is injective, so their restrictions to the valuation ring agree. Since E is the fraction
-field of that valuation ring, the two field homomorphisms agree.
-(blueprint: lem-sf-completed-change-injective). -/
+field of that valuation ring, the two field homomorphisms agree. -/
 theorem completedChange_injective (l : ℕ) [Fact l.Prime]
     (E L : FieldStage.{u} l) :
     Function.Injective (PurCompactSupport.completedChange l E.carrier L.carrier) := by

@@ -145,8 +145,7 @@ attribute [local irreducible] scalarReductionTowerIso
 /-- On a K-flat representative the strict Koszul comparison preserves quotient units.
 
 Source: the finite-free quotient resolution in paragraph 1 of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 06YY and 07A6
-(blueprint: lem-sf-integral-koszul-quotient-units).
+`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 06YY and 07A6.
 
 Proof: the cone inclusion followed by its quotient augmentation is the degree-zero
 quotient map, by `mappingCone.inr_descShortComplex` and `cokernel.π_desc`.

@@ -36,8 +36,7 @@ import Mathlib.CategoryTheory.Linear.FunctorCategory
 
 /-! # Scalar linearity of the completed tensor
 
-Source: Stacks 06YS and 0941; completed tensor-Hom transpose, proof step 3
-(blueprint: lem-coef-completed-tensor-scalar-linearity).
+Source: Stacks 06YS and 0941; completed tensor-Hom transpose, proof step 3.
 -/
 
 @[expose] public section
@@ -554,8 +553,7 @@ Every quotient and tower transition commutes with the constant section.
 The Roos maps and derived localization preserve this equality. Conjugating by
 the normalized descent comparison gives the equality for all derived arrows.
 Restriction to the constructible full subcategory changes no morphism or scalar.
-Zero objects, zero scalars and arbitrary torsion inputs require no cancellation.
-(blueprint: lem-coef-completed-tensor-scalar-linearity). -/
+Zero objects, zero scalars and arbitrary torsion inputs require no cancellation. -/
 theorem completedTensor_map_smul_left
     (M M' N N' : sfIntegralConstructibleCategory l E W) (f : M ⟶ M') (g : N ⟶ N')
     (c : Padic.coefficientExtensionIntegers l E) :

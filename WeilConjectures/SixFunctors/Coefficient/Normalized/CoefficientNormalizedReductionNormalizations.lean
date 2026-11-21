@@ -16,8 +16,7 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWh
 
 /-! # Representative normalizations for coefficient reduction
 
-Source: Stacks 06YS, 06YY, 07A4, 07A6 and 0941
-(blueprint: lem-coef-normalized-reduction-models-normalizations).
+Source: Stacks 06YS, 06YY, 07A4, 07A6 and 0941.
 -/
 
 @[expose] public section
@@ -174,8 +173,7 @@ Descend exact evaluation's natural total-tensor comparison along K-flat represen
 its unique generator law identifies it with coefficientEvaluationTensorIso. Choose
 the strict reduction tensor comparison independently. Replace the three comparison
 fields together and paste their representative squares for the evaluation equation.
-All reduction-model data, its adjunction, and both projection identities are retained.
-(blueprint: lem-coef-normalized-reduction-models-normalizations). -/
+All reduction-model data, its adjunction, and both projection identities are retained. -/
 theorem coefficientNormalizedReductionNormalizations
     (R : CoefficientDerivedSystemReduction l E W) :
     ∃ S : CoefficientDerivedSystemReduction l E W,

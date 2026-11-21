@@ -14,7 +14,6 @@ import all WeilConjectures.Algebra.Homology.ProperBaseChange.OpenImmersionTensor
 /-! # Finite quotient preserves ordinary open support
 
 Source: Stacks 03DI, 03EK and 0E8I; fix-prop-coherence, ordinary open-factor argument.
-(blueprint: lem-sf-ordinary-finite-quotient-open-support).
 -/
 
 @[expose] public noncomputable section
@@ -95,7 +94,6 @@ private theorem projection_square {X Y : Scheme.{u}} (j : X ⟶ Y) (n : ℕ) :
 
 /-- A single quotient of an extended module is in the finite open essential image.
 Source: Stacks 03DI, 03EK and 0E8I; fix-prop-coherence, ordinary open-factor argument.
-(blueprint: lem-sf-ordinary-finite-quotient-open-support).
 
 Proof: the canonical constant-ring comparison identifies finite geometric inverse
 image with the stated coefficient inverse image by uniqueness of left adjoints.

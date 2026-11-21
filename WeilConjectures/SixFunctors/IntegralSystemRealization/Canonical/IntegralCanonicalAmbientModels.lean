@@ -14,7 +14,6 @@ import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCal
 import all WeilConjectures.Algebra.Homology.RingedTensorSquare.RingedExchangeTensorCoherence
 
 /-! # Intermediate assembly data for integral realization
-Source: blueprint fix-prop-coherence.
 -/
 
 @[expose] public noncomputable section
@@ -94,8 +93,7 @@ private theorem properProjection_app (o : Operations l E) {X Y : Scheme.{u}}
 /-- Simultaneous canonical operations, mate-pasting models and open reconstruction.
 This assertion contains no comparison of an arbitrary finite expression.
 Source: Stacks 0941, 03DI, 07A7 and 0F7B--0F7F; blueprint fix-prop-coherence,
-strict-system realization steps 1--2
-(blueprint: lem-sf-integral-canonical-ambient-models).
+strict-system realization steps 1--2.
 
 Proof: construct total right-derived system image from its ordinary adjunction,
 using K-injective resolutions on the ringed sequence site. Descend exact system

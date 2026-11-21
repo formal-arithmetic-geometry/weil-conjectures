@@ -34,7 +34,6 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- The local signed formula determines the chain tensor--Hom comparison uniquely.
 Source: paragraph 1 of `lem-coef-integral-hom-reduction.proof.md`, and Stacks
 Tag 0A8X for the product Hom complex.
-(blueprint: lem-sf-signed-hom-tensor-ext).
 
 Proof: total tensor coproduct inclusions reduce equality to each homogeneous tensor
 summand. The chosen Hom product cone is limiting, so its projections detect equality.

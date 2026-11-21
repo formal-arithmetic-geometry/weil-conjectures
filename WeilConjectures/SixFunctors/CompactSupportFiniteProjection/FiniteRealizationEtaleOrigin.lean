@@ -83,7 +83,7 @@ private theorem fixedEtaleOrigin (X : SixFunctorSpace D)
 
 /-- Inverse realization of a bounded constructible input has bounded-below étale origin.
 Source: finiteRing_constructibleDerived_origin and preservation of boundedness by the
-coefficient equivalence (blueprint: lem-sf-finite-realization-etale-origin).
+coefficient equivalence.
 Proof: the intrinsic constructibility and finite homology support of K give a bounded
 constructible etale preimage by the finite-ring origin theorem. Lift its comparison
 through the coefficient equivalence. Its lower bound gives the required plus origin. -/

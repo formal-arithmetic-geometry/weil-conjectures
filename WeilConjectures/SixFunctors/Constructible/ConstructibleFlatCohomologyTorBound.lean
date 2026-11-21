@@ -84,8 +84,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 # Bounded locally constant residue cohomology gives Tor bounds on every slice
 
 Source: Stacks Project, proetale.tex, Tag 09C3, finite residue Tor-amplitude input;
-sites-modules.tex, Tags 03ER, 03DJ and 08FC; sites-cohomology.tex, Tags 06YS and 06YU
-(blueprint: lem-fix-constructible-flat-cohomology-tor-bound).
+sites-modules.tex, Tags 03ER, 03DJ and 08FC; sites-cohomology.tex, Tags 06YS and 06YU.
 
 The finite coefficient index zero denotes exponent one. Vanishing is vanishing of
 module sheaves on the actual localized site, with arbitrary test module sheaves.

@@ -30,7 +30,7 @@ variable {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
   (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor)
 
 /-- Applying the images of two composable morphisms under an additive-group valued functor.
-Source: functoriality (auxiliary; not a blueprint node). -/
+ -/
 theorem _root_.CategoryTheory.Functor.map_comp_apply_addCommGrp {C : Type*} [Category* C]
     (H : C ⥤ AddCommGrpCat.{c}) {X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z) (y : H.obj X) :
     H.map g (H.map f y) = H.map (f ≫ g) y := by

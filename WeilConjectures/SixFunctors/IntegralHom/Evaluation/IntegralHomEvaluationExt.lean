@@ -23,8 +23,7 @@ attribute [local irreducible] homComplexFunctor
 /-- Homogeneous evaluations over identity slices detect maps into a Hom complex.
 
 Source: the evaluation argument in paragraph 1 of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 03EK and 03EO
-(blueprint: lem-sf-integral-hom-evaluation-ext).
+`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 03EK and 03EO.
 
 Proof: compare the chain maps in each degree. The Hom degree is the product of
 internal Hom objects indexed by the source degree; its product projections are

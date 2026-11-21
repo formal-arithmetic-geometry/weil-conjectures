@@ -27,7 +27,6 @@ import Mathlib.CategoryTheory.Adjunction.Triple
 /-! # The completed-coefficient module localization sequence
 
 Source: Stacks Project, Pro-etale Cohomology, Tags 09AH, 09AG and 09BM.
-(blueprint: lem-fix-ordinary-completed-localization-sequence).
 -/
 
 @[expose] public noncomputable section
@@ -297,10 +296,9 @@ private theorem counit_bijective_on_open {X : AlgebraicGeometry.Scheme.{t}}
 /-- The actual slice-extension counit and completed closed-pullback unit give the
 module localization sequence, with independent site and coefficient universes.
 
-Source: Stacks Project, proetale.tex, Tags 09AH (lemma-ses-associated-to-open),
-09AG (lemma-jshriek-zero), and 09BM
-(lemma-closed-immersion-complement-retrocompact-exact).
-(blueprint: lem-fix-ordinary-completed-localization-sequence).
+Source: Stacks Project, proetale.tex, Tags 09AH,
+09AG, and 09BM
+.
 
 Proof: use the finite-projection characterization of ordinaryCompletedRingMap
 and immersion inverse-image limit preservation to identify the completed closed

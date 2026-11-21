@@ -103,7 +103,6 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedOpenFlatResolution
 /-! # Goodness of completed open extension
 
 Source: Stacks Tags 03DI, 03DJ, 0E8I and 0G7E.
-(blueprint: lem-sf-open-extension-good-complex-extension).
 -/
 
 @[expose] public noncomputable section
@@ -139,7 +138,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Completed coefficient open extension preserves the K-flat, flat-term class.
 Source: Stacks 03DI, 03DJ, 0E8I and 0G7E; the ringed-slice transport step.
-(blueprint: lem-sf-open-extension-good-complex-extension).
 
 Proof: identify the actual completed coefficient open extension with the literal
 ringed-slice extension using the pro-etale slice presentation. The ringed-slice

@@ -169,13 +169,11 @@ private theorem canonicalInverseSquare (o : Operations l E) (c : Compositors l E
     Functor.whiskerRight_app, Category.assoc] using (congr_app hh L).symm
 
 /-- The canonical bridge intertwines open base change for one cartesian square.
-Source: Stacks 03DI and 07A7; blueprint fix-prop-coherence
-(blueprint: lem-sf-integral-system-bridge-open-basechange).
+Source: Stacks 03DI and 07A7; blueprint fix-prop-coherence.
 Proof: apply injectivity of the open-adjunction hom equivalence to the desired
 forward equation, substitute the specified inverse-beta transpose equation and
 both bridge unit equations, use the bridge pull-square comparison, and cancel the
 beta isomorphisms. This is a whole-system argument and needs no finite evaluation.
-(blueprint: lem-sf-integral-system-bridge-open-basechange).
 -/
 theorem integralSystemBridgeOpenBaseChange (o : Operations l E)
     (c : Compositors l E o) (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)

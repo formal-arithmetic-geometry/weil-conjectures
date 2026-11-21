@@ -34,8 +34,7 @@ attribute [local implicit_reducible] Equivalence.mapDerivedCategory
 set_option backward.defeqAttrib.useBackward true
 
 /-- Finite realization identifies the derived proper counit in the fixed coordinates.
-Source: Stacks 03D6 and 0D6D, compactification-coherence proof, first two paragraphs
-(blueprint: lem-sf-finite-ring-counit-coordinates).
+Source: Stacks 03D6 and 0D6D, compactification-coherence proof, first two paragraphs.
 
 Proof: derive the ordinary finite left-adjoint uniqueness isomorphism using derivedUniq.
 Apply its counit identity to the inverse derived realization comparison.

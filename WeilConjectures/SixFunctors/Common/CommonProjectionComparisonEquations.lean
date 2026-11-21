@@ -12,10 +12,6 @@ import WeilConjectures.SixFunctors.Common.CommonProjectionCompositionOnStage
 import WeilConjectures.SixFunctors.Common.CommonProjectionProperOnStage
 
 /-! # Compact-support projection comparison equations
-
-Source: the coherence paragraph of the projection-formula proof in
-literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done.
-(blueprint: lem-sf-common-projection-comparison-equations).
 -/
 
 @[expose] public noncomputable section
@@ -403,30 +399,7 @@ end Naturality
 set_option backward.isDefEq.respectTransparency false in
 /-- Common finite coefficient fields transport the four comparison equations
 of the normalized projection. No projection invertibility is asserted here.
-Source: thm-sf-pf-field.proof.md, Compatibility and the common finite coefficient
-field paragraph, and fix-prop-projection-formula.proof.md, final coherence
-sentence, in literature/blueprint/latest/blueprint.
-(blueprint: lem-sf-common-projection-comparison-equations).
-Proof: for any displayed equation choose a finite compositum of the fields of
-its inputs. Move each input there using the stage system's isoToStage; its
-canonical transition isomorphisms identify each pair with its enlarged model.
-Use the canonical common-stage tensor comparison, defined on representatives,
-and the normalized pullback/support comparisons. The supplied adjunction
-comparisons preserve the proper counit and the open unit/counit, so the image
-of each stage projection is exactly the common-stage projection after these
-endpoint identifications. Apply inclusion to the stage compactification and
-composition equations. Naturality moves the endpoint comparisons through each
-factor; commonStageComparison.compactification, .composition and .pullComposition
-then identify the specified composites. Cancel the outer isomorphisms to obtain
-the two common-stage equations. The threefold version of the same calculation
-carries the stage pentagon to the specified common-stage pentagon, including
-its transported composite compactification. The .properIdentity equation and
-preservation of the proper adjunction identify the proper-counit component and
-transport the proper equation. The identity and tower comparisons of the
-canonical common-stage tensor and stage-system inclusions show the results are
-independent of the chosen compositum. Only forward preservation of equations
-is used. Naturality in the input isomorphisms returns the result to the original
-pairs; their structure morphisms need not be separated. -/
+ -/
 theorem compactSupportProjectionCoherence_common
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C)

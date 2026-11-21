@@ -14,7 +14,6 @@ import WeilConjectures.SmoothPurity.PurStrictScalar.CompletedScalarAssociatorLoc
 /-! # The scalar associator on computation counits
 
 Source: Stacks Tags 06YY and 07A6.
-(blueprint: lem-sf-completed-scalar-associator-counit).
 -/
 
 @[expose] public noncomputable section
@@ -101,8 +100,7 @@ private theorem scalar_counit_isIso
   infer_instance
 
 /-- The scalar tensor associator preserves the successive computation counits.
-Source: Stacks 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint).
-(blueprint: lem-sf-completed-scalar-associator-counit).
+Source: Stacks 06YY and 07A6 (lemma-adjoint).
 Proof: express the associator through the three counit-normalized exact models.
 The exact derived-composition factorization identifies its cochain representative.
 Naturality moves the middle model comparison past the first factor map.

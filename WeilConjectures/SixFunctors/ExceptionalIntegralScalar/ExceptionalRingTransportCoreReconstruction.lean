@@ -41,7 +41,6 @@ Source: Zheng, Construction 5.25 and Proposition 5.26.
 The proof applies the normalized reduction/limit theorem to the coefficient sequence at
 `X` and `Y`, restricts to the replete subcategories with the common finite and Tor
 bounds, and records the resulting equivalence, unit, counit, and evaluation maps.
-(blueprint: new-lem-sf-exceptional-ring-transport-reconstructions)
 The left realizations are supplied with their integer shift-compatibility witnesses.
 -/
 theorem exists_exceptional_transport_reconstructions

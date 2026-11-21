@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralCompletedDi
 /-! # Ordinary direct image and the coefficient limit
 
 Source: Stacks Project, Tags 03D7 and 0941.
-(blueprint: lem-sf-integral-ordinary-limit-model).
 -/
 
 @[expose] public noncomputable section
@@ -214,7 +213,6 @@ private theorem model_projections {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- Direct image commutes with the ordinary coefficient limit, preserving every projection.
 Source: Stacks Project, Tags 03D7 and 0941; primitive realization Step 3.
-(blueprint: lem-sf-integral-ordinary-limit-model).
 
 Proof: at each finite level use the identity-section direct-image/evaluation comparison
 and the identity-section scalar-restriction comparison. The specified horizontal maps

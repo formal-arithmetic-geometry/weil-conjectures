@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryQuotientTensor
 /-! # A functorial strict complex model of normalized coefficient reduction
 
 Source: Stacks 06YS, 06YY, 07A4 and 0941.
-(blueprint: lem-coef-strict-reduction-functor-model).
 -/
 
 @[expose] public section
@@ -38,8 +37,7 @@ attribute [local irreducible] DerivedCategory _root_.instCategoryDerivedCategory
 
 /-- A strict complex presentation, with a binary normalization and ordinary chain
 coherence. No associator of either derived closed structure occurs in these data.
-Source: Stacks 07A4 and 0941
-(blueprint: lem-coef-strict-reduction-functor-model). -/
+Source: Stacks 07A4 and 0941. -/
 structure CoefficientStrictReductionFunctorModel
     (R : CoefficientDerivedSystemReduction l E W) where
   /-- The ordinary pullback applied to complexes, before localization. -/
@@ -94,7 +92,6 @@ This is a binary model assertion; it makes no claim about derived associators.
 
 Source: Stacks, sites-cohomology.tex, Tag 07A4, proof of
 `lemma-pullback-tensor-product`, together with the sequence projection of Tag 0941.
-(blueprint: lem-coef-strict-reduction-functor-model).
 
 Proof: apply the ordinary sequence projection pullback to each term and differential
 and transport the strict scalar systems to modules on the sequence site. Its ordinary

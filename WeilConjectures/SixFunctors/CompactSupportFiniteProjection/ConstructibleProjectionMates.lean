@@ -15,8 +15,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryMonoidal
 /-! # Canonical constructible projection mates
-Source: projection-formula construction, proof steps 1--6
-(blueprint: def-sf-constructible-projection-mates).
+Source: projection-formula construction, proof steps 1--6.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,8 +33,7 @@ open scoped CategoryTheory.Functor
 namespace WeilConjectures
 
 /-- The identity base-change square retaining a prescribed compactification.
-Source: the chosen compactification paragraph of the projection transformation
-(blueprint: def-sf-constructible-projection-mates). -/
+Source: the chosen compactification paragraph of the projection transformation. -/
 def compactSupportProjectionSquare {D : FiniteFieldDatum.{u}}
     {X Y : SixFunctorSpace D} (f : X ⟶ Y) (c : Compactification f.hom.left) :
     SixFunctorCompactifiedSquare D where
@@ -84,8 +82,7 @@ def compactSupportProjectionSquare {D : FiniteFieldDatum.{u}}
   openComm := by simp
 
 /-- Components of the specified compactification projection in operation coordinates.
-Source: def-exchange-projection, the counit mate followed by open projection
-(blueprint: def-sf-constructible-projection-mates). -/
+ -/
 def compactSupportProjectionComponent {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     {S : SixFunctorPushStage D B} {T : ∀ X, B X ⥤ B X ⥤ B X}
@@ -97,7 +94,7 @@ def compactSupportProjectionComponent {D : FiniteFieldDatum.{u}}
   (A (compactSupportProjectionSquare f c)).projectionComponent K L
 
 /-- Identity-open square for the proper comparison, in the original object coordinates.
-Source: the proper clause (blueprint: def-sf-constructible-projection-mates). -/
+Source: the proper clause. -/
 def compactSupportProperSquare {D : FiniteFieldDatum.{u}}
     {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsProper f.hom.left] :
     SixFunctorCompactifiedSquare D where
@@ -130,8 +127,7 @@ def compactSupportProperSquare {D : FiniteFieldDatum.{u}}
   openComm := by simp
 
 /-- The same counit mate for a proper map, without the open factor.
-Source: proper identification clause of the projection formula
-(blueprint: def-sf-constructible-projection-mates). -/
+Source: proper identification clause of the projection formula. -/
 def compactSupportProperProjection {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     {S : SixFunctorPushStage D B} {T : ∀ X, B X ⥤ B X ⥤ B X}
@@ -153,7 +149,7 @@ def compactSupportProperProjection {D : FiniteFieldDatum.{u}}
     rfl)
 
 /-- Tensoring a comparison in the first slot, then applying a realization.
-Source: coefficient transport of projection (blueprint: def-sf-constructible-projection-mates). -/
+Source: coefficient transport of projection. -/
 def projectionTensorLeftRealization {A : Type v} [Category.{w} A]
     {B : Type v'} [Category.{w'} B] (T : A ⥤ A ⥤ A) (V : A ⥤ B)
     {K K' : A} (e : K ≅ K') (L : A) :
@@ -161,8 +157,7 @@ def projectionTensorLeftRealization {A : Type v} [Category.{w} A]
   V.mapIso ((T.mapIso e).app L)
 
 /-- Cancel the inner coefficient unit, tensor a pullback comparison, and apply
-compact support and realization. Source: finite projection
-(blueprint: def-sf-constructible-projection-mates). -/
+compact support and realization. Source: finite projection. -/
 def projectionTensorTargetRealization
     {A : Type a} [Category.{ha} A] {B : Type b} [Category.{hb} B]
     {C : Type c} [Category.{hc} C] {D : Type d} [Category.{hd} D]
@@ -173,7 +168,7 @@ def projectionTensorTargetRealization
   V.mapIso (F.mapIso ((R.unitIso.app _).symm ≪≫ (T.obj K).mapIso e))
 
 /-- Conjugation of an ambient arrow, lifted through a full subcategory.
-Source: finite projection (blueprint: def-sf-constructible-projection-mates). -/
+Source: finite projection. -/
 def projectionFullConjugate {A : Type v} [Category.{w} A] {P : ObjectProperty A}
     {K L : P.FullSubcategory} {U V : A} (e : K.obj ≅ U) (e' : L.obj ≅ V)
     (a : U ⟶ V) : K ⟶ L :=
@@ -182,8 +177,7 @@ def projectionFullConjugate {A : Type v} [Category.{w} A] {P : ObjectProperty A}
 /-- Evaluate the proper/open projection with its tensor-coordinate endpoints exposed.
 Doing the endpoint conversion at an arbitrary coefficient category prevents repeated
 reduction of derived tensor constructions after specializing the coefficients.
-Source: the canonical proper/open mate, current projection-formula construction
-(blueprint: def-sf-constructible-projection-mates). -/
+Source: the canonical proper/open mate, current projection-formula construction. -/
 def projectionTensorCoordinateComponent (A : Type v) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
     [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
@@ -201,7 +195,7 @@ def projectionTensorCoordinateComponent (A : Type v) [Category.{u + 1} A] [Abeli
   ((projectionMapOfCompactification A c).app K).app L
 
 /-- The tensor-coordinate evaluation inherits invertibility of the published mate.
-Source: the same proper/open projection (blueprint: def-sf-constructible-projection-mates). -/
+Source: the same proper/open projection. -/
 theorem projectionTensorCoordinateComponent_isIso (A : Type v) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
     [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
@@ -214,7 +208,7 @@ theorem projectionTensorCoordinateComponent_isIso (A : Type v) [Category.{u + 1}
   exact h
 
 /-- The coordinate presentation evaluates the published projection, without a new choice.
-Source: the same proper/open projection (blueprint: def-sf-constructible-projection-mates). -/
+Source: the same proper/open projection. -/
 theorem projectionTensorCoordinateComponent_eq (A : Type v) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
     [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
@@ -233,7 +227,7 @@ variable {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
   (S : SixFunctorFiniteOperations D C E n hn)
 
 /-- The canonical derived coefficient realization, with the positive exponent retained.
-Source: the finite clause (blueprint: def-sf-constructible-projection-mates). -/
+Source: the finite clause. -/
 def realization (X : SixFunctorSpace D) :
     DerivedCategory (Sheaf (ProEt.topology X.obj.left)
       (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)))) ≌
@@ -241,7 +235,7 @@ def realization (X : SixFunctorSpace D) :
   sixFunctorFiniteRealization D C E n hn X
 
 /-- The recorded fixed-scalar tensor with its derived-category type exposed.
-Source: finite tensor convention (blueprint: def-sf-constructible-projection-mates). -/
+Source: finite tensor convention. -/
 def fixedTensor (X : SixFunctorSpace D) :
     DerivedCategory (Sheaf (ProEt.topology X.obj.left)
       (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)))) ⥤
@@ -253,7 +247,7 @@ def fixedTensor (X : SixFunctorSpace D) :
     (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))) X.obj.left
 
 /-- The K-flat left-derived inverse image, with a fixed exposed category type.
-Source: finite projection (blueprint: def-sf-constructible-projection-mates). -/
+Source: finite projection. -/
 def fixedDerivedPull {X Y : SixFunctorSpace D} (f : X ⟶ Y) :
     DerivedCategory (Sheaf (ProEt.topology Y.obj.left)
       (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)))) ⥤
@@ -264,7 +258,7 @@ def fixedDerivedPull {X Y : SixFunctorSpace D} (f : X ⟶ Y) :
     f.hom.left).leftDerivedFunctor
 
 /-- The published normalization of K-flat inverse image by exact inverse image.
-Source: finite projection (blueprint: def-sf-constructible-projection-mates). -/
+Source: finite projection. -/
 def fixedPullComparison {X Y : SixFunctorSpace D} (f : X ⟶ Y) :
     fixedDerivedPull (C := C) (E := E) (n := n) f ≅
       sfFixedDerivedPullback (Padic.coefficientExtensionRing C.l E n) f.hom.left :=
@@ -272,7 +266,7 @@ def fixedPullComparison {X Y : SixFunctorSpace D} (f : X ⟶ Y) :
     (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))) f.hom.left
 
 /-- The existing proper/open projection in a compact exposed signature.
-Source: def-exchange-projection (blueprint: def-sf-constructible-projection-mates). -/
+ -/
 def fixedComponent {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (c : Compactification f.hom.left)
     (K : DerivedCategory (Sheaf (ProEt.topology X.obj.left)
@@ -290,7 +284,7 @@ def fixedComponent {X Y : SixFunctorSpace D} (f : X ⟶ Y)
 
 /-- The finite signed derived tensor, transported through the published coefficient
 realization. This is a change of presentation of the existing tensor.
-Source: the finite projection display (blueprint: def-sf-constructible-projection-mates). -/
+Source: the finite projection display. -/
 def tensor (X : SixFunctorSpace D) :
     proEtaleDerivedCategory X.obj.left (Padic.coefficientExtensionRing C.l E n) ⥤
       proEtaleDerivedCategory X.obj.left (Padic.coefficientExtensionRing C.l E n) ⥤
@@ -366,7 +360,7 @@ private theorem fixedEtaleOrigin (X : SixFunctorSpace D)
 
 /-- Exactly the typing facts for the partial finite tensor and finite-Tor pullback.
 There is no finite-Tor assumption on the first input.
-Source: the domains of the projection formula (blueprint: def-sf-constructible-projection-mates).
+Source: the domains of the projection formula.
 Proof (postponed): use the finite constructible etale-origin equivalence and its
 Tor comparison. On etale representatives, tensor with a bounded flat model of the
 second input preserves bounded constructibility. Exact inverse image preserves the
@@ -441,7 +435,7 @@ theorem domains :
         A X.obj.left a b h.1 _).2 hexact)
 
 /-- The partial tensor on its full first and finite-Tor second domains.
-Source: the finite coefficient clause (blueprint: def-sf-constructible-projection-mates). -/
+Source: the finite coefficient clause. -/
 def partialTensor (X : SixFunctorSpace D) :
     sixFunctorFiniteCategory D C E n hn X ⥤
       finiteTorConstructibleCategory C.l E n hn X.obj.left ⥤
@@ -454,7 +448,7 @@ def partialTensor (X : SixFunctorSpace D) :
       (fun KL ↦ (domains S).1 X KL.1 KL.2))
 
 /-- The restriction of the recorded inverse image to finite-Tor inputs.
-Source: the finite coefficient clause (blueprint: def-sf-constructible-projection-mates). -/
+Source: the finite coefficient clause. -/
 def torPull {X Y : SixFunctorSpace D} (f : X ⟶ Y) :
     finiteTorConstructibleCategory C.l E n hn Y.obj.left ⥤
       finiteTorConstructibleCategory C.l E n hn X.obj.left :=
@@ -466,7 +460,7 @@ def torPull {X Y : SixFunctorSpace D} (f : X ⟶ Y) :
 
 /-- The prescribed support realization, including cancellation of the coefficient
 unit. Thus no free comparison of support functors is introduced.
-Source: finite compactification construction (blueprint: def-sf-constructible-projection-mates). -/
+Source: finite compactification construction. -/
 def supportRealization {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (c : Compactification f.hom.left) (K : sixFunctorFiniteCategory D C E n hn X) :
     ((S.finite.support f c).obj K).obj ≅
@@ -481,7 +475,7 @@ def supportRealization {X Y : SixFunctorSpace D} (f : X ⟶ Y)
       ((realization (C := C) (E := E) (n := n) (hn := hn) X).inverse.obj K.obj)
 
 /-- Canonical cancellation of the coefficient equivalence in inverse image.
-Source: finite pullback construction (blueprint: def-sf-constructible-projection-mates). -/
+Source: finite pullback construction. -/
 def pullRealization {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (L : sixFunctorFiniteCategory D C E n hn Y) :
     ((S.finite.pull f).obj L).obj ≅
@@ -500,7 +494,7 @@ def pullRealization {X Y : SixFunctorSpace D} (f : X ⟶ Y)
       Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _).symm).app L.obj
 
 /-- Support realization in fixed-scalar coordinates, cancelling the unit before
-applying tensor. Source: finite projection (blueprint: def-sf-constructible-projection-mates). -/
+applying tensor. Source: finite projection. -/
 def fixedSupportRealization {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (c : Compactification f.hom.left) (K : sixFunctorFiniteCategory D C E n hn X) :
     (realization (C := C) (E := E) (n := n) (hn := hn) Y).inverse.obj
@@ -514,8 +508,7 @@ def fixedSupportRealization {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (RY.unitIso.app ((sfFixedCompactSupport
       (Padic.coefficientExtensionRing C.l E n) c).obj (RX.inverse.obj K.obj))).symm
 
-/-- Tensor the fixed support comparison and realize it back. Source: finite projection
-(blueprint: def-sf-constructible-projection-mates). -/
+/-- Tensor the fixed support comparison and realize it back. Source: finite projection. -/
 def sourceComparison {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (c : Compactification f.hom.left) (K : sixFunctorFiniteCategory D C E n hn X)
     (L : finiteTorConstructibleCategory C.l E n hn Y.obj.left) :=
@@ -526,7 +519,7 @@ def sourceComparison {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (fixedSupportRealization S f c K) (RY.inverse.obj L.obj)
 
 /-- Pullback in fixed-scalar coordinates, with the coefficient unit cancelled.
-Source: finite projection (blueprint: def-sf-constructible-projection-mates). -/
+Source: finite projection. -/
 def fixedPullRealization {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (L : sixFunctorFiniteCategory D C E n hn Y) :
     (realization (C := C) (E := E) (n := n) (hn := hn) X).inverse.obj
@@ -543,7 +536,7 @@ def fixedPullRealization {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (fixedPullComparison (C := C) (E := E) (n := n) f).symm.app (RY.inverse.obj L.obj)
 
 /-- Target realization of the finite partial tensor projection.
-Source: finite projection (blueprint: def-sf-constructible-projection-mates). -/
+Source: finite projection. -/
 def targetComparison {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (c : Compactification f.hom.left) (K : sixFunctorFiniteCategory D C E n hn X)
     (L : finiteTorConstructibleCategory C.l E n hn Y.obj.left) :=
@@ -559,7 +552,7 @@ def targetComparison {X Y : SixFunctorSpace D} (f : X ⟶ Y)
 /-- The finite projection on the full bounded constructible first domain. The
 published proper-counit/open projection is conjugated only by the explicit source
 and target comparisons above, then lifted through the full inclusion.
-Source: the finite projection display (blueprint: def-sf-constructible-projection-mates). -/
+Source: the finite projection display. -/
 def component {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (c : Compactification f.hom.left) (K : sixFunctorFiniteCategory D C E n hn X)
     (L : finiteTorConstructibleCategory C.l E n hn Y.obj.left) :
@@ -574,8 +567,7 @@ def component {X Y : SixFunctorSpace D} (f : X ⟶ Y)
         ((realization (C := C) (E := E) (n := n) (hn := hn) Y).inverse.obj L.obj)))
 
 /-- The restricted pullback compositor is the recorded compositor, lifted through
-its full finite-Tor inclusion. Source: composition clause
-(blueprint: def-sf-constructible-projection-mates). -/
+its full finite-Tor inclusion. Source: composition clause. -/
 def torPullComposition {X Y Z : SixFunctorSpace D} (f : X ⟶ Y) (g : Y ⟶ Z)
     (L : finiteTorConstructibleCategory C.l E n hn Z.obj.left) :
     (torPull S (f ≫ g)).obj L ≅ (torPull S f).obj ((torPull S g).obj L) :=
@@ -585,7 +577,7 @@ def torPullComposition {X Y Z : SixFunctorSpace D} (f : X ⟶ Y) (g : Y ⟶ Z)
 
 /-- The proper counit projection in these coordinates. The identity-open
 compactification cancels via the specified proper identification.
-Source: proper clause (blueprint: def-sf-constructible-projection-mates). -/
+Source: proper clause. -/
 def properComponent {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsProper f.hom.left]
     (K : sixFunctorFiniteCategory D C E n hn X)
     (L : finiteTorConstructibleCategory C.l E n hn Y.obj.left) :
@@ -598,7 +590,7 @@ def properComponent {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsProper f.hom.left
 
 /-- Finite projection coherence on the full first and finite-Tor second domains.
 Every arrow is the explicit canonical component above. Source: finite coefficient
-and coherence clauses (blueprint: def-sf-constructible-projection-mates). -/
+and coherence clauses. -/
 structure Laws : Prop where
   isIso : ∀ {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]

@@ -20,7 +20,7 @@ are the derived completions of the plain operations of `D(Y_ét, 𝒪_E)` (see
 `PF_{f, K, L}` over `E`, for `K` and `L` obtained by rationalization from `𝒪_E`-objects, is the
 image of the integral projection map, the derived completion of the plain projection map, under
 the localization functor `DerivedCategoryDerivedCompleteRational.fromIntegral`. This file proves
-that it is an isomorphism (blueprint `lemma-kunneth-formula-compact-supports--3`, rational stage),
+that it is an isomorphism,
 following the blueprint: the integral projection map is an isomorphism
 (`lemma-projection-formula-integral-coefficients`,
 `AlgebraicGeometry.Etale.isIso_completion_map_projectionMap`), and a functor carries isomorphisms to

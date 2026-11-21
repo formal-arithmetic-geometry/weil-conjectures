@@ -15,9 +15,9 @@ For a morphism `f : X ⟶ Y`, the square
 
 ```
 X --𝟙--> X
-|        |
-𝟙        f
-v        v
+| |
+𝟙 f
+v v
 X --f--> Y
 ```
 

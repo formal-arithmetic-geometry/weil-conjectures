@@ -57,9 +57,9 @@ supported localization triangles are compatible with the restriction of supports
 
 ```
   Le^* Rj_* Lj^* L ──Le^* δ_L──▶ Le^* ((Ri_! Ri^! L)[1]) ≅ (Le^* Ri_! Ri^! L)[1]
-        │                                                      │
-  Ex_*, τ                                                    ψ[1]
-        ▼                                                      ▼
+        │ │
+  Ex_*, τ ψ[1]
+        ▼ ▼
   Rj'_* Lj'^* L' ─────────────δ_{L'}──────────────▶ (Ri'_! Ri'^! L')[1]
 ```
 
@@ -143,9 +143,9 @@ change map `Ex_*`, is the adjoint of the pulled back class: this combines the co
 
 ```
 Le^* K ──Le^*(adjoint of y)──▶ Le^* ((Rj_* M)[1]) ──≅──▶ (Le^* Rj_* M)[1]
-   │                                                          │
- η │                                                          │ Ex_*[1]
-   ▼                                                          ▼
+   │ │
+ η │ │ Ex_*[1]
+   ▼ ▼
 Rj'_* Lj'^* Le^* K ──Rj'_*(≅ ≫ Le₁^* y ≫ ≅)──▶ Rj'_* ((Le₁^* M)[1]) ──≅──▶ (Rj'_* Le₁^* M)[1]
 ```
 -/
@@ -203,9 +203,9 @@ omit [HasSmallSiteSheafify A] in
 
 ```
 Le^* (Ri_! Ri^! L) ──ψ──▶ Ri'_! Ri'^! L'
-        │                       │
- Le^* ε │                       │ ε'
-        ▼                       ▼
+        │ │
+ Le^* ε │ │ ε'
+        ▼ ▼
      Le^* L ────────τ────────▶ L'
 ```
 -/

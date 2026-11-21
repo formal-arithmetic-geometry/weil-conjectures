@@ -254,8 +254,7 @@ private theorem ambient_refinement_scalar
 
 /-- Completed scalar extension preserves the normalized proper/open refinement word.
 The input is an ordinary open-unit comparison, before any chosen exceptional operation.
-Source: Zheng 5.13--5.15; Stacks 0F7B and 0F7I, coefficient mate pasting
-(blueprint: lem-sf-ring-refinement-scalar-word).
+Source: Zheng 5.13--5.15; Stacks 0F7B and 0F7I, coefficient mate pasting.
 
 Proof: use a finite integral basis for the extension of coefficient fields, with
 its compatible reductions on the ramified en subsystem. On the coefficient-system

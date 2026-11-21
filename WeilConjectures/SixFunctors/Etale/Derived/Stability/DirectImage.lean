@@ -74,7 +74,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 /-! #### Direct image -/
 
 omit [Finite Λ] in
-/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
+/-- Finiteness and constructibility.
 
 Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes, let `Λ` be a noetherian ring and `J` an
 ideal of `Λ` with `Λ ⧸ J` finite, and let `K` be a bounded constructible complex of étale sheaves
@@ -105,7 +105,7 @@ theorem boundedConstructible_rightDerivedLowerStar [IsNoetherianRing Λ] (J : Id
       exact hNJ, by simpa using hNY.map f.appTop.hom⟩
   exact boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero J f aX aY hf hbc hJ
 
-/-- Blueprint `sk-thm-sf-direct-image-tor-amplitude`: Direct image with finite Tor amplitude.
+/-- Direct image with finite Tor amplitude.
 
 Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes with `dim X ≤ d`, let `Λ` be a finite
 ring and let `K` be a complex of étale sheaves of `Λ`-modules on `X` of Tor amplitude in
@@ -159,7 +159,7 @@ theorem torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing [IsNoetherianRi
   exact torAmplitudeIn_rightDerivedLowerStar_of_nsmul_id_eq_zero Λ aX aY f hf d hd a b N hN hta
 
 omit [Finite Λ] in
-/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
+/-- Finiteness and constructibility.
 
 For a finite `Λ` whose exponent is invertible on `Y` and a morphism `f : X ⟶ Y` of finite-type
 `k`-schemes, `Rf_*` preserves bounded constructibility. This is the finite-coefficient case of
@@ -182,7 +182,7 @@ theorem boundedConstructible_rightDerivedLowerStar_of_finite [Finite Λ] {X Y : 
   have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom f
   exact boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent Λ f aX aY hf K hbc
 
-/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
+/-- Stability of the constructible finite-Tor
 subcategories.
 
 Clause (iii): `Rf_* : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated morphism of
@@ -240,7 +240,7 @@ theorem constructibleFiniteTor_rightDerivedLowerStar_of_isProper {X Y : Scheme.{
     exact ⟨boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian aY f hbc, a,
       b + 2 * (d : ℤ), torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
 
-/-- Blueprint `proposition-six-operations-dctf`: Stability of the constructible finite-Tor
+/-- Stability of the constructible finite-Tor
 subcategories.
 
 Clause (iv): `Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated finite-type `f`

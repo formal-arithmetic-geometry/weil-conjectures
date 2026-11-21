@@ -353,8 +353,7 @@ private theorem clopenComparison_transpose (o : Operations l E) {U X : Scheme.{u
   erw [Category.comp_id]
 
 /-- Open support comparisons for the fixed section-normalized system compositors.
-Source: Stacks 03DI, 09AE, 0E8I; blueprint fix-prop-coherence, slice comparisons
-(blueprint: lem-sf-integral-system-open-comparisons).
+Source: Stacks 03DI, 09AE, 0E8I; blueprint fix-prop-coherence, slice comparisons.
 
 Proof: the finite open extension is fully faithful; exact localization retains
 its invertible unit. The normalized open evaluation mate carries the system unit

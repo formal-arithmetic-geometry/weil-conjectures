@@ -12,8 +12,7 @@ public import WeilConjectures.SixFunctors.Constructible.ConstructibleTensorCompl
 /-! # Normalized comparison of pullback and quotient completion
 
 Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, base-change
-paragraph; Bhatt--Scholze, Definition 3.4.10 and Lemmas 6.5.5, 6.5.8; Stacks 099N, 09BN, 0GL1
-(blueprint: def-sf-pull-completion-comparison).
+paragraph; Bhatt--Scholze, Definition 3.4.10 and Lemmas 6.5.5, 6.5.8; Stacks 099N, 09BN, 0GL1.
 
 The record Pull retains the strict quotient-tower realization of the published operations.
 Its normalizations do not choose replacement operation functors.
@@ -41,7 +40,7 @@ open WeilConjectures.PurCompactSupport
 namespace WeilConjectures.OpenFactorCoherence
 
 /-- The matching locally bijective criterion at the same size.
-Source: Stacks 098K (blueprint: def-sf-pull-completion-comparison). -/
+Source: Stacks 098K. -/
 instance (priority := 4000) siteLocallyBijective (W : Scheme.{u}) :
     (ProEt.topology W).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall _
@@ -49,47 +48,41 @@ instance (priority := 4000) siteLocallyBijective (W : Scheme.{u}) :
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The original ordinary derived category over B_W. Source: Stacks 099N
-(blueprint: def-sf-pull-completion-comparison). -/
+/-- The original ordinary derived category over B_W. Source: Stacks 099N. -/
 abbrev D (W : Scheme.{u}) := DerivedCategory (integralTowerModules.{u, u} l E W)
 
-/-- Actual cochain representatives. Source: Stacks 05RU
-(blueprint: def-sf-pull-completion-comparison). -/
+/-- Actual cochain representatives. Source: Stacks 05RU. -/
 abbrev Cx (W : Scheme.{u}) := CochainComplex (integralTowerModules.{u, u} l E W) ℤ
 
 /-- Exact ambient extension, with the published ringed-slice adjunction.
-Source: Stacks 03DI (blueprint: def-sf-pull-completion-comparison). -/
+Source: Stacks 03DI. -/
 abbrev J {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (openExtension (completed l E) j).mapDerivedCategory
 
-/-- Ordinary exact open restriction. Source: Stacks 09BN
-(blueprint: def-sf-pull-completion-comparison). -/
+/-- Ordinary exact open restriction. Source: Stacks 09BN. -/
 abbrev star {U X : Scheme.{u}} (j : U ⟶ X) := pull (completed l E) j
 
-/-- Exact termwise extension before localization. Source: Stacks 03DJ
-(blueprint: def-sf-pull-completion-comparison). -/
+/-- Exact termwise extension before localization. Source: Stacks 03DJ. -/
 abbrev jCx {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (openExtension (completed l E) j).mapHomologicalComplex (.up ℤ)
 
 /-- Ordinary pullback on complexes, over the actual completed coefficient map.
-Source: Stacks 099N (blueprint: def-sf-pull-completion-comparison). -/
+Source: Stacks 099N. -/
 abbrev pullCx {U X : Scheme.{u}} (g : U ⟶ X) :=
   (proEtaleRingModulePullback g ((completed l E).ring X)
     ((completed l E).ring U) ((completed l E).pull g)).mapHomologicalComplex (.up ℤ)
 
-/-- Fixed quotient completion on the global site. Source: Stacks 08TC
-(blueprint: def-sf-pull-completion-comparison). -/
+/-- Fixed quotient completion on the global site. Source: Stacks 08TC. -/
 abbrev C (W : Scheme.{u}) := IntegralOnSlice.completion.{u, u} l E W none
 
-/-- Its actual quotient-augmentation unit. Source: Stacks 08TC
-(blueprint: def-sf-pull-completion-comparison). -/
+/-- Its actual quotient-augmentation unit. Source: Stacks 08TC. -/
 abbrev eta (W : Scheme.{u}) := IntegralOnSlice.completionUnit.{u, u} l E W none
 
 set_option genSizeOf false in
 set_option genInjectivity false in
 /-- The completion comparison of a geometric pullback is normalized by an entire strict
 quotient tower and the pure tensor/unit formula, not by evaluations in derived categories.
-Source: Stacks 099N(2),(5) (blueprint: def-sf-pull-completion-comparison). -/
+Source: Stacks 099N(2),(5). -/
 structure Pull {U X : Scheme.{u}} (g : U ⟶ X) where
   source_good : ∀ P : Cx l E X, IntegralOnSlice.Good.{u, u} l E X none P →
     integralOperationsGoodComplex.{u, u} l E X P
@@ -121,7 +114,7 @@ structure Pull {U X : Scheme.{u}} (g : U ⟶ X) where
         DerivedCategory.Q.map (integralOperationsRoosMap (tower.hom.app P))
 
 /-- Ordinary-to-completed pullback, with the actual quotient unit from Pull.model.
-Source: Stacks 099N (blueprint: def-sf-pull-completion-comparison). -/
+Source: Stacks 099N. -/
 def Pull.unit {U X : Scheme.{u}} {g : U ⟶ X} (p : Pull l E g) :
     star l E g ⟶ integralDerivedPullback.{u, u} l E g :=
   Functor.whiskerLeft (star l E g) (eta l E U) ≫ p.comparison.hom

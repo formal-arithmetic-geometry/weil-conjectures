@@ -122,7 +122,6 @@ private theorem transport_mate
 
 Source: Stacks Tags 03D8, 06YY, 07A6; the adjunction normalizations in
 IntegralCompactSupportCoefficientComparison.
-(blueprint: lem-sf-integral-finite-proper-mate).
 
 Proof: scalarPull is the unique left-adjoint comparison conjugate to the
 restriction/direct-image isomorphism. Its inverse has geometric mate equal to

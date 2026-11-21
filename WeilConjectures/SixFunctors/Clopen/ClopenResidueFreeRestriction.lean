@@ -28,7 +28,6 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 /-! # Slice constant residue bases under normalized clopen restriction
 
 Source: Stacks Project, proetale.tex, Tag 09C3; sites.tex, Tag 00XZ.
-(blueprint: lem-sf-clopen-residue-free-restriction).
 -/
 
 @[expose] public section
@@ -56,7 +55,6 @@ module sheaf after ordinary restriction to the open subscheme.
 Source: Stacks Project, proetale.tex, Tag 09C3, the disjoint-open trivialization;
 sites.tex, Tag 00XZ, localization of sheafification. This is the coefficient and
 module transport in step 2 of lem-sf-residue-lisse-clopen-bases.
-(blueprint: lem-sf-clopen-residue-free-restriction).
 
 Proof: precompose localized module sheaves with the concrete sliceFrom functor to
 restrict to the pro-etale site of U, and transport scalars along d.finite 0. This

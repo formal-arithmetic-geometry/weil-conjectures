@@ -199,8 +199,7 @@ end MateModel
 /-- The inverse mate of the fixed derived scalar comparison is the localization
 of the ordinary inverse mate. This assertion involves one finite coefficient
 module complex, and no coefficient system or evaluation transition.
-Source: Stacks 0D6E and 0D6J; Zheng Lemma 4.10
-(blueprint: lem-sf-integral-scalar-pullback-mate-normalization).
+Source: Stacks 0D6E and 0D6J; Zheng Lemma 4.10.
 
 Proof: apply the derived adjunction Hom bijection to the desired equation.
 The exact-localization factor and the right-derived unit express the transpose

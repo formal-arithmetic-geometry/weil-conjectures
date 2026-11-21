@@ -320,7 +320,7 @@ private theorem integralOperation (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D
 
 /-- Construct the finite and integral stages, without any field-stage adjunction.
 Source: Zheng, Lemma 5.22, Construction 5.25 and Proposition 5.24; coefficient
-construction steps 1--4 (blueprint: lem-sf-ring-stage-assembly).
+construction steps 1--4.
 
 Proof: choose the literal scalar restrictions once for each endpoint, independently of
 compactification. Restrict finite compact support and the specified finite exceptional

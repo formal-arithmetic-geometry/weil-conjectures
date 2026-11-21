@@ -29,8 +29,7 @@ public import WeilConjectures.AlgebraicGeometry.Sf.SfCompactSupportRestrictionOf
 /-! # IntegralSystemOperations
 
 Source: Stacks 0941, 03DI, 07A7 and blueprint fix-prop-coherence,
-strict-system operations and bounded finite expressions
-(blueprint: def-sf-integral-system-operations).
+strict-system operations and bounded finite expressions.
 -/
 
 @[expose] public noncomputable section
@@ -49,32 +48,30 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The recorded unbounded category of strict semilinear systems.
-Source: Stacks 0941 (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 0941. -/
 abbrev System (W : Scheme.{u}) := coefficientSequenceDerived l E W
 
 /-- The recorded completed-coefficient derived category.
-Source: Stacks 0941 (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 0941. -/
 abbrev Integral (W : Scheme.{u}) := DerivedCategory (scalarReductionSource l E W)
 
 /-- Exact inverse image on the actual sequence site, with its canonical quotient actions.
-Source: Stacks 0941, 03D2
-(blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 0941, 03D2. -/
 abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) := pullbackTensorSequenceDerived l E f
 
 /-- The fixed reconstruction adjunction and its K-flat normalized tensor models.
-Source: Stacks 0941, 07A6
-(blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 0941, 07A6. -/
 abbrev calculus (W : Scheme.{u}) := pullbackTensorCalculus l E W
 
 /-- Additivity of actual direct image follows from its recorded ordinary adjunction.
-Source: Stacks 03D2 (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 03D2. -/
 instance sequenceDirectAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pullbackTensorSequenceDirect l E f).Additive :=
   (pullbackTensorSequenceAdjunction l E f).right_adjoint_additive
 
 /-- The universal derived image of the actual ordinary sequence-site direct image.
 Its transpose equation is the one in the recorded coefficient comparison interface.
-Source: Zheng 4.1, 4.10 (blueprint: def-sf-integral-system-operations). -/
+Source: Zheng 4.1, 4.10. -/
 structure Direct {X Y : Scheme.{u}} (f : X ⟶ Y) where
   model : SheafOfModules.CoefficientDerivedImage
     (pullbackTensorSequenceInverse l E f) (pullbackTensorSequenceDirect l E f)
@@ -86,16 +83,16 @@ structure Direct {X Y : Scheme.{u}} (f : X ⟶ Y) where
         model.inverseFactors.hom.app P
 
 /-- The actual derived image, retaining its universal right-derived certificate.
-Source: Zheng 4.10 (blueprint: def-sf-integral-system-operations). -/
+Source: Zheng 4.10. -/
 abbrev Direct.direct {X Y : Scheme.{u}} {f : X ⟶ Y} (d : Direct l E f) := d.model.direct
 
 /-- The derived adjunction transported by the exact-inverse-image factorization.
-Source: Zheng 4.10 (blueprint: def-sf-integral-system-operations). -/
+Source: Zheng 4.10. -/
 def Direct.adj {X Y : Scheme.{u}} {f : X ⟶ Y} (d : Direct l E f) :
     pull l E f ⊣ d.direct := d.model.adjunction.ofNatIsoLeft d.inverse
 
 /-- The coefficient-level adjunction obtained from the actual module adjunction.
-Source: Zheng 4.10 (blueprint: def-sf-integral-system-operations). -/
+Source: Zheng 4.10. -/
 def finiteAdj {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     finiteDerivedPullback l E n f ⊣
       proEtaleConstantDerivedDirectImage f (Padic.coefficientExtensionRing l E (n + 1)) :=
@@ -104,7 +101,7 @@ def finiteAdj {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
 
 /-- Direct-image evaluation, its two adjunction equations, and all adjacent quotient
 transitions. The inverse-image comparison is the fixed cochain-normalized one.
-Source: Zheng 4.1, 4.10 (blueprint: def-sf-integral-system-operations). -/
+Source: Zheng 4.1, 4.10. -/
 structure DirectEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y} (d : Direct l E f) where
   evaluation : ∀ n : ℕ,
     d.direct ⋙ coefficientSequenceDerivedEvaluation l E Y n ≅
@@ -139,8 +136,7 @@ structure DirectEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y} (d : Direct l E f) w
 
 /-- Exact termwise extension by zero, specified by its ordinary adjunction to the
 actual sequence inverse image. This retains the entire coefficient system.
-Source: Stacks 03DI, 0941
-(blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 03DI, 0941. -/
 structure Open {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] where
   ordinary : coefficientSequenceModules l E U ⥤ coefficientSequenceModules l E X
   [additive : ordinary.Additive]
@@ -151,18 +147,18 @@ structure Open {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] where
 attribute [instance] Open.additive Open.limits Open.colimits
 
 /-- Extension by zero descends by the exact-functor factorization.
-Source: Stacks 03DI (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 03DI. -/
 abbrev Open.derived {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersion j]
     (o : Open l E j) := o.ordinary.mapDerivedCategory
 
 /-- The exact open adjunction is the localization of the ordinary one.
-Source: Stacks 03DI (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 03DI. -/
 def Open.adj {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersion j]
     (o : Open l E j) : o.derived ⊣ pull l E j :=
   SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction o.adjunction
 
 /-- The finite open adjunction, localized from its canonical ordinary unit.
-Source: Stacks 03DI (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 03DI. -/
 def finiteOpenAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :
     (sfIntrinsicExtensionByZero j (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory ⊣
       finiteDerivedPullback l E n j :=
@@ -170,8 +166,7 @@ def finiteOpenAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ)
     (sfIntrinsicOpenAdjunction (Padic.coefficientExtensionRing l E (n + 1)) j)
 
 /-- Evaluation of open extension is fixed by the transpose of the canonical inverse
-image evaluation map. Source: Stacks 03DI, 0941
-(blueprint: def-sf-integral-system-operations). -/
+image evaluation map. Source: Stacks 03DI, 0941. -/
 structure OpenEvaluation {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersion j]
     (a : Open l E j) where
   evaluation : ∀ n : ℕ,
@@ -185,8 +180,7 @@ structure OpenEvaluation {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersion j]
 
 /-- Canonical simultaneous operations on the single ringed sequence site at each scheme.
 Functorial right derivation and exact open localization are part of the conclusions,
-not extra hypotheses on inputs. Source: Stacks 0941, Zheng Lemma 4.10
-(blueprint: def-sf-integral-system-operations). -/
+not extra hypotheses on inputs. Source: Stacks 0941, Zheng Lemma 4.10. -/
 structure Operations where
   direct : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), Direct l E f
   evaluation : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), DirectEvaluation l E (direct f)
@@ -195,19 +189,17 @@ structure Operations where
     OpenEvaluation l E (extension j)
 
 /-- The actual total right derived system image.
-Source: Stacks 0941 (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 0941. -/
 abbrev Operations.push (o : Operations l E) {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (o.direct f).direct
 
 /-- The actual exact derived system open extension.
-Source: Stacks 03DI, 0941
-(blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 03DI, 0941. -/
 abbrev Operations.shriek (o : Operations l E) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] := (o.extension j).derived
 
 /-- Evaluation of the chosen compactification composite, with the actual open and
-proper evaluation factors. Source: Stacks 0F7J
-(blueprint: def-sf-integral-system-operations). -/
+proper evaluation factors. Source: Stacks 0F7J. -/
 def supportEvaluation (o : Operations l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (n : ℕ) :
     (Operations.shriek l E o c.i ⋙ Operations.push l E o c.g) ⋙
@@ -224,8 +216,7 @@ def supportEvaluation (o : Operations l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
 The inverse-image comparison is the conjugate of this section map, and the derived
 comparison is its class on complexes. These requirements fix the canonical scalar
 normalization, rather than merely asserting existence of some natural isomorphism.
-Source: Stacks 03D8, 07A7
-(blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 03D8, 07A7. -/
 structure Compositors (o : Operations l E) where
   ordinaryDirect : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),
     pullbackTensorSequenceDirect l E f ⋙ pullbackTensorSequenceDirect l E g ≅
@@ -262,7 +253,7 @@ structure Compositors (o : Operations l E) where
           ((NatIso.mapHomologicalComplex (ordinaryPull f g) (.up ℤ)).hom.app P)
 
 /-- Direct-image compositors are exactly conjugate to the fixed inverse-image ones.
-Source: Stacks 07A7 (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 07A7. -/
 def Compositors.pushComp {o : Operations l E} (c : Compositors l E o)
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     Operations.push l E o f ⋙ Operations.push l E o g ≅ Operations.push l E o (f ≫ g) :=
@@ -270,8 +261,7 @@ def Compositors.pushComp {o : Operations l E} (c : Compositors l E o)
     (o.direct (f ≫ g)).adj (c.pullComp f g)
 
 /-- Open compositors are the specified conjugates under the open adjunctions.
-Source: Stacks 03DI, 07A7
-(blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 03DI, 07A7. -/
 def Compositors.openComp {o : Operations l E} (c : Compositors l E o)
     {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion k] :
@@ -280,20 +270,20 @@ def Compositors.openComp {o : Operations l E} (c : Compositors l E o)
     (o.extension (j ≫ k)).adj (c.pullComp j k).symm
 
 /-- The inverse-image comparison around a commutative square.
-Source: Stacks 07A7 (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 07A7. -/
 def Compositors.square {o : Operations l E} (c : Compositors l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
     (h : k ≫ p = r ≫ i) : pull l E i ⋙ pull l E r ≅ pull l E p ⋙ pull l E k :=
   (c.pullComp r i).symm ≪≫ eqToIso (congrArg (pull l E) h.symm) ≪≫ c.pullComp k p
 
 /-- The left side of the open projection comparison.
-Source: Stacks 0E8I (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 0E8I. -/
 def openTensorLeft (o : Operations l E) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : System l E U × System l E X ⥤ System l E X :=
   (Operations.shriek l E o j).prod (𝟭 _) ⋙ (calculus l E X).systemClosed.tensor
 
 /-- The right side of the open projection comparison, with restriction in its second slot.
-Source: Stacks 0E8I (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 0E8I. -/
 def openTensorRight (o : Operations l E) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : System l E U × System l E X ⥤ System l E X :=
   (𝟭 _).prod (pull l E j) ⋙ (calculus l E U).systemClosed.tensor ⋙
@@ -303,8 +293,7 @@ def openTensorRight (o : Operations l E) {U X : Scheme.{u}} (j : U ⟶ X)
 comparison is indexed by a cartesian square. Its inverse, and the inverse projection
 comparison, are fixed by the displayed adjunction transposes. The clopen comparison
 uses the inverse of the open unit under the direct-image adjunction.
-Source: Stacks 03DI, 09AE, 0E8I; blueprint fix-prop-coherence
-(blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 03DI, 09AE, 0E8I; blueprint fix-prop-coherence. -/
 structure OpenComparisons (o : Operations l E) (c : Compositors l E o) where
   unitIso : ∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (M : System l E U), IsIso ((o.extension j).adj.unit.app M)
@@ -337,7 +326,7 @@ structure OpenComparisons (o : Operations l E) (c : Compositors l E o) where
         (@inv _ _ _ _ ((o.extension j).adj.unit.app M) (unitIso j M))
 
 /-- Canonical open-unit isomorphism, assembled from its actual components.
-Source: Stacks 03DI (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 03DI. -/
 def OpenComparisons.unit (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : 𝟭 (System l E U) ≅
@@ -346,7 +335,7 @@ def OpenComparisons.unit (o : Operations l E) (c : Compositors l E o)
     (a.unitIso j M)) (fun f ↦ (o.extension j).adj.unit.naturality f)
 
 /-- Open-extension equality transport is fixed by the inverse-image adjunction.
-Source: Stacks 03DI (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 03DI. -/
 def openCongr (o : Operations l E) {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :
     Operations.shriek l E o f ≅ Operations.shriek l E o g :=
@@ -354,7 +343,7 @@ def openCongr (o : Operations l E) {U X : Scheme.{u}} {f g : U ⟶ X}
     ((o.extension g).adj.ofNatIsoRight (eqToIso (congrArg (pull l E) h.symm)))
 
 /-- Open restriction of direct image is conjugate to the normalized open base change.
-Source: Stacks 0F7B (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 0F7B. -/
 def cartesianConjugate (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) {V W Z : Scheme.{u}} (p : V ⟶ Z) (i : W ⟶ Z)
     [IsOpenImmersion i] :
@@ -367,7 +356,7 @@ def cartesianConjugate (o : Operations l E) (c : Compositors l E o)
 
 /-- Restriction of k-extension to the pulled-back open is s-extension. The inverse
 open unit fixes this identification, including the empty open.
-Source: Stacks 0F7B (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 0F7B. -/
 def restrictFactor (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) {U V W Z : Scheme.{u}}
     (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
@@ -386,7 +375,7 @@ def restrictFactor (o : Operations l E) (c : Compositors l E o)
 
 /-- The prescribed lambda: restrict p, factor k through its clopen lift s, identify
 J_s with S_s using the open unit, and compose the direct images.
-Source: Stacks 0F7B (blueprint: def-sf-integral-system-operations). -/
+Source: Stacks 0F7B. -/
 def properOpenLambda (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) {U V W Z : Scheme.{u}}
     (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
@@ -406,8 +395,7 @@ def properOpenLambda (o : Operations l E) (c : Compositors l E o)
   eqToIso (congrArg (Operations.push l E o) (pullback.lift_snd k r h))
 
 /-- A finite-type compactified arrow has a quasi-compact open factor, by cancellation
-of quasi-compactness against the separated proper factor. Source: Stacks 01K5
-(blueprint: def-sf-integral-system-operations). -/
+of quasi-compactness against the separated proper factor. Source: Stacks 01K5. -/
 abbrev compactOpenQuasiCompact {X Y : Scheme.{u}} {f : X ⟶ Y}
     (d : Compactification f) (h : QuasiCompact f) : QuasiCompact d.i :=
   @QuasiCompact.of_comp X d.Z Y d.i d.g (d.comm ▸ h) inferInstance

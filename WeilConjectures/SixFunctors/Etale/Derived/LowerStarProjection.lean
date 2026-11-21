@@ -20,10 +20,10 @@ adjunction `Lp^* ⊣ Rp_*` and the comparison
 `Lp^* ⊣ Rp_*` is given by the diagram
 ```
 Lp^*(Rp_*M ⊗ᴸ L) --comparison--> Lp^*Rp_*M ⊗ᴸ Lp^*L
-        \                               |
-         \                              | ε_M ⊗ᴸ 𝟙
-       transpose                        v
-           ---------------------->  M ⊗ᴸ Lp^*L
+        \ |
+         \ | ε_M ⊗ᴸ 𝟙
+       transpose v
+           ----------------------> M ⊗ᴸ Lp^*L
 ```
 where the comparison is `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison`, the long
 edge is `(homEquiv _ _).symm` of the projection map and `ε` is the counit of
@@ -135,10 +135,10 @@ lemma rightDerivedLowerStarProjectionMap_app_app
 `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` is the composite
 ```
 Lp^*(Rp_*M ⊗ᴸ L) --comparison--> Lp^*Rp_*M ⊗ᴸ Lp^*L
-        \                               |
-         \                              | ε_M ⊗ᴸ 𝟙
-       transpose                        v
-           ---------------------->  M ⊗ᴸ Lp^*L
+        \ |
+         \ | ε_M ⊗ᴸ 𝟙
+       transpose v
+           ----------------------> M ⊗ᴸ Lp^*L
 ```
 where the comparison is `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison`, the long
 edge is `(homEquiv _ _).symm` of the projection map and `ε` is the counit of

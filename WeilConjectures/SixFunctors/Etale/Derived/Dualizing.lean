@@ -34,7 +34,7 @@ the *Verdier dual* is `𝔻_X = RHom_X(-, ω_X)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual_of_isInvertible`: biduality for
   an invertible dualizing complex.
 
-General Verdier biduality on `Dctf(X, Λ)` (`sk-prop-sf-biduality-general`) and the preservation
+General Verdier biduality on `Dctf(X, Λ)` and the preservation
 of `Dctf(X, Λ)` by `𝔻_X` (`lemma-verdier-duality-preserves-constructibility--1`) are proved in
 `WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality`.
 
@@ -59,7 +59,6 @@ The statements are for torsion coefficients, finitely generated objects of `A` b
 with `Λ` finite). With coefficients `ℤ` they fail: for the origin `i` of `𝔸¹` in characteristic
 zero, `Ri^!ℤ` has `ℚ/ℤ` in degree `3`, so `𝔻(i_*ℤ)` is not constructible, and
 `𝔻𝔻(i_*ℤ) = i_*Ẑ` is not `i_*ℤ`.
-
 -/
 
 @[expose] public section
@@ -84,9 +83,7 @@ variable {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a]
 namespace Etale
 
 /-- The dualizing complex `ω_X = Ra^! Λ_S` of a scheme `X` over a base `S`, the exceptional
-inverse image along the structure morphism `a : X ⟶ S` of the monoidal unit `Λ_S` (blueprint
-`definition-verdier-dual-evaluation`, with `S = Spec k` and finite coefficients
-`A = ModuleCat Λ`). -/
+inverse image along the structure morphism `a : X ⟶ S` of the monoidal unit `Λ_S`. -/
 noncomputable def dualizingComplex : _root_.DerivedCategory (Sheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ)) :=
   (R(a)^![Λ]).obj (𝟙_ _)

@@ -28,8 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The finite ringed pullback in the constant-ring coordinates.
-Source: Stacks 03D3, 03D6 and 07A6; the derived finiteDirectImage_eq adjoint.
-(blueprint: def-sf-integral-finite-pullback-coordinates). -/
+Source: Stacks 03D3, 03D6 and 07A6; the derived finiteDirectImage_eq adjoint. -/
 def finiteRingPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     PurCompactSupport.pull
         (PurCompactSupport.finite l E (n + 1) (Nat.le_add_left 1 n)) f ≅
@@ -45,8 +44,7 @@ def finiteRingPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
           (finiteAdj l E f n)
 
 /-- Scalar/pullback balancing in the published finite coordinates.
-Source: Stacks 03D8, 06YY, 07A6.
-(blueprint: def-sf-integral-finite-pullback-coordinates). -/
+Source: Stacks 03D8, 06YY, 07A6. -/
 def finiteScalarPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ringedPull l E f ⋙ scalarReductionDerivedExtension l E X n ≅
       scalarReductionDerivedExtension l E Y n ⋙ finiteDerivedPullback l E n f :=

@@ -36,8 +36,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 /-- The pure quotient coordinate and zero shifted coordinate determine the chain map.
 Source: Bhatt--Scholze 3.4.10; the explicit Roos augmentation in constructible
-tensor completion, step 8
-(blueprint: lem-sf-tensor-completion-chain-uniqueness).
+tensor completion, step 8.
 Proof: fix the two input complexes and a total degree. A morphism into the
 mapping cocone is determined by its first and shifted coordinates. The shifted
 coordinates of both maps vanish by the second normalization clause. Project

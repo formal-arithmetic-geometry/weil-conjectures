@@ -19,7 +19,6 @@ for models of finite type over a strictly henselian trait this is Deligne's fini
 theorem, SGA 4½, [Th. finitude], Thm. 3.2), the restriction of `Ψ` to the bounded
 constructible derived categories
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.boundedConstructibleNearbyCycles`).
-
 -/
 
 @[expose] public section

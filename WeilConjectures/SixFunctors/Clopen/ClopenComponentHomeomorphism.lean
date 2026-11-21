@@ -18,9 +18,8 @@ import WeilConjectures.SixFunctors.Supporting.ProfiniteClopenPullback
 # Clopen inverse images and spectral connected-component spaces
 
 Source: agent consequence of Stacks Project, `topology.tex`, Tags 0906
-(lemma-spectral-pi0), 005F (lemma-connected-component-intersection), and 08ZZ
-(lemma-profinite-refine-open-covering)
-(blueprint: lem-sfb-spectral-clopen-component-homeomorphism).
+, 005F, and 08ZZ
+.
 -/
 
 @[expose] public section
@@ -62,9 +61,8 @@ given by set image. The uniquely normalized continuous component map makes this 
 natural, so bijectivity on clopens is equivalent before and after taking components.
 The spaces may be empty and need not satisfy any separation or compactness condition.
 
-Source: Stacks Project, `topology.tex`, Tag 0900 (lemma-pi0-profinite), clopen saturation
+Source: Stacks Project, `topology.tex`, Tag 0900, clopen saturation
 passage, with Tags 004T, 0376, and 08ZL, expanded by the agent naturality calculation.
-(blueprint: lem-sfb-component-quotient-clopen-naturality)
 
 Proof for stage 3:
 1. By lem-sfb-connected-component-maximality, the connected component of x contains x,
@@ -151,9 +149,8 @@ induces a homeomorphism of connected-component quotients, normalized by the quot
 No nonemptiness assumption is imposed.
 
 Source: agent consequence of Stacks Project, `topology.tex`, Tags 0906
-(lemma-spectral-pi0), 005F (lemma-connected-component-intersection), and 08ZZ
-(lemma-profinite-refine-open-covering)
-(blueprint: lem-sfb-spectral-clopen-component-homeomorphism).
+, 005F, and 08ZZ
+.
 
 Proof for stage 3:
 1. A continuous map sends each connected component into a connected component. The induced

@@ -27,7 +27,6 @@ the value group of `R'`, and that the residues of its integral elements are sums
 residues of `R'` and of residues of elements of `Ω`: the `p`-basis of `κ` stays `p`-independent in
 the residue field of `R'` (`Field.PowIndependent.map_of_isSeparable`), so that adjoining the
 `θ i n` to `Frac R'` is unramified (`ValuationSubring.unramified_adjoin_roots`).
-
 -/
 
 @[expose] public section

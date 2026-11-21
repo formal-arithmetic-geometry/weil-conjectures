@@ -23,7 +23,6 @@ braidings (`ProEtale.CondensedRing.NearbyCyclesModel.braiding_comp_kunnethMap`).
 
 The braiding of the derived categories is `DerivedCategory.braidedCategory'`, used as a local
 instance.
-
 -/
 
 @[expose] public section

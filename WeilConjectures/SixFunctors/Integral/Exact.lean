@@ -156,7 +156,7 @@ theorem Etale.preservesEpimorphisms_lowerStar_of_isIntegralHom :
       exact epi_comp _ _
     exact this
 
-/-- Blueprint `lemma-integral-changes-source-base`: Étale direct image is exact for
+/-- Étale direct image is exact for
 integral morphisms.
 
 The direct image `f_*` along an integral morphism `f` is exact on étale sheaves of
@@ -233,7 +233,7 @@ private lemma surjective_stalkRestrict_of_isIntegralHom {Ω : Type u} [Field Ω]
 `lemma-integral-changes-source-base--2`. For a geometric point `x` of `X` over the geometric point
 `y` of `Y`, the stalk `G_x` is a colimit of factors of the sections of `G` over the integral base
 change of the strict henselisation at `y`, which is the stalk `(f_* G)_y`; so `G_x` is a quotient of
-`(f_* G)_y`.  (blueprint: lem-sbc-integral-direct-image-detects-zero)
+`(f_* G)_y`.
 -/
 theorem Etale.isZero_of_isZero_lowerStar_obj
     {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}

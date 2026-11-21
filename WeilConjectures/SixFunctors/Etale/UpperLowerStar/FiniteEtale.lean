@@ -43,7 +43,6 @@ a section of the counit `f^* f_* G ⟶ G`, which is restriction to the graph.
   follows from the comparison `f_! G ⟶ f_* G` with the extension by zero
   `AlgebraicGeometry.Etale.etaleLowerShriek` being an isomorphism, checked on stalks; the
   general case reduces to abelian groups via `Hom(a, -)`.
-
 -/
 
 @[expose] public section
@@ -210,7 +209,7 @@ omit [IsSeparated f] in
 /-- The graphs are compatible with base change: for `φ : U' ⟶ U` the square
 ```
 U' ──graph──→ U' ×_Y X
-│φ               │φ × 𝟙
+│φ │φ × 𝟙
 U ───graph──→ U ×_Y X
 ```
 is cartesian. -/

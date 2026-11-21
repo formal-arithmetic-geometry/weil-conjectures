@@ -18,9 +18,7 @@ of `Λ` (the nonzero elements, or the powers of `ϖ`), so that the rational stag
 separated finite-type `k`-schemes this file constructs the compact-support direct image and the
 exceptional inverse image on `Dᵇc(-, 𝒪_E)` and `Dᵇc(-, E)`, with the adjunction `Rf_! ⊣ Rf^!`:
 
-* at the integral stage, `Rf_!` preserves `Dᵇc(-, 𝒪_E)` (blueprint
-  `lemma-change-coefficients-compact-support`,
-  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek`) and so does
+* at the integral stage, `Rf_!` preserves `Dᵇc(-, 𝒪_E)` and so does
   `Rf^!` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`), so that
   the adjunction `Rf_! ⊣ Rf^!` of `D(X_ét, Λ)` restricts to the constructible categories
   (`AlgebraicGeometry.Etale.boundedConstructibleIntegralLowerShriekUpperShriekAdjunction`);
@@ -83,7 +81,7 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
   {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   {X Y : Scheme.{u}}
 
-/-- Blueprint `lemma-change-coefficients-compact-support`: Integral compact support.
+/-- Integral compact support.
 
 Let `f : X ⟶ Y` be a separated finite-type morphism of separated finite-type `k`-schemes and
 `K ∈ Dᵇc(X, Λ)`, at the integral stage `Λ = 𝒪_E`, `I = (ϖ)`. Then `Rf_! K ∈ Dᵇc(Y, Λ)`, the

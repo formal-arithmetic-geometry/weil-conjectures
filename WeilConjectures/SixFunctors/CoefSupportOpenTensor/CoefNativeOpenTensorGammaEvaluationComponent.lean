@@ -15,7 +15,6 @@ import WeilConjectures.SixFunctors.CoefSupportOpenTensor.CoefNativeRestrictionTe
 /-! # Pointwise evaluation compatibility of native open tensor models
 
 Source: Stacks 0GL1, 07A4; support-open-tensor steps 5--6.
-(blueprint: lem-coef-native-open-tensor-gamma-evaluation-component).
 -/
 
 @[expose] public noncomputable section
@@ -316,7 +315,6 @@ objects. It is the pointwise generator-and-descent calculation used to assemble
 total summands, and K-flat pullback, while bilinearity and tensor descent extend the
 same equality from generators to the displayed derived pair.
 Source: Stacks 0GL1 and 07A4, support-open-tensor steps 5--6.
-(blueprint: lem-coef-native-open-tensor-gamma-evaluation-component).
 -/
 theorem nativeOpenTensorGammaEvaluation_component {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j]

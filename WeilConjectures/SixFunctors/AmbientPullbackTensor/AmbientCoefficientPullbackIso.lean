@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientCoefficientSeque
 /-! # Components of ambient pullback coherence
 
 Source: Stacks 03CB, 03D3, 03EL, 07A4 and 04VG.
-(blueprint: lem-sf-ambient-coefficient-pullback-iso).
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +31,7 @@ attribute [local irreducible] pull CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory
 
 /-- Inverse image preserves the actual coefficient ring, on the finite or sequence site.
-Source: Stacks 0H7J, 03CB and 0941
-(blueprint: lem-sf-ambient-coefficient-pullback-iso).
+Source: Stacks 0H7J, 03CB and 0941.
 Proof: at a finite level identify each coefficient sheaf with the sheafification
 of the constant ring presheaf. The two composites of inverse image and the
 constant-sheaf functor are left adjoint to evaluation of direct image at the

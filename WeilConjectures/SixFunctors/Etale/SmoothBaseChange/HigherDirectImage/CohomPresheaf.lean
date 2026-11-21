@@ -772,8 +772,7 @@ noncomputable abbrev Etale.homologyShiftComparison {X Y : Scheme.{u}} (h : Y ⟶
       ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app _
 
 /-- The canonical map from `W ↦ Hᵠ(W ×_X Y, K|)` to `Hᵠ(Rh_* K)` is locally injective and
-locally surjective, for every morphism `h`. 
-(blueprint: sbc-lem-module-higher-image-raw-comparison-locally-bijective)
+locally surjective, for every morphism `h`.
 -/
 theorem Etale.isLocallyBijective_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}}
     (h : Y ⟶ X) (q : ℤ)
@@ -798,7 +797,7 @@ theorem Etale.isLocallyBijective_higherDirectImagePresheafToSheaf {X Y : Scheme.
   rw [hφ]
   constructor <;> infer_instance
 
-/-- Blueprint `theorem-proper-base-change-classical-pro`: Higher direct images for quasi-compact
+/-- Higher direct images for quasi-compact
 quasi-separated morphisms, for complexes.
 
 Let `h : Y ⟶ X` be quasi-compact and quasi-separated and `K ∈ D⁺(Y_ét, Λ)`. Then the `q`-th
@@ -836,7 +835,7 @@ theorem Etale.isIso_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}}
     exact Presheaf.isLocallySurjective_of_isLocallySurjective X.smallEtaleTopology
       (toSheafify _ _) ψ.hom
 
-/-- Blueprint `theorem-proper-base-change-classical-pro`: Higher direct images for quasi-compact
+/-- Higher direct images for quasi-compact
 quasi-separated morphisms.
 
 Let `h : Y ⟶ X` be quasi-compact and quasi-separated and `F` an étale sheaf of `Λ`-modules on
@@ -883,9 +882,9 @@ lemma Etale.higherDirectImagePresheafToHom_app_apply {X Y : Scheme.{u}} (h : Y �
 /-- Naturality of the shift identification `H⁰((Rh_* K)[q]) ≅ Hᵠ(Rh_* K)` in `K`: for
 `φ : K ⟶ K'` the square
 ```
-H⁰((Rh_* K)[q])  ⟶ Hᵠ(Rh_* K)
-      │                 │
-      ▼                 ▼
+H⁰((Rh_* K)[q]) ⟶ Hᵠ(Rh_* K)
+      │ │
+      ▼ ▼
 H⁰((Rh_* K')[q]) ⟶ Hᵠ(Rh_* K')
 ```
 commutes. -/
@@ -911,9 +910,9 @@ lemma Etale.homologyShiftComparison_naturality {X Y : Scheme.{u}} (h : Y ⟶ X) 
 /-- Naturality of the canonical map from `W ↦ Hᵠ(W ×_X Y, K|)` to `Hᵠ(Rh_* K)` in `K`: for
 `φ : K ⟶ K'` the square
 ```
-Hᵠ(- ×_X Y, K|)  ⟶ Hᵠ(Rh_* K)
-      │                 │
-      ▼                 ▼
+Hᵠ(- ×_X Y, K|) ⟶ Hᵠ(Rh_* K)
+      │ │
+      ▼ ▼
 Hᵠ(- ×_X Y, K'|) ⟶ Hᵠ(Rh_* K')
 ```
 of presheaves on `X_ét` commutes, the right map being the map on sections of `Hᵠ(Rh_* φ)`. -/
@@ -983,8 +982,7 @@ filtered colimit of its finitely generated subgroups, which are finite direct su
 groups `ℤ/e` with `e ∣ d` (and of copies of `ℤ` when `d = 0`); as `h` is quasi-compact and
 quasi-separated, `R^q h_*` commutes with filtered colimits, so the underlying abelian sheaf of
 `R^q h_* (Λ/dΛ)` vanishes, and the higher direct images of a sheaf of `Λ`-modules are computed
-on its underlying abelian sheaf. 
-(blueprint: lem-sbc-constant-module-higher-direct-image-local-vanishing)
+on its underlying abelian sheaf.
 -/
 @[stacks 03Q8]
 theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists {X Y : Scheme.{u}}

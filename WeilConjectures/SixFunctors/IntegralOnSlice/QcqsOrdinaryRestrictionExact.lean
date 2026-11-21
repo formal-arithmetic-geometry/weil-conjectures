@@ -193,7 +193,6 @@ private theorem moduleForget_limits {X : Scheme.{t}}
 specified completed coefficient map is invertible.
 
 Source: Stacks Tags 09AA(1), 09BL, 09AE and 03CO; Bhatt--Scholze Lemma 6.5.8(1).
-(blueprint: lem-fix-qcqs-ordinary-restriction-exact).
 Proof: for an immersion inverse image on set sheaves preserves all limits. For a
 weakly etale map it is slice restriction and also preserves all limits. Compose
 the two inverse images, using uniqueness of adjoints to identify the composite

@@ -32,8 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Proper scalar comparison in the published finite constant-ring coordinates.
-Source: Stacks 07A7; normalized proper mate in fix-prop-coherence
-(blueprint: lem-sf-integral-proper-finite-projection). -/
+Source: Stacks 07A7; normalized proper mate in fix-prop-coherence. -/
 @[irreducible] def properFiniteReduction {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ringedPush l E f ⋙ scalarReductionDerivedExtension l E Y n ⟶
       scalarReductionDerivedExtension l E X n ⋙
@@ -162,8 +161,7 @@ private theorem finitePullback_normalization (o : Operations l E)
 /-- Finite projection of the proper realization, before any open extension.
 There is no completeness or constructibility assumption on the system M.
 Source: Stacks 07A7 and 0941; fix-prop-coherence.proof.md, preservation of
-adjunction units and counits; Step 1 of integral support projection transport
-(blueprint: lem-sf-integral-proper-finite-projection).
+adjunction units and counits; Step 1 of integral support projection transport.
 
 Proof: first identify inverse pullback/reduction in finite coordinates on a
 flat-term K-flat representative, by integralFinitePullback_onGood. Naturality

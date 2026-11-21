@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.Compact.CompactSupportQuotientCocycleD
 /-! # Universal comparison square left for quotient chain maps
 
 Source: blueprint coefficient quotient proof, Steps 2 and 3; Stacks Tags 03EK and 06YY.
-(blueprint: lem-coef-compact-support-quotient-computation-square-left).
 -/
 
 @[expose] public noncomputable section
@@ -28,7 +27,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /- **Reduced comparison square (left).**
 Source: blueprint coefficient quotient proof, Steps 2--3; Stacks Tags 06YS, 06YY and 07A6.
-(blueprint: lem-coef-compact-support-quotient-computation-square-left).
 
 The universal counit and normalized adjunction comparison identifies the specified
 chain map with the corresponding derived arrow. The proof is split from the parent

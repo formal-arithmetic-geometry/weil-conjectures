@@ -25,7 +25,6 @@ models whose `j`s are quasi-compact and quasi-separated and bounded below `𝒪_
 (`NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_padicAlgCl`). In particular `Π_{A,B}` is
 invertible if `Π_{A₀,B₀}` is, and conversely `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Π_{A₀,B₀}` is invertible if
 `Π_{A,B}` is (`NearbyCyclesModel.isIso_map_map_kunnethMap_iff_padicAlgCl`).
-
 -/
 
 @[expose] public section

@@ -10,8 +10,7 @@ import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperation
 
 /-! # The canonical tensor-completion chain map
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion-chain).
+Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5.
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +35,7 @@ attribute [local irreducible] IntegralOnSlice.duality IntegralOnSlice.roosUnit
   IntegralAmbient.tensorTowerIso IntegralAmbient.tensorOperationUnit
 
 /-- Compose a natural augmentation with a natural comparison of its target towers.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion-chain). -/
+Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
 def completionChainOfTower
     {C B S : Type*} [Category* C] [Category* B] [Category* S]
     (F : B ⥤ C) (U : C ⥤ S) (V : B ⥤ S) (R : S ⥤ C)
@@ -53,8 +51,7 @@ def completionChainOfTower
       R.map_comp, ← Category.assoc]
 
 /-- Naturality of the existing Roos unit, in the native cochain category.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: lem-fix-constructible-tensor-completion-chain). -/
+Source: Bhatt--Scholze, Definition 3.4.10. -/
 theorem tensorRoosUnit_natural
     {P Q : CochainComplex (integralTowerModules l E W) ℤ} (f : P ⟶ Q) :
     f ≫ IntegralOnSlice.roosUnit l E W none Q =
@@ -64,8 +61,7 @@ theorem tensorRoosUnit_natural
     exact WeilConjectures.IntegralOnSlice.sliceRoosUnit_natural l E W none f
 
 /-- The actual Roos augmentation followed by the normalized tensor-tower comparison.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion-chain). -/
+Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
 @[irreducible] def tensorCompletionChain : totalTensor l E W ⟶
     integralOperationsTensorComplexFunctor l E W := by
   let F := totalTensor l E W
@@ -81,8 +77,7 @@ Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
     (IntegralAmbient.tensorTowerIso l E W)
 
 /-- The component is the actual normalized tensor operation unit.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion-chain). -/
+Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
 theorem tensorCompletionChain_app
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     (tensorCompletionChain l E W).app (P, Q) = tensorCompletionUnitMap l E W P Q := by

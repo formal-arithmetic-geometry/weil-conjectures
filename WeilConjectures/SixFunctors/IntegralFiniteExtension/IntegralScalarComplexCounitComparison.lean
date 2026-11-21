@@ -36,8 +36,7 @@ same sheaf map and the standard derived localizations. The two quotient comparis
 isomorphisms and the ordinary functor's homotopy comparison have identity components.
 Their images are identities, so the composite defining pbcComplexCounit reduces to
 the component defining completedScalarCounit. This applies to every complex, without
-flatness or boundedness assumptions, also for the empty scheme and zero complex.
-(blueprint: new-sf-integral-scalar-complex-counit-comparison). -/
+flatness or boundedness assumptions, also for the empty scheme and zero complex. -/
 theorem pbcComplexCounit_eq_completedScalarCounit
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -58,8 +57,7 @@ Source: the cochain counit identification above and paragraph 5 of the finite
 coefficient extension proof, Stacks Tags 06YY and 07A4.
 Proof: replace the canonical counit by the counit of the same completed scalar
 witness, using pbcComplexCounit_eq_completedScalarCounit. The resulting equality
-is exactly the prescribed square he, for this complex. No flatness is needed.
-(blueprint: new-sf-integral-scalar-complex-counit-comparison). -/
+is exactly the prescribed square he, for this complex. No flatness is needed. -/
 theorem completedScalarCounit_comparison
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

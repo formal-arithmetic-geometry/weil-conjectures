@@ -11,8 +11,7 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdi
 
 /-! # LocallyFiniteAdicFunctorDescent
 
-Source: Bhatt--Scholze, Section 6.8; native realization proof
-(blueprint: lem-sf-locally-finite-adic-functor-descent).
+Source: Bhatt--Scholze, Section 6.8; native realization proof.
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +39,7 @@ attribute [local irreducible] sections CoefficientPresentation.integralMap
 This statement constructs no functor, coefficient map, scalar comparison, or small model.
 
 Source: Bhatt--Scholze, Proposition 6.8.14(1),(2), using the existing condensed
-filtered two-colimit; steps 3, 6 and 7 of the native realization proof
-(blueprint: lem-sf-locally-finite-adic-functor-descent).
+filtered two-colimit; steps 3, 6 and 7 of the native realization proof.
 
 Proof in words: identify the native coefficient with the finite-field-valued condensed
 coefficient by sheafification. Internal-module and section-module equivalences preserve

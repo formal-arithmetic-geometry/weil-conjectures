@@ -55,9 +55,9 @@ def KunnethBaseChangeProperty (f : X ⟶ S) (n : ℕ) (q₀ : ℤ) : Prop :=
 
 ```
 Y --h--> X' --b--> X
-|        |         |
-e        f'        f
-v        v         v
+| | |
+e f' f
+v v v
 T --g--> S' --a--> S
 ```
 
@@ -75,7 +75,7 @@ lemma kunnethBaseChangeProperty_iff (f : X ⟶ S) (n : ℕ) (q₀ : ℤ) :
 
 open _root_.DerivedCategory in
 /-- The base change property `BC(f, n, q₀)` in terms of the unbounded exchange morphism
-`AlgebraicGeometry.Etale.unboundedExchange` (`definition-derived-base-change-map`): it holds if and
+`AlgebraicGeometry.Etale.unboundedExchange`: it holds if and
 only if, for every diagram as in `AlgebraicGeometry.Etale.kunnethBaseChangeProperty_iff` and every
 sheaf `F` of `ℤ/n`-modules on `T_ét`, the exchange morphism `f'^* Rg_* F ⟶ Rh_* e^* F` induces
 isomorphisms on the cohomology sheaves in degrees `q ≤ q₀`. -/

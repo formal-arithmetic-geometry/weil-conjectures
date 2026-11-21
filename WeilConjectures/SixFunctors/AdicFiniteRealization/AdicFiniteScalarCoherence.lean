@@ -14,7 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.Rational.RationalRealizationScalarC
 /-! # Scalar coherence of finite adic realizations
 
 Source: BS Proposition 6.8.14(2); quotient comparison and balanced tensor normalization.
-(blueprint: lem-sf-adic-finite-scalar-coherence).
 -/
 
 @[expose] public noncomputable section
@@ -673,8 +672,7 @@ private theorem comp_heq_right_id {A : Type*} [Category A]
   exact heq_of_eq (Category.comp_id f)
 
 /-- The finite realization comparisons intertwine the specified raw associators and units.
-Source: BS Proposition 6.8.14(2); finite realization node, steps 5--6
-(blueprint: lem-sf-adic-finite-scalar-coherence).
+Source: BS Proposition 6.8.14(2); finite realization node, steps 5--6.
 
 Proof:
 1. For each inclusion take rationalRealizationScalarCoherence for the two supplied

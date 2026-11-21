@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerived
 import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroRepresentative
 
 /-! The H-zero scalar normalization extracted from the coefficient-sections package.
-(blueprint: lem-coef-derived-sections-scalar-hom-zero)
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 Source: Stacks 03CZ, 079P and 08JA.
 Choose K-flat and K-injective representatives, identify the enriched map with the
 ordinary tensor-Hom transpose, and transport degree-zero cocycles through the fixed
-representative evaluation equivalences.
-(blueprint: lem-coef-derived-sections-normalization-scalar-hom-zero) -/
+representative evaluation equivalences. -/
 theorem coefficientDerivedSectionsScalarHomZero
     (R : CoefficientDerivedSystemReduction l E W)
     (hF : CoefficientFiniteTensorNormalization l E W R)

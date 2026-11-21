@@ -23,7 +23,6 @@ with retraction `s`, and `act i : Y ⟶ Y` (`i ∈ t`, a finite nonempty family)
 of a finite group this exhibits `α` as the inclusion of the invariants, with the averaging
 idempotent. It is the formal part of the identification of nearby cycles with invariants used in
 the generic-slicing step (SGA 4½, [Th. finitude], Lemme 3.3).
-
 -/
 
 @[expose] public section

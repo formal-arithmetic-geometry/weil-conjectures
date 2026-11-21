@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.ProEtaleCoefficients.EquivalenceAdjunction
 /-! # Unit-normalized finite scalar transport on the open slice
 
 Source: Stacks Project, Modules on Sites, Tags 03DI, 03EK and 0E8I.
-(blueprint: lem-sf-open-finite-scalar-unit-transport).
 -/
 
 @[expose] public noncomputable section
@@ -196,8 +195,7 @@ private theorem transport_unit (o : Operations l E j) (n : ℕ)
 
 /-- Scalar extension on U and scalar extension on the transported slice have a
 comparison which preserves the actual normalized units on original sections.
-Source: Stacks 03CZ, 03DI; categorical unit transport across equivalences
-(blueprint: lem-sf-open-finite-scalar-unit-transport).
+Source: Stacks 03CZ, 03DI; categorical unit transport across equivalences.
 
 Proof: the projection equality gives the scalar-restriction square. Its maps are
 identities on the underlying sections; linearity is exactly that projection equality.

@@ -25,16 +25,15 @@ up to universal homeomorphisms, the Galois layer of `L₁^sep / L₁` over the m
 constructs the change of trait `τ : N₂ ⟶ N₁` of these models over `Spec l : Spec L₂ ⟶ Spec L₁`
 (`NearbyCyclesModel.sliceGaloisChangeHom`) and checks the two commutative squares
 ```
-M'  ──φ'──→  N'                N₂ ──τ──→ N₁
- │ρ_M         │ρ_N              │ψ_M       │ψ_N
-N₂_{L₂^sep} ─τ'→ N₁_{L₁^sep}    M  ──φ──→  N
+M' ──φ'──→ N' N₂ ──τ──→ N₁
+ │ρ_M │ρ_N │ψ_M │ψ_N
+N₂_{L₂^sep} ─τ'→ N₁_{L₁^sep} M ──φ──→ N
 ```
 of morphisms of models, with `τ'` the change of Galois layers (`NearbyCyclesModel.galoisLayerMap`),
 `ρ` the universal homeomorphisms onto the Galois layers and `ψ` the composites of the nilpotent
 thickenings and the weakly étale cartesian parts. These are the squares through which Deligne's
 induction (SGA 4½, [Th. finitude], proof of 3.7) reduces the change of trait on the generic slice
 to the change of trait of the slices.
-
 -/
 
 @[expose] public section

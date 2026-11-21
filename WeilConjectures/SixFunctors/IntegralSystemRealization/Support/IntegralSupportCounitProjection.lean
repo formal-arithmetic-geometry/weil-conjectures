@@ -12,8 +12,6 @@ import all WeilConjectures.SixFunctors.GeneratorReduction.ShortWordIntegralDomai
 import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportRealization
 
 /-! # Counit-normalized projection of the primitive compact-support comparison
-
-Source: blueprint fix-prop-coherence, strict-system expression realization.
 -/
 
 @[expose] public noncomputable section
@@ -186,7 +184,6 @@ or canonical-pair derivations in this assertion.
 
 Source: blueprint fix-prop-coherence, compactification step of
 lem-sf-integral-expression-coefficient-squares; Stacks 0941 and 0D6E.
-(blueprint: lem-sf-integral-support-counit-projection).
 
 Proof: transport Good through rho, retaining each origin evaluation and its actual
 transition square. The general reconstruction lemma applied to b makes H integral

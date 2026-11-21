@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.Right.RightDerivedExactRestrictionNormaliz
 /-! # The inverse derived restriction cube
 
 Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-native-scalar-inverse-derived-restriction-cube).
 -/
 
 @[expose] public noncomputable section
@@ -45,7 +44,6 @@ attribute [local irreducible] CondensedRing.lowerStar proEtaleRingModuleDirectIm
 -- Normalizing concrete site functors elaborates both ringed-site presentations.
 /-- Exact localization carries the ordinary scalar cube to the specified inverse derived cube.
 Source: Stacks, Cohomology on Sites, Tag 0D6E; step 4 of the native scalar cube.
-(blueprint: lem-sf-native-scalar-inverse-derived-restriction-cube).
 
 Proof: normalize the two condensed faces by their right-derived cochain units.
 Normalize the inverse presentation faces by the exact-equivalence composition formula,

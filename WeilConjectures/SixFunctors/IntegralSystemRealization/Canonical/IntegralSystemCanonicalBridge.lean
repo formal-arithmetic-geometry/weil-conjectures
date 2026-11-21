@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearP
 
 /-! # Canonical constant-ring presentation of the strict coefficient system
 
-Source: Stacks 0941 and 0F7B; blueprint fix-prop-coherence, strict-system realization
-(blueprint: def-sf-integral-system-canonical-bridge).
+Source: Stacks 0941 and 0F7B; blueprint fix-prop-coherence, strict-system realization.
 -/
 
 @[expose] public noncomputable section
@@ -28,19 +27,18 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Positive coefficient rings in the published constant-ring universe.
-Source: Stacks 0941 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 0941. -/
 abbrev scalarRings (n : ℕ) : CommRingCat.{u+1} :=
   CommRingCat.of (ULift.{u+1} (Padic.coefficientExtensionRing l E (n+1)))
 
 /-- The actual adjacent quotient, with only a universe lift.
-Source: Stacks 0941 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 0941. -/
 abbrev scalarTransitions (n : ℕ) : scalarRings l E (n+1) ⟶ scalarRings l E n :=
   CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n+1)).ulift
 
 /-- Ordinary direct-image presentation, fixed by identity on every component section.
 This is the identity of underlying systems, rather than unrelated finite-level lifts.
-Source: Stacks 03D7, 0941
-(blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03D7, 0941. -/
 structure CanonicalBridge (o : Operations l E) where
   ordinary : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
     pullbackTensorSequenceDirect l E f ≅
@@ -51,7 +49,7 @@ structure CanonicalBridge (o : Operations l E) where
     ((ordinary f).hom.app M).val.app (op (n, V)) x = x
 
 /-- Inverse-image presentation is uniquely fixed by the ordinary direct-image identity.
-Source: Stacks 03D7 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03D7. -/
 def CanonicalBridge.pull {o : Operations l E} (b : CanonicalBridge l E o)
     {X Y : Scheme.{u}} (f : X ⟶ Y) : pull l E f ≅
       ProEtale.SemilinearProperOpen.P (scalarRings l E) (scalarTransitions l E) f :=
@@ -67,7 +65,7 @@ def CanonicalBridge.pull {o : Operations l E} (b : CanonicalBridge l E o)
         (scalarRings l E) (scalarTransitions l E) f))
 
 /-- Derived direct-image presentation is the adjoint conjugate of inverse image.
-Source: Stacks 07A7 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 07A7. -/
 def CanonicalBridge.push {o : Operations l E} (b : CanonicalBridge l E o)
     {X Y : Scheme.{u}} (f : X ⟶ Y) : Operations.push l E o f ≅
       ProEtale.SemilinearProperOpen.R (scalarRings l E) (scalarTransitions l E) f :=
@@ -76,7 +74,7 @@ def CanonicalBridge.push {o : Operations l E} (b : CanonicalBridge l E o)
     (b.pull l E f).symm
 
 /-- Open presentation is uniquely fixed by the actual open adjunction unit.
-Source: Stacks 03DI (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03DI. -/
 def CanonicalBridge.shriek {o : Operations l E} (b : CanonicalBridge l E o)
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : Operations.shriek l E o j ≅
       ProEtale.SemilinearProperOpen.J (scalarRings l E) (scalarTransitions l E) j :=
@@ -84,13 +82,13 @@ def CanonicalBridge.shriek {o : Operations l E} (b : CanonicalBridge l E o)
     (ProEtale.SemilinearProperOpen.jAdj (scalarRings l E) (scalarTransitions l E) j)
 
 /-- The ordinary completed-ring inverse image used in its canonical module adjunction.
-Source: Stacks 03D7 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03D7. -/
 abbrev integralOrdinaryPull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   proEtaleRingModulePullback f ((PurCompactSupport.completed l E).ring Y)
     ((PurCompactSupport.completed l E).ring X) ((PurCompactSupport.completed l E).pull f)
 
 /-- The canonical module inverse image is additive.
-Source: Stacks 03D7 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03D7. -/
 instance integralOrdinaryPullAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (integralOrdinaryPull l E f).Additive :=
   proEtaleRingModulePullback_additive f ((PurCompactSupport.completed l E).ring Y)
@@ -98,14 +96,14 @@ instance integralOrdinaryPullAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 /-- Scalar restriction leaves every underlying section unchanged. This identity
 function supplies the canonical coordinate transport, rather than a free equivalence.
-Source: Stacks 03DA (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03DA. -/
 def restrictionSection {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     {R S : Sheaf J RingCat.{r}} (φ : R ⟶ S) (M : SheafOfModules.{s} S) (V : Cᵒᵖ) :
     ((SheafOfModules.restrictScalars φ).obj M).val.obj V → M.val.obj V := fun x ↦ x
 
 /-- The actual ordinary limit projection in the finite evaluation coordinates.
 Its transport is the published equality of restriction followed by evaluation.
-Source: Stacks 0941 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 0941. -/
 def ordinaryLimitProjection (W : Scheme.{u}) (M : coefficientSequenceModules l E W)
     (n : ℕ) (V : W.ProEt) :
     ((pullbackTensorOrdinaryLimit l E W).obj M).val.obj (op V) →
@@ -119,7 +117,7 @@ def ordinaryLimitProjection (W : Scheme.{u}) (M : coefficientSequenceModules l E
 
 /-- Underlying sections of the actual completed-ring direct image. The coefficient
 map changes the action only, so this canonical coordinate map is the identity.
-Source: Stacks 03D1 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03D1. -/
 def integralPushSection {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : proEtaleRingModules X ((PurCompactSupport.completed l E).ring X)) (V : Y.ProEt) :
     ((proEtaleRingModuleDirectImage f ((PurCompactSupport.completed l E).ring Y)
@@ -129,7 +127,7 @@ def integralPushSection {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- Underlying sections of the finite constant-coefficient direct image, again the
 identity coordinate map for the published pushforward.
-Source: Stacks 03D1 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03D1. -/
 def finitePushSection {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (M : normalizedDVRModules l E X n) (V : Y.ProEt) :
     ((coefficientProEtaleModuleDirectImage.{u, u} f
@@ -138,8 +136,7 @@ def finitePushSection {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
 
 /-- Direct image commutes with ordinary limits by the identity on every projected
 section. This ordinary characterization is jointly faithful; it is not a claim about
-faithfulness of derived evaluations. Source: Stacks 03D7, 0941
-(blueprint: def-sf-integral-system-canonical-bridge). -/
+faithfulness of derived evaluations. Source: Stacks 03D7, 0941. -/
 structure OrdinaryLimitModel where
   comparison : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
     pullbackTensorSequenceDirect l E f ⋙ pullbackTensorOrdinaryLimit l E Y ≅
@@ -160,7 +157,7 @@ structure OrdinaryLimitModel where
         (ordinaryLimitProjection l E Y ((pullbackTensorSequenceDirect l E f).obj M) n V x))
 
 /-- Ordinary quotient/pullback interchange, conjugate to the actual limit comparison.
-Source: Stacks 07A7 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 07A7. -/
 def OrdinaryLimitModel.reductionPull (a : OrdinaryLimitModel l E)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     integralOrdinaryPull l E f ⋙ pullbackTensorOrdinaryReduction l E X ≅
@@ -174,7 +171,7 @@ def OrdinaryLimitModel.reductionPull (a : OrdinaryLimitModel l E)
 
 /-- The same canonical ordinary comparison on whole complexes. Writing its degree
 components retains the two actual functor factorizations, without changing categories.
-Source: Stacks 07A6 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 07A6. -/
 def OrdinaryLimitModel.reductionPullComplex (a : OrdinaryLimitModel l E)
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (scalarReductionSource l E Y) ℤ) :
@@ -187,8 +184,7 @@ def OrdinaryLimitModel.reductionPullComplex (a : OrdinaryLimitModel l E)
 
 /-- Canonical derived quotient/pullback interchange is fixed on whole K-flat systems
 by the ordinary adjoint-conjugate comparison. The normalization is in the system
-category, before finite evaluation. Source: Stacks 07A4, 07A6 and 0941
-(blueprint: def-sf-integral-system-canonical-bridge). -/
+category, before finite evaluation. Source: Stacks 07A4, 07A6 and 0941. -/
 structure RealizationModel (o : Operations l E) where
   ordinary : OrdinaryLimitModel l E
   reductionPull : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
@@ -212,8 +208,7 @@ structure RealizationModel (o : Operations l E) where
 
 /-- The proper direct-image realization is exactly the right-adjoint conjugate of
 canonical reduction/pullback. It therefore specifies the actual integral direct-image
-functor, including the derived adjunction. Source: Stacks 07A7 and 0941
-(blueprint: def-sf-integral-system-canonical-bridge). -/
+functor, including the derived adjunction. Source: Stacks 07A7 and 0941. -/
 def RealizationModel.push {o : Operations l E} (a : RealizationModel l E o)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Operations.push l E o f ⋙ coefficientSequenceLimit l E Y ≅
@@ -225,7 +220,7 @@ def RealizationModel.push {o : Operations l E} (a : RealizationModel l E o)
     (a.reductionPull f)
 
 /-- Open reduction is the inverse open-adjunction mate of the fixed pullback square.
-Source: Stacks 03DI, 07A7 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03DI, 07A7. -/
 def RealizationModel.openReduction {o : Operations l E} (a : RealizationModel l E o)
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (calculus l E U).reduction ⋙ Operations.shriek l E o j ⟶
@@ -235,8 +230,7 @@ def RealizationModel.openReduction {o : Operations l E} (a : RealizationModel l 
     (o.extension j).adj).symm (a.reductionPull j).hom
 
 /-- Canonical ordinary-to-completed models, retaining their published pure tensor
-and quotient-augmentation normalizations. Source: Stacks 099N, 07A4
-(blueprint: def-sf-integral-system-canonical-bridge). -/
+and quotient-augmentation normalizations. Source: Stacks 099N, 07A4. -/
 structure RingedModels where
   tensor : ∀ W : Scheme.{u}, OpenFactorCoherence.Tensor l E W
   pull : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), OpenFactorCoherence.Pull l E f
@@ -256,48 +250,48 @@ structure RingedModels where
         ((tensor W).good Q hQ).1).hom
 
 /-- The actual localized completed-ring pullback, before completion.
-Source: Stacks 03D7 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03D7. -/
 abbrev ringedPull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   PurCompactSupport.pull (PurCompactSupport.completed l E) f
 
 /-- The actual localized completed-ring proper image.
-Source: Stacks 07A5 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 07A5. -/
 abbrev ringedPush {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   PurCompactSupport.push (PurCompactSupport.completed l E) f
 
 /-- The actual localized completed-ring open extension.
-Source: Stacks 03DI (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03DI. -/
 abbrev ringedOpen {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] :=
   (PurCompactSupport.openExtension (PurCompactSupport.completed l E) f).mapDerivedCategory
 
 /-- The actual localized completed-ring geometric adjunction.
-Source: Stacks 07A6 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 07A6. -/
 def ringedAdj {X Y : Scheme.{u}} (f : X ⟶ Y) : ringedPull l E f ⊣ ringedPush l E f :=
   proEtaleRingDerivedAdjunction f ((PurCompactSupport.completed l E).ring Y)
     ((PurCompactSupport.completed l E).ring X) ((PurCompactSupport.completed l E).pull f)
 
 /-- The actual localized completed-ring open adjunction.
-Source: Stacks 03DI (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03DI. -/
 def ringedOpenAdj {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] :
     ringedOpen l E f ⊣ ringedPull l E f :=
   PurCompactSupport.openDerivedAdjunction (PurCompactSupport.completed l E) f
 
 /-- The published representative-normalized geometric pullback compositor.
-Source: Stacks 0D6D (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 0D6D. -/
 def ringedPullComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ringedPull l E (f ≫ g) ≅ ringedPull l E g ⋙ ringedPull l E f :=
   PurCompactSupport.geometricPullComposition (PurCompactSupport.completed l E) f g
     (PurCompactSupport.completedPull_comp l E f g)
 
 /-- Direct-image composition is the conjugate of that very compositor.
-Source: Stacks 0D6D (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 0D6D. -/
 def ringedPushComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ringedPush l E f ⋙ ringedPush l E g ≅ ringedPush l E (f ≫ g) :=
   conjugateIsoEquiv ((ringedAdj l E g).comp (ringedAdj l E f))
     (ringedAdj l E (f ≫ g)) (ringedPullComp l E f g)
 
 /-- Open composition is fixed by the localized open adjunction.
-Source: Stacks 03DI (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03DI. -/
 def ringedOpenComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [IsOpenImmersion f] [IsOpenImmersion g] :
     ringedOpen l E f ⋙ ringedOpen l E g ≅ ringedOpen l E (f ≫ g) :=
@@ -305,7 +299,7 @@ def ringedOpenComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (ringedOpenAdj l E (f ≫ g)) (ringedPullComp l E f g).symm
 
 /-- The canonical localized ringed-site square.
-Source: Stacks 07A7 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 07A7. -/
 def ringedSquare {U V W Z : Scheme.{u}}
     (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
     (h : k ≫ p = r ≫ i) :
@@ -314,14 +308,14 @@ def ringedSquare {U V W Z : Scheme.{u}}
     eqToIso (congrArg (ringedPull l E) h.symm) ≪≫ ringedPullComp l E k p
 
 /-- The recorded K-flat normalized tensor/pullback comparison on completed ring sheaves.
-Source: Stacks 07A4 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 07A4. -/
 def ringedTensorPull (d : RingedModels l E) {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   proEtaleCanonicalTensorComparison f ((PurCompactSupport.completed l E).ring Y)
     ((PurCompactSupport.completed l E).ring X) ((PurCompactSupport.completed l E).pull f)
     (d.tensor Y).ordinary (d.tensor X).ordinary
 
 /-- The localized ringed-site interpretation underlying the completed expressions.
-Source: Stacks 07A4, 099N (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 07A4, 099N. -/
 def ringedInterpretation (d : RingedModels l E) : Interpretation (Integral l E) where
   pull := ringedPull l E
   push := ringedPush l E
@@ -330,7 +324,7 @@ def ringedInterpretation (d : RingedModels l E) : Interpretation (Integral l E) 
   compactSupport _f c := PurCompactSupport.image (PurCompactSupport.completed l E) c
 
 /-- Ordinary tensor reassociation transported from the recorded closed tensor model.
-Source: Stacks 07A4 (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 07A4. -/
 def ringedAssociator (d : RingedModels l E) (W : Scheme.{u}) (A B C : Integral l E W) :
     (d.tensor W).ordinary.tensor.obj ((d.tensor W).ordinary.tensor.obj (A, B), C) ≅
       (d.tensor W).ordinary.tensor.obj (A, (d.tensor W).ordinary.tensor.obj (B, C)) :=
@@ -342,8 +336,7 @@ def ringedAssociator (d : RingedModels l E) (W : Scheme.{u}) (A B C : Integral l
 
 /-- The actual completion-unit comparison of expressions, defined recursively before
 any invertibility assertion. In particular no realization c_V defines this map.
-Source: Stacks 099N; blueprint fix-prop-coherence, localized integral maps
-(blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 099N; blueprint fix-prop-coherence, localized integral maps. -/
 def Expression.completionMap (d : RingedModels l E) {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} {W : Over B} (e : Expression B I X W)
     (K : ∀ i, Integral l E (X i).left) :
@@ -365,13 +358,13 @@ def Expression.completionMap (d : RingedModels l E) {B : Scheme.{u}} {I : Type u
       ((e.evaluate (integralInterpretation l E)).obj K,
         (t.evaluate (integralInterpretation l E)).obj K)
 /-- The left side of the open projection comparison.
-Source: Stacks 0E8I (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 0E8I. -/
 def ringedTensorLeft (d : RingedModels l E) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : Integral l E U × Integral l E X ⥤ Integral l E X :=
   (ringedOpen l E j).prod (𝟭 _) ⋙ (d.tensor X).ordinary.tensor
 
 /-- The right side of the open projection comparison, with restriction in its second slot.
-Source: Stacks 0E8I (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 0E8I. -/
 def ringedTensorRight (d : RingedModels l E) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : Integral l E U × Integral l E X ⥤ Integral l E X :=
   (𝟭 _).prod (ringedPull l E j) ⋙ (d.tensor U).ordinary.tensor ⋙
@@ -381,8 +374,7 @@ def ringedTensorRight (d : RingedModels l E) {U X : Scheme.{u}} (j : U ⟶ X)
 comparison is indexed by a cartesian square. Its inverse, and the inverse projection
 comparison, are fixed by the displayed adjunction transposes. The clopen comparison
 uses the inverse of the open unit under the direct-image adjunction.
-Source: Stacks 03DI, 09AE, 0E8I; blueprint fix-prop-coherence
-(blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03DI, 09AE, 0E8I; blueprint fix-prop-coherence. -/
 structure RingedOpenComparisons (d : RingedModels l E) where
   unitIso : ∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (M : Integral l E U), IsIso ((ringedOpenAdj l E j).unit.app M)
@@ -415,7 +407,7 @@ structure RingedOpenComparisons (d : RingedModels l E) where
         (@inv _ _ _ _ ((ringedOpenAdj l E j).unit.app M) (unitIso j M))
 
 /-- Canonical open-unit isomorphism, assembled from its actual components.
-Source: Stacks 03DI (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03DI. -/
 def RingedOpenComparisons.unit (d : RingedModels l E)
     (a : RingedOpenComparisons l E d) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : 𝟭 (Integral l E U) ≅
@@ -424,7 +416,7 @@ def RingedOpenComparisons.unit (d : RingedModels l E)
     (a.unitIso j M)) (fun f ↦ (ringedOpenAdj l E j).unit.naturality f)
 
 /-- Open-extension equality transport is fixed by the inverse-image adjunction.
-Source: Stacks 03DI (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 03DI. -/
 def ringedOpenCongr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :
     ringedOpen l E f ≅ ringedOpen l E g :=
@@ -432,7 +424,7 @@ def ringedOpenCongr {U X : Scheme.{u}} {f g : U ⟶ X}
     ((ringedOpenAdj l E g).ofNatIsoRight (eqToIso (congrArg (ringedPull l E) h.symm)))
 
 /-- Open restriction of direct image is conjugate to the normalized open base change.
-Source: Stacks 0F7B (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 0F7B. -/
 def ringedCartesianConjugate (d : RingedModels l E)
     (a : RingedOpenComparisons l E d) {V W Z : Scheme.{u}} (p : V ⟶ Z) (i : W ⟶ Z)
     [IsOpenImmersion i] :
@@ -445,7 +437,7 @@ def ringedCartesianConjugate (d : RingedModels l E)
 
 /-- Restriction of k-extension to the pulled-back open is s-extension. The inverse
 open unit fixes this identification, including the empty open.
-Source: Stacks 0F7B (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 0F7B. -/
 def ringedRestrictFactor (d : RingedModels l E)
     (a : RingedOpenComparisons l E d) {U V W Z : Scheme.{u}}
     (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
@@ -464,7 +456,7 @@ def ringedRestrictFactor (d : RingedModels l E)
 
 /-- The prescribed lambda: restrict p, factor k through its clopen lift s, identify
 J_s with S_s using the open unit, and compose the direct images.
-Source: Stacks 0F7B (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 0F7B. -/
 def ringedProperOpenLambda (d : RingedModels l E)
     (a : RingedOpenComparisons l E d) {U V W Z : Scheme.{u}}
     (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
@@ -485,7 +477,7 @@ def ringedProperOpenLambda (d : RingedModels l E)
 
 /-- The localized ringed-site proper/open map is pinned by the actual lambda transpose.
 No independent map or endomorphism is accepted as its normalization.
-Source: Stacks 0F7B (blueprint: def-sf-integral-system-canonical-bridge). -/
+Source: Stacks 0F7B. -/
 structure RingedProperOpen (d : RingedModels l E) (a : RingedOpenComparisons l E d) where
   gamma : ∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)
     (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i]

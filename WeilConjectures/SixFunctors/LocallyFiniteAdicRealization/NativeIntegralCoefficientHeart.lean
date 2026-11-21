@@ -555,7 +555,6 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 /-! # Native constructibility of an ordinary integral local model
 
 Source: Bhatt--Scholze, Definitions 6.8.3 and 6.8.10, Proposition 6.8.14(2).
-(blueprint: lem-sf-native-integral-coefficient-heart).
 -/
 
 @[expose] public noncomputable section
@@ -641,7 +640,6 @@ private theorem stratifiedModels_of_iso
 sheaf under ordinary tensor extension. No assertion about derived objects occurs here.
 
 Source: Bhatt--Scholze, Definitions 6.8.3 and 6.8.10, Proposition 6.8.14(2).
-(blueprint: lem-sf-native-integral-coefficient-heart).
 
 Proof in words: take the finite stratification and the covering sieves in hN.
 Restriction along the normalized completed coefficient isomorphism identifies the

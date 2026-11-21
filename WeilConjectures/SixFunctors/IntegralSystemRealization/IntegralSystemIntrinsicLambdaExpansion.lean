@@ -152,7 +152,7 @@ def nativeToSystem (W : Scheme.{u}) :
 
 -- State the unfolding for a free equality, so that its proof is never reduced.
 /-- The integral-system equality transport is the image of the native one.
-Source: blueprint def-sf-integral-system-native-bridge-data. -/
+ -/
 theorem nativeREq_eq_native {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g)
     (M : System l E X) :
     nativeREq l E h M = (nativeToSystem l E Y).map
@@ -341,8 +341,7 @@ the composites of its components. Whiskering on the left is evaluation, and
 whiskering on the right maps the component through the direct functor.
 Associator components are identities. Removing them gives each displayed
 five-factor word. Finally unfold the actual diagram fields. This calculation
-uses no canonical-bridge compatibility square.
-(blueprint: lem-sf-integral-system-lambda-word-expansions). -/
+uses no canonical-bridge compatibility square. -/
 theorem lambdaWord_expansions (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)

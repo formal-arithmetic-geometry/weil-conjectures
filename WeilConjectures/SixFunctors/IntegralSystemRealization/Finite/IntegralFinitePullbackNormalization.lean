@@ -164,7 +164,6 @@ private theorem finiteScalarPullback_eq {X Y : Scheme.{u}} (f : X ‚ü∂ Y) (n : ‚Ñ
 
 Source: Stacks Tags 03D7, 03EL, 07A6, 0941; current blueprint
 fix-prop-coherence.proof.md, preservation of coefficient comparisons of units and counits.
-(blueprint: lem-sf-integral-finite-pullback-normalization).
 
 Proof: the existing integralReductionPullFiniteSquare gives the forward equation
 on every derived object. Its finite geometric comparison is obtained by deriving

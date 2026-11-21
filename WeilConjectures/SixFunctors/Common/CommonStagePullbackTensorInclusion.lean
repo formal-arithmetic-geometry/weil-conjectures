@@ -13,9 +13,6 @@ import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorNaturality
 import all Mathlib.Logic.Small.Defs
 
 /-! # The inverse pullback/tensor square for finite-stage inclusion
-
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-common-stage-pullback-tensor-inclusion-inverse).
 -/
 
 @[expose] public noncomputable section
@@ -146,9 +143,6 @@ private theorem tensor_model_heq_tail
   exact Category.id_comp _
 
 /-- The canonical pullback/tensor comparison satisfies the inverse inclusion square.
-
-Source: thm-sf-pf-field.proof.md, Compatibility and the common coefficient field.
-(blueprint: lem-sf-common-stage-pullback-tensor-inclusion-inverse).
 
 Proof: identify the two inverse tensorators with their literal finite-stage model
 maps. Compute common pullback of the source model using coherent descent. Evaluate

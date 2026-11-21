@@ -126,7 +126,6 @@ without an internal Hom or any tensor presentation as input.
 
 Source: Stacks 06YY, 07A4, 07A6 and 08J7; blueprint
 `lem-coef-integral-hom-reduction.proof.md`, paragraph 1.
-(blueprint: lem-sf-reduction-tensor-resolution-comparison).
 
 Proof: on a K-flat complex A, tensor the supplied augmentation with A. Its
 localization is invertible by K-flatness of A. The ordinary balanced tensor

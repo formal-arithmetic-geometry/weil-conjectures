@@ -17,8 +17,6 @@ import all WeilConjectures.SmoothPurity.Supporting.Coefficient.ConstantCoefficie
 set_option linter.privateModule false
 
 /-! # Primitive completion effectivity
-
-Source: current blueprint fix-prop-coherence, primitive realization step.
 -/
 
 @[expose] public noncomputable section

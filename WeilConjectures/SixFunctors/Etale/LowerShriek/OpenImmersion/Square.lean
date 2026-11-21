@@ -10,14 +10,14 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseCh
 /-!
 # Open-immersion squares
 
-An *open-immersion square* (blueprint `proposition-extension-zero-restriction-closed-subscheme--11`)
+An *open-immersion square*
 is a cartesian square
 ```
 U' --g_U--> U
-|           |
-j'          j
-v           v
-X' --g-->   X
+| |
+j' j
+v v
+X' --g--> X
 ```
 of schemes in which `j` and `j'` are open immersions, so that `U' = U ×_X X'`; no hypothesis is
 made on `g`. Since open immersions are stable under base change, a cartesian square whose right
@@ -40,10 +40,10 @@ namespace AlgebraicGeometry
 A cartesian square `g_U ≫ j = j' ≫ g`
 ```
 U' --g_U--> U
-|           |
-j'          j
-v           v
-X' --g-->   X
+| |
+j' j
+v v
+X' --g--> X
 ```
 of schemes in which `j : U ⟶ X` and `j' : U' ⟶ X'` are open immersions, so that
 `U' = U ×_X X'`. No hypothesis is made on `g`. -/

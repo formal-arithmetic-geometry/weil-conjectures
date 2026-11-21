@@ -67,8 +67,7 @@ variable (l : ℕ) [Fact l.Prime]
   (T : Scheme.{u}) (a b : AlgebraicallyClosedCoefficients.Index l Ω) (h : a ≤ b)
 
 /-- Localization of the canonical intrinsic integral scalar shift agrees with the canonical
-rational scalar shift. Source: Zheng, Constructions 6.2 and 6.6
-(blueprint: lem-sf-canonical-stage-scalar-shift).
+rational scalar shift. Source: Zheng, Constructions 6.2 and 6.6.
 
 Proof: the object and pure tensor formulas identify both composite functors. Their identity
 comparison commutes with shift one: the two localization comparisons are identities, and the

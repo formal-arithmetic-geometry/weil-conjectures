@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.Supporting.Tensor.ProjectiveTensorChartComple
 
 /-! # Completeness of ordinary tensor on constructible inputs
 
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50
-(blueprint: lem-fix-constructible-tensor-completion-constructible).
+Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50.
 -/
 
 @[expose] public noncomputable section
@@ -157,8 +156,7 @@ private theorem tensorUnit_onConstructible
 
 /-- The ordinary derived tensor of constructible inputs is complete, with invertible
 canonical completion unit.
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Lemma 6.5.8
-(blueprint: lem-fix-constructible-tensor-completion-constructible).
+Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Lemma 6.5.8.
 
 Proof: simultaneous projective chart refinement gives a finite open--closed tree and
 common finite covers of its nonempty leaves. On each chart the two inputs have

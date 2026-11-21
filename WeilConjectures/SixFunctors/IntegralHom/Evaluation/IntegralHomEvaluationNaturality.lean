@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.IntegralHom.Evaluation.IntegralHomEvaluationT
 
 Source: Stacks Project, sites-cohomology.tex, Lemma 08J9 and its functorial
 Hom-total-tensor identification.
-(blueprint: lem-sf-integral-hom-evaluation-naturality).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ neither tensor, symmetry nor any scalar-reduction presentation.
 
 Source: Stacks Project, sites-cohomology.tex, Lemma 08J9, proof via functorial
 Hom-total-tensor currying; Tags 06YS and 06YU for K-flat representatives.
-(blueprint: lem-sf-integral-hom-evaluation-naturality).
 
 Proof: take the closed symmetric monoidal structure of the recorded derived Hom.
 Its K-flat comparison and a.representative identify its tensor with a.tensor by

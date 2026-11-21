@@ -102,7 +102,7 @@ set_option linter.style.haveILetI false
 completion-unit normalization, naturally on the integral constructible domain.
 
 Source: Stacks 09BP; Bhatt--Scholze 6.5.5, 6.5.8, pp.49--50; the open-factor paragraph
-of prop-sf-pf-coherence (blueprint: lem-sf-open-projection-roos-completion).
+of prop-sf-pf-coherence.
 
 Proof:
 1. Finite type over the field makes U and X Noetherian, hence qcqs. The structure

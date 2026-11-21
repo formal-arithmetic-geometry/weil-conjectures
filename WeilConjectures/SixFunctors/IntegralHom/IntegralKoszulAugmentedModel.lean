@@ -267,9 +267,6 @@ private theorem koszulTensorPresentation_unit
 /-- The actual reduction tower on a K-flat resolution has a Koszul tensor model on
 any representative, with the prescribed augmentation at every level.
 
-Source: paragraph 1 of the current blueprint `lem-coef-integral-hom-reduction.proof.md`
-(blueprint: lem-sf-integral-koszul-augmented-model).
-
 Proof: append the coefficient unit to the Koszul diagram. Its terms are K-flat,
 so tensoring with this entire diagram descends through localization. The right
 unitor identifies evaluation at the added vertex with the localization functor.

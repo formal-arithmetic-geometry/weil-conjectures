@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCor
 
 /-! The reduction comparison part of the exceptional integral transport system laws.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-transport-core-system-reduction-laws).
+5.26.
 -/
 
 @[expose] public noncomputable section
@@ -21,12 +21,12 @@ open ConstructibleExceptionalCoefficients
 
 /--
 The two reduction comparison equations are the final system-level components
-of strict-system transport.  The first transports the `F` comparison through
+of strict-system transport. The first transports the `F` comparison through
 the false-side reconstruction counit, and the second does the analogous thing
-for `G` through the true-side counit.  They are isolated together because both
+for `G` through the true-side counit. They are isolated together because both
 are the same reconstruction-counit calculation on opposite endpoints.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-transport-core-system-reduction-laws).
+5.26.
 -/
 theorem exists_exceptional_transport_core_system_reduction_laws
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]

@@ -30,7 +30,6 @@ With the Gauss valuation, `Lᵢ` is the inertia field of `Ωᵢ(x)`; an extensio
 the defectlessness of `L₁`, the stability theorem of Ohm and Kuhlmann in the residue-transcendental
 case (F.-V. Kuhlmann, *Elimination of ramification I: the generalized stability theorem*,
 Trans. AMS 362 (2010), §4), proved in `SliceTrait.Hom.mem_compositum_of_ΩMap_mem`.
-
 -/
 
 @[expose] public section

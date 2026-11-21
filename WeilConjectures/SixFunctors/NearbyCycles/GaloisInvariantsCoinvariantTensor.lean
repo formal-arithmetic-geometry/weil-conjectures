@@ -24,12 +24,10 @@ exchange `α : Ψ_N C ⟶ Ψ_{N_Ω} C` of the Galois layer has a retraction `r` 
 (`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor`).
 
 This is the coinvariant property used for the projection formula `(E ⊗ B)^P = E^P ⊗ B` in the
-generic-slicing step of Gabber's Künneth formula (blueprint `prose-E-10`,
-`NearbyCyclesModel.isIso_kunnethMap_of_isIso_galoisLayer`). The proof is that of
+generic-slicing step of Gabber's Künneth formula. The proof is that of
 `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_coinvariant`, with the
 continuity of the cohomology sheaves of the tensor product along the finite layers
 (`ProEtale.CondensedRing.isColimit_homology_tensorRight_mapCocone`).
-
 -/
 
 @[expose] public section

@@ -42,10 +42,6 @@ identity factors. This equation concerns only the canonical coefficient functors
 an etale-origin witness. It has no supplied finite operations, constructible input,
 operation realization, or integral reduction.
 
-Source: def-sf-operation-stages, composition and proper/open normalizations;
-prop-sf-pf-coherence.proof.md, compatibility with counits and j_!.
-(blueprint: lem-sf-finite-support-identity-factor-compositor).
-
 Proof: expand sixFunctorFiniteCompositionComparison, retaining its two inverse
 refinementFixedWitnessIso factors. By naturality of the three coefficient comparisons,
 move those factors to the input and output. The middle coherenceProEtaleCompositor

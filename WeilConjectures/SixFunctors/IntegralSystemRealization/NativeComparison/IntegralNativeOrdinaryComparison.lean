@@ -40,8 +40,7 @@ private theorem uniqueness_conjugate
   rw [hc, ← L.map_comp_assoc, Iso.hom_inv_id_app, L.map_id, Category.id_comp]
 
 /-- Transport a right-adjoint mate through isomorphisms of both adjunctions.
-Source: Mathlib's mate and conjugate counit characterizations, followed by naturality.
-(blueprint: lem-sf-adjoint-mates-transport). -/
+Source: Mathlib's mate and conjugate counit characterizations, followed by naturality. -/
 theorem transport_mates
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {L L' : A ⥤ B} {R R' : B ⥤ A} {K K' : C ⥤ D} {S S' : D ⥤ C}
@@ -140,8 +139,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   PresheafOfModules.restrictScalarsObj ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj'
 
 /-- Ordinary left-adjoint uniqueness for a specified whole-system direct comparison.
-Source: the counit characterization of left-adjoint uniqueness.
-(blueprint: lem-sf-integral-native-ordinary-comparison). -/
+Source: the counit characterization of left-adjoint uniqueness. -/
 def ordinaryPullIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (r : pullbackTensorSequenceDirect l E f ≅
       ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
@@ -154,8 +152,7 @@ def ordinaryPullIso {X Y : Scheme.{u}} (f : X ⟶ Y)
       (compactSupportSystemQuotient l E) f)
 
 /-- The sequence inverse-evaluation comparison in intrinsic finite coordinates.
-Source: the two normalized inverse-evaluation comparisons.
-(blueprint: lem-sf-integral-native-ordinary-comparison). -/
+Source: the two normalized inverse-evaluation comparisons. -/
 def ordinaryEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     pullbackTensorSequenceInverse l E f ⋙ coefficientSequenceEvaluation l E X n ≅
       coefficientSequenceEvaluation l E Y n ⋙
@@ -178,8 +175,7 @@ private theorem intrinsicComparison_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ
       (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1))) M)
 
 /-- The ordinary native finite pullback in intrinsic constant-module coordinates.
-Source: Mathlib left-adjoint uniqueness for the fixed direct-image coordinate change.
-(blueprint: lem-sf-integral-native-ordinary-comparison). -/
+Source: Mathlib left-adjoint uniqueness for the fixed direct-image coordinate change. -/
 @[irreducible] def nativeFinitePullIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E n) f ≅
       sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f :=
@@ -191,8 +187,7 @@ Source: Mathlib left-adjoint uniqueness for the fixed direct-image coordinate ch
         (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
 
 /-- Ordinary left-adjoint uniqueness is conjugate to the fixed direct-image coordinate change.
-Source: Mathlib adjoint uniqueness and the counit equation.
-(blueprint: lem-sf-integral-native-ordinary-comparison). -/
+Source: Mathlib adjoint uniqueness and the counit equation. -/
 theorem nativeFinitePullIso_conjugate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     conjugateEquiv
       (proEtaleRingModuleAdjunction f
@@ -246,8 +241,7 @@ private theorem ordinary_mate_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
 /-- A normalized ordinary direct comparison determines the inverse-evaluation square.
 Source: the native and sequence unit normalizations and naturality of adjunction mates.
 Proof: transpose both normalized evaluation squares, transport their mates through
-ordinary left-adjoint uniqueness, and cancel the finite direct coordinate isomorphism.
-(blueprint: lem-sf-integral-native-ordinary-comparison). -/
+ordinary left-adjoint uniqueness, and cancel the finite direct coordinate isomorphism. -/
 theorem ordinary_pull_square {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (r : pullbackTensorSequenceDirect l E f ≅
       ProEtale.VaryingRing.push (compactSupportSystemLevel l E)

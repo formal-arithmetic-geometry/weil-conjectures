@@ -37,8 +37,7 @@ private theorem extendUnitAutomorphism {D : Type*} [Category D] [MonoidalCategor
 /-- An equivalence from a monoidal category allows any chosen isomorphism on
 one tensor-unit object to be incorporated into a natural comparison.
 
-Source: diagonal-tower trace (1), choice of coefficient/adjunction coordinates
-(blueprint: lem-sfb-finite-p1-unit-adjustment).
+Source: diagonal-tower trace (1), choice of coefficient/adjunction coordinates.
 Proof: lift the discrepancy on H(V) through the fully faithful functor H.
 Transport V to the tensor unit, tensor its automorphism with every object,
 and conjugate by the left unitors. At the unit this is the original

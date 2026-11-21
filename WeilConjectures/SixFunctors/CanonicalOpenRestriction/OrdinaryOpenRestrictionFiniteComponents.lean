@@ -27,8 +27,7 @@ open WeilConjectures.IntegralOpenReduction
 namespace WeilConjectures.CanonicalOpenRestriction
 
 /-- Transport a restriction-evaluation square through the two coefficient equivalences.
-Source: Stacks 03DJ and 0941
-(blueprint: lem-sf-ordinary-open-restriction-evaluation-mate). -/
+Source: Stacks 03DJ and 0941. -/
 def transportRestrictionEvaluation
     {A : Type a} {B : Type b} {C : Type c}
     {D : Type d} {E : Type e} {F : Type f}
@@ -51,8 +50,7 @@ def transportRestrictionEvaluation
     Functor.isoWhiskerRight ν _ ≪≫ Functor.associator _ _ _
 
 /-- Component formula for transport through two coefficient equivalences.
-Source: Stacks 03DJ and 0941
-(blueprint: lem-sf-ordinary-open-restriction-evaluation-mate). -/
+Source: Stacks 03DJ and 0941. -/
 theorem transportRestrictionEvaluation_app
     {A : Type a} {B : Type b} {C : Type c}
     {D : Type d} {E : Type e} {F : Type f}
@@ -81,8 +79,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] (o : Operations l E j)
 
 /-- The natural form of the fixed ordinary restriction-evaluation comparison.
-Source: Stacks 03DJ and 0941
-(blueprint: lem-sf-ordinary-open-restriction-evaluation-mate). -/
+Source: Stacks 03DJ and 0941. -/
 def ordinaryRestrictionEvaluation (n : ℕ) :
     systemRestriction l E j o ⋙ coefficientSequenceEvaluation l E U n ≅
       coefficientSequenceEvaluation l E X n ⋙ finiteRestriction l E j o n :=
@@ -90,8 +87,7 @@ def ordinaryRestrictionEvaluation (n : ℕ) :
     (o.transportEvaluation n) (o.openSystems.restrictionEvaluation n)
 
 /-- Its components retain exactly the originally prescribed units and counits.
-Source: Stacks 03DJ and 0941
-(blueprint: lem-sf-ordinary-open-restriction-evaluation-mate). -/
+Source: Stacks 03DJ and 0941. -/
 theorem ordinaryRestrictionEvaluation_app (n : ℕ) (N : coefficientSequenceModules l E X) :
     (ordinaryRestrictionEvaluation l E j o n).app N =
       counitRestrictionEvaluation l E j o n N := by
@@ -100,7 +96,6 @@ theorem ordinaryRestrictionEvaluation_app (n : ℕ) (N : coefficientSequenceModu
 
 /-- Evaluation transports a right mate to its finite right mate.
 Source: Stacks 03DJ and 0E8I; ordinary adjunction counit calculation.
-(blueprint: lem-sf-ordinary-open-restriction-evaluation-mate).
 
 Proof: apply the inverse finite Hom bijection. Naturality moves the finite counit
 past p, and hε replaces it by the evaluated system counit. Move μ across the mate

@@ -22,12 +22,11 @@ correspondence* of an endomorphism `h : X ⟶ X` over `s` and a morphism `v : h^
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.CohomologicalCorrespondence`: a cohomological correspondence
-  (blueprint `definition-correspondence--2`).
+- `AlgebraicGeometry.Etale.CohomologicalCorrespondence`: a cohomological correspondence.
 - `AlgebraicGeometry.Etale.CohomologicalCorrespondence.fixedScheme`: its fixed scheme
-  `Fix(c) = C ×_{X ×_s X, c, Δ_X} X` (blueprint `definition-correspondence--3`).
+  `Fix(c) = C ×_{X ×_s X, c, Δ_X} X`.
 - `AlgebraicGeometry.Etale.CohomologicalCorrespondence.graph`: the graph correspondence of
-  `(h, v)` (blueprint `definition-frobenius-correspondences-their-operators--5`), whose fixed scheme
+  `(h, v)`, whose fixed scheme
   is `Fix(h)` (`AlgebraicGeometry.Etale.CohomologicalCorrespondence.fixedScheme_graph`).
 
 ## Implementation notes
@@ -91,8 +90,7 @@ attribute [instance] hasCompactification
 
 variable {Λ aX K} (c : CohomologicalCorrespondence Λ aX K)
 
-/-- The fixed scheme `Fix(c) = C ×_{X ×_s X, c, Δ_X} X` of a cohomological correspondence
-(blueprint `definition-correspondence--3`). -/
+/-- The fixed scheme `Fix(c) = C ×_{X ×_s X, c, Δ_X} X` of a cohomological correspondence. -/
 noncomputable abbrev fixedScheme : Scheme.{u} :=
   Scheme.fixedScheme aX c.c₁ c.c₂ c.w
 
@@ -136,8 +134,7 @@ lemma graph_c₂ (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[ModuleCat.{u +
   rfl
 
 /-- The fixed scheme of the graph correspondence of `h` is the fixed scheme `Fix(h)` of `h`,
-the scheme-theoretic equalizer of `𝟙 X` and `h` (blueprint
-`definition-frobenius-correspondences-their-operators--5`). -/
+the scheme-theoretic equalizer of `𝟙 X` and `h`. -/
 lemma fixedScheme_graph (h : X ⟶ X) (hh : h ≫ aX = aX)
     (v : (D((h)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
     (graph Λ h hh v).fixedScheme = Hom.fixedScheme aX h hh :=

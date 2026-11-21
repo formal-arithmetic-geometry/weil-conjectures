@@ -196,8 +196,8 @@ noncomputable abbrev tensorRestrictScalarsUnitUpperStarMap :
 pullback: the square
 ```
 g^* (S ⊗_R (P ⊗ S_Y)) ──g^* π♯──▶ g^* (S ⊗_R P)
-        │ ≅                              │ ≅
-        ▼                                ▼
+        │ ≅ │ ≅
+        ▼ ▼
 S ⊗_R g^* (P ⊗ S_Y) ──▶ S ⊗_R (g^* P ⊗ S_Z) ──π♯──▶ S ⊗_R g^* P
 ```
 commutes. It is the transpose of `AlgebraicGeometry.Etale.sheafExtendScalarsProjection_upperStar`
@@ -368,8 +368,8 @@ private lemma leftDerivedSheafExtendScalarsProjection_transpose_upperStar_aux
 `D(Y_ét, R)`, the square
 ```
 Lg^* Ψ (K ⊗ᴸ S_Y) ──Lg^* ϑ♯──▶ Lg^* Ψ K
-       │ ≅                         │ ≅
-       ▼                           ▼
+       │ ≅ │ ≅
+       ▼ ▼
 Ψ Lg^* (K ⊗ᴸ S_Y) ──▶ Ψ (Lg^* K ⊗ᴸ S_Z) ──ϑ♯──▶ Ψ Lg^* K
 ```
 commutes, where `ϑ♯ : Ψ (K ⊗ᴸ S_Y) ⟶ Ψ K` is the transpose along `Ψ ⊣ Res` of the derived

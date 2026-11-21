@@ -9,8 +9,7 @@ public import WeilConjectures.SixFunctors.ConstructibleTensorModel.Constructible
 
 /-! # Coordinates of the canonical tensor-completion chain map
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion-coordinates).
+Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5.
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +34,7 @@ attribute [local irreducible] IntegralOnSlice.duality IntegralOnSlice.roosUnit
   IntegralAmbient.tensorTowerIso IntegralAmbient.tensorOperationUnit
 
 /-- Every first product coordinate is the prescribed quotient map on pure tensors.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion-coordinates). -/
+Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
 theorem tensorChain_first
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (p q : ℤ) (n : ℕ)
     (U : W.ProEtᵒᵖ) (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U) :
@@ -85,8 +83,7 @@ theorem tensorChain_first
     exact (IntegralAmbient.tensorTowerModel l E W).exists.choose_spec P Q n p q U 1 x y
 
 /-- Every shifted mapping-fiber coordinate of the actual augmentation is zero.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-fix-constructible-tensor-completion-coordinates). -/
+Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
 theorem tensorChain_second
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (i j : ℤ)
     (h : i + -1 = j) :

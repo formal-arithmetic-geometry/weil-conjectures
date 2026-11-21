@@ -63,7 +63,7 @@ private theorem evaluation_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) (n : �
   exact (pullbackTensorDerivedEvaluation_existsUnique l E f n).exists.choose_spec C
 
 /-- Transport of derived evaluation to the ordinary quotient model.
-Source: Stacks Tag 07A6 (blueprint: lem-sf-integral-reduction-pull-evaluation-quotient). -/
+Source: Stacks Tag 07A6. -/
 theorem integralReductionPullEvaluationQuotient {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     letI := sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f

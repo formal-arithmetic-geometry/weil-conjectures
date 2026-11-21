@@ -38,7 +38,6 @@ special fibre `Y' ×_𝒳 V`; it maps to `N` by the open immersion of total spac
 - `NearbyCyclesModel.isPullback_restrictOpens_j`, `NearbyCyclesModel.isPullback_restrictOpens_i`,
   `NearbyCyclesModel.Hom.isPullback_restrictOpens_total`: cartesian squares of fibres over a trait
   and of total spaces over a change of trait restrict to opens.
-
 -/
 
 @[expose] public section

@@ -41,8 +41,7 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor
   unrestrictedIntegralComplexFunctor scalarReductionExistence unrestrictedIntegralReductionExistence
 
 /-- Ordinary descent and signed Roos comparison in the global coefficient presentation.
-Source: Stacks 09BP, 03DI, 0GL1; the open-factor blueprint argument
-(blueprint: lem-sf-open-projection-ordinary-roos).
+Source: Stacks 09BP, 03DI, 0GL1; the open-factor blueprint argument.
 
 Proof: identify the open pro-etale site with the slice at the open object, using the
 coefficient equivalence in o. Finite type over the field makes both schemes

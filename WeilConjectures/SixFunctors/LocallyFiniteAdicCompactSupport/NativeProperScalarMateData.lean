@@ -9,12 +9,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunct
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-! # The canonical successive condensed scalar mate
-
-Source: the formal-properties paragraph of the current blueprint scalar
-direct-image proof. The two coefficient changes are the published integral
-localization and finite-field inclusion into the finite-subextension-valued
-condensed algebraic closure.
-(blueprint: def-sf-native-proper-scalar-mate-data).
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +35,7 @@ open AlgebraicGeometry.ProEtale
 
 /-- Tensoring internal modules preserves the coproducts used in the fourfold
 graded tensor comparison, since the module category is closed monoidal.
-Source: Mathlib's closed monoidal colimit preservation.
-(blueprint: def-sf-native-proper-scalar-mate-data). -/
+Source: Mathlib's closed monoidal colimit preservation. -/
 @[instance_reducible] def nativeScalarModuleClosed (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [hcomm : IsCommMonObj R] :
     MonoidalClosed (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :=
@@ -51,16 +44,14 @@ Source: Mathlib's closed monoidal colimit preservation.
 attribute [local instance] nativeScalarModuleClosed
 
 /-- Symmetry of the canonical relative module tensor.
-Source: the relative tensor construction in the adopted library.
-(blueprint: def-sf-native-proper-scalar-mate-data). -/
+Source: the relative tensor construction in the adopted library. -/
 @[instance_reducible] def nativeScalarModuleSymmetric (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [hcomm : IsCommMonObj R] :
     SymmetricCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :=
   @Mod.symmetricCategory _ _ _ _ _ _ _ R _ hcomm
 
 /-- Canonical functorial flat resolutions of internal modules.
-Source: the adopted library's module-object flat resolution.
-(blueprint: def-sf-native-proper-scalar-mate-data). -/
+Source: the adopted library's module-object flat resolution. -/
 theorem nativeScalarModuleFlatResolution (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [hcomm : IsCommMonObj R] :
     Abelian.HasFunctorialFlatResolution (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :=
@@ -69,8 +60,7 @@ theorem nativeScalarModuleFlatResolution (T : Scheme.{u})
 attribute [local instance] nativeScalarModuleSymmetric nativeScalarModuleFlatResolution
 
 /-- Left tensor of internal modules preserves small colimits.
-Source: closed monoidal adjunction.
-(blueprint: def-sf-native-proper-scalar-mate-data). -/
+Source: closed monoidal adjunction. -/
 theorem nativeScalarModuleLeftColimits (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
@@ -79,8 +69,7 @@ theorem nativeScalarModuleLeftColimits (T : Scheme.{u})
   infer_instance
 
 /-- Right tensor of internal modules preserves small colimits.
-Source: closed symmetric monoidal adjunction.
-(blueprint: def-sf-native-proper-scalar-mate-data). -/
+Source: closed symmetric monoidal adjunction. -/
 theorem nativeScalarModuleRightColimits (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
@@ -91,8 +80,7 @@ theorem nativeScalarModuleRightColimits (T : Scheme.{u})
 attribute [local instance] nativeScalarModuleLeftColimits nativeScalarModuleRightColimits
 
 /-- Fourfold graded tensor compatibility from closedness.
-Source: Mathlib closed monoidal colimit preservation.
-(blueprint: def-sf-native-proper-scalar-mate-data). -/
+Source: Mathlib closed monoidal colimit preservation. -/
 theorem nativeScalarModuleTensorFour (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
     ∀ (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)),
@@ -105,8 +93,7 @@ theorem nativeScalarModuleTensorFour (T : Scheme.{u})
   infer_instance
 
 /-- The left-associated graded tensor commutes with the defining coproduct.
-Source: Mathlib graded monoidal associator construction.
-(blueprint: def-sf-native-proper-scalar-mate-data). -/
+Source: Mathlib graded monoidal associator construction. -/
 theorem nativeScalarModuleGoodTensorLeft (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
     ∀ (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)),
@@ -115,8 +102,7 @@ theorem nativeScalarModuleGoodTensorLeft (T : Scheme.{u})
   infer_instance
 
 /-- The right-associated graded tensor commutes with the defining coproduct.
-Source: Mathlib graded monoidal associator construction.
-(blueprint: def-sf-native-proper-scalar-mate-data). -/
+Source: Mathlib graded monoidal associator construction. -/
 theorem nativeScalarModuleGoodTensorRight (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
     ∀ (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)),
@@ -130,8 +116,7 @@ attribute [local irreducible] Mod.monoidalClosed Mod.monoidalCategory
   Mod.monoidalCategoryStruct
 
 /-- Integral coefficient localization is exact.
-Source: the proved localization theorem `padicIntegers_invertEll`.
-(blueprint: def-sf-native-proper-scalar-mate-data). -/
+Source: the proved localization theorem `padicIntegers_invertEll`. -/
 theorem nativeScalarIntegralExact (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) :
     PreservesFiniteLimits (Mod.extendScalars (padicIntegersToPadicSubfield T l E)) :=
@@ -140,8 +125,7 @@ theorem nativeScalarIntegralExact (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 attribute [local instance] nativeScalarIntegralExact
 
 /-- The published derived integral-to-field scalar functor, named once.
-Source: the canonical derived extension of scalars along integral localization.
-(blueprint: def-sf-native-proper-scalar-mate-data). -/
+Source: the canonical derived extension of scalars along integral localization. -/
 def nativeScalarIntegralDerived (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) :
     DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
@@ -151,8 +135,7 @@ def nativeScalarIntegralDerived (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
   (Mod.extendScalars (padicIntegersToPadicSubfield T l E)).leftDerivedFunctor
 
 /-- The published derived finite-field-to-closure scalar functor, named once.
-Source: the canonical derived extension for the finite-subfield inclusion.
-(blueprint: def-sf-native-proper-scalar-mate-data). -/
+Source: the canonical derived extension for the finite-subfield inclusion. -/
 def nativeScalarClosureDerived (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) :
     DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
@@ -164,8 +147,7 @@ def nativeScalarClosureDerived (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 
 /-- The actual composite of the two published coefficient-change mates.
 Both factors are constructed for arbitrary morphisms and unbounded complexes.
-Source: the formal-properties paragraph of the blueprint scalar direct-image proof.
-(blueprint: def-sf-native-proper-scalar-mate-data). -/
+ -/
 def nativeScalarCondensedComposite (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) {U V : Scheme.{u}} (g : U ⟶ V)
     (C : DerivedCategory (Mod (Sheaf (ProEt.topology U) Ab.{u + 1})

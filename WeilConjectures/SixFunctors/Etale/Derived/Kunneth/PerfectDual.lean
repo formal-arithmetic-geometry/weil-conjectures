@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Pullback
 
 # Duality of external products of perfect complexes on smooth schemes
 
-The remark `rem-sf-kv-formal` (`sk-rem-sf-kv-formal`) observes that the statement
+The remark `rem-sf-kv-formal` observes that the statement
 `𝔻_{X × Y} (M ⊠ N) ≅ 𝔻_X M ⊠ 𝔻_Y N`, equivalent to the Künneth–Verdier isomorphism, is *formal*
 for perfect `M`, `N` on smooth `X`, `Y`: under orientations the Verdier dual of a perfect complex
 is its twisted shifted coefficient dual (`theorem-poincare-duality--2`), and the coefficient dual of
@@ -23,9 +23,8 @@ an external product of perfect complexes is the external product of the coeffici
 ## Main statements
 
 - `AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_externalProduct`
-  (`sk-rem-sf-kv-formal`, `rem-sf-kv-formal`): `𝔻(P ⊠ Q) ≅ 𝔻P ⊠ 𝔻Q` for perfect `P`, `Q`, given
+: `𝔻(P ⊠ Q) ≅ 𝔻P ⊠ 𝔻Q` for perfect `P`, `Q`, given
   orientations of `X`, `Y` and `X × Y`.
-
 -/
 
 @[expose] public section
@@ -93,7 +92,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
 variable [HasTateTwist Λ]
 
-/-- Blueprint `sk-rem-sf-kv-formal`, `rem-sf-kv-formal`: the formal case of duality of external
+/-- The formal case of duality of external
 products.
 
 Let `a : X ⟶ S` and `b : Y ⟶ S` carry orientations of relative dimensions `d` and `e`, and let

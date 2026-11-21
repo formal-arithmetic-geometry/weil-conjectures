@@ -17,7 +17,6 @@ The specialization unit `σ : Λ ⟶ Ψ Λ` (`NearbyCyclesModel.unit`) and the p
 cycles, restricted to bounded constructible complexes
 (`NearbyCyclesModel.boundedConstructibleUnit`,
 `NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange`).
-
 -/
 
 @[expose] public section

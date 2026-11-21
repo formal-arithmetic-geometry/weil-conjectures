@@ -13,8 +13,6 @@ import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffe
 import all WeilConjectures.SixFunctors.GeneratorReduction.GeneratorKind.TensorAdjunctionReductionSquares
 
 /-! # Ordinary coefficient squares for compactification composites
-
-Source: blueprint fix-prop-coherence, the coefficient comparisons of individual maps.
 -/
 
 @[expose] public noncomputable section
@@ -387,8 +385,6 @@ private theorem compact_projection_square
     L, H, M, N, q, r, qJ, rg, rf, α, β, A, C, D, qA, qC, qD, qJC, qJD] using! h
 
 /-- Ordinary coefficient squares for the fixed open/proper compactification words.
-Source: blueprint fix-prop-coherence, expansion of compactification exchange and projection.
-(blueprint: lem-sf-integral-ordinary-compactification-squares).
 
 Proof: the exchange clause is ordinaryCompactificationExchangeSquare. For projection,
 expand the three factors: proper projection, proper image of open projection, and

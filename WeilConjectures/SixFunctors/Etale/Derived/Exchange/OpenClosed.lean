@@ -47,16 +47,16 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
 
-/-- Blueprint `lem-kun-base-change-open-closed`: base change for open-closed immersions.
+/-- Base change for open-closed immersions.
 
 Let `j : U ⟶ X` be both an open and a closed immersion and `g : Y ⟶ X` a morphism, with
 cartesian square
 
 ```
   W --p--> U
-  |        |
-  h        j
-  v        v
+  | |
+  h j
+  v v
   Y --g--> X
 ```
 
@@ -80,7 +80,7 @@ section OpenImmersion
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 omit [HasSmallSiteSheafify A] in
-/-- Blueprint `lem-kun-open-immersion-restriction`: inverse image along an open immersion is a
+/-- Inverse image along an open immersion is a
 left inverse of direct image.
 
 For an open immersion `j : U ⟶ X`:

@@ -44,7 +44,6 @@ open immersion, `g` proper), the lower shriek on small étale sites is the compo
   `AlgebraicGeometry.Etale.of_isOpenImmersion`, so the extension by zero along it is
   available; the Kan extension it needs exists because an open immersion is a monomorphism.
   Hence `f_!` carries no hypotheses beyond the standing assumptions on `A`.
-
 -/
 
 @[expose] public section

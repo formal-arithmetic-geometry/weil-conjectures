@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedE
 
 /-! # The ordinary quotient system commutes with total tensor products
 
-Source: Stacks 07A4 (lemma-pullback-tensor-product) and 0941.
+Source: Stacks 07A4 and 0941.
 
 For an ordinary quotient-system model `M`, we construct a natural isomorphism of chain
 complexes on the ringed sequence site
@@ -349,7 +349,7 @@ theorem OrdinaryModel.quotientTensorApp_evaluation (M : OrdinaryModel l E W) (n 
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The tensor comparison for the ordinary quotient system.
-Source: Stacks 07A4 (lemma-pullback-tensor-product) and 0941. -/
+Source: Stacks 07A4 and 0941. -/
 def OrdinaryModel.quotientTensor (M : OrdinaryModel l E W) :
     coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅
@@ -373,7 +373,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- **Tensor comparison for the ordinary quotient system.** There is a natural isomorphism
 `M.quotient (P ⊗ Q) ≅ M.quotient P ⊗ M.quotient Q` whose finite evaluations are the
 ordinary scalar tensor comparisons, under the evaluation tensor comparisons.
-Source: Stacks 07A4 (lemma-pullback-tensor-product) and 0941. -/
+Source: Stacks 07A4 and 0941. -/
 theorem OrdinaryModel.quotientTensor_exists (M : OrdinaryModel l E W) :
     ∃ b : coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅

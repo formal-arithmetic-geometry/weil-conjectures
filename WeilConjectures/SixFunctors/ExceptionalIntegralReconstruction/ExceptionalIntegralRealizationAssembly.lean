@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralReconstruction.Exce
 
 /-! # Realization of the reconstructed exceptional adjunction
 Source: Zheng, Section 5; integral reconstruction, steps 3--9.
-(blueprint: lem-sf-exceptional-integral-realization-assembly).
 -/
 
 @[expose] public noncomputable section
@@ -28,7 +27,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 proper/open comparisons, choosing compatible transport shifts on its same functors.
 Source: Zheng, Construction 5.25 and Proposition 5.24; integral reconstruction,
 steps 3--9, especially the single proper/open word and its primitive comparisons.
-(blueprint: lem-sf-exceptional-integral-realization-assembly).
 
 Proof: choose the canonical system operations and their ordinary-limit comparison
 model. Rebuild only the transport record on the same ordinary adjoint, site maps

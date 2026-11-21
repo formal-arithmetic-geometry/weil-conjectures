@@ -13,8 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
 /-!
 # Smooth duality from the étale and the affine-space cases
 
-The reduction step of the proof of orientation-free smooth duality (blueprint
-`proposition-exceptional-inverse-image-smooth-morphism`): for `f : X ⟶ Y` smooth of relative
+The reduction step of the proof of orientation-free smooth duality: for `f : X ⟶ Y` smooth of relative
 dimension `d`, admitting a compactification, with the exponent of `Λ` invertible on `X`, the
 dualizing complex `ω_f` is a locally constant sheaf of free rank-one `Λ`-modules placed in degree
 `-2d` and the canonical tensor map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism for every

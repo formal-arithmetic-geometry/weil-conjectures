@@ -129,7 +129,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 Source: Weil blueprint, `lemma-bounds-finite-reductions--2`, proof step 2;
 Stacks Project, Cohomology on Sites, Tags 06YY and 0D6D.
-(blueprint: lem-coef-integral-residue-tor-residue-amplitude).
 
 The proof compares universal derived scalar extensions, then computes the finite
 residue extension on its given K-flat representative. Exact restriction detects
@@ -629,8 +628,7 @@ compares that model with the displayed residue quotient tensor.
 4. Restriction of scalars is exact and faithful, since it leaves underlying
 abelian sheaves unchanged. The homology comparison for exact functors therefore
 preserves and reflects zero cohomology. Apply it to the isomorphism of step 1
-and the model comparisons of step 3, in each degree i.
-(blueprint: lem-coef-integral-residue-tor-residue-amplitude). -/
+and the model comparisons of step 3, in each degree i. -/
 theorem integralReduction_residue_homology_zero_iff
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : AlgebraicGeometry.Scheme.{u})

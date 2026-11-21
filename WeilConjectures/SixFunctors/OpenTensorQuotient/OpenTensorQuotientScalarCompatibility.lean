@@ -14,7 +14,6 @@ import all WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenFiniteScalarComp
 /-! # Scalar units and open restriction of strict quotient towers
 
 Source: Stacks Project, Tags 03DI, 03EK, 0941 and 0E8I.
-(blueprint: lem-sf-open-quotient-scalar-unit-compatibility).
 -/
 
 @[expose] public noncomputable section
@@ -90,8 +89,7 @@ unit agrees with extension by zero. The proof is the generator calculation: both
 send each extension summand to the same unit generator, and extensionality of
 sheafification, complexes, and strict towers assembles the equality. This includes zero
 and negative degrees and empty or identity opens.
-Source: Stacks Project, Tags 03DI, 03EK, 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-unit-equation). -/
+Source: Stacks Project, Tags 03DI, 03EK, 0E8I and 0941. -/
 theorem openQuotientScalarUnitEquation
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o)
@@ -142,7 +140,6 @@ intertwines the actual scalar-adjunction units on every complex. This is only th
 scalar comparison; no tensor balancing or open tensor square is asserted.
 
 Source: Stacks Project, Modules on Sites, Tags 03DI and 0E8I; strict towers, Tag 0941.
-(blueprint: lem-sf-open-quotient-scalar-unit-compatibility).
 
 Proof: on the ambient site's slice at the open object, restriction of scalars does not change an
 extension-presheaf summand or its insertion. The identity on these summands, followed by

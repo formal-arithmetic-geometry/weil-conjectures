@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackDerivedC
 /-! # Components of ambient pullback coherence
 
 Source: Stacks 03CB, 03D3, 03EL, 07A4 and 04VG.
-(blueprint: lem-sf-ambient-pullback-composition-laws).
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +31,7 @@ attribute [local irreducible] pull CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory
 
 /-- Associativity and the two unit laws for the specified pullback comparisons.
-Source: Stacks 03CB, 03D3, Categories 0B65 and 04VG
-(blueprint: lem-sf-ambient-pullback-composition-laws).
+Source: Stacks 03CB, 03D3, Categories 0B65 and 04VG.
 Proof: the section formulas defining pushComp and pushId express their maps as
 restriction by the canonical iterated fibre-product comparisons. Both routes
 through a triple comparison preserve all projections, so pullback uniqueness

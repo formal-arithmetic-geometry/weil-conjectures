@@ -222,8 +222,7 @@ private theorem endpointRestrictions
 
 /-- Scalar mates for supplied, ambient-realized adjunctions.
 Source: Zheng, Lemma 5.22, Construction 5.25, Propositions 5.24 and 5.26;
-coefficient construction steps 2 and 4
-(blueprint: lem-sf-ring-scalar-mates-for-realized-operations).
+coefficient construction steps 2 and 4.
 
 Proof:
 1. At each endpoint restrict ambient finite-target derived extension to the full

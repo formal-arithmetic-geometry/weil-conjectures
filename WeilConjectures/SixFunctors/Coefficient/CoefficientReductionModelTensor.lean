@@ -49,7 +49,6 @@ for the constructed extension. Conjugate its derived tensor comparison by this
 natural isomorphism. No unit/counit projection equation or normalized-object
 assertion is needed. The construction
 uses no invertibility of quotient ring maps and treats zero and equal levels too.
-(blueprint: lem-coef-reduction-model-tensor)
 -/
 theorem coefficientReductionModelTensor_exists
     (T : CoefficientDerivedSystemTensors l E W)

@@ -20,7 +20,6 @@ if `u_M` is a split monomorphism and `u_N` and the Künneth map `Π'` of the pul
 invertible, then `Lρ'^* Π_{A,B}` is a split monomorphism
 (`NearbyCyclesModel.isSplitMono_map_kunnethMap_of_isSplitMono`). In the generic-slicing step of
 Gabber's Künneth formula, `u_M` is the inclusion of the invariants of a pro-`p` group.
-
 -/
 
 @[expose] public section

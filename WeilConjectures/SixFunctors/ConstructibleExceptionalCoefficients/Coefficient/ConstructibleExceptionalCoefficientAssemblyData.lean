@@ -28,8 +28,7 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- The inherited shift on the full ring-stage inclusion.
-Source: full coefficient subcategories in the exceptional construction
-(blueprint: def-sf-constructible-exceptional-assembly-data). -/
+Source: full coefficient subcategories in the exceptional construction. -/
 @[instance_reducible]
 def constructionInclusionShift (T : Scheme.{max u v}) (s : RingStage.{max u v} l) :
     (RingStage.inclusion.{u, v} l Ω T s).CommShift ℤ :=
@@ -55,8 +54,7 @@ different finite stages are not images of one stage inclusion, so without this f
 closed functors of two compactifications could differ by a stage-dependent sign twist
 on such arrows and no natural refinement map would exist.
 These are properties of the chosen stage data, not refinement maps or refinement existence.
-Source: Zheng 5.22 and raw localization; exceptional construction steps 3--5
-(blueprint: def-sf-constructible-exceptional-assembly-data). -/
+Source: Zheng 5.22 and raw localization; exceptional construction steps 3--5. -/
 structure CoefficientConstructionNormalization
     (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))
     (F : CoefficientConstructionFields.{u, v} l Ω D hl R)
@@ -92,8 +90,7 @@ structure CoefficientConstructionNormalization
 /-- Only the left geometric refinement maps, with their realization and descent equations.
 The right maps in the normalization predicate are the explicit adjunction conjugates;
 no right comparison, unit equation, or counit equation is assumed as input data.
-Source: proper/open refinement, raw localization, and common-field descent
-(blueprint: def-sf-constructible-exceptional-assembly-data). -/
+Source: proper/open refinement, raw localization, and common-field descent. -/
 structure CoefficientLeftRefinements
     (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))
     (F : CoefficientConstructionFields.{u, v} l Ω D hl R)

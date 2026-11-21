@@ -138,7 +138,7 @@ private theorem module_iso_inv_hom_sections
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Scalar-extension adjoint comparisons preserve a transition which preserves unit tensors.
-Source: Stacks 03D7 and 03EK (blueprint: lem-pur-system-scalar-transition-comparison).
+Source: Stacks 03D7 and 03EK.
 Proof: precompose with the inverse model comparison. Scalar-extension Hom
 extensionality reduces equality to unit tensors. Both left-adjoint uniqueness
 comparisons preserve the adjunction units. The defining quotient mate has the
@@ -655,7 +655,7 @@ private theorem presheaf_function_eq {C : Type*} [Category C]
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The actual horizontal map, retaining the two literal section carriers.
-Source: Stacks 0941 (blueprint: lem-pur-sequence-ordinary-factorization).
+Source: Stacks 0941.
 Proof: remove the source and target additive-group transports in the defining
 transition equation. Forgetting linearity does not change the underlying function. -/
 private theorem coefficientSequenceTransition_function_heq (N : coefficientSequenceModules l E W)

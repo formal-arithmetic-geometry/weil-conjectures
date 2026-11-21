@@ -37,7 +37,6 @@ lemma-adjoint-pullback-pushforward-modules; Tag 03EL,
 lemma-tensor-product-pullback; Tag 0941, sites-cohomology.tex,
 lemma-derived-limit-is-ok; current blueprint
 `sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md`, maps-used sentence.
-(blueprint: lem-sf-pull-quotient-ordinary-projection).
 
 Proof: Work in each degree. By the unit identity for adjoint conjugates,
 the ordinary reduction unit followed by the limit of a.reductionPull is the

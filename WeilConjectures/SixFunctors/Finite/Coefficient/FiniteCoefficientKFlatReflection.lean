@@ -26,7 +26,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # K-flatness reflected by finite coefficient inverse image
 
 Source: blueprint site comparison paragraph; Stacks 06YN and 07A4.
-(blueprint: lem-sf-finite-coefficient-kflat-reflection).
 -/
 
 @[expose] public noncomputable section
@@ -127,8 +126,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
 /-- The finite-level site inverse image reflects K-flatness of etale complexes.
-Source: blueprint site comparison paragraph; Stacks 06YN and 07A4
-(blueprint: lem-sf-finite-coefficient-kflat-reflection).
+Source: blueprint site comparison paragraph; Stacks 06YN and 07A4.
 
 Proof: ordinary etale-to-pro-etale inverse image is exact and faithful, and intrinsic
 realization is an exact equivalence. Their composite therefore reflects acyclicity

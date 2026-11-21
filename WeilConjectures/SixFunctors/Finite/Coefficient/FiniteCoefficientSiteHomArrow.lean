@@ -10,12 +10,6 @@ public import WeilConjectures.SixFunctors.Finite.Coefficient.FiniteCoefficientSi
 import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import WeilConjectures.SixFunctors.Finite.Coefficient.FiniteCoefficientSiteTensorPresentation
 /-! # Finite coefficient change for internal Hom
-
-Source: blueprint sec-six-functors/sk-prop-sf-biduality-general,
-node lemma-change-coefficients-internal-hom--1 (blueprint:
-def-sf-finite-coefficient-site-hom-arrow). Indices n and m below denote exponents n + 1 and m + 1;
-thus every positive exponent, including the identity quotient, occurs. All comparison maps are
-closed transposes of reduced evaluation, never choices of arbitrary arrows.
 -/
 
 @[expose] public noncomputable section
@@ -32,7 +26,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
 /-- Explicit K-flat witness type with the small pro-etale universe fixed.
-Source: blueprint site-comparison proof (blueprint: def-sf-finite-coefficient-site-hom-arrow). -/
+ -/
 abbrev finiteHomKFlat (n : ℕ)
     (P : CochainComplex (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u}
@@ -43,8 +37,7 @@ abbrev finiteHomKFlat (n : ℕ)
     ((finiteHomNuComplex l E X n).obj P)
 
 /-- Representative normalization with the category and tensor data shared.
-Source: Stacks 07A4, site-comparison paragraph
-(blueprint: def-sf-finite-coefficient-site-hom-arrow). -/
+Source: Stacks 07A4, site-comparison paragraph. -/
 def FiniteHomNuTensorNormalizationAux
     {C : Type a} {D : Type b} {A : Type c} {B : Type d}
     [Category.{e} C] [Category.{f} D] [Category.{g} A] [Category.{w} B]
@@ -160,8 +153,7 @@ private theorem tensorModelSquareDescentOfPresentation
 
 /-- The specified tensorator is characterized on every pair of explicit K-flat
 representatives by the ordinary pure-tensor chain comparison and the intrinsic
-localization comparison. Source: Stacks 00YV, 06YN, 07A4 (blueprint:
-def-sf-finite-coefficient-site-hom-arrow). -/
+localization comparison. Source: Stacks 00YV, 06YN, 07A4. -/
 def FiniteHomNuTensorNormalization (n : ℕ)
     (μ : (finiteHomEtaleClosed l E X n).tensor ⋙ finiteHomNu l E X n ≅
       (finiteHomNu l E X n).prod (finiteHomNu l E X n) ⋙
@@ -196,7 +188,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The inverse-image tensor comparison is uniquely fixed by the displayed
 K-flat pure-tensor and localization equations. Source: blueprint site-comparison
-proof (blueprint: def-sf-finite-coefficient-site-hom-arrow).
+proof.
 Proof: inverse image preserves the balanced pure-tensor chain map; localization
 and the intrinsic tensor-model comparison identify its derived image. The
 representative equation determines the natural isomorphism uniquely. -/
@@ -228,7 +220,7 @@ theorem finiteHomNuTensor_existsUnique (n : ℕ) :
     (finiteHomNuTensorPresentation l E X n)
 
 /-- The canonical normalized tensor comparison for nu_X^*.
-Source: blueprint site-comparison proof (blueprint: def-sf-finite-coefficient-site-hom-arrow). -/
+ -/
 def finiteHomNuTensor (n : ℕ) :
     (finiteHomEtaleClosed l E X n).tensor ⋙ finiteHomNu l E X n ≅
       (finiteHomNu l E X n).prod (finiteHomNu l E X n) ⋙
@@ -236,7 +228,7 @@ def finiteHomNuTensor (n : ℕ) :
   (finiteHomNuTensor_existsUnique l E X n).choose
 
 /-- The site internal-Hom comparison, the transpose of inverse image of evaluation.
-Source: blueprint site formula (blueprint: def-sf-finite-coefficient-site-hom-arrow). -/
+ -/
 def finiteHomSiteHom (n : ℕ) :=
   coefficientBaseChangeHom (finiteHomEtaleClosed l E X n) (finiteIntrinsicClosed l E X n)
     (finiteHomNu l E X n) (finiteHomNuTensor l E X n)

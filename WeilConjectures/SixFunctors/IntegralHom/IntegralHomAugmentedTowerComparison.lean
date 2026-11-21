@@ -35,8 +35,7 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Internal Hom comparison of the augmented reduction towers
 
-Source: blueprint order 2478, proof steps 4-8; Stacks Tags 07A6, 08J9 and 08TC
-(blueprint: lem-sf-integral-hom-augmented-tower-comparison).
+Source: blueprint order 2478, proof steps 4-8; Stacks Tags 07A6, 08J9 and 08TC.
 -/
 
 @[expose] public section
@@ -65,8 +64,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 condition or taking any product. The isomorphism includes every transition map,
 and its displayed equation includes each canonical augmentation.
 
-Source: blueprint order 2478, steps 4-8; Stacks Tags 07A6, 08J9 and 08TC
-(blueprint: lem-sf-integral-hom-augmented-tower-comparison).
+Source: blueprint order 2478, steps 4-8; Stacks Tags 07A6, 08J9 and 08TC.
 
 Proof: Choose a complex G' representing Hom(K,Q(G)) and a flat-term K-flat
 resolution q' of G'. For each positive exponent use models_exist and

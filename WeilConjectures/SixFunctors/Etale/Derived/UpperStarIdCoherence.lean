@@ -216,9 +216,9 @@ two identifications `Li'^* Lv^* La^* C ≅ Lu^* C` — through `Lv^* La^* ≅ La
 square
 ```
 Li'^* Lv^* La^* C --(Lv^* La^* ≅ La'^* Lu^*)--> Li'^* La'^* Lu^* C
-        |                                               |
-(Li'^* Lv^* ≅ Lu^* Li^*)                         (Li'^* La'^* ≅ 𝟭)
-        v                                               v
+        | |
+(Li'^* Lv^* ≅ Lu^* Li^*) (Li'^* La'^* ≅ 𝟭)
+        v v
 Lu^* Li^* La^* C ------------(Li^* La^* ≅ 𝟭)-----------> Lu^* C
 ```
 commutes. -/

@@ -31,7 +31,7 @@ attribute [local implicit_reducible] Equivalence.mapDerivedCategory
 set_option backward.defeqAttrib.useBackward true
 
 /-- The ordinary pull compositor determined by the unique normalized direct-image compositor.
-Source: Stacks 03D6 (blueprint: lem-sf-finite-ring-pull-compositor).
+Source: Stacks 03D6.
 The adjunction conjugation equivalence determines it uniquely. -/
 def finiteOrdinaryPullComp
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
@@ -58,7 +58,7 @@ def finiteOrdinaryPullComp
 attribute [local irreducible] finiteOrdinaryPullComp
 
 /-- The finite pullback presentation preserves the ordinary pull compositor.
-Source: Stacks 03D6 (blueprint: lem-sf-finite-ring-pull-compositor).
+Source: Stacks 03D6.
 Proof: apply the generic uniqueness compositor transport identity to the three
 finiteDirectImage_eq equalities. Substitute finiteOrdinaryPushComposition and
 unfold the named inverse conjugate. This identifies the specified left-adjoint

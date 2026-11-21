@@ -107,8 +107,7 @@ public import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-! # Ordinary input to open tensor descent
 
-Source: Stacks 0E8I, 0GL1, 07A4, 0G7E and Homology 012Z
-(blueprint: def-sf-open-tensor-cochain-data).
+Source: Stacks 0E8I, 0GL1, 07A4, 0G7E and Homology 012Z.
 -/
 
 @[expose] public noncomputable section
@@ -141,7 +140,7 @@ variable {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']
 /-- Ordinary and cochain data for an exact open adjunction. No derived tensor is
 chosen here. The projection and its total are natural in both variables, and the
 ordinary inverse is the specified unit transpose. Source: Stacks 0E8I, 0GL1, 07A4,
-0G7E and Homology 012Z (blueprint: def-sf-open-tensor-cochain-data). -/
+0G7E and Homology 012Z. -/
 structure OpenTensorCochainData where
   right : SemilinearSections.Mod.{c, v, max c v r} J' R' ⥤
     SemilinearSections.Mod.{c, v, max c v r} J R

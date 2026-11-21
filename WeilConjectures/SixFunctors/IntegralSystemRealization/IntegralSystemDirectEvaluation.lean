@@ -128,8 +128,7 @@ private theorem restrictedDirect_exists {X Y : Scheme.{u}} (f : X ‚ü∂ Y) (n : ‚Ñ
 
 /-- Evaluation of the universal right derived sequence-site direct image, including
 its adjunction and adjacent quotient normalizations.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941, 07A7
-(blueprint: lem-sf-integral-system-direct-evaluation).
+Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941, 07A7.
 
 Proof: evaluation at n has a left derived finite left extension. On flat-term
 K-flat representatives the ordinary extension is zero above n and, at q at most n,

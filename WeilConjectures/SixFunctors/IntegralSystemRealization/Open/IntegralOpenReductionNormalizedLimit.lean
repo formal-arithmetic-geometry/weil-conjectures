@@ -11,8 +11,6 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.IntegralOpenRe
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.IntegralOpenLimitComplete
 
 /-! # Canonical integral model construction steps
-
-Source: blueprint fix-prop-coherence, strict-system realization.
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 Only invertibility of these specified maps is asserted; the realization isomorphism
 and its counit/unit normalization are not part of this statement.
 Source: Stacks 03DI, 0941, 07A7, 09BP and 0A0E; blueprint fix-prop-coherence,
-open reconstruction step of the strict-system realization
-(blueprint: lem-sf-integral-open-reduction-normalized-limit).
+open reconstruction step of the strict-system realization.
 
 Proof: write the open immersion as its open slice of the pro-etale site. The ordinary
 quotient-tensor/open-extension comparison is invertible by the direct-sum description

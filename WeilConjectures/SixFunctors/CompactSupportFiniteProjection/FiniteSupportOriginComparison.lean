@@ -32,8 +32,7 @@ variable {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
   [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}
 
 /-- The existing coefficient realization restricted to bounded constructible objects.
-Source: finite-ring constructible derived origin, applied to the fixed realization
-(blueprint: lem-sf-finite-support-origin-binary-normalization). -/
+Source: finite-ring constructible derived origin, applied to the fixed realization. -/
 def originInclusion (X : SixFunctorSpace D) :
     sixFunctorFiniteCategory D C E n hn X ⥤
       (DerivedCategory.plusEtaleOrigin
@@ -48,8 +47,7 @@ def originInclusion (X : SixFunctorSpace D) :
       (fun K ↦ finiteRealization_etaleOrigin X K)
 
 /-- Conjugate a functor comparison through the inverse coefficient equivalences.
-Source: equivalence unit and counit cancellation
-(blueprint: lem-sf-finite-support-origin-binary-normalization). -/
+Source: equivalence unit and counit cancellation. -/
 def inverseConjugation {A B C₀ D₀ : Type*}
     [Category A] [Category B] [Category C₀] [Category D₀]
     (R : A ≌ B) (R' : C₀ ≌ D₀) (F : B ⥤ D₀) (G : A ⥤ C₀)
@@ -166,8 +164,7 @@ private theorem transport_normalization
 
 /-- Comparison with the canonical origin support, built from the given realization
 and the canonical change of compactification. No new comparison is chosen.
-Source: the prescribed finite support realization and canonical candidate comparison
-(blueprint: lem-sf-finite-support-origin-binary-normalization). -/
+Source: the prescribed finite support realization and canonical candidate comparison. -/
 def originSupportComparison (S : SixFunctorFiniteOperations D C E n hn)
     {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     [QuasiCompact f.hom.left] (c : Compactification f.hom.left) :
@@ -656,9 +653,6 @@ private theorem faithful_composition_path
     whiskerRight_left_strict] using h
 
 /-- The binary operation compositor agrees with the canonical origin compositor.
-Source: finiteCompositionNormalization in def-sf-operation-stages and the witnessed
-composition construction in proposition-composition-base-change-rf-shriek--1
-(blueprint: lem-sf-finite-support-origin-binary-normalization).
 
 Proof: fix a bounded constructible input and obtain its bounded etale origin by
 finiteRing_constructibleDerived_origin. Retain this witness in

@@ -35,7 +35,6 @@ The monoidal structure on étale sheaves is the global instance
   `Λ`-modules is flat if and only if all its stalks at geometric points are flat.
 - `AlgebraicGeometry.Etale.upperStarPreservesFlat_moduleCat`: for every morphism of
   schemes `g`, the pullback `g^*` sends flat étale sheaves of `Λ`-modules to flat ones.
-
 -/
 
 @[expose] public section

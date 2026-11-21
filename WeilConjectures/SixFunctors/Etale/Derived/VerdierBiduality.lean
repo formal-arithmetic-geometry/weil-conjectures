@@ -78,7 +78,7 @@ theorem isIso_verdierDualDoubleDual_app [IsAlgClosed k]
     IsIso ((verdierDualDoubleDual Λ a).app K) :=
   isIso_verdierDualDoubleDual_app_of_isAlgClosed Λ a hK
 
-/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
+/-- General Verdier biduality.
 
 For `X` separated of finite type over an algebraically closed field `k` and a finite
 coefficient ring `Λ` whose exponent is invertible on `k`, the Verdier dual is a contravariant

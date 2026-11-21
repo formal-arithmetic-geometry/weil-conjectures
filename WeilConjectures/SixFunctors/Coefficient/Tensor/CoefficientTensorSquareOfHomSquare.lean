@@ -23,7 +23,6 @@ namespace WeilConjectures
 /-- A natural isomorphism preserving the evaluation-defined internal-Hom comparisons
 also preserves the tensor comparisons.
 Source: Stacks 08J9, tensor--Hom adjunction.
-(blueprint: lem-coef-tensor-square-of-hom-square).
 
 Proof: for inputs L,M transpose the identity of L tensor M. Apply the closed
 comparison equality to M and L tensor M, and precompose by the image of this
@@ -113,7 +112,6 @@ private theorem baseChange_composite
 
 /-- The closed square detects a square between two composite tensor comparisons.
 Source: Stacks 08J9, transposition of the identity tensor map.
-(blueprint: lem-coef-tensor-square-of-hom-square).
 Proof: the evaluation-defined closed comparison of a composite is the composite
 of the two closed comparisons. Substitute these formulas and apply
 coefficientTensorSquareOfHomSquare. -/

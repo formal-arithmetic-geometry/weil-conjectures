@@ -27,7 +27,7 @@ of `Rf^!` commutes with arbitrary base change
 ## Main statements
 
 - `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`
-  (`proposition-exceptional-inverse-image-smooth-morphism`).
+.
 
 ## Implementation notes
 
@@ -44,7 +44,7 @@ compact-support base change `Ex_!`, which is only constructed for a quasi-compac
 `f'`.
 
 The exponent of `Λ` is asked to be invertible on the source `X`, not on the base `Y`: this is
-the setting of the purity chapter (`proposition-exceptional-inverse-image-smooth-morphism`), and the
+the setting of the purity chapter, and the
 proof is local on `X`. Over the image of `f`, which is open, the two conditions agree.
 -/
 
@@ -67,7 +67,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}}
   (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
 
 include d in
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Smooth cohomological duality
+/-- Smooth cohomological duality
 without a chosen orientation.
 
 Let `f : X ⟶ Y` be smooth, separated, compactifiable and of pure relative dimension `d`, let `Λ`

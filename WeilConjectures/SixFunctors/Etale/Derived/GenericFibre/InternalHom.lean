@@ -80,12 +80,12 @@ noncomputable def derivedHomUpperStarComparison {X Y : Scheme.{u}} (g : Y ⟶ X)
   letI := leftDerivedUpperStarMonoidal A g
   (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).app M
 
-/-- Blueprint `lemma-restriction-geometric-generic-fibre`: the internal-hom comparison preserves
+/-- The internal-hom comparison preserves
 evaluation. The square
 ```
   Lg^*K ⊗ᴸ Lg^* RHom(K, M) ──1 ⊗ ρ──▶ Lg^*K ⊗ᴸ RHom(Lg^*K, Lg^*M)
-            │ μ                                   │ ev
-            ▼                                     ▼
+            │ μ │ ev
+            ▼ ▼
   Lg^*(K ⊗ᴸ RHom(K, M)) ───────Lg^* ev──────▶ Lg^* M
 ```
 commutes, `μ` being the tensor comparison of the monoidal functor `Lg^*`. -/

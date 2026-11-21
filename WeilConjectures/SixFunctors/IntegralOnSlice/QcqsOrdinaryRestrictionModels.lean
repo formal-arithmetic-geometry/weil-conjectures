@@ -166,7 +166,6 @@ end RoosRestriction
 map followed by a locally closed immersion.
 
 Source: Stacks Tags 09BL, 09BM, 06YY and 0941; Bhatt--Scholze Lemma 6.5.8.
-(blueprint: lem-fix-qcqs-ordinary-restriction-models).
 Proof: inverse image for an immersion preserves all limits; for a weakly etale map
 it is restriction to a slice. Compose these functors. The finite constant-section
 coefficient maps are isomorphisms and commute with every quotient transition.

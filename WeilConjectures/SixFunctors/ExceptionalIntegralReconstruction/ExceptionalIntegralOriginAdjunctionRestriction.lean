@@ -10,7 +10,6 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Restriction of the origin adjunction
 Source: Zheng, Section 5; integral reconstruction, step 2.
-(blueprint: lem-sf-exceptional-integral-origin-adjunction-restriction).
 -/
 
 @[expose] public noncomputable section
@@ -31,7 +30,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 subcategories and the two coordinate equivalences.
 Source: Zheng, Lemma 5.22; the Hom-chain construction in the proof of the
 normalized exceptional integral adjunction.
-(blueprint: lem-sf-exceptional-integral-origin-adjunction-restriction).
 
 Proof: lift the two coordinate equivalences to the origin subcategories and
 use their counit isomorphisms to identify the transported proper/open and

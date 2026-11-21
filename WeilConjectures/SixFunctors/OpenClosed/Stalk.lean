@@ -38,7 +38,6 @@ is defined along `MorphismProperty.Over.pullback @Etale ⊤ i`, whereas the poin
 applied to the definitionally equal `AlgebraicGeometry.Scheme.Hom.Etale i`, whose stated
 type `X.Etale ⥤ Z.Etale` is the one the geometric points of `Z` and `X` come with. Both
 names appear below, each where its instances are available.
-
 -/
 
 @[expose] public section
@@ -80,10 +79,10 @@ section of `P` over the pointed étale neighbourhood `(V ×_X Z, y)` of `s`. In 
 the triangle of germ maps
 ```
                    (i.Etale.op ⋙ P)(V) = P(V ×_X Z)
-                     /                          \
-     toPresheafFiber at (V, y)          toPresheafFiber at (V ×_X Z, y)
-                   /                              \
-                  ↓                                ↓
+                     / \
+     toPresheafFiber at (V, y) toPresheafFiber at (V ×_X Z, y)
+                   / \
+                  ↓ ↓
   ((i.Etale.op ⋙ P) at s ≫ i) --- lowerStarCompPresheafFiberIso ---> (P at s)
 ```
 commutes. -/

@@ -56,8 +56,7 @@ private theorem rationalizationShift_eq
   rfl
 
 /-- The ordinary-realization shift descends to the published canonical rational scalar shift.
-Source: Zheng, Construction 6.2; the normalized scalar square in Construction 6.6
-(blueprint: lem-sf-canonical-scalar-localization-shift).
+Source: Zheng, Construction 6.2; the normalized scalar square in Construction 6.6.
 
 Proof: the normalized integral restriction square compares the finite-Tor scalar
 functor with the intrinsic integral scalar functor, using their canonical shifts.

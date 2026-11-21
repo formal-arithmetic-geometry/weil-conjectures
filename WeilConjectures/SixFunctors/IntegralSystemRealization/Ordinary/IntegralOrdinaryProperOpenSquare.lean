@@ -12,8 +12,6 @@ import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffe
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.Ordinary.IntegralOrdinaryProperOpenCalculus
 
 /-! # Ordinary coefficient squares for proper/open interchange
-
-Source: blueprint fix-prop-coherence, the coefficient comparisons of individual maps.
 -/
 
 @[expose] public noncomputable section
@@ -585,8 +583,6 @@ private theorem gamma_coefficient_square
     Category.assoc] using! hm
 
 /-- The ordinary coefficient square for the proper/open interchange.
-Source: blueprint fix-prop-coherence, the canonical proper/open lambda adjunct.
-(blueprint: lem-sf-integral-ordinary-proper-open-square).
 
 Proof: expand gamma as the open adjunct of inverse lambda. The canonical bridge
 identifies the system lambda with the cartesian open-base-change, clopen lift and

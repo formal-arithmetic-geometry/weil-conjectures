@@ -31,8 +31,7 @@ variable (l : ℕ) [Fact l.Prime]
   (E : FieldStage.{max u v} l) (X Y : Scheme.{max u v})
 
 /-- Change only the membership proof of an integral representative.
-Source: the full-subcategory step of Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: the full-subcategory step of Zheng, Construction 6.2. -/
 def integralRepresentative
     (h : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) :
     sfIntegralConstructibleCategory l E.carrier X ⥤ C.{u, v} l Ω X (.integral E) where
@@ -40,8 +39,7 @@ def integralRepresentative
   map f := ObjectProperty.homMk f.hom
 
 /-- Extend the domain of an integral functor by the literal full inclusions.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: Zheng, Construction 6.2. -/
 def fullIntegralFunctor
     (F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E))
     (h : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) :
@@ -49,30 +47,26 @@ def fullIntegralFunctor
   integralRepresentative l Ω E X h ⋙ F ⋙ PurCompactSupport.finiteTorIntegralInclusion l E.carrier Y
 
 /-- The proof-changing representative functor is additive.
-Source: the tensor Hom construction in Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: the tensor Hom construction in Zheng, Construction 6.2. -/
 instance integralRepresentativeAdditive (h) :
     (integralRepresentative l Ω E X h).Additive where
   map_add := by intros; rfl
 
 /-- The proof-changing representative functor is integral-linear.
-Source: the tensor Hom construction in Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: the tensor Hom construction in Zheng, Construction 6.2. -/
 instance integralRepresentativeLinear (h) :
     (integralRepresentative l Ω E X h).Linear (Padic.coefficientExtensionIntegers l E.carrier) where
   map_smul := by intros; rfl
 
 /-- The literal full integral inclusion is additive.
-Source: the tensor Hom construction in Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: the tensor Hom construction in Zheng, Construction 6.2. -/
 instance integralInclusionAdditive (l : ℕ) [Fact l.Prime]
     (E : FieldStage.{w} l) (X : Scheme.{w}) :
     (PurCompactSupport.finiteTorIntegralInclusion l E.carrier X).Additive where
   map_add := by intros; rfl
 
 /-- The literal full integral inclusion is integral-linear.
-Source: the tensor Hom construction in Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: the tensor Hom construction in Zheng, Construction 6.2. -/
 instance integralInclusionLinear (l : ℕ) [Fact l.Prime]
     (E : FieldStage.{w} l) (X : Scheme.{w}) :
     (PurCompactSupport.finiteTorIntegralInclusion l E.carrier X).Linear
@@ -80,8 +74,7 @@ instance integralInclusionLinear (l : ℕ) [Fact l.Prime]
   map_smul := by intros; rfl
 
 /-- The full-domain functor is additive, since both inclusions are literal.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: Zheng, Construction 6.2. -/
 instance fullIntegralFunctorAdditive
     (F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E))
     [F.Additive] (h) : (fullIntegralFunctor l Ω E X Y F h).Additive := by
@@ -89,8 +82,7 @@ instance fullIntegralFunctorAdditive
   infer_instance
 
 /-- The full-domain functor preserves integral scalar multiplication.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: Zheng, Construction 6.2. -/
 instance fullIntegralFunctorLinear
     (F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E))
     [F.Linear (Padic.coefficientExtensionIntegers l E.carrier)] (h) :
@@ -100,8 +92,7 @@ instance fullIntegralFunctorLinear
   infer_instance
 
 /-- Tensor extension of a linear functor preserves identities and composition.
-Source: the tensor Hom construction in Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: the tensor Hom construction in Zheng, Construction 6.2. -/
 theorem rawTensorFunctorLaws
     {R : Type*} [CommRing R] {B C : Type*} [Category B] [Category C]
     [Preadditive B] [Preadditive C] [Linear R B] [Linear R C]
@@ -133,8 +124,7 @@ theorem rawTensorFunctorLaws
     | add b b' hb hb' => simp [map_add, hb, hb']
 
 /-- The rational functor sends each tensor to the tensor of the integral image.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: Zheng, Construction 6.2. -/
 def rawRationalFunctor
     (F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E))
     [F.Additive] [F.Linear (Padic.coefficientExtensionIntegers l E.carrier)]
@@ -152,8 +142,7 @@ def rawRationalFunctor
     map_comp := fun f g ↦ (rawTensorFunctorLaws _ H).2 _ _ _ f g }
 
 /-- Canonical endpoint shift on raw rationalization, chosen without an operation.
-Source: the inherited shifts of the two full coefficient subcategories
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: the inherited shifts of the two full coefficient subcategories. -/
 @[instance_reducible]
 def integralRationalizationShift : (rationalization.{u, v} l Ω E X).CommShift ℤ := by
   letI : (PurCompactSupport.finiteTorIntegralInclusion l E.carrier X).CommShift ℤ :=
@@ -164,8 +153,7 @@ def integralRationalizationShift : (rationalization.{u, v} l Ω E X).CommShift �
   infer_instance
 
 /-- Only the adjunction and exact structures on the two explicitly constructed functors.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: Zheng, Construction 6.2. -/
 structure RawLocalizedAdjunction
     (A : Operation.{u, v} l Ω X Y (.integral E))
     [A.F.Additive] [A.G.Additive]
@@ -185,8 +173,7 @@ structure RawLocalizedAdjunction
 variable {X Y}
 
 /-- Package the exact structures; both functor data are the explicit tensor extensions.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: Zheng, Construction 6.2. -/
 def RawLocalizedAdjunction.operation
     {A : Operation.{u, v} l Ω X Y (.integral E)}
     [A.F.Additive] [A.G.Additive]
@@ -207,8 +194,7 @@ def RawLocalizedAdjunction.operation
   counitShift := R.counitShift
 
 /-- The literal tensor extension agrees with rationalization on integral arrows.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
+Source: Zheng, Construction 6.2. -/
 def rawRationalComparison
     (F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E))
     [F.Additive] [F.Linear (Padic.coefficientExtensionIntegers l E.carrier)]

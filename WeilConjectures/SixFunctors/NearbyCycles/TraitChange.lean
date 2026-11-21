@@ -65,7 +65,6 @@ The case of `𝔽_E`-coefficients is Deligne's induction above
 (`NearbyCyclesModel.traitChangeInvariance`), which needs the change of trait to be unramified
 (`𝔪_{R₂} = 𝔪_{R₁} R₂`) and the geometric generic points to be algebraic, for the slicing
 argument.
-
 -/
 
 @[expose] public section

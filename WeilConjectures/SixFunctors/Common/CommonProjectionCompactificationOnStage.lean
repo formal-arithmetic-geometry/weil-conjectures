@@ -9,9 +9,6 @@ public import WeilConjectures.SixFunctors.Compact.CompactSupportProjectionCohere
 import WeilConjectures.SixFunctors.Common.CommonProjectionTensorCompatibility
 
 /-! # Projection comparison equations on finite coefficient models
-
-Source: thm-sf-pf-field.proof.md, Compatibility and the common finite coefficient
-field paragraph, and fix-prop-projection-formula.proof.md, final coherence sentence.
 -/
 
 @[expose] public noncomputable section
@@ -116,20 +113,7 @@ end CommonProjectionCompactificationTransport
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The compactification equation on two models included from one finite field.
-Source: thm-sf-pf-field.proof.md, Compatibility and the common coefficient-field
-paragraph, and fix-prop-projection-formula.proof.md, final coherence sentence.
-(blueprint: lem-sf-common-projection-compactification-on-stage).
-Proof: Apply inclusion to the finite-stage compactification equation. Use the canonical
-common-stage tensor comparison on the two finite models, rather than an independently
-chosen tensor isomorphism. The tensor normalizations and the canonical pullback-tensor
-normalization identify the proper counit and open projection mates with the specified
-common-stage projection. The support comparison is normalized on these models.
-Naturality moves the tensor comparisons through the refinement components, and
-commonStageComparison.compactification identifies the two refinement maps. The
-resulting equation has the same invertible tensor/support comparison at both ends;
-cancel these comparisons. This proves the displayed equation on the included models.
-The calculation uses only forward functoriality, and includes equal compactifications,
-zero objects and empty schemes. -/
+ -/
 theorem commonProjectionCompactification_onStage
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C)

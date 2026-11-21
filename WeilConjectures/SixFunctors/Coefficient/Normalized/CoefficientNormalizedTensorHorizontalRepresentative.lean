@@ -14,7 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.ProjectionTensorCore.SemilinearTens
 /-! # Representative square for normalized tensor horizontality
 
 Source: Stacks 07A4 and 0941; Zheng Construction 4.1.
-(blueprint: lem-coef-normalized-tensor-horizontal-representative).
 -/
 
 @[expose] public section
@@ -419,7 +418,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The horizontal tensor square after choosing simultaneous K-flat representatives.
 Source: Stacks 07A4 and 0941, and Zheng Construction 4.1.
-(blueprint: lem-coef-normalized-tensor-horizontal-representative).
 
 Proof: evaluate the two chosen K-flat complexes at level `m`, apply the ordinary
 pure-tensor quotient comparison, and use the representative normalization fields of

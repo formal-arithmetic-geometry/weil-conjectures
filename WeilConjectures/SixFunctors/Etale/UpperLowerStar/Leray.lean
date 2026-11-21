@@ -41,8 +41,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 Grothendieck abelian category `A` form a composable pair with acyclicity: `f_*` is right adjoint
 to the exact pullback `f^*`, hence sends injective sheaves to injective, so `h_*`-acyclic,
 sheaves.
-
-(blueprint: `def-sp-etale-dictionary`) -/
+ -/
 theorem isAcyclicComposablePair_lowerStar {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z) :
     (lowerStar A f).IsAcyclicComposablePair (lowerStar A h) :=
   (upperStarLowerStarAdjunction A f).isAcyclicComposablePair _

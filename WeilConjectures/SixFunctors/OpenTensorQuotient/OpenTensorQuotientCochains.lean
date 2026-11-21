@@ -15,7 +15,6 @@ import WeilConjectures.SixFunctors.OpenTensorQuotient.OpenTensorQuotientRoosNorm
 /-! # Strict quotient tensor comparison on compatible open models
 
 Source: Stacks Tags 0E8I, 0GL1 and 0941; Bhatt--Scholze Definition 3.4.10.
-(blueprint: lem-sf-open-quotient-normalized-cochains).
 -/
 
 @[expose] public noncomputable section
@@ -137,7 +136,6 @@ already compatible open models. No geometric preservation or choice of derived
 open operations is asserted here.
 
 Source: Stacks Tags 0E8I, 0GL1 and 0941; Bhatt--Scholze Definition 3.4.10.
-(blueprint: lem-sf-open-quotient-normalized-cochains).
 
 Proof: take normalized tensor-completion presentations on X and U from their
 existing model-existence theorem. Global invertibility supplies the residue-field

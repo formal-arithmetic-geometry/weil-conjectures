@@ -9,8 +9,6 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralReal
 import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCalculus
 
 /-! # Realization squares for canonical expression pairs
-
-Source: blueprint fix-prop-coherence, strict-system expression realization.
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +25,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Naturality of the normalized open comparison on its good domain.
-Source: blueprint fix-prop-coherence, open reconstruction normalization.
-(blueprint: lem-sf-integral-open-realization-naturality).
 
 Proof: write the openNormalization equations at M and N. Naturality of the actual
 counit moves s past the reconstruction map; naturality of openReduction moves its

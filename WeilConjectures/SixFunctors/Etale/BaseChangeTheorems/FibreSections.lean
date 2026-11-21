@@ -392,8 +392,7 @@ localization `S_(y)` by continuity of sections at inverse limits
 strictly henselian, so these are the sections over the closed geometric fibre
 (`AlgebraicGeometry.Etale.bijective_restrictAlong_fibreToStrictLocalization`), which are the
 sections over `X_y` by the invariance of sections under extension of algebraically closed base
-fields.
-(blueprint: `proposition-proper-base-change-degree-zero`, the stalk formula) -/
+fields. -/
 @[stacks 0A3S]
 theorem bijective_stalkToFibreSections_of_isProper [IsProper f] [IsAlgClosed Ω]
     (h : IsPullback a b f y) :

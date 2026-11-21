@@ -75,7 +75,6 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 /-! # Uncurrying on integral Hom representatives
 
 Source: Stacks 07A4 and 08J9; blueprint coefficient-extension paragraph 2.
-(blueprint: lem-sf-integral-hom-representative-uncurry).
 -/
 
 @[expose] public section
@@ -138,7 +137,6 @@ open CategoryTheory.RingedDerivedNative
 /-- Unsigned representative uncurrying agrees with the normalized right-tensor adjunction.
 
 Source: Stacks Tags 07A4 and 08J9; blueprint coefficient-extension paragraph 2.
-(blueprint: lem-sf-integral-hom-representative-uncurry).
 
 Proof: uncurry the chain map by the existing chain tensor-Hom equivalence; its
 product-projection formula is ordinary evaluation, without a sign in the order

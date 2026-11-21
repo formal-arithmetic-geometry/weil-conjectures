@@ -36,8 +36,7 @@ attribute [local irreducible] finiteHomEtaleData finiteHomEtaleClosedGeneral
   ProEtale.etaleSheafExtendScalars ProEtale.finiteCoefficientIntrinsicComparison
 
 /-- The route extending the inverse-image tensor map before applying the mate.
-Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final site comparison
-(blueprint: lem-coef-finite-hom-site-tensor-chain-equation). -/
+Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final site comparison. -/
 @[irreducible] def finiteHomSiteTensorLeftChain
     {n m : ℕ} (h : m ≤ n)
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology
@@ -76,8 +75,7 @@ Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final 
 
 -- Keep the concrete termwise and total tensor models in one definition.
 /-- The route applying the mate before the etale scalar and site tensor maps.
-Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final site comparison
-(blueprint: lem-coef-finite-hom-site-tensor-chain-equation). -/
+Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final site comparison. -/
 @[irreducible] def finiteHomSiteTensorRightChain
     {n m : ℕ} (h : m ≤ n)
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology
@@ -108,7 +106,7 @@ Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final 
 -- The adjunction and pure-section reduction crosses the concrete tensor models.
 /-- Balanced scalar association commutes with the ordinary site tensor comparison.
 Source: Stacks 03EK, 06YN, 07A4; blueprint lemma-change-coefficients-internal-hom--1, final site
-paragraph (blueprint: lem-coef-finite-hom-site-tensor-chain-equation).
+paragraph.
 
 Proof: in each total degree transpose the two maps by the ordinary scalar
 adjunction. Extensionality for the inverse image of a tensor reduces their

@@ -96,7 +96,6 @@ private theorem unitPresentation_natural
 of the integral map when its finite tensor components do.
 Source: Stacks Project, Tags 03CZ, 06YY and 0941; the augmentation calculation
 in step 1 of `lem-sf-open-restriction-counit-on-good-complexes`.
-(blueprint: lem-sf-augmented-reduction-naturality).
 
 Proof: transport the strict augmentations through the finite presentation
 isomorphisms. Their components are the scalar-adjunction units. Naturality of

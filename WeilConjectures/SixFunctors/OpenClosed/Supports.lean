@@ -125,7 +125,7 @@ for injective objects
 For a complex `I` of injective étale sheaves, `0 ⟶ s_* s^! I ⟶ I ⟶ j_* j^* I ⟶ 0` is a short exact
 sequence of complexes: the restriction `I ⟶ j_* j^* I` is a degreewise (split) epimorphism by
 `AlgebraicGeometry.Etale.isSplitEpi_upperStarLowerStarAdjunction_unit_app_of_injective`. This
-is the étale form, the site of the purity chapter (`def-pur-conventions`); the pro-étale form is
+is the étale form, the site of the purity chapter; the pro-étale form is
 `AlgebraicGeometry.ProEtale.shortExact_supportsShortComplex`. -/
 theorem shortExact_supportsShortComplex (hjs : Set.range s.base = (Set.range j.base)ᶜ)
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [∀ n, Injective (I.X n)] :
@@ -220,7 +220,7 @@ whose first map is the inclusion `u : A(K) ⟶ B(K)` of the supported sections
 (`AlgebraicGeometry.Etale.supportsShortComplex`). Here `A(K)` is the kernel of the restriction
 `I(K) ⟶ j_* j^* I(K)`, which is `s_* s^! I(K)` by
 `AlgebraicGeometry.Etale.closedUpperShriekCompLowerStarIso`. The cone of `u` is
-`AlgebraicGeometry.Etale.supportsCone`. As throughout the purity chapter (`def-pur-conventions`)
+`AlgebraicGeometry.Etale.supportsCone`. As throughout the purity chapter
 this is formalised on the small étale site. -/
 noncomputable def supportsShortComplexOfIsGE
     (K : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) (n : ℤ) [K.IsGE n] :

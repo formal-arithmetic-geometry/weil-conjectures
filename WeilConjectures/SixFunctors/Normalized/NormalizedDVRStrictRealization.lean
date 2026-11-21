@@ -30,7 +30,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 Source: the strict representative step in the inverse-limit assertion of
 proposition-sp-integral-adjunction; Stacks, Derived Categories, lemma-K-injective.
-(blueprint: lem-coef-normalized-dvr-strict-realization).
 -/
 
 @[expose] public section
@@ -96,7 +95,6 @@ realization. This assertion does not impose normalization or identify a limit.
 Source: the strict representative step of lem-coef-integral-dualizing-roos-model,
 expanded from the inverse-limit paragraph of proposition-sp-integral-adjunction;
 Stacks, Derived Categories, lemma-K-injective.
-(blueprint: lem-coef-normalized-dvr-strict-realization).
 
 Proof: restrict each finite object to the completed coefficient sheaf. The canonical
 restriction-composition comparisons and the two given identities make these objects

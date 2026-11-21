@@ -35,7 +35,7 @@ attribute [local irreducible] IntegralOnSlice.roosUnit IntegralAmbient.tensorTow
 
 attribute [-instance] IntegralAmbient.ambientCxCategory IntegralAmbient.ambientDCategory in
 /-- The calculus tensor with its own representative comparison, restricted to flat terms.
-Source: Stacks 07A4 (blueprint: def-sf-integral-ringed-tensor-descent-data). -/
+Source: Stacks 07A4. -/
 def integralRingedOrdinaryTensor (W : Scheme.{u}) :
     ProEtaleTensorModel W ((PurCompactSupport.completed l E).ring W) where
   tensor := (calculus l E W).integralClosed.tensor

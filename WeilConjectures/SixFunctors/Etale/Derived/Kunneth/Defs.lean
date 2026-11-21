@@ -34,7 +34,6 @@ The Künneth formulas for the external product are in the other modules of
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.externalProduct`: `K ⊠ M = Lp^* K ⊗ᴸ Lq^* M`.
-
 -/
 
 @[expose] public section
@@ -61,9 +60,9 @@ variable {B X Y : Scheme.{u}}
 
 ```
   X ×_B Y --q--> Y
-     |           |
-     p           g
-     v           v
+     | |
+     p g
+     v v
      X ---f----> B
 ```
 

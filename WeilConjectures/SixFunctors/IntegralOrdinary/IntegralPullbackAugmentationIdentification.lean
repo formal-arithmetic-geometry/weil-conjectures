@@ -140,7 +140,6 @@ private theorem pull_completion_chain {X Y : Scheme.{u}} (f : X ⟶ Y)
 normalized strict pullback model.
 
 Source: Stacks 03D2, 06YY, 08TC and 0941.
-(blueprint: lem-sf-integral-pullback-augmentation-identification).
 
 Proof: identify the two ordinary module pullbacks by uniqueness of their adjunctions.
 This identification preserves adjunction-unit sections. The generator normalization

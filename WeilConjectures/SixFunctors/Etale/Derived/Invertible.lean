@@ -34,7 +34,6 @@ If `L` moreover has a tensor inverse `L'` — as a lisse sheaf of rank one does 
 
 - `AlgebraicGeometry.Etale.isDualizable_singleFunctor_obj_of_tensorIso`: a sheaf with a
   tensor inverse, placed in degree zero, is dualizable.
-
 -/
 
 @[expose] public section

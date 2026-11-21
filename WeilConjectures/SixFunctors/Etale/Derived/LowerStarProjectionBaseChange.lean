@@ -76,8 +76,8 @@ lemma derivedSquareUpperStarIso_hom_tensor (sq : CommSq g' f' f g)
 `g' ≫ f = f' ≫ g`, `K` in `D(X_ét)` and `L` in `D(Y_ét)`, the square
 ```
 Lg^*(Rf_*K ⊗ᴸ L) ──Lg^* π──▶ Lg^*Rf_*(K ⊗ᴸ Lf^*L) ──Ex_*──▶ Rf'_*Lg'^*(K ⊗ᴸ Lf^*L)
-       │                                                          │
-       ▼                                                          ▼
+       │ │
+       ▼ ▼
 Lg^*Rf_*K ⊗ᴸ Lg^*L ──Ex_* ⊗ 1──▶ Rf'_*Lg'^*K ⊗ᴸ Lg^*L ──π──▶ Rf'_*(Lg'^*K ⊗ᴸ Lg'^*Lf^*L)
 ```
 commutes, where the vertical arrows are the tensor comparisons of the derived pullbacks and the

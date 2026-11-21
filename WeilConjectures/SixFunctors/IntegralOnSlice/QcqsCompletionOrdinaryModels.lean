@@ -159,7 +159,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Canonical completion units and finite open--closed locality on qcqs schemes
 
 Source: Stacks Project, Tags 099M, 09BL and 09BM; Bhatt--Scholze, Lemma 6.5.8
-and Remark 6.5.10 (blueprint: def-fix-qcqs-completion-ordinary-models).
+and Remark 6.5.10.
 
 Completion and its unit are the recorded functorial strict quotient-tower product
 mapping fiber. The unit has zero shifted-product coordinate. The finite tree is
@@ -183,12 +183,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{t}} (f : X ⟶ Y)
 
 /-- The actual ring direct image, with coefficient size max u (t+1).
-Source: Stacks 03D2 (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 03D2. -/
 abbrev ordinaryRingPush := (proEtaleBaseChange f).sheafPushforwardContinuous
   RingCat.{max u (t + 1)} (ProEt.topology Y) (ProEt.topology X)
 
 /-- Ring inverse image exists in the chosen coefficient universe.
-Source: Stacks 00VC (blueprint: def-fix-qcqs-completion-ordinary-models).
+Source: Stacks 00VC.
 Proof: transport the actual pro-etale sites to coefficientProEtaleSiteModel, which
 changes only presentation sizes. Left Kan extension and sheafification give a left
 adjoint there. Transport its adjunction back to the displayed ring direct image. -/
@@ -212,11 +212,11 @@ adjoint there. Transport its adjunction back to the displayed ring direct image.
       (ProEt.topology Y) (ProEt.topology X)).isRightAdjoint
 
 /-- The sheaf inverse image, fixed by its adjunction with actual ring direct image.
-Source: Stacks 00VC (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 00VC. -/
 abbrev ordinaryRingInverse := (ordinaryRingPush.{t, u} f).leftAdjoint
 
 /-- The constant-section map for the finite quotient at exponent n+1.
-Source: Stacks 0H7J (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 0H7J. -/
 def ordinaryFiniteRingMap (n : ℕ) : integralCoefficientSheaf l E Y n ⟶
     (ordinaryRingPush.{t, u} f).obj (integralCoefficientSheaf l E X n) :=
   (sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
@@ -224,7 +224,7 @@ def ordinaryFiniteRingMap (n : ℕ) : integralCoefficientSheaf l E Y n ⟶
       (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1)))))
 
 /-- The completed ring map is determined, including every finite projection.
-Source: Stacks 03CO and 0H7J (blueprint: def-fix-qcqs-completion-ordinary-models).
+Source: Stacks 03CO and 0H7J.
 Proof: finite constant-section maps commute with the quotient homomorphisms by
 sheafification. They form a cone. Direct image is a right adjoint and preserves
 limits, so the limit universal property gives this map and its uniqueness. -/
@@ -252,11 +252,11 @@ theorem ordinaryCompletedRingMap_existsUnique :
   exact (hc n.unop).trans (hρ n.unop).symm
 
 /-- The unique completed direct ring map with the specified finite projections.
-Source: Stacks 03CO (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 03CO. -/
 def ordinaryCompletedRingMap := (ordinaryCompletedRingMap_existsUnique l E f).exists.choose
 
 /-- The canonical inverse-image coefficient map, the adjoint of the limit map.
-Source: Stacks 03D2 (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 03D2. -/
 def ordinaryCoefficientMap :
     (ordinaryRingInverse.{t, u} f).obj (completedIntegralCoefficientSheafUnrestricted l E Y) ⟶
       completedIntegralCoefficientSheafUnrestricted l E X :=
@@ -264,13 +264,13 @@ def ordinaryCoefficientMap :
         (ordinaryCompletedRingMap l E f)
 
 /-- Module direct image with the canonical completed coefficient action.
-Source: Stacks 03D1 (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 03D1. -/
 def ordinaryPush : Mod l E X none ⥤ Mod l E Y none :=
   SheafOfModules.pushforward.{max u (t + 1)} (F := proEtaleBaseChange f)
     (J := ProEt.topology Y) (K := ProEt.topology X) (ordinaryCompletedRingMap l E f)
 
 /-- The canonical module direct image admits its sheafified Kan-extension left adjoint.
-Source: Stacks 03D7 (blueprint: def-fix-qcqs-completion-ordinary-models).
+Source: Stacks 03D7.
 Proof: apply module_pushforward_isRightAdjoint_of_universes with site object size t+1,
 morphism size t and module size max u (t+1). No site universe is identified with u. -/
 @[instance] theorem ordinaryPush_isRightAdjoint : (ordinaryPush l E f).IsRightAdjoint := by
@@ -278,16 +278,16 @@ morphism size t and module size max u (t+1). No site universe is identified with
     (U := proEtaleBaseChange f) (ordinaryCompletedRingMap l E f)
 
 /-- Ordinary pullback, before any completion, along the fixed coefficient morphism.
-Source: Stacks 03D2 (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 03D2. -/
 def ordinaryPull : Mod l E Y none ⥤ Mod l E X none := (ordinaryPush l E f).leftAdjoint
 
 /-- The specified sheafified Kan-extension module adjunction.
-Source: Stacks 03D2 (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 03D2. -/
 def ordinaryAdjunction : ordinaryPull l E f ⊣ ordinaryPush l E f :=
   Adjunction.ofIsRightAdjoint (ordinaryPush l E f)
 
 /-- Additivity of this ordinary pullback.
-Source: Stacks 03D2 (blueprint: def-fix-qcqs-completion-ordinary-models).
+Source: Stacks 03D2.
 Proof: sectionwise module direct image is additive, and its left adjoint is additive
 by the preadditive adjunction criterion. -/
 @[instance] theorem ordinaryPull_additive : (ordinaryPull l E f).Additive := by
@@ -547,7 +547,7 @@ private def ordinaryModelPushIso :
     rfl
 
 /-- Existence of ordinary total derived pullback, with its universal comparison.
-Source: Stacks 06YY (blueprint: def-fix-qcqs-completion-ordinary-models).
+Source: Stacks 06YY.
 Proof: apply lem-weil-pbc-ringed-topoi-derived-pullback to the specified ringed
 inverse image and its module adjunction. Flat-term K-flat resolutions exist in the
 independent coefficient universe.
@@ -595,13 +595,13 @@ The resolving-class localization therefore gives the total left derived functor.
   exact OrdinaryModelProof.derived_equivalence eY eX (ordinaryPull l E f) G i
 
 /-- The ordinary unbounded derived pullback of completed-coefficient modules.
-Source: Stacks 06YY (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 06YY. -/
 def ordinaryDerivedPull : D l E Y none ⥤ D l E X none :=
   ((ordinaryPull l E f).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).totalLeftDerived
     DerivedCategory.Qh (HomotopyCategory.quasiIso (Mod l E Y none) (.up ℤ))
 
 /-- Termwise ordinary pullback, retaining the strict differentials and quotient maps.
-Source: Stacks 06YY (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 06YY. -/
 def ordinaryComplexPull : Cx l E Y none ⥤ Cx l E X none :=
   (ordinaryPull l E f).mapHomologicalComplex (.up ℤ)
 
@@ -613,7 +613,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{t}} (f : X ⟶ Y)
 
 /-- The ordinary derived counit on an arbitrary cochain representative.
-Source: Stacks 06YY (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 06YY. -/
 def ordinaryComplexCounit (P : Cx l E Y none) :
     (ordinaryDerivedPull l E f).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj ((ordinaryComplexPull l E f).obj P) :=
@@ -627,7 +627,7 @@ def ordinaryComplexCounit (P : Cx l E Y none) :
     (DerivedCategory.quotientCompQhIso _).hom.app ((ordinaryComplexPull l E f).obj P)
 
 /-- The product endomorphism 1-s of the already recorded strict quotient tower.
-Source: Stacks 0941 (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 0941. -/
 def ordinaryRoosEndomorphism (P : Cx l E Y none) :=
   towerTransitionEndomorphism
     (K := fun n : ℕ ↦ ((tower l E Y none).obj P).obj (op n))
@@ -710,8 +710,7 @@ private theorem ordinaryAugmentation_formula
 /-- The quotient maps, as one natural map of strict towers, are uniquely fixed on generators.
 The formula is 1 tensor q ↦ 1 tensor (q tensor 1); completed linearity gives
 b tensor q ↦ 1 tensor (q tensor pi_n(b)) on every inverse-image generator.
-Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 06YY, 08TC
-(blueprint: def-fix-qcqs-completion-ordinary-models).
+Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 06YY, 08TC.
 Proof: the completed coefficient map commutes with each quotient by its defining
 projection equation. Thus the displayed map is balanced, linear and restriction
 compatible. Sheafification gives the module maps; applying them degreewise gives
@@ -746,13 +745,12 @@ theorem ordinaryQuotientAugmentation_existsUnique :
     (ordinaryAugmentation_formula l E f P n.unop i V.unop x).symm
 
 /-- The actual quotient augmentation, with all quotient transitions retained.
-Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 08TC
-(blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 08TC. -/
 def ordinaryQuotientAugmentation :=
   (ordinaryQuotientAugmentation_existsUnique l E f).exists.choose
 
 /-- The product of the specified quotient maps.
-Source: Stacks 08TC (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 08TC. -/
 def ordinaryProductAugmentation
     (P : Cx l E Y none) :
     (ordinaryComplexPull l E f).obj P ⟶
@@ -760,7 +758,7 @@ def ordinaryProductAugmentation
   Pi.lift (fun n ↦ ((ordinaryQuotientAugmentation l E f).app P).app (op n))
 
 /-- The strict quotient augmentation is killed by 1-s, with zero second cone cochain.
-Source: Stacks 08TC (blueprint: def-fix-qcqs-completion-ordinary-models).
+Source: Stacks 08TC.
 Proof: after every product projection, the composite with 1-s is the difference
 between consecutive quotient maps and is zero by the strict tower's naturality.
 The differential of the zero cochain is zero. Product projections are jointly monic. -/
@@ -793,7 +791,7 @@ theorem ordinaryCompletionChain_condition
   simp
 
 /-- The prescribed chain map into Cone(1-s)[-1]: quotient maps and zero, respectively.
-Source: Stacks 08TC (blueprint: def-fix-qcqs-completion-ordinary-models). -/
+Source: Stacks 08TC. -/
 def ordinaryCompletionChain
     (P : Cx l E Y none) :
     (ordinaryComplexPull l E f).obj P ⟶

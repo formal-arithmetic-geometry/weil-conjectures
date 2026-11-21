@@ -26,7 +26,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The completed open pullback has the published strict quotient-tower model.
 Source: Stacks 099N(2),(5), 0941; Bhatt--Scholze 6.5.8.
-(blueprint: lem-sf-open-factor-pull-realization).
 
 Proof: inverse image along an open immersion is exact. Its coefficient map preserves
 the constant sections and all quotient projections. The balanced scalar comparison

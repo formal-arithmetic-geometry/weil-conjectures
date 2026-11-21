@@ -224,7 +224,6 @@ normalized coefficient presentation in the native locally finite coefficient rin
 Proof source: Bhatt--Scholze, Lemma 6.8.2 and Section 6.8. Construct the inverse-limit
 identification from the finite quotient realizations, then use the finite constant and
 residue equations to normalize the localization and rational inclusion.
-(blueprint: lem-sf-native-completed-coefficient-presentation-at)
 -/
 theorem exists_native_completed_coefficient_presentation_at
     [G : NativeGeometry.{u} l]

@@ -61,8 +61,7 @@ resolution with two free rank-one terms. The target of the augmentation is the
 actual restriction of the finite coefficient unit in degree zero.
 
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 093M, 06YQ and 0657
-(blueprint: lem-sf-integral-reduction-two-term-resolution).
+Stacks Tags 093M, 06YQ and 0657.
 
 Proof: use the DVR uniformizer of the ring of integers of E. Its (n+1)-st
 power is a non-zero-divisor. The complex with that multiplication from the

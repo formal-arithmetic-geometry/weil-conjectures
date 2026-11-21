@@ -23,8 +23,7 @@ attribute [local instance] coefficientFiniteQuotientExtensionAdditive
 
 /-- The two derived tensor routes have their specified ordinary chain models.
 Source: Stacks 06YN, 06YY, 07A4, 07A6; blueprint lemma-change-coefficients-internal-hom--1, final
-site-comparison paragraph
-(blueprint: lem-coef-finite-hom-site-tensor-route-normalization).
+site-comparison paragraph.
 
 Proof: take e and its generator equation from quotientCalculus.tensor_model on
 nu(P), nu(Q). Reflect their K-flatness to the etale site. Use the etale K-flat

@@ -16,7 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearTensorEvaluati
 /-! # Components of normalized coefficient evaluation projection
 
 Source: Stacks 07A4, 08J9 and 0941; Zheng Construction 4.1.
-(blueprint: lem-coef-normalized-evaluation-projection-components).
 -/
 
 @[expose] public section
@@ -153,7 +152,6 @@ of isomorphisms is proved in `coefficientNormalizedEvaluationProjection`.
 Source: Zheng Construction 4.1 and Proposition 4.17(a); Stacks 07A4 and 08J9;
 the component calculation in step 3 of
 `lem-coef-normalized-evaluation-projection`.
-(blueprint: lem-coef-normalized-evaluation-projection-components).
 
 Proof: convert coefficient normalization to semilinear normalization using the
 actual transition's sectionwise characterization and the scalar adjunction.

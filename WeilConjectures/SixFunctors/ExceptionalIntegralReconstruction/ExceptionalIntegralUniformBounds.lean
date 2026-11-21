@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralReconstruction.Exce
 
 /-! # ExceptionalIntegralUniformBounds
 Source: Zheng, Section 5; integral reconstruction, step 2.
-(blueprint: lem-sf-exceptional-integral-uniform-bounds).
 -/
 
 @[expose] public noncomputable section
@@ -28,7 +27,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Common finite cohomological and Tor intervals for the actual exceptional system images.
 Source: Zheng, Propositions 2.23, 2.29, 3.16 and 5.24.
-(blueprint: lem-sf-exceptional-integral-uniform-bounds).
 
 Proof: give the middle scheme the structure map through its proper factor. It is
 finite type over the field, hence Noetherian, and the open factor is quasi-compact.

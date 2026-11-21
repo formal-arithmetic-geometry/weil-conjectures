@@ -262,7 +262,6 @@ private theorem partition_tree
 There is no assertion of a projective model, a finite chart family, or a tensor product.
 
 Source: Bhatt--Scholze, Lemmas 6.5.5--6.5.8; Stacks Tags 09Y4 and 09C3.
-(blueprint: lem-sf-affine-residue-lisse-tree).
 
 Proof: restriction to the affine open is the exact over-site restriction and preserves
 products, hence the augmented quotient/Roos triangle and derived completeness. Its

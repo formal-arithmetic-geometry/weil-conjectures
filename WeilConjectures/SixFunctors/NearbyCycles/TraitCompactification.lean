@@ -40,7 +40,6 @@ every `K` is `Lu^* Ru_* K` for the open immersion `u` of the geometric generic f
 being again of étale origin. This is the reduction to (pro)jective models at the start of the
 proof of loc. cit., Prop. 3.7, with Nagata's compactification instead of a projective closure and
 the direct image instead of the extension by zero.
-
 -/
 
 @[expose] public section

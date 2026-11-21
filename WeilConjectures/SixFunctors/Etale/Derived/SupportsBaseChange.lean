@@ -92,8 +92,8 @@ variable (e : U' ⟶ U) [(e)^*[A].PreservesFlat] [(e)^*[ModuleCat.{u + 1} Λ].Pr
 /-- The comparison `Le^*(K ⊗ M) ≅ Le^* K ⊗ Le^* M` is natural in both variables:
 ```
   Le^*(K ⊗ M) ----------> Le^*(K₁ ⊗ M₁)
-       |                        |
-       v                        v
+       | |
+       v v
   Le^*K ⊗ Le^*M -------> Le^*K₁ ⊗ Le^*M₁
 ```
 -/
@@ -120,8 +120,8 @@ lemma leftDerivedUpperStarTensorIso_hom_naturality
 
 ```
 Le^*(R₁ ⊗ R₂) ──Le^* P──▶ Le^* Ri_! Ri^! (M ⊗ N) ──ψ──▶ Ri'_! Ri'^! (M' ⊗ N')
-      │ ≅                                                        ‖
-      ▼                                                          ‖
+      │ ≅ ‖
+      ▼ ‖
 Le^* R₁ ⊗ Le^* R₂ ────ψ₁ ⊗ ψ₂────▶ R₁' ⊗ R₂' ─────P'──────▶ Ri'_! Ri'^! (M' ⊗ N')
 ```
 
@@ -265,10 +265,10 @@ and `φ' : L₁' ⟶ L₂'` on `U'` compatible with identifications `τ₁ : Le^
 `Ri'_! Ri'^! φ'`:
 ```
   K' --- restriction of γ ---> Ri'_! Ri'^! L₁'
-     \                               |
-      \                              | Ri'_! Ri'^! φ'
-       \                             v
-        ------------------->  Ri'_! Ri'^! L₂'
+     \ |
+      \ | Ri'_! Ri'^! φ'
+       \ v
+        -------------------> Ri'_! Ri'^! L₂'
        restriction of γ ≫ Ri_! Ri^! φ
 ```
 -/
@@ -350,8 +350,8 @@ omit [(e)^*[ModuleCat.{u + 1} Λ].PreservesFlat] in
 /-- **Transitivity of the restriction of supports** along a composite `e' = e₁ ≫ e`:
 ```
   Le'^* Ri_! Ri^! L ------------------------------> Ri₂_! Ri₂^! L₂
-          |                                                ^
-          v                                                |
+          | ^
+          v |
   Le₁^* Le^* Ri_! Ri^! L ---> Le₁^* Ri'_! Ri'^! L' --------+
 ```
 -/

@@ -18,8 +18,8 @@ homomorphism of extensions `Ωᵢ/Lᵢ` over `l`, with change of Galois layers
 `τ' : N₂_{Ω₂} ⟶ N₁_{Ω₁}` (`NearbyCyclesModel.galoisLayerMap`). The pullback exchanges of the square
 ```
 N₂_{Ω₂} ──τ'──→ N₁_{Ω₁}
-   │σ₂             │σ₁
-   ↓               ↓
+   │σ₂ │σ₁
+   ↓ ↓
    N₂ ─────τ─────→ N₁
 ```
 satisfy `α_{τ'} ∘ τ'^* α_{σ₁} = α_{σ₂} ∘ σ₂^* α_τ` up to the composition isomorphisms
@@ -44,7 +44,6 @@ category with a jointly conservative family of functors (the cohomology functors
 - `NearbyCyclesModel.pullbackExchange_galoisLayerMap_square`: the square of pullback exchanges.
 - `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap`: the change of trait is
   invertible on the invariant summands once it is invertible on the Galois layers.
-
 -/
 
 @[expose] public section

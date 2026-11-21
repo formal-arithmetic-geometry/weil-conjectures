@@ -71,7 +71,6 @@ private theorem complete_local_iff (K : IntegralOnSlice.D l E T none) :
 complete, with no hypothesis on the scheme or its residue characteristics.
 
 Source: Bhatt--Scholze, Lemma 6.5.5; Stacks Tags 099I and 0941.
-(blueprint: lem-sf-bounded-projective-complex-complete-unrestricted).
 
 Proof: use the intrinsic local-Hom criterion for the canonical quotient tower.
 For each localized section, restriction followed by internal Hom is triangulated.

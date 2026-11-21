@@ -25,8 +25,7 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 Source: Deligne, Weil II, (1.1.3), p. 150 and (1.1.7), pp. 150--151;
 the explicit pro-etale/completed argument is agent-written, extracted from
-`lem-weil-frobenius-point-transport-natural`, steps 3--6 and 9
-(blueprint: lem-weil-isomorphism-comparison-natural).
+`lem-weil-frobenius-point-transport-natural`, steps 3--6 and 9.
 
 The finite comparison is fixed on every complex by the recorded tensor-unit map.
 The integral comparison is the recorded chosen-resolution map, on every ambient
@@ -313,8 +312,7 @@ by inverse image of the actual completion unit. They remain natural after the
 stated composition, including on incomplete objects.
 Source: Deligne, Weil II, (1.1.3), (1.1.7), as motivation; blueprint
 `sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md`,
-clauses (2)--(3), through the agent-written entire-cone normalization
-(blueprint: lem-weil-isomorphism-comparison-natural).
+clauses (2)--(3), through the agent-written entire-cone normalization.
 
 Proof, node steps 3--5: apply
 lem-weil-isomorphism-derived-pullback-comparison-normalization to the canonical

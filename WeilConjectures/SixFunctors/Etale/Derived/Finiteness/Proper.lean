@@ -17,17 +17,17 @@ Let `k` be a field and `Λ` a finite ring killed by an integer invertible in `k`
 morphism `f : X ⟶ S` with `S` of finite type over `k`:
 
 - `AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isProper`
-  (`proposition-proper-direct-image-finite-coefficients`): `𝒞(f)` holds. The proof is Noetherian
+: `𝒞(f)` holds. The proof is Noetherian
   induction on closed subsets of `X`, using a projective modification given by Chow's lemma
   (`AlgebraicGeometry.exists_projective_modification`), the projective case and the transfer
   along modifications `AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_modification`.
 - `AlgebraicGeometry.Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper`
-  (`proposition-proper-direct-image-finite-coefficients`): moreover `Rᵠf_* F = 0` for `q > 2d` if
+: moreover `Rᵠf_* F = 0` for `q > 2d` if
   the geometric fibres have dimension at most `d`. The vanishing is checked at geometric points, by
   proper base change (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`) and
   the cohomological dimension of the geometric fibres.
 - `AlgebraicGeometry.Etale.isIso_homology_derivedBaseChangeMapPlus_of_isProper`
-  (`obl-fin-comparison`): the comparison with the cohomology of geometric fibres.
+: the comparison with the cohomology of geometric fibres.
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper`
   (`theorem-results-from-etale-theory--3`): `Rf_*` preserves `D^b_c`. The blueprint uses the
   hypercohomology spectral sequence; we use the dévissage along truncation triangles
@@ -54,7 +54,7 @@ open _root_.DerivedCategory
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   [HasInvertibleExponent Λ (Spec (.of k))]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Proper direct-image
+/-- Proper direct-image
 constructibility.
 
 Let `Λ` be a finite ring killed by an integer invertible in the field `k`. Every proper morphism
@@ -169,7 +169,7 @@ lemma isZero_homology_rightDerivedLowerStar_of_isProper {X S : Scheme.{u}} (f : 
       (Plus.homologyFunctor _ q).mapIso
         (asIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)))
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: The proper case: direct images
+/-- The proper case: direct images
 of proper morphisms.
 
 Let `f : X ⟶ S` be a proper morphism with `S` of finite type over `k`, all of whose geometric
@@ -189,7 +189,7 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper {X S : S
     isZero_homology_rightDerivedLowerStar_of_isProper f d hd F⟩
 
 
-/-- Blueprint `obl-fin-comparison`: The comparison and finitude of proper direct images.
+/-- The comparison and finitude of proper direct images.
 
 Let `f : X ⟶ S` be a proper morphism with `S` of finite type over `k`, whose geometric fibres
 have dimension at most `d`, and let `F` be a constructible sheaf of `Λ`-modules on `X_ét`, for a

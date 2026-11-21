@@ -45,9 +45,9 @@ of `g^♯ s` to `t` is restricting the germ of `s` to `t ≫ g`, followed by the
 
 ```
   (f_* Λ)_y ----(g^♯)_y----> (f_* Λ)_y
-      |                          |
-  ρ_{t ≫ g}                      ρ_t
-      v                          v
+      | |
+  ρ_{t ≫ g} ρ_t
+      v v
   Λ_{t ≫ g} --ε--> (g_* Λ)_{t ≫ g} --ρ_t--> Λ_t
 ```
 -/

@@ -23,7 +23,6 @@ and `Lg^* Lε_N^* ≅ L(g ≫ ε_N)^*`
 
 The base change morphism of the square of generic fibres is computed by the abstract mate lemma
 `CategoryTheory.mateEquiv_app_of_isoId_comp`.
-
 -/
 
 @[expose] public section

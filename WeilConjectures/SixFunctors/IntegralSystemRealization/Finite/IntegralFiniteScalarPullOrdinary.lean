@@ -31,8 +31,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The identity on sections comparing finite direct image and scalar restriction.
-Source: Stacks 03D7 and 0D6E
-(blueprint: lem-sf-integral-finite-scalar-pull-ordinary). -/
+Source: Stacks 03D7 and 0D6E. -/
 @[irreducible] def finiteScalarRestrictionDirect {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     proEtaleConstantModuleDirectImage f (finiteCoefficientRing l E (n + 1)) ⋙
         scalarReductionRestriction l E Y n ≅
@@ -54,8 +53,7 @@ Source: Stacks 03D7 and 0D6E
       ((PurCompactSupport.reduction l E (n + 1) (Nat.le_add_left 1 n)).square f)
 
 /-- The ordinary scalar/pullback square, uniquely determined by the right square.
-Source: Stacks 03D7 and 06YY
-(blueprint: lem-sf-integral-finite-scalar-pull-ordinary). -/
+Source: Stacks 03D7 and 06YY. -/
 @[irreducible] def ordinaryFiniteScalarPull {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     integralOrdinaryPull l E f ⋙ scalarReductionExtension l E X n ≅
       scalarReductionExtension l E Y n ⋙
@@ -69,8 +67,7 @@ Source: Stacks 03D7 and 06YY
               (CommRingCat.of (ULift.{u + 1} (finiteCoefficientRing l E (n + 1))))))
 
 /-- Expanded right comparison for the ordinary scalar square, kept as a folding API.
-Source: Stacks Tags 06YY and 0D6E
-(blueprint: lem-sf-integral-finite-scalar-pull-ordinary). -/
+Source: Stacks Tags 06YY and 0D6E. -/
 theorem ordinaryFiniteScalarPull_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ordinaryFiniteScalarPull l E f n =
     (((proEtaleRingModuleAdjunction f ((PurCompactSupport.completed l E).ring Y)
@@ -99,8 +96,7 @@ theorem ordinaryFiniteScalarPull_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
 
 /-- The ordinary comparison has the composite-adjunction transpose prescribed by
 its restriction/direct-image square.
-Source: Stacks Tag 06YY
-(blueprint: lem-sf-integral-finite-scalar-pull-ordinary).
+Source: Stacks Tag 06YY.
 Proof: the unit equation for leftAdjointUniq after ofNatIsoRight gives the
 transpose followed by the inverse right comparison. Cancel that inverse. -/
 theorem ordinaryFiniteScalarPull_transpose {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
@@ -133,8 +129,7 @@ theorem ordinaryFiniteScalarPull_transpose {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
   exact h
 
 /-- Degreewise form of the ordinary scalar square.
-Source: Stacks 07A6
-(blueprint: lem-sf-integral-finite-scalar-pull-ordinary). -/
+Source: Stacks 07A6. -/
 def ordinaryFiniteScalarPullComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     ((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj
