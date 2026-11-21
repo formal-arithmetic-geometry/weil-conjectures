@@ -125,28 +125,30 @@ by the derived projection formula and the Yoneda lemma. -/
 theorem isIso_verdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (verdierExchange ℓ f K L) := by
-  have hproj : IsIso (boundedConstructibleExceptionalProjectionMorphism ℓ f K L) := by
+  have hproj : ∀ B, IsIso (boundedConstructibleExceptionalProjectionMorphism ℓ f K B) := by
+    intro B
     let c := compactificationOverField f
     have hA := boundedConstructible_openImmersionLowerShriek_obj (Profinite.padicAlgClRingObj ℓ) ℓ
       c.overI K
     have : IsIso (properProjectionMorphism (Profinite.padicAlgClRingObj ℓ) c.overG.left
-        ((D((c.overI.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) L.obj) :=
-      isIso_properProjectionMorphism_padicAlgCl ℓ c.overG _ L.obj hA L.property
+        ((D((c.overI.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) B.obj) :=
+      isIso_properProjectionMorphism_padicAlgCl ℓ c.overG _ B.obj hA B.property
     have : IsIso (properProjectionMorphism (Profinite.padicAlgClRingObj ℓ) c.g
-        ((D((c.i)_!open⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) L.obj) := this
+        ((D((c.i)_!open⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj) B.obj) := this
     have hExc : IsIso
         (exceptionalProjectionMorphismOfCompactification (Profinite.padicAlgClRingObj ℓ) c
-          K.obj L.obj) := by
+          K.obj B.obj) := by
       unfold exceptionalProjectionMorphismOfCompactification
       infer_instance
     have : IsIso ((boundedConstructible _).ι.map
-        (boundedConstructibleExceptionalProjectionMorphism ℓ f K L)) := by
+        (boundedConstructibleExceptionalProjectionMorphism ℓ f K B)) := by
       change IsIso
         (exceptionalProjectionMorphismOfCompactification (Profinite.padicAlgClRingObj ℓ) c
-          K.obj L.obj)
+          K.obj B.obj)
       exact hExc
     exact isIso_of_fully_faithful (boundedConstructible _).ι _
-  letI := hproj
+  letI : ∀ B, IsIso (((boundedConstructibleExceptionalProjection ℓ f).app K).app B) :=
+    fun B => (boundedConstructibleExceptionalProjection_app_app ℓ f K B) ▸ hproj B
   exact Verdier.isIso_exchange_of_isIso _ _ _ K L
 
 end Exchange
