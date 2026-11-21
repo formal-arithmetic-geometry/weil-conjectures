@@ -181,7 +181,6 @@ theorem nonempty_iso_reductionModIdeal_verdierDual {X : Scheme.{u}} (aX : X ⟶ 
   obtain ⟨e₂⟩ := nonempty_iso_reductionModIdeal_dualizingComplex Λ J aX
   exact ⟨e₁ ≪≫ (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).mapIso e₂⟩
 
-set_option linter.style.haveILetI false in
 set_option maxHeartbeats 800000 in
 -- The affine factorization and localization descent expand the derived tensor comparison.
 /-- The finite coefficient comparison for the exceptional inverse image.
@@ -253,7 +252,7 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}
       have hc' : IsIso (rightDerivedUpperShriekTensorMap c Mc
           ((L((p)^*[ModuleCat.{u + 1} Λ])).obj
             ((L((v)^*[ModuleCat.{u + 1} Λ])).obj N))) := by
-        haveI hclosed := isIso_rightDerivedUpperShriekTensorMap_constantSingle_of_isClosedImmersion
+        have hclosed := isIso_rightDerivedUpperShriekTensorMap_constantSingle_of_isClosedImmersion
           Λ (p ≫ v ≫ aY) c Mc b B
         exact isIso_lowerShriekRightAdjointTensorMap_of_iso_right
           (rightDerivedUpperShriekAdjunction Λ c)
@@ -298,7 +297,7 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}
             ρ.hom.app (Mv ⊗ ((L((v)^*[ModuleCat.{u + 1} Λ])).obj N))) := by
         rw [hc]
         infer_instance
-      letI := hiso
+      let := hiso
       exact IsIso.of_isIso_comp_right _
         (ρ.hom.app (Mv ⊗ ((L((v)^*[ModuleCat.{u + 1} Λ])).obj N)))
     have hgv : g ≫ v = u ≫ f := by rw [Scheme.Hom.resLE_comp_ι]
@@ -336,7 +335,7 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}
           ρ.hom.app (L ⊗ N)) := by
         rw [hc]
         infer_instance
-      letI := hiso
+      let := hiso
       exact IsIso.of_isIso_comp_right (rightDerivedUpperShriekTensorMap (u ≫ f) L N)
         (ρ.hom.app (L ⊗ N))
     have hθu := isIso_dualizingComplexTensorMap_of_isOpenImmersion Λ u
@@ -367,13 +366,13 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}
       (Euf u f _ rfl) (hPFuf u f _ rfl).comp ρuf.hom hρuf L N
     have huf' : IsIso (rightDerivedUpperShriekTensorMap (u ≫ f) L N ≫
         ρuf.hom.app (L ⊗ N)) := by
-      letI := hcomp
+      let := hcomp
       infer_instance
-    letI := huf'
+    let := huf'
     have hunit := isIso_lowerShriekRightAdjointTensorMap_of_forall adju
       (projectionMapAssociativity Λ u) hθu (R(f)^![Λ].obj L)
       ((L((f)^*[ModuleCat.{u + 1} Λ])).obj N)
-    letI := hunit
+    let := hunit
     have hmap : IsIso ((R(u)^![Λ]).map
         (rightDerivedUpperShriekTensorMap f L N)) := by
       rw [huf] at huf'

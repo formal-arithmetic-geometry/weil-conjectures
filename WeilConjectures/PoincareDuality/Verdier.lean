@@ -119,7 +119,6 @@ noncomputable def verdierExchange
     (boundedConstructibleUpperShriekAdjunction ℓ f)
     (boundedConstructibleExceptionalProjection ℓ f) K L
 
-set_option linter.style.haveILetI false in
 /-- **Verdier duality** (`ℚ̄_ℓ`-coefficient): the exchange morphism `Φ_{f,K,L}` is an isomorphism,
 by the derived projection formula and the Yoneda lemma. -/
 theorem isIso_verdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -147,7 +146,7 @@ theorem isIso_verdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj �
           K.obj B.obj)
       exact hExc
     exact isIso_of_fully_faithful (boundedConstructible _).ι _
-  letI : ∀ B, IsIso (((boundedConstructibleExceptionalProjection ℓ f).app K).app B) :=
+  let : ∀ B, IsIso (((boundedConstructibleExceptionalProjection ℓ f).app K).app B) :=
     fun B => (boundedConstructibleExceptionalProjection_app_app ℓ f K B) ▸ hproj B
   exact Verdier.isIso_exchange_of_isIso _ _ _ K L
 
