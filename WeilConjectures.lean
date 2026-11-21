@@ -450,6 +450,7 @@ public import WeilConjectures.Algebra.Homology.FilteredFreeKProjectiveAssembly
 public import WeilConjectures.Algebra.Homology.FilteredFreeKProjectiveStep
 public import WeilConjectures.Algebra.Homology.FilteredFreeResolution
 public import WeilConjectures.Algebra.Homology.FilteredFreeTelescopeSplitting
+public import WeilConjectures.Algebra.Homology.FilteredInternalHom
 public import WeilConjectures.Algebra.Homology.FilteredModuleComplexHomologyZero
 public import WeilConjectures.Algebra.Homology.Finite.FiniteFreeDualPullback
 public import WeilConjectures.Algebra.Homology.Finite.FiniteFreeMonoCokernelKFlat
